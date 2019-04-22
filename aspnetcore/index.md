@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/07/2019
 uid: index
-ms.openlocfilehash: 944c8a93aff53b8d72fda03f5df9c5ba45990cbc
-ms.sourcegitcommit: 6bde1fdf686326c080a7518a6725e56e56d8886e
+ms.openlocfilehash: 9cb598c4068586e4e960ec40743c4f54f09995ad
+ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/08/2019
-ms.locfileid: "59068275"
+ms.lasthandoff: 04/16/2019
+ms.locfileid: "59614374"
 ---
 # <a name="introduction-to-aspnet-core"></a>ASP.NET Core 소개
 
@@ -44,7 +44,7 @@ ASP.NET Core MVC에서는 [Web API](xref:tutorials/first-web-api) 및 [웹앱](x
 
 ## <a name="client-side-development"></a>클라이언트 쪽 개발
 
-ASP.NET Core는 [Razor Components](xref:razor-components/index), [Angular](xref:spa/angular), [React](xref:spa/react) 및 [부트스트랩](https://getbootstrap.com/) 등 유명한 클라이언트 쪽 프레임워크 및 라이브러리와 원활하게 통합합니다. 자세한 내용은 [Razor 구성 요소](xref:razor-components/index) 및 *클라이언트 쪽 개발*의 관련 항목을 참조하세요.
+ASP.NET Core는 [Blazor](xref:blazor/index), [Angular](xref:spa/angular), [React](xref:spa/react), [부트스트랩](https://getbootstrap.com/) 등 유명한 클라이언트 쪽 프레임워크 및 라이브러리와 원활하게 통합됩니다. 자세한 내용은 <xref:blazor/index> 및 ‘클라이언트 쪽 개발’의 관련 항목을 참조하세요.
 
 <a name="target-framework"></a>
 
@@ -77,7 +77,7 @@ ASP.NET Core 앱 개발을 소개하는 자습서 및 문서는 다음 순서대
 
    |앱 형식  |시나리오  |자습서  |
    |----------|----------|----------|
-   |웹앱       | 새로운 개발의 경우        |[Razor Pages 시작](xref:tutorials/razor-pages/razor-pages-start) |
+   |웹앱       | 새로운 개발의 경우        |[Razor 페이지 시작](xref:tutorials/razor-pages/razor-pages-start) |
    |웹앱       | MVC 앱을 유지 관리하는 경우 |[MVC 시작](xref:tutorials/first-mvc-app/start-mvc)|
    |Web API       |                            |[웹 API 만들기](xref:tutorials/first-web-api)\*  |
    |실시간 앱 |                            |[SignalR 시작](xref:tutorials/signalr) |

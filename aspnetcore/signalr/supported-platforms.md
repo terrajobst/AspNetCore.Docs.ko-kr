@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 04/06/2019
 uid: signalr/supported-platforms
 ms.openlocfilehash: fefaaf97de3f1fabf8f3154bf5b4ccb37195ccff
-ms.sourcegitcommit: 6bde1fdf686326c080a7518a6725e56e56d8886e
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/08/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59068224"
 ---
 # <a name="aspnet-core-signalr-supported-platforms"></a>ASP.NET Core SignalR 지원 플랫폼
@@ -46,6 +46,6 @@ ASP.NET core SignalR은 ASP.NET Core에서 지 원하는 서버 플랫폼을 지
 
 다음 클라이언트는 사용할 수는 있지만 실험적이거나 비공식적입니다. 현재 지원 되지 않으며 되지 않을 수 있습니다.
 
-* [C + + 클라이언트](https://github.com/aspnet/SignalR/tree/master/clients/cpp)
+* [C++ 클라이언트](https://github.com/aspnet/SignalR/tree/master/clients/cpp)
 
 * [Swift 클라이언트](https://github.com/moozzyk/SignalR-Client-Swift)

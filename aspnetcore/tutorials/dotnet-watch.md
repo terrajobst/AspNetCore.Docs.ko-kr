@@ -6,17 +6,17 @@ ms.author: riande
 ms.date: 05/31/2018
 uid: tutorials/dotnet-watch
 ms.openlocfilehash: 40ecca1c6f9d519b24649d0c28946d95b820c07c
-ms.sourcegitcommit: 6bde1fdf686326c080a7518a6725e56e56d8886e
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/08/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59068198"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>파일 감시자를 사용하여 ASP.NET Core 앱 개발
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT) 및 [Victor Hurdugaci](https://twitter.com/victorhurdugaci)
 
-`dotnet watch` 소스 파일을 변경할 때 [.NET Core CLI](/dotnet/core/tools) 명령을 실행하는 도구입니다. 예를 들어 파일 변경은 컴파일, 테스트 실행 또는 배포를 트리거할 수 있습니다.
+`dotnet watch`은 원본 파일을 변경할 때 [.NET Core CLI](/dotnet/core/tools) 명령을 실행하는 도구입니다. 예를 들어 파일 변경은 컴파일, 테스트 실행 또는 배포를 트리거할 수 있습니다.
 
 이 자습서에서는 합계를 반환하는 엔드포인트 및 제품을 반환하는 엔드포인트 등 두 개의 엔드포인트에서 기존 Web API를 사용합니다. 제품 메서드에는 버그가 있습니다. 이 문제가 이 자습서에서 해결되었습니다.
 
@@ -114,7 +114,7 @@ public static int Product(int a, int b)
 
 1. 제품을 반환하도록 `Product` 메서드 코드를 수정합니다. 파일을 저장합니다.
 
-`dotnet watch` 파일 변경을 검색하고 테스트를 다시 실행합니다. 콘솔 출력은 통과된 테스트를 나타냅니다.
+`dotnet watch`는 파일 변경을 검색하고 테스트를 다시 실행합니다. 콘솔 출력은 통과된 테스트를 나타냅니다.
 
 ## <a name="customize-files-list-to-watch"></a>조사할 파일 목록 사용자 지정
 
@@ -135,7 +135,7 @@ public static int Product(int a, int b)
 
 ## <a name="opt-out-of-files-to-be-watched"></a>감시할 파일 옵트아웃
 
-`dotnet-watch` 기본 설정을 무시하도록 구성할 수 있습니다. 특정 파일을 무시하려면 *.csproj* 파일에서 `Watch="false"` 특성을 항목의 정의로 추가합니다.
+기본 설정을 무시하도록 `dotnet-watch`를 구성할 수 있습니다. 특정 파일을 무시하려면 *.csproj* 파일에서 `Watch="false"` 특성을 항목의 정의로 추가합니다.
 
 ```xml
 <ItemGroup>
@@ -152,7 +152,7 @@ public static int Product(int a, int b)
 
 ## <a name="custom-watch-projects"></a>사용자 정의 조사식 프로젝트
 
-`dotnet-watch` C# 프로젝트로 제한되지 않습니다. 다른 시나리오를 처리하도록 사용자 지정 조사식 프로젝트를 만들 수 있습니다. 다음 프로젝트 레이아웃을 사용합니다.
+`dotnet-watch`는 C# 프로젝트로 제한되지 않습니다. 다른 시나리오를 처리하도록 사용자 지정 조사식 프로젝트를 만들 수 있습니다. 다음 프로젝트 레이아웃을 사용합니다.
 
 * **test/**
   * *UnitTests/UnitTests.csproj*
@@ -185,4 +185,4 @@ dotnet watch msbuild /t:Test
 
 ## <a name="dotnet-watch-in-github"></a>GitHub의 `dotnet-watch`
 
-`dotnet-watch` GitHub [aspnet/AspNetCore 리포지토리](https://github.com/aspnet/AspNetCore/tree/master/src/Tools/dotnet-watch)의 일부입니다.
+`dotnet-watch`는 GitHub [aspnet/AspNetCore 리포지토리](https://github.com/aspnet/AspNetCore/tree/master/src/Tools/dotnet-watch)의 일부입니다.

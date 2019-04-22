@@ -8,10 +8,10 @@ ms.custom: mvc, seodec18
 ms.date: 04/06/2019
 uid: fundamentals/configuration/platform-specific-configuration
 ms.openlocfilehash: c2a2e1fbd288ff292c6759d03fae51876cdb5704
-ms.sourcegitcommit: 258a97159da206f9009f23fdf6f8fa32f178e50b
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/09/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59425077"
 ---
 # <a name="use-hosting-startup-assemblies-in-aspnet-core"></a>ASP.NET Core에서 호스팅 시작 어셈블리 사용
@@ -66,7 +66,7 @@ ms.locfileid: "59425077"
 
 [샘플 코드](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)에는 Razor 페이지 앱, *HostingStartupApp* 및 클래스 라이브러리, *HostingStartupLibrary*가 포함되어 있습니다. 클래스 라이브러리:
 
-* `IHostingStartup`을 구현하는 호스트 시작 클래스(`ServiceKeyInjection`)가 포함되어 있습니다. `ServiceKeyInjection` 메모리 내 구성 공급자([AddInMemoryCollection](/dotnet/api/microsoft.extensions.configuration.memoryconfigurationbuilderextensions.addinmemorycollection))를 사용하여 앱의 구성에 서비스 문자열 쌍을 추가합니다.
+* `IHostingStartup`을 구현하는 호스트 시작 클래스(`ServiceKeyInjection`)가 포함되어 있습니다. `ServiceKeyInjection`은 메모리 내 구성 공급자([AddInMemoryCollection](/dotnet/api/microsoft.extensions.configuration.memoryconfigurationbuilderextensions.addinmemorycollection))를 사용하여 앱의 구성에 서비스 문자열 쌍을 추가합니다.
 * 호스팅 시작의 네임스페이스 및 클래스를 식별하는 `HostingStartup` 특성을 포함합니다.
 
 `ServiceKeyInjection` 클래스의 [구성](/dotnet/api/microsoft.aspnetcore.hosting.ihostingstartup.configure) 메서드는 [IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder)를 사용하여 앱에 향상된 기능을 추가합니다.
@@ -83,7 +83,7 @@ ms.locfileid: "59425077"
 
 [샘플 코드](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/)에는 별도의 호스팅 시작인 *HostingStartupPackage*를 제공하는 NuGet 패키지 프로젝트도 포함되어 있습니다. 패키지는 앞에서 설명한 클래스 라이브러리와 같은 특징이 있습니다. 패키지:
 
-* `IHostingStartup`을 구현하는 호스트 시작 클래스(`ServiceKeyInjection`)가 포함되어 있습니다. `ServiceKeyInjection` 앱의 구성에 서비스 문자열 쌍을 추가합니다.
+* `IHostingStartup`을 구현하는 호스트 시작 클래스(`ServiceKeyInjection`)가 포함되어 있습니다. `ServiceKeyInjection`은 앱의 구성에 서비스 문자열 쌍을 추가합니다.
 * `HostingStartup` 특성을 포함합니다.
 
 *HostingStartupPackage/ServiceKeyInjection.cs*:
@@ -124,7 +124,7 @@ ms.locfileid: "59425077"
 
 [!code-csharp[](platform-specific-configuration/samples-snapshot/2.x/StartupEnhancement.cs?name=snippet1)]
 
-클래스는 `IHostingStartup`을 구현합니다. 클래스의 [구성](/dotnet/api/microsoft.aspnetcore.hosting.ihostingstartup.configure) 메서드는 [IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder)를 사용하여 앱에 향상된 기능을 추가합니다. `IHostingStartup.Configure` 호스팅 시작 어셈블리에서 사용자 코드로 `Startup.Configure` 앞에 런타임에서 호출됩니다. 그러면 사용자 코드가 호스팅 시작 어셈블리에서 제공하는 모든 구성을 덮어쓸 수 있습니다.
+클래스는 `IHostingStartup`을 구현합니다. 클래스의 [구성](/dotnet/api/microsoft.aspnetcore.hosting.ihostingstartup.configure) 메서드는 [IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder)를 사용하여 앱에 향상된 기능을 추가합니다. 호스팅 시작 어셈블리의 `IHostingStartup.Configure`는 사용자 코드로 `Startup.Configure` 전에 런타임에서 호출됩니다. 그러면 사용자 코드가 호스팅 시작 어셈블리에서 제공하는 모든 구성을 덮어쓸 수 있습니다.
 
 [!code-csharp[](platform-specific-configuration/samples-snapshot/2.x/StartupEnhancement.cs?name=snippet2&highlight=3,5)]
 
@@ -217,7 +217,7 @@ dotnet store --manifest store.manifest.csproj --runtime win7-x64 --output ./depl
 
 **호스팅 시작의 종속성 파일 수정 및 배치**
 
-향상된 기능에 대한 패키지 참조 없이 향상된 기능을 활성화하려면 `additionalDeps`를 사용하여 런타임에 추가 종속성을 지정합니다. `additionalDeps` 다음을 수행할 수 있습니다.
+향상된 기능에 대한 패키지 참조 없이 향상된 기능을 활성화하려면 `additionalDeps`를 사용하여 런타임에 추가 종속성을 지정합니다. `additionalDeps`를 사용하면 다음을 수행할 수 있습니다.
 
 * 시작 시 앱의 고유한 *\*.deps.json* 파일과 병합하기 위해 추가 *\*.deps.json* 파일 집합을 제공하여 앱의 라이브러리 그래프를 확장합니다.
 * 호스팅 시작 어셈블리를 검색 가능하고 로드 가능하게 만듭니다.
@@ -387,7 +387,7 @@ dotnet nuget locals all --clear
    * *additionalDeps/shared/Microsoft.AspNetCore.App/{Shared Framework Version}/* 폴더에서 `StartupDiagnostics`의 `additionalDeps`를 생성합니다.
    * *deployment* 폴더에 *deploy.ps1* 파일을 배치합니다.
 1. *배포* 폴더에서 *deploy.ps1* 스크립트를 실행합니다. 스크립트는 다음을 수행합니다.
-   * `StartupDiagnostics` `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` 환경 변수에 추가됩니다.
+   * `StartupDiagnostics`를 `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` 환경 변수에 추가합니다.
    * 호스팅 시작 종속성 경로를 `DOTNET_ADDITIONAL_DEPS` 환경 변수에 추가합니다.
    * 런타임 저장소 경로를 `DOTNET_SHARED_STORE` 환경 변수에 추가합니다.
 1. 샘플 앱을 실행합니다.

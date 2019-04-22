@@ -1,10 +1,10 @@
 ---
 ms.openlocfilehash: 5636beb47e32b184211fb2555c6d9d067550727f
-ms.sourcegitcommit: 948e533e02c2a7cb6175ada20b2c9cabb7786d0b
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/10/2019
-ms.locfileid: "59468726"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59705538"
 ---
 # <a name="error-handling-sample-application"></a>오류 처리 샘플 애플리케이션
 

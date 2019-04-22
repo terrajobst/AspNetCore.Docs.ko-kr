@@ -6,18 +6,18 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 1/11/2019
 uid: security/authentication/google-logins
-ms.openlocfilehash: 1328bcbce3e6e4786f9d410d1f28f309dc9d2722
-ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
+ms.openlocfilehash: 44c79b3279db7946b6d89a726bd3f5acfb5f51af
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/30/2019
-ms.locfileid: "58750540"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59705593"
 ---
 # <a name="google-external-login-setup-in-aspnet-core"></a>ASP.NET Core에서 Google 외부 로그인 설정
 
 작성자: [Valeriy Novytskyy](https://github.com/01binary) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-2019 년 1 월에서에서 Google을 시작 [종료](https://developers.google.com/+/api-shutdown) Google +에 로그인 하 고 개발자는 시스템에서 새 Google 로그인을 3 월에서 이동 해야 합니다. ASP.NET Core 2.1 및 2.2 패키지 Google 인증에 대 한 변경 내용에 맞게 2 월에 업데이트 됩니다. 자세한 정보 및 ASP.NET Core에 대 한 임시 완화 [이 GitHub 문제](https://github.com/aspnet/AspNetCore/issues/6486)합니다. 이 자습서는 새로운 설치 프로세스를 사용 하 여 업데이트 되었습니다.
+[레거시 Google + Api 2019 년 3 월 7 일부 터 종료](https://developers.google.com/+/api-shutdown)합니다. Google +에 로그인 하 고 개발자가 시스템에서 새 Google 로그인을 이동 해야 합니다. Google 인증에 대 한 ASP.NET Core 2.1 및 2.2 패키지 변경 내용에 맞게 업데이트 됩니다. 자세한 정보 및 ASP.NET Core에 대 한 임시 완화 [이 GitHub 문제](https://github.com/aspnet/AspNetCore/issues/6486)합니다. 이 자습서는 새로운 설치 프로세스를 사용 하 여 업데이트 되었습니다.
 
 이 자습서에서 만든 ASP.NET Core 2.2 프로젝트를 사용 하 여 Google 계정으로 로그인 할 수 있도록 하는 방법을 보여 줍니다.는 [이전 페이지](xref:security/authentication/social/index)합니다.
 

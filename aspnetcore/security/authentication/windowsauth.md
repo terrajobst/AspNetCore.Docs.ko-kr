@@ -8,10 +8,10 @@ ms.custom: mvc, seodec18
 ms.date: 04/03/2019
 uid: security/authentication/windowsauth
 ms.openlocfilehash: bd4ffa79c4d1e0070c820fa9c06b0a84c3aaae74
-ms.sourcegitcommit: 948e533e02c2a7cb6175ada20b2c9cabb7786d0b
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/10/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59468655"
 ---
 # <a name="configure-windows-authentication-in-aspnet-core"></a>ASP.NET Core에서 Windows 인증을 구성 합니다.
@@ -26,7 +26,7 @@ Windows 인증은 ASP.NET Core 앱의 사용자를 인증 하는 운영 체제�
 
 합니다 **웹 응용 프로그램** Windows 인증을 지원 하도록 Visual Studio 또는.NET Core CLI를 통해 사용할 수 있는 템플릿을 구성할 수 있습니다.
 
-# [<a name="visual-studio"></a>Visual Studio](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ### <a name="use-the-windows-authentication-app-template-for-a-new-project"></a>새 프로젝트를 위해 Windows 인증 앱 템플릿 사용
 
@@ -55,7 +55,7 @@ Visual Studio에서 다음을 수행합니다.
 
 [!code-json[](windowsauth/sample_snapshot/launchSettings.json?highlight=2-3)]
 
-# [<a name="net-core-cli"></a>.NET Core CLI](#tab/netcore-cli)
+# <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 사용 된 **Windows 인증** 앱 템플릿.
 

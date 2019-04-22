@@ -5,12 +5,12 @@ description: 웹 페이지에 서버 기반 코드를 포함하는 Razor 태그 
 ms.author: riande
 ms.date: 10/26/2018
 uid: mvc/views/razor
-ms.openlocfilehash: 53d4dc608fbfd45bcc015a3af83f5d87f86c7f15
-ms.sourcegitcommit: a1c43150ed46aa01572399e8aede50d4668745ca
+ms.openlocfilehash: 7f97be651c067e94f29eef4956c10d87ec031bed
+ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/21/2019
-ms.locfileid: "58327367"
+ms.lasthandoff: 04/16/2019
+ms.locfileid: "59614287"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>ASP.NET Core에 대한 Razor 구문 참조
 
@@ -171,6 +171,31 @@ Razor 코드 블록은 `@`으로 시작하고 `{}`로 묶입니다. 식과는 �
 <p>The future depends on what you do today. - Mahatma Gandhi</p>
 <p>Hate cannot drive out hate, only love can do that. - Martin Luther King, Jr.</p>
 ```
+
+::: moniker range=">= aspnetcore-3.0"
+
+코드 블록에서 템플릿 메서드로 제공되는 태그를 사용하여 [로컬 함수](/dotnet/csharp/programming-guide/classes-and-structs/local-functions)를 선언합니다.
+
+```cshtml
+@{
+    void RenderName(string name)
+    {
+        <p>Name: <strong>@name</strong></p>
+    }
+
+    RenderName("Mahatma Gandhi");
+    RenderName("Martin Luther King, Jr.");
+}
+```
+
+이 코드는 다음 HTML을 렌더링합니다.
+
+```html
+<p>Name: <strong>Mahatma Gandhi</strong></p>
+<p>Name: <strong>Martin Luther King, Jr.</strong></p>
+```
+
+::: moniker-end
 
 ### <a name="implicit-transitions"></a>암시적 전환
 
@@ -521,6 +546,33 @@ Razor는 보기에 전달된 모델에 액세스할 수 있는 `Model` 속성을
 다음 코드는 생성된 Razor C# 클래스입니다.
 
 [!code-csharp[](razor/sample/Classes/Views_Home_Test_cshtml.cs?range=1-19)]
+
+::: moniker range=">= aspnetcore-3.0"
+
+`@functions` 메서드는 태그가 있을 때 템플릿 메서드로 제공됩니다.
+
+```cshtml
+@{
+    RenderName("Mahatma Gandhi");
+    RenderName("Martin Luther King, Jr.");
+}
+
+@functions {
+    private void RenderName(string name)
+    {
+        <p>Name: <strong>@name</strong></p>
+    }
+}
+```
+
+이 코드는 다음 HTML을 렌더링합니다.
+
+```html
+<p>Name: <strong>Mahatma Gandhi</strong></p>
+<p>Name: <strong>Martin Luther King, Jr.</strong></p>
+```
+
+::: moniker-end
 
 ### <a name="section"></a>@section
 

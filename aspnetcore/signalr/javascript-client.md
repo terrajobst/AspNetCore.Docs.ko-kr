@@ -5,14 +5,14 @@ description: ASP.NET Core SignalR JavaScript 클라이언트의 개요입니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 03/14/2019
+ms.date: 04/17/2019
 uid: signalr/javascript-client
-ms.openlocfilehash: a0980dca2eb8d483a9d9f1c5667fb74ee06364f0
-ms.sourcegitcommit: d913bca90373c07f89b1d1df01af5fc01fc908ef
+ms.openlocfilehash: e58015221497a9f962edf9f9fdba7ea3025d7694
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/14/2019
-ms.locfileid: "57978344"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59705606"
 ---
 # <a name="aspnet-core-signalr-javascript-client"></a>ASP.NET Core SignalR JavaScript 클라이언트
 
@@ -104,7 +104,140 @@ SignalR은 `SendAsync`와 `connection.on`에 정의된 메서드 이름과 인�
 
 ## <a name="reconnect-clients"></a>클라이언트를 다시 연결
 
-SignalR에 대 한 JavaScript 클라이언트가 자동으로 다시 연결 하지 않습니다. 클라이언트에 수동으로 다시 연결 하는 코드를 작성 해야 합니다. 다음 코드는 일반적인 다시 연결 방법을 보여 줍니다.
+::: moniker range=">= aspnetcore-3.0"
+
+### <a name="automatically-reconnect"></a>자동으로 다시 연결
+
+SignalR에 대 한 JavaScript 클라이언트를 자동으로 사용 하 여 다시 연결을 구성할 수 있습니다 합니다 `withAutomaticReconnect` 메서드를 [HubConnectionBuilder](/javascript/api/%40aspnet/signalr/hubconnectionbuilder)합니다. 기본적으로 다시 자동으로 연결 되지 않습니다.
+
+```javascript
+const connection = new signalR.HubConnectionBuilder()
+    .withUrl("/chatHub")
+    .withAutomaticReconnect()
+    .build();
+```
+
+모든 매개 변수 없이 `withAutomaticReconnect()` 4 실패 한 시도 후 각 다시 연결 시도 전에 각각 0, 2, 10 일 및 30 초를 기다리고 클라이언트를 구성 합니다.
+
+다시 연결 시도 시작 하기 전에 `HubConnection` 전환 됩니다 합니다 `HubConnectionState.Reconnecting` 상태 및 실행 해당 `onreconnecting` 전환 하는 대신 콜백을 `Disconnected` 상태 및 트리거 해당 `onclose` 콜백을 등을 `HubConnection`자동 다시 연결 하지 않고 구성 합니다. 이 연결 손실 되었음을 사용자에 게 경고 하는 데 UI 요소를 사용 하지 않도록 설정할 수 있는 기회를 제공 합니다.
+
+```javascript
+connection.onreconnecting((error) => {
+  console.assert(connection.state === signalR.HubConnectionState.Reconnecting);
+
+  document.getElementById("messageInput").disabled = true;
+
+  const li = document.createElement("li");
+  li.textContent = `Connection lost due to error "${error}". Reconnecting.`;
+  document.getElementById("messagesList").appendChild(li);
+});
+```
+
+클라이언트는 먼저 4 회 성공적으로 다시 연결 하는 경우는 `HubConnection` 으로 다시 전환 됩니다.는 `Connected` 상태 및 실행 해당 `onreconnected` 콜백 합니다. 이 연결이 다시 설정 하는 사용자에 게 알리기 기회를 제공 합니다.
+
+연결 서버에 완전히 새로운 표시 하므로 새 `connectionId` 에 제공 됩니다는 `onreconnected` 콜백 합니다.
+
+> [!WARNING]
+> `onreconnected` 콜백의 `connectionId` 매개 변수는 정의 되지 경우 합니다 `HubConnection` 하도록 구성 된 [협상 건너뛸](xref:signalr/configuration#configure-client-options)합니다.
+
+```javascript
+connection.onreconnected((connectionId) => {
+  console.assert(connection.state === signalR.HubConnectionState.Connected);
+
+  document.getElementById("messageInput").disabled = false;
+
+  const li = document.createElement("li");
+  li.textContent = `Connection reestablished. Connected with connectionId "${connectionId}".`;
+  document.getElementById("messagesList").appendChild(li);
+});
+```
+
+`withAutomaticReconnect()` 구성지 않습니다는 `HubConnection` 시작 실패를 수동으로 처리 해야 하므로 초기 시작 실패를 다시 시도 합니다.
+
+```javascript
+async function start() {
+    try {
+        await connection.start();
+        console.assert(connection.state === signalR.HubConnectionState.Connected);
+        console.log("connected");
+    } catch (err) {
+        console.assert(connection.state === signalR.HubConnectionState.Disconnected);
+        console.log(err);
+        setTimeout(() => start(), 5000);
+    }
+};
+```
+
+클라이언트 하지 해당 처음 네 개의 시도 내에서 성공적으로 다시 연결 하는 경우는 `HubConnection` 전환 됩니다 합니다 `Disconnected` 상태 및 실행 해당 [onclose](/javascript/api/%40aspnet/signalr/hubconnection#onclose) 콜백 합니다. 이 연결이 영구적으로 손실 되었으며 페이지를 새로 고치는 것이 좋습니다 사용자에 게 알리기 기회를 제공 합니다.
+
+```javascript
+connection.onclose((error) => {
+  console.assert(connection.state === signalR.HubConnectionState.Disconnected);
+
+  document.getElementById("messageInput").disabled = true;
+
+  const li = document.createElement("li");
+  li.textContent = `Connection closed due to error "${error}". Try refreshing this page to restart the connection.`;
+  document.getElementById("messagesList").appendChild(li);
+})
+```
+
+사용자 지정 연결을 끊기 전에 다시 연결 시도 횟수를 구성 하거나 다시 연결 시간을 변경 하려면 `withAutomaticReconnect` 각 다시 연결 시도 시작 하기 전에 대기할 밀리초의 지연을 나타내는 숫자 배열을 허용 합니다.
+
+```javascript
+const connection = new signalR.HubConnectionBuilder()
+    .withUrl("/chatHub")
+    .withAutomaticReconnect([0, 0, 10000])
+    .build();
+
+    // .withAutomaticReconnect([0, 2000, 10000, 30000]) yields the default behavior
+```
+
+앞의 예제 구성는 `HubConnection` 연결이 끊어진 후에 즉시 다시 연결 시도 시작 합니다. 기본 구성에는이 마찬가지입니다.
+
+첫 번째 다시 연결 시도가 실패 하면 기본 구성이 있는 것 처럼 2 초 대기 하는 대신 두 번째 다시 연결 시도가 즉시 시작도 됩니다.
+
+두 번째 다시 연결 시도가 실패 하면 세 번째 다시 연결 시도 기본 구성 등 다시 10 초 후에 시작 됩니다.
+
+사용자 지정 동작은 다음 달라 지므로 다시 기본 동작에서 중지 하 여 세 번째 다시 연결 시도 하나를 사용 하는 대신 오류 후 더 시도 기본 구성이 있는 것 처럼 다른 30 초 후에 다시 연결 합니다.
+
+자동의 수와 타이밍을 보다 잘 제어할 다시 시도 하려는 경우 `withAutomaticReconnect` 구현 하는 개체를 허용 합니다 `IReconnectPolicy` 라는 단일 메서드가 있는 인터페이스 `nextRetryDelayInMilliseconds`합니다.
+
+`nextRetryDelayInMilliseconds` 두 개의 인수로 `previousRetryCount` 및 `elapsedMilliseconds`, 두 번호는 합니다. 첫 번째 다시 연결 시도 하기 전에 둘 다 `previousRetryCount` 고 `elapsedMilliseconds` 0이 됩니다. 각 실패 한 시도 후 `previousRetryCount` 1 씩 증가 하 고 `elapsedMilliseconds` 밀리초에서 지금 다시 연결 하는 데 걸린 시간을 반영 하도록 업데이트 됩니다.
+
+`nextRetryDelayInMilliseconds` 두 숫자 밀리초 수를 나타내는 다음 다시 연결 시도 하기 전에 대기할 반환 해야 합니다 또는 `null` 경우는 `HubConnection` 다시 연결을 중지 해야 합니다.
+
+```javascript
+const connection = new signalR.HubConnectionBuilder()
+    .withUrl("/chatHub")
+    .withAutomaticReconnect({
+        nextRetryDelayInMilliseconds: (previousRetryCount, elapsedMilliseconds) => {
+          if (elapsedMilliseconds < 60000) {
+            // If we've been reconnecting for less than 60 seconds so far,
+            // wait between 0 and 10 seconds before the next reconnect attempt.
+            return Math.random() * 10000;
+          } else {
+            // If we've been reconnecting for more than 60 seconds so far, stop reconnecting.
+            return null;
+          }
+        })
+    .build();
+```
+
+또는 클라이언트에서 설명한 것 처럼 수동으로 다시 연결 하는 코드를 작성할 수 있습니다 [수동으로 다시](#manually-reconnect)입니다.
+
+::: moniker-end
+
+### <a name="manually-reconnect"></a>수동으로 다시 연결
+
+::: moniker range="< aspnetcore-3.0"
+
+> [!WARNING]
+> 3.0 이전 SignalR에 대 한 JavaScript 클라이언트 하지 자동으로 다시 연결 합니다. 클라이언트에 수동으로 다시 연결 하는 코드를 작성 해야 합니다.
+
+::: moniker-end
+
+다음 코드는 일반적인 수동 다시 연결 방법을 보여 줍니다.
 
 1. 함수 (이 경우에 `start` 함수) 연결을 시작 하기 위해 만들어집니다.
 1. 호출 된 `start` 함수에서 연결의 `onclose` 이벤트 처리기입니다.

@@ -8,10 +8,10 @@ ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/migrations
 ms.openlocfilehash: 3d2ae12bf8eda4f7997008758d4d29434a8371a7
-ms.sourcegitcommit: 1a7000630e55da90da19b284e1b2f2f13a393d74
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/04/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59012606"
 ---
 # <a name="tutorial-using-the-migrations-feature---aspnet-mvc-with-ef-core"></a>자습서: 마이그레이션 기능 사용 - ASP.NET MVC 및 EF Core 사용
@@ -104,7 +104,7 @@ Done. To undo this action, use 'ef migrations remove'
 
 마이그레이션은 현재 데이터베이스 스키마의 *스냅숏*을 *Migrations/SchoolContextModelSnapshot.cs*에 만듭니다. 마이그레이션을 추가하면 EF가 데이터 모델을 스냅숏 파일과 비교하여 변경 내용을 확인합니다.
 
-마이그레이션을 삭제할 때는 [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove) 명령을 사용합니다. `dotnet ef migrations remove` 마이그레이션을 삭제하고 스냅숏이 올바르게 다시 설정되도록 합니다.
+마이그레이션을 삭제할 때는 [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove) 명령을 사용합니다. `dotnet ef migrations remove`는 마이그레이션을 삭제하고 스냅숏이 올바르게 다시 설정되도록 합니다.
 
 스냅숏 파일을 사용하는 방법에 대한 자세한 내용은 [팀 환경의 EF Core 마이그레이션](/ef/core/managing-schemas/migrations/teams)을 참조하세요.
 

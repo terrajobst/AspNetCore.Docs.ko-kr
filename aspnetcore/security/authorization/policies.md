@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 04/05/2019
 uid: security/authorization/policies
 ms.openlocfilehash: ea9d687d3810c104d5b3fa39033849c21569709b
-ms.sourcegitcommit: 6bde1fdf686326c080a7518a6725e56e56d8886e
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/08/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59068172"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>ASP.NET Core의 정책 기반 권한 부여
@@ -96,7 +96,7 @@ Razor 페이지를 사용 하는 경우 참조 [Razor 페이지에 정책을 적
 
 * 다른 처리기의 성공 여부와 관계없이 무조건 실패한 것으로 나타내려면 `context.Fail`을 호출합니다.
 
-처리기를 호출 하는 경우 `context.Succeed` 또는 `context.Fail`, 다른 모든 처리기도 호출 됩니다. 이렇게 하면 다른 처리기가 성공적으로 유효성이 검사 되지 않았거나 요구 사항 실패 하는 경우에 수행 하는 로깅과 같은 부작용을 생성 하기 위한 요구 사항. [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) 속성이 (ASP.NET Core 1.1 이상에서 사용 가능) `false`로 설정되면 `context.Fail`이 호출될 경우 나머지 처리기들의 실행이 중단되고 즉시 빠져나갑니다. `InvokeHandlersAfterFailure` 기본값은 `true`, 모든 처리기가 호출 하는 경우.
+처리기를 호출 하는 경우 `context.Succeed` 또는 `context.Fail`, 다른 모든 처리기도 호출 됩니다. 이렇게 하면 다른 처리기가 성공적으로 유효성이 검사 되지 않았거나 요구 사항 실패 하는 경우에 수행 하는 로깅과 같은 부작용을 생성 하기 위한 요구 사항. [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) 속성이 (ASP.NET Core 1.1 이상에서 사용 가능) `false`로 설정되면 `context.Fail`이 호출될 경우 나머지 처리기들의 실행이 중단되고 즉시 빠져나갑니다. `InvokeHandlersAfterFailure`의 기본값은 `true`로, 이 경우 모든 처리기가 호출됩니다.
 
 > [!NOTE]
 > 권한 부여 처리기는 인증에 실패 하는 경우에 호출 됩니다.

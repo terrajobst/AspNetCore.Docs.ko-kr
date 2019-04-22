@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 03/31/2019
 uid: fundamentals/logging/loggermessage
 ms.openlocfilehash: 7a030b4bb754f65f8d93e51f203344c2dc02a634
-ms.sourcegitcommit: 5995f44e9e13d7e7aa8d193e2825381c42184e47
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/02/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "58809265"
 ---
 # <a name="high-performance-logging-with-loggermessage-in-aspnet-core"></a>ASP.NET Core에서 LoggerMessage를 사용한 고성능 로깅

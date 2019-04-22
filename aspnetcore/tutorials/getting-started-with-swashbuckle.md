@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 04/04/2019
 uid: tutorials/get-started-with-swashbuckle
 ms.openlocfilehash: 31d45eaa684118ab78d1b3ecac594e95712f631f
-ms.sourcegitcommit: 6bde1fdf686326c080a7518a6725e56e56d8886e
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/08/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59068351"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Swashbuckle 및 ASP.NET Core 시작
@@ -31,7 +31,7 @@ Swashbuckle에 대한 세 가지 주 구성 요소는 다음과 같습니다.
 
 다음 방법으로 Swashbuckle을 추가할 수 있습니다.
 
-### [<a name="visual-studio"></a>Visual Studio](#tab/visual-studio)
+### <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * **패키지 관리자 콘솔** 창에서:
   * **보기** > **다른 창** > **패키지 관리자 콘솔**로 이동
@@ -48,14 +48,14 @@ Swashbuckle에 대한 세 가지 주 구성 요소는 다음과 같습니다.
   * 검색 상자에 “Swashbuckle.AspNetCore” 입력
   * **찾아보기** 탭에서 “Swashbuckle.AspNetCore” 패키지를 선택하고 **설치** 클릭
 
-### [<a name="visual-studio-for-mac"></a>Visual Studio for Mac](#tab/visual-studio-mac)
+### <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 * **Solution Pad**에서 *Packages* 폴더를 마우스 오른쪽 단추로 클릭 > **패키지 추가...** 선택
 * **패키지 추가** 창의 **소스** 드롭다운을 “nuget.org”로 설정
 * 검색 상자에 “Swashbuckle.AspNetCore” 입력
 * 결과 창에서 "Swashbuckle.AspNetCore" 패키지를 선택하고 **패키지 추가** 클릭
 
-### [<a name="visual-studio-code"></a>Visual Studio Code](#tab/visual-studio-code)
+### <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 **통합 터미널**에서 다음 명령을 실행합니다.
 
@@ -63,7 +63,7 @@ Swashbuckle에 대한 세 가지 주 구성 요소는 다음과 같습니다.
 dotnet add TodoApi.csproj package Swashbuckle.AspNetCore
 ```
 
-### [<a name="net-core-cli"></a>.NET Core CLI](#tab/netcore-cli)
+### <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 다음 명령을 실행합니다.
 
@@ -128,7 +128,7 @@ Swagger UI는 버전의 정보를 표시합니다.
 
 XML 주석은 다음 방법으로 사용하도록 설정할 수 있습니다.
 
-#### [<a name="visual-studio"></a>Visual Studio](#tab/visual-studio)
+#### <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -146,7 +146,7 @@ XML 주석은 다음 방법으로 사용하도록 설정할 수 있습니다.
 
 ::: moniker-end
 
-#### [<a name="visual-studio-for-mac"></a>Visual Studio for Mac](#tab/visual-studio-mac)
+#### <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -164,7 +164,7 @@ XML 주석은 다음 방법으로 사용하도록 설정할 수 있습니다.
 
 ::: moniker-end
 
-#### [<a name="visual-studio-code"></a>Visual Studio Code](#tab/visual-studio-code)
+#### <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 강조 표시된 줄을 *.csproj* 파일에 수동으로 추가합니다.
 
@@ -180,7 +180,7 @@ XML 주석은 다음 방법으로 사용하도록 설정할 수 있습니다.
 
 ::: moniker-end
 
-#### [<a name="net-core-cli"></a>.NET Core CLI](#tab/netcore-cli)
+#### <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 강조 표시된 줄을 *.csproj* 파일에 수동으로 추가합니다.
 

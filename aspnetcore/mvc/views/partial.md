@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 04/06/2019
 uid: mvc/views/partial
 ms.openlocfilehash: 65da78d6df3f179df9bdfa3a32af8736b71bbac5
-ms.sourcegitcommit: 948e533e02c2a7cb6175ada20b2c9cabb7786d0b
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/10/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59468710"
 ---
 # <a name="partial-views-in-aspnet-core"></a>ASP.NET Core의 부분 보기
@@ -136,7 +136,7 @@ MVC 보기 렌더링과 달리 부분 보기는 *_ViewStart.cshtml*을 실행하
 
 ### <a name="asynchronous-html-helper"></a>비동기 HTML 도우미
 
-HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.PartialAsync*>를 사용하는 것입니다. `PartialAsync` <xref:System.Threading.Tasks.Task%601>에 래핑된 <xref:Microsoft.AspNetCore.Html.IHtmlContent> 형식을 반환합니다. 대기된 호출 접두사로 `@` 문자를 사용하여 메서드를 참조합니다.
+HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.PartialAsync*>를 사용하는 것입니다. `PartialAsync`는 <xref:System.Threading.Tasks.Task%601>에 래핑된 <xref:Microsoft.AspNetCore.Html.IHtmlContent> 형식을 반환합니다. 대기된 호출 접두사로 `@` 문자를 사용하여 메서드를 참조합니다.
 
 ```cshtml
 @await Html.PartialAsync("_PartialName")
@@ -182,7 +182,7 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 
 ### <a name="synchronous-html-helper"></a>동기 HTML 도우미
 
-<xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.Partial*> 및 <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.RenderPartial*>은 각각 `PartialAsync` 및 `RenderPartialAsync`의 해당하는 동기 항목입니다. 교착 상태인 시나리오가 있으므로 동기 해당 항목을 사용하지 않는 것이 좋습니다. 동기 메서드는 이후 릴리스에서 제거 대상으로 지정됩니다.
+`PartialAsync` 및 `RenderPartialAsync`의 해당하는 동기 항목은 각각 <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.Partial*> 및 <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.RenderPartial*>입니다. 교착 상태인 시나리오가 있으므로 동기 해당 항목을 사용하지 않는 것이 좋습니다. 동기 메서드는 이후 릴리스에서 제거 대상으로 지정됩니다.
 
 > [!IMPORTANT]
 > 코드를 실행해야 하는 경우 부분 보기 대신 [보기 구성 요소](xref:mvc/views/view-components)를 사용합니다.
@@ -243,7 +243,7 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 
 ## <a name="access-data-from-partial-views"></a>부분 보기에서 데이터 액세스
 
-부분 보기가 인스턴스화되면 부모의 `ViewData` 사전의 ‘사본’을 수신합니다. 부분 보기 내에서 데이터에 대한 업데이트는 부모 보기에 유지되지 않습니다. `ViewData` 부분 보기의 변경 내용은 부분 보기가 반환될 때 손실됩니다.
+부분 보기가 인스턴스화되면 부모의 `ViewData` 사전의 ‘사본’을 수신합니다. 부분 보기 내에서 데이터에 대한 업데이트는 부모 보기에 유지되지 않습니다. 부분 보기에서 변경된 `ViewData`는 부분 보기가 반환될 때 손실됩니다.
 
 다음 예는 [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) 인스턴스를 부분 보기에 전달하는 방법을 보여 줍니다.
 

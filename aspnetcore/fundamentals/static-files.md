@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 04/08/2019
 uid: fundamentals/static-files
 ms.openlocfilehash: 12c7b39bee462ff83188a5a0f10b133ca273863b
-ms.sourcegitcommit: 258a97159da206f9009f23fdf6f8fa32f178e50b
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/09/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59425064"
 ---
 # <a name="static-files-in-aspnet-core"></a>ASP.NET Core의 고정 파일
@@ -154,7 +154,7 @@ HTML, CSS, 이미지 및 JavaScript와 같은 정적 파일은 ASP.NET Core 앱�
 [!code-csharp[](static-files/samples/1x/StartupEmpty.cs?name=snippet_ConfigureMethod&highlight=3)]
 
 > [!IMPORTANT]
-> `UseDefaultFiles` 기본 파일을 제공하기 전에 `UseStaticFiles`를 먼저 호출해야 합니다. `UseDefaultFiles` 파일을 실제로 제공하지 않는 URL 재작성기입니다. 파일을 제공하도록 `UseStaticFiles`를 통해 정적 파일 미들웨어를 활성화합니다.
+> `UseStaticFiles`가 기본 파일을 제공하기 전에 `UseDefaultFiles`를 먼저 호출해야 합니다. `UseDefaultFiles`는 파일을 실제로 제공하지 않는 URL 재작성기입니다. 파일을 제공하도록 `UseStaticFiles`를 통해 정적 파일 미들웨어를 활성화합니다.
 
 `UseDefaultFiles`를 사용하여 다음에 대한 폴더 검색을 요청합니다.
 
@@ -200,7 +200,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 
 [!code-csharp[](static-files/samples/1x/StartupUseFileServer.cs?name=snippet_ConfigureMethod&highlight=5-11)]
 
-`AddDirectoryBrowser` `EnableDirectoryBrowsing` 속성 값이 `true`인 경우 호출해야 합니다.
+`EnableDirectoryBrowsing` 속성 값이 `true`인 경우 `AddDirectoryBrowser`를 호출해야 합니다.
 
 [!code-csharp[](static-files/samples/1x/StartupUseFileServer.cs?name=snippet_ConfigureServicesMethod)]
 
@@ -242,7 +242,7 @@ URL은 파일 계층 구조 및 이전 코드를 사용하여 다음과 같이 �
 ### <a name="considerations"></a>고려 사항
 
 > [!WARNING]
-> `UseDirectoryBrowser` 및 `UseStaticFiles`는 비밀을 누출할 수 있습니다. 프로덕션 환경에서 디렉터리 검색을 비활성화하는 것이 좋습니다. `UseStaticFiles` 또는 `UseDirectoryBrowser`를 통해 어떤 디렉터리가 활성화되었는지 주의 깊게 검토합니다. 전체 디렉터리와 해당 하위 디렉터리는 공개적으로 액세스할 수 있습니다. *\<content_root>/wwwroot*와 같이 전용 디렉터리에 공개적으로 제공하는 데 적합한 파일을 저장합니다. MVC 뷰, Razor 페이지(2.x에만 해당), 구성 파일 등으로 이러한 파일을 구분합니다.
+> `UseDirectoryBrowser` 및 `UseStaticFiles`는 비밀 정보를 누출 할 수 있습니다. 프로덕션 환경에서 디렉터리 검색을 비활성화하는 것이 좋습니다. `UseStaticFiles` 또는 `UseDirectoryBrowser`를 통해 어떤 디렉터리가 활성화되었는지 주의 깊게 검토합니다. 전체 디렉터리와 해당 하위 디렉터리는 공개적으로 액세스할 수 있습니다. *\<content_root>/wwwroot*와 같이 전용 디렉터리에 공개적으로 제공하는 데 적합한 파일을 저장합니다. MVC 뷰, Razor 페이지(2.x에만 해당), 구성 파일 등으로 이러한 파일을 구분합니다.
 
 * `UseDirectoryBrowser` 및 `UseStaticFiles`로 노출된 콘텐츠에 대한 URL은 대/소문자 구분 및 기본 파일 시스템의 문자 제한이 적용됩니다. 예를 들어 Windows는 대/소문자를 구분하지 않는 반면 macOS 및 Linux는 그렇지 않습니다.
 

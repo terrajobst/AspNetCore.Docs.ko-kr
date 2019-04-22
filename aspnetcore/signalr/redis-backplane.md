@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 11/28/2018
 uid: signalr/redis-backplane
 ms.openlocfilehash: 9d2a942dba6abe669126efee7f2b3cdd6560658e
-ms.sourcegitcommit: 1a7000630e55da90da19b284e1b2f2f13a393d74
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/04/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59012645"
 ---
 # <a name="set-up-a-redis-backplane-for-aspnet-core-signalr-scale-out"></a>ASP.NET Core SignalR 확장에 대 한를 Redis 백플레인으로 설정

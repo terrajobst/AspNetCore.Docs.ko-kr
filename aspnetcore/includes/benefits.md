@@ -1,3 +1,11 @@
+---
+ms.openlocfilehash: d794058f533c4b617f641fa3cb3e6d63fd807c2d
+ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2019
+ms.locfileid: "59615395"
+---
 ASP.NET Core는 다음과 같은 이점을 제공합니다.
 
 * 웹 UI 및 웹 API를 동일한 과정으로 빌드합니다.
@@ -5,7 +13,7 @@ ASP.NET Core는 다음과 같은 이점을 제공합니다.
 * [Razor 페이지](xref:razor-pages/index)는 더 쉽고 더 생산적으로 코딩 페이지에 초점을 맞춘 시나리오를 만듭니다.
 * Windows, macOS 및 Linux에서 개발하고 실행할 수 있습니다.
 * 오픈 소스이며 [커뮤니티에 중점](https://live.asp.net/)을 둡니다.
-* [최신 클라이언트 쪽 프레임워크](xref:razor-components/index) 및 워크플로 개발을 통합합니다.
+* [최신 클라이언트 쪽 프레임워크](xref:blazor/index) 및 워크플로 개발을 통합합니다.
 * 클라우드를 갖춘 환경 기반 [구성 시스템](xref:fundamentals/configuration/index)입니다.
 * [종속성 주입](xref:fundamentals/dependency-injection)이 기본 제공됩니다.
 * 간단한 [고성능](https://github.com/aspnet/benchmarks) 모듈식 HTTP 요청 파이프라인을 포함합니다.

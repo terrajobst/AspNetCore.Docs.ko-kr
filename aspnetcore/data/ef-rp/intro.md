@@ -7,10 +7,10 @@ ms.custom: seodec18
 ms.date: 11/22/2018
 uid: data/ef-rp/intro
 ms.openlocfilehash: aff62d760cf0899983cf841f6715f2658b113f82
-ms.sourcegitcommit: 1a7000630e55da90da19b284e1b2f2f13a393d74
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/04/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59012684"
 ---
 # <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>ASP.NET Core에서 Entity Framework Core를 사용한 Razor 페이지 - 자습서 1/8
@@ -25,15 +25,15 @@ Contoso University 샘플 웹앱은 EF(Entity Framework) Core를 사용하여 AS
 
 샘플 앱은 가상 Contoso University의 웹 사이트입니다. 학생 입학, 강좌 개설 및 강사 할당과 같은 기능이 있습니다. 이 페이지는 Contoso University 샘플 앱을 빌드하는 방법을 설명하는 일련의 자습서 중 첫 번째 작업입니다.
 
-[완성된 앱을 다운로드하거나 확인합니다.](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [지침을 다운로드하세요](xref:index#how-to-download-a-sample).
+[완성된 앱을 다운로드하거나 확인하세요.](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [지침을 다운로드하세요](xref:index#how-to-download-a-sample).
 
 ## <a name="prerequisites"></a>전제 조건
 
-# [<a name="visual-studio"></a>Visual Studio](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE [](~/includes/net-core-prereqs-windows.md)]
 
-# [<a name="net-core-cli"></a>.NET Core CLI](#tab/netcore-cli)
+# <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 [!INCLUDE [](~/includes/2.1-SDK.md)]
 
@@ -59,7 +59,7 @@ Contoso University 샘플 웹앱은 EF(Entity Framework) Core를 사용하여 AS
 
 ## <a name="create-the-contosouniversity-razor-pages-web-app"></a>ContosoUniversity Razor Pages 웹앱 만들기
 
-# [<a name="visual-studio"></a>Visual Studio](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Visual Studio **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.
 * 새 ASP.NET Core 웹 애플리케이션을 만듭니다. 프로젝트 이름을 **ContosoUniversity**로 지정합니다. 코드를 복사/붙여넣을 때 네임스페이스와 일치할 수 있도록 프로젝트 이름을 *ContosoUniversity*로 지정하는 것이 중요합니다.
@@ -68,7 +68,7 @@ Contoso University 샘플 웹앱은 EF(Entity Framework) Core를 사용하여 AS
 이전 단계의 이미지는 [Razor 웹앱 만들기](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app)를 참조하세요.
 앱을 실행합니다.
 
-# [<a name="net-core-cli"></a>.NET Core CLI](#tab/netcore-cli)
+# <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 ```CLI
 dotnet new webapp -o ContosoUniversity
@@ -114,9 +114,9 @@ Contoso University 앱에 대한 엔터티 클래스를 만듭니다. 다음과 
 
 `ID` 속성은 이 클래스에 해당하는 DB(데이터베이스) 테이블의 기본 키 열이 됩니다. 기본적으로 EF 코어는 `ID` 또는 `classnameID`로 명명된 속성을 기본 키로 해석합니다. `classnameID`에서 `classname`은 클래스의 이름입니다. 기본 키가 자동으로 인식되는 경우 대안은 앞의 예제에서 `StudentID`입니다.
 
-`Enrollments` 속성은 [탐색 속성](/ef/core/modeling/relationships)입니다. 탐색 속성은 이 엔터티와 관련된 다른 엔터티에 연결됩니다. 이 경우 `Student entity`의 `Enrollments` 속성은 해당 `Student`에 관련된 모든 `Enrollment` 엔터티를 포함합니다. 예를 들어 DB의 학생 행에 두 개의 관련 등록 행이 있는 경우 `Enrollments` 탐색 속성은 그 두 `Enrollment` 엔터티를 포함합니다. 관련된 `Enrollment` 행은 `StudentID` 열에서 해당 학생의 기본 키 값을 포함하는 열입니다. 예를 들어 ID=1인 학생에 `Enrollment` 테이블의 두 개 행이 있다고 가정합니다. `Enrollment` 테이블에 `StudentID` = 1인 두 개의 행이 있습니다. `StudentID` `Student` 테이블에서 학생을 지정하는 `Enrollment` 테이블의 외래 키입니다.
+`Enrollments` 속성은 [탐색 속성](/ef/core/modeling/relationships)입니다. 탐색 속성은 이 엔터티와 관련된 다른 엔터티에 연결됩니다. 이 경우 `Student entity`의 `Enrollments` 속성은 해당 `Student`에 관련된 모든 `Enrollment` 엔터티를 포함합니다. 예를 들어 DB의 학생 행에 두 개의 관련 등록 행이 있는 경우 `Enrollments` 탐색 속성은 그 두 `Enrollment` 엔터티를 포함합니다. 관련된 `Enrollment` 행은 `StudentID` 열에서 해당 학생의 기본 키 값을 포함하는 열입니다. 예를 들어 ID=1인 학생에 `Enrollment` 테이블의 두 개 행이 있다고 가정합니다. `Enrollment` 테이블에 `StudentID` = 1인 두 개의 행이 있습니다. `StudentID`는 `Student` 테이블에서 학생을 지정하는 `Enrollment` 테이블의 외래 키입니다.
 
-탐색 속성이 여러 엔터티를 포함하는 경우 탐색 속성은 `ICollection<T>`와 같은 목록 유형이어야 합니다. `ICollection<T>` 지정할 수 있으며, `List<T>` 또는 `HashSet<T>`와 같은 형식일 수 있습니다. `ICollection<T>`가 사용되는 경우 EF Core는 기본적으로 `HashSet<T>` 컬렉션을 만듭니다. 여러 엔터티를 포함하는 탐색 속성은 다대다 및 일대다 관계에서 제공됩니다.
+탐색 속성이 여러 엔터티를 포함하는 경우 탐색 속성은 `ICollection<T>`와 같은 목록 유형이어야 합니다. `ICollection<T>`는 지정할 수 있으며, `List<T>` 또는 `HashSet<T>`와 같은 형식일 수 있습니다. `ICollection<T>`가 사용되는 경우 EF Core는 기본적으로 `HashSet<T>` 컬렉션을 만듭니다. 여러 엔터티를 포함하는 탐색 속성은 다대다 및 일대다 관계에서 제공됩니다.
 
 ### <a name="the-enrollment-entity"></a>등록 엔터티
 
@@ -155,7 +155,7 @@ EF Core는 속성 이름이 `<navigation property name><primary key property nam
 * 프로젝트를 빌드합니다.
 * *Pages/Students* 폴더를 만듭니다.
 
-# [<a name="visual-studio"></a>Visual Studio](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * **솔루션 탐색기**에서 *Pages/Students* 폴더 > **추가** > **새 스캐폴드된 항목**을 마우스 오른쪽 단추로 클릭합니다.
 * **스캐폴드 추가** 대화 상자에서 **Entity Framework(CRUD)를 사용한 Razor Pages** > **추가**를 선택합니다.
@@ -171,7 +171,7 @@ EF Core는 속성 이름이 `<navigation property name><primary key property nam
 
 이전 단계에서 문제가 발생한 경우 [영화 모델 스캐폴드](xref:tutorials/razor-pages/model#scaffold-the-movie-model)를 참조하세요.
 
-# [<a name="net-core-cli"></a>.NET Core CLI](#tab/netcore-cli)
+# <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 다음 명령을 실행하여 학생 모델을 스캐폴드합니다.
 
@@ -219,7 +219,7 @@ ASP.NET Core는 [종속성 주입](xref:fundamentals/dependency-injection)을 �
 
 [!code-csharp[](intro/samples/cu21/Program.cs?name=snippet)]
 
-`EnsureCreated` 컨텍스트에 대한 데이터베이스가 있는지 확인합니다. 존재하는 경우 아무런 동작이 발생하지 않습니다. 존재하지 않는 경우 데이터베이스 및 해당하는 모든 스키마가 생성됩니다. `EnsureCreated` 데이터베이스를 만드는 데 마이그레이션을 사용하지 않습니다. `EnsureCreated`를 사용하여 만든 데이터베이스는 나중에 마이그레이션을 사용하여 업데이트될 수 없습니다.
+`EnsureCreated`는 컨텍스트에 대한 데이터베이스가 있는지 확인합니다. 존재하는 경우 아무런 동작이 발생하지 않습니다. 존재하지 않는 경우 데이터베이스 및 해당하는 모든 스키마가 생성됩니다. `EnsureCreated`는 데이터베이스를 만드는 데 마이그레이션을 사용하지 않습니다. `EnsureCreated`를 사용하여 만든 데이터베이스는 나중에 마이그레이션을 사용하여 업데이트될 수 없습니다.
 
 앱 시작 시 다음 작업 흐름을 허용하는 `EnsureCreated`가 호출됩니다.
 
@@ -228,7 +228,7 @@ ASP.NET Core는 [종속성 주입](xref:fundamentals/dependency-injection)을 �
 * 앱을 실행합니다.
 * `EnsureCreated`가 `EmailAddress` 열이 있는 DB를 만듭니다.
 
-`EnsureCreated` 스키마가 빠르게 발전하는 경우 개발 초기에 편리합니다. 나중에 자습서에서 DB가 삭제되고 마이그레이션이 사용됩니다.
+`EnsureCreated`는 스키마가 빠르게 발전하는 경우 개발 초기에 편리합니다. 나중에 자습서에서 DB가 삭제되고 마이그레이션이 사용됩니다.
 
 ### <a name="test-the-app"></a>앱 테스트
 
@@ -264,7 +264,7 @@ EF Core가 빈 DB를 만듭니다. 이 섹션에서는 테스트 데이터로 �
 
 [!code-csharp[](intro/samples/cu21/Data/DbInitializer.cs?name=snippet_Intro)]
 
-참고: 앞의 코드는 `Data`가 아닌 `Models`을 네임스페이스(`namespace ContosoUniversity.Models`)에 사용합니다. `Models` 스캐폴더에서 생성된 코드와 일치합니다. 자세한 내용은 [이 GitHub 스캐폴딩 문제](https://github.com/aspnet/Scaffolding/issues/822)를 참조하세요.
+참고: 앞의 코드는 `Data`가 아닌 `Models`을 네임스페이스(`namespace ContosoUniversity.Models`)에 사용합니다. `Models`는 스캐폴더에서 생성된 코드와 일치합니다. 자세한 내용은 [이 GitHub 스캐폴딩 문제](https://github.com/aspnet/Scaffolding/issues/822)를 참조하세요.
 
 코드는 DB에 학생이 있는지를 확인합니다. DB에 학생이 없는 경우 DB는 테스트 데이터로 초기화됩니다. `List<T>` 컬렉션이 아닌 배열에 테스트 데이터를 로드하여 성능을 최적화합니다.
 

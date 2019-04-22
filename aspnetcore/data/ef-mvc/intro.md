@@ -8,10 +8,10 @@ ms.date: 02/06/2019
 ms.topic: tutorial
 uid: data/ef-mvc/intro
 ms.openlocfilehash: 5a2ec9a8d85925e55840962cc90b3092953e7920
-ms.sourcegitcommit: 1a7000630e55da90da19b284e1b2f2f13a393d74
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/04/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59012853"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>자습서: ASP.NET MVC 웹앱에서 EF Core 시작
@@ -341,7 +341,7 @@ Entity Framework에서 전체 데이터베이스를 만들 수 있도록 작성�
 
 * `await` 키워드로 인해 컴파일러는 메서드를 두 부분으로 분할합니다. 첫 번째 부분은 비동기적으로 시작되는 작업을 종료합니다. 두 번째 부분은 작업이 완료될 때 호출되는 콜백 메서드에 배치됩니다.
 
-* `ToListAsync` `ToList` 확장 메서드의 비동기 버전입니다.
+* `ToListAsync`는 `ToList` 확장 메서드의 비동기 버전입니다.
 
 Entity Framework를 사용하는 비동기 코드를 작성할 때 고려해야 할 몇 가지 사항은 다음과 같습니다.
 

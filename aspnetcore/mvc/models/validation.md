@@ -8,10 +8,10 @@ ms.date: 04/06/2019
 monikerRange: '>= aspnetcore-2.1'
 uid: mvc/models/validation
 ms.openlocfilehash: 1ae3c20478b02d6f654e65fdf34c88e1ffb837f8
-ms.sourcegitcommit: 948e533e02c2a7cb6175ada20b2c9cabb7786d0b
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/10/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59468739"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>ASP.NET Core MVC 및 Razor Pages의 모델 유효성 검사
@@ -111,7 +111,7 @@ ms.locfileid: "59468739"
 
 1. JavaScript가 호출할 작업 메서드를 만듭니다.  jQuery 유효성 검사 [remote](https://jqueryvalidation.org/remote-method/) 메서드는 JSON 응답을 수신해야 합니다.
 
-   * `"true"` 입력 데이터가 유효함을 의미합니다.
+   * `"true"`는 입력 데이터가 유효함을 의미합니다.
    * `"false"`, `undefined` 또는 `null`은 입력이 잘못되었음을 의미합니다.  기본 오류 메시지를 표시합니다.
    * 다른 문자열은 모두 입력이 잘못되었음을 의미합니다. 문자열을 사용자 지정 오류 메시지로 표시합니다.
 
@@ -129,7 +129,7 @@ ms.locfileid: "59468739"
 
 [!code-csharp[](validation/sample/Models/User.cs?name=snippet_UserNameProperties)]
 
-`AdditionalFields` 명시적으로 문자열 `"FirstName"` 및 `"LastName"`으로 설정할 수 있지만 [`nameof`](/dotnet/csharp/language-reference/keywords/nameof) 연산자를 사용하면 이후 리팩터링이 단순해집니다. 이 유효성 검사에 대한 작업 메서드에 대해서는 이름과 성 인수를 모두 지정할 수 있습니다.
+`AdditionalFields`를 명시적으로 문자열 `"FirstName"` 및 `"LastName"`으로 설정할 수 있지만 [`nameof`](/dotnet/csharp/language-reference/keywords/nameof) 연산자를 사용하면 이후 리팩터링이 단순해집니다. 이 유효성 검사에 대한 작업 메서드에 대해서는 이름과 성 인수를 모두 지정할 수 있습니다.
 
 [!code-csharp[](validation/sample/Controllers/UsersController.cs?name=snippet_VerifyName)]
 
@@ -142,7 +142,7 @@ ms.locfileid: "59468739"
 public string MiddleName { get; set; }
 ```
 
-`AdditionalFields`모든 특성 인수와 같이 상수 식이어야 합니다. 따라서 `AdditionalFields`를 초기화하기 위해 [보간된 문자열](/dotnet/csharp/language-reference/keywords/interpolated-strings)을 사용하거나 <xref:System.String.Join*>을 호출하지 마십시오.
+모든 특성 인수와 같은 `AdditionalFields`은 상수 식이어야 합니다. 따라서 `AdditionalFields`를 초기화하기 위해 [보간된 문자열](/dotnet/csharp/language-reference/keywords/interpolated-strings)을 사용하거나 <xref:System.String.Join*>을 호출하지 마십시오.
 
 ## <a name="alternatives-to-built-in-attributes"></a>기본 제공 특성에 대한 대안
 
@@ -204,7 +204,7 @@ public string MiddleName { get; set; }
 
 ## <a name="maximum-recursion"></a>최대 재귀
 
-<xref:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor> 유효성 검사 중인 모델의 개체 그래프를 트래버스합니다. 매우 깊거나 무한히 재귀하는 모델의 경우 유효성 검사를 실행하면 스택 오버플로가 발생할 수 있습니다. [MvcOptions.MaxValidationDepth](xref:Microsoft.AspNetCore.Mvc.MvcOptions.MaxValidationDepth)는 방문자 재귀가 구성된 깊이를 초과하는 경우 유효성 검사를 조기에 중지하는 방법을 제공합니다. `MvcOptions.MaxValidationDepth`의 기본값은 `CompatibilityVersion.Version_2_2` 이상에서 실행하는 경우 200입니다. 그보다 이전 버전의 경우 이 값은 Null이며, 이는 깊이 제약 조건이 없음을 의미합니다.
+<xref:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor>는 유효성 검사 중인 모델의 개체 그래프를 트래버스합니다. 매우 깊거나 무한히 재귀하는 모델의 경우 유효성 검사를 실행하면 스택 오버플로가 발생할 수 있습니다. [MvcOptions.MaxValidationDepth](xref:Microsoft.AspNetCore.Mvc.MvcOptions.MaxValidationDepth)는 방문자 재귀가 구성된 깊이를 초과하는 경우 유효성 검사를 조기에 중지하는 방법을 제공합니다. `MvcOptions.MaxValidationDepth`의 기본값은 `CompatibilityVersion.Version_2_2` 이상에서 실행하는 경우 200입니다. 그보다 이전 버전의 경우 이 값은 Null이며, 이는 깊이 제약 조건이 없음을 의미합니다.
 
 ## <a name="automatic-short-circuit"></a>자동 단락
 

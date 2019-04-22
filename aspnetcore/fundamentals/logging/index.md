@@ -6,12 +6,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 03/02/2019
 uid: fundamentals/logging/index
-ms.openlocfilehash: 065b2016d3a2dcc2243ec6869e027c5fabe4dad8
-ms.sourcegitcommit: 6bde1fdf686326c080a7518a6725e56e56d8886e
+ms.openlocfilehash: f0e4dbb6fda4f676ad8e769c71cc9548a4d61d66
+ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/08/2019
-ms.locfileid: "59068406"
+ms.lasthandoff: 04/16/2019
+ms.locfileid: "59614437"
 ---
 # <a name="logging-in-aspnet-core"></a>ASP.NET Core에 로그인
 
@@ -148,7 +148,7 @@ DI에서 <xref:Microsoft.Extensions.Logging.ILogger%601> 개체를 가져옵니�
 
 `Logging` 아래의 `LogLevel` 속성은 선택한 범주에 대해 로그할 최소 [수준](#log-level)을 지정합니다. 이 예제에서는 `System` 및 `Microsoft` 범주는 `Information` 수준으로 로그되고 다른 모든 범주는 `Debug` 수준으로 로그됩니다.
 
-`Logging` 아래의 다른 속성은 로깅 공급자를 지정합니다. 이 예제는 콘솔 공급자를 위한 것입니다. 공급자가 [로그 범위](#log-scopes)를 지원하는 경우 `IncludeScopes`는 사용 가능 여부를 나타냅니다. 공급자 속성(예: 예제에서 `Console`)은 `LogLevel` 속성을 지정할 수도 있습니다. `LogLevel` (공급자 아래에 위치)은 해당 공급자의 로그 수준을 지정합니다.
+`Logging` 아래의 다른 속성은 로깅 공급자를 지정합니다. 이 예제는 콘솔 공급자를 위한 것입니다. 공급자가 [로그 범위](#log-scopes)를 지원하는 경우 `IncludeScopes`는 사용 가능 여부를 나타냅니다. 공급자 속성(예: 예제에서 `Console`)은 `LogLevel` 속성을 지정할 수도 있습니다. 공급자 아래의 `LogLevel`은 해당 공급자에 대한 로그 수준을 지정합니다.
 
 수준이 `Logging.{providername}.LogLevel`에 지정된 경우 `Logging.LogLevel`에 설정된 모든 수준을 재정의합니다.
 
@@ -249,7 +249,7 @@ Microsoft.AspNetCore.Hosting.Internal.WebHost:Information: Request finished in 3
 
 ::: moniker-end
 
-`ILogger<T>` 는 `T`의 정규화된 형식 이름으로 `CreateLogger`를 호출하는 것과 같습니다.
+`ILogger<T>`는 `T`의 정규화된 형식 이름으로 `CreateLogger`를 호출하는 것과 동일합니다.
 
 ## <a name="log-level"></a>로그 수준
 
@@ -285,11 +285,11 @@ ASP.NET Core는 다음 로그 수준을 정의하며, 여기에 가장 낮은 �
 
 * 정보 = 2
 
-  앱의 일반적인 흐름을 추적합니다. 이러한 로그는 일반적으로 장기적인 가치가 있습니다. 예제: `Request received for path /api/todo`
+  앱의 일반적인 흐름을 추적합니다. 이러한 로그는 일반적으로 장기적인 가치가 있습니다. 예: `Request received for path /api/todo`
 
 * 경고 = 3
 
-  앱 흐름에 비정상적이거나 예기치 않은 이벤트가 있습니다. 앱이 중지되지 않지만 조사해야 하는 오류 또는 기타 조건이 여기에 포함될 수 있습니다. 처리된 예외는 `Warning` 로그 수준을 사용하는 일반적인 장소입니다. 예제: `FileNotFoundException for file quotes.txt.`
+  앱 흐름에 비정상적이거나 예기치 않은 이벤트가 있습니다. 앱이 중지되지 않지만 조사해야 하는 오류 또는 기타 조건이 여기에 포함될 수 있습니다. 처리된 예외는 `Warning` 로그 수준을 사용하는 일반적인 장소입니다. 예: `FileNotFoundException for file quotes.txt.`
 
 * 오류 = 4
 
@@ -497,7 +497,8 @@ System.Exception: Item not found exception.
 * 콘솔
 * 디버그
 * EventLog
-* AzureAppServices
+* AzureAppServicesFile
+* AzureAppServicesBlob
 * TraceSource
 * EventSource
 

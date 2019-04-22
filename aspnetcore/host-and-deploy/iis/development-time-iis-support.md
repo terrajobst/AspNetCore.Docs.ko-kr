@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 04/08/2019
 uid: host-and-deploy/iis/development-time-iis-support
 ms.openlocfilehash: 6f555858239b4432d252f8b3ac7add5c3e8bfe62
-ms.sourcegitcommit: 258a97159da206f9009f23fdf6f8fa32f178e50b
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/09/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59425103"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>ASP.NET Core용 Visual Studio의 개발 시간 IIS 지원
@@ -22,7 +22,7 @@ ms.locfileid: "59425103"
 
 ## <a name="prerequisites"></a>전제 조건
 
-* [Visual Studio for Windows](https://visualstudio.microsoft.com/downloads/)
+* [Windows용 Visual Studio](https://visualstudio.microsoft.com/downloads/)
 * **ASP.NET 및 웹 개발** 워크로드
 * **.NET Core 플랫폼 간 개발** 워크로드
 * X.509 보안 인증서(HTTPS 지원용)

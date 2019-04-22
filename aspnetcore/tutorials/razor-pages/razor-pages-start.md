@@ -6,10 +6,10 @@ ms.author: riande
 ms.date: 12/5/2018
 uid: tutorials/razor-pages/razor-pages-start
 ms.openlocfilehash: 1d264ca4a605d8291e273a8f054c92e7eefa5548
-ms.sourcegitcommit: 948e533e02c2a7cb6175ada20b2c9cabb7786d0b
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/10/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59468849"
 ---
 # <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>자습서: ASP.NET Core에서 Razor 페이지 시작
@@ -39,7 +39,7 @@ ms.locfileid: "59468849"
 
 ## <a name="create-a-razor-pages-web-app"></a>Razor 페이지 웹앱 만들기
 
-# [<a name="visual-studio"></a>Visual Studio](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Visual Studio **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.
 
@@ -55,7 +55,7 @@ ms.locfileid: "59468849"
 
   ![솔루션 탐색기](razor-pages-start/_static/se2.2.png)
 
-# [<a name="visual-studio-code"></a>Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * [통합 터미널](https://code.visualstudio.com/docs/editor/integrated-terminal)을 엽니다.
 
@@ -75,7 +75,7 @@ ms.locfileid: "59468849"
 
 * **예**를 선택합니다.
 
-# [<a name="visual-studio-for-mac"></a>Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 터미널에서 다음 명령을 실행합니다.
 
@@ -97,7 +97,7 @@ Visual Studio에서 **파일 > 열기**를 선택하고 *RazorPagesMovie.csproj*
 
 ## <a name="run-the-app"></a>앱 실행
 
-# [<a name="visual-studio"></a>Visual Studio](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Ctrl+F5를 눌러 디버거 없이 실행합니다.
 
@@ -115,7 +115,7 @@ Visual Studio에서 **파일 > 열기**를 선택하고 *RazorPagesMovie.csproj*
 
   ![홈 또는 인덱스 페이지](razor-pages-start/_static/home2.2.png)
   
-# [<a name="visual-studio-code"></a>Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
   [!INCLUDE[](~/includes/trustCertVSC.md)]
 
@@ -133,7 +133,7 @@ Visual Studio에서 **파일 > 열기**를 선택하고 *RazorPagesMovie.csproj*
 
   ![홈 또는 인덱스 페이지](razor-pages-start/_static/home2.2.png)
   
-# [<a name="visual-studio-for-mac"></a>Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
   [!INCLUDE[](~/includes/trustCertMac.md)]
 

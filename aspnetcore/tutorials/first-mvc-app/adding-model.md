@@ -6,10 +6,10 @@ ms.author: riande
 ms.date: 02/25/2019
 uid: tutorials/first-mvc-app/adding-model
 ms.openlocfilehash: 08d8e9679bfee11f03e61cb4b9ae9b5b36186049
-ms.sourcegitcommit: 1a7000630e55da90da19b284e1b2f2f13a393d74
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/04/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59012827"
 ---
 # <a name="add-a-model-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 모델 추가
@@ -26,13 +26,13 @@ ms.locfileid: "59012827"
 
 ## <a name="add-a-data-model-class"></a>데이터 모델 클래스 추가
 
-# [<a name="visual-studio"></a>Visual Studio](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 *Models* 폴더> **추가** > **클래스**를 마우스 오른쪽 단추로 클릭합니다. 클래스의 이름을 **동영상**으로 지정합니다.
 
 [!INCLUDE [model 1b](~/includes/mvc-intro/model1b.md)]
 
-# [<a name="visual-studio-code--visual-studio-for-mac"></a>Visual Studio Code/Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
 * *Models* 폴더에 *Movie.cs* 클래스를 추가합니다.
 
@@ -45,7 +45,7 @@ ms.locfileid: "59012827"
 
 이 섹션에서는 동영상 모델을 스캐폴 합니다. 즉, 스캐폴드 도구는 동영상 모델에서 CRUD(만들기, 읽기, 업데이트 및 삭제) 작업을 위한 페이지를 생성합니다.
 
-# [<a name="visual-studio"></a>Visual Studio](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 **솔루션 탐색기**에서 *Controllers* 폴더를 마우스 오른쪽 단추로 클릭하고 **> 추가 > 스캐폴드 항목 새로 만들기**를 선택합니다.
 
@@ -76,7 +76,7 @@ Visual Studio에서 다음을 만듭니다.
 
 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete)(만들기, 읽기, 업데이트 및 삭제) 작업 메서드와 뷰 및 데이터베이스 컨텍스트의 자동 생성을 *스캐폴딩*이라고 합니다.
 
-# [<a name="visual-studio-code"></a>Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 <!--  Until https://github.com/aspnet/Scaffolding/issues/582 is fixed windows needs backslash or the namespace is namespace RazorPagesMovie.Pages_Movies rather than namespace RazorPagesMovie.Pages.Movies
 -->
@@ -98,7 +98,7 @@ Visual Studio에서 다음을 만듭니다.
 
 <!-- Mac -------------------------->
 
-# [<a name="visual-studio-for-mac"></a>Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 * 프로젝트 디렉터리(*Program.cs*, *Startup.cs* 및 *.csproj* 파일이 포함된 디렉터리)에서 명령 창을 엽니다.
 * 스캐폴딩 도구를 설치합니다.
@@ -141,7 +141,7 @@ System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity id
 * 초기 마이그레이션을 추가합니다.
 * 초기 마이그레이션을 사용하여 데이터베이스를 업데이트합니다.
 
-# [<a name="visual-studio"></a>Visual Studio](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. **도구** 메뉴에서 **NuGet 패키지 관리자** > **PMC**(패키지 관리자 콘솔)를 선택합니다.
 
@@ -160,7 +160,7 @@ System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity id
 
    `Update-Database` 명령은 데이터베이스를 만드는 *Migrations/{time-stamp}_InitialCreate.cs* 파일에서 `Up` 메서드를 실행합니다.
 
-# [<a name="visual-studio-code--visual-studio-for-mac"></a>Visual Studio Code/Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
 [!INCLUDE [initial migration](~/includes/RP/model3.md)]
 
@@ -174,7 +174,7 @@ System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity id
 
 ASP.NET Core는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)를 사용하여 빌드됩니다. 서비스(예: EF Core DB 컨텍스트)는 애플리케이션 시작 중에 DI에 등록됩니다. 이러한 서비스(예: Razor 페이지)가 필요한 구성 요소에는 생성자 매개 변수를 통해 이러한 서비스가 제공됩니다. DB 컨텍스트 인스턴스를 가져오는 생성자 코드는 자습서 뒷부분에 나옵니다.
 
-# [<a name="visual-studio"></a>Visual Studio](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 스캐폴딩 도구는 자동으로 DB 컨텍스트를 만들고 DI 컨테이너에 등록했습니다.
 
@@ -190,7 +190,7 @@ ASP.NET Core는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)�
 
 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 개체에서 메서드를 호출하여 연결 문자열의 이름을 컨텍스트에 전달합니다. 로컬 개발의 경우 [ASP.NET Core 구성 시스템](xref:fundamentals/configuration/index)은 *appsettings.json* 파일에서 연결 문자열을 읽습니다.
 
-# [<a name="visual-studio-code--visual-studio-for-mac"></a>Visual Studio Code/Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
 DB 컨텍스트를 만들고 DI 컨테이너에 등록했습니다.
 
@@ -224,8 +224,8 @@ Login failed for user 'User-name'.
 
 앞에서 강조 표시된 코드는 [종속성 주입](xref:fundamentals/dependency-injection) 컨테이너에 추가된 영화 데이터베이스 컨텍스트를 표시합니다.
 
-* `services.AddDbContext<MvcMovieContext>(options =>` 사용할 데이터베이스 및 연결 문자열을 지정합니다.
-* `=>` [람다 연산자](/dotnet/articles/csharp/language-reference/operators/lambda-operator)입니다.
+* `services.AddDbContext<MvcMovieContext>(options =>`는 사용할 데이터베이스 및 연결 문자열을 지정합니다.
+* `=>`은 [람다 연산자](/dotnet/articles/csharp/language-reference/operators/lambda-operator)입니다.
 
 *Controllers/MoviesController.cs* 파일을 열고 생성자를 검사합니다.
 

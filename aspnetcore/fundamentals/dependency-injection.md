@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 04/07/2019
 uid: fundamentals/dependency-injection
 ms.openlocfilehash: da6ddf1f0efd164a58f017ff55ce216bbefa7cc6
-ms.sourcegitcommit: 6bde1fdf686326c080a7518a6725e56e56d8886e
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/08/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59068325"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>ASP.NET Core에서 종속성 주입
@@ -80,9 +80,9 @@ public class IndexModel : PageModel
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Services/MyDependency.cs?name=snippet1)]
 
-`MyDependency` 자신의 생성자에서 [ILogger&lt;TCategoryName&gt;](/dotnet/api/microsoft.extensions.logging.ilogger-1)을 요청합니다. 종속성 주입을 연결된 방식으로 사용하는 일은 특별한 경우가 아닙니다. 요청된 각 종속성은 차례로 자체 종속성을 요청합니다. 컨테이너는 그래프의 종속성을 해결하고 완전히 해결된 서비스를 반환합니다. 해결해야 하는 종속성이 모인 집합은 일반적으로 종속성 트리, 종속성 그래프 또는 개체 그래프라고 합니다.
+`MyDependency`는 자신의 생성자에서 [ILogger&lt;TCategoryName&gt;](/dotnet/api/microsoft.extensions.logging.ilogger-1)을 요청합니다. 종속성 주입을 연결된 방식으로 사용하는 일은 특별한 경우가 아닙니다. 요청된 각 종속성은 차례로 자체 종속성을 요청합니다. 컨테이너는 그래프의 종속성을 해결하고 완전히 해결된 서비스를 반환합니다. 해결해야 하는 종속성이 모인 집합은 일반적으로 종속성 트리, 종속성 그래프 또는 개체 그래프라고 합니다.
 
-`IMyDependency` 및 `ILogger<TCategoryName>`은 서비스 컨테이너에 등록되어야 합니다. `IMyDependency` `Startup.ConfigureServices`에 등록됩니다. `ILogger<TCategoryName>` 로깅 추상화 인프라에서 등록하므로, 프레임워크에서 기본적으로 등록한 [프레임워크 제공 서비스](#framework-provided-services)입니다.
+`IMyDependency` 및 `ILogger<TCategoryName>`는 서비스 컨테이너에 등록되어야 합니다. `IMyDependency`는 `Startup.ConfigureServices`에 등록됩니다. `ILogger<TCategoryName>`은 로깅 추상화 인프라에서 등록하므로, 프레임워크에서 기본적으로 등록한 [프레임워크 제공 서비스](#framework-provided-services)입니다.
 
 컨테이너는 [개방형 형식(제네릭)](/dotnet/csharp/language-reference/language-specification/types#open-and-closed-types)을 활용하여 `ILogger<TCategoryName>`을 확인하므로 일부 [생성된 형식(제네릭)](/dotnet/csharp/language-reference/language-specification/types#constructed-types)을 등록하지 않아도 됩니다.
 
@@ -185,7 +185,7 @@ Singleton 수명 서비스는 처음 요청할 때(또는 `ConfigureServices`를
 다음 두 가지 메커니즘으로 서비스를 해결할 수 있습니다.
 
 * `IServiceProvider`
-* [ActivatorUtilities](/dotnet/api/microsoft.extensions.dependencyinjection.activatorutilities) &ndash; 종속성 주입 컨테이너에서 서비스 등록 없이 개체를 생성할 수 있습니다. `ActivatorUtilities` 태그 도우미, MVC 컨트롤러 및 모델 바인더와 같은 사용자용 추상화에 사용됩니다.
+* [ActivatorUtilities](/dotnet/api/microsoft.extensions.dependencyinjection.activatorutilities) &ndash; 종속성 주입 컨테이너에서 서비스 등록 없이 개체를 생성할 수 있습니다. `ActivatorUtilities`는 태그 도우미, MVC 컨트롤러 및 모델 바인더와 같은 사용자용 추상화에 사용됩니다.
 
 생성자에는 종속성 주입으로 제공되지 않는 인수를 사용할 수 있지만, 인수에 기본값을 할당해야 합니다.
 
@@ -209,7 +209,7 @@ Entity Framework 컨텍스트는 일반적으로 [범위가 지정된 수명](#s
 
 `OperationService`는 등록되어 각각 다른 `Operation` 형식에 종속됩니다. 종속성 주입을 통해 `OperationService`를 요청하는 경우에는 종속 서비스의 수명에 따라 각 서비스의 새 인스턴스나 기존 인스턴스를 받습니다.
 
-* 컨테이너에서 요청할 때 임시 서비스가 생성되면 `IOperationTransient` 서비스의 `OperationId`는 `OperationService`의 `OperationId`와 다릅니다. `OperationService` `IOperationTransient` 클래스의 새 인스턴스를 받습니다. 새 인스턴스는 다른 `OperationId`를 생성합니다.
+* 컨테이너에서 요청할 때 임시 서비스가 생성되면 `IOperationTransient` 서비스의 `OperationId`는 `OperationService`의 `OperationId`와 다릅니다. `OperationService`는 `IOperationTransient` 클래스의 새 인스턴스를 받습니다. 새 인스턴스는 다른 `OperationId`를 생성합니다.
 * 클라이언트 요청에 따라 범위가 지정된 서비스가 생성되면 `IOperationScoped` 서비스의 `OperationId`는 클라이언트 요청 내의 `OperationService`와 같습니다. 전체 클라이언트 요청에서 두 서비스는 다른 `OperationId` 값을 공유합니다.
 * 싱글톤 및 싱글톤 인스턴스 서비스가 한 번 생성되어 모든 클라이언트 요청과 모든 서비스에서 사용되는 경우 `OperationId`는 모든 서비스 요청에서 상수입니다.
 
@@ -227,7 +227,7 @@ Entity Framework 컨텍스트는 일반적으로 [범위가 지정된 수명](#s
 
 다음 출력은 두 요청의 결과를 보여 줍니다.
 
-**첫 번째 요청:**
+**첫 번째 요청:**:
 
 컨트롤러 작업:
 
@@ -243,7 +243,7 @@ Scoped: 5d997e2d-55f5-4a64-8388-51c4e3a1ad19
 Singleton: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
 인스턴스: 00000000-0000-0000-0000-000000000000
 
-**두 번째 요청:**
+**두 번째 요청**:
 
 컨트롤러 작업:
 
@@ -364,7 +364,7 @@ public void ConfigureServices(IServiceCollection services)
 * 이름을 기준으로 삽입
 * 자식 컨테이너
 * 사용자 지정 수명 관리
-* `Func<T>` 초기화 지연에 대한 지원
+* 초기화 지연에 대한 `Func<T>` 지원
 
 어댑터를 지원하는 일부 컨테이너의 목록은 [종속성 주입 readme.md 파일](https://github.com/aspnet/Extensions/tree/master/src/DependencyInjection)을 참조하세요.
 
@@ -473,4 +473,4 @@ DI는 정적/전역 개체 액세스 패턴의 ‘대안’입니다. 고정 개
 * [종속성 주입으로 ASP.NET Core에 정리 코드 작성(MSDN)](https://msdn.microsoft.com/magazine/mt703433.aspx)
 * [명시적 종속성 원칙](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)
 * [Inversion of Control 컨테이너 및 종속성 주입 패턴(Martin Fowler)](https://www.martinfowler.com/articles/injection.html)
-* [ASP.NET Core DI의 여러 인터페이스를 사용하여 서비스를 등록하는 방법](https://andrewlock.net/how-to-register-a-service-with-multiple-interfaces-for-in-asp-net-core-di/)
+* [How to register a service with multiple interfaces in ASP.NET Core DI](https://andrewlock.net/how-to-register-a-service-with-multiple-interfaces-for-in-asp-net-core-di/)(ASP.NET Core DI의 여러 인터페이스를 사용하여 서비스를 등록하는 방법)

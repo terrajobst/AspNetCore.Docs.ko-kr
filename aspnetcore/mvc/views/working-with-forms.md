@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 04/06/2019
 uid: mvc/views/working-with-forms
 ms.openlocfilehash: 6eff3bf03e650e154b5c767c9bcdd915e7db8b47
-ms.sourcegitcommit: 948e533e02c2a7cb6175ada20b2c9cabb7786d0b
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/10/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59468804"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>ASP.NET Core 형식의 태그 도우미
@@ -33,7 +33,7 @@ ms.locfileid: "59468804"
 
 * `asp-route-<Parameter Name>` 특성을 제공합니다. 여기서 `<Parameter Name>`을 경로 값에 추가합니다. `Html.BeginForm` 및 `Html.BeginRouteForm`에 대한 `routeValues` 매개 변수는 유사한 기능을 제공합니다.
 
-* HTML 도우미 대안 `Html.BeginForm`이 있습니다. `Html.BeginRouteForm`
+* HTML 도우미 대안 `Html.BeginForm` 및 `Html.BeginRouteForm`가 있습니다.
 
 예제:
 
@@ -171,7 +171,7 @@ public class HomeController : Controller
 
 입력 태그 도우미:
 
-* `asp-for` 특성에 지정된 식 이름에 대해 `id` 및 `name` HTML 특성을 만듭니다. `asp-for="Property1.Property2"` `m => m.Property1.Property2`와 같습니다. 식의 이름은 `asp-for` 특성 값에 사용됩니다. 추가 정보는 [식 이름](#expression-names) 섹션을 참조하세요.
+* `asp-for` 특성에 지정된 식 이름에 대해 `id` 및 `name` HTML 특성을 만듭니다. `asp-for="Property1.Property2"`는 `m => m.Property1.Property2`와 같습니다. 식의 이름은 `asp-for` 특성 값에 사용됩니다. 추가 정보는 [식 이름](#expression-names) 섹션을 참조하세요.
 
 * 모델 속성에 적용된 모델 형식 및 [데이터 주석](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) 특성에 따라 HTML `type` 특성 값을 설정합니다.
 
@@ -277,7 +277,7 @@ Type expected
 
 ASP.NET Core MVC가 `ModelExpression`의 값을 계산하는 경우 `ModelState`를 비롯한 여러 원본을 검사합니다. `<input type="text" asp-for="@Name">`을 고려합니다. 계산된 `value` 특성은 첫 번째 null이 아닌 값입니다.
 
-* `ModelState` “Name” 키를 가진 항목입니다.
+* "Name" 키를 가진 `ModelState` 항목입니다.
 * 식 `Model.Name`의 결과입니다.
 
 ### <a name="navigating-child-properties"></a>자식 속성 탐색
@@ -334,7 +334,7 @@ public IActionResult Edit(int id, int colorIndex)
 
 [!code-HTML[](working-with-forms/sample/final/Views/Shared/EditorTemplates/ToDoItem.cshtml)]
 
-`foreach` 값이 `asp-for` 또는 `Html.DisplayFor` 해당 컨텍스트에서 사용될 때 가능한 경우 사용해야 합니다. 일반적으로, `for`는 열거자를 할당할 필요가 없으므로 `foreach`보다 좋습니다(시나리오에서 허용하는 경우). 그러나 LINQ 식에서 인덱서를 평가하는 작업은 비용이 많이 들기 때문에 최소화해야 합니다.
+값이 `asp-for` 또는 `Html.DisplayFor` 해당 컨텍스트에서 사용될 때 가능한 경우 `foreach`를 사용해야 합니다. 일반적으로, `for`는 열거자를 할당할 필요가 없으므로 `foreach`보다 좋습니다(시나리오에서 허용하는 경우). 그러나 LINQ 식에서 인덱서를 평가하는 작업은 비용이 많이 들기 때문에 최소화해야 합니다.
 
 &nbsp;
 
@@ -488,7 +488,7 @@ public IActionResult Edit(int id, int colorIndex)
 
 * 모델의 속성에 대한 [선택](https://www.w3.org/wiki/HTML/Elements/select) 및 관련된 [옵션](https://www.w3.org/wiki/HTML/Elements/option) 요소를 생성합니다.
 
-* HTML 도우미 대안 `Html.DropDownListFor`가 있습니다. `Html.ListBoxFor`
+* HTML 도우미 대안 `Html.DropDownListFor` 및 `Html.ListBoxFor`가 있습니다.
 
 `Select Tag Helper` `asp-for`는 [선택](https://www.w3.org/wiki/HTML/Elements/select) 요소에 대한 모델 속성 이름을 지정하고 `asp-items`는 [옵션](https://www.w3.org/wiki/HTML/Elements/option) 요소를 지정합니다.  예:
 
@@ -662,7 +662,7 @@ HTML [\<option>](https://www.w3.org/wiki/HTML/Elements/option) 요소를 추가�
 ## <a name="additional-resources"></a>추가 자료
 
 * <xref:mvc/views/tag-helpers/intro>
-* [HTML 양식 요소](https://www.w3.org/TR/html401/interact/forms.html)
+* [HTML 형식 요소](https://www.w3.org/TR/html401/interact/forms.html)
 * [요청 확인 토큰](/aspnet/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages)
 * <xref:mvc/models/model-binding>
 * <xref:mvc/models/validation>

@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 04/11/2019
 uid: security/data-protection/configuration/overview
 ms.openlocfilehash: ee43427fa1e82a365d49df50567b4ca7afb5a5d3
-ms.sourcegitcommit: 9b7fcb4ce00a3a32e153a080ebfaae4ef417aafa
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/12/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59516250"
 ---
 # <a name="configure-aspnet-core-data-protection"></a>ASP.NET Core 데이터 보호를 구성 합니다.

@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 02/25/2019
 uid: security/key-vault-configuration
 ms.openlocfilehash: 8fd1cca1803d3f1d44d80ec63c5cfc259cbdaf55
-ms.sourcegitcommit: 1a7000630e55da90da19b284e1b2f2f13a393d74
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/04/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59012697"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>ASP.NET Core에서 azure Key Vault 구성 공급자
@@ -304,7 +304,7 @@ WebHost.CreateDefaultBuilder(args)
 
 공급자는 POCO 배열에 대 한 바인딩에 배열로 구성 값을 읽을 수 있습니다.
 
-콜론을 포함 하는 키를 허용 하는 구성 소스에서 읽을 때 (`:`) 구분 기호, 숫자 키 세그먼트 배열을 구성 하는 키를 구분 하기 위해 사용 됩니다 (`:0:`, `:1:`,... `:{n}:`)를 사용하여 저장하는 값에 액세스할 수 있습니다. 자세한 내용은 참조 하세요. [구성: 클래스에 배열을 바인딩할](xref:fundamentals/configuration/index#bind-an-array-to-a-class)합니다.
+콜론을 포함 하는 키를 허용 하는 구성 소스에서 읽을 때 (`:`) 구분 기호, 숫자 키 세그먼트 배열을 구성 하는 키를 구분 하기 위해 사용 됩니다 (`:0:`, `:1:`,... `:{n}:`). 자세한 내용은 참조 하세요. [구성: 클래스에 배열을 바인딩할](xref:fundamentals/configuration/index#bind-an-array-to-a-class)합니다.
 
 Azure Key Vault 키를 구분 기호로 콜론을 사용할 수 없습니다. 이 항목에서 설명한 접근 방식을 사용 하 여 이중 대시 (`--`) 계층 값 (섹션)에 대 한 구분 기호로 사용 합니다. 배열 키는 이중 대시 및 숫자 키 세그먼트를 사용 하 여 Azure Key Vault에 저장 됩니다 (`--0--`, `--1--`하십시오 &hellip; `--{n}--`).
 
@@ -370,7 +370,7 @@ Configuration.Reload();
 ## <a name="additional-resources"></a>추가 자료
 
 * <xref:fundamentals/configuration/index>
-* [Microsoft Azure: Key Vault](https://azure.microsoft.com/services/key-vault/)
+* [Microsoft Azure: 키 자격 증명 모음](https://azure.microsoft.com/services/key-vault/)
 * [Microsoft Azure: Key Vault 설명서](/azure/key-vault/)
 * [Azure Key Vault에 대 한 키 생성 및 HSM 보호 된 전송 하는 방법](/azure/key-vault/key-vault-hsm-protected-keys)
 * [KeyVaultClient 클래스](/dotnet/api/microsoft.azure.keyvault.keyvaultclient)

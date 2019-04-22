@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 04/06/2019
 uid: security/cookie-sharing
 ms.openlocfilehash: 7a049ed8787808e228859afc051b8697a6261c21
-ms.sourcegitcommit: 6bde1fdf686326c080a7518a6725e56e56d8886e
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/08/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59068312"
 ---
 # <a name="share-cookies-among-apps-with-aspnet-and-aspnet-core"></a>ASP.NET 및 ASP.NET Core에서 앱 간 쿠키 공유하기
@@ -32,10 +32,10 @@ ms.locfileid: "59068312"
 * 인증 쿠키 이름이 `.AspNet.SharedCookie`라는 공통적인 값으로 설정됩니다.
 * 명시적이나 기본적으로 `AuthenticationType`을 `Identity.Application`으로 설정합니다.
 * 데이터 보호 시스템이 데이터 보호 키를 공유할 수 있도록 공통 앱 이름(`SharedCookieApp`)을 사용합니다.
-* `Identity.Application` 인증 체계로 사용 됩니다. 어떤 체계를 사용하든지 기본 체계로 또는 명시적으로 설정하여 공유 쿠키 *앱 내에서 그리고 앱 간에* 일관되게 사용해야 합니다. 이 체계는 쿠키를 암호화하거나 해독할 때 사용되므로 앱 간에 일관된 체계가 사용되어야 합니다.
+* 인증 체계로 `Identity.Application`을 사용합니다. 어떤 체계를 사용하든지 기본 체계로 또는 명시적으로 설정하여 공유 쿠키 *앱 내에서 그리고 앱 간에* 일관되게 사용해야 합니다. 이 체계는 쿠키를 암호화하거나 해독할 때 사용되므로 앱 간에 일관된 체계가 사용되어야 합니다.
 * 공통적인 [데이터 보호 키](xref:security/data-protection/implementation/key-management) 저장소 위치를 사용합니다. 예제 앱은 솔루션 루트에 위치한 *KeyRing*이라는 폴더를 사용하여 데이터 보호 키를 보관합니다.
 * ASP.NET Core 앱에서는 [PersistKeysToFileSystem](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.persistkeystofilesystem)을 사용하여 키 저장소 위치를 설정합니다. 그리고 [SetApplicationName](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.setapplicationname)을 사용하여 공통 공유 응용 프로그램 이름을 구성합니다.
-* .NET Framework 앱은 쿠키 인증 미들웨어에서 [DataProtectionProvider](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionprovider)의 구현을 사용합니다. `DataProtectionProvider` 암호화 및 인증 쿠키 페이로드 데이터의 암호 해독에 대 한 데이터 보호 서비스를 제공합니다. `DataProtectionProvider` 인스턴스는 앱의 다른 부분에서 사용되는 데이터 보호 시스템과 격리됩니다.
+* .NET Framework 앱은 쿠키 인증 미들웨어에서 [DataProtectionProvider](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionprovider)의 구현을 사용합니다. `DataProtectionProvider`는 인증 쿠키 페이로드 데이터의 암호화 및 해독을 위한 데이터 보호 서비스를 제공합니다. `DataProtectionProvider` 인스턴스는 앱의 다른 부분에서 사용되는 데이터 보호 시스템과 격리됩니다.
   * [DataProtectionProvider.Create(System.IO.DirectoryInfo, Action\<IDataProtectionBuilder>)](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionprovider.create?view=aspnetcore-2.0#Microsoft_AspNetCore_DataProtection_DataProtectionProvider_Create_System_IO_DirectoryInfo_System_Action_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder__)는 [DirectoryInfo](/dotnet/api/system.io.directoryinfo) 를 전달받아 데이터 보호 키 저장소의 위치를 지정합니다. 예제 앱에서는 *KeyRing* 폴더의 경로를 `DirectoryInfo` 에 제공합니다. [DataProtectionBuilderExtensions.SetApplicationName](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.setapplicationname?view=aspnetcore-2.0#Microsoft_AspNetCore_DataProtection_DataProtectionBuilderExtensions_SetApplicationName_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_) 은 공통 앱 이름을 설정합니다.
   * [DataProtectionProvider](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionprovider)는 [Microsoft.AspNetCore.DataProtection.Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) NuGet 패키지를 필요로 합니다. ASP.NET Core 2.1 이상의 앱에서 이 패키지를 가져오려면 [Microsoft.AspNetCore.App 메타 패키지](xref:fundamentals/metapackage-app)를 참조합니다. .NET Framework를 대상으로 할 경우 `Microsoft.AspNetCore.DataProtection.Extensions`에 대한 패키지 참조를 추가합니다.
 

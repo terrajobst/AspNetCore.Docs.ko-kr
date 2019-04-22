@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core에서 태그 도우미를 작성하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/24/2018
+ms.date: 04/12/2019
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: ddfd7cb8c67e28709b8ce75d5a4d0a8c0c0cc43c
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: 19b7df1abc8765cb9a77487e39c4365fdacf2b65
+ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58210082"
+ms.lasthandoff: 04/16/2019
+ms.locfileid: "59614424"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>ASP.NET Core의 작성자 태그 도우미
 
@@ -65,7 +65,9 @@ ms.locfileid: "58210082"
    public class Email : TagHelper
    ```
 
-1. `EmailTagHelper` 클래스를 모든 Razor 뷰에서 사용할 수 있도록 하려면 `addTagHelper` 지시문을 *Views/_ViewImports.cshtml* 파일에 추가합니다. [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopyEmail.cshtml?highlight=2,3)]
+1. `EmailTagHelper` 클래스를 모든 Razor 뷰에서 사용할 수 있도록 하려면 `addTagHelper` 지시문을 *Views/_ViewImports.cshtml* 파일에 추가합니다.
+
+   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopyEmail.cshtml?highlight=2,3)]
 
    위의 코드에서는 와일드 카드 구문을 사용하여 사용할 수 있는 모든 태그 도우미를 어셈블리에서 지정합니다. `@addTagHelper` 뒤의 첫 번째 문자열은 로드할 태그 도우미(모든 태그 도우미에 "*" 사용)를 지정하고 두 번째 문자열 "AuthoringTagHelpers"는 태그 도우미가 있는 어셈블리를 지정합니다. 또한 두 번째 줄은 와일드 카드 구문을 사용하여 ASP.NET Core MVC 태그 도우미를 제공합니다(해당 도우미에 대해서는 [태그 도우미 소개](intro.md)에서 설명). 태그 도우미를 Razor 뷰에서 사용할 수 있도록 해주는 `@addTagHelper` 지시문입니다. 또는 아래 표시된 것처럼 태그 도우미의 FQN(정규화된 이름)을 제공할 수 있습니다.
 

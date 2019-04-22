@@ -7,10 +7,10 @@ ms.author: scaddie
 ms.date: 04/06/2019
 uid: mvc/views/tag-helpers/th-components
 ms.openlocfilehash: fdad4ae367245cd3beabaf90587c1fe5e9162afe
-ms.sourcegitcommit: 948e533e02c2a7cb6175ada20b2c9cabb7786d0b
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/10/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59468597"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>ASP.NET Core의 태그 도우미 구성 요소
@@ -40,11 +40,11 @@ HTML `<head>` 요소 내에서 CSS 파일은 일반적으로 HTML `<link>` 요�
 
 위의 코드에서
 
-* `AddressStyleTagHelperComponent` <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent>를 구현합니다. 추상은 다음과 같습니다.
+* `AddressStyleTagHelperComponent`는 <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent>를 구현합니다. 추상은 다음과 같습니다.
   * <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext>를 사용한 클래스 초기화를 허용합니다.
   * 태그 도우미 구성 요소를 사용하여 HTML 요소를 추가하거나 수정할 수 있게 합니다.
-* <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent.Order*> 속성은 구성 요소가 렌더링되는 순서를 정의합니다. `Order` 앱에서 태그 도우미 구성 요소가 여러 번 사용되는 경우 필요합니다.
-* <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent.ProcessAsync*> 실행 컨텍스트의 <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext.TagName*> 속성 값을 `head`와 비교합니다. 비교가 true로 평가되면 `_style` 필드의 내용이 HTML `<head>` 요소에 주입됩니다.
+* <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent.Order*> 속성은 구성 요소가 렌더링되는 순서를 정의합니다. 앱에서 태그 도우미 구성 요소가 여러 번 사용되는 경우 `Order`가 필요합니다.
+* <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent.ProcessAsync*>는 실행 컨텍스트의 <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext.TagName*> 속성 값을 `head`와 비교합니다. 비교가 true로 평가되면 `_style` 필드의 내용이 HTML `<head>` 요소에 주입됩니다.
 
 ### <a name="inject-into-html-body-element"></a>HTML 본문 요소에 주입
 
@@ -76,7 +76,7 @@ HTML `<head>` 요소 내에서 CSS 파일은 일반적으로 HTML `<link>` 요�
 
 태그 도우미 구성 요소가 DI에 등록되어 있지 않으면 Razor Pages 페이지 또는 MVC 보기에서 등록할 수 있습니다. 이 기술은 주입된 태그 및 Razor 파일의 구성 요소 실행 순서를 제어하는 데 사용됩니다.
 
-`ITagHelperComponentManager` 태그 도우미 구성 요소를 추가하거나 앱에서 제거하는 데 사용됩니다. 다음 코드에서는 `AddressTagHelperComponent`를 사용한 이 기술을 보여 줍니다.
+`ITagHelperComponentManager`는 태그 도우미 구성 요소를 추가하거나 앱에서 제거하는 데 사용됩니다. 다음 코드에서는 `AddressTagHelperComponent`를 사용한 이 기술을 보여 줍니다.
 
 [!code-cshtml[](th-components/samples/RazorPagesSample/Pages/Contact.cshtml?name=snippet_ITagHelperComponentManager)]
 
@@ -85,7 +85,7 @@ HTML `<head>` 요소 내에서 CSS 파일은 일반적으로 HTML `<link>` 요�
 * `@inject` 지시문은 `ITagHelperComponentManager`의 인스턴스를 제공합니다. 이 인스턴스는 Razor 파일의 액세스 다운스트림에 대한 이름이 `manager`인 변수에 할당됩니다.
 * `AddressTagHelperComponent` 인스턴스가 앱의 태그 도우미 구성 요소 컬렉션에 추가됩니다.
 
-`AddressTagHelperComponent` `markup` 및 `order` 매개 변수를 허용하는 생성자를 수용하도록 수정됩니다.
+`AddressTagHelperComponent`는 `markup` 및 `order` 매개 변수를 허용하는 생성자를 수용하도록 수정됩니다.
 
 [!code-csharp[](th-components/samples/RazorPagesSample/TagHelpers/AddressTagHelperComponent.cs?name=snippet_Constructor)]
 

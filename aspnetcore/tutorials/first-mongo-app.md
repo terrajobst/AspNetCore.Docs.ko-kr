@@ -7,10 +7,10 @@ ms.custom: mvc, seodec18
 ms.date: 01/31/2019
 uid: tutorials/first-mongo-app
 ms.openlocfilehash: 95a5f8bdb4b302d6bdae7b5809b54f1b263e6ee4
-ms.sourcegitcommit: 1a7000630e55da90da19b284e1b2f2f13a393d74
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/04/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59012866"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>ASP.NET Core 및 MongoDB를 사용하여 웹 API 만들기
@@ -31,20 +31,20 @@ ms.locfileid: "59012866"
 
 ## <a name="prerequisites"></a>전제 조건
 
-# [<a name="visual-studio"></a>Visual Studio](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * [.NET Core SDK 2.2 이상](https://www.microsoft.com/net/download/all)
 * [Visual Studio 2017 버전 15.9 이상](https://www.visualstudio.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=button+cta&utm_content=download+vs2017)(**ASP.NET 및 웹 개발** 워크로드 필요)
 * [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
 
-# [<a name="visual-studio-code"></a>Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * [.NET Core SDK 2.2 이상](https://www.microsoft.com/net/download/all)
 * [Visual Studio Code](https://code.visualstudio.com/download)
 * [Visual Studio Code용 C#](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
 * [MongoDB](https://docs.mongodb.com/manual/administration/install-community/)
 
-# [<a name="visual-studio-for-mac"></a>Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 * [.NET Core SDK 2.2 이상](https://www.microsoft.com/net/download/all)
 * [Mac용 Visual Studio 버전 7.7 이상](https://www.visualstudio.com/downloads/)
@@ -140,7 +140,7 @@ Windows를 사용하는 경우 MongoDB는 기본적으로*C:\\Program Files\\Mon
 
 ## <a name="create-the-aspnet-core-web-api-project"></a>ASP.NET Core 웹 API 프로젝트 만들기
 
-# [<a name="visual-studio"></a>Visual Studio](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. **파일** > **새로 만들기** > **프로젝트**로 이동합니다.
 1. **ASP.NET Core 웹 애플리케이션**을 선택하고 프로젝트 이름을 *BooksApi*로 지정한 다음, **확인**을 클릭합니다.
@@ -151,7 +151,7 @@ Windows를 사용하는 경우 MongoDB는 기본적으로*C:\\Program Files\\Mon
     Install-Package MongoDB.Driver -Version {VERSION}
     ```
 
-# [<a name="visual-studio-code"></a>Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 1. 명령 셸에서 다음 명령을 실행합니다.
 
@@ -169,7 +169,7 @@ Windows를 사용하는 경우 MongoDB는 기본적으로*C:\\Program Files\\Mon
     dotnet add BooksApi.csproj package MongoDB.Driver -v {VERSION}
     ```
 
-# [<a name="visual-studio-for-mac"></a>Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 1. **파일** > **새 솔루션** > **.NET Core** > **앱**으로 이동합니다.
 1. **ASP.NET Core Web API** C# 프로젝트 템플릿을 선택하고 **다음**을 클릭합니다.
@@ -222,10 +222,10 @@ Windows를 사용하는 경우 MongoDB는 기본적으로*C:\\Program Files\\Mon
     [!code-csharp[](first-mongo-app/sample/BooksApi/Services/BookService.cs?name=snippet_BookServiceConstructor&highlight=3)]
 
 * `IMongoDatabase` &ndash; 작업 수행을 위한 Mongo 데이터베이스를 나타냅니다. 이 자습서에서는 인터페이스의 일반 `GetCollection<T>(collection)` 메서드를 사용하여 특정 컬렉션의 데이터에 액세스합니다. 이 메서드를 호출한 후 컬렉션에 대해 CRUD 작업을 수행할 수 있습니다. `GetCollection<T>(collection)` 메서드 호출에서 다음을 수행합니다.
-  * `collection` 컬렉션 이름을 나타냅니다.
-  * `T` 컬렉션에 저장된 CLR 개체 형식을 나타냅니다.
+  * `collection`은 컬렉션 이름을 나타냅니다.
+  * `T`는 컬렉션에 저장된 CLR 개체 형식을 나타냅니다.
 
-`GetCollection<T>(collection)` 컬렉션을 나타내는 `MongoCollection` 개체를 반환합니다. 이 자습서에서는 컬렉션에 대해 다음 메서드를 호출합니다.
+`GetCollection<T>(collection)`은 컬렉션을 나타내는 `MongoCollection` 개체를 반환합니다. 이 자습서에서는 컬렉션에 대해 다음 메서드를 호출합니다.
 
 * `Find<T>` &ndash; 제공된 검색 조건과 일치하는 컬렉션의 모든 문서를 반환합니다.
 * `InsertOne` &ndash; 제공된 개체를 컬렉션에 새 문서로 삽입합니다.
@@ -242,7 +242,7 @@ Windows를 사용하는 경우 MongoDB는 기본적으로*C:\\Program Files\\Mon
 
     * `BookService` 클래스를 사용하여 CRUD 작업을 수행합니다.
     * GET, POST, PUT 및 DELETE HTTP 요청을 지원하는 작업 메서드를 포함합니다.
-    * <xref:System.Web.Http.ApiController.CreatedAtRoute*> 메서드는 서버에서 새 리소스를 만드는 HTTP POST 메서드의 표준 응답인 201 응답을 반환합니다. `CreatedAtRoute` 응답에 대한 위치 헤더도 추가합니다. 위치 헤더는 새로 만들어진 할 일 항목의 URI를 지정합니다. [10.2.2 201 Created](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)(10.2.2 201 생성됨)를 참조하세요.
+    * <xref:System.Web.Http.ApiController.CreatedAtRoute*> 메서드는 서버에서 새 리소스를 만드는 HTTP POST 메서드의 표준 응답인 201 응답을 반환합니다. `CreatedAtRoute`는 응답에 대한 위치 헤더도 추가합니다. 위치 헤더는 새로 만들어진 할 일 항목의 URI를 지정합니다. [10.2.2 201 Created](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)(10.2.2 201 생성됨)를 참조하세요.
 1. 앱을 빌드하고 실행합니다.
 1. 브라우저에서 `http://localhost:<port>/api/books`로 이동합니다. 다음 JSON 응답이 표시됩니다.
 
@@ -269,6 +269,6 @@ Windows를 사용하는 경우 MongoDB는 기본적으로*C:\\Program Files\\Mon
 
 ASP.NET Core 웹 API 빌드 방법에 대한 자세한 내용은 다음 리소스를 참조하세요.
 
-* [이 문서의 YouTube 버전](https://www.youtube.com/watch?v=7uJt_sOenyo&feature=youtu.be)
+* [이 문서의 Youtube 버전](https://www.youtube.com/watch?v=7uJt_sOenyo&feature=youtu.be)
 * <xref:web-api/index>
 * <xref:web-api/action-return-types>

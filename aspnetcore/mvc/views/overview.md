@@ -6,10 +6,10 @@ ms.author: riande
 ms.date: 04/03/2019
 uid: mvc/views/overview
 ms.openlocfilehash: 766996645bc6ef2b6be42d729baf5d57f55b6ddd
-ms.sourcegitcommit: 1a7000630e55da90da19b284e1b2f2f13a393d74
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/04/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59012801"
 ---
 # <a name="views-in-aspnet-core-mvc"></a>ASP.NET Core MVC에서 뷰
@@ -192,7 +192,7 @@ viewmodel 형식 및 비즈니스 모델 형식 모두에 같은 클래스를 �
 
 ### <a name="weakly-typed-data-viewdata-viewdata-attribute-and-viewbag"></a>약한 형식의 데이터(ViewData, ViewData 특성 및 ViewBag)
 
-`ViewBag` *Razor Pages에서 사용할 수 없습니다.*
+`ViewBag` *은 Razor 페이지에서 사용할 수 없습니다.*
 
 강력한 형식의 뷰 외에도, 뷰는 *약한 형식*(*느슨한 형식*이라고도 함) 데이터 컬렉션에 액세스할 수 있습니다. 강력한 형식과 달리, *약한 형식*(또는 *느슨한 형식*)은 사용 중인 데이터 형식을 명시적으로 선언하지 않는 것을 의미합니다. 컨트롤러 및 뷰 간에 적은 양의 데이터를 전달하기 위해 약한 형식의 데이터 컬렉션을 사용할 수 있습니다.
 
@@ -210,7 +210,7 @@ viewmodel 형식 및 비즈니스 모델 형식 모두에 같은 클래스를 �
 
 **ViewData**
 
-`ViewData` `string` 키를 통해 액세스된 [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) 개체입니다. 문자열 데이터는 캐스트할 필요 없이 직접 저장 및 사용할 수 있지만 추출할 때는 다른 `ViewData` 개체 값을 특정 형식으로 캐스트해야 합니다. `ViewData`를 사용하여 컨트롤러에서 뷰로, [부분 뷰](xref:mvc/views/partial) 및 [레이아웃](xref:mvc/views/layout)을 포함한 뷰 내에서 데이터를 전달할 수 있습니다.
+`ViewData`는 `string` 키를 통해 액세스된 [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) 개체입니다. 문자열 데이터는 캐스트할 필요 없이 직접 저장 및 사용할 수 있지만 추출할 때는 다른 `ViewData` 개체 값을 특정 형식으로 캐스트해야 합니다. `ViewData`를 사용하여 컨트롤러에서 뷰로, [부분 뷰](xref:mvc/views/partial) 및 [레이아웃](xref:mvc/views/layout)을 포함한 뷰 내에서 데이터를 전달할 수 있습니다.
 
 다음은 작업에서 `ViewData`를 사용하여 인사말 및 주소에 대한 값을 설정하는 예제입니다.
 
@@ -292,9 +292,9 @@ public class HomeController : Controller
 
 **ViewBag**
 
-`ViewBag` *Razor Pages에서 사용할 수 없습니다.*
+`ViewBag` *은 Razor 페이지에서 사용할 수 없습니다.*
 
-`ViewBag` `ViewData`에 저장된 개체에 대한 동적 액세스를 제공하는 [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata) 개체입니다. `ViewBag` 캐스팅이 필요하지 않으므로 작업하기 더 편리할 수 있습니다. 다음 예제에서는 `ViewData`를 사용할 때와 동일한 결과로 `ViewBag`을 사용하는 방법을 보여 줍니다.
+`ViewBag`은 `ViewData`에 저장된 개체에 대한 동적 액세스를 제공하는 [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata) 개체입니다. 캐스팅이 필요하지 않으므로 `ViewBag`이 작업하기 더 편리할 수 있습니다. 다음 예제에서는 `ViewData`를 사용할 때와 동일한 결과로 `ViewBag`을 사용하는 방법을 보여 줍니다.
 
 ```csharp
 public IActionResult SomeAction()
@@ -325,7 +325,7 @@ public IActionResult SomeAction()
 
 **ViewData 및 ViewBag을 동시에 사용**
 
-`ViewBag` *Razor Pages에서 사용할 수 없습니다.*
+`ViewBag` *은 Razor 페이지에서 사용할 수 없습니다.*
 
 `ViewData` 및 `ViewBag`은 동일한 기본 `ViewData` 컬렉션을 사용하므로 `ViewData` 및 `ViewBag`을 모두 사용하고 값을 읽고 쓸 때 이들을 혼합 및 일치시킬 수 있습니다.
 
@@ -365,15 +365,15 @@ public IActionResult SomeAction()
 
 **ViewData 및 ViewBag 간 차이를 표시하는 요약**
 
- `ViewBag` Razor Pages에서 사용할 수 없습니다.
+ `ViewBag`은 Razor 페이지에서 사용할 수 없습니다.
 
 * `ViewData`
   * [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary)에서 파생되므로 유용한 `ContainsKey`, `Add`, `Remove` 및 `Clear`와 같은 사전 속성이 있습니다.
-  * 사전의 키는 문자열이므로 공백을 사용할 수 있습니다. 예제: `ViewData["Some Key With Whitespace"]`
+  * 사전의 키는 문자열이므로 공백을 사용할 수 있습니다. 예: `ViewData["Some Key With Whitespace"]`
   * `string` 이외의 모든 형식을 뷰에서 `ViewData`를 사용하도록 캐스트해야 합니다.
 * `ViewBag`
   * [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata)에서 파생되므로 점 표기법(`@ViewBag.SomeKey = <value or object>`)을 사용하여 동적 속성을 생성할 수 있으며 캐스팅이 필요하지 않습니다. `ViewBag` 구문을 사용하면 신속하게 컨트롤러와 뷰를 추가할 수 있습니다.
-  * 간단하게 Null 값을 확인합니다. 예제: `@ViewBag.Person?.Name`
+  * 간단하게 Null 값을 확인합니다. 예: `@ViewBag.Person?.Name`
 
 **ViewData 또는 ViewBag을 사용하는 경우**
 
