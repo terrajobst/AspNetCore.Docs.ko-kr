@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 03/31/2019
 uid: grpc/migration
-ms.openlocfilehash: 4d489b5aecf2e15fbbe3ac472b991a4365cd47c1
-ms.sourcegitcommit: 57a974556acd09363a58f38c26f74dc21e0d4339
+ms.openlocfilehash: 47d74edd821124f0c8390d704ca7931b7eb6c4cd
+ms.sourcegitcommit: eb784a68219b4829d8e50c8a334c38d4b94e0cfa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59672621"
+ms.lasthandoff: 04/22/2019
+ms.locfileid: "59982603"
 ---
 # <a name="migrating-grpc-services-from-c-core-to-aspnet-core"></a>ASP.NET Core로 C 코어에서 gRPC services 마이그레이션
 
@@ -49,26 +49,19 @@ public void ConfigureServices(IServiceCollection services)
 
 C-core 기반 앱에서와 같이 설정 `grpc.max_receive_message_length` 하 고 `grpc.max_send_message_length` 으로 구성 된 `ChannelOption` 때 [서버 인스턴스를 생성](https://grpc.io/grpc/csharp/api/Grpc.Core.Server.html#Grpc_Core_Server__ctor_System_Collections_Generic_IEnumerable_Grpc_Core_ChannelOption__)합니다.
 
-ASP.NET Core에서 `GrpcServiceOptions` 이러한 설정을 구성 하는 방법을 제공 합니다. GRPC는 모든 서비스 또는 개별 서비스 구현 형식의 설정은 전역적으로 적용할 수 있습니다. 개별 서비스 구현 형식에 대 한 지정 된 옵션 구성 하는 경우 전역 설정을 재정의 합니다.
+ASP.NET Core, gRPC 제공을 통해 구성 된 `GrpcServiceOptions` 형식입니다. 예를 들어 gRPC 서비스의 들어오는 메시지의 최대 크기를 통해 구성할 수 있습니다 `AddGrpc`:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-    services
-        .AddGrpc(globalOptions =>
-        {
-            // Global settings
-            globalOptions.SendMaxMessageSize = 4096
-            globalOptions.ReceiveMaxMessageSize = 4096
-        })
-        .AddServiceOptions<GreeterService>(greeterOptions =>
-        {
-            // GreeterService settings. These will override global settings
-            globalOptions.SendMaxMessageSize = 2048
-            globalOptions.ReceiveMaxMessageSize = 2048
-        })
+    services.AddGrpc(options =>
+    {
+        options.ReceiveMaxMessageSize = 16384; // 16 MB
+    });
 }
 ```
+
+구성에 대 한 자세한 내용은 참조 하세요. <xref:grpc/configuration>합니다.
 
 ## <a name="logging"></a>로깅
 

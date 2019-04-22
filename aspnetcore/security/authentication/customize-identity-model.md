@@ -3,14 +3,14 @@ title: ASP.NET core에서 identity 모델 사용자 지정 합니다.
 author: ajcvickers
 description: 이 문서에서는 ASP.NET Core Id에 대 한 기본 Entity Framework Core 데이터 모델을 사용자 지정 하는 방법을 설명 합니다.
 ms.author: avickers
-ms.date: 09/24/2018
+ms.date: 04/24/2019
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 0aa7448ac37a97a4d09a04caf365f641f22f5997
-ms.sourcegitcommit: a1c43150ed46aa01572399e8aede50d4668745ca
+ms.openlocfilehash: ae5f4567a8921ce277cd6153f37a5558bcf4e261
+ms.sourcegitcommit: eb784a68219b4829d8e50c8a334c38d4b94e0cfa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/21/2019
-ms.locfileid: "58327303"
+ms.lasthandoff: 04/22/2019
+ms.locfileid: "59982787"
 ---
 # <a name="identity-model-customization-in-aspnet-core"></a>ASP.NET core에서 identity 모델 사용자 지정 합니다.
 
@@ -34,7 +34,7 @@ ASP.NET Core Id 관리 및 ASP.NET Core 앱에서 사용자를 저장 하기 위
 * .NET Core CLI 명령줄을 사용 하는 경우. 자세한 내용은 [EF Core.NET 명령줄 도구](/ef/core/miscellaneous/cli/dotnet)합니다.
 * 클릭 하는 **마이그레이션 적용** 앱이 실행 되 면 오류 페이지에는 단추입니다.
 
-ASP.NET Core 개발 시 오류 페이지 처리기를 있습니다. 처리기는 앱이 실행 되는 경우 마이그레이션을 적용할 수 있습니다. 프로덕션 앱에 대 한 것이 마이그레이션이에서 SQL 스크립트를 생성 하 고 제어 되는 앱 및 데이터베이스 배포의 일환으로 데이터베이스 변경 내용을 배포에 적합 합니다.
+ASP.NET Core 개발 시 오류 페이지 처리기를 있습니다. 처리기는 앱이 실행 되는 경우 마이그레이션을 적용할 수 있습니다. 일반적으로 프로덕션 앱 마이그레이션이에서 SQL 스크립트를 생성 하 고 제어 된 앱 및 데이터베이스 배포의 일환으로 데이터베이스 변경 내용을 배포 합니다.
 
 Id를 사용 하는 새 앱을 만든 경우 위의 1-2 단계 이미 완료 되었습니다. 즉, 초기 데이터 모델이 이미 있는 및 초기 마이그레이션 프로젝트에 추가 되었습니다. 여전히 초기 마이그레이션을 데이터베이스에 적용 해야 합니다. 다음 방법 중 하나를 통해 초기 마이그레이션을 적용할 수 있습니다.
 
@@ -300,6 +300,16 @@ public abstract class IdentityUserContext<
 
 ### <a name="custom-user-data"></a>사용자 지정 사용자 데이터
 
+<!--
+set projNam=WebApp1
+dotnet new webapp -o %projNam%
+cd %projNam%
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design 
+dotnet aspnet-codegenerator identity  -dc ApplicationDbContext --useDefaultUI 
+dotnet ef migrations add CreateIdentitySchema
+dotnet ef database update
+ -->
+
 [사용자 지정 사용자 데이터](xref:security/authentication/add-user-data) 에서 상속 하 여 사용할 `IdentityUser`합니다. 이 형식의 이름에 `ApplicationUser`:
 
 ```csharp
@@ -318,14 +328,26 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         : base(options)
     {
     }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+    }
 }
 ```
 
 재정의 하지 않아도 됩니다 `OnModelCreating` 에 `ApplicationDbContext` 클래스입니다. EF Core 매핑하는 `CustomTag` 규칙에 따라 속성입니다. 데이터베이스를 새 업데이트 해야 하는 반면 `CustomTag` 열입니다. 열을 만들려면 마이그레이션을 추가 하 고 다음에 설명 된 대로 데이터베이스를 업데이트할 [Id 및 EF Core 마이그레이션](#identity-and-ef-core-migrations)합니다.
 
-업데이트 `Startup.ConfigureServices` 를 사용 하도록 `ApplicationUser` 클래스:
+업데이트 *Pages/Shared/_LoginPartial.cshtml* 바꾸고 `IdentityUser` 사용 하 여 `ApplicationUser`:
 
-::: moniker range=">= aspnetcore-2.1"
+```
+@using Microsoft.AspNetCore.Identity
+@using WebApp1.Areas.Identity.Data
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+```
+
+업데이트 *Areas/Identity/IdentityHostingStartup.cs* 하거나 `Startup.ConfigureServices` 바꾸고 `IdentityUser` 사용 하 여 `ApplicationUser`입니다.
 
 ```csharp
 services.AddDefaultIdentity<ApplicationUser>()
@@ -337,28 +359,6 @@ ASP.NET Core 2.1 이상 버전에서는 Identity Razor 클래스 라이브러리
 
 * [스캐폴드 ID](xref:security/authentication/scaffold-identity)
 * [추가, 다운로드 및 Id에 사용자 지정 사용자 데이터를 삭제 합니다.](xref:security/authentication/add-user-data)
-
-::: moniker-end
-
-::: moniker range="= aspnetcore-2.0"
-
-```csharp
-services.AddIdentity<ApplicationUser, IdentityRole>()
-        .AddEntityFrameworkStores<ApplicationDbContext>()
-        .AddDefaultTokenProviders();
-```
-
-::: moniker-end
-
-::: moniker range="<= aspnetcore-1.1"
-
-```csharp
-services.AddIdentity<ApplicationUser, IdentityRole>()
-        .AddEntityFrameworkStores<ApplicationDbContext, Guid>()
-        .AddDefaultTokenProviders();
-```
-
-::: moniker-end
 
 ### <a name="change-the-primary-key-type"></a>기본 키 형식 변경
 

@@ -7,12 +7,12 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/17/2019
 uid: signalr/javascript-client
-ms.openlocfilehash: e58015221497a9f962edf9f9fdba7ea3025d7694
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
+ms.openlocfilehash: f1f072e63928502fa1bad62e808ff035e57f2fd3
+ms.sourcegitcommit: eb784a68219b4829d8e50c8a334c38d4b94e0cfa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59705606"
+ms.lasthandoff: 04/22/2019
+ms.locfileid: "59983015"
 ---
 # <a name="aspnet-core-signalr-javascript-client"></a>ASP.NET Core SignalR JavaScript 클라이언트
 
@@ -66,6 +66,13 @@ JavaScript 클라이언트는 [HubConnection](/javascript/api/%40aspnet/signalr/
 
 > [!NOTE]
 > Azure SignalR Service를 사용 하는 경우 *서버 리스 모드*, 클라이언트에서 허브 메서드를 호출할 수 없습니다. 자세한 내용은 참조는 [SignalR Service 설명서](/azure/azure-signalr/signalr-concept-serverless-development-config)합니다.
+
+합니다 `invoke` 메서드는 JavaScript [약속](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)합니다. `Promise` 해결 될 반환 값 (있는 경우) 서버에 대 한 메서드가 반환 하는 경우. 서버에 대 한 메서드가 오류를 throw 하는 경우는 `Promise` 오류 메시지와 함께 거부 됩니다. 사용 합니다 `then` 및 `catch` 메서드는 `Promise` 이러한 자체 (또는 `await` 구문).
+
+합니다 `send` 메서드는 JavaScript `Promise`합니다. `Promise` 서버로 메시지가 전송 된 때 해결 됩니다. 메시지를 보내는 오류가 발생 하는 경우는 `Promise` 오류 메시지와 함께 거부 됩니다. 사용 합니다 `then` 및 `catch` 메서드는 `Promise` 이러한 자체 (또는 `await` 구문).
+
+> [!NOTE]
+> 사용 하 여 `send` 서버에서 메시지를 수신 될 때까지 대기 하지 않습니다. 따라서 서버에서 데이터 또는 오류를 반환할 수 없는 합니다.
 
 ## <a name="call-client-methods-from-hub"></a>허브에서 클라이언트 메서드 호출하기
 
