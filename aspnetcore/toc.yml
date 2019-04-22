@@ -529,8 +529,12 @@ items:
     name: gRPC 서비스와 HTTP API 비교
   - name: 자습서
     items:
-    - uid: tutorials/grpc/grpc-start
+    - uid: tutorials/grpc/index
       name: ASP.NET Core에서 gRPC 서비스 시작
+    - uid: tutorials/grpc/grpc-start
+      name: ASP.NET Core gRPC Greeter 서비스 만들기
+    - uid: tutorials/grpc/grpc-client
+      name: .NET Core gRPC 클라이언트 만들기
 - name: 테스트, 디버깅 및 문제 해결
   items:
   - name: 단위 테스트
@@ -930,12 +934,12 @@ items:
   - uid: security/app-secrets
     name: 개발에서 비밀 보호
     displayName: password
+  - uid: security/key-vault-configuration
+    name: Azure Key Vault 구성 공급자
   - uid: security/enforcing-ssl
     name: HTTPS 적용
   - uid: security/gdpr
     name: EU GDPR(일반 데이터 보호 규정) 지원
-  - uid: security/key-vault-configuration
-    name: Azure Key Vault 구성 공급자
   - uid: security/anti-request-forgery
     name: 요청 위조 방지
   - uid: security/preventing-open-redirects
@@ -1058,9 +1062,9 @@ items:
   href: /dotnet/api/?view=aspnetcore-2.2
 - name: 참가
   href: https://github.com/aspnet/Docs/blob/master/CONTRIBUTING.md
-ms.openlocfilehash: 1863125cec772262c41884af343f66ec8fcb53ad
-ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
+ms.openlocfilehash: 721fb2d1042307c23e0858a7a1bf71a0b24d57ab
+ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/16/2019
-ms.locfileid: "59614300"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59705564"
