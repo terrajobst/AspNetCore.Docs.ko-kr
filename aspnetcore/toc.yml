@@ -261,10 +261,82 @@ items:
       name: 종속성 주입 - 보기
     - uid: mvc/controllers/testing
       name: 단위 테스트
-  - uid: razor-components/index
-    name: Razor 구성 요소
+  - name: Blazor
+    items:
+    - uid: blazor/index
+      name: 개요
+    - uid: blazor/get-started
+      name: 시작
+    - uid: blazor/hosting-models
+      name: 호스팅 모델
+    - uid: tutorials/first-blazor-app
+      name: 첫 번째 앱 빌드
+    - uid: blazor/components
+      name: 구성 요소
+    - uid: blazor/forms-validation
+      name: 양식 및 유효성 검사
+    - uid: blazor/class-libraries
+      name: 구성 요소 라이브러리
+    - uid: blazor/layouts
+      name: 레이아웃
+    - uid: blazor/dependency-injection
+      name: 종속성 주입
+    - uid: blazor/routing
+      name: 라우팅
+    - uid: blazor/javascript-interop
+      name: JavaScript interop
+    - uid: blazor/debug
+      name: 디버그
+    - name: 호스트 및 배포
+      items:
+      - uid: host-and-deploy/blazor/index
+        name: 개요
+      - uid: host-and-deploy/blazor/client-side
+        name: 클라이언트 쪽
+      - uid: host-and-deploy/blazor/server-side
+        name: 서버 쪽
+      - uid: host-and-deploy/blazor/configure-linker
+        name: 링커 구성
+  - name: 클라이언트 쪽 개발
+    items:
+    - name: 단일 페이지 앱
+      items:
+      - uid: spa/angular
+        name: Angular
+      - uid: spa/react
+        name: React
+      - uid: spa/react-with-redux
+        name: Redux를 사용한 React
+      - uid: client-side/spa-services
+        name: JavaScriptServices
+    - name: LibMan
+      items:
+      - uid: client-side/libman/index
+        name: 개요
+      - uid: client-side/libman/libman-cli
+        name: CLI
+      - uid: client-side/libman/libman-vs
+        name: Visual Studio
+    - uid: client-side/using-gulp
+      name: Gulp
+    - uid: client-side/using-grunt
+      name: Grunt
+    - uid: client-side/bower
+      name: Bower
+    - uid: client-side/bundling-and-minification
+      name: 번들 및 축소
+    - uid: client-side/using-browserlink
+      name: 브라우저 링크
   - uid: fundamentals/app-state
     name: 세션 및 앱 상태
+  - uid: mvc/views/layout
+    name: 레이아웃
+  - uid: mvc/models/model-binding
+    name: 모델 바인딩
+  - uid: mvc/models/validation
+    name: 모델 유효성 검사
+  - uid: mvc/views/razor
+    name: Razor 구문
   - name: 태그 도우미
     items:
     - uid: mvc/views/tag-helpers/intro
@@ -303,14 +375,6 @@ items:
         href: mvc/views/working-with-forms.md#the-validation-message-tag-helper
       - name: 유효성 검사 요약
         href: mvc/views/working-with-forms.md#the-validation-summary-tag-helper
-  - uid: mvc/views/layout
-    name: 레이아웃
-  - uid: mvc/models/model-binding
-    name: 모델 바인딩
-  - uid: mvc/models/validation
-    name: 모델 유효성 검사
-  - uid: mvc/views/razor
-    name: Razor 구문
   - name: 고급
     items:
     - uid: mvc/views/view-components
@@ -553,102 +617,6 @@ items:
       href: /azure/visual-studio/vs-storage-aspnet5-getting-started-queues?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
     - name: Table Storage
       href: /azure/visual-studio/vs-storage-aspnet5-getting-started-tables?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
-- name: 클라이언트 쪽 개발
-  items:
-  - name: Razor 구성 요소
-    items:
-    - uid: razor-components/index
-      name: 개요
-    - uid: razor-components/get-started
-      name: 시작
-    - uid: razor-components/hosting-models
-      name: 호스팅 모델
-    - uid: tutorials/first-razor-components-app
-      name: 첫 번째 앱 빌드
-    - uid: razor-components/components
-      name: 구성 요소
-    - uid: razor-components/forms-validation
-      name: 양식 및 유효성 검사
-    - uid: razor-components/class-libraries
-      name: 구성 요소 라이브러리
-    - uid: razor-components/layouts
-      name: 레이아웃
-    - uid: razor-components/dependency-injection
-      name: 종속성 주입
-    - uid: razor-components/routing
-      name: 라우팅
-    - uid: razor-components/javascript-interop
-      name: JavaScript interop
-    - uid: razor-components/debug
-      name: 디버그
-    - name: 호스트 및 배포
-      items:
-      - uid: host-and-deploy/razor-components-blazor/index
-        name: 개요
-      - uid: host-and-deploy/razor-components-blazor/razor-components
-        name: Razor 구성 요소
-  - name: 단일 페이지 앱
-    items:
-    - name: Blazor
-      items:
-      - uid: spa/blazor/index
-        name: 개요
-      - uid: spa/blazor/get-started
-        name: 시작
-      - uid: razor-components/hosting-models
-        name: 호스팅 모델
-      - uid: tutorials/first-razor-components-app
-        name: 첫 번째 앱 빌드
-      - uid: razor-components/components
-        name: 구성 요소
-      - uid: razor-components/forms-validation
-        name: 양식 및 유효성 검사
-      - uid: razor-components/class-libraries
-        name: 구성 요소 라이브러리
-      - uid: razor-components/layouts
-        name: 레이아웃
-      - uid: razor-components/dependency-injection
-        name: 종속성 주입
-      - uid: razor-components/routing
-        name: 라우팅
-      - uid: razor-components/javascript-interop
-        name: JavaScript interop
-      - uid: razor-components/debug
-        name: 디버그
-      - name: 호스트 및 배포
-        items:
-        - uid: host-and-deploy/razor-components-blazor/index
-          name: 개요
-        - uid: host-and-deploy/razor-components-blazor/blazor
-          name: Blazor
-        - uid: host-and-deploy/razor-components-blazor/configure-linker
-          name: 링커 구성
-    - uid: spa/angular
-      name: Angular
-    - uid: spa/react
-      name: React
-    - uid: spa/react-with-redux
-      name: Redux를 사용한 React
-    - uid: client-side/spa-services
-      name: JavaScriptServices
-  - name: LibMan
-    items:
-    - uid: client-side/libman/index
-      name: 개요
-    - uid: client-side/libman/libman-cli
-      name: CLI
-    - uid: client-side/libman/libman-vs
-      name: Visual Studio
-  - uid: client-side/using-gulp
-    name: Gulp
-  - uid: client-side/using-grunt
-    name: Grunt
-  - uid: client-side/bower
-    name: Bower
-  - uid: client-side/bundling-and-minification
-    name: 번들 및 축소
-  - uid: client-side/using-browserlink
-    name: 브라우저 링크
 - name: 호스팅 및 배포
   displayName: publish
   items:
@@ -777,15 +745,15 @@ items:
   - uid: host-and-deploy/health-checks
     name: 상태 확인
     displayName: deploy, publish
-  - name: Razor 구성 요소/Blazor
+  - name: Blazor
     items:
-    - uid: host-and-deploy/razor-components-blazor/index
+    - uid: host-and-deploy/blazor/index
       name: 개요
-    - uid: host-and-deploy/razor-components-blazor/blazor
-      name: Blazor
-    - uid: host-and-deploy/razor-components-blazor/razor-components
-      name: Razor 구성 요소
-    - uid: host-and-deploy/razor-components-blazor/configure-linker
+    - uid: host-and-deploy/blazor/client-side
+      name: 클라이언트 쪽
+    - uid: host-and-deploy/blazor/server-side
+      name: 서버 쪽
+    - uid: host-and-deploy/blazor/configure-linker
       name: 링커 구성
 - name: 보안 및 ID
   displayName: authentication, authorization
@@ -1090,9 +1058,9 @@ items:
   href: /dotnet/api/?view=aspnetcore-2.2
 - name: 참가
   href: https://github.com/aspnet/Docs/blob/master/CONTRIBUTING.md
-ms.openlocfilehash: e788460a2de31aa570907b4561d30ad0da2ca854
-ms.sourcegitcommit: 9b7fcb4ce00a3a32e153a080ebfaae4ef417aafa
+ms.openlocfilehash: 1863125cec772262c41884af343f66ec8fcb53ad
+ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/12/2019
-ms.locfileid: "59516276"
+ms.lasthandoff: 04/16/2019
+ms.locfileid: "59614300"
