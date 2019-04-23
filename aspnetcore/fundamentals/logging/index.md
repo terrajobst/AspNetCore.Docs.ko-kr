@@ -6,12 +6,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 03/02/2019
 uid: fundamentals/logging/index
-ms.openlocfilehash: f0e4dbb6fda4f676ad8e769c71cc9548a4d61d66
-ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
+ms.openlocfilehash: 8a2e310b47e32e9015b0c127ed79d8f6bdf2e44d
+ms.sourcegitcommit: eb784a68219b4829d8e50c8a334c38d4b94e0cfa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/16/2019
-ms.locfileid: "59614437"
+ms.lasthandoff: 04/22/2019
+ms.locfileid: "59982855"
 ---
 # <a name="logging-in-aspnet-core"></a>ASP.NET Core에 로그인
 
@@ -803,8 +803,6 @@ Azure에서 로깅에 대한 자세한 내용은 다음 섹션을 참조하세�
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.0"
-
-* 명시적으로 <xref:Microsoft.Extensions.Logging.AzureAppServicesLoggerFactoryExtensions.AddAzureWebAppDiagnostics*>를 호출하지 마세요. Azure App Service에 앱을 배포하면 공급자가 자동으로 앱에 제공됩니다.
 
 .NET Framework를 대상으로 지정하거나 `Microsoft.AspNetCore.App` 메타패키지를 참조하는 경우 패키지 공급자를 프로젝트에 추가합니다. `AddAzureWebAppDiagnostics` 호출:
 
