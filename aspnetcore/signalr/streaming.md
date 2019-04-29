@@ -7,12 +7,12 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/12/2019
 uid: signalr/streaming
-ms.openlocfilehash: 83bbb231482d9c1606be3c5bbbeb1cc3b8efcf7d
-ms.sourcegitcommit: eb784a68219b4829d8e50c8a334c38d4b94e0cfa
-ms.translationtype: MT
+ms.openlocfilehash: d185056d3bdda089eaa46ae9b8e13ab7a4354f93
+ms.sourcegitcommit: 8a84ce880b4c40d6694ba6423038f18fc2eb5746
+ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/22/2019
-ms.locfileid: "59982658"
+ms.lasthandoff: 04/23/2019
+ms.locfileid: "60165078"
 ---
 # <a name="use-streaming-in-aspnet-core-signalr"></a>ASP.NET Core SignalR에서 스트리밍 사용
 
@@ -36,13 +36,13 @@ ASP.NET Core SignalR은 서버 메서드의 스트리밍 반환 값을 지원합
 
 ::: moniker range=">= aspnetcore-3.0"
 
-반환 될 때 자동으로 허브 메서드를 스트리밍 허브 메서드를 됩니다는 <xref:System.Threading.Channels.ChannelReader`1>, `IAsyncEnumerable<T>`를 `Task<ChannelReader<T>>`, 또는 `Task<IAsyncEnumerable<T>>`합니다.
+반환 될 때 자동으로 허브 메서드를 스트리밍 허브 메서드를 됩니다는 <xref:System.Threading.Channels.ChannelReader%601>, `IAsyncEnumerable<T>`를 `Task<ChannelReader<T>>`, 또는 `Task<IAsyncEnumerable<T>>`합니다.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<xref:System.Threading.Channels.ChannelReader`1> 또는 `Task<ChannelReader<T>>`를 반환하는 허브 메서드는 자동으로 스트리밍 허브 메서드로 간주됩니다.
+<xref:System.Threading.Channels.ChannelReader%601> 또는 `Task<ChannelReader<T>>`를 반환하는 허브 메서드는 자동으로 스트리밍 허브 메서드로 간주됩니다.
 
 ::: moniker-end
 
@@ -58,7 +58,7 @@ ASP.NET Core SignalR은 서버 메서드의 스트리밍 반환 값을 지원합
 
 ::: moniker-end
 
-다음 샘플에서는 스트리밍 채널을 사용 하 여 클라이언트에는 데이터의 기본 사항을 보여 줍니다. 개체를 쓸 때마다는 <xref:System.Threading.Channels.ChannelWriter`1>, 개체가 즉시 클라이언트로 전송 됩니다. 마지막으로 `ChannelWriter`가 완료되어 스트림이 닫혔음을 클라이언트에 알려줍니다.
+다음 샘플에서는 스트리밍 채널을 사용 하 여 클라이언트에는 데이터의 기본 사항을 보여 줍니다. 개체를 쓸 때마다는 <xref:System.Threading.Channels.ChannelWriter%601>, 개체가 즉시 클라이언트로 전송 됩니다. 마지막으로 `ChannelWriter`가 완료되어 스트림이 닫혔음을 클라이언트에 알려줍니다.
 
 > [!NOTE]
 > 백그라운드 스레드에서 `ChannelWriter<T>`에 쓰고 최대한 빨리 `ChannelReader`를 반환하십시오. 다른 허브 호출 될 때까지 차단 되는 `ChannelReader` 반환 됩니다.

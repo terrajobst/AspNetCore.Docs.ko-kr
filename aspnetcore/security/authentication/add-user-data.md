@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core 프로젝트에서 Id에 사용자 지정 사용자 데이터를 추가 하는 방법에 알아봅니다. GDPR에 따라 데이터를 삭제 합니다.
 ms.author: riande
 ms.date: 6/16/2018
-ms.custom: seodec18
+ms.custom: mvc, seodec18
 uid: security/authentication/add-user-data
-ms.openlocfilehash: 8c0413a16d92b717619387748ee78f0d14d6c852
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
-ms.translationtype: MT
+ms.openlocfilehash: 1b7cac9206776e9290326511247b6db33f13cb32
+ms.sourcegitcommit: 8a84ce880b4c40d6694ba6423038f18fc2eb5746
+ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59516211"
+ms.lasthandoff: 04/23/2019
+ms.locfileid: "60165094"
 ---
 # <a name="add-download-and-delete-custom-user-data-to-identity-in-an-aspnet-core-project"></a>추가, 다운로드 및 ASP.NET Core 프로젝트에서 Id에 사용자 지정 사용자 데이터를 삭제 합니다.
 

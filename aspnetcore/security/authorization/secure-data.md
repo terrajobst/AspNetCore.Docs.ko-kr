@@ -4,14 +4,14 @@ author: rick-anderson
 description: 권한 부여로 보호 되는 사용자 데이터를 사용 하 여 Razor 페이지 앱을 만드는 방법에 알아봅니다. HTTPS, 인증, 보안, ASP.NET Core Id를 포함합니다.
 ms.author: riande
 ms.date: 12/18/2018
-ms.custom: seodec18
+ms.custom: mvc, seodec18
 uid: security/authorization/secure-data
-ms.openlocfilehash: 748de9264a1b22b50e0832fdd350e06eeefd5cb3
-ms.sourcegitcommit: 7d6019f762fc5b8cbedcd69801e8310f51a17c18
-ms.translationtype: MT
+ms.openlocfilehash: 9b01aca0cb2b33f5561193ffdce4aa4950485fce
+ms.sourcegitcommit: 8a84ce880b4c40d6694ba6423038f18fc2eb5746
+ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/25/2019
-ms.locfileid: "58419461"
+ms.lasthandoff: 04/23/2019
+ms.locfileid: "60165240"
 ---
 # <a name="create-an-aspnet-core-app-with-user-data-protected-by-authorization"></a>권한 부여로 보호 되는 사용자 데이터를 사용 하 여 ASP.NET Core 앱 만들기
 

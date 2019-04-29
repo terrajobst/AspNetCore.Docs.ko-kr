@@ -5,14 +5,14 @@ description: FileUpload 클래스를 사용 하 여 ASP.NET Core에서 Razor 페
 monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
 ms.date: 11/10/2018
-ms.custom: seodec18
+ms.custom: mvc, seodec18
 uid: razor-pages/upload-files
-ms.openlocfilehash: 80929c6c1a95b46b942958def1540ac8ed5abc81
-ms.sourcegitcommit: 49faca2644590fc081d86db46ea5e29edfc28b7b
-ms.translationtype: MT
+ms.openlocfilehash: a12653e5dc99ad731de63e151af6dbdbe38ffefc
+ms.sourcegitcommit: 8a84ce880b4c40d6694ba6423038f18fc2eb5746
+ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/09/2018
-ms.locfileid: "53121403"
+ms.lasthandoff: 04/23/2019
+ms.locfileid: "60165224"
 ---
 # <a name="upload-files-to-a-razor-page-in-aspnet-core"></a>ASP.NET Core의 Razor 페이지에 파일 업로드
 
@@ -113,7 +113,7 @@ public async Task<IActionResult> OnPostAsync()
 > 코드 샘플에서는 악성 파일 업로드에 대한 서버 쪽 보호 기능을 제공하지 않습니다. 사용자의 파일을 수락할 때 공격 노출 영역을 줄이는 방법에 대한 자세한 내용은 다음 리소스를 참조하세요.
 >
 > * [무제한 파일 업로드](https://www.owasp.org/index.php/Unrestricted_File_Upload)
-> * [Azure 보안: 사용자의 파일을 수락할 때 적절한 제어 장치가 있는지 확인](/azure/security/azure-security-threat-modeling-tool-input-validation#controls-users)
+> * [Azure 보안: 사용자의 파일을 허용할 때 적절 한 제어가 수행 되는지 확인 합니다.](/azure/security/azure-security-threat-modeling-tool-input-validation#controls-users)
 
 ### <a name="save-the-file-to-azure-blob-storage"></a>Azure Blob Storage에 파일 저장
 
@@ -159,7 +159,7 @@ Azure Blob Storage에 파일 콘텐츠를 업로드하려면 [.NET을 사용하�
 
 ## <a name="add-the-schedule-table-to-the-database"></a>데이터베이스에 일정 테이블 추가
 
-PMC(패키지 관리자 콘솔)에서 **도구** > **NuGet 패키지 관리자** > **패키지 관리자 콘솔**을 엽니다.
+패키지 관리자 콘솔 (PMC)을 엽니다. **도구** > **NuGet 패키지 관리자** > **패키지 관리자 콘솔**합니다.
 
 ![PMC 메뉴](upload-files/_static/pmc.png)
 

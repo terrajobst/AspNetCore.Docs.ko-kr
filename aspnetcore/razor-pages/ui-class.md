@@ -5,14 +5,14 @@ description: 부분 뷰를 사용 하 여 ASP.NET Core에서 클래스 라이브
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 09/07/2018
-ms.custom: seodec18
+ms.custom: mvc, seodec18
 uid: razor-pages/ui-class
-ms.openlocfilehash: dc7db9483f2d75fe79ed9a9806f944e4f2a05a9b
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
-ms.translationtype: MT
+ms.openlocfilehash: 383b7e49b5dbd0c0f13218aff20abe6421d785b8
+ms.sourcegitcommit: 8a84ce880b4c40d6694ba6423038f18fc2eb5746
+ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58265340"
+ms.lasthandoff: 04/23/2019
+ms.locfileid: "60165159"
 ---
 # <a name="create-reusable-ui-using-the-razor-class-library-project-in-aspnet-core"></a>ASP.NET Core에서 Razor 클래스 라이브러리 프로젝트를 사용 하 여 다시 사용할 수 있는 UI 만들기
 
