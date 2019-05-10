@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 4/10/2019
 uid: tutorials/grpc/grpc-client
-ms.openlocfilehash: 031afbfaf097c518a85400b0b6abbc135c1bc611
-ms.sourcegitcommit: 57a974556acd09363a58f38c26f74dc21e0d4339
+ms.openlocfilehash: ec6bf5072c76de640a78b2c3f13dd1fc552b9d04
+ms.sourcegitcommit: b508b115107e0f8d7f62b25cfcc8ad45e1373459
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59674163"
+ms.lasthandoff: 05/07/2019
+ms.locfileid: "65212644"
 ---
 # <a name="tutorial-create-a-net-core-grpc-client"></a>자습서: .NET Core gRPC 클라이언트 만들기
 
@@ -36,15 +36,15 @@ ms.locfileid: "59674163"
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[여기](https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio)의 지침에 따라 *GrpcGreeterClient*라는 이름으로 콘솔 앱을 만듭니다.
+[여기](/dotnet/core/tutorials/with-visual-studio)의 지침에 따라 *GrpcGreeterClient*라는 이름으로 콘솔 앱을 만듭니다.
 
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-[여기](https://docs.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio-code)의 지침에 따라 *GrpcGreeterClient*라는 이름으로 콘솔 앱을 만듭니다.
+[여기](/dotnet/core/tutorials/with-visual-studio-code)의 지침에 따라 *GrpcGreeterClient*라는 이름으로 콘솔 앱을 만듭니다.
 
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-[여기](https://docs.microsoft.com/en-us/dotnet/core/tutorials/using-on-mac-vs-full-solution)의 지침에 따라 *GrpcGreeterClient*라는 이름으로 콘솔 앱을 만듭니다.
+[여기](/dotnet/core/tutorials/using-on-mac-vs-full-solution)의 지침에 따라 *GrpcGreeterClient*라는 이름으로 콘솔 앱을 만듭니다.
 
 <!-- End of VS tabs -->
 
@@ -89,7 +89,7 @@ gRPC 클라이언트 프로젝트에 다음 패키지를 추가합니다.
 **통합 터미널**에서 다음 명령을 실행합니다.
 
 ```console
-dotnet add TodoApi.csproj package Grpc.Core
+dotnet add GrpcGreeterClient.csproj package Grpc.Core
 ```
 
 Google.Protobuf 및 Grpc.Tools에 대해 반복

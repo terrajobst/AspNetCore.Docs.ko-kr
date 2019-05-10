@@ -7,19 +7,19 @@ ms.custom: mvc
 ms.date: 10/24/2018
 uid: migration/1x-to-2x/index
 ms.openlocfilehash: f5bd2bc9862a7487658125e14837798886efad11
-ms.sourcegitcommit: 4d74644f11e0dac52b4510048490ae731c691496
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50090531"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64882798"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>ASP.NET Core 1.x에서 2.0으로 마이그레이션
 
 작성자: [Scott Addie](https://github.com/scottaddie)
 
-이 문서에서는 기존 ASP.NET Core 1.x 프로젝트를 ASP.NET Core 2.0으로 업데이트하는 과정을 안내합니다. 응용 프로그램을 ASP.NET Core 2.0으로 마이그레이션하면 [여러 가지 새로운 기능 및 향상된 성능](xref:aspnetcore-2.0)을 활용할 수 있습니다.
+이 문서에서는 기존 ASP.NET Core 1.x 프로젝트를 ASP.NET Core 2.0으로 업데이트하는 과정을 안내합니다. 애플리케이션을 ASP.NET Core 2.0으로 마이그레이션하면 [여러 가지 새로운 기능 및 향상된 성능](xref:aspnetcore-2.0)을 활용할 수 있습니다.
 
-기존 ASP.NET Core 1.x 응용 프로그램은 버전별 프로젝트 템플릿을 기반으로 합니다. ASP.NET Core 프레임워크가 진화함에 따라 프로젝트 템플릿 및 포함된 시작 코드도 함께 진화합니다. ASP.NET Core 프레임워크를 업데이트하는 것 외에도 응용 프로그램에 대한 코드를 업데이트해야 합니다.
+기존 ASP.NET Core 1.x 애플리케이션은 버전별 프로젝트 템플릿을 기반으로 합니다. ASP.NET Core 프레임워크가 진화함에 따라 프로젝트 템플릿 및 포함된 시작 코드도 함께 진화합니다. ASP.NET Core 프레임워크를 업데이트하는 것 외에도 애플리케이션에 대한 코드를 업데이트해야 합니다.
 
 <a name="prerequisites"></a>
 
@@ -140,7 +140,7 @@ EF Core 1.x를 사용하는 1.x 프로젝트에서 `dotnet ef migrations add`와
 1. `ConfigureServices` 메서드를 호출하여 종속성 주입을 통해 모든 서비스를 등록합니다(`DbContext` 형식 포함).
 1. 필수 작업을 수행합니다.
 
-EF Core 2.0을 사용하는 2.0 프로젝트에서는 응용 프로그램 서비스를 가져오기 위해 `Program.BuildWebHost`가 호출됩니다. 1.x와 달리 2.0 프로젝트에서는 `Startup.Configure`를 호출하는 데 부작용이 추가로 발생합니다. 1.x 앱이 `Configure` 메서드에서 데이터베이스 초기화 코드를 호출한 경우 예기치 않은 문제가 발생할 수 있습니다. 예를 들어 데이터베이스가 아직 없는 경우 EF Core 마이그레이션 명령 실행 전에 시드 코드가 실행됩니다. 아직 데이터베이스가 없는 경우 이 문제가 `dotnet ef migrations list` 명령 실패의 원인이 됩니다.
+EF Core 2.0을 사용하는 2.0 프로젝트에서는 애플리케이션 서비스를 가져오기 위해 `Program.BuildWebHost`가 호출됩니다. 1.x와 달리 2.0 프로젝트에서는 `Startup.Configure`를 호출하는 데 부작용이 추가로 발생합니다. 1.x 앱이 `Configure` 메서드에서 데이터베이스 초기화 코드를 호출한 경우 예기치 않은 문제가 발생할 수 있습니다. 예를 들어 데이터베이스가 아직 없는 경우 EF Core 마이그레이션 명령 실행 전에 시드 코드가 실행됩니다. 아직 데이터베이스가 없는 경우 이 문제가 `dotnet ef migrations list` 명령 실패의 원인이 됩니다.
 
 *Startup.cs*의 `Configure` 메서드에서 다음 1.x 시드 초기화 코드를 고려하세요.
 
@@ -150,13 +150,13 @@ EF Core 2.0을 사용하는 2.0 프로젝트에서는 응용 프로그램 서비
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Program2.cs?name=snippet_Main2Code&highlight=10)]
 
-2.0부터 `BuildWebHost`에서 웹 호스트를 빌드하고 구성하는 작업 외에 다른 작업을 수행하는 것은 바람직하지 않습니다. 응용 프로그램 실행과 관련된 모든 작업은 `BuildWebHost` 외부(보통 *Program.cs*의 `Main` 메서드)에서 처리해야 합니다.
+2.0부터 `BuildWebHost`에서 웹 호스트를 빌드하고 구성하는 작업 외에 다른 작업을 수행하는 것은 바람직하지 않습니다. 애플리케이션 실행과 관련된 모든 작업은 `BuildWebHost`&mdash; 외부(보통 *Program.cs*의 `Main` 메서드)에서 처리해야 합니다.
 
 <a name="view-compilation"></a>
 
 ## <a name="review-razor-view-compilation-setting"></a>Razor 보기 컴파일 설정 검토
 
-빠른 응용 프로그램 시작 시간 및 보다 작은 게시된 번들은 무엇보다도 중요합니다. 이러한 이유로 [Razor 보기 컴파일](xref:mvc/views/view-compilation)은 ASP.NET Core 2.0에서 기본적으로 활성화됩니다.
+빠른 애플리케이션 시작 시간 및 보다 작은 게시된 번들은 무엇보다도 중요합니다. 이러한 이유로 [Razor 보기 컴파일](xref:mvc/views/view-compilation)은 ASP.NET Core 2.0에서 기본적으로 활성화됩니다.
 
 `MvcRazorCompileOnPublish` 속성을 true로 설정하는 것은 더 이상 필요하지 않습니다. 보기 컴파일을 비활성화하는 경우가 아니면 *.csproj* 파일에서 속성을 제거할 수 있습니다.
 
@@ -168,7 +168,7 @@ EF Core 2.0을 사용하는 2.0 프로젝트에서는 응용 프로그램 서비
 
 ## <a name="rely-on-application-insights-light-up-features"></a>Application Insights "강화" 기능 사용
 
-응용 프로그램 성능 계측의 손쉬운 설치는 중요합니다. 이제 Visual Studio 2017 도구에서 제공하는 [Application Insights](/azure/application-insights/app-insights-overview) "강화" 기능을 사용할 수 있습니다.
+애플리케이션 성능 계측의 손쉬운 설치는 중요합니다. 이제 Visual Studio 2017 도구에서 제공하는 [Application Insights](/azure/application-insights/app-insights-overview) "강화" 기능을 사용할 수 있습니다.
 
 Visual Studio 2017에서 만든 ASP.NET Core 1.1 프로젝트는 기본적으로 Application Insights를 추가했습니다. *Program.cs* 및 *Startup.cs* 외부에서 Application Insights SDK를 직접 사용하지 않을 경우 다음 단계를 수행합니다.
 

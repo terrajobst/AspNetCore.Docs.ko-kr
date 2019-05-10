@@ -1,4 +1,4 @@
-> [!NOTE]
-> 보안상의 이유로 `GET` 요청 데이터를 페이지 모델 속성에 바인딩하려면 명시적으로 지정해야만 합니다. 사용자 입력을 속성에 매핑하기 전에 이를 확인하십시오. `GET` 바인딩을 명시적으로 지정하면 쿼리 문자열이나 경로 값을 필요로 하는 시나리오를 다뤄야 할 때 유용합니다.
+> [!WARNING]
+> 보안상의 이유로 페이지 모델 속성에 `GET` 요청 데이터를 바인딩하기 위해 옵트인해야 합니다. 속성에 매핑하기 전에 사용자 입력을 확인합니다. 쿼리 문자열이나 경로 값을 사용하는 시나리오를 해결할 때 `GET` 바인딩을 옵트인하면 유용합니다.
 >
-> `GET` 요청 시 속성을 바인딩하려면 `[BindProperty]` 특성의 `SupportsGet` 속성을 `true`로 설정합니다 (`[BindProperty(SupportsGet = true)]`).
+> `GET` 요청에 속성을 바인딩하려면 [[BindProperty]](/dotnet/api/microsoft.aspnetcore.mvc.bindpropertyattribute) 특성의 `SupportsGet` 속성을 `true`로 설정합니다. `[BindProperty(SupportsGet = true)]`

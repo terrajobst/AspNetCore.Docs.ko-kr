@@ -4,14 +4,14 @@ author: ssougnez
 description: 이 자습서에서는 해당 클라이언트가 TypeScript로 작성된 ASP.NET Core SignalR 웹앱을 번들링 및 빌드하도록 WebPack을 구성합니다.
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 02/11/2019
+ms.date: 04/23/2019
 uid: tutorials/signalr-typescript-webpack
-ms.openlocfilehash: aaf9aa59928ed6b17bc0586d97dbdefc9e30362c
-ms.sourcegitcommit: 5e3797a02ff3c48bb8cb9ad4320bfd169ebe8aba
+ms.openlocfilehash: 8bebdd9102f93d2b2a8bf142db1053def9d001a0
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/12/2019
-ms.locfileid: "56102954"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64884608"
 ---
 # <a name="use-aspnet-core-signalr-with-typescript-and-webpack"></a>TypeScript 및 WebPack과 함께 ASP.NET Core SignalR 사용
 
@@ -28,9 +28,24 @@ ms.locfileid: "56102954"
 > * SignalR 서버 구성
 > * 클라이언트 및 서버 간 통신 활성화
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/tutorials/signalr-typescript-webpack/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/signalr-typescript-webpack/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-[!INCLUDE [Prerequisites](~/includes/net-core-prereqs-vs-vsc-2.2.md)]
+## <a name="prerequisites"></a>전제 조건
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+* [Visual Studio 2017 버전 15.9 이상](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=button+cta&utm_content=download+vs2017)(**ASP.NET 및 웹 개발** 워크로드 필요)
+* [.NET Core SDK 2.2 이상](https://www.microsoft.com/net/download/all)
+* [Node.js](https://www.npmjs.com/) ([npm](https://nodejs.org/) 포함)
+
+# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+
+* [Visual Studio Code](https://code.visualstudio.com/download)
+* [.NET Core SDK 2.2 이상](https://www.microsoft.com/net/download/all)
+* [Visual Studio Code용 C# 버전 1.17.1 이상](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
+* [Node.js](https://www.npmjs.com/) ([npm](https://nodejs.org/) 포함)
+
+---
 
 ## <a name="create-the-aspnet-core-web-app"></a>ASP.NET Core 웹앱 만들기
 

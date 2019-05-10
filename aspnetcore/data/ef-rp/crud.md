@@ -5,18 +5,14 @@ description: EF Core를 사용한 만들기, 읽기, 업데이트, 삭제 방법
 ms.author: riande
 ms.date: 6/31/2017
 uid: data/ef-rp/crud
-ms.openlocfilehash: c104498a4411ac36672ffbb9660948d4e96bf1ee
-ms.sourcegitcommit: 10e14b85490f064395e9b2f423d21e3c2d39ed8b
+ms.openlocfilehash: 43d133c61c0387ebcb4bcb2d22c800588d8534c3
+ms.sourcegitcommit: 3376f224b47a89acf329b2d2f9260046a372f924
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58142386"
+ms.lasthandoff: 05/10/2019
+ms.locfileid: "65516916"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---crud---2-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - CRUD - 2/8
-
-[!INCLUDE[2.0 version](~/includes/RP-EF/20-pdf.md)]
-
-::: moniker range=">= aspnetcore-2.1"
 
 작성자: [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -161,7 +157,7 @@ ms.locfileid: "58142386"
 
 [SetValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues.setvalues#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyValues_SetValues_System_Object_) 메서드는 다른 [PropertyValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues) 개체의 값을 읽어서 이 개체의 값을 설정합니다. `SetValues`는 속성 이름 일치를 사용합니다. 뷰 모델 형식은 모델 형식과 연결될 필요는 없으며 일치하는 속성만 있으면 됩니다.
 
-`StudentVM`을 사용하려면 `Student` 대신 `StudentVM`을 사용하도록 [CreateVM.cshtml](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21/Pages/Students/CreateVM.cshtml)을 업데이트해야 합니다.
+`StudentVM`을 사용하려면 `Student` 대신 `StudentVM`을 사용하도록 [CreateVM.cshtml](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21/Pages/Students/CreateVM.cshtml)을 업데이트해야 합니다.
 
 Razor 페이지에서 `PageModel` 파생 클래스는 뷰 모델입니다.
 
@@ -207,8 +203,7 @@ DB 컨텍스트는 메모리의 엔터티가 해당하는 DB의 행과 동기화
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Delete.cshtml.cs?name=snippet1&highlight=12)]
 
-
-  `OnGetAsync` 메서드를 다음 코드로 바꿉니다.
+`OnGetAsync` 메서드를 다음 코드로 바꿉니다.
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Delete.cshtml.cs?name=snippet_OnGetAsync&highlight=1,9,17-20)]
 
@@ -247,7 +242,7 @@ Razor 페이지에 올바른 `@page` 지시문이 포함되어 있는지 확인�
 
 각 Razor 페이지는 `@page` 지시문을 포함해야 합니다.
 
-::: moniker-end
+
 
 ## <a name="additional-resources"></a>추가 자료
 

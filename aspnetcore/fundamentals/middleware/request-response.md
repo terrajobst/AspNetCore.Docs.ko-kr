@@ -8,11 +8,11 @@ ms.custom: mvc
 ms.date: 02/26/2019
 uid: fundamentals/middleware/request-response
 ms.openlocfilehash: b6e3cd4b79e0c062b271c65cd5ecbdb4ef80c3a1
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58208059"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65085509"
 ---
 # <a name="request-and-response-operations-in-aspnet-core"></a>ASP.NET Core의 요청 및 응답 작업
 

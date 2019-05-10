@@ -1,18 +1,18 @@
 ---
-title: ASP.NET Core의 목적은 문자열
+title: ASP.NET Core에서 용도 문자열
 author: rick-anderson
-description: ASP.NET Core 데이터 보호 Api의 목적은 문자열 사용 방법에 대해 알아봅니다.
+description: 용도 문자열에서 ASP.NET Core 데이터 보호 Api를 사용 하는 방법에 대해 알아봅니다.
 ms.author: riande
 ms.date: 10/14/2016
 uid: security/data-protection/consumer-apis/purpose-strings
 ms.openlocfilehash: 4c85423f8de7e4b784ae1bb304a884541df251b6
-ms.sourcegitcommit: a1afd04758e663d7062a5bfa8a0d4dca38f42afc
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/20/2018
-ms.locfileid: "36278767"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65087538"
 ---
-# <a name="purpose-strings-in-aspnet-core"></a>ASP.NET Core의 목적은 문자열
+# <a name="purpose-strings-in-aspnet-core"></a>ASP.NET Core에서 용도 문자열
 
 <a name="data-protection-consumer-apis-purposes"></a>
 
@@ -20,7 +20,7 @@ ms.locfileid: "36278767"
 
 소비자가 용도를 지정하면 루트 암호화 키와 용도 문자열이 함께 적용되어 해당 소비자에 고유한 하위 암호화 키가 파생됩니다. 이로 인해서 해당 소비자와 응용 프로그램 내의 모든 다른 암호화 소비자가 서로 격리되며, 해당 소비자의 페이로드를 다른 구성 요소가 읽을 수도, 다른 구성 요소의 페이로드를 해당 소비자가 읽을 수도 없게 됩니다. 또한 이러한 격리는 구성 요소에 대한 전 범주의 공격을 불가능하게 만듭니다.
 
-![용도 다이어그램 예제](purpose-strings/_static/purposes.png)
+![목적은 다이어그램 예제](purpose-strings/_static/purposes.png)
 
 이 다이어그램에서 `IDataProtector` 의 인스턴스 A 및 B는 서로 상대방의 페이로드를 **읽을 수 없으며**, 자신의 페이로드만 읽을 수 있습니다.
 

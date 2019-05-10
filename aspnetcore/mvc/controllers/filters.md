@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/08/2019
 uid: mvc/controllers/filters
-ms.openlocfilehash: 4fe04cde2a234302845b2cbded106f1e809842bc
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: f357df0bbc51e881132e36ccb20f4ffdc3035032
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58209296"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64883468"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core에서 필터링
 
@@ -27,7 +27,7 @@ ASP.NET Core MVC에서 *필터*를 사용하면 요청 처리 파이프라인의
 
 사용자 지정 필터를 만들어 교차 편집 문제를 처리할 수 있습니다. 필터는 작업 간 코드 중복을 방지할 수 있습니다. 예를 들어 오류 처리 예외 필터는 오류 처리를 통합할 수 있습니다.
 
-[GitHub에서 샘플 보기 또는 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/controllers/filters/sample)
+[GitHub에서 샘플 보기 또는 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample)
 
 ## <a name="how-filters-work"></a>필터 작동 방법
 
@@ -425,4 +425,4 @@ ASP.NET Core 1.1에서 필터 파이프라인에 미들웨어를 사용할 수 �
 ## <a name="next-actions"></a>다음 작업
 
 * [Razor Pages에 대한 필터 메서드](xref:razor-pages/filter) 참조
-* 필터를 실험하려면 [Github 샘플을 다운로드하고, 테스트하고, 수정](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/controllers/filters/sample)합니다.
+* 필터를 실험하려면 [Github 샘플을 다운로드하고, 테스트하고, 수정](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample)합니다.

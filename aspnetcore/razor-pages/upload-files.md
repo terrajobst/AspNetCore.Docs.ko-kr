@@ -7,24 +7,24 @@ ms.author: riande
 ms.date: 11/10/2018
 ms.custom: mvc, seodec18
 uid: razor-pages/upload-files
-ms.openlocfilehash: a12653e5dc99ad731de63e151af6dbdbe38ffefc
-ms.sourcegitcommit: 8a84ce880b4c40d6694ba6423038f18fc2eb5746
-ms.translationtype: HT
+ms.openlocfilehash: 07457d57b7d3b444c8cea818149569407f1dd8e8
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60165224"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65085723"
 ---
 # <a name="upload-files-to-a-razor-page-in-aspnet-core"></a>ASP.NET Core의 Razor 페이지에 파일 업로드
 
 [Luke Latham](https://github.com/guardrex)으로
 
-이 항목을 기반으로 합니다 [샘플 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample) 에서 <xref:tutorials/razor-pages/razor-pages-start>합니다.
+이 항목을 기반으로 합니다 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample) 에서 <xref:tutorials/razor-pages/razor-pages-start>합니다.
 
 이 항목에서는 작은 파일 업로딩에 대해 제대로 작동 하는 단순 모델 바인딩을 사용 하 여 파일을 업로드 하는 방법을 보여 줍니다. 큰 파일 스트리밍에 대한 자세한 내용은 [스트리밍으로 큰 파일 업로드](xref:mvc/models/file-uploads#uploading-large-files-with-streaming)를 참조하세요.
 
 다음 단계에서는 동영상 일정 파일 업로드 기능이 샘플 앱에 추가됩니다. 동영상 일정은 `Schedule` 클래스로 표현됩니다. 클래스에는 일정의 두 버전이 포함됩니다. 한 버전(`PublicSchedule`)은 고객에게 제공됩니다. 다른 버전(`PrivateSchedule`)은 회사 직원들이 사용합니다. 각 버전은 별도 파일로 업로드됩니다. 이 자습서에서는 서버에 단일 게시물이 있는 페이지에서 두 개의 파일 업로드를 수행하는 방법을 보여 줍니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/razor-pages/upload-files/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/upload-files/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="security-considerations"></a>보안 고려 사항
 

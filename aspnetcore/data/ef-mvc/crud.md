@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 02/04/2019
 ms.topic: tutorial
 uid: data/ef-mvc/crud
-ms.openlocfilehash: cee521eec3172c04b4d9d93c12076c42c9adff18
-ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
+ms.openlocfilehash: 61669dca24b552012ee057b89de28b7de1702c2b
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/30/2019
-ms.locfileid: "58750609"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64886168"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>자습서: CRUD 기능 구현 - ASP.NET MVC 및 EF Core 사용
 
@@ -293,7 +293,7 @@ HttpPost `Delete` 작업 메서드(`DeleteConfirmed`라는)를 실제 삭제 작
 
 ## <a name="get-the-code"></a>코드 가져오기
 
-[완성된 애플리케이션을 다운로드하거나 확인합니다.](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[완성된 애플리케이션을 다운로드하거나 확인합니다.](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="next-steps"></a>다음 단계
 

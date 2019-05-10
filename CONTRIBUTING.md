@@ -1,11 +1,3 @@
----
-ms.openlocfilehash: 98a03118954baa85b093a0514e1ac6f0fb6353e8
-ms.sourcegitcommit: 088e6744cd67a62f214f25146313a53949b17d35
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 03/21/2019
-ms.locfileid: "58320110"
----
 # <a name="contribute-to-the-aspnet-core-documentation"></a>ASP.NET Core 설명서에 참가
 
 이 문서에서는 [ASP.NET 문서 사이트](https://docs.microsoft.com/aspnet/)에서 호스팅되는 문서 및 코드 샘플에 참여하는 프로세스를 설명합니다. 오타 수정 및 새 문서 작성을 통한 참여를 환영합니다.

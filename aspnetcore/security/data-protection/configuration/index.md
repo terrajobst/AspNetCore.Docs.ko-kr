@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 10/12/2017
 uid: security/data-protection/configuration/index
 ms.openlocfilehash: d6b87f8c0b20572929cf7449379c6fa3ade123ad
-ms.sourcegitcommit: a1afd04758e663d7062a5bfa8a0d4dca38f42afc
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/20/2018
-ms.locfileid: "36273375"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64883008"
 ---
 # <a name="data-protection-configuration-in-aspnet-core"></a>ASP.NET Core 데이터 보호 구성
 
