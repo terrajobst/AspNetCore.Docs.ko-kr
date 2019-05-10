@@ -1,11 +1,3 @@
----
-ms.openlocfilehash: 41021e30ae85dd0ae42cbe6f1606727e21bd7707
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59705525"
----
 # <a name="aspnet-core-middleware-extensibility-sample"></a>ASP.NET Core 미들웨어 확장성 샘플
 
 이 샘플에서는 [ASP.NET Core의 팩터리 기반 미들웨어 활성화](https://docs.microsoft.com/aspnet/core/fundamentals/middleware/middleware-extensibility)에 설명된 시나리오를 보여줍니다.

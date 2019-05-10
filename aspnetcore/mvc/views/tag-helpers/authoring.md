@@ -4,20 +4,20 @@ author: rick-anderson
 description: ASP.NET Core에서 태그 도우미를 작성하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/12/2019
+ms.date: 04/29/2019
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: 19b7df1abc8765cb9a77487e39c4365fdacf2b65
-ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
+ms.openlocfilehash: 37e39ac93e7b67184dfc238d58e12c2be8d84f91
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/16/2019
-ms.locfileid: "59614424"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65087343"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>ASP.NET Core의 작성자 태그 도우미
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/views/tag-helpers/authoring/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/authoring/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="get-started-with-tag-helpers"></a>태그 도우미 시작
 
@@ -108,7 +108,9 @@ FQN을 사용하여 뷰에 태그 도우미를 추가하려면 먼저 FQN(`Autho
 
 이 방법은 특성 컬렉션에 현재 존재하지 않는 한, 속성 "href" 특성에 대해 작동합니다. 또한 `output.Attributes.Add` 메서드를 사용하여 태그 특성 컬렉션 끝에 태그 도우미 특성을 추가할 수도 있습니다.
 
-1. *Views/Home/Contact.cshtml* 파일에서 태그를 다음 변경 내용으로 업데이트합니다. [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/ContactCopy.cshtml?highlight=15,16)]
+1. *Views/Home/Contact.cshtml* 파일에서 태그를 다음 변경 내용으로 업데이트합니다.
+
+   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/ContactCopy.cshtml?highlight=15,16)]
 
 1. 앱을 실행하고 올바른 링크를 생성하는지 확인합니다.
 

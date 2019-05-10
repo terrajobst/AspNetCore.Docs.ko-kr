@@ -8,11 +8,11 @@ ms.custom: mvc
 ms.date: 02/15/2019
 uid: mvc/compatibility-version
 ms.openlocfilehash: b360da105799a1dccb1902e167e50e78864b76a9
-ms.sourcegitcommit: 0945078a09c372f17e9b003758ed87e99c2449f4
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/21/2019
-ms.locfileid: "56647930"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65085896"
 ---
 # <a name="compatibility-version-for-aspnet-core-mvc"></a>ASP.NET Core MVC에 대한 호환성 버전
 

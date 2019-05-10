@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 10/14/2016
 uid: security/authorization/claims
 ms.openlocfilehash: 6b60ae5515819b017ab577f655ed91ee4d8ed0dd
-ms.sourcegitcommit: a1afd04758e663d7062a5bfa8a0d4dca38f42afc
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/20/2018
-ms.locfileid: "36275229"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65086147"
 ---
 # <a name="claims-based-authorization-in-aspnet-core"></a>ASP.NET Core의 클레임 기반 권한 부여
 

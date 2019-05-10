@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/06/2019
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 831f0c84f0ff062e9e24ccbf4ca81b7143c66e66
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
+ms.openlocfilehash: 3db2e08acc1552957f28c7015f9a75af4a57fdcd
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59468555"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65084857"
 ---
 # <a name="file-uploads-in-aspnet-core"></a>ASP.NET Core에서 파일 업로드
 
@@ -19,7 +19,7 @@ ms.locfileid: "59468555"
 
 ASP.NET MVC 작업은 소규모 파일에 대해서는 단순 모델 바인딩을, 대규모 파일에 대해서는 스트리밍을 사용하여 하나 이상의 파일 업로딩을 지원합니다.
 
-[GitHub에서 샘플 보기 또는 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/models/file-uploads/sample/FileUploadSample)
+[GitHub에서 샘플 보기 또는 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/sample/FileUploadSample)
 
 ## <a name="uploading-small-files-with-model-binding"></a>모델 바인딩을 사용하여 작은 파일 업로딩
 

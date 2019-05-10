@@ -6,17 +6,17 @@ ms.author: riande
 ms.date: 10/14/2016
 uid: fundamentals/request-features
 ms.openlocfilehash: d0f3ae521d1f314dd04cb581d9a921da4719273d
-ms.sourcegitcommit: a1afd04758e663d7062a5bfa8a0d4dca38f42afc
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/20/2018
-ms.locfileid: "36279495"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65087029"
 ---
 # <a name="request-features-in-aspnet-core"></a>ASP.NET Core의 요청 기능
 
 작성자: [Steve Smith](https://ardalis.com/)
 
-HTTP 요청 및 응답과 관련된 웹 서버 구현의 세부 사항은 인터페이스를 통해서 정의됩니다. 이러한 인터페이스는 서버 구현 및 미들웨어에서 응용 프로그램의 호스팅 파이프라인을 만들고 수정하는 데 사용됩니다.
+HTTP 요청 및 응답과 관련된 웹 서버 구현의 세부 사항은 인터페이스를 통해서 정의됩니다. 이러한 인터페이스는 서버 구현 및 미들웨어에서 애플리케이션의 호스팅 파이프라인을 만들고 수정하는 데 사용됩니다.
 
 ## <a name="feature-interfaces"></a>기능 인터페이스
 
@@ -49,7 +49,7 @@ ASP.NET Core는 `Microsoft.AspNetCore.Http.Features`에서 서버가 지원하�
 `ITlsTokenBindingFeature`는 TLS 토큰 바인딩 매개 변수 작업을 위한 메서드를 정의합니다.
 
 > [!NOTE]
-> `ISessionFeature`는 서버 기능이 아니지만 `SessionMiddleware`로 구현됩니다([응용 프로그램 상태 관리](app-state.md) 참조).
+> `ISessionFeature`는 서버 기능이 아니지만 `SessionMiddleware`로 구현됩니다([애플리케이션 상태 관리](app-state.md) 참조).
 
 ## <a name="feature-collections"></a>기능 컬렉션
 
@@ -59,9 +59,9 @@ ASP.NET Core는 `Microsoft.AspNetCore.Http.Features`에서 서버가 지원하�
 
 서버가 기능 컬렉션을 만드는 동안 미들웨어는 이 컬렉션에 추가할 수 있고 컬렉션의 기능을 사용할 수 있습니다. 예를 들어 `StaticFileMiddleware`는 `IHttpSendFileFeature` 기능에 액세스합니다.  이는 해당 기능이 존재하는 경우 실제 경로에서 요청된 고정 파일을 보내는 데 사용됩니다. 그렇지 않으면 느린 대체 메서드를 사용하여 파일을 보냅니다. 사용 가능한 경우 `IHttpSendFileFeature`는 운영 체제가 파일을 열고 네트워크 카드로 직접 커널 모드 복사를 수행할 수 있게 해줍니다.
 
-또한 미들웨어는 서버에 의해 설정된 기능 컬렉션에 추가할 수 있습니다. 기존 기능을 미들웨어로 대체할 수 있으므로, 미들웨어가 서버의 기능을 향상할 수 있습니다. 컬렉션에 추가된 기능은 다른 미들웨어에서 즉시 사용하거나 나중에 요청 파이프라인의 기본 응용 프로그램 자체에서 사용할 수 있습니다.
+또한 미들웨어는 서버에 의해 설정된 기능 컬렉션에 추가할 수 있습니다. 기존 기능을 미들웨어로 대체할 수 있으므로, 미들웨어가 서버의 기능을 향상할 수 있습니다. 컬렉션에 추가된 기능은 다른 미들웨어에서 즉시 사용하거나 나중에 요청 파이프라인의 기본 애플리케이션 자체에서 사용할 수 있습니다.
 
-사용자 지정 서버 구현 및 특정 미들웨어의 향상 기능을 결합하면 응용 프로그램에 필요한 정확한 기능 집합을 구성할 수 있습니다. 이를 통해 서버를 변경하지 않고 누락된 기능을 추가할 수 있으며, 최소한의 기능만 노출되도록 하여 공격 영역을 제한하고 성능을 개선할 수 있습니다.
+사용자 지정 서버 구현 및 특정 미들웨어의 향상 기능을 결합하면 애플리케이션에 필요한 정확한 기능 집합을 구성할 수 있습니다. 이를 통해 서버를 변경하지 않고 누락된 기능을 추가할 수 있으며, 최소한의 기능만 노출되도록 하여 공격 영역을 제한하고 성능을 개선할 수 있습니다.
 
 ## <a name="summary"></a>요약
 

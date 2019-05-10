@@ -5,14 +5,14 @@ description: ASP.NET Core SignalR 앱을 구성하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 02/07/2019
+ms.date: 04/15/2019
 uid: signalr/configuration
-ms.openlocfilehash: 2c1bb8d5e317813d1fdb8d474b7d7d892e6f67ec
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
+ms.openlocfilehash: 703357fd52805e01515e5bac3b1a364ce7fe00f0
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58264582"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65087645"
 ---
 # <a name="aspnet-core-signalr-configuration"></a>ASP.NET Core SignalR 구성
 
@@ -167,6 +167,31 @@ let connection = new signalR.HubConnectionBuilder()
     .configureLogging(signalR.LogLevel.Information)
     .build();
 ```
+
+::: moniker range=">= aspnetcore-3.0"
+
+대신에 `LogLevel` 값을 제공할 수도 있습니다는 `string` 로그 수준 이름을 나타내는 값입니다. 구성 환경에서 로깅 SignalR에 대 한 액세스 없는 경우에 유용 합니다 `LogLevel` 상수입니다.
+
+```javascript
+let connection = new signalR.HubConnectionBuilder()
+    .withUrl("/myhub")
+    .configureLogging("warn")
+    .build();
+```
+
+다음 표에서 사용 가능한 로그 수준은 나열합니다. 에 제공한 값 `configureLogging` 설정 합니다 **최소** 로그 기록 될 수준입니다. 이 수준에서 기록 된 메시지 **수준을 테이블의 뒤에 나열 된 또는**에 기록 됩니다.
+
+| string | LogLevel |
+| - | - |
+| `"trace"` | `LogLevel.Trace` |
+| `"debug"` | `LogLevel.Debug` |
+| `"info"` **or** `"information"` | `LogLevel.Information` |
+| `"warn"` **or** `"warning"` | `LogLevel.Warning` |
+| `"error"` | `LogLevel.Error` |
+| `"critical"` | `LogLevel.Critical` |
+| `"none"` | `LogLevel.None` |
+
+::: moniker-end
 
 > [!NOTE]
 > 로깅을 완전히 비활성화시키려면 `configureLogging` 메서드에서 `signalR.LogLevel.None`을 지정하십시오.

@@ -6,11 +6,11 @@ ms.author: tdykstra
 ms.date: 12/07/2016
 uid: migration/http-modules
 ms.openlocfilehash: 516230a66ee3edba986c91d79684256aa8e4c994
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58209848"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65087014"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>HTTP 처리기 및 모듈을 ASP.NET Core 미들웨어로 마이그레이션
 

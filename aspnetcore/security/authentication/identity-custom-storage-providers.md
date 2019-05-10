@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: ccd56d0c15639e1ad29094e947f8055702ee2264
-ms.sourcegitcommit: 2c7ffe349eabdccf2ed748dd303ffd0ba6e1cfe3
+ms.openlocfilehash: 5a0797fcfe93d49b941b61688ae8f58a1b5d7614
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/26/2019
-ms.locfileid: "56833672"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65086343"
 ---
 # <a name="custom-storage-providers-for-aspnet-core-identity"></a>ASP.NET Core Id에 대 한 사용자 지정 저장소 공급자
 
@@ -19,11 +19,11 @@ ms.locfileid: "56833672"
 
 ASP.NET Core Id는 확장 가능한 시스템 사용자 지정 저장소 공급자를 만들고 앱에 연결할 수 있습니다. 이 항목에서는 ASP.NET Core Id에 대 한 사용자 지정된 저장소 공급자를 만드는 방법을 설명 합니다. 사용자 고유의 저장소 공급자를 만들기 위한 중요 한 개념을 다루지만 단계별 연습은 되지 않습니다.
 
-[GitHub에서 샘플 보기 또는 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/security/authentication/identity/sample)
+[GitHub에서 샘플 보기 또는 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample)
 
 ## <a name="introduction"></a>소개
 
-ASP.NET Core Id 시스템을 기본적으로 Entity Framework Core를 사용 하 여 SQL Server 데이터베이스에 사용자 정보를 저장 합니다. 대부분의 앱에 대 한이 방법은 잘 작동합니다. 그러나 다음 다른 지 속성 메커니즘 또는 데이터 스키마를 사용 하는 것이 좋습니다. 예를 들면,
+ASP.NET Core Id 시스템을 기본적으로 Entity Framework Core를 사용 하 여 SQL Server 데이터베이스에 사용자 정보를 저장 합니다. 대부분의 앱에 대 한이 방법은 잘 작동합니다. 그러나 다음 다른 지 속성 메커니즘 또는 데이터 스키마를 사용 하는 것이 좋습니다. 예를 들어:
 
 * 사용할 [Azure Table Storage](/azure/storage/) 또는 다른 데이터 저장소입니다.
 * 데이터베이스 테이블 구조가 서로 합니다. 
@@ -139,7 +139,7 @@ ASP.NET Core Id 관리자 및 저장소를 호출 하는 클래스로 구성 됩
 * [IUserTwoFactorStore](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactorstore-1)
 * [IUserLockoutStore](/dotnet/api/microsoft.aspnetcore.identity.iuserlockoutstore-1)
 
-선택적 인터페이스에서 상속 `IUserStore<TUser>`합니다. 에 저장 하는 부분적으로 구현 된 샘플 사용자를 볼 수 있습니다 합니다 [샘플 앱](https://github.com/aspnet/Docs/blob/master/aspnetcore/security/authentication/identity-custom-storage-providers/sample/CustomIdentityProviderSample/CustomProvider/CustomUserStore.cs)합니다.
+선택적 인터페이스에서 상속 `IUserStore<TUser>`합니다. 에 저장 하는 부분적으로 구현 된 샘플 사용자를 볼 수 있습니다 합니다 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/security/authentication/identity-custom-storage-providers/sample/CustomIdentityProviderSample/CustomProvider/CustomUserStore.cs)합니다.
 
 내는 `UserStore` 클래스 작업을 수행 하기 위해 만든 데이터 액세스 클래스를 사용 합니다. 이러한 종속성 주입을 사용 하 여 전달 됩니다. Dapper 구현에서는 SQL Server의 예를 들어, 합니다 `UserStore` 클래스에는 `CreateAsync` 의 인스턴스를 사용 하는 메서드 `DapperUsersTable` 새 레코드를 삽입:
 

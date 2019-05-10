@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/07/2019
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: da6ddf1f0efd164a58f017ff55ce216bbefa7cc6
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
+ms.openlocfilehash: f4be1559c3b4c17cd09f1360d954c837d84d5058
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59068325"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65085606"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>ASP.NET Core에서 종속성 주입
 
@@ -22,7 +22,7 @@ ASP.NET Core는 클래스와 해당 종속성 간의 [IoC(Inversion of Control)]
 
 MVC 컨트롤러 내의 종속성 주입에 대한 자세한 내용은 <xref:mvc/controllers/dependency-injection>을 참조하세요.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="overview-of-dependency-injection"></a>종속성 주입 개요
 
@@ -72,7 +72,7 @@ public class IndexModel : PageModel
 * 서비스 컨테이너에 종속성 등록. ASP.NET Core는 서비스 컨테이너 [IServiceProvider](/dotnet/api/system.iserviceprovider)를 기본 제공합니다. 서비스는 앱의 `Startup.ConfigureServices` 메서드에 등록됩니다.
 * 서비스를 사용되는 클래스의 생성자에 주입. 프레임워크는 종속성의 인스턴스를 만들고 더 이상 필요하지 않으면 삭제하는 작업을 담당합니다.
 
-[샘플 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples)에서 `IMyDependency` 인터페이스는 서비스가 앱에 제공하는 메서드를 정의합니다.
+[샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples)에서 `IMyDependency` 인터페이스는 서비스가 앱에 제공하는 메서드를 정의합니다.
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Interfaces/IMyDependency.cs?name=snippet1)]
 

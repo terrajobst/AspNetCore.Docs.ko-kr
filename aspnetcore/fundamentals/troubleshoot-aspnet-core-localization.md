@@ -2,14 +2,15 @@
 title: ASP.NET Core 지역화 문제 해결
 author: hishamco
 description: ASP.NET Core 앱에서 지역화 관련 문제를 진단하는 방법을 알아봅니다.
+ms.author: riande
 ms.date: 01/24/2019
 uid: fundamentals/troubleshoot-aspnet-core-localization
-ms.openlocfilehash: 73405f539c89d79096e7b536407cd9730679d478
-ms.sourcegitcommit: 687ffb15ebe65379f75c84739ea851d5a0d788b7
+ms.openlocfilehash: c76732c1a0389818f8f9efae8fe384ca0f9ca308
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/26/2019
-ms.locfileid: "58489000"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65087373"
 ---
 # <a name="troubleshoot-aspnet-core-localization"></a>ASP.NET Core 지역화 문제 해결
 

@@ -5,12 +5,12 @@ description: 이 자습서에서는 ASP.NET Core MVC 앱에서 데이터 모델 
 ms.author: riande
 ms.date: 6/31/2017
 uid: data/ef-rp/migrations
-ms.openlocfilehash: 1803c6d3956121e4e7091f4f951917425e87c335
-ms.sourcegitcommit: 7d6019f762fc5b8cbedcd69801e8310f51a17c18
+ms.openlocfilehash: 5b8228130378059aebe21c9c3ea1eb72e4c6aad9
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/25/2019
-ms.locfileid: "58419474"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65086164"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---migrations---4-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 마이그레이션 - 4/8
 
@@ -25,7 +25,7 @@ ms.locfileid: "58419474"
 이 자습서에서는 데이터 모델 변경 관리를 위한 EF Core 마이그레이션 기능이 사용됩니다.
 
 해결할 수 없는 문제가 발생한 경우 [완성된 앱](
-https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)을 다운로드합니다.
+https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)을 다운로드합니다.
 
 새 앱이 개발되면 데이터 모델이 자주 변경됩니다. 모델이 변경될 때마다 모델이 데이터베이스와 동기화 해제됩니다. 이 자습서는 존재하지 않는 경우 데이터베이스를 만들도록 Entity Framework를 구성하여 시작되었습니다. 데이터 모델이 변경될 때마다 다음이 수행됩니다.
 
@@ -161,7 +161,7 @@ EF Core는 `__MigrationsHistory` 테이블을 사용하여 마이그레이션을
 ## <a name="troubleshooting"></a>문제 해결
 
 [완료된 앱](
-https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/StageSnapShots/cu-part4-migrations)을 다운로드합니다.
+https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/StageSnapShots/cu-part4-migrations)을 다운로드합니다.
 
 앱에서는 다음과 같은 예외가 생성됩니다.
 
