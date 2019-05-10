@@ -7,43 +7,40 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/17/2019
 uid: signalr/dotnet-client
-ms.openlocfilehash: 640d75157e42ffa6d78235c5be03e4846e8dcde9
-ms.sourcegitcommit: eb784a68219b4829d8e50c8a334c38d4b94e0cfa
+ms.openlocfilehash: b59af0f9c84a008f778709970dba2273abdfcd4f
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/22/2019
-ms.locfileid: "59982948"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65087712"
 ---
-# <a name="aspnet-core-signalr-net-client"></a><span data-ttu-id="73558-103">ASP.NET Core SignalR .NET 클라이언트</span><span class="sxs-lookup"><span data-stu-id="73558-103">ASP.NET Core SignalR .NET Client</span></span>
+# <a name="aspnet-core-signalr-net-client"></a><span data-ttu-id="829d8-103">ASP.NET Core SignalR .NET 클라이언트</span><span class="sxs-lookup"><span data-stu-id="829d8-103">ASP.NET Core SignalR .NET Client</span></span>
 
-<span data-ttu-id="73558-104">ASP.NET Core SignalR .NET 클라이언트 라이브러리를 사용하면 .NET 앱에서 SignalR 허브와 통신할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73558-104">The ASP.NET Core SignalR .NET client library lets you communicate with SignalR hubs from .NET apps.</span></span>
+<span data-ttu-id="829d8-104">ASP.NET Core SignalR .NET 클라이언트 라이브러리를 사용하면 .NET 앱에서 SignalR 허브와 통신할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-104">The ASP.NET Core SignalR .NET client library lets you communicate with SignalR hubs from .NET apps.</span></span>
 
-> [!NOTE]
-> <span data-ttu-id="73558-105">Xamarin에는 Visual Studio 버전에 대한 특별한 요구 사항이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73558-105">Xamarin has special requirements for Visual Studio version.</span></span> <span data-ttu-id="73558-106">자세한 내용은 [Xamarin과 SignalR 클라이언트 2.1.1](https://github.com/aspnet/Announcements/issues/305)을 참고하시기 바랍니다.</span><span class="sxs-lookup"><span data-stu-id="73558-106">For more information, see [SignalR Client 2.1.1 in Xamarin](https://github.com/aspnet/Announcements/issues/305).</span></span>
+<span data-ttu-id="829d8-105">[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/dotnet-client/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="829d8-105">[View or download sample code](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/dotnet-client/sample) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-<span data-ttu-id="73558-107">[코드 샘플 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/signalr/dotnet-client/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="73558-107">[View or download sample code](https://github.com/aspnet/Docs/tree/master/aspnetcore/signalr/dotnet-client/sample) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="829d8-106">이 문서의 코드 샘플은 ASP.NET Core SignalR .NET 클라이언트를 사용하는 WPF 앱입니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-106">The code sample in this article is a WPF app that uses the ASP.NET Core SignalR .NET client.</span></span>
 
-<span data-ttu-id="73558-108">이 문서의 코드 샘플은 ASP.NET Core SignalR .NET 클라이언트를 사용하는 WPF 앱입니다.</span><span class="sxs-lookup"><span data-stu-id="73558-108">The code sample in this article is a WPF app that uses the ASP.NET Core SignalR .NET client.</span></span>
+## <a name="install-the-signalr-net-client-package"></a><span data-ttu-id="829d8-107">SignalR .NET 클라이언트 패키지 설치하기</span><span class="sxs-lookup"><span data-stu-id="829d8-107">Install the SignalR .NET client package</span></span>
 
-## <a name="install-the-signalr-net-client-package"></a><span data-ttu-id="73558-109">SignalR .NET 클라이언트 패키지 설치하기</span><span class="sxs-lookup"><span data-stu-id="73558-109">Install the SignalR .NET client package</span></span>
-
-<span data-ttu-id="73558-110">.NET 클라이언트에서 SignalR 허브에 연결하려면 `Microsoft.AspNetCore.SignalR.Client` 패키지가 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="73558-110">The `Microsoft.AspNetCore.SignalR.Client` package is needed for .NET clients to connect to SignalR hubs.</span></span> <span data-ttu-id="73558-111">클라이언트 라이브러리를 설치하려면 **패키지 관리자 콘솔** 창에서 다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="73558-111">To install the client library, run the following command in the **Package Manager Console** window:</span></span>
+<span data-ttu-id="829d8-108">.NET 클라이언트에서 SignalR 허브에 연결하려면 `Microsoft.AspNetCore.SignalR.Client` 패키지가 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-108">The `Microsoft.AspNetCore.SignalR.Client` package is needed for .NET clients to connect to SignalR hubs.</span></span> <span data-ttu-id="829d8-109">클라이언트 라이브러리를 설치하려면 **패키지 관리자 콘솔** 창에서 다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-109">To install the client library, run the following command in the **Package Manager Console** window:</span></span>
 
 ```powershell
 Install-Package Microsoft.AspNetCore.SignalR.Client
 ```
 
-## <a name="connect-to-a-hub"></a><span data-ttu-id="73558-112">허브에 연결하기</span><span class="sxs-lookup"><span data-stu-id="73558-112">Connect to a hub</span></span>
+## <a name="connect-to-a-hub"></a><span data-ttu-id="829d8-110">허브에 연결하기</span><span class="sxs-lookup"><span data-stu-id="829d8-110">Connect to a hub</span></span>
 
-<span data-ttu-id="73558-113">연결을 설정하려면 `HubConnectionBuilder`를 생성하고 `Build`를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="73558-113">To establish a connection, create a `HubConnectionBuilder` and call `Build`.</span></span> <span data-ttu-id="73558-114">연결을 만드는 동안 허브 URL, 프로토콜, 전송 형태, 로그 수준, 헤더 및 기타 옵션을 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73558-114">The hub URL, protocol, transport type, log level, headers, and other options can be configured while building a connection.</span></span> <span data-ttu-id="73558-115">`HubConnectionBuilder` 메서드들 중 원하는 메서드를 `Build`에 삽입하여 필요한 모든 옵션을 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="73558-115">Configure any required options by inserting any of the `HubConnectionBuilder` methods into `Build`.</span></span> <span data-ttu-id="73558-116">`StartAsync`를 사용하여 연결을 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="73558-116">Start the connection with `StartAsync`.</span></span>
+<span data-ttu-id="829d8-111">연결을 설정하려면 `HubConnectionBuilder`를 생성하고 `Build`를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-111">To establish a connection, create a `HubConnectionBuilder` and call `Build`.</span></span> <span data-ttu-id="829d8-112">연결을 만드는 동안 허브 URL, 프로토콜, 전송 형태, 로그 수준, 헤더 및 기타 옵션을 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-112">The hub URL, protocol, transport type, log level, headers, and other options can be configured while building a connection.</span></span> <span data-ttu-id="829d8-113">`HubConnectionBuilder` 메서드들 중 원하는 메서드를 `Build`에 삽입하여 필요한 모든 옵션을 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-113">Configure any required options by inserting any of the `HubConnectionBuilder` methods into `Build`.</span></span> <span data-ttu-id="829d8-114">`StartAsync`를 사용하여 연결을 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-114">Start the connection with `StartAsync`.</span></span>
 
 [!code-csharp[Build hub connection](dotnet-client/sample/signalrchatclient/MainWindow.xaml.cs?name=snippet_MainWindowClass&highlight=15-17,39)]
 
-## <a name="handle-lost-connection"></a><span data-ttu-id="73558-117">연결 해제 처리하기</span><span class="sxs-lookup"><span data-stu-id="73558-117">Handle lost connection</span></span>
+## <a name="handle-lost-connection"></a><span data-ttu-id="829d8-115">연결 해제 처리하기</span><span class="sxs-lookup"><span data-stu-id="829d8-115">Handle lost connection</span></span>
 
-<span data-ttu-id="73558-118"><xref:Microsoft.AspNetCore.SignalR.Client.HubConnection.Closed> 이벤트를 이용해서 끊긴 연결에 대응합니다.</span><span class="sxs-lookup"><span data-stu-id="73558-118">Use the <xref:Microsoft.AspNetCore.SignalR.Client.HubConnection.Closed> event to respond to a lost connection.</span></span> <span data-ttu-id="73558-119">예를 들어 자동으로 재연결할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73558-119">For example, you might want to automate reconnection.</span></span>
+<span data-ttu-id="829d8-116"><xref:Microsoft.AspNetCore.SignalR.Client.HubConnection.Closed> 이벤트를 이용해서 끊긴 연결에 대응합니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-116">Use the <xref:Microsoft.AspNetCore.SignalR.Client.HubConnection.Closed> event to respond to a lost connection.</span></span> <span data-ttu-id="829d8-117">예를 들어 자동으로 재연결할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-117">For example, you might want to automate reconnection.</span></span>
 
-<span data-ttu-id="73558-120">`Closed` 이벤트에는 `async void`를 사용하지 않고 비동기 코드를 실행할 수 있는 `Task`를 반환하는 대리자가 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="73558-120">The `Closed` event requires a delegate that returns a `Task`, which allows async code to run without using `async void`.</span></span> <span data-ttu-id="73558-121">동기적으로 실행되는 `Closed` 이벤트 처리기에서 대리자의 시그니처를 만족시키려면 `Task.CompletedTask`를 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="73558-121">To satisfy the delegate signature in a `Closed` event handler that runs synchronously, return `Task.CompletedTask`:</span></span>
+<span data-ttu-id="829d8-118">`Closed` 이벤트에는 `async void`를 사용하지 않고 비동기 코드를 실행할 수 있는 `Task`를 반환하는 대리자가 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-118">The `Closed` event requires a delegate that returns a `Task`, which allows async code to run without using `async void`.</span></span> <span data-ttu-id="829d8-119">동기적으로 실행되는 `Closed` 이벤트 처리기에서 대리자의 시그니처를 만족시키려면 `Task.CompletedTask`를 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-119">To satisfy the delegate signature in a `Closed` event handler that runs synchronously, return `Task.CompletedTask`:</span></span>
 
 ```csharp
 connection.Closed += (error) => {
@@ -52,44 +49,44 @@ connection.Closed += (error) => {
 };
 ```
 
-<span data-ttu-id="73558-122">비동기를 지원하는 가장 큰 이유는 연결을 다시 시작할 수도 있기 때문입니다.</span><span class="sxs-lookup"><span data-stu-id="73558-122">The main reason for the async support is so you can restart the connection.</span></span> <span data-ttu-id="73558-123">연결 시작은 비동기 작업입니다.</span><span class="sxs-lookup"><span data-stu-id="73558-123">Starting a connection is an async action.</span></span>
+<span data-ttu-id="829d8-120">비동기를 지원하는 가장 큰 이유는 연결을 다시 시작할 수도 있기 때문입니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-120">The main reason for the async support is so you can restart the connection.</span></span> <span data-ttu-id="829d8-121">연결 시작은 비동기 작업입니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-121">Starting a connection is an async action.</span></span>
 
-<span data-ttu-id="73558-124">연결을 재시작하는 `Closed` 처리기에서는 다음 예제에서 볼 수 있는 것처럼 서버의 과부하를 방지할 수 있도록 임의의 지연 시간 동안 대기하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="73558-124">In a `Closed` handler that restarts the connection, consider waiting for some random delay to prevent overloading the server, as shown in the following example:</span></span>
+<span data-ttu-id="829d8-122">연결을 재시작하는 `Closed` 처리기에서는 다음 예제에서 볼 수 있는 것처럼 서버의 과부하를 방지할 수 있도록 임의의 지연 시간 동안 대기하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-122">In a `Closed` handler that restarts the connection, consider waiting for some random delay to prevent overloading the server, as shown in the following example:</span></span>
 
 [!code-csharp[Use Closed event handler to automate reconnection](dotnet-client/sample/signalrchatclient/MainWindow.xaml.cs?name=snippet_ClosedRestart)]
 
-## <a name="call-hub-methods-from-client"></a><span data-ttu-id="73558-125">클라이언트에서 허브 메서드 호출하기</span><span class="sxs-lookup"><span data-stu-id="73558-125">Call hub methods from client</span></span>
+## <a name="call-hub-methods-from-client"></a><span data-ttu-id="829d8-123">클라이언트에서 허브 메서드 호출하기</span><span class="sxs-lookup"><span data-stu-id="829d8-123">Call hub methods from client</span></span>
 
-<span data-ttu-id="73558-126">`InvokeAsync`는 허브 메서드를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="73558-126">`InvokeAsync` calls methods on the hub.</span></span> <span data-ttu-id="73558-127">허브 메서드의 이름과 허브 메서드에 정의된 모든 인수를 `InvokeAsync`에 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="73558-127">Pass the hub method name and any arguments defined in the hub method to `InvokeAsync`.</span></span> <span data-ttu-id="73558-128">SignalR은 비동기로 동작하므로 호출 시 `async`와 `await`를 사용해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="73558-128">SignalR is asynchronous, so use `async` and `await` when making the calls.</span></span>
+<span data-ttu-id="829d8-124">`InvokeAsync`는 허브 메서드를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-124">`InvokeAsync` calls methods on the hub.</span></span> <span data-ttu-id="829d8-125">허브 메서드의 이름과 허브 메서드에 정의된 모든 인수를 `InvokeAsync`에 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-125">Pass the hub method name and any arguments defined in the hub method to `InvokeAsync`.</span></span> <span data-ttu-id="829d8-126">SignalR은 비동기로 동작하므로 호출 시 `async`와 `await`를 사용해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-126">SignalR is asynchronous, so use `async` and `await` when making the calls.</span></span>
 
 [!code-csharp[InvokeAsync method](dotnet-client/sample/signalrchatclient/MainWindow.xaml.cs?name=snippet_InvokeAsync)]
 
-<span data-ttu-id="73558-129">합니다 `InvokeAsync` 메서드가 반환 되는 `Task` 서버 메서드가 반환 될 때 완료 되는 합니다.</span><span class="sxs-lookup"><span data-stu-id="73558-129">The `InvokeAsync` method returns a `Task` which completes when the server method returns.</span></span> <span data-ttu-id="73558-130">반환 값에 있는 경우 제공 됩니다 결과로 `Task`합니다.</span><span class="sxs-lookup"><span data-stu-id="73558-130">The return value, if any, is provided as the result of the `Task`.</span></span> <span data-ttu-id="73558-131">서버에서 메서드에 의해 throw 된 예외 생성 오류가 발생 한 `Task`합니다.</span><span class="sxs-lookup"><span data-stu-id="73558-131">Any exceptions thrown by the method on the server produce a faulted `Task`.</span></span> <span data-ttu-id="73558-132">사용 하 여 `await` 서버 메서드가 완료 될 때까지 기다리는 구문 및 `try...catch` 구문 오류를 처리 합니다.</span><span class="sxs-lookup"><span data-stu-id="73558-132">Use `await` syntax to wait for the server method to complete and `try...catch` syntax to handle errors.</span></span>
+<span data-ttu-id="829d8-127">합니다 `InvokeAsync` 메서드가 반환 되는 `Task` 서버 메서드가 반환 될 때 완료 되는 합니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-127">The `InvokeAsync` method returns a `Task` which completes when the server method returns.</span></span> <span data-ttu-id="829d8-128">반환 값에 있는 경우 제공 됩니다 결과로 `Task`합니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-128">The return value, if any, is provided as the result of the `Task`.</span></span> <span data-ttu-id="829d8-129">서버에서 메서드에 의해 throw 된 예외 생성 오류가 발생 한 `Task`합니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-129">Any exceptions thrown by the method on the server produce a faulted `Task`.</span></span> <span data-ttu-id="829d8-130">사용 하 여 `await` 서버 메서드가 완료 될 때까지 기다리는 구문 및 `try...catch` 구문 오류를 처리 합니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-130">Use `await` syntax to wait for the server method to complete and `try...catch` syntax to handle errors.</span></span>
 
-<span data-ttu-id="73558-133">`SendAsync` 메서드가 반환 되는 `Task` 메시지 서버에 전송 되었을 때 완료 되는.</span><span class="sxs-lookup"><span data-stu-id="73558-133">The `SendAsync` method returns a `Task` which completes when the message has been sent to the server.</span></span> <span data-ttu-id="73558-134">반환 값이 제공 되지 아니므로 `Task` 서버 메서드가 완료 될 때까지 대기 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="73558-134">No return value is provided since this `Task` doesn't wait until the server method completes.</span></span> <span data-ttu-id="73558-135">메시지를 전송 하는 동안 클라이언트에서 throw 된 예외 생성 오류가 발생 한 `Task`합니다.</span><span class="sxs-lookup"><span data-stu-id="73558-135">Any exceptions thrown on the client while sending the message produce a faulted `Task`.</span></span> <span data-ttu-id="73558-136">사용 하 여 `await` 고 `try...catch` 처리 하는 구문 오류를 전송 합니다.</span><span class="sxs-lookup"><span data-stu-id="73558-136">Use `await` and `try...catch` syntax to handle send errors.</span></span>
+<span data-ttu-id="829d8-131">`SendAsync` 메서드가 반환 되는 `Task` 메시지 서버에 전송 되었을 때 완료 되는.</span><span class="sxs-lookup"><span data-stu-id="829d8-131">The `SendAsync` method returns a `Task` which completes when the message has been sent to the server.</span></span> <span data-ttu-id="829d8-132">반환 값이 제공 되지 아니므로 `Task` 서버 메서드가 완료 될 때까지 대기 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-132">No return value is provided since this `Task` doesn't wait until the server method completes.</span></span> <span data-ttu-id="829d8-133">메시지를 전송 하는 동안 클라이언트에서 throw 된 예외 생성 오류가 발생 한 `Task`합니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-133">Any exceptions thrown on the client while sending the message produce a faulted `Task`.</span></span> <span data-ttu-id="829d8-134">사용 하 여 `await` 고 `try...catch` 처리 하는 구문 오류를 전송 합니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-134">Use `await` and `try...catch` syntax to handle send errors.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="73558-137">Azure SignalR Service를 사용 하는 경우 *서버 리스 모드*, 클라이언트에서 허브 메서드를 호출할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="73558-137">If you're using Azure SignalR Service in *Serverless mode*, you cannot call hub methods from a client.</span></span> <span data-ttu-id="73558-138">자세한 내용은 참조는 [SignalR Service 설명서](/azure/azure-signalr/signalr-concept-serverless-development-config)합니다.</span><span class="sxs-lookup"><span data-stu-id="73558-138">For more information, see the [SignalR Service documentation](/azure/azure-signalr/signalr-concept-serverless-development-config).</span></span>
+> <span data-ttu-id="829d8-135">Azure SignalR Service를 사용 하는 경우 *서버 리스 모드*, 클라이언트에서 허브 메서드를 호출할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-135">If you're using Azure SignalR Service in *Serverless mode*, you cannot call hub methods from a client.</span></span> <span data-ttu-id="829d8-136">자세한 내용은 참조는 [SignalR Service 설명서](/azure/azure-signalr/signalr-concept-serverless-development-config)합니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-136">For more information, see the [SignalR Service documentation](/azure/azure-signalr/signalr-concept-serverless-development-config).</span></span>
 
-## <a name="call-client-methods-from-hub"></a><span data-ttu-id="73558-139">허브에서 클라이언트 메서드 호출하기</span><span class="sxs-lookup"><span data-stu-id="73558-139">Call client methods from hub</span></span>
+## <a name="call-client-methods-from-hub"></a><span data-ttu-id="829d8-137">허브에서 클라이언트 메서드 호출하기</span><span class="sxs-lookup"><span data-stu-id="829d8-137">Call client methods from hub</span></span>
 
-<span data-ttu-id="73558-140">연결을 만든 다음, 그러나 연결을 시작하기 전에 `connection.On`을 이용해서 허브가 호출할 메서드를 정의합니다.</span><span class="sxs-lookup"><span data-stu-id="73558-140">Define methods the hub calls using `connection.On` after building, but before starting the connection.</span></span>
+<span data-ttu-id="829d8-138">연결을 만든 다음, 그러나 연결을 시작하기 전에 `connection.On`을 이용해서 허브가 호출할 메서드를 정의합니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-138">Define methods the hub calls using `connection.On` after building, but before starting the connection.</span></span>
 
 [!code-csharp[Define client methods](dotnet-client/sample/signalrchatclient/MainWindow.xaml.cs?name=snippet_ConnectionOn)]
 
-<span data-ttu-id="73558-141">위의 `connection.On` 내부의 코드는 서버 쪽 코드에서 `SendAsync` 메서드를 사용하여 이 코드를 호출할 때 실행됩니다.</span><span class="sxs-lookup"><span data-stu-id="73558-141">The preceding code in `connection.On` runs when server-side code calls it using the `SendAsync` method.</span></span>
+<span data-ttu-id="829d8-139">위의 `connection.On` 내부의 코드는 서버 쪽 코드에서 `SendAsync` 메서드를 사용하여 이 코드를 호출할 때 실행됩니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-139">The preceding code in `connection.On` runs when server-side code calls it using the `SendAsync` method.</span></span>
 
 [!code-csharp[Call client method](dotnet-client/sample/signalrchat/hubs/chathub.cs?name=snippet_SendMessage)]
 
-## <a name="error-handling-and-logging"></a><span data-ttu-id="73558-142">오류 처리 및 로깅</span><span class="sxs-lookup"><span data-stu-id="73558-142">Error handling and logging</span></span>
+## <a name="error-handling-and-logging"></a><span data-ttu-id="829d8-140">오류 처리 및 로깅</span><span class="sxs-lookup"><span data-stu-id="829d8-140">Error handling and logging</span></span>
 
-<span data-ttu-id="73558-143">try-catch 문을 이용해서 오류를 처리합니다.</span><span class="sxs-lookup"><span data-stu-id="73558-143">Handle errors with a try-catch statement.</span></span> <span data-ttu-id="73558-144">`Exception` 개체를 검사해서 오류가 발생한 후 수행할 적절한 동작을 결정합니다.</span><span class="sxs-lookup"><span data-stu-id="73558-144">Inspect the `Exception` object to determine the proper action to take after an error occurs.</span></span>
+<span data-ttu-id="829d8-141">try-catch 문을 이용해서 오류를 처리합니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-141">Handle errors with a try-catch statement.</span></span> <span data-ttu-id="829d8-142">`Exception` 개체를 검사해서 오류가 발생한 후 수행할 적절한 동작을 결정합니다.</span><span class="sxs-lookup"><span data-stu-id="829d8-142">Inspect the `Exception` object to determine the proper action to take after an error occurs.</span></span>
 
 [!code-csharp[Logging](dotnet-client/sample/signalrchatclient/MainWindow.xaml.cs?name=snippet_ErrorHandling)]
 
-## <a name="additional-resources"></a><span data-ttu-id="73558-145">추가 자료</span><span class="sxs-lookup"><span data-stu-id="73558-145">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="829d8-143">추가 자료</span><span class="sxs-lookup"><span data-stu-id="829d8-143">Additional resources</span></span>
 
-* [<span data-ttu-id="73558-146">허브</span><span class="sxs-lookup"><span data-stu-id="73558-146">Hubs</span></span>](xref:signalr/hubs)
-* [<span data-ttu-id="73558-147">JavaScript 클라이언트</span><span class="sxs-lookup"><span data-stu-id="73558-147">JavaScript client</span></span>](xref:signalr/javascript-client)
-* [<span data-ttu-id="73558-148">Azure에 게시하기</span><span class="sxs-lookup"><span data-stu-id="73558-148">Publish to Azure</span></span>](xref:signalr/publish-to-azure-web-app)
-* [<span data-ttu-id="73558-149">Azure SignalR Service 서버 리스 설명서</span><span class="sxs-lookup"><span data-stu-id="73558-149">Azure SignalR Service serverless documentation</span></span>](/azure/azure-signalr/signalr-concept-serverless-development-config)
+* [<span data-ttu-id="829d8-144">허브</span><span class="sxs-lookup"><span data-stu-id="829d8-144">Hubs</span></span>](xref:signalr/hubs)
+* [<span data-ttu-id="829d8-145">JavaScript 클라이언트</span><span class="sxs-lookup"><span data-stu-id="829d8-145">JavaScript client</span></span>](xref:signalr/javascript-client)
+* [<span data-ttu-id="829d8-146">Azure에 게시하기</span><span class="sxs-lookup"><span data-stu-id="829d8-146">Publish to Azure</span></span>](xref:signalr/publish-to-azure-web-app)
+* [<span data-ttu-id="829d8-147">Azure SignalR Service 서버 리스 설명서</span><span class="sxs-lookup"><span data-stu-id="829d8-147">Azure SignalR Service serverless documentation</span></span>](/azure/azure-signalr/signalr-concept-serverless-development-config)
