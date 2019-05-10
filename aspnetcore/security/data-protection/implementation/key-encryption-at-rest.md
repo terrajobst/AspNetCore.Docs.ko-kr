@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 07/16/2018
 uid: security/data-protection/implementation/key-encryption-at-rest
 ms.openlocfilehash: 52c3137dbe467096364b42430c92aecc7c15e313
-ms.sourcegitcommit: 8f8924ce4eb9effeaf489f177fb01b66867da16f
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/24/2018
-ms.locfileid: "39219292"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64892310"
 ---
 # <a name="key-encryption-at-rest-in-aspnet-core"></a>ASP.NET Core에서 미사용 데이터 암호화 키
 
@@ -34,7 +34,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-자세한 내용은 [ASP.NET Core 데이터 보호 구성: ProtectKeysWithAzureKeyVault](xref:security/data-protection/configuration/overview#protectkeyswithazurekeyvault)합니다.
+자세한 내용은 참조 하세요. [ASP.NET Core 데이터 보호를 구성 합니다. ProtectKeysWithAzureKeyVault](xref:security/data-protection/configuration/overview#protectkeyswithazurekeyvault).
 
 ::: moniker-end
 
@@ -66,7 +66,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker range=">= aspnetcore-2.0"
 
-## <a name="x509-certificate"></a>X.509 인증서
+## <a name="x509-certificate"></a>X.509 certificate(X.509 인증서)
 
 앱은 여러 컴퓨터 간에 분산 됩니다, 경우에 컴퓨터 간에 공유 하는 X.509 인증서를 배포 하 고 호스팅된 앱이 인증서를 사용 하 여 미사용 키 암호화를 위한 구성 편리할 수 있습니다.
 
@@ -82,7 +82,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker-end
 
-## <a name="windows-dpapi-ng"></a>Windows DPAPI NG
+## <a name="windows-dpapi-ng"></a>Windows DPAPI-NG
 
 **이 메커니즘은 Windows 8/windows Server 2012 이상 에서만 사용할 수 있습니다.**
 

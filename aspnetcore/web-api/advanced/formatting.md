@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 10/14/2016
 uid: web-api/advanced/formatting
-ms.openlocfilehash: b0fce0632fd2d885cb8e9a056923ec365d2f327d
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: 04f5b3c544cf3fc47c8321c8233535400fcf55f4
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58209988"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64890768"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>ASP.NET Core Web API에서 응답 데이터 서식 지정
 
@@ -19,7 +19,7 @@ ms.locfileid: "58209988"
 
 ASP.NET Core MVC에는 지정된 형식을 사용하거나 클라이언트 사양에 대한 응답으로 응답 데이터의 서식을 지정하기 위한 기본적인 지원 기능이 있습니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/web-api/advanced/formatting/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/formatting/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="format-specific-action-results"></a>형식별 작업 결과
 

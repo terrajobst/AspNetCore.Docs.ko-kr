@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 10/14/2016
 uid: security/data-protection/configuration/default-settings
 ms.openlocfilehash: 2f022a4c7519485fe629ce47c27d214c8c27d5bc
-ms.sourcegitcommit: af8a6eb5375ef547a52ffae22465e265837aa82b
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/12/2019
-ms.locfileid: "56159213"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64897280"
 ---
 # <a name="data-protection-key-management-and-lifetime-in-aspnet-core"></a>ASP.NET Core의 데이터 보호 키 관리 및 수명
 
@@ -27,12 +27,12 @@ ms.locfileid: "56159213"
 
 1. 사용자 프로필이 사용 가능한 경우에는 *%LOCALAPPDATA%\ASP.NET\DataProtection-Keys* 폴더에 키가 저장됩니다. 운영 체제가 Windows DPAPI를 사용 하 여 미사용 키 암호화 됩니다.
 
-   응용 프로그램 풀 [setProfileEnvironment 특성](/iis/configuration/system.applicationhost/applicationpools/add/processmodel#configuration) 도 사용할 수 있어야 합니다. `setProfileEnvironment` 의 기본값은 `true`입니다. 일부 시나리오 (예: Windows OS)에서 `setProfileEnvironment` 로 설정 된 `false`합니다. 키가 사용자 프로필 디렉터리에 저장 되지 않습니다 필요 합니다.
+   앱 풀의 [setProfileEnvironment 특성](/iis/configuration/system.applicationhost/applicationpools/add/processmodel#configuration)도 사용하도록 설정해야 합니다. `setProfileEnvironment` 의 기본값은 `true`입니다. Windows OS와 같은 일부 시나리오에서는 `setProfileEnvironment`가 `false`로 설정됩니다. 키가 예상대로 사용자 프로필 디렉터리에 저장되지 않는 경우 다음을 수행합니다.
 
-   1. 로 이동 합니다 *%windir%/system32/inetsrv/config* 폴더입니다.
-   1. 엽니다는 *applicationHost.config* 파일입니다.
+   1. *%windir%/system32/inetsrv/config* 폴더로 이동합니다.
+   1. *applicationHost.config* 파일을 엽니다.
    1. `<system.applicationHost><applicationPools><applicationPoolDefaults><processModel>` 요소를 찾습니다.
-   1. 있는지 확인 합니다 `setProfileEnvironment` 특성 값은 기본값이, 존재 하지 하 `true`, 특성의 값을 명시적으로 설정 또는 `true`.
+   1. `setProfileEnvironment` 특성이 존재하지 않는지 확인합니다. 존재하지 않을 경우 기본값이 `true`로 설정됩니다. 또는 특성 값을 명시적으로 `true`로 설정합니다.
 
 1. 응용 프로그램이 IIS에서 호스트되는 경우에는 작업자 프로세스 계정에만 ACL로 허용된 HKLM 레지스트리 하위의 특수한 레지스트리 키에 키가 저장됩니다. 저장된 비활성 키는 DPAPI를 통해서 암호화됩니다.
 

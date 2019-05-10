@@ -7,11 +7,11 @@ ms.custom: mvc
 ms.date: 10/10/2018
 uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
 ms.openlocfilehash: fb69584f6e9d4756e175bbd6f3deb1f413b80fc5
-ms.sourcegitcommit: c43a6f1fe72d7c2db4b5815fd532f2b45d964e07
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/30/2018
-ms.locfileid: "50244816"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64890468"
 ---
 # <a name="cache-tag-helper-in-aspnet-core-mvc"></a>ASP.NET Core MVC의 캐시 태그 도우미
 
@@ -33,7 +33,7 @@ ms.locfileid: "50244816"
 
 ### <a name="enabled"></a>사용
 
-| 특성 유형  | 예제        | 기본 |
+| 특성 유형  | 예제        | 기본값 |
 | --------------- | --------------- | ------- |
 | 부울         | `true`, `false` | `true`  |
 
@@ -49,7 +49,7 @@ ms.locfileid: "50244816"
 
 ### <a name="expires-on"></a>expires-on
 
-| 특성 유형   | 예                            |
+| 특성 유형   | 예제                            |
 | ---------------- | ---------------------------------- |
 | `DateTimeOffset` | `@new DateTime(2025,1,29,17,02,0)` |
 
@@ -65,7 +65,7 @@ ms.locfileid: "50244816"
 
 ### <a name="expires-after"></a>expires-after
 
-| 특성 유형 | 예                      | 기본    |
+| 특성 유형 | 예제                      | 기본값    |
 | -------------- | ---------------------------- | ---------- |
 | `TimeSpan`     | `@TimeSpan.FromSeconds(120)` | 20분 |
 
@@ -83,7 +83,7 @@ Razor 보기 엔진은 기본 `expires-after` 값을 20분으로 설정합니다
 
 ### <a name="expires-sliding"></a>expires-sliding
 
-| 특성 유형 | 예                     |
+| 특성 유형 | 예제                     |
 | -------------- | --------------------------- |
 | `TimeSpan`     | `@TimeSpan.FromSeconds(60)` |
 
@@ -173,7 +173,7 @@ routes.MapRoute(
 
 ### <a name="vary-by-user"></a>vary-by-user
 
-| 특성 유형  | 예제        | 기본 |
+| 특성 유형  | 예제        | 기본값 |
 | --------------- | --------------- | ------- |
 | 부울         | `true`, `false` | `true`  |
 
@@ -191,7 +191,7 @@ routes.MapRoute(
 
 ### <a name="vary-by"></a>vary-by
 
-| 특성 유형 | 예  |
+| 특성 유형 | 예제  |
 | -------------- | -------- |
 | 문자열         | `@Model` |
 
@@ -222,7 +222,7 @@ public IActionResult Index(string myParam1, string myParam2, string myParam3)
 
 ### <a name="priority"></a>priority
 
-| 특성 유형      | 예제                               | 기본  |
+| 특성 유형      | 예제                               | 기본값  |
 | ------------------- | -------------------------------------- | -------- |
 | `CacheItemPriority` | `High`, `Low`, `NeverRemove`, `Normal` | `Normal` |
 

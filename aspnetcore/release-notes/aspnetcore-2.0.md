@@ -5,12 +5,12 @@ description: ASP.NET Core 2.0의 새로운 기능에 대해 알아봅니다.
 ms.author: riande
 ms.date: 07/10/2017
 uid: aspnetcore-2.0
-ms.openlocfilehash: 60e44e64bd1cfada0143e374f6f51dec0e4e84f8
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: 07e490fd844f0f9044afce37651ef680ed0c894d
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58209887"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64883098"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>ASP.NET Core 2.0의 새로운 기능
 
@@ -47,7 +47,7 @@ ASP.NET Core 2.0 패키지는 .NET Standard 2.0을 대상으로 합니다. 패�
 
 `IConfiguration` 인스턴스는 기본적으로 ASP.NET Core 2.0의 서비스 컨테이너에 추가됩니다. 서비스 컨테이너의 `IConfiguration`을 사용하면 애플리케이션이 컨테이너에서 구성 값을 더 쉽게 검색할 수 있습니다.
 
-계획된 문서의 상태에 대한 자세한 내용은 [GitHub issue](https://github.com/aspnet/Docs/issues/3387)(GitHub 문제)를 참조하세요.
+계획된 문서의 상태에 대한 자세한 내용은 [GitHub issue](https://github.com/aspnet/AspNetCore.Docs/issues/3387)(GitHub 문제)를 참조하세요.
 
 ## <a name="logging-update"></a>로깅 업데이트
 
@@ -61,7 +61,7 @@ ASP.NET Core 2.0에서 로깅은 기본적으로 DI(종속성 주입) 시스템�
 
 새 템플릿을 사용하여 [Azure AD B2C](https://azure.microsoft.com/services/active-directory-b2c/))를 통해 웹앱 및 Web API에 대한 인증을 구성할 수 있습니다.
 
-계획된 문서의 상태에 대한 자세한 내용은 [GitHub issue](https://github.com/aspnet/Docs/issues/3054)(GitHub 문제)를 참조하세요.
+계획된 문서의 상태에 대한 자세한 내용은 [GitHub issue](https://github.com/aspnet/AspNetCore.Docs/issues/3054)(GitHub 문제)를 참조하세요.
 
 ## <a name="identity-update"></a>ID 업데이트
 
@@ -113,7 +113,7 @@ return File(data, "text/plain", "downloadName.txt", lastModified: DateTime.UtcNo
 
 ASP.NET Core 2.0에서 이 기능은 Visual Studio에서 디버그할 경우 및 Azure App Services에서 실행될 경우(옵트인(opt in) 후) 자동으로 Application Insights 진단을 사용하도록 설정하는 데 사용됩니다. 따라서 프로젝트 템플릿은 더 이상 기본적으로 Application Insights 패키지와 코드를 추가하지 않습니다.
 
-계획된 문서의 상태에 대한 자세한 내용은 [GitHub issue](https://github.com/aspnet/Docs/issues/3389)(GitHub 문제)를 참조하세요.
+계획된 문서의 상태에 대한 자세한 내용은 [GitHub issue](https://github.com/aspnet/AspNetCore.Docs/issues/3389)(GitHub 문제)를 참조하세요.
 
 ## <a name="automatic-use-of-anti-forgery-tokens"></a>위조 방지 토큰 자동 사용
 

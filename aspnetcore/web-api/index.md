@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 04/11/2019
 uid: web-api/index
-ms.openlocfilehash: 334e5732269921a62356e7854824deccc051c291
-ms.sourcegitcommit: 8a84ce880b4c40d6694ba6423038f18fc2eb5746
+ms.openlocfilehash: d804a7f1b4f0e89f433a3674116c97804705f7cc
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60165178"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64882958"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>ASP.NET Core로 Web API 만들기
 
@@ -20,7 +20,7 @@ ms.locfileid: "60165178"
 
 ASP.NET Core는 C#를 사용하여 Web API라고도 하는 RESTful 서비스 만들기를 지원합니다. 요청을 처리하기 위해 Web API는 컨트롤러를 사용합니다. Web API의 *컨트롤러*는 `ControllerBase`에서 파생되는 클래스입니다. 이 문서에서는 API 요청을 처리하기 위해 컨트롤러를 사용하는 방법을 보여 줍니다.
 
-[샘플 코드 보기 또는 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/web-api/index/samples) ([다운로드하는 방법](xref:index#how-to-download-a-sample))
+[샘플 코드 보기 또는 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/index/samples) ([다운로드하는 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="controllerbase-class"></a>ControllerBase 클래스
 

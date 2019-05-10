@@ -5,12 +5,12 @@ description: ASP.NET Core의 웹 API에서 사용자 지정 포맷터를 만들�
 ms.author: tdykstra
 ms.date: 02/08/2017
 uid: web-api/advanced/custom-formatters
-ms.openlocfilehash: 611840defd1da3b57b365c99deaf1c67f1568227
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
+ms.openlocfilehash: ece60b47f345235a084faacf8e59b792856614d2
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58264627"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64887058"
 ---
 # <a name="custom-formatters-in-aspnet-core-web-api"></a>ASP.NET Core Web API에서 포맷터 사용자 지정
 
@@ -18,7 +18,7 @@ ms.locfileid: "58264627"
 
 ASP.NET Core MVC는 JSON 또는 XML을 사용하여 웹 API에서 데이터 교환에 대한 기본 제공 지원을 제공합니다. 이 문서에서는 사용자 지정 포맷터를 만들어 추가 형식에 대한 지원을 추가하는 방법을 보여줍니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-custom-formatters"></a>사용자 지정 포맷터를 사용하는 경우
 
@@ -51,7 +51,7 @@ ASP.NET Core MVC는 JSON 또는 XML을 사용하여 웹 API에서 데이터 교�
 
 [!code-csharp[](custom-formatters/sample/Formatters/VcardOutputFormatter.cs?name=classdef)]
 
-입력 포맷터 예제는 [샘플 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)을 참조하세요.
+입력 포맷터 예제는 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)을 참조하세요.
 
 이진 형식의 경우 [InputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.inputformatter) 또는 [OutputFormatter](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformatter) 기본 클래스에서 파생시킵니다.
 
@@ -61,7 +61,7 @@ ASP.NET Core MVC는 JSON 또는 XML을 사용하여 웹 API에서 데이터 교�
 
 [!code-csharp[](custom-formatters/sample/Formatters/VcardOutputFormatter.cs?name=ctor&highlight=3,5-6)]
 
-입력 포맷터 예제는 [샘플 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)을 참조하세요.
+입력 포맷터 예제는 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)을 참조하세요.
 
 > [!NOTE]
 > 포맷터 클래스에서 생성자 종속성 주입을 수행할 수 없습니다. 예를 들어 생성자에 로거 매개 변수를 추가하여 로거를 가져올 수 없습니다. 서비스에 액세스하려면 메서드에 전달된 컨텍스트 개체를 사용해야 합니다. [아래](#read-write) 코드 예제에서는 수행 방법을 보여줍니다.
@@ -72,7 +72,7 @@ ASP.NET Core MVC는 JSON 또는 XML을 사용하여 웹 API에서 데이터 교�
 
 [!code-csharp[](custom-formatters/sample/Formatters/VcardOutputFormatter.cs?name=canwritetype)]
 
-입력 포맷터 예제는 [샘플 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)을 참조하세요.
+입력 포맷터 예제는 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)을 참조하세요.
 
 #### <a name="the-canwriteresult-method"></a>CanWriteResult 메서드
 
@@ -92,7 +92,7 @@ ASP.NET Core MVC는 JSON 또는 XML을 사용하여 웹 API에서 데이터 교�
 
 [!code-csharp[](custom-formatters/sample/Formatters/VcardOutputFormatter.cs?name=writeresponse&highlight=3-4)]
 
-입력 포맷터 예제는 [샘플 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)을 참조하세요.
+입력 포맷터 예제는 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)을 참조하세요.
 
 ## <a name="how-to-configure-mvc-to-use-a-custom-formatter"></a>사용자 지정 포맷터를 사용하도록 MVC를 구성하는 방법
 
@@ -105,7 +105,7 @@ ASP.NET Core MVC는 JSON 또는 XML을 사용하여 웹 API에서 데이터 교�
 ## <a name="next-steps"></a>다음 단계
 
 * [GitHub의 일반 텍스트 포맷터의 샘플 코드.](https://github.com/aspnet/Entropy/tree/master/samples/Mvc.Formatters)
-* 간단한 vCard 입력 및 출력 포맷터를 구현하는 [이 문서의 샘플 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)입니다. 앱은 다음 예제와 같이 vCard를 읽고 씁니다.
+* 간단한 vCard 입력 및 출력 포맷터를 구현하는 [이 문서의 샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)입니다. 앱은 다음 예제와 같이 vCard를 읽고 씁니다.
 
 ```
 BEGIN:VCARD

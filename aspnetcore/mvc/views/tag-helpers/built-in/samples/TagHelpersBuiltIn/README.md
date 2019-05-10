@@ -1,11 +1,3 @@
----
-ms.openlocfilehash: 3113220696eb3e3cb8c126cd1287e60203d96378
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58208336"
----
 # <a name="aspnet-core-built-in-tag-helpers-sample"></a>ASP.NET Core 기본 제공 태그 도우미 샘플
 
 이 샘플에서는 MVC와 Razor 페이지를 모두 사용한 기본 제공 태그 도우미의 변형을 보여 줍니다.

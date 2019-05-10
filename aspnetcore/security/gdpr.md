@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/29/2018
 uid: security/gdpr
-ms.openlocfilehash: bbb3b8e091b5a0be8e852d70ba1a5d7100782ba3
-ms.sourcegitcommit: 191d21c1e37b56f0df0187e795d9a56388bbf4c7
+ms.openlocfilehash: c5c13dbd1006d10aba0f54b0b9d72b527ee98945
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/08/2019
-ms.locfileid: "57665378"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64894110"
 ---
 # <a name="eu-general-data-protection-regulation-gdpr-support-in-aspnet-core"></a>ASP.NET Core에서 EU 데이터 보호 규정 GDPR (일반) 지원
 
@@ -26,9 +26,9 @@ ASP.NET Core의 일부를 충족 하기 위해 Api 및 템플릿을 제공 합�
 * [TempData 및 세션 쿠키](#tempdata) 추적 비활성화 되 면 작동 되지 않습니다.
 * 합니다 [Identity 관리](#pd) 페이지를 다운로드 하 여 사용자 데이터를 삭제 한 링크를 제공 합니다.
 
-합니다 [샘플 앱](https://github.com/aspnet/Docs/tree/live/aspnetcore/security/gdpr/sample) GDPR 확장 지점 중 대부분을 테스트 하 고 Api ASP.NET Core 2.1 템플릿을 추가할 수 있습니다. 참조를 [ReadMe](https://github.com/aspnet/Docs/tree/live/aspnetcore/security/gdpr/sample) 지침을 테스트 하는 것에 대 한 파일입니다.
+합니다 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/security/gdpr/sample) GDPR 확장 지점 중 대부분을 테스트 하 고 Api ASP.NET Core 2.1 템플릿을 추가할 수 있습니다. 참조를 [ReadMe](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/security/gdpr/sample) 지침을 테스트 하는 것에 대 한 파일입니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/live/aspnetcore/security/gdpr/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/security/gdpr/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="aspnet-core-gdpr-support-in-template-generated-code"></a>ASP.NET Core GDPR 지원 템플릿에서 생성 된 코드
 

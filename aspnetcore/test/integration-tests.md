@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/25/2019
 uid: test/integration-tests
-ms.openlocfilehash: 11a8f4296e1b0b229c736645f1aa598307b88ec4
-ms.sourcegitcommit: 088e6744cd67a62f214f25146313a53949b17d35
+ms.openlocfilehash: 46c3b227ca0b3def5ab7d527a2f6ef2497d55f83
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/21/2019
-ms.locfileid: "58320188"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64892070"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>ASP.NET Core에서 통합 테스트
 
@@ -22,7 +22,7 @@ ms.locfileid: "58320188"
 
 이 항목에서는 단위 테스트의 기본 지식이 있다고 가정 합니다. 테스트 개념을 잘 알 수 없는 경우 참조를 [Unit Testing.NET Core 및.NET Standard](/dotnet/core/testing/) 항목 및 해당 연결 된 콘텐츠입니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/test/integration-tests/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 샘플 앱은 Razor 페이지 앱 및 Razor 페이지의 기본 지식이 있다고 가정 합니다. Razor 페이지를 사용 하 여 알 수 없는 경우 다음 항목을 참조 합니다.
 
@@ -104,7 +104,7 @@ ASP.NET Core에서 통합 테스트 하려면 다음 항목이 필요 합니다.
   * [Microsoft.AspNetCore.Mvc.Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/)
 * Web SDK 프로젝트 파일에 지정 (`<Project Sdk="Microsoft.NET.Sdk.Web">`). 웹 SDK를 참조할 때 필요 합니다 [Microsoft.AspNetCore.App 메타 패키지](xref:fundamentals/metapackage-app)합니다.
 
-이러한 필수 구성이 요소에서 볼 수 있습니다 합니다 [샘플 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/test/integration-tests/samples/)합니다. 검사는 *tests/RazorPagesProject.Tests/RazorPagesProject.Tests.csproj* 파일입니다. 샘플 앱에서는 합니다 [xUnit](https://xunit.github.io/) 테스트 프레임 워크와 [AngleSharp](https://anglesharp.github.io/) 파서 라이브러리, 샘플 앱 참조 하므로:
+이러한 필수 구성이 요소에서 볼 수 있습니다 합니다 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/)합니다. 검사는 *tests/RazorPagesProject.Tests/RazorPagesProject.Tests.csproj* 파일입니다. 샘플 앱에서는 합니다 [xUnit](https://xunit.github.io/) 테스트 프레임 워크와 [AngleSharp](https://anglesharp.github.io/) 파서 라이브러리, 샘플 앱 참조 하므로:
 
 * [xunit](https://www.nuget.org/packages/xunit/)
 * [xunit.runner.visualstudio](https://www.nuget.org/packages/xunit.runner.visualstudio/)
@@ -155,7 +155,7 @@ SUT에서 `/SecurePage` 사용 하 여 페이지를 [AuthorizePage](/dotnet/api/
 
    [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/CustomWebApplicationFactory.cs?name=snippet1)]
 
-   데이터베이스에서 시드를 [샘플 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/test/integration-tests/samples) 의해 수행 되는 `InitializeDbForTests` 메서드. 메서드는에 설명 되어는 [통합 테스트 샘플: 테스트 앱 조직을](#test-app-organization) 섹션입니다.
+   데이터베이스에서 시드를 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) 의해 수행 되는 `InitializeDbForTests` 메서드. 메서드는에 설명 되어는 [통합 테스트 샘플: 테스트 앱 조직을](#test-app-organization) 섹션입니다.
 
 2. 사용자 지정을 사용 하 여 `CustomWebApplicationFactory` 테스트 클래스에 있습니다. 다음 예제에서는에서 팩터리를 `IndexPageTests` 클래스:
 
@@ -173,7 +173,7 @@ SUT 대 한 모든 POST 요청에는 앱의 자동으로 수행 하는 위조 �
 1. 위조 방지 쿠키 및 응답에서 요청 유효성 검사 토큰을 구문 분석 합니다.
 1. 현재 위치에서 위조 방지 쿠키 및 요청 유효성 검사를 사용 하 여 POST 요청 토큰을 확인 합니다.
 
-합니다 `SendAsync` 도우미 확장 메서드 (*Helpers/HttpClientExtensions.cs*) 및 `GetDocumentAsync` 도우미 메서드 (*Helpers/HtmlHelpers.cs*)에 [샘플앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/test/integration-tests/samples/) 를 사용 합니다 [AngleSharp](https://anglesharp.github.io/) 다음 메서드를 사용 하 여 위조 방지 검사를 처리 하는 파서:
+합니다 `SendAsync` 도우미 확장 메서드 (*Helpers/HttpClientExtensions.cs*) 및 `GetDocumentAsync` 도우미 메서드 (*Helpers/HtmlHelpers.cs*)에 [샘플앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/) 를 사용 합니다 [AngleSharp](https://anglesharp.github.io/) 다음 메서드를 사용 하 여 위조 방지 검사를 처리 하는 파서:
 
 * `GetDocumentAsync` &ndash; 수신 합니다 [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) 반환 하 고는 `IHtmlDocument`합니다. `GetDocumentAsync` 준비 하는 팩터리를 사용 하는 *가상 응답* 원본을 `HttpResponseMessage`합니다. 자세한 내용은 참조는 [AngleSharp 설명서](https://github.com/AngleSharp/AngleSharp#documentation)합니다.
 * `SendAsync` 에 대 한 확장 메서드는 `HttpClient` compose는 [HttpRequestMessage](/dotnet/api/system.net.http.httprequestmessage) 호출 [SendAsync(HttpRequestMessage)](/dotnet/api/system.net.http.httpclient.sendasync#System_Net_Http_HttpClient_SendAsync_System_Net_Http_HttpRequestMessage_) 는 SUT에 요청을 제출 하 합니다. 에 대 한 오버 로드가 `SendAsync` HTML 양식을 수락 (`IHtmlFormElement`) 및 다음:
@@ -188,7 +188,7 @@ SUT 대 한 모든 POST 요청에는 앱의 자동으로 수행 하는 위조 �
 
 추가 구성 된 테스트 메서드 내에서 필요한 경우 [WithWebHostBuilder](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.withwebhostbuilder) 만듭니다 `WebApplicationFactory` 와 [IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder) 추가로 구성 하 여 사용자 지정 합니다.
 
-합니다 `Post_DeleteMessageHandler_ReturnsRedirectToRoot` 의 메서드를 테스트 합니다 [샘플 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/test/integration-tests/samples) 의 사용을 보여 줍니다 `WithWebHostBuilder`합니다. 이 테스트는 SUT에서 양식을 제출 하 여을 트리거하여 데이터베이스에서 레코드 삭제를 수행 합니다.
+합니다 `Post_DeleteMessageHandler_ReturnsRedirectToRoot` 의 메서드를 테스트 합니다 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) 의 사용을 보여 줍니다 `WithWebHostBuilder`합니다. 이 테스트는 SUT에서 양식을 제출 하 여을 트리거하여 데이터베이스에서 레코드 삭제를 수행 합니다.
 
 다른 테스트 하기 때문에 `IndexPageTests` 클래스의 모든 데이터베이스에 레코드를 삭제 하 고 전에 실행할 수는 작업을 수행 합니다 `Post_DeleteMessageHandler_ReturnsRedirectToRoot` 메서드, 데이터베이스 레코드를 삭제 하려면 SUT에 있는지 확인 하기 위해이 테스트 메서드에 시드는 합니다. 선택 하는 `deleteBtn1` 단추는 `messages` 는 SUT 요청에는 SUT 형태로 시뮬레이션 됩니다:
 
@@ -311,7 +311,7 @@ _client = _factory.CreateClient(clientOptions);
 
 ## <a name="disable-shadow-copying"></a>섀도 복사를 사용 하지 않도록 설정
 
-출력 폴더와 다른 폴더에서 실행할 테스트를 사용 하면 섀도 복사 합니다. 제대로 작동 하려면 테스트에 대 한 섀도 복사를 비활성화 해야 합니다. [샘플 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/test/integration-tests/samples) xUnit을 사용 하 고 포함 하 여 xunit 섀도 복사를 사용 하지 않도록 설정 된 *xunit.runner.json* 올바른 구성 설정 사용 하 여 파일. 자세한 내용은 [JSON을 사용 하 여 xUnit 구성](https://xunit.github.io/docs/configuring-with-json.html)합니다.
+출력 폴더와 다른 폴더에서 실행할 테스트를 사용 하면 섀도 복사 합니다. 제대로 작동 하려면 테스트에 대 한 섀도 복사를 비활성화 해야 합니다. [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) xUnit을 사용 하 고 포함 하 여 xunit 섀도 복사를 사용 하지 않도록 설정 된 *xunit.runner.json* 올바른 구성 설정 사용 하 여 파일. 자세한 내용은 [JSON을 사용 하 여 xUnit 구성](https://xunit.github.io/docs/configuring-with-json.html)합니다.
 
 추가 된 *xunit.runner.json* 다음 콘텐츠를 사용 하 여 테스트 프로젝트의 루트에 파일:
 
@@ -327,14 +327,14 @@ _client = _factory.CreateClient(clientOptions);
 
 ## <a name="integration-tests-sample"></a>통합 테스트 샘플
 
-합니다 [샘플 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/test/integration-tests/samples) 두 개의 앱으로 구성 됩니다.
+합니다 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) 두 개의 앱으로 구성 됩니다.
 
 | 앱 | 프로젝트 폴더 | 설명 |
 | --- | -------------- | ----------- |
 | 메시지 앱 (SUT) | *src/RazorPagesProject* | 추가, 하나를 삭제, all, 삭제 및 메시지를 분석할 수 있습니다. |
 | 테스트 앱 | *tests/RazorPagesProject.Tests* | 통합 테스트는 SUT 하는 데 사용 합니다. |
 
-와 같은 기본 제공 테스트에 대 한 기능의 IDE 사용 하 여 테스트를 실행할 수 있습니다 [Visual Studio](https://www.visualstudio.com/vs/)합니다. 사용 하는 경우 [Visual Studio Code](https://code.visualstudio.com/) 또는 명령줄에서 명령 프롬프트에서 다음 명령을 실행 합니다 *tests/RazorPagesProject.Tests* 폴더:
+와 같은 기본 제공 테스트에 대 한 기능의 IDE 사용 하 여 테스트를 실행할 수 있습니다 [Visual Studio](https://visualstudio.microsoft.com)합니다. 사용 하는 경우 [Visual Studio Code](https://code.visualstudio.com/) 또는 명령줄에서 명령 프롬프트에서 다음 명령을 실행 합니다 *tests/RazorPagesProject.Tests* 폴더:
 
 ```console
 dotnet test

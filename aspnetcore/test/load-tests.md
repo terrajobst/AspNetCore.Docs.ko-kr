@@ -7,11 +7,11 @@ ms.custom: mvc
 ms.date: 04/05/2019
 uid: test/loadtests
 ms.openlocfilehash: 0a8449ea2c9df0f2ac93058f03af0a1a2aa66508
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59068185"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64897440"
 ---
 # <a name="aspnet-core-loadstress-testing"></a>ASP.NET Core 부하/스트레스 테스트
 

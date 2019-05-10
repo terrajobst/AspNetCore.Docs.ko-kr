@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 162586059e3115bc15efaa63a9a0652e09872f1b
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: 228722ecdc0fb19e024b7154393390fe6d34c5ff
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58209967"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64887308"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging---3-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 정렬, 필터, 페이징 - 3/8
 
@@ -29,7 +29,7 @@ ms.locfileid: "58209967"
 
 ![학생 인덱스 페이지](sort-filter-page/_static/paging.png)
 
-해결할 수 없는 문제가 발생한 경우 [완성된 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)을 다운로드합니다.
+해결할 수 없는 문제가 발생한 경우 [완성된 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)을 다운로드합니다.
 
 ## <a name="add-sorting-to-the-index-page"></a>인덱스 페이지에 정렬 추가
 
@@ -275,13 +275,13 @@ LINQ 문은 등록 날짜별로 학생 엔터티를 그룹화하고 각 그룹�
 
 앱을 실행하고 정보 페이지로 이동합니다. 각 등록 날짜에 대한 학생 수가 테이블에 표시됩니다.
 
-해결할 수 없는 문제가 발생한 경우 [이 단계에 완성된 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/StageSnapShots/cu-part3-sorting)을 다운로드합니다.
+해결할 수 없는 문제가 발생한 경우 [이 단계에 완성된 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/StageSnapShots/cu-part3-sorting)을 다운로드합니다.
 
 ![정보 페이지](sort-filter-page/_static/about.png)
 
 ## <a name="additional-resources"></a>추가 자료
 
-* [ASP.NET Core 2.x 소스 디버깅](https://github.com/aspnet/Docs/issues/4155)
+* [ASP.NET Core 2.x 소스 디버깅](https://github.com/aspnet/AspNetCore.Docs/issues/4155)
 * [이 자습서의 YouTube 버전](https://www.youtube.com/watch?v=MDs7PFpoMqI)
 
 다음 자습서에서는 앱은 마이그레이션을 사용하여 데이터 모델을 업데이트합니다.

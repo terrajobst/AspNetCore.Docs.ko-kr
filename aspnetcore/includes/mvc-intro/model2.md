@@ -1,11 +1,3 @@
----
-ms.openlocfilehash: 82c0f3076e846045ca85697e150ff0ab9be75dba
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58214044"
----
 <a name="dc"></a>
 
 다음 `MvcMovieContext` 클래스를 *Models* 폴더에 추가합니다.  

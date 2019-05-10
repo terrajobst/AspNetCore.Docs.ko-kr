@@ -5,6 +5,12 @@ description: ASP.NET Core MVC 소개의 목차를 참조하세요.
 ms.author: riande
 ms.date: 10/26/2017
 uid: tutorials/first-mvc-app/index
+ms.openlocfilehash: 04ab19644d68428246c29a5dac980e8bb91867d0
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64882808"
 ---
 # <a name="create-a-web-app-with-aspnet-core-mvc"></a>ASP.NET Core MVC를 사용하여 웹앱 만들기
 

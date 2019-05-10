@@ -7,18 +7,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/08/2019
 uid: host-and-deploy/iis/development-time-iis-support
-ms.openlocfilehash: 6f555858239b4432d252f8b3ac7add5c3e8bfe62
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
+ms.openlocfilehash: d2b2456c7ab6b72f2270b6edc17000695061cc2b
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59425103"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64887758"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>ASP.NET Core용 Visual Studio의 개발 시간 IIS 지원
 
 작성자: [Sourabh Shirhatti](https://twitter.com/sshirhatti) 및 [Luke Latham](https://github.com/guardrex)
 
-이 문서에서는 Windows Server에서 IIS를 통해 실행되는 ASP.NET Core 앱을 디버그하기 위한 [Visual Studio](https://www.visualstudio.com/vs/) 지원에 대해 설명합니다. 이 항목에서는 이 시나리오를 사용하도록 설정하고 프로젝트를 설정하는 방법을 안내합니다.
+이 문서에서는 Windows Server에서 IIS를 통해 실행되는 ASP.NET Core 앱을 디버그하기 위한 [Visual Studio](https://visualstudio.microsoft.com) 지원에 대해 설명합니다. 이 항목에서는 이 시나리오를 사용하도록 설정하고 프로젝트를 설정하는 방법을 안내합니다.
 
 ## <a name="prerequisites"></a>전제 조건
 

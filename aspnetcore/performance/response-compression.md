@@ -7,18 +7,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/13/2019
 uid: performance/response-compression
-ms.openlocfilehash: e87480ebb81791ed233f3e2308e35e21e081824f
-ms.sourcegitcommit: 6ba5fb1fd0b7f9a6a79085b0ef56206e462094b7
+ms.openlocfilehash: e312d43fb62106f6ecb98367c29daa377bb227c9
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/14/2019
-ms.locfileid: "56248370"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64893350"
 ---
 # <a name="response-compression-in-aspnet-core"></a>ASP.NET Core에서 응답 압축
 
 [Luke Latham](https://github.com/guardrex)으로
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/performance/response-compression/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 네트워크 대역폭은 제한 된 리소스입니다. 일반적으로 응답의 크기를 줄이면 앱의 응답성 데이터는 종종 크게 증가 합니다. 페이로드 크기를 줄이는 한 가지 방법은 응용 프로그램의 응답을 압축 하는 경우
 
@@ -89,7 +89,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 | `Content-Type`     | 콘텐츠의 MIME 형식을 지정합니다. 모든 응답을 지정 해야 해당 `Content-Type`합니다. 미들웨어는 응답을 압축 해야 하는 경우를 확인 하려면이 값을 확인 합니다. 미들웨어 집합을 지정 [MIME 형식 기본](#mime-types) 인코딩할 수 있지만 바꾸거나 MIME 형식을 추가할 수 있습니다. |
 | `Vary`             | 값을 사용 하 여 서버에서 전송 하는 경우 `Accept-Encoding` 클라이언트와 프록시에는 `Vary` 헤더는 클라이언트에 캐시 해야 하는 프록시를 나타냅니다 (다)의 값을 기반으로 하는 응답을 `Accept-Encoding` 요청의 헤더입니다. 사용 하 여 콘텐츠를 반환 하는 결과 `Vary: Accept-Encoding` 헤더는 모두 압축 하 고 압축 되지 않은 응답이 별도로 캐시 됩니다. |
 
-사용 하 여 응답 압축 미들웨어의 기능을 탐색 합니다 [샘플 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/performance/response-compression/samples)합니다. 이 샘플에서는 다음을 보여 줍니다.
+사용 하 여 응답 압축 미들웨어의 기능을 탐색 합니다 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples)합니다. 이 샘플에서는 다음을 보여 줍니다.
 
 * Gzip 및 사용자 지정 압축 공급자를 사용 하 여 앱 응답을 압축 합니다.
 * 압축에 대 한 MIME 형식 목록을 기본 MIME 형식을 추가 하는 방법.
@@ -114,7 +114,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 
 ::: moniker-end
 
-## <a name="configuration"></a>구성하기
+## <a name="configuration"></a>구성
 
 ::: moniker range=">= aspnetcore-2.2"
 
@@ -350,7 +350,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="middleware-issue-when-behind-an-nginx-reverse-proxy"></a>Nginx 역방향 프록시 뒤에 있을 때는 미들웨어 문제
 
-Nginx에서 프록시를 요청 하는 경우는 `Accept-Encoding` 헤더를 제거 합니다. 제거 된 `Accept-Encoding` 헤더에서 응답 압축 미들웨어를 방지 합니다. 자세한 내용은 참조 하세요. [NGINX: 압축 및 압축 풀기](https://www.nginx.com/resources/admin-guide/compression-and-decompression/)합니다. 이 문제를 추적 하 여 [Nginx에 대 한 통과 압축 파악 (aspnet/BasicMiddleware \#123)](https://github.com/aspnet/BasicMiddleware/issues/123)합니다.
+Nginx에서 프록시를 요청 하는 경우는 `Accept-Encoding` 헤더를 제거 합니다. 제거 된 `Accept-Encoding` 헤더에서 응답 압축 미들웨어를 방지 합니다. 자세한 내용은 [NGINX: 압축 및 압축 풀기](https://www.nginx.com/resources/admin-guide/compression-and-decompression/)합니다. 이 문제를 추적 하 여 [Nginx에 대 한 통과 압축 파악 (aspnet/BasicMiddleware \#123)](https://github.com/aspnet/BasicMiddleware/issues/123)합니다.
 
 ## <a name="working-with-iis-dynamic-compression"></a>IIS 동적 압축이 사용
 

@@ -7,11 +7,11 @@ ms.custom: H1Hack27Feb2017
 ms.date: 08/02/2017
 uid: client-side/spa-services
 ms.openlocfilehash: ee772e67ef14608bcc6e3498ade00424ff6090e5
-ms.sourcegitcommit: 49faca2644590fc081d86db46ea5e29edfc28b7b
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/09/2018
-ms.locfileid: "53121378"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64893950"
 ---
 # <a name="use-javascriptservices-to-create-single-page-applications-in-aspnet-core"></a>JavaScriptServices를 사용하여 ASP.NET Core에서 단일 페이지 응용 프로그램 만들기
 
@@ -67,7 +67,7 @@ SpaServices를 사용하려면 다음을 설치합니다.
     node -v && npm -v
     ```
 
-참고: Azure 웹 사이트에 배포 하는 경우 필요가 여기에서 모든 작업을 수행할 &mdash; Node.js 설치 되어 서버 환경에서 사용할 수 있습니다.
+참고: Azure 웹 사이트에 배포 하는 경우 여기에서는 아무 작업도 수행할 필요가 없습니다 &mdash; Node.js 설치 되어 서버 환경에서 사용할 수 있습니다.
 
 * [!INCLUDE [](~/includes/net-core-sdk-download-link.md)]
 
@@ -123,7 +123,7 @@ SpaServices가 제공하는 ASP.NET Core [태그 도우미](xref:mvc/views/tag-h
 
 [!code-typescript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/boot-server.ts?range=6,10-21,38-52,79-)]
 
-참고: 태그 도우미에서 전달되는 속성 이름은 **PascalCase** 표기법으로 표시됩니다. 이와는 달리 JavaScript에서는 동일한 속성 이름이 **camelCase**로 표현됩니다. 이 차이는 기본 JSON 직렬화 구성으로 인한 것입니다.
+참고: 태그 도우미에 전달 된 속성 이름으로 표시 됩니다 **PascalCase** 표기법입니다. 이와는 달리 JavaScript에서는 동일한 속성 이름이 **camelCase**로 표현됩니다. 이 차이는 기본 JSON 직렬화 구성으로 인한 것입니다.
 
 위의 코드 예제를 확장하기 위해 `resolve` 함수에 제공되는 `globals` 속성을 추가하여 데이터를 서버에서 뷰로 전달할 수 있습니다.
 
@@ -225,7 +225,7 @@ app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
 
 [!code-csharp[](../client-side/spa-services/sample/SpaServicesSampleApp/Startup.cs?name=snippet_MvcRoutingTable&highlight=7-9)]
 
-팁: 경로는 구성된 순서대로 평가됩니다. 따라서 앞의 코드 예제에서는 `default` 경로가 가장 먼저 패턴 일치에 사용됩니다.
+팁: 경로 구성 하는 순서 대로 평가 됩니다. 따라서 앞의 코드 예제에서는 `default` 경로가 가장 먼저 패턴 일치에 사용됩니다.
 
 <a name="new-project-creation"></a>
 

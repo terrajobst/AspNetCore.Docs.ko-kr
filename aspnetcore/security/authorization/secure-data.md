@@ -6,12 +6,12 @@ ms.author: riande
 ms.date: 12/18/2018
 ms.custom: mvc, seodec18
 uid: security/authorization/secure-data
-ms.openlocfilehash: 9b01aca0cb2b33f5561193ffdce4aa4950485fce
-ms.sourcegitcommit: 8a84ce880b4c40d6694ba6423038f18fc2eb5746
-ms.translationtype: HT
+ms.openlocfilehash: 7013a88aac26426d1f84d1f52e35e319b3764cdb
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/23/2019
-ms.locfileid: "60165240"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64894450"
 ---
 # <a name="create-an-aspnet-core-app-with-user-data-protected-by-authorization"></a>권한 부여로 보호 되는 사용자 데이터를 사용 하 여 ASP.NET Core 앱 만들기
 
@@ -19,7 +19,7 @@ ms.locfileid: "60165240"
 
 ::: moniker range="<= aspnetcore-1.1"
 
-참조 [이 PDF](https://webpifeed.blob.core.windows.net/webpifeed/Partners/asp.net_repo_pdf_1-16-18.pdf) ASP.NET Core MVC 버전에 대 한 합니다. 이 자습서에서는 ASP.NET Core 1.1 버전은 [이](https://github.com/aspnet/Docs/tree/master/aspnetcore/security/authorization/secure-data) 폴더입니다. ASP.NET Core 샘플에는 1.1 합니다 [샘플](https://github.com/aspnet/Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/final2)합니다.
+참조 [이 PDF](https://webpifeed.blob.core.windows.net/webpifeed/Partners/asp.net_repo_pdf_1-16-18.pdf) ASP.NET Core MVC 버전에 대 한 합니다. 이 자습서에서는 ASP.NET Core 1.1 버전은 [이](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data) 폴더입니다. ASP.NET Core 샘플에는 1.1 합니다 [샘플](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/final2)합니다.
 
 ::: moniker-end
 
@@ -89,11 +89,11 @@ ASP.NET Core 2.1에서 `User.IsInRole` 사용 하는 경우 실패 `AddDefaultId
 
 ## <a name="the-starter-and-completed-app"></a>시작 및 완료 된 앱
 
-[다운로드](xref:index#how-to-download-a-sample) 는 [완료](https://github.com/aspnet/Docs/tree/master/aspnetcore/security/authorization/secure-data/samples) 앱. [테스트](#test-the-completed-app) 완성된 된 앱의 보안 기능에 익숙해질 수 있도록 합니다.
+[다운로드](xref:index#how-to-download-a-sample) 는 [완료](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples) 앱. [테스트](#test-the-completed-app) 완성된 된 앱의 보안 기능에 익숙해질 수 있도록 합니다.
 
 ### <a name="the-starter-app"></a>시작 앱
 
-[다운로드](xref:index#how-to-download-a-sample) 는 [스타터](https://github.com/aspnet/Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/starter2) 앱.
+[다운로드](xref:index#how-to-download-a-sample) 는 [스타터](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/starter2) 앱.
 
 앱 실행을 탭 합니다 **ContactManager** 에 연결 하 고 만들기, 편집 및 연락처를 삭제를 확인 합니다.
 
@@ -275,7 +275,7 @@ Entity Framework Core를 사용 하 여 서비스에 등록 해야 합니다 [�
 
 ## <a name="add-or-remove-a-user-to-a-role"></a>추가 하거나 역할에 사용자를 제거 합니다.
 
-참조 [이 문제](https://github.com/aspnet/Docs/issues/8502) 에 대 한 내용은:
+참조 [이 문제](https://github.com/aspnet/AspNetCore.Docs/issues/8502) 에 대 한 내용은:
 
 * 사용자의 권한을 제거 합니다. 예를 들어 음소거 채팅 앱에서 사용자입니다.
 * 사용자에 권한을 추가 합니다.
@@ -346,7 +346,7 @@ Entity Framework Core를 사용 하 여 서비스에 등록 해야 합니다 [�
 
 ### <a name="seed-the-database"></a>데이터베이스 시드
 
-추가 된 [SeedData](https://github.com/aspnet/Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/starter2.1/Data/SeedData.cs) 클래스는 *데이터* 폴더입니다.
+추가 된 [SeedData](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/starter2.1/Data/SeedData.cs) 클래스는 *데이터* 폴더입니다.
 
 호출 `SeedData.Initialize` 에서 `Main`:
 

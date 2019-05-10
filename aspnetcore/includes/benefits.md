@@ -1,11 +1,3 @@
----
-ms.openlocfilehash: d794058f533c4b617f641fa3cb3e6d63fd807c2d
-ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 04/16/2019
-ms.locfileid: "59615395"
----
 ASP.NET Core는 다음과 같은 이점을 제공합니다.
 
 * 웹 UI 및 웹 API를 동일한 과정으로 빌드합니다.

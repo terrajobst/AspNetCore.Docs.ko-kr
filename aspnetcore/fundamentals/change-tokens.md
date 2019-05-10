@@ -5,12 +5,12 @@ description: 변경 토큰을 사용하여 변경 내용을 추적하는 방법�
 ms.author: riande
 ms.date: 11/10/2017
 uid: fundamentals/change-tokens
-ms.openlocfilehash: 7ad580a7e999a4eae006ce5dd07cca0cbdbe9ab6
-ms.sourcegitcommit: 375e9a67f5e1f7b0faaa056b4b46294cc70f55b7
+ms.openlocfilehash: f7dad52fc19b6dc5c8668ad852e69acd65a72162
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/29/2018
-ms.locfileid: "50206421"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64886878"
 ---
 # <a name="detect-changes-with-change-tokens-in-aspnet-core"></a>ASP.NET Core에서 변경 토큰을 사용하여 변경 내용 검색
 
@@ -18,7 +18,7 @@ ms.locfileid: "50206421"
 
 *변경 토큰*은 변경 내용을 추적하는 데 사용되는 범용의 하위 수준 구성 요소입니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/change-tokens/sample/)([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/change-tokens/sample/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="ichangetoken-interface"></a>IChangeToken 인터페이스
 
