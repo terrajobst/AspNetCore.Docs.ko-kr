@@ -5,12 +5,12 @@ description: ASP.NET Core MVC 프로젝트에 ASP.NET MVC 프로젝트에서 구
 ms.author: riande
 ms.date: 10/14/2016
 uid: migration/configuration
-ms.openlocfilehash: 5a1c4d0cbbdf74a00073c654e78a05f44948caae
-ms.sourcegitcommit: 375e9a67f5e1f7b0faaa056b4b46294cc70f55b7
+ms.openlocfilehash: c379f1f64dc5ab8aeb48055124e86e4e60d93785
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/29/2018
-ms.locfileid: "50205914"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64894930"
 ---
 # <a name="migrate-configuration-to-aspnet-core"></a>ASP.NET Core로 구성 마이그레이션
 
@@ -18,7 +18,7 @@ ms.locfileid: "50205914"
 
 시작 했던 이전 문서에서 [ASP.NET MVC 프로젝트를 ASP.NET Core MVC로 마이그레이션](xref:migration/mvc)합니다. 이 문서에서는 구성을 마이그레이션 했습니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/migration/configuration/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/migration/configuration/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="setup-configuration"></a>설치 구성
 

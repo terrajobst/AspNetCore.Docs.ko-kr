@@ -7,11 +7,11 @@ ms.custom: mvc
 ms.date: 08/30/2018
 uid: client-side/libman/libman-cli
 ms.openlocfilehash: 5667f79648a60b8fd9496f8041ef08891ab766af
-ms.sourcegitcommit: 9bdba90b2c97a4016188434657194b2d7027d6e3
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/27/2018
-ms.locfileid: "47402087"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64894760"
 ---
 # <a name="use-the-libman-command-line-interface-cli-with-aspnet-core"></a>LibMan 명령줄 인터페이스 (CLI)를 사용 하 여 ASP.NET Core를 사용 하 여
 
@@ -144,7 +144,7 @@ A *libman.json* 파일이 다음과 같은 내용으로 프로젝트 루트에 �
 }
 ```
 
-## <a name="add-library-files"></a>라이브러리 파일 추가
+## <a name="add-library-files"></a>라이브러리 파일 추가하기
 
 `libman install` 명령을 다운로드 하 고 프로젝트에 라이브러리 파일을 설치 합니다. A *libman.json* 파일이 없는 경우 추가 됩니다. 합니다 *libman.json* 라이브러리 파일에 대 한 구성 세부 정보를 저장할 파일을 수정 합니다.
 
@@ -259,7 +259,7 @@ libman install jquery@3.2.1 --provider cdnjs --destination wwwroot/scripts/jquer
 }
 ```
 
-## <a name="restore-library-files"></a>라이브러리 파일 복원
+## <a name="restore-library-files"></a>라이브러리 파일 복원하기
 
 합니다 `libman restore` 명령에 정의 된 라이브러리 파일 설치 *libman.json*합니다. 이 때 적용되는 규칙은 다음과 같습니다.
 
@@ -288,7 +288,7 @@ libman restore [-h|--help]
 libman restore
 ```
 
-## <a name="delete-library-files"></a>라이브러리 파일 삭제
+## <a name="delete-library-files"></a>라이브러리 파일 삭제하기
 
 `libman clean` 명령은 LibMan 통해 이전에 복원 하는 라이브러리 파일을 삭제 합니다. 이 작업 후 빈 할 폴더 삭제 됩니다. 라이브러리 파일의 구성에 연결 합니다 `libraries` 속성을 *libman.json* 제거 되지 않습니다.
 
@@ -313,7 +313,7 @@ LibMan를 통해 설치 된 라이브러리 파일을 삭제:
 libman clean
 ```
 
-## <a name="uninstall-library-files"></a>라이브러리 파일을 제거
+## <a name="uninstall-library-files"></a>라이브러리 파일 제거하기
 
 `libman uninstall` 명령:
 

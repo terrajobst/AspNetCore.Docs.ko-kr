@@ -1,11 +1,3 @@
----
-ms.openlocfilehash: 209b5c41e17897693962954b1e795bdbb41f9384
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
-ms.translationtype: MT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59012736"
----
 # <a name="key-vault-configuration-provider-sample-app"></a>키 자격 증명 모음 구성 공급자 샘플 응용 프로그램
 
 이 샘플에서는 Azure 키 자격 증명 모음 구성 공급자를 사용 합니다.

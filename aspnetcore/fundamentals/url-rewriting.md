@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/18/2018
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: d2dd5e9b7f196bcbd1940f7ef58331dabd2367a1
-ms.sourcegitcommit: 816f39e852a8f453e8682081871a31bc66db153a
+ms.openlocfilehash: 72d5b2e902a95442ccffb7a149b917c50373775b
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/19/2018
-ms.locfileid: "53637809"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64889928"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>ASP.NET Core에서 URL 재작성 미들웨어
 
@@ -38,7 +38,7 @@ URL 재작성은 하나 이상의 미리 정의된 규칙을 기반으로 하는
 > [!NOTE]
 > URL 재작성은 응용 프로그램의 성능을 저하시킬 수 있습니다. 가능한 경우 규칙의 수와 복잡성을 제한합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="url-redirect-and-url-rewrite"></a>URL 리디렉션 및 URL 재작성
 
@@ -68,7 +68,7 @@ URL 재작성은 하나 이상의 미리 정의된 규칙을 기반으로 하는
 
 ## <a name="url-rewriting-sample-app"></a>URL 재작성 예제 응용 프로그램
 
-[샘플 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/)을 사용하면 URL 재작성 미들웨어의 기능을 살펴볼 수 있습니다. 이 앱은 리디렉션 및 재작성 규칙을 적용하고, 여러 시나리오에 대해 리디렉션되거나 다시 작성된 URL을 표시합니다.
+[샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/)을 사용하면 URL 재작성 미들웨어의 기능을 살펴볼 수 있습니다. 이 앱은 리디렉션 및 재작성 규칙을 적용하고, 여러 시나리오에 대해 리디렉션되거나 다시 작성된 URL을 표시합니다.
 
 ## <a name="when-to-use-url-rewriting-middleware"></a>URL 재작성 미들웨어를 사용해야 하는 경우
 
@@ -191,7 +191,7 @@ URL을 재작성하는 규칙을 만들려면 <xref:Microsoft.AspNetCore.Rewrite
 
 `redirect-rule/(.*)` 리디렉션 규칙이 있는 이전 예제에는 정규식의 시작 부분에 캐럿(`^`)이 없습니다. 따라서 일치하는 모든 문자가 경로의 `redirect-rule/` 앞에 나올 수 있습니다.
 
-| Path                               | 일치 |
+| 경로                               | 일치 |
 | ---------------------------------- | :---: |
 | `/redirect-rule/1234/5678`         | 예   |
 | `/my-cool-redirect-rule/1234/5678` | 예   |
@@ -199,7 +199,7 @@ URL을 재작성하는 규칙을 만들려면 <xref:Microsoft.AspNetCore.Rewrite
 
 반면 `^rewrite-rule/(\d+)/(\d+)` 재작성 규칙의 경우에는 오로지 `rewrite-rule/`로 시작하는 경로만 일치합니다. 다음 표에는 일치에서의 차이가 나와 있습니다.
 
-| Path                              | 일치 |
+| 경로                              | 일치 |
 | --------------------------------- | :---: |
 | `/rewrite-rule/1234/5678`         | 예   |
 | `/my-cool-rewrite-rule/1234/5678` | 아니요    |

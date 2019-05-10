@@ -5,12 +5,12 @@ description: ASP.NET Core 2 단계 인증을 사용 하는 TOTP authenticator �
 ms.author: riande
 ms.date: 08/14/2018
 uid: security/authentication/identity-enable-qrcodes
-ms.openlocfilehash: 5581f2001036746974a858d8a664db16df50edb2
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: a7fdc86b3fe94e714e5147c89a32fce13757d1c1
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58209228"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64896730"
 ---
 # <a name="enable-qr-code-generation-for-totp-authenticator-apps-in-aspnet-core"></a>ASP.NET Core에서 TOTP authenticator 앱에 대 한 QR 코드 생성 사용
 
@@ -85,7 +85,7 @@ ASP.NET Core 웹 앱 템플릿을 인증자를 지원 하지만 QRCode 생성에
 
 ::: moniker range=">= aspnetcore-2.1"
 
-처음 프로젝트를 만들 때 선택한 프로젝트 이름에서 QR 코드에서 사이트 이름을 가져옵니다. 검색 하 여 변경할 수 있습니다 합니다 `GenerateQrCodeUri(string email, string unformattedKey)` 의 메서드를 */Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml*합니다.
+처음 프로젝트를 만들 때 선택한 프로젝트 이름에서 QR 코드에서 사이트 이름을 가져옵니다. 검색 하 여 변경할 수 있습니다 합니다 `GenerateQrCodeUri(string email, string unformattedKey)` 의 메서드를 */Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml.cs*합니다.
 
 ::: moniker-end
 

@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 02/28/2017
 uid: tutorials/first-mvc-app/adding-controller
 ms.openlocfilehash: dad9262e544fc216ddc694b11b0dfb88b58db9cd
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58265018"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64887288"
 ---
 # <a name="add-a-controller-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 컨트롤러 추가
 
@@ -115,8 +115,7 @@ URL의 일부 매개 변수 정보를 컨트롤러에 전달하도록 코드를 
 
 위의 이미지에서 URL 세그먼트(`Parameters`)를 사용하지 않고 `name` 및 `numTimes` 매개 변수가 [쿼리 문자열](https://wikipedia.org/wiki/Query_string)로 전달됩니다. 위 URL에서 `?`(물음표)는 구분 기호이고 쿼리 문자열이 이어집니다. `&` 문자는 쿼리 문자열을 구분합니다.
 
-
-  `Welcome` 메서드를 다음 코드로 바꿉니다.
+`Welcome` 메서드를 다음 코드로 바꿉니다.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_3)]
 

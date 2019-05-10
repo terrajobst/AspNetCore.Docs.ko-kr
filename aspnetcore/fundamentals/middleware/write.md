@@ -7,11 +7,11 @@ ms.custom: mvc
 ms.date: 02/14/2019
 uid: fundamentals/middleware/write
 ms.openlocfilehash: 2c5577394a10370d92c8a83f9d806b63f3245c8b
-ms.sourcegitcommit: b3894b65e313570e97a2ab78b8addd22f427cac8
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/23/2019
-ms.locfileid: "56744924"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64889168"
 ---
 # <a name="write-custom-aspnet-core-middleware"></a>사용자 지정 ASP.NET Core 미들웨어 작성
 
@@ -27,7 +27,7 @@ ms.locfileid: "56744924"
 
 위의 샘플 코드는 미들웨어 구성 요소를 만드는 방법을 보여주는 데 사용됩니다. ASP.NET Core의 기본 제공 지역화 지원은 <xref:fundamentals/localization>을 참조하세요.
 
-문화권을 전달하여 미들웨어를 테스트할 수 있습니다. 예를 들어 `http://localhost:7997/?culture=no`과 같은 형식입니다.
+문화권을 전달하여 미들웨어를 테스트할 수 있습니다. 예를 들어, `http://localhost:7997/?culture=no`을 입력합니다.
 
 다음 코드는 미들웨어 대리자를 클래스로 이동합니다.
 

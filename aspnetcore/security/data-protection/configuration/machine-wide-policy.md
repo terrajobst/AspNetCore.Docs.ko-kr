@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 10/14/2016
 uid: security/data-protection/configuration/machine-wide-policy
 ms.openlocfilehash: 70aaca7afcd3df22cebb4466fbd9845a2277688c
-ms.sourcegitcommit: a1afd04758e663d7062a5bfa8a0d4dca38f42afc
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/20/2018
-ms.locfileid: "36275190"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64897270"
 ---
 # <a name="data-protection-machine-wide-policy-support-in-aspnet-core"></a>ASP.NET Core 데이터 보호의 시스템 수준 정책 지원
 
@@ -68,4 +68,4 @@ EncryptionType 값이 Managed로 지정되면, 기밀성을 위해 관리되는 
 EncryptionType 값에 이 외에 다른 값이 지정되면 (null 값이나 빈 값 이외의), 데이터 보호 시스템이 구동 시 예외를 던집니다.
 
 > [!WARNING]
-> 형식 이름(EncryptionAlgorithmType, ValidationAlgorithmType, KeyEscrowSinks)에 관한 기본 정책 설정을 구성하는 경우, 반드시 응용 프로그램에서 해당 형식을 사용할 수 있어야 합니다. 결론적으로 이 말은 데스크탑 CLR 상에서 실행되는 응용 프로그램의 경우, 해당 형식을 포함한 어셈블리가 GAC에 설치되어 있어야 한다는 뜻입니다. ASP.NET Core 응용 프로그램의.NET Core에서 실행 중인 경우 이러한 형식을 포함 하는 패키지를 설치 해야 합니다.
+> 형식 이름(EncryptionAlgorithmType, ValidationAlgorithmType, KeyEscrowSinks)에 관한 기본 정책 설정을 구성하는 경우, 반드시 응용 프로그램에서 해당 형식을 사용할 수 있어야 합니다. 결론적으로 이 말은 데스크탑 CLR 상에서 실행되는 응용 프로그램의 경우, 해당 형식을 포함한 어셈블리가 GAC에 설치되어 있어야 한다는 뜻입니다. .NET Core에서 실행 되는 ASP.NET Core 앱을 이러한 형식을 포함 하는 패키지를 설치 해야 합니다.

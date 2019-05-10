@@ -1,18 +1,18 @@
 ---
-title: ASP.NET Core에 대 한 소비자 Api 개요
+title: ASP.NET core 소비자 Api 개요
 author: rick-anderson
-description: 다양 한 소비자 ASP.NET Core data protection 라이브러리 내에서 사용할 수 있는 Api의 간략 한 개요를 수신 합니다.
+description: Api에서 ASP.NET Core 데이터 보호 라이브러리를 사용할 수 있는 다양 한 소비자의 간략 한 개요를 수신 합니다.
 ms.author: riande
 ms.date: 10/14/2016
 uid: security/data-protection/consumer-apis/overview
 ms.openlocfilehash: b0d11d097ee2d448b6781f6fa84445f6400fbc76
-ms.sourcegitcommit: a1afd04758e663d7062a5bfa8a0d4dca38f42afc
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/20/2018
-ms.locfileid: "36279118"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65087551"
 ---
-# <a name="consumer-apis-overview-for-aspnet-core"></a>ASP.NET Core에 대 한 소비자 Api 개요
+# <a name="consumer-apis-overview-for-aspnet-core"></a>ASP.NET core 소비자 Api 개요
 
 `IDataProtectionProvider` 와 `IDataProtector` 는 소비자가 데이터 보호 시스템을 사용할 때 가장 기본이 되는 인터페이스입니다. 이러한 인터페이스는 [Microsoft.AspNetCore.DataProtection.Abstractions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Abstractions/) 패키지에 포함되어 있습니다.
 
@@ -39,7 +39,7 @@ DI-인식 구성 요소의 경우, 구성 요소의 생성자에서 `IDataProtec
 
 다음 예제는 세 가지 개념을 보여줍니다.
 
-1. [추가 데이터 보호 시스템](xref:security/data-protection/configuration/overview) 서비스 컨테이너를
+1. [추가 데이터 보호 시스템](xref:security/data-protection/configuration/overview) 서비스 컨테이너에
 
 2. DI를 통해서 `IDataProtectionProvider` 의 인스턴스 가져오기
 

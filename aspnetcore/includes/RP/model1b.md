@@ -1,4 +1,5 @@
-<!-- THIS INCLUDE USED BY MVC AND RP --> `Movie` 클래스에 다음 속성을 추가합니다.
+<!-- THIS INCLUDE USED BY MVC AND RP -->
+`Movie` 클래스에 다음 속성을 추가합니다.
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Models/Movie.cs?name=snippet1)]
 

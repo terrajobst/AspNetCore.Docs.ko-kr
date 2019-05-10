@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 10/14/2016
 uid: security/data-protection/configuration/non-di-scenarios
 ms.openlocfilehash: 34354c8443f6ae00bcce6ad9bdb6c11aaaa25bf8
-ms.sourcegitcommit: a1afd04758e663d7062a5bfa8a0d4dca38f42afc
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/20/2018
-ms.locfileid: "36276882"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64897310"
 ---
 # <a name="non-di-aware-scenarios-for-data-protection-in-aspnet-core"></a>ASP.NET Core 데이터 보호에 대한 비-DI 인식 시나리오
 
@@ -18,15 +18,15 @@ ms.locfileid: "36276882"
 
 ASP.NET Core, 데이터 보호, 종속성 주입, DataProtectionProvider [서비스 컨테이너에 추가 된](xref:security/data-protection/consumer-apis/overview), 종속 구성 요소에서 종속성 주입(DI)을 통해서 사용됩니다. 그러나 경우에 따라서는 이런 구성이 불가능한 경우도 있으며, 그 대표적인 사례가 기존 응용 프로그램에 데이터 보호 시스템을 추가하는 경우입니다.
 
-이러한 시나리오를 지원 하도록는 [Microsoft.AspNetCore.DataProtection.Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) 패키지는 구체적인 형식이 제공 [DataProtectionProvider](/dotnet/api/Microsoft.AspNetCore.DataProtection.DataProtectionProvider), 데이터 보호를 사용 하는 간단한 방법을 제공 DI에 의존 하지 않고 합니다. `DataProtectionProvider` 구현 입력 [IDataProtectionProvider](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotectionprovider)합니다. 생성 `DataProtectionProvider` 하기만 제공 하는 [DirectoryInfo](/dotnet/api/system.io.directoryinfo) 다음 코드 예제와 같이 공급자의 암호화 키 저장 될 위치를 나타냅니다.
+이러한 시나리오를 지 원하는 합니다 [Microsoft.AspNetCore.DataProtection.Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) 패키지를 구체적 형식을 제공 [DataProtectionProvider](/dotnet/api/Microsoft.AspNetCore.DataProtection.DataProtectionProvider), 데이터 보호를 사용 하는 간단한 방법을 제공 하는 없이 DI에 의존 합니다. 합니다 `DataProtectionProvider` 구현 입력 [IDataProtectionProvider](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotectionprovider)합니다. 생성 `DataProtectionProvider` 만 제공 해야는 [DirectoryInfo](/dotnet/api/system.io.directoryinfo) 다음 코드 샘플에서 볼 수 있듯이 공급자의 암호화 키 저장 될 위치를 나타냅니다.
 
 [!code-none[](non-di-scenarios/_static/nodisample1.cs)]
 
-기본적으로는 `DataProtectionProvider` 구체적인 형식 원시 키 자료를 암호화 하지 않습니다 전에 파일 시스템에 유지 합니다. 이 시나리오를 네트워크 공유 및 데이터 보호 시스템 개발자 포인트 추론할 수 없습니다. 자동으로 적절 한 휴지 키 암호화 메커니즘을 지 원하는입니다.
+기본적으로 `DataProtectionProvider` 구체적인 형식을 원시 키 자료를 암호화 하지 전에 파일 시스템에 유지 합니다. 네트워크 공유 및 데이터 보호 시스템 개발자 지점 적절 한 미사용 키 암호화 메커니즘을 추론할 자동으로 수 없습니다. 시나리오를 지원 하기 위해서입니다.
 
 또한, 기본적으로 `DataProtectionProvider` 구체 형식은 [앱을 격리](xref:security/data-protection/configuration/overview#per-application-isolation) 하지 않습니다. 동일한 키 디렉터리를 가리키는 모든 응용 프로그램들은 [매개 변수 용도 위해](xref:security/data-protection/consumer-apis/purpose-strings)가 일치하기만 하면 페이로드를 공유할 수 있습니다.
 
-[DataProtectionProvider](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionprovider) 생성자가 시스템의 동작을 조정 하는 데 사용할 수 있는 선택적 구성 콜백 허용 합니다. 다음 예제를 명시적으로 호출 된 복원 격리를 보여 줍니다. [SetApplicationName](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.setapplicationname)합니다. 이 샘플에는 자동으로 보관 되는 Windows DPAPI를 사용 하 여 키를 암호화 하는 시스템 구성 보여 줍니다. 관련 된 모든 컴퓨터에 공유 인증서를 배포 하 고 시스템을 호출 하 여 인증서 기반 암호화를 사용 하도록 구성 하는 디렉터리는 UNC 공유를 가리키는 경우 지정할 수 있습니다 [ProtectKeysWithCertificate](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.protectkeyswithcertificate)합니다.
+합니다 [DataProtectionProvider](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionprovider) 생성자는 시스템의 동작에 맞게 사용할 수 있는 선택적 구성 콜백입니다. 아래 샘플에 대 한 명시적 호출을 사용 하 여 복원 격리를 보여 줍니다 [SetApplicationName](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.setapplicationname)합니다. 샘플도 자동으로 보관 되는 Windows DPAPI를 사용 하 여 키를 암호화 하는 시스템 구성 방법을 보여 줍니다. 모든 관련 컴퓨터에서 공유 인증서를 배포 하 고 시스템을 호출 하 여 인증서 기반 암호화를 사용 하도록 구성 하려면 디렉터리는 UNC 공유를 가리키는 경우 시킬 수 있습니다 [ProtectKeysWithCertificate](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.protectkeyswithcertificate)합니다.
 
 [!code-none[](non-di-scenarios/_static/nodisample2.cs)]
 

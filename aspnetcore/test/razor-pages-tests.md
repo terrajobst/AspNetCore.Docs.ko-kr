@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/27/2017
 uid: test/razor-pages-tests
-ms.openlocfilehash: 5116ec3c3d6c27f9b0e098f82c82dd7b7337b8f6
-ms.sourcegitcommit: 375e9a67f5e1f7b0faaa056b4b46294cc70f55b7
+ms.openlocfilehash: f1526b8803f43ec8cbe77c1d2c100d9daf6cd316
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/29/2018
-ms.locfileid: "50207500"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64893720"
 ---
 # <a name="razor-pages-unit-tests-in-aspnet-core"></a>ASP.NET Core에서 razor 페이지 단위 테스트
 
@@ -30,16 +30,16 @@ ASP.NET Core Razor 페이지 앱의 단위 테스트를 지원합니다. 테스�
 * [Razor 페이지 시작](xref:tutorials/razor-pages/razor-pages-start)
 * [Dotnet test 및 xUnit을 사용 하 여.NET Core에서 C# 테스트 단위](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/test/razor-pages-tests/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/razor-pages-tests/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 샘플 프로젝트는 두 개의 앱으로 구성 됩니다.
 
 | 앱         | 프로젝트 폴더                        | 설명 |
 | ----------- | ------------------------------------- | ----------- |
 | 메시지 앱 | *src/RazorPagesTestSample*            | 추가, 하나를 삭제, all, 삭제 및 메시지를 분석할 수 있습니다. |
-| 테스트 앱    | *tests/RazorPagesTestSample.Tests*    | 메시지 앱 단위 테스트 하는 데 사용: DAL (계층) 및 인덱스 페이지 모델 데이터에 액세스 합니다. |
+| 테스트 앱    | *tests/RazorPagesTestSample.Tests*    | 메시지 앱 단위 테스트 하는 데 사용 합니다. DAL (데이터 액세스 계층) 및 인덱스 페이지 모델입니다. |
 
-와 같은 기본 제공 테스트에 대 한 기능의 IDE 사용 하 여 테스트를 실행할 수 있습니다 [Visual Studio](https://www.visualstudio.com/vs/)합니다. 사용 하는 경우 [Visual Studio Code](https://code.visualstudio.com/) 또는 명령줄에서 명령 프롬프트에서 다음 명령을 실행 합니다 *tests/RazorPagesTestSample.Tests* 폴더:
+와 같은 기본 제공 테스트에 대 한 기능의 IDE 사용 하 여 테스트를 실행할 수 있습니다 [Visual Studio](https://visualstudio.microsoft.com)합니다. 사용 하는 경우 [Visual Studio Code](https://code.visualstudio.com/) 또는 명령줄에서 명령 프롬프트에서 다음 명령을 실행 합니다 *tests/RazorPagesTestSample.Tests* 폴더:
 
 ```console
 dotnet test
@@ -74,7 +74,7 @@ dotnet test
 
 메시지 앱에 포함 된 네 가지 메서드를 사용 하 여는 DAL에는 `AppDbContext` 클래스 (*src/RazorPagesTestSample/Data/AppDbContext.cs*). 각 메서드 테스트 응용 프로그램에 하나 또는 두 개의 단위 테스트
 
-| DAL 메서드               | 기능                                                                   |
+| DAL 메서드               | 함수                                                                   |
 | ------------------------ | -------------------------------------------------------------------------- |
 | `GetMessagesAsync`       | 가져옵니다를 `List<Message>` 별로 정렬 된 데이터베이스에서의 `Text` 속성입니다. |
 | `AddMessageAsync`        | 추가 된 `Message` 데이터베이스에 있습니다.                                          |
@@ -108,9 +108,9 @@ using (var db = new AppDbContext(Utilities.TestingDbContextOptions()))
 
 각 테스트 메서드는 `DataAccessLayerTest` 클래스 (*UnitTests/DataAccessLayerTest.cs*) 정렬 Act Assert 비슷한 패턴을 따릅니다.
 
-1. 정렬: 테스트에 대 한 데이터베이스가 구성 되어 하거나 예상된 결과 정의 합니다.
+1. 정렬 합니다. 테스트에 대해 구성 된 데이터베이스 및/또는 예상된 결과 정의
 1. Act: 테스트 실행 됩니다.
-1. Assert: 어설션 테스트 결과 성공 인지 확인에 적용 됩니다.
+1. 어설션 됩니다. 테스트 결과 성공 인지 확인 하려면 어설션이 됩니다.
 
 예를 들어 합니다 `DeleteMessageAsync` 로 식별 되는 단일 메시지를 제거 하는 것에 대 한 메서드는 해당 `Id` (*src/RazorPagesTestSample/Data/AppDbContext.cs*):
 
@@ -145,7 +145,7 @@ using (var db = new AppDbContext(Utilities.TestingDbContextOptions()))
 
 다른 단위 테스트 집합의 페이지 모델 메서드 테스트 담당합니다. 메시지 앱에서 인덱스 페이지 모델에서 발견 되는 `IndexModel` 클래스의 *src/RazorPagesTestSample/Pages/Index.cshtml.cs*합니다.
 
-| 페이지 모델 메서드 | 기능 |
+| 페이지 모델 메서드 | 함수 |
 | ----------------- | -------- |
 | `OnGetAsync` | 사용 하 여 UI에 대 한 DAL에서 메시지를 가져옵니다는 `GetMessagesAsync` 메서드. |
 | `OnPostAddMessageAsync` | 경우는 `ModelState` 유효, 호출 `AddMessageAsync` 데이터베이스로 메시지를 추가 하려면. |

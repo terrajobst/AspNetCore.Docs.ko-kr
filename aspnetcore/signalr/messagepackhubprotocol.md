@@ -8,11 +8,11 @@ ms.custom: mvc
 ms.date: 02/27/2019
 uid: signalr/messagepackhubprotocol
 ms.openlocfilehash: 7742f6f8bb53fb3c299ff98ae52a0da519ff396c
-ms.sourcegitcommit: 6ddd8a7675c1c1d997c8ab2d4498538e44954cac
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/05/2019
-ms.locfileid: "57400673"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64896520"
 ---
 # <a name="use-messagepack-hub-protocol-in-signalr-for-aspnet-core"></a>ASP.NET Core SignalR에서 MessagePack 허브 프로토콜 사용
 
@@ -115,7 +115,7 @@ public class ChatMessage
 }
 ```
 
-JavaScript 클라이언트에서 전송 하는 경우에 사용 해야 `PascalCased` 속성 이름은 대/소문자와 일치 해야 합니다는 C# 클래스를 정확 하 게 합니다. 예를 들면,
+JavaScript 클라이언트에서 전송 하는 경우에 사용 해야 `PascalCased` 속성 이름은 대/소문자와 일치 해야 합니다는 C# 클래스를 정확 하 게 합니다. 예를 들어:
 
 ```javascript
 connection.invoke("SomeMethod", { Sender: "Sally", Message: "Hello!" });

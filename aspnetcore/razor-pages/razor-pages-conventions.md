@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/07/2019
 uid: razor-pages/razor-pages-conventions
-ms.openlocfilehash: c160d93e22fc5b3511ba4e5539cce8576346898b
-ms.sourcegitcommit: 191d21c1e37b56f0df0187e795d9a56388bbf4c7
+ms.openlocfilehash: 4e07b5803adbce94982584212fa65afbfd427b64
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/08/2019
-ms.locfileid: "57665546"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64893510"
 ---
 # <a name="razor-pages-route-and-app-conventions-in-aspnet-core"></a>ASP.NET Core에서 Razor 페이지 경로 및 앱 규칙
 
@@ -26,7 +26,7 @@ ms.locfileid: "57665546"
 
 경로 세그먼트 또는 매개 변수 이름으로 사용할 수 없는 예약어 있습니다. 자세한 내용은 참조 하세요. [라우팅: 예약 된 라우팅 이름](xref:fundamentals/routing#reserved-routing-names)합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 | 시나리오 | 샘플에서는 다음 사항을 보여줍니다. |
 | -------- | --------------------------- |
@@ -94,7 +94,7 @@ Razor Pages 라우팅과 MVC 컨트롤러 라우팅은 구현을 공유합니다
 
 가능 하면 설정 하지 않은 합니다 `Order`, 그러면 `Order = 0`합니다. 올바른 경로 선택 하려면 라우팅에 의존 합니다.
 
-Razor 페이지 옵션을 추가 하는 등 <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>, MVC 서비스 컬렉션에 추가 되 면 추가 `Startup.ConfigureServices`합니다. 예제는 [샘플 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/)을 참조하세요.
+Razor 페이지 옵션을 추가 하는 등 <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>, MVC 서비스 컬렉션에 추가 되 면 추가 `Startup.ConfigureServices`합니다. 예제는 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/)을 참조하세요.
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet1)]
 

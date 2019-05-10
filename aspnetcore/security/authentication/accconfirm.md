@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 3/11/2019
 uid: security/authentication/accconfirm
 ms.openlocfilehash: 59041bcf11f7deb351a2f0bb075ed80c8af5e12b
-ms.sourcegitcommit: 088e6744cd67a62f214f25146313a53949b17d35
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/21/2019
-ms.locfileid: "58320223"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64891680"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>계정 확인 및 ASP.NET Core에서 암호 복구
 

@@ -6,12 +6,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 03/28/2019
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: 8967f87da58e7386bc1dd84e7b3e0f5daaecf9cb
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: b5b05dbd553124cecac2ec7ddb55c939cb91c8ad
+ms.sourcegitcommit: a3926eae3f687013027a2828830c12a89add701f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64884718"
+ms.lasthandoff: 05/08/2019
+ms.locfileid: "65450998"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>ASP.NET Core에서 Kestrel 웹 서버 구현
 
@@ -1132,5 +1132,5 @@ Kestrel은 `http://example.com:5000`과 같은 접두사에 따라 구성을 지
 * <xref:test/troubleshoot>
 * <xref:security/enforcing-ssl>
 * <xref:host-and-deploy/proxy-load-balancer>
-* [Kestrel 소스 코드](https://github.com/aspnet/KestrelHttpServer)
+* [Kestrel 소스 코드](https://github.com/aspnet/AspNetCore/tree/master/src/Servers/Kestrel)
 * [RFC 7230: 메시지 구문 및 라우팅(섹션 5.4: 호스트)](https://tools.ietf.org/html/rfc7230#section-5.4)

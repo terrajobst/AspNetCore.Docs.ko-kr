@@ -8,11 +8,11 @@ ms.custom: mvc
 ms.date: 10/24/2018
 uid: security/authentication/scaffold-identity
 ms.openlocfilehash: 7445db31e461bf61e8a91af7239187a6ece9d011
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59705473"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64897360"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>ASP.NET Core 프로젝트에서 스 캐 폴드 Id
 

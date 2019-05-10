@@ -1,6 +1,6 @@
 # <a name="response-compression-sample-application-aspnet-core-2x"></a>응답 압축에 대 한 샘플 응용 프로그램 (ASP.NET Core 2.x)
 
-이 샘플에서는 ASP.NET Core 2.x 응답 압축 미들웨어 HTTP 응답을 압축 합니다. 샘플 Gzip, Brotli을 및 텍스트, 이미지 응답에 대 한 사용자 지정 압축 공급자를 보여 줍니다 및 압축을 위한 MIME 형식을 추가 하는 방법을 보여 줍니다. ASP.NET Core 1.x 샘플을 보려면 [응답 압축에 대 한 샘플 응용 프로그램 (ASP.NET Core 1.x)](https://github.com/aspnet/Docs/tree/master/aspnetcore/performance/response-compression/samples/1.x)합니다.
+이 샘플에서는 ASP.NET Core 2.x 응답 압축 미들웨어 HTTP 응답을 압축 합니다. 샘플 Gzip, Brotli을 및 텍스트, 이미지 응답에 대 한 사용자 지정 압축 공급자를 보여 줍니다 및 압축을 위한 MIME 형식을 추가 하는 방법을 보여 줍니다. ASP.NET Core 1.x 샘플을 보려면 [응답 압축에 대 한 샘플 응용 프로그램 (ASP.NET Core 1.x)](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples/1.x)합니다.
 
 ## <a name="examples-in-this-sample"></a>이 샘플의 예제
 

@@ -6,12 +6,12 @@ ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 uid: azure/devops/tools-and-downloads
-ms.openlocfilehash: 0c64e723f1b912323103f201a66c1edaeccdcc2d
-ms.sourcegitcommit: b34b25da2ab68e6495b2460ff570468f16a9bf0d
+ms.openlocfilehash: ae4827f735274405021e5ee539d1029b7ddb9553
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53284353"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64891990"
 ---
 # <a name="tools-and-downloads"></a>도구 및 다운로드
 
@@ -38,7 +38,7 @@ Azure에 프로 비전 및와 같은 리소스를 관리 하기 위한 몇 가�
 
 ## <a name="recommended-tools-windows-only"></a>권장된 도구 (Windows만 해당)
 
-* [Visual Studio](https://www.visualstudio.com/)의 강력한 Azure 도구 GUI에 대 한 제공 대부분의 기능에이 가이드에서 설명 합니다. 무료 Visual Studio Community Edition을 비롯 한 모든 버전의 Visual Studio 작동 합니다. 자습서를 사용 하 여와 Visual Studio 없이 개발, 배포 및 DevOps를 보여 주기 위해 기록 됩니다.
+* [Visual Studio](https://visualstudio.microsoft.com)의 강력한 Azure 도구 GUI에 대 한 제공 대부분의 기능에이 가이드에서 설명 합니다. 무료 Visual Studio Community Edition을 비롯 한 모든 버전의 Visual Studio 작동 합니다. 자습서를 사용 하 여와 Visual Studio 없이 개발, 배포 및 DevOps를 보여 주기 위해 기록 됩니다.
 
   Visual Studio에는 다음이 있는지 확인 [워크 로드](/visualstudio/install/modify-visual-studio) 설치:
 

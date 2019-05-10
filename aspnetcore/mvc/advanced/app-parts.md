@@ -5,16 +5,16 @@ description: 앱의 리소스에 대한 추상화인 애플리케이션 파트�
 ms.author: riande
 ms.date: 01/04/2017
 uid: mvc/extensibility/app-parts
-ms.openlocfilehash: 67bd40adef4cdb0bd781f70114d3954cd9a8ed09
-ms.sourcegitcommit: 088e6744cd67a62f214f25146313a53949b17d35
+ms.openlocfilehash: 5d5e79d3afe0eee6d0b126d4642ccd5f61bff409
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/21/2019
-ms.locfileid: "58320097"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64888138"
 ---
 # <a name="application-parts-in-aspnet-core"></a>ASP.NET Core에서 애플리케이션 파트
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 *애플리케이션 파트*는 컨트롤러, 보기 구성 요소 또는 태그 도우미와 같은 MVC 기능이 검색할 수 있는 애플리케이션의 리소스에 대한 추상화입니다. 애플리케이션 파트의 한 가지 예로는 AssemblyPart가 있습니다. 여기서는 어셈블리 참조를 캡슐화하고 표시 유형 및 컴파일 참조를 노출합니다. *기능 공급자*는 애플리케이션 파트를 사용하여 ASP.NET Core MVC 앱의 기능을 구성합니다. 애플리케이션 파트에 대한 주요 사용 사례는 어셈블리에서 MVC 기능을 검색(또는 로드를 방지)하도록 앱을 구성하는 것입니다.
 

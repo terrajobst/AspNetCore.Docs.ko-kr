@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/20/2018
 uid: client-side/libman/libman-vs
-ms.openlocfilehash: 727bd80b7f37f6ebd9d37b7aab1aa6c33b85678c
-ms.sourcegitcommit: 375e9a67f5e1f7b0faaa056b4b46294cc70f55b7
+ms.openlocfilehash: 41a5a41c8921b04290784d26441ecb46aea753e7
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/29/2018
-ms.locfileid: "50206729"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64894970"
 ---
 # <a name="use-libman-with-aspnet-core-in-visual-studio"></a>Visual Studio에서 ASP.NET Core와 LibMan 사용하기
 
@@ -24,7 +24,7 @@ Visual Studio는 ASP.NET Core 프로젝트에서 [LibMan](xref:client-side/libma
 * 라이브러리를 검색하고 프로젝트에 파일을 추가하기 위한 검색 대화 상자.
 * LibMan 매니페스트 파일인 *libman.json*&mdash;에 대한 편집 지원.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/client-side/libman/samples/) [(다운로드 방법)](xref:index#how-to-download-a-sample)
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/client-side/libman/samples/) [(다운로드 방법)](xref:index#how-to-download-a-sample)
 
 ## <a name="prerequisites"></a>전제 조건
 

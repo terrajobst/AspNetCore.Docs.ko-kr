@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 04/13/2019
 uid: performance/performance-best-practices
-ms.openlocfilehash: 095db38cf3102f6e18930efdbbaeeb90dffad8af
-ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
+ms.openlocfilehash: 28dc7fb40c1b60f643108dcb44593a08942a1650
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/16/2019
-ms.locfileid: "59614450"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65087494"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core 성능 모범 사례
 
@@ -44,7 +44,7 @@ ASP.NET Core 앱의 일반적인 성능 문제는 비동기 될 수 있는 호�
 * 데이터 액세스 및 장기 실행 작업 Api 비동기적으로 호출 합니다.
 * 비동기화 컨트롤러/Razor 페이지 작업 합니다. 전체 호출 스택은의 이점을 얻기 위해서는 비동기 [async/await](/dotnet/csharp/programming-guide/concepts/async/) 패턴입니다.
 
-프로파일러는와 같은 [PerfView](https://github.com/Microsoft/perfview)를 자주 추가 된 스레드를 찾는 데 사용할 수는 [스레드 풀](/windows/desktop/procthread/thread-pool)합니다. `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start` 이벤트 스레드 풀에 추가 하는 스레드를 나타냅니다. <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc  -->
+프로파일러는와 같은 [PerfView](https://github.com/Microsoft/perfview)를 자주 추가 된 스레드를 찾는 데 사용할 수는 [스레드 풀](/windows/desktop/procthread/thread-pools)합니다. `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start` 이벤트 스레드 풀에 추가 하는 스레드를 나타냅니다. <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc  -->
 
 ## <a name="minimize-large-object-allocations"></a>큰 개체 할당을 최소화 합니다.
 

@@ -7,12 +7,12 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 06/04/2018
 uid: signalr/groups
-ms.openlocfilehash: 45f2bb44e03a586b7fc186525fdd3a2645c820d5
-ms.sourcegitcommit: ed76cc752966c604a795fbc56d5a71d16ded0b58
+ms.openlocfilehash: 180f8b4551eea39cc340bf1d250f4575cb5f71ed
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/02/2019
-ms.locfileid: "55667754"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65087425"
 ---
 # <a name="manage-users-and-groups-in-signalr"></a>SignalR에서 사용자 및 그룹 관리
 
@@ -20,7 +20,7 @@ ms.locfileid: "55667754"
 
 SignalR을 사용하면 특정 사용자와 관련된 모든 연결뿐만 아니라 명명된 연결 그룹에 메시지를 전송할 수 있습니다.
 
-[샘플 코드 보기 또는 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/signalr/groups/sample/) [(다운로드 방법)](xref:index#how-to-download-a-sample)
+[샘플 코드 보기 또는 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/groups/sample/) [(다운로드 방법)](xref:index#how-to-download-a-sample)
 
 ## <a name="users-in-signalr"></a>SignalR의 사용자
 

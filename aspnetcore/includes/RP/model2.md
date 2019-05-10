@@ -1,11 +1,3 @@
----
-ms.openlocfilehash: 86cf1874677dc8b79e3223fb0819eb1881c69a11
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58265604"
----
 <a name="dc"></a>
 
 ### <a name="add-a-database-context-class"></a>데이터베이스 컨텍스트 클래스 추가
