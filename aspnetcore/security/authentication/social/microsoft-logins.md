@@ -1,152 +1,96 @@
 ---
 title: ASP.NET Core를 사용 하 여 Microsoft 계정 외부 로그인 설정
 author: rick-anderson
-description: 이 자습서에서는 기존 ASP.NET Core 앱에 Microsoft 계정 사용자 인증의 통합을 보여 줍니다.
+description: 이 샘플에서는 기존 ASP.NET Core 앱에 Microsoft 계정 사용자 인증의 통합을 보여 줍니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/11/2018
+ms.date: 5/11/2019
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: 1733d049d6752c24d7749b5b5ae2a4b866492358
-ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
+ms.openlocfilehash: 1c78cc957b6ff77c91c8ca4aef59a1cacd85a8ca
+ms.sourcegitcommit: 3376f224b47a89acf329b2d2f9260046a372f924
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/30/2019
-ms.locfileid: "58751002"
+ms.lasthandoff: 05/10/2019
+ms.locfileid: "65517086"
 ---
-# <a name="microsoft-account-external-login-setup-with-aspnet-core"></a><span data-ttu-id="6948d-103">ASP.NET Core를 사용 하 여 Microsoft 계정 외부 로그인 설정</span><span class="sxs-lookup"><span data-stu-id="6948d-103">Microsoft Account external login setup with ASP.NET Core</span></span>
+# <a name="microsoft-account-external-login-setup-with-aspnet-core"></a><span data-ttu-id="c3298-103">ASP.NET Core를 사용 하 여 Microsoft 계정 외부 로그인 설정</span><span class="sxs-lookup"><span data-stu-id="c3298-103">Microsoft Account external login setup with ASP.NET Core</span></span>
 
-<span data-ttu-id="6948d-104">작성자: [Valeriy Novytskyy](https://github.com/01binary) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="6948d-104">By [Valeriy Novytskyy](https://github.com/01binary) and [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+<span data-ttu-id="c3298-104">작성자: [Valeriy Novytskyy](https://github.com/01binary) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="c3298-104">By [Valeriy Novytskyy](https://github.com/01binary) and [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
-<span data-ttu-id="6948d-105">이 자습서에서 만든 샘플 ASP.NET Core 2.0 프로젝트를 사용 하 여 Microsoft 계정으로 로그인 사용자가 사용 하도록 설정 하는 방법을 보여 줍니다.는 [이전 페이지](xref:security/authentication/social/index)합니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-105">This tutorial shows you how to enable your users to sign in with their Microsoft account using a sample ASP.NET Core 2.0 project created on the [previous page](xref:security/authentication/social/index).</span></span>
+<span data-ttu-id="c3298-105">이 샘플에서 만든 ASP.NET Core 2.2 프로젝트를 사용 하 여 Microsoft 계정으로 로그인 할 수 있도록 하는 방법을 보여 줍니다.는 [이전 페이지](xref:security/authentication/social/index)합니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-105">This sample shows you how to enable users to sign in with their Microsoft account using the ASP.NET Core 2.2 project created on the [previous page](xref:security/authentication/social/index).</span></span>
 
-## <a name="create-the-app-in-microsoft-developer-portal"></a><span data-ttu-id="6948d-106">Microsoft 개발자 포털에서 앱 만들기</span><span class="sxs-lookup"><span data-stu-id="6948d-106">Create the app in Microsoft Developer Portal</span></span>
+## <a name="create-the-app-in-microsoft-developer-portal"></a><span data-ttu-id="c3298-106">Microsoft 개발자 포털에서 앱 만들기</span><span class="sxs-lookup"><span data-stu-id="c3298-106">Create the app in Microsoft Developer Portal</span></span>
 
-* <span data-ttu-id="6948d-107">이동할 [ https://apps.dev.microsoft.com ](https://apps.dev.microsoft.com) 만들거나 Microsoft 계정으로 로그인 합니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-107">Navigate to [https://apps.dev.microsoft.com](https://apps.dev.microsoft.com) and create or sign into a Microsoft account:</span></span>
+* <span data-ttu-id="c3298-107">로 이동 합니다 [Azure portal-앱 등록](https://go.microsoft.com/fwlink/?linkid=2083908) 페이지를 만들거나 Microsoft 계정으로 로그인 합니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-107">Navigate to the [Azure portal - App registrations](https://go.microsoft.com/fwlink/?linkid=2083908) page and create or sign into a Microsoft account:</span></span>
 
-![로그인 대화 상자](index/_static/MicrosoftDevLogin.png)
+<span data-ttu-id="c3298-108">Microsoft 계정이 없다면 선택 **만드십시오**합니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-108">If you don't have a Microsoft account, select **Create one**.</span></span> <span data-ttu-id="c3298-109">로그인 한 후 리디렉션됩니다 합니다 **앱 등록** 페이지:</span><span class="sxs-lookup"><span data-stu-id="c3298-109">After signing in you are redirected to the **App registrations** page:</span></span>
 
-<span data-ttu-id="6948d-109">Microsoft 계정이 아직 없다면 탭  **[만드세요!](https://signup.live.com/signup?wa=wsignin1.0&rpsnv=13&ct=1478151035&rver=6.7.6643.0&wp=SAPI_LONG&wreply=https%3a%2f%2fapps.dev.microsoft.com%2fLoginPostBack&id=293053&aadredir=1&contextid=D70D4F21246BAB50&bk=1478151036&uiflavor=web&uaid=f0c3de863a914c358b8dc01b1ff49e85&mkt=EN-US&lc=1033&lic=1)**</span><span class="sxs-lookup"><span data-stu-id="6948d-109">If you don't already have a Microsoft account, tap **[Create one!](https://signup.live.com/signup?wa=wsignin1.0&rpsnv=13&ct=1478151035&rver=6.7.6643.0&wp=SAPI_LONG&wreply=https%3a%2f%2fapps.dev.microsoft.com%2fLoginPostBack&id=293053&aadredir=1&contextid=D70D4F21246BAB50&bk=1478151036&uiflavor=web&uaid=f0c3de863a914c358b8dc01b1ff49e85&mkt=EN-US&lc=1033&lic=1)**</span></span> <span data-ttu-id="6948d-110">로그인 한 후 리디렉션됩니다 **내 응용 프로그램** 페이지:</span><span class="sxs-lookup"><span data-stu-id="6948d-110">After signing in you are redirected to **My applications** page:</span></span>
+* <span data-ttu-id="c3298-110">선택 **새 등록**</span><span class="sxs-lookup"><span data-stu-id="c3298-110">Select **New registration**</span></span>
+* <span data-ttu-id="c3298-111">입력 한 **이름을**입니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-111">Enter a **Name**.</span></span>
+* <span data-ttu-id="c3298-112">에 대 한 옵션을 선택 **지원 되는 계정 유형**합니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-112">Select an option for **Supported account types**.</span></span>  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts -->
+* <span data-ttu-id="c3298-113">아래 **리디렉션 URI**를 사용 하 여 개발 URL 입력 `/signin-microsoft` 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-113">Under **Redirect URI**, enter your development URL with `/signin-microsoft` appended.</span></span> <span data-ttu-id="c3298-114">예를 들어, `https://localhost:44389/signin-microsoft`을 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-114">For example, `https://localhost:44389/signin-microsoft`.</span></span> <span data-ttu-id="c3298-115">이 샘플의 뒷부분에 나오는 구성 Microsoft 인증 체계에서 요청을 자동으로 처리 됩니다 `/signin-microsoft` OAuth 흐름을 구현 하는 경로입니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-115">The Microsoft authentication scheme configured later in this sample will automatically handle requests at `/signin-microsoft` route to implement the OAuth flow.</span></span>
+* <span data-ttu-id="c3298-116">선택 **등록**</span><span class="sxs-lookup"><span data-stu-id="c3298-116">Select **Register**</span></span>
 
-![Microsoft Edge에서 열린 Microsoft 개발자 포털](index/_static/MicrosoftDev.png)
+### <a name="create-client-secret"></a><span data-ttu-id="c3298-117">클라이언트 비밀 만들기</span><span class="sxs-lookup"><span data-stu-id="c3298-117">Create client secret</span></span>
 
-* <span data-ttu-id="6948d-112">탭 **앱 추가** 오른쪽 상단 모서리에 입력 하 **응용 프로그램 이름** 하 고 **Contact Email**:</span><span class="sxs-lookup"><span data-stu-id="6948d-112">Tap **Add an app** in the upper right corner and enter your **Application Name** and **Contact Email**:</span></span>
+* <span data-ttu-id="c3298-118">왼쪽된 창에서 선택 **인증서 및 비밀**합니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-118">In the left pane, select **Certificates & secrets**.</span></span>
+* <span data-ttu-id="c3298-119">아래 **클라이언트 비밀**, 선택 **새 클라이언트 암호**</span><span class="sxs-lookup"><span data-stu-id="c3298-119">Under **Client secrets**, select **New client secret**</span></span>
 
-![새 응용 프로그램 등록 대화 상자](index/_static/MicrosoftDevAppCreate.png)
+  * <span data-ttu-id="c3298-120">클라이언트 암호에 대 한 설명을 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-120">Add a description for the client secret.</span></span>
+  * <span data-ttu-id="c3298-121">선택 된 **추가** 단추입니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-121">Select the **Add** button.</span></span>
 
-* <span data-ttu-id="6948d-114">이 자습서에서는 선택을 취소 합니다 **안내식 설정** 확인란 합니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-114">For the purposes of this tutorial, clear the **Guided Setup** check box.</span></span>
-
-* <span data-ttu-id="6948d-115">탭 **Create** 를 계속 합니다 **등록** 페이지.</span><span class="sxs-lookup"><span data-stu-id="6948d-115">Tap **Create** to continue to the **Registration** page.</span></span> <span data-ttu-id="6948d-116">제공을 **이름** 의 값을 확인 합니다 **응용 프로그램 Id**,으로 사용 하는 `ClientId` 자습서의에서 뒷부분에서:</span><span class="sxs-lookup"><span data-stu-id="6948d-116">Provide a **Name** and note the value of the **Application Id**, which you use as `ClientId` later in the tutorial:</span></span>
-
-![등록 페이지](index/_static/MicrosoftDevAppReg.png)
-
-* <span data-ttu-id="6948d-118">탭 **플랫폼 추가** 에 **플랫폼** 섹션을 선택 합니다 **웹** 플랫폼:</span><span class="sxs-lookup"><span data-stu-id="6948d-118">Tap **Add Platform** in the **Platforms** section and select the **Web** platform:</span></span>
-
-![추가 플랫폼 대화 상자](index/_static/MicrosoftDevAppPlatform.png)
-
-* <span data-ttu-id="6948d-120">새 **웹** 플랫폼 섹션에서 사용 하 여 개발 URL 입력 `/signin-microsoft` 에 추가 합니다 **리디렉션 Url** 필드 (예를 들어: `https://localhost:44320/signin-microsoft`).</span><span class="sxs-lookup"><span data-stu-id="6948d-120">In the new **Web** platform section, enter your development URL with `/signin-microsoft` appended into the **Redirect URLs** field (for example: `https://localhost:44320/signin-microsoft`).</span></span> <span data-ttu-id="6948d-121">이 자습서의 뒷부분에서 구성 된 Microsoft 인증 체계에서 요청을 자동으로 처리 됩니다 `/signin-microsoft` OAuth 흐름을 구현 하는 경로:</span><span class="sxs-lookup"><span data-stu-id="6948d-121">The Microsoft authentication scheme configured later in this tutorial will automatically handle requests at `/signin-microsoft` route to implement the OAuth flow:</span></span>
-
-![웹 플랫폼 섹션](index/_static/MicrosoftRedirectUri.png)
+* <span data-ttu-id="c3298-122">아래 **클라이언트 비밀**, 클라이언트 암호의 값을 복사 합니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-122">Under **Client secrets**, copy the value of the client secret.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="6948d-123">URI 세그먼트 `/signin-microsoft` Microsoft 인증 공급자의 기본 콜백으로 설정 됩니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-123">The URI segment `/signin-microsoft` is set as the default callback of the Microsoft authentication provider.</span></span> <span data-ttu-id="6948d-124">상속을 통해 Microsoft 인증 미들웨어를 구성 하는 동안 기본 콜백 URI를 변경할 수 있습니다 [RemoteAuthenticationOptions.CallbackPath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) 의 속성을 [MicrosoftAccountOptions](/dotnet/api/microsoft.aspnetcore.authentication.microsoftaccount.microsoftaccountoptions) 클래스입니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-124">You can change the default callback URI while configuring the Microsoft authentication middleware via the inherited [RemoteAuthenticationOptions.CallbackPath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) property of the [MicrosoftAccountOptions](/dotnet/api/microsoft.aspnetcore.authentication.microsoftaccount.microsoftaccountoptions) class.</span></span>
+> <span data-ttu-id="c3298-123">URI 세그먼트 `/signin-microsoft` Microsoft 인증 공급자의 기본 콜백으로 설정 됩니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-123">The URI segment `/signin-microsoft` is set as the default callback of the Microsoft authentication provider.</span></span> <span data-ttu-id="c3298-124">상속을 통해 Microsoft 인증 미들웨어를 구성 하는 동안 기본 콜백 URI를 변경할 수 있습니다 [RemoteAuthenticationOptions.CallbackPath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) 의 속성을 [MicrosoftAccountOptions](/dotnet/api/microsoft.aspnetcore.authentication.microsoftaccount.microsoftaccountoptions) 클래스입니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-124">You can change the default callback URI while configuring the Microsoft authentication middleware via the inherited [RemoteAuthenticationOptions.CallbackPath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) property of the [MicrosoftAccountOptions](/dotnet/api/microsoft.aspnetcore.authentication.microsoftaccount.microsoftaccountoptions) class.</span></span>
 
-* <span data-ttu-id="6948d-125">탭 **URL 추가** URL가 추가 되도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-125">Tap **Add URL** to ensure the URL was added.</span></span>
+## <a name="store-the-microsoft-client-id-and-client-secret"></a><span data-ttu-id="c3298-125">Microsoft 클라이언트 ID 및 클라이언트 암호를 저장 합니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-125">Store the Microsoft client ID and client secret</span></span>
 
-* <span data-ttu-id="6948d-126">필요한 경우 다른 응용 프로그램 설정 작성 하 고 탭 **저장할** 앱 구성에 변경 내용을 저장 하려면 페이지 맨 아래에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-126">Fill out any other application settings if necessary and tap **Save** at the bottom of the page to save changes to app configuration.</span></span>
+<span data-ttu-id="c3298-126">안전 하 게 저장 하려면 다음 명령을 실행 `ClientId` 하 고 `ClientSecret` 사용 하 여 [암호 관리자](xref:security/app-secrets):</span><span class="sxs-lookup"><span data-stu-id="c3298-126">Run the following commands to securely store `ClientId` and `ClientSecret` using [Secret Manager](xref:security/app-secrets):</span></span>
 
-* <span data-ttu-id="6948d-127">다시 방문 해야 사이트를 배포 하는 경우는 **등록** 페이지 및 새 공용 URL을 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-127">When deploying the site you'll need to revisit the **Registration** page and set a new public URL.</span></span>
+```console
+dotnet user-secrets set Authentication:Microsoft:ClientId <Client-Id>
+dotnet user-secrets set Authentication:Microsoft:ClientSecret <Client-Secret>
+```
 
-## <a name="store-microsoft-application-id-and-password"></a><span data-ttu-id="6948d-128">Microsoft 응용 프로그램 Id 및 암호를 저장 합니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-128">Store Microsoft Application Id and Password</span></span>
-
-* <span data-ttu-id="6948d-129">참고 합니다 `Application Id` 에 표시 합니다 **등록** 페이지입니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-129">Note the `Application Id` displayed on the **Registration** page.</span></span>
-
-* <span data-ttu-id="6948d-130">탭 **새 암호 생성** 에 **응용 프로그램 비밀** 섹션입니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-130">Tap **Generate New Password** in the **Application Secrets** section.</span></span> <span data-ttu-id="6948d-131">이 응용 프로그램 암호를 복사할 수 있는 상자를 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-131">This displays a box where you can copy the application password:</span></span>
-
-![새 암호가 생성 대화 상자](index/_static/MicrosoftDevPassword.png)
-
-<span data-ttu-id="6948d-133">Microsoft와 같은 중요 한 설정이 연결 `Application ID` 하 고 `Password` 사용 하 여 응용 프로그램 구성에는 [암호 관리자](xref:security/app-secrets)합니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-133">Link sensitive settings like Microsoft `Application ID` and `Password` to your application configuration using the [Secret Manager](xref:security/app-secrets).</span></span> <span data-ttu-id="6948d-134">이 자습서에서는 이름을 토큰 `Authentication:Microsoft:ApplicationId` 고 `Authentication:Microsoft:Password`입니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-134">For the purposes of this tutorial, name the tokens `Authentication:Microsoft:ApplicationId` and `Authentication:Microsoft:Password`.</span></span>
+<span data-ttu-id="c3298-127">Microsoft와 같은 중요 한 설정이 연결 `ClientId` 하 고 `ClientSecret` 사용 하 여 응용 프로그램 구성에는 [암호 관리자](xref:security/app-secrets)합니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-127">Link sensitive settings like Microsoft `ClientId` and `ClientSecret` to your application configuration using the [Secret Manager](xref:security/app-secrets).</span></span> <span data-ttu-id="c3298-128">이 샘플에서는 토큰 이름을 `Authentication:Microsoft:ClientId` 고 `Authentication:Microsoft:ClientSecret`입니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-128">For the purposes of this sample, name the tokens `Authentication:Microsoft:ClientId` and `Authentication:Microsoft:ClientSecret`.</span></span>
 
 [!INCLUDE[](~/includes/environmentVarableColon.md)]
 
-## <a name="configure-microsoft-account-authentication"></a><span data-ttu-id="6948d-135">Microsoft 계정 인증 구성</span><span class="sxs-lookup"><span data-stu-id="6948d-135">Configure Microsoft Account Authentication</span></span>
+## <a name="configure-microsoft-account-authentication"></a><span data-ttu-id="c3298-129">Microsoft 계정 인증 구성</span><span class="sxs-lookup"><span data-stu-id="c3298-129">Configure Microsoft Account Authentication</span></span>
 
-<span data-ttu-id="6948d-136">이 자습서에 사용 되는 프로젝트 템플릿이 되도록 [Microsoft.AspNetCore.Authentication.MicrosoftAccount](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.MicrosoftAccount) 패키지가 이미 설치 되었습니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-136">The project template used in this tutorial ensures that [Microsoft.AspNetCore.Authentication.MicrosoftAccount](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.MicrosoftAccount) package is already installed.</span></span>
+<span data-ttu-id="c3298-130">Microsoft 계정 서비스에 추가 합니다 `ConfigureServices` 의 메서드 *Startup.cs* 파일:</span><span class="sxs-lookup"><span data-stu-id="c3298-130">Add the Microsoft Account service in the `ConfigureServices` method in *Startup.cs* file:</span></span>
 
-* <span data-ttu-id="6948d-137">Visual Studio 2017을 사용 하 여이 패키지를 설치 하려면 마우스 오른쪽 단추로 클릭 프로젝트를 마우스 **NuGet 패키지 관리**합니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-137">To install this package with Visual Studio 2017, right-click on the project and select **Manage NuGet Packages**.</span></span>
-* <span data-ttu-id="6948d-138">.NET Core CLI를 설치 하려면 프로젝트 디렉터리에서 다음을 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-138">To install with .NET Core CLI, execute the following in your project directory:</span></span>
-
-   `dotnet add package Microsoft.AspNetCore.Authentication.MicrosoftAccount`
-
-::: moniker range=">= aspnetcore-2.0"
-
-<span data-ttu-id="6948d-139">Microsoft 계정 서비스에 추가 합니다 `ConfigureServices` 의 메서드 *Startup.cs* 파일:</span><span class="sxs-lookup"><span data-stu-id="6948d-139">Add the Microsoft Account service in the `ConfigureServices` method in *Startup.cs* file:</span></span>
-
-```csharp
-services.AddDefaultIdentity<IdentityUser>()
-        .AddDefaultUI(UIFramework.Bootstrap4)
-        .AddEntityFrameworkStores<ApplicationDbContext>();
-
-services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
-{
-    microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ApplicationId"];
-    microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:Password"];
-});
-```
+[!code-csharp[](~/security/authentication/social/social-code/StartupMS.cs?name=snippet&highlight=10-14)]
 
 [!INCLUDE [default settings configuration](includes/default-settings.md)]
 
 [!INCLUDE[](includes/chain-auth-providers.md)]
 
-::: moniker-end
+<span data-ttu-id="c3298-131">참조 된 [MicrosoftAccountOptions](/dotnet/api/microsoft.aspnetcore.builder.microsoftaccountoptions) Microsoft 계정 인증에서 지 원하는 구성 옵션에 대 한 자세한 내용은 API 참조.</span><span class="sxs-lookup"><span data-stu-id="c3298-131">See the [MicrosoftAccountOptions](/dotnet/api/microsoft.aspnetcore.builder.microsoftaccountoptions) API reference for more information on configuration options supported by Microsoft Account authentication.</span></span> <span data-ttu-id="c3298-132">이 사용 하 여 사용자에 대 한 다른 정보를 요청할 수 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-132">This can be used to request different information about the user.</span></span>
 
-::: moniker range="< aspnetcore-2.0"
+## <a name="sign-in-with-microsoft-account"></a><span data-ttu-id="c3298-133">Microsoft 계정으로 로그인</span><span class="sxs-lookup"><span data-stu-id="c3298-133">Sign in with Microsoft Account</span></span>
 
-<span data-ttu-id="6948d-140">Microsoft 계정 미들웨어를 추가 합니다 `Configure` 의 메서드 *Startup.cs* 파일:</span><span class="sxs-lookup"><span data-stu-id="6948d-140">Add the Microsoft Account middleware in the `Configure` method in *Startup.cs* file:</span></span>
+<span data-ttu-id="c3298-134">실행을 클릭 하 고 **로그인**합니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-134">Run the and click **Log in**.</span></span> <span data-ttu-id="c3298-135">Microsoft에 로그인 하는 옵션이 표시 됩니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-135">An option to sign in with Microsoft appears.</span></span> <span data-ttu-id="c3298-136">Microsoft를 클릭 하면 리디렉션됩니다 Microsoft 인증에 대 한 합니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-136">When you click on Microsoft, you are redirected to Microsoft for authentication.</span></span> <span data-ttu-id="c3298-137">(아직 로그인 하지 않은) 하는 경우 Microsoft 계정으로 로그인 한 후 앱 정보에 액세스할 수 있도록 라는 메시지가 표시 됩니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-137">After signing in with your Microsoft Account (if not already signed in) you will be prompted to let the app access your info:</span></span>
 
-```csharp
-app.UseMicrosoftAccountAuthentication(new MicrosoftAccountOptions()
-{
-    ClientId = Configuration["Authentication:Microsoft:ApplicationId"],
-    ClientSecret = Configuration["Authentication:Microsoft:Password"]
-});
-```
+<span data-ttu-id="c3298-138">탭 **예** 및 전자 메일을 설정할 수 있는 웹 사이트로 다시 리디렉션됩니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-138">Tap **Yes** and you will be redirected back to the web site where you can set your email.</span></span>
 
-::: moniker-end
-
-<span data-ttu-id="6948d-141">하지만 Microsoft 개발자 포털에서 사용 되는 용어 이름은 이러한 토큰 `ApplicationId` 하 고 `Password`,으로 노출 하는 `ClientId` 및 `ClientSecret` 구성 API에.</span><span class="sxs-lookup"><span data-stu-id="6948d-141">Although the terminology used on Microsoft Developer Portal names these tokens `ApplicationId` and `Password`, they're exposed as `ClientId` and `ClientSecret` to the configuration API.</span></span>
-
-<span data-ttu-id="6948d-142">참조 된 [MicrosoftAccountOptions](/dotnet/api/microsoft.aspnetcore.builder.microsoftaccountoptions) Microsoft 계정 인증에서 지 원하는 구성 옵션에 대 한 자세한 내용은 API 참조.</span><span class="sxs-lookup"><span data-stu-id="6948d-142">See the [MicrosoftAccountOptions](/dotnet/api/microsoft.aspnetcore.builder.microsoftaccountoptions) API reference for more information on configuration options supported by Microsoft Account authentication.</span></span> <span data-ttu-id="6948d-143">이 사용 하 여 사용자에 대 한 다른 정보를 요청할 수 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-143">This can be used to request different information about the user.</span></span>
-
-## <a name="sign-in-with-microsoft-account"></a><span data-ttu-id="6948d-144">Microsoft 계정으로 로그인</span><span class="sxs-lookup"><span data-stu-id="6948d-144">Sign in with Microsoft Account</span></span>
-
-<span data-ttu-id="6948d-145">응용 프로그램을 실행 하 고 클릭 **로그인**합니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-145">Run your application and click **Log in**.</span></span> <span data-ttu-id="6948d-146">Microsoft에 로그인 하는 옵션이 표시 됩니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-146">An option to sign in with Microsoft appears:</span></span>
-
-![웹 페이지 응용 프로그램 로그: 인증 되지 않은 사용자](index/_static/DoneMicrosoft.png)
-
-<span data-ttu-id="6948d-148">Microsoft를 클릭 하면 리디렉션됩니다 Microsoft 인증에 대 한 합니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-148">When you click on Microsoft, you are redirected to Microsoft for authentication.</span></span> <span data-ttu-id="6948d-149">(아직 로그인 하지 않은) 하는 경우 Microsoft 계정으로 로그인 한 후 앱 정보에 액세스할 수 있도록 라는 메시지가 표시 됩니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-149">After signing in with your Microsoft Account (if not already signed in) you will be prompted to let the app access your info:</span></span>
-
-![Microsoft 인증 대화 상자](index/_static/MicrosoftLogin.png)
-
-<span data-ttu-id="6948d-151">탭 **예** 및 전자 메일을 설정할 수 있는 웹 사이트로 다시 리디렉션됩니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-151">Tap **Yes** and you will be redirected back to the web site where you can set your email.</span></span>
-
-<span data-ttu-id="6948d-152">이제 Microsoft 자격 증명을 사용 하 여 로그인 됩니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-152">You are now logged in using your Microsoft credentials:</span></span>
-
-![웹 응용 프로그램: 인증 된 사용자](index/_static/Done.png)
+<span data-ttu-id="c3298-139">이제 Microsoft 자격 증명을 사용 하 여 로그인 됩니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-139">You are now logged in using your Microsoft credentials:</span></span>
 
 [!INCLUDE[Forward request information when behind a proxy or load balancer section](includes/forwarded-headers-middleware.md)]
 
-## <a name="troubleshooting"></a><span data-ttu-id="6948d-154">문제 해결</span><span class="sxs-lookup"><span data-stu-id="6948d-154">Troubleshooting</span></span>
+## <a name="troubleshooting"></a><span data-ttu-id="c3298-140">문제 해결</span><span class="sxs-lookup"><span data-stu-id="c3298-140">Troubleshooting</span></span>
 
-* <span data-ttu-id="6948d-155">Microsoft 계정 공급자는 로그인 오류 페이지로 리디렉션됩니다, 하는 경우 오류 제목과 설명을 쿼리 문자열 매개 변수 바로 다음을 유의 합니다 `#` (해시 태그) Uri에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-155">If the Microsoft Account provider redirects you to a sign in error page, note the error title and description query string parameters directly following the `#` (hashtag) in the Uri.</span></span>
+* <span data-ttu-id="c3298-141">Microsoft 계정 공급자는 로그인 오류 페이지로 리디렉션됩니다, 하는 경우 오류 제목과 설명을 쿼리 문자열 매개 변수 바로 다음을 유의 합니다 `#` (해시 태그) Uri에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-141">If the Microsoft Account provider redirects you to a sign in error page, note the error title and description query string parameters directly following the `#` (hashtag) in the Uri.</span></span>
 
-  <span data-ttu-id="6948d-156">가장 일반적인 원인은 응용 프로그램의 모든 일치 하지 않는 Uri 오류 메시지는 Microsoft 인증에 문제가 있음을 나타낼 것 처럼 보이지만, 합니다 **리디렉션 Uri** 에 대해 지정 된 된 **웹** 플랫폼 .</span><span class="sxs-lookup"><span data-stu-id="6948d-156">Although the error message seems to indicate a problem with Microsoft authentication, the most common cause is your application Uri not matching any of the **Redirect URIs** specified for the **Web** platform.</span></span>
-* <span data-ttu-id="6948d-157">**ASP.NET Core 2.x만:** 호출 하 여 구성 되어 있지 않으면 Identity `services.AddIdentity` 에 `ConfigureServices`를 인증 하려고 하면 *ArgumentException: 'SignInScheme' 옵션을 제공 해야*합니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-157">**ASP.NET Core 2.x only:** If Identity isn't configured by calling `services.AddIdentity` in `ConfigureServices`, attempting to authenticate will result in *ArgumentException: The 'SignInScheme' option must be provided*.</span></span> <span data-ttu-id="6948d-158">이 자습서에 사용 되는 프로젝트 템플릿이이 수행 되도록 보장 합니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-158">The project template used in this tutorial ensures that this is done.</span></span>
-* <span data-ttu-id="6948d-159">사이트 데이터베이스를 초기 마이그레이션을 적용 하 여 만들어지지 않은, 경우 받습니다 *요청을 처리 하는 동안 데이터베이스 작업이 실패 했습니다.* 오류입니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-159">If the site database has not been created by applying the initial migration, you will get *A database operation failed while processing the request* error.</span></span> <span data-ttu-id="6948d-160">탭 **마이그레이션 적용** 데이터베이스를 만들고 오류 지 나 새로 고침 합니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-160">Tap **Apply Migrations** to create the database and refresh to continue past the error.</span></span>
+  <span data-ttu-id="c3298-142">가장 일반적인 원인은 응용 프로그램의 모든 일치 하지 않는 Uri 오류 메시지는 Microsoft 인증에 문제가 있음을 나타낼 것 처럼 보이지만, 합니다 **리디렉션 Uri** 에 대해 지정 된 된 **웹** 플랫폼 .</span><span class="sxs-lookup"><span data-stu-id="c3298-142">Although the error message seems to indicate a problem with Microsoft authentication, the most common cause is your application Uri not matching any of the **Redirect URIs** specified for the **Web** platform.</span></span>
+* <span data-ttu-id="c3298-143">호출 하 여 구성 되어 있지 않으면 Identity `services.AddIdentity` 에 `ConfigureServices`를 인증 하려고 하면 *ArgumentException: 'SignInScheme' 옵션을 제공 해야*합니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-143">If Identity isn't configured by calling `services.AddIdentity` in `ConfigureServices`, attempting to authenticate will result in *ArgumentException: The 'SignInScheme' option must be provided*.</span></span> <span data-ttu-id="c3298-144">이 샘플에 사용 되는 프로젝트 템플릿이이 수행 되도록 보장 합니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-144">The project template used in this sample ensures that this is done.</span></span>
+* <span data-ttu-id="c3298-145">사이트 데이터베이스를 초기 마이그레이션을 적용 하 여 만들어지지 않은, 경우 받습니다 *요청을 처리 하는 동안 데이터베이스 작업이 실패 했습니다.* 오류입니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-145">If the site database has not been created by applying the initial migration, you will get *A database operation failed while processing the request* error.</span></span> <span data-ttu-id="c3298-146">탭 **마이그레이션 적용** 데이터베이스를 만들고 오류 지 나 새로 고침 합니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-146">Tap **Apply Migrations** to create the database and refresh to continue past the error.</span></span>
 
-## <a name="next-steps"></a><span data-ttu-id="6948d-161">다음 단계</span><span class="sxs-lookup"><span data-stu-id="6948d-161">Next steps</span></span>
+## <a name="next-steps"></a><span data-ttu-id="c3298-147">다음 단계</span><span class="sxs-lookup"><span data-stu-id="c3298-147">Next steps</span></span>
 
-* <span data-ttu-id="6948d-162">이 문서에서는 Microsoft를 사용 하 여 인증 하는 보여 주었습니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-162">This article showed how you can authenticate with Microsoft.</span></span> <span data-ttu-id="6948d-163">에 나열 된 다른 공급자를 사용 하 여 인증 하는 유사한 방법을 따를 수 있습니다 합니다 [이전 페이지](xref:security/authentication/social/index)합니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-163">You can follow a similar approach to authenticate with other providers listed on the [previous page](xref:security/authentication/social/index).</span></span>
+* <span data-ttu-id="c3298-148">이 문서에서는 Microsoft를 사용 하 여 인증 하는 보여 주었습니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-148">This article showed how you can authenticate with Microsoft.</span></span> <span data-ttu-id="c3298-149">에 나열 된 다른 공급자를 사용 하 여 인증 하는 유사한 방법을 따를 수 있습니다 합니다 [이전 페이지](xref:security/authentication/social/index)합니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-149">You can follow a similar approach to authenticate with other providers listed on the [previous page](xref:security/authentication/social/index).</span></span>
 
-* <span data-ttu-id="6948d-164">새 만들어야 Azure 웹 앱에 웹 사이트를 게시 하면 `Password` Microsoft 개발자 포털에서 합니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-164">Once you publish your web site to Azure web app, you should create a new `Password` in the Microsoft Developer Portal.</span></span>
+* <span data-ttu-id="c3298-150">Azure 웹 앱에 웹 사이트를 게시 하면 새 클라이언트 만들기 암호는 Microsoft 개발자 포털에서.</span><span class="sxs-lookup"><span data-stu-id="c3298-150">Once you publish your web site to Azure web app, create a new client secrets in the Microsoft Developer Portal.</span></span>
 
-* <span data-ttu-id="6948d-165">설정 된 `Authentication:Microsoft:ApplicationId` 및 `Authentication:Microsoft:Password` Azure portal에서 응용 프로그램 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-165">Set the `Authentication:Microsoft:ApplicationId` and `Authentication:Microsoft:Password` as application settings in the Azure portal.</span></span> <span data-ttu-id="6948d-166">구성 시스템 환경 변수에서 키를 읽을 수 설정 됩니다.</span><span class="sxs-lookup"><span data-stu-id="6948d-166">The configuration system is set up to read keys from environment variables.</span></span>
+* <span data-ttu-id="c3298-151">설정 된 `Authentication:Microsoft:ClientId` 및 `Authentication:Microsoft:ClientSecret` Azure portal에서 응용 프로그램 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-151">Set the `Authentication:Microsoft:ClientId` and `Authentication:Microsoft:ClientSecret` as application settings in the Azure portal.</span></span> <span data-ttu-id="c3298-152">구성 시스템 환경 변수에서 키를 읽을 수 설정 됩니다.</span><span class="sxs-lookup"><span data-stu-id="c3298-152">The configuration system is set up to read keys from environment variables.</span></span>

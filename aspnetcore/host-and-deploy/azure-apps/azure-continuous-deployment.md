@@ -6,165 +6,165 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2018
 uid: host-and-deploy/azure-apps/azure-continuous-deployment
-ms.openlocfilehash: e12c2ee0b78db105b431770e8644e7d19d915765
-ms.sourcegitcommit: b34b25da2ab68e6495b2460ff570468f16a9bf0d
+ms.openlocfilehash: 3b344505739bb4292ed1683c73ff314b6e4e01e9
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53284445"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64890098"
 ---
-# <a name="continuous-deployment-to-azure-with-visual-studio-and-git-with-aspnet-core"></a><span data-ttu-id="76e7b-103">ASP.NET Core와 함께 Visual Studio 및 Git을 사용하여 Azure에 지속적인 배포</span><span class="sxs-lookup"><span data-stu-id="76e7b-103">Continuous deployment to Azure with Visual Studio and Git with ASP.NET Core</span></span>
+# <a name="continuous-deployment-to-azure-with-visual-studio-and-git-with-aspnet-core"></a><span data-ttu-id="d1f0c-103">ASP.NET Core와 함께 Visual Studio 및 Git을 사용하여 Azure에 지속적인 배포</span><span class="sxs-lookup"><span data-stu-id="d1f0c-103">Continuous deployment to Azure with Visual Studio and Git with ASP.NET Core</span></span>
 
-<span data-ttu-id="76e7b-104">작성자: [Erik Reitan](https://github.com/Erikre)</span><span class="sxs-lookup"><span data-stu-id="76e7b-104">By [Erik Reitan](https://github.com/Erikre)</span></span>
+<span data-ttu-id="d1f0c-104">작성자: [Erik Reitan](https://github.com/Erikre)</span><span class="sxs-lookup"><span data-stu-id="d1f0c-104">By [Erik Reitan](https://github.com/Erikre)</span></span>
 
 [!INCLUDE [Azure App Service Preview Notice](../../includes/azure-apps-preview-notice.md)]
 
-<span data-ttu-id="76e7b-105">이 자습서에서는 Visual Studio를 사용하여 ASP.NET Core 웹앱을 만들고 지속적인 배포를 사용하여 Visual Studio에서 Azure App Service에 배포하는 방법을 알아봅니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-105">This tutorial shows how to create an ASP.NET Core web app using Visual Studio and deploy it from Visual Studio to Azure App Service using continuous deployment.</span></span>
+<span data-ttu-id="d1f0c-105">이 자습서에서는 Visual Studio를 사용하여 ASP.NET Core 웹앱을 만들고 지속적인 배포를 사용하여 Visual Studio에서 Azure App Service에 배포하는 방법을 알아봅니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-105">This tutorial shows how to create an ASP.NET Core web app using Visual Studio and deploy it from Visual Studio to Azure App Service using continuous deployment.</span></span>
 
-<span data-ttu-id="76e7b-106">Azure DevOps Services를 사용하여 [Azure App Service](/azure/app-service/app-service-web-overview)에 대한 CD(지속적인 업데이트) 워크플로를 구성하는 방법을 보여 주는 [Azure Pipelines를 사용하여 첫 번째 파이프라인 만들기](/azure/devops/pipelines/get-started-yaml)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="76e7b-106">See also [Create your first pipeline with Azure Pipelines](/azure/devops/pipelines/get-started-yaml), which shows how to configure a continuous delivery (CD) workflow for [Azure App Service](/azure/app-service/app-service-web-overview) using Azure DevOps Services.</span></span> <span data-ttu-id="76e7b-107">Azure Pipelines는 Azure DevOps Services의 서비스 중 하나로, Azure App Service에서 호스트되는 앱의 업데이트를 게시하는 강력한 배포 파이프라인을 간단하게 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-107">Azure Pipelines (an Azure DevOps Services service) simplifies setting up a robust deployment pipeline to publish updates for apps hosted in Azure App Service.</span></span> <span data-ttu-id="76e7b-108">파이프라인을 빌드하고, 테스트를 실행하고, 스테이징 슬롯에 배포하고, 프로덕션에 배포하도록 Azure Portal에서 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-108">The pipeline can be configured from the Azure portal to build, run tests, deploy to a staging slot, and then deploy to production.</span></span>
+<span data-ttu-id="d1f0c-106">Azure DevOps Services를 사용하여 [Azure App Service](/azure/app-service/app-service-web-overview)에 대한 CD(지속적인 업데이트) 워크플로를 구성하는 방법을 보여 주는 [Azure Pipelines를 사용하여 첫 번째 파이프라인 만들기](/azure/devops/pipelines/get-started-yaml)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-106">See also [Create your first pipeline with Azure Pipelines](/azure/devops/pipelines/get-started-yaml), which shows how to configure a continuous delivery (CD) workflow for [Azure App Service](/azure/app-service/app-service-web-overview) using Azure DevOps Services.</span></span> <span data-ttu-id="d1f0c-107">Azure Pipelines는 Azure DevOps Services의 서비스 중 하나로, Azure App Service에서 호스트되는 앱의 업데이트를 게시하는 강력한 배포 파이프라인을 간단하게 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-107">Azure Pipelines (an Azure DevOps Services service) simplifies setting up a robust deployment pipeline to publish updates for apps hosted in Azure App Service.</span></span> <span data-ttu-id="d1f0c-108">파이프라인을 빌드하고, 테스트를 실행하고, 스테이징 슬롯에 배포하고, 프로덕션에 배포하도록 Azure Portal에서 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-108">The pipeline can be configured from the Azure portal to build, run tests, deploy to a staging slot, and then deploy to production.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="76e7b-109">이 자습서를 완료하려면 Microsoft Azure 계정이 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-109">To complete this tutorial, a Microsoft Azure account is required.</span></span> <span data-ttu-id="76e7b-110">계정을 얻으려면 [MSDN 구독자 혜택을 활성화](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/?WT.mc_id=A261C142F)하거나 [평가판에 등록](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-110">To obtain an account, [activate MSDN subscriber benefits](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/?WT.mc_id=A261C142F) or [sign up for a free trial](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).</span></span>
+> <span data-ttu-id="d1f0c-109">이 자습서를 완료하려면 Microsoft Azure 계정이 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-109">To complete this tutorial, a Microsoft Azure account is required.</span></span> <span data-ttu-id="d1f0c-110">계정을 얻으려면 [MSDN 구독자 혜택을 활성화](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/?WT.mc_id=A261C142F)하거나 [평가판에 등록](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-110">To obtain an account, [activate MSDN subscriber benefits](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/?WT.mc_id=A261C142F) or [sign up for a free trial](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).</span></span>
 
-## <a name="prerequisites"></a><span data-ttu-id="76e7b-111">전제 조건</span><span class="sxs-lookup"><span data-stu-id="76e7b-111">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="d1f0c-111">전제 조건</span><span class="sxs-lookup"><span data-stu-id="d1f0c-111">Prerequisites</span></span>
 
-<span data-ttu-id="76e7b-112">이 자습서에서는 다음 소프트웨어가 설치되어 있다고 가정합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-112">This tutorial assumes the following software is installed:</span></span>
+<span data-ttu-id="d1f0c-112">이 자습서에서는 다음 소프트웨어가 설치되어 있다고 가정합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-112">This tutorial assumes the following software is installed:</span></span>
 
-* [<span data-ttu-id="76e7b-113">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="76e7b-113">Visual Studio</span></span>](https://www.visualstudio.com)
+* [<span data-ttu-id="d1f0c-113">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="d1f0c-113">Visual Studio</span></span>](https://visualstudio.microsoft.com)
 * [!INCLUDE [](~/includes/net-core-sdk-download-link.md)]
-* <span data-ttu-id="76e7b-114">Windows용 [Git](https://git-scm.com/downloads)</span><span class="sxs-lookup"><span data-stu-id="76e7b-114">[Git](https://git-scm.com/downloads) for Windows</span></span>
+* <span data-ttu-id="d1f0c-114">Windows용 [Git](https://git-scm.com/downloads)</span><span class="sxs-lookup"><span data-stu-id="d1f0c-114">[Git](https://git-scm.com/downloads) for Windows</span></span>
 
-## <a name="create-an-aspnet-core-web-app"></a><span data-ttu-id="76e7b-115">ASP.NET Core 웹앱 만들기</span><span class="sxs-lookup"><span data-stu-id="76e7b-115">Create an ASP.NET Core web app</span></span>
+## <a name="create-an-aspnet-core-web-app"></a><span data-ttu-id="d1f0c-115">ASP.NET Core 웹앱 만들기</span><span class="sxs-lookup"><span data-stu-id="d1f0c-115">Create an ASP.NET Core web app</span></span>
 
-1. <span data-ttu-id="76e7b-116">Visual Studio를 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-116">Start Visual Studio.</span></span>
+1. <span data-ttu-id="d1f0c-116">Visual Studio를 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-116">Start Visual Studio.</span></span>
 
-1. <span data-ttu-id="76e7b-117">**파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-117">From the **File** menu, select **New** > **Project**.</span></span>
+1. <span data-ttu-id="d1f0c-117">**파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-117">From the **File** menu, select **New** > **Project**.</span></span>
 
-1. <span data-ttu-id="76e7b-118">**ASP.NET Core 웹 애플리케이션** 프로젝트 템플릿을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-118">Select the **ASP.NET Core Web Application** project template.</span></span> <span data-ttu-id="76e7b-119">**설치됨** > **템플릿** > **Visual C#** > **.NET Core** 아래에 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-119">It appears under **Installed** > **Templates** > **Visual C#** > **.NET Core**.</span></span> <span data-ttu-id="76e7b-120">프로젝트 이름을 `SampleWebAppDemo`로 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-120">Name the project `SampleWebAppDemo`.</span></span> <span data-ttu-id="76e7b-121">**새 Git 리포지토리 만들기** 옵션을 선택하고 **확인**을 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-121">Select the **Create new Git repository** option and click **OK**.</span></span>
+1. <span data-ttu-id="d1f0c-118">**ASP.NET Core 웹 애플리케이션** 프로젝트 템플릿을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-118">Select the **ASP.NET Core Web Application** project template.</span></span> <span data-ttu-id="d1f0c-119">**설치됨** > **템플릿** > **Visual C#** > **.NET Core** 아래에 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-119">It appears under **Installed** > **Templates** > **Visual C#** > **.NET Core**.</span></span> <span data-ttu-id="d1f0c-120">프로젝트 이름을 `SampleWebAppDemo`로 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-120">Name the project `SampleWebAppDemo`.</span></span> <span data-ttu-id="d1f0c-121">**새 Git 리포지토리 만들기** 옵션을 선택하고 **확인**을 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-121">Select the **Create new Git repository** option and click **OK**.</span></span>
 
    ![새 프로젝트 대화 상자](azure-continuous-deployment/_static/01-new-project.png)
 
-1. <span data-ttu-id="76e7b-123">**새 ASP.NET Core 프로젝트** 대화 상자에서 ASP.NET Core **빈** 템플릿을 선택한 후 **확인**을 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-123">In the **New ASP.NET Core Project** dialog, select the ASP.NET Core **Empty** template, then click **OK**.</span></span>
+1. <span data-ttu-id="d1f0c-123">**새 ASP.NET Core 프로젝트** 대화 상자에서 ASP.NET Core **빈** 템플릿을 선택한 후 **확인**을 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-123">In the **New ASP.NET Core Project** dialog, select the ASP.NET Core **Empty** template, then click **OK**.</span></span>
 
    ![새 ASP.NET Core 프로젝트 대화 상자](azure-continuous-deployment/_static/02-web-site-template.png)
 
 > [!NOTE]
-> <span data-ttu-id="76e7b-125">최신 .NET Core 릴리스는 2.0입니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-125">The most recent release of .NET Core is 2.0.</span></span>
+> <span data-ttu-id="d1f0c-125">최신 .NET Core 릴리스는 2.0입니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-125">The most recent release of .NET Core is 2.0.</span></span>
 
-### <a name="running-the-web-app-locally"></a><span data-ttu-id="76e7b-126">로컬로 웹앱 실행</span><span class="sxs-lookup"><span data-stu-id="76e7b-126">Running the web app locally</span></span>
+### <a name="running-the-web-app-locally"></a><span data-ttu-id="d1f0c-126">로컬로 웹앱 실행</span><span class="sxs-lookup"><span data-stu-id="d1f0c-126">Running the web app locally</span></span>
 
-1. <span data-ttu-id="76e7b-127">Visual Studio에서 앱 만들기를 완료하면 **디버그** > **디버깅 시작**을 선택하여 앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-127">Once Visual Studio finishes creating the app, run the app by selecting **Debug** > **Start Debugging**.</span></span> <span data-ttu-id="76e7b-128">또는 **F5**키를 누릅니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-128">As an alternative, press **F5**.</span></span>
+1. <span data-ttu-id="d1f0c-127">Visual Studio에서 앱 만들기를 완료하면 **디버그** > **디버깅 시작**을 선택하여 앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-127">Once Visual Studio finishes creating the app, run the app by selecting **Debug** > **Start Debugging**.</span></span> <span data-ttu-id="d1f0c-128">또는 **F5**키를 누릅니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-128">As an alternative, press **F5**.</span></span>
 
-   <span data-ttu-id="76e7b-129">Visual Studio 및 새 앱을 초기화하는 데 시간이 걸릴 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-129">It may take time to initialize Visual Studio and the new app.</span></span> <span data-ttu-id="76e7b-130">완료되면 브라우저에 실행 중인 앱이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-130">Once it's complete, the browser shows the running app.</span></span>
+   <span data-ttu-id="d1f0c-129">Visual Studio 및 새 앱을 초기화하는 데 시간이 걸릴 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-129">It may take time to initialize Visual Studio and the new app.</span></span> <span data-ttu-id="d1f0c-130">완료되면 브라우저에 실행 중인 앱이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-130">Once it's complete, the browser shows the running app.</span></span>
 
    ![브라우저 창에서는 'Hello World!'을 표시하는 애플리케이션이 실행 중이라고 표시합니다.](azure-continuous-deployment/_static/04-browser-runapp.png)
 
-1. <span data-ttu-id="76e7b-132">실행 중인 웹앱을 검토한 후 브라우저를 닫고 Visual Studio의 도구 모음에서 “디버깅 중지” 아이콘을 선택하여 앱을 중지합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-132">After reviewing the running Web app, close the browser and select the "Stop Debugging" icon in the toolbar of Visual Studio to stop the app.</span></span>
+1. <span data-ttu-id="d1f0c-132">실행 중인 웹앱을 검토한 후 브라우저를 닫고 Visual Studio의 도구 모음에서 “디버깅 중지” 아이콘을 선택하여 앱을 중지합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-132">After reviewing the running Web app, close the browser and select the "Stop Debugging" icon in the toolbar of Visual Studio to stop the app.</span></span>
 
-## <a name="create-a-web-app-in-the-azure-portal"></a><span data-ttu-id="76e7b-133">Azure Portal에서 웹앱 만들기</span><span class="sxs-lookup"><span data-stu-id="76e7b-133">Create a web app in the Azure Portal</span></span>
+## <a name="create-a-web-app-in-the-azure-portal"></a><span data-ttu-id="d1f0c-133">Azure Portal에서 웹앱 만들기</span><span class="sxs-lookup"><span data-stu-id="d1f0c-133">Create a web app in the Azure Portal</span></span>
 
-<span data-ttu-id="76e7b-134">다음 단계에서는 Azure Portal에서 웹앱을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-134">The following steps create a web app in the Azure Portal:</span></span>
+<span data-ttu-id="d1f0c-134">다음 단계에서는 Azure Portal에서 웹앱을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-134">The following steps create a web app in the Azure Portal:</span></span>
 
-1. <span data-ttu-id="76e7b-135">[Azure Portal](https://portal.azure.com)에 로그인합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-135">Log in to the [Azure Portal](https://portal.azure.com).</span></span>
+1. <span data-ttu-id="d1f0c-135">[Azure Portal](https://portal.azure.com)에 로그인합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-135">Log in to the [Azure Portal](https://portal.azure.com).</span></span>
 
-1. <span data-ttu-id="76e7b-136">포털 인터페이스의 왼쪽 위에 있는 **새로 만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-136">Select **NEW** at the top left of the portal interface.</span></span>
+1. <span data-ttu-id="d1f0c-136">포털 인터페이스의 왼쪽 위에 있는 **새로 만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-136">Select **NEW** at the top left of the portal interface.</span></span>
 
-1. <span data-ttu-id="76e7b-137">**웹 + 모바일** > **웹앱**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-137">Select **Web + Mobile** > **Web App**.</span></span>
+1. <span data-ttu-id="d1f0c-137">**웹 + 모바일** > **웹앱**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-137">Select **Web + Mobile** > **Web App**.</span></span>
 
    ![Microsoft Azure Portal: 새 단추: Marketplace 아래의 웹 + 모바일: 추천 앱 아래의 Web App 단추](azure-continuous-deployment/_static/05-azure-newwebapp.png)
 
-1. <span data-ttu-id="76e7b-139">**Web App** 블레이드에서 **App Service 이름**에 고유한 값을 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-139">In the **Web App** blade, enter a unique value for the **App Service Name**.</span></span>
+1. <span data-ttu-id="d1f0c-139">**Web App** 블레이드에서 **App Service 이름**에 고유한 값을 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-139">In the **Web App** blade, enter a unique value for the **App Service Name**.</span></span>
 
    ![Web App 블레이드](azure-continuous-deployment/_static/06-azure-newappblade.png)
 
    > [!NOTE]
-   > <span data-ttu-id="76e7b-141">**App Service 이름** 이름은 고유해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-141">The **App Service Name** name must be unique.</span></span> <span data-ttu-id="76e7b-142">이름이 제공되면 포털에서 이 규칙이 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-142">The portal enforces this rule when the name is provided.</span></span> <span data-ttu-id="76e7b-143">다른 값을 제공하는 경우 이 자습서에서 표시되는 각 **SampleWebAppDemo**를 해당 값으로 대체합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-143">If providing a different value, substitute that value for each occurrence of **SampleWebAppDemo** in this tutorial.</span></span>
+   > <span data-ttu-id="d1f0c-141">**App Service 이름** 이름은 고유해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-141">The **App Service Name** name must be unique.</span></span> <span data-ttu-id="d1f0c-142">이름이 제공되면 포털에서 이 규칙이 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-142">The portal enforces this rule when the name is provided.</span></span> <span data-ttu-id="d1f0c-143">다른 값을 제공하는 경우 이 자습서에서 표시되는 각 **SampleWebAppDemo**를 해당 값으로 대체합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-143">If providing a different value, substitute that value for each occurrence of **SampleWebAppDemo** in this tutorial.</span></span>
 
-   <span data-ttu-id="76e7b-144">또한 **Web App** 블레이드에서 기존 **App Service 계획/위치**를 선택하거나 새로 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-144">Also in the **Web App** blade, select an existing **App Service Plan/Location** or create a new one.</span></span> <span data-ttu-id="76e7b-145">새 플랜을 만들 경우 가격 책정 계층, 위치 및 기타 옵션을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-145">If creating a new plan, select the pricing tier, location, and other options.</span></span> <span data-ttu-id="76e7b-146">App Service 계획에 대한 자세한 내용은 [Azure App Service 계획 세부 개요](/azure/app-service/azure-web-sites-web-hosting-plans-in-depth-overview)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="76e7b-146">For more information on App Service plans, see [Azure App Service plans in-depth overview](/azure/app-service/azure-web-sites-web-hosting-plans-in-depth-overview).</span></span>
+   <span data-ttu-id="d1f0c-144">또한 **Web App** 블레이드에서 기존 **App Service 계획/위치**를 선택하거나 새로 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-144">Also in the **Web App** blade, select an existing **App Service Plan/Location** or create a new one.</span></span> <span data-ttu-id="d1f0c-145">새 플랜을 만들 경우 가격 책정 계층, 위치 및 기타 옵션을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-145">If creating a new plan, select the pricing tier, location, and other options.</span></span> <span data-ttu-id="d1f0c-146">App Service 계획에 대한 자세한 내용은 [Azure App Service 계획 세부 개요](/azure/app-service/azure-web-sites-web-hosting-plans-in-depth-overview)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-146">For more information on App Service plans, see [Azure App Service plans in-depth overview](/azure/app-service/azure-web-sites-web-hosting-plans-in-depth-overview).</span></span>
 
-1. <span data-ttu-id="76e7b-147">**만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-147">Select **Create**.</span></span> <span data-ttu-id="76e7b-148">Azure에서는 웹앱을 프로비전하고 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-148">Azure will provision and start the web app.</span></span>
+1. <span data-ttu-id="d1f0c-147">**만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-147">Select **Create**.</span></span> <span data-ttu-id="d1f0c-148">Azure에서는 웹앱을 프로비전하고 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-148">Azure will provision and start the web app.</span></span>
 
    ![Azure Portal: 샘플 Web App 데모 01 Essentials 블레이드](azure-continuous-deployment/_static/07-azure-webappblade.png)
 
-## <a name="enable-git-publishing-for-the-new-web-app"></a><span data-ttu-id="76e7b-150">새 웹앱에 대한 Git 게시 사용</span><span class="sxs-lookup"><span data-stu-id="76e7b-150">Enable Git publishing for the new web app</span></span>
+## <a name="enable-git-publishing-for-the-new-web-app"></a><span data-ttu-id="d1f0c-150">새 웹앱에 대한 Git 게시 사용</span><span class="sxs-lookup"><span data-stu-id="d1f0c-150">Enable Git publishing for the new web app</span></span>
 
-<span data-ttu-id="76e7b-151">Git은 Azure App Service 웹앱을 배포하는 데 사용할 수 있는 분산 버전 제어 시스템입니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-151">Git is a distributed version control system that can be used to deploy an Azure App Service web app.</span></span> <span data-ttu-id="76e7b-152">웹앱 코드는 로컬 Git 리포지토리에 저장되고 코드는 원격 리포지토리로 푸시하여 Azure에 배포됩니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-152">Web app code is stored in a local Git repository, and the code is deployed to Azure by pushing to a remote repository.</span></span>
+<span data-ttu-id="d1f0c-151">Git은 Azure App Service 웹앱을 배포하는 데 사용할 수 있는 분산 버전 제어 시스템입니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-151">Git is a distributed version control system that can be used to deploy an Azure App Service web app.</span></span> <span data-ttu-id="d1f0c-152">웹앱 코드는 로컬 Git 리포지토리에 저장되고 코드는 원격 리포지토리로 푸시하여 Azure에 배포됩니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-152">Web app code is stored in a local Git repository, and the code is deployed to Azure by pushing to a remote repository.</span></span>
 
-1. <span data-ttu-id="76e7b-153">[Azure Portal](https://portal.azure.com)에 로그인합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-153">Log into the [Azure Portal](https://portal.azure.com).</span></span>
+1. <span data-ttu-id="d1f0c-153">[Azure Portal](https://portal.azure.com)에 로그인합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-153">Log into the [Azure Portal](https://portal.azure.com).</span></span>
 
-1. <span data-ttu-id="76e7b-154">**App Services**를 선택하여 Azure 구독과 연결된 App Service 목록을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-154">Select **App Services** to view a list of the app services associated with the Azure subscription.</span></span>
+1. <span data-ttu-id="d1f0c-154">**App Services**를 선택하여 Azure 구독과 연결된 App Service 목록을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-154">Select **App Services** to view a list of the app services associated with the Azure subscription.</span></span>
 
-1. <span data-ttu-id="76e7b-155">이 자습서의 이전 섹션에서 만든 웹앱을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-155">Select the web app created in the previous section of this tutorial.</span></span>
+1. <span data-ttu-id="d1f0c-155">이 자습서의 이전 섹션에서 만든 웹앱을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-155">Select the web app created in the previous section of this tutorial.</span></span>
 
-1. <span data-ttu-id="76e7b-156">**배포** 블레이드에서 **배포 옵션** > **원본 선택** > **로컬 Git 리포지토리**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-156">In the **Deployment** blade, select **Deployment options** > **Choose Source** > **Local Git Repository**.</span></span>
+1. <span data-ttu-id="d1f0c-156">**배포** 블레이드에서 **배포 옵션** > **원본 선택** > **로컬 Git 리포지토리**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-156">In the **Deployment** blade, select **Deployment options** > **Choose Source** > **Local Git Repository**.</span></span>
 
    ![설정 블레이드: 배포 소스 블레이드: 소스 블레이드 선택](azure-continuous-deployment/_static/deployment-options.png)
 
-1. <span data-ttu-id="76e7b-158">**확인**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-158">Select **OK**.</span></span>
+1. <span data-ttu-id="d1f0c-158">**확인**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-158">Select **OK**.</span></span>
 
-1. <span data-ttu-id="76e7b-159">웹앱 또는 다른 App Service 앱을 게시하기 위한 배포 자격 증명이 이전에 설정되지 않은 경우 지금 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-159">If deployment credentials for publishing a web app or other App Service app haven't previously been set up, set them up now:</span></span>
+1. <span data-ttu-id="d1f0c-159">웹앱 또는 다른 App Service 앱을 게시하기 위한 배포 자격 증명이 이전에 설정되지 않은 경우 지금 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-159">If deployment credentials for publishing a web app or other App Service app haven't previously been set up, set them up now:</span></span>
 
-   * <span data-ttu-id="76e7b-160">**설정** > **배포 자격 증명**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-160">Select **Settings** > **Deployment credentials**.</span></span> <span data-ttu-id="76e7b-161">**배포 자격 증명 설정** 블레이드가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-161">The **Set deployment credentials** blade is displayed.</span></span>
-   * <span data-ttu-id="76e7b-162">사용자 이름 및 암호를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-162">Create a user name and password.</span></span> <span data-ttu-id="76e7b-163">나중에 Git을 설정할 때 사용할 암호를 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-163">Save the password for later use when setting up Git.</span></span>
-   * <span data-ttu-id="76e7b-164">**저장**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-164">Select **Save**.</span></span>
+   * <span data-ttu-id="d1f0c-160">**설정** > **배포 자격 증명**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-160">Select **Settings** > **Deployment credentials**.</span></span> <span data-ttu-id="d1f0c-161">**배포 자격 증명 설정** 블레이드가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-161">The **Set deployment credentials** blade is displayed.</span></span>
+   * <span data-ttu-id="d1f0c-162">사용자 이름 및 암호를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-162">Create a user name and password.</span></span> <span data-ttu-id="d1f0c-163">나중에 Git을 설정할 때 사용할 암호를 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-163">Save the password for later use when setting up Git.</span></span>
+   * <span data-ttu-id="d1f0c-164">**저장**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-164">Select **Save**.</span></span>
 
-1. <span data-ttu-id="76e7b-165">**웹앱** 블레이드에서 **설정** > **속성**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-165">In the **Web App** blade, select **Settings** > **Properties**.</span></span> <span data-ttu-id="76e7b-166">배포할 원격 Git 리포지토리 URL이 **GIT URL** 아래에 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-166">The URL of the remote Git repository to deploy to is shown under **GIT URL**.</span></span>
+1. <span data-ttu-id="d1f0c-165">**웹앱** 블레이드에서 **설정** > **속성**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-165">In the **Web App** blade, select **Settings** > **Properties**.</span></span> <span data-ttu-id="d1f0c-166">배포할 원격 Git 리포지토리 URL이 **GIT URL** 아래에 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-166">The URL of the remote Git repository to deploy to is shown under **GIT URL**.</span></span>
 
-1. <span data-ttu-id="76e7b-167">나중에 자습서에서 사용할 **GIT URL** 값을 복사합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-167">Copy the **GIT URL** value for later use in the tutorial.</span></span>
+1. <span data-ttu-id="d1f0c-167">나중에 자습서에서 사용할 **GIT URL** 값을 복사합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-167">Copy the **GIT URL** value for later use in the tutorial.</span></span>
 
    ![Azure Portal: 애플리케이션 속성 블레이드](azure-continuous-deployment/_static/09-azure-giturl.png)
 
-## <a name="publish-the-web-app-to-azure-app-service"></a><span data-ttu-id="76e7b-169">Azure App Service에 웹앱 게시</span><span class="sxs-lookup"><span data-stu-id="76e7b-169">Publish the web app to Azure App Service</span></span>
+## <a name="publish-the-web-app-to-azure-app-service"></a><span data-ttu-id="d1f0c-169">Azure App Service에 웹앱 게시</span><span class="sxs-lookup"><span data-stu-id="d1f0c-169">Publish the web app to Azure App Service</span></span>
 
-<span data-ttu-id="76e7b-170">이 섹션에서는 Visual Studio를 사용하여 로컬 Git 리포지토리를 만들고 해당 리포지토리로부터 Azure에 푸시하여 웹앱을 배포합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-170">In this section, create a local Git repository using Visual Studio and push from that repository to Azure to deploy the web app.</span></span> <span data-ttu-id="76e7b-171">관련 단계에는 다음이 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-171">The steps involved include the following:</span></span>
+<span data-ttu-id="d1f0c-170">이 섹션에서는 Visual Studio를 사용하여 로컬 Git 리포지토리를 만들고 해당 리포지토리로부터 Azure에 푸시하여 웹앱을 배포합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-170">In this section, create a local Git repository using Visual Studio and push from that repository to Azure to deploy the web app.</span></span> <span data-ttu-id="d1f0c-171">관련 단계에는 다음이 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-171">The steps involved include the following:</span></span>
 
-* <span data-ttu-id="76e7b-172">Azure에 로컬 리포지토리를 배포할 수 있도록 GIT URL 값을 사용하여 원격 리포지토리 설정을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-172">Add the remote repository setting using the GIT URL value, so the local repository can be deployed to Azure.</span></span>
-* <span data-ttu-id="76e7b-173">프로젝트에 변경 내용을 커밋합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-173">Commit project changes.</span></span>
-* <span data-ttu-id="76e7b-174">로컬 리포지토리에서 Azure의 원격 리포지토리로 프로젝트 변경 내용을 푸시합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-174">Push project changes from the local repository to the remote repository on Azure.</span></span>
+* <span data-ttu-id="d1f0c-172">Azure에 로컬 리포지토리를 배포할 수 있도록 GIT URL 값을 사용하여 원격 리포지토리 설정을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-172">Add the remote repository setting using the GIT URL value, so the local repository can be deployed to Azure.</span></span>
+* <span data-ttu-id="d1f0c-173">프로젝트에 변경 내용을 커밋합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-173">Commit project changes.</span></span>
+* <span data-ttu-id="d1f0c-174">로컬 리포지토리에서 Azure의 원격 리포지토리로 프로젝트 변경 내용을 푸시합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-174">Push project changes from the local repository to the remote repository on Azure.</span></span>
 
-1. <span data-ttu-id="76e7b-175">**솔루션 탐색기**에서 **솔루션 'SampleWebAppDemo'** 를 마우스 오른쪽 단추로 클릭하고 **커밋**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-175">In **Solution Explorer** right-click **Solution 'SampleWebAppDemo'** and select **Commit**.</span></span> <span data-ttu-id="76e7b-176">**팀 탐색기**가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-176">The **Team Explorer** is displayed.</span></span>
+1. <span data-ttu-id="d1f0c-175">**솔루션 탐색기**에서 **솔루션 'SampleWebAppDemo'** 를 마우스 오른쪽 단추로 클릭하고 **커밋**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-175">In **Solution Explorer** right-click **Solution 'SampleWebAppDemo'** and select **Commit**.</span></span> <span data-ttu-id="d1f0c-176">**팀 탐색기**가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-176">The **Team Explorer** is displayed.</span></span>
 
    ![팀 탐색기 연결 탭](azure-continuous-deployment/_static/10-team-explorer.png)
 
-1. <span data-ttu-id="76e7b-178">**팀 탐색기**에서 **홈**(홈 아이콘) > **설정** > **리포지토리 설정**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-178">In **Team Explorer**, select the **Home** (home icon) > **Settings** > **Repository Settings**.</span></span>
+1. <span data-ttu-id="d1f0c-178">**팀 탐색기**에서 **홈**(홈 아이콘) > **설정** > **리포지토리 설정**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-178">In **Team Explorer**, select the **Home** (home icon) > **Settings** > **Repository Settings**.</span></span>
 
-1. <span data-ttu-id="76e7b-179">**리포지토리 설정**의 **원격** 섹션에서 **추가**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-179">In the **Remotes** section of the **Repository Settings**, select **Add**.</span></span> <span data-ttu-id="76e7b-180">**원격 추가** 대화 상자가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-180">The **Add Remote** dialog box is displayed.</span></span>
+1. <span data-ttu-id="d1f0c-179">**리포지토리 설정**의 **원격** 섹션에서 **추가**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-179">In the **Remotes** section of the **Repository Settings**, select **Add**.</span></span> <span data-ttu-id="d1f0c-180">**원격 추가** 대화 상자가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-180">The **Add Remote** dialog box is displayed.</span></span>
 
-1. <span data-ttu-id="76e7b-181">원격 리포지토리의 **이름**을 **Azure SampleApp**으로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-181">Set the **Name** of the remote to **Azure-SampleApp**.</span></span>
+1. <span data-ttu-id="d1f0c-181">원격 리포지토리의 **이름**을 **Azure SampleApp**으로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-181">Set the **Name** of the remote to **Azure-SampleApp**.</span></span>
 
-1. <span data-ttu-id="76e7b-182">**페치**의 값을 이 자습서의 앞부분에 나오는 Azure에서 복사한 **Git URL**로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-182">Set the value for **Fetch** to the **Git URL** that copied from Azure earlier in this tutorial.</span></span> <span data-ttu-id="76e7b-183">이 URL은 **.git**로 끝납니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-183">Note that this is the URL that ends with **.git**.</span></span>
+1. <span data-ttu-id="d1f0c-182">**페치**의 값을 이 자습서의 앞부분에 나오는 Azure에서 복사한 **Git URL**로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-182">Set the value for **Fetch** to the **Git URL** that copied from Azure earlier in this tutorial.</span></span> <span data-ttu-id="d1f0c-183">이 URL은 **.git**로 끝납니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-183">Note that this is the URL that ends with **.git**.</span></span>
 
    ![원격 대화 상자 편집](azure-continuous-deployment/_static/11-add-remote.png)
 
    > [!NOTE]
-   > <span data-ttu-id="76e7b-185">대안으로 **명령 창**을 열고, 프로젝트 디렉터리로 변경하고, 명령을 입력하여 **명령 창**에서 원격 리포지토리를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-185">As an alternative, specify the remote repository from the **Command Window** by opening the **Command Window**, changing to the project directory, and entering the command.</span></span> <span data-ttu-id="76e7b-186">예제:</span><span class="sxs-lookup"><span data-stu-id="76e7b-186">Example:</span></span>
+   > <span data-ttu-id="d1f0c-185">대안으로 **명령 창**을 열고, 프로젝트 디렉터리로 변경하고, 명령을 입력하여 **명령 창**에서 원격 리포지토리를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-185">As an alternative, specify the remote repository from the **Command Window** by opening the **Command Window**, changing to the project directory, and entering the command.</span></span> <span data-ttu-id="d1f0c-186">예제:</span><span class="sxs-lookup"><span data-stu-id="d1f0c-186">Example:</span></span>
    >
    > `git remote add Azure-SampleApp https://me@sampleapp.scm.azurewebsites.net:443/SampleApp.git`
 
-1. <span data-ttu-id="76e7b-187">**홈**(홈 아이콘) > **설정** > **전역 설정**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-187">Select the **Home** (home icon) > **Settings** > **Global Settings**.</span></span> <span data-ttu-id="76e7b-188">이름 및 전자 메일 주소가 설정되었는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-188">Confirm that the name and email address are set.</span></span> <span data-ttu-id="76e7b-189">필요한 경우 **업데이트**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-189">Select **Update** if required.</span></span>
+1. <span data-ttu-id="d1f0c-187">**홈**(홈 아이콘) > **설정** > **전역 설정**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-187">Select the **Home** (home icon) > **Settings** > **Global Settings**.</span></span> <span data-ttu-id="d1f0c-188">이름 및 전자 메일 주소가 설정되었는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-188">Confirm that the name and email address are set.</span></span> <span data-ttu-id="d1f0c-189">필요한 경우 **업데이트**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-189">Select **Update** if required.</span></span>
 
-1. <span data-ttu-id="76e7b-190">**홈** > **변경 내용**을 선택하여 **변경 내용** 보기로 돌아갑니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-190">Select **Home** > **Changes** to return to the **Changes** view.</span></span>
+1. <span data-ttu-id="d1f0c-190">**홈** > **변경 내용**을 선택하여 **변경 내용** 보기로 돌아갑니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-190">Select **Home** > **Changes** to return to the **Changes** view.</span></span>
 
-1. <span data-ttu-id="76e7b-191">**Initial Push #1**과 같은 커밋 메시지를 입력하고 **커밋**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-191">Enter a commit message, such as **Initial Push #1** and select **Commit**.</span></span> <span data-ttu-id="76e7b-192">이렇게 하면 로컬에서 ‘커밋’이 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-192">This action creates a *commit* locally.</span></span>
+1. <span data-ttu-id="d1f0c-191">**Initial Push #1**과 같은 커밋 메시지를 입력하고 **커밋**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-191">Enter a commit message, such as **Initial Push #1** and select **Commit**.</span></span> <span data-ttu-id="d1f0c-192">이렇게 하면 로컬에서 ‘커밋’이 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-192">This action creates a *commit* locally.</span></span>
 
    ![팀 탐색기 연결 탭](azure-continuous-deployment/_static/12-initial-commit.png)
 
    > [!NOTE]
-   > <span data-ttu-id="76e7b-194">대안으로 **명령 창**을 열고, 프로젝트 디렉터리로 변경하고, git 명령을 입력하여 **명령 창**에서 변경 내용을 커밋합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-194">As an alternative, commit changes from the **Command Window** by opening the **Command Window**, changing to the project directory, and entering the git commands.</span></span> <span data-ttu-id="76e7b-195">예제:</span><span class="sxs-lookup"><span data-stu-id="76e7b-195">Example:</span></span>
+   > <span data-ttu-id="d1f0c-194">대안으로 **명령 창**을 열고, 프로젝트 디렉터리로 변경하고, git 명령을 입력하여 **명령 창**에서 변경 내용을 커밋합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-194">As an alternative, commit changes from the **Command Window** by opening the **Command Window**, changing to the project directory, and entering the git commands.</span></span> <span data-ttu-id="d1f0c-195">예제:</span><span class="sxs-lookup"><span data-stu-id="d1f0c-195">Example:</span></span>
    >
    > `git add .`
    >
    > `git commit -am "Initial Push #1"`
 
-1. <span data-ttu-id="76e7b-196">**홈** > **동기화** > **동작** > **명령 프롬프트 열기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-196">Select **Home** > **Sync** > **Actions** > **Open Command Prompt**.</span></span> <span data-ttu-id="76e7b-197">명령 프롬프트가 프로젝트 디렉터리에서 열립니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-197">The command prompt opens to the project directory.</span></span>
+1. <span data-ttu-id="d1f0c-196">**홈** > **동기화** > **동작** > **명령 프롬프트 열기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-196">Select **Home** > **Sync** > **Actions** > **Open Command Prompt**.</span></span> <span data-ttu-id="d1f0c-197">명령 프롬프트가 프로젝트 디렉터리에서 열립니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-197">The command prompt opens to the project directory.</span></span>
 
-1. <span data-ttu-id="76e7b-198">명령 창에서 다음 명령을 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-198">Enter the following command in the command window:</span></span>
+1. <span data-ttu-id="d1f0c-198">명령 창에서 다음 명령을 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-198">Enter the following command in the command window:</span></span>
 
    `git push -u Azure-SampleApp master`
 
-1. <span data-ttu-id="76e7b-199">Azure에서 이전에 만든 Azure **배포 자격 증명** 암호를 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-199">Enter the Azure **deployment credentials** password created earlier in Azure.</span></span>
+1. <span data-ttu-id="d1f0c-199">Azure에서 이전에 만든 Azure **배포 자격 증명** 암호를 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-199">Enter the Azure **deployment credentials** password created earlier in Azure.</span></span>
 
-   <span data-ttu-id="76e7b-200">이 명령은 로컬 프로젝트 파일을 Azure에 푸시하는 프로세스를 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-200">This command starts the process of pushing the local project files to Azure.</span></span> <span data-ttu-id="76e7b-201">위 명령의 출력은 성공적으로 배포했다는 메시지와 함께 종료됩니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-201">The output from the above command ends with a message that the deployment was successful.</span></span>
+   <span data-ttu-id="d1f0c-200">이 명령은 로컬 프로젝트 파일을 Azure에 푸시하는 프로세스를 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-200">This command starts the process of pushing the local project files to Azure.</span></span> <span data-ttu-id="d1f0c-201">위 명령의 출력은 성공적으로 배포했다는 메시지와 함께 종료됩니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-201">The output from the above command ends with a message that the deployment was successful.</span></span>
 
    ```
    remote: Finished successfully.
@@ -176,58 +176,58 @@ ms.locfileid: "53284445"
    ```
 
    > [!NOTE]
-   > <span data-ttu-id="76e7b-202">프로젝트의 공동 작업이 필요한 경우 Azure로 푸시하기 전에 [GitHub](https://github.com)로 푸시하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-202">If collaboration on the project is required, consider pushing to [GitHub](https://github.com) before pushing to Azure.</span></span>
+   > <span data-ttu-id="d1f0c-202">프로젝트의 공동 작업이 필요한 경우 Azure로 푸시하기 전에 [GitHub](https://github.com)로 푸시하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-202">If collaboration on the project is required, consider pushing to [GitHub](https://github.com) before pushing to Azure.</span></span>
  
-### <a name="verify-the-active-deployment"></a><span data-ttu-id="76e7b-203">활성 배포 확인</span><span class="sxs-lookup"><span data-stu-id="76e7b-203">Verify the Active Deployment</span></span>
+### <a name="verify-the-active-deployment"></a><span data-ttu-id="d1f0c-203">활성 배포 확인</span><span class="sxs-lookup"><span data-stu-id="d1f0c-203">Verify the Active Deployment</span></span>
 
-<span data-ttu-id="76e7b-204">로컬 환경에서 웹앱을 Azure로 성공적으로 전송했는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-204">Verify that the web app transfer from the local environment to Azure is successful.</span></span>
+<span data-ttu-id="d1f0c-204">로컬 환경에서 웹앱을 Azure로 성공적으로 전송했는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-204">Verify that the web app transfer from the local environment to Azure is successful.</span></span>
 
-<span data-ttu-id="76e7b-205">[Azure Portal](https://portal.azure.com)에서 웹앱을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-205">In the [Azure Portal](https://portal.azure.com), select the web app.</span></span> <span data-ttu-id="76e7b-206">**배포** > **배포 옵션**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-206">Select **Deployment** > **Deployment options**.</span></span>
+<span data-ttu-id="d1f0c-205">[Azure Portal](https://portal.azure.com)에서 웹앱을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-205">In the [Azure Portal](https://portal.azure.com), select the web app.</span></span> <span data-ttu-id="d1f0c-206">**배포** > **배포 옵션**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-206">Select **Deployment** > **Deployment options**.</span></span>
 
 ![Azure Portal: 설정 블레이드: 성공적인 배포를 보여주는 배포 블레이드](azure-continuous-deployment/_static/13-verify-deployment.png)
 
-## <a name="run-the-app-in-azure"></a><span data-ttu-id="76e7b-208">Azure에서 앱 실행</span><span class="sxs-lookup"><span data-stu-id="76e7b-208">Run the app in Azure</span></span>
+## <a name="run-the-app-in-azure"></a><span data-ttu-id="d1f0c-208">Azure에서 앱 실행</span><span class="sxs-lookup"><span data-stu-id="d1f0c-208">Run the app in Azure</span></span>
 
-<span data-ttu-id="76e7b-209">이제 웹앱이 Azure에 배포되었으므로 앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-209">Now that the web app is deployed to Azure, run the app.</span></span>
+<span data-ttu-id="d1f0c-209">이제 웹앱이 Azure에 배포되었으므로 앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-209">Now that the web app is deployed to Azure, run the app.</span></span>
 
-<span data-ttu-id="76e7b-210">이는 두 가지 방법으로 수행할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-210">This can be accomplished in two ways:</span></span>
+<span data-ttu-id="d1f0c-210">이는 두 가지 방법으로 수행할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-210">This can be accomplished in two ways:</span></span>
 
-* <span data-ttu-id="76e7b-211">Azure Portal에서 웹앱에 대한 웹앱 블레이드를 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-211">In the Azure Portal, locate the web app blade for the web app.</span></span> <span data-ttu-id="76e7b-212">**찾아보기**를 선택하여 기본 브라우저에서 앱을 봅니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-212">Select **Browse** to view the app in the default browser.</span></span>
-* <span data-ttu-id="76e7b-213">브라우저를 열고 웹앱의 URL을 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-213">Open a browser and enter the URL for the web app.</span></span> <span data-ttu-id="76e7b-214">예: `http://SampleWebAppDemo.azurewebsites.net`</span><span class="sxs-lookup"><span data-stu-id="76e7b-214">Example: `http://SampleWebAppDemo.azurewebsites.net`</span></span>
+* <span data-ttu-id="d1f0c-211">Azure Portal에서 웹앱에 대한 웹앱 블레이드를 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-211">In the Azure Portal, locate the web app blade for the web app.</span></span> <span data-ttu-id="d1f0c-212">**찾아보기**를 선택하여 기본 브라우저에서 앱을 봅니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-212">Select **Browse** to view the app in the default browser.</span></span>
+* <span data-ttu-id="d1f0c-213">브라우저를 열고 웹앱의 URL을 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-213">Open a browser and enter the URL for the web app.</span></span> <span data-ttu-id="d1f0c-214">예: `http://SampleWebAppDemo.azurewebsites.net`</span><span class="sxs-lookup"><span data-stu-id="d1f0c-214">Example: `http://SampleWebAppDemo.azurewebsites.net`</span></span>
 
-## <a name="update-the-web-app-and-republish"></a><span data-ttu-id="76e7b-215">웹앱 업데이트 및 다시 게시</span><span class="sxs-lookup"><span data-stu-id="76e7b-215">Update the web app and republish</span></span>
+## <a name="update-the-web-app-and-republish"></a><span data-ttu-id="d1f0c-215">웹앱 업데이트 및 다시 게시</span><span class="sxs-lookup"><span data-stu-id="d1f0c-215">Update the web app and republish</span></span>
 
-<span data-ttu-id="76e7b-216">로컬 코드를 변경한 후 다시 게시합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-216">After making changes to the local code, republish:</span></span>
+<span data-ttu-id="d1f0c-216">로컬 코드를 변경한 후 다시 게시합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-216">After making changes to the local code, republish:</span></span>
 
-1. <span data-ttu-id="76e7b-217">Visual Studio의 **솔루션 탐색기**에서 *Startup.cs* 파일을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-217">In **Solution Explorer** of Visual Studio, open the *Startup.cs* file.</span></span>
+1. <span data-ttu-id="d1f0c-217">Visual Studio의 **솔루션 탐색기**에서 *Startup.cs* 파일을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-217">In **Solution Explorer** of Visual Studio, open the *Startup.cs* file.</span></span>
 
-1. <span data-ttu-id="76e7b-218">`Configure` 메서드에서 `Response.WriteAsync` 메서드를 수정하여 다음과 같이 표시되도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-218">In the `Configure` method, modify the `Response.WriteAsync` method so that it appears as follows:</span></span>
+1. <span data-ttu-id="d1f0c-218">`Configure` 메서드에서 `Response.WriteAsync` 메서드를 수정하여 다음과 같이 표시되도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-218">In the `Configure` method, modify the `Response.WriteAsync` method so that it appears as follows:</span></span>
 
    ```csharp
    await context.Response.WriteAsync("Hello World! Deploy to Azure.");
    ```
 
-1. <span data-ttu-id="76e7b-219">변경 내용을 *Startup.cs*에 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-219">Save the changes to *Startup.cs*.</span></span>
+1. <span data-ttu-id="d1f0c-219">변경 내용을 *Startup.cs*에 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-219">Save the changes to *Startup.cs*.</span></span>
 
-1. <span data-ttu-id="76e7b-220">**솔루션 탐색기**에서 **솔루션 'SampleWebAppDemo'** 를 마우스 오른쪽 단추로 클릭하고 **커밋**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-220">In **Solution Explorer**, right-click **Solution 'SampleWebAppDemo'** and select **Commit**.</span></span> <span data-ttu-id="76e7b-221">**팀 탐색기**가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-221">The **Team Explorer** is displayed.</span></span>
+1. <span data-ttu-id="d1f0c-220">**솔루션 탐색기**에서 **솔루션 'SampleWebAppDemo'** 를 마우스 오른쪽 단추로 클릭하고 **커밋**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-220">In **Solution Explorer**, right-click **Solution 'SampleWebAppDemo'** and select **Commit**.</span></span> <span data-ttu-id="d1f0c-221">**팀 탐색기**가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-221">The **Team Explorer** is displayed.</span></span>
 
-1. <span data-ttu-id="76e7b-222">`Update #2`와 같은 커밋 메시지를 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-222">Enter a commit message, such as `Update #2`.</span></span>
+1. <span data-ttu-id="d1f0c-222">`Update #2`와 같은 커밋 메시지를 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-222">Enter a commit message, such as `Update #2`.</span></span>
 
-1. <span data-ttu-id="76e7b-223">**커밋** 단추를 눌러 프로젝트 변경 내용을 커밋합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-223">Press the **Commit** button to commit the project changes.</span></span>
+1. <span data-ttu-id="d1f0c-223">**커밋** 단추를 눌러 프로젝트 변경 내용을 커밋합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-223">Press the **Commit** button to commit the project changes.</span></span>
 
-1. <span data-ttu-id="76e7b-224">**홈** > **동기화** > **작업** > **푸시**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-224">Select **Home** > **Sync** > **Actions** > **Push**.</span></span>
+1. <span data-ttu-id="d1f0c-224">**홈** > **동기화** > **작업** > **푸시**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-224">Select **Home** > **Sync** > **Actions** > **Push**.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="76e7b-225">대안으로 **명령 창**을 열고, 프로젝트 디렉터리를 변경하고, git 명령을 입력하여 **명령 창**의 변경 내용을 푸시합니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-225">As an alternative, push the changes from the **Command Window** by opening the **Command Window**, changing to the project directory, and entering a git command.</span></span> <span data-ttu-id="76e7b-226">예제:</span><span class="sxs-lookup"><span data-stu-id="76e7b-226">Example:</span></span>
+> <span data-ttu-id="d1f0c-225">대안으로 **명령 창**을 열고, 프로젝트 디렉터리를 변경하고, git 명령을 입력하여 **명령 창**의 변경 내용을 푸시합니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-225">As an alternative, push the changes from the **Command Window** by opening the **Command Window**, changing to the project directory, and entering a git command.</span></span> <span data-ttu-id="d1f0c-226">예제:</span><span class="sxs-lookup"><span data-stu-id="d1f0c-226">Example:</span></span>
 > 
 > `git push -u Azure-SampleApp master`
 
-## <a name="view-the-updated-web-app-in-azure"></a><span data-ttu-id="76e7b-227">Azure에서 업데이트된 웹앱 보기</span><span class="sxs-lookup"><span data-stu-id="76e7b-227">View the updated web app in Azure</span></span>
+## <a name="view-the-updated-web-app-in-azure"></a><span data-ttu-id="d1f0c-227">Azure에서 업데이트된 웹앱 보기</span><span class="sxs-lookup"><span data-stu-id="d1f0c-227">View the updated web app in Azure</span></span>
 
-<span data-ttu-id="76e7b-228">Azure Portal의 웹앱 블레이드에서 **찾아보기**를 선택하거나 브라우저를 열고 웹앱의 URL을 입력하여 업데이트된 웹앱을 봅니다.</span><span class="sxs-lookup"><span data-stu-id="76e7b-228">View the updated web app by selecting **Browse** from the web app blade in the Azure Portal or by opening a browser and entering the URL for the web app.</span></span> <span data-ttu-id="76e7b-229">예: `http://SampleWebAppDemo.azurewebsites.net`</span><span class="sxs-lookup"><span data-stu-id="76e7b-229">Example: `http://SampleWebAppDemo.azurewebsites.net`</span></span>
+<span data-ttu-id="d1f0c-228">Azure Portal의 웹앱 블레이드에서 **찾아보기**를 선택하거나 브라우저를 열고 웹앱의 URL을 입력하여 업데이트된 웹앱을 봅니다.</span><span class="sxs-lookup"><span data-stu-id="d1f0c-228">View the updated web app by selecting **Browse** from the web app blade in the Azure Portal or by opening a browser and entering the URL for the web app.</span></span> <span data-ttu-id="d1f0c-229">예: `http://SampleWebAppDemo.azurewebsites.net`</span><span class="sxs-lookup"><span data-stu-id="d1f0c-229">Example: `http://SampleWebAppDemo.azurewebsites.net`</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="76e7b-230">추가 자료</span><span class="sxs-lookup"><span data-stu-id="76e7b-230">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="d1f0c-230">추가 자료</span><span class="sxs-lookup"><span data-stu-id="d1f0c-230">Additional resources</span></span>
 
-* [<span data-ttu-id="76e7b-231">Azure Pipelines를 사용하여 첫 번째 파이프라인 만들기</span><span class="sxs-lookup"><span data-stu-id="76e7b-231">Create your first pipeline with Azure Pipelines</span></span>](/azure/devops/pipelines/get-started-yaml)
-* [<span data-ttu-id="76e7b-232">프로젝트 Kudu</span><span class="sxs-lookup"><span data-stu-id="76e7b-232">Project Kudu</span></span>](https://github.com/projectkudu/kudu/wiki)
+* [<span data-ttu-id="d1f0c-231">Azure Pipelines를 사용하여 첫 번째 파이프라인 만들기</span><span class="sxs-lookup"><span data-stu-id="d1f0c-231">Create your first pipeline with Azure Pipelines</span></span>](/azure/devops/pipelines/get-started-yaml)
+* [<span data-ttu-id="d1f0c-232">프로젝트 Kudu</span><span class="sxs-lookup"><span data-stu-id="d1f0c-232">Project Kudu</span></span>](https://github.com/projectkudu/kudu/wiki)
 * <xref:host-and-deploy/visual-studio-publish-profiles>

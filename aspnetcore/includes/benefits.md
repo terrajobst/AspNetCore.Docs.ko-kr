@@ -1,22 +1,14 @@
----
-ms.openlocfilehash: d794058f533c4b617f641fa3cb3e6d63fd807c2d
-ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 04/16/2019
-ms.locfileid: "59615395"
----
-<span data-ttu-id="f6530-101">ASP.NET Core는 다음과 같은 이점을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="f6530-101">ASP.NET Core provides the following benefits:</span></span>
+<span data-ttu-id="cb86f-101">ASP.NET Core는 다음과 같은 이점을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="cb86f-101">ASP.NET Core provides the following benefits:</span></span>
 
-* <span data-ttu-id="f6530-102">웹 UI 및 웹 API를 동일한 과정으로 빌드합니다.</span><span class="sxs-lookup"><span data-stu-id="f6530-102">A unified story for building web UI and web APIs.</span></span>
-* <span data-ttu-id="f6530-103">테스트 가능성을 고려하여 설계되었습니다.</span><span class="sxs-lookup"><span data-stu-id="f6530-103">Architected for testability.</span></span>
-* <span data-ttu-id="f6530-104">[Razor 페이지](xref:razor-pages/index)는 더 쉽고 더 생산적으로 코딩 페이지에 초점을 맞춘 시나리오를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="f6530-104">[Razor Pages](xref:razor-pages/index) makes coding page-focused scenarios easier and more productive.</span></span>
-* <span data-ttu-id="f6530-105">Windows, macOS 및 Linux에서 개발하고 실행할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="f6530-105">Ability to develop and run on Windows, macOS, and Linux.</span></span>
-* <span data-ttu-id="f6530-106">오픈 소스이며 [커뮤니티에 중점](https://live.asp.net/)을 둡니다.</span><span class="sxs-lookup"><span data-stu-id="f6530-106">Open-source and [community-focused](https://live.asp.net/).</span></span>
-* <span data-ttu-id="f6530-107">[최신 클라이언트 쪽 프레임워크](xref:blazor/index) 및 워크플로 개발을 통합합니다.</span><span class="sxs-lookup"><span data-stu-id="f6530-107">Integration of [modern, client-side frameworks](xref:blazor/index) and development workflows.</span></span>
-* <span data-ttu-id="f6530-108">클라우드를 갖춘 환경 기반 [구성 시스템](xref:fundamentals/configuration/index)입니다.</span><span class="sxs-lookup"><span data-stu-id="f6530-108">A cloud-ready, environment-based [configuration system](xref:fundamentals/configuration/index).</span></span>
-* <span data-ttu-id="f6530-109">[종속성 주입](xref:fundamentals/dependency-injection)이 기본 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="f6530-109">Built-in [dependency injection](xref:fundamentals/dependency-injection).</span></span>
-* <span data-ttu-id="f6530-110">간단한 [고성능](https://github.com/aspnet/benchmarks) 모듈식 HTTP 요청 파이프라인을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="f6530-110">A lightweight, [high-performance](https://github.com/aspnet/benchmarks), and modular HTTP request pipeline.</span></span>
-* <span data-ttu-id="f6530-111">[IIS](xref:host-and-deploy/iis/index), [Nginx](xref:host-and-deploy/linux-nginx), [Apache](xref:host-and-deploy/linux-apache), [Docker](xref:host-and-deploy/docker/index)에서 호스트하거나 고유한 프로세스에서 자체 호스트하는 기능이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="f6530-111">Ability to host on [IIS](xref:host-and-deploy/iis/index), [Nginx](xref:host-and-deploy/linux-nginx), [Apache](xref:host-and-deploy/linux-apache), [Docker](xref:host-and-deploy/docker/index), or self-host in your own process.</span></span>
-* <span data-ttu-id="f6530-112">[.NET Core](/dotnet/articles/standard/choosing-core-framework-server)를 대상으로 하는 경우 앱 버전을 함께 관리할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="f6530-112">Side-by-side app versioning when targeting [.NET Core](/dotnet/articles/standard/choosing-core-framework-server).</span></span>
-* <span data-ttu-id="f6530-113">최신 웹 개발을 간소화하는 도구를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="f6530-113">Tooling that simplifies modern web development.</span></span>
+* <span data-ttu-id="cb86f-102">웹 UI 및 웹 API를 동일한 과정으로 빌드합니다.</span><span class="sxs-lookup"><span data-stu-id="cb86f-102">A unified story for building web UI and web APIs.</span></span>
+* <span data-ttu-id="cb86f-103">테스트 가능성을 고려하여 설계되었습니다.</span><span class="sxs-lookup"><span data-stu-id="cb86f-103">Architected for testability.</span></span>
+* <span data-ttu-id="cb86f-104">[Razor 페이지](xref:razor-pages/index)는 더 쉽고 더 생산적으로 코딩 페이지에 초점을 맞춘 시나리오를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="cb86f-104">[Razor Pages](xref:razor-pages/index) makes coding page-focused scenarios easier and more productive.</span></span>
+* <span data-ttu-id="cb86f-105">Windows, macOS 및 Linux에서 개발하고 실행할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cb86f-105">Ability to develop and run on Windows, macOS, and Linux.</span></span>
+* <span data-ttu-id="cb86f-106">오픈 소스이며 [커뮤니티에 중점](https://live.asp.net/)을 둡니다.</span><span class="sxs-lookup"><span data-stu-id="cb86f-106">Open-source and [community-focused](https://live.asp.net/).</span></span>
+* <span data-ttu-id="cb86f-107">[최신 클라이언트 쪽 프레임워크](xref:blazor/index) 및 워크플로 개발을 통합합니다.</span><span class="sxs-lookup"><span data-stu-id="cb86f-107">Integration of [modern, client-side frameworks](xref:blazor/index) and development workflows.</span></span>
+* <span data-ttu-id="cb86f-108">클라우드를 갖춘 환경 기반 [구성 시스템](xref:fundamentals/configuration/index)입니다.</span><span class="sxs-lookup"><span data-stu-id="cb86f-108">A cloud-ready, environment-based [configuration system](xref:fundamentals/configuration/index).</span></span>
+* <span data-ttu-id="cb86f-109">[종속성 주입](xref:fundamentals/dependency-injection)이 기본 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="cb86f-109">Built-in [dependency injection](xref:fundamentals/dependency-injection).</span></span>
+* <span data-ttu-id="cb86f-110">간단한 [고성능](https://github.com/aspnet/benchmarks) 모듈식 HTTP 요청 파이프라인을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="cb86f-110">A lightweight, [high-performance](https://github.com/aspnet/benchmarks), and modular HTTP request pipeline.</span></span>
+* <span data-ttu-id="cb86f-111">[IIS](xref:host-and-deploy/iis/index), [Nginx](xref:host-and-deploy/linux-nginx), [Apache](xref:host-and-deploy/linux-apache), [Docker](xref:host-and-deploy/docker/index)에서 호스트하거나 고유한 프로세스에서 자체 호스트하는 기능이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cb86f-111">Ability to host on [IIS](xref:host-and-deploy/iis/index), [Nginx](xref:host-and-deploy/linux-nginx), [Apache](xref:host-and-deploy/linux-apache), [Docker](xref:host-and-deploy/docker/index), or self-host in your own process.</span></span>
+* <span data-ttu-id="cb86f-112">[.NET Core](/dotnet/articles/standard/choosing-core-framework-server)를 대상으로 하는 경우 앱 버전을 함께 관리할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cb86f-112">Side-by-side app versioning when targeting [.NET Core](/dotnet/articles/standard/choosing-core-framework-server).</span></span>
+* <span data-ttu-id="cb86f-113">최신 웹 개발을 간소화하는 도구를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="cb86f-113">Tooling that simplifies modern web development.</span></span>
