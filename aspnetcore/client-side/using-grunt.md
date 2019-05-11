@@ -3,20 +3,20 @@ title: ASP.NET Core에서 사용 하 여 Grunt
 author: rick-anderson
 description: ''
 ms.author: riande
-ms.date: 10/14/2016
+ms.date: 05/10/2019
 uid: client-side/using-grunt
-ms.openlocfilehash: fc912974fb6ed3c65bb46a7d616d9e531587d946
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 73b7704726db9d93588dddd3f3b05a23fb3425b3
+ms.sourcegitcommit: ffe3ed7921ec6c7c70abaac1d10703ec9a43374c
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64894640"
+ms.lasthandoff: 05/11/2019
+ms.locfileid: "65535947"
 ---
 # <a name="use-grunt-in-aspnet-core"></a>ASP.NET Core에서 사용 하 여 Grunt
 
 [Noel Rice](https://blog.falafel.com/falafel-software-recognized-sitefinity-website-year/)
 
-Grunt은 스크립트 축소, TypeScript 컴파일, 코드 품질 다름이 도구, 프로세서를 전 하는 CSS, 및 클라이언트 개발을 지원 하기 위해 수행 해야 하는 모든 반복 작업에 대 한 자동화 하는 JavaScript 작업 실행 기는 합니다. ASP.NET 프로젝트 템플릿은 기본적으로 Gulp를 사용 하지만 Visual Studio에서 grunt 완전히 지원 됩니다 (참조 [Gulp 사용](using-gulp.md)).
+Grunt은 스크립트 축소, TypeScript 컴파일, 코드 품질 다름이 도구, 프로세서를 전 하는 CSS, 및 클라이언트 개발을 지원 하기 위해 수행 해야 하는 모든 반복 작업에 대 한 자동화 하는 JavaScript 작업 실행 기는 합니다. Visual Studio에서 grunt 완전히 지원 됩니다.
 
 이 예제에서는 빈 ASP.NET Core 프로젝트의 시작 점으로에서 클라이언트 빌드 프로세스를 자동화 하는 방법을 보여 줍니다.
 
@@ -286,7 +286,3 @@ Visual Studio에서 작업할 때마다 작업을 수동으로 시작 하려는 
 ## <a name="summary"></a>요약
 
 Grunt를 강력한 작업 실행 기 대부분의 클라이언트 빌드 작업을 자동화 하는 경우 Grunt NPM의 패키지 및 Visual Studio와의 통합 도구 기능 제공을 활용 합니다. Visual Studio의 Task Runner 탐색기 구성 파일의 변경 사항을 감지 하 고 작업을 실행 하 고 실행 중인 작업을 보고 Visual Studio 이벤트에 작업을 바인딩할 하는 편리한 인터페이스를 제공 합니다.
-
-## <a name="additional-resources"></a>추가 자료
-
-* [Gulp 사용하기](using-gulp.md)

@@ -4,14 +4,14 @@ author: mjrousos
 description: 일반적인 성능 문제 방지 및 ASP.NET Core 앱에서 성능 향상에 대 한 팁입니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-ms.date: 04/13/2019
+ms.date: 05/10/2019
 uid: performance/performance-best-practices
-ms.openlocfilehash: 28dc7fb40c1b60f643108dcb44593a08942a1650
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 7651dff18f98c60057660c8946c3daa66d272f6a
+ms.sourcegitcommit: ffe3ed7921ec6c7c70abaac1d10703ec9a43374c
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087494"
+ms.lasthandoff: 05/11/2019
+ms.locfileid: "65536078"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core 성능 모범 사례
 
@@ -130,7 +130,7 @@ ASP.NET Core 앱의 일반적인 성능 문제는 비동기 될 수 있는 호�
 권장 사항:
 
 * **수행할** ASP.NET Core를 사용 하 여 [기본 제공 지원](xref:client-side/bundling-and-minification) 클라이언트 자산 묶음 및 축소에 대 한 합니다.
-* **수행할** 다른 타사 도구는 같은 것이 좋습니다 [Gulp](xref:client-side/using-gulp) 또는 [Webpack](https://webpack.js.org/) 복잡 한 클라이언트 자산 관리에 대 한 합니다.
+* **수행할** 다른 타사 도구는 같은 것이 좋습니다 [Webpack](https://webpack.js.org/), 복잡 한 클라이언트 자산 관리에 대 한 합니다.
 
 ## <a name="compress-responses"></a>응답 압축
 

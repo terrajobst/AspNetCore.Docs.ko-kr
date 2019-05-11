@@ -4,14 +4,14 @@ author: scottaddie
 description: 번들링 및 축소 기술을 적용하여 ASP.NET Core 웹 응용 프로그램에서 정적 리소스를 최적화하는 방법을 알아봅니다.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 11/20/2018
+ms.date: 05/10/2019
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: 5d5f0aadb7740c9b2b959d12a585cd8c91758ce8
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: ba01d365a25dfbd13fed89263d7489b2ce2a8771
+ms.sourcegitcommit: ffe3ed7921ec6c7c70abaac1d10703ec9a43374c
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64894300"
+ms.lasthandoff: 05/11/2019
+ms.locfileid: "65535925"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>ASP.NET Core에서 정적 자산 번들링 및 축소하기
 
@@ -63,7 +63,7 @@ ms.locfileid: "64894300"
 
 ## <a name="choose-a-bundling-and-minification-strategy"></a>번들링 및 축소 전략 선택하기
 
-MVC 및 Razor 페이지 프로젝트 템플릿을 묶음 및 축소 JSON 구성 파일의 구성에 대 한 기본 제공 솔루션을 제공 합니다. 와 같은 타사 도구를 [Gulp](xref:client-side/using-gulp) 하 고 [Grunt](xref:client-side/using-grunt) 실행 기 작업을 좀 더 많은 복잡성을 사용 하 여 동일한 작업을 수행 합니다. 개발 워크플로에서 처리 묶음 및 축소 초과 해야 하는 경우 타사 도구는 최적의 선택&mdash;lint 및 이미지 최적화와 같은 합니다. 디자인 타임 묶음 및 축소를 사용 하 여 앱의 배포 하기 전에 축소 된 파일이 생성 됩니다. 묶음 및 축소를 배포 하기 전에 서버 부하 감소의 이점이 제공 합니다. 그러나 해당 디자인 타임 묶음을 인식 해야 하 고 축소 빌드 복잡성 증가 정적 파일 에서만 작동 합니다.
+MVC 및 Razor 페이지 프로젝트 템플릿을 묶음 및 축소 JSON 구성 파일의 구성에 대 한 기본 제공 솔루션을 제공 합니다. 와 같은 타사 도구를 [Grunt](xref:client-side/using-grunt) runner 작업을 좀 더 많은 복잡성을 사용 하 여 동일한 작업을 수행 합니다. 개발 워크플로에서 처리 묶음 및 축소 초과 해야 하는 경우 타사 도구는 최적의 선택&mdash;lint 및 이미지 최적화와 같은 합니다. 디자인 타임 묶음 및 축소를 사용 하 여 앱의 배포 하기 전에 축소 된 파일이 생성 됩니다. 묶음 및 축소를 배포 하기 전에 서버 부하 감소의 이점이 제공 합니다. 그러나 해당 디자인 타임 묶음을 인식 해야 하 고 축소 빌드 복잡성 증가 정적 파일 에서만 작동 합니다.
 
 ## <a name="configure-bundling-and-minification"></a>번들링 및 축소 구성하기
 
@@ -325,11 +325,9 @@ Visual Studio에서 프로젝트를 빌드하기 전에 Gulp 축소 작업을 �
 ========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
 ```
 
-또는 Visual Studio의 작업 러너 탐색기를 사용하여 Gulp 작업을 특정 Visual Studio 이벤트에 바인딩 할 수 있습니다. 이에 대한 지침은 [기본 작업 실행하기](xref:client-side/using-gulp#running-default-tasks)를 참고하시기 바랍니다.
 
 ## <a name="additional-resources"></a>추가 자료
 
-* [Gulp 사용하기](xref:client-side/using-gulp)
 * [Grunt 사용하기](xref:client-side/using-grunt)
 * [다양한 환경 사용하기](xref:fundamentals/environments)
 * [태그 도우미](xref:mvc/views/tag-helpers/intro)

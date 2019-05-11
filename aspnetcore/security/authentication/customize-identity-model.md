@@ -5,12 +5,12 @@ description: 이 문서에서는 ASP.NET Core Id에 대 한 기본 Entity Framew
 ms.author: avickers
 ms.date: 04/24/2019
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: ae5f4567a8921ce277cd6153f37a5558bcf4e261
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 53ce77e20722f3ba3282ff4455a0b70d30e635b0
+ms.sourcegitcommit: ffe3ed7921ec6c7c70abaac1d10703ec9a43374c
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64897860"
+ms.lasthandoff: 05/11/2019
+ms.locfileid: "65536016"
 ---
 # <a name="identity-model-customization-in-aspnet-core"></a>ASP.NET core에서 identity 모델 사용자 지정 합니다.
 
@@ -340,7 +340,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
 업데이트 *Pages/Shared/_LoginPartial.cshtml* 바꾸고 `IdentityUser` 사용 하 여 `ApplicationUser`:
 
-```
+```cshtml
 @using Microsoft.AspNetCore.Identity
 @using WebApp1.Areas.Identity.Data
 @inject SignInManager<ApplicationUser> SignInManager
