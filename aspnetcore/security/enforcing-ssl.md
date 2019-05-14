@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/01/2018
 uid: security/enforcing-ssl
-ms.openlocfilehash: ab407436afb16687fa285a836b608ad2e6a4802f
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: e27e0c31b128cbd7d71bf7b83a2d33cc89ea3ab1
+ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64894560"
+ms.lasthandoff: 05/14/2019
+ms.locfileid: "65610433"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>ASP.NET Core에서 HTTPS 적용
 
@@ -256,6 +256,17 @@ dotnet dev-certs https --help
 참조 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/6199)합니다.
 
 ::: moniker-end
+
+<a name="wsl"></a>
+
+## <a name="trust-https-certificate-from-windows-subsystem-for-linux"></a>Linux 용 Windows 하위 시스템에서 HTTPS 인증서를 신뢰 합니다.
+
+Windows 하위 시스템에 대 한 WSL (Linux) HTTPS 자체 서명 된 인증서를 생성합니다. WSL 인증서를 신뢰 하는 Windows 인증서 저장소를 구성 합니다.
+
+* WSL 생성 된 인증서를 내보내려면 다음 명령을 실행 합니다. `dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p <cryptic-password>`
+* WSL 창에서 다음 명령을 실행 합니다. `ASPNETCORE_Kestrel__Certificates__Default__Password="<cryptic-password>" ASPNETCORE_Kestrel__Certificates__Default__Path=/mnt/c/Users/user-name/.aspnet/https/aspnetapp.pfx dotnet watch run`
+
+  위의 명령은 Linux Windows 신뢰할 수 있는 인증서를 사용 하므로 환경 변수를 설정 합니다.
 
 ## <a name="additional-information"></a>추가 정보
 

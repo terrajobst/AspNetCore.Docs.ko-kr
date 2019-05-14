@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/20/2018
 uid: client-side/libman/libman-vs
-ms.openlocfilehash: 41a5a41c8921b04290784d26441ecb46aea753e7
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: d0494b96447ad2b256acbde7748209ff430ae7c1
+ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64894970"
+ms.lasthandoff: 05/14/2019
+ms.locfileid: "65610176"
 ---
 # <a name="use-libman-with-aspnet-core-in-visual-studio"></a>Visual Studio에서 ASP.NET Core와 LibMan 사용하기
 
@@ -28,7 +28,7 @@ Visual Studio는 ASP.NET Core 프로젝트에서 [LibMan](xref:client-side/libma
 
 ## <a name="prerequisites"></a>전제 조건
 
-* **ASP.NET 및 웹 개발** 워크로드가 설치된 Visual Studio 2017 버전 15.8 이상
+* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) 사용 하 여 합니다 **ASP.NET 및 웹 개발** 워크 로드
 
 ## <a name="add-library-files"></a>라이브러리 파일 추가하기
 
