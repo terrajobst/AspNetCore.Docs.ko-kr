@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core에서 개발 앱 암호의 안전한 저장소
+title: ASP.NET Core 개발 시 앱 암호의 안전한 저장  
 author: rick-anderson
 description: 저장 하 고 ASP.NET Core 앱을 개발 하는 동안 앱 암호 '로 중요 한 정보를 검색 하는 방법에 알아봅니다.
 ms.author: scaddie
@@ -13,17 +13,17 @@ ms.contentlocale: ko-KR
 ms.lasthandoff: 04/27/2019
 ms.locfileid: "64893220"
 ---
-# <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>ASP.NET Core에서 개발 앱 암호의 안전한 저장소
+# <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>ASP.NET Core 개발 시 앱 비밀의 안전한 저장
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT), [김 Roth](https://github.com/danroth27), 및 [Scott Addie](https://github.com/scottaddie)
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/app-secrets/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-이 문서에 저장 하 고 ASP.NET Core 앱을 개발 하는 동안 중요 한 데이터를 검색 하는 기술을 설명 합니다. 소스 코드에서 암호 또는 기타 중요 한 데이터를 저장 하지 마십시오. 프로덕션 비밀을 사용할 수 없습니다 개발 또는 테스트에 대 한 합니다. [Azure Key Vault 구성 제공자](xref:security/key-vault-configuration)로 Azure 테스트 및 프로덕션 암호를 저장하고 보호할 수 있습니다.
+이 문서는 ASP.NET Core 앱을 개발할 때 민감한 데이터를 저장하거나 검색하는 기술들을 설명합니다. 소스 코드에 패스워드나 다른 민감한 데이터를 저장하지 마세요. 프로덕션용 비밀들은 개발 또는 테스트에서 사용하면 안됩니다. [Azure Key Vault 구성 제공자](xref:security/key-vault-configuration)로 Azure 테스트 및 프로덕션 암호를 저장하고 보호할 수 있습니다.
 
 ## <a name="environment-variables"></a>환경 변수
 
-환경 변수는 로컬 구성 파일 또는 코드에서의 앱 비밀 저장소를 방지 하는 데 사용 됩니다. 환경 변수는 모든 이전에 지정한 구성 원본에 대 한 구성 값을 재정의합니다.
+환경 변수는 로컬 구성 파일 또는 코드에서의 앱 비밀의 저장을 방지하는 데 사용됩니다. 환경 변수는 이전에 지정한 모든 구성 원본의 구성 값을 재정의합니다.
 
 ::: moniker range="<= aspnetcore-1.1"
 
@@ -33,10 +33,10 @@ ms.locfileid: "64893220"
 
 ::: moniker-end
 
-ASP.NET Core 웹 앱을는 것이 좋습니다 **개별 사용자 계정** 보안이 사용 됩니다. 프로젝트의 기본 데이터베이스 연결 문자열을 있기 *appsettings.json* 키를 사용 하 여 파일 `DefaultConnection`합니다. 기본 연결 문자열은 사용자 모드에서 실행 되는 암호가 필요 하며 LocalDB입니다. 앱 배포 하는 동안는 `DefaultConnection` 환경 변수의 값을 사용 하 여 키 값을 재정의할 수 있습니다. 환경 변수는 중요 한 자격 증명을 사용 하 여 전체 연결 문자열을 저장할 수 있습니다.
+**개별 사용자 계정** 보안이 활성화된 ASP.NET Core 웹 앱을 고려해보세요. 기본 데이터베이스 연결 문자열이 프로젝트의 *appsettings.json* 파일의 `DefaultConnection` 키에 포함되어 있습니다. 기본 연결 문자열은 사용자 모드에서 실행되고 암호가 필요없는 LocalDB용입니다. 앱을 배포하는 동안 `DefaultConnection` 키 값은 환경 변수의 값으로 재정의할 수 있습니다. 환경 변수는 민감한 자격 증명을 사용하여 전체 연결 문자열을 저장할 수 있습니다.
 
 > [!WARNING]
-> 환경 변수는 암호화 되지 않은 일반 텍스트에 일반적으로 저장 됩니다. 컴퓨터 또는 프로세스가 손상 된 경우 환경 변수는 신뢰할 수 없는 당사자가 액세스할 수 있습니다. 사용자 암호의 공개 되지 않도록 추가 조치가 필요할 수 있습니다.
+> 환경 변수는 일반적으로 암호화되지 않은 일반 텍스트로 저장됩니다. 컴퓨터 또는 프로세스가 손상된 경우 환경 변수는 신뢰할 수 없는 당사자가 액세스할 수 있습니다. 사용자의 비밀 정보가 유출되지 않도록 추가 조치가 필요할 수 있습니다.
 
 [!INCLUDE[](~/includes/environmentVarableColon.md)]
 
