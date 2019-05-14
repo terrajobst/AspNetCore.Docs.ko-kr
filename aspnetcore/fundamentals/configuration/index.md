@@ -43,14 +43,14 @@ ASP.NET Core의 앱 구성은 ‘구성 공급자’가 설정한 키-값 쌍을
 호스트를 빌드할 때 ASP.NET Core [dotnet new](/dotnet/core/tools/dotnet-new) 템플릿을 기반으로 하는 웹앱은 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>를 호출합니다. <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>는 다음 순서로 앱에 대한 기본 구성을 제공합니다.
 
 * 호스트 구성은 다음에 의해 제공됩니다.
-  * [환경 변수 구성 공급자](#environment-variables-configuration-provider)을 사용하여 `ASPNETCORE_`를 접두사로 사용하는 환경 변수(예: `ASPNETCORE_ENVIRONMENT`) 구성 키-값 쌍이 로드되면 접두사(`ASPNETCORE_`)는 제거됩니다.
-  * [명령줄 구성 공급자](#command-line-configuration-provider)을 사용하는 명령줄 인수
+  * [환경 변수 구성 공급자](#environment-variables-configuration-provider)를 사용하여 `ASPNETCORE_`를 접두사로 사용하는 환경 변수(예: `ASPNETCORE_ENVIRONMENT`) 구성 키-값 쌍이 로드되면 접두사(`ASPNETCORE_`)는 제거됩니다.
+  * [명령줄 구성 공급자](#command-line-configuration-provider)를 사용하는 명령줄 인수
 * 앱 구성은 다음에 의해 제공됩니다.
-  * [파일 구성 공급자](#file-configuration-provider)을 사용하는 *appsettings.json*
-  * [파일 구성 공급자](#file-configuration-provider)을 사용하는 *appsettings.{Environment}.json*
+  * [파일 구성 공급자](#file-configuration-provider)를 사용하는 *appsettings.json*
+  * [파일 구성 공급자](#file-configuration-provider)를 사용하는 *appsettings.{Environment}.json*
   * 앱이 항목 어셈블리를 사용하여 `Development` 환경에서 실행되는 경우 [Secret Manager](xref:security/app-secrets)입니다.
-  * [환경 변수 구성 공급자](#environment-variables-configuration-provider)을 사용하는 환경 변수 사용자 지정 접두사가 사용되는 경우(예: `.AddEnvironmentVariables(prefix: "PREFIX_")`가 포함된 `PREFIX_`), 구성 키-값 쌍이 로드되면 접두사는 제거됩니다.
-  * [명령줄 구성 공급자](#command-line-configuration-provider)을 사용하는 명령줄 인수
+  * [환경 변수 구성 공급자](#environment-variables-configuration-provider)를 사용하는 환경 변수 사용자 지정 접두사가 사용되는 경우(예: `.AddEnvironmentVariables(prefix: "PREFIX_")`가 포함된 `PREFIX_`), 구성 키-값 쌍이 로드되면 접두사는 제거됩니다.
+  * [명령줄 구성 공급자](#command-line-configuration-provider)를 사용하는 명령줄 인수
 
 구성 공급자에 대해서는 이 항목의 뒷부분에서 설명됩니다. 호스트 및 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>에 대한 추가 정보는 <xref:fundamentals/host/web-host#set-up-a-host>를 참조하세요.
 
