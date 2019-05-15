@@ -5,14 +5,14 @@ description: ASP.NET Core 앱을 구축하기 위한 기본적인 개념을 알�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/31/2019
+ms.date: 05/11/2019
 uid: fundamentals/index
-ms.openlocfilehash: a1fed574db0baab391ebb9cfc44664ceddbfa69b
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 9c7bc25d813ad17825ef03f5176882993cc2dd63
+ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64882628"
+ms.lasthandoff: 05/14/2019
+ms.locfileid: "65610319"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core 기본 사항
 
@@ -78,6 +78,8 @@ ASP.NET Core 앱은 시작 시 *호스트*를 빌드합니다. 호스트는 다�
 
 ::: moniker range=">= aspnetcore-3.0"
 
+`CreateHostBuilder`는 외부 구성 요소(예: [Entity Framework](/ef/core/))에 작성기 메서드를 식별하는 특수 이름입니다.
+
 ASP.NET Core 3.0 이상의 웹앱에서는 제네릭 호스트(`Host` 클래스) 또는 웹 호스트(`WebHost` 클래스)를 사용할 수 있습니다. 제네릭 호스트를 사용하는 것이 좋고, 웹 호스트를 이전 버전과 호환 가능합니다.
 
 프레임워크는 다음과 같이 일반적으로 사용되는 옵션으로 호스트를 설정할 수 있는 `CreateDefaultBuilder` 및 `ConfigureWebHostDefaults` 메서드를 제공합니다.
@@ -95,6 +97,8 @@ ASP.NET Core 3.0 이상의 웹앱에서는 제네릭 호스트(`Host` 클래스)
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
+
+`CreateWebHostBuilder`는 외부 구성 요소(예: [Entity Framework](/ef/core/))에 작성기 메서드를 식별하는 특수 이름입니다.
 
 ASP.NET Core 2.x는 웹앱에서 웹 호스트(`WebHost` 클래스)를 사용합니다. 프레임워크는 다음과 같이 일반적으로 사용되는 옵션으로 호스트를 설정할 수 있는 `CreateDefaultBuilder`를 제공합니다.
 

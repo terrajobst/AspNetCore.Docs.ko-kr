@@ -1,27 +1,27 @@
 ---
 title: ASP.NET Core 시작
 author: rick-anderson
-description: ASP.NET Core를 사용하여 간단한 Hello World 앱을 만들고 실행하는 빠른 자습서입니다.
+description: ASP.NET Core를 사용하여 기본 Hello World 앱을 만들고 실행하는 간단한 자습서입니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/15/2019
+ms.date: 5/15/2019
 uid: getting-started
-ms.openlocfilehash: 76728c484368a8b63130c259a9663473970846d3
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: 9227dcfbc84376d9d73bc6fc0dd76085779acae1
+ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58209478"
+ms.lasthandoff: 05/14/2019
+ms.locfileid: "65610316"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>자습서: ASP.NET Core 시작
 
-이 자습서에서는 .NET Core 명령줄 인터페이스를 사용하여 ASP.NET Core 웹앱을 만드는 방법을 보여 줍니다.
+이 자습서에서는 .NET Core 명령줄 인터페이스를 사용하여 ASP.NET Core 웹앱을 만들고 실행하는 방법을 보여 줍니다.
 
 다음을 수행하는 방법을 알아봅니다.
 
 > [!div class="checklist"]
 > * 웹앱 프로젝트를 만듭니다.
-> * 로컬 HTTPS를 사용하도록 설정합니다.
+> * 개발 인증서를 신뢰합니다.
 > * 앱을 실행합니다.
 > * Razor 페이지를 편집합니다.
 
@@ -41,7 +41,7 @@ ms.locfileid: "58209478"
 dotnet new webapp -o aspnetcoreapp
 ```
 
-## <a name="enable-local-https"></a>로컬 HTTPS 사용
+### <a name="trust-the-development-certificate"></a>개발 인증서 신뢰
 
 HTTPS 개발 인증서 신뢰:
 
@@ -71,6 +71,8 @@ dotnet dev-certs https --trust
 
 # <a name="linuxtablinux"></a>[Linux](#tab/linux)
 
+Linux용 Windows 하위 시스템의 경우 [Linux용 Windows 하위 시스템에서 HTTPS 인증서 신뢰](xref:security/enforcing-ssl#wsl)를 참조하세요.
+
 HTTPS 개발 인증서를 신뢰하는 방법은 Linux 배포에 대한 설명서를 참조하세요.
 
 ---
@@ -86,7 +88,7 @@ cd aspnetcoreapp
 dotnet run
 ```
 
-명령 셸에서 앱이 시작되었음을 나타낸 후 [https://localhost:5001](https://localhost:5001)로 이동합니다. **동의**를 클릭하여 개인 정보 및 쿠키 정책에 동의합니다. 이 앱은 개인 정보를 보관하지 않습니다.
+명령 셸에서 앱이 시작되었음을 나타낸 후 [https://localhost:5001](https://localhost:5001)로 이동합니다. **동의**를 클릭하여 개인정보처리방침 정책에 동의합니다. 이 앱은 개인 정보를 보관하지 않습니다.
 
 ## <a name="edit-a-razor-page"></a>Razor 페이지 편집
 
@@ -102,7 +104,7 @@ dotnet run
 
 > [!div class="checklist"]
 > * 웹앱 프로젝트를 만듭니다.
-> * 로컬 HTTPS를 사용하도록 설정합니다.
+> * 개발 인증서를 신뢰합니다.
 > * 프로젝트를 실행합니다.
 > * 페이지를 수정합니다.
 
