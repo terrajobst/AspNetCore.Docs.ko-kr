@@ -3,14 +3,14 @@ title: ASP.NET Core의 영역
 author: rick-anderson
 description: 관련 기능을 별도의 네임스페이스(라우팅용) 및 폴더 구조(보기용)로 그룹화하는 데 사용되는 ASP.NET MVC 기능인 영역에 대해 알아봅니다.
 ms.author: riande
-ms.date: 02/14/2019
+ms.date: 05/06/2019
 uid: mvc/controllers/areas
-ms.openlocfilehash: 79bc023a7bd00a9d4de375e3cddaafd148251469
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
+ms.openlocfilehash: 35c7682861f7392b0bcda7326e4d7f5ccc356bda
+ms.sourcegitcommit: b508b115107e0f8d7f62b25cfcc8ad45e1373459
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58264762"
+ms.lasthandoff: 05/07/2019
+ms.locfileid: "65212596"
 ---
 # <a name="areas-in-aspnet-core"></a>ASP.NET Core의 영역
 
@@ -25,7 +25,7 @@ ms.locfileid: "58264762"
 * 앱은 논리적으로 분리할 수 있는 여러 개의 고급 기능 구성 요소로 이루어져 있습니다.
 * 각 기능 영역을 독립적으로 작업할 수 있도록 앱을 파티션하려고 합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/controllers/areas/samples) ([다운로드 방법](xref:index#how-to-download-a-sample)) 다운로드 샘플은 테스트 영역에 대한 기본 앱을 제공합니다.
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples) ([다운로드 방법](xref:index#how-to-download-a-sample)) 다운로드 샘플은 테스트 영역에 대한 기본 앱을 제공합니다.
 
 Razor Pages를 사용하는 경우 이 문서에서 [Razor Pages가 있는 영역](#areas-with-razor-pages)을 참조하세요.
 
@@ -34,8 +34,13 @@ Razor Pages를 사용하는 경우 이 문서에서 [Razor Pages가 있는 영�
 영역, 컨트롤러 및 보기를 사용하는 일반적인 ASP.NET Core 웹앱에는 다음이 포함됩니다.
 
 * [영역 폴더 구조](#area-folder-structure).
-* 컨트롤러를 [&lbrack;영역&rbrack;](#attribute) 특성으로 데코레이트하여 해당 영역([!code-csharp[](areas/samples/MVCareas/Areas/Products/Controllers/ManageController.cs?name=snippet2)])과 연결합니다.
-* [시작 시 영역 경로 추가](#add-area-route): [!code-csharp[](areas/samples/MVCareas/Startup.cs?name=snippet2&highlight=3-6)]
+* 컨트롤러를 [&lbrack;Area&rbrack;](#attribute) 특성으로 데코레이팅하여 해당 영역과 연결합니다.
+
+  [!code-csharp[](areas/samples/MVCareas/Areas/Products/Controllers/ManageController.cs?name=snippet2)]
+
+* [시작 시 영역 경로 추가](#add-area-route):
+
+  [!code-csharp[](areas/samples/MVCareas/Startup.cs?name=snippet2&highlight=3-6)]
 
 ### <a name="area-folder-structure"></a>영역 폴더 구조
 
@@ -99,7 +104,7 @@ ASP.NET Core 2.2와 함께 `MapAreaRoute`를 사용하는 경우 [이 GitHub 문
 
 ### <a name="link-generation-with-mvc-areas"></a>MVC 영역과 링크 생성
 
-[샘플 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/controllers/areas/samples)의 다음 코드는 지정된 영역과 링크 생성을 보여줍니다.
+[샘플 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples)의 다음 코드는 지정된 영역과 링크 생성을 보여줍니다.
 
 [!code-cshtml[](areas/samples/MVCareas/Views/Shared/_testLinksPartial.cshtml?name=snippet)]
 
@@ -127,7 +132,7 @@ ASP.NET Core 2.2와 함께 `MapAreaRoute`를 사용하는 경우 [이 GitHub 문
 
 ## <a name="areas-with-razor-pages"></a>Razor Pages가 있는 영역
 
-Razor Pages가 있는 영역은 앱 루트에 *Areas/&lt;area name&gt;/Pages* 폴더가 있어야 합니다. [샘플 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/controllers/areas/samples)에서는 다음 폴더 구조가 사용됩니다.
+Razor Pages가 있는 영역은 앱 루트에 *Areas/&lt;area name&gt;/Pages* 폴더가 있어야 합니다. [샘플 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples)에서는 다음 폴더 구조가 사용됩니다.
 
 * 프로젝트 이름
   * 영역
@@ -144,7 +149,7 @@ Razor Pages가 있는 영역은 앱 루트에 *Areas/&lt;area name&gt;/Pages* �
 
 ### <a name="link-generation-with-razor-pages-and-areas"></a>Razor Pages 및 영역과 링크 생성
 
-[샘플 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas)의 다음 코드는 지정된 영역(예: `asp-area="Products"`)과 링크 생성을 보여 줍니다.
+[샘플 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas)의 다음 코드는 지정된 영역(예: `asp-area="Products"`)과 링크 생성을 보여 줍니다.
 
 [!code-cshtml[](areas/samples/RPareas/Pages/Shared/_testLinksPartial.cshtml?name=snippet)]
 
@@ -160,7 +165,7 @@ Razor Pages가 있는 영역은 앱 루트에 *Areas/&lt;area name&gt;/Pages* �
 
 * `<a asp-page="/Manage/About">`에서 생성된 링크는 `Services` 영역의 페이지를 마지막으로 요청한 경우에만 유효합니다. 예를 들어 `/Services/Manage/`, `/Services/Manage/Index` 또는 `/Services/Manage/About`입니다.
 * `<a asp-page="/About">`에서 생성된 링크는 `/Home`의 페이지를 마지막으로 요청한 경우에만 유효합니다.
-* 코드는 [샘플 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas)에서 가져온 것입니다.
+* 코드는 [샘플 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas)에서 가져온 것입니다.
 
 ### <a name="import-namespace-and-tag-helpers-with-viewimports-file"></a>_ViewImports 파일을 사용하여 네임스페이스 및 태그 도우미 가져오기
 
@@ -179,7 +184,9 @@ Razor Pages가 있는 영역은 앱 루트에 *Areas/&lt;area name&gt;/Pages* �
 
 [!code-cshtml[](areas/samples/RPareas/Areas/Products/Pages/_ViewImports.cshtml)]
 
-다음 태그는 */Products/About* Razor 페이지를 보여 줍니다. [!code-cshtml[](areas/samples/RPareas/Areas/Products/Pages/About.cshtml)]
+다음 태그는 */Products/About* Razor 페이지를 보여 줍니다.
+
+[!code-cshtml[](areas/samples/RPareas/Areas/Products/Pages/About.cshtml)]
 
 위의 파일에서 네임스페이스와 `@addTagHelper` 지시문은 *Areas/Products/Pages/_ViewImports.cshtml* 파일을 통해 파일로 가져온 것입니다.
 

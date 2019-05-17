@@ -6,12 +6,12 @@ ms.author: tdykstra
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/sort-filter-page
-ms.openlocfilehash: dff5a5b1ba3c8ed07ccc8d134f8cfeb25b9f6689
-ms.sourcegitcommit: 3e9e1f6d572947e15347e818f769e27dea56b648
+ms.openlocfilehash: 921e27bf56587813f835357c9090c91a155c087b
+ms.sourcegitcommit: b508b115107e0f8d7f62b25cfcc8ad45e1373459
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/30/2019
-ms.locfileid: "58751046"
+ms.lasthandoff: 05/07/2019
+ms.locfileid: "65212556"
 ---
 # <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>자습서: 정렬, 필터링 및 페이징 추가 - ASP.NET MVC 및 EF Core 사용
 
@@ -211,10 +211,8 @@ return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(), pa
 Contoso University 웹 사이트의 **정보** 페이지에는 각 등록 날짜에 등록된 학생 수가 표시됩니다. 여기에는 그룹화와 그룹에 대한 간단한 계산이 필요합니다. 이 작업을 수행하기 위해 다음을 수행합니다.
 
 * 뷰에 전달해야 하는 데이터에 대해 뷰 모델 클래스를 만듭니다.
-
-* 홈 컨트롤러에서 About 메서드를 수정합니다.
-
-* 정보 뷰를 수정합니다.
+* 홈 컨트롤러에서 About 메서드를 만듭니다.
+* 정보 뷰를 만듭니다.
 
 ### <a name="create-the-view-model"></a>뷰 모델 만들기
 
@@ -239,10 +237,8 @@ Contoso University 웹 사이트의 **정보** 페이지에는 각 등록 날짜
 [!code-csharp[](intro/samples/cu/Controllers/HomeController.cs?name=snippet_UseDbSet)]
 
 LINQ 문은 등록 날짜별로 학생 엔터티를 그룹화하고 각 그룹의 엔터티 수를 계산하며 결과를 `EnrollmentDateGroup` 뷰 모델 개체의 컬렉션에 저장합니다.
-> [!NOTE]
-> Entity Framework Core 1.0 버전에서는 전체 결과 집합이 클라이언트에 반환되고 그룹화가 클라이언트에서 수행됩니다. 일부 시나리오에서는 이로 인해 성능 문제가 발생할 수 있습니다. 프로덕션 볼륨의 데이터로 성능을 테스트하고 필요한 경우 원시 SQL을 사용하여 서버에서 그룹화를 수행합니다. 원시 SQL을 사용하는 방법에 대한 자세한 내용은 [이 시리즈의 마지막 자습서](advanced.md)를 참조하세요.
 
-### <a name="modify-the-about-view"></a>정보 뷰 수정
+### <a name="create-the-about-view"></a>정보 뷰 만들기
 
 다음 코드를 사용하여 *Views/Home/About.cshtml* 파일을 추가합니다.
 
@@ -252,7 +248,7 @@ LINQ 문은 등록 날짜별로 학생 엔터티를 그룹화하고 각 그룹�
 
 ## <a name="get-the-code"></a>코드 가져오기
 
-[완성된 애플리케이션을 다운로드하거나 확인합니다.](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[완성된 애플리케이션을 다운로드하거나 확인합니다.](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="next-steps"></a>다음 단계
 

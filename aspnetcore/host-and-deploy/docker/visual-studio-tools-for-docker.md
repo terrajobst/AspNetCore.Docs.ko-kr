@@ -6,27 +6,27 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/12/2018
 uid: host-and-deploy/docker/visual-studio-tools-for-docker
-ms.openlocfilehash: 42f8071eadabba3eb8cb738be1720f4c6195808c
-ms.sourcegitcommit: 375e9a67f5e1f7b0faaa056b4b46294cc70f55b7
+ms.openlocfilehash: 3bf3d8d0a627d97090e3ce9fef7e380f03c7626d
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/29/2018
-ms.locfileid: "50207240"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64888368"
 ---
 # <a name="visual-studio-tools-for-docker-with-aspnet-core"></a>Visual Studio Tools for Docker 및 ASP.NET Core
 
 Visual Studio 2017은 .NET Core를 대상으로 하는 컨테이너화된 ASP.NET Core 앱의 빌드, 디버그 및 실행을 지원합니다. Windows 및 Linux 컨테이너가 모두 지원됩니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/host-and-deploy/docker/visual-studio-tools-for-docker/samples)([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/docker/visual-studio-tools-for-docker/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>전제 조건
 
 * [Windows용 Docker](https://docs.docker.com/docker-for-windows/install/)
-* **.NET Core 플랫폼 간 개발** 워크로드가 있는 [Visual Studio 2017](https://www.visualstudio.com/)
+* **.NET Core 플랫폼 간 개발** 워크로드가 있는 [Visual Studio 2017](https://visualstudio.microsoft.com)
 
 ## <a name="installation-and-setup"></a>설치 및 설정
 
-Docker를 설치하려면 우선 [Windows용 Docker: 설치하기 전에 알아야 할 사항](https://docs.docker.com/docker-for-windows/install/#what-to-know-before-you-install)의 정보를 검토하세요. 다음으로 [Windows용 Docker](https://docs.docker.com/docker-for-windows/install/)를 설치합니다.
+Docker를 설치하려면 우선 [Windows용 Docker 클라이언트에 있는 정보를 검토합니다. 설치하기 전에 알아야 할 사항](https://docs.docker.com/docker-for-windows/install/#what-to-know-before-you-install)의 정보를 검토하세요. 다음으로 [Windows용 Docker](https://docs.docker.com/docker-for-windows/install/)를 설치합니다.
 
 Windows용 Docker에서 **[공유 드라이브](https://docs.docker.com/docker-for-windows/#shared-drives)** 는 볼륨 매핑 및 디버깅을 지원하도록 구성되어야 합니다. 시스템 트레이의 Docker 아이콘을 마우스 오른쪽 단추로 클릭하고 **설정**을 선택한 다음, **공유 드라이브**를 선택합니다. Docker에서 파일을 저장하는 드라이브를 선택합니다. **적용**을 클릭합니다.
 
@@ -43,7 +43,7 @@ ASP.NET Core 프로젝트를 컨테이너화하려면 프로젝트가 .NET Core�
 
 ### <a name="new-app"></a>새 앱
 
-**ASP.NET Core 웹 응용 프로그램** 프로젝트 템플릿을 사용하여 새 앱을 만들 때 **Docker 지원 사용** 확인란을 선택합니다.
+**ASP.NET Core 웹 애플리케이션** 프로젝트 템플릿을 사용하여 새 앱을 만들 때 **Docker 지원 사용** 확인란을 선택합니다.
 
 ![Docker 지원 사용 확인란](visual-studio-tools-for-docker/_static/enable-docker-support-check-box.png)
 
@@ -84,7 +84,7 @@ Visual Studio Tools for Docker는 .NET Framework를 대상으로 하는 기존 A
 
 Visual Studio 2017 버전 15.7 또는 이전 버전에서는 [Docker Compose](https://docs.docker.com/compose/overview/)를 단독 컨테이너 오케스트레이션 솔루션으로 지원합니다. Docker Compose 아티팩트는 **추가** > **Docker 지원**을 통해 추가됩니다.
 
-Visual Studio 2017 버전 15.8 또는 이후 버전에서는 지시하는 경우에만 오케스트레이션이 추가됩니다. **솔루션 탐색기**에서 프로젝트를 마우스 오른쪽 단추로 클릭하고 **추가** > **컨테이너 오케스트레이터 지원**을 선택합니다. [Docker Compose](#docker-compose) 및 [Service Fabric](#service-fabric)라는 두 가지 다른 옵션이 제공됩니다.
+Visual Studio 2017 버전 15.8 또는 이후 버전에서는 지시하는 경우에만 오케스트레이션이 추가됩니다. **솔루션 탐색기**에서 프로젝트를 마우스 오른쪽 단추로 클릭하고 **추가** > **컨테이너 오케스트레이터 지원**을 선택합니다. 두 가지 다른 옵션인 [Docker Compose](#docker-compose) 및 [Service Fabric](#service-fabric)이 제공됩니다.
 
 ### <a name="docker-compose"></a>Docker Compose
 

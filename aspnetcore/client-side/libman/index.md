@@ -7,11 +7,11 @@ ms.custom: mvc
 ms.date: 08/14/2018
 uid: client-side/libman/index
 ms.openlocfilehash: a6ff0cc3342cfac74739387aa17046ed5050232f
-ms.sourcegitcommit: ecf2cd4e0613569025b28e12de3baa21d86d4258
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/30/2018
-ms.locfileid: "43312361"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64882208"
 ---
 # <a name="client-side-library-acquisition-in-aspnet-core-with-libman"></a>LibMan을 사용하여 ASP.NET Core에서 클라이언트 쪽 라이브러리 획득
 
@@ -27,7 +27,7 @@ LibMan은 다음과 같은 이점을 제공합니다.
 * 라이브러리의 파일 하위 집합을 획득하기 위해 [Node.js](https://nodejs.org), [npm](https://www.npmjs.com) 및 [WebPack](https://webpack.js.org) 같은 추가 도구가 반드시 필요한 것은 아닙니다.
 * 파일은 작업 또는 수동 파일 복사를 빌드하도록 재정렬하지 않고도 특정 위치에 배치할 수 있습니다.
 
-LibMan의 이점에 대한 자세한 내용은 [Visual Studio 2017: LibMan 세그먼트의 최신 프런트 엔드 웹 개발](https://channel9.msdn.com/Events/Build/2017/B8073#time=43m34s)을 참조하세요.
+LibMan의 이점에 대한 자세한 내용은 [Modern front-end web development in Visual Studio 2017: LibMan segment](https://channel9.msdn.com/Events/Build/2017/B8073#time=43m34s)(Visual Studio 2017의 최신 프런트 엔드 웹 개발: LibMan 세그먼트)를 참조하세요.
 
 LibMan은 패키지 관리 시스템이 아닙니다. npm 또는 [yarn](https://yarnpkg.com) 같은 패키지 관리자를 이미 사용 중인 경우 계속 사용하시면 됩니다. LibMan은 이러한 도구를 대체하기 위해 개발된 것이 아닙니다.
 

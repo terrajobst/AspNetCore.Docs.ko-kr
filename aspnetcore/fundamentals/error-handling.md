@@ -5,14 +5,14 @@ description: ASP.NET Core 앱에서 오류를 처리하는 방법을 알아봅�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 04/07/2019
+ms.date: 05/03/2019
 uid: fundamentals/error-handling
-ms.openlocfilehash: cbb9462a3c6010e074dc391aa128ac2cbb901456
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
+ms.openlocfilehash: 36cd9fdac0b9159900e82327705a73d561e7ce6b
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59705580"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65086975"
 ---
 # <a name="handle-errors-in-aspnet-core"></a>ASP.NET Core에서 오류 처리
 
@@ -20,7 +20,7 @@ ms.locfileid: "59705580"
 
 이 문서에서는 ASP.NET Core 앱에서 오류를 처리하기 위한 일반적인 접근법을 다룹니다.
 
-[샘플 코드 보기 또는 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/error-handling/samples) ([다운로드하는 방법](xref:index#how-to-download-a-sample)) 이 문서에는 다양한 시나리오를 사용할 수 있도록 샘플 앱에서 전처리기 지시문(`#if`, `#endif`, `#define`)을 설정하는 방법에 대한 지침이 포함됩니다.
+[샘플 코드 보기 또는 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples) ([다운로드하는 방법](xref:index#how-to-download-a-sample)) 이 문서에는 다양한 시나리오를 사용할 수 있도록 샘플 앱에서 전처리기 지시문(`#if`, `#endif`, `#define`)을 설정하는 방법에 대한 지침이 포함됩니다.
 
 ## <a name="developer-exception-page"></a>개발자 예외 페이지
 
@@ -40,7 +40,7 @@ ms.locfileid: "59705580"
 * 쿠키(있는 경우)
 * 헤더
 
-[샘플 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)에서 개발자 예외 페이지를 보려면 `DevEnvironment` 전처리기 지시문을 사용하고 홈페이지에서 **예외 트리거**를 선택합니다.
+[샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)에서 개발자 예외 페이지를 보려면 `DevEnvironment` 전처리기 지시문을 사용하고 홈페이지에서 **예외 트리거**를 선택합니다.
 
 ## <a name="exception-handler-page"></a>예외 처리기 페이지
 
@@ -75,7 +75,7 @@ public IActionResult Error()
 > [!WARNING]
 > 클라이언트로 중요한 오류 정보를 **제공하지 마세요**. 오류 제공은 보안 위험입니다.
 
-[샘플 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)에서 예외 처리 페이지를 보려면 `ProdEnvironment` 및 `ErrorHandlerPage` 전처리기 지시문을 사용하고 홈페이지에서 **예외 트리거**를 선택합니다.
+[샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)에서 예외 처리 페이지를 보려면 `ProdEnvironment` 및 `ErrorHandlerPage` 전처리기 지시문을 사용하고 홈페이지에서 **예외 트리거**를 선택합니다.
 
 ## <a name="exception-handler-lambda"></a>예외 처리기 람다
 
@@ -88,7 +88,7 @@ public IActionResult Error()
 > [!WARNING]
 > <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature> 또는 <xref:Microsoft.AspNetCore.Diagnostics.IExceptionHandlerPathFeature>에서 클라이언트로 중요한 오류 정보를 **제공하지 마세요**. 오류 제공은 보안 위험입니다.
 
-[샘플 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)에서 예외 처리 람다의 결과를 보려면 `ProdEnvironment` 및 `ErrorHandlerLambda` 전처리기 지시문을 사용하고 홈페이지에서 **예외 트리거**를 선택합니다.
+[샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)에서 예외 처리 람다의 결과를 보려면 `ProdEnvironment` 및 `ErrorHandlerLambda` 전처리기 지시문을 사용하고 홈페이지에서 **예외 트리거**를 선택합니다.
 
 ## <a name="usestatuscodepages"></a>UseStatusCodePages
 
@@ -108,7 +108,7 @@ public IActionResult Error()
 Status Code: 404; Not Found
 ```
 
-[샘플 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)에서 다양한 상태 코드 페이지 형식 중 하나를 보려면 `StatusCodePages`로 시작하는 전처리기 지시문 중 하나를 사용하고 홈페이지에서 **404 트리거**를 선택합니다.
+[샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)에서 다양한 상태 코드 페이지 형식 중 하나를 보려면 `StatusCodePages`로 시작하는 전처리기 지시문 중 하나를 사용하고 홈페이지에서 **404 트리거**를 선택합니다.
 
 ## <a name="usestatuscodepages-with-format-string"></a>형식 문자열이 있는 UseStatusCodePages
 
@@ -131,7 +131,7 @@ Status Code: 404; Not Found
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_StatusCodePagesWithRedirect)]
 
-URL 템플릿에는 예제와 같이 상태 코드의 `{0}` 자리 표시자가 포함될 수 있습니다. URL 템플릿이 물결표(~)로 시작하는 경우 물결표는 앱의 `PathBase`로 대체됩니다. 앱 내에서 엔드포인트를 가리키는 경우 엔드포인트에 대해 MVC 뷰 또는 Razor 페이지를 만듭니다. Razor Pages 예제를 보려면 [샘플 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)의 [StatusCode.cshtml](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/2.x/Pages/StatusCode.cshtml)을 참조하세요.
+URL 템플릿에는 예제와 같이 상태 코드의 `{0}` 자리 표시자가 포함될 수 있습니다. URL 템플릿이 물결표(~)로 시작하는 경우 물결표는 앱의 `PathBase`로 대체됩니다. 앱 내에서 엔드포인트를 가리키는 경우 엔드포인트에 대해 MVC 뷰 또는 Razor 페이지를 만듭니다. Razor Pages 예제를 보려면 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)의 *Pages/StatusCode.cshtml*을 참조하세요.
 
 이 메서드는 일반적으로 앱이 다음과 같은 경우에 사용됩니다.
 
@@ -147,7 +147,7 @@ URL 템플릿에는 예제와 같이 상태 코드의 `{0}` 자리 표시자가 
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_StatusCodePagesWithReExecute)]
 
-앱 내에서 엔드포인트를 가리키는 경우 엔드포인트에 대해 MVC 뷰 또는 Razor 페이지를 만듭니다. Razor Pages 예제를 보려면 [샘플 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)의 [StatusCode.cshtml](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/2.x/Pages/StatusCode.cshtml)을 참조하세요.
+앱 내에서 엔드포인트를 가리키는 경우 엔드포인트에 대해 MVC 뷰 또는 Razor 페이지를 만듭니다. Razor Pages 예제를 보려면 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)의 *Pages/StatusCode.cshtml*을 참조하세요.
 
 이 메서드는 일반적으로 앱이 다음과 같은 경우에 사용됩니다.
 

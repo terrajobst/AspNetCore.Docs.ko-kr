@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/07/2019
 uid: index
-ms.openlocfilehash: 9cb598c4068586e4e960ec40743c4f54f09995ad
-ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
+ms.openlocfilehash: 6dd722b3b78d2af81497bde9e0519feb9af84748
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/16/2019
-ms.locfileid: "59614374"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65086146"
 ---
 # <a name="introduction-to-aspnet-core"></a>ASP.NET Core 소개
 
@@ -24,7 +24,7 @@ ASP.NET Core는 클라우드 기반 인터넷에 연결된 최신 애플리케�
 * 클라우드 또는 온-프레미스에 배포합니다.
 * [.NET Core 또는.NET Framework](/dotnet/articles/standard/choosing-core-framework-server)를 실행합니다.
 
-## <a name="why-to-use-aspnet-core"></a>ASP.NET Core를 사용하는 이유
+## <a name="why-choose-aspnet-core"></a>ASP.NET Core를 선택하는 이유
 
 수백만 명의 개발자가 [ASP.NET 4.x](/aspnet/overview)를 사용하여 웹앱을 만들었습니다(계속 사용 중). ASP.NET Core는 간결한 모듈식 프레임워크를 만드는 아키텍처 변경 내용을 포함한 ASP.NET 4.x의 새로운 디자인입니다.
 
@@ -101,7 +101,7 @@ ASP.NET Core 앱 개발을 소개하는 자습서 및 문서는 다음 순서대
 
 대부분의 문서 및 자습서에는 샘플 코드에 대한 링크가 포함됩니다.
 
-1. [ASP.NET 리포지토리 zip 파일을 다운로드합니다](https://codeload.github.com/aspnet/Docs/zip/master).
+1. [ASP.NET 리포지토리 zip 파일을 다운로드합니다](https://codeload.github.com/aspnet/AspNetCore.Docs/zip/master).
 1. *Docs-master.zip* 파일의 압축을 풉니다.
 1. 샘플 링크의 URL을 사용하여 샘플 디렉터리로 이동할 수 있습니다.
 
@@ -148,7 +148,7 @@ WebHost.CreateDefaultBuilder(args)
 
 코드를 둘러싸고 있는 `#region` 및 `#endregion` 문을 안전하게 무시(또는 제거)할 수 있습니다. 항목에 설명된 샘플 시나리오를 실행하려는 경우 이러한 명령문 내에서 코드를 변경하지 마십시오. 다른 시나리오를 실험하는 경우 자유롭게 코드를 변경할 수 있습니다.
 
-자세한 내용은 다음을 참조하세요. [ASP.NET 설명서에 참여: 코드 조각](https://github.com/aspnet/Docs/blob/master/CONTRIBUTING.md#code-snippets).
+자세한 내용은 다음을 참조하세요. [ASP.NET 설명서에 참여: 코드 조각](https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md#code-snippets).
 
 ## <a name="next-steps"></a>다음 단계
 

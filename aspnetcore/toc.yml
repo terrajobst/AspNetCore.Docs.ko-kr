@@ -92,7 +92,11 @@
     - name: 원격 프로시저 호출 앱
       items:
         - name: ASP.NET Core에서 gRPC 서비스 시작
+          uid: tutorials/grpc/index
+        - name: ASP.NET Core gRPC Greeter 서비스 만들기
           uid: tutorials/grpc/grpc-start
+        - name: .NET Core gRPC 클라이언트 만들기
+          uid: tutorials/grpc/grpc-client
     - name: 데이터 액세스
       items:
         - name: Razor Pages를 사용한 EF Core
@@ -230,8 +234,9 @@
         - name: 개요
           uid: mvc/overview
         - name: 자습서
-          uid: tutorials/first-mvc-app/index
           items:
+            - name: 개요
+              uid: tutorials/first-mvc-app/index
             - name: 시작
               uid: tutorials/first-mvc-app/start-mvc
             - name: 컨트롤러 추가
@@ -324,8 +329,6 @@
               uid: client-side/libman/libman-cli
             - name: Visual Studio
               uid: client-side/libman/libman-vs
-        - name: Gulp
-          uid: client-side/using-gulp
         - name: Grunt
           uid: client-side/using-grunt
         - name: Bower
@@ -338,13 +341,10 @@
       uid: fundamentals/app-state
     - name: 레이아웃
       uid: mvc/views/layout
-    - name: 모델 바인딩
-      uid: mvc/models/model-binding
-    - name: 모델 유효성 검사
-      uid: mvc/models/validation
     - name: Razor 구문
       uid: mvc/views/razor
     - name: 태그 도우미
+      uid: mvc/views/tag-helpers/builtin-th/Index
       items:
         - name: 개요
           uid: mvc/views/tag-helpers/intro
@@ -396,10 +396,6 @@
           uid: mvc/controllers/areas
         - name: 앱 파트
           uid: mvc/extensibility/app-parts
-        - name: 사용자 지정 모델 바인딩
-          uid: mvc/advanced/custom-model-binding
-        - name: 호환성 버전
-          uid: mvc/compatibility-version
 - name: Web API 앱
   items:
     - name: 개요
@@ -1000,6 +996,14 @@
       uid: fundamentals/troubleshoot-aspnet-core-localization
 - name: 고급
   items:
+    - name: 모델 바인딩
+      uid: mvc/models/model-binding
+    - name: 사용자 지정 모델 바인딩
+      uid: mvc/advanced/custom-model-binding
+    - name: 모델 유효성 검사
+      uid: mvc/models/validation
+    - name: 호환성 버전
+      uid: mvc/compatibility-version
     - name: 쓰기 미들웨어
       uid: fundamentals/middleware/write
     - name: 요청 및 응답 작업
@@ -1076,4 +1080,4 @@
 - name: API 참조
   href: /dotnet/api/?view=aspnetcore-2.2
 - name: 참가
-  href: 'https://github.com/aspnet/Docs/blob/master/CONTRIBUTING.md'
+  href: 'https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md'

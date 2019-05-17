@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/11/2019
 uid: fundamentals/configuration/index
-ms.openlocfilehash: ad430f50b3d2616437b716b8be275937ef282bea
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 63a876c09f952537d790f2a5df4b8672df49d015
+ms.sourcegitcommit: 3376f224b47a89acf329b2d2f9260046a372f924
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64882528"
+ms.lasthandoff: 05/10/2019
+ms.locfileid: "65517027"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core의 구성
 
@@ -36,23 +36,23 @@ ASP.NET Core의 앱 구성은 ‘구성 공급자’가 설정한 키-값 쌍을
 
 ## <a name="host-vs-app-configuration"></a>호스트 및 앱 구성
 
-앱을 구성하고 시작하기 전에 *호스트*를 구성하고 시작합니다. 호스트는 앱 시작 및 수명 관리를 담당합니다. 앱과 호스트 모두 이 항목에서 설명하는 구성 관리자를 사용하여 구성합니다. 호스트 구성 키-값 쌍은 앱의 전역 구성에 포함됩니다. 호스트를 빌드할 때 구성 공급자를 사용하는 방법과 구성 원본이 호스트 구성에 미치는 영향에 대한 자세한 내용은 [호스트](xref:fundamentals/index#host)를 참조하세요.
+앱을 구성하고 시작하기 전에 *호스트*를 구성하고 시작합니다. 호스트는 앱 시작 및 수명 관리를 담당합니다. 앱과 호스트 모두 이 항목에서 설명하는 구성 관리자를 사용하여 구성합니다. 호스트 구성 키-값 쌍은 앱의 전역 구성에 포함됩니다. 호스트를 빌드할 때 구성 공급 기업을 사용하는 방법과 구성 원본이 호스트 구성에 미치는 영향에 대한 자세한 내용은 [호스트](xref:fundamentals/index#host)를 참조하세요.
 
 ## <a name="default-configuration"></a>기본 구성
 
 호스트를 빌드할 때 ASP.NET Core [dotnet new](/dotnet/core/tools/dotnet-new) 템플릿을 기반으로 하는 웹앱은 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>를 호출합니다. <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>는 다음 순서로 앱에 대한 기본 구성을 제공합니다.
 
 * 호스트 구성은 다음에 의해 제공됩니다.
-  * [환경 변수 구성 공급자](#environment-variables-configuration-provider)를 사용하여 `ASPNETCORE_`를 접두사로 사용하는 환경 변수(예: `ASPNETCORE_ENVIRONMENT`) 구성 키-값 쌍이 로드되면 접두사(`ASPNETCORE_`)는 제거됩니다.
-  * [명령줄 구성 공급자](#command-line-configuration-provider)를 사용하는 명령줄 인수
+  * [환경 변수 구성 공급 기업](#environment-variables-configuration-provider)을 사용하여 `ASPNETCORE_`를 접두사로 사용하는 환경 변수(예: `ASPNETCORE_ENVIRONMENT`) 구성 키-값 쌍이 로드되면 접두사(`ASPNETCORE_`)는 제거됩니다.
+  * [명령줄 구성 공급 기업](#command-line-configuration-provider)을 사용하는 명령줄 인수
 * 앱 구성은 다음에 의해 제공됩니다.
-  * [파일 구성 공급자](#file-configuration-provider)를 사용하는 *appsettings.json*
-  * [파일 구성 공급자](#file-configuration-provider)를 사용하는 *appsettings.{Environment}.json*
+  * [파일 구성 공급 기업](#file-configuration-provider)을 사용하는 *appsettings.json*
+  * [파일 구성 공급 기업](#file-configuration-provider)을 사용하는 *appsettings.{Environment}.json*
   * 앱이 항목 어셈블리를 사용하여 `Development` 환경에서 실행되는 경우 [Secret Manager](xref:security/app-secrets)입니다.
-  * [환경 변수 구성 공급자](#environment-variables-configuration-provider)를 사용하는 환경 변수 사용자 지정 접두사가 사용되는 경우(예: `.AddEnvironmentVariables(prefix: "PREFIX_")`가 포함된 `PREFIX_`), 구성 키-값 쌍이 로드되면 접두사는 제거됩니다.
-  * [명령줄 구성 공급자](#command-line-configuration-provider)를 사용하는 명령줄 인수
+  * [환경 변수 구성 공급 기업](#environment-variables-configuration-provider)을 사용하는 환경 변수 사용자 지정 접두사가 사용되는 경우(예: `.AddEnvironmentVariables(prefix: "PREFIX_")`가 포함된 `PREFIX_`), 구성 키-값 쌍이 로드되면 접두사는 제거됩니다.
+  * [명령줄 구성 공급 기업](#command-line-configuration-provider)을 사용하는 명령줄 인수
 
-구성 공급자에 대해서는 이 항목의 뒷부분에서 설명됩니다. 호스트 및 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>에 대한 추가 정보는 <xref:fundamentals/host/web-host#set-up-a-host>를 참조하세요.
+구성 공급 기업에 대해서는 이 항목의 뒷부분에서 설명됩니다. 호스트 및 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>에 대한 추가 정보는 <xref:fundamentals/host/web-host#set-up-a-host>를 참조하세요.
 
 ## <a name="security"></a>보안
 
@@ -98,7 +98,7 @@ ASP.NET Core의 앱 구성은 ‘구성 공급자’가 설정한 키-값 쌍을
 
 앱 시작 시 구성 공급자에서 지정한 순서로 구성 소스를 읽습니다.
 
-파일 구성 공급자는 앱 시작 후 기본 설정 파일이 변경되면 구성을 다시 로드할 수 있습니다. 파일 구성 공급자에 대해서는 이 항목의 뒷부분에서 설명합니다.
+변경 검색을 구현하는 구성 공급자는 기본 설정 파일이 변경되면 구성을 다시 로드할 수 있습니다. 예를 들어 파일 구성 공급자(이 항목의 뒷부분에서 설명됨) 및 [Azure Key Vault 구성 공급자](xref:security/key-vault-configuration)는 변경 검색을 구현합니다.
 
 <xref:Microsoft.Extensions.Configuration.IConfiguration>은 앱의 [DI(종속성 주입)](xref:fundamentals/dependency-injection) 컨테이너에서 사용할 수 있습니다. <xref:Microsoft.Extensions.Configuration.IConfiguration>을 Razor Pages <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel>에 삽입하여 클래스에 대한 구성을 가져올 수 있습니다.
 
@@ -167,7 +167,7 @@ public class IndexModel : PageModel
 
 ## <a name="configureappconfiguration"></a>ConfigureAppConfiguration
 
-호스트를 빌드할 때 <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*>을 호출하여 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>에 의해 자동으로 추가된 구성 공급자 외에도 앱의 구성 공급자를 지정합니다.
+호스트를 빌드할 때 <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*>을 호출하여 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>에 의해 자동으로 추가된 구성 공급 기업 외에도 앱의 구성 공급 기업을 지정합니다.
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Program.cs?name=snippet_Program&highlight=19)]
 

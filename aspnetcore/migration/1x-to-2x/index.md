@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: f5bd2bc9862a7487658125e14837798886efad11
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: fb6157205ab5280eb982a61e834eea5074864830
+ms.sourcegitcommit: a3926eae3f687013027a2828830c12a89add701f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64882798"
+ms.lasthandoff: 05/08/2019
+ms.locfileid: "65450962"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>ASP.NET Core 1.x에서 2.0으로 마이그레이션
 
@@ -41,6 +41,8 @@ ms.locfileid: "64882798"
 
 > [!NOTE]
 > .NET Core 2.0은 .NET Core 1.x보다 훨씬 더 큰 노출 영역을 제공합니다. .NET Core 1.x에 API가 없기 때문에 전적으로 .NET Framework를 대상으로 하는 경우 .NET Core 2.0을 대상으로 하는 것은 작동할 가능성이 있습니다.
+
+프로젝트 파일에 `<RuntimeFrameworkVersion>1.{sub-version}</RuntimeFrameworkVersion>`이 포함된 경우에는 [이 GitHub 문제](https://github.com/aspnet/AspNetCore/issues/3221#issuecomment-413094268)를 참조하세요.
 
 <a name="global-json"></a>
 

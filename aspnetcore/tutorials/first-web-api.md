@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/4/2019
 uid: tutorials/first-web-api
-ms.openlocfilehash: 24c87f2ad0446aef51f9d648fd20c181cbeaed2e
-ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
+ms.openlocfilehash: dce2926e3cb19d6ac8d2af0e9b96c31dee1d92fd
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/05/2019
-ms.locfileid: "57346474"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65087517"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core-mvc"></a>자습서: ASP.NET Core MVC를 사용하여 웹 API 만들기
 
@@ -216,7 +216,7 @@ ASP.NET Core에서는 DB 컨텍스트와 같은 서비스를 [DI(종속성 주�
 위의 코드는:
 
 * 메서드 없이 API 컨트롤러 클래스를 정의합니다.
-* [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) 특성을 사용하여 클래스를 데코레이트합니다. 이 특성은 컨트롤러가 웹 API 요청에 응답함을 나타냅니다. 특성을 사용하도록 설정하는 특정 동작에 대한 정보는 [ApiController 특성 주석](xref:web-api/index#annotation-with-apicontroller-attribute)을 참조하세요.
+* [[ApiController]](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) 특성을 사용하여 클래스를 데코레이팅합니다. 이 특성은 컨트롤러가 웹 API 요청에 응답함을 나타냅니다. 특성을 사용하도록 설정하는 특정 동작에 대한 정보는 <xref:web-api/index>를 참조하세요.
 * DI를 사용하여 데이터베이스 컨텍스트(`TodoContext`)를 컨트롤러에 삽입합니다. 컨트롤러의 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 메서드 각각에서 데이터베이스 컨텍스트를 사용합니다.
 * 데이터베이스가 비어 있는 경우 데이터베이스에 `Item1`이라는 항목을 추가합니다. 이 코드는 생성자에 위치하므로 새 HTTP 요청이 발생할 때마다 실행됩니다. 모든 항목을 삭제하면 생성자는 다음에 API가 호출될 경우 `Item1`을 다시 만듭니다. 따라서 실제로 작동되는 경우 삭제가 작동하지 않는 것처럼 보일 수 있습니다.
 
@@ -443,7 +443,7 @@ jQuery [ajax](https://api.jquery.com/jquery.ajax/) 함수는 할 일 항목의 �
 
 ## <a name="additional-resources"></a>추가 자료
 
-[이 자습서에서 샘플 코드 보기 또는 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/tutorials/first-web-api/samples) [다운로드하는 방법](xref:index#how-to-download-a-sample)을 참조하세요.
+[이 자습서에서 샘플 코드 보기 또는 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples) [다운로드하는 방법](xref:index#how-to-download-a-sample)을 참조하세요.
 
 자세한 내용은 다음 리소스를 참조하세요.
 

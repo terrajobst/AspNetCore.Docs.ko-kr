@@ -5,14 +5,14 @@ description: ASP.NET Core를 사용하여 Blazor 서버 쪽 앱을 호스팅하�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/15/2019
+ms.date: 04/26/2019
 uid: host-and-deploy/blazor/server-side
-ms.openlocfilehash: 940020ee44d72d50395aad64bc924413c1bbecfb
-ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
+ms.openlocfilehash: 8e44be09a4cceba2509f3e86abf3ce5fd2d077bd
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/16/2019
-ms.locfileid: "59614713"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64887768"
 ---
 # <a name="host-and-deploy-blazor-server-side"></a>Blazor 서버 쪽 호스트 및 배포
 
@@ -20,13 +20,13 @@ ms.locfileid: "59614713"
 
 ## <a name="host-configuration-values"></a>호스트 구성 값
 
-[서버 쪽 호스팅 모델](xref:blazor/hosting-models#server-side-hosting-model)을 사용하는 서버 쪽 앱은 [제네릭 호스트 구성 값](xref:fundamentals/host/generic-host#host-configuration)을 허용할 수 있습니다.
+[서버 쪽 호스팅 모델](xref:blazor/hosting-models#server-side)을 사용하는 서버 쪽 앱은 [제네릭 호스트 구성 값](xref:fundamentals/host/generic-host#host-configuration)을 허용할 수 있습니다.
 
 ## <a name="deployment"></a>배포
 
-[서버 쪽 호스팅 모델](xref:blazor/hosting-models#server-side-hosting-model)을 사용하면 Blazor가 서버의 ASP.NET Core 앱 내에서 실행됩니다. UI 업데이트, 이벤트 처리 및 JavaScript 호출은 [SignalR](xref:signalr/introduction) 연결을 통해 처리됩니다.
+[서버 쪽 호스팅 모델](xref:blazor/hosting-models#server-side)을 사용하면 Blazor가 서버의 ASP.NET Core 앱 내에서 실행됩니다. UI 업데이트, 이벤트 처리 및 JavaScript 호출은 [SignalR](xref:signalr/introduction) 연결을 통해 처리됩니다.
 
-이 앱은 게시된 출력의 ASP.NET Core 앱과 함께 포함되고, 두 앱이 함께 배포됩니다. ASP.NET Core 앱을 호스트할 수 있는 웹 서버가 필요합니다. 서버 쪽 배포의 경우 Visual Studio에는 **Razor 구성 요소** 프로젝트 템플릿([dotnet new](/dotnet/core/tools/dotnet-new) 명령을 사용하는 경우 `razorcomponents` 템플릿)이 포함됩니다.
+ASP.NET Core 앱을 호스팅할 수 있는 웹 서버가 필요합니다. Visual Studio에는 **Blazor(서버 쪽)** 프로젝트 템플릿([dotnet new](/dotnet/core/tools/dotnet-new) 명령을 사용하는 경우 `blazorserverside` 템플릿)이 포함됩니다.
 
 <!--
 
@@ -38,6 +38,9 @@ ms.locfileid: "59614713"
 
 -->
 
-ASP.NET Core 앱 호스팅 및 배포에 대한 자세한 내용은 <xref:host-and-deploy/index>를 참조하세요.
+## <a name="additional-resources"></a>추가 자료
 
-Azure App Service 배포에 대한 자세한 내용은 <xref:tutorials/publish-to-azure-webapp-using-vs>를 참조하세요.
+* <xref:signalr/introduction>
+* <xref:host-and-deploy/index>
+* <xref:tutorials/publish-to-azure-webapp-using-vs>
+* [Azure App Service에 ASP.NET Core 미리 보기 릴리스 배포](xref:host-and-deploy/azure-apps/index#deploy-aspnet-core-preview-release-to-azure-app-service)

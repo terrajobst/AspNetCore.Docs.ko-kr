@@ -5,14 +5,14 @@ description: ASP.NET Core에서 Web API 만들기에 대한 기본 사항을 알
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 04/11/2019
+ms.date: 05/07/2019
 uid: web-api/index
-ms.openlocfilehash: d804a7f1b4f0e89f433a3674116c97804705f7cc
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 593fd33babc81cddfc4db2150a37e5ec3bc1a0be
+ms.sourcegitcommit: a3926eae3f687013027a2828830c12a89add701f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64882958"
+ms.lasthandoff: 05/08/2019
+ms.locfileid: "65450842"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>ASP.NET Core로 Web API 만들기
 
@@ -137,6 +137,10 @@ if (!ModelState.IsValid)
 유효성 검사 오류로 발생하는 응답을 사용자 지정하려면 <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.InvalidModelStateResponseFactory>를 사용합니다. `services.AddMvc().SetCompatibilityVersion` 뒤에 다음 강조 표시된 코드를 추가합니다.
 
 [!code-csharp[](index/samples/2.x/Startup.cs?name=snippet_ConfigureBadRequestResponse&highlight=3-20)]
+
+### <a name="log-automatic-400-responses"></a>자동 400 응답 기록
+
+[How to log automatic 400 responses on model validation errors (aspnet/AspNetCore.Docs #12157)](https://github.com/aspnet/AspNetCore.Docs/issues/12157)(모델 유효성 검사 오류에서 자동 400 응답을 기록하는 방법(aspnet/AspNetCore.Docs #12157))를 참조하세요.
 
 ### <a name="disable-automatic-400"></a>자동 400 사용 안 함
 

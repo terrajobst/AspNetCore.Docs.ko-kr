@@ -4,15 +4,15 @@ description: 이 자습서에서는 더 많은 엔터티 및 관계를 추가하
 author: rick-anderson
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 02/05/2019
+ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/complex-data-model
-ms.openlocfilehash: 5ab893dd77ff2cc9a735702eb3a547ed8bcb2197
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
+ms.openlocfilehash: 2776e3357941d0e7932882c39af121f85d037d62
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58264857"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64887248"
 ---
 # <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>자습서: 복잡한 데이터 모델 만들기 - ASP.NET MVC 및 EF Core 사용
 
@@ -40,7 +40,7 @@ ms.locfileid: "58264857"
 
 ## <a name="prerequisites"></a>전제 조건
 
-* [MVC 웹앱에서 ASP.NET Core용 EF Core 마이그레이션 기능 사용](migrations.md)
+* [EF Core 마이그레이션 사용](migrations.md)
 
 ## <a name="customize-the-data-model"></a>데이터 모델 사용자 지정
 
@@ -320,7 +320,7 @@ public ICollection<Course> Courses { get; set; }
 ```
 
 > [!NOTE]
-> 규칙에 따라 Entity Framework는 null 비허용 외래 키 및 다대다 관계에 대한 하위 삭제를 사용하도록 허용합니다. 이는 마이그레이션을 추가하려고 하면 예외가 발생하는 순환 하위 삭제 규칙으로 이어질 수 있습니다. 예를 들어, Department.InstructorID 속성을 null 허용으로 정의하지 않은 경우 EF는 부서를 삭제할 때 강사를 삭제하도록 하위 삭제를 구성합니다. 이는 사용자가 원하는 결과가 아닙니다. 비즈니스 규칙에 null 비허용인 `InstructorID` 속성이 필요한 경우, 다음 흐름 API 문을 사용하여 관계에서 하위 삭제를 사용하지 않도록 설정해야 합니다.
+> 규칙에 따라 Entity Framework는 null 비허용 외래 키 및 다대다 관계에 대한 하위 삭제를 사용하도록 허용합니다. 이는 마이그레이션을 추가하려고 하면 예외가 발생하는 순환 하위 삭제 규칙으로 이어질 수 있습니다. 예를 들어, Department.InstructorID 속성을 nullable로 정의하지 않은 경우 EF는 강사를 삭제할 때 부서를 삭제하도록 계단식 삭제 규칙을 구성합니다. 이는 원하는 결과가 아닙니다. 비즈니스 규칙에 null 비허용인 `InstructorID` 속성이 필요한 경우, 다음 흐름 API 문을 사용하여 관계에서 하위 삭제를 사용하지 않도록 설정해야 합니다.
 >
 > ```csharp
 > modelBuilder.Entity<Department>()
@@ -509,7 +509,7 @@ dotnet ef database update
 
 ## <a name="get-the-code"></a>코드 가져오기
 
-[완성된 애플리케이션을 다운로드하거나 확인합니다.](https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[완성된 애플리케이션을 다운로드하거나 확인합니다.](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="next-steps"></a>다음 단계
 
@@ -529,6 +529,7 @@ dotnet ef database update
 > * 연결 문자열 변경
 > * 데이터베이스 업데이트
 
-관련 데이터에 액세스하는 방법을 자세히 알아보려면 다음 문서로 진행합니다.
+관련 데이터에 액세스하는 방법을 자세히 알아보려면 다음 자습서로 진행합니다.
+
 > [!div class="nextstepaction"]
-> [관련 데이터 액세스](read-related-data.md)
+> [다음: 관련 데이터 액세스](read-related-data.md)

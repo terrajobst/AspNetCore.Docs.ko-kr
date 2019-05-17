@@ -4,14 +4,14 @@ author: tdykstra
 description: ASP.NET Core의 로깅 프레임워크에 대해 알아봅니다. 기본 제공 로깅 공급자를 살펴보고 인기 있는 타사 공급자에 대해 알아봅니다.
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 03/02/2019
+ms.date: 05/01/2019
 uid: fundamentals/logging/index
-ms.openlocfilehash: 8a2e310b47e32e9015b0c127ed79d8f6bdf2e44d
-ms.sourcegitcommit: eb784a68219b4829d8e50c8a334c38d4b94e0cfa
+ms.openlocfilehash: ee7d4b2ae04b5f6c262acc5da0f86f90ab50585f
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/22/2019
-ms.locfileid: "59982855"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65085664"
 ---
 # <a name="logging-in-aspnet-core"></a>ASP.NET Core에 로그인
 
@@ -19,7 +19,7 @@ ms.locfileid: "59982855"
 
 ASP.NET Core는 다양한 기본 제공 및 타사 로깅 공급자와 함께 작동하는 로깅 API를 지원합니다. 이 문서에서는 기본 제공 공급자에서 로깅 API를 사용하는 방법을 보여줍니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/logging/index/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/logging/index/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="add-providers"></a>공급자 추가
 
@@ -54,7 +54,7 @@ ASP.NET Core는 다양한 기본 제공 및 타사 로깅 공급자와 함께 �
 ASP.NET Core [DI(종속성 주입](xref:fundamentals/dependency-injection))는 `ILoggerFactory` 인스턴스를 제공합니다. `AddConsole` 및 `AddDebug` 확장 메서드는 [Microsoft.Extensions.Logging.Console](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console/) 및 [Microsoft.Extensions.Logging.Debug](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Debug/) 패키지에 정의됩니다. 각 확장 메서드는 `ILoggerFactory.AddProvider` 메서드를 호출하고, 공급자 인스턴스를 전달합니다.
 
 > [!NOTE]
-> [샘플 앱](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/logging/index/samples/1.x)은 `Startup.Configure` 메서드에서 로그 공급자를 추가합니다. 먼저 실행되는 코드의 로그 출력을 가져오려면 `Startup` 클래스 생성자에 로그 공급자를 추가합니다.
+> [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/logging/index/samples/1.x)은 `Startup.Configure` 메서드에서 로그 공급자를 추가합니다. 먼저 실행되는 코드의 로그 출력을 가져오려면 `Startup` 클래스 생성자에 로그 공급자를 추가합니다.
 
 ::: moniker-end
 
@@ -496,11 +496,12 @@ System.Exception: Item not found exception.
 
 * 콘솔
 * 디버그
+* EventSource
 * EventLog
+* TraceSource
 * AzureAppServicesFile
 * AzureAppServicesBlob
-* TraceSource
-* EventSource
+* ApplicationInsights
 
 ### <a name="default-minimum-level"></a>기본 최소 수준
 
@@ -616,8 +617,9 @@ ASP.NET Core는 다음 공급자를 제공합니다.
 * [EventSource](#eventsource-provider)
 * [EventLog](#windows-eventlog-provider)
 * [TraceSource](#tracesource-provider)
-
-[Azure에서 로깅](#logging-in-azure)에 대한 옵션은 이 문서의 뒷부분에 나와 있습니다.
+* [AzureAppServicesFile](#azure-app-service-provider)
+* [AzureAppServicesBlob](#azure-app-service-provider)
+* [ApplicationInsights](#azure-application-insights-trace-logging)
 
 stdout 로깅에 대한 자세한 내용은 <xref:host-and-deploy/iis/troubleshoot#aspnet-core-module-stdout-log> 및 <xref:host-and-deploy/azure-apps/troubleshoot#aspnet-core-module-stdout-log>을 참조하세요.
 
@@ -767,19 +769,6 @@ loggerFactory.AddTraceSource(sourceSwitchName);
 
 ::: moniker-end
 
-## <a name="logging-in-azure"></a>Azure에서 로깅
-
-Azure에서 로깅에 대한 자세한 내용은 다음 섹션을 참조하세요.
-
-* [Azure App Service 공급자](#azure-app-service-provider)
-* [Azure 로그 스트리밍](#azure-log-streaming)
-
-::: moniker range=">= aspnetcore-1.1"
-
-* [Azure Application Insights 추적 로깅](#azure-application-insights-trace-logging)
-
-::: moniker-end
-
 ### <a name="azure-app-service-provider"></a>Azure App Service 공급자
 
 [Microsoft.Extensions.Logging.AzureAppServices](https://www.nuget.org/packages/Microsoft.Extensions.Logging.AzureAppServices) 공급자 패키지는 Azure App Service 앱의 파일 시스템과 Azure Storage 계정의 [Blob 스토리지](https://azure.microsoft.com/documentation/articles/storage-dotnet-how-to-use-blobs/#what-is-blob-storage)에 텍스트 파일을 기록합니다. 공급자 패키지는 .NET Core 1.1 이상을 대상으로 하는 앱에 사용할 수 있습니다.
@@ -842,7 +831,7 @@ App Service 앱에 배포할 때 애플리케이션은 Azure Portal **App Servic
 
 공급자는 프로젝트가 Azure 환경에서 실행되는 경우에만 작동합니다. 프로젝트를 로컬로 실행하는 경우에는 아무 영향도 없습니다&mdash;Blob에 대한 로컬 파일 또는 로컬 개발 스토리지에 기록하지 않습니다.
 
-### <a name="azure-log-streaming"></a>Azure 로그 스트리밍
+#### <a name="azure-log-streaming"></a>Azure 로그 스트리밍
 
 Azure 로그 스트리밍을 통해 로그 작업을 실시간으로 볼 수 있습니다.
 
@@ -865,14 +854,23 @@ Azure 로그 스트리밍을 구성하려면:
 
 ### <a name="azure-application-insights-trace-logging"></a>Azure Application Insights 추적 로깅
 
-Application Insights SDK는 ASP.NET Core 로깅 인프라에 생성된 로그를 수집하고 보고할 수 있습니다. 자세한 내용은 다음 리소스를 참조하세요.
+[Microsoft.Extensions.Logging.ApplicationInsights](https://www.nuget.org/packages/Microsoft.Extensions.Logging.ApplicationInsights) 공급자 패키지는 Azure Application Insights에 로그를 기록합니다. Application Insights는 웹앱을 모니터링하고 원격 분석 데이터를 쿼리 및 분석하기 위한 도구를 제공하는 서비스입니다. 이 공급자를 사용하는 경우 Application Insights 도구를 사용하여 로그를 쿼리 및 분석할 수 있습니다.
+
+로깅 공급자는 ASP.NET Core에 대한 모든 사용 가능한 원격 분석을 제공하는 패키지인 [Microsoft.ApplicationInsights.AspNetCore](https://www.nuget.org/packages/Microsoft.ApplicationInsights.AspNetCore)의 종속성으로 포함됩니다. 이 패키지를 사용하는 경우 공급자 패키지를 설치할 필요가 없습니다.
+
+ASP.NET 4.x용으로 제공되는 [Microsoft.ApplicationInsights.Web](https://www.nuget.org/packages/Microsoft.ApplicationInsights.Web) 패키지&mdash;를 사용하지 마세요.
+
+자세한 내용은 다음 리소스를 참조하세요.
 
 * [Application Insights 개요](/azure/application-insights/app-insights-overview)
-* [ASP.NET Core용 Application Insights](/azure/application-insights/app-insights-asp-net-core)
+* [ASP.NET Core 애플리케이션용 Application Insights](/azure/azure-monitor/app/asp-net-core-no-visualstudio) - 로깅과 함께 전체 범위 Application Insights 원격 분석을 구현하려면 여기에서 시작합니다.
+* [.NET Core ILogger 로그용 ApplicationInsightsLoggerProvider](/azure/azure-monitor/app/ilogger) - 나머지 Application Insights 원격 분석 없이 로깅 공급자를 구현하려면 여기에서 시작합니다.
 * [Application Insights 로깅 어댑터](https://github.com/Microsoft/ApplicationInsights-dotnet-logging/blob/develop/README.md).
-* [Application Insights ILogger 구현 샘플](/azure/azure-monitor/app/ilogger)
-
+* [Application Insights SDK 설치, 구성 및 초기화](/learn/modules/instrument-web-app-code-with-application-insights) - Microsoft Learn 사이트의 대화형 자습서입니다.
 ::: moniker-end
+
+> [!NOTE]
+> 2019년 5월 1일부터 [ASP.NET Core용 Application Insights](/azure/azure-monitor/app/asp-net-core) 문서는 만료되고 자습서 단계가 작동하지 않습니다. 대신에 [ASP.NET Core 애플리케이션용 Application Insights](/azure/azure-monitor/app/asp-net-core-no-visualstudio)를 참조하세요. 문제를 인식하고 수정 작업을 진행하고 있습니다.
 
 ## <a name="third-party-logging-providers"></a>타사 로깅 공급자
 
@@ -885,7 +883,7 @@ ASP.NET Core와 호환되는 타사 로깅 프레임워크는 다음과 같습�
 * [Loggr](http://loggr.net/)([GitHub 리포지토리](https://github.com/imobile3/Loggr.Extensions.Logging))
 * [NLog](http://nlog-project.org/)([GitHub 리포지토리](https://github.com/NLog/NLog.Extensions.Logging))
 * [Sentry](https://sentry.io/welcome/) ([GitHub repo](https://github.com/getsentry/sentry-dotnet))
-* [Serilog](https://serilog.net/)([GitHub 리포지토리](https://github.com/serilog/serilog-extensions-logging))
+* [Serilog](https://serilog.net/)([GitHub 리포지토리](https://github.com/serilog/serilog-aspnetcore))
 * [Stackdriver](https://cloud.google.com/dotnet/docs/stackdriver#logging)([Github 리포지토리](https://github.com/googleapis/google-cloud-dotnet))
 
 일부 타사 프레임워크는 [구조적 로깅이라고 하는 의미 체계 로깅](https://softwareengineering.stackexchange.com/questions/312197/benefits-of-structured-logging-vs-basic-logging)을 수행할 수 있습니다.

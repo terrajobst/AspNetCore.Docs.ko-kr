@@ -4,14 +4,14 @@ author: pkellner
 description: ASP.NET Core 앵커 태그 도우미 특성 및 HTML 앵커 태그의 동작을 확장할 때 각 특성이 담당하는 역할을 확인합니다.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 12/18/2018
+ms.date: 4/18/2019
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: 60fa0c00e40878a8227ca2bc8bdb0bc2bf9f8336
-ms.sourcegitcommit: ea215df889e89db44037a6ac2f01baede0450da9
+ms.openlocfilehash: de45c99194d4825c1e404aa193b0f076ba659748
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/19/2018
-ms.locfileid: "53595343"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64883428"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>ASP.NET Core의 앵커 태그 도우미
 
@@ -21,15 +21,15 @@ ms.locfileid: "53595343"
 
 태그 도우미에 대한 개요는 <xref:mvc/views/tag-helpers/intro>를 참조하세요.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 이 문서의 예제 전반에서는 다음의 *SpeakerController*가 사용됩니다. 
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Controllers/SpeakerController.cs?name=snippet_SpeakerController)]
 
-`asp-` 특성의 목록은 다음과 같습니다.
+## <a name="anchor-tag-helper-attributes"></a>앵커 태그 도우미 특성
 
-## <a name="asp-controller"></a>asp-controller
+### <a name="asp-controller"></a>asp-controller
 
 [asp-controller](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Controller*) 특성은 URL 생성에 사용되는 컨트롤러를 지정합니다. 다음 태그는 모든 스피커를 나열합니다.
 
@@ -63,7 +63,7 @@ ms.locfileid: "53595343"
 
 `asp-action` 특성값이 `Index`면 URL에 아무런 액션도 추가되지 않으며 기본 `Index` 액션이 호출됩니다. 지정된 (또는 기본값으로 설정된) 액션은 `asp-controller`에서 참조되는 컨트롤러에 존재해야 합니다. 
 
-## <a name="asp-route-value"></a>asp-route-{value}
+### <a name="asp-route-value"></a>asp-route-{value}
 
 [asp-route-{value}](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) 특성을 사용하면 와일드카드 경로 접두사를 사용할 수 있습니다. `{value}` 자리 표시자에 위치하는 모든 값은 잠재적인 경로 매개 변수로 해석됩니다.  기본 경로가 발견되지 않으면 이 경로 접두사는 생성되는 `href` 특성에 요청 매개 변수 및 값으로 추가됩니다. 그렇지 않으면 경로 템플릿에서 이 경로 접두사가 대체됩니다.
 
@@ -117,7 +117,7 @@ ms.locfileid: "53595343"
 
 `asp-controller` 또는 `asp-action`이 지정되지 않으면 `asp-route` 특성과 동일한 기본 처리가 그대로 수행됩니다.
 
-## <a name="asp-route"></a>asp-route
+### <a name="asp-route"></a>asp-route
 
 [asp-route](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Route*) 특성은 명명된 경로에 직접 연결되는 URL을 생성하기 위해서 사용됩니다. [라우팅 특성](xref:mvc/controllers/routing#attribute-routing)을 사용하면 경로가 `SpeakerController`에 표시된 이름으로 지정되고 해당 `Evaluations` 메서드에서 사용할 수 있습니다.
 
@@ -155,7 +155,7 @@ ms.locfileid: "53595343"
 
 사전에 존재하는 키가 경로 매개 변수와 일치하면 경로에서 해당 값이 적절하게 대체됩니다. 반면 일치하지 않는 다른 값은 요청 매개 변수로 생성됩니다.
 
-## <a name="asp-fragment"></a>asp-fragment
+### <a name="asp-fragment"></a>asp-fragment
 
 [asp-fragment](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Fragment*) 특성은 URL에 추가할 URL 조각을 정의합니다. 앵커 태그 도우미는 해시 문자(#)를 추가합니다. 다음 태그를 살펴보시기 바랍니다.
 
@@ -169,7 +169,7 @@ ms.locfileid: "53595343"
 
 해시 태그는 클라이언트 측 앱을 만들 때 유용합니다. 예를 들어 JavaScript에서 손쉽게 표시하고 검색하는 데 사용할 수 있습니다.
 
-## <a name="asp-area"></a>asp-area
+### <a name="asp-area"></a>asp-area
 
 [asp-area](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Area*) 특성은 적절한 경로를 설정하기 위해 사용되는 영역 이름을 설정합니다. 다음 예제에서는 `asp-area` 특성으로 인해 경로가 다시 매핑되는 방식을 보여 줍니다.
 
@@ -239,7 +239,7 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 >
 > [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_UseMvc&highlight=5)]
 
-## <a name="asp-protocol"></a>asp-protocol
+### <a name="asp-protocol"></a>asp-protocol
 
 [asp-protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) 특성은 URL의 프로토콜(예: `https`)을 지정하는 데 사용됩니다. 예:
 
@@ -253,7 +253,7 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 
 예제의 호스트 이름은 localhost입니다. 앵커 태그 도우미는 URL을 생성할 때 웹 사이트의 공용 도메인을 사용합니다.
 
-## <a name="asp-host"></a>asp-host
+### <a name="asp-host"></a>asp-host
 
 [asp-host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) 특성은 URL의 호스트 이름을 지정하는 데 사용됩니다. 예:
 
@@ -265,7 +265,7 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 <a href="https://microsoft.com/Home/About">About</a>
 ```
 
-## <a name="asp-page"></a>asp-page
+### <a name="asp-page"></a>asp-page
 
 [asp-page](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*) 특성은 Razor 페이지와 함께 사용됩니다. 이 특성은 앵커 태그의 `href` 특성값을 특정 페이지로 설정하기 위해서 사용됩니다. 페이지 이름 앞에 슬래시("/")를 접두사로 사용해서 URL을 생성합니다.
 
@@ -289,7 +289,7 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 <a href="/Attendee?attendeeid=10">View Attendee</a>
 ```
 
-## <a name="asp-page-handler"></a>asp-page-handler
+### <a name="asp-page-handler"></a>asp-page-handler
 
 [asp-page-handler](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.PageHandler*) 특성은 Razor 페이지와 함께 사용됩니다. 이 특성을 특정 페이지 처리기에 연결하기 위한 것입니다.
 

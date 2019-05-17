@@ -6,18 +6,14 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: 311f72699b6291996a43d56247bd3d2bfab596e6
-ms.sourcegitcommit: 088e6744cd67a62f214f25146313a53949b17d35
+ms.openlocfilehash: a65543f805b197031bd46ef1974d4d4a5018b2d1
+ms.sourcegitcommit: 3376f224b47a89acf329b2d2f9260046a372f924
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/21/2019
-ms.locfileid: "58320250"
+ms.lasthandoff: 05/10/2019
+ms.locfileid: "65516910"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---data-model---5-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 데이터 모델 - 5/8
-
-[!INCLUDE[2.0 version](~/includes/RP-EF/20-pdf.md)]
-
-::: moniker range=">= aspnetcore-2.1"
 
 작성자: [Tom Dykstra](https://github.com/tdykstra) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -33,7 +29,7 @@ ms.locfileid: "58320250"
 ![엔터티 다이어그램](complex-data-model/_static/diagram.png)
 
 해결할 수 없는 문제가 발생한 경우 [완성된 앱](
-https://github.com/aspnet/Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)을 다운로드합니다.
+https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)을 다운로드합니다.
 
 ## <a name="customize-the-data-model-with-attributes"></a>특성을 사용하여 데이터 모델 사용자 지정
 
@@ -385,19 +381,18 @@ public ICollection<Course> Courses { get; set; }
 
 참고: 규칙에 따라 EF Core는 Null을 허용하지 않는 FK 및 다대다 관계에 대한 계단식 삭제를 활성화합니다. 계단식 삭제로 인해 순환 계단식 삭제 규칙이 발생할 수 있습니다. 순환 계단식 삭제 규칙은 마이그레이션이 추가될 때 예외를 발생시킵니다.
 
-예를 들어 `Department.InstructorID` 속성이 nullable로 정의되지 않은 경우:
+예를 들어 `Department.InstructorID` 속성이 null 허용 안 함으로 정의된 경우:
 
-* EF Core는 부서가 삭제될 때 강사를 삭제하도록 계단식 삭제 규칙을 구성합니다.
-* 부서가 삭제될 때 강사 삭제는 의도된 동작이 아닙니다.
+* EF Core는 강사가 삭제될 때 부서를 삭제하도록 계단식 삭제 규칙을 구성합니다.
+* 강사가 삭제될 때 부서 삭제는 의도된 동작이 아닙니다.
+* 다음 흐름 API는 계단식 대신 제한 규칙을 설정합니다.
 
-비즈니스 규칙에서 Null을 허용하지 않는 `InstructorID` 속성이 필요한 경우 다음 흐름 API 문을 사용합니다.
-
- ```csharp
- modelBuilder.Entity<Department>()
-    .HasOne(d => d.Administrator)
-    .WithMany()
-    .OnDelete(DeleteBehavior.Restrict)
- ```
+   ```csharp
+   modelBuilder.Entity<Department>()
+      .HasOne(d => d.Administrator)
+      .WithMany()
+      .OnDelete(DeleteBehavior.Restrict)
+  ```
 
 위의 코드는 부서 강사 관계에서 계단식 삭제를 비활성화합니다.
 
@@ -671,7 +666,7 @@ SSOX에서 DB를 엽니다.
 * [이 자습서의 YouTube 버전(1부)](https://www.youtube.com/watch?v=0n2f0ObgCoA)
 * [이 자습서의 YouTube 버전(2부)](https://www.youtube.com/watch?v=Je0Z5K1TNmY)
 
-::: moniker-end
+
 
 > [!div class="step-by-step"]
 > [이전](xref:data/ef-rp/migrations)

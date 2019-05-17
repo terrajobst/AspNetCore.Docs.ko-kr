@@ -5,12 +5,12 @@ description: ASP.NET Core가 MVC 보기에 종속성 주입을 지원하는 방�
 ms.author: riande
 ms.date: 10/14/2016
 uid: mvc/views/dependency-injection
-ms.openlocfilehash: 940e237fd73a864d9fd59f5447fe486f93648f62
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: b411b164bfea81f82c5c9fc1052e0ecfe65f0bc2
+ms.sourcegitcommit: 3376f224b47a89acf329b2d2f9260046a372f924
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087475"
+ms.lasthandoff: 05/10/2019
+ms.locfileid: "65517046"
 ---
 # <a name="dependency-injection-into-views-in-aspnet-core"></a>ASP.NET Core의 보기에 종속성 주입
 
@@ -20,13 +20,38 @@ ASP.NET Core는 보기에 [종속성 주입](xref:fundamentals/dependency-inject
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/dependency-injection/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-## <a name="a-simple-example"></a>간단한 예제
+## <a name="configuration-injection"></a>구성 삽입
 
-`@inject` 지시문을 사용하여 보기에 서비스를 삽입할 수 있습니다. `@inject`를 보기에 속성을 추가하고 DI를 사용하여 속성을 채우는 것으로 생각하셔도 좋습니다.
+*appsettings.json* 값을 직접 뷰에 삽입할 수 있습니다.
+
+*appsettings.json* 파일의 예:
+
+```json
+{
+   "root": {
+      "parent": {
+         "child": "myvalue"
+      }
+   }
+}
+```
 
 `@inject`에 대한 구문: `@inject <type> <name>`
 
-실제로 작동하는 `@inject` 예제:
+`@inject`를 사용하는 예제:
+
+```csharp
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
+   string myValue = Configuration["root:parent:child"];
+   ...
+}
+```
+
+## <a name="service-injection"></a>서비스 삽입
+
+`@inject` 지시문을 사용하여 서비스를 뷰에 삽입할 수 있습니다. `@inject`를 뷰에 속성을 추가하고 DI를 사용하여 속성을 채우는 것으로 생각하셔도 좋습니다.
 
 [!code-csharp[](../../mvc/views/dependency-injection/sample/src/ViewInjectSample/Views/ToDo/Index.cshtml?highlight=4,5,15,16,17)]
 

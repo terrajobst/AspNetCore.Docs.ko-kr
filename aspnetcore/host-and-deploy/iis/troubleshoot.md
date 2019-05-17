@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/14/2019
 uid: host-and-deploy/iis/troubleshoot
-ms.openlocfilehash: 1fa90737aadebe3f714c702fbce649629d79dcd4
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
+ms.openlocfilehash: f89eac3ae6fc704bc8bf38a9707fc3c6c3568e91
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58264549"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64884348"
 ---
 # <a name="troubleshoot-aspnet-core-on-iis"></a>IIS에서 ASP.NET Core 문제 해결
 
@@ -49,7 +49,7 @@ Visual Studio에서 ASP.NET Core 프로젝트는 기본적으로 디버그 중�
 
 ASP.NET Core 모듈이 백엔드 dotnet 프로세스를 시작하려고 하지만 시작할 수 없습니다. 프로세스 시작 실패의 원인은 일반적으로 [애플리케이션 이벤트 로그](#application-event-log) 및 [ASP.NET Core 모듈 stdout 로그](#aspnet-core-module-stdout-log)의 항목에서 확인할 수 있습니다.
 
-일반적인 실패 조건은 존재하지 않는 ASP.NET Core 공유 프레임워크의 버전을 대상으로 하여 앱이 잘못 구성되었다는 것입니다. 대상 머신에 설치된 ASP.NET Core 공유 프레임워크의 버전을 확인합니다.
+일반적인 실패 조건은 존재하지 않는 ASP.NET Core 공유 프레임워크의 버전을 대상으로 하여 앱이 잘못 구성되었다는 것입니다. 대상 머신에 설치된 ASP.NET Core 공유 프레임워크의 버전을 확인합니다. 공유 프레임워크는 머신에 설치되고 메타패키지(예: `Microsoft.AspNetCore.App`)에서 참조되는 어셈블리(*.dll* 파일) 세트입니다. 메타패키지 참조는 필요한 최소 버전을 지정할 수 있습니다. 자세한 내용은 [공유 프레임워크](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/)를 참조하세요.
 
 호스팅 또는 앱의 잘못된 구성으로 인해 작업자 프로세스가 실패하면 ‘502.5 프로세스 실패’ 오류 페이지가 반환됩니다.
 
@@ -241,7 +241,7 @@ stdout 로그를 사용하고 보려면:
 [WER(Windows 오류 보고)](/windows/desktop/wer/windows-error-reporting)에서 덤프를 얻고 분석합니다.
 
 1. `c:\dumps`에 크래시 덤프 파일을 저장할 폴더를 만듭니다. 앱 풀에는 폴더에 대한 쓰기 액세스 권한이 있어야 합니다.
-1. [EnableDumps PowerShell 스크립트](https://github.com/aspnet/Docs/blob/master/aspnetcore/host-and-deploy/iis/troubleshoot/scripts/EnableDumps.ps1) 실행:
+1. [EnableDumps PowerShell 스크립트](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/iis/troubleshoot/scripts/EnableDumps.ps1) 실행:
    * 앱에서 [in-process 호스팅 모델](xref:fundamentals/servers/index#in-process-hosting-model)을 사용하는 경우 *w3wp.exe*에 대한 스크립트 실행:
 
      ```console
@@ -255,7 +255,7 @@ stdout 로그를 사용하고 보려면:
      ```
 
 1. 충돌이 발생하는 조건에서 앱을 실행합니다.
-1. 충돌이 발생한 후 [DisableDumps PowerShell 스크립트](https://github.com/aspnet/Docs/blob/master/aspnetcore/host-and-deploy/iis/troubleshoot/scripts/DisableDumps.ps1) 실행:
+1. 충돌이 발생한 후 [DisableDumps PowerShell 스크립트](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/iis/troubleshoot/scripts/DisableDumps.ps1) 실행:
    * 앱에서 [in-process 호스팅 모델](xref:fundamentals/servers/index#in-process-hosting-model)을 사용하는 경우 *w3wp.exe*에 대한 스크립트 실행:
 
      ```console

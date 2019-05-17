@@ -5,14 +5,14 @@ description: 앱 및 데이터베이스와 같은 ASP.NET Core 인프라의 상�
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/11/2019
+ms.date: 04/23/2019
 uid: host-and-deploy/health-checks
-ms.openlocfilehash: 0bb80a5fccc8240c6f1fb8e59b379766bfd90d9e
-ms.sourcegitcommit: 687ffb15ebe65379f75c84739ea851d5a0d788b7
+ms.openlocfilehash: 5119267a8da5c950989b14b7c2e818aa22806506
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/26/2019
-ms.locfileid: "58488717"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64887928"
 ---
 # <a name="health-checks-in-aspnet-core"></a>ASP.NET Core의 상태 검사
 
@@ -26,7 +26,7 @@ ASP.NET Core는 앱 인프라 구성 요소의 상태를 보고하기 위해 상
 * 메모리, 디스크 및 기타 물리적 서버 리소스의 사용이 정상적인 상태인지 모니터링할 수 있습니다.
 * 상태 검사는 데이터베이스 및 외부 서비스 엔드포인트와 같은 앱 종속성을 테스트하여 가용성 및 정상 작동 여부를 확인할 수 있습니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/host-and-deploy/health-checks/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/health-checks/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 샘플 앱에는 이 항목에 설명된 시나리오의 예가 있습니다. 지정된 시나리오에 대해 샘플 앱을 실행하려면 명령 셸의 프로젝트 폴더에서 [dotnet run](/dotnet/core/tools/dotnet-run) 명령을 사용합니다. 샘플 앱의 사용 방법에 대한 자세한 내용은 샘플 앱의 *README.md* 파일과 이 항목의 시나리오 설명을 참조하세요.
 
@@ -36,7 +36,7 @@ ASP.NET Core는 앱 인프라 구성 요소의 상태를 보고하기 위해 상
 
 [Microsoft.AspNetCore.App 메타패키지](xref:fundamentals/metapackage-app)를 참조하거나 [Microsoft.AspNetCore.Diagnostics.HealthChecks](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.HealthChecks) 패키지에 대한 패키지 참조를 추가합니다.
 
-샘플 앱은 여러 시나리오의 상태 검사를 보여주는 시작 코드를 제공합니다. [데이터베이스 프로브](#database-probe) 시나리오는 [BeatPulse](https://github.com/Xabaril/BeatPulse)를 사용하여 데이터베이스 연결의 상태를 검사합니다. [DbContext 프로브](#entity-framework-core-dbcontext-probe) 시나리오는 EF Core `DbContext`를 사용하여 데이터베이스를 검사합니다. 데이터베이스 시나리오를 탐색하려면 샘플 앱:
+샘플 앱은 여러 시나리오의 상태 검사를 보여주는 시작 코드를 제공합니다. [데이터베이스 프로브](#database-probe) 시나리오는 [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)를 사용하여 데이터베이스 연결의 상태를 검사합니다. [DbContext 프로브](#entity-framework-core-dbcontext-probe) 시나리오는 EF Core `DbContext`를 사용하여 데이터베이스를 검사합니다. 데이터베이스 시나리오를 탐색하려면 샘플 앱:
 
 * 데이터베이스를 만들고 *appsettings.json* 파일에서 연결 문자열을 제공합니다.
 * 해당 프로젝트 파일에 다음 패키지 참조가 있습니다.
@@ -44,7 +44,7 @@ ASP.NET Core는 앱 인프라 구성 요소의 상태를 보고하기 위해 상
   * [Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore/)
 
 > [!NOTE]
-> [BeatPulse](https://github.com/Xabaril/BeatPulse)는 Microsoft에서 유지 관리하거나 지원하지 않습니다.
+> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)는 [BeatPulse](https://github.com/xabaril/beatpulse)의 포트이며 Microsoft에서 유지 관리하거나 지원하지 않습니다.
 
 다른 상태 검사 시나리오는 관리 포트에 대해 상태 검사를 필터링하는 방법을 보여줍니다. 샘플 앱을 사용하려면 관리 URL과 관리 포트가 포함된 *Properties/launchSettings.json*  파일을 만들어야 합니다. 자세한 내용은 [포트별 필터링](#filter-by-port) 섹션을 참조하세요.
 
@@ -286,18 +286,18 @@ private static Task WriteResponse(HttpContext httpContext,
 
 상태 검사는 데이터베이스 쿼리를 지정하여 데이터베이스가 정상적으로 응답하는지를 나타내기 위해 부울 테스트로서 실행할 수 있습니다.
 
-샘플 앱은 ASP.NET Core 앱의 상태 검사 라이브러리인 [BeatPulse](https://github.com/Xabaril/BeatPulse)를 사용하여 SQL Server 데이터베이스에 대한 상태 검사를 수행합니다. BeatPulse는 데이터베이스에 연결이 양호한지 확인하기 위해 데이터베이스에 대해 `SELECT 1` 쿼리를 실행합니다.
+샘플 앱은 ASP.NET Core 앱의 상태 검사 라이브러리인 [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)를 사용하여 SQL Server 데이터베이스에 대한 상태 검사를 수행합니다. `AspNetCore.Diagnostics.HealthChecks`는 데이터베이스에 연결이 양호한지 확인하기 위해 데이터베이스에 대해 `SELECT 1` 쿼리를 실행합니다.
 
 > [!WARNING]
 > 쿼리로 데이터베이스 연결을 검사할 때 신속하게 반환되는 쿼리를 선택합니다. 쿼리 방식 실행은 데이터베이스의 오버로드와 성능 저하를 유발할 수 있습니다. 대부분의 경우 테스트 쿼리를 실행할 필요가 없습니다. 간단히 데이터베이스에 연결하는 정도로도 충분합니다. 쿼리를 실행해야 하는 경우 `SELECT 1`과 같은 간단한 SELECT 쿼리를 선택합니다.
 
-BeatPulse 라이브러리를 사용하려면 [AspNetCore.HealthChecks.SqlServer](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer/)에 대한 패키지 참조를 포함합니다.
+[AspNetCore.HealthChecks.SqlServer](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer/)에 대한 패키지 참조를 포함합니다.
 
 샘플 앱의 *appsettings.json* 파일에서 유효한 데이터베이스 연결 문자열을 제공합니다. 앱은 `HealthCheckSample`이라고 하는 SQL Server 데이터베이스를 사용합니다.
 
 [!code-json[](health-checks/samples/2.x/HealthChecksSample/appsettings.json?highlight=3)]
 
-`Startup.ConfigureServices`의 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*>에 상태 검사 서비스를 등록합니다. 샘플 앱은 데이터베이스의 연결 문자열(*DbHealthStartup.cs*)을 사용하여 BeatPulse의 `AddSqlServer` 메서드를 호출합니다.
+`Startup.ConfigureServices`의 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*>에 상태 검사 서비스를 등록합니다. 샘플 앱은 데이터베이스의 연결 문자열(*DbHealthStartup.cs*)을 사용하여 `AddSqlServer` 메서드를 호출합니다.
 
 [!code-csharp[](health-checks/samples/2.x/HealthChecksSample/DbHealthStartup.cs?name=snippet_ConfigureServices)]
 
@@ -312,7 +312,7 @@ dotnet run --scenario db
 ```
 
 > [!NOTE]
-> [BeatPulse](https://github.com/Xabaril/BeatPulse)는 Microsoft에서 유지 관리하거나 지원하지 않습니다.
+> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)는 [BeatPulse](https://github.com/xabaril/beatpulse)의 포트이며 Microsoft에서 유지 관리하거나 지원하지 않습니다.
 
 ## <a name="entity-framework-core-dbcontext-probe"></a>Entity Framework Core DbContext 프로브
 
@@ -469,9 +469,9 @@ dotnet run --scenario writer
 ```
 
 > [!NOTE]
-> [BeatPulse](https://github.com/Xabaril/BeatPulse)에는 디스크 스토리지 및 최댓값 활동성 검사를 포함하여 메트릭 기반 상태 확인 시나리오가 포함됩니다.
+> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)에는 디스크 스토리지 및 최댓값 활동성 검사를 포함하여 메트릭 기반 상태 확인 시나리오가 포함됩니다.
 >
-> [BeatPulse](https://github.com/Xabaril/BeatPulse)는 Microsoft에서 유지 관리하거나 지원하지 않습니다.
+> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)는 [BeatPulse](https://github.com/xabaril/beatpulse)의 포트이며 Microsoft에서 유지 관리하거나 지원하지 않습니다.
 
 ## <a name="filter-by-port"></a>포트별 필터링
 
@@ -681,6 +681,6 @@ Task PublishAsync(HealthReport report, CancellationToken cancellationToken);
 ::: moniker-end
 
 > [!NOTE]
-> [BeatPulse](https://github.com/Xabaril/BeatPulse)는 [Application Insights](/azure/application-insights/app-insights-overview)를 포함하여 몇몇 시스템에 대한 게시자를 포함합니다.
+> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)는 [Application Insights](/azure/application-insights/app-insights-overview)를 포함하여 몇몇 시스템에 대한 게시자를 포함합니다.
 >
-> [BeatPulse](https://github.com/Xabaril/BeatPulse)는 Microsoft에서 유지 관리하거나 지원하지 않습니다.
+> [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)는 [BeatPulse](https://github.com/xabaril/beatpulse)의 포트이며 Microsoft에서 유지 관리하거나 지원하지 않습니다.

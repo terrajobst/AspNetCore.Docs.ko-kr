@@ -7,12 +7,12 @@ ms.author: pranavkm
 ms.custom: mvc
 ms.date: 12/14/2018
 uid: web-api/advanced/analyzers
-ms.openlocfilehash: 7558552586d3056c43d8bfd9ef74cbcb3396726f
-ms.sourcegitcommit: 6548c19f345850ee22b50f7ef9fca732895d9e08
+ms.openlocfilehash: bcc89f856e0aeef80c46a44f76f86b4c09ac6746
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/14/2018
-ms.locfileid: "53425096"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64890828"
 ---
 # <a name="use-web-api-analyzers"></a>웹 API 분석기 사용
 
@@ -74,8 +74,10 @@ OpenAPI 문서에는 작업이 반환할 수 있는 상태 코드 및 응답 형
 
 앞의 작업은 HTTP 200 성공 반환 유형을 문서화하지만 HTTP 404 실패 상태 코드는 문서화하지 않습니다. 분석기는 HTTP 404 상태 코드에 대한 누락된 설명서를 경고로 보고합니다. 문제를 해결하기 위한 옵션이 제공됩니다.
 
+![경고를 보고하는 분석기](conventions/_static/Analyzer.gif)
+
 ## <a name="additional-resources"></a>추가 자료
 
 * <xref:web-api/advanced/conventions>
 * <xref:tutorials/web-api-help-pages-using-swagger>
-* [ApiController 특성 주석](xref:web-api/index#annotation-with-apicontroller-attribute)
+* <xref:web-api/index>

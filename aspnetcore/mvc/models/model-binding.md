@@ -7,11 +7,11 @@ ms.author: tdykstra
 ms.date: 11/13/2018
 uid: mvc/models/model-binding
 ms.openlocfilehash: 1dc9b41328ed78440622acc1865b6f088d394403
-ms.sourcegitcommit: 1d6ab43eed9cb3df6211c22b97bb3a9351ec4419
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51597786"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64883148"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core의 모델 바인딩
 
@@ -87,7 +87,7 @@ MVC에는 기본 모델 바인딩 동작을 다른 원본으로 전달하는 데
 
 * `[BindRequired]`: 이 특성은 바인딩이 발생할 수 없는 경우 모델 상태 오류를 추가합니다.
 
-* `[BindNever]`: 모델 바인더에게 이 매개 변수에 바인딩하지 않도록 지시합니다.
+* `[BindNever]`: 모델 바인더에 이 매개 변수에 바인딩하지 않도록 지시합니다.
 
 * `[FromHeader]`, `[FromQuery]`, `[FromRoute]`, `[FromForm]`: 적용하려는 정확한 바인딩 소스를 지정할 때 사용합니다.
 

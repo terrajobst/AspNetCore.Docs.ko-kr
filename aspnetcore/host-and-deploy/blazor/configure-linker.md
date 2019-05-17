@@ -5,22 +5,20 @@ description: Blazor 앱을 빌드할 때 IL(Intermediate Language) 링커를 제
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/15/2019
+ms.date: 04/24/2019
 uid: host-and-deploy/blazor/configure-linker
-ms.openlocfilehash: 01e18498a16e86392755b02b92ffda929669cb7d
-ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
+ms.openlocfilehash: 00676d4311f8955c3c1ef38d31219d62ea9f4a25
+ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/16/2019
-ms.locfileid: "59614688"
+ms.lasthandoff: 04/27/2019
+ms.locfileid: "64887778"
 ---
 # <a name="configure-the-linker-for-blazor"></a>Blazor용 링커 구성
 
 [Luke Latham](https://github.com/guardrex)으로
 
-[!INCLUDE[](~/includes/razor-components-preview-notice.md)]
-
-Blazor는 각 릴리스 모드 빌드 중에 [IL(중간 언어)](/dotnet/standard/managed-code#intermediate-language--execution) 연결을 수행하여 앱의 출력 어셈블리에서 불필요한 IL을 제거합니다.
+Blazor는 릴리스 빌드 중에 [IL(중간 언어)](/dotnet/standard/managed-code#intermediate-language--execution) 연결을 수행하여 앱의 출력 어셈블리에서 불필요한 IL을 제거합니다.
 
 다음 방법 중 하나를 사용하여 어셈블리 연결을 제어합니다.
 

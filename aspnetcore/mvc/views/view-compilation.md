@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/02/2019
 uid: mvc/views/view-compilation
-ms.openlocfilehash: 11195f00e922f6817a0fa0988fad9d8082dea30a
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: eba9de26e1af8c4df06b846748d8aa9380fc1862
+ms.sourcegitcommit: a3926eae3f687013027a2828830c12a89add701f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64883698"
+ms.lasthandoff: 05/08/2019
+ms.locfileid: "65450878"
 ---
 # <a name="razor-file-compilation-in-aspnet-core"></a>ASP.NET Core의 Razor 파일 컴파일
 
@@ -133,9 +133,9 @@ dotnet publish -c Release
       .AddRazorRuntimeCompilation()
   ```
 
-배포 시 런타임 컴파일이 작동하려면 앱에서 프로젝트 파일을 추가로 수정하여 `PreserveCompilationReferences`를 `true`로 설정해야 합니다.
+배포 시 런타임 컴파일이 작동하려면 앱에서 프로젝트 파일을 수정하여 `PreserveCompilationReferences`를 `true`로 설정해야 합니다.
 
-[!code-xml[](view-compilation/sample/RuntimeCompilation.csproj?highlight=3)]
+[!code-xml[](view-compilation/sample/RuntimeCompilation.csproj?highlight=4)]
 
 ::: moniker-end
 

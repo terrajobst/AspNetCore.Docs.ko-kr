@@ -5,14 +5,14 @@ description: Windows 서비스에서 ASP.NET Core 앱을 호스트하는 방법�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 04/04/2019
+ms.date: 05/04/2019
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: 544eefa87898e82ec2bf8f9f61ce4e26dd554bb7
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
+ms.openlocfilehash: ec3a37fd859df7592fa0d6d9cc0109942a570e7a
+ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59068338"
+ms.lasthandoff: 05/06/2019
+ms.locfileid: "65086993"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>Windows 서비스에서 ASP.NET Core 호스트
 
@@ -20,7 +20,7 @@ ms.locfileid: "59068338"
 
 IIS를 사용하지 않고 Windows에서 ASP.NET Core 앱을 [Windows 서비스](/dotnet/framework/windows-services/introduction-to-windows-service-applications)로 호스트할 수 있습니다. Windows Service로 호스팅되는 앱은 재부팅 후 자동으로 시작됩니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/Docs/tree/master/aspnetcore/host-and-deploy/windows-service/) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>전제 조건
 
@@ -209,7 +209,7 @@ icacls "c:\svc" /grant "ServiceUser:(OI)(CI)WRX" /t
 
 ## <a name="create-the-service"></a>서비스 만들기
 
-[RegisterService.ps1](https://github.com/aspnet/Docs/tree/master/aspnetcore/host-and-deploy/windows-service/scripts) PowerShell 스크립트를 사용하여 서비스를 등록합니다. 관리 PowerShell 6 명령 셸에서 다음 명령이 있는 스크립트를 실행합니다.
+[RegisterService.ps1](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/scripts) PowerShell 스크립트를 사용하여 서비스를 등록합니다. 관리 PowerShell 6 명령 셸에서 다음 명령이 있는 스크립트를 실행합니다.
 
 ```powershell
 .\RegisterService.ps1 
@@ -284,7 +284,7 @@ Stop-Service -Name MyService
 
 서비스를 중지하는 짧은 지연 후에 `Remove-Service -Name {NAME}` Powershell 6 명령을 사용하여 서비스를 제거합니다.
 
-샘플 앱 서비스의 상태를 확인합니다.
+다음 명령은 샘플 앱 서비스를 제거합니다.
 
 ```powershell
 Remove-Service -Name MyService
