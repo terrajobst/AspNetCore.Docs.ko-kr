@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 03/31/2019
 uid: grpc/comparison
-ms.openlocfilehash: 8f4cefe1dedcf4cfd9650e73e6a1ba30dbbfeffa
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 655c921788deb30f3c0f3b47f4440dc8701c0f59
+ms.sourcegitcommit: ccbb84ae307a5bc527441d3d509c20b5c1edde05
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087408"
+ms.lasthandoff: 05/19/2019
+ms.locfileid: "65874928"
 ---
 # <a name="comparing-grpc-services-with-http-apis"></a>gRPC 서비스와 HTTP API 비교
 
@@ -76,7 +76,7 @@ gRPC 기간는 완료 하는 RPC 대기를 지정 하는 클라이언트를 허�
 
 gRPC는 다음과 같은 시나리오에 적합 합니다.
 
-* **마이크로 서비스** &ndash; gRPC가 설계 된 짧은 대기 시간과 높은 처리량의 통신이 있습니다. gRPC는 간단한 마이크로 서비스에 대 한 훌륭한 효율성 중요 합니다.
+* **마이크로 서비스** &ndash; gRPC는 짧은 대기 시간 및 높은 처리량의 통신이 설계 되었습니다. gRPC는 간단한 마이크로 서비스에 대 한 훌륭한 효율성 중요 합니다.
 * **실시간 간 통신과** &ndash; gRPC가 양방향 스트리밍에 대 한 지원. gRPC 서비스에 푸시할 수 메시지 폴링 없이 실시간.
 * **Polygot 환경** &ndash; gRPC 도구에서 만드는 gRPC 다중 언어 환경에 적합 한 모든 주요 개발 언어를 지원 합니다.
 * **네트워크 제한 된 환경** &ndash; gRPC 메시지 Protobuf를 간단한 메시지 형식으로 serialize 됩니다. GRPC 메시지에 해당 하는 JSON 메시지 보다 항상 작습니다.
