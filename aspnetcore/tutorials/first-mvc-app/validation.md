@@ -5,12 +5,12 @@ description: ASP.NET Core 앱에 유효성 검사를 추가하는 방법.
 ms.author: riande
 ms.date: 04/13/2017
 uid: tutorials/first-mvc-app/validation
-ms.openlocfilehash: 49db8d7c1d3e54f416c66685c19b3a2e3b14251c
-ms.sourcegitcommit: 191d21c1e37b56f0df0187e795d9a56388bbf4c7
+ms.openlocfilehash: 6c59d0188f67872c7dd5599967551d7d390bfdcf
+ms.sourcegitcommit: ccbb84ae307a5bc527441d3d509c20b5c1edde05
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/08/2019
-ms.locfileid: "57665446"
+ms.lasthandoff: 05/19/2019
+ms.locfileid: "65875021"
 ---
 # <a name="add-validation-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 유효성 검사 추가
 
@@ -27,25 +27,9 @@ MVC의 디자인 개념 중 하나는 [DRY](https://wikipedia.org/wiki/Don%27t_r
 
 MVC에서 제공하는 유효성 검사 지원 및 Entity Framework Core Code First는 반복 금지 원칙의 좋은 예제입니다. 유효성 검사 규칙을 한 위치(모델 클래스에서)에서 선언적으로 지정하고 앱의 모든 위치에서 규칙을 시행할 수 있습니다.
 
-## <a name="adding-validation-rules-to-the-movie-model"></a>영화 모델에 유효성 검사 규칙 추가
+[!INCLUDE[](~/includes/RP-MVC/validation.md)]
 
-*Movie.cs* 파일을 엽니다. DataAnnotations는 클래스 또는 속성에 선언적으로 적용되는 유효성 검사 특성의 기본 제공 집합을 제공합니다. 여기에는 서식 지정을 돕는 `DataType`과 같은 서식 지정 특성도 포함되며 유효성 검사를 제공하지 않습니다.
-
-기본 제공되는 `Required`, `StringLength`, `RegularExpression` 및 `Range` 유효성 검사 특성을 활용하도록 `Movie` 클래스를 업데이트합니다.
-
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc//sample/MvcMovie22/Models/MovieDateRatingDA.cs?name=snippet1)]
-
-이 유효성 검사 특성은 적용되는 모델 속성에 시행하려는 동작을 지정합니다.
-
-* `Required` 및 `MinimumLength` 특성은 속성에 값이 있어야 하지만 사용자가 이 유효성 검사를 만족하기 위해 공백을 입력하는 것을 예방할 수 없다는 것을 나타냅니다. 
-* `RegularExpression` 특성은 입력될 수 있는 문자를 제한하는 데 사용됩니다. 위의 코드에서 `Genre` 및 `Rating`은 문자만을 사용해야 합니다(첫 번째 문자 대문자, 공백, 숫자 및 특수 문자가 허용되지 않음).
-* `Range` 특성은 지정된 범위 내의 값을 제한합니다. 
-* `StringLength` 특성을 사용하면 문자열 속성의 최대 길이와, 필요에 따라 최소 길이를 설정할 수 있습니다. 
-* 값 형식(예: `decimal`, `int`, `float`, `DateTime`)은 기본적으로 필요하며 `[Required]` 특성은 필요하지 않습니다.
-
-ASP.NET Core에 의해 자동으로 적용되는 유효성 검사 규칙을 사용하면 앱을 더욱 강력하게 합니다. 또한 유효성 검사를 잊거나, 데이터베이스에 불량 데이터가 실수로 들어가지 않게 할 수 있습니다.
-
-## <a name="validation-error-ui-in-mvc"></a>MVC에서 유효성 검사 오류 UI
+## <a name="validation-error-ui"></a>유효성 검사 오류 UI
 
 앱을 실행하고 동영상 컨트롤러로 이동합니다.
 

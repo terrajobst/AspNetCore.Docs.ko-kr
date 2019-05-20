@@ -4,14 +4,14 @@ author: rick-anderson
 description: 이 자습서에는 외부 인증 공급자에 OAuth 2.0을 사용하여 ASP.NET Core 2.x 앱을 빌드하는 방법을 보여줍니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 4/19/2019
+ms.date: 05/10/2019
 uid: security/authentication/social/index
-ms.openlocfilehash: e2d68ac93bdcfa2fc015e8447ea38626787cdb02
-ms.sourcegitcommit: a3926eae3f687013027a2828830c12a89add701f
+ms.openlocfilehash: 8dac8a8a2276388414b6bb1211e970617b001637
+ms.sourcegitcommit: ccbb84ae307a5bc527441d3d509c20b5c1edde05
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/08/2019
-ms.locfileid: "65451049"
+ms.lasthandoff: 05/19/2019
+ms.locfileid: "65874816"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>ASP.NET Core에서 Facebook, Google 및 외부 공급자 인증
 
@@ -33,10 +33,12 @@ ms.locfileid: "65451049"
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Visual Studio **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.
-* 새 ASP.NET Core 웹 애플리케이션을 만듭니다.
-* 드롭다운에서 **ASP.NET Core 2.2**를 선택한 다음, **웹 애플리케이션**을 선택합니다.
-* **인증 변경**을 선택하고 인증을 **개별 사용자 계정**으로 설정합니다.
+* 새 프로젝트를 만듭니다.
+* **ASP.NET Core 웹 애플리케이션** 및 **다음**을 선택합니다.
+* **프로젝트 이름**을 제공하고 **위치**를 확인하거나 변경합니다. **만들기**를 선택합니다.
+* 드롭다운에서 **ASP.NET Core 2.2**를 선택합니다. 템플릿 목록에서 **웹 애플리케이션**을 선택합니다.
+* **인증**에서 **변경**을 선택하고 인증을 **개별 사용자 계정**으로 설정합니다. **확인**을 선택합니다.
+* **새 ASP.NET Core 웹 애플리케이션 만들기** 창에서 **만들기**를 선택합니다.
 
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -56,27 +58,14 @@ ms.locfileid: "65451049"
   * `-au Individual`은 개별 인증을 위한 코드를 만듭니다.
   * `code` 명령은 Visual Studio Code의 새 인스턴스에서 *WebApp1* 폴더를 엽니다.
 
-  **가 있는 대화 상자가 나타나고 'WebApp1'에서 빌드 및 디버그에 필요한 자산이 누락되었습니다. 추가할까요?**
-
-* **예**를 선택합니다.
+* **가 있는 대화 상자가 나타나고 'WebApp1'에서 빌드 및 디버그에 필요한 자산이 누락되었습니다. 추가할까요?** **예**를 선택합니다.
 
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-터미널에서 다음 명령을 실행합니다.
-
-<!-- TODO: update these instruction once mac support 2.2 projects -->
-
-```console
-dotnet new webapp -o WebApp1 -au Individual
-```
-
-이전 명령은 [.NET Core CLI](/dotnet/core/tools/dotnet)를 사용하여 Razor Pages 프로젝트를 만듭니다.
-
-## <a name="open-the-project"></a>프로젝트 열기
-
-Visual Studio에서 **파일 > 열기**를 선택한 다음, *WebApp1.csproj* 파일을 선택합니다.
-
-<!-- End of VS tabs -->
+* **파일** > **새 솔루션**을 선택합니다.
+* 사이드바에서 **.NET Core** > **앱**을 선택합니다. **웹 애플리케이션** 템플릿을 선택합니다. **새로 만들기**를 선택합니다.
+* **대상프레임 워크** 드롭다운을 **.NET Core 2.2**로 설정합니다. **새로 만들기**를 선택합니다.
+* **프로젝트 이름**을 제공하세요. **위치**를 확인하거나 변경합니다. **만들기**를 선택합니다.
 
 ---
 

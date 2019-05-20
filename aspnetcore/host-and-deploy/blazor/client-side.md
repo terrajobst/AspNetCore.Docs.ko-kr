@@ -5,24 +5,22 @@ description: ASP.NET Core, CDN(Content Delivery Network), 파일 서버 및 GitH
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/15/2019
+ms.date: 05/13/2019
 uid: host-and-deploy/blazor/client-side
-ms.openlocfilehash: 01a612029f415f583908c3bf2adc2e6d35167acb
-ms.sourcegitcommit: 017b673b3c700d2976b77201d0ac30172e2abc87
+ms.openlocfilehash: ea8ece266809913e32ac212bc55cb3c2499c234f
+ms.sourcegitcommit: ccbb84ae307a5bc527441d3d509c20b5c1edde05
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/16/2019
-ms.locfileid: "59614720"
+ms.lasthandoff: 05/19/2019
+ms.locfileid: "65874967"
 ---
 # <a name="host-and-deploy-blazor-client-side"></a>Blazor 클라이언트 쪽 호스트 및 배포
 
 작성자: [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com) 및 [Daniel Roth](https://github.com/danroth27)
 
-[!INCLUDE[](~/includes/razor-components-preview-notice.md)]
-
 ## <a name="host-configuration-values"></a>호스트 구성 값
 
-[클라이언트 쪽 호스팅 모델](xref:blazor/hosting-models#client-side-hosting-model)을 사용하는 Blazor 앱은 개발 환경의 런타임에 다음 호스트 구성 값을 명령줄 인수로 허용할 수 있습니다.
+[클라이언트 쪽 호스팅 모델](xref:blazor/hosting-models#client-side)을 사용하는 Blazor 앱은 개발 환경의 런타임에 다음 호스트 구성 값을 명령줄 인수로 허용할 수 있습니다.
 
 ### <a name="content-root"></a>콘텐츠 루트
 
@@ -95,7 +93,7 @@ ms.locfileid: "59614720"
 
 ## <a name="deployment"></a>배포
 
-[클라이언트 쪽 호스팅 모델](xref:blazor/hosting-models#client-side-hosting-model)을 사용하는 경우:
+[클라이언트 쪽 호스팅 모델](xref:blazor/hosting-models#client-side)을 사용하는 경우:
 
 * Blazor 앱, 해당 앱의 종속성 및 .NET 런타임이 브라우저에 다운로드됩니다.
 * 해당 앱은 브라우저 UI 스레드에서 직접 실행됩니다. 다음 방법 중 하나 이상을 사용할 수 있습니다.
@@ -110,15 +108,15 @@ Blazor는 각 빌드에 대해 IL(중간 언어) 연결을 수행하여 출력 �
 
 클라이언트 쪽 앱의 페이지 구성 요소에 대한 요청 라우팅은 서버 쪽에서 호스트하는 앱에 대한 요청 라우팅처럼 간단하지 않습니다. 다음 두 페이지를 사용하여 클라이언트 쪽 앱을 생각해 보겠습니다.
 
-* **_Main.cshtml_** &ndash; 앱의 루트에서 로드하며 정보 페이지(`href="About"`)에 대한 링크를 포함합니다.
-* **_About.cshtml_** &ndash; 페이지 정보입니다.
+* **_Main.razor** &ndash; 앱의 루트에 로드되고 정보 페이지(`href="About"`)에 대한 링크가 포함되어 있습니다.
+* **_About.razor** &ndash; 정보 페이지.
 
 브라우저의 주소 표시줄을 사용하여 앱의 기본 문서를 요청하는 경우(예: `https://www.contoso.com/`):
 
 1. 브라우저가 요청을 합니다.
 1. 기본 페이지(일반적으로 *index.html*)가 반환됩니다.
 1. *index.html* 앱을 부트스트랩으로 처리합니다.
-1. Blazor의 라우터가 로드되고 Razor 기본 페이지(*Main.cshtml*)가 표시됩니다.
+1. Blazor의 라우터가 로드되고 Razor 기본 페이지(*Main.razor*)가 표시됩니다.
 
 기본 페이지에서 정보 페이지에 대한 링크를 선택하면 정보 페이지가 로드됩니다. Blazor 라우터는 브라우저가 인터넷상에서 `www.contoso.com`에 대해 `About`를 요청하는 것을 중단하므로 정보 페이지에 대한 링크 선택은 클라이언트에서 작동합니다. *클라이언트 쪽 앱 내의* 내부 페이지에 대한 모든 요청도 같은 방법으로 작동합니다. 요청은 인터넷상에서 서버가 호스트하는 리소스에 대한 브라우저 기반 요청을 트리거하지 않습니다. 라우터가 내부적으로 요청을 처리합니다.
 
@@ -128,13 +126,19 @@ Blazor는 각 빌드에 대해 IL(중간 언어) 연결을 수행하여 출력 �
 
 ## <a name="app-base-path"></a>앱 기본 경로
 
-앱 기본 경로는 서버상의 가상 앱 루트 경로입니다. 예를 들어 Contoso 서버의 가상 폴더 `/CoolApp/`에 상주하는 앱은 `https://www.contoso.com/CoolApp`에 도달하며 `/CoolApp/`의 가상 기본 경로를 포함합니다. 앱 기본 경로를 `CoolApp/`로 설정하면 앱은 서버상에 가상으로 상주하는 위치를 인식하게 됩니다. 해당 앱은 앱 기본 경로를 사용하여 루트 디렉터리에 없는 구성 요소에서 앱 루트에 대한 상대 URL을 구성합니다. 이렇게 하면 디렉터리 구조의 다른 수준에 존재하는 구성 요소가 앱 전체의 위치에서 다른 리소스에 대한 링크를 만들 수 있습니다. 또한 링크의 `href` 대상이 앱 기본 경로 내에 있는 경우 &mdash; Blazor 라우터가 내부 탐색을 처리하는 경우 하이퍼링크 클릭을 가로채기 위해서도 앱 기본 경로를 사용합니다.
+앱 기본 경로는 서버상의 가상 앱 루트 경로입니다. 예를 들어 Contoso 서버의 가상 폴더 `/CoolApp/`에 상주하는 앱은 `https://www.contoso.com/CoolApp`에 도달하며 `/CoolApp/`의 가상 기본 경로를 포함합니다. 앱 기본 경로를 가상 경로(`<base href="/CoolApp/">`)로 설정하면 앱은 서버상에 가상으로 상주하는 위치를 인식하게 됩니다. 해당 앱은 앱 기본 경로를 사용하여 루트 디렉터리에 없는 구성 요소에서 앱 루트에 대한 상대 URL을 구성합니다. 이렇게 하면 디렉터리 구조의 다른 수준에 존재하는 구성 요소가 앱 전체의 위치에서 다른 리소스에 대한 링크를 만들 수 있습니다. 또한 링크의 `href` 대상이 앱 기본 경로 내에 있는 경우 &mdash; Blazor 라우터가 내부 탐색을 처리하는 경우 하이퍼링크 클릭을 가로채기 위해서도 앱 기본 경로를 사용합니다.
 
-많은 호스팅 시나리오에서 앱에 대한 서버의 가상 경로는 앱의 루트입니다. 이러한 경우 앱 기본 경로는 앱에 대한 기본 구성인 슬래시(`<base href="/" />`)입니다. GitHub 페이지 및 IIS 가상 디렉터리 또는 하위 애플리케이션 등의 다른 호스팅 시나리오에서는 앱 기본 경로를 앱에 대한 서버의 가상 경로로 설정해야 합니다. 앱의 기본 경로를 설정하려면 `<head>` 태그 요소 내에서 찾은 *index.html*의 `<base>` 태그를 추가하거나 업데이트합니다. `href` 속성 값을 `virtual-path/`(뒤에 슬래시가 필요함)로 설정하며, 여기서 `virtual-path/`는 앱에 대한 서버의 전체 가상 앱 루트 경로입니다. 앞의 예에서 가상 경로는 `CoolApp/`: `<base href="CoolApp/">`로 설정됩니다.
+많은 호스팅 시나리오에서 앱에 대한 서버의 가상 경로는 앱의 루트입니다. 이러한 경우 앱 기본 경로는 앱에 대한 기본 구성인 슬래시(`<base href="/" />`)입니다. GitHub 페이지 및 IIS 가상 디렉터리 또는 하위 애플리케이션 등의 다른 호스팅 시나리오에서는 앱 기본 경로를 앱에 대한 서버의 가상 경로로 설정해야 합니다. 앱의 기본 경로를 설정하려면 *wwwroot/index.html* 파일의 `<head>` 태그 요소 내에 `<base>` 태그를 업데이트합니다. `href` 속성 값을 `/virtual-path/`(뒤에 슬래시가 필요함)로 설정하며, 여기서 `/virtual-path/`는 앱에 대한 서버의 전체 가상 앱 루트 경로입니다. 앞의 예에서 가상 경로는 `/CoolApp/`: `<base href="/CoolApp/">`로 설정됩니다.
 
-루트가 아닌 경로가 구성된 앱(예: `<base href="CoolApp/">`)의 경우, 앱은 *로컬로 실행하면* 해당 리소스를 찾지 못합니다. 로컬 개발 및 시험 중에 이 문제를 해결하려면 런타임에 `<base>` 태그의 `href` 값과 일치하는 *기본 경로* 인수를 제공할 수 있습니다.
+루트가 아닌 경로가 구성된 앱(예: `<base href="/CoolApp/">`)의 경우, 앱은 *로컬로 실행하면* 해당 리소스를 찾지 못합니다. 로컬 개발 및 시험 중에 이 문제를 해결하려면 런타임에 `<base>` 태그의 `href` 값과 일치하는 *기본 경로* 인수를 제공할 수 있습니다.
 
-앱을 로컬로 실행하는 경우 경로 기본 인수를 루트 경로(`/`)와 함께 전달하려면 앱의 디렉터리에서 다음 명령을 실행합니다.
+앱을 로컬로 실행하는 경우 경로 기본 인수를 루트 경로(`/`)와 함께 전달하려면 `--pathbase` 옵션을 통해 앱의 디렉터리에서 `dotnet run` 명령을 실행합니다.
+
+```console
+dotnet run --pathbase=/{Virtual Path (no trailing slash)}
+```
+
+가상 기본 경로가 `/CoolApp/`(`<base href="/CoolApp/">`)인 앱의 경우 명령은 다음과 같습니다.
 
 ```console
 dotnet run --pathbase=/CoolApp
@@ -144,7 +148,7 @@ dotnet run --pathbase=/CoolApp
 
 자세한 내용은 [경로 기준 호스트 구성 값](#path-base) 섹션을 참조하세요.
 
-앱이 [클라이언트 쪽 호스팅 모델](xref:blazor/hosting-models#client-side-hosting-model)(**Blazor** 프로젝트 템플릿 기반)을 사용하고 ASP.NET Core 앱에서 IIS 하위 애플리케이션으로 호스트되는 경우, 상속된 ASP.NET Core 모듈 핸들러를 사용하지 않도록 설정하거나 *web.config* 파일에서 루트(상위) 앱의 `<handlers>` 섹션을 하위 앱에서 상속하지 않도록 해야 합니다.
+앱이 [클라이언트 쪽 호스팅 모델](xref:blazor/hosting-models#client-side)(**Blazor** 프로젝트 템플릿 기반, [dotnet new](/dotnet/core/tools/dotnet-new) 명령을 사용할 경우 `blazor` 템플릿 기반) 사용하고 ASP.NET Core 앱에서 IIS 하위 애플리케이션으로 호스트되는 경우, 상속된 ASP.NET Core 모듈 핸들러를 사용하지 않도록 설정하거나 *web.config* 파일에서 루트(상위) 앱의 `<handlers>` 섹션을 하위 앱에서 상속하지 않도록 해야 합니다.
 
 파일에 `<handlers>` 섹션을 추가하여 앱의 게시된 *web.config* 파일에서 핸들러를 제거합니다.
 
