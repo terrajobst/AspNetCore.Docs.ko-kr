@@ -6,23 +6,23 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/12/2018
 uid: host-and-deploy/docker/visual-studio-tools-for-docker
-ms.openlocfilehash: 3bf3d8d0a627d97090e3ce9fef7e380f03c7626d
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: b0d884fe2fe56f267ad70c388a08cd3fe6256364
+ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64888368"
+ms.lasthandoff: 05/14/2019
+ms.locfileid: "65610372"
 ---
 # <a name="visual-studio-tools-for-docker-with-aspnet-core"></a>Visual Studio Tools for Docker 및 ASP.NET Core
 
-Visual Studio 2017은 .NET Core를 대상으로 하는 컨테이너화된 ASP.NET Core 앱의 빌드, 디버그 및 실행을 지원합니다. Windows 및 Linux 컨테이너가 모두 지원됩니다.
+Visual Studio 2017 이상 버전은 .NET Core를 대상으로 하는 컨테이너화된 ASP.NET Core 앱의 빌드, 디버그 및 실행을 지원합니다. Windows 및 Linux 컨테이너가 모두 지원됩니다.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/docker/visual-studio-tools-for-docker/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>전제 조건
 
 * [Windows용 Docker](https://docs.docker.com/docker-for-windows/install/)
-* **.NET Core 플랫폼 간 개발** 워크로드가 있는 [Visual Studio 2017](https://visualstudio.microsoft.com)
+* **.NET Core 플랫폼 간 개발** 워크로드가 있는 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 
 ## <a name="installation-and-setup"></a>설치 및 설정
 
@@ -112,7 +112,7 @@ Visual Studio Tools for Docker는 다음 파일을 통해 솔루션에 *docker-c
 기본 [필수 구성 요소](#prerequisites) 외에도 [Service Fabric](/azure/service-fabric/) 오케스트레이션 솔루션에는 다음 필수 구성 요소가 필요합니다.
 
 * [Microsoft Azure Service Fabric SDK](https://www.microsoft.com/web/handlers/webpi.ashx?command=getinstallerredirect&appid=MicrosoftAzure-ServiceFabric-CoreSDK) 버전 2.6 이상
-* Visual Studio 2017의 **Azure 개발** 워크로드
+* Visual Studio의 **Azure 개발** 워크로드
 
 Service Fabric은 Windows의 로컬 개발 클러스터에서 Linux 컨테이너를 실행하는 기능을 지원하지 않습니다. 프로젝트에 Linux 컨테이너가 이미 사용되고 있으면 Visual Studio는 Windows 컨테이너로 전환하라는 메시지를 표시합니다.
 

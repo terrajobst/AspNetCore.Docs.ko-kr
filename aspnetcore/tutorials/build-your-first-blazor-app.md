@@ -5,14 +5,14 @@ description: Blazor 앱을 단계별로 빌드합니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/18/2019
+ms.date: 05/14/2019
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: d235fec4e128ad8622a06d301eeac15c4862c159
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: c1b142ebdbd85eb10ddf8c8b70edd9782732a4f1
+ms.sourcegitcommit: 3ee6ee0051c3d2c8d47a58cb17eef1a84a4c46a0
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087760"
+ms.lasthandoff: 05/14/2019
+ms.locfileid: "65621095"
 ---
 # <a name="build-your-first-blazor-app"></a>첫 번째 Blazor 앱 빌드
 
@@ -151,6 +151,14 @@ Blazor 클라이언트 쪽 앱을 사용하는 경우 `HttpClient`를 삽입하�
    ```
 
 1. 앱을 다시 빌드하고 실행합니다. 새 Todo 페이지를 방문하여 Todo 구성 요소에 대한 링크가 작동하는지 확인합니다.
+
+1. Blazor 서버 쪽 앱을 빌드하는 경우 앱의 네임스페이스를 *\_Imports.razor* 파일에 추가합니다. 다음 `@using` 문에서는 앱의 네임스페이스가 `WebApplication`인 것으로 가정합니다.
+
+   ```cshtml
+   @using WebApplication
+   ```
+   
+   Blazor 클라이언트 쪽 앱은 기본적으로 앱의 네임스페이스를 *\_Imports.razor* 파일에 포함합니다.
 
 1. 프로젝트 루트에 *TodoItem.cs* 파일을 추가하여 Todo 항목을 나타내는 클래스를 저장합니다. `TodoItem` 클래스에 대해 다음 C# 코드를 사용합니다.
 
