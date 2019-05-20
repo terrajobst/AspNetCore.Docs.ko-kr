@@ -4,14 +4,14 @@ author: guardrex
 description: 앱 시작 및 수명 관리를 담당하는 ASP.NET Core의 웹 호스트에 대해 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2018
+ms.date: 05/11/2019
 uid: fundamentals/host/web-host
-ms.openlocfilehash: b391b5e514e750f64f30d33cf4eb91e489242eba
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 48f3b664d901bdfb27cdf9e798fa60c0587d1def
+ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64888978"
+ms.lasthandoff: 05/14/2019
+ms.locfileid: "65610286"
 ---
 # <a name="aspnet-core-web-host"></a>ASP.NET Core 웹 호스트
 
@@ -39,7 +39,9 @@ ASP.NET Core 앱은 *호스트*를 구성 및 실행합니다. 호스트는 앱 
 
 ## <a name="set-up-a-host"></a>호스트 설정
 
-[IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder)의 인스턴스를 사용하여 호스트를 만듭니다. 이는 일반적으로 앱의 진입점에서 수행되는 `Main` 메서드입니다. 프로젝트 템플릿에서 `Main`은 *Program.cs*에 있습니다. 일반적인 *Program.cs*는 [CreateDefaultBuilder](/dotnet/api/microsoft.aspnetcore.webhost.createdefaultbuilder)를 호출하여 호스트 설정을 시작합니다.
+[IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder)의 인스턴스를 사용하여 호스트를 만듭니다. 이는 일반적으로 앱의 진입점에서 수행되는 `Main` 메서드입니다. 작성기 메서드 이름 `CreateWebHostBuilder`는 외부 구성 요소(예: [Entity Framework](/ef/core/))에 작성기 메서드를 식별하는 특수 이름입니다.
+
+프로젝트 템플릿에서 `Main`은 *Program.cs*에 있습니다. 일반적인 앱은 [CreateDefaultBuilder](/dotnet/api/microsoft.aspnetcore.webhost.createdefaultbuilder)를 호출하여 호스트 설정을 시작합니다.
 
 ```csharp
 public class Program

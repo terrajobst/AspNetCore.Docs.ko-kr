@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/5/2018
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: e9214139c0e6e958445feb13b6350bad376a0152
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 38e1fff9c7a212af992951dbf57e124cae69d36f
+ms.sourcegitcommit: ccbb84ae307a5bc527441d3d509c20b5c1edde05
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64884168"
+ms.lasthandoff: 05/19/2019
+ms.locfileid: "65874985"
 ---
 # <a name="add-validation-to-an-aspnet-core-razor-page"></a>ASP.NET Core Razor 페이지에 유효성 검사 추가
 
@@ -28,22 +28,7 @@ ms.locfileid: "64884168"
 
 Razor 페이지에서 제공하는 유효성 검사 지원 및 Entity Framework는 반복 금지 원칙의 좋은 예제입니다. 유효성 검사 규칙은 한 위치(모델 클래스에서)에서 선언적으로 지정되고 규칙은 앱의 모든 위치에 적용됩니다.
 
-### <a name="adding-validation-rules-to-the-movie-model"></a>동영상 모델에 유효성 검사 규칙 추가
-
-*Models/Movie.cs* 파일을 엽니다. [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6)는 클래스 또는 속성에 선언적으로 적용되는 유효성 검사 특성의 기본 제공 집합을 제공합니다. 또한 DataAnnotations는 서식 지정을 돕는 `DataType`과 같은 서식 지정 특성을 포함하며 유효성 검사를 제공하지 않습니다.
-
-`Required`, `StringLength`, `RegularExpression` 및 `Range` 유효성 검사 특성을 활용하도록 `Movie` 클래스를 업데이트합니다.
-
-[!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Models/MovieDateRatingDA.cs?name=snippet1)]
-
-유효성 검사 특성은 모델 속성에 적용되는 동작을 지정합니다.
-
-* `Required` 및 `MinimumLength` 특성은 속성에 값이 있어야 함을 나타냅니다. 그러나 사용자는 nullable 형식에 대한 유효성 검사 제약 조건을 만족하기 위해 공백을 입력할 수 있습니다. nullable 형식이 아닌 [값 형식](/dotnet/csharp/language-reference/keywords/value-types)(`decimal`, `int`, `float`,`DateTime`)은 기본적으로 필요하며 `Required` 특성은 필요하지 않습니다.
-* `RegularExpression` 특성은 사용자가 입력할 수 있는 문자를 제한합니다. 위의 코드에서 `Genre`는 하나 이상의 대문자로 시작하고 0개 이상의 문자, 작은따옴표 또는 큰따옴표, 공백 문자 또는 대시를 사용해야 합니다. `Rating`은 하나 이상의 대문자로 시작하고 0개 이상의 문자, 숫자, 작은따옴표 또는 큰따옴표, 공백 문자 또는 대시를 사용해야 합니다.
-* `Range` 특성은 지정된 범위로 값을 제한합니다.
-* `StringLength` 특성은 문자열의 최대 길이 및 필요에 따라 최소 길이를 설정합니다. 
-
-ASP.NET Core에 의해 자동으로 적용되는 유효성 검사 규칙을 사용하면 앱을 보다 강력하게 합니다. 모델에서 자동 유효성 검사는 새 코드가 추가될 때 적용하기 위해 기억할 필요가 없기 때문에 앱을 보호합니다.
+[!INCLUDE[](~/includes/RP-MVC/validation.md)]
 
 ### <a name="validation-error-ui-in-razor-pages"></a>Razor 페이지에서 유효성 검사 오류 UI
 

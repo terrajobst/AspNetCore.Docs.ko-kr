@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/29/2019
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: 37e39ac93e7b67184dfc238d58e12c2be8d84f91
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: d7a5656131189ffafb60a7b1db0b8d93a3787ae2
+ms.sourcegitcommit: 3ee6ee0051c3d2c8d47a58cb17eef1a84a4c46a0
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087343"
+ms.lasthandoff: 05/14/2019
+ms.locfileid: "65621052"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>ASP.NET Core의 작성자 태그 도우미
 
@@ -313,3 +313,12 @@ FQN을 사용하여 뷰에 태그 도우미를 추가하려면 먼저 FQN(`Autho
 [!code-csharp[](../../views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/z1AutoLinkerCopy.cs?highlight=5,6,10&range=8-21)]
 
 * `GetChildContentAsync`를 여러 번 호출해도 같은 값이 반환되며 캐시된 결과를 사용하지 않음을 나타내는 false 매개 변수를 전달하지 않은 경우 `TagHelper` 본문을 다시 실행하지 않습니다.
+
+## <a name="load-minified-partial-view-taghelper"></a>축소된 부분 보기 TagHelper 로드
+
+프로덕션 환경에서는 축소된 부분 보기를 로드하여 성능을 향상할 수 있습니다. 프로덕션에서 축소된 부분 보기를 활용하려면 다음을 수행하세요.
+
+* 부분 보기를 축소하는 사전 빌드 프로세스를 만들거나 설정합니다.
+* 다음 코드를 사용하여 개발 환경이 아닌 환경에서 축소된 부분 보기를 로드합니다.
+
+[!code-csharp[](authoring/sample/AuthoringTagHelpers/src/MinifiedVersionTagHelper.cs?name=snippet)]
