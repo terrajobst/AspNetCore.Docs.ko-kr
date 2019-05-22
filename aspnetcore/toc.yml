@@ -277,6 +277,8 @@
       items:
         - name: 개요
           uid: blazor/index
+        - name: 지원되는 플랫폼
+          uid: blazor/supported-platforms
         - name: 시작
           uid: blazor/get-started
         - name: 호스팅 모델
