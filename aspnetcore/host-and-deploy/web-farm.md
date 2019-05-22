@@ -2,16 +2,17 @@
 title: 웹 팜에 ASP.NET Core 호스트
 author: guardrex
 description: 웹 팜 환경에서 공유 리소스가 있는 ASP.NET Core 앱의 여러 인스턴스를 호스트하는 방법을 알아봅니다.
+monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/26/2018
+ms.date: 05/12/2019
 uid: host-and-deploy/web-farm
-ms.openlocfilehash: 4873665e6174a6acf885e1ebb41fb005d646bd1f
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: df1be8cc76a5017923f26636a241b69881dfcc81
+ms.sourcegitcommit: b4ef2b00f3e1eb287138f8b43c811cb35a100d3e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64884158"
+ms.lasthandoff: 05/21/2019
+ms.locfileid: "65970103"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>웹 팜에 ASP.NET Core 호스트
 

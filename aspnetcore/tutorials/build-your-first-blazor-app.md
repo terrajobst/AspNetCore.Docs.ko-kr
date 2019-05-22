@@ -5,14 +5,14 @@ description: Blazor 앱을 단계별로 빌드합니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/14/2019
+ms.date: 05/19/2019
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: c1b142ebdbd85eb10ddf8c8b70edd9782732a4f1
-ms.sourcegitcommit: 3ee6ee0051c3d2c8d47a58cb17eef1a84a4c46a0
+ms.openlocfilehash: d48b891127f4db929b631c0ddf199c07658e604c
+ms.sourcegitcommit: b4ef2b00f3e1eb287138f8b43c811cb35a100d3e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65621095"
+ms.lasthandoff: 05/21/2019
+ms.locfileid: "65970118"
 ---
 # <a name="build-your-first-blazor-app"></a>첫 번째 Blazor 앱 빌드
 
@@ -188,7 +188,7 @@ Blazor 클라이언트 쪽 앱을 사용하는 경우 `HttpClient`를 삽입하�
    [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/ToDo7.razor?highlight=2)]
 
    ```cshtml
-   <input placeholder="Something todo" bind="@newTodo">
+   <input placeholder="Something todo" bind="@newTodo" />
    ```
 
 1. `AddTodo` 메서드를 업데이트하여 지정된 제목이 있는 `TodoItem`을 목록에 추가합니다. `newTodo`를 빈 문자열로 설정하여 텍스트 입력 값을 지웁니다.
