@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2019
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: aff4b857394c554e94dd8929dca809eb1a4387f2
-ms.sourcegitcommit: b4ef2b00f3e1eb287138f8b43c811cb35a100d3e
+ms.openlocfilehash: 6ba4da913ef712ef897a4c8418263e3060ea85ac
+ms.sourcegitcommit: e67356f5e643a5d43f6d567c5c998ce6002bdeb4
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/21/2019
-ms.locfileid: "65970041"
+ms.lasthandoff: 05/22/2019
+ms.locfileid: "66004973"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS가 있는 Windows에서 ASP.NET Core 호스팅
 
@@ -33,11 +33,13 @@ Azure에서 호스트하는 방법에 대한 자세한 내용은 <xref:host-and-
 
 ## <a name="supported-platforms"></a>지원되는 플랫폼
 
-32비트(x86) 및 64비트(x64) 배포용으로 게시된 앱이 지원됩니다. 앱이 다음과 같지 않은 경우 32비트 앱을 배포하세요.
+32비트(x86) 또는 64비트(x64) 배포용으로 게시된 앱이 지원됩니다. 앱이 다음과 같은 경우가 아닌 한 32비트(x86) .NET Core SDK를 포함한 32비트 앱을 배포합니다.
 
 * 64비트 앱에 사용할 수 있는 더 큰 가상 메모리 주소 공간이 필요합니다.
 * 더 큰 IIS 스택 크기가 필요합니다.
 * 64비트 네이티브 종속성이 있습니다.
+
+64비트 앱을 게시하려면 64비트(x64) .NET Core SDK를 사용합니다. 64비트 런타임이 호스트 시스템에 있어야 합니다.
 
 ## <a name="application-configuration"></a>애플리케이션 구성
 
