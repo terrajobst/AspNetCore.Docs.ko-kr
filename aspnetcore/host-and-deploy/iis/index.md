@@ -5,14 +5,14 @@ description: Windows Server IIS(인터넷 정보 서비스)에서 ASP.NET Core �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2019
+ms.date: 05/24/2019
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 6ba4da913ef712ef897a4c8418263e3060ea85ac
-ms.sourcegitcommit: e67356f5e643a5d43f6d567c5c998ce6002bdeb4
+ms.openlocfilehash: f0efe6c0edc71c5e2c45aeaa175c8a5643ef0fde
+ms.sourcegitcommit: e1623d8279b27ff83d8ad67a1e7ef439259decdf
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/22/2019
-ms.locfileid: "66004973"
+ms.lasthandoff: 05/25/2019
+ms.locfileid: "66223139"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS가 있는 Windows에서 ASP.NET Core 호스팅
 
@@ -282,7 +282,7 @@ services.Configure<IISOptions>(options =>
 
 ## <a name="install-web-deploy-when-publishing-with-visual-studio"></a>Visual Studio을 사용하여 게시할 때 웹 배포 설치
 
-[웹 배포](/iis/publish/using-web-deploy/introduction-to-web-deploy)를 사용하여 앱을 서버에 배포하는 경우 최신 버전의 웹 배포를 서버에 설치합니다. 웹 배포를 설치하려면 [WebPI(웹 플랫폼 설치 관리자)](https://www.microsoft.com/web/downloads/platform.aspx)를 사용하거나 [Microsoft 다운로드 센터](https://www.microsoft.com/download/details.aspx?id=43717)에서 직접 설치 관리자를 가져옵니다. WebPI를 사용하는 것이 좋습니다. WebPI는 호스팅 공급자에 대한 독립 실행형 설치 및 구성을 제공합니다.
+[웹 배포](/iis/install/installing-publishing-technologies/installing-and-configuring-web-deploy-on-iis-80-or-later)를 사용하여 앱을 서버에 배포하는 경우 최신 버전의 웹 배포를 서버에 설치합니다. 웹 배포를 설치하려면 [WebPI(웹 플랫폼 설치 관리자)](https://www.microsoft.com/web/downloads/platform.aspx)를 사용하거나 [Microsoft 다운로드 센터](https://www.microsoft.com/download/details.aspx?id=43717)에서 직접 설치 관리자를 가져옵니다. WebPI를 사용하는 것이 좋습니다. WebPI는 호스팅 공급자에 대한 독립 실행형 설치 및 구성을 제공합니다.
 
 ## <a name="create-the-iis-site"></a>IIS 사이트 만들기
 
