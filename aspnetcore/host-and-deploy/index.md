@@ -2,16 +2,17 @@
 title: ASP.NET Core 호스트 및 배포
 author: guardrex
 description: 호스팅 환경을 설정하고 ASP.NET Core 앱을 배포하는 방법을 알아봅니다.
+monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/06/2018
+ms.date: 05/12/2019
 uid: host-and-deploy/index
-ms.openlocfilehash: f443a8ee28a859b5075a8bb03016407af9a3ddb1
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 068c5f357b8010d78493a78a10c353e3317f3867
+ms.sourcegitcommit: b4ef2b00f3e1eb287138f8b43c811cb35a100d3e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64882108"
+ms.lasthandoff: 05/21/2019
+ms.locfileid: "65969893"
 ---
 # <a name="host-and-deploy-aspnet-core"></a>ASP.NET Core 호스트 및 배포
 
@@ -46,19 +47,9 @@ ASP.NET Core 앱은 서버가 부팅되고 작동 중단 후 다시 시작될 �
 
 ## <a name="set-up-a-reverse-proxy"></a>역방향 프록시 설정
 
-::: moniker range=">= aspnetcore-2.0"
-
 앱에서 [Kestrel](xref:fundamentals/servers/kestrel) 서버를 사용하는 경우 [Nginx](xref:host-and-deploy/linux-nginx), [Apache](xref:host-and-deploy/linux-apache) 또는 [IIS](xref:host-and-deploy/iis/index)를 역방향 프록시 서버로 사용할 수 있습니다. 역방향 프록시 서버는 인터넷에서 HTTP 요청을 받아서 Kestrel에 전달합니다.
 
-&mdash;역방향 프록시 서버가 있는 구성과 없는 구성 모두&mdash; ASP.NET Core 2.0 이상 앱에 대해 지원되는 호스팅 구성입니다. 자세한 내용은 [Kestrel를 역방향 프록시와 함께 사용할 경우](xref:fundamentals/servers/kestrel#when-to-use-kestrel-with-a-reverse-proxy)를 참조하세요.
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-2.0"
-
-앱에서 [Kestrel](xref:fundamentals/servers/kestrel) 서버를 사용하고 앱이 인터넷에 노출되는 경우, [Nginx](xref:host-and-deploy/linux-nginx), [Apache](xref:host-and-deploy/linux-apache) 또는 [IIS](xref:host-and-deploy/iis/index)를 역방향 프록시 서버로 사용하세요. 역방향 프록시 서버는 인터넷에서 HTTP 요청을 받아서 Kestrel에 전달합니다. 역방향 프록시를 사용하는 주요 이유는 보안 때문입니다. 자세한 내용은 [Kestrel를 역방향 프록시와 함께 사용할 경우](xref:fundamentals/servers/kestrel?tabs=aspnetcore1x#when-to-use-kestrel-with-a-reverse-proxy)를 참조하세요.
-
-::: moniker-end
+&mdash;역방향 프록시 서버가 있는 구성과 없는 구성 모두&mdash; 지원되는 호스팅 구성입니다. 자세한 내용은 [Kestrel를 역방향 프록시와 함께 사용할 경우](xref:fundamentals/servers/kestrel#when-to-use-kestrel-with-a-reverse-proxy)를 참조하세요.
 
 ## <a name="proxy-server-and-load-balancer-scenarios"></a>프록시 서버 및 부하 분산 장치 시나리오
 

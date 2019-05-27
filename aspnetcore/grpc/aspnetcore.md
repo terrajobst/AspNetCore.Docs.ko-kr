@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 03/08/2019
 uid: grpc/aspnetcore
-ms.openlocfilehash: c99a499fad824c3ac026f6f390c826c0418fc069
-ms.sourcegitcommit: 57a974556acd09363a58f38c26f74dc21e0d4339
+ms.openlocfilehash: 1f019fac23982a95fa37d43099522f4b3e9d107a
+ms.sourcegitcommit: 5d384db2fa9373a93b5d15e985fb34430e49ad7a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59515601"
+ms.lasthandoff: 05/23/2019
+ms.locfileid: "66039277"
 ---
 # <a name="grpc-services-with-aspnet-core"></a>ASP.NET Core를 사용하는 gRPC 서비스
 
@@ -77,32 +77,6 @@ GRPC API 메서드, 호스트, 헤더 및 트레일러와 같은 일부 HTTP/2 �
 `ServerCallContext` 에 대 한 전체 액세스를 제공 하지 않습니다 `HttpContext` 모든 ASP.NET api에서. 합니다 `GetHttpContext` 에 대 한 전체 액세스를 제공 하는 확장 메서드는 `HttpContext` ASP.NET Api에서 기본 HTTP/2 메시지를 표시 합니다.
 
 [!code-cs[](~/tutorials/grpc/grpc-start/samples/GrpcGreeter/Services/GreeterService.cs?name=snippet1)]
-
-### <a name="request-body-data-rate-limit"></a>요청 본문 데이터 속도 제한
-
-기본적으로 Kestrel 서버 적용을 [최소 요청 본문 데이터 속도](
-<xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.MinRequestBodyDataRate>)합니다. 스트리밍 호출이 이중와 스트리밍 클라이언트에 대 한이 속도 충족할 수 있습니다 하 고 연결 시간이 초과 될 수 있습니다. 최소 요청 본문 데이터 속도 제한 gRPC 서비스 스트리밍 클라이언트 및 이중 교환 패턴 스트리밍 호출이 포함 된 경우 비활성화 해야 합니다.
-
-```csharp
-public class Program
-{
-    public static void Main(string[] args)
-    {
-        CreateHostBuilder(args).Build().Run();
-    }
-
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-         Host.CreateDefaultBuilder(args)
-    .ConfigureWebHostDefaults(webBuilder =>
-    {
-        webBuilder.UseStartup<Startup>();
-        webBuilder.ConfigureKestrel((context, options) =>
-        {
-            options.Limits.MinRequestBodyDataRate = null;
-        });
-    });
-}
-```
 
 ## <a name="additional-resources"></a>추가 자료
 

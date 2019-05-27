@@ -2,16 +2,17 @@
 title: IIS가 있는 Windows에서 ASP.NET Core 호스팅
 author: guardrex
 description: Windows Server IIS(인터넷 정보 서비스)에서 ASP.NET Core 앱을 호스팅하는 방법을 알아봅니다.
+monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/07/2019
+ms.date: 05/19/2019
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: c8e742047230339434b910de9a8a2492bc4da1ff
-ms.sourcegitcommit: a3926eae3f687013027a2828830c12a89add701f
+ms.openlocfilehash: aff4b857394c554e94dd8929dca809eb1a4387f2
+ms.sourcegitcommit: b4ef2b00f3e1eb287138f8b43c811cb35a100d3e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/08/2019
-ms.locfileid: "65450978"
+ms.lasthandoff: 05/21/2019
+ms.locfileid: "65970041"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS가 있는 Windows에서 ASP.NET Core 호스팅
 
@@ -42,8 +43,6 @@ Azure에서 호스트하는 방법에 대한 자세한 내용은 <xref:host-and-
 
 ### <a name="enable-the-iisintegration-components"></a>IISIntegration 구성 요소 사용
 
-::: moniker range=">= aspnetcore-2.1"
-
 일반적인 *Program.cs*는 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>를 호출하여 호스트 설정을 시작합니다.
 
 ```csharp
@@ -51,20 +50,6 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
     WebHost.CreateDefaultBuilder(args)
         ...
 ```
-
-::: moniker-end
-
-::: moniker range="= aspnetcore-2.0"
-
-일반적인 *Program.cs*는 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>를 호출하여 호스트 설정을 시작합니다.
-
-```csharp
-public static IWebHost BuildWebHost(string[] args) =>
-    WebHost.CreateDefaultBuilder(args)
-        ...
-```
-
-::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.2"
 
@@ -90,7 +75,7 @@ In-process 및 out-of-process 호스팅 모델에 대한 자세한 내용은 [AS
 
 ::: moniker-end
 
-::: moniker range="= aspnetcore-2.1"
+::: moniker range="< aspnetcore-2.2"
 
 `CreateDefaultBuilder`는 [Kestrel](xref:fundamentals/servers/kestrel) 서버를 웹 서버로 구성하고 [ASP.NET Core 모듈](xref:host-and-deploy/aspnet-core-module)의 기본 경로 및 포트를 구성하여 IIS 통합을 구현합니다.
 
@@ -101,44 +86,6 @@ ASP.NET Core 모듈은 동적 포트를 생성하여 백 엔드 프로세스에 
 * [구성](xref:fundamentals/configuration/index)(또는 [명령줄 --urls 옵션](xref:fundamentals/host/web-host#override-configuration))
 
 모듈을 사용하는 경우 `UseUrls` 호출 또는 Kestrel의 `Listen` API가 필요하지 않습니다. `UseUrls` 또는 `Listen`을 호출하는 경우 Kestrel은 IIS 없이 앱을 실행할 때만 지정된 포트에서 수신 대기합니다.
-
-::: moniker-end
-
-::: moniker range="= aspnetcore-2.0"
-
-`CreateDefaultBuilder`는 [Kestrel](xref:fundamentals/servers/kestrel) 서버를 웹 서버로 구성하고 [ASP.NET Core 모듈](xref:host-and-deploy/aspnet-core-module)의 기본 경로 및 포트를 구성하여 IIS 통합을 구현합니다.
-
-ASP.NET Core 모듈은 동적 포트를 생성하여 백 엔드 프로세스에 할당합니다. `CreateDefaultBuilder`는 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> 메서드를 호출합니다. `UseIISIntegration`은 localhost IP 주소(`localhost`)의 동적 포트에서 수신 대기하도록 Kestrel을 구성합니다. 동적 포트가 1234인 경우 Kestrel은 `localhost:1234`에서 수신 대기합니다. 이 구성은 다음에서 제공된 다른 URL 구성을 바꿉니다.
-
-* `UseUrls`
-* [Kestrel의 수신 대기 API](xref:fundamentals/servers/kestrel#endpoint-configuration)
-* [구성](xref:fundamentals/configuration/index)(또는 [명령줄 --urls 옵션](xref:fundamentals/host/web-host#override-configuration))
-
-모듈을 사용하는 경우 `UseUrls` 호출 또는 Kestrel의 `Listen` API가 필요하지 않습니다. `UseUrls` 또는 `Listen`을 호출하는 경우 Kestrel은 IIS 없이 앱을 실행할 때만 지정된 포트에서 수신 대기합니다.
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-2.0"
-
-[Microsoft.AspNetCore.Server.IISIntegration](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.IISIntegration/) 패키지에 대한 종속성을 앱의 종속성에 포함합니다. <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> 확장 메서드를 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder>에 추가하여 IIS 통합 미들웨어를 사용합니다.
-
-```csharp
-var host = new WebHostBuilder()
-    .UseKestrel()
-    .UseIISIntegration()
-    ...
-```
-
-<xref:Microsoft.AspNetCore.Hosting.WebHostBuilderKestrelExtensions.UseKestrel*> 및 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*>이 둘 다 필요합니다. `UseIISIntegration`을 호출하는 코드는 코드 이식성에 영향을 주지 않습니다. 앱이 IIS 배후에서 실행되지 않는 경우(예를 들어 앱이 Kestrel에서 바로 실행되는 경우)에는 `UseIISIntegration`이 작동하지 않습니다.
-
-ASP.NET Core 모듈은 동적 포트를 생성하여 백 엔드 프로세스에 할당합니다. `UseIISIntegration`은 localhost IP 주소(`localhost`)의 동적 포트에서 수신 대기하도록 Kestrel을 구성합니다. 동적 포트가 1234인 경우 Kestrel은 `localhost:1234`에서 수신 대기합니다. 이 구성은 다음에서 제공된 다른 URL 구성을 바꿉니다.
-
-* `UseUrls`
-* [구성](xref:fundamentals/configuration/index)(또는 [명령줄 --urls 옵션](xref:fundamentals/host/web-host#override-configuration))
-
-모듈을 사용하는 경우 `UseUrls` 호출이 필요하지 않습니다. `UseUrls`를 호출하는 경우 Kestrel은 IIS 없이 앱을 실행할 때만 지정된 포트에서 수신 대기합니다.
-
-`UseUrls`를 ASP.NET Core 1.0 앱에서 호출하는 경우 모듈 구성 포트를 덮어 쓰지 않도록 `UseIISIntegration`을 호출하기 **전에** 호출합니다. 모듈 설정이 `UseUrls`를 재정의하기 때문에 이 호출 순서는 ASP.NET Core 1.1에서 필요하지 않습니다.
 
 ::: moniker-end
 
@@ -174,12 +121,16 @@ services.Configure<IISServerOptions>(options =>
 
 ::: moniker-end
 
-::: moniker range="= aspnetcore-2.2"
+::: moniker range="< aspnetcore-3.0"
 
 | 옵션                         | 기본 | 설정 |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | `true`인 경우 IIS 서버는 [Windows 인증](xref:security/authentication/windowsauth)에 의해 인증된 `HttpContext.User`를 설정합니다. `false`인 경우 서버는 `HttpContext.User`에 대한 ID만 제공하고, `AuthenticationScheme`에서 명시적으로 요청될 때 챌린지에 응답합니다. IIS에서 Windows 인증은 `AutomaticAuthentication`이 작동하기 위해 사용하도록 설정되어야 합니다. 자세한 내용은 [Windows 인증](xref:security/authentication/windowsauth)을 참조하세요. |
 | `AuthenticationDisplayName`    | `null`  | 로그인 페이지에서 사용자에게 나타나는 표시 이름을 설정합니다. |
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-2.2"
 
 **Out-of-process 호스팅 모델**
 
@@ -352,7 +303,7 @@ services.Configure<IISOptions>(options =>
 
    ![.NET CLR 버전에 대해 관리 코드 없음 설정](index/_static/edit-apppool-ws2016.png)
 
-    ASP.NET Core는 별도의 프로세스에서 실행되며 런타임을 관리합니다. ASP.NET Core에서는 데스크톱 CLR을 로드할 필요가 없습니다. **.NET CLR 버전**을 **관리 코드 없음**으로 설정하는 것은 선택 사항입니다.
+    ASP.NET Core는 별도의 프로세스에서 실행되며 런타임을 관리합니다. ASP.NET Core는 데스크톱 CLR(.NET CLR) 로드에 관계없이 실행됩니다. .NET Core용 CoreCLR(Core 공용 언어 런타임)이 부팅되어 작업자 프로세스의 앱을 호스트합니다. **.NET CLR 버전**을 **관리 코드 없음**으로 설정하는 것은 선택 사항이지만 권장됩니다.
 
 1. *ASP.NET Core 2.2 이상*: [In-process 호스팅 모델](xref:fundamentals/servers/index#in-process-hosting-model)을 사용하는 64비트(x64) [자체 포함된 배포](/dotnet/core/deploying/#self-contained-deployments-scd)의 경우 32비트(x86) 프로세스에 대해 앱 풀을 사용하지 않도록 설정합니다.
 
@@ -505,7 +456,7 @@ ASP.NET Core 앱 아래에 비ASP .NET Core 하위 앱을 호스팅하는 경우
 
 ASP.NET Core 앱을 다른 ASP.NET Core 앱에서 하위 앱으로 호스팅하려면 다음을 수행합니다.
 
-1. 하위 앱에 대한 앱 풀을 설정합니다. **.NET CLR 버전**을 **관리 코드 없음**으로 설정합니다.
+1. 하위 앱에 대한 앱 풀을 설정합니다. 데스크톱 CLR(.NET CLR)이 아닌 .NET Core용 CoreCLR(Core 공용 언어 런타임)이 부팅되어 작업자 프로세스의 앱을 호스트하기 때문에 **.NET CLR 버전**을 **관리 코드 없음**으로 설정합니다.
 
 1. 루트 사이트 아래의 폴더에 하위 앱을 사용하여 IIS 관리자에 루트 사이트를 추가합니다.
 
@@ -629,6 +580,83 @@ HTTP/2는 기본적으로 사용됩니다. HTTP/2 연결이 설정되지 않은 
 이 섹션은 .NET Framework를 대상으로 하는 ASP.NET Core 앱에만 적용됩니다.
 
 .NET Framework를 대상으로 하는 ASP.NET Core 앱의 경우 OPTIONS 요청은 IIS에서 기본적으로 앱에 전달되지 않습니다. OPTIONS 요청을 전달하도록 *web.config*에서 앱의 IIS 처리기를 구성하는 방법을 알아보려면 [ASP.NET Web API 2에서 원본 간 요청을 사용하도록 설정: CORS 작동 방식](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works)을 참조하세요.
+
+::: moniker range=">= aspnetcore-2.2"
+
+## <a name="application-initialization-module-and-idle-timeout"></a>애플리케이션 초기화 모듈 및 유휴 시간 제한
+
+ASP.NET Core 모듈 버전 2에서 IIS에 호스트된 경우
+
+* [애플리케이션 초기화 모듈](#application-initialization-module) &ndash; - 앱 호스팅 [In Process](xref:fundamentals/servers/index#in-process-hosting-model) 또는 [Out of Process](xref:fundamentals/servers/index#out-of-process-hosting-model)가 작업자 프로세스를 다시 시작하거나 서버를 다시 시작할 때 자동으로 시작되도록 구성할 수 있습니다.
+* [유휴 시간 제한](#idle-timeout) &ndash; - 앱 호스팅 [In Process](xref:fundamentals/servers/index#in-process-hosting-model)가 비활성 기간 중에 시간 초과되지 않도록 구성할 수 있습니다.
+
+### <a name="application-initialization-module"></a>애플리케이션 초기화 모듈
+
+‘앱 호스팅 In Process 및 Out of Process에 적용됩니다.’
+
+[IIS 애플리케이션 초기화](/iis/get-started/whats-new-in-iis-8/iis-80-application-initialization)는 앱 풀이 시작되거나 재활용될 때 HTTP 요청을 앱으로 보내는 IIS 기능입니다. 요청은 앱이 시작되도록 트리거합니다. 기본적으로 IIS는 앱의 루트 URL(`/`)에 요청을 실행하여 앱을 초기화합니다(구성에 대한 자세한 내용은 [추가 리소스](#application-initialization-module-and-idle-timeout-additional-resources) 참조).
+
+IIS 애플리케이션 초기화 역할 기능이 사용하도록 설정되었는지 확인합니다.
+
+Windows 7 이상 데스크톱 시스템에서 IIS를 로컬로 사용하는 경우
+
+1. **제어판** > **프로그램** > **프로그램 및 기능** > **Windows 기능 사용/사용 안 함**(화면 왼쪽)으로 이동합니다.
+1. **인터넷 정보 서비스** > **World Wide Web 서비스** > **애플리케이션 개발 기능**을 엽니다.
+1. **애플리케이션 초기화** 확인란을 선택합니다.
+
+Windows Server 2008 R2 이상
+
+1. **역할 및 기능 추가 마법사**를 엽니다.
+1. **역할 서비스 선택** 패널에서 **애플리케이션 개발** 노드를 엽니다.
+1. **애플리케이션 초기화** 확인란을 선택합니다.
+
+다음 방법 중 하나를 사용하여 사이트에 대해 애플리케이션 초기화 모듈을 활성화합니다.
+
+* IIS 관리자 사용
+
+  1. **연결** 패널에서 **애플리케이션 풀**을 선택합니다.
+  1. 목록에서 앱의 앱 풀을 마우스 오른쪽 단추로 클릭하고 **고급 설정**을 선택합니다.
+  1. 기본 **시작 모드**는 **OnDemand**입니다. **시작 모드**를 **AlwaysRunning**으로 설정합니다. **확인**을 선택합니다.
+  1. **연결** 패널에서 **사이트** 노드를 엽니다.
+  1. 앱을 마우스 오른쪽 단추로 클릭하고 **웹 사이트 관리** > **고급 설정**을 선택합니다.
+  1. 기본 **미리 로드 사용** 설정은 **False**입니다. **미리 로드 사용**을 **True**로 설정합니다. **확인**을 선택합니다.
+
+* *web.config*를 사용하여 `doAppInitAfterRestart`가 `true`로 설정된 `<applicationInitialization>` 요소를 앱의 *web.config* 파일에 있는 `<system.webServer>` 요소에 추가합니다.
+
+  ```xml
+  <?xml version="1.0" encoding="utf-8"?>
+  <configuration>
+    <location path="." inheritInChildApplications="false">
+      <system.webServer>
+        <applicationInitialization doAppInitAfterRestart="true" />
+      </system.webServer>
+    </location>
+  </configuration>
+  ```
+
+### <a name="idle-timeout"></a>유휴 시간 제한
+
+‘앱 호스팅 In Process 에만 적용됩니다.’
+
+앱의 유휴 상태를 방지하려면 IIS 관리자를 사용하여 앱 풀의 유휴 시간 제한을 설정합니다.
+
+1. **연결** 패널에서 **애플리케이션 풀**을 선택합니다.
+1. 목록에서 앱의 앱 풀을 마우스 오른쪽 단추로 클릭하고 **고급 설정**을 선택합니다.
+1. 기본 **유휴 시간 제한(분)** 은 **20**분입니다. **유휴 시간 제한(분)** 을 **0**으로 설정합니다. **확인**을 선택합니다.
+1. 작업자 프로세스를 재순환합니다.
+
+앱 호스팅 [Out of Process](xref:fundamentals/servers/index#out-of-process-hosting-model)가 시간 초과되지 않도록 하려면 다음 방법 중 하나를 사용합니다.
+
+* 실행 상태를 유지하기 위해 외부 서비스에서 앱을 ping합니다.
+* 앱이 백그라운드 서비스만 호스트하는 경우 IIS 호스팅을 방지하고, [Windows 서비스를 사용하여 ASP.NET Core 앱을 호스트](xref:host-and-deploy/windows-service)합니다.
+
+### <a name="application-initialization-module-and-idle-timeout-additional-resources"></a>애플리케이션 초기화 모듈 및 유휴 시간 제한 추가 리소스
+
+* [IIS 8.0 애플리케이션 초기화](/iis/get-started/whats-new-in-iis-8/iis-80-application-initialization)
+* [애플리케이션 초기화 \<applicationInitialization>](/iis/configuration/system.webserver/applicationinitialization/).
+* [애플리케이션 풀의 프로세스 모델 설정 \<processModel>](/iis/configuration/system.applicationhost/applicationpools/add/processmodel).
+
+::: moniker-end
 
 ## <a name="deployment-resources-for-iis-administrators"></a>IIS 관리자를 위한 배포 리소스
 

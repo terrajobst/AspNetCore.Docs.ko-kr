@@ -7,12 +7,12 @@ ms.author: jamesnk
 ms.custom: mvc
 ms.date: 04/09/2019
 uid: grpc/configuration
-ms.openlocfilehash: 66dfb9ec136616f10c1b7aaad766e18813b87de4
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 851c9ca1f7d62f6f368df66bb38eb4bbaf64bf32
+ms.sourcegitcommit: 5d384db2fa9373a93b5d15e985fb34430e49ad7a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087335"
+ms.lasthandoff: 05/23/2019
+ms.locfileid: "66041890"
 ---
 # <a name="grpc-for-aspnet-core-configuration"></a>ASP.NET Core 구성에 대 한 gRPC
 
@@ -48,36 +48,6 @@ services.AddGrpc().AddServiceOptions<MyService>(options =>
 {
     options.ReceiveMaxMessageSize = 10 * 1024 * 1024; // 10 megabytes
 });
-```
-
-## <a name="configure-kestrel-options"></a>Kestrel 옵션 구성
-
-Kestrel 서버에 ASP.NET 용 gRPC의 동작에 영향을 주는 구성 옵션이 있습니다.
-
-### <a name="request-body-data-rate-limit"></a>요청 본문 데이터 속도 제한
-
-기본적으로 Kestrel 서버 적용을 [최소 요청 본문 데이터 속도](
-<xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits.MinRequestBodyDataRate>)합니다. 스트리밍 호출이 이중와 스트리밍 클라이언트에 대 한이 속도 충족할 수 있습니다 하 고 연결 시간이 초과 될 수 있습니다. 최소 요청 본문 데이터 속도 제한 gRPC 서비스 스트리밍 클라이언트 및 이중 교환 패턴 스트리밍 호출이 포함 된 경우 비활성화 해야 합니다.
-
-```csharp
-public class Program
-{
-    public static void Main(string[] args)
-    {
-        CreateHostBuilder(args).Build().Run();
-    }
-
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-         Host.CreateDefaultBuilder(args)
-    .ConfigureWebHostDefaults(webBuilder =>
-    {
-        webBuilder.UseStartup<Startup>();
-        webBuilder.ConfigureKestrel((context, options) =>
-        {
-            options.Limits.MinRequestBodyDataRate = null;
-        });
-    });
-}
 ```
 
 ## <a name="additional-resources"></a>추가 자료
