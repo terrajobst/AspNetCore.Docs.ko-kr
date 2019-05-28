@@ -5,14 +5,14 @@ description: Blazor 앱을 호스트하고 배포하는 방법을 알아봅니�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/24/2019
+ms.date: 05/23/2019
 uid: host-and-deploy/blazor/index
-ms.openlocfilehash: c8a65b08582102af9129cf71ac4a108a905e49fc
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 5def0356d13975211dd234f6a6a9f5a993d003b7
+ms.sourcegitcommit: e1623d8279b27ff83d8ad67a1e7ef439259decdf
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65085529"
+ms.lasthandoff: 05/25/2019
+ms.locfileid: "66223174"
 ---
 # <a name="host-and-deploy-blazor"></a>Blazor 호스트 및 배포
 
@@ -24,7 +24,7 @@ ms.locfileid: "65085529"
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. 탐색 모음에서 **빌드** > **{APPLICATION} 게시**를 선택합니다.
+1. 탐색 모음에서 **빌드** >  **{APPLICATION} 게시**를 선택합니다.
 1. *publish target*을 선택합니다. 로컬로 게시하려면 **폴더**를 선택합니다.
 1. **폴더 선택** 필드에서 기본 위치를 그대로 사용하거나 다른 위치를 지정합니다. **게시** 단추를 선택합니다.
 
@@ -51,3 +51,9 @@ Blazor 클라이언트 쪽 앱은 */bin/Release/{TARGET FRAMEWORK}/dist* 폴더�
 
 * <xref:host-and-deploy/blazor/client-side>
 * <xref:host-and-deploy/blazor/server-side>
+
+## <a name="blazor-serverless-hosting-with-azure-storage"></a>Azure Storage를 사용하여 Blazor 서버리스 호스팅
+
+[Azure Storage](https://azure.microsoft.com/services/storage/)의 Blazor 클라이언트 쪽 앱은 스토리지 컨테이너에서 직접 정적 콘텐츠로 제공됩니다.
+
+자세한 내용은 [Blazor 클라이언트 쪽 호스트 및 배포(독립 실행형 배포): Azure Storage](xref:host-and-deploy/blazor/client-side#azure-storage)를 참조하세요.
