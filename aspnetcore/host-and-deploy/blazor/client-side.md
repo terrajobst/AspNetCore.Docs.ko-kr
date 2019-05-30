@@ -5,14 +5,14 @@ description: ASP.NET Core, CDN(Content Delivery Network), 파일 서버 및 GitH
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/13/2019
+ms.date: 05/21/2019
 uid: host-and-deploy/blazor/client-side
-ms.openlocfilehash: ea8ece266809913e32ac212bc55cb3c2499c234f
-ms.sourcegitcommit: ccbb84ae307a5bc527441d3d509c20b5c1edde05
+ms.openlocfilehash: b572067e688d7e7f7c654a7a25703009c1a7e855
+ms.sourcegitcommit: e1623d8279b27ff83d8ad67a1e7ef439259decdf
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/19/2019
-ms.locfileid: "65874967"
+ms.lasthandoff: 05/25/2019
+ms.locfileid: "66223196"
 ---
 # <a name="host-and-deploy-blazor-client-side"></a>Blazor 클라이언트 쪽 호스트 및 배포
 
@@ -233,6 +233,17 @@ URL을 다시 생성하려면 [URL 다시 생성 모듈](https://www.iis.net/dow
 500 - 내부 서버 오류가 수신되고 웹 사이트의 구성에 액세스를 시도할 때 IIS 관리자가 오류를 표시하면 URL 다시 생성 모듈이 설치되었는지 확인합니다. 모듈이 설치되지 않은 경우 IIS가 *web.config* 파일을 구문 분석할 수 없습니다. 그러면 IIS 관리자가 웹 사이트의 구성을 로드할 수 없으며 웹 사이트가 Blazor의 정적 파일을 제공할 수 없습니다.
 
 IIS 배포 문제 해결에 대한 자세한 내용은 <xref:host-and-deploy/iis/troubleshoot>를 참조하세요.
+
+### <a name="azure-storage"></a>Azure Storage
+
+Azure Storage 정적 파일 호스팅으로 서버리스 Blazor 앱 호스팅이 가능합니다. 사용자 지정 도메인 이름, Azure 콘텐츠 배달 네트워크(CDN) 및 HTTPS가 지원됩니다.
+
+스토리지 계정에서 정적 웹 사이트 호스팅을 위해 BLOB 서비스를 사용할 수 있는 경우:
+
+* **인덱스 문서 이름**을 `index.html`로 설정합니다.
+* **오류 문서 경로**를 `index.html`로 설정합니다. Razor 구성 요소 및 기타 파일이 아닌 엔드포인트는 BLOB 서비스에 의해 저장된 정적 콘텐츠의 실제 경로에 존재하지 않습니다. 이러한 리소스 중 하나를 Blazor 라우터가 처리해야 한다는 요청이 수신되면 BLOB 서비스에 의해 생성된 *404 - 찾을 수 없음* 오류가 요청을 **오류 문서 경로**로 라우팅합니다. *index.html* BLOB이 반환되고 Blazor 라우터가 로드되어 경로를 처리합니다.
+
+자세한 내용은 [Azure Storage에서 정적 웹 사이트 호스팅](/azure/storage/blobs/storage-blob-static-website)을 참조하세요.
 
 ### <a name="nginx"></a>Nginx
 

@@ -92,10 +92,6 @@
     - name: 원격 프로시저 호출 앱
       items:
         - name: ASP.NET Core에서 gRPC 서비스 시작
-          uid: tutorials/grpc/index
-        - name: ASP.NET Core gRPC Greeter 서비스 만들기
-          uid: tutorials/grpc/grpc-start
-        - name: .NET Core gRPC 클라이언트 만들기
           uid: tutorials/grpc/grpc-client
     - name: 데이터 액세스
       items:
@@ -321,7 +317,7 @@
               uid: spa/react
             - name: Redux를 사용한 React
               uid: spa/react-with-redux
-            - name: JavaScriptServices
+            - name: JavaScript 서비스
               uid: client-side/spa-services
         - name: LibMan
           items:
@@ -534,14 +530,8 @@
       uid: grpc/migration
     - name: gRPC 서비스와 HTTP API 비교
       uid: grpc/comparison
-    - name: 자습서
-      items:
-        - name: ASP.NET Core에서 gRPC 서비스 시작
-          uid: tutorials/grpc/index
-        - name: ASP.NET Core gRPC Greeter 서비스 만들기
-          uid: tutorials/grpc/grpc-start
-        - name: .NET Core gRPC 클라이언트 만들기
-          uid: tutorials/grpc/grpc-client
+    - name: gRPC 클라이언트 및 서버 만들기
+      uid: tutorials/grpc/grpc-client
 - name: '테스트, 디버깅 및 문제 해결'
   items:
     - name: 단위 테스트

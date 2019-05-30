@@ -5,14 +5,14 @@ description: ASP.NET Core에서 Websocket을 시작하는 방법을 알아봅니
 monikerRange: '>= aspnetcore-1.1'
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 01/17/2019
+ms.date: 05/10/2019
 uid: fundamentals/websockets
-ms.openlocfilehash: 1b62dc91453437518e4b8f6f8dd0915977130766
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: bba9cf051deaf57efdd82ca2fb1318fce79bd6cc
+ms.sourcegitcommit: e1623d8279b27ff83d8ad67a1e7ef439259decdf
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64888248"
+ms.lasthandoff: 05/25/2019
+ms.locfileid: "66223216"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>ASP.NET Core에서 WebSocket 지원
 
@@ -122,6 +122,15 @@ WebSockets를 사용하여 소켓 연결로 직접 작업하세요. 예를 들�
 ::: moniker-end
 
 WebSocket 요청은 모든 URL을 통해서 전달될 수 있지만, 이 예제 코드에서는 `/ws` 에 대한 요청만 수락합니다.
+
+WebSocket을 사용하는 경우 연결 기간 동안 미들웨어 파이프라인이 계속 실행되도록 **해야 합니다**. 미들웨어 파이프라인 종료 후 WebSocket 메시지를 보내거나 받으려고 하면 다음과 같은 예외가 발생할 수 있습니다.
+
+```
+System.Net.WebSockets.WebSocketException (0x80004005): The remote party closed the WebSocket connection without completing the close handshake. ---> System.ObjectDisposedException: Cannot write to the response body, the response has completed.
+Object name: 'HttpResponseStream'.
+```
+
+백그라운드 서비스를 사용하여 WebSocket에 데이터를 쓰는 경우 미들웨어 파이프라인이 계속 실행되도록 해야 합니다. <xref:System.Threading.Tasks.TaskCompletionSource%601>을 사용하여 이 작업을 수행합니다. `TaskCompletionSource`를 백그라운드 서비스에 전달하고 WebSocket 사용을 완료하면 <xref:System.Threading.Tasks.TaskCompletionSource%601.TrySetResult%2A>를 호출하도록 합니다. 그런 다음 요청하는 동안 <xref:System.Threading.Tasks.TaskCompletionSource%601.Task>를 `await`합니다.
 
 ### <a name="send-and-receive-messages"></a>메시지 보내기 및 받기
 

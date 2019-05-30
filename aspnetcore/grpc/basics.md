@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 03/31/2019
 uid: grpc/basics
-ms.openlocfilehash: 7c5ecf21124414b21f5c36b76e90bde67ac1f958
-ms.sourcegitcommit: 57a974556acd09363a58f38c26f74dc21e0d4339
+ms.openlocfilehash: 5a88bd0e9f789058b3606691c5ebd9a74325ac9b
+ms.sourcegitcommit: 4d05e30567279072f1b070618afe58ae1bcefd5a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59672673"
+ms.lasthandoff: 05/29/2019
+ms.locfileid: "66376339"
 ---
 # <a name="grpc-services-with-c"></a>C 사용 하 여 gRPC 서비스\#
 
@@ -32,13 +32,13 @@ Protobuf 파일의 구문에 자세한 내용은 참조는 [공식 설명서 (pr
 * 합니다 `Greeter` 서비스 정의 `SayHello` 호출 합니다.
 * `SayHello` 전송 된 `HelloRequest` 받고 메시지는 `HelloResponse` 메시지:
 
-[!code-proto[](~/tutorials/grpc/grpc-start/samples/GrpcGreeter/Protos/greet.proto)]
+[!code-proto[](~/tutorials//grpc/grpc-start/sample/GrpcGreeter/Protos/greet.proto)]
 
 ## <a name="add-a-proto-file-to-a-c-app"></a>C.proto 파일로 추가할\# 앱
 
 합니다 *.proto* 파일을 프로젝트에 추가 하 여 포함 된 `<Protobuf>` 항목 그룹:
 
-[!code-xml[](~/tutorials/grpc/grpc-start/samples/GrpcGreeter/GrpcGreeter.csproj?highlight=2&range=7-11)]
+[!code-xml[](~/tutorials//grpc/grpc-start/sample/GrpcGreeter/GrpcGreeter.csproj?highlight=2&range=7-11)]
 
 ## <a name="c-tooling-support-for-proto-files"></a>C#도구.proto 파일에 대 한 지원
 
@@ -50,9 +50,9 @@ Protobuf 파일의 구문에 자세한 내용은 참조는 [공식 설명서 (pr
 
 서버 및 클라이언트 프로젝트에서이 패키지가 필요 합니다. `Grpc.Tools` Visual Studio에서 패키지 관리자를 사용 하거나 추가 하 여 추가할 수는 `<PackageReference>` 프로젝트 파일에:
 
-[!code-xml[](~/tutorials/grpc/grpc-start/samples/GrpcGreeter/GrpcGreeter.csproj?highlight=1&range=17)]
+[!code-xml[](~/tutorials//grpc/grpc-start/sample/GrpcGreeter/GrpcGreeter.csproj?highlight=1&range=17)]
 
-도구 패키지의 종속성으로 표시 되어 있으므로 들이 런타임 시 필요 하지 않습니다 `PrivateAssets="All"`합니다.
+도구 패키지는 런타임에 필요하지 않으므로 종속성은 `PrivateAssets="All"`로 표시됩니다.
 
 ## <a name="generated-c-assets"></a>생성 된 C# 자산
 
@@ -60,15 +60,15 @@ Protobuf 파일의 구문에 자세한 내용은 참조는 [공식 설명서 (pr
 
 서버 쪽 자산에 대 한 추상 서비스 기본 형식에는 생성 됩니다. 기본 형식 gRPC 호출에 포함 된 모든 정의 포함 합니다 *.proto* 파일입니다. 이 기본 형식에서 파생 되며 gRPC 호출에 대 한 논리를 구현 하는 구체적인 서비스 구현을 만듭니다. 에 대 한 합니다 `greet.proto`,이 예제에서는 앞에서 설명한 추상 `GreeterBase` 가상 포함 하는 형식 `SayHello` 메서드가 생성 됩니다. 구체적인 구현을 `GreeterService` 메서드를 재정의 하 고 gRPC 호출을 처리 하는 논리를 구현 합니다.
 
-[!code-csharp[](~/tutorials/grpc/grpc-start/samples/GrpcGreeter/Services/GreeterService.cs?name=snippet)]
+[!code-csharp[](~/tutorials//grpc/grpc-start/sample/GrpcGreeter/Services/GreeterService.cs?name=snippet)]
 
 클라이언트 쪽 자산에 대 한 구체적인 클라이언트 형식을 생성 됩니다. 는 gRPC를 호출 합니다 *.proto* 파일 메서드를 호출할 수 있는 구체적인 형식으로 변환 됩니다. 에 대 한는 `greet.proto`, 예제에서는 앞에서 설명한 구체적인 `GreeterClient` 형식이 생성 됩니다. 호출 `GreeterClient.SayHello` 서버로 gRPC 호출을 시작 합니다.
 
-[!code-csharp[](~/tutorials/grpc/grpc-start/samples/GrpcGreeterClient/Program.cs?highlight=5-8&name=snippet)]
+[!code-csharp[](~/tutorials//grpc/grpc-start/sample/GrpcGreeterClient/Program.cs?highlight=5-8&name=snippet)]
 
 기본적으로 서버 및 클라이언트 자산 각각에 대해 생성 됩니다 *.proto* 에 포함 된 파일을 `<Protobuf>` 항목 그룹입니다. 서버 자산에만 서버 프로젝트에서 생성 되는 `GrpcServices` 특성이로 설정 된 `Server`합니다.
 
-[!code-xml[](~/tutorials/grpc/grpc-start/samples/GrpcGreeter/GrpcGreeter.csproj?highlight=2&range=7-11)]
+[!code-xml[](~/tutorials//grpc/grpc-start/sample/GrpcGreeter/GrpcGreeter.csproj?highlight=2&range=7-11)]
 
 특성이로 설정 되는 마찬가지로 `Client` 클라이언트 프로젝트에서.
 

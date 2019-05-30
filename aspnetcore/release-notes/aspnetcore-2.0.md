@@ -3,14 +3,15 @@ title: ASP.NET Core 2.0의 새로운 기능
 author: rick-anderson
 description: ASP.NET Core 2.0의 새로운 기능에 대해 알아봅니다.
 ms.author: riande
-ms.date: 07/10/2017
+ms.custom: mvc
+ms.date: 05/28/2019
 uid: aspnetcore-2.0
-ms.openlocfilehash: 07e490fd844f0f9044afce37651ef680ed0c894d
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 5cf7b9aa7ccf86f1a89e6145cfc185c5ef803e66
+ms.sourcegitcommit: 4d05e30567279072f1b070618afe58ae1bcefd5a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64883098"
+ms.lasthandoff: 05/29/2019
+ms.locfileid: "66376409"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>ASP.NET Core 2.0의 새로운 기능
 
@@ -75,7 +76,7 @@ ASP.NET Core 2.0에서는 ID를 사용하여 보안 Web API를 더 쉽게 빌드
 
 ## <a name="spa-templates"></a>SPA 템플릿
 
-Angular, Aurelia, Knockout.js, React.js 및 React.js에 대한 SPA(단일 페이지 애플리케이션) 프로젝트 템플릿을 사용할 수 있습니다. Angular 템플릿은 Angular 4로 업데이트되었습니다. Angular 및 React 템플릿은 기본적으로 제공됩니다. 다른 템플릿을 가져오는 방법에 대한 자세한 내용은 [새 SPA 프로젝트 만들기](xref:client-side/spa-services#creating-a-new-project)를 참조하세요. ASP.NET Core에서 SPA를 빌드하는 방법에 대한 자세한 내용은 [단일 페이지 애플리케이션 만들기에 JavaScriptServices 사용](xref:client-side/spa-services)을 참조하세요.
+Angular, Aurelia, Knockout.js, React.js 및 React.js에 대한 SPA(단일 페이지 애플리케이션) 프로젝트 템플릿을 사용할 수 있습니다. Angular 템플릿은 Angular 4로 업데이트되었습니다. Angular 및 React 템플릿은 기본적으로 제공됩니다. 다른 템플릿을 가져오는 방법에 대한 자세한 내용은 [새 SPA 프로젝트 만들기](xref:client-side/spa-services#create-a-new-project)를 참조하세요. ASP.NET Core에서 SPA를 빌드하는 방법에 대한 정보는 <xref:client-side/spa-services>를 참조하세요.
 
 ## <a name="kestrel-improvements"></a>Kestrel 기능 향상
 
