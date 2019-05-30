@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/21/2019
 uid: host-and-deploy/blazor/client-side
-ms.openlocfilehash: b572067e688d7e7f7c654a7a25703009c1a7e855
-ms.sourcegitcommit: e1623d8279b27ff83d8ad67a1e7ef439259decdf
+ms.openlocfilehash: b50516b4dce28a6b105b2ab8b9386060d5392983
+ms.sourcegitcommit: 4d05e30567279072f1b070618afe58ae1bcefd5a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/25/2019
-ms.locfileid: "66223196"
+ms.lasthandoff: 05/29/2019
+ms.locfileid: "66376397"
 ---
 # <a name="host-and-deploy-blazor-client-side"></a>Blazor 클라이언트 쪽 호스트 및 배포
 
@@ -126,7 +126,7 @@ Blazor는 각 빌드에 대해 IL(중간 언어) 연결을 수행하여 출력 �
 
 ## <a name="app-base-path"></a>앱 기본 경로
 
-앱 기본 경로는 서버상의 가상 앱 루트 경로입니다. 예를 들어 Contoso 서버의 가상 폴더 `/CoolApp/`에 상주하는 앱은 `https://www.contoso.com/CoolApp`에 도달하며 `/CoolApp/`의 가상 기본 경로를 포함합니다. 앱 기본 경로를 가상 경로(`<base href="/CoolApp/">`)로 설정하면 앱은 서버상에 가상으로 상주하는 위치를 인식하게 됩니다. 해당 앱은 앱 기본 경로를 사용하여 루트 디렉터리에 없는 구성 요소에서 앱 루트에 대한 상대 URL을 구성합니다. 이렇게 하면 디렉터리 구조의 다른 수준에 존재하는 구성 요소가 앱 전체의 위치에서 다른 리소스에 대한 링크를 만들 수 있습니다. 또한 링크의 `href` 대상이 앱 기본 경로 내에 있는 경우 &mdash; Blazor 라우터가 내부 탐색을 처리하는 경우 하이퍼링크 클릭을 가로채기 위해서도 앱 기본 경로를 사용합니다.
+앱 기본 경로는 서버상의 가상 앱 루트 경로입니다.  예를 들어 Contoso 서버의 가상 폴더 `/CoolApp/`에 상주하는 앱은 `https://www.contoso.com/CoolApp`에 도달하며 `/CoolApp/`의 가상 기본 경로를 포함합니다. 앱 기본 경로를 가상 경로(`<base href="/CoolApp/">`)로 설정하면 앱은 서버상에 가상으로 상주하는 위치를 인식하게 됩니다. 해당 앱은 앱 기본 경로를 사용하여 루트 디렉터리에 없는 구성 요소에서 앱 루트에 대한 상대 URL을 구성합니다. 이렇게 하면 디렉터리 구조의 다른 수준에 존재하는 구성 요소가 앱 전체의 위치에서 다른 리소스에 대한 링크를 만들 수 있습니다. 또한 링크의 `href` 대상이 앱 기본 경로 내에 있는 경우 &mdash; Blazor 라우터가 내부 탐색을 처리하는 경우 하이퍼링크 클릭을 가로채기 위해서도 앱 기본 경로를 사용합니다.
 
 많은 호스팅 시나리오에서 앱에 대한 서버의 가상 경로는 앱의 루트입니다. 이러한 경우 앱 기본 경로는 앱에 대한 기본 구성인 슬래시(`<base href="/" />`)입니다. GitHub 페이지 및 IIS 가상 디렉터리 또는 하위 애플리케이션 등의 다른 호스팅 시나리오에서는 앱 기본 경로를 앱에 대한 서버의 가상 경로로 설정해야 합니다. 앱의 기본 경로를 설정하려면 *wwwroot/index.html* 파일의 `<head>` 태그 요소 내에 `<base>` 태그를 업데이트합니다. `href` 속성 값을 `/virtual-path/`(뒤에 슬래시가 필요함)로 설정하며, 여기서 `/virtual-path/`는 앱에 대한 서버의 전체 가상 앱 루트 경로입니다. 앞의 예에서 가상 경로는 `/CoolApp/`: `<base href="/CoolApp/">`로 설정됩니다.
 
@@ -189,7 +189,9 @@ Azure App Service 배포에 대한 자세한 내용은 <xref:tutorials/publish-t
 
 ## <a name="standalone-deployment"></a>독립 실행형 배포
 
-*독립 실행형 배포*는 클라이언트 쪽 Blazor 앱을 클라이언트가 직접 요청하는 정적 파일 세트로 제공합니다. Blazor 앱을 제공하기 위해 웹 서버를 사용하지 않습니다.
+*독립 실행형 배포*는 클라이언트 쪽 Blazor 앱을 클라이언트가 직접 요청하는 정적 파일 세트로 제공합니다. 모든 정적 파일 서버는 Blazor 앱을 사용할 수 있습니다.
+
+독립 실행형 배포 자산은 *bin/Release/{TARGET FRAMEWORK}/publish/{ASSEMBLY NAME}/dist* 폴더에 게시됩니다.
 
 ### <a name="iis"></a>IIS
 
@@ -211,8 +213,8 @@ Blazor 프로젝트가 게시되면 다음 IIS 구성을 사용하여 *web.confi
   * `application/octet-stream`
   * `application/wasm`
 * URL 재작성 모듈 규칙을 설정합니다.
-  * 앱의 정적 자산이 상주하는 하위 디렉터리(*{ASSEMBLY NAME}/dist/{PATH REQUESTED}*)를 제공합니다.
-  * 파일이 아닌 자산에 대한 요청이 정적 자산 폴더에 있는 앱의 기본 문서(*{ASSEMBLY NAME}/dist/index.html*)로 리디렉션되도록 SPA 폴백 라우팅을 만듭니다.
+  * 앱의 정적 자산이 상주하는 하위 디렉터리( *{ASSEMBLY NAME}/dist/{PATH REQUESTED}* )를 제공합니다.
+  * 파일이 아닌 자산에 대한 요청이 정적 자산 폴더에 있는 앱의 기본 문서( *{ASSEMBLY NAME}/dist/index.html*)로 리디렉션되도록 SPA 폴백 라우팅을 만듭니다.
 
 #### <a name="install-the-url-rewrite-module"></a>URL 재작성 모듈 설치
 
@@ -230,7 +232,7 @@ URL을 다시 생성하려면 [URL 다시 생성 모듈](https://www.iis.net/dow
 
 #### <a name="troubleshooting"></a>문제 해결
 
-500 - 내부 서버 오류가 수신되고 웹 사이트의 구성에 액세스를 시도할 때 IIS 관리자가 오류를 표시하면 URL 다시 생성 모듈이 설치되었는지 확인합니다. 모듈이 설치되지 않은 경우 IIS가 *web.config* 파일을 구문 분석할 수 없습니다. 그러면 IIS 관리자가 웹 사이트의 구성을 로드할 수 없으며 웹 사이트가 Blazor의 정적 파일을 제공할 수 없습니다.
+500 - 내부 서버 오류가 수신되고 웹 사이트의 구성에 액세스를 시도할 때 IIS 관리자가 오류를 표시하면 URL 다시 생성 모듈이 설치되었는지 확인합니다.  모듈이 설치되지 않은 경우 IIS가 *web.config* 파일을 구문 분석할 수 없습니다. 그러면 IIS 관리자가 웹 사이트의 구성을 로드할 수 없으며 웹 사이트가 Blazor의 정적 파일을 제공할 수 없습니다.
 
 IIS 배포 문제 해결에 대한 자세한 내용은 <xref:host-and-deploy/iis/troubleshoot>를 참조하세요.
 

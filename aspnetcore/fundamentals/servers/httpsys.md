@@ -5,14 +5,14 @@ description: Windows의 ASP.NET Core에 대한 웹 서버인 HTTP.sys에 대해 
 monikerRange: '>= aspnetcore-2.0'
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 02/21/2019
+ms.date: 05/27/2019
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: 7ba27b404cd10752ff9e304cd0a272eff7fa627a
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: d91a0f7b83fb073147978319edfbed0bda9a1c44
+ms.sourcegitcommit: 06c4f2910dd54ded25e1b8750e09c66578748bc9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087052"
+ms.lasthandoff: 05/30/2019
+ms.locfileid: "66395951"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>ASP.NET Core에서 HTTP.sys 웹 서버 구현
 
@@ -184,7 +184,7 @@ HTTP.sys는 Kerberos 인증 프로토콜을 사용하여 커널 모드 인증에
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>` &ndash; 정규화된 URL(Uniform Resource Locator)입니다. 와일드카드 바인딩을 사용하지 마세요. 유효한 호스트 이름 또는 로컬 IP 주소를 사용합니다. ‘URL에는 후행 슬래시가 포함되어야 합니다.’
+   * `<URL>` &ndash; 정규화된 URL(Uniform Resource Locator)입니다. 와일드카드 바인딩을 사용하지 마세요. 유효한 호스트 이름 또는 로컬 IP 주소를 사용합니다. ‘URL에는 후행 슬래시가 포함되어야 합니다.’ 
    * `<USER>` &ndash; 사용자 또는 사용자-그룹 이름을 지정합니다.
 
    다음 예제에서 서버의 로컬 IP 주소는 `10.0.0.4`입니다.
@@ -271,7 +271,7 @@ HTTP.sys는 Kerberos 인증 프로토콜을 사용하여 커널 모드 인증에
 
 ## <a name="additional-resources"></a>추가 자료
 
-* [HTTP.sys에서 Windows 인증 사용](xref:security/authentication/windowsauth#enable-windows-authentication-with-httpsys)
+* [HTTP.sys에서 Windows 인증 사용](xref:security/authentication/windowsauth#httpsys)
 * [HTTP Server API](https://msdn.microsoft.com/library/windows/desktop/aa364510.aspx)(HTTP 서버 API)
 * [aspnet/HttpSysServer GitHub 리포지토리(소스 코드)](https://github.com/aspnet/HttpSysServer/)
 * [호스트](xref:fundamentals/index#host)

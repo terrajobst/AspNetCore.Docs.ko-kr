@@ -7,12 +7,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 05/17/2019
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: 6f9eee1ed46f02232bed977f8f60a3d77db48784
-ms.sourcegitcommit: e1623d8279b27ff83d8ad67a1e7ef439259decdf
+ms.openlocfilehash: 37274873f2bd4127f8743399d95d3cf7fef435c5
+ms.sourcegitcommit: b8ed594ab9f47fa32510574f3e1b210cff000967
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/25/2019
-ms.locfileid: "66223149"
+ms.lasthandoff: 05/28/2019
+ms.locfileid: "66251329"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>ASP.NET Core에서 Kestrel 웹 서버 구현
 
@@ -160,6 +160,12 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 Kestrel 웹 서버에는 인터넷 연결 배포에 특히 유용한 제약 조건 구성 옵션이 있습니다.
 
 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> 클래스의 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Limits> 속성에서 제약 조건을 설정합니다. `Limits` 속성은 <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerLimits> 클래스의 인스턴스를 보유합니다.
+
+다음 예제에서는 <xref:Microsoft.AspNetCore.Server.Kestrel.Core> 네임스페이스를 사용합니다.
+
+```csharp
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+```
 
 ### <a name="keep-alive-timeout"></a>Keep-alive 시간 제한
 
@@ -650,7 +656,7 @@ Kestrel은 `http://localhost:5000` 및 `https://localhost:5001`에서 수신 대
       "Url": "https://localhost:5002",
       "Certificate": {
         "Subject": "<subject; required>",
-        "Store": "<certificate store; defaults to My>",
+        "Store": "<certificate store; required>",
         "Location": "<location; defaults to CurrentUser>",
         "AllowInvalid": "<true or false; defaults to false>"
       }
@@ -683,7 +689,7 @@ Kestrel은 `http://localhost:5000` 및 `https://localhost:5001`에서 수신 대
 ```json
 "Default": {
   "Subject": "<subject; required>",
-  "Store": "<cert store; defaults to My>",
+  "Store": "<cert store; required>",
   "Location": "<location; defaults to CurrentUser>",
   "AllowInvalid": "<true or false; defaults to false>"
 }
@@ -1041,7 +1047,7 @@ private class TlsFilterAdapter : IConnectionAdapter
 }
 ```
 
-구성에서 프로토콜 설정
+구성에서 프로토콜 설정 
 
 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>는 기본적으로 `serverOptions.Configure(context.Configuration.GetSection("Kestrel"))`을 호출하여 Kestrel 구성을 로드합니다.
 
