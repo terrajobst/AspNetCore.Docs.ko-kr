@@ -92,7 +92,7 @@
     - name: 원격 프로시저 호출 앱
       items:
         - name: ASP.NET Core에서 gRPC 서비스 시작
-          uid: tutorials/grpc/grpc-client
+          uid: tutorials/grpc/grpc-start
     - name: 데이터 액세스
       items:
         - name: Razor Pages를 사용한 EF Core
@@ -530,8 +530,6 @@
       uid: grpc/migration
     - name: gRPC 서비스와 HTTP API 비교
       uid: grpc/comparison
-    - name: gRPC 클라이언트 및 서버 만들기
-      uid: tutorials/grpc/grpc-client
 - name: '테스트, 디버깅 및 문제 해결'
   items:
     - name: 단위 테스트
