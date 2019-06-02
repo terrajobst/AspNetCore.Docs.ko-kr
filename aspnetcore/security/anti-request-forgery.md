@@ -6,18 +6,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/11/2018
 uid: security/anti-request-forgery
-ms.openlocfilehash: 4498bd88e7188ea6c0063aeec054bc20e13ed5f1
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: a32e0e2dbd7fab95562a562cb88767d4c1e8049d
+ms.sourcegitcommit: c5339594101d30b189f61761275b7d310e80d18a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65086437"
+ms.lasthandoff: 06/02/2019
+ms.locfileid: "66458492"
 ---
 # <a name="prevent-cross-site-request-forgery-xsrfcsrf-attacks-in-aspnet-core"></a>ASP.NET Core에서 방지 교차 사이트 요청 위조 (XSRF/CSRF) 공격
 
 하 여 [Steve Smith](https://ardalis.com/)하십시오 [Fiyaz Hasan](https://twitter.com/FiyazBinHasan), 및 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-교차 사이트 요청 위조 (XSRF 또는 CSRF, 발음 라고도 *참조 surf*)은 악의적인 웹 앱을 신뢰 하는 웹 앱을 클라이언트 브라우저 간의 상호 작용에 영향을 줄 가능해 집니다 웹에 호스팅된 앱에 대 한 공격 브라우저. 웹 브라우저는 웹 사이트에 몇 가지 유형의 인증 토큰이 모든 요청에 자동으로 보내기 때문에 이러한 공격 있을 수 있습니다. 이러한 형태의 악용이 라고도 *원클릭 공격* 또는 *세션 있는* 공격을 활용 하기 때문에 사용자의 이전 세션을 인증 합니다.
+교차 사이트 요청 위조 (XSRF 또는 CSRF 라고도 함)는 악성 웹 앱을 클라이언트 브라우저 및 해당 브라우저에서 신뢰 하는 웹 앱 간의 상호 작용에 영향을 줄 가능해 집니다 웹에 호스팅된 앱에 대 한 공격입니다. 웹 브라우저는 웹 사이트에 몇 가지 유형의 인증 토큰이 모든 요청에 자동으로 보내기 때문에 이러한 공격 있을 수 있습니다. 이러한 형태의 악용이 라고도 *원클릭 공격* 또는 *세션 있는* 공격을 활용 하기 때문에 사용자의 이전 세션을 인증 합니다.
 
 CSRF 공격의 예:
 
