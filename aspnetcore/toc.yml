@@ -91,7 +91,7 @@
           uid: tutorials/signalr-typescript-webpack
     - name: 원격 프로시저 호출 앱
       items:
-        - name: ASP.NET Core에서 gRPC 서비스 시작
+        - name: gRPC 서비스 시작
           uid: tutorials/grpc/grpc-start
     - name: 데이터 액세스
       items:
