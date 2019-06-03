@@ -4,14 +4,14 @@ author: ardalis
 description: ASP.NET Core Web API에서 응답 데이터의 서식을 지정하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: H1Hack27Feb2017
-ms.date: 05/21/2019
+ms.date: 05/29/2019
 uid: web-api/advanced/formatting
-ms.openlocfilehash: bd86015773068b6f75f64a0599d710281f7d4d60
-ms.sourcegitcommit: e67356f5e643a5d43f6d567c5c998ce6002bdeb4
+ms.openlocfilehash: 7628565d8646c0a057e28aa54dc9ce9198750c15
+ms.sourcegitcommit: 9ae1fd11f39b0a72b2ae42f0b450345e6e306bc0
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/22/2019
-ms.locfileid: "66004960"
+ms.lasthandoff: 05/30/2019
+ms.locfileid: "66415682"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>ASP.NET Core Web API에서 응답 데이터 서식 지정
 
@@ -133,13 +133,17 @@ services.AddMvc()
 
 ### <a name="add-xml-format-support"></a>XML 형식 지원 추가
 
-XML 서식 지정 지원을 추가하려면 [Microsoft.AspNetCore.Mvc.Formatters.Xml](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Formatters.Xml/) NuGet 패키지를 설치합니다.
+::: moniker range="<= aspnetcore-2.2"
 
-`System.Xml.Serialization.XmlSerializer`를 사용하여 구현된 XML 포맷터는 `Startup.ConfigureServices`에서 다음과 같이 구성할 수 있습니다.
+ASP.NET Core 2.2 이상에서 XML 서식 지정 지원을 추가하려면 [Microsoft.AspNetCore.Mvc.Formatters.Xml](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Formatters.Xml/) NuGet 패키지를 설치합니다.
+
+::: moniker-end
+
+`System.Xml.Serialization.XmlSerializer`를 사용하여 구현된 XML 포맷터는 `Startup.ConfigureServices`에서 <xref:Microsoft.Extensions.DependencyInjection.MvcXmlMvcBuilderExtensions.AddXmlSerializerFormatters*>를 호출하여 구성할 수 있습니다.
 
 [!code-csharp[](./formatting/sample/Startup.cs?name=snippet1&highlight=2)]
 
-또는 `System.Runtime.Serialization.DataContractSerializer`를 사용하여 구현된 XML 포맷터는 `Startup.ConfigureServices`에서 다음과 같이 구성할 수 있습니다.
+또는 `System.Runtime.Serialization.DataContractSerializer`를 사용하여 구현된 XML 포맷터는 `Startup.ConfigureServices`에서 <xref:Microsoft.Extensions.DependencyInjection.MvcXmlMvcBuilderExtensions.AddXmlDataContractSerializerFormatters*>를 호출하여 구성할 수 있습니다.
 
 ```csharp
 services.AddMvc()
