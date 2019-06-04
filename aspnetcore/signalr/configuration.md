@@ -5,14 +5,14 @@ description: ASP.NET Core SignalR 앱을 구성하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 04/15/2019
+ms.date: 06/03/2019
 uid: signalr/configuration
-ms.openlocfilehash: 703357fd52805e01515e5bac3b1a364ce7fe00f0
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 6c7bd602e621917c491bfb1e26ff0fcfc3a565b0
+ms.sourcegitcommit: a04eb20e81243930ec829a9db5dd5de49f669450
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087645"
+ms.lasthandoff: 06/03/2019
+ms.locfileid: "66470360"
 ---
 # <a name="aspnet-core-signalr-configuration"></a>ASP.NET Core SignalR 구성
 
@@ -61,6 +61,8 @@ MessagePack 직렬화는 [AddMessagePackProtocol](/dotnet/api/microsoft.extensio
 
 다음 표는 SignalR 허브를 구성하기 위한 옵션을 설명합니다.
 
+::: moniker range=">= aspnetcore-3.0"
+
 | 옵션 | 기본값 | 설명 |
 | ------ | ------------- | ----------- |
 | `ClientTimeoutInterval` | 30초 | 서버는 클라이언트를 고려 하는 경우이 간격 등 연결 유지 메시지를 수신 하지 않은 연결 끊김. 실제로이 구현 하는 방법으로 인해 연결이 끊어진 표시할 클라이언트에 대 한이 시간 제한 간격 보다 오래 걸릴 수 있습니다. 권장된 값은 double을 `KeepAliveInterval` 값입니다.|
@@ -68,6 +70,21 @@ MessagePack 직렬화는 [AddMessagePackProtocol](/dotnet/api/microsoft.extensio
 | `KeepAliveInterval` | 15초 | 서버가 이 간격 내에 메시지를 전송하지 않으면 자동으로 ping 메시지가 전송되어 연결이 열린 상태로 유지됩니다. `KeepAliveInterval`을 변경할 경우 클라이언트의 `ServerTimeout`/`serverTimeoutInMilliseconds` 설정도 변경하십시오. 권장되는 `ServerTimeout`/`serverTimeoutInMilliseconds` 값은 `KeepAliveInterval` 값의 두 배입니다.  |
 | `SupportedProtocols` | 설치된 모든 프로토콜 | 허브가 지원하는 프로토콜입니다. 기본적으로 서버에 등록된 모든 프로토콜이 허용되지만 이 목록에서 프로토콜을 제거하여 개별 허브에 대해 특정 프로토콜을 비활성화시킬 수 있습니다. |
 | `EnableDetailedErrors` | `false` | 이 값이 `true`면 Hub 메서드에서 예외가 발생할 경우 자세한 예외 메시지가 클라이언트로 반환됩니다. 예외 메시지에는 민감한 정보가 포함되어 있을 수 있으므로 기본값은 `false`입니다. |
+| `StreamBufferCapacity` | `10` | 클라이언트에 대 한 버퍼링 할 수 있는 항목의 최대 수에 스트림을 업로드 합니다. 이 한도 도달 하는 경우 호출을 처리 하는 서버 스트림 항목을 처리할 때까지 차단 됩니다.|
+
+::: moniker-end
+
+::: moniker range="<= aspnetcore-2.2"
+
+| 옵션 | 기본값 | 설명 |
+| ------ | ------------- | ----------- |
+| `ClientTimeoutInterval` | 30초 | 서버는 클라이언트를 고려 하는 경우이 간격 등 연결 유지 메시지를 수신 하지 않은 연결 끊김. 실제로이 구현 하는 방법으로 인해 연결이 끊어진 표시할 클라이언트에 대 한이 시간 제한 간격 보다 오래 걸릴 수 있습니다. 권장된 값은 double을 `KeepAliveInterval` 값입니다.|
+| `HandshakeTimeout` | 15초 | 클라이언트가 이 시간 제한 내에 초기 핸드셰이크 메시지를 전송하지 않으면 연결이 닫힙니다. 이 설정은 심각한 네트워크 지연으로 인해 핸드셰이크 시간 제한 오류가 발생하는 경우에만 수정해야 하는 고급 설정입니다. 핸드셰이크 프로세스에 대한 보다 자세한 내용은 [SignalR 허브 프로토콜 사양](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)을 참고하시기 바랍니다. |
+| `KeepAliveInterval` | 15초 | 서버가 이 간격 내에 메시지를 전송하지 않으면 자동으로 ping 메시지가 전송되어 연결이 열린 상태로 유지됩니다. `KeepAliveInterval`을 변경할 경우 클라이언트의 `ServerTimeout`/`serverTimeoutInMilliseconds` 설정도 변경하십시오. 권장되는 `ServerTimeout`/`serverTimeoutInMilliseconds` 값은 `KeepAliveInterval` 값의 두 배입니다.  |
+| `SupportedProtocols` | 설치된 모든 프로토콜 | 허브가 지원하는 프로토콜입니다. 기본적으로 서버에 등록된 모든 프로토콜이 허용되지만 이 목록에서 프로토콜을 제거하여 개별 허브에 대해 특정 프로토콜을 비활성화시킬 수 있습니다. |
+| `EnableDetailedErrors` | `false` | 이 값이 `true`면 Hub 메서드에서 예외가 발생할 경우 자세한 예외 메시지가 클라이언트로 반환됩니다. 예외 메시지에는 민감한 정보가 포함되어 있을 수 있으므로 기본값은 `false`입니다. |
+
+::: moniker-end
 
 `Startup.ConfigureServices`에서 `AddSignalR` 호출에 옵션 대리자를 제공하여 모든 허브에 대한 옵션을 구성할 수 있습니다.
 
