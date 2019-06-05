@@ -5,14 +5,14 @@ description: 통합 테스트를 사용하여 앱의 구성 요소가 데이터�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/25/2019
+ms.date: 06/05/2019
 uid: test/integration-tests
-ms.openlocfilehash: 46c3b227ca0b3def5ab7d527a2f6ef2497d55f83
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 3af2a1f7c6a65d7ff42597972ee151a50fc95fb6
+ms.sourcegitcommit: c716ea9155a6b404c1f3d3d34e2388454cd276d7
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64892070"
+ms.lasthandoff: 06/05/2019
+ms.locfileid: "66716371"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>ASP.NET Core에서 통합 테스트
 
@@ -84,7 +84,7 @@ ASP.NET Core에서 통합 테스트 하려면 다음 항목이 필요 합니다.
 
 `Microsoft.AspNetCore.Mvc.Testing` 패키지에는 다음 작업을 처리 합니다.
 
-* 종속성 파일을 복사 (*\*.deps*)에서 테스트 프로젝트의 SUT *bin* 폴더입니다.
+* 종속성 파일을 복사 ( *\*.deps*)에서 테스트 프로젝트의 SUT *bin* 디렉터리입니다.
 * 정적 파일 및 페이지/뷰 테스트를 실행 하는 경우 찾을 수 있도록 SUT의 프로젝트 루트 콘텐츠 루트를 설정 합니다.
 * 제공 된 [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) 클래스를 사용 하 여 SUT 부트스트래핑 간단 하 게 `TestServer`합니다.
 
@@ -127,6 +127,8 @@ ASP.NET Core에서 통합 테스트 하려면 다음 항목이 필요 합니다.
 [CreateClient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) 의 인스턴스를 만들고 `HttpClient` 자동 리디렉션을 따릅니다를 쿠키를 처리 합니다.
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/BasicTests.cs?name=snippet1)]
+
+기본적으로 필수적이 지 않은 쿠키 없는 유지를 요청 하는 경우는 [GDPR 승인 정책](xref:security/gdpr) 사용 가능 합니다. 필수적이 지 않은 쿠키 TempData 공급자에 의해 사용 되는 유지 하기 위해 테스트에서 필수로 표시 합니다. 전자 메일 메시지에 쿠키를 필수로 표시 지침을 참조 하세요 [Essential 쿠키](xref:security/gdpr#essential-cookies)합니다.
 
 ### <a name="test-a-secure-endpoint"></a>보안 끝점을 테스트 합니다.
 
@@ -270,7 +272,7 @@ _client = _factory.CreateClient(clientOptions);
 
 ## <a name="how-the-test-infrastructure-infers-the-app-content-root-path"></a>테스트 인프라에서 앱 콘텐츠 루트 경로 유추 하는 방법
 
-합니다 `WebApplicationFactory` 생성자에 대 한 검색 하 여 앱 콘텐츠 루트 경로 유추를 [WebApplicationFactoryContentRootAttribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) 같은 키를 사용 하 여 통합 테스트를 포함 하는 어셈블리에는 `TEntryPoint` 어셈블리`System.Reflection.Assembly.FullName`. 경우 올바른 키를 사용 하 여 특성을 찾을 수 없으면 `WebApplicationFactory` 대체 솔루션 파일을 검색 합니다 (*\*.sln*) 추가 하 고는 `TEntryPoint` 솔루션 디렉터리에 어셈블리 이름입니다. 응용 프로그램 루트 디렉터리 (콘텐츠 루트 경로) 뷰 및 콘텐츠 파일을 검색할 사용 됩니다.
+합니다 `WebApplicationFactory` 생성자에 대 한 검색 하 여 앱 콘텐츠 루트 경로 유추를 [WebApplicationFactoryContentRootAttribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) 같은 키를 사용 하 여 통합 테스트를 포함 하는 어셈블리에는 `TEntryPoint` 어셈블리`System.Reflection.Assembly.FullName`. 경우 올바른 키를 사용 하 여 특성을 찾을 수 없으면 `WebApplicationFactory` 대체 솔루션 파일을 검색 합니다 ( *\*.sln*) 추가 하 고는 `TEntryPoint` 솔루션 디렉터리에 어셈블리 이름입니다. 응용 프로그램 루트 디렉터리 (콘텐츠 루트 경로) 뷰 및 콘텐츠 파일을 검색할 사용 됩니다.
 
 대부분의 경우에서 필요는 없습니다 앱 콘텐츠 루트를 명시적으로 설정 검색 논리는 일반적으로 런타임 시 올바른 콘텐츠 루트를 찾으면 됩니다. 콘텐츠 루트는 없는 특별 한 시나리오에서 기본 제공 검색 알고리즘을 명시적으로 또는 사용자 지정 논리를 사용 하 여 루트를 지정할 수 있습니다 콘텐츠 앱을 사용 합니다. 이러한 시나리오에서 앱 콘텐츠 루트를 설정 하려면 호출을 `UseSolutionRelativeContentRoot` 에서 확장 메서드는 [Microsoft.AspNetCore.TestHost](https://www.nuget.org/packages/Microsoft.AspNetCore.TestHost) 패키지 합니다. 솔루션의 상대 경로 및 선택적 솔루션 파일 이름 또는 와일드 카드 사용 패턴을 제공 (기본값 = `*.sln`).
 
@@ -311,7 +313,7 @@ _client = _factory.CreateClient(clientOptions);
 
 ## <a name="disable-shadow-copying"></a>섀도 복사를 사용 하지 않도록 설정
 
-출력 폴더와 다른 폴더에서 실행할 테스트를 사용 하면 섀도 복사 합니다. 제대로 작동 하려면 테스트에 대 한 섀도 복사를 비활성화 해야 합니다. [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) xUnit을 사용 하 고 포함 하 여 xunit 섀도 복사를 사용 하지 않도록 설정 된 *xunit.runner.json* 올바른 구성 설정 사용 하 여 파일. 자세한 내용은 [JSON을 사용 하 여 xUnit 구성](https://xunit.github.io/docs/configuring-with-json.html)합니다.
+출력 디렉터리 보다 다른 디렉터리에서 실행할 테스트를 사용 하면 섀도 복사 합니다. 제대로 작동 하려면 테스트에 대 한 섀도 복사를 비활성화 해야 합니다. [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) xUnit을 사용 하 고 포함 하 여 xunit 섀도 복사를 사용 하지 않도록 설정 된 *xunit.runner.json* 올바른 구성 설정 사용 하 여 파일. 자세한 내용은 [JSON을 사용 하 여 xUnit 구성](https://xunit.github.io/docs/configuring-with-json.html)합니다.
 
 추가 된 *xunit.runner.json* 다음 콘텐츠를 사용 하 여 테스트 프로젝트의 루트에 파일:
 
@@ -329,12 +331,12 @@ _client = _factory.CreateClient(clientOptions);
 
 합니다 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) 두 개의 앱으로 구성 됩니다.
 
-| 앱 | 프로젝트 폴더 | 설명 |
-| --- | -------------- | ----------- |
+| 앱 | 프로젝트 디렉터리 | 설명 |
+| --- | ----------------- | ----------- |
 | 메시지 앱 (SUT) | *src/RazorPagesProject* | 추가, 하나를 삭제, all, 삭제 및 메시지를 분석할 수 있습니다. |
 | 테스트 앱 | *tests/RazorPagesProject.Tests* | 통합 테스트는 SUT 하는 데 사용 합니다. |
 
-와 같은 기본 제공 테스트에 대 한 기능의 IDE 사용 하 여 테스트를 실행할 수 있습니다 [Visual Studio](https://visualstudio.microsoft.com)합니다. 사용 하는 경우 [Visual Studio Code](https://code.visualstudio.com/) 또는 명령줄에서 명령 프롬프트에서 다음 명령을 실행 합니다 *tests/RazorPagesProject.Tests* 폴더:
+와 같은 기본 제공 테스트에 대 한 기능의 IDE 사용 하 여 테스트를 실행할 수 있습니다 [Visual Studio](https://visualstudio.microsoft.com)합니다. 사용 하는 경우 [Visual Studio Code](https://code.visualstudio.com/) 또는 명령줄에서 명령 프롬프트에서 다음 명령을 실행 합니다 *tests/RazorPagesProject.Tests* 디렉터리:
 
 ```console
 dotnet test
@@ -357,10 +359,10 @@ SUT는 다음 특성을 사용 하 여 Razor 페이지 메시지 시스템:
 
 ### <a name="test-app-organization"></a>테스트 앱 구성
 
-테스트 앱 내에서 콘솔 앱은는 *tests/RazorPagesProject.Tests* 폴더입니다.
+테스트 앱 내에서 콘솔 앱은는 *tests/RazorPagesProject.Tests* 디렉터리입니다.
 
-| 테스트 앱 폴더 | 설명 |
-| --------------- | ----------- |
+| 테스트 앱 디렉터리 | 설명 |
+| ------------------ | ----------- |
 | *BasicTests* | *BasicTests.cs* 라우팅, 인증 되지 않은 사용자, 보안 페이지에 액세스 하 고 GitHub 사용자 프로필 및 프로필의 사용자 로그인을 확인 하는 것에 대 한 테스트 메서드가 포함 되어 있습니다. |
 | *IntegrationTests* | *IndexPageTests.cs* 사용자 지정을 사용 하 여 인덱스 페이지에 대 한 통합 테스트를 포함 `WebApplicationFactory` 클래스입니다. |
 | *도우미/유틸리티* | <ul><li>*Utilities.cs* 포함 된 `InitializeDbForTests` 테스트 데이터로 데이터베이스 시드를 사용 하는 방법입니다.</li><li>*HtmlHelpers.cs* AngleSharp를 반환 하는 방법을 제공 `IHtmlDocument` 테스트 메서드를 사용 합니다.</li><li>*HttpClientExtensions.cs* 에 대 한 오버 로드를 제공 `SendAsync` 는 SUT에 요청을 제출 합니다.</li></ul> |

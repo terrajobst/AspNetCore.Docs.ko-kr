@@ -5,14 +5,14 @@ description: ASP.NET Core 웹 앱에서 GDPR 확장 포인트에 액세스 하�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/29/2018
+ms.date: 06/05/2019
 uid: security/gdpr
-ms.openlocfilehash: c5c13dbd1006d10aba0f54b0b9d72b527ee98945
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 967f3246836c93a1af56f7109edb056220606b58
+ms.sourcegitcommit: c716ea9155a6b404c1f3d3d34e2388454cd276d7
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64894110"
+ms.lasthandoff: 06/05/2019
+ms.locfileid: "66716342"
 ---
 # <a name="eu-general-data-protection-regulation-gdpr-support-in-aspnet-core"></a>ASP.NET Core에서 EU 데이터 보호 규정 GDPR (일반) 지원
 
@@ -30,13 +30,13 @@ ASP.NET Core의 일부를 충족 하기 위해 Api 및 템플릿을 제공 합�
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/security/gdpr/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-## <a name="aspnet-core-gdpr-support-in-template-generated-code"></a>ASP.NET Core GDPR 지원 템플릿에서 생성 된 코드
+## <a name="aspnet-core-gdpr-support-in-template-generated-code"></a>템플릿에서 생성 된 코드에서 ASP.NET Core GDPR 지원
 
 Razor 페이지 및 MVC 프로젝트 템플릿을 사용 하 여 만든 프로젝트에는 다음 GDPR 지원을 포함 합니다.
 
-* [CookiePolicyOptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions) 하 고 [UseCookiePolicy](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyappbuilderextensions.usecookiepolicy) 에 설정 된 `Startup`합니다.
-* 합니다 *_CookieConsentPartial.cshtml* [부분 뷰](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper)합니다.
-* 합니다 *Pages/Privacy.cshtml* 페이지 또는 *Views/Home/Privacy.cshtml* 보기 사이트의 개인 정보 취급 방침에 자세히 설명 하는 페이지를 제공 합니다. 합니다 *_CookieConsentPartial.cshtml* 파일 개인 정보 페이지에 대 한 링크를 생성 합니다.
+* [CookiePolicyOptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions) 하 고 [UseCookiePolicy](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyappbuilderextensions.usecookiepolicy) 에서 설정 됩니다는 `Startup` 클래스입니다.
+* 합니다  *\_CookieConsentPartial.cshtml* [부분 뷰](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper)합니다. **Accept** 단추는이 파일에 포함 됩니다. 클릭할 때 합니다 **Accept** 단추, 쿠키를 저장 하는 동의 제공 됩니다.
+* 합니다 *Pages/Privacy.cshtml* 페이지 또는 *Views/Home/Privacy.cshtml* 보기 사이트의 개인 정보 취급 방침에 자세히 설명 하는 페이지를 제공 합니다. 합니다  *\_CookieConsentPartial.cshtml* 파일 개인 정보 페이지에 대 한 링크를 생성 합니다.
 * 개별 사용자 계정을 사용 하 여 만든 앱에 대 한 관리 페이지는 다운로드 및 삭제에 대 한 링크를 제공 [개인 사용자 데이터](#pd)입니다.
 
 ### <a name="cookiepolicyoptions-and-usecookiepolicy"></a>CookiePolicyOptions 및 UseCookiePolicy
@@ -49,29 +49,29 @@ Razor 페이지 및 MVC 프로젝트 템플릿을 사용 하 여 만든 프로�
 
 [!code-csharp[](gdpr/sample/Startup.cs?name=snippet1&highlight=51)]
 
-### <a name="cookieconsentpartialcshtml-partial-view"></a>_CookieConsentPartial.cshtml partial view
+### <a name="cookieconsentpartialcshtml-partial-view"></a>\_CookieConsentPartial.cshtml 부분 뷰
 
-합니다 *_CookieConsentPartial.cshtml* 부분 뷰:
+합니다  *\_CookieConsentPartial.cshtml* 부분 뷰:
 
 [!code-html[](gdpr/sample/RP/Pages/Shared/_CookieConsentPartial.cshtml)]
 
 이 부분:
 
-* 사용자에 대 한 추적의 상태를 가져옵니다. 앱을 동의 요구 하도록 구성 된 경우 사용자는 쿠키를 추적할 수 전에 동의 해야 합니다. 위쪽 탐색 모음에서 만든 쿠키 동의 패널 고정 됩니다. 동의 필요한 경우는 *_Layout.cshtml* 파일입니다.
+* 사용자에 대 한 추적의 상태를 가져옵니다. 앱을 동의 요구 하도록 구성 된 경우 사용자는 쿠키를 추적할 수 전에 동의 해야 합니다. 위쪽 탐색 모음에서 만든 쿠키 동의 패널 고정 됩니다. 동의 필요한 경우는  *\_Layout.cshtml* 파일입니다.
 * HTML 제공 `<p>` 정책을 사용 하 여 개인 정보 및 쿠키를 요약 하는 요소입니다.
 * 개인 정보 페이지 또는 사이트의 개인 정보 취급 방침을 자세히 설명 하 수 있는 보기에 대 한 링크를 제공 합니다.
 
 ## <a name="essential-cookies"></a>필수 쿠키
 
-동의 지정 하지 않으면 필수 표시 쿠키만 브라우저로 전송 됩니다. 다음 코드에서는 쿠키 중요 합니다.
+경우 동의 쿠키를 저장할 답변이 제공, 필수로 표시 하는 쿠키가 브라우저에 전달 됩니다. 다음 코드에서는 쿠키 중요 합니다.
 
 [!code-csharp[Main](gdpr/sample/RP/Pages/Cookie.cshtml.cs?name=snippet1&highlight=5)]
 
 <a name="tempdata"></a>
 
-## <a name="tempdata-provider-and-session-state-cookies-are-not-essential"></a>Tempdata 공급자 및 세션 상태 쿠키 중요 하지 않은 경우
+### <a name="tempdata-provider-and-session-state-cookies-arent-essential"></a>TempData 공급자 및 세션 상태 쿠키 없는 필수
 
-합니다 [Tempdata 공급자](xref:fundamentals/app-state#tempdata) 쿠키는 중요 하지 않습니다. 추적을 해제 하면 Tempdata 공급자 작동 하지 않습니다. 표시의 필수 요소로 TempData 쿠키 Tempdata 공급자를 추적 비활성화 되 면 사용 하려면 `Startup.ConfigureServices`:
+합니다 [TempData 공급자](xref:fundamentals/app-state#tempdata) 쿠키는 중요 하지 않습니다. 추적을 해제 하면 TempData 공급자 작동 하지 않습니다. 표시의 필수 요소로 TempData 쿠키 TempData 공급자를 추적 비활성화 되 면 사용 하려면 `Startup.ConfigureServices`:
 
 [!code-csharp[Main](gdpr/sample/RP/Startup.cs?name=snippet1)]
 
