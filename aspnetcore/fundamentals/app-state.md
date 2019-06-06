@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/12/2019
 uid: fundamentals/app-state
-ms.openlocfilehash: cf5a1da78f3918bc4a49209157b9aa4bc7ed8458
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 3d878a389462aa7f3932f374034fb7cf11fd191c
+ms.sourcegitcommit: c716ea9155a6b404c1f3d3d34e2388454cd276d7
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64886868"
+ms.lasthandoff: 06/05/2019
+ms.locfileid: "66716333"
 ---
 # <a name="session-and-app-state-in-aspnet-core"></a>ASP.NET Core에서 세션 및 앱 상태
 
@@ -65,7 +65,7 @@ ASP.NET Core는 각 요청과 함께 앱으로 전송되는 세션 ID를 포함�
 * 앱은 마지막 요청 이후 제한된 시간 동안 세션을 유지합니다. 앱은 세션 시간 제한을 설정하거나 20분의 기본값을 사용합니다. 세션 상태는 특정 세션과 관련된 사용자 데이터를 저장하되, 데이터가 세션 간에 영구 스토리지를 요구하지 않는 경우에 적합합니다.
 * 세션 데이터는 [ISession.Clear](/dotnet/api/microsoft.aspnetcore.http.isession.clear) 구현이 호출되거나 세션이 만료될 때 삭제됩니다.
 * 클라이언트 브라우저가 닫혔거나 세션 쿠키가 삭제 또는 클라이언트에서 만료되었을 때 앱 코드에 이를 알려주는 기본 메커니즘은 없습니다.
-* ASP.NET Core MVC 및 Razor Pages 템플릿에는 GDPR(일반 데이터 보호 규정) 지원이 포함되어 있습니다. 세션 상태 쿠키는 기본적으로 필수로 표시되지 않으므로 사이트 방문자가 추적을 허용하지 않는 한 세션 상태가 작동하지 않습니다. 자세한 내용은 <xref:security/gdpr#tempdata-provider-and-session-state-cookies-are-not-essential>을 참조하세요.
+* ASP.NET Core MVC 및 Razor Pages 템플릿에는 GDPR(일반 데이터 보호 규정) 지원이 포함되어 있습니다. 세션 상태 쿠키는 기본적으로 필수로 표시되지 않으므로 사이트 방문자가 추적을 허용하지 않는 한 세션 상태가 작동하지 않습니다. 자세한 내용은 <xref:security/gdpr#tempdata-provider-and-session-state-cookies-arent-essential>을 참조하세요.
 
 > [!WARNING]
 > 중요한 데이터를 세션 상태에 저장하지 마세요. 사용자는 브라우저를 닫지 않고 세션 쿠키를 지울 수 있습니다. 일부 브라우저는 브라우저 창이 닫혀도 유효한 세션 쿠키를 유지 관리합니다. 세션은 단일 사용자로 제한될 수 없으므로 다음 사용자는 동일한 세션 쿠키로 앱을 계속 검색할 수 있습니다.
