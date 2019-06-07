@@ -5,14 +5,14 @@ description: ASP.NET Core에서 HTTP.sys 및 IIS에 대 한 Windows 인증을 �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc, seodec18
-ms.date: 05/29/2019
+ms.date: 06/05/2019
 uid: security/authentication/windowsauth
-ms.openlocfilehash: 9dfff5dcba409ddca7e05c771b864ab121e0ea85
-ms.sourcegitcommit: 06c4f2910dd54ded25e1b8750e09c66578748bc9
+ms.openlocfilehash: 900bbf5f14b1876ad537b2b77e4ba07d7aa168f2
+ms.sourcegitcommit: e7e04a45195d4e0527af6f7cf1807defb56dc3c3
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/30/2019
-ms.locfileid: "66395933"
+ms.lasthandoff: 06/06/2019
+ms.locfileid: "66750160"
 ---
 # <a name="configure-windows-authentication-in-aspnet-core"></a>ASP.NET Core에서 Windows 인증을 구성 합니다.
 
@@ -22,9 +22,17 @@ ms.locfileid: "66395933"
 
 Windows 인증은 ASP.NET Core 앱의 사용자를 인증 하는 운영 체제에서 사용 합니다. 서버는 Windows 계정 또는 Active Directory 도메인 id를 사용 하 여 사용자를 식별 하는 회사 네트워크에서 실행 될 때 Windows 인증을 사용할 수 있습니다. Windows 인증은 인트라넷 환경 사용자, 클라이언트 앱 및 웹 서버는 동일한 Windows 도메인에 속해야 하는 위치에 가장 적합 합니다.
 
-## <a name="launch-settings-debugger"></a>시작 설정 (디버거)
+## <a name="iisiis-express"></a>IIS/IIS Express
 
-시작 설정에 대 한 구성에만 적용 합니다 *Properties/launchSettings.json* 파일 및 Windows 인증을 위해 IIS 또는 HTTP.sys 서버를 구성 하지 않습니다. 서버의 구성에 설명 되어는 [IIS 또는 HTTP.sys에 대 한 인증 서비스를 사용 하도록 설정](#authentication-services-for-iis-or-httpsys) 섹션입니다.
+인증 서비스를 호출 하 여 추가 <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> (<xref:Microsoft.AspNetCore.Server.IISIntegration?displayProperty=fullName> 네임 스페이스)에서 `Startup.ConfigureServices`:
+
+```csharp
+services.AddAuthentication(IISDefaults.AuthenticationScheme);
+```
+
+### <a name="launch-settings-debugger"></a>시작 설정 (디버거)
+
+시작 설정에 대 한 구성에만 적용 합니다 *Properties/launchSettings.json* IIS Express에 대 한 파일을 IIS에 대 한 Windows 인증을 구성 하지 않습니다. 서버 구성에 설명 되어는 [IIS](#iis) 섹션입니다.
 
 합니다 **웹 응용 프로그램** Visual Studio 또는.NET Core CLI를 통해 사용할 수 있는 템플릿을 업데이트 하는 Windows 인증을 지원 하도록 구성할 수 있습니다 합니다 *Properties/launchSettings.json* 파일 자동으로 합니다.
 
@@ -76,17 +84,7 @@ dotnet new webapp --auth Windows
 
 기존 프로젝트를 수정 하는 경우 프로젝트 파일에 대 한 패키지 참조를 포함 되어 있는지 확인 합니다 [Microsoft.AspNetCore.App 메타 패키지](xref:fundamentals/metapackage-app) **하거나** 는 [ Microsoft.AspNetCore.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication/) NuGet 패키지.
 
-## <a name="authentication-services-for-iis-or-httpsys"></a>IIS 또는 HTTP.sys에 대 한 인증 서비스
-
-호스팅 시나리오에 따라 지침을 따릅니다 **중 하나** 는 [IIS](#iis) 섹션 **하거나** [HTTP.sys](#httpsys) 섹션입니다.
-
 ### <a name="iis"></a>IIS
-
-인증 서비스를 호출 하 여 추가 <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> (<xref:Microsoft.AspNetCore.Server.IISIntegration?displayProperty=fullName> 네임 스페이스)에서 `Startup.ConfigureServices`:
-
-```csharp
-services.AddAuthentication(IISDefaults.AuthenticationScheme);
-```
 
 IIS에서 사용 하 여 [ASP.NET Core 모듈](xref:host-and-deploy/aspnet-core-module) ASP.NET Core 앱을 호스트 하 합니다. Windows 인증을 통해 IIS에 대해 구성 된 합니다 *web.config* 파일입니다. 다음 섹션은 표시 하는 방법.
 
@@ -127,9 +125,9 @@ ASP.NET Core 모듈은 기본적으로 앱에 Windows 인증 토큰을 전달 �
   * 설정을 다시 설정 하려면 IIS 관리자를 사용 합니다 *web.config* 배포에서 파일을 덮어쓸지 후 파일입니다.
   * 추가 된 *web.config 파일* 설정 사용 하 여 로컬 앱.
 
-### <a name="httpsys"></a>HTTP.sys
+## <a name="httpsys"></a>HTTP.sys
 
-하지만 [Kestrel](xref:fundamentals/servers/kestrel) Windows 인증을 지원 하지 않습니다 사용할 수 있습니다 [HTTP.sys](xref:fundamentals/servers/httpsys) Windows에서 자체 호스팅된 시나리오를 지원 합니다.
+자체 호스팅된 시나리오에서는 [Kestrel](xref:fundamentals/servers/kestrel) 하지 지원 Windows 인증을 사용할 수 있습니다 [HTTP.sys](xref:fundamentals/servers/httpsys)합니다.
 
 인증 서비스를 호출 하 여 추가 <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> (<xref:Microsoft.AspNetCore.Server.HttpSys?displayProperty=fullName> 네임 스페이스)에서 `Startup.ConfigureServices`:
 

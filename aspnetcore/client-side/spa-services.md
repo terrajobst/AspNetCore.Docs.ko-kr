@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: H1Hack27Feb2017
 ms.date: 05/28/2019
 uid: client-side/spa-services
-ms.openlocfilehash: 2ac7a6c7a5499d0525a61c6401f5996f8543fdba
-ms.sourcegitcommit: 4d05e30567279072f1b070618afe58ae1bcefd5a
+ms.openlocfilehash: c7cd35865c5bddf0e5efaa9e616832b6755d9227
+ms.sourcegitcommit: e7e04a45195d4e0527af6f7cf1807defb56dc3c3
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/29/2019
-ms.locfileid: "66376217"
+ms.lasthandoff: 06/06/2019
+ms.locfileid: "66750113"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>JavaScript 서비스를 사용 하 여 ASP.NET Core의 단일 페이지 응용 프로그램을 만들려면
 
@@ -24,7 +24,7 @@ ms.locfileid: "66376217"
 
 JavaScript 서비스는 ASP.NET Core에 대 한 클라이언트 쪽 기술 컬렉션입니다. 이 기술의 목표는 ASP.NET Core를 SPA 구축 시 개발자가 선호하는 서버 측 플랫폼으로 자리매김하는 것입니다.
 
-세 가지 고유 NuGet 패키지의 JavaScript Services 구성 됩니다.
+두 개의 고유 NuGet 패키지의 JavaScript Services 구성 됩니다.
 
 * [Microsoft.AspNetCore.NodeServices](https://www.nuget.org/packages/Microsoft.AspNetCore.NodeServices/) (NodeServices)
 * [Microsoft.AspNetCore.SpaServices](https://www.nuget.org/packages/Microsoft.AspNetCore.SpaServices/) (SpaServices)
@@ -221,7 +221,7 @@ dotnet new --install Microsoft.AspNetCore.SpaTemplates::*
 | 템플릿                                 | 약식 이름 | 언어 | 태그        |
 | ------------------------------------------| :--------: | :------: | :---------: |
 | MVC ASP.NET Core with Angular             | angular    | [C#]     | Web/MVC/SPA |
-| MVC ASP.NET Core with React.js             | react      | [C#]     | Web/MVC/SPA |
+| MVC ASP.NET Core with React.js            | react      | [C#]     | Web/MVC/SPA |
 | MVC ASP.NET Core with React.js and Redux  | reactredux | [C#]     | Web/MVC/SPA |
 
 SPA 템플릿 중 하나를 사용하여 새로운 프로젝트를 만들려면 [dotnet new](/dotnet/core/tools/dotnet-new) 명령 뒤에 템플릿의 **약식 이름**을 추가합니다. 다음 명령은 서버 측에 ASP.NET Core MVC가 구성된 Angular 응용 프로그램을 생성합니다.
