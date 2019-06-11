@@ -3,14 +3,14 @@ title: ASP.NET Core MVC 시작
 author: rick-anderson
 description: ASP.NET Core MVC를 시작하는 방법을 알아봅니다.
 ms.author: riande
-ms.date: 12/12/2018
+ms.date: 04/24/2019
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: dbc07558d7d7672e60e8834dc3e4e9d8aab437e3
-ms.sourcegitcommit: 57792e5f594db1574742588017c708350958bdf0
+ms.openlocfilehash: dc3499c89860190b76d6be7b8abeeaef827880d6
+ms.sourcegitcommit: a1364109d11d414121a6337b611bee61d6e489e9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58265283"
+ms.lasthandoff: 06/04/2019
+ms.locfileid: "66491253"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>ASP.NET Core MVC 시작
 
@@ -38,24 +38,18 @@ ms.locfileid: "58265283"
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Visual Studio에서 **파일 > 새로 만들기 > 프로젝트**를 선택합니다.
+* Visual Studio에서 **새 프로젝트 만들기**를 선택합니다.
 
-![파일 > 새로 만들기 > 프로젝트](start-mvc/_static/alt_new_project.png)
+* **ASP.NET Core 웹 애플리케이션**을 선택한 후, **다음**을 선택합니다.
 
-**새 프로젝트** 대화 상자를 완료합니다.
+![새 ASP.NET Core 웹 애플리케이션](start-mvc/_static/np_2.1.png)
 
-* 왼쪽 창에서 **.NET Core**를 선택합니다.
-* 가운데 창에서 **ASP.NET Core 웹 애플리케이션(.NET Core)** 을 선택합니다.
-* 프로젝트 이름을 “MvcMovie”로 지정합니다(코드를 복사할 때 네임스페이스가 일치하도록 프로젝트 이름을 “MvcMovie”로 지정해야 함).
-* **확인** 선택
+* 프로젝트 이름을 **MvcMovie**로 지정하고 **만들기**를 선택합니다. 프로젝트 이름을 **MvcMovie**로 지정하는 것이 중요하므로 코드를 복사할 때 네임스페이스가 일치합니다.
 
-![새 프로젝트 대화 상자, 왼쪽 창의 .NET Core, ASP.NET Core 웹 ](start-mvc/_static/new_project2-21.png)
+  ![새 ASP.NET Core 웹 애플리케이션](start-mvc/_static/config.png)
 
-**새 ASP.NET Core 웹 애플리케이션(.NET Core) - MvcMovie** 대화 상자를 완료합니다.
 
-* 버전 선택기 드롭다운 상자에서 **ASP.NET Core 2.2**를 선택합니다.
-* **웹 애플리케이션(모델-뷰-컨트롤러)** 을 선택합니다.
-* **확인**을 선택합니다.
+* **웹 애플리케이션(Model-View-Controller)** 을 선택한 다음, **만들기**를 선택합니다.
 
 ![새 프로젝트 대화 상자, 왼쪽 창의 .NET Core, ASP.NET Core 웹 ](start-mvc/_static/new_project22-21.png)
 
@@ -83,13 +77,15 @@ Visual Studio에서는 방금 만든 MVC 프로젝트에 대한 기본 템플릿
 
 * **파일** > **새 솔루션**을 선택합니다.
 
-  ![macOS 새 솔루션](~/tutorials/first-web-api-mac/_static/sln.png)
+  ![macOS 새 솔루션](./start-mvc/_static/new_project_vsmac.png)
 
-* **.NET Core 앱** > **ASP.NET Core** > **ASP.NET Core Web App(MVC)** > **다음**을 선택합니다.
+* **.NET Core** > **앱** > **웹 애플리케이션(Model-View-Controller)**  > **다음**을 선택합니다.
 
-  ![macOS 새 프로젝트 대화 상자](~/tutorials/first-mvc-app-mac/start-mvc/1.png)
+  ![macOS 새 프로젝트 대화 상자](./start-mvc/_static/new_project_mvc_vsmac.png)
 
-* **새 ASP.NET Core Web API 구성** 대화 상자에서 **.NET Core 2.2*라는 기본 **대상 프레임워크**를 수락합니다.
+* **새 ASP.NET Core Web API 구성** 대화 상자에서 **.NET Core 2.2**라는 기본 **대상 프레임워크**를 수락합니다.
+
+  ![macOS .NET Core 2.2 선택](./start-mvc/_static/new_project_22_vsmac.png)
 
 * 프로젝트 이름을 **MvcMovie**로 지정하고 **만들기**를 선택합니다.
 
@@ -113,6 +109,14 @@ Visual Studio에서는 방금 만든 MVC 프로젝트에 대한 기본 템플릿
 
   ![IIS Express](start-mvc/_static/iis_express.png)
 
+* **승인**을 선택하여 추적에 동의합니다. 이 앱은 개인 정보를 추적하지 않습니다. 템플릿 생성 코드는 [GDPR(일반 데이터 보호 규정)](xref:security/gdpr)을 충족할 수 있도록 자산을 포함합니다.
+
+  ![홈 또는 인덱스 페이지](start-mvc/_static/privacy.png)
+
+  다음 이미지에서는 추적을 승인한 후에 앱을 보여줍니다.
+
+  ![홈 또는 인덱스 페이지](start-mvc/_static/home2.2.png)
+
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 Ctrl+F5를 눌러 디버거 없이 실행합니다.
@@ -123,6 +127,14 @@ Ctrl+F5를 눌러 디버거 없이 실행합니다.
 
   Ctrl+F5(디버그 이외 모드)를 사용하여 앱을 시작하면 코드를 변경하고, 파일을 저장하고, 브라우저를 새로 고치고, 코드 변경 내용을 확인할 수 있습니다. 대부분의 개발자는 페이지 및 보기 변경 내용을 새로 고치기 위해 디버그 이외 모드를 사용하려고 합니다.
 
+* **승인**을 선택하여 추적에 동의합니다. 이 앱은 개인 정보를 추적하지 않습니다. 템플릿 생성 코드는 [GDPR(일반 데이터 보호 규정)](xref:security/gdpr)을 충족할 수 있도록 자산을 포함합니다.
+
+  ![홈 또는 인덱스 페이지](start-mvc/_static/privacy.png)
+
+  다음 이미지에서는 추적을 승인한 후에 앱을 보여줍니다.
+
+  ![홈 또는 인덱스 페이지](start-mvc/_static/home2.2.png)
+
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 **실행** > **디버깅하지 않고 시작**을 선택하여 앱을 시작합니다. Mac용 Visual Studio에서 [Kestrel](xref:fundamentals/servers/index#kestrel) 서버를 시작하고, 브라우저를 실행하며, `http://localhost:port`로 이동합니다. 여기서 *port*는 임의로 선택된 포트 번호입니다.
@@ -132,15 +144,15 @@ Ctrl+F5를 눌러 디버거 없이 실행합니다.
 * 주소 표시줄에 `localhost:port#`이 표시되고 `example.com` 등은 표시되지 않습니다. 그 이유는 `localhost`가 로컬 컴퓨터의 표준 이름이기 때문입니다. Visual Studio에서 웹 프로젝트를 만들 경우 웹 서버에는 임의 포트가 사용됩니다. 앱을 실행할 경우 다른 포트 번호가 표시됩니다.
 * **실행** 메뉴 항목에서 앱을 디버그 또는 디버그 이외 모드로 시작할 수 있습니다.
 
----
-
 * **승인**을 선택하여 추적에 동의합니다. 이 앱은 개인 정보를 추적하지 않습니다. 템플릿 생성 코드는 [GDPR(일반 데이터 보호 규정)](xref:security/gdpr)을 충족할 수 있도록 자산을 포함합니다.
 
-  ![홈 또는 인덱스 페이지](start-mvc/_static/privacy.png)
+  ![홈 또는 인덱스 페이지](./start-mvc/_static/output_privacy_macos.png)
 
   다음 이미지에서는 추적을 승인한 후에 앱을 보여줍니다.
 
-  ![홈 또는 인덱스 페이지](start-mvc/_static/home2.2.png)
+  ![홈 또는 인덱스 페이지](./start-mvc/_static/output_macos.png)
+
+---
 
 [!INCLUDE[](~/includes/vs-vsc-vsmac-help.md)]
 

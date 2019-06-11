@@ -5,12 +5,12 @@ description: 간단한 ASP.NET Core 앱에 모델을 추가합니다.
 ms.author: riande
 ms.date: 02/25/2019
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: 0580c2cb7717a89d0d16cd3f431a63db78fa27cb
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 0de1b7e69298af8299e0ca6c8ebd3c2b995b7471
+ms.sourcegitcommit: 5dd2ce9709c9e41142771e652d1a4bd0b5248cec
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64887428"
+ms.lasthandoff: 06/05/2019
+ms.locfileid: "66692494"
 ---
 # <a name="add-a-model-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 모델 추가
 
@@ -156,7 +156,7 @@ System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity id
 
    `Add-Migration` 명령은 초기 데이터베이스 스키마를 만드는 코드를 생성합니다.
 
-   데이터베이스 스키마는 *Data/MvcMovieContext.cs* 파일에서 `MvcMovieContext` 클래스에 지정된 모델을 기반으로 합니다. `Initial` 인수는 마이그레이션 이름입니다. 모든 이름을 사용할 수 있지만 규칙에 따라 마이그레이션을 설명하는 이름을 사용합니다. 자세한 내용은 <xref:data/ef-mvc/migrations>을 참조하세요.
+   데이터베이스 스키마는 `MvcMovieContext` 클래스에 지정된 모델을 기반으로 합니다. `Initial` 인수는 마이그레이션 이름입니다. 모든 이름을 사용할 수 있지만 규칙에 따라 마이그레이션을 설명하는 이름을 사용합니다. 자세한 내용은 <xref:data/ef-mvc/migrations>을 참조하세요.
 
    `Update-Database` 명령은 데이터베이스를 만드는 *Migrations/{time-stamp}_InitialCreate.cs* 파일에서 `Up` 메서드를 실행합니다.
 

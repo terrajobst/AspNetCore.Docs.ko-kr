@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/30/2018
 uid: tutorials/get-started-with-nswag
-ms.openlocfilehash: 566d402fbbb71f6b2cc46fc401cdf915a29cccda
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 787f51629b044e638d2790b3dda8723c2644c2d8
+ms.sourcegitcommit: a04eb20e81243930ec829a9db5dd5de49f669450
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087441"
+ms.lasthandoff: 06/03/2019
+ms.locfileid: "66470433"
 ---
 # <a name="get-started-with-nswag-and-aspnet-core"></a>NSwag 및 ASP.NET Core 시작
 
@@ -117,11 +117,12 @@ dotnet add TodoApi.csproj package NSwag.AspNetCore
 * 프로젝트 내에서 코드 생성을 위한 [NSwag.CodeGeneration.CSharp](https://www.nuget.org/packages/NSwag.CodeGeneration.CSharp/) 또는 [NSwag.CodeGeneration.TypeScript](https://www.nuget.org/packages/NSwag.CodeGeneration.TypeScript/) NuGet 패키지.
 * [명령줄](https://github.com/NSwag/NSwag/wiki/CommandLine)의 NSwag.
 * [NSwag.MSBuild](https://github.com/NSwag/NSwag/wiki/MSBuild) NuGet 패키지.
+* C# 또는 TypeScript에서 API 클라이언트 코드 생성을 위한 [Unchase OpenAPI(Swagger) 연결된 서비스](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseopenapiconnectedservice) &ndash; Visual Studio 연결된 서비스. 또한 NSwag를 사용하여 OpenAPI 서비스용 C# 컨트롤러를 생성합니다.
 
 ### <a name="generate-code-with-nswagstudio"></a>NSwagStudio로 코드 생성
 
 * [NSwagStudio GitHub 리포지토리](https://github.com/RSuter/NSwag/wiki/NSwagStudio)의 지침에 따라 NSwagStudio를 설치합니다.
-* NSwagStudio를 시작하고 **Swagger 사양 URL** 텍스트 상자에 *swagger.json* 파일 URL을 입력합니다. 예: *http://localhost:44354/swagger/v1/swagger.json*.
+* NSwagStudio를 시작하고 **Swagger 사양 URL** 텍스트 상자에 *swagger.json* 파일 URL을 입력합니다. 예: *http://localhost:44354/swagger/v1/swagger.json* .
 * **로컬 복사본 만들기** 단추를 클릭하여 Swagger 사양의 JSON 표시를 생성합니다.
 
   ![Swagger 사양의 로컬 복사본 만들기](web-api-help-pages-using-swagger/_static/CreateLocalCopy-NSwagStudio.PNG)

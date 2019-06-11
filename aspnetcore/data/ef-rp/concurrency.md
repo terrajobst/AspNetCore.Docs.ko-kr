@@ -4,14 +4,14 @@ author: rick-anderson
 description: 이 자습서에는 여러 사용자가 동시에 같은 엔터티를 업데이트하는 경우 충돌을 처리하는 방법을 보여 줍니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/07/2018
+ms.date: 05/31/2019
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: 17ce0c111daabe2c7bbf4795b658856568c85158
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 8430f8e720870a7b541655ea8bcfe2f67c942bb3
+ms.sourcegitcommit: c5339594101d30b189f61761275b7d310e80d18a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64886178"
+ms.lasthandoff: 06/02/2019
+ms.locfileid: "66458419"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---concurrency---8-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 동시성 - 8/8
 
@@ -189,7 +189,7 @@ dotnet ef database update
 
 ### <a name="update-the-edit-page-model"></a>편집 페이지 모델 업데이트
 
-*pages\departments\edit.cshtml.cs*를 다음 코드로 업데이트합니다.
+*Pages\Departments\Edit.cshtml.cs*를 다음 코드로 업데이트합니다.
 
 [!code-csharp[](intro/samples/cu/Pages/Departments/Edit.cshtml.cs?name=snippet)]
 

@@ -3,14 +3,14 @@ title: '자습서: ASP.NET Core에서 Razor 페이지 시작'
 author: rick-anderson
 description: 이 자습서 시리즈는 ASP.NET Core에서 Razor Pages를 사용하는 방법을 보여 줍니다. 모델을 만들고, Razor Pages에 대한 코드를 생성하고, Entity Framework Core 및 SQL Server를 데이터 액세스에 사용하고, 검색 기능을 추가하고, 입력 유효성 검사를 추가하고, 마이그레이션을 사용하여 모델을 업데이트하는 방법을 알아봅니다.
 ms.author: riande
-ms.date: 05/30/2019
+ms.date: 6/3/2019
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: e9f11f68aa138ab74a0ffbbd0e32067bc984606d
-ms.sourcegitcommit: 9ae1fd11f39b0a72b2ae42f0b450345e6e306bc0
+ms.openlocfilehash: d843e47ccb5180fab34b4c4c4a4b5cbda21289bf
+ms.sourcegitcommit: a1364109d11d414121a6337b611bee61d6e489e9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/30/2019
-ms.locfileid: "66415665"
+ms.lasthandoff: 06/04/2019
+ms.locfileid: "66491212"
 ---
 # <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>자습서: ASP.NET Core에서 Razor 페이지 시작
 
@@ -43,13 +43,17 @@ ms.locfileid: "66415665"
 
 * Visual Studio **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.
 
-* 새 ASP.NET Core 웹 애플리케이션을 만듭니다. 프로젝트 이름을 **RazorPagesMovie**로 지정합니다. 코드를 복사하여 붙여넣을 때 네임스페이스가 일치하도록 프로젝트 이름을 *RazorPagesMovie*로 지정해야 합니다.
+* 새 ASP.NET Core 웹 애플리케이션을 만들고 **다음**을 선택합니다.
 
   ![새 ASP.NET Core 웹 애플리케이션](razor-pages-start/_static/np_2.1.png)
 
-* 드롭다운에서 **ASP.NET Core 2.2**를 선택한 다음, **웹 애플리케이션**을 선택합니다.
+* 프로젝트 이름을 **RazorPagesMovie**로 지정합니다. 코드를 복사하여 붙여넣을 때 네임스페이스가 일치하도록 프로젝트 이름을 *RazorPagesMovie*로 지정해야 합니다.
 
-  ![새 ASP.NET Core 웹 애플리케이션](razor-pages-start/_static/np_2_2.2.png)
+  ![새 ASP.NET Core 웹 애플리케이션](razor-pages-start/_static/config.png)
+
+* 드롭다운에서 **ASP.NET Core 2.2**를 선택하고 **웹 애플리케이션**을 선택한 다음, **만들기**를 선택합니다.
+
+![새 ASP.NET Core 웹 애플리케이션](razor-pages-start/_static/np_2_2.2.png)
 
   다음 시작 프로젝트를 만듭니다.
 

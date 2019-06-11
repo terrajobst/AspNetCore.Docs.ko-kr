@@ -5,14 +5,14 @@ description: ASP.NET Core에서 호스팅되는 서비스를 사용하는 백그
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/25/2019
+ms.date: 06/03/2019
 uid: fundamentals/host/hosted-services
-ms.openlocfilehash: 613227cdead1d0b62a0dead2fca9fab68fd534cc
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 2dbb1a84a380ab06a4be7ecf628799a070afc9e3
+ms.sourcegitcommit: 5dd2ce9709c9e41142771e652d1a4bd0b5248cec
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64889008"
+ms.lasthandoff: 06/05/2019
+ms.locfileid: "66692520"
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>ASP.NET Core에서 호스팅되는 서비스를 사용하는 백그라운드 작업
 
@@ -30,6 +30,32 @@ ASP.NET Core에서 백그라운드 작업은 *호스팅되는 서비스*로 구�
 
 * 웹 호스트 &ndash; 웹 호스트는 웹앱을 호스팅하는 데 유용합니다. 이 항목에 표시된 예제 코드는 웹 호스트 버전의 샘플에서 가져옵니다. 자세한 내용은 [웹 호스트](xref:fundamentals/host/web-host) 항목을 참조하세요.
 * 일반 호스트 &ndash; 일반 호스트는 ASP.NET Core 2.1의 새로운 기능입니다. 자세한 내용은 [일반 호스트](xref:fundamentals/host/generic-host) 항목을 참조하세요.
+
+::: moniker range=">= aspnetcore-3.0"
+
+## <a name="worker-service-template"></a>Worker Service 템플릿
+
+ASP.NET Core Worker Service 템플릿은 장기간 실행되는 서비스 앱을 작성하기 위한 시작점을 제공합니다. 템플릿을 호스팅되는 서비스 앱의 기반으로 사용하려면 다음을 수행합니다.
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+1. 새 프로젝트를 만듭니다.
+1. **새 ASP.NET Core 웹 애플리케이션**을 선택합니다. **새로 만들기**를 선택합니다.
+1. **프로젝트 이름** 필드에 프로젝트 이름을 제공하거나 기본 프로젝트 이름을 수락합니다. **만들기**를 선택합니다.
+1. **새 ASP.NET Core 웹 애플리케이션 만들기** 대화 상자에서 **.NET Core** 및 **ASP.NET Core 3.0**이 선택되었는지 확인합니다.
+1. **Worker Service** 템플릿을 선택합니다. **만들기**를 선택합니다.
+
+# <a name="visual-studio-code--net-core-clitabvisual-studio-codenetcore-cli"></a>[Visual Studio Code/.NET Core CLI](#tab/visual-studio-code+netcore-cli)
+
+명령 셸에서 [dotnet new](/dotnet/core/tools/dotnet-new) 명령과 함께 Worker Service(`worker`) 템플릿을 사용합니다. 다음 예제에서는 `ContosoWorkerService`라는 Worker Service 앱을 만듭니다. 명령이 실행될 때 `ContosoWorkerService` 앱의 폴더가 자동으로 만들어집니다.
+
+```console
+dotnet new worker -o ContosoWorkerService
+```
+
+---
+
+::: moniker-end
 
 ## <a name="package"></a>패키지
 

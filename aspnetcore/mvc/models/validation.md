@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 04/06/2019
 monikerRange: '>= aspnetcore-2.1'
 uid: mvc/models/validation
-ms.openlocfilehash: acb0ae989f6e82a5bc80935a8acfc96e51073d2f
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 9737e45729b4e5abd9a33824c4d6610ca21681c0
+ms.sourcegitcommit: c5339594101d30b189f61761275b7d310e80d18a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64883178"
+ms.lasthandoff: 06/02/2019
+ms.locfileid: "66458477"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>ASP.NET Core MVC 및 Razor Pages의 모델 유효성 검사
 
@@ -122,7 +122,9 @@ ms.locfileid: "64883178"
 1. 다음 예제와 같이 모델 클래스에서는 유효성 검사 작업 메서드를 가리키는 `[Remote]` 특성으로 속성에 주석을 답니다.
 
    [!code-csharp[](validation/sample/Models/User.cs?name=snippet_UserEmailProperty)]
-
+ 
+   `Microsoft.AspNetCore.Mvc` 네임스페이스에 `[Remote]` 특성이 있습니다. `Microsoft.AspNetCore.App` 또는 `Microsoft.AspNetCore.All` 메타패키지를 사용하지 않는 경우 [Microsoft.AspNetCore.Mvc.ViewFeatures](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.ViewFeatures) NuGet 패키지를 설치합니다.
+   
 ### <a name="additional-fields"></a>추가 필드
 
 `[Remote]` 특성의 `AdditionalFields` 속성을 사용하여 서버의 데이터를 기준으로 필드 조합의 유효성을 검사할 수 있습니다. 예를 들어 `User` 모델이 `FirstName` 및 `LastName` 속성을 포함한 경우 해당 이름 쌍을 이미 가진 기존 사용자가 없는지 확인하는 것이 좋습니다. 다음 예제에서는 `AdditionalFields`을 사용하는 방법을 보여 줍니다.

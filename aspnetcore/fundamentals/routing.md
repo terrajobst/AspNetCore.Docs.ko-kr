@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/13/2019
 uid: fundamentals/routing
-ms.openlocfilehash: 0c2df3ec63f393b961754f496830cccb26f1cb76
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 2a7a942f43de94326e84977f09dc9a2e24dd00f0
+ms.sourcegitcommit: 5dd2ce9709c9e41142771e652d1a4bd0b5248cec
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64884568"
+ms.lasthandoff: 06/05/2019
+ms.locfileid: "66692581"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core에서 라우팅
 
@@ -165,7 +165,9 @@ URL 일치는 라우팅에서 들어오는 요청을 *처리기*로 디스패치
 
 [RouteData.Routers](xref:Microsoft.AspNetCore.Routing.RouteData.Routers)는 성공적으로 요청 일치에 참여한 경로의 목록입니다. 경로는 서로 중첩될 수 있습니다. <xref:Microsoft.AspNetCore.Routing.RouteData.Routers> 속성은 결과적으로 일치한 경로의 논리 트리를 통해 경로를 반영합니다. 일반적으로 <xref:Microsoft.AspNetCore.Routing.RouteData.Routers>의 첫 번째 항목은 경로 컬렉션이며 URL 생성을 위해 사용되어야 합니다. <xref:Microsoft.AspNetCore.Routing.RouteData.Routers>의 마지막 항목은 일치한 경로 처리기입니다.
 
-### <a name="url-generation"></a>URL 생성
+<a name="lg"></a>
+
+### <a name="url-generation-with-linkgenerator"></a>LinkGenerator를 사용한 URL 생성
 
 ::: moniker range=">= aspnetcore-2.2"
 

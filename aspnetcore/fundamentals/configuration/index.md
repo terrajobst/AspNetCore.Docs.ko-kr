@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/24/2019
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 3f7588f9ba18e300f5947e8bb0daf2e72d580a94
-ms.sourcegitcommit: e1623d8279b27ff83d8ad67a1e7ef439259decdf
+ms.openlocfilehash: 81820e8161965fcca2f97d00708df5a29df668de
+ms.sourcegitcommit: 9691b742134563b662948b0ed63f54ef7186801e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/25/2019
-ms.locfileid: "66223161"
+ms.lasthandoff: 06/10/2019
+ms.locfileid: "66824831"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core의 구성
 
@@ -331,7 +331,7 @@ dotnet run -CLKey1=value1 -CLKey2=value2
 
 [Azure App Service](https://azure.microsoft.com/services/app-service/)를 사용하면 Azure Portal에서 환경 변수를 설정할 수 있으므로 환경 변수 구성 공급자를 사용한 앱 구성을 재정의할 수 있습니다. 자세한 내용은 [Azure 앱: Azure Portal을 사용하여 앱 구성 재정의](xref:host-and-deploy/azure-apps/index#override-app-configuration-using-the-azure-portal) 편을 참조하세요.
 
-새 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder>를 초기화할 때 `ASPNETCORE_`가 접두사인 환경 변수의 경우 `AddEnvironmentVariables`가 자동으로 호출됩니다. 자세한 내용은 [웹 호스트: 호스트 설정 편을](xref:fundamentals/host/web-host#set-up-a-host) 참조하세요.
+`AddEnvironmentVariables`는 새 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder>가 초기화될 때 [호스트 구성](#host-vs-app-configuration)에 대해 `ASPNETCORE_`가 접두사된 환경 변수를 로드하는 데 사용됩니다. 자세한 내용은 [웹 호스트: 호스트 설정 편을](xref:fundamentals/host/web-host#set-up-a-host) 참조하세요.
 
 `CreateDefaultBuilder`는 다음 항목도 로드합니다.
 

@@ -4,14 +4,14 @@ author: juntaoluo
 description: 이 자습서는 ASP.NET Core에서 gRPC 서비스 및 gRPC 클라이언트를 만드는 방법을 보여줍니다. gRPC 서비스 프로젝트를 만들고, proto 파일을 편집하고, 이중 스트리밍 호출을 추가하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
-ms.date: 5/30/2019
+ms.date: 06/05/2019
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: 2b4325d2413e335a3061a7695def88a1b23ee52b
-ms.sourcegitcommit: 4d05e30567279072f1b070618afe58ae1bcefd5a
+ms.openlocfilehash: 71e3321819eb7169f0896abe3e07849f59ea6fc7
+ms.sourcegitcommit: 5dd2ce9709c9e41142771e652d1a4bd0b5248cec
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/29/2019
-ms.locfileid: "66376364"
+ms.lasthandoff: 06/05/2019
+ms.locfileid: "66692522"
 ---
 # <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>자습서: ASP.NET Core에서 gRPC 클라이언트 및 서버 만들기
 
@@ -161,7 +161,7 @@ gRPC 클라이언트 프로젝트에 다음 패키지를 추가합니다.
 
 PMC(패키지 관리자 콘솔) 또는 NuGet 패키지 관리를 사용하여 패키지 설치
 
-####  <a name="pmc-option-to-install-packages"></a>패키지 설치를 위한 PMC 옵션
+#### <a name="pmc-option-to-install-packages"></a>패키지 설치를 위한 PMC 옵션
 
 * Visual Studio에서 **도구** > **NuGet 패키지 관리자** > **패키지 관리자 콘솔**을 선택합니다.
 * **패키지 관리자 콘솔** 창에서 *GrpcGreeterClient.csproj* 파일이 있는 디렉터리로 이동합니다.
@@ -169,7 +169,7 @@ PMC(패키지 관리자 콘솔) 또는 NuGet 패키지 관리를 사용하여 �
 
  ```powershell
 Install-Package Grpc.Core
-Install-Package Grpc.Protobuf
+Install-Package Google.Protobuf
 Install-Package Grpc.Tools
 ```
 
@@ -218,7 +218,7 @@ dotnet add GrpcGreeterClient.csproj package Grpc.Tools
 
   프로젝트를 마우스 오른쪽 단추로 클릭하고 **도구 > 파일 편집**을 선택합니다.
 
-  ------
+  ---
 
 * **greet.proto** 파일을 GrpcGreeterClient 프로젝트 파일의 `<Protobuf>` 항목 그룹에 추가합니다.
 
@@ -230,7 +230,7 @@ dotnet add GrpcGreeterClient.csproj package Grpc.Tools
 
 클라이언트 프로젝트를 빌드하여 C# 클라이언트 자산 생성을 트리거합니다.
 
-### <a name="create-the-greater-client"></a>더 큰 클라이언트 만들기
+### <a name="create-the-greeter-client"></a>Greeter 클라이언트 만들기
 
 프로젝트를 빌드하여 **Greeter** 네임스페이스에 유형을 만듭니다. `Greeter` 유형은 빌드 프로세스에 의해 자동으로 생성됩니다.
 
@@ -240,14 +240,14 @@ gRPC 클라이언트 *Program.cs* 파일을 다음 코드로 업데이트합니�
 
 *Program.cs*는 gRPC 클라이언트의 진입점 및 논리를 포함합니다.
 
-더 큰 클라이언트는 다음에 의해 생성됩니다.
+Greeter 클라이언트는 다음에 의해 생성됩니다.
 
 * gRPC 서비스에 대한 연결을 만들기 위한 정보가 포함된 `Channel` 인스턴스화.
-* `Channel`을 사용하여 더 큰 클라이언트를 구성합니다.
+* `Channel`을 사용하여 Greeter 클라이언트를 구성합니다.
 
 [!code-cs[](~/tutorials/grpc/grpc-start/sample/GrpcGreeterClient/Program.cs?name=snippet&highlight=4-6)]
 
-더 큰 클라이언트가 비동기 `SayHello` 메서드를 호출합니다. `SayHello` 호출의 결과가 표시됩니다.
+Greeter 클라이언트가 비동기 `SayHello` 메서드를 호출합니다. `SayHello` 호출의 결과가 표시됩니다.
 
 [!code-cs[](~/tutorials/grpc/grpc-start/sample/GrpcGreeterClient/Program.cs?name=snippet&highlight=7-9)]
 

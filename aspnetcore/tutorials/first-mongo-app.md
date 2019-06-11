@@ -1,17 +1,17 @@
 ---
-title: ASP.NET Core 및 MongoDB를 사용하여 웹 API 빌드
+title: ASP.NET Core 및 MongoDB를 사용하여 웹 API 만들기
 author: prkhandelwal
-description: 이 자습서에서는 MongoDB NoSQL 데이터베이스를 사용하여 ASP.NET Core 웹 API를 빌드하는 방법을 보여 줍니다.
+description: 이 자습서에서는 MongoDB NoSQL 데이터베이스를 사용하여 ASP.NET Core 웹 API를 만드는 방법을 보여 줍니다.
 ms.author: scaddie
 ms.custom: mvc, seodec18
-ms.date: 01/31/2019
+ms.date: 06/04/2019
 uid: tutorials/first-mongo-app
-ms.openlocfilehash: f593a8d2d06897736b12f49f25c6049ea994a88a
-ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
+ms.openlocfilehash: 6a8c5d75f562b38015101e039a2f5d96a5491595
+ms.sourcegitcommit: 5dd2ce9709c9e41142771e652d1a4bd0b5248cec
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65610612"
+ms.lasthandoff: 06/05/2019
+ms.locfileid: "66692556"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>ASP.NET Core 및 MongoDB를 사용하여 웹 API 만들기
 
@@ -143,8 +143,9 @@ Windows를 사용하는 경우 MongoDB는 기본적으로*C:\\Program Files\\Mon
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. **파일** > **새로 만들기** > **프로젝트**로 이동합니다.
-1. **ASP.NET Core 웹 애플리케이션**을 선택하고 프로젝트 이름을 *BooksApi*로 지정한 다음, **확인**을 클릭합니다.
-1. **.NET Core** 대상 프레임워크 및 **ASP.NET Core 2.2**를 선택합니다. **API** 프로젝트 템플릿을 선택하고 **확인**을 클릭합니다.
+1. **ASP.NET Core 웹 애플리케이션** 프로젝트 유형을 선택하고 **다음**을 선택합니다.
+1. 프로젝트 이름을 *BooksApi*로 지정하고 **만들기**를 선택합니다.
+1. **.NET Core** 대상 프레임워크 및 **ASP.NET Core 2.2**를 선택합니다. **API** 프로젝트 템플릿을 선택하고 **만들기**를 선택합니다.
 1. [NuGet 갤러리: MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/)를 방문하여 MongoDB용 .NET 드라이버의 안정적인 최신 버전을 확인합니다. **패키지 관리자 콘솔** 창에서 프로젝트 루트로 이동합니다. 다음 명령을 실행하여 MongoDB용 .NET 드라이버를 설치합니다.
 
     ```powershell
@@ -162,7 +163,7 @@ Windows를 사용하는 경우 MongoDB는 기본적으로*C:\\Program Files\\Mon
 
     .NET Core를 대상으로 하는 새로운 ASP.NET Core 웹 API 프로젝트가 Visual Studio Code에서 생성되어 열립니다.
 
-1. ‘빌드 및 디버그에 필요한 자산이 ‘BooksApi’에서 누락되었습니다. 추가하시겠습니까?’ 알림이 표시되면 **예**를 클릭합니다. 
+1. 상태 표시줄의 OmniSharp 불꽃 아이콘이 녹색으로 바뀐 후 대화 상자에 **빌드 및 디버그에 필요한 자산이 'BooksApi'에서 누락되었습니다.라는 메시지가 표시됩니다. 추가할까요?** . **예**를 선택합니다.
 1. [NuGet 갤러리: MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/)를 방문하여 MongoDB용 .NET 드라이버의 안정적인 최신 버전을 확인합니다. **통합 터미널**을 열고 프로젝트 루트로 이동합니다. 다음 명령을 실행하여 MongoDB용 .NET 드라이버를 설치합니다.
 
     ```console
@@ -171,80 +172,109 @@ Windows를 사용하는 경우 MongoDB는 기본적으로*C:\\Program Files\\Mon
 
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-1. **파일** > **새 솔루션** > **.NET Core** > **앱**으로 이동합니다.
-1. **ASP.NET Core Web API** C# 프로젝트 템플릿을 선택하고 **다음**을 클릭합니다.
-1. **대상 프레임워크** 드롭다운 목록에서 **.NET Core 2.2**를 선택하고 **다음**을 클릭합니다.
-1. **프로젝트 이름**으로 *BooksApi*를 입력한 다음, **만들기**를 클릭합니다.
+1. **파일** > **새 솔루션** >  **.NET Core** > **앱**으로 이동합니다.
+1. **ASP.NET Core Web API** C# 프로젝트 템플릿을 선택하고 **다음**을 선택합니다.
+1. **대상 프레임워크** 드롭다운 목록에서 **.NET Core 2.2**를 선택하고 **다음**을 선택합니다.
+1. **프로젝트 이름**으로 *BooksApi*를 입력하고 **만들기**를 선택합니다.
 1. **솔루션** 패드에서 프로젝트의 **종속성** 노드를 마우스 오른쪽 단추로 클릭하고 **패키지 추가**를 선택합니다.
-1. 검색 상자에 *MongoDB.Driver*를 입력하고 *MongoDB.Driver* 패키지를 선택한 다음, **패키지 추가**를 클릭합니다.
-1. **라이선스 승인** 대화 상자에서 **동의** 단추를 클릭합니다.
+1. 검색 상자에 *MongoDB.Driver*를 입력하여 *MongoDB.Driver* 패키지를 선택하고 **패키지 추가**를 선택합니다.
+1. **라이선스 승인** 대화 상자에서 **동의** 단추를 선택합니다.
 
 ---
 
-## <a name="add-a-model"></a>모델 추가
+## <a name="add-an-entity-model"></a>엔터티 모델 추가
 
 1. 프로젝트 루트에 *Models* 디렉터리를 추가합니다.
 1. 다음 코드를 사용하여 *Models* 디렉터리에 `Book` 클래스를 추가합니다.
 
     [!code-csharp[](first-mongo-app/sample/BooksApi/Models/Book.cs)]
 
-앞의 클래스에서 `Id` 속성은
+    앞의 클래스에서 `Id` 속성은
+    
+    * CLR(공용 언어 런타임) 개체를 MongoDB 컬렉션에 매핑하는 데 필요합니다.
+    * 이 속성을 문서의 기본 키로 지정하려면 [[BsonId]](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonIdAttribute.htm)에 주석을 추가합니다.
+    * [ObjectId](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_ObjectId.htm) 구조 대신 `string` 유형으로 매개 변수를 전달하려면 [[BsonRepresentation(BsonType.ObjectId)]](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonRepresentationAttribute.htm)에 주석을 추가합니다. Mongo는 `string`에서 `ObjectId`로 변환을 처리합니다.
+    
+    클래스의 기타 속성은 [[BsonElement]](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonElementAttribute.htm) 특성으로 주석이 추가됩니다. 특성 값은 MongoDB 컬렉션의 속성 이름을 나타냅니다.
 
-* CLR(공용 언어 런타임) 개체를 MongoDB 컬렉션에 매핑하는 데 필요합니다.
-* 이 속성을 문서의 기본 키로 지정하려면 `[BsonId]`로 주석이 추가됩니다.
-* `ObjectId` 대신 `string` 형식으로 매개 변수를 전달할 수 있도록 `[BsonRepresentation(BsonType.ObjectId)]`로 주석이 추가됩니다. Mongo는 `string`에서 `ObjectId`로 변환을 처리합니다.
+## <a name="add-a-configuration-model"></a>구성 모델 추가
 
-클래스의 기타 속성은 `[BsonElement]` 특성으로 주석이 추가됩니다. 특성 값은 MongoDB 컬렉션의 속성 이름을 나타냅니다.
+1. 다음 데이터베이스 구성 값을 *appsettings.json*에 추가합니다.
 
-## <a name="add-a-crud-operations-class"></a>CRUD 작업 클래스 추가
+    [!code-json[](first-mongo-app/sample/BooksApi/appsettings.json?highlight=2-6)]
+
+1. 다음 코드를 사용하여 *BookstoreDatabaseSettings.cs* 파일을 *모델* 디렉터리에 추가합니다.
+
+    [!code-csharp[](first-mongo-app/sample/BooksApi/Models/BookstoreDatabaseSettings.cs)]
+
+    위의 `BookstoreDatabaseSettings` 클래스는 *appsettings.json* 파일의 `BookstoreDatabaseSettings` 속성 값을 저장하는 데 사용됩니다. JSON 및 C# 속성 이름은 매핑 프로세스를 용이하게 하기 위해 동일한 이름이 지정됩니다.
+
+1. `AddMvc`로 호출하기 전에 다음 코드를 `Startup.ConfigureServices`에 추가합니다.
+
+    [!code-csharp[](first-mongo-app/sample/BooksApi/Startup.cs?name=snippet_ConfigureDatabaseSettings)]
+
+    위의 코드에서
+
+    * *appsettings.json* 파일의 `BookstoreDatabaseSettings` 섹션이 바인딩되는 구성 인스턴스가 DI(종속성 주입) 컨테이너에 등록됩니다. 예를 들어 `BookstoreDatabaseSettings` 개체의 `ConnectionString` 속성은 *appsettings.json*의 `BookstoreDatabaseSettings:ConnectionString` 속성으로 채워집니다.
+    * `IBookstoreDatabaseSettings` 인터페이스는 싱글톤 [서비스 수명](xref:fundamentals/dependency-injection#service-lifetimes)으로 DI에 등록됩니다. 삽입하면 인터페이스 인스턴스가 `BookstoreDatabaseSettings` 개체로 확인됩니다.
+
+1. *Startup.cs*의 맨 위에 다음 코드를 추가하여 `BookstoreDatabaseSettings` 및 `IBookstoreDatabaseSettings` 참조를 확인합니다.
+
+    [!code-csharp[](first-mongo-app/sample/BooksApi/Startup.cs?name=snippet_UsingBooksApiModels)]
+
+## <a name="add-a-crud-operations-service"></a>CRUD 작업 서비스 추가
 
 1. 프로젝트 루트에 *Services* 디렉터리를 추가합니다.
 1. 다음 코드를 사용하여 *Services* 디렉터리에 `BookService` 클래스를 추가합니다.
 
     [!code-csharp[](first-mongo-app/sample/BooksApi/Services/BookService.cs?name=snippet_BookServiceClass)]
 
-1. *appsettings.json*에 MongoDB 연결 문자열을 추가합니다.
+    위의 코드에서 생성자 주입을 통해 DI에서 `IBookstoreDatabaseSettings` 인스턴스가 검색됩니다. 이 기술은 [구성 모델 추가](#add-a-configuration-model) 섹션에 추가된 *appsettings.json* 구성 값에 대한 액세스를 제공합니다.
 
-    [!code-csharp[](first-mongo-app/sample/BooksApi/appsettings.json?highlight=2-4)]
+1. `Startup.ConfigureServices`에서 `BookService` 클래스를 DI로 등록합니다.
 
-    앞의 `BookstoreDb` 속성은 `BookService` 클래스 생성자에서 액세스됩니다.
+    [!code-csharp[](first-mongo-app/sample/BooksApi/Startup.cs?name=snippet_ConfigureServices&highlight=9)]
 
-1. `Startup.ConfigureServices`에서 `BookService` 클래스를 종속성 삽입 시스템에 등록합니다.
+    위의 코드에서 `BookService` 클래스는 사용 클래스에서 생성자 주입을 지원하는 DI로 등록됩니다. `BookService`가 `MongoClient`에 직접 종속되기 때문에 싱글톤 서비스 수명이 가장 적합합니다. 공식 [Mongo 클라이언트 재사용 지침](https://mongodb.github.io/mongo-csharp-driver/2.8/reference/driver/connecting/#re-use)에 따라 `MongoClient`를 싱글톤 수명으로 DI에 등록해야 합니다.
 
-    [!code-csharp[](first-mongo-app/sample/BooksApi/Startup.cs?name=snippet_ConfigureServices&highlight=3)]
+1. *Startup.cs*의 맨 위에 다음 코드를 추가하여 `BookService` 참조를 확인합니다.
 
-    앞의 서비스 등록은 사용 클래스에서 생성자 삽입을 지원하는 데 필요합니다.
+    [!code-csharp[](first-mongo-app/sample/BooksApi/Startup.cs?name=snippet_UsingBooksApiServices)]
 
 `BookService` 클래스는 다음 `MongoDB.Driver` 멤버를 사용하여 데이터베이스에 대해 CRUD 작업을 수행합니다.
 
-* `MongoClient` &ndash; 데이터베이스 작업을 수행하기 위한 서버 인스턴스를 읽습니다. 이 클래스의 생성자에 MongoDB 연결 문자열이 제공됩니다.
+* [MongoClient](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoClient.htm) &ndash; 데이터베이스 작업을 수행하기 위한 서버 인스턴스를 읽습니다. 이 클래스의 생성자에 MongoDB 연결 문자열이 제공됩니다.
 
     [!code-csharp[](first-mongo-app/sample/BooksApi/Services/BookService.cs?name=snippet_BookServiceConstructor&highlight=3)]
 
-* `IMongoDatabase` &ndash; 작업 수행을 위한 Mongo 데이터베이스를 나타냅니다. 이 자습서에서는 인터페이스의 일반 `GetCollection<T>(collection)` 메서드를 사용하여 특정 컬렉션의 데이터에 액세스합니다. 이 메서드를 호출한 후 컬렉션에 대해 CRUD 작업을 수행할 수 있습니다. `GetCollection<T>(collection)` 메서드 호출에서 다음을 수행합니다.
+* [IMongoDatabase](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_IMongoDatabase.htm) &ndash; 작업 수행을 위한 Mongo 데이터베이스를 나타냅니다. 이 자습서에서는 인터페이스의 일반 [GetCollection<TDocument>(컬렉션)](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoDatabase_GetCollection__1.htm) 메서드를 사용하여 특정 컬렉션의 데이터에 액세스합니다. 이 메서드를 호출한 후 컬렉션에 대해 CRUD 작업을 수행합니다. `GetCollection<TDocument>(collection)` 메서드 호출에서 다음을 수행합니다.
   * `collection`은 컬렉션 이름을 나타냅니다.
-  * `T`는 컬렉션에 저장된 CLR 개체 형식을 나타냅니다.
+  * `TDocument`는 컬렉션에 저장된 CLR 개체 형식을 나타냅니다.
 
-`GetCollection<T>(collection)`은 컬렉션을 나타내는 `MongoCollection` 개체를 반환합니다. 이 자습서에서는 컬렉션에 대해 다음 메서드를 호출합니다.
+`GetCollection<TDocument>(collection)`는 컬렉션을 나타내는 [MongoCollection](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoCollection.htm) 개체를 반환합니다. 이 자습서에서는 컬렉션에 대해 다음 메서드를 호출합니다.
 
-* `Find<T>` &ndash; 제공된 검색 조건과 일치하는 컬렉션의 모든 문서를 반환합니다.
-* `InsertOne` &ndash; 제공된 개체를 컬렉션에 새 문서로 삽입합니다.
-* `ReplaceOne` &ndash; 제공된 검색 조건과 일치하는 단일 문서를 제공된 개체로 바꿉니다.
-* `DeleteOne` &ndash; 제공된 검색 조건과 일치하는 단일 문서를 삭제합니다.
+* [DeleteOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_DeleteOne.htm) &ndash; 제공된 검색 조건과 일치하는 단일 문서를 삭제합니다.
+* [Find\<TDocument>](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollectionExtensions_Find__1_1.htm) &ndash; 제공된 검색 조건과 일치하는 컬렉션의 모든 문서를 반환합니다.
+* [InsertOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm) &ndash; 제공된 개체를 컬렉션에 새 문서로 삽입합니다.
+* [ReplaceOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_ReplaceOne.htm) &ndash; 제공된 검색 조건과 일치하는 단일 문서를 제공된 개체로 바꿉니다.
 
 ## <a name="add-a-controller"></a>컨트롤러 추가
 
-1. 다음 코드를 사용하여 *Controllers* 디렉터리에 `BooksController` 클래스를 추가합니다.
+다음 코드를 사용하여 *Controllers* 디렉터리에 `BooksController` 클래스를 추가합니다.
 
-    [!code-csharp[](first-mongo-app/sample/BooksApi/Controllers/BooksController.cs)]
+[!code-csharp[](first-mongo-app/sample/BooksApi/Controllers/BooksController.cs)]
 
-    앞의 웹 API 컨트롤러는 다음과 같습니다.
+앞의 웹 API 컨트롤러는 다음과 같습니다.
 
-    * `BookService` 클래스를 사용하여 CRUD 작업을 수행합니다.
-    * GET, POST, PUT 및 DELETE HTTP 요청을 지원하는 작업 메서드를 포함합니다.
-    * <xref:System.Web.Http.ApiController.CreatedAtRoute*> 메서드는 서버에서 새 리소스를 만드는 HTTP POST 메서드의 표준 응답인 201 응답을 반환합니다. `CreatedAtRoute`는 응답에 대한 위치 헤더도 추가합니다. 위치 헤더는 새로 만들어진 할 일 항목의 URI를 지정합니다. [10.2.2 201 Created](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)(10.2.2 201 생성됨)를 참조하세요.
+* `BookService` 클래스를 사용하여 CRUD 작업을 수행합니다.
+* GET, POST, PUT 및 DELETE HTTP 요청을 지원하는 작업 메서드를 포함합니다.
+* `Create` 작업 메서드에서 <xref:System.Web.Http.ApiController.CreatedAtRoute*>를 호출하여 [HTTP 201](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) 응답을 반환합니다. 상태 코드 201은 서버에서 새 리소스를 만드는 HTTP POST 메서드의 표준 응답입니다. 또한 `CreatedAtRoute`는 `Location` 헤더를 응답에 추가합니다. `Location` 헤더는 새로 만든 책의 URI를 지정합니다.
+
+## <a name="test-the-web-api"></a>웹 API 테스트
+
 1. 앱을 빌드하고 실행합니다.
-1. 브라우저에서 `http://localhost:<port>/api/books`로 이동합니다. 다음 JSON 응답이 표시됩니다.
+
+1. `http://localhost:<port>/api/books`로 이동하여 컨트롤러의 매개 변수가 없는 `Get` 작업 메서드를 테스트합니다. 다음 JSON 응답이 표시됩니다.
 
     ```json
     [
@@ -265,10 +295,22 @@ Windows를 사용하는 경우 MongoDB는 기본적으로*C:\\Program Files\\Mon
     ]
     ```
 
+1. `http://localhost:<port>/api/books/5bfd996f7b8e48dc15ff215e`로 이동하여 컨트롤러의 오버로드된 `Get` 작업 메서드를 테스트합니다. 다음 JSON 응답이 표시됩니다.
+
+    ```json
+    {
+      "id":"5bfd996f7b8e48dc15ff215e",
+      "bookName":"Clean Code",
+      "price":43.15,
+      "category":"Computers",
+      "author":"Robert C. Martin"
+    }
+    ```
+
 ## <a name="next-steps"></a>다음 단계
 
 ASP.NET Core 웹 API 빌드 방법에 대한 자세한 내용은 다음 리소스를 참조하세요.
 
-* [이 문서의 Youtube 버전](https://www.youtube.com/watch?v=7uJt_sOenyo&feature=youtu.be)
+* [이 문서의 YouTube 버전](https://www.youtube.com/watch?v=7uJt_sOenyo&feature=youtu.be)
 * <xref:web-api/index>
 * <xref:web-api/action-return-types>
