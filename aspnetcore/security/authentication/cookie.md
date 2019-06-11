@@ -5,12 +5,12 @@ description: ASP.NET Core Id 없이 쿠키 인증을 사용 하 여 설명
 ms.author: riande
 ms.date: 02/25/2019
 uid: security/authentication/cookie
-ms.openlocfilehash: 2bc3e16b1b32816b14ad5bb4ca905ae5ed51ab87
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: f3e02b357a83cf5fc4b9fcdc79b2fbe80da98507
+ms.sourcegitcommit: 9691b742134563b662948b0ed63f54ef7186801e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64897750"
+ms.lasthandoff: 06/10/2019
+ms.locfileid: "66824758"
 ---
 # <a name="use-cookie-authentication-without-aspnet-core-identity"></a>ASP.NET Core Id 없이 쿠키 인증 사용
 
@@ -195,7 +195,7 @@ await HttpContext.Authentication.SignInAsync(
 
 `SignInAsync` 암호화 된 쿠키를 만들고 현재 응답에 추가 합니다. 지정 하지 않으면는 `AuthenticationScheme`, 기본 구성표가 사용 됩니다.
 
-내부적으로 사용 되는 암호화는 ASP.NET Core [데이터 보호](xref:security/data-protection/using-data-protection#security-data-protection-getting-started) 시스템입니다. 여러 컴퓨터, 앱에 부하 분산 또는 웹 팜에서 사용 하 여 앱을 호스트 하는 경우 수행 해야 합니다 [데이터 보호를 구성](xref:security/data-protection/configuration/overview) 동일한 키 링 및 앱 식별자를 사용 하도록 합니다.
+내부적으로 사용 되는 암호화는 ASP.NET Core [데이터 보호](xref:security/data-protection/using-data-protection) 시스템입니다. 여러 컴퓨터, 앱에 부하 분산 또는 웹 팜에서 사용 하 여 앱을 호스트 하는 경우 수행 해야 합니다 [데이터 보호를 구성](xref:security/data-protection/configuration/overview) 동일한 키 링 및 앱 식별자를 사용 하도록 합니다.
 
 ## <a name="sign-out"></a>로그아웃
 
