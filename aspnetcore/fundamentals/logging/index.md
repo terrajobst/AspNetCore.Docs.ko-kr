@@ -6,12 +6,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 05/01/2019
 uid: fundamentals/logging/index
-ms.openlocfilehash: ee7d4b2ae04b5f6c262acc5da0f86f90ab50585f
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 435f06b85af4a1a5a78a870c2add3e15ff1ffe89
+ms.sourcegitcommit: 1bb3f3f1905b4e7d4ca1b314f2ce6ee5dd8be75f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65085664"
+ms.lasthandoff: 06/11/2019
+ms.locfileid: "66837271"
 ---
 # <a name="logging-in-aspnet-core"></a>ASP.NET Core에 로그인
 
@@ -823,9 +823,10 @@ loggerFactory.AddAzureWebAppDiagnostics();
 
 ::: moniker-end
 
-App Service 앱에 배포할 때 애플리케이션은 Azure Portal **App Service** 페이지의 [진단 로그](/azure/app-service/web-sites-enable-diagnostic-log/#enablediag) 섹션에 있는 설정을 따릅니다. 이러한 설정을 업데이트하는 경우 앱을 다시 시작하거나 재배포하지 않아도 변경 내용은 즉시 적용됩니다.
+App Service 앱에 배포할 때 애플리케이션은 Azure Portal **App Service** 페이지의 [App Service 로그](/azure/app-service/web-sites-enable-diagnostic-log/#enablediag) 섹션에 있는 설정을 따릅니다. 다음 설정이 업데이트되면 앱을 다시 시작하거나 재배포하지 않아도 변경 내용이 즉시 적용됩니다.
 
-![Azure 로깅 설정](index/_static/azure-logging-settings.png)
+* **애플리케이션 로깅(파일 시스템)**
+* **애플리케이션 로깅(Blob)**
 
 로그 파일의 기본 위치는 *D:\\home\\LogFiles\\Application* 폴더이며, 기본 파일 이름은 *diagnostics-yyyymmdd.txt*입니다. 기본 파일 크기 제한은 10MB이고, 보존되는 기본 최대 파일 수는 2입니다. 기본 BLOB 이름은 *{app-name}{timestamp}/yyyy/mm/dd/hh/{guid}-applicationLog.txt*입니다.
 
@@ -841,14 +842,11 @@ Azure 로그 스트리밍을 통해 로그 작업을 실시간으로 볼 수 있
 
 Azure 로그 스트리밍을 구성하려면:
 
-* 앱의 포털 페이지에서 **진단 로그** 페이지로 이동합니다.
+* 앱의 포털 페이지에서 **App Service 로그** 페이지로 이동합니다.
 * **애플리케이션 로깅(파일 시스템)** 을 **On**으로 설정합니다.
+* 로그 **수준**을 선택합니다.
 
-![Azure Portal 진단 로그 페이지](index/_static/azure-diagnostic-logs.png)
-
-**로그 스트리밍** 페이지로 이동하여 앱 메시지를 봅니다. 앱이 `ILogger` 인터페이스를 통해 기록한 것입니다.
-
-![Azure Portal 애플리케이션 로그 스트리밍](index/_static/azure-log-streaming.png)
+**로그 스트림** 페이지로 이동하여 앱 메시지를 봅니다. 앱이 `ILogger` 인터페이스를 통해 기록한 것입니다.
 
 ::: moniker range=">= aspnetcore-1.1"
 

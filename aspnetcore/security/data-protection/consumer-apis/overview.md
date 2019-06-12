@@ -3,14 +3,14 @@ title: ASP.NET core 소비자 Api 개요
 author: rick-anderson
 description: Api에서 ASP.NET Core 데이터 보호 라이브러리를 사용할 수 있는 다양 한 소비자의 간략 한 개요를 수신 합니다.
 ms.author: riande
-ms.date: 10/14/2016
+ms.date: 06/11/2019
 uid: security/data-protection/consumer-apis/overview
-ms.openlocfilehash: b0d11d097ee2d448b6781f6fa84445f6400fbc76
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: ff9badb55813cae0aa72d3a95dc53792332f109b
+ms.sourcegitcommit: 1bb3f3f1905b4e7d4ca1b314f2ce6ee5dd8be75f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087551"
+ms.lasthandoff: 06/11/2019
+ms.locfileid: "66837374"
 ---
 # <a name="consumer-apis-overview-for-aspnet-core"></a>ASP.NET core 소비자 Api 개요
 
@@ -32,7 +32,7 @@ ms.locfileid: "65087551"
 
 ## <a name="consuming-these-interfaces"></a>인터페이스 소비하기
 
-DI-인식 구성 요소의 경우, 구성 요소의 생성자에서 `IDataProtectionProvider` 매개 변수를 전달 받고, 구성 요소의 인스턴스가 만들어질 때 DI 시스템이 자동으로 이 서비스를 제공하는 방식으로 사용하도록 만들어졌습니다.
+DI 인식 구성 요소에 대 한 용도은 구성 요소는는 `IDataProtectionProvider` DI 시스템 구성 요소를 인스턴스화할 때 자동으로이 서비스를 제공 하 고 생성자의 매개 변수입니다.
 
 > [!NOTE]
 > 일부 응용 프로그램(예: 콘솔 응용 프로그램 또는 ASP.NET 4.x 응용 프로그램)은 DI를 인식하지 못할 수도 있으므로 본문에서 설명하는 메커니즘을 사용할 수 없습니다. 이러한 시나리오의 경우, DI를 거치지 않고 `IDataProtection` 공급자의 인스턴스를 얻는 방법에 대한 자세한 정보는 [비 DI-인식 시나리오](xref:security/data-protection/configuration/non-di-scenarios) 를 참조하세요.
