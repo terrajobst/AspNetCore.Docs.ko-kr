@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/11/2019
 uid: security/data-protection/configuration/overview
-ms.openlocfilehash: ee43427fa1e82a365d49df50567b4ca7afb5a5d3
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 65a927b6288ca6cc41ee1bedd1080e52ffe0d3e1
+ms.sourcegitcommit: 335a88c1b6e7f0caa8a3a27db57c56664d676d34
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64897300"
+ms.lasthandoff: 06/12/2019
+ms.locfileid: "67034927"
 ---
 # <a name="configure-aspnet-core-data-protection"></a>ASP.NET Core 데이터 보호를 구성 합니다.
 
@@ -23,9 +23,9 @@ ms.locfileid: "64897300"
 이러한 시나리오에 대 한 데이터 보호 시스템은 다양 한 구성 API를 제공합니다.
 
 > [!WARNING]
-> 구성 파일에는 마찬가지로 데이터 보호 키 링을 보호 해야 적절 한 권한을 사용 하 여 합니다. 미사용 키를 암호화 하도록 선택할 수 있습니다 하지만이 것을 막기 위해 공격자가 새 키를 만들지 못하게 합니다. 따라서 앱의 보안 영향을 받습니다. 데이터 보호를 사용 하 여 구성 저장소 위치에는 자체 구성 파일을 보호 하는 방식과 유사 하 게 앱에 제한 된 액세스가 있어야 합니다. 예를 들어, 디스크에 키 링을 저장 하려는 경우 파일 시스템 권한을 사용 합니다. 확인 id만 웹 앱이 실행 되는 읽기, 쓰기 및 해당 디렉터리에 대 한 액세스를 만듭니다. Azure Table Storage를 사용 하는 경우 웹 앱에만 읽기, 쓰기 또는 등 테이블 저장소에 새 항목을 만들 수가 있어야 합니다.
+> 구성 파일에는 마찬가지로 데이터 보호 키 링을 보호 해야 적절 한 권한을 사용 하 여 합니다. 미사용 키를 암호화 하도록 선택할 수 있습니다 하지만이 것을 막기 위해 공격자가 새 키를 만들지 못하게 합니다. 따라서 앱의 보안 영향을 받습니다. 데이터 보호를 사용 하 여 구성 저장소 위치에는 자체 구성 파일을 보호 하는 방식과 유사 하 게 앱에 제한 된 액세스가 있어야 합니다. 예를 들어, 디스크에 키 링을 저장 하려는 경우 파일 시스템 권한을 사용 합니다. 확인 id만 웹 앱이 실행 되는 읽기, 쓰기 및 해당 디렉터리에 대 한 액세스를 만듭니다. Azure Blob Storage를 사용 하는 경우 웹 앱에만 읽기, 쓰기 또는 등 blob 저장소에 새 항목을 만들 수가 있어야 합니다.
 >
-> 확장 메서드 [AddDataProtection](/dotnet/api/microsoft.extensions.dependencyinjection.dataprotectionservicecollectionextensions.adddataprotection) 반환 된 [IDataProtectionBuilder](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotectionbuilder)합니다. `IDataProtectionBuilder` 는 함께 연이어 호출해서 데이터 보호 옵션을 구성할 수 있는 확장 메서드들을 노출합니다. 
+> 확장 메서드 [AddDataProtection](/dotnet/api/microsoft.extensions.dependencyinjection.dataprotectionservicecollectionextensions.adddataprotection) 반환 된 [IDataProtectionBuilder](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotectionbuilder)합니다. `IDataProtectionBuilder` 는 함께 연이어 호출해서 데이터 보호 옵션을 구성할 수 있는 확장 메서드들을 노출합니다.
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -42,7 +42,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-키 링 저장소 위치를 설정 (예를 들어 [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage)). 호출 하기 때문에 위치를 설정 해야 합니다 `ProtectKeysWithAzureKeyVault` 를 구현 하는 [IXmlEncryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmlencryptor) 키 링 저장소 위치를 포함 하 여 자동으로 데이터 보호 설정을 사용 하지 않도록 설정 하는 합니다. 키 링을 유지 하기 위해 Azure Blob Storage를 사용 하는 앞의 예제입니다. 자세한 내용은 참조 하세요. [키 저장소 공급자: Azure 및 Redis](xref:security/data-protection/implementation/key-storage-providers#azure-and-redis)합니다. 키 링을 사용 하 여 로컬로 유지할 수도 있습니다 [PersistKeysToFileSystem](xref:security/data-protection/implementation/key-storage-providers#file-system)합니다.
+키 링 저장소 위치를 설정 (예를 들어 [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage)). 호출 하기 때문에 위치를 설정 해야 합니다 `ProtectKeysWithAzureKeyVault` 를 구현 하는 [IXmlEncryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmlencryptor) 키 링 저장소 위치를 포함 하 여 자동으로 데이터 보호 설정을 사용 하지 않도록 설정 하는 합니다. 키 링을 유지 하기 위해 Azure Blob Storage를 사용 하는 앞의 예제입니다. 자세한 내용은 참조 하세요. [키 저장소 공급자: Azure Storage](xref:security/data-protection/implementation/key-storage-providers#azure-storage)를 참조하세요. 키 링을 사용 하 여 로컬로 유지할 수도 있습니다 [PersistKeysToFileSystem](xref:security/data-protection/implementation/key-storage-providers#file-system)합니다.
 
 `keyIdentifier` 키 암호화에 사용 되는 키 자격 증명 모음 키 식별자입니다. 예를 들어 라는 key vault에서 만든 키 `dataprotection` 에 `contosokeyvault` 키 식별자를 가진 `https://contosokeyvault.vault.azure.net/keys/dataprotection/`합니다. 앱에 부여할 **키 래핑 해제** 및 **래핑할 키** key vault에 대 한 사용 권한.
 
@@ -170,12 +170,12 @@ ASP.NET Core 호스트에 의해서 데이터 보호 시스템이 제공되는 �
 
 따라서 고유 테 넌 트를 로컬 컴퓨터의 각 앱을 고려 하 여 격리 메커니즘의 작동을 <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> 판별자로 앱 ID를 자동으로 포함 하는 지정 된 모든 앱에 대 한 루트입니다. 앱의 고유 ID는 앱의 실제 경로:
 
-* 에 호스팅된 앱 [IIS](xref:fundamentals/servers/index#iis-http-server), 고유 ID를 앱의 IIS 실제 경로입니다. 웹 팜 환경에서 앱을 배포한 경우이 값은 안정적인 가정할 경우 웹 팜의 모든 컴퓨터에서 IIS 환경 비슷하게 구성 됩니다.
+* IIS에서 호스팅되는 앱에 대 한 고유 ID는 앱의 IIS 실제 경로입니다. 웹 팜 환경에서 앱을 배포한 경우이 값은 안정적인 가정할 경우 웹 팜의 모든 컴퓨터에서 IIS 환경 비슷하게 구성 됩니다.
 * 자체 호스팅된 앱 실행에 대 한 합니다 [Kestrel 서버](xref:fundamentals/servers/index#kestrel), 고유 ID가 디스크에 앱의 실제 경로입니다.
 
 고유 식별자는 재설정 효력을 유지 하도록 설계 되었습니다&mdash;개별 앱 및 컴퓨터 자체입니다.
 
-이 격리 메커니즘은 응용 프로그램에 악의적인 의사가 없음을 전제로 합니다. 악의적인 응용 프로그램은 언제든지 동일한 작업자 프로세스 계정으로 동작하는 다른 모든 응용 프로그램에 영향을 미칠 수 있습니다. 응용 프로그램들 간에 서로 신뢰할 수 없는 공유 호스팅 환경에서는 호스팅 공급자가 응용 프로그램의 기본 키 저장소를 분리하는 등, OS 수준에서 응용 프로그램 간에 격리를 담보할 수 있는 조치를 취해야만 합니다. 
+이 격리 메커니즘은 응용 프로그램에 악의적인 의사가 없음을 전제로 합니다. 악의적인 응용 프로그램은 언제든지 동일한 작업자 프로세스 계정으로 동작하는 다른 모든 응용 프로그램에 영향을 미칠 수 있습니다. 응용 프로그램들 간에 서로 신뢰할 수 없는 공유 호스팅 환경에서는 호스팅 공급자가 응용 프로그램의 기본 키 저장소를 분리하는 등, OS 수준에서 응용 프로그램 간에 격리를 담보할 수 있는 조치를 취해야만 합니다.
 
 데이터 보호 시스템이 ASP.NET Core 호스트에 의해 제공되지 않는 경우에는 (가령, 개발자가 직접 구체적인 `DataProtectionProvider` 형식을 이용해서 인스턴스를 생성하는 등), 자동으로 응용 프로그램 격리가 비활성화되며 적절한 [용도](xref:security/data-protection/consumer-apis/purpose-strings)를 제공하기만 하면 동일한 키 관련 자료를 사용하는 모든 응용 프로그램들 간에 페이로드를 공유할 수 있습니다. 이런 환경에서 응용 프로그램 간 격리를 제공하려면 앞에서 살펴본 예제처럼 구성 개체의 [SetApplicationName](#setapplicationname) 메서드를 호출하면 됩니다.
 
@@ -213,7 +213,7 @@ services.AddDataProtection()
 
 EncryptionAlgorithm 및 ValidationAlgorithm의 기본값은 각각 AES-256-CBC와 HMACSHA256 입니다. 시스템 관리자가 [컴퓨터 수준 정책](xref:security/data-protection/configuration/machine-wide-policy)을 통해서 기본 정책을 설정할 수도 있지만, 명시적으로 `UseCryptographicAlgorithms`를 호출하면 기본 정책이 재정의됩니다.
 
-`UseCryptographicAlgorithms` 을 호출하면 미리 제공되는 목록 중에서 원하는 알고리즘을 지정할 수 있습니다. 개발자는 알고리즘 구현을 걱정할 필요가 없습니다. 위의 시나리오에서 데이터 보호 시스템이 Windows에서 실행 중이라면 AES의 CNG 구현을 사용하려고 시도하고,  그렇지 않으면 관리되는 [System.Security.Cryptography.Aes](/dotnet/api/system.security.cryptography.aes) 클래스로 대체됩니다.
+`UseCryptographicAlgorithms` 을 호출하면 미리 제공되는 목록 중에서 원하는 알고리즘을 지정할 수 있습니다. 개발자는 알고리즘 구현을 걱정할 필요가 없습니다. 위의 시나리오에서 데이터 보호 시스템이 Windows에서 실행 중이라면 AES의 CNG 구현을 사용하려고 시도하고, 그렇지 않으면 관리되는 [System.Security.Cryptography.Aes](/dotnet/api/system.security.cryptography.aes) 클래스로 대체됩니다.
 
 [UseCustomCryptographicAlgorithms](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.usecustomcryptographicalgorithms)를 호출해서 원하는 구현을 직접 지정할 수도 있습니다.
 

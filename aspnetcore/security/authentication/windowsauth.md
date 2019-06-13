@@ -5,22 +5,35 @@ description: ASP.NET Core에서 HTTP.sys 및 IIS에 대 한 Windows 인증을 �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc, seodec18
-ms.date: 06/05/2019
+ms.date: 06/12/2019
 uid: security/authentication/windowsauth
-ms.openlocfilehash: 900bbf5f14b1876ad537b2b77e4ba07d7aa168f2
-ms.sourcegitcommit: e7e04a45195d4e0527af6f7cf1807defb56dc3c3
+ms.openlocfilehash: 93f833adff95f25d570947cd1a9035d652f522c2
+ms.sourcegitcommit: 335a88c1b6e7f0caa8a3a27db57c56664d676d34
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/06/2019
-ms.locfileid: "66750160"
+ms.lasthandoff: 06/12/2019
+ms.locfileid: "67034956"
 ---
 # <a name="configure-windows-authentication-in-aspnet-core"></a>ASP.NET Core에서 Windows 인증을 구성 합니다.
 
 하 여 [Scott Addie](https://twitter.com/Scott_Addie) 고 [Luke Latham](https://github.com/guardrex)
 
-[Windows 인증](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) 사용 하 여 호스팅되는 ASP.NET Core 앱에 대해 구성할 수 있습니다 [IIS](xref:host-and-deploy/iis/index) 하거나 [HTTP.sys](xref:fundamentals/servers/httpsys)합니다.
+::: moniker range=">= aspnetcore-3.0"
+
+사용 하 여 호스팅되는 ASP.NET Core 앱에 대 한 Windows 인증 (라고도: Negotiate, Kerberos 또는 NTLM 인증)를 구성할 수 있습니다 [IIS](xref:host-and-deploy/iis/index)하십시오 [Kestrel](xref:fundamentals/servers/kestrel), 또는 [HTTP.sys](xref:fundamentals/servers/httpsys) .
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+사용 하 여 호스팅되는 ASP.NET Core 앱에 대 한 Windows 인증 (라고도: Negotiate, Kerberos 또는 NTLM 인증)를 구성할 수 있습니다 [IIS](xref:host-and-deploy/iis/index) 하거나 [HTTP.sys](xref:fundamentals/servers/httpsys)합니다.
+
+::: moniker-end
 
 Windows 인증은 ASP.NET Core 앱의 사용자를 인증 하는 운영 체제에서 사용 합니다. 서버는 Windows 계정 또는 Active Directory 도메인 id를 사용 하 여 사용자를 식별 하는 회사 네트워크에서 실행 될 때 Windows 인증을 사용할 수 있습니다. Windows 인증은 인트라넷 환경 사용자, 클라이언트 앱 및 웹 서버는 동일한 Windows 도메인에 속해야 하는 위치에 가장 적합 합니다.
+
+> [!NOTE]
+> HTTP/2를 사용 하 여 Windows 인증이 지원 되지 않습니다. HTTP/2 응답에서 인증 질문을 보낼 수 있습니다 하지만 인증 하기 전에 클라이언트 HTTP/1.1로 다운 그레이드 해야 합니다.
 
 ## <a name="iisiis-express"></a>IIS/IIS Express
 
@@ -125,9 +138,65 @@ ASP.NET Core 모듈은 기본적으로 앱에 Windows 인증 토큰을 전달 �
   * 설정을 다시 설정 하려면 IIS 관리자를 사용 합니다 *web.config* 배포에서 파일을 덮어쓸지 후 파일입니다.
   * 추가 된 *web.config 파일* 설정 사용 하 여 로컬 앱.
 
+::: moniker range=">= aspnetcore-3.0"
+
+## <a name="kestrel"></a>Kestrel
+
+ 합니다 [Microsoft.AspNetCore.Authentication.Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) NuGet 패키지 사용 될 수 있습니다 [Kestrel](xref:fundamentals/servers/kestrel) Negotiate, Kerberos 및 NTLM을 사용 하 여 Windows, Linux 및 macOS에서 Windows 인증을 지원 하도록 합니다.
+
+> [!WARNING]
+> 연결에 대 한 요청에서 자격 증명을 유지할 수 있습니다. *협상 프록시 Kestrel 사용 하 여 1:1 연결 선호도 (영구 연결)를 유지 하지 않는 인증 프록시를 사용 하 여 사용 하면 안 됩니다.* 즉, Negotiate 인증을 IIS 뒤에 있는 Kestrel을 사용 하 여 사용할 해야 [ancm (ASP.NET Core 모듈은) out of process](xref:host-and-deploy/iis/index#out-of-process-hosting-model)합니다.
+
+ 인증 서비스를 호출 하 여 추가 <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> (`Microsoft.AspNetCore.Authentication.Negotiate` 네임 스페이스) 및 `AddNegotitate` (`Microsoft.AspNetCore.Authentication.Negotiate` 네임 스페이스)에서 `Startup.ConfigureServices`:
+
+ ```csharp
+services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
+    .AddNegotiate();
+```
+
+호출 하 여 인증 미들웨어를 추가할 <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> 에서 `Startup.Configure`:
+
+ ```csharp
+app.UseAuthentication();
+
+app.UseMvc();
+```
+
+미들웨어에 대 한 자세한 내용은 참조 하세요. <xref:fundamentals/middleware/index>합니다.
+
+익명 요청 허용 됩니다. 사용 하 여 [ASP.NET Core 권한 부여](xref:security/authorization/introduction) 인증에 대 한 익명 요청 수입니다.
+
+### <a name="windows-environment-configuration"></a>Windows 환경 구성
+
+합니다 [Microsoft.AspNetCore.Authentication.Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) 사용자 모드 인증을 수행 하는 구성 요소입니다. 서비스 사용자 이름 (Spn) 컴퓨터 계정이 아닌 서비스를 실행 하는 사용자 계정에 추가 되어야 합니다. 실행 `setspn -S HTTP/mysrevername.mydomain.com myuser` 관리 명령 셸에서 합니다.
+
+### <a name="linux-and-macos-environment-configuration"></a>Linux 및 macOS 환경 구성
+
+Linux 또는 macOS 컴퓨터를 Windows 도메인 가입에 대 한 지침은 합니다 [Kerberos Windows 인증을 사용 하 여 SQL Server를 Azure Data Studio 연결](/sql/azure-data-studio/enable-kerberos?view=sql-server-2017#join-your-os-to-the-active-directory-domain-controller) 문서. 지침을 도메인에 Linux 컴퓨터에 대 한 컴퓨터 계정을 만듭니다. 해당 컴퓨터 계정에 Spn은 추가 해야 합니다.
+
+> [!NOTE]
+> 지침에 따라 하는 경우는 [Azure Data Studio Kerberos Windows 인증을 사용 하 여 SQL Server에 연결](/sql/azure-data-studio/enable-kerberos?view=sql-server-2017#join-your-os-to-the-active-directory-domain-controller) 문서를 교체 `python-software-properties` 사용 하 여 `python3-software-properties` 필요한 경우.
+
+제공 하는 데 필요한 추가 단계는 Linux 또는 macOS 컴퓨터에 도메인에 가입 되 면을 [keytab 파일](https://blogs.technet.microsoft.com/pie/2018/01/03/all-you-need-to-know-about-keytab-files/) Spn을 사용 하 여:
+
+* 도메인 컨트롤러에서 컴퓨터 계정에 새 웹 서비스 Spn을 추가 합니다.
+  * `setspn -S HTTP/mywebservice.mydomain.com mymachine`
+  * `setspn -S HTTP/mywebservice@MYDOMAIN.COM mymachine`
+* 사용 하 여 [ktpass](/windows-server/administration/windows-commands/ktpass) keytab 파일을 생성 하려면:
+  * `ktpass -princ HTTP/mywebservice.mydomain.com@MYDOMAIN.COM -pass myKeyTabFilePassword -mapuser MYDOMAIN\mymachine$ -pType KRB5_NT_PRINCIPAL -out c:\temp\mymachine.HTTP.keytab -crypto AES256-SHA1`
+  * 표시 된 대로 대문자로에서 일부 필드를 지정 되어야 합니다.
+* Linux 또는 macOS 컴퓨터에 키 파일을 복사 합니다.
+* 환경 변수를 통해 keytab 파일을 선택 합니다. `export KRB5_KTNAME=/tmp/mymachine.HTTP.keytab`
+* 호출 `klist` 현재 사용 가능한 Spn을 표시 합니다.
+
+> [!NOTE]
+> Keytab 파일을 도메인 액세스 자격 증명을 포함 하 고 적절 하 게 보호 되어야 합니다.
+
+::: moniker-end
+
 ## <a name="httpsys"></a>HTTP.sys
 
-자체 호스팅된 시나리오에서는 [Kestrel](xref:fundamentals/servers/kestrel) 하지 지원 Windows 인증을 사용할 수 있습니다 [HTTP.sys](xref:fundamentals/servers/httpsys)합니다.
+[HTTP.sys](xref:fundamentals/servers/httpsys) 협상, NTLM 또는 기본 인증을 사용 하 여 커널 모드 Windows 인증을 지원 합니다.
 
 인증 서비스를 호출 하 여 추가 <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> (<xref:Microsoft.AspNetCore.Server.HttpSys?displayProperty=fullName> 네임 스페이스)에서 `Startup.ConfigureServices`:
 
@@ -177,6 +246,12 @@ Asp.net 가장을 구현 하지 않습니다. 앱 풀 또는 프로세스 id를 
 [!code-csharp[](windowsauth/sample_snapshot/Startup.cs?highlight=10-19)]
 
 `RunImpersonated` 비동기 작업을 지원 하지 않으며 복잡 한 시나리오에 사용할 수 없습니다. 예를 들어 전체 요청 또는 미들웨어 체인 래핑 지원 없거나 것이 좋습니다.
+
+::: moniker range=">= aspnetcore-3.0"
+
+동안 합니다 [Microsoft.AspNetCore.Authentication.Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) 패키지를 사용 하면 Windows에서 인증, Linux 및 macOS의 경우 가장은 Windows 에서만 지원 됩니다.
+
+::: moniker-end
 
 ## <a name="claims-transformations"></a>클레임 변환
 
