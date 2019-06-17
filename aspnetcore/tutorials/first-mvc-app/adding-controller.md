@@ -5,12 +5,12 @@ description: 간단한 ASP.NET Core MVC 앱에 컨트롤러를 추가하는 방�
 ms.author: riande
 ms.date: 02/28/2017
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: dad9262e544fc216ddc694b11b0dfb88b58db9cd
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 9dbfb52109260dbfe0c6c094a7ac4edae47d24e7
+ms.sourcegitcommit: 1bb3f3f1905b4e7d4ca1b314f2ce6ee5dd8be75f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64887288"
+ms.lasthandoff: 06/11/2019
+ms.locfileid: "66837333"
 ---
 # <a name="add-a-controller-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 컨트롤러 추가
 
@@ -102,7 +102,7 @@ URL의 일부 매개 변수 정보를 컨트롤러에 전달하도록 코드를 
 위의 코드는:
 
 * C# 선택적 매개 변수 기능을 사용하여 `numTimes` 매개 변수에 대해 전달된 값이 없는 경우 해당 매개 변수의 기본값이 1임을 나타냅니다. <!-- remove for simplified -->
-* `HtmlEncoder.Default.Encode`를 사용하여 악의적인 입력(예: JavaScript)에서 응용 프로그램을 보호합니다.
+* `HtmlEncoder.Default.Encode`를 사용하여 악의적인 입력(예: JavaScript)에서 애플리케이션을 보호합니다.
 * `$"Hello {name}, NumTimes is: {numTimes}"`에서 [보간된 문자열](/dotnet/articles/csharp/language-reference/keywords/interpolated-strings)을 사용합니다. <!-- remove for simplified -->
 
 앱을 실행하고 다음으로 이동합니다.

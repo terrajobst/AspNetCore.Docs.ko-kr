@@ -4,24 +4,24 @@ author: ardalis
 description: 부분 보기를 사용하여 큰 태그 파일을 나누고 ASP.NET Core 앱의 웹 페이지에서 공통 태그의 중복을 줄이는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/06/2019
+ms.date: 06/12/2019
 uid: mvc/views/partial
-ms.openlocfilehash: e13b2ea974697bb12c121d1a70fb5079d6aadb2d
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 901fd52f89969141713e443890781a77308bd901
+ms.sourcegitcommit: 335a88c1b6e7f0caa8a3a27db57c56664d676d34
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64887468"
+ms.lasthandoff: 06/12/2019
+ms.locfileid: "67034909"
 ---
 # <a name="partial-views-in-aspnet-core"></a>ASP.NET Core의 부분 보기
 
 작성자: [Steve Smith](https://ardalis.com/), [Luke Latham](https://github.com/guardrex), [Maher JENDOUBI](https://twitter.com/maherjend), [Rick Anderson](https://twitter.com/RickAndMSFT), [Scott Sauber](https://twitter.com/scottsauber)
 
-부분 보기는 다른 태그 파일의 렌더링된 출력  *내에서* HTML 출력을 렌더링하는 [Razor](xref:mvc/views/razor) 태그 파일(*.cshtml*)입니다.
+부분 보기는 다른 태그 파일의 렌더링된 출력  *내에서* HTML 출력을 렌더링하는 [Razor](xref:mvc/views/razor) 태그 파일( *.cshtml*)입니다.
 
 ::: moniker range=">= aspnetcore-2.1"
 
-‘부분 보기’라는 용어는 MVC 앱(여기서 태그 파일을 ‘보기’라고 함) 또는 Razor Pages 앱(여기서 태그 파일을 ‘페이지’라고 함)을 개발하는 데 사용됩니다. 이 주제에서는 일반적으로 MVC 보기 및 Razor Pages 페이지를 ‘태그 파일’로 참조합니다.
+‘부분 보기’라는 용어는 MVC 앱(여기서 태그 파일을 ‘보기’라고 함) 또는 Razor Pages 앱(여기서 태그 파일을 ‘페이지’라고 함)을 개발하는 데 사용됩니다.    이 주제에서는 일반적으로 MVC 보기 및 Razor Pages 페이지를 ‘태그 파일’로 참조합니다. 
 
 ::: moniker-end
 
@@ -46,9 +46,9 @@ ms.locfileid: "64887468"
 
 ::: moniker range=">= aspnetcore-2.0"
 
-부분 보기는 ‘보기’ 폴더(MVC) 또는 *Pages* 폴더(Razor Pages)에서 유지 관리되는 *.cshtml* 태그 파일입니다.
+부분 보기는 ‘보기’ 폴더(MVC) 또는 *Pages* 폴더(Razor Pages)에서 유지 관리되는 *.cshtml* 태그 파일입니다. 
 
-ASP.NET Core MVC에서 컨트롤러의 <xref:Microsoft.AspNetCore.Mvc.ViewResult>는 보기 또는 부분 보기를 반환할 수 있습니다. 비슷한 기능이 ASP.NET Core 2.2의 Razor Pages에 대해 계획되어 있습니다. Razor Pages에서 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel>은 <xref:Microsoft.AspNetCore.Mvc.PartialViewResult>를 반환할 수 있습니다. 부분 보기 참조 및 렌더링은 [부분 보기 참조](#reference-a-partial-view) 섹션에 설명되어 있습니다.
+ASP.NET Core MVC에서 컨트롤러의 <xref:Microsoft.AspNetCore.Mvc.ViewResult>는 보기 또는 부분 보기를 반환할 수 있습니다. Razor Pages에서 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel>은 <xref:Microsoft.AspNetCore.Mvc.PartialViewResult> 개체로 표시되는 부분 보기를 반환할 수 있습니다. 부분 보기 참조 및 렌더링은 [부분 보기 참조](#reference-a-partial-view) 섹션에 설명되어 있습니다.
 
 MVC 보기 또는 페이지 렌더링과 달리 부분 보기는 *_ViewStart.cshtml*을 실행하지 않습니다. *_ViewStart.cshtml*에 대한 자세한 내용은 <xref:mvc/views/layout>을 참조하세요.
 
@@ -58,9 +58,9 @@ MVC 보기 또는 페이지 렌더링과 달리 부분 보기는 *_ViewStart.csh
 
 ::: moniker range="< aspnetcore-2.0"
 
-부분 보기는 ‘보기’ 폴더에서 유지 관리되는 *.cshtml* 태그 파일입니다.
+부분 보기는 ‘보기’ 폴더에서 유지 관리되는 *.cshtml* 태그 파일입니다. 
 
-컨트롤러의 <xref:Microsoft.AspNetCore.Mvc.ViewResult>는 보기 또는 부분 보기를 반환할 수 있습니다.
+컨트롤러의 <xref:Microsoft.AspNetCore.Mvc.ViewResult>는 보기 또는 부분 보기를 반환할 수 있습니다. 부분 보기 참조 및 렌더링은 [부분 보기 참조](#reference-a-partial-view) 섹션에 설명되어 있습니다.
 
 MVC 보기 렌더링과 달리 부분 보기는 *_ViewStart.cshtml*을 실행하지 않습니다. *_ViewStart.cshtml*에 대한 자세한 내용은 <xref:mvc/views/layout>을 참조하세요.
 
@@ -69,6 +69,33 @@ MVC 보기 렌더링과 달리 부분 보기는 *_ViewStart.cshtml*을 실행하
 ::: moniker-end
 
 ## <a name="reference-a-partial-view"></a>부분 보기 참조
+
+::: moniker range=">= aspnetcore-2.0"
+
+### <a name="use-a-partial-view-in-a-razor-pages-pagemodel"></a>Razor Pages PageModel에서 부분 보기 사용
+
+ASP.NET Core 2.0 또는 2.1에서 다음 처리기 메서드는 응답에 대해 *\_AuthorPartialRP.cshtml* 부분 보기를 렌더링합니다.
+
+```csharp
+public IActionResult OnGetPartial() =>
+    new PartialViewResult
+    {
+        ViewName = "_AuthorPartialRP",
+        ViewData = ViewData,
+    };
+```
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-2.2"
+
+ASP.NET Core 2.2 이상에서 처리기 메서드는 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageBase.Partial*> 메서드를 대신 호출하여 `PartialViewResult` 프로젝트를 생성할 수 있습니다.
+
+[!code-csharp[](partial/sample/PartialViewsSample/Pages/DiscoveryRP.cshtml.cs?name=snippet_OnGetPartial)]
+
+::: moniker-end
+
+### <a name="use-a-partial-view-in-a-markup-file"></a>태그 파일에서 부분 보기 사용
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -235,15 +262,15 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 다음 규칙이 부분 보기 검색에 적용됩니다.
 
 * 부분 보기가 다른 폴더에 있는 경우 파일 이름이 같은 다른 부분 보기가 허용됩니다.
-* 파일 확장명 없는 이름으로 부분 보기를 참조할 때 부분 보기가 호출자의 폴더와 ‘공유’ 폴더에 모두 있는 경우 호출자 폴더에 있는 부분 보기가 부분 보기를 제공합니다. 호출자의 폴더에 부분 보기가 없는 경우 부분 보기는 ‘공유’ 폴더에서 제공됩니다. ‘공유’ 폴더의 부분 보기를 ‘공유 부분 보기’ 또는 ‘기본 부분 보기’라고 합니다.
-* 부분 보기는 ‘연결’ 가능하며, 순환 참조가 호출에 의해 형성되지 않는 경우 다른 부분 보기를 호출할 수 있습니다. 상대 경로는 항상, 파일의 루트 또는 부모가 아닌 현재 파일에 상대적입니다.
+* 파일 확장명 없는 이름으로 부분 보기를 참조할 때 부분 보기가 호출자의 폴더와 ‘공유’ 폴더에 모두 있는 경우 호출자 폴더에 있는 부분 보기가 부분 보기를 제공합니다.  호출자의 폴더에 부분 보기가 없는 경우 부분 보기는 ‘공유’ 폴더에서 제공됩니다.  ‘공유’ 폴더의 부분 보기를 ‘공유 부분 보기’ 또는 ‘기본 부분 보기’라고 합니다.   
+* 부분 보기는 ‘연결’ 가능하며, 순환 참조가 호출에 의해 형성되지 않는 경우 다른 부분 보기를 호출할 수 있습니다.  상대 경로는 항상, 파일의 루트 또는 부모가 아닌 현재 파일에 상대적입니다.
 
 > [!NOTE]
 > 부분 보기에 정의된 [Razor](xref:mvc/views/razor) `section`은 부모 태그 파일에 표시되지 않습니다. `section`만 정의되어 있는 부분 보기에 표시됩니다.
 
 ## <a name="access-data-from-partial-views"></a>부분 보기에서 데이터 액세스
 
-부분 보기가 인스턴스화되면 부모의 `ViewData` 사전의 ‘사본’을 수신합니다. 부분 보기 내에서 데이터에 대한 업데이트는 부모 보기에 유지되지 않습니다. 부분 보기에서 변경된 `ViewData`는 부분 보기가 반환될 때 손실됩니다.
+부분 보기가 인스턴스화되면 부모의 `ViewData` 사전의 ‘사본’을 수신합니다.  부분 보기 내에서 데이터에 대한 업데이트는 부모 보기에 유지되지 않습니다. 부분 보기에서 변경된 `ViewData`는 부분 보기가 반환될 때 손실됩니다.
 
 다음 예는 [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) 인스턴스를 부분 보기에 전달하는 방법을 보여 줍니다.
 
@@ -263,7 +290,7 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 
 샘플 앱의 다음 태그는 *Pages/ArticlesRP/ReadRP.cshtml* 페이지에서 가져온 것입니다. 페이지에는 두 개의 부분 보기가 있습니다. 두 번째 부분 보기는 모델 및 `ViewData`를 부분 보기에 전달합니다. `ViewDataDictionary` 생성자 오버로드를 사용하여 기존 `ViewData` 사전을 유지하면서 새로운 `ViewData` 사전을 전달합니다.
 
-[!code-cshtml[](partial/sample/PartialViewsSample/Pages/ArticlesRP/ReadRP.cshtml?name=snippet_ReadPartialViewRP&highlight=5,15-19)]
+[!code-cshtml[](partial/sample/PartialViewsSample/Pages/ArticlesRP/ReadRP.cshtml?name=snippet_ReadPartialViewRP&highlight=5,15-20)]
 
 *Pages/Shared/_AuthorPartialRP.cshtml*은 *ReadRP.cshtml* 태그 파일에서 참조하는 첫 번째 부분 보기입니다.
 
@@ -279,7 +306,7 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 
 샘플 앱의 다음 태그는 *Views/Articles/Read.cshtml* 보기를 표시합니다. 보기에는 두 개의 부분 보기가 있습니다. 두 번째 부분 보기는 모델 및 `ViewData`를 부분 보기에 전달합니다. `ViewDataDictionary` 생성자 오버로드를 사용하여 기존 `ViewData` 사전을 유지하면서 새로운 `ViewData` 사전을 전달합니다.
 
-[!code-cshtml[](partial/sample/PartialViewsSample/Views/Articles/Read.cshtml?name=snippet_ReadPartialView&highlight=5,15-19)]
+[!code-cshtml[](partial/sample/PartialViewsSample/Views/Articles/Read.cshtml?name=snippet_ReadPartialView&highlight=5,15-20)]
 
 *Views/Shared/_AuthorPartial.cshtml*은 *ReadRP.cshtml* 태그 파일에서 참조하는 첫 번째 부분 보기입니다.
 

@@ -3,14 +3,14 @@ title: ASP.NET Core에 대한 Razor 구문 참조
 author: rick-anderson
 description: 웹 페이지에 서버 기반 코드를 포함하는 Razor 태그 구문에 대해 알아봅니다.
 ms.author: riande
-ms.date: 10/26/2018
+ms.date: 06/12/2019
 uid: mvc/views/razor
-ms.openlocfilehash: 7f97be651c067e94f29eef4956c10d87ec031bed
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 87c5b97a653c139b8b79f4270e0d9d0081815433
+ms.sourcegitcommit: 335a88c1b6e7f0caa8a3a27db57c56664d676d34
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64887908"
+ms.lasthandoff: 06/12/2019
+ms.locfileid: "67034944"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>ASP.NET Core에 대한 Razor 구문 참조
 
@@ -574,9 +574,39 @@ Razor는 보기에 전달된 모델에 액세스할 수 있는 `Model` 속성을
 
 ::: moniker-end
 
+### <a name="attribute"></a>@attribute
+
+`@attribute` 지시문은 지정된 특성을 생성된 페이지 또는 보기의 클래스에 추가합니다. 다음 예제에서는 `[Authorize]` 특성을 추가합니다.
+
+```cshtml
+@attribute [Authorize]
+```
+
+> [!WARNING]
+> ASP.NET Core 3.0 미리 보기 6 릴리스에서 `@attribute` 지시문이 *\_Imports.razor* 및 *\_ViewImports.cshtml* 파일에서 작동하지 않는 알려진 문제가 있습니다. 이 문제는 미리 보기 7 릴리스에서 해결될 예정입니다.
+
+### <a name="namespace"></a>@namespace
+
+`@namespace` 지시문은 생성된 페이지 또는 보기 클래스의 네임스페이스를 설정합니다.
+
+```cshtml
+@namespace Your.Namespace.Here
+```
+
+페이지 또는 보기가 `@namespace` 지시문을 사용하여 API를 가져오는 경우 원래 파일의 네임스페이스는 해당 네임스페이스를 기준으로 설정됩니다. 
+
+*MyApp/Pages/\_ViewImports.cshtml*이 `@namespace Hello.World`를 포함하는 경우 `Hello.World` 네임스페이스를 가져오는 페이지 또는 보기의 네임스페이스는 다음 표와 같이 설정됩니다.
+
+| 페이지(또는 보기)                     | 네임스페이스               |
+| ---------------------------------- | ----------------------- |
+| *MyApp/Pages/Index.cshtml*         | `Hello.World`           |
+| *MyApp/Pages/MorePages/Bar.cshtml* | `Hello.World.MorePages` |
+
+여러 가져오기 파일에 `@namespace` 지시문이 있는 경우 디렉터리 체인의 페이지 또는 보기에 가장 가까운 파일이 사용됩니다.
+
 ### <a name="section"></a>@section
 
-`@section` 지시문은 [layout](xref:mvc/views/layout)과 함께 사용되어 HTML 페이지의 여러 부분에 있는 콘텐츠를 렌더링할 수 있게 해줍니다. 자세한 내용은 [섹션](xref:mvc/views/layout#layout-sections-label)을 참조하세요.
+`@section` 지시문은 [layout](xref:mvc/views/layout)과 함께 사용되어 페이지 또는 보기에서 HTML 페이지의 여러 부분에 있는 콘텐츠를 렌더링할 수 있게 해줍니다. 자세한 내용은 [섹션](xref:mvc/views/layout#layout-sections-label)을 참조하세요.
 
 ## <a name="templated-razor-delegates"></a>템플릿에 작성된 Razor 대리자
 

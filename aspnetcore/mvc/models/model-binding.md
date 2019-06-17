@@ -1,151 +1,428 @@
 ---
 title: ASP.NET Core의 모델 바인딩
 author: tdykstra
-description: ASP.NET Core MVC의 모델 바인딩이 HTTP 요청의 데이터를 작업 메서드 매개 변수에 매핑하는 방법을 알아봅니다.
+description: ASP.NET Core에서 모델 바인딩의 작동 방법 및 해당 동작을 사용자 지정하는 방법을 알아봅니다.
 ms.assetid: 0be164aa-1d72-4192-bd6b-192c9c301164
 ms.author: tdykstra
-ms.date: 11/13/2018
+ms.date: 05/31/2019
 uid: mvc/models/model-binding
-ms.openlocfilehash: 1dc9b41328ed78440622acc1865b6f088d394403
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 7d62ccecdacbd34a38a1fd8c58979a9b09cf86e8
+ms.sourcegitcommit: e7e04a45195d4e0527af6f7cf1807defb56dc3c3
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64883148"
+ms.lasthandoff: 06/06/2019
+ms.locfileid: "66750208"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core의 모델 바인딩
 
-작성자: [Rachel Appel](https://github.com/rachelappel)
+이 문서는 모델 바인딩이 무엇인지, 작동 방법 및 해당 동작을 사용자 지정하는 방법을 설명합니다.
 
-## <a name="introduction-to-model-binding"></a>모델 바인딩 소개
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/model-binding/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-ASP.NET Core MVC에서 모델 바인딩은 작업 메서드 매개 변수에 HTTP 요청의 데이터를 자동으로 매핑합니다. 매개 변수는 문자열, 정수, float 등과 같은 단순 형식이거나 복합 형식일 수 있습니다. 들어오는 데이터를 대상에 매핑하는 것은 데이터의 크기나 복잡성에 관계없이 자주 반복되는 시나리오이므로 MVC의 훌륭한 기능입니다. MVC는 바인딩을 추상화하여 이 문제를 해결하므로 개발자는 모든 앱에서 동일한 코드의 약간 다른 버전을 다시 작성하지 않아도 됩니다. 형식 변환기 코드에 사용자 고유의 텍스트를 작성하는 것은 지루하고 오류가 발생하기 쉽습니다.
+## <a name="what-is-model-binding"></a>모델 바인딩이란
 
-## <a name="how-model-binding-works"></a>모델 바인딩의 작동 방식
+컨트롤러 및 Razor 페이지는 HTTP 요청에서 제공되는 데이터를 사용하여 작동합니다. 예를 들어 경로 데이터는 레코드 키를 제공할 수 있으며, 게시된 양식 필드는 모델의 속성에 대한 값을 제공할 수 있습니다. 이러한 각 값을 검색하고 문자열에서 .NET 형식으로 변환하도록 코드를 작성하는 것은 번거롭고 오류가 발생하기 쉽습니다. 모델 바인딩은 이 프로세스를 자동화합니다. 모델 바인딩 시스템:
 
-MVC는 HTTP 요청을 받으면 이를 컨트롤러의 특정 작업 메서드에 라우팅합니다. 경로 데이터에 기반하여 실행할 작업 메서드를 결정한 다음, HTTP 요청의 값을 해당 작업 메서드의 매개 변수에 바인드합니다. 예를 들어 다음 URL을 가정해 봅니다.
+* 경로 데이터, 양식 필드 및 쿼리 문자열과 같은 다양한 원본의 데이터를 검색합니다.
+* 메서드 매개 변수 및 공용 속성에서 컨트롤러 및 Razor 페이지에 데이터를 제공합니다.
+* 문자열 데이터를 .NET 형식으로 변환합니다.
+* 복합 형식의 속성을 업데이트합니다.
 
-`http://contoso.com/movies/edit/2`
+## <a name="example"></a>예제
 
-경로 템플릿은 `{controller=Home}/{action=Index}/{id?}`와 같으므로, `movies/edit/2`는 `Movies` 컨트롤러와 해당 `Edit` 작업 메서드로 라우팅합니다. 또한 `id`라는 선택적 매개 변수를 허용합니다. 작업 메서드의 코드는 다음과 같아야 합니다.
+다음 작업 메서드를 사용합니다.
 
-```csharp
-public IActionResult Edit(int? id)
-   ```
+[!code-csharp[](model-binding/samples/2.x/Controllers/PetsController.cs?name=snippet_DogsOnly)]
 
-참고: URL 경로에 있는 문자열은 대/소문자를 구분하지 않습니다.
+앱은 이 URL로 요청을 수신합니다.
 
-MVC는 이름을 기준으로 요청 데이터를 작업 매개 변수에 바인딩하려고 시도합니다. MVC는 매개 변수 이름과 설정 가능한 공용 속성 이름을 사용하여 각 매개 변수의 값을 찾습니다. 위의 예에서 유일한 작업 매개 변수의 이름은 `id`이며 MVC는 경로 값에서 같은 이름의 값에 바인딩합니다. 경로 값 외에도, MVC는 요청의 여러 부분에서 설정된 순서대로 데이터를 바인딩합니다. 아래는 모델 바인딩이 보이는 순서대로 나열된 데이터 원본 목록입니다.
-
-1. `Form values`: POST 메서드를 사용하여 HTTP 요청에 포함되는 양식 값입니다. (jQuery POST 요청 포함).
-
-2. `Route values`: [라우팅](xref:fundamentals/routing)에서 제공한 경로 값 집합
-
-3. `Query strings`: URI의 쿼리 문자열 부분입니다.
-
-<!-- DocFX BUG
-The link works but generates an error when building with DocFX
-@fundamentals/routing
-[Routing](xref:fundamentals/routing)
--->
-
-참고: 양식 값, 경로 데이터 및 쿼리 문자열은 모두 이름-값 쌍으로 저장됩니다.
-
-모델 바인딩에서는 `id`라는 이름의 키를 요청했고 양식 값에 `id`라는 항목이 없으므로 해당 키를 찾는 경로 값으로 이동했습니다. 이 예제에서는 일치 항목입니다. 바인딩이 발생하고 값이 정수 2로 변환됩니다. 편집(문자열 ID)을 사용하는 동일한 요청이 문자열 "2"로 변환됩니다.
-
-지금까지 예에서는 단순 형식을 사용합니다. MVC에서 단순 형식은 모든 .NET 기본 형식 또는 문자열 형식 변환기를 사용한 형식입니다. 작업 메서드의 매개 변수가 `Movie` 형식과 같은 클래스이고 속성으로 단순 및 복합 형식을 모두 포함하는 경우, MVC의 모델 바인딩에서 이를 원활하게 처리합니다. 리플렉션 및 재귀를 사용하여 복합 형식의 속성을 검색하고 일치하는 항목을 찾습니다. 모델 바인딩은 값을 속성에 바인딩하기 위해 *parameter_name.property_name* 패턴을 찾습니다. 이 양식의 일치하는 값을 찾지 못하면 속성 이름만 사용하여 바인딩을 시도합니다. `Collection` 형식과 같은 형식에 대해, 모델 바인딩에서는 *parameter_name[index]* 또는 *[index]* 에 대해 일치 항목을 찾습니다. 모델 바인딩에서는 `Dictionary` 형식을 유사하게 처리하며 키가 단순 형식인 경우, *parameter_name[key]* 또는 *[key]* 를 요청합니다. 지원되는 키는 동일한 모델 형식에 대해 생성된 필드 이름 HTML 및 태그 도우미와 일치합니다. 이렇게 하면 라운드트립 값이 가능해지므로 생성 또는 편집에서 바인딩된 데이터가 유효성 검사를 통과하지 못했을 때와 같이, 사용자 편의를 위해 양식 필드는 사용자 입력으로 채워져 있습니다.
-
-모델 바인딩을 가능하게 하려면 클래스에 공용 기본 생성자와 바인딩할 공용 쓰기 가능 속성이 있어야 합니다. 모델 바인딩이 발생하면 클래스는 공용 기본 생성자를 사용하여 인스턴스화된 다음, 속성을 설정할 수 있습니다.
-
-매개 변수가 바인딩되면 모델 바인딩은 해당 이름의 값을 찾는 것을 중지하고 다음 매개 변수를 바인딩하도록 이동합니다. 그렇지 않은 경우 기본 모델 바인딩 동작은 해당 형식에 따라 매개 변수를 기본값으로 설정합니다.
-
-* `T[]`: `byte[]` 형식의 배열을 제외하고, 바인딩은 `T[]` 형식의 매개 변수를 `Array.Empty<T>()`로 설정합니다. `byte[]` 형식의 배열은 `null`로 설정됩니다.
-
-* 참조 형식: 바인딩은 속성을 설정하지 않고 기본 생성자를 사용하여 클래스의 인스턴스를 만듭니다. 그러나 모델 바인딩에서는 `string` 매개 변수를 `null`로 설정합니다.
-
-* Nullable 형식: Nullable 형식은 `null`로 설정됩니다. 위의 예제에서 모델 바인딩은 `int?` 형식이므로 `id`를 `null`로 설정합니다.
-
-* 값 형식: Null을 허용하지 않는 값 형식 `T`는 `default(T)`로 설정됩니다. 예를 들어 모델 바인딩은 `int id` 매개 변수를 0으로 설정합니다. 기본값에 의존하지 않고 모델 유효성 검사 또는 nullable 형식을 사용하는 것이 좋습니다.
-
-바인딩에 실패하는 경우 MVC는 오류를 throw하지 않습니다. 사용자 입력을 허용하는 모든 작업에서 `ModelState.IsValid` 속성을 확인해야 합니다.
-
-참고: 컨트롤러의 `ModelState` 속성에 있는 각 항목은 `Errors` 속성이 포함된 `ModelStateEntry`입니다. 이 컬렉션을 직접 쿼리할 필요는 거의 없습니다. 대신 `ModelState.IsValid`를 사용하세요.
-
-또한 모델 바인딩을 수행할 때 MVC가 고려해야 하는 몇 가지 특수 데이터 형식이 있습니다.
-
-* `IFormFile`, `IEnumerable<IFormFile>`: HTTP 요청의 일부인 하나 이상의 업로드된 파일입니다.
-
-* `CancellationToken`: 비동기 컨트롤러에서 작업을 취소하는 데 사용됩니다.
-
-이러한 형식은 작업 매개 변수 또는 클래스 형식의 속성에 바인딩할 수 있습니다.
-
-모델 바인딩이 완료되면 [유효성 검사](validation.md)가 발생합니다. 기본 모델 바인딩은 대부분의 개발 시나리오에서 잘 작동합니다. 또한 확장 가능하므로 고유한 요구 사항이 있는 경우 기본 제공 동작을 사용자 지정할 수 있습니다.
-
-## <a name="customize-model-binding-behavior-with-attributes"></a>특성으로 모델 바인딩 동작 사용자 지정
-
-MVC에는 기본 모델 바인딩 동작을 다른 원본으로 전달하는 데 사용할 수 있는 몇 가지 특성이 포함되어 있습니다. 예를 들어 속성에 바인딩이 필요한지, `[BindRequired]` 또는 `[BindNever]` 특성을 사용하여 아예 바인딩이 발생하지 않아야 하는지 여부를 지정할 수 있습니다. 또는 기본 데이터 원본을 재정의하고 모델 바인더의 데이터 원본을 지정할 수 있습니다. 다음은 모델 바인딩 특성 목록입니다.
-
-* `[BindRequired]`: 이 특성은 바인딩이 발생할 수 없는 경우 모델 상태 오류를 추가합니다.
-
-* `[BindNever]`: 모델 바인더에 이 매개 변수에 바인딩하지 않도록 지시합니다.
-
-* `[FromHeader]`, `[FromQuery]`, `[FromRoute]`, `[FromForm]`: 적용하려는 정확한 바인딩 소스를 지정할 때 사용합니다.
-
-* `[FromServices]`: 이 특성은 [종속성 주입](../../fundamentals/dependency-injection.md)을 사용하여 서비스에서 매개 변수를 바인딩합니다.
-
-* `[FromBody]`: 구성된 포맷터를 사용하여 요청 본문에서 데이터를 바인딩합니다. 포맷터는 요청의 콘텐츠 형식에 따라 선택됩니다.
-
-* `[ModelBinder]`: 기본 모델 바인더, 바인딩 소스 및 이름을 재정의하는 데 사용됩니다.
-
-특성은 모델 바인딩의 기본 동작을 재정의해야 할 때 매우 유용한 도구입니다.
-
-## <a name="customize-model-binding-and-validation-globally"></a>모델 바인딩 사용자 지정 및 전역으로 유효성 검사
-
-모델 바인딩 및 시스템 동작의 유효성 검사는 다음을 설명하는 [ModelMetadata](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.modelmetadata)를 기반으로 합니다.
-
-* 모델이 바인딩되는 방법
-* 형식 및 해당 속성에서 유효성 검사가 발생하는 방법
-
-[MvcOptions.ModelMetadataDetailsProviders](/dotnet/api/microsoft.aspnetcore.mvc.mvcoptions.modelmetadatadetailsproviders#Microsoft_AspNetCore_Mvc_MvcOptions_ModelMetadataDetailsProviders)에 세부 정보 공급자를 추가하여 시스템의 동작 측면을 전역적으로 구성할 수 있습니다. MVC에는 특정 형식에 대한 모델 바인딩 또는 유효성 검사 비활성화와 같은 동작 구성을 허용하는 몇 가지 기본 제공 정보 공급자가 있습니다.
-
-특정 형식의 모든 모델에 대한 모델 바인딩을 비활성화하려면 `Startup.ConfigureServices`에서 [ExcludeBindingMetadataProvider](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.metadata.excludebindingmetadataprovider)를 추가합니다. 예를 들어 `System.Version` 형식의 모든 모델에 대한 모델 바인딩을 비활성화하려면:
-
-```csharp
-services.AddMvc().AddMvcOptions(options =>
-    options.ModelMetadataDetailsProviders.Add(
-        new ExcludeBindingMetadataProvider(typeof(System.Version))));
+```
+http://contoso.com/api/pets/2?DogsOnly=true
 ```
 
-특정 형식의 속성에 대한 유효성 검사를 비활성화하려면 `Startup.ConfigureServices`에 [SuppressChildValidationMetadataProvider](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.suppresschildvalidationmetadataprovider)를 추가합니다. 예를 들어 `System.Guid` 형식의 속성에 대한 유효성 검사를 비활성화하려면:
+모델 바인딩은 라우팅 시스템이 작업 메서드를 선택한 후 다음 단계를 통해 진행됩니다.
+
+* `GetByID`의 첫 번째 매개 변수, `id`라는 정수를 찾습니다.
+* HTTP 요청에서 사용 가능한 원본을 찾고 경로 데이터에서 `id` = "2"를 찾습니다.
+* 문자열 "2"를 정수 2로 변환합니다.
+* `GetByID`의 다음 매개 변수, `dogsOnly`라는 부울을 찾습니다.
+* 원본을 찾고 쿼리 문자열에서 "DogsOnly=true"를 찾습니다. 이름 일치는 대/소문자를 구분하지 않습니다.
+* 문자열 "true"를 부울 `true`로 변환합니다.
+
+그런 다음, 프레임워크는 `id` 매개 변수에 대해 2를 `dogsOnly` 매개 변수에 대해 `true`를 전달하는 `GetById` 메서드를 호출합니다.
+
+앞의 예제에서 모델 바인딩 대상은 단순 형식인 메서드 매개 변수입니다. 대상은 복합 형식의 속성일 수도 있습니다. 각 속성이 성공적으로 바인딩된 후 [모델 유효성 검사](xref:mvc/models/validation)가 해당 속성에 대해 발생합니다. 모델에 바인딩되는 데이터의 레코드 및 모든 바인딩 또는 유효성 검사 오류는 [ControllerBase.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) 또는 [PageModel.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState)에 저장됩니다. 이 프로세스가 성공되었는지 확인하기 위해 앱은 [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) 플래그를 확인합니다.
+
+## <a name="targets"></a>대상
+
+모델 바인딩은 다음 종류의 대상에 대한 값을 찾으려고 합니다.
+
+* 요청이 라우팅되는 컨트롤러 작업 메서드의 매개 변수
+* 요청이 라우팅되는 Razor Pages 처리기 메서드의 매개 변수 
+* 특성으로 지정되는 경우 컨트롤러 또는 `PageModel` 클래스의 공용 속성
+
+### <a name="bindproperty-attribute"></a>[BindProperty] 특성
+
+모델 바인딩이 해당 속성을 대상으로 하도록 컨트롤러의 공용 속성 또는 `PageModel` 클래스에 적용할 수 있습니다.
+
+[!code-csharp[](model-binding/samples/2.x/Pages/Instructors/Edit.cshtml.cs?name=snippet_BindProperty&highlight=7-8)]
+
+### <a name="bindpropertiesattribute"></a>[BindProperties] 특성
+
+ASP.NET Core 2.1 이상에서 사용할 수 있습니다.  모델 바인딩이 클래스의 모든 공용 속성을 대상으로 하도록 컨트롤러 또는 `PageModel` 클래스에 적용할 수 있습니다.
+
+[!code-csharp[](model-binding/samples/2.x/Pages/Instructors/Create.cshtml.cs?name=snippet_BindProperties&highlight=1-2)]
+
+### <a name="model-binding-for-http-get-requests"></a>HTTP GET 요청에 대한 모델 바인딩
+
+기본적으로 속성은 HTTP GET 요청에 대해 바인딩되지 않습니다. 일반적으로 GET 요청에 대해 필요한 것은 레코드 ID 매개 변수입니다. 레코드 ID는 데이터베이스에 있는 항목을 찾는 데 사용됩니다. 따라서 모델의 인스턴스를 포함하는 속성을 바인딩할 필요가 없습니다. 속성을 GET 요청의 데이터에 바인딩하려는 시나리오에서 `SupportsGet` 속성을 `true`로 설정합니다.
+
+[!code-csharp[](model-binding/samples/2.x/Pages/Instructors/Index.cshtml.cs?name=snippet_SupportsGet)]
+
+## <a name="sources"></a>원본
+
+기본적으로 모델 바인딩은 HTTP 요청의 다음 원본에서 키-값 쌍의 양식으로 데이터를 가져옵니다.
+
+1. 양식 필드 
+1. 요청 본문([[ApiController] 특성이 있는 컨트롤러](xref:web-api/index#binding-source-parameter-inference)의 경우)
+1. 경로 데이터
+1. 쿼리 문자열 매개 변수
+1. 업로드된 파일 
+
+각 대상 매개 변수 또는 속성의 경우 원본은 이 목록에 표시된 순서대로 검사됩니다. 몇 가지 예외도 있습니다.
+
+* 경로 데이터 및 쿼리 문자열 값은 단순 형식에 대해서만 사용됩니다.
+* 업로드된 파일은 `IFormFile` 또는 `IEnumerable<IFormFile>`을 구현하는 대상 유형에만 바인딩됩니다.
+
+기본 동작이 올바른 결과를 제공하지 않는 경우 다음 특성 중 하나를 사용하여 지정된 대상을 사용하도록 원본을 지정할 수 있습니다. 
+
+* [[FromQuery]](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute) - 쿼리 문자열에서 값을 가져옵니다. 
+* [[FromRoute]](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute) - 경로 데이터에서 값을 가져옵니다.
+* [[FromForm]](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) - 게시된 양식 필드에서 값을 가져옵니다.
+* [[FromBody]](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute) - 요청 본문에서 값을 가져옵니다.
+* [[FromHeader]](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute) - HTTP 헤더에서 값을 가져옵니다.
+
+이러한 특성:
+
+* 다음 예제와 같이 모델 속성(모델 클래스가 아닌)에 개별적으로 추가됩니다.
+
+  [!code-csharp[](model-binding/samples/2.x/Models/Instructor.cs?name=snippet_FromQuery&highlight=5-6)]
+
+* 필요에 따라 생성자에서 모델 이름 값을 허용합니다. 이 옵션은 속성 이름이 요청의 값과 일치하지 않는 경우에 제공됩니다. 예를 들어 요청의 값은 다음 예제와 같이 해당 이름에 하이픈이 있는 헤더일 수 있습니다.
+
+  [!code-csharp[](model-binding/samples/2.x/Pages/Instructors/Index.cshtml.cs?name=snippet_FromHeader)]
+
+### <a name="frombody-attribute"></a>[FromBody] 특성
+
+요청 본문 데이터는 요청의 콘텐츠 형식과 관련된 입력 포맷터를 사용하여 구문 분석됩니다. 입력 포맷터는 [이 문서의 뒷부분](#input-formatters)에 설명되어 있습니다.
+
+작업 메서드당 둘 이상의 매개 변수에 `[FromBody]`를 적용하지 마십시오. ASP.NET Core 런타임은 요청 스트림을 읽는 책임을 입력 포맷터에 위임합니다. 요청 스트림을 읽으면 더 이상 다른 `[FromBody]` 매개 변수를 바인딩하기 위해 다시 읽을 수 없습니다.
+
+### <a name="additional-sources"></a>추가 원본
+
+원본 데이터는 *값 공급 기업*에 의해 모델 바인딩 시스템에 제공됩니다. 다른 원본에서 모델 바인딩에 대한 데이터를 가져오는 사용자 지정 값 공급 기업을 작성 및 등록할 수 있습니다. 예를 들어 쿠키 또는 세션 상태의 데이터를 원할 수 있습니다. 새 원본에서 데이터를 가져오려면 다음을 수행합니다.
+
+* `IValueProvider`를 구현하는 클래스를 만듭니다.
+* `IValueProviderFactory`를 구현하는 클래스를 만듭니다.
+* `Startup.ConfigureServices`에서 팩터리 클래스를 등록합니다.
+
+샘플 앱은 쿠키에서 값을 가져오는 [값 공급 기업](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/CookieValueProvider.cs) 및 [팩터리](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/CookieValueProviderFactory.cs) 예제를 포함합니다. 다음은 `Startup.ConfigureServices`의 등록 코드입니다.
+
+[!code-csharp[](model-binding/samples/2.x/Startup.cs?name=snippet_ValueProvider&highlight=3)]
+
+표시된 코드는 사용자 지정 값 공급 기업을 모든 기본 제공 값 공급 기업 다음에 배치합니다.  목록에서 첫 번째로 지정하려면 `Add` 대신에 `Insert(0, new CookieValueProviderFactory())`를 호출합니다.
+
+## <a name="no-source-for-a-model-property"></a>모델 속성에 대한 원본 없음
+
+기본적으로 모델 속성에 대한 값이 없으면 모델 상태 오류가 생성되지 않습니다. 속성은 Null 또는 기본값으로 설정됩니다.
+
+* Nullable 단순 형식은 `null`로 설정됩니다.
+* Null을 허용하지 않는 값 형식은 `default(T)`로 설정됩니다. 예를 들어 매개 변수 `int id`는 0으로 설정됩니다.
+* 복합 형식의 경우 모델 바인딩은 속성을 설정하지 않고 기본 생성자를 사용하여 인스턴스를 만듭니다.
+* 배열은 `byte[]` 배열이 `null`로 설정되는 점을 제외하고 `Array.Empty<T>()`로 설정됩니다.
+
+모델 속성에 대한 양식 필드에 아무것도 없을 때 모델 상태가 무효화되어야 하는 경우 [[BindRequired] 특성](#bindrequired-attribute)을 사용합니다.
+
+이 `[BindRequired]` 동작은 요청 본문의 JSON 또는 XML 데이터가 아니라 게시된 양식 데이터의 모델 바인딩에 적용됩니다. 요청 본문 데이터는 [입력 포맷터](#input-formatters)에서 처리됩니다.
+
+## <a name="type-conversion-errors"></a>형식 변환 오류
+
+원본이 있지만 대상 형식으로 변환될 수 없는 경우 모델 상태는 잘못된 것으로 플래그가 지정됩니다. 이전 섹션에서 설명한 것처럼 대상 매개 변수 또는 속성은 Null 또는 기본값으로 설정됩니다.
+
+`[ApiController]` 특성이 있는 API 컨트롤러에서 잘못된 모델 상태로 자동 HTTP 400 응답이 발생합니다.
+
+Razor 페이지에서 페이지를 오류 메시지와 함께 다시 표시합니다.
+
+[!code-csharp[](model-binding/samples/2.x/Pages/Instructors/Create.cshtml.cs?name=snippet_HandleMBError&highlight=3-6)]
+
+클라이언트 쪽 유효성 검사는 Razor Pages 양식으로 제출될 수 있는 대부분의 잘못된 데이터를 catch합니다. 이 유효성 검사는 위의 강조 표시된 코드를 트리거하기 어렵게 만듭니다. 샘플 앱은 **Hire Date** 필드에 잘못된 데이터를 배치하고 양식을 제출하는 **잘못된 데이터로 제출** 단추를 포함합니다. 이 단추는 데이터 변환 오류가 발생하는 경우 페이지를 다시 표시하기 위해 코드가 작동하는 방식을 보여 줍니다.
+
+위의 코드로 페이지가 다시 표시될 때 잘못된 입력은 양식 필드에 표시되지 않습니다. 이는 모델 속성이 Null 또는 기본값으로 설정되었기 때문입니다. 잘못된 입력은 오류 메시지에 표시됩니다. 그러나 양식 필드에 잘못된 데이터를 다시 표시하려는 경우 모델 속성을 문자열로 만들고 데이터 변환을 수동으로 수행하는 것이 좋습니다.
+
+형식 변환 오류를 모델 상태 오류로 만들려 하지 않는 경우 동일한 전략을 권장합니다. 이 경우 모델 속성을 문자열로 만듭니다.
+
+## <a name="simple-types"></a>단순 형식
+
+모델 바인더에서 원본 문자열을 변환할 수 있는 단순 형식은 다음을 포함합니다.
+
+* [Boolean](xref:System.ComponentModel.BooleanConverter)
+* [Byte](xref:System.ComponentModel.ByteConverter), [SByte](xref:System.ComponentModel.SByteConverter)
+* [Char](xref:System.ComponentModel.CharConverter)
+* [DateTime](xref:System.ComponentModel.DateTimeConverter)
+* [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
+* [Decimal](xref:System.ComponentModel.DecimalConverter)
+* [double](xref:System.ComponentModel.DoubleConverter)
+* [Enum](xref:System.ComponentModel.EnumConverter)
+* [Guid](xref:System.ComponentModel.GuidConverter)
+* [Int16](xref:System.ComponentModel.Int16Converter), [Int32](xref:System.ComponentModel.Int32Converter), [Int64](xref:System.ComponentModel.Int64Converter)
+* [Single](xref:System.ComponentModel.SingleConverter)
+* [TimeSpan](xref:System.ComponentModel.TimeSpanConverter)
+* [UInt16](xref:System.ComponentModel.UInt16Converter), [UInt32](xref:System.ComponentModel.UInt32Converter), [UInt64](xref:System.ComponentModel.UInt64Converter)
+* [Uri](xref:System.UriTypeConverter)
+* [Version](xref:System.ComponentModel.VersionConverter)
+
+## <a name="complex-types"></a>복합 형식
+
+복합 형식에 공용 기본 생성자와 바인딩할 공용 쓰기 가능 속성이 있어야 합니다. 모델 바인딩이 발생하면 클래스는 공용 기본 생성자를 사용하여 인스턴스화됩니다. 
+
+복합 형식의 각 속성의 경우 모델 바인딩은 이름 패턴*prefix.property_name*에 대한 원본을 찾습니다. 아무것도 없는 경우 접두사 없이 *property_name*만을 찾습니다.
+
+매개 변수에 대한 바인딩의 경우 접두사는 매개 변수 이름입니다. `PageModel` 공용 속성에 대한 바인딩의 경우 접두사는 공용 속성 이름입니다. 일부 특성에는 매개 변수의 기본 사용 또는 속성 이름을 재정의할 수 있도록 하는 `Prefix` 속성이 있습니다.
+
+예를 들어 복합 형식이 다음 `Instructor` 클래스라고 가정합니다.
+
+  ```csharp
+  public class Instructor
+  {
+      public int ID { get; set; }
+      public string LastName { get; set; }
+      public string FirstName { get; set; }
+  }
+  ```
+
+### <a name="prefix--parameter-name"></a>접두사 = 매개 변수 이름
+
+바인딩될 모델이 `instructorToUpdate`라는 매개 변수인 경우:
 
 ```csharp
-services.AddMvc().AddMvcOptions(options =>
-    options.ModelMetadataDetailsProviders.Add(
-        new SuppressChildValidationMetadataProvider(typeof(System.Guid))));
+public IActionResult OnPost(int? id, Instructor instructorToUpdate)
 ```
 
-## <a name="bind-formatted-data-from-the-request-body"></a>요청 본문에서 형식이 지정된 데이터 바인딩
+모델 바인딩은 키 `instructorToUpdate.ID`에 대한 원본을 찾아 시작합니다. 없는 경우 접두사 없이 `ID`를 찾습니다.
 
-요청 데이터는 JSON, XML 및 기타 여러 가지 형식으로 제공될 수 있습니다. [FromBody] 특성을 사용하여 매개 변수를 요청 본문의 데이터에 바인딩하려는 것을 표시하는 경우, MVC는 구성된 포맷터 집합을 사용하여 해당 콘텐츠 형식을 기반으로 요청 데이터를 처리합니다. 기본적으로 MVC에는 JSON 데이터를 처리하기 위한 `JsonInputFormatter` 클래스가 포함되어 있지만 XML 및 기타 사용자 지정 형식을 처리하기 위한 포맷터를 더 추가할 수 있습니다.
+### <a name="prefix--property-name"></a>접두사 = 속성 이름
+
+바인딩될 모델이 컨트롤러 또는 `PageModel` 클래스의 `Instructor`라는 속성인 경우:
+
+```csharp
+[BindProperty]
+public Instructor Instructor { get; set; }
+```
+
+모델 바인딩은 키 `Instructor.ID`에 대한 원본을 찾아 시작합니다. 없는 경우 접두사 없이 `ID`를 찾습니다.
+
+### <a name="custom-prefix"></a>사용자 지정 접두사
+
+바인딩될 모델이 `instructorToUpdate`라는 매개 변수이고 `Bind` 특성이 접두사로 `Instructor`를 지정하는 경우:
+
+```csharp
+public IActionResult OnPost(
+    int? id, [Bind(Prefix = "Instructor")] Instructor instructorToUpdate)
+```
+
+모델 바인딩은 키 `Instructor.ID`에 대한 원본을 찾아 시작합니다. 없는 경우 접두사 없이 `ID`를 찾습니다.
+
+### <a name="attributes-for-complex-type-targets"></a>복합 형식 대상에 대한 특성
+
+여러 기본 제공 특성은 복합 형식의 모델 바인딩을 제어할 수 있습니다.
+
+* `[BindRequired]`
+* `[BindNever]`
+* `[Bind]`
 
 > [!NOTE]
-> `[FromBody]`로 데코레이팅된 작업당 최대 하나의 매개 변수가 있을 수 있습니다. ASP.NET Core MVC 런타임은 요청 스트림을 읽는 책임을 포맷터에 위임합니다. 매개 변수에 대해 요청 스트림을 읽은 후에는, 일반적으로 다른 `[FromBody]` 매개 변수를 바인딩하기 위해 요청 스트림을 다시 읽을 수 없습니다.
+> 이러한 특성은 게시된 양식 데이터가 값의 원본일 때 모델 바인딩에 영향을 줍니다. 게시된 JSON 및 XML 요청 본문을 처리하는 입력 포맷터에는 영향을 주지 않습니다. 입력 포맷터는 [이 문서의 뒷부분](#input-formatters)에 설명되어 있습니다.
+>
+> [모델 유효성 검사](xref:mvc/models/validation#required-attribute)에서 `[Required]` 특성의 설명을 참조하세요.
 
-> [!NOTE]
-> `JsonInputFormatter`은 기본 포맷터이며 [Json.NET](https://www.newtonsoft.com/json)을 기반으로 합니다.
+### <a name="bindrequired-attribute"></a>[BindRequired] 특성
 
-ASP.NET Core는 다르게 지정되는 특성이 적용되지 않는 한, [Content-Type](https://www.w3.org/Protocols/rfc1341/4_Content-Type.html) 헤더와 매개 변수의 형식을 기반으로 입력 포맷터를 선택합니다. XML 또는 다른 형식을 사용하려면 *Startup.cs* 파일에서 구성해야 하지만 NuGet을 사용하여 먼저 `Microsoft.AspNetCore.Mvc.Formatters.Xml`에 대한 참조를 얻어야 할 수도 있습니다. 시작 코드는 다음과 비슷합니다.
+메서드 매개 변수가 아닌 모델 속성에만 적용될 수 있습니다. 모델의 속성에 대한 바인딩이 발생할 수 없는 경우 모델 바인딩이 모델 상태 오류를 추가하도록 합니다. 예를 들면 다음과 같습니다.
+
+[!code-csharp[](model-binding/samples/2.x/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
+
+### <a name="bindnever-attribute"></a>[BindNever] 특성
+
+메서드 매개 변수가 아닌 모델 속성에만 적용될 수 있습니다. 모델 바인딩이 모델의 속성을 설정하는 것을 방지합니다. 예를 들면 다음과 같습니다.
+
+[!code-csharp[](model-binding/samples/2.x/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
+
+### <a name="bind-attribute"></a>[Bind] 특성
+
+클래스 또는 메서드 매개 변수에 적용될 수 있습니다. 모델 바인딩에 포함되어야 하는 모델의 속성을 지정합니다.
+
+다음 예제에서 모든 처리기 또는 작업 메서드가 호출될 때 지정된 속성의 `Instructor` 모델만 바인딩됩니다.
 
 ```csharp
-public void ConfigureServices(IServiceCollection services)
-{
-    services.AddMvc()
-        .AddXmlSerializerFormatters();
-   }
+[Bind("LastName,FirstMidName,HireDate")]
+public class Instructor
 ```
 
-*Startup.cs* 파일의 코드에는 ASP.NET Core 앱용 서비스를 빌드하는 데 사용할 수 있는 `services` 인수가 있는 `ConfigureServices` 메서드가 포함되어 있습니다. 이 샘플에서는 MVC가 이 앱에 대해 제공할 서비스로 XML 포맷터를 추가하고 있습니다. `AddMvc` 메서드에 전달된 `options` 인수를 통해 앱 시작 시 MVC의 필터, 포맷터 및 기타 시스템 옵션을 추가하고 관리할 수 있습니다. 그런 다음, 컨트롤러 클래스나 작업 메서드에 `Consumes` 특성을 적용하여 원하는 형식으로 작업합니다.
+다음 예제에서 `OnPost` 메서드가 호출될 때 지정된 속성의 `Instructor` 모델만 바인딩됩니다.
 
-### <a name="custom-model-binding"></a>사용자 지정 모델 바인딩
+```csharp
+[HttpPost]
+public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor instructor)
+```
 
-사용자 고유의 사용자 지정 모델 바인더를 작성하여 모델 바인딩을 확장할 수 있습니다. [사용자 모델 바인딩](../advanced/custom-model-binding.md)에 대해 자세히 알아보세요.
+`[Bind]` 특성은 *만들기* 시나리오에서 초과 게시를 방지하는 데 사용될 수 있습니다. 제외된 속성은 변경되지 않은 채로 남겨지는 대신 Null 또는 기본값으로 설정되기 때문에 편집 시나리오에서 잘 작동하지 않습니다. 초과 게시에 대한 방어의 경우 뷰 모델이 `[Bind]` 특성보다 권장됩니다. 자세한 내용은 [초과 게시에 대한 보안 정보](xref:data/ef-mvc/crud#security-note-about-overposting)를 참조하세요.
+
+## <a name="collections"></a>컬렉션
+
+단순 형식의 컬렉션인 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예:
+
+* 바인딩되는 매개 변수가 `selectedCourses`라는 배열이라고 가정합니다.
+
+  ```csharp
+  public IActionResult OnPost(int? id, int[] selectedCourses)
+  ```
+
+* 양식 또는 쿼리 문자열 데이터는 다음 형식 중 하나일 수 있습니다.
+   
+  ```
+  selectedCourses=1050&selectedCourses=2000 
+  ```
+
+  ```
+  selectedCourses[0]=1050&selectedCourses[1]=2000
+  ```
+
+  ```
+  [0]=1050&[1]=2000
+  ```
+
+  ```
+  selectedCourses[a]=1050&selectedCourses[b]=2000&selectedCourses.index=a&selectedCourses.index=b
+  ```
+
+  ```
+  [a]=1050&[b]=2000&index=a&index=b
+  ```
+
+* 다음 형식은 양식 데이터에서만 지원됩니다.
+
+  ```
+  selectedCourses[]=1050&selectedCourses[]=2000
+  ```
+
+* 앞의 모든 예제 형식의 경우 모델 바인딩은 두 항목의 배열을 `selectedCourses` 매개 변수에 전달합니다.
+
+  * selectedCourses[0]=1050
+  * selectedCourses[1]=2000
+
+  아래 첨자 숫자(... [0] ... [1] ...)를 사용하는 데이터 형식은 0부터 시작하여 순차적으로 번호가 매겨지는지 확인해야 합니다. 아래 첨자 번호에 간격이 있는 경우 간격 뒤에 있는 모든 항목은 무시됩니다. 예를 들어 아래 첨자가 0과 1 대신 0과 2인 경우 두 번째 항목은 무시됩니다.
+
+## <a name="dictionaries"></a>사전
+
+`Dictionary` 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예:
+
+* 대상 매개 변수가 `selectedCourses`라는 `Dictionary<string, string>`라고 가정합니다.
+
+  ```csharp
+  public IActionResult OnPost(int? id, Dictionary<int, string> selectedCourses)
+  ```
+
+* 게시된 양식 또는 쿼리 문자열 데이터는 다음 예제 중 하나와 같을 수 있습니다.
+
+  ```
+  selectedCourses[1050]=Chemistry&selectedCourses[2000]=Economics
+  ```
+
+  ```
+  [1050]=Chemistry&selectedCourses[2000]=Economics
+  ```
+
+  ```
+  selectedCourses[0].Key=1050&selectedCourses[0].Value=Chemistry&
+  selectedCourses[1].Key=2000&selectedCourses[1].Value=Economics
+  ```
+
+  ```
+  [0].Key=1050&[0].Value=Chemistry&[1].Key=2000&[1].Value=Economics
+  ```
+
+* 앞의 모든 예제 형식의 경우 모델 바인딩은 두 항목의 사전을 `selectedCourses` 매개 변수에 전달합니다.
+
+  * selectedCourses["1050"]="Chemistry"
+  * selectedCourses["2000"]="Economics"
+
+## <a name="special-data-types"></a>특수 데이터 형식
+
+모델 바인딩이 처리할 수 있는 일부 특수 데이터 형식이 있습니다.
+
+### <a name="iformfile-and-iformfilecollection"></a>IFormFile 및 IFormFileCollection
+
+HTTP 요청에 포함되는 업로드된 파일입니다.  또한 여러 파일에 대해 `IEnumerable<IFormFile>`이 지원됩니다.
+
+### <a name="cancellationtoken"></a>CancellationToken
+
+비동기 컨트롤러에서 작업을 취소하는 데 사용됩니다.
+
+### <a name="formcollection"></a>FormCollection
+
+게시된 양식 데이터에서 모든 값을 검색하는 데 사용됩니다.
+
+## <a name="input-formatters"></a>입력 포맷터
+
+요청 본문의 데이터는 JSON, XML 또는 일부 다른 형식일 수 있습니다. 이 데이터를 구문 분석하기 위해 모델 바인딩은 특정 콘텐츠 유형을 처리하도록 구성된 *입력 포맷터*를 사용합니다. 기본적으로 ASP.NET Core는 JSON 데이터를 처리하기 위한 JSON 기반 입력 포맷터를 포함합니다. 다른 콘텐츠 형식에 대해 다른 포맷터를 추가할 수 있습니다.
+
+ASP.NET Core는 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute) 특성을 기반으로 입력 포맷터를 선택합니다. 특성이 없는 경우 [Content-Type 헤더](https://www.w3.org/Protocols/rfc1341/4_Content-Type.html)를 사용합니다.
+
+기본 제공 XML 입력 포맷터를 사용하려면 다음을 수행합니다.
+
+* `Microsoft.AspNetCore.Mvc.Formatters.Xml` NuGet 패키지를 설치합니다.
+
+* `Startup.ConfigureServices`에서 <xref:Microsoft.Extensions.DependencyInjection.MvcXmlMvcCoreBuilderExtensions.AddXmlSerializerFormatters*> 또는 <xref:Microsoft.Extensions.DependencyInjection.MvcXmlMvcCoreBuilderExtensions.AddXmlDataContractSerializerFormatters*>를 호출합니다.
+
+  [!code-csharp[](model-binding/samples/2.x/Startup.cs?name=snippet_ValueProvider&highlight=9)]
+
+* 요청 본문에서 XML을 필요로 하는 컨트롤러 클래스 또는 작업 메서드에 `Consumes` 특성을 적용합니다.
+
+  ```csharp
+  [HttpPost]
+  [Consumes("application/xml")]
+  public ActionResult<Pet> Create(Pet pet)
+  ```
+
+  자세한 내용은 [XML Serialization 소개](https://docs.microsoft.com/en-us/dotnet/standard/serialization/introducing-xml-serialization)를 참조하세요.
+
+## <a name="exclude-specified-types-from-model-binding"></a>모델 바인딩에서 지정된 형식 제외
+
+모델 바인딩 및 시스템 동작의 유효성 검사는 [ModelMetadata](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.modelmetadata)를 기반으로 합니다. [MvcOptions.ModelMetadataDetailsProviders](xref:Microsoft.AspNetCore.Mvc.MvcOptions.ModelMetadataDetailsProviders)에 세부 정보 공급 기업을 추가하여 `ModelMetadata`를 사용자 지정할 수 있습니다. 기본 제공 세부 정보 공급 기업을 지정된 형식에 대한 모델 바인딩 또는 유효성 검사를 비활성화하기 위해 사용할 수 있습니다.
+
+지정된 형식의 모든 모델에 대한 모델 바인딩을 비활성화하려면 `Startup.ConfigureServices`에서 <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ExcludeBindingMetadataProvider>를 추가합니다. 예를 들어 `System.Version` 형식의 모든 모델에 대한 모델 바인딩을 비활성화하려면:
+
+[!code-csharp[](model-binding/samples/2.x/Startup.cs?name=snippet_ValueProvider&highlight=4-5)]
+
+지정된 형식의 속성에 대한 유효성 검사를 비활성화하려면 `Startup.ConfigureServices`에서 <xref:Microsoft.AspNetCore.Mvc.ModelBinding.SuppressChildValidationMetadataProvider>를 추가합니다. 예를 들어 `System.Guid` 형식의 속성에 대한 유효성 검사를 비활성화하려면:
+
+[!code-csharp[](model-binding/samples/2.x/Startup.cs?name=snippet_ValueProvider&highlight=6-7)]
+
+## <a name="custom-model-binders"></a>사용자 지정 모델 바인더
+
+사용자 지정 모델 바인더를 작성하고 지정된 대상에 대해 선택하도록 `[ModelBinder]` 특성을 사용하여 모델 바인딩을 확장할 수 있습니다. [사용자 모델 바인딩](xref:mvc/advanced/custom-model-binding)에 대해 자세히 알아보세요.
+
+## <a name="manual-model-binding"></a>수동 모델 바인딩
+
+<xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> 메서드를 사용하여 모델 바인딩을 수동으로 호출할 수 있습니다. 메서드는 `ControllerBase` 및 `PageModel` 클래스에서 정의됩니다. 메서드 오버로드를 통해 사용할 접두사 및 값 공급 기업을 지정할 수 있습니다. 모델 바인딩이 실패하는 경우 메서드는 `false`를 반환합니다. 예를 들면 다음과 같습니다.
+
+[!code-csharp[](model-binding/samples/2.x/Pages/InstructorsWithCollection/Create.cshtml.cs?name=snippet_TryUpdate&highlight=1-4)]
+
+## <a name="fromservices-attribute"></a>[FromServices] 특성
+
+이 특성의 이름은 데이터 원본을 지정하는 모델 바인딩 특성의 패턴을 따릅니다. 그러나 값 공급 기업의 바인딩 데이터에 대한 것은 아닙니다. [종속성 주입](xref:fundamentals/dependency-injection) 컨테이너에서 형식의 인스턴스를 가져옵니다. 특정 메서드가 호출되는 경우에만 서비스가 필요할 때 생성자 주입에 대안을 제공하는 것이 목적입니다.
+
+## <a name="additional-resources"></a>추가 자료
+
+* <xref:mvc/models/validation>
+* <xref:mvc/advanced/custom-model-binding>

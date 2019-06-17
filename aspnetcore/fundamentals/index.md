@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/11/2019
 uid: fundamentals/index
-ms.openlocfilehash: 9c7bc25d813ad17825ef03f5176882993cc2dd63
-ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
+ms.openlocfilehash: 3cf311f8e6be4ed12c79ceecc15ccc1babfb0117
+ms.sourcegitcommit: 335a88c1b6e7f0caa8a3a27db57c56664d676d34
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65610319"
+ms.lasthandoff: 06/12/2019
+ms.locfileid: "67034863"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core 기본 사항
 
@@ -25,8 +25,9 @@ ms.locfileid: "65610319"
 * 앱에서 요구하는 서비스가 구성됩니다.
 * 요청 처리 파이프라인이 정의됩니다.
 
-* 서비스를 구성(또는 *등록*)하는 코드는 `Startup.ConfigureServices` 메서드에 추가됩니다. *서비스*는 앱에서 사용되는 구성 요소입니다. 예를 들어, Entity Framework Core 컨텍스트 개체는 서비스입니다.
-* 요청 처리 파이프라인을 구성하는 코드는 `Startup.Configure` 메서드에 추가됩니다. 해당 파이프라인은 일련의 *미들웨어* 구성 요소로 구성됩니다. 예를 들어 미들웨어는 정적 파일에 대한 요청을 처리하거나 HTTP 요청을 HTTPS로 리디렉션할 수 있습니다. 각 미들웨어는 `HttpContext` 상에서 비동기 작업을 수행한 다음, 파이프라인의 다음 미들웨어를 호출하거나 요청을 종료합니다.
+*서비스*는 앱에서 사용되는 구성 요소입니다. 예를 들어 로깅 구성 요소는 서비스입니다. 서비스를 구성(또는 *등록*)하는 코드는 `Startup.ConfigureServices` 메서드에 추가됩니다.
+
+요청 처리 파이프라인은 일련의 *미들웨어* 구성 요소로 구성됩니다. 예를 들어 미들웨어는 정적 파일에 대한 요청을 처리하거나 HTTP 요청을 HTTPS로 리디렉션할 수 있습니다. 각 미들웨어는 `HttpContext` 상에서 비동기 작업을 수행한 다음, 파이프라인의 다음 미들웨어를 호출하거나 요청을 종료합니다. 요청 처리 파이프라인을 구성하는 코드는 `Startup.Configure` 메서드에 추가됩니다.
 
 샘플 `Startup` 클래스는 다음과 같습니다.
 
@@ -60,9 +61,7 @@ ASP.NET Core는 풍부한 일련의 기본 제공 미들웨어를 포함하고 �
 
 자세한 내용은 <xref:fundamentals/middleware/index>을 참조하세요.
 
-<a id="host"/>
-
-## <a name="the-host"></a>호스트
+## <a name="host"></a>호스트
 
 ASP.NET Core 앱은 시작 시 *호스트*를 빌드합니다. 호스트는 다음과 같은 앱의 리소스를 모두 캡슐화하는 개체입니다.
 
@@ -74,61 +73,45 @@ ASP.NET Core 앱은 시작 시 *호스트*를 빌드합니다. 호스트는 다�
 
 하나의 개체에 앱의 모든 상호 종속적 리소스를 포함하는 주요 원인은 수명 관리 즉, 앱 시작 및 종료에 대한 제어 때문입니다.
 
-호스트를 만드는 코드는 `Program.Main`에 포함되고 [작성기 패턴](https://wikipedia.org/wiki/Builder_pattern)을 따릅니다. 호스트의 일부인 각 리소스를 구성하는 메서드가 호출됩니다. 호스트 개체를 모두 풀링하여 인스턴스화하는 작성기 메서드가 호출됩니다.
-
 ::: moniker range=">= aspnetcore-3.0"
 
-`CreateHostBuilder`는 외부 구성 요소(예: [Entity Framework](/ef/core/))에 작성기 메서드를 식별하는 특수 이름입니다.
+두 호스트, 제네릭 호스트와 웹 호스트를 사용할 수 있습니다. 제네릭 호스트를 사용하는 것이 좋고, 웹 호스트는 이전 버전과만 호환 가능합니다.
 
-ASP.NET Core 3.0 이상의 웹앱에서는 제네릭 호스트(`Host` 클래스) 또는 웹 호스트(`WebHost` 클래스)를 사용할 수 있습니다. 제네릭 호스트를 사용하는 것이 좋고, 웹 호스트를 이전 버전과 호환 가능합니다.
+호스트를 만드는 코드는 `Program.Main`에 있습니다.
 
-프레임워크는 다음과 같이 일반적으로 사용되는 옵션으로 호스트를 설정할 수 있는 `CreateDefaultBuilder` 및 `ConfigureWebHostDefaults` 메서드를 제공합니다.
+[!code-csharp[](index/snapshots/3.x/Program1.cs)]
+
+`CreateDefaultBuilder` 및 `ConfigureWebHostDefaults` 메서드는 다음과 같이 일반적으로 사용되는 옵션으로 호스트를 구성합니다.
 
 * [Kestrel](#servers)을 웹 서버로 사용하고 IIS 통합을 설정합니다.
 * *appsettings.json*, *appsettings.{Environment Name}.json*, 환경 변수, 명령줄 인수 및 기타 구성 소스의 구성을 로드합니다.
 * 콘솔 및 디버그 공급 기업에 로깅 출력을 보냅니다.
 
-호스트를 빌드하는 샘플 코드는 다음과 같습니다. 일반적으로 사용되는 옵션을 사용하여 호스트를 설정하는 메서드를 집중적으로 다룹니다.
-
-[!code-csharp[](index/snapshots/3.x/Program1.cs?highlight=9-10)]
-
-자세한 내용은 <xref:fundamentals/host/generic-host> 및 <xref:fundamentals/host/web-host>를 참조하세요.
+자세한 내용은 <xref:fundamentals/host/generic-host>을 참조하세요.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-`CreateWebHostBuilder`는 외부 구성 요소(예: [Entity Framework](/ef/core/))에 작성기 메서드를 식별하는 특수 이름입니다.
+두 호스트, 웹 호스트와 제네릭 호스트를 사용할 수 있습니다. ASP.NET Core 2.x에서 제네릭 호스트는 비 웹 시나리오에만 해당됩니다.
 
-ASP.NET Core 2.x는 웹앱에서 웹 호스트(`WebHost` 클래스)를 사용합니다. 프레임워크는 다음과 같이 일반적으로 사용되는 옵션으로 호스트를 설정할 수 있는 `CreateDefaultBuilder`를 제공합니다.
+호스트를 만드는 코드는 `Program.Main`에 있습니다.
+
+[!code-csharp[](index/snapshots/2.x/Program1.cs)]
+
+`CreateDefaultBuilder` 메서드는 다음과 같이 일반적으로 사용되는 옵션으로 호스트를 구성합니다.
 
 * [Kestrel](#servers)을 웹 서버로 사용하고 IIS 통합을 설정합니다.
 * *appsettings.json*, *appsettings.{Environment Name}.json*, 환경 변수, 명령줄 인수 및 기타 구성 소스의 구성을 로드합니다.
 * 콘솔 및 디버그 공급 기업에 로깅 출력을 보냅니다.
-
-호스트를 빌드하는 샘플 코드는 다음과 같습니다.
-
-[!code-csharp[](index/snapshots/2.x/Program1.cs?highlight=9)]
 
 자세한 내용은 <xref:fundamentals/host/web-host>을 참조하세요.
 
 ::: moniker-end
 
-### <a name="advanced-host-scenarios"></a>고급 호스트 시나리오
+### <a name="non-web-scenarios"></a>비 웹 시나리오
 
-::: moniker range=">= aspnetcore-3.0"
-
-제네릭 호스트는 ASP.NET Core 앱&mdash;뿐만 아니라 모든 .NET Core 앱에 사용할 수 있습니다. 제네릭 호스트(`Host` 클래스)를 통해 다른 형식의 앱에서 로깅, DI, 구성 및 앱 수명 관리와 같은 교차 프레임워크 확장을 사용할 수 있습니다. 자세한 내용은 <xref:fundamentals/host/generic-host>을 참조하세요.
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.0"
-
-웹 호스트는 HTTP 서버 구현을 포함하도록 설계되었으며 다른 종류의 .NET 앱에 필요하지 않습니다. ASP.NET Core 2.1부터 제네릭 호스트(`Host` 클래스)는 ASP.NET Core 앱뿐만 아니라 모든 .NET Core 앱에 사용할 수 있습니다. 제네릭 호스트를 통해 다른 형식의 앱에서 로깅, DI, 구성 및 앱 수명 관리와 같은 교차 프레임워크 확장을 사용할 수 있습니다. 자세한 내용은 <xref:fundamentals/host/generic-host>을 참조하세요.
-
-::: moniker-end
-
-호스트를 사용하여 백그라운드 작업을 실행할 수도 있습니다. 자세한 내용은 <xref:fundamentals/host/hosted-services>을 참조하세요.
+제네릭 호스트를 통해 다른 형식의 앱에서 로깅, DI(종속성 주입), 구성 및 앱 수명 관리와 같은 교차 프레임워크 확장을 사용할 수 있습니다. 자세한 내용은 <xref:fundamentals/host/generic-host> 및 <xref:fundamentals/host/hosted-services>를 참조하세요.
 
 ## <a name="servers"></a>서버
 
@@ -287,6 +270,6 @@ ASP.NET Core에는 다음과 같은 오류를 처리하기 위한 기본 제공 
 
 웹 루트(*webroot*라고도 함)는 CSS, JavaScript 및 이미지 파일과 같은 공용 정적 리소스의 기본 경로입니다. 기본적으로 정적 파일 미들웨어는 웹 루트 디렉터리(및 하위 디렉터리)에 있는 파일만 제공합니다. 웹 루트 경로는 *{Content Root}/wwwroot*를 기본값으로 지정하지만 [호스트를 빌드](#host)할 때 다른 위치를 지정할 수도 있습니다.
 
-Razor(*.cshtml*) 파일에서 물결표 슬래시 `~/`가 웹 루트를 가리킵니다. `~/`에서 시작하는 경로를 가상 경로라고 합니다.
+Razor( *.cshtml*) 파일에서 물결표 슬래시 `~/`가 웹 루트를 가리킵니다. `~/`에서 시작하는 경로를 가상 경로라고 합니다.
 
 자세한 내용은 <xref:fundamentals/static-files>을 참조하세요.

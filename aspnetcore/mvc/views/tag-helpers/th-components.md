@@ -4,14 +4,14 @@ author: scottaddie
 description: 태그 도우미 구성 요소란 무엇이며 ASP.NET Core에서 어떻게 사용하는지 알아봅니다.
 monikerRange: '>= aspnetcore-2.0'
 ms.author: scaddie
-ms.date: 04/06/2019
+ms.date: 06/12/2019
 uid: mvc/views/tag-helpers/th-components
-ms.openlocfilehash: 777bbcca3d1c2f03f386fa62df2a2e0b00409318
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: b5b3abea6492cfaa7d6acd0e54073a8db12eb2a5
+ms.sourcegitcommit: 335a88c1b6e7f0caa8a3a27db57c56664d676d34
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64889738"
+ms.lasthandoff: 06/12/2019
+ms.locfileid: "67034759"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>ASP.NET Core의 태그 도우미 구성 요소
 
@@ -62,9 +62,16 @@ HTML `<head>` 요소 내에서 CSS 파일은 일반적으로 HTML `<link>` 요�
 
 태그 도우미 구성 요소를 앱의 태그 도우미 구성 요소 컬렉션에 추가해야 합니다. 컬렉션에 추가하는 세 가지 방법이 있습니다.
 
-1. [서비스 컨테이너를 통한 등록](#registration-via-services-container)
-1. [Razor 파일을 통한 등록](#registration-via-razor-file)
-1. [페이지 모델 또는 컨트롤러를 통한 등록](#registration-via-page-model-or-controller)
+* [ASP.NET Core의 태그 도우미 구성 요소](#tag-helper-components-in-aspnet-core)
+  * [사용 사례](#use-cases)
+    * [HTML 헤드 요소에 주입](#inject-into-html-head-element)
+    * [HTML 본문 요소에 주입](#inject-into-html-body-element)
+  * [구성 요소 등록](#register-a-component)
+    * [서비스 컨테이너를 통한 등록](#registration-via-services-container)
+    * [Razor 파일을 통한 등록](#registration-via-razor-file)
+    * [페이지 모델 또는 컨트롤러를 통한 등록](#registration-via-page-model-or-controller)
+  * [구성 요소 만들기](#create-a-component)
+  * [추가 리소스](#additional-resources)
 
 ### <a name="registration-via-services-container"></a>서비스 컨테이너를 통한 등록
 
