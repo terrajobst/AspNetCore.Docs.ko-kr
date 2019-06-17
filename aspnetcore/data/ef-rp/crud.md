@@ -5,12 +5,12 @@ description: EF Core를 사용한 만들기, 읽기, 업데이트, 삭제 방법
 ms.author: riande
 ms.date: 6/31/2017
 uid: data/ef-rp/crud
-ms.openlocfilehash: 43d133c61c0387ebcb4bcb2d22c800588d8534c3
-ms.sourcegitcommit: 3376f224b47a89acf329b2d2f9260046a372f924
+ms.openlocfilehash: ec22c82b3b70399017b5b9aa61896440db647062
+ms.sourcegitcommit: e7e04a45195d4e0527af6f7cf1807defb56dc3c3
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/10/2019
-ms.locfileid: "65516916"
+ms.lasthandoff: 06/06/2019
+ms.locfileid: "66750022"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---crud---2-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - CRUD - 2/8
 
@@ -123,7 +123,7 @@ ms.locfileid: "65516916"
 앞의 예제에서:
 
 * 두 번째 인수(`"student", // Prefix`)는 값 조회에 사용하는 접두사입니다. 대/소문자를 구분하지 않습니다.
-* 게시된 양식 값은 [모델 바인딩](xref:mvc/models/model-binding#how-model-binding-works)을 사용한 `Student` 모델의 형식으로 변환됩니다.
+* 게시된 양식 값은 [모델 바인딩](xref:mvc/models/model-binding)을 사용한 `Student` 모델의 형식으로 변환됩니다.
 
 <a id="overpost"></a>
 

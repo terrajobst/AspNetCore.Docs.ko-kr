@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 02/04/2019
 ms.topic: tutorial
 uid: data/ef-mvc/crud
-ms.openlocfilehash: 61669dca24b552012ee057b89de28b7de1702c2b
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 442570cdc79fe7c496392ffbcbc527cf841aefa9
+ms.sourcegitcommit: e7e04a45195d4e0527af6f7cf1807defb56dc3c3
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64886168"
+ms.lasthandoff: 06/06/2019
+ms.locfileid: "66750077"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>자습서: CRUD 기능 구현 - ASP.NET MVC 및 EF Core 사용
 
@@ -177,7 +177,7 @@ HttpPost 편집 작업 메서드를 다음 코드로 바꿉니다.
 
 이러한 변경 내용은 초과 게시를 방지하기 위해 보안 모범 사례를 구현합니다. 스캐폴더는 `Bind` 특성을 생성했고 모델 바인더에서 만든 엔터티를 `Modified` 플래그로 설정된 엔터티에 추가했습니다. `Bind` 특성은 `Include` 매개 변수에 나열되지 않은 필드에서 기존의 모든 데이터를 지우므로 해당 코드는 대부분의 시나리오에 권장되지 않습니다.
 
-새 코드는 기존 엔터티를 읽고 `TryUpdateModel`을 호출하여 [게시된 양식 데이터에서 사용자 입력에 따라](xref:mvc/models/model-binding#how-model-binding-works) 검색된 엔터티에서 필드를 업데이트합니다. Entity Framework의 자동 변경 내용 추적은 양식 입력에 의해 변경된 필드에서 `Modified` 플래그를 설정합니다. `SaveChanges` 메서드가 호출되는 경우 Entity Framework는 SQL 문을 만들어 데이터베이스 행을 업데이트합니다. 동시성 충돌은 무시되고 사용자가 업데이트한 테이블 열만 데이터베이스에서 업데이트됩니다. (이후의 자습서에서는 동시성 충돌을 처리하는 방법을 보여 줍니다.)
+새 코드는 기존 엔터티를 읽고 `TryUpdateModel`을 호출하여 [게시된 양식 데이터에서 사용자 입력에 따라](xref:mvc/models/model-binding) 검색된 엔터티에서 필드를 업데이트합니다. Entity Framework의 자동 변경 내용 추적은 양식 입력에 의해 변경된 필드에서 `Modified` 플래그를 설정합니다. `SaveChanges` 메서드가 호출되는 경우 Entity Framework는 SQL 문을 만들어 데이터베이스 행을 업데이트합니다. 동시성 충돌은 무시되고 사용자가 업데이트한 테이블 열만 데이터베이스에서 업데이트됩니다. (이후의 자습서에서는 동시성 충돌을 처리하는 방법을 보여 줍니다.)
 
 초과 게시를 방지하는 가장 좋은 방법으로 **편집** 페이지에서 업데이트 가능하도록 원하는 필드가 `TryUpdateModel` 매개 변수에서 허용 목록에 추가됩니다. (매개 변수 목록에서 필드 목록 앞의 빈 문자열은 양식 필드 이름으로 사용하는 접두사에 대한 것입니다.) 현재 보호하는 추가 필드가 없지만 모델 바인더에서 바인딩하길 원하는 필드를 나열하는 것은 향후에 데이터 모델에 필드를 추가하는지 확인하며, 여기에서 명시적으로 추가할 때까지 자동으로 보호됩니다.
 

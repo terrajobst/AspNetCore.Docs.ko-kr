@@ -7,18 +7,18 @@ ms.author: riande
 ms.custom: mvc, seoapril2019
 ms.date: 05/01/2019
 uid: blazor/index
-ms.openlocfilehash: bd7d2d3e6702844627f19dfbbbad5c52389a52e5
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: d58115b17536cad0b3927e6d32b7dbe8db8e4b0f
+ms.sourcegitcommit: 335a88c1b6e7f0caa8a3a27db57c56664d676d34
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65085775"
+ms.lasthandoff: 06/12/2019
+ms.locfileid: "67034427"
 ---
 # <a name="introduction-to-blazor"></a>Blazor 소개
 
 작성자: [Daniel Roth](https://github.com/danroth27) 및 [Luke Latham](https://github.com/guardrex)
 
-Blazor를 시작합니다.
+Blazor를 시작합니다. 
 
 Blazor는 .NET을 사용하여 대화형 클라이언트 쪽 웹 UI를 빌드하기 위한 프레임워크입니다.
 
@@ -37,11 +37,11 @@ Blazor는 .NET을 사용하여 대화형 클라이언트 쪽 웹 UI를 빌드하
 
 ## <a name="components"></a>구성 요소
 
-Blazor 앱은 구성 요소를 기반으로 합니다. Blazor의 구성 요소는 페이지, 대화 상자 또는 데이터 입력 양식과 같은 UI의 요소입니다. 구성 요소는 사용자 이벤트를 처리하고 유연한 UI 렌더링 논리를 정의합니다. 구성 요소는 중첩 및 재사용될 수 있습니다.
+Blazor 앱은 구성 요소를 기반으로 합니다.  Blazor의 구성 요소는 페이지, 대화 상자 또는 데이터 입력 양식과 같은 UI의 요소입니다. 구성 요소는 사용자 이벤트를 처리하고 유연한 UI 렌더링 논리를 정의합니다. 구성 요소는 중첩 및 재사용될 수 있습니다.
 
 구성 요소는 [NuGet 패키지](/nuget/what-is-nuget)로 공유 및 배포될 수 있는 .NET 어셈블리에 기본 제공된 .NET 클래스입니다. 구성 요소 클래스는 일반적으로 *.razor* 파일 확장자를 가진 Razor 태그 페이지 형식으로 작성됩니다.
 
-Blazor의 구성 요소는 경우에 따라 Razor 구성 요소라고도 합니다. [Razor](xref:mvc/views/razor)는 개발자 생산성을 위해 설계된 HTML 태그와 C# 코드를 결합하는 구문입니다. Razor를 사용하여 [IntelliSense](/visualstudio/ide/using-intellisense) 지원으로 동일한 파일에서 HTML 태그와 C# 사이를 전환할 수 있습니다. Razor Pages 및 MVC에서도 Razor를 사용합니다. 요청/응답 모델을 중심으로 빌드된 Razor Pages 및 MVC와는 달리, 구성 요소는 특별히 클라이언트 쪽 UI 논리 및 컴퍼지션에 사용됩니다.
+Blazor의 구성 요소는 경우에 따라 Razor 구성 요소라고도 합니다.  [Razor](xref:mvc/views/razor)는 개발자 생산성을 위해 설계된 HTML 태그와 C# 코드를 결합하는 구문입니다. Razor를 사용하여 [IntelliSense](/visualstudio/ide/using-intellisense) 지원으로 동일한 파일에서 HTML 태그와 C# 사이를 전환할 수 있습니다. Razor Pages 및 MVC에서도 Razor를 사용합니다. 요청/응답 모델을 중심으로 빌드된 Razor Pages 및 MVC와는 달리, 구성 요소는 특별히 클라이언트 쪽 UI 논리 및 컴퍼지션에 사용됩니다.
 
 다음 Razor 태그는 다른 구성 요소 내에 중첩될 수 있는 구성 요소(*Dialog.razor*)를 보여 줍니다.
 
@@ -51,10 +51,10 @@ Blazor의 구성 요소는 경우에 따라 Razor 구성 요소라고도 합니�
 
     @ChildContent
 
-    <button onclick="@OnYes">Yes!</button>
+    <button @onclick="@OnYes">Yes!</button>
 </div>
 
-@functions {
+@code {
     [Parameter]
     private string Title { get; set; }
 
@@ -90,7 +90,7 @@ Welcome to your new app.
 
 이 구성 요소를 앱에서 사용할 경우 [Visual Studio](/visualstudio/ide/using-intellisense) 및 [Visual Studio Code](https://code.visualstudio.com/docs/editor/intellisense)의 IntelliSense는 구문 및 매개 변수 완성을 통해 개발 속도를 높입니다.
 
-구성 요소는 유연하고 효율적인 방법으로 UI를 업데이트하는 데 사용되는 ‘렌더링 트리’라는 브라우저 DOM의 메모리 내 표시로 렌더링됩니다.
+구성 요소는 유연하고 효율적인 방법으로 UI를 업데이트하는 데 사용되는 ‘렌더링 트리’라는 브라우저 DOM의 메모리 내 표시로 렌더링됩니다. 
 
 ## <a name="blazor-client-side"></a>Blazor 클라이언트 쪽
 
@@ -108,7 +108,7 @@ Blazor 클라이언트 쪽 앱이 빌드되고 브라우저에서 실행되는 �
 * 어셈블리와 .NET 런타임이 브라우저에 다운로드됩니다.
 * Blazor 클라이언트 쪽에서 .NET 런타임을 부트스트랩하고 앱의 어셈블리를 로드하도록 런타임을 구성합니다. Blazor 클라이언트 쪽 런타임은 JavaScript interop를 사용하여 DOM(문서 개체 모델) 조작 및 브라우저 API 호출을 처리합니다.
 
-게시된 앱의 크기인 해당 페이로드 크기는 앱의 유용성에 중요한 성능 요소입니다. 대규모 앱은 브라우저에 다운로드되는 데 비교적 오랜 시간이 걸리므로 사용자 환경이 손상됩니다. Blazor 클라이언트 쪽에서는 페이로드 크기를 최적화하여 다운로드 시간을 줄입니다.
+게시된 앱의 크기인 해당 페이로드 크기는 앱의 유용성에 중요한 성능 요소입니다.  대규모 앱은 브라우저에 다운로드되는 데 비교적 오랜 시간이 걸리므로 사용자 환경이 손상됩니다. Blazor 클라이언트 쪽에서는 페이로드 크기를 최적화하여 다운로드 시간을 줄입니다.
 
 * [IL(중간 언어) 링커](xref:host-and-deploy/blazor/configure-linker)에서 게시하면 사용되지 않는 코드가 앱에서 제거됩니다.
 * HTTP 응답이 압축됩니다.
