@@ -1,151 +1,428 @@
 ---
 title: ASP.NET Core의 모델 바인딩
 author: tdykstra
-description: ASP.NET Core MVC의 모델 바인딩이 HTTP 요청의 데이터를 작업 메서드 매개 변수에 매핑하는 방법을 알아봅니다.
+description: ASP.NET Core에서 모델 바인딩의 작동 방법 및 해당 동작을 사용자 지정하는 방법을 알아봅니다.
 ms.assetid: 0be164aa-1d72-4192-bd6b-192c9c301164
 ms.author: tdykstra
-ms.date: 11/13/2018
+ms.date: 05/31/2019
 uid: mvc/models/model-binding
-ms.openlocfilehash: 1dc9b41328ed78440622acc1865b6f088d394403
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 7d62ccecdacbd34a38a1fd8c58979a9b09cf86e8
+ms.sourcegitcommit: e7e04a45195d4e0527af6f7cf1807defb56dc3c3
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64883148"
+ms.lasthandoff: 06/06/2019
+ms.locfileid: "66750208"
 ---
-# <a name="model-binding-in-aspnet-core"></a><span data-ttu-id="0a058-103">ASP.NET Core의 모델 바인딩</span><span class="sxs-lookup"><span data-stu-id="0a058-103">Model Binding in ASP.NET Core</span></span>
+# <a name="model-binding-in-aspnet-core"></a><span data-ttu-id="76290-103">ASP.NET Core의 모델 바인딩</span><span class="sxs-lookup"><span data-stu-id="76290-103">Model Binding in ASP.NET Core</span></span>
 
-<span data-ttu-id="0a058-104">작성자: [Rachel Appel](https://github.com/rachelappel)</span><span class="sxs-lookup"><span data-stu-id="0a058-104">By [Rachel Appel](https://github.com/rachelappel)</span></span>
+<span data-ttu-id="76290-104">이 문서는 모델 바인딩이 무엇인지, 작동 방법 및 해당 동작을 사용자 지정하는 방법을 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-104">This article explains what model binding is, how it works, and how to customize its behavior.</span></span>
 
-## <a name="introduction-to-model-binding"></a><span data-ttu-id="0a058-105">모델 바인딩 소개</span><span class="sxs-lookup"><span data-stu-id="0a058-105">Introduction to model binding</span></span>
+<span data-ttu-id="76290-105">[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/model-binding/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="76290-105">[View or download sample code](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/model-binding/samples) ([how to download](xref:index#how-to-download-a-sample)).</span></span>
 
-<span data-ttu-id="0a058-106">ASP.NET Core MVC에서 모델 바인딩은 작업 메서드 매개 변수에 HTTP 요청의 데이터를 자동으로 매핑합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-106">Model binding in ASP.NET Core MVC maps data from HTTP requests to action method parameters.</span></span> <span data-ttu-id="0a058-107">매개 변수는 문자열, 정수, float 등과 같은 단순 형식이거나 복합 형식일 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-107">The parameters may be simple types such as strings, integers, or floats, or they may be complex types.</span></span> <span data-ttu-id="0a058-108">들어오는 데이터를 대상에 매핑하는 것은 데이터의 크기나 복잡성에 관계없이 자주 반복되는 시나리오이므로 MVC의 훌륭한 기능입니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-108">This is a great feature of MVC because mapping incoming data to a counterpart is an often repeated scenario, regardless of size or complexity of the data.</span></span> <span data-ttu-id="0a058-109">MVC는 바인딩을 추상화하여 이 문제를 해결하므로 개발자는 모든 앱에서 동일한 코드의 약간 다른 버전을 다시 작성하지 않아도 됩니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-109">MVC solves this problem by abstracting binding away so developers don't have to keep rewriting a slightly different version of that same code in every app.</span></span> <span data-ttu-id="0a058-110">형식 변환기 코드에 사용자 고유의 텍스트를 작성하는 것은 지루하고 오류가 발생하기 쉽습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-110">Writing your own text to type converter code is tedious, and error prone.</span></span>
+## <a name="what-is-model-binding"></a><span data-ttu-id="76290-106">모델 바인딩이란</span><span class="sxs-lookup"><span data-stu-id="76290-106">What is Model binding</span></span>
 
-## <a name="how-model-binding-works"></a><span data-ttu-id="0a058-111">모델 바인딩의 작동 방식</span><span class="sxs-lookup"><span data-stu-id="0a058-111">How model binding works</span></span>
+<span data-ttu-id="76290-107">컨트롤러 및 Razor 페이지는 HTTP 요청에서 제공되는 데이터를 사용하여 작동합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-107">Controllers and Razor pages work with data that comes from HTTP requests.</span></span> <span data-ttu-id="76290-108">예를 들어 경로 데이터는 레코드 키를 제공할 수 있으며, 게시된 양식 필드는 모델의 속성에 대한 값을 제공할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-108">For example, route data may provide a record key, and posted form fields may provide values for the properties of the model.</span></span> <span data-ttu-id="76290-109">이러한 각 값을 검색하고 문자열에서 .NET 형식으로 변환하도록 코드를 작성하는 것은 번거롭고 오류가 발생하기 쉽습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-109">Writing code to retrieve each of these values and convert them from strings to .NET types would be tedious and error-prone.</span></span> <span data-ttu-id="76290-110">모델 바인딩은 이 프로세스를 자동화합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-110">Model binding automates this process.</span></span> <span data-ttu-id="76290-111">모델 바인딩 시스템:</span><span class="sxs-lookup"><span data-stu-id="76290-111">The model binding system:</span></span>
 
-<span data-ttu-id="0a058-112">MVC는 HTTP 요청을 받으면 이를 컨트롤러의 특정 작업 메서드에 라우팅합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-112">When MVC receives an HTTP request, it routes it to a specific action method of a controller.</span></span> <span data-ttu-id="0a058-113">경로 데이터에 기반하여 실행할 작업 메서드를 결정한 다음, HTTP 요청의 값을 해당 작업 메서드의 매개 변수에 바인드합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-113">It determines which action method to run based on what is in the route data, then it binds values from the HTTP request to that action method's parameters.</span></span> <span data-ttu-id="0a058-114">예를 들어 다음 URL을 가정해 봅니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-114">For example, consider the following URL:</span></span>
+* <span data-ttu-id="76290-112">경로 데이터, 양식 필드 및 쿼리 문자열과 같은 다양한 원본의 데이터를 검색합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-112">Retrieves data from various sources such as route data, form fields, and query strings.</span></span>
+* <span data-ttu-id="76290-113">메서드 매개 변수 및 공용 속성에서 컨트롤러 및 Razor 페이지에 데이터를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-113">Provides the data to controllers and Razor pages in method parameters and public properties.</span></span>
+* <span data-ttu-id="76290-114">문자열 데이터를 .NET 형식으로 변환합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-114">Converts string data to .NET types.</span></span>
+* <span data-ttu-id="76290-115">복합 형식의 속성을 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-115">Updates properties of complex types.</span></span>
 
-`http://contoso.com/movies/edit/2`
+## <a name="example"></a><span data-ttu-id="76290-116">예제</span><span class="sxs-lookup"><span data-stu-id="76290-116">Example</span></span>
 
-<span data-ttu-id="0a058-115">경로 템플릿은 `{controller=Home}/{action=Index}/{id?}`와 같으므로, `movies/edit/2`는 `Movies` 컨트롤러와 해당 `Edit` 작업 메서드로 라우팅합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-115">Since the route template looks like this, `{controller=Home}/{action=Index}/{id?}`, `movies/edit/2` routes to the `Movies` controller, and its `Edit` action method.</span></span> <span data-ttu-id="0a058-116">또한 `id`라는 선택적 매개 변수를 허용합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-116">It also accepts an optional parameter called `id`.</span></span> <span data-ttu-id="0a058-117">작업 메서드의 코드는 다음과 같아야 합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-117">The code for the action method should look something like this:</span></span>
+<span data-ttu-id="76290-117">다음 작업 메서드를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-117">Suppose you have the following action method:</span></span>
 
-```csharp
-public IActionResult Edit(int? id)
-   ```
+[!code-csharp[](model-binding/samples/2.x/Controllers/PetsController.cs?name=snippet_DogsOnly)]
 
-<span data-ttu-id="0a058-118">참고: URL 경로에 있는 문자열은 대/소문자를 구분하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-118">Note: The strings in the URL route are not case sensitive.</span></span>
+<span data-ttu-id="76290-118">앱은 이 URL로 요청을 수신합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-118">And the app receives a request with this URL:</span></span>
 
-<span data-ttu-id="0a058-119">MVC는 이름을 기준으로 요청 데이터를 작업 매개 변수에 바인딩하려고 시도합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-119">MVC will try to bind request data to the action parameters by name.</span></span> <span data-ttu-id="0a058-120">MVC는 매개 변수 이름과 설정 가능한 공용 속성 이름을 사용하여 각 매개 변수의 값을 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-120">MVC will look for values for each parameter using the parameter name and the names of its public settable properties.</span></span> <span data-ttu-id="0a058-121">위의 예에서 유일한 작업 매개 변수의 이름은 `id`이며 MVC는 경로 값에서 같은 이름의 값에 바인딩합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-121">In the above example, the only action parameter is named `id`, which MVC binds to the value with the same name in the route values.</span></span> <span data-ttu-id="0a058-122">경로 값 외에도, MVC는 요청의 여러 부분에서 설정된 순서대로 데이터를 바인딩합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-122">In addition to route values MVC will bind data from various parts of the request and it does so in a set order.</span></span> <span data-ttu-id="0a058-123">아래는 모델 바인딩이 보이는 순서대로 나열된 데이터 원본 목록입니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-123">Below is a list of the data sources in the order that model binding looks through them:</span></span>
-
-1. <span data-ttu-id="0a058-124">`Form values`: POST 메서드를 사용하여 HTTP 요청에 포함되는 양식 값입니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-124">`Form values`: These are form values that go in the HTTP request using the POST method.</span></span> <span data-ttu-id="0a058-125">(jQuery POST 요청 포함).</span><span class="sxs-lookup"><span data-stu-id="0a058-125">(including jQuery POST requests).</span></span>
-
-2. <span data-ttu-id="0a058-126">`Route values`: [라우팅](xref:fundamentals/routing)에서 제공한 경로 값 집합</span><span class="sxs-lookup"><span data-stu-id="0a058-126">`Route values`: The set of route values provided by [Routing](xref:fundamentals/routing)</span></span>
-
-3. <span data-ttu-id="0a058-127">`Query strings`: URI의 쿼리 문자열 부분입니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-127">`Query strings`: The query string part of the URI.</span></span>
-
-<!-- DocFX BUG
-The link works but generates an error when building with DocFX
-@fundamentals/routing
-[Routing](xref:fundamentals/routing)
--->
-
-<span data-ttu-id="0a058-128">참고: 양식 값, 경로 데이터 및 쿼리 문자열은 모두 이름-값 쌍으로 저장됩니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-128">Note: Form values, route data, and query strings are all stored as name-value pairs.</span></span>
-
-<span data-ttu-id="0a058-129">모델 바인딩에서는 `id`라는 이름의 키를 요청했고 양식 값에 `id`라는 항목이 없으므로 해당 키를 찾는 경로 값으로 이동했습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-129">Since model binding asked for a key named `id` and there's nothing named `id` in the form values, it moved on to the route values looking for that key.</span></span> <span data-ttu-id="0a058-130">이 예제에서는 일치 항목입니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-130">In our example, it's a match.</span></span> <span data-ttu-id="0a058-131">바인딩이 발생하고 값이 정수 2로 변환됩니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-131">Binding happens, and the value is converted to the integer 2.</span></span> <span data-ttu-id="0a058-132">편집(문자열 ID)을 사용하는 동일한 요청이 문자열 "2"로 변환됩니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-132">The same request using Edit(string id) would convert to the string "2".</span></span>
-
-<span data-ttu-id="0a058-133">지금까지 예에서는 단순 형식을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-133">So far the example uses simple types.</span></span> <span data-ttu-id="0a058-134">MVC에서 단순 형식은 모든 .NET 기본 형식 또는 문자열 형식 변환기를 사용한 형식입니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-134">In MVC simple types are any .NET primitive type or type with a string type converter.</span></span> <span data-ttu-id="0a058-135">작업 메서드의 매개 변수가 `Movie` 형식과 같은 클래스이고 속성으로 단순 및 복합 형식을 모두 포함하는 경우, MVC의 모델 바인딩에서 이를 원활하게 처리합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-135">If the action method's parameter were a class such as the `Movie` type, which contains both simple and complex types as properties, MVC's model binding will still handle it nicely.</span></span> <span data-ttu-id="0a058-136">리플렉션 및 재귀를 사용하여 복합 형식의 속성을 검색하고 일치하는 항목을 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-136">It uses reflection and recursion to traverse the properties of complex types looking for matches.</span></span> <span data-ttu-id="0a058-137">모델 바인딩은 값을 속성에 바인딩하기 위해 *parameter_name.property_name* 패턴을 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-137">Model binding looks for the pattern *parameter_name.property_name* to bind values to properties.</span></span> <span data-ttu-id="0a058-138">이 양식의 일치하는 값을 찾지 못하면 속성 이름만 사용하여 바인딩을 시도합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-138">If it doesn't find matching values of this form, it will attempt to bind using just the property name.</span></span> <span data-ttu-id="0a058-139">`Collection` 형식과 같은 형식에 대해, 모델 바인딩에서는 *parameter_name[index]* 또는 *[index]* 에 대해 일치 항목을 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-139">For those types such as `Collection` types, model binding looks for matches to *parameter_name[index]* or just *[index]*.</span></span> <span data-ttu-id="0a058-140">모델 바인딩에서는 `Dictionary` 형식을 유사하게 처리하며 키가 단순 형식인 경우, *parameter_name[key]* 또는 *[key]* 를 요청합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-140">Model binding treats  `Dictionary` types similarly, asking for *parameter_name[key]* or just *[key]*, as long as the keys are simple types.</span></span> <span data-ttu-id="0a058-141">지원되는 키는 동일한 모델 형식에 대해 생성된 필드 이름 HTML 및 태그 도우미와 일치합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-141">Keys that are supported match the field names HTML and tag helpers generated for the same model type.</span></span> <span data-ttu-id="0a058-142">이렇게 하면 라운드트립 값이 가능해지므로 생성 또는 편집에서 바인딩된 데이터가 유효성 검사를 통과하지 못했을 때와 같이, 사용자 편의를 위해 양식 필드는 사용자 입력으로 채워져 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-142">This enables round-tripping values so that the form fields remain filled with the user's input for their convenience, for example, when bound data from a create or edit didn't pass validation.</span></span>
-
-<span data-ttu-id="0a058-143">모델 바인딩을 가능하게 하려면 클래스에 공용 기본 생성자와 바인딩할 공용 쓰기 가능 속성이 있어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-143">To make model binding possible, the class must have a public default constructor and public writable properties to bind.</span></span> <span data-ttu-id="0a058-144">모델 바인딩이 발생하면 클래스는 공용 기본 생성자를 사용하여 인스턴스화된 다음, 속성을 설정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-144">When model binding occurs, the class is instantiated using the public default constructor, then the properties can be set.</span></span>
-
-<span data-ttu-id="0a058-145">매개 변수가 바인딩되면 모델 바인딩은 해당 이름의 값을 찾는 것을 중지하고 다음 매개 변수를 바인딩하도록 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-145">When a parameter is bound, model binding stops looking for values with that name and it moves on to bind the next parameter.</span></span> <span data-ttu-id="0a058-146">그렇지 않은 경우 기본 모델 바인딩 동작은 해당 형식에 따라 매개 변수를 기본값으로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-146">Otherwise, the default model binding behavior sets parameters to their default values depending on their type:</span></span>
-
-* <span data-ttu-id="0a058-147">`T[]`: `byte[]` 형식의 배열을 제외하고, 바인딩은 `T[]` 형식의 매개 변수를 `Array.Empty<T>()`로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-147">`T[]`: With the exception of arrays of type `byte[]`, binding sets parameters of type `T[]` to `Array.Empty<T>()`.</span></span> <span data-ttu-id="0a058-148">`byte[]` 형식의 배열은 `null`로 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-148">Arrays of type `byte[]` are set to `null`.</span></span>
-
-* <span data-ttu-id="0a058-149">참조 형식: 바인딩은 속성을 설정하지 않고 기본 생성자를 사용하여 클래스의 인스턴스를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-149">Reference Types: Binding creates an instance of a class with the default constructor without setting properties.</span></span> <span data-ttu-id="0a058-150">그러나 모델 바인딩에서는 `string` 매개 변수를 `null`로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-150">However, model binding sets `string` parameters to `null`.</span></span>
-
-* <span data-ttu-id="0a058-151">Nullable 형식: Nullable 형식은 `null`로 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-151">Nullable Types: Nullable types are set to `null`.</span></span> <span data-ttu-id="0a058-152">위의 예제에서 모델 바인딩은 `int?` 형식이므로 `id`를 `null`로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-152">In the above example, model binding sets `id` to `null` since it's of type `int?`.</span></span>
-
-* <span data-ttu-id="0a058-153">값 형식: Null을 허용하지 않는 값 형식 `T`는 `default(T)`로 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-153">Value Types: Non-nullable value types of type `T` are set to `default(T)`.</span></span> <span data-ttu-id="0a058-154">예를 들어 모델 바인딩은 `int id` 매개 변수를 0으로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-154">For example, model binding will set a parameter `int id` to 0.</span></span> <span data-ttu-id="0a058-155">기본값에 의존하지 않고 모델 유효성 검사 또는 nullable 형식을 사용하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-155">Consider using model validation or nullable types rather than relying on default values.</span></span>
-
-<span data-ttu-id="0a058-156">바인딩에 실패하는 경우 MVC는 오류를 throw하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-156">If binding fails, MVC doesn't throw an error.</span></span> <span data-ttu-id="0a058-157">사용자 입력을 허용하는 모든 작업에서 `ModelState.IsValid` 속성을 확인해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-157">Every action which accepts user input should check the `ModelState.IsValid` property.</span></span>
-
-<span data-ttu-id="0a058-158">참고: 컨트롤러의 `ModelState` 속성에 있는 각 항목은 `Errors` 속성이 포함된 `ModelStateEntry`입니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-158">Note: Each entry in the controller's `ModelState` property is a `ModelStateEntry` containing an `Errors` property.</span></span> <span data-ttu-id="0a058-159">이 컬렉션을 직접 쿼리할 필요는 거의 없습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-159">It's rarely necessary to query this collection yourself.</span></span> <span data-ttu-id="0a058-160">대신 `ModelState.IsValid`를 사용하세요.</span><span class="sxs-lookup"><span data-stu-id="0a058-160">Use `ModelState.IsValid` instead.</span></span>
-
-<span data-ttu-id="0a058-161">또한 모델 바인딩을 수행할 때 MVC가 고려해야 하는 몇 가지 특수 데이터 형식이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-161">Additionally, there are some special data types that MVC must consider when performing model binding:</span></span>
-
-* <span data-ttu-id="0a058-162">`IFormFile`, `IEnumerable<IFormFile>`: HTTP 요청의 일부인 하나 이상의 업로드된 파일입니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-162">`IFormFile`, `IEnumerable<IFormFile>`: One or more uploaded files that are part of the HTTP request.</span></span>
-
-* <span data-ttu-id="0a058-163">`CancellationToken`: 비동기 컨트롤러에서 작업을 취소하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-163">`CancellationToken`: Used to cancel activity in asynchronous controllers.</span></span>
-
-<span data-ttu-id="0a058-164">이러한 형식은 작업 매개 변수 또는 클래스 형식의 속성에 바인딩할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-164">These types can be bound to action parameters or to properties on a class type.</span></span>
-
-<span data-ttu-id="0a058-165">모델 바인딩이 완료되면 [유효성 검사](validation.md)가 발생합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-165">Once model binding is complete, [Validation](validation.md) occurs.</span></span> <span data-ttu-id="0a058-166">기본 모델 바인딩은 대부분의 개발 시나리오에서 잘 작동합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-166">Default model binding works great for the vast majority of development scenarios.</span></span> <span data-ttu-id="0a058-167">또한 확장 가능하므로 고유한 요구 사항이 있는 경우 기본 제공 동작을 사용자 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-167">It's also extensible so if you have unique needs you can customize the built-in behavior.</span></span>
-
-## <a name="customize-model-binding-behavior-with-attributes"></a><span data-ttu-id="0a058-168">특성으로 모델 바인딩 동작 사용자 지정</span><span class="sxs-lookup"><span data-stu-id="0a058-168">Customize model binding behavior with attributes</span></span>
-
-<span data-ttu-id="0a058-169">MVC에는 기본 모델 바인딩 동작을 다른 원본으로 전달하는 데 사용할 수 있는 몇 가지 특성이 포함되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-169">MVC contains several attributes that you can use to direct its default model binding behavior to a different source.</span></span> <span data-ttu-id="0a058-170">예를 들어 속성에 바인딩이 필요한지, `[BindRequired]` 또는 `[BindNever]` 특성을 사용하여 아예 바인딩이 발생하지 않아야 하는지 여부를 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-170">For example, you can specify whether binding is required for a property, or if it should never happen at all by using the `[BindRequired]` or `[BindNever]` attributes.</span></span> <span data-ttu-id="0a058-171">또는 기본 데이터 원본을 재정의하고 모델 바인더의 데이터 원본을 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-171">Alternatively, you can override the default data source, and specify the model binder's data source.</span></span> <span data-ttu-id="0a058-172">다음은 모델 바인딩 특성 목록입니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-172">Below is a list of model binding attributes:</span></span>
-
-* <span data-ttu-id="0a058-173">`[BindRequired]`: 이 특성은 바인딩이 발생할 수 없는 경우 모델 상태 오류를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-173">`[BindRequired]`: This attribute adds a model state error if binding cannot occur.</span></span>
-
-* <span data-ttu-id="0a058-174">`[BindNever]`: 모델 바인더에 이 매개 변수에 바인딩하지 않도록 지시합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-174">`[BindNever]`: Tells the model binder to never bind to this parameter.</span></span>
-
-* <span data-ttu-id="0a058-175">`[FromHeader]`, `[FromQuery]`, `[FromRoute]`, `[FromForm]`: 적용하려는 정확한 바인딩 소스를 지정할 때 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-175">`[FromHeader]`, `[FromQuery]`, `[FromRoute]`, `[FromForm]`: Use these to specify the exact binding source you want to apply.</span></span>
-
-* <span data-ttu-id="0a058-176">`[FromServices]`: 이 특성은 [종속성 주입](../../fundamentals/dependency-injection.md)을 사용하여 서비스에서 매개 변수를 바인딩합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-176">`[FromServices]`: This attribute uses [dependency injection](../../fundamentals/dependency-injection.md) to bind parameters from services.</span></span>
-
-* <span data-ttu-id="0a058-177">`[FromBody]`: 구성된 포맷터를 사용하여 요청 본문에서 데이터를 바인딩합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-177">`[FromBody]`: Use the configured formatters to bind data from the request body.</span></span> <span data-ttu-id="0a058-178">포맷터는 요청의 콘텐츠 형식에 따라 선택됩니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-178">The formatter is selected based on content type of the request.</span></span>
-
-* <span data-ttu-id="0a058-179">`[ModelBinder]`: 기본 모델 바인더, 바인딩 소스 및 이름을 재정의하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-179">`[ModelBinder]`: Used to override the default model binder, binding source and name.</span></span>
-
-<span data-ttu-id="0a058-180">특성은 모델 바인딩의 기본 동작을 재정의해야 할 때 매우 유용한 도구입니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-180">Attributes are very helpful tools when you need to override the default behavior of model binding.</span></span>
-
-## <a name="customize-model-binding-and-validation-globally"></a><span data-ttu-id="0a058-181">모델 바인딩 사용자 지정 및 전역으로 유효성 검사</span><span class="sxs-lookup"><span data-stu-id="0a058-181">Customize model binding and validation globally</span></span>
-
-<span data-ttu-id="0a058-182">모델 바인딩 및 시스템 동작의 유효성 검사는 다음을 설명하는 [ModelMetadata](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.modelmetadata)를 기반으로 합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-182">The model binding and validation system's behavior is driven by [ModelMetadata](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.modelmetadata) that describes:</span></span>
-
-* <span data-ttu-id="0a058-183">모델이 바인딩되는 방법</span><span class="sxs-lookup"><span data-stu-id="0a058-183">How a model is to be bound.</span></span>
-* <span data-ttu-id="0a058-184">형식 및 해당 속성에서 유효성 검사가 발생하는 방법</span><span class="sxs-lookup"><span data-stu-id="0a058-184">How validation occurs on the type and its properties.</span></span>
-
-<span data-ttu-id="0a058-185">[MvcOptions.ModelMetadataDetailsProviders](/dotnet/api/microsoft.aspnetcore.mvc.mvcoptions.modelmetadatadetailsproviders#Microsoft_AspNetCore_Mvc_MvcOptions_ModelMetadataDetailsProviders)에 세부 정보 공급자를 추가하여 시스템의 동작 측면을 전역적으로 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-185">Aspects of the system's behavior can be configured globally by adding a details provider to [MvcOptions.ModelMetadataDetailsProviders](/dotnet/api/microsoft.aspnetcore.mvc.mvcoptions.modelmetadatadetailsproviders#Microsoft_AspNetCore_Mvc_MvcOptions_ModelMetadataDetailsProviders).</span></span> <span data-ttu-id="0a058-186">MVC에는 특정 형식에 대한 모델 바인딩 또는 유효성 검사 비활성화와 같은 동작 구성을 허용하는 몇 가지 기본 제공 정보 공급자가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-186">MVC has a few built-in details providers that allow configuring behavior such as disabling model binding or validation for certain types.</span></span>
-
-<span data-ttu-id="0a058-187">특정 형식의 모든 모델에 대한 모델 바인딩을 비활성화하려면 `Startup.ConfigureServices`에서 [ExcludeBindingMetadataProvider](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.metadata.excludebindingmetadataprovider)를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-187">To disable model binding on all models of a certain type, add an [ExcludeBindingMetadataProvider](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.metadata.excludebindingmetadataprovider) in `Startup.ConfigureServices`.</span></span> <span data-ttu-id="0a058-188">예를 들어 `System.Version` 형식의 모든 모델에 대한 모델 바인딩을 비활성화하려면:</span><span class="sxs-lookup"><span data-stu-id="0a058-188">For example, to disable model binding on all models of type `System.Version`:</span></span>
-
-```csharp
-services.AddMvc().AddMvcOptions(options =>
-    options.ModelMetadataDetailsProviders.Add(
-        new ExcludeBindingMetadataProvider(typeof(System.Version))));
+```
+http://contoso.com/api/pets/2?DogsOnly=true
 ```
 
-<span data-ttu-id="0a058-189">특정 형식의 속성에 대한 유효성 검사를 비활성화하려면 `Startup.ConfigureServices`에 [SuppressChildValidationMetadataProvider](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.suppresschildvalidationmetadataprovider)를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-189">To disable validation on properties of a certain type, add a [SuppressChildValidationMetadataProvider](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.suppresschildvalidationmetadataprovider) in `Startup.ConfigureServices`.</span></span> <span data-ttu-id="0a058-190">예를 들어 `System.Guid` 형식의 속성에 대한 유효성 검사를 비활성화하려면:</span><span class="sxs-lookup"><span data-stu-id="0a058-190">For example, to disable validation on properties of type `System.Guid`:</span></span>
+<span data-ttu-id="76290-119">모델 바인딩은 라우팅 시스템이 작업 메서드를 선택한 후 다음 단계를 통해 진행됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-119">Model binding goes though the following steps after the routing system selects the action method:</span></span>
+
+* <span data-ttu-id="76290-120">`GetByID`의 첫 번째 매개 변수, `id`라는 정수를 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-120">Finds the first parameter of `GetByID`, an integer named `id`.</span></span>
+* <span data-ttu-id="76290-121">HTTP 요청에서 사용 가능한 원본을 찾고 경로 데이터에서 `id` = "2"를 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-121">Looks through the available sources in the HTTP request and finds `id` = "2" in route data.</span></span>
+* <span data-ttu-id="76290-122">문자열 "2"를 정수 2로 변환합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-122">Converts the string "2" into integer 2.</span></span>
+* <span data-ttu-id="76290-123">`GetByID`의 다음 매개 변수, `dogsOnly`라는 부울을 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-123">Finds the next parameter of `GetByID`, a boolean named `dogsOnly`.</span></span>
+* <span data-ttu-id="76290-124">원본을 찾고 쿼리 문자열에서 "DogsOnly=true"를 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-124">Looks through the sources and finds "DogsOnly=true" in the query string.</span></span> <span data-ttu-id="76290-125">이름 일치는 대/소문자를 구분하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-125">Name matching is not case-sensitive.</span></span>
+* <span data-ttu-id="76290-126">문자열 "true"를 부울 `true`로 변환합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-126">Converts the string "true" into boolean `true`.</span></span>
+
+<span data-ttu-id="76290-127">그런 다음, 프레임워크는 `id` 매개 변수에 대해 2를 `dogsOnly` 매개 변수에 대해 `true`를 전달하는 `GetById` 메서드를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-127">The framework then calls the `GetById` method, passing in 2 for the `id` parameter, and `true` for the `dogsOnly` parameter.</span></span>
+
+<span data-ttu-id="76290-128">앞의 예제에서 모델 바인딩 대상은 단순 형식인 메서드 매개 변수입니다.</span><span class="sxs-lookup"><span data-stu-id="76290-128">In the preceding example, the model binding targets are method parameters that are simple types.</span></span> <span data-ttu-id="76290-129">대상은 복합 형식의 속성일 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-129">Targets may also be the properties of a complex type.</span></span> <span data-ttu-id="76290-130">각 속성이 성공적으로 바인딩된 후 [모델 유효성 검사](xref:mvc/models/validation)가 해당 속성에 대해 발생합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-130">After each property is successfully bound, [model validation](xref:mvc/models/validation) occurs for that property.</span></span> <span data-ttu-id="76290-131">모델에 바인딩되는 데이터의 레코드 및 모든 바인딩 또는 유효성 검사 오류는 [ControllerBase.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) 또는 [PageModel.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState)에 저장됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-131">The record of what data is bound to the model, and any binding or validation errors, is stored in [ControllerBase.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) or [PageModel.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState).</span></span> <span data-ttu-id="76290-132">이 프로세스가 성공되었는지 확인하기 위해 앱은 [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) 플래그를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-132">To find out if this process was successful, the app checks the [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) flag.</span></span>
+
+## <a name="targets"></a><span data-ttu-id="76290-133">대상</span><span class="sxs-lookup"><span data-stu-id="76290-133">Targets</span></span>
+
+<span data-ttu-id="76290-134">모델 바인딩은 다음 종류의 대상에 대한 값을 찾으려고 합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-134">Model binding tries to find values for the following kinds of targets:</span></span>
+
+* <span data-ttu-id="76290-135">요청이 라우팅되는 컨트롤러 작업 메서드의 매개 변수</span><span class="sxs-lookup"><span data-stu-id="76290-135">Parameters of the controller action method that a request is routed to.</span></span>
+* <span data-ttu-id="76290-136">요청이 라우팅되는 Razor Pages 처리기 메서드의 매개 변수</span><span class="sxs-lookup"><span data-stu-id="76290-136">Parameters of the Razor Pages handler method that a request is routed to.</span></span> 
+* <span data-ttu-id="76290-137">특성으로 지정되는 경우 컨트롤러 또는 `PageModel` 클래스의 공용 속성</span><span class="sxs-lookup"><span data-stu-id="76290-137">Public properties of a controller or `PageModel` class, if specified by attributes.</span></span>
+
+### <a name="bindproperty-attribute"></a><span data-ttu-id="76290-138">[BindProperty] 특성</span><span class="sxs-lookup"><span data-stu-id="76290-138">[BindProperty] attribute</span></span>
+
+<span data-ttu-id="76290-139">모델 바인딩이 해당 속성을 대상으로 하도록 컨트롤러의 공용 속성 또는 `PageModel` 클래스에 적용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-139">Can be applied to a public property of a controller or `PageModel` class to cause model binding to target that property:</span></span>
+
+[!code-csharp[](model-binding/samples/2.x/Pages/Instructors/Edit.cshtml.cs?name=snippet_BindProperty&highlight=7-8)]
+
+### <a name="bindpropertiesattribute"></a><span data-ttu-id="76290-140">[BindProperties] 특성</span><span class="sxs-lookup"><span data-stu-id="76290-140">[BindProperties] attribute</span></span>
+
+<span data-ttu-id="76290-141">ASP.NET Core 2.1 이상에서 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-141">Available in ASP.NET Core 2.1 and later.</span></span>  <span data-ttu-id="76290-142">모델 바인딩이 클래스의 모든 공용 속성을 대상으로 하도록 컨트롤러 또는 `PageModel` 클래스에 적용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-142">Can be applied to a controller or `PageModel` class to tell model binding to target all public properties of the class:</span></span>
+
+[!code-csharp[](model-binding/samples/2.x/Pages/Instructors/Create.cshtml.cs?name=snippet_BindProperties&highlight=1-2)]
+
+### <a name="model-binding-for-http-get-requests"></a><span data-ttu-id="76290-143">HTTP GET 요청에 대한 모델 바인딩</span><span class="sxs-lookup"><span data-stu-id="76290-143">Model binding for HTTP GET requests</span></span>
+
+<span data-ttu-id="76290-144">기본적으로 속성은 HTTP GET 요청에 대해 바인딩되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-144">By default, properties are not bound for HTTP GET requests.</span></span> <span data-ttu-id="76290-145">일반적으로 GET 요청에 대해 필요한 것은 레코드 ID 매개 변수입니다.</span><span class="sxs-lookup"><span data-stu-id="76290-145">Typically, all you need for a GET request is a record ID parameter.</span></span> <span data-ttu-id="76290-146">레코드 ID는 데이터베이스에 있는 항목을 찾는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-146">The record ID is used to look up the item in the database.</span></span> <span data-ttu-id="76290-147">따라서 모델의 인스턴스를 포함하는 속성을 바인딩할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-147">Therefore, there is no need to bind a property that holds an instance of the model.</span></span> <span data-ttu-id="76290-148">속성을 GET 요청의 데이터에 바인딩하려는 시나리오에서 `SupportsGet` 속성을 `true`로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-148">In scenarios where you do want properties bound to data from GET requests, set the `SupportsGet` property to `true`:</span></span>
+
+[!code-csharp[](model-binding/samples/2.x/Pages/Instructors/Index.cshtml.cs?name=snippet_SupportsGet)]
+
+## <a name="sources"></a><span data-ttu-id="76290-149">원본</span><span class="sxs-lookup"><span data-stu-id="76290-149">Sources</span></span>
+
+<span data-ttu-id="76290-150">기본적으로 모델 바인딩은 HTTP 요청의 다음 원본에서 키-값 쌍의 양식으로 데이터를 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="76290-150">By default, model binding gets data in the form of key-value pairs from the following sources in an HTTP request:</span></span>
+
+1. <span data-ttu-id="76290-151">양식 필드</span><span class="sxs-lookup"><span data-stu-id="76290-151">Form fields</span></span> 
+1. <span data-ttu-id="76290-152">요청 본문([[ApiController] 특성이 있는 컨트롤러](xref:web-api/index#binding-source-parameter-inference)의 경우)</span><span class="sxs-lookup"><span data-stu-id="76290-152">The request body (For [controllers that have the [ApiController] attribute](xref:web-api/index#binding-source-parameter-inference).)</span></span>
+1. <span data-ttu-id="76290-153">경로 데이터</span><span class="sxs-lookup"><span data-stu-id="76290-153">Route data</span></span>
+1. <span data-ttu-id="76290-154">쿼리 문자열 매개 변수</span><span class="sxs-lookup"><span data-stu-id="76290-154">Query string parameters</span></span>
+1. <span data-ttu-id="76290-155">업로드된 파일</span><span class="sxs-lookup"><span data-stu-id="76290-155">Uploaded files</span></span> 
+
+<span data-ttu-id="76290-156">각 대상 매개 변수 또는 속성의 경우 원본은 이 목록에 표시된 순서대로 검사됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-156">For each target parameter or property, the sources are scanned in the order indicated in this list.</span></span> <span data-ttu-id="76290-157">몇 가지 예외도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-157">There are a few exceptions:</span></span>
+
+* <span data-ttu-id="76290-158">경로 데이터 및 쿼리 문자열 값은 단순 형식에 대해서만 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-158">Route data and query string values are used only for simple types.</span></span>
+* <span data-ttu-id="76290-159">업로드된 파일은 `IFormFile` 또는 `IEnumerable<IFormFile>`을 구현하는 대상 유형에만 바인딩됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-159">Uploaded files are bound only to target types that implement `IFormFile` or `IEnumerable<IFormFile>`.</span></span>
+
+<span data-ttu-id="76290-160">기본 동작이 올바른 결과를 제공하지 않는 경우 다음 특성 중 하나를 사용하여 지정된 대상을 사용하도록 원본을 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-160">If the default behavior doesn't give the right results, you can use one of the following attributes to specify the source to use for any given target.</span></span> 
+
+* <span data-ttu-id="76290-161">[[FromQuery]](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute) - 쿼리 문자열에서 값을 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="76290-161">[[FromQuery]](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute) - Gets values from the query string.</span></span> 
+* <span data-ttu-id="76290-162">[[FromRoute]](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute) - 경로 데이터에서 값을 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="76290-162">[[FromRoute]](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute) - Gets values from route data.</span></span>
+* <span data-ttu-id="76290-163">[[FromForm]](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) - 게시된 양식 필드에서 값을 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="76290-163">[[FromForm]](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) - Gets values from posted form fields.</span></span>
+* <span data-ttu-id="76290-164">[[FromBody]](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute) - 요청 본문에서 값을 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="76290-164">[[FromBody]](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute) - Gets values from the request body.</span></span>
+* <span data-ttu-id="76290-165">[[FromHeader]](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute) - HTTP 헤더에서 값을 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="76290-165">[[FromHeader]](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute) - Gets values from HTTP headers.</span></span>
+
+<span data-ttu-id="76290-166">이러한 특성:</span><span class="sxs-lookup"><span data-stu-id="76290-166">These attributes:</span></span>
+
+* <span data-ttu-id="76290-167">다음 예제와 같이 모델 속성(모델 클래스가 아닌)에 개별적으로 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-167">Are added to model properties individually (not to the model class), as in the following example:</span></span>
+
+  [!code-csharp[](model-binding/samples/2.x/Models/Instructor.cs?name=snippet_FromQuery&highlight=5-6)]
+
+* <span data-ttu-id="76290-168">필요에 따라 생성자에서 모델 이름 값을 허용합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-168">Optionally accept a model name value in the constructor.</span></span> <span data-ttu-id="76290-169">이 옵션은 속성 이름이 요청의 값과 일치하지 않는 경우에 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-169">This option is provided in case the property name doesn't match the value in the request.</span></span> <span data-ttu-id="76290-170">예를 들어 요청의 값은 다음 예제와 같이 해당 이름에 하이픈이 있는 헤더일 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-170">For instance, the value in the request might be a header with a hyphen in its name, as in the following example:</span></span>
+
+  [!code-csharp[](model-binding/samples/2.x/Pages/Instructors/Index.cshtml.cs?name=snippet_FromHeader)]
+
+### <a name="frombody-attribute"></a><span data-ttu-id="76290-171">[FromBody] 특성</span><span class="sxs-lookup"><span data-stu-id="76290-171">[FromBody] attribute</span></span>
+
+<span data-ttu-id="76290-172">요청 본문 데이터는 요청의 콘텐츠 형식과 관련된 입력 포맷터를 사용하여 구문 분석됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-172">The request body data is parsed by using input formatters specific to the content type of the request.</span></span> <span data-ttu-id="76290-173">입력 포맷터는 [이 문서의 뒷부분](#input-formatters)에 설명되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-173">Input formatters are explained [later in this article](#input-formatters).</span></span>
+
+<span data-ttu-id="76290-174">작업 메서드당 둘 이상의 매개 변수에 `[FromBody]`를 적용하지 마십시오.</span><span class="sxs-lookup"><span data-stu-id="76290-174">Don't apply `[FromBody]` to more than one parameter per action method.</span></span> <span data-ttu-id="76290-175">ASP.NET Core 런타임은 요청 스트림을 읽는 책임을 입력 포맷터에 위임합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-175">The ASP.NET Core runtime delegates the responsibility of reading the request stream to the input formatter.</span></span> <span data-ttu-id="76290-176">요청 스트림을 읽으면 더 이상 다른 `[FromBody]` 매개 변수를 바인딩하기 위해 다시 읽을 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-176">Once the request stream is read, it's no longer available to be read again for binding other `[FromBody]` parameters.</span></span>
+
+### <a name="additional-sources"></a><span data-ttu-id="76290-177">추가 원본</span><span class="sxs-lookup"><span data-stu-id="76290-177">Additional sources</span></span>
+
+<span data-ttu-id="76290-178">원본 데이터는 *값 공급 기업*에 의해 모델 바인딩 시스템에 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-178">Source data is provided to the model binding system by *value providers*.</span></span> <span data-ttu-id="76290-179">다른 원본에서 모델 바인딩에 대한 데이터를 가져오는 사용자 지정 값 공급 기업을 작성 및 등록할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-179">You can write and register custom value providers that get data for model binding from other sources.</span></span> <span data-ttu-id="76290-180">예를 들어 쿠키 또는 세션 상태의 데이터를 원할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-180">For example, you might want data from cookies or session state.</span></span> <span data-ttu-id="76290-181">새 원본에서 데이터를 가져오려면 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-181">To get data from a new source:</span></span>
+
+* <span data-ttu-id="76290-182">`IValueProvider`를 구현하는 클래스를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="76290-182">Create a class that implements `IValueProvider`.</span></span>
+* <span data-ttu-id="76290-183">`IValueProviderFactory`를 구현하는 클래스를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="76290-183">Create a class that implements `IValueProviderFactory`.</span></span>
+* <span data-ttu-id="76290-184">`Startup.ConfigureServices`에서 팩터리 클래스를 등록합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-184">Register the factory class in `Startup.ConfigureServices`.</span></span>
+
+<span data-ttu-id="76290-185">샘플 앱은 쿠키에서 값을 가져오는 [값 공급 기업](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/CookieValueProvider.cs) 및 [팩터리](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/CookieValueProviderFactory.cs) 예제를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-185">The sample app includes a [value provider](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/CookieValueProvider.cs) and [factory](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/CookieValueProviderFactory.cs) example that gets values from cookies.</span></span> <span data-ttu-id="76290-186">다음은 `Startup.ConfigureServices`의 등록 코드입니다.</span><span class="sxs-lookup"><span data-stu-id="76290-186">Here's the registration code in `Startup.ConfigureServices`:</span></span>
+
+[!code-csharp[](model-binding/samples/2.x/Startup.cs?name=snippet_ValueProvider&highlight=3)]
+
+<span data-ttu-id="76290-187">표시된 코드는 사용자 지정 값 공급 기업을 모든 기본 제공 값 공급 기업 다음에 배치합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-187">The code shown puts the custom value provider after all the built-in value providers.</span></span>  <span data-ttu-id="76290-188">목록에서 첫 번째로 지정하려면 `Add` 대신에 `Insert(0, new CookieValueProviderFactory())`를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-188">To make it the first in the list, call `Insert(0, new CookieValueProviderFactory())` instead of `Add`.</span></span>
+
+## <a name="no-source-for-a-model-property"></a><span data-ttu-id="76290-189">모델 속성에 대한 원본 없음</span><span class="sxs-lookup"><span data-stu-id="76290-189">No source for a model property</span></span>
+
+<span data-ttu-id="76290-190">기본적으로 모델 속성에 대한 값이 없으면 모델 상태 오류가 생성되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-190">By default, a model state error isn't created if no value is found for a model property.</span></span> <span data-ttu-id="76290-191">속성은 Null 또는 기본값으로 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-191">The property is set to null or a default value:</span></span>
+
+* <span data-ttu-id="76290-192">Nullable 단순 형식은 `null`로 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-192">Nullable simple types are set to `null`.</span></span>
+* <span data-ttu-id="76290-193">Null을 허용하지 않는 값 형식은 `default(T)`로 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-193">Non-nullable value types are set to `default(T)`.</span></span> <span data-ttu-id="76290-194">예를 들어 매개 변수 `int id`는 0으로 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-194">For example, a parameter `int id` is set to 0.</span></span>
+* <span data-ttu-id="76290-195">복합 형식의 경우 모델 바인딩은 속성을 설정하지 않고 기본 생성자를 사용하여 인스턴스를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="76290-195">For complex Types, model binding creates an instance by using the default constructor, without setting properties.</span></span>
+* <span data-ttu-id="76290-196">배열은 `byte[]` 배열이 `null`로 설정되는 점을 제외하고 `Array.Empty<T>()`로 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-196">Arrays are set to `Array.Empty<T>()`, except that `byte[]` arrays are set to `null`.</span></span>
+
+<span data-ttu-id="76290-197">모델 속성에 대한 양식 필드에 아무것도 없을 때 모델 상태가 무효화되어야 하는 경우 [[BindRequired] 특성](#bindrequired-attribute)을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-197">If model state should be invalidated when nothing is found in form fields for a model property, use the [[BindRequired] attribute](#bindrequired-attribute).</span></span>
+
+<span data-ttu-id="76290-198">이 `[BindRequired]` 동작은 요청 본문의 JSON 또는 XML 데이터가 아니라 게시된 양식 데이터의 모델 바인딩에 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-198">Note that this `[BindRequired]` behavior applies to model binding from posted form data, not to JSON or XML data in a request body.</span></span> <span data-ttu-id="76290-199">요청 본문 데이터는 [입력 포맷터](#input-formatters)에서 처리됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-199">Request body data is handled by [input formatters](#input-formatters).</span></span>
+
+## <a name="type-conversion-errors"></a><span data-ttu-id="76290-200">형식 변환 오류</span><span class="sxs-lookup"><span data-stu-id="76290-200">Type conversion errors</span></span>
+
+<span data-ttu-id="76290-201">원본이 있지만 대상 형식으로 변환될 수 없는 경우 모델 상태는 잘못된 것으로 플래그가 지정됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-201">If a source is found but can't be converted into the target type, model state is flagged as invalid.</span></span> <span data-ttu-id="76290-202">이전 섹션에서 설명한 것처럼 대상 매개 변수 또는 속성은 Null 또는 기본값으로 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-202">The target parameter or property is set to null or a default value, as noted in the previous section.</span></span>
+
+<span data-ttu-id="76290-203">`[ApiController]` 특성이 있는 API 컨트롤러에서 잘못된 모델 상태로 자동 HTTP 400 응답이 발생합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-203">In an API controller that has the `[ApiController]` attribute, invalid model state results in an automatic HTTP 400 response.</span></span>
+
+<span data-ttu-id="76290-204">Razor 페이지에서 페이지를 오류 메시지와 함께 다시 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-204">In a Razor page, redisplay the page with an error message:</span></span>
+
+[!code-csharp[](model-binding/samples/2.x/Pages/Instructors/Create.cshtml.cs?name=snippet_HandleMBError&highlight=3-6)]
+
+<span data-ttu-id="76290-205">클라이언트 쪽 유효성 검사는 Razor Pages 양식으로 제출될 수 있는 대부분의 잘못된 데이터를 catch합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-205">Client-side validation catches most bad data that would otherwise be submitted to a Razor Pages form.</span></span> <span data-ttu-id="76290-206">이 유효성 검사는 위의 강조 표시된 코드를 트리거하기 어렵게 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="76290-206">This validation makes it hard to trigger the preceding highlighted code.</span></span> <span data-ttu-id="76290-207">샘플 앱은 **Hire Date** 필드에 잘못된 데이터를 배치하고 양식을 제출하는 **잘못된 데이터로 제출** 단추를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-207">The sample app includes a **Submit with Invalid Date** button that puts bad data in the **Hire Date** field and submits the form.</span></span> <span data-ttu-id="76290-208">이 단추는 데이터 변환 오류가 발생하는 경우 페이지를 다시 표시하기 위해 코드가 작동하는 방식을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="76290-208">This button shows how the code for redisplaying the page works when data conversion errors occur.</span></span>
+
+<span data-ttu-id="76290-209">위의 코드로 페이지가 다시 표시될 때 잘못된 입력은 양식 필드에 표시되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-209">When the page is redisplayed by the preceding code, the invalid input is not shown in the form field.</span></span> <span data-ttu-id="76290-210">이는 모델 속성이 Null 또는 기본값으로 설정되었기 때문입니다.</span><span class="sxs-lookup"><span data-stu-id="76290-210">This is because the model property has been set to null or a default value.</span></span> <span data-ttu-id="76290-211">잘못된 입력은 오류 메시지에 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-211">The invalid input does appear in an error message.</span></span> <span data-ttu-id="76290-212">그러나 양식 필드에 잘못된 데이터를 다시 표시하려는 경우 모델 속성을 문자열로 만들고 데이터 변환을 수동으로 수행하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-212">But if you want to redisplay the bad data in the form field, consider making the model property a string and doing the data conversion manually.</span></span>
+
+<span data-ttu-id="76290-213">형식 변환 오류를 모델 상태 오류로 만들려 하지 않는 경우 동일한 전략을 권장합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-213">The same strategy is recommended if you don't want type conversion errors to result in model state errors.</span></span> <span data-ttu-id="76290-214">이 경우 모델 속성을 문자열로 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="76290-214">In that case, make the model property a string.</span></span>
+
+## <a name="simple-types"></a><span data-ttu-id="76290-215">단순 형식</span><span class="sxs-lookup"><span data-stu-id="76290-215">Simple types</span></span>
+
+<span data-ttu-id="76290-216">모델 바인더에서 원본 문자열을 변환할 수 있는 단순 형식은 다음을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-216">The simple types that the model binder can convert source strings into include the following:</span></span>
+
+* [<span data-ttu-id="76290-217">Boolean</span><span class="sxs-lookup"><span data-stu-id="76290-217">Boolean</span></span>](xref:System.ComponentModel.BooleanConverter)
+* <span data-ttu-id="76290-218">[Byte](xref:System.ComponentModel.ByteConverter), [SByte](xref:System.ComponentModel.SByteConverter)</span><span class="sxs-lookup"><span data-stu-id="76290-218">[Byte](xref:System.ComponentModel.ByteConverter), [SByte](xref:System.ComponentModel.SByteConverter)</span></span>
+* [<span data-ttu-id="76290-219">Char</span><span class="sxs-lookup"><span data-stu-id="76290-219">Char</span></span>](xref:System.ComponentModel.CharConverter)
+* [<span data-ttu-id="76290-220">DateTime</span><span class="sxs-lookup"><span data-stu-id="76290-220">DateTime</span></span>](xref:System.ComponentModel.DateTimeConverter)
+* [<span data-ttu-id="76290-221">DateTimeOffset</span><span class="sxs-lookup"><span data-stu-id="76290-221">DateTimeOffset</span></span>](xref:System.ComponentModel.DateTimeOffsetConverter)
+* [<span data-ttu-id="76290-222">Decimal</span><span class="sxs-lookup"><span data-stu-id="76290-222">Decimal</span></span>](xref:System.ComponentModel.DecimalConverter)
+* [<span data-ttu-id="76290-223">double</span><span class="sxs-lookup"><span data-stu-id="76290-223">Double</span></span>](xref:System.ComponentModel.DoubleConverter)
+* [<span data-ttu-id="76290-224">Enum</span><span class="sxs-lookup"><span data-stu-id="76290-224">Enum</span></span>](xref:System.ComponentModel.EnumConverter)
+* [<span data-ttu-id="76290-225">Guid</span><span class="sxs-lookup"><span data-stu-id="76290-225">Guid</span></span>](xref:System.ComponentModel.GuidConverter)
+* <span data-ttu-id="76290-226">[Int16](xref:System.ComponentModel.Int16Converter), [Int32](xref:System.ComponentModel.Int32Converter), [Int64](xref:System.ComponentModel.Int64Converter)</span><span class="sxs-lookup"><span data-stu-id="76290-226">[Int16](xref:System.ComponentModel.Int16Converter), [Int32](xref:System.ComponentModel.Int32Converter), [Int64](xref:System.ComponentModel.Int64Converter)</span></span>
+* [<span data-ttu-id="76290-227">Single</span><span class="sxs-lookup"><span data-stu-id="76290-227">Single</span></span>](xref:System.ComponentModel.SingleConverter)
+* [<span data-ttu-id="76290-228">TimeSpan</span><span class="sxs-lookup"><span data-stu-id="76290-228">TimeSpan</span></span>](xref:System.ComponentModel.TimeSpanConverter)
+* <span data-ttu-id="76290-229">[UInt16](xref:System.ComponentModel.UInt16Converter), [UInt32](xref:System.ComponentModel.UInt32Converter), [UInt64](xref:System.ComponentModel.UInt64Converter)</span><span class="sxs-lookup"><span data-stu-id="76290-229">[UInt16](xref:System.ComponentModel.UInt16Converter), [UInt32](xref:System.ComponentModel.UInt32Converter), [UInt64](xref:System.ComponentModel.UInt64Converter)</span></span>
+* [<span data-ttu-id="76290-230">Uri</span><span class="sxs-lookup"><span data-stu-id="76290-230">Uri</span></span>](xref:System.UriTypeConverter)
+* [<span data-ttu-id="76290-231">Version</span><span class="sxs-lookup"><span data-stu-id="76290-231">Version</span></span>](xref:System.ComponentModel.VersionConverter)
+
+## <a name="complex-types"></a><span data-ttu-id="76290-232">복합 형식</span><span class="sxs-lookup"><span data-stu-id="76290-232">Complex types</span></span>
+
+<span data-ttu-id="76290-233">복합 형식에 공용 기본 생성자와 바인딩할 공용 쓰기 가능 속성이 있어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-233">A complex type must have a public default constructor and public writable properties to bind.</span></span> <span data-ttu-id="76290-234">모델 바인딩이 발생하면 클래스는 공용 기본 생성자를 사용하여 인스턴스화됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-234">When model binding occurs, the class is instantiated using the public default constructor.</span></span> 
+
+<span data-ttu-id="76290-235">복합 형식의 각 속성의 경우 모델 바인딩은 이름 패턴*prefix.property_name*에 대한 원본을 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-235">For each property of the complex type, model binding looks through the sources for the name pattern *prefix.property_name*.</span></span> <span data-ttu-id="76290-236">아무것도 없는 경우 접두사 없이 *property_name*만을 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-236">If nothing is found, it looks for just *property_name* without the prefix.</span></span>
+
+<span data-ttu-id="76290-237">매개 변수에 대한 바인딩의 경우 접두사는 매개 변수 이름입니다.</span><span class="sxs-lookup"><span data-stu-id="76290-237">For binding to a parameter, the prefix is the parameter name.</span></span> <span data-ttu-id="76290-238">`PageModel` 공용 속성에 대한 바인딩의 경우 접두사는 공용 속성 이름입니다.</span><span class="sxs-lookup"><span data-stu-id="76290-238">For binding to a `PageModel` public property, the prefix is the public property name.</span></span> <span data-ttu-id="76290-239">일부 특성에는 매개 변수의 기본 사용 또는 속성 이름을 재정의할 수 있도록 하는 `Prefix` 속성이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-239">Some attributes have a `Prefix` property that lets you override the default usage of parameter or property name.</span></span>
+
+<span data-ttu-id="76290-240">예를 들어 복합 형식이 다음 `Instructor` 클래스라고 가정합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-240">For example, suppose the complex type is the following `Instructor` class:</span></span>
+
+  ```csharp
+  public class Instructor
+  {
+      public int ID { get; set; }
+      public string LastName { get; set; }
+      public string FirstName { get; set; }
+  }
+  ```
+
+### <a name="prefix--parameter-name"></a><span data-ttu-id="76290-241">접두사 = 매개 변수 이름</span><span class="sxs-lookup"><span data-stu-id="76290-241">Prefix = parameter name</span></span>
+
+<span data-ttu-id="76290-242">바인딩될 모델이 `instructorToUpdate`라는 매개 변수인 경우:</span><span class="sxs-lookup"><span data-stu-id="76290-242">If the model to be bound is a parameter named `instructorToUpdate`:</span></span>
 
 ```csharp
-services.AddMvc().AddMvcOptions(options =>
-    options.ModelMetadataDetailsProviders.Add(
-        new SuppressChildValidationMetadataProvider(typeof(System.Guid))));
+public IActionResult OnPost(int? id, Instructor instructorToUpdate)
 ```
 
-## <a name="bind-formatted-data-from-the-request-body"></a><span data-ttu-id="0a058-191">요청 본문에서 형식이 지정된 데이터 바인딩</span><span class="sxs-lookup"><span data-stu-id="0a058-191">Bind formatted data from the request body</span></span>
+<span data-ttu-id="76290-243">모델 바인딩은 키 `instructorToUpdate.ID`에 대한 원본을 찾아 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-243">Model binding starts by looking through the sources for the key `instructorToUpdate.ID`.</span></span> <span data-ttu-id="76290-244">없는 경우 접두사 없이 `ID`를 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-244">If that isn't found, it looks for `ID` without a prefix.</span></span>
 
-<span data-ttu-id="0a058-192">요청 데이터는 JSON, XML 및 기타 여러 가지 형식으로 제공될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-192">Request data can come in a variety of formats including JSON, XML and many others.</span></span> <span data-ttu-id="0a058-193">[FromBody] 특성을 사용하여 매개 변수를 요청 본문의 데이터에 바인딩하려는 것을 표시하는 경우, MVC는 구성된 포맷터 집합을 사용하여 해당 콘텐츠 형식을 기반으로 요청 데이터를 처리합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-193">When you use the [FromBody] attribute to indicate that you want to bind a parameter to data in the request body, MVC uses a configured set of formatters to handle the request data based on its content type.</span></span> <span data-ttu-id="0a058-194">기본적으로 MVC에는 JSON 데이터를 처리하기 위한 `JsonInputFormatter` 클래스가 포함되어 있지만 XML 및 기타 사용자 지정 형식을 처리하기 위한 포맷터를 더 추가할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-194">By default MVC includes a `JsonInputFormatter` class for handling JSON data, but you can add additional formatters for handling XML and other custom formats.</span></span>
+### <a name="prefix--property-name"></a><span data-ttu-id="76290-245">접두사 = 속성 이름</span><span class="sxs-lookup"><span data-stu-id="76290-245">Prefix = property name</span></span>
+
+<span data-ttu-id="76290-246">바인딩될 모델이 컨트롤러 또는 `PageModel` 클래스의 `Instructor`라는 속성인 경우:</span><span class="sxs-lookup"><span data-stu-id="76290-246">If the model to be bound is a property named `Instructor` of the controller or `PageModel` class:</span></span>
+
+```csharp
+[BindProperty]
+public Instructor Instructor { get; set; }
+```
+
+<span data-ttu-id="76290-247">모델 바인딩은 키 `Instructor.ID`에 대한 원본을 찾아 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-247">Model binding starts by looking through the sources for the key `Instructor.ID`.</span></span> <span data-ttu-id="76290-248">없는 경우 접두사 없이 `ID`를 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-248">If that isn't found, it looks for `ID` without a prefix.</span></span>
+
+### <a name="custom-prefix"></a><span data-ttu-id="76290-249">사용자 지정 접두사</span><span class="sxs-lookup"><span data-stu-id="76290-249">Custom prefix</span></span>
+
+<span data-ttu-id="76290-250">바인딩될 모델이 `instructorToUpdate`라는 매개 변수이고 `Bind` 특성이 접두사로 `Instructor`를 지정하는 경우:</span><span class="sxs-lookup"><span data-stu-id="76290-250">If the model to be bound is a parameter named `instructorToUpdate` and a `Bind` attribute specifies `Instructor` as the prefix:</span></span>
+
+```csharp
+public IActionResult OnPost(
+    int? id, [Bind(Prefix = "Instructor")] Instructor instructorToUpdate)
+```
+
+<span data-ttu-id="76290-251">모델 바인딩은 키 `Instructor.ID`에 대한 원본을 찾아 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-251">Model binding starts by looking through the sources for the key `Instructor.ID`.</span></span> <span data-ttu-id="76290-252">없는 경우 접두사 없이 `ID`를 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-252">If that isn't found, it looks for `ID` without a prefix.</span></span>
+
+### <a name="attributes-for-complex-type-targets"></a><span data-ttu-id="76290-253">복합 형식 대상에 대한 특성</span><span class="sxs-lookup"><span data-stu-id="76290-253">Attributes for complex type targets</span></span>
+
+<span data-ttu-id="76290-254">여러 기본 제공 특성은 복합 형식의 모델 바인딩을 제어할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-254">Several built-in attributes are available for controlling model binding of complex types:</span></span>
+
+* `[BindRequired]`
+* `[BindNever]`
+* `[Bind]`
 
 > [!NOTE]
-> <span data-ttu-id="0a058-195">`[FromBody]`로 데코레이팅된 작업당 최대 하나의 매개 변수가 있을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-195">There can be at most one parameter per action decorated with `[FromBody]`.</span></span> <span data-ttu-id="0a058-196">ASP.NET Core MVC 런타임은 요청 스트림을 읽는 책임을 포맷터에 위임합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-196">The ASP.NET Core MVC run-time delegates the responsibility of reading the request stream to the formatter.</span></span> <span data-ttu-id="0a058-197">매개 변수에 대해 요청 스트림을 읽은 후에는, 일반적으로 다른 `[FromBody]` 매개 변수를 바인딩하기 위해 요청 스트림을 다시 읽을 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-197">Once the request stream is read for a parameter, it's generally not possible to read the request stream again for binding other `[FromBody]` parameters.</span></span>
+> <span data-ttu-id="76290-255">이러한 특성은 게시된 양식 데이터가 값의 원본일 때 모델 바인딩에 영향을 줍니다.</span><span class="sxs-lookup"><span data-stu-id="76290-255">These attributes affect model binding when posted form data is the source of values.</span></span> <span data-ttu-id="76290-256">게시된 JSON 및 XML 요청 본문을 처리하는 입력 포맷터에는 영향을 주지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-256">They do not affect input formatters, which process posted JSON and XML request bodies.</span></span> <span data-ttu-id="76290-257">입력 포맷터는 [이 문서의 뒷부분](#input-formatters)에 설명되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-257">Input formatters are explained [later in this article](#input-formatters).</span></span>
+>
+> <span data-ttu-id="76290-258">[모델 유효성 검사](xref:mvc/models/validation#required-attribute)에서 `[Required]` 특성의 설명을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="76290-258">See also the discussion of the `[Required]` attribute in [Model validation](xref:mvc/models/validation#required-attribute).</span></span>
 
-> [!NOTE]
-> <span data-ttu-id="0a058-198">`JsonInputFormatter`은 기본 포맷터이며 [Json.NET](https://www.newtonsoft.com/json)을 기반으로 합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-198">The `JsonInputFormatter` is the default formatter and is based on [Json.NET](https://www.newtonsoft.com/json).</span></span>
+### <a name="bindrequired-attribute"></a><span data-ttu-id="76290-259">[BindRequired] 특성</span><span class="sxs-lookup"><span data-stu-id="76290-259">[BindRequired] attribute</span></span>
 
-<span data-ttu-id="0a058-199">ASP.NET Core는 다르게 지정되는 특성이 적용되지 않는 한, [Content-Type](https://www.w3.org/Protocols/rfc1341/4_Content-Type.html) 헤더와 매개 변수의 형식을 기반으로 입력 포맷터를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-199">ASP.NET Core selects input formatters based on the [Content-Type](https://www.w3.org/Protocols/rfc1341/4_Content-Type.html) header and the type of the parameter, unless there's an attribute applied to it specifying otherwise.</span></span> <span data-ttu-id="0a058-200">XML 또는 다른 형식을 사용하려면 *Startup.cs* 파일에서 구성해야 하지만 NuGet을 사용하여 먼저 `Microsoft.AspNetCore.Mvc.Formatters.Xml`에 대한 참조를 얻어야 할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-200">If you'd like to use XML or another format you must configure it in the *Startup.cs* file, but you may first have to obtain a reference to `Microsoft.AspNetCore.Mvc.Formatters.Xml` using NuGet.</span></span> <span data-ttu-id="0a058-201">시작 코드는 다음과 비슷합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-201">Your startup code should look something like this:</span></span>
+<span data-ttu-id="76290-260">메서드 매개 변수가 아닌 모델 속성에만 적용될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-260">Can only be applied to model properties, not to method parameters.</span></span> <span data-ttu-id="76290-261">모델의 속성에 대한 바인딩이 발생할 수 없는 경우 모델 바인딩이 모델 상태 오류를 추가하도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-261">Causes model binding to add a model state error if binding cannot occur for a model's property.</span></span> <span data-ttu-id="76290-262">예를 들면 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-262">Here's an example:</span></span>
+
+[!code-csharp[](model-binding/samples/2.x/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
+
+### <a name="bindnever-attribute"></a><span data-ttu-id="76290-263">[BindNever] 특성</span><span class="sxs-lookup"><span data-stu-id="76290-263">[BindNever] attribute</span></span>
+
+<span data-ttu-id="76290-264">메서드 매개 변수가 아닌 모델 속성에만 적용될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-264">Can only be applied to model properties, not to method parameters.</span></span> <span data-ttu-id="76290-265">모델 바인딩이 모델의 속성을 설정하는 것을 방지합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-265">Prevents model binding from setting a model's property.</span></span> <span data-ttu-id="76290-266">예를 들면 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-266">Here's an example:</span></span>
+
+[!code-csharp[](model-binding/samples/2.x/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
+
+### <a name="bind-attribute"></a><span data-ttu-id="76290-267">[Bind] 특성</span><span class="sxs-lookup"><span data-stu-id="76290-267">[Bind] attribute</span></span>
+
+<span data-ttu-id="76290-268">클래스 또는 메서드 매개 변수에 적용될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-268">Can be applied to a class or a method parameter.</span></span> <span data-ttu-id="76290-269">모델 바인딩에 포함되어야 하는 모델의 속성을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-269">Specifies which properties of a model should be included in model binding.</span></span>
+
+<span data-ttu-id="76290-270">다음 예제에서 모든 처리기 또는 작업 메서드가 호출될 때 지정된 속성의 `Instructor` 모델만 바인딩됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-270">In the following example, only the specified properties of the `Instructor` model are bound when any handler or action method is called:</span></span>
 
 ```csharp
-public void ConfigureServices(IServiceCollection services)
-{
-    services.AddMvc()
-        .AddXmlSerializerFormatters();
-   }
+[Bind("LastName,FirstMidName,HireDate")]
+public class Instructor
 ```
 
-<span data-ttu-id="0a058-202">*Startup.cs* 파일의 코드에는 ASP.NET Core 앱용 서비스를 빌드하는 데 사용할 수 있는 `services` 인수가 있는 `ConfigureServices` 메서드가 포함되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-202">Code in the *Startup.cs* file contains a `ConfigureServices` method with a `services` argument you can use to build up services for your ASP.NET Core app.</span></span> <span data-ttu-id="0a058-203">이 샘플에서는 MVC가 이 앱에 대해 제공할 서비스로 XML 포맷터를 추가하고 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-203">In the sample, we are adding an XML formatter as a service that MVC will provide for this app.</span></span> <span data-ttu-id="0a058-204">`AddMvc` 메서드에 전달된 `options` 인수를 통해 앱 시작 시 MVC의 필터, 포맷터 및 기타 시스템 옵션을 추가하고 관리할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-204">The `options` argument passed into the `AddMvc` method allows you to add and manage filters, formatters, and other system options from MVC upon app startup.</span></span> <span data-ttu-id="0a058-205">그런 다음, 컨트롤러 클래스나 작업 메서드에 `Consumes` 특성을 적용하여 원하는 형식으로 작업합니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-205">Then apply the `Consumes` attribute to controller classes or action methods to work with the format you want.</span></span>
+<span data-ttu-id="76290-271">다음 예제에서 `OnPost` 메서드가 호출될 때 지정된 속성의 `Instructor` 모델만 바인딩됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-271">In the following example, only the specified properties of the `Instructor` model are bound when the `OnPost` method is called:</span></span>
 
-### <a name="custom-model-binding"></a><span data-ttu-id="0a058-206">사용자 지정 모델 바인딩</span><span class="sxs-lookup"><span data-stu-id="0a058-206">Custom Model Binding</span></span>
+```csharp
+[HttpPost]
+public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor instructor)
+```
 
-<span data-ttu-id="0a058-207">사용자 고유의 사용자 지정 모델 바인더를 작성하여 모델 바인딩을 확장할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="0a058-207">You can extend model binding by writing your own custom model binders.</span></span> <span data-ttu-id="0a058-208">[사용자 모델 바인딩](../advanced/custom-model-binding.md)에 대해 자세히 알아보세요.</span><span class="sxs-lookup"><span data-stu-id="0a058-208">Learn more about [custom model binding](../advanced/custom-model-binding.md).</span></span>
+<span data-ttu-id="76290-272">`[Bind]` 특성은 *만들기* 시나리오에서 초과 게시를 방지하는 데 사용될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-272">The `[Bind]` attribute can be used to protect against overposting in *create* scenarios.</span></span> <span data-ttu-id="76290-273">제외된 속성은 변경되지 않은 채로 남겨지는 대신 Null 또는 기본값으로 설정되기 때문에 편집 시나리오에서 잘 작동하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-273">It doesn't work well in edit scenarios because excluded properties are set to null or a default value instead of being left unchanged.</span></span> <span data-ttu-id="76290-274">초과 게시에 대한 방어의 경우 뷰 모델이 `[Bind]` 특성보다 권장됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-274">For defense against overposting, view models are recommended rather than the `[Bind]` attribute.</span></span> <span data-ttu-id="76290-275">자세한 내용은 [초과 게시에 대한 보안 정보](xref:data/ef-mvc/crud#security-note-about-overposting)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="76290-275">For more information, see [Security note about overposting](xref:data/ef-mvc/crud#security-note-about-overposting).</span></span>
+
+## <a name="collections"></a><span data-ttu-id="76290-276">컬렉션</span><span class="sxs-lookup"><span data-stu-id="76290-276">Collections</span></span>
+
+<span data-ttu-id="76290-277">단순 형식의 컬렉션인 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-277">For targets that are collections of simple types, model binding looks for matches to *parameter_name* or *property_name*.</span></span> <span data-ttu-id="76290-278">일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-278">If no match is found, it looks for one of the supported formats without the prefix.</span></span> <span data-ttu-id="76290-279">예:</span><span class="sxs-lookup"><span data-stu-id="76290-279">For example:</span></span>
+
+* <span data-ttu-id="76290-280">바인딩되는 매개 변수가 `selectedCourses`라는 배열이라고 가정합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-280">Suppose the parameter to be bound is an array named `selectedCourses`:</span></span>
+
+  ```csharp
+  public IActionResult OnPost(int? id, int[] selectedCourses)
+  ```
+
+* <span data-ttu-id="76290-281">양식 또는 쿼리 문자열 데이터는 다음 형식 중 하나일 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-281">Form or query string data can be in one of the following formats:</span></span>
+   
+  ```
+  selectedCourses=1050&selectedCourses=2000 
+  ```
+
+  ```
+  selectedCourses[0]=1050&selectedCourses[1]=2000
+  ```
+
+  ```
+  [0]=1050&[1]=2000
+  ```
+
+  ```
+  selectedCourses[a]=1050&selectedCourses[b]=2000&selectedCourses.index=a&selectedCourses.index=b
+  ```
+
+  ```
+  [a]=1050&[b]=2000&index=a&index=b
+  ```
+
+* <span data-ttu-id="76290-282">다음 형식은 양식 데이터에서만 지원됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-282">The following format is supported only in form data:</span></span>
+
+  ```
+  selectedCourses[]=1050&selectedCourses[]=2000
+  ```
+
+* <span data-ttu-id="76290-283">앞의 모든 예제 형식의 경우 모델 바인딩은 두 항목의 배열을 `selectedCourses` 매개 변수에 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-283">For all of the preceding example formats, model binding passes an array of two items to the `selectedCourses` parameter:</span></span>
+
+  * <span data-ttu-id="76290-284">selectedCourses[0]=1050</span><span class="sxs-lookup"><span data-stu-id="76290-284">selectedCourses[0]=1050</span></span>
+  * <span data-ttu-id="76290-285">selectedCourses[1]=2000</span><span class="sxs-lookup"><span data-stu-id="76290-285">selectedCourses[1]=2000</span></span>
+
+  <span data-ttu-id="76290-286">아래 첨자 숫자(... [0] ... [1] ...)를 사용하는 데이터 형식은 0부터 시작하여 순차적으로 번호가 매겨지는지 확인해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-286">Data formats that use subscript numbers (... [0] ... [1] ...) must ensure that they are numbered sequentially starting at zero.</span></span> <span data-ttu-id="76290-287">아래 첨자 번호에 간격이 있는 경우 간격 뒤에 있는 모든 항목은 무시됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-287">If there are any gaps in subscript numbering, all items after the gap are ignored.</span></span> <span data-ttu-id="76290-288">예를 들어 아래 첨자가 0과 1 대신 0과 2인 경우 두 번째 항목은 무시됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-288">For example, if the subscripts are 0 and 2 instead of 0 and 1, the second item is ignored.</span></span>
+
+## <a name="dictionaries"></a><span data-ttu-id="76290-289">사전</span><span class="sxs-lookup"><span data-stu-id="76290-289">Dictionaries</span></span>
+
+<span data-ttu-id="76290-290">`Dictionary` 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-290">For `Dictionary` targets, model binding looks for matches to *parameter_name* or *property_name*.</span></span> <span data-ttu-id="76290-291">일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-291">If no match is found, it looks for one of the supported formats without the prefix.</span></span> <span data-ttu-id="76290-292">예:</span><span class="sxs-lookup"><span data-stu-id="76290-292">For example:</span></span>
+
+* <span data-ttu-id="76290-293">대상 매개 변수가 `selectedCourses`라는 `Dictionary<string, string>`라고 가정합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-293">Suppose the target parameter is a `Dictionary<string, string>` named `selectedCourses`:</span></span>
+
+  ```csharp
+  public IActionResult OnPost(int? id, Dictionary<int, string> selectedCourses)
+  ```
+
+* <span data-ttu-id="76290-294">게시된 양식 또는 쿼리 문자열 데이터는 다음 예제 중 하나와 같을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-294">The posted form or query string data can look like one of the following examples:</span></span>
+
+  ```
+  selectedCourses[1050]=Chemistry&selectedCourses[2000]=Economics
+  ```
+
+  ```
+  [1050]=Chemistry&selectedCourses[2000]=Economics
+  ```
+
+  ```
+  selectedCourses[0].Key=1050&selectedCourses[0].Value=Chemistry&
+  selectedCourses[1].Key=2000&selectedCourses[1].Value=Economics
+  ```
+
+  ```
+  [0].Key=1050&[0].Value=Chemistry&[1].Key=2000&[1].Value=Economics
+  ```
+
+* <span data-ttu-id="76290-295">앞의 모든 예제 형식의 경우 모델 바인딩은 두 항목의 사전을 `selectedCourses` 매개 변수에 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-295">For all of the preceding example formats, model binding passes a dictionary of two items to the `selectedCourses` parameter:</span></span>
+
+  * <span data-ttu-id="76290-296">selectedCourses["1050"]="Chemistry"</span><span class="sxs-lookup"><span data-stu-id="76290-296">selectedCourses["1050"]="Chemistry"</span></span>
+  * <span data-ttu-id="76290-297">selectedCourses["2000"]="Economics"</span><span class="sxs-lookup"><span data-stu-id="76290-297">selectedCourses["2000"]="Economics"</span></span>
+
+## <a name="special-data-types"></a><span data-ttu-id="76290-298">특수 데이터 형식</span><span class="sxs-lookup"><span data-stu-id="76290-298">Special data types</span></span>
+
+<span data-ttu-id="76290-299">모델 바인딩이 처리할 수 있는 일부 특수 데이터 형식이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-299">There are some special data types that model binding can handle.</span></span>
+
+### <a name="iformfile-and-iformfilecollection"></a><span data-ttu-id="76290-300">IFormFile 및 IFormFileCollection</span><span class="sxs-lookup"><span data-stu-id="76290-300">IFormFile and IFormFileCollection</span></span>
+
+<span data-ttu-id="76290-301">HTTP 요청에 포함되는 업로드된 파일입니다.</span><span class="sxs-lookup"><span data-stu-id="76290-301">An uploaded file included in the HTTP request.</span></span>  <span data-ttu-id="76290-302">또한 여러 파일에 대해 `IEnumerable<IFormFile>`이 지원됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-302">Also supported is `IEnumerable<IFormFile>` for multiple files.</span></span>
+
+### <a name="cancellationtoken"></a><span data-ttu-id="76290-303">CancellationToken</span><span class="sxs-lookup"><span data-stu-id="76290-303">CancellationToken</span></span>
+
+<span data-ttu-id="76290-304">비동기 컨트롤러에서 작업을 취소하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-304">Used to cancel activity in asynchronous controllers.</span></span>
+
+### <a name="formcollection"></a><span data-ttu-id="76290-305">FormCollection</span><span class="sxs-lookup"><span data-stu-id="76290-305">FormCollection</span></span>
+
+<span data-ttu-id="76290-306">게시된 양식 데이터에서 모든 값을 검색하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-306">Used to retrieve all the values from posted form data.</span></span>
+
+## <a name="input-formatters"></a><span data-ttu-id="76290-307">입력 포맷터</span><span class="sxs-lookup"><span data-stu-id="76290-307">Input formatters</span></span>
+
+<span data-ttu-id="76290-308">요청 본문의 데이터는 JSON, XML 또는 일부 다른 형식일 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-308">Data in the request body can be in JSON, XML, or some other format.</span></span> <span data-ttu-id="76290-309">이 데이터를 구문 분석하기 위해 모델 바인딩은 특정 콘텐츠 유형을 처리하도록 구성된 *입력 포맷터*를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-309">To parse this data, model binding uses an *input formatter* that is configured to handle a particular content type.</span></span> <span data-ttu-id="76290-310">기본적으로 ASP.NET Core는 JSON 데이터를 처리하기 위한 JSON 기반 입력 포맷터를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-310">By default, ASP.NET Core includes JSON based input formatters for handling JSON data.</span></span> <span data-ttu-id="76290-311">다른 콘텐츠 형식에 대해 다른 포맷터를 추가할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-311">You can add other formatters for other content types.</span></span>
+
+<span data-ttu-id="76290-312">ASP.NET Core는 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute) 특성을 기반으로 입력 포맷터를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-312">ASP.NET Core selects input formatters based on the [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute) attribute.</span></span> <span data-ttu-id="76290-313">특성이 없는 경우 [Content-Type 헤더](https://www.w3.org/Protocols/rfc1341/4_Content-Type.html)를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-313">If no attribute is present, it uses the [Content-Type header](https://www.w3.org/Protocols/rfc1341/4_Content-Type.html).</span></span>
+
+<span data-ttu-id="76290-314">기본 제공 XML 입력 포맷터를 사용하려면 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-314">To use the built-in XML input formatters:</span></span>
+
+* <span data-ttu-id="76290-315">`Microsoft.AspNetCore.Mvc.Formatters.Xml` NuGet 패키지를 설치합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-315">Install the `Microsoft.AspNetCore.Mvc.Formatters.Xml` NuGet package.</span></span>
+
+* <span data-ttu-id="76290-316">`Startup.ConfigureServices`에서 <xref:Microsoft.Extensions.DependencyInjection.MvcXmlMvcCoreBuilderExtensions.AddXmlSerializerFormatters*> 또는 <xref:Microsoft.Extensions.DependencyInjection.MvcXmlMvcCoreBuilderExtensions.AddXmlDataContractSerializerFormatters*>를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-316">In `Startup.ConfigureServices`, call <xref:Microsoft.Extensions.DependencyInjection.MvcXmlMvcCoreBuilderExtensions.AddXmlSerializerFormatters*> or <xref:Microsoft.Extensions.DependencyInjection.MvcXmlMvcCoreBuilderExtensions.AddXmlDataContractSerializerFormatters*>.</span></span>
+
+  [!code-csharp[](model-binding/samples/2.x/Startup.cs?name=snippet_ValueProvider&highlight=9)]
+
+* <span data-ttu-id="76290-317">요청 본문에서 XML을 필요로 하는 컨트롤러 클래스 또는 작업 메서드에 `Consumes` 특성을 적용합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-317">Apply the `Consumes` attribute to controller classes or action methods that should expect XML in the request body.</span></span>
+
+  ```csharp
+  [HttpPost]
+  [Consumes("application/xml")]
+  public ActionResult<Pet> Create(Pet pet)
+  ```
+
+  <span data-ttu-id="76290-318">자세한 내용은 [XML Serialization 소개](https://docs.microsoft.com/en-us/dotnet/standard/serialization/introducing-xml-serialization)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="76290-318">For more information, see [Introducing XML Serialization](https://docs.microsoft.com/en-us/dotnet/standard/serialization/introducing-xml-serialization).</span></span>
+
+## <a name="exclude-specified-types-from-model-binding"></a><span data-ttu-id="76290-319">모델 바인딩에서 지정된 형식 제외</span><span class="sxs-lookup"><span data-stu-id="76290-319">Exclude specified types from model binding</span></span>
+
+<span data-ttu-id="76290-320">모델 바인딩 및 시스템 동작의 유효성 검사는 [ModelMetadata](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.modelmetadata)를 기반으로 합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-320">The model binding and validation systems' behavior is driven by [ModelMetadata](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.modelmetadata).</span></span> <span data-ttu-id="76290-321">[MvcOptions.ModelMetadataDetailsProviders](xref:Microsoft.AspNetCore.Mvc.MvcOptions.ModelMetadataDetailsProviders)에 세부 정보 공급 기업을 추가하여 `ModelMetadata`를 사용자 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-321">You can customize `ModelMetadata` by adding a details provider to [MvcOptions.ModelMetadataDetailsProviders](xref:Microsoft.AspNetCore.Mvc.MvcOptions.ModelMetadataDetailsProviders).</span></span> <span data-ttu-id="76290-322">기본 제공 세부 정보 공급 기업을 지정된 형식에 대한 모델 바인딩 또는 유효성 검사를 비활성화하기 위해 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-322">Built-in details providers are available for disabling model binding or validation for specified types.</span></span>
+
+<span data-ttu-id="76290-323">지정된 형식의 모든 모델에 대한 모델 바인딩을 비활성화하려면 `Startup.ConfigureServices`에서 <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ExcludeBindingMetadataProvider>를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-323">To disable model binding on all models of a specified type, add an <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ExcludeBindingMetadataProvider> in `Startup.ConfigureServices`.</span></span> <span data-ttu-id="76290-324">예를 들어 `System.Version` 형식의 모든 모델에 대한 모델 바인딩을 비활성화하려면:</span><span class="sxs-lookup"><span data-stu-id="76290-324">For example, to disable model binding on all models of type `System.Version`:</span></span>
+
+[!code-csharp[](model-binding/samples/2.x/Startup.cs?name=snippet_ValueProvider&highlight=4-5)]
+
+<span data-ttu-id="76290-325">지정된 형식의 속성에 대한 유효성 검사를 비활성화하려면 `Startup.ConfigureServices`에서 <xref:Microsoft.AspNetCore.Mvc.ModelBinding.SuppressChildValidationMetadataProvider>를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-325">To disable validation on properties of a specified type, add a <xref:Microsoft.AspNetCore.Mvc.ModelBinding.SuppressChildValidationMetadataProvider> in `Startup.ConfigureServices`.</span></span> <span data-ttu-id="76290-326">예를 들어 `System.Guid` 형식의 속성에 대한 유효성 검사를 비활성화하려면:</span><span class="sxs-lookup"><span data-stu-id="76290-326">For example, to disable validation on properties of type `System.Guid`:</span></span>
+
+[!code-csharp[](model-binding/samples/2.x/Startup.cs?name=snippet_ValueProvider&highlight=6-7)]
+
+## <a name="custom-model-binders"></a><span data-ttu-id="76290-327">사용자 지정 모델 바인더</span><span class="sxs-lookup"><span data-stu-id="76290-327">Custom model binders</span></span>
+
+<span data-ttu-id="76290-328">사용자 지정 모델 바인더를 작성하고 지정된 대상에 대해 선택하도록 `[ModelBinder]` 특성을 사용하여 모델 바인딩을 확장할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-328">You can extend model binding by writing a custom model binder and using the `[ModelBinder]` attribute to select it for a given target.</span></span> <span data-ttu-id="76290-329">[사용자 모델 바인딩](xref:mvc/advanced/custom-model-binding)에 대해 자세히 알아보세요.</span><span class="sxs-lookup"><span data-stu-id="76290-329">Learn more about [custom model binding](xref:mvc/advanced/custom-model-binding).</span></span>
+
+## <a name="manual-model-binding"></a><span data-ttu-id="76290-330">수동 모델 바인딩</span><span class="sxs-lookup"><span data-stu-id="76290-330">Manual model binding</span></span>
+
+<span data-ttu-id="76290-331"><xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> 메서드를 사용하여 모델 바인딩을 수동으로 호출할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-331">Model binding can be invoked manually by using the <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> method.</span></span> <span data-ttu-id="76290-332">메서드는 `ControllerBase` 및 `PageModel` 클래스에서 정의됩니다.</span><span class="sxs-lookup"><span data-stu-id="76290-332">The method is defined on both `ControllerBase` and `PageModel` classes.</span></span> <span data-ttu-id="76290-333">메서드 오버로드를 통해 사용할 접두사 및 값 공급 기업을 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-333">Method overloads let you specify the prefix and value provider to use.</span></span> <span data-ttu-id="76290-334">모델 바인딩이 실패하는 경우 메서드는 `false`를 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="76290-334">The method returns `false` if model binding fails.</span></span> <span data-ttu-id="76290-335">예를 들면 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="76290-335">Here's an example:</span></span>
+
+[!code-csharp[](model-binding/samples/2.x/Pages/InstructorsWithCollection/Create.cshtml.cs?name=snippet_TryUpdate&highlight=1-4)]
+
+## <a name="fromservices-attribute"></a><span data-ttu-id="76290-336">[FromServices] 특성</span><span class="sxs-lookup"><span data-stu-id="76290-336">[FromServices] attribute</span></span>
+
+<span data-ttu-id="76290-337">이 특성의 이름은 데이터 원본을 지정하는 모델 바인딩 특성의 패턴을 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="76290-337">This attribute's name follows the pattern of model binding attributes that specify a data source.</span></span> <span data-ttu-id="76290-338">그러나 값 공급 기업의 바인딩 데이터에 대한 것은 아닙니다.</span><span class="sxs-lookup"><span data-stu-id="76290-338">But it's not about binding data from a value provider.</span></span> <span data-ttu-id="76290-339">[종속성 주입](xref:fundamentals/dependency-injection) 컨테이너에서 형식의 인스턴스를 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="76290-339">It gets an instance of a type from the [dependency injection](xref:fundamentals/dependency-injection) container.</span></span> <span data-ttu-id="76290-340">특정 메서드가 호출되는 경우에만 서비스가 필요할 때 생성자 주입에 대안을 제공하는 것이 목적입니다.</span><span class="sxs-lookup"><span data-stu-id="76290-340">Its purpose is to provide an alternative to constructor injection for when you need a service only if a particular method is called.</span></span>
+
+## <a name="additional-resources"></a><span data-ttu-id="76290-341">추가 자료</span><span class="sxs-lookup"><span data-stu-id="76290-341">Additional resources</span></span>
+
+* <xref:mvc/models/validation>
+* <xref:mvc/advanced/custom-model-binding>
