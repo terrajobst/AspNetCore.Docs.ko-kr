@@ -7,12 +7,12 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/28/2018
 uid: signalr/redis-backplane
-ms.openlocfilehash: 9d2a942dba6abe669126efee7f2b3cdd6560658e
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: adf9bbce1353fd811a4044e173533f76bc4193de
+ms.sourcegitcommit: 4ef0362ef8b6e5426fc5af18f22734158fe587e1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087661"
+ms.lasthandoff: 06/17/2019
+ms.locfileid: "67152921"
 ---
 # <a name="set-up-a-redis-backplane-for-aspnet-core-signalr-scale-out"></a>ASP.NET Core SignalR 확장에 대 한를 Redis 백플레인으로 설정
 
@@ -184,9 +184,9 @@ services.AddSignalR()
 
 ::: moniker-end
 
-## <a name="clustering"></a>클러스터링
+## <a name="redis-clustering"></a>Redis 클러스터링
 
-클러스터링은 여러 Redis 서버를 사용 하 여 고가용성을 달성 하는 방법입니다. 공식적으로 지원 되지 않으면 클러스터링 하지만 작동 될 수 있습니다.
+[Redis 클러스터링](https://redis.io/topics/cluster-spec) 여러 Redis 서버를 사용 하 여 고가용성을 달성 하기 위한 메서드입니다. 공식적으로 지원 되지 않으면 클러스터링 하지만 작동 될 수 있습니다.
 
 ## <a name="next-steps"></a>다음 단계
 

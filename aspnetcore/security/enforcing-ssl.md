@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/01/2018
 uid: security/enforcing-ssl
-ms.openlocfilehash: 8d48877153d6d75348e29299c669125904236de8
-ms.sourcegitcommit: 5dd2ce9709c9e41142771e652d1a4bd0b5248cec
+ms.openlocfilehash: 08ce50775d1b5348cb0528a1724cec2e5c72dae2
+ms.sourcegitcommit: 4ef0362ef8b6e5426fc5af18f22734158fe587e1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/05/2019
-ms.locfileid: "66692595"
+ms.lasthandoff: 06/17/2019
+ms.locfileid: "67152901"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>ASP.NET Core에서 HTTPS 적용
 
@@ -24,11 +24,32 @@ ms.locfileid: "66692595"
 
 API가 없습니다. 첫 번째 요청 시 중요 한 데이터를 보낸 클라이언트를 방지할 수 있습니다.
 
+::: moniker range="< aspnetcore-3.0"
+
 > [!WARNING]
+> ## <a name="api-projects"></a>API 프로젝트
+>
 > 수행할 **되지** 사용 하 여 [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) 중요 한 정보를 수신 하는 Web Api에서 합니다. `RequireHttpsAttribute` 브라우저는 HTTP에서 HTTPS로 리디렉션하 HTTP 상태 코드를 사용 합니다. API 클라이언트 이해 하지 못하거나 HTTP에서 HTTPS로 리디렉션 준수 될 수 있습니다. 이러한 클라이언트는 HTTP를 통해 정보를 보낼 수 있습니다. Web Api을 수행 해야합니다.
 >
 > * HTTP에서 수신 대기할 수 없습니다.
 > * 상태 코드 400 (잘못 된 요청)를 사용 하 여 연결을 닫고 요청을 제공 하지 마십시오.
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
+
+> [!WARNING]
+> ## <a name="api-projects"></a>API 프로젝트
+>
+> 수행할 **되지** 사용 하 여 [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) 중요 한 정보를 수신 하는 Web Api에서 합니다. `RequireHttpsAttribute` 브라우저는 HTTP에서 HTTPS로 리디렉션하 HTTP 상태 코드를 사용 합니다. API 클라이언트 이해 하지 못하거나 HTTP에서 HTTPS로 리디렉션 준수 될 수 있습니다. 이러한 클라이언트는 HTTP를 통해 정보를 보낼 수 있습니다. Web Api을 수행 해야합니다.
+>
+> * HTTP에서 수신 대기할 수 없습니다.
+> * 상태 코드 400 (잘못 된 요청)를 사용 하 여 연결을 닫고 요청을 제공 하지 마십시오.
+>
+> ## <a name="hsts-and-api-projects"></a>HSTS 및 API 프로젝트
+>
+> 기본 API 프로젝트를 포함 하지 마세요 [HSTS](#hsts) HSTS는 일반적으로 브라우저 유일한 명령 때문입니다. 휴대폰 또는 데스크톱 앱의 경우와 같은 다른 호출자 마십시오 **되지** 지침을 따릅니다. 브라우저 내 에서도 단일 HTTP 통해 API에 인증 된 호출에 위험 안전 하지 않은 네트워크. 만 수신 하 고 HTTPS를 통해 응답 API 프로젝트를 구성 하는 보안 방법이입니다.
+
+::: moniker-end
 
 ## <a name="require-https"></a>HTTPS 필요
 
@@ -159,6 +180,8 @@ HTTPS 리디렉션을 미들웨어를 사용 하는 대신 (`UseHttpsRedirection
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1"
+
+<a name="hsts"></a>
 
 ## <a name="http-strict-transport-security-protocol-hsts"></a>HTTP 엄격한 전송 보안 프로토콜 (HSTS)
 

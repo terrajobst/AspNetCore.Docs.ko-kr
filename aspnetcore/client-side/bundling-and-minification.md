@@ -4,14 +4,14 @@ author: scottaddie
 description: 번들링 및 축소 기술을 적용하여 ASP.NET Core 웹 응용 프로그램에서 정적 리소스를 최적화하는 방법을 알아봅니다.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 05/10/2019
+ms.date: 06/17/2019
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: ba01d365a25dfbd13fed89263d7489b2ce2a8771
-ms.sourcegitcommit: ffe3ed7921ec6c7c70abaac1d10703ec9a43374c
+ms.openlocfilehash: c3ec67d9f5c2b8eb44b5ced911ccfd0fa40a52a7
+ms.sourcegitcommit: 4ef0362ef8b6e5426fc5af18f22734158fe587e1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/11/2019
-ms.locfileid: "65535925"
+ms.lasthandoff: 06/17/2019
+ms.locfileid: "67152772"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>ASP.NET Core에서 정적 자산 번들링 및 축소하기
 
@@ -286,6 +286,9 @@ npm i -g gulp-cli
 Visual Studio나 Bundler & Minifier 확장을 사용할 수 없는 경우 직접 수작업으로 변환합니다.
 
 프로젝트 루트에 다음 `devDependencies`가 지정된 *package.json* 파일을 추가합니다.
+
+> [!WARNING]
+> `gulp-uglify` 모듈 ECMAScript (ES) 2015를 지원 하지 않습니다 / ES6 이상. 설치 [gulp terser](https://www.npmjs.com/package/gulp-terser) 대신 `gulp-uglify` ES2015 데 / ES6 이상.
 
 [!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/package.json?range=5-13)]
 
