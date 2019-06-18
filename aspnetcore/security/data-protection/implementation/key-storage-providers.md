@@ -5,12 +5,12 @@ description: ASP.NET Core 및 키 저장소 위치를 구성 하는 방법에 �
 ms.author: riande
 ms.date: 06/11/2019
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: 49b068480fe7ba0a9b338aa5f5b7fc19fb98528f
-ms.sourcegitcommit: f5762967df3be8b8c868229e679301f2f7954679
+ms.openlocfilehash: 19d51399e24d085f7c34f70098ca02cbba7a888f
+ms.sourcegitcommit: 28a2874765cefe9eaa068dceb989a978ba2096aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67048092"
+ms.lasthandoff: 06/17/2019
+ms.locfileid: "67167037"
 ---
 # <a name="key-storage-providers-in-aspnet-core"></a>ASP.NET Core에서 키 저장소 공급자
 
@@ -37,7 +37,7 @@ public void ConfigureServices(IServiceCollection services)
 
 합니다 [Microsoft.AspNetCore.DataProtection.AzureStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/) 패키지를 Azure Blob Storage에서 데이터 보호 키를 저장할 수 있습니다. 웹 앱의 여러 인스턴스 키를 공유할 수 있습니다. 앱에는 여러 서버에서 인증 쿠키 또는 CSRF 보호 공유할 수 있습니다.
 
-Azure Blob 저장소 공급자를 구성 하려면 중 하나를 호출 합니다 [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage) 오버 로드 합니다. 
+Azure Blob 저장소 공급자를 구성 하려면 중 하나를 호출 합니다 [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage) 오버 로드 합니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -47,7 +47,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-웹 앱이 Azure 서비스로 실행 하는 경우 인증 토큰 수 자동으로 사용 하 여 만들어집니다 [ Microsoft.Azure.Services.AppAuthentication](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication/)합니다. 
+웹 앱이 Azure 서비스로 실행 하는 경우 인증 토큰 수 자동으로 사용 하 여 만들어집니다 [Microsoft.Azure.Services.AppAuthentication](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication/)합니다.
 
 ```csharp
 var tokenProvider = new AzureServiceTokenProvider();
@@ -149,7 +149,7 @@ EF Core 공급자를 구성 하려면 다음을 호출 합니다 [ `PersistKeysT
 
 [!code-csharp[Main](key-storage-providers/sample/MyKeysContext.cs)]
 
-만들기는 `DataProtectionKeys` 테이블입니다. 
+만들기는 `DataProtectionKeys` 테이블입니다.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 

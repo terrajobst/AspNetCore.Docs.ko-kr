@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 03/31/2019
 uid: grpc/basics
-ms.openlocfilehash: 5a88bd0e9f789058b3606691c5ebd9a74325ac9b
-ms.sourcegitcommit: 4d05e30567279072f1b070618afe58ae1bcefd5a
+ms.openlocfilehash: 00772144cb484b78a256f178642463577d316be2
+ms.sourcegitcommit: 516f166c5f7cec54edf3d9c71e6e2ba53fb3b0e5
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/29/2019
-ms.locfileid: "66376339"
+ms.lasthandoff: 06/18/2019
+ms.locfileid: "67196355"
 ---
 # <a name="grpc-services-with-c"></a>C 사용 하 여 gRPC 서비스\#
 
@@ -38,7 +38,7 @@ Protobuf 파일의 구문에 자세한 내용은 참조는 [공식 설명서 (pr
 
 합니다 *.proto* 파일을 프로젝트에 추가 하 여 포함 된 `<Protobuf>` 항목 그룹:
 
-[!code-xml[](~/tutorials//grpc/grpc-start/sample/GrpcGreeter/GrpcGreeter.csproj?highlight=2&range=7-11)]
+[!code-xml[](~/tutorials/grpc/grpc-start/sample/GrpcGreeter/GrpcGreeter.csproj?highlight=2&range=7-9)]
 
 ## <a name="c-tooling-support-for-proto-files"></a>C#도구.proto 파일에 대 한 지원
 
@@ -50,7 +50,7 @@ Protobuf 파일의 구문에 자세한 내용은 참조는 [공식 설명서 (pr
 
 서버 및 클라이언트 프로젝트에서이 패키지가 필요 합니다. `Grpc.Tools` Visual Studio에서 패키지 관리자를 사용 하거나 추가 하 여 추가할 수는 `<PackageReference>` 프로젝트 파일에:
 
-[!code-xml[](~/tutorials//grpc/grpc-start/sample/GrpcGreeter/GrpcGreeter.csproj?highlight=1&range=17)]
+[!code-xml[](~/tutorials/grpc/grpc-start/sample/GrpcGreeter/GrpcGreeter.csproj?highlight=1&range=15)]
 
 도구 패키지는 런타임에 필요하지 않으므로 종속성은 `PrivateAssets="All"`로 표시됩니다.
 
@@ -68,7 +68,7 @@ Protobuf 파일의 구문에 자세한 내용은 참조는 [공식 설명서 (pr
 
 기본적으로 서버 및 클라이언트 자산 각각에 대해 생성 됩니다 *.proto* 에 포함 된 파일을 `<Protobuf>` 항목 그룹입니다. 서버 자산에만 서버 프로젝트에서 생성 되는 `GrpcServices` 특성이로 설정 된 `Server`합니다.
 
-[!code-xml[](~/tutorials//grpc/grpc-start/sample/GrpcGreeter/GrpcGreeter.csproj?highlight=2&range=7-11)]
+[!code-xml[](~/tutorials//grpc/grpc-start/sample/GrpcGreeter/GrpcGreeter.csproj?highlight=2&range=7-9)]
 
 특성이로 설정 되는 마찬가지로 `Client` 클라이언트 프로젝트에서.
 

@@ -3,14 +3,14 @@ title: ASP.NET Core 2.0으로 인증 및 Id 마이그레이션
 author: scottaddie
 description: 이 문서에서는 ASP.NET Core 2.0으로 ASP.NET Core 1.x 인증 및 Id 마이그레이션에 대 한 가장 일반적인 단계를 간략하게 설명 합니다.
 ms.author: scaddie
-ms.date: 12/18/2018
+ms.date: 06/13/2019
 uid: migration/1x-to-2x/identity-2x
-ms.openlocfilehash: 086deac51af186012315d5b6a1236c92c8980037
-ms.sourcegitcommit: 5d384db2fa9373a93b5d15e985fb34430e49ad7a
+ms.openlocfilehash: 3e8bc75b87a85159c9668b52eea32bb7d700be6c
+ms.sourcegitcommit: 516f166c5f7cec54edf3d9c71e6e2ba53fb3b0e5
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/23/2019
-ms.locfileid: "66039236"
+ms.lasthandoff: 06/18/2019
+ms.locfileid: "67196378"
 ---
 # <a name="migrate-authentication-and-identity-to-aspnet-core-20"></a>ASP.NET Core 2.0으로 인증 및 Id 마이그레이션
 
@@ -18,11 +18,17 @@ ms.locfileid: "66039236"
 
 ASP.NET Core 2.0에는 새 모델을 인증 하 고 [Identity](xref:security/authentication/identity) 서비스를 사용 하 여 구성을 간소화 하는 합니다. 아래에 설명 된 대로 새 모델을 사용 하도록 인증 또는 Id를 사용 하는 ASP.NET Core 1.x 응용 프로그램을 업데이트할 수 있습니다.
 
+## <a name="update-namespaces"></a>네임 스페이스를 업데이트 합니다.
+
+1\.x, 클래스 등 `IdentityRole` 하 고 `IdentityUser` 에서 찾을 수 없습니다는 `Microsoft.AspNetCore.Identity.EntityFrameworkCore` 네임 스페이스입니다.
+
+2\.0에 <xref:Microsoft.AspNetCore.Identity> 네임 스페이스는 이러한 클래스의 새 홈 되었습니다. 영향을 받는 클래스에 포함 되어 기본 Identity 코드로 `ApplicationUser` 고 `Startup`입니다. 조정에 `using` 영향을 받는 참조를 확인 하는 문입니다.
+
 <a name="auth-middleware"></a>
 
 ## <a name="authentication-middleware-and-services"></a>인증 미들웨어 및 서비스
 
-1.x 프로젝트에서 인증 미들웨어를 통해 구성 됩니다. 지원 하려는 각 인증 체계에 대 한 미들웨어 메서드를 호출 합니다.
+1\.x 프로젝트에서 인증 미들웨어를 통해 구성 됩니다. 지원 하려는 각 인증 체계에 대 한 미들웨어 메서드를 호출 합니다.
 
 Id를 사용 하 여 Facebook 인증을 구성 하는 1.x 다음과 *Startup.cs*:
 
@@ -43,7 +49,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory)
 }
 ```
 
-2.0 프로젝트에서 인증 서비스를 통해 구성 됩니다. 각 인증 체계에 등록 합니다 `ConfigureServices` 메서드의 *Startup.cs*합니다. 합니다 `UseIdentity` 메서드를 사용 하 여 바뀝니다 `UseAuthentication`합니다.
+2\.0 프로젝트에서 인증 서비스를 통해 구성 됩니다. 각 인증 체계에 등록 합니다 `ConfigureServices` 메서드의 *Startup.cs*합니다. 합니다 `UseIdentity` 메서드를 사용 하 여 바뀝니다 `UseAuthentication`합니다.
 
 다음 예제에서는 2.0에서 Id를 사용 하 여 Facebook 인증 구성 *Startup.cs*:
 
@@ -253,9 +259,9 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 
 ### <a name="setting-default-authentication-schemes"></a>기본 인증 체계를 설정합니다.
 
-1.x의 경우에 `AutomaticAuthenticate` 및 `AutomaticChallenge` 의 속성을 [AuthenticationOptions](/dotnet/api/Microsoft.AspNetCore.Builder.AuthenticationOptions?view=aspnetcore-1.1) 기본 클래스에서 단일 인증 체계를 설정할 데 사용 된 합니다. 이 적용할 좋은 방법이 없었습니다.
+1\.x의 경우에 `AutomaticAuthenticate` 및 `AutomaticChallenge` 의 속성을 [AuthenticationOptions](/dotnet/api/Microsoft.AspNetCore.Builder.AuthenticationOptions?view=aspnetcore-1.1) 기본 클래스에서 단일 인증 체계를 설정할 데 사용 된 합니다. 이 적용할 좋은 방법이 없었습니다.
 
-2.0에서는 이러한 두 속성이 제거 되었습니다. 개별 속성으로 `AuthenticationOptions` 인스턴스. 구성할 수 있습니다 합니다 `AddAuthentication` 메서드 호출을 `ConfigureServices` 메서드의 *Startup.cs*:
+2\.0에서는 이러한 두 속성이 제거 되었습니다. 개별 속성으로 `AuthenticationOptions` 인스턴스. 구성할 수 있습니다 합니다 `AddAuthentication` 메서드 호출을 `ConfigureServices` 메서드의 *Startup.cs*:
 
 ```csharp
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -289,7 +295,7 @@ services.AddAuthentication(options =>
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Controllers/AccountController.cs?name=snippet_AuthenticationProperty)]
 
-2.0 프로젝트에서 가져오는 합니다 `Microsoft.AspNetCore.Authentication` 네임 스페이스 및 삭제는 `Authentication` 속성 참조:
+2\.0 프로젝트에서 가져오는 합니다 `Microsoft.AspNetCore.Authentication` 네임 스페이스 및 삭제는 `Authentication` 속성 참조:
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Controllers/AccountController.cs?name=snippet_AuthenticationProperty)]
 
@@ -309,15 +315,15 @@ Windows 인증의 두 가지 변형이 있습니다.
 services.AddAuthentication(IISDefaults.AuthenticationScheme);
 ```
 
-기본 스키마를 설정 하지 못했습니다에는 그에 따라 권한 부여 요청을에 작동에서 문제를 해결할 수 없습니다.
+작업에서 챌린지를 권한 부여 요청을 방지 하는 기본 체계를 설정 하지 못했습니다.
 
 <a name="identity-cookie-options"></a>
 
 ## <a name="identitycookieoptions-instances"></a>IdentityCookieOptions 인스턴스
 
-2.0 변경의 부작용으로 나타납니다 명명 된 쿠키 옵션 인스턴스 대신 옵션을 사용 하도록 전환 됩니다. Identity 쿠키 구성표 이름을 사용자 지정 하는 기능 제거 됩니다.
+2\.0 변경의 부작용으로 나타납니다 명명 된 쿠키 옵션 인스턴스 대신 옵션을 사용 하도록 전환 됩니다. Identity 쿠키 구성표 이름을 사용자 지정 하는 기능 제거 됩니다.
 
-1.x 프로젝트를 사용 하 여 예를 들어 [생성자 주입](xref:mvc/controllers/dependency-injection#constructor-injection) 전달 하는 `IdentityCookieOptions` 에 매개 변수 *AccountController.cs*합니다. 외부 쿠키 인증 체계는 제공 된 인스턴스에서 액세스 합니다.
+1\.x 프로젝트를 사용 하 여 예를 들어 [생성자 주입](xref:mvc/controllers/dependency-injection#constructor-injection) 전달 하는 `IdentityCookieOptions` 에 매개 변수 *AccountController.cs* 하 고 *ManageController.cs*. 외부 쿠키 인증 체계는 제공 된 인스턴스에서 액세스 합니다.
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Controllers/AccountController.cs?name=snippet_AccountControllerConstructor&highlight=4,11)]
 
@@ -325,9 +331,17 @@ services.AddAuthentication(IISDefaults.AuthenticationScheme);
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Controllers/AccountController.cs?name=snippet_AccountControllerConstructor)]
 
-`IdentityConstants.ExternalScheme` 상수를 직접 사용할 수 있습니다.
+사용 하는 1.x 프로젝트는 `_externalCookieScheme` 다음과 같이 필드:
+
+[!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Controllers/AccountController.cs?name=snippet_AuthenticationProperty)]
+
+2\.0 프로젝트에서 앞의 코드를 다음으로 바꿉니다. `IdentityConstants.ExternalScheme` 상수를 직접 사용할 수 있습니다.
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Controllers/AccountController.cs?name=snippet_AuthenticationProperty)]
+
+새로 추가 된 해결 `SignOutAsync` 다음 네임 스페이스를 가져와서 호출 합니다.
+
+[!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Controllers/AccountController.cs?name=snippet_AuthenticationImport)]
 
 <a name="navigation-properties"></a>
 
@@ -389,31 +403,31 @@ protected override void OnModelCreating(ModelBuilder builder)
 
 ## <a name="replace-getexternalauthenticationschemes"></a>GetExternalAuthenticationSchemes 대체
 
-동기 메서드 `GetExternalAuthenticationSchemes` 비동기 버전을 위해 제거 되었습니다. 1.x 프로젝트 같은 코드를 가정해 *ManageController.cs*:
+동기 메서드 `GetExternalAuthenticationSchemes` 비동기 버전을 위해 제거 되었습니다. 1.x 프로젝트 같은 코드를 가정해 *Controllers/ManageController.cs*:
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Controllers/ManageController.cs?name=snippet_GetExternalAuthenticationSchemes)]
 
-이 메서드가 나타납니다 *Login.cshtml* 너무:
+이 메서드가 나타납니다 *Views/Account/Login.cshtml* 너무:
 
-[!code-cshtml[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Views/Account/Login.cshtml?range=62,75-84)]
+[!code-cshtml[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Views/Account/Login.cshtml?name=snippet_GetExtAuthNSchemes&highlight=2)]
 
-2.0 프로젝트에서 사용 된 `GetExternalAuthenticationSchemesAsync` 메서드:
+2\.0 프로젝트에서 사용 된 <xref:Microsoft.AspNetCore.Identity.SignInManager`1.GetExternalAuthenticationSchemesAsync*> 메서드. 변경을 *ManageController.cs* 다음 코드와 유사 합니다.
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Controllers/ManageController.cs?name=snippet_GetExternalAuthenticationSchemesAsync)]
 
 *Login.cshtml*의 `AuthenticationScheme` 액세스 되는 속성을 `foreach` 루프 변경 `Name`:
 
-[!code-cshtml[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Views/Account/Login.cshtml?range=62,75-84)]
+[!code-cshtml[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Views/Account/Login.cshtml?name=snippet_GetExtAuthNSchemesAsync&highlight=2,19)]
 
 <a name="property-change"></a>
 
 ## <a name="manageloginsviewmodel-property-change"></a>ManageLoginsViewModel 속성 변경
 
-A `ManageLoginsViewModel` 개체가 사용 되는 `ManageLogins` 의 동작 *ManageController.cs*합니다. 1.x 프로젝트에서 개체의 `OtherLogins` 속성이 반환 형식이 `IList<AuthenticationDescription>`합니다. 이 반환 형식은 가져오는 `Microsoft.AspNetCore.Http.Authentication`:
+A `ManageLoginsViewModel` 개체가 사용 되는 `ManageLogins` 의 동작 *ManageController.cs*합니다. 1\.x 프로젝트에서 개체의 `OtherLogins` 속성이 반환 형식이 `IList<AuthenticationDescription>`합니다. 이 반환 형식은 가져오는 `Microsoft.AspNetCore.Http.Authentication`:
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Models/ManageViewModels/ManageLoginsViewModel.cs?name=snippet_ManageLoginsViewModel&highlight=2,11)]
 
-2.0 프로젝트에서 반환 형식을 변경 `IList<AuthenticationScheme>`합니다. 대체이 새 반환 형식이 필요 합니다 `Microsoft.AspNetCore.Http.Authentication` 사용 하 여 가져오기는 `Microsoft.AspNetCore.Authentication` 가져오기.
+2\.0 프로젝트에서 반환 형식을 변경 `IList<AuthenticationScheme>`합니다. 대체이 새 반환 형식이 필요 합니다 `Microsoft.AspNetCore.Http.Authentication` 사용 하 여 가져오기는 `Microsoft.AspNetCore.Authentication` 가져오기.
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Models/ManageViewModels/ManageLoginsViewModel.cs?name=snippet_ManageLoginsViewModel&highlight=2,11)]
 
@@ -421,4 +435,4 @@ A `ManageLoginsViewModel` 개체가 사용 되는 `ManageLogins` 의 동작 *Man
 
 ## <a name="additional-resources"></a>추가 자료
 
-추가 세부 정보 및 토론에 대 한 참조를 [Auth 2.0에 대 한 토론](https://github.com/aspnet/Security/issues/1338) GitHub에서 문제입니다.
+자세한 내용은 참조는 [인증 2.0에 대 한 토론](https://github.com/aspnet/Security/issues/1338) GitHub에서 문제입니다.
