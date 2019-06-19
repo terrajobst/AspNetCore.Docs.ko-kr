@@ -3,18 +3,16 @@ title: ASP.NET Core에서 사용 하 여 Grunt
 author: rick-anderson
 description: ASP.NET Core에서 사용 하 여 Grunt
 ms.author: riande
-ms.date: 05/14/2019
+ms.date: 06/18/2019
 uid: client-side/using-grunt
-ms.openlocfilehash: 4d9b6cf6f9a0007e9722bc054f0d9a7608f1473b
-ms.sourcegitcommit: 3ee6ee0051c3d2c8d47a58cb17eef1a84a4c46a0
+ms.openlocfilehash: 851ce3b50e88fee597518aef23276800f4b50f06
+ms.sourcegitcommit: a1283d486ac1dcedfc7ea302e1cc882833e2c515
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65620994"
+ms.lasthandoff: 06/18/2019
+ms.locfileid: "67207744"
 ---
 # <a name="use-grunt-in-aspnet-core"></a>ASP.NET Core에서 사용 하 여 Grunt
-
-[Noel Rice](https://blog.falafel.com/falafel-software-recognized-sitefinity-website-year/)
 
 Grunt은 스크립트 축소, TypeScript 컴파일, 코드 품질 다름이 도구, 프로세서를 전 하는 CSS, 및 클라이언트 개발을 지원 하기 위해 수행 해야 하는 모든 반복 작업에 대 한 자동화 하는 JavaScript 작업 실행 기는 합니다. Visual Studio에서 grunt 완전히 지원 됩니다.
 
