@@ -1,20 +1,20 @@
 ---
-title: Blazor 호스트 및 배포
+title: ASP.NET Core Blazor 호스트 및 배포
 author: guardrex
 description: Blazor 앱을 호스트하고 배포하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/23/2019
+ms.date: 06/14/2019
 uid: host-and-deploy/blazor/index
-ms.openlocfilehash: 0fc7643c65b93a63d7a594d35e4013eab76e9db8
-ms.sourcegitcommit: 4d05e30567279072f1b070618afe58ae1bcefd5a
+ms.openlocfilehash: 8a5ac5c58e7ceab07e55da8b61ebb01f7ac984bc
+ms.sourcegitcommit: 4ef0362ef8b6e5426fc5af18f22734158fe587e1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/29/2019
-ms.locfileid: "66376379"
+ms.lasthandoff: 06/17/2019
+ms.locfileid: "67153194"
 ---
-# <a name="host-and-deploy-blazor"></a>Blazor 호스트 및 배포
+# <a name="host-and-deploy-aspnet-core-blazor"></a>ASP.NET Core Blazor 호스트 및 배포
 
 작성자: [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com) 및 [Daniel Roth](https://github.com/danroth27)
 
@@ -55,4 +55,4 @@ Blazor 클라이언트 쪽 앱은 */bin/Release/{TARGET FRAMEWORK}/publish/{ASSE
 
 [Azure Storage](https://azure.microsoft.com/services/storage/)의 Blazor 클라이언트 쪽 앱은 스토리지 컨테이너에서 직접 정적 콘텐츠로 제공됩니다.
 
-자세한 내용은 [Blazor 클라이언트 쪽 호스트 및 배포(독립 실행형 배포): Azure Storage](xref:host-and-deploy/blazor/client-side#azure-storage)를 참조하세요.
+자세한 내용은 [ASP.NET Core Blazor 클라이언트 쪽 호스트 및 배포(독립 실행형 배포): Azure Storage](xref:host-and-deploy/blazor/client-side#azure-storage)를 참조하세요.
