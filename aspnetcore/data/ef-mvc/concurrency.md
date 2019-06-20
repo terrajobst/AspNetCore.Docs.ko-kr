@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: d3954800f4f1358565a627768e34465215dc4f6e
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: bfe417a6153f74cf0ca2d9bcde4db1bba8453b3b
+ms.sourcegitcommit: 4ef0362ef8b6e5426fc5af18f22734158fe587e1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64886658"
+ms.lasthandoff: 06/17/2019
+ms.locfileid: "67152893"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>자습서: 동시성 처리 - ASP.NET MVC 및 EF Core 사용
 
@@ -154,7 +154,7 @@ HttpPost `Edit` 메서드에 대한 기존 코드를 다음 코드로 바꿉니�
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_EditPost)]
 
-코드는 업데이트될 부서 읽기를 시도하여 시작합니다. `SingleOrDefaultAsync` 메서드가 Null을 반환하는 경우 부서가 다른 사용자에 의해 삭제되었습니다. 이 경우 코드는 편집 페이지가 오류 메시지와 함께 다시 표시될 수 있도록 게시된 양식 값을 사용하여 부서 엔터티를 만듭니다. 대신 부서 필드를 다시 표시하지 않고 오류 메시지만을 표시하는 경우 부서 엔터티를 다시 만들 필요가 없습니다.
+코드는 업데이트될 부서 읽기를 시도하여 시작합니다. `FirstOrDefaultAsync` 메서드가 Null을 반환하는 경우 부서가 다른 사용자에 의해 삭제되었습니다. 이 경우 코드는 편집 페이지가 오류 메시지와 함께 다시 표시될 수 있도록 게시된 양식 값을 사용하여 부서 엔터티를 만듭니다. 대신 부서 필드를 다시 표시하지 않고 오류 메시지만을 표시하는 경우 부서 엔터티를 다시 만들 필요가 없습니다.
 
 보기는 숨겨진 필드에 원래 `RowVersion` 값을 저장하고, 이 메서드는 `rowVersion` 매개 변수에서 해당 값을 받습니다. `SaveChanges`를 호출하기 전에 엔터티에 대한 `OriginalValues` 컬렉션에 해당 원래 `RowVersion` 속성 값을 넣어야 합니다.
 
