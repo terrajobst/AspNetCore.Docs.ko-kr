@@ -7,12 +7,12 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/17/2019
 uid: signalr/javascript-client
-ms.openlocfilehash: 8ac6528b203831f426feabf4cdd3e0ed293b75c5
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 1565aa38a69113781d7c272a1710298cccc1f045
+ms.sourcegitcommit: 3eedd6180fbbdcb81a8e1ebdbeb035bf4f2feb92
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64896530"
+ms.lasthandoff: 06/20/2019
+ms.locfileid: "67284512"
 ---
 # <a name="aspnet-core-signalr-javascript-client"></a>ASP.NET Core SignalR JavaScript 클라이언트
 
@@ -31,7 +31,7 @@ SignalR JavaScript 클라이언트 라이브러리는 [npm](https://www.npmjs.co
   npm install @aspnet/signalr
   ```
 
-그러면 npm이 *node_modules\\@aspnet\signalr\dist\browser* 폴더에 패키지 콘텐츠를 설치합니다. *wwwroot\\lib* 폴더 하위에 *signalr* 이라는 새 폴더를 만듭니다  *signalr.js* 파일을 *wwwroot\lib\signalr* 폴더로 복사합니다.
+그러면 npm이 *node_modules\\@aspnet\signalr\dist\browser* 폴더에 패키지 콘텐츠를 설치합니다. *wwwroot\\lib* 폴더 하위에 *signalr* 이라는 새 폴더를 만듭니다 *signalr.js* 파일을 *wwwroot\lib\signalr* 폴더로 복사합니다.
 
 ## <a name="use-the-signalr-javascript-client"></a>SignalR JavaScript 클라이언트 사용하기
 
@@ -130,13 +130,13 @@ const connection = new signalR.HubConnectionBuilder()
 
 ```javascript
 connection.onreconnecting((error) => {
-  console.assert(connection.state === signalR.HubConnectionState.Reconnecting);
+    console.assert(connection.state === signalR.HubConnectionState.Reconnecting);
 
-  document.getElementById("messageInput").disabled = true;
+    document.getElementById("messageInput").disabled = true;
 
-  const li = document.createElement("li");
-  li.textContent = `Connection lost due to error "${error}". Reconnecting.`;
-  document.getElementById("messagesList").appendChild(li);
+    const li = document.createElement("li");
+    li.textContent = `Connection lost due to error "${error}". Reconnecting.`;
+    document.getElementById("messagesList").appendChild(li);
 });
 ```
 
@@ -149,13 +149,13 @@ connection.onreconnecting((error) => {
 
 ```javascript
 connection.onreconnected((connectionId) => {
-  console.assert(connection.state === signalR.HubConnectionState.Connected);
+    console.assert(connection.state === signalR.HubConnectionState.Connected);
 
-  document.getElementById("messageInput").disabled = false;
+    document.getElementById("messageInput").disabled = false;
 
-  const li = document.createElement("li");
-  li.textContent = `Connection reestablished. Connected with connectionId "${connectionId}".`;
-  document.getElementById("messagesList").appendChild(li);
+    const li = document.createElement("li");
+    li.textContent = `Connection reestablished. Connected with connectionId "${connectionId}".`;
+    document.getElementById("messagesList").appendChild(li);
 });
 ```
 
@@ -179,14 +179,14 @@ async function start() {
 
 ```javascript
 connection.onclose((error) => {
-  console.assert(connection.state === signalR.HubConnectionState.Disconnected);
+    console.assert(connection.state === signalR.HubConnectionState.Disconnected);
 
-  document.getElementById("messageInput").disabled = true;
+    document.getElementById("messageInput").disabled = true;
 
-  const li = document.createElement("li");
-  li.textContent = `Connection closed due to error "${error}". Try refreshing this page to restart the connection.`;
-  document.getElementById("messagesList").appendChild(li);
-})
+    const li = document.createElement("li");
+    li.textContent = `Connection closed due to error "${error}". Try refreshing this page to restart the connection.`;
+    document.getElementById("messagesList").appendChild(li);
+});
 ```
 
 사용자 지정 연결을 끊기 전에 다시 연결 시도 횟수를 구성 하거나 다시 연결 시간을 변경 하려면 `withAutomaticReconnect` 각 다시 연결 시도 시작 하기 전에 대기할 밀리초의 지연을 나타내는 숫자 배열을 허용 합니다.
@@ -219,15 +219,16 @@ const connection = new signalR.HubConnectionBuilder()
     .withUrl("/chatHub")
     .withAutomaticReconnect({
         nextRetryDelayInMilliseconds: (previousRetryCount, elapsedMilliseconds) => {
-          if (elapsedMilliseconds < 60000) {
-            // If we've been reconnecting for less than 60 seconds so far,
-            // wait between 0 and 10 seconds before the next reconnect attempt.
-            return Math.random() * 10000;
-          } else {
-            // If we've been reconnecting for more than 60 seconds so far, stop reconnecting.
-            return null;
-          }
-        })
+            if (elapsedMilliseconds < 60000) {
+                // If we've been reconnecting for less than 60 seconds so far,
+                // wait between 0 and 10 seconds before the next reconnect attempt.
+                return Math.random() * 10000;
+            } else {
+                // If we've been reconnecting for more than 60 seconds so far, stop reconnecting.
+                return null;
+            }
+        }
+    })
     .build();
 ```
 
@@ -240,7 +241,7 @@ const connection = new signalR.HubConnectionBuilder()
 ::: moniker range="< aspnetcore-3.0"
 
 > [!WARNING]
-> 3.0 이전 SignalR에 대 한 JavaScript 클라이언트 하지 자동으로 다시 연결 합니다. 클라이언트에 수동으로 다시 연결 하는 코드를 작성 해야 합니다.
+> 3\.0 이전 SignalR에 대 한 JavaScript 클라이언트 하지 자동으로 다시 연결 합니다. 클라이언트에 수동으로 다시 연결 하는 코드를 작성 해야 합니다.
 
 ::: moniker-end
 
@@ -251,7 +252,7 @@ const connection = new signalR.HubConnectionBuilder()
 
 [!code-javascript[Reconnect the JavaScript client](javascript-client/sample/wwwroot/js/chat.js?range=28-40)]
 
-실제 구현을는 지 수 백오프를 사용 하거나 포기 하기 전에 지정 된 횟수를 다시 시도 하세요. 
+실제 구현을는 지 수 백오프를 사용 하거나 포기 하기 전에 지정 된 횟수를 다시 시도 하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 
