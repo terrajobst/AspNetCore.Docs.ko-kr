@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/11/2019
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: 1c78cc957b6ff77c91c8ca4aef59a1cacd85a8ca
-ms.sourcegitcommit: 3376f224b47a89acf329b2d2f9260046a372f924
+ms.openlocfilehash: 16ec2d5f2bccc59958b884869ef42af9cfa13df0
+ms.sourcegitcommit: 06a455d63ff7d6b571ca832e8117f4ac9d646baf
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/10/2019
-ms.locfileid: "65517086"
+ms.lasthandoff: 06/21/2019
+ms.locfileid: "67316597"
 ---
 # <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>ASP.NET Core를 사용 하 여 Microsoft 계정 외부 로그인 설정
 
@@ -59,7 +59,7 @@ Microsoft와 같은 중요 한 설정이 연결 `ClientId` 하 고 `ClientSecret
 
 ## <a name="configure-microsoft-account-authentication"></a>Microsoft 계정 인증 구성
 
-Microsoft 계정 서비스에 추가 합니다 `ConfigureServices` 의 메서드 *Startup.cs* 파일:
+Microsoft 계정 서비스를 추가할 `Startup.ConfigureServices`:
 
 [!code-csharp[](~/security/authentication/social/social-code/StartupMS.cs?name=snippet&highlight=10-14)]
 

@@ -4,14 +4,14 @@ author: rick-anderson
 description: 이 자습서에서는 기존 ASP.NET Core 앱에 Google 계정 사용자 인증의 통합을 보여 줍니다.
 ms.author: riande
 ms.custom: mvc, seodec18
-ms.date: 1/11/2019
+ms.date: 06/19/2019
 uid: security/authentication/google-logins
-ms.openlocfilehash: 44c79b3279db7946b6d89a726bd3f5acfb5f51af
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: b0edac411e73cd2eec7c4e212b99971577f59cfb
+ms.sourcegitcommit: 06a455d63ff7d6b571ca832e8117f4ac9d646baf
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64895540"
+ms.lasthandoff: 06/21/2019
+ms.locfileid: "67316446"
 ---
 # <a name="google-external-login-setup-in-aspnet-core"></a>ASP.NET Core에서 Google 외부 로그인 설정
 
@@ -44,7 +44,9 @@ API 자격 증명 및에서 사용량을 관리할 수 있습니다 합니다 [A
 
 ## <a name="configure-google-authentication"></a>Google 인증 구성
 
-Google 서비스를 추가할 `Startup.ConfigureServices`합니다.
+Google 서비스를 추가할 `Startup.ConfigureServices`:
+
+[!code-csharp[](~/security/authentication/social/social-code/StartupGoogle.cs?name=snippet_ConfigureServices&highlight=10-18)]
 
 [!INCLUDE [default settings configuration](includes/default-settings2-2.md)]
 
@@ -58,7 +60,7 @@ Google 서비스를 추가할 `Startup.ConfigureServices`합니다.
 
 [!INCLUDE[](includes/chain-auth-providers.md)]
 
-참조 된 [GoogleOptions](/dotnet/api/microsoft.aspnetcore.authentication.google.googleoptions) Google 인증에서 지 원하는 구성 옵션에 대 한 자세한 내용은 API 참조. 이 사용 하 여 사용자에 대 한 다른 정보를 요청할 수 수 있습니다.
+참조 된 <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions> Google 인증에서 지 원하는 구성 옵션에 대 한 자세한 내용은 API 참조. 이 사용 하 여 사용자에 대 한 다른 정보를 요청할 수 수 있습니다.
 
 ## <a name="change-the-default-callback-uri"></a>기본 콜백 URI를 변경 합니다.
 
@@ -68,7 +70,7 @@ URI 세그먼트 `/signin-google` Google 인증 공급자의 기본 콜백으로
 
 * 로그인 작동 하지 않습니다 하 고 오류를 가져오지 않음, 문제를 더 쉽게 디버그 하려면 개발 모드를 전환 합니다.
 * 호출 하 여 구성 되어 있지 않으면 Identity `services.AddIdentity` 에 `ConfigureServices`에서 결과 인증 하는 동안, *ArgumentException: 'SignInScheme' 옵션을 제공 해야*합니다. 이 자습서에 사용 되는 프로젝트 템플릿이이 수행 되도록 보장 합니다.
-* 사이트 데이터베이스를 초기 마이그레이션을 적용 하 여 만들어지지 않은, 하는 경우 얻게 *요청을 처리 하는 동안 데이터베이스 작업이 실패 했습니다.* 오류입니다. 탭 **마이그레이션 적용** 데이터베이스를 만들고 오류 지 나 새로 고침 합니다.
+* 사이트 데이터베이스를 초기 마이그레이션을 적용 하 여 만들어지지 않은, 하는 경우 얻게 *요청을 처리 하는 동안 데이터베이스 작업이 실패 했습니다.* 오류입니다. 선택 **마이그레이션 적용** 데이터베이스를 만들고 오류 지 나 페이지를 새로 고칩니다.
 
 ## <a name="next-steps"></a>다음 단계
 

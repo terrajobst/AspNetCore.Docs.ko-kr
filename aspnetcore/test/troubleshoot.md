@@ -4,14 +4,14 @@ author: Rick-Anderson
 description: ASP.NET Core 프로젝트를 사용하여 경고 및 오류를 이해하고 문제를 해결합니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/13/2019
+ms.date: 06/19/2019
 uid: test/troubleshoot
-ms.openlocfilehash: 3d755b2f0c509d65dea86bbe719e42935d87d546
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: bcec8a55a5111e1f3acf53ae2f57b45e6e609d25
+ms.sourcegitcommit: 9f11685382eb1f4dd0fb694dea797adacedf9e20
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64895330"
+ms.lasthandoff: 06/21/2019
+ms.locfileid: "67313682"
 ---
 # <a name="troubleshoot-aspnet-core-projects"></a>ASP.NET Core 프로젝트 문제 해결
 
@@ -27,11 +27,11 @@ ms.locfileid: "64895330"
 
 ## <a name="net-core-sdk-warnings"></a>.NET core SDK 경고
 
-### <a name="both-the-32-bit-and-64-bit-versions-of-the-net-core-sdk-are-installed"></a>32 비트와 64 비트 버전의.NET Core SDK가 설치 된
+### <a name="both-the-32-bit-and-64-bit-versions-of-the-net-core-sdk-are-installed"></a>.NET Core SDK의 32 비트 및 64 비트 버전이 모두 설치 되어
 
 에 **새 프로젝트** 대화 ASP.NET Core에 대 한 다음과 같은 경고가 표시 될 수 있습니다.
 
-> 모두 32 비트 및 64 비트 버전의.NET Core SDK 설치 됩니다. 에 설치 된 64 비트 버전의 템플릿만 ' c:\\Program Files\\dotnet\\sdk\\' 표시 됩니다.
+> .NET Core SDK의 32 비트 및 64 비트 버전이 설치 됩니다. 에 설치 된 64 비트 버전의 템플릿만 ' c:\\Program Files\\dotnet\\sdk\\' 표시 됩니다.
 
 이 경고를 표시 하는 경우 32 비트 (x86)와 버전의 64 비트 (x64) 합니다 [.NET Core SDK](https://www.microsoft.com/net/download/all) 설치 됩니다. 두 버전을 설치할 수 있습니다 하는 일반적인 이유는 다음과 같습니다.
 
@@ -45,7 +45,7 @@ ms.locfileid: "64895330"
 
 에 **새 프로젝트** 대화 ASP.NET Core에 대 한 다음과 같은 경고가 표시 될 수 있습니다.
 
-> .NET Core SDK는 여러 위치에 설치 됩니다. Sdk의 템플릿만에 설치 된 템플릿 ' c:\\Program Files\\dotnet\\sdk\\' 표시 됩니다.
+> .NET Core SDK는 여러 위치에 설치 됩니다. 에 설치 된 Sdk의 템플릿만 ' c:\\Program Files\\dotnet\\sdk\\' 표시 됩니다.
 
 하나 이상의.NET Core SDK 설치 디렉터리 외부에 있는 경우에이 메시지를 참조 하세요 *c:\\Program Files\\dotnet\\sdk\\* 합니다. 일반적으로.NET Core SDK MSI 설치 관리자 대신 복사/붙여넣기를 사용 하는 컴퓨터에 배포 된 경우 발생 합니다.
 

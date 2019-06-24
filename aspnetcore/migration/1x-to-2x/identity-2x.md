@@ -3,14 +3,14 @@ title: ASP.NET Core 2.0으로 인증 및 Id 마이그레이션
 author: scottaddie
 description: 이 문서에서는 ASP.NET Core 2.0으로 ASP.NET Core 1.x 인증 및 Id 마이그레이션에 대 한 가장 일반적인 단계를 간략하게 설명 합니다.
 ms.author: scaddie
-ms.date: 06/13/2019
+ms.date: 06/21/2019
 uid: migration/1x-to-2x/identity-2x
-ms.openlocfilehash: 3e8bc75b87a85159c9668b52eea32bb7d700be6c
-ms.sourcegitcommit: 516f166c5f7cec54edf3d9c71e6e2ba53fb3b0e5
+ms.openlocfilehash: c83356e12fa5ae581b369265b9d857b08445ed51
+ms.sourcegitcommit: 9f11685382eb1f4dd0fb694dea797adacedf9e20
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67196378"
+ms.lasthandoff: 06/21/2019
+ms.locfileid: "67313739"
 ---
 # <a name="migrate-authentication-and-identity-to-aspnet-core-20"></a>ASP.NET Core 2.0으로 인증 및 Id 마이그레이션
 
@@ -304,18 +304,31 @@ services.AddAuthentication(options =>
 ## <a name="windows-authentication-httpsys--iisintegration"></a>Windows 인증 (HTTP.sys / IISIntegration)
 
 Windows 인증의 두 가지 변형이 있습니다.
-1. 호스트에는 인증 된 사용자만 허용
-2. 호스트 허용 모두 익명 사용자를 인증 하 고
 
-위에서 설명한 첫 번째 변형 2.0 변경 내용의 영향을 받지 않습니다.
+* 호스트는 인증 된 사용자만 허용합니다. 이 변형 2.0 변경 내용의 영향을 받지 않습니다.
+* 호스트 허용 모두 익명 사용자를 인증 합니다. 이 변형 2.0 변경의 영향. 예를 들어 앱에서 익명 사용자를 허용 해야 합니다 [IIS](xref:host-and-deploy/iis/index) 또는 [HTTP.sys](xref:fundamentals/servers/httpsys) 계층 하지만 컨트롤러 수준에서 사용자 권한을 부여 합니다. 이 시나리오에서는 기본 스키마에 설정 된 `Startup.ConfigureServices` 메서드.
 
-위에서 설명한 두 번째 변형 2.0 변경의 영향. 예를 들어, 있습니다 수 허용 해서는 익명 사용자가 IIS에서 앱으로 또는 [HTTP.sys](xref:fundamentals/servers/httpsys) 컨트롤러 수준에서 권한 부여 하지만 사용자 계층입니다. 이 시나리오에서는 기본 스키마로 설정 합니다 `IISDefaults.AuthenticationScheme` 에 `Startup.ConfigureServices` 메서드:
+  에 대 한 [Microsoft.AspNetCore.Server.IISIntegration](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.IISIntegration/), 기본 스키마로 `IISDefaults.AuthenticationScheme`:
 
-```csharp
-services.AddAuthentication(IISDefaults.AuthenticationScheme);
-```
+  ```csharp
+  using Microsoft.AspNetCore.Server.IISIntegration;
 
-작업에서 챌린지를 권한 부여 요청을 방지 하는 기본 체계를 설정 하지 못했습니다.
+  services.AddAuthentication(IISDefaults.AuthenticationScheme);
+  ```
+
+  에 대 한 [Microsoft.AspNetCore.Server.HttpSys](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.HttpSys/), 기본 스키마로 `HttpSysDefaults.AuthenticationScheme`:
+
+  ```csharp
+  using Microsoft.AspNetCore.Server.HttpSys;
+
+  services.AddAuthentication(HttpSysDefaults.AuthenticationScheme);
+  ```
+
+  기본 스키마를 설정 하지 못했습니다 다음 예외로 인해 작업에서 권한 부여 (챌린지) 요청을 방지 합니다.
+
+  > `System.InvalidOperationException`: 없습니다 authenticationScheme 지정 하 고 찾을 수 없는 DefaultChallengeScheme 했습니다.
+
+자세한 내용은 <xref:security/authentication/windowsauth>을 참조하세요.
 
 <a name="identity-cookie-options"></a>
 
