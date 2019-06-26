@@ -298,6 +298,8 @@
           uid: blazor/javascript-interop
         - name: 디버그
           uid: blazor/debug
+        - name: 웹 API 호출
+          uid: blazor/call-web-api
         - name: 호스트 및 배포
           items:
             - name: 개요
