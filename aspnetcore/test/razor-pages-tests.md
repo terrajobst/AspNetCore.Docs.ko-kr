@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/27/2017
 uid: test/razor-pages-tests
-ms.openlocfilehash: f1526b8803f43ec8cbe77c1d2c100d9daf6cd316
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: f0e47f975579dc114eaeda375028ec62696f58ed
+ms.sourcegitcommit: 763af2cbdab0da62d1f1cfef4bcf787f251dfb5c
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64893720"
+ms.lasthandoff: 06/26/2019
+ms.locfileid: "67394734"
 ---
 # <a name="razor-pages-unit-tests-in-aspnet-core"></a>ASP.NET Core에서 razor 페이지 단위 테스트
 
@@ -66,7 +66,7 @@ dotnet test
 | 테스트 앱 폴더 | 설명 |
 | --------------- | ----------- |
 | *UnitTests*     | <ul><li>*DataAccessLayerTest.cs* DAL에 대 한 단위 테스트를 포함 합니다.</li><li>*IndexPageTests.cs* 인덱스 페이지 모델에 대 한 단위 테스트를 포함 합니다.</li></ul> |
-| *유틸리티*     | 포함 된 `TestingDbContextOptions` 데이터베이스를 각 테스트에 대 한 초기 상태로 다시 설정 됩니다 있도록 새 데이터베이스 각 DAL 단위 테스트에 대 한 상황에 맞는 옵션을 만드는 데 사용 되는 메서드. |
+| *유틸리티*     | 포함 된 `TestDbContextOptions` 데이터베이스를 각 테스트에 대 한 초기 상태로 다시 설정 됩니다 있도록 새 데이터베이스 각 DAL 단위 테스트에 대 한 상황에 맞는 옵션을 만드는 데 사용 되는 메서드. |
 
 테스트 프레임 워크 [xUnit](https://xunit.github.io/)합니다. 모의 프레임 워크 개체가 [Moq](https://github.com/moq/moq4)합니다.
 
@@ -93,14 +93,14 @@ using (var db = new AppDbContext(optionsBuilder.Options))
 }
 ```
 
-이 방식의 문제는 각 테스트는이 어떤 상태 이전 테스트 왼쪽에서 데이터베이스에 수신 하는 경우 이 서로 간섭 하지 않는 원자성 단위 테스트를 작성 하려고 할 때 문제가 될 수 있습니다. 적용할 합니다 `AppDbContext` 각 테스트에 대 한 새 데이터베이스 컨텍스트를 사용 하려면 제공를 `DbContextOptions` 새 서비스 공급자를 기반으로 하는 인스턴스. 테스트 응용 프로그램을 사용 하는 방법을 보여 줍니다 해당 `Utilities` 클래스 메서드에 `TestingDbContextOptions` (*tests/RazorPagesTestSample.Tests/Utilities/Utilities.cs*):
+이 방식의 문제는 각 테스트는이 어떤 상태 이전 테스트 왼쪽에서 데이터베이스에 수신 하는 경우 이 서로 간섭 하지 않는 원자성 단위 테스트를 작성 하려고 할 때 문제가 될 수 있습니다. 적용할 합니다 `AppDbContext` 각 테스트에 대 한 새 데이터베이스 컨텍스트를 사용 하려면 제공를 `DbContextOptions` 새 서비스 공급자를 기반으로 하는 인스턴스. 테스트 응용 프로그램을 사용 하는 방법을 보여 줍니다 해당 `Utilities` 클래스 메서드에 `TestDbContextOptions` (*tests/RazorPagesTestSample.Tests/Utilities/Utilities.cs*):
 
 [!code-csharp[](razor-pages-tests/samples/2.x/tests/RazorPagesTestSample.Tests/Utilities/Utilities.cs?name=snippet1)]
 
 사용 하는 `DbContextOptions` DAL 단위 테스트 하면 각 테스트를 새 데이터베이스 인스턴스를 사용 하 여 원자 단위로 실행 합니다.
 
 ```csharp
-using (var db = new AppDbContext(Utilities.TestingDbContextOptions()))
+using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
 {
     // Use the db here in the unit test.
 }
