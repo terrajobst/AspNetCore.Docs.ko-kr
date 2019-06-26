@@ -220,8 +220,6 @@
               uid: tutorials/razor-pages/validation
         - name: 필터
           uid: razor-pages/filter
-        - name: Razor 클래스 라이브러리
-          uid: razor-pages/ui-class
         - name: 경로 및 앱 규칙
           uid: razor-pages/razor-pages-conventions
         - name: 파일 업로드
@@ -344,6 +342,8 @@
       uid: mvc/views/layout
     - name: Razor 구문
       uid: mvc/views/razor
+    - name: Razor 클래스 라이브러리
+      uid: razor-pages/ui-class
     - name: 태그 도우미
       uid: mvc/views/tag-helpers/builtin-th/Index
       items:
