@@ -296,11 +296,13 @@
           uid: blazor/routing
         - name: JavaScript interop
           uid: blazor/javascript-interop
+        - name: 보안 및 ID
+          uid: security/blazor/index
         - name: 디버그
           uid: blazor/debug
         - name: 웹 API 호출
           uid: blazor/call-web-api
-        - name: 호스트 및 배포
+        - name: 호스팅 및 배포
           items:
             - name: 개요
               uid: host-and-deploy/blazor/index
@@ -456,9 +458,6 @@
         - name: 사용자 및 그룹
           uid: signalr/groups
           displayName: signalr
-        - name: Azure에 게시
-          uid: signalr/publish-to-azure-web-app
-          displayName: signalr
         - name: API 디자인 고려 사항
           uid: signalr/api-design
           displayName: signalr
@@ -489,9 +488,9 @@
         - name: 개요
           displayName: signalr
           uid: signalr/scale
-        - name: Azure SignalR Service
+        - name: Azure App Service
+          uid: signalr/publish-to-azure-web-app
           displayName: signalr
-          href: /azure/azure-signalr/signalr-overview?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
         - name: Redis 백플레인
           displayName: signalr
           uid: signalr/redis-backplane
@@ -962,6 +961,8 @@
       uid: security/ip-safelist
     - name: 애플리케이션 보안 - OWASP
       href: 'https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/DotNet_Security_Cheat_Sheet.md'
+    - name: Blazor
+      uid: security/blazor/index
 - name: 성능
   items:
     - name: 개요
