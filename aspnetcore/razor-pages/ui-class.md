@@ -4,15 +4,15 @@ author: Rick-Anderson
 description: 부분 뷰를 사용 하 여 ASP.NET Core에서 클래스 라이브러리에 다시 사용할 수 있는 Razor UI를 만드는 방법에 설명 합니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-ms.date: 06/24/2019
+ms.date: 06/28/2019
 ms.custom: mvc, seodec18
 uid: razor-pages/ui-class
-ms.openlocfilehash: 96ef8fc055a6b92cd0808d02031d917b8446f305
-ms.sourcegitcommit: 763af2cbdab0da62d1f1cfef4bcf787f251dfb5c
+ms.openlocfilehash: d59f643a23b48ccbddf498ef534ee8432b010f40
+ms.sourcegitcommit: 6d9cf728465cdb0de1037633a8b7df9a8989cccb
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2019
-ms.locfileid: "67394754"
+ms.lasthandoff: 06/28/2019
+ms.locfileid: "67463263"
 ---
 # <a name="create-reusable-ui-using-the-razor-class-library-project-in-aspnet-core"></a>ASP.NET Core에서 Razor 클래스 라이브러리 프로젝트를 사용 하 여 다시 사용할 수 있는 UI 만들기
 
@@ -228,6 +228,8 @@ RCL 콘텐츠 웹 앱의 일부인 것 처럼 참조 *페이지* 폴더를 다�
 </body>
 ```
 
+::: moniker range=">= aspnetcore-3.0"
+
 ## <a name="create-an-rcl-with-static-assets"></a>RCL 정적 자산 만들기
 
 RCL는 RCL의 사용 중인 앱에서 참조할 수 있는 도우미 정적 자산 필요할 수 있습니다. ASP.NET Core를 사용 중인 앱에 사용할 수 있는 정적 자산을 포함 하는 RCLs를 만들 수 있습니다.
@@ -254,3 +256,5 @@ RCL를 빌드할 때 정적 웹 자산 위치를 설명 하는 매니페스트�
 ### <a name="publish"></a>게시
 
 참조 되는 모든 프로젝트 및 패키지에서 도우미 자산에 복사 됩니다 앱을 게시할 때 합니다 *wwwroot* 폴더에서 게시 된 앱의 `_content/{LIBRARY NAME}/`합니다.
+
+::: moniker-end

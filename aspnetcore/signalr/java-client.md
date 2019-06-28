@@ -5,14 +5,14 @@ description: ASP.NET Core SignalR Java 클라이언트를 사용 하는 방법�
 monikerRange: '>= aspnetcore-2.2'
 ms.author: mimengis
 ms.custom: mvc
-ms.date: 03/14/2019
+ms.date: 06/27/2019
 uid: signalr/java-client
-ms.openlocfilehash: e5a4a2d7df7e5b95f8f814aad5ff2844476c8b3d
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: eea1dfb7d8afcd34c0dacd8315ad196d7235c9f7
+ms.sourcegitcommit: 6d9cf728465cdb0de1037633a8b7df9a8989cccb
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64892380"
+ms.lasthandoff: 06/28/2019
+ms.locfileid: "67463265"
 ---
 # <a name="aspnet-core-signalr-java-client"></a>ASP.NET Core SignalR Java 클라이언트
 
@@ -98,9 +98,20 @@ HubConnection hubConnection = HubConnectionBuilder.create("YOUR HUB URL HERE")
 
 ## <a name="known-limitations"></a>알려진 제한 사항
 
+::: moniker range=">= aspnetcore-3.0"
+
+* JSON 프로토콜에만 지원 됩니다.
+* 대체 (fallback) 전송 및 서버 전송 이벤트 전송을 지원 되지 않습니다.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 * JSON 프로토콜에만 지원 됩니다.
 * Websocket 전송만 지원 됩니다.
 * 스트리밍 아직 지원 되지 않습니다.
+
+::: moniker-end
 
 ## <a name="additional-resources"></a>추가 자료
 
