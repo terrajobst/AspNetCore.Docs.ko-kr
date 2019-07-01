@@ -4,14 +4,14 @@ author: guardrex
 description: 앱 시작 및 수명 관리를 담당하는 ASP.NET Core의 웹 호스트에 대해 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/11/2019
+ms.date: 06/14/2019
 uid: fundamentals/host/web-host
-ms.openlocfilehash: 48f3b664d901bdfb27cdf9e798fa60c0587d1def
-ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
+ms.openlocfilehash: c5d5b723b31a5c211a47e378e50be858fda0b2bd
+ms.sourcegitcommit: 9f11685382eb1f4dd0fb694dea797adacedf9e20
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65610286"
+ms.lasthandoff: 06/21/2019
+ms.locfileid: "67313791"
 ---
 # <a name="aspnet-core-web-host"></a>ASP.NET Core 웹 호스트
 
@@ -19,27 +19,21 @@ ms.locfileid: "65610286"
 
 ASP.NET Core 앱은 *호스트*를 구성 및 실행합니다. 호스트는 앱 시작 및 수명 관리를 담당합니다. 최소한으로 호스트는 서버 및 요청 처리 파이프라인을 구성합니다. 호스트는 로깅, 종속성 주입 및 구성을 설정할 수도 있습니다.
 
-::: moniker range="<= aspnetcore-1.1"
+::: moniker range=">= aspnetcore-3.0"
 
-이 항목의 1.1 버전인 경우 [ASP.NET Core 웹 호스트(버전 1.1, PDF)](https://webpifeed.blob.core.windows.net/webpifeed/Partners/Web-Host_1.1.pdf)를 다운로드하세요.
-
-::: moniker-end
-
-::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
-
-이 문서에서는 웹앱 호스팅을 위한 ASP.NET Core 웹 호스트(<xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder>)를 다룹니다. .NET 일반 호스트([IHostBuilder](/dotnet/api/microsoft.extensions.hosting.ihostbuilder))에 대한 자세한 내용은 <xref:fundamentals/host/generic-host>를 참조하세요.
+이 문서에서는 이전 버전과의 호환성을 위해서만 사용 가능한 상태를 유지하는 웹 호스트에 설명합니다. 모든 앱 유형에 [일반 호스트](xref:fundamentals/host/generic-host)를 사용하는 것이 좋습니다.
 
 ::: moniker-end
 
-::: moniker range="> aspnetcore-2.2"
+::: moniker range="<= aspnetcore-2.2"
 
-이 문서에서는 ASP.NET Core 웹 호스트([IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder))를 다룹니다. ASP.NET Core 3.0에서는 일반 호스트가 웹 호스트를 대체합니다. 자세한 내용은 [호스트](xref:fundamentals/index#host)를 참조하세요.
+이 문서에서는 웹앱 호스트를 위한 웹 호스트에 대해 다룹니다. 다른 종류의 앱인 경우 [일반 호스트](xref:fundamentals/host/generic-host)를 사용합니다.
 
 ::: moniker-end
 
 ## <a name="set-up-a-host"></a>호스트 설정
 
-[IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder)의 인스턴스를 사용하여 호스트를 만듭니다. 이는 일반적으로 앱의 진입점에서 수행되는 `Main` 메서드입니다. 작성기 메서드 이름 `CreateWebHostBuilder`는 외부 구성 요소(예: [Entity Framework](/ef/core/))에 작성기 메서드를 식별하는 특수 이름입니다.
+[IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder)의 인스턴스를 사용하여 호스트를 만듭니다. 이는 일반적으로 앱의 진입점에서 수행되는 `Main` 메서드입니다.
 
 프로젝트 템플릿에서 `Main`은 *Program.cs*에 있습니다. 일반적인 앱은 [CreateDefaultBuilder](/dotnet/api/microsoft.aspnetcore.webhost.createdefaultbuilder)를 호출하여 호스트 설정을 시작합니다.
 
@@ -56,6 +50,8 @@ public class Program
             .UseStartup<Startup>();
 }
 ```
+
+`CreateDefaultBuilder`를 호출하는 코드는 `CreateWebHostBuilder`라는 메서드에 포함되어, 빌더 개체에서 `Run`을 호출하는 `Main`의 코드와 분리됩니다. 이 분리는 [Entity Framework Core 도구](/ef/core/miscellaneous/cli/)를 사용하는 경우 필요합니다. 이 도구는 앱을 실행하지 않고 호스트를 구성하기 위해 디자인 타임에 호출할 수 있는 `CreateWebHostBuilder` 메서드를 찾으려 합니다. `IDesignTimeDbContextFactory`를 구현하는 방법도 있습니다. 자세한 내용은 [디자인 타임 DbContext 만들기](/ef/core/miscellaneous/cli/dbcontext-creation)를 참조하세요.
 
 `CreateDefaultBuilder`는 다음 작업을 수행합니다.
 
@@ -131,9 +127,9 @@ public class Program
 앱 구성에 대한 자세한 내용은 <xref:fundamentals/configuration/index>를 참조하세요.
 
 > [!NOTE]
-> ASP.NET Core 2.x에서는 정적 `CreateDefaultBuilder` 메서드 사용에 대한 대안으로 [WebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilder)에서 호스트를 만들 수 있도록 지원합니다. 자세한 내용은 ASP.NET Core 1.x 탭을 참조하세요.
+> ASP.NET Core 2.x에서는 정적 `CreateDefaultBuilder` 메서드 사용에 대한 대안으로 [WebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilder)에서 호스트를 만들 수 있도록 지원합니다.
 
-호스트를 설정할 때 [Configure](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configure?view=aspnetcore-1.1) 및 [ConfigureServices](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilder.configureservices?view=aspnetcore-1.1) 메서드가 제공됩니다. `Startup` 클래스가 지정된 경우 `Configure` 메서드를 정의해야 합니다. 자세한 내용은 <xref:fundamentals/startup>을 참조하세요. `ConfigureServices`에 대한 여러 호출은 서로 추가합니다. `WebHostBuilder`에서 `Configure` 또는 `UseStartup`에 대한 여러 호출은 이전 설정을 대체합니다.
+호스트를 설정할 때 [Configure](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configure) 및 [ConfigureServices](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilder.configureservices) 메서드가 제공됩니다. `Startup` 클래스가 지정된 경우 `Configure` 메서드를 정의해야 합니다. 자세한 내용은 <xref:fundamentals/startup>을 참조하세요. `ConfigureServices`에 대한 여러 호출은 서로 추가합니다. `WebHostBuilder`에서 `Configure` 또는 `UseStartup`에 대한 여러 호출은 이전 설정을 대체합니다.
 
 ## <a name="host-configuration-values"></a>호스트 구성 값
 

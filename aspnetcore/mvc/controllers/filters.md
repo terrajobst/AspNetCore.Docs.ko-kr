@@ -17,7 +17,7 @@ ms.locfileid: "66223029"
 
 작성자: [Kirk Larkin](https://github.com/serpent5), [Rick Anderson](https://twitter.com/RickAndMSFT), [Tom Dykstra](https://github.com/tdykstra/), [Steve Smith](https://ardalis.com/)
 
-ASP.NET Core에서 ‘필터’를 사용하면 요청 처리 파이프라인의 특정 단계 전후에 코드를 실행할 수 있습니다.
+ASP.NET Core에서 ‘필터’를 사용하면 요청 처리 파이프라인의 특정 단계 전후에 코드를 실행할 수 있습니다. 
 
 기본 제공 필터는 다음과 같은 작업을 처리합니다.
 
@@ -32,7 +32,7 @@ ASP.NET Core에서 ‘필터’를 사용하면 요청 처리 파이프라인의
 
 ## <a name="how-filters-work"></a>필터 작동 방법
 
-필터는 ‘필터 파이프라인’이라고도 하는 ‘ASP.NET Core 동작 호출 파이프라인’내에서 실행됩니다.  필터 파이프라인은 ASP.NET Core가 실행할 작업을 선택한 후에 실행됩니다.
+필터는 ‘필터 파이프라인’이라고도 하는 ‘ASP.NET Core 동작 호출 파이프라인’내에서 실행됩니다.    필터 파이프라인은 ASP.NET Core가 실행할 작업을 선택한 후에 실행됩니다.
 
 ![다른 미들웨어, 라우팅 미들웨어, 작업 선택 영역 및 ASP.NET Core 작업 호출 파이프라인을 통해 요청이 처리됩니다. 응답이 클라이언트에 전송되기 전에 작업 선택 영역, 라우팅 미들웨어 및 기타 다양한 미들웨어를 통해 요청 처리가 계속됩니다.](filters/_static/filter-pipeline-1.png)
 
@@ -76,7 +76,7 @@ ASP.NET Core에서 ‘필터’를 사용하면 요청 처리 파이프라인의
 
 단일 클래스에서 여러 필터 단계에 대한 인터페이스를 구현할 수 있습니다. 예를 들어 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> 클래스는 `IActionFilter`, `IResultFilter` 및 해당 비동기 값을 구현합니다.
 
-필터 인터페이스의 동기 또는 비동기 버전 중 **하****나**를 구현합니다. 런타임은 먼저 필터가 비동기 인터페이스를 구현하는지를 확인하고 그렇다면 이를 호출합니다. 그렇지 않으면 동기 인터페이스의 메서드를 호출합니다. 비동기 및 동기 인터페이스가 모두 하나의 클래스에서 구현되는 경우에는 비동기 메서드만 호출됩니다. <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute>와 같은 추상 클래스를 사용하는 경우 각 필터 형식에 대한 동기 메서드 또는 비동기 메서드만 재정의합니다.
+필터 인터페이스의 동기 또는 비동기 버전 중 **하** **나**를 구현합니다. 런타임은 먼저 필터가 비동기 인터페이스를 구현하는지를 확인하고 그렇다면 이를 호출합니다. 그렇지 않으면 동기 인터페이스의 메서드를 호출합니다. 비동기 및 동기 인터페이스가 모두 하나의 클래스에서 구현되는 경우에는 비동기 메서드만 호출됩니다. <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute>와 같은 추상 클래스를 사용하는 경우 각 필터 형식에 대한 동기 메서드 또는 비동기 메서드만 재정의합니다.
 
 ### <a name="built-in-filter-attributes"></a>기본 제공 필터 특성
 
@@ -417,7 +417,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * 작업 내에서 발생하는 트래핑 예외에 좋습니다.
 * 오류 처리 미들웨어만큼 유연하지 않습니다.
 
-예외 처리의 경우 미들웨어를 선호합니다. 어떤 작업 메서드가 호출되는지에 따라 오류 처리 방식이 ‘다른’ 경우에만 예외 필터를 사용합니다. 예를 들어 앱에는 API 엔드포인트 및 보기/HTML 모두에 대한 작업 메서드가 있을 수 있습니다. API 엔드포인트는 JSON으로 오류 정보를 반환할 수 있습니다. 반면 보기 기반 작업은 HTML로 오류 페이지를 반환할 수 있습니다.
+예외 처리의 경우 미들웨어를 선호합니다. 어떤 작업 메서드가 호출되는지에 따라 오류 처리 방식이 ‘다른’ 경우에만 예외 필터를 사용합니다.  예를 들어 앱에는 API 엔드포인트 및 보기/HTML 모두에 대한 작업 메서드가 있을 수 있습니다. API 엔드포인트는 JSON으로 오류 정보를 반환할 수 있습니다. 반면 보기 기반 작업은 HTML로 오류 페이지를 반환할 수 있습니다.
 
 ## <a name="result-filters"></a>결과 필터
 

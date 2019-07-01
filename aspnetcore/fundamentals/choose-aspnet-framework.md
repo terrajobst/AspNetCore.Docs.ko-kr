@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 05/02/2019
 uid: fundamentals/choose-between-aspnet-and-aspnetcore
-ms.openlocfilehash: a51d9946c9e65bd1665c610153f724c6087c9f7f
-ms.sourcegitcommit: b8ed594ab9f47fa32510574f3e1b210cff000967
+ms.openlocfilehash: 97d65df8df1e27694d818098958288874e8ab92e
+ms.sourcegitcommit: 47cc13ab90913af9a2887cef0896bb4e9aba4dd5
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/28/2019
-ms.locfileid: "66251374"
+ms.lasthandoff: 06/26/2019
+ms.locfileid: "67399173"
 ---
 # <a name="choose-between-aspnet-4x-and-aspnet-core"></a>ASP.NET 4.x와 ASP.NET Core 중에서 선택
 
@@ -36,7 +36,7 @@ ASP.NET 4.x는 Windows에서 엔터프라이즈급 서버 기반 웹앱을 빌�
 |Windows, macOS 또는 Linux용 빌드|Windows용 빌드|
 |[Razor 페이지](xref:razor-pages/index)는 ASP.NET Core 2.x에서 웹 UI를 만드는 좋은 방법입니다. [MVC](xref:mvc/overview), [Web API](xref:tutorials/first-web-api) 및 [SignalR](xref:signalr/introduction)도 참조하세요.|[Web Forms](/aspnet/web-forms), [SignalR](/aspnet/signalr), [MVC](/aspnet/mvc), [Web API](/aspnet/web-api/), [WebHooks](/aspnet/webhooks/) 또는 [웹 페이지](/aspnet/web-pages)를 사용합니다.|
 |컴퓨터당 여러 버전|컴퓨터당 하나의 버전|
-|C# 또는 F#을 사용하여 Visual Studio, [Mac용 Visual Studio](https://visualstudio.microsoft.com/vs/mac/) 또는 [Visual Studio Code](https://code.visualstudio.com/)에서 개발|C#, VB 또는 F#을 사용하여 Visual Studio에서 개발|
+|C# 또는 F#을 사용하여 [Visual Studio](https://visualstudio.microsoft.com/vs/), [Mac용 Visual Studio](https://visualstudio.microsoft.com/vs/mac/), 또는 [Visual Studio Code](https://code.visualstudio.com/)에서 개방|C#, VB 또는 F#을 사용하여 [Visual Studio](https://visualstudio.microsoft.com/vs/)에서 개발|
 |ASP.NET 4.x보다 고성능|성능 양호|
 |[.NET Framework 또는 .NET Core 런타임 선택](/dotnet/standard/choosing-core-framework-server)|.NET Framework 런타임 사용|
 

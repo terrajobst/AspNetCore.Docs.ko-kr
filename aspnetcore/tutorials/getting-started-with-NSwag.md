@@ -4,14 +4,14 @@ author: zuckerthoben
 description: NSwag를 사용하여 ASP.NET Core Web API의 설명서 및 도움말 페이지를 생성하는 방법을 알아봅니다.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 12/30/2018
+ms.date: 06/21/2019
 uid: tutorials/get-started-with-nswag
-ms.openlocfilehash: 787f51629b044e638d2790b3dda8723c2644c2d8
-ms.sourcegitcommit: a04eb20e81243930ec829a9db5dd5de49f669450
+ms.openlocfilehash: c5b2dc47328d6d3c271a87579fa8c300109bd734
+ms.sourcegitcommit: 06a455d63ff7d6b571ca832e8117f4ac9d646baf
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/03/2019
-ms.locfileid: "66470433"
+ms.lasthandoff: 06/21/2019
+ms.locfileid: "67316551"
 ---
 # <a name="get-started-with-nswag-and-aspnet-core"></a>NSwag 및 ASP.NET Core 시작
 
@@ -43,7 +43,7 @@ NSwag를 사용하면 기존 API가 필요하지 않으므로 Swagger를 통합�
 * 구현된 Web API에 대한 Swagger 사양을 생성합니다.
 * Web API를 찾아보고 테스트하는 Swagger UI를 제공합니다.
 
-[NSwag](https://github.com/RSuter/NSwag) ASP.NET Core 미들웨어를 사용하려면 [NSwag.AspNetCore](https://www.nuget.org/packages/NSwag.AspNetCore/) NuGet 패키지를 설치합니다. 이 패키지에는 Swagger 사양, Swagger UI(v2 및 v3) 및 [ReDoc UI](https://github.com/Rebilly/ReDoc)를 생성하고 제공하는 미들웨어가 포함되어 있습니다.
+[NSwag](https://github.com/RicoSuter/NSwag) ASP.NET Core 미들웨어를 사용하려면 [NSwag.AspNetCore](https://www.nuget.org/packages/NSwag.AspNetCore/) NuGet 패키지를 설치합니다. 이 패키지에는 Swagger 사양, Swagger UI(v2 및 v3) 및 [ReDoc UI](https://github.com/Rebilly/ReDoc)를 생성하고 제공하는 미들웨어가 포함되어 있습니다.
 
 다음 방법 중 하나를 사용하여 NSwag NuGet 패키지를 설치합니다.
 
@@ -91,17 +91,13 @@ dotnet add TodoApi.csproj package NSwag.AspNetCore
 
 ## <a name="add-and-configure-swagger-middleware"></a>Swagger 미들웨어 추가 및 구성
 
- `Startup` 클래스에서 다음 단계를 수행하여 ASP.NET Core 앱에서 Swagger를 추가하고 구성합니다.
+다음 단계를 수행하여 ASP.NET Core 앱에서 Swagger를 추가하고 구성합니다.
 
-* 다음 네임스페이스를 가져옵니다.
-
-[!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.NSwag/Startup.cs?name=snippet_StartupConfigureImports)]
-
-* `ConfigureServices` 메서드에서 필수 Swagger 서비스를 등록합니다.
+* `Startup.ConfigureServices` 메서드에서 필수 Swagger 서비스를 등록합니다.
 
 [!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.NSwag/Startup.cs?name=snippet_ConfigureServices&highlight=8)]
 
-* `Configure` 메서드에서 생성된 Swagger 사양 및 Swagger UI를 지원하기 위해 미들웨어를 사용하도록 설정합니다.
+* `Startup.Configure` 메서드에서 생성된 Swagger 사양 및 Swagger UI를 지원하기 위해 미들웨어를 사용하도록 설정합니다.
 
 [!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.NSwag/Startup.cs?name=snippet_Configure&highlight=6-7)]
 
@@ -113,15 +109,15 @@ dotnet add TodoApi.csproj package NSwag.AspNetCore
 
 다음 옵션 중 하나를 선택하여 NSwag의 코드 생성 기능을 활용할 수 있습니다.
 
-* [NSwagStudio](https://github.com/NSwag/NSwag/wiki/NSwagStudio) &ndash; C# 또는 TypeScript에서 API 클라이언트 코드를 생성하기 위한 Windows 데스크톱 앱.
+* [NSwagStudio](https://github.com/RicoSuter/NSwag/wiki/NSwagStudio) &ndash; C# 또는 TypeScript에서 API 클라이언트 코드를 생성하기 위한 Windows 데스크톱 앱.
 * 프로젝트 내에서 코드 생성을 위한 [NSwag.CodeGeneration.CSharp](https://www.nuget.org/packages/NSwag.CodeGeneration.CSharp/) 또는 [NSwag.CodeGeneration.TypeScript](https://www.nuget.org/packages/NSwag.CodeGeneration.TypeScript/) NuGet 패키지.
-* [명령줄](https://github.com/NSwag/NSwag/wiki/CommandLine)의 NSwag.
-* [NSwag.MSBuild](https://github.com/NSwag/NSwag/wiki/MSBuild) NuGet 패키지.
+* [명령줄](https://github.com/RicoSuter/NSwag/wiki/CommandLine)의 NSwag.
+* [NSwag.MSBuild](https://github.com/RicoSuter/NSwag/wiki/MSBuild) NuGet 패키지.
 * C# 또는 TypeScript에서 API 클라이언트 코드 생성을 위한 [Unchase OpenAPI(Swagger) 연결된 서비스](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseopenapiconnectedservice) &ndash; Visual Studio 연결된 서비스. 또한 NSwag를 사용하여 OpenAPI 서비스용 C# 컨트롤러를 생성합니다.
 
 ### <a name="generate-code-with-nswagstudio"></a>NSwagStudio로 코드 생성
 
-* [NSwagStudio GitHub 리포지토리](https://github.com/RSuter/NSwag/wiki/NSwagStudio)의 지침에 따라 NSwagStudio를 설치합니다.
+* [NSwagStudio GitHub 리포지토리](https://github.com/RicoSuter/NSwag/wiki/NSwagStudio)의 지침에 따라 NSwagStudio를 설치합니다.
 * NSwagStudio를 시작하고 **Swagger 사양 URL** 텍스트 상자에 *swagger.json* 파일 URL을 입력합니다. 예: *http://localhost:44354/swagger/v1/swagger.json* .
 * **로컬 복사본 만들기** 단추를 클릭하여 Swagger 사양의 JSON 표시를 생성합니다.
 
@@ -277,7 +273,7 @@ NSwag는 [리플렉션](/dotnet/csharp/programming-guide/concepts/reflection)을
 
 ::: moniker range=">= aspnetcore-2.1"
 
- NSwag는 [리플렉션](/dotnet/csharp/programming-guide/concepts/reflection)을 사용하고 웹 API 작업의 권장 반환 형식은 [ActionResult\<T>](xref:Microsoft.AspNetCore.Mvc.ActionResult%601)이므로 `T`로 정의된 반환 형식만 유추할 수 있습니다. 다른 가능한 반환 형식은 자동으로 유추할 수 없습니다. 
+ NSwag는 [리플렉션](/dotnet/csharp/programming-guide/concepts/reflection)을 사용하고 웹 API 작업의 권장 반환 형식은 [ActionResult\<T>](xref:Microsoft.AspNetCore.Mvc.ActionResult%601)이므로 `T`로 정의된 반환 형식만 유추할 수 있습니다. 다른 가능한 반환 형식은 자동으로 유추할 수 없습니다.
 
 다음 예제를 참조하세요.
 

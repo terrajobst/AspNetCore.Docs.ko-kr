@@ -7,12 +7,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 06/03/2019
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: 4cfca4b38543ff073bb98dc09b483d96096928ae
-ms.sourcegitcommit: 5dd2ce9709c9e41142771e652d1a4bd0b5248cec
+ms.openlocfilehash: 3a254af4d56cb4abc7004a67b0d0b42de2b878b1
+ms.sourcegitcommit: 47cc13ab90913af9a2887cef0896bb4e9aba4dd5
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/05/2019
-ms.locfileid: "66692561"
+ms.lasthandoff: 06/26/2019
+ms.locfileid: "67399111"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>Windows 서비스에서 ASP.NET Core 호스트
 
@@ -211,7 +211,7 @@ Active Directory를 사용할 때 사용자를 관리하는 대체 방법은 관
 
 서비스 사용자 계정에 대해 *서비스로 로그온* 권한을 설정하려면:
 
-1. *secpool.msc*를 실행하여 로컬 보안 정책 편집기를 엽니다.
+1. *secpol.msc*를 실행하여 로컬 보안 정책 편집기를 엽니다.
 1. **로컬 정책** 노드를 확장하고 **사용자 권한 할당**을 선택합니다.
 1. **서비스로 로그온** 정책을 엽니다.
 1. **사용자 또는 그룹 추가**를 선택합니다.
