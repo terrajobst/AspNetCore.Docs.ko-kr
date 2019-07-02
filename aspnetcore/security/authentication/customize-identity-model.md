@@ -3,14 +3,14 @@ title: ASP.NET core에서 identity 모델 사용자 지정 합니다.
 author: ajcvickers
 description: 이 문서에서는 ASP.NET Core Id에 대 한 기본 Entity Framework Core 데이터 모델을 사용자 지정 하는 방법을 설명 합니다.
 ms.author: avickers
-ms.date: 04/24/2019
+ms.date: 07/01/2019
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 53ce77e20722f3ba3282ff4455a0b70d30e635b0
-ms.sourcegitcommit: ffe3ed7921ec6c7c70abaac1d10703ec9a43374c
+ms.openlocfilehash: f549fdff4a416b5fadcb2b1078b051bbab8e402e
+ms.sourcegitcommit: eb3e51d58dd713eefc242148f45bd9486be3a78a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/11/2019
-ms.locfileid: "65536016"
+ms.lasthandoff: 07/02/2019
+ms.locfileid: "67500484"
 ---
 # <a name="identity-model-customization-in-aspnet-core"></a>ASP.NET core에서 identity 모델 사용자 지정 합니다.
 
@@ -72,7 +72,7 @@ Id 모델 엔터티 형식은 이루어져 있습니다.
 
 ### <a name="default-model-configuration"></a>기본 모델 구성
 
-대부분 identity 정의 *컨텍스트 클래스* 에서 상속 되는 <xref:Microsoft.EntityFrameworkCore.DbContext> 구성 하 고 모델을 사용 합니다. 이 구성을 수행 해야를 사용 하는 [EF Core Code First Fluent API](/ef/core/modeling/) 에 <xref:Microsoft.EntityFrameworkCore.DbContext.OnModelCreating*> 컨텍스트 클래스의 메서드. 기본 구성은 다음과 같습니다.
+대부분 identity 정의 *컨텍스트 클래스* 에서 상속 되는 [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 구성 하 고 모델을 사용 합니다. 이 구성을 수행 해야를 사용 하는 [EF Core Code First Fluent API](/ef/core/modeling/) 에 [OnModelCreating](/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating) 컨텍스트 클래스의 메서드. 기본 구성은 다음과 같습니다.
 
 ```csharp
 builder.Entity<TUser>(b =>
@@ -463,7 +463,7 @@ PK 유형을 변경 하려면 다음이 단계를 수행 합니다.
             .AddDefaultTokenProviders();
     ```
 
-    기본 키의 데이터 형식을 분석에서 유추 되는 <xref:Microsoft.EntityFrameworkCore.DbContext> 개체입니다.
+    기본 키의 데이터 형식을 분석에서 유추 되는 [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 개체입니다.
 
     ASP.NET Core 2.1 이상 버전에서는 Identity Razor 클래스 라이브러리로 제공 됩니다. 자세한 내용은 <xref:security/authentication/scaffold-identity>을 참조하세요. 앞의 코드 호출을 해야 하는 결과적으로 <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>입니다. Identity 스 캐 폴더는 프로젝트에 파일을 식별을 추가 하려면 사용 된 경우 호출을 제거 `AddDefaultUI`합니다.
 
@@ -477,7 +477,7 @@ PK 유형을 변경 하려면 다음이 단계를 수행 합니다.
             .AddDefaultTokenProviders();
     ```
 
-    기본 키의 데이터 형식을 분석에서 유추 되는 <xref:Microsoft.EntityFrameworkCore.DbContext> 개체입니다.
+    기본 키의 데이터 형식을 분석에서 유추 되는 [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 개체입니다.
 
     ::: moniker-end
 
@@ -507,7 +507,7 @@ PK 유형을 변경 하려면 다음이 단계를 수행 합니다.
 
     [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=13-16)]
 
-    기본 키의 데이터 형식을 분석에서 유추 되는 <xref:Microsoft.EntityFrameworkCore.DbContext> 개체입니다.
+    기본 키의 데이터 형식을 분석에서 유추 되는 [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 개체입니다.
 
     ASP.NET Core 2.1 이상 버전에서는 Identity Razor 클래스 라이브러리로 제공 됩니다. 자세한 내용은 <xref:security/authentication/scaffold-identity>을 참조하세요. 앞의 코드 호출을 해야 하는 결과적으로 <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>입니다. Identity 스 캐 폴더는 프로젝트에 파일을 식별을 추가 하려면 사용 된 경우 호출을 제거 `AddDefaultUI`합니다.
 
@@ -521,7 +521,7 @@ PK 유형을 변경 하려면 다음이 단계를 수행 합니다.
 
     [!code-csharp[](customize-identity-model/samples/2.0/RazorPagesSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=7-9)]
 
-    기본 키의 데이터 형식을 분석에서 유추 되는 <xref:Microsoft.EntityFrameworkCore.DbContext> 개체입니다.
+    기본 키의 데이터 형식을 분석에서 유추 되는 [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 개체입니다.
 
     ::: moniker-end
 
@@ -962,7 +962,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 엔터티 형식 수에 대 한 적합 한 여러 가지 방법으로 지연 로드에 설명 된 대로 합니다 [EF Core 설명서](/ef/core/querying/related-data#lazy-loading)합니다. 간단히 하기 위해 요구 하는 지연 로드 프록시를 사용 합니다.
 
 * 설치 합니다 [Microsoft.EntityFrameworkCore.Proxies](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) 패키지 있습니다.
-* 에 대 한 호출 <xref:Microsoft.EntityFrameworkCore.ProxiesExtensions.UseLazyLoadingProxies*> 내부 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext*>합니다.
+* 에 대 한 호출 <xref:Microsoft.EntityFrameworkCore.ProxiesExtensions.UseLazyLoadingProxies*> 안쪽 [AddDbContext\<TContext >](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext)합니다.
 * 공용 엔터티 형식을 사용 하 여 `public virtual` 탐색 속성입니다.
 
 다음 예제에서는 호출 `UseLazyLoadingProxies` 에서 `Startup.ConfigureServices`:

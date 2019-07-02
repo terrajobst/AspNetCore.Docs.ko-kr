@@ -5,14 +5,14 @@ description: ASP.NET Core에서 HTTP.sys 및 IIS에 대 한 Windows 인증을 �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc, seodec18
-ms.date: 06/12/2019
+ms.date: 07/01/2019
 uid: security/authentication/windowsauth
-ms.openlocfilehash: 93f833adff95f25d570947cd1a9035d652f522c2
-ms.sourcegitcommit: 335a88c1b6e7f0caa8a3a27db57c56664d676d34
+ms.openlocfilehash: 30f1f554a29412ed6b84115d457d2da1aba91c17
+ms.sourcegitcommit: eb3e51d58dd713eefc242148f45bd9486be3a78a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/12/2019
-ms.locfileid: "67034956"
+ms.lasthandoff: 07/02/2019
+ms.locfileid: "67500506"
 ---
 # <a name="configure-windows-authentication-in-aspnet-core"></a>ASP.NET Core에서 Windows 인증을 구성 합니다.
 
@@ -145,7 +145,10 @@ ASP.NET Core 모듈은 기본적으로 앱에 Windows 인증 토큰을 전달 �
  합니다 [Microsoft.AspNetCore.Authentication.Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) NuGet 패키지 사용 될 수 있습니다 [Kestrel](xref:fundamentals/servers/kestrel) Negotiate, Kerberos 및 NTLM을 사용 하 여 Windows, Linux 및 macOS에서 Windows 인증을 지원 하도록 합니다.
 
 > [!WARNING]
-> 연결에 대 한 요청에서 자격 증명을 유지할 수 있습니다. *협상 프록시 Kestrel 사용 하 여 1:1 연결 선호도 (영구 연결)를 유지 하지 않는 인증 프록시를 사용 하 여 사용 하면 안 됩니다.* 즉, Negotiate 인증을 IIS 뒤에 있는 Kestrel을 사용 하 여 사용할 해야 [ancm (ASP.NET Core 모듈은) out of process](xref:host-and-deploy/iis/index#out-of-process-hosting-model)합니다.
+> 연결에 대 한 요청에서 자격 증명을 유지할 수 있습니다. *협상 프록시 Kestrel 사용 하 여 1:1 연결 선호도 (영구 연결)를 유지 하지 않는 인증 프록시를 사용 하 여 사용 하면 안 됩니다.*
+
+> [!NOTE]
+> 협상 처리기 기본 서버에서 Windows 인증을 고유 하 게 지원 하 고 사용 하는 경우를 검색 합니다. 서버에서 Windows 인증을 지원 하지만 비활성화 된 경우의 서버 구현을 사용 하도록 설정 하 라는 오류가 throw 됩니다. 서버에서 Windows 인증을 사용 하 고, Negotiate 처리기를 투명 하 게 전달 합니다.
 
  인증 서비스를 호출 하 여 추가 <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> (`Microsoft.AspNetCore.Authentication.Negotiate` 네임 스페이스) 및 `AddNegotitate` (`Microsoft.AspNetCore.Authentication.Negotiate` 네임 스페이스)에서 `Startup.ConfigureServices`:
 
@@ -255,7 +258,17 @@ Asp.net 가장을 구현 하지 않습니다. 앱 풀 또는 프로세스 id를 
 
 ## <a name="claims-transformations"></a>클레임 변환
 
+::: moniker range=">= aspnetcore-3.0"
+
+Iis에서 호스팅할 때 <xref:Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync*> 사용자를 초기화 하기 위해 내부적으로 호출 되지 않습니다. 따라서 모든 인증 후에 클레임을 변환하는 데 사용되는 <xref:Microsoft.AspNetCore.Authentication.IClaimsTransformation> 구현은 기본적으로 활성화되지 않습니다. 클레임 변환을 활성화 하는 코드 예제 및 자세한 내용은 참조 하세요. <xref:host-and-deploy/aspnet-core-module#in-process-hosting-model>합니다.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 IIS에서 프로세스 모드를 사용 하 여 호스팅하는 경우 <xref:Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync*> 사용자를 초기화 하기 위해 내부적으로 호출 되지 않습니다. 따라서 모든 인증 후에 클레임을 변환하는 데 사용되는 <xref:Microsoft.AspNetCore.Authentication.IClaimsTransformation> 구현은 기본적으로 활성화되지 않습니다. In process를 호스트 하는 경우 클레임 변환을 활성화 하는 코드 예제 및 자세한 내용은 참조 하세요. <xref:host-and-deploy/aspnet-core-module#in-process-hosting-model>합니다.
+
+::: moniker-end
 
 ## <a name="additional-resources"></a>추가 자료
 
