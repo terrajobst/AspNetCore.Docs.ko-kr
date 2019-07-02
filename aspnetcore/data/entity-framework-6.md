@@ -67,10 +67,10 @@ Visual Studio에서 다음 단계에 따라 이 샘플을 처음부터 만들 �
 
 * 솔루션을 만듭니다.
 
-*  > **새 프로젝트** > **웹** > **ASP.NET Core 웹 애플리케이션****추가**
+*  > **새 프로젝트** > **웹** > **ASP.NET Core 웹 애플리케이션** **추가**
   * 프로젝트 템플릿 선택 대화 상자의 드롭다운에서 API 및 .NET Framework 선택
 
-* 새 프로젝트** > **Windows 데스크톱** > **클래스 라이브러리(.NET Framework)** **추가** > **
+*  > **새 프로젝트** > **Windows 데스크톱** > **클래스 라이브러리(.NET Framework)** **추가**
 
 * 두 프로젝트에 대한 **PMC(패키지 관리자 콘솔)** 에서 `Install-Package Entityframework` 명령을 실행합니다.
 
