@@ -3,15 +3,15 @@ title: ASP.NET Core에서 인증서 인증을 구성 합니다.
 author: blowdart
 description: ASP.NET Core에서 HTTP.sys 및 IIS에 대 한 인증서 인증을 구성 하는 방법에 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
-ms.author: barry.dorrans
+ms.author: bdorrans
 ms.date: 06/11/2019
 uid: security/authentication/certauth
-ms.openlocfilehash: 37567128531187bfe7dd6c9f5aa990226e70f35f
-ms.sourcegitcommit: 1bb3f3f1905b4e7d4ca1b314f2ce6ee5dd8be75f
+ms.openlocfilehash: 8609c58265340da1d618135795915d6c49e750a3
+ms.sourcegitcommit: 0b9e767a09beaaaa4301915cdda9ef69daaf3ff2
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/11/2019
-ms.locfileid: "66837540"
+ms.lasthandoff: 07/03/2019
+ms.locfileid: "67538717"
 ---
 # <a name="overview"></a>개요
 
@@ -89,7 +89,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 * `OnAuthenticationFailed` &ndash; 예외가 인증 하는 동안 발생 하 고 대응할 수 하는 경우 호출 됩니다.
 * `OnCertificateValidated` &ndash; 인증서를 확인, 유효성 검사를 통과 하 고 기본 보안 주체를 만든 후 호출 됩니다. 이 이벤트를 사용 하면 고유한 유효성 검사를 수행 하 고 확장 하거나 보안 주체를 바꿀 수 있습니다. 예제를 보려면 다음을 포함 합니다.
   * 서비스에 인증서를 식별 하는 경우를 결정 합니다.
-  * 사용자 고유의 보안 주체를 생성합니다. 다음 예제에서는 고려 `Startup.ConfigureServices`:
+  * 사용자 고유의 보안 주체를 생성합니다. `Startup.ConfigureServices`에서 다음 예제를 참조하세요.
 
 ```csharp
 services.AddAuthentication(
@@ -125,7 +125,7 @@ services.AddAuthentication(
 
 인바운드 인증서 추가 유효성 검사를 충족 하지 않는 경우 호출 `context.Fail("failure reason")` 실패 이유를 사용 하 여 합니다.
 
-실제 기능을 원할 것 데이터베이스 또는 다른 유형의 사용자 저장소에 연결 하는 종속성 주입에 등록 된 서비스를 호출 합니다. 대리자에 전달 된 컨텍스트를 사용 하 여 서비스에 액세스 합니다. 다음 예제에서는 고려 `Startup.ConfigureServices`:
+실제 기능을 원할 것 데이터베이스 또는 다른 유형의 사용자 저장소에 연결 하는 종속성 주입에 등록 된 서비스를 호출 합니다. 대리자에 전달 된 컨텍스트를 사용 하 여 서비스에 액세스 합니다. `Startup.ConfigureServices`에서 다음 예제를 참조하세요.
 
 ```csharp
 services.AddAuthentication(
