@@ -1,20 +1,20 @@
 ---
-title: Blazor용 링커 구성
+title: ASP.NET Core Blazor용 링커 구성
 author: guardrex
 description: Blazor 앱을 빌드할 때 IL(Intermediate Language) 링커를 제어하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/24/2019
+ms.date: 06/14/2019
 uid: host-and-deploy/blazor/configure-linker
-ms.openlocfilehash: 00676d4311f8955c3c1ef38d31219d62ea9f4a25
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: bdddae16885f45df2c10e4d98b1c33eb11dfdf24
+ms.sourcegitcommit: 4ef0362ef8b6e5426fc5af18f22734158fe587e1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64887778"
+ms.lasthandoff: 06/17/2019
+ms.locfileid: "67153214"
 ---
-# <a name="configure-the-linker-for-blazor"></a>Blazor용 링커 구성
+# <a name="configure-the-linker-for-aspnet-core-blazor"></a>ASP.NET Core Blazor용 링커 구성
 
 [Luke Latham](https://github.com/guardrex)으로
 

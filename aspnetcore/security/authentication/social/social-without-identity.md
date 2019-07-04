@@ -5,12 +5,12 @@ description: Facebook, Google, Twitter, ASP.NET Core Id 없이 등 계정 사용
 ms.author: riande
 ms.date: 07/04/2019
 uid: security/authentication/social/social-without-identity
-ms.openlocfilehash: e67da513fef1ce453110c465b08e9c7965e71df5
-ms.sourcegitcommit: d6e51c60439f03a8992bda70cc982ddb15d3f100
+ms.openlocfilehash: 1e7124e8b07c0faf2d005ec3ef55c0414a697d64
+ms.sourcegitcommit: f6e6730872a7d6f039f97d1df762f0d0bd5e34cf
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67557652"
+ms.lasthandoff: 07/04/2019
+ms.locfileid: "67561563"
 ---
 # <a name="use-social-sign-in-provider-authentication-without-aspnet-core-identity"></a>ASP.NET Core Id 없이 사용 하 여 소셜 로그인 공급자 인증
 
@@ -47,7 +47,7 @@ ms.locfileid: "67557652"
 
 인증 체계 및 쿠키 인증에 대 한 자세한 내용은를 참조 하세요. <xref:security/authentication/cookie>합니다.
 
-## <a name="applying-basic-authorization"></a>기본 권한 부여를 적용합니다.
+## <a name="applying-authorization"></a>권한 부여를 적용합니다.
 
 앱의 인증 구성을 적용 하 여 테스트를 `AuthorizeAttribute` 특성을 컨트롤러, 작업 또는 페이지입니다. 다음 코드에 대 한 액세스를 제한 합니다 *개인 정보 보호* 인증 된 사용자에 게 페이지:
 

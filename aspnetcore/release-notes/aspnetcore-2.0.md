@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/28/2019
 uid: aspnetcore-2.0
-ms.openlocfilehash: 5cf7b9aa7ccf86f1a89e6145cfc185c5ef803e66
-ms.sourcegitcommit: 4d05e30567279072f1b070618afe58ae1bcefd5a
+ms.openlocfilehash: dac5a48042a71774cb884e30a166be68bee69691
+ms.sourcegitcommit: f5762967df3be8b8c868229e679301f2f7954679
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/29/2019
-ms.locfileid: "66376409"
+ms.lasthandoff: 06/13/2019
+ms.locfileid: "67048116"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>ASP.NET Core 2.0의 새로운 기능
 
@@ -60,7 +60,7 @@ ASP.NET Core 2.0에서 로깅은 기본적으로 DI(종속성 주입) 시스템�
 
 새 인증 모델을 사용하면 DI를 사용하는 애플리케이션에 대한 인증을 더 쉽게 구성할 수 있습니다.
 
-새 템플릿을 사용하여 [Azure AD B2C](https://azure.microsoft.com/services/active-directory-b2c/))를 통해 웹앱 및 Web API에 대한 인증을 구성할 수 있습니다.
+새 템플릿을 사용하여 [Azure AD B2C](https://azure.microsoft.com/services/active-directory-b2c/)를 통해 웹앱과 웹 API에 대한 인증을 구성할 수 있습니다.
 
 계획된 문서의 상태에 대한 자세한 내용은 [GitHub issue](https://github.com/aspnet/AspNetCore.Docs/issues/3054)(GitHub 문제)를 참조하세요.
 
@@ -68,7 +68,7 @@ ASP.NET Core 2.0에서 로깅은 기본적으로 DI(종속성 주입) 시스템�
 
 ASP.NET Core 2.0에서는 ID를 사용하여 보안 Web API를 더 쉽게 빌드할 수 있습니다. [MSAL(Microsoft Authentication Library)](https://www.nuget.org/packages/Microsoft.Identity.Client)을 사용하여 Web API에 액세스하기 위해 액세스 토큰을 얻을 수 있습니다.
 
-2.0의 인증 변경에 대한 자세한 내용은 다음 리소스를 참조하세요.
+2\.0의 인증 변경에 대한 자세한 내용은 다음 리소스를 참조하세요.
 
 * [ASP.NET Core의 계정 확인 및 암호 복구](xref:security/authentication/accconfirm)
 * [ASP.NET Core에서 인증자 앱에 QR 코드 생성 사용](xref:security/authentication/identity-enable-qrcodes)
@@ -138,7 +138,7 @@ Razor 뷰 엔진이 새 Roslyn 컴파일러를 사용하도록 업데이트되�
 
 C# 7.1 기능 상태에 대한 자세한 내용은 [the Roslyn GitHub repository](https://github.com/dotnet/roslyn/blob/master/docs/Language%20Feature%20Status.md)(Roslyn GitHub 리포지토리)를 참조하세요.
 
-## <a name="other-documentation-updates-for-20"></a>2.0에 대한 기타 문서 업데이트
+## <a name="other-documentation-updates-for-20"></a>2\.0에 대한 기타 문서 업데이트
 
 * [ASP.NET Core 앱 배포용 Visual Studio 게시 프로필](xref:host-and-deploy/visual-studio-publish-profiles)
 * [키 관리](xref:security/data-protection/implementation/key-management)

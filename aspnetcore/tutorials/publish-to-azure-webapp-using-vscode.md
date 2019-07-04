@@ -2,16 +2,16 @@
 title: Visual Studio Code를 사용하여 Azure에 ASP.NET Core 앱 게시
 author: ricardoserradas
 description: Visual Studio Code를 사용하여 Azure App Service에 ASP.NET Core 앱을 게시하는 방법 알아보기
-ms.author: ricardoserradas
+ms.author: riserrad
 ms.custom: mvc
 ms.date: 04/16/2019
 uid: tutorials/publish-to-azure-webapp-using-vscode
-ms.openlocfilehash: 64d82835f6a47a458802692c99658b964c07f807
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 2eaae62af97927fbe22e7f5d4fadfc2265c5a5cd
+ms.sourcegitcommit: 0b9e767a09beaaaa4301915cdda9ef69daaf3ff2
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64889608"
+ms.lasthandoff: 07/03/2019
+ms.locfileid: "67538745"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio-code"></a>Visual Studio Code를 사용하여 Azure에 ASP.NET Core 앱 게시
 

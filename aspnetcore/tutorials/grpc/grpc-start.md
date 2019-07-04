@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 06/12/2019
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: 919db3f31310342657c89100a6e25e8293648a9f
-ms.sourcegitcommit: 335a88c1b6e7f0caa8a3a27db57c56664d676d34
+ms.openlocfilehash: 6aef56ecd61ad71e166c03c12b28b25b931cdd88
+ms.sourcegitcommit: 4ef0362ef8b6e5426fc5af18f22734158fe587e1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/12/2019
-ms.locfileid: "67034810"
+ms.lasthandoff: 06/17/2019
+ms.locfileid: "67152928"
 ---
 # <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>자습서: ASP.NET Core에서 gRPC 클라이언트 및 서버 만들기
 
@@ -117,13 +117,14 @@ info: Microsoft.Hosting.Lifetime[0]
 * *greet.proto*: *Protos/greet.proto* 파일은 `Greeter` gRPC를 정의하고 gRPC 서버 자산을 생성하는 데 사용됩니다. 자세한 내용은 [gRPC 소개](xref:grpc/index)를 참조하세요.
 * *Services* 폴더: `Greeter` 서비스의 구현을 포함합니다.
 * *appSettings.json*: Kestrel에서 사용하는 프로토콜과 같은 구성 데이터를 포함합니다. 자세한 내용은 <xref:fundamentals/configuration/index>을 참조하세요.
-* *Program.cs*: gRPC 서비스의 진입점을 포함합니다. 자세한 내용은 <xref:fundamentals/host/web-host>을 참조하세요.
+* *Program.cs*: gRPC 서비스의 진입점을 포함합니다. 자세한 내용은 <xref:fundamentals/host/generic-host>을 참조하세요.
 * *Startup.cs*: 앱 동작을 구성하는 코드를 포함합니다. 자세한 내용은 [앱 시작](xref:fundamentals/startup)을 참조하세요.
 
 ## <a name="create-the-grpc-client-in-a-net-console-app"></a>.NET 콘솔 앱에서 gRPC 클라이언트 만들기
 
 ## <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
+* Visual Studio의 두 번째 인스턴스를 엽니다.
 * 메뉴 모음에서 **파일** > **새로 만들기** > **프로젝트**를 선택합니다.
 * **새 프로젝트 만들기** 대화 상자에서 **콘솔 앱(.NET Core)** 을 선택합니다.
 * **다음** 선택
@@ -151,7 +152,7 @@ code -r GrpcGreeterClient
 
 ### <a name="add-required-packages"></a>필수 패키지 추가
 
-gRPC 클라이언트 프로젝트에 다음 패키지를 추가합니다.
+gRPC 클라이언트 프로젝트에는 다음 패키지가 필요합니다.
 
 * [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client)는 .NET Core 클라이언트를 포함합니다.
 * [Google.Protobuf](https://www.nuget.org/packages/Google.Protobuf/)는 C#용 protobuf 메시지 API를 포함합니다.
@@ -208,7 +209,7 @@ dotnet add GrpcGreeterClient.csproj package Grpc.Tools
 
   # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio) 
 
-  프로젝트를 마우스 오른쪽 단추로 클릭하고 **GrpcGreeterClient.csproj 편집**을 선택합니다.
+  프로젝트를 마우스 오른쪽 단추로 클릭하고 **프로젝트 파일 편집**을 선택합니다.
 
   # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) 
 
@@ -220,7 +221,7 @@ dotnet add GrpcGreeterClient.csproj package Grpc.Tools
 
   ---
 
-* **greet.proto** 파일을 GrpcGreeterClient 프로젝트 파일의 `<Protobuf>` 항목 그룹에 추가합니다.
+* **greet.proto** 파일을 참조하는 `<Protobuf>` 요소를 사용하여 항목 그룹을 추가합니다.
 
   ```XML
   <ItemGroup>
@@ -228,11 +229,9 @@ dotnet add GrpcGreeterClient.csproj package Grpc.Tools
   </ItemGroup>
   ```
 
-클라이언트 프로젝트를 빌드하여 C# 클라이언트 자산 생성을 트리거합니다.
-
 ### <a name="create-the-greeter-client"></a>Greeter 클라이언트 만들기
 
-프로젝트를 빌드하여 **Greeter** 네임스페이스에 유형을 만듭니다. `Greeter` 유형은 빌드 프로세스에 의해 자동으로 생성됩니다.
+프로젝트를 빌드하여 `GrpcGreeter` 네임스페이스에 유형을 만듭니다. `GrpcGreeter` 유형은 빌드 프로세스에 의해 자동으로 생성됩니다.
 
 gRPC 클라이언트 *Program.cs* 파일을 다음 코드로 업데이트합니다.
 

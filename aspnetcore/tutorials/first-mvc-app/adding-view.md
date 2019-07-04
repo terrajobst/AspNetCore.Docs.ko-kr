@@ -5,12 +5,12 @@ description: 간단한 ASP.NET Core MVC 앱에 보기 추가
 ms.author: riande
 ms.date: 03/04/2017
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 6ff706012dabbf9500a805708c1f058b59ebc610
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 70c96b4838b37ea2c193c328f00a410642338369
+ms.sourcegitcommit: 28a2874765cefe9eaa068dceb989a978ba2096aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64890918"
+ms.lasthandoff: 06/17/2019
+ms.locfileid: "67167076"
 ---
 # <a name="add-a-view-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 보기 추가
 
@@ -24,7 +24,7 @@ Razor를 사용하여 뷰 템플릿 파일을 만듭니다. Razor 기반 뷰 템
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_4)]
 
-앞의 코드는 컨트롤러의 <xref:Microsoft.AspNetCore.Mvc.Controller.View*> 메서드를 호출합니다. HTML 응답을 생성하기 위해 뷰 템플릿을 사용합니다. 위의 `Index` 메서드와 같은 컨트롤러 메서드(‘동작 메서드’라고도 함)는 일반적으로 `string`과 같은 형식이 아닌 <xref:Microsoft.AspNetCore.Mvc.IActionResult>(또는 <xref:Microsoft.AspNetCore.Mvc.ActionResult>에서 파생된 클래스)를 반환합니다.
+앞의 코드는 컨트롤러의 <xref:Microsoft.AspNetCore.Mvc.Controller.View*> 메서드를 호출합니다. HTML 응답을 생성하기 위해 뷰 템플릿을 사용합니다. 위의 `Index` 메서드와 같은 컨트롤러 메서드(‘동작 메서드’라고도 함)는 일반적으로 `string`과 같은 형식이 아닌 <xref:Microsoft.AspNetCore.Mvc.IActionResult>(또는 <xref:Microsoft.AspNetCore.Mvc.ActionResult>에서 파생된 클래스)를 반환합니다. 
 
 ## <a name="add-a-view"></a>보기 추가
 
@@ -72,7 +72,7 @@ Razor를 사용하여 뷰 템플릿 파일을 만듭니다. Razor 기반 뷰 템
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
-`https://localhost:xxxx/HelloWorld`로 이동합니다. `HelloWorldController`에서 `Index` 메서드는 많은 작업을 수행하지 않았습니다. `return View();` 문을 실행했습니다. 해당 문은 메서드가 브라우저에 대한 응답을 렌더링하기 위해 보기 템플릿 파일을 사용해야 함을 지정했습니다. 보기 템플릿 파일의 이름을 명시적으로 지정하지 않았기 때문에 MVC는 */Views/HelloWorld* 폴더에서 *Index.cshtml* 보기 파일을 사용하도록 기본 설정되었습니다. 아래 이미지는 보기에서 하드 코드된 “Hello from our View Template!” 문자열을 보여줍니다.
+`https://localhost:xxxx/HelloWorld`로 이동합니다. `HelloWorldController`에서 `Index` 메서드는 많은 작업을 수행하지 않았습니다. `return View();` 문을 실행했습니다. 해당 문은 메서드가 브라우저에 대한 응답을 렌더링하기 위해 보기 템플릿 파일을 사용해야 함을 지정했습니다. 보기 템플릿 파일 이름을 지정하지 않았기 때문에 MVC는 기본적으로 기본 보기 파일을 사용하도록 설정되었습니다. 기본 보기 파일은 메서드(`Index`)와 이름이 같으므로 */Views/HelloWorld/Index.cshtml*이 사용됩니다. 아래 이미지는 보기에서 하드 코드된 “Hello from our View Template!” 문자열을 보여줍니다.
 
 ![브라우저 창](~/tutorials/first-mvc-app/adding-view/_static/hell_template.png)
 

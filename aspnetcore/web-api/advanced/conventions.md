@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/13/2018
 uid: web-api/advanced/conventions
-ms.openlocfilehash: 671e39ded50e50bbfe6d12879895bee74367f754
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: ae409158defe15ffaa7454039b302cf3c6437e54
+ms.sourcegitcommit: 6d9cf728465cdb0de1037633a8b7df9a8989cccb
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64890778"
+ms.lasthandoff: 06/28/2019
+ms.locfileid: "67463289"
 ---
 # <a name="use-web-api-conventions"></a>웹 API 규칙 사용
 
@@ -50,7 +50,7 @@ ASP.NET Core MVC 2.2 이상에는 <xref:Microsoft.AspNetCore.Mvc.DefaultApiConve
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     ```
 
-`[ProducesDefaultResponseType]`에 대한 자세한 내용은 [Default Response](https://swagger.io/docs/specification/describing-responses/#default)(기본 응답)를 참조하세요.
+    `[ProducesDefaultResponseType]`에 대한 자세한 내용은 [Default Response](https://swagger.io/docs/specification/describing-responses/#default)(기본 응답)를 참조하세요.
 
 1. &mdash; 컨트롤러에 `Microsoft.AspNetCore.Mvc.ApiConventionTypeAttribute`를 적용하면 컨트롤러에서 모든 작업에 지정된 규칙 유형을 적용합니다. 규칙 메서드는 규칙 메서드가 적용되는 작업을 결정하는 힌트로 데코레이팅됩니다. 힌트에 대한 자세한 내용은 [웹 API 규칙 만들기](#create-web-api-conventions)를 참조하세요).
 

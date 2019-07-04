@@ -1,19 +1,19 @@
 ---
-title: '자습서: ASP.NET Core MVC를 사용하여 웹 API 만들기'
+title: '자습서: ASP.NET Core를 사용하여 웹 API 만들기'
 author: rick-anderson
-description: ASP.NET Core MVC를 사용하여 웹 API 빌드
+description: ASP.NET Core를 사용하여 웹 API를 빌드하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/4/2019
+ms.date: 06/18/2019
 uid: tutorials/first-web-api
-ms.openlocfilehash: dce2926e3cb19d6ac8d2af0e9b96c31dee1d92fd
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 17e8ee08fca775b8fccc3f2e6cd6067caca9c79f
+ms.sourcegitcommit: a1283d486ac1dcedfc7ea302e1cc882833e2c515
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087517"
+ms.lasthandoff: 06/18/2019
+ms.locfileid: "67207774"
 ---
-# <a name="tutorial-create-a-web-api-with-aspnet-core-mvc"></a>자습서: ASP.NET Core MVC를 사용하여 웹 API 만들기
+# <a name="tutorial-create-a-web-api-with-aspnet-core"></a>자습서: ASP.NET Core를 사용하여 웹 API 만들기
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT) 및 [Mike Wasson](https://github.com/mikewasson)
 
@@ -88,7 +88,7 @@ ms.locfileid: "65087517"
 
   ![macOS 새 프로젝트 대화 상자](first-web-api-mac/_static/1.png)
   
-* **새 ASP.NET Core Web API 구성** 대화 상자에서 **.NET Core 2.2*라는 기본 **대상 프레임워크**를 수락합니다.
+* **새 ASP.NET Core Web API 구성** 대화 상자에서 * *.NET Core 2.2*라는 기본 **대상 프레임워크**를 수락합니다.
 
 * **프로젝트 이름**으로 *TodoApi*를 입력한 다음, **만들기**를 선택합니다.
 
@@ -276,7 +276,7 @@ ASP.NET Core에서는 DB 컨텍스트와 같은 서비스를 [DI(종속성 주�
 
 이 자습서에서는 Postman을 사용하여 웹 API를 테스트합니다.
 
-* [Postman](https://www.getpostman.com/apps) 설치
+* [Postman](https://www.getpostman.com/downloads/) 설치
 * 웹앱을 시작합니다.
 * Postman을 시작합니다.
 * **SSL 인증서 확인** 사용 안 함

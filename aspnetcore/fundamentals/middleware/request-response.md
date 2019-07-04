@@ -3,16 +3,16 @@ title: ASP.NET Core의 요청 및 응답 작업
 author: jkotalik
 description: ASP.NET Core에서 요청 본문을 읽고 응답 본문을 쓰는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
-ms.author: jkotalik
+ms.author: jukotali
 ms.custom: mvc
 ms.date: 02/26/2019
 uid: fundamentals/middleware/request-response
-ms.openlocfilehash: b6e3cd4b79e0c062b271c65cd5ecbdb4ef80c3a1
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 0c321dad256e239b61907980c09d2c088c1407ff
+ms.sourcegitcommit: 0b9e767a09beaaaa4301915cdda9ef69daaf3ff2
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65085509"
+ms.lasthandoff: 07/03/2019
+ms.locfileid: "67538583"
 ---
 # <a name="request-and-response-operations-in-aspnet-core"></a>ASP.NET Core의 요청 및 응답 작업
 
@@ -22,7 +22,7 @@ ms.locfileid: "65085509"
 
 ASP.NET Core 3.0에는 요청 및 응답 본문에 대한 두 가지 추상(<xref:System.IO.Stream> 및 <xref:System.IO.Pipelines.Pipe>)이 있습니다. 요청 읽기에서 [HttpRequest.Body](xref:Microsoft.AspNetCore.Http.HttpRequest.Body)는 <xref:System.IO.Stream>이고, `HttpRequest.BodyPipe`는 <xref:System.IO.Pipelines.PipeReader>입니다. 응답 쓰기에서 [HttpResponse.Body](xref:Microsoft.AspNetCore.Http.HttpResponse.Body)는 이고, `HttpResponse.BodyPipe`는 <xref:System.IO.Pipelines.PipeWriter>입니다.
 
-스트림보다 파이프라인을 사용하는 것이 좋습니다. 일부 간단한 작업에서는 스트림이 더 편리할 수도 있지만, 파이프라인은 성능상의 장점이 있고 대부분의 시나리오에서 더 편리합니다. 3.0에서 ASP.NET Core는 내부적으로 스트림 대신 파이프라인을 사용하기 시작했습니다. 다음과 같은 경우를 예로 들 수 있습니다.
+스트림보다 파이프라인을 사용하는 것이 좋습니다. 일부 간단한 작업에서는 스트림이 더 편리할 수도 있지만, 파이프라인은 성능상의 장점이 있고 대부분의 시나리오에서 더 편리합니다. 3\.0에서 ASP.NET Core는 내부적으로 스트림 대신 파이프라인을 사용하기 시작했습니다. 다음과 같은 경우를 예로 들 수 있습니다.
 
 - `FormReader`
 - `TextReader`
@@ -72,11 +72,11 @@ ASP.NET Core 3.0에는 요청 및 응답 본문에 대한 두 가지 추상(<xre
 
 ## <a name="adapters"></a>어댑터
 
-이제 `HttpRequest` 및 `HttpResponse`에서 `Body` 및 `BodyPipe` 속성을 둘 다 사용할 수 있으므로 `Body`를 다른 스트림으로 설정하면 어떻게 될까요? 3.0에서는 새 어댑터 세트가 각 유형을 다른 유형에 맞게 자동으로 조정합니다. 예를 들어 `HttpRequest.Body`을 새 스트림으로 설정하는 경우 `HttpRequest.BodyPipe`가 `HttpRequest.Body`를 래핑하는 새 `PipeReader`으로 자동 설정됩니다. `BodyPipe` 속성을 설정하는 경우에도 동일한 동작이 적용됩니다. `HttpResponse.BodyPipe`를 새 `PipeWriter`로 설정하면 `HttpResponse.Body`가 `HttpResponse.BodyPipe`를 래핑하는 새 스트림으로 자동 설정됩니다.
+이제 `HttpRequest` 및 `HttpResponse`에서 `Body` 및 `BodyPipe` 속성을 둘 다 사용할 수 있으므로 `Body`를 다른 스트림으로 설정하면 어떻게 될까요? 3\.0에서는 새 어댑터 세트가 각 유형을 다른 유형에 맞게 자동으로 조정합니다. 예를 들어 `HttpRequest.Body`을 새 스트림으로 설정하는 경우 `HttpRequest.BodyPipe`가 `HttpRequest.Body`를 래핑하는 새 `PipeReader`으로 자동 설정됩니다. `BodyPipe` 속성을 설정하는 경우에도 동일한 동작이 적용됩니다. `HttpResponse.BodyPipe`를 새 `PipeWriter`로 설정하면 `HttpResponse.Body`가 `HttpResponse.BodyPipe`를 래핑하는 새 스트림으로 자동 설정됩니다.
 
 ## <a name="startasync"></a>StartAsync
 
-`HttpResponse.StartAsync`는 3.0의 새로운 기능입니다. 헤더를 수정할 수 없음을 나타내고 `OnStarting` 콜백을 실행하는 데 사용됩니다. 3.0-preview3에서는 `HttpRequest.BodyPipe`를 사용하기 전에 `StartAsync`을 호출해야 하며, 이후 릴리스에서는 권장 사항이 될 예정입니다. Kestrel을 서버로 사용하는 경우 `PipeReader`를 사용하기 전에 StartAsync를 호출하면 `GetMemory`에서 반환된 메모리가 외부 버퍼가 아닌 Kestrel의 내부 <xref:System.IO.Pipelines.Pipe>에 속하게 됩니다.
+`HttpResponse.StartAsync`는 3.0의 새로운 기능입니다. 헤더를 수정할 수 없음을 나타내고 `OnStarting` 콜백을 실행하는 데 사용됩니다. 3\.0-preview3에서는 `HttpRequest.BodyPipe`를 사용하기 전에 `StartAsync`을 호출해야 하며, 이후 릴리스에서는 권장 사항이 될 예정입니다. Kestrel을 서버로 사용하는 경우 `PipeReader`를 사용하기 전에 StartAsync를 호출하면 `GetMemory`에서 반환된 메모리가 외부 버퍼가 아닌 Kestrel의 내부 <xref:System.IO.Pipelines.Pipe>에 속하게 됩니다.
 
 ## <a name="additional-resources"></a>추가 자료
 

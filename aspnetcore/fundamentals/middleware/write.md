@@ -2,16 +2,17 @@
 title: 사용자 지정 ASP.NET Core 미들웨어 작성
 author: rick-anderson
 description: 사용자 지정 ASP.NET Core 미들웨어 작성 방법을 알아봅니다.
+monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/14/2019
+ms.date: 06/17/2019
 uid: fundamentals/middleware/write
-ms.openlocfilehash: 2c5577394a10370d92c8a83f9d806b63f3245c8b
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 352db93dd7061070c76e34f6c03883f68e2041ee
+ms.sourcegitcommit: 28a2874765cefe9eaa068dceb989a978ba2096aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64889168"
+ms.lasthandoff: 06/17/2019
+ms.locfileid: "67167105"
 ---
 # <a name="write-custom-aspnet-core-middleware"></a>사용자 지정 ASP.NET Core 미들웨어 작성
 
@@ -27,33 +28,28 @@ ms.locfileid: "64889168"
 
 위의 샘플 코드는 미들웨어 구성 요소를 만드는 방법을 보여주는 데 사용됩니다. ASP.NET Core의 기본 제공 지역화 지원은 <xref:fundamentals/localization>을 참조하세요.
 
-문화권을 전달하여 미들웨어를 테스트할 수 있습니다. 예를 들어, `http://localhost:7997/?culture=no`을 입력합니다.
+문화권을 전달하여 미들웨어를 테스트합니다. 예를 들어 `https://localhost:5001/?culture=no`를 요청합니다.
 
 다음 코드는 미들웨어 대리자를 클래스로 이동합니다.
 
 [!code-csharp[](index/snapshot/Culture/RequestCultureMiddleware.cs)]
 
-::: moniker range="< aspnetcore-2.0"
+미들웨어 클래스는 다음을 포함해야 합니다.
 
-미들웨어 `Task` 메서드의 이름은 `Invoke`여야 합니다. ASP.NET 코어 2.0 이상에서는 이름이 `Invoke` 또는 `InvokeAsync`일 수 있습니다.
+* <xref:Microsoft.AspNetCore.Http.RequestDelegate> 형식의 매개 변수가 있는 공용 생성자
+* `Invoke` 또는 `InvokeAsync`라는 공용 메서드. 이 메서드는 다음 작업을 수행해야 합니다.
+  * `Task`를 반환합니다.
+  * <xref:Microsoft.AspNetCore.Http.HttpContext> 형식의 첫 번째 매개 변수를 허용합니다.
+  
+생성자 및 `Invoke`/`InvokeAsync`의 추가 매개 변수는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)로 채워집니다.
 
-::: moniker-end
+## <a name="middleware-dependencies"></a>미들웨어 종속성
 
-## <a name="middleware-extension-method"></a>미들웨어 확장 메서드
-
-다음 확장 메서드는 <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder>를 통해 미들웨어를 공개합니다.
-
-[!code-csharp[](index/snapshot/Culture/RequestCultureMiddlewareExtensions.cs)]
-
-다음 코드는 `Startup.Configure`에서 미들웨어를 호출합니다.
-
-[!code-csharp[](index/snapshot/Culture/Startup.cs?name=snippet1&highlight=5)]
-
-미들웨어는 해당 생성자에서 해당 종속성을 노출하여 [명시적 종속성 원칙](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)을 따라야 합니다. 미들웨어는 *애플리케이션 수명*당 한 번 생성됩니다. 요청 내에서 서비스를 미들웨어와 공유해야 하는 경우 [요청당 종속성](#per-request-dependencies) 섹션을 참조하세요.
+미들웨어는 해당 생성자에서 해당 종속성을 노출하여 [명시적 종속성 원칙](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)을 따라야 합니다. 미들웨어는 *애플리케이션 수명*당 한 번 생성됩니다. 요청 내에서 서비스를 미들웨어와 공유해야 하는 경우 [요청당 미들웨어 종속성](#per-request-middleware-dependencies) 섹션을 참조하세요.
 
 미들웨어 구성 요소는 생성자 매개 변수를 통해 [DI(종속성 주입)](xref:fundamentals/dependency-injection)에서 해당 종속성을 확인할 수 있습니다. [UseMiddleware&lt;T&gt;](/dotnet/api/microsoft.aspnetcore.builder.usemiddlewareextensions.usemiddleware#Microsoft_AspNetCore_Builder_UseMiddlewareExtensions_UseMiddleware_Microsoft_AspNetCore_Builder_IApplicationBuilder_System_Type_System_Object___)는 추가 매개 변수를 직접 수락할 수도 있습니다.
 
-## <a name="per-request-dependencies"></a>요청당 종속성
+## <a name="per-request-middleware-dependencies"></a>요청당 미들웨어 종속성
 
 미들웨어는 요청당이 아닌 앱 시작 시 생성되므로 미들웨어 생성자에 의해 사용되는 *범위가 지정된* 수명 서비스는 각 요청 중에 다른 종속성 주입된 형식과 공유되지 않습니다. *범위가 지정된* 서비스를 미들웨어와 다른 형식 간에 공유해야 하는 경우 이러한 서비스를 `Invoke` 메서드의 서명에 추가합니다. `Invoke` 메서드는 DI로 채워지는 추가 매개 변수를 수락할 수 있습니다.
 
@@ -75,6 +71,16 @@ public class CustomMiddleware
     }
 }
 ```
+
+## <a name="middleware-extension-method"></a>미들웨어 확장 메서드
+
+다음 확장 메서드는 <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder>를 통해 미들웨어를 공개합니다.
+
+[!code-csharp[](index/snapshot/Culture/RequestCultureMiddlewareExtensions.cs)]
+
+다음 코드는 `Startup.Configure`에서 미들웨어를 호출합니다.
+
+[!code-csharp[](index/snapshot/Culture/Startup.cs?name=snippet1&highlight=5)]
 
 ## <a name="additional-resources"></a>추가 자료
 
