@@ -5,14 +5,14 @@ description: Blazor 앱을 빌드할 때 IL(Intermediate Language) 링커를 제
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/14/2019
+ms.date: 07/02/2019
 uid: host-and-deploy/blazor/configure-linker
-ms.openlocfilehash: bdddae16885f45df2c10e4d98b1c33eb11dfdf24
-ms.sourcegitcommit: 4ef0362ef8b6e5426fc5af18f22734158fe587e1
+ms.openlocfilehash: 03be18e7ee6ca8103e1a666da9e693ff67267d83
+ms.sourcegitcommit: 0b9e767a09beaaaa4301915cdda9ef69daaf3ff2
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67153214"
+ms.lasthandoff: 07/03/2019
+ms.locfileid: "67538626"
 ---
 # <a name="configure-the-linker-for-aspnet-core-blazor"></a>ASP.NET Core Blazor용 링커 구성
 
@@ -27,7 +27,7 @@ Blazor는 릴리스 빌드 중에 [IL(중간 언어)](/dotnet/standard/managed-c
 
 ## <a name="disable-linking-with-a-msbuild-property"></a>MSBuild 속성을 사용하여 연결을 사용하지 않도록 설정
 
-게시를 포함하는 앱이 빌드되면 릴리스 모드에서 연결이 기본적으로 활성화됩니다. 모든 어셈블리에 대한 연결을 비활성화하려면 프로젝트 파일에서 `<BlazorLinkOnBuild>` MSBuild 속성을 `false`로 설정합니다.
+게시를 포함하는 앱이 빌드되면 릴리스 모드에서 연결이 기본적으로 활성화됩니다. 모든 어셈블리에 대한 연결을 비활성화하려면 프로젝트 파일에서 `BlazorLinkOnBuild` MSBuild 속성을 `false`로 설정합니다.
 
 ```xml
 <PropertyGroup>
