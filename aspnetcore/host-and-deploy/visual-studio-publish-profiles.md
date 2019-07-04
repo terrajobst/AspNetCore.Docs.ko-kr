@@ -5,14 +5,14 @@ description: Visual Studio에서 게시 프로필을 만들고 다양한 대상�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/12/2019
+ms.date: 06/18/2019
 uid: host-and-deploy/visual-studio-publish-profiles
-ms.openlocfilehash: be5d1a79b7f4437d04586ae4ce24df94547d8a3c
-ms.sourcegitcommit: b4ef2b00f3e1eb287138f8b43c811cb35a100d3e
+ms.openlocfilehash: ac243a3898553b2e14a6c15d311afaf62f112a24
+ms.sourcegitcommit: a1283d486ac1dcedfc7ea302e1cc882833e2c515
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/21/2019
-ms.locfileid: "65969985"
+ms.lasthandoff: 06/18/2019
+ms.locfileid: "67207820"
 ---
 # <a name="visual-studio-publish-profiles-for-aspnet-core-app-deployment"></a>ASP.NET Core 앱 배포용 Visual Studio 게시 프로필
 
@@ -20,64 +20,17 @@ ms.locfileid: "65969985"
 
 이 문서에서는 Visual Studio 2017 이상을 사용하여 게시 프로필을 만들고 사용하는 방법에 초점을 맞춥니다. Visual Studio로 만들어진 게시 프로필은 MSBuild 및 Visual Studio에서 실행할 수 있습니다. Azure에 게시에 관한 지침은 [Visual Studio를 사용하여 Azure App Service에 ASP.NET Core 웹앱 게시](xref:tutorials/publish-to-azure-webapp-using-vs)를 참조하세요.
 
-다음 프로젝트 파일은 `dotnet new mvc` 명령을 사용하여 만들어졌습니다.
-
-::: moniker range=">= aspnetcore-2.2"
+`dotnet new mvc` 명령은 다음 최상위 `<Project>` 요소가 포함된 프로젝트 파일을 생성합니다.
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
-
+    <!-- omitted for brevity -->
 </Project>
 ```
 
-::: moniker-end
+위 `<Project>` 요소의 `Sdk` 특성은 각각 *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Web\Sdk\Sdk.props* 및 *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Web\Sdk\Sdk.targets*에서 MSBuild [속성](/visualstudio/msbuild/msbuild-properties) 및 [대상](/visualstudio/msbuild/msbuild-targets)을 가져옵니다. `$(MSBuildSDKsPath)`(Visual Studio 2019 Enterprise 사용)의 기본 위치는 *%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\MSBuild\Sdks* 폴더입니다.
 
-::: moniker range="< aspnetcore-2.2"
-
-```xml
-<Project Sdk="Microsoft.NET.Sdk.Web">
-
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
-
-</Project>
-```
-
-::: moniker-end
-
-`<Project>` 요소의 `Sdk` 특성은 다음 작업을 수행합니다.
-
-* 시작 시 *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Web\Sdk\Sdk.Props*에서 속성 파일을 가져옵니다.
-* 종료 시 *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Web\Sdk\Sdk.targets*에서 대상 파일을 가져옵니다.
-
-`MSBuildSDKsPath`의 기본 위치(Visual Studio 2017 Enterprise 사용)는 *%programfiles(x86)%\Microsoft Visual Studio\2017\Enterprise\MSBuild\Sdks* 폴더입니다.
-
-`Microsoft.NET.Sdk.Web` SDK는 다음에 따라 달라집니다.
-
-* *Microsoft.NET.Sdk.Web.ProjectSystem*
-* *Microsoft.NET.Sdk.Publish*
-
-이러한 항목은 다음 속성 및 대상을 가져옵니다.
-
-* *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Web.ProjectSystem\Sdk\Sdk.Props*
-* *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Web.ProjectSystem\Sdk\Sdk.targets*
-* *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Publish\Sdk\Sdk.Props*
-* *$(MSBuildSDKsPath)\Microsoft.NET.Sdk.Publish\Sdk\Sdk.targets*
-
-게시 대상은 사용된 게시 방법에 따라 올바른 대상 집합을 가져옵니다.
+`Microsoft.NET.Sdk.Web`(웹 SDK)은 `Microsoft.NET.Sdk`(.NET Core SDK) 및 `Microsoft.NET.Sdk.Razor`([Razor SDK](xref:razor-pages/sdk))를 비롯한 다른 SDK에 종속됩니다. 각 종속 SDK와 연결된 MSBuild 속성과 대상을 가져옵니다. 게시 대상은 사용된 게시 방법에 따라 해당 대상 집합을 가져옵니다.
 
 MSBuild 또는 Visual Studio가 프로젝트를 로드하면 다음 높은 수준의 작업이 수행됩니다.
 
@@ -87,9 +40,23 @@ MSBuild 또는 Visual Studio가 프로젝트를 로드하면 다음 높은 수�
 
 ## <a name="compute-project-items"></a>프로젝트 항목 컴퓨팅
 
-프로젝트가 로드되면 프로젝트 항목(파일)이 계산됩니다. `item type` 특성에 따라 파일 처리 방법이 결정됩니다. 기본적으로 *.cs* 파일은 `Compile` 항목 목록에 포함됩니다. `Compile` 항목 목록의 파일이 컴파일됩니다.
+프로젝트가 로드되면 [MSBuild 프로젝트 항목](/visualstudio/msbuild/common-msbuild-project-items)(파일)이 컴퓨팅됩니다. 항목 종류에 따라 파일 처리 방법이 결정됩니다. 기본적으로 *.cs* 파일은 `Compile` 항목 목록에 포함됩니다. `Compile` 항목 목록의 파일이 컴파일됩니다.
 
-`Content` 항목 목록에는 빌드 출력 이외에 게시될 파일이 포함됩니다. 기본적으로 패턴 `wwwroot/**`와 일치하는 파일은 `Content` 항목에 포함됩니다. [와일드카드 사용 패턴](https://gruntjs.com/configuring-tasks#globbing-patterns)인 `wwwroot/\*\*`는 *wwwroot* **및** 하위 폴더에서 모든 파일을 일치시킵니다. 게시 목록에 파일을 명시적으로 추가하려면 [포함 파일](#include-files)에 표시된 대로 *.csproj* 파일에서 직접 파일을 추가합니다.
+`Content` 항목 목록에는 빌드 출력 이외에 게시될 파일이 포함됩니다. 기본적으로 `wwwroot\**`, `**\*.json` 및 `Content` 패턴과 일치하는 파일이 `**\*.config` 항목 목록에 포함됩니다. 예를 들어 `wwwroot\**` [와일드카드 사용 패턴](https://gruntjs.com/configuring-tasks#globbing-patterns)은 *wwwroot* 폴더 **및** 하위 폴더의 모든 파일과 일치합니다.
+
+::: moniker range=">= aspnetcore-3.0"
+
+웹 SDK는 [Razor SDK](xref:razor-pages/sdk)를 가져옵니다. 따라서 `**\*.cshtml` 및 `**\*.razor` 패턴과 일치하는 파일도 `Content` 항목 목록에 포함됩니다.
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
+
+웹 SDK는 [Razor SDK](xref:razor-pages/sdk)를 가져옵니다. 따라서 `**\*.cshtml` 패턴과 일치하는 파일도 `Content` 항목 목록에 포함됩니다.
+
+::: moniker-end
+
+게시 목록에 파일을 명시적으로 추가하려면 [포함 파일](#include-files) 섹션에 표시된 대로 *.csproj* 파일에서 직접 파일을 추가합니다.
 
 Visual Studio에서 **게시** 단추를 선택하거나 명령줄에서 게시할 경우:
 
@@ -103,7 +70,7 @@ ASP.NET Core 프로젝트가 프로젝트 파일의 `Microsoft.NET.Sdk.Web`을 �
 
 ## <a name="basic-command-line-publishing"></a>기본 명령줄 게시
 
-명령줄 게시는 모든 .NET Core 지원 플랫폼에 적용되며 Visual Studio가 필요하지 않습니다. 아래 샘플에서 [dotnet publish](/dotnet/core/tools/dotnet-publish) 명령은 *.csproj* 파일이 포함된 프로젝트 디렉터리에서 실행됩니다. 프로젝트 폴더에 없는 경우 프로젝트 파일 경로를 명시적으로 전달합니다. 예:
+명령줄 게시는 모든 .NET Core 지원 플랫폼에 적용되며 Visual Studio가 필요하지 않습니다. 다음 샘플에서 [dotnet publish](/dotnet/core/tools/dotnet-publish) 명령은 *.csproj* 파일이 포함된 프로젝트 디렉터리에서 실행됩니다. 프로젝트 폴더에 없는 경우 프로젝트 파일 경로를 명시적으로 전달합니다. 예:
 
 ```console
 dotnet publish C:\Webs\Web1
@@ -120,10 +87,12 @@ dotnet publish
 
 ```console
 C:\Webs\Web1>dotnet publish
-Microsoft (R) Build Engine version 15.3.409.57025 for .NET Core
+Microsoft (R) Build Engine version {version} for .NET Core
 Copyright (C) Microsoft Corporation. All rights reserved.
 
+  Restore completed in 36.81 ms for C:\Webs\Web1\Web1.csproj.
   Web1 -> C:\Webs\Web1\bin\Debug\netcoreapp{X.Y}\Web1.dll
+  Web1 -> C:\Webs\Web1\bin\Debug\netcoreapp{X.Y}\Web1.Views.dll
   Web1 -> C:\Webs\Web1\bin\Debug\netcoreapp{X.Y}\publish\
 ```
 
@@ -148,7 +117,7 @@ dotnet publish -c Release -o C:\MyWebs\test
 
 `dotnet publish -c Release /p:PublishDir=//r8/release/AdminWeb`
 
-네트워크 공유는 슬래시(*//r8/*)를 사용하여 지정하고 모든 .NET Core 지원 플랫폼에서 작동합니다.
+네트워크 공유는 슬래시( *//r8/* )를 사용하여 지정하고 모든 .NET Core 지원 플랫폼에서 작동합니다.
 
 배포할 게시된 앱이 실행되고 있지 않은지 확인합니다. 앱이 실행 중이면 *publish* 폴더의 파일이 잠겨 있습니다. 잠긴 파일을 복사할 수 없으므로 배포를 수행할 수 없습니다.
 
@@ -158,7 +127,7 @@ dotnet publish -c Release -o C:\MyWebs\test
 
 게시 프로필을 사용하면 게시 프로세스를 간소화할 수 있고 제한 없이 프로필을 사용할 수 있습니다. 다음 경로 중 하나를 선택하여 Visual Studio에서 게시 프로필을 만듭니다.
 
-* 솔루션 탐색기에서 프로젝트를 마우스 오른쪽 단추로 클릭하고 **게시**를 선택합니다.
+* **솔루션 탐색기**에서 프로젝트를 마우스 오른쪽 단추로 클릭하고 **게시**를 선택합니다.
 * **빌드** 메뉴에서 **게시 {PROJECT NAME}** 를 선택합니다.
 
 앱 기능 페이지의 **게시** 탭이 표시됩니다. 프로젝트에 게시 프로필이 없으면 다음 페이지가 표시됩니다.
@@ -187,7 +156,7 @@ Azure 대상에 게시하는 경우 *.pubxml* 파일에는 Azure 구독 식별�
 
 중요 정보(예: 게시 암호)는 사용자/컴퓨터 수준별로 암호화됩니다. 이 정보는 *Properties/PublishProfiles/{PROFILE NAME}.pubxml.user* 파일에 저장됩니다. 중요 정보가 저장될 수 있는 파일이므로 소스 제어에 체크 인하면 안 됩니다.
 
-ASP.NET Core에서 웹앱을 게시하는 방법에 대한 개요는 [호스트 및 배포](xref:host-and-deploy/index)를 참조하세요. ASP.NET Core 앱을 게시하는 데 필요한 MSBuild 작업 및 대상은 https://github.com/aspnet/websdk의 오픈 소스입니다.
+ASP.NET Core에서 웹앱을 게시하는 방법에 대한 개요는 [호스트 및 배포](xref:host-and-deploy/index)를 참조하세요. ASP.NET Core 앱을 게시하는 데 필요한 MSBuild 작업 및 대상은 [aspnet/websdk 리포지토리](https://github.com/aspnet/websdk)에 있는 오픈 소스입니다.
 
 `dotnet publish`는 MSDeploy 폴더와 [Kudu](https://github.com/projectkudu/kudu/wiki) 게시 프로필을 사용할 수 있습니다.
 
@@ -209,7 +178,7 @@ MSDeploy 패키지(MSDeploy가 플랫폼 간이 아니기 때문에 현재 Windo
 dotnet publish WebApplication.csproj /p:PublishProfile=<MsDeployPackageProfileName>
 ```
 
-위 샘플에서 `deployonbuild`를 `dotnet publish`에 전달하지 **마세요**.
+위 예제에서 `deployonbuild`를 `dotnet publish`에 전달하지 마세요.
 
 자세한 내용은 [Microsoft.NET.Sdk.Publish](https://github.com/aspnet/websdk#microsoftnetsdkpublish)를 참조하세요.
 
@@ -272,7 +241,7 @@ MSBuild file.
 </Project>
 ```
 
-`<LastUsedBuildConfiguration>`은 `Release`로 설정됩니다. Visual Studio에서 게시할 경우 `<LastUsedBuildConfiguration>` 구성 속성 값은 게시 프로세스가 시작될 때의 값을 사용하여 설정됩니다. `<LastUsedBuildConfiguration>` 구성 속성은 특별하고 가져온 MSBuild 파일에서 재정의되면 안 됩니다. 이 속성은 명령줄에서 재정의할 수 있습니다.
+위 예제에서는 `<LastUsedBuildConfiguration>`이 `Release`로 설정되었습니다. Visual Studio에서 게시할 경우 `<LastUsedBuildConfiguration>` 구성 속성 값은 게시 프로세스가 시작될 때의 값을 사용하여 설정됩니다. `<LastUsedBuildConfiguration>` 구성 속성은 특별하고 가져온 MSBuild 파일에서 재정의되면 안 됩니다. 이 속성은 명령줄에서 재정의할 수 있습니다.
 
 .NET Core CLI 사용:
 
@@ -334,7 +303,7 @@ dotnet msbuild "AzureWebApp.csproj"
 
 ## <a name="set-the-environment"></a>환경 변수를 설정합니다.
 
-`<EnvironmentName>` 속성을 게시 프로필(*.pubxml*) 또는 프로젝트 파일에 포함하여 앱의 [환경](xref:fundamentals/environments)을 설정합니다.
+`<EnvironmentName>` 속성을 게시 프로필( *.pubxml*) 또는 프로젝트 파일에 포함하여 앱의 [환경](xref:fundamentals/environments)을 설정합니다.
 
 ```xml
 <PropertyGroup>
@@ -346,7 +315,15 @@ dotnet msbuild "AzureWebApp.csproj"
 
 ## <a name="exclude-files"></a>파일 제외
 
-ASP.NET Core 웹앱을 게시할 경우 *wwwroot* 폴더의 빌드 아티팩트 및 콘텐츠가 포함됩니다. `msbuild`는 [와일드카드 사용 패턴](https://gruntjs.com/configuring-tasks#globbing-patterns)을 지원합니다. 예를 들어 다음 `<Content>` 요소는 *wwwroot/content* 폴더와 모든 하위 폴더에서 모든 텍스트(*.txt*) 파일을 제외합니다.
+ASP.NET Core 웹앱을 게시하는 경우 다음 자산이 포함됩니다.
+
+* 빌드 아티팩트
+* 다음 와일드카드 사용 패턴과 일치하는 폴더 및 파일:
+  * `**\*.config`(예: *web.config*)
+  * `**\*.json`(예: *appsettings.json*)
+  * `wwwroot\**`
+
+MSBuild는 [와일드카드 사용 패턴](https://gruntjs.com/configuring-tasks#globbing-patterns)을 지원합니다. 예를 들어 다음 `<Content>` 요소는 *wwwroot\content* 폴더와 모든 하위 폴더에 있는 텍스트( *.txt*) 파일의 복사를 표시하지 않습니다.
 
 ```xml
 <ItemGroup>
@@ -356,7 +333,7 @@ ASP.NET Core 웹앱을 게시할 경우 *wwwroot* 폴더의 빌드 아티팩트 
 
 앞의 태그는 게시 프로필 또는 *.csproj* 파일에 추가될 수 있습니다. *.csproj* 파일에 추가된 규칙은 프로젝트의 모든 게시 프로필에 추가됩니다.
 
-다음 `<MsDeploySkipRules>` 요소는 *wwwroot/content* 폴더에서 모든 파일을 제외합니다.
+다음 `<MsDeploySkipRules>` 요소는 *wwwroot\content* 폴더의 모든 파일을 제외합니다.
 
 ```xml
 <ItemGroup>
@@ -367,7 +344,7 @@ ASP.NET Core 웹앱을 게시할 경우 *wwwroot* 폴더의 빌드 아티팩트 
 </ItemGroup>
 ```
 
-`<MsDeploySkipRules>`는 배포 사이트에서 ‘건너뛰기’ 대상을 삭제하지 않습니다. `<Content>` 대상 파일 및 폴더는 배포 사이트에서 삭제됩니다. 예를 들어 배포된 웹앱에 다음 파일이 포함되었다고 가정합니다.
+`<MsDeploySkipRules>`는 배포 사이트에서 ‘건너뛰기’ 대상을 삭제하지 않습니다.  `<Content>` 대상 파일 및 폴더는 배포 사이트에서 삭제됩니다. 예를 들어 배포된 웹앱에 다음 파일이 포함되었다고 가정합니다.
 
 * *Views/Home/About1.cshtml*
 * *Views/Home/About2.cshtml*
@@ -394,7 +371,7 @@ ASP.NET Core 웹앱을 게시할 경우 *wwwroot* 폴더의 빌드 아티팩트 
 </ItemGroup>
 ```
 
-앞의 `<MsDeploySkipRules>` 요소는 ‘건너뛴’ 파일이 배포되지 않도록 합니다. 해당 파일은 배포된 후에 삭제되지 않습니다.
+앞의 `<MsDeploySkipRules>` 요소는 ‘건너뛴’ 파일이 배포되지 않도록 합니다.  해당 파일은 배포된 후에 삭제되지 않습니다.
 
 다음 `<Content>` 요소는 배포 사이트에서 대상 파일을 삭제합니다.
 
@@ -425,7 +402,10 @@ Done Building Project "C:\Webs\Web1\Web1.csproj" (default targets).
 
 ## <a name="include-files"></a>포함 파일
 
-다음 태그는 게시 사이트의 *wwwroot/images* 폴더에 대한 프로젝트 디렉터리 외부에 *images* 폴더를 포함합니다.
+다음 태그를 살펴보시기 바랍니다.
+
+* 프로젝트 디렉터리 외부의 *images* 폴더를 게시 사이트의 *wwwroot/images* 폴더에 포함합니다.
+* *.csproj* 파일 또는 게시 프로필에 추가할 수 있습니다. 태그가 *.csproj* 파일에 추가되면 프로젝트의 각 게시 프로필에 포함됩니다.
 
 ```xml
 <ItemGroup>
@@ -435,8 +415,6 @@ Done Building Project "C:\Webs\Web1\Web1.csproj" (default targets).
   </DotnetPublishFiles>
 </ItemGroup>
 ```
-
-태그는 *.csproj* 파일 또는 게시 프로필에 추가될 수 있습니다. 태그가 *.csproj* 파일에 추가되면 프로젝트의 각 게시 프로필에 포함됩니다.
 
 다음 강조 표시된 태그는 방법을 표시합니다.
 
@@ -477,7 +455,7 @@ MSBuild file.
 </Project>
 ```
 
-더 많은 배포 샘플을 보려면 [WebSDK Readme](https://github.com/aspnet/websdk)(WebSDK 추가 정보)를 참조하세요.
+더 많은 배포 샘플을 보려면 [웹 SDK 리포지토리 추가 정보](https://github.com/aspnet/websdk)를 참조하세요.
 
 ## <a name="run-a-target-before-or-after-publishing"></a>게시 이전 또는 이후 대상 실행
 
@@ -516,6 +494,6 @@ Azure App Service 웹앱 배포에 있는 파일을 보려면 [Kudu 서비스](h
 ## <a name="additional-resources"></a>추가 자료
 
 * [웹 배포](https://www.iis.net/downloads/microsoft/web-deploy)(MSDeploy)는 IIS 서버에 대한 웹앱 및 웹 사이트 배포를 간소화합니다.
-* [https://github.com/aspnet/websdk](https://github.com/aspnet/websdk/issues): 배포에 대한 파일 문제 및 요청 기능.
+* [웹 SDK GitHub 리포지토리](https://github.com/aspnet/websdk/issues): 배포에 대한 파일 문제 및 요청 기능.
 * [Visual Studio에서 Azure VM에 ASP.NET 웹앱 게시](/azure/virtual-machines/windows/publish-web-app-from-visual-studio)
 * <xref:host-and-deploy/iis/transform-webconfig>
