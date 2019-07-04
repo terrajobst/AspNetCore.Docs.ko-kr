@@ -192,6 +192,8 @@
       uid: fundamentals/http-requests
     - name: 정적 파일
       uid: fundamentals/static-files
+    - name: 코드 생성기
+      uid: fundamentals/tools/dotnet-aspnet-codegenerator
 - name: 웹앱
   items:
     - name: Razor 페이지
@@ -816,6 +818,8 @@
           uid: security/authentication/2fa
         - name: ID 없이 쿠키 인증 사용
           uid: security/authentication/cookie
+        - name: ID 없이 소셜 인증 사용
+          uid: security/authentication/social/social-without-identity
         - name: Azure Active Directory
           items:
             - name: 개요
