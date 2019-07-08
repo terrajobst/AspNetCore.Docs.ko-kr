@@ -2,16 +2,17 @@
 title: ASP.NET Core에서 razor 페이지 단위 테스트
 author: guardrex
 description: Razor 페이지 앱에 대 한 단위 테스트를 만드는 방법에 알아봅니다.
+monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/27/2017
+ms.date: 07/07/2017
 uid: test/razor-pages-tests
-ms.openlocfilehash: f0e47f975579dc114eaeda375028ec62696f58ed
-ms.sourcegitcommit: 763af2cbdab0da62d1f1cfef4bcf787f251dfb5c
+ms.openlocfilehash: f89b4fcb0065e725f70deec7859e373f9158b4bd
+ms.sourcegitcommit: 91cc1f07ef178ab709ea42f8b3a10399c970496e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2019
-ms.locfileid: "67394734"
+ms.lasthandoff: 07/08/2019
+ms.locfileid: "67622788"
 ---
 # <a name="razor-pages-unit-tests-in-aspnet-core"></a>ASP.NET Core에서 razor 페이지 단위 테스트
 
@@ -26,20 +27,20 @@ ASP.NET Core Razor 페이지 앱의 단위 테스트를 지원합니다. 테스�
 
 이 항목에서는 Razor 페이지 앱 및 단위 테스트는 기본적인 이해가 있다고 가정 합니다. Razor 페이지 앱 또는 테스트 개념을 잘 모르는 경우 다음 항목을 참조 합니다.
 
-* [Razor 페이지 소개](xref:razor-pages/index)
-* [Razor 페이지 시작](xref:tutorials/razor-pages/razor-pages-start)
+* <xref:razor-pages/index>
+* <xref:tutorials/razor-pages/razor-pages-start>
 * [Dotnet test 및 xUnit을 사용 하 여.NET Core에서 C# 테스트 단위](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/razor-pages-tests/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 샘플 프로젝트는 두 개의 앱으로 구성 됩니다.
 
-| 앱         | 프로젝트 폴더                        | 설명 |
-| ----------- | ------------------------------------- | ----------- |
-| 메시지 앱 | *src/RazorPagesTestSample*            | 추가, 하나를 삭제, all, 삭제 및 메시지를 분석할 수 있습니다. |
-| 테스트 앱    | *tests/RazorPagesTestSample.Tests*    | 메시지 앱 단위 테스트 하는 데 사용 합니다. DAL (데이터 액세스 계층) 및 인덱스 페이지 모델입니다. |
+| 앱         | 프로젝트 폴더                     | 설명 |
+| ----------- | ---------------------------------- | ----------- |
+| 메시지 앱 | *src/RazorPagesTestSample*         | 메시지 추가, 하나의 메시지를 삭제, 모든 메시지를 삭제 및 메시지 (메시지 당 단어의 평균 찾기)를 분석할 수 있습니다. |
+| 테스트 앱    | *tests/RazorPagesTestSample.Tests* | 단위 테스트는 DAL에서 메시지 앱의 인덱스 페이지 모델을 사용 합니다. |
 
-와 같은 기본 제공 테스트에 대 한 기능의 IDE 사용 하 여 테스트를 실행할 수 있습니다 [Visual Studio](https://visualstudio.microsoft.com)합니다. 사용 하는 경우 [Visual Studio Code](https://code.visualstudio.com/) 또는 명령줄에서 명령 프롬프트에서 다음 명령을 실행 합니다 *tests/RazorPagesTestSample.Tests* 폴더:
+와 같은 기본 제공 테스트에 대 한 기능의 IDE 사용 하 여 테스트를 실행할 수 있습니다 [Visual Studio](/visualstudio/test/unit-test-your-code) 하거나 [Mac 용 Visual Studio](/dotnet/core/tutorials/using-on-mac-vs-full-solution)합니다. 사용 하는 경우 [Visual Studio Code](https://code.visualstudio.com/) 또는 명령줄에서 명령 프롬프트에서 다음 명령을 실행 합니다 *tests/RazorPagesTestSample.Tests* 폴더:
 
 ```console
 dotnet test
@@ -47,17 +48,17 @@ dotnet test
 
 ## <a name="message-app-organization"></a>메시지 앱 조직
 
-메시지 앱은 다음 특성을 가진 간단한 Razor 페이지 메시지 시스템:
+메시지 앱은 다음 특성을 사용 하 여 Razor 페이지 메시지 시스템:
 
-* 앱의 인덱스 페이지 (*pages/Index.cshtml* 하 고 *Pages/Index.cshtml.cs*) UI 및 페이지 추가, 삭제 및 메시지 (메시지 당 평균 단어) 분석을 제어 하려면 모델 메서드 제공 .
+* 앱의 인덱스 페이지 (*pages/Index.cshtml* 하 고 *Pages/Index.cshtml.cs*) UI 및 페이지 모델을 추가, 삭제 및 분석 (평균 개수를 확인 하는 메시지의 제어 방법 제공 단어 메시지당)입니다.
 * 메시지에서 설명 합니다 `Message` 클래스 (*Data/Message.cs*) 두 가지 속성을 사용 하 여: `Id` (키) 및 `Text` (메시지). `Text` 속성 필요 하 고 200 자로 제한 됩니다.
 * 메시지를 사용 하 여 저장 됩니다 [Entity Framework의 메모리 내 데이터베이스](/ef/core/providers/in-memory/)&#8224;합니다.
-* 해당 데이터베이스 컨텍스트 클래스의를 DAL (데이터 액세스 계층)를 포함 하는 앱 `AppDbContext` (*Data/AppDbContext.cs*). DAL 메서드 표시 되는 `virtual`, 테스트에서 사용할 메서드를 모의 수 있습니다.
+* 앱이 해당 데이터베이스 컨텍스트 클래스에서 DAL 포함 `AppDbContext` (*Data/AppDbContext.cs*). DAL 메서드 표시 되는 `virtual`, 테스트에서 사용할 메서드를 모의 수 있습니다.
 * 데이터베이스 앱 시작 시 비어 있으면 메시지 저장소는 세 개의 메시지를 사용 하 여 초기화 됩니다. 이러한 *메시지 시드* 테스트에도 사용 됩니다.
 
 &#8224;EF 항목인 [inmemory 테스트](/ef/core/miscellaneous/testing/in-memory), MSTest 사용한 테스트에 대 한 메모리 내 데이터베이스를 사용 하는 방법에 설명 합니다. 이 항목에서는 사용 된 [xUnit](https://xunit.github.io/) 테스트 프레임 워크입니다. 테스트 개념 다른 테스트 프레임 워크에서 구현 테스트와 유사 하지만 동일 하지입니다.
 
-앱 리포지토리 패턴을 사용 하지 않습니다 하 고 효과적인 예가 없습니다 있지만 합니다 [작업 단위 (UoW) 패턴](https://martinfowler.com/eaaCatalog/unitOfWork.html), Razor 페이지는 이러한 패턴을 개발을 지원 합니다. 자세한 내용은 [인프라 지 속성 계층 디자인](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) 하 고 [컨트롤러 논리 테스트](/aspnet/core/mvc/controllers/testing) (샘플 리포지토리 패턴을 구현 하는 데 사용).
+샘플 앱 리포지토리 패턴을 사용 하지 않습니다 하 고 효과적인 예가 없습니다 있지만 합니다 [작업 단위 (UoW) 패턴](https://martinfowler.com/eaaCatalog/unitOfWork.html), Razor 페이지는 이러한 패턴을 개발을 지원 합니다. 자세한 내용은 [인프라 지 속성 계층 디자인](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) 고 <xref:mvc/controllers/testing> (샘플 리포지토리 패턴을 구현 하는 데 사용).
 
 ## <a name="test-app-organization"></a>테스트 앱 구성
 
@@ -81,7 +82,7 @@ dotnet test
 | `DeleteAllMessagesAsync` | 모든 삭제 `Message` 데이터베이스에서 항목입니다.                           |
 | `DeleteMessageAsync`     | 단일 삭제 `Message` 하 여 데이터베이스에서 `Id`합니다.                      |
 
-DAL의 단위 테스트에 필요한 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 새로 만들 때 `AppDbContext` 각 테스트에 대 한 합니다. 만드는 한 가지 방법은 합니다 `DbContextOptions` 각 테스트를 사용 하는 것을 [DbContextOptionsBuilder](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptionsbuilder):
+DAL의 단위 테스트에 필요한 <xref:Microsoft.EntityFrameworkCore.DbContextOptions> 새로 만들 때 `AppDbContext` 각 테스트에 대 한 합니다. 만드는 한 가지 방법은 합니다 `DbContextOptions` 각 테스트를 사용 하는 것을 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder>:
 
 ```csharp
 var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>()
@@ -148,15 +149,15 @@ using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
 | 페이지 모델 메서드 | 함수 |
 | ----------------- | -------- |
 | `OnGetAsync` | 사용 하 여 UI에 대 한 DAL에서 메시지를 가져옵니다는 `GetMessagesAsync` 메서드. |
-| `OnPostAddMessageAsync` | 경우는 `ModelState` 유효, 호출 `AddMessageAsync` 데이터베이스로 메시지를 추가 하려면. |
+| `OnPostAddMessageAsync` | 경우는 [ModelState](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary) 유효, 호출 `AddMessageAsync` 데이터베이스로 메시지를 추가 하려면. |
 | `OnPostDeleteAllMessagesAsync` | 호출 `DeleteAllMessagesAsync` 모든 데이터베이스에 메시지를 삭제 합니다. |
 | `OnPostDeleteMessageAsync` | 실행 `DeleteMessageAsync` 사용 하 여 메시지를 삭제 하는 `Id` 지정 합니다. |
 | `OnPostAnalyzeMessagesAsync` | 하나 이상의 메시지를 데이터베이스에 있는 경우 메시지당 단어의 평균을 계산 합니다. |
 
 페이지 모델 메서드 테스트에서 7 개의 테스트를 사용 하 여 `IndexPageTests` 클래스 (*tests/RazorPagesTestSample.Tests/UnitTests/IndexPageTests.cs*). 테스트는 친숙 한 정렬 Assert Act 패턴을 사용 합니다. 이러한 테스트에 집중 합니다.
 
-* 메서드 올바른 동작을 수행 하는 경우 결정 때는 `ModelState` 올바르지 않습니다.
-* 올바른 생성 메서드 확인 `IActionResult`합니다.
+* 메서드 올바른 동작을 수행 하는 경우 결정 때 합니다 [ModelState](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary) 올바르지 않습니다.
+* 올바른 생성 메서드 확인 <xref:Microsoft.AspNetCore.Mvc.IActionResult>합니다.
 * 속성 값 할당 내용이 확인 합니다.
 
 이 그룹의 테스트에는 종종 페이지 모델 메서드 실행 되는 작업 단계에 대 한 예상 되는 데이터를 생성 하기 위해 DAL의 메서드를 모방 합니다. 예를 들어, 합니다 `GetMessagesAsync` 메서드는 `AppDbContext` 출력을 생성 하기 위해 모의 합니다. 이 메서드를 실행 하는 페이지 모델 메서드를 모의 결과 반환 합니다. 데이터를 데이터베이스에서 가져와야 하지 않습니다. 이 DAL을 사용 하 여 페이지 모델 테스트에서에 대 한 예측 가능 하 고 신뢰할 수 있는 테스트 조건을 만듭니다.
@@ -181,17 +182,18 @@ using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
 
 [!code-csharp[](razor-pages-tests/samples/2.x/tests/RazorPagesTestSample.Tests/UnitTests/IndexPageTests.cs?name=snippet3)]
 
-이 그룹의 다른 테스트 페이지를 포함 하는 모델 개체 만들기를 `DefaultHttpContext`는 `ModelStateDictionary`, `ActionContext` 설정 하는 `PageContext`, `ViewDataDictionary`, 및 `PageContext`합니다. 이러한 테스트를 수행 하는에 유용 합니다. 메시지 앱을 설정 하는 예를 들어를 `ModelState` 오류로 `AddModelError` 있는지 여부를 확인 하려면 유효한 `PageResult` 이 반환 됩니다 `OnPostAddMessageAsync` 실행:
+이 그룹의 다른 테스트 페이지를 포함 하는 모델 개체 만들기를 <xref:Microsoft.AspNetCore.Http.DefaultHttpContext>는 <xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary>, <xref:Microsoft.AspNetCore.Mvc.ActionContext> 설정 하는 `PageContext`, `ViewDataDictionary`, 및 `PageContext`합니다. 이러한 테스트를 수행 하는에 유용 합니다. 메시지 앱을 설정 하는 예를 들어를 `ModelState` 오류로 <xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.AddModelError*> 있는지 여부를 확인 하려면 유효한 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageResult> 이 반환 됩니다 `OnPostAddMessageAsync` 실행:
 
 [!code-csharp[](razor-pages-tests/samples/2.x/tests/RazorPagesTestSample.Tests/UnitTests/IndexPageTests.cs?name=snippet4&highlight=11,26,29,32)]
 
 ## <a name="additional-resources"></a>추가 자료
 
 * [Dotnet test 및 xUnit을 사용 하 여.NET Core에서 C# 테스트 단위](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)
-* [테스트 컨트롤러](xref:mvc/controllers/testing)
+* <xref:mvc/controllers/testing>
 * [코드 단위 테스트](/visualstudio/test/unit-test-your-code) (Visual Studio)
-* [통합 테스트](xref:test/integration-tests)
+* <xref:test/integration-tests>
 * [xUnit.net](https://xunit.github.io/)
-* [XUnit.net (.NET core/asp.net Core)를 사용 하 여 시작](https://xunit.github.io/docs/getting-started-dotnet-core)
+* [Visual Studio for Mac을 사용하여 macOS에서 완전한 .NET Core 솔루션 빌드](/dotnet/core/tutorials/using-on-mac-vs-full-solution)
+* [XUnit.net 시작 하기: .NET SDK 명령줄 사용 하 여.NET Core를 사용 하 여](https://xunit.github.io/docs/getting-started-dotnet-core)
 * [Moq](https://github.com/moq/moq4)
 * [Moq 빠른 시작](https://github.com/Moq/moq4/wiki/Quickstart)
