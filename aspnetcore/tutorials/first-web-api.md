@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core를 사용하여 웹 API를 빌드하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/18/2019
+ms.date: 06/23/2019
 uid: tutorials/first-web-api
-ms.openlocfilehash: 17e8ee08fca775b8fccc3f2e6cd6067caca9c79f
-ms.sourcegitcommit: a1283d486ac1dcedfc7ea302e1cc882833e2c515
+ms.openlocfilehash: a53f7019c1079296f073e743ddbf9d90fc5abad3
+ms.sourcegitcommit: d6e51c60439f03a8992bda70cc982ddb15d3f100
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67207774"
+ms.lasthandoff: 07/03/2019
+ms.locfileid: "67555871"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>자습서: ASP.NET Core를 사용하여 웹 API 만들기
 
@@ -49,17 +49,32 @@ ms.locfileid: "67207774"
 
 다음 다이어그램에서는 앱의 디자인을 보여줍니다.
 
-![클라이언트는 왼쪽에 상자로 표시되며 요청을 제출하고 오른쪽에 그린 상자인 애플리케이션에서 응답을 받습니다. 애플리케이션 상자 내에서 3개의 상자는 컨트롤러, 모델 및 데이터 액세스 계층을 나타냅니다. 요청은 애플리케이션의 컨트롤러로 들어오고 읽기/쓰기 작업은 컨트롤러와 데이터 액세스 계층 간에 발생합니다. 모델은 직렬화되며 응답에서 클라이언트에 반환됩니다.](first-web-api/_static/architecture.png)
+![클라이언트는 왼쪽에 상자로 표시됩니다. 클라이언트는 요청을 제출하고 오른쪽에 그려진 상자인 애플리케이션에서 응답을 받습니다. 애플리케이션 상자 내에서 3개의 상자는 컨트롤러, 모델 및 데이터 액세스 계층을 나타냅니다. 요청은 애플리케이션의 컨트롤러로 들어오고 읽기/쓰기 작업은 컨트롤러와 데이터 액세스 계층 간에 발생합니다. 모델은 직렬화되며 응답에서 클라이언트에 반환됩니다.](first-web-api/_static/architecture.png)
 
-[!INCLUDE[](~/includes/net-core-prereqs-all-2.2.md)]
+## <a name="prerequisites"></a>전제 조건
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+[!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
+
+# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+
+[!INCLUDE[](~/includes/net-core-prereqs-vsc-2.2.md)]
+
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+
+[!INCLUDE[](~/includes/net-core-prereqs-mac-2.2.md)]
+
+---
 
 ## <a name="create-a-web-project"></a>웹 프로젝트 만들기
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.
-* **ASP.NET Core 웹 애플리케이션** 템플릿을 선택합니다. 프로젝트 이름을 *TodoApi*로 지정하고 **확인**을 클릭합니다.
-* **새 ASP.NET Core 웹 애플리케이션 - TodoApi** 대화 상자에서 ASP.NET Core 버전을 선택합니다. **API** 템플릿을 선택하고 **확인**을 클릭합니다. **Docker 지원 사용**을 선택하지 **마세요**.
+* **ASP.NET Core 웹 애플리케이션** 템플릿을 선택하고 **다음**을 클릭합니다.
+* 프로젝트 이름을 *TodoApi*로 지정하고 **만들기**를 클릭합니다.
+* **새 ASP.NET Core 웹 애플리케이션 만들기** 대화 상자에서 **.NET Core** 및 **ASP.NET Core 2.2**가 선택되었는지 확인합니다. **API** 템플릿을 선택하고 **만들기**를 클릭합니다. **Docker 지원 사용**을 선택하지 **마세요**.
 
 ![VS 새 프로젝트 대화 상자](first-web-api/_static/vs.png)
 
@@ -392,7 +407,7 @@ Postman을 사용하여 할 일 항목을 삭제합니다.
 
 이 섹션에서는 jQuery를 사용하여 웹 API를 호출하는 HTML 페이지가 추가되었습니다. jQuery는 요청을 시작하고 API 응답의 세부 정보로 페이지를 업데이트합니다.
 
-[정적 파일](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_)을 제공하고 [기본 파일 매핑을 사용](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_)하도록 프로젝트를 구성합니다.
+다음 강조 표시된 코드로 *Startup.cs*를 업데이트하여 앱이 [정적 파일을 제공](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_)하고 [기본 파일 매핑을 사용](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_)하도록 구성합니다.
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Startup.cs?highlight=14-15&name=snippet_configure)]
 
