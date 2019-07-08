@@ -2,17 +2,17 @@
 title: ASP.NET Core의 응답 캐싱 미들웨어
 author: guardrex
 description: ASP.NET Core에서 응답 캐싱 미들웨어를 구성하고 사용하는 방법을 알아봅니다.
-monikerRange: '>= aspnetcore-1.1'
+monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/20/2019
+ms.date: 07/05/2019
 uid: performance/caching/middleware
-ms.openlocfilehash: ddbd547ec0fdd09da1f3e3ce30f8fa35a34870c2
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: d6756ce16396133da643cc08ca0f48369479ad3a
+ms.sourcegitcommit: b9e914ef274b5ec359582f299724af6234dce135
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64897370"
+ms.lasthandoff: 07/05/2019
+ms.locfileid: "67596148"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>ASP.NET Core의 응답 캐싱 미들웨어
 
@@ -20,37 +20,26 @@ ms.locfileid: "64897370"
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/middleware/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-이 문서에서는 ASP.NET Core 응용 프로그램에서 응답 캐싱 미들웨어를 구성하는 방법을 알아봅니다. 미들웨어는 응답을 캐싱할 수 있는 시점을 결정하고 응답을 저장하고 캐시에서 가져온 응답을 제공합니다. HTTP 캐싱 및 `ResponseCache` 특성에 대한 소개는 [응답 캐싱](xref:performance/caching/response)을 참고하시기 바랍니다.
-
-## <a name="package"></a>Package
-
-::: moniker range=">= aspnetcore-2.1"
-
-참조를 [Microsoft.AspNetCore.App 메타 패키지](xref:fundamentals/metapackage-app) 에 대 한 패키지 참조를 추가 하거나 합니다 [Microsoft.AspNetCore.ResponseCaching](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCaching/) 패키지 합니다.
-
-::: moniker-end
-
-::: moniker range="= aspnetcore-2.0"
-
-참조를 [Microsoft.AspNetCore.All 메타 패키지](xref:fundamentals/metapackage) 에 대 한 패키지 참조를 추가 하거나 합니다 [Microsoft.AspNetCore.ResponseCaching](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCaching/) 패키지 합니다.
-
-::: moniker-end
-
-::: moniker range="= aspnetcore-1.1"
-
-패키지 참조를 추가 합니다 [Microsoft.AspNetCore.ResponseCaching](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCaching/) 패키지 있습니다.
-
-::: moniker-end
+이 문서에서는 ASP.NET Core 응용 프로그램에서 응답 캐싱 미들웨어를 구성하는 방법을 알아봅니다. 미들웨어는 응답을 캐싱할 수 있는 시점을 결정하고 응답을 저장하고 캐시에서 가져온 응답을 제공합니다. HTTP 캐싱을 소개 하며 [[ResponseCache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) 특성을 참조 하십시오 [응답 캐싱](xref:performance/caching/response)합니다.
 
 ## <a name="configuration"></a>구성
 
-`Startup.ConfigureServices`에서 서비스 컬렉션에 미들웨어를 추가합니다.
+사용 하 여는 [Microsoft.AspNetCore.App 메타 패키지](xref:fundamentals/metapackage-app) 에 대 한 패키지 참조를 추가 또는 합니다 [Microsoft.AspNetCore.ResponseCaching](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCaching/) 패키지 합니다.
 
-[!code-csharp[](middleware/samples/2.x/ResponseCachingMiddleware/Startup.cs?name=snippet1&highlight=9)]
+`Startup.ConfigureServices`, 응답 캐싱 미들웨어 서비스 컬렉션에 추가 합니다.
 
-그리고 미들웨어를 요청 처리 파이프라인에 추가하는 `UseResponseCaching` 확장 메서드를 이용해서 응용 프로그램이 미들웨어를 사용하도록 구성합니다. 예제 응용 프로그램은 최대 10초 동안 캐시가 응답을 캐싱할 수 있도록 [`Cache-Control`](https://tools.ietf.org/html/rfc7234#section-5.2) 헤더를 응답에 추가합니다. 또한 [`Vary`](https://tools.ietf.org/html/rfc7231#section-7.1.4) 헤더를 전송해서 후속 요청의 [`Accept-Encoding`](https://tools.ietf.org/html/rfc7231#section-5.3.4) 헤더가 원본 요청과 일치하는 경우에만 캐시된 응답을 제공하도록 미들웨어를 구성합니다. 다음 예제 코드에서 [CacheControlHeaderValue](/dotnet/api/microsoft.net.http.headers.cachecontrolheadervalue) 및 [HeaderNames](/dotnet/api/microsoft.net.http.headers.headernames)를 사용하려면 [Microsoft.Net.Http.Headers](/dotnet/api/microsoft.net.http.headers) 네임스페이스에 대한 `using` 문이 필요합니다.
+[!code-csharp[](middleware/samples/2.x/ResponseCachingMiddleware/Startup.cs?name=snippet1&highlight=3)]
 
-[!code-csharp[](middleware/samples/2.x/ResponseCachingMiddleware/Startup.cs?name=snippet2&highlight=17,22-29)]
+사용 하 여 미들웨어를 사용 하도록 앱을 구성 합니다 <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching*> 요청 처리 파이프라인에 미들웨어를 추가 하는 확장 메서드를 `Startup.Configure`:
+
+[!code-csharp[](middleware/samples/2.x/ResponseCachingMiddleware/Startup.cs?name=snippet2&highlight=14)]
+
+샘플 앱은 후속 요청에서 캐싱을 제어 하는 헤더를 추가 합니다.
+
+* [Cache-control](https://tools.ietf.org/html/rfc7234#section-5.2) &ndash; 최대 10 초 동안 캐시 가능 응답을 캐시 합니다.
+* [달라 집니다](https://tools.ietf.org/html/rfc7231#section-7.1.4) &ndash; 경우에만 캐시 된 응답을 처리 하는 미들웨어를 구성 합니다 [ `Accept-Encoding` ](https://tools.ietf.org/html/rfc7231#section-5.3.4) 후속 요청의 헤더는 원래 요청과 일치 합니다.
+
+[!code-csharp[](middleware/samples_snippets/2.x/AddHeaders.cs)]
 
 응답 캐싱 미들웨어는 상태 코드가 200(정상)인 서버 응답만 캐시합니다. [오류 페이지](xref:fundamentals/error-handling)를 비롯한 다른 모든 응답은 미들웨어에 의해 무시됩니다.
 
@@ -59,35 +48,36 @@ ms.locfileid: "64897370"
 
 ## <a name="options"></a>옵션
 
-미들웨어는 응답 캐싱을 제어하기 위한 세 가지 옵션을 제공합니다.
+응답 캐싱 옵션은 다음 표에 표시 됩니다.
 
-| 옵션                | 설명 |
-| --------------------- | ----------- |
-| UseCaseSensitivePaths | 경로의 대/소문자를 구분해서 응답을 캐시할지 결정합니다. 기본값은 `false`입니다. |
-| MaximumBodySize       | 캐시 가능한 응답 본문의 최대 바이트 크기입니다. 기본값은 `64 * 1024 * 1024`(64MB)입니다. |
-| SizeLimit             | 응답 캐싱 미들웨어의 바이트 크기 제한입니다. 기본값은 `100 * 1024 * 1024`(100MB)입니다. |
+| 옵션 | 설명 |
+| ------ | ----------- |
+| <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.MaximumBodySize> | 캐시 가능한 응답 본문의 최대 바이트 크기입니다. 기본값은 `64 * 1024 * 1024`(64MB)입니다. |
+| <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.SizeLimit> | 응답 캐싱 미들웨어의 바이트 크기 제한입니다. 기본값은 `100 * 1024 * 1024`(100MB)입니다. |
+| <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.UseCaseSensitivePaths> | 경로의 대/소문자를 구분해서 응답을 캐시할지 결정합니다. 기본값은 `false`입니다. |
 
 아래 예제는 미들웨어를 다음과 같이 구성합니다.
 
-* 1,024바이트 이하의 응답을 캐시합니다.
-* 경로의 대/소문자를 구분해서 응답을 저장합니다(예를 들어 `/page1`과 `/Page1`을 별도로 저장합니다).
+* 본문 크기 보다 작거나 1, 024 바이트를 사용 하 여 응답을 캐시 합니다.
+* 대/소문자 구분 경로 의해 응답을 저장 합니다. 예를 들어 `/page1` 고 `/Page1` 별도로 저장 됩니다.
 
 ```csharp
 services.AddResponseCaching(options =>
 {
-    options.UseCaseSensitivePaths = true;
     options.MaximumBodySize = 1024;
+    options.UseCaseSensitivePaths = true;
 });
 ```
 
 ## <a name="varybyquerykeys"></a>VaryByQueryKeys
 
-MVC/Web API 컨트롤러 또는 Razor Pages 페이지 모델을 사용할 때 `ResponseCache` 특성은 응답 캐싱을 위한 적절한 헤더를 설정하기 위해 필요한 매개 변수를 지정합니다. 미들웨어가 반드시 필요한 `ResponseCache` 특성의 유일한 매개 변수는 `VaryByQueryKeys`로, 이 매개 변수는 실제 HTTP 헤더와 일치하지 않습니다. 자세한 내용은 [ResponseCache 특성](xref:performance/caching/response#responsecache-attribute)을 참고하시기 바랍니다.
+MVC를 사용 하는 경우 / 웹 API 컨트롤러 또는 Razor 페이지 페이지 모델에는 [[ResponseCache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) 특성 응답 캐싱을 위해 적절 한 헤더를 설정 하는 데 필요한 매개 변수를 지정 합니다. 미들웨어가 반드시 필요한 `[ResponseCache]` 특성의 유일한 매개 변수는 <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute.VaryByQueryKeys>로, 이 매개 변수는 실제 HTTP 헤더와 일치하지 않습니다. 자세한 내용은 <xref:performance/caching/response#responsecache-attribute>을 참조하세요.
 
-`ResponseCache` 특성을 사용하지 않을 경우, `VaryByQueryKeys` 기능을 사용해서 응답 캐싱을 변경할 수 있습니다. 사용 된 `ResponseCachingFeature` 에서 직접 합니다 `IFeatureCollection` 의 `HttpContext`:
+사용 하지 않는 경우는 `[ResponseCache]` 특성을 사용 하 여 달라질 수 응답 캐싱 `VaryByQueryKeys`합니다. 사용 된 <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingFeature> 에서 직접 합니다 [HttpContext.Features](xref:Microsoft.AspNetCore.Http.HttpContext.Features):
 
 ```csharp
 var responseCachingFeature = context.HttpContext.Features.Get<IResponseCachingFeature>();
+
 if (responseCachingFeature != null)
 {
     responseCachingFeature.VaryByQueryKeys = new[] { "MyKey" };
@@ -98,21 +88,21 @@ if (responseCachingFeature != null)
 
 ## <a name="http-headers-used-by-response-caching-middleware"></a>응답 캐싱 미들웨어에서 사용되는 HTTP 헤더
 
-미들웨어에 의한 응답 캐싱은 HTTP 헤더를 이용해서 구성됩니다.
+다음 표에서 응답 캐싱에 영향을 주는 HTTP 헤더에 정보를 제공 합니다.
 
 | 헤더 | 설명 |
 | ------ | ------- |
-| Authorization | 이 헤더가 존재할 경우 응답이 캐시되지 않습니다. |
-| Cache-Control | 미들웨어는 `public` 캐시 지시문으로 표시된 캐싱 응답만 고려합니다. 다음 매개 변수로 캐싱을 제어하십시오.<ul><li>max-age</li><li>max-stale&#8224;</li><li>최소 새로</li><li>must-revalidate</li><li>캐시 없음</li><li>no-store</li><li>only-if-cached</li><li>private</li><li>public</li><li>기간</li><li>proxy-revalidate&#8225;</li></ul>&#8224; `max-stale`에 제한이 지정되지 않으면 미들웨어는 아무런 작업도 하지 않습니다.<br>&#8225; `proxy-revalidate`는 `must-revalidate`와 동일한 효과를 갖습니다.<br><br>자세한 내용은 참조 하세요. [RFC 7231: 캐시 제어 지시문을 요청](https://tools.ietf.org/html/rfc7234#section-5.2.1)합니다. |
-| Pragma | 요청에 지정된 `Pragma: no-cache` 헤더는 `Cache-Control: no-cache`와 동일한 효과를 갖습니다. 이 헤더는 `Cache-Control` 헤더가 존재할 경우, 지정된 관련 지시문에 의해 재정의됩니다. HTTP/1.0에 대한 하위 호환성을 감안하기 위한 헤더입니다. |
-| Set-Cookie | 이 헤더가 존재할 경우 응답이 캐시되지 않습니다. 하나 이상의 쿠키를 설정하는 요청 처리 파이프라인의 모든 미들웨어는 응답 캐싱 미들웨어가 응답을 캐싱하지 못하게 합니다(예를 들어 [쿠키 기반 TempData 공급자](xref:fundamentals/app-state#tempdata)).  |
-| Vary | `Vary` 헤더는 다른 헤더를 이용해서 캐싱된 응답을 변경하기 위해서 사용됩니다. 예를 들어, `Vary: Accept-Encoding` 헤더가 지정된 요청과 `Accept-Encoding: gzip` 헤더가 지정된 요청에 대한 응답을 별도로 캐시하는 `Accept-Encoding: text/plain` 헤더를 지정해서 인코딩된 응답을 캐시할 수 있습니다. 헤더 값이 `*`인 응답은 절대로 저장되지 않습니다. |
-| Expires | 이 헤더에 의해 낡은 것으로 간주되는 응답은 다른 `Cache-Control` 헤더에 의해서 재정의되지 않는 한 저장되거나 조회되지 않습니다. |
-| -None-If-match | 값이 `*`가 아니고 응답의 `ETag`가 제공된 모든 값과 일치하지 않으면 전체 응답이 캐시에서 제공됩니다. 그렇지 않으면 304(수정되지 않음) 응답이 제공됩니다. |
-| If-수정-이후 | `If-None-Match` 헤더가 존재하지 않으면, 캐시된 응답 날짜가 제공된 값보다 새로운 경우 전체 응답이 캐시에서 제공됩니다. 그렇지 않으면 304(수정되지 않음) 응답이 제공됩니다. |
-| Date | 캐시에서 응답을 제공할 때, 원본 응답이 `Date` 헤더를 제공하지 않으면 미들웨어에 의해 설정됩니다. |
-| Content-Length | 캐시에서 응답을 제공할 때, 원본 응답이`Content-Length` 헤더를 제공하지 않으면 미들웨어에 의해 설정됩니다. |
-| 보존 기간 | 원본 응답이 전송한 `Age` 헤더는 무시됩니다. 캐시된 응답을 제공할 때 미들웨어가 새로운 값을 계산합니다. |
+| `Authorization` | 이 헤더가 존재할 경우 응답이 캐시되지 않습니다. |
+| `Cache-Control` | 미들웨어는 `public` 캐시 지시문으로 표시된 캐싱 응답만 고려합니다. 다음 매개 변수로 캐싱을 제어하십시오.<ul><li>max-age</li><li>max-stale&#8224;</li><li>최소 새로</li><li>must-revalidate</li><li>캐시 없음</li><li>no-store</li><li>only-if-cached</li><li>private</li><li>public</li><li>기간</li><li>proxy-revalidate&#8225;</li></ul>&#8224; `max-stale`에 제한이 지정되지 않으면 미들웨어는 아무런 작업도 하지 않습니다.<br>&#8225; `proxy-revalidate`는 `must-revalidate`와 동일한 효과를 갖습니다.<br><br>자세한 내용은 참조 하세요. [RFC 7231: 캐시 제어 지시문을 요청](https://tools.ietf.org/html/rfc7234#section-5.2.1)합니다. |
+| `Pragma` | 요청에 지정된 `Pragma: no-cache` 헤더는 `Cache-Control: no-cache`와 동일한 효과를 갖습니다. 이 헤더는 `Cache-Control` 헤더가 존재할 경우, 지정된 관련 지시문에 의해 재정의됩니다. HTTP/1.0에 대한 하위 호환성을 감안하기 위한 헤더입니다. |
+| `Set-Cookie` | 이 헤더가 존재할 경우 응답이 캐시되지 않습니다. 하나 이상의 쿠키를 설정하는 요청 처리 파이프라인의 모든 미들웨어는 응답 캐싱 미들웨어가 응답을 캐싱하지 못하게 합니다(예를 들어 [쿠키 기반 TempData 공급자](xref:fundamentals/app-state#tempdata)).  |
+| `Vary` | `Vary` 헤더는 다른 헤더를 이용해서 캐싱된 응답을 변경하기 위해서 사용됩니다. 예를 들어, `Vary: Accept-Encoding` 헤더가 지정된 요청과 `Accept-Encoding: gzip` 헤더가 지정된 요청에 대한 응답을 별도로 캐시하는 `Accept-Encoding: text/plain` 헤더를 지정해서 인코딩된 응답을 캐시할 수 있습니다. 헤더 값이 `*`인 응답은 절대로 저장되지 않습니다. |
+| `Expires` | 이 헤더에 의해 낡은 것으로 간주되는 응답은 다른 `Cache-Control` 헤더에 의해서 재정의되지 않는 한 저장되거나 조회되지 않습니다. |
+| `If-None-Match` | 값이 `*`가 아니고 응답의 `ETag`가 제공된 모든 값과 일치하지 않으면 전체 응답이 캐시에서 제공됩니다. 그렇지 않으면 304(수정되지 않음) 응답이 제공됩니다. |
+| `If-Modified-Since` | `If-None-Match` 헤더가 존재하지 않으면, 캐시된 응답 날짜가 제공된 값보다 새로운 경우 전체 응답이 캐시에서 제공됩니다. 그렇지 않은 경우는 *304 수정 안 됨-* 응답이 제공 됩니다. |
+| `Date` | 캐시에서 응답을 제공할 때, 원본 응답이`Date` 헤더를 제공하지 않으면 미들웨어에 의해 설정됩니다. |
+| `Content-Length` | 캐시에서 응답을 제공할 때, 원본 응답이`Content-Length` 헤더를 제공하지 않으면 미들웨어에 의해 설정됩니다. |
+| `Age` | 원본 응답이 전송한 `Age` 헤더는 무시됩니다. 캐시된 응답을 제공할 때 미들웨어가 새로운 값을 계산합니다. |
 
 ## <a name="caching-respects-request-cache-control-directives"></a>캐싱에서 요청 Cache-Control 지시문 사용
 
@@ -138,20 +128,20 @@ if (responseCachingFeature != null)
 
 * 요청의 결과로 200(OK) 상태 코드가 설정된 서버 응답을 받아야 합니다.
 * 요청 메서드가 GET 또는 HEAD여야 합니다.
-* `Startup.Configure`, 응답 캐싱 미들웨어 압축이 필요한 미들웨어 전에 배치 되어야 합니다. 자세한 내용은 <xref:fundamentals/middleware/index>을 참조하세요.
+* `Startup.Configure`, 응답 캐싱 미들웨어 캐싱이 필요한 미들웨어 전에 배치 되어야 합니다. 자세한 내용은 <xref:fundamentals/middleware/index>을 참조하세요.
 * `Authorization` 헤더가 없어야 합니다.
 * `Cache-Control` 헤더의 매개 변수가 유효해야 하고 응답이 `public`으로 표시되어야 하며 `private`로 표시되지 않아야 합니다.
 * `Pragma: no-cache`가 있으면 `Cache-Control` 헤더가 `Pragma` 헤더를 덮어쓰므로 `Cache-Control` 헤더가 없는 경우 no-cache header가 없어야 합니다.
 * `Set-Cookie` 헤더가 없어야 합니다.
 * `Vary` 헤더의 매개 변수가 유효해야 하고 `*`가 아니어야 합니다.
 * `Content-Length` 헤더의 값이 (설정된 경우) 응답 본문의 크기와 일치해야 합니다.
-* [IHttpSendFileFeature](/dotnet/api/microsoft.aspnetcore.http.features.ihttpsendfilefeature) 가 사용되지 않아야 합니다.
+* <xref:Microsoft.AspNetCore.Http.Features.IHttpSendFileFeature> 사용 되지 않습니다.
 * 응답이 `Expires` 헤더와 `max-age` 및 `s-maxage` 캐시 지시문에 지정된 것보다 오래되면 안 됩니다.
-* 응답 버퍼링 성공 해야 하며 응답의 크기 구성 보다 작을 수 해야 또는 기본 `SizeLimit`입니다.
+* 응답 버퍼링 하는 것은 성공적 이어야 합니다. 응답의 크기 구성 보다 작을 수 해야 또는 기본 <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.SizeLimit>입니다. 응답 본문 크기가 구성 된 미만의 또는 기본 <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.MaximumBodySize>입니다.
 * 응답은 [RFC 7234](https://tools.ietf.org/html/rfc7234) 사양에 따라 캐시 가능해야 합니다. 예를 들어 `no-store` 지시문이 요청 또는 응답 헤더 필드에 없어야 합니다. 참조 *섹션 3: 캐시에서 응답을 저장할* 의 [RFC 7234](https://tools.ietf.org/html/rfc7234) 세부 정보에 대 한 합니다.
 
 > [!NOTE]
-> 교차 사이트 요청 위조(CSRF, Cross-Site Request Forgery) 방지를 위한 보안 토큰을 생성하는 Antiforgery 시스템은 `Cache-Control` 및 `Pragma` 헤더를 `no-cache`로 설정하기 때문에 응답이 캐시되지 않습니다. HTML 폼 요소에 대한 Antiforgery 토큰을 비활성화시키는 방법에 대한 정보는 [ASP.NET Core Antiforgery 구성](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration)을 참고하시기 바랍니다.
+> 교차 사이트 요청 위조(CSRF, Cross-Site Request Forgery) 방지를 위한 보안 토큰을 생성하는 Antiforgery 시스템은 `Cache-Control` 및 `Pragma` 헤더를 `no-cache`로 설정하기 때문에 응답이 캐시되지 않습니다. HTML 폼 요소에 대 한 위조 방지 토큰을 사용 하지 않도록 설정 하는 방법에 대 한 자세한 내용은 <xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration>합니다.
 
 ## <a name="additional-resources"></a>추가 자료
 
