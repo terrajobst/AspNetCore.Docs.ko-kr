@@ -5,14 +5,14 @@ description: ASP.NET Core에서 Web API 만들기에 대한 기본 사항을 알
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 05/07/2019
+ms.date: 07/08/2019
 uid: web-api/index
-ms.openlocfilehash: 593fd33babc81cddfc4db2150a37e5ec3bc1a0be
-ms.sourcegitcommit: a3926eae3f687013027a2828830c12a89add701f
+ms.openlocfilehash: 4f9c334f74dd2a8b7c31c7a42703fa361ccf9139
+ms.sourcegitcommit: 91cc1f07ef178ab709ea42f8b3a10399c970496e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/08/2019
-ms.locfileid: "65450842"
+ms.lasthandoff: 07/08/2019
+ms.locfileid: "67622790"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>ASP.NET Core로 Web API 만들기
 
@@ -28,7 +28,7 @@ Web API에는 <xref:Microsoft.AspNetCore.Mvc.ControllerBase>에서 파생되는 
 
 [!code-csharp[](index/samples/2.x/Controllers/ValuesController.cs?name=snippet_Signature&highlight=3)]
 
-<xref:Microsoft.AspNetCore.Mvc.Controller> 기본 클래스에서 파생하여 Web API 컨트롤러를 만들지 마세요. `Controller`는 `ControllerBase`에서 파생되며 뷰에 대한 지원을 추가하므로 Web API 요청이 아닌 웹 페이지를 처리할 수 있습니다.  이 규칙에 대한 예외가 있습니다. 뷰와 API 모두에 동일한 컨트롤러를 사용하려는 경우 `Controller`에서 파생합니다.
+<xref:Microsoft.AspNetCore.Mvc.Controller> 클래스에서 파생된 Web API 컨트롤러를 만들지 마세요. `Controller`는 `ControllerBase`에서 파생되며 뷰에 대한 지원을 추가하므로 Web API 요청이 아닌 웹 페이지를 처리할 수 있습니다.  이 규칙에 대한 예외가 있습니다. 뷰와 API 모두에 동일한 컨트롤러를 사용하려는 경우 `Controller`에서 파생합니다.
 
 `ControllerBase` 클래스는 HTTP 요청을 처리하는 데 유용한 많은 속성 및 메서드를 제공합니다. 예를 들어, `ControllerBase.CreatedAtAction`은 201 상태 코드를 반환합니다.
 
