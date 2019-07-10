@@ -2,23 +2,47 @@
 title: ASP.NET Core에서 지 원하는 일반 데이터 보호 규정 (GDPR)
 author: rick-anderson
 description: ASP.NET Core 웹 앱에서 GDPR 확장 포인트에 액세스 하는 방법에 알아봅니다.
-monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/05/2019
+ms.date: 07/11/2019
 uid: security/gdpr
-ms.openlocfilehash: 1580187afef56e8e2f5be7a4bae32912e6305c5a
-ms.sourcegitcommit: 4ef0362ef8b6e5426fc5af18f22734158fe587e1
+ms.openlocfilehash: 01d2f8943c0995c1400122b89c4ca7c459a85279
+ms.sourcegitcommit: bee530454ae2b3c25dc7ffebf93536f479a14460
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67152860"
+ms.lasthandoff: 07/10/2019
+ms.locfileid: "67724573"
 ---
 # <a name="eu-general-data-protection-regulation-gdpr-support-in-aspnet-core"></a>ASP.NET Core에서 EU 데이터 보호 규정 GDPR (일반) 지원
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ASP.NET Core의 일부를 충족 하기 위해 Api 및 템플릿을 제공 합니다 [EU 데이터 보호 규정 GDPR (일반)](https://www.eugdpr.org/) 요구 사항:
+
+::: moniker range=">= aspnetcore-3.0"
+
+* 프로젝트 템플릿 확장 지점 및 개인 정보 및 쿠키 정책을 사용 하 여 대체할 수 있는 스텁된 태그를 포함 합니다.
+* 합니다 *Pages/Privacy.cshtml* 페이지 또는 *Views/Home/Privacy.cshtml* 보기 사이트의 개인 정보 취급 방침에 자세히 설명 하는 페이지를 제공 합니다.
+
+기능을 사용 하도록 기본 쿠키 동의 ASP.NET Core 3.0 템플릿 생성 된 앱에서 ASP.NET Core 2.2 템플릿을 참조 하십시오.
+
+* 추가 [CookiePolicyOptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions) 너무 `Startup.ConfigureServices` 하 고 [UseCookiePolicy](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyappbuilderextensions.usecookiepolicy) 에 `Startup.Configure`:
+
+  [!code-csharp[Main](gdpr/sample/RP3.0/Startup.cs?name=snippet1&highlight=12-19,38)]
+
+* 쿠키 동의 부분에 추가 합니다 *_Layout.cshtml* 파일:
+
+  [!code-cshtml[Main](gdpr/sample/RP3.0/Pages/Shared/_Layout.cshtml?name=snippet&highlight=4)]
+
+* 추가 된  *\_CookieConsentPartial.cshtml* 파일을 프로젝트:
+
+  [!code-cshtml[Main](gdpr/sample/RP3.0/Pages/Shared/_CookieConsentPartial.cshtml)]
+
+* 쿠키 동의 기능에 대해 알아보려면이 문서의 ASP.NET Core 2.2 버전을 선택 합니다.
+
+::: moniker-end
+
+::: moniker range="= aspnetcore-2.2"
 
 * 프로젝트 템플릿 확장 지점 및 개인 정보 및 쿠키 정책을 사용 하 여 대체할 수 있는 스텁된 태그를 포함 합니다.
 * 쿠키 동의 기능 수 있습니다 동의 묻는 메시지가 표시 (및 추적) 사용자의 개인 정보를 저장 합니다. 앱에 사용자 데이터 수집에 동의 하지 않은 경우 [CheckConsentNeeded](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions.checkconsentneeded) 로 `true`에 필수적이 지 않은 쿠키는 브라우저에 전송 되지 않습니다.
@@ -32,17 +56,7 @@ ASP.NET Core의 일부를 충족 하기 위해 Api 및 템플릿을 제공 합�
 
 ## <a name="aspnet-core-gdpr-support-in-template-generated-code"></a>템플릿에서 생성 된 코드에서 ASP.NET Core GDPR 지원
 
-::: moniker range="< aspnetcore-2.2"
-
-Razor 페이지 및 MVC 프로젝트 템플릿을 사용 하 여 만든 프로젝트 GDPR 또는 쿠키 동의 대 한 지원이 없습니다. GDPR을 추가 하려면 ASP.NET Core 2.2 템플릿에서 생성 된 코드를 복사 합니다.
-
-::: moniker-end
-
-::: moniker range=">= aspnetcore-2.2"
-
 Razor 페이지 및 MVC 프로젝트 템플릿을 사용 하 여 만든 프로젝트에는 다음 GDPR 지원을 포함 합니다.
-
-::: moniker-end
 
 * [CookiePolicyOptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions) 하 고 [UseCookiePolicy](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyappbuilderextensions.usecookiepolicy) 에서 설정 됩니다는 `Startup` 클래스입니다.
 * 합니다  *\_CookieConsentPartial.cshtml* [부분 뷰](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper)합니다. **Accept** 단추는이 파일에 포함 됩니다. 클릭할 때 합니다 **Accept** 단추, 쿠키를 저장 하는 동의 제공 됩니다.
@@ -63,7 +77,7 @@ Razor 페이지 및 MVC 프로젝트 템플릿을 사용 하 여 만든 프로�
 
 합니다  *\_CookieConsentPartial.cshtml* 부분 뷰:
 
-[!code-html[](gdpr/sample/RP/Pages/Shared/_CookieConsentPartial.cshtml)]
+[!code-html[](gdpr/sample/RP2.2/Pages/Shared/_CookieConsentPartial.cshtml)]
 
 이 부분:
 
@@ -75,7 +89,7 @@ Razor 페이지 및 MVC 프로젝트 템플릿을 사용 하 여 만든 프로�
 
 경우 동의 쿠키를 저장할 답변이 제공, 필수로 표시 하는 쿠키가 브라우저에 전달 됩니다. 다음 코드에서는 쿠키 중요 합니다.
 
-[!code-csharp[Main](gdpr/sample/RP/Pages/Cookie.cshtml.cs?name=snippet1&highlight=5)]
+[!code-csharp[Main](gdpr/sample/RP2.2/Pages/Cookie.cshtml.cs?name=snippet1&highlight=5)]
 
 <a name="tempdata"></a>
 
@@ -83,11 +97,11 @@ Razor 페이지 및 MVC 프로젝트 템플릿을 사용 하 여 만든 프로�
 
 합니다 [TempData 공급자](xref:fundamentals/app-state#tempdata) 쿠키는 중요 하지 않습니다. 추적을 해제 하면 TempData 공급자 작동 하지 않습니다. 표시의 필수 요소로 TempData 쿠키 TempData 공급자를 추적 비활성화 되 면 사용 하려면 `Startup.ConfigureServices`:
 
-[!code-csharp[Main](gdpr/sample/RP/Startup.cs?name=snippet1)]
+[!code-csharp[Main](gdpr/sample/RP2.2/Startup.cs?name=snippet1)]
 
 [세션 상태](xref:fundamentals/app-state) 쿠키 필수 요소는 아닙니다. 추적을 사용할 수 없습니다. 세션 상태를 작동 하지 않습니다. 다음 코드는 필수 세션 쿠키를 사용 하면:
 
-[!code-csharp[](gdpr/sample/RP/Startup.cs?name=snippet2)]
+[!code-csharp[](gdpr/sample/RP2.2/Startup.cs?name=snippet2)]
 
 <a name="pd"></a>
 
@@ -105,6 +119,8 @@ Razor 페이지 및 MVC 프로젝트 템플릿을 사용 하 여 만든 프로�
 * 합니다 **삭제** 하 고 **다운로드** 링크는 기본 id 데이터에만 작동 합니다. 앱 사용자 지정 사용자 데이터를 만든 사용자 지정 사용자 데이터를 다운로드/삭제를 확장 해야 합니다. 자세한 내용은 [추가, 다운로드 및 삭제 사용자 지정 사용자 데이터 Id로](xref:security/authentication/add-user-data)합니다.
 * Id 데이터베이스 테이블에 저장 된 사용자에 대 한 토큰을 저장 `AspNetUserTokens` 사용자로 인해 연계 delete 동작을 통해 삭제 될 때 삭제 되는 [외래 키](https://github.com/aspnet/Identity/blob/release/2.1/src/EF/IdentityUserContext.cs#L152)합니다.
 * [외부 공급자 인증](xref:security/authentication/social/index)Facebook과 Google을 사용할 수 없는 쿠키 정책 수락 되기 전에 같이 합니다.
+
+::: moniker-end
 
 ## <a name="encryption-at-rest"></a>휴지 상태의 암호화
 

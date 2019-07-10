@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/07/2019
 uid: razor-pages/razor-pages-conventions
-ms.openlocfilehash: 4e07b5803adbce94982584212fa65afbfd427b64
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 59c8af648b50deb51f3762c14348d08acd48886e
+ms.sourcegitcommit: bee530454ae2b3c25dc7ffebf93536f479a14460
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64893510"
+ms.lasthandoff: 07/10/2019
+ms.locfileid: "67724456"
 ---
 # <a name="razor-pages-route-and-app-conventions-in-aspnet-core"></a>ASP.NET Core에서 Razor 페이지 경로 및 앱 규칙
 
@@ -270,7 +270,7 @@ public class SlugifyParameterTransformer : IOutboundParameterTransformer
 
 페이지 앱 모델은 *OtherPages* 폴더에 있는 Page2 페이지로 이동하는 세그먼트에 대한 상대 경로를 확인하는 데 사용됩니다. 조건이 통과하는 경우 헤더가 추가됩니다. 그렇지 않으면 `EmptyFilter`이 적용됩니다.
 
-`EmptyFilter`은 [작업 필터](xref:mvc/controllers/filters#action-filters)입니다. Razor 페이지에서 작업 필터를 무시하므로 경로에 `OtherPages/Page2`가 포함되지 않는 경우 의도한 대로 `EmptyFilter`이 작동되지 않습니다.
+`EmptyFilter`은 [작업 필터](xref:mvc/controllers/filters#action-filters)입니다. Razor 페이지에서 작업 필터를 무시 하므로 합니다 `EmptyFilter` 영향을 주지 않습니다 경우는 경로 포함 하지 않습니다 의도 한 대로 `OtherPages/Page2`입니다.
 
 `localhost:5000/OtherPages/Page2`에서 샘플의 Page2 페이지를 요청하고 헤더를 검사하여 결과를 확인합니다.
 
