@@ -5,18 +5,18 @@ description: 사이트 간 스크립팅 (XSS) 및 ASP.NET Core 앱에서이 취�
 ms.author: riande
 ms.date: 10/02/2018
 uid: security/cross-site-scripting
-ms.openlocfilehash: 50f0211a2c64708d9b788dd10ce9064e66014d55
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 1e9e988be68313cfd493832519c1be89335d6e48
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64895350"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815204"
 ---
 # <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a>ASP.NET Core에서 교차 사이트 스크립팅(XSS) 방지하기
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-교차 사이트 스크립팅(XSS)은 공격자가 웹페이지에 Javascript와 같은 클라이언트측 스크립트를 웹페이지에 배치하도록 하는 보안상 취약점을 일컫습니다.  다른 사용자가 공격당한 페이지를 로드할 경우 쿠키 및 세션 토큰을 탈취하고 DOM을 조작하여 웹 페이지 내용을 변경하거나 다른 페이지로 이동시킬 수 있는 공격자의 스크립트가 실행됩니다. XSS 취약성으로 인 한 응용 프로그램은 사용자 입력 하 고 유효성 검사, 인코딩 또는 해 서 이스케이프 하지 않고 페이지를 출력 하는 경우에 일반적으로 발생 합니다. XSS 취약점은 응용 프로그램에서 사용자 입력을 받아 유효성 검사, 인코딩, 이스케이프 과정을 거치지 않고 페이지에 출력할 때 발생합니다.
+교차 사이트 스크립팅(XSS)은 공격자가 웹페이지에 Javascript와 같은 클라이언트측 스크립트를 웹페이지에 배치하도록 하는 보안상 취약점을 일컫습니다. 다른 사용자가 공격당한 페이지를 로드할 경우 쿠키 및 세션 토큰을 탈취하고 DOM을 조작하여 웹 페이지 내용을 변경하거나 다른 페이지로 이동시킬 수 있는 공격자의 스크립트가 실행됩니다. XSS 취약성으로 인 한 응용 프로그램은 사용자 입력 하 고 유효성 검사, 인코딩 또는 해 서 이스케이프 하지 않고 페이지를 출력 하는 경우에 일반적으로 발생 합니다. XSS 취약점은 응용 프로그램에서 사용자 입력을 받아 유효성 검사, 인코딩, 이스케이프 과정을 거치지 않고 페이지에 출력할 때 발생합니다.
 
 ## <a name="protecting-your-application-against-xss"></a>응용 프로그램을 XSS로부터 보호하기
 
@@ -214,7 +214,7 @@ services.AddSingleton<HtmlEncoder>(
 <p>This link text is in Chinese: <a href="/">汉语/漢語</a></p>
    ```
 
-안전 목록 범위는 언어가 아닌 유니코드 차트로서 명시되어 있습니다. [유니코드 표준](http://unicode.org/)에는 필요한 문자가 포함된 차트를 찾을 수 있도록 [코드 차트](http://www.unicode.org/charts/index.html) 목록이 제공됩니다. 각 인코더(예: Html, JavaScript, Url)는 개별적으로 구성해야 합니다.
+안전 목록 범위는 언어가 아닌 유니코드 차트로서 명시되어 있습니다. [유니코드 표준](https://unicode.org/)에는 필요한 문자가 포함된 차트를 찾을 수 있도록 [코드 차트](https://www.unicode.org/charts/index.html) 목록이 제공됩니다. 각 인코더(예: Html, JavaScript, Url)는 개별적으로 구성해야 합니다.
 
 > [!NOTE]
 > 사용자 지정 안전 목록은 종속성 주입을 통해 생성된 인코더에만 적용됩니다. `System.Text.Encodings.Web.*Encoder.Default`를 통해 직접 인코더에 액세스하는 경우 기본 라틴계 문자 안전 목록만 사용할 수 있습니다.

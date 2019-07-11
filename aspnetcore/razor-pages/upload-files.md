@@ -7,12 +7,12 @@ ms.author: riande
 ms.date: 11/10/2018
 ms.custom: mvc, seodec18
 uid: razor-pages/upload-files
-ms.openlocfilehash: 07457d57b7d3b444c8cea818149569407f1dd8e8
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 14d10424951e8ec3c7909d001c6f86e5fcb45d26
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65085723"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815038"
 ---
 # <a name="upload-files-to-a-razor-page-in-aspnet-core"></a>ASP.NET Core의 Razor 페이지에 파일 업로드
 
@@ -64,7 +64,7 @@ ms.locfileid: "65085723"
 
 ## <a name="add-a-helper-method-to-upload-files"></a>파일을 업로드하는 도우미 메서드 추가
 
-업로드된 일정 파일을 처리하기 위한 코드 중복을 방지하려면 먼저 정적 도우미 메서드를 추가합니다. 앱에 *유틸리티* 폴더를 만들고 다음 콘텐츠가 포함된 *FileHelpers.cs* 파일을 추가합니다. 도우미 메서드 `ProcessFormFile`은 [IFormFile](/dotnet/api/microsoft.aspnetcore.http.iformfile) 및 [ModelStateDictionary](/api/microsoft.aspnetcore.mvc.modelbinding.modelstatedictionary)를 사용하여 파일의 크기와 콘텐츠를 포함하는 문자열을 반환합니다. 콘텐츠 형식 및 길이를 확인합니다. 파일이 유효성 검사를 통과하지 못한 경우 오류가 `ModelState`에 추가됩니다.
+업로드된 일정 파일을 처리하기 위한 코드 중복을 방지하려면 먼저 정적 도우미 메서드를 추가합니다. 앱에 *유틸리티* 폴더를 만들고 다음 콘텐츠가 포함된 *FileHelpers.cs* 파일을 추가합니다. 도우미 메서드 `ProcessFormFile`은 [IFormFile](/dotnet/api/microsoft.aspnetcore.http.iformfile) 및 [ModelStateDictionary](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.modelstatedictionary)를 사용하여 파일의 크기와 콘텐츠를 포함하는 문자열을 반환합니다. 콘텐츠 형식 및 길이를 확인합니다. 파일이 유효성 검사를 통과하지 못한 경우 오류가 `ModelState`에 추가됩니다.
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -117,7 +117,7 @@ public async Task<IActionResult> OnPostAsync()
 
 ### <a name="save-the-file-to-azure-blob-storage"></a>Azure Blob Storage에 파일 저장
 
-Azure Blob Storage에 파일 콘텐츠를 업로드하려면 [.NET을 사용하여 Azure Blob Storage 시작](/azure/storage/blobs/storage-dotnet-how-to-use-blobs)을 참조하세요. 이 항목에서는 [UploadFromStream](/dotnet/api/microsoft.windowsazure.storage.file.cloudfile.uploadfromstreamasync)을 사용하여 Blob 스토리지에 [FileStream](/dotnet/api/system.io.filestream)을 저장하는 방법을 보여 줍니다.
+Azure Blob Storage에 파일 콘텐츠를 업로드하려면 [.NET을 사용하여 Azure Blob Storage 시작](/azure/storage/blobs/storage-dotnet-how-to-use-blobs)을 참조하세요. 이 항목에서는 [UploadFromStream](/dotnet/api/microsoft.azure.storage.file.cloudfile.uploadfromstreamasync)을 사용하여 Blob 스토리지에 [FileStream](/dotnet/api/system.io.filestream)을 저장하는 방법을 보여 줍니다.
 
 ## <a name="add-the-schedule-class"></a>일정 클래스 추가
 

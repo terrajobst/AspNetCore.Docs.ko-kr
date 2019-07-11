@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
 ms.date: 04/11/2019
 uid: performance/diagnostic-tools
-ms.openlocfilehash: 66676b5a2b95b87bfbbd50022e279e35a12b9793
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: d273897b9ad26d57eb94b196b58f14019a96d07d
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64894190"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815629"
 ---
 # <a name="performance-diagnostic-tools"></a>성능 진단 도구
 
@@ -53,7 +53,7 @@ Application Insights는 다양 한 환경에서 사용할 수 있습니다.
 
 [PerfView](https://github.com/Microsoft/perfview) 은.NET 성능 문제를 진단 하는 데 특별히.NET 팀에서 만든 성능 분석 도구입니다. PerfView는 CPU 사용량, 메모리 GC 동작, 성능 및 이벤트 벽 시계 시간 분석을 허용합니다.
 
-PerfView 및 시작 하는 방법에 대 한 자세히 알아볼 수 있습니다 [PerfView 비디오 자습서](http://channel9.msdn.com/Series/PerfView-Tutorial) 또는 도구에서 사용할 수 있는 사용자 가이드를 참조 하 여 또는 [github](https://github.com/Microsoft/perfview)합니다.
+PerfView 및 시작 하는 방법에 대 한 자세히 알아볼 수 있습니다 [PerfView 비디오 자습서](https://channel9.msdn.com/Series/PerfView-Tutorial) 또는 도구에서 사용할 수 있는 사용자 가이드를 참조 하 여 또는 [github](https://github.com/Microsoft/perfview)합니다.
 
 ## <a name="windows-performance-toolkit"></a>Windows 성능 도구 키트
 

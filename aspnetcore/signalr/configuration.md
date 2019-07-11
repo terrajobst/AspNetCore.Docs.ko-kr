@@ -7,12 +7,12 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 06/03/2019
 uid: signalr/configuration
-ms.openlocfilehash: 662565e537fa0eb13ed80e558949740739a63558
-ms.sourcegitcommit: eb3e51d58dd713eefc242148f45bd9486be3a78a
+ms.openlocfilehash: 8c9fcaecb04555718f5da6a42a8e56c258e795af
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67500384"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67813447"
 ---
 # <a name="aspnet-core-signalr-configuration"></a>ASP.NET Core SignalR 구성
 
@@ -76,7 +76,7 @@ MessagePack 직렬화는 [AddMessagePackProtocol](/dotnet/api/microsoft.extensio
 
 ::: moniker range="= aspnetcore-2.2"
 
-| 옵션 | 기본값 | 설명 |
+| 옵션 | 기본값 | Description |
 | ------ | ------------- | ----------- |
 | `ClientTimeoutInterval` | 30초 | 서버는 클라이언트를 고려 하는 경우이 간격 등 연결 유지 메시지를 수신 하지 않은 연결 끊김. 실제로이 구현 하는 방법으로 인해 연결이 끊어진 표시할 클라이언트에 대 한이 시간 제한 간격 보다 오래 걸릴 수 있습니다. 권장된 값은 double을 `KeepAliveInterval` 값입니다.|
 | `HandshakeTimeout` | 15초 | 클라이언트가 이 시간 제한 내에 초기 핸드셰이크 메시지를 전송하지 않으면 연결이 닫힙니다. 이 설정은 심각한 네트워크 지연으로 인해 핸드셰이크 시간 제한 오류가 발생하는 경우에만 수정해야 하는 고급 설정입니다. 핸드셰이크 프로세스에 대한 보다 자세한 내용은 [SignalR 허브 프로토콜 사양](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)을 참고하시기 바랍니다. |
@@ -313,7 +313,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-SignalR Java 클라이언트에서 전달자 토큰에 대 한 액세스 토큰 팩터리를 제공 하 여 인증에 사용 하도록 구성할 수 있습니다 합니다 [HttpHubConnectionBuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java)합니다. 사용 하 여 [withAccessTokenFactory](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__) 제공 하는 [RxJava](https://github.com/ReactiveX/RxJava) [Single\<문자열 >](http://reactivex.io/documentation/single.html)합니다. 호출 하 여 [Single.defer](http://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)를 클라이언트에 대 한 액세스 토큰을 생성 하는 논리를 작성할 수 있습니다.
+SignalR Java 클라이언트에서 전달자 토큰에 대 한 액세스 토큰 팩터리를 제공 하 여 인증에 사용 하도록 구성할 수 있습니다 합니다 [HttpHubConnectionBuilder](/java/api/com.microsoft.signalr._http_hub_connection_builder?view=aspnet-signalr-java)합니다. 사용 하 여 [withAccessTokenFactory](/java/api/com.microsoft.signalr._http_hub_connection_builder.withaccesstokenprovider?view=aspnet-signalr-java#com_microsoft_signalr__http_hub_connection_builder_withAccessTokenProvider_Single_String__) 제공 하는 [RxJava](https://github.com/ReactiveX/RxJava) [Single\<문자열 >](https://reactivex.io/documentation/single.html)합니다. 호출 하 여 [Single.defer](https://reactivex.io/RxJava/javadoc/io/reactivex/Single.html#defer-java.util.concurrent.Callable-)를 클라이언트에 대 한 액세스 토큰을 생성 하는 논리를 작성할 수 있습니다.
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/myhub")
@@ -329,7 +329,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/m
 
 # <a name="nettabdotnet"></a>[.NET](#tab/dotnet)
 
-| 옵션 | 기본값 | 설명 |
+| 옵션 | 기본값 | Description |
 | ------ | ------------- | ----------- |
 | `ServerTimeout` | 30초(30000밀리초) | 서버 활동 시간 제한입니다. 서버가 이 시간 제한 내에 메시지를 전송하지 않으면 클라이언트는 서버 연결이 끊어졌다고 간주하고 `Closed` 이벤트(JavaScript에서는 `onclose` 이벤트)를  트리거합니다. 이 값이 충분히 커야만 ping 메시지가 서버에서 전송**되고** 시간 제한 내에 클라이언트에 의해 수신될 수 있습니다. 권장되는 값은 ping이 도착할 시간을 확보하기 위해 최소한 서버의 `KeepAliveInterval` 값의 두 배가 되는 숫자여야 합니다. |
 | `HandshakeTimeout` | 15초 | 초기 서버 핸드셰이크에 대한 시간 제한입니다. 서버가 이 시간 제한 내에 핸드셰이크 응답을 전송하지 않으면 클라이언트는 핸드셰이크를 취소하고 `Closed` 이벤트(JavaScript에서는 `onclose` 이벤트)를 트리거합니다. 이 설정은 심각한 네트워크 지연으로 인해 핸드셰이크 시간 제한 오류가 발생하는 경우에만 수정해야 하는 고급 설정입니다. 핸드셰이크 프로세스에 대한 자세한 내용은 [SignalR 허브 프로토콜 사양](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)을 참고하시기 바랍니다. |
@@ -338,13 +338,13 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/m
 
 # <a name="javascripttabjavascript"></a>[JavaScript](#tab/javascript)
 
-| 옵션 | 기본값 | 설명 |
+| 옵션 | 기본값 | Description |
 | ------ | ------------- | ----------- |
 | `serverTimeoutInMilliseconds` | 30초(30000밀리초) | 서버 활동 시간 제한입니다. 클라이언트 연결이 끊어진 서버 및 트리거 고려 서버는이 간격에 메시지를 전송 되지 않은, 경우를 `onclose` 이벤트입니다. 이 값이 충분히 커야만 ping 메시지가 서버에서 전송**되고** 시간 제한 내에 클라이언트에 의해 수신될 수 있습니다. 권장되는 값은 ping이 도착할 시간을 확보하기 위해 최소한 서버의 `KeepAliveInterval` 값의 두 배가 되는 숫자여야 합니다. |
 
 # <a name="javatabjava"></a>[Java](#tab/java)
 
-| 옵션 | 기본값 | 설명 |
+| 옵션 | 기본값 | Description |
 | ----------- | ------------- | ----------- |
 |`getServerTimeout` `setServerTimeout` | 30초(30000밀리초) | 서버 활동 시간 제한입니다. 클라이언트 연결이 끊어진 서버 및 트리거 고려 서버는이 간격에 메시지를 전송 되지 않은, 경우를 `onClose` 이벤트입니다. 이 값이 충분히 커야만 ping 메시지가 서버에서 전송**되고** 시간 제한 내에 클라이언트에 의해 수신될 수 있습니다. 권장되는 값은 ping이 도착할 시간을 확보하기 위해 최소한 서버의 `KeepAliveInterval` 값의 두 배가 되는 숫자여야 합니다. |
 | `withHandshakeResponseTimeout` | 15초 | 초기 서버 핸드셰이크에 대한 시간 제한입니다. 서버는이 간격의 핸드셰이크 응답을 보내지 않습니다, 클라이언트 취소 핸드셰이크 및 트리거는 `onClose` 이벤트입니다. 이 설정은 심각한 네트워크 지연으로 인해 핸드셰이크 시간 제한 오류가 발생하는 경우에만 수정해야 하는 고급 설정입니다. 핸드셰이크 프로세스에 대한 자세한 내용은 [SignalR 허브 프로토콜 사양](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)을 참고하시기 바랍니다. |
@@ -357,7 +357,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/m
 
 # <a name="nettabdotnet"></a>[.NET](#tab/dotnet)
 
-| .NET 옵션 |  기본값 | 설명 |
+| .NET 옵션 |  기본값 | Description |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | HTTP 요청에서 전달자 인증 토큰으로 제공된 문자열을 반환하는 함수입니다. |
 | `SkipNegotiation` | `false` | 이 값을 `true`로 설정하면 협상 단계를 건너뜁니다. **WebSockets 전송이 유일하게 활성화된 전송인 경우에만 지원됩니다.** Azure SignalR Service를 사용하는 경우에는 이 설정을 사용할 수 없습니다. |

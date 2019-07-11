@@ -7,16 +7,16 @@ ms.author: scaddie
 ms.custom: H1Hack27Feb2017
 ms.date: 05/28/2019
 uid: client-side/spa-services
-ms.openlocfilehash: c7cd35865c5bddf0e5efaa9e616832b6755d9227
-ms.sourcegitcommit: e7e04a45195d4e0527af6f7cf1807defb56dc3c3
+ms.openlocfilehash: 19710b58bca606d21feda9069ad00edd1e4f72e9
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/06/2019
-ms.locfileid: "66750113"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67813481"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>JavaScript 서비스를 사용 하 여 ASP.NET Core의 단일 페이지 응용 프로그램을 만들려면
 
-작성자: [Scott Addie](https://github.com/scottaddie) 및 [Fiyaz Hasan](http://fiyazhasan.me/)
+작성자: [Scott Addie](https://github.com/scottaddie) 및 [Fiyaz Hasan](https://fiyazhasan.me/)
 
 단일 페이지 응용 프로그램(SPA)은 내재된 풍부한 사용자 경험으로 인해서 인기 있는 웹 응용 프로그램 형식입니다. 클라이언트 쪽 SPA 프레임 워크 또는 라이브러리와 같은 통합 [Angular](https://angular.io/) 또는 [반응](https://facebook.github.io/react/), ASP.NET Core와 같은 서버 쪽 프레임 워크를 사용 하 여 어려울 수 있습니다. JavaScript 서비스 통합 프로세스의 마찰을 줄이기 위해 개발 되었습니다. 서로 다른 클라이언트 및 서버 기술 스택 간의 원활한 작업을 가능하게 해줍니다.
 
@@ -96,7 +96,7 @@ npm i -S aspnet-prerendering
 
 ### <a name="asp-prerender-module-tag-helper"></a>asp prerender 모듈 태그 도우미
 
-위의 코드 예제에 사용된 `asp-prerender-module` 태그 도우미는 서버에서 Node.js를 통해서 *ClientApp/dist/main-server.js*를 실행합니다. 명확히 말하자면 *main-server.js* 파일은 [Webpack](http://webpack.github.io/) 빌드 프로세스의 TypeScript-JavaScript 소스 간 변환 작업의 결과물입니다. Webpack은 `main-server`의 진입점 별칭과 *ClientApp/boot-server.ts* 파일에서 시작되는 이 별칭에 대한 종속성 그래프의 순회를 정의합니다.
+위의 코드 예제에 사용된 `asp-prerender-module` 태그 도우미는 서버에서 Node.js를 통해서 *ClientApp/dist/main-server.js*를 실행합니다. 명확히 말하자면 *main-server.js* 파일은 [Webpack](https://webpack.github.io/) 빌드 프로세스의 TypeScript-JavaScript 소스 간 변환 작업의 결과물입니다. Webpack은 `main-server`의 진입점 별칭과 *ClientApp/boot-server.ts* 파일에서 시작되는 이 별칭에 대한 종속성 그래프의 순회를 정의합니다.
 
 [!code-javascript[](../client-side/spa-services/sample/SpaServicesSampleApp/webpack.config.js?range=53)]
 

@@ -4,14 +4,14 @@ author: rick-anderson
 description: 이 샘플에서는 기존 ASP.NET Core 앱에 Microsoft 계정 사용자 인증의 통합을 보여 줍니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 5/11/2019
+ms.date: 05/11/2019
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: 16ec2d5f2bccc59958b884869ef42af9cfa13df0
-ms.sourcegitcommit: 06a455d63ff7d6b571ca832e8117f4ac9d646baf
+ms.openlocfilehash: 2c690e5bd8465806d42091616917cfdd747ef8f0
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/21/2019
-ms.locfileid: "67316597"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815568"
 ---
 # <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>ASP.NET Core를 사용 하 여 Microsoft 계정 외부 로그인 설정
 
@@ -28,7 +28,7 @@ Microsoft 계정이 없다면 선택 **만드십시오**합니다. 로그인 한
 * 선택 **새 등록**
 * 입력 한 **이름을**입니다.
 * 에 대 한 옵션을 선택 **지원 되는 계정 유형**합니다.  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts -->
-* 아래 **리디렉션 URI**를 사용 하 여 개발 URL 입력 `/signin-microsoft` 추가 합니다. 예를 들어, `https://localhost:44389/signin-microsoft`을 입력합니다. 이 샘플의 뒷부분에 나오는 구성 Microsoft 인증 체계에서 요청을 자동으로 처리 됩니다 `/signin-microsoft` OAuth 흐름을 구현 하는 경로입니다.
+* 아래 **리디렉션 URI**를 사용 하 여 개발 URL 입력 `/signin-microsoft` 추가 합니다. `https://localhost:44389/signin-microsoft` )을 입력합니다. 이 샘플의 뒷부분에 나오는 구성 Microsoft 인증 체계에서 요청을 자동으로 처리 됩니다 `/signin-microsoft` OAuth 흐름을 구현 하는 경로입니다.
 * 선택 **등록**
 
 ### <a name="create-client-secret"></a>클라이언트 비밀 만들기

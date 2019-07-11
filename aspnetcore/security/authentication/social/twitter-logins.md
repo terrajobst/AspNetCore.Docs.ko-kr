@@ -4,14 +4,14 @@ author: rick-anderson
 description: 이 자습서에서는 기존 ASP.NET Core 앱에 Twitter 계정 사용자 인증의 통합을 보여 줍니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 5/11/2019
+ms.date: 05/11/2019
 uid: security/authentication/twitter-logins
-ms.openlocfilehash: 486d58b600ca5326a0728de40bb386fbb9440f67
-ms.sourcegitcommit: 3376f224b47a89acf329b2d2f9260046a372f924
+ms.openlocfilehash: d816ed27898639b0af6896a51ac035d5526c5d29
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/10/2019
-ms.locfileid: "65516879"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67814067"
 ---
 # <a name="twitter-external-sign-in-setup-with-aspnet-core"></a>ASP.NET Core를 사용 하 여 외부 로그인 설치 twitter
 

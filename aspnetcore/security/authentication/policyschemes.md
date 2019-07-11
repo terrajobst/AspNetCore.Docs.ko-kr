@@ -3,14 +3,14 @@ title: ASP.NET Core에서 정책 구성표
 author: rick-anderson
 description: 인증 정책 체계 쉽게 단일 논리 인증 체계
 ms.author: riande
-ms.date: 2/28/2019
+ms.date: 02/28/2019
 uid: security/authentication/policyschemes
-ms.openlocfilehash: 1a2d92e6fa54189b8154fc501b31c8a99d1f9081
-ms.sourcegitcommit: 357a7120632b20465801c093e4e5bd4a315496a8
+ms.openlocfilehash: be03f349455c673b0739935ad20e596325c8cb74
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/08/2019
-ms.locfileid: "67649176"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815291"
 ---
 # <a name="policy-schemes-in-aspnet-core"></a>ASP.NET Core에서 정책 구성표
 
@@ -26,7 +26,7 @@ ms.locfileid: "67649176"
 
 [!code-csharp[sample](policyschemes/samples/AuthenticationSchemeOptions.cs?name=snippet)]
 
-## <a name="examples"></a>예제
+## <a name="examples"></a>예
 
 다음 예제에서는 하위 수준 체계를 결합 하는 더 높은 수준 체계를 보여 줍니다. 문제를 Google 인증을 사용 하 고 다른 모든 항목에 대 한 쿠키 인증을 사용 하는 키를 누릅니다.
 

@@ -6,12 +6,12 @@ ms.author: casoper
 ms.date: 09/21/2018
 ms.custom: mvc, seodec18
 uid: security/authentication/azure-ad-b2c-webapi
-ms.openlocfilehash: 0eb8b533f44a1f72cfc3c4ec5ec060adb37eed6c
-ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
+ms.openlocfilehash: c917a5130857165716bd801ac19dad0f53a7d214
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65610364"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815373"
 ---
 # <a name="authentication-in-web-apis-with-azure-active-directory-b2c-in-aspnet-core"></a>Web Api ASP.NET Core에서 Azure Active Directory B2C를 사용 하 여 인증
 
@@ -46,11 +46,11 @@ Azure AD B2C 테 넌 트 만들기 [설명서에 설명 된 대로](/azure/activ
 
 ## <a name="configure-a-sign-up-or-sign-in-policy"></a>등록 또는 로그인 정책 구성
 
-Azure AD B2C 설명서에서 절차 [등록 또는 로그인 정책 만들기](/azure/active-directory-b2c/active-directory-b2c-reference-policies#create-a-sign-up-or-sign-in-policy)합니다. 정책 이름을 **SiUpIn**합니다.  에 대 한 설명서에 제공 된 예제 값을 사용할 **Id 공급자**를 **등록 특성**, 및 **응용 프로그램 클레임**합니다. 사용 하는 **지금 실행** 설명서에 설명 된 대로 정책을 테스트 하려면 단추는 선택 사항입니다.
+Azure AD B2C 설명서에서 절차 [등록 또는 로그인 정책 만들기](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions)합니다. 정책 이름을 **SiUpIn**합니다.  에 대 한 설명서에 제공 된 예제 값을 사용할 **Id 공급자**를 **등록 특성**, 및 **응용 프로그램 클레임**합니다. 사용 하는 **지금 실행** 설명서에 설명 된 대로 정책을 테스트 하려면 단추는 선택 사항입니다.
 
 ## <a name="register-the-api-in-azure-ad-b2c"></a>Azure AD B2C에서 API 등록
 
-새로 만든 Azure AD B2C 테 넌 트를 사용 하 여 API를 등록 [설명서에 나와 있는 단계](/azure/active-directory-b2c/active-directory-b2c-app-registration#register-a-web-api) 아래 합니다 **웹 API 등록** 섹션입니다.
+새로 만든 Azure AD B2C 테 넌 트를 사용 하 여 API를 등록 [설명서에 나와 있는 단계](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application) 아래 합니다 **웹 API 등록** 섹션입니다.
 
 다음 값을 사용 합니다.
 
@@ -106,7 +106,7 @@ Visual Studio에서 API를 실행 합니다. Visual Studio는 API의 루트 URL�
 
 ### <a name="register-postman-as-a-web-app"></a>Postman에 웹 앱으로 등록
 
-Azure AD B2C 테 넌 트에서 토큰을 가져옵니다는 웹 앱을 시뮬레이션 하는 Postman, 때문에 웹 앱으로 테 넌 트에 등록 되어야 합니다. Postman을 사용 하 여 등록 [설명서에 나와 있는 단계](/azure/active-directory-b2c/active-directory-b2c-app-registration#register-a-web-app) 아래 합니다 **웹 앱을 등록** 섹션입니다. 중지 된 **웹 앱 클라이언트 비밀 만들기** 섹션입니다. 클라이언트 암호를이 자습서에 필요 하지 않습니다. 
+Azure AD B2C 테 넌 트에서 토큰을 가져옵니다는 웹 앱을 시뮬레이션 하는 Postman, 때문에 웹 앱으로 테 넌 트에 등록 되어야 합니다. Postman을 사용 하 여 등록 [설명서에 나와 있는 단계](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application) 아래 합니다 **웹 앱을 등록** 섹션입니다. 중지 된 **웹 앱 클라이언트 비밀 만들기** 섹션입니다. 클라이언트 암호를이 자습서에 필요 하지 않습니다. 
 
 다음 값을 사용 합니다.
 

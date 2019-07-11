@@ -5,12 +5,12 @@ description: ASP.NET Core 앱에 대 한 오픈 리디렉션 공격을 방지 �
 ms.author: riande
 ms.date: 07/07/2017
 uid: security/preventing-open-redirects
-ms.openlocfilehash: 0896189d2caaccb19647eb7c6d57f29dfc0290dd
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 9d8cac8708fe9aeadba5af1287362a20df7f6bfe
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64891620"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815494"
 ---
 # <a name="prevent-open-redirect-attacks-in-aspnet-core"></a>ASP.NET Core에서 오픈 리디렉션 공격 방지
 
@@ -58,7 +58,7 @@ public IActionResult SomeAction(string redirectUrl)
 
 ### <a name="islocalurl"></a>IsLocalUrl
 
-사용 된 [IsLocalUrl](/dotnet/api/Microsoft.AspNetCore.Mvc.IUrlHelper?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_IUrlHelper_IsLocalUrl_System_String_) 리디렉션하기 전에 Url을 테스트 하는 방법.
+사용 된 [IsLocalUrl](/dotnet/api/Microsoft.AspNetCore.Mvc.IUrlHelper.islocalurl#Microsoft_AspNetCore_Mvc_IUrlHelper_IsLocalUrl_System_String_) 리디렉션하기 전에 Url을 테스트 하는 방법.
 
 다음 예제에서는 URL을 리디렉션하기 전에 로컬 인지 여부를 확인 하는 방법을 보여 줍니다.
 

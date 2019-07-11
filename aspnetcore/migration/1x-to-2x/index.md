@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: fb6157205ab5280eb982a61e834eea5074864830
-ms.sourcegitcommit: a3926eae3f687013027a2828830c12a89add701f
+ms.openlocfilehash: 056930f3c586153d13555bbb6036f46587e2352d
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/08/2019
-ms.locfileid: "65450962"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815097"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>ASP.NET Core 1.x에서 2.0으로 마이그레이션
 
@@ -31,7 +31,7 @@ ms.locfileid: "65450962"
 
 ## <a name="update-target-framework-moniker-tfm"></a>TFM(대상 프레임워크 모니커) 업데이트
 
-.NET Core를 대상으로 하는 프로젝트는 .NET Core 2.0보다 크거나 같은 버전의 [TFM](/dotnet/standard/frameworks#referring-to-frameworks)을 사용해야 합니다. *.csproj* 파일에서 `<TargetFramework>` 노드를 검색하고 해당 내부 텍스트를 `netcoreapp2.0`으로 바꿉니다.
+.NET Core를 대상으로 하는 프로젝트는 .NET Core 2.0보다 크거나 같은 버전의 [TFM](/dotnet/standard/frameworks)을 사용해야 합니다. *.csproj* 파일에서 `<TargetFramework>` 노드를 검색하고 해당 내부 텍스트를 `netcoreapp2.0`으로 바꿉니다.
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App.csproj?range=3)]
 
@@ -56,7 +56,7 @@ ms.locfileid: "65450962"
 
 ## <a name="update-package-references"></a>패키지 참조 업데이트
 
-1.x 프로젝트에서 *.csproj* 파일은 프로젝트에서 사용하는 각 NuGet 패키지를 나열합니다.
+1\.x 프로젝트에서 *.csproj* 파일은 프로젝트에서 사용하는 각 NuGet 패키지를 나열합니다.
 
 .NET Core 2.0을 대상으로 하는 ASP.NET Core 2.0 프로젝트에서 *.csproj* 파일의 단일 [metapackage](xref:fundamentals/metapackage) 참조는 패키지의 컬렉션을 대체합니다.
 
@@ -96,11 +96,11 @@ ASP.NET Core 2.0 및 Entity Framework Core 2.0의 모든 기능은 metapackage�
 
 ## <a name="update-main-method-in-programcs"></a>Program.cs의 Main 메서드 업데이트
 
-1.x 프로젝트에서 *Program.cs*의 `Main` 메서드는 다음과 같았습니다.
+1\.x 프로젝트에서 *Program.cs*의 `Main` 메서드는 다음과 같았습니다.
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Program.cs?name=snippet_ProgramCs&highlight=8-19)]
 
-2.0 프로젝트에서 *Program.cs*의 `Main` 메서드는 간소화되었습니다.
+2\.0 프로젝트에서 *Program.cs*의 `Main` 메서드는 간소화되었습니다.
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Program.cs?highlight=8-11)]
 
@@ -114,13 +114,13 @@ Unable to create an object of type '<Context>'. Add an implementation of 'IDesig
 
 ## <a name="add-configuration-providers"></a>구성 공급자 추가
 
-1.x 프로젝트에서는 `Startup` 생성자를 통해 앱에 구성 공급자를 추가했습니다. 이 단계에는 `ConfigurationBuilder`의 인스턴스 만들기, 해당 공급자(환경 변수, 앱 설정 등) 로드 및 `IConfigurationRoot`의 멤버 초기화와 같은 작업이 포함되었습니다.
+1\.x 프로젝트에서는 `Startup` 생성자를 통해 앱에 구성 공급자를 추가했습니다. 이 단계에는 `ConfigurationBuilder`의 인스턴스 만들기, 해당 공급자(환경 변수, 앱 설정 등) 로드 및 `IConfigurationRoot`의 멤버 초기화와 같은 작업이 포함되었습니다.
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Startup.cs?name=snippet_1xStartup)]
 
 위의 예제에서는 `IHostingEnvironment.EnvironmentName` 속성과 일치하는 *appsettings.\<EnvironmentName\>.json* 파일뿐만 아니라 *appsettings.json*의 구성 설정을 사용하여 `Configuration` 멤버를 로드합니다. 이러한 파일의 위치는 *Startup.cs*와 동일한 경로에 있습니다.
 
-2.0 프로젝트에서 1.x 프로젝트에 포함된 기본 구성 코드는 백그라운드에서 실행됩니다. 예를 들어 환경 변수 및 앱 설정은 시작 시 로드됩니다. 동일한 *Startup.cs* 코드는 삽입된 인스턴스를 사용하여 `IConfiguration` 초기화로 축소됩니다.
+2\.0 프로젝트에서 1.x 프로젝트에 포함된 기본 구성 코드는 백그라운드에서 실행됩니다. 예를 들어 환경 변수 및 앱 설정은 시작 시 로드됩니다. 동일한 *Startup.cs* 코드는 삽입된 인스턴스를 사용하여 `IConfiguration` 초기화로 축소됩니다.
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/Startup.cs?name=snippet_2xStartup)]
 
@@ -142,17 +142,17 @@ EF Core 1.x를 사용하는 1.x 프로젝트에서 `dotnet ef migrations add`와
 1. `ConfigureServices` 메서드를 호출하여 종속성 주입을 통해 모든 서비스를 등록합니다(`DbContext` 형식 포함).
 1. 필수 작업을 수행합니다.
 
-EF Core 2.0을 사용하는 2.0 프로젝트에서는 애플리케이션 서비스를 가져오기 위해 `Program.BuildWebHost`가 호출됩니다. 1.x와 달리 2.0 프로젝트에서는 `Startup.Configure`를 호출하는 데 부작용이 추가로 발생합니다. 1.x 앱이 `Configure` 메서드에서 데이터베이스 초기화 코드를 호출한 경우 예기치 않은 문제가 발생할 수 있습니다. 예를 들어 데이터베이스가 아직 없는 경우 EF Core 마이그레이션 명령 실행 전에 시드 코드가 실행됩니다. 아직 데이터베이스가 없는 경우 이 문제가 `dotnet ef migrations list` 명령 실패의 원인이 됩니다.
+EF Core 2.0을 사용하는 2.0 프로젝트에서는 애플리케이션 서비스를 가져오기 위해 `Program.BuildWebHost`가 호출됩니다. 1\.x와 달리 2.0 프로젝트에서는 `Startup.Configure`를 호출하는 데 부작용이 추가로 발생합니다. 1\.x 앱이 `Configure` 메서드에서 데이터베이스 초기화 코드를 호출한 경우 예기치 않은 문제가 발생할 수 있습니다. 예를 들어 데이터베이스가 아직 없는 경우 EF Core 마이그레이션 명령 실행 전에 시드 코드가 실행됩니다. 아직 데이터베이스가 없는 경우 이 문제가 `dotnet ef migrations list` 명령 실패의 원인이 됩니다.
 
 *Startup.cs*의 `Configure` 메서드에서 다음 1.x 시드 초기화 코드를 고려하세요.
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Startup.cs?name=snippet_ConfigureSeedData&highlight=8)]
 
-2.0 프로젝트에서 `SeedData.Initialize` 호출을 *Program.cs*의 `Main` 메서드로 이동합니다.
+2\.0 프로젝트에서 `SeedData.Initialize` 호출을 *Program.cs*의 `Main` 메서드로 이동합니다.
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Program2.cs?name=snippet_Main2Code&highlight=10)]
 
-2.0부터 `BuildWebHost`에서 웹 호스트를 빌드하고 구성하는 작업 외에 다른 작업을 수행하는 것은 바람직하지 않습니다. 애플리케이션 실행과 관련된 모든 작업은 `BuildWebHost`&mdash; 외부(보통 *Program.cs*의 `Main` 메서드)에서 처리해야 합니다.
+2\.0부터 `BuildWebHost`에서 웹 호스트를 빌드하고 구성하는 작업 외에 다른 작업을 수행하는 것은 바람직하지 않습니다. 애플리케이션 실행과 관련된 모든 작업은 `BuildWebHost`&mdash; 외부(보통 *Program.cs*의 `Main` 메서드)에서 처리해야 합니다.
 
 <a name="view-compilation"></a>
 
@@ -186,7 +186,7 @@ Visual Studio 2017에서 만든 ASP.NET Core 1.1 프로젝트는 기본적으로
 
     [!code-cshtml[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Views/Shared/_Layout.cshtml?range=1,19&dedent=4)]
 
-Application Insights SDK를 직접 사용하는 경우 계속 진행합니다. 2.0 [metapackage](xref:fundamentals/metapackage)에는 최신 버전의 Application Insights가 포함되어 있으므로 이전 버전을 참조하는 경우 패키지 다운그레이드 오류가 나타납니다.
+Application Insights SDK를 직접 사용하는 경우 계속 진행합니다. 2\.0 [metapackage](xref:fundamentals/metapackage)에는 최신 버전의 Application Insights가 포함되어 있으므로 이전 버전을 참조하는 경우 패키지 다운그레이드 오류가 나타납니다.
 
 <a name="auth-and-identity"></a>
 

@@ -4,14 +4,14 @@ author: rick-anderson
 description: ObjectPool를 사용 하 여 ASP.NET Core 앱의 성능을 높이기 위한 팁입니다.
 monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
-ms.date: 4/11/2019
+ms.date: 04/11/2019
 uid: performance/ObjectPool
-ms.openlocfilehash: 92106d5add7dbda36e451614429baa0db420f0e8
-ms.sourcegitcommit: bee530454ae2b3c25dc7ffebf93536f479a14460
+ms.openlocfilehash: 771f19e54a908b8b2cd85ff72f368f16e94a2310
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/10/2019
-ms.locfileid: "67724837"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815518"
 ---
 # <a name="object-reuse-with-objectpool-in-aspnet-core"></a>ASP.NET Core에서 ObjectPool 사용 하 여 개체 다시 사용
 

@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 06/17/2019
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: c3ec67d9f5c2b8eb44b5ced911ccfd0fa40a52a7
-ms.sourcegitcommit: 4ef0362ef8b6e5426fc5af18f22734158fe587e1
+ms.openlocfilehash: 6254a74fd0a11669706a2a89b156a3223e300d1c
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67152772"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67813502"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>ASP.NET Core에서 정적 자산 번들링 및 축소하기
 
@@ -86,7 +86,7 @@ ASP.NET Core 2.1 이상에서는 MVC 또는 Razor 페이지 프로젝트 루트�
 구성 옵션은 다음과 같습니다.
 
 * `outputFileName`: 출력 번들 파일의 이름입니다. *bundleconfig.json* 파일로부터의 상대 경로를 포함할 수 있습니다. **필수**
-* `inputFiles`: 배열 함께 번들로 제공할 파일입니다. 이 배열의 값은 구성 파일에 대한 상대 경로입니다. **선택적**, *값이 비어 있으면 빈 출력 파일이 만들어집니다. [와일드카드 사용](http://www.tldp.org/LDP/abs/html/globbingref.html) 패턴이 지원됩니다.
+* `inputFiles`: 배열 함께 번들로 제공할 파일입니다. 이 배열의 값은 구성 파일에 대한 상대 경로입니다. **선택적**, *값이 비어 있으면 빈 출력 파일이 만들어집니다. [와일드카드 사용](https://www.tldp.org/LDP/abs/html/globbingref.html) 패턴이 지원됩니다.
 * `minify`: 출력 형식에 대 한 축소 옵션입니다. **선택적**, *기본값 - `minify: { enabled: true }`*
   * 이 구성 옵션은 출력 파일 형식마다 달라집니다.
     * [CSS Minifier](https://github.com/madskristensen/BundlerMinifier/wiki/cssminifier)

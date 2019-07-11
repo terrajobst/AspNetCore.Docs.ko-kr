@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/13/2019
 uid: security/key-vault-configuration
-ms.openlocfilehash: 78c63cf135ca92f0b5f6c6828b2ae34a44a7b36c
-ms.sourcegitcommit: 3ee6ee0051c3d2c8d47a58cb17eef1a84a4c46a0
+ms.openlocfilehash: be176ed612be0773c4a5b52607c023da3856ac14
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65621026"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815325"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>ASP.NET Core에서 azure Key Vault 구성 공급자
 
@@ -34,7 +34,7 @@ Azure 키 자격 증명 모음 구성 공급자를 사용 하려면 패키지 �
 채택 하는 [Azure 리소스에 대 한 id 관리](/azure/active-directory/managed-identities-azure-resources/overview) 시나리오에 대 한 패키지 참조를 추가 합니다 [Microsoft.Azure.Services.AppAuthentication](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication/) 패키지.
 
 > [!NOTE]
-> 안정적인 최신 릴리스를 작성할 당시 `Microsoft.Azure.Services.AppAuthentication`, 버전 `1.0.3`에 대 한 지원을 제공 [identities 관리 되는 시스템 할당](/azure/active-directory/managed-identities-azure-resources/overview#how-does-the-managed-identities-for-azure-resources-worka-namehow-does-it-worka)합니다. 에 대 한 지원 *identities 관리 되는 사용자 할당* 에서 사용할 수는 `1.2.0-preview2` 패키지 있습니다. 이 항목에서는 시스템 관리 id 사용을 보여 줍니다. 및 버전을 사용 하 여 제공된 된 샘플 앱 `1.0.3` 의 `Microsoft.Azure.Services.AppAuthentication` 패키지 있습니다.
+> 안정적인 최신 릴리스를 작성할 당시 `Microsoft.Azure.Services.AppAuthentication`, 버전 `1.0.3`에 대 한 지원을 제공 [identities 관리 되는 시스템 할당](/azure/active-directory/managed-identities-azure-resources/overview#how-does-the-managed-identities-for-azure-resources-work)합니다. 에 대 한 지원 *identities 관리 되는 사용자 할당* 에서 사용할 수는 `1.2.0-preview2` 패키지 있습니다. 이 항목에서는 시스템 관리 id 사용을 보여 줍니다. 및 버전을 사용 하 여 제공된 된 샘플 앱 `1.0.3` 의 `Microsoft.Azure.Services.AppAuthentication` 패키지 있습니다.
 
 ## <a name="sample-app"></a>샘플 앱
 
@@ -120,11 +120,11 @@ Azure AD를 구성 하 고, Azure Active Directory 응용 프로그램 ID 및 X.
 
 샘플 앱에서는 경우 응용 프로그램 ID 및 X.509 인증서를 `#define` 맨 위에 있는 문을 합니다 *Program.cs* 파일을 설정 `Certificate`합니다.
 
-1. PKCS #12 파일을 만듭니다 (*.pfx*) 인증서입니다. 인증서를 만들기 위한 옵션에 포함 됩니다 [Windows에서 MakeCert](/windows/desktop/seccrypto/makecert) 하 고 [OpenSSL](https://www.openssl.org/)합니다.
+1. PKCS #12 파일을 만듭니다 ( *.pfx*) 인증서입니다. 인증서를 만들기 위한 옵션에 포함 됩니다 [Windows에서 MakeCert](/windows/desktop/seccrypto/makecert) 하 고 [OpenSSL](https://www.openssl.org/)합니다.
 1. 현재 사용자의 개인 인증서 저장소에 인증서를 설치 합니다. 표시 키로 내보낼 수 있는 선택 사항입니다. 이 프로세스에서 나중에 사용 되는 인증서의 지문을 note 합니다.
-1. PKCS #12 보관 파일 내보내기 (*.pfx*) DER로 인코딩된 인증서를 인증서 (*.cer*).
+1. PKCS #12 보관 파일 내보내기 ( *.pfx*) DER로 인코딩된 인증서를 인증서 ( *.cer*).
 1. Azure AD에 앱 등록 (**앱 등록**).
-1. DER로 인코딩된 인증서를 업로드 (*.cer*) Azure AD에:
+1. DER로 인코딩된 인증서를 업로드 ( *.cer*) Azure AD에:
    1. Azure AD에서 앱을 선택 합니다.
    1. 이동할 **인증서 및 비밀**합니다.
    1. 선택 **인증서 업로드** 공개 키를 포함 하는 인증서를 업로드 합니다. A *.cer*를 *.pem*, 또는 *.crt* 인증서 허용 됩니다.
@@ -135,8 +135,8 @@ Azure AD를 구성 하 고, Azure Active Directory 응용 프로그램 ID 및 X.
 1. 선택 **새로 추가**합니다.
 1. 선택 **보안 주체 선택** 이름으로 등록 된 앱을 선택 합니다. 선택 된 **선택** 단추입니다.
 1. 열기 **비밀 권한** 응용 프로그램을 제공 하 고 **가져오기** 하 고 **목록** 권한.
-1. **확인**을 선택합니다.
-1. **저장**을 선택합니다.
+1.           **확인**을 선택합니다.
+1.           **저장**을 선택합니다.
 1. 앱을 배포 합니다.
 
 합니다 `Certificate` 샘플 앱에서 해당 구성 값을 가져옵니다 `IConfigurationRoot` 비밀 이름으로 같은 이름의:

@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 08/09/2018
 uid: client-side/bower
-ms.openlocfilehash: 08e6daa537c6c6f92a1cf80d70745e8ef606f580
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 1292b75bdfe1cea56d9c8bc282b0dd90fc945a33
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64893000"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67813524"
 ---
 # <a name="manage-client-side-packages-with-bower-in-aspnet-core"></a>ASP.NET Core에서 Bower 사용 하 여 클라이언트 쪽 패키지 관리
 
@@ -22,9 +22,9 @@ ms.locfileid: "64893000"
 >
 > Webpack 사용 하 여 yarn 되는 인기 있는 한 가지 대안은 [마이그레이션 지침](https://bower.io/blog/2017/how-to-migrate-away-from-bower/) 사용할 수 있습니다.
 
-[Bower](https://bower.io/) "웹에 대 한 패키지 관리자" 자신을 호출 합니다. .NET 에코 시스템 내에서 NuGet의 정적 콘텐츠 파일을 배달 하지 못하는 남긴 void를 채우도록 합니다. ASP.NET Core 프로젝트에 대 한 이러한 정적 파일은 같은 클라이언트 쪽 라이브러리에 내재 [jQuery](http://jquery.com/) 하 고 [부트스트랩](http://getbootstrap.com/)합니다. .NET 라이브러리에 대해 여전히 사용 [NuGet](https://www.nuget.org/) 패키지 관리자입니다.
+[Bower](https://bower.io/) "웹에 대 한 패키지 관리자" 자신을 호출 합니다. .NET 에코 시스템 내에서 NuGet의 정적 콘텐츠 파일을 배달 하지 못하는 남긴 void를 채우도록 합니다. ASP.NET Core 프로젝트에 대 한 이러한 정적 파일은 같은 클라이언트 쪽 라이브러리에 내재 [jQuery](https://jquery.com/) 하 고 [부트스트랩](https://getbootstrap.com/)합니다. .NET 라이브러리에 대해 여전히 사용 [NuGet](https://www.nuget.org/) 패키지 관리자입니다.
 
-클라이언트 쪽 설정 하는 ASP.NET Core 프로젝트 템플릿을 사용 하 여 만든 새로운 프로젝트는 프로세스를 빌드합니다. [jQuery](http://jquery.com/) 하 고 [부트스트랩](http://getbootstrap.com/) 설치할지, Bower 지원 됩니다.
+클라이언트 쪽 설정 하는 ASP.NET Core 프로젝트 템플릿을 사용 하 여 만든 새로운 프로젝트는 프로세스를 빌드합니다. [jQuery](https://jquery.com/) 하 고 [부트스트랩](https://getbootstrap.com/) 설치할지, Bower 지원 됩니다.
 
 클라이언트 쪽 패키지에 나열 됩니다는 *bower.json* 파일입니다. ASP.NET Core 프로젝트 템플릿 구성 *bower.json* jQuery, jQuery 유효성 검사 및 부트스트랩 합니다.
 
@@ -50,7 +50,7 @@ ms.locfileid: "64893000"
 
 ![bower 버전 IntelliSense](bower/_static/version-intelliSense.png)
 
-사용 하 여 bower [의미 체계 버전 관리](http://semver.org/) 종속성을 구성 합니다. 번호 매기기 체계를 사용 하 여 패키지를 식별 하는 의미 체계 버전 관리, 라고도 SemVer \<주요 >.\< 부 버전 >. \<패치 >. IntelliSense만 몇 가지 일반적인 옵션을 표시 하 여 의미 체계 버전 관리를 간소화 합니다. (위의 예에서 4.6.3) IntelliSense 목록에 맨 위 항목에는 패키지의 안정적인 최신 버전으로 간주 됩니다. 캐럿 (^) 기호가 일치 하는 가장 최근의 주 버전 항목과 물결표 (~) 최신 부 버전.
+사용 하 여 bower [의미 체계 버전 관리](https://semver.org/) 종속성을 구성 합니다. 번호 매기기 체계를 사용 하 여 패키지를 식별 하는 의미 체계 버전 관리, 라고도 SemVer \<주요 >.\< 부 버전 >. \<패치 >. IntelliSense만 몇 가지 일반적인 옵션을 표시 하 여 의미 체계 버전 관리를 간소화 합니다. (위의 예에서 4.6.3) IntelliSense 목록에 맨 위 항목에는 패키지의 안정적인 최신 버전으로 간주 됩니다. 캐럿 (^) 기호가 일치 하는 가장 최근의 주 버전 항목과 물결표 (~) 최신 부 버전.
 
 저장 된 *bower.json* 파일입니다. Visual Studio를 감시 합니다 *bower.json* 변경에 대 한 파일입니다. 저장 시 합니다 *bower 설치* 명령을 실행 합니다. 출력 창을 참조 하십시오 **Bower/npm** 실행 되는 정확한 명령에 대 한 보기입니다.
 

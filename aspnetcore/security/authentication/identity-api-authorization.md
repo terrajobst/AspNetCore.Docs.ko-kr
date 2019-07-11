@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 03/07/2019
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 4afc9ac0a3c54b452c6a1b23e4de31d7e2fc5284
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 302a5e10a70e40e75ab9fe4b3e5a98c4e847b822
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64894150"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815228"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>인증 및 Spa에 대 한 권한 부여
 
@@ -251,7 +251,7 @@ async populateWeatherData() {
 
 Azure Websites에 배포 하려면의 단계에 따라 앱을 배포할 [Azure에 앱을 배포](xref:tutorials/publish-to-azure-webapp-using-vs#deploy-the-app-to-azure) 필요한 Azure 리소스를 만들고 앱을 프로덕션에 배포 합니다.
 
-앞에서 설명한 절차를 따라 앱을 Azure에 배포 되지만 기능 아직. 앱에서 사용 된 인증서도 설정 해야 합니다. 사용할 인증서의 지문을 찾아에 설명 된 단계를 따릅니다 [인증서 로드](/azure/app-service/app-service-web-ssl-cert-load#load-your-certificates)합니다.
+앞에서 설명한 절차를 따라 앱을 Azure에 배포 되지만 기능 아직. 앱에서 사용 된 인증서도 설정 해야 합니다. 사용할 인증서의 지문을 찾아에 설명 된 단계를 따릅니다 [인증서 로드](/azure/app-service/app-service-web-ssl-cert-load#load-the-certificate-in-code)합니다.
 
 하지만 이러한 SSL를 언급 하는 단계, 즉를 **개인 인증서** 섹션 포털에서 앱을 사용 하려면 프로 비전된 인증서를 업로드할 수 있습니다.
 

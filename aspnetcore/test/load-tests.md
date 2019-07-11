@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/05/2019
 uid: test/loadtests
-ms.openlocfilehash: 3c21da6c799bc3080a1a16cb62ae4535b8890a1b
-ms.sourcegitcommit: bee530454ae2b3c25dc7ffebf93536f479a14460
+ms.openlocfilehash: 4b07dd1af7e0c1d3ce9baa167b69fd8f80df204a
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/10/2019
-ms.locfileid: "67724495"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815167"
 ---
 # <a name="aspnet-core-loadstress-testing"></a>ASP.NET Core 부하/스트레스 테스트
 
@@ -23,7 +23,7 @@ ms.locfileid: "67724495"
 
 스트레스 테스트 스트레스 앱 오류에서 복구를 정상적으로 예상 되는 동작을 반환 하는 경우를 결정 합니다. 스트레스 상태에서 앱이 정상 조건 실행 되지 않습니다.
 
-Visual Studio 2019에는 부하 테스트 기능을 사용 하 여 Visual Studio의 마지막 버전입니다. 부하 테스트는 나중에 도구를 필요로 하는 고객에 대 한 Apache JMeter, Akamai CloudTest BlazeMeter 같은 대체 도구를 것이 좋습니다. 자세한 내용은 참조는 [Visual Studio 2019 릴리스](/visualstudio/releases/2019/release-notes#test-tools)합니다.
+Visual Studio 2019에는 부하 테스트 기능을 사용 하 여 Visual Studio의 마지막 버전입니다. 부하 테스트는 나중에 도구를 필요로 하는 고객에 대 한 Apache JMeter, Akamai CloudTest BlazeMeter 같은 대체 도구를 것이 좋습니다. 자세한 내용은 참조는 [Visual Studio 2019 릴리스](/visualstudio/releases/2019/release-notes-v16.0#test-tools)합니다.
 
 부하 테스트 서비스의 Azure DevOps 2020에 종료 될 예정입니다. 자세한 내용은 [클라우드 기반 부하 테스트 서비스 수명 끝](https://devblogs.microsoft.com/devops/cloud-based-load-testing-service-eol/)합니다.
 
@@ -48,7 +48,7 @@ Azure DevOps를 사용 하 여 클라우드에서 온-프레미스 나 실행을
 * [URL 기반](/azure/devops/test/load-test/get-started-simple-cloud-load-test?view=vsts) &ndash; 테스트, 요청 형식, 헤더 및 쿼리 문자열을 로드 하는 Url을 지정할 수 있습니다. 실행 지속 시간 같은 매개 변수를 설정, 부하 패턴 및 사용자 수가 구성할 수 있습니다.
 * [Apache JMeter](https://jmeter.apache.org/).
 
-## <a name="azure-portal"></a>Azure 포털
+## <a name="azure-portal"></a>Azure Portal
 
 [Azure 포털을 통해 설정 하 고 웹 앱의 부하 테스트 실행](/azure/devops/test/load-test/app-service-web-app-performance-test?view=vsts) 에서 직접 합니다 **성능** Azure portal에서 App Service의 탭 합니다.
 
@@ -72,7 +72,7 @@ Azure DevOps를 사용 하 여 클라우드에서 온-프레미스 나 실행을
 * [ApacheBench (ab)](https://httpd.apache.org/docs/2.4/programs/ab.html)
 * [Gatling](https://gatling.io/)
 * [메뚜기](https://locust.io/)
-* [West Wind WebSurge](http://websurge.west-wind.com/)
+* [West Wind WebSurge](https://websurge.west-wind.com/)
 * [Netling](https://github.com/hallatore/Netling)
 * [Vegeta](https://github.com/tsenart/vegeta)
 

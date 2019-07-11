@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc, seoapril2019
 ms.date: 07/01/2019
 uid: blazor/index
-ms.openlocfilehash: dbfadf9481cf16279e2a491bc04f51058e1d8a9c
-ms.sourcegitcommit: eb3e51d58dd713eefc242148f45bd9486be3a78a
+ms.openlocfilehash: d91ba4fd5ada714a539375715745241f05e9fc70
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67500428"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67813364"
 ---
 # <a name="introduction-to-blazor"></a>Blazor 소개
 
@@ -145,7 +145,7 @@ Blazor는 [.NET Standard 2.0](/dotnet/standard/net-standard)을 구현합니다.
 
 ## <a name="additional-resources"></a>추가 자료
 
-* [WebAssembly](http://webassembly.org/)
+* [WebAssembly](https://webassembly.org/)
 * <xref:blazor/hosting-models>
 * [C# 가이드](/dotnet/csharp/)
 * <xref:mvc/views/razor>

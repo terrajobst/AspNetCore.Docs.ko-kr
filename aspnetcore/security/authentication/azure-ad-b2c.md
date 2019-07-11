@@ -6,12 +6,12 @@ ms.author: casoper
 ms.custom: mvc
 ms.date: 02/27/2019
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: 3cb878aff7bf0c6c8efe7f3f0c0f06c74acef477
-ms.sourcegitcommit: 0b9e767a09beaaaa4301915cdda9ef69daaf3ff2
+ms.openlocfilehash: 54117bf0dd45305d060eef5fecfb98ed45f8ecdb
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67538739"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815295"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>ASP.NET Core에서 Azure Active Directory B2C를 사용 하 여 클라우드 인증
 
@@ -43,7 +43,7 @@ Azure Active Directory B2C 테 넌 트 만들기 [설명서에 설명 된 대로
 
 ## <a name="register-the-app-in-azure-ad-b2c"></a>Azure AD B2C에서 앱을 등록 합니다.
 
-새로 만든 Azure AD B2C 테 넌 트를 사용 하 여 앱을 등록 [설명서에 나와 있는 단계](/azure/active-directory-b2c/active-directory-b2c-app-registration#register-a-web-app) 아래 합니다 **웹 앱을 등록** 섹션입니다. 중지 된 **웹 앱 클라이언트 비밀 만들기** 섹션입니다. 클라이언트 암호를이 자습서에 필요 하지 않습니다. 
+새로 만든 Azure AD B2C 테 넌 트를 사용 하 여 앱을 등록 [설명서에 나와 있는 단계](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application) 아래 합니다 **웹 앱을 등록** 섹션입니다. 중지 된 **웹 앱 클라이언트 비밀 만들기** 섹션입니다. 클라이언트 암호를이 자습서에 필요 하지 않습니다. 
 
 다음 값을 사용 합니다.
 
@@ -57,7 +57,7 @@ Azure Active Directory B2C 테 넌 트 만들기 [설명서에 설명 된 대로
 | **네이티브 클라이언트 포함**     | 아니요                        |                                                                                                                                                                                                    |
 
 > [!WARNING]
-> 경우 유의 해야 localhost가 아닌 회신 URL을 설정 합니다 [회신 URL 목록에 허용 되는 사항에 대 한 제약 조건을](/azure/active-directory-b2c/active-directory-b2c-app-registration#choosing-a-web-app-or-api-reply-url)합니다. 
+> 경우 유의 해야 localhost가 아닌 회신 URL을 설정 합니다 [회신 URL 목록에 허용 되는 사항에 대 한 제약 조건을](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application)합니다. 
 
 앱을 등록 한 후에 테 넌 트에서 앱의 목록이 표시 됩니다. 방금 등록 된 앱을 선택 합니다. 선택 합니다 **복사** 아이콘의 오른쪽에는 **응용 프로그램 ID** 클립보드에 복사 하는 필드입니다.
 
@@ -101,7 +101,7 @@ Visual Studio에서 다음을 수행합니다.
 
 ## <a name="configure-policies"></a>정책 구성
 
-Azure AD B2C 설명서의 단계를 사용 [등록 또는 로그인 정책 만들기](/azure/active-directory-b2c/active-directory-b2c-reference-policies#create-a-sign-up-or-sign-in-policy)를 차례로 [암호 재설정 정책 만들기](/azure/active-directory-b2c/active-directory-b2c-reference-policies#create-a-password-reset-policy)합니다. 에 대 한 설명서에 제공 된 예제 값을 사용할 **Id 공급자**를 **등록 특성**, 및 **응용 프로그램 클레임**합니다. 사용 하는 **지금 실행** 설명서에 설명 된 대로 정책을 테스트 하려면 단추는 선택 사항입니다.
+Azure AD B2C 설명서의 단계를 사용 [등록 또는 로그인 정책 만들기](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions)를 차례로 [암호 재설정 정책 만들기](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions)합니다. 에 대 한 설명서에 제공 된 예제 값을 사용할 **Id 공급자**를 **등록 특성**, 및 **응용 프로그램 클레임**합니다. 사용 하는 **지금 실행** 설명서에 설명 된 대로 정책을 테스트 하려면 단추는 선택 사항입니다.
 
 > [!WARNING]
 > 정책 이름이 해당 정책에서 사용 된 설명서에 설명 된 대로 정확 하 게 되어 확인 합니다 **인증 변경** Visual Studio에서 대화 합니다. 정책 이름을 확인할 수 있습니다 *appsettings.json*합니다.

@@ -5,12 +5,12 @@ description: 기존 ASP.NET MVC 또는 Web API 앱을 ASP.NET Core.web으로 마
 ms.author: scaddie
 ms.date: 12/11/2018
 uid: migration/proper-to-2x/index
-ms.openlocfilehash: 7b6aec621efa5e1400fcfd4396a2322733113ec1
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 9c97b9c0f13a265ab5c90225dcd5a581a1272701
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64882908"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815474"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>ASP.NET에서 ASP.NET Core로 마이그레이션
 
@@ -54,7 +54,7 @@ ASP.NET Core에는 앱을 부트스트랩하기 위한 새로운 메커니즘이
 
 [!code-csharp[](samples/globalasax-sample.cs)]
 
-이 방법은 구현을 방해하는 방식으로 애플리케이션 및 애플리케이션이 배포되는 서버를 결합합니다. 분리 작업 시 여러 프레임워크를 함께 사용할 수 있는 더 분명한 방식을 제공하도록 [OWIN](http://owin.org/)이 도입되었습니다. OWIN은 필요한 모듈만 추가하기 위한 파이프라인을 제공합니다. 호스팅 환경에서는 [Startup](xref:fundamentals/startup) 함수를 사용하여 서비스 및 앱 요청 파이프라인을 구성합니다. `Startup`은 미들웨어 집합을 애플리케이션에 등록합니다. 각 요청에 대해 애플리케이션은 기존 처리기 집합에 대한 연결된 목록의 head 포인터를 사용하여 각 미들웨어 구성 요소를 호출합니다. 각 미들웨어 구성 요소는 요청 처리 파이프라인에 하나 이상의 처리기를 추가할 수 있습니다. 이 작업을 수행하려면 목록의 새 헤드인 처리기에 참조를 반환합니다. 각 처리기는 목록의 다음 처리기를 기억하고 호출해야 합니다. ASP.NET Core에서는 애플리케이션에 대한 진입점이 `Startup`이고 더 이상 *Global.asax*에 대한 종속성을 포함하지 않습니다. .NET Framework에서 OWIN을 사용할 경우 다음과 같은 항목을 파이프라인으로 사용합니다.
+이 방법은 구현을 방해하는 방식으로 애플리케이션 및 애플리케이션이 배포되는 서버를 결합합니다. 분리 작업 시 여러 프레임워크를 함께 사용할 수 있는 더 분명한 방식을 제공하도록 [OWIN](https://owin.org/)이 도입되었습니다. OWIN은 필요한 모듈만 추가하기 위한 파이프라인을 제공합니다. 호스팅 환경에서는 [Startup](xref:fundamentals/startup) 함수를 사용하여 서비스 및 앱 요청 파이프라인을 구성합니다. `Startup`은 미들웨어 집합을 애플리케이션에 등록합니다. 각 요청에 대해 애플리케이션은 기존 처리기 집합에 대한 연결된 목록의 head 포인터를 사용하여 각 미들웨어 구성 요소를 호출합니다. 각 미들웨어 구성 요소는 요청 처리 파이프라인에 하나 이상의 처리기를 추가할 수 있습니다. 이 작업을 수행하려면 목록의 새 헤드인 처리기에 참조를 반환합니다. 각 처리기는 목록의 다음 처리기를 기억하고 호출해야 합니다. ASP.NET Core에서는 애플리케이션에 대한 진입점이 `Startup`이고 더 이상 *Global.asax*에 대한 종속성을 포함하지 않습니다. .NET Framework에서 OWIN을 사용할 경우 다음과 같은 항목을 파이프라인으로 사용합니다.
 
 [!code-csharp[](samples/webapi-owin.cs)]
 
@@ -143,7 +143,7 @@ Unity에서 삽입한 것처럼 리포지토리는 어디든지 삽입될 수 �
 
 ASP.NET에서 정적 파일은 다양한 디렉터리에 저장되고 뷰에서 참조됩니다.
 
-ASP.NET Core에서 정적 파일은 별도로 구성되지 않는 한 “웹 루트”(*&lt;content root&gt;/wwwroot*)에 저장됩니다. 파일은 `Startup.Configure`에서 `UseStaticFiles` 확장 메서드를 호출하는 방식으로 요청 파이프라인에 로드됩니다.
+ASP.NET Core에서 정적 파일은 별도로 구성되지 않는 한 “웹 루트”( *&lt;content root&gt;/wwwroot*)에 저장됩니다. 파일은 `Startup.Configure`에서 `UseStaticFiles` 확장 메서드를 호출하는 방식으로 요청 파이프라인에 로드됩니다.
 
 [!code-csharp[](../../fundamentals/static-files/samples/1x/StartupStaticFiles.cs?highlight=3&name=snippet_ConfigureMethod)]
 

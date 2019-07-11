@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/20/2018
 uid: client-side/libman/libman-vs
-ms.openlocfilehash: d0494b96447ad2b256acbde7748209ff430ae7c1
-ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
+ms.openlocfilehash: ebfb405516d968bf5d5b8cff956a9892457027f2
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65610176"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67813469"
 ---
 # <a name="use-libman-with-aspnet-core-in-visual-studio"></a>Visual Studio에서 ASP.NET Core와 LibMan 사용하기
 
@@ -26,9 +26,9 @@ Visual Studio는 ASP.NET Core 프로젝트에서 [LibMan](xref:client-side/libma
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/client-side/libman/samples/) [(다운로드 방법)](xref:index#how-to-download-a-sample)
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>필수 구성 요소
 
-* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) 사용 하 여 합니다 **ASP.NET 및 웹 개발** 워크 로드
+* **ASP.NET 및 웹 개발** 워크로드가 있는 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 
 ## <a name="add-library-files"></a>라이브러리 파일 추가하기
 
@@ -94,7 +94,7 @@ Visual Studio의 모든 LibMan 작업은 프로젝트 루트의 LibMan 매니페
 
 **&#8224;** 프로젝트 루트에 아직 *libman.json* 파일이 존재하지 않으면 기본 항목 템플릿 내용을 담은 파일이 만들어집니다.
 
-Visual Studio는 색 지정, 서식 지정, IntelliSense 및 스키마 유효성 검사 같은 다양한 JSON 편집 지원을 제공합니다. LibMan 매니페스트의 JSON 스키마는 [http://json.schemastore.org/libman](http://json.schemastore.org/libman)에서 살펴볼 수 있습니다.
+Visual Studio는 색 지정, 서식 지정, IntelliSense 및 스키마 유효성 검사 같은 다양한 JSON 편집 지원을 제공합니다. LibMan 매니페스트의 JSON 스키마는 [https://json.schemastore.org/libman](https://json.schemastore.org/libman)에서 살펴볼 수 있습니다.
 
 다음 매니페스트 파일을 사용하는 경우 LibMan은 `libraries` 속성에 정의된 각 구성에 따라 파일을 검색합니다. `libraries` 내에 정의된 개체 리터럴에 대한 설명은 다음과 같습니다.
 

@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: migration/mvc2
-ms.openlocfilehash: 7f048f2f95f1a51a0b6ce3d36665420ff28ec26f
-ms.sourcegitcommit: 5f299daa7c8102d56a63b214b9a34cc4bc87bc42
+ms.openlocfilehash: e9dffe8bce502e48a09af04ea0be9952a68aa46f
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/19/2019
-ms.locfileid: "58208475"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815450"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core-20"></a>ASP.NET에서 ASP.NET Core 2.0으로 마이그레이션
 
@@ -19,7 +19,7 @@ ms.locfileid: "58208475"
 
 이 문서는 ASP.NET 애플리케이션을 ASP.NET Core 2.0으로 마이그레이션하기 위한 참조 가이드로 사용됩니다.
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>필수 구성 요소
 
 설치할 **하나** 에서 다음의 [.NET 다운로드: Windows](https://www.microsoft.com/net/download/windows):
 
@@ -60,7 +60,7 @@ ASP.NET Core에는 앱을 부트스트랩하기 위한 새로운 메커니즘이
 
 [!code-csharp[](samples/globalasax-sample.cs)]
 
-이 방법은 구현을 방해하는 방식으로 애플리케이션 및 애플리케이션이 배포되는 서버를 결합합니다. 분리 작업 시 여러 프레임워크를 함께 사용할 수 있는 더 분명한 방식을 제공하도록 [OWIN](http://owin.org/)이 도입되었습니다. OWIN은 필요한 모듈만 추가하기 위한 파이프라인을 제공합니다. 호스팅 환경에서는 [Startup](xref:fundamentals/startup) 함수를 사용하여 서비스 및 앱 요청 파이프라인을 구성합니다. `Startup`은 미들웨어 집합을 응용 프로그램에 등록합니다. 각 요청에 대해 애플리케이션은 기존 처리기 집합에 대한 연결된 목록의 head 포인터를 사용하여 각 미들웨어 구성 요소를 호출합니다. 각 미들웨어 구성 요소는 요청 처리 파이프라인에 하나 이상의 처리기를 추가할 수 있습니다. 이 작업을 수행하려면 목록의 새 헤드인 처리기에 참조를 반환합니다. 각 처리기는 목록의 다음 처리기를 기억하고 호출해야 합니다. ASP.NET Core에서는 애플리케이션에 대한 진입점이 `Startup`이고 더 이상 *Global.asax*에 대한 종속성을 포함하지 않습니다. .NET Framework에서 OWIN을 사용할 경우 다음과 같은 항목을 파이프라인으로 사용합니다.
+이 방법은 구현을 방해하는 방식으로 애플리케이션 및 애플리케이션이 배포되는 서버를 결합합니다. 분리 작업 시 여러 프레임워크를 함께 사용할 수 있는 더 분명한 방식을 제공하도록 [OWIN](https://owin.org/)이 도입되었습니다. OWIN은 필요한 모듈만 추가하기 위한 파이프라인을 제공합니다. 호스팅 환경에서는 [Startup](xref:fundamentals/startup) 함수를 사용하여 서비스 및 앱 요청 파이프라인을 구성합니다. `Startup`은 미들웨어 집합을 응용 프로그램에 등록합니다. 각 요청에 대해 애플리케이션은 기존 처리기 집합에 대한 연결된 목록의 head 포인터를 사용하여 각 미들웨어 구성 요소를 호출합니다. 각 미들웨어 구성 요소는 요청 처리 파이프라인에 하나 이상의 처리기를 추가할 수 있습니다. 이 작업을 수행하려면 목록의 새 헤드인 처리기에 참조를 반환합니다. 각 처리기는 목록의 다음 처리기를 기억하고 호출해야 합니다. ASP.NET Core에서는 애플리케이션에 대한 진입점이 `Startup`이고 더 이상 *Global.asax*에 대한 종속성을 포함하지 않습니다. .NET Framework에서 OWIN을 사용할 경우 다음과 같은 항목을 파이프라인으로 사용합니다.
 
 [!code-csharp[](samples/webapi-owin.cs)]
 
@@ -72,7 +72,7 @@ ASP.NET Core는 비슷한 방법을 사용하지만 항목을 처리하는 데 O
 
 `Startup`에는 `Configure` 메서드가 포함되어야 합니다. `Configure`에서 파이프라인에 필요한 미들웨어를 추가합니다. 기본 웹 사이트 템플릿을 기반으로 한 다음 예제에서는 여러 확장 메서드를 사용하여 다음 지원을 통해 파이프라인을 구성합니다.
 
-* [BrowserLink](http://vswebessentials.com/features/browserlink)
+* [BrowserLink](https://vswebessentials.com/features/browserlink)
 * 오류 페이지
 * 정적 파일
 * ASP.NET Core MVC
@@ -147,7 +147,7 @@ ASP.NET Core에서 종속성 주입에 대 한 자세한 내용은 참조 하세
 
 ASP.NET에서 정적 파일은 다양한 디렉터리에 저장되고 뷰에서 참조됩니다.
 
-ASP.NET Core에서 정적 파일은 별도로 구성되지 않는 한 “웹 루트”(*&lt;content root&gt;/wwwroot*)에 저장됩니다. 파일은 `Startup.Configure`에서 `UseStaticFiles` 확장 메서드를 호출하는 방식으로 요청 파이프라인에 로드됩니다.
+ASP.NET Core에서 정적 파일은 별도로 구성되지 않는 한 “웹 루트”( *&lt;content root&gt;/wwwroot*)에 저장됩니다. 파일은 `Startup.Configure`에서 `UseStaticFiles` 확장 메서드를 호출하는 방식으로 요청 파이프라인에 로드됩니다.
 
 [!code-csharp[](../../fundamentals/static-files/samples/1x/StartupStaticFiles.cs?highlight=3&name=snippet_ConfigureMethod)]
 

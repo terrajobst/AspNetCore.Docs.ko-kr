@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/05/2019
 uid: test/integration-tests
-ms.openlocfilehash: 3af2a1f7c6a65d7ff42597972ee151a50fc95fb6
-ms.sourcegitcommit: c716ea9155a6b404c1f3d3d34e2388454cd276d7
+ms.openlocfilehash: a4e22e53b4658a7c6da3c9e15671a355b212f559
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/05/2019
-ms.locfileid: "66716371"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815362"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>ASP.NET Core에서 통합 테스트
 
@@ -184,7 +184,7 @@ SUT 대 한 모든 POST 요청에는 앱의 자동으로 수행 하는 위조 �
   * 제출 단추 (`IHtmlElement`) 값을 구성 하 고 (`IEnumerable<KeyValuePair<string, string>>`)
 
 > [!NOTE]
-> [AngleSharp](https://anglesharp.github.io/) 타사 구문 분석 하는 데모용으로이 항목에서는 샘플 앱에 사용 되는 라이브러리입니다. AngleSharp는 ASP.NET Core 앱의 통합 테스트에 필요한 또는 지원 되지 않습니다. 다른 파서 사용할 수와 같은 합니다 [Html 민첩성 팩 (HAP)](http://html-agility-pack.net/)합니다. 다른 방법은 위조 방지 시스템의 요청 확인 토큰 및 위조 방지 쿠키를 직접 처리 하는 코드를 작성 하는 것입니다.
+> [AngleSharp](https://anglesharp.github.io/) 타사 구문 분석 하는 데모용으로이 항목에서는 샘플 앱에 사용 되는 라이브러리입니다. AngleSharp는 ASP.NET Core 앱의 통합 테스트에 필요한 또는 지원 되지 않습니다. 다른 파서 사용할 수와 같은 합니다 [Html 민첩성 팩 (HAP)](https://html-agility-pack.net/)합니다. 다른 방법은 위조 방지 시스템의 요청 확인 토큰 및 위조 방지 쿠키를 직접 처리 하는 코드를 작성 하는 것입니다.
 
 ## <a name="customize-the-client-with-withwebhostbuilder"></a>WithWebHostBuilder 사용 하 여 클라이언트를 사용자 지정
 
@@ -200,7 +200,7 @@ SUT 대 한 모든 POST 요청에는 앱의 자동으로 수행 하는 위조 �
 
 다음 표에서 기본 [WebApplicationFactoryClientOptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions) 를 만들 때 사용할 수 있는 `HttpClient` 인스턴스.
 
-| 옵션 | 설명 | 기본 |
+| 옵션 | 설명 | 기본값 |
 | ------ | ----------- | ------- |
 | [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | 가져오거나 여부 `HttpClient` 인스턴스 리디렉션 응답을 자동으로 수행 해야 합니다. | `true` |
 | [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | 기본 주소를 가져오거나 설정 합니다. `HttpClient` 인스턴스. | `http://localhost` |
@@ -331,7 +331,7 @@ _client = _factory.CreateClient(clientOptions);
 
 합니다 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) 두 개의 앱으로 구성 됩니다.
 
-| 앱 | 프로젝트 디렉터리 | 설명 |
+| 앱 | 프로젝트 디렉터리 | Description |
 | --- | ----------------- | ----------- |
 | 메시지 앱 (SUT) | *src/RazorPagesProject* | 추가, 하나를 삭제, all, 삭제 및 메시지를 분석할 수 있습니다. |
 | 테스트 앱 | *tests/RazorPagesProject.Tests* | 통합 테스트는 SUT 하는 데 사용 합니다. |
@@ -361,7 +361,7 @@ SUT는 다음 특성을 사용 하 여 Razor 페이지 메시지 시스템:
 
 테스트 앱 내에서 콘솔 앱은는 *tests/RazorPagesProject.Tests* 디렉터리입니다.
 
-| 테스트 앱 디렉터리 | 설명 |
+| 테스트 앱 디렉터리 | Description |
 | ------------------ | ----------- |
 | *BasicTests* | *BasicTests.cs* 라우팅, 인증 되지 않은 사용자, 보안 페이지에 액세스 하 고 GitHub 사용자 프로필 및 프로필의 사용자 로그인을 확인 하는 것에 대 한 테스트 메서드가 포함 되어 있습니다. |
 | *IntegrationTests* | *IndexPageTests.cs* 사용자 지정을 사용 하 여 인덱스 페이지에 대 한 통합 테스트를 포함 `WebApplicationFactory` 클래스입니다. |

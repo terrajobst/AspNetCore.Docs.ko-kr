@@ -22,6 +22,6 @@
 
 ## <a name="use-the-sample"></a>샘플 사용
 
-1. 사용 하 여 요청 [Fiddler](http://www.telerik.com/fiddler)를 [Firebug](http://getfirebug.com/), 또는 [Postman](https://www.getpostman.com/) 없이 응용 프로그램에는 `Accept-Encoding` 헤더 및 응답 크기는 응답 페이로드를 참고 하 고 응답 헤더입니다.
+1. 사용 하 여 요청 [Fiddler](https://www.telerik.com/fiddler)를 [Firebug](https://getfirebug.com/), 또는 [Postman](https://www.getpostman.com/) 없이 응용 프로그램에는 `Accept-Encoding` 헤더 및 응답 크기는 응답 페이로드를 참고 하 고 응답 헤더입니다.
 1. 추가 된 `Accept-Encoding: br` 또는 `Accept-Encoding: gzip` 헤더 압축 된 응답 크기 및 응답 헤더를 확인 합니다. 응답 크기, 삭제 및 `Content-Encoding` 나타내는 하거나 Gzip으로 압축 하는 미들웨어에서 응답 헤더 포함 되어 있거나 Brotli 발생 했습니다. Lorem Ipsum에 대 한 응답 본문에서 볼 때 또는 **testfile1kb.txt** 응답을 표시의 텍스트를 압축 하 고 읽을 수 없습니다.
 1. 추가 `Accept-Encoding: mycustomcompression` 헤더 응답 헤더를 확인 합니다. 합니다 `CustomCompressionProvider` 응답을 압축 실제로 되지 않는 빈 구현을 이지만 사용자 지정 압축 스트림을 래퍼를 만들 수 있습니다는 `CreateStream()` 메서드.

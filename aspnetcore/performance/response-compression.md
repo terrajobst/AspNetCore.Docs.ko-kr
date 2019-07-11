@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/13/2019
 uid: performance/response-compression
-ms.openlocfilehash: e312d43fb62106f6ecb98367c29daa377bb227c9
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: d5d2da3dc0a8a452de97d98161d429389d2f7638
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64893350"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815611"
 ---
 # <a name="response-compression-in-aspnet-core"></a>ASP.NET Core에서 응답 압축
 
@@ -30,7 +30,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 
 * 다음 서버 기반 압축 기술을 사용할 수 없습니다.
   * [IIS 동적 압축이 모듈](https://www.iis.net/overview/reliability/dynamiccachingandcompression)
-  * [Apache mod_deflate 모듈](http://httpd.apache.org/docs/current/mod/mod_deflate.html)
+  * [Apache mod_deflate 모듈](https://httpd.apache.org/docs/current/mod/mod_deflate.html)
   * [Nginx 압축 및 압축 풀기](https://www.nginx.com/resources/admin-guide/compression-and-decompression/)
 * 직접 호스트:
   * [HTTP.sys 서버](xref:fundamentals/servers/httpsys) (이전의 WebListener)
@@ -44,7 +44,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 
 ::: moniker range=">= aspnetcore-2.2"
 
-| `Accept-Encoding` 헤더 값 | 지원 되는 미들웨어 | 설명 |
+| `Accept-Encoding` 헤더 값 | 지원 되는 미들웨어 | Description |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | 예 (기본값)        | [Brotli 압축 된 데이터 형식](https://tools.ietf.org/html/rfc7932) |
 | `deflate`                       | 아니요                   | [DEFLATE 압축 된 데이터 형식](https://tools.ietf.org/html/rfc1951) |
@@ -58,7 +58,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 
 ::: moniker range="< aspnetcore-2.2"
 
-| `Accept-Encoding` 헤더 값 | 지원 되는 미들웨어 | 설명 |
+| `Accept-Encoding` 헤더 값 | 지원 되는 미들웨어 | Description |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | 아니요                   | [Brotli 압축 된 데이터 형식](https://tools.ietf.org/html/rfc7932) |
 | `deflate`                       | 아니요                   | [DEFLATE 압축 된 데이터 형식](https://tools.ietf.org/html/rfc1951) |
@@ -70,7 +70,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 
 ::: moniker-end
 
-자세한 내용은 참조는 [IANA 공식 콘텐츠 코딩 목록](http://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry)합니다.
+자세한 내용은 참조는 [IANA 공식 콘텐츠 코딩 목록](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry)합니다.
 
 미들웨어를 사용 하면 사용자 지정에 대 한 추가 압축 공급자를 추가 하려면 `Accept-Encoding` 헤더 값입니다. 자세한 내용은 [사용자 지정 공급자](#custom-providers) 아래.
 
@@ -94,7 +94,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 * Gzip 및 사용자 지정 압축 공급자를 사용 하 여 앱 응답을 압축 합니다.
 * 압축에 대 한 MIME 형식 목록을 기본 MIME 형식을 추가 하는 방법.
 
-## <a name="package"></a>Package
+## <a name="package"></a>패키지
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -114,7 +114,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 
 ::: moniker-end
 
-## <a name="configuration"></a>구성
+## <a name="configuration"></a>Configuration
 
 ::: moniker range=">= aspnetcore-2.2"
 
@@ -143,10 +143,10 @@ public class Startup
 }
 ```
 
-메모:
+참고:
 
 * `app.UseResponseCompression` 먼저 호출 해야 `app.UseMvc`합니다.
-* 와 같은 도구를 사용 [Fiddler](http://www.telerik.com/fiddler)를 [Firebug](http://getfirebug.com/), 또는 [Postman](https://www.getpostman.com/) 설정 하는 `Accept-Encoding` 요청 헤더 및 응답 헤더, 크기 및 본문을 연구 합니다.
+* 와 같은 도구를 사용 [Fiddler](https://www.telerik.com/fiddler)를 [Firebug](https://getfirebug.com/), 또는 [Postman](https://www.getpostman.com/) 설정 하는 `Accept-Encoding` 요청 헤더 및 응답 헤더, 크기 및 본문을 연구 합니다.
 
 요청 하지 않고 샘플 앱을 제출 합니다 `Accept-Encoding` 헤더 응답 압축 되지를 확인 합니다. `Content-Encoding` 및 `Vary` 헤더 응답에 없습니다.
 
@@ -385,4 +385,4 @@ Nginx에서 프록시를 요청 하는 경우는 `Accept-Encoding` 헤더를 제
 * [Mozilla Developer Network: Accept-Encoding](https://developer.mozilla.org/docs/Web/HTTP/Headers/Accept-Encoding)
 * [RFC 7231 섹션 3.1.2.1: 콘텐츠 구분을 사용 합니다.](https://tools.ietf.org/html/rfc7231#section-3.1.2.1)
 * [RFC 7230 섹션 4.2.3: Gzip 코딩](https://tools.ietf.org/html/rfc7230#section-4.2.3)
-* [GZIP 파일 형식 사양 버전 4.3](http://www.ietf.org/rfc/rfc1952.txt)
+* [GZIP 파일 형식 사양 버전 4.3](https://www.ietf.org/rfc/rfc1952.txt)

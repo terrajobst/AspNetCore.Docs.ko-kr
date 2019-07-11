@@ -5,12 +5,12 @@ description: ASP.NET Core 데이터 보호 상황에 맞는 헤더의 구현 세
 ms.author: riande
 ms.date: 10/14/2016
 uid: security/data-protection/implementation/context-headers
-ms.openlocfilehash: 2b8fd594672bf623d38bfae90d05a984f92ce6a3
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 518423f5df93924d3df144994e4beb1755cd0bfc
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087559"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67814022"
 ---
 # <a name="context-headers-in-aspnet-core"></a>ASP.NET Core에서 컨텍스트 헤더
 
@@ -48,7 +48,7 @@ ms.locfileid: "65087559"
 
 이상적으로 모두 0 인 벡터 K_E K_H에 전달할 수도 있습니다. 그러나 기본 알고리즘 (특히 DES 및 3DES) 작업을 수행 하기 전에 약한 키의 벡터를 모두 0과 같은 단순 또는 반복 패턴을 사용 하 여 속하는 있는지를 확인 하는 위치는 상황을 방지 하려고 합니다.
 
-대신 사용 하 여 NIST SP800 108 KDF 카운터 모드에서 (참조 [NIST SP800 108](http://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), 초로 5.1) 길이가 0 인 키, 레이블 및 컨텍스트 및 기본 PRF로 HMACSHA512를 사용 하 여 합니다. 파생 | K_E | + | K_H | 출력 바이트 다음 분해 하면 K_E 및 K_H 자체입니다. 수학적으로 다음과 같이 표시 됩니다.
+대신 사용 하 여 NIST SP800 108 KDF 카운터 모드에서 (참조 [NIST SP800 108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), 초로 5.1) 길이가 0 인 키, 레이블 및 컨텍스트 및 기본 PRF로 HMACSHA512를 사용 하 여 합니다. 파생 | K_E | + | K_H | 출력 바이트 다음 분해 하면 K_E 및 K_H 자체입니다. 수학적으로 다음과 같이 표시 됩니다.
 
 ( K_E || K_H ) = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")
 
