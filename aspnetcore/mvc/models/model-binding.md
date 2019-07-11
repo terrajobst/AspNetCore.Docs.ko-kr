@@ -6,12 +6,12 @@ ms.assetid: 0be164aa-1d72-4192-bd6b-192c9c301164
 ms.author: tdykstra
 ms.date: 05/31/2019
 uid: mvc/models/model-binding
-ms.openlocfilehash: 7d62ccecdacbd34a38a1fd8c58979a9b09cf86e8
-ms.sourcegitcommit: e7e04a45195d4e0527af6f7cf1807defb56dc3c3
+ms.openlocfilehash: 10a9f8327bf16d11ec1e04ac3888d701f1ab1778
+ms.sourcegitcommit: bee530454ae2b3c25dc7ffebf93536f479a14460
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/06/2019
-ms.locfileid: "66750208"
+ms.lasthandoff: 07/10/2019
+ms.locfileid: "67724535"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core의 모델 바인딩
 
@@ -28,7 +28,7 @@ ms.locfileid: "66750208"
 * 문자열 데이터를 .NET 형식으로 변환합니다.
 * 복합 형식의 속성을 업데이트합니다.
 
-## <a name="example"></a>예제
+## <a name="example"></a>예
 
 다음 작업 메서드를 사용합니다.
 
@@ -326,7 +326,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 `Dictionary` 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예:
 
-* 대상 매개 변수가 `selectedCourses`라는 `Dictionary<string, string>`라고 가정합니다.
+* 대상 매개 변수가 `selectedCourses`라는 `Dictionary<int, string>`라고 가정합니다.
 
   ```csharp
   public IActionResult OnPost(int? id, Dictionary<int, string> selectedCourses)
