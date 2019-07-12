@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core의 고정 파일
+title: ASP.NET Core의 정적 파일
 author: rick-anderson
 description: ASP.NET Core 웹앱에서 정적 파일을 제공 및 보호하고 정적 파일 호스팅 미들웨어 동작을 구성하는 방법을 알아봅니다.
 ms.author: riande
@@ -13,7 +13,7 @@ ms.contentlocale: ko-KR
 ms.lasthandoff: 04/27/2019
 ms.locfileid: "64888388"
 ---
-# <a name="static-files-in-aspnet-core"></a>ASP.NET Core의 고정 파일
+# <a name="static-files-in-aspnet-core"></a>ASP.NET Core의 정적 파일
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT) 및 [Scott Addie](https://twitter.com/Scott_Addie)
 
