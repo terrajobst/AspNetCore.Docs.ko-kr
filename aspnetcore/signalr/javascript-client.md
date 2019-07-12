@@ -7,16 +7,16 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/17/2019
 uid: signalr/javascript-client
-ms.openlocfilehash: 1565aa38a69113781d7c272a1710298cccc1f045
-ms.sourcegitcommit: 3eedd6180fbbdcb81a8e1ebdbeb035bf4f2feb92
+ms.openlocfilehash: 8b645304b597db0c37fb9cd8814c493ca1c6ee62
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/20/2019
-ms.locfileid: "67284512"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67814956"
 ---
 # <a name="aspnet-core-signalr-javascript-client"></a>ASP.NET Core SignalR JavaScript 클라이언트
 
-작성자: [Rachel Appel](http://twitter.com/rachelappel)
+작성자: [Rachel Appel](https://twitter.com/rachelappel)
 
 ASP.NET Core SignalR JavaScript 클라이언트 라이브러리를 사용 하면 서버 쪽 허브 코드를 호출할 수 있습니다.
 

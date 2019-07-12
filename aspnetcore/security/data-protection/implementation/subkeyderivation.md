@@ -5,12 +5,12 @@ description: ASP.NET Core 데이터 보호의 구현 세부 정보 파생을 하
 ms.author: riande
 ms.date: 10/14/2016
 uid: security/data-protection/implementation/subkeyderivation
-ms.openlocfilehash: 37e7b01700e8a6b755b5ed16a9d7d75a9eeb970e
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: bbfde378755b09cd5b1217b8cf66249b9fa1d6ad
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64891840"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67814382"
 ---
 # <a name="subkey-derivation-and-authenticated-encryption-in-aspnet-core"></a>하위 키 파생 및 ASP.NET Core에서 인증 된 암호화
 
@@ -37,7 +37,7 @@ AAD가 모든 세 가지 컴포넌트의 튜플에 대 한 고유 하므로 새�
 
 (K_E, K_H) SP800_108_CTR_HMACSHA512 = (K_M, AAD, contextHeader | | keyModifier)
 
-이때 카운터 모드에서 NIST SP800 108 KDF를 호출 하는 것 (참조 [NIST SP800 108](http://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), 초로 5.1) 다음 매개 변수를 사용 하 여:
+이때 카운터 모드에서 NIST SP800 108 KDF를 호출 하는 것 (참조 [NIST SP800 108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), 초로 5.1) 다음 매개 변수를 사용 하 여:
 
 * 키 파생 키 (KDK) K_M =
 
