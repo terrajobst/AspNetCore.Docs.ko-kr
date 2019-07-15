@@ -44,7 +44,7 @@ dotnet aspnet-codegenerator identity -h
 dotnet aspnet-codegenerator identity -dc MyWeb.Data.ApplicationDbContext --files Account.Register
 ```
 
-PowerShell 명령 구분 기호로 세미콜론을 사용합니다. PowerShell을 사용 하는 경우 파일 목록에 세미콜론을 이스케이프 또는 큰따옴표로 파일 목록을 저장 합니다. 예를 들어:
+PowerShell 명령 구분 기호로 세미콜론을 사용합니다. PowerShell을 사용 하는 경우 파일 목록에 세미콜론을 이스케이프 또는 큰따옴표로 파일 목록을 저장 합니다. 예:
 
 ```console
 dotnet aspnet-codegenerator identity -dc MyWeb.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"

@@ -9,6 +9,6 @@
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-많은 타사 도구를 다운로드할 수 있습니다 관리 하 고 예를 들어 SQLite 데이터베이스를 봅니다 [DB Browser for SQLite](http://sqlitebrowser.org/)합니다.
+많은 타사 도구를 다운로드할 수 있습니다 관리 하 고 예를 들어 SQLite 데이터베이스를 봅니다 [DB Browser for SQLite](https://sqlitebrowser.org/)합니다.
 
 ---
