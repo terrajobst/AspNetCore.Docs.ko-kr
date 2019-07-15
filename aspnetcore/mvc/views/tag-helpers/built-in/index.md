@@ -6,59 +6,22 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 uid: mvc/views/tag-helpers/builtin-th/Index
-ms.openlocfilehash: 9cca912f43159e778a4c9419e6171f06b4037b8b
-ms.sourcegitcommit: 036d4b03fd86ca5bb378198e29ecf2704257f7b2
+ms.openlocfilehash: f19cfa5b843bde8a8633ce778562707e566bebb9
+ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/05/2019
-ms.locfileid: "57346017"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67856102"
 ---
 # <a name="aspnet-core-built-in-tag-helpers"></a>기본 제공 ASP.NET Core 태그 도우미
 
-작성자: [Peter Kellner](http://peterkellner.net)
+작성자: [Peter Kellner](https://peterkellner.net)
 
 태그 도우미에 대한 개요는 <xref:mvc/views/tag-helpers/intro>를 참조하세요.
 
-> [!NOTE]
-> 문서에서 설명하지 않는 기본 제공된 태그 도우미가 있습니다. 이러한 태그 도우미는 [Razor](xref:mvc/views/razor) 뷰 엔진에서 내부적으로 사용됩니다. 여기에는 웹 사이트의 루트 경로로 확장되는 `~`(물결표) 문자의 태그 도우미가 포함됩니다.
+문서에서 나열되지 않는 기본 제공된 태그 도우미가 있습니다. 나열되지 않은 태그 도우미는 [Razor](xref:mvc/views/razor) 뷰 엔진에서 내부적으로 사용됩니다. `~`(물결표) 문자에 대한 태그 도우미는 나열되지 않습니다. 물결표 태그 도우미는 웹 사이트의 루트 경로로 확장됩니다.
 
-## <a name="built-in-aspnet-core-tag-helpers"></a>기본 제공 ASP.NET Core 태그 도우미
-
-**[앵커 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)**
-
-**[캐시 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper)**
-
-**[분산 캐시 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper)**
-
-**[환경 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/environment-tag-helper)**
-
-[comment]: **[FormActionTagHelper](xref:mvc/views/tag-helpers/builtin-th/form-action-tag-helper)**
-
-**[폼 태그 도우미](xref:mvc/views/working-with-forms#the-form-tag-helper)**
-
-**[양식 작업 태그 도우미](xref:mvc/views/working-with-forms#the-form-action-tag-helper)**
-
-**[이미지 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/image-tag-helper)**
-
-**[입력 태그 도우미](xref:mvc/views/working-with-forms#the-input-tag-helper)**
-
-**[레이블 태그 도우미](xref:mvc/views/working-with-forms#the-label-tag-helper)**
-
-[comment]: **[LinkTagHelper](xref:mvc/views/tag-helpers/builtin-th/link-tag-helper)**
-
-[comment]: **[OptionTagHelper](xref:mvc/views/tag-helpers/builtin-th/option-tag-helper)**
-
-[comment]: **[ScriptTagHelper](xref:mvc/views/tag-helpers/builtin-th/script-tag-helper)**
-
-**[부분 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper)**
-
-**[선택 태그 도우미](xref:mvc/views/working-with-forms#the-select-tag-helper)**
-
-**[텍스트 영역 태그 도우미](xref:mvc/views/working-with-forms#the-textarea-tag-helper)**
-
-**[유효성 검사 메시지 태그 도우미](xref:mvc/views/working-with-forms#the-validation-message-tag-helper)**
-
-**[유효성 검사 요약 태그 도우미](xref:mvc/views/working-with-forms#the-validation-summary-tag-helper)**
+[!INCLUDE[](~/includes/built-in-TH.md)]
 
 ## <a name="additional-resources"></a>추가 자료
 

@@ -5,14 +5,14 @@ description: 구성 API를 사용하여 ASP.NET Core 앱을 구성하는 방법�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/24/2019
+ms.date: 07/11/2019
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 81820e8161965fcca2f97d00708df5a29df668de
-ms.sourcegitcommit: 9691b742134563b662948b0ed63f54ef7186801e
+ms.openlocfilehash: 3351ab743ce38b78b1c5857e52020fdeda12cbe7
+ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/10/2019
-ms.locfileid: "66824831"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67855823"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core의 구성
 
@@ -21,6 +21,7 @@ ms.locfileid: "66824831"
 ASP.NET Core의 앱 구성은 ‘구성 공급자’가 설정한 키-값 쌍을 기반으로 합니다.  구성 공급자는 다양한 구성 소스에서 구성 데이터를 키-값 쌍으로 읽어 들입니다.
 
 * Azure Key Vault
+* Azure App Configuration
 * 명령줄 인수
 * 사용자 지정 공급자(설치 또는 생성된)
 * 디렉터리 파일
@@ -38,7 +39,7 @@ using Microsoft.Extensions.Configuration;
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-## <a name="host-vs-app-configuration"></a>호스트 및 앱 구성
+## <a name="host-versus-app-configuration"></a>호스트 대 앱 구성
 
 앱을 구성하고 시작하기 전에 *호스트*를 구성하고 시작합니다. 호스트는 앱 시작 및 수명 관리를 담당합니다. 앱과 호스트 모두 이 항목에서 설명하는 구성 관리자를 사용하여 구성합니다. 호스트 구성 키-값 쌍은 앱의 전역 구성에 포함됩니다. 호스트를 빌드할 때 구성 공급자를 사용하는 방법과 구성 원본이 호스트 구성에 미치는 영향에 대한 자세한 내용은 [호스트](xref:fundamentals/index#host)를 참조하세요.
 
@@ -145,6 +146,7 @@ public class IndexModel : PageModel
 | 공급자 | 다음에서 구성 제공&hellip; |
 | -------- | ----------------------------------- |
 | [Azure Key Vault 구성 공급자](xref:security/key-vault-configuration)(‘보안’ 항목)  | Azure Key Vault |
+| [Azure App Configuration 공급자](/azure/azure-app-configuration/quickstart-aspnet-core-app)(Azure 설명서) | Azure App Configuration |
 | [명령줄 구성 공급자](#command-line-configuration-provider) | 명령줄 매개 변수 |
 | [사용자 지정 구성 공급자](#custom-configuration-provider) | 사용자 지정 소스 |
 | [환경 변수 구성 공급자](#environment-variables-configuration-provider) | 환경 변수 |
@@ -244,7 +246,7 @@ var host = new WebHostBuilder()
 
 값은 등호(`=`) 다음에 와야 합니다. 또는 값이 공백 다음에 오는 경우 키에 접두사(`--` 또는 `/`)가 있어야 합니다. 등호를 사용하는 경우 값이 null일 수 있습니다(예: `CommandLineKey=`).
 
-| 키 접두사               | 예제                                                |
+| 키 접두사               | 예                                                |
 | ------------------------ | ------------------------------------------------------ |
 | 접두사 없음                | `CommandLineKey1=value1`                               |
 | 대시 2개(`--`)        | `--CommandLineKey2=value2`, `--CommandLineKey2 value2` |
@@ -331,7 +333,7 @@ dotnet run -CLKey1=value1 -CLKey2=value2
 
 [Azure App Service](https://azure.microsoft.com/services/app-service/)를 사용하면 Azure Portal에서 환경 변수를 설정할 수 있으므로 환경 변수 구성 공급자를 사용한 앱 구성을 재정의할 수 있습니다. 자세한 내용은 [Azure 앱: Azure Portal을 사용하여 앱 구성 재정의](xref:host-and-deploy/azure-apps/index#override-app-configuration-using-the-azure-portal) 편을 참조하세요.
 
-`AddEnvironmentVariables`는 새 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder>가 초기화될 때 [호스트 구성](#host-vs-app-configuration)에 대해 `ASPNETCORE_`가 접두사된 환경 변수를 로드하는 데 사용됩니다. 자세한 내용은 [웹 호스트: 호스트 설정 편을](xref:fundamentals/host/web-host#set-up-a-host) 참조하세요.
+`AddEnvironmentVariables`는 새 <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder>가 초기화될 때 [호스트 구성](#host-versus-app-configuration)에 대해 `ASPNETCORE_`가 접두사된 환경 변수를 로드하는 데 사용됩니다. 자세한 내용은 [웹 호스트: 호스트 설정 편을](xref:fundamentals/host/web-host#set-up-a-host) 참조하세요.
 
 `CreateDefaultBuilder`는 다음 항목도 로드합니다.
 
@@ -966,7 +968,7 @@ var sectionExists = _config.GetSection("section2:subsection2").Exists();
 | starship:class        | Constitution                                      |
 | starship:length       | 304.8                                             |
 | starship:commissioned | False                                             |
-| trademark             | Paramount Pictures Corp. http://www.paramount.com |
+| trademark             | Paramount Pictures Corp. https://www.paramount.com |
 
 샘플 앱은 `starship` 키를 사용하여 `GetSection`을 호출합니다. `starship` 키-값 쌍은 격리됩니다. `Bind` 메서드는 `Starship` 클래스의 인스턴스를 전달하는 하위 섹션에서 호출됩니다. 인스턴스 값을 바인딩한 후 인스턴스는 렌더링할 속성에 할당됩니다.
 

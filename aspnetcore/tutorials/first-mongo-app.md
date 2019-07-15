@@ -4,14 +4,14 @@ author: prkhandelwal
 description: 이 자습서에서는 MongoDB NoSQL 데이터베이스를 사용하여 ASP.NET Core 웹 API를 만드는 방법을 보여 줍니다.
 ms.author: scaddie
 ms.custom: mvc, seodec18
-ms.date: 06/10/2019
+ms.date: 07/10/2019
 uid: tutorials/first-mongo-app
-ms.openlocfilehash: 426b4c0dee290153b9b1bf83deec14fa728183cb
-ms.sourcegitcommit: f5762967df3be8b8c868229e679301f2f7954679
+ms.openlocfilehash: c64f6e69a19e294a18cc72c860af0a03ef70d444
+ms.sourcegitcommit: 357a7120632b20465801c093e4e5bd4a315496a8
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67048088"
+ms.lasthandoff: 07/08/2019
+ms.locfileid: "67649188"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>ASP.NET Core 및 MongoDB를 사용하여 웹 API 만들기
 
@@ -109,6 +109,9 @@ Windows를 사용하는 경우 MongoDB는 기본적으로*C:\\Program Files\\Mon
       ]
     }
     ```
+  
+  > [!NOTE]
+  > 이 문서에 표시된 ID는 이 샘플을 실행할 때의 ID와 일치하지 않습니다.
 
 1. 다음 명령을 사용하여 데이터베이스의 문서를 봅니다.
 
@@ -318,11 +321,11 @@ Windows를 사용하는 경우 MongoDB는 기본적으로*C:\\Program Files\\Mon
     ]
     ```
 
-1. `http://localhost:<port>/api/books/5bfd996f7b8e48dc15ff215e`로 이동하여 컨트롤러의 오버로드된 `Get` 작업 메서드를 테스트합니다. 다음 JSON 응답이 표시됩니다.
+1. `http://localhost:<port>/api/books/{id here}`로 이동하여 컨트롤러의 오버로드된 `Get` 작업 메서드를 테스트합니다. 다음 JSON 응답이 표시됩니다.
 
     ```json
     {
-      "id":"5bfd996f7b8e48dc15ff215e",
+      "id":"{ID}",
       "bookName":"Clean Code",
       "price":43.15,
       "category":"Computers",
