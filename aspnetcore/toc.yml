@@ -431,6 +431,8 @@
       uid: web-api/advanced/analyzers
     - name: 규칙
       uid: web-api/advanced/conventions
+    - name: HTTP REPL을 사용하여 API 테스트
+      uid: web-api/http-repl
 - name: 실시간 앱
   displayName: signalr
   items:
