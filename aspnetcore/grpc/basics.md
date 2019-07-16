@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 03/31/2019
 uid: grpc/basics
-ms.openlocfilehash: 00772144cb484b78a256f178642463577d316be2
-ms.sourcegitcommit: 516f166c5f7cec54edf3d9c71e6e2ba53fb3b0e5
+ms.openlocfilehash: 78d744d641396c449a142375c69730333f8183cd
+ms.sourcegitcommit: 1bf80f4acd62151ff8cce517f03f6fa891136409
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67196355"
+ms.lasthandoff: 07/15/2019
+ms.locfileid: "68223878"
 ---
 # <a name="grpc-services-with-c"></a>C 사용 하 여 gRPC 서비스\#
 
@@ -30,9 +30,9 @@ Protobuf 파일의 구문에 자세한 내용은 참조는 [공식 설명서 (pr
 
 * 정의 `Greeter` 서비스입니다.
 * 합니다 `Greeter` 서비스 정의 `SayHello` 호출 합니다.
-* `SayHello` 전송 된 `HelloRequest` 받고 메시지는 `HelloResponse` 메시지:
+* `SayHello` 전송 된 `HelloRequest` 받고 메시지는 `HelloReply` 메시지:
 
-[!code-proto[](~/tutorials//grpc/grpc-start/sample/GrpcGreeter/Protos/greet.proto)]
+[!code-protobuf[](~/tutorials//grpc/grpc-start/sample/GrpcGreeter/Protos/greet.proto)]
 
 ## <a name="add-a-proto-file-to-a-c-app"></a>C.proto 파일로 추가할\# 앱
 

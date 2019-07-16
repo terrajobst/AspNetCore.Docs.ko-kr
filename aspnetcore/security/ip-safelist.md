@@ -6,12 +6,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 08/31/2018
 uid: security/ip-safelist
-ms.openlocfilehash: cfbb50ea33ae3af577f13b00bccc75fe0be57f79
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: ca05989efabea3a71c6912e98055a6746e0f5966
+ms.sourcegitcommit: 1bf80f4acd62151ff8cce517f03f6fa891136409
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64898150"
+ms.lasthandoff: 07/15/2019
+ms.locfileid: "68223927"
 ---
 # <a name="client-ip-safelist-for-aspnet-core"></a>ASP.NET Core에 대 한 클라이언트 IP 수신
 
@@ -23,7 +23,7 @@ ms.locfileid: "64898150"
 * 특정 컨트롤러 또는 작업 메서드에 대 한 요청 된 원격 IP 주소를 확인 하려면 작업 필터입니다.
 * Razor 페이지 필터를 Razor 페이지에 대 한 요청 된 원격 IP 주소를 확인 합니다.
 
-샘플 앱은 두 가지 방법을 모두 보여 줍니다. 각 경우에서는 승인 된 클라이언트 IP 주소를 포함 하는 문자열을 앱 설정에 저장 됩니다. 미들웨어 또는 필터를 목록으로 문자열을 구문 분석 하 고 원격 IP 목록 인지 확인 합니다. 그렇지 않은 경우는 HTTP 403 사용 권한 없음 상태 코드가 반환 됩니다.
+각 경우에서는 승인 된 클라이언트 IP 주소를 포함 하는 문자열을 앱 설정에 저장 됩니다. 미들웨어 또는 필터를 목록으로 문자열을 구문 분석 하 고 원격 IP 목록 인지 확인 합니다. 그렇지 않은 경우는 HTTP 403 사용 권한 없음 상태 코드가 반환 됩니다.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/ip-safelist/samples/2.x/ClientIpAspNetCore) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
@@ -37,7 +37,7 @@ ms.locfileid: "64898150"
 
 `Configure` 메서드는 미들웨어를 추가 하 고 수신 문자열을 생성자 매개 변수에서를 전달 합니다.
 
-[!code-csharp[](ip-safelist/samples/2.x/ClientIpAspNetCore/Startup.cs?name=snippet_Configure&highlight=7)]
+[!code-csharp[](ip-safelist/samples/2.x/ClientIpAspNetCore/Startup.cs?name=snippet_Configure&highlight=10)]
 
 미들웨어를 배열에 문자열을 구문 분석 및 배열에 있는 원격 IP 주소를 찾습니다. 원격 IP 주소가 없는 경우 미들웨어는 HTTP 401 사용할 수 없음 반환 합니다. 이 유효성 검사 프로세스는 HTTP Get 요청에 대해 무시 됩니다.
 
