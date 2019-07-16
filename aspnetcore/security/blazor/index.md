@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/26/2019
 uid: security/blazor/index
-ms.openlocfilehash: b3bca26e7088a8353084a065f9b9593c9d8e08e6
-ms.sourcegitcommit: 9bb29f9ba6f0645ee8b9cabda07e3a5aa52cd659
+ms.openlocfilehash: 097a747f68729109922af5c68dfd918024ee6146
+ms.sourcegitcommit: 040aedca220ed24ee1726e6886daf6906f95a028
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2019
-ms.locfileid: "67406186"
+ms.lasthandoff: 07/15/2019
+ms.locfileid: "67893620"
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor 인증 및 권한 부여
 
@@ -41,7 +41,7 @@ Blazor 서버 쪽 앱은 SignalR을 사용하여 생성된 실시간 연결을 �
 
 <xref:blazor/get-started> 문서의 Visual Studio 지침에 따라 인증 메커니즘이 있는 새 Blazor 서버 쪽 프로젝트를 만듭니다.
 
-**새 ASP.NET Core 웹 애플리케이션 만들기** 대화 상자에서 **Blazor(서버 쪽)** 템플릿을 선택한 후 **인증**에서 **변경**을 선택합니다.
+**새 ASP.NET Core 웹 애플리케이션 만들기** 대화 상자에서 **Blazor 서버 앱** 템플릿을 선택한 후 **인증**에서 **변경**을 선택합니다.
 
 다른 ASP.NET Core 프로젝트에 사용할 수 있는 것과 동일한 인증 메커니즘 세트를 제공하는 대화 상자가 열립니다.
 
