@@ -3,7 +3,7 @@ ASP.NET Core는 다음과 같은 이점을 제공합니다.
 * 웹 UI 및 웹 API를 동일한 과정으로 빌드합니다.
 * 테스트 가능성을 고려하여 설계되었습니다.
 * [Razor 페이지](xref:razor-pages/index)는 더 쉽고 더 생산적으로 코딩 페이지에 초점을 맞춘 시나리오를 만듭니다.
-* [Blazor](xref:blazor/index)를 사용하면 JavaScript와 함께 브라우저에서 C#을 사용할 수 있습니다. 모두 .NET으로 작성된 서버 쪽 및 클라이언트 쪽 앱을 공유합니다. 
+* [Blazor](xref:blazor/index)를 사용하면 JavaScript와 함께 브라우저에서 C#을 사용할 수 있습니다. 모두 .NET으로 작성된 서버 쪽 및 클라이언트 쪽 앱을 공유합니다.
 * Windows, macOS 및 Linux에서 개발하고 실행할 수 있습니다.
 * 오픈 소스이며 [커뮤니티에 중점](https://live.asp.net/)을 둡니다.
 * [최신 클라이언트 쪽 프레임워크](xref:blazor/index) 및 워크플로 개발을 통합합니다.
