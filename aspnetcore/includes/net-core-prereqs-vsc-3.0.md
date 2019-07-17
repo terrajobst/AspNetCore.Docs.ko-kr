@@ -1,3 +1,3 @@
-* [Visual Studio Code](https://code.visualstudio.com/)
+* [Visual Studio Code](https://code.visualstudio.com/download)
 * [.NET Core SDK 3.0](https://dotnet.microsoft.com/download/dotnet-core/3.0)
-* [C# for Visual Studio Code 버전 1.17.1 이상](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
+* [Visual Studio Code용 C#(최신 버전)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
