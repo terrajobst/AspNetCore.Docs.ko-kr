@@ -1,3 +1,3 @@
-* [<span data-ttu-id="bfd6f-101">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="bfd6f-101">Visual Studio Code</span></span>](https://code.visualstudio.com/)
-* [<span data-ttu-id="bfd6f-102">.NET Core SDK 3.0</span><span class="sxs-lookup"><span data-stu-id="bfd6f-102">.NET Core SDK 3.0</span></span>](https://dotnet.microsoft.com/download/dotnet-core/3.0)
-* [<span data-ttu-id="bfd6f-103">C# for Visual Studio Code 버전 1.17.1 이상</span><span class="sxs-lookup"><span data-stu-id="bfd6f-103">C# for Visual Studio Code version 1.17.1 or later</span></span>](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
+* [<span data-ttu-id="f046a-101">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="f046a-101">Visual Studio Code</span></span>](https://code.visualstudio.com/download)
+* [<span data-ttu-id="f046a-102">.NET Core SDK 3.0</span><span class="sxs-lookup"><span data-stu-id="f046a-102">.NET Core SDK 3.0</span></span>](https://dotnet.microsoft.com/download/dotnet-core/3.0)
+* [<span data-ttu-id="f046a-103">Visual Studio Code용 C#(최신 버전)</span><span class="sxs-lookup"><span data-stu-id="f046a-103">C# for Visual Studio Code (latest version)</span></span>](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
