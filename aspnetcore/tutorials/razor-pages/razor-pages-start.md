@@ -3,99 +3,99 @@ title: '자습서: ASP.NET Core에서 Razor 페이지 시작'
 author: rick-anderson
 description: 이 자습서 시리즈는 ASP.NET Core에서 Razor Pages를 사용하는 방법을 보여 줍니다. 모델을 만들고, Razor Pages에 대한 코드를 생성하고, Entity Framework Core 및 SQL Server를 데이터 액세스에 사용하고, 검색 기능을 추가하고, 입력 유효성 검사를 추가하고, 마이그레이션을 사용하여 모델을 업데이트하는 방법을 알아봅니다.
 ms.author: riande
-ms.date: 6/3/2019
+ms.date: 06/03/2019
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 207f5a5ab5e21d8cd8f6cf2f63641b94d8077ae5
-ms.sourcegitcommit: d6e51c60439f03a8992bda70cc982ddb15d3f100
+ms.openlocfilehash: 7e228c99b4d55c14cea9c915cf06a7fbbbd5af44
+ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67555800"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67855731"
 ---
-# <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a><span data-ttu-id="f89f2-104">자습서: ASP.NET Core에서 Razor 페이지 시작</span><span class="sxs-lookup"><span data-stu-id="f89f2-104">Tutorial: Get started with Razor Pages in ASP.NET Core</span></span>
+# <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a><span data-ttu-id="86b62-104">자습서: ASP.NET Core에서 Razor 페이지 시작</span><span class="sxs-lookup"><span data-stu-id="86b62-104">Tutorial: Get started with Razor Pages in ASP.NET Core</span></span>
 
-<span data-ttu-id="f89f2-105">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="f89f2-105">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+<span data-ttu-id="86b62-105">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="86b62-105">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
-<span data-ttu-id="f89f2-106">이 시리즈의 첫 번째 자습서입니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-106">This is the first tutorial of a series.</span></span> <span data-ttu-id="f89f2-107">[시리즈](xref:tutorials/razor-pages/index)에서는 ASP.NET Core Razor Pages 웹앱을 빌드하는 작업의 기본 사항을 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-107">[The series](xref:tutorials/razor-pages/index) teaches the basics of building an ASP.NET Core Razor Pages web app.</span></span>
+<span data-ttu-id="86b62-106">이 시리즈의 첫 번째 자습서입니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-106">This is the first tutorial of a series.</span></span> <span data-ttu-id="86b62-107">[시리즈](xref:tutorials/razor-pages/index)에서는 ASP.NET Core Razor Pages 웹앱을 빌드하는 작업의 기본 사항을 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-107">[The series](xref:tutorials/razor-pages/index) teaches the basics of building an ASP.NET Core Razor Pages web app.</span></span>
 
 [!INCLUDE[](~/includes/advancedRP.md)]
 
-<span data-ttu-id="f89f2-108">시리즈가 끝나면 영화의 데이터베이스를 관리하는 앱이 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-108">At the end of the series, you'll have an app that manages a database of movies.</span></span>  
+<span data-ttu-id="86b62-108">시리즈가 끝나면 영화의 데이터베이스를 관리하는 앱이 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-108">At the end of the series, you'll have an app that manages a database of movies.</span></span>  
 
 [!INCLUDE[View or download sample code](~/includes/rp/download.md)]
 
-<span data-ttu-id="f89f2-109">이 자습서에서는 다음을 수행했습니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-109">In this tutorial, you:</span></span>
+<span data-ttu-id="86b62-109">이 자습서에서는 다음을 수행했습니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-109">In this tutorial, you:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="f89f2-110">Razor Pages 웹앱 만들기</span><span class="sxs-lookup"><span data-stu-id="f89f2-110">Create a Razor Pages web app.</span></span>
-> * <span data-ttu-id="f89f2-111">앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-111">Run the app.</span></span>
-> * <span data-ttu-id="f89f2-112">프로젝트 파일을 검사합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-112">Examine the project files.</span></span>
+> * <span data-ttu-id="86b62-110">Razor Pages 웹앱 만들기</span><span class="sxs-lookup"><span data-stu-id="86b62-110">Create a Razor Pages web app.</span></span>
+> * <span data-ttu-id="86b62-111">앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-111">Run the app.</span></span>
+> * <span data-ttu-id="86b62-112">프로젝트 파일을 검사합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-112">Examine the project files.</span></span>
 
-<span data-ttu-id="f89f2-113">이 자습서가 끝나면 나중에 자습서에서 빌드할 Razor Pages 웹앱을 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-113">At the end of this tutorial, you'll have a working Razor Pages web app that you'll build on in later tutorials.</span></span>
+<span data-ttu-id="86b62-113">이 자습서가 끝나면 나중에 자습서에서 빌드할 Razor Pages 웹앱을 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-113">At the end of this tutorial, you'll have a working Razor Pages web app that you'll build on in later tutorials.</span></span>
 
 ![홈 또는 인덱스 페이지](razor-pages-start/_static/home2.2.png)
 
-## <a name="prerequisites"></a><span data-ttu-id="f89f2-115">전제 조건</span><span class="sxs-lookup"><span data-stu-id="f89f2-115">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="86b62-115">전제 조건</span><span class="sxs-lookup"><span data-stu-id="86b62-115">Prerequisites</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="f89f2-116">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="f89f2-116">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="86b62-116">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="86b62-116">Visual Studio</span></span>](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="f89f2-117">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="f89f2-117">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="86b62-117">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="86b62-117">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-2.2.md)]
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="f89f2-118">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="f89f2-118">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="86b62-118">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="86b62-118">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-2.2.md)]
 
 ---
 
-## <a name="create-a-razor-pages-web-app"></a><span data-ttu-id="f89f2-119">Razor 페이지 웹앱 만들기</span><span class="sxs-lookup"><span data-stu-id="f89f2-119">Create a Razor Pages web app</span></span>
+## <a name="create-a-razor-pages-web-app"></a><span data-ttu-id="86b62-119">Razor 페이지 웹앱 만들기</span><span class="sxs-lookup"><span data-stu-id="86b62-119">Create a Razor Pages web app</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="f89f2-120">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="f89f2-120">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="86b62-120">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="86b62-120">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="f89f2-121">Visual Studio **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-121">From the Visual Studio **File** menu, select **New** > **Project**.</span></span>
+* <span data-ttu-id="86b62-121">Visual Studio **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-121">From the Visual Studio **File** menu, select **New** > **Project**.</span></span>
 
-* <span data-ttu-id="f89f2-122">새 ASP.NET Core 웹 애플리케이션을 만들고 **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-122">Create a new ASP.NET Core Web Application and select **Next**.</span></span>
+* <span data-ttu-id="86b62-122">새 ASP.NET Core 웹 애플리케이션을 만들고 **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-122">Create a new ASP.NET Core Web Application and select **Next**.</span></span>
 
   ![새 ASP.NET Core 웹 애플리케이션](razor-pages-start/_static/np_2.1.png)
 
-* <span data-ttu-id="f89f2-124">프로젝트 이름을 **RazorPagesMovie**로 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-124">Name the project **RazorPagesMovie**.</span></span> <span data-ttu-id="f89f2-125">코드를 복사하여 붙여넣을 때 네임스페이스가 일치하도록 프로젝트 이름을 *RazorPagesMovie*로 지정해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-125">It's important to name the project *RazorPagesMovie* so the namespaces will match when you copy and paste code.</span></span>
+* <span data-ttu-id="86b62-124">프로젝트 이름을 **RazorPagesMovie**로 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-124">Name the project **RazorPagesMovie**.</span></span> <span data-ttu-id="86b62-125">코드를 복사하여 붙여넣을 때 네임스페이스가 일치하도록 프로젝트 이름을 *RazorPagesMovie*로 지정해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-125">It's important to name the project *RazorPagesMovie* so the namespaces will match when you copy and paste code.</span></span>
 
   ![새 ASP.NET Core 웹 애플리케이션](razor-pages-start/_static/config.png)
 
-* <span data-ttu-id="f89f2-127">드롭다운에서 **ASP.NET Core 2.2**를 선택하고 **웹 애플리케이션**을 선택한 다음, **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-127">Select **ASP.NET Core 2.2** in the dropdown, **Web Application**, and then select **Create**.</span></span>
+* <span data-ttu-id="86b62-127">드롭다운에서 **ASP.NET Core 2.2**를 선택하고 **웹 애플리케이션**을 선택한 다음, **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-127">Select **ASP.NET Core 2.2** in the dropdown, **Web Application**, and then select **Create**.</span></span>
 
 ![새 ASP.NET Core 웹 애플리케이션](razor-pages-start/_static/np_2_2.2.png)
 
-  <span data-ttu-id="f89f2-129">다음 시작 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-129">The following starter project is created:</span></span>
+  <span data-ttu-id="86b62-129">다음 시작 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-129">The following starter project is created:</span></span>
 
   ![솔루션 탐색기](razor-pages-start/_static/se2.2.png)
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="f89f2-131">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="f89f2-131">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="86b62-131">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="86b62-131">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-* <span data-ttu-id="f89f2-132">[통합 터미널](https://code.visualstudio.com/docs/editor/integrated-terminal)을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-132">Open the [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).</span></span>
+* <span data-ttu-id="86b62-132">[통합 터미널](https://code.visualstudio.com/docs/editor/integrated-terminal)을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-132">Open the [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).</span></span>
 
-* <span data-ttu-id="f89f2-133">프로젝트를 포함하는 디렉터리(`cd`)로 변경합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-133">Change to the directory (`cd`) which will contain the project.</span></span>
+* <span data-ttu-id="86b62-133">프로젝트를 포함하는 디렉터리(`cd`)로 변경합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-133">Change to the directory (`cd`) which will contain the project.</span></span>
 
-* <span data-ttu-id="f89f2-134">다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-134">Run the following commands:</span></span>
+* <span data-ttu-id="86b62-134">다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-134">Run the following commands:</span></span>
 
   ```console
   dotnet new webapp -o RazorPagesMovie
   code -r RazorPagesMovie
   ```
 
-  * <span data-ttu-id="f89f2-135">`dotnet new` 명령은 *RazorPagesMovie* 폴더에서 새 Razor Pages 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-135">The `dotnet new` command creates a new Razor Pages project in the *RazorPagesMovie* folder.</span></span>
-  * <span data-ttu-id="f89f2-136">`code` 명령은 Visual Studio Code의 현재 인스턴스에서 *RazorPagesMovie* 폴더를 엽니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-136">The `code` command opens the *RazorPagesMovie* folder in the current instance of Visual Studio Code.</span></span>
+  * <span data-ttu-id="86b62-135">`dotnet new` 명령은 *RazorPagesMovie* 폴더에서 새 Razor Pages 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-135">The `dotnet new` command creates a new Razor Pages project in the *RazorPagesMovie* folder.</span></span>
+  * <span data-ttu-id="86b62-136">`code` 명령은 Visual Studio Code의 현재 인스턴스에서 *RazorPagesMovie* 폴더를 엽니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-136">The `code` command opens the *RazorPagesMovie* folder in the current instance of Visual Studio Code.</span></span>
 
-* <span data-ttu-id="f89f2-137">상태 표시줄의 OmniSharp 불꽃 아이콘이 녹색으로 바뀐 후 다음 대화 상자가 나타납니다. **빌드 및 디버그에 필요한 자산이 ‘RazorPagesMovie’에서 누락되었습니다. 추가할까요?**</span><span class="sxs-lookup"><span data-stu-id="f89f2-137">After the status bar's OmniSharp flame icon turns green, a dialog asks **Required assets to build and debug are missing from 'RazorPagesMovie'. Add them?**</span></span> <span data-ttu-id="f89f2-138">**예**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-138">Select **Yes**.</span></span>
+* <span data-ttu-id="86b62-137">상태 표시줄의 OmniSharp 불꽃 아이콘이 녹색으로 바뀐 후 다음 대화 상자가 나타납니다. **빌드 및 디버그에 필요한 자산이 ‘RazorPagesMovie’에서 누락되었습니다. 추가할까요?**</span><span class="sxs-lookup"><span data-stu-id="86b62-137">After the status bar's OmniSharp flame icon turns green, a dialog asks **Required assets to build and debug are missing from 'RazorPagesMovie'. Add them?**</span></span> <span data-ttu-id="86b62-138">**예**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-138">Select **Yes**.</span></span>
 
-  <span data-ttu-id="f89f2-139">*launch.json* 및 *tasks.json* 파일을 포함한 *.vscode* 디렉터리가 프로젝트의 루트 디렉터리에 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-139">A *.vscode* directory, containing *launch.json* and *tasks.json* files, is added to the project's root directory.</span></span>
+  <span data-ttu-id="86b62-139">*launch.json* 및 *tasks.json* 파일을 포함한 *.vscode* 디렉터리가 프로젝트의 루트 디렉터리에 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-139">A *.vscode* directory, containing *launch.json* and *tasks.json* files, is added to the project's root directory.</span></span>
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="f89f2-140">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="f89f2-140">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="86b62-140">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="86b62-140">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="f89f2-141">터미널에서 다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-141">From a terminal, run the following command:</span></span>
+<span data-ttu-id="86b62-141">터미널에서 다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-141">From a terminal, run the following command:</span></span>
 
 <!-- TODO: update these instruction once mac support 2.2 projects -->
 
@@ -103,69 +103,69 @@ ms.locfileid: "67555800"
 dotnet new webapp -o RazorPagesMovie
 ```
 
-<span data-ttu-id="f89f2-142">이전 명령은 [.NET Core CLI](/dotnet/core/tools/dotnet)를 사용하여 Razor Pages 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-142">The preceding commands use the [.NET Core CLI](/dotnet/core/tools/dotnet) to create a Razor Pages project.</span></span>
+<span data-ttu-id="86b62-142">이전 명령은 [.NET Core CLI](/dotnet/core/tools/dotnet)를 사용하여 Razor Pages 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-142">The preceding commands use the [.NET Core CLI](/dotnet/core/tools/dotnet) to create a Razor Pages project.</span></span>
 
-## <a name="open-the-project"></a><span data-ttu-id="f89f2-143">프로젝트 열기</span><span class="sxs-lookup"><span data-stu-id="f89f2-143">Open the project</span></span>
+## <a name="open-the-project"></a><span data-ttu-id="86b62-143">프로젝트 열기</span><span class="sxs-lookup"><span data-stu-id="86b62-143">Open the project</span></span>
 
-<span data-ttu-id="f89f2-144">Visual Studio에서 **파일 > 열기**를 선택하고 *RazorPagesMovie.csproj* 파일을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-144">From Visual Studio, select **File > Open**, and then select the *RazorPagesMovie.csproj* file.</span></span>
+<span data-ttu-id="86b62-144">Visual Studio에서 **파일 > 열기**를 선택하고 *RazorPagesMovie.csproj* 파일을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-144">From Visual Studio, select **File > Open**, and then select the *RazorPagesMovie.csproj* file.</span></span>
 
 <!-- End of VS tabs -->
 
 ---
 
-## <a name="run-the-app"></a><span data-ttu-id="f89f2-145">앱 실행</span><span class="sxs-lookup"><span data-stu-id="f89f2-145">Run the app</span></span>
+## <a name="run-the-app"></a><span data-ttu-id="86b62-145">앱 실행</span><span class="sxs-lookup"><span data-stu-id="86b62-145">Run the app</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="f89f2-146">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="f89f2-146">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="86b62-146">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="86b62-146">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="f89f2-147">Ctrl+F5를 눌러 디버거 없이 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-147">Press Ctrl+F5 to run without the debugger.</span></span>
+* <span data-ttu-id="86b62-147">Ctrl+F5를 눌러 디버거 없이 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-147">Press Ctrl+F5 to run without the debugger.</span></span>
 
   [!INCLUDE[](~/includes/trustCertVS.md)]
 
-  <span data-ttu-id="f89f2-148">Visual Studio가 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)를 시작하고 앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-148">Visual Studio starts [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) and runs the app.</span></span> <span data-ttu-id="f89f2-149">주소 표시줄에 `localhost:port#`이 표시되고 `example.com` 등은 표시되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-149">The address bar shows `localhost:port#` and not something like `example.com`.</span></span> <span data-ttu-id="f89f2-150">`localhost`가 로컬 컴퓨터의 표준 호스트 이름이기 때문입니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-150">That's because `localhost` is the standard hostname for the local computer.</span></span> <span data-ttu-id="f89f2-151">Localhost는 로컬 컴퓨터의 웹 요청만 지원합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-151">Localhost only serves web requests from the local computer.</span></span> <span data-ttu-id="f89f2-152">Visual Studio에서 웹 프로젝트를 만들 경우 웹 서버에는 임의 포트가 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-152">When Visual Studio creates a web project, a random port is used for the web server.</span></span>
+  <span data-ttu-id="86b62-148">Visual Studio가 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)를 시작하고 앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-148">Visual Studio starts [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) and runs the app.</span></span> <span data-ttu-id="86b62-149">주소 표시줄에 `localhost:port#`이 표시되고 `example.com` 등은 표시되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-149">The address bar shows `localhost:port#` and not something like `example.com`.</span></span> <span data-ttu-id="86b62-150">`localhost`가 로컬 컴퓨터의 표준 호스트 이름이기 때문입니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-150">That's because `localhost` is the standard hostname for the local computer.</span></span> <span data-ttu-id="86b62-151">Localhost는 로컬 컴퓨터의 웹 요청만 지원합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-151">Localhost only serves web requests from the local computer.</span></span> <span data-ttu-id="86b62-152">Visual Studio에서 웹 프로젝트를 만들 경우 웹 서버에는 임의 포트가 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-152">When Visual Studio creates a web project, a random port is used for the web server.</span></span>
 
-* <span data-ttu-id="f89f2-153">앱의 홈페이지에서 **승인**을 선택하여 추적에 동의합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-153">On the app's home page, select **Accept** to consent to tracking.</span></span>
+* <span data-ttu-id="86b62-153">앱의 홈페이지에서 **승인**을 선택하여 추적에 동의합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-153">On the app's home page, select **Accept** to consent to tracking.</span></span>
 
-  <span data-ttu-id="f89f2-154">이 앱은 개인 정보를 추적하지 않지만 유럽 연합의 [GDPR(일반 데이터 보호 규정)](xref:security/gdpr)을 준수하기 위해 필요한 경우 프로젝트 템플릿에는 동의 기능이 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-154">This app doesn't track personal information, but the project template includes the consent feature in case you need it to comply with the European Union's [General Data Protection Regulation (GDPR)](xref:security/gdpr).</span></span>
+  <span data-ttu-id="86b62-154">이 앱은 개인 정보를 추적하지 않지만 유럽 연합의 [GDPR(일반 데이터 보호 규정)](xref:security/gdpr)을 준수하기 위해 필요한 경우 프로젝트 템플릿에는 동의 기능이 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-154">This app doesn't track personal information, but the project template includes the consent feature in case you need it to comply with the European Union's [General Data Protection Regulation (GDPR)](xref:security/gdpr).</span></span>
 
   ![홈 또는 인덱스 페이지](razor-pages-start/_static/homeGDPR2.2.png)
 
-  <span data-ttu-id="f89f2-156">다음 이미지에서는 추적에 동의한 후에 앱을 보여줍니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-156">The following image shows the app after you give consent to tracking:</span></span>
+  <span data-ttu-id="86b62-156">다음 이미지에서는 추적에 동의한 후에 앱을 보여줍니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-156">The following image shows the app after you give consent to tracking:</span></span>
 
   ![홈 또는 인덱스 페이지](razor-pages-start/_static/home2.2.png)
   
-# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="f89f2-158">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="f89f2-158">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="86b62-158">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="86b62-158">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
   [!INCLUDE[](~/includes/trustCertVSC.md)]
 
-* <span data-ttu-id="f89f2-159">**Ctrl-F5** 키를 눌러서 디버거 없이 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-159">Press **Ctrl-F5** to run without the debugger.</span></span>
+* <span data-ttu-id="86b62-159">**Ctrl-F5** 키를 눌러서 디버거 없이 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-159">Press **Ctrl-F5** to run without the debugger.</span></span>
 
-  <span data-ttu-id="f89f2-160">Visual Studio Code가 [Kestrel](xref:fundamentals/servers/kestrel)을 시작하고, 브라우저를 시작하고, `http://localhost:5001`로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-160">Visual Studio Code starts [Kestrel](xref:fundamentals/servers/kestrel), launches a browser, and navigates to `http://localhost:5001`.</span></span> <span data-ttu-id="f89f2-161">주소 표시줄에 `localhost:port#`이 표시되고 `example.com` 등은 표시되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-161">The address bar shows `localhost:port#` and not something like `example.com`.</span></span> <span data-ttu-id="f89f2-162">그 이유는 `localhost`가 로컬 컴퓨터의 표준 이름이기 때문입니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-162">That's because `localhost` is the standard hostname for  local computer.</span></span> <span data-ttu-id="f89f2-163">Localhost는 로컬 컴퓨터의 웹 요청만 지원합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-163">Localhost only serves web requests from the local computer.</span></span>
+  <span data-ttu-id="86b62-160">Visual Studio Code가 [Kestrel](xref:fundamentals/servers/kestrel)을 시작하고, 브라우저를 시작하고, `http://localhost:5001`로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-160">Visual Studio Code starts [Kestrel](xref:fundamentals/servers/kestrel), launches a browser, and navigates to `http://localhost:5001`.</span></span> <span data-ttu-id="86b62-161">주소 표시줄에 `localhost:port#`이 표시되고 `example.com` 등은 표시되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-161">The address bar shows `localhost:port#` and not something like `example.com`.</span></span> <span data-ttu-id="86b62-162">그 이유는 `localhost`가 로컬 컴퓨터의 표준 이름이기 때문입니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-162">That's because `localhost` is the standard hostname for  local computer.</span></span> <span data-ttu-id="86b62-163">Localhost는 로컬 컴퓨터의 웹 요청만 지원합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-163">Localhost only serves web requests from the local computer.</span></span>
 
-* <span data-ttu-id="f89f2-164">앱의 홈페이지에서 **승인**을 선택하여 추적에 동의합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-164">On the app's home page, select **Accept** to consent to tracking.</span></span>
+* <span data-ttu-id="86b62-164">앱의 홈페이지에서 **승인**을 선택하여 추적에 동의합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-164">On the app's home page, select **Accept** to consent to tracking.</span></span>
 
-  <span data-ttu-id="f89f2-165">이 앱은 개인 정보를 추적하지 않지만 유럽 연합의 [GDPR(일반 데이터 보호 규정)](xref:security/gdpr)을 준수하기 위해 필요한 경우 프로젝트 템플릿에는 동의 기능이 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-165">This app doesn't track personal information, but the project template includes the consent feature in case you need it to comply with the European Union's [General Data Protection Regulation (GDPR)](xref:security/gdpr).</span></span>
+  <span data-ttu-id="86b62-165">이 앱은 개인 정보를 추적하지 않지만 유럽 연합의 [GDPR(일반 데이터 보호 규정)](xref:security/gdpr)을 준수하기 위해 필요한 경우 프로젝트 템플릿에는 동의 기능이 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-165">This app doesn't track personal information, but the project template includes the consent feature in case you need it to comply with the European Union's [General Data Protection Regulation (GDPR)](xref:security/gdpr).</span></span>
 
   ![홈 또는 인덱스 페이지](razor-pages-start/_static/homeGDPR2.2.png)
 
-  <span data-ttu-id="f89f2-167">다음 이미지에서는 추적에 동의한 후에 앱을 보여줍니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-167">The following image shows the app after you give consent to tracking:</span></span>
+  <span data-ttu-id="86b62-167">다음 이미지에서는 추적에 동의한 후에 앱을 보여줍니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-167">The following image shows the app after you give consent to tracking:</span></span>
 
   ![홈 또는 인덱스 페이지](razor-pages-start/_static/home2.2.png)
   
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="f89f2-169">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="f89f2-169">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="86b62-169">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="86b62-169">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
   [!INCLUDE[](~/includes/trustCertMac.md)]
 
-* <span data-ttu-id="f89f2-170">디버거 없이 실행하려면 **Cmd-Opt-F5**를 누릅니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-170">Press **Cmd-Opt-F5** to run without the debugger.</span></span>
+* <span data-ttu-id="86b62-170">디버거 없이 실행하려면 **Cmd-Opt-F5**를 누릅니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-170">Press **Cmd-Opt-F5** to run without the debugger.</span></span>
 
-  <span data-ttu-id="f89f2-171">Visual Studio가 [Kestrel](xref:fundamentals/servers/kestrel)을 시작하고, 브라우저를 시작하고, `http://localhost:5001`으로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-171">Visual Studio starts [Kestrel](xref:fundamentals/servers/kestrel), launches a browser, and navigates to `http://localhost:5001`.</span></span>
+  <span data-ttu-id="86b62-171">Visual Studio가 [Kestrel](xref:fundamentals/servers/kestrel)을 시작하고, 브라우저를 시작하고, `http://localhost:5001`으로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-171">Visual Studio starts [Kestrel](xref:fundamentals/servers/kestrel), launches a browser, and navigates to `http://localhost:5001`.</span></span>
 
-* <span data-ttu-id="f89f2-172">앱의 홈페이지에서 **승인**을 선택하여 추적에 동의합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-172">On the app's home page, select **Accept** to consent to tracking.</span></span>
+* <span data-ttu-id="86b62-172">앱의 홈페이지에서 **승인**을 선택하여 추적에 동의합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-172">On the app's home page, select **Accept** to consent to tracking.</span></span>
 
-  <span data-ttu-id="f89f2-173">이 앱은 개인 정보를 추적하지 않지만 유럽 연합의 [GDPR(일반 데이터 보호 규정)](xref:security/gdpr)을 준수하기 위해 필요한 경우 프로젝트 템플릿에는 동의 기능이 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-173">This app doesn't track personal information, but the project template includes the consent feature in case you need it to comply with the European Union's [General Data Protection Regulation (GDPR)](xref:security/gdpr).</span></span>
+  <span data-ttu-id="86b62-173">이 앱은 개인 정보를 추적하지 않지만 유럽 연합의 [GDPR(일반 데이터 보호 규정)](xref:security/gdpr)을 준수하기 위해 필요한 경우 프로젝트 템플릿에는 동의 기능이 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-173">This app doesn't track personal information, but the project template includes the consent feature in case you need it to comply with the European Union's [General Data Protection Regulation (GDPR)](xref:security/gdpr).</span></span>
 
   ![홈 또는 인덱스 페이지](razor-pages-start/_static/homeGDPR2.2_safari.png)
 
-  <span data-ttu-id="f89f2-175">다음 이미지에서는 추적에 동의한 후에 앱을 보여줍니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-175">The following image shows the app after you give consent to tracking:</span></span>
+  <span data-ttu-id="86b62-175">다음 이미지에서는 추적에 동의한 후에 앱을 보여줍니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-175">The following image shows the app after you give consent to tracking:</span></span>
 
   ![홈 또는 인덱스 페이지](razor-pages-start/_static/home2.2_safari.png)
 
@@ -173,49 +173,49 @@ dotnet new webapp -o RazorPagesMovie
 
 ---
 
-## <a name="examine-the-project-files"></a><span data-ttu-id="f89f2-177">프로젝트 파일 검사</span><span class="sxs-lookup"><span data-stu-id="f89f2-177">Examine the project files</span></span>
+## <a name="examine-the-project-files"></a><span data-ttu-id="86b62-177">프로젝트 파일 검사</span><span class="sxs-lookup"><span data-stu-id="86b62-177">Examine the project files</span></span>
 
-<span data-ttu-id="f89f2-178">이후 자습서에서 작업할 주요 프로젝트 폴더 및 파일에 대한 개요는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-178">Here's an overview of the main project folders and files that you'll work with in later tutorials.</span></span>
+<span data-ttu-id="86b62-178">이후 자습서에서 작업할 주요 프로젝트 폴더 및 파일에 대한 개요는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-178">Here's an overview of the main project folders and files that you'll work with in later tutorials.</span></span>
 
-### <a name="pages-folder"></a><span data-ttu-id="f89f2-179">페이지 폴더</span><span class="sxs-lookup"><span data-stu-id="f89f2-179">Pages folder</span></span>
+### <a name="pages-folder"></a><span data-ttu-id="86b62-179">페이지 폴더</span><span class="sxs-lookup"><span data-stu-id="86b62-179">Pages folder</span></span>
 
-<span data-ttu-id="f89f2-180">Razor 페이지 및 지원 파일이 들어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-180">Contains Razor pages and supporting files.</span></span> <span data-ttu-id="f89f2-181">각 Razor 페이지는 파일 쌍입니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-181">Each Razor page is a pair of files:</span></span>
+<span data-ttu-id="86b62-180">Razor 페이지 및 지원 파일이 들어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-180">Contains Razor pages and supporting files.</span></span> <span data-ttu-id="86b62-181">각 Razor 페이지는 파일 쌍입니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-181">Each Razor page is a pair of files:</span></span>
 
-* <span data-ttu-id="f89f2-182">Razor 구문을 사용하는 C# 코드로 HTML 태그를 포함하는 *.cshtml* 파일.</span><span class="sxs-lookup"><span data-stu-id="f89f2-182">A *.cshtml* file that contains HTML markup with C# code using Razor syntax.</span></span>
-* <span data-ttu-id="f89f2-183">페이지 이벤트를 처리하는 C# 코드가 포함된 *.cshtml.cs* 파일.</span><span class="sxs-lookup"><span data-stu-id="f89f2-183">A *.cshtml.cs* file that contains C# code that handles page events.</span></span>
+* <span data-ttu-id="86b62-182">Razor 구문을 사용하는 C# 코드로 HTML 태그를 포함하는 *.cshtml* 파일.</span><span class="sxs-lookup"><span data-stu-id="86b62-182">A *.cshtml* file that contains HTML markup with C# code using Razor syntax.</span></span>
+* <span data-ttu-id="86b62-183">페이지 이벤트를 처리하는 C# 코드가 포함된 *.cshtml.cs* 파일.</span><span class="sxs-lookup"><span data-stu-id="86b62-183">A *.cshtml.cs* file that contains C# code that handles page events.</span></span>
 
-<span data-ttu-id="f89f2-184">지원 파일에는 밑줄로 시작하는 이름이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-184">Supporting files have names that begin with an underscore.</span></span> <span data-ttu-id="f89f2-185">예를 들어 *_Layout.cshtml* 파일은 모든 페이지에 공통되는 UI 요소를 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-185">For example, the *_Layout.cshtml* file configures UI elements common to all pages.</span></span> <span data-ttu-id="f89f2-186">이 파일은 페이지 맨 위에 있는 탐색 메뉴를 설정하고 페이지 맨 아래에 저작권 표시를 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-186">This file sets up the navigation menu at the top of the page and the copyright notice at the bottom of the page.</span></span> <span data-ttu-id="f89f2-187">자세한 내용은 <xref:mvc/views/layout>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="f89f2-187">For more information, see <xref:mvc/views/layout>.</span></span>
+<span data-ttu-id="86b62-184">지원 파일에는 밑줄로 시작하는 이름이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-184">Supporting files have names that begin with an underscore.</span></span> <span data-ttu-id="86b62-185">예를 들어 *_Layout.cshtml* 파일은 모든 페이지에 공통되는 UI 요소를 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-185">For example, the *_Layout.cshtml* file configures UI elements common to all pages.</span></span> <span data-ttu-id="86b62-186">이 파일은 페이지 맨 위에 있는 탐색 메뉴를 설정하고 페이지 맨 아래에 저작권 표시를 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-186">This file sets up the navigation menu at the top of the page and the copyright notice at the bottom of the page.</span></span> <span data-ttu-id="86b62-187">자세한 내용은 <xref:mvc/views/layout>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="86b62-187">For more information, see <xref:mvc/views/layout>.</span></span>
 
-### <a name="wwwroot-folder"></a><span data-ttu-id="f89f2-188">wwwroot 폴더</span><span class="sxs-lookup"><span data-stu-id="f89f2-188">wwwroot folder</span></span>
+### <a name="wwwroot-folder"></a><span data-ttu-id="86b62-188">wwwroot 폴더</span><span class="sxs-lookup"><span data-stu-id="86b62-188">wwwroot folder</span></span>
 
-<span data-ttu-id="f89f2-189">HTML 파일, JavaScript 파일 및 CSS 파일과 같은 정적 파일을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-189">Contains static files, such as HTML files, JavaScript files, and CSS files.</span></span> <span data-ttu-id="f89f2-190">자세한 내용은 <xref:fundamentals/static-files>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="f89f2-190">For more information, see <xref:fundamentals/static-files>.</span></span>
+<span data-ttu-id="86b62-189">HTML 파일, JavaScript 파일 및 CSS 파일과 같은 정적 파일을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-189">Contains static files, such as HTML files, JavaScript files, and CSS files.</span></span> <span data-ttu-id="86b62-190">자세한 내용은 <xref:fundamentals/static-files>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="86b62-190">For more information, see <xref:fundamentals/static-files>.</span></span>
 
-### <a name="appsettingsjson"></a><span data-ttu-id="f89f2-191">appSettings.json</span><span class="sxs-lookup"><span data-stu-id="f89f2-191">appSettings.json</span></span>
+### <a name="appsettingsjson"></a><span data-ttu-id="86b62-191">appSettings.json</span><span class="sxs-lookup"><span data-stu-id="86b62-191">appSettings.json</span></span>
 
-<span data-ttu-id="f89f2-192">연결 문자열과 같은 구성 데이터를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-192">Contains configuration data, such as connection strings.</span></span> <span data-ttu-id="f89f2-193">자세한 내용은 <xref:fundamentals/configuration/index>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="f89f2-193">For more information, see <xref:fundamentals/configuration/index>.</span></span>
+<span data-ttu-id="86b62-192">연결 문자열과 같은 구성 데이터를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-192">Contains configuration data, such as connection strings.</span></span> <span data-ttu-id="86b62-193">자세한 내용은 <xref:fundamentals/configuration/index>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="86b62-193">For more information, see <xref:fundamentals/configuration/index>.</span></span>
 
-### <a name="programcs"></a><span data-ttu-id="f89f2-194">Program.cs</span><span class="sxs-lookup"><span data-stu-id="f89f2-194">Program.cs</span></span>
+### <a name="programcs"></a><span data-ttu-id="86b62-194">Program.cs</span><span class="sxs-lookup"><span data-stu-id="86b62-194">Program.cs</span></span>
 
-<span data-ttu-id="f89f2-195">프로그램의 진입점을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-195">Contains the entry point for the program.</span></span> <span data-ttu-id="f89f2-196">자세한 내용은 <xref:fundamentals/host/generic-host>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="f89f2-196">For more information, see <xref:fundamentals/host/generic-host>.</span></span>
+<span data-ttu-id="86b62-195">프로그램의 진입점을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-195">Contains the entry point for the program.</span></span> <span data-ttu-id="86b62-196">자세한 내용은 <xref:fundamentals/host/generic-host>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="86b62-196">For more information, see <xref:fundamentals/host/generic-host>.</span></span>
 
-### <a name="startupcs"></a><span data-ttu-id="f89f2-197">Startup.cs</span><span class="sxs-lookup"><span data-stu-id="f89f2-197">Startup.cs</span></span>
+### <a name="startupcs"></a><span data-ttu-id="86b62-197">Startup.cs</span><span class="sxs-lookup"><span data-stu-id="86b62-197">Startup.cs</span></span>
 
-<span data-ttu-id="f89f2-198">쿠키에 대한 동의 필요 여부 등 앱 동작을 구성하는 코드를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-198">Contains code that configures app behavior, such as whether it requires consent for cookies.</span></span> <span data-ttu-id="f89f2-199">자세한 내용은 <xref:fundamentals/startup>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="f89f2-199">For more information, see <xref:fundamentals/startup>.</span></span>
+<span data-ttu-id="86b62-198">쿠키에 대한 동의 필요 여부 등 앱 동작을 구성하는 코드를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-198">Contains code that configures app behavior, such as whether it requires consent for cookies.</span></span> <span data-ttu-id="86b62-199">자세한 내용은 <xref:fundamentals/startup>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="86b62-199">For more information, see <xref:fundamentals/startup>.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="f89f2-200">추가 자료</span><span class="sxs-lookup"><span data-stu-id="f89f2-200">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="86b62-200">추가 자료</span><span class="sxs-lookup"><span data-stu-id="86b62-200">Additional resources</span></span>
 
-* [<span data-ttu-id="f89f2-201">이 자습서의 YouTube 버전</span><span class="sxs-lookup"><span data-stu-id="f89f2-201">Youtube version of this tutorial</span></span>](https://www.youtube.com/watch?v=F0SP7Ry4flQ&feature=youtu.be)
+* [<span data-ttu-id="86b62-201">이 자습서의 YouTube 버전</span><span class="sxs-lookup"><span data-stu-id="86b62-201">Youtube version of this tutorial</span></span>](https://www.youtube.com/watch?v=F0SP7Ry4flQ&feature=youtu.be)
 
-## <a name="next-steps"></a><span data-ttu-id="f89f2-202">다음 단계</span><span class="sxs-lookup"><span data-stu-id="f89f2-202">Next steps</span></span>
+## <a name="next-steps"></a><span data-ttu-id="86b62-202">다음 단계</span><span class="sxs-lookup"><span data-stu-id="86b62-202">Next steps</span></span>
 
-<span data-ttu-id="f89f2-203">이 자습서에서는 다음을 수행했습니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-203">In this tutorial, you:</span></span>
+<span data-ttu-id="86b62-203">이 자습서에서는 다음을 수행했습니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-203">In this tutorial, you:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="f89f2-204">Razor Pages 웹앱을 만들었습니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-204">Created a Razor Pages web app.</span></span>
-> * <span data-ttu-id="f89f2-205">앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-205">Ran the app.</span></span>
-> * <span data-ttu-id="f89f2-206">프로젝트 파일을 검사했습니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-206">Examined the project files.</span></span>
+> * <span data-ttu-id="86b62-204">Razor Pages 웹앱을 만들었습니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-204">Created a Razor Pages web app.</span></span>
+> * <span data-ttu-id="86b62-205">앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-205">Ran the app.</span></span>
+> * <span data-ttu-id="86b62-206">프로젝트 파일을 검사했습니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-206">Examined the project files.</span></span>
 
-<span data-ttu-id="f89f2-207">시리즈의 다음 자습서로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="f89f2-207">Advance to the next tutorial in the series:</span></span>
+<span data-ttu-id="86b62-207">시리즈의 다음 자습서로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="86b62-207">Advance to the next tutorial in the series:</span></span>
 
 > [!div class="step-by-step"]
-> [<span data-ttu-id="f89f2-208">모델 추가</span><span class="sxs-lookup"><span data-stu-id="f89f2-208">Add a model</span></span>](xref:tutorials/razor-pages/model)
+> [<span data-ttu-id="86b62-208">모델 추가</span><span class="sxs-lookup"><span data-stu-id="86b62-208">Add a model</span></span>](xref:tutorials/razor-pages/model)
