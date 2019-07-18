@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/12/2019
 uid: fundamentals/app-state
-ms.openlocfilehash: 3d878a389462aa7f3932f374034fb7cf11fd191c
-ms.sourcegitcommit: c716ea9155a6b404c1f3d3d34e2388454cd276d7
+ms.openlocfilehash: 4b02a9b5867559da493054bb128aabed4d920ace
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/05/2019
-ms.locfileid: "66716333"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67813617"
 ---
 # <a name="session-and-app-state-in-aspnet-core"></a>ASP.NET Core에서 세션 및 앱 상태
 
@@ -81,7 +81,7 @@ ASP.NET Core는 각 요청과 함께 앱으로 전송되는 세션 ID를 포함�
 
 * [IDistributedCache](/dotnet/api/microsoft.extensions.caching.distributed.idistributedcache) 메모리 캐시 중 하나 `IDistributedCache` 구현은 세션에 대한 백업 저장소로 사용됩니다. 자세한 내용은 <xref:performance/caching/distributed>을 참조하세요.
 * `ConfigureServices`의 [AddSession](/dotnet/api/microsoft.extensions.dependencyinjection.sessionservicecollectionextensions.addsession)에 대한 호출.
-* `Configure`의 [UseSession](/dotnet/api/microsoft.aspnetcore.builder.sessionmiddlewareextensions#methods_)에 대한 호출.
+* `Configure`의 [UseSession](/dotnet/api/microsoft.aspnetcore.builder.sessionmiddlewareextensions.usesession#Microsoft_AspNetCore_Builder_SessionMiddlewareExtensions_UseSession_Microsoft_AspNetCore_Builder_IApplicationBuilder_)에 대한 호출.
 
 다음 코드에서는 `IDistributedCache`의 기본 메모리 내 구현을 사용하여 메모리 내 세션 공급자를 설정하는 방법을 보여 줍니다.
 

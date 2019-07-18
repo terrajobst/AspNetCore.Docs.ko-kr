@@ -5,12 +5,12 @@ description: Entity Framework Core(EF Core)를 사용하여 데이터베이스�
 ms.author: riande
 ms.date: 02/12/2019
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: 44e6f53d517b0470c5e6fa785a4061e59cda9ce6
-ms.sourcegitcommit: 20ca93d72cb0b3998637724b44523e57b089c8fd
+ms.openlocfilehash: be9f515178d0169a69487f917c7d39c6f11f1292
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/09/2019
-ms.locfileid: "65473601"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815059"
 ---
 # <a name="add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>ASP.NET Core에서 Razor 페이지 앱에 모델 추가
 
@@ -81,6 +81,10 @@ ms.locfileid: "65473601"
 ![이전 지침의 이미지입니다.](model/_static/add_scaffold.png)
 
 **Entity Framework(CRUD)를 사용하여 Razor Pages 추가** 대화 상자를 완료합니다.
+<!-- In the next section, change 
+(plus) sign and accept the generated name 
+to use Data, it should not use models. That will make the namespace the same for the VS version and the CLI version
+-->
 
 * **모델 클래스** 드롭다운에서 **동영상(RazorPagesMovie.Models)** 을 선택합니다.
 * **데이터 컨텍스트 클래스** 행에서 **+** 기호를 선택하고 생성된 이름인 **RazorPagesMovie.Models.RazorPagesMovieContext**를 수용합니다.

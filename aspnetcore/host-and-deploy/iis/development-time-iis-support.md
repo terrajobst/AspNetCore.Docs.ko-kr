@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/08/2019
 uid: host-and-deploy/iis/development-time-iis-support
-ms.openlocfilehash: d2b2456c7ab6b72f2270b6edc17000695061cc2b
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: f2d5dbbdc80eec035616ddea234ee5d3343eeae8
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64887758"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815189"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>ASP.NET Core용 Visual Studio의 개발 시간 IIS 지원
 
@@ -108,7 +108,7 @@ HTTP를 사용하는 프로젝트의 경우 [HTTPS 리디렉션 및 HSTS 미들�
 
 ::: moniker-end
 
-Visual Studio를 사용하지 않는 경우에는 *속성* 폴더의 [launchSettings.json](http://json.schemastore.org/launchsettings) 파일에 시작 프로필을 수동으로 추가합니다. 다음 예제에서는 HTTPS 프로토콜을 사용하도록 프로필을 구성합니다.
+Visual Studio를 사용하지 않는 경우에는 *속성* 폴더의 [launchSettings.json](https://json.schemastore.org/launchsettings) 파일에 시작 프로필을 수동으로 추가합니다. 다음 예제에서는 HTTPS 프로토콜을 사용하도록 프로필을 구성합니다.
 
 ```json
 {

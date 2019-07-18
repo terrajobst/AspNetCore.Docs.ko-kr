@@ -6,16 +6,16 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/20/2018
 uid: tutorials/web-api-help-pages-using-swagger
-ms.openlocfilehash: fb65b84b781b5c19040b559f0d7635ceb00cf4a0
-ms.sourcegitcommit: 06a455d63ff7d6b571ca832e8117f4ac9d646baf
+ms.openlocfilehash: 06a942ca213c7c0a58932494be0ed23cb6896d48
+ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/21/2019
-ms.locfileid: "67316572"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67856089"
 ---
 # <a name="aspnet-core-web-api-help-pages-with-swagger--openapi"></a>Swagger/OpenAPI를 사용한 ASP.NET Core 웹 API 도움말 페이지
 
-작성자: [Christoph Nienaber](https://twitter.com/zuckerthoben) 및 [Rico Suter](http://rsuter.com)
+작성자: [Christoph Nienaber](https://twitter.com/zuckerthoben) 및 [Rico Suter](https://blog.rsuter.com/)
 
 Web API를 사용할 때 여러 메서드를 이해하는 것이 개발자에게 어려울 수 있습니다. [Swagger](https://swagger.io/)([OpenAPI](https://www.openapis.org/)라고도 함)는 Web API에 대한 유용한 설명서 및 도움말 페이지를 생성하는 문제를 해결합니다. 대화형 설명서, 클라이언트 SDK 생성 및 API 검색 기능과 같은 이점을 제공합니다.
 
@@ -113,7 +113,7 @@ Swagger 흐름의 핵심은 Swagger 사양(기본적으로 *swagger.json*이라�
 ![예제 Swagger GET 테스트](web-api-help-pages-using-swagger/_static/get-try-it-out.png)
 
 > [!NOTE]
-> 스크린샷에 사용된 Swagger UI 버전은 버전 2입니다. 버전 3 예제는 [Petstore 예제](http://petstore.swagger.io/)를 참조하세요.
+> 스크린샷에 사용된 Swagger UI 버전은 버전 2입니다. 버전 3 예제는 [Petstore 예제](https://petstore.swagger.io/)를 참조하세요.
 
 ## <a name="next-steps"></a>다음 단계
 

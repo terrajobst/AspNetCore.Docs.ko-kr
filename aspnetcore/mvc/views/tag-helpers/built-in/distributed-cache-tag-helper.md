@@ -6,16 +6,16 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 uid: mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper
-ms.openlocfilehash: a5b33451a763c297c6d7885855a321c43435abb4
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 4e4d383bac67c73bad8b0a31b9ceb9452251761b
+ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64890458"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67856195"
 ---
 # <a name="distributed-cache-tag-helper-in-aspnet-core"></a>ASP.NET Core의 분산 캐시 태그 도우미
 
-작성자: [Peter Kellner](http://peterkellner.net) 및 [Luke Latham](https://github.com/guardrex)
+작성자: [Peter Kellner](https://peterkellner.net) 및 [Luke Latham](https://github.com/guardrex)
 
 분산 캐시 태그 도우미는 콘텐츠를 분산 캐시 원본에 캐싱하여 ASP.NET Core 앱 성능을 획기적으로 개선하는 기능을 제공합니다.
 
@@ -44,7 +44,7 @@ ms.locfileid: "64890458"
 
 ### <a name="name"></a>name
 
-| 특성 유형 | 예제                               |
+| 특성 유형 | 예                               |
 | -------------- | ------------------------------------- |
 | 문자열         | `my-distributed-cache-unique-key-101` |
 

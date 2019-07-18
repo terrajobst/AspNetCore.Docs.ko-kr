@@ -5,12 +5,12 @@ description: 기본 ASP.NET Core MVC 앱에 검색을 추가하는 방법을 보
 ms.author: riande
 ms.date: 12/13/2018
 uid: tutorials/first-mvc-app/search
-ms.openlocfilehash: ca3b0baeddd31e10243689091d435767079bb979
-ms.sourcegitcommit: a3926eae3f687013027a2828830c12a89add701f
+ms.openlocfilehash: fbec03d71e247c58fb5968290c4baf6b28120e1c
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/08/2019
-ms.locfileid: "65450851"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815063"
 ---
 # <a name="add-search-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 검색 추가
 
@@ -85,7 +85,7 @@ HTML `<form>` 태그는 [양식 태그 도우미](xref:mvc/views/working-with-fo
 
 ![HttpPost 인덱스에서의 애플리케이션 응답을 포함한 브라우저 창: ghost에 대한 필터](~/tutorials/first-mvc-app/search/_static/fo.png)
 
-그러나 이 `[HttpPost]` 버전의 `Index` 메서드를 추가하는 경우에도 이를 모두 구현하는 방법은 제한됩니다. 특정 검색을 책갈피로 설정하거나 동일하게 필터링된 영화 목록을 보기 위해 클릭할 수 있는 링크를 친구에게 보내려고 한다고 가정합니다. HTTP POST 요청의 URL은 GET 요청의 URL(localhost:xxxxx/Movies/Index)과 동일합니다. URL에는 검색 정보가 없습니다. 검색 문자열 정보는 [양식 필드 값](https://developer.mozilla.org/docs/Learn/HTML/Forms/Sending_and_retrieving_form_data)으로 서버에 전송됩니다. 브라우저 개발자 도구 또는 뛰어난 [Fiddler 도구](http://www.telerik.com/fiddler)에서 확인할 수 있습니다. 아래 이미지에서는 Chrome 브라우저 개발자 도구를 보여줍니다.
+그러나 이 `[HttpPost]` 버전의 `Index` 메서드를 추가하는 경우에도 이를 모두 구현하는 방법은 제한됩니다. 특정 검색을 책갈피로 설정하거나 동일하게 필터링된 영화 목록을 보기 위해 클릭할 수 있는 링크를 친구에게 보내려고 한다고 가정합니다. HTTP POST 요청의 URL은 GET 요청의 URL(localhost:xxxxx/Movies/Index)과 동일합니다. URL에는 검색 정보가 없습니다. 검색 문자열 정보는 [양식 필드 값](https://developer.mozilla.org/docs/Learn/HTML/Forms/Sending_and_retrieving_form_data)으로 서버에 전송됩니다. 브라우저 개발자 도구 또는 뛰어난 [Fiddler 도구](https://www.telerik.com/fiddler)에서 확인할 수 있습니다. 아래 이미지에서는 Chrome 브라우저 개발자 도구를 보여줍니다.
 
 ![Microsoft Edge에 있는 개발자 도구의 네트워크 탭은 ghost의 searchString 값을 가진 요청 본문을 보여줍니다.](~/tutorials/first-mvc-app/search/_static/f12_rb.png)
 
@@ -144,7 +144,7 @@ HTML `<form>` 태그는 [양식 태그 도우미](xref:mvc/views/working-with-fo
 
 장르별, 동영상 제목별 및 둘 다로 검색하여 앱을 테스트합니다.
 
-![https://localhost:5001/Movies?MovieGenre=Comedy&SearchString=2의 결과를 보여주는 브라우저 창](~/tutorials/first-mvc-app/search/_static/s2.png)
+![https://localhost:5001/Movies?MovieGenre=Comedy&SearchString=2 의 결과를 보여주는 브라우저 창](~/tutorials/first-mvc-app/search/_static/s2.png)
 
 > [!div class="step-by-step"]
 > [이전](controller-methods-views.md)

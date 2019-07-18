@@ -5,12 +5,12 @@ description: 앱의 리소스에 대한 추상화인 애플리케이션 파트�
 ms.author: riande
 ms.date: 01/04/2017
 uid: mvc/extensibility/app-parts
-ms.openlocfilehash: 5d5e79d3afe0eee6d0b126d4642ccd5f61bff409
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 9d0b4b5fadcc287172f23fa36c421f04ca2ade4a
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64888138"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815476"
 ---
 # <a name="application-parts-in-aspnet-core"></a>ASP.NET Core에서 애플리케이션 파트
 
@@ -20,7 +20,7 @@ ms.locfileid: "64888138"
 
 ## <a name="introducing-application-parts"></a>애플리케이션 파트 소개
 
-MVC 앱은 [애플리케이션 파트](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.applicationpart)에서 해당 기능을 로드합니다. 특히 [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) 클래스는 어셈블리에서 지원하는 애플리케이션 파트를 나타냅니다. 이러한 클래스를 사용하여 컨트롤러, 보기 구성 요소, 태그 도우미 및 Razor 컴파일 원본과 같은 MVC 기능을 검색하고 로드할 수 있습니다. [ApplicationPartManager](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.applicationpartmanager)는 MVC 앱에 사용할 수 있는 애플리케이션 파트 및 기능 공급자를 추적합니다. MVC를 구성하는 경우 `Startup`에서 `ApplicationPartManager`와 상호 작용할 수 있습니다.
+MVC 앱은 [애플리케이션 파트](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.applicationpart)에서 해당 기능을 로드합니다. 특히 [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart) 클래스는 어셈블리에서 지원하는 애플리케이션 파트를 나타냅니다. 이러한 클래스를 사용하여 컨트롤러, 보기 구성 요소, 태그 도우미 및 Razor 컴파일 원본과 같은 MVC 기능을 검색하고 로드할 수 있습니다. [ApplicationPartManager](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.applicationpartmanager)는 MVC 앱에 사용할 수 있는 애플리케이션 파트 및 기능 공급자를 추적합니다. MVC를 구성하는 경우 `Startup`에서 `ApplicationPartManager`와 상호 작용할 수 있습니다.
 
 ```csharp
 // create an assembly part from a class's assembly

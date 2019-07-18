@@ -7,12 +7,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 06/20/2019
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: eefe507efadb5ef0a03854d931402f9eaa23a266
-ms.sourcegitcommit: 763af2cbdab0da62d1f1cfef4bcf787f251dfb5c
+ms.openlocfilehash: 3f48cda8f89d3f3dcce220cad4e405472b510df4
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2019
-ms.locfileid: "67394768"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67814886"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>ASP.NET Core에서 HTTP.sys 웹 서버 구현
 
@@ -195,7 +195,7 @@ HTTP.sys는 Kerberos 인증 프로토콜을 사용하여 커널 모드 인증에
    * **.NET Core** &ndash; 앱에 .NET Core가 필요한 경우 [.NET Core 다운로드](https://dotnet.microsoft.com/download)에서 **.NET Core 런타임** 설치 관리자를 가져와 실행합니다. 서버에 전체 SDK를 설치하지 마세요.
    * **.NET Framework** &ndash; 앱에 .NET Framework가 필요한 경우 [.NET Framework: 설치 가이드](/dotnet/framework/install/)를 참조하세요. 필수 .NET Framework를 설치합니다. 최신 .NET Framework의 설치 관리자는 [.NET Core 다운로드](https://dotnet.microsoft.com/download) 페이지에서 사용할 수 있습니다.
 
-   앱이 [자체 포함 배포](/dotnet/core/deploying/#framework-dependent-deployments-scd)인 경우 앱의 배포에 런타임이 포함됩니다. 서버에 프레임워크를 설치할 필요가 없습니다.
+   앱이 [자체 포함 배포](/dotnet/core/deploying/#self-contained-deployments-scd)인 경우 앱의 배포에 런타임이 포함됩니다. 서버에 프레임워크를 설치할 필요가 없습니다.
 
 1. 앱에서 URL 및 포트를 구성합니다.
 

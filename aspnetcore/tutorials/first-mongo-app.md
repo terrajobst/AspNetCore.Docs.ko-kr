@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc, seodec18
 ms.date: 07/10/2019
 uid: tutorials/first-mongo-app
-ms.openlocfilehash: c64f6e69a19e294a18cc72c860af0a03ef70d444
-ms.sourcegitcommit: 357a7120632b20465801c093e4e5bd4a315496a8
+ms.openlocfilehash: 99b28407a249a5c0bc6a0cf3a285c04f1d6187a7
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/08/2019
-ms.locfileid: "67649188"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815660"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>ASP.NET Core 및 MongoDB를 사용하여 웹 API 만들기
 
@@ -294,7 +294,7 @@ Windows를 사용하는 경우 MongoDB는 기본적으로*C:\\Program Files\\Mon
 
 * `BookService` 클래스를 사용하여 CRUD 작업을 수행합니다.
 * GET, POST, PUT 및 DELETE HTTP 요청을 지원하는 작업 메서드를 포함합니다.
-* `Create` 작업 메서드에서 <xref:System.Web.Http.ApiController.CreatedAtRoute*>를 호출하여 [HTTP 201](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) 응답을 반환합니다. 상태 코드 201은 서버에서 새 리소스를 만드는 HTTP POST 메서드의 표준 응답입니다. 또한 `CreatedAtRoute`는 `Location` 헤더를 응답에 추가합니다. `Location` 헤더는 새로 만든 책의 URI를 지정합니다.
+* `Create` 작업 메서드에서 <xref:System.Web.Http.ApiController.CreatedAtRoute*>를 호출하여 [HTTP 201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) 응답을 반환합니다. 상태 코드 201은 서버에서 새 리소스를 만드는 HTTP POST 메서드의 표준 응답입니다. 또한 `CreatedAtRoute`는 `Location` 헤더를 응답에 추가합니다. `Location` 헤더는 새로 만든 책의 URI를 지정합니다.
 
 ## <a name="test-the-web-api"></a>웹 API 테스트
 

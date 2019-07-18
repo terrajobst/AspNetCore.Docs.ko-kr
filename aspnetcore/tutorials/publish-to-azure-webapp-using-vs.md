@@ -4,14 +4,14 @@ author: rick-anderson
 description: Visual Studio를 사용하여 Azure App Service에 ASP.NET Core 앱을 게시하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/06/2018
+ms.date: 07/10/2019
 uid: tutorials/publish-to-azure-webapp-using-vs
-ms.openlocfilehash: c0251032d83349d4d3925d1ec594c9230ed6ad2d
-ms.sourcegitcommit: 6d9cf728465cdb0de1037633a8b7df9a8989cccb
+ms.openlocfilehash: dbb8229a52c8c93da94406ad64d03eff9631afb4
+ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/01/2019
-ms.locfileid: "67207650"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68308330"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio"></a>Visual Studio를 사용하여 Azure에 ASP.NET Core 앱 게시
 
@@ -21,7 +21,7 @@ ms.locfileid: "67207650"
 
 macOS에서 작업하고 있는 경우 [Mac용 Visual Studio에서 Azure에 게시](https://blog.xamarin.com/publish-azure-visual-studio-mac/)를 참조하세요.
 
-App Service 배포 문제를 해결하려면 <xref:host-and-deploy/azure-apps/troubleshoot>을 참조하세요.
+App Service 배포 문제를 해결하려면 <xref:test/troubleshoot-azure-iis>을 참조하세요.
 
 ## <a name="set-up"></a>설치
 
@@ -191,4 +191,4 @@ Visual Studio는 Azure에서 웹앱 및 SQL Server를 만듭니다. 이 단계�
 * [Azure 리소스 그룹](/azure/azure-resource-manager/resource-group-overview#resource-groups)
 * [Azure SQL Database](/azure/sql-database/)
 * <xref:host-and-deploy/visual-studio-publish-profiles>
-* <xref:host-and-deploy/azure-apps/troubleshoot>
+* <xref:test/troubleshoot-azure-iis>

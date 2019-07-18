@@ -5,12 +5,12 @@ description: 모델-보기-컨트롤러 디자인 패턴을 사용하여 웹앱 
 ms.author: riande
 ms.date: 01/08/2018
 uid: mvc/overview
-ms.openlocfilehash: eb636616ab952f506993ae5f4692e5e966bb20f4
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 819bc93a7580626bf586b984b0ce169306df56d9
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087315"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815346"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>ASP.NET Core MVC 개요
 
@@ -179,7 +179,7 @@ ASP.NET Core MVC는 웹 사이트를 구축할 수 있는 훌륭한 플랫폼일
 
 이 프레임워크는 JSON 또는 XML로 [데이터 형식을 지정](xref:web-api/advanced/formatting)하는 기본 제공 지원을 통해 HTTP 콘텐츠 협상을 지원합니다. [사용자 지정 포맷터](xref:web-api/advanced/custom-formatters)를 작성하여 사용자 고유의 형식에 대한 지원을 추가할 수 있습니다.
 
-링크 생성을 사용하여 하이퍼미디어를 지원할 수 있습니다. 여러 웹 애플리케이션에서 Web API를 공유할 수 있도록 [CORS(원본 간 리소스 공유)](http://www.w3.org/TR/cors/)를 간단하게 지원할 수 있습니다.
+링크 생성을 사용하여 하이퍼미디어를 지원할 수 있습니다. 여러 웹 애플리케이션에서 Web API를 공유할 수 있도록 [CORS(원본 간 리소스 공유)](https://www.w3.org/TR/cors/)를 간단하게 지원할 수 있습니다.
 
 ### <a name="testability"></a>테스트 가능성
 

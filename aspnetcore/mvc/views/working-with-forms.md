@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/06/2019
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: 380d47d33706b3197dba3b9f7e3e1f186e27115f
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: a07bb4f539c8bd38b08402c598924e14c748921d
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64890818"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815231"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>ASP.NET Core 형식의 태그 도우미
 
@@ -602,7 +602,7 @@ HTTP POST `Index` 메서드는 선택 항목을 표시합니다.
 
 ### <a name="multiple-select"></a>다중 선택
 
-`asp-for` 특성에 지정된 속성이 `IEnumerable`인 경우 태그 선택 도우미는 [multiple = "multiple"](http://w3c.github.io/html-reference/select.html) 특성을 자동으로 생성합니다. 예를 들어, 다음과 같은 모델을 가정합니다.
+`asp-for` 특성에 지정된 속성이 `IEnumerable`인 경우 태그 선택 도우미는 [multiple = "multiple"](https://w3c.github.io/html-reference/select.html) 특성을 자동으로 생성합니다. 예를 들어, 다음과 같은 모델을 가정합니다.
 
 [!code-csharp[](../../mvc/views/working-with-forms/sample/final/ViewModels/CountryViewModelIEnumerable.cs?highlight=6)]
 

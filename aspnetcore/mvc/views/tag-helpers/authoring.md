@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/29/2019
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: d7a5656131189ffafb60a7b1db0b8d93a3787ae2
-ms.sourcegitcommit: 3ee6ee0051c3d2c8d47a58cb17eef1a84a4c46a0
+ms.openlocfilehash: c13e63725298975fc882aa45c4e75de53e1d66a8
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65621052"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815152"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>ASP.NET Core의 작성자 태그 도우미
 
@@ -193,7 +193,7 @@ FQN을 사용하여 뷰에 태그 도우미를 추가하려면 먼저 FQN(`Autho
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/WebsiteInformationTagHelper.cs)]
 
-   * 앞에서 언급했듯이, 태그 도우미는 파스칼식 C# 클래스 이름과 태그 도우미 속성을 [kebab case](http://wiki.c2.com/?KebabCase)로 변환합니다. 따라서 Razor에서 `WebsiteInformationTagHelper`를 사용하려면 `<website-information />`을 작성합니다.
+   * 앞에서 언급했듯이, 태그 도우미는 파스칼식 C# 클래스 이름과 태그 도우미 속성을 [kebab case](https://wiki.c2.com/?KebabCase)로 변환합니다. 따라서 Razor에서 `WebsiteInformationTagHelper`를 사용하려면 `<website-information />`을 작성합니다.
 
    * `[HtmlTargetElement]` 특성을 사용하여 대상 요소를 명시적으로 식별하지 않으므로 `website-information`의 기본값이 대상으로 지정됩니다. 다음 특성을 적용한 경우(kebab 대/소문자는 아니지만 클래스 이름 일치):
 
@@ -207,7 +207,7 @@ FQN을 사용하여 뷰에 태그 도우미를 추가하려면 먼저 FQN(`Autho
    [HtmlTargetElement("Website-Information")]
    ```
 
-   * 자체 닫음 요소에는 내용이 없습니다. 이 예에서 Razor 태그는 자체 닫음 태그를 사용하지만, 태그 도우미는 [section](http://www.w3.org/TR/html5/sections.html#the-section-element) 요소(자체 닫음이 아니며 `section` 요소 내부에 내용 작성 중)를 만들 것입니다. 따라서 `TagMode`를 `StartTagAndEndTag`로 설정하여 출력을 작성해야 합니다. 또는 `TagMode` 설정 줄을 주석 처리하고 닫는 태그로 태그를 작성할 수 있습니다. (예제 태그는 이 자습서의 뒷부분에 제공됩니다.)
+   * 자체 닫음 요소에는 내용이 없습니다. 이 예에서 Razor 태그는 자체 닫음 태그를 사용하지만, 태그 도우미는 [section](https://www.w3.org/TR/html5/sections.html#the-section-element) 요소(자체 닫음이 아니며 `section` 요소 내부에 내용 작성 중)를 만들 것입니다. 따라서 `TagMode`를 `StartTagAndEndTag`로 설정하여 출력을 작성해야 합니다. 또는 `TagMode` 설정 줄을 주석 처리하고 닫는 태그로 태그를 작성할 수 있습니다. (예제 태그는 이 자습서의 뒷부분에 제공됩니다.)
 
    * 다음 줄에서 `$`(달러 기호)는 [보간된 문자열](/dotnet/csharp/language-reference/keywords/interpolated-strings)을 사용합니다.
 

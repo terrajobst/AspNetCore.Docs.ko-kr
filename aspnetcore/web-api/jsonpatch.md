@@ -6,12 +6,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 03/24/2019
 uid: web-api/jsonpatch
-ms.openlocfilehash: 14710e6431a2a7ce60fa7f190bef184da85281a0
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 97264903d85dbb397e85fdbf7b070e2aaae74bc8
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64888418"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815548"
 ---
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>ASP.NET Core Web API의 JsonPatch
 
@@ -25,7 +25,7 @@ PUT 및 [PATCH](https://tools.ietf.org/html/rfc5789) 메서드는 기존 리소�
 
 ## <a name="json-patch"></a>JSON 패치
 
-[JSON 패치](https://tools.ietf.org/html/rfc6902)는 리소스에 적용할 업데이트를 지정하기 위한 형식입니다. JSON 패치 문서에는 작업 배열이 포함됩니다. 각 작업은 배열 요소 추가 또는 속성 값 바꾸기와 같은 특정 유형의 변경을 식별합니다.
+[JSON 패치](https://tools.ietf.org/html/rfc6902)는 리소스에 적용할 업데이트를 지정하기 위한 형식입니다. JSON 패치 문서에는 작업 배열이 포함됩니다.  각 작업은 배열 요소 추가 또는 속성 값 바꾸기와 같은 특정 유형의 변경을 식별합니다.
 
 예를 들어 다음 JSON 문서는 리소스, 리소스의 JSON 패치 문서 및 패치 작업을 적용한 결과를 나타냅니다.
 
@@ -71,7 +71,7 @@ JSON 패치 문서를 리소스에 적용하여 변경된 내용은 원자성입
 
 ## <a name="path-syntax"></a>경로 구문
 
-작업 개체의 [path](http://tools.ietf.org/html/rfc6901) 속성에서 수준 사이에는 슬래시가 있습니다. 예를 들어, `"/address/zipCode"`을 입력합니다.
+작업 개체의 [path](https://tools.ietf.org/html/rfc6901) 속성에서 수준 사이에는 슬래시가 있습니다. 예를 들어, `"/address/zipCode"`을 입력합니다.
 
 0부터 시작하는 인덱스는 배열 요소를 지정하는 데 사용됩니다. `addresses` 배열의 첫 번째 요소는 `/addresses/0`에 있습니다. 배열 끝에 `add`(추가)하려면 인덱스 번호가 아닌 하이픈(-)을 사용합니다(`/addresses/-`).
 
@@ -221,6 +221,6 @@ API 컨트롤러에서 JSON 패치의 작업 메서드는 다음과 같습니다
 
 * [IETF RFC 5789 PATCH 메서드 사양](https://tools.ietf.org/html/rfc5789)
 * [IETF RFC 6902 JSON 패치 사양](https://tools.ietf.org/html/rfc6902)
-* [IETF RFC 6901 JSON 패치 경로 형식 사양](http://tools.ietf.org/html/rfc6901)
-* [JSON 패치 문서](http://jsonpatch.com/). JSON 패치 문서를 만들기 위한 리소스의 링크를 포함합니다.
+* [IETF RFC 6901 JSON 패치 경로 형식 사양](https://tools.ietf.org/html/rfc6901)
+* [JSON 패치 문서](https://jsonpatch.com/). JSON 패치 문서를 만들기 위한 리소스의 링크를 포함합니다.
 * [ASP.NET Core JSON 패치 소스 코드](https://github.com/aspnet/AspNetCore/tree/master/src/Features/JsonPatch/src)

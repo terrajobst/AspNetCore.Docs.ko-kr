@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: a65543f805b197031bd46ef1974d4d4a5018b2d1
-ms.sourcegitcommit: 3376f224b47a89acf329b2d2f9260046a372f924
+ms.openlocfilehash: f995f3f74da4910de518af875eb89349a8457573
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/10/2019
-ms.locfileid: "65516910"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67813707"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---data-model---5-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 데이터 모델 - 5/8
 
@@ -486,7 +486,7 @@ FK는 Null을 허용하지 않습니다. `CourseAssignment`에서 두 개의 FK(
 
 ## <a name="fluent-api-alternative-to-attributes"></a>특성에 대한 흐름 API 대안
 
-위의 코드에서 `OnModelCreating` 메서드는 *흐름 API*를 사용하여 EF Core 동작을 구성합니다. API는 종종 일련의 메서드 호출을 단일 명령문으로 함께 연결하여 사용되기 때문에 “흐름”이라고 부릅니다. [다음 코드](/ef/core/modeling/#methods-of-configuration)는 흐름 API의 예제입니다.
+위의 코드에서 `OnModelCreating` 메서드는 *흐름 API*를 사용하여 EF Core 동작을 구성합니다. API는 종종 일련의 메서드 호출을 단일 명령문으로 함께 연결하여 사용되기 때문에 “흐름”이라고 부릅니다. [다음 코드](/ef/core/modeling/#use-fluent-api-to-configure-a-model)는 흐름 API의 예제입니다.
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -512,7 +512,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 * EF Core 구성에만(예: `HasKey`)
 * 유효성 검사 및 EF Core 구성(예: `[StringLength(50)]`)
 
-특성과 흐름 API의 비교에 대한 자세한 내용은 [구성 메서드](/ef/core/modeling/#methods-of-configuration)를 참조하세요.
+특성과 흐름 API의 비교에 대한 자세한 내용은 [구성 메서드](/ef/core/modeling/)를 참조하세요.
 
 ## <a name="entity-diagram-showing-relationships"></a>관계를 보여 주는 엔터티 다이어그램
 

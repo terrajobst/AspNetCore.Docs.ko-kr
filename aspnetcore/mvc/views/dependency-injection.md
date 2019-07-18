@@ -5,12 +5,12 @@ description: ASP.NET Core가 MVC 보기에 종속성 주입을 지원하는 방�
 ms.author: riande
 ms.date: 10/14/2016
 uid: mvc/views/dependency-injection
-ms.openlocfilehash: b411b164bfea81f82c5c9fc1052e0ecfe65f0bc2
-ms.sourcegitcommit: 3376f224b47a89acf329b2d2f9260046a372f924
+ms.openlocfilehash: 63feea5ddf286dd3e659f3a622cfb0f7451b9bba
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/10/2019
-ms.locfileid: "65517046"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815334"
 ---
 # <a name="dependency-injection-into-views-in-aspnet-core"></a>ASP.NET Core의 보기에 종속성 주입
 
@@ -106,4 +106,4 @@ ASP.NET Core는 보기에 [종속성 주입](xref:fundamentals/dependency-inject
 
 ## <a name="see-also"></a>참고 항목
 
-* Simon Timms 블로그: [Getting Lookup Data Into Your View](http://blog.simontimms.com/2015/06/09/getting-lookup-data-into-you-view/)(보기로 조회 데이터 가져오기)
+* Simon Timms 블로그: [Getting Lookup Data Into Your View](https://blog.simontimms.com/2015/06/09/getting-lookup-data-into-you-view/)(보기로 조회 데이터 가져오기)

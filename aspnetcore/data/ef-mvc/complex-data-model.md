@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/complex-data-model
-ms.openlocfilehash: 2776e3357941d0e7932882c39af121f85d037d62
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 8ef458108e60850d0d54e7b1e6472c5b92984ccc
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64887248"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67813536"
 ---
 # <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>자습서: 복잡한 데이터 모델 만들기 - ASP.NET MVC 및 EF Core 사용
 
@@ -397,7 +397,7 @@ public Student Student { get; set; }
 
 ## <a name="about-a-fluent-api-alternative"></a>흐름 API 대안 정보
 
-`DbContext` 클래스에서 `OnModelCreating` 메서드의 코드는 *흐름 API*를 사용하여 EF 동작을 구성합니다. API는 종종 [EF Core 설명서](/ef/core/modeling/#methods-of-configuration)의 이 예제와 같이 일련의 메서드 호출을 단일 명령문으로 연결하여 사용되기 때문에 “흐름”이라고 부릅니다.
+`DbContext` 클래스에서 `OnModelCreating` 메서드의 코드는 *흐름 API*를 사용하여 EF 동작을 구성합니다. API는 종종 [EF Core 설명서](/ef/core/modeling/#use-fluent-api-to-configure-a-model)의 이 예제와 같이 일련의 메서드 호출을 단일 명령문으로 연결하여 사용되기 때문에 “흐름”이라고 부릅니다.
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -412,7 +412,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 일부 개발자는 흐름 API를 단독으로 사용하는 것을 선호하므로 자신의 엔터티 클래스를 “정리”할 수 있습니다. 원하는 경우 특성과 흐름 API를 섞을 수 있으며, 흐름 API를 사용해야만 수행할 수 있는 몇 가지 사용자 지정이 있습니다. 하지만 일반적으로 이러한 두 가지 방법 중 하나를 선택하여 가능한 한 일관되게 사용하는 것이 좋습니다. 둘 다 사용하는 경우 충돌이 있을 때마다 흐름 API가 특성을 재정의합니다.
 
-특성 대 흐름 API의 비교에 관한 자세한 내용은 [구성 메서드](/ef/core/modeling/#methods-of-configuration)를 참조하세요.
+특성 대 흐름 API의 비교에 관한 자세한 내용은 [구성 메서드](/ef/core/modeling/)를 참조하세요.
 
 ## <a name="entity-diagram-showing-relationships"></a>관계를 보여 주는 엔터티 다이어그램
 

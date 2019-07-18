@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2019
 uid: host-and-deploy/iis/transform-webconfig
-ms.openlocfilehash: bd8cf7d8515e874eefd2c326727f56d0a4b502a7
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 58dee024f5b032d1ef13df02648727b6a07eac1f
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087074"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67813356"
 ---
 # <a name="transform-webconfig"></a>web.config 변환
 
@@ -182,5 +182,5 @@ dotnet publish /p:IsWebConfigTransformDisabled=true
 
 ## <a name="additional-resources"></a>추가 자료
 
-* [웹 애플리케이션 프로젝트 배포를 위한 Web.config 변환 구문](http://go.microsoft.com/fwlink/?LinkId=301874)
+* [웹 애플리케이션 프로젝트 배포를 위한 Web.config 변환 구문](https://go.microsoft.com/fwlink/?LinkId=301874)
 * [Visual Studio를 사용하여 웹 프로젝트 배포를 위한 Web.config 변환 구문](https://docs.microsoft.com/previous-versions/aspnet/dd465326(v=vs.110))

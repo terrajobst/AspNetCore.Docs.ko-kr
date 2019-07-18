@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 03/18/2019
 uid: mvc/views/tag-helpers/intro
-ms.openlocfilehash: 11d2914b5797735fb6a262a31bdb49f58391579f
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 870ce2eb28f384b380cc1178842325dc28199f09
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64884058"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67814985"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>ASP.NET Core의 태그 도우미
 
@@ -19,7 +19,7 @@ ms.locfileid: "64884058"
 
 ## <a name="what-are-tag-helpers"></a>태그 도우미란?
 
-태그 도우미를 사용하면 서버 쪽 코드를 Razor 파일에서 HTML 요소를 만들고 렌더링하는 데 사용할 수 있습니다. 예를 들어 기본 제공 `ImageTagHelper`는 이미지 이름에 버전 번호를 추가할 수 있습니다. 이미지가 변경될 때마다 서버에서 이미지에 대한 고유 버전을 새로 생성하므로 클라이언트는 항상 최신 이미지를 가져옵니다(오래된 캐시된 이미지 대신). 양식 작성, 링크, 자산 로드 등의 일반적인 작업을 위한 여러 가지 기본 제공 태그 도우미가 있으며, 공용 GitHub 리포지토리 및 NuGet 패키지로도 사용할 수 있습니다. 태그 도우미는 C#에서 작성되며 요소 이름, 특성 이름 또는 부모 태그 기반의 HTML 요소를 대상으로 합니다. 예를 들어 기본 제공 `LabelTagHelper`는 `LabelTagHelper` 특성이 적용될 때 HTML `<label>` 요소를 대상으로 할 수 있습니다. [HTML 도우미](http://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers)에 익숙한 경우 태그 도우미를 사용하면 Razor 보기에서 HTML과 C# 간의 명시적 전환이 줄어듭니다. 많은 경우 HTML 도우미는 특정 태그 도우미에 대한 대체 방법을 제공하지만, 태그 도우미는 HTML 도우미를 대체하지 않으며 각 HTML 도우미에 대한 태그 도우미가 없다는 사실을 인지하는 것이 중요합니다. [HTML 도우미와 비교한 태그 도우미](#tag-helpers-compared-to-html-helpers)를 보시면 차이점이 자세히 설명되어 있습니다.
+태그 도우미를 사용하면 서버 쪽 코드를 Razor 파일에서 HTML 요소를 만들고 렌더링하는 데 사용할 수 있습니다. 예를 들어 기본 제공 `ImageTagHelper`는 이미지 이름에 버전 번호를 추가할 수 있습니다. 이미지가 변경될 때마다 서버에서 이미지에 대한 고유 버전을 새로 생성하므로 클라이언트는 항상 최신 이미지를 가져옵니다(오래된 캐시된 이미지 대신). 양식 작성, 링크, 자산 로드 등의 일반적인 작업을 위한 여러 가지 기본 제공 태그 도우미가 있으며, 공용 GitHub 리포지토리 및 NuGet 패키지로도 사용할 수 있습니다. 태그 도우미는 C#에서 작성되며 요소 이름, 특성 이름 또는 부모 태그 기반의 HTML 요소를 대상으로 합니다. 예를 들어 기본 제공 `LabelTagHelper`는 `LabelTagHelper` 특성이 적용될 때 HTML `<label>` 요소를 대상으로 할 수 있습니다. [HTML 도우미](https://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers)에 익숙한 경우 태그 도우미를 사용하면 Razor 보기에서 HTML과 C# 간의 명시적 전환이 줄어듭니다. 많은 경우 HTML 도우미는 특정 태그 도우미에 대한 대체 방법을 제공하지만, 태그 도우미는 HTML 도우미를 대체하지 않으며 각 HTML 도우미에 대한 태그 도우미가 없다는 사실을 인지하는 것이 중요합니다. [HTML 도우미와 비교한 태그 도우미](#tag-helpers-compared-to-html-helpers)를 보시면 차이점이 자세히 설명되어 있습니다.
 
 ## <a name="what-tag-helpers-provide"></a>태그 도우미가 제공하는 기능
 
@@ -175,7 +175,7 @@ IntelliSense는 페이지에서 모델에 사용할 수 있는 속성과 메서�
 
 ## <a name="tag-helpers-compared-to-html-helpers"></a>HTML 도우미와 비교한 태그 도우미
 
-태그 도우미는 Razor 보기의 HTML 요소에 연결되고, [HTML 도우미](http://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers)는 HTML을 사용하여 Razor 보기에 배치된 메서드로 호출됩니다. CSS 클래스 "caption"을 사용하여 HTML 레이블을 만드는 다음 Razor 태그를 고려해 보세요.
+태그 도우미는 Razor 보기의 HTML 요소에 연결되고, [HTML 도우미](https://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers)는 HTML을 사용하여 Razor 보기에 배치된 메서드로 호출됩니다. CSS 클래스 "caption"을 사용하여 HTML 레이블을 만드는 다음 Razor 태그를 고려해 보세요.
 
 ```cshtml
 @Html.Label("FirstName", "First Name:", new {@class="caption"})
@@ -255,4 +255,4 @@ Visual Studio 편집기를 사용하면 레지스터 양식의 태그 도우미 
 
 * [태그 도우미 작성](xref:mvc/views/tag-helpers/authoring)
 * [양식 사용](xref:mvc/views/working-with-forms)
-* [GitHub의 TagHelperSamples](https://github.com/dpaquette/TagHelperSamples)에는 [부트스트랩](http://getbootstrap.com/)을 사용하기 위한 태그 도우미 샘플이 포함되어 있습니다.
+* [GitHub의 TagHelperSamples](https://github.com/dpaquette/TagHelperSamples)에는 [부트스트랩](https://getbootstrap.com/)을 사용하기 위한 태그 도우미 샘플이 포함되어 있습니다.

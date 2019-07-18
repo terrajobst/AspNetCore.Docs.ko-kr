@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core에서 보기 구성 요소가 사용되는 방법 및 이를 앱에 추가하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 5/14/2019
+ms.date: 05/14/2019
 uid: mvc/views/view-components
-ms.openlocfilehash: 17fd7aa977868d522df9f27e0c23d07b016bfb7c
-ms.sourcegitcommit: 3ee6ee0051c3d2c8d47a58cb17eef1a84a4c46a0
+ms.openlocfilehash: ff84abf9e0c682d22196a0a0f5f377990c80a6ae
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65621080"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815272"
 ---
 # <a name="view-components-in-aspnet-core"></a>ASP.NET Core의 보기 구성 요소
 
@@ -184,7 +184,7 @@ ASP.NET Core 1.1 이상에서는 뷰 구성 요소를 [태그 도우미](xref:mv
 
   [!code-cshtml[](view-components/sample/ViewCompFinal/Views/Shared/Components/PriorityList/Default1.cshtml)]
 
-   Razor 뷰는 `TodoItem` 목록을 가져와 표시합니다. 뷰 구성 요소 `InvokeAsync` 메서드가 뷰의 이름을 전달하지 않은 경우(샘플에서처럼) 규칙에 따라 뷰 이름으로 *Default*가 사용됩니다. 자습서의 뒷부분에서 뷰 이름을 전달하는 방법을 보여 줍니다. 특정 컨트롤러에 대한 기본 스타일 지정을 재정의하려면 컨트롤러 관련 뷰 폴더에 뷰를 추가합니다(예: *Views/ToDo/Components/PriorityList/Default.cshtml)*.
+   Razor 뷰는 `TodoItem` 목록을 가져와 표시합니다. 뷰 구성 요소 `InvokeAsync` 메서드가 뷰의 이름을 전달하지 않은 경우(샘플에서처럼) 규칙에 따라 뷰 이름으로 *Default*가 사용됩니다. 자습서의 뒷부분에서 뷰 이름을 전달하는 방법을 보여 줍니다. 특정 컨트롤러에 대한 기본 스타일 지정을 재정의하려면 컨트롤러 관련 뷰 폴더에 뷰를 추가합니다(예: *Views/ToDo/Components/PriorityList/Default.cshtml)* .
 
     뷰 구성 요소가 컨트롤러에 관한 것이면 컨트롤러 관련 폴더에 추가할 수 있습니다(*Views/ToDo/Components/PriorityList/Default.cshtml*).
 

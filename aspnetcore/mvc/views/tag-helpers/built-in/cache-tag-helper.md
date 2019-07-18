@@ -6,16 +6,16 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
-ms.openlocfilehash: fb69584f6e9d4756e175bbd6f3deb1f413b80fc5
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 0273a9805dd5db5450f57dcf3fd4d952308df074
+ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64890468"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67856208"
 ---
 # <a name="cache-tag-helper-in-aspnet-core-mvc"></a>ASP.NET Core MVC의 캐시 태그 도우미
 
-작성자: [Peter Kellner](http://peterkellner.net) 및 [Luke Latham](https://github.com/guardrex) 
+작성자: [Peter Kellner](https://peterkellner.net) 및 [Luke Latham](https://github.com/guardrex) 
 
 캐시 태그 도우미는 콘텐츠를 내부 ASP.NET Core 캐시 공급자에 캐시하여 ASP.NET Core 앱 성능을 개선하는 기능을 제공합니다.
 
@@ -49,7 +49,7 @@ ms.locfileid: "64890468"
 
 ### <a name="expires-on"></a>expires-on
 
-| 특성 유형   | 예제                            |
+| 특성 유형   | 예                            |
 | ---------------- | ---------------------------------- |
 | `DateTimeOffset` | `@new DateTime(2025,1,29,17,02,0)` |
 
@@ -65,7 +65,7 @@ ms.locfileid: "64890468"
 
 ### <a name="expires-after"></a>expires-after
 
-| 특성 유형 | 예제                      | 기본값    |
+| 특성 유형 | 예                      | 기본값    |
 | -------------- | ---------------------------- | ---------- |
 | `TimeSpan`     | `@TimeSpan.FromSeconds(120)` | 20분 |
 
@@ -83,7 +83,7 @@ Razor 보기 엔진은 기본 `expires-after` 값을 20분으로 설정합니다
 
 ### <a name="expires-sliding"></a>expires-sliding
 
-| 특성 유형 | 예제                     |
+| 특성 유형 | 예                     |
 | -------------- | --------------------------- |
 | `TimeSpan`     | `@TimeSpan.FromSeconds(60)` |
 
@@ -191,7 +191,7 @@ routes.MapRoute(
 
 ### <a name="vary-by"></a>vary-by
 
-| 특성 유형 | 예제  |
+| 특성 유형 | 예  |
 | -------------- | -------- |
 | 문자열         | `@Model` |
 

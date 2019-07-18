@@ -5,14 +5,14 @@ description: Azure App Service 및 IIS에서 ASP.NET Core 앱을 호스팅할 �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/12/2019
+ms.date: 07/10/2019
 uid: host-and-deploy/azure-iis-errors-reference
-ms.openlocfilehash: 0191460f8c3dab98e6f977a29eacf0396b6789d8
-ms.sourcegitcommit: b4ef2b00f3e1eb287138f8b43c811cb35a100d3e
+ms.openlocfilehash: 3030bc57be113d9034123c96403742442b9240bb
+ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/21/2019
-ms.locfileid: "65970066"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68308094"
 ---
 # <a name="common-errors-reference-for-azure-app-service-and-iis-with-aspnet-core"></a>ASP.NET Core를 사용하는 Azure App Service 및 IIS에 대한 일반적인 오류 참조
 
@@ -24,12 +24,12 @@ Azure App Service 및 IIS에서 ASP.NET Core 앱을 호스팅할 때 일반적�
 
 * 브라우저 동작(상태 코드 및 오류 메시지)
 * 애플리케이션 이벤트 로그 항목
-  * Azure App Service &ndash;는 <xref:host-and-deploy/azure-apps/troubleshoot>을 참조하세요.
+  * Azure App Service &ndash;는 <xref:test/troubleshoot-azure-iis>을 참조하세요.
   * IIS
     1. **Windows** 메뉴에서 **시작**을 선택하고, *이벤트 뷰어*를 입력하고, **Enter**를 누릅니다.
     1. **이벤트 뷰어**가 열리면 사이드바에서 **Windows 로그** > **애플리케이션**을 확장합니다.
 * ASP.NET Core 모듈 stdout 및 디버그 로그 항목
-  * Azure App Service &ndash;는 <xref:host-and-deploy/azure-apps/troubleshoot>을 참조하세요.
+  * Azure App Service &ndash;는 <xref:test/troubleshoot-azure-iis>을 참조하세요.
   * IIS &ndash;는 ASP.NET Core 모듈 항목의 [로그 생성 및 리디렉션](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection) 및 [향상된 진단 로그](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) 섹션의 지침을 따릅니다.
 
 오류 정보를 다음 일반 오류와 비교합니다. 일치하는 항목이 발견되면 문제 해결 권장 사항을 따릅니다.
@@ -60,7 +60,7 @@ OS를 업그레이드하는 동안 **C:\Windows\SysWOW64\inetsrv** 디렉터리�
 
 ## <a name="missing-site-extension-32-bit-x86-and-64-bit-x64-site-extensions-installed-or-wrong-process-bitness-set"></a>사이트 확장 누락, 32비트(x86) 및 64비트(x64) 사이트 확장이 설치됨 또는 잘못된 프로세스 비트 수가 설정됨
 
-Azure App Services에서 호스트하는 앱에 적용됩니다.
+Azure App Services에서 호스트하는 앱에 적용됩니다. 
 
 * **브라우저:** HTTP 오류 500.0 - ANCM In-Process 처리기 로드 실패
 
@@ -85,7 +85,7 @@ Azure App Services에서 호스트하는 앱에 적용됩니다.
 
 * 미리 보기 런타임에서 앱을 실행 중이며 32비트(x86) 및 64비트(x64) [사이트 확장](xref:host-and-deploy/azure-apps/index#install-the-preview-site-extension)이 둘 다 설치된 경우 앱의 비트 수와 일치하지 않는 사이트 확장을 제거합니다. 사이트 확장을 제거한 후 앱을 다시 시작합니다. 앱이 다시 시작될 때까지 몇 초간 기다립니다.
 
-* 미리 보기 런타임에서 앱을 실행 중이며 사이트 확장의 비트 수가 앱의 비트 수와 일치하는 경우 미리 보기 사이트 확장의 ‘런타임 버전’이 앱의 런타임 버전과 일치하는지 확인합니다.
+* 미리 보기 런타임에서 앱을 실행 중이며 사이트 확장의 비트 수가 앱의 비트 수와 일치하는 경우 미리 보기 사이트 확장의 ‘런타임 버전’이 앱의 런타임 버전과 일치하는지 확인합니다. 
 
 * **애플리케이션 설정**에 있는 앱의 **플랫폼**이 앱의 비트 수와 일치하는지 확인합니다.
 
@@ -121,7 +121,7 @@ x86 프레임워크 종속 배포(`<PlatformTarget>x86</PlatformTarget>`)의 경
 
 문제 해결:
 
-* 앱이 Kestrel에서 로컬로 실행되는지 확인합니다. 프로세스 오류는 앱 내의 문제 때문일 수 있습니다. 자세한 내용은 [문제 해결(IIS)](xref:host-and-deploy/iis/troubleshoot) 또는 [문제 해결(Azure App Service)](xref:host-and-deploy/azure-apps/troubleshoot)을 참조하세요.
+* 앱이 Kestrel에서 로컬로 실행되는지 확인합니다. 프로세스 오류는 앱 내의 문제 때문일 수 있습니다. 자세한 내용은 <xref:test/troubleshoot-azure-iis>을 참조하세요.
 
 * Azure 앱 배포에서 앱을 업그레이드하고 새 어셈블리를 배포할 때 이 예외가 발생하면 이전 배포에서 모든 파일을 수동으로 삭제합니다. 호환되지 않는 어셈블리가 오랫동안 남아 있으면 업그레이드된 응용 프로그램을 배포할 때 `System.BadImageFormatException` 예외가 발생할 수 있습니다.
 
@@ -143,7 +143,7 @@ x86 프레임워크 종속 배포(`<PlatformTarget>x86</PlatformTarget>`)의 경
 
 * 사용 중인 앱에 대해 올바른 URI 엔드포인트를 확인합니다. 바인딩을 확인합니다.
 
-* IIS 웹 사이트가 ‘중지됨’ 상태가 아닌지 확인합니다.
+* IIS 웹 사이트가 ‘중지됨’ 상태가 아닌지 확인합니다. 
 
 ## <a name="corewebengine-or-w3svc-server-features-disabled"></a>CoreWebEngine 또는 W3SVC 서버 기능이 사용되지 않음
 
@@ -231,7 +231,7 @@ IIS 웹 사이트 **기본 설정**과 실제 앱 폴더를 확인합니다. 앱
 
 문제 해결:
 
-* 앱이 Kestrel에서 로컬로 실행되는지 확인합니다. 프로세스 오류는 앱 내의 문제 때문일 수 있습니다. 자세한 내용은 [문제 해결(IIS)](xref:host-and-deploy/iis/troubleshoot) 또는 [문제 해결(Azure App Service)](xref:host-and-deploy/azure-apps/troubleshoot)을 참조하세요.
+* 앱이 Kestrel에서 로컬로 실행되는지 확인합니다. 프로세스 오류는 앱 내의 문제 때문일 수 있습니다. 자세한 내용은 <xref:test/troubleshoot-azure-iis>을 참조하세요.
 
 * *web.config*의 `<aspNetCore>` 요소에서 *processPath* 특성을 확인하여 FDD(프레임워크 종속 배포)에 대한 `dotnet`인지 또는 [SCD(자체 포함 배포)](/dotnet/core/deploying/#self-contained-deployments-scd)에 대한 `.\{ASSEMBLY}.exe`인지 확인합니다.
 
@@ -249,7 +249,7 @@ IIS 웹 사이트 **기본 설정**과 실제 앱 폴더를 확인합니다. 앱
 
   특정 런타임이 필요한 경우 [.NET Download Archives](https://dotnet.microsoft.com/download/archives)에서 런타임을 다운로드하여 시스템에 설치합니다. 설치를 완료하려면 시스템을 다시 시작하거나 명령 프롬프트에서 **net stop was /y**에 이어 **net start w3svc**를 실행하여 IIS를 다시 시작합니다.
 
-* FDD를 배포했을 수 있지만 ‘Microsoft Visual C++ 2015 재배포 가능 패키지(x64)’가 시스템에 설치되어 있지 않습니다. [Microsoft 다운로드 센터](https://www.microsoft.com/download/details.aspx?id=53840)에서 설치 관리자를 다운로드합니다.
+* FDD를 배포했을 수 있지만 ‘Microsoft Visual C++ 2015 재배포 가능 패키지(x64)’가 시스템에 설치되어 있지 않습니다.  [Microsoft 다운로드 센터](https://www.microsoft.com/download/details.aspx?id=53840)에서 설치 관리자를 다운로드합니다.
 
 ## <a name="incorrect-arguments-of-aspnetcore-element"></a>\<aspNetCore> 요소의 잘못된 인수
 
@@ -259,7 +259,7 @@ IIS 웹 사이트 **기본 설정**과 실제 앱 폴더를 확인합니다. 앱
 
 * **애플리케이션 로그:** hostfxr를 호출하여 inprocess 요청 처리기를 찾는 데 실패했으며 네이티브 종속성을 찾지 못했습니다. 이는 앱이 잘못 구성되었음을 의미할 가능성이 높으며, 앱이 대상으로 하고 머신에 설치되어 있는 Microsoft.NetCore.App 및 Microsoft.AspNetCore.App 버전을 확인하세요. inprocess 요청 처리기를 찾을 수 없습니다. hostfxr 호출에서 캡처된 출력: dotnet SDK 명령을 실행하시겠습니까? 다음 위치에서 dotnet SDK를 설치하세요. https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409 애플리케이션 '/LM/W3SVC/3/ROOT'를 시작하지 못했습니다. 오류 코드 '0x8000ffff'.
 
-* **ASP.NET Core 모듈 stdout 로그:** dotnet SDK 명령을 실행하시겠습니까? [https://go.microsoft.com/fwlink/?LinkID=798306&amp;clcid=0x409](https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409) 에서 dotnet SDK를 설치하세요.
+* **ASP.NET Core 모듈 stdout 로그:** dotnet SDK 명령을 실행하시겠습니까? [https://go.microsoft.com/fwlink/?LinkID=798306&amp;clcid=0x409](https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409 ) 에서 dotnet SDK를 설치하세요.
 
 * **ASP.NET Core 모듈 디버그 로그:** hostfxr를 호출하여 inprocess 요청 처리기를 찾는 데 실패했으며 네이티브 종속성을 찾지 못했습니다. 이는 앱이 잘못 구성되었음을 의미할 가능성이 높으며, 앱이 대상으로 하고 머신에 설치되어 있는 Microsoft.NetCore.App 및 Microsoft.AspNetCore.App 버전을 확인하세요. 실패한 HRESULT가 반환되었습니다. 0x8000ffff inprocess 요청 처리기를 찾을 수 없습니다. hostfxr 호출에서 캡처된 출력: dotnet SDK 명령을 실행하시겠습니까? 다음 위치에서 dotnet SDK를 설치하세요. https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409 실패한 HRESULT가 반환되었습니다. 0x8000ffff
 
@@ -277,7 +277,7 @@ IIS 웹 사이트 **기본 설정**과 실제 앱 폴더를 확인합니다. 앱
 
 문제 해결:
 
-* 앱이 Kestrel에서 로컬로 실행되는지 확인합니다. 프로세스 오류는 앱 내의 문제 때문일 수 있습니다. 자세한 내용은 [문제 해결(IIS)](xref:host-and-deploy/iis/troubleshoot) 또는 [문제 해결(Azure App Service)](xref:host-and-deploy/azure-apps/troubleshoot)을 참조하세요.
+* 앱이 Kestrel에서 로컬로 실행되는지 확인합니다. 프로세스 오류는 앱 내의 문제 때문일 수 있습니다. 자세한 내용은 <xref:test/troubleshoot-azure-iis>을 참조하세요.
 
 * *web.config*의 `<aspNetCore>` 요소에서 *인수* 특성을 검사하여 (a) FDD(프레임워크 종속 배포)에 대한 `.\{ASSEMBLY}.dll`인지, 또는 (b) 없는 경우 빈 문자열(`arguments=""`)이거나 SCD(자체 포함 배포)에 대한 앱의 인수(`arguments="{ARGUMENT_1}, {ARGUMENT_2}, ... {ARGUMENT_X}"`) 목록인지 확인합니다.
 
@@ -317,7 +317,7 @@ FDD(프레임워크 종속 배포)의 경우 시스템에 올바른 런타임이
 
 문제 해결:
 
-애플리케이션 풀이 ‘중지됨’ 상태가 아닌지 확인합니다.
+애플리케이션 풀이 ‘중지됨’ 상태가 아닌지 확인합니다. 
 
 ## <a name="sub-application-includes-a-handlers-section"></a>하위 애플리케이션에 \<handlers> 섹션이 포함되어 있음
 
@@ -407,6 +407,5 @@ FDD(프레임워크 종속 배포)의 경우 시스템에 올바른 런타임이
 
 자세한 내용은 다음 항목을 참조하세요.
 
-* <xref:host-and-deploy/iis/troubleshoot>
-* <xref:host-and-deploy/azure-apps/troubleshoot>
+* <xref:test/troubleshoot-azure-iis>
 * <xref:test/troubleshoot>

@@ -5,12 +5,12 @@ description: ASP.NET Core의 웹 API에서 사용자 지정 포맷터를 만들�
 ms.author: tdykstra
 ms.date: 02/08/2017
 uid: web-api/advanced/custom-formatters
-ms.openlocfilehash: ece60b47f345235a084faacf8e59b792856614d2
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 03456f0a20cf1849bcd29101fda951f81edda31c
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64887058"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67814830"
 ---
 # <a name="custom-formatters-in-aspnet-core-web-api"></a>ASP.NET Core Web API에서 포맷터 사용자 지정
 
@@ -82,7 +82,7 @@ ASP.NET Core MVC는 JSON 또는 XML을 사용하여 웹 API에서 데이터 교�
 * 런타임 시 반환될 수 있는 파생 클래스가 있습니다.
 * 런타임 시 작업에서 반환하는 파생 클래스를 알아야 합니다.
 
-예를 들어 작업 메서드 서명이 `Person` 형식을 반환한다고 가정하지만 `Person`에서 파생된 `Student` 또는 `Instructor` 형식을 반환할 수 있습니다. 포맷터에서 `Student` 개체만을 처리하려는 경우 `CanWriteResult` 메서드에 제공된 컨텍스트 개체에서 [개체](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformattercanwritecontext#Microsoft_AspNetCore_Mvc_Formatters_OutputFormatterCanWriteContext_Object) 형식을 확인합니다. 작업 메서드가 `IActionResult`를 반환할 때 반드시 `CanWriteResult`를 사용해야 하는 것은 아닙니다. 이 경우에 `CanWriteType` 메서드는 런타임 형식을 수신합니다.
+예를 들어 작업 메서드 서명이 `Person` 형식을 반환한다고 가정하지만 `Person`에서 파생된 `Student` 또는 `Instructor` 형식을 반환할 수 있습니다. 포맷터에서 `Student` 개체만을 처리하려는 경우 `CanWriteResult` 메서드에 제공된 컨텍스트 개체에서 [개체](/dotnet/api/microsoft.aspnetcore.mvc.formatters.outputformattercanwritecontext.object#Microsoft_AspNetCore_Mvc_Formatters_OutputFormatterCanWriteContext_Object) 형식을 확인합니다. 작업 메서드가 `IActionResult`를 반환할 때 반드시 `CanWriteResult`를 사용해야 하는 것은 아닙니다. 이 경우에 `CanWriteType` 메서드는 런타임 형식을 수신합니다.
 
 <a id="read-write"></a>
 

@@ -6,16 +6,16 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 uid: mvc/views/tag-helpers/builtin-th/environment-tag-helper
-ms.openlocfilehash: 379f58ed37329f047d53adf1dcfdfd2ad6a6ca4e
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: e2e038fe69da696b67f7aef61795e23dc8512fdf
+ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64887678"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67856127"
 ---
 # <a name="environment-tag-helper-in-aspnet-core"></a>ASP.NET Core의 Environment 태그 도우미
 
-작성자: [Peter Kellner](http://peterkellner.net), [Hisham Bin Ateya](https://twitter.com/hishambinateya) 및 [Luke Latham](https://github.com/guardrex)
+작성자: [Peter Kellner](https://peterkellner.net), [Hisham Bin Ateya](https://twitter.com/hishambinateya) 및 [Luke Latham](https://github.com/guardrex)
 
 Environment 태그 도우미는 현재 [호스팅 환경](xref:fundamentals/environments)에 기반하여 포함된 콘텐츠를 조건부로 렌더링합니다. 환경 태그 도우미의 단일 특성 `names`는 쉼표로 구분된 환경 이름 목록입니다. 제공된 환경 이름 중에 현재 환경과 일치하는 이름이 하나라도 있으면 포함된 콘텐츠가 렌더링됩니다.
 

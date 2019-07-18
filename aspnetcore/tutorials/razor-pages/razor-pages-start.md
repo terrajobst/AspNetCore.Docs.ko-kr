@@ -3,14 +3,14 @@ title: '자습서: ASP.NET Core에서 Razor 페이지 시작'
 author: rick-anderson
 description: 이 자습서 시리즈는 ASP.NET Core에서 Razor Pages를 사용하는 방법을 보여 줍니다. 모델을 만들고, Razor Pages에 대한 코드를 생성하고, Entity Framework Core 및 SQL Server를 데이터 액세스에 사용하고, 검색 기능을 추가하고, 입력 유효성 검사를 추가하고, 마이그레이션을 사용하여 모델을 업데이트하는 방법을 알아봅니다.
 ms.author: riande
-ms.date: 6/3/2019
+ms.date: 06/03/2019
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 207f5a5ab5e21d8cd8f6cf2f63641b94d8077ae5
-ms.sourcegitcommit: d6e51c60439f03a8992bda70cc982ddb15d3f100
+ms.openlocfilehash: 7e228c99b4d55c14cea9c915cf06a7fbbbd5af44
+ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67555800"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67855731"
 ---
 # <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>자습서: ASP.NET Core에서 Razor 페이지 시작
 

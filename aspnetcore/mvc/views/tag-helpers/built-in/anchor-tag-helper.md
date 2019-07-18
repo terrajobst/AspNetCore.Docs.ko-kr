@@ -4,18 +4,18 @@ author: pkellner
 description: ASP.NET Core 앵커 태그 도우미 특성 및 HTML 앵커 태그의 동작을 확장할 때 각 특성이 담당하는 역할을 확인합니다.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 4/18/2019
+ms.date: 04/18/2019
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: de45c99194d4825c1e404aa193b0f076ba659748
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 44fc4ff6334e33630974181021aa1a6880a89917
+ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64883428"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67856218"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>ASP.NET Core의 앵커 태그 도우미
 
-작성자: [Peter Kellner](http://peterkellner.net) 및 [Scott Addie](https://github.com/scottaddie)
+작성자: [Peter Kellner](https://peterkellner.net) 및 [Scott Addie](https://github.com/scottaddie)
 
 [앵커 태그 도우미](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper)는 새 특성을 추가하여 표준 HTML 앵커(`<a ... ></a>`) 태그를 향상시킵니다. 규칙에 따라 해당 특성들의 이름은 `asp-` 접두사로 시작됩니다. 렌더링 된 앵커 요소의 `href` 특성값은 `asp-` 특성값에 따라 결정됩니다.
 
@@ -23,7 +23,7 @@ ms.locfileid: "64883428"
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-이 문서의 예제 전반에서는 다음의 *SpeakerController*가 사용됩니다. 
+이 문서의 예제 전반에서는 다음의 *SpeakerController*가 사용됩니다.
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Controllers/SpeakerController.cs?name=snippet_SpeakerController)]
 
@@ -41,7 +41,7 @@ ms.locfileid: "64883428"
 <a href="/Speaker">All Speakers</a>
 ```
 
-`asp-controller` 특성이 지정되고 `asp-action`이 지정되지 않았을 경우, 기본 `asp-action` 값은 현재 실행 중인 뷰와 연결된 컨트롤러 액션입니다. *HomeController*의 *Index* 뷰(*/Home*)에서 위의 태그에서 `asp-action`을 생략한 앵커 태그 도우미를 사용할 경우, 생성되는 HTML은 다음과 같습니다.
+`asp-controller` 특성이 지정되고 `asp-action`이 지정되지 않았을 경우, 기본 `asp-action` 값은 현재 실행 중인 뷰와 연결된 컨트롤러 액션입니다. *HomeController*의 *Index* 뷰( */Home*)에서 위의 태그에서 `asp-action`을 생략한 앵커 태그 도우미를 사용할 경우, 생성되는 HTML은 다음과 같습니다.
 
 ```html
 <a href="/Home">All Speakers</a>
@@ -61,17 +61,17 @@ ms.locfileid: "64883428"
 
 `asp-controller` 특성을 지정하지 않으면 현재 뷰를 실행 중인 뷰를 호출하는 기본 컨트롤러가 사용됩니다.
 
-`asp-action` 특성값이 `Index`면 URL에 아무런 액션도 추가되지 않으며 기본 `Index` 액션이 호출됩니다. 지정된 (또는 기본값으로 설정된) 액션은 `asp-controller`에서 참조되는 컨트롤러에 존재해야 합니다. 
+`asp-action` 특성값이 `Index`면 URL에 아무런 액션도 추가되지 않으며 기본 `Index` 액션이 호출됩니다. 지정된 (또는 기본값으로 설정된) 액션은 `asp-controller`에서 참조되는 컨트롤러에 존재해야 합니다.
 
 ### <a name="asp-route-value"></a>asp-route-{value}
 
-[asp-route-{value}](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) 특성을 사용하면 와일드카드 경로 접두사를 사용할 수 있습니다. `{value}` 자리 표시자에 위치하는 모든 값은 잠재적인 경로 매개 변수로 해석됩니다.  기본 경로가 발견되지 않으면 이 경로 접두사는 생성되는 `href` 특성에 요청 매개 변수 및 값으로 추가됩니다. 그렇지 않으면 경로 템플릿에서 이 경로 접두사가 대체됩니다.
+[asp-route-{value}](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) 특성을 사용하면 와일드카드 경로 접두사를 사용할 수 있습니다. `{value}` 자리 표시자에 위치하는 모든 값은 잠재적인 경로 매개 변수로 해석됩니다. 기본 경로가 발견되지 않으면 이 경로 접두사는 생성되는 `href` 특성에 요청 매개 변수 및 값으로 추가됩니다. 그렇지 않으면 경로 템플릿에서 이 경로 접두사가 대체됩니다.
 
 다음 컨트롤러 액션을 살펴보시기 바랍니다.
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Controllers/BuiltInTagController.cs?name=snippet_AnchorTagHelperAction)]
 
-*Startup.Configure*에 정의된 기본 경로 템플릿을 사용할 경우: 
+*Startup.Configure*에 정의된 기본 경로 템플릿을 사용할 경우:
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_UseMvc&highlight=8-10)]
 
@@ -133,7 +133,7 @@ ms.locfileid: "64883428"
 <a href="/Speaker/Evaluations">Speaker Evaluations</a>
 ```
 
-`asp-route` 와 `asp-controller` 또는 `asp-action` 을 동시에 지정하면 기대하는 것과 다른 경로가 생성될 수 있습니다. 경로 충돌을 방지하려면 `asp-route`를 `asp-controller` 및 `asp-action` 특성과 함께 사용하지 않아야 합니다. 
+`asp-route` 와 `asp-controller` 또는 `asp-action` 을 동시에 지정하면 기대하는 것과 다른 경로가 생성될 수 있습니다. 경로 충돌을 방지하려면 `asp-route`를 `asp-controller` 및 `asp-action` 특성과 함께 사용하지 않아야 합니다.
 
 ## <a name="asp-all-route-data"></a>asp-all-route-data
 

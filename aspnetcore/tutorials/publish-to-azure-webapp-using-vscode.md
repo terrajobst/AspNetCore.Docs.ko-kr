@@ -4,14 +4,14 @@ author: ricardoserradas
 description: Visual Studio Code를 사용하여 Azure App Service에 ASP.NET Core 앱을 게시하는 방법 알아보기
 ms.author: riserrad
 ms.custom: mvc
-ms.date: 04/16/2019
+ms.date: 07/10/2019
 uid: tutorials/publish-to-azure-webapp-using-vscode
-ms.openlocfilehash: 2eaae62af97927fbe22e7f5d4fadfc2265c5a5cd
-ms.sourcegitcommit: 0b9e767a09beaaaa4301915cdda9ef69daaf3ff2
+ms.openlocfilehash: 97e8fcb1e5470245c80fad0875abb5fdace7853c
+ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67538745"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68308325"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio-code"></a>Visual Studio Code를 사용하여 Azure에 ASP.NET Core 앱 게시
 
@@ -19,7 +19,7 @@ ms.locfileid: "67538745"
 
 [!INCLUDE [Azure App Service Preview Notice](../includes/azure-apps-preview-notice.md)]
 
-App Service 배포 문제를 해결하려면 <xref:host-and-deploy/azure-apps/troubleshoot>을 참조하세요.
+App Service 배포 문제를 해결하려면 <xref:test/troubleshoot-azure-iis>을 참조하세요.
 
 ## <a name="intro"></a>소개
 

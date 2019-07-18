@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 05/29/2019
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 7628565d8646c0a057e28aa54dc9ce9198750c15
-ms.sourcegitcommit: 9ae1fd11f39b0a72b2ae42f0b450345e6e306bc0
+ms.openlocfilehash: b050011aa38743353fb2a7d133abcdca0b8c6d33
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/30/2019
-ms.locfileid: "66415682"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67814812"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>ASP.NET Core Web API에서 응답 데이터 서식 지정
 
@@ -63,7 +63,7 @@ JSON 형식의 데이터 반환:
 
 [!code-csharp[](./formatting/sample/Controllers/Api/AuthorsController.cs?highlight=8,10&range=28-38)]
 
-다른 형식이 요청되지 않는 한 JSON 형식 응답이 반환되고 서버는 요청된 형식을 반환할 수 있습니다. [Fiddler](http://www.telerik.com/fiddler)와 같은 도구를 사용하여 Accept 헤더가 포함된 요청을 만들고 다른 형식을 지정할 수 있습니다. 해당 경우에서 서버에 요청된 형식으로 응답을 생성할 수 있는 *포맷터*가 있으면 결과는 클라이언트 기본 형식으로 반환됩니다.
+다른 형식이 요청되지 않는 한 JSON 형식 응답이 반환되고 서버는 요청된 형식을 반환할 수 있습니다. [Fiddler](https://www.telerik.com/fiddler)와 같은 도구를 사용하여 Accept 헤더가 포함된 요청을 만들고 다른 형식을 지정할 수 있습니다. 해당 경우에서 서버에 요청된 형식으로 응답을 생성할 수 있는 *포맷터*가 있으면 결과는 클라이언트 기본 형식으로 반환됩니다.
 
 ![application/xml의 Accept 헤더 값과 함께 수동으로 만든 GET 요청을 보여 주는 Fiddler 콘솔](formatting/_static/fiddler-composer.png)
 

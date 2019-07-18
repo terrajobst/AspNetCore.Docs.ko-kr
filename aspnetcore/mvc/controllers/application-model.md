@@ -5,12 +5,12 @@ description: MVC 요소가 ASP.NET Core에서 작동하는 방법을 수정하�
 ms.author: riande
 ms.date: 10/14/2016
 uid: mvc/controllers/application-model
-ms.openlocfilehash: 6b0591a877c0d82e0ee6ab002eb6a6650753677b
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: f7f64c8b3a63ec66936772e724edb57037654059
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64890998"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815504"
 ---
 # <a name="work-with-the-application-model-in-aspnet-core"></a>ASP.NET Core에서 애플리케이션 모델 작업
 
@@ -63,7 +63,7 @@ Then(`Order=-990`):
 * 컨텍스트에 작업 메서드 매개 변수 추가
 * 경로 및 기타 특성 적용
 
-일부 기본 제공 동작은 `DefaultApplicationModelProvider`에 의해 구현됩니다. 이 공급자는 [`ControllerModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.controllermodel)을 구성할 책임이 있습니다. 여기서는 [`ActionModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.actionmodel#Microsoft_AspNetCore_Mvc_ApplicationModels_ActionModel), [`PropertyModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.propertymodel) 및 [`ParameterModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.parametermodel#Microsoft_AspNetCore_Mvc_ApplicationModels_ParameterModel) 인스턴스를 차례로 참조합니다. `DefaultApplicationModelProvider` 클래스는 나중에 변경될 수 있는 내부 프레임워크 구현 세부 정보입니다. 
+일부 기본 제공 동작은 `DefaultApplicationModelProvider`에 의해 구현됩니다. 이 공급자는 [`ControllerModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.controllermodel)을 구성할 책임이 있습니다. 여기서는 [`ActionModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.actionmodel), [`PropertyModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.propertymodel) 및 [`ParameterModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.parametermodel) 인스턴스를 차례로 참조합니다. `DefaultApplicationModelProvider` 클래스는 나중에 변경될 수 있는 내부 프레임워크 구현 세부 정보입니다. 
 
 `AuthorizationApplicationModelProvider`는 `AuthorizeFilter` 및 `AllowAnonymousFilter` 특성과 연결된 동작을 적용할 책임이 있습니다. [이러한 특성에 대한 자세한 정보](xref:security/authorization/simple)
 

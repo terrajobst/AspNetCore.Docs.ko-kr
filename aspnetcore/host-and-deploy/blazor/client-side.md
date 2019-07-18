@@ -5,14 +5,14 @@ description: ASP.NET Core, CDN(Content Delivery Network), 파일 서버 및 GitH
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/02/2019
+ms.date: 07/10/2019
 uid: host-and-deploy/blazor/client-side
-ms.openlocfilehash: 46c99364098557557bff0c38cab5a91ee2d3979b
-ms.sourcegitcommit: 0b9e767a09beaaaa4301915cdda9ef69daaf3ff2
+ms.openlocfilehash: be6b6c245440cb085a1a6b115f4f087306f7cc83
+ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67538643"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68308083"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-client-side"></a>ASP.NET Core Blazor 클라이언트 쪽 호스트 및 배포
 
@@ -126,7 +126,7 @@ Blazor 라우터는 브라우저가 인터넷 상에서 `About`에 대해 `www.c
 
 ## <a name="app-base-path"></a>앱 기본 경로
 
-앱 기본 경로는 서버상의 가상 앱 루트 경로입니다. 예를 들어 Contoso 서버의 가상 폴더 `/CoolApp/`에 상주하는 앱은 `https://www.contoso.com/CoolApp`에 도달하며 `/CoolApp/`의 가상 기본 경로를 포함합니다. 앱 기본 경로를 가상 경로(`<base href="/CoolApp/">`)로 설정하면 앱은 서버상에 가상으로 상주하는 위치를 인식하게 됩니다. 해당 앱은 앱 기본 경로를 사용하여 루트 디렉터리에 없는 구성 요소에서 앱 루트에 대한 상대 URL을 구성합니다. 이렇게 하면 디렉터리 구조의 다른 수준에 존재하는 구성 요소가 앱 전체의 위치에서 다른 리소스에 대한 링크를 만들 수 있습니다. 또한 링크의 `href` 대상이 앱 기본 경로 내에 있는 경우 &mdash; Blazor 라우터가 내부 탐색을 처리하는 경우 하이퍼링크 클릭을 가로채기 위해서도 앱 기본 경로를 사용합니다.
+앱 기본 경로는 서버상의 가상 앱 루트 경로입니다.  예를 들어 Contoso 서버의 가상 폴더 `/CoolApp/`에 상주하는 앱은 `https://www.contoso.com/CoolApp`에 도달하며 `/CoolApp/`의 가상 기본 경로를 포함합니다. 앱 기본 경로를 가상 경로(`<base href="/CoolApp/">`)로 설정하면 앱은 서버상에 가상으로 상주하는 위치를 인식하게 됩니다. 해당 앱은 앱 기본 경로를 사용하여 루트 디렉터리에 없는 구성 요소에서 앱 루트에 대한 상대 URL을 구성합니다. 이렇게 하면 디렉터리 구조의 다른 수준에 존재하는 구성 요소가 앱 전체의 위치에서 다른 리소스에 대한 링크를 만들 수 있습니다. 또한 링크의 `href` 대상이 앱 기본 경로 내에 있는 경우 &mdash; Blazor 라우터가 내부 탐색을 처리하는 경우 하이퍼링크 클릭을 가로채기 위해서도 앱 기본 경로를 사용합니다.
 
 많은 호스팅 시나리오에서 앱에 대한 서버의 가상 경로는 앱의 루트입니다. 이러한 경우 앱 기본 경로는 앱에 대한 기본 구성인 슬래시(`<base href="/" />`)입니다. GitHub 페이지 및 IIS 가상 디렉터리 또는 하위 애플리케이션 등의 다른 호스팅 시나리오에서는 앱 기본 경로를 앱에 대한 서버의 가상 경로로 설정해야 합니다. 앱의 기본 경로를 설정하려면 *wwwroot/index.html* 파일의 `<head>` 태그 요소 내에 `<base>` 태그를 업데이트합니다. `href` 속성 값을 `/virtual-path/`(뒤에 슬래시가 필요함)로 설정하며, 여기서 `/virtual-path/`는 앱에 대한 서버의 전체 가상 앱 루트 경로입니다. 앞의 예에서 가상 경로는 `/CoolApp/`: `<base href="/CoolApp/">`로 설정됩니다.
 
@@ -213,8 +213,8 @@ Blazor 프로젝트가 게시되면 다음 IIS 구성을 사용하여 *web.confi
   * `application/octet-stream`
   * `application/wasm`
 * URL 재작성 모듈 규칙을 설정합니다.
-  * 앱의 정적 자산이 상주하는 하위 디렉터리(*{ASSEMBLY NAME}/dist/{PATH REQUESTED}*)를 제공합니다.
-  * 파일이 아닌 자산에 대한 요청이 정적 자산 폴더에 있는 앱의 기본 문서(*{ASSEMBLY NAME}/dist/index.html*)로 리디렉션되도록 SPA 폴백 라우팅을 만듭니다.
+  * 앱의 정적 자산이 상주하는 하위 디렉터리( *{ASSEMBLY NAME}/dist/{PATH REQUESTED}* )를 제공합니다.
+  * 파일이 아닌 자산에 대한 요청이 정적 자산 폴더에 있는 앱의 기본 문서( *{ASSEMBLY NAME}/dist/index.html*)로 리디렉션되도록 SPA 폴백 라우팅을 만듭니다.
 
 #### <a name="install-the-url-rewrite-module"></a>URL 재작성 모듈 설치
 
@@ -232,9 +232,9 @@ URL을 다시 생성하려면 [URL 다시 생성 모듈](https://www.iis.net/dow
 
 #### <a name="troubleshooting"></a>문제 해결
 
-500 - 내부 서버 오류가 수신되고 웹 사이트의 구성에 액세스를 시도할 때 IIS 관리자가 오류를 표시하면 URL 다시 생성 모듈이 설치되었는지 확인합니다. 모듈이 설치되지 않은 경우 IIS가 *web.config* 파일을 구문 분석할 수 없습니다. 그러면 IIS 관리자가 웹 사이트의 구성을 로드할 수 없으며 웹 사이트가 Blazor의 정적 파일을 제공할 수 없습니다.
+500 - 내부 서버 오류가 수신되고 웹 사이트의 구성에 액세스를 시도할 때 IIS 관리자가 오류를 표시하면 URL 다시 생성 모듈이 설치되었는지 확인합니다.  모듈이 설치되지 않은 경우 IIS가 *web.config* 파일을 구문 분석할 수 없습니다. 그러면 IIS 관리자가 웹 사이트의 구성을 로드할 수 없으며 웹 사이트가 Blazor의 정적 파일을 제공할 수 없습니다.
 
-IIS 배포 문제 해결에 대한 자세한 내용은 <xref:host-and-deploy/iis/troubleshoot>를 참조하세요.
+IIS 배포 문제 해결에 대한 자세한 내용은 <xref:test/troubleshoot-azure-iis>를 참조하세요.
 
 ### <a name="azure-storage"></a>Azure Storage
 
@@ -281,6 +281,6 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 ### <a name="github-pages"></a>GitHub 페이지
 
-URL 다시 생성을 처리하려면 *index.html* 페이지로 요청 리디렉션을 처리하는 스크립트를 사용하여 *404.html* 파일을 추가합니다. 커뮤니티에서 제공하는 예제 구현은 [GitHub 페이지에 대한 단일 페이지 앱](http://spa-github-pages.rafrex.com/)([rafrex/spa-github-pages on GitHub](https://github.com/rafrex/spa-github-pages#readme))을 참조하세요. 커뮤니티 방식을 사용하는 예는 [blazor-demo/blazor-demo.github.io on GitHub](https://github.com/blazor-demo/blazor-demo.github.io)([실시간 사이트](https://blazor-demo.github.io/))를 참조하세요.
+URL 다시 생성을 처리하려면 *index.html* 페이지로 요청 리디렉션을 처리하는 스크립트를 사용하여 *404.html* 파일을 추가합니다. 커뮤니티에서 제공하는 예제 구현은 [GitHub 페이지에 대한 단일 페이지 앱](https://spa-github-pages.rafrex.com/)([rafrex/spa-github-pages on GitHub](https://github.com/rafrex/spa-github-pages#readme))을 참조하세요. 커뮤니티 방식을 사용하는 예는 [blazor-demo/blazor-demo.github.io on GitHub](https://github.com/blazor-demo/blazor-demo.github.io)([실시간 사이트](https://blazor-demo.github.io/))를 참조하세요.
 
 조직의 사이트 대신 프로젝트 사이트를 사용하는 경우 *index.html*의 `<base>` 태그를 추가하거나 업데이트합니다. `href` 특성 값을 후행 슬래시가 있는 GitHub 리포지토리 이름으로 설정합니다(예: `my-repository/`).

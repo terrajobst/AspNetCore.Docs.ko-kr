@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/migrations
-ms.openlocfilehash: 3ad8ae27c3a7ced2f367919e200aff51fdf03b64
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 35569a4d75abf1c18a3750d9785c3cf55a35ea69
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64885718"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67813774"
 ---
 # <a name="tutorial-using-the-migrations-feature---aspnet-mvc-with-ef-core"></a>자습서: 마이그레이션 기능 사용 - ASP.NET MVC 및 EF Core 사용
 
@@ -84,9 +84,9 @@ Done. To undo this action, use 'ef migrations remove'
 ```
 
 > [!NOTE]
-> *No executable found matching command "dotnet-ef"(명령 “dotnet-ef”에 일치하는 실행 파일을 찾을 수 없음)* 오류 메시지가 표시되면 [이 블로그 게시물](http://thedatafarm.com/data-access/no-executable-found-matching-command-dotnet-ef/)을 참조하여 문제 해결에 도움을 받으세요.
+> *No executable found matching command "dotnet-ef"(명령 “dotnet-ef”에 일치하는 실행 파일을 찾을 수 없음)* 오류 메시지가 표시되면 [이 블로그 게시물](https://thedatafarm.com/data-access/no-executable-found-matching-command-dotnet-ef/)을 참조하여 문제 해결에 도움을 받으세요.
 
-“*cannot access the file ... ContosoUniversity.dll because it is being used by another process.*(다른 프로세스에서 사용 중이므로 ContosoUniversity.dll 파일에 액세스할 수 없음.)” 오류 메시지가 표시되면 Windows 시스템 트레이에서 IIS Express 아이콘을 찾아 마우스 오른쪽 단추로 클릭한 다음, **ContosoUniversity > 사이트 중단**을 클릭합니다.
+“*cannot access the file ... ContosoUniversity.dll because it is being used by another process.* (다른 프로세스에서 사용 중이므로 ContosoUniversity.dll 파일에 액세스할 수 없음.)” 오류 메시지가 표시되면 Windows 시스템 트레이에서 IIS Express 아이콘을 찾아 마우스 오른쪽 단추로 클릭한 다음, **ContosoUniversity > 사이트 중단**을 클릭합니다.
 
 ## <a name="examine-up-and-down-methods"></a>Up 및 Down 메서드 검사
 

@@ -5,12 +5,12 @@ description: 간단한 ASP.NET Core MVC 앱에 컨트롤러를 추가하는 방�
 ms.author: riande
 ms.date: 02/28/2017
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: 9dbfb52109260dbfe0c6c094a7ac4edae47d24e7
-ms.sourcegitcommit: 1bb3f3f1905b4e7d4ca1b314f2ce6ee5dd8be75f
+ms.openlocfilehash: f28dc96b66fce736242d26a2584fea0a23375e23
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/11/2019
-ms.locfileid: "66837333"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815200"
 ---
 # <a name="add-a-controller-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 컨트롤러 추가
 
@@ -68,7 +68,7 @@ MVC 패턴을 통해 이러한 요소 간의 느슨한 결합을 제공하는 �
 
 HTTP 엔드포인트는 웹 애플리케이션에서 대상으로 지정 가능한 URL(예: `https://localhost:5001/HelloWorld`)으로써 사용되는 프로토콜(`HTTPS`), 웹 서버(TCP 포트 포함)의 네트워크 위치(`localhost:5001`) 및 대상 URI `HelloWorld`을 결합합니다.
 
-첫 번째 주석은 이 항목을 기본 URL에 `/HelloWorld/`를 추가하여 호출되는 [HTTP GET](https://www.w3schools.com/tags/ref_httpmethods.asp) 메서드라고 설명합니다. 두 번째 주석은 URL에 `/HelloWorld/Welcome/`를 추가하여 호출되는 [HTTP GET](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) 메서드를 지정합니다. 나중에 자습서에서 스캐폴딩 엔진은 데이터를 업데이트하는 `HTTP POST` 메서드를 생성하는 데 사용됩니다.
+첫 번째 주석은 이 항목을 기본 URL에 `/HelloWorld/`를 추가하여 호출되는 [HTTP GET](https://www.w3schools.com/tags/ref_httpmethods.asp) 메서드라고 설명합니다. 두 번째 주석은 URL에 `/HelloWorld/Welcome/`를 추가하여 호출되는 [HTTP GET](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) 메서드를 지정합니다. 나중에 자습서에서 스캐폴딩 엔진은 데이터를 업데이트하는 `HTTP POST` 메서드를 생성하는 데 사용됩니다.
 
 디버그가 아닌 모드로 앱을 실행하고 주소 표시줄의 경로에 "HelloWorld"를 추가합니다. `Index` 메서드가 문자열을 반환합니다.
 

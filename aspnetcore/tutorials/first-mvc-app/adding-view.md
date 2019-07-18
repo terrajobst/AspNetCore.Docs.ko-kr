@@ -5,12 +5,12 @@ description: 간단한 ASP.NET Core MVC 앱에 보기 추가
 ms.author: riande
 ms.date: 03/04/2017
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 70c96b4838b37ea2c193c328f00a410642338369
-ms.sourcegitcommit: 28a2874765cefe9eaa068dceb989a978ba2096aa
+ms.openlocfilehash: c86e5aba6dbd1e39460cc3d2c266ce704282ee09
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67167076"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815428"
 ---
 # <a name="add-a-view-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 보기 추가
 
@@ -164,7 +164,7 @@ URL에서 데이터를 가져오고 [MVC 모델 바인더](xref:mvc/models/model
 
 ![시작 레이블과 네 번 표시되는 구 Hello Rick을 보여주는 개인 정보 보기](~/tutorials/first-mvc-app/adding-view/_static/rick2.png)
 
-위의 샘플에서 컨트롤러에서 보기로 데이터를 전달하는 데 `ViewData` 사전이 사용되었습니다. 자습서의 뒷부분에서 보기 모델은 컨트롤러에서 보기로 데이터를 전달하는 데 사용됩니다. 데이터를 전달하는 보기 모델 방법은 일반적으로 `ViewData` 사전 접근 방법보다 훨씬 많이 사용됩니다. 자세한 내용은 [When to use ViewBag, ViewData, or TempData](http://www.rachelappel.com/when-to-use-viewbag-viewdata-or-tempdata-in-asp-net-mvc-3-applications/)(ViewBag, ViewData 또는 TempData를 사용하는 경우)를 참조하세요.
+위의 샘플에서 컨트롤러에서 보기로 데이터를 전달하는 데 `ViewData` 사전이 사용되었습니다. 자습서의 뒷부분에서 보기 모델은 컨트롤러에서 보기로 데이터를 전달하는 데 사용됩니다. 데이터를 전달하는 보기 모델 방법은 일반적으로 `ViewData` 사전 접근 방법보다 훨씬 많이 사용됩니다. 자세한 내용은 [When to use ViewBag, ViewData, or TempData](https://www.rachelappel.com/when-to-use-viewbag-viewdata-or-tempdata-in-asp-net-mvc-3-applications/)(ViewBag, ViewData 또는 TempData를 사용하는 경우)를 참조하세요.
 
 다음 자습서에서는 영화 데이터베이스가 만들어집니다.
 

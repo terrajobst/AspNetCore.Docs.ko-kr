@@ -5,12 +5,12 @@ description: ASP.NET Core에서 컨트롤러 메서드, 보기 및 DataAnnotatio
 ms.author: riande
 ms.date: 12/13/2018
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: 36c8141ba5827366572dabcfd0fdf9600c745706
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 6d960da5acecbb95893bd339b4391560bedffb3d
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64889768"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815411"
 ---
 # <a name="controller-methods-and-views-in-aspnet-core"></a>ASP.NET Core의 컨트롤러 메서드 및 보기
 
@@ -30,7 +30,7 @@ Entity Framework Core가 `Price`를 데이터베이스의 통화에 올바르게
 
 `Movies` 컨트롤러로 이동하고 **편집** 링크 위에 마우스 포인터를 놓으면 대상 URL이 표시됩니다.
 
-![브라우저 창에서 편집 링크에 마우스를 가져가면 https://localhost:5001/Movies/Edit/5의 링크 Url이 표시됩니다.](~/tutorials/first-mvc-app/controller-methods-views/_static/edit7.png)
+![브라우저 창에서 편집 링크에 마우스를 가져가면 https://localhost:5001/Movies/Edit/5 의 링크 Url이 표시됩니다.](~/tutorials/first-mvc-app/controller-methods-views/_static/edit7.png)
 
 **편집**, **세부 정보** 및 **삭제** 링크는 *Views/Movies/Index.cshtml* 파일의 Core MVC 앵커 태그 도우미에 의해 생성됩니다.
 
@@ -54,7 +54,7 @@ ASP.NET Core는 `https://localhost:5001/Movies/Edit/4`를 매개 변수 `Id`가 
 
 [태그 도우미](xref:mvc/views/tag-helpers/intro)는 ASP.NET Core의 가장 인기 있는 새로운 기능 중 하나입니다. 자세한 내용은 [추가 리소스](#additional-resources)를 참조하세요.
 
-`Movies` 컨트롤러를 열고 두 `Edit` 작업 메서드를 검사합니다. 다음 코드는 동영상을 페치하여 *Edit.cshtml* Razor 파일에서 생성된 편집 양식에 기입하는 `HTTP GET Edit` 메서드를 보여 줍니다. 
+`Movies` 컨트롤러를 열고 두 `Edit` 작업 메서드를 검사합니다. 다음 코드는 동영상을 페치하여 *Edit.cshtml* Razor 파일에서 생성된 편집 양식에 기입하는 `HTTP GET Edit` 메서드를 보여 줍니다.
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -76,7 +76,7 @@ ASP.NET Core는 `https://localhost:5001/Movies/Edit/4`를 매개 변수 `Id`가 
 
 ::: moniker-end
 
-`[Bind]` 특성은 하나의 [과도 게시](/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/implementing-basic-crud-functionality-with-the-entity-framework-in-asp-net-mvc-application#overpost) 방지 방법입니다. 변경하려는 속성만 `[Bind]` 특성에 포함해야 합니다. 자세한 내용은 [과도 게시로부터 컨트롤러 보호](/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/implementing-basic-crud-functionality-with-the-entity-framework-in-asp-net-mvc-application)를 참조하세요. [ViewModels](http://rachelappel.com/use-viewmodels-to-manage-data-amp-organize-code-in-asp-net-mvc-applications/)는 과도 게시를 방지하기 위한 다른 방법을 제공합니다.
+`[Bind]` 특성은 하나의 [과도 게시](/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/implementing-basic-crud-functionality-with-the-entity-framework-in-asp-net-mvc-application#overpost) 방지 방법입니다. 변경하려는 속성만 `[Bind]` 특성에 포함해야 합니다. 자세한 내용은 [과도 게시로부터 컨트롤러 보호](/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/implementing-basic-crud-functionality-with-the-entity-framework-in-asp-net-mvc-application)를 참조하세요. [ViewModels](https://rachelappel.com/use-viewmodels-to-manage-data-amp-organize-code-in-asp-net-mvc-applications/)는 과도 게시를 방지하기 위한 다른 방법을 제공합니다.
 
 두 번째 `Edit` 작업 메서드는 `[HttpPost]` 특성 뒤에 옵니다.
 
@@ -116,7 +116,7 @@ ASP.NET Core는 `https://localhost:5001/Movies/Edit/4`를 매개 변수 `Id`가 
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Shared/edit_view_source.html?highlight=1,6,10,17,24,28)]
 
-`<input>` 요소는 `action` 특성이 `/Movies/Edit/id` URL에 게시되도록 설정된 `HTML <form>` 요소에 있습니다. 양식 데이터는 `Save` 단추를 클릭하면 서버에 게시됩니다. `</form>` 요소를 닫기 전 마지막 줄은 [양식 태그 도우미](xref:mvc/views/working-with-forms)에서 생성된 숨겨진 [XSRF](xref:security/anti-request-forgery) 토큰을 나타냅니다. 
+`<input>` 요소는 `action` 특성이 `/Movies/Edit/id` URL에 게시되도록 설정된 `HTML <form>` 요소에 있습니다. 양식 데이터는 `Save` 단추를 클릭하면 서버에 게시됩니다. `</form>` 요소를 닫기 전 마지막 줄은 [양식 태그 도우미](xref:mvc/views/working-with-forms)에서 생성된 숨겨진 [XSRF](xref:security/anti-request-forgery) 토큰을 나타냅니다.
 
 ## <a name="processing-the-post-request"></a>POST 요청 처리
 
@@ -151,7 +151,7 @@ ASP.NET Core는 `https://localhost:5001/Movies/Edit/4`를 매개 변수 `Id`가 
 * [태그 도우미 작성](xref:mvc/views/tag-helpers/authoring)
 * [요청 위조 방지](xref:security/anti-request-forgery)
 * [과도 게시로부터 컨트롤러 보호](/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/implementing-basic-crud-functionality-with-the-entity-framework-in-asp-net-mvc-application)
-* [ViewModels](http://rachelappel.com/use-viewmodels-to-manage-data-amp-organize-code-in-asp-net-mvc-applications/)
+* [ViewModels](https://rachelappel.com/use-viewmodels-to-manage-data-amp-organize-code-in-asp-net-mvc-applications/)
 * [Form 태그 도우미](xref:mvc/views/working-with-forms)
 * [Input 태그 도우미](xref:mvc/views/working-with-forms)
 * [Label 태그 도우미](xref:mvc/views/working-with-forms)

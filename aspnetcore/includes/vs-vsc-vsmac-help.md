@@ -1,11 +1,3 @@
----
-ms.openlocfilehash: 9a53dddd52f529ce24927249aa1fcb3e0020962d
-ms.sourcegitcommit: 78339e9891c8676db01a6e81e9cb0cdaa280162f
-ms.translationtype: HT
-ms.contentlocale: ko-KR
-ms.lasthandoff: 04/17/2019
-ms.locfileid: "59041634"
----
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ## <a name="visual-studio-help"></a>Visual Studio 도움말

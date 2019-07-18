@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 12/18/2018
 uid: fundamentals/owin
-ms.openlocfilehash: 9d6ce79c15fe768c260c6361ac3babecab5f3f9b
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 7edb4db026f1b778d43ac72883690a0b2a18ee31
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087297"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67814892"
 ---
 # <a name="open-web-interface-for-net-owin-with-aspnet-core"></a>ASP.NET Core가 있는 OWIN(Open Web Interface for .NET)
 
@@ -35,7 +35,7 @@ OWIN은 서로 다른 개체 모델이 있는 두 프레임워크를 함께 사�
 
 ASP.NET Core의 OWIN 지원은 `Microsoft.AspNetCore.Owin` 패키지의 일부로 배포됩니다. 이 패키지를 설치하여 OWIN 지원을 프로젝트로 가져올 수 있습니다.
 
-OWIN 미들웨어는 `Func<IDictionary<string, object>, Task>` 인터페이스 및 특정 키 설정(예: `owin.ResponseBody`)이 필요한 [OWIN 사양](http://owin.org/spec/spec/owin-1.0.0.html)을 준수합니다. 다음과 같은 간단한 OWIN 미들웨어는 "Hello World"를 표시합니다.
+OWIN 미들웨어는 `Func<IDictionary<string, object>, Task>` 인터페이스 및 특정 키 설정(예: `owin.ResponseBody`)이 필요한 [OWIN 사양](https://owin.org/spec/spec/owin-1.0.0.html)을 준수합니다. 다음과 같은 간단한 OWIN 미들웨어는 "Hello World"를 표시합니다.
 
 ```csharp
 public Task OwinHello(IDictionary<string, object> environment)
@@ -43,7 +43,7 @@ public Task OwinHello(IDictionary<string, object> environment)
     string responseText = "Hello World via OWIN";
     byte[] responseBytes = Encoding.UTF8.GetBytes(responseText);
 
-    // OWIN Environment Keys: http://owin.org/spec/spec/owin-1.0.0.html
+    // OWIN Environment Keys: https://owin.org/spec/spec/owin-1.0.0.html
     var responseStream = (Stream)environment["owin.ResponseBody"];
     var responseHeaders = (IDictionary<string, string[]>)environment["owin.ResponseHeaders"];
 
@@ -230,7 +230,7 @@ public class Startup
 
 ## <a name="owin-keys"></a>OWIN 키
 
-OWIN은 HTTP 요청/응답 교환 전체에서 정보를 전달하는 `IDictionary<string,object>` 개체에 따라 달라집니다. ASP.NET Core는 아래에 나열된 키를 구현합니다. [기본 사양, 확장](http://owin.org/#spec) 및 [OWIN 키 지침 및 공통 키](http://owin.org/spec/spec/CommonKeys.html)를 참조하세요.
+OWIN은 HTTP 요청/응답 교환 전체에서 정보를 전달하는 `IDictionary<string,object>` 개체에 따라 달라집니다. ASP.NET Core는 아래에 나열된 키를 구현합니다. [기본 사양, 확장](https://owin.org/#spec) 및 [OWIN 키 지침 및 공통 키](https://owin.org/spec/spec/CommonKeys.html)를 참조하세요.
 
 ### <a name="request-data-owin-v100"></a>요청 데이터(OWIN v1.0.0)
 
@@ -284,14 +284,14 @@ OWIN은 HTTP 요청/응답 교환 전체에서 정보를 전달하는 `IDictiona
 
 | 키               | 값(형식) | 설명 |
 | ----------------- | ------------ | ----------- |
-| sendfile.SendAsync | [대리자 시그니처](http://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) 참조 | 요청당 |
+| sendfile.SendAsync | [대리자 시그니처](https://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) 참조 | 요청당 |
 
 ### <a name="opaque-v030"></a>불투명 v0.3.0
 
 | 키               | 값(형식) | 설명 |
 | ----------------- | ------------ | ----------- |
 | opaque.Version | `String` |  |
-| opaque.Upgrade | `OpaqueUpgrade` | [대리자 시그니처](http://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) 참조 |
+| opaque.Upgrade | `OpaqueUpgrade` | [대리자 시그니처](https://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) 참조 |
 | opaque.Stream | `Stream` |  |
 | opaque.CallCancelled | `CancellationToken` |  |
 
@@ -300,12 +300,12 @@ OWIN은 HTTP 요청/응답 교환 전체에서 정보를 전달하는 `IDictiona
 | 키               | 값(형식) | 설명 |
 | ----------------- | ------------ | ----------- |
 | websocket.Version | `String` |  |
-| websocket.Accept | `WebSocketAccept` | [대리자 시그니처](http://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) 참조 |
+| websocket.Accept | `WebSocketAccept` | [대리자 시그니처](https://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) 참조 |
 | websocket.AcceptAlt |  | 비-사양 |
 | websocket.SubProtocol | `String` | [RFC6455 Section 4.2.2](https://tools.ietf.org/html/rfc6455#section-4.2.2) 5.5단계 참조 |
-| websocket.SendAsync | `WebSocketSendAsync` | [대리자 시그니처](http://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) 참조  |
-| websocket.ReceiveAsync | `WebSocketReceiveAsync` | [대리자 시그니처](http://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) 참조  |
-| websocket.CloseAsync | `WebSocketCloseAsync` | [대리자 시그니처](http://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) 참조  |
+| websocket.SendAsync | `WebSocketSendAsync` | [대리자 시그니처](https://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) 참조  |
+| websocket.ReceiveAsync | `WebSocketReceiveAsync` | [대리자 시그니처](https://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) 참조  |
+| websocket.CloseAsync | `WebSocketCloseAsync` | [대리자 시그니처](https://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) 참조  |
 | websocket.CallCancelled | `CancellationToken` |  |
 | websocket.ClientCloseStatus | `int` | Optional |
 | websocket.ClientCloseDescription | `String` | Optional |

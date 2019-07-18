@@ -4,14 +4,14 @@ author: CamSoper
 description: 모니터링 및 ASP.NET Core 및 Azure를 사용 하 여 DevOps 솔루션의 일부로 코드 디버깅
 ms.author: casoper
 ms.custom: mvc, seodec18
-ms.date: 10/24/2018
+ms.date: 07/10/2019
 uid: azure/devops/monitor
-ms.openlocfilehash: 00489bd92dfff8fd80bd24c2e60193d32031d7c4
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 1d8ed99f4387dbc99929164c558cc2ce14bd9ea0
+ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64893070"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68307954"
 ---
 # <a name="monitor-and-debug"></a>모니터링 및 디버그
 
@@ -37,11 +37,11 @@ App Service 웹 앱은 쉽게 실시간으로 모니터링 됩니다. Azure port
 
     ![스크린 샷 보여 주는 요약 패널](./media/monitoring/overview.png)
 
-    * **Http 5xx**: ASP.NET Core 코드의 예외 일반적으로 서버 쪽 오류의 수입니다.
-    * **데이터에서**: 웹 앱으로 들어오는 데이터 수신 합니다.
-    * **데이터 출력**: 클라이언트에 웹 앱에서 데이터 송신 합니다.
+    * **Http 5xx**: 서버 쪽 오류 수, 일반적으로 ASP.NET Core 코드의 예외입니다.
+    * **데이터의 데이터**: 데이터 수신은 웹 앱으로 들어오는 것입니다.
+    * **데이터 출력**: 웹 앱에서 클라이언트로 데이터를 송신 합니다.
     * **요청**: HTTP 요청 수입니다.
-    * **평균 응답 시간**: HTTP 요청에 응답 하도록 웹 앱에 대 한 평균 시간입니다.
+    * **평균 응답 시간**: 웹 앱이 HTTP 요청에 응답 하는 평균 시간입니다.
 
     여러 셀프 서비스 도구 문제 해결 및 최적화를 위한이 페이지에도 있습니다.
 
@@ -111,7 +111,7 @@ ASP.NET Core 및 웹 서버 (App Service) 로그는 웹 앱에 대 한 생성 �
 
 Azure Monitor 해줍니다 [실시간으로 경고](/azure/monitoring-and-diagnostics/insights-alerts-portal) 메트릭, 관리 이벤트 및 기타 조건을 기준으로 합니다.
 
-> *참고: 현재 웹 앱 메트릭 경고는 경고 (클래식) 서비스에서 사용할 수만 합니다.*
+> *참고: 현재 웹 앱 메트릭에 대 한 경고는 경고 (클래식) 서비스 에서만 사용할 수 있습니다.*
 
 합니다 [경고 (클래식) 서비스](/azure/monitoring-and-diagnostics/monitor-quick-resource-metric-alert-portal) 또는 Azure Monitor에서 찾을 수 있습니다 합니다 **모니터링** App Service 설정의 섹션입니다.
 
@@ -135,7 +135,7 @@ Azure App Service 일 수 있습니다 [Visual Studio를 사용 하 여 원격�
 
 ## <a name="additional-reading"></a>추가 참조 항목
 
-* <xref:host-and-deploy/azure-apps/troubleshoot>
+* <xref:test/troubleshoot-azure-iis>
 * <xref:host-and-deploy/azure-iis-errors-reference>
 * [Application Insights를 사용 하 여 Azure 웹 앱 성능 모니터링](/azure/application-insights/app-insights-azure-web-apps)
 * [Azure App Service에서 웹앱에 대한 진단 로깅 사용](/azure/app-service/web-sites-enable-diagnostic-log)
