@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/16/2019
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 644d84f9adba650b3ef10ba69cc75c22845be211
-ms.sourcegitcommit: 7e00e8236ca4eabf058f07020a5a3882daf7564f
+ms.openlocfilehash: a3d8c87fdb1cbc3b8b11b15f797190d626edad59
+ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/16/2019
-ms.locfileid: "68239230"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68308057"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS가 있는 Windows에서 ASP.NET Core 호스팅
 
@@ -734,10 +734,10 @@ ASP.NET Core 앱을 호스팅하기 위해 ASP.NET Core 모듈을 구성하는 �
 [디렉터리 구조](xref:host-and-deploy/directory-structure)
 
 ASP.NET Core 앱용 활성 및 비활성 IIS 모듈과 IIS 모듈을 관리하는 방법을 살펴봅니다.  
-[IIS 모듈](xref:host-and-deploy/iis/troubleshoot)
+[IIS 모듈](xref:host-and-deploy/iis/modules)
 
 ASP.NET Core 앱의 IIS 배포에 대한 문제 진단 방법을 알아봅니다.  
-[문제 해결](xref:host-and-deploy/iis/troubleshoot)
+[문제 해결](xref:test/troubleshoot-azure-iis)
 
 IIS에서 ASP.NET Core 앱을 호스팅할 때 일반적인 오류를 구분합니다.  
 [Azure App Service 및 IIS에 대한 일반적인 오류 참조](xref:host-and-deploy/azure-iis-errors-reference)
