@@ -534,6 +534,10 @@
       uid: grpc/aspnetcore
     - name: 구성
       uid: grpc/configuration
+    - name: 인증 및 권한 부여
+      uid: grpc/authn-and-authz
+    - name: 보안 고려 사항
+      uid: grpc/security
     - name: C Core에서 ASP.NET Core로 gRPC 서비스 마이그레이션
       uid: grpc/migration
     - name: gRPC 서비스와 HTTP API 비교
@@ -560,6 +564,10 @@
       uid: test/troubleshoot
     - name: 로깅
       uid: fundamentals/logging/index
+    - name: Azure 및 IIS 문제 해결
+      uid: test/troubleshoot-azure-iis
+    - name: Azure 및 IIS 오류 참조
+      uid: host-and-deploy/azure-iis-errors-reference
 - name: 데이터 액세스
   items:
     - name: 자습서
@@ -656,7 +664,7 @@
           uid: host-and-deploy/aspnet-core-module
         - name: 문제 해결
           displayName: 'azure, deploy, publish'
-          uid: host-and-deploy/azure-apps/troubleshoot
+          uid: test/troubleshoot-azure-iis
         - name: 오류 참조
           displayName: 'azure, deploy, publish'
           uid: host-and-deploy/azure-iis-errors-reference
@@ -697,7 +705,7 @@
           uid: host-and-deploy/iis/modules
         - name: 문제 해결
           displayName: 'deploy, publish'
-          uid: host-and-deploy/iis/troubleshoot
+          uid: test/troubleshoot-azure-iis
         - name: 오류 참조
           displayName: 'deploy, publish'
           uid: host-and-deploy/azure-iis-errors-reference
