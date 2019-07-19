@@ -5,14 +5,14 @@ description: 이 문서에는 Azure 호스트 및 배포 리소스의 링크가 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/28/2019
+ms.date: 07/16/2019
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: 5daefde13310ebeb232ef4c8886b12ad78182e50
-ms.sourcegitcommit: f5762967df3be8b8c868229e679301f2f7954679
+ms.openlocfilehash: bbdb3e92b6b8afb44d9c0c95c240002c7b7c17db
+ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67048249"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68308152"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Azure App Service에 ASP.NET Core 앱 배포
 
@@ -48,7 +48,7 @@ Azure 앱 플랫폼에서 적용하는 Azure App Service 런타임 실행 제한
 
 ::: moniker range=">= aspnetcore-2.2"
 
-64비트(x64) 및 32비트(x86) 앱은 Azure App Service에 있습니다. App Service에서 사용 가능한 [.NET Core SDK](/dotnet/core/sdk)는 32비트이지만 [Kudu](https://github.com/projectkudu/kudu/wiki) 콘솔 또는 [Visual Studio 게시 프로필이나 CLI 명령을 사용하는 MSDeploy](xref:host-and-deploy/visual-studio-publish-profiles)를 통해 64비트 앱을 배포할 수 있습니다.
+64비트(x64) 및 32비트(x86) 앱은 Azure App Service에 있습니다. App Service에서 사용 가능한 [.NET Core SDK](/dotnet/core/sdk)는 32비트이지만 [Kudu](https://github.com/projectkudu/kudu/wiki) 콘솔 또는 Visual Studio의 게시 프로세스를 사용하여 로컬로 빌드된 64비트 앱을 배포할 수 있습니다. 자세한 내용은 [앱 게시 및 배포](#publish-and-deploy-the-app) 섹션을 참조하세요.
 
 ::: moniker-end
 
@@ -57,6 +57,8 @@ Azure 앱 플랫폼에서 적용하는 Azure App Service 런타임 실행 제한
 원시 종속 항목을 지원하는 앱의 경우 32비트(x86) 앱의 런타임이 Azure App Service에 있습니다. App Service에서 사용 가능한 [.NET Core SDK](/dotnet/core/sdk)는 32비트입니다.
 
 ::: moniker-end
+
+.NET Core 런타임 및 .NET Core SDK에 대한 정보와 같은 .NET Core 프레임워크 구성 요소 및 배포 방법에 대한 자세한 내용은 [.NET Core: 컴퍼지션 정보](/dotnet/core/about#composition)를 참조하세요.
 
 ### <a name="packages"></a>패키지
 
@@ -80,7 +82,7 @@ Azure Portal에서 앱 설정을 만들거나 수정하고**저장** 단추를 �
 
 ::: moniker-end
 
-::: moniker range=">= aspnetcore-2.0 <= aspnetcore-2.2"
+::: moniker range="< aspnetcore-3.0"
 
 앱이 [WebHost.CreateDefaultBuilder](/dotnet/api/microsoft.aspnetcore.webhost.createdefaultbuilder)를 사용하여 호스트를 빌드하는 경우 호스트를 구성하는 환경 변수는 `ASPNETCORE_` 접두사를 사용합니다. 자세한 내용은 <xref:fundamentals/host/web-host> 및 [환경 변수 구성 공급자](xref:fundamentals/configuration/index#environment-variables-configuration-provider)를 참조하세요.
 
@@ -115,7 +117,7 @@ HTTP 상태 코드, 실패한 요청 및 웹 서버 활동에 대한 진단 로�
 <xref:fundamentals/error-handling>  
 ASP.NET Core 앱에서 오류를 처리하기 위한 일반적인 접근법을 이해합니다.
 
-<xref:host-and-deploy/azure-apps/troubleshoot>  
+<xref:test/troubleshoot-azure-iis>  
 ASP.NET Core 앱을 사용하는 Azure App Service 배포에 대한 문제 진단 방법을 알아봅니다.
 
 <xref:host-and-deploy/azure-iis-errors-reference>  
@@ -136,10 +138,10 @@ Azure App Service/IIS에서 호스트하는 앱의 일반적인 배포 구성 �
 
 ## <a name="deploy-aspnet-core-preview-release-to-azure-app-service"></a>Azure App Service에 ASP.NET Core 미리 보기 릴리스 배포
 
-다음 방법 중 하나를 사용합니다.
+앱이 .NET Core의 미리 보기 릴리스를 사용하는 경우 다음 방법 중 하나를 사용합니다.
 
 * [미리 보기 사이트 확장을 설치](#install-the-preview-site-extension)합니다.
-* [자체 포함된 앱을 배포](#deploy-the-app-self-contained)합니다.
+* [자체 포함 미리 보기 앱을 배포합니다](#deploy-a-self-contained-preview-app).
 * [Web Apps for Containers에서 Docker를 사용](#use-docker-with-web-apps-for-containers)합니다.
 
 ### <a name="install-the-preview-site-extension"></a>미리 보기 사이트 확장 설치
@@ -188,7 +190,7 @@ ARM 템플릿을 사용하여 앱을 만들고 배포하는 경우 `siteextensio
 
 [!code-json[](index/sample/arm.json?highlight=2)]
 
-### <a name="deploy-the-app-self-contained"></a>자체 포함된 앱 배포
+### <a name="deploy-a-self-contained-preview-app"></a>자체 포함 미리 보기 앱 배포
 
 미리 보기 런타임을 대상으로 하는 [SCD(자체 포함 배포)](/dotnet/core/deploying/#self-contained-deployments-scd)는 배포 시 미리 보기 런타임을 전달합니다.
 
@@ -197,9 +199,59 @@ ARM 템플릿을 사용하여 앱을 만들고 배포하는 경우 `siteextensio
 * Azure App Service의 사이트에는 [미리 보기 사이트 확장](#install-the-preview-site-extension)이 필요하지 않습니다.
 * 앱은 [FDD(프레임워크 종속 배포)](/dotnet/core/deploying#framework-dependent-deployments-fdd)에 대해 게시할 때와 다른 접근 방식으로 공개해야 합니다.
 
-#### <a name="publish-from-visual-studio"></a>Visual Studio에서 게시
+[자체 포함된 앱 배포](#deploy-the-app-self-contained) 섹션의 지침을 따릅니다.
 
-1. Visual Studio 도구 모음에서 **빌드** >  **{애플리케이션 이름} 게시**를 선택합니다.
+### <a name="use-docker-with-web-apps-for-containers"></a>Web Apps for Containers에서 Docker 사용
+
+[Docker 허브](https://hub.docker.com/r/microsoft/aspnetcore/)에는 최신 미리 보기 Docker 이미지가 포함됩니다. 이미지는 기본 이미지로 사용할 수 있습니다. 이미지를 사용하고 일반적으로 Web App for Containers에 배포합니다.
+
+## <a name="publish-and-deploy-the-app"></a>앱 게시 및 배포
+
+### <a name="deploy-the-app-framework-dependent"></a>프레임워크 종속 앱 배포
+
+::: moniker range=">= aspnetcore-2.2"
+
+64비트 [프레임워크 종속 배포](/dotnet/core/deploying/#framework-dependent-deployments-fdd)의 경우:
+
+* 64비트 .NET Core SDK를 사용하여 64비트 앱을 빌드합니다.
+* App Service의 **구성** > **일반 설정**에서 **플랫폼**을 **64비트**로 설정합니다. 플랫폼 비트 수를 선택할 수 있도록 하려면 앱에서 기본 이상의 서비스 플랜을 사용해야 합니다.
+
+::: moniker-end
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+1. Visual Studio 도구 모음에서 **빌드** >  **{애플리케이션 이름} 게시**를 선택하거나 **솔루션 탐색기**에서 프로젝트를 마우스 오른쪽 단추로 클릭하고 **게시**를 선택합니다.
+1. **공개 대상 선택** 대화 상자에서 **App Service**가 선택되어 있는지 확인합니다.
+1. **고급**을 선택합니다. **게시** 대화 상자가 열립니다.
+1. **게시** 대화 상자에서:
+   * **릴리스** 구성이 선택되었는지 확인합니다.
+   * **배포 모드** 드롭다운 목록을 열고 **프레임워크 종속**을 선택합니다.
+   * **이동식**을 **대상 런타임**으로 선택합니다.
+   * 배포 시 추가 파일을 제거해야 하는 경우 **파일 게시 옵션**을 열고 대상에서 추가 파일을 제거하는 확인란을 선택합니다.
+   * **저장**을 선택합니다.
+1. 게시 마법사의 나머지 프롬프트를 따라 새 사이트를 작성하거나 기존 사이트를 업데이트합니다.
+
+# <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
+
+1. 프로젝트 파일에서 [런타임 식별자(RID)](/dotnet/core/rid-catalog)를 지정하지 않습니다.
+
+1. 명령 셸에서 [dotnet publish](/dotnet/core/tools/dotnet-publish) 명령을 사용하여 릴리스 구성에 있는 앱을 게시합니다. 다음 예제에서는 앱이 프레임워크 종속 앱으로 게시됩니다.
+
+   ```console
+   dotnet publish --configuration Release
+   ```
+
+1. *bin/Release/{TARGET FRAMEWORK}/publish* 디렉터리의 콘텐츠를 App Service의 사이트로 이동합니다. 로컬 하드 드라이브 또는 네트워크 공유에서 *게시* 폴더 콘텐츠를 [Kudu](https://github.com/projectkudu/kudu/wiki) 콘솔의 App Service로 직접 끌어오는 경우에는 Kudu 콘솔의 `D:\home\site\wwwroot` 폴더로 파일을 끕니다.
+
+---
+
+### <a name="deploy-the-app-self-contained"></a>자체 포함된 앱 배포
+
+[자체 포함 배포(SCD)](/dotnet/core/deploying/#self-contained-deployments-scd)에는 Visual Studio 또는 CLI(명령줄 인터페이스)를 사용합니다.
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+1. Visual Studio 도구 모음에서 **빌드** >  **{애플리케이션 이름} 게시**를 선택하거나 **솔루션 탐색기**에서 프로젝트를 마우스 오른쪽 단추로 클릭하고 **게시**를 선택합니다.
 1. **공개 대상 선택** 대화 상자에서 **App Service**가 선택되어 있는지 확인합니다.
 1. **고급**을 선택합니다. **게시** 대화 상자가 열립니다.
 1. **게시** 대화 상자에서:
@@ -210,13 +262,13 @@ ARM 템플릿을 사용하여 앱을 만들고 배포하는 경우 `siteextensio
    * **저장**을 선택합니다.
 1. 게시 마법사의 나머지 프롬프트를 따라 새 사이트를 작성하거나 기존 사이트를 업데이트합니다.
 
-#### <a name="publish-using-command-line-interface-cli-tools"></a>CLI(명령줄 인터페이스) 도구를 사용하여 게시합니다.
+# <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
 1. 프로젝트 파일에서 하나 이상의 [RID(런타임 ID)](/dotnet/core/rid-catalog)를 지정합니다. 단일 RID에 `<RuntimeIdentifier>`(단수)을 사용하거나, `<RuntimeIdentifiers>`(복수)를 사용하여 세미콜론으로 구분된 RID 목록을 제공합니다. 다음 예제에서는 `win-x86` RID가 지정됩니다.
 
    ```xml
    <PropertyGroup>
-     <TargetFramework>netcoreapp2.1</TargetFramework>
+     <TargetFramework>{TARGET FRAMEWORK}</TargetFramework>
      <RuntimeIdentifier>win-x86</RuntimeIdentifier>
    </PropertyGroup>
    ```
@@ -227,11 +279,9 @@ ARM 템플릿을 사용하여 앱을 만들고 배포하는 경우 `siteextensio
    dotnet publish --configuration Release --runtime win-x86
    ```
 
-1. *bin/Release/{TARGET FRAMEWORK}/{RUNTIME IDENTIFIER}/publish* 디렉터리의 콘텐츠를 App Service의 사이트로 이동합니다.
+1. *bin/Release/{TARGET FRAMEWORK}/{RUNTIME IDENTIFIER}/publish* 디렉터리의 콘텐츠를 App Service의 사이트로 이동합니다. 로컬 하드 드라이브 또는 네트워크 공유에서 *게시* 폴더 콘텐츠를 Kudu 콘솔의 App Service로 직접 끌어오는 경우에는 Kudu 콘솔의 `D:\home\site\wwwroot` 폴더로 파일을 끕니다.
 
-### <a name="use-docker-with-web-apps-for-containers"></a>Web Apps for Containers에서 Docker 사용
-
-[Docker 허브](https://hub.docker.com/r/microsoft/aspnetcore/)에는 최신 미리 보기 Docker 이미지가 포함됩니다. 이미지는 기본 이미지로 사용할 수 있습니다. 이미지를 사용하고 일반적으로 Web App for Containers에 배포합니다.
+---
 
 ## <a name="protocol-settings-https"></a>프로토콜 설정(HTTPS)
 

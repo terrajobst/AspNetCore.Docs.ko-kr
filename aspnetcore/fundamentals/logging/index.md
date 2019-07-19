@@ -6,12 +6,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 07/11/2019
 uid: fundamentals/logging/index
-ms.openlocfilehash: 51433cbf35e434300fbefae29f33594e765bcc7b
-ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
+ms.openlocfilehash: cdb5cad2302cc8ec02107021005b8590efce7533
+ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/12/2019
-ms.locfileid: "67855920"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68308214"
 ---
 # <a name="logging-in-aspnet-core"></a>ASP.NET Core에 로그인
 
@@ -623,7 +623,7 @@ ASP.NET Core는 다음 공급자를 제공합니다.
 * [AzureAppServicesBlob](#azure-app-service-provider)
 * [ApplicationInsights](#azure-application-insights-trace-logging)
 
-stdout 로깅에 대한 자세한 내용은 <xref:host-and-deploy/iis/troubleshoot#aspnet-core-module-stdout-log> 및 <xref:host-and-deploy/azure-apps/troubleshoot#aspnet-core-module-stdout-log>을 참조하세요.
+ASP.NET Core 모듈을 사용한 stdout 및 디버그 로깅에 대한 자세한 내용은 <xref:test/troubleshoot-azure-iis> 및 <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>을 참조하세요.
 
 ### <a name="console-provider"></a>콘솔 공급자
 

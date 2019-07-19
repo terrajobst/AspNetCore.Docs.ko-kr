@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
 ms.date: 04/06/2019
 uid: razor-pages/index
-ms.openlocfilehash: 419355d670536fef1a38fbcb8ce1fd880c0e9b0d
-ms.sourcegitcommit: d6e51c60439f03a8992bda70cc982ddb15d3f100
+ms.openlocfilehash: 406e89c96ea63493091d0287077e244faee5f730
+ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67555728"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68308014"
 ---
 # <a name="introduction-to-razor-pages-in-aspnet-core"></a>ASP.NET Core의 Razor 페이지 소개
 
@@ -169,7 +169,7 @@ db 컨텍스트는 다음과 같습니다.
 
 [!code-cs[](index/sample/RazorPagesContacts/Pages/Create.cshtml.cs?name=snippet_PageModel&highlight=10-11)]
 
-Razor 페이지는 기본적으로 비 GET 동사에 대해서만 속성을 바인딩합니다. 속성을 바인딩하면 작성해야 하는 코드의 양을 줄일 수 있습니다. 바인딩은 양식 필드 렌더링할 때와 (`<input asp-for="Customer.Name">`) 입력을 받아들일 때 동일한 속성을 사용하여 코드를 줄입니다.
+Razor 페이지는 기본적으로 비 `GET` 동사에 대해서만 속성을 바인딩합니다. 속성을 바인딩하면 작성해야 하는 코드의 양을 줄일 수 있습니다. 바인딩은 양식 필드 렌더링할 때와 (`<input asp-for="Customer.Name">`) 입력을 받아들일 때 동일한 속성을 사용하여 코드를 줄입니다.
 
 [!INCLUDE[](~/includes/bind-get.md)]
 
@@ -218,7 +218,7 @@ Razor 페이지는 기본적으로 비 GET 동사에 대해서만 속성을 바�
 
 단추를 선택하면 양식의 `POST` 요청이 서버로 전송됩니다. 규약에 따라 처리기 메서드의 이름은 `handler` 매개 변수의 값을 기반으로 `OnPost[handler]Async` 체계에 의해 선택됩니다.
 
-이번 예제에서는 `handler`가 `delete`이므로 `POST` 요청을 처리하기 위해 `OnPostDeleteAsync` 처리기 메서드가 사용됩니다. `asp-page-handler`가 `remove` 같은 다른 값으로 설정되면 `OnPostRemoveAsync`라는 이름의 페이지 처리기 메서드가 선택됩니다.
+이번 예제에서는 `handler`가 `delete`이므로 `POST` 요청을 처리하기 위해 `OnPostDeleteAsync` 처리기 메서드가 사용됩니다. `asp-page-handler`가 `remove` 같은 다른 값으로 설정되면 `OnPostRemoveAsync`라는 이름의 처리기 메서드가 선택됩니다.
 
 [!code-cs[](index/sample/RazorPagesContacts/Pages/Index.cshtml.cs?range=26-37)]
 
@@ -237,13 +237,13 @@ Razor 페이지는 기본적으로 비 GET 동사에 대해서만 속성을 바�
 
 [!code-cs[](index/sample/Create.cshtml.cs?highlight=3,15-16)]
 
-자세한 내용은 [모델 유효성 검사](xref:mvc/models/validation)를 참고하시기 바랍니다.
+자세한 내용은 [모델 유효성 검사](xref:mvc/models/validation)를 참조하세요.
 
-## <a name="manage-head-requests-with-the-onget-handler"></a>OnGet 처리기로 HEAD 요청 관리하기
+## <a name="handle-head-requests-with-an-onget-handler-fallback"></a>OnGet 처리기 대체를 사용하여 HEAD 요청 처리
 
-HEAD 요청을 사용하면 특정 리소스의 헤더를 검색할 수 있습니다. GET 요청과는 달리 HEAD 요청은 응답 본문을 반환하지 않습니다.
+`HEAD` 요청을 사용하면 특정 리소스의 헤더를 검색할 수 있습니다. `GET` 요청과는 달리 `HEAD` 요청은 응답 본문을 반환하지 않습니다.
 
-일반적으로 HEAD 요청에 대한 HEAD 처리기를 만들고 호출합니다. 
+일반적으로 `HEAD` 요청에 대한 `OnHead` 처리기를 만들고 호출합니다. 
 
 ```csharp
 public void OnHead()
@@ -252,18 +252,16 @@ public void OnHead()
 }
 ```
 
-만약 정의된 HEAD 처리기(`OnHead`)가 없다면 ASP.NET Core 2.1 이상에서는 Razor 페이지가 GET 페이지 처리기(`OnGet`) 호출로 대체합니다. ASP.NET Core 2.1 및 2.2에서 이 동작은 `Startup.Configure`의 [SetCompatibilityVersion](xref:mvc/compatibility-version)에 의해서 발생합니다.
+만약 정의된 `OnHead` 처리기가 없다면 ASP.NET Core 2.1 이상에서는 Razor 페이지가 `OnGet` 처리기 호출로 대체합니다. 이 동작은 `Startup.ConfigureServices`의 [SetCompatibilityVersion](xref:mvc/compatibility-version)에 대한 호출에 의해 사용 설정됩니다.
 
 ```csharp
 services.AddMvc()
-    .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1);
+    .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 ```
 
-기본 템플릿은 ASP.NET Core 2.1 및 2.2에서 `SetCompatibilityVersion` 호출을 생성합니다.
+기본 템플릿은 ASP.NET Core 2.1 및 2.2에서 `SetCompatibilityVersion` 호출을 생성합니다. `SetCompatibilityVersion`은 효과적으로 Razor 페이지 옵션 `AllowMappingHeadRequestsToGetHandler`를 `true`로 설정합니다.
 
-`SetCompatibilityVersion`은 효과적으로 Razor 페이지 옵션 `AllowMappingHeadRequestsToGetHandler`를 `true`로 설정합니다.
-
-`SetCompatibilityVersion`을 사용하여 2.1의 모든 동작을 허용하는 대신 명시적으로 특정 동작을 허용할 수 있습니다. 다음 코드는 HEAD 요청을 GET 처리기로 매핑하는 것을 허용합니다.
+`SetCompatibilityVersion`을 사용하여 모든 동작을 허용하는 대신 명시적으로 *특정* 동작을 허용할 수 있습니다. 다음 코드는 `HEAD` 요청을 `OnGet` 처리기에 매핑할 수 있도록 옵트인합니다.
 
 ```csharp
 services.AddMvc()
@@ -487,7 +485,7 @@ public string Message { get; set; }
 
 ## <a name="multiple-handlers-per-page"></a>한 페이지에 대한 여러 처리기
 
-다음 페이지는 `asp-page-handler` 태그 도우미를 사용하여 두 개의 페이지 처리기에 대한 태그를 생성합니다.
+다음 페이지는 `asp-page-handler` 태그 도우미를 사용하여 두 처리기에 대한 태그를 생성합니다.
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/Customers/CreateFATH.cshtml?highlight=12-13)]
 
