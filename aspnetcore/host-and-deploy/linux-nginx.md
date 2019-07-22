@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/31/2019
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: 29b80b59f474f6a775d1eba315597e55e1e37781
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: d9db2a251820d0dab26f8a6bd2eb755090154165
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64884198"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67813339"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>Nginx를 사용하여 Linux에서 ASP.NET Core 호스트
 
@@ -308,7 +308,7 @@ LSM(Linux Security Modules)은 Linux 2.6 이후 Linux 커널에 포함된 프레
 사용되지 않는 모든 외부 포트를 닫습니다. 복잡하지 않은 방화벽(ufw)은 방화벽을 구성하기 위한 명령줄 인터페이스를 제공하여 `iptables`에 대한 프런트 엔드를 제공합니다.
 
 > [!WARNING]
-> 방화벽이 올바르게 구성되지 않으면 전체 시스템에 대한 액세스가 차단됩니다. 올바른 SSH 포트를 지정하지 못하면 SSH를 사용하여 시스템에 연결하는 경우 실직적으로 시스템에 액세스할 수 없게 됩니다. 기본 포트는 22입니다. 자세한 내용은 [ufw 소개](https://help.ubuntu.com/community/UFW) 및 [매뉴얼](http://manpages.ubuntu.com/manpages/bionic/man8/ufw.8.html)을 참조하세요.
+> 방화벽이 올바르게 구성되지 않으면 전체 시스템에 대한 액세스가 차단됩니다. 올바른 SSH 포트를 지정하지 못하면 SSH를 사용하여 시스템에 연결하는 경우 실직적으로 시스템에 액세스할 수 없게 됩니다. 기본 포트는 22입니다. 자세한 내용은 [ufw 소개](https://help.ubuntu.com/community/UFW) 및 [매뉴얼](https://manpages.ubuntu.com/manpages/bionic/man8/ufw.8.html)을 참조하세요.
 
 `ufw`를 설치하고 필요한 모든 포트에서 트래픽을 허용하도록 구성합니다.
 
@@ -341,7 +341,7 @@ static char ngx_http_server_full_string[] = "Server: Web Server" CRLF;
 
 **보안(HTTPS) 로컬 연결을 위해 앱 구성**
 
-[dotnet 실행](/dotnet/core/tools/dotnet-run) 명령은 `applicationUrl` 속성(예: `https://localhost:5001; http://localhost:5000`)이 제공하는 URL에서 수신 대기하도록 앱을 구성하는 앱의 *Properties/launchSettings.json* 파일을 사용합니다.
+[dotnet 실행](/dotnet/core/tools/dotnet-run) 명령은 `applicationUrl` 속성(예: `https://localhost:5001;http://localhost:5000`)이 제공하는 URL에서 수신 대기하도록 앱을 구성하는 앱의 *Properties/launchSettings.json* 파일을 사용합니다.
 
 다음 방법 중 하나를 사용하여 `dotnet run` 명령 또는 개발 환경(Visual Studio Code의 F5 또는 Ctrl+F5)에 대해 개발 중인 인증서를 사용하도록 앱을 구성합니다.
 
@@ -368,7 +368,7 @@ static char ngx_http_server_full_string[] = "Server: Web Server" CRLF;
 
 #### <a name="secure-nginx-from-clickjacking"></a>클릭재킹(clickjacking)으로부터 Nginx 보호
 
-또한 ‘UI 교정 공격’이라고도 하는[클릭재킹(Clickjacking)](https://blog.qualys.com/securitylabs/2015/10/20/clickjacking-a-common-implementation-mistake-that-can-put-your-websites-in-danger)은 웹 사이트 방문자를 속여서 현재 방문 중인 것과 다른 페이지에서 링크 또는 단추를 클릭하게 하는 악의적인 공격입니다. `X-FRAME-OPTIONS`를 사용하여 사이트를 보호합니다.
+또한 ‘UI 교정 공격’이라고도 하는[클릭재킹(Clickjacking)](https://blog.qualys.com/securitylabs/2015/10/20/clickjacking-a-common-implementation-mistake-that-can-put-your-websites-in-danger)은 웹 사이트 방문자를 속여서 현재 방문 중인 것과 다른 페이지에서 링크 또는 단추를 클릭하게 하는 악의적인 공격입니다.  `X-FRAME-OPTIONS`를 사용하여 사이트를 보호합니다.
 
 클릭재킹 공격을 완화하려면:
 
