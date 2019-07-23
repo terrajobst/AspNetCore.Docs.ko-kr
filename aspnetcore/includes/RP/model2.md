@@ -2,7 +2,7 @@
 
 ### <a name="add-a-database-context-class"></a>데이터베이스 컨텍스트 클래스 추가
 
-다음 `RazorPagesMovieContext` 클래스를 *Models* 폴더에 추가합니다.
+다음 `RazorPagesMovieContext` 클래스를 *Data* 폴더에 추가:
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Data/RazorPagesMovieContext.cs)]
 
@@ -12,7 +12,7 @@
 
 ### <a name="add-a-database-connection-string"></a>데이터베이스 연결 문자열 추가
 
-*appsettings.json* 파일에 연결 문자열을 추가합니다.
+다음 강조된 코드에 표시된 대로 연결 문자열을 *appsettings.json* 파일에 추가:
 
 [!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie/appsettings_SQLite.json?highlight=8-10)]
 

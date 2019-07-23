@@ -5,14 +5,14 @@ description: ASP.NET Core 앱에서 오류를 처리하는 방법을 알아봅�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: tdykstra
 ms.custom: mvc
-ms.date: 05/03/2019
+ms.date: 07/10/2019
 uid: fundamentals/error-handling
-ms.openlocfilehash: 6b92cb6b68b1c70d67f42284d548729e598f9a8b
-ms.sourcegitcommit: c5339594101d30b189f61761275b7d310e80d18a
+ms.openlocfilehash: f9f91455b273b99608ca6f1524df6cb748a26669
+ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/02/2019
-ms.locfileid: "66458441"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68308203"
 ---
 # <a name="handle-errors-in-aspnet-core"></a>ASP.NET Core에서 오류 처리
 
@@ -204,7 +204,7 @@ if (statusCodePagesFeature != null)
 * dotnet 프로세스의 작동이 중단됩니다.
 * HTTP 서버가 [Kestrel](xref:fundamentals/servers/kestrel)인 경우 오류 페이지가 표시되지 않습니다.
 
-[IIS](/iis) 또는 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)에서 실행 중일 때, 프로세스를 시작할 수 없는 경우 [ASP.NET Core 모듈](xref:host-and-deploy/aspnet-core-module)에서 *502.5 - 프로세스 실패*를 반환합니다. 자세한 내용은 <xref:host-and-deploy/iis/troubleshoot>을 참조하세요. Azure App Service의 시작 문제 해결에 대한 내용은 <xref:host-and-deploy/azure-apps/troubleshoot>을 참조하세요.
+[IIS](/iis)(또는 Azure App Service) 또는 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)에서 실행 중일 때, 프로세스를 시작할 수 없는 경우 [ASP.NET Core 모듈](xref:host-and-deploy/aspnet-core-module)에서 ‘502.5 - 프로세스 실패’를 반환합니다.  자세한 내용은 <xref:test/troubleshoot-azure-iis>을 참조하세요.
 
 ## <a name="database-error-page"></a>데이터베이스 오류 페이지
 
@@ -230,6 +230,5 @@ MVC 앱에서는 예외 필터를 전체적으로 구성하거나 컨트롤러�
 
 ## <a name="additional-resources"></a>추가 자료
 
+* <xref:test/troubleshoot-azure-iis>
 * <xref:host-and-deploy/azure-iis-errors-reference>
-* <xref:host-and-deploy/iis/troubleshoot>
-* <xref:host-and-deploy/azure-apps/troubleshoot>

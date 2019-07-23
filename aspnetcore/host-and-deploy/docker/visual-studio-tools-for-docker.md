@@ -1,19 +1,19 @@
 ---
-title: Visual Studio Tools for Docker 및 ASP.NET Core
+title: ASP.NET Core를 포함한 Visual Studio 컨테이너 도구
 author: spboyer
-description: Visual Studio 2017 도구 및 Windows용 Docker를 사용하여 ASP.NET Core 앱을 컨테이너화하는 방법에 대해 알아봅니다.
+description: Visual Studio 도구 및 Windows용 Docker를 사용하여 ASP.NET Core 앱을 컨테이너화하는 방법에 대해 알아봅니다.
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/12/2018
 uid: host-and-deploy/docker/visual-studio-tools-for-docker
-ms.openlocfilehash: b0d884fe2fe56f267ad70c388a08cd3fe6256364
-ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
+ms.openlocfilehash: 5faf0be19448d8272901bf018357da63bbe22d4b
+ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65610372"
+ms.lasthandoff: 07/18/2019
+ms.locfileid: "68308068"
 ---
-# <a name="visual-studio-tools-for-docker-with-aspnet-core"></a>Visual Studio Tools for Docker 및 ASP.NET Core
+# <a name="visual-studio-container-tools-with-aspnet-core"></a>ASP.NET Core를 포함한 Visual Studio 컨테이너 도구
 
 Visual Studio 2017 이상 버전은 .NET Core를 대상으로 하는 컨테이너화된 ASP.NET Core 앱의 빌드, 디버그 및 실행을 지원합니다. Windows 및 Linux 컨테이너가 모두 지원됩니다.
 
@@ -56,7 +56,7 @@ ASP.NET Core 프로젝트를 컨테이너화하려면 프로젝트가 .NET Core�
 * **프로젝트** 메뉴에서 **Docker 지원**을 선택합니다.
 * **솔루션 탐색기**에서 프로젝트를 마우스 오른쪽 단추로 클릭하고 **추가** > **Docker 지원**을 선택합니다.
 
-Visual Studio Tools for Docker는 .NET Framework를 대상으로 하는 기존 ASP.NET Core 프로젝트에 Docker 추가를 지원하지 않습니다.
+Visual Studio 컨테이너 도구는 .NET Framework를 대상으로 하는 기존 ASP.NET Core 프로젝트에 Docker 추가를 지원하지 않습니다.
 
 ## <a name="dockerfile-overview"></a>Dockerfile 개요
 
@@ -88,7 +88,7 @@ Visual Studio 2017 버전 15.8 또는 이후 버전에서는 지시하는 경우
 
 ### <a name="docker-compose"></a>Docker Compose
 
-Visual Studio Tools for Docker는 다음 파일을 통해 솔루션에 *docker-compose* 프로젝트를 추가합니다.
+Visual Studio 컨테이너 도구는 다음 파일을 통해 솔루션에 *docker-compose* 프로젝트를 추가합니다.
 
 * *docker-compose.dcproj* &ndash; 프로젝트를 나타내는 파일입니다. 사용할 OS를 지정하는 `<DockerTargetOS>` 요소를 포함합니다.
 * *.dockerignore* &ndash; 빌드 컨텍스트를 생성할 때 제외할 파일 및 디렉터리 패턴을 나열합니다.
@@ -116,7 +116,7 @@ Visual Studio Tools for Docker는 다음 파일을 통해 솔루션에 *docker-c
 
 Service Fabric은 Windows의 로컬 개발 클러스터에서 Linux 컨테이너를 실행하는 기능을 지원하지 않습니다. 프로젝트에 Linux 컨테이너가 이미 사용되고 있으면 Visual Studio는 Windows 컨테이너로 전환하라는 메시지를 표시합니다.
 
-Visual Studio Tools for Docker는 다음 작업을 수행합니다.
+Visual Studio 컨테이너 도구는 다음 작업을 수행합니다.
 
 * *&lt;project_name&gt;Application* **Service Fabric Application** 프로젝트를 솔루션에 추가합니다.
 * *Dockerfile* 및 *.dockerignore* 파일을 ASP.NET Core 프로젝트에 추가합니다. ASP.NET Core 프로젝트에 *Dockerfile*이 이미 있으면 *Dockerfile.original*로 이름이 변경됩니다. 다음과 유사한 새 *Dockerfile*이 만들어집니다.
@@ -194,7 +194,7 @@ baf9a678c88d        hellodockertools:dev   "C:\\remote_debugge..."   10 minutes 
 
 ## <a name="publish-docker-images"></a>Docker 이미지 게시
 
-앱의 개발 및 디버그 주기를 완료한 후 앱의 프로덕션 이미지를 만들 때 Visual Studio Tools for Docker를 사용할 수 있습니다. 구성 드롭다운을 **릴리스**로 변경하고 앱을 빌드합니다. 도구는 Docker 허브에서 compile/publish 이미지를 가져옵니다(캐시에 아직 없는 경우). ‘최신’ 태그로 이미지가 생성되면 이를 개인 레지스트리 또는 Docker 허브에 푸시할 수 있습니다.
+앱의 개발 및 디버그 주기를 완료한 후 앱의 프로덕션 이미지를 만들 때 Visual Studio 컨테이너 도구를 사용할 수 있습니다. 구성 드롭다운을 **릴리스**로 변경하고 앱을 빌드합니다. 도구는 Docker 허브에서 compile/publish 이미지를 가져옵니다(캐시에 아직 없는 경우). ‘최신’ 태그로 이미지가 생성되면 이를 개인 레지스트리 또는 Docker 허브에 푸시할 수 있습니다. 
 
 PMC에서 `docker images` 명령을 실행하여 이미지의 목록을 봅니다. 다음과 비슷한 출력이 표시됩니다.
 
@@ -225,7 +225,7 @@ microsoft/aspnetcore        2.0     c69d39472da9  13 days ago     347MB
 ::: moniker-end
 
 > [!NOTE]
-> `docker images` 명령은 *\<없음>*(위에 나열되지 않음)으로 식별된 리포지토리 이름 및 태그로 매개자 이미지를 반환합니다. 이러한 이름이 지정되지 않는 이미지는 [다단계 빌드](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) *Dockerfile*에 의해 생성됩니다. 최종 이미지 빌드의 효율성을 향상시키며&mdash;변경될 때 필요한 레이어만 다시 빌드됩니다. 더 이상 매개자 이미지가 필요하지 않은 경우 [docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/) 명령을 사용하여 삭제합니다.
+> `docker images` 명령은 *\<없음>* (위에 나열되지 않음)으로 식별된 리포지토리 이름 및 태그로 매개자 이미지를 반환합니다. 이러한 이름이 지정되지 않는 이미지는 [다단계 빌드](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) *Dockerfile*에 의해 생성됩니다. 최종 이미지 빌드의 효율성을 향상시키며&mdash;변경될 때 필요한 레이어만 다시 빌드됩니다. 더 이상 매개자 이미지가 필요하지 않은 경우 [docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/) 명령을 사용하여 삭제합니다.
 
 *dev* 이미지와 비교하여 프로덕션 또는 릴리스 이미지의 크기가 작을 수 있습니다. 볼륨 매핑으로 인해 디버거 및 앱은 컨테이너 내부가 아닌 로컬 컴퓨터에서 실행되었습니다. *최신* 이미지는 호스트 컴퓨터에서 앱을 실행하는 데 필요한 앱 코드를 패키징했습니다. 따라서 델타는 앱 코드의 크기입니다.
 
@@ -234,5 +234,5 @@ microsoft/aspnetcore        2.0     c69d39472da9  13 days ago     347MB
 * [Visual Studio를 사용한 컨테이너 개발](/visualstudio/containers)
 * [Azure Service Fabric: 개발 환경 준비](/azure/service-fabric/service-fabric-get-started)
 * [Azure Service Fabric에 Windows 컨테이너의 .NET 앱 배포](/azure/service-fabric/service-fabric-host-app-in-a-container)
-* [Docker 관련 Visual Studio 2017 개발 문제 해결](/azure/vs-azure-tools-docker-troubleshooting-docker-errors)
-* [Visual Studio Tools for Docker GitHub 리포지토리](https://github.com/Microsoft/DockerTools)
+* [Docker 관련 Visual Studio 개발 문제 해결](/azure/vs-azure-tools-docker-troubleshooting-docker-errors)
+* [Visual Studio 컨테이너 도구 GitHub 리포지토리](https://github.com/Microsoft/DockerTools)

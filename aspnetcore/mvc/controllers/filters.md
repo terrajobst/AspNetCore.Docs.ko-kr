@@ -4,14 +4,14 @@ author: ardalis
 description: 필터 작동 방법 및 ASP.NET Core에서 사용하는 방법을 자세히 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 5/08/2019
+ms.date: 05/08/2019
 uid: mvc/controllers/filters
-ms.openlocfilehash: cdf121b97396cb23103d49cd141b9ef19b8c0cc6
-ms.sourcegitcommit: e1623d8279b27ff83d8ad67a1e7ef439259decdf
+ms.openlocfilehash: 50b199744f32ad19335080da406db69665ec1ae9
+ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/25/2019
-ms.locfileid: "66223029"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67856157"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core에서 필터링
 
@@ -259,9 +259,9 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 
 [!code-csharp[](./filters/sample/FiltersSample/Controllers/HomeController.cs?name=snippet_ServiceFilter&highlight=1)]
 
-[ServiceFilterAttribute.IsReusable](xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute.IsReusable):
+`ServiceFilterAttribute`를 사용할 때 [ServiceFilterAttribute.IsReusable](xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute.IsReusable) 설정:
 
-* 필터 인스턴스가 원래 생성된 요청 범위 외부에서 재사용될 가능성이 *있음*을 암시하는 것입니다. ASP.NET Core 런타임은 다음을 보장하지 않습니다.
+* 필터 인스턴스가 원래 생성된 요청 범위 밖에서 재사용될 가능성이 *있음*을 암시하는 것입니다. ASP.NET Core 런타임은 다음을 보장하지 않습니다.
 
   * 필터의 단일 인스턴스 생성.
   * 필터는 나중에 DI 컨테이너에서 다시 요청되지 않습니다.
@@ -279,7 +279,10 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 * `TypeFilterAttribute`을 사용하여 참조되는 형식은 DI 컨테이너를 사용하여 등록할 필요가 없습니다.  DI 컨테이너에서 충족하는 종속성을 갖고 있습니다.
 * `TypeFilterAttribute`는 형식에 대한 생성자 인수를 필요에 따라 허용할 수 있습니다.
 
-`TypeFilterAttribute`를 사용 중인 경우 `IsReusable`을 설정하면 필터 인스턴스가 원래 생성된 요청 범위 외부에서 재사용될 가능성이 *있음*을 암시하는 것입니다. ASP.NET Core 런타임은 단일 필터 인스턴스가 생성되도록 보장하지 않습니다. 싱글톤이 아닌 수명이 지정된 서비스에 의존하는 필터를 사용할 때는 `IsReusable`을(를) 사용하지 마세요.
+`TypeFilterAttribute`를 사용할 때 [TypeFilterAttribute.IsReusable](xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute.IsReusable) 설정:
+* 필터 인스턴스가 원래 생성된 요청 범위 밖에서 재사용될 가능성이 *있음*을 암시하는 것입니다. ASP.NET Core 런타임은 단일 필터 인스턴스가 생성되도록 보장하지 않습니다.
+
+* 싱글톤이 아닌 수명이 지정된 서비스에 의존하는 필터와 함께 사용하지 마세요.
 
 다음 예제에서는 `TypeFilterAttribute`를 사용하여 인수를 형식에 전달하는 방법을 보여줍니다.
 

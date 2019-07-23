@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core를 사용하여 웹 API를 빌드하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/23/2019
+ms.date: 07/11/2019
 uid: tutorials/first-web-api
-ms.openlocfilehash: a53f7019c1079296f073e743ddbf9d90fc5abad3
-ms.sourcegitcommit: d6e51c60439f03a8992bda70cc982ddb15d3f100
+ms.openlocfilehash: 95410cef9753fbb0eda6136320b59682e0553ea7
+ms.sourcegitcommit: 040aedca220ed24ee1726e6886daf6906f95a028
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67555871"
+ms.lasthandoff: 07/15/2019
+ms.locfileid: "67893173"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>자습서: ASP.NET Core를 사용하여 웹 API 만들기
 
@@ -99,7 +99,7 @@ ms.locfileid: "67555871"
 
   ![macOS 새 솔루션](first-web-api-mac/_static/sln.png)
 
-* **.NET Core App** > **ASP.NET Core Web API** > **다음**을 선택합니다.
+* **.NET Core** > **앱** > **API** > **다음**을 선택합니다.
 
   ![macOS 새 프로젝트 대화 상자](first-web-api-mac/_static/1.png)
   
@@ -245,6 +245,8 @@ ASP.NET Core에서는 DB 컨텍스트와 같은 서비스를 [DI(종속성 주�
 
 * `GET /api/todo`
 * `GET /api/todo/{id}`
+
+앱이 계속 실행되고 있으면 중지합니다. 그런 다음, 다시 실행하여 최신 변경 내용을 포함합니다.
 
 브라우저에서 두 개의 엔드포인트를 호출하여 앱을 테스트합니다. 예:
 

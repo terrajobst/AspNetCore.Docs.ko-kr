@@ -5,14 +5,14 @@ description: 앱 및 데이터베이스와 같은 ASP.NET Core 인프라의 상�
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/23/2019
+ms.date: 07/11/2019
 uid: host-and-deploy/health-checks
-ms.openlocfilehash: 5119267a8da5c950989b14b7c2e818aa22806506
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 43b6c3b55170eaf3a989d0f2779edac5290df823
+ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64887928"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67855904"
 ---
 # <a name="health-checks-in-aspnet-core"></a>ASP.NET Core의 상태 검사
 
@@ -666,7 +666,7 @@ Task PublishAsync(HealthReport report, CancellationToken cancellationToken);
 ::: moniker range="= aspnetcore-2.2"
 
 > [!NOTE]
-> 다음 해결 방법에서는 하나 이상의 다른 호스트 서비스가 이미 앱에 추가되었을 때 서비스 컨테이너에 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheckPublisher> 인스턴스를 추가하는 것을 허용합니다. 이 해결 방법은 ASP.NET Core 3.0 릴리스에는 필요하지 않습니다. 자세한 내용은 https://github.com/aspnet/Extensions/issues/639를 참조하세요.
+> 다음 해결 방법에서는 하나 이상의 다른 호스트 서비스가 이미 앱에 추가되었을 때 서비스 컨테이너에 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheckPublisher> 인스턴스를 추가하는 것을 허용합니다. 이 해결 방법은 ASP.NET Core 3.0 릴리스에는 필요하지 않습니다. 자세한 내용은 https://github.com/aspnet/Extensions/issues/639 를 참조하세요.
 >
 > ```csharp
 > private const string HealthCheckServiceAssembly =
@@ -684,3 +684,20 @@ Task PublishAsync(HealthReport report, CancellationToken cancellationToken);
 > [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)는 [Application Insights](/azure/application-insights/app-insights-overview)를 포함하여 몇몇 시스템에 대한 게시자를 포함합니다.
 >
 > [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)는 [BeatPulse](https://github.com/xabaril/beatpulse)의 포트이며 Microsoft에서 유지 관리하거나 지원하지 않습니다.
+
+## <a name="restrict-health-checks-with-mapwhen"></a>MapWhen으로 상태 검사 제한
+
+<xref:Microsoft.AspNetCore.Builder.MapWhenExtensions.MapWhen*>을 사용하여 상태 검사 엔드포인트에 대한 요청 파이프라인을 조건부로 분기합니다.
+
+다음 예제에서 `MapWhen`은 `api/HealthCheck` 엔드포인트에 대한 GET 요청을 받는 경우 상태 검사 미들웨어를 활성화하도록 요청 파이프라인을 분기합니다.
+
+```csharp
+app.MapWhen(
+    context => context.Request.Method == HttpMethod.Get.Method && 
+        context.Request.Path.StartsWith("/api/HealthCheck"),
+    builder => builder.UseHealthChecks());
+
+app.UseMvc();
+```
+
+자세한 내용은 <xref:fundamentals/middleware/index#use-run-and-map>을 참조하세요.

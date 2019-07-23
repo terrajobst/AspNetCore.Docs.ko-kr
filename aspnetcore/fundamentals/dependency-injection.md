@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/09/2019
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 1455aa9ce4ea24eaeb396134f91b6d089b346c17
-ms.sourcegitcommit: bee530454ae2b3c25dc7ffebf93536f479a14460
+ms.openlocfilehash: 9293de38dcca1c0672f9cc3defa8d3c1b0b13d5a
+ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/10/2019
-ms.locfileid: "67724434"
+ms.lasthandoff: 07/12/2019
+ms.locfileid: "67855894"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>ASP.NET Core에서 종속성 주입
 
@@ -95,7 +95,7 @@ services.AddSingleton(typeof(ILogger<T>), typeof(Logger<T>));
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Startup.cs?name=snippet1&highlight=5)]
 
 > [!NOTE]
-> 각 `services.Add{SERVICE_NAME}` 확장 메서드는 서비스를 추가(및 잠재적으로 구성)합니다. 예를 들어 `services.AddMvc()`는 Razor 페이지와 MVC에서 요청하는 서비스를 추가합니다. 앱에서 이 규칙을 따르는 것이 좋습니다. 확장 메서드를 <xref:Microsoft.Extensions.DependencyInjection?displayProperty=fullName> 네임스페이스에 배치하여 서비스 등록 그룹을 캡슐화합니다.
+> 각 `services.Add{SERVICE_NAME}` 확장 메서드는 서비스를 추가(및 잠재적으로 구성)합니다. 예를 들어 `services.AddMvc()`는 Razor 페이지와 MVC에서 요청하는 서비스를 추가합니다. 앱에서 이 규칙을 따르는 것이 좋습니다. 확장 메서드를 [Microsoft.Extensions.DependencyInjection](/dotnet/api/microsoft.extensions.dependencyinjection) 네임스페이스에 배치하여 서비스 등록 그룹을 캡슐화합니다.
 
 서비스의 생성자에 `string`과 같은 [기본 제공](/dotnet/csharp/language-reference/keywords/built-in-types-table) 형식이 필요한 경우 [구성](xref:fundamentals/configuration/index) 및 [옵션 패턴](xref:fundamentals/configuration/options)을 사용하여 해당 형식을 삽입할 수 있습니다.
 
@@ -140,7 +140,7 @@ public class MyDependency : IMyDependency
 | <xref:System.Diagnostics.DiagnosticSource?displayProperty=fullName> | Singleton |
 | <xref:System.Diagnostics.DiagnosticListener?displayProperty=fullName> | Singleton |
 
-서비스 컬렉션 확장 메서드를 사용하여 서비스(및 필요한 경우 해당 종속 서비스)를 등록할 수 있는 경우 단일 `Add{SERVICE_NAME}` 확장 메서드를 사용하여 해당 서비스에 필요한 모든 서비스를 등록하는 것이 규칙입니다. 다음 코드는 확장 메서드 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext*>, <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.AddIdentityCore*> 및 <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddMvc*>를 사용하여 컨테이너에 서비스를 추가하는 방법을 보여주는 예제입니다.
+서비스 컬렉션 확장 메서드를 사용하여 서비스(및 필요한 경우 해당 종속 서비스)를 등록할 수 있는 경우 단일 `Add{SERVICE_NAME}` 확장 메서드를 사용하여 해당 서비스에 필요한 모든 서비스를 등록하는 것이 규칙입니다. 다음 코드는 확장 메서드 [AddDbContext\<TContext>](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext), <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.AddIdentityCore*> 및 <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddMvc*>를 사용하여 컨테이너에 서비스를 추가하는 방법을 보여 주는 예제입니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -242,7 +242,7 @@ services.TryAddEnumerable(ServiceDescriptor.Singleton<IMyDep1, MyDep>());
 
 ## <a name="entity-framework-contexts"></a>Entity Framework 컨텍스트
 
-Entity Framework 컨텍스트는 일반적으로 [범위가 지정된 수명](#service-lifetimes)을 사용하여 서비스 컨테이너에 추가됩니다. 이는 웹앱 데이터베이스 작업이 일반적으로 클라이언트 요청에 따라 범위가 지정되기 때문입니다. 데이터베이스 컨텍스트를 등록할 때 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext*> 오버로드로 수명이 지정되지 않으면 기본 수명이 범위가 지정됩니다. 지정된 수명의 서비스는 서비스보다 수명이 짧은 데이터베이스 컨텍스트를 사용해서는 안됩니다.
+Entity Framework 컨텍스트는 일반적으로 [범위가 지정된 수명](#service-lifetimes)을 사용하여 서비스 컨테이너에 추가됩니다. 이는 웹앱 데이터베이스 작업이 일반적으로 클라이언트 요청에 따라 범위가 지정되기 때문입니다. 데이터베이스 컨텍스트를 등록할 때 [AddDbContext\<TContext>](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) 오버로드로 수명이 지정되지 않으면 기본 수명이 범위가 지정됩니다. 지정된 수명의 서비스는 서비스보다 수명이 짧은 데이터베이스 컨텍스트를 사용해서는 안됩니다.
 
 ## <a name="lifetime-and-registration-options"></a>수명 및 등록 옵션
 
