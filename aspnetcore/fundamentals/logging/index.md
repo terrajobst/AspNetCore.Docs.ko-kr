@@ -6,12 +6,12 @@ ms.author: tdykstra
 ms.custom: mvc
 ms.date: 07/11/2019
 uid: fundamentals/logging/index
-ms.openlocfilehash: cdb5cad2302cc8ec02107021005b8590efce7533
-ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
+ms.openlocfilehash: 4fe677e69478284db2ccab655c35b5744b6f63f9
+ms.sourcegitcommit: 059ab380744fa3be3b69aa90d431b563c57092cf
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68308214"
+ms.lasthandoff: 07/23/2019
+ms.locfileid: "68410917"
 ---
 # <a name="logging-in-aspnet-core"></a>ASP.NET Core에 로그인
 
@@ -865,14 +865,11 @@ ASP.NET 4.x용으로 제공되는 [Microsoft.ApplicationInsights.Web](https://ww
 자세한 내용은 다음 리소스를 참조하세요.
 
 * [Application Insights 개요](/azure/application-insights/app-insights-overview)
-* [ASP.NET Core 애플리케이션용 Application Insights](/azure/azure-monitor/app/asp-net-core-no-visualstudio) - 로깅과 함께 전체 범위 Application Insights 원격 분석을 구현하려면 여기에서 시작합니다.
+* [ASP.NET Core 애플리케이션용 Application Insights](/azure/azure-monitor/app/asp-net-core) - 로깅과 함께 전체 범위 Application Insights 원격 분석을 구현하려면 여기에서 시작합니다.
 * [.NET Core ILogger 로그용 ApplicationInsightsLoggerProvider](/azure/azure-monitor/app/ilogger) - 나머지 Application Insights 원격 분석 없이 로깅 공급자를 구현하려면 여기에서 시작합니다.
-* [Application Insights 로깅 어댑터](https://github.com/Microsoft/ApplicationInsights-dotnet-logging/blob/develop/README.md).
+* [Application Insights 로깅 어댑터](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-trace-logs).
 * [Application Insights SDK 설치, 구성 및 초기화](/learn/modules/instrument-web-app-code-with-application-insights) - Microsoft Learn 사이트의 대화형 자습서입니다.
 ::: moniker-end
-
-> [!NOTE]
-> 2019년 5월 1일부터 [ASP.NET Core용 Application Insights](/azure/azure-monitor/app/asp-net-core) 문서는 만료되고 자습서 단계가 작동하지 않습니다. 대신에 [ASP.NET Core 애플리케이션용 Application Insights](/azure/azure-monitor/app/asp-net-core-no-visualstudio)를 참조하세요. 문제를 인식하고 수정 작업을 진행하고 있습니다.
 
 ## <a name="third-party-logging-providers"></a>타사 로깅 공급자
 
