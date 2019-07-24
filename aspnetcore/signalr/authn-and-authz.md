@@ -5,14 +5,14 @@ description: ASP.NET Core SignalR에서 인증 및 권한 부여를 사용하는
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 05/09/2019
+ms.date: 07/15/2019
 uid: signalr/authn-and-authz
-ms.openlocfilehash: e8f9dc48be780fb91bdec6ea4d579f5e4f16197b
-ms.sourcegitcommit: 3376f224b47a89acf329b2d2f9260046a372f924
+ms.openlocfilehash: e7e7a9fd537ba89b64c15594652a290357a00038
+ms.sourcegitcommit: f30b18442ed12831c7e86b0db249183ccd749f59
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/10/2019
-ms.locfileid: "65516950"
+ms.lasthandoff: 07/23/2019
+ms.locfileid: "68412537"
 ---
 # <a name="authentication-and-authorization-in-aspnet-core-signalr"></a>ASP.NET Core SignalR의 인증 및 권한 부여
 
@@ -24,7 +24,7 @@ ms.locfileid: "65516950"
 
 SignalR을 [ASP.NET Core 인증](xref:security/authentication/identity)과 함께 사용하여 각 연결에 사용자를 연결할 수 있습니다. 허브에서는 [`HubConnectionContext.User`](/dotnet/api/microsoft.aspnetcore.signalr.hubconnectioncontext.user) 속성을 통해서 인증 데이터에 접근할 수 있습니다. 인증을 사용하면 허브가 특정 사용자와 관련된 모든 연결에서 메서드를 호출할 수 있습니다(자세한 정보는 [SignalR의 사용자 및 그룹 관리](xref:signalr/groups)를 참고하시기 바랍니다). 단일 사용자에게 다수의 연결을 연결할 수 있습니다.
 
-다음은 예가 `Startup.Configure` SignalR 및 ASP.NET Core 인증을 사용 하는:
+SignalR 및 ASP.NET Core 인증을 사용 `Startup.Configure` 하는 예제는 다음과 같습니다.
 
 ```csharp
 public void Configure(IApplicationBuilder app)
@@ -48,7 +48,7 @@ public void Configure(IApplicationBuilder app)
 ```
 
 > [!NOTE]
-> SignalR 및 ASP.NET Core 인증 미들웨어를 등록 하는 순서가 중요 합니다. 항상 호출 `UseAuthentication` 하기 전에 `UseSignalR` SignalR 사용자에 있도록는 `HttpContext`합니다.
+> SignalR 및 ASP.NET Core 인증 미들웨어를 등록 하는 순서는 중요 합니다. SignalR에 `UseAuthentication` 에 `UseSignalR` 대 한 사용자 `HttpContext`가 있도록 항상 먼저를 호출 합니다.
 
 ### <a name="cookie-authentication"></a>쿠키 인증
 
@@ -101,7 +101,7 @@ var connection = new HubConnectionBuilder()
 > [!NOTE]
 > 선택한 값은 시스템의 모든 사용자 간에 고유해야 합니다. 그렇지 않으면 특정 사용자를 대상으로 한 메시지가 다른 사용자에게 전달될 수 있습니다.
 
-이 구성 요소를 등록 하면 `Startup.ConfigureServices` 메서드.
+`Startup.ConfigureServices` 메서드에이 구성 요소를 등록 합니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -126,22 +126,22 @@ var connection = new HubConnectionBuilder()
 
 Windows 인증은 Microsoft Internet Explorer 또는 Microsoft Edge를 사용하는 경우에만 브라우저 클라이언트에서 지원됩니다.
 
-### <a name="use-claims-to-customize-identity-handling"></a>사용 하 여 클레임 id 처리를 사용자 지정 하려면
+### <a name="use-claims-to-customize-identity-handling"></a>클레임을 사용 하 여 id 처리 사용자 지정
 
-앱 사용자를 인증 하는 사용자 클레임에서 SignalR 사용자 Id를 파생할 수 있습니다. SignalR 사용자 Id를 생성 하는 방법을 사용 하지 않으려면 구현 `IUserIdProvider` 구현을 등록 합니다.
+사용자를 인증 하는 앱은 사용자 클레임에서 사용자 Id를 SignalR 파생 시킬 수 있습니다. SignalR에서 사용자 id를 만드는 방법을 지정 하려면 `IUserIdProvider` 구현을 구현 하 고 등록 합니다.
 
-샘플 코드를 사용 하는 클레임을 사용 하는 식별 속성으로 사용자의 전자 메일 주소를 선택 하는 방법을 보여 줍니다. 
+샘플 코드는 클레임을 사용 하 여 사용자의 이메일 주소를 식별 속성으로 선택 하는 방법을 보여 줍니다. 
 
 > [!NOTE]
 > 선택한 값은 시스템의 모든 사용자 간에 고유해야 합니다. 그렇지 않으면 특정 사용자를 대상으로 한 메시지가 다른 사용자에게 전달될 수 있습니다.
 
 [!code-csharp[Email provider](authn-and-authz/sample/EmailBasedUserIdProvider.cs?name=EmailBasedUserIdProvider)]
 
-형식 사용 하 여 클레임을 추가 하는 계정 등록 `ClaimsTypes.Email` ASP.NET identity 데이터베이스에 있습니다.
+계정 등록은 ASP.NET id 데이터베이스에 형식의 `ClaimsTypes.Email` 클레임을 추가 합니다.
 
 [!code-csharp[Adding the email to the ASP.NET identity claims](authn-and-authz/sample/pages/account/Register.cshtml.cs?name=AddEmailClaim)]
 
-이 구성 요소를 등록 하면 `Startup.ConfigureServices`합니다.
+에서이 구성 요소를 `Startup.ConfigureServices`등록 합니다.
 
 ```csharp
 services.AddSingleton<IUserIdProvider, EmailBasedUserIdProvider>();
@@ -157,7 +157,7 @@ services.AddSingleton<IUserIdProvider, EmailBasedUserIdProvider>();
 
 ```csharp
 [Authorize("MyAuthorizationPolicy")]
-public class ChatHub: Hub
+public class ChatHub : Hub
 {
 }
 ```
@@ -166,7 +166,7 @@ public class ChatHub: Hub
 
 ```csharp
 [Authorize]
-public class ChatHub: Hub
+public class ChatHub : Hub
 {
     public async Task Send(string message)
     {
@@ -181,6 +181,81 @@ public class ChatHub: Hub
 }
 ```
 
+::: moniker range=">= aspnetcore-3.0"
+
+### <a name="use-authorization-handlers-to-customize-hub-method-authorization"></a>권한 부여 처리기를 사용 하 여 허브 메서드 권한 부여 사용자 지정
+
+SignalR는 허브 메서드가 권한 부여를 요구할 때 권한 부여 처리기에 사용자 지정 리소스를 제공 합니다. 리소스는의 `HubInvocationContext`인스턴스입니다. 에는 `HubCallerContext`, 호출 되는 허브 메서드의 이름 및 허브 메서드에 대 한 인수가 포함되어있습니다.`HubInvocationContext`
+
+Azure Active Directory를 통해 여러 조직 로그인을 허용 하는 대화방의 예를 생각해 보세요. Microsoft 계정 있는 사용자는 채팅에 로그인 할 수 있지만 소유 조직의 구성원만 사용자를 금지 하거나 사용자의 채팅 기록을 볼 수 있습니다. 또한 특정 사용자의 특정 기능을 제한 해야 할 수도 있습니다. ASP.NET Core 3.0의 업데이트 된 기능을 사용 하는 것이 가능 합니다. 을 `DomainRestrictedRequirement` 사용자 지정 `IAuthorizationRequirement`으로 사용 하는 방법을 확인 합니다. `HubInvocationContext` 이제 리소스 매개 변수가 전달 되 고 있으므로 내부 논리는 허브가 호출 되는 컨텍스트를 검사 하 고 사용자가 개별 허브 메서드를 실행할 수 있도록 하는 결정을 내릴 수 있습니다.
+
+```csharp
+[Authorize]
+public class ChatHub : Hub
+{
+    public void SendMessage(string message)
+    {
+    }
+
+    [Authorize("DomainRestricted")]
+    public void BanUser(string username)
+    {
+    }
+
+    [Authorize("DomainRestricted")]
+    public void ViewUserHistory(string username)
+    {
+    }
+}
+
+public class DomainRestrictedRequirement : 
+    AuthorizationHandler<DomainRestrictedRequirement, HubInvocationContext>, 
+    IAuthorizationRequirement
+{
+    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
+        DomainRestrictedRequirement requirement, 
+        HubInvocationContext resource)
+    {
+        if (IsUserAllowedToDoThis(resource.HubMethodName, context.User.Identity.Name) && 
+            context.User.Identity.Name.EndsWith("@microsoft.com"))
+        {
+            context.Succeed(requirement);
+        }
+        return Task.CompletedTask;
+    }
+
+    private bool IsUserAllowedToDoThis(string hubMethodName,
+        string currentUsername)
+    {
+        return !(currentUsername.Equals("asdf42@microsoft.com") && 
+            hubMethodName.Equals("banUser", StringComparison.OrdinalIgnoreCase));
+    }
+}
+```
+
+에서 `Startup.ConfigureServices` 정책`DomainRestricted` 만들기에 대 한 매개 변수로 사용자 지정 `DomainRestrictedRequirement` 요구 사항을 제공 하 여 새 정책을 추가 합니다.
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    // ... other services ...
+
+    services
+        .AddAuthorization(options =>
+        {
+            options.AddPolicy("DomainRestricted", policy =>
+            {
+                policy.Requirements.Add(new DomainRestrictedRequirement());
+            });
+        });
+}
+```
+
+앞의 예제 `DomainRestrictedRequirement` 에서 클래스는 `IAuthorizationRequirement` 및 해당 요구 사항에 대 한 `AuthorizationHandler` 고유한 클래스입니다. 이러한 두 구성 요소를 별도의 클래스로 분할 하 여 문제를 구분할 수 있습니다. 예제의 방법의 장점은 요구 사항과 처리기가 동일 하기 때문에 시작 하는 `AuthorizationHandler` 동안를 주입할 필요가 없다는 점입니다.
+
+::: moniker-end
+
 ## <a name="additional-resources"></a>추가 자료
 
 * [ASP.NET Core에서 전달자 토큰 인증](https://blogs.msdn.microsoft.com/webdev/2016/10/27/bearer-token-authentication-in-asp-net-core/)
+* [리소스 기반 권한 부여](xref:security/authorization/resourcebased)

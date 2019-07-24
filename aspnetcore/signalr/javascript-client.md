@@ -5,14 +5,14 @@ description: ASP.NET Core SignalR JavaScript 클라이언트의 개요입니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 04/17/2019
+ms.date: 06/28/2019
 uid: signalr/javascript-client
-ms.openlocfilehash: 8b645304b597db0c37fb9cd8814c493ca1c6ee62
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: f314e1fe0ef0ea73a28b332404a09f2956524132
+ms.sourcegitcommit: f30b18442ed12831c7e86b0db249183ccd749f59
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67814956"
+ms.lasthandoff: 07/23/2019
+ms.locfileid: "68412388"
 ---
 # <a name="aspnet-core-signalr-javascript-client"></a>ASP.NET Core SignalR JavaScript 클라이언트
 
@@ -26,12 +26,27 @@ ASP.NET Core SignalR JavaScript 클라이언트 라이브러리를 사용 하면
 
 SignalR JavaScript 클라이언트 라이브러리는 [npm](https://www.npmjs.com/) 패키지로 배포됩니다. Visual Studio를 사용하고 있다면 **패키지 관리자 콘솔** 에서 루트 폴더에 있을 때 `npm install` 을 실행합니다. Visual Studio Code에서는 **통합 터미널** 에서 명령을 실행합니다.
 
+::: moniker range=">= aspnetcore-3.0"
+
+  ```console
+  npm init -y
+  npm install @microsoft/signalr
+  ```
+
+그러면 npm이 *node_modules\\@microsoft\signalr\dist\browser* 폴더에 패키지 콘텐츠를 설치합니다. *wwwroot\\lib* 폴더 하위에 *signalr* 이라는 새 폴더를 만듭니다 *signalr.js* 파일을 *wwwroot\lib\signalr* 폴더로 복사합니다.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
   ```console
   npm init -y
   npm install @aspnet/signalr
   ```
 
 그러면 npm이 *node_modules\\@aspnet\signalr\dist\browser* 폴더에 패키지 콘텐츠를 설치합니다. *wwwroot\\lib* 폴더 하위에 *signalr* 이라는 새 폴더를 만듭니다 *signalr.js* 파일을 *wwwroot\lib\signalr* 폴더로 복사합니다.
+
+::: moniker-end
 
 ## <a name="use-the-signalr-javascript-client"></a>SignalR JavaScript 클라이언트 사용하기
 
@@ -60,19 +75,19 @@ SignalR JavaScript 클라이언트 라이브러리는 [npm](https://www.npmjs.co
 JavaScript 클라이언트는 [HubConnection](/javascript/api/%40aspnet/signalr/hubconnection)의 [invoke](/javascript/api/%40aspnet/signalr/hubconnection#invoke) 메서드를 통해서 허브의 public 메서드를 호출합니다. 이 `invoke` 메서드는 두 가지 인수를 전달받습니다.
 
 * 허브 메서드의 이름. 다음 예제에서 허브 메서드의 이름은 `SendMessage`입니다.
-* 허브 메서드에 정의된 모든 인수. 다음 예제에서 인수의 이름은 `message`입니다. 이 예제 코드에서는 최신 버전의 Internet Explorer를 제외 하 고 모든 주요 브라우저에서 지원 되는 화살표 함수 구문입니다.
+* 허브 메서드에 정의된 모든 인수. 다음 예제에서 인수의 이름은 `message`입니다. 예제 코드는 Internet Explorer를 제외한 모든 주요 브라우저의 현재 버전에서 지원 되는 화살표 함수 구문을 사용 합니다.
 
   [!code-javascript[Call hub methods](javascript-client/sample/wwwroot/js/chat.js?range=24)]
 
 > [!NOTE]
-> Azure SignalR Service를 사용 하는 경우 *서버 리스 모드*, 클라이언트에서 허브 메서드를 호출할 수 없습니다. 자세한 내용은 참조는 [SignalR Service 설명서](/azure/azure-signalr/signalr-concept-serverless-development-config)합니다.
+> 서버를 사용 하지 않는 *모드로*Azure SignalR Service를 사용 하는 경우 클라이언트에서 허브 메서드를 호출할 수 없습니다. 자세한 내용은 [SignalR Service 설명서](/azure/azure-signalr/signalr-concept-serverless-development-config)를 참조 하세요.
 
-합니다 `invoke` 메서드는 JavaScript [약속](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)합니다. `Promise` 해결 될 반환 값 (있는 경우) 서버에 대 한 메서드가 반환 하는 경우. 서버에 대 한 메서드가 오류를 throw 하는 경우는 `Promise` 오류 메시지와 함께 거부 됩니다. 사용 합니다 `then` 및 `catch` 메서드는 `Promise` 이러한 자체 (또는 `await` 구문).
+메서드 `invoke` 는 JavaScript [약속](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)을 반환 합니다. 는 `Promise` 서버의 메서드가 반환 될 때 반환 값 (있는 경우)으로 확인 됩니다. 서버에서 메서드가 오류를 `Promise` throw 하는 경우 오류 메시지와 함께이 거부 됩니다. 이러한 경우 또는 `catch` `Promise` `then` 구문을처리하려면자체에서및메서드`await` 를 사용 합니다.
 
-합니다 `send` 메서드는 JavaScript `Promise`합니다. `Promise` 서버로 메시지가 전송 된 때 해결 됩니다. 메시지를 보내는 오류가 발생 하는 경우는 `Promise` 오류 메시지와 함께 거부 됩니다. 사용 합니다 `then` 및 `catch` 메서드는 `Promise` 이러한 자체 (또는 `await` 구문).
+메서드 `send` 는 JavaScript `Promise`를 반환 합니다. 메시지가 서버에 전송 되 면 이확인됩니다.`Promise` 메시지를 보내는 동안 오류가 발생 하는 경우 `Promise` 이 오류 메시지와 함께 거부 됩니다. 이러한 경우 또는 `catch` `Promise` `then` 구문을처리하려면자체에서및메서드`await` 를 사용 합니다.
 
 > [!NOTE]
-> 사용 하 여 `send` 서버에서 메시지를 수신 될 때까지 대기 하지 않습니다. 따라서 서버에서 데이터 또는 오류를 반환할 수 없는 합니다.
+> 를 `send` 사용 하면 서버에서 메시지를 받을 때까지 기다리지 않습니다. 따라서 서버에서 데이터 또는 오류를 반환할 수 없습니다.
 
 ## <a name="call-client-methods-from-hub"></a>허브에서 클라이언트 메서드 호출하기
 
@@ -115,7 +130,7 @@ SignalR은 `SendAsync`와 `connection.on`에 정의된 메서드 이름과 인�
 
 ### <a name="automatically-reconnect"></a>자동으로 다시 연결
 
-SignalR에 대 한 JavaScript 클라이언트를 자동으로 사용 하 여 다시 연결을 구성할 수 있습니다 합니다 `withAutomaticReconnect` 메서드를 [HubConnectionBuilder](/javascript/api/%40aspnet/signalr/hubconnectionbuilder)합니다. 기본적으로 다시 자동으로 연결 되지 않습니다.
+SignalR에 대 한 JavaScript 클라이언트는 `withAutomaticReconnect` [HubConnectionBuilder](/javascript/api/%40aspnet/signalr/hubconnectionbuilder)에서 메서드를 사용 하 여 자동으로 다시 연결 되도록 구성할 수 있습니다. 기본적으로 자동으로 다시 연결 되지 않습니다.
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
@@ -124,9 +139,9 @@ const connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-모든 매개 변수 없이 `withAutomaticReconnect()` 4 실패 한 시도 후 각 다시 연결 시도 전에 각각 0, 2, 10 일 및 30 초를 기다리고 클라이언트를 구성 합니다.
+매개 변수를 `withAutomaticReconnect()` 사용 하지 않으면는 각 다시 연결 시도를 시도 하기 전에 0, 2, 10 및 30 초 동안 대기 하도록 클라이언트를 구성 하 고, 실패 한 네 번 시도 하면 중지 합니다.
 
-다시 연결 시도 시작 하기 전에 `HubConnection` 전환 됩니다 합니다 `HubConnectionState.Reconnecting` 상태 및 실행 해당 `onreconnecting` 전환 하는 대신 콜백을 `Disconnected` 상태 및 트리거 해당 `onclose` 콜백을 등을 `HubConnection`자동 다시 연결 하지 않고 구성 합니다. 이 연결 손실 되었음을 사용자에 게 경고 하는 데 UI 요소를 사용 하지 않도록 설정할 수 있는 기회를 제공 합니다.
+다시 연결 `HubConnection` 시도를 시작 하기 전에이 상태로 전환 `HubConnectionState.Reconnecting` 되 고, `Disconnected` 상태를 `onreconnecting` 전환 하 고 해당 `onclose` 콜백을 다음과 같이 `HubConnection`트리거하는대신콜백이발생합니다.자동 다시 연결이 구성 되지 않았습니다. 이렇게 하면 연결이 손실 되었음을 사용자에 게 경고 하 고 UI 요소를 사용 하지 않도록 설정할 수 있습니다.
 
 ```javascript
 connection.onreconnecting((error) => {
@@ -140,12 +155,12 @@ connection.onreconnecting((error) => {
 });
 ```
 
-클라이언트는 먼저 4 회 성공적으로 다시 연결 하는 경우는 `HubConnection` 으로 다시 전환 됩니다.는 `Connected` 상태 및 실행 해당 `onreconnected` 콜백 합니다. 이 연결이 다시 설정 하는 사용자에 게 알리기 기회를 제공 합니다.
+클라이언트에서 처음 네 번의 시도 `HubConnection` 내에 다시 연결 하는 경우이 `Connected` 상태로 다시 전환 되 고 `onreconnected` 콜백이 발생 합니다. 이렇게 하면 연결이 다시 설정 되었음을 사용자에 게 알릴 수 있습니다.
 
-연결 서버에 완전히 새로운 표시 하므로 새 `connectionId` 에 제공 됩니다는 `onreconnected` 콜백 합니다.
+연결은 서버에서 완전히 새로운 것 이므로 `connectionId` `onreconnected` 콜백에 새가 제공 됩니다.
 
 > [!WARNING]
-> `onreconnected` 콜백의 `connectionId` 매개 변수는 정의 되지 경우 합니다 `HubConnection` 하도록 구성 된 [협상 건너뛸](xref:signalr/configuration#configure-client-options)합니다.
+> 가 `onreconnected` 협상을 `connectionId` [건너뛰도록](xref:signalr/configuration#configure-client-options)구성 된 경우 `HubConnection` 콜백의 매개 변수는 정의 되지 않습니다.
 
 ```javascript
 connection.onreconnected((connectionId) => {
@@ -159,7 +174,7 @@ connection.onreconnected((connectionId) => {
 });
 ```
 
-`withAutomaticReconnect()` 구성지 않습니다는 `HubConnection` 시작 실패를 수동으로 처리 해야 하므로 초기 시작 실패를 다시 시도 합니다.
+`withAutomaticReconnect()`초기 시작 오류 `HubConnection` 를 다시 시도 하도록를 구성 하지 않으므로 시작 실패를 수동으로 처리 해야 합니다.
 
 ```javascript
 async function start() {
@@ -175,7 +190,7 @@ async function start() {
 };
 ```
 
-클라이언트 하지 해당 처음 네 개의 시도 내에서 성공적으로 다시 연결 하는 경우는 `HubConnection` 전환 됩니다 합니다 `Disconnected` 상태 및 실행 해당 [onclose](/javascript/api/%40aspnet/signalr/hubconnection#onclose) 콜백 합니다. 이 연결이 영구적으로 손실 되었으며 페이지를 새로 고치는 것이 좋습니다 사용자에 게 알리기 기회를 제공 합니다.
+클라이언트가 처음 네 번의 시도 `HubConnection` 내에서 성공적으로 다시 연결 되지 않으면이 `Disconnected` 상태로 전환 되 고 [onclose](/javascript/api/%40aspnet/signalr/hubconnection#onclose) 콜백이 발생 합니다. 이를 통해 사용자에 게 연결이 영구적으로 손실 되었음을 알리고 페이지 새로 고침을 권장 하는 기회를 제공 합니다.
 
 ```javascript
 connection.onclose((error) => {
@@ -189,7 +204,7 @@ connection.onclose((error) => {
 });
 ```
 
-사용자 지정 연결을 끊기 전에 다시 연결 시도 횟수를 구성 하거나 다시 연결 시간을 변경 하려면 `withAutomaticReconnect` 각 다시 연결 시도 시작 하기 전에 대기할 밀리초의 지연을 나타내는 숫자 배열을 허용 합니다.
+연결을 끊거나 다시 연결 하는 시간 `withAutomaticReconnect` 을 변경 하기 전에 사용자가 다시 연결 시도 횟수를 구성 하기 위해는 각 다시 연결 시도를 시작 하기 전에 대기할 지연 시간 (밀리초)을 나타내는 숫자 배열을 허용 합니다.
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
@@ -200,39 +215,38 @@ const connection = new signalR.HubConnectionBuilder()
     // .withAutomaticReconnect([0, 2000, 10000, 30000]) yields the default behavior
 ```
 
-앞의 예제 구성는 `HubConnection` 연결이 끊어진 후에 즉시 다시 연결 시도 시작 합니다. 기본 구성에는이 마찬가지입니다.
+앞의 예제에서는 연결이 `HubConnection` 끊긴 후 즉시 다시 연결 시도를 시작 하도록를 구성 합니다. 기본 구성의 경우에도 마찬가지입니다.
 
-첫 번째 다시 연결 시도가 실패 하면 기본 구성이 있는 것 처럼 2 초 대기 하는 대신 두 번째 다시 연결 시도가 즉시 시작도 됩니다.
+첫 번째 다시 연결 시도가 실패 하면 두 번째 다시 연결 시도도 기본 구성에서와 같이 2 초 동안 대기 하는 대신 즉시 시작 됩니다.
 
-두 번째 다시 연결 시도가 실패 하면 세 번째 다시 연결 시도 기본 구성 등 다시 10 초 후에 시작 됩니다.
+두 번째 다시 연결 시도가 실패 하면 세 번째 다시 연결 시도가 10 초 후에 다시 시작 됩니다 .이는 기본 구성 처럼 다시 시작 됩니다.
 
-사용자 지정 동작은 다음 달라 지므로 다시 기본 동작에서 중지 하 여 세 번째 다시 연결 시도 하나를 사용 하는 대신 오류 후 더 시도 기본 구성이 있는 것 처럼 다른 30 초 후에 다시 연결 합니다.
+그런 다음 기본 구성에서와 같이 30 초 후에 다시 연결을 다시 시도 하는 대신 세 번째 다시 연결 시도 실패 후 중지 하 여 기본 동작에서 사용자 지정 동작이 다시 달라 지므로.
 
-자동의 수와 타이밍을 보다 잘 제어할 다시 시도 하려는 경우 `withAutomaticReconnect` 구현 하는 개체를 허용 합니다 `IReconnectPolicy` 라는 단일 메서드가 있는 인터페이스 `nextRetryDelayInMilliseconds`합니다.
+자동 다시 연결 시도 `withAutomaticReconnect` 의 타이밍과 수를 더 많이 제어 하려는 경우는 라는 `nextRetryDelayInMilliseconds`단일 메서드가 있는 `IRetryPolicy` 인터페이스를 구현 하는 개체를 허용 합니다.
 
-`nextRetryDelayInMilliseconds` 두 개의 인수로 `previousRetryCount` 및 `elapsedMilliseconds`, 두 번호는 합니다. 첫 번째 다시 연결 시도 하기 전에 둘 다 `previousRetryCount` 고 `elapsedMilliseconds` 0이 됩니다. 각 실패 한 시도 후 `previousRetryCount` 1 씩 증가 하 고 `elapsedMilliseconds` 밀리초에서 지금 다시 연결 하는 데 걸린 시간을 반영 하도록 업데이트 됩니다.
+`nextRetryDelayInMilliseconds`는 형식의 `RetryContext`단일 인수를 사용 합니다. `previousRetryCount` 에는`elapsedMilliseconds` , 및 각각,`number`및 인 세 가지 속성이 있습니다. `number` `retryReason` `RetryContext` `Error` 첫 번째 다시 연결을 시도 하기 `previousRetryCount` 전에 `elapsedMilliseconds` 와는 모두 0이 되며 `retryReason` 은 연결이 끊어지는 원인이 되는 오류입니다. 실패 한 각 재시도 `previousRetryCount` 후에는 1 씩 증가 하 고, 지금까지 밀리초 단위로 다시 연결 하는 데 소요 된 시간을 반영 하도록 업데이트 되며, `elapsedMilliseconds` 는 `retryReason` 마지막 다시 연결 시도를 발생 시킨 오류를 발생 시킵니다. 통과.
 
-`nextRetryDelayInMilliseconds` 두 숫자 밀리초 수를 나타내는 다음 다시 연결 시도 하기 전에 대기할 반환 해야 합니다 또는 `null` 경우는 `HubConnection` 다시 연결을 중지 해야 합니다.
+`nextRetryDelayInMilliseconds`는 다음 다시 연결 시도 `null` 전에 대기 하는 시간 (밀리초)을 나타내는 숫자를 반환 해야 합니다. 그렇지 않으면에서 `HubConnection` 다시 연결을 중지 해야 합니다.
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
     .withUrl("/chatHub")
     .withAutomaticReconnect({
-        nextRetryDelayInMilliseconds: (previousRetryCount, elapsedMilliseconds) => {
-            if (elapsedMilliseconds < 60000) {
-                // If we've been reconnecting for less than 60 seconds so far,
-                // wait between 0 and 10 seconds before the next reconnect attempt.
-                return Math.random() * 10000;
-            } else {
-                // If we've been reconnecting for more than 60 seconds so far, stop reconnecting.
-                return null;
-            }
-        }
-    })
+        nextRetryDelayInMilliseconds: retryContext => {
+          if (retryContext.elapsedMilliseconds < 60000) {
+            // If we've been reconnecting for less than 60 seconds so far,
+            // wait between 0 and 10 seconds before the next reconnect attempt.
+            return Math.random() * 10000;
+          } else {
+            // If we've been reconnecting for more than 60 seconds so far, stop reconnecting.
+            return null;
+          }
+        })
     .build();
 ```
 
-또는 클라이언트에서 설명한 것 처럼 수동으로 다시 연결 하는 코드를 작성할 수 있습니다 [수동으로 다시](#manually-reconnect)입니다.
+또는 [수동으로 다시 연결](#manually-reconnect)에 설명 된 대로 클라이언트를 수동으로 다시 연결 하는 코드를 작성할 수 있습니다.
 
 ::: moniker-end
 
@@ -241,11 +255,11 @@ const connection = new signalR.HubConnectionBuilder()
 ::: moniker range="< aspnetcore-3.0"
 
 > [!WARNING]
-> 3\.0 이전 SignalR에 대 한 JavaScript 클라이언트 하지 자동으로 다시 연결 합니다. 클라이언트에 수동으로 다시 연결 하는 코드를 작성 해야 합니다.
+> 3\.0 이전 버전의 SignalR에 대 한 JavaScript 클라이언트는 자동으로 다시 연결 되지 않습니다. 클라이언트에 수동으로 다시 연결 하는 코드를 작성 해야 합니다.
 
 ::: moniker-end
 
-다음 코드는 일반적인 수동 다시 연결 방법을 보여 줍니다.
+다음 코드에서는 일반적인 수동 다시 연결 방식을 보여 줍니다.
 
 1. 함수 (이 경우에 `start` 함수) 연결을 시작 하기 위해 만들어집니다.
 1. 호출 된 `start` 함수에서 연결의 `onclose` 이벤트 처리기입니다.
@@ -263,4 +277,4 @@ const connection = new signalR.HubConnectionBuilder()
 * [.NET 클라이언트](xref:signalr/dotnet-client)
 * [Azure에 게시하기](xref:signalr/publish-to-azure-web-app)
 * [원본 간 요청 (CORS)](xref:security/cors)
-* [Azure SignalR Service 서버 리스 설명서](/azure/azure-signalr/signalr-concept-serverless-development-config)
+* [Azure SignalR 서비스 서버 리스 설명서](/azure/azure-signalr/signalr-concept-serverless-development-config)
