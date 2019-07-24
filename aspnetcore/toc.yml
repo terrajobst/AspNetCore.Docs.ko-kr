@@ -192,8 +192,6 @@
       uid: fundamentals/http-requests
     - name: 정적 파일
       uid: fundamentals/static-files
-    - name: aspnet-codegenerator
-      uid: fundamentals/tools/dotnet-aspnet-codegenerator
 - name: 웹앱
   items:
     - name: Razor 페이지
@@ -403,6 +401,8 @@
           uid: mvc/controllers/areas
         - name: 앱 파트
           uid: mvc/extensibility/app-parts
+        - name: aspnet-codegenerator
+          uid: fundamentals/tools/dotnet-aspnet-codegenerator
 - name: Web API 앱
   items:
     - name: 개요
