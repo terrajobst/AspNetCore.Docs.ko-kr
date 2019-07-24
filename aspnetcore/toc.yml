@@ -8,7 +8,7 @@
       uid: fundamentals/choose-between-aspnet-and-aspnetcore
     - name: .NET Core와 .NET Framework 비교
       href: /dotnet/standard/choosing-core-framework-server?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
-- name: 시작하기
+- name: 시작
   uid: getting-started
 - name: 새로운 기능
   items:
@@ -22,14 +22,14 @@
       uid: aspnetcore-1.1
 - name: 자습서
   items:
-    - name: 웹 앱
+    - name: 웹앱
       items:
         - name: Razor 페이지
           displayName: tutorial
           items:
             - name: 개요
               uid: tutorials/razor-pages/index
-            - name: 시작하기
+            - name: 시작
               uid: tutorials/razor-pages/razor-pages-start
             - name: 모델 추가
               uid: tutorials/razor-pages/model
@@ -50,7 +50,7 @@
           items:
             - name: 개요
               uid: tutorials/first-mvc-app/index
-            - name: 시작하기
+            - name: 시작
               uid: tutorials/first-mvc-app/start-mvc
             - name: 컨트롤러 추가
               uid: tutorials/first-mvc-app/adding-controller
@@ -103,7 +103,7 @@
           items:
             - name: 개요
               uid: data/ef-rp/index
-            - name: 시작하기
+            - name: 시작
               uid: data/ef-rp/intro
             - name: '만들기, 읽기, 업데이트 및 삭제'
               uid: data/ef-rp/crud
@@ -129,7 +129,7 @@
           items:
             - name: 개요
               uid: data/ef-mvc/index
-            - name: 시작하기
+            - name: 시작
               uid: data/ef-mvc/intro
             - name: '만들기, 읽기, 업데이트 및 삭제'
               uid: data/ef-mvc/crud
@@ -194,7 +194,7 @@
       uid: fundamentals/static-files
     - name: aspnet-codegenerator
       uid: fundamentals/tools/dotnet-aspnet-codegenerator
-- name: 웹 앱
+- name: 웹앱
   items:
     - name: Razor 페이지
       items:
@@ -204,7 +204,7 @@
           items:
             - name: 개요
               uid: tutorials/razor-pages/index
-            - name: 시작하기
+            - name: 시작
               uid: tutorials/razor-pages/razor-pages-start
             - name: 모델 추가
               uid: tutorials/razor-pages/model
@@ -236,7 +236,7 @@
           items:
             - name: 개요
               uid: tutorials/first-mvc-app/index
-            - name: 시작하기
+            - name: 시작
               uid: tutorials/first-mvc-app/start-mvc
             - name: 컨트롤러 추가
               uid: tutorials/first-mvc-app/adding-controller
@@ -256,11 +256,11 @@
               uid: tutorials/first-mvc-app/validation
             - name: 세부 정보 및 삭제 메서드 검사
               uid: tutorials/first-mvc-app/details
-        - name: 뷰
+        - name: 보기
           uid: mvc/views/overview
         - name: 부분 뷰
           uid: mvc/views/partial
-        - name: Controllers
+        - name: 컨트롤러
           uid: mvc/controllers/actions
         - name: 라우팅
           uid: mvc/controllers/routing
@@ -278,7 +278,7 @@
           uid: blazor/index
         - name: 지원되는 플랫폼
           uid: blazor/supported-platforms
-        - name: 시작하기
+        - name: 시작
           uid: blazor/get-started
         - name: 호스팅 모델
           uid: blazor/hosting-models
@@ -369,9 +369,9 @@
               uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
             - name: 분산 캐시
               uid: mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper
-            - name: Environment
+            - name: 환경
               uid: mvc/views/tag-helpers/builtin-th/environment-tag-helper
-            - name: 양식
+            - name: Form
               href: 'mvc/views/working-with-forms.md#the-form-tag-helper'
             - name: 이미지
               uid: mvc/views/tag-helpers/builtin-th/image-tag-helper
@@ -379,9 +379,9 @@
               href: 'mvc/views/working-with-forms.md#the-input-tag-helper'
             - name: 레이블
               href: 'mvc/views/working-with-forms.md#the-label-tag-helper'
-            - name: 부분
+            - name: Partial
               uid: mvc/views/tag-helpers/builtin-th/partial-tag-helper
-            - name: 여기서
+            - name: 선택
               href: 'mvc/views/working-with-forms.md#the-select-tag-helper'
             - name: 텍스트 영역
               href: 'mvc/views/working-with-forms.md#the-textarea-tag-helper'
@@ -459,7 +459,7 @@
         - name: 허브 외부에서 보내기
           uid: signalr/hubcontext
           displayName: signalr
-        - name: 개요
+        - name: 사용자 및 그룹
           uid: signalr/groups
           displayName: signalr
         - name: API 디자인 고려 사항
@@ -576,7 +576,7 @@
           items:
             - name: 개요
               uid: data/ef-rp/index
-            - name: 시작하기
+            - name: 시작
               uid: data/ef-rp/intro
             - name: '만들기, 읽기, 업데이트 및 삭제'
               uid: data/ef-rp/crud
@@ -600,7 +600,7 @@
           items:
             - name: 개요
               uid: data/ef-mvc/index
-            - name: 시작하기
+            - name: 시작
               uid: data/ef-mvc/intro
             - name: '만들기, 읽기, 업데이트 및 삭제'
               uid: data/ef-mvc/crud
@@ -760,7 +760,7 @@
     - name: 디렉터리 구조
       displayName: 'deploy, publish'
       uid: host-and-deploy/directory-structure
-    - name: 상태 검사
+    - name: 상태 확인
       uid: host-and-deploy/health-checks
       displayName: 'deploy, publish'
     - name: Blazor
@@ -1023,7 +1023,7 @@
     - name: 요청 및 응답 작업
       displayName: middleware
       uid: fundamentals/middleware/request-response
-    - name: URL 다시 쓰기
+    - name: URL 재작성
       uid: fundamentals/url-rewriting
     - name: 파일 공급자
       uid: fundamentals/file-providers
@@ -1093,5 +1093,5 @@
       uid: migration/logging-nonaspnetcore
 - name: API 참조
   href: /dotnet/api/?view=aspnetcore-2.2
-- name: 기고
+- name: 참가
   href: 'https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md'
