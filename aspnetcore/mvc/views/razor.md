@@ -5,12 +5,12 @@ description: 웹 페이지에 서버 기반 코드를 포함하는 Razor 태그 
 ms.author: riande
 ms.date: 06/12/2019
 uid: mvc/views/razor
-ms.openlocfilehash: 87c5b97a653c139b8b79f4270e0d9d0081815433
-ms.sourcegitcommit: 335a88c1b6e7f0caa8a3a27db57c56664d676d34
+ms.openlocfilehash: 634623aa6df860a2ff728da4e65d277326db37e2
+ms.sourcegitcommit: 051f068c78931432e030b60094c38376d64d013e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/12/2019
-ms.locfileid: "67034944"
+ms.lasthandoff: 07/24/2019
+ms.locfileid: "68440363"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>ASP.NET Core에 대한 Razor 구문 참조
 
@@ -581,9 +581,6 @@ Razor는 보기에 전달된 모델에 액세스할 수 있는 `Model` 속성을
 ```cshtml
 @attribute [Authorize]
 ```
-
-> [!WARNING]
-> ASP.NET Core 3.0 미리 보기 6 릴리스에서 `@attribute` 지시문이 *\_Imports.razor* 및 *\_ViewImports.cshtml* 파일에서 작동하지 않는 알려진 문제가 있습니다. 이 문제는 미리 보기 7 릴리스에서 해결될 예정입니다.
 
 ### <a name="namespace"></a>@namespace
 

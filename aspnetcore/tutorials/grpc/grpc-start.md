@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 06/12/2019
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: 8507c3dcefeb61a4dd34a1ff967c082d287cf646
-ms.sourcegitcommit: d6e51c60439f03a8992bda70cc982ddb15d3f100
+ms.openlocfilehash: 3e90e3b17186757fe157fb6641888786bb7a0df2
+ms.sourcegitcommit: f30b18442ed12831c7e86b0db249183ccd749f59
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "67555892"
+ms.lasthandoff: 07/23/2019
+ms.locfileid: "68412528"
 ---
 # <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>자습서: ASP.NET Core에서 gRPC 클라이언트 및 서버 만들기
 
@@ -112,11 +112,11 @@ Visual Studio에서 **파일 > 열기**를 선택하고 *GrpcGreeter.sln* 파일
 
 ---
 
-로그에는 `http://localhost:50051`에서 수신하는 서비스가 표시됩니다.
+로그에는 `https://localhost:5001`에서 수신하는 서비스가 표시됩니다.
 
 ```console
 info: Microsoft.Hosting.Lifetime[0]
-      Now listening on: http://localhost:50051
+      Now listening on: https://localhost:5001
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
@@ -258,11 +258,11 @@ Greeter 클라이언트는 다음에 의해 생성됩니다.
 * gRPC 서비스에 대한 연결을 만들기 위한 정보가 포함된 `HttpClient` 인스턴스화.
 * `HttpClient`을 사용하여 Greeter 클라이언트를 구성합니다.
 
-[!code-cs[](~/tutorials/grpc/grpc-start/sample/GrpcGreeterClient/Program.cs?name=snippet&highlight=3-9)]
+[!code-cs[](~/tutorials/grpc/grpc-start/sample/GrpcGreeterClient/Program.cs?name=snippet&highlight=3-6)]
 
 Greeter 클라이언트가 비동기 `SayHello` 메서드를 호출합니다. `SayHello` 호출의 결과가 표시됩니다.
 
-[!code-cs[](~/tutorials/grpc/grpc-start/sample/GrpcGreeterClient/Program.cs?name=snippet&highlight=10-12)]
+[!code-cs[](~/tutorials/grpc/grpc-start/sample/GrpcGreeterClient/Program.cs?name=snippet&highlight=7-9)]
 
 ## <a name="test-the-grpc-client-with-the-grpc-greeter-service"></a>gRPC Greeter 서비스를 사용하여 gRPC 클라이언트 테스트
 
@@ -291,7 +291,7 @@ gRPC 서비스는 명령 프롬프트에 기록된 로그에 성공적인 호출
 
 ```console
 info: Microsoft.Hosting.Lifetime[0]
-      Now listening on: http://localhost:50051
+      Now listening on: https://localhost:5001
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
@@ -299,7 +299,7 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Content root path: C:\GH\aspnet\docs\4\Docs\aspnetcore\tutorials\grpc\grpc-start\sample\GrpcGreeter
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/2 POST http://localhost:50051/Greet.Greeter/SayHello application/grpc
+      Request starting HTTP/2 POST https://localhost:5001/Greet.Greeter/SayHello application/grpc
 info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
       Executing endpoint 'gRPC - /Greet.Greeter/SayHello'
 info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
