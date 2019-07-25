@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/18/2018
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: 72d5b2e902a95442ccffb7a149b917c50373775b
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 5be53baf4b9eb8774501fbf7f781370f7f687d0c
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64889928"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67814948"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>ASP.NET Core에서 URL 재작성 미들웨어
 
@@ -205,7 +205,7 @@ URL을 재작성하는 규칙을 만들려면 <xref:Microsoft.AspNetCore.Rewrite
 | `/my-cool-rewrite-rule/1234/5678` | 아니요    |
 | `/anotherrewrite-rule/1234/5678`  | 아니요    |
 
-표현식의 `^rewrite-rule/` 부분 뒤에는 계속해서 두 개의 캡처 그룹, `(\d+)/(\d+)`이 위치해 있습니다. 여기서 `\d`는 *숫자 하나와 일치*함을 뜻합니다. 그리고 더하기 기호(`+`)는 *앞의 문자와 한 번 이상 일치*함을 나타냅니다. 따라서 URL은 반드시 숫자 뒤에 슬래시와 다른 숫자가 연이어 나타나는 부분을 포함해야 합니다. 이 캡쳐 그룹들은 `$1` 및 `$2`를 통해서 재작성 URL에 삽입됩니다.  재작성 규칙의 대체 문자열은 캡처된 그룹을 쿼리 문자열에 배치합니다. 즉, 요청 경로 `/rewrite-rule/1234/5678`은 `/rewritten?var1=1234&var2=5678`에서 리소스를 가져오도록 재작성됩니다. 원본 요청에 쿼리 문자열이 있으면 URL을 다시 작성할 때 유지됩니다.
+표현식의 `^rewrite-rule/` 부분 뒤에는 계속해서 두 개의 캡처 그룹, `(\d+)/(\d+)`이 위치해 있습니다. 여기서 `\d`는 *숫자 하나와 일치*함을 뜻합니다. 그리고 더하기 기호(`+`)는 *앞의 문자와 한 번 이상 일치*함을 나타냅니다. 따라서 URL은 반드시 숫자 뒤에 슬래시와 다른 숫자가 연이어 나타나는 부분을 포함해야 합니다. 이 캡쳐 그룹들은 `$1` 및 `$2`를 통해서 재작성 URL에 삽입됩니다. 재작성 규칙의 대체 문자열은 캡처된 그룹을 쿼리 문자열에 배치합니다. 즉, 요청 경로 `/rewrite-rule/1234/5678`은 `/rewritten?var1=1234&var2=5678`에서 리소스를 가져오도록 재작성됩니다. 원본 요청에 쿼리 문자열이 있으면 URL을 다시 작성할 때 유지됩니다.
 
 리소스를 가져오기 위해 서버를 왕복하지 않습니다. 리소스가 있으면 이를 가져와서 *200 - 정상* 상태 코드와 함께 클라이언트에 반환합니다. 클라이언트는 리디렉션 되지 않으므로 브라우저 주소 표시줄의 URL은 변경되지 않습니다. 클라이언트는 서버에서 URL 재작성 작업이 발생했음을 검색할 수 없습니다.
 
@@ -384,5 +384,5 @@ ASP.NET Core 2.x로 출시된 미들웨어는 다음과 같은 IIS URL 재작성
 * [URL 재작성 모듈 구성 참조](/iis/extensions/url-rewrite-module/url-rewrite-module-configuration-reference)
 * [IIS URL 재작성 모듈 포럼](https://forums.iis.net/1152.aspx)
 * [간단한 URL 구조 유지](https://support.google.com/webmasters/answer/76329?hl=en)
-* [10가지 URL 재작성 팁과 요령](http://ruslany.net/2009/04/10-url-rewriting-tips-and-tricks/)
+* [10가지 URL 재작성 팁과 요령](https://ruslany.net/2009/04/10-url-rewriting-tips-and-tricks/)
 * [슬래시 여부](https://webmasters.googleblog.com/2010/04/to-slash-or-not-to-slash.html)

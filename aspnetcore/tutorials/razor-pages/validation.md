@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core의 Razor 페이지에 유효성 검사를 추가하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/5/2018
+ms.date: 12/05/2018
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: 38e1fff9c7a212af992951dbf57e124cae69d36f
-ms.sourcegitcommit: ccbb84ae307a5bc527441d3d509c20b5c1edde05
+ms.openlocfilehash: 8495849c89ca3d6fd2b2006b61ce2ec75ff504a5
+ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/19/2019
-ms.locfileid: "65874985"
+ms.lasthandoff: 07/11/2019
+ms.locfileid: "67815650"
 ---
 # <a name="add-validation-to-an-aspnet-core-razor-page"></a>ASP.NET Core Razor 페이지에 유효성 검사 추가
 
@@ -47,7 +47,7 @@ Razor 페이지에서 제공하는 유효성 검사 지원 및 Entity Framework�
 양식 데이터는 클라이언트 쪽 유효성 검사 오류가 없을 때까지 서버에 게시되지 않습니다. 양식 데이터가 다음 방법 중 하나 이상으로 게시되지 않았는지 확인합니다.
 
 * `OnPostAsync` 메서드에 중단점을 배치합니다. 양식을 제출합니다(**만들기** 또는 **저장** 선택). 중단점은 적중되지 않습니다.
-* [Fiddler 도구](http://www.telerik.com/fiddler)를 사용합니다.
+* [Fiddler 도구](https://www.telerik.com/fiddler)를 사용합니다.
 * 브라우저 개발자 도구를 사용하여 네트워크 트래픽을 모니터링합니다.
 
 ### <a name="server-side-validation"></a>서버 쪽 유효성 검사
