@@ -1,18 +1,18 @@
 ---
-title: ASP.NET Core에서 해시 암호
+title: ASP.NET Core의 해시 암호
 author: rick-anderson
-description: ASP.NET Core 데이터 보호 Api를 사용 하 여 암호를 해시 하는 방법에 알아봅니다.
+description: ASP.NET Core 데이터 보호 Api를 사용 하 여 암호를 해시 하는 방법을 알아봅니다.
 ms.author: riande
 ms.date: 10/14/2016
 uid: security/data-protection/consumer-apis/password-hashing
-ms.openlocfilehash: 70301ffffbaaf3c5ff0642b19b80e40be83aa438
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: bd4b8fcf6a5a16a86ada97bbd3519f872d1417b7
+ms.sourcegitcommit: 0efb9e219fef481dee35f7b763165e488aa6cf9c
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64896650"
+ms.lasthandoff: 07/29/2019
+ms.locfileid: "68602458"
 ---
-# <a name="hash-passwords-in-aspnet-core"></a>ASP.NET Core에서 해시 암호
+# <a name="hash-passwords-in-aspnet-core"></a>ASP.NET Core의 해시 암호
 
 데이터 보호 코드 베이스에는 암호화 키 파생 함수를 제공해주는 *Microsoft.AspNetCore.Cryptography.KeyDerivation* 패키지가 포함되어 있습니다. 이 패키지는 독립적인 구성 요소로서 데이터 보호 시스템의 나머지 다른 부분에 의존하지 않습니다. 이 패키지는 완벽히 독립적으로 사용이 가능합니다. 다만 편의상 소스가 데이터 보호 코드 베이스와 함께 위치해 있을 뿐입니다.
 
@@ -26,4 +26,4 @@ ms.locfileid: "64896650"
 
 [!code-csharp[](password-hashing/samples/passwordhasher.cs)]
 
-참조 된 [소스 코드](https://github.com/aspnet/Identity/blob/master/src/Core/PasswordHasher.cs) ASP.NET Core Id에 대 한 `PasswordHasher` 실제 유형을 사용 사례입니다.
+실제 사용 사례는 ASP.NET Core id `PasswordHasher` 형식에 대 한 [소스 코드](https://github.com/aspnet/AspNetCore/blob/master/src/Identity/Extensions.Core/src/PasswordHasher.cs) 를 참조 하세요.
