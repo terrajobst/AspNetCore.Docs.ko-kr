@@ -3,178 +3,374 @@ title: ASP.NET Core의 스캐폴드된 Razor 페이지
 author: rick-anderson
 description: 스캐폴딩을 통해 생성된 Razor 페이지를 설명합니다.
 ms.author: riande
-ms.date: 04/06/2019
+ms.date: 07/22/2019
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: fcda567eb99ca5e32e7bebe5dd9e16ac134369b1
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 741ee4291cacbb1de0f8341673c8fd6ef0c9a462
+ms.sourcegitcommit: 849af69ee3c94cdb9fd8fa1f1bb8f5a5dda7b9eb
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64887638"
+ms.lasthandoff: 07/22/2019
+ms.locfileid: "68371838"
 ---
-# <a name="scaffolded-razor-pages-in-aspnet-core"></a><span data-ttu-id="77b62-103">ASP.NET Core의 스캐폴드된 Razor 페이지</span><span class="sxs-lookup"><span data-stu-id="77b62-103">Scaffolded Razor Pages in ASP.NET Core</span></span>
+# <a name="scaffolded-razor-pages-in-aspnet-core"></a><span data-ttu-id="e4486-103">ASP.NET Core의 스캐폴드된 Razor 페이지</span><span class="sxs-lookup"><span data-stu-id="e4486-103">Scaffolded Razor Pages in ASP.NET Core</span></span>
 
-<span data-ttu-id="77b62-104">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="77b62-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="77b62-105">이 자습서에서는 이전 자습서에서 스캐폴딩을 통해 만든 Razor 페이지를 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-105">This tutorial examines the Razor Pages created by scaffolding in the previous tutorial.</span></span>
+<span data-ttu-id="e4486-104">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="e4486-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
-<span data-ttu-id="77b62-106">샘플을 [보거나 다운로드합니다](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22).</span><span class="sxs-lookup"><span data-stu-id="77b62-106">[View or download](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22) sample.</span></span>
+<span data-ttu-id="e4486-105">이 자습서에서는 [이전 자습서](xref:tutorials/razor-pages/model)에서 스캐폴딩을 통해 만든 Razor 페이지를 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-105">This tutorial examines the Razor Pages created by scaffolding in the [previous tutorial](xref:tutorials/razor-pages/model).</span></span>
 
-## <a name="the-create-delete-details-and-edit-pages"></a><span data-ttu-id="77b62-107">만들기, 삭제, 세부 정보 및 편집 페이지</span><span class="sxs-lookup"><span data-stu-id="77b62-107">The Create, Delete, Details, and Edit pages</span></span>
+[!INCLUDE[View or download sample code](~/includes/rp/download.md)]
 
-<span data-ttu-id="77b62-108">*Pages/Movies/Index.cshtml.cs* 페이지 모델을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-108">Examine the *Pages/Movies/Index.cshtml.cs* Page Model:</span></span>
+## <a name="the-create-delete-details-and-edit-pages"></a><span data-ttu-id="e4486-106">만들기, 삭제, 세부 정보 및 편집 페이지</span><span class="sxs-lookup"><span data-stu-id="e4486-106">The Create, Delete, Details, and Edit pages</span></span>
 
-[!code-csharp[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml.cs)]
+<span data-ttu-id="e4486-107">*Pages/Movies/Index.cshtml.cs* 페이지 모델을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-107">Examine the *Pages/Movies/Index.cshtml.cs* Page Model:</span></span>
 
-<span data-ttu-id="77b62-109">Razor 페이지는 `PageModel`에서 파생됩니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-109">Razor Pages are derived from `PageModel`.</span></span> <span data-ttu-id="77b62-110">일반적으로 `PageModel` 파생 클래스를 `<PageName>Model`이라고 합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-110">By convention, the `PageModel`-derived class is called `<PageName>Model`.</span></span> <span data-ttu-id="77b62-111">생성자는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 `RazorPagesMovieContext`를 페이지에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-111">The constructor uses [dependency injection](xref:fundamentals/dependency-injection) to add the `RazorPagesMovieContext` to the page.</span></span> <span data-ttu-id="77b62-112">모든 스캐폴드된 페이지가 이 패턴을 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-112">All the scaffolded pages follow this pattern.</span></span> <span data-ttu-id="77b62-113">엔터티 프레임워크로 비동기 프로그래밍에 대한 자세한 내용은 [비동기 코드](xref:data/ef-rp/intro#asynchronous-code)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="77b62-113">See [Asynchronous code](xref:data/ef-rp/intro#asynchronous-code) for more information on asynchronous programing with Entity Framework.</span></span>
+[!code-csharp[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs)]
 
-<span data-ttu-id="77b62-114">페이지에 대한 요청을 만들면 `OnGetAsync` 메서드가 Razor 페이지에 동영상 목록을 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-114">When a request is made for the page, the `OnGetAsync` method returns a list of movies to the Razor Page.</span></span> <span data-ttu-id="77b62-115">페이지 상태를 초기화하기 위해 `OnGetAsync` 또는 `OnGet`이 Razor 페이지에서 호출됩니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-115">`OnGetAsync` or `OnGet` is called on a Razor Page to initialize the state for the page.</span></span> <span data-ttu-id="77b62-116">이 경우 `OnGetAsync`는 동영상 목록을 가져와 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-116">In this case, `OnGetAsync` gets a list of movies and displays them.</span></span>
+<span data-ttu-id="e4486-108">Razor 페이지는 `PageModel`에서 파생됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-108">Razor Pages are derived from `PageModel`.</span></span> <span data-ttu-id="e4486-109">일반적으로 `PageModel` 파생 클래스를 `<PageName>Model`이라고 합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-109">By convention, the `PageModel`-derived class is called `<PageName>Model`.</span></span> <span data-ttu-id="e4486-110">생성자는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 `RazorPagesMovieContext`를 페이지에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-110">The constructor uses [dependency injection](xref:fundamentals/dependency-injection) to add the `RazorPagesMovieContext` to the page.</span></span> <span data-ttu-id="e4486-111">모든 스캐폴드된 페이지가 이 패턴을 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-111">All the scaffolded pages follow this pattern.</span></span> <span data-ttu-id="e4486-112">엔터티 프레임워크로 비동기 프로그래밍에 대한 자세한 내용은 [비동기 코드](xref:data/ef-rp/intro#asynchronous-code)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="e4486-112">See [Asynchronous code](xref:data/ef-rp/intro#asynchronous-code) for more information on asynchronous programing with Entity Framework.</span></span>
 
-<span data-ttu-id="77b62-117">`OnGet`에서 `void`를 반환하거나 `OnGetAsync`에서 `Task`를 반환하면 반환 메서드가 사용되지 않은 것입니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-117">When `OnGet` returns `void` or `OnGetAsync` returns`Task`, no return method is used.</span></span> <span data-ttu-id="77b62-118">반환 형식이 `IActionResult` 또는 `Task<IActionResult>`이면 반환 문을 제공해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-118">When the return type is `IActionResult` or `Task<IActionResult>`, a return statement must be provided.</span></span> <span data-ttu-id="77b62-119">*Pages/Movies/Create.cshtml.cs* `OnPostAsync` 메서드를 예로 들 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-119">For example, the *Pages/Movies/Create.cshtml.cs* `OnPostAsync` method:</span></span>
+<span data-ttu-id="e4486-113">페이지에 대한 요청을 만들면 `OnGetAsync` 메서드가 Razor 페이지에 동영상 목록을 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-113">When a request is made for the page, the `OnGetAsync` method returns a list of movies to the Razor Page.</span></span> <span data-ttu-id="e4486-114">페이지 상태를 초기화하기 위해 `OnGetAsync` 또는 `OnGet`이 Razor 페이지에서 호출됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-114">`OnGetAsync` or `OnGet` is called on a Razor Page to initialize the state for the page.</span></span> <span data-ttu-id="e4486-115">이 경우 `OnGetAsync`는 동영상 목록을 가져와 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-115">In this case, `OnGetAsync` gets a list of movies and displays them.</span></span>
 
-[!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml.cs?name=snippet)]
+<span data-ttu-id="e4486-116">`OnGet`에서 `void`를 반환하거나 `OnGetAsync`에서 `Task`를 반환하면 반환 메서드가 사용되지 않은 것입니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-116">When `OnGet` returns `void` or `OnGetAsync` returns`Task`, no return method is used.</span></span> <span data-ttu-id="e4486-117">반환 형식이 `IActionResult` 또는 `Task<IActionResult>`이면 반환 문을 제공해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-117">When the return type is `IActionResult` or `Task<IActionResult>`, a return statement must be provided.</span></span> <span data-ttu-id="e4486-118">*Pages/Movies/Create.cshtml.cs* `OnPostAsync` 메서드를 예로 들 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-118">For example, the *Pages/Movies/Create.cshtml.cs* `OnPostAsync` method:</span></span>
 
-<a name="index"></a> <span data-ttu-id="77b62-120">*Pages/Movies/Index.cshtml* Razor 페이지를 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-120">Examine the *Pages/Movies/Index.cshtml* Razor Page:</span></span>
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml.cs?name=snippet)]
 
-[!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml)]
+<a name="index"></a> <span data-ttu-id="e4486-119">*Pages/Movies/Index.cshtml* Razor 페이지를 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-119">Examine the *Pages/Movies/Index.cshtml* Razor Page:</span></span>
 
-<span data-ttu-id="77b62-121">Razor는 HTML에서 C# 또는 Razor 관련 태그로 전환될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-121">Razor can transition from HTML into C# or into Razor-specific markup.</span></span> <span data-ttu-id="77b62-122">`@` 기호 뒤에 [Razor 예약 키워드](xref:mvc/views/razor#razor-reserved-keywords)가 사용되면 이 기호는 Razor 관련 태그로 전환됩니다. 이외의 경우에는 C#으로 전환됩니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-122">When an `@` symbol is followed by a [Razor reserved keyword](xref:mvc/views/razor#razor-reserved-keywords), it transitions into Razor-specific markup, otherwise it transitions into C#.</span></span>
+[!code-cshtml[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Index.cshtml)]
 
-<span data-ttu-id="77b62-123">`@page` Razor 지시문은 파일을 MVC 작업으로 만들고, 이것은 요청을 처리할 수 있음을 의미합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-123">The `@page` Razor directive makes the file into an MVC action, which means that it can handle requests.</span></span> <span data-ttu-id="77b62-124">`@page`는 페이지의 첫 번째 Razor 지시문이어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-124">`@page` must be the first Razor directive on a page.</span></span> <span data-ttu-id="77b62-125">`@page`는 Razor 관련 태그로 전환되는 하나의 예입니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-125">`@page` is an example of transitioning into Razor-specific markup.</span></span> <span data-ttu-id="77b62-126">자세한 내용은 [Razor 구문](xref:mvc/views/razor#razor-syntax)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="77b62-126">See [Razor syntax](xref:mvc/views/razor#razor-syntax) for more information.</span></span>
+<span data-ttu-id="e4486-120">Razor는 HTML에서 C# 또는 Razor 관련 태그로 전환될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-120">Razor can transition from HTML into C# or into Razor-specific markup.</span></span> <span data-ttu-id="e4486-121">`@` 기호 뒤에 [Razor 예약 키워드](xref:mvc/views/razor#razor-reserved-keywords)가 사용되면 이 기호는 Razor 관련 태그로 전환됩니다. 이외의 경우에는 C#으로 전환됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-121">When an `@` symbol is followed by a [Razor reserved keyword](xref:mvc/views/razor#razor-reserved-keywords), it transitions into Razor-specific markup, otherwise it transitions into C#.</span></span>
 
-<span data-ttu-id="77b62-127">다음 HTML 도우미에서 사용되는 람다 식을 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-127">Examine the lambda expression used in the following HTML Helper:</span></span>
+<span data-ttu-id="e4486-122">`@page` Razor 지시문은 파일을 MVC 작업으로 만들고, 이것은 요청을 처리할 수 있음을 의미합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-122">The `@page` Razor directive makes the file into an MVC action, which means that it can handle requests.</span></span> <span data-ttu-id="e4486-123">`@page`는 페이지의 첫 번째 Razor 지시문이어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-123">`@page` must be the first Razor directive on a page.</span></span> <span data-ttu-id="e4486-124">`@page`는 Razor 관련 태그로 전환되는 하나의 예입니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-124">`@page` is an example of transitioning into Razor-specific markup.</span></span> <span data-ttu-id="e4486-125">자세한 내용은 [Razor 구문](xref:mvc/views/razor#razor-syntax)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="e4486-125">See [Razor syntax](xref:mvc/views/razor#razor-syntax) for more information.</span></span>
+
+<span data-ttu-id="e4486-126">다음 HTML 도우미에서 사용되는 람다 식을 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-126">Examine the lambda expression used in the following HTML Helper:</span></span>
 
 ```cshtml
 @Html.DisplayNameFor(model => model.Movie[0].Title))
 ```
 
-<span data-ttu-id="77b62-128">`DisplayNameFor` HTML 도우미는 람다 식에서 참조되는 `Title` 속성을 검사하여 표시 이름을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-128">The `DisplayNameFor` HTML Helper inspects the `Title` property referenced in the lambda expression to determine the display name.</span></span> <span data-ttu-id="77b62-129">람다 식은 계산되는 것이 아니라 검사됩니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-129">The lambda expression is inspected rather than evaluated.</span></span> <span data-ttu-id="77b62-130">즉, `model`, `model.Movie` 또는 `model.Movie[0]`가 `null`이거나 비어 있을 경우 액세스 위반이 없습니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-130">That means there is no access violation when `model`, `model.Movie`, or `model.Movie[0]` are `null` or empty.</span></span> <span data-ttu-id="77b62-131">람다 식이 계산될 경우(예: `@Html.DisplayFor(modelItem => item.Title)` 사용) 모델의 속성 값이 계산됩니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-131">When the lambda expression is evaluated (for example, with `@Html.DisplayFor(modelItem => item.Title)`), the model's property values are evaluated.</span></span>
+<span data-ttu-id="e4486-127">`DisplayNameFor` HTML 도우미는 람다 식에서 참조되는 `Title` 속성을 검사하여 표시 이름을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-127">The `DisplayNameFor` HTML Helper inspects the `Title` property referenced in the lambda expression to determine the display name.</span></span> <span data-ttu-id="e4486-128">람다 식은 계산되는 것이 아니라 검사됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-128">The lambda expression is inspected rather than evaluated.</span></span> <span data-ttu-id="e4486-129">즉, `model`, `model.Movie` 또는 `model.Movie[0]`가 `null`이거나 비어 있을 경우 액세스 위반이 없습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-129">That means there is no access violation when `model`, `model.Movie`, or `model.Movie[0]` are `null` or empty.</span></span> <span data-ttu-id="e4486-130">람다 식이 계산될 경우(예: `@Html.DisplayFor(modelItem => item.Title)` 사용) 모델의 속성 값이 계산됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-130">When the lambda expression is evaluated (for example, with `@Html.DisplayFor(modelItem => item.Title)`), the model's property values are evaluated.</span></span>
 
 <a name="md"></a>
 
-### <a name="the-model-directive"></a><span data-ttu-id="77b62-132">@model 지시문</span><span class="sxs-lookup"><span data-stu-id="77b62-132">The @model directive</span></span>
+### <a name="the-model-directive"></a><span data-ttu-id="e4486-131">@model 지시문</span><span class="sxs-lookup"><span data-stu-id="e4486-131">The @model directive</span></span>
 
-[!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?range=1-2&highlight=2)]
+[!code-cshtml[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Index.cshtml?range=1-2&highlight=2)]
 
-<span data-ttu-id="77b62-133">`@model` 지시문은 Razor 페이지에 전달되는 모델 형식을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-133">The `@model` directive specifies the type of the model passed to the Razor Page.</span></span> <span data-ttu-id="77b62-134">이전 예제에서 `@model` 줄은 Razor 페이지에서 `PageModel` 파생 클래스를 사용할 수 있게 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-134">In the preceding example, the `@model` line makes the `PageModel`-derived class available to the Razor Page.</span></span> <span data-ttu-id="77b62-135">모델은 페이지에서 `@Html.DisplayNameFor` 및 `@Html.DisplayFor` [HTML 도우미](/aspnet/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs#understanding-html-helpers)에서 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-135">The model is used in the `@Html.DisplayNameFor` and `@Html.DisplayFor` [HTML Helpers](/aspnet/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs#understanding-html-helpers) on the page.</span></span>
+<span data-ttu-id="e4486-132">`@model` 지시문은 Razor 페이지에 전달되는 모델 형식을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-132">The `@model` directive specifies the type of the model passed to the Razor Page.</span></span> <span data-ttu-id="e4486-133">이전 예제에서 `@model` 줄은 Razor 페이지에서 `PageModel` 파생 클래스를 사용할 수 있게 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-133">In the preceding example, the `@model` line makes the `PageModel`-derived class available to the Razor Page.</span></span> <span data-ttu-id="e4486-134">모델은 페이지에서 `@Html.DisplayNameFor` 및 `@Html.DisplayFor` [HTML 도우미](/aspnet/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs#understanding-html-helpers)에서 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-134">The model is used in the `@Html.DisplayNameFor` and `@Html.DisplayFor` [HTML Helpers](/aspnet/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs#understanding-html-helpers) on the page.</span></span>
 
-### <a name="the-layout-page"></a><span data-ttu-id="77b62-136">레이아웃 페이지</span><span class="sxs-lookup"><span data-stu-id="77b62-136">The layout page</span></span>
+### <a name="the-layout-page"></a><span data-ttu-id="e4486-135">레이아웃 페이지</span><span class="sxs-lookup"><span data-stu-id="e4486-135">The layout page</span></span>
 
-<span data-ttu-id="77b62-137">메뉴 링크를 선택합니다(**RazorPagesMovie**, **홈** 및 **개인 정보**).</span><span class="sxs-lookup"><span data-stu-id="77b62-137">Select the menu links (**RazorPagesMovie**, **Home**, and **Privacy**).</span></span> <span data-ttu-id="77b62-138">각 페이지는 동일한 메뉴 레이아웃을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-138">Each page shows the same menu layout.</span></span> <span data-ttu-id="77b62-139">메뉴 레이아웃은 *Pages/Shared/_Layout.cshtml* 파일에서 구현됩니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-139">The menu layout is implemented in the *Pages/Shared/_Layout.cshtml* file.</span></span> <span data-ttu-id="77b62-140">*Pages/Shared/_Layout.cshtml* 파일을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-140">Open the *Pages/Shared/_Layout.cshtml* file.</span></span>
+<span data-ttu-id="e4486-136">메뉴 링크를 선택합니다(**RazorPagesMovie**, **홈** 및 **개인 정보**).</span><span class="sxs-lookup"><span data-stu-id="e4486-136">Select the menu links (**RazorPagesMovie**, **Home**, and **Privacy**).</span></span> <span data-ttu-id="e4486-137">각 페이지는 동일한 메뉴 레이아웃을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-137">Each page shows the same menu layout.</span></span> <span data-ttu-id="e4486-138">메뉴 레이아웃은 *Pages/Shared/_Layout.cshtml* 파일에서 구현됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-138">The menu layout is implemented in the *Pages/Shared/_Layout.cshtml* file.</span></span> <span data-ttu-id="e4486-139">*Pages/Shared/_Layout.cshtml* 파일을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-139">Open the *Pages/Shared/_Layout.cshtml* file.</span></span>
 
-<span data-ttu-id="77b62-141">[레이아웃](xref:mvc/views/layout) 템플릿을 사용하면 한 곳에서 사이트의 HTML 컨테이너 레이아웃을 지정한 다음 사이트에서 여러 페이지에 걸쳐 적용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-141">[Layout](xref:mvc/views/layout) templates allow you to specify the HTML container layout of your site in one place and then apply it across multiple pages in your site.</span></span> <span data-ttu-id="77b62-142">`@RenderBody()` 줄을 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-142">Find the `@RenderBody()` line.</span></span> <span data-ttu-id="77b62-143">`RenderBody`는 사용자가 만드는 모든 페이지 특정 보기가 표시되는 자리 표시자이며 레이아웃 페이지에서 ‘래핑됩니다’.</span><span class="sxs-lookup"><span data-stu-id="77b62-143">`RenderBody` is a placeholder where all the page-specific views you create show up, *wrapped* in the layout page.</span></span> <span data-ttu-id="77b62-144">예를 들어 **개인 정보** 링크를 선택하는 경우 **Pages/Privacy.cshtml** 보기는 `RenderBody` 메서드 내에서 렌더링됩니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-144">For example, if you select the **Privacy** link, the **Pages/Privacy.cshtml** view is rendered inside the `RenderBody` method.</span></span>
+<span data-ttu-id="e4486-140">[레이아웃](xref:mvc/views/layout) 템플릿을 사용하여 HTML 컨테이너 레이아웃을 다음과 같이 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-140">[Layout](xref:mvc/views/layout) templates allow the HTML container layout to be:</span></span>
+
+* <span data-ttu-id="e4486-141">한 위치에 지정됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-141">Specified in one place.</span></span>
+* <span data-ttu-id="e4486-142">사이트의 여러 페이지에 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-142">Applied in multiple pages in the site.</span></span>
+
+<span data-ttu-id="e4486-143">`@RenderBody()` 줄을 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-143">Find the `@RenderBody()` line.</span></span> <span data-ttu-id="e4486-144">`RenderBody`는 사용자가 만드는 모든 페이지 특정 보기가 표시되는 자리 표시자이며 레이아웃 페이지에서 *래핑*됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-144">`RenderBody` is a placeholder where all the page-specific views show up, *wrapped* in the layout page.</span></span> <span data-ttu-id="e4486-145">예를 들어, **개인 정보** 링크를 선택하는 경우 *Pages/Privacy.cshtml* 보기는 `RenderBody` 메서드 내에서 렌더링됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-145">For example, select the **Privacy** link and the *Pages/Privacy.cshtml* view is rendered inside the `RenderBody` method.</span></span>
 
 <a name="vd"></a>
 
-### <a name="viewdata-and-layout"></a><span data-ttu-id="77b62-145">ViewData 및 레이아웃</span><span class="sxs-lookup"><span data-stu-id="77b62-145">ViewData and layout</span></span>
+### <a name="viewdata-and-layout"></a><span data-ttu-id="e4486-146">ViewData 및 레이아웃</span><span class="sxs-lookup"><span data-stu-id="e4486-146">ViewData and layout</span></span>
 
-<span data-ttu-id="77b62-146">*Pages/Movies/Index.cshtml* 파일의 다음 코드를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-146">Consider the following code from the *Pages/Movies/Index.cshtml* file:</span></span>
+<span data-ttu-id="e4486-147">*Pages/Movies/Index.cshtml* 파일의 다음 태그를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-147">Consider the following markup from the *Pages/Movies/Index.cshtml* file:</span></span>
+
+[!code-cshtml[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Index.cshtml?range=1-6&highlight=4-999)]
+
+<span data-ttu-id="e4486-148">강조 표시된 이전 태그는 C#으로 전환되는 Razor의 예제입니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-148">The preceding highlighted markup is an example of Razor transitioning into C#.</span></span> <span data-ttu-id="e4486-149">`{` 및 `}` 문자로 C# 코드 블록을 묶습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-149">The `{` and `}` characters enclose a block of C# code.</span></span>
+
+<span data-ttu-id="e4486-150">`PageModel` 기본 클래스에는 데이터를 추가하고 뷰에 전달하는 데 사용할 수 있는 `ViewData` 사전 속성이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-150">The `PageModel` base class contains a `ViewData` dictionary property that can be used to add data that and pass it to a View.</span></span> <span data-ttu-id="e4486-151">키/쌍 패턴을 사용하여 개체를 `ViewData` 사전에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-151">Objects are added to the `ViewData` dictionary using a key/value pattern.</span></span> <span data-ttu-id="e4486-152">이전 샘플에서는 `"Title"` 속성이 `ViewData` 사전에 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-152">In the preceding sample, the `"Title"` property is added to the `ViewData` dictionary.</span></span>
+
+<span data-ttu-id="e4486-153">`"Title"` 속성은 *Pages/Shared/_Layout.cshtml* 파일에서 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-153">The `"Title"` property is used in the *Pages/Shared/_Layout.cshtml* file.</span></span> <span data-ttu-id="e4486-154">다음 태그는 *_Layout.cshtml* 파일의 처음 몇 줄을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-154">The following markup shows the first few lines of the *_Layout.cshtml* file.</span></span>
+
+<!-- we need a snapshot copy of layout because we are
+changing in in the next step.
+-->
+[!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/NU/_Layout.cshtml?highlight=6)]
+
+<span data-ttu-id="e4486-155">`@*Markup removed for brevity.*@` 줄은 Razor 주석입니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-155">The line `@*Markup removed for brevity.*@` is a Razor comment.</span></span> <span data-ttu-id="e4486-156">HTML 주석(`<!-- -->`)과 달리 Razor 주석은 클라이언트에 전송되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-156">Unlike HTML comments (`<!-- -->`), Razor comments are not sent to the client.</span></span>
+
+### <a name="update-the-layout"></a><span data-ttu-id="e4486-157">레이아웃 업데이트</span><span class="sxs-lookup"><span data-stu-id="e4486-157">Update the layout</span></span>
+
+<span data-ttu-id="e4486-158">*Pages/Shared/_Layout.cshtml* 파일의 `<title>` 요소를 변경하여 **RazorPagesMovie** 대신 **Movie**를 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-158">Change the `<title>` element in the *Pages/Shared/_Layout.cshtml* file to display **Movie** rather than **RazorPagesMovie**.</span></span>
+
+[!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml?range=1-6&highlight=6)]
+
+<span data-ttu-id="e4486-159">*Pages/Shared/_Layout.cshtml* 파일에서 다음 앵커 요소를 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-159">Find the following anchor element in the *Pages/Shared/_Layout.cshtml* file.</span></span>
+
+```cshtml
+<a class="navbar-brand" asp-area="" asp-page="/Index">RazorPagesMovie</a>
+```
+
+<span data-ttu-id="e4486-160">이전 요소를 다음 태그로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-160">Replace the preceding element with the following markup:</span></span>
+
+```cshtml
+<a class="navbar-brand" asp-page="/Movies/Index">RpMovie</a>
+```
+
+<span data-ttu-id="e4486-161">이전 앵커 요소는 [태그 도우미](xref:mvc/views/tag-helpers/intro)입니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-161">The preceding anchor element is a [Tag Helper](xref:mvc/views/tag-helpers/intro).</span></span> <span data-ttu-id="e4486-162">이 경우에는 [앵커 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)입니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-162">In this case, it's the [Anchor Tag Helper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper).</span></span> <span data-ttu-id="e4486-163">`asp-page="/Movies/Index"` 태그 도우미 특성 및 값으로 `/Movies/Index` Razor 페이지의 링크를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-163">The `asp-page="/Movies/Index"` Tag Helper attribute and value creates a link to the `/Movies/Index` Razor Page.</span></span> <span data-ttu-id="e4486-164">`asp-area` 특성 값이 비어 있으므로 영역은 링크에서 사용되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-164">The `asp-area` attribute value is empty, so the area isn't used in the link.</span></span> <span data-ttu-id="e4486-165">자세한 내용은 [영역](xref:mvc/controllers/areas)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="e4486-165">See [Areas](xref:mvc/controllers/areas) for more information.</span></span>
+
+<span data-ttu-id="e4486-166">변경 내용을 저장하고 **RpMovie** 링크를 클릭하여 앱을 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-166">Save your changes, and test the app by clicking on the **RpMovie** link.</span></span> <span data-ttu-id="e4486-167">문제가 있는 경우 GitHub에서 [_Layout.cshtml](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml) 파일을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="e4486-167">See the [_Layout.cshtml](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml) file in GitHub if you have any problems.</span></span>
+
+<span data-ttu-id="e4486-168">다른 링크(**홈**, **RpMovie**, **만들기**, **편집** 및 **삭제**)를 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-168">Test the other links (**Home**, **RpMovie**, **Create**, **Edit**, and **Delete**).</span></span> <span data-ttu-id="e4486-169">각 페이지에서 설정되는 제목은 브라우저 탭에서 확인할 수 있습니다. 페이지의 책갈피를 지정하면 제목이 책갈피에 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-169">Each page sets the title, which you can see in the browser tab. When you bookmark a page, the title is used for the bookmark.</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="e4486-170">`Price` 필드에는 소수점을 입력하지 못할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-170">You may not be able to enter decimal commas in the `Price` field.</span></span> <span data-ttu-id="e4486-171">소수점으로 쉼표(“,”)를 사용하는 영어가 아닌 로캘 및 미국 영어가 아닌 날짜 형식에 대해 [jQuery 유효성 검사](https://jqueryvalidation.org/)를 지원하려면 앱을 전역화하는 단계를 수행해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-171">To support [jQuery validation](https://jqueryvalidation.org/) for non-English locales that use a comma (",") for a decimal point, and non US-English date formats, you must take steps to globalize your app.</span></span> <span data-ttu-id="e4486-172">소수점 추가에 대한 지침은 이 [GitHub 문제 4076](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="e4486-172">See this [GitHub issue 4076](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) for instructions on adding decimal comma.</span></span>
+
+<span data-ttu-id="e4486-173">`Layout` 속성은 *Pages/_ViewStart.cshtml* 파일에서 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-173">The `Layout` property is set in the *Pages/_ViewStart.cshtml* file:</span></span>
+
+[!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/Pages/_ViewStart.cshtml)]
+
+<span data-ttu-id="e4486-174">이전 태그는 *Pages* 폴더 아래에 있는 모든 Razor 파일에 대한 레이아웃 파일을 *Pages/Shared/_Layout.cshtml*로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-174">The preceding markup sets the layout file to *Pages/Shared/_Layout.cshtml* for all Razor files under the *Pages* folder.</span></span> <span data-ttu-id="e4486-175">자세한 내용은 [레이아웃](xref:razor-pages/index#layout)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="e4486-175">See [Layout](xref:razor-pages/index#layout) for more information.</span></span>
+
+### <a name="the-create-page-model"></a><span data-ttu-id="e4486-176">Create 페이지 모델</span><span class="sxs-lookup"><span data-stu-id="e4486-176">The Create page model</span></span>
+
+<span data-ttu-id="e4486-177">*Pages/Movies/Create.cshtml.cs* 페이지 모델을 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-177">Examine the *Pages/Movies/Create.cshtml.cs* page model:</span></span>
+
+[!code-csharp[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml.cs?name=snippetALL)]
+
+<span data-ttu-id="e4486-178">`OnGet` 메서드는 페이지에 필요한 상태를 초기화합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-178">The `OnGet` method initializes any state needed for the page.</span></span> <span data-ttu-id="e4486-179">만들기 페이지에는 초기화할 상태가 없습니다. 따라서 `Page`가 반환됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-179">The Create page doesn't have any state to initialize, so `Page` is returned.</span></span> <span data-ttu-id="e4486-180">자습서의 뒷부분에서 상태를 초기화하는 `OnGet`의 예가 나와 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-180">Later in the tutorial, an example of `OnGet` initializing state is shown.</span></span> <span data-ttu-id="e4486-181">`Page` 메서드는 *Create.cshtml* 페이지를 렌더링하는 `PageResult` 개체를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-181">The `Page` method creates a `PageResult` object that renders the *Create.cshtml* page.</span></span>
+
+<span data-ttu-id="e4486-182">`Movie` 속성은 `[BindProperty]` 특성을 사용하여 [모델 바인딩](xref:mvc/models/model-binding)을 옵트인(opt in)합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-182">The `Movie` property uses the `[BindProperty]` attribute to opt-in to [model binding](xref:mvc/models/model-binding).</span></span> <span data-ttu-id="e4486-183">만들기 폼이 폼 값을 게시하면 ASP.NET Core 런타임이 게시된 값을 `Movie` 모델에 바인딩합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-183">When the Create form posts the form values, the ASP.NET Core runtime binds the posted values to the `Movie` model.</span></span>
+
+<span data-ttu-id="e4486-184">페이지에 폼 데이터가 게시되면 `OnPostAsync` 메서드가 실행됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-184">The `OnPostAsync` method is run when the page posts form data:</span></span>
+
+[!code-csharp[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml.cs?name=snippetPost)]
+
+<span data-ttu-id="e4486-185">모델 오류가 있는 경우 폼과 게시된 모든 폼 데이터가 다시 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-185">If there are any model errors, the form is redisplayed, along with any form data posted.</span></span> <span data-ttu-id="e4486-186">대부분의 모델 오류는 폼이 게시되기 전에 클라이언트 쪽에서 catch할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-186">Most model errors can be caught on the client-side before the form is posted.</span></span> <span data-ttu-id="e4486-187">예를 들어 데이터로 변환될 수 없는 날짜 필드에 대한 값을 게시하는 모델 오류가 발생할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-187">An example of a model error is posting a value for the date field that cannot be converted to a date.</span></span> <span data-ttu-id="e4486-188">클라이언트 쪽 유효성 검사 및 모델 유효성 검사는 자습서의 뒷부분에서 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-188">Client-side validation and model validation are discussed later in the tutorial.</span></span>
+
+<span data-ttu-id="e4486-189">모델 오류가 없는 경우 데이터가 저장되고 브라우저가 인덱스 페이지로 리디렉션됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-189">If there are no model errors, the data is saved, and the browser is redirected to the Index page.</span></span>
+
+### <a name="the-create-razor-page"></a><span data-ttu-id="e4486-190">만들기 Razor 페이지</span><span class="sxs-lookup"><span data-stu-id="e4486-190">The Create Razor Page</span></span>
+
+<span data-ttu-id="e4486-191">*Pages/Movies/Create.cshtml* Razor 페이지 파일을 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-191">Examine the *Pages/Movies/Create.cshtml* Razor Page file:</span></span>
+
+[!code-cshtml[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml)]
+
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="e4486-192">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="e4486-192">Visual Studio</span></span>](#tab/visual-studio)
+
+<span data-ttu-id="e4486-193">Visual Studio에서는 다음 태그를 태그 도우미에 사용되는 독특한 굵은 글꼴로 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-193">Visual Studio displays the following tags in a distinctive bold font used for Tag Helpers:</span></span>
+
+* `<form method="post">`
+* `<div asp-validation-summary="ModelOnly" class="text-danger"></div>`
+* `<label asp-for="Movie.Title" class="control-label"></label>`
+* `<input asp-for="Movie.Title" class="form-control" />`
+* `<span asp-validation-for="Movie.Title" class="text-danger"></span>`
+
+![Create.cshtml 페이지의 VS17 뷰](page/_static/th3.png)
+
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="e4486-195">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="e4486-195">Visual Studio Code</span></span>](#tab/visual-studio-code)
+
+<span data-ttu-id="e4486-196">다음 태그 도우미는 위의 태그에 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-196">The following Tag Helpers are shown in the preceding markup:</span></span>
+
+* `<form method="post">`
+* `<div asp-validation-summary="ModelOnly" class="text-danger"></div>`
+* `<label asp-for="Movie.Title" class="control-label"></label>`
+* `<input asp-for="Movie.Title" class="form-control" />`
+* `<span asp-validation-for="Movie.Title" class="text-danger"></span>`
+
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="e4486-197">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="e4486-197">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+
+<span data-ttu-id="e4486-198">Visual Studio에서는 다음 태그를 태그 도우미에 사용되는 독특한 굵은 글꼴로 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-198">Visual Studio displays the following tags in a distinctive bold font used for Tag Helpers:</span></span>
+
+* `<form method="post">`
+* `<div asp-validation-summary="ModelOnly" class="text-danger"></div>`
+* `<label asp-for="Movie.Title" class="control-label"></label>`
+* `<input asp-for="Movie.Title" class="form-control" />`
+* `<span asp-validation-for="Movie.Title" class="text-danger"></span>`
+
+---
+
+<span data-ttu-id="e4486-199">`<form method="post">` 요소는 [폼 태그 도우미](xref:mvc/views/working-with-forms#the-form-tag-helper)입니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-199">The `<form method="post">` element is a [Form Tag Helper](xref:mvc/views/working-with-forms#the-form-tag-helper).</span></span> <span data-ttu-id="e4486-200">폼 태그 도우미에는 [위조 방지 토큰](xref:security/anti-request-forgery)이 자동으로 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-200">The Form Tag Helper automatically includes an [antiforgery token](xref:security/anti-request-forgery).</span></span>
+
+<span data-ttu-id="e4486-201">스캐폴딩 엔진은 다음과 비슷한 모델에서 각 필드(ID 제외)에 대한 Razor 태그를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-201">The scaffolding engine creates Razor markup for each field in the model (except the ID) similar to the following:</span></span>
+
+[!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml?range=15-20)]
+
+<span data-ttu-id="e4486-202">[유효성 검사 태그 도우미](xref:mvc/views/working-with-forms#the-validation-tag-helpers) (`<div asp-validation-summary` 및 `<span asp-validation-for`) 는 유효성 검사 오류를 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-202">The [Validation Tag Helpers](xref:mvc/views/working-with-forms#the-validation-tag-helpers) (`<div asp-validation-summary` and `<span asp-validation-for`) display validation errors.</span></span> <span data-ttu-id="e4486-203">유효성 검사는 이 시리즈의 뒷부분에서 자세히 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-203">Validation is covered in more detail later in this series.</span></span>
+
+<span data-ttu-id="e4486-204">[레이블 태그 도우미](xref:mvc/views/working-with-forms#the-label-tag-helper)(`<label asp-for="Movie.Title" class="control-label"></label>`)는 `Title` 속성에 대한 레이블 캡션 및 `for` 특성을 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-204">The [Label Tag Helper](xref:mvc/views/working-with-forms#the-label-tag-helper) (`<label asp-for="Movie.Title" class="control-label"></label>`) generates the label caption and `for` attribute for the `Title` property.</span></span>
+
+<span data-ttu-id="e4486-205">[입력 태그 도우미](xref:mvc/views/working-with-forms)(`<input asp-for="Movie.Title" class="form-control">`)는 [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) 특성을 사용하고 클라이언트 쪽의 jQuery 유효성 검사에 필요한 HTML 특성을 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-205">The [Input Tag Helper](xref:mvc/views/working-with-forms) (`<input asp-for="Movie.Title" class="form-control">`) uses the [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) attributes and produces HTML attributes needed for jQuery Validation on the client-side.</span></span>
+
+<span data-ttu-id="e4486-206">태그 도우미(예: `<form method="post">`)에 대한 자세한 내용은 [ASP.NET Core의 태그 도우미](xref:mvc/views/tag-helpers/intro)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="e4486-206">For more information on Tag Helpers such as `<form method="post">`, see [Tag Helpers in ASP.NET Core](xref:mvc/views/tag-helpers/intro).</span></span>
+
+## <a name="additional-resources"></a><span data-ttu-id="e4486-207">추가 자료</span><span class="sxs-lookup"><span data-stu-id="e4486-207">Additional resources</span></span>
+
+> [!div class="step-by-step"]
+> <span data-ttu-id="e4486-208">[이전: 모델 추가](xref:tutorials/razor-pages/model)
+> [다음: 데이터베이스](xref:tutorials/razor-pages/sql)</span><span class="sxs-lookup"><span data-stu-id="e4486-208">[Previous: Adding a model](xref:tutorials/razor-pages/model)
+[Next: Database](xref:tutorials/razor-pages/sql)</span></span>
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+<span data-ttu-id="e4486-209">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="e4486-209">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+
+<span data-ttu-id="e4486-210">이 자습서에서는 [이전 자습서](xref:tutorials/razor-pages/model)에서 스캐폴딩을 통해 만든 Razor 페이지를 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-210">This tutorial examines the Razor Pages created by scaffolding in the [previous tutorial](xref:tutorials/razor-pages/model).</span></span>
+
+<span data-ttu-id="e4486-211">샘플을 [보거나 다운로드합니다](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22).</span><span class="sxs-lookup"><span data-stu-id="e4486-211">[View or download](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22) sample.</span></span>
+
+## <a name="the-create-delete-details-and-edit-pages"></a><span data-ttu-id="e4486-212">만들기, 삭제, 세부 정보 및 편집 페이지</span><span class="sxs-lookup"><span data-stu-id="e4486-212">The Create, Delete, Details, and Edit pages</span></span>
+
+<span data-ttu-id="e4486-213">*Pages/Movies/Index.cshtml.cs* 페이지 모델을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-213">Examine the *Pages/Movies/Index.cshtml.cs* Page Model:</span></span>
+
+[!code-csharp[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml.cs)]
+
+<span data-ttu-id="e4486-214">Razor 페이지는 `PageModel`에서 파생됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-214">Razor Pages are derived from `PageModel`.</span></span> <span data-ttu-id="e4486-215">일반적으로 `PageModel` 파생 클래스를 `<PageName>Model`이라고 합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-215">By convention, the `PageModel`-derived class is called `<PageName>Model`.</span></span> <span data-ttu-id="e4486-216">생성자는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 `RazorPagesMovieContext`를 페이지에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-216">The constructor uses [dependency injection](xref:fundamentals/dependency-injection) to add the `RazorPagesMovieContext` to the page.</span></span> <span data-ttu-id="e4486-217">모든 스캐폴드된 페이지가 이 패턴을 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-217">All the scaffolded pages follow this pattern.</span></span> <span data-ttu-id="e4486-218">엔터티 프레임워크로 비동기 프로그래밍에 대한 자세한 내용은 [비동기 코드](xref:data/ef-rp/intro#asynchronous-code)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="e4486-218">See [Asynchronous code](xref:data/ef-rp/intro#asynchronous-code) for more information on asynchronous programing with Entity Framework.</span></span>
+
+<span data-ttu-id="e4486-219">페이지에 대한 요청을 만들면 `OnGetAsync` 메서드가 Razor 페이지에 동영상 목록을 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-219">When a request is made for the page, the `OnGetAsync` method returns a list of movies to the Razor Page.</span></span> <span data-ttu-id="e4486-220">페이지 상태를 초기화하기 위해 `OnGetAsync` 또는 `OnGet`이 Razor 페이지에서 호출됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-220">`OnGetAsync` or `OnGet` is called on a Razor Page to initialize the state for the page.</span></span> <span data-ttu-id="e4486-221">이 경우 `OnGetAsync`는 동영상 목록을 가져와 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-221">In this case, `OnGetAsync` gets a list of movies and displays them.</span></span>
+
+<span data-ttu-id="e4486-222">`OnGet`에서 `void`를 반환하거나 `OnGetAsync`에서 `Task`를 반환하면 반환 메서드가 사용되지 않은 것입니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-222">When `OnGet` returns `void` or `OnGetAsync` returns`Task`, no return method is used.</span></span> <span data-ttu-id="e4486-223">반환 형식이 `IActionResult` 또는 `Task<IActionResult>`이면 반환 문을 제공해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-223">When the return type is `IActionResult` or `Task<IActionResult>`, a return statement must be provided.</span></span> <span data-ttu-id="e4486-224">*Pages/Movies/Create.cshtml.cs* `OnPostAsync` 메서드를 예로 들 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-224">For example, the *Pages/Movies/Create.cshtml.cs* `OnPostAsync` method:</span></span>
+
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml.cs?name=snippet)]
+
+<a name="index"></a> <span data-ttu-id="e4486-225">*Pages/Movies/Index.cshtml* Razor 페이지를 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-225">Examine the *Pages/Movies/Index.cshtml* Razor Page:</span></span>
+
+[!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml)]
+
+<span data-ttu-id="e4486-226">Razor는 HTML에서 C# 또는 Razor 관련 태그로 전환될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-226">Razor can transition from HTML into C# or into Razor-specific markup.</span></span> <span data-ttu-id="e4486-227">`@` 기호 뒤에 [Razor 예약 키워드](xref:mvc/views/razor#razor-reserved-keywords)가 사용되면 이 기호는 Razor 관련 태그로 전환됩니다. 이외의 경우에는 C#으로 전환됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-227">When an `@` symbol is followed by a [Razor reserved keyword](xref:mvc/views/razor#razor-reserved-keywords), it transitions into Razor-specific markup, otherwise it transitions into C#.</span></span>
+
+<span data-ttu-id="e4486-228">`@page` Razor 지시문은 파일을 MVC 작업으로 만들고, 이것은 요청을 처리할 수 있음을 의미합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-228">The `@page` Razor directive makes the file into an MVC action, which means that it can handle requests.</span></span> <span data-ttu-id="e4486-229">`@page`는 페이지의 첫 번째 Razor 지시문이어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-229">`@page` must be the first Razor directive on a page.</span></span> <span data-ttu-id="e4486-230">`@page`는 Razor 관련 태그로 전환되는 하나의 예입니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-230">`@page` is an example of transitioning into Razor-specific markup.</span></span> <span data-ttu-id="e4486-231">자세한 내용은 [Razor 구문](xref:mvc/views/razor#razor-syntax)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="e4486-231">See [Razor syntax](xref:mvc/views/razor#razor-syntax) for more information.</span></span>
+
+<span data-ttu-id="e4486-232">다음 HTML 도우미에서 사용되는 람다 식을 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-232">Examine the lambda expression used in the following HTML Helper:</span></span>
+
+```cshtml
+@Html.DisplayNameFor(model => model.Movie[0].Title))
+```
+
+<span data-ttu-id="e4486-233">`DisplayNameFor` HTML 도우미는 람다 식에서 참조되는 `Title` 속성을 검사하여 표시 이름을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-233">The `DisplayNameFor` HTML Helper inspects the `Title` property referenced in the lambda expression to determine the display name.</span></span> <span data-ttu-id="e4486-234">람다 식은 계산되는 것이 아니라 검사됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-234">The lambda expression is inspected rather than evaluated.</span></span> <span data-ttu-id="e4486-235">즉, `model`, `model.Movie` 또는 `model.Movie[0]`가 `null`이거나 비어 있을 경우 액세스 위반이 없습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-235">That means there is no access violation when `model`, `model.Movie`, or `model.Movie[0]` are `null` or empty.</span></span> <span data-ttu-id="e4486-236">람다 식이 계산될 경우(예: `@Html.DisplayFor(modelItem => item.Title)` 사용) 모델의 속성 값이 계산됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-236">When the lambda expression is evaluated (for example, with `@Html.DisplayFor(modelItem => item.Title)`), the model's property values are evaluated.</span></span>
+
+<a name="md"></a>
+
+### <a name="the-model-directive"></a><span data-ttu-id="e4486-237">@model 지시문</span><span class="sxs-lookup"><span data-stu-id="e4486-237">The @model directive</span></span>
+
+[!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?range=1-2&highlight=2)]
+
+<span data-ttu-id="e4486-238">`@model` 지시문은 Razor 페이지에 전달되는 모델 형식을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-238">The `@model` directive specifies the type of the model passed to the Razor Page.</span></span> <span data-ttu-id="e4486-239">이전 예제에서 `@model` 줄은 Razor 페이지에서 `PageModel` 파생 클래스를 사용할 수 있게 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-239">In the preceding example, the `@model` line makes the `PageModel`-derived class available to the Razor Page.</span></span> <span data-ttu-id="e4486-240">모델은 페이지에서 `@Html.DisplayNameFor` 및 `@Html.DisplayFor` [HTML 도우미](/aspnet/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs#understanding-html-helpers)에서 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-240">The model is used in the `@Html.DisplayNameFor` and `@Html.DisplayFor` [HTML Helpers](/aspnet/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs#understanding-html-helpers) on the page.</span></span>
+
+### <a name="the-layout-page"></a><span data-ttu-id="e4486-241">레이아웃 페이지</span><span class="sxs-lookup"><span data-stu-id="e4486-241">The layout page</span></span>
+
+<span data-ttu-id="e4486-242">메뉴 링크를 선택합니다(**RazorPagesMovie**, **홈** 및 **개인 정보**).</span><span class="sxs-lookup"><span data-stu-id="e4486-242">Select the menu links (**RazorPagesMovie**, **Home**, and **Privacy**).</span></span> <span data-ttu-id="e4486-243">각 페이지는 동일한 메뉴 레이아웃을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-243">Each page shows the same menu layout.</span></span> <span data-ttu-id="e4486-244">메뉴 레이아웃은 *Pages/Shared/_Layout.cshtml* 파일에서 구현됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-244">The menu layout is implemented in the *Pages/Shared/_Layout.cshtml* file.</span></span> <span data-ttu-id="e4486-245">*Pages/Shared/_Layout.cshtml* 파일을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-245">Open the *Pages/Shared/_Layout.cshtml* file.</span></span>
+
+<span data-ttu-id="e4486-246">[레이아웃](xref:mvc/views/layout) 템플릿을 사용하면 한 곳에서 사이트의 HTML 컨테이너 레이아웃을 지정한 다음 사이트에서 여러 페이지에 걸쳐 적용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-246">[Layout](xref:mvc/views/layout) templates allow you to specify the HTML container layout of your site in one place and then apply it across multiple pages in your site.</span></span> <span data-ttu-id="e4486-247">`@RenderBody()` 줄을 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-247">Find the `@RenderBody()` line.</span></span> <span data-ttu-id="e4486-248">`RenderBody`는 사용자가 만드는 모든 페이지 특정 보기가 표시되는 자리 표시자이며 레이아웃 페이지에서 ‘래핑됩니다’. </span><span class="sxs-lookup"><span data-stu-id="e4486-248">`RenderBody` is a placeholder where all the page-specific views you create show up, *wrapped* in the layout page.</span></span> <span data-ttu-id="e4486-249">예를 들어 **개인 정보** 링크를 선택하는 경우 **Pages/Privacy.cshtml** 보기는 `RenderBody` 메서드 내에서 렌더링됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-249">For example, if you select the **Privacy** link, the **Pages/Privacy.cshtml** view is rendered inside the `RenderBody` method.</span></span>
+
+<a name="vd"></a>
+
+### <a name="viewdata-and-layout"></a><span data-ttu-id="e4486-250">ViewData 및 레이아웃</span><span class="sxs-lookup"><span data-stu-id="e4486-250">ViewData and layout</span></span>
+
+<span data-ttu-id="e4486-251">*Pages/Movies/Index.cshtml* 파일의 다음 코드를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-251">Consider the following code from the *Pages/Movies/Index.cshtml* file:</span></span>
 
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?range=1-6&highlight=4-999)]
 
-<span data-ttu-id="77b62-147">이전 강조 표시된 코드는 C#으로 전환되는 Razor의 예제입니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-147">The preceding highlighted code is an example of Razor transitioning into C#.</span></span> <span data-ttu-id="77b62-148">`{` 및 `}` 문자로 C# 코드 블록을 묶습니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-148">The `{` and `}` characters enclose a block of C# code.</span></span>
+<span data-ttu-id="e4486-252">이전 강조 표시된 코드는 C#으로 전환되는 Razor의 예제입니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-252">The preceding highlighted code is an example of Razor transitioning into C#.</span></span> <span data-ttu-id="e4486-253">`{` 및 `}` 문자로 C# 코드 블록을 묶습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-253">The `{` and `}` characters enclose a block of C# code.</span></span>
 
-<span data-ttu-id="77b62-149">`PageModel` 기본 클래스에는 뷰에 전달할 데이터를 추가하는 데 사용될 수 있는 `ViewData` 사전 속성이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-149">The `PageModel` base class has a `ViewData` dictionary property that can be used to add data that you want to pass to a View.</span></span> <span data-ttu-id="77b62-150">키/쌍 패턴을 사용하여 개체를 `ViewData` 사전에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-150">You add objects into the `ViewData` dictionary using a key/value pattern.</span></span> <span data-ttu-id="77b62-151">이전 샘플에서는 “Title” 속성이 `ViewData` 사전에 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-151">In the preceding sample, the "Title" property is added to the `ViewData` dictionary.</span></span>
+<span data-ttu-id="e4486-254">`PageModel` 기본 클래스에는 뷰에 전달할 데이터를 추가하는 데 사용될 수 있는 `ViewData` 사전 속성이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-254">The `PageModel` base class has a `ViewData` dictionary property that can be used to add data that you want to pass to a View.</span></span> <span data-ttu-id="e4486-255">키/쌍 패턴을 사용하여 개체를 `ViewData` 사전에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-255">You add objects into the `ViewData` dictionary using a key/value pattern.</span></span> <span data-ttu-id="e4486-256">이전 샘플에서는 “Title” 속성이 `ViewData` 사전에 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-256">In the preceding sample, the "Title" property is added to the `ViewData` dictionary.</span></span>
 
-<span data-ttu-id="77b62-152">"Title" 속성은 *Pages/Shared/_Layout.cshtml* 파일에서 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-152">The "Title" property is used in the *Pages/Shared/_Layout.cshtml* file.</span></span> <span data-ttu-id="77b62-153">다음 태그는 *_Layout.cshtml* 파일의 처음 몇 줄을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-153">The following markup shows the first few lines of the *_Layout.cshtml* file.</span></span>
+<span data-ttu-id="e4486-257">"Title" 속성은 *Pages/Shared/_Layout.cshtml* 파일에서 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-257">The "Title" property is used in the *Pages/Shared/_Layout.cshtml* file.</span></span> <span data-ttu-id="e4486-258">다음 태그는 *_Layout.cshtml* 파일의 처음 몇 줄을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-258">The following markup shows the first few lines of the *_Layout.cshtml* file.</span></span>
 
 <!-- we need a snapshot copy of layout because we are
 changing in in the next step.
 -->
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/NU/_Layout.cshtml?highlight=6-99)]
 
-<span data-ttu-id="77b62-154">`@*Markup removed for brevity.*@` 줄은 레이아웃 파일에 나타나지 않는 Razor 주석입니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-154">The line `@*Markup removed for brevity.*@` is a Razor comment which doesn't appear in your layout file.</span></span> <span data-ttu-id="77b62-155">HTML 주석(`<!-- -->`)과 달리 Razor 주석은 클라이언트에 전송되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-155">Unlike HTML comments (`<!-- -->`), Razor comments are not sent to the client.</span></span>
+<span data-ttu-id="e4486-259">`@*Markup removed for brevity.*@` 줄은 레이아웃 파일에 나타나지 않는 Razor 주석입니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-259">The line `@*Markup removed for brevity.*@` is a Razor comment which doesn't appear in your layout file.</span></span> <span data-ttu-id="e4486-260">HTML 주석(`<!-- -->`)과 달리 Razor 주석은 클라이언트에 전송되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-260">Unlike HTML comments (`<!-- -->`), Razor comments are not sent to the client.</span></span>
 
-### <a name="update-the-layout"></a><span data-ttu-id="77b62-156">레이아웃 업데이트</span><span class="sxs-lookup"><span data-stu-id="77b62-156">Update the layout</span></span>
+### <a name="update-the-layout"></a><span data-ttu-id="e4486-261">레이아웃 업데이트</span><span class="sxs-lookup"><span data-stu-id="e4486-261">Update the layout</span></span>
 
-<span data-ttu-id="77b62-157">*Pages/Shared/_Layout.cshtml* 파일의 `<title>` 요소를 변경하여 **RazorPagesMovie** 대신 **Movie**를 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-157">Change the `<title>` element in the *Pages/Shared/_Layout.cshtml* file to display **Movie** rather than **RazorPagesMovie**.</span></span>
+<span data-ttu-id="e4486-262">*Pages/Shared/_Layout.cshtml* 파일의 `<title>` 요소를 변경하여 **RazorPagesMovie** 대신 **Movie**를 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-262">Change the `<title>` element in the *Pages/Shared/_Layout.cshtml* file to display **Movie** rather than **RazorPagesMovie**.</span></span>
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml?range=1-6&highlight=6)]
 
-<span data-ttu-id="77b62-158">*Pages/Shared/_Layout.cshtml* 파일에서 다음 앵커 요소를 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-158">Find the following anchor element in the *Pages/Shared/_Layout.cshtml* file.</span></span>
+<span data-ttu-id="e4486-263">*Pages/Shared/_Layout.cshtml* 파일에서 다음 앵커 요소를 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-263">Find the following anchor element in the *Pages/Shared/_Layout.cshtml* file.</span></span>
 
 ```cshtml
 <a class="navbar-brand" asp-area="" asp-page="/Index">RazorPagesMovie</a>
 ```
 
-<span data-ttu-id="77b62-159">이전 요소를 다음 태그로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-159">Replace the preceding element with the following markup.</span></span>
+<span data-ttu-id="e4486-264">이전 요소를 다음 태그로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-264">Replace the preceding element with the following markup.</span></span>
 
 ```cshtml
 <a class="navbar-brand" asp-page="/Movies/Index">RpMovie</a>
 ```
 
-<span data-ttu-id="77b62-160">이전 앵커 요소는 [태그 도우미](xref:mvc/views/tag-helpers/intro)입니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-160">The preceding anchor element is a [Tag Helper](xref:mvc/views/tag-helpers/intro).</span></span> <span data-ttu-id="77b62-161">이 경우에는 [앵커 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)입니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-161">In this case, it's the [Anchor Tag Helper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper).</span></span> <span data-ttu-id="77b62-162">`asp-page="/Movies/Index"` 태그 도우미 특성 및 값으로 `/Movies/Index` Razor 페이지의 링크를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-162">The `asp-page="/Movies/Index"` Tag Helper attribute and value creates a link to the `/Movies/Index` Razor Page.</span></span> <span data-ttu-id="77b62-163">`asp-area` 특성 값이 비어 있으므로 영역은 링크에서 사용되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-163">The `asp-area` attribute value is empty, so the area isn't used in the link.</span></span> <span data-ttu-id="77b62-164">자세한 내용은 [영역](xref:mvc/controllers/areas)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="77b62-164">See [Areas](xref:mvc/controllers/areas) for more information.</span></span>
+<span data-ttu-id="e4486-265">이전 앵커 요소는 [태그 도우미](xref:mvc/views/tag-helpers/intro)입니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-265">The preceding anchor element is a [Tag Helper](xref:mvc/views/tag-helpers/intro).</span></span> <span data-ttu-id="e4486-266">이 경우에는 [앵커 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)입니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-266">In this case, it's the [Anchor Tag Helper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper).</span></span> <span data-ttu-id="e4486-267">`asp-page="/Movies/Index"` 태그 도우미 특성 및 값으로 `/Movies/Index` Razor 페이지의 링크를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-267">The `asp-page="/Movies/Index"` Tag Helper attribute and value creates a link to the `/Movies/Index` Razor Page.</span></span> <span data-ttu-id="e4486-268">`asp-area` 특성 값이 비어 있으므로 영역은 링크에서 사용되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-268">The `asp-area` attribute value is empty, so the area isn't used in the link.</span></span> <span data-ttu-id="e4486-269">자세한 내용은 [영역](xref:mvc/controllers/areas)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="e4486-269">See [Areas](xref:mvc/controllers/areas) for more information.</span></span>
 
-<span data-ttu-id="77b62-165">변경 내용을 저장하고 **RpMovie** 링크를 클릭하여 앱을 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-165">Save your changes, and test the app by clicking on the **RpMovie** link.</span></span> <span data-ttu-id="77b62-166">문제가 있는 경우 GitHub에서 [_Layout.cshtml](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml) 파일을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="77b62-166">See the [_Layout.cshtml](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml) file in GitHub if you have any problems.</span></span>
+<span data-ttu-id="e4486-270">변경 내용을 저장하고 **RpMovie** 링크를 클릭하여 앱을 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-270">Save your changes, and test the app by clicking on the **RpMovie** link.</span></span> <span data-ttu-id="e4486-271">문제가 있는 경우 GitHub에서 [_Layout.cshtml](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml) 파일을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="e4486-271">See the [_Layout.cshtml](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml) file in GitHub if you have any problems.</span></span>
 
-<span data-ttu-id="77b62-167">다른 링크(**홈**, **RpMovie**, **만들기**, **편집** 및 **삭제**)를 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-167">Test the other links (**Home**, **RpMovie**, **Create**, **Edit**, and **Delete**).</span></span> <span data-ttu-id="77b62-168">각 페이지에서 설정되는 제목은 브라우저 탭에서 확인할 수 있습니다. 페이지의 책갈피를 지정하면 제목이 책갈피에 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-168">Each page sets the title, which you can see in the browser tab. When you bookmark a page, the title is used for the bookmark.</span></span>
+<span data-ttu-id="e4486-272">다른 링크(**홈**, **RpMovie**, **만들기**, **편집** 및 **삭제**)를 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-272">Test the other links (**Home**, **RpMovie**, **Create**, **Edit**, and **Delete**).</span></span> <span data-ttu-id="e4486-273">각 페이지에서 설정되는 제목은 브라우저 탭에서 확인할 수 있습니다. 페이지의 책갈피를 지정하면 제목이 책갈피에 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-273">Each page sets the title, which you can see in the browser tab. When you bookmark a page, the title is used for the bookmark.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="77b62-169">`Price` 필드에는 소수점을 입력하지 못할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-169">You may not be able to enter decimal commas in the `Price` field.</span></span> <span data-ttu-id="77b62-170">소수점으로 쉼표(“,”)를 사용하는 영어가 아닌 로캘 및 미국 영어가 아닌 날짜 형식에 대해 [jQuery 유효성 검사](https://jqueryvalidation.org/)를 지원하려면 앱을 전역화하는 단계를 수행해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-170">To support [jQuery validation](https://jqueryvalidation.org/) for non-English locales that use a comma (",") for a decimal point, and non US-English date formats, you must take steps to globalize your app.</span></span> <span data-ttu-id="77b62-171">소수점 추가에 대한 지침은 이 [GitHub 문제 4076](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)에 나와 있습니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-171">This [GitHub issue 4076](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) for instructions on adding decimal comma.</span></span>
+> <span data-ttu-id="e4486-274">`Price` 필드에는 소수점을 입력하지 못할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-274">You may not be able to enter decimal commas in the `Price` field.</span></span> <span data-ttu-id="e4486-275">소수점으로 쉼표(“,”)를 사용하는 영어가 아닌 로캘 및 미국 영어가 아닌 날짜 형식에 대해 [jQuery 유효성 검사](https://jqueryvalidation.org/)를 지원하려면 앱을 전역화하는 단계를 수행해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-275">To support [jQuery validation](https://jqueryvalidation.org/) for non-English locales that use a comma (",") for a decimal point, and non US-English date formats, you must take steps to globalize your app.</span></span> <span data-ttu-id="e4486-276">소수점 추가에 대한 지침은 이 [GitHub 문제 4076](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)에 나와 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-276">This [GitHub issue 4076](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) for instructions on adding decimal comma.</span></span>
 
-<span data-ttu-id="77b62-172">`Layout` 속성은 *Pages/_ViewStart.cshtml* 파일에서 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-172">The `Layout` property is set in the *Pages/_ViewStart.cshtml* file:</span></span>
+<span data-ttu-id="e4486-277">`Layout` 속성은 *Pages/_ViewStart.cshtml* 파일에서 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-277">The `Layout` property is set in the *Pages/_ViewStart.cshtml* file:</span></span>
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/_ViewStart.cshtml)]
 
-<span data-ttu-id="77b62-173">이전 태그는 *Pages* 폴더 아래에 있는 모든 Razor 파일에 대한 레이아웃 파일을 *Pages/Shared/_Layout.cshtml*로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-173">The preceding markup sets the layout file to *Pages/Shared/_Layout.cshtml* for all Razor files under the *Pages* folder.</span></span> <span data-ttu-id="77b62-174">자세한 내용은 [레이아웃](xref:razor-pages/index#layout)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="77b62-174">See [Layout](xref:razor-pages/index#layout) for more information.</span></span>
+<span data-ttu-id="e4486-278">이전 태그는 *Pages* 폴더 아래에 있는 모든 Razor 파일에 대한 레이아웃 파일을 *Pages/Shared/_Layout.cshtml*로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-278">The preceding markup sets the layout file to *Pages/Shared/_Layout.cshtml* for all Razor files under the *Pages* folder.</span></span> <span data-ttu-id="e4486-279">자세한 내용은 [레이아웃](xref:razor-pages/index#layout)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="e4486-279">See [Layout](xref:razor-pages/index#layout) for more information.</span></span>
 
-### <a name="the-create-page-model"></a><span data-ttu-id="77b62-175">Create 페이지 모델</span><span class="sxs-lookup"><span data-stu-id="77b62-175">The Create page model</span></span>
+### <a name="the-create-page-model"></a><span data-ttu-id="e4486-280">Create 페이지 모델</span><span class="sxs-lookup"><span data-stu-id="e4486-280">The Create page model</span></span>
 
-<span data-ttu-id="77b62-176">*Pages/Movies/Create.cshtml.cs* 페이지 모델을 살펴봅니다. </span><span class="sxs-lookup"><span data-stu-id="77b62-176">Examine the *Pages/Movies/Create.cshtml.cs* page model:</span></span>
+<span data-ttu-id="e4486-281">*Pages/Movies/Create.cshtml.cs* 페이지 모델을 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-281">Examine the *Pages/Movies/Create.cshtml.cs* page model:</span></span>
 
 [!code-csharp[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml.cs?name=snippetALL)]
 
-<span data-ttu-id="77b62-177">`OnGet` 메서드는 페이지에 필요한 상태를 초기화합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-177">The `OnGet` method initializes any state needed for the page.</span></span> <span data-ttu-id="77b62-178">만들기 페이지에는 초기화할 상태가 없습니다. 따라서 `Page`가 반환됩니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-178">The Create page doesn't have any state to initialize, so `Page` is returned.</span></span> <span data-ttu-id="77b62-179">이 자습서의 뒷부분에서 `OnGet` 메서드 초기화 상태를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-179">Later in the tutorial you see `OnGet` method initialize state.</span></span> <span data-ttu-id="77b62-180">`Page` 메서드는 *Create.cshtml* 페이지를 렌더링하는 `PageResult` 개체를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-180">The `Page` method creates a `PageResult` object that renders the *Create.cshtml* page.</span></span>
+<span data-ttu-id="e4486-282">`OnGet` 메서드는 페이지에 필요한 상태를 초기화합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-282">The `OnGet` method initializes any state needed for the page.</span></span> <span data-ttu-id="e4486-283">만들기 페이지에는 초기화할 상태가 없습니다. 따라서 `Page`가 반환됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-283">The Create page doesn't have any state to initialize, so `Page` is returned.</span></span> <span data-ttu-id="e4486-284">이 자습서의 뒷부분에서 `OnGet` 메서드 초기화 상태를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-284">Later in the tutorial you see `OnGet` method initialize state.</span></span> <span data-ttu-id="e4486-285">`Page` 메서드는 *Create.cshtml* 페이지를 렌더링하는 `PageResult` 개체를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-285">The `Page` method creates a `PageResult` object that renders the *Create.cshtml* page.</span></span>
 
-<span data-ttu-id="77b62-181">`Movie` 속성은 `[BindProperty]` 특성을 사용하여 [모델 바인딩](xref:mvc/models/model-binding)을 옵트인(opt in)합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-181">The `Movie` property uses the `[BindProperty]` attribute to opt-in to [model binding](xref:mvc/models/model-binding).</span></span> <span data-ttu-id="77b62-182">만들기 폼이 폼 값을 게시하면 ASP.NET Core 런타임이 게시된 값을 `Movie` 모델에 바인딩합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-182">When the Create form posts the form values, the ASP.NET Core runtime binds the posted values to the `Movie` model.</span></span>
+<span data-ttu-id="e4486-286">`Movie` 속성은 `[BindProperty]` 특성을 사용하여 [모델 바인딩](xref:mvc/models/model-binding)을 옵트인(opt in)합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-286">The `Movie` property uses the `[BindProperty]` attribute to opt-in to [model binding](xref:mvc/models/model-binding).</span></span> <span data-ttu-id="e4486-287">만들기 폼이 폼 값을 게시하면 ASP.NET Core 런타임이 게시된 값을 `Movie` 모델에 바인딩합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-287">When the Create form posts the form values, the ASP.NET Core runtime binds the posted values to the `Movie` model.</span></span>
 
-<span data-ttu-id="77b62-183">페이지에 폼 데이터가 게시되면 `OnPostAsync` 메서드가 실행됩니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-183">The `OnPostAsync` method is run when the page posts form data:</span></span>
+<span data-ttu-id="e4486-288">페이지에 폼 데이터가 게시되면 `OnPostAsync` 메서드가 실행됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-288">The `OnPostAsync` method is run when the page posts form data:</span></span>
 
 [!code-csharp[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml.cs?name=snippetPost)]
 
-<span data-ttu-id="77b62-184">모델 오류가 있는 경우 폼과 게시된 모든 폼 데이터가 다시 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-184">If there are any model errors, the form is redisplayed, along with any form data posted.</span></span> <span data-ttu-id="77b62-185">대부분의 모델 오류는 폼이 게시되기 전에 클라이언트 쪽에서 catch할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-185">Most model errors can be caught on the client-side before the form is posted.</span></span> <span data-ttu-id="77b62-186">예를 들어 데이터로 변환될 수 없는 날짜 필드에 대한 값을 게시하는 모델 오류가 발생할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-186">An example of a model error is posting a value for the date field that cannot be converted to a date.</span></span> <span data-ttu-id="77b62-187">클라이언트 쪽 유효성 검사 및 모델 유효성 검사는 자습서의 뒷부분에서 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-187">Client-side validation and model validation are discussed later in the tutorial.</span></span>
+<span data-ttu-id="e4486-289">모델 오류가 있는 경우 폼과 게시된 모든 폼 데이터가 다시 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-289">If there are any model errors, the form is redisplayed, along with any form data posted.</span></span> <span data-ttu-id="e4486-290">대부분의 모델 오류는 폼이 게시되기 전에 클라이언트 쪽에서 catch할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-290">Most model errors can be caught on the client-side before the form is posted.</span></span> <span data-ttu-id="e4486-291">예를 들어 데이터로 변환될 수 없는 날짜 필드에 대한 값을 게시하는 모델 오류가 발생할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-291">An example of a model error is posting a value for the date field that cannot be converted to a date.</span></span> <span data-ttu-id="e4486-292">클라이언트 쪽 유효성 검사 및 모델 유효성 검사는 자습서의 뒷부분에서 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-292">Client-side validation and model validation are discussed later in the tutorial.</span></span>
 
-<span data-ttu-id="77b62-188">모델 오류가 없는 경우 데이터가 저장되고 브라우저가 인덱스 페이지로 리디렉션됩니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-188">If there are no model errors, the data is saved, and the browser is redirected to the Index page.</span></span>
+<span data-ttu-id="e4486-293">모델 오류가 없는 경우 데이터가 저장되고 브라우저가 인덱스 페이지로 리디렉션됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-293">If there are no model errors, the data is saved, and the browser is redirected to the Index page.</span></span>
 
-### <a name="the-create-razor-page"></a><span data-ttu-id="77b62-189">만들기 Razor 페이지</span><span class="sxs-lookup"><span data-stu-id="77b62-189">The Create Razor Page</span></span>
+### <a name="the-create-razor-page"></a><span data-ttu-id="e4486-294">만들기 Razor 페이지</span><span class="sxs-lookup"><span data-stu-id="e4486-294">The Create Razor Page</span></span>
 
-<span data-ttu-id="77b62-190">*Pages/Movies/Create.cshtml* Razor 페이지 파일을 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-190">Examine the *Pages/Movies/Create.cshtml* Razor Page file:</span></span>
+<span data-ttu-id="e4486-295">*Pages/Movies/Create.cshtml* Razor 페이지 파일을 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-295">Examine the *Pages/Movies/Create.cshtml* Razor Page file:</span></span>
 
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml)]
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="77b62-191">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="77b62-191">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="e4486-296">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="e4486-296">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="77b62-192">Visual Studio에서는 `<form method="post">` 태그를 태그 도우미에 사용되는 독특한 굵은 글꼴로 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-192">Visual Studio displays the `<form method="post">` tag in a distinctive bold font used for Tag Helpers:</span></span>
+<span data-ttu-id="e4486-297">Visual Studio에서는 `<form method="post">` 태그를 태그 도우미에 사용되는 독특한 굵은 글꼴로 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-297">Visual Studio displays the `<form method="post">` tag in a distinctive bold font used for Tag Helpers:</span></span>
 
 ![Create.cshtml 페이지의 VS17 뷰](page/_static/th.png)
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="77b62-194">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="77b62-194">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="e4486-299">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="e4486-299">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-<span data-ttu-id="77b62-195">태그 도우미(예: `<form method="post">`)에 대한 자세한 내용은 [ASP.NET Core의 태그 도우미](xref:mvc/views/tag-helpers/intro)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="77b62-195">For more information on Tag Helpers such as `<form method="post">`, see [Tag Helpers in ASP.NET Core](xref:mvc/views/tag-helpers/intro).</span></span>
+<span data-ttu-id="e4486-300">태그 도우미(예: `<form method="post">`)에 대한 자세한 내용은 [ASP.NET Core의 태그 도우미](xref:mvc/views/tag-helpers/intro)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="e4486-300">For more information on Tag Helpers such as `<form method="post">`, see [Tag Helpers in ASP.NET Core](xref:mvc/views/tag-helpers/intro).</span></span>
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="77b62-196">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="77b62-196">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="e4486-301">Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="e4486-301">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="77b62-197">Mac용 Visual Studio에서는 `<form method="post">` 태그를 태그 도우미에 사용되는 독특한 굵은 글꼴로 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-197">Visual Studio for Mac displays the `<form method="post">` tag in a distinctive bold font used for Tag Helpers.</span></span>
+<span data-ttu-id="e4486-302">Mac용 Visual Studio에서는 `<form method="post">` 태그를 태그 도우미에 사용되는 독특한 굵은 글꼴로 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-302">Visual Studio for Mac displays the `<form method="post">` tag in a distinctive bold font used for Tag Helpers.</span></span>
 
 ---
 
-<span data-ttu-id="77b62-198">`<form method="post">` 요소는 [폼 태그 도우미](xref:mvc/views/working-with-forms#the-form-tag-helper)입니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-198">The `<form method="post">` element is a [Form Tag Helper](xref:mvc/views/working-with-forms#the-form-tag-helper).</span></span> <span data-ttu-id="77b62-199">폼 태그 도우미에는 [위조 방지 토큰](xref:security/anti-request-forgery)이 자동으로 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-199">The Form Tag Helper automatically includes an [antiforgery token](xref:security/anti-request-forgery).</span></span>
+<span data-ttu-id="e4486-303">`<form method="post">` 요소는 [폼 태그 도우미](xref:mvc/views/working-with-forms#the-form-tag-helper)입니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-303">The `<form method="post">` element is a [Form Tag Helper](xref:mvc/views/working-with-forms#the-form-tag-helper).</span></span> <span data-ttu-id="e4486-304">폼 태그 도우미에는 [위조 방지 토큰](xref:security/anti-request-forgery)이 자동으로 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-304">The Form Tag Helper automatically includes an [antiforgery token](xref:security/anti-request-forgery).</span></span>
 
-<span data-ttu-id="77b62-200">스캐폴딩 엔진은 다음과 비슷한 모델에서 각 필드(ID 제외)에 대한 Razor 태그를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-200">The scaffolding engine creates Razor markup for each field in the model (except the ID) similar to the following:</span></span>
+<span data-ttu-id="e4486-305">스캐폴딩 엔진은 다음과 비슷한 모델에서 각 필드(ID 제외)에 대한 Razor 태그를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-305">The scaffolding engine creates Razor markup for each field in the model (except the ID) similar to the following:</span></span>
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml?range=15-20)]
 
-<span data-ttu-id="77b62-201">[유효성 검사 태그 도우미](xref:mvc/views/working-with-forms#the-validation-tag-helpers) (`<div asp-validation-summary` 및 `<span asp-validation-for`) 는 유효성 검사 오류를 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-201">The [Validation Tag Helpers](xref:mvc/views/working-with-forms#the-validation-tag-helpers) (`<div asp-validation-summary` and `<span asp-validation-for`) display validation errors.</span></span> <span data-ttu-id="77b62-202">유효성 검사는 이 시리즈의 뒷부분에서 자세히 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-202">Validation is covered in more detail later in this series.</span></span>
+<span data-ttu-id="e4486-306">[유효성 검사 태그 도우미](xref:mvc/views/working-with-forms#the-validation-tag-helpers) (`<div asp-validation-summary` 및 `<span asp-validation-for`) 는 유효성 검사 오류를 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-306">The [Validation Tag Helpers](xref:mvc/views/working-with-forms#the-validation-tag-helpers) (`<div asp-validation-summary` and `<span asp-validation-for`) display validation errors.</span></span> <span data-ttu-id="e4486-307">유효성 검사는 이 시리즈의 뒷부분에서 자세히 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-307">Validation is covered in more detail later in this series.</span></span>
 
-<span data-ttu-id="77b62-203">[레이블 태그 도우미](xref:mvc/views/working-with-forms#the-label-tag-helper)(`<label asp-for="Movie.Title" class="control-label"></label>`)는 `Title` 속성에 대한 레이블 캡션 및 `for` 특성을 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-203">The [Label Tag Helper](xref:mvc/views/working-with-forms#the-label-tag-helper) (`<label asp-for="Movie.Title" class="control-label"></label>`) generates the label caption and `for` attribute for the `Title` property.</span></span>
+<span data-ttu-id="e4486-308">[레이블 태그 도우미](xref:mvc/views/working-with-forms#the-label-tag-helper)(`<label asp-for="Movie.Title" class="control-label"></label>`)는 `Title` 속성에 대한 레이블 캡션 및 `for` 특성을 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-308">The [Label Tag Helper](xref:mvc/views/working-with-forms#the-label-tag-helper) (`<label asp-for="Movie.Title" class="control-label"></label>`) generates the label caption and `for` attribute for the `Title` property.</span></span>
 
-<span data-ttu-id="77b62-204">[입력 태그 도우미](xref:mvc/views/working-with-forms)(`<input asp-for="Movie.Title" class="form-control">`)는 [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) 특성을 사용하고 클라이언트 쪽의 jQuery 유효성 검사에 필요한 HTML 특성을 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="77b62-204">The [Input Tag Helper](xref:mvc/views/working-with-forms) (`<input asp-for="Movie.Title" class="form-control">`) uses the [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) attributes and produces HTML attributes needed for jQuery Validation on the client-side.</span></span>
+<span data-ttu-id="e4486-309">[입력 태그 도우미](xref:mvc/views/working-with-forms)(`<input asp-for="Movie.Title" class="form-control">`)는 [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) 특성을 사용하고 클라이언트 쪽의 jQuery 유효성 검사에 필요한 HTML 특성을 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="e4486-309">The [Input Tag Helper](xref:mvc/views/working-with-forms) (`<input asp-for="Movie.Title" class="form-control">`) uses the [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) attributes and produces HTML attributes needed for jQuery Validation on the client-side.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="77b62-205">추가 자료</span><span class="sxs-lookup"><span data-stu-id="77b62-205">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="e4486-310">추가 자료</span><span class="sxs-lookup"><span data-stu-id="e4486-310">Additional resources</span></span>
 
-* [<span data-ttu-id="77b62-206">이 자습서의 YouTube 버전</span><span class="sxs-lookup"><span data-stu-id="77b62-206">YouTube version of this tutorial</span></span>](https://youtu.be/zxgKjPYnOMM)
+* [<span data-ttu-id="e4486-311">이 자습서의 YouTube 버전</span><span class="sxs-lookup"><span data-stu-id="e4486-311">YouTube version of this tutorial</span></span>](https://youtu.be/zxgKjPYnOMM)
 
 > [!div class="step-by-step"]
-> <span data-ttu-id="77b62-207">[이전: 모델 추가](xref:tutorials/razor-pages/model)
-> [다음: 데이터베이스](xref:tutorials/razor-pages/sql)</span><span class="sxs-lookup"><span data-stu-id="77b62-207">[Previous: Adding a model](xref:tutorials/razor-pages/model)
+> <span data-ttu-id="e4486-312">[이전: 모델 추가](xref:tutorials/razor-pages/model)
+> [다음: 데이터베이스](xref:tutorials/razor-pages/sql)</span><span class="sxs-lookup"><span data-stu-id="e4486-312">[Previous: Adding a model](xref:tutorials/razor-pages/model)
 [Next: Database](xref:tutorials/razor-pages/sql)</span></span>
+
+::: moniker-end
