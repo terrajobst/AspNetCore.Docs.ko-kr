@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core의 Razor 페이지에 유효성 검사를 추가하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2018
+ms.date: 7/23/2019
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: 8495849c89ca3d6fd2b2006b61ce2ec75ff504a5
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: d6d45dc7154bf415c3b098299d066b6fb37cf64d
+ms.sourcegitcommit: 16502797ea749e2690feaa5e652a65b89c007c89
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815650"
+ms.lasthandoff: 07/25/2019
+ms.locfileid: "68483258"
 ---
 # <a name="add-validation-to-an-aspnet-core-razor-page"></a>ASP.NET Core Razor 페이지에 유효성 검사 추가
 
@@ -56,9 +56,9 @@ Razor 페이지에서 제공하는 유효성 검사 지원 및 Entity Framework�
 
 선택 가능한 서버 쪽 유효성 검사 테스트:
 
-* 브라우저에서 JavaScript를 비활성화합니다. 브라우저의 개발자 도구를 사용하여 이를 수행할 수 있습니다. 브라우저에서 JavaScript를 비활성화할 수 없는 경우 다른 브라우저를 시도하세요.
+* 브라우저에서 JavaScript를 비활성화합니다. 브라우저의 개발자 도구를 사용하여 JavaScript를 사용하지 않도록 설정할 수 있습니다. 브라우저에서 JavaScript를 비활성화할 수 없는 경우 다른 브라우저를 시도하세요.
 * 만들기 또는 편집 페이지의 `OnPostAsync` 메서드에서 중단점을 설정합니다.
-* 유효성 검사 오류가 있는 양식을 제출합니다.
+* 잘못된 데이터가 포함된 양식을 제출합니다.
 * 모델 상태가 유효하지 않은 것을 확인합니다.
 
   ```csharp
@@ -117,13 +117,72 @@ public DateTime ReleaseDate { get; set; }
 
 다음 코드는 한 줄에 결합 특성을 보여 줍니다.
 
-[!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Models/MovieDateRatingDAmult.cs?name=snippet1)]
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDAmult.cs?name=snippet1)]
 
 [Razor Pages 및 EF Core 시작](xref:data/ef-rp/intro)에서는 Razor Pages를 사용한 고급 EF Core 작업을 보여 줍니다.
 
+### <a name="apply-migrations"></a>마이그레이션 적용
+
+클래스에 적용된 DataAnnotations는 스키마를 변경합니다. 예를 들어 `Title` 필드에 적용되는 DataAnnotations는 다음과 같습니다.
+
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDA.cs?name=snippet11)]
+
+* 문자를 60자로 제한합니다.
+* `null` 값은 허용하지 않습니다.
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+`Movie` 테이블에는 현재 다음과 같은 스키마가 있습니다.
+
+``` sql
+CREATE TABLE [dbo].[Movie] (
+    [ID]          INT             IDENTITY (1, 1) NOT NULL,
+    [Title]       NVARCHAR (MAX)  NULL,
+    [ReleaseDate] DATETIME2 (7)   NOT NULL,
+    [Genre]       NVARCHAR (MAX)  NULL,
+    [Price]       DECIMAL (18, 2) NOT NULL,
+    [Rating]      NVARCHAR (MAX)  NULL,
+    CONSTRAINT [PK_Movie] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+```
+
+위의 스키마 변경으로 인해 EF가 예외를 throw하지 않습니다. 그러나 스키마가 모델과 일치하도록 마이그레이션을 만듭니다.
+
+**도구** 메뉴에서 **NuGet 패키지 관리자 > 패키지 관리자 콘솔**을 선택합니다.
+PMC에서 다음 명령을 입력합니다.
+
+```powershell
+Add-Migration New_DataAnnotations
+Update-Database
+```
+
+`Update-Database`는 `New_DataAnnotations` 클래스의 `Up` 메서드를 실행합니다. 다음과 같이 `Up` 메서드를 검사합니다.
+
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Migrations/20190724163003_New_DataAnnotations.cs?name=snippet)]
+
+업데이트된 `Movie` 테이블에는 다음 스키마가 있습니다.
+
+``` sql
+CREATE TABLE [dbo].[Movie] (
+    [ID]          INT             IDENTITY (1, 1) NOT NULL,
+    [Title]       NVARCHAR (60)   NOT NULL,
+    [ReleaseDate] DATETIME2 (7)   NOT NULL,
+    [Genre]       NVARCHAR (30)   NOT NULL,
+    [Price]       DECIMAL (18, 2) NOT NULL,
+    [Rating]      NVARCHAR (5)    NOT NULL,
+    CONSTRAINT [PK_Movie] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+```
+
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+
+SQLite에는 마이그레이션이 필요하지 않습니다.
+
+---
+
 ### <a name="publish-to-azure"></a>Azure에 게시
 
-Azure에 배포하는 방법에 대한 자세한 내용은 [자습서: SQL Database가 포함된 Azure에서 ASP.NET 앱 빌드](/azure/app-service/app-service-web-tutorial-dotnet-sqldatabase)를 참조하세요. ASP.NET Core 앱이 아닌 ASP.NET 앱에 대한 지침이지만 단계는 동일합니다.
+Azure에 배포하는 방법에 대한 자세한 내용은 [자습서: SQL Database가 포함된 Azure에서 ASP.NET Core 앱 빌드](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)를 참조하세요.
 
 Razor 페이지에 대한 이 소개를 완료해 주셔서 감사합니다. [Razor Pages 및 EF Core 시작](xref:data/ef-rp/intro)은 이 자습서의 유용한 후속편입니다.
 
