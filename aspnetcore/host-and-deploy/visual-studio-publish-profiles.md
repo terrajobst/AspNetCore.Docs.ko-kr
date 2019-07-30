@@ -96,7 +96,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
   Web1 -> C:\Webs\Web1\bin\Debug\{TARGET FRAMEWORK MONIKER}\publish\
 ```
 
-기본 게시 폴더 형식은 *bin\Debug\\{TARGET FRAMEWORK MONIKER}\publish\\*입니다. 예를 들어 *bin\Debug\netcoreapp2.2\publish\\*입니다.
+기본 게시 폴더 형식은 *bin\Debug\\{TARGET FRAMEWORK MONIKER}\publish\\* 입니다. 예를 들어 *bin\Debug\netcoreapp2.2\publish\\* 입니다.
 
 다음 명령은 `Release` 빌드 및 게시 디렉터리를 지정합니다.
 
@@ -111,7 +111,7 @@ dotnet publish -c Release -o C:\MyWebs\test
 * `p:<NAME>=<VALUE>`
 * `/p:<NAME>=<VALUE>`
 
-예를 들어 다음 명령은 `Release` 빌드를 네트워크 공유에 게시합니다. 네트워크 공유는 슬래시(*//r8/*)를 사용하여 지정하고 모든 .NET Core 지원 플랫폼에서 작동합니다.
+예를 들어 다음 명령은 `Release` 빌드를 네트워크 공유에 게시합니다. 네트워크 공유는 슬래시( *//r8/* )를 사용하여 지정하고 모든 .NET Core 지원 플랫폼에서 작동합니다.
 
 `dotnet publish -c Release /p:PublishDir=//r8/release/AdminWeb`
 
@@ -137,7 +137,7 @@ dotnet publish -c Release -o C:\MyWebs\test
 
 가장 적합한 게시 대상을 결정하려면 [내게 적합한 게시 옵션](/visualstudio/ide/not-in-toc/web-publish-options)을 참조하세요.
 
-**폴더** 게시 대상을 선택하는 경우 게시된 자산을 저장할 폴더 경로를 지정합니다. 기본 폴더 경로는 *bin\\{PROJECT CONFIGURATION}\\{TARGET FRAMEWORK MONIKER}\publish\\*입니다. 예를 들어 *bin\Release\netcoreapp2.2\publish\\*입니다. **프로필 만들기** 단추를 선택하여 완료합니다.
+**폴더** 게시 대상을 선택하는 경우 게시된 자산을 저장할 폴더 경로를 지정합니다. 기본 폴더 경로는 *bin\\{PROJECT CONFIGURATION}\\{TARGET FRAMEWORK MONIKER}\publish\\* 입니다. 예를 들어 *bin\Release\netcoreapp2.2\publish\\* 입니다. **프로필 만들기** 단추를 선택하여 완료합니다.
 
 게시 프로필이 만들어지면 **게시** 탭의 콘텐츠가 변경됩니다. 새로 만들어진 프로필이 드롭다운 목록에 표시됩니다. 드롭다운 목록 아래에서 **새 프로필 만들기**를 선택하여 다른 새 프로필을 만듭니다.
 
@@ -305,7 +305,7 @@ dotnet msbuild "AzureWebApp.csproj"
 
 ## <a name="set-the-environment"></a>환경 변수를 설정합니다.
 
-`<EnvironmentName>` 속성을 게시 프로필(*.pubxml*) 또는 프로젝트 파일에 포함하여 앱의 [환경](xref:fundamentals/environments)을 설정합니다.
+`<EnvironmentName>` 속성을 게시 프로필( *.pubxml*) 또는 프로젝트 파일에 포함하여 앱의 [환경](xref:fundamentals/environments)을 설정합니다.
 
 ```xml
 <PropertyGroup>
@@ -325,7 +325,7 @@ ASP.NET Core 웹앱을 게시하는 경우 다음 자산이 포함됩니다.
   * `**\*.json`(예: *appsettings.json*)
   * `wwwroot\**`
 
-MSBuild는 [와일드카드 사용 패턴](https://gruntjs.com/configuring-tasks#globbing-patterns)을 지원합니다. 예를 들어 다음 `<Content>` 요소는 *wwwroot\content* 폴더와 모든 하위 폴더에 있는 텍스트(*.txt*) 파일의 복사를 표시하지 않습니다.
+MSBuild는 [와일드카드 사용 패턴](https://gruntjs.com/configuring-tasks#globbing-patterns)을 지원합니다. 예를 들어 다음 `<Content>` 요소는 *wwwroot\content* 폴더와 모든 하위 폴더에 있는 텍스트( *.txt*) 파일의 복사를 표시하지 않습니다.
 
 ```xml
 <ItemGroup>
@@ -346,7 +346,7 @@ MSBuild는 [와일드카드 사용 패턴](https://gruntjs.com/configuring-tasks
 </ItemGroup>
 ```
 
-`<MsDeploySkipRules>`는 배포 사이트에서 ‘건너뛰기’ 대상을 삭제하지 않습니다. `<Content>` 대상 파일 및 폴더는 배포 사이트에서 삭제됩니다. 예를 들어 배포된 웹앱에 다음 파일이 포함되었다고 가정합니다.
+`<MsDeploySkipRules>`는 배포 사이트에서 ‘건너뛰기’ 대상을 삭제하지 않습니다.  `<Content>` 대상 파일 및 폴더는 배포 사이트에서 삭제됩니다. 예를 들어 배포된 웹앱에 다음 파일이 포함되었다고 가정합니다.
 
 * *Views/Home/About1.cshtml*
 * *Views/Home/About2.cshtml*
@@ -373,7 +373,7 @@ MSBuild는 [와일드카드 사용 패턴](https://gruntjs.com/configuring-tasks
 </ItemGroup>
 ```
 
-앞의 `<MsDeploySkipRules>` 요소는 ‘건너뛴’ 파일이 배포되지 않도록 합니다. 해당 파일은 배포된 후에 삭제되지 않습니다.
+앞의 `<MsDeploySkipRules>` 요소는 ‘건너뛴’ 파일이 배포되지 않도록 합니다.  해당 파일은 배포된 후에 삭제되지 않습니다.
 
 다음 `<Content>` 요소는 배포 사이트에서 대상 파일을 삭제합니다.
 
