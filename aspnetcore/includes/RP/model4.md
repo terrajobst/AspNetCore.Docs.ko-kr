@@ -13,3 +13,5 @@
 ```console
 dotnet aspnet-codegenerator razorpage -h
 ```
+
+자세한 내용은 [dotnet aspnet-codegenerator](xref:fundamentals/tools/dotnet-aspnet-codegenerator)를 참조하세요. 

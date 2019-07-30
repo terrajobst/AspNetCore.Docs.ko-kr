@@ -4,13 +4,14 @@
 >
 >SQLite 제한 사항에 대한 해결 방법은 테이블의 내용이 변경될 때 테이블 다시 빌드를 수행하기 위해 수동으로 마이그레이션 코드를 작성하는 것입니다. 테이블 다시 빌드에는 다음이 포함됩니다.
 >
->* 기존 테이블의 이름 바꾸기.
 >* 새 테이블 만들기.
 >* 이전 테이블에서 새 테이블로 데이터 복사.
 >* 이전 테이블 삭제.
+>* 새 테이블 이름 바꾸기.
 >
 >자세한 내용은 다음 리소스를 참조하세요.
 >
 > * [SQLite EF Core 데이터베이스 공급자 제한 사항](/ef/core/providers/sqlite/limitations)
 > * [마이그레이션 코드 사용자 지정](/ef/core/managing-schemas/migrations/#customize-migration-code)
 > * [데이터 시드](/ef/core/modeling/data-seeding)
+  * [SQLite ALTER TABLE 문](https://sqlite.org/lang_altertable.html)

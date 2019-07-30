@@ -5,14 +5,14 @@ description: HTTP REPL .NET Core 전역 도구를 사용하여 ASP.NET Core 웹 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 07/12/2019
+ms.date: 07/23/2019
 uid: web-api/http-repl
-ms.openlocfilehash: 1774382305cc3d479291700390807d277a24bfa7
-ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
+ms.openlocfilehash: 1ceda6182c62bb1be06cd95f14e6a46a1809253e
+ms.sourcegitcommit: 059ab380744fa3be3b69aa90d431b563c57092cf
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68308351"
+ms.lasthandoff: 07/23/2019
+ms.locfileid: "68410894"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>HTTP REPL을 사용하여 웹 API 테스트
 
@@ -44,13 +44,10 @@ HTTP REPL(Read-Eval-Print Loop):
 HTTP REPL을 설치하려면 다음 명령을 실행합니다.
 
 ```console
-dotnet tool install -g dotnet-httprepl
-    --version 2.2.0-*
-    --add-source https://dotnet.myget.org/F/dotnet-core/api/v3/index.json
+dotnet tool install -g Microsoft.dotnet-httprepl --version 3.0.0-*
 ```
 
-[.NET Core 글로벌 도구](/dotnet/core/tools/global-tools#install-a-global-tool)가 MyGet에 호스트된 [dotnet-httprepl](https://dotnet.myget.org/feed/dotnet-core/package/nuget/dotnet-httprepl
-) NuGet 패키지에서 설치됩니다.
+[.NET Core 글로벌 도구](/dotnet/core/tools/global-tools#install-a-global-tool)가 [Microsoft.dotnet-httprepl](https://www.nuget.org/packages/Microsoft.dotnet-httprepl) NuGet 패키지에서 설치됩니다.
 
 ## <a name="usage"></a>사용법
 
@@ -73,53 +70,54 @@ dotnet httprepl --help
 다음 출력이 표시됩니다.
 
 ```console
-Usage: dotnet httprepl [<BASE_ADDRESS>] [options]
+Usage:
+  dotnet httprepl [<BASE_ADDRESS>] [options]
 
 Arguments:
   <BASE_ADDRESS> - The initial base address for the REPL.
 
 Options:
-  --help - Show help information.
+  -h|--help - Show help information.
 
 Once the REPL starts, these commands are valid:
 
 HTTP Commands:
 Use these commands to execute requests against your application.
 
-GET            Issues a GET request.
-POST           Issues a POST request.
-PUT            Issues a PUT request.
-DELETE         Issues a DELETE request.
-PATCH          Issues a PATCH request.
-HEAD           Issues a HEAD request.
-OPTIONS        Issues an OPTIONS request.
+GET            get - Issues a GET request
+POST           post - Issues a POST request
+PUT            put - Issues a PUT request
+DELETE         delete - Issues a DELETE request
+PATCH          patch - Issues a PATCH request
+HEAD           head - Issues a HEAD request
+OPTIONS        options - Issues a OPTIONS request
 
 set header     Sets or clears a header for all requests. e.g. `set header content-type application/json`
-
 
 Navigation Commands:
 The REPL allows you to navigate your URL space and focus on specific APIs that you are working on.
 
 set base       Set the base URI. e.g. `set base http://locahost:5000`
-set swagger    Set the URI, relative to your base if set, of the Swagger document for this API. e.g. `set swagger /swagger/v1/swagger.json`
-ls             Show all endpoints for the current path.
-cd             Append the given directory to the currently selected path, or move up a path when using `cd ..`.
+set swagger    Sets the swagger document to use for information about the current server
+ls             Show all endpoints for the current path
+cd             Append the given directory to the currently selected path, or move up a path when using `cd ..`
 
 Shell Commands:
 Use these commands to interact with the REPL shell.
 
-clear          Removes all text from the shell.
-echo [on/off]  Turns request echoing on or off, show the request that was made when using request commands.
-exit           Exit the shell.
+clear          Removes all text from the shell
+echo [on/off]  Turns request echoing on or off, show the request that was made when using request commands
+exit           Exit the shell
 
 REPL Customization Commands:
 Use these commands to customize the REPL behavior.
 
-pref [get/set] Allows viewing or changing preferences, e.g. 'pref set editor.command.default 'C:\Program Files\Microsoft VS Code\Code.exe'`
-run            Runs the script at the given path. A script is a set of commands that can be typed with one command per line.
-ui             Displays the Swagger UI page, if available, in the default browser.
+pref [get/set] Allows viewing or changing preferences, e.g. 'pref set editor.command.default 'C:\\Program Files\\Microsoft VS Code\\Code.exe'`
+run            Runs the script at the given path. A script is a set of commands that can be typed with one command per line
+ui             Displays the Swagger UI page, if available, in the default browser
 
-Use help <COMMAND> to learn more details about individual commands. e.g. `help get`
+Use `help <COMMAND>` for more detail on an individual command. e.g. `help get`.
+For detailed tool info, see https://aka.ms/http-repl-doc.
 ```
 
 HTTP REPL은 명령 완성을 제안합니다. <kbd>Tab</kbd> 키를 누르면 입력한 문자 또는 API 엔드포인트를 완성하는 명령 목록이 반복됩니다. 다음 섹션에서는 사용 가능한 CLI 명령에 대해 간략하게 설명합니다.

@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 06/21/2019
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: 033f2dda9942f91f23158cf2d986062157a3b69e
-ms.sourcegitcommit: 06a455d63ff7d6b571ca832e8117f4ac9d646baf
+ms.openlocfilehash: 0ffd437bbb48ef1c7a9159fbf3ac41441613f434
+ms.sourcegitcommit: 849af69ee3c94cdb9fd8fa1f1bb8f5a5dda7b9eb
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/21/2019
-ms.locfileid: "67316603"
+ms.lasthandoff: 07/22/2019
+ms.locfileid: "68372067"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Swashbuckle 및 ASP.NET Core 시작
 
@@ -45,15 +45,17 @@ Swashbuckle에 대한 세 가지 주 구성 요소는 다음과 같습니다.
 * **NuGet 패키지 관리** 대화 상자에서:
   * **솔루션 탐색기** > **NuGet 패키지 관리**에서 프로젝트를 마우스 오른쪽 단추로 클릭
   * **패키지 소스**를 “nuget.org”로 설정
+  * "시험판 포함" 옵션을 사용하도록 설정했는지 확인
   * 검색 상자에 “Swashbuckle.AspNetCore” 입력
-  * **찾아보기** 탭에서 “Swashbuckle.AspNetCore” 패키지를 선택하고 **설치** 클릭
+  * **찾아보기** 탭에서 최신 “Swashbuckle.AspNetCore” 패키지를 선택하고 **설치** 클릭
 
 ### <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 * **Solution Pad**에서 *Packages* 폴더를 마우스 오른쪽 단추로 클릭 > **패키지 추가...** 선택
 * **패키지 추가** 창의 **소스** 드롭다운을 “nuget.org”로 설정
+* "시험판 패키지 표시" 옵션을 사용하도록 설정했는지 확인
 * 검색 상자에 “Swashbuckle.AspNetCore” 입력
-* 결과 창에서 "Swashbuckle.AspNetCore" 패키지를 선택하고 **패키지 추가** 클릭
+* 결과 창에서 최신 "Swashbuckle.AspNetCore" 패키지를 선택하고 **패키지 추가** 클릭
 
 ### <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
