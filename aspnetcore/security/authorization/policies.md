@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/05/2019
 uid: security/authorization/policies
-ms.openlocfilehash: 67337c847ba71df3fe61250996ec944632ad5d57
-ms.sourcegitcommit: 1bb3f3f1905b4e7d4ca1b314f2ce6ee5dd8be75f
+ms.openlocfilehash: 60625944d4ba31da6b98bdf947991088dc75ed87
+ms.sourcegitcommit: 7001657c00358b082734ba4273693b9b3ed35d2a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/11/2019
-ms.locfileid: "66837349"
+ms.lasthandoff: 07/31/2019
+ms.locfileid: "68669964"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>ASP.NET Core의 정책 기반 권한 부여
 
@@ -25,15 +25,15 @@ ms.locfileid: "66837349"
 
 ## <a name="iauthorizationservice"></a>IAuthorizationService 
 
-기본 인증은 성공 하는 경우를 결정 하는 서비스가 <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService>:
+권한 부여의 성공 <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService>여부를 결정 하는 기본 서비스는 다음과 같습니다.
 
 [!code-csharp[](policies/samples/stubs/copy_of_IAuthorizationService.cs?highlight=24-25,48-49&name=snippet)]
 
-위의 코드는 두 메서드는 강조 표시 합니다 [IAuthorizationService](https://github.com/aspnet/AspNetCore/blob/v2.2.4/src/Security/Authorization/Core/src/IAuthorizationService.cs)합니다.
+위의 코드는 [IAuthorizationService](https://github.com/aspnet/AspNetCore/blob/v2.2.4/src/Security/Authorization/Core/src/IAuthorizationService.cs)의 두 메서드를 강조 표시 합니다.
 
-<xref:Microsoft.AspNetCore.Authorization.IAuthorizationRequirement> 메서드가 없는 및 권한 부여는 성공 여부를 추적 하는 메커니즘을 사용 하 여 표식 서비스가입니다.
+<xref:Microsoft.AspNetCore.Authorization.IAuthorizationRequirement>는 메서드가 없는 마커 서비스 이며, 권한 부여의 성공 여부를 추적 하는 메커니즘입니다.
 
-각 <xref:Microsoft.AspNetCore.Authorization.IAuthorizationHandler> 요구 사항을 충족 하는 경우를 검사 합니다.
+각 <xref:Microsoft.AspNetCore.Authorization.IAuthorizationHandler> 는 요구 사항이 충족 되는지 확인 합니다.
 <!--The following code is a copy/paste from 
 https://github.com/aspnet/AspNetCore/blob/v2.2.4/src/Security/Authorization/Core/src/IAuthorizationHandler.cs -->
 
@@ -52,13 +52,13 @@ public interface IAuthorizationHandler
 }
 ```
 
-<xref:Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext> 클래스는 요구 사항이 충족 되었는지 여부를 표시 하는 처리기에서 사용 합니다.
+클래스 <xref:Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext> 는 처리기에서 요구 사항이 충족 되었는지 여부를 표시 하는 데 사용 하는 내용입니다.
 
 ```csharp
  context.Succeed(requirement)
 ```
 
-다음 코드에서는 간단한 (고 주석을 사용 하 여 주석이 추가 된) 권한 부여 서비스의 기본 구현 합니다.
+다음 코드는 권한 부여 서비스의 간소화 된 (주석으로 주석이 추가 됨) 기본 구현을 보여 줍니다.
 
 ```csharp
 public async Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user, 
@@ -81,7 +81,7 @@ public async Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user,
 }
 ```
 
-다음 코드에서는 일반적인 `ConfigureServices`:
+다음 코드에서는 일반적인 `ConfigureServices`을 보여 줍니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -102,31 +102,31 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-사용 하 여 <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> 또는 `[Authorize(Policy = "Something"]` 권한 부여에 대 한 합니다.
+권한 <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> 부여 `[Authorize(Policy = "Something")]` 에 또는를 사용 합니다.
 
-## <a name="applying-policies-to-mvc-controllers"></a>MVC 컨트롤러에 정책을 적용
+## <a name="applying-policies-to-mvc-controllers"></a>MVC 컨트롤러에 정책 적용
 
-Razor 페이지를 사용 하는 경우 참조 [Razor 페이지에 정책을 적용](#applying-policies-to-razor-pages) 이 문서의.
+Razor Pages 사용 하는 경우이 문서의 [Razor Pages에 정책 적용](#applying-policies-to-razor-pages) 을 참조 하세요.
 
-정책을 사용 하 여 컨트롤러에 적용 되는 `[Authorize]` 정책 이름의 특성입니다. 예를 들어:
+정책은 정책 이름으로 특성을 `[Authorize]` 사용 하 여 컨트롤러에 적용 됩니다. 예를 들어:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
-## <a name="applying-policies-to-razor-pages"></a>Razor 페이지에 정책 적용
+## <a name="applying-policies-to-razor-pages"></a>Razor Pages에 정책 적용
 
-정책을 사용 하 여 Razor 페이지에 적용 되는 `[Authorize]` 정책 이름의 특성입니다. 예를 들어:
+정책은 정책 이름이 있는 `[Authorize]` 특성을 사용 하 여 Razor Pages에 적용 됩니다. 예를 들어:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-정책 수를 사용 하 여도 Razor 페이지에 적용 하는 수는 [권한 부여 규칙](xref:security/authorization/razor-pages-authorization)합니다.
+[권한 부여 규칙](xref:security/authorization/razor-pages-authorization)을 사용 하 여 Razor Pages에 정책을 적용할 수도 있습니다.
 
 ## <a name="requirements"></a>요구 사항
 
-권한 부여 요구 사항은 현재 사용자 보안 주체를 평가 하는 정책을 사용할 수 있는 데이터 매개 변수의 컬렉션입니다. 요구 사항인 단일 매개 변수는 "AtLeast21" 정책에서&mdash;최소 보존 기간입니다. 요구 사항 구현 [IAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement), 빈 표식을 인터페이스인 합니다. 매개 변수가 있는 최소 보존 기간 요구 사항이 다음과 같이 구현할 수 있습니다.
+권한 부여 요구 사항은 정책에서 현재 사용자 보안 주체를 평가 하는 데 사용할 수 있는 데이터 매개 변수의 컬렉션입니다. "AtLeast21" 정책에서 요구 사항은 최소 age의 단일 매개 변수&mdash;입니다. 요구 사항은 빈 표식 인터페이스인 [IAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement)을 구현 합니다. 매개 변수가 있는 최소 기간 요구 사항은 다음과 같이 구현할 수 있습니다.
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Requirements/MinimumAgeRequirement.cs?name=snippet_MinimumAgeRequirementClass)]
 
-권한 부여 정책에 여러 권한 부여 요구 사항이 있으면 모든 요구 사항을 정책 평가가 성공 하기 위해 전달 해야 합니다. 에 단일 권한 부여 정책에 추가 하는 여러 권한 부여 요구 사항을 처리 되는 즉, 한 **AND** 단위로 합니다.
+권한 부여 정책에 여러 권한 부여 요구 사항이 포함 된 경우 정책 평가가 성공 하려면 모든 요구 사항이 통과 해야 합니다. 즉, 단일 권한 부여 정책에 추가 된 여러 권한 부여 요구 사항은 **및** 기준으로 처리 됩니다.
 
 > [!NOTE]
 > 요구 사항이 데이터나 속성을 가져야 할 필요는 없습니다.
@@ -137,7 +137,7 @@ Razor 페이지를 사용 하는 경우 참조 [Razor 페이지에 정책을 적
 
 권한 부여 처리기는 요구 사항의 속성을 평가하는 역할을 담당합니다. 권한 부여 처리기는 제공된 [AuthorizationHandlerContext](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext)에 대해 요구 사항을 평가하여 접근 허용 여부를 결정합니다.
 
-하나의 요구 사항에 [여러 개의 처리기](#security-authorization-policies-based-multiple-handlers) 가 존재할 수 있습니다. 처리기는 [AuthorizationHandler\<TRequirement>](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandler-1)를 상속받으며, 여기서 `TRequirement` 는 처리해야 할 요구 사항입니다. 또는 처리기를 구현할 수 있습니다 [IAuthorizationHandler](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationhandler) 요구 사항 둘 이상의 유형을 처리 하도록 합니다.
+하나의 요구 사항에 [여러 개의 처리기](#security-authorization-policies-based-multiple-handlers) 가 존재할 수 있습니다. 처리기는 [AuthorizationHandler\<TRequirement>](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandler-1)를 상속받으며, 여기서 `TRequirement` 는 처리해야 할 요구 사항입니다. 또는 처리기가 [IAuthorizationHandler](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationhandler) 을 구현 하 여 둘 이상의 요구 사항을 처리할 수 있습니다.
 
 ### <a name="use-a-handler-for-one-requirement"></a>한 가지 요구 사항에 대한 처리기 사용하기
 
@@ -151,21 +151,21 @@ Razor 페이지를 사용 하는 경우 참조 [Razor 페이지에 정책을 적
 
 ### <a name="use-a-handler-for-multiple-requirements"></a>여러 요구 사항에 대한 처리기 사용하기
 
-다음은 권한 처리기는 세 가지 유형의 요구 사항 처리할 수 있습니다-다 관계의 예입니다.
+다음은 권한 처리기가 세 가지 종류의 요구 사항을 처리할 수 있는 일 대 다 관계의 예입니다.
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Handlers/PermissionHandler.cs?name=snippet_PermissionHandlerClass)]
 
-앞의 코드를 통과 [PendingRequirements](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.pendingrequirements#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_PendingRequirements)&mdash;성공으로 표시 되지 않습니다 요구 사항을 포함 하는 속성입니다. 에 대 한는 `ReadPermission` 요구 사항, 소유자 또는 스폰서 요청 된 리소스에 액세스 하는 사용자 여야 합니다. 경우에 `EditPermission` 또는 `DeletePermission` 요구 사항, 자신이 요청한 리소스에 액세스 하려면 소유자 여야 합니다.
+이전 코드는 성공으로 표시 되지 않은 요구 사항이 포함 된 속성을 [pendingrequirements 사항](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.pendingrequirements#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_PendingRequirements)&mdash;으로 트래버스 합니다. `ReadPermission` 요구 사항에 대해 사용자는 요청 된 리소스에 액세스 하기 위한 소유자 또는 스폰서 여야 합니다. `EditPermission` 또는`DeletePermission` 요구 사항의 경우 요청 된 리소스에 액세스 하려면 소유자 여야 합니다.
 
 <a name="security-authorization-policies-based-handler-registration"></a>
 
 ### <a name="handler-registration"></a>처리기 등록하기
 
-처리기는 구성 과정 중 서비스 컬렉션에 등록됩니다. 예를 들어:
+처리기는 구성 과정 중 서비스 컬렉션에 등록됩니다. 예:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=32-33,48-53,61,62-63,66)]
 
-앞의 코드를 등록 `MinimumAgeHandler` 를 호출 하 여 단일 항목으로 `services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();`입니다. 기본 제공 중 하나를 사용 하 여 처리기를 등록할 수 있습니다 [수명 서비스](xref:fundamentals/dependency-injection#service-lifetimes)합니다.
+위의 코드는를 `MinimumAgeHandler` 호출 `services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();`하 여 singleton으로 등록 합니다. 기본 제공 [서비스 수명](xref:fundamentals/dependency-injection#service-lifetimes)중 하나를 사용 하 여 처리기를 등록할 수 있습니다.
 
 ## <a name="what-should-a-handler-return"></a>처리기가 반환해야 하는 결과는?
 
@@ -177,10 +177,10 @@ Razor 페이지를 사용 하는 경우 참조 [Razor 페이지에 정책을 적
 
 * 다른 처리기의 성공 여부와 관계없이 무조건 실패한 것으로 나타내려면 `context.Fail`을 호출합니다.
 
-처리기를 호출 하는 경우 `context.Succeed` 또는 `context.Fail`, 다른 모든 처리기도 호출 됩니다. 이렇게 하면 다른 처리기가 성공적으로 유효성이 검사 되지 않았거나 요구 사항 실패 하는 경우에 수행 하는 로깅과 같은 부작용을 생성 하기 위한 요구 사항. [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) 속성이 (ASP.NET Core 1.1 이상에서 사용 가능) `false`로 설정되면 `context.Fail`이 호출될 경우 나머지 처리기들의 실행이 중단되고 즉시 빠져나갑니다. `InvokeHandlersAfterFailure`의 기본값은 `true`로, 이 경우 모든 처리기가 호출됩니다.
+처리기에서 또는 `context.Fail`를 `context.Succeed` 호출 하는 경우 다른 모든 처리기가 계속 호출 됩니다. 이렇게 하면 다른 처리기가 성공적으로 유효성을 검사 하거나 실패 한 경우에도 발생 하는 로깅 등의 부작용이 발생할 수 있습니다. [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) 속성이 (ASP.NET Core 1.1 이상에서 사용 가능) `false`로 설정되면 `context.Fail`이 호출될 경우 나머지 처리기들의 실행이 중단되고 즉시 빠져나갑니다. `InvokeHandlersAfterFailure`의 기본값은 `true`로, 이 경우 모든 처리기가 호출됩니다.
 
 > [!NOTE]
-> 권한 부여 처리기는 인증에 실패 하는 경우에 호출 됩니다.
+> 인증이 실패 하는 경우에도 권한 부여 처리기가 호출 됩니다.
 
 <a name="security-authorization-policies-based-multiple-handlers"></a>
 
@@ -216,7 +216,7 @@ Razor 페이지를 사용 하는 경우 참조 [Razor 페이지에 정책을 적
 
 예를 들어, MVC는 `Resource` 속성에 [AuthorizationFilterContext](/dotnet/api/?term=AuthorizationFilterContext)의 인스턴스를 전달합니다. 이 속성은 `HttpContext`나 `RouteData`를 비롯한, MVC 및 Razor 페이지가 제공하는 다양한 정보들에 대한 접근을 제공합니다.
 
-`Resource` 속성을 사용하는 방식은 프레임워크에 따라서 달라집니다. 따라서 `Resource` 속성의 정보를 사용할 경우 권한 부여 정책이 특정 프레임워크를 대상으로 제한될 수 있습니다. 캐스팅 해야 합니다 `Resource` 사용 하 여 속성을 `is` 키워드를 하 고 확인 코드 충돌 하지 않도록 하려면 캐스팅 했습니다 사용 하 여는 `InvalidCastException` 다른 프레임 워크에서 실행할 때:
+`Resource` 속성을 사용하는 방식은 프레임워크에 따라서 달라집니다. 따라서 `Resource` 속성의 정보를 사용할 경우 권한 부여 정책이 특정 프레임워크를 대상으로 제한될 수 있습니다. 키워드를 `InvalidCastException` `Resource` `is` 사용 하 여 속성을 캐스팅 한 다음, 다른 프레임 워크에서 실행 될 때 코드가와 충돌 하지 않도록 캐스팅이 성공 했는지 확인 해야 합니다.
 
 ```csharp
 // Requires the following import:
