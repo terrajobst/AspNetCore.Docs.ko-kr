@@ -3,14 +3,14 @@ title: ASP.NET Core MVC 개요
 author: ardalis
 description: 모델-보기-컨트롤러 디자인 패턴을 사용하여 웹앱 및 API를 빌드할 수 있는 풍부한 프레임워크인 ASP.NET Core MVC에 대해 알아봅니다.
 ms.author: riande
-ms.date: 01/08/2018
+ms.date: 08/01/2019
 uid: mvc/overview
-ms.openlocfilehash: 819bc93a7580626bf586b984b0ce169306df56d9
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: 7f09751850cbfa7bb3dc79656d4530445a9767b1
+ms.sourcegitcommit: 3204bc89ae6354b61ee0a9b2770ebe5214b7790c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815346"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68707817"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>ASP.NET Core MVC 개요
 
@@ -88,11 +88,11 @@ routes.MapRoute(name: "Default", template: "{controller=Home}/{action=Index}/{id
 [Route("api/[controller]")]
 public class ProductsController : Controller
 {
-  [HttpGet("{id}")]
-  public IActionResult GetProduct(int id)
-  {
-    ...
-  }
+    [HttpGet("{id}")]
+    public IActionResult GetProduct(int id)
+    {
+      ...
+    }
 }
 ```
 
@@ -102,7 +102,7 @@ ASP.NET Core MVC [모델 바인딩](models/model-binding.md)은 클라이언트 
 
 ```csharp
 public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null) { ... }
-   ```
+```
 
 ### <a name="model-validation"></a>모델 유효성 검사
 
@@ -149,6 +149,7 @@ ASP.NET Core는 기본적으로 [DI(종속성 주입 )](../fundamentals/dependen
 
 ```cshtml
 @inject SomeService ServiceName
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -189,11 +190,11 @@ ASP.NET Core MVC는 웹 사이트를 구축할 수 있는 훌륭한 플랫폼일
 
 [ASP.NET Core MVC 보기](views/overview.md)는 [Razor 보기 엔진](views/razor.md)을 사용하여 보기를 렌더링합니다. Razor는 포함된 C# 코드를 사용하여 보기를 정의하는 작고 다양한 표현이 가능하고 유연한 템플릿 태그 언어입니다. Razor는 서버에서 웹 콘텐츠를 동적으로 생성하는 데 사용됩니다. 서버 코드를 클라이언트 쪽 콘텐츠 및 코드와 완전히 혼합할 수 있습니다.
 
-```text
+```cshtml
 <ul>
-  @for (int i = 0; i < 5; i++) {
-    <li>List item @i</li>
-  }
+    @for (int i = 0; i < 5; i++) {
+        <li>List item @i</li>
+    }
 </ul>
 ```
 
