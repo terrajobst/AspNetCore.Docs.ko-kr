@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: a1c0622d97e0d2b0a5601e27688f4be7cbe068dc
-ms.sourcegitcommit: 16502797ea749e2690feaa5e652a65b89c007c89
+ms.openlocfilehash: 4af41422288847c5e77057215390b901d1074c88
+ms.sourcegitcommit: 7001657c00358b082734ba4273693b9b3ed35d2a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/25/2019
-ms.locfileid: "68483307"
+ms.lasthandoff: 07/31/2019
+ms.locfileid: "68670098"
 ---
 # <a name="add-a-new-field-to-a-razor-page-in-aspnet-core"></a>ASP.NET Core의 Razor 페이지에 새 필드 추가
 
@@ -43,7 +43,7 @@ EF Code First를 사용하여 자동으로 데이터베이스를 만들 경우 C
 
 *Pages/Movies/Index.cshtml*를 편집하고 `Rating` 필드를 추가합니다.
 
-[!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/SnapShots/IndexRating.cshtml?highlight=40-42,61-63)]
+[!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/SnapShots/IndexRating.cshtml?highlight=40-42,62-64)]
 
 다음 페이지를 업데이트합니다.
 
