@@ -5,12 +5,12 @@ description: 기본 ASP.NET Core MVC 앱에 검색을 추가하는 방법을 보
 ms.author: riande
 ms.date: 12/13/2018
 uid: tutorials/first-mvc-app/search
-ms.openlocfilehash: fbec03d71e247c58fb5968290c4baf6b28120e1c
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: ed6c7a095143670b7d06e43db3a428dec9bf97ad
+ms.sourcegitcommit: 3204bc89ae6354b61ee0a9b2770ebe5214b7790c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815063"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68707839"
 ---
 # <a name="add-search-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 검색 추가
 
@@ -18,7 +18,7 @@ ms.locfileid: "67815063"
 
 이 섹션에서는 *장르* 또는 *이름*별로 영화를 검색할 수 있는 `Index` 작업 메서드에 검색 기능을 추가합니다.
 
-`Index` 메서드를 다음 코드로 업데이트합니다.
+*Controllers/MoviesController.cs*에 있는 `Index` 메서드를 다음 코드로 업데이트합니다.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/MoviesController.cs?name=snippet_1stSearch)]
 
@@ -91,7 +91,7 @@ HTML `<form>` 태그는 [양식 태그 도우미](xref:mvc/views/working-with-fo
 
 요청 본문에서 검색 매개 변수 및 [XSRF](xref:security/anti-request-forgery) 토큰을 볼 수 있습니다. 이전 자습서에서 설명했듯이 [양식 태그 도우미](xref:mvc/views/working-with-forms)는 [XSRF](xref:security/anti-request-forgery) 위조 방지 토큰을 생성합니다. 컨트롤러 메서드에서 토큰 유효성을 검사할 필요가 없도록 데이터를 수정하지 않습니다.
 
-검색 매개 변수가 URL이 아닌 요청 본문에 있기 때문에 책갈피에 해당 검색 정보를 캡처하거나 다른 사용자와 공유할 수 없습니다. 요청을 `HTTP GET`로 지정하여 이 문제를 해결합니다.
+검색 매개 변수가 URL이 아닌 요청 본문에 있기 때문에 책갈피에 해당 검색 정보를 캡처하거나 다른 사용자와 공유할 수 없습니다. *Views/Movies/Index.cshtml* 파일에서 `HTTP GET` 요청을 지정하여 문제를 해결해야 합니다.
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexGet.cshtml?highlight=12&range=1-23)]
 
@@ -132,7 +132,7 @@ HTML `<form>` 태그는 [양식 태그 도우미](xref:mvc/views/working-with-fo
 
 ## <a name="add-search-by-genre-to-the-index-view"></a>인덱스 보기에 장르별 검색 추가
 
-다음과 같이 `Index.cshtml`을 업그레이드합니다.
+*Views/Movies/* 에 있는 `Index.cshtml`을 다음과 같이 업데이트합니다.
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexFormGenreNoRating.cshtml?highlight=1,15,16,17,19,28,31,34,37,43)]
 
