@@ -1009,6 +1009,8 @@
       uid: fundamentals/localization
     - name: 이식 가능 개체 지역화
       uid: fundamentals/portable-object-localization
+    - name: 확장성
+      uid: fundamentals/localization-extensibility
     - name: 문제 해결
       uid: fundamentals/troubleshoot-aspnet-core-localization
 - name: 고급

@@ -6,12 +6,12 @@ ms.author: riande
 ms.date: 12/18/2018
 ms.custom: mvc, seodec18
 uid: security/authorization/secure-data
-ms.openlocfilehash: 222ae1d6212b838e5c70f831960fa23a9924a0ae
-ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
+ms.openlocfilehash: 4b94cc53777308deb26521a079d8a1c2742744db
+ms.sourcegitcommit: 4fe3ae892f54dc540859bff78741a28c2daa9a38
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/12/2019
-ms.locfileid: "67856149"
+ms.lasthandoff: 08/04/2019
+ms.locfileid: "68776739"
 ---
 # <a name="create-an-aspnet-core-app-with-user-data-protected-by-authorization"></a>권한 부여로 보호 되는 사용자 데이터를 사용 하 여 ASP.NET Core 앱 만들기
 
@@ -37,13 +37,13 @@ ms.locfileid: "67856149"
 * **관리자** 승인 하거나 연락처 데이터를 거부할 수 있습니다. 승인 된 연락처만 사용자에 게 표시 됩니다.
 * **관리자** 승인/거부를 편집/삭제할 모든 데이터입니다.
 
-이 문서에서는 이미지를 정확 하 게 최신 템플릿에 일치 하지 않습니다.
+이 문서의 이미지는 정확히 최신 템플릿과 일치 하지 않습니다.
 
 다음 이미지에서는 Rick 사용자 (`rick@example.com`)에 로그인 됩니다. Rick 승인 된 연락처를 보기만 할 수 있습니다 하 고 **편집할**/**삭제**/**새로 만들기** 자신의 연락처에 대 한 링크입니다. Rick을 표시 하 여 만든 마지막 레코드만 **편집** 하 고 **삭제** 링크 합니다. 다른 사용자에 게는 관리자가 "승인 됨" 상태 변경 될 때까지 마지막 레코드를 표시 되지 않습니다.
 
 ![로그인 한 Rick을 보여 주는 스크린샷](secure-data/_static/rick.png)
 
-다음 이미지에서는 `manager@contoso.com` 로그인 하는 관리자의 역할:
+다음 이미지 `manager@contoso.com` 에서는 관리자 역할에 로그인 되어 있습니다.
 
 ![보여 주는 스크린샷 manager@contoso.com 로그인](secure-data/_static/manager1.png)
 
@@ -53,7 +53,7 @@ ms.locfileid: "67856149"
 
 합니다 **승인** 하 고 **거부** 단추가 관리자와 관리자만 표시 됩니다.
 
-다음 이미지에서는 `admin@contoso.com` 관리자의 역할에 서명 합니다.
+다음 이미지 `admin@contoso.com` 에서는 및 관리자 역할에 로그인 되어 있습니다.
 
 ![보여 주는 스크린샷 admin@contoso.com 로그인](secure-data/_static/admin.png)
 
@@ -65,11 +65,11 @@ ms.locfileid: "67856149"
 
 다음 인증 처리기를 포함 하는 샘플:
 
-* `ContactIsOwnerAuthorizationHandler`: 사용자 데이터 편집할 수 있는지 확인 합니다.
-* `ContactManagerAuthorizationHandler`: 관리자 승인 또는 거부 연락처를 허용 합니다.
-* `ContactAdministratorsAuthorizationHandler`: 관리자를 승인 하거나 거부할 연락처 및 연락처 편집/삭제할 수 있습니다.
+* `ContactIsOwnerAuthorizationHandler`: 사용자가 자신의 데이터만 편집할 수 있도록 합니다.
+* `ContactManagerAuthorizationHandler`: 관리자가 연락처를 승인 하거나 거부할 수 있습니다.
+* `ContactAdministratorsAuthorizationHandler`: 관리자가 연락처를 승인 또는 거부 하 고 연락처를 편집/삭제할 수 있습니다.
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>필수 구성 요소
 
 이 자습서 고급 옵션입니다. 에 대해 잘 알고 있어야 합니다.
 
@@ -122,7 +122,7 @@ dotnet ef database update
 
  사용 하 여 Razor 페이지, 컨트롤러 또는 작업 메서드 수준에서 인증을 옵트아웃할 수 있습니다는 `[AllowAnonymous]` 특성입니다. 새로 추가 된 Razor 페이지 및 컨트롤러를 보호 사용자를 인증 하도록 요구 하는 기본 인증 정책을 설정 합니다. 기본적으로 필요한 인증은 새 컨트롤러 및 포함할 Razor 페이지에 의존 하는 것 보다 안전 하지는 `[Authorize]` 특성입니다.
 
-추가 [AllowAnonymous](/dotnet/api/microsoft.aspnetcore.authorization.allowanonymousattribute) 인덱스 및 개인 정보 페이지로 익명 사용자가 등록 하기 전에 사이트에 대 한 정보를 얻을 수 있도록 합니다.
+익명 사용자가 등록 하기 전에 사이트에 대 한 정보를 얻을 수 있도록 인덱스 및 개인 정보 페이지에 [Allowanonymous](/dotnet/api/microsoft.aspnetcore.authorization.allowanonymousattribute) 를 추가 합니다.
 
 [!code-csharp[](secure-data/samples/final3/Pages/Index.cshtml.cs?highlight=1,7)]
 
@@ -159,7 +159,7 @@ dotnet user-secrets set SeedUserPW <PW>
 합니다 `ContactIsOwnerAuthorizationHandler` 호출 [컨텍스트. 성공](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.succeed#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_Succeed_Microsoft_AspNetCore_Authorization_IAuthorizationRequirement_) 현재 인증 된 사용자가 연락처 소유자입니다. 권한 부여 처리기 일반적으로:
 
 * 반환 `context.Succeed` 요구 사항이 충족 되는 경우.
-* 반환 `Task.CompletedTask` 요구 사항이 충족 되지 않는 경우. `Task.CompletedTask` 성공 또는 실패를 아닙니다&mdash;다른 권한 부여 처리기 실행을 허용 합니다.
+* 반환 `Task.CompletedTask` 요구 사항이 충족 되지 않는 경우. `Task.CompletedTask`은 (는) 성공&mdash;또는 실패 하지 않으므로 다른 권한 부여 처리기를 실행할 수 있습니다.
 
 명시적으로 실패 하는 경우 반환 [컨텍스트. 실패](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.fail)합니다.
 
@@ -242,7 +242,7 @@ Entity Framework Core를 사용 하 여 서비스에 등록 해야 합니다 [�
 
 현재 UI은 편집 및 사용자가 수정할 수 없습니다. 연락처에 대 한 링크를 삭제 합니다.
 
-권한 부여 서비스를 주입 합니다 *pages/_viewimports.cshtml* 모든 보기에 사용할 수 있도록 파일:
+모든 보기에서 사용할 수 있도록 *Pages/_ViewImports* 파일에 권한 부여 서비스를 삽입 합니다.
 
 [!code-cshtml[](secure-data/samples/final3/Pages/_ViewImports.cshtml?highlight=6-99)]
 
@@ -269,14 +269,14 @@ Entity Framework Core를 사용 하 여 서비스에 등록 해야 합니다 [�
 
 참조 [이 문제](https://github.com/aspnet/AspNetCore.Docs/issues/8502) 에 대 한 내용은:
 
-* 사용자의 권한을 제거 합니다. 예를 들어, 음소거 채팅 앱에서 사용자입니다.
+* 사용자의 권한을 제거 합니다. 예를 들어 채팅 앱에서 사용자를 음소거 합니다.
 * 사용자에 권한을 추가 합니다.
 
 ## <a name="test-the-completed-app"></a>완성된 된 앱 테스트
 
 시드 된 사용자 계정의 암호를 이미 설정 하지 않은 경우 사용 합니다 [암호 관리자 도구](xref:security/app-secrets#secret-manager) 암호를 설정 하려면:
 
-* 강력한 암호를 선택 합니다. 8을 사용 하거나 자세한 문자 및 하나 이상의 대문자 문자, 숫자 및 기호입니다. 예를 들어 `Passw0rd!` 강력한 암호 요구 사항을 충족 합니다.
+* 강력한 암호를 선택 합니다. 8 개 이상의 문자 및 하나 이상의 대문자, 숫자 및 기호를 사용 합니다. 예를 들어 `Passw0rd!` 강력한 암호 요구 사항을 충족 합니다.
 * 프로젝트의 폴더에서 다음 명령을 실행 하는 `<PW>` 암호입니다.
 
   ```console
@@ -314,7 +314,7 @@ Entity Framework Core를 사용 하 여 서비스에 등록 해야 합니다 [�
   dotnet new webapp -o ContactManager -au Individual -uld
   ```
 
-* 추가 *Models/Contact.cs*:
+* *모델/연락처를 추가 합니다. cs*:
 
   [!code-csharp[](secure-data/samples/starter2.1/Models/Contact.cs?name=snippet1)]
 
@@ -330,9 +330,9 @@ dotnet ef migrations add initial
 dotnet ef database update
   ```
 
-버그 발생 하는 경우는 `dotnet aspnet-codegenerator razorpage` 명령을 참조 하십시오 [이 GitHub 문제](https://github.com/aspnet/Scaffolding/issues/984)합니다.
+`dotnet aspnet-codegenerator razorpage` 명령을 사용 하 여 버그를 발생 하는 경우 [이 GitHub 문제](https://github.com/aspnet/Scaffolding/issues/984)를 참조 하세요.
 
-* 업데이트를 **ContactManager** 에 고정 합니다 *Pages/Shared/_Layout.cshtml* 파일:
+* *Pages/Shared/Layout. cshtml* 파일에서 지 각 **관리자** 앵커를 업데이트 합니다.
 
  ```cshtml
 <a class="navbar-brand" asp-area="" asp-page="/Contacts/Index">ContactManager</a>
@@ -342,7 +342,7 @@ dotnet ef database update
 
 ### <a name="seed-the-database"></a>데이터베이스 시드
 
-추가 된 [SeedData](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/starter3/Data/SeedData.cs) 클래스는 *데이터* 폴더:
+*데이터* 폴더에 [SeedData](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/starter3/Data/SeedData.cs) 클래스를 추가 합니다.
 
 [!code-csharp[](secure-data/samples/starter3/Data/SeedData.cs)]
 
@@ -366,7 +366,7 @@ dotnet ef database update
 
 ![로그인 한 Rick을 보여 주는 스크린샷](secure-data/_static/rick.png)
 
-다음 이미지에서는 `manager@contoso.com` 로그인 하는 관리자의 역할:
+다음 이미지 `manager@contoso.com` 에서는 관리자 역할에 로그인 되어 있습니다.
 
 ![보여 주는 스크린샷 manager@contoso.com 로그인](secure-data/_static/manager1.png)
 
@@ -376,7 +376,7 @@ dotnet ef database update
 
 합니다 **승인** 하 고 **거부** 단추가 관리자와 관리자만 표시 됩니다.
 
-다음 이미지에서는 `admin@contoso.com` 관리자의 역할에 서명 합니다.
+다음 이미지 `admin@contoso.com` 에서는 및 관리자 역할에 로그인 되어 있습니다.
 
 ![보여 주는 스크린샷 admin@contoso.com 로그인](secure-data/_static/admin.png)
 
@@ -388,9 +388,9 @@ dotnet ef database update
 
 다음 인증 처리기를 포함 하는 샘플:
 
-* `ContactIsOwnerAuthorizationHandler`: 사용자 데이터 편집할 수 있는지 확인 합니다.
-* `ContactManagerAuthorizationHandler`: 관리자 승인 또는 거부 연락처를 허용 합니다.
-* `ContactAdministratorsAuthorizationHandler`: 관리자를 승인 하거나 거부할 연락처 및 연락처 편집/삭제할 수 있습니다.
+* `ContactIsOwnerAuthorizationHandler`: 사용자가 자신의 데이터만 편집할 수 있도록 합니다.
+* `ContactManagerAuthorizationHandler`: 관리자가 연락처를 승인 하거나 거부할 수 있습니다.
+* `ContactAdministratorsAuthorizationHandler`: 관리자가 연락처를 승인 또는 거부 하 고 연락처를 편집/삭제할 수 있습니다.
 
 ## <a name="prerequisites"></a>필수 구성 요소
 
@@ -482,7 +482,7 @@ dotnet user-secrets set SeedUserPW <PW>
 합니다 `ContactIsOwnerAuthorizationHandler` 호출 [컨텍스트. 성공](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.succeed#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_Succeed_Microsoft_AspNetCore_Authorization_IAuthorizationRequirement_) 현재 인증 된 사용자가 연락처 소유자입니다. 권한 부여 처리기 일반적으로:
 
 * 반환 `context.Succeed` 요구 사항이 충족 되는 경우.
-* 반환 `Task.CompletedTask` 요구 사항이 충족 되지 않는 경우. `Task.CompletedTask` 성공 또는 실패를 아닙니다&mdash;다른 권한 부여 처리기 실행을 허용 합니다.
+* 반환 `Task.CompletedTask` 요구 사항이 충족 되지 않는 경우. `Task.CompletedTask`은 (는) 성공&mdash;또는 실패 하지 않으므로 다른 권한 부여 처리기를 실행할 수 있습니다.
 
 명시적으로 실패 하는 경우 반환 [컨텍스트. 실패](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.fail)합니다.
 
@@ -592,14 +592,14 @@ Entity Framework Core를 사용 하 여 서비스에 등록 해야 합니다 [�
 
 참조 [이 문제](https://github.com/aspnet/AspNetCore.Docs/issues/8502) 에 대 한 내용은:
 
-* 사용자의 권한을 제거 합니다. 예를 들어, 음소거 채팅 앱에서 사용자입니다.
+* 사용자의 권한을 제거 합니다. 예를 들어 채팅 앱에서 사용자를 음소거 합니다.
 * 사용자에 권한을 추가 합니다.
 
 ## <a name="test-the-completed-app"></a>완성된 된 앱 테스트
 
 시드 된 사용자 계정의 암호를 이미 설정 하지 않은 경우 사용 합니다 [암호 관리자 도구](xref:security/app-secrets#secret-manager) 암호를 설정 하려면:
 
-* 강력한 암호를 선택 합니다. 8을 사용 하거나 자세한 문자 및 하나 이상의 대문자 문자, 숫자 및 기호입니다. 예를 들어 `Passw0rd!` 강력한 암호 요구 사항을 충족 합니다.
+* 강력한 암호를 선택 합니다. 8 개 이상의 문자 및 하나 이상의 대문자, 숫자 및 기호를 사용 합니다. 예를 들어 `Passw0rd!` 강력한 암호 요구 사항을 충족 합니다.
 * 프로젝트의 폴더에서 다음 명령을 실행 하는 `<PW>` 암호입니다.
 
   ```console
@@ -607,10 +607,11 @@ Entity Framework Core를 사용 하 여 서비스에 등록 해야 합니다 [�
   ```
 
 * 데이터베이스 삭제 및 업데이트
+
     ```console
      dotnet ef database drop -f
      dotnet ef database update  
-```
+     ```
 
 * 데이터베이스를 시드하려면 앱을 다시 시작 합니다.
 
@@ -640,7 +641,7 @@ Entity Framework Core를 사용 하 여 서비스에 등록 해야 합니다 [�
   dotnet new webapp -o ContactManager -au Individual -uld
   ```
 
-* 추가 *Models/Contact.cs*:
+* *모델/연락처를 추가 합니다. cs*:
 
   [!code-csharp[](secure-data/samples/starter2.1/Models/Contact.cs?name=snippet1)]
 
