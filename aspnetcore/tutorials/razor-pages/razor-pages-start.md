@@ -5,12 +5,12 @@ description: 이 자습서 시리즈는 ASP.NET Core에서 Razor Pages를 사용
 ms.author: riande
 ms.date: 07/25/2019
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 1605197188d97f27a884739a72400da2d5818b1a
-ms.sourcegitcommit: 849af69ee3c94cdb9fd8fa1f1bb8f5a5dda7b9eb
+ms.openlocfilehash: 57a10895c718c539ece280afcb27cb4033c7fb45
+ms.sourcegitcommit: 979dbfc5e9ce09b9470789989cddfcfb57079d94
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/22/2019
-ms.locfileid: "68371969"
+ms.lasthandoff: 07/31/2019
+ms.locfileid: "68682802"
 ---
 # <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>자습서: ASP.NET Core에서 Razor 페이지 시작
 
@@ -133,7 +133,7 @@ Visual Studio에서 **파일 > 열기**를 선택하고 *RazorPagesMovie.csproj*
 
   [!INCLUDE[](~/includes/trustCertMac.md)]
 
-* 디버거 없이 실행하려면 **Cmd-Opt-F5**를 누릅니다.
+* 디버거 없이 실행하려면 **Alt-Cmd-Enter**를 누릅니다. 또는 메뉴 모음에서 실행>디버깅하지 않고 시작으로 이동합니다.
 
   Visual Studio가 [Kestrel](xref:fundamentals/servers/kestrel)을 시작하고, 브라우저를 시작하고, `http://localhost:5001`으로 이동합니다.
 

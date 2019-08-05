@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/14/2019
 uid: mvc/views/view-components
-ms.openlocfilehash: ff84abf9e0c682d22196a0a0f5f377990c80a6ae
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: e6990368519857a27b291d7d565c09072f23f1b0
+ms.sourcegitcommit: 7001657c00358b082734ba4273693b9b3ed35d2a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815272"
+ms.lasthandoff: 07/31/2019
+ms.locfileid: "68670089"
 ---
 # <a name="view-components-in-aspnet-core"></a>ASP.NET Core의 보기 구성 요소
 
@@ -326,6 +326,14 @@ Razor 태그 파일의 뷰 구성 요소 태그 도우미를 사용합니다.
 ::: moniker-end
 
 `PriorityList.Invoke`의 메서드 시그니처는 동기이지만, Razor는 태그 파일에 `Component.InvokeAsync`를 사용하여 메서드를 찾고 호출합니다.
+
+## <a name="all-view-component-parameters-are-required"></a>모든 뷰 구성 요소 매개 변수 필요
+
+뷰 구성 요소의 각 매개 변수는 필수 특성입니다. 이 [GitHub 문제](https://github.com/aspnet/AspNetCore/issues/5011)를 참조하세요. 매개 변수가 하나라도 생략되면
+
+* `InvokeAsync` 메서드 시그니처가 일치하지 않게 되므로 메서드가 실행되지 않습니다.
+* ViewComponent가 마크업을 렌더링하지 않습니다.
+* 오류가 throw되지 않습니다.
 
 ## <a name="additional-resources"></a>추가 자료
 

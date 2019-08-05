@@ -3,14 +3,14 @@ title: ASP.NET Core의 레이아웃
 author: ardalis
 description: ASP.NET Core 앱에서 뷰를 렌더링하기 전에 일반적인 레이아웃을 사용하고, 지시문을 공유하고, 공용 코드를 실행하는 방법을 알아봅니다.
 ms.author: riande
-ms.date: 02/26/2019
+ms.date: 07/30/2019
 uid: mvc/views/layout
-ms.openlocfilehash: 7a60ee15e688d6f0e531302457604fa759213758
-ms.sourcegitcommit: 24b1f6decbb17bb22a45166e5fdb0845c65af498
+ms.openlocfilehash: 6bd9dfc65c026ee524277aaaa21333d299c8981e
+ms.sourcegitcommit: 7001657c00358b082734ba4273693b9b3ed35d2a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/27/2019
-ms.locfileid: "56899244"
+ms.lasthandoff: 07/31/2019
+ms.locfileid: "68669998"
 ---
 # <a name="layout-in-aspnet-core"></a>ASP.NET Core의 레이아웃
 
@@ -39,11 +39,11 @@ ms.locfileid: "56899244"
 
 * Razor Pages: *Pages/Shared/_Layout.cshtml*
 
-  ![솔루션 탐색기의 페이지 폴더](layout/_static/rp-web-project-views.png)
+  ![솔루션 탐색기의 Pages 폴더](layout/_static/rp-web-project-views.png)
 
 * 보기를 사용하는 컨트롤러: *Views/Shared/_Layout.cshtml*
 
- ![솔루션 탐색기의 뷰 폴더](layout/_static/mvc-web-project-views.png)
+  ![솔루션 탐색기의 Views 폴더](layout/_static/mvc-web-project-views.png)
 
 이 레이아웃은 앱의 뷰에 대한 최상위 수준 템플릿을 정의합니다. 앱에는 레이아웃이 필요하지 않습니다. 앱은 다른 레이아웃을 지정하는 서로 다른 뷰를 포함하는 둘 이상의 레이아웃을 정의할 수 있습니다.
 
