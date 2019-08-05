@@ -5,12 +5,12 @@ description: 간단한 ASP.NET Core MVC 앱에 보기 추가
 ms.author: riande
 ms.date: 03/04/2017
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 38efd234d919cd0427928df73388e65ce13527d1
-ms.sourcegitcommit: 979dbfc5e9ce09b9470789989cddfcfb57079d94
+ms.openlocfilehash: b6a3b1e673b8b67530b82c7d850e810a6c11e555
+ms.sourcegitcommit: 3204bc89ae6354b61ee0a9b2770ebe5214b7790c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/31/2019
-ms.locfileid: "68681889"
+ms.lasthandoff: 08/01/2019
+ms.locfileid: "68707883"
 ---
 # <a name="add-a-view-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 보기 추가
 
@@ -223,7 +223,7 @@ Razor를 사용하여 뷰 템플릿 파일을 만듭니다. Razor 기반 뷰 템
   * **이름** 상자에 *Index.cshtml*을 입력합니다.
   * **새로 만들기**를 선택합니다.
 
-![새 항목 추가 대화 상자](adding-view/_static/add_view.png)
+![새 항목 추가 대화 상자](adding-view/_static/add_view_mac.png)
 
 ---
 
