@@ -301,6 +301,8 @@
           uid: blazor/javascript-interop
         - name: 보안 및 ID
           uid: security/blazor/index
+        - name: 오류 처리
+          uid: blazor/handle-errors
         - name: 디버그
           uid: blazor/debug
         - name: 웹 API 호출
