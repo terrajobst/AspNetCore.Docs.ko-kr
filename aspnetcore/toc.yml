@@ -104,8 +104,6 @@
         - name: Razor Pages를 사용한 EF Core
           displayName: tutorial
           items:
-            - name: 개요
-              uid: data/ef-rp/index
             - name: 시작
               uid: data/ef-rp/intro
             - name: '만들기, 읽기, 업데이트 및 삭제'
@@ -581,8 +579,6 @@
       items:
         - name: Razor Pages를 사용한 EF Core
           items:
-            - name: 개요
-              uid: data/ef-rp/index
             - name: 시작
               uid: data/ef-rp/intro
             - name: '만들기, 읽기, 업데이트 및 삭제'
@@ -701,6 +697,8 @@
         - name: 개요
           displayName: 'deploy, publish'
           uid: host-and-deploy/iis/index
+        - name: IIS 자습서에 게시
+          uid: tutorials/publish-to-iis
         - name: ASP.NET Core 모듈
           displayName: 'deploy, publish'
           uid: host-and-deploy/aspnet-core-module
