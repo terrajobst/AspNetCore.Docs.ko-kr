@@ -5,18 +5,20 @@ description: Windows Server IIS(인터넷 정보 서비스)에서 ASP.NET Core �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/28/2019
+ms.date: 07/31/2019
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 7677173493e68f5a5656c18533e0ae13a7c5bece
-ms.sourcegitcommit: 0efb9e219fef481dee35f7b763165e488aa6cf9c
+ms.openlocfilehash: df4d74a2800ef586091347289561a03b31e33f44
+ms.sourcegitcommit: 776367717e990bdd600cb3c9148ffb905d56862d
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/29/2019
-ms.locfileid: "68602464"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68913936"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS가 있는 Windows에서 ASP.NET Core 호스팅
 
 [Luke Latham](https://github.com/guardrex)으로
+
+IIS 서버에 ASP.NET Core 앱을 게시하는 방법에 대한 자습서 경험은 <xref:tutorials/publish-to-iis>을(를) 참조하세요.
 
 [.NET Core 호스팅 번들 설치](#install-the-net-core-hosting-bundle)
 
