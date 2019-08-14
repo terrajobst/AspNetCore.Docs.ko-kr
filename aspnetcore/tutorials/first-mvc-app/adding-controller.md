@@ -3,14 +3,14 @@ title: ASP.NET Core MVC 앱에 컨트롤러 추가
 author: rick-anderson
 description: 간단한 ASP.NET Core MVC 앱에 컨트롤러를 추가하는 방법을 배웁니다.
 ms.author: riande
-ms.date: 02/28/2017
+ms.date: 08/05/2017
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: ab97b875956ec262623ed9862ace6a930331d80d
-ms.sourcegitcommit: 979dbfc5e9ce09b9470789989cddfcfb57079d94
+ms.openlocfilehash: 1c54959130f3a9959d4d4fdb8dcaa0d37ee2f046
+ms.sourcegitcommit: 2eb605f4f20ac4dd9de6c3b3e3453e108a357a21
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/31/2019
-ms.locfileid: "68682319"
+ms.lasthandoff: 08/06/2019
+ms.locfileid: "68820057"
 ---
 # <a name="add-a-controller-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 컨트롤러 추가
 
@@ -86,9 +86,9 @@ MVC는 들어오는 URL에 따라 컨트롤러 클래스(및 그 안에 작업 �
 
 앱으로 이동하고 URL 세그먼트를 제공하지 않는 경우 "Home" 컨트롤러에 기본값으로 지정되고 위에 강조 표시된 템플릿 줄에 "Index" 메서드가 지정됩니다.
 
-첫 번째 URL 세그먼트는 실행할 컨트롤러 클래스를 결정합니다. 따라서 `localhost:xxxx/HelloWorld`가 **HelloWorld**Controller 클래스에 매핑됩니다. URL 세그먼트의 두 번째 부분은 클래스에 대한 작업 메서드를 결정합니다. 따라서 `localhost:xxxx/HelloWorld/Index`는 실행할 `HelloWorldController` 클래스의 `Index` 메서드를 발생시킵니다. `localhost:xxxx/HelloWorld`로 이동하고 기본적으로 `Index` 메서드를 호출해야 합니다. `Index`는 메서드 이름이 명시적으로 지정되지 않으면 컨트롤러에서 호출되는 기본 메서드이기 때문입니다. URL 세그먼트(`id`)의 세 번째 부분은 경로 데이터입니다. 경로 데이터는 자습서의 뒷 부분에서 설명합니다.
+첫 번째 URL 세그먼트는 실행할 컨트롤러 클래스를 결정합니다. 따라서 `localhost:{PORT}/HelloWorld`가 **HelloWorld**Controller 클래스에 매핑됩니다. URL 세그먼트의 두 번째 부분은 클래스에 대한 작업 메서드를 결정합니다. 따라서 `localhost:{PORT}/HelloWorld/Index`는 실행할 `HelloWorldController` 클래스의 `Index` 메서드를 발생시킵니다. `localhost:{PORT}/HelloWorld`로 이동하고 기본적으로 `Index` 메서드를 호출해야 합니다. `Index`는 메서드 이름이 명시적으로 지정되지 않으면 컨트롤러에서 호출되는 기본 메서드이기 때문입니다. URL 세그먼트(`id`)의 세 번째 부분은 경로 데이터입니다. 경로 데이터는 자습서의 뒷 부분에서 설명합니다.
 
-`https://localhost:xxxx/HelloWorld/Welcome`으로 이동합니다. `Welcome` 메서드가 실행되고 문자열 `This is the Welcome action method...`를 반환합니다. 이 URL의 경우 컨트롤러는 `HelloWorld`이고 `Welcome`은 작업 메서드입니다. 아직 URL의 `[Parameters]` 부분을 사용하지 않았습니다.
+`https://localhost:{PORT}/HelloWorld/Welcome`으로 이동합니다. `Welcome` 메서드가 실행되고 문자열 `This is the Welcome action method...`를 반환합니다. 이 URL의 경우 컨트롤러는 `HelloWorld`이고 `Welcome`은 작업 메서드입니다. 아직 URL의 `[Parameters]` 부분을 사용하지 않았습니다.
 
 ![브라우저 창은 시작 작업 메서드입니다.라는 애플리케이션 응답을 표시합니다.](~/tutorials/first-mvc-app/adding-controller/_static/welcome.png)
 
@@ -104,9 +104,9 @@ URL의 일부 매개 변수 정보를 컨트롤러에 전달하도록 코드를 
 
 앱을 실행하고 다음으로 이동합니다.
 
-   `https://localhost:xxxx/HelloWorld/Welcome?name=Rick&numtimes=4`
+   `https://localhost:{PORT}/HelloWorld/Welcome?name=Rick&numtimes=4`
 
-(xxxx를 포트 번호로 바꿉니다.) URL에서 `name` 및 `numtimes`에 다른 값을 사용할 수 있습니다. MVC [모델 바인딩](xref:mvc/models/model-binding) 시스템은 주소 표시줄의 쿼리 문자열에서 메서드의 매개 변수로 명명된 매개 변수를 자동으로 매핑합니다. 자세한 정보는 [모델 바인딩](xref:mvc/models/model-binding)을 참조하세요.
+(`{PORT}`를 포트 번호로 바꿉니다.) URL에서 `name` 및 `numtimes`에 다른 값을 사용할 수 있습니다. MVC [모델 바인딩](xref:mvc/models/model-binding) 시스템은 주소 표시줄의 쿼리 문자열에서 메서드의 매개 변수로 명명된 매개 변수를 자동으로 매핑합니다. 자세한 정보는 [모델 바인딩](xref:mvc/models/model-binding)을 참조하세요.
 
 ![Hello Rick, NumTimes의 애플리케이션 응답을 보여주는 브라우저 창은 다음과 같습니다. 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
 
@@ -116,7 +116,7 @@ URL의 일부 매개 변수 정보를 컨트롤러에 전달하도록 코드를 
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_3)]
 
-앱을 실행하고 `https://localhost:xxx/HelloWorld/Welcome/3?name=Rick` URL을 입력합니다.
+앱을 실행하고 `https://localhost:{PORT}/HelloWorld/Welcome/3?name=Rick` URL을 입력합니다.
 
 이번에 세 번째 URL 세그먼트는 `id` 경로 매개 변수와 일치합니다. `Welcome` 메서드는 `MapControllerRoute` 메서드에서 URL 템플릿과 일치하는 `id` 매개 변수를 포함합니다. 후행 `?`(`id?`에 위치)는 `id` 매개 변수가 선택 사항임을 나타냅니다.
 
@@ -205,9 +205,9 @@ Remove link for simplified tutorial.
 
 앱으로 이동하고 URL 세그먼트를 제공하지 않는 경우 "Home" 컨트롤러에 기본값으로 지정되고 위에 강조 표시된 템플릿 줄에 "Index" 메서드가 지정됩니다.
 
-첫 번째 URL 세그먼트는 실행할 컨트롤러 클래스를 결정합니다. 따라서 `localhost:xxxx/HelloWorld`은 `HelloWorldController` 클래스에 매핑됩니다. URL 세그먼트의 두 번째 부분은 클래스에 대한 작업 메서드를 결정합니다. 따라서 `localhost:xxxx/HelloWorld/Index`는 실행할 `HelloWorldController` 클래스의 `Index` 메서드를 발생시킵니다. `localhost:xxxx/HelloWorld`로 이동하고 기본적으로 `Index` 메서드를 호출해야 합니다. 메서드 이름이 명시적으로 지정되지 않으면 `Index`가 컨트롤러에서 호출되는 기본 메서드이기 때문입니다. URL 세그먼트(`id`)의 세 번째 부분은 경로 데이터입니다. 경로 데이터는 자습서의 뒷 부분에서 설명합니다.
+첫 번째 URL 세그먼트는 실행할 컨트롤러 클래스를 결정합니다. 따라서 `localhost:{PORT}/HelloWorld`은 `HelloWorldController` 클래스에 매핑됩니다. URL 세그먼트의 두 번째 부분은 클래스에 대한 작업 메서드를 결정합니다. 따라서 `localhost:{PORT}/HelloWorld/Index`는 실행할 `HelloWorldController` 클래스의 `Index` 메서드를 발생시킵니다. `localhost:{PORT}/HelloWorld`로 이동하고 기본적으로 `Index` 메서드를 호출해야 합니다. 메서드 이름이 명시적으로 지정되지 않으면 `Index`가 컨트롤러에서 호출되는 기본 메서드이기 때문입니다. URL 세그먼트(`id`)의 세 번째 부분은 경로 데이터입니다. 경로 데이터는 자습서의 뒷 부분에서 설명합니다.
 
-`https://localhost:xxxx/HelloWorld/Welcome`으로 이동합니다. `Welcome` 메서드가 실행되고 문자열 `This is the Welcome action method...`를 반환합니다. 이 URL의 경우 컨트롤러는 `HelloWorld`이고 `Welcome`은 작업 메서드입니다. 아직 URL의 `[Parameters]` 부분을 사용하지 않았습니다.
+`https://localhost:{PORT}/HelloWorld/Welcome`으로 이동합니다. `Welcome` 메서드가 실행되고 문자열 `This is the Welcome action method...`를 반환합니다. 이 URL의 경우 컨트롤러는 `HelloWorld`이고 `Welcome`은 작업 메서드입니다. 아직 URL의 `[Parameters]` 부분을 사용하지 않았습니다.
 
 ![브라우저 창은 시작 작업 메서드입니다.라는 애플리케이션 응답을 표시합니다.](~/tutorials/first-mvc-app/adding-controller/_static/welcome.png)
 
@@ -223,9 +223,9 @@ URL의 일부 매개 변수 정보를 컨트롤러에 전달하도록 코드를 
 
 앱을 실행하고 다음으로 이동합니다.
 
-   `https://localhost:xxxx/HelloWorld/Welcome?name=Rick&numtimes=4`
+   `https://localhost:{PORT}/HelloWorld/Welcome?name=Rick&numtimes=4`
 
-(xxxx를 포트 번호로 바꿉니다.) URL에서 `name` 및 `numtimes`에 다른 값을 사용할 수 있습니다. MVC [모델 바인딩](xref:mvc/models/model-binding) 시스템은 주소 표시줄의 쿼리 문자열에서 메서드의 매개 변수로 명명된 매개 변수를 자동으로 매핑합니다. 자세한 정보는 [모델 바인딩](xref:mvc/models/model-binding)을 참조하세요.
+(`{PORT}`를 포트 번호로 바꿉니다.) URL에서 `name` 및 `numtimes`에 다른 값을 사용할 수 있습니다. MVC [모델 바인딩](xref:mvc/models/model-binding) 시스템은 주소 표시줄의 쿼리 문자열에서 메서드의 매개 변수로 명명된 매개 변수를 자동으로 매핑합니다. 자세한 정보는 [모델 바인딩](xref:mvc/models/model-binding)을 참조하세요.
 
 ![Hello Rick, NumTimes의 애플리케이션 응답을 보여주는 브라우저 창은 다음과 같습니다. 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
 
@@ -235,7 +235,7 @@ URL의 일부 매개 변수 정보를 컨트롤러에 전달하도록 코드를 
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_3)]
 
-앱을 실행하고 `https://localhost:xxx/HelloWorld/Welcome/3?name=Rick` URL을 입력합니다.
+앱을 실행하고 `https://localhost:{PORT}/HelloWorld/Welcome/3?name=Rick` URL을 입력합니다.
 
 이번에 세 번째 URL 세그먼트는 `id` 경로 매개 변수와 일치합니다. `Welcome` 메서드는 `MapRoute` 메서드에서 URL 템플릿과 일치하는 `id` 매개 변수를 포함합니다. 후행 `?`(`id?`에 위치)는 `id` 매개 변수가 선택 사항임을 나타냅니다.
 

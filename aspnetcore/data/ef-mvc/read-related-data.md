@@ -6,12 +6,12 @@ ms.author: tdykstra
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: 5b45ced4fe6ed220c9a63bc6480c8c8520b36ed4
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 20f801e23f3e75d7915bcb7c095060b68d9cb03f
+ms.sourcegitcommit: 2eb605f4f20ac4dd9de6c3b3e3453e108a357a21
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64886368"
+ms.lasthandoff: 08/06/2019
+ms.locfileid: "68819782"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>자습서: 관련 데이터 읽기 - ASP.NET MVC 및 EF Core 사용
 
@@ -188,7 +188,7 @@ Entity Framework와 같은 ORM(개체-관계형 매핑) 소프트웨어에서 �
   }
   ```
 
-* 각 강사가 가르치는 강좌를 표시하는 **강좌** 열을 추가했습니다. 이 razor 구문에 대한 자세한 내용은 [`@:`를 사용하여 명시적 줄 전환](xref:mvc/views/razor#explicit-line-transition-with-)을 참조하세요.
+* 각 강사가 가르치는 과정을 표시하는 **Courses** 열을 추가했습니다. 자세한 내용은 Razor 구문 문서의 [@를 사용하여 명시적으로 줄 전환:](xref:mvc/views/razor#explicit-line-transition-with-) 섹션을 참조하세요.
 
 * 선택된 강사의 `tr` 요소에 `class="success"`를 동적으로 추가하는 코드를 추가했습니다. 부트스트랩 클래스를 사용하여 선택된 행에 대한 배경색을 설정합니다.
 

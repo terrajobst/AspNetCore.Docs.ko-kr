@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/13/2018
 uid: tutorials/first-mvc-app/new-field
-ms.openlocfilehash: 45506d071c90c91a61e6912ff51350b43e8ae136
-ms.sourcegitcommit: 335a88c1b6e7f0caa8a3a27db57c56664d676d34
+ms.openlocfilehash: f22a90dd7662bfb34e2f7adb87fa611012d78533
+ms.sourcegitcommit: b5e63714afc26e94be49a92619586df5189ed93a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/12/2019
-ms.locfileid: "67034800"
+ms.lasthandoff: 08/02/2019
+ms.locfileid: "68739590"
 ---
 # <a name="add-a-new-field-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 새 필드 추가
 
@@ -33,7 +33,21 @@ EF Code First를 사용하여 자동으로 데이터베이스를 만들 경우 C
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Models/MovieDateRating.cs?highlight=13&name=snippet)]
 
-앱을 빌드합니다(Ctrl+Shift+B).
+앱 빌드
+
+### <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+ Ctrl+Shift+B
+
+### <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+
+`dotnet build`
+
+### <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+
+명령 ⌘ + B
+
+------
 
 `Movie` 클래스에 새 필드를 추가했으므로 이 새 속성이 포함되도록 바인딩 허용 목록을 업데이트해야 합니다. *MoviesController.cs*에서 `Rating` 속성을 포함하도록 `Create` 및 `Edit` 동작 메서드에 대해 `[Bind]` 속성을 업데이트합니다.
 
@@ -60,6 +74,8 @@ EF Code First를 사용하여 자동으로 데이터베이스를 만들 경우 C
 <!-- This tab intentionally left blank. -->
 
 ---
+
+나머지 템플릿을 업데이트합니다.
 
 새 열에 대해 값을 제공하도록 `SeedData` 클래스를 업데이트합니다. 샘플 변경은 아래에 표시되지만 각 `new Movie`에 대해 이 변경을 수행하려고 합니다.
 

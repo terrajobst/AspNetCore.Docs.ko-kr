@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 06/12/2019
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: 3e90e3b17186757fe157fb6641888786bb7a0df2
-ms.sourcegitcommit: f30b18442ed12831c7e86b0db249183ccd749f59
+ms.openlocfilehash: 6a3a7446a488ef54d99d6c7605980c18890b9ad0
+ms.sourcegitcommit: 4fe3ae892f54dc540859bff78741a28c2daa9a38
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/23/2019
-ms.locfileid: "68412528"
+ms.lasthandoff: 08/04/2019
+ms.locfileid: "68776637"
 ---
 # <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>자습서: ASP.NET Core에서 gRPC 클라이언트 및 서버 만들기
 
@@ -192,8 +192,8 @@ Install-Package Grpc.Tools
 
 * **솔루션 탐색기** > **NuGet 패키지 관리**에서 프로젝트를 마우스 오른쪽 단추로 클릭
 * **찾아보기** 탭을 선택합니다.
-* 검색 상자에 **Grpc.Core**를 입력합니다.
-* **찾아보기** 탭에서 **Grpc.Core** 패키지를 선택하고 **설치**를 선택합니다.
+* 검색 상자에 **Grpc.Net.Client**를 입력합니다.
+* **찾아보기** 탭에서 **Grpc.Net.Client** 패키지를 선택하고 **설치**를 선택합니다.
 * `Google.Protobuf` 및 `Grpc.Tools`에 대해 반복하세요.
 
 ### <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
@@ -269,7 +269,7 @@ Greeter 클라이언트가 비동기 `SayHello` 메서드를 호출합니다. `S
 ### <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Greeter 서비스에서 `Ctrl+F5`를 눌러 디버거 없이 서버를 시작합니다.
-* `GrpcGreeterClient` 프로젝트에서 `Ctrl+F5`를 눌러 디버거 없이 서버를 시작합니다.
+* `GrpcGreeterClient` 프로젝트에서 `Ctrl+F5`를 눌러 디버거 없이 클라이언트를 시작합니다.
 
 ### <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 

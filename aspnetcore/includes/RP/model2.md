@@ -2,7 +2,7 @@
 
 ### <a name="add-a-database-context-class"></a>데이터베이스 컨텍스트 클래스 추가
 
-다음 `RazorPagesMovieContext` 클래스를 *Data* 폴더에 추가:
+RazorPagesMovie 프로젝트에서 *Data*라는 새 폴더를 만듭니다. 다음 `RazorPagesMovieContext` 클래스를 *Data* 폴더에 추가:
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Data/RazorPagesMovieContext.cs)]
 
@@ -18,18 +18,19 @@
 
 [!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/appsettings_SQLite.json?highlight=10-12)]
 
-### <a name="add-required-nuget-packages"></a>필요한 NuGet 패키지 추가
+### <a name="add-nuget-packages-and-ef-tools"></a>NuGet 패키지 및 EF 도구 추가
 
-다음 .NET Core CLI 명령을 실행하여 SQLite, Entity Framework Core 및 CodeGeneration.Design을 프로젝트에 추가합니다.
+RazorPagesMovie 프로젝트의 터미널을 엽니다.  디자인/레이아웃 표시줄에서 프로젝트 이름을 마우스 오른쪽 단추로 클릭하고 터미널에서 **도구 > 열기**로 이동합니다. 터미널에서 다음 .NET Core CLI 명령을 실행합니다.
 
 ```console
+dotnet tool install --global dotnet-ef --version 3.0.0-*
 dotnet add package Microsoft.EntityFrameworkCore.SQLite --version 3.0.0-*
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 3.0.0-*
 dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.0.0-*
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 3.0.0-*
 ```
 
-스캐폴딩에는 `Microsoft.VisualStudio.Web.CodeGeneration.Design` 패키지가 필요합니다.
+위의 명령은 .NET CLI 및 여러 패키지의 Entity Framework Core 도구를 프로젝트에 추가합니다. 스캐폴딩에는 `Microsoft.VisualStudio.Web.CodeGeneration.Design` 패키지가 필요합니다.
 
 <a name="reg"></a>
 

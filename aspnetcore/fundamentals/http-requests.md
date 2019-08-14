@@ -5,14 +5,14 @@ description: IHttpClientFactory 인터페이스를 사용하여 ASP.NET Core에�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 05/10/2019
+ms.date: 08/01/2019
 uid: fundamentals/http-requests
-ms.openlocfilehash: 8b95f63c0e06a2b7d1d66064def192f91b8ffbb4
-ms.sourcegitcommit: ccbb84ae307a5bc527441d3d509c20b5c1edde05
+ms.openlocfilehash: bcf2a2eaf6910222d274c38bac343c92fab9cb5b
+ms.sourcegitcommit: b5e63714afc26e94be49a92619586df5189ed93a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/19/2019
-ms.locfileid: "65874954"
+ms.lasthandoff: 08/02/2019
+ms.locfileid: "68739531"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>ASP.NET Core에서 IHttpClientFactory를 사용하여 HTTP 요청 만들기
 
@@ -76,7 +76,12 @@ ms.locfileid: "65874954"
 
 ### <a name="typed-clients"></a>형식화된 클라이언트
 
-형식화된 클라이언트는 문자열을 키로 사용할 필요가 없이 명명된 클라이언트와 동일한 기능을 제공 합니다. 형식화된 클라이언트 방법은 클라이언트를 사용할 때 IntelliSense 및 컴파일러 도움말을 제공합니다. 특정 `HttpClient`을 구성하고 상호 작용하기 위해 단일 위치를 제공합니다. 예를 들어 단일 형식의 클라이언트는 단일 백 엔드 엔드포인트에 사용될 수 있으며 해당 엔드포인트를 처리하는 모든 논리를 캡슐화할 수 있습니다. 다른 이점은 DI로 작업하고 앱에서 필요할 경우 삽입할 수 있다는 점입니다.
+형식화된 클라이언트:
+
+* 문자열을 키로 사용할 필요가 없이 명명된 클라이언트와 동일한 기능을 제공합니다.
+* 클라이언트를 사용할 때 IntelliSense 및 컴파일러 도움말을 제공합니다.
+* 특정 `HttpClient`을 구성하고 상호 작용하기 위해 단일 위치를 제공합니다. 예를 들어 단일 형식의 클라이언트는 단일 백 엔드 엔드포인트에 사용될 수 있으며 해당 엔드포인트를 처리하는 모든 논리를 캡슐화할 수 있습니다.
+* DI로 작업하고 앱에서 필요할 경우 삽입할 수 있습니다.
 
 형식화된 클라이언트는 생성자의 `HttpClient` 매개 변수를 수락합니다.
 
@@ -163,7 +168,7 @@ public class ValuesController : ControllerBase
 
 처리기를 만들려면 <xref:System.Net.Http.DelegatingHandler>에서 파생되는 클래스를 정의합니다. 파이프라인의 다음 처리기로 요청을 전달하기 전에 코드를 실행하려면 `SendAsync` 메서드를 재정의합니다.
 
-[!code-csharp[Main](http-requests/samples/2.x/HttpClientFactorySample/Handlers/ValidateHeaderHandler.cs?name=snippet1)]
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Handlers/ValidateHeaderHandler.cs?name=snippet1)]
 
 위의 코드에서는 기본 처리기를 정의합니다. `X-API-KEY` 헤더가 요청에 포함되었는지 확인합니다. 헤더가 누락된 경우 HTTP 호출을 방지하고 적합한 응답을 반환할 수 있습니다.
 
@@ -181,7 +186,10 @@ public class ValuesController : ControllerBase
 
 ::: moniker range="< aspnetcore-2.2"
 
-위의 코드에서 `ValidateHeaderHandler`은 DI에 등록됩니다. 처리기는 범위가 지정되지 않은, 임시 서비스로 DI에 등록**되어야** 합니다. 처리기가 범위가 지정된 서비스로 등록되고 처리기에서 사용하는 서비스가 삭제 가능한 경우, 처리기가 범위를 벗어나기 전에 처리기의 서비스가 삭제될 수 있으며 그러면 처리기에서 오류가 발생합니다.
+위의 코드에서 `ValidateHeaderHandler`은 DI에 등록됩니다. 처리기는 범위가 지정되지 않은, 임시 서비스로 DI에 등록**되어야** 합니다. 처리기가 범위 지정 서비스로 등록되고 처리기가 종속된 모든 서비스는 삭제 가능합니다.
+
+* 처리기가 범위를 벗어나기 전에 처리기의 서비스를 삭제할 수 있습니다.
+* 처리기 서비스를 삭제하면 처리기가 실패합니다.
 
 일단 등록되면 처리기 형식으로 전달하여 <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.AddHttpMessageHandler*>를 호출할 수 있습니다.
 
@@ -212,7 +220,7 @@ public class ValuesController : ControllerBase
 
 `AddTransientHttpErrorPolicy` 확장은 `Startup.ConfigureServices` 내에서 사용할 수 있습니다. 확장은 가능한 일시적 오류를 나타내는 오류를 처리하기 위해 구성된 `PolicyBuilder` 개체에 대한 액세스를 제공합니다.
 
-[!code-csharp[Main](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet7)]
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet7)]
 
 위의 코드에서 `WaitAndRetryAsync` 정책이 정의되어 있습니다. 실패한 요청은 최대 세 번까지 다시 시도되며 시도 간 600밀리초의 지연 간격을 둡니다.
 
@@ -220,7 +228,7 @@ public class ValuesController : ControllerBase
 
 Polly 기반 처리기를 추가하는 데 사용될 수 있는 추가 확장 메서드가 존재합니다. 이러한 하나의 확장은 여러 오버로드가 있는 `AddPolicyHandler`입니다. 하나의 오버로드는 적용할 정책을 정의할 때 요청을 검사할 수 있습니다.
 
-[!code-csharp[Main](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet8)]
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet8)]
 
 앞의 코드에서 나가는 요청이 HTTP GET인 경우 10초 시간 제한이 적용됩니다. 다른 HTTP 메서드의 경우 30초 시간 제한이 사용됩니다.
 
@@ -228,7 +236,7 @@ Polly 기반 처리기를 추가하는 데 사용될 수 있는 추가 확장 �
 
 향상된 기능을 제공하기 위해 Polly 정책을 중첩하는 것이 일반적입니다.
 
-[!code-csharp[Main](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet9)]
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet9)]
 
 앞의 예제에서 두 개의 처리기가 추가됩니다. 첫 번째 처리기는 재시도 정책을 추가하기 위해 `AddTransientHttpErrorPolicy` 확장을 사용합니다. 실패한 요청은 최대 세 번까지 다시 시도됩니다. `AddTransientHttpErrorPolicy`에 대한 두 번째 호출은 회로 차단기 정책을 추가합니다. 5번의 시도가 순차적으로 실패하는 경우 추가적인 외부 요청은 30초 동안 차단됩니다. 회로 차단기 정책은 상태 저장입니다. 이 클라이언트를 통한 모든 호출은 동일한 회로 상태를 공유합니다.
 
@@ -236,7 +244,7 @@ Polly 기반 처리기를 추가하는 데 사용될 수 있는 추가 확장 �
 
 정기적으로 사용되는 정책의 관리 방식은 정책을 한 번 정의하고 `PolicyRegistry`에 등록합니다. 정책을 사용하여 레지스트리에서 처리기를 추가할 수 있는 확장 메서드가 제공됩니다.
 
-[!code-csharp[Main](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet10)]
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet10)]
 
 위의 코드에서 두 정책은 `PolicyRegistry`가 `ServiceCollection`에 추가될 때 등록됩니다. 레지스트리에서 정책을 사용하기 위해 `AddPolicyHandlerFromRegistry` 메서드가 사용되어 적용할 정책의 이름을 전달합니다.
 
@@ -252,7 +260,7 @@ Polly 기반 처리기를 추가하는 데 사용될 수 있는 추가 확장 �
 
 기본 처리기 수명은 2분입니다. 명명된 클라이언트별 기준으로 기본값을 재정의할 수 있습니다. 재정의하려면 클라이언트를 만들 때 반환되는 `IHttpClientBuilder`에서 <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.SetHandlerLifetime*>을 호출합니다.
 
-[!code-csharp[Main](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet11)]
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet11)]
 
 클라이언트의 삭제는 필요하지 않습니다. 삭제는 나가는 요청을 취소하고 <xref:System.IDisposable.Dispose*>를 호출한 후에는 지정된 `HttpClient` 인스턴스가 사용될 수 없도록 보장합니다. `IHttpClientFactory`는 `HttpClient` 인스턴스에서 사용되는 리소스를 추적하고 삭제합니다. `HttpClient` 인스턴스는 일반적으로 삭제가 필요하지 않은 .NET 개체로 처리될 수 있습니다.
 
@@ -276,7 +284,32 @@ Polly 기반 처리기를 추가하는 데 사용될 수 있는 추가 확장 �
 
 `IHttpClientBuilder`은 명명된 또는 형식화된 클라이언트를 추가할 때 반환됩니다. <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> 확장 메서드는 대리자를 정의하는 데 사용될 수 있습니다. 대리자는 해당 클라이언트가 사용한 기본 `HttpMessageHandler`을 만들고 구성하는 데 사용됩니다.
 
-[!code-csharp[Main](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet12)]
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet12)]
+
+## <a name="use-ihttpclientfactory-in-a-console-app"></a>콘솔 앱에서 IHttpClientFactory 사용
+
+콘솔 앱에서 프로젝트에 다음 패키지 참조를 추가합니다.
+
+* [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting)
+* [Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http)
+
+다음 예제에서는
+
+* <xref:System.Net.Http.IHttpClientFactory>는 [제너릭 호스트의](xref:fundamentals/host/generic-host) 서비스 컨테이너에 등록됩니다.
+* `MyService`에서는 `HttpClient`를 만드는 데 사용하는 서비스에서 클라이언트 팩터리 인스턴스를 만듭니다. `HttpClient`는 웹 페이지를 검색하는 데 사용됩니다.
+* `Main`을 통해서는 서비스의 `GetPage` 메서드를 실행하고 웹 페이지 콘텐츠의 처음 500자를 콘솔에 씁니다.
+
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](http-requests/samples/3.x/HttpClientFactoryConsoleSample/Program.cs?highlight=14-15,20,26-27,59-62)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactoryConsoleSample/Program.cs?highlight=14-15,20,26-27,59-62)]
+
+::: moniker-end
 
 ## <a name="additional-resources"></a>추가 자료
 

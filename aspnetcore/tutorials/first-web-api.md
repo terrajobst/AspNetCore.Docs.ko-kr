@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core를 사용하여 웹 API를 빌드하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/11/2019
+ms.date: 08/05/2019
 uid: tutorials/first-web-api
-ms.openlocfilehash: 60235af56077127093ac1d77338bc228a6edf073
-ms.sourcegitcommit: 0efb9e219fef481dee35f7b763165e488aa6cf9c
+ms.openlocfilehash: 855d05fa2b9c1a7572212c40adbe61bb396f4bac
+ms.sourcegitcommit: 2eb605f4f20ac4dd9de6c3b3e3453e108a357a21
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/29/2019
-ms.locfileid: "68602491"
+ms.lasthandoff: 08/06/2019
+ms.locfileid: "68819840"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>자습서: ASP.NET Core를 사용하여 웹 API 만들기
 
@@ -728,6 +728,7 @@ ASP.NET Core에서는 DB 컨텍스트와 같은 서비스를 [DI(종속성 주�
 * 요청된 ID와 일치하는 항목이 없는 경우 메서드가 404 [NotFound](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.notfound) 오류 코드를 반환합니다.
 * 그렇지 않으면 메서드가 JSON 응답 본문에서 200을 반환합니다. `item`을 반환하면 HTTP 200 응답이 발생합니다.
 
+
 ## <a name="test-the-gettodoitems-method"></a>GetTodoItems 메서드 테스트
 
 이 자습서에서는 Postman을 사용하여 웹 API를 테스트합니다.
@@ -736,10 +737,19 @@ ASP.NET Core에서는 DB 컨텍스트와 같은 서비스를 [DI(종속성 주�
 * 웹앱을 시작합니다.
 * Postman을 시작합니다.
 * **SSL 인증서 확인** 사용 안 함
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+* **파일** > **설정**(**일반** 탭)에서 **SSL 인증서 확인**을 사용하지 않게 설정합니다.
+
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+
+* **Postman** > **기본 설정**(**일반** 탭)에서 **SSL 인증서 확인**을 사용하지 않게 설정합니다. 또는 렌치를 선택하고 **설정**을 선택한 다음 SSL 인증서 확인을 사용하지 않게 설정합니다.
+
+---
   
-  * **파일 > 설정**(**일반* 탭)에서 **SSL 인증서 확인**을 사용하지 않습니다.
-    > [!WARNING]
-    > 컨트롤러를 테스트한 후에 SSL 인증서 확인을 다시 사용하도록 설정합니다.
+> [!WARNING]
+> 컨트롤러를 테스트한 후에 SSL 인증서 확인을 다시 사용하도록 설정합니다.
 
 * 새 요청을 만듭니다.
   * HTTP 메서드를 **GET**으로 설정합니다.
@@ -751,7 +761,7 @@ ASP.NET Core에서는 DB 컨텍스트와 같은 서비스를 [DI(종속성 주�
 
 ## <a name="add-a-create-method"></a>메서드 만들기 추가
 
-다음 `PostTodoItem` 메서드를 추가합니다.
+*Controllers/TodoController.cs* 내부에 다음 `PostTodoItem` 메서드를 추가합니다. 
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_Create)]
 

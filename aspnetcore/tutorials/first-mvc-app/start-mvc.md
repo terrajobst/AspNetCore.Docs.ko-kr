@@ -3,14 +3,14 @@ title: ASP.NET Core MVC 시작
 author: rick-anderson
 description: ASP.NET Core MVC를 시작하는 방법을 알아봅니다.
 ms.author: riande
-ms.date: 04/24/2019
+ms.date: 08/05/2019
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: b3544769b0e40fc27f5b6c939c6d7b5f9082f854
-ms.sourcegitcommit: 979dbfc5e9ce09b9470789989cddfcfb57079d94
+ms.openlocfilehash: f6a92423546ebd9d4c8e1a92fb81b6b72f847f61
+ms.sourcegitcommit: 2eb605f4f20ac4dd9de6c3b3e3453e108a357a21
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/31/2019
-ms.locfileid: "68682804"
+ms.lasthandoff: 08/06/2019
+ms.locfileid: "68820093"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>ASP.NET Core MVC 시작
 
