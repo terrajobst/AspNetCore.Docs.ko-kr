@@ -4,14 +4,14 @@ author: jamesnk
 description: ASP.NET Core에 대 한 gRPC에서 인증 및 권한 부여를 사용 하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 07/26/2019
+ms.date: 08/13/2019
 uid: grpc/authn-and-authz
-ms.openlocfilehash: 34f7f8a5a22159329b3d6c4524943434c460c7fb
-ms.sourcegitcommit: 0efb9e219fef481dee35f7b763165e488aa6cf9c
+ms.openlocfilehash: 19018c4ffae1228055a4858b496f135d015625b4
+ms.sourcegitcommit: 89fcc6cb3e12790dca2b8b62f86609bed6335be9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/29/2019
-ms.locfileid: "68602432"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68993282"
 ---
 # <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>ASP.NET Core에 대 한 gRPC의 인증 및 권한 부여
 
@@ -42,6 +42,8 @@ public void Configure(IApplicationBuilder app)
 
 > [!NOTE]
 > ASP.NET Core 인증 미들웨어를 등록 하는 순서는 중요 합니다. 항상 `UseAuthentication` 및`UseAuthorization` 전후를 호출 합니다.`UseEndpoints` `UseRouting`
+
+호출 하는 동안 앱에서 사용 하는 인증 메커니즘을 구성 해야 합니다. 인증 구성은에 `Startup.ConfigureServices` 추가 되 고 앱이 사용 하는 인증 메커니즘에 따라 달라질 수 있습니다. ASP.NET Core 앱을 보호 하는 방법에 대 한 예제는 [인증 샘플](xref:security/authentication/samples)을 참조 하세요.
 
 인증이 설정 된 후에는를 `ServerCallContext`통해 grpc 서비스 메서드에서 사용자에 액세스할 수 있습니다.
 

@@ -5,14 +5,14 @@ description: 선택한 도구를 사용 하 여 Blazor 앱을 빌드하여 Blazo
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/23/2019
+ms.date: 08/13/2019
 uid: blazor/get-started
-ms.openlocfilehash: b4609858be43acf9d1b2d8be5eff4879fd56f49f
-ms.sourcegitcommit: 051f068c78931432e030b60094c38376d64d013e
+ms.openlocfilehash: 1358a2e92af9d9104e565718692b1ca1940b9d9e
+ms.sourcegitcommit: 89fcc6cb3e12790dca2b8b62f86609bed6335be9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/24/2019
-ms.locfileid: "68948333"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68993398"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>ASP.NET Core Blazor 시작 하기
 
@@ -25,7 +25,7 @@ Blazor 시작 하기:
 1. 명령 셸에서 다음 명령을 실행 하 여 Blazor 템플릿을 설치 합니다.
 
    ```console
-   dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.0.0-preview7.19365.7
+   dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.0.0-preview8.19405.7
    ```
 
 1. 선택한 도구에 대 한 지침을 따르세요.
@@ -40,12 +40,12 @@ Blazor 시작 하기:
 
    4 \. **프로젝트 이름** 필드에 프로젝트 이름을 제공하거나 기본 프로젝트 이름을 수락합니다. **위치** 항목이 올바른지 확인 하거나 프로젝트의 위치를 제공 합니다. **만들기**를 선택합니다.
 
-   5\. Blazor 클라이언트 쪽 환경에서는 **Blazor (클라이언트 쪽)** 템플릿을 선택 합니다. Blazor 서버 쪽 환경에서는 **Blazor 서버 앱** 템플릿을 선택 합니다. **만들기**를 선택합니다. 서버 쪽 및 클라이언트 쪽의 두 Blazor 호스팅 모델에 대 한 자세한 내용은을 참조 <xref:blazor/hosting-models>하십시오.
+   5\. 클라이언트 쪽 환경을 Blazor **Blazor Weasembomapp** 템플릿을 선택 합니다. Blazor 서버 쪽 환경에서는 **Blazor 서버 앱** 템플릿을 선택 합니다. **만들기**를 선택합니다. 서버 쪽 및 클라이언트 쪽의 두 Blazor 호스팅 모델에 대 한 자세한 내용은을 참조 <xref:blazor/hosting-models>하십시오.
 
    6\. **F5** 키를 눌러 앱을 실행합니다.
 
    > [!NOTE]
-   > ASP.NET Core Blazor (Preview 6 이전 버전)의 이전 미리 보기 릴리스에 대해 Blazor Visual Studio 확장을 설치한 경우 Preview 7에서 확장을 제거할 수 있습니다. 이제 명령 셸에서 Blazor 템플릿을 설치 하면 Visual Studio에서 템플릿을 노출 하기에 충분 합니다.
+   > ASP.NET Core Blazor (Preview 6 이전 버전)의 이전 미리 보기 릴리스에 대해 Blazor Visual Studio 확장을 설치한 경우 확장을 제거할 수 있습니다. 이제 명령 셸에서 Blazor 템플릿을 설치 하면 Visual Studio에서 템플릿을 노출 하기에 충분 합니다.
 
    # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -56,13 +56,13 @@ Blazor 시작 하기:
    3\. Blazor 클라이언트 쪽 환경의 경우 명령 셸에서 다음 명령을 실행 합니다.
 
       ```console
-      dotnet new blazor -o WebApplication1
+      dotnet new blazorwasm -o WebApplication1
       ```
 
       Blazor 서버 쪽 환경의 경우 명령 셸에서 다음 명령을 실행 합니다.
 
       ```console
-      dotnet new blazorserverside -o WebApplication1
+      dotnet new blazorserver -o WebApplication1
       ```
 
       서버 쪽 및 클라이언트 쪽의 두 Blazor 호스팅 모델에 대 한 자세한 내용은을 참조 <xref:blazor/hosting-models>하십시오.
@@ -85,7 +85,7 @@ Blazor 시작 하기:
 
    3\. In the sidebar, select **.NET Core** > **App**.
 
-   4\. For a Blazor server-side experience, select the **ASP.NET Core Blazor Server App** template. For a Blazor client-side experience, select the **ASP.NET Core Blazor WebAssembly App** template. Select **Next**. For information on the two Blazor hosting models, server-side and client-side, see <xref:blazor/hosting-models>.
+   4\. For a Blazor server-side experience, select the **Blazor Server App** template. For a Blazor client-side experience, select the **Blazor WebAssembly App** template. Select **Next**. For information on the two Blazor hosting models, server-side and client-side, see <xref:blazor/hosting-models>.
 
    5\. The **Target Framework** defaults to **.NET Core 3.0**. Select **Next**.
 
@@ -100,7 +100,7 @@ Blazor 시작 하기:
    Blazor 클라이언트 쪽 환경의 경우 명령 셸에서 다음 명령을 실행 합니다.
 
    ```console
-   dotnet new blazor -o WebApplication1
+   dotnet new blazorwasm -o WebApplication1
    cd WebApplication1
    dotnet run
    ```
@@ -108,7 +108,7 @@ Blazor 시작 하기:
    Blazor 서버 쪽 환경의 경우 명령 셸에서 다음 명령을 실행 합니다.
 
    ```console
-   dotnet new blazorserverside -o WebApplication1
+   dotnet new blazorserver -o WebApplication1
    cd WebApplication1
    dotnet run
    ```
@@ -152,7 +152,7 @@ HTML 구문을 사용 하 여 구성 요소를 다른 구성 요소에 추가 �
 
 구성 요소 매개 변수는 자식 구성 요소에 대 한 속성을 설정할 수 있도록 하는 특성 또는 [자식 콘텐츠](xref:blazor/components#child-content)를 사용 하 여 지정 됩니다. `Counter` 구성 요소에 매개 변수를 추가 하려면 `@code` 구성 요소의 블록을 업데이트 합니다.
 
-* 특성`[Parameter]` 을 사용 하 `IncrementAmount` 여에 대 한 속성을 추가 합니다.
+* 특성`[Parameter]` 을 사용 하 여 `IncrementAmount` 에 대 한 public 속성을 추가 합니다.
 * `currentCount` 값을 늘릴 때 `IncrementAmount`를 사용하도록 `IncrementCount` 메서드를 변경합니다.
 
 *Pages/Counter.razor*:

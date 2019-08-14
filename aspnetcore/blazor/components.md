@@ -5,14 +5,14 @@ description: 데이터에 바인딩하고, 이벤트를 처리 하 고, 구성 �
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/02/2019
+ms.date: 08/13/2019
 uid: blazor/components
-ms.openlocfilehash: 43457bffd748ebba68cc86d33fdeb98dc419704b
-ms.sourcegitcommit: 776367717e990bdd600cb3c9148ffb905d56862d
+ms.openlocfilehash: a95c186d30eaf342f10ecbe6f7add242d4679a0f
+ms.sourcegitcommit: 89fcc6cb3e12790dca2b8b62f86609bed6335be9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/09/2019
-ms.locfileid: "68948433"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68993411"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -26,7 +26,9 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 구성 요소는 및 HTML 태그의 C# 조합을 사용 하 여 [razor](xref:mvc/views/razor) 구성 요소 파일 (*razor*)에서 구현 됩니다. Blazor의 구성 요소는 공식적으로 *Razor 구성 요소*라고 합니다.
 
-*. Cshtml* 파일 확장명을 사용 하 여 구성 요소를 작성할 수 있습니다. 프로젝트 파일의 MSBuild속성을사용하여구성요소인cshtml파일을식별`_RazorComponentInclude` 합니다. 예를 들어 *Pages* 폴더 아래의 모든 *Cshtml* 파일을 Razor 구성 요소 파일로 처리 하도록 지정 하는 앱이 있습니다.
+구성 요소의 이름은 대문자로 시작 해야 합니다. 예를 들어 *MyCoolComponent* 는 유효 하며 *MyCoolComponent* 은 유효 하지 않습니다.
+
+MSBuild 속성을 `_RazorComponentInclude` 사용 하 여 파일이 Razor 구성 요소 파일로 식별 되는 *경우에* 는이 파일 확장명을 사용 하 여 구성 요소를 작성할 수 있습니다. 예를 들어 *Pages* 폴더 아래의 모든 *Cshtml* 파일을 Razor 구성 요소 파일로 처리 하도록 지정 하는 앱이 있습니다.
 
 ```xml
 <PropertyGroup>
@@ -79,9 +81,11 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 구성 요소를 렌더링 하는 방법과 구성 요소 상태가 Blazor 서버 쪽 앱에서 관리 되는 방법에 대 한 <xref:blazor/hosting-models> 자세한 내용은 문서를 참조 하세요.
 
-## <a name="using-components"></a>구성 요소 사용
+## <a name="use-components"></a>구성 요소 사용
 
 구성 요소에는 HTML 요소 구문을 사용 하 여 선언 함으로써 다른 구성 요소가 포함 될 수 있습니다. 구성 요소 사용을 위한 태그는 태그 이름이 구성 요소 유형인 HTML 태그처럼 보입니다.
+
+특성 바인딩은 대/소문자를 구분 합니다. 예 `@bind` 를 들어는 유효 하며 `@Bind` 는 유효 하지 않습니다.
 
 *인덱스 razor* 의 다음 태그는 인스턴스를 `HeadingComponent` 렌더링 합니다.
 
@@ -91,9 +95,11 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 [!code-cshtml[](common/samples/3.x/BlazorSample/Components/HeadingComponent.razor)]
 
+구성 요소에 구성 요소 이름과 일치 하지 않는 대문자 첫 글자가 포함 된 HTML 요소가 포함 된 경우 요소에 예기치 않은 이름이 있음을 나타내는 경고가 내보내집니다. 구성 요소 네임 스페이스에 대 한 문을추가하면구성요소를사용할수있게되므로경고가제거됩니다.`@using`
+
 ## <a name="component-parameters"></a>구성 요소 매개 변수
 
-구성 요소에는 `[Parameter]` 특성을 사용 하는 구성 요소 클래스에서 속성 (일반적으로 public이 *아닌*)을 사용 하 여 정의 되는 구성 요소 *매개 변수가*있을 수 있습니다. 특성을 사용하여 태그에서 구성 요소의 인수를 지정합니다.
+구성 요소는 `[Parameter]` 특성을 사용 하 여 구성 요소 클래스의 공용 속성을 사용 하 여 정의 되는 *구성 요소 매개 변수*를 포함할 수 있습니다. 특성을 사용하여 태그에서 구성 요소의 인수를 지정합니다.
 
 *Components/ChildComponent. razor*:
 
@@ -142,19 +148,19 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 @code {
     [Parameter]
-    private string Maxlength { get; set; } = "10";
+    public string Maxlength { get; set; } = "10";
 
     [Parameter]
-    private string Placeholder { get; set; } = "Input placeholder text";
+    public string Placeholder { get; set; } = "Input placeholder text";
 
     [Parameter]
-    private string Required { get; set; } = "required";
+    public string Required { get; set; } = "required";
 
     [Parameter]
-    private string Size { get; set; } = "50";
+    public string Size { get; set; } = "50";
 
     [Parameter]
-    private Dictionary<string, object> InputAttributes { get; set; } =
+    public Dictionary<string, object> InputAttributes { get; set; } =
         new Dictionary<string, object>()
         {
             { "maxlength", "10" },
@@ -187,8 +193,8 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 ```cshtml
 @code {
-    [Parameter(CaptureUnmatchedValues = true)]
-    private Dictionary<string, object> InputAttributes { get; set; }
+    [Parameter(CaptureUnmatchedAttributes = true)]
+    public Dictionary<string, object> InputAttributes { get; set; }
 }
 ```
 
@@ -224,6 +230,33 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 요소가 `onchange`포커스를 잃을 때 발생 하는와 달리 `oninput` 는 텍스트 상자의 값이 변경 될 때 발생 합니다.
 
+**전역화**
+
+`@bind`값은 현재 문화권의 규칙을 사용 하 여 표시 및 구문 분석을 위해 형식이 지정 됩니다.
+
+현재 문화권은 <xref:System.Globalization.CultureInfo.CurrentCulture?displayProperty=fullName> 속성에서 액세스할 수 있습니다.
+
+[InvariantCulture](xref:System.Globalization.CultureInfo.InvariantCulture) 는 다음 필드 형식 (`<input type="{TYPE}" />`)에 사용 됩니다.
+
+* `date`
+* `number`
+
+이전 필드 형식:
+
+* 적절 한 브라우저 기반 서식 지정 규칙을 사용 하 여 표시 됩니다.
+* 자유 형식 텍스트를 포함할 수 없습니다.
+* 브라우저의 구현에 따라 사용자 상호 작용 특성을 제공 합니다.
+
+다음 필드 형식은 특정 형식 지정 요구 사항을 가지 며 현재 Blazor에서 지원 되지 않습니다. 모든 주요 브라우저에서 지원 되지 않기 때문입니다.
+
+* `datetime-local`
+* `month`
+* `week`
+
+`@bind`값을 구문 분석 하 고 <xref:System.Globalization.CultureInfo?displayProperty=fullName> 형식을 지정 하기 위해 매개변수를지원합니다.`@bind:culture` `date` 및`number` 필드 형식을 사용할 때는 문화권을 지정 하지 않는 것이 좋습니다. `date`및 `number` 에는 필수 문화권을 제공 하는 기본 제공 Blazor 지원이 있습니다.
+
+사용자의 문화권을 설정 하는 방법에 대 한 자세한 내용은 [지역화](#localization) 섹션을 참조 하십시오.
+
 **서식 문자열**
 
 데이터 바인딩은를 사용 <xref:System.DateTime> 하 여 [@bind:format](xref:mvc/views/razor#bind)형식 문자열과 함께 작동 합니다. 통화 또는 숫자 형식과 같은 다른 형식 식은 현재 사용할 수 없습니다.
@@ -233,11 +266,20 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 @code {
     [Parameter]
-    private DateTime StartDate { get; set; } = new DateTime(2020, 1, 1);
+    public DateTime StartDate { get; set; } = new DateTime(2020, 1, 1);
 }
 ```
 
+위의 코드에서 요소의 필드 형식 `<input>` (`type`)은 기본적으로로 `text`설정 됩니다. `@bind:format`는 다음 .NET 형식의 바인딩에 대해 지원 됩니다.
+
+* <xref:System.DateTime?displayProperty=fullName>
+* <xref:System.DateTime?displayProperty=fullName>?
+* <xref:System.DateTimeOffset?displayProperty=fullName>
+* <xref:System.DateTimeOffset?displayProperty=fullName>?
+
 특성 `@bind:format` `value` 은 요소의`<input>` 에 적용할 날짜 형식을 지정 합니다. 형식은 `onchange` 이벤트가 발생할 때 값을 구문 분석 하는 데도 사용 됩니다.
+
+Blazor에서 날짜 형식을 기본적 `date` 으로 지원 하기 때문에 필드 형식의 형식을 지정 하지 않는 것이 좋습니다.
 
 **구성 요소 매개 변수**
 
@@ -252,10 +294,10 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 @code {
     [Parameter]
-    private int Year { get; set; }
+    public int Year { get; set; }
 
     [Parameter]
-    private EventCallback<int> YearChanged { get; set; }
+    public EventCallback<int> YearChanged { get; set; }
 }
 ```
 
@@ -278,7 +320,7 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 @code {
     [Parameter]
-    private int ParentYear { get; set; } = 1978;
+    public int ParentYear { get; set; } = 1978;
 
     private void ChangeTheYear()
     {
@@ -516,7 +558,7 @@ await callback.InvokeAsync(arg);
 
 @code {
     [Parameter]
-    private IEnumerable<Person> People { get; set; }
+    public IEnumerable<Person> People { get; set; }
 }
 ```
 
@@ -532,7 +574,7 @@ await callback.InvokeAsync(arg);
 
 @code {
     [Parameter]
-    private IEnumerable<Person> People { get; set; }
+    public IEnumerable<Person> People { get; set; }
 }
 ```
 
@@ -574,7 +616,7 @@ await callback.InvokeAsync(arg);
 * 모델 개체 인스턴스 (예: `Person` 이전 예제와 같은 인스턴스) 이렇게 하면 개체 참조 일치를 기반으로 유지 됩니다.
 * 고유 식별자 (예:, `int` `string`또는 `Guid`형식의 기본 키 값)입니다.
 
-예기치 않게 충돌 하는 값을 제공 하지 마십시오. 가 `@key="@someObject.GetHashCode()"` 제공 된 경우 관련 없는 개체의 해시 코드는 동일할 수 있으므로 예기치 않은 충돌이 발생할 수 있습니다. 동일한 부모 `@key` 내에서 충돌 방지 값을 요청 하는 경우 `@key` 에는 값이 허용 되지 않습니다.
+에 `@key` 사용 되는 값이 충돌 하지 않는지 확인 합니다. 동일한 부모 요소 내에서 충돌 방지 값이 검색 되는 경우 Blazor는 기존 요소나 구성 요소를 새 요소나 구성 요소에 명확 하 게 매핑할 수 없기 때문에 예외를 throw 합니다. 개체 인스턴스 또는 기본 키 값과 같은 고유 값만 사용 합니다.
 
 ## <a name="lifecycle-methods"></a>수명 주기 메서드
 
@@ -765,7 +807,7 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값�
 
 @code {
     [Parameter]
-    private bool IsCompleted { get; set; }
+    public bool IsCompleted { get; set; }
 }
 ```
 
@@ -1063,7 +1105,7 @@ private PermInfo Permissions { get; set; }
 @code
 {
     [Parameter]
-    private string PetDetailsQuote { get; set; }
+    public string PetDetailsQuote { get; set; }
 }
 ```
 
@@ -1191,3 +1233,123 @@ builder.AddContent(seq++, "Second");
 * 수동으로 구현 `RenderTreeBuilder` 된 논리의 긴 블록을 작성 하지 마세요. 파일 `.razor` 을 선호 하 고 컴파일러가 시퀀스 번호를 처리할 수 있도록 합니다.
 * 시퀀스 번호가 하드 코딩 된 경우 diff 알고리즘에서는 값이 증가 하는 시퀀스 번호만 필요 합니다. 초기 값과 간격은 관련이 없습니다. 한 가지 합법적인 옵션은 코드 줄 번호를 시퀀스 번호로 사용 하거나 0부터 시작 하 여 또는 수백 (또는 선호 하는 간격) 만큼 증가 하는 것입니다. 
 * Blazor는 시퀀스 번호를 사용 하지만 다른 트리 diff UI 프레임 워크는이를 사용 하지 않습니다. 시퀀스 번호가 사용 되는 경우 diff는 훨씬 더 빠르며, Blazor는 개발자가 파일을 작성 `.razor` 하는 개발자를 위해 자동으로 시퀀스 번호를 처리 하는 컴파일 단계를 활용할 수 있습니다.
+
+## <a name="localization"></a>지역화
+
+Blazor 서버 쪽 앱은 [지역화 미들웨어](xref:fundamentals/localization#localization-middleware)를 사용 하 여 지역화 됩니다. 미들웨어는 앱에서 리소스를 요청 하는 사용자에 게 적절 한 문화권을 선택 합니다.
+
+문화권은 다음 방법 중 하나를 사용 하 여 설정할 수 있습니다.
+
+* [쿠키](#cookies)
+* [문화권을 선택 하는 UI 제공](#provide-ui-to-choose-the-culture)
+
+자세한 내용과 예제를 보려면 <xref:fundamentals/localization>을 참조하십시오.
+
+### <a name="cookies"></a>쿠키
+
+지역화 문화권 쿠키는 사용자의 문화권을 유지할 수 있습니다. 쿠키는 응용 프로그램의 호스트 `OnGet` 페이지 (*Pages/host-a*)의 메서드에 의해 만들어집니다. 지역화 미들웨어는 후속 요청에서 쿠키를 읽어 사용자의 culture를 설정 합니다. 
+
+쿠키를 사용 하면 WebSocket 연결이 문화권을 올바르게 전파할 수 있습니다. 지역화 체계가 URL 경로 또는 쿼리 문자열을 기반으로 하는 경우 스키마는 Websocket을 사용 하지 못할 수 있으므로 문화권이 유지 되지 않습니다. 따라서 지역화 문화권 쿠키를 사용 하는 것이 좋습니다.
+
+문화권이 지역화 쿠키에 유지 되는 경우 모든 기술을 사용 하 여 문화권을 할당할 수 있습니다. 서버 쪽 ASP.NET Core에 대해 설정 된 지역화 체계가 앱에 이미 있는 경우 앱의 기존 지역화 인프라를 계속 사용 하 고 앱의 체계 내에서 지역화 문화권 쿠키를 설정 합니다.
+
+다음 예제에서는 지역화 미들웨어에서 읽을 수 있는 쿠키의 현재 문화권을 설정 하는 방법을 보여 줍니다. Blazor 서버 쪽 앱에서 다음 내용을 사용 하 여 *Pages/Host. cshtml* 파일을 만듭니다.
+
+```csharp
+public class HostModel : PageModel
+{
+    public void OnGet()
+    {
+        HttpContext.Response.Cookies.Append(
+            CookieRequestCultureProvider.DefaultCookieName,
+            CookieRequestCultureProvider.MakeCookieValue(
+                new RequestCulture(
+                    CultureInfo.CurrentCulture,
+                    CultureInfo.CurrentUICulture)));
+    }
+}
+```
+
+지역화는 앱에서 처리 됩니다.
+
+1. 브라우저가 앱에 초기 HTTP 요청을 보냅니다.
+1. 문화권이 지역화 미들웨어에 의해 할당 됩니다.
+1. _Host `OnGet` 의 메서드 는 응답의 일부로 쿠키의 문화권을 유지 합니다.
+1. 브라우저는 WebSocket 연결을 열어 대화형 Blazor 서버 쪽 세션을 만듭니다.
+1. 지역화 미들웨어는 쿠키를 읽고 문화권을 할당 합니다.
+1. Blazor 서버 쪽 세션이 올바른 문화권으로 시작 합니다.
+
+## <a name="provide-ui-to-choose-the-culture"></a>문화권을 선택 하는 UI 제공
+
+사용자가 문화권을 선택할 수 있도록 UI를 제공 하려면 *리디렉션 기반 방법을* 사용 하는 것이 좋습니다. 이 프로세스는 사용자가 보안 리소스&mdash;에 액세스 하려고 할 때 사용자가 로그인 페이지로 리디렉션되고 다시 원래 리소스로 리디렉션되는 경우와 비슷합니다. 
+
+앱은 컨트롤러에 대 한 리디렉션을 통해 사용자가 선택한 문화권을 유지 합니다. 컨트롤러는 사용자가 선택한 문화권을 쿠키로 설정 하 고 사용자를 다시 원래 URI로 리디렉션합니다.
+
+서버에서 HTTP 끝점을 설정 하 여 사용자가 선택한 문화권을 쿠키에 설정 하 고 다시 원래 URI로 리디렉션을 수행 합니다.
+
+```csharp
+[Route("[controller]/[action]")]
+public class CultureController : Controller
+{
+    public IActionResult SetCulture(string culture, string redirectUri)
+    {
+        if (culture != null)
+        {
+            HttpContext.Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(
+                    new RequestCulture(culture)));
+        }
+
+        return LocalRedirect(redirectUri);
+    }
+}
+```
+
+> [!WARNING]
+> `LocalRedirect` 작업 결과를 사용 하 여 열린 리디렉션 공격을 방지 합니다. 자세한 내용은 <xref:security/preventing-open-redirects>을 참조하세요.
+
+다음 구성 요소는 사용자가 문화권을 선택할 때 초기 리디렉션을 수행 하는 방법의 예를 보여 줍니다.
+
+```cshtml
+@inject IUriHelper UriHelper
+
+<h3>Select your language</h3>
+
+<select @onchange="OnSelected">
+    <option>Select...</option>
+    <option value="en-US">English</option>
+    <option value="fr-FR">Français</option>
+</select>
+
+@code {
+    private double textNumber;
+
+    private void OnSelected(UIChangeEventArgs e)
+    {
+        var culture = (string)e.Value;
+        var uri = new Uri(UriHelper.GetAbsoluteUri())
+            .GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
+        var query = $"?culture={Uri.EscapeDataString(culture)}&" +
+            $"redirectUri={Uri.EscapeDataString(uri)}";
+
+        UriHelper.NavigateTo("/Culture/SetCulture" + query, forceLoad: true);
+    }
+}
+```
+
+### <a name="use-net-localization-scenarios-in-blazor-apps"></a>Blazor apps에서 .NET 지역화 시나리오 사용
+
+Blazor apps 내에서 다음과 같은 .NET 지역화 및 세계화 시나리오를 사용할 수 있습니다.
+
+* . NET의 리소스 시스템
+* 문화권별 숫자 및 날짜 형식 지정
+
+Blazor의 `@bind` 기능은 사용자의 현재 문화권에 따라 세계화를 수행 합니다. 자세한 내용은 [데이터 바인딩](#data-binding) 섹션을 참조 하세요.
+
+제한 된 ASP.NET Core의 지역화 시나리오 집합이 현재 지원 됩니다.
+
+* `IStringLocalizer<>`는 Blazor apps에서 *지원 됩니다* .
+* `IHtmlLocalizer<>`, `IViewLocalizer<>`및 데이터 주석 지역화는 MVC 시나리오 ASP.NET Core Blazor apps에서 **지원 되지 않습니다** .
+
+자세한 내용은 <xref:fundamentals/localization>을 참조하세요.

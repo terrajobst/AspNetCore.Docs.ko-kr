@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/01/2019
 uid: blazor/hosting-models
-ms.openlocfilehash: 9dd96ff6e3539bf1c3e932b33776b16d0fbb2d34
-ms.sourcegitcommit: 849af69ee3c94cdb9fd8fa1f1bb8f5a5dda7b9eb
+ms.openlocfilehash: 64393e826cb17550085f468f5916fca55973908f
+ms.sourcegitcommit: 89fcc6cb3e12790dca2b8b62f86609bed6335be9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/22/2019
-ms.locfileid: "68948293"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68993385"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor 호스팅 모델
 
@@ -28,10 +28,9 @@ Blazor에 대 한 주 호스팅 모델이 브라우저에서 클라이언트 쪽
 
 ![클라이언트 쪽 Blazor: Blazor 앱은 브라우저 내부의 UI 스레드에서 실행 됩니다.](hosting-models/_static/client-side.png)
 
-클라이언트 쪽 호스팅 모델을 사용 하 여 Blazor 앱을 만들려면 다음 템플릿 중 하나를 사용 합니다.
+클라이언트 쪽 호스팅 모델을 사용 하 여 Blazor 앱을 만들려면 **Blazor Weasembomapp** 템플릿 ([dotnet new blazorwasm](/dotnet/core/tools/dotnet-new))을 사용 합니다.
 
-* **Blazor (클라이언트 쪽)** ([dotnet new blazor](/dotnet/core/tools/dotnet-new)) &ndash; 정적 파일 집합으로 배포 됩니다.
-* **Blazor (ASP.NET Core 호스팅)** ([dotnet new blazorhosted](/dotnet/core/tools/dotnet-new)) &ndash; ASP.NET Core 서버에서 호스팅됩니다. ASP.NET Core 앱은 Blazor 앱을 클라이언트에 제공 합니다. Blazor 클라이언트 쪽 앱은 web API 호출 또는 [SignalR](xref:signalr/introduction)를 사용 하 여 네트워크를 통해 서버와 상호 작용할 수 있습니다.
+**Blazor WebAssembly 앱** 템플릿을 선택한 후에는 **ASP.NET Core hosted** 확인란을 선택 하 여 ASP.NET Core 백 엔드를 사용 하도록 앱을 구성 하는 옵션이 있습니다 ([dotnet new blazorwasm--호스팅](/dotnet/core/tools/dotnet-new)). ASP.NET Core 앱은 Blazor 앱을 클라이언트에 제공 합니다. Blazor 클라이언트 쪽 앱은 web API 호출 또는 [SignalR](xref:signalr/introduction)를 사용 하 여 네트워크를 통해 서버와 상호 작용할 수 있습니다.
 
 템플릿에는를 처리 하는 *blazor* 스크립트가 포함 됩니다.
 
@@ -58,7 +57,7 @@ Blazor에 대 한 주 호스팅 모델이 브라우저에서 클라이언트 쪽
 
 ![브라우저는 SignalR 연결을 통해 서버의 앱 (ASP.NET Core 앱 내에서 호스트)과 상호 작용 합니다.](hosting-models/_static/server-side.png)
 
-서버 쪽 호스팅 모델을 사용 하 여 Blazor 앱을 만들려면 ASP.NET Core **Blazor Server 앱** 템플릿 ([dotnet new blazorserverside](/dotnet/core/tools/dotnet-new))을 사용 합니다. ASP.NET Core 앱은 서버 쪽 앱을 호스팅하고 클라이언트에서 연결 하는 SignalR 끝점을 만듭니다.
+서버 쪽 호스팅 모델을 사용 하 여 Blazor 앱을 만들려면 ASP.NET Core **Blazor Server 앱** 템플릿 ([dotnet new blazorserver](/dotnet/core/tools/dotnet-new))을 사용 합니다. ASP.NET Core 앱은 서버 쪽 앱을 호스팅하고 클라이언트에서 연결 하는 SignalR 끝점을 만듭니다.
 
 ASP.NET Core 앱은 추가할 앱 `Startup` 클래스를 참조 합니다.
 

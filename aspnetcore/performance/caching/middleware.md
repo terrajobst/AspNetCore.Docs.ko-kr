@@ -5,14 +5,14 @@ description: ASP.NET Core에서 응답 캐싱 미들웨어를 구성하고 사�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/08/2019
+ms.date: 08/09/2019
 uid: performance/caching/middleware
-ms.openlocfilehash: 6371f42b100f70c6042064a6372c7b9e41fd5c73
-ms.sourcegitcommit: 776367717e990bdd600cb3c9148ffb905d56862d
+ms.openlocfilehash: 838a08c12316d218501f26d5905f9e31ab93dfc9
+ms.sourcegitcommit: 89fcc6cb3e12790dca2b8b62f86609bed6335be9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/09/2019
-ms.locfileid: "68914988"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68994223"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>ASP.NET Core의 응답 캐싱 미들웨어
 
@@ -24,57 +24,57 @@ ms.locfileid: "68914988"
 
 ## <a name="configuration"></a>Configuration
 
-[AspNetCore 메타 패키지](xref:fundamentals/metapackage-app) 를 사용 하거나 [ResponseCaching](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCaching/) 패키지에 대 한 패키지 참조를 추가 합니다.
+::: moniker range=">= aspnetcore-3.0"
+
+응답 캐싱 미들웨어는 ASP.NET Core 앱에 암시적으로 추가 되는 [AspNetCore ResponseCaching](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCaching/) 패키지에 의해 사용할 수 됩니다.
 
 에서 `Startup.ConfigureServices`응답 캐싱 미들웨어를 서비스 컬렉션에 추가 합니다.
 
-::: moniker range=">= aspnetcore-3.0"
-
 [!code-csharp[](middleware/samples/3.x/ResponseCachingMiddleware/Startup.cs?name=snippet1&highlight=3)]
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.0"
-
-[!code-csharp[](middleware/samples/2.x/ResponseCachingMiddleware/Startup.cs?name=snippet1&highlight=3)]
-
-::: moniker-end
 
 <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching*> 의`Startup.Configure`요청 처리 파이프라인에 미들웨어를 추가 하는 확장 메서드를 사용 하 여 미들웨어를 사용 하도록 앱을 구성 합니다.
 
-::: moniker range=">= aspnetcore-3.0"
-
 [!code-csharp[](middleware/samples/3.x/ResponseCachingMiddleware/Startup.cs?name=snippet2&highlight=16)]
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.0"
-
-[!code-csharp[](middleware/samples/2.x/ResponseCachingMiddleware/Startup.cs?name=snippet2&highlight=14)]
-
-::: moniker-end
 
 샘플 앱은 다음 요청에 대 한 캐싱을 제어 하는 헤더를 추가 합니다.
 
 * [Cache-control](https://tools.ietf.org/html/rfc7234#section-5.2) &ndash; 최대 10 초 동안 캐시할 수 있는 응답을 캐시 합니다.
 * [다름](https://tools.ietf.org/html/rfc7231#section-7.1.4) 후속 요청의 [`Accept-Encoding`](https://tools.ietf.org/html/rfc7231#section-5.3.4) 헤더가 원래 요청의 헤더와 일치 하는 경우에만 캐시 된 응답을 제공 하도록 미들웨어를 구성 합니다. &ndash;
 
-::: moniker range=">= aspnetcore-3.0"
-
 [!code-csharp[](middleware/samples_snippets/3.x/AddHeaders.cs)]
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.0"
-
-[!code-csharp[](middleware/samples_snippets/2.x/AddHeaders.cs)]
-
-::: moniker-end
 
 응답 캐싱 미들웨어는 상태 코드가 200(정상)인 서버 응답만 캐시합니다. [오류 페이지](xref:fundamentals/error-handling)를 비롯한 다른 모든 응답은 미들웨어에 의해 무시됩니다.
 
 > [!WARNING]
 > 인증된 클라이언트에 대한 콘텐츠를 포함하고 있는 응답은 미들웨어가 해당 응답을 저장하거나 제공하는 것을 막을 수 있도록 반드시 캐시가 불가능한 것으로 표시해야 합니다. 미들웨어가 캐싱할 수 있는 응답인지 여부를 판단하는 방법에 대한 자세한 내용은 [캐싱 조건](#conditions-for-caching)을 참고하시기 바랍니다.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+[AspNetCore 메타 패키지](xref:fundamentals/metapackage-app) 를 사용 하거나 [ResponseCaching](https://www.nuget.org/packages/Microsoft.AspNetCore.ResponseCaching/) 패키지에 대 한 패키지 참조를 추가 합니다.
+
+에서 `Startup.ConfigureServices`응답 캐싱 미들웨어를 서비스 컬렉션에 추가 합니다.
+
+[!code-csharp[](middleware/samples/2.x/ResponseCachingMiddleware/Startup.cs?name=snippet1&highlight=3)]
+
+<xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching*> 의`Startup.Configure`요청 처리 파이프라인에 미들웨어를 추가 하는 확장 메서드를 사용 하 여 미들웨어를 사용 하도록 앱을 구성 합니다.
+
+[!code-csharp[](middleware/samples/2.x/ResponseCachingMiddleware/Startup.cs?name=snippet2&highlight=14)]
+
+샘플 앱은 다음 요청에 대 한 캐싱을 제어 하는 헤더를 추가 합니다.
+
+* [Cache-control](https://tools.ietf.org/html/rfc7234#section-5.2) &ndash; 최대 10 초 동안 캐시할 수 있는 응답을 캐시 합니다.
+* [다름](https://tools.ietf.org/html/rfc7231#section-7.1.4) 후속 요청의 [`Accept-Encoding`](https://tools.ietf.org/html/rfc7231#section-5.3.4) 헤더가 원래 요청의 헤더와 일치 하는 경우에만 캐시 된 응답을 제공 하도록 미들웨어를 구성 합니다. &ndash;
+
+[!code-csharp[](middleware/samples_snippets/2.x/AddHeaders.cs)]
+
+응답 캐싱 미들웨어는 상태 코드가 200(정상)인 서버 응답만 캐시합니다. [오류 페이지](xref:fundamentals/error-handling)를 비롯한 다른 모든 응답은 미들웨어에 의해 무시됩니다.
+
+> [!WARNING]
+> 인증된 클라이언트에 대한 콘텐츠를 포함하고 있는 응답은 미들웨어가 해당 응답을 저장하거나 제공하는 것을 막을 수 있도록 반드시 캐시가 불가능한 것으로 표시해야 합니다. 미들웨어가 캐싱할 수 있는 응답인지 여부를 판단하는 방법에 대한 자세한 내용은 [캐싱 조건](#conditions-for-caching)을 참고하시기 바랍니다.
+
+::: moniker-end
 
 ## <a name="options"></a>변수
 
