@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/13/2019
 uid: blazor/components
-ms.openlocfilehash: 8cb2dc4c3cd22fe71fe15c22762948f9dcd3c08f
-ms.sourcegitcommit: f5f0ff65d4e2a961939762fb00e654491a2c772a
+ms.openlocfilehash: 752f49f020acf26efcb304ed5e28e27c478dac83
+ms.sourcegitcommit: 7a46973998623aead757ad386fe33602b1658793
 ms.translationtype: MT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 08/15/2019
-ms.locfileid: "69030356"
+ms.locfileid: "69487587"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -523,9 +523,10 @@ await callback.InvokeAsync(arg);
 
 * 자식 구성 요소에 [특성을추가합니다.@ref](xref:mvc/views/razor#ref)
 * 자식 구성 요소와 동일한 유형으로 필드를 정의 합니다.
+* 지원 필드 생성을 억제 하는 매개변수를제공합니다.`@ref:suppressField` 자세한 내용은 [3.0.0 @ref 에서에 대 한 자동 지원 필드 지원 제거-preview9](https://github.com/aspnet/Announcements/issues/381)를 참조 하세요.
 
 ```cshtml
-<MyLoginDialog @ref="loginDialog" ... />
+<MyLoginDialog @ref="loginDialog" @ref:suppressField ... />
 
 @code {
     private MyLoginDialog loginDialog;

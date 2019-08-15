@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/13/2019
 uid: blazor/javascript-interop
-ms.openlocfilehash: ffd25fe0288159681f7fc052fc09e1f6fc425404
-ms.sourcegitcommit: f5f0ff65d4e2a961939762fb00e654491a2c772a
+ms.openlocfilehash: 00ea14ca95c328b5f8779785a92aa0720a96eb05
+ms.sourcegitcommit: 7a46973998623aead757ad386fe33602b1658793
 ms.translationtype: MT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 08/15/2019
-ms.locfileid: "69030309"
+ms.locfileid: "69487551"
 ---
 # <a name="aspnet-core-blazor-javascript-interop"></a>ASP.NET Core Blazor JavaScript interop
 
@@ -125,11 +125,12 @@ JavaScript 파일 `<script>` 을 참조 하는 태그를 *wwwroot/index.html* �
 
 * HTML 요소에 특성을 추가 합니다. `@ref`
 * 이름이 `ElementReference` 특성`@ref` 의 값과 일치 하는 형식의 필드를 정의 합니다.
+* 지원 필드 생성을 억제 하는 매개변수를제공합니다.`@ref:suppressField` 자세한 내용은 [3.0.0 @ref 에서에 대 한 자동 지원 필드 지원 제거-preview9](https://github.com/aspnet/Announcements/issues/381)를 참조 하세요.
 
 다음 예제에서는 `username` `<input>` 요소에 대 한 참조를 캡처하는 방법을 보여 줍니다.
 
 ```cshtml
-<input @ref="username" ... />
+<input @ref="username" @ref:suppressField ... />
 
 @code {
     ElementReference username;
@@ -158,7 +159,7 @@ window.exampleJsFunctions = {
 ```cshtml
 @inject IJSRuntime JSRuntime
 
-<input @ref="username" />
+<input @ref="username" @ref:suppressField />
 <button @onclick="SetFocus">Set focus on username</button>
 
 @code {
@@ -188,7 +189,7 @@ public static Task Focus(this ElementReference elementRef, IJSRuntime jsRuntime)
 @inject IJSRuntime JSRuntime
 @using JsInteropClasses
 
-<input @ref="username" />
+<input @ref="username" @ref:suppressField />
 <button @onclick="SetFocus">Set focus on username</button>
 
 @code {

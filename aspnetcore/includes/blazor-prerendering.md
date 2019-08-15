@@ -6,10 +6,10 @@ Blazor 서버 쪽 앱은 렌더링 되지 않지만 브라우저와의 연결이
 @using Microsoft.JSInterop
 @inject IJSRuntime JSRuntime
 
-<input @ref="myInput" value="Value set during render" />
+<input @ref="myInput" @ref:suppressField value="Value set during render" />
 
 @code {
-    private ElementRef myInput;
+    private ElementReference myInput;
 
     protected override void OnAfterRender()
     {
@@ -39,12 +39,12 @@ Blazor 서버 쪽 앱은 렌더링 되지 않지만 브라우저와의 연결이
 
 <p>
     Set value via JS interop call:
-    <input id="val-set-by-interop" @ref="myElem" />
+    <input id="val-set-by-interop" @ref="myElem" @ref:suppressField />
 </p>
 
 @code {
     private string infoFromJs;
-    private ElementRef myElem;
+    private ElementReference myElem;
 
     protected override async Task OnAfterRenderAsync()
     {
