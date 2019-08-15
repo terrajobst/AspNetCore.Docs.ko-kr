@@ -1,30 +1,30 @@
 ---
-title: ASP.NET core 인증 및 Id 마이그레이션
+title: ASP.NET Core 인증 및 Id 마이그레이션
 author: ardalis
-description: ASP.NET Core MVC 프로젝트에 ASP.NET MVC 프로젝트에서 인증 및 id를 마이그레이션하는 방법에 알아봅니다.
+description: ASP.NET MVC 프로젝트에서 ASP.NET Core MVC 프로젝트로 인증 및 id를 마이그레이션하는 방법에 대해 알아봅니다.
 ms.author: riande
 ms.date: 10/14/2016
 uid: migration/identity
-ms.openlocfilehash: 72e62e78e37325ec47d54abbc11a875ae87fb63a
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: f821930dbd36de18db31104cddf34c563009a506
+ms.sourcegitcommit: 476ea5ad86a680b7b017c6f32098acd3414c0f6c
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64891880"
+ms.lasthandoff: 08/14/2019
+ms.locfileid: "69022276"
 ---
-# <a name="migrate-authentication-and-identity-to-aspnet-core"></a>ASP.NET core 인증 및 Id 마이그레이션
+# <a name="migrate-authentication-and-identity-to-aspnet-core"></a>ASP.NET Core 인증 및 Id 마이그레이션
 
 작성자: [Steve Smith](https://ardalis.com/)
 
-이전 문서에서는 우리가 [ASP.NET Core MVC에서 ASP.NET MVC 프로젝트 구성 마이그레이션](xref:migration/configuration)합니다. 이 문서에서는 등록, 로그인 및 사용자 관리 기능을 마이그레이션할 것입니다.
+이전 문서에서는 [ASP.NET mvc 프로젝트에서 ASP.NET CORE mvc로 구성을 마이그레이션](xref:migration/configuration)했습니다. 이 문서에서는 등록, 로그인 및 사용자 관리 기능을 마이그레이션합니다.
 
 ## <a name="configure-identity-and-membership"></a>Id 및 멤버 자격 구성
 
-ASP.NET MVC에서 인증 및 id 기능에 ASP.NET Id를 사용 하 여 구성 됩니다 *Startup.Auth.cs* 하 고 *IdentityConfig.cs*에 있는 합니다 *App_Start* 폴더입니다. ASP.NET Core mvc에서 이러한 기능에 구성 된 *Startup.cs*합니다.
+ASP.NET MVC에서 인증 및 id 기능은 *App_Start* 폴더에 있는 *Startup.Auth.cs* 및 *IdentityConfig.cs*의 ASP.NET Identity를 사용 하 여 구성 됩니다. ASP.NET Core MVC에서 이러한 기능은 *Startup.cs*에서 구성 됩니다.
 
-설치 합니다 `Microsoft.AspNetCore.Identity.EntityFrameworkCore` 고 `Microsoft.AspNetCore.Authentication.Cookies` NuGet 패키지.
+`Microsoft.AspNetCore.Identity.EntityFrameworkCore` 및`Microsoft.AspNetCore.Authentication.Cookies` NuGet 패키지를 설치 합니다.
 
-그런 다음 엽니다 *Startup.cs* 업데이트 및는 `Startup.ConfigureServices` Entity Framework 및 Id 서비스를 사용 하는 방법.
+그런 다음 *Startup.cs* 를 열고 메서드를 `Startup.ConfigureServices` 업데이트 하 여 Entity Framework 및 id 서비스를 사용 합니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -41,7 +41,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-이 시점에서 두 가지 유형이 있습니다 ASP.NET MVC 프로젝트에서 아직 마이그레이션하지 않은 우리는 위의 코드에서 참조: `ApplicationDbContext` 고 `ApplicationUser`입니다. 새 *모델* 폴더에서 ASP.NET Core 프로젝트를 마우스 두 클래스를 이러한 형식에 해당 하 고 추가 합니다. ASP.NET MVC 버전의 이러한 클래스를 찾을 수 있습니다 */Models/IdentityModels.cs*, 하지만 더 명확한 이므로로 마이그레이션된 프로젝트에서 클래스 파일을 하나씩 사용 됩니다.
+이 시점에서 ASP.NET MVC 프로젝트에서 아직 마이그레이션하지 않은 두 가지 형식이 위의 코드에서 참조 되었습니다. `ApplicationDbContext` 및. `ApplicationUser` ASP.NET Core 프로젝트에서 새 *모델* 폴더를 만들고 이러한 형식에 해당 하는 두 개의 클래스를 추가 합니다. */Models/IdentityModels.cs*에서 이러한 클래스의 ASP.NET MVC 버전을 찾을 수 있지만 마이그레이션된 프로젝트에서 클래스 당 파일 하나를 사용 하는 것이 더 명확 하기 때문입니다.
 
 *ApplicationUser.cs*:
 
@@ -59,7 +59,7 @@ namespace NewMvcProject.Models
 *ApplicationDbContext.cs*:
 
 ```csharp
-using Microsoft.AspNetCore.Identity.EntityFramework;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Data.Entity;
 
 namespace NewMvcProject.Models
@@ -82,9 +82,9 @@ namespace NewMvcProject.Models
 }
 ```
 
-ASP.NET Core MVC 시작 웹 프로젝트의 사용자가 많은 사용자 지정을 포함 하지 않습니다 또는 `ApplicationDbContext`합니다. 또한 모든 사용자 지정 속성 및 앱의 사용자의 메서드를 마이그레이션해야 할 실제 앱을 마이그레이션할 때는 및 `DbContext` 클래스 뿐만 아니라 앱 활용 모델 클래스입니다. 예를 들어, 경우에 `DbContext` 에 `DbSet<Album>`, 마이그레이션해야 하는 `Album` 클래스입니다.
+ASP.NET Core MVC 스타터 웹 프로젝트에는 사용자의 사용자 지정 또는 `ApplicationDbContext`가 포함 되어 있지 않습니다. 실제 앱을 마이그레이션할 때 앱이 사용 하는 다른 모델 클래스 뿐만 아니라 앱의 사용자 및 `DbContext` 클래스의 사용자 지정 속성 및 메서드도 모두 마이그레이션해야 합니다. 예를 들어에 `DbContext` `DbSet<Album>`가 있으면 `Album` 클래스를 마이그레이션해야 합니다.
 
-현재 위치에서 이러한 파일은 *Startup.cs* 파일을 업데이트 하 여 컴파일할 수 있습니다 해당 `using` 문:
+이러한 파일이 준비 되 면 해당 `using` 문을 업데이트 하 여 *Startup.cs* 파일을 컴파일할 수 있습니다.
 
 ```csharp
 using Microsoft.AspNetCore.Builder;
@@ -95,13 +95,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 ```
 
-앱 인증 및 Id 서비스를 지원 하도록 준비 되었습니다. 바로 이러한 기능이 사용자에 게 노출 해야 합니다.
+이제 앱이 인증 및 Id 서비스를 지원할 준비가 되었습니다. 이러한 기능은 사용자에 게 노출 되어야 합니다.
 
-## <a name="migrate-registration-and-login-logic"></a>등록 및 로그인 논리를 마이그레이션
+## <a name="migrate-registration-and-login-logic"></a>등록 및 로그인 논리 마이그레이션
 
-앱에 대해 구성 하는 Id 서비스와 Entity Framework 및 SQL Server를 사용 하 여 구성 하는 데이터 액세스 준비가 앱에 등록 및 로그인에 대 한 지원을 추가 합니다. 이전에 설명한 대로 [마이그레이션 프로세스의 앞부분에 나오는](xref:migration/mvc#migrate-the-layout-file) 에 대 한 참조를 주석으로 처리 했습니다 *_LoginPartial* 에서 *_Layout.cshtml*합니다. 이제 해당 코드를 반환 합니다. 주석 처리를 제거 하지만 로그인 기능을 지원 하기 위해 뷰 필요한 컨트롤러를 추가 하는 시간입니다.
+앱에 대해 구성 된 Id 서비스 및 Entity Framework 및 SQL Server를 사용 하 여 구성 된 데이터 액세스를 사용 하 여 등록에 대 한 지원을 추가 하 고 앱에 로그인 할 준비가 되었습니다. [마이그레이션 프로세스의 이전 단계에서](xref:migration/mvc#migrate-the-layout-file) *_LoginPartial* 에 대 한 참조를 주석으로 처리 했습니다 *.* 이제 해당 코드로 돌아와서, 주석 처리를 제거 하 고, 필요한 컨트롤러 및 뷰를 추가 하 여 로그인 기능을 지원할 때입니다.
 
-주석 처리를 제거 합니다 `@Html.Partial` 줄 *_Layout.cshtml*:
+Layout에서 `@Html.Partial` 줄의 주석 처리를 제거 *합니다 (_s)* .
 
 ```cshtml
       <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
@@ -111,9 +111,9 @@ using Microsoft.Extensions.DependencyInjection;
 </div>
 ```
 
-이제 라는 새 Razor 뷰를 추가 *_LoginPartial* 에 *Views/Shared* 폴더:
+이제 *_LoginPartial* 이라는 새 Razor 뷰를 *Views/Shared* 폴더에 추가 합니다.
 
-업데이트 *_LoginPartial.cshtml* 다음 코드를 사용 하 여 (모든 내용을 바꾸기):
+_LoginPartial을 다음 코드로 업데이트 *합니다* (모든 내용 바꾸기).
 
 ```cshtml
 @inject SignInManager<ApplicationUser> SignInManager
@@ -141,8 +141,8 @@ else
 }
 ```
 
-이때 브라우저에서 사이트를 새로 고칠 수 해야 합니다.
+이 시점에서 브라우저에서 사이트를 새로 고칠 수 있습니다.
 
 ## <a name="summary"></a>요약
 
-ASP.NET Core에서는 ASP.NET Id 기능을 변경 합니다. 이 문서에서는 ASP.NET Core에 ASP.NET Id의 인증 및 사용자 관리 기능을 마이그레이션하는 방법에 살펴보았습니다.
+ASP.NET Core ASP.NET Identity 기능에 대 한 변경 사항을 소개 합니다. 이 문서에서는 ASP.NET Identity의 인증 및 사용자 관리 기능을 ASP.NET Core로 마이그레이션하는 방법에 대해 살펴보았습니다.
