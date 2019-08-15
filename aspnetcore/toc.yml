@@ -547,6 +547,8 @@
       uid: grpc/migration
     - name: gRPC 서비스와 HTTP API 비교
       uid: grpc/comparison
+    - name: 문제 해결
+      uid: grpc/troubleshoot
 - name: '테스트, 디버깅 및 문제 해결'
   items:
     - name: 단위 테스트
@@ -557,9 +559,9 @@
       uid: mvc/controllers/testing
     - name: 원격 디버깅
       href: /visualstudio/debugger/remote-debugging-azure
-    - name: 스냅숏 디버깅
+    - name: 스냅샷 디버깅
       href: /azure/azure-monitor/app/snapshot-debugger?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
-    - name: Visual Studio에서 스냅숏 디버깅
+    - name: Visual Studio에서 스냅샷 디버깅
       href: /visualstudio/debugger/debug-live-azure-applications
     - name: 통합 테스트
       uid: test/integration-tests
