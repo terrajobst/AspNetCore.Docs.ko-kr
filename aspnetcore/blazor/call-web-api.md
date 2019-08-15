@@ -5,14 +5,14 @@ description: CORS (크로스-원본 자원 공유) 요청 만들기를 포함 �
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/25/2019
+ms.date: 08/13/2019
 uid: blazor/call-web-api
-ms.openlocfilehash: 1a13f9f1f9e660b39a1df584e49198c4bbb61533
-ms.sourcegitcommit: 47cc13ab90913af9a2887cef0896bb4e9aba4dd5
+ms.openlocfilehash: 60ebd01bc07da22cd1dcd0b16297ee54c97867fc
+ms.sourcegitcommit: f5f0ff65d4e2a961939762fb00e654491a2c772a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/26/2019
-ms.locfileid: "68948193"
+ms.lasthandoff: 08/15/2019
+ms.locfileid: "69030385"
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>ASP.NET Core Blazor에서 web API 호출
 
@@ -31,7 +31,7 @@ Blazor 클라이언트 쪽 예제는 샘플 앱에서 다음 구성 요소를 �
 
 ## <a name="httpclient-and-json-helpers"></a>HttpClient 및 JSON 도우미
 
-Blazor 클라이언트 쪽 응용 프로그램에서 [Httpclient](xref:fundamentals/http-requests) 는 다시 원본 서버로 요청을 만들기 위해 미리 구성 된 서비스로 사용할 수 있습니다. `HttpClient`및 JSON 도우미는 타사 웹 API 끝점을 호출 하는 데에도 사용 됩니다. `HttpClient`는 브라우저 [인출 API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 를 사용 하 여 구현 되며 동일한 원본 정책의 적용을 포함 하 여 해당 제한 사항이 적용 됩니다.
+Blazor 클라이언트 쪽 응용 프로그램에서 [Httpclient](xref:fundamentals/http-requests) 는 다시 원본 서버로 요청을 만들기 위해 미리 구성 된 서비스로 사용할 수 있습니다. JSON 도우미 `HttpClient` 를 사용 하려면에 대 `Microsoft.AspNetCore.Blazor.HttpClient`한 패키지 참조를 추가 합니다. `HttpClient`및 JSON 도우미는 타사 웹 API 끝점을 호출 하는 데에도 사용 됩니다. `HttpClient`는 브라우저 [인출 API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 를 사용 하 여 구현 되며 동일한 원본 정책의 적용을 포함 하 여 해당 제한 사항이 적용 됩니다.
 
 클라이언트의 기본 주소가 원래 서버의 주소로 설정 됩니다. 지시문을 `HttpClient` 사용 하 여 `@inject` 인스턴스를 삽입 합니다.
 
@@ -59,7 +59,7 @@ JSON 도우미 메서드는 URI (다음 예제의 웹 API)에 요청을 보내�
 
 * `GetJsonAsync`&ndash; HTTP GET 요청을 보내고 JSON 응답 본문을 구문 분석 하 여 개체를 만듭니다.
 
-  다음 코드에서는 `_todoItems` 구성 요소에 의해 표시 됩니다. 이 `GetTodoItems` 메서드는 구성 요소의 렌더링 ([OnInitAsync](xref:blazor/components#lifecycle-methods))이 완료 될 때 트리거됩니다. 전체 예제는 샘플 앱을 참조 하세요.
+  다음 코드에서는 `_todoItems` 구성 요소에 의해 표시 됩니다. 이 `GetTodoItems` 메서드는 구성 요소의 렌더링 ([oninitializedasync](xref:blazor/components#lifecycle-methods))이 완료 될 때 트리거됩니다. 전체 예제는 샘플 앱을 참조 하세요.
 
   ```cshtml
   @using System.Net.Http
@@ -68,7 +68,7 @@ JSON 도우미 메서드는 URI (다음 예제의 웹 API)에 요청을 보내�
   @code {
       private TodoItem[] _todoItems;
 
-      protected override async Task OnInitAsync() => 
+      protected override async Task OnInitializedAsync() => 
           _todoItems = await Http.GetJsonAsync<TodoItem[]>("api/todo");
   }
   ```

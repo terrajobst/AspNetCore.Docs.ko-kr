@@ -5,14 +5,14 @@ description: Blazor에서 양식 및 필드 유효성 검사 시나리오를 사
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/02/2019
+ms.date: 08/13/2019
 uid: blazor/forms-validation
-ms.openlocfilehash: e1b7de6e31adae8102bbefba5d08418c4daac687
-ms.sourcegitcommit: 849af69ee3c94cdb9fd8fa1f1bb8f5a5dda7b9eb
+ms.openlocfilehash: 0b2e38cdbd974a28960b917fb6b5ce370f8c4659
+ms.sourcegitcommit: f5f0ff65d4e2a961939762fb00e654491a2c772a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/22/2019
-ms.locfileid: "68948243"
+ms.lasthandoff: 08/15/2019
+ms.locfileid: "69030338"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET Core Blazor 폼 및 유효성 검사
 
@@ -129,7 +129,7 @@ public class Starship
     </p>
     <p>
         <label for="description">Description (optional): </label>
-        <InputTextArea Id="description" @bind-Value="starship.Description" />
+        <InputTextArea id="description" @bind-Value="starship.Description" />
     </p>
     <p>
         <label for="classification">Primary Classification: </label>
@@ -151,7 +151,7 @@ public class Starship
     </p>
     <p>
         <label for="productionDate">Production Date: </label>
-        <InputDate Id="productionDate" @bind-Value="starship.ProductionDate" />
+        <InputDate id="productionDate" @bind-Value="starship.ProductionDate" />
     </p>
 
     <button type="submit">Submit</button>
