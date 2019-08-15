@@ -5,12 +5,12 @@ description: 기본적인 ASP.NET Core MVC 앱에서 Details 컨트롤러 메서
 ms.author: riande
 ms.date: 12/13/2018
 uid: tutorials/first-mvc-app/details
-ms.openlocfilehash: 056017ea4f4073fa0b1cd747d06775b2a33616cf
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: d19e8cdb63da2bb9c66db1943dfcec183d432401
+ms.sourcegitcommit: 2719c70cd15a430479ab4007ff3e197fbf5dfee0
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64889578"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68862979"
 ---
 # <a name="examine-the-details-and-delete-methods-of-an-aspnet-core-app"></a>ASP.NET Core 앱의 Details 및 Delete 메서드 검사
 
@@ -24,7 +24,7 @@ Movie 컨트롤러를 열고 `Details` 메서드를 검사합니다.
 
 [!code-csharp[](start-mvc/sample/MvcMovie/Startup.cs?highlight=5&name=snippet_1)]
 
-EF를 통해 `FirstOrDefaultAsync` 메서드를 사용하는 데이터를 쉽게 검색할 수 있습니다. 메서드에 기본 구성된 중요한 보안 기능은 검색 메서드가 이를 사용하여 어떠한 작업을 시도하기 전에 동영상을 발견했는지 코드에서 확인하는 것입니다. 예를 들어 해커는 링크에서 만든 URL을 `http://localhost:xxxx/Movies/Details/1`에서 `http://localhost:xxxx/Movies/Details/12345`(또는 실제 동영상을 표시하지 않는 다른 값)와 같은 URL로 변경하여 사이트에 오류를 발생시킬 수 있습니다. Null 동영상을 검사하지 않은 경우 앱은 예외를 throw합니다.
+EF를 통해 `FirstOrDefaultAsync` 메서드를 사용하는 데이터를 쉽게 검색할 수 있습니다. 메서드에 기본 구성된 중요한 보안 기능은 검색 메서드가 이를 사용하여 어떠한 작업을 시도하기 전에 동영상을 발견했는지 코드에서 확인하는 것입니다. 예를 들어 해커는 링크에서 만든 URL을 `http://localhost:{PORT}/Movies/Details/1`에서 `http://localhost:{PORT}/Movies/Details/12345`(또는 실제 동영상을 표시하지 않는 다른 값)와 같은 URL로 변경하여 사이트에 오류를 발생시킬 수 있습니다. Null 동영상을 검사하지 않은 경우 앱은 예외를 throw합니다.
 
 `Delete` 및 `DeleteConfirmed` 메서드를 검사합니다.
 

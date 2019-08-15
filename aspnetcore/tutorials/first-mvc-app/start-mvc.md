@@ -5,12 +5,12 @@ description: ASP.NET Core MVC를 시작하는 방법을 알아봅니다.
 ms.author: riande
 ms.date: 08/05/2019
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: f6a92423546ebd9d4c8e1a92fb81b6b72f847f61
-ms.sourcegitcommit: 2eb605f4f20ac4dd9de6c3b3e3453e108a357a21
+ms.openlocfilehash: 36f4811f876a6e35440445103a1f86ae06b31b6a
+ms.sourcegitcommit: 476ea5ad86a680b7b017c6f32098acd3414c0f6c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/06/2019
-ms.locfileid: "68820093"
+ms.lasthandoff: 08/14/2019
+ms.locfileid: "69022515"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>ASP.NET Core MVC 시작
 
@@ -126,7 +126,6 @@ Visual Studio에서는 방금 만든 MVC 프로젝트에 대한 기본 템플릿
 
   ![IIS Express](start-mvc/_static/iis_express.png)
 
-
   다음 이미지에 앱이 나와 있습니다.
 
   ![홈 또는 인덱스 페이지](start-mvc/_static/home2.2.png)
@@ -140,12 +139,6 @@ Ctrl+F5를 눌러 디버거 없이 실행합니다.
   Visual Studio Code가 [Kestrel](xref:fundamentals/servers/kestrel)을 시작하고, 브라우저를 시작하고, `https://localhost:5001`로 이동합니다. 주소 표시줄에 `localhost:port:5001`이 표시되고 `example.com` 등은 표시되지 않습니다. 그 이유는 `localhost`가 로컬 컴퓨터의 표준 이름이기 때문입니다. Localhost는 로컬 컴퓨터의 웹 요청만 지원합니다.
 
   Ctrl+F5(디버그 이외 모드)를 사용하여 앱을 시작하면 코드를 변경하고, 파일을 저장하고, 브라우저를 새로 고치고, 코드 변경 내용을 확인할 수 있습니다. 대부분의 개발자는 페이지 및 보기 변경 내용을 새로 고치기 위해 디버그 이외 모드를 사용하려고 합니다.
-
-* **승인**을 선택하여 추적에 동의합니다. 이 앱은 개인 정보를 추적하지 않습니다. 템플릿 생성 코드는 [GDPR(일반 데이터 보호 규정)](xref:security/gdpr)을 충족할 수 있도록 자산을 포함합니다.
-
-  ![홈 또는 인덱스 페이지](start-mvc/_static/privacy.png)
-
-  다음 이미지에서는 추적을 승인한 후에 앱을 보여줍니다.
 
   ![홈 또는 인덱스 페이지](start-mvc/_static/home2.2.png)
 

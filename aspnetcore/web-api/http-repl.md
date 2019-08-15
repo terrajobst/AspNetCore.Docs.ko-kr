@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 07/25/2019
 uid: web-api/http-repl
-ms.openlocfilehash: e719d599545810d723840b0800cd6a2b4f96b123
-ms.sourcegitcommit: fbc66827e319d28bebed678ea5fd42f582fe3c34
+ms.openlocfilehash: 0e80fcd76a4d3efcd35140c52e0f6f0ae0f27932
+ms.sourcegitcommit: 2719c70cd15a430479ab4007ff3e197fbf5dfee0
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/25/2019
-ms.locfileid: "68493580"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68862957"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>HTTP REPL을 사용하여 웹 API 테스트
 
@@ -532,12 +532,12 @@ HTTP POST 요청을 실행하려면:
 
 1. 모델 유효성 검사 요구 사항을 충족하도록 JSON 템플릿을 수정합니다.
 
-  ```json
-  {
-    "id": 0,
-    "name": "Scott Addie"
-  }
-  ```
+    ```json
+    {
+      "id": 0,
+      "name": "Scott Addie"
+    }
+    ```
 
 1. *.tmp* 파일을 저장하고 텍스트 편집기를 닫습니다. 명령 셸에 다음 출력이 나타납니다.
 

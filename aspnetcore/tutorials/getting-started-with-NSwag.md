@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 06/21/2019
 uid: tutorials/get-started-with-nswag
-ms.openlocfilehash: c5b2dc47328d6d3c271a87579fa8c300109bd734
-ms.sourcegitcommit: 06a455d63ff7d6b571ca832e8117f4ac9d646baf
+ms.openlocfilehash: af8e2a266e54364857f0b49cc78a54683dff9de4
+ms.sourcegitcommit: 776367717e990bdd600cb3c9148ffb905d56862d
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/21/2019
-ms.locfileid: "67316551"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68915088"
 ---
 # <a name="get-started-with-nswag-and-aspnet-core"></a>NSwag 및 ASP.NET Core 시작
 
@@ -70,14 +70,6 @@ NSwag를 사용하면 기존 API가 필요하지 않으므로 Swagger를 통합�
 * **패키지 추가** 창의 **소스** 드롭다운을 “nuget.org”로 설정
 * 검색 상자에 “NSwag.AspNetCore” 입력
 * 결과 창에서 "NSwag.AspNetCore" 패키지를 선택하고 **패키지 추가** 클릭
-
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
-
-**통합 터미널**에서 다음 명령을 실행합니다.
-
-```console
-dotnet add TodoApi.csproj package NSwag.AspNetCore
-```
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -237,7 +229,7 @@ XML 주석을 사용하려면 다음 단계를 수행합니다.
 
 ::: moniker-end
 
-# <a name="visual-studio-code--net-core-clitabvisual-studio-codenetcore-cli"></a>[Visual Studio Code/.NET Core CLI](#tab/visual-studio-code+netcore-cli)
+# <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 강조 표시된 줄을 *.csproj* 파일에 수동으로 추가합니다.
 
