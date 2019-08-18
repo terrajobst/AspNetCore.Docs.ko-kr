@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/13/2019
 uid: blazor/components
-ms.openlocfilehash: 752f49f020acf26efcb304ed5e28e27c478dac83
-ms.sourcegitcommit: 7a46973998623aead757ad386fe33602b1658793
+ms.openlocfilehash: 5361c506f112cbb74865c3819f0b3bd578a1705a
+ms.sourcegitcommit: 38cac2552029fc19428722bb204ff9e16eb94225
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/15/2019
-ms.locfileid: "69487587"
+ms.lasthandoff: 08/18/2019
+ms.locfileid: "69573092"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -165,7 +165,7 @@ MSBuild 속성을 `_RazorComponentInclude` 사용 하 여 파일이 Razor 구성
         {
             { "maxlength", "10" },
             { "placeholder", "Input placeholder text" },
-            { "required", "true" },
+            { "required", "required" },
             { "size", "50" }
         };
 }
@@ -185,7 +185,7 @@ MSBuild 속성을 `_RazorComponentInclude` 사용 하 여 파일이 Razor 구성
 <input id="useAttributesDict"
        maxlength="10"
        placeholder="Input placeholder text"
-       required="true"
+       required="required"
        size="50">
 ```
 
