@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/13/2019
 uid: blazor/class-libraries
-ms.openlocfilehash: 6e93d48bbc684845952c3db8935ccc8b190044b7
-ms.sourcegitcommit: f5f0ff65d4e2a961939762fb00e654491a2c772a
+ms.openlocfilehash: b5857f2cf22bde801deeeaf227817fdf99862f4a
+ms.sourcegitcommit: 4cb0c7e74355f2e87c60e2a196f842b937247a99
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/15/2019
-ms.locfileid: "69030340"
+ms.lasthandoff: 08/16/2019
+ms.locfileid: "69545778"
 ---
 # <a name="aspnet-core-razor-components-class-libraries"></a>ASP.NET Core Razor 구성 요소 클래스 라이브러리
 
@@ -60,16 +60,6 @@ Blazor에 대 한 환경을 <xref:blazor/get-started> 구성 하려면 문서의
 
 ---
 
-## <a name="rcls-not-supported-for-client-side-apps"></a>RCLs는 클라이언트 쪽 앱에 대해 지원 되지 않습니다.
-
-현재 ASP.NET Core 3.0 미리 보기에서 Razor 클래스 라이브러리는 Blazor 클라이언트 쪽 앱과 호환 되지 않습니다. Blazor 클라이언트 쪽 응용 프로그램의 경우 명령 셸에서 `blazorlib` 템플릿에서 만든 Blazor 구성 요소 라이브러리를 사용 합니다.
-
-```console
-dotnet new blazorlib -o MyComponentLib1
-```
-
-템플릿을 사용 하는 `blazorlib` 구성 요소 라이브러리는 이미지, JavaScript 및 스타일 시트와 같은 정적 파일을 포함할 수 있습니다. 빌드 시 정적 파일은 작성 된 어셈블리 파일 ( *.dll*)에 포함 되며,이를 통해 해당 리소스를 포함 하는 방법에 대해 걱정할 필요 없이 구성 요소를 사용할 수 있습니다. `content` 디렉터리에 포함 된 모든 파일은 포함 리소스로 표시 됩니다.
-
 ## <a name="consume-a-library-component"></a>라이브러리 구성 요소 사용
 
 다른 프로젝트의 라이브러리에 정의 된 구성 요소를 사용 하려면 다음 방법 중 하나를 사용 합니다.
@@ -116,8 +106,6 @@ dotnet pack
 ```console
 dotnet nuget publish
 ```
-
-`blazorlib` 템플릿을 사용할 때 정적 리소스는 NuGet 패키지에 포함 됩니다. 라이브러리 소비자는 스크립트 및 스타일 시트를 자동으로 받기 때문에 소비자는 리소스를 수동으로 설치할 필요가 없습니다.
 
 ## <a name="create-a-razor-components-class-library-with-static-assets"></a>정적 자산을 사용 하 여 Razor 구성 요소 클래스 라이브러리 만들기
 
