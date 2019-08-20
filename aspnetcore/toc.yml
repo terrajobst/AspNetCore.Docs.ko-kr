@@ -966,6 +966,8 @@
           uid: security/key-vault-configuration
     - name: HTTPS 적용
       uid: security/enforcing-ssl
+    - name: HTTPS를 사용하여 Docker 호스팅
+      uid: security/docker-https
     - name: EU GDPR(일반 데이터 보호 규정) 지원
       uid: security/gdpr
     - name: 요청 위조 방지
