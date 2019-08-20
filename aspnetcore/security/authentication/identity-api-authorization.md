@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/05/2019
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 6b8818cc89a87e66ecec445ff8071348aacde64a
-ms.sourcegitcommit: 2eb605f4f20ac4dd9de6c3b3e3453e108a357a21
+ms.openlocfilehash: cb51df0267a5eabd4a2694727e9c896d0554265e
+ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/06/2019
-ms.locfileid: "68819926"
+ms.lasthandoff: 08/19/2019
+ms.locfileid: "69583600"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>SPAs에 대 한 인증 및 권한 부여
 
@@ -93,9 +93,9 @@ dotnet new react -o <output_directory_name> -au Individual
 
 이 도우미 메서드는 앱의 정책 스키마를 기본 인증 처리기로 구성 합니다. 이 정책은 id URL 공간 "/Identity"의 하위 경로로 라우팅되는 모든 요청을 Id로 처리할 수 있도록 구성 됩니다. 는 `JwtBearerHandler` 다른 모든 요청을 처리 합니다. 또한이 메서드는 기본 `<<ApplicationName>>API` `<<ApplicationName>>API` 범위를 사용 하 여 IdentityServer를 사용 하 여 API 리소스를 등록 하 고 JWT 전달자 토큰 미들웨어를 구성 하 여 앱에 대해 IdentityServer에서 발급 한 토큰의 유효성을 검사 합니다.
 
-### <a name="sampledatacontroller"></a>SampleDataController
+### <a name="weatherforecastcontroller"></a>WeatherForecastController
 
-*Controllers\SampleDataController.cs* 파일에서 리소스에 액세스 하기 `[Authorize]` 위한 기본 정책에 따라 사용자에 게 권한을 부여 해야 함을 나타내는 클래스에 적용 된 특성을 확인 합니다. 기본 권한 부여 정책은 위에서 언급 한 정책 체계에 의해 `AddIdentityServerJwt` 설정 되는 기본 인증 체계를 사용 하도록 구성 되며, 이러한 도우미 메서드로 구성 된를 `JwtBearerHandler` 에 대 한 기본 처리기로 만듭니다. 앱에 대 한 요청입니다.
+*Controllers\WeatherForecastController.cs* 파일에서 리소스에 액세스 하기 `[Authorize]` 위한 기본 정책에 따라 사용자에 게 권한을 부여 해야 함을 나타내는 클래스에 적용 된 특성을 확인 합니다. 기본 권한 부여 정책은 위에서 언급 한 정책 체계에 의해 `AddIdentityServerJwt` 설정 되는 기본 인증 체계를 사용 하도록 구성 되며, 이러한 도우미 메서드로 구성 된를 `JwtBearerHandler` 에 대 한 기본 처리기로 만듭니다. 앱에 대 한 요청입니다.
 
 ### <a name="applicationdbcontext"></a>ApplicationDbContext
 
