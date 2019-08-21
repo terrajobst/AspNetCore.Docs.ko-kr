@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/20/2019
 uid: tutorials/web-api-jquery
-ms.openlocfilehash: eb8b2453fd037170a49f531fea4c3ef1c056292d
-ms.sourcegitcommit: 0efb9e219fef481dee35f7b763165e488aa6cf9c
+ms.openlocfilehash: a319e4b4ce09e9b09afeaff065d5740276deb115
+ms.sourcegitcommit: 476ea5ad86a680b7b017c6f32098acd3414c0f6c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/29/2019
-ms.locfileid: "68602572"
+ms.lasthandoff: 08/14/2019
+ms.locfileid: "69022553"
 ---
 # <a name="tutorial-call-an-aspnet-core-web-api-with-jquery"></a>자습서: jQuery로 ASP.NET Core 웹 API 호출하기
 
@@ -29,7 +29,8 @@ ASP.NET Core 2.2의 경우에는 [jQuery로 웹 API 호출하기](xref:tutorials
 
 ## <a name="prerequisites"></a>전제 조건
 
-[자습서: 웹 API 만들기](xref:tutorials/first-web-api) 완료
+* [자습서: 웹 API 만들기](xref:tutorials/first-web-api) 완료
+* CSS, HTML, JavaScript 및 jQuery에 대한 지식
 
 ## <a name="call-the-api-with-jquery"></a>jQuery를 사용하여 API 호출
 

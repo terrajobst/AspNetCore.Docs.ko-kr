@@ -5,14 +5,14 @@ description: Blazor 앱을 단계별로 빌드합니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/01/2019
+ms.date: 07/26/2019
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: d592c5bac1eb9822843a1ad1513a15fdfd6b1032
-ms.sourcegitcommit: eb3e51d58dd713eefc242148f45bd9486be3a78a
+ms.openlocfilehash: 88999350b9c7631e15ba9d0242da5880c8ae71ff
+ms.sourcegitcommit: 89fcc6cb3e12790dca2b8b62f86609bed6335be9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67500317"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68994219"
 ---
 # <a name="build-your-first-blazor-app"></a>첫 번째 Blazor 앱 빌드
 
@@ -67,7 +67,7 @@ HTML 구문을 사용하여 구성 요소를 다른 구성 요소에 포함합�
 
 ## <a name="component-parameters"></a>구성 요소 매개 변수
 
-구성 요소에는 매개 변수도 포함될 수 있습니다. 구성 요소 매개 변수는 `[Parameter]`로 데코레이트된 component 클래스에서 public이 아닌 속성을 사용하여 정의됩니다. 특성을 사용하여 태그에서 구성 요소의 인수를 지정합니다.
+구성 요소에는 매개 변수도 포함될 수 있습니다. 구성 요소 매개 변수는 `[Parameter]`로 데코레이트된 구성 요소 클래스에서 public 속성을 사용하여 정의됩니다. 특성을 사용하여 태그에서 구성 요소의 인수를 지정합니다.
 
 1. 구성 요소의 `@code` C# 코드를 업데이트합니다.
 

@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/10/2019
 uid: host-and-deploy/blazor/client-side
-ms.openlocfilehash: be6b6c245440cb085a1a6b115f4f087306f7cc83
-ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
+ms.openlocfilehash: e9a42bd4e8511d426761746047fed2d4f7dfc6dd
+ms.sourcegitcommit: 89fcc6cb3e12790dca2b8b62f86609bed6335be9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68308083"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68994085"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-client-side"></a>ASP.NET Core Blazor 클라이언트 쪽 호스트 및 배포
 
@@ -148,7 +148,7 @@ dotnet run --pathbase=/CoolApp
 
 자세한 내용은 [경로 기준 호스트 구성 값](#path-base) 섹션을 참조하세요.
 
-앱이 [클라이언트 쪽 호스팅 모델](xref:blazor/hosting-models#client-side)(**Blazor**(클라이언트 쪽) 프로젝트 템플릿 기반, [dotnet new](/dotnet/core/tools/dotnet-new) 명령을 사용할 경우 `blazor` 템플릿 기반) 사용하고 ASP.NET Core 앱에서 IIS 하위 앱으로 호스트되는 경우, 상속된 ASP.NET Core 모듈 핸들러를 사용하지 않도록 설정하거나 *web.config* 파일에서 루트(부모) 앱의 `<handlers>` 섹션을 하위 앱에서 상속하지 않도록 해야 합니다.
+앱이 [클라이언트 쪽 호스팅 모델](xref:blazor/hosting-models#client-side)(**Blazor WebAssembly 앱** 프로젝트 템플릿 기반, [dotnet new](/dotnet/core/tools/dotnet-new) 명령을 사용할 경우 `blazorwasm` 템플릿 기반) 사용하고 ASP.NET Core 앱에서 IIS 하위 앱으로 호스트되는 경우, 상속된 ASP.NET Core 모듈 처리기를 사용하지 않도록 설정하거나 *web.config* 파일에서 루트(부모) 앱의 `<handlers>` 섹션을 하위 앱에서 상속하지 않도록 해야 합니다.
 
 파일에 `<handlers>` 섹션을 추가하여 앱의 게시된 *web.config* 파일에서 핸들러를 제거합니다.
 
@@ -181,7 +181,7 @@ dotnet run --pathbase=/CoolApp
 
 *호스트하는 배포*는 웹 서버 상에서 실행하는 [ASP.NET Core 앱](xref:index)에서 Blazor 클라이언트 쪽 Blazor 앱을 브라우저에 제공하지 않습니다.
 
-Blazor 앱은 ASP.NET Core 앱과 함께 배포되도록 게시된 출력의 후자 앱과 함께 포함됩니다. ASP.NET Core 앱을 호스트할 수 있는 웹 서버가 필요합니다. 호스트하는 배포의 경우, Visual Studio는 **Blazor(ASP.NET Core가 호스트하는)** 프로젝트 템플릿([dotnet new](/dotnet/core/tools/dotnet-new) 명령을 사용하는 경우 `blazorhosted` 템플릿)을 포함합니다.
+Blazor 앱은 ASP.NET Core 앱과 함께 배포되도록 게시된 출력의 후자 앱과 함께 포함됩니다. ASP.NET Core 앱을 호스트할 수 있는 웹 서버가 필요합니다. 호스트된 배포의 경우 Visual Studio에는 **Hosted** 옵션이 선택된 **Blazor WebAssembly 앱** 프로젝트 템플릿([dotnet new](/dotnet/core/tools/dotnet-new) 명령을 사용하는 경우 `blazorwasm` 템플릿)이 포함됩니다.
 
 ASP.NET Core 앱 호스팅 및 배포에 대한 자세한 내용은 <xref:host-and-deploy/index>를 참조하세요.
 

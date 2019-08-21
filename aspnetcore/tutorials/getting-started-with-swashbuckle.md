@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 06/21/2019
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: 0ffd437bbb48ef1c7a9159fbf3ac41441613f434
-ms.sourcegitcommit: 849af69ee3c94cdb9fd8fa1f1bb8f5a5dda7b9eb
+ms.openlocfilehash: 606be317318eafa170d926aaace1f752d3a25510
+ms.sourcegitcommit: 89fcc6cb3e12790dca2b8b62f86609bed6335be9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/22/2019
-ms.locfileid: "68372067"
+ms.lasthandoff: 08/13/2019
+ms.locfileid: "68994298"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Swashbuckle 및 ASP.NET Core 시작
 
@@ -115,6 +115,8 @@ IIS 또는 역방향 프록시에서 디렉터리를 사용하는 경우 `./` �
 ## <a name="customize-and-extend"></a>사용자 지정 및 확장
 
 Swagger는 개체 모델을 설명하고 테마와 일치하도록 UI를 사용자 지정하는 옵션을 제공합니다.
+
+Startup 클래스에 다음 네임스페이스를 추가합니다. [!code-csharp[](~/tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.Swashbuckle/Startup2.cs?name=snippet_PreReqNamespaces)]
 
 ### <a name="api-info-and-description"></a>API 정보 및 설명
 
@@ -423,11 +425,11 @@ ASP.NET Core 2.2 이상에서는 `[ProducesResponseType]`을 사용하여 명시
 
 [!code-css[](../tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.Swashbuckle/wwwroot/swagger/ui/custom.css)]
 
-다른 CSS 파일 다음에 *index.html* 파일의 *custom.css*를 참조합니다.
+다른 CSS 파일 다음에 ui 폴더에 있는 *index.html* 파일의 *custom.css*를 참조합니다.
 
 [!code-html[](../tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.Swashbuckle/wwwroot/swagger/ui/index.html?name=snippet_SwaggerUiCss&highlight=3)]
 
-`http://localhost:<port>/swagger/ui/index.html`의 *index.html* 페이지로 이동합니다. 헤더의 텍스트 상자에 `http://localhost:<port>/swagger/v1/swagger.json`을 입력하고 **탐색** 단추를 클릭합니다. 결과 페이지가 다음과 같이 표시됩니다.
+`http://localhost:<port>/swagger/ui/index.html`의 *index.html* 페이지로 이동합니다. 헤더의 텍스트 상자에 `https://localhost:<port>/swagger/v1/swagger.json`을 입력하고 **탐색** 단추를 클릭합니다. 결과 페이지가 다음과 같이 표시됩니다.
 
 ![사용자 지정 헤더 제목이 포함된 Swagger UI](web-api-help-pages-using-swagger/_static/custom-header.png)
 

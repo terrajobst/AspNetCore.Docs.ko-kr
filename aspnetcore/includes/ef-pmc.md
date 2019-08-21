@@ -1,0 +1,1 @@
+EF Core의 PMC 도구에 대한 자세한 내용은 [EF Core 도구 참조 - Visual Studio의 PMC](/ef/core/miscellaneous/cli/powershell)를 참조하세요.

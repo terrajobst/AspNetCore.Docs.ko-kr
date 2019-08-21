@@ -3,6 +3,8 @@
   ```console
   dotnet dev-certs https --trust
   ```
+  
+  앞의 명령은 Linux에서 작동하지 않습니다. 인증서 신뢰에 대해서는 Linux 배포 설명서를 참조하세요.
 
   이전 명령으로 인해 다음 대화 상자가 표시됩니다.
 

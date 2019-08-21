@@ -3,14 +3,14 @@ title: ASP.NET Core의 영역
 author: rick-anderson
 description: 관련 기능을 별도의 네임스페이스(라우팅용) 및 폴더 구조(보기용)로 그룹화하는 데 사용되는 ASP.NET MVC 기능인 영역에 대해 알아봅니다.
 ms.author: riande
-ms.date: 05/10/2019
+ms.date: 08/07/2019
 uid: mvc/controllers/areas
-ms.openlocfilehash: f3a75bc307a206e43241b421f448b09011868d08
-ms.sourcegitcommit: ffe3ed7921ec6c7c70abaac1d10703ec9a43374c
+ms.openlocfilehash: e44c726c47caa3dd0c8c92e3a2502a590bee82d1
+ms.sourcegitcommit: 2719c70cd15a430479ab4007ff3e197fbf5dfee0
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/11/2019
-ms.locfileid: "65535963"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68862791"
 ---
 # <a name="areas-in-aspnet-core"></a>ASP.NET Core의 영역
 
@@ -116,9 +116,13 @@ ASP.NET Core 2.2와 함께 `MapAreaRoute`를 사용하는 경우 [이 GitHub 문
 
 자세한 정보는 [컨트롤러 작업에 라우팅](xref:mvc/controllers/routing)을 참조하세요.
 
-### <a name="shared-layout-for-areas-using-the-viewstartcshtml-file"></a>_ViewStart.cshtml 파일을 사용하여 영역에 대한 레이아웃 공유
+### <a name="shared-layout-for-areas-using-the-_viewstartcshtml-file"></a>_ViewStart.cshtml 파일을 사용하여 영역에 대한 레이아웃 공유
 
 전체 앱의 일반적인 레이아웃을 공유하려면 *_ViewStart.cshtml*을 애플리케이션 루트 폴더로 이동합니다.
+
+### <a name="_viewimportscshtml"></a>_ViewImports.cshtml
+
+표준 위치에서 */Views/_ViewImports.cshtml*은 영역에 적용되지 않습니다. 영역에서 [태그 도우미](xref:mvc/views/tag-helpers/intro), `@using` 또는 `@inject`를 사용하려면 적절한 *_ViewImports.cshtml* 파일이 [영역 뷰에 적용](xref:mvc/views/layout#importing-shared-directives)되는지 확인합니다. 모든 뷰에서 동일한 동작을 원하는 경우 */Views/_ViewImports.cshtml*을 애플리케이션 루트로 이동합니다.
 
 <a name="rename"></a>
 
@@ -157,7 +161,7 @@ Razor Pages가 있는 영역은 앱 루트에 *Areas/&lt;area name&gt;/Pages* �
 
 샘플 다운로드에는 영역을 지정하지 않고 위의 링크 및 동일한 링크를 포함하는 [부분 뷰](xref:mvc/views/partial)가 포함되어 있습니다. 부분 뷰는 [레이아웃 파일](xref:mvc/views/layout)에서 참조되므로, 앱의 모든 페이지에 생성된 링크가 표시됩니다. 영역을 지정하지 않고 생성된 링크는 동일한 영역의 페이지에서 참조할 때만 유효합니다.
 
-영역을 지정하지 않으면 ‘앰비언트’ 값에 따라 라우팅이 달라집니다. 현재 요청의 현재 경로 값은 링크 생성에 대한 앰비언트 값으로 간주됩니다. 샘플 앱의 대부분의 경우 앰비언트 값을 사용하면 잘못된 링크가 생성됩니다. 예를 들어 다음 코드에서 생성된 링크를 살펴보겠습니다.
+영역을 지정하지 않으면 ‘앰비언트’ 값에 따라 라우팅이 달라집니다.  현재 요청의 현재 경로 값은 링크 생성에 대한 앰비언트 값으로 간주됩니다. 샘플 앱의 대부분의 경우 앰비언트 값을 사용하면 잘못된 링크가 생성됩니다. 예를 들어 다음 코드에서 생성된 링크를 살펴보겠습니다.
 
 [!code-cshtml[](areas/samples/RPareas/Pages/Shared/_testLinksPartial.cshtml?name=snippet2)]
 
@@ -167,7 +171,7 @@ Razor Pages가 있는 영역은 앱 루트에 *Areas/&lt;area name&gt;/Pages* �
 * `<a asp-page="/About">`에서 생성된 링크는 `/Home`의 페이지를 마지막으로 요청한 경우에만 유효합니다.
 * 코드는 [샘플 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas)에서 가져온 것입니다.
 
-### <a name="import-namespace-and-tag-helpers-with-viewimports-file"></a>_ViewImports 파일을 사용하여 네임스페이스 및 태그 도우미 가져오기
+### <a name="import-namespace-and-tag-helpers-with-_viewimports-file"></a>_ViewImports 파일을 사용하여 네임스페이스 및 태그 도우미 가져오기
 
 각 영역의 *Pages* 폴더에 *_ViewImports.cshtml* 파일을 추가하여 네임스페이스 및 태그 도우미를 폴더의 각 Razor 페이지로 가져올 수 있습니다.
 

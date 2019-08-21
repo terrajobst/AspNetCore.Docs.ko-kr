@@ -3,14 +3,14 @@ title: ASP.NET Core MVC 앱에 모델 추가
 author: rick-anderson
 description: 간단한 ASP.NET Core 앱에 모델을 추가합니다.
 ms.author: riande
-ms.date: 02/25/2019
+ms.date: 8/15/2019
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: fcfe97e2228c21ffea8fe7ec5df8e2ea9c398828
-ms.sourcegitcommit: 1bb3f3f1905b4e7d4ca1b314f2ce6ee5dd8be75f
+ms.openlocfilehash: 038ea8cf7c72e4aaca6e06c0208d3dd1d5597577
+ms.sourcegitcommit: 476ea5ad86a680b7b017c6f32098acd3414c0f6c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/11/2019
-ms.locfileid: "66837321"
+ms.lasthandoff: 08/14/2019
+ms.locfileid: "69022451"
 ---
 # <a name="add-a-model-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 모델 추가
 
@@ -23,6 +23,369 @@ ms.locfileid: "66837321"
 직접 만드는 모델 클래스는 EF Core에 대한 종속성이 없으므로 POCO(**P**lain **O**ld **C**LR **O**bject) 클래스로 알려져 있습니다. 이 클래스는 데이터베이스에 저장되는 데이터의 속성을 정의합니다.
 
 이 자습서에서는 먼저 모델 클래스를 작성하면 EF Core가 데이터베이스를 만듭니다. 이 문서에서 설명하지 않는 대체 방법은 기존 데이터베이스에서 모델 클래스를 생성하는 것입니다. 이 방법에 대한 정보는 [ASP.NET Core - 기존 데이터베이스](/ef/core/get-started/aspnetcore/existing-db)를 참조하세요.
+
+::: moniker range=">= aspnetcore-3.0"
+
+## <a name="add-a-data-model-class"></a>데이터 모델 클래스 추가
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+*Models* 폴더> **추가** > **클래스**를 마우스 오른쪽 단추로 클릭합니다. 파일 이름을 *Movie.cs*로 지정합니다.
+
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+
+*Movie.cs* 파일을 *Models* 폴더에 추가합니다.
+
+---
+
+다음 코드로 *Movie.cs* 파일을 업데이트합니다.
+
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Models/Movie.cs)]
+
+`Movie` 클래스에는 기본 키에 대해 데이터베이스에 필요한 `Id` 필드가 포함되어 있습니다.
+
+`ReleaseDate`에 대한 [DataType](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.internal.datatypeattributeadapter) 특성은 데이터 형식(`Date`)을 지정합니다. 이 특성 사용:
+
+  * 사용자는 날짜 필드에 시간 정보를 입력할 필요가 없습니다.
+  * 시간 정보가 아니라 날짜만 표시됩니다.
+
+[DataAnnotations](/dotnet/api/system.componentmodel.dataannotations)는 이후 자습서에서 다룹니다.
+
+## <a name="add-nuget-packages"></a>NuGet 패키지 추가
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+**도구** 메뉴에서 **NuGet 패키지 관리자** > PMC(**패키지 관리자 콘솔**)를 선택합니다.
+
+![PMC 메뉴](~/tutorials/first-mvc-app/adding-model/_static/pmc.png)
+
+PMC에서 다음 명령을 실행합니다.
+
+```powershell
+Install-Package Microsoft.EntityFrameworkCore.SqlServer -IncludePrerelease
+```
+
+앞의 명령은 EF Core SQL Server 공급자를 추가합니다. 이 공급자 패키지는 EF Core 패키지를 종속성으로 설치합니다. 추가 패키지는 자습서 뒷부분의 스캐폴딩 단계에서 자동으로 설치됩니다.
+
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+
+다음 .NET Core CLI 명령을 실행합니다.
+
+```console
+dotnet tool install --global dotnet-ef --version 3.0.0-*
+dotnet add package Microsoft.EntityFrameworkCore.SQLite --version 3.0.0-*
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 3.0.0-*
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.0.0-*
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 3.0.0-*
+```
+
+앞의 명령은 다음을 추가합니다.
+
+* .NET CLI에 대한 Entity Framework Core 도구.
+* EF Core 패키지를 종속성으로 설치하는 EF Core SQLite 공급자.
+* 스캐폴딩에 필요한 패키지: `Microsoft.VisualStudio.Web.CodeGeneration.Design` 및 `Microsoft.EntityFrameworkCore.SqlServer`.
+
+---
+
+<a name="dc"></a>
+
+## <a name="create-a-database-context-class"></a>데이터베이스 컨텍스트 클래스 만들기
+
+`Movie` 모델에 대한 EF Core 기능(만들기, 읽기, 업데이트, 삭제)을 조정하려면 데이터베이스 컨텍스트 클래스가 필요합니다. 데이터베이스 컨텍스트는 [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)에서 파생되며 데이터 모델에 포함할 엔터티를 지정합니다.
+
+*Data* 폴더를 만듭니다.
+
+다음 코드로 *Data/MvcMovieContext.cs* 파일을 추가합니다. 
+
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/zDocOnly/MvcMovieContext.cs?name=snippet)]
+
+이전 코드에서는 엔터티 집합에 대해 [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) 속성을 만듭니다. Entity Framework 용어에서 엔터티 집합은 일반적으로 데이터베이스 테이블에 해당합니다. 엔터티는 테이블의 행에 해당합니다.
+
+<a name="reg"></a>
+
+## <a name="register-the-database-context"></a>데이터베이스 컨텍스트 등록
+
+ASP.NET Core는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)를 사용하여 빌드됩니다. 서비스(예: EF Core DB 컨텍스트)는 애플리케이션 시작 중에 DI에 등록되어야 합니다. 이러한 서비스(예: Razor 페이지)가 필요한 구성 요소에는 생성자 매개 변수를 통해 이러한 서비스가 제공됩니다. DB 컨텍스트 인스턴스를 가져오는 생성자 코드는 자습서 뒷부분에 나옵니다. 이 섹션에서는 DI 컨테이너에 데이터베이스 컨텍스트를 등록합니다.
+
+*Startup.cs* 맨 위에 다음 `using` 문을 추가합니다.
+
+```csharp
+using MvcMovie.Data;
+using Microsoft.EntityFrameworkCore;
+```
+
+`Startup.ConfigureServices`에 다음 강조 표시된 코드를 추가합니다.
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_ConfigureServices&highlight=6-7)]
+
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_UseSqlite&highlight=6-7)]
+
+---
+
+[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 개체에서 메서드를 호출하여 연결 문자열의 이름을 컨텍스트에 전달합니다. 로컬 개발의 경우 [ASP.NET Core 구성 시스템](xref:fundamentals/configuration/index)은 *appsettings.json* 파일에서 연결 문자열을 읽습니다.
+
+<a name="cs"></a>
+
+## <a name="add-a-database-connection-string"></a>데이터베이스 연결 문자열 추가
+
+*appsettings.json* 파일에 연결 문자열을 추가합니다.
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings.json?highlight=10-12)]
+
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+
+[!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings_SQLite.json?highlight=10-12)]
+
+---
+
+컴파일러 오류에 대한 검사로 프로젝트를 빌드합니다.
+
+## <a name="scaffold-movie-pages"></a>동영상 페이지 스캐폴드
+
+스캐폴딩 도구를 사용하여 동영상 모델에 대한 CRUD(만들기, 읽기, 업데이트 및 삭제) 페이지를 생성합니다.
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+**솔루션 탐색기**에서 *Controllers* 폴더를 마우스 오른쪽 단추로 클릭하고 **> 추가 > 스캐폴드 항목 새로 만들기**를 선택합니다.
+
+![위의 단계 보기](adding-model/_static/add_controller21.png)
+
+**스캐폴드 추가** 대화 상자에서 **보기 포함 MVC 컨트롤러, Entity Framework > 추가 사용**을 선택합니다.
+
+![스캐폴드 추가 대화 상자](adding-model/_static/add_scaffold21.png)
+
+**컨트롤러 추가** 대화 상자를 입력합니다.
+
+* **모델 클래스:** *Movie(MvcMovie.Models)*
+* **데이터 컨텍스트 클래스:** *MvcMovieContext(MvcMovie.Data)*
+
+![데이터 컨텍스트 추가](adding-model/_static/dc3.png)
+
+* **보기:** 확인된 각 옵션의 기본값 선택 유지
+* **컨트롤러 이름:** 기본값 *MoviesController* 유지
+* **추가** 선택
+
+Visual Studio에서 다음을 만듭니다.
+
+* 동영상 컨트롤러(*Controllers/MoviesController.cs*)
+* 만들기, 삭제, 세부 정보, 편집 및 인덱스 페이지에 대한 Razor 뷰 파일(*Views/Movies/\*.cshtml*)
+
+이 파일의 자동 생성을 *스캐폴딩*이라고 합니다.
+
+### <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) 
+
+* 프로젝트 디렉터리(*Program.cs*, *Startup.cs* 및 *.csproj* 파일이 포함된 디렉터리)에서 명령 창을 엽니다.
+
+* Linux에서 스캐폴드 도구 경로를 내보냅니다.
+
+  ```console
+    export PATH=$HOME/.dotnet/tools:$PATH
+  ```
+
+* 다음 명령을 실행합니다.
+
+  ```console
+     dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
+  ```
+
+  [!INCLUDE [explains scaffold generated params](~/includes/mvc-intro/model4.md)]
+
+### <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+
+* 프로젝트 디렉터리(*Program.cs*, *Startup.cs* 및 *.csproj* 파일이 포함된 디렉터리)에서 명령 창을 엽니다.
+
+* 다음 명령을 실행합니다.
+
+  ```console
+     dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
+  ```
+
+  [!INCLUDE [explains scaffold generated params](~/includes/mvc-intro/model4.md)]
+
+---
+
+<!-- End of tabs                  -->
+
+데이터베이스가 없으므로 아직 스캐폴드된 페이지를 사용할 수 없습니다. 앱을 실행하고 **동영상 앱** 링크를 클릭하면 ‘데이터베이스를 열 수 없음’  또는 *‘해당 테이블이 없음:* Movie’ 오류 메시지가 표시됩니다.
+
+<a name="migration"></a>
+
+## <a name="initial-migration"></a>초기 마이그레이션
+
+EF Core [마이그레이션](xref:data/ef-mvc/migrations) 기능을 사용하여 데이터베이스를 만듭니다. 마이그레이션은 데이터 모델과 일치하도록 데이터베이스를 만들고 업데이트할 수 있는 도구 세트입니다.
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+**도구** 메뉴에서 **NuGet 패키지 관리자** > PMC(**패키지 관리자 콘솔**)를 선택합니다.
+
+PMC에서 다음 명령을 입력합니다.
+
+```console
+Add-Migration InitialCreate
+Update-Database
+```
+
+* `Add-Migration InitialCreate`: *Migrations/{timestamp}_InitialCreate.cs* 마이그레이션 파일을 생성합니다. `InitialCreate` 인수는 마이그레이션 이름입니다. 모든 이름을 사용할 수 있지만 규칙에 따라 마이그레이션을 설명하는 이름을 선택합니다. 이는 첫 번째 마이그레이션이므로 생성된 클래스에는 데이터베이스 스키마를 만드는 코드가 포함되어 있습니다. 데이터베이스 스키마는 `MvcMovieContext` 클래스에 지정된 모델을 기반으로 합니다.
+
+* `Update-Database`: 이전 명령이 만든 최신 마이그레이션으로 데이터베이스를 업데이트합니다. 이 명령은 데이터베이스를 만드는 `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* 파일을 실행합니다.
+
+  데이터베이스 업데이트 명령은 다음 경고를 생성합니다. 
+
+  > 엔터티 형식 ‘Movie’에서 10진수 열 ‘Price’의 형식이 지정되지 않았습니다. 그러면 값이 기본 전체 자릿수 및 소수 자릿수에 적합하지 않은 경우 자동으로 잘립니다. ‘HasColumnType()’를 사용하여 모든 값을 수용할 수 있는 SQL Server 열 형식을 명시적으로 지정합니다.
+
+  해당 경고를 무시할 수 있지만 자습서의 뒷부분에서 수정될 예정입니다.
+
+[!INCLUDE [more information on the PMC tools for EF Core](~/includes/ef-pmc.md)]
+
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+
+다음 .NET Core CLI 명령을 실행합니다.
+
+```console
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+```
+
+* `ef migrations add InitialCreate`: *Migrations/{timestamp}_InitialCreate.cs* 마이그레이션 파일을 생성합니다. `InitialCreate` 인수는 마이그레이션 이름입니다. 모든 이름을 사용할 수 있지만 규칙에 따라 마이그레이션을 설명하는 이름을 선택합니다. 이는 첫 번째 마이그레이션이므로 생성된 클래스에는 데이터베이스 스키마를 만드는 코드가 포함되어 있습니다. 데이터베이스 스키마는 *Data/MvcMovieContext.cs* 파일에서 `MvcMovieContext` 클래스에 지정된 모델을 기반으로 합니다.
+
+* `ef database update`: 이전 명령이 만든 최신 마이그레이션으로 데이터베이스를 업데이트합니다. 이 명령은 데이터베이스를 만드는 `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* 파일을 실행합니다.
+
+[!INCLUDE [ more information on the CLI tools for EF Core](~/includes/ef-cli.md)]
+
+---
+
+### <a name="the-initialcreate-class"></a>InitialCreate 클래스
+
+*Migrations/{timestamp}_InitialCreate.cs* 마이그레이션 파일을 검사합니다.
+
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Migrations/20190805165915_InitialCreate.cs?name=snippet)]
+
+ `Up` 메서드는 Movie 테이블을 만들고 `Id`를 기본 키로 구성합니다. `Down` 메서드는 `Up` 마이그레이션에 의해 변경된 스키마를 되돌립니다.
+
+<a name="test"></a>
+
+## <a name="test-the-app"></a>앱 테스트
+
+* 앱을 실행하고 **동영상 앱** 링크를 클릭합니다.
+
+  다음 중 하나와 비슷한 예외가 발생하는 경우:
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+  ```console
+  SqlException: Cannot open database "MvcMovieContext-1" requested by the login. The login failed.
+  ```
+
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+
+  ```console
+  SqliteException: SQLite Error 1: 'no such table: Movie'.
+  ```
+
+---
+  [마이그레이션 단계](#migration)를 누락했을 수 있습니다.
+
+* **만들기** 페이지를 테스트합니다. 데이터를 입력하고 제출합니다.
+
+  > [!NOTE]
+  > `Price` 필드에는 소수점을 입력하지 못할 수도 있습니다. 소수점으로 쉼표(",")를 사용하는 영어가 아닌 로캘 및 미국 영어가 아닌 날짜 형식에 대해 [jQuery 유효성 검사](https://jqueryvalidation.org/)를 지원하려면 앱을 글로벌화해야 합니다. 세계화 지침은 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)를 참조하세요.
+
+* **편집**, **세부 정보** 및 **삭제** 링크를 테스트합니다.
+
+## <a name="dependency-injection-in-the-controller"></a>컨트롤러의 종속성 주입
+
+*Controllers/MoviesController.cs* 파일을 열고 생성자를 검사합니다.
+
+<!-- l.. Make copy of Movies controller (or use the old one as I did in the 3.0 upgrade) because we comment out the initial index method and update it later  -->
+
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_1)]
+
+생성자는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 컨트롤러에 데이터베이스 컨텍스트(`MvcMovieContext`)를 삽입할 수 있습니다. 컨트롤러의 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 메서드 각각에서 데이터베이스 컨텍스트를 사용합니다.
+
+<a name="strongly-typed-models-keyword-label"></a>
+<a name="strongly-typed-models-and-the--keyword"></a>
+
+## <a name="strongly-typed-models-and-the-model-keyword"></a>강력한 형식의 모델 및 @model 키워드
+
+이 자습서의 앞부분에서 언급했듯이 컨트롤러가 `ViewData` 사전을 사용하여 데이터 또는 개체를 뷰에 전달할 수 있는 방법이 표시되었습니다. `ViewData` 사전은 확인할 정보를 전달하는 편리한 런타임에 바인딩된 방법을 제공하는 동적 개체입니다.
+
+또한 MVC는 확인할 강력한 형식의 모델 개체를 전달하는 기능을 제공합니다. 이 강력한 형식의 방법을 통해 컴파일 시간 코드 검사를 수행할 수 있습니다. 스캐폴딩 메커니즘은 `MoviesController` 클래스 및 뷰에서 이 방법(즉, 강력한 형식의 모델 전달)을 사용했습니다.
+
+*Controllers/MoviesController.cs* 파일에서 생성된 `Details` 메서드를 검사합니다.
+
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_details)]
+
+`id` 매개 변수는 일반적으로 경로 데이터 변수로 전달됩니다. 예를 들어 `https://localhost:5001/movies/details/1`은 다음을 설정합니다.
+
+* `movies` 컨트롤러에 대한 컨트롤러(첫 번째 URL 세그먼트)
+* `details`에 대한 작업(두 번째 URL 세그먼트)
+* 1에 대한 ID(마지막 URL 세그먼트)
+
+다음과 같이 쿼리 문자열을 사용하여 `id`에 전달할 수 있습니다.
+
+`https://localhost:5001/movies/details?id=1`
+
+ID 값이 제공되지 않는 경우에 `id` 매개 변수가 [nullable 형식](/dotnet/csharp/programming-guide/nullable-types/index)(`int?`)으로 정의됩니다.
+
+[람다 식](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions)을 `FirstOrDefaultAsync`에 전달하여 경로 데이터 또는 쿼리 문자열 값과 일치하는 영화 엔터티를 선택합니다.
+
+```csharp
+var movie = await _context.Movie
+    .FirstOrDefaultAsync(m => m.Id == id);
+```
+
+영화가 있으면 `Movie` 모델의 인스턴스를 `Details` 뷰에 전달합니다.
+
+```csharp
+return View(movie);
+   ```
+
+*Views/Movies/Details.cshtml* 파일의 내용을 검사합니다.
+
+[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/DetailsOriginal.cshtml)]
+
+뷰 파일 맨 위에 있는 `@model` 문은 뷰에 필요한 개체의 형식을 지정합니다. 동영상 컨트롤러가 만들어진 후 다음 `@model` 문이 포함되었습니다.
+
+```HTML
+@model MvcMovie.Models.Movie
+   ```
+
+이 `@model` 지시문을 사용하면 컨트롤러가 뷰에 전달한 동영상에 액세스할 수 있습니다. `Model` 개체는 강력한 형식입니다. 예를 들어 *Details.cshtml* 뷰에서 코드는 각 영화 필드를 강력한 형식의 `Model` 개체를 사용하여 `DisplayNameFor` 및 `DisplayFor` HTML 도우미에 전달합니다. 또한 `Create` 및 `Edit` 메서드 및 뷰는 `Movie` 모델 개체를 전달합니다.
+
+영화 컨트롤러에서 *Index.cshtml* 뷰 및 `Index` 메서드를 검사합니다. 코드가 `View` 메서드를 호출하는 경우 `List` 개체를 생성하는 방법을 확인합니다. 이 코드는 `Index` 작업 메서드의 `Movies` 목록을 뷰에 전달합니다.
+
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_index)]
+
+동영상 컨트롤러가 만들어진 경우 스캐폴딩은 다음 `@model` 문을 *Index.cshtml* 파일의 맨 위에 포함했습니다.
+
+<!-- Copy Index.cshtml to IndexOriginal.cshtml -->
+
+[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?range=1)]
+
+`@model` 지시문을 사용하면 강력한 형식인 `Model` 개체를 사용하여 컨트롤러가 뷰에 전달된 영화 목록에 액세스할 수 있습니다. 예를 들어 *Index.cshtml* 뷰에서 코드는 강력한 형식의 `Model` 개체에 `foreach` 문을 포함한 영화를 반복합니다.
+
+[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?highlight=1,31,34,37,40,43,46-48)]
+
+`Model` 개체가 강력한 형식이기 때문에(`IEnumerable<Movie>` 개체처럼) 루프의 각 항목은 `Movie`으로 입력됩니다. 즉, 여러 가지 이점 중에서 코드의 컴파일 시간 검사를 가져올 수 있습니다.
+
+## <a name="additional-resources"></a>추가 자료
+
+* [태그 도우미](xref:mvc/views/tag-helpers/intro)
+* [전역화 및 지역화](xref:fundamentals/localization)
+
+> [!div class="step-by-step"]
+> [이전 뷰 추가](adding-view.md)
+> [다음 SQL 사용](working-with-sql.md)
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
 
 ## <a name="add-a-data-model-class"></a>데이터 모델 클래스 추가
 
@@ -88,6 +451,12 @@ Visual Studio에서 다음을 만듭니다.
    dotnet tool install --global dotnet-aspnet-codegenerator
    ```
 
+* Linux에서 스캐폴드 도구 경로를 내보냅니다.
+
+  ```console
+    export PATH=$HOME/.dotnet/tools:$PATH
+  ```
+
 * 다음 명령을 실행합니다.
 
   ```console
@@ -113,13 +482,15 @@ Visual Studio에서 다음을 만듭니다.
      dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
   ```
 
-[!INCLUDE [explains scaffold gen params](~/includes/RP/model4.md)]
+[!INCLUDE [explains scaffold generated params](~/includes/mvc-intro/model4.md)]
 
 ---
 
 <!-- End of VS tabs                  -->
 
 응용 프로그램을 실행하고 **Mvc Movie** 링크를 클릭하면 다음과 유사한 오류가 표시됩니다.
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ``` error
 An unhandled exception occurred while processing the request.
@@ -129,6 +500,17 @@ Login failed for user 'Rick'.
 
 System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString
 ```
+
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+
+``` error
+An unhandled exception occurred while processing the request.
+SqliteException: SQLite Error 1: 'no such table: Movie'.
+Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(int rc, sqlite3 db)
+
+```
+
+---
 
 데이터베이스를 만들어야 하며 이를 수행하기 위해 EF Core [마이그레이션](xref:data/ef-mvc/migrations) 기능을 사용합니다. 마이그레이션을 통해 데이터 모델과 일치하는 데이터베이스를 만들고 데이터 모델 변경 시 데이터베이스 스키마를 업데이트할 수 있습니다.
 
@@ -143,7 +525,7 @@ System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity id
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. **도구** 메뉴에서 **NuGet 패키지 관리자** > **PMC**(패키지 관리자 콘솔)를 선택합니다.
+1. **도구** 메뉴에서 **NuGet 패키지 관리자** > PMC(**패키지 관리자 콘솔**)를 선택합니다.
 
    ![PMC 메뉴](~/tutorials/first-mvc-app/adding-model/_static/pmc.png)
 
@@ -184,7 +566,7 @@ ASP.NET Core는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)�
 
 `MvcMovieContext`는 `Movie` 모델에 대한 EF Core 기능(만들기, 읽기, 업데이트, 삭제 등)을 조정합니다. 데이터 컨텍스트(`MvcMovieContext`)는 [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)에서 파생됩니다. 데이터 컨텍스트는 데이터 모델에 포함되는 엔터티를 지정합니다.
 
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Data/MvcMovieContext.cs)]
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Data/MvcMovieContext.cs)]
 
 이전 코드에서는 엔터티 집합에 대해 [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) 속성을 만듭니다. Entity Framework 용어에서 엔터티 집합은 일반적으로 데이터베이스 테이블에 해당합니다. 엔터티는 테이블의 행에 해당합니다.
 
@@ -309,3 +691,5 @@ return View(movie);
 > [!div class="step-by-step"]
 > [이전 뷰 추가](adding-view.md)
 > [다음 SQL 사용](working-with-sql.md)
+
+::: moniker-end

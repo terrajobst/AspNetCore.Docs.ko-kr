@@ -5,12 +5,12 @@ description: Entity Framework Core(EF Core)를 사용하여 데이터베이스�
 ms.author: riande
 ms.date: 07/22/2019
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: 6132f7b907014b4f57bb9ae0300e00b6ecb23f1a
-ms.sourcegitcommit: 2eb605f4f20ac4dd9de6c3b3e3453e108a357a21
+ms.openlocfilehash: 39e2a38e0b91b7dbecf05c084ca0be5e312dcb0d
+ms.sourcegitcommit: 2719c70cd15a430479ab4007ff3e197fbf5dfee0
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/06/2019
-ms.locfileid: "68820074"
+ms.lasthandoff: 08/09/2019
+ms.locfileid: "68862865"
 ---
 # <a name="add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>ASP.NET Core에서 Razor 페이지 앱에 모델 추가
 
@@ -135,18 +135,30 @@ ms.locfileid: "68820074"
 
 ---
 
-스캐폴드 프로세스는 다음 파일을 생성하고 업데이트합니다.
-
 ### <a name="files-created"></a>생성된 파일
+
+# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+스캐폴드 프로세스는 다음 파일을 생성하고 업데이트합니다.
 
 * *Pages/Movies*: 만들기, 삭제, 세부 정보, 편집 및 인덱스입니다.
 * *Data/RazorPagesMovieContext.cs*
 
-### <a name="file-updated"></a>파일 업데이트됨
+### <a name="updated"></a>업데이트됨
 
 * *Startup.cs*
 
 생성되고 업데이트된 파일은 다음 섹션에서 설명합니다.
+
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+
+스캐폴드 프로세스는 다음 파일을 만듭니다.
+
+* *Pages/Movies*: 만들기, 삭제, 세부 정보, 편집 및 인덱스입니다.
+
+생성된 파일은 다음 섹션에서 설명합니다.
+
+---
 
 <a name="pmc"></a>
 
