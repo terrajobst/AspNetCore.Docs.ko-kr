@@ -1,18 +1,18 @@
 ---
 title: '자습서: ASP.NET MVC 웹앱에서 EF Core 시작'
 description: 이는 Contoso University 샘플 애플리케이션을 처음부터 빌드하는 방법을 설명하는 일련의 자습서 중 첫 번째입니다.
-author: rick-anderson
+author: tdykstra
 ms.author: tdykstra
 ms.custom: mvc
 ms.date: 02/06/2019
 ms.topic: tutorial
 uid: data/ef-mvc/intro
-ms.openlocfilehash: a93d5af314f1ff679a8df636297a0d5849ebdb8d
-ms.sourcegitcommit: 6afe57fb8d9055f88fedb92b16470398c4b9b24a
+ms.openlocfilehash: 1b68c20ba206a5afe36f307525879f91d03d95d1
+ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/14/2019
-ms.locfileid: "65610202"
+ms.lasthandoff: 08/19/2019
+ms.locfileid: "69583336"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>자습서: ASP.NET MVC 웹앱에서 EF Core 시작
 
@@ -259,7 +259,7 @@ CRUD 작업 메서드와 보기를 자동으로 만드는 작업을 스캐폴딩
 
   * **추가**를 클릭합니다.
 
-  **추가**를 클릭하면 Visual Studio 스캐폴딩 엔진은 *StudentsController.cs* 파일과 컨트롤러와 작동하는 뷰 집합(*.cshtml* 파일)을 만듭니다.
+  **추가**를 클릭하면 Visual Studio 스캐폴딩 엔진은 *StudentsController.cs* 파일과 컨트롤러와 작동하는 뷰 집합( *.cshtml* 파일)을 만듭니다.
 
 (스캐폴딩 엔진은 이 자습서의 앞에서 수행한 것과 같이 수동으로 먼저 만들지 않은 경우 데이터베이스 컨텍스트를 만들 수도 있습니다. **데이터 컨텍스트 클래스**의 오른쪽에 있는 더하기 기호를 클릭하여 **컨트롤러 추가** 상자에 새 컨텍스트 클래스를 지정할 수 있습니다.  그런 다음, Visual Studio는 `DbContext` 클래스 뿐만 아니라 컨트롤러와 뷰도 만듭니다.)
 
@@ -319,7 +319,7 @@ Entity Framework에서 전체 데이터베이스를 만들 수 있도록 작성�
 
 * ID 또는 classnameID로 명명된 엔터티 속성은 기본 키 속성으로 인식됩니다.
 
-* 속성은 이름이 ‘\<탐색 속성 이름>\<기본 키 속성 이름>’인 경우 외래 키 속성으로 해석됩니다(예: `Student` 엔터티의 기본 키가 `ID`인 경우 `Student` 탐색 속성의 경우 `StudentID`). 외래 키 속성의 이름을 단순히 ‘\<기본 키 속성 이름>’으로 지정할 수 있습니다(예: `Enrollment` 엔터티의 기본 키가 `EnrollmentID`이므로 `EnrollmentID`).
+* 속성은 이름이 ‘\<탐색 속성 이름>\<기본 키 속성 이름>’인 경우 외래 키 속성으로 해석됩니다(예: `Student` 엔터티의 기본 키가 `ID`인 경우 `Student` 탐색 속성의 경우 `StudentID`).  외래 키 속성의 이름을 단순히 ‘\<기본 키 속성 이름>’으로 지정할 수 있습니다(예: `Enrollment` 엔터티의 기본 키가 `EnrollmentID`이므로 `EnrollmentID`). 
 
 기본 동작은 재정의될 수 있습니다. 예를 들어 이 자습서의 앞부분에서 본 것처럼 테이블 이름을 명시적으로 지정할 수 있습니다. 또한 이 시리즈의 [이후의 자습서](complex-data-model.md)에서 볼 수 있듯이 열 이름을 설정하고 기본 키 또는 외래 키로 속성을 설정할 수 있습니다.
 

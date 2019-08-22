@@ -1,17 +1,17 @@
 ---
 title: '자습서: 정렬, 필터링 및 페이징 추가 - ASP.NET MVC 및 EF Core 사용'
 description: 이 자습서에서는 학생 인덱스 페이지에 정렬, 필터링 및 페이징 기능을 추가합니다. 단순 그룹화를 수행하는 페이지도 만듭니다.
-author: rick-anderson
+author: tdykstra
 ms.author: tdykstra
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/sort-filter-page
-ms.openlocfilehash: 921e27bf56587813f835357c9090c91a155c087b
-ms.sourcegitcommit: b508b115107e0f8d7f62b25cfcc8ad45e1373459
+ms.openlocfilehash: 4e52a3d3f56c4cf6f396ee9ff1c18061a2364c77
+ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/07/2019
-ms.locfileid: "65212556"
+ms.lasthandoff: 08/19/2019
+ms.locfileid: "69583395"
 ---
 # <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>자습서: 정렬, 필터링 및 페이징 추가 - ASP.NET MVC 및 EF Core 사용
 
@@ -93,7 +93,7 @@ Student 인덱스 페이지에 정렬을 추가하려면 Students 컨트롤러�
 > [!NOTE]
 > 여기에서는 `IQueryable` 개체에서 `Where` 메서드를 호출하고 있으며 필터는 서버에서 처리됩니다. 일부 시나리오에서는 메모리 내 컬렉션에서 확장 메서드로 `Where` 메서드를 호출할 수 있습니다. (예를 들어, EF `DbSet` 대신에 `IEnumerable` 컬렉션을 반환하는 리포지토리 메서드를 참조하도록 `_context.Students`로 참조를 변경한다고 가정해 보겠습니다.) 결과는 일반적으로 동일하지만 경우에 따라 다를 수 있습니다.
 >
->예를 들어 `Contains` 메서드의 .NET Framework 구현은 기본적으로 대/소문자 구분 비교를 수행하지만 SQL Server에서는 SQL Server 인스턴스의 데이터 정렬 설정에 따라 결정됩니다. 이 설정은 기본적으로 대/소문자를 구분하지 않습니다. `ToUpper` 메서드를 호출하여 테스트가 명시적으로 대/소문자를 구분하지 않도록 설정할 수 있습니다.  *Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())*. 이렇게 하면 `IQueryable` 개체 대신 `IEnumerable` 컬렉션을 반환하는 리포지토리를 사용하도록 코드를 나중에 변경할 경우 결과가 동일하게 유지됩니다. (`IEnumerable` 컬렉션에서 `Contains` 메서드를 호출하면 .NET Framework 구현을 가져오고 `IQueryable` 개체에서 호출하면 데이터베이스 공급자 구현을 가져옵니다.) 그러나 이 솔루션에서는 성능 저하가 발생합니다. `ToUpper` 코드는 TSQL SELECT 문의 WHERE 절에 함수를 배치합니다. 그러면 최적화 프로그램이 인덱스를 사용할 수 없게 됩니다. SQL은 대부분 대/소문자를 구분하지 않도록 설치된다는 것을 고려하면 대/소문자 구분 데이터 저장소로 마이그레이션할 때까지 `ToUpper` 코드를 사용하지 않는 것이 좋습니다.
+>예를 들어 `Contains` 메서드의 .NET Framework 구현은 기본적으로 대/소문자 구분 비교를 수행하지만 SQL Server에서는 SQL Server 인스턴스의 데이터 정렬 설정에 따라 결정됩니다. 이 설정은 기본적으로 대/소문자를 구분하지 않습니다. `ToUpper` 메서드를 호출하여 테스트가 명시적으로 대/소문자를 구분하지 않도록 설정할 수 있습니다.  *Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())* . 이렇게 하면 `IQueryable` 개체 대신 `IEnumerable` 컬렉션을 반환하는 리포지토리를 사용하도록 코드를 나중에 변경할 경우 결과가 동일하게 유지됩니다. (`IEnumerable` 컬렉션에서 `Contains` 메서드를 호출하면 .NET Framework 구현을 가져오고 `IQueryable` 개체에서 호출하면 데이터베이스 공급자 구현을 가져옵니다.) 그러나 이 솔루션에서는 성능 저하가 발생합니다. `ToUpper` 코드는 TSQL SELECT 문의 WHERE 절에 함수를 배치합니다. 그러면 최적화 프로그램이 인덱스를 사용할 수 없게 됩니다. SQL은 대부분 대/소문자를 구분하지 않도록 설치된다는 것을 고려하면 대/소문자 구분 데이터 저장소로 마이그레이션할 때까지 `ToUpper` 코드를 사용하지 않는 것이 좋습니다.
 
 ### <a name="add-a-search-box-to-the-student-index-view"></a>Students 인덱스 뷰에 검색 상자 추가
 

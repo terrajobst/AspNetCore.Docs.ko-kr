@@ -1,18 +1,18 @@
 ---
 title: '자습서: CRUD 기능 구현 - ASP.NET MVC 및 EF Core 사용'
 description: 이 자습서에서는 MVC 스캐폴딩이 컨트롤러 및 보기에서 자동으로 만드는 CRUD(만들기, 읽기, 업데이트, 삭제) 코드를 검토하고 사용자 지정합니다.
-author: rick-anderson
+author: tdykstra
 ms.author: tdykstra
 ms.custom: mvc
 ms.date: 02/04/2019
 ms.topic: tutorial
 uid: data/ef-mvc/crud
-ms.openlocfilehash: 442570cdc79fe7c496392ffbcbc527cf841aefa9
-ms.sourcegitcommit: e7e04a45195d4e0527af6f7cf1807defb56dc3c3
+ms.openlocfilehash: 975738200f9ea621c38b395be123b1d05c78298e
+ms.sourcegitcommit: 41f2c1a6b316e6e368a4fd27a8b18d157cef91e1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/06/2019
-ms.locfileid: "66750077"
+ms.lasthandoff: 08/21/2019
+ms.locfileid: "69886311"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>자습서: CRUD 기능 구현 - ASP.NET MVC 및 EF Core 사용
 
@@ -58,7 +58,7 @@ ms.locfileid: "66750077"
 http://localhost:1230/Instructor/Index/1?courseID=2021
 ```
 
-URL의 마지막 부분("?courseID=2021")은 쿼리 문자열 값입니다. 또한 모델 바인더는 쿼리 문자열 값으로 전달하는 경우 ID 값을 `Details` 메서드 `id` 매개 변수에 전달합니다.
+URL의 마지막 부분("?courseID=2021")은 쿼리 문자열 값입니다. 또한 모델 바인더는 쿼리 문자열 값으로 전달하는 경우 ID 값을 `Index` 메서드 `id` 매개 변수에 전달합니다.
 
 ```
 http://localhost:1230/Instructor/Index?id=1&CourseID=2021

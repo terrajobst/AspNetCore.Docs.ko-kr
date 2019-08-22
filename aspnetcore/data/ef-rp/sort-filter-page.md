@@ -1,17 +1,17 @@
 ---
 title: ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 정렬, 필터, 페이징 - 3/8
-author: rick-anderson
+author: tdykstra
 description: 이 자습서에서는 ASP.NET Core 및 Entity Framework Core를 사용하여 Razor 페이지에 정렬, 필터링 및 페이징 기능을 추가합니다.
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 70f4220674502265963410b928b9340aa20e0cea
-ms.sourcegitcommit: 776367717e990bdd600cb3c9148ffb905d56862d
+ms.openlocfilehash: b4cef98f3ad4973878c5fa65a47c0b86cdfc8686
+ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/09/2019
-ms.locfileid: "68914093"
+ms.lasthandoff: 08/19/2019
+ms.locfileid: "69583525"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging---3-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 정렬, 필터, 페이징 - 3/8
 

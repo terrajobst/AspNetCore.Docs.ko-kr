@@ -1,18 +1,18 @@
 ---
 title: '자습서: 마이그레이션 기능 사용 - ASP.NET MVC 및 EF Core 사용'
 description: 이 자습서에서는 ASP.NET Core MVC 애플리케이션에서 데이터 모델 변경 관리를 위해 EF Core 마이그레이션 기능을 사용하는 것을 시작합니다.
-author: rick-anderson
+author: tdykstra
 ms.author: tdykstra
 ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/migrations
-ms.openlocfilehash: 35569a4d75abf1c18a3750d9785c3cf55a35ea69
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: 7ee383ff5fcd9dd79503321aaa188fd85ef18d7a
+ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67813774"
+ms.lasthandoff: 08/19/2019
+ms.locfileid: "69583457"
 ---
 # <a name="tutorial-using-the-migrations-feature---aspnet-mvc-with-ef-core"></a>자습서: 마이그레이션 기능 사용 - ASP.NET MVC 및 EF Core 사용
 
@@ -25,7 +25,7 @@ ms.locfileid: "67813774"
 > * 연결 문자열 변경
 > * 초기 마이그레이션 만들기
 > * Up 및 Down 메서드 검사
-> * 데이터 모델 스냅숏에 대해 알아보기
+> * 데이터 모델 스냅샷에 대해 알아보기
 > * 마이그레이션 적용
 
 ## <a name="prerequisites"></a>전제 조건
@@ -100,13 +100,13 @@ Done. To undo this action, use 'ef migrations remove'
 
 데이터베이스가 이미 존재할 때 초기 마이그레이션을 만든 경우 데이터베이스 만들기 코드가 생성되지만 데이터베이스는 이미 데이터 모델과 일치하기 때문에 실행할 필요는 없습니다. 데이터베이스가 아직 없는 다른 환경에 앱을 배포하는 경우 이 코드를 실행하여 데이터베이스를 만들기 때문에 먼저 테스트하는 것이 좋습니다. 바로 이것이 앞서 연결 문자열의 데이터베이스 이름을 변경한 이유입니다. 따라서 해당 마이그레이션은 처음부터 새로운 데이터베이스를 만들 수 있습니다.
 
-## <a name="the-data-model-snapshot"></a>데이터 모델 스냅숏
+## <a name="the-data-model-snapshot"></a>데이터 모델 스냅샷
 
-마이그레이션은 현재 데이터베이스 스키마의 *스냅숏*을 *Migrations/SchoolContextModelSnapshot.cs*에 만듭니다. 마이그레이션을 추가하면 EF가 데이터 모델을 스냅숏 파일과 비교하여 변경 내용을 확인합니다.
+마이그레이션은 현재 데이터베이스 스키마의 *스냅숏*을 *Migrations/SchoolContextModelSnapshot.cs*에 만듭니다. 마이그레이션을 추가하면 EF가 데이터 모델을 스냅샷 파일과 비교하여 변경 내용을 확인합니다.
 
-마이그레이션을 삭제할 때는 [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove) 명령을 사용합니다. `dotnet ef migrations remove`는 마이그레이션을 삭제하고 스냅숏이 올바르게 다시 설정되도록 합니다.
+마이그레이션을 삭제할 때는 [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove) 명령을 사용합니다. `dotnet ef migrations remove`는 마이그레이션을 삭제하고 스냅샷이 올바르게 다시 설정되도록 합니다.
 
-스냅숏 파일을 사용하는 방법에 대한 자세한 내용은 [팀 환경의 EF Core 마이그레이션](/ef/core/managing-schemas/migrations/teams)을 참조하세요.
+스냅샷 파일을 사용하는 방법에 대한 자세한 내용은 [팀 환경의 EF Core 마이그레이션](/ef/core/managing-schemas/migrations/teams)을 참조하세요.
 
 ## <a name="apply-the-migration"></a>마이그레이션 적용
 
@@ -181,7 +181,7 @@ PMC 명령에 대한 자세한 내용은 [패키지 관리자 콘솔(Visual Stud
 > * 연결 문자열 변경
 > * 초기 마이그레이션 만들기
 > * Up 및 Down 메서드 검사
-> * 데이터 모델 스냅숏에 대해 알아보기
+> * 데이터 모델 스냅샷에 대해 알아보기
 > * 마이그레이션 적용
 
 데이터 모델 확장에 관한 더 많은 고급 항목을 살펴보려면 다음 자습서로 진행합니다. 방식에 따라 추가 마이그레이션을 만들고 적용하게 됩니다.
