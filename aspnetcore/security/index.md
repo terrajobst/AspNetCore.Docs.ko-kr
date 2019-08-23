@@ -1,17 +1,17 @@
 ---
 title: ASP.NET Core 보안 개요
-author: tdykstra
+author: rick-anderson
 description: ASP.NET Core의 인증, 권한 부여 및 보안 기본 사항에 대해 알아봅니다.
-ms.author: tdykstra
+ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: security/index
-ms.openlocfilehash: 933501411169d89c4b24edda743c47591aa7a87a
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 0f8e96fb7d5246e746b95f8907745f849de60e24
+ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64881888"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69975657"
 ---
 # <a name="overview-of-aspnet-core-security"></a>ASP.NET Core 보안 개요
 
