@@ -5,14 +5,14 @@ description: Blazor apps를 디버그 하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/31/2019
+ms.date: 08/22/2019
 uid: blazor/debug
-ms.openlocfilehash: 37c6009727a4f62b61793adca0d83cdd53be4b9a
-ms.sourcegitcommit: 3204bc89ae6354b61ee0a9b2770ebe5214b7790c
-ms.translationtype: HT
+ms.openlocfilehash: c3188a1fe1b699b787f7a95630f3918d295d0f68
+ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/01/2019
-ms.locfileid: "68948373"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69974904"
 ---
 # <a name="debug-aspnet-core-blazor"></a>디버그 ASP.NET Core Blazor
 
@@ -51,6 +51,10 @@ ms.locfileid: "68948373"
 1. 브라우저에서 앱에 액세스 합니다.
 1. 개발자 도구 패널이 아닌 앱에 키보드 포커스를 둡니다. 디버깅을 시작할 때 개발자 도구 패널을 닫을 수 있습니다.
 1. 다음 Blazor 바로 가기 키를 선택 합니다.
+   * `Shift+Alt+D`Windows/Linux에서
+   * `Shift+Cmd+D`macOS
+1. 화면에 나열 된 단계에 따라 원격 디버깅을 사용 하도록 설정 하 고 브라우저를 다시 시작 합니다.
+1. 다음 Blazor 바로 가기 키를 다시 선택 하 여 디버그 세션을 시작 합니다.
    * `Shift+Alt+D`Windows/Linux에서
    * `Shift+Cmd+D`macOS
 

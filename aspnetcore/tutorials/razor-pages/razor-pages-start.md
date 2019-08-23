@@ -5,12 +5,12 @@ description: 이 자습서 시리즈는 ASP.NET Core에서 Razor Pages를 사용
 ms.author: riande
 ms.date: 07/25/2019
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 57a10895c718c539ece280afcb27cb4033c7fb45
-ms.sourcegitcommit: 979dbfc5e9ce09b9470789989cddfcfb57079d94
+ms.openlocfilehash: 67a5fcee0a37861fd39a018443edbc0b9e513213
+ms.sourcegitcommit: 7a46973998623aead757ad386fe33602b1658793
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/31/2019
-ms.locfileid: "68682802"
+ms.lasthandoff: 08/15/2019
+ms.locfileid: "69487644"
 ---
 # <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>자습서: ASP.NET Core에서 Razor 페이지 시작
 
@@ -92,15 +92,22 @@ ms.locfileid: "68682802"
 
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-터미널에서 다음 명령을 실행합니다.
+* **파일** > **새 솔루션**을 선택합니다.
 
-<!-- TODO: update these instruction once mac support 2.2 projects -->
+![macOS 새 솔루션](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-```console
-dotnet new webapp -o RazorPagesMovie
-```
+* **.NET Core** > **앱** > **웹 애플리케이션** > **다음**을 선택합니다.
 
-이전 명령은 [.NET Core CLI](/dotnet/core/tools/dotnet)를 사용하여 Razor Pages 프로젝트를 만듭니다.
+  ![macOS 새 프로젝트 대화 상자](razor-pages-start/_static/webapp.png)
+
+* **새 ASP.NET Core 웹 API 구성** 대화 상자에서 **대상 프레임워크**를 **.NET Core 3.0**으로 설정합니다.
+
+  ![macOS .NET Core 3.0 선택](razor-pages-start/_static/targetframework3.png)
+
+* 프로젝트 이름을 **RazorPagesMovie**로 지정하고 **만들기**를 선택합니다.
+
+  ![nameproj](razor-pages-start/_static/RazorPagesMovie.png)
+
 
 ## <a name="open-the-project"></a>프로젝트 열기
 
