@@ -2,16 +2,16 @@
 title: ASP.NET Core에 대 한 클라이언트 IP safelist
 author: damienbod
 description: 승인 된 IP 주소 목록에 대해 원격 IP 주소의 유효성을 검사 하는 미들웨어 또는 작업 필터를 작성 하는 방법에 대해 알아봅니다.
-ms.author: tdykstra
+ms.author: riande
 ms.custom: mvc
 ms.date: 08/31/2018
 uid: security/ip-safelist
-ms.openlocfilehash: ca05989efabea3a71c6912e98055a6746e0f5966
-ms.sourcegitcommit: 1bf80f4acd62151ff8cce517f03f6fa891136409
+ms.openlocfilehash: 02e44135ab1742d44691cfda8c4167f21d6efa4e
+ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/15/2019
-ms.locfileid: "68223927"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69975640"
 ---
 # <a name="client-ip-safelist-for-aspnet-core"></a>ASP.NET Core에 대 한 클라이언트 IP safelist
 
