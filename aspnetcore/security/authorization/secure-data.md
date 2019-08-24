@@ -6,12 +6,12 @@ ms.author: riande
 ms.date: 12/18/2018
 ms.custom: mvc, seodec18
 uid: security/authorization/secure-data
-ms.openlocfilehash: 4b94cc53777308deb26521a079d8a1c2742744db
-ms.sourcegitcommit: 4fe3ae892f54dc540859bff78741a28c2daa9a38
+ms.openlocfilehash: 225d0e3aa51745253d03e614b1c8568b3a6ba731
+ms.sourcegitcommit: 983b31449fe398e6e922eb13e9eb6f4287ec91e8
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/04/2019
-ms.locfileid: "68776739"
+ms.lasthandoff: 08/24/2019
+ms.locfileid: "70017489"
 ---
 # <a name="create-an-aspnet-core-app-with-user-data-protected-by-authorization"></a>권한 부여로 보호 되는 사용자 데이터를 사용 하 여 ASP.NET Core 앱 만들기
 
@@ -37,7 +37,7 @@ ms.locfileid: "68776739"
 * **관리자** 승인 하거나 연락처 데이터를 거부할 수 있습니다. 승인 된 연락처만 사용자에 게 표시 됩니다.
 * **관리자** 승인/거부를 편집/삭제할 모든 데이터입니다.
 
-이 문서의 이미지는 정확히 최신 템플릿과 일치 하지 않습니다.
+이 문서의 이미지는 최신 템플릿과 정확히 일치 하지 않습니다.
 
 다음 이미지에서는 Rick 사용자 (`rick@example.com`)에 로그인 됩니다. Rick 승인 된 연락처를 보기만 할 수 있습니다 하 고 **편집할**/**삭제**/**새로 만들기** 자신의 연락처에 대 한 링크입니다. Rick을 표시 하 여 만든 마지막 레코드만 **편집** 하 고 **삭제** 링크 합니다. 다른 사용자에 게는 관리자가 "승인 됨" 상태 변경 될 때까지 마지막 레코드를 표시 되지 않습니다.
 

@@ -5,14 +5,14 @@ description: 페이지 코딩 중심의 시나리오에서 ASP.NET Core의 Razor
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc, seodec18
-ms.date: 06/18/2019
+ms.date: 08/23/2019
 uid: razor-pages/sdk
-ms.openlocfilehash: 1dc001c7c5fe320629835e06fe6db7fadabff94d
-ms.sourcegitcommit: 6189b0ced9c115248c6ede02efcd0b29d31f2115
+ms.openlocfilehash: 81025c14ba68971ca5d3cfc9387c2f50dd247654
+ms.sourcegitcommit: 983b31449fe398e6e922eb13e9eb6f4287ec91e8
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/23/2019
-ms.locfileid: "69985400"
+ms.lasthandoff: 08/24/2019
+ms.locfileid: "70017394"
 ---
 # <a name="aspnet-core-razor-sdk"></a>ASP.NET Core Razor SDK
 
@@ -22,26 +22,21 @@ ms.locfileid: "69985400"
 
 합니다 [!INCLUDE[](~/includes/2.1-SDK.md)] 포함 된 `Microsoft.NET.Sdk.Razor` MSBuild SDK (Razor SDK). Razor SDK:
 
-::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
+::: moniker range=">= aspnetcore-3.0"
+
+* 는 MVC 기반 또는 [Blazor](xref:blazor/index) 프로젝트 ASP.NET Core [Razor](xref:mvc/views/razor) 파일이 포함 된 프로젝트를 빌드, 패키징 및 게시 하는 데 필요 합니다.
+* Razor (*cshtml* 또는 *razor*) 파일의 컴파일을 사용자 지정할 수 있는 미리 정의 된 대상, 속성 및 항목 집합을 포함 합니다.
+
+Razor SDK에는 `Content` `Include` `**\*.cshtml` 및`**\*.razor` 와일드 카드 사용 패턴으로 설정 된 특성이 포함 된 항목이 포함 되어 있습니다. 일치 파일이 게시 됩니다.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 * ASP.NET Core MVC 기반 프로젝트용 [Razor](xref:mvc/views/razor) 파일을 포함하는 프로젝트의 빌드, 패키징 및 게시와 관련된 환경을 표준화합니다.
 * Razor 파일 컴파일의 사용자 지정을 허용하는 사전 정의된 대상, 속성 및 항목 집합이 포함됩니다.
-::: moniker-end
 
-::: moniker range=">= aspnetcore-3.0"
-* ASP.NET Core MVC 기반 프로젝트용 [Razor](xref:mvc/views/razor) 파일 또는 [Blazor](xref:blazor/index) 프로젝트를 포함 하는 프로젝트를 빌드, 패키지 및 게시 하는 데 필요 합니다.
-* Razor (cshtml 또는 razor) 파일의 컴파일을 사용자 지정할 수 있는 미리 정의 된 대상, 속성 및 항목 집합을 포함 합니다.
-::: moniker-end
-
-
-::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
-
-Razor SDK에는 `<Content>` `Include` 특성을 `**\*.cshtml` 와일드 카드 사용 패턴으로 설정 하는 요소가 포함 되어 있습니다. 일치 파일이 게시 됩니다.
-
-::: moniker-end
-
-::: moniker range=">= aspnetcore-3.0"
-
-Razor SDK에는 `<Content>` `Include` `**\*.cshtml` 및`**\*.razor` 와일드 카드 사용 패턴으로 설정 된 특성이 있는 요소가 포함 되어 있습니다. 일치 파일이 게시 됩니다.
+Razor SDK는 `Content` `Include` 특성이 `**\*.cshtml` 와일드 카드 사용 패턴으로 설정 된 항목을 포함 합니다. 일치 파일이 게시 됩니다.
 
 ::: moniker-end
 
@@ -53,7 +48,14 @@ Razor SDK에는 `<Content>` `Include` `**\*.cshtml` 및`**\*.razor` 와일드 �
 
 대부분의 웹 앱을 명시적으로 Razor SDK를 참조할 필요가 없습니다.
 
-::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
+::: moniker range=">= aspnetcore-3.0"
+
+Razor SDK를 사용 하 여 Razor 뷰나 Razor Pages를 포함 하는 클래스 라이브러리를 빌드하려면 먼저 RCL (Razor 클래스 라이브러리) 프로젝트 템플릿을 사용 하는 것이 좋습니다. Blazor (*razor*) 파일을 빌드하는 데 사용 되는 rcl에는 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Components) 패키지에 대 한 참조가 최소한 필요 합니다. Razor 뷰나 페이지 (*cshtml* 파일)를 작성 하는 데 사용 되는 rcl은 이상 버전 `netcoreapp3.0` 을 대상으로 지정 하 `FrameworkReference` 고 해당 프로젝트 파일의 [AspNetCore 메타 패키지](xref:fundamentals/metapackage-app) 에 대 한를 포함 합니다.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 Razor SDK를 사용하여 Razor 보기 또는 Razor 페이지를 포함하는 클래스 라이브러리를 빌드하려면:
 
 * `Microsoft.NET.Sdk` 대신 `Microsoft.NET.Sdk.Razor`를 사용합니다.
@@ -78,11 +80,6 @@ Razor SDK를 사용하여 Razor 보기 또는 Razor 페이지를 포함하는 �
   
 ::: moniker-end
 
-::: moniker range=">= aspnetcore-3.0"
-Razor SDK를 사용 하 여 Razor 뷰나 Razor Pages 포함 하는 클래스 라이브러리를 빌드하려면 Razor 클래스 라이브러리 프로젝트 템플릿을 사용 하 여 시작 하는 것이 좋습니다. Blazor (razor) 파일을 빌드하는 데 사용 되는 razor 클래스 라이브러리에는 최소한 `Microsoft.AspNetCore.Components` 패키지에 대 한 참조가 필요 합니다. Razor 뷰 또는 페이지 (cshtml 파일)를 빌드하는 데 사용 되는 razor 클래스 라이브러리에는 `netcoreapp3.0` `FrameworkReference` 를 `Microsoft.AspNetCore.App`대상으로 하는 이상이 필요 하며가 있어야 합니다.
-
-::: moniker-end
-
 ::: moniker range="= aspnetcore-2.1"
 
 > [!WARNING]
@@ -100,15 +97,16 @@ Razor SDK를 사용 하 여 Razor 뷰나 Razor Pages 포함 하는 클래스 라
 속성 및 다음 표에 항목을 입력 및 출력 Razor SDK를 구성 하려면 사용 됩니다.
 
 ::: moniker range=">= aspnetcore-3.0"
-> [!WARNING]
-ASP.NET Core 3.0부터 또는 `RazorCompileOnBuild` `RazorCompileOnPublish` 를 사용 하지 않도록 설정 하면 MVC 뷰 또는 Razor Pages 기본적으로 제공 되지 않습니다. 응용 프로그램은 런타임 컴파일을 사용 하 `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation` 여 cshtml 파일을 처리 하는 경우 런타임 컴파일에 대 한 명시적 참조를 추가 해야 합니다.
-::: moniker-end
 
+> [!WARNING]
+> ASP.NET Core 3.0부터 프로젝트 파일의 `RazorCompileOnBuild` 또는 `RazorCompileOnPublish` MSBuild 속성을 사용할 수 없는 경우 MVC 뷰 또는 Razor Pages는 기본적으로 제공 되지 않습니다. 앱이 런타임 컴파일을 사용 하 여 AspNetCore 파일을 처리 하는 경우 응용 프로그램에서 [RuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation) 패키지에 대 한 명시적 참조를 추가 해야 합니다.
+
+::: moniker-end
 
 | 항목 | Description |
 | ----- | ----------- |
 | `RazorGenerate` | 코드 생성에 대 한 입력 인 항목 요소 (*cshtml* 파일)입니다. |
-| `RazorComponent` | 구성 요소 코드 생성에 대 한 입력 인 항목 요소 (*razor* 파일)입니다.
+| `RazorComponent` | Razor 구성 요소 코드 생성에 대 한 입력 인 항목 요소 (*razor* 파일)입니다. |
 | `RazorCompile` | Razor 컴파일 대상에 대 한 입력 인 항목 요소 ( *.cs* 파일)입니다. 이 `ItemGroup` 를 사용 하 여 Razor 어셈블리로 컴파일될 추가 파일을 지정 합니다. |
 | `RazorTargetAssemblyAttribute` | 코드에 사용된 항목 요소는 Razor 어셈블리의 특성을 생성합니다. 예를 들어 다음과 같습니다.  <br>`RazorAssemblyAttribute`<br>`Include="System.Reflection.AssemblyMetadataAttribute"`<br>`_Parameter1="BuildSource" _Parameter2="https://docs.microsoft.com/">` |
 | `RazorEmbeddedResource` | 항목 요소에서 생성 된 Razor 어셈블리에 포함 리소스로 추가 합니다. |
@@ -135,9 +133,9 @@ ASP.NET Core 3.0부터 또는 `RazorCompileOnBuild` `RazorCompileOnPublish` 를 
 
 Razor SDK는 두 기본 대상을 정의합니다.
 
-* `RazorGenerate` &ndash; 코드 생성 *.cs* 에서 파일을 `RazorGenerate` 항목 요소가 있습니다. 이 대상 전후에 실행할 수 있는 추가 대상을 지정하려면 `RazorGenerateDependsOn` 속성을 사용합니다.
-* `RazorCompile` &ndash; 생성 된 컴파일합니다 *.cs* Razor 어셈블리 파일입니다. 이 대상 전후에 실행할 수 있는 추가 대상을 지정하려면 `RazorCompileDependsOn`을 사용합니다.
-* `RazorComponentGenerate`코드는 항목 요소에 대 `RazorComponent` 한 .cs 파일을 생성 합니다. &ndash; 이 대상 전후에 실행할 수 있는 추가 대상을 지정하려면 `RazorComponentGenerateDependsOn` 속성을 사용합니다.
+* `RazorGenerate` &ndash; 코드 생성 *.cs* 에서 파일을 `RazorGenerate` 항목 요소가 있습니다. 이 대상 전후에 실행할 수 있는 추가 대상을 지정 하려면 속성을사용합니다.`RazorGenerateDependsOn`
+* `RazorCompile` &ndash; 생성 된 컴파일합니다 *.cs* Razor 어셈블리 파일입니다. 을 사용 `RazorCompileDependsOn` 하 여이 대상 전후에 실행할 수 있는 추가 대상을 지정 합니다.
+* `RazorComponentGenerate`코드는 항목 요소에 대 `RazorComponent` 한 .cs 파일을 생성 합니다. &ndash; 이 대상 전후에 실행할 수 있는 추가 대상을 지정 하려면 속성을사용합니다.`RazorComponentGenerateDependsOn`
 
 ### <a name="runtime-compilation-of-razor-views"></a>Razor 뷰의 런타임 컴파일
 
@@ -155,7 +153,7 @@ Razor SDK는 두 기본 대상을 정의합니다.
 </PropertyGroup>
 ```
 
-Razor의 언어 버전은 작성 된 런타임의 버전과 긴밀 하 게 통합 됩니다. 런타임에 대해 설계 되지 않은 언어 버전을 대상으로 지정 하는 것은 지원 되지 않으며 빌드 오류가 발생할 수 있습니다.
+Razor의 언어 버전은 작성 된 런타임의 버전과 긴밀 하 게 통합 됩니다. 런타임에 대해 설계 되지 않은 언어 버전을 대상으로 하는 것은 지원 되지 않으며 빌드 오류가 발생할 수 있습니다.
 
 ## <a name="additional-resources"></a>추가 자료
 
