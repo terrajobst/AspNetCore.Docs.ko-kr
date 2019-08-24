@@ -25,7 +25,7 @@ ms.locfileid: "67815629"
 
 자세한 내용은 [Visual Studio 설명서](/visualstudio/profiling/profiling-overview)합니다.
 
-## <a name="application-insights"></a>응용 프로그램 정보
+## <a name="application-insights"></a>애플리케이션 정보
 
 [Application Insights](/azure/application-insights/app-insights-overview) 앱에 대 한 자세한 성능 데이터를 제공 합니다. Application Insights는 자동으로 응답 속도, 실패율, 종속성 응답 시간 등의 데이터를 수집 합니다. Application Insights는 앱에 사용자 지정 이벤트 및 특정 메트릭 로깅을 지원 합니다.
 

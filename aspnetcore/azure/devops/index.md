@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core 및 Azure에서 DevOps
 author: CamSoper
-description: Azure에서 호스팅되는 ASP.NET Core 앱에 대한 DevOps 파이프라인을 빌드하는 방법에 대한 종단 간 지침을 제공하는 가이드입니다.
+description: Azure에서 호스팅되는 ASP.NET Core 앱에 대한 DevOps 파이프라인을 빌드하는 방법에 대한 엔드투엔드 지침을 제공하는 가이드입니다.
 ms.author: casoper
 ms.date: 08/07/2018
 ms.custom: mvc, seodec18
@@ -19,7 +19,7 @@ ms.locfileid: "64881958"
 
 작성자: [Cam Soper](https://twitter.com/camsoper) 및 [Scott Addie](https://twitter.com/scottaddie)
 
-이 가이드는 [다운로드 가능한 PDF 전자책](https://aka.ms/devopsbook)으로 제공됩니다.
+이 가이드는 [다운로드 가능한 PDF eBook](https://aka.ms/devopsbook)으로 제공됩니다.
 
 ## <a name="welcome"></a>환영 
 
@@ -33,7 +33,7 @@ ASP.NET Core에 익숙한 개발자여야 합니다(200~300레벨). 이 소개�
 
 ## <a name="what-this-guide-doesnt-cover"></a>이 가이드에서 다루지 않는 내용
 
-이 가이드는 .NET 개발자를 위한 종단 간 연속 배포 환경에 중점을 둡니다. Azure의 모든 항목에 대한 완전한 가이드가 아니며 Azure 서비스에 대한 .NET API에만 광범위하게 집중하지 않습니다. 지속적인 통합, 배포, 모니터링 및 디버깅과 관련된 모든 항목을 강조합니다. 이 가이드의 끝에서 다음 단계에 대한 권장 사항이 제공됩니다. ASP.NET Core 개발자에게 유용한 Azure 플랫폼 서비스가 제안에 포함됩니다.
+이 가이드는 .NET 개발자를 위한 엔드투엔드 연속 배포 환경에 중점을 둡니다. Azure의 모든 항목에 대한 완전한 가이드가 아니며 Azure 서비스에 대한 .NET API에만 광범위하게 집중하지 않습니다. 지속적인 통합, 배포, 모니터링 및 디버깅과 관련된 모든 항목을 강조합니다. 이 가이드의 끝에서 다음 단계에 대한 권장 사항이 제공됩니다. ASP.NET Core 개발자에게 유용한 Azure 플랫폼 서비스가 제안에 포함됩니다.
 
 ## <a name="whats-in-this-guide"></a>설명서의 내용
 
@@ -47,7 +47,7 @@ Azure App Service에 ASP.NET Core 앱을 배포하는 다양한 방법을 알아
 
 ### <a name="continuous-integration-and-deploymentxrefazuredevopscicd"></a>[연속 통합 및 배포](xref:azure/devops/cicd)
 
-GitHub, Azure DevOps Services, Azure를 사용하여 종단 간 연속 통합 및 ASP.NET Core 앱에 대한 배포 솔루션을 빌드합니다.
+GitHub, Azure DevOps Services, Azure를 사용하여 엔드투엔드 연속 통합 및 ASP.NET Core 앱에 대한 배포 솔루션을 빌드합니다.
 
 ### <a name="monitor-and-debugxrefazuredevopsmonitor"></a>[모니터링 및 디버그](xref:azure/devops/monitor)
 

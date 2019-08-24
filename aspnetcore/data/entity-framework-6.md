@@ -59,7 +59,7 @@ Core 프로젝트의 *Startup.cs* 파일에서 `ConfigureServices`에 종속성 
 
 [!code-csharp[](entity-framework-6/sample/MVCCore/Controllers/StudentsController.cs?name=snippet_ContextInController)]
 
-## <a name="sample-application"></a>애플리케이션 예제
+## <a name="sample-application"></a>샘플 애플리케이션
 
 작업 중인 애플리케이션 예제는 이 문서와 함께 제공되는 [샘플 Visual Studio 솔루션](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/entity-framework-6/sample/)을 참조하세요.
 

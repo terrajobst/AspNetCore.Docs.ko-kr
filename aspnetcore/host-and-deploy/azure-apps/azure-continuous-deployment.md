@@ -40,7 +40,7 @@ Azure DevOps Services를 사용하여 [Azure App Service](/azure/app-service/app
 
 1. **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.
 
-1. **ASP.NET Core 웹 애플리케이션** 프로젝트 템플릿을 선택합니다. **설치됨** > **템플릿** > **Visual C#** > **.NET Core** 아래에 표시됩니다. 프로젝트 이름을 `SampleWebAppDemo`로 지정합니다. **새 Git 리포지토리 만들기** 옵션을 선택하고 **확인**을 클릭합니다.
+1. **ASP.NET Core 웹 애플리케이션** 프로젝트 템플릿을 선택합니다. **설치됨** > **템플릿** > **Visual C#**  >  **.NET Core** 아래에 표시됩니다. 프로젝트 이름을 `SampleWebAppDemo`로 지정합니다. **새 Git 리포지토리 만들기** 옵션을 선택하고 **확인**을 클릭합니다.
 
    ![새 프로젝트 대화 상자](azure-continuous-deployment/_static/01-new-project.png)
 
@@ -145,7 +145,7 @@ Git은 Azure App Service 웹앱을 배포하는 데 사용할 수 있는 분산 
 
 1. **홈** > **변경 내용**을 선택하여 **변경 내용** 보기로 돌아갑니다.
 
-1. **Initial Push #1**과 같은 커밋 메시지를 입력하고 **커밋**을 선택합니다. 이렇게 하면 로컬에서 ‘커밋’이 생성됩니다.
+1. **Initial Push #1**과 같은 커밋 메시지를 입력하고 **커밋**을 선택합니다. 이렇게 하면 로컬에서 ‘커밋’이 생성됩니다. 
 
    ![팀 탐색기 연결 탭](azure-continuous-deployment/_static/12-initial-commit.png)
 
@@ -176,7 +176,7 @@ Git은 Azure App Service 웹앱을 배포하는 데 사용할 수 있는 분산 
    ```
 
    > [!NOTE]
-   > 프로젝트의 공동 작업이 필요한 경우 Azure로 푸시하기 전에 [GitHub](https://github.com)로 푸시하는 것이 좋습니다.
+   > 프로젝트의 협업이 필요한 경우 Azure로 푸시하기 전에 [GitHub](https://github.com)로 푸시하는 것이 좋습니다.
  
 ### <a name="verify-the-active-deployment"></a>활성 배포 확인
 
