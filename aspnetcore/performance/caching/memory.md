@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 8/22/2019
 uid: performance/caching/memory
-ms.openlocfilehash: 3005adec9ffe41859d05a3f61c7c45b8e7bfeefc
-ms.sourcegitcommit: bdaee0e8c657fe7546fd6b7990db9c03c2af04df
+ms.openlocfilehash: 1519abbca6430063f037372a4927f5818f160457
+ms.sourcegitcommit: 776598f71da0d1e4c9e923b3b395d3c3b5825796
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69908381"
+ms.lasthandoff: 08/26/2019
+ms.locfileid: "70024795"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>ASP.NET Core의 메모리 내 캐시
 
@@ -85,15 +85,15 @@ ASP.NET `System.Runtime.Caching` 4.x에서 ASP.NET Core로 코드를 이식할 �
 
 [!code-csharp[](memory/3.0sample/WebCacheSample/Controllers/HomeController.cs?name=snippet99)]
 
-상대 (sliding) 만료를 사용 하는 캐시 된 항목 집합은 만료에 바인딩되어 있지 않기 때문에 부실 하 게 될 위험이 있습니다. 슬라이딩 만료와 절대 만료를 사용 하 여 캐시 된 항목이 절대 만료 보다 더 오래 되지 않도록 합니다. 절대 만료가 슬라이딩와 결합 된 경우 절대 만료는 항목을 캐시할 수 있는 기간에 대 한 상한을 설정 합니다. 절대 만료 시간과 달리, 항목이 슬라이딩 만료 간격 내에 캐시에서 요청 되지 않은 경우 항목은 캐시에서 제거 됩니다. 절대 및 상대 (sliding) 만료가 지정 된 경우 만료는 논리적으로 ORed 됩니다.
+슬라이딩 만료가 있는 캐시 된 항목 집합은 부실 해질 수 있습니다. 슬라이딩 만료 간격 보다 더 자주 액세스 하는 경우 항목은 만료 되지 않습니다. 절대 만료 시간이 지날 때 항목이 만료 되도록 하려면 슬라이딩 만료를 절대 만료와 결합 합니다. 절대 만료는 항목을 캐시할 수 있는 기간에 대 한 상한을 설정 하 고, 해당 항목이 슬라이딩 만료 간격 내에 요청 되지 않은 경우에도 이전에 만료 될 수 있도록 합니다. 절대 및 상대 (sliding) 만료가 모두 지정 된 경우 만료는 논리적으로 ORed 됩니다. 슬라이딩 만료 간격이 *나* 절대 만료 시간을 전달 하는 경우 항목은 캐시에서 제거 됩니다.
 
-다음 코드는 슬라이딩 및 절대 만료를 포함 하는 캐시 된 항목을 가져오거나 만듭니다.
+다음 코드는 슬라이딩 *및* 절대 만료를 모두 사용 하 여 캐시 된 항목을 가져오거나 만듭니다.
 
 [!code-csharp[](memory/3.0sample/WebCacheSample/Controllers/HomeController.cs?name=snippet9)]
 
 위의 코드는 데이터가 절대 시간 보다 오래 캐시 되지 않도록 보장 합니다.
 
-<xref:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate*>, <xref:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync*> <xref:Microsoft.Extensions.Caching.Memory.CacheExtensions> 및 는의<xref:Microsoft.Extensions.Caching.Memory.IMemoryCache>기능을 확장 하는 클래스의 확장 메서드입니다. <xref:Microsoft.Extensions.Caching.Memory.CacheExtensions.Get*> 다른 캐시 메서드에 대 한 설명은 [IMemoryCache 메서드](/dotnet/api/microsoft.extensions.caching.memory.imemorycache) 및 [cacheextensions 메서드](/dotnet/api/microsoft.extensions.caching.memory.cacheextensions) 를 참조 하세요.
+<xref:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate*>, <xref:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync*>및 <xref:Microsoft.Extensions.Caching.Memory.CacheExtensions.Get*> 는클래스<xref:Microsoft.Extensions.Caching.Memory.CacheExtensions> 의 확장 메서드입니다. 이러한 메서드는의 <xref:Microsoft.Extensions.Caching.Memory.IMemoryCache>기능을 확장 합니다.
 
 ## <a name="memorycacheentryoptions"></a>MemoryCacheEntryOptions
 
