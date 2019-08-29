@@ -1,17 +1,17 @@
 ---
 title: ASP.NET Core에서 앱 시작
-author: tdykstra
+author: rick-anderson
 description: ASP.NET Core의 시작 클래스에서 서비스 및 앱의 요청 파이프라인을 구성하는 방법을 알아봅니다.
-ms.author: tdykstra
+ms.author: riande
 ms.custom: mvc
 ms.date: 8/7/2019
 uid: fundamentals/startup
-ms.openlocfilehash: 2ce4f2093c11066370160c62949888837065f129
-ms.sourcegitcommit: 2fa0ffe82a47c7317efc9ea908365881cbcb8ed7
+ms.openlocfilehash: 8866ee9210a91754d8050d0b91ff52c3d3fe0836
+ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/17/2019
-ms.locfileid: "69572841"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69975433"
 ---
 # <a name="app-startup-in-aspnet-core"></a>ASP.NET Core에서 앱 시작
 

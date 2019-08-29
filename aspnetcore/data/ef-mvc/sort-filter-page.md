@@ -2,16 +2,16 @@
 title: '자습서: 정렬, 필터링 및 페이징 추가 - ASP.NET MVC 및 EF Core 사용'
 description: 이 자습서에서는 학생 인덱스 페이지에 정렬, 필터링 및 페이징 기능을 추가합니다. 단순 그룹화를 수행하는 페이지도 만듭니다.
 author: tdykstra
-ms.author: tdykstra
+ms.author: riande
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/sort-filter-page
-ms.openlocfilehash: 4e52a3d3f56c4cf6f396ee9ff1c18061a2364c77
-ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
+ms.openlocfilehash: 7a5f617b00cceb007f37ca1e585c4c7ff1831b56
+ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/19/2019
-ms.locfileid: "69583395"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69975218"
 ---
 # <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>자습서: 정렬, 필터링 및 페이징 추가 - ASP.NET MVC 및 EF Core 사용
 

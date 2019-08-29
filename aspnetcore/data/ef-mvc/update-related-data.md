@@ -2,17 +2,17 @@
 title: '자습서: 관련 데이터 업데이트 - ASP.NET MVC 및 EF Core 사용'
 description: 이 자습서에서는 외래 키 필드 및 탐색 속성을 업데이트하여 관련된 데이터를 업데이트합니다.
 author: tdykstra
-ms.author: tdykstra
+ms.author: riande
 ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: 4bf444d3334f32ff80a6e21607b250c00e0dc7ca
-ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
+ms.openlocfilehash: 85849cfbb6f453103c4013ce49be4afbf506d7b5
+ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/19/2019
-ms.locfileid: "69583422"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69975148"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>자습서: 관련 데이터 업데이트 - ASP.NET MVC 및 EF Core 사용
 

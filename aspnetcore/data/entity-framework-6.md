@@ -2,16 +2,16 @@
 title: ASP.NET Core 및 Entity Framework 6 시작
 author: rick-anderson
 description: 이 문서에는 ASP.NET Core 애플리케이션에서 Entity Framework 6을 사용하는 방법을 보여 줍니다.
-ms.author: tdykstra
+ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: data/entity-framework-6
-ms.openlocfilehash: 50f51a72341cbad017872df581da214211b9920a
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: ace937e72efa2343e50b11d52ebc0a2530505758
+ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64886938"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69975592"
 ---
 # <a name="get-started-with-aspnet-core-and-entity-framework-6"></a>ASP.NET Core 및 Entity Framework 6 시작
 
@@ -59,7 +59,7 @@ Core 프로젝트의 *Startup.cs* 파일에서 `ConfigureServices`에 종속성 
 
 [!code-csharp[](entity-framework-6/sample/MVCCore/Controllers/StudentsController.cs?name=snippet_ContextInController)]
 
-## <a name="sample-application"></a>샘플 애플리케이션
+## <a name="sample-application"></a>애플리케이션 예제
 
 작업 중인 애플리케이션 예제는 이 문서와 함께 제공되는 [샘플 Visual Studio 솔루션](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/entity-framework-6/sample/)을 참조하세요.
 

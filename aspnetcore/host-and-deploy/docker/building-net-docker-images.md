@@ -1,17 +1,17 @@
 ---
 title: ASP.NET Core의 Docker 이미지
-author: tdykstra
+author: rick-anderson
 description: Docker 레지스트리에서 게시된 .NET Core Docker 이미지를 사용하는 방법을 알아봅니다. 이미지를 끌어오고 고유한 이미지를 빌드합니다.
-ms.author: tdykstra
+ms.author: riande
 ms.custom: mvc
 ms.date: 06/18/2019
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: 578f6f8cd54597fe0a6186d182cccc3955331e49
-ms.sourcegitcommit: 2fa0ffe82a47c7317efc9ea908365881cbcb8ed7
+ms.openlocfilehash: 38bdad7110a45538be01cf432aab773c4205980e
+ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/17/2019
-ms.locfileid: "69572857"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69975408"
 ---
 # <a name="docker-images-for-aspnet-core"></a>ASP.NET Core의 Docker 이미지
 

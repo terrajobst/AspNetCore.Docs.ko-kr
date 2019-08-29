@@ -3,16 +3,16 @@ title: Windows 서비스에서 ASP.NET Core 호스트
 author: guardrex
 description: Windows 서비스에서 ASP.NET Core 앱을 호스트하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-2.1'
-ms.author: tdykstra
+ms.author: riande
 ms.custom: mvc
 ms.date: 06/03/2019
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: 703edff19d82d10415bedb9b92d83709c275100f
-ms.sourcegitcommit: 776367717e990bdd600cb3c9148ffb905d56862d
+ms.openlocfilehash: 308a8bd10371cc70c431b8858ef7d82c1bb624da
+ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/09/2019
-ms.locfileid: "68913912"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69975407"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>Windows 서비스에서 ASP.NET Core 호스트
 

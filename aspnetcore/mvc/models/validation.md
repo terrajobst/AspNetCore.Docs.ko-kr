@@ -1,18 +1,18 @@
 ---
 title: ASP.NET Core MVC의 모델 유효성 검사
-author: tdykstra
+author: rick-anderson
 description: ASP.NET Core MVC 및 Razor Pages의 모델 유효성 검사에 대해 알아봅니다.
 ms.author: riande
 ms.custom: mvc
 ms.date: 04/06/2019
 monikerRange: '>= aspnetcore-2.1'
 uid: mvc/models/validation
-ms.openlocfilehash: 43b69e9b7588ad575f203200c5bc59a4272d0066
-ms.sourcegitcommit: 849af69ee3c94cdb9fd8fa1f1bb8f5a5dda7b9eb
+ms.openlocfilehash: eb18d3a701a4d1937ac6eb9f61916f348b95882a
+ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/22/2019
-ms.locfileid: "67814108"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69975253"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>ASP.NET Core MVC 및 Razor Pages의 모델 유효성 검사
 

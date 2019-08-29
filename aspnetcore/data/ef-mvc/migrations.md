@@ -2,17 +2,17 @@
 title: '자습서: 마이그레이션 기능 사용 - ASP.NET MVC 및 EF Core 사용'
 description: 이 자습서에서는 ASP.NET Core MVC 애플리케이션에서 데이터 모델 변경 관리를 위해 EF Core 마이그레이션 기능을 사용하는 것을 시작합니다.
 author: tdykstra
-ms.author: tdykstra
+ms.author: riande
 ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/migrations
-ms.openlocfilehash: 7ee383ff5fcd9dd79503321aaa188fd85ef18d7a
-ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
+ms.openlocfilehash: fcb238c132a774200e9f54f1141f5ba79fa2f802
+ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/19/2019
-ms.locfileid: "69583457"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69975159"
 ---
 # <a name="tutorial-using-the-migrations-feature---aspnet-mvc-with-ef-core"></a>자습서: 마이그레이션 기능 사용 - ASP.NET MVC 및 EF Core 사용
 

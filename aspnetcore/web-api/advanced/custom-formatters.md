@@ -2,15 +2,15 @@
 title: ASP.NET Core Web API에서 포맷터 사용자 지정
 author: rick-anderson
 description: ASP.NET Core의 웹 API에서 사용자 지정 포맷터를 만들고 사용하는 방법을 알아봅니다.
-ms.author: tdykstra
+ms.author: riande
 ms.date: 02/08/2017
 uid: web-api/advanced/custom-formatters
-ms.openlocfilehash: 03456f0a20cf1849bcd29101fda951f81edda31c
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: 6fb7e192bf3e943eb9018b08fb87a833d3643208
+ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67814830"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69975678"
 ---
 # <a name="custom-formatters-in-aspnet-core-web-api"></a>ASP.NET Core Web API에서 포맷터 사용자 지정
 

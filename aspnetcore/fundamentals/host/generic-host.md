@@ -3,16 +3,16 @@ title: .NET 일반 호스트
 author: tdykstra
 description: 앱 시작 및 수명 관리를 담당하는 .NET Core 일반 호스트에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-2.1'
-ms.author: tdykstra
+ms.author: riande
 ms.custom: mvc
 ms.date: 07/01/2019
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: d787559eaecd6d4d6cfe01e37baf28774a90c5c3
-ms.sourcegitcommit: bee530454ae2b3c25dc7ffebf93536f479a14460
+ms.openlocfilehash: 9f5ecc7840fc7ffd9432a3bb67d0418efb7e8fd6
+ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/10/2019
-ms.locfileid: "67724421"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69975623"
 ---
 # <a name="net-generic-host"></a>.NET 일반 호스트
 
@@ -308,7 +308,7 @@ webBuilder.UseSetting(WebHostDefaults.HostingStartupAssembliesKey, "assembly1;as
 webBuilder.UseSetting(WebHostDefaults.HostingStartupExcludeAssembliesKey, "assembly1;assembly2");
 ```
 
-### <a name="httpsport"></a>HTTPS_Port
+### <a name="https_port"></a>HTTPS_Port
 
 HTTPS 리디렉션 포트. [HTTPS 적용](xref:security/enforcing-ssl)에 사용됩니다.
 

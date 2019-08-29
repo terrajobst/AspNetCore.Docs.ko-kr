@@ -3,16 +3,16 @@ title: ASP.NET Core에서 WebSocket 지원
 author: rick-anderson
 description: ASP.NET Core에서 Websocket을 시작하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-1.1'
-ms.author: tdykstra
+ms.author: riande
 ms.custom: mvc
 ms.date: 05/10/2019
 uid: fundamentals/websockets
-ms.openlocfilehash: 4c49a5349c0718e5c59f30e6d51caf7a43fa0454
-ms.sourcegitcommit: c5339594101d30b189f61761275b7d310e80d18a
+ms.openlocfilehash: 5d4d9b02bd45e6650aa56448a3663cad06b3b45e
+ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/02/2019
-ms.locfileid: "66458450"
+ms.lasthandoff: 08/22/2019
+ms.locfileid: "69975452"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>ASP.NET Core에서 WebSocket 지원
 
@@ -47,7 +47,7 @@ ms.locfileid: "66458450"
 
   * Windows 8 / Windows Server 2012 이상
 
-* 지원되는 브라우저는 https://caniuse.com/#feat=websockets를 참조하세요.
+* 지원되는 브라우저는 https://caniuse.com/#feat=websockets 를 참조하세요.
 
 ::: moniker range="< aspnetcore-2.1"
 
@@ -145,7 +145,7 @@ CORS에서 제공하는 보호 기능은 WebSocket에 적용되지 않습니다.
 
 그러나 브라우저는 WebSocket 요청을 발급할 때 `Origin` 헤더를 보냅니다. 애플리케이션은 예상된 원본에서 제공하는 WebSocket만 허용되도록 이러한 헤더의 유효성을 검사하도록 구성되어야 합니다.
 
-"https://server.com"에서 서버를 호스팅하고 "https://client.com"에서 클라이언트를 호스팅하는 경우 `AllowedOrigins` 목록에 "https://client.com"을 추가하여 WebSocket을 확인합니다.
+"https://server.com "에서 서버를 호스팅하고 "https://client.com"에서 클라이언트를 호스팅하는 경우 `AllowedOrigins` 목록에 "https://client.com"을 추가하여 WebSocket을 확인합니다.
 
 [!code-csharp[](websockets/samples/2.x/WebSocketsSample/Startup.cs?name=UseWebSocketsOptionsAO&highlight=6-7)]
 
@@ -198,7 +198,7 @@ Windows 8 이상에서 WebSocket 프로토콜을 지원하려면:
 
 ## <a name="sample-app"></a>샘플 앱
 
-이 아티클과 함께 제공되는 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/websockets/samples)은 에코 앱입니다. WebSocket 연결을 생성하는 웹 페이지가 제공되며 서버는 수신한 메시지를 클라이언트로 재전송합니다. 명령 프롬프트에서 앱을 실행하고(IIS Express가 있는 Visual Studio에서 실행되도록 설정되지 않음) http://localhost:5000으로 이동합니다. 웹 페이지 왼쪽 상단에 연결 상태가 표시됩니다.
+이 아티클과 함께 제공되는 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/websockets/samples)은 에코 앱입니다. WebSocket 연결을 생성하는 웹 페이지가 제공되며 서버는 수신한 메시지를 클라이언트로 재전송합니다. 명령 프롬프트에서 앱을 실행하고(IIS Express가 있는 Visual Studio에서 실행되도록 설정되지 않음) http://localhost:5000 으로 이동합니다. 웹 페이지 왼쪽 상단에 연결 상태가 표시됩니다.
 
 ![웹 페이지의 초기 상태](websockets/_static/start.png)
 

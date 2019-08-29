@@ -5,12 +5,12 @@ description: 관련 기능을 별도의 네임스페이스(라우팅용) 및 폴
 ms.author: riande
 ms.date: 08/16/2019
 uid: mvc/controllers/areas
-ms.openlocfilehash: d0af3092776ee09469c879fffd3047c50b1a59b4
-ms.sourcegitcommit: 4cb0c7e74355f2e87c60e2a196f842b937247a99
+ms.openlocfilehash: 9065aa23a537add5a9376472e4f4478e9d4149bd
+ms.sourcegitcommit: 776598f71da0d1e4c9e923b3b395d3c3b5825796
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/16/2019
-ms.locfileid: "69545800"
+ms.lasthandoff: 08/26/2019
+ms.locfileid: "70024739"
 ---
 # <a name="areas-in-aspnet-core"></a>ASP.NET Core의 영역
 
@@ -72,9 +72,7 @@ Razor Pages를 사용하는 경우 이 문서에서 [Razor Pages가 있는 영�
 /Areas/<Area-Name>/Views/Shared/<Action-Name>.cshtml
 /Views/Shared/<Action-Name>.cshtml
 /Pages/Shared/<Action-Name>.cshtml
-   ```
-
-*컨트롤러* 및 *모델*과 같은 보기가 아닌 폴더의 위치는 중요하지 **않습니다**. 예를 들어 *컨트롤러* 및 *모델* 폴더는 필요하지 않습니다. *컨트롤러* 및 *모델*의 내용은 .dll로 컴파일되는 코드입니다. *보기*의 내용은 해당 보기에 대한 요청이 있을 때까지 컴파일되지 않습니다.
+```
 
 <a name="attribute"></a>
 
