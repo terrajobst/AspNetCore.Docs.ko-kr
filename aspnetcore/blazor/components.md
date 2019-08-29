@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/13/2019
 uid: blazor/components
-ms.openlocfilehash: e1afae730d61463d31c8a1698fc31904a3fc8f0e
-ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
+ms.openlocfilehash: 07e9153ccfdc78d1da57b815d33220f7fa597cc7
+ms.sourcegitcommit: 4b00e77f9984ce76356e829cfe7f75f0f61a7a8f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/19/2019
-ms.locfileid: "69583095"
+ms.lasthandoff: 08/29/2019
+ms.locfileid: "70145733"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -436,7 +436,7 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 | 진행률 | `UIProgressEventArgs` |
 | 터치 | `UITouchEventArgs`&ndash; 터치를구분하는장치에서`UITouchPoint` 단일 접촉 지점을 나타냅니다. |
 
-위의 표에서 이벤트의 속성 및 이벤트 처리 동작에 대 한 자세한 내용은 [참조 소스에서 EventArgs 클래스](https://github.com/aspnet/AspNetCore/tree/release/3.0-preview8/src/Components/Web/src)를 참조 하세요.
+위의 표에서 이벤트의 속성 및 이벤트 처리 동작에 대 한 자세한 내용은 [참조 소스의 EventArgs 클래스 (aspnet/AspNetCore release/3.0-preview9 branch)](https://github.com/aspnet/AspNetCore/tree/release/3.0-preview9/src/Components/Web/src)를 참조 하세요.
 
 ### <a name="lambda-expressions"></a>람다 식
 
