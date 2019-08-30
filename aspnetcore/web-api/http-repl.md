@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 07/25/2019
 uid: web-api/http-repl
-ms.openlocfilehash: 0e80fcd76a4d3efcd35140c52e0f6f0ae0f27932
-ms.sourcegitcommit: 2719c70cd15a430479ab4007ff3e197fbf5dfee0
+ms.openlocfilehash: d2c5f774595e7a2223e84cc76eecdb9baa04adfe
+ms.sourcegitcommit: 776598f71da0d1e4c9e923b3b395d3c3b5825796
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/09/2019
-ms.locfileid: "68862957"
+ms.lasthandoff: 08/26/2019
+ms.locfileid: "70024799"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>HTTP REPL을 사용하여 웹 API 테스트
 
@@ -82,6 +82,12 @@ Options:
 
 Once the REPL starts, these commands are valid:
 
+Setup Commands:
+Use these commands to configure the tool for your API server
+
+connect        Configures the directory structure and base address of the api server
+set header     Sets or clears a header for all requests. e.g. `set header content-type application/json`
+
 HTTP Commands:
 Use these commands to execute requests against your application.
 
@@ -93,13 +99,10 @@ PATCH          patch - Issues a PATCH request
 HEAD           head - Issues a HEAD request
 OPTIONS        options - Issues a OPTIONS request
 
-set header     Sets or clears a header for all requests. e.g. `set header content-type application/json`
-
 Navigation Commands:
 The REPL allows you to navigate your URL space and focus on specific APIs that you are working on.
 
 set base       Set the base URI. e.g. `set base http://locahost:5000`
-set swagger    Sets the swagger document to use for information about the current server
 ls             Show all endpoints for the current path
 cd             Append the given directory to the currently selected path, or move up a path when using `cd ..`
 
@@ -128,10 +131,10 @@ HTTP REPL은 명령 완성을 제안합니다. <kbd>Tab</kbd> 키를 누르면 �
 다음 명령을 실행하여 웹 API에 연결합니다.
 
 ```console
-dotnet httprepl <BASE URI>
+dotnet httprepl <ROOT URI>
 ```
 
-`<BASE URI>`는 웹 API의 기본 URI입니다. 예:
+`<ROOT URI>`는 웹 API의 기본 URI입니다. 예:
 
 ```console
 dotnet httprepl https://localhost:5001
@@ -140,27 +143,27 @@ dotnet httprepl https://localhost:5001
 또는 HTTP REPL이 실행되는 동안 언제든지 다음 명령을 실행합니다.
 
 ```console
-set base <BASE URI>
+connect <ROOT URI>
 ```
 
 예:
 
 ```console
-(Disconnected)~ set base https://localhost:5001
+(Disconnected)~ connect https://localhost:5001
 ```
 
-## <a name="point-to-the-swagger-document-for-the-web-api"></a>웹 API에 대한 Swagger 문서를 가리킵니다.
+## <a name="manually-point-to-the-swagger-document-for-the-web-api"></a>웹 API에 대한 Swagger 문서를 수동으로 가리킵니다.
 
-웹 API를 제대로 검사하려면 웹 API에 대한 Swagger 문서에 관련 URI를 설정합니다. 다음 명령을 실행합니다.
+위의 connect 명령으로는 Swagger 문서 자동 검색을 시도하게 됩니다. 이 작업을 할 수 없는 경우에는 다음과 같이 `--swagger` 옵션으로 웹 API에 대한 Swagger 문서의 URI을 지정할 수 있습니다.
 
 ```console
-set swagger <RELATIVE URI>
+connect <ROOT URI> --swagger <SWAGGER URI>
 ```
 
 예:
 
 ```console
-https://localhost:5001/~ set swagger /swagger/v1/swagger.json
+(Disconnected)~ connect https://localhost:5001 --swagger /swagger/v1/swagger.json
 ```
 
 ## <a name="navigate-the-web-api"></a>웹 API 탐색
@@ -402,6 +405,21 @@ pref set editor.command.default "C:\Program Files\Microsoft VS Code\Code.exe"
 
 ```console
 pref set editor.command.default.arguments "--disable-extensions --new-window"
+```
+
+### <a name="set-the-swagger-search-paths"></a>Swagger 검색 경로 설정
+
+기본적으로 HTTP REPL에는 `--swagger` 옵션 없이 `connect` 명령을 실행할 때 Swagger 문서 검색에 사용하는 상대 경로 집합이 있습니다. 이러한 상대 경로는 `connect` 명령에서 지정된 루트 및 기본 경로와 결합됩니다. 기본 상대 경로는 다음과 같습니다.
+
+- *swagger.json*
+- *swagger/v1/swagger.json*
+- */swagger.json*
+- */swagger/v1/swagger.json*
+
+사용자의 환경에서 서로 다른 검색 경로 집합을 사용하려면 `swagger.searchPaths` 기본 설정을 지정합니다. 값은 파이프로 구분된 상대 경로 목록이어야 합니다. 예:
+
+```console
+pref set swagger.searchPaths "swagger/v2/swagger.json|swagger/v3/swagger.json
 ```
 
 ## <a name="test-http-get-requests"></a>HTTP GET 요청 테스트

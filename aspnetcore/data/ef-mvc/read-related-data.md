@@ -2,16 +2,16 @@
 title: '자습서: 관련 데이터 읽기 - ASP.NET MVC 및 EF Core 사용'
 description: 이 자습서에서는 관련 데이터 즉, Entity Framework에서 탐색 속성으로 로드하는 데이터를 읽고 표시합니다.
 author: tdykstra
-ms.author: tdykstra
+ms.author: riande
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: 43d05d0a5f938e60cdb54a0025d8bc277059c2e3
-ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
+ms.openlocfilehash: 2bf556dae5d30819c54ecc3f0dadfbd3316db1cc
+ms.sourcegitcommit: 0774a61a3a6c1412a7da0e7d932dc60c506441fc
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/19/2019
-ms.locfileid: "69583435"
+ms.lasthandoff: 08/27/2019
+ms.locfileid: "70059107"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>자습서: 관련 데이터 읽기 - ASP.NET MVC 및 EF Core 사용
 
@@ -239,7 +239,7 @@ Entity Framework와 같은 ORM(개체-관계형 매핑) 소프트웨어에서 �
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?name=snippet_ExplicitLoading&highlight=23-29)]
 
-새 코드는 강사 엔터티를 검색하는 코드에서 등록 데이터에 대한 *ThenInclude* 메서드 호출을 삭제합니다. 강사 및 강좌가 선택된 경우 강조 표시된 코드는 선택된 강좌에 대한 등록 엔터티 및 각 등록에 대한 학생 엔터티를 검색합니다.
+새 코드는 강사 엔터티를 검색하는 코드에서 등록 데이터에 대한 *ThenInclude* 메서드 호출을 삭제합니다. 이 코드는 `AsNoTracking` 또한 삭제합니다.  강사 및 강좌가 선택된 경우 강조 표시된 코드는 선택된 강좌에 대한 등록 엔터티 및 각 등록에 대한 학생 엔터티를 검색합니다.
 
 앱을 실행하고, 강사 인덱스 페이지로 이동하면 데이터가 검색되는 방법을 변경했더라도 페이지에 표시되는 내용에 차이가 없습니다.
 

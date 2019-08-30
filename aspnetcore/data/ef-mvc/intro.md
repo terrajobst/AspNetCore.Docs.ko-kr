@@ -2,19 +2,27 @@
 title: '자습서: ASP.NET MVC 웹앱에서 EF Core 시작'
 description: 이는 Contoso University 샘플 애플리케이션을 처음부터 빌드하는 방법을 설명하는 일련의 자습서 중 첫 번째입니다.
 author: tdykstra
-ms.author: tdykstra
+ms.author: riande
 ms.custom: mvc
 ms.date: 02/06/2019
 ms.topic: tutorial
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 1b68c20ba206a5afe36f307525879f91d03d95d1
-ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
+ms.openlocfilehash: 3450ac5b46e2a03b5d58c8760b78a52065343992
+ms.sourcegitcommit: 6189b0ced9c115248c6ede02efcd0b29d31f2115
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/19/2019
-ms.locfileid: "69583336"
+ms.lasthandoff: 08/23/2019
+ms.locfileid: "69985364"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>자습서: ASP.NET MVC 웹앱에서 EF Core 시작
+
+::: moniker range=">= aspnetcore-3.0"
+
+이 자습서는 ASP.NET Core 3.0에 맞게 업데이트되지 **않았습니다**. [Razor Pages 버전](xref:data/ef-rp/intro)이 업데이트되었습니다. 업데이트 가능 시기에 대해서는 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/13920)를 참조하세요.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
 
 [!INCLUDE [RP better than MVC](~/includes/RP-EF/rp-over-mvc.md)]
 
@@ -378,3 +386,5 @@ Entity Framework를 사용하는 비동기 코드를 작성할 때 고려해야 
 
 > [!div class="nextstepaction"]
 > [기본 CRUD 기능 구현](crud.md)
+
+::: moniker-end

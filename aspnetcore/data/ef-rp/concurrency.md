@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: df3cc9eb3d0c1748ca9cd194ee58e4614bba24d5
-ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
+ms.openlocfilehash: da57633c345ec087b1a4f24ddc7771e7a2d04720
+ms.sourcegitcommit: 0774a61a3a6c1412a7da0e7d932dc60c506441fc
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/19/2019
-ms.locfileid: "69583400"
+ms.lasthandoff: 08/27/2019
+ms.locfileid: "70059087"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---concurrency---8-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 동시성 - 8/8
 
@@ -234,7 +234,7 @@ SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 
 
 스캐폴딩 도구는 인덱스 페이지에 대한 `RowVersion` 열을 만들지만, 해당 필드는 프로덕션 앱에 표시되지 않습니다. 이 자습서에서는 동시성 처리의 작동 방식을 보여 줄 수 있는 `RowVersion`의 마지막 바이트가 표시됩니다. 마지막 바이트는 자체적으로 고유하게 보장되지 않습니다.
 
-인덱스 페이지를 업데이트합니다.
+*Pages\Departments\Index.cshtml* 페이지를 업데이트합니다.
 
 * 인덱스를 부서로 바꿉니다.
 * 바이트 배열의 마지막 바이트만 표시하도록 `RowVersion`을 포함하는 코드를 변경합니다.

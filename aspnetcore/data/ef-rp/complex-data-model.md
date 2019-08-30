@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: 8a1c0759453b02f4ce1c45471a8f93da626f8261
-ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
+ms.openlocfilehash: 34b977f70f3e7e58e4ab6fcf3d8f69800896a65d
+ms.sourcegitcommit: 0774a61a3a6c1412a7da0e7d932dc60c506441fc
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/19/2019
-ms.locfileid: "69583293"
+ms.lasthandoff: 08/27/2019
+ms.locfileid: "70059127"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---data-model---5-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 데이터 모델 - 5/8
 
@@ -134,13 +134,16 @@ public string FirstMidName { get; set; }
 
 `Required` 특성에서 이름 속성은 필수 필드입니다. `Required` 특성은 값 형식(예: `DateTime`, `int` 및 `double`)과 같은 비 nullable 형식에 필요하지 않습니다. Null일 수 없는 형식은 자동으로 필수 필드로 처리됩니다.
 
-`Required` 특성은 `StringLength` 특성에서 최소 길이 매개 변수로 대체될 수 있습니다.
+`MinimumLength`가 적용되려면 `Required` 특성이 `MinimumLength`와 함께 사용되어야 합니다.
 
 ```csharp
 [Display(Name = "Last Name")]
-[StringLength(50, MinimumLength=1)]
+[Required]
+[StringLength(50, MinimumLength=2)]
 public string LastName { get; set; }
 ```
+
+`MinimumLength`와 `Required`는 유효성 검사 충족에 공백을 허용합니다. 문자열을 완전히 제어할 수 있도록 `RegularExpression` 특성을 사용합니다.
 
 ### <a name="the-display-attribute"></a>표시 특성
 
@@ -1353,7 +1356,7 @@ SSOX에서 DB를 엽니다.
 
 다음 강조 표시된 코드를 추가합니다. 새 코드는 `.CreateTable( name: "Department"` 블록 뒤로 이동합니다.
 
- [!code-csharp[](intro/samples/cu/Migrations/20171027005808_ComplexDataModel.cs?name=snippet_CreateDefaultValue&highlight=22-32)]
+[!code-csharp[](intro/samples/cu/Migrations/20171027005808_ComplexDataModel.cs?name=snippet_CreateDefaultValue&highlight=22-32)]
 
 위의 변경 내용으로 `ComplexDataModel` `Up` 메서드를 실행한 후에 기존 `Course` 행은 “Temp” 부서에 연결됩니다.
 
@@ -1368,8 +1371,6 @@ SSOX에서 DB를 엽니다.
 
 * [이 자습서의 YouTube 버전(1부)](https://www.youtube.com/watch?v=0n2f0ObgCoA)
 * [이 자습서의 YouTube 버전(2부)](https://www.youtube.com/watch?v=Je0Z5K1TNmY)
-
-
 
 > [!div class="step-by-step"]
 > [이전](xref:data/ef-rp/migrations)

@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core를 사용하여 웹 API를 빌드하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/14/2019
+ms.date: 08/27/2019
 uid: tutorials/first-web-api
-ms.openlocfilehash: 99985e9fb1134c2ba808434f8d24c4a768773268
-ms.sourcegitcommit: 476ea5ad86a680b7b017c6f32098acd3414c0f6c
+ms.openlocfilehash: 25bfccb136d875b454034bd011828c9f3b6cd3d8
+ms.sourcegitcommit: de17150e5ec7507d7114dde0e5dbc2e45a66ef53
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/14/2019
-ms.locfileid: "69022601"
+ms.lasthandoff: 08/28/2019
+ms.locfileid: "70113294"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>자습서: ASP.NET Core를 사용하여 웹 API 만들기
 
@@ -462,9 +462,9 @@ Postman을 사용하여 할 일 항목을 삭제합니다.
 * 예를 들어 삭제할 개체의 URI를 `https://localhost:5001/api/TodoItems/1`로 설정합니다.
 * **보내기** 선택
 
-## <a name="call-the-api-from-jquery"></a>jQuery에서 API 호출
+## <a name="call-the-web-api-with-javascript"></a>JavaScript를 사용하여 웹 API 호출
 
-단계별 지침은 [자습서: jQuery로 ASP.NET Core 웹 API 호출하기](xref:tutorials/web-api-jquery)를 참조하세요.
+단계별 지침은 [자습서: JavaScript로 ASP.NET Core 웹 API 호출하기](xref:tutorials/web-api-javascript)를 참조하세요.
 
 ::: moniker-end
 
@@ -480,9 +480,10 @@ Postman을 사용하여 할 일 항목을 삭제합니다.
 > * 라우팅 및 URL 경로 구성
 > * 반환 값 지정
 > * Postman을 사용하여 웹 API 호출
-> * jQuery를 사용하여 웹 API를 호출합니다.
+> * JavaScript를 사용하여 웹 API를 호출합니다.
 
 작업을 완료하면 웹 API는 관계형 데이터베이스에 저장된 "할 일" 항목을 관리할 수 있게 됩니다.
+
 ## <a name="overview"></a>개요
 
 이 자습서에서는 다음 API를 만듭니다.
@@ -737,7 +738,6 @@ ASP.NET Core에서는 DB 컨텍스트와 같은 서비스를 [DI(종속성 주�
 * 요청된 ID와 일치하는 항목이 없는 경우 메서드가 404 [NotFound](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.notfound) 오류 코드를 반환합니다.
 * 그렇지 않으면 메서드가 JSON 응답 본문에서 200을 반환합니다. `item`을 반환하면 HTTP 200 응답이 발생합니다.
 
-
 ## <a name="test-the-gettodoitems-method"></a>GetTodoItems 메서드 테스트
 
 이 자습서에서는 Postman을 사용하여 웹 API를 테스트합니다.
@@ -863,9 +863,9 @@ Postman을 사용하여 할 일 항목을 삭제합니다.
 
 샘플 앱을 사용하면 모든 항목을 삭제할 수 있습니다. 하지만 마지막 항목이 삭제되면 다음에 API를 호출하는 경우 모델 클래스 생성자에서 새로운 항목이 생성됩니다.
 
-## <a name="call-the-api-with-jquery"></a>jQuery를 사용하여 API 호출
+## <a name="call-the-web-api-with-javascript"></a>JavaScript를 사용하여 웹 API 호출
 
-이 섹션에서는 jQuery를 사용하여 웹 API를 호출하는 HTML 페이지가 추가되었습니다. jQuery는 요청을 시작하고 API 응답의 세부 정보로 페이지를 업데이트합니다.
+이 섹션에는 JavaScript를 사용하여 웹 API를 호출하는 HTML 페이지가 추가되었습니다. Fetch API가 요청을 시작합니다. JavaScript는 웹 API 응답의 세부 정보를 토대로 페이지를 업데이트합니다.
 
 다음 강조 표시된 코드로 *Startup.cs*를 업데이트하여 앱이 [정적 파일을 제공](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_)하고 [기본 파일 매핑을 사용](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_)하도록 구성합니다.
 
@@ -886,19 +886,17 @@ HTML 페이지를 로컬에서 테스트하려면 ASP.NET Core 프로젝트의 �
 * *Properties\launchSettings.json*을 엽니다.
 * `launchUrl` 속성을 제거하여 앱이 *index.html*&mdash; 프로젝트의 기본 파일에서 열리도록 합니다.
 
-여러 가지 방법으로 jQuery를 가져올 수 있습니다. 위의 코드 조각에서 라이브러리는 CDN에서 로드됩니다.
-
-이 샘플은 API의 모든 CRUD 메서드를 호출합니다. API 호출에 대한 설명은 다음과 같습니다.
+이 샘플은 웹 API의 CRUD 메서드를 모두 호출합니다. API 호출에 대한 설명은 다음과 같습니다.
 
 ### <a name="get-a-list-of-to-do-items"></a>할 일 항목의 목록 가져오기
 
-jQuery [ajax](https://api.jquery.com/jquery.ajax/) 함수는 할 일 항목의 배열을 나타내는 JSON을 반환하는 API에 `GET` 요청을 보냅니다. 요청이 성공하면 `success` 콜백 함수가 호출됩니다. 콜백에서 DOM은 할 일 정보로 업데이트됩니다.
+Fetch는 할 일 항목의 배열을 나타내는 JSON을 반환하는 웹 API에 HTTP GET 요청을 보냅니다. 요청이 성공하면 `success` 콜백 함수가 호출됩니다. 콜백에서 DOM은 할 일 정보로 업데이트됩니다.
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_GetData)]
 
 ### <a name="add-a-to-do-item"></a>할 일 항목 추가
 
-[ajax](https://api.jquery.com/jquery.ajax/) 함수는 `POST` 요청 본문에서 할 일 항목을 사용하여 요청을 보냅니다. `accepts` 및 `contentType` 옵션은 수신 및 전송되는 미디어 형식을 지정하기 위해 `application/json`으로 설정됩니다. [JSON.stringify](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)를 사용하여 할 일 항목을 JSON으로 변환합니다. API가 성공적인 상태 코드를 반환하면 `getData` 함수가 호출되어 HTML 테이블을 업데이트합니다.
+Fetch는 요청 본문에서 할 일 항목을 사용하여 HTTP POST 요청을 보냅니다. `accepts` 및 `contentType` 옵션은 수신 및 전송되는 미디어 형식을 지정하기 위해 `application/json`으로 설정됩니다. [JSON.stringify](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)를 사용하여 할 일 항목을 JSON으로 변환합니다. API가 성공적인 상태 코드를 반환하면 `getData` 함수가 호출되어 HTML 테이블을 업데이트합니다.
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_AddItem)]
 
