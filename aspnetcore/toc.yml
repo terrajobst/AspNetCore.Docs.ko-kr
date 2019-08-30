@@ -78,12 +78,12 @@
         - name: Web API 만들기
           displayName: tutorial
           uid: tutorials/first-web-api
-        - name: MongoDB를 사용하는 Web API
+        - name: MongoDB를 사용하여 웹 API 생성
           displayName: tutorial
           uid: tutorials/first-mongo-app
-        - name: jQuery를 사용하는 Web API
+        - name: JavaScript를 사용하여 웹 API 호출
           displayName: tutorial
-          uid: tutorials/web-api-jquery
+          uid: tutorials/web-api-javascript
         - name: 모바일 백 엔드
           displayName: tutorial
           uid: mobile/native-mobile-backend
