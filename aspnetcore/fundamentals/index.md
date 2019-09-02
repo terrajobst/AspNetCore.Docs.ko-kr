@@ -43,7 +43,7 @@ Entity Framework Core 컨텍스트 개체를 가져오는 데 DI를 사용하는
 
 [!code-csharp[](index/snapshots/2.x/Index.cshtml.cs?highlight=5)]
 
-DI가 기본 제공되기는 하지만 원하는 경우 타사 IoC(Inversion of Control) 컨테이너를 플러그 인할 수 있도록 설계되었습니다.
+DI가 기본 제공되면 원하는 경우 타사 IoC(Inversion of Control) 컨테이너에 플러그 인할 수 있도록 설계되었습니다.
 
 자세한 내용은 <xref:fundamentals/dependency-injection>을 참조하세요.
 
@@ -166,9 +166,9 @@ ASP.NET Core는 *Kestrel* 플랫폼 간 서버 구현을 제공합니다. Kestre
 
 ASP.NET Core는 정렬된 일련의 구성 공급 기업에서 이름-값 쌍으로 설정을 가져오는 구성 프레임워크를 제공합니다. *.json* 파일, *.xml* 파일, 환경 변수 및 명령줄 인수와 같은 다양한 원본의 기본 제공 구성 공급 기업이 있습니다. 또는 사용자 지정 구성 공급 기업을 작성할 수도 있습니다.
 
-예를 들어 구성이 *appsettings.json* 및 환경 변수에서 제공되도록 지정할 수 있습니다. 그런 다음, *ConnectionString* 값이 요청되면 프레임워크는 먼저 *appsettings.json* 파일을 찾습니다. 거기에서 값을 찾을 수 없을 뿐만 아니라 환경 변수에서도 찾을 수 없으면 환경 변수의 값이 우선 적용됩니다.
+예를 들어 구성이 *appsettings.json* 및 환경 변수에서 제공되도록 지정할 수 있습니다. 그런 다음, *ConnectionString* 값이 요청되면 프레임워크는 먼저 *appsettings.json* 파일을 찾습니다. 값을 찾았지만 환경 변수에서도 값을 찾을 수 있다면 환경 변수의 값이 우선 적용됩니다.
 
-ASP.NET Core는 암호와 같은 기밀 구성 데이터를 관리하기 위해 [비밀 관리자 도구](xref:security/app-secrets)를 제공합니다. 프로덕션 비밀의 경우 [Azure Key Vault](xref:security/key-vault-configuration)를 사용하는 것이 좋습니다.
+ASP.NET Core는 암호와 같은 기밀 구성 데이터를 관리하기 위해 [비밀 관리자 도구](xref:security/app-secrets)를 제공합니다. 프로덕션 암호의 경우 [Azure Key Vault](xref:security/key-vault-configuration)를 사용하는 것이 좋습니다.
 
 자세한 내용은 <xref:fundamentals/configuration/index>을 참조하세요.
 
