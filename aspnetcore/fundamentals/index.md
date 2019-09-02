@@ -43,7 +43,7 @@ Entity Framework Core 컨텍스트 개체를 가져오는 데 DI를 사용하는
 
 [!code-csharp[](index/snapshots/2.x/Index.cshtml.cs?highlight=5)]
 
-DI가 기본 제공되면 원하는 경우 타사 IoC(Inversion of Control) 컨테이너에 플러그 인할 수 있도록 설계되었습니다.
+DI가 기본 제공되기는 하지만 원하는 경우 타사 IoC(Inversion of Control) 컨테이너를 플러그 인할 수 있도록 설계되었습니다.
 
 자세한 내용은 <xref:fundamentals/dependency-injection>을 참조하세요.
 
