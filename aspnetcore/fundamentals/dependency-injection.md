@@ -26,7 +26,7 @@ MVC 컨트롤러 내의 종속성 주입에 대한 자세한 내용은 <xref:mvc
 
 ## <a name="overview-of-dependency-injection"></a>종속성 주입 개요
 
-‘종속성’은 다른 개체에 필요한 모든 개체입니다. 앱의 다른 클래스가 종속된 `MyDependency` 클래스에서 `WriteMessage` 메서드를 사용하는 다음 코드를 살펴보세요.
+‘종속성’은 다른 개체에 필요한 모든 개체입니다.  앱의 다른 클래스가 종속된 `MyDependency` 클래스에서 `WriteMessage` 메서드를 사용하는 다음 코드를 살펴보세요.
 
 ```csharp
 public class MyDependency
@@ -70,7 +70,7 @@ public class IndexModel : PageModel
 
 * 인퍼테이스 또는 기본 클래스를 사용하여 종속성 구현을 추상화합니다.
 * 서비스 컨테이너에 종속성 등록. ASP.NET Core는 서비스 컨테이너인 <xref:System.IServiceProvider>를 기본 제공합니다. 서비스는 앱의 `Startup.ConfigureServices` 메서드에서 등록됩니다.
-* 서비스를 사용되는 클래스의 생성자에 주입. 프레임워크는 종속성의 인스턴스를 만들고 더 이상 필요하지 않으면 삭제하는 작업을 담당합니다.
+* 서비스를 사용되는 클래스의 생성자에 주입  . 프레임워크는 종속성의 인스턴스를 만들고 더 이상 필요하지 않으면 삭제하는 작업을 담당합니다.
 
 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples)에서 `IMyDependency` 인터페이스는 서비스가 앱에 제공하는 메서드를 정의합니다.
 
@@ -80,7 +80,7 @@ public class IndexModel : PageModel
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Services/MyDependency.cs?name=snippet1)]
 
-`MyDependency`는 해당 생성자에서 <xref:Microsoft.Extensions.Logging.ILogger`1>를 요청합니다. 종속성 주입을 연결된 방식으로 사용하는 일은 특별한 경우가 아닙니다. 요청된 각 종속성은 차례로 자체 종속성을 요청합니다. 컨테이너는 그래프의 종속성을 해결하고 완전히 해결된 서비스를 반환합니다. 해결해야 하는 종속성이 모인 집합은 일반적으로 종속성 트리, 종속성 그래프 또는 개체 그래프라고 합니다.
+`MyDependency`는 해당 생성자에서 <xref:Microsoft.Extensions.Logging.ILogger`1>를 요청합니다. 종속성 주입을 연결된 방식으로 사용하는 일은 특별한 경우가 아닙니다. 요청된 각 종속성은 차례로 자체 종속성을 요청합니다. 컨테이너는 그래프의 종속성을 해결하고 완전히 해결된 서비스를 반환합니다. 해결해야 하는 종속성이 모인 집합은 일반적으로 종속성 트리, 종속성 그래프 또는 개체 그래프라고 합니다    .
 
 `IMyDependency` 및 `ILogger<TCategoryName>`는 서비스 컨테이너에 등록되어야 합니다. `IMyDependency`는 `Startup.ConfigureServices`에 등록됩니다. `ILogger<TCategoryName>`은 로깅 추상화 인프라에서 등록하므로, 프레임워크에서 기본적으로 등록한 [프레임워크 제공 서비스](#framework-provided-services)입니다.
 
@@ -274,7 +274,7 @@ Entity Framework 컨텍스트는 일반적으로 [범위가 지정된 수명](#s
 
 다음 출력은 두 요청의 결과를 보여 줍니다.
 
-**첫 번째 요청:**:
+**첫 번째 요청:** :
 
 컨트롤러 작업:
 
@@ -310,11 +310,11 @@ Singleton: 01271bc1-9e31-48e7-8f7c-7261b040ded9
 
 * *Transient* 개체는 항상 다릅니다. 첫 번째와 두 번째 클라이언트 요청에 대한 임시 `OperationId` 값은 `OperationService` 작업과 클라이언트 요청 간에 모두 다릅니다. 각 서비스 요청과 클라이언트 요청에 새 인스턴스가 제공됩니다.
 * *Scoped* 개체는 클라이언트 요청 내에서는 동일하지만 클라이언트 요청 간에는 다릅니다.
-* *Singleton* 개체는 `Startup.ConfigureServices`에 `Operation` 인스턴스 제공 여부와 관계없이 모든 개체 및 모든 요청에 대해 동일합니다.
+* *Singleton* 개체는 `Startup.ConfigureServices`에서 `Operation` 인스턴스 제공 여부와 관계없이 모든 개체 및 모든 요청에 대해 동일합니다.
 
 ## <a name="call-services-from-main"></a>Main에서 서비스 호출
 
-[IServiceScopeFactory.CreateScope](xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory.CreateScope*)와 함께 <xref:Microsoft.Extensions.DependencyInjection.IServiceScope>를 만들어 앱 범위 내에서 범위가 지정된 서비스를 확인합니다. 이 방법은 시작 시 범위가 지정된 서비스에 액세스하여 초기화 작업을 실행하는 데 유용합니다. 다음 예제에서는 `Program.Main`에서 `MyScopedService`에 대한 컨텍스트를 가져오는 방법을 보여 줍니다.
+[IServiceScopeFactory.CreateScope](xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory.CreateScope*)를 사용하여 <xref:Microsoft.Extensions.DependencyInjection.IServiceScope>를 만들어서 앱 범위 내로 범위가 지정된 서비스를 해결합니다. 이 방법은 시작 시 범위가 지정된 서비스에 액세스하여 초기화 작업을 실행하는 데 유용합니다. 다음 예제에서는 `Program.Main`에서 `MyScopedService`에 대한 컨텍스트를 가져오는 방법을 보여 줍니다.
 
 ```csharp
 public static void Main(string[] args)
@@ -345,12 +345,12 @@ public static void Main(string[] args)
 
 앱이 개발 환경에서 실행 중인 경우 기본 서비스 공급자가 다음을 확인하는 검사를 수행합니다.
 
-* 범위가 지정된 서비스는 루트 서비스 공급자를 통해 간접적 또는 직접으로 확인되지 않습니다.
+* '직접으로' in current translation is awkward/inappropriate in terms of grammar.
 * 범위가 지정된 서비스는 직접 또는 간접적으로 싱글톤에 삽입되지 않습니다.
 
 루트 서비스 공급자는 <xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider*>를 호출할 때 만들어집니다. 루트 서비스 공급자의 수명은 공급자가 앱과 함께 시작되고 앱이 종료될 때 삭제되는 앱/서버의 수명에 해당합니다.
 
-범위가 지정된 서비스는 서비스를 만든 컨테이너에 의해 삭제됩니다. 범위가 지정된 서비스가 루트 컨테이너에서 만들어지는 경우 서비스의 수명은 효과적으로 싱글톤으로 승격됩니다. 해당 서비스는 앱/서버가 종료될 때 루트 컨테이너에 의해서만 삭제되기 때문입니다. 서비스 범위의 유효성 검사는 `BuildServiceProvider`가 호출될 경우 이러한 상황을 catch합니다.
+범위가 지정된 서비스는 서비스를 만든 컨테이너에 의해 삭제됩니다. 범위가 지정된 서비스가 루트 컨테이너에서 만들어지는 경우 서비스의 수명은 효과적으로 싱글톤으로 승격됩니다. 해당 서비스는 앱/서버가 종료될 때 루트 컨테이너에 의해서만 삭제되기 때문입니다. 서비스 범위의 유효성 검사는 `BuildServiceProvider`가 호출될 경우 이러한 상황을 감지합니다.
 
 자세한 내용은 <xref:fundamentals/host/web-host#scope-validation>을 참조하세요.
 
@@ -360,7 +360,7 @@ public static void Main(string[] args)
 
 요청 서비스는 앱의 일부로 구성 및 요청된 서비스를 나타냅니다. 개체가 종속성을 지정한 경우에는 `ApplicationServices`가 아닌 `RequestServices`에 있는 형식으로 충족됩니다.
 
-일반적으로 앱은 이러한 속성을 직접 사용해서는 안 됩니다. 대신 클래스 생성자를 통해 클래스에 필요한 형식을 요청하고 프레임워크가 종속성을 주입하도록 합니다. 테스트하기 쉬운 클래스를 생성합니다.
+일반적으로 앱은 이러한 속성을 직접 사용해서는 안 됩니다. 대신 클래스 생성자를 통해 클래스에 필요한 형식을 요청하고 프레임워크가 종속성을 주입하도록 합니다. 이 방법이 테스트하기 쉬운 클래스를 생성합니다.
 
 > [!NOTE]
 > `RequestServices` 컬렉션에 액세스하는 것보다 생성자 매개 변수로 종속성을 요청하는 것을 선호합니다.
@@ -370,11 +370,11 @@ public static void Main(string[] args)
 모범 사례는 다음과 같습니다.
 
 * 종속성 주입을 사용하여 종속성을 가져오도록 서비스를 디자인합니다.
-* 상태 저장 정적 메서드 호출을 사용하지 마세요.
+* 상태를 저장하는 정적 메서드 호출을 사용하지 마세요.
 * 서비스 내의 종속 클래스를 직접 인스턴스화하지 마세요. 직접 인스턴스화는 코드를 특정 구현에 결합합니다.
 * 앱 클래스를 작고 잘 구성되고 쉽게 테스트할 수 있도록 만듭니다.
 
-클래스에 주입된 종속성이 너무 많아 보이면 일반적으로 클래스에 역할이 너무 많고 [SRP(단일 책임 원칙)](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#single-responsibility)를 위반하는 것일 수 있습니다. 해당 책임 몇 가지를 새로운 클래스로 이동하여 클래스를 리팩터링해 보세요. Razor 페이지의 페이지 모델 클래스 및 MVC 컨트롤러 클래스는 UI 고려 사항에 집중해야 합니다. 비즈니스 규칙 및 데이터 액세스 구현 세부 정보는 이러한 [별도의 문제](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns)에 적합한 클래스에 유지되어야 합니다.
+클래스에 주입된 종속성이 너무 많아 보이면 일반적으로 클래스에 역할이 너무 많고 [SRP(단일 책임 원칙)](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#single-responsibility)를 위반하는 것일 수 있습니다. 해당 책임 몇 가지를 새로운 클래스로 이동하여 클래스를 리팩터링해 보세요. Razor 페이지의 페이지 모델 클래스 및 MVC 컨트롤러 클래스는 UI 고려 사항에 집중해야 합니다. 비즈니스 규칙 및 데이터 액세스 구현 세부 정보는 이러한 [문제의 분리](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns)에 적합한 클래스에 유지되어야 합니다.
 
 ### <a name="disposal-of-services"></a>서비스 삭제
 
@@ -405,10 +405,10 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="default-service-container-replacement"></a>기본 서비스 컨테이너 바꾸기
 
-기본 제공 서비스 컨테이너는 프레임워크의 조건 및 대부분의 소비자 앱을 제공하는 것을 의미합니다. 지원하지 않는 특정 기능이 필요하지 않는 한 기본 제공 컨테이너를 사용하는 것이 좋습니다. 기본 제공 컨테이너에서 찾을 수 없는 타사 컨테이너에서 지원되는 일부 기능:
+기본 제공 서비스 컨테이너는 프레임워크 및 대부분의 소비자 앱의 요구를 충족하기 위한 것입니다. 지원하지 않는 특정 기능이 필요하지 않는 한 기본 제공 컨테이너를 사용하는 것이 좋습니다. 기본 제공 컨테이너에서 찾을 수 없는 타사 컨테이너에서 지원되는 일부 기능들로는 다음과 같은 것들이 있습니다.
 
 * 속성 삽입
-* 이름을 기준으로 삽입
+* 이름에 기반한 삽입
 * 자식 컨테이너
 * 사용자 지정 수명 관리
 * 초기화 지연에 대한 `Func<T>` 지원
@@ -469,7 +469,7 @@ public void ConfigureServices(IServiceCollection services)
 
 * 서비스에 정적으로 액세스(예를 들어 다른 곳에 사용하기 위해 [IApplicationBuilder.ApplicationServices](xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices)를 정적으로 입력)하지 마세요.
 
-* ‘서비스 로케이터 패턴’을 사용하지 마세요. 예를 들어 DI를 대신 사용할 수 있는 경우 서비스 인스턴스를 가져오기 위해 <xref:System.IServiceProvider.GetService*>를 호출하지 마세요.
+* ‘서비스 로케이터 패턴’을 사용하지 마세요.  예를 들어 DI를 대신 사용할 수 있는 경우 서비스 인스턴스를 가져오기 위해 <xref:System.IServiceProvider.GetService*>를 호출하지 마세요.
 
   **잘못된 예:**
 
@@ -514,7 +514,7 @@ public void ConfigureServices(IServiceCollection services)
 
 모든 권장 사항과 마찬가지로, 하나를 무시해야 하는 상황이 발생할 수 있습니다. 예외는 드물게 발생하며, 대부분 프레임워크 자체 내에서 특별한 경우에만 발생합니다.
 
-DI는 정적/전역 개체 액세스 패턴의 ‘대안’입니다. 고정 개체 액세스와 함께 사용할 경우 DI의 장점을 실현할 수 없습니다.
+DI는 정적/전역 개체 액세스 패턴의 ‘대안’입니다.  고정 개체 액세스와 함께 사용할 경우 DI의 장점을 실현할 수 없습니다.
 
 ## <a name="additional-resources"></a>추가 자료
 
