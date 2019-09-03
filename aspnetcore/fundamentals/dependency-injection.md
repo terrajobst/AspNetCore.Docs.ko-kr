@@ -26,7 +26,7 @@ MVC 컨트롤러 내의 종속성 주입에 대한 자세한 내용은 <xref:mvc
 
 ## <a name="overview-of-dependency-injection"></a>종속성 주입 개요
 
-‘종속성’은 다른 개체에 필요한 모든 개체입니다. 앱의 다른 클래스에서 종속하는 `WriteMessage` 메서드를 갖고 있는 `MyDependency` 클래스를 살펴보세요.
+‘종속성’은 다른 개체에 필요한 모든 개체입니다. 앱의 다른 클래스가 종속된 `WriteMessage` 메서드를 갖고 있는 `MyDependency` 클래스를 살펴보세요.
 
 ```csharp
 public class MyDependency
@@ -274,7 +274,7 @@ Entity Framework 컨텍스트는 일반적으로 [범위가 지정된 수명](#s
 
 다음 출력은 두 요청의 결과를 보여 줍니다.
 
-**첫 번째 요청:** :
+**첫 번째 요청:**:
 
 컨트롤러 작업:
 
@@ -469,7 +469,7 @@ public void ConfigureServices(IServiceCollection services)
 
 * 서비스에 정적으로 액세스(예를 들어 다른 곳에 사용하기 위해 [IApplicationBuilder.ApplicationServices](xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices)를 정적으로 입력)하지 마세요.
 
-* ‘서비스 로케이터 패턴’을 사용하지 마세요.  예를 들어 DI를 대신 사용할 수 있는 경우 서비스 인스턴스를 가져오기 위해 <xref:System.IServiceProvider.GetService*>를 호출하지 마세요.
+* ‘서비스 로케이터 패턴’을 사용하지 마세요. 예를 들어 DI를 대신 사용할 수 있는 경우 서비스 인스턴스를 가져오기 위해 <xref:System.IServiceProvider.GetService*>를 호출하지 마세요.
 
   **잘못된 예:**
 
@@ -514,7 +514,7 @@ public void ConfigureServices(IServiceCollection services)
 
 모든 권장 사항과 마찬가지로, 권장 사항을 무시해야 하는 상황이 발생할 수 있습니다. 예외는 드물게 발생하며, 대부분 프레임워크 자체 내에서 특별한 경우에만 발생합니다.
 
-DI는 정적/전역 개체 액세스 패턴의 ‘대안’입니다.  고정 개체 액세스와 함께 사용할 경우 DI의 장점을 실현할 수 없습니다.
+DI는 정적/전역 개체 액세스 패턴의 ‘대안’입니다. 고정 개체 액세스와 함께 사용할 경우 DI의 장점을 실현할 수 없습니다.
 
 ## <a name="additional-resources"></a>추가 자료
 
