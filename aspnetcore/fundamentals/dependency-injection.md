@@ -422,7 +422,7 @@ public void ConfigureServices(IServiceCollection services)
   * [Autofac](https://www.nuget.org/packages/Autofac/)
   * [Autofac.Extensions.DependencyInjection](https://www.nuget.org/packages/Autofac.Extensions.DependencyInjection/)
 
-* 컨테이너를 `Startup.ConfigureServices`에 구성하고 `IServiceProvider`를 반환합니다.
+* `Startup.ConfigureServices`에서 컨테이너를 구성하고 `IServiceProvider`를 반환합니다.
 
     ```csharp
     public IServiceProvider ConfigureServices(IServiceCollection services)
