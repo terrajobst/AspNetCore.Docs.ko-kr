@@ -543,7 +543,7 @@ var host = new HostBuilder()
 호스트 구성은 다음에 의해 만들어집니다.
 
 * <xref:Microsoft.Extensions.Hosting.IHostBuilder>에서 확장 메서드를 호출하여 [콘텐츠 루트](#content-root) 및 [환경](#environment)을 설정합니다.
-* <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureHostConfiguration*>의 구성 공급자에서 구성을 읽는 중입니다.
+* <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureHostConfiguration*>의 구성 공급자에서 구성을 읽습니다.
 
 ### <a name="extension-methods"></a>확장 메서드
 
@@ -577,7 +577,7 @@ var host = new HostBuilder()
 
 **키**: environment  
 **형식**: *string*  
-**기본값**: 프로덕션  
+**기본값**: Production  
 **설정 방법**: `UseEnvironment`  
 **환경 변수**: `<PREFIX_>ENVIRONMENT`(`<PREFIX_>`는 [선택적이고 사용자 정의됨](#configurehostconfiguration))
 
@@ -648,7 +648,7 @@ var host = new HostBuilder()
 ```
 
 > [!NOTE]
-> <xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*> 및 <xref:Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions.AddEnvironmentVariables*>와 같은 구성 확장 메서드에는 [Microsoft.Extensions.Configuration.Json](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.Json) 및 [Microsoft.Extensions.Configuration.EnvironmentVariables](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.EnvironmentVariables)와 같은 추가 NuGet 패키지가 필요합니다. 앱에서 [Microsoft.AspNetCore.App metapackage](xref:fundamentals/metapackage-app)를 사용하는 경우가 아니면 이 패키지는 [Microsoft.Extensions.Configuration](https://www.nuget.org/packages/Microsoft.Extensions.Configuration) 패키지 이외에 프로젝트에 추가되어야 합니다. 자세한 내용은 <xref:fundamentals/configuration/index>을 참조하세요.
+> <xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*> 및 <xref:Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions.AddEnvironmentVariables*>와 같은 구성 확장 메서드에는 [Microsoft.Extensions.Configuration.Json](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.Json) 및 [Microsoft.Extensions.Configuration.EnvironmentVariables](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.EnvironmentVariables)와 같은 추가 NuGet 패키지가 필요합니다. 앱에서 [Microsoft.AspNetCore.App 메타패키지](xref:fundamentals/metapackage-app)를 사용하는 경우가 아니면 이 패키지는 [Microsoft.Extensions.Configuration](https://www.nuget.org/packages/Microsoft.Extensions.Configuration) 패키지 이외에 프로젝트에 추가되어야 합니다. 자세한 내용은 <xref:fundamentals/configuration/index>을 참조하세요.
 
 ## <a name="configureservices"></a>ConfigureServices
 
