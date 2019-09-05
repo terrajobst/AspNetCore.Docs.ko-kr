@@ -47,13 +47,13 @@ ASP.NET Core 요청 파이프라인은 하나씩 차례로 호출되는 요청 �
 
 [!code-csharp[](index/snapshot/Chain/Startup.cs?name=snippet1)]
 
-대리자가 다음 대리자에 요청을 전달하지 않을 때 이를*요청 파이프라인을 단락(short-circuiting)* 한다고 합니다. 단락(short-circuiting)은 불필요한 작업을 방지하기 때문에 종종 바람직합니다. 예를 들어 [정적 파일 미들웨어](xref:fundamentals/static-files)는 정적 파일에 대한 요청을 처리하고 나머지 파이프라인을 단락(short-circuit)하여 *터미널 미들웨어*로 작동할 수 있습니다. 추가 처리를 종료하는 미들웨어 전에 파이프라인에 추가된 미들웨어는 `next.Invoke` 문 이후의 코드를 계속 처리합니다. 그러나 이미 전송된 응답에 쓰려고 시도하는 것에 대한 다음 경고를 참조하세요.
+대리자가 다음 대리자에 요청을 전달하지 않을 때 이를 *요청 파이프라인을 단락(short-circuiting)*한다고 합니다. 단락(short-circuiting)은 불필요한 작업을 방지하기 때문에 종종 바람직합니다. 예를 들어 [정적 파일 미들웨어](xref:fundamentals/static-files)는 정적 파일에 대한 요청을 처리하고 나머지 파이프라인을 단락(short-circuit)하여 *터미널 미들웨어*로 작동할 수 있습니다. 추가 처리를 종료하는 미들웨어 전에 파이프라인에 추가된 미들웨어는 `next.Invoke` 문 이후의 코드를 계속 처리합니다. 그러나 이미 전송된 응답에 쓰려고 시도하는 것에 대한 다음 경고를 참조하세요.
 
 > [!WARNING]
 > 클라이언트에 응답을 전송한 후에 `next.Invoke`를 호출하지 마십시오. 응답이 시작된 후 <xref:Microsoft.AspNetCore.Http.HttpResponse>로 변경하면 예외를 던집니다. 예를 들어 헤더 및 상태 코드를 설정하는 변경 작업은 예외를 던집니다. `next`를 호출한 후 응답 본문에 작성할 경우:
 >
 > * 프로토콜 위반이 발생할 수 있습니다. 예를 들어, 명시된 `Content-Length`보다 긴 내용이 작성될 수 있습니다.
-> * 본문 형식을 손상시킬 수 있습니다. 예를 들어, CSS 파일에 HTML 바닥글 작성할 수 있습니다.
+> * 본문 형식을 손상시킬 수 있습니다. 예를 들어, CSS 파일에 HTML 바닥글을 작성할 수 있습니다.
 >
 > <xref:Microsoft.AspNetCore.Http.HttpResponse.HasStarted*>는 헤더가 이미 전송됐는지 또는 본문이 이미 작성됐는지 여부를 나타내는 유용한 힌트를 제공해줍니다.
 
@@ -108,7 +108,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 요청이 정적 파일 미들웨어에서 처리되지 않는 경우 인증을 수행하는 인증 미들웨어(<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*>)로 전달됩니다. 인증은 인증되지 않은 요청을 단락(short-circuit)하지 않습니다. 인증 미들웨어가 요청을 인증하지만, MVC가 특정 Razor Page 또는 컨트롤러 및 작업을 선택한 후에만 권한 부여(및 거부)가 발생합니다.
 
-다음 예제는 정적 파일에 대한 요청이 응답 압축 미들웨어 전에 정적 파일 미들웨어에서 처리되는 미들웨어 순서를 설명합니다. 정적 파일은 이 미들웨어 순서에서는 압축되지 않습니다. <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute*>의 MVC 응답은 압축할 수 있습니다.
+다음 예제는 정적 파일에 대한 요청이 응답 압축 미들웨어 전에 정적 파일 미들웨어에서 처리되는 미들웨어 순서를 설명합니다. 정적 파일은 이 미들웨어 순서를 사용하여 압축되지 않습니다. <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute*>의 MVC 응답은 압축할 수 있습니다.
 
 ```csharp
 public void Configure(IApplicationBuilder app)
