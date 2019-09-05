@@ -5,14 +5,14 @@ description: HTTP REPL .NET Core 전역 도구를 사용하여 ASP.NET Core 웹 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 07/25/2019
+ms.date: 08/29/2019
 uid: web-api/http-repl
-ms.openlocfilehash: d2c5f774595e7a2223e84cc76eecdb9baa04adfe
-ms.sourcegitcommit: 776598f71da0d1e4c9e923b3b395d3c3b5825796
+ms.openlocfilehash: 7121670856da4b123b1c3e780a7952da0fb696a1
+ms.sourcegitcommit: e6bd2bbe5683e9a7dbbc2f2eab644986e6dc8a87
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/26/2019
-ms.locfileid: "70024799"
+ms.lasthandoff: 09/03/2019
+ms.locfileid: "70238051"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>HTTP REPL을 사용하여 웹 API 테스트
 
@@ -325,52 +325,6 @@ pref set formatting.json.indentSize 4
 ]
 ```
 
-### <a name="set-indentation-size"></a>들여쓰기 크기 설정
-
-응답 들여쓰기 크기 사용자 지정은 현재 JSON에 대해서만 지원됩니다. 기본 크기는 두 개의 공백입니다. 예:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Apple"
-  },
-  {
-    "id": 2,
-    "name": "Orange"
-  },
-  {
-    "id": 3,
-    "name": "Strawberry"
-  }
-]
-```
-
-기본 크기를 변경하려면 `formatting.json.indentSize` 키를 설정합니다. 예를 들어 항상 네 개의 공백을 사용하려면:
-
-```console
-pref set formatting.json.indentSize 4
-```
-
-후속 응답은 네 개의 공백 설정을 사용합니다.
-
-```json
-[
-    {
-        "id": 1,
-        "name": "Apple"
-    },
-    {
-        "id": 2,
-        "name": "Orange"
-    },
-    {
-        "id": 3,
-        "name": "Strawberry"
-    }
-]
-```
-
 ### <a name="set-the-default-text-editor"></a>기본 텍스트 편집기 설정
 
 기본적으로 HTTP REPL에는 사용하도록 구성된 텍스트 편집기가 없습니다. HTTP 요청 본문이 필요한 웹 API 메서드를 테스트하려면 기본 텍스트 편집기를 설정해야 합니다. HTTP REPL 도구는 요청 본문을 작성할 목적으로만 구성된 텍스트 편집기를 시작합니다. 다음 명령을 실행하여 기본 설정 텍스트 편집기를 기본값으로 설정합니다.
@@ -419,7 +373,7 @@ pref set editor.command.default.arguments "--disable-extensions --new-window"
 사용자의 환경에서 서로 다른 검색 경로 집합을 사용하려면 `swagger.searchPaths` 기본 설정을 지정합니다. 값은 파이프로 구분된 상대 경로 목록이어야 합니다. 예:
 
 ```console
-pref set swagger.searchPaths "swagger/v2/swagger.json|swagger/v3/swagger.json
+pref set swagger.searchPaths "swagger/v2/swagger.json|swagger/v3/swagger.json"
 ```
 
 ## <a name="test-http-get-requests"></a>HTTP GET 요청 테스트

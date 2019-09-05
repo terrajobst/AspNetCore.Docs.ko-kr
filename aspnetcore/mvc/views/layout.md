@@ -5,12 +5,12 @@ description: ASP.NET Core 앱에서 뷰를 렌더링하기 전에 일반적인 �
 ms.author: riande
 ms.date: 07/30/2019
 uid: mvc/views/layout
-ms.openlocfilehash: 6bd9dfc65c026ee524277aaaa21333d299c8981e
-ms.sourcegitcommit: 7001657c00358b082734ba4273693b9b3ed35d2a
+ms.openlocfilehash: 9a7b8003b24329f6e9cbd349ee47f6844b7c5f6d
+ms.sourcegitcommit: e6bd2bbe5683e9a7dbbc2f2eab644986e6dc8a87
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/31/2019
-ms.locfileid: "68669998"
+ms.lasthandoff: 09/03/2019
+ms.locfileid: "70238036"
 ---
 # <a name="layout-in-aspnet-core"></a>ASP.NET Core의 레이아웃
 
@@ -62,7 +62,7 @@ Razor 뷰는 `Layout` 속성을 포함합니다. 이 속성을 설정하여 레�
 기본적으로 모든 레이아웃에서 `RenderBody`를 호출해야 합니다. `RenderBody` 호출이 배치될 때마다 뷰의 내용이 렌더링됩니다.
 
 <a name="layout-sections-label"></a>
-
+<!-- https://stackoverflow.com/questions/23327578 -->
 ### <a name="sections"></a>섹션
 
 레이아웃은 `RenderSection`을 호출하여 필요에 따라 하나 이상의 *섹션*을 참조합니다. 섹션에서는 특정 페이지 요소를 배치할 위치를 구성하는 방법을 제공합니다. `RenderSection` 호출 때마다 섹션이 필수 또는 옵션인지 여부를 지정할 수 있습니다.
