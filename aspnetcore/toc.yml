@@ -78,7 +78,7 @@
         - name: Web API 만들기
           displayName: tutorial
           uid: tutorials/first-web-api
-        - name: MongoDB를 사용하여 웹 API 생성
+        - name: MongoDB를 사용하는 Web API
           displayName: tutorial
           uid: tutorials/first-mongo-app
         - name: JavaScript를 사용하여 웹 API 호출
@@ -301,7 +301,11 @@
         - name: JavaScript interop
           uid: blazor/javascript-interop
         - name: 보안 및 ID
-          uid: security/blazor/index
+          items:
+            - name: 개요
+              uid: security/blazor/index
+            - name: 서버 쪽
+              uid: security/blazor/server-side
         - name: 상태 관리
           uid: blazor/state-management
         - name: 오류 처리
@@ -540,13 +544,17 @@
       uid: grpc/basics
     - name: ASP.NET Core를 사용하는 gRPC 서비스
       uid: grpc/aspnetcore
+    - name: .NET 클라이언트로 gRPC 서비스 호출
+      uid: grpc/client
+    - name: gRPC 클라이언트 팩터리 통합
+      uid: grpc/clientfactory
     - name: 구성
       uid: grpc/configuration
     - name: 인증 및 권한 부여
       uid: grpc/authn-and-authz
     - name: 보안 고려 사항
       uid: grpc/security
-    - name: C Core에서 ASP.NET Core로 gRPC 서비스 마이그레이션
+    - name: C Core에서 gRPC 서비스 마이그레이션
       uid: grpc/migration
     - name: gRPC 서비스와 HTTP API 비교
       uid: grpc/comparison
@@ -988,7 +996,11 @@
     - name: 애플리케이션 보안 - OWASP
       href: 'https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/DotNet_Security_Cheat_Sheet.md'
     - name: Blazor
-      uid: security/blazor/index
+      items:
+        - name: 개요
+          uid: security/blazor/index
+        - name: 서버 쪽
+          uid: security/blazor/server-side
 - name: 성능
   items:
     - name: 개요
