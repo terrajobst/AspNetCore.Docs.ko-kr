@@ -80,7 +80,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 * 콘텐츠 루트를 <xref:System.IO.Directory.GetCurrentDirectory*>에서 반환된 경로로 설정합니다.
 * 다음에서 호스트 구성을 로드합니다.
-  * 접두사가 "DOTNET_"인 환경 변수입니다.
+  * 접두사가 "DOTNET_"인 환경 변수.
   * 명령줄 인수.
 * 다음에서 앱 구성을 로드합니다.
   * *appsettings.json*.
@@ -97,7 +97,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 `ConfigureWebHostDefaults` 메서드는 다음 작업을 수행합니다.
 
-* "ASPNETCORE_"가 접두사된 환경에서 호스트 구성을 로드합니다.
+* 접두사가 "ASPNETCORE_"인 환경 변수에서 호스트 구성을 로드합니다.
 * [Kestrel](xref:fundamentals/servers/kestrel) 서버를 웹 서버로 설정하고 앱의 호스팅 구성 공급자를 사용하여 구성합니다. Kestrel 서버의 기본 옵션은 <xref:fundamentals/servers/kestrel#kestrel-options>을 참조합니다.
 * [호스트 필터링 미들웨어](xref:fundamentals/servers/kestrel#host-filtering)를 추가합니다.
 * ASPNETCORE_FORWARDEDHEADERS_ENABLED=true인 경우 [전달된 헤더 미들웨어](xref:host-and-deploy/proxy-load-balancer#forwarded-headers)를 추가합니다.
@@ -176,7 +176,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 **키**: applicationName  
 **형식**: *string*  
-**기본값**: 앱의 진입점을 포함하는 어셈블리의 이름입니다.
+**기본값**: 앱의 진입점을 포함하는 어셈블리의 이름입니다.  
 **환경 변수**: `<PREFIX_>APPLICATIONNAME`
 
 이 값을 설정하려면 환경 변수를 사용합니다. 
@@ -226,7 +226,8 @@ Host.CreateDefaultBuilder(args)
 
 **키**: shutdownTimeoutSeconds  
 **형식**: *int*  
-**기본값**: 5초 **환경 변수**: `<PREFIX_>SHUTDOWNTIMEOUTSECONDS`
+**기본값**: 5초 
+**환경 변수**: `<PREFIX_>SHUTDOWNTIMEOUTSECONDS`
 
 이 값을 설정하려면 환경 변수를 사용하거나 `HostOptions`를 구성합니다. 다음 예제에서는 시간 제한을 20초로 설정합니다.
 
@@ -312,8 +313,9 @@ webBuilder.UseSetting(WebHostDefaults.HostingStartupExcludeAssembliesKey, "assem
 
 HTTPS 리디렉션 포트. [HTTPS 적용](xref:security/enforcing-ssl)에 사용됩니다.
 
-**키**: https_port **형식**: *문자열*
-**기본값**: 기본값은 설정되지 않습니다.
+**키**: https_port  
+**형식**: *문자열*  
+**기본값**: 기본값은 설정되지 않습니다.  
 **환경 변수**: `<PREFIX_>HTTPS_PORT`
 
 이 값을 설정하려면 구성을 사용하거나 `UseSetting`을 호출합니다.
@@ -356,7 +358,8 @@ webBuilder.UseSetting(WebHostDefaults.PreventHostingStartupKey, "true");
 
 `Startup` 클래스를 검색할 어셈블리입니다.
 
-**키**: startupAssembly **형식**: *string*  
+**키**: startupAssembly 
+**형식**: *string*  
 **기본값**: 앱의 어셈블리  
 **환경 변수**: `<PREFIX_>STARTUPASSEMBLY`
 
@@ -376,7 +379,7 @@ webBuilder.UseStartup<Startup>();
 
 **키**: urls  
 **형식**: *string*  
-**기본값**: `http://localhost:5000` 및 `https://localhost:5001`
+**기본값**: `http://localhost:5000` 및 `https://localhost:5001` 
 **환경 변수**: `<PREFIX_>URLS`
 
 이 값을 설정하려면 환경 변수를 사용하거나 `UseUrls`를 호출합니다.
@@ -406,7 +409,7 @@ webBuilder.UseWebRoot("public");
 
 기본 제공된 <xref:Microsoft.Extensions.Hosting.IHost> 구현에 대한 메서드를 호출하여 애플리케이션을 시작하고 중지합니다. 이러한 메서드는 서비스 컨테이너에 등록된 모든 <xref:Microsoft.Extensions.Hosting.IHostedService> 구현에 영향을 줍니다.
 
-### <a name="run"></a>실행
+### <a name="run"></a>Run
 
 <xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run*>은 앱을 시작하고 호스트가 종료될 때까지 호출 스레드를 차단합니다.
 
@@ -418,7 +421,7 @@ webBuilder.UseWebRoot("public");
 
 <xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.RunConsoleAsync*>는 콘솔 지원을 구현하고, 호스트를 빌드 및 시작하며, Ctrl+C/SIGINT 또는 SIGTERM이 종료될 때까지 기다립니다.
 
-### <a name="start"></a>시작
+### <a name="start"></a>Start
 
 <xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Start*>는 호스트를 동기적으로 시작합니다.
 
@@ -724,7 +727,7 @@ public static class Extensions
 
 <xref:Microsoft.Extensions.Hosting.IHost> 구현은 서비스 컨테이너에 등록된 <xref:Microsoft.Extensions.Hosting.IHostedService> 구현의 시작 및 중지를 담당합니다.
 
-### <a name="run"></a>실행
+### <a name="run"></a>Run
 
 <xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run*>은 앱을 시작하고 호스트가 종료될 때까지 호출 스레드를 차단합니다.
 
