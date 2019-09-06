@@ -5,14 +5,14 @@ description: 데이터에 바인딩하고, 이벤트를 처리 하 고, 구성 �
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/13/2019
+ms.date: 09/04/2019
 uid: blazor/components
-ms.openlocfilehash: 07e9153ccfdc78d1da57b815d33220f7fa597cc7
-ms.sourcegitcommit: 4b00e77f9984ce76356e829cfe7f75f0f61a7a8f
+ms.openlocfilehash: ce9da14bbe19cbee960d215f6167a0e760bd607a
+ms.sourcegitcommit: 8b36f75b8931ae3f656e2a8e63572080adc78513
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/29/2019
-ms.locfileid: "70145733"
+ms.lasthandoff: 09/05/2019
+ms.locfileid: "70310371"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -72,8 +72,8 @@ MSBuild 속성을 `_RazorComponentInclude` 사용 하 여 파일이 Razor 구성
 페이지 또는 뷰에서 구성 요소를 렌더링 하려면 HTML 도우미 메서드를 `RenderComponentAsync<TComponent>` 사용 합니다.
 
 ```cshtml
-<div id="Counter">
-    @(await Html.RenderComponentAsync<Counter>(new { IncrementAmount = 10 }))
+<div id="MyComponent">
+    @(await Html.RenderComponentAsync<MyComponent>(RenderMode.ServerPrerendered))
 </div>
 ```
 
@@ -420,23 +420,23 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 
 일부 이벤트의 경우 이벤트 인수 형식이 허용 됩니다. 이러한 이벤트 유형 중 하나에 대 한 액세스가 필요 하지 않은 경우에는 메서드 호출에 필요 하지 않습니다.
 
-지원 되는 [Uieventargs](https://github.com/aspnet/AspNetCore/blob/release/3.0-preview8/src/Components/Components/src/UIEventArgs.cs) 는 다음 표에 나와 있습니다.
+지원 되는 [EventArgs](https://github.com/aspnet/AspNetCore/tree/release/3.0-preview9/src/Components/Web/src/Web) 는 다음 표에 나와 있습니다.
 
 | 이벤트 | 클래스 |
 | ----- | ----- |
-| 클립보드 | `UIClipboardEventArgs` |
-| 옵니다  | `UIDragEventArgs`는 끌어서 놓기 작업을 수행 하는 동안 끌어 온 데이터를 저장 하는 데 사용 되며 `UIDataTransferItem`하나 이상의를 보유할 수 있습니다. &ndash; `DataTransfer` `UIDataTransferItem`하나의 끌기 데이터 항목을 나타냅니다. |
-| Error | `UIErrorEventArgs` |
-| 포커스 | `UIFocusEventArgs`는에 대 한 `relatedTarget`지원을 포함 하지 않습니다. &ndash; |
-| `<input>` 변경 | `UIChangeEventArgs` |
-| 키보드 | `UIKeyboardEventArgs` |
-| 마우스 | `UIMouseEventArgs` |
-| 마우스 포인터 | `UIPointerEventArgs` |
-| 마우스 휠 | `UIWheelEventArgs` |
-| 진행률 | `UIProgressEventArgs` |
-| 터치 | `UITouchEventArgs`&ndash; 터치를구분하는장치에서`UITouchPoint` 단일 접촉 지점을 나타냅니다. |
+| 클립보드        | `ClipboardEventArgs` |
+| 옵니다             | `DragEventArgs`끌어 온 항목 데이터를 `DataTransferItem` 저장 합니다. &ndash; `DataTransfer` |
+| Error            | `ErrorEventArgs` |
+| 포커스            | `FocusEventArgs`는에 대 한 `relatedTarget`지원을 포함 하지 않습니다. &ndash; |
+| `<input>` 변경 | `ChangeEventArgs` |
+| 키보드         | `KeyboardEventArgs` |
+| 마우스            | `MouseEventArgs` |
+| 마우스 포인터    | `PointerEventArgs` |
+| 마우스 휠      | `WheelEventArgs` |
+| 진행률         | `ProgressEventArgs` |
+| 터치            | `TouchEventArgs`&ndash; 터치를구분하는장치에서`TouchPoint` 단일 접촉 지점을 나타냅니다. |
 
-위의 표에서 이벤트의 속성 및 이벤트 처리 동작에 대 한 자세한 내용은 [참조 소스의 EventArgs 클래스 (aspnet/AspNetCore release/3.0-preview9 branch)](https://github.com/aspnet/AspNetCore/tree/release/3.0-preview9/src/Components/Web/src)를 참조 하세요.
+위의 표에서 이벤트의 속성 및 이벤트 처리 동작에 대 한 자세한 내용은 [참조 소스의 EventArgs 클래스 (aspnet/AspNetCore release/3.0-preview9 branch)](https://github.com/aspnet/AspNetCore/tree/release/3.0-preview9/src/Components/Web/src/Web)를 참조 하세요.
 
 ### <a name="lambda-expressions"></a>람다 식
 
@@ -523,10 +523,9 @@ await callback.InvokeAsync(arg);
 
 * 자식 구성 요소에 [특성을추가합니다.@ref](xref:mvc/views/razor#ref)
 * 자식 구성 요소와 동일한 유형으로 필드를 정의 합니다.
-* 지원 필드 생성을 억제 하는 매개변수를제공합니다.`@ref:suppressField` 자세한 내용은 [3.0.0 @ref 에서에 대 한 자동 지원 필드 지원 제거-preview9](https://github.com/aspnet/Announcements/issues/381)를 참조 하세요.
 
 ```cshtml
-<MyLoginDialog @ref="loginDialog" @ref:suppressField ... />
+<MyLoginDialog @ref="loginDialog" ... />
 
 @code {
     private MyLoginDialog loginDialog;
@@ -543,34 +542,67 @@ await callback.InvokeAsync(arg);
 > [!IMPORTANT]
 > 변수 `loginDialog` 는 구성 요소가 렌더링 된 후에만 채워지고 출력에는 `MyLoginDialog` 요소가 포함 됩니다. 이 시점까지 참조할 항목이 없습니다. 구성 요소에서 렌더링을 완료 한 후에 구성 요소 참조를 `OnAfterRenderAsync` 조작 `OnAfterRender` 하려면 또는 메서드를 사용 합니다.
 
-<!-- HOLD https://github.com/aspnet/AspNetCore.Docs/pull/13818
-Component references provide a way to reference a component instance so that you can issue commands to that instance, such as `Show` or `Reset`.
-
-The Razor compiler automatically generates a backing field for element and component references when using [@ref](xref:mvc/views/razor#ref). In the following example, there's no need to create a `myLoginDialog` field for the `LoginDialog` component:
-
-```cshtml
-<LoginDialog @ref="myLoginDialog" ... />
-
-@code {
-    private void OnSomething()
-    {
-        myLoginDialog.Show();
-    }
-}
-```
-
-When the component is rendered, the generated `myLoginDialog` field is populated with the `LoginDialog` component instance. You can then invoke .NET methods on the component instance.
-
-In some cases, a backing field is required. For example, declare a backing field when referencing generic components. To suppress backing field generation, specify the `@ref:suppressField` parameter.
-
-> [!IMPORTANT]
-> The generated `myLoginDialog` variable is only populated after the component is rendered and its output includes the `LoginDialog` element. Until that point, there's nothing to reference. To manipulate components references after the component has finished rendering, use the `OnAfterRenderAsync` or `OnAfterRender` methods.
--->
-
 구성 요소 참조를 캡처하는 것은 [요소 참조를 캡처하](xref:blazor/javascript-interop#capture-references-to-elements)는 데 유사한 구문을 사용 하지만 [JavaScript interop](xref:blazor/javascript-interop) 기능은 아닙니다. 구성 요소 참조는 JavaScript 코드로&mdash;전달 되지 않으며 .net 코드 에서만 사용 됩니다.
 
 > [!NOTE]
 > 구성 요소 참조를 사용 하 여 자식 구성 요소의 상태를 변경할 수 **없습니다** . 대신, 일반 선언적 매개 변수를 사용 하 여 자식 구성 요소에 데이터를 전달 합니다. 일반적인 선언적 매개 변수를 사용 하면 자식 구성 요소가 자동으로 올바른 시간에 rerender 됩니다.
+
+## <a name="invoke-component-methods-externally-to-update-state"></a>외부에서 구성 요소 메서드를 호출 하 여 상태 업데이트
+
+Blazor는를 `SynchronizationContext` 사용 하 여 단일 논리적 실행 스레드를 적용 합니다. 구성 요소의 수명 주기 메서드 및 Blazor에 의해 발생 하는 모든 이벤트 콜백이이 `SynchronizationContext`에서 실행 됩니다. 외부 이벤트 (예: 타이머 또는 다른 알림)를 기반으로 구성 요소를 업데이트 해야 하는 경우 Blazor의 `InvokeAsync` `SynchronizationContext`로 디스패치할 메서드를 사용 합니다.
+
+예를 들어 업데이트 된 상태의 수신 구성 요소를 알릴 수 있는 알림 *서비스* 를 살펴보겠습니다.
+
+```csharp
+public class NotifierService
+{
+    // Can be called from anywhere
+    public async Task Update(string key, int value)
+    {
+        if (Notify != null)
+        {
+            await Notify.Invoke(key, value);
+        }
+    }
+
+    public event Action<string, int, Task> Notify;
+}
+```
+
+을 사용 하 `NotifierService` 여 구성 요소를 업데이트 합니다.
+
+```cshtml
+@page "/"
+@inject NotifierService Notifier
+@implements IDisposable
+
+<p>Last update: @lastNotification.key = @lastNotification.value</p>
+
+@code {
+    private (string key, int value) lastNotification;
+
+    protected override void OnInitialized()
+    {
+        Notifier.Notify += OnNotify;
+    }
+
+    public async Task OnNotify(string key, int value)
+    {
+        await InvokeAsync(() =>
+        {
+            lastNotification = (key, value);
+            StateHasChanged();
+        });
+    }
+
+    public void Dispose()
+    {
+        Notifier.Notify -= OnNotify;
+    }
+}
+```
+
+앞의 예제 `NotifierService` 에서는 Blazor의 외부에 `OnNotify` 있는 구성 요소의 `SynchronizationContext`메서드를 호출 합니다. `InvokeAsync`는 올바른 컨텍스트로 전환 하 고 렌더링을 큐에 대기 하는 데 사용 됩니다.
 
 ## <a name="use-key-to-control-the-preservation-of-elements-and-components"></a>키 \@를 사용 하 여 요소 및 구성 요소 유지 관리
 
@@ -1006,18 +1038,7 @@ public class ThemeInfo
 }
 ```
 
-연계 값을 사용 하기 위해 구성 요소는 특성을 사용 하 `[CascadingParameter]` 여 연계 매개 변수를 선언 하거나 문자열 이름 값을 기반으로 합니다.
-
-```cshtml
-<CascadingValue Value=@PermInfo Name="UserPermissions">...</CascadingValue>
-
-[CascadingParameter(Name = "UserPermissions")]
-private PermInfo Permissions { get; set; }
-```
-
-문자열 이름 값을 사용 하는 바인딩은 동일한 형식의 여러 연계 값이 있고 동일한 하위 트리 내에서이 값을 구분 해야 하는 경우에 적합 합니다.
-
-연계 값은 유형별 매개 변수에 바인딩됩니다.
+연계 값을 사용 하기 위해 구성 요소는 `[CascadingParameter]` 특성을 사용 하 여 연계 매개 변수를 선언 합니다. 연계 값은 유형별 매개 변수에 바인딩됩니다.
 
 샘플 앱에서 구성 요소는 `CascadingValuesParametersTheme` 연계 값을 `ThemeInfo` 연계 매개 변수에 바인딩합니다. 매개 변수는 구성 요소에 의해 표시 되는 단추 중 하나에 대해 CSS 클래스를 설정 하는 데 사용 됩니다.
 
@@ -1057,13 +1078,46 @@ private PermInfo Permissions { get; set; }
 }
 ```
 
+동일한 하위 트리 내에서 동일한 형식의 여러 값을 계단식으로 배열 하려면 각 `Name` `CascadingValue` 구성 요소 및 `CascadingParameter`해당에 대 한 고유 문자열을 제공 합니다. 다음 예제에서 두 `CascadingValue` 구성 요소는 이름으로의 `MyCascadingType` 서로 다른 인스턴스를 계단식으로 배열 합니다.
+
+```cshtml
+<CascadingValue Value=@ParentCascadeParameter1 Name="CascadeParam1">
+    <CascadingValue Value=@ParentCascadeParameter2 Name="CascadeParam2">
+        ...
+    </CascadingValue>
+</CascadingValue>
+
+@code {
+    private MyCascadingType ParentCascadeParameter1;
+
+    [Parameter]
+    public MyCascadingType ParentCascadeParameter2 { get; set; }
+
+    ...
+}
+```
+
+하위 구성 요소에서 종속 매개 변수는 상위 구성 요소의 해당 하는 종속 된 값에서 이름으로 해당 값을 받습니다.
+
+```cshtml
+...
+
+@code {
+    [CascadingParameter(Name = "CascadeParam1")]
+    protected MyCascadingType ChildCascadeParameter1 { get; set; }
+    
+    [CascadingParameter(Name = "CascadeParam2")]
+    protected MyCascadingType ChildCascadeParameter2 { get; set; }
+}
+```
+
 ### <a name="tabset-example"></a>TabSet 예제
 
 연계 매개 변수를 사용 하면 구성 요소 계층 구조 전체에서 공동 작업할 수 있습니다. 예를 들어 샘플 앱에서 다음 *Tabset* 예제를 살펴보세요.
 
 샘플 앱에는 탭 `ITab` 에서 구현 하는 인터페이스가 있습니다.
 
-[!code-cs[](common/samples/3.x/BlazorSample/UIInterfaces/ITab.cs)]
+[!code-csharp[](common/samples/3.x/BlazorSample/UIInterfaces/ITab.cs)]
 
 구성 요소는 여러 `TabSet` `Tab` 구성 요소를 포함 하는 구성 요소를 사용 합니다. `CascadingValuesParametersTabSet`
 
@@ -1340,7 +1394,7 @@ public class CultureController : Controller
 다음 구성 요소는 사용자가 문화권을 선택할 때 초기 리디렉션을 수행 하는 방법의 예를 보여 줍니다.
 
 ```cshtml
-@inject IUriHelper UriHelper
+@inject NavigationManager NavigationManager
 
 <h3>Select your language</h3>
 
@@ -1356,12 +1410,12 @@ public class CultureController : Controller
     private void OnSelected(UIChangeEventArgs e)
     {
         var culture = (string)e.Value;
-        var uri = new Uri(UriHelper.GetAbsoluteUri())
+        var uri = new Uri(NavigationManager.Uri())
             .GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
         var query = $"?culture={Uri.EscapeDataString(culture)}&" +
             $"redirectUri={Uri.EscapeDataString(uri)}";
 
-        UriHelper.NavigateTo("/Culture/SetCulture" + query, forceLoad: true);
+        NavigationManager.NavigateTo("/Culture/SetCulture" + query, forceLoad: true);
     }
 }
 ```
@@ -1381,3 +1435,21 @@ Blazor의 `@bind` 기능은 사용자의 현재 문화권에 따라 세계화를
 * `IHtmlLocalizer<>`, `IViewLocalizer<>`및 데이터 주석 지역화는 MVC 시나리오 ASP.NET Core Blazor apps에서 **지원 되지 않습니다** .
 
 자세한 내용은 <xref:fundamentals/localization>을 참조하세요.
+
+## <a name="scalable-vector-graphics-svg-images"></a>SVG (스케일러블 벡터 그래픽) 이미지
+
+Blazor는 HTML을 렌더링 하므로 svg (확장 가능한 벡터 그래픽) 이미지 (*svg*)를 비롯 한 브라우저 지원 이미지가 `<img>` 태그를 통해 지원 됩니다.
+
+```html
+<img alt="Example image" src="some-image.svg" />
+```
+
+마찬가지로, 스타일 시트 파일 ( *.css*)의 css 규칙에서 SVG 이미지가 지원 됩니다.
+
+```css
+.my-element {
+    background-image: url("some-image.svg");
+}
+```
+
+그러나 인라인 SVG 태그는 일부 시나리오에서 지원 되지 않습니다. `<svg>` 태그를 구성 요소 파일 (*razor*)에 직접 저장 하는 경우 기본 이미지 렌더링이 지원 되지만 많은 고급 시나리오가 아직 지원 되지 않습니다. 예를 들어 `<use>` 태그는 현재 적용 되지 않으며 `@bind` 일부 SVG 태그와 함께 사용할 수 없습니다. 향후 릴리스에서 이러한 제한을 해결할 예정입니다.

@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/23/2019
 uid: blazor/routing
-ms.openlocfilehash: 067dad657c1e89a31fac45fdfa095cce4b10798d
-ms.sourcegitcommit: e6bd2bbe5683e9a7dbbc2f2eab644986e6dc8a87
+ms.openlocfilehash: ae3d7ab01185dd6f2e8e0f59b78c2e693fe464b0
+ms.sourcegitcommit: 8b36f75b8931ae3f656e2a8e63572080adc78513
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/03/2019
-ms.locfileid: "70238054"
+ms.lasthandoff: 09/05/2019
+ms.locfileid: "70310340"
 ---
 # <a name="aspnet-core-blazor-routing"></a>ASP.NET Core Blazor 라우팅
 
@@ -30,16 +30,17 @@ Blazor 서버 쪽은 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)�
 
 구성 `Router` 요소는 라우팅을 활성화 하 고 액세스 가능한 각 구성 요소에 경로 템플릿이 제공 됩니다. 구성 요소가 다음과 같이 *응용 프로그램 razor* 파일에 나타납니다. `Router`
 
-Blazor 서버 쪽 앱에서:
+Blazor 서버 쪽 또는 클라이언트 쪽 응용 프로그램에서 다음을 수행 합니다.
 
 ```cshtml
-<Router AppAssembly="typeof(Startup).Assembly" />
-```
-
-Blazor 클라이언트 쪽 앱에서:
-
-```cshtml
-<Router AppAssembly="typeof(Program).Assembly" />
+<Router AppAssembly="typeof(Startup).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+    </Found>
+    <NotFound>
+        <p>Sorry, there's nothing at this address.</p>
+    </NotFound>
+</Router>
 ```
 
 `@page` 지시문을 사용 하는 *razor* 파일이 컴파일되면 생성 된 <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> 클래스에 경로 템플릿을 지정 하는이 제공 됩니다. 런타임에 라우터는를 `RouteAttribute` 사용 하 여 구성 요소 클래스를 검색 하 고 요청 된 URL과 일치 하는 경로 템플릿을 사용 하 여 구성 요소를 렌더링 합니다.
@@ -49,24 +50,27 @@ Blazor 클라이언트 쪽 앱에서:
 [!code-cshtml[](common/samples/3.x/BlazorSample/Pages/BlazorRoute.razor?name=snippet_BlazorRoute)]
 
 > [!IMPORTANT]
-> 경로를 올바르게 생성 `<base>` 하려면 앱에서 `href` 특성에 지정 된 앱 기본 경로를 사용 하 여 *wwwroot/index.html* 파일 (Blazor client side) 또는 *Pages/_Host* 파일 (Blazor server side)에 태그를 포함 해야 합니다. `<base href="/">`). 자세한 내용은 <xref:host-and-deploy/blazor/client-side#app-base-path>을 참조하세요.
+> Url이 올바르게 확인 될 수 `<base>` 있도록 앱은 `href` 특성에 지정 된 앱 기본 경로를 사용 하 여 *wwwroot/index.html* 파일 (Blazor client side) 또는 *Pages/_Host* 파일 (Blazor server side)에 태그를 포함 해야 합니다. `<base href="/">`). 자세한 내용은 <xref:host-and-deploy/blazor/client-side#app-base-path>을 참조하세요.
 
 ## <a name="provide-custom-content-when-content-isnt-found"></a>콘텐츠를 찾을 수 없는 경우 사용자 지정 콘텐츠 제공
 
 요청 된 경로에 대 한 콘텐츠를 찾을 수 없는 경우 구성요소를사용하여앱에서사용자지정콘텐츠를지정할수있습니다.`Router`
 
-*응용 프로그램 razor* 파일에서 `<NotFoundContent>` `Router` 구성 요소의 요소에 사용자 지정 콘텐츠를 설정 합니다.
+*응용 프로그램 razor* 파일에서 `<NotFound>` `Router` 구성 요소의 템플릿 매개 변수에 사용자 지정 콘텐츠를 설정 합니다.
 
 ```cshtml
 <Router AppAssembly="typeof(Startup).Assembly">
-    <NotFoundContent>
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+    </Found>
+    <NotFound>
         <h1>Sorry</h1>
         <p>Sorry, there's nothing at this address.</p> b
-    </NotFoundContent>
+    </NotFound>
 </Router>
 ```
 
-의 `<NotFoundContent>` 콘텐츠에는 다른 대화형 구성 요소와 같은 임의의 항목이 포함 될 수 있습니다.
+의 `<NotFound>` 콘텐츠에는 다른 대화형 구성 요소와 같은 임의의 항목이 포함 될 수 있습니다.
 
 ## <a name="route-parameters"></a>경로 매개 변수
 
@@ -147,14 +151,14 @@ Blazor 서버 쪽 앱에서 *_Host* `/` 의 기본 경로는 (`@page "/"`)입니
 
 ## <a name="uri-and-navigation-state-helpers"></a>URI 및 탐색 상태 도우미
 
-를 `Microsoft.AspNetCore.Components.IUriHelper` 사용 하 여 코드에서 C# uri 및 탐색 작업을 수행 합니다. `IUriHelper`는 다음 표에 나와 있는 이벤트와 메서드를 제공 합니다.
+를 `Microsoft.AspNetCore.Components.NavigationManager` 사용 하 여 코드에서 C# uri 및 탐색 작업을 수행 합니다. `NavigationManager`는 다음 표에 나와 있는 이벤트와 메서드를 제공 합니다.
 
 | 멤버 | 설명 |
 | ------ | ----------- |
-| `GetAbsoluteUri` | 현재 절대 URI를 가져옵니다. |
-| `GetBaseUri` | 절대 URI를 생성 하기 위해 상대 URI 경로 앞에 추가할 수 있는 기본 URI (후행 슬래시 포함)를 가져옵니다. 일반적으로 `GetBaseUri` 는 *wwwroot/index.html* ( `href` Blazor) 또는 *Pages/_Host* (Blazor 서버측)의 문서 `<base>` 요소에 있는 특성에 해당 합니다. |
+| `Uri` | 현재 절대 URI를 가져옵니다. |
+| `BaseUri` | 절대 URI를 생성 하기 위해 상대 URI 경로 앞에 추가할 수 있는 기본 URI (후행 슬래시 포함)를 가져옵니다. 일반적으로 `BaseUri` 는 *wwwroot/index.html* ( `href` Blazor) 또는 *Pages/_Host* (Blazor 서버측)의 문서 `<base>` 요소에 있는 특성에 해당 합니다. |
 | `NavigateTo` | 지정 된 URI로 이동 합니다. `forceLoad` 가`true`다음과 같은 경우:<ul><li>클라이언트 쪽 라우팅이 무시 됩니다.</li><li>URI가 일반적으로 클라이언트 쪽 라우터에서 처리 되는지 여부와 상관 없이 브라우저는 서버에서 새 페이지를 강제로 로드 합니다.</li></ul> |
-| `OnLocationChanged` | 탐색 위치가 변경 될 때 발생 하는 이벤트입니다. |
+| `LocationChanged` | 탐색 위치가 변경 될 때 발생 하는 이벤트입니다. |
 | `ToAbsoluteUri` | 상대 URI를 절대 URI로 변환 합니다. |
 | `ToBaseRelativePath` | 기본 uri가 지정 된 경우 (예: 이전에에서 `GetBaseUri`반환 된 uri)는 절대 uri를 기본 uri 접두사에 상대적인 uri로 변환 합니다. |
 
@@ -162,8 +166,7 @@ Blazor 서버 쪽 앱에서 *_Host* `/` 의 기본 경로는 (`@page "/"`)입니
 
 ```cshtml
 @page "/navigate"
-@using Microsoft.AspNetCore.Components
-@inject IUriHelper UriHelper
+@inject NavigationManager NavigationManager
 
 <h1>Navigate in Code Example</h1>
 
@@ -174,7 +177,7 @@ Blazor 서버 쪽 앱에서 *_Host* `/` 의 기본 경로는 (`@page "/"`)입니
 @code {
     private void NavigateToCounterComponent()
     {
-        UriHelper.NavigateTo("counter");
+        NavigationManager.NavigateTo("counter");
     }
 }
 ```

@@ -5,14 +5,14 @@ description: ASP.NET 4.x 및 ASP.NET Core 앱들 간에 인증 쿠키를 공유�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/14/2019
+ms.date: 09/05/2019
 uid: security/cookie-sharing
-ms.openlocfilehash: 1650afce5c371d0830bb207618b9c1495f0ce587
-ms.sourcegitcommit: 476ea5ad86a680b7b017c6f32098acd3414c0f6c
+ms.openlocfilehash: 9b5bee9fb588ef04efd50aa4a5afc3e53da1b123
+ms.sourcegitcommit: 116bfaeab72122fa7d586cdb2e5b8f456a2dc92a
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/14/2019
-ms.locfileid: "69022385"
+ms.lasthandoff: 09/05/2019
+ms.locfileid: "70384768"
 ---
 # <a name="share-authentication-cookies-among-aspnet-apps"></a>ASP.NET apps 간에 인증 쿠키 공유
 
@@ -34,7 +34,7 @@ ms.locfileid: "69022385"
   * .NET Framework apps에서 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/)에 대 한 패키지 참조를 추가 합니다.
 * <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*>공통 앱 이름을 설정 합니다.
 
-## <a name="share-authentication-cookies-among-aspnet-core-apps"></a>ASP.NET Core 앱 간에 인증 쿠키 공유하기
+## <a name="share-authentication-cookies-with-aspnet-core-identity"></a>ASP.NET Core Id와 인증 쿠키 공유
 
 ASP.NET Core Identity를 사용하는 경우:
 
@@ -46,7 +46,7 @@ ASP.NET Core Identity를 사용하는 경우:
 
 ```csharp
 services.AddDataProtection()
-    .PersistKeysToFileSystem({PATH TO COMMON KEY RING FOLDER})
+    .PersistKeysToFileSystem("{PATH TO COMMON KEY RING FOLDER}")
     .SetApplicationName("SharedCookieApp");
 
 services.ConfigureApplicationCookie(options => {
@@ -54,11 +54,13 @@ services.ConfigureApplicationCookie(options => {
 });
 ```
 
+## <a name="share-authentication-cookies-without-aspnet-core-identity"></a>ASP.NET Core Id 없이 인증 쿠키 공유
+
 ASP.NET Core Id 없이 쿠키를 직접 사용 하는 경우에서 `Startup.ConfigureServices`데이터 보호 및 인증을 구성 합니다. 다음 예제에서는 인증 형식이로 `Identity.Application`설정 됩니다.
 
 ```csharp
 services.AddDataProtection()
-    .PersistKeysToFileSystem({PATH TO COMMON KEY RING FOLDER})
+    .PersistKeysToFileSystem("{PATH TO COMMON KEY RING FOLDER}")
     .SetApplicationName("SharedCookieApp");
 
 services.AddAuthentication("Identity.Application")
@@ -67,6 +69,23 @@ services.AddAuthentication("Identity.Application")
         options.Cookie.Name = ".AspNet.SharedCookie";
     });
 ```
+
+## <a name="share-cookies-across-different-base-paths"></a>여러 기본 경로 간에 쿠키 공유
+
+인증 쿠키는 기본 [HttpRequest](xref:Microsoft.AspNetCore.Http.HttpRequest.PathBase) [경로](xref:Microsoft.AspNetCore.Http.CookieBuilder.Path)를 사용 합니다. 앱의 쿠키를 다른 기본 경로에서 공유 해야 하는 경우 `Path` 에는를 재정의 해야 합니다.
+
+```csharp
+services.AddDataProtection()
+    .PersistKeysToFileSystem("{PATH TO COMMON KEY RING FOLDER}")
+    .SetApplicationName("SharedCookieApp");
+
+services.ConfigureApplicationCookie(options => {
+    options.Cookie.Name = ".AspNet.SharedCookie";
+    options.Cookie.Path = "/";
+});
+```
+
+## <a name="share-cookies-across-subdomains"></a>하위 도메인 간에 쿠키 공유
 
 하위 도메인 간에 쿠키를 공유하는 앱을 호스팅할 경우, [Cookie.Domain](xref:Microsoft.AspNetCore.Http.CookieBuilder.Domain) 속성에 공통 도메인을 지정합니다. `second_subdomain.contoso.com` 및 `contoso.com`과 같은 `first_subdomain.contoso.com`에서 앱 간에 쿠키를 공유하려면 `Cookie.Domain`을 `.contoso.com`으로 지정합니다.
 
@@ -91,7 +110,7 @@ Katana 쿠키 인증 미들웨어를 사용 하는 ASP.NET 4.x 앱은 ASP.NET Co
 
 ASP.NET 4.x 앱은 4.5.1 이상 .NET Framework 대상으로 해야 합니다. 그렇지 않으면 필요한 NuGet 패키지를 설치하지 못합니다.
 
-ASP.NET 4.x 앱과 ASP.NET Core 앱 간에 인증 쿠키를 공유 하려면 [ASP.NET Core 앱 간에 인증 쿠키 공유](#share-authentication-cookies-among-aspnet-core-apps) 섹션에 명시 된 대로 ASP.NET Core 앱을 구성 하 고 다음과 같이 ASP.NET 4.x 앱을 구성 합니다.
+ASP.NET 4.x 앱과 ASP.NET Core 앱 간에 인증 쿠키를 공유 하려면 [ASP.NET Core 앱 간에 인증 쿠키 공유](#share-authentication-cookies-with-aspnet-core-identity) 섹션에 명시 된 대로 ASP.NET Core 앱을 구성 하 고 다음과 같이 ASP.NET 4.x 앱을 구성 합니다.
 
 앱의 패키지가 최신 릴리스로 업데이트 되는지 확인 합니다. 각 ASP.NET 4.x 앱에 [Owin](https://www.nuget.org/packages/Microsoft.Owin.Security.Interop/) 패키지를 설치 합니다.
 
@@ -123,7 +142,7 @@ app.UseCookieAuthentication(new CookieAuthenticationOptions
     },
     TicketDataFormat = new AspNetTicketDataFormat(
         new DataProtectorShim(
-            DataProtectionProvider.Create({PATH TO COMMON KEY RING FOLDER},
+            DataProtectionProvider.Create("{PATH TO COMMON KEY RING FOLDER}",
                 (builder) => { builder.SetApplicationName("SharedCookieApp"); })
             .CreateProtector(
                 "Microsoft.AspNetCore.Authentication.Cookies." +

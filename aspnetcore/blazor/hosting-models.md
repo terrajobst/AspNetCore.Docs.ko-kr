@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/01/2019
 uid: blazor/hosting-models
-ms.openlocfilehash: 64393e826cb17550085f468f5916fca55973908f
-ms.sourcegitcommit: 89fcc6cb3e12790dca2b8b62f86609bed6335be9
+ms.openlocfilehash: bf2bce4f89e8bfe6e5aeeb4860c85a60c5eb4b7c
+ms.sourcegitcommit: 8b36f75b8931ae3f656e2a8e63572080adc78513
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/13/2019
-ms.locfileid: "68993385"
+ms.lasthandoff: 09/05/2019
+ms.locfileid: "70310411"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor 호스팅 모델
 
@@ -99,35 +99,67 @@ Blazor 서버 쪽 앱은 서버에 대 한 활성 SignalR 연결이 필요 합�
  
 ```cshtml
 <body>
-    <app>@(await Html.RenderComponentAsync<App>())</app>
+    <app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
  
     <script src="_framework/blazor.server.js"></script>
 </body>
 ```
+
+`RenderMode`구성 요소가 있는지 여부를 구성 합니다.
+
+* 는 페이지에 미리 렌더링 된 됩니다.
+* 는 페이지에서 정적 HTML로 렌더링 되거나 사용자 에이전트에서 Blazor 앱을 부트스트랩 하는 데 필요한 정보가 포함 되어 있습니다.
+
+| `RenderMode`        | Description |
+| ------------------- | ----------- |
+| `ServerPrerendered` | 구성 요소를 정적 HTML로 렌더링 하 고 Blazor 서버 쪽 앱에 대 한 마커를 포함 합니다. 사용자 에이전트가 시작 되 면이 표식은 Blazor 앱을 부트스트랩 하는 데 사용 됩니다. 매개 변수는 지원 되지 않습니다. |
+| `Server`            | Blazor 서버 쪽 앱에 대 한 마커를 렌더링 합니다. 구성 요소의 출력은 포함 되지 않습니다. 사용자 에이전트가 시작 되 면이 표식은 Blazor 앱을 부트스트랩 하는 데 사용 됩니다. 매개 변수는 지원 되지 않습니다. |
+| `Static`            | 구성 요소를 정적 HTML로 렌더링 합니다. 매개 변수가 지원 됩니다. |
+
+정적 HTML 페이지에서 서버 구성 요소를 렌더링 하는 것은 지원 되지 않습니다.
  
 클라이언트는 앱을 미리 렌더링 하는 데 사용 된 상태와 동일한 상태를 사용 하 여 서버에 다시 연결 합니다. 앱의 상태가 아직 메모리에 있는 경우 SignalR 연결이 설정 된 후에 구성 요소 상태가 다시 발생 하지 않습니다.
 
 ### <a name="render-stateful-interactive-components-from-razor-pages-and-views"></a>Razor 페이지 및 뷰에서 상태 저장 대화형 구성 요소 렌더링
  
-상태 저장 대화형 구성 요소는 Razor 페이지 또는 보기에 추가할 수 있습니다. 페이지 또는 뷰가 렌더링 되 면 구성 요소는 미리 렌더링 된 됩니다. 그런 다음 상태가 아직 메모리에 있는 한 클라이언트 연결이 설정 되 면 앱은 구성 요소 상태에 다시 연결 합니다.
+상태 저장 대화형 구성 요소는 Razor 페이지 또는 보기에 추가할 수 있습니다.
+
+페이지 또는 뷰가 렌더링 되는 경우:
+
+* 구성 요소가 페이지 또는 뷰와 미리 렌더링 된 됩니다.
+* 렌더링에 사용 되는 초기 구성 요소 상태가 손실 됩니다.
+* 새 구성 요소 상태는 SignalR 연결이 설정 될 때 생성 됩니다.
  
-예를 들어 다음 Razor 페이지는 폼을 `Counter` 사용 하 여 지정 된 초기 카운트를 사용 하 여 구성 요소를 렌더링 합니다.
+다음 Razor 페이지는 구성 요소 `Counter` 를 렌더링 합니다.
+
+```cshtml
+<h1>My Razor Page</h1>
+ 
+@(await Html.RenderComponentAsync<Counter>(RenderMode.ServerPrerendered))
+```
+
+### <a name="render-noninteractive-components-from-razor-pages-and-views"></a>Razor 페이지 및 뷰에서 비 대화형 구성 요소 렌더링
+
+다음 Razor 페이지에서 구성 요소는 `MyComponent` 폼을 사용 하 여 지정 된 초기 값을 사용 하 여 정적으로 렌더링 됩니다.
  
 ```cshtml
 <h1>My Razor Page</h1>
 
 <form>
-    <input type="number" asp-for="InitialCount" />
-    <button type="submit">Set initial count</button>
+    <input type="number" asp-for="InitialValue" />
+    <button type="submit">Set initial value</button>
 </form>
  
-@(await Html.RenderComponentAsync<Counter>(new { InitialCount = InitialCount }))
+@(await Html.RenderComponentAsync<MyComponent>(RenderMode.Static, 
+    new { InitialValue = InitialValue }))
  
 @code {
     [BindProperty(SupportsGet=true)]
-    public int InitialCount { get; set; }
+    public int InitialValue { get; set; }
 }
 ```
+
+는 `MyComponent` 정적으로 렌더링 되므로 구성 요소는 대화형이 될 수 없습니다.
 
 ### <a name="detect-when-the-app-is-prerendering"></a>앱이 사전 렌더링 되는 경우 검색
  

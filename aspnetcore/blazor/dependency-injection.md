@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/02/2019
 uid: blazor/dependency-injection
-ms.openlocfilehash: a9330caa81eec0910206312283b3424c70cd1289
-ms.sourcegitcommit: 2eb605f4f20ac4dd9de6c3b3e3453e108a357a21
+ms.openlocfilehash: a2bfa0cbe951e817ed6264f1a151d5a716cd795c
+ms.sourcegitcommit: 8b36f75b8931ae3f656e2a8e63572080adc78513
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/06/2019
-ms.locfileid: "68948393"
+ms.lasthandoff: 09/05/2019
+ms.locfileid: "70310341"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core Blazor 종속성 주입
 
@@ -22,18 +22,18 @@ Blazor는 [DI (종속성 주입)](xref:fundamentals/dependency-injection)를 지
 
 DI는 중앙 위치에 구성 된 서비스에 액세스 하기 위한 기술입니다. Blazor 앱에서 다음과 같은 작업을 수행할 수 있습니다.
 
-* 단일 서비스 라고 하는 여러 구성 요소에서 서비스 클래스의 단일 인스턴스를 공유 합니다.
+* 단일 *서비스 라고 하는 여러* 구성 요소에서 서비스 클래스의 단일 인스턴스를 공유 합니다.
 * 참조 추상화를 사용 하 여 구체적인 서비스 클래스의 구성 요소를 분리 합니다. 예를 들어 앱의 데이터 `IDataAccess` 에 액세스 하기 위한 인터페이스를 생각해 보겠습니다. 인터페이스는 구체적 `DataAccess` 클래스에서 구현 되 고 앱의 서비스 컨테이너에 서비스로 등록 됩니다. 구성 요소가 DI를 사용 하 여 `IDataAccess` 구현을 수신 하는 경우 구성 요소가 구체적인 형식에 연결 되지 않습니다. 단위 테스트에서 모의 구현을 위해 구현을 바꿀 수 있습니다.
 
 ## <a name="default-services"></a>기본 서비스
 
 기본 서비스는 앱의 서비스 컬렉션에 자동으로 추가 됩니다.
 
-| 서비스 | 수명 | 설명 |
+| 서비스 | 수명 | Description |
 | ------- | -------- | ----------- |
 | <xref:System.Net.Http.HttpClient> | Singleton | URI로 식별 되는 리소스에서 http 요청을 보내고 HTTP 응답을 받기 위한 메서드를 제공 합니다. 이 인스턴스 `HttpClient` 는 백그라운드에서 HTTP 트래픽을 처리 하는 데 브라우저를 사용 합니다. [BaseAddress](xref:System.Net.Http.HttpClient.BaseAddress) 는 앱의 기본 URI 접두사로 자동으로 설정 됩니다. 자세한 내용은 <xref:blazor/call-web-api>을 참조하세요. |
 | `IJSRuntime` | Singleton | JavaScript 호출이 디스패치되는 JavaScript 런타임의 인스턴스를 나타냅니다. 자세한 내용은 <xref:blazor/javascript-interop>을 참조하세요. |
-| `IUriHelper` | Singleton | Uri 및 탐색 상태를 사용 하기 위한 도우미를 포함 합니다. 자세한 내용은 [URI 및 탐색 상태 도우미](xref:blazor/routing#uri-and-navigation-state-helpers)를 참조 하세요. |
+| `NavigationManager` | Singleton | Uri 및 탐색 상태를 사용 하기 위한 도우미를 포함 합니다. 자세한 내용은 [URI 및 탐색 상태 도우미](xref:blazor/routing#uri-and-navigation-state-helpers)를 참조 하세요. |
 
 사용자 지정 서비스 공급자는 테이블에 나열 된 기본 서비스를 자동으로 제공 하지 않습니다. 사용자 지정 서비스 공급자를 사용 하 고 표에 표시 된 서비스가 필요한 경우 새 서비스 공급자에 필요한 서비스를 추가 합니다.
 
