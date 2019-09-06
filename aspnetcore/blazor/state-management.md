@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/13/2019
 uid: blazor/state-management
-ms.openlocfilehash: af040635302fbf2dae8192dcf37d55bfcfedfcec
-ms.sourcegitcommit: f5f0ff65d4e2a961939762fb00e654491a2c772a
+ms.openlocfilehash: 01f32130e43b7235cb438ad71321256882f53573
+ms.sourcegitcommit: 8b36f75b8931ae3f656e2a8e63572080adc78513
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/15/2019
-ms.locfileid: "69030374"
+ms.lasthandoff: 09/05/2019
+ms.locfileid: "70310298"
 ---
 # <a name="aspnet-core-blazor-state-management"></a>ASP.NET Core Blazor 상태 관리
 
@@ -237,10 +237,7 @@ else
 
 오류를 해결 하는 한 가지 방법은 사전 렌더링을 사용 하지 않도록 설정 하는 것입니다. 일반적으로 앱이 브라우저 기반 저장소를 많이 사용 하는 경우이 옵션을 선택 하는 것이 좋습니다. 응용 프로그램은 또는 `localStorage` `sessionStorage` 를 사용할 수 있을 때까지 유용한 콘텐츠를 다시 만들 수 없기 때문에, 렌더링은 복잡성을 더하고 앱을 활용 하지 않습니다.
 
-렌더링을 사용 하지 않도록 설정 하려면:
-
-1. *Pages/_Host* 파일을 열고에 대 `Html.RenderComponentAsync`한 호출을 제거 합니다.
-1. 파일을 `endpoints.MapBlazorHub()` 열고`endpoints.MapBlazorHub<App>("app")`에 대 한 호출을로 바꿉니다. `Startup.cs` `App`루트 구성 요소의 형식입니다. `"app"`루트 구성 요소의 위치를 지정 하는 CSS 선택기입니다.
+렌더링을 사용 하지 않도록 설정 하려면 *Pages/_Host* 파일을 열고에 대 `Html.RenderComponentAsync<App>(RenderMode.Server)`한 호출을 변경 합니다.
 
 렌더링은 또는 `localStorage` `sessionStorage`를 사용 하지 않는 다른 페이지에 유용할 수 있습니다. 렌더링을 사용 하도록 설정 된 상태로 유지 하려면 브라우저가 회로에 연결 될 때까지 로드 작업을 지연 시킵니다. 카운터 값을 저장 하는 예제는 다음과 같습니다.
 

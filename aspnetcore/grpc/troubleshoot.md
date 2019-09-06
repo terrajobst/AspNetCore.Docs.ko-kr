@@ -7,12 +7,12 @@ ms.author: jamesnk
 ms.custom: mvc
 ms.date: 08/26/2019
 uid: grpc/troubleshoot
-ms.openlocfilehash: 49bde2792f0fd7910de02d75f5f443000916dec7
-ms.sourcegitcommit: de17150e5ec7507d7114dde0e5dbc2e45a66ef53
+ms.openlocfilehash: e0c12aac083bc2e13f66831e756f2a93b7ee76b0
+ms.sourcegitcommit: 8b36f75b8931ae3f656e2a8e63572080adc78513
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/28/2019
-ms.locfileid: "70112750"
+ms.lasthandoff: 09/05/2019
+ms.locfileid: "70310443"
 ---
 # <a name="troubleshoot-grpc-on-net-core"></a>.NET Core에서 gRPC 문제 해결
 
@@ -40,10 +40,9 @@ info: Microsoft.Hosting.Lifetime[0]
 ```csharp
 static async Task Main(string[] args)
 {
-    var httpClient = new HttpClient();
     // The port number(5001) must match the port of the gRPC server.
-    httpClient.BaseAddress = new Uri("https://localhost:5001");
-    var client = GrpcClient.Create<Greeter.GreeterClient>(httpClient);
+    var channel = GrpcChannel.ForAddress("https://localhost:5001");
+    var client = new Greet.GreeterClient(channel);
 }
 ```
 
@@ -56,7 +55,7 @@ static async Task Main(string[] args)
 > 처리되지 않은 예외가 발생했습니다. System.Net.Http.HttpRequestException: SSL 연결을 설정할 수 없습니다. 내부 예외를 참조 하십시오.
 > ---> 합니다. AuthenticationException: 유효성 검사 절차에 따르면 원격 인증서가 잘못 되었습니다.
 
-응용 프로그램을 로컬로 테스트 하 고 ASP.NET Core HTTPS 개발 인증서를 신뢰할 수 없는 경우이 오류가 표시 될 수 있습니다. 이 문제를 해결 하 [는 지침은 Windows 및 macOS에서 ASP.NET CORE HTTPS 개발 인증서 신뢰](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos)를 참조 하세요.
+응용 프로그램을 로컬로 테스트 하 고 ASP.NET Core HTTPS 개발 인증서를 신뢰할 수 없는 경우이 오류가 표시 될 수 있습니다. 이 문제의 해결 지침은 [Windows 및 macOS에서의 ASP.NET Core HTTPS 개발 인증서 신뢰](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos)를 참조하세요.
 
 다른 컴퓨터에서 gRPC 서비스를 호출 하 고 인증서를 신뢰할 수 없는 경우 gRPC 클라이언트에서 잘못 된 인증서를 무시 하도록 구성할 수 있습니다. 다음 코드는 [Httpclienthandler. ServerCertificateCustomValidationCallback](/dotnet/api/system.net.http.httpclienthandler.servercertificatecustomvalidationcallback) 를 사용 하 여 신뢰할 수 있는 인증서가 없는 호출을 허용 합니다.
 
@@ -78,13 +77,12 @@ var client = GrpcClient.Create<Greeter.GreeterClient>(httpClient);
 .NET Core 클라이언트를 사용 하 여 안전 하지 않은 gRPC 서비스를 호출 하려면 추가 구성이 필요 합니다. Grpc 클라이언트는 `System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport` 스위치를로 설정 하 고 서버 `http` 주소에서를 `true` 사용 해야 합니다.
 
 ```csharp
-// This switch must be set before creating the HttpClient.
+// This switch must be set before creating the GrpcChannel/HttpClient.
 AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
 
-var httpClient = new HttpClient();
-// The address starts with "http://"
-httpClient.BaseAddress = new Uri("http://localhost:5000");
-var client = GrpcClient.Create<Greeter.GreeterClient>(httpClient);
+// The port number(5000) must match the port of the gRPC server.
+var channel = GrpcChannel.ForAddress("https://localhost:5001");
+var client = new Greet.GreeterClient(channel);
 ```
 
 ## <a name="unable-to-start-aspnet-core-grpc-app-on-macos"></a>MacOS에서 ASP.NET Core gRPC 앱을 시작할 수 없음
