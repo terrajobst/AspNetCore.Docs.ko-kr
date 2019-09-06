@@ -33,7 +33,7 @@ ms.locfileid: "68308182"
 
 ASP.NET Core 요청 파이프라인은 하나씩 차례로 호출되는 요청 대리자 시퀀스로 구성됩니다. 다음 다이어그램은 그 개념을 보여줍니다. 실행 스레드는 검은색 화살표를 따릅니다.
 
-![요청이 도착하고, 세 가지 미들웨어를 처리하고, 응답이 앱에서 나가는 것을 보여주는 요청 처리 패턴입니다. 각 미들웨어는 해당 논리를 실행하고 next() 문에서 다음 미들웨어에 대한 요청을 전달합니다. 세 번째 미들웨어가 요청을 처리한 후 요청은 클라이언트에 대한 응답으로 앱을 떠나기 전에 해당 다음() 문 후에 추가 처리에 대한 반대 순서로 이전의 두 개의 미들웨어를 통해 다시 전달합니다.](index/_static/request-delegate-pipeline.png)
+![요청이 도착하고, 세 가지 미들웨어에 의해서 처리되고, 앱에서 응답이 나가는 것을 보여주는 요청 처리 패턴입니다. 각 미들웨어는 해당 논리를 실행하고 next() 문에서 다음 미들웨어로 요청을 전달합니다. 세 번째 미들웨어가 요청을 처리한 후 요청은 클라이언트에 대한 응답으로 앱을 떠나기 전에 해당 next() 문 후에 추가 처리를 위해 반대 순서로 이전의 두 개 미들웨어를 통해 다시 전달됩니다.](index/_static/request-delegate-pipeline.png)
 
 각 대리자는 다음 대리자 전과 후에 작업을 수행할 수 있습니다. 예외 처리 대리자는 파이프라인의 이후 단계에서 발생하는 예외를 잡을 수 있도록 파이프라인의 초기에 호출되어야 합니다.
 
@@ -47,13 +47,13 @@ ASP.NET Core 요청 파이프라인은 하나씩 차례로 호출되는 요청 �
 
 [!code-csharp[](index/snapshot/Chain/Startup.cs?name=snippet1)]
 
-대리자가 다음 대리자에 요청을 전달하지 않을 때 이를*요청 파이프라인을 단락(short-circuiting)* 한다고 합니다. 단락(short-circuiting)은 불필요한 작업을 방지하기 때문에 보통 바람직합니다. 예를 들어 [정적 파일 미들웨어](xref:fundamentals/static-files)는 정적 파일에 대한 요청을 처리하고 나머지 파이프라인을 단락(short-circuit)하여 *터미널 미들웨어*로 작동할 수 있습니다. 추가 처리를 종료하는 미들웨어 앞의 파이프라인에 추가되는 미들웨어는 `next.Invoke` 문 뒤의 코드를 계속 처리합니다. 그러나 이미 전송된 응답에 쓰려고 하는 것에 대한 다음 경고를 참조하세요.
+대리자가 다음 대리자에 요청을 전달하지 않을 때 이를 *요청 파이프라인을 단락(short-circuiting)* 한다고 합니다. 단락(short-circuiting)은 불필요한 작업을 방지하기 때문에 종종 바람직합니다. 예를 들어 [정적 파일 미들웨어](xref:fundamentals/static-files)는 정적 파일에 대한 요청을 처리하고 나머지 파이프라인을 단락(short-circuit)하여 *터미널 미들웨어*로 작동할 수 있습니다. 추가 처리를 종료하는 미들웨어 전에 파이프라인에 추가된 미들웨어는 `next.Invoke` 문 이후의 코드를 계속 처리합니다. 그러나 이미 전송된 응답에 쓰려고 시도하는 것에 대한 다음 경고를 참조하세요.
 
 > [!WARNING]
-> 클라이언트에 응답을 전송한 후에 `next.Invoke`를 호출하지 마십시오. 응답이 시작된 후 <xref:Microsoft.AspNetCore.Http.HttpResponse>로 변경하면 예외를 throw합니다. 예를 들어 헤더 및 상태 코드를 설정하는 변경 작업은 예외를 throw합니다. `next`를 호출한 후 응답 본문에 작성하기:
+> 클라이언트에 응답을 전송한 후에 `next.Invoke`를 호출하지 마십시오. 응답이 시작된 후 <xref:Microsoft.AspNetCore.Http.HttpResponse>로 변경하면 예외를 던집니다. 예를 들어 헤더 및 상태 코드를 설정하는 변경 작업은 예외를 던집니다. `next`를 호출한 후 응답 본문에 작성할 경우:
 >
 > * 프로토콜 위반이 발생할 수 있습니다. 예를 들어, 명시된 `Content-Length`보다 긴 내용이 작성될 수 있습니다.
-> * 본문 형식을 손상시킬 수 있습니다. 예를 들어 CSS 파일에 HTML 바닥글 작성하기.
+> * 본문 형식을 손상시킬 수 있습니다. 예를 들어, CSS 파일에 HTML 바닥글을 작성할 수 있습니다.
 >
 > <xref:Microsoft.AspNetCore.Http.HttpResponse.HasStarted*>는 헤더가 이미 전송됐는지 또는 본문이 이미 작성됐는지 여부를 나타내는 유용한 힌트를 제공해줍니다.
 
@@ -61,17 +61,17 @@ ASP.NET Core 요청 파이프라인은 하나씩 차례로 호출되는 요청 �
 
 미들웨어 구성 요소가 `Startup.Configure` 메서드에 추가되는 순서는 요청에서 미들웨어 구성 요소가 호출되는 순서와 응답에 대한 역순서를 정의합니다. 순서는 보안, 성능 및 기능에 중요합니다.
 
-다음 `Startup.Configure` 메서드는 공통 앱 시나리오를 위한 미들웨어 구성 요소를 추가합니다.
+다음 `Startup.Configure` 메서드는 일반적인 앱 시나리오를 위한 미들웨어 구성 요소를 추가합니다.
 
 1. 예외/오류 처리
    * 앱이 개발 환경에서 실행되는 경우:
      * 개발자 예외 페이지 미들웨어(<xref:Microsoft.AspNetCore.Builder.DeveloperExceptionPageExtensions.UseDeveloperExceptionPage*>)가 앱 런타임 오류를 보고합니다.
      * 데이터베이스 오류 페이지 미들웨어(<xref:Microsoft.AspNetCore.Builder.DatabaseErrorPageExtensions.UseDatabaseErrorPage*>)가 데이터베이스 런타임 오류를 보고합니다.
    * 프로덕션 환경에서 앱을 실행하는 경우:
-     * 예외 처리기 미들웨어(<xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler*>)가 다음 미들웨어에서 throw된 예외를 catch합니다.
+     * 예외 처리기 미들웨어(<xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler*>)가 다음 미들웨어에서 던져진 예외를 잡습니다.
      * HTTP HSTS(엄격한 전송 보안 프로토콜) 미들웨어(<xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts*>)가 `Strict-Transport-Security` 헤더를 추가합니다.
 1. HTTPS 리디렉션 미들웨어(<xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection*>)가 HTTP 요청을 HTTPS로 리디렉션합니다.
-1. 정적 파일 미들웨어(<xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles*>)가 정적 파일을 반환하고 추가 요청 처리를 제한합니다.
+1. 정적 파일 미들웨어(<xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles*>)가 정적 파일을 반환하고 추가 요청 처리를 단락합니다.
 1. 쿠키 정책 미들웨어(<xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy*>)가 앱이 EU GDPR(일반 데이터 보호 규정)을 준수하도록 만듭니다.
 1. 인증 미들웨어(<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*>)가 보안 리소스에 대한 액세스가 허용되기 전에 사용자 인증을 시도합니다.
 1. 세션 미들웨어(<xref:Microsoft.AspNetCore.Builder.SessionMiddlewareExtensions.UseSession*>)가 세션 상태를 설정 및 유지합니다. 앱이 세션 상태를 사용하는 경우에는 쿠키 정책 미들웨어 이후 및 MVC 미들웨어 이전에 세션 미들웨어를 호출하세요.
@@ -102,7 +102,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 앞의 예제 코드에서 각 미들웨어 확장 메서드는 <xref:Microsoft.AspNetCore.Builder?displayProperty=fullName> 네임스페이스를 통해 <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder>에 표시됩니다.
 
-<xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler*>는 파이프라인에 처음으로 추가된 미들웨어 구성 요소입니다. 따라서 예외 처리기 미들웨어는 후속 호출에서 발생하는 모든 예외를 catch 합니다.
+<xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler*>는 파이프라인에 처음으로 추가된 미들웨어 구성 요소입니다. 따라서 예외 처리기 미들웨어는 후속 호출에서 발생하는 모든 예외를 잡습니다.
 
 정적 파일 미들웨어는 파이프라인 초기에 호출되므로 요청을 처리하고 나머지 구성 요소를 통과하지 않고 단락(short-circuit)할 수 있습니다. 정적 파일 미들웨어는 권한 부여 검사를 제공하지 **않습니다**. *wwwroot* 아래의 항목을 비롯한 제공되는 모든 파일은 공개적으로 사용할 수 있습니다. 정적 파일을 보호하는 방법은 <xref:fundamentals/static-files>을 참조하세요.
 
@@ -169,7 +169,7 @@ app.Map("/level1", level1App => {
 
 ## <a name="built-in-middleware"></a>기본 제공 미들웨어
 
-ASP.NET Core는 다음과 같은 미들웨어 구성 요소가 함께 제공됩니다. *순서* 열은 요청 처리 파이프라인에서 미들웨어의 배치, 미들웨어가 요청 처리를 종료할 수 있는 조건에 대한 정보를 제공합니다. 미들웨어가 요청 처리 파이프라인을 단락(short-circuit)하고 다운스트림 미들웨어가 더는 요청을 처리하지 못하도록 하는 경우 이를 *터미널 미들웨어*라고 합니다. 단락(short-circuiting)에 대한 자세한 내용은 [IApplicationBuilder로 미들웨어 파이프라인 만들기](#create-a-middleware-pipeline-with-iapplicationbuilder) 섹션을 참조하세요.
+ASP.NET Core는 다음과 같은 미들웨어 구성 요소와 함께 제공됩니다. *순서* 열은 요청 처리 파이프라인에서 미들웨어의 배치, 미들웨어가 요청 처리를 종료할 수 있는 조건에 대한 정보를 제공합니다. 미들웨어가 요청 처리 파이프라인을 단락(short-circuit)하고 후속 미들웨어가 더는 요청을 처리하지 못하도록 하는 경우 이를 *터미널 미들웨어*라고 합니다. 단락(short-circuiting)에 대한 자세한 내용은 [IApplicationBuilder로 미들웨어 파이프라인 만들기](#create-a-middleware-pipeline-with-iapplicationbuilder) 섹션을 참조하세요.
 
 | 미들웨어 | 설명 | 순서 |
 | ---------- | ----------- | ----- |

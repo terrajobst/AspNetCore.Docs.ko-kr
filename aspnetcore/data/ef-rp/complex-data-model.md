@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: 34b977f70f3e7e58e4ab6fcf3d8f69800896a65d
-ms.sourcegitcommit: 0774a61a3a6c1412a7da0e7d932dc60c506441fc
+ms.openlocfilehash: ab29cf687c80551d275cae69f28b7576016bfff6
+ms.sourcegitcommit: e6bd2bbe5683e9a7dbbc2f2eab644986e6dc8a87
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/27/2019
-ms.locfileid: "70059127"
+ms.lasthandoff: 09/03/2019
+ms.locfileid: "70238129"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---data-model---5-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 데이터 모델 - 5/8
 
@@ -390,7 +390,7 @@ public ICollection<Course> Courses { get; set; }
 
 규칙에 따라 EF Core는 Null을 허용하지 않는 FK 및 다대다 관계에 대한 계단식 삭제를 활성화합니다. 이 기본 동작으로 인해 순환 계단식 삭제 규칙이 발생할 수 있습니다. 순환 계단식 삭제 규칙은 마이그레이션이 추가될 때 예외를 발생시킵니다.
 
-예를 들어 `Department.InstructorID` 속성이 비 nullable로 정의된 경우 EF Core는 계단식 삭제 규칙을 구성합니다. 이 경우 관리자로 할당된 강사가 삭제되면 부서가 삭제됩니다. 이 시나리오에서는 제한 규칙을 사용하는 것이 좋습니다. 다음 흐름 API는 제한 규칙을 설정하고 계단식 삭제를 사용하지 않도록 설정합니다.
+예를 들어 `Department.InstructorID` 속성이 비 nullable로 정의된 경우 EF Core는 계단식 삭제 규칙을 구성합니다. 이 경우 관리자로 할당된 강사가 삭제되면 부서가 삭제됩니다. 이 시나리오에서는 제한 규칙을 사용하는 것이 좋습니다. 다음 [흐름 API](#fluent-api-alternative-to-attributes)는 제한 규칙을 설정하고 계단식 삭제를 사용하지 않도록 설정합니다.
 
   ```csharp
   modelBuilder.Entity<Department>()
@@ -1091,7 +1091,7 @@ public ICollection<Course> Courses { get; set; }
 
 * EF Core는 강사가 삭제될 때 부서를 삭제하도록 계단식 삭제 규칙을 구성합니다.
 * 강사가 삭제될 때 부서 삭제는 의도된 동작이 아닙니다.
-* 다음 흐름 API는 계단식 대신 제한 규칙을 설정합니다.
+* 다음 [흐름 API](#fluent-api-alternative-to-attributes)는 계단식 대신 제한 규칙을 설정합니다.
 
    ```csharp
    modelBuilder.Entity<Department>()
