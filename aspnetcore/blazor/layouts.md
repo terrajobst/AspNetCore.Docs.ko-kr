@@ -5,18 +5,18 @@ description: Blazor apps에 대해 재사용 가능한 레이아웃 구성 요�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/02/2019
+ms.date: 09/06/2019
 uid: blazor/layouts
-ms.openlocfilehash: 2d652e149381f0a93e3135da978ab5737d47c6f1
-ms.sourcegitcommit: 0b9e767a09beaaaa4301915cdda9ef69daaf3ff2
+ms.openlocfilehash: 05a38c10e18407d50422192ab1ddf3ff4b0f3a5b
+ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/03/2019
-ms.locfileid: "68948223"
+ms.lasthandoff: 09/07/2019
+ms.locfileid: "70800368"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>ASP.NET Core Blazor 레이아웃
 
-[Rainer Stropek](https://www.timecockpit.com)
+[Rainer Stropek](https://www.timecockpit.com) 및 [Luke latham 문자](https://github.com/guardrex)
 
 메뉴, 저작권 메시지 및 회사 로고와 같은 일부 앱 요소는 일반적으로 앱의 전체 레이아웃에 포함 되며 앱의 모든 구성 요소에서 사용 됩니다. 이러한 요소의 코드를 앱의 모든 구성 요소에 복사 하는 것은 요소 중 하나&mdash;에 업데이트가 필요한 경우 모든 구성 요소를 업데이트 해야 하기 때문에 효율적이 지 않습니다. 이러한 중복은 유지 관리 하기 어렵고 시간이 지남에 따라 일관 되지 않은 콘텐츠가 발생할 수 있습니다. *레이아웃* 은이 문제를 해결 합니다.
 
@@ -31,29 +31,41 @@ ms.locfileid: "68948223"
 
 [!code-cshtml[](layouts/sample_snapshot/3.x/MainLayout.razor?highlight=1,13)]
 
+Blazor 앱 템플릿 중 하나를 `MainLayout` 기반으로 하는 앱에서 구성 요소 (*mainlayout. razor*)는 앱의 *공유* 폴더에 있습니다.
+
+## <a name="default-layout"></a>기본 레이아웃
+
+앱의 *응용 프로그램 razor* 파일에서 `Router` 구성 요소의 기본 앱 레이아웃을 지정 합니다. 기본 Blazor `Router` 템플릿에서 제공 하는 다음 구성 요소는 기본 레이아웃 `MainLayout` 을 구성 요소로 설정 합니다.
+
+[!code-cshtml[](layouts/sample_snapshot/3.x/App1.razor?highlight=3)]
+
+콘텐츠에 대 `NotFound` 한 기본 레이아웃을 제공 하려면 내용에 `LayoutView` 대해 `NotFound` 를 지정 합니다.
+
+[!code-cshtml[](layouts/sample_snapshot/3.x/App2.razor?highlight=6-9)]
+
+`Router` 구성 요소에 대 한 자세한 내용은을 <xref:blazor/routing>참조 하십시오.
+
 ## <a name="specify-a-layout-in-a-component"></a>구성 요소에 레이아웃 지정
 
 Razor 지시어 `@layout` 를 사용 하 여 레이아웃을 구성 요소에 적용 합니다. 컴파일러는 구성 `@layout` 요소 클래스 `LayoutAttribute`에 적용 되는를로 변환 합니다.
 
-다음 구성 요소인 *masterlist. razor*의 내용은의 `MainLayout` `@Body`위치에 있는에 삽입 됩니다.
+다음 `MasterList` 구성 요소의 내용이의 `@Body`위치에서에 삽입 `MasterLayout` 됩니다.
 
 [!code-cshtml[](layouts/sample_snapshot/3.x/MasterList.razor?highlight=1)]
 
 ## <a name="centralized-layout-selection"></a>중앙 레이아웃 선택
 
-앱의 모든 폴더에는 선택적으로 *_Imports. razor*라는 템플릿 파일이 포함 될 수 있습니다. 컴파일러는 동일한 폴더에 있는 모든 Razor 템플릿의 imports 파일에 지정 된 지시문을 포함 하 고 모든 하위 폴더에서 재귀적으로 포함 됩니다. 따라서을 포함 `@layout MainLayout` 하는 *Imports. razor* 파일은 폴더의 모든 구성 요소가를 사용 `MainLayout`하는지 확인 합니다. 폴더 및 하위 폴더에 있는 모든 `@layout MainLayout` *razor* 파일을 반복적으로 추가할 필요는 없습니다. `@using`지시문은 동일한 방식으로 구성 요소에도 적용 됩니다.
+앱의 모든 폴더에는 선택적으로 *_Imports. razor*라는 템플릿 파일이 포함 될 수 있습니다. 컴파일러는 동일한 폴더에 있는 모든 Razor 템플릿의 imports 파일에 지정 된 지시문을 포함 하 고 모든 하위 폴더에서 재귀적으로 포함 됩니다. 따라서을 포함 `@layout MyCoolLayout` 하는 *Imports. razor* 파일은 폴더의 모든 구성 요소가를 사용 `MyCoolLayout`하는지 확인 합니다. 폴더 및 하위 폴더에 있는 모든 `@layout MyCoolLayout` *razor* 파일을 반복적으로 추가할 필요는 없습니다. `@using`지시문은 동일한 방식으로 구성 요소에도 적용 됩니다.
 
 다음 가져오기-razor 파일 가져오기 *(_s)* :
 
-* `MainLayout`.
+* `MyCoolLayout`.
 * 동일한 폴더와 하위 폴더에 있는 모든 Razor 구성 요소입니다.
 * `BlazorApp1.Data` 네임스페이스.
  
 [!code-cshtml[](layouts/sample_snapshot/3.x/_Imports.razor)]
 
 *_Imports. razor* 파일은 [razor 뷰 및 페이지에 대 한 _ViewImports 파일과](xref:mvc/views/layout#importing-shared-directives) 비슷하지만 특히 razor 구성 요소 파일에 적용 됩니다.
-
-Blazor 템플릿에서는 레이아웃 선택을 위해 Imports. razor 파일을 사용 합니다 *(_d).* Blazor 템플릿에서 만든 앱은 프로젝트 및 *Pages* 폴더의 루트에 *_imports. razor* 파일이 포함 되어 있습니다.
 
 ## <a name="nested-layouts"></a>중첩 레이아웃
 
@@ -67,7 +79,7 @@ Blazor 템플릿에서는 레이아웃 선택을 위해 Imports. razor 파일을
 
 [!code-cshtml[](layouts/sample_snapshot/3.x/MasterListLayout.razor?highlight=1,9)]
 
-마지막으로 *masterlayout* 에는머리글,주메뉴,바닥글등의최상위레이아웃요소가포함`MasterLayout` 됩니다. `MasterListLayout`가 표시`@Body` 되 면`EpisodesComponent` 이 렌더링 됩니다.
+마지막으로 *masterlayout* 에는머리글,주메뉴,바닥글등의최상위레이아웃요소가포함`MasterLayout` 됩니다. `MasterListLayout`가 표시 되 면 `EpisodesComponent`이 `@Body` 렌더링 됩니다.
 
 [!code-cshtml[](layouts/sample_snapshot/3.x/MasterLayout.razor?highlight=6)]
 

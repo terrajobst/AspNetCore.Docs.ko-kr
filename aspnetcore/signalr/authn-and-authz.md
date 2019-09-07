@@ -7,12 +7,12 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 07/15/2019
 uid: signalr/authn-and-authz
-ms.openlocfilehash: e7e7a9fd537ba89b64c15594652a290357a00038
-ms.sourcegitcommit: f30b18442ed12831c7e86b0db249183ccd749f59
+ms.openlocfilehash: da226f4e192be8e34a0b2cec1493a1353c995279
+ms.sourcegitcommit: 387cf29f5d5addef2cbc70670a11d612806b36b2
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/23/2019
-ms.locfileid: "68412537"
+ms.lasthandoff: 09/06/2019
+ms.locfileid: "70746526"
 ---
 # <a name="authentication-and-authorization-in-aspnet-core-signalr"></a>ASP.NET Core SignalR의 인증 및 권한 부여
 
@@ -26,13 +26,39 @@ SignalR을 [ASP.NET Core 인증](xref:security/authentication/identity)과 함�
 
 SignalR 및 ASP.NET Core 인증을 사용 `Startup.Configure` 하는 예제는 다음과 같습니다.
 
+::: moniker range=">= aspnetcore-3.0"
+
 ```csharp
 public void Configure(IApplicationBuilder app)
 {
     ...
 
     app.UseStaticFiles();
-    
+
+    app.UseRouting();
+
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapHub<ChatHub>("/chat");
+        endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+    });
+}
+```
+
+::: moniker-end
+
+::: moniker range="<= aspnetcore-2.2"
+
+```csharp
+public void Configure(IApplicationBuilder app)
+{
+    ...
+
+    app.UseStaticFiles();
+
     app.UseAuthentication();
 
     app.UseSignalR(hubs =>
@@ -49,6 +75,8 @@ public void Configure(IApplicationBuilder app)
 
 > [!NOTE]
 > SignalR 및 ASP.NET Core 인증 미들웨어를 등록 하는 순서는 중요 합니다. SignalR에 `UseAuthentication` 에 `UseSignalR` 대 한 사용자 `HttpContext`가 있도록 항상 먼저를 호출 합니다.
+
+::: moniker-end
 
 ### <a name="cookie-authentication"></a>쿠키 인증
 

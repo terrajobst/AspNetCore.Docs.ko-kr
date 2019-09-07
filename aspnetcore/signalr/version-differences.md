@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.date: 11/14/2018
 uid: signalr/version-differences
-ms.openlocfilehash: d140becaed5b4fc765b7a72571c7f5dce7f4e3d4
-ms.sourcegitcommit: 28646e8ca62fb094db1557b5c0c02d5b45531824
+ms.openlocfilehash: 70b09493d9b4c96c897465d60e53e93a793c42f9
+ms.sourcegitcommit: 387cf29f5d5addef2cbc70670a11d612806b36b2
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/23/2019
-ms.locfileid: "67333456"
+ms.lasthandoff: 09/06/2019
+ms.locfileid: "70746545"
 ---
 # <a name="differences-between-aspnet-signalr-and-aspnet-core-signalr"></a>ASP.NET SignalR과 ASP.NET Core SignalR의 차이점
 
@@ -21,18 +21,18 @@ ASP.NET Core SignalR은 ASP.NET SignalR용 클라이언트 또는 서버와 호�
 
 |                      | ASP.NET SignalR | ASP.NET Core SignalR |
 | -------------------- | --------------- | -------------------- |
-| Server NuGet 패키지 | [Microsoft.AspNet.SignalR](https://www.nuget.org/packages/Microsoft.AspNet.SignalR/) | [Microsoft.AspNetCore.App](https://www.nuget.org/packages/Microsoft.AspNetCore.App/) (.NET Core)<br>[Microsoft.AspNetCore.SignalR](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR/) (.NET Framework) |
+| 서버 NuGet 패키지 | [Microsoft.AspNet.SignalR](https://www.nuget.org/packages/Microsoft.AspNet.SignalR/) | [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.App/) (.net Core)<br>[AspNetCore. SignalR](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR/) (.NET Framework) |
 | 클라이언트 NuGet 패키지 | [Microsoft.AspNet.SignalR.Client](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft.AspNet.SignalR.JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [Microsoft.AspNetCore.SignalR.Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
 | 클라이언트 npm 패키지 | [signalr](https://www.npmjs.com/package/signalr) | [@aspnet/signalr](https://www.npmjs.com/package/@aspnet/signalr) |
-| Java 클라이언트 | [GitHub 리포지토리](https://github.com/SignalR/java-client) (사용 되지 않음)  | Maven package [com.microsoft.signalr](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
-| 서버 앱 유형 | ASP.NET (System.Web) 또는 OWIN 자체 호스트 | ASP.NET Core |
-| 지원되는 서버 플랫폼 | .NET framework 4.5 이상 | .NET Framework 4.6.1 이상<br>.NET core 2.1 이상 |
+| Java 클라이언트 | [GitHub 리포지토리](https://github.com/SignalR/java-client) mapi  | Maven package [signalr](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
+| 서버 앱 유형 | ASP.NET (System.web) 또는 OWIN 자체 호스트 | ASP.NET Core |
+| 지원되는 서버 플랫폼 | .NET Framework 4.5 이상 | .NET Framework 4.6.1 이상<br>.NET Core 2.1 이상 |
 
 ## <a name="feature-differences"></a>기능상의 차이점
 
 ### <a name="automatic-reconnects"></a>자동 다시 연결
 
-ASP.NET Core SignalR은 자동 재연결을 지원하지 않습니다. 클라이언트의 연결이 끊어진 경우 재연결하려면 사용자가 명시적으로 새로운 연결을 시작해야 합니다. ASP.NET SignalR은 연결이 끊어지면 SignalR이 서버에 재연결하려고 시도합니다. 
+ASP.NET Core SignalR은 자동 재연결을 지원하지 않습니다. 클라이언트의 연결이 끊어진 경우 재연결하려면 사용자가 명시적으로 새로운 연결을 시작해야 합니다. ASP.NET SignalR은 연결이 끊어지면 SignalR이 서버에 재연결하려고 시도합니다.
 
 ### <a name="protocol-support"></a>프로토콜 지원
 
@@ -40,7 +40,7 @@ ASP.NET Core SignalR은 JSON뿐만 아니라 [MessagePack](xref:signalr/messagep
 
 ### <a name="transports"></a>전송
 
-영원히 프레임 전송 ASP.NET Core SignalR에서 지원 되지 않습니다.
+ASP.NET Core SignalR에서는 무한 프레임 전송이 지원 되지 않습니다.
 
 ## <a name="differences-on-the-server"></a>서버의 차이점
 
@@ -52,6 +52,24 @@ ASP.NET Core SignalR은 ASP.NET Core 미들웨어이므로 `Startup.ConfigureSer
 services.AddSignalR()
 ```
 
+::: moniker range=">= aspnetcore-3.0"
+
+라우팅을 구성 하려면 `Startup.Configure` 메서드의 [useendpoints](/dotnet/api/microsoft.aspnetcore.builder.endpointroutingapplicationbuilderextensions.useendpoints) 메서드 호출 내에서 허브에 경로를 매핑합니다.
+
+
+```csharp
+app.UseRouting();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHub<ChatHub>("/hub");
+});
+```
+
+::: moniker-end
+
+::: moniker range="<= aspnetcore-2.2"
+
 라우팅을 구성하려면 `Startup.Configure` 메서드에서 [UseSignalR](/dotnet/api/microsoft.aspnetcore.builder.signalrappbuilderextensions.usesignalr) 메서드 호출 내부에서 허브에 경로를 매핑합니다.
 
 ```csharp
@@ -61,9 +79,11 @@ app.UseSignalR(routes =>
 });
 ```
 
+::: moniker-end
+
 ### <a name="sticky-sessions"></a>고정 세션
 
-ASP.NET SignalR에 대 한 확장 모델에는 클라이언트가 다시 연결 하 고 팜의 모든 서버에 메시지를 보낼 수 있습니다. ASP.NET Core SignalR의 연결 기간에 대 한 클라이언트는 동일한 서버를 사용 하 여 작용 해야 합니다. Redis를 사용 하 여 확장에는 고정 세션은 필요한 의미 합니다. 확장 사용에 대 한 [Azure SignalR Service](/azure/azure-signalr/), 서비스가 클라이언트에 대 한 연결을 처리 하기 때문에 고정 세션이 필요 하지 않습니다. 
+ASP.NET SignalR에 대 한 확장 모델을 사용 하면 클라이언트가 팜의 모든 서버에 다시 연결 하 여 메시지를 보낼 수 있습니다. ASP.NET Core SignalR에서 클라이언트는 연결 기간 동안 동일한 서버와 상호 작용 해야 합니다. Redis를 사용 하는 확장의 경우에는 고정 세션이 필요 합니다. [Azure SignalR service](/azure/azure-signalr/)를 사용 하는 확장의 경우 서비스에서 클라이언트에 대 한 연결을 처리 하기 때문에 고정 세션이 필요 하지 않습니다.
 
 ### <a name="single-hub-per-connection"></a>연결당 단일 허브
 
@@ -79,15 +99,15 @@ ASP.NET Core SignalR에서는 연결 모델이 단순화되었습니다. 단일 
 
 ### <a name="persistentconnection-removal"></a>PersistentConnection 제거
 
-ASP.NET Core SignalR에는 [PersistentConnection](https://docs.microsoft.com/previous-versions/aspnet/jj919047(v%3dvs.118)) 클래스가 제거 되었습니다. 
+ASP.NET Core SignalR에서 [PersistentConnection](https://docs.microsoft.com/previous-versions/aspnet/jj919047(v%3dvs.118)) 클래스가 제거 되었습니다.
 
 ### <a name="globalhost"></a>GlobalHost
 
-ASP.NET Core는 DI (종속성 주입) 프레임 워크에 기본 제공 합니다. 서비스에 액세스 하려면 DI를 사용할 수는 [HubContext](xref:signalr/hubcontext)합니다. 합니다 `GlobalHost` 가져오려는 ASP.NET SignalR에서 사용 되는 개체는 `HubContext` ASP.NET Core SignalR에 존재 하지 않습니다.
+ASP.NET Core에는 프레임 워크에 기본 제공 되는 DI (종속성 주입)가 있습니다. 서비스는 DI를 사용 하 여 [HubContext](xref:signalr/hubcontext)에 액세스할 수 있습니다. ASP.NET `GlobalHost` SignalR`HubContext` 에 사용 되는 개체는 ASP.NET Core SignalR에 존재 하지 않습니다.
 
 ### <a name="hubpipeline"></a>HubPipeline
 
-ASP.NET Core SignalR에 대 한 지원이 없는 `HubPipeline` 모듈입니다.
+ASP.NET Core SignalR는 모듈을 `HubPipeline` 지원 하지 않습니다.
 
 ## <a name="differences-on-the-client"></a>클라이언트의 차이점
 
@@ -110,7 +130,7 @@ jQuery에 대한 종속성은 제거되었지만 프로젝트에서 여전히 jQ
 
 ### <a name="internet-explorer-support"></a>Internet Explorer 지원
 
-ASP.NET Core SignalR (Microsoft Internet Explorer 8 자 이상에서 지원 되는 ASP.NET SignalR) Microsoft Internet Explorer 11 이상이 필요 합니다.
+ASP.NET Core SignalR에는 Microsoft Internet explorer 11 이상이 필요 합니다 (ASP.NET SignalR에서 지원 되는 Microsoft Internet Explorer 8 이상).
 
 ### <a name="javascript-client-method-syntax"></a>JavaScript 클라이언트 메서드 구문
 

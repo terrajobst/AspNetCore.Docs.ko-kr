@@ -5,14 +5,14 @@ description: Blazor apps에서 구성 요소에 서비스를 삽입 하는 방�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/02/2019
+ms.date: 09/06/2019
 uid: blazor/dependency-injection
-ms.openlocfilehash: a2bfa0cbe951e817ed6264f1a151d5a716cd795c
-ms.sourcegitcommit: 8b36f75b8931ae3f656e2a8e63572080adc78513
+ms.openlocfilehash: 0b48cd0cbe14d2b07627f56ab78611bbd3209fa1
+ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/05/2019
-ms.locfileid: "70310341"
+ms.lasthandoff: 09/07/2019
+ms.locfileid: "70800388"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core Blazor 종속성 주입
 
@@ -61,7 +61,7 @@ public void ConfigureServices(IServiceCollection services)
 
 | 수명 | Description |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped*> | Blazor 클라이언트 쪽에는 현재 DI 범위 개념이 없습니다. `Scoped`-등록 된 서비스는 `Singleton` 서비스 처럼 작동 합니다. 그러나 서버 쪽 호스팅 모델은 `Scoped` 수명을 지원 합니다. Razor 구성 요소에서 범위가 지정 된 서비스 등록의 범위는 연결로 지정 됩니다. 따라서 현재 사용자로 범위를 지정 해야 하는 서비스에 대해 범위 지정 서비스를 사용 하는 것이 좋습니다. 현재 의도는 브라우저에서 클라이언트 쪽을 실행 하는 경우에도 마찬가지입니다. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped*> | Blazor Weasembomapps는 현재 DI 범위의 개념을가지고 있지 않습니다. `Scoped`-등록 된 서비스는 `Singleton` 서비스 처럼 작동 합니다. 그러나 서버 쪽 호스팅 모델은 `Scoped` 수명을 지원 합니다. Blazor Server 앱에서 범위가 지정 된 서비스 등록 범위는 *연결*로 지정 됩니다. 따라서 현재 사용자로 범위를 지정 해야 하는 서비스에 대해 범위 지정 서비스를 사용 하는 것이 좋습니다. 현재 의도는 브라우저에서 클라이언트 쪽을 실행 하는 경우에도 마찬가지입니다. |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton*> | DI는 서비스의 *단일 인스턴스* 를 만듭니다. 서비스를 필요로 하 `Singleton` 는 모든 구성 요소는 동일한 서비스의 인스턴스를 수신 합니다. |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient*> | 구성 요소가 서비스 컨테이너에서 `Transient` 서비스의 인스턴스를 가져올 때마다 서비스의 *새 인스턴스* 를 수신 합니다. |
 
@@ -124,6 +124,29 @@ public class DataAccess : IDataAccess
 * 모든 인수를 DI에서 수행할 수 있는 생성자가 하나 있어야 합니다. DI에서 다루지 않는 추가 매개 변수는 기본값을 지정 하는 경우 허용 됩니다.
 * 적용 가능한 생성자는 *public*이어야 합니다.
 * 적용 가능한 생성자가 하나 있어야 합니다. 모호성을 발생 시 DI는 예외를 throw 합니다.
+
+## <a name="utility-base-component-classes-to-manage-a-di-scope"></a>DI 범위를 관리 하는 유틸리티 기본 구성 요소 클래스
+
+ASP.NET Core 앱에서 범위가 지정 된 서비스는 일반적으로 현재 요청으로 범위가 지정 됩니다. 요청이 완료 된 후에는 모든 범위 지정 또는 임시 서비스가 DI 시스템에 의해 삭제 됩니다. Blazor Server 앱에서 요청 범위는 클라이언트 연결 기간 동안 지속 되므로 임시 및 범위가 지정 된 서비스가 예상 보다 훨씬 오래 지속 될 수 있습니다.
+
+서비스의 범위를 구성 요소의 수명으로 범위를 지정할 수 있도록 `OwningComponentBase` 에서는 `OwningComponentBase<TService>` 및 기본 클래스를 사용할 수 있습니다. 이러한 기본 클래스는 구성 `ScopedServices` 요소의 수명으로 `IServiceProvider` 범위가 지정 된 서비스를 확인 하는 형식의 속성을 노출 합니다. Razor의 기본 클래스에서 상속 되는 구성 요소를 작성 하려면 `@inherits` 지시문을 사용 합니다.
+
+```cshtml
+@page "/users"
+@attribute [Authorize]
+@inherits OwningComponentBase<Data.ApplicationDbContext>
+
+<h1>Users (@Service.Users.Count())</h1>
+<ul>
+    @foreach (var user in Service.Users)
+    {
+        <li>@user.UserName</li>
+    }
+</ul>
+```
+
+> [!NOTE]
+> 또는를 사용 하 `@inject` 여 구성 요소에 삽입 된 서비스는 `InjectAttribute` 구성 요소의 범위에 생성 되지 않으며 요청 범위에 연결 됩니다.
 
 ## <a name="additional-resources"></a>추가 자료
 

@@ -5,14 +5,14 @@ description: 데이터에 바인딩하고, 이벤트를 처리 하 고, 구성 �
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/04/2019
+ms.date: 09/06/2019
 uid: blazor/components
-ms.openlocfilehash: ce9da14bbe19cbee960d215f6167a0e760bd607a
-ms.sourcegitcommit: 8b36f75b8931ae3f656e2a8e63572080adc78513
+ms.openlocfilehash: e877abfb568f71046c3603cac5e888e99ffc8d15
+ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/05/2019
-ms.locfileid: "70310371"
+ms.lasthandoff: 09/07/2019
+ms.locfileid: "70800414"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -426,7 +426,7 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 | ----- | ----- |
 | 클립보드        | `ClipboardEventArgs` |
 | 옵니다             | `DragEventArgs`끌어 온 항목 데이터를 `DataTransferItem` 저장 합니다. &ndash; `DataTransfer` |
-| Error            | `ErrorEventArgs` |
+| 오류            | `ErrorEventArgs` |
 | 포커스            | `FocusEventArgs`는에 대 한 `relatedTarget`지원을 포함 하지 않습니다. &ndash; |
 | `<input>` 변경 | `ChangeEventArgs` |
 | 키보드         | `KeyboardEventArgs` |
@@ -716,17 +716,30 @@ protected override void OnParametersSet()
 
 `OnAfterRenderAsync`및 `OnAfterRender` 는 구성 요소 렌더링을 완료 한 후에 호출 됩니다. 요소 및 구성 요소 참조가이 시점에 채워집니다. 렌더링 된 DOM 요소에 대해 작동 하는 타사 JavaScript 라이브러리 활성화와 같이 렌더링 된 콘텐츠를 사용 하 여 추가 초기화 단계를 수행 하려면이 단계를 사용 합니다.
 
+`OnAfterRender`*는 서버에서 사전 렌더링 될 때 호출 되지 않습니다.*
+
+`OnAfterRenderAsync` 및 `firstRender` 에대한매개변수`OnAfterRender` 는 다음과 같습니다.
+
+* 구성 요소 `true` 인스턴스를 처음 호출할 때로 설정 합니다.
+* 초기화 작업이 한 번만 수행 되도록 합니다.
+
 ```csharp
-protected override async Task OnAfterRenderAsync()
+protected override async Task OnAfterRenderAsync(bool firstRender)
 {
-    await ...
+    if (firstRender)
+    {
+        await ...
+    }
 }
 ```
 
 ```csharp
-protected override void OnAfterRender()
+protected override void OnAfterRender(bool firstRender)
 {
-    ...
+    if (firstRender)
+    {
+        ...
+    }
 }
 ```
 

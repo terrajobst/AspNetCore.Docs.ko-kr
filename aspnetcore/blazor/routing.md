@@ -5,14 +5,14 @@ description: 앱에서 요청을 라우팅하는 방법 및 NavLink 구성 요�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/23/2019
+ms.date: 09/06/2019
 uid: blazor/routing
-ms.openlocfilehash: ae3d7ab01185dd6f2e8e0f59b78c2e693fe464b0
-ms.sourcegitcommit: 8b36f75b8931ae3f656e2a8e63572080adc78513
+ms.openlocfilehash: d348908261c51b477aa698a407266d05c0df5a33
+ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/05/2019
-ms.locfileid: "70310340"
+ms.lasthandoff: 09/07/2019
+ms.locfileid: "70800337"
 ---
 # <a name="aspnet-core-blazor-routing"></a>ASP.NET Core Blazor 라우팅
 
@@ -28,9 +28,7 @@ Blazor 서버 쪽은 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)�
 
 ## <a name="route-templates"></a>경로 템플릿
 
-구성 `Router` 요소는 라우팅을 활성화 하 고 액세스 가능한 각 구성 요소에 경로 템플릿이 제공 됩니다. 구성 요소가 다음과 같이 *응용 프로그램 razor* 파일에 나타납니다. `Router`
-
-Blazor 서버 쪽 또는 클라이언트 쪽 응용 프로그램에서 다음을 수행 합니다.
+구성 `Router` 요소는 지정 된 경로를 사용 하 여 각 구성 요소로 라우팅할 수 있도록 합니다. 구성 요소가 다음과 같이 *응용 프로그램 razor* 파일에 나타납니다. `Router`
 
 ```cshtml
 <Router AppAssembly="typeof(Startup).Assembly">
@@ -43,20 +41,27 @@ Blazor 서버 쪽 또는 클라이언트 쪽 응용 프로그램에서 다음을
 </Router>
 ```
 
-`@page` 지시문을 사용 하는 *razor* 파일이 컴파일되면 생성 된 <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> 클래스에 경로 템플릿을 지정 하는이 제공 됩니다. 런타임에 라우터는를 `RouteAttribute` 사용 하 여 구성 요소 클래스를 검색 하 고 요청 된 URL과 일치 하는 경로 템플릿을 사용 하 여 구성 요소를 렌더링 합니다.
+`@page` 지시문을 사용 하는 *razor* 파일이 컴파일되면 생성 된 <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> 클래스에 경로 템플릿을 지정 하는이 제공 됩니다.
+
+런타임에 구성 요소는 `RouteView` 다음과 같습니다.
+
+* 원하는 매개 변수와 함께에서을 받습니다. `Router` `RouteData`
+* 지정 된 매개 변수를 사용 하 여 지정 된 구성 요소를 해당 레이아웃 또는 선택적 기본 레이아웃으로 렌더링 합니다.
+
+레이아웃을 지정 하지 않는 `DefaultLayout` 구성 요소에 사용할 레이아웃 클래스가 포함 된 매개 변수를 선택적으로 지정할 수 있습니다. 기본 Blazor 템플릿은 구성 요소를 `MainLayout` 지정 합니다. *Mainlayout. razor* 는 템플릿 프로젝트의 *공유* 폴더에 있습니다. 레이아웃에 대 한 자세한 내용은을 <xref:blazor/layouts>참조 하십시오.
 
 여러 경로 템플릿을 구성 요소에 적용할 수 있습니다. 다음 구성 요소는 및 `/BlazorRoute` `/DifferentBlazorRoute`에 대 한 요청에 응답 합니다.
 
 [!code-cshtml[](common/samples/3.x/BlazorSample/Pages/BlazorRoute.razor?name=snippet_BlazorRoute)]
 
 > [!IMPORTANT]
-> Url이 올바르게 확인 될 수 `<base>` 있도록 앱은 `href` 특성에 지정 된 앱 기본 경로를 사용 하 여 *wwwroot/index.html* 파일 (Blazor client side) 또는 *Pages/_Host* 파일 (Blazor server side)에 태그를 포함 해야 합니다. `<base href="/">`). 자세한 내용은 <xref:host-and-deploy/blazor/client-side#app-base-path>을 참조하세요.
+> Url이 올바르게 확인 될 수 `<base>` 있도록 앱은 `href` 특성에 지정 된 앱 기본 경로를 사용 하 여 *wwwroot/index.html* 파일 (Blazor client side) 또는 *Pages/_Host* 파일 (Blazor server side)에 태그를 포함 해야 합니다. `<base href="/">`). 자세한 내용은 <xref:host-and-deploy/blazor/index#app-base-path>을 참조하세요.
 
 ## <a name="provide-custom-content-when-content-isnt-found"></a>콘텐츠를 찾을 수 없는 경우 사용자 지정 콘텐츠 제공
 
 요청 된 경로에 대 한 콘텐츠를 찾을 수 없는 경우 구성요소를사용하여앱에서사용자지정콘텐츠를지정할수있습니다.`Router`
 
-*응용 프로그램 razor* 파일에서 `<NotFound>` `Router` 구성 요소의 템플릿 매개 변수에 사용자 지정 콘텐츠를 설정 합니다.
+*응용 프로그램 razor* 파일에서 `NotFound` `Router` 구성 요소의 템플릿 매개 변수에 사용자 지정 콘텐츠를 설정 합니다.
 
 ```cshtml
 <Router AppAssembly="typeof(Startup).Assembly">
@@ -70,7 +75,13 @@ Blazor 서버 쪽 또는 클라이언트 쪽 응용 프로그램에서 다음을
 </Router>
 ```
 
-의 `<NotFound>` 콘텐츠에는 다른 대화형 구성 요소와 같은 임의의 항목이 포함 될 수 있습니다.
+태그의 `<NotFound>` 내용에는 다른 대화형 구성 요소와 같은 임의의 항목이 포함 될 수 있습니다. `NotFound` 콘텐츠에 기본 레이아웃을 적용 하려면를 참조 <xref:blazor/layouts>하십시오.
+
+## <a name="route-to-components-from-multiple-assemblies"></a>여러 어셈블리에서 구성 요소로 라우팅
+
+매개 변수를 사용 하 여 라우팅할 수 있는 `Router` 구성 요소를 검색할 때 고려할 구성 요소에 대 한 추가 어셈블리를 지정 합니다. `AdditionalAssemblies` 지정 된 어셈블리는 지정 된 어셈블리 외 `AppAssembly`에도 고려 됩니다. 다음 예제 `Component1` 에서는 참조 된 클래스 라이브러리에 정의 된 라우팅할 수 있는 구성 요소입니다. 다음 `AdditionalAssemblies` 예에서는에 대 한 `Component1`라우팅을 지원 합니다.
+
+< Router AppAssembly = "typeof (Program). 어셈블리 "AdditionalAssemblies =" new [] {typeof (Component1). Assembly} > ...</Router>
 
 ## <a name="route-parameters"></a>경로 매개 변수
 
@@ -181,4 +192,3 @@ Blazor 서버 쪽 앱에서 *_Host* `/` 의 기본 경로는 (`@page "/"`)입니
     }
 }
 ```
-

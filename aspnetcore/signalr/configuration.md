@@ -7,12 +7,12 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 08/05/2019
 uid: signalr/configuration
-ms.openlocfilehash: 475d9664c588c06bfcd816959be8a425ee01c023
-ms.sourcegitcommit: 776367717e990bdd600cb3c9148ffb905d56862d
+ms.openlocfilehash: 156ffac83fbdf61fd88ad8acc307c2c701c46bca
+ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/09/2019
-ms.locfileid: "68915077"
+ms.lasthandoff: 09/06/2019
+ms.locfileid: "70773927"
 ---
 # <a name="aspnet-core-signalr-configuration"></a>ASP.NET Core SignalR 구성
 
@@ -122,6 +122,30 @@ services.AddSignalR().AddHubOptions<MyHub>(options =>
 
 ### <a name="advanced-http-configuration-options"></a>고급 HTTP 구성 옵션
 
+::: moniker range=">= aspnetcore-3.0"
+
+전송 및 메모리 버퍼 관리와 관련된 고급 설정을 구성하려면 `HttpConnectionDispatcherOptions`를 사용합니다. 이러한 옵션은의 `Startup.Configure` [maphub\<T >](/dotnet/api/microsoft.aspnetcore.builder.hubendpointroutebuilderextensions.maphub) 에 대리자를 전달 하 여 구성 합니다.
+
+```csharp
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+{
+    app.UseRouting();
+
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapHub<MyHub>("/myhub", options =>
+        {
+            options.Transports =
+                HttpTransportType.WebSockets |
+                HttpTransportType.LongPolling;
+        });
+    });
+}
+```
+::: moniker-end
+
+::: moniker range="<= aspnetcore-2.2"
+
 전송 및 메모리 버퍼 관리와 관련된 고급 설정을 구성하려면 `HttpConnectionDispatcherOptions`를 사용합니다. 이러한 옵션은의 `Startup.Configure` [maphub\<T >](/dotnet/api/microsoft.aspnetcore.signalr.hubroutebuilder.maphub) 에 대리자를 전달 하 여 구성 합니다.
 
 ```csharp
@@ -140,6 +164,8 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     });
 }
 ```
+
+::: moniker-end
 
 다음 표에서는 ASP.NET Core SignalR의 고급 HTTP 옵션을 구성 하는 옵션을 설명 합니다.
 
@@ -360,14 +386,14 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/m
 
 # <a name="javascripttabjavascript"></a>[JavaScript](#tab/javascript)
 
-| 옵션 | 기본값 | 설명 |
+| 옵션 | 기본값 | Description |
 | ------ | ------------- | ----------- |
 | `serverTimeoutInMilliseconds` | 30초(30000밀리초) | 서버 활동 시간 제한입니다. 서버가이 간격 내에 메시지를 보내지 않은 경우 클라이언트는 서버 연결을 끊고 이벤트를 `onclose` 트리거합니다. 이 값이 충분히 커야만 ping 메시지가 서버에서 전송**되고** 시간 제한 내에 클라이언트에 의해 수신될 수 있습니다. 권장 값은 ping이 도착할 때까지 허용 하는 서버 `KeepAliveInterval` 값을 두 번 이상 사용 하는 숫자입니다. |
 | `keepAliveIntervalInMilliseconds` | 15 초 (15000 밀리초) | 클라이언트에서 ping 메시지를 보내는 간격을 결정 합니다. 클라이언트에서 메시지를 보내면 타이머를 간격의 시작으로 다시 설정 합니다. 클라이언트에서 서버의 `ClientTimeoutInterval` 집합에 있는 메시지를 보내지 않은 경우 서버는 클라이언트의 연결을 끊은 것으로 간주 합니다. |
 
 # <a name="javatabjava"></a>[Java](#tab/java)
 
-| 옵션 | 기본값 | Description |
+| 옵션 | 기본값 | 설명 |
 | ------ | ------------- | ----------- |
 | `getServerTimeout` / `setServerTimeout` | 30초(30000밀리초) | 서버 활동 시간 제한입니다. 서버가이 간격 내에 메시지를 보내지 않은 경우 클라이언트는 서버 연결을 끊고 이벤트를 `onClose` 트리거합니다. 이 값이 충분히 커야만 ping 메시지가 서버에서 전송**되고** 시간 제한 내에 클라이언트에 의해 수신될 수 있습니다. 권장 값은 ping이 도착할 때까지 허용 하는 서버 `KeepAliveInterval` 값을 두 번 이상 사용 하는 숫자입니다. |
 | `withHandshakeResponseTimeout` | 15초 | 초기 서버 핸드셰이크에 대한 시간 제한입니다. 서버가이 간격 내에 핸드셰이크 응답을 보내지 않는 경우 클라이언트는 핸드셰이크를 취소 하 고 이벤트를 `onClose` 트리거합니다. 이 설정은 심각한 네트워크 지연으로 인해 핸드셰이크 시간 제한 오류가 발생하는 경우에만 수정해야 하는 고급 설정입니다. 핸드셰이크 프로세스에 대한 자세한 내용은 [SignalR 허브 프로토콜 사양](https://github.com/aspnet/SignalR/blob/master/specs/HubProtocol.md)을 참고하시기 바랍니다. |
@@ -409,7 +435,7 @@ Java 클라이언트 `WithUrl` `HttpHubConnectionBuilder` 의에 있는 다양 �
 
 # <a name="nettabdotnet"></a>[.NET](#tab/dotnet)
 
-| .NET 옵션 |  기본값 | 설명 |
+| .NET 옵션 |  기본값 | Description |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | HTTP 요청에서 전달자 인증 토큰으로 제공된 문자열을 반환하는 함수입니다. |
 | `SkipNegotiation` | `false` | 이 값을 `true`로 설정하면 협상 단계를 건너뜁니다. **WebSockets 전송이 유일하게 활성화된 전송인 경우에만 지원됩니다.** Azure SignalR Service를 사용하는 경우에는 이 설정을 사용할 수 없습니다. |
@@ -432,7 +458,7 @@ Java 클라이언트 `WithUrl` `HttpHubConnectionBuilder` 의에 있는 다양 �
 
 # <a name="javatabjava"></a>[Java](#tab/java)
 
-| Java 옵션 | 기본값 | 설명 |
+| Java 옵션 | Default Value | 설명 |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | HTTP 요청에서 전달자 인증 토큰으로 제공된 문자열을 반환하는 함수입니다. |
 | `shouldSkipNegotiate` | `false` | 이 값을 `true`로 설정하면 협상 단계를 건너뜁니다. **WebSockets 전송이 유일하게 활성화된 전송인 경우에만 지원됩니다.** Azure SignalR Service를 사용하는 경우에는 이 설정을 사용할 수 없습니다. |
