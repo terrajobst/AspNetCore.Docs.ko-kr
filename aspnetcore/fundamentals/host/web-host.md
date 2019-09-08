@@ -21,7 +21,7 @@ ASP.NET Core 앱은 *호스트*를 구성 및 실행합니다. 호스트는 앱 
 
 ::: moniker range=">= aspnetcore-3.0"
 
-이 문서에서는 이전 버전과의 호환성을 위해서만 사용 가능한 상태를 유지하는 웹 호스트에 설명합니다. 모든 앱 유형에 [일반 호스트](xref:fundamentals/host/generic-host)를 사용하는 것이 좋습니다.
+이 문서에서는 웹 앱 호스팅을 위한 웹 호스트에 대해 다룹니다. 다른 유형의 앱은 [일반 호스트](xref:fundamentals/host/generic-host)를 사용합니다.
 
 ::: moniker-end
 
@@ -33,7 +33,7 @@ ASP.NET Core 앱은 *호스트*를 구성 및 실행합니다. 호스트는 앱 
 
 ## <a name="set-up-a-host"></a>호스트 설정
 
-[IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder)의 인스턴스를 사용하여 호스트를 만듭니다. 이는 일반적으로 앱의 진입점에서 수행되는 `Main` 메서드입니다.
+[IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder)의 인스턴스를 사용하여 호스트를 만듭니다. 이는 일반적으로 앱의 진입점인 `Main` 메서드에서 수행됩니다.
 
 프로젝트 템플릿에서 `Main`은 *Program.cs*에 있습니다. 일반적인 앱은 [CreateDefaultBuilder](/dotnet/api/microsoft.aspnetcore.webhost.createdefaultbuilder)를 호출하여 호스트 설정을 시작합니다.
 
@@ -55,20 +55,20 @@ public class Program
 
 `CreateDefaultBuilder`는 다음 작업을 수행합니다.
 
-* 앱의 호스팅 구성 공급자를 사용하여 [Kestrel](xref:fundamentals/servers/kestrel) 서버를 웹 서버로 구성합니다. Kestrel 서버의 기본 옵션은 <xref:fundamentals/servers/kestrel#kestrel-options>을 참조합니다.
+* 앱의 호스팅 구성 공급자를 사용하여 [Kestrel](xref:fundamentals/servers/kestrel) 서버를 웹 서버로 구성합니다. Kestrel 서버의 기본 옵션은 <xref:fundamentals/servers/kestrel#kestrel-options>을 참조하세요.
 * 콘텐츠 루트를 [Directory.GetCurrentDirectory](/dotnet/api/system.io.directory.getcurrentdirectory)에서 반환된 경로로 설정합니다.
 * 다음에서 [호스트 구성](#host-configuration-values)을 로드합니다.
-  * 접두사가 `ASPNETCORE_`인 환경 변수(예: `ASPNETCORE_ENVIRONMENT`)입니다.
+  * 접두사가 `ASPNETCORE_`인 환경 변수(예: `ASPNETCORE_ENVIRONMENT`).
   * 명령줄 인수.
 * 다음 순서대로 앱 구성을 로드합니다.
   * *appsettings.json*.
   * *appsettings.{Environment}.json*.
-  * 앱이 항목 어셈블리를 사용하여 `Development` 환경에서 실행되는 경우 [Secret Manager](xref:security/app-secrets)입니다.
+  * 앱이 항목 어셈블리를 사용하여 `Development` 환경에서 실행되는 경우 [Secret Manager](xref:security/app-secrets).
   * 환경 변수.
   * 명령줄 인수.
 * 콘솔 및 디버그 출력에 대한 [로깅](xref:fundamentals/logging/index)을 구성합니다. 로깅은 *appsettings.json* 또는 *appsettings.{Environment}.json* 파일의 로깅 구성 섹션에 지정된 [로그 필터링](xref:fundamentals/logging/index#log-filtering) 규칙을 포함합니다.
-* [ASP.NET Core 모듈](xref:host-and-deploy/aspnet-core-module)을 사용하여 IIS에서 실행하는 경우 `CreateDefaultBuilder`는 앱의 기본 주소와 포트를 구성하는 [IIS 통합](xref:host-and-deploy/iis/index)을 활성화합니다. 또한 IIS 통합은 [시작 오류를 캡처](#capture-startup-errors)하도록 앱을 구성합니다. IIS 기본 옵션은 <xref:host-and-deploy/iis/index#iis-options>를 참조합니다.
-* 앱의 환경이 개발인 경우 [ServiceProviderOptions.ValidateScopes](/dotnet/api/microsoft.extensions.dependencyinjection.serviceprovideroptions.validatescopes)을 `true`으로 설정합니다. 자세한 내용은 [범위 유효성 검사](#scope-validation)를 참조하세요.
+* [ASP.NET Core 모듈](xref:host-and-deploy/aspnet-core-module)을 사용하여 IIS에서 실행하는 경우 `CreateDefaultBuilder`는 앱의 기본 주소와 포트를 구성하는 [IIS 통합](xref:host-and-deploy/iis/index)을 활성화합니다. 또한 IIS 통합은 [시작 오류를 캡처](#capture-startup-errors)하도록 앱을 구성합니다. IIS 기본 옵션은 <xref:host-and-deploy/iis/index#iis-options>를 참조하세요.
+* 앱의 환경이 Development인 경우 [ServiceProviderOptions.ValidateScopes](/dotnet/api/microsoft.extensions.dependencyinjection.serviceprovideroptions.validatescopes)를 `true`로 설정합니다. 자세한 내용은 [범위 유효성 검사](#scope-validation)를 참조하세요.
 
 `CreateDefaultBuilder`에 의해 정의된 구성은 [ConfigureAppConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configureappconfiguration), [ConfigureLogging](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configurelogging), 기타 메서드 및 [IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder)의 확장 메서드로 재정의되고 확대될 수 있습니다. 몇 가지 예제는 다음과 같습니다.
 
@@ -135,8 +135,8 @@ public class Program
 
 [WebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilder)는 호스트 구성 값을 설정하기 위해 다음 방법을 사용합니다.
 
-* `ASPNETCORE_{configurationKey}` 형식의 환경 변수를 포함하는 호스트 빌더 구성. 예를 들어, `ASPNETCORE_ENVIRONMENT`을 입력합니다.
-* [UseContentRoot](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.usecontentroot) 및 [UseConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.useconfiguration) 같은 확장입니다([구성 재정의](#override-configuration) 섹션 참조).
+* `ASPNETCORE_{configurationKey}` 형식의 환경 변수를 포함하는 호스트 빌더 구성. 예: `ASPNETCORE_ENVIRONMENT`.
+* [UseContentRoot](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.usecontentroot) 및 [UseConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.useconfiguration) 같은 확장([구성 재정의](#override-configuration) 섹션을 참조하세요).
 * [UseSetting](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilder.usesetting) 및 연결된 키. `UseSetting`을 사용하여 값을 설정할 때 값은 형식에 관계 없이 문자열로 설정됩니다.
 
 호스트는 마지막에 값을 설정한 옵션을 사용합니다. 자세한 내용은 다음 섹션의 [구성 재정의](#override-configuration)를 참조하세요.
@@ -257,7 +257,7 @@ WebHost.CreateDefaultBuilder(args)
     .UseSetting("https_port", "8080")
 ```
 
-### <a name="hosting-startup-exclude-assemblies"></a>호스팅 시작 어셈블리 제외
+### <a name="hosting-startup-exclude-assemblies"></a>호스팅 시작 제외 어셈블리
 
 시작 시 제외할 호스팅 시작 어셈블리의 세미콜론으로 구분된 문자열입니다.
 
@@ -312,14 +312,14 @@ WebHost.CreateDefaultBuilder(args)
 **설정 방법**: `UseUrls`  
 **환경 변수**: `ASPNETCORE_URLS`
 
-서버가 응답해야 하는 세미콜론으로 구분된(;) URL 접두사의 목록으로 설정합니다. 예를 들어, `http://localhost:123`을 입력합니다. “\*”를 사용하여 서버가 지정된 포트 및 프로토콜을 사용하는 IP 주소 또는 호스트 이름에서 요청을 수신해야 함을 나타냅니다(예: `http://*:5000`). 프로토콜(`http://` 또는 `https://`)은 각 URL에 포함되어 있어야 합니다. 지원되는 형식은 서버마다 다릅니다.
+서버가 응답해야 하는 세미콜론으로 구분된(;) URL 접두사의 목록으로 설정합니다. 예: `http://localhost:123`. “\*”를 사용하여 서버가 지정된 포트 및 프로토콜을 사용하는 IP 주소 또는 호스트 이름에서 요청을 수신해야 함을 나타냅니다(예: `http://*:5000`). 프로토콜(`http://` 또는 `https://`)은 각 URL에 포함되어 있어야 합니다. 지원되는 형식은 서버마다 다릅니다.
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
     .UseUrls("http://*:5000;http://localhost:5001;https://hostname:5002")
 ```
 
-Kestrel에는 자체 엔드포인트 구성 API가 있습니다. 자세한 내용은 <xref:fundamentals/servers/kestrel#endpoint-configuration>을 참조하세요.
+Kestrel에는 자체 끝점 구성 API가 있습니다. 자세한 내용은 <xref:fundamentals/servers/kestrel#endpoint-configuration>을 참조하세요.
 
 ### <a name="shutdown-timeout"></a>시스템 종료 제한 시간
 
@@ -333,7 +333,7 @@ Kestrel에는 자체 엔드포인트 구성 API가 있습니다. 자세한 내�
 
 키가 `UseSetting`을 통해 *int*를 허용하더라도(예: `.UseSetting(WebHostDefaults.ShutdownTimeoutKey, "10")`) [UseShutdownTimeout](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.useshutdowntimeout) 확장 메서드는 [TimeSpan](/dotnet/api/system.timespan)을 사용합니다.
 
-시간 제한 기간 동안 호스팅:
+제한 시간 기간 동안 호스팅은:
 
 * [IApplicationLifetime.ApplicationStopping](/dotnet/api/microsoft.aspnetcore.hosting.iapplicationlifetime.applicationstopping)을 트리거합니다.
 * 중지하지 못한 서비스에 대한 모든 오류를 기록하면서 호스팅된 서비스 중지를 시도합니다.
@@ -355,7 +355,7 @@ WebHost.CreateDefaultBuilder(args)
 **설정 방법**: `UseStartup`  
 **환경 변수**: `ASPNETCORE_STARTUPASSEMBLY`
 
-이름(`string`) 또는 형식(`TStartup`)별 어셈블리를 참조할 수 있습니다. `UseStartup` 메서드가 여러 개 호출된 경우 마지막 메서드가 우선 적용됩니다.
+이름(`string`) 또는 형식(`TStartup`)으로 어셈블리를 참조할 수 있습니다. `UseStartup` 메서드가 여러 개 호출된 경우 마지막 메서드가 우선 적용됩니다.
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -386,7 +386,7 @@ WebHost.CreateDefaultBuilder(args)
 
 [구성](xref:fundamentals/configuration/index)을 사용하여 웹 호스트를 구성합니다. 다음 예제에서는 호스트 구성이 필요에 따라 *hostsettings.json* 파일에 지정됩니다. *hostsettings.json* 파일에서 로드된 모든 구성은 명령줄 인수에 의해 재정의될 수도 있습니다. 빌드된 구성(`config`에 있음)은 [UseConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.useconfiguration)을 통해 호스트를 구성하는 데 사용됩니다. `IWebHostBuilder` 구성이 앱의 구성에 추가되지만 반대의 경우에는 true가 아닙니다. &mdash;`ConfigureAppConfiguration`은 `IWebHostBuilder` 구성에 영향을 주지 않습니다.
 
-먼저 *hostsettings.json* 구성으로 `UseUrls`에 의해 제공되는 구성을 재정의하고, 두 번째로 명령줄 인수 구성을 재정의합니다.
+`UseUrls`에 의해 제공되는 구성을 먼저 *hostsettings.json*의 구성으로 재정의하고, 두 번째로 명령줄 인수의 구성으로 재정의합니다.
 
 ```csharp
 public class Program
@@ -437,7 +437,7 @@ dotnet run --urls "http://*:8080"
 
 ## <a name="manage-the-host"></a>호스트 관리
 
-**실행**
+**Run**
 
 `Run` 메서드는 웹앱을 시작하고 호스트가 종료될 때까지 호출 스레드를 차단합니다.
 
@@ -445,7 +445,7 @@ dotnet run --urls "http://*:8080"
 host.Run();
 ```
 
-**시작**
+**Start**
 
 해당 `Start` 메서드를 호출하여 비차단 방식으로 호스트를 실행합니다.
 
@@ -491,7 +491,7 @@ using (var host = WebHost.Start(app => app.Response.WriteAsync("Hello, World!"))
 }
 ```
 
-`http://localhost:5000`에 대한 브라우저에서 요청을 수행하여 “Hello World!” 응답을 수신합니다. `WaitForShutdown`은 중단(Ctrl-C/SIGINT 또는 SIGTERM)이 발생할 때까지 차단합니다. 앱은 `Console.WriteLine` 메시지를 표시하고 keypress가 종료될 때까지 대기합니다.
+`http://localhost:5000`에 대한 브라우저에서 요청을 수행하여 “Hello World!” 응답을 수신합니다. `WaitForShutdown`은 중단(Ctrl-C/SIGINT 또는 SIGTERM)이 발생할 때까지 차단합니다. 앱은 `Console.WriteLine` 메시지를 표시하고 종료하기 위한 키 입력을 대기합니다.
 
 **Start(string url, RequestDelegate app)**
 
@@ -539,7 +539,7 @@ using (var host = WebHost.Start(router => router
 | `http://localhost:5000/Sante/Kevin`        | Sante, Kevin!                            |
 | `http://localhost:5000`                    | Hello World!                             |
 
-`WaitForShutdown`은 중단(Ctrl-C/SIGINT 또는 SIGTERM)이 발생할 때까지 차단합니다. 앱은 `Console.WriteLine` 메시지를 표시하고 keypress가 종료될 때까지 대기합니다.
+`WaitForShutdown`은 중단(Ctrl-C/SIGINT 또는 SIGTERM)이 발생할 때까지 차단합니다. 앱은 `Console.WriteLine` 메시지를 표시하고 종료하기 위한 키 입력을 대기합니다.
 
 **Start(string url, Action&lt;IRouteBuilder&gt; routeBuilder)**
 
@@ -583,7 +583,7 @@ using (var host = WebHost.StartWith(app =>
 }
 ```
 
-`http://localhost:5000`에 대한 브라우저에서 요청을 수행하여 “Hello World!” 응답을 수신합니다. `WaitForShutdown`은 중단(Ctrl-C/SIGINT 또는 SIGTERM)이 발생할 때까지 차단합니다. 앱은 `Console.WriteLine` 메시지를 표시하고 keypress가 종료될 때까지 대기합니다.
+`http://localhost:5000`에 대한 브라우저에서 요청을 수행하여 “Hello World!” 응답을 수신합니다. `WaitForShutdown`은 중단(Ctrl-C/SIGINT 또는 SIGTERM)이 발생할 때까지 차단합니다. 앱은 `Console.WriteLine` 메시지를 표시하고 종료하기 위한 키 입력을 대기합니다.
 
 **StartWith(string url, Action&lt;IApplicationBuilder&gt; app)**
 
