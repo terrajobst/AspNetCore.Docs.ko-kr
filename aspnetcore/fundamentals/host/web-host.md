@@ -21,7 +21,7 @@ ASP.NET Core 앱은 *호스트*를 구성 및 실행합니다. 호스트는 앱 
 
 ::: moniker range=">= aspnetcore-3.0"
 
-이 문서에서는 이전 버전과의 호환성을 위해서만 사용 가능한 웹 호스트에 대해 다룹니다. 모든 앱 유형에 [일반 호스트](xref:fundamentals/host/generic-host)를 사용하는 것이 좋습니다.
+이 문서에서는 웹 앱 호스팅을 위한 웹 호스트에 대해 다룹니다. 다른 유형의 앱은 [일반 호스트](xref:fundamentals/host/generic-host)를 사용합니다.
 
 ::: moniker-end
 
@@ -68,7 +68,7 @@ public class Program
   * 명령줄 인수.
 * 콘솔 및 디버그 출력에 대한 [로깅](xref:fundamentals/logging/index)을 구성합니다. 로깅은 *appsettings.json* 또는 *appsettings.{Environment}.json* 파일의 로깅 구성 섹션에 지정된 [로그 필터링](xref:fundamentals/logging/index#log-filtering) 규칙을 포함합니다.
 * [ASP.NET Core 모듈](xref:host-and-deploy/aspnet-core-module)을 사용하여 IIS에서 실행하는 경우 `CreateDefaultBuilder`는 앱의 기본 주소와 포트를 구성하는 [IIS 통합](xref:host-and-deploy/iis/index)을 활성화합니다. 또한 IIS 통합은 [시작 오류를 캡처](#capture-startup-errors)하도록 앱을 구성합니다. IIS 기본 옵션은 <xref:host-and-deploy/iis/index#iis-options>를 참조하세요.
-* 앱의 환경이 Development인 경우 [ServiceProviderOptions.ValidateScopes](/dotnet/api/microsoft.extensions.dependencyinjection.serviceprovideroptions.validatescopes)을 `true`으로 설정합니다. 자세한 내용은 [범위 유효성 검사](#scope-validation)를 참조하세요.
+* 앱의 환경이 Development인 경우 [ServiceProviderOptions.ValidateScopes](/dotnet/api/microsoft.extensions.dependencyinjection.serviceprovideroptions.validatescopes)를 `true`로 설정합니다. 자세한 내용은 [범위 유효성 검사](#scope-validation)를 참조하세요.
 
 `CreateDefaultBuilder`에 의해 정의된 구성은 [ConfigureAppConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configureappconfiguration), [ConfigureLogging](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configurelogging), 기타 메서드 및 [IWebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder)의 확장 메서드로 재정의되고 확대될 수 있습니다. 몇 가지 예제는 다음과 같습니다.
 
@@ -771,7 +771,7 @@ public class MyClass
 
 루트 서비스 공급자는 [BuildServiceProvider](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectioncontainerbuilderextensions.buildserviceprovider)를 호출할 때 만들어집니다. 루트 서비스 공급자의 수명은 공급자가 앱과 함께 시작되고 앱이 종료될 때 삭제되는 앱/서버의 수명에 해당합니다.
 
-범위가 지정된 서비스는 서비스를 만든 컨테이너에 의해 삭제됩니다. 범위가 지정된 서비스가 루트 컨테이너에서 만들어지는 경우 서비스의 수명은 사실상 싱글톤으로 승격됩니다. 해당 서비스는 앱/서버가 종료될 때 루트 컨테이너에 의해서만 삭제되기 때문입니다. 서비스 범위의 유효성 검사는 `BuildServiceProvider`이 호출될 경우 이러한 상황을 잡습니다.
+범위가 지정된 서비스는 서비스를 만든 컨테이너에 의해 삭제됩니다. 범위가 지정된 서비스가 루트 컨테이너에서 만들어지는 경우 서비스의 수명은 사실상 싱글톤으로 승격됩니다. 해당 서비스는 앱/서버가 종료될 때 루트 컨테이너에 의해서만 삭제되기 때문입니다. 서비스 범위의 유효성 검사는 `BuildServiceProvider`이 호출될 경우 이러한 상황을 알아챕니다.
 
 프로덕션 환경을 포함하여 범위의 유효성을 검사하려면 호스트 작성기에서 [ServiceProviderOptions](/dotnet/api/microsoft.extensions.dependencyinjection.serviceprovideroptions)을 [UseDefaultServiceProvider](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.usedefaultserviceprovider)로 구성합니다.
 
