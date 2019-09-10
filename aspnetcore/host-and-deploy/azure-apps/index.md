@@ -5,14 +5,14 @@ description: 이 문서에는 Azure 호스트 및 배포 리소스의 링크가 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/28/2019
+ms.date: 09/07/2019
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: 5035a31526e0290964e0fdee05753aeaf6cb3790
-ms.sourcegitcommit: 0efb9e219fef481dee35f7b763165e488aa6cf9c
+ms.openlocfilehash: 5da32b5fd1026263f721db442b2676d45b239b8d
+ms.sourcegitcommit: 2d4c1732c4866ed26b83da35f7bc2ad021a9c701
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/29/2019
-ms.locfileid: "68602446"
+ms.lasthandoff: 09/09/2019
+ms.locfileid: "70815592"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Azure App Service에 ASP.NET Core 앱 배포
 
@@ -97,17 +97,7 @@ Azure Portal에서 앱 설정을 만들거나 수정하고**저장** 단추를 �
 
 ## <a name="monitoring-and-logging"></a>모니터링 및 로깅
 
-::: moniker range=">= aspnetcore-3.0"
-
-App Service에 배포된 ASP.NET Core 앱은 자동으로 App Service 확장인 **ASP.NET Core 로깅 통합**을 받습니다. 확장을 사용하면 Azure App Service에서 ASP.NET Core 앱에서 로깅 통합이 가능합니다.
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.0"
-
-App Service에 배포된 ASP.NET Core 앱은 자동으로 App Service 확장인 **ASP.NET Core 로깅 확장**을 받습니다. 확장을 사용하면 Azure App Service에서 ASP.NET Core 앱에서 로깅 통합이 가능합니다.
-
-::: moniker-end
+Azure App Service는 ASP.NET Core 앱에 대한 로깅 통합을 사용할 수 있게 하는 **ASP.NET Core 로깅 확장**을 제공합니다. App Service에 확장명을 자동으로 추가하려면 Visual Studio의 **게시** 프로세스를 **App Service** 게시 프로필과 함께 사용하세요. Visual Studio를 사용하여 앱을 배포하지 않는 경우 App Service의 **개발 도구** > **확장** 대화 상자를 통해 Azure Portal에 확장을 수동으로 설치하세요.
 
 모니터링, 로깅 및 문제 해결에 대한 자세한 내용은 다음 문서를 참조하세요.
 
