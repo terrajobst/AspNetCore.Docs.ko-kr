@@ -176,7 +176,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 **키**: applicationName  
 **형식**: *string*  
-**기본값**: 앱의 진입점을 포함하는 어셈블리의 이름입니다.  
+**기본값**: 앱의 진입점을 포함하는 어셈블리의 이름입니다.
 **환경 변수**: `<PREFIX_>APPLICATIONNAME`
 
 이 값을 설정하려면 환경 변수를 사용합니다. 
@@ -204,7 +204,7 @@ Host.CreateDefaultBuilder(args)
 
 **키**: environment  
 **형식**: *string*  
-**기본값**: 프로덕션  
+**기본값**: Production  
 **환경 변수**: `<PREFIX_>ENVIRONMENT`
 
 이 값을 설정하려면 환경 변수를 사용하거나 `IHostBuilder`에서 `UseEnvironment`를 호출합니다.
@@ -226,8 +226,7 @@ Host.CreateDefaultBuilder(args)
 
 **키**: shutdownTimeoutSeconds  
 **형식**: *int*  
-**기본값**: 5초 
-**환경 변수**: `<PREFIX_>SHUTDOWNTIMEOUTSECONDS`
+**기본값**: 5초 **환경 변수**: `<PREFIX_>SHUTDOWNTIMEOUTSECONDS`
 
 이 값을 설정하려면 환경 변수를 사용하거나 `HostOptions`를 구성합니다. 다음 예제에서는 시간 제한을 20초로 설정합니다.
 
@@ -313,9 +312,8 @@ webBuilder.UseSetting(WebHostDefaults.HostingStartupExcludeAssembliesKey, "assem
 
 HTTPS 리디렉션 포트. [HTTPS 적용](xref:security/enforcing-ssl)에 사용됩니다.
 
-**키**: https_port  
-**형식**: *문자열*  
-**기본값**: 기본값은 설정되지 않습니다.  
+**키**: https_port **형식**: *문자열*
+**기본값**: 기본값은 설정되지 않습니다.
 **환경 변수**: `<PREFIX_>HTTPS_PORT`
 
 이 값을 설정하려면 구성을 사용하거나 `UseSetting`을 호출합니다.
@@ -358,8 +356,7 @@ webBuilder.UseSetting(WebHostDefaults.PreventHostingStartupKey, "true");
 
 `Startup` 클래스를 검색할 어셈블리입니다.
 
-**키**: startupAssembly 
-**형식**: *string*  
+**키**: startupAssembly **형식**: *string*  
 **기본값**: 앱의 어셈블리  
 **환경 변수**: `<PREFIX_>STARTUPASSEMBLY`
 
@@ -379,7 +376,7 @@ webBuilder.UseStartup<Startup>();
 
 **키**: urls  
 **형식**: *string*  
-**기본값**: `http://localhost:5000` 및 `https://localhost:5001` 
+**기본값**: `http://localhost:5000` 및 `https://localhost:5001`
 **환경 변수**: `<PREFIX_>URLS`
 
 이 값을 설정하려면 환경 변수를 사용하거나 `UseUrls`를 호출합니다.
