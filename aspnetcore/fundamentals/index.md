@@ -5,14 +5,14 @@ description: ASP.NET Core 앱을 구축하기 위한 기본적인 개념을 알�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/11/2019
+ms.date: 09/02/2019
 uid: fundamentals/index
-ms.openlocfilehash: a6c848987c97103864fd5410922346e85a68c353
-ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
+ms.openlocfilehash: 7e2901919c8b0165d0f169abf74fe5bc0edd8be4
+ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/12/2019
-ms.locfileid: "67856230"
+ms.lasthandoff: 09/06/2019
+ms.locfileid: "70773749"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core 기본 사항
 
@@ -43,7 +43,7 @@ Entity Framework Core 컨텍스트 개체를 가져오는 데 DI를 사용하는
 
 [!code-csharp[](index/snapshots/2.x/Index.cshtml.cs?highlight=5)]
 
-DI가 기본 제공되면 원하는 경우 타사 IoC(Inversion of Control) 컨테이너에 플러그 인할 수 있도록 설계되었습니다.
+DI가 기본 제공되기는 하지만 원하는 경우 타사 IoC(Inversion of Control) 컨테이너를 플러그 인할 수 있도록 설계되었습니다.
 
 자세한 내용은 <xref:fundamentals/dependency-injection>을 참조하세요.
 
@@ -168,7 +168,7 @@ ASP.NET Core는 정렬된 일련의 구성 공급 기업에서 이름-값 쌍으
 
 예를 들어 구성이 *appsettings.json* 및 환경 변수에서 제공되도록 지정할 수 있습니다. 그런 다음, *ConnectionString* 값이 요청되면 프레임워크는 먼저 *appsettings.json* 파일을 찾습니다. 값을 찾았지만 환경 변수에서도 값을 찾을 수 있다면 환경 변수의 값이 우선 적용됩니다.
 
-ASP.NET Core는 암호와 같은 기밀 구성 데이터를 관리하기 위해 [비밀 관리자 도구](xref:security/app-secrets)를 제공합니다. 프로덕션 암호의 경우 [Azure Key Vault](xref:security/key-vault-configuration)를 사용하는 것이 좋습니다.
+ASP.NET Core는 암호와 같은 기밀 구성 데이터를 관리하기 위해 [비밀 관리자 도구](xref:security/app-secrets)를 제공합니다. 프로덕션 비밀의 경우 [Azure Key Vault](xref:security/key-vault-configuration)를 사용하는 것이 좋습니다.
 
 자세한 내용은 <xref:fundamentals/configuration/index>을 참조하세요.
 
@@ -270,6 +270,18 @@ ASP.NET Core에는 다음과 같은 오류를 처리하기 위한 기본 제공 
 
 웹 루트(*webroot*라고도 함)는 CSS, JavaScript 및 이미지 파일과 같은 공용 정적 리소스의 기본 경로입니다. 기본적으로 정적 파일 미들웨어는 웹 루트 디렉터리(및 하위 디렉터리)에 있는 파일만 제공합니다. 웹 루트 경로는 *{Content Root}/wwwroot*를 기본값으로 지정하지만 [호스트를 빌드](#host)할 때 다른 위치를 지정할 수도 있습니다.
 
-Razor( *.cshtml*) 파일에서 물결표 슬래시 `~/`가 웹 루트를 가리킵니다. `~/`에서 시작하는 경로를 가상 경로라고 합니다.
+::: moniker range=">= aspnetcore-3.0"
+
+자세한 내용은 [ContentRootPath](/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0#contentrootpath)를 참조하세요.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+자세한 내용은 [웹 루트](/aspnet/core/fundamentals/host/web-host#webroot)를 참조하세요.
+
+::: moniker-end
+
+Razor(*.cshtml*) 파일에서 물결표 슬래시 `~/`가 웹 루트를 가리킵니다. `~/`에서 시작하는 경로를 가상 경로라고 합니다.
 
 자세한 내용은 <xref:fundamentals/static-files>을 참조하세요.

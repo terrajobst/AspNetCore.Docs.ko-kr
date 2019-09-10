@@ -5,14 +5,14 @@ description: Blazor 인증 및 권한 부여 시나리오에 대해 알아봅니
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/29/2019
+ms.date: 09/05/2019
 uid: security/blazor/index
-ms.openlocfilehash: 8714acbeb6e8a00992a601030811b24f53426b82
-ms.sourcegitcommit: 8b36f75b8931ae3f656e2a8e63572080adc78513
+ms.openlocfilehash: 2ba7b0612c2be50ae0797c50dc3cb0d63c0f0c2d
+ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/05/2019
-ms.locfileid: "70310518"
+ms.lasthandoff: 09/07/2019
+ms.locfileid: "70800513"
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor 인증 및 권한 부여
 
@@ -25,7 +25,7 @@ Blazor 서버 쪽 앱과 클라이언트 쪽 앱의 보안 시나리오가 다�
 * 사용자에게 표시되는 UI 옵션(예: 사용자가 사용할 수 있는 메뉴 항목)
 * 앱 영역과 구성 요소의 액세스 규칙
 
-Blazor 클라이언트 쪽 앱은 클라이언트에서 실행됩니다. 권한 부여는 표시할 UI 옵션을 결정하는 ‘용도로만’ 사용됩니다.  사용자가 클라이언트 쪽 확인을 수정하거나 무시할 수 있기 때문에, Blazor 클라이언트 쪽 앱은 권한 부여 액세스 규칙을 적용할 수 없습니다.
+Blazor 클라이언트 쪽 앱은 클라이언트에서 실행됩니다. 권한 부여는 표시할 UI 옵션을 결정하는 ‘용도로만’ 사용됩니다. 사용자가 클라이언트 쪽 확인을 수정하거나 무시할 수 있기 때문에, Blazor 클라이언트 쪽 앱은 권한 부여 액세스 규칙을 적용할 수 없습니다.
 
 ## <a name="authentication"></a>인증
 
@@ -238,20 +238,20 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="authorization"></a>권한 부여
 
-사용자가 인증되면, 사용자가 수행할 수 있는 작업을 제어하기 위해 ‘권한 부여’ 규칙이 적용됩니다. 
+사용자가 인증되면, 사용자가 수행할 수 있는 작업을 제어하기 위해 ‘권한 부여’ 규칙이 적용됩니다.
 
 일반적으로 다음 여부에 따라 액세스가 허용 또는 거부됩니다.
 
 * 사용자가 인증(로그인)되었는지 여부
-* 사용자가 ‘역할’에 속하는지 여부 
-* 사용자에게 ‘클레임’이 있는지 여부 
-* ‘정책’이 충족되었는지 여부 
+* 사용자가 ‘역할’에 속하는지 여부
+* 사용자에게 ‘클레임’이 있는지 여부
+* ‘정책’이 충족되었는지 여부
 
 이러한 각 개념은 ASP.NET Core MVC 또는 Razor Pages 앱에서와 동일합니다. ASP.NET Core 보안에 대한 자세한 내용은 [ASP.NET Core 보안 및 ID](xref:security/index)의 문서를 참조하세요.
 
 ## <a name="authorizeview-component"></a>AuthorizeView 구성 요소
 
-`AuthorizeView` 구성 요소는 사용자에게 볼 수 있는 권한이 있는지 여부에 따라 선택적으로 UI를 표시합니다. 이 접근 방식은 사용자에게 데이터를 ‘표시’하기만 하면 되고 절차적 논리에 사용자 ID를 사용할 필요가 없는 경우에 유용합니다. 
+`AuthorizeView` 구성 요소는 사용자에게 볼 수 있는 권한이 있는지 여부에 따라 선택적으로 UI를 표시합니다. 이 접근 방식은 사용자에게 데이터를 ‘표시’하기만 하면 되고 절차적 논리에 사용자 ID를 사용할 필요가 없는 경우에 유용합니다.
 
 이 구성 요소는 로그인한 사용자 정보에 액세스하는 데 사용할 수 있는 `AuthenticationState` 형식의 `context` 변수를 공개합니다.
 
@@ -277,7 +277,7 @@ public void ConfigureServices(IServiceCollection services)
 </AuthorizeView>
 ```
 
-`<Authorized>` 및 `<NotAuthorized>`의 콘텐츠에는 다른 대화형 구성 요소와 같은 임의 항목이 포함될 수 있습니다.
+`<Authorized>` 및 `<NotAuthorized>` 태그의 콘텐츠에는 다른 대화형 구성 요소와 같은 임의 항목이 포함될 수 있습니다.
 
 UI 옵션이나 액세스를 제어하는 역할 또는 정책과 같은 권한 부여 조건은 [권한 부여](#authorization) 섹션에서 설명합니다.
 
@@ -288,7 +288,7 @@ UI 옵션이나 액세스를 제어하는 역할 또는 정책과 같은 권한 
 
 ### <a name="role-based-and-policy-based-authorization"></a>역할 기반 및 정책 기반 권한 부여
 
-`AuthorizeView` 구성 요소는 ‘역할 기반’ 또는 ‘정책 기반’ 권한 부여를 지원합니다.  
+`AuthorizeView` 구성 요소는 ‘역할 기반’ 또는 ‘정책 기반’ 권한 부여를 지원합니다.
 
 역할 기반 권한 부여의 경우 `Roles` 매개 변수를 사용합니다.
 
@@ -316,7 +316,7 @@ UI 옵션이나 액세스를 제어하는 역할 또는 정책과 같은 권한 
 
 ### <a name="content-displayed-during-asynchronous-authentication"></a>비동기 인증 중에 표시되는 콘텐츠
 
-Blazor에서는 인증 상태를 ‘비동기적으로’ 확인할 수 있습니다.  이 접근 방식의 주요 시나리오는 Blazor 클라이언트 쪽 앱이 외부 엔드포인트에 인증 요청을 하는 경우입니다.
+Blazor에서는 인증 상태를 ‘비동기적으로’ 확인할 수 있습니다. 이 접근 방식의 주요 시나리오는 Blazor 클라이언트 쪽 앱이 외부 엔드포인트에 인증 요청을 하는 경우입니다.
 
 인증이 진행되는 동안 `AuthorizeView`는 기본적으로 아무 콘텐츠도 표시하지 않습니다. 인증 중에 콘텐츠를 표시하려면 `<Authorizing>` 요소를 사용합니다.
 
@@ -347,7 +347,7 @@ You can only see this if you're signed in.
 ```
 
 > [!IMPORTANT]
-> Blazor 라우터를 통해 연결된 `@page` 구성 요소에서만 `[Authorize]`를 사용합니다. 권한 부여는 라우팅의 일부로만 수행되고, 페이지에 렌더링된 자식 구성 요소에 대해서는 수행되지 ‘않습니다’.  페이지 내의 특정 파트 표시 권한을 부여하려면 `AuthorizeView`를 대신 사용합니다.
+> Blazor 라우터를 통해 연결된 `@page` 구성 요소에서만 `[Authorize]`를 사용합니다. 권한 부여는 라우팅의 일부로만 수행되고, 페이지에 렌더링된 자식 구성 요소에 대해서는 수행되지 ‘않습니다’. 페이지 내의 특정 파트 표시 권한을 부여하려면 `AuthorizeView`를 대신 사용합니다.
 
 구성 요소를 컴파일하기 위해 해당 구성 요소 또는 *_Imports.razor* 파일에 `@using Microsoft.AspNetCore.Authorization`을 추가해야 할 수도 있습니다.
 
@@ -410,9 +410,9 @@ You can only see this if you're signed in.
 </Router>
 ```
 
-`<NotFound>`, `<NotAuthorized>` 및 `<Authorizing>`의 콘텐츠에는 다른 대화형 구성 요소와 같은 임의 항목이 포함될 수 있습니다.
+`<NotFound>`, `<NotAuthorized>` 및 `<Authorizing>` 태그의 콘텐츠에는 다른 대화형 구성 요소와 같은 임의 항목이 포함될 수 있습니다.
 
-`<NotAuthorized>`를 지정하지 않으면, `<AuthorizeRouteView>`는 다음 대체 메시지를 사용합니다.
+`<NotAuthorized>` 요소를 지정하지 않으면 `AuthorizeRouteView`는 다음 대체 메시지를 사용합니다.
 
 ```html
 Not authorized.
