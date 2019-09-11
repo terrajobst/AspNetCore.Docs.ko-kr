@@ -5,14 +5,14 @@ description: Blazor 서버 쪽 앱에 대 한 보안 위협을 완화 하는 방
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/05/2019
+ms.date: 09/07/2019
 uid: security/blazor/server-side
-ms.openlocfilehash: 13bb4475b4beac78cf489d83fb59a3e0d6d8f2d9
-ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
+ms.openlocfilehash: d30f19bfbbcdb6c142f03a6e0cc6e1fc154c2091
+ms.sourcegitcommit: e7c56e8da5419bbc20b437c2dd531dedf9b0dc6b
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/07/2019
-ms.locfileid: "70800501"
+ms.lasthandoff: 09/10/2019
+ms.locfileid: "70878530"
 ---
 # <a name="secure-aspnet-core-blazor-server-side-apps"></a>Blazor 서버 쪽 앱 보안 ASP.NET Core
 
@@ -99,7 +99,7 @@ DoS (서비스 거부) 공격에는 서버에서 하나 이상의 리소스를 �
 | `CircuitOptions.MaxBufferedUnacknowledgedRenderBatches` | 승인 되지 않은 최대 렌더링 일괄 처리 수 서버는 지정 된 시간에 회로 당 메모리에 유지 하 여 강력한 다시 연결을 지원 합니다. 한도에 도달 하면 클라이언트에서 하나 이상의 일괄 처리를 승인할 때까지 서버가 새 렌더링 일괄 처리 생성을 중지 합니다. | 10 |
 
 
-| SignalR 및 ASP.NET Core 제한             | 설명 | 기본값 |
+| SignalR 및 ASP.NET Core 제한             | Description | 기본값 |
 | ------------------------------------------ | ----------- | ------- |
 | `CircuitOptions.MaximumReceiveMessageSize` | 개별 메시지의 메시지 크기입니다. | 32 KB |
 
@@ -115,7 +115,7 @@ DoS (서비스 거부) 공격에는 서버에서 하나 이상의 리소스를 �
 .NET 메서드에서 JavaScript로의 호출:
 
 * 모든 호출에는 실패 한 후 구성 가능한 시간 제한이 있으므로 호출자 <xref:System.OperationCanceledException> 에 게를 반환 합니다.
-  * (`CircuitOptions.JSInteropDefaultCallTimeout`) 호출에 대 한 기본 시간 제한은 1 분입니다.
+  * (`CircuitOptions.JSInteropDefaultCallTimeout`) 호출에 대 한 기본 시간 제한은 1 분입니다. 이 제한을 구성 하려면를 참조 <xref:blazor/javascript-interop#harden-js-interop-calls>하세요.
   * 취소 토큰을 제공 하 여 호출 단위로 취소를 제어할 수 있습니다. 가능 하면 기본 호출 제한 시간을 사용 하 고 취소 토큰이 제공 되는 경우 클라이언트에 대 한 시간 범위를 제한 합니다.
 * JavaScript 호출 결과를 신뢰할 수 없습니다. 브라우저에서 실행 중인 Blazor 앱 클라이언트는 호출할 JavaScript 함수를 검색 합니다. 함수가 호출 되 고 결과 또는 오류가 생성 됩니다. 악의적인 클라이언트에서 다음을 시도할 수 있습니다.
   * JavaScript 함수에서 오류를 반환 하 여 앱에서 문제를 발생 시킵니다.
@@ -200,6 +200,72 @@ Blazor 서버 쪽 이벤트는 비동기적 이므로 앱이 새 렌더링을 �
 ```
 
 처리기 내에 `if (count < 3) { ... }` 검사를 추가 하 여 증가 `count` 에 대 한 결정은 현재 앱 상태를 기준으로 합니다. 이러한 결정은 이전 예제에서와 같이 일시적으로 오래 되었을 수 있는 UI의 상태를 기반으로 하지 않습니다.
+
+### <a name="guard-against-multiple-dispatches"></a>여러 디스패치 방지
+
+이벤트 콜백에서 외부 서비스 또는 데이터베이스에서 데이터를 가져오는 것과 같이 장기 실행 작업을 호출 하는 경우 가드를 사용 하는 것이 좋습니다. 가드는 작업이 진행 중인 동안 시각적 피드백을 사용 하 여 사용자가 여러 작업을 큐에 대기 시킬 수 없도록 합니다. 다음 구성 요소 코드는 `isLoading` 가 `true` 서버 `GetForecastAsync` 에서 데이터를 가져오는 동안를로 설정 합니다. 가 `isLoading` 인`true`동안 UI에서 단추가 사용 하지 않도록 설정 됩니다.
+
+```cshtml
+@page "/fetchdata"
+@using BlazorServerSample.Data
+@inject WeatherForecastService ForecastService
+
+<button disabled="@isLoading" @onclick="UpdateForecasts">Update</button>
+
+@code {
+    private bool isLoading;
+    private WeatherForecast[] forecasts;
+
+    private async Task UpdateForecasts()
+    {
+        if (!isLoading)
+        {
+            isLoading = true;
+            forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+            isLoading = false;
+        }
+    }
+}
+```
+
+### <a name="cancel-early-and-avoid-use-after-dispose"></a>조기에 취소 하 고 사용 방지-삭제 후
+
+[여러 디스패치 방지](#guard-against-multiple-dispatches) 섹션에 설명 된 대로 가드를 사용 하는 것 외에도를 <xref:System.Threading.CancellationToken> 사용 하 여 구성 요소가 삭제 될 때 장기 실행 작업을 취소 하는 것이 좋습니다. 이 방법에는 구성 요소에서 *삭제 후 사용* 을 방지 하는 추가 혜택이 있습니다.
+
+```cshtml
+@implements IDisposable
+
+...
+
+@code {
+    private readonly CancellationTokenSource TokenSource = 
+        new CancellationTokenSource();
+
+    private async Task UpdateForecasts()
+    {
+        ...
+
+        forecasts = await ForecastService.GetForecastAsync(DateTime.Now, 
+            TokenSource.Token);
+
+        if (TokenSource.Token.IsCancellationRequested)
+        {
+           return;
+        }
+
+        ...
+    }
+
+    public void Dispose()
+    {
+        CancellationTokenSource.Cancel();
+    }
+}
+```
+
+### <a name="avoid-events-that-produce-large-amounts-of-data"></a>많은 양의 데이터를 생성 하는 이벤트 방지
+
+`oninput` 또는`onscroll`와 같은 일부 DOM 이벤트는 많은 양의 데이터를 생성할 수 있습니다. Blazor 서버 앱에서는 이러한 이벤트를 사용 하지 마십시오.
 
 ## <a name="additional-security-guidance"></a>추가 보안 지침
 
@@ -330,6 +396,9 @@ Blazor 서버 쪽 앱 세션이 시작 되 면 서버는 세션 시작의 일부
 * 클라이언트에서 바인딩되지 않은 메모리 양을 할당 하지 않도록 합니다.
   * 구성 요소 내의 데이터입니다.
   * `DotNetObject`클라이언트에 반환 되는 참조입니다.
+* 여러 디스패치를 방지 합니다.
+* 구성 요소가 삭제 될 때 장기 실행 작업을 취소 합니다.
+* 많은 양의 데이터를 생성 하는 이벤트를 방지 합니다.
 * 에 `NavigationManager.Navigate` 대 한 호출의 일부로 사용자 입력을 사용 하지 않도록 하 고, 피할 수 없는 경우 허용 되는 원본 집합에 대 한 사용자 입력의 유효성을 검사 합니다.
 * UI 상태를 기준으로 권한 부여를 결정 하지 않고 구성 요소 상태 에서만 결정 합니다.
 * XSS 공격 으로부터 보호 하기 위해 [CSP (콘텐츠 보안 정책)](https://developer.mozilla.org/docs/Web/HTTP/CSP) 를 사용 하는 것이 좋습니다.

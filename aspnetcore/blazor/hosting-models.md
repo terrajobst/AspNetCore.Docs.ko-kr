@@ -5,14 +5,14 @@ description: Blazor 클라이언트 쪽 및 서버 쪽 호스팅 모델을 이�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/05/2019
+ms.date: 09/07/2019
 uid: blazor/hosting-models
-ms.openlocfilehash: f7a16d64e1f874a4f6b3c8db5217810b13c7c6ff
-ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
+ms.openlocfilehash: 7880affa59af1fa4fc47aee3dc98ae9aa53729af
+ms.sourcegitcommit: e7c56e8da5419bbc20b437c2dd531dedf9b0dc6b
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/07/2019
-ms.locfileid: "70800435"
+ms.lasthandoff: 09/10/2019
+ms.locfileid: "70878340"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor 호스팅 모델
 
@@ -83,24 +83,68 @@ ASP.NET Core 앱은 추가할 앱 `Startup` 클래스를 참조 합니다.
 
 &dagger;*Blazor* 스크립트는 ASP.NET Core 공유 프레임 워크의 포함 리소스에서 제공 됩니다.
 
+### <a name="comparison-to-server-rendered-ui"></a>서버에서 렌더링 된 UI 비교
+
+Blazor 서버 앱을 이해 하는 한 가지 방법은 Razor 뷰나 Razor Pages를 사용 하 여 ASP.NET Core 앱에서 UI를 렌더링 하는 일반적인 모델과의 차이점을 이해 하는 것입니다. 두 모델 모두 Razor 언어를 사용 하 여 HTML 콘텐츠를 설명 하지만 태그가 렌더링 되는 방식에는 크게 차이가 있습니다.
+
+Razor 페이지 또는 뷰가 렌더링 되 면 Razor 코드의 모든 줄은 텍스트 형식으로 HTML을 내보냅니다. 렌더링 후 서버는 생성 된 상태를 포함 하 여 페이지 또는 뷰 인스턴스를 삭제 합니다. 서버 유효성 검사에 실패 하 고 유효성 검사 요약이 표시 되는 경우와 같은 페이지에 대 한 다른 요청이 발생 하는 경우
+
+* 전체 페이지는 HTML 텍스트로 다시 돌아갑니다.
+* 페이지가 클라이언트로 전송 됩니다.
+
+Blazor 앱은 *구성 요소*라는 UI의 재사용 가능한 요소로 구성 됩니다. 구성 요소에 C# 는 코드, 태그 및 기타 구성 요소가 포함 됩니다. 구성 요소가 렌더링 되 면 Blazor은 HTML 또는 XML 문서 개체 모델 (DOM)와 유사한 포함 된 구성 요소의 그래프를 생성 합니다. 이 그래프에는 속성 및 필드에 유지 되는 구성 요소 상태가 포함 됩니다. Blazor는 구성 요소 그래프를 평가 하 여 태그의 이진 표현을 생성 합니다. 이진 형식은 다음과 같을 수 있습니다.
+
+* 렌더링 중에 HTML 텍스트로 바뀝니다.
+* 정기적으로 렌더링 하는 동안 태그를 효율적으로 업데이트 하는 데 사용 됩니다.
+
+Blazor의 UI 업데이트는 다음에 의해 트리거됩니다.
+
+* 사용자 상호 작용 (예: 단추 선택)
+* 타이머와 같은 앱 트리거입니다.
+
+그래프가 계산 되며 UI *diff* (차이)가 계산 됩니다. 이러한 차이는 클라이언트에서 UI를 업데이트 하는 데 필요한 최소한의 DOM 편집 집합입니다. Diff는 클라이언트에 이진 형식으로 전송 되 고 브라우저에서 적용 됩니다.
+
+사용자가 클라이언트에서 다른 구성 요소를 탐색 한 후에 구성 요소가 삭제 됩니다. 사용자가 구성 요소와 상호 작용 하는 동안에는 구성 요소의 상태 (서비스, 리소스)가 서버 메모리에 보관 되어야 합니다. 서버에서 많은 구성 요소의 상태를 동시에 유지 관리할 수 있기 때문에 메모리 소모는 해결 해야 하는 문제입니다. 서버 메모리를 최적으로 사용 하기 위해 Blazor Server 앱을 제작 하는 방법에 대 한 지침은 <xref:security/blazor/server-side>을 참조 하십시오.
+
+### <a name="circuits"></a>배선
+
+Blazor 서버 앱은 [ASP.NET Core SignalR](xref:signalr/introduction)위에 빌드됩니다. 각 클라이언트는 *회로*라는 하나 이상의 SignalR 연결을 통해 서버와 통신 합니다. 회로는 일시적인 네트워크 중단을 허용할 수 있는 SignalR 연결에 대 한 Blazor의 추상화입니다. Blazor client에서 SignalR 연결의 연결이 끊어지면 새 SignalR 연결을 사용 하 여 서버에 다시 연결 하려고 시도 합니다.
+
+Blazor 서버 앱에 연결 된 각 브라우저 화면 (브라우저 탭 또는 iframe)은 SignalR 연결을 사용 합니다. 이는 서버에서 렌더링 되는 일반적인 앱에 비해 또 다른 중요 한 차이점입니다. 서버에서 렌더링 하는 응용 프로그램에서는 여러 브라우저 화면에서 동일한 앱을 여는 것은 일반적으로 서버에서 추가 리소스 요구 사항으로 변환 되지 않습니다. Blazor 서버 앱에서 각 브라우저 화면에는 서버에서 관리 해야 하는 별도의 회로와 개별 구성 요소 상태 인스턴스가 필요 합니다.
+
+Blazor는 브라우저 탭을 닫거나 외부 URL로 이동 하는 *정상적인* 종료를 고려 합니다. 정상적인 종료 시 회로 및 연결 된 리소스가 즉시 해제 됩니다. 클라이언트는 네트워크 중단으로 인해 안정적이 지 않은 방식으로 연결을 끊을 수도 있습니다. Blazor 서버는 클라이언트가 다시 연결할 수 있도록 구성 가능한 간격 동안 연결이 끊어진 회로를 저장 합니다. 자세한 내용은 [동일한 서버에](#reconnection-to-the-same-server) 다시 연결 섹션을 참조 하세요.
+
+### <a name="ui-latency"></a>UI 대기 시간
+
+UI 대기 시간은 시작 된 작업에서 UI를 업데이트 하는 데 걸리는 시간입니다. UI 대기 시간에 대 한 값이 작을수록 앱이 사용자에 게 반응 하는 데 필수적입니다. Blazor 서버 앱에서 각 작업은 서버로 전송 되 고 처리 되며 UI diff가 다시 전송 됩니다. 따라서 UI 대기 시간은 네트워크 대기 시간 및 작업 처리의 서버 대기 시간 합계입니다.
+
+개인 회사 네트워크로 제한 된 lob (기간 업무) 앱의 경우 네트워크 대기 시간으로 인 한 대기 시간에 대 한 사용자의 영향은 일반적으로 imperceptible입니다. 인터넷을 통해 배포 된 앱의 경우 특히 사용자가 지리적으로 광범위 하 게 분산 된 경우 대기 시간이 달라질 수 있습니다.
+
+메모리 사용은 앱 대기 시간에도 영향을 주지 않습니다. 메모리 사용이 증가 하면 가비지 수집 또는 페이징 메모리가 디스크에 자주 발생 하므로 앱 성능이 저하 되 고 결과적으로 UI 대기 시간이 증가 합니다. 자세한 내용은 <xref:security/blazor/server-side>을 참조하세요.
+
+Blazor 서버 앱은 네트워크 대기 시간 및 메모리 사용을 줄여 UI 대기 시간을 최소화 하도록 최적화 되어야 합니다. 네트워크 대기 시간을 측정 하는 방법은을 <xref:host-and-deploy/blazor/server-side#measure-network-latency>참조 하십시오. SignalR 및 Blazor에 대 한 자세한 내용은 다음을 참조 하세요.
+
+* <xref:host-and-deploy/blazor/server-side>
+* <xref:security/blazor/server-side>
+
 ### <a name="reconnection-to-the-same-server"></a>동일한 서버에 다시 연결
 
 Blazor 서버 쪽 앱은 서버에 대 한 활성 SignalR 연결이 필요 합니다. 연결이 끊어지면 앱이 서버에 다시 연결을 시도 합니다. 클라이언트의 상태가 아직 메모리에 있으면 클라이언트 세션이 상태 손실 없이 다시 시작 됩니다.
- 
+
 클라이언트에서 연결이 끊어진 것을 감지 하면 클라이언트에서 다시 연결을 시도 하는 동안 기본 UI가 표시 됩니다. 다시 연결이 실패 하는 경우 사용자에 게 다시 시도 하는 옵션이 제공 됩니다. UI를 사용자 지정 하려면 `components-reconnect-modal` *_Host* Razor 페이지 `id` 에서로 요소를 정의 합니다. 클라이언트는 연결 상태에 따라 다음 CSS 클래스 중 하나를 사용 하 여이 요소를 업데이트 합니다.
- 
+
 * `components-reconnect-show`&ndash; 연결이 끊어져서 클라이언트에서 다시 연결을 시도 했음을 나타내는 UI를 표시 합니다.
 * `components-reconnect-hide`&ndash; 클라이언트에 활성 연결이 있으며 UI를 숨깁니다.
 * `components-reconnect-failed`&ndash; 다시 연결 하지 못했습니다. 다시 연결을 다시 시도 하려면 `window.Blazor.reconnect()`를 호출 합니다.
 
 ### <a name="stateful-reconnection-after-prerendering"></a>렌더링 후 상태 저장 다시 연결
- 
+
 서버에 대 한 클라이언트 연결이 설정 되기 전에 서버에서 UI를 미리 렌더링 하도록 Blazor 서버 쪽 앱이 기본적으로 설정 되어 있습니다. 이는 *_Host* Razor 페이지에 설정 되어 있습니다.
- 
+
 ```cshtml
 <body>
     <app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
- 
+
     <script src="_framework/blazor.server.js"></script>
 </body>
 ```
@@ -110,18 +154,18 @@ Blazor 서버 쪽 앱은 서버에 대 한 활성 SignalR 연결이 필요 합�
 * 는 페이지에 미리 렌더링 된 됩니다.
 * 는 페이지에서 정적 HTML로 렌더링 되거나 사용자 에이전트에서 Blazor 앱을 부트스트랩 하는 데 필요한 정보가 포함 되어 있습니다.
 
-| `RenderMode`        | Description |
+| `RenderMode`        | 설명 |
 | ------------------- | ----------- |
 | `ServerPrerendered` | 구성 요소를 정적 HTML로 렌더링 하 고 Blazor 서버 쪽 앱에 대 한 마커를 포함 합니다. 사용자 에이전트가 시작 되 면이 표식은 Blazor 앱을 부트스트랩 하는 데 사용 됩니다. 매개 변수는 지원 되지 않습니다. |
 | `Server`            | Blazor 서버 쪽 앱에 대 한 마커를 렌더링 합니다. 구성 요소의 출력은 포함 되지 않습니다. 사용자 에이전트가 시작 되 면이 표식은 Blazor 앱을 부트스트랩 하는 데 사용 됩니다. 매개 변수는 지원 되지 않습니다. |
 | `Static`            | 구성 요소를 정적 HTML로 렌더링 합니다. 매개 변수가 지원 됩니다. |
 
 정적 HTML 페이지에서 서버 구성 요소를 렌더링 하는 것은 지원 되지 않습니다.
- 
+
 클라이언트는 앱을 미리 렌더링 하는 데 사용 된 상태와 동일한 상태를 사용 하 여 서버에 다시 연결 합니다. 앱의 상태가 아직 메모리에 있는 경우 SignalR 연결이 설정 된 후에 구성 요소 상태가 다시 발생 하지 않습니다.
 
 ### <a name="render-stateful-interactive-components-from-razor-pages-and-views"></a>Razor 페이지 및 뷰에서 상태 저장 대화형 구성 요소 렌더링
- 
+
 상태 저장 대화형 구성 요소는 Razor 페이지 또는 보기에 추가할 수 있습니다.
 
 페이지 또는 뷰가 렌더링 되는 경우:
@@ -129,19 +173,19 @@ Blazor 서버 쪽 앱은 서버에 대 한 활성 SignalR 연결이 필요 합�
 * 구성 요소가 페이지 또는 뷰와 미리 렌더링 된 됩니다.
 * 렌더링에 사용 되는 초기 구성 요소 상태가 손실 됩니다.
 * 새 구성 요소 상태는 SignalR 연결이 설정 될 때 생성 됩니다.
- 
+
 다음 Razor 페이지는 구성 요소 `Counter` 를 렌더링 합니다.
 
 ```cshtml
 <h1>My Razor Page</h1>
- 
+
 @(await Html.RenderComponentAsync<Counter>(RenderMode.ServerPrerendered))
 ```
 
 ### <a name="render-noninteractive-components-from-razor-pages-and-views"></a>Razor 페이지 및 뷰에서 비 대화형 구성 요소 렌더링
 
 다음 Razor 페이지에서 구성 요소는 `MyComponent` 폼을 사용 하 여 지정 된 초기 값을 사용 하 여 정적으로 렌더링 됩니다.
- 
+
 ```cshtml
 <h1>My Razor Page</h1>
 
@@ -149,10 +193,10 @@ Blazor 서버 쪽 앱은 서버에 대 한 활성 SignalR 연결이 필요 합�
     <input type="number" asp-for="InitialValue" />
     <button type="submit">Set initial value</button>
 </form>
- 
+
 @(await Html.RenderComponentAsync<MyComponent>(RenderMode.Static, 
     new { InitialValue = InitialValue }))
- 
+
 @code {
     [BindProperty(SupportsGet=true)]
     public int InitialValue { get; set; }
@@ -162,18 +206,18 @@ Blazor 서버 쪽 앱은 서버에 대 한 활성 SignalR 연결이 필요 합�
 는 `MyComponent` 정적으로 렌더링 되므로 구성 요소는 대화형이 될 수 없습니다.
 
 ### <a name="detect-when-the-app-is-prerendering"></a>앱이 사전 렌더링 되는 경우 검색
- 
+
 [!INCLUDE[](~/includes/blazor-prerendering.md)]
 
 ### <a name="configure-the-signalr-client-for-blazor-server-side-apps"></a>Blazor 서버 쪽 앱에 대 한 SignalR 클라이언트 구성
- 
+
 경우에 따라 Blazor 서버 쪽 앱에서 사용 하는 SignalR 클라이언트를 구성 해야 합니다. 예를 들어 SignalR 클라이언트에 대 한 로깅을 구성 하 여 연결 문제를 진단할 수 있습니다.
- 
+
 *Pages/_Host* 파일에서 SignalR client를 구성 하려면 다음을 수행 합니다.
 
 * *Blazor 스크립트* 에 대 한 `<script>` 태그에 특성을추가합니다.`autostart="false"`
 * 을 `Blazor.start` 호출 하 고 SignalR builder를 지정 하는 구성 개체를 전달 합니다.
- 
+
 ```html
 <script src="_framework/blazor.server.js" autostart="false"></script>
 <script>

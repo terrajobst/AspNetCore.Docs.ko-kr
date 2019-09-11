@@ -5,14 +5,14 @@ description: Blazor apps에서 JavaScript의 .NET 및 .NET 메서드에서 JavaS
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/05/2019
+ms.date: 09/07/2019
 uid: blazor/javascript-interop
-ms.openlocfilehash: 4e2c979971f8f550af4aa9653880bfd1e5fae731
-ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
+ms.openlocfilehash: fa485420c01e6a6d4181f733d6848de08ffca730
+ms.sourcegitcommit: e7c56e8da5419bbc20b437c2dd531dedf9b0dc6b
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/07/2019
-ms.locfileid: "70800292"
+ms.lasthandoff: 09/10/2019
+ms.locfileid: "70878362"
 ---
 # <a name="aspnet-core-blazor-javascript-interop"></a>ASP.NET Core Blazor JavaScript interop
 
@@ -249,3 +249,23 @@ JavaScript interop 코드는 클래스 라이브러리에 포함 될 수 있으�
 빌드된 NuGet 패키지는 NuGet 패키지를 참조 하는 것과 동일한 방식으로 앱의 프로젝트 파일에서 참조 됩니다. 패키지가 복원 된 후에는 앱 코드가 JavaScript를로 호출할 수 있습니다 C#.
 
 자세한 내용은 <xref:blazor/class-libraries>을 참조하세요.
+
+## <a name="harden-js-interop-calls"></a>JS interop 호출 강화
+
+JS interop는 네트워킹 오류로 인해 실패할 수 있으며 신뢰할 수 없는 것으로 처리 되어야 합니다. 기본적으로 Blazor 서버 앱은 1 분 후 서버에서 JS interop 호출을 시간 제한 합니다. 앱에서 10 초 등의 적극적 시간 제한을 허용할 수 있는 경우 다음 방법 중 하나를 사용 하 여 시간 제한을 설정 합니다.
+
+* 전역에서 `Startup.ConfigureServices`제한 시간을 지정 합니다.
+
+  ```csharp
+  services.AddServerSideBlazor(
+      options => options.JSInteropDefaultCallTimeout = TimeSpan.FromSeconds({SECONDS}));
+  ```
+
+* 구성 요소 코드에서 호출 마다 단일 호출에서 제한 시간을 지정할 수 있습니다.
+
+  ```csharp
+  var result = await JSRuntime.InvokeAsync<string>("MyJSOperation", 
+      TimeSpan.FromSeconds({SECONDS}), new[] { "Arg1" });
+  ```
+
+리소스 소모에 대 한 자세한 내용은을 <xref:security/blazor/server-side>참조 하십시오.

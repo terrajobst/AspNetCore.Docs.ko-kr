@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/06/2019
 uid: blazor/components
-ms.openlocfilehash: e877abfb568f71046c3603cac5e888e99ffc8d15
-ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
+ms.openlocfilehash: dbd0879d200061151e8307346adef784967bf123
+ms.sourcegitcommit: e7c56e8da5419bbc20b437c2dd531dedf9b0dc6b
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/07/2019
-ms.locfileid: "70800414"
+ms.lasthandoff: 09/10/2019
+ms.locfileid: "70878401"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -1466,3 +1466,7 @@ Blazor는 HTML을 렌더링 하므로 svg (확장 가능한 벡터 그래픽) �
 ```
 
 그러나 인라인 SVG 태그는 일부 시나리오에서 지원 되지 않습니다. `<svg>` 태그를 구성 요소 파일 (*razor*)에 직접 저장 하는 경우 기본 이미지 렌더링이 지원 되지만 많은 고급 시나리오가 아직 지원 되지 않습니다. 예를 들어 `<use>` 태그는 현재 적용 되지 않으며 `@bind` 일부 SVG 태그와 함께 사용할 수 없습니다. 향후 릴리스에서 이러한 제한을 해결할 예정입니다.
+
+## <a name="additional-resources"></a>추가 자료
+
+* <xref:security/blazor/server-side>&ndash; 리소스 고갈에 경합 해야 하는 Blazor 서버 쪽 앱을 빌드하는 방법에 대 한 지침을 제공 합니다.
