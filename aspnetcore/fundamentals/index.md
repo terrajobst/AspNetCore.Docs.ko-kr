@@ -5,14 +5,14 @@ description: ASP.NET Core 앱을 구축하기 위한 기본적인 개념을 알�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/02/2019
+ms.date: 09/06/2019
 uid: fundamentals/index
-ms.openlocfilehash: 7e2901919c8b0165d0f169abf74fe5bc0edd8be4
-ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
+ms.openlocfilehash: cff2afd62ed60648dc689d408dde56ecda18c261
+ms.sourcegitcommit: 2d4c1732c4866ed26b83da35f7bc2ad021a9c701
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/06/2019
-ms.locfileid: "70773749"
+ms.lasthandoff: 09/09/2019
+ms.locfileid: "70815647"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core 기본 사항
 
@@ -272,7 +272,7 @@ ASP.NET Core에는 다음과 같은 오류를 처리하기 위한 기본 제공 
 
 ::: moniker range=">= aspnetcore-3.0"
 
-자세한 내용은 [ContentRootPath](/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0#contentrootpath)를 참조하세요.
+자세한 내용은 [WebRoot](/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0#webroot)를 참조하세요.
 
 ::: moniker-end
 
@@ -282,6 +282,6 @@ ASP.NET Core에는 다음과 같은 오류를 처리하기 위한 기본 제공 
 
 ::: moniker-end
 
-Razor(*.cshtml*) 파일에서 물결표 슬래시 `~/`가 웹 루트를 가리킵니다. `~/`에서 시작하는 경로를 가상 경로라고 합니다.
+Razor( *.cshtml*) 파일에서 물결표 슬래시 `~/`가 웹 루트를 가리킵니다. `~/`에서 시작하는 경로를 가상 경로라고 합니다.
 
 자세한 내용은 <xref:fundamentals/static-files>을 참조하세요.

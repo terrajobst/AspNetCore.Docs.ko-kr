@@ -10,6 +10,12 @@ ASP.NET Core는 다음과 같은 이점을 제공합니다.
 * 클라우드를 갖춘 환경 기반 [구성 시스템](xref:fundamentals/configuration/index)입니다.
 * [종속성 주입](xref:fundamentals/dependency-injection)이 기본 제공됩니다.
 * 간단한 [고성능](https://github.com/aspnet/benchmarks) 모듈식 HTTP 요청 파이프라인을 포함합니다.
-* [Kestrel](xref:fundamentals/servers/kestrel), [IIS](xref:host-and-deploy/iis/index), [Nginx](xref:host-and-deploy/linux-nginx), [Apache](xref:host-and-deploy/linux-apache), [Docker](xref:host-and-deploy/docker/index)에서 호스트하거나 고유한 프로세스에서 자체 호스트하는 기능입니다.
+* 다음에서 호스트할 수 있습니다.
+  * [Kestrel](xref:fundamentals/servers/kestrel)
+  * [IIS](xref:host-and-deploy/iis/index)
+  * [HTTP.sys](xref:fundamentals/servers/httpsys)
+  * [Nginx](xref:host-and-deploy/linux-nginx)
+  * [Apache](xref:host-and-deploy/linux-apache)
+  * [Docker](xref:host-and-deploy/docker/index)
 * [Side-by-side 버전 관리](/dotnet/standard/choosing-core-framework-server#a-need-for-side-by-side-of-net-versions-per-application-level).
 * 최신 웹 개발을 간소화하는 도구를 포함합니다.
