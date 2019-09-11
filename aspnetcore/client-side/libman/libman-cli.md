@@ -41,7 +41,7 @@ dotnet tool install -g Microsoft.Web.LibraryManager.Cli --version 1.0.94-g606058
 
 앞의 예제에서 로컬 Windows 컴퓨터에서.NET Core 전역 도구 설치 *C:\Temp\Microsoft.Web.LibraryManager.Cli.1.0.94-g606058a278.nupkg* 파일입니다.
 
-## <a name="usage"></a>사용법
+## <a name="usage"></a>사용
 
 CLI의 설치 후 다음 명령을 사용할 수 있습니다.
 
@@ -195,7 +195,7 @@ libman install [-h|--help]
 }
 ```
 
-3.2.1 jQuery 버전을 설치 하려면 *jquery.min.js* 파일을 합니다 *jquery스크립트/wwwroot/* CDNJS 공급자를 사용 하 여 폴더:
+3\.2.1 jQuery 버전을 설치 하려면 *jquery.min.js* 파일을 합니다 *jquery스크립트/wwwroot/* CDNJS 공급자를 사용 하 여 폴더:
 
 ```console
 libman install jquery@3.2.1 --provider cdnjs --destination wwwroot/scripts/jquery --files jquery.min.js

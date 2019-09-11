@@ -50,7 +50,7 @@ dotnet tool install -g Microsoft.dotnet-httprepl --version "3.0.0-*"
 
 [.NET Core 글로벌 도구](/dotnet/core/tools/global-tools#install-a-global-tool)가 [Microsoft.dotnet-httprepl](https://www.nuget.org/packages/Microsoft.dotnet-httprepl) NuGet 패키지에서 설치됩니다.
 
-## <a name="usage"></a>사용법
+## <a name="usage"></a>사용
 
 도구를 성공적으로 설치한 후 다음 명령을 실행하여 HTTP REPL을 시작합니다.
 
