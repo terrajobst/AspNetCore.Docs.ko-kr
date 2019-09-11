@@ -6,18 +6,18 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/14/2018
 uid: client-side/libman/index
-ms.openlocfilehash: a6ff0cc3342cfac74739387aa17046ed5050232f
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 87987446b7f2c625da90951510e697e06569ba36
+ms.sourcegitcommit: e7c56e8da5419bbc20b437c2dd531dedf9b0dc6b
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64882208"
+ms.lasthandoff: 09/10/2019
+ms.locfileid: "70878335"
 ---
 # <a name="client-side-library-acquisition-in-aspnet-core-with-libman"></a>LibMan을 사용하여 ASP.NET Core에서 클라이언트 쪽 라이브러리 획득
 
 작성자: [Scott Addie](https://twitter.com/Scott_Addie)
 
-라이브러리 관리자(LibMan)는 가벼운 클라이언트 쪽 라이브러리 획득 도구입니다. LibMan은 파일 시스템에서 또는 [CDN(콘텐츠 전송 네트워크)](https://wikipedia.org/wiki/Content_delivery_network)에서 인기 있는 라이브러리 및 프레임워크를 다운로드합니다. 지원되는 CDN은 [CDNJS](https://cdnjs.com/) 및 [unpkg](https://unpkg.com/#/)입니다. 선택한 라이브러리 파일은 ASP.NET Core 프로젝트 내부의 적절한 위치에 페치 및 배치됩니다.
+라이브러리 관리자(LibMan)는 가벼운 클라이언트 쪽 라이브러리 획득 도구입니다. LibMan은 파일 시스템에서 또는 [CDN(콘텐츠 전송 네트워크)](https://wikipedia.org/wiki/Content_delivery_network)에서 인기 있는 라이브러리 및 프레임워크를 다운로드합니다. 지원되는 CDN은 [CDNJS](https://cdnjs.com/), [jsDelivr](https://www.jsdelivr.com/) 및 [unpkg](https://unpkg.com/#/)입니다. 선택한 라이브러리 파일은 ASP.NET Core 프로젝트 내부의 적절한 위치에 페치 및 배치됩니다.
 
 ## <a name="libman-use-cases"></a>LibMan 사용 사례
 
