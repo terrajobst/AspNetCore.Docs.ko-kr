@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/29/2019
 uid: web-api/http-repl
-ms.openlocfilehash: 7121670856da4b123b1c3e780a7952da0fb696a1
-ms.sourcegitcommit: e6bd2bbe5683e9a7dbbc2f2eab644986e6dc8a87
+ms.openlocfilehash: b93641c96ad093b40aaa887f19409d4c2e1490df
+ms.sourcegitcommit: efb9c16321b34f8ede802822b26eb983de16479b
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/03/2019
-ms.locfileid: "70238051"
+ms.lasthandoff: 09/09/2019
+ms.locfileid: "70842271"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>HTTP REPL을 사용하여 웹 API 테스트
 
@@ -55,24 +55,24 @@ dotnet tool install -g Microsoft.dotnet-httprepl --version "3.0.0-*"
 도구를 성공적으로 설치한 후 다음 명령을 실행하여 HTTP REPL을 시작합니다.
 
 ```console
-dotnet httprepl
+httprepl
 ```
 
 사용 가능한 HTTP REPL 명령을 보려면 다음 명령 중 하나를 실행합니다.
 
 ```console
-dotnet httprepl -h
+httprepl -h
 ```
 
 ```console
-dotnet httprepl --help
+httprepl --help
 ```
 
 다음 출력이 표시됩니다.
 
 ```console
 Usage:
-  dotnet httprepl [<BASE_ADDRESS>] [options]
+  httprepl [<BASE_ADDRESS>] [options]
 
 Arguments:
   <BASE_ADDRESS> - The initial base address for the REPL.
@@ -131,13 +131,13 @@ HTTP REPL은 명령 완성을 제안합니다. <kbd>Tab</kbd> 키를 누르면 �
 다음 명령을 실행하여 웹 API에 연결합니다.
 
 ```console
-dotnet httprepl <ROOT URI>
+httprepl <ROOT URI>
 ```
 
 `<ROOT URI>`는 웹 API의 기본 URI입니다. 예:
 
 ```console
-dotnet httprepl https://localhost:5001
+httprepl https://localhost:5001
 ```
 
 또는 HTTP REPL이 실행되는 동안 언제든지 다음 명령을 실행합니다.
@@ -928,7 +928,7 @@ Request echoing is off
 HTTP REPL 도구에 의해 명령 셸에 작성된 모든 출력을 제거하려면 `clear` 또는 `cls` 명령을 실행합니다. 설명을 위해 명령 셸에 다음 출력이 포함되어 있다고 가정합니다.
 
 ```console
-dotnet httprepl https://localhost:5001
+httprepl https://localhost:5001
 (Disconnected)~ set base "https://localhost:5001"
 Using swagger metadata from https://localhost:5001/swagger/v1/swagger.json
 
