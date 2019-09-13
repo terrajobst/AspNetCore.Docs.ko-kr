@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/06/2019
 uid: blazor/components
-ms.openlocfilehash: dbd0879d200061151e8307346adef784967bf123
-ms.sourcegitcommit: e7c56e8da5419bbc20b437c2dd531dedf9b0dc6b
+ms.openlocfilehash: bc9fa06e5acccb773717fe87bf4aabb971b8dee5
+ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/10/2019
-ms.locfileid: "70878401"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70963773"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -79,7 +79,7 @@ MSBuild 속성을 `_RazorComponentInclude` 사용 하 여 파일이 Razor 구성
 
 페이지 및 뷰에서 구성 요소를 사용할 수 있지만 반대의 경우는 그렇지 않습니다. 구성 요소는 부분 보기 및 섹션과 같은 보기 및 페이지 관련 시나리오를 사용할 수 없습니다. 구성 요소의 부분 뷰에서 논리를 사용 하려면 부분 뷰 논리를 구성 요소에 대 한 요소로 처리 합니다.
 
-구성 요소를 렌더링 하는 방법과 구성 요소 상태가 Blazor 서버 쪽 앱에서 관리 되는 방법에 대 한 <xref:blazor/hosting-models> 자세한 내용은 문서를 참조 하세요.
+구성 요소를 렌더링 하는 방법과 구성 요소 상태가 Blazor Server 앱에서 관리 되는 방법에 대 <xref:blazor/hosting-models> 한 자세한 내용은 문서를 참조 하세요.
 
 ## <a name="use-components"></a>구성 요소 사용
 
@@ -217,7 +217,7 @@ MSBuild 속성을 `_RazorComponentInclude` 사용 하 여 파일이 Razor 구성
 
 ```cshtml
 <input value="@CurrentValue"
-    @onchange="@((UIChangeEventArgs __e) => CurrentValue = __e.Value)" />
+    @onchange="@((ChangeEventArgs __e) => CurrentValue = __e.Value)" />
 ```
 
 구성 요소가 렌더링 되 면 input 요소의 `value` 은 `CurrentValue` 속성에서 가져옵니다. 사용자가 텍스트 상자에를 `onchange` 입력 하면 이벤트가 발생 `CurrentValue` 하 고 속성이 변경 된 값으로 설정 됩니다. 실제로 코드 생성은 형식 변환이 수행 되는 몇 가지 경우 `@bind` 를 처리 하기 때문에 좀 더 복잡 합니다. 원칙적 `@bind` 으로는 식 `value` 의 현재 값을 특성과 연결 하 고 등록 된 처리기를 사용 하 여 변경 내용을 처리 합니다.
@@ -379,7 +379,7 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 </button>
 
 @code {
-    private void UpdateHeading(UIMouseEventArgs e)
+    private void UpdateHeading(MouseEventArgs e)
     {
         ...
     }
@@ -409,7 +409,7 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 </button>
 
 @code {
-    private async Task UpdateHeading(UIMouseEventArgs e)
+    private async Task UpdateHeading(MouseEventArgs e)
     {
         ...
     }
@@ -446,7 +446,7 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 <button @onclick="@(e => Console.WriteLine("Hello, world!"))">Say hello</button>
 ```
 
-요소 집합을 반복 하는 경우와 같이 추가 값을 닫는 것이 편리한 경우가 종종 있습니다. 다음 예제에서는 UI에서 선택 된 경우 각각 `UpdateHeading` 이벤트 인수 (`UIMouseEventArgs`)와 해당 단추 번호 (`buttonNumber`)를 전달 하는 세 개의 단추를 만듭니다.
+요소 집합을 반복 하는 경우와 같이 추가 값을 닫는 것이 편리한 경우가 종종 있습니다. 다음 예제에서는 UI에서 선택 된 경우 각각 `UpdateHeading` 이벤트 인수 (`MouseEventArgs`)와 해당 단추 번호 (`buttonNumber`)를 전달 하는 세 개의 단추를 만듭니다.
 
 ```cshtml
 <h2>@message</h2>
@@ -464,7 +464,7 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 @code {
     private string message = "Select a button to learn its position.";
 
-    private void UpdateHeading(UIMouseEventArgs e, int buttonNumber)
+    private void UpdateHeading(MouseEventArgs e, int buttonNumber)
     {
         message = $"You selected Button #{buttonNumber} at " +
             $"mouse position: {e.ClientX} X {e.ClientY}.";
@@ -479,7 +479,7 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 
 중첩 된 구성 요소가 있는 일반적인 시나리오는 자식 구성 요소 이벤트가 발생&mdash;하는 경우 (예: 자식에서 `onclick` 이벤트가 발생할 때) 부모 구성 요소의 메서드를 실행 하고자 하는 것입니다. 구성 요소 간에 이벤트를 노출 하려면를 `EventCallback`사용 합니다. 부모 구성 요소는 콜백 메서드를 자식 구성 요소 `EventCallback`에 할당할 수 있습니다.
 
-샘플 `ChildComponent` 앱의는 `onclick` 단추의 처리기가 샘플의 `ParentComponent`에서 `EventCallback` 대리자를 받도록 설정 되는 방법을 보여 줍니다. 는 `EventCallback` 주변 장치의 `onclick` 이벤트 `UIMouseEventArgs`에 적합 한로 형식화 됩니다.
+샘플 `ChildComponent` 앱의는 `onclick` 단추의 처리기가 샘플의 `ParentComponent`에서 `EventCallback` 대리자를 받도록 설정 되는 방법을 보여 줍니다. 는 `EventCallback` 주변 장치의 `onclick` 이벤트 `MouseEventArgs`에 적합 한로 형식화 됩니다.
 
 [!code-cshtml[](common/samples/3.x/BlazorSample/Components/ChildComponent.razor?highlight=5-7,17-18)]
 
@@ -516,6 +516,126 @@ await callback.InvokeAsync(arg);
 이벤트 `EventCallback` 처리 `EventCallback<T>` 및 바인딩 구성 요소 매개 변수에는 및를 사용 합니다.
 
 `EventCallback<T>` 강력한`EventCallback`형식의를 사용 하는 것이 좋습니다. `EventCallback<T>`구성 요소의 사용자에 게 더 나은 오류 피드백을 제공 합니다. 다른 UI 이벤트 처리기와 마찬가지로 이벤트 매개 변수를 지정 하는 것은 선택 사항입니다. 콜백에 `EventCallback` 전달 된 값이 없는 경우를 사용 합니다.
+
+## <a name="chained-bind"></a>연결 된 바인딩
+
+일반적인 시나리오는 데이터 바인딩된 매개 변수를 구성 요소 출력의 페이지 요소에 연결 하는 것입니다. 이 시나리오를 여러 수준의 바인딩이 동시에 발생 하기 때문에 연결 된 *바인딩* 이라고 합니다.
+
+연결 된 바인딩은 페이지의 요소에서 `@bind` 구문을 사용 하 여 구현할 수 없습니다. 이벤트 처리기 및 값은 별도로 지정 해야 합니다. 그러나 부모 구성 요소는 구성 요소의 매개 `@bind` 변수와 함께 구문을 사용할 수 있습니다.
+
+다음 `PasswordField` 구성 요소 (*passwordfield. razor*):
+
+* `<input>` 요소의 값`Password` 을 속성으로 설정 합니다.
+* [Eventcallback](#eventcallback)을 사용 `Password` 하 여 속성의 변경 내용을 부모 구성 요소에 노출 합니다.
+
+```cshtml
+Password: 
+
+<input @oninput="OnPasswordChanged" 
+       required 
+       type="@(showPassword ? "text" : "password")" 
+       value="@Password" />
+
+<button class="btn btn-primary" @onclick="ToggleShowPassword">
+    Show password
+</button>
+
+@code {
+    private bool showPassword;
+
+    [Parameter]
+    public string Password { get; set; }
+
+    [Parameter]
+    public EventCallback<string> PasswordChanged { get; set; }
+
+    private Task OnPasswordChanged(ChangeEventArgs e)
+    {
+        Password = e.Value.ToString();
+
+        return PasswordChanged.InvokeAsync(Password);
+    }
+
+    private void ToggleShowPassword()
+    {
+        showPassword = !showPassword;
+    }
+}
+```
+
+`PasswordField` 구성 요소는 다른 구성 요소에서 사용 됩니다.
+
+```cshtml
+<PasswordField @bind-Password="password" />
+
+@code {
+    private string password;
+}
+```
+
+위의 예에서 암호에 대 한 검사 또는 트랩 오류를 수행 하려면 다음을 수행 합니다.
+
+* `Password` (`password` 다음 예제 코드에서)에 대 한 지원 필드를 만듭니다.
+* `Password` Setter에서 검사 또는 트랩 오류를 수행 합니다.
+
+다음 예에서는 암호 값에 공백을 사용 하는 경우 사용자에 게 즉각적인 피드백을 제공 합니다.
+
+```cshtml
+Password: 
+
+<input @oninput="OnPasswordChanged" 
+       required 
+       type="@(showPassword ? "text" : "password")" 
+       value="@Password" />
+
+<button class="btn btn-primary" @onclick="ToggleShowPassword">
+    Show password
+</button>
+
+<span class="text-danger">@validationMessage</span>
+
+@code {
+    private bool showPassword;
+    private string password;
+    private string validationMessage;
+
+    [Parameter]
+    public string Password
+    {
+        get { return password ?? string.Empty; }
+        set
+        {
+            if (password != value)
+            {
+                if (value.Contains(' '))
+                {
+                    validationMessage = "Spaces not allowed!";
+                }
+                else
+                {
+                    password = value;
+                    validationMessage = string.Empty;
+                }
+            }
+        }
+    }
+
+    [Parameter]
+    public EventCallback<string> PasswordChanged { get; set; }
+
+    private Task OnPasswordChanged(ChangeEventArgs e)
+    {
+        Password = e.Value.ToString();
+
+        return PasswordChanged.InvokeAsync(Password);
+    }
+
+    private void ToggleShowPassword()
+    {
+        showPassword = !showPassword;
+    }
+}
+```
 
 ## <a name="capture-references-to-components"></a>구성 요소에 대 한 참조 캡처
 
@@ -565,7 +685,7 @@ public class NotifierService
         }
     }
 
-    public event Action<string, int, Task> Notify;
+    public event Func<string, int, Task> Notify;
 }
 ```
 
@@ -613,7 +733,7 @@ public class NotifierService
 ```csharp
 @foreach (var person in People)
 {
-    <DetailsEditor Details="@person.Details" />
+    <DetailsEditor Details="person.Details" />
 }
 
 @code {
@@ -629,7 +749,7 @@ public class NotifierService
 ```csharp
 @foreach (var person in People)
 {
-    <DetailsEditor @key="@person" Details="@person.Details" />
+    <DetailsEditor @key="person" Details="person.Details" />
 }
 
 @code {
@@ -656,8 +776,8 @@ public class NotifierService
 를 사용 `@key` 하 여 개체가 변경 될 때 Blazor가 요소 또는 구성 요소 하위 트리를 유지 하지 못하게 할 수도 있습니다.
 
 ```cshtml
-<div @key="@currentPerson">
-    ... content that depends on @currentPerson ...
+<div @key="currentPerson">
+    ... content that depends on currentPerson ...
 </div>
 ```
 
@@ -934,7 +1054,7 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값�
 템플릿 기반 구성 요소를 사용 하는 경우 매개 변수의 이름과 일치 하는 자식 요소 (`TableHeader` 및 `RowTemplate` 다음 예제에서는)를 사용 하 여 템플릿 매개 변수를 지정할 수 있습니다.
 
 ```cshtml
-<TableTemplate Items="@pets">
+<TableTemplate Items="pets">
     <TableHeader>
         <th>ID</th>
         <th>Name</th>
@@ -951,7 +1071,7 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값�
 요소로 전달 된 형식의 `RenderFragment<T>` 구성 요소 인수에는 라는 `context` 암시적 매개 변수가 있지만 (예: 앞의 코드 샘플 `@context.PetId`에서), 자식에 있는 특성을 `Context` 사용 하 여 매개 변수 이름을 변경할 수 있습니다. 요소인. 다음 예제에서 `Context` 요소의 특성은 `RowTemplate` 매개 변수를 `pet` 지정 합니다.
 
 ```cshtml
-<TableTemplate Items="@pets">
+<TableTemplate Items="pets">
     <TableHeader>
         <th>ID</th>
         <th>Name</th>
@@ -966,7 +1086,7 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값�
 또는 구성 요소 요소에 특성 `Context` 을 지정할 수 있습니다. 지정 된 `Context` 특성은 모든 지정 된 템플릿 매개 변수에 적용 됩니다. 이는 자식 요소를 래핑하는 대신 암시적 자식 콘텐츠에 대 한 콘텐츠 매개 변수 이름을 지정 하려는 경우에 유용할 수 있습니다. 다음 예제에서 특성은 `Context` `TableTemplate` 요소에 나타나고 모든 템플릿 매개 변수에 적용 됩니다.
 
 ```cshtml
-<TableTemplate Items="@pets" Context="pet">
+<TableTemplate Items="pets" Context="pet">
     <TableHeader>
         <th>ID</th>
         <th>Name</th>
@@ -987,7 +1107,7 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값�
 제네릭 형식의 구성 요소를 사용 하는 경우 가능 하면 형식 매개 변수가 유추 됩니다.
 
 ```cshtml
-<ListViewTemplate Items="@pets">
+<ListViewTemplate Items="pets">
     <ItemTemplate Context="pet">
         <li>@pet.Name</li>
     </ItemTemplate>
@@ -997,7 +1117,7 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값�
 그렇지 않은 경우 형식 매개 변수의 이름과 일치 하는 특성을 사용 하 여 형식 매개 변수를 명시적으로 지정 해야 합니다. 다음 예제 `TItem="Pet"` 에서는 유형을 지정 합니다.
 
 ```cshtml
-<ListViewTemplate Items="@pets" TItem="Pet">
+<ListViewTemplate Items="pets" TItem="Pet">
     <ItemTemplate Context="pet">
         <li>@pet.Name</li>
     </ItemTemplate>
@@ -1037,7 +1157,7 @@ public class ThemeInfo
             <NavMenu />
         </div>
         <div class="col-sm-9">
-            <CascadingValue Value="@theme">
+            <CascadingValue Value="theme">
                 <div class="content px-4">
                     @Body
                 </div>
@@ -1331,7 +1451,7 @@ builder.AddContent(seq++, "Second");
 
 ## <a name="localization"></a>지역화
 
-Blazor 서버 쪽 앱은 [지역화 미들웨어](xref:fundamentals/localization#localization-middleware)를 사용 하 여 지역화 됩니다. 미들웨어는 앱에서 리소스를 요청 하는 사용자에 게 적절 한 문화권을 선택 합니다.
+Blazor 서버 앱은 [지역화 미들웨어](xref:fundamentals/localization#localization-middleware)를 사용 하 여 지역화 됩니다. 미들웨어는 앱에서 리소스를 요청 하는 사용자에 게 적절 한 문화권을 선택 합니다.
 
 문화권은 다음 방법 중 하나를 사용 하 여 설정할 수 있습니다.
 
@@ -1348,7 +1468,7 @@ Blazor 서버 쪽 앱은 [지역화 미들웨어](xref:fundamentals/localization
 
 문화권이 지역화 쿠키에 유지 되는 경우 모든 기술을 사용 하 여 문화권을 할당할 수 있습니다. 서버 쪽 ASP.NET Core에 대해 설정 된 지역화 체계가 앱에 이미 있는 경우 앱의 기존 지역화 인프라를 계속 사용 하 고 앱의 체계 내에서 지역화 문화권 쿠키를 설정 합니다.
 
-다음 예제에서는 지역화 미들웨어에서 읽을 수 있는 쿠키의 현재 문화권을 설정 하는 방법을 보여 줍니다. Blazor 서버 쪽 앱에서 다음 내용을 사용 하 여 *Pages/Host. cshtml* 파일을 만듭니다.
+다음 예제에서는 지역화 미들웨어에서 읽을 수 있는 쿠키의 현재 문화권을 설정 하는 방법을 보여 줍니다. Blazor 서버 앱에 다음 내용이 포함 된 *Pages/Host. cshtml* 파일을 만듭니다.
 
 ```csharp
 public class HostModel : PageModel
@@ -1370,9 +1490,9 @@ public class HostModel : PageModel
 1. 브라우저가 앱에 초기 HTTP 요청을 보냅니다.
 1. 문화권이 지역화 미들웨어에 의해 할당 됩니다.
 1. _Host `OnGet` 의 메서드 는 응답의 일부로 쿠키의 문화권을 유지 합니다.
-1. 브라우저는 WebSocket 연결을 열어 대화형 Blazor 서버 쪽 세션을 만듭니다.
+1. 브라우저는 WebSocket 연결을 열어 대화형 Blazor 서버 세션을 만듭니다.
 1. 지역화 미들웨어는 쿠키를 읽고 문화권을 할당 합니다.
-1. Blazor 서버 쪽 세션이 올바른 문화권으로 시작 합니다.
+1. Blazor 서버 세션이 올바른 문화권으로 시작 합니다.
 
 ## <a name="provide-ui-to-choose-the-culture"></a>문화권을 선택 하는 UI 제공
 
@@ -1420,7 +1540,7 @@ public class CultureController : Controller
 @code {
     private double textNumber;
 
-    private void OnSelected(UIChangeEventArgs e)
+    private void OnSelected(ChangeEventArgs e)
     {
         var culture = (string)e.Value;
         var uri = new Uri(NavigationManager.Uri())
@@ -1469,4 +1589,4 @@ Blazor는 HTML을 렌더링 하므로 svg (확장 가능한 벡터 그래픽) �
 
 ## <a name="additional-resources"></a>추가 자료
 
-* <xref:security/blazor/server-side>&ndash; 리소스 고갈에 경합 해야 하는 Blazor 서버 쪽 앱을 빌드하는 방법에 대 한 지침을 제공 합니다.
+* <xref:security/blazor/server>&ndash; 리소스 고갈에 경합 해야 하는 Blazor Server 앱을 빌드하는 방법에 대 한 지침을 제공 합니다.

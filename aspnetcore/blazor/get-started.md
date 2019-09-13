@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/05/2019
 uid: blazor/get-started
-ms.openlocfilehash: 7bff1d38de77adfa1835ee37f4e5f8912ba629cc
-ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
+ms.openlocfilehash: e33ca421676caa20c823faf635442eda2a40ba65
+ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/07/2019
-ms.locfileid: "70800318"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70964008"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>ASP.NET Core Blazor 시작 하기
 
@@ -40,7 +40,7 @@ Blazor 시작 하기:
 
    4 \. **프로젝트 이름** 필드에 프로젝트 이름을 제공하거나 기본 프로젝트 이름을 수락합니다. **위치** 항목이 올바른지 확인 하거나 프로젝트의 위치를 제공 합니다. **만들기**를 선택합니다.
 
-   5\. 클라이언트 쪽 환경을 Blazor **Blazor Weasembomapp** 템플릿을 선택 합니다. Blazor 서버 쪽 환경에서는 **Blazor 서버 앱** 템플릿을 선택 합니다. **만들기**를 선택합니다. 서버 쪽 및 클라이언트 쪽의 두 Blazor 호스팅 모델에 대 한 자세한 내용은을 참조 <xref:blazor/hosting-models>하십시오.
+   5\. Blazor weasembomexperience 환경에 대해 **Blazor Weasembomapp** 템플릿을 선택 합니다. Blazor 서버 환경의 경우 **Blazor Server 앱** 템플릿을 선택 합니다. **만들기**를 선택합니다. 두 Blazor 호스팅 모델에 대 한 자세한 내용은 *Blazor Server* 및 *Blazor Weasembomommbmbsembmbsembmbsembse.* <xref:blazor/hosting-models>
 
    6\. **F5** 키를 눌러 앱을 실행합니다.
 
@@ -53,25 +53,25 @@ Blazor 시작 하기:
 
    2 \. [ C# Visual Studio Code 확장에 대 한](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)최신 버전을 설치 합니다.
 
-   3\. Blazor 클라이언트 쪽 환경의 경우 명령 셸에서 다음 명령을 실행 합니다.
+   3\. Blazor Weasembomexperience 환경의 경우 명령 셸에서 다음 명령을 실행 합니다.
 
       ```console
       dotnet new blazorwasm -o WebApplication1
       ```
 
-      Blazor 서버 쪽 환경의 경우 명령 셸에서 다음 명령을 실행 합니다.
+      Blazor 서버 환경의 경우 명령 셸에서 다음 명령을 실행 합니다.
 
       ```console
       dotnet new blazorserver -o WebApplication1
       ```
 
-      서버 쪽 및 클라이언트 쪽의 두 Blazor 호스팅 모델에 대 한 자세한 내용은을 참조 <xref:blazor/hosting-models>하십시오.
+      두 Blazor 호스팅 모델에 대 한 자세한 내용은 *Blazor Server* 및 *Blazor Weasembomommbmbsembmbsembmbsembse.* <xref:blazor/hosting-models>
 
    4 \. Visual Studio Code에서 *WebApplication1* 폴더를 엽니다.
 
-   5\. Blazor 서버 쪽 프로젝트의 경우 IDE는 프로젝트를 빌드 및 디버그 하기 위해 자산을 추가 하도록 요청 합니다. **예**를 선택합니다.
+   5\. Blazor 서버 프로젝트의 경우 IDE는 프로젝트를 빌드 및 디버그 하기 위해 자산을 추가 하도록 요청 합니다. **예**를 선택합니다.
 
-   6\. Blazor 서버 쪽 앱을 사용 하는 경우 Visual Studio Code 디버거를 사용 하 여 앱을 실행 합니다. Blazor 클라이언트 쪽 앱을 사용 하는 경우 앱 `dotnet run` 의 프로젝트 폴더에서를 실행 합니다.
+   6\. Blazor 서버 앱을 사용 하는 경우 Visual Studio Code 디버거를 사용 하 여 앱을 실행 합니다. Blazor weasembomapp을 사용 하는 경우 `dotnet run` 앱의 프로젝트 폴더에서를 실행 합니다.
 
    7 \. 브라우저에서 `https://localhost:5001`로 이동합니다.
 
@@ -85,7 +85,7 @@ Blazor 시작 하기:
 
    3\. In the sidebar, select **.NET Core** > **App**.
 
-   4\. For a Blazor server-side experience, select the **Blazor Server App** template. For a Blazor client-side experience, select the **Blazor WebAssembly App** template. Select **Next**. For information on the two Blazor hosting models, server-side and client-side, see <xref:blazor/hosting-models>.
+   4\. For a Blazor Server experience, select the **Blazor Server App** template. For a Blazor WebAssembly experience, select the **Blazor WebAssembly App** template. Select **Next**. For information on the two Blazor hosting models, *Blazor Server* and *Blazor WebAssembly*, see <xref:blazor/hosting-models>.
 
    5\. The **Target Framework** defaults to **.NET Core 3.0**. Select **Next**.
 
@@ -97,7 +97,7 @@ Blazor 시작 하기:
 
    # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
-   Blazor 클라이언트 쪽 환경의 경우 명령 셸에서 다음 명령을 실행 합니다.
+   Blazor Weasembomexperience의 경우 명령 셸에서 다음 명령을 실행 합니다.
 
    ```console
    dotnet new blazorwasm -o WebApplication1
@@ -105,7 +105,7 @@ Blazor 시작 하기:
    dotnet run
    ```
 
-   Blazor 서버 쪽 환경의 경우 명령 셸에서 다음 명령을 실행 합니다.
+   Blazor 서버 환경의 경우 명령 셸에서 다음 명령을 실행 합니다.
 
    ```console
    dotnet new blazorserver -o WebApplication1
@@ -113,7 +113,7 @@ Blazor 시작 하기:
    dotnet run
    ```
 
-   서버 쪽 및 클라이언트 쪽의 두 Blazor 호스팅 모델에 대 한 자세한 내용은을 참조 <xref:blazor/hosting-models>하십시오.
+   두 Blazor 호스팅 모델에 대 한 자세한 내용은 *Blazor Server* 및 *Blazor Weasembomommbmbsembmbsembmbsembse.* <xref:blazor/hosting-models>
 
    브라우저에서 `https://localhost:5001`로 이동합니다.
 

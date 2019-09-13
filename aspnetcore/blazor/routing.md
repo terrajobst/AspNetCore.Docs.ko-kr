@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/06/2019
 uid: blazor/routing
-ms.openlocfilehash: d348908261c51b477aa698a407266d05c0df5a33
-ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
+ms.openlocfilehash: 1c61eedf7dbf0bbc8796eaa11360783b9d7aba6c
+ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/07/2019
-ms.locfileid: "70800337"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70963865"
 ---
 # <a name="aspnet-core-blazor-routing"></a>ASP.NET Core Blazor 라우팅
 
@@ -22,7 +22,7 @@ Blazor apps에서 요청을 라우팅하는 방법 및 `NavLink` 구성 요소�
 
 ## <a name="aspnet-core-endpoint-routing-integration"></a>ASP.NET Core 끝점 라우팅 통합
 
-Blazor 서버 쪽은 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)에 통합 됩니다. ASP.NET Core 앱은 `MapBlazorHub` 에서 `Startup.Configure`대화형 구성 요소에 대 한 들어오는 연결을 허용 하도록 구성 됩니다.
+Blazor 서버는 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)에 통합 됩니다. ASP.NET Core 앱은 `MapBlazorHub` 에서 `Startup.Configure`대화형 구성 요소에 대 한 들어오는 연결을 허용 하도록 구성 됩니다.
 
 [!code-csharp[](routing/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
@@ -55,7 +55,7 @@ Blazor 서버 쪽은 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)�
 [!code-cshtml[](common/samples/3.x/BlazorSample/Pages/BlazorRoute.razor?name=snippet_BlazorRoute)]
 
 > [!IMPORTANT]
-> Url이 올바르게 확인 될 수 `<base>` 있도록 앱은 `href` 특성에 지정 된 앱 기본 경로를 사용 하 여 *wwwroot/index.html* 파일 (Blazor client side) 또는 *Pages/_Host* 파일 (Blazor server side)에 태그를 포함 해야 합니다. `<base href="/">`). 자세한 내용은 <xref:host-and-deploy/blazor/index#app-base-path>을 참조하세요.
+> Url이 올바르게 확인 될 수 `<base>` 있도록 앱은 `href` 특성 에지정된앱기본경로를사용하여wwwroot/index.html파일(Blazorweasembome)또는Pages/_Host파일(BlazorServer)에태그를포함해야합니다.`<base href="/">`). 자세한 내용은 <xref:host-and-deploy/blazor/index#app-base-path>을 참조하세요.
 
 ## <a name="provide-custom-content-when-content-isnt-found"></a>콘텐츠를 찾을 수 없는 경우 사용자 지정 콘텐츠 제공
 
@@ -120,7 +120,7 @@ Blazor 서버 쪽은 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)�
 
 ### <a name="routing-with-urls-that-contain-dots"></a>점이 포함 된 Url로 라우팅
 
-Blazor 서버 쪽 앱에서 *_Host* `/` 의 기본 경로는 (`@page "/"`)입니다. Url이 파일을 요청 하는 것`.`으로 나타나기 때문에 점 ()이 포함 된 요청 url이 기본 경로와 일치 하지 않습니다. Blazor 앱은 존재 하지 않는 정적 파일에 대해 *404-찾을 수* 없음 응답을 반환 합니다. 점이 포함 된 경로를 사용 하려면 다음 경로 템플릿을 사용 하 여 _Host를 구성 *합니다* .
+Blazor Server 앱에서 *_Host* `/` 의 기본 경로는 (`@page "/"`)입니다. Url이 파일을 요청 하는 것`.`으로 나타나기 때문에 점 ()이 포함 된 요청 url이 기본 경로와 일치 하지 않습니다. Blazor 앱은 존재 하지 않는 정적 파일에 대해 *404-찾을 수* 없음 응답을 반환 합니다. 점이 포함 된 경로를 사용 하려면 다음 경로 템플릿을 사용 하 여 _Host를 구성 *합니다* .
 
 ```cshtml
 @page "/{**path}"
@@ -167,7 +167,7 @@ Blazor 서버 쪽 앱에서 *_Host* `/` 의 기본 경로는 (`@page "/"`)입니
 | 멤버 | 설명 |
 | ------ | ----------- |
 | `Uri` | 현재 절대 URI를 가져옵니다. |
-| `BaseUri` | 절대 URI를 생성 하기 위해 상대 URI 경로 앞에 추가할 수 있는 기본 URI (후행 슬래시 포함)를 가져옵니다. 일반적으로 `BaseUri` 는 *wwwroot/index.html* ( `href` Blazor) 또는 *Pages/_Host* (Blazor 서버측)의 문서 `<base>` 요소에 있는 특성에 해당 합니다. |
+| `BaseUri` | 절대 URI를 생성 하기 위해 상대 URI 경로 앞에 추가할 수 있는 기본 URI (후행 슬래시 포함)를 가져옵니다. 일반적으로 `BaseUri` 는 *wwwroot/index.html* ( `href` Blazor weasembmbe) 또는 *Pages/_Host* (Blazor Server)의 문서 `<base>` 요소에 있는 특성에 해당 합니다. |
 | `NavigateTo` | 지정 된 URI로 이동 합니다. `forceLoad` 가`true`다음과 같은 경우:<ul><li>클라이언트 쪽 라우팅이 무시 됩니다.</li><li>URI가 일반적으로 클라이언트 쪽 라우터에서 처리 되는지 여부와 상관 없이 브라우저는 서버에서 새 페이지를 강제로 로드 합니다.</li></ul> |
 | `LocationChanged` | 탐색 위치가 변경 될 때 발생 하는 이벤트입니다. |
 | `ToAbsoluteUri` | 상대 URI를 절대 URI로 변환 합니다. |

@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/07/2019
 uid: blazor/javascript-interop
-ms.openlocfilehash: fa485420c01e6a6d4181f733d6848de08ffca730
-ms.sourcegitcommit: e7c56e8da5419bbc20b437c2dd531dedf9b0dc6b
+ms.openlocfilehash: 1572b9ee646577d094409cc33dd621f2f73dc863
+ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/10/2019
-ms.locfileid: "70878362"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70964208"
 ---
 # <a name="aspnet-core-blazor-javascript-interop"></a>ASP.NET Core Blazor JavaScript interop
 
@@ -28,15 +28,15 @@ Blazor 앱은 JavaScript 코드에서 .NET 및 .NET 메서드의 JavaScript 함�
 
 .Net에서 JavaScript를 호출 하려면 `IJSRuntime` 추상화를 사용 합니다. 메서드 `InvokeAsync<T>` 는 원하는 수의 JSON 직렬화 가능 인수와 함께 호출 하려는 JavaScript 함수에 대 한 식별자를 사용 합니다. 함수 식별자는 전역 범위 (`window`)를 기준으로 합니다. 을 호출 `window.someScope.someFunction`하려는 경우 `someScope.someFunction`식별자는입니다. 호출 되기 전에 함수를 등록할 필요가 없습니다. 반환 형식은 `T` JSON 직렬화도 가능 해야 합니다.
 
-서버 쪽 응용 프로그램의 경우:
+Blazor 서버 앱의 경우:
 
-* 서버 쪽 앱에서 여러 사용자 요청을 처리 합니다. JavaScript 함수 `JSRuntime.Current` 를 호출 하기 위해 구성 요소에서를 호출 하지 마세요.
+* Blazor 서버 앱에서 여러 사용자 요청을 처리 합니다. JavaScript 함수 `JSRuntime.Current` 를 호출 하기 위해 구성 요소에서를 호출 하지 마세요.
 * `IJSRuntime` 추상화를 주입 하 고 삽입 된 개체를 사용 하 여 JavaScript interop 호출을 실행 합니다.
 * Blazor 앱은 렌더링 되지 않지만 브라우저와의 연결이 설정 되지 않았기 때문에 JavaScript를 호출할 수 없습니다. 자세한 내용은 [Blazor 앱이 사전 렌더링 되는 경우 검색](#detect-when-a-blazor-app-is-prerendering) 섹션을 참조 하세요.
 
 다음 예제는 실험적 JavaScript 기반 디코더 인 [Textdecoder](https://developer.mozilla.org/docs/Web/API/TextDecoder)를 기반으로 합니다. 이 예제에서는 C# 메서드에서 JavaScript 함수를 호출 하는 방법을 보여 줍니다. JavaScript 함수는 C# 메서드에서 바이트 배열을 받아 배열을 디코딩하고 표시를 위해 구성 요소에 텍스트를 반환 합니다.
 
-Wwwroot/index.html (Blazor) 또는 *Pages/_Host* (Blazor server side)의 `TextDecoder` 요소내에서를사용하여전달된배열을디코딩하는함수를제공합니다.`<head>`
+Wwwroot/index.html (Blazor weasembom) 또는 *Pages/_Host* (Blazor Server)의 `TextDecoder` 요소내에서를사용하여전달된배열을디코딩하는함수를제공`<head>` 합니다.
 
 [!code-html[](javascript-interop/samples_snapshot/index-script.html)]
 
@@ -70,7 +70,7 @@ Wwwroot/index.html (Blazor) 또는 *Pages/_Host* (Blazor server side)의 `TextDe
   IJSRuntime JSRuntime { get; set; }
   ```
 
-이 항목과 함께 제공 되는 클라이언트 쪽 샘플 앱에서는 DOM과 상호 작용 하 여 사용자 입력을 받고 환영 메시지를 표시 하는 두 가지 JavaScript 함수를 클라이언트 쪽 앱에서 사용할 수 있습니다.
+이 항목과 함께 제공 되는 클라이언트 쪽 샘플 앱에서는 사용자 입력을 받고 환영 메시지를 표시 하기 위해 DOM과 상호 작용 하는 두 가지 JavaScript 함수를 앱에서 사용할 수 있습니다.
 
 * `showPrompt`&ndash; 사용자 입력 (사용자 이름)을 수락 하 고 이름을 호출자에 게 반환 하 라는 프롬프트를 생성 합니다.
 * `displayWelcome`&ndash; 의`welcome`를사용 하 여 호출자의 시작 메시지를 DOM 개체에 할당 합니다. `id`
@@ -79,13 +79,13 @@ Wwwroot/index.html (Blazor) 또는 *Pages/_Host* (Blazor server side)의 `TextDe
 
 [!code-javascript[](./common/samples/3.x/BlazorSample/wwwroot/exampleJsInterop.js?highlight=2-7)]
 
-JavaScript 파일 `<script>` 을 참조 하는 태그를 *wwwroot/index.html* 파일 (Blazor client side) 또는 *Pages/_Host* 파일 (Blazor server side)에 넣습니다.
+JavaScript 파일 `<script>` 을 참조 하는 태그를 *wwwroot/index.html* 파일 (Blazor weasembmboms) 또는 *Pages/_Host* 파일 (Blazor Server)에 저장 합니다.
 
-*wwwroot/index.html* (Blazor 클라이언트 쪽):
+*wwwroot/index.html* (Blazor Weasembambmbsembse):
 
 [!code-html[](./common/samples/3.x/BlazorSample/wwwroot/index.html?highlight=15)]
 
-*Pages/_Host* (Blazor 서버 쪽):
+*Pages/_Host* (Blazor 서버):
 
 [!code-cshtml[](javascript-interop/samples_snapshot/_Host.cshtml?highlight=29)]
 
@@ -93,7 +93,7 @@ JavaScript 파일 `<script>` 을 참조 하는 태그를 *wwwroot/index.html* �
 
 .NET 메서드는를 호출 `IJSRuntime.InvokeAsync<T>`하 여 *exampleJsInterop* 파일의 JavaScript 함수를 사용 하 여 상호 운용 합니다.
 
-추상화 `IJSRuntime` 는 서버측 시나리오에 사용할 수 있는 비동기입니다. 응용 프로그램에서 클라이언트 쪽을 실행 하 고 JavaScript 함수를 동기적으로 호출 하려는 경우로 다운 `IJSInProcessRuntime` 캐스트 및 `Invoke<T>` 를 대신 호출 합니다. 대부분의 JavaScript interop 라이브러리는 비동기 Api를 사용 하 여 모든 시나리오, 클라이언트 쪽 또는 서버 쪽에서 라이브러리를 사용할 수 있도록 하는 것이 좋습니다.
+Blazor `IJSRuntime` 서버 시나리오의 경우 추상화는 비동기입니다. 앱이 Blazor weasembomapp이 고 JavaScript 함수를 동기적으로 호출 하려는 경우로 다운 캐스트 및를 `IJSInProcessRuntime` 대신 호출 `Invoke<T>` 합니다. 대부분의 JavaScript interop 라이브러리는 비동기 Api를 사용 하 여 모든 시나리오에서 라이브러리를 사용할 수 있도록 하는 것이 좋습니다.
 
 샘플 앱에는 JavaScript interop를 설명 하는 구성 요소가 포함 되어 있습니다. 구성 요소:
 
@@ -178,7 +178,7 @@ public static Task Focus(this ElementReference elementRef, IJSRuntime jsRuntime)
 
 ### <a name="static-net-method-call"></a>정적 .NET 메서드 호출
 
-JavaScript에서 정적 .net 메서드를 호출 하려면 `DotNet.invokeMethod` 또는 `DotNet.invokeMethodAsync` 함수를 사용 합니다. 호출할 정적 메서드의 식별자, 함수를 포함 하는 어셈블리의 이름 및 인수를 전달 합니다. 서버 쪽 시나리오를 지원 하기 위해 비동기 버전이 선호 됩니다. JavaScript에서 .net 메서드를 호출 하려면 .net 메서드가 public, static 및 특성을 `[JSInvokable]` 가져야 합니다. 기본적으로 메서드 식별자는 메서드 이름 이지만 생성자를 `JSInvokableAttribute` 사용 하 여 다른 식별자를 지정할 수 있습니다. Open 제네릭 메서드를 호출 하는 것은 현재 지원 되지 않습니다.
+JavaScript에서 정적 .net 메서드를 호출 하려면 `DotNet.invokeMethod` 또는 `DotNet.invokeMethodAsync` 함수를 사용 합니다. 호출할 정적 메서드의 식별자, 함수를 포함 하는 어셈블리의 이름 및 인수를 전달 합니다. Blazor 서버 시나리오를 지원 하기 위해 비동기 버전이 선호 됩니다. JavaScript에서 .net 메서드를 호출 하려면 .net 메서드가 public, static 및 특성을 `[JSInvokable]` 가져야 합니다. 기본적으로 메서드 식별자는 메서드 이름 이지만 생성자를 `JSInvokableAttribute` 사용 하 여 다른 식별자를 지정할 수 있습니다. Open 제네릭 메서드를 호출 하는 것은 현재 지원 되지 않습니다.
 
 샘플 앱에는의 C# `int`배열을 반환 하는 메서드가 포함 되어 있습니다. `JSInvokable` 특성은 메서드에 적용 됩니다.
 
@@ -268,4 +268,4 @@ JS interop는 네트워킹 오류로 인해 실패할 수 있으며 신뢰할 �
       TimeSpan.FromSeconds({SECONDS}), new[] { "Arg1" });
   ```
 
-리소스 소모에 대 한 자세한 내용은을 <xref:security/blazor/server-side>참조 하십시오.
+리소스 소모에 대 한 자세한 내용은을 <xref:security/blazor/server>참조 하십시오.

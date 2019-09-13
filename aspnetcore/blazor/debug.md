@@ -7,18 +7,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/22/2019
 uid: blazor/debug
-ms.openlocfilehash: c3188a1fe1b699b787f7a95630f3918d295d0f68
-ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
+ms.openlocfilehash: e9477e504d32fd1dd5d6c87392386d1131f46e9f
+ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69974904"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70964003"
 ---
 # <a name="debug-aspnet-core-blazor"></a>디버그 ASP.NET Core Blazor
 
 [Daniel Roth](https://github.com/danroth27)
 
-*조기* 지원은 Blazor에서 실행 되는 클라이언트 쪽 앱을 디버그 하는 데 사용할 수 있습니다.
+*조기에* 지원 됩니다. Blazor weambmbomomomomommbommbommbommbommbommboma에서 실행 되는
 
 디버거 기능이 제한 됩니다. 사용 가능한 시나리오는 다음과 같습니다.
 
@@ -47,7 +47,7 @@ ms.locfileid: "69974904"
 
 ## <a name="procedure"></a>프로시저
 
-1. 구성에서 `Debug` Blazor 클라이언트 쪽 앱을 실행 합니다. `--configuration Debug`옵션을 [dotnetrun](/dotnet/core/tools/dotnet-run) 명령`dotnet run --configuration Debug`에 전달합니다.
+1. 구성에서 `Debug` Blazor weasembomapp를 실행 합니다. `--configuration Debug`옵션을 [dotnetrun](/dotnet/core/tools/dotnet-run) 명령`dotnet run --configuration Debug`에 전달합니다.
 1. 브라우저에서 앱에 액세스 합니다.
 1. 개발자 도구 패널이 아닌 앱에 키보드 포커스를 둡니다. 디버깅을 시작할 때 개발자 도구 패널을 닫을 수 있습니다.
 1. 다음 Blazor 바로 가기 키를 선택 합니다.

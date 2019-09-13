@@ -7,31 +7,31 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/13/2019
 uid: blazor/call-web-api
-ms.openlocfilehash: 60ebd01bc07da22cd1dcd0b16297ee54c97867fc
-ms.sourcegitcommit: f5f0ff65d4e2a961939762fb00e654491a2c772a
+ms.openlocfilehash: 152a2d5ac9a4325592ca414e9ea5e70c947d079f
+ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/15/2019
-ms.locfileid: "69030385"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70963700"
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>ASP.NET Core Blazor에서 web API 호출
 
 By [Luke Latham](https://github.com/guardrex) 및 [Daniel Roth](https://github.com/danroth27)
 
-Blazor 클라이언트 쪽 앱은 미리 구성 `HttpClient` 된 서비스를 사용 하 여 web api를 호출 합니다. Blazor JSON 도우미를 사용 하거나를 <xref:System.Net.Http.HttpRequestMessage>사용 하 여 JavaScript [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 옵션을 포함할 수 있는 요청을 작성 합니다.
+Blazor weasembomapps는 미리 구성 `HttpClient` 된 서비스를 사용 하 여 web api를 호출 합니다. Blazor JSON 도우미를 사용 하거나를 <xref:System.Net.Http.HttpRequestMessage>사용 하 여 JavaScript [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 옵션을 포함할 수 있는 요청을 작성 합니다.
 
-Blazor 서버 쪽 앱은 일반적으로를 사용 <xref:System.Net.Http.HttpClient> 하 여 <xref:System.Net.Http.IHttpClientFactory>만든 인스턴스를 사용 하 여 web api를 호출 합니다. 자세한 내용은 <xref:fundamentals/http-requests>을 참조하세요.
+Blazor 서버 앱은 일반적으로을 <xref:System.Net.Http.HttpClient> 사용 하 여 <xref:System.Net.Http.IHttpClientFactory>만든 인스턴스를 사용 하 여 web api를 호출 합니다 자세한 내용은 <xref:fundamentals/http-requests>을 참조하세요.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-Blazor 클라이언트 쪽 예제는 샘플 앱에서 다음 구성 요소를 참조 하세요.
+Blazor Weasemboma 예제는 샘플 앱에서 다음 구성 요소를 참조 하세요.
 
 * Web API 호출 (*Pages/CallWebAPI*)
 * HTTP 요청 테스터 (*구성 요소/HTTPRequestTester. razor*)
 
 ## <a name="httpclient-and-json-helpers"></a>HttpClient 및 JSON 도우미
 
-Blazor 클라이언트 쪽 응용 프로그램에서 [Httpclient](xref:fundamentals/http-requests) 는 다시 원본 서버로 요청을 만들기 위해 미리 구성 된 서비스로 사용할 수 있습니다. JSON 도우미 `HttpClient` 를 사용 하려면에 대 `Microsoft.AspNetCore.Blazor.HttpClient`한 패키지 참조를 추가 합니다. `HttpClient`및 JSON 도우미는 타사 웹 API 끝점을 호출 하는 데에도 사용 됩니다. `HttpClient`는 브라우저 [인출 API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 를 사용 하 여 구현 되며 동일한 원본 정책의 적용을 포함 하 여 해당 제한 사항이 적용 됩니다.
+Blazor Weasembomapps에서 [Httpclient](xref:fundamentals/http-requests) 는 다시 원본 서버로 요청을 만들기 위해 미리 구성 된 서비스로 사용할 수 있습니다. JSON 도우미 `HttpClient` 를 사용 하려면에 대 `Microsoft.AspNetCore.Blazor.HttpClient`한 패키지 참조를 추가 합니다. `HttpClient`및 JSON 도우미는 타사 웹 API 끝점을 호출 하는 데에도 사용 됩니다. `HttpClient`는 브라우저 [인출 API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 를 사용 하 여 구현 되며 동일한 원본 정책의 적용을 포함 하 여 해당 제한 사항이 적용 됩니다.
 
 클라이언트의 기본 주소가 원래 서버의 주소로 설정 됩니다. 지시문을 `HttpClient` 사용 하 여 `@inject` 인스턴스를 삽입 합니다.
 
@@ -151,7 +151,7 @@ JSON 도우미 메서드는 URI (다음 예제의 웹 API)에 요청을 보내�
 
 ## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>Fetch API 요청 옵션이 포함 된 HttpClient 및 HttpRequestMessage
 
-Blazor 클라이언트 쪽 앱에서 webassembly을 실행 하는 경우 [httpclient](xref:fundamentals/http-requests) 및 <xref:System.Net.Http.HttpRequestMessage> 를 사용 하 여 요청을 사용자 지정 합니다. 예를 들어 요청 URI, HTTP 메서드 및 원하는 요청 헤더를 지정할 수 있습니다.
+Blazor weambmbomembomommboma에서 실행 되는 경우 [httpclient](xref:fundamentals/http-requests) 및 <xref:System.Net.Http.HttpRequestMessage> 를 사용 하 여 요청을 사용자 지정 합니다. 예를 들어 요청 URI, HTTP 메서드 및 원하는 요청 헤더를 지정할 수 있습니다.
 
 요청에 대 한 속성을 `WebAssemblyHttpMessageHandler.FetchArgs` 사용 하 여 기본 JavaScript [인출 API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 에 요청 옵션을 제공 합니다. 다음 예제 `credentials` 와 같이 속성은 다음 값 중 하나로 설정 됩니다.
 

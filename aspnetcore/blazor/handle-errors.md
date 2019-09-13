@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/06/2019
 uid: blazor/handle-errors
-ms.openlocfilehash: 52f55af99881b09c84d9cf88f5845efcb1ea76a1
-ms.sourcegitcommit: 776367717e990bdd600cb3c9148ffb905d56862d
+ms.openlocfilehash: d3e261e83f375574339a8ce3428e8bfb73df4307
+ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/09/2019
-ms.locfileid: "68948453"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70963982"
 ---
 # <a name="handle-errors-in-aspnet-core-blazor-apps"></a>ASP.NET Core Blazor apps의 오류 처리
 
@@ -22,7 +22,7 @@ ms.locfileid: "68948453"
 
 ## <a name="how-the-blazor-framework-reacts-to-unhandled-exceptions"></a>Blazor framework가 처리 되지 않은 예외에 반응 하는 방법
 
-Blazor 서버 쪽은 상태 저장 프레임 워크입니다. 사용자가 앱과 상호 작용 하는 동안 *회로*라는 서버에 대 한 연결을 유지 합니다. 회로는 활성 구성 요소 인스턴스를 비롯 하 여 상태에 대 한 다른 많은 측면을 포함 합니다.
+Blazor 서버는 상태 저장 프레임 워크입니다. 사용자가 앱과 상호 작용 하는 동안 *회로*라는 서버에 대 한 연결을 유지 합니다. 회로는 활성 구성 요소 인스턴스를 비롯 하 여 상태에 대 한 다른 많은 측면을 포함 합니다.
 
 * 구성 요소의 가장 최근 렌더링 된 출력입니다.
 * 클라이언트 쪽 이벤트에 의해 트리거될 수 있는 현재 이벤트 처리 대리자 집합입니다.
@@ -225,4 +225,4 @@ Blazor 구성 요소는 미리 렌더링 된를 `Html.RenderComponentAsync` 사�
 
 잘못 된 수동 렌더링 트리 작성기 논리가 있으면 충돌, 서버 중단 및 보안 취약성을 포함 하 여 정의 되지 않은 임의의 동작이 발생할 수 있습니다.
 
-어셈블리 코드 또는 MSIL 명령을 직접 작성 하는 것과 동일한 수준의 복잡성과 동일한 수준의 복잡성 을 가진 수동 렌더링 트리 작성기 논리를 고려 합니다.
+어셈블리 코드 또는 MSIL 명령을 직접 작성 하 *는 것과 동일한 수준의* 복잡성과 동일한 수준의 복잡성을 가진 수동 렌더링 트리 작성기 논리를 고려 합니다.

@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/06/2019
 uid: blazor/dependency-injection
-ms.openlocfilehash: 0b48cd0cbe14d2b07627f56ab78611bbd3209fa1
-ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
+ms.openlocfilehash: 6c01fdc390cc9150cf81673c717b73c4b10c31f1
+ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/07/2019
-ms.locfileid: "70800388"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70963976"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core Blazor 종속성 주입
 
@@ -29,7 +29,7 @@ DI는 중앙 위치에 구성 된 서비스에 액세스 하기 위한 기술입
 
 기본 서비스는 앱의 서비스 컬렉션에 자동으로 추가 됩니다.
 
-| 서비스 | 수명 | Description |
+| 서비스 | 수명 | 설명 |
 | ------- | -------- | ----------- |
 | <xref:System.Net.Http.HttpClient> | Singleton | URI로 식별 되는 리소스에서 http 요청을 보내고 HTTP 응답을 받기 위한 메서드를 제공 합니다. 이 인스턴스 `HttpClient` 는 백그라운드에서 HTTP 트래픽을 처리 하는 데 브라우저를 사용 합니다. [BaseAddress](xref:System.Net.Http.HttpClient.BaseAddress) 는 앱의 기본 URI 접두사로 자동으로 설정 됩니다. 자세한 내용은 <xref:blazor/call-web-api>을 참조하세요. |
 | `IJSRuntime` | Singleton | JavaScript 호출이 디스패치되는 JavaScript 런타임의 인스턴스를 나타냅니다. 자세한 내용은 <xref:blazor/javascript-interop>을 참조하세요. |
@@ -59,9 +59,9 @@ public void ConfigureServices(IServiceCollection services)
 
 다음 표에 표시 된 수명을 사용 하 여 서비스를 구성할 수 있습니다.
 
-| 수명 | Description |
+| 수명 | 설명 |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped*> | Blazor Weasembomapps는 현재 DI 범위의 개념을가지고 있지 않습니다. `Scoped`-등록 된 서비스는 `Singleton` 서비스 처럼 작동 합니다. 그러나 서버 쪽 호스팅 모델은 `Scoped` 수명을 지원 합니다. Blazor Server 앱에서 범위가 지정 된 서비스 등록 범위는 *연결*로 지정 됩니다. 따라서 현재 사용자로 범위를 지정 해야 하는 서비스에 대해 범위 지정 서비스를 사용 하는 것이 좋습니다. 현재 의도는 브라우저에서 클라이언트 쪽을 실행 하는 경우에도 마찬가지입니다. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped*> | Blazor Weasembomapps는 현재 DI 범위의 개념을가지고 있지 않습니다. `Scoped`-등록 된 서비스는 `Singleton` 서비스 처럼 작동 합니다. 그러나 Blazor 서버 호스팅 모델은 `Scoped` 수명을 지원 합니다. Blazor Server 앱에서 범위가 지정 된 서비스 등록 범위는 *연결*로 지정 됩니다. 따라서 현재 사용자로 범위를 지정 해야 하는 서비스에 대해 범위 지정 서비스를 사용 하는 것이 좋습니다. 현재 의도는 브라우저에서 클라이언트 쪽을 실행 하는 경우에도 마찬가지입니다. |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton*> | DI는 서비스의 *단일 인스턴스* 를 만듭니다. 서비스를 필요로 하 `Singleton` 는 모든 구성 요소는 동일한 서비스의 인스턴스를 수신 합니다. |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient*> | 구성 요소가 서비스 컨테이너에서 `Transient` 서비스의 인스턴스를 가져올 때마다 서비스의 *새 인스턴스* 를 수신 합니다. |
 
