@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 08/21/2019
 uid: grpc/client
-ms.openlocfilehash: 27e4b3e7307ae49bacb01a46fbc1b55b6967c7a0
-ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
+ms.openlocfilehash: 56f79b303a8d53699e8eb6156d328c0da1259416
+ms.sourcegitcommit: dc5b293e08336dc236de66ed1834f7ef78359531
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/06/2019
-ms.locfileid: "70773687"
+ms.lasthandoff: 09/16/2019
+ms.locfileid: "71011140"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>.NET 클라이언트를 사용 하 여 gRPC 서비스 호출
 
@@ -45,6 +45,9 @@ var counterClient = new Count.CounterClient(channel);
 ```
 
 `GrpcChannel.ForAddress`는 gRPC 클라이언트를 만들기 위한 유일한 옵션은 아닙니다. ASP.NET Core 앱에서 gRPC 서비스를 호출 하는 경우 [grpc 클라이언트 팩터리 통합](xref:grpc/clientfactory)을 고려 합니다. grpc 통합 `HttpClientFactory` 은 grpc 클라이언트를 만드는 중앙의 대안을 제공 합니다.
+
+> [!NOTE]
+> [.Net 클라이언트를 사용 하 여 안전 하지 않은 gRPC 서비스를 호출](xref:grpc/troubleshoot#call-insecure-grpc-services-with-net-core-client)하려면 추가 구성이 필요 합니다.
 
 ## <a name="make-grpc-calls"></a>GRPC 호출 만들기
 
