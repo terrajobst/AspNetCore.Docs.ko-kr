@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/05/2019
 uid: host-and-deploy/blazor/index
-ms.openlocfilehash: 5a56bbda5bb7727c7dbeaed7f2a91d0dcb6e7e71
-ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
+ms.openlocfilehash: 26c8fcf56ab8ca68aeca93560785fc6c1144ab86
+ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/06/2019
-ms.locfileid: "70773594"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70963683"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor"></a>ASP.NET Core Blazor 호스트 및 배포
 
@@ -24,7 +24,7 @@ ms.locfileid: "70773594"
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. 탐색 모음에서 **빌드** > **{APPLICATION} 게시**를 선택합니다.
+1. 탐색 모음에서 **빌드** >  **{APPLICATION} 게시**를 선택합니다.
 1. *publish target*을 선택합니다. 로컬로 게시하려면 **폴더**를 선택합니다.
 1. **폴더 선택** 필드에서 기본 위치를 그대로 사용하거나 다른 위치를 지정합니다. **게시** 단추를 선택합니다.
 
@@ -40,7 +40,7 @@ dotnet publish -c Release
 
 앱을 게시하면 배포할 자산을 만들기 전에 프로젝트 종속성의 [복원](/dotnet/core/tools/dotnet-restore)과 프로젝트의 [빌드](/dotnet/core/tools/dotnet-build)가 트리거됩니다. 빌드 프로세스의 일부로 앱 다운로드 크기와 로드 시간을 줄이기 위해 사용하지 않는 메서드와 어셈블리를 제거합니다.
 
-Blazor 클라이언트 쪽 앱은 */bin/Release/{TARGET FRAMEWORK}/publish/{ASSEMBLY NAME}/dist* 폴더에 게시됩니다. Blazor 서버 쪽 앱은 */bin/Release/{TARGET FRAMEWORK}/publish* 폴더에 게시됩니다.
+Blazor WebAssembly 앱은 */bin/Release/{TARGET FRAMEWORK}/publish/{ASSEMBLY NAME}/dist* 폴더에 게시됩니다. Blazor 서버 앱은 */bin/Release/{TARGET FRAMEWORK}/publish* 폴더에 게시됩니다.
 
 이 폴더의 자산은 웹 서버에 배포됩니다. 배포는 사용 중인 개발 도구에 따라 수동 프로세스일 수도 있고 자동 프로세스일 수도 있습니다.
 
@@ -87,5 +87,5 @@ dotnet run --pathbase=/CoolApp
 
 배포 지침은 다음 항목을 참조하세요.
 
-* <xref:host-and-deploy/blazor/client-side>
-* <xref:host-and-deploy/blazor/server-side>
+* <xref:host-and-deploy/blazor/webassembly>
+* <xref:host-and-deploy/blazor/server>

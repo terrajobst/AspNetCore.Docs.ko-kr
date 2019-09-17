@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/01/2019
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: 9f5ecc7840fc7ffd9432a3bb67d0418efb7e8fd6
-ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
+ms.openlocfilehash: 261abae499a0d5f807a14aebd224949881067bc7
+ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69975623"
+ms.lasthandoff: 09/06/2019
+ms.locfileid: "70773805"
 ---
 # <a name="net-generic-host"></a>.NET 일반 호스트
 
@@ -98,14 +98,14 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 `ConfigureWebHostDefaults` 메서드는 다음 작업을 수행합니다.
 
 * 접두사가 "ASPNETCORE_"인 환경 변수에서 호스트 구성을 로드합니다.
-* [Kestrel](xref:fundamentals/servers/kestrel) 서버를 웹 서버로 설정하고 앱의 호스팅 구성 공급자를 사용하여 구성합니다. Kestrel 서버의 기본 옵션은 <xref:fundamentals/servers/kestrel#kestrel-options>을 참조합니다.
+* [Kestrel](xref:fundamentals/servers/kestrel) 서버를 웹 서버로 설정하고 앱의 호스팅 구성 공급자를 사용하여 구성합니다. Kestrel 서버의 기본 옵션은 <xref:fundamentals/servers/kestrel#kestrel-options>을 참조하세요.
 * [호스트 필터링 미들웨어](xref:fundamentals/servers/kestrel#host-filtering)를 추가합니다.
 * ASPNETCORE_FORWARDEDHEADERS_ENABLED=true인 경우 [전달된 헤더 미들웨어](xref:host-and-deploy/proxy-load-balancer#forwarded-headers)를 추가합니다.
-* IIS 통합을 사용합니다. IIS 기본 옵션은 <xref:host-and-deploy/iis/index#iis-options>를 참조합니다.
+* IIS 통합을 사용합니다. IIS 기본 옵션은 <xref:host-and-deploy/iis/index#iis-options>를 참조하세요.
 
 이 문서 뒷부분의 [모든 앱 유형에 대한 설정](#settings-for-all-app-types) 및 [웹앱 설정](#settings-for-web-apps) 섹션에서는 기본 작성기 설정을 재정의하는 방법을 보여줍니다.
 
-## <a name="framework-provided-services"></a>프레임워크에서 제공한 서비스
+## <a name="framework-provided-services"></a>프레임워크에서 제공하는 서비스
 
 자동으로 등록된 서비스에는 다음이 포함됩니다.
 
@@ -169,6 +169,8 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 ## <a name="settings-for-all-app-types"></a>모든 앱 유형에 대한 설정
 
 이 섹션에는 HTTP 및 비 HTTP 워크로드 모두에 적용되는 호스트 설정이 나열되어 있습니다. 기본적으로 이러한 설정을 구성하는 데 사용되는 환경 변수에는 `DOTNET_` 또는 `ASPNETCORE_` 접두사가 있을 수 있습니다.
+
+<!-- In the following sections, two spaces at end of line are used to force line breaks in the rendered page. -->
 
 ### <a name="applicationname"></a>ApplicationName
 
@@ -312,8 +314,9 @@ webBuilder.UseSetting(WebHostDefaults.HostingStartupExcludeAssembliesKey, "assem
 
 HTTPS 리디렉션 포트. [HTTPS 적용](xref:security/enforcing-ssl)에 사용됩니다.
 
-**키**: https_port **형식**: *문자열*
-**기본값**: 기본값은 설정되지 않습니다.
+**키**: https_port  
+**형식**: *string*  
+**기본값**: 기본값은 설정되지 않습니다.  
 **환경 변수**: `<PREFIX_>HTTPS_PORT`
 
 이 값을 설정하려면 구성을 사용하거나 `UseSetting`을 호출합니다.
@@ -356,7 +359,8 @@ webBuilder.UseSetting(WebHostDefaults.PreventHostingStartupKey, "true");
 
 `Startup` 클래스를 검색할 어셈블리입니다.
 
-**키**: startupAssembly **형식**: *string*  
+**키**: startupAssembly  
+**형식**: *string*  
 **기본값**: 앱의 어셈블리  
 **환경 변수**: `<PREFIX_>STARTUPASSEMBLY`
 
@@ -372,11 +376,11 @@ webBuilder.UseStartup<Startup>();
 
 ### <a name="urls"></a>URL
 
-서버에서 요청을 수신해야 하는 포트와 프로토콜을 포함하는 세미클론으로 구분된 IP 주소 또는 호스트 주소의 목록입니다. 예를 들어, `http://localhost:123`을 입력합니다. “\*”를 사용하여 서버가 지정된 포트 및 프로토콜을 사용하는 IP 주소 또는 호스트 이름에서 요청을 수신해야 함을 나타냅니다(예: `http://*:5000`). 프로토콜(`http://` 또는 `https://`)은 각 URL에 포함되어 있어야 합니다. 지원되는 형식은 서버마다 다릅니다.
+서버에서 요청을 수신해야 하는 포트와 프로토콜을 포함하는 세미클론으로 구분된 IP 주소 또는 호스트 주소의 목록입니다. 예: `http://localhost:123`. “\*”를 사용하여 서버가 지정된 포트 및 프로토콜을 사용하는 IP 주소 또는 호스트 이름에서 요청을 수신해야 함을 나타냅니다(예: `http://*:5000`). 프로토콜(`http://` 또는 `https://`)은 각 URL에 포함되어 있어야 합니다. 지원되는 형식은 서버마다 다릅니다.
 
 **키**: urls  
 **형식**: *string*  
-**기본값**: `http://localhost:5000` 및 `https://localhost:5001`
+**기본값**: `http://localhost:5000` 및 `https://localhost:5001`  
 **환경 변수**: `<PREFIX_>URLS`
 
 이 값을 설정하려면 환경 변수를 사용하거나 `UseUrls`를 호출합니다.
@@ -385,7 +389,7 @@ webBuilder.UseStartup<Startup>();
 webBuilder.UseUrls("http://*:5000;http://localhost:5001;https://hostname:5002");
 ```
 
-Kestrel에는 자체 엔드포인트 구성 API가 있습니다. 자세한 내용은 <xref:fundamentals/servers/kestrel#endpoint-configuration>을 참조하세요.
+Kestrel에는 자체 끝점 구성 API가 있습니다. 자세한 내용은 <xref:fundamentals/servers/kestrel#endpoint-configuration>을 참조하세요.
 
 ### <a name="webroot"></a>WebRoot
 
