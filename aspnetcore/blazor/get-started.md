@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/05/2019
 uid: blazor/get-started
-ms.openlocfilehash: e33ca421676caa20c823faf635442eda2a40ba65
-ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
+ms.openlocfilehash: cce91b6332295f77c639f881fe342b625fee7fca
+ms.sourcegitcommit: 92c901c7f32ee9efb335d99ec4c3add2cc9f3142
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/13/2019
-ms.locfileid: "70964008"
+ms.lasthandoff: 09/16/2019
+ms.locfileid: "71025514"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>ASP.NET Core Blazor 시작 하기
 
@@ -25,7 +25,7 @@ Blazor 시작 하기:
 1. 명령 셸에서 다음 명령을 실행 하 여 Blazor 템플릿을 설치 합니다.
 
    ```console
-   dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.0.0-preview9.19424.4
+   dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.0.0-preview9.19457.4
    ```
 
 1. 선택한 도구에 대 한 지침을 따르세요.
