@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/15/2019
 uid: getting-started
-ms.openlocfilehash: c35251a0e49fbbffee7b8f5ea6905322b9042261
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: d1edf91f1b37ba2b69732471dc6c1f306ac5ad24
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67814941"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081115"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>자습서: ASP.NET Core 시작
 
@@ -37,7 +37,7 @@ ms.locfileid: "67814941"
 
 명령 셸을 열고 다음 명령을 입력합니다.
 
-```console
+```dotnetcli
 dotnet new webapp -o aspnetcoreapp
 ```
 
@@ -47,7 +47,7 @@ HTTPS 개발 인증서 신뢰:
 
 # <a name="windowstabwindows"></a>[Windows](#tab/windows)
 
-```console
+```dotnetcli
 dotnet dev-certs https --trust
 ```
 
@@ -59,7 +59,7 @@ dotnet dev-certs https --trust
 
 # <a name="macostabmacos"></a>[macOS](#tab/macos)
 
-```console
+```dotnetcli
 dotnet dev-certs https --trust
 ```
 
@@ -83,7 +83,7 @@ HTTPS 개발 인증서를 신뢰하는 방법은 Linux 배포에 대한 설명�
 
 다음 명령을 실행합니다.
 
-```console
+```dotnetcli
 cd aspnetcoreapp
 dotnet run
 ```

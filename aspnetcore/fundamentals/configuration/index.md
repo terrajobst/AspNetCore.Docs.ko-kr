@@ -7,16 +7,16 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/12/2019
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 5723295c70f8d893f758ca5dc87180c6b707f493
-ms.sourcegitcommit: 89fcc6cb3e12790dca2b8b62f86609bed6335be9
+ms.openlocfilehash: 0de2222e8072523ff0e5d261a9fe5ef8eb9a7606
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/13/2019
-ms.locfileid: "68994150"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081814"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core의 구성
 
-[Luke Latham](https://github.com/guardrex)으로
+작성자: [Luke Latham](https://github.com/guardrex)
 
 ASP.NET Core의 앱 구성은 ‘구성 공급자’가 설정한 키-값 쌍을 기반으로 합니다.  구성 공급자는 다양한 구성 소스에서 구성 데이터를 키-값 쌍으로 읽어 들입니다.
 
@@ -106,7 +106,7 @@ using Microsoft.Extensions.Configuration;
 * 개발 또는 테스트 환경에서 프로덕션 비밀을 사용하지 마세요.
 * 의도치 않게 소스 코드 리포지토리에 커밋되는 일이 없도록 프로젝트 외부에서 비밀을 지정하세요.
 
-자세한 내용은 다음 항목을 참조하십시오.
+자세한 내용은 다음 항목을 참조하세요.
 
 * <xref:fundamentals/environments>
 * <xref:security/app-secrets> &ndash; 환경 변수를 사용하여 중요한 데이터를 저장하는 방법에 대한 조언을 포함합니다. 비밀 관리자는 파일 구성 공급자를 사용하여 사용자 비밀을 로컬 시스템의 JSON 파일에 저장합니다. 파일 구성 공급자에 대해서는 이 항목의 뒷부분에서 설명합니다.
@@ -168,7 +168,7 @@ public class IndexModel : PageModel
 
 구성 공급자는 호스트에서 설정될 때 DI가 제공되지 않으므로 DI를 활용할 수 없습니다.
 
-### <a name="keys"></a>구성
+### <a name="keys"></a>키
 
 구성키는 다음 규칙을 따릅니다.
 
@@ -354,7 +354,7 @@ ASP.NET Core 템플릿을 기반으로 하는 앱의 경우 `AddCommandLine`은 
 
 명령 예:
 
-```console
+```dotnetcli
 dotnet run CommandLineKey1=value1 --CommandLineKey2=value2 /CommandLineKey3=value3
 dotnet run --CommandLineKey1 value1 /CommandLineKey2 value2
 dotnet run CommandLineKey1= CommandLineKey2=value2
@@ -402,7 +402,7 @@ public static readonly Dictionary<string, string> _switchMappings =
 
 앱을 시작할 때 스위치 매핑된 키가 사용되는 경우 구성은 사전에서 제공하는 키의 구성 값을 수신합니다.
 
-```console
+```dotnetcli
 dotnet run -CLKey1=value1 -CLKey2=value2
 ```
 
@@ -871,7 +871,7 @@ var configSection = _config.GetSection("section2");
 var children = configSection.GetChildren();
 ```
 
-### <a name="exists"></a>exists
+### <a name="exists"></a>있음
 
 [ConfigurationExtensions.Exists](xref:Microsoft.Extensions.Configuration.ConfigurationExtensions.Exists*)를 사용하면 구성 섹션이 있는지 확인할 수 있습니다.
 
@@ -1088,7 +1088,7 @@ _config.GetSection("array").Bind(arrayExample);
 }
 ```
 
-`ConfigureAppConfiguration`:
+`ConfigureAppConfiguration`의 경우
 
 ```csharp
 config.AddJsonFile(
@@ -1315,8 +1315,8 @@ MVC 뷰에서:
 
 ## <a name="add-configuration-from-an-external-assembly"></a>외부 어셈블리의 구성 추가
 
-<xref:Microsoft.AspNetCore.Hosting.IHostingStartup>구현에서는 시작 시 앱의 `Startup` 클래스 외부에 있는 외부 어셈블리에서 앱에 향상된 기능을 추가할 수 있습니다. 자세한 내용은 <xref:fundamentals/configuration/platform-specific-configuration>을 참조하세요.
+<xref:Microsoft.AspNetCore.Hosting.IHostingStartup> 구현은 시작 시 앱의 `Startup` 클래스 외부에 있는 외부 어셈블리에서 앱에 향상된 기능을 추가할 수 있습니다. 자세한 내용은 <xref:fundamentals/configuration/platform-specific-configuration>을 참조하세요.
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:fundamentals/configuration/options>
