@@ -1,40 +1,40 @@
 ---
 title: ASP.NET Core의 웹 서버 구현
-author: guardrex
-description: ASP.NET Core의 웹 서버 Kestrel 및 HTTP.sys를 알아봅니다. 서버를 선택하는 방법 및 역방향 프록시 서버를 사용하는 시기에 대해 알아봅니다.
+author: tdykstra
+description: ASP.NET Core의 웹 서버 Kestrel 및 HTTP.sys를 검색합니다. 서버를 선택하는 방법 및 역방향 프록시 서버를 사용하는 시기에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/01/2019
+ms.date: 08/10/2019
 uid: fundamentals/servers/index
-ms.openlocfilehash: 404fec18409a675981fc0c068ee9a99001e06c16
-ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
+ms.openlocfilehash: cfea559725a644f167aa3afdf88c78bace4b5950
+ms.sourcegitcommit: dc5b293e08336dc236de66ed1834f7ef78359531
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69975541"
+ms.lasthandoff: 09/16/2019
+ms.locfileid: "71011147"
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>ASP.NET Core의 웹 서버 구현
 
 작성자: [Tom Dykstra](https://github.com/tdykstra), [Steve Smith](https://ardalis.com/), [Stephen Halter](https://twitter.com/halter73) 및 [Chris Ross](https://github.com/Tratcher)
 
-ASP.NET Core 앱은 In-Process HTTP 서버 구현을 사용하여 실행됩니다. 서버 구현은 HTTP 요청을 수신하고 <xref:Microsoft.AspNetCore.Http.HttpContext>에 구성된 일련의 [요청 기능](xref:fundamentals/request-features)으로 앱에 표시합니다.
+ASP.NET Core 앱은 In-process HTTP 서버 구현을 사용하여 실행됩니다. 서버 구현은 HTTP 요청을 수신하고 <xref:Microsoft.AspNetCore.Http.HttpContext>에 구성된 일련의 [요청 기능](xref:fundamentals/request-features)으로 앱에 표시합니다.
 
 ## <a name="kestrel"></a>Kestrel
 
 Kestrel은 ASP.NET Core 프로젝트 템플릿에 포함된 기본 웹 서버입니다.
 
-다음과 같이 Kestrel을 사용할 수 있습니다.
+Kestrel 사용:
 
-* 인터넷을 포함한 네트워크의 요청을 직접 처리하는 에지 서버로 단독 사용합니다.
+* 인터넷을 포함한 네트워크로부터 직접 요청을 처리하는 에지 서버로서 단독으로 사용
 
-  ![Kestrel이 역방향 프록시 서버 없이 직접 인터넷과 통신합니다.](kestrel/_static/kestrel-to-internet2.png)
+  ![Kestrel은 역방향 프록시 서버 없이 직접 인터넷과 통신합니다.](kestrel/_static/kestrel-to-internet2.png)
 
-* [IIS(인터넷 정보 서비스)](https://www.iis.net/), [Nginx](https://nginx.org) 또는 [Apache](https://httpd.apache.org/) 같은 *역방향 프록시 서버*와 함께 사용합니다. 역방향 프록시 서버는 인터넷에서 HTTP 요청을 받아서 Kestrel에 전달합니다.
+* [IIS(인터넷 정보 서비스)](https://www.iis.net/), [Nginx](https://nginx.org) 또는 [Apache](https://httpd.apache.org/)와 같은 *역방향 프록시 서버*와 함께 사용 역방향 프록시 서버는 인터넷에서 HTTP 요청을 받아서 Kestrel에 전달합니다.
 
-  ![Kestrel이 IIS, Nginx 또는 Apache 같은 역방향 프록시 서버를 통해 간접적으로 인터넷과 통신합니다.](kestrel/_static/kestrel-to-internet.png)
+  ![Kestrel은 IIS, Nginx 또는 Apache 같은 역방향 프록시 서버를 통해 간접적으로 인터넷과 통신합니다.](kestrel/_static/kestrel-to-internet.png)
 
-역방향 프록시 서버를 사용하는 호스팅 구성과 사용하지 않는 호스팅 구성 모두 ASP.NET Core 2.1 이상의 앱에서 지원됩니다.
+&mdash;역방향 프록시 서버가 있는 구성과 없는 구성 모두&mdash; 지원되는 호스팅 구성입니다.
 
 Kestrel을 역방향 프록시 구성에서 사용하는 경우에 대한 Kestrel 구성 지침 및 정보는 <xref:fundamentals/servers/kestrel>을 참조하세요.
 
@@ -44,22 +44,22 @@ Kestrel을 역방향 프록시 구성에서 사용하는 경우에 대한 Kestre
 
 ASP.NET Core는 다음과 함께 제공됩니다.
 
-* [Kestrel 서버](xref:fundamentals/servers/kestrel)는 기본 플랫폼 간 HTTP 서버 구현입니다.
-* IIS HTTP 서버는 IIS의 [In-Process 서버](#hosting-models)입니다.
+* [Kestrel 서버](xref:fundamentals/servers/kestrel)는 플랫폼 간 기본 HTTP 서버를 구현한 것입니다.
+* IIS HTTP 서버는 IIS의 [In-process 서버](#hosting-models)입니다.
 * [HTTP.sys 서버](xref:fundamentals/servers/httpsys)는 [Http.Sys 커널 드라이버 및 HTTP Server API](/windows/desktop/Http/http-api-start-page)를 기반으로 하는 Windows 전용 HTTP 서버입니다.
 
-[IIS](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture) 또는 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)를 사용하는 경우 앱은 다음 중 하나에서 실행됩니다.
+[IIS](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture) 또는 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)를 사용하는 경우 앱은 다음 중 하나를 실행합니다.
 
-* IIS 작업자 프로세스와 동일한 프로세스에서 IIS HTTP 서버를 사용하여 실행됩니다([In-Process 호스팅 모델](#hosting-models)). *In-Process*가 권장되는 구성입니다.
-* IIS 작업자 프로세스와 다른 별도의 프로세스에서 [Kestrel 서버](#kestrel)를 사용하여 실행됩니다([Out-of-Process 호스팅 모델](#hosting-models)). 
+* IIS HTTP 서버를 사용하는 IIS 작업자 프로세스([In Process 호스팅 모델](#hosting-models))와 동일한 프로세스에서 권장되는 구성은 *In process*입니다.
+* [Kestrel 서버](#kestrel)를 사용하는 IIS 작업자 프로세스([out-of-process 호스팅 모델](#hosting-models))와 다른 별도의 프로세스에서
 
-[ASP.NET Core 모듈](xref:host-and-deploy/aspnet-core-module)은 IIS와 In-Process IIS HTTP 서버 또는 Kestrel 간의 네이티브 IIS 요청을 처리하는 네이티브 IIS 모듈입니다. 자세한 내용은 <xref:host-and-deploy/aspnet-core-module>을 참조하세요.
+[ASP.NET Core 모듈](xref:host-and-deploy/aspnet-core-module)은 IIS와 In-process IIS HTTP 서버 또는 Kestrel 간의 네이티브 IIS 요청을 처리하는 네이티브 IIS 모듈입니다. 자세한 내용은 <xref:host-and-deploy/aspnet-core-module>을 참조하세요.
 
 ## <a name="hosting-models"></a>호스팅 모델
 
-In-Process 호스팅을 사용하면 ASP.NET Core 앱은 IIS 작업자 프로세스와 동일한 프로세스에서 실행됩니다. 요청이 나가는 네트워크 트래픽을 동일한 머신에 다시 반환하는 네트워크 인터페이스인 루프백 어댑터를 통해 프록시되지 않기 때문에 In-Process 호스팅이 Out-of-Process 호스팅보다 향상된 성능을 제공합니다. IIS는 [Windows Process Activation Service(WAS)](/iis/manage/provisioning-and-managing-iis/features-of-the-windows-process-activation-service-was)를 사용하여 프로세스 관리를 처리합니다.
+In-Process 호스팅을 사용하면 ASP.NET Core 앱은 IIS 작업자 프로세스와 동일한 프로세스에서 실행됩니다. 나가는 네트워크 트래픽을 동일한 머신에 다시 반환하는 네트워크 인터페이스인 루프백 어댑터를 통해 요청이 프록시되지 않기 때문에 In Process 호스팅에서는 Out-of-process 호스팅을 통해 성능을 개선합니다. IIS는 [Windows Process Activation Service(WAS)](/iis/manage/provisioning-and-managing-iis/features-of-the-windows-process-activation-service-was)를 사용하여 프로세스 관리를 처리합니다.
 
-Out-of-Process 호스팅을 사용하면 ASP.NET Core 앱은 IIS 작업자 프로세스와 별도의 프로세스에서 실행되고, 모듈이 프로세스 관리를 수행합니다. 모듈은 첫 번째 요청이 들어올 때 ASP.NET Core 앱용 프로세스를 시작하고 종료되거나 충돌이 발생하면 앱을 다시 시작합니다. 이는 [Windows Process Activation Service(WAS)](/iis/manage/provisioning-and-managing-iis/features-of-the-windows-process-activation-service-was)로 관리되는 In-Process로 실행되는 앱에서 볼 수 있는 동작과 기본적으로 동일합니다.
+Out-of-Process 호스팅을 사용하여 ASP.NET Core 앱은 IIS 작업자 프로세스와 별도의 프로세스에서 실행되고, 이 모듈은 프로세스 관리를 수행합니다. 이 모듈은 첫 번째 요청이 들어올 때 ASP.NET Core 앱용 프로세스를 시작하고 종료되거나 충돌이 발생하면 앱을 다시 시작합니다. 이는 [Windows Process Activation Service(WAS)](/iis/manage/provisioning-and-managing-iis/features-of-the-windows-process-activation-service-was)로 관리되는 In-Process로 실행되는 앱에서 볼 수 있는 동작과 기본적으로 동일합니다.
 
 자세한 내용 및 구성 지침은 다음 항목을 참조하세요.
 
@@ -87,9 +87,9 @@ ASP.NET Core는 다음과 함께 제공됩니다.
 * [Kestrel](xref:fundamentals/servers/kestrel) 서버는 기본 플랫폼 간 HTTP 서버입니다.
 * [HTTP.sys 서버](xref:fundamentals/servers/httpsys)는 [Http.Sys 커널 드라이버 및 HTTP Server API](/windows/desktop/Http/http-api-start-page)를 기반으로 하는 Windows 전용 HTTP 서버입니다.
 
-[IIS](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture) 또는 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)를 사용하면 앱이 [Kestrel 서버](#kestrel)를 사용하여 IIS 작업자 프로세스와 다른 별도의 프로세스에서(*Out-of-Process*) 실행됩니다.
+[IIS](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture) 또는 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)를 사용하면 앱이 [Kestrel 서버](#kestrel)를 사용하는 IIS 작업자 프로세스(*out-of-process*)와 다른 별도의 프로세스에서 실행됩니다.
 
-ASP.NET Core 앱은 IIS 작업자 프로세스와 별도의 프로세스에서 실행되므로 모듈이 프로세스 관리를 수행합니다. 모듈은 첫 번째 요청이 들어올 때 ASP.NET Core 앱용 프로세스를 시작하고 종료되거나 충돌이 발생하면 앱을 다시 시작합니다. 이는 [Windows Process Activation Service(WAS)](/iis/manage/provisioning-and-managing-iis/features-of-the-windows-process-activation-service-was)로 관리되는 In-Process로 실행되는 앱에서 볼 수 있는 동작과 기본적으로 동일합니다.
+ASP.NET Core 앱은 IIS 작업자 프로세스와 별도의 프로세스에서 실행되므로 이 모듈은 프로세스 관리를 수행합니다. 이 모듈은 첫 번째 요청이 들어올 때 ASP.NET Core 앱용 프로세스를 시작하고 종료되거나 충돌이 발생하면 앱을 다시 시작합니다. 이는 [Windows Process Activation Service(WAS)](/iis/manage/provisioning-and-managing-iis/features-of-the-windows-process-activation-service-was)로 관리되는 In-Process로 실행되는 앱에서 볼 수 있는 동작과 기본적으로 동일합니다.
 
 다음 다이어그램은 IIS, ASP.NET Core 모듈 및 Out-of-Process에 호스트된 앱 간의 관계를 보여 줍니다.
 
@@ -128,7 +128,7 @@ Linux에서 Kestrel에 대한 역방향 프록시 서버로 Apache를 사용하�
 
 ## <a name="httpsys"></a>HTTP.sys
 
-Windows에서 ASP.NET Core 앱을 실행할 경우 Kestrel 대신 HTTP.sys를 사용할 수 있습니다. 최상의 성능을 위해 일반적으로 Kestrel을 사용하는 것이 좋습니다. 앱이 인터넷에 노출되고 필수 기능이 Kestrel이 아닌 HTTP.sys에서 지원되는 시나리오에서 HTTP.sys를 사용할 수 있습니다. 자세한 내용은 <xref:fundamentals/servers/httpsys>을 참조하세요.
+Windows에서 ASP.NET Core 앱을 실행할 경우 Kestrel 대신 HTTP.sys를 사용할 수 있습니다. 최상의 성능을 위해 일반적으로 Kestrel을 사용하는 것이 좋습니다. 앱이 인터넷에 노출되고 필수 기능이 Kestrel이 아닌 HTTP.sys에서 지원되는 경우 시나리오에서 HTTP.sys를 사용할 수 있습니다. 자세한 내용은 <xref:fundamentals/servers/httpsys>을 참조하세요.
 
 ![HTTP.sys는 인터넷과 직접 통신합니다.](httpsys/_static/httpsys-to-internet.png)
 
@@ -146,7 +146,7 @@ HTTP.sys 구성 지침은 <xref:fundamentals/servers/httpsys>를 참조하세요
 
 ## <a name="custom-servers"></a>사용자 지정 서버
 
-기본 제공 서버가 앱의 요구 사항을 충족하지 않으면 사용자 지정 서버 구현을 만들 수 있습니다. [OWIN(Open Web Interface for .NET) 가이드](xref:fundamentals/owin)에서는 [Nowin](https://github.com/Bobris/Nowin) 기반 <xref:Microsoft.AspNetCore.Hosting.Server.IServer> 구현을 작성하는 방법을 보여 줍니다. 앱이 사용하는 기능 인터페이스에만 구현이 필요하지만, 최소한 <xref:Microsoft.AspNetCore.Http.Features.IHttpRequestFeature> 및 <xref:Microsoft.AspNetCore.Http.Features.IHttpResponseFeature>는 지원되어야 합니다.
+기본 제공 서버가 앱의 요구 사항을 충족하지 않으면 사용자 지정 서버 구현을 만들 수 있습니다. [OWIN(Open Web Interface for .NET) 가이드](xref:fundamentals/owin)에서는 [Nowin](https://github.com/Bobris/Nowin) 기반 <xref:Microsoft.AspNetCore.Hosting.Server.IServer> 구현을 작성하는 방법을 보여 줍니다. 앱이 사용하는 기능 인터페이스에만 구현이 필요합니다. 최소한 <xref:Microsoft.AspNetCore.Http.Features.IHttpRequestFeature> 및 <xref:Microsoft.AspNetCore.Http.Features.IHttpResponseFeature>가 지원되어야 합니다.
 
 ## <a name="server-startup"></a>서버 시작
 
@@ -160,7 +160,7 @@ IDE(통합 개발 환경)이나 편집기가 앱을 시작하는 경우 서버�
 
 ## <a name="http2-support"></a>HTTP/2 지원
 
-[HTTP/2](https://httpwg.org/specs/rfc7540.html)는 다음과 같은 배포 시나리오에서 ASP.NET Core에서 지원됩니다.
+[HTTP/2](https://httpwg.org/specs/rfc7540.html)는 다음과 같은 배포 시나리오에서 ASP.NET Core를 통해 지원됩니다.
 
 ::: moniker range=">= aspnetcore-2.2"
 
@@ -168,18 +168,18 @@ IDE(통합 개발 환경)이나 편집기가 앱을 시작하는 경우 서버�
   * 운영 체제
     * Windows Server 2016/Windows 10 이상&dagger;
     * Linux 및 OpenSSL 1.0.2 이상(예: Ubuntu 16.04 이상)
-    * macOS에서는 이후 릴리스에서 HTTP/2가 지원됩니다.
+    * 이후 릴리스에서는 macOS에서 HTTP/2가 지원됩니다.
   * 대상 프레임워크: .NET Core 2.2 이상
 * [HTTP.sys](xref:fundamentals/servers/httpsys#http2-support)
   * Windows Server 2016/Windows 10 이상
-  * 대상 프레임워크: HTTP.sys 배포에는 적용되지 않습니다.
+  * 대상 프레임워크: HTTP.sys 배포에는 적용할 수 없습니다.
 * [IIS(In-Process)](xref:host-and-deploy/iis/index#http2-support)
   * Windows Server 2016/Windows 10 이상, IIS 10 이상
   * 대상 프레임워크: .NET Core 2.2 이상
-* [IIS(Out-of-Process)](xref:host-and-deploy/iis/index#http2-support)
+* [IIS(Out-of-process)](xref:host-and-deploy/iis/index#http2-support)
   * Windows Server 2016/Windows 10 이상, IIS 10 이상
-  * 공개 에지 서버 연결은 HTTP/2를 사용하지만 Kestrel에 대한 역방향 프록시 연결은 HTTP/1.1을 사용합니다.
-  * 대상 프레임워크: IIS Out-of-Process 배포에는 적용되지 않습니다.
+  * 공용 에지 서버 연결은 HTTP/2를 사용하지만 Kestrel에 대한 역방향 프록시 연결은 HTTP/1.1을 사용합니다.
+  * 대상 프레임워크: IIS Out-of-process 배포에는 적용할 수 없습니다.
 
 &dagger;Kestrel은 Windows Server 2012 R2와 Windows 8.1에서의 HTTP/2 지원을 제한했습니다. 이러한 운영 체제에서 사용할 수 있는 지원 가능 TLS 암호 그룹 목록이 제한되므로 지원이 제한됩니다. TLS 연결을 보호하는 데 ECDSA(타원 곡선 디지털 서명 알고리즘)를 사용하여 생성된 인증서가 필요할 수 있습니다.
 
@@ -189,11 +189,11 @@ IDE(통합 개발 환경)이나 편집기가 앱을 시작하는 경우 서버�
 
 * [HTTP.sys](xref:fundamentals/servers/httpsys#http2-support)
   * Windows Server 2016/Windows 10 이상
-  * 대상 프레임워크: HTTP.sys 배포에는 적용되지 않습니다.
-* [IIS(Out-of-Process)](xref:host-and-deploy/iis/index#http2-support)
+  * 대상 프레임워크: HTTP.sys 배포에는 적용할 수 없습니다.
+* [IIS(Out-of-process)](xref:host-and-deploy/iis/index#http2-support)
   * Windows Server 2016/Windows 10 이상, IIS 10 이상
   * 공용 에지 서버 연결은 HTTP/2를 사용하지만 Kestrel에 대한 역방향 프록시 연결은 HTTP/1.1을 사용합니다.
-  * 대상 프레임워크: IIS Out-of-Process 배포에는 적용되지 않습니다.
+  * 대상 프레임워크: IIS Out-of-process 배포에는 적용할 수 없습니다.
 
 ::: moniker-end
 
