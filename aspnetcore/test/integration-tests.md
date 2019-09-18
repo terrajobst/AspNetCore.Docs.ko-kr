@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/23/2019
 uid: test/integration-tests
-ms.openlocfilehash: 195acd3e03f3de63ebd61767f2c86d1c0f38fca5
-ms.sourcegitcommit: 983b31449fe398e6e922eb13e9eb6f4287ec91e8
+ms.openlocfilehash: 272f0f2140647dd31319f8feada0ec04c7ab4e44
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/24/2019
-ms.locfileid: "70017440"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71082494"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>ASP.NET Core의 통합 테스트
 
@@ -68,7 +68,7 @@ ASP.NET Core의 통합 테스트에는 다음이 필요 합니다.
 * 테스트 프로젝트는 SUT에 대 한 테스트 웹 호스트를 만들고 테스트 서버 클라이언트를 사용 하 여 SUT에 대 한 요청 및 응답을 처리 합니다.
 * Test runner는 테스트를 실행 하 고 테스트 결과를 보고 하는 데 사용 됩니다.
 
-통합 테스트는 일반적인 *정렬*, 작업 및 *어설션* 테스트 단계를 포함하는 이벤트 시퀀스를 따릅니다.
+통합 테스트는 일반적인 *정렬*, 작업 및 *어설션* 테스트 *단계를 포함*하는 이벤트 시퀀스를 따릅니다.
 
 1. SUT의 웹 호스트가 구성 되어 있습니다.
 1. 앱에 요청을 제출 하는 테스트 서버 클라이언트가 만들어집니다.
@@ -104,7 +104,7 @@ Razor Pages 앱과 MVC 앱의 테스트에 대 한 구성의 차이는 거의 �
   * [Microsoft.AspNetCore.Mvc.Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/)
 * 프로젝트 파일 (`<Project Sdk="Microsoft.NET.Sdk.Web">`)에 웹 SDK를 지정 합니다. 웹 SDK는 [AspNetCore 메타 패키지](xref:fundamentals/metapackage-app)를 참조할 때 필요 합니다.
 
-이러한 필수 구성 요소는 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/)에서 볼 수 있습니다. *테스트/RazorPagesProject* . 테스트/razor 프로젝트. .csproj 파일을 검사 합니다. 샘플 앱은 [Xunit](https://xunit.github.io/) 테스트 프레임 워크 및 [AngleSharp](https://anglesharp.github.io/) 파서 라이브러리를 사용 하므로 샘플 앱은 다음을 참조 합니다.
+이러한 필수 구성 요소는 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/)에서 볼 수 있습니다. *테스트/RazorPagesProject. 테스트/razor*  프로젝트. .csproj 파일을 검사 합니다. 샘플 앱은 [Xunit](https://xunit.github.io/) 테스트 프레임 워크 및 [AngleSharp](https://anglesharp.github.io/) 파서 라이브러리를 사용 하므로 샘플 앱은 다음을 참조 합니다.
 
 * [xunit](https://www.nuget.org/packages/xunit/)
 * [xunit.runner.visualstudio](https://www.nuget.org/packages/xunit.runner.visualstudio/)
@@ -311,7 +311,7 @@ Visual Studio를 사용 하는 경우 파일의 **출력 디렉터리로 복사*
 
 [Visual Studio](https://visualstudio.microsoft.com)와 같은 IDE의 기본 제공 테스트 기능을 사용 하 여 테스트를 실행할 수 있습니다. [Visual Studio Code](https://code.visualstudio.com/) 또는 명령줄을 사용 하는 경우 *테스트/RazorPagesProject. 테스트* 디렉터리의 명령 프롬프트에서 다음 명령을 실행 합니다.
 
-```console
+```dotnetcli
 dotnet test
 ```
 

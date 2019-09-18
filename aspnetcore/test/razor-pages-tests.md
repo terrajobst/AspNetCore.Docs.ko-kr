@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/14/2019
 uid: test/razor-pages-tests
-ms.openlocfilehash: 35feb5dd95fa79ceca7ff03523cef30d29ccbdd3
-ms.sourcegitcommit: 476ea5ad86a680b7b017c6f32098acd3414c0f6c
+ms.openlocfilehash: afac97d686ef190ebb92d20a55a15dd774b0d1de
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/14/2019
-ms.locfileid: "69022568"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081435"
 ---
 # <a name="razor-pages-unit-tests-in-aspnet-core"></a>ASP.NET Core에서 단위 테스트 Razor Pages
 
@@ -37,14 +37,14 @@ ASP.NET Core Razor Pages 앱의 단위 테스트를 지원 합니다. DAL (데�
 
 샘플 프로젝트는 다음과 같은 두 개의 앱으로 구성 됩니다.
 
-| 앱         | 프로젝트 폴더                     | 설명 |
+| 앱         | 프로젝트 폴더                     | Description |
 | ----------- | ---------------------------------- | ----------- |
 | 메시지 앱 | *src/RazorPagesTestSample*         | 사용자가 메시지를 추가 하 고, 메시지 하나를 삭제 하 고, 모든 메시지를 삭제 하 고, 메시지를 분석할 수 있도록 허용 합니다 (메시지당 평균 단어 수를 확인). |
 | 응용 프로그램 테스트    | *tests/RazorPagesTestSample.Tests* | 메시지 앱의 DAL 및 인덱스 페이지 모델을 단위 테스트 하는 데 사용 됩니다. |
 
 [Visual Studio](/visualstudio/test/unit-test-your-code) 또는 [MAC용 VISUAL STUDIO](/dotnet/core/tutorials/using-on-mac-vs-full-solution)와 같은 IDE의 기본 제공 테스트 기능을 사용 하 여 테스트를 실행할 수 있습니다. [Visual Studio Code](https://code.visualstudio.com/) 또는 명령줄을 사용 하는 경우 *테스트/RazorPagesTestSample. 테스트* 폴더의 명령 프롬프트에서 다음 명령을 실행 합니다.
 
-```console
+```dotnetcli
 dotnet test
 ```
 
@@ -77,7 +77,7 @@ dotnet test
 
 메시지 앱에는 `AppDbContext` 클래스 (*src/razorpagestestsample/Data/AppDbContext*)에 포함 된 네 개의 메서드가 있는 DAL이 있습니다. 각 메서드에는 테스트 앱에 하나 또는 두 개의 단위 테스트가 있습니다.
 
-| DAL 메서드               | 함수                                                                   |
+| DAL 메서드               | 기능                                                                   |
 | ------------------------ | -------------------------------------------------------------------------- |
 | `GetMessagesAsync`       | 속성`Text` 을 `List<Message>` 기준으로 정렬 된 데이터베이스에서을 가져옵니다. |
 | `AddMessageAsync`        | 데이터베이스에 `Message` 를 추가 합니다.                                          |
@@ -148,7 +148,7 @@ using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
 
 다른 단위 테스트 집합은 페이지 모델 메서드의 테스트를 담당 합니다. 메시지 앱에서 인덱스 페이지 모델은 `IndexModel` *src/razorpagestestsample/Pages/Index. cshtml*의 클래스에서 찾을 수 있습니다.
 
-| 페이지 모델 메서드 | 함수 |
+| 페이지 모델 메서드 | 기능 |
 | ----------------- | -------- |
 | `OnGetAsync` | 메서드를 `GetMessagesAsync` 사용 하 여 UI에 대 한 DAL에서 메시지를 가져옵니다. |
 | `OnPostAddMessageAsync` | [Modelstate](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary) 가 올바르면를 호출 `AddMessageAsync` 하 여 데이터베이스에 메시지를 추가 합니다. |
@@ -228,7 +228,7 @@ ASP.NET Core Razor Pages 앱의 단위 테스트를 지원 합니다. DAL (데�
 
 [Visual Studio](/visualstudio/test/unit-test-your-code) 또는 [MAC용 VISUAL STUDIO](/dotnet/core/tutorials/using-on-mac-vs-full-solution)와 같은 IDE의 기본 제공 테스트 기능을 사용 하 여 테스트를 실행할 수 있습니다. [Visual Studio Code](https://code.visualstudio.com/) 또는 명령줄을 사용 하는 경우 *테스트/RazorPagesTestSample. 테스트* 폴더의 명령 프롬프트에서 다음 명령을 실행 합니다.
 
-```console
+```dotnetcli
 dotnet test
 ```
 
@@ -261,7 +261,7 @@ dotnet test
 
 메시지 앱에는 `AppDbContext` 클래스 (*src/razorpagestestsample/Data/AppDbContext*)에 포함 된 네 개의 메서드가 있는 DAL이 있습니다. 각 메서드에는 테스트 앱에 하나 또는 두 개의 단위 테스트가 있습니다.
 
-| DAL 메서드               | 함수                                                                   |
+| DAL 메서드               | 기능                                                                   |
 | ------------------------ | -------------------------------------------------------------------------- |
 | `GetMessagesAsync`       | 속성`Text` 을 `List<Message>` 기준으로 정렬 된 데이터베이스에서을 가져옵니다. |
 | `AddMessageAsync`        | 데이터베이스에 `Message` 를 추가 합니다.                                          |
@@ -332,7 +332,7 @@ using (var db = new AppDbContext(Utilities.TestDbContextOptions()))
 
 다른 단위 테스트 집합은 페이지 모델 메서드의 테스트를 담당 합니다. 메시지 앱에서 인덱스 페이지 모델은 `IndexModel` *src/razorpagestestsample/Pages/Index. cshtml*의 클래스에서 찾을 수 있습니다.
 
-| 페이지 모델 메서드 | 함수 |
+| 페이지 모델 메서드 | 기능 |
 | ----------------- | -------- |
 | `OnGetAsync` | 메서드를 `GetMessagesAsync` 사용 하 여 UI에 대 한 DAL에서 메시지를 가져옵니다. |
 | `OnPostAddMessageAsync` | [Modelstate](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary) 가 올바르면를 호출 `AddMessageAsync` 하 여 데이터베이스에 메시지를 추가 합니다. |

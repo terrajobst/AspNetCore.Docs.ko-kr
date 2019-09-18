@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/23/2019
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: da5293462451447766f7b3b5ff733e1ea9449f18
-ms.sourcegitcommit: f30b18442ed12831c7e86b0db249183ccd749f59
+ms.openlocfilehash: 500824807307840a9279dd00c2fe632835737c2d
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/23/2019
-ms.locfileid: "68412506"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71080787"
 ---
 # <a name="custom-storage-providers-for-aspnet-core-identity"></a>ASP.NET Core Id에 대 한 사용자 지정 저장소 공급자
 
@@ -23,7 +23,7 @@ Id ASP.NET Core은 사용자 지정 저장소 공급자를 만들어 앱에 연�
 
 ## <a name="introduction"></a>소개
 
-기본적으로 ASP.NET Core Id 시스템은 Entity Framework Core을 사용 하 여 SQL Server 데이터베이스에 사용자 정보를 저장 합니다. 이 접근 방식은 많은 앱에서 잘 작동 합니다. 그러나 다른 지 속성 메커니즘 또는 데이터 스키마를 사용 하는 것이 좋습니다. 예를 들어:
+기본적으로 ASP.NET Core Id 시스템은 Entity Framework Core을 사용 하 여 SQL Server 데이터베이스에 사용자 정보를 저장 합니다. 이 접근 방식은 많은 앱에서 잘 작동 합니다. 그러나 다른 지 속성 메커니즘 또는 데이터 스키마를 사용 하는 것이 좋습니다. 예:
 
 * [Azure Table Storage](/azure/storage/) 또는 다른 데이터 저장소를 사용 합니다.
 * 데이터베이스 테이블의 구조가 다릅니다. 
@@ -35,7 +35,7 @@ ASP.NET Core Id는 "개별 사용자 계정" 옵션을 사용 하 여 Visual Stu
 
 .NET Core CLI 사용 하는 경우 다음 `-au Individual`을 추가 합니다.
 
-```console
+```dotnetcli
 dotnet new mvc -au Individual
 ```
 
@@ -169,7 +169,7 @@ ASP.NET Core Id는 관리자 및 저장소 라는 클래스로 구성 됩니다.
 * **IQueryableUserStore**  
  [&lt;Iqueryableuserstore tuser&gt; ](/dotnet/api/microsoft.aspnetcore.identity.iqueryableuserstore-1) 인터페이스는 쿼리 가능한 사용자 저장소를 제공 하기 위해 구현 하는 멤버를 정의 합니다.
 
-앱에 필요한 인터페이스만 구현 합니다. 예를 들어:
+앱에 필요한 인터페이스만 구현 합니다. 예:
 
 ```csharp
 public class UserStore : IUserStore<IdentityUser>,

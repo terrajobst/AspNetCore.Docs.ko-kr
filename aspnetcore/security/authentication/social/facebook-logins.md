@@ -1,23 +1,23 @@
 ---
 title: ASP.NET Core에서 Facebook 외부 로그인 설정
 author: rick-anderson
-description: 기존 ASP.NET Core 앱에 Facebook 계정 사용자 인증의 통합을 보여 주는 코드 예제를 사용 하 여 자습서입니다.
+description: 기존 ASP.NET Core 앱에 Facebook 계정 사용자 인증을 통합 하는 방법을 보여 주는 코드 예제를 보여 주는 자습서입니다.
 ms.author: riande
 ms.custom: seoapril2019, mvc, seodec18
 ms.date: 03/04/2019
 uid: security/authentication/facebook-logins
-ms.openlocfilehash: 84b891f6cee71a26726d49a9d42ae45007d2b429
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: f7b21de7e5fe9d77804588280c3d8be9df8afee5
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64893590"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71082543"
 ---
 # <a name="facebook-external-login-setup-in-aspnet-core"></a>ASP.NET Core에서 Facebook 외부 로그인 설정
 
 작성자: [Valeriy Novytskyy](https://github.com/01binary) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-코드 예제를 사용 하 여이 자습서에서 만든 샘플 ASP.NET Core 2.0 프로젝트를 사용 하 여 Facebook 계정으로 로그인 사용자가 사용 하도록 설정 하는 방법을 보여 줍니다 합니다 [이전 페이지](xref:security/authentication/social/index)합니다. 수행 하 여 Facebook 앱 ID를 만드는 것으로 시작 합니다 [공식 단계](https://developers.facebook.com)합니다.
+이 자습서의 코드 예제에서는 [이전 페이지](xref:security/authentication/social/index)에서 만든 샘플 ASP.NET Core 2.0 프로젝트를 사용 하 여 사용자가 Facebook 계정으로 로그인 할 수 있도록 설정 하는 방법을 보여 줍니다. 수행 하 여 Facebook 앱 ID를 만드는 것으로 시작 합니다 [공식 단계](https://developers.facebook.com)합니다.
 
 ## <a name="create-the-app-in-facebook"></a>Facebook에서 앱 만들기
 
@@ -64,7 +64,7 @@ Facebook과 같은 중요 한 설정 연결 `App ID` 하 고 `App Secret` 사용
 
 안전 하 게 저장 하려면 다음 명령을 실행 `App ID` 고 `App Secret` 암호 관리자를 사용 하 여:
 
-```console
+```dotnetcli
 dotnet user-secrets set Authentication:Facebook:AppId <app-id>
 dotnet user-secrets set Authentication:Facebook:AppSecret <app-secret>
 ```
@@ -123,7 +123,7 @@ app.UseFacebookAuthentication(new FacebookOptions()
 
 응용 프로그램을 실행 하 고 클릭 **로그인**합니다. Facebook으로 로그인 하는 옵션이 표시 됩니다.
 
-![웹 응용 프로그램: 인증 되지 않은 사용자](index/_static/DoneFacebook.png)
+![웹 응용 프로그램: 사용자가 인증 되지 않음](index/_static/DoneFacebook.png)
 
 클릭 하면 **Facebook**, 인증에 대 한 Facebook로 리디렉션됩니다.
 
@@ -137,18 +137,18 @@ Facebook 자격 증명을 입력 한 후 전자 메일을 설정할 수 있는 �
 
 이제 Facebook 자격 증명을 사용 하 여 로그인 됩니다.
 
-![웹 응용 프로그램: 인증 된 사용자](index/_static/Done.png)
+![웹 응용 프로그램: 사용자 인증 됨](index/_static/Done.png)
 
 [!INCLUDE[Forward request information when behind a proxy or load balancer section](includes/forwarded-headers-middleware.md)]
 
 ## <a name="troubleshooting"></a>문제 해결
 
-* **ASP.NET Core 2.x만:** 호출 하 여 구성 되어 있지 않으면 Identity `services.AddIdentity` 에 `ConfigureServices`를 인증 하려고 하면 *ArgumentException: 'SignInScheme' 옵션을 제공 해야*합니다. 이 자습서에 사용 되는 프로젝트 템플릿이이 수행 되도록 보장 합니다.
+* **ASP.NET Core 2.x에만 해당:** 에서 `services.AddIdentity` *를 호출 하 여 id가 구성 되지 않은 경우 인증을 시도 하면 ArgumentException이 발생 합니다. `ConfigureServices` ' SignInScheme ' 옵션을 제공*해야 합니다. 이 자습서에 사용 되는 프로젝트 템플릿이이 수행 되도록 보장 합니다.
 * 사이트 데이터베이스를 초기 마이그레이션을 적용 하 여 만들어지지 않은, 하는 경우 얻게 *요청을 처리 하는 동안 데이터베이스 작업이 실패 했습니다.* 오류입니다. 탭 **마이그레이션 적용** 데이터베이스를 만들고 오류 지 나 새로 고침 합니다.
 
 ## <a name="next-steps"></a>다음 단계
 
-* 추가 된 [Microsoft.AspNetCore.Authentication.Facebook](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Facebook) 고급 Facebook 인증 시나리오에 대 한 프로젝트에 NuGet 패키지. 이 패키지에 앱을 사용 하 여 Facebook 외부 로그인 기능을 통합 필요는 없습니다. 
+* 고급 Facebook 인증 시나리오에 대 한 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Facebook) 패키지를 프로젝트에 추가 합니다. 이 패키지는 Facebook 외부 로그인 기능을 앱에 통합 하는 데 필요 하지 않습니다. 
 
 * 이 문서에서는 Facebook을 사용 하 여 인증 하는 보여 주었습니다. 에 나열 된 다른 공급자를 사용 하 여 인증 하는 유사한 방법을 따를 수 있습니다 합니다 [이전 페이지](xref:security/authentication/social/index)합니다.
 

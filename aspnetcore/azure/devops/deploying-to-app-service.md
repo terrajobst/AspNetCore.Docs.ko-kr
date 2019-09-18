@@ -6,12 +6,12 @@ ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: e09d03f1d30f128b1db1588aa92b28ec3e4ae626
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: df41f296e9c4e1eff6e31d45b29ec30ee1e20cf4
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64892640"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71080444"
 ---
 # <a name="deploy-an-app-to-app-service"></a>App Service에 앱 배포
 
@@ -35,7 +35,7 @@ ms.locfileid: "64892640"
 
 명령 셸에서 코드를 다운로드할 프로젝트를 빌드하고 다음과 같이 실행 합니다.
 
-> *참고: Linux/macOS 사용자는 적절 하 게 변경 경로 대 한 예를 들어, 앞에 슬래시를 사용 하 여 (`/`) 대신 백슬래시 (`\`).*
+> *참고: Linux/macos 사용자는 경로를 적절 하 게 변경 해야 합니다. 예를 들어 백슬래시`/`() 대신`\`슬래시 ()를 사용 해야 합니다.*
 
 1. 로컬 컴퓨터의 폴더로 코드를 복제 합니다.
 
@@ -51,13 +51,13 @@ ms.locfileid: "64892640"
 
 3. 패키지를 복원 하 고 솔루션을 빌드하십시오.
 
-    ```console
+    ```dotnetcli
     dotnet build
     ```
 
 4. 앱을 실행합니다.
 
-    ```console
+    ```dotnetcli
     dotnet run
     ```
 
@@ -73,7 +73,7 @@ ms.locfileid: "64892640"
 
 앱을 배포 하려면 App Service 만들기 해야 [웹 앱](/azure/app-service/app-service-web-overview)합니다. 웹 앱을 만든 후 Git를 사용 하 여 로컬 컴퓨터에서를 배포할 수 있습니다.
 
-1. 에 로그인 합니다 [Azure Cloud Shell](https://shell.azure.com/bash)합니다. 참고: 처음으로 로그인 할 때 Cloud Shell은 구성 파일에 대 한 저장소 계정을 만들려면 요구 합니다. 기본값을 사용 하거나 고유 이름을 제공 합니다.
+1. 에 로그인 합니다 [Azure Cloud Shell](https://shell.azure.com/bash)합니다. 참고: 처음으로 로그인 하면 Cloud Shell 구성 파일에 대 한 저장소 계정을 만들라는 메시지가 표시 됩니다. 기본값을 사용 하거나 고유 이름을 제공 합니다.
 
 2. 다음 단계에서 Cloud Shell을 사용 합니다.
 
@@ -141,7 +141,7 @@ ms.locfileid: "64892640"
 
 ## <a name="deployment-with-visual-studio"></a>Visual Studio 사용 하 여 배포
 
-> *참고: 이 섹션에서는 Windows에만 적용 됩니다. Linux 및 macOS 사용자는 2 단계 아래에 설명 된 변경 내용을 확인 해야 합니다. 파일을 저장 하 고 사용 하 여 로컬 리포지토리에 변경 내용을 커밋하기 `git commit`합니다. 마지막으로 사용 하 여 변경 내용을 푸시 `git push`첫 번째 섹션 에서처럼 합니다.*
+> *참고: 이 섹션은 Windows에만 적용 됩니다. Linux 및 macOS 사용자는 2 단계 아래에 설명 된 변경 내용을 확인 해야 합니다. 파일을 저장 하 고 사용 하 여 로컬 리포지토리에 변경 내용을 커밋하기 `git commit`합니다. 마지막으로 사용 하 여 변경 내용을 푸시 `git push`첫 번째 섹션 에서처럼 합니다.*
 
 앱 명령 셸에서 이미 배포 되었습니다. 앱에 업데이트를 배포 하려면 Visual Studio의 통합된 도구를 사용해 보겠습니다. 배후에서 Visual Studio 도구, 명령줄 같지만 Visual Studio의 친숙 한 UI 내에서 동일한 작업을 수행 합니다.
 

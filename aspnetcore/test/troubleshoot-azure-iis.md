@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/18/2019
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: deae568a6ba88c9a8365b9d7f2df629899bc64a1
-ms.sourcegitcommit: 16502797ea749e2690feaa5e652a65b89c007c89
+ms.openlocfilehash: 384ae6645ce083fba76a430dfc3bec3a59d3870e
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/25/2019
-ms.locfileid: "68483315"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081533"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Azure App Service 및 IIS에 대 한 ASP.NET Core 문제 해결
 
@@ -72,7 +72,7 @@ The Web server is configured to not list the contents of this directory.
    * IIS에서 응용 프로그램을 호스트 하는 경우 iis **관리자**의 **기본 설정**에 표시 된 iis **실제 경로** 에 앱이 배포 되었는지 확인 합니다.
 1. 호스팅 시스템의 배포를 프로젝트의 *게시* 폴더의 콘텐츠와 비교 하 여 모든 앱의 파일 및 폴더가 배포 되었는지 확인 합니다.
 
-게시 된 ASP.NET Core 앱의 레이아웃에 대 한 자세한 내용은을 참조 <xref:host-and-deploy/directory-structure>하십시오. Web.config *파일에* 대 한 자세한 내용은을 참조 <xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig>하십시오.
+게시 된 ASP.NET Core 앱의 레이아웃에 대 한 자세한 내용은을 참조 <xref:host-and-deploy/directory-structure>하십시오. *Web.config 파일에* 대 한 자세한 내용은을 참조 <xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig>하십시오.
 
 ### <a name="500-internal-server-error"></a>500 내부 서버 오류
 
@@ -265,7 +265,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 1. 앱을 실행합니다.
    * 앱이 [프레임워크 종속 배포](/dotnet/core/deploying/#framework-dependent-deployments-fdd)인 경우:
 
-     ```console
+     ```dotnetcli
      dotnet .\{ASSEMBLY NAME}.dll
      ```
 

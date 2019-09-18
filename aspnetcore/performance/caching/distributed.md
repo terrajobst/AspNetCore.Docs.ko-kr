@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/27/2019
 uid: performance/caching/distributed
-ms.openlocfilehash: 8417463038bcdc0f77852bec3c3bb8a618153009
-ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
+ms.openlocfilehash: dbcdfcd07877fabfe6d18cd4d840b5597afa1afd
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/06/2019
-ms.locfileid: "70773846"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081541"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>ASP.NET Core 분산 캐싱
 
@@ -104,7 +104,7 @@ Redis 분산 캐시를 사용 하려면 [AspNetCore 메타 패키지](xref:funda
 
 `sql-cache create` 명령을 실행 하 여 SQL Server에서 테이블을 만듭니다. SQL Server 인스턴스 (`Data Source`), 데이터베이스 (`Initial Catalog`), `dbo`스키마 (예:) 및 테이블 이름 (예: `TestCache`)을 제공 합니다.
 
-```console
+```dotnetcli
 dotnet sql-cache create "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DistCache;Integrated Security=True;" dbo TestCache
 ```
 

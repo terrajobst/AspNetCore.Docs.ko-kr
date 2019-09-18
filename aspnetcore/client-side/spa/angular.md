@@ -7,12 +7,12 @@ ms.author: stevesa
 ms.custom: mvc
 ms.date: 03/07/2019
 uid: spa/angular
-ms.openlocfilehash: 6d0107ef52d63a0f6f5713c518ddc54ac4230d53
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 62654ca040be99de8063a63c7e4ac09cbb8564eb
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64893670"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71080398"
 ---
 # <a name="use-the-angular-project-template-with-aspnet-core"></a>ASP.NET Core에서 Angular 프로젝트 템플릿 사용
 
@@ -26,7 +26,7 @@ ASP.NET Core 2.1이 설치되어 있는 경우 Angular 프로젝트 템플릿을
 
 빈 디렉터리에 `dotnet new angular` 명령을 사용하여 명령 프롬프트에서 새 프로젝트를 만듭니다. 예를 들어 다음 명령은 *my-new-app* 디렉터리에 앱을 만들고 해당 디렉터리로 전환합니다.
 
-```console
+```dotnetcli
 dotnet new angular -o my-new-app
 cd my-new-app
 ```
@@ -53,7 +53,7 @@ Now listening on: http://localhost:<port>
 
 브라우저에서 이 URL로 이동합니다.
 
-앱이 백그라운드에서 Angular CLI 서버의 인스턴스를 시작합니다. 다음과 유사한 메시지가 기록됩니다. *NG 라이브 개발 서버는 localhost에서 수신 합니다.&lt;otherport&gt;에서 브라우저를 열고 http://localhost:&lt; otherport&gt;/* 합니다. 이 메시지 무시&mdash;결합된 ASP.NET Core 및 Angular CLI 앱의 URL이 **아닙니다**.
+앱이 백그라운드에서 Angular CLI 서버의 인스턴스를 시작합니다. 다음과 유사한 메시지가 기록됩니다. *로컬 호스트&lt;:/otherport&gt;에서 수신 대기 하 고 있는 개발 서버, otherport http://localhost:&lt&gt; 에서 브라우저를 엽니다*. 이 메시지 무시&mdash;결합된 ASP.NET Core 및 Angular CLI 앱의 URL이 **아닙니다**.
 
 ---
 
@@ -90,7 +90,7 @@ npm install --save <package_name>
 
 개발 시에 앱은 개발자 편의를 위해 최적화된 모드로 실행됩니다. 예를 들어 디버그할 때 원래 TypeScript 코드를 볼 수 있도록 JavaScript 번들에 소스 맵이 포함됩니다. 앱은 디스크에서 TypeScript, HTML 및 CSS 파일 변경 내용을 감시하고 해당 파일의 변경을 확인하면 자동으로 다시 컴파일하고 다시 로드합니다.
 
-프로덕션 시에는 성능에 최적화된 앱의 버전을 제공합니다. 이는 자동으로 수행하도록 구성됩니다. 게시할 때 빌드 구성은 클라이언트 쪽 코드의 축소된 AOT(Ahead-Of-Time) 컴파일된 빌드를 내보냅니다. 개발 빌드 달리 프로덕션 빌드에는 Node.js (활성화 하지 않은 경우 서버 쪽 렌더링 (SSR)) 서버에 설치할 필요 하지 않습니다.
+프로덕션 시에는 성능에 최적화된 앱의 버전을 제공합니다. 이는 자동으로 수행하도록 구성됩니다. 게시할 때 빌드 구성은 클라이언트 쪽 코드의 축소된 AOT(Ahead-Of-Time) 컴파일된 빌드를 내보냅니다. 개발 빌드와 달리 프로덕션 빌드에서는 서버에 node.js를 설치할 필요가 없습니다 (SSR (서버 쪽 렌더링)을 사용 하도록 설정 하지 않은 경우).
 
 표준 [ASP.NET Core 호스팅 및 배포 방법](xref:host-and-deploy/index)을 사용할 수 있습니다.
 

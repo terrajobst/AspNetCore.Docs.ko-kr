@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/01/2019
 uid: security/key-vault-configuration
-ms.openlocfilehash: 0d0b6e20a1901d4a2630ce263b5fd0cd7bcca8fe
-ms.sourcegitcommit: 4fe3ae892f54dc540859bff78741a28c2daa9a38
+ms.openlocfilehash: fe6cdca1f7180f9da26fe2838e529becb26ccd45
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/04/2019
-ms.locfileid: "68776649"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081108"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>ASP.NET Core의 Azure Key Vault 구성 공급자
 
@@ -61,13 +61,13 @@ Azure Key Vault 구성 공급자를 사용 하려면 패키지 참조를 [Micros
 
 암호 관리자는 프로젝트의 콘텐츠 루트에 열린 명령 셸에서 사용 됩니다. 여기서 `{SECRET NAME}` 은 이름이 고 `{SECRET VALUE}` 는 값입니다.
 
-```console
+```dotnetcli
 dotnet user-secrets set "{SECRET NAME}" "{SECRET VALUE}"
 ```
 
 프로젝트의 콘텐츠 루트에서 명령 셸에서 다음 명령을 실행 하 여 샘플 앱에 대 한 암호를 설정 합니다.
 
-```console
+```dotnetcli
 dotnet user-secrets set "SecretName" "secret_value_1_dev"
 dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 ```
@@ -84,7 +84,7 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
    * **Cloud Shell 시작** 단추를 사용 하 여 브라우저에서 Cloud Shell를 엽니다.
    * Azure Portal의 오른쪽 위 모퉁이에 있는 메뉴에서 **Cloud Shell** 단추를 선택 합니다.
 
-   자세한 내용은 [AZURE CLI (명령줄 인터페이스)](/cli/azure/) 및 [Azure Cloud Shell 개요](/azure/cloud-shell/overview)를 참조 하세요.
+   자세한 내용은 [Azure 명령줄 인터페이스 (CLI)](/cli/azure/) 및 [Azure Cloud Shell 개요](/azure/cloud-shell/overview)를 참조 하세요.
 
 1. 아직 인증 하지 않은 경우 `az login` 명령을 사용 하 여 로그인 합니다.
 
@@ -135,8 +135,8 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 1. **새로 추가**를 선택 합니다.
 1. **보안 주체 선택** 을 선택 하 고 이름으로 등록 된 앱을 선택 합니다. **선택** 단추를 선택 합니다.
 1. **비밀 권한을** 열고 **Get** 및 **List** 권한을 사용 하 여 앱을 제공 합니다.
-1.           **확인**을 선택합니다.
-1.           **저장**을 선택합니다.
+1. **확인**을 선택합니다.
+1. **저장**을 선택합니다.
 1. 앱을 배포 합니다.
 
 샘플 `Certificate` 앱은 암호 이름과 동일한 이름을 사용 `IConfigurationRoot` 하 여에서 해당 구성 값을 가져옵니다.
@@ -233,7 +233,7 @@ Azure CLI, PowerShell 또는 Azure Portal를 사용 하 여 **앱을 다시 시�
 
    [암호 관리자 도구](xref:security/app-secrets)를 사용 하 여 다음 암호를 로컬로 저장 합니다.
 
-   ```console
+   ```dotnetcli
    dotnet user-secrets set "5000-AppSecret" "5.0.0.0_secret_value_dev"
    dotnet user-secrets set "5100-AppSecret" "5.1.0.0_secret_value_dev"
    ```

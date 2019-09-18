@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 03/07/2019
 uid: spa/react
-ms.openlocfilehash: 91a71498574d6d96c2c06e896283fed801e8adb3
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 0e61c5b3e31a0b050d356b8f8e16306dc1e2a7f3
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64893700"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71080411"
 ---
 # <a name="use-the-react-project-template-with-aspnet-core"></a>ASP.NET Core에 React 프로젝트 템플릿 사용
 
@@ -26,7 +26,7 @@ ASP.NET Core 2.1이 설치되어 있는 경우 React 프로젝트 템플릿을 �
 
 빈 디렉터리에 `dotnet new react` 명령을 사용하여 명령 프롬프트에서 새 프로젝트를 만듭니다. 예를 들어 다음 명령은 *my-new-app* 디렉터리에 앱을 만들고 해당 디렉터리로 전환합니다.
 
-```console
+```dotnetcli
 dotnet new react -o my-new-app
 cd my-new-app
 ```
@@ -80,13 +80,13 @@ npm install --save <package_name>
 
 이 기본 설정에는 단점이 있습니다. C# 코드를 수정하고 ASP.NET Core 앱을 다시 시작해야 할 때마다 CRA 서버가 다시 시작됩니다. 백업을 시작하려면 몇 초 정도가 필요합니다. C# 코드를 자주 편집하고 있고 CRA 서버가 다시 시작될 때까지 기다리지 않으려면 ASP.NET Core 프로세스와는 별도로 CRA 서버를 외부에서 실행합니다. 이를 수행하려면:
 
-1. 추가 된 *.env* 파일을 합니다 *ClientApp* 다음 설정 사용 하 여 하위 디렉터리:
+1. 다음 설정을 사용 하 여 *ClientApp* 하위 디렉터리에 env 파일을 추가 *합니다* .
 
     ```
     BROWSER=none
     ```
 
-    이렇게 하면 웹 브라우저에서에서 CRA 서버 외부에서 시작 하는 경우.
+    이렇게 하면 외부에서 CRA 서버를 시작할 때 웹 브라우저가 열리지 않습니다.
 
 2. 명령 프롬프트에서 *ClientApp* 하위 디렉터리로 전환하고 CRA 개발 서버를 시작합니다.
 
@@ -104,7 +104,7 @@ npm install --save <package_name>
 ASP.NET Core 앱을 시작할 때 CRA 서버는 시작되지 않습니다. 수동으로 시작한 인스턴스가 대신 사용됩니다. 이를 통해 더 빠르게 시작하고 다시 시작할 수 있습니다. 더 이상 React 앱이 매번 다시 빌드할 때까지 기다리지 않습니다.
 
 > [!IMPORTANT]
-> "서버 쪽 렌더링"이 서식이 파일의 지원 되는 기능이 아닙니다. 이 템플릿 사용 하 여 목표는 "-react-앱 만들기"를 사용 하 여 패리티를 충족 합니다. 따라서 시나리오 및 기능 (예: SSR) "-react-앱 만들기" 프로젝트에 포함 되어 있지는 지원 되지 않습니다 및 사용자에 대 한 연습 그대로 유지 됩니다.
+> "서버 쪽 렌더링"은이 템플릿에서 지원 되지 않는 기능입니다. 이 템플릿의 목표는 "-반응-앱"을 사용 하 여 패리티를 충족 하는 것입니다. 따라서 "SSR와 같은" 만들기-응답-앱 "프로젝트에 포함 되지 않은 시나리오와 기능은 지원 되지 않으며 사용자를 위한 연습으로 남아 있습니다.
 
 ## <a name="additional-resources"></a>추가 자료
 

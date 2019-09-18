@@ -6,12 +6,12 @@ ms.author: riande
 ms.date: 06/18/2019
 ms.custom: mvc, seodec18
 uid: security/authentication/add-user-data
-ms.openlocfilehash: c219500b7595fd8d200e4e5e742b1e1fda836ba3
-ms.sourcegitcommit: a1283d486ac1dcedfc7ea302e1cc882833e2c515
+ms.openlocfilehash: f5a47ffd2e068414268ed9037d4376bfd21ba1bb
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/18/2019
-ms.locfileid: "67207731"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71080803"
 ---
 # <a name="add-download-and-delete-custom-user-data-to-identity-in-an-aspnet-core-project"></a>추가, 다운로드 및 ASP.NET Core 프로젝트에서 Id에 사용자 지정 사용자 데이터를 삭제 합니다.
 
@@ -20,7 +20,7 @@ ms.locfileid: "67207731"
 이 아티클에서 방법.
 
 * ASP.NET Core 웹 앱에 사용자 지정 사용자 데이터를 추가 합니다.
-* 사용 하 여 사용자 지정 사용자 데이터 모델을 데코 레이트 된 <xref:Microsoft.AspNetCore.Identity.PersonalDataAttribute> 특성 다운로드 및 삭제에 대 한 자동으로 사용할 수 있도록 합니다. 충족 하는 사용 하면 데이터를 다운로드 하 고 삭제 하는 일을 할 [GDPR](xref:security/gdpr) 요구 사항입니다.
+* 사용자 지정 사용자 데이터 모델을 <xref:Microsoft.AspNetCore.Identity.PersonalDataAttribute> 특성으로 데코레이팅 하 여 자동으로 다운로드 및 삭제에 사용할 수 있도록 합니다. 충족 하는 사용 하면 데이터를 다운로드 하 고 삭제 하는 일을 할 [GDPR](xref:security/gdpr) 요구 사항입니다.
 
 프로젝트 샘플에는 Razor 페이지 웹 앱에서 만들어지지만 지침은 ASP.NET Core MVC 웹 앱에 대해 유사 합니다.
 
@@ -36,13 +36,13 @@ ms.locfileid: "67207731"
 
 * Visual Studio **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다. 프로젝트 이름을 **WebApp1** 되도록 하려는 경우의 네임 스페이스와 일치 합니다 [샘플을 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) 코드입니다.
 * 선택 **ASP.NET Core 웹 응용 프로그램** > **확인**
-* 선택 **ASP.NET Core 2.2** 드롭다운 목록에서
+* 드롭다운에서 **ASP.NET Core 2.2** 을 선택 합니다.
 * 선택 **웹 응용 프로그램**  > **확인**
 * 프로젝트를 빌드하고 실행합니다.
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-```cli
+```dotnetcli
 dotnet new webapp -o WebApp1
 ```
 
@@ -67,26 +67,26 @@ dotnet new webapp -o WebApp1
 
 ASP.NET Core 스 캐 폴더를 이전에 설치 하지 않은 경우 지금 설치 합니다.
 
-```cli
+```dotnetcli
 dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
 에 대 한 패키지 참조 추가 [Microsoft.VisualStudio.Web.CodeGeneration.Design](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.CodeGeneration.Design/) 프로젝트 (.csproj) 파일에 있습니다. 프로젝트 디렉터리에서 다음 명령을 실행 합니다.
 
-```cli
+```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet restore
 ```
 
 Identity 스 캐 폴더 옵션을 나열 하려면 다음 명령을 실행 합니다.
 
-```cli
+```dotnetcli
 dotnet aspnet-codegenerator identity -h
 ```
 
 프로젝트 폴더에서 Identity 스 캐 폴더를 실행 합니다.
 
-```cli
+```dotnetcli
 dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account.Manage.Index
 ```
 
@@ -143,14 +143,14 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 Visual studio에서 **패키지 관리자 콘솔**:
 
-```PMC
+```powershell
 Add-Migration CustomUserData
 Update-Database
 ```
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-```cli
+```dotnetcli
 dotnet ef migrations add CustomUserData
 dotnet ef database update
 ```

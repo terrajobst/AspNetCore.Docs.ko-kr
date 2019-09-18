@@ -6,12 +6,12 @@ ms.author: riande
 ms.date: 12/18/2018
 ms.custom: mvc, seodec18
 uid: security/authorization/secure-data
-ms.openlocfilehash: d95f44394d6ecc3c3896b45c5bebc73fa2d92445
-ms.sourcegitcommit: dc5b293e08336dc236de66ed1834f7ef78359531
+ms.openlocfilehash: d827f6f839c9e42e6d3d7b04fe8b24a1c9732aee
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/16/2019
-ms.locfileid: "71011192"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71082448"
 ---
 # <a name="create-an-aspnet-core-app-with-user-data-protected-by-authorization"></a>권한 부여로 보호 되는 사용자 데이터를 사용 하 여 ASP.NET Core 앱 만들기
 
@@ -69,7 +69,7 @@ ms.locfileid: "71011192"
 * `ContactManagerAuthorizationHandler`: 관리자가 연락처를 승인 하거나 거부할 수 있습니다.
 * `ContactAdministratorsAuthorizationHandler`: 관리자가 연락처를 승인 또는 거부 하 고 연락처를 편집/삭제할 수 있습니다.
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>필수 구성 요소
 
 이 자습서 고급 옵션입니다. 에 대해 잘 알고 있어야 합니다.
 
@@ -103,7 +103,7 @@ ASP.NET을 사용 하 여 [Identity](xref:security/authentication/identity) 데�
 
 새 마이그레이션을 만들고 데이터베이스를 업데이트 합니다.
 
-```console
+```dotnetcli
 dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
@@ -130,7 +130,7 @@ dotnet ef database update
 
 `SeedData` 클래스에는 두 개의 계정을 만듭니다: 관리자 및 관리자입니다. 사용 된 [암호 관리자 도구](xref:security/app-secrets) 이러한 계정에 대 한 암호를 설정 합니다. 프로젝트 디렉터리에서 암호를 설정 (포함 하는 디렉터리 *Program.cs*):
 
-```console
+```dotnetcli
 dotnet user-secrets set SeedUserPW <PW>
 ```
 
@@ -279,7 +279,7 @@ Entity Framework Core를 사용 하 여 서비스에 등록 해야 합니다 [�
 * 강력한 암호를 선택 합니다. 8 개 이상의 문자 및 하나 이상의 대문자, 숫자 및 기호를 사용 합니다. 예를 들어 `Passw0rd!` 강력한 암호 요구 사항을 충족 합니다.
 * 프로젝트의 폴더에서 다음 명령을 실행 하는 `<PW>` 암호입니다.
 
-  ```console
+  ```dotnetcli
   dotnet user-secrets set SeedUserPW <PW>
   ```
 
@@ -310,7 +310,7 @@ Entity Framework Core를 사용 하 여 서비스에 등록 해야 합니다 [�
   * 네임 스페이스에는 샘플에 사용 된 네임 스페이스와 일치 하므로 "ContactManager" 이름을 지정 합니다.
   * `-uld` SQLite 대신 LocalDB를 지정합니다.
 
-  ```console
+  ```dotnetcli
   dotnet new webapp -o ContactManager -au Individual -uld
   ```
 
@@ -321,14 +321,14 @@ Entity Framework Core를 사용 하 여 서비스에 등록 해야 합니다 [�
 * 스 캐 폴드는 `Contact` 모델입니다.
 * 초기 마이그레이션을 만들고 데이터베이스를 업데이트 합니다.
 
-```console
+```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet tool install -g dotnet-aspnet-codegenerator
 dotnet aspnet-codegenerator razorpage -m Contact -udl -dc ApplicationDbContext -outDir Pages\Contacts --referenceScriptLibraries
 dotnet ef database drop -f
 dotnet ef migrations add initial
 dotnet ef database update
-  ```
+```
 
 `dotnet aspnet-codegenerator razorpage` 명령을 사용 하 여 버그를 발생 하는 경우 [이 GitHub 문제](https://github.com/aspnet/Scaffolding/issues/984)를 참조 하세요.
 
@@ -426,7 +426,7 @@ ASP.NET을 사용 하 여 [Identity](xref:security/authentication/identity) 데�
 
 새 마이그레이션을 만들고 데이터베이스를 업데이트 합니다.
 
-```console
+```dotnetcli
 dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
@@ -453,7 +453,7 @@ dotnet ef database update
 
 `SeedData` 클래스에는 두 개의 계정을 만듭니다: 관리자 및 관리자입니다. 사용 된 [암호 관리자 도구](xref:security/app-secrets) 이러한 계정에 대 한 암호를 설정 합니다. 프로젝트 디렉터리에서 암호를 설정 (포함 하는 디렉터리 *Program.cs*):
 
-```console
+```dotnetcli
 dotnet user-secrets set SeedUserPW <PW>
 ```
 
@@ -602,16 +602,16 @@ Entity Framework Core를 사용 하 여 서비스에 등록 해야 합니다 [�
 * 강력한 암호를 선택 합니다. 8 개 이상의 문자 및 하나 이상의 대문자, 숫자 및 기호를 사용 합니다. 예를 들어 `Passw0rd!` 강력한 암호 요구 사항을 충족 합니다.
 * 프로젝트의 폴더에서 다음 명령을 실행 하는 `<PW>` 암호입니다.
 
-  ```console
+  ```dotnetcli
   dotnet user-secrets set SeedUserPW <PW>
   ```
 
 * 데이터베이스 삭제 및 업데이트
 
-    ```console
-     dotnet ef database drop -f
-     dotnet ef database update  
-     ```
+  ```dotnetcli
+  dotnet ef database drop -f
+  dotnet ef database update  
+  ```
 
 * 데이터베이스를 시드하려면 앱을 다시 시작 합니다.
 
@@ -637,7 +637,7 @@ Entity Framework Core를 사용 하 여 서비스에 등록 해야 합니다 [�
   * 네임 스페이스에는 샘플에 사용 된 네임 스페이스와 일치 하므로 "ContactManager" 이름을 지정 합니다.
   * `-uld` SQLite 대신 LocalDB를 지정합니다.
 
-  ```console
+  ```dotnetcli
   dotnet new webapp -o ContactManager -au Individual -uld
   ```
 
@@ -648,7 +648,7 @@ Entity Framework Core를 사용 하 여 서비스에 등록 해야 합니다 [�
 * 스 캐 폴드는 `Contact` 모델입니다.
 * 초기 마이그레이션을 만들고 데이터베이스를 업데이트 합니다.
 
-  ```console
+  ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Contact -udl -dc ApplicationDbContext -outDir Pages\Contacts --referenceScriptLibraries
   dotnet ef database drop -f
   dotnet ef migrations add initial

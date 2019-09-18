@@ -5,12 +5,12 @@ description: ASP.NET Core 및 키 저장소 위치를 구성 하는 방법에 �
 ms.author: riande
 ms.date: 06/11/2019
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: 19d51399e24d085f7c34f70098ca02cbba7a888f
-ms.sourcegitcommit: 28a2874765cefe9eaa068dceb989a978ba2096aa
+ms.openlocfilehash: d5d15779d89a2d746ca2165abab2840232ae0128
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67167037"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71082036"
 ---
 # <a name="key-storage-providers-in-aspnet-core"></a>ASP.NET Core에서 키 저장소 공급자
 
@@ -35,9 +35,9 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="azure-storage"></a>Azure Storage
 
-합니다 [Microsoft.AspNetCore.DataProtection.AzureStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/) 패키지를 Azure Blob Storage에서 데이터 보호 키를 저장할 수 있습니다. 웹 앱의 여러 인스턴스 키를 공유할 수 있습니다. 앱에는 여러 서버에서 인증 쿠키 또는 CSRF 보호 공유할 수 있습니다.
+[AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/) 패키지를 사용 하 여 Azure Blob Storage에 데이터 보호 키를 저장할 수 있습니다. 웹 앱의 여러 인스턴스 키를 공유할 수 있습니다. 앱에는 여러 서버에서 인증 쿠키 또는 CSRF 보호 공유할 수 있습니다.
 
-Azure Blob 저장소 공급자를 구성 하려면 중 하나를 호출 합니다 [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage) 오버 로드 합니다.
+Azure Blob Storage 공급자를 구성 하려면 [Persistkeystoazureblobstorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage) 오버 로드 중 하나를 호출 합니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -47,7 +47,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-웹 앱이 Azure 서비스로 실행 하는 경우 인증 토큰 수 자동으로 사용 하 여 만들어집니다 [Microsoft.Azure.Services.AppAuthentication](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication/)합니다.
+웹 앱이 Azure 서비스로 실행 되 고 있는 경우에는 인증 토큰을 [Microsoft. azure. AppAuthentication](https://www.nuget.org/packages/Microsoft.Azure.Services.AppAuthentication/)을 사용 하 여 자동으로 만들 수 있습니다.
 
 ```csharp
 var tokenProvider = new AzureServiceTokenProvider();
@@ -64,19 +64,19 @@ services.AddDataProtection()
     .PersistKeysToAzureBlobStorage(container, "keys.xml");
 ```
 
-참조 [서비스 간 인증을 구성 하는 방법에 대 한 자세한 내용은 합니다.](/azure/key-vault/service-to-service-authentication)
+[서비스 간 인증 구성에 대 한 자세한 내용을](/azure/key-vault/service-to-service-authentication) 참조 하세요.
 
 ## <a name="redis"></a>Redis
 
 ::: moniker range=">= aspnetcore-2.2"
 
-합니다 [Microsoft.AspNetCore.DataProtection.StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) 패키지를 Redis cache에서 데이터 보호 키를 저장할 수 있습니다. 웹 앱의 여러 인스턴스 키를 공유할 수 있습니다. 앱에는 여러 서버에서 인증 쿠키 또는 CSRF 보호 공유할 수 있습니다.
+[AspNetCore StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) 패키지를 사용 하면 Redis cache에 데이터 보호 키를 저장할 수 있습니다. 웹 앱의 여러 인스턴스 키를 공유할 수 있습니다. 앱에는 여러 서버에서 인증 쿠키 또는 CSRF 보호 공유할 수 있습니다.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.2"
 
-합니다 [Microsoft.AspNetCore.DataProtection.Redis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) 패키지를 Redis cache에서 데이터 보호 키를 저장할 수 있습니다. 웹 앱의 여러 인스턴스 키를 공유할 수 있습니다. 앱에는 여러 서버에서 인증 쿠키 또는 CSRF 보호 공유할 수 있습니다.
+[AspNetCore Redis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) 패키지를 사용 하면 Redis cache에 데이터 보호 키를 저장할 수 있습니다. 웹 앱의 여러 인스턴스 키를 공유할 수 있습니다. 앱에는 여러 서버에서 인증 쿠키 또는 CSRF 보호 공유할 수 있습니다.
 
 ::: moniker-end
 
@@ -145,15 +145,15 @@ EF Core 공급자를 구성 하려면 다음을 호출 합니다 [ `PersistKeysT
 
 [!code-csharp[Main](key-storage-providers/sample/Startup.cs?name=snippet&highlight=13-15)]
 
-제네릭 매개 변수 `TContext`에서 상속 되어야 [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 구현 [IDataProtectionKeyContext](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcore.idataprotectionkeycontext):
+제네릭 매개 변수 `TContext`는 [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 에서 상속 해야 하며 [IDataProtectionKeyContext](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcore.idataprotectionkeycontext)를 구현 해야 합니다.
 
 [!code-csharp[Main](key-storage-providers/sample/MyKeysContext.cs)]
 
-만들기는 `DataProtectionKeys` 테이블입니다.
+테이블을 `DataProtectionKeys` 만듭니다.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-다음 명령을 실행 합니다 **패키지 관리자 콘솔** (PMC) 창:
+**패키지 관리자 콘솔** (PMC) 창에서 다음 명령을 실행 합니다.
 
 ```PowerShell
 Add-Migration AddDataProtectionKeys -Context MyKeysContext
@@ -164,22 +164,22 @@ Update-Database -Context MyKeysContext
 
 명령 셸에서 다음 명령을 실행 합니다.
 
-```console
+```dotnetcli
 dotnet ef migrations add AddDataProtectionKeys --context MyKeysContext
 dotnet ef database update --context MyKeysContext
 ```
 
 ---
 
-`MyKeysContext` 가 `DbContext` 앞의 코드 샘플에 정의 합니다. 사용 중인 경우는 `DbContext` 다른 이름으로 대체 하 `DbContext` 에 대 한 이름 `MyKeysContext`합니다.
+`MyKeysContext`는 앞의 코드 샘플에 정의되어있습니다.`DbContext` 다른 이름을 사용 하는 `DbContext` 을 사용 하는 경우에는 `DbContext` 사용자의 `MyKeysContext`이름을로 바꿉니다.
 
-`DataProtectionKeys` 클래스/엔터티는 다음 표에 표시 되는 구조를 채택 합니다.
+클래스 `DataProtectionKeys` /엔터티는 다음 표에 나와 있는 구조를 가집니다.
 
 | 속성/필드 | CLR 형식 | SQL 유형              |
 | -------------- | -------- | --------------------- |
-| `Id`           | `int`    | `int`PK를 null이 아님   |
-| `FriendlyName` | `string` | `nvarchar(MAX)`를 null |
-| `Xml`          | `string` | `nvarchar(MAX)`를 null |
+| `Id`           | `int`    | `int`, PK, not null   |
+| `FriendlyName` | `string` | `nvarchar(MAX)`, null |
+| `Xml`          | `string` | `nvarchar(MAX)`, null |
 
 ::: moniker-end
 

@@ -5,22 +5,22 @@ description: 개별 사용자 계정을 사용 하 여 만든 ASP.NET Core 프�
 ms.author: riande
 ms.date: 11/30/2017
 uid: security/authentication/individual
-ms.openlocfilehash: f9c1be16386da935382275815bb5fd5c72894b1c
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: cf548417268a8587787471b9ed91c0ed109fbee9
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64892530"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71080697"
 ---
 # <a name="articles-based-on-aspnet-core-projects-created-with-individual-user-accounts"></a>개별 사용자 계정을 사용 하 여 만든 ASP.NET Core 프로젝트를 기반으로 하는 문서
 
-ASP.NET Core Id는 "개별 사용자 계정" 옵션을 사용 하 여 Visual Studio에서 프로젝트 템플릿에 포함 됩니다.
+ASP.NET Core Id는 "개별 사용자 계정" 옵션을 사용 하 여 Visual Studio의 프로젝트 템플릿에 포함 됩니다.
 
-인증 템플릿을 사용 하 여.NET Core CLI에서 사용할 수 있습니다 `-au Individual`:
+인증 템플릿은 .NET Core CLI `-au Individual`에서 사용할 수 있습니다.
 
 ::: moniker range=">= aspnetcore-2.1"
 
-```console
+```dotnetcli
 dotnet new mvc -au Individual
 dotnet new webapp -au Individual
 ```
@@ -29,37 +29,37 @@ dotnet new webapp -au Individual
 
 ::: moniker range="= aspnetcore-2.0"
 
-```console
+```dotnetcli
 dotnet new mvc -au Individual
 dotnet new razor -au Individual
 ```
 
 ::: moniker-end
 
-참조 [이 GitHub 문제](https://github.com/aspnet/AspNetCore/issues/5833) web API 인증에 대 한 합니다.
+Web API 인증에 대 한 [이 GitHub 문제](https://github.com/aspnet/AspNetCore/issues/5833) 를 참조 하세요.
 
 <a name="no"></a>
 
 ## <a name="no-authentication"></a>인증 안 함
 
-인증을 사용 하 여.NET Core CLI에 지정 된 `-au` 옵션입니다. Visual Studio에는 **인증 변경** 대화 상자는 새 웹 응용 프로그램에 사용할 수 있습니다. Visual Studio에서 새 웹 앱에 대 한 기본값은 **인증 없음**합니다.
+인증은 `-au` 옵션을 사용 하 여 .NET Core CLI에 지정 됩니다. Visual Studio에서 새 웹 응용 프로그램에 대해 **인증 변경** 대화 상자를 사용할 수 있습니다. Visual Studio의 새 웹 앱에 대 한 기본값은 **인증 안 함**입니다.
 
-인증 안 함을 사용 하 여 만든 프로젝트:
+인증 없이 만든 프로젝트:
 
-* 웹 페이지 및 UI에 로그인 및 로그 아웃에 없습니다.
-* 인증 코드를 포함 하지 마십시오.
+* 로그인 및 로그 아웃 하는 웹 페이지와 UI가 포함 되지 않습니다.
+* 인증 코드를 포함 하지 않습니다.
 
 <a name="win"></a>
 
 ## <a name="windows-authentication"></a>Windows 인증
 
-Windows 인증을 사용 하 여.NET Core CLI에서 새 웹 앱에 대 한 지정 된 `-au Windows` 옵션입니다. Visual Studio에서의 **인증 변경** 대화 상자를 사용 합니다 **Windows 인증** 옵션입니다.
+.NET Core CLI에서 `-au Windows` 옵션을 사용 하 여 새 웹 앱에 대 한 Windows 인증을 지정 합니다. Visual Studio에서 **인증 변경** 대화 상자는 **Windows 인증** 옵션을 제공 합니다.
 
-앱을 사용 하도록 구성 된 Windows 인증을 선택 합니다 [Windows Authentication IIS 모듈](xref:host-and-deploy/iis/modules)합니다. Windows 인증 인트라넷 웹 사이트를 위한 것입니다.
+Windows 인증을 선택 하면 앱이 [Windows 인증 IIS 모듈](xref:host-and-deploy/iis/modules)을 사용 하도록 구성 됩니다. Windows 인증은 인트라넷 웹 사이트를 위한 것입니다.
 
 ## <a name="additional-resources"></a>추가 자료
 
-다음 문서에는 개별 사용자 계정을 사용 하는 ASP.NET Core 템플릿에서 생성 된 코드를 사용 하는 방법을 보여 줍니다.
+다음 문서에서는 개별 사용자 계정을 사용 하는 ASP.NET Core 템플릿에서 생성 된 코드를 사용 하는 방법을 보여 줍니다.
 
 * [SMS를 이용한 2단계 인증](xref:security/authentication/2fa)
 * [ASP.NET Core의 계정 확인 및 암호 복구](xref:security/authentication/accconfirm)
