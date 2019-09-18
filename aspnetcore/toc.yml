@@ -304,8 +304,8 @@
           items:
             - name: 개요
               uid: security/blazor/index
-            - name: 서버 쪽
-              uid: security/blazor/server-side
+            - name: Blazor 서버
+              uid: security/blazor/server
         - name: 상태 관리
           uid: blazor/state-management
         - name: 오류 처리
@@ -318,10 +318,10 @@
           items:
             - name: 개요
               uid: host-and-deploy/blazor/index
-            - name: 클라이언트 쪽
-              uid: host-and-deploy/blazor/client-side
-            - name: 서버 쪽
-              uid: host-and-deploy/blazor/server-side
+            - name: Blazor WebAssembly
+              uid: host-and-deploy/blazor/webassembly
+            - name: Blazor 서버
+              uid: host-and-deploy/blazor/server
             - name: 링커 구성
               uid: host-and-deploy/blazor/configure-linker
     - name: 클라이언트 쪽 개발
@@ -785,10 +785,10 @@
       items:
         - name: 개요
           uid: host-and-deploy/blazor/index
-        - name: 클라이언트 쪽
-          uid: host-and-deploy/blazor/client-side
-        - name: 서버 쪽
-          uid: host-and-deploy/blazor/server-side
+        - name: Blazor WebAssembly
+          uid: host-and-deploy/blazor/webassembly
+        - name: Blazor 서버
+          uid: host-and-deploy/blazor/server
         - name: 링커 구성
           uid: host-and-deploy/blazor/configure-linker
 - name: 보안 및 ID
@@ -999,8 +999,8 @@
       items:
         - name: 개요
           uid: security/blazor/index
-        - name: 서버 쪽
-          uid: security/blazor/server-side
+        - name: Blazor 서버
+          uid: security/blazor/server
 - name: 성능
   items:
     - name: 개요

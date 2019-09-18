@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/05/2019
 uid: security/blazor/index
-ms.openlocfilehash: 2ba7b0612c2be50ae0797c50dc3cb0d63c0f0c2d
-ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
+ms.openlocfilehash: ab8cc547463ef647316b5a4e377c15021debc4b1
+ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/07/2019
-ms.locfileid: "70800513"
+ms.lasthandoff: 09/13/2019
+ms.locfileid: "70963960"
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor 인증 및 권한 부여
 
@@ -20,26 +20,26 @@ ms.locfileid: "70800513"
 
 ASP.NET Core는 Blazor 앱의 보안 구성 및 관리를 지원합니다.
 
-Blazor 서버 쪽 앱과 클라이언트 쪽 앱의 보안 시나리오가 다릅니다. Blazor 서버 쪽 앱은 서버에서 실행되기 때문에 권한 부여 확인을 통해 다음을 결정할 수 있습니다.
+Blazor 서버와 Blazor WebAssembly 앱의 보안 시나리오는 서로 다릅니다. Blazor 서버 앱은 서버에서 실행되기 때문에 권한 부여 확인을 통해 다음을 결정할 수 있습니다.
 
 * 사용자에게 표시되는 UI 옵션(예: 사용자가 사용할 수 있는 메뉴 항목)
 * 앱 영역과 구성 요소의 액세스 규칙
 
-Blazor 클라이언트 쪽 앱은 클라이언트에서 실행됩니다. 권한 부여는 표시할 UI 옵션을 결정하는 ‘용도로만’ 사용됩니다. 사용자가 클라이언트 쪽 확인을 수정하거나 무시할 수 있기 때문에, Blazor 클라이언트 쪽 앱은 권한 부여 액세스 규칙을 적용할 수 없습니다.
+Blazor WebAssembly 앱은 클라이언트에서 실행됩니다. 권한 부여는 표시할 UI 옵션을 결정하는 ‘용도로만’ 사용됩니다.  사용자가 클라이언트 쪽 확인을 수정하거나 무시할 수 있기 때문에, Blazor WebAssembly 앱은 권한 부여 액세스 규칙을 적용할 수 없습니다.
 
 ## <a name="authentication"></a>인증
 
-Blazor는 기존 ASP.NET Core 인증 메커니즘을 사용하여 사용자 ID를 설정합니다. 정확한 메커니즘은 Blazor 앱을 호스트하는 방법, 즉 서버 쪽인지 또는 클라이언트 쪽인지에 따라 다릅니다.
+Blazor는 기존 ASP.NET Core 인증 메커니즘을 사용하여 사용자 ID를 설정합니다. 정확한 메커니즘은 Blazor 앱을 호스트하는 방법, 즉 Blazor 서버인지 또는 Blazor WebAssembly인지에 따라 다릅니다.
 
-### <a name="blazor-server-side-authentication"></a>Blazor 서버 쪽 인증
+### <a name="blazor-server-authentication"></a>Blazor 서버 인증
 
-Blazor 서버 쪽 앱은 SignalR을 사용하여 생성된 실시간 연결을 통해 작동합니다. [SignalR 기반 앱의 인증](xref:signalr/authn-and-authz)은 연결 시 처리됩니다. 인증은 쿠키 또는 다른 전달자 토큰을 기반으로 할 수 있습니다.
+Blazor 서버 앱은 SignalR을 사용하여 생성된 실시간 연결을 통해 작동합니다. [SignalR 기반 앱의 인증](xref:signalr/authn-and-authz)은 연결 시 처리됩니다. 인증은 쿠키 또는 다른 전달자 토큰을 기반으로 할 수 있습니다.
 
-프로젝트를 만들 때 Blazor 서버 쪽 프로젝트 템플릿에서 자동으로 인증을 설정할 수 있습니다.
+프로젝트를 만들 때 Blazor 서버 프로젝트 템플릿에서 자동으로 인증을 설정할 수 있습니다.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-<xref:blazor/get-started> 문서의 Visual Studio 지침에 따라 인증 메커니즘이 있는 새 Blazor 서버 쪽 프로젝트를 만듭니다.
+<xref:blazor/get-started> 문서의 Visual Studio 지침에 따라 인증 메커니즘이 있는 새 Blazor 서버 프로젝트를 만듭니다.
 
 **새 ASP.NET Core 웹 애플리케이션 만들기** 대화 상자에서 **Blazor 서버 앱** 템플릿을 선택한 후 **인증**에서 **변경**을 선택합니다.
 
@@ -54,7 +54,7 @@ Blazor 서버 쪽 앱은 SignalR을 사용하여 생성된 실시간 연결을 �
 
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-<xref:blazor/get-started> 문서의 Visual Studio Code 지침에 따라 인증 메커니즘이 있는 새 Blazor 서버 쪽 프로젝트를 만듭니다.
+<xref:blazor/get-started> 문서의 Visual Studio Code 지침에 따라 인증 메커니즘이 있는 새 Blazor 서버 프로젝트를 만듭니다.
 
 ```console
 dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
@@ -88,7 +88,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 <!--
 # [.NET Core CLI](#tab/netcore-cli/)
 
-Follow the .NET Core CLI guidance in the <xref:blazor/get-started> article to create a new Blazor server-side project with an authentication mechanism:
+Follow the .NET Core CLI guidance in the <xref:blazor/get-started> article to create a new Blazor Server project with an authentication mechanism:
 
 ```console
 dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
@@ -111,15 +111,15 @@ The command creates a folder named with the value provided for the `{APP NAME}` 
 
 ---
 
-### <a name="blazor-client-side-authentication"></a>Blazor 클라이언트 쪽 인증
+### <a name="blazor-webassembly-authentication"></a>Blazor WebAssembly 인증
 
-Blazor 클라이언트 쪽 앱에서는 사용자가 클라이언트 쪽 코드를 모두 수정할 수 있기 때문에 인증 확인을 무시할 수 있습니다. JavaScript SPA 프레임워크 또는 모든 운영 체제의 네이티브 앱을 포함하여 모든 클라이언트 쪽 앱 기술에는 동일하게 적용됩니다.
+Blazor WebAssembly 앱에서는 사용자가 클라이언트 쪽 코드를 모두 수정할 수 있기 때문에 인증 확인을 무시할 수 있습니다. JavaScript SPA 프레임워크 또는 모든 운영 체제의 네이티브 앱을 포함하여 모든 클라이언트 쪽 앱 기술에는 동일하게 적용됩니다.
 
-Blazor 클라이언트 쪽 앱에 대한 사용자 지정 `AuthenticationStateProvider` 서비스 구현은 다음 섹션에서 설명합니다.
+Blazor WebAssembly 앱에 대한 사용자 지정 `AuthenticationStateProvider` 서비스 구현은 다음 섹션에서 설명합니다.
 
 ## <a name="authenticationstateprovider-service"></a>AuthenticationStateProvider 서비스
 
-Blazor 서버 쪽 앱에는 ASP.NET Core의 `HttpContext.User`에서 인증 상태 데이터를 가져오는 `AuthenticationStateProvider` 서비스가 기본 제공됩니다. 이런 방법으로 인증 상태가 기존의 ASP.NET Core 서버 쪽 인증 메커니즘과 통합됩니다.
+Blazor 서버 앱에는 ASP.NET Core의 `HttpContext.User`에서 인증 상태 데이터를 가져오는 `AuthenticationStateProvider` 서비스가 기본 제공됩니다. 이런 방법으로 인증 상태가 기존의 ASP.NET Core 서버 쪽 인증 메커니즘과 통합됩니다.
 
 `AuthenticationStateProvider`는 `AuthorizeView` 구성 요소와 `CascadingAuthenticationState` 구성 요소가 인증 상태를 가져오는 데 사용하는 기본 서비스입니다.
 
@@ -157,7 +157,7 @@ DI(종속성 주입) 및 서비스에 대한 자세한 내용은 <xref:blazor/de
 
 ## <a name="implement-a-custom-authenticationstateprovider"></a>사용자 지정 AuthenticationStateProvider 구현
 
-Blazor 클라이언트 쪽 앱을 빌드하는 경우 또는 앱의 사양에 사용자 지정 공급자가 필요한 경우, 공급자를 구현하고 `GetAuthenticationStateAsync`를 재정의합니다.
+Blazor WebAssembly 앱을 빌드하는 경우 또는 앱의 사양에 사용자 지정 공급자가 필요한 경우, 공급자를 구현하고 `GetAuthenticationStateAsync`를 재정의합니다.
 
 ```csharp
 class CustomAuthStateProvider : AuthenticationStateProvider
@@ -238,20 +238,20 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="authorization"></a>권한 부여
 
-사용자가 인증되면, 사용자가 수행할 수 있는 작업을 제어하기 위해 ‘권한 부여’ 규칙이 적용됩니다.
+사용자가 인증되면, 사용자가 수행할 수 있는 작업을 제어하기 위해 ‘권한 부여’ 규칙이 적용됩니다. 
 
 일반적으로 다음 여부에 따라 액세스가 허용 또는 거부됩니다.
 
 * 사용자가 인증(로그인)되었는지 여부
-* 사용자가 ‘역할’에 속하는지 여부
-* 사용자에게 ‘클레임’이 있는지 여부
-* ‘정책’이 충족되었는지 여부
+* 사용자가 ‘역할’에 속하는지 여부 
+* 사용자에게 ‘클레임’이 있는지 여부 
+* ‘정책’이 충족되었는지 여부 
 
 이러한 각 개념은 ASP.NET Core MVC 또는 Razor Pages 앱에서와 동일합니다. ASP.NET Core 보안에 대한 자세한 내용은 [ASP.NET Core 보안 및 ID](xref:security/index)의 문서를 참조하세요.
 
 ## <a name="authorizeview-component"></a>AuthorizeView 구성 요소
 
-`AuthorizeView` 구성 요소는 사용자에게 볼 수 있는 권한이 있는지 여부에 따라 선택적으로 UI를 표시합니다. 이 접근 방식은 사용자에게 데이터를 ‘표시’하기만 하면 되고 절차적 논리에 사용자 ID를 사용할 필요가 없는 경우에 유용합니다.
+`AuthorizeView` 구성 요소는 사용자에게 볼 수 있는 권한이 있는지 여부에 따라 선택적으로 UI를 표시합니다. 이 접근 방식은 사용자에게 데이터를 ‘표시’하기만 하면 되고 절차적 논리에 사용자 ID를 사용할 필요가 없는 경우에 유용합니다. 
 
 이 구성 요소는 로그인한 사용자 정보에 액세스하는 데 사용할 수 있는 `AuthenticationState` 형식의 `context` 변수를 공개합니다.
 
@@ -288,7 +288,7 @@ UI 옵션이나 액세스를 제어하는 역할 또는 정책과 같은 권한 
 
 ### <a name="role-based-and-policy-based-authorization"></a>역할 기반 및 정책 기반 권한 부여
 
-`AuthorizeView` 구성 요소는 ‘역할 기반’ 또는 ‘정책 기반’ 권한 부여를 지원합니다.
+`AuthorizeView` 구성 요소는 ‘역할 기반’ 또는 ‘정책 기반’ 권한 부여를 지원합니다.  
 
 역할 기반 권한 부여의 경우 `Roles` 매개 변수를 사용합니다.
 
@@ -310,13 +310,13 @@ UI 옵션이나 액세스를 제어하는 역할 또는 정책과 같은 권한 
 
 클레임 기반 권한 부여는 정책 기반 권한 부여의 특별한 경우입니다. 예를 들어 사용자에게 특정 클레임이 있어야 하는 정책을 정의할 수 있습니다. 자세한 내용은 <xref:security/authorization/policies>을 참조하세요.
 
-이러한 API는 Blazor 서버 쪽 앱이나 Blazor 클라이언트 쪽 앱에서 사용할 수 있습니다.
+이러한 API는 Blazor 서버나 Blazor WebAssembly 앱에서 사용할 수 있습니다.
 
 `Roles` 또는 `Policy`를 지정하지 않으면 `AuthorizeView`는 기본 정책을 사용합니다.
 
 ### <a name="content-displayed-during-asynchronous-authentication"></a>비동기 인증 중에 표시되는 콘텐츠
 
-Blazor에서는 인증 상태를 ‘비동기적으로’ 확인할 수 있습니다. 이 접근 방식의 주요 시나리오는 Blazor 클라이언트 쪽 앱이 외부 엔드포인트에 인증 요청을 하는 경우입니다.
+Blazor에서는 인증 상태를 ‘비동기적으로’ 확인할 수 있습니다.  이 접근 방식의 주요 시나리오는 Blazor WebAssembly 앱이 외부 엔드포인트에 인증 요청을 하는 경우입니다.
 
 인증이 진행되는 동안 `AuthorizeView`는 기본적으로 아무 콘텐츠도 표시하지 않습니다. 인증 중에 콘텐츠를 표시하려면 `<Authorizing>` 요소를 사용합니다.
 
@@ -333,7 +333,7 @@ Blazor에서는 인증 상태를 ‘비동기적으로’ 확인할 수 있습�
 </AuthorizeView>
 ```
 
-이 접근 방식은 일반적으로 Blazor 서버 쪽 앱에 적용할 수 없습니다. Blazor 서버 쪽 앱은 상태가 설정되는 즉시 인증 상태를 알 수 있습니다. Blazor 서버 쪽 앱의 `AuthorizeView` 구성 요소에 `Authorizing` 콘텐츠를 제공할 수는 있지만, 이 콘텐츠는 표시되지 않습니다.
+이 접근 방식은 일반적으로 Blazor 서버 앱에 적용할 수 없습니다. Blazor 서버 앱은 상태가 설정되는 즉시 인증 상태를 알 수 있습니다. Blazor 서버 앱의 `AuthorizeView` 구성 요소에 `Authorizing` 콘텐츠를 제공할 수는 있지만, 이 콘텐츠는 표시되지 않습니다.
 
 ## <a name="authorize-attribute"></a>[Authorize] 특성
 
@@ -347,7 +347,7 @@ You can only see this if you're signed in.
 ```
 
 > [!IMPORTANT]
-> Blazor 라우터를 통해 연결된 `@page` 구성 요소에서만 `[Authorize]`를 사용합니다. 권한 부여는 라우팅의 일부로만 수행되고, 페이지에 렌더링된 자식 구성 요소에 대해서는 수행되지 ‘않습니다’. 페이지 내의 특정 파트 표시 권한을 부여하려면 `AuthorizeView`를 대신 사용합니다.
+> Blazor 라우터를 통해 연결된 `@page` 구성 요소에서만 `[Authorize]`를 사용합니다. 권한 부여는 라우팅의 일부로만 수행되고, 페이지에 렌더링된 자식 구성 요소에 대해서는 수행되지 ‘않습니다’.  페이지 내의 특정 파트 표시 권한을 부여하려면 `AuthorizeView`를 대신 사용합니다.
 
 구성 요소를 컴파일하기 위해 해당 구성 요소 또는 *_Imports.razor* 파일에 `@using Microsoft.AspNetCore.Authorization`을 추가해야 할 수도 있습니다.
 
@@ -382,7 +382,7 @@ You can only see this if you're signed in.
 * 사용자가 구성 요소에 적용된 `[Authorize]` 조건을 충족하지 못하는 경우. `[Authorize]` 특성은 [[Authorize] 특성](#authorize-attribute) 섹션에서 설명합니다.
 * 비동기 인증이 진행 중인 경우
 
-기본 Blazor 서버 쪽 프로젝트 템플릿에서 *App.razor* 파일은 사용자 지정 콘텐츠를 설정하는 방법을 보여 줍니다.
+기본 Blazor 서버 프로젝트 템플릿에서 *App.razor* 파일은 사용자 지정 콘텐츠를 설정하는 방법을 보여 줍니다.
 
 ```cshtml
 <Router AppAssembly="@typeof(Program).Assembly">
@@ -459,9 +459,9 @@ Not authorized.
 }
 ```
 
-## <a name="authorization-in-blazor-client-side-apps"></a>Blazor 클라이언트 쪽 앱의 권한 부여
+## <a name="authorization-in-blazor-webassembly-apps"></a>Blazor WebAssembly 앱의 권한 부여
 
-Blazor 클라이언트 쪽 앱에서는 사용자가 클라이언트 쪽 코드를 모두 수정할 수 있기 때문에 권한 부여 확인을 무시할 수 있습니다. JavaScript SPA 프레임워크 또는 모든 운영 체제의 네이티브 앱을 포함하여 모든 클라이언트 쪽 앱 기술에는 동일하게 적용됩니다.
+Blazor WebAssembly 앱에서는 사용자가 클라이언트 쪽 코드를 모두 수정할 수 있기 때문에 권한 부여 확인을 무시할 수 있습니다. JavaScript SPA 프레임워크 또는 모든 운영 체제의 네이티브 앱을 포함하여 모든 클라이언트 쪽 앱 기술에는 동일하게 적용됩니다.
 
 **항상 클라이언트 쪽 앱을 통해 액세스한 API 엔드포인트 내에서 서버의 권한 부여 확인을 수행합니다.**
 
@@ -473,7 +473,7 @@ Blazor 클라이언트 쪽 앱에서는 사용자가 클라이언트 쪽 코드�
 
 * **`authenticationStateTask`에 대해 `null` 값을 받았습니다.**
 
-인증을 사용할 수 있는 Blazor 서버 쪽 템플릿으로 프로젝트를 만들지 않았을 가능성이 큽니다. *App.razor* 등의 UI 트리 일부를 `<CascadingAuthenticationState>`로 다음과 같이 래핑합니다.
+인증을 사용할 수 있는 Blazor 서버 템플릿으로 프로젝트를 만들지 않았을 가능성이 큽니다. *App.razor* 등의 UI 트리 일부를 `<CascadingAuthenticationState>`로 다음과 같이 래핑합니다.
 
 ```cshtml
 <CascadingAuthenticationState>
@@ -488,5 +488,5 @@ Blazor 클라이언트 쪽 앱에서는 사용자가 클라이언트 쪽 코드�
 ## <a name="additional-resources"></a>추가 자료
 
 * <xref:security/index>
-* <xref:security/blazor/server-side>
+* <xref:security/blazor/server>
 * <xref:security/authentication/windowsauth>

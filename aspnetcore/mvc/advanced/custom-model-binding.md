@@ -5,12 +5,12 @@ description: 모델 바인딩을 통해 컨트롤러 작업이 ASP.NET Core의 �
 ms.author: riande
 ms.date: 11/13/2018
 uid: mvc/advanced/custom-model-binding
-ms.openlocfilehash: 3623a29976a2e2a7b1bdb22d35716b8a3b448958
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 91f42393ffee3249f9167e10eaea7b279a7cb70b
+ms.sourcegitcommit: e7c56e8da5419bbc20b437c2dd531dedf9b0dc6b
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64891228"
+ms.lasthandoff: 09/10/2019
+ms.locfileid: "70878404"
 ---
 # <a name="custom-model-binding-in-aspnet-core"></a>ASP.NET Core의 사용자 지정 모델 바인딩
 
@@ -104,7 +104,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 
 [!code-csharp[](custom-model-binding/sample/CustomModelBindingSample/Controllers/BoundAuthorsController.cs?name=demo1&highlight=2)]
 
-이 예에서는 인수 이름이 기본 `authorId`가 아니기 때문에 `ModelBinder` 특성을 사용하여 매개 변수에 지정됩니다. 컨트롤러와 작업 메서드는 작업 메서드에서 엔터티를 조회하는 것에 비해 간단합니다. Entity Framework Core를 사용하여 작성자를 가져오는 논리는 모델 바인더로 이동되었습니다. `Author` 모델에 바인딩하는 메서드가 여러 개 있는 경우 상당히 간소화될 수 있습니다.
+이 예에서는 인수 이름이 기본 `authorId`가 아니기 때문에 `ModelBinder` 특성을 사용하여 매개 변수에 지정됩니다. 컨트롤러와 작업 메서드 모두 작업 메서드에서 엔터티를 조회하는 것에 비해 간단합니다. Entity Framework Core를 사용하여 작성자를 가져오는 논리는 모델 바인더로 이동되었습니다. `Author` 모델에 바인딩하는 메서드가 여러 개 있는 경우 상당히 간소화될 수 있습니다.
 
 개별 모델 속성(viewmodel처럼) 또는 작업 메서드 매개 변수에 `ModelBinder` 특성을 적용하여 그 형식 또는 작업에만 해당하는 특정 모델 바인더 또는 모델을 지정할 수 있습니다.
 
@@ -129,6 +129,19 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 컬렉션 끝에 공급자를 추가하면 사용자 지정 바인더가 기회를 얻기도 전에 기본 제공 모델 바인더가 호출될 수 있습니다. 이 예제에서는 `Author` 작업 인수에 사용되도록 사용자 지정 공급자를 컬렉션의 시작 부분에 추가합니다.
 
 [!code-csharp[](custom-model-binding/sample/CustomModelBindingSample/Startup.cs?name=callout&highlight=5-9)]
+
+### <a name="polymorphic-model-binding"></a>다형 모델 바인딩
+
+파생 형식의 다른 모델에 바인딩하는 것을 다형 모델 바인딩이라고 합니다. 요청 값을 특정 파생 모델 형식에 바인딩해야 하는 경우 사용자 지정 모델 바인딩이 필요합니다. 이 방법이 필요하지 않은 한 다형 모델 바인딩은 하지 않는 것이 좋습니다. 다형 모델 바인딩을 사용하면 바인딩된 모델에 대해 추론하기 어려워집니다. 그러나 앱에 다형 모델 바인딩이 필요한 경우 구현은 다음 코드와 비슷합니다.
+
+파생 형식의 다른 모델에 바인딩하는 것을 다형 모델 바인딩이라고 합니다. 요청 값을 특정 파생 모델 형식에 바인딩해야 하는 경우 사용자 지정 모델 바인딩이 필요합니다. 다형 모델 바인딩에는 다음과 같은 특성이 있습니다.
+
+* 모든 언어와 상호 운용할 수 있도록 설계된 REST API에는 일반적이지 않습니다.
+* 바인딩된 모델에 대해 추론하기 어려워집니다.
+
+그러나 앱에 다형 모델 바인딩이 필요한 경우 구현은 다음 코드와 비슷합니다.
+
+[!code-csharp[](custom-model-binding/3.0sample/PolymorphicModelBinding/ModelBinders/PolymorphicModelBinder.cs?name=snippet)]
 
 ## <a name="recommendations-and-best-practices"></a>권장 사항 및 모범 사례
 

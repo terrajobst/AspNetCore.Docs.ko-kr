@@ -5,24 +5,28 @@ description: ASP.NET Core의 웹 API에서 사용자 지정 포맷터를 만들�
 ms.author: riande
 ms.date: 02/08/2017
 uid: web-api/advanced/custom-formatters
-ms.openlocfilehash: 6fb7e192bf3e943eb9018b08fb87a833d3643208
-ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
+ms.openlocfilehash: 122edfd4ccd06ed62e071691f421d2aeef8002b4
+ms.sourcegitcommit: 488cc779fc71377d9371e7a14356113e9c7eff17
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69975678"
+ms.lasthandoff: 09/11/2019
+ms.locfileid: "70913509"
 ---
 # <a name="custom-formatters-in-aspnet-core-web-api"></a>ASP.NET Core Web API에서 포맷터 사용자 지정
 
 작성자: [Tom Dykstra](https://github.com/tdykstra)
 
-ASP.NET Core MVC는 JSON 또는 XML을 사용하여 웹 API에서 데이터 교환에 대한 기본 제공 지원을 제공합니다. 이 문서에서는 사용자 지정 포맷터를 만들어 추가 형식에 대한 지원을 추가하는 방법을 보여줍니다.
+ASP.NET Core MVC는 입력 및 출력 포맷터를 사용하여 Web API에서 데이터 교환을 지원합니다. 입력 포맷터는 [모델 바인딩](xref:mvc/models/model-binding)에서 사용됩니다. 출력 포맷터는 [응답 형식](xref:web-api/advanced/formatting)을 지정하는 데 사용됩니다.
+
+프레임워크는 JSON 및 XML에 대한 기본 제공 입력 및 출력 포맷터를 제공합니다. 일반 텍스트에 대한 기본 제공 출력 포맷터는 제공하지만 일반 텍스트에 대한 입력 포맷터는 제공하지 않습니다.
+
+이 문서에서는 사용자 지정 포맷터를 만들어 추가 형식에 대한 지원을 추가하는 방법을 보여줍니다. 일반 텍스트에 대한 사용자 지정 입력 포맷터의 예제는 GitHub 의 [TextPlainInputFormatter](https://github.com/aspnet/Entropy/blob/master/samples/Mvc.Formatters/TextPlainInputFormatter.cs)를 참조하세요.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-custom-formatters"></a>사용자 지정 포맷터를 사용하는 경우
 
-[콘텐츠 협상](xref:web-api/advanced/formatting#content-negotiation) 프로세스에서 기본 제공 포맷터에 의해 지원되지 않는 콘텐츠 형식을 지원하려는 경우(JSON 및 XML) 사용자 지정 포맷터를 사용합니다.
+[콘텐츠 협상](xref:web-api/advanced/formatting#content-negotiation) 프로세스에서 기본 제공 포맷터에 의해 지원되지 않는 콘텐츠 형식을 지원하려는 경우 사용자 지정 포맷터를 사용합니다.
 
 예를 들어, 웹 API의 클라이언트 중 일부가 [Protobuf](https://github.com/google/protobuf) 형식을 처리할 수 있는 경우 더 효율적이기 때문에 해당 클라이언트에서 Protobuf를 사용합니다. 또는 웹 API에서 연락 데이터를 교환하는 데 자주 사용되는 [vCard](https://wikipedia.org/wiki/VCard) 형식으로 연락처 이름 및 주소를 보낼 수 있습니다. 이 문서에서 제공하는 샘플 앱은 간단한 vCard 포맷터를 구현합니다.
 
@@ -104,7 +108,6 @@ ASP.NET Core MVC는 JSON 또는 XML을 사용하여 웹 API에서 데이터 교�
 
 ## <a name="next-steps"></a>다음 단계
 
-* [GitHub의 일반 텍스트 포맷터의 샘플 코드.](https://github.com/aspnet/Entropy/tree/master/samples/Mvc.Formatters)
 * 간단한 vCard 입력 및 출력 포맷터를 구현하는 [이 문서의 샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/custom-formatters/sample)입니다. 앱은 다음 예제와 같이 vCard를 읽고 씁니다.
 
 ```

@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/23/2019
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 2f0410eb75a6ef3f3d361c75bce7e79ae6d42a61
-ms.sourcegitcommit: 983b31449fe398e6e922eb13e9eb6f4287ec91e8
+ms.openlocfilehash: ea1111f43b6b8b4f47061056e8ad8d505f92dba6
+ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/24/2019
-ms.locfileid: "70017499"
+ms.lasthandoff: 09/07/2019
+ms.locfileid: "70800482"
 ---
 # <a name="build-your-first-blazor-app"></a>첫 번째 Blazor 앱 빌드
 
@@ -67,11 +67,11 @@ HTML 구문을 사용하여 구성 요소를 다른 구성 요소에 포함합�
 
 ## <a name="component-parameters"></a>구성 요소 매개 변수
 
-구성 요소에는 매개 변수도 포함될 수 있습니다. 구성 요소 매개 변수는 `[Parameter]`로 데코레이트된 구성 요소 클래스에서 public 속성을 사용하여 정의됩니다. 특성을 사용하여 태그에서 구성 요소의 인수를 지정합니다.
+구성 요소에는 매개 변수도 포함될 수 있습니다. 구성 요소 매개 변수는 `[Parameter]` 특성을 포함하는 구성 요소 클래스에서 공용 속성을 사용하여 정의됩니다. 특성을 사용하여 태그에서 구성 요소의 인수를 지정합니다.
 
 1. 구성 요소의 `@code` C# 코드를 업데이트합니다.
 
-   * `[Parameter]` 특성으로 데코레이트된 `IncrementAmount` 속성을 추가합니다.
+   * `[Parameter]` 특성을 포함하는 공용 `IncrementAmount` 속성을 추가합니다.
    * `currentCount` 값을 늘릴 때 `IncrementAmount`를 사용하도록 `IncrementCount` 메서드를 변경합니다.
 
    *Pages/Counter.razor*:
