@@ -214,7 +214,7 @@ snapshot option1 = value1_from_json UPDATED, snapshot option2 = 200
 
 <xref:Microsoft.Extensions.Options.IConfigureNamedOptions%601>로 명명된 옵션 지원은 샘플 앱에 예제 &num;6으로 설명되어 있습니다.
 
-앱은 *명명된 옵션* 지원을 통해 명명된 옵션 구성들을 구분할 수 있습니다. 샘플 앱에서 명명된 옵션은 [OptionsServiceCollectionExtensions.Configure](xref:Microsoft.Extensions.DependencyInjection.OptionsServiceCollectionExtensions.Configure*)를 사용하여 선언됩니다. 이 메서드는 [ConfigureNamedOptions\<TOptions>.Configure](xref:Microsoft.Extensions.Options.ConfigureNamedOptions`1.Configure*) 확장 메서드를 호출합니다.
+앱은 *명명된 옵션* 지원을 통해 명명된 옵션 구성들을 구분할 수 있습니다. 샘플 앱에서 명명된 옵션은 [ConfigureNamedOptions\<TOptions>.Configure](xref:Microsoft.Extensions.Options.ConfigureNamedOptions`1.Configure*) 확장 메서드를 호출하는 [OptionsServiceCollectionExtensions.Configure](xref:Microsoft.Extensions.DependencyInjection.OptionsServiceCollectionExtensions.Configure*)를 사용하여 선언됩니다.
 
 [!code-csharp[](options/samples/3.x/OptionsSample/Startup.cs?name=snippet_Example6)]
 
@@ -275,7 +275,7 @@ services.AddOptions<MyOptions>("optionalName")
 
 다음과 같은 두 가지 방법으로 옵션을 구성하는 동안 종속성 주입을 통해 다른 서비스에 액세스할 수 있습니다.
 
-* [OptionsBuilder\<TOptions>](xref:Microsoft.Extensions.Options.OptionsBuilder`1)에서 구성 대리자를 [구성](xref:Microsoft.Extensions.Options.OptionsBuilder`1.Configure*)에 전달합니다. [OptionsBuilder\<TOptions>](xref:Microsoft.Extensions.Options.OptionsBuilder`1)는 최대 5개의 서비스를 사용하여 옵션을 구성할 수 있는 [구성](xref:Microsoft.Extensions.Options.OptionsBuilder`1.Configure*)의 오버로드를 제공합니다.
+* 구성 대리자를 [OptionsBuilder\<TOptions>](xref:Microsoft.Extensions.Options.OptionsBuilder`1)의 [Configure](xref:Microsoft.Extensions.Options.OptionsBuilder`1.Configure*)에 전달합니다. [OptionsBuilder\<TOptions>](xref:Microsoft.Extensions.Options.OptionsBuilder`1)는 최대 5개의 서비스를 사용하여 옵션을 구성할 수 있는 [Configure](xref:Microsoft.Extensions.Options.OptionsBuilder`1.Configure*)의 오버로드를 제공합니다.
 
   ```csharp
   services.AddOptions<MyOptions>("optionalName")
@@ -478,7 +478,7 @@ public void Configure(IApplicationBuilder app, IOptionsMonitor<MyOptions> option
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example1)]
 
-다음 페이지 모델은 <xref:Microsoft.Extensions.Options.IOptionsMonitor%601>를 통해 [생성자 종속성 삽입](xref:mvc/controllers/dependency-injection)을 사용하여 설정에 액세스합니다(*Pages/Index.cshtml.cs*).
+다음 페이지 모델은 <xref:Microsoft.Extensions.Options.IOptionsMonitor%601>를 통해 [생성자 종속성 주입](xref:mvc/controllers/dependency-injection)을 사용하여 설정에 액세스합니다(*Pages/Index.cshtml.cs*).
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=9)]
 
@@ -588,7 +588,7 @@ subOption1 = subvalue1_from_json, subOption2 = 200
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?name=snippet_Example4)]
 
-샘플 앱은 `@inject` 지시문을 사용하여 `IOptionsMonitor<MyOptions>`를 삽입하는 방법을 보여 줍니다.
+샘플 앱은 `@inject` 지시문을 사용하여 `IOptionsMonitor<MyOptions>`를 주입하는 방법을 보여 줍니다.
 
 [!code-cshtml[](options/samples/2.x/OptionsSample/Pages/Index.cshtml?range=1-10&highlight=4)]
 
@@ -612,7 +612,7 @@ subOption1 = subvalue1_from_json, subOption2 = 200
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?name=snippet_Example5)]
 
-다음 이미지에는 *appsettings.json* 파일에서 로드된 초기 `option1` 및 `option2` 값이 나와 있습니다.
+다음 이미지는 *appsettings.json* 파일에서 로드된 초기 `option1` 및 `option2` 값을 보여줍니다.
 
 ```html
 snapshot option1 = value1_from_json, snapshot option2 = -1
@@ -628,7 +628,7 @@ snapshot option1 = value1_from_json UPDATED, snapshot option2 = 200
 
 <xref:Microsoft.Extensions.Options.IConfigureNamedOptions%601>로 명명된 옵션 지원은 샘플 앱에 예제 &num;6으로 설명되어 있습니다.
 
-앱은 *명명된 옵션* 지원을 통해 명명된 옵션 구성들을 구분할 수 있습니다. 샘플 앱에서 명명된 옵션은 [OptionsServiceCollectionExtensions.Configure](xref:Microsoft.Extensions.DependencyInjection.OptionsServiceCollectionExtensions.Configure*)를 사용하여 선언됩니다. 이 메서드는 [ConfigureNamedOptions\<TOptions>.Configure](xref:Microsoft.Extensions.Options.ConfigureNamedOptions`1.Configure*) 확장 메서드를 호출합니다.
+앱은 *명명된 옵션* 지원을 통해 명명된 옵션 구성들을 구분할 수 있습니다. 샘플 앱에서 명명된 옵션은 [ConfigureNamedOptions\<TOptions>.Configure](xref:Microsoft.Extensions.Options.ConfigureNamedOptions`1.Configure*) 확장 메서드를 호출하는 [OptionsServiceCollectionExtensions.Configure](xref:Microsoft.Extensions.DependencyInjection.OptionsServiceCollectionExtensions.Configure*)를 사용하여 선언됩니다.
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example6)]
 
@@ -671,7 +671,7 @@ named_options_2: option1 = ConfigureAll replacement value, option2 = 5
 ```
 
 > [!NOTE]
-> 모든 옵션은 명명된 인스턴스입니다. 기존 <xref:Microsoft.Extensions.Options.IConfigureOptions%601> 인스턴스는 `Options.DefaultName`인 `string.Empty` 인스턴스를 대상으로 지정한 것처럼 처리됩니다. <xref:Microsoft.Extensions.Options.IConfigureNamedOptions%601>는 <xref:Microsoft.Extensions.Options.IConfigureOptions%601>도 구현합니다. <xref:Microsoft.Extensions.Options.IOptionsFactory%601>의 기본 구현에는 각 옵션을 적절하게 사용하기 위한 논리가 있습니다. `null` 명명된 옵션은 특정 명명된 인스턴스 대신 모든 명명된 인스턴스를 대상으로 지정하는 데 사용됩니다(<xref:Microsoft.Extensions.DependencyInjection.OptionsServiceCollectionExtensions.ConfigureAll*> 및 <xref:Microsoft.Extensions.DependencyInjection.OptionsServiceCollectionExtensions.PostConfigureAll*>에서 이 규칙을 사용함).
+> 모든 옵션은 명명된 인스턴스입니다. 기존 <xref:Microsoft.Extensions.Options.IConfigureOptions%601> 인스턴스는 `string.Empty`인 `Options.DefaultName` 인스턴스를 대상으로 지정한 것처럼 처리됩니다. <xref:Microsoft.Extensions.Options.IConfigureNamedOptions%601>는 <xref:Microsoft.Extensions.Options.IConfigureOptions%601>도 구현합니다. <xref:Microsoft.Extensions.Options.IOptionsFactory%601>의 기본 구현에는 각 옵션을 적절하게 사용하기 위한 논리가 있습니다. `null` 명명된 옵션은 특정 명명된 인스턴스 대신 모든 명명된 인스턴스를 대상으로 지정하는 데 사용됩니다(<xref:Microsoft.Extensions.DependencyInjection.OptionsServiceCollectionExtensions.ConfigureAll*> 및 <xref:Microsoft.Extensions.DependencyInjection.OptionsServiceCollectionExtensions.PostConfigureAll*>에서 이 규칙을 사용함).
 
 ## <a name="optionsbuilder-api"></a>OptionsBuilder API
 
@@ -689,7 +689,7 @@ services.AddOptions<MyOptions>("optionalName")
 
 다음과 같은 두 가지 방법으로 옵션을 구성하는 동안 종속성 주입을 통해 다른 서비스에 액세스할 수 있습니다.
 
-* [OptionsBuilder\<TOptions>](xref:Microsoft.Extensions.Options.OptionsBuilder`1)에서 구성 대리자를 [구성](xref:Microsoft.Extensions.Options.OptionsBuilder`1.Configure*)에 전달합니다. [OptionsBuilder\<TOptions>](xref:Microsoft.Extensions.Options.OptionsBuilder`1)는 최대 5개의 서비스를 사용하여 옵션을 구성할 수 있는 [구성](xref:Microsoft.Extensions.Options.OptionsBuilder`1.Configure*)의 오버로드를 제공합니다.
+* 구성 대리자를 [OptionsBuilder\<TOptions>](xref:Microsoft.Extensions.Options.OptionsBuilder`1)의 [Configure](xref:Microsoft.Extensions.Options.OptionsBuilder`1.Configure*)에 전달합니다. [OptionsBuilder\<TOptions>](xref:Microsoft.Extensions.Options.OptionsBuilder`1)는 최대 5개의 서비스를 사용하여 옵션을 구성할 수 있는 [Configure](xref:Microsoft.Extensions.Options.OptionsBuilder`1.Configure*)의 오버로드를 제공합니다.
 
   ```csharp
   services.AddOptions<MyOptions>("optionalName")
@@ -756,7 +756,7 @@ public interface IValidateOptions<TOptions> where TOptions : class
 }
 ```
 
-데이터 주석 기반 유효성 검사는 `OptionsBuilder<TOptions>`에 대해 <xref:Microsoft.Extensions.DependencyInjection.OptionsBuilderDataAnnotationsExtensions.ValidateDataAnnotations*> 메서드를 호출하여 [Microsoft.Extensions.Options.DataAnnotations](https://www.nuget.org/packages/Microsoft.Extensions.Options.DataAnnotations) 패키지에서 사용할 수 있습니다. `Microsoft.Extensions.Options.DataAnnotations`는 [Microsoft.AspNetCore.App 메타패키지](xref:fundamentals/metapackage-app)(ASP.NET Core 2.2 이상)에 포함되어 있습니다.
+데이터 주석 기반 유효성 검사는 `OptionsBuilder<TOptions>`의 <xref:Microsoft.Extensions.DependencyInjection.OptionsBuilderDataAnnotationsExtensions.ValidateDataAnnotations*> 메서드를 호출하여 [Microsoft.Extensions.Options.DataAnnotations](https://www.nuget.org/packages/Microsoft.Extensions.Options.DataAnnotations) 패키지에서 사용할 수 있습니다. `Microsoft.Extensions.Options.DataAnnotations`는 [Microsoft.AspNetCore.App 메타패키지](xref:fundamentals/metapackage-app)(ASP.NET Core 2.2 이상)에 포함되어 있습니다.
 
 ```csharp
 using Microsoft.Extensions.DependencyInjection;
@@ -833,7 +833,7 @@ services.PostConfigureAll<MyOptions>(myOptions =>
 
 ## <a name="accessing-options-during-startup"></a>시작하는 동안 옵션 액세스
 
-`Configure` 메서드가 실행되기 전에 서비스가 빌드되므로 `Startup.Configure`에서 <xref:Microsoft.Extensions.Options.IOptions%601> 및 <xref:Microsoft.Extensions.Options.IOptionsMonitor%601>를 사용할 수 있습니다.
+`Configure` 메서드가 실행되기 전에 서비스가 만들어지므로 `Startup.Configure`에서 <xref:Microsoft.Extensions.Options.IOptions%601> 및 <xref:Microsoft.Extensions.Options.IOptionsMonitor%601>를 사용할 수 있습니다.
 
 ```csharp
 public void Configure(IApplicationBuilder app, IOptionsMonitor<MyOptions> optionsAccessor)
@@ -892,7 +892,7 @@ public void Configure(IApplicationBuilder app, IOptionsMonitor<MyOptions> option
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example1)]
 
-다음 페이지 모델은 <xref:Microsoft.Extensions.Options.IOptionsMonitor%601>를 통해 [생성자 종속성 삽입](xref:mvc/controllers/dependency-injection)을 사용하여 설정에 액세스합니다(*Pages/Index.cshtml.cs*).
+다음 페이지 모델은 <xref:Microsoft.Extensions.Options.IOptionsMonitor%601>를 통해 [생성자 종속성 주입](xref:mvc/controllers/dependency-injection)을 사용하여 설정에 액세스합니다(*Pages/Index.cshtml.cs*).
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=9)]
 
@@ -1103,7 +1103,7 @@ services.AddOptions<MyOptions>("optionalName")
 
 다음과 같은 두 가지 방법으로 옵션을 구성하는 동안 종속성 주입을 통해 다른 서비스에 액세스할 수 있습니다.
 
-* [OptionsBuilder\<TOptions>](xref:Microsoft.Extensions.Options.OptionsBuilder`1)에서 구성 대리자를 [구성](xref:Microsoft.Extensions.Options.OptionsBuilder`1.Configure*)에 전달합니다. [OptionsBuilder\<TOptions>](xref:Microsoft.Extensions.Options.OptionsBuilder`1)는 최대 5개의 서비스를 사용하여 옵션을 구성할 수 있는 [구성](xref:Microsoft.Extensions.Options.OptionsBuilder`1.Configure*)의 오버로드를 제공합니다.
+* 구성 대리자를 [OptionsBuilder\<TOptions>](xref:Microsoft.Extensions.Options.OptionsBuilder`1)의 [Configure](xref:Microsoft.Extensions.Options.OptionsBuilder`1.Configure*)에 전달합니다. [OptionsBuilder\<TOptions>](xref:Microsoft.Extensions.Options.OptionsBuilder`1)는 최대 5개의 서비스를 사용하여 옵션을 구성할 수 있는 [Configure](xref:Microsoft.Extensions.Options.OptionsBuilder`1.Configure*)의 오버로드를 제공합니다.
 
   ```csharp
   services.AddOptions<MyOptions>("optionalName")
@@ -1147,7 +1147,7 @@ services.PostConfigureAll<MyOptions>(myOptions =>
 
 ## <a name="accessing-options-during-startup"></a>시작하는 동안 옵션 액세스
 
-`Configure` 메서드가 실행되기 전에 서비스가 빌드되므로 `Startup.Configure`에서 <xref:Microsoft.Extensions.Options.IOptions%601> 및 <xref:Microsoft.Extensions.Options.IOptionsMonitor%601>를 사용할 수 있습니다.
+`Configure` 메서드가 실행되기 전에 서비스가 만들어지므로 `Startup.Configure`에서 <xref:Microsoft.Extensions.Options.IOptions%601> 및 <xref:Microsoft.Extensions.Options.IOptionsMonitor%601>를 사용할 수 있습니다.
 
 ```csharp
 public void Configure(IApplicationBuilder app, IOptionsMonitor<MyOptions> optionsAccessor)
