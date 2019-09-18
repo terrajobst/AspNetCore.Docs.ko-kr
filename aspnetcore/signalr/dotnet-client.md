@@ -7,56 +7,56 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 09/13/2019
 uid: signalr/dotnet-client
-ms.openlocfilehash: d2755f652e734bad6447ddeb9a82345dcde25b28
-ms.sourcegitcommit: 805f625d16d74e77f02f5f37326e5aceafcb78e3
+ms.openlocfilehash: 4419799ef11469413f813843a9d02ac0223d30c6
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/13/2019
-ms.locfileid: "70985491"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081287"
 ---
-# <a name="aspnet-core-signalr-net-client"></a><span data-ttu-id="02eb0-103">ASP.NET Core SignalR .NET 클라이언트</span><span class="sxs-lookup"><span data-stu-id="02eb0-103">ASP.NET Core SignalR .NET Client</span></span>
+# <a name="aspnet-core-signalr-net-client"></a><span data-ttu-id="4784a-103">ASP.NET Core SignalR .NET 클라이언트</span><span class="sxs-lookup"><span data-stu-id="4784a-103">ASP.NET Core SignalR .NET Client</span></span>
 
-<span data-ttu-id="02eb0-104">ASP.NET Core SignalR .NET 클라이언트 라이브러리를 사용하면 .NET 앱에서 SignalR 허브와 통신할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-104">The ASP.NET Core SignalR .NET client library lets you communicate with SignalR hubs from .NET apps.</span></span>
+<span data-ttu-id="4784a-104">ASP.NET Core SignalR .NET 클라이언트 라이브러리를 사용하면 .NET 앱에서 SignalR 허브와 통신할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-104">The ASP.NET Core SignalR .NET client library lets you communicate with SignalR hubs from .NET apps.</span></span>
 
-<span data-ttu-id="02eb0-105">[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/dotnet-client/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="02eb0-105">[View or download sample code](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/dotnet-client/sample) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="4784a-105">[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/dotnet-client/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="4784a-105">[View or download sample code](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/dotnet-client/sample) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-<span data-ttu-id="02eb0-106">이 문서의 코드 샘플은 ASP.NET Core SignalR .NET 클라이언트를 사용하는 WPF 앱입니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-106">The code sample in this article is a WPF app that uses the ASP.NET Core SignalR .NET client.</span></span>
+<span data-ttu-id="4784a-106">이 문서의 코드 샘플은 ASP.NET Core SignalR .NET 클라이언트를 사용하는 WPF 앱입니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-106">The code sample in this article is a WPF app that uses the ASP.NET Core SignalR .NET client.</span></span>
 
-## <a name="install-the-signalr-net-client-package"></a><span data-ttu-id="02eb0-107">SignalR .NET 클라이언트 패키지 설치하기</span><span class="sxs-lookup"><span data-stu-id="02eb0-107">Install the SignalR .NET client package</span></span>
+## <a name="install-the-signalr-net-client-package"></a><span data-ttu-id="4784a-107">SignalR .NET 클라이언트 패키지 설치하기</span><span class="sxs-lookup"><span data-stu-id="4784a-107">Install the SignalR .NET client package</span></span>
 
-<span data-ttu-id="02eb0-108">[AspNetCore SignalR](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client) 패키지는 .Net 클라이언트가 SignalR hubs에 연결 하는 데 필요 합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-108">The [Microsoft.AspNetCore.SignalR.Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client) package is required for .NET clients to connect to SignalR hubs.</span></span>
+<span data-ttu-id="4784a-108">[AspNetCore SignalR](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client) 패키지는 .Net 클라이언트가 SignalR hubs에 연결 하는 데 필요 합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-108">The [Microsoft.AspNetCore.SignalR.Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client) package is required for .NET clients to connect to SignalR hubs.</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="02eb0-109">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="02eb0-109">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="4784a-109">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="4784a-109">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="02eb0-110">클라이언트 라이브러리를 설치하려면 **패키지 관리자 콘솔** 창에서 다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-110">To install the client library, run the following command in the **Package Manager Console** window:</span></span>
+<span data-ttu-id="4784a-110">클라이언트 라이브러리를 설치하려면 **패키지 관리자 콘솔** 창에서 다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-110">To install the client library, run the following command in the **Package Manager Console** window:</span></span>
 
 ```powershell
 Install-Package Microsoft.AspNetCore.SignalR.Client
 ```
 
-# <a name="net-core-clitabnetcore-cli"></a>[<span data-ttu-id="02eb0-111">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="02eb0-111">.NET Core CLI</span></span>](#tab/netcore-cli)
+# <a name="net-core-clitabnetcore-cli"></a>[<span data-ttu-id="4784a-111">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="4784a-111">.NET Core CLI</span></span>](#tab/netcore-cli)
 
-<span data-ttu-id="02eb0-112">클라이언트 라이브러리를 설치 하려면 명령 셸에서 다음 명령을 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-112">To install the client library, run the following command in a command shell:</span></span>
+<span data-ttu-id="4784a-112">클라이언트 라이브러리를 설치 하려면 명령 셸에서 다음 명령을 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-112">To install the client library, run the following command in a command shell:</span></span>
 
-```console
+```dotnetcli
 dotnet add package Microsoft.AspNetCore.SignalR.Client
 ```
 
 ---
 
-## <a name="connect-to-a-hub"></a><span data-ttu-id="02eb0-113">허브에 연결하기</span><span class="sxs-lookup"><span data-stu-id="02eb0-113">Connect to a hub</span></span>
+## <a name="connect-to-a-hub"></a><span data-ttu-id="4784a-113">허브에 연결하기</span><span class="sxs-lookup"><span data-stu-id="4784a-113">Connect to a hub</span></span>
 
-<span data-ttu-id="02eb0-114">연결을 설정하려면 `HubConnectionBuilder`를 생성하고 `Build`를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-114">To establish a connection, create a `HubConnectionBuilder` and call `Build`.</span></span> <span data-ttu-id="02eb0-115">연결을 만드는 동안 허브 URL, 프로토콜, 전송 형태, 로그 수준, 헤더 및 기타 옵션을 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-115">The hub URL, protocol, transport type, log level, headers, and other options can be configured while building a connection.</span></span> <span data-ttu-id="02eb0-116">`HubConnectionBuilder` 메서드들 중 원하는 메서드를 `Build`에 삽입하여 필요한 모든 옵션을 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-116">Configure any required options by inserting any of the `HubConnectionBuilder` methods into `Build`.</span></span> <span data-ttu-id="02eb0-117">`StartAsync`를 사용하여 연결을 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-117">Start the connection with `StartAsync`.</span></span>
+<span data-ttu-id="4784a-114">연결을 설정하려면 `HubConnectionBuilder`를 생성하고 `Build`를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-114">To establish a connection, create a `HubConnectionBuilder` and call `Build`.</span></span> <span data-ttu-id="4784a-115">연결을 만드는 동안 허브 URL, 프로토콜, 전송 형태, 로그 수준, 헤더 및 기타 옵션을 구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-115">The hub URL, protocol, transport type, log level, headers, and other options can be configured while building a connection.</span></span> <span data-ttu-id="4784a-116">`HubConnectionBuilder` 메서드들 중 원하는 메서드를 `Build`에 삽입하여 필요한 모든 옵션을 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-116">Configure any required options by inserting any of the `HubConnectionBuilder` methods into `Build`.</span></span> <span data-ttu-id="4784a-117">`StartAsync`를 사용하여 연결을 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-117">Start the connection with `StartAsync`.</span></span>
 
 [!code-csharp[Build hub connection](dotnet-client/sample/signalrchatclient/MainWindow.xaml.cs?name=snippet_MainWindowClass&highlight=15-17,39)]
 
-## <a name="handle-lost-connection"></a><span data-ttu-id="02eb0-118">연결 해제 처리하기</span><span class="sxs-lookup"><span data-stu-id="02eb0-118">Handle lost connection</span></span>
+## <a name="handle-lost-connection"></a><span data-ttu-id="4784a-118">연결 해제 처리하기</span><span class="sxs-lookup"><span data-stu-id="4784a-118">Handle lost connection</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-### <a name="automatically-reconnect"></a><span data-ttu-id="02eb0-119">자동으로 다시 연결</span><span class="sxs-lookup"><span data-stu-id="02eb0-119">Automatically reconnect</span></span>
+### <a name="automatically-reconnect"></a><span data-ttu-id="4784a-119">자동으로 다시 연결</span><span class="sxs-lookup"><span data-stu-id="4784a-119">Automatically reconnect</span></span>
 
-<span data-ttu-id="02eb0-120">는의 메서드 `WithAutomaticReconnect` <xref:Microsoft.AspNetCore.SignalR.Client.HubConnection> 를사용하여자동으로다시연결되도록<xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder>구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-120">The <xref:Microsoft.AspNetCore.SignalR.Client.HubConnection> can be configured to automatically reconnect using the `WithAutomaticReconnect` method on the <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder>.</span></span> <span data-ttu-id="02eb0-121">기본적으로 자동으로 다시 연결 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-121">It won't automatically reconnect by default.</span></span>
+<span data-ttu-id="4784a-120">는의 메서드 `WithAutomaticReconnect` <xref:Microsoft.AspNetCore.SignalR.Client.HubConnection> 를사용하여자동으로다시연결되도록<xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder>구성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-120">The <xref:Microsoft.AspNetCore.SignalR.Client.HubConnection> can be configured to automatically reconnect using the `WithAutomaticReconnect` method on the <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder>.</span></span> <span data-ttu-id="4784a-121">기본적으로 자동으로 다시 연결 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-121">It won't automatically reconnect by default.</span></span>
 
 ```csharp
 HubConnection connection= new HubConnectionBuilder()
@@ -65,9 +65,9 @@ HubConnection connection= new HubConnectionBuilder()
     .Build();
 ```
 
-<span data-ttu-id="02eb0-122">매개 변수를 `WithAutomaticReconnect()` 사용 하지 않으면는 각 다시 연결 시도를 시도 하기 전에 0, 2, 10 및 30 초 동안 대기 하도록 클라이언트를 구성 하 고, 실패 한 네 번 시도 하면 중지 합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-122">Without any parameters, `WithAutomaticReconnect()` configures the client to wait 0, 2, 10, and 30 seconds respectively before trying each reconnect attempt, stopping after four failed attempts.</span></span>
+<span data-ttu-id="4784a-122">매개 변수를 `WithAutomaticReconnect()` 사용 하지 않으면는 각 다시 연결 시도를 시도 하기 전에 0, 2, 10 및 30 초 동안 대기 하도록 클라이언트를 구성 하 고, 실패 한 네 번 시도 하면 중지 합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-122">Without any parameters, `WithAutomaticReconnect()` configures the client to wait 0, 2, 10, and 30 seconds respectively before trying each reconnect attempt, stopping after four failed attempts.</span></span>
 
-<span data-ttu-id="02eb0-123">다시 연결 시도를 시작 하기 전에 `HubConnection` 는 `HubConnectionState.Reconnecting` 상태로 전환 되 고 이벤트를 `Reconnecting` 발생 시킵니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-123">Before starting any reconnect attempts, the `HubConnection` will transition to the `HubConnectionState.Reconnecting` state and fire the `Reconnecting` event.</span></span>  <span data-ttu-id="02eb0-124">이렇게 하면 연결이 손실 되었음을 사용자에 게 경고 하 고 UI 요소를 사용 하지 않도록 설정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-124">This provides an opportunity to warn users that the connection has been lost and to disable UI elements.</span></span> <span data-ttu-id="02eb0-125">비 대화형 앱은 메시지 큐를 시작 하거나 삭제할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-125">Non-interactive apps can start queuing or dropping messages.</span></span>
+<span data-ttu-id="4784a-123">다시 연결 시도를 시작 하기 전에 `HubConnection` 는 `HubConnectionState.Reconnecting` 상태로 전환 되 고 이벤트를 `Reconnecting` 발생 시킵니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-123">Before starting any reconnect attempts, the `HubConnection` will transition to the `HubConnectionState.Reconnecting` state and fire the `Reconnecting` event.</span></span>  <span data-ttu-id="4784a-124">이렇게 하면 연결이 손실 되었음을 사용자에 게 경고 하 고 UI 요소를 사용 하지 않도록 설정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-124">This provides an opportunity to warn users that the connection has been lost and to disable UI elements.</span></span> <span data-ttu-id="4784a-125">비 대화형 앱은 메시지 큐를 시작 하거나 삭제할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-125">Non-interactive apps can start queuing or dropping messages.</span></span>
 
 ```csharp
 connection.Reconnecting += error =>
@@ -81,12 +81,12 @@ connection.Reconnecting += error =>
 };
 ```
 
-<span data-ttu-id="02eb0-126">클라이언트가 처음 네 번의 시도 내에서 다시 연결 하는 `HubConnection` 경우는 `Connected` 상태로 다시 전환 되 고 이벤트를 `Reconnected` 발생 시킵니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-126">If the client successfully reconnects within its first four attempts, the `HubConnection` will transition back to the `Connected` state and fire the `Reconnected` event.</span></span> <span data-ttu-id="02eb0-127">이렇게 하면 연결을 다시 설정 하 고 대기 중인 모든 메시지를 큐에서 제거 하는 사용자에 게 알릴 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-127">This provides an opportunity to inform users the connection has been reestablished and dequeue any queued messages.</span></span>
+<span data-ttu-id="4784a-126">클라이언트가 처음 네 번의 시도 내에서 다시 연결 하는 `HubConnection` 경우는 `Connected` 상태로 다시 전환 되 고 이벤트를 `Reconnected` 발생 시킵니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-126">If the client successfully reconnects within its first four attempts, the `HubConnection` will transition back to the `Connected` state and fire the `Reconnected` event.</span></span> <span data-ttu-id="4784a-127">이렇게 하면 연결을 다시 설정 하 고 대기 중인 모든 메시지를 큐에서 제거 하는 사용자에 게 알릴 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-127">This provides an opportunity to inform users the connection has been reestablished and dequeue any queued messages.</span></span>
 
-<span data-ttu-id="02eb0-128">연결이 서버에서 완전히 새로운 형태 이므로 `ConnectionId` `Reconnected` 이벤트 처리기에 새가 제공 됩니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-128">Since the connection looks entirely new to the server, a new `ConnectionId` will be provided to the `Reconnected` event handlers.</span></span>
+<span data-ttu-id="4784a-128">연결이 서버에서 완전히 새로운 형태 이므로 `ConnectionId` `Reconnected` 이벤트 처리기에 새가 제공 됩니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-128">Since the connection looks entirely new to the server, a new `ConnectionId` will be provided to the `Reconnected` event handlers.</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="02eb0-129">가 `Reconnected` [협상](xref:signalr/configuration#configure-client-options)을 건너뛰도록 `connectionId` 구성 된 경우 `HubConnection` 이벤트 처리기의 매개 변수는 null이 됩니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-129">The `Reconnected` event handler's `connectionId` parameter will be null if the `HubConnection` was configured to [skip negotiation](xref:signalr/configuration#configure-client-options).</span></span>
+> <span data-ttu-id="4784a-129">가 `Reconnected` [협상](xref:signalr/configuration#configure-client-options)을 건너뛰도록 `connectionId` 구성 된 경우 `HubConnection` 이벤트 처리기의 매개 변수는 null이 됩니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-129">The `Reconnected` event handler's `connectionId` parameter will be null if the `HubConnection` was configured to [skip negotiation](xref:signalr/configuration#configure-client-options).</span></span>
 
 ```csharp
 connection.Reconnected += connectionId =>
@@ -100,7 +100,7 @@ connection.Reconnected += connectionId =>
 };
 ```
 
-<span data-ttu-id="02eb0-130">`WithAutomaticReconnect()`초기 시작 오류 `HubConnection` 를 다시 시도 하도록를 구성 하지 않으므로 시작 실패를 수동으로 처리 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-130">`WithAutomaticReconnect()` won't configure the `HubConnection` to retry initial start failures, so start failures need to be handled manually:</span></span>
+<span data-ttu-id="4784a-130">`WithAutomaticReconnect()`초기 시작 오류 `HubConnection` 를 다시 시도 하도록를 구성 하지 않으므로 시작 실패를 수동으로 처리 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-130">`WithAutomaticReconnect()` won't configure the `HubConnection` to retry initial start failures, so start failures need to be handled manually:</span></span>
 
 ```csharp
 public static async Task<bool> ConnectWithRetryAsync(HubConnection connection, CancellationToken token)
@@ -128,7 +128,7 @@ public static async Task<bool> ConnectWithRetryAsync(HubConnection connection, C
 }
 ```
 
-<span data-ttu-id="02eb0-131">클라이언트가 처음 네 번의 시도 `HubConnection` 내에서 성공적으로 다시 연결 되지 않으면이 `Disconnected` 상태로 전환 되 고 이벤트를 <xref:Microsoft.AspNetCore.SignalR.Client.HubConnection.Closed> 발생 시킵니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-131">If the client doesn't successfully reconnect within its first four attempts, the `HubConnection` will transition to the `Disconnected` state and fire the <xref:Microsoft.AspNetCore.SignalR.Client.HubConnection.Closed> event.</span></span> <span data-ttu-id="02eb0-132">이를 통해 연결을 수동으로 다시 시작 하거나 연결이 영구적으로 손실 되었음을 사용자에 게 알릴 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-132">This provides an opportunity to attempt to restart the connection manually or inform users the connection has been permanently lost.</span></span>
+<span data-ttu-id="4784a-131">클라이언트가 처음 네 번의 시도 `HubConnection` 내에서 성공적으로 다시 연결 되지 않으면이 `Disconnected` 상태로 전환 되 고 이벤트를 <xref:Microsoft.AspNetCore.SignalR.Client.HubConnection.Closed> 발생 시킵니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-131">If the client doesn't successfully reconnect within its first four attempts, the `HubConnection` will transition to the `Disconnected` state and fire the <xref:Microsoft.AspNetCore.SignalR.Client.HubConnection.Closed> event.</span></span> <span data-ttu-id="4784a-132">이를 통해 연결을 수동으로 다시 시작 하거나 연결이 영구적으로 손실 되었음을 사용자에 게 알릴 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-132">This provides an opportunity to attempt to restart the connection manually or inform users the connection has been permanently lost.</span></span>
 
 ```csharp
 connection.Closed += error =>
@@ -141,7 +141,7 @@ connection.Closed += error =>
 };
 ```
 
-<span data-ttu-id="02eb0-133">연결을 끊거나 다시 연결 하는 시간 `WithAutomaticReconnect` 을 변경 하기 전에 사용자가 다시 연결 시도 횟수를 구성 하기 위해는 각 다시 연결 시도를 시작 하기 전에 대기할 지연 시간 (밀리초)을 나타내는 숫자 배열을 허용 합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-133">In order to configure a custom number of reconnect attempts before disconnecting or change the reconnect timing, `WithAutomaticReconnect` accepts an array of numbers representing the delay in milliseconds to wait before starting each reconnect attempt.</span></span>
+<span data-ttu-id="4784a-133">연결을 끊거나 다시 연결 하는 시간 `WithAutomaticReconnect` 을 변경 하기 전에 사용자가 다시 연결 시도 횟수를 구성 하기 위해는 각 다시 연결 시도를 시작 하기 전에 대기할 지연 시간 (밀리초)을 나타내는 숫자 배열을 허용 합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-133">In order to configure a custom number of reconnect attempts before disconnecting or change the reconnect timing, `WithAutomaticReconnect` accepts an array of numbers representing the delay in milliseconds to wait before starting each reconnect attempt.</span></span>
 
 ```csharp
 HubConnection connection= new HubConnectionBuilder()
@@ -152,19 +152,19 @@ HubConnection connection= new HubConnectionBuilder()
     // .WithAutomaticReconnect(new[] { TimeSpan.Zero, TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(10), TimeSpan.FromSeconds(30) }) yields the default behavior.
 ```
 
-<span data-ttu-id="02eb0-134">앞의 예제에서는 연결이 `HubConnection` 끊긴 후 즉시 다시 연결 시도를 시작 하도록를 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-134">The preceding example configures the `HubConnection` to start attempting reconnects immediately after the connection is lost.</span></span> <span data-ttu-id="02eb0-135">기본 구성의 경우에도 마찬가지입니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-135">This is also true for the default configuration.</span></span>
+<span data-ttu-id="4784a-134">앞의 예제에서는 연결이 `HubConnection` 끊긴 후 즉시 다시 연결 시도를 시작 하도록를 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-134">The preceding example configures the `HubConnection` to start attempting reconnects immediately after the connection is lost.</span></span> <span data-ttu-id="4784a-135">기본 구성의 경우에도 마찬가지입니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-135">This is also true for the default configuration.</span></span>
 
-<span data-ttu-id="02eb0-136">첫 번째 다시 연결 시도가 실패 하면 두 번째 다시 연결 시도도 기본 구성에서와 같이 2 초 동안 대기 하는 대신 즉시 시작 됩니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-136">If the first reconnect attempt fails, the second reconnect attempt will also start immediately instead of waiting 2 seconds like it would in the default configuration.</span></span>
+<span data-ttu-id="4784a-136">첫 번째 다시 연결 시도가 실패 하면 두 번째 다시 연결 시도도 기본 구성에서와 같이 2 초 동안 대기 하는 대신 즉시 시작 됩니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-136">If the first reconnect attempt fails, the second reconnect attempt will also start immediately instead of waiting 2 seconds like it would in the default configuration.</span></span>
 
-<span data-ttu-id="02eb0-137">두 번째 다시 연결 시도가 실패 하면 세 번째 다시 연결 시도가 10 초 후에 다시 시작 됩니다 .이는 기본 구성 처럼 다시 시작 됩니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-137">If the second reconnect attempt fails, the third reconnect attempt will start in 10 seconds which is again like the default configuration.</span></span>
+<span data-ttu-id="4784a-137">두 번째 다시 연결 시도가 실패 하면 세 번째 다시 연결 시도가 10 초 후에 다시 시작 됩니다 .이는 기본 구성 처럼 다시 시작 됩니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-137">If the second reconnect attempt fails, the third reconnect attempt will start in 10 seconds which is again like the default configuration.</span></span>
 
-<span data-ttu-id="02eb0-138">그런 다음 사용자 지정 동작은 세 번째 다시 연결 시도가 실패 한 후 중지 하 여 기본 동작에서 다시 달라 지므로 합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-138">The custom behavior then diverges again from the default behavior by stopping after the third reconnect attempt failure.</span></span> <span data-ttu-id="02eb0-139">기본 구성에서는 30 초 내에 다시 한 번 더 다시 연결 하려고 시도 합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-139">In the default configuration there would be one more reconnect attempt in another 30 seconds.</span></span>
+<span data-ttu-id="4784a-138">그런 다음 사용자 지정 동작은 세 번째 다시 연결 시도가 실패 한 후 중지 하 여 기본 동작에서 다시 달라 지므로 합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-138">The custom behavior then diverges again from the default behavior by stopping after the third reconnect attempt failure.</span></span> <span data-ttu-id="4784a-139">기본 구성에서는 30 초 내에 다시 한 번 더 다시 연결 하려고 시도 합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-139">In the default configuration there would be one more reconnect attempt in another 30 seconds.</span></span>
 
-<span data-ttu-id="02eb0-140">자동 다시 연결 시도 `WithAutomaticReconnect` 의 타이밍과 수를 더 많이 제어 하려는 경우는 라는 `NextRetryDelay`단일 메서드가 있는 `IRetryPolicy` 인터페이스를 구현 하는 개체를 허용 합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-140">If you want even more control over the timing and number of automatic reconnect attempts, `WithAutomaticReconnect` accepts an object implementing the `IRetryPolicy` interface, which has a single method named `NextRetryDelay`.</span></span>
+<span data-ttu-id="4784a-140">자동 다시 연결 시도 `WithAutomaticReconnect` 의 타이밍과 수를 더 많이 제어 하려는 경우는 라는 `NextRetryDelay`단일 메서드가 있는 `IRetryPolicy` 인터페이스를 구현 하는 개체를 허용 합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-140">If you want even more control over the timing and number of automatic reconnect attempts, `WithAutomaticReconnect` accepts an object implementing the `IRetryPolicy` interface, which has a single method named `NextRetryDelay`.</span></span>
 
-<span data-ttu-id="02eb0-141">`NextRetryDelay`는 형식의 `RetryContext`단일 인수를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-141">`NextRetryDelay` takes a single argument with the type `RetryContext`.</span></span> <span data-ttu-id="02eb0-142">`PreviousRetryCount` 에는`ElapsedTime` , 및 각각,`TimeSpan`및 인 세 가지 속성이 있습니다. `long` `RetryReason` `RetryContext` `Exception`</span><span class="sxs-lookup"><span data-stu-id="02eb0-142">The `RetryContext` has three properties: `PreviousRetryCount`, `ElapsedTime` and `RetryReason` which are a `long`, a `TimeSpan` and an `Exception` respectively.</span></span> <span data-ttu-id="02eb0-143">첫 번째 다시 연결을 시도 하기 `PreviousRetryCount` 전에 `ElapsedTime` 와는 모두 0이 되며 `RetryReason` 은 연결이 끊어지는 원인이 되는 예외입니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-143">Before the first reconnect attempt, both `PreviousRetryCount` and `ElapsedTime` will be zero, and the `RetryReason` will be the Exception that caused the connection to be lost.</span></span> <span data-ttu-id="02eb0-144">실패 한 각 재시도 후에 `PreviousRetryCount` 는 `ElapsedTime` 1 씩 증가 하 고, 지금까지 다시 연결 하는 데 걸린 시간을 반영 하도록 업데이트 되며, `RetryReason` 는 마지막 다시 연결 시도가 실패 한 원인이 됩니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-144">After each failed retry attempt, `PreviousRetryCount` will be incremented by one, `ElapsedTime` will be updated to reflect the amount of time spent reconnecting so far, and the `RetryReason` will be the Exception that caused the last reconnect attempt to fail.</span></span>
+<span data-ttu-id="4784a-141">`NextRetryDelay`는 형식의 `RetryContext`단일 인수를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-141">`NextRetryDelay` takes a single argument with the type `RetryContext`.</span></span> <span data-ttu-id="4784a-142">`PreviousRetryCount` 에는`ElapsedTime` , 및 각각,`TimeSpan`및 인 세 가지 속성이 있습니다. `long` `RetryReason` `RetryContext` `Exception`</span><span class="sxs-lookup"><span data-stu-id="4784a-142">The `RetryContext` has three properties: `PreviousRetryCount`, `ElapsedTime` and `RetryReason` which are a `long`, a `TimeSpan` and an `Exception` respectively.</span></span> <span data-ttu-id="4784a-143">첫 번째 다시 연결을 시도 하기 `PreviousRetryCount` 전에 `ElapsedTime` 와는 모두 0이 되며 `RetryReason` 은 연결이 끊어지는 원인이 되는 예외입니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-143">Before the first reconnect attempt, both `PreviousRetryCount` and `ElapsedTime` will be zero, and the `RetryReason` will be the Exception that caused the connection to be lost.</span></span> <span data-ttu-id="4784a-144">실패 한 각 재시도 후에 `PreviousRetryCount` 는 `ElapsedTime` 1 씩 증가 하 고, 지금까지 다시 연결 하는 데 걸린 시간을 반영 하도록 업데이트 되며, `RetryReason` 는 마지막 다시 연결 시도가 실패 한 원인이 됩니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-144">After each failed retry attempt, `PreviousRetryCount` will be incremented by one, `ElapsedTime` will be updated to reflect the amount of time spent reconnecting so far, and the `RetryReason` will be the Exception that caused the last reconnect attempt to fail.</span></span>
 
-<span data-ttu-id="02eb0-145">`NextRetryDelay``null` 는`HubConnection` 다음 다시 연결 시도 전에 대기 시간을 나타내는 TimeSpan을 반환 해야 합니다. 그렇지 않으면이 다시 연결을 중지 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-145">`NextRetryDelay` must return either a TimeSpan representing the time to wait before the next reconnect attempt or `null` if the `HubConnection` should stop reconnecting.</span></span>
+<span data-ttu-id="4784a-145">`NextRetryDelay``null` 는`HubConnection` 다음 다시 연결 시도 전에 대기 시간을 나타내는 TimeSpan을 반환 해야 합니다. 그렇지 않으면이 다시 연결을 중지 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-145">`NextRetryDelay` must return either a TimeSpan representing the time to wait before the next reconnect attempt or `null` if the `HubConnection` should stop reconnecting.</span></span>
 
 ```csharp
 public class RandomRetryPolicy : IRetryPolicy
@@ -195,22 +195,22 @@ HubConnection connection = new HubConnectionBuilder()
     .Build();
 ```
 
-<span data-ttu-id="02eb0-146">또는 [수동으로 다시 연결](#manually-reconnect)에 설명 된 대로 클라이언트를 수동으로 다시 연결 하는 코드를 작성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-146">Alternatively, you can write code that will reconnect your client manually as demonstrated in [Manually reconnect](#manually-reconnect).</span></span>
+<span data-ttu-id="4784a-146">또는 [수동으로 다시 연결](#manually-reconnect)에 설명 된 대로 클라이언트를 수동으로 다시 연결 하는 코드를 작성할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-146">Alternatively, you can write code that will reconnect your client manually as demonstrated in [Manually reconnect](#manually-reconnect).</span></span>
 
 ::: moniker-end
 
-### <a name="manually-reconnect"></a><span data-ttu-id="02eb0-147">수동으로 다시 연결</span><span class="sxs-lookup"><span data-stu-id="02eb0-147">Manually reconnect</span></span>
+### <a name="manually-reconnect"></a><span data-ttu-id="4784a-147">수동으로 다시 연결</span><span class="sxs-lookup"><span data-stu-id="4784a-147">Manually reconnect</span></span>
 
 ::: moniker range="< aspnetcore-3.0"
 
 > [!WARNING]
-> <span data-ttu-id="02eb0-148">3\.0 이전 버전의 SignalR에 대 한 .NET 클라이언트는 자동으로 다시 연결 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-148">Prior to 3.0, the .NET client for SignalR doesn't automatically reconnect.</span></span> <span data-ttu-id="02eb0-149">클라이언트에 수동으로 다시 연결 하는 코드를 작성 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-149">You must write code that will reconnect your client manually.</span></span>
+> <span data-ttu-id="4784a-148">3\.0 이전 버전의 SignalR에 대 한 .NET 클라이언트는 자동으로 다시 연결 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-148">Prior to 3.0, the .NET client for SignalR doesn't automatically reconnect.</span></span> <span data-ttu-id="4784a-149">클라이언트에 수동으로 다시 연결 하는 코드를 작성 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-149">You must write code that will reconnect your client manually.</span></span>
 
 ::: moniker-end
 
-<span data-ttu-id="02eb0-150"><xref:Microsoft.AspNetCore.SignalR.Client.HubConnection.Closed> 이벤트를 이용해서 끊긴 연결에 대응합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-150">Use the <xref:Microsoft.AspNetCore.SignalR.Client.HubConnection.Closed> event to respond to a lost connection.</span></span> <span data-ttu-id="02eb0-151">예를 들어 자동으로 재연결할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-151">For example, you might want to automate reconnection.</span></span>
+<span data-ttu-id="4784a-150"><xref:Microsoft.AspNetCore.SignalR.Client.HubConnection.Closed> 이벤트를 이용해서 끊긴 연결에 대응합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-150">Use the <xref:Microsoft.AspNetCore.SignalR.Client.HubConnection.Closed> event to respond to a lost connection.</span></span> <span data-ttu-id="4784a-151">예를 들어 자동으로 재연결할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-151">For example, you might want to automate reconnection.</span></span>
 
-<span data-ttu-id="02eb0-152">`Closed` 이벤트에는 `async void`를 사용하지 않고 비동기 코드를 실행할 수 있는 `Task`를 반환하는 대리자가 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-152">The `Closed` event requires a delegate that returns a `Task`, which allows async code to run without using `async void`.</span></span> <span data-ttu-id="02eb0-153">동기적으로 실행되는 `Closed` 이벤트 처리기에서 대리자의 시그니처를 만족시키려면 `Task.CompletedTask`를 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-153">To satisfy the delegate signature in a `Closed` event handler that runs synchronously, return `Task.CompletedTask`:</span></span>
+<span data-ttu-id="4784a-152">`Closed` 이벤트에는 `async void`를 사용하지 않고 비동기 코드를 실행할 수 있는 `Task`를 반환하는 대리자가 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-152">The `Closed` event requires a delegate that returns a `Task`, which allows async code to run without using `async void`.</span></span> <span data-ttu-id="4784a-153">동기적으로 실행되는 `Closed` 이벤트 처리기에서 대리자의 시그니처를 만족시키려면 `Task.CompletedTask`를 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-153">To satisfy the delegate signature in a `Closed` event handler that runs synchronously, return `Task.CompletedTask`:</span></span>
 
 ```csharp
 connection.Closed += (error) => {
@@ -219,44 +219,44 @@ connection.Closed += (error) => {
 };
 ```
 
-<span data-ttu-id="02eb0-154">비동기를 지원하는 가장 큰 이유는 연결을 다시 시작할 수도 있기 때문입니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-154">The main reason for the async support is so you can restart the connection.</span></span> <span data-ttu-id="02eb0-155">연결 시작은 비동기 작업입니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-155">Starting a connection is an async action.</span></span>
+<span data-ttu-id="4784a-154">비동기를 지원하는 가장 큰 이유는 연결을 다시 시작할 수도 있기 때문입니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-154">The main reason for the async support is so you can restart the connection.</span></span> <span data-ttu-id="4784a-155">연결 시작은 비동기 작업입니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-155">Starting a connection is an async action.</span></span>
 
-<span data-ttu-id="02eb0-156">연결을 재시작하는 `Closed` 처리기에서는 다음 예제에서 볼 수 있는 것처럼 서버의 과부하를 방지할 수 있도록 임의의 지연 시간 동안 대기하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-156">In a `Closed` handler that restarts the connection, consider waiting for some random delay to prevent overloading the server, as shown in the following example:</span></span>
+<span data-ttu-id="4784a-156">연결을 재시작하는 `Closed` 처리기에서는 다음 예제에서 볼 수 있는 것처럼 서버의 과부하를 방지할 수 있도록 임의의 지연 시간 동안 대기하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-156">In a `Closed` handler that restarts the connection, consider waiting for some random delay to prevent overloading the server, as shown in the following example:</span></span>
 
 [!code-csharp[Use Closed event handler to automate reconnection](dotnet-client/sample/signalrchatclient/MainWindow.xaml.cs?name=snippet_ClosedRestart)]
 
-## <a name="call-hub-methods-from-client"></a><span data-ttu-id="02eb0-157">클라이언트에서 허브 메서드 호출하기</span><span class="sxs-lookup"><span data-stu-id="02eb0-157">Call hub methods from client</span></span>
+## <a name="call-hub-methods-from-client"></a><span data-ttu-id="4784a-157">클라이언트에서 허브 메서드 호출하기</span><span class="sxs-lookup"><span data-stu-id="4784a-157">Call hub methods from client</span></span>
 
-<span data-ttu-id="02eb0-158">`InvokeAsync`는 허브 메서드를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-158">`InvokeAsync` calls methods on the hub.</span></span> <span data-ttu-id="02eb0-159">허브 메서드의 이름과 허브 메서드에 정의된 모든 인수를 `InvokeAsync`에 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-159">Pass the hub method name and any arguments defined in the hub method to `InvokeAsync`.</span></span> <span data-ttu-id="02eb0-160">SignalR은 비동기로 동작하므로 호출 시 `async`와 `await`를 사용해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-160">SignalR is asynchronous, so use `async` and `await` when making the calls.</span></span>
+<span data-ttu-id="4784a-158">`InvokeAsync`는 허브 메서드를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-158">`InvokeAsync` calls methods on the hub.</span></span> <span data-ttu-id="4784a-159">허브 메서드의 이름과 허브 메서드에 정의된 모든 인수를 `InvokeAsync`에 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-159">Pass the hub method name and any arguments defined in the hub method to `InvokeAsync`.</span></span> <span data-ttu-id="4784a-160">SignalR은 비동기로 동작하므로 호출 시 `async`와 `await`를 사용해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-160">SignalR is asynchronous, so use `async` and `await` when making the calls.</span></span>
 
 [!code-csharp[InvokeAsync method](dotnet-client/sample/signalrchatclient/MainWindow.xaml.cs?name=snippet_InvokeAsync)]
 
-<span data-ttu-id="02eb0-161">메서드 `InvokeAsync` 는 서버 메서드가 `Task` 반환 될 때 완료 되는를 반환 합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-161">The `InvokeAsync` method returns a `Task` which completes when the server method returns.</span></span> <span data-ttu-id="02eb0-162">반환 값 (있는 경우)은의 `Task`결과로 제공 됩니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-162">The return value, if any, is provided as the result of the `Task`.</span></span> <span data-ttu-id="02eb0-163">서버에서 메서드에 의해 throw 되는 모든 예외에 오류가 `Task`발생 합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-163">Any exceptions thrown by the method on the server produce a faulted `Task`.</span></span> <span data-ttu-id="02eb0-164">구문을 `await` 사용 하 여 서버 메서드가 `try...catch` 완료 될 때까지 기다리거나 구문을 사용 하 여 오류를 처리 합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-164">Use `await` syntax to wait for the server method to complete and `try...catch` syntax to handle errors.</span></span>
+<span data-ttu-id="4784a-161">메서드 `InvokeAsync` 는 서버 메서드가 `Task` 반환 될 때 완료 되는를 반환 합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-161">The `InvokeAsync` method returns a `Task` which completes when the server method returns.</span></span> <span data-ttu-id="4784a-162">반환 값 (있는 경우)은의 `Task`결과로 제공 됩니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-162">The return value, if any, is provided as the result of the `Task`.</span></span> <span data-ttu-id="4784a-163">서버에서 메서드에 의해 throw 되는 모든 예외에 오류가 `Task`발생 합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-163">Any exceptions thrown by the method on the server produce a faulted `Task`.</span></span> <span data-ttu-id="4784a-164">구문을 `await` 사용 하 여 서버 메서드가 `try...catch` 완료 될 때까지 기다리거나 구문을 사용 하 여 오류를 처리 합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-164">Use `await` syntax to wait for the server method to complete and `try...catch` syntax to handle errors.</span></span>
 
-<span data-ttu-id="02eb0-165">메서드 `SendAsync` 는 메시지가 서버로 `Task` 전송 될 때 완료 되는를 반환 합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-165">The `SendAsync` method returns a `Task` which completes when the message has been sent to the server.</span></span> <span data-ttu-id="02eb0-166">서버 메서드가 완료 될 때까지 기다리지 `Task` 않으므로 반환 값이 제공 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-166">No return value is provided since this `Task` doesn't wait until the server method completes.</span></span> <span data-ttu-id="02eb0-167">메시지를 보내는 동안 클라이언트에서 throw 되는 모든 예외에 오류가 `Task`발생 합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-167">Any exceptions thrown on the client while sending the message produce a faulted `Task`.</span></span> <span data-ttu-id="02eb0-168">`await` 및`try...catch` 구문을 사용 하 여 보내기 오류를 처리 합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-168">Use `await` and `try...catch` syntax to handle send errors.</span></span>
+<span data-ttu-id="4784a-165">메서드 `SendAsync` 는 메시지가 서버로 `Task` 전송 될 때 완료 되는를 반환 합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-165">The `SendAsync` method returns a `Task` which completes when the message has been sent to the server.</span></span> <span data-ttu-id="4784a-166">서버 메서드가 완료 될 때까지 기다리지 `Task` 않으므로 반환 값이 제공 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-166">No return value is provided since this `Task` doesn't wait until the server method completes.</span></span> <span data-ttu-id="4784a-167">메시지를 보내는 동안 클라이언트에서 throw 되는 모든 예외에 오류가 `Task`발생 합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-167">Any exceptions thrown on the client while sending the message produce a faulted `Task`.</span></span> <span data-ttu-id="4784a-168">`await` 및`try...catch` 구문을 사용 하 여 보내기 오류를 처리 합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-168">Use `await` and `try...catch` syntax to handle send errors.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="02eb0-169">서버를 사용 하지 않는 *모드로*Azure SignalR Service를 사용 하는 경우 클라이언트에서 허브 메서드를 호출할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-169">If you're using Azure SignalR Service in *Serverless mode*, you cannot call hub methods from a client.</span></span> <span data-ttu-id="02eb0-170">자세한 내용은 [SignalR Service 설명서](/azure/azure-signalr/signalr-concept-serverless-development-config)를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="02eb0-170">For more information, see the [SignalR Service documentation](/azure/azure-signalr/signalr-concept-serverless-development-config).</span></span>
+> <span data-ttu-id="4784a-169">서버를 사용 하지 않는 *모드로*Azure SignalR Service를 사용 하는 경우 클라이언트에서 허브 메서드를 호출할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-169">If you're using Azure SignalR Service in *Serverless mode*, you cannot call hub methods from a client.</span></span> <span data-ttu-id="4784a-170">자세한 내용은 [SignalR Service 설명서](/azure/azure-signalr/signalr-concept-serverless-development-config)를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="4784a-170">For more information, see the [SignalR Service documentation](/azure/azure-signalr/signalr-concept-serverless-development-config).</span></span>
 
-## <a name="call-client-methods-from-hub"></a><span data-ttu-id="02eb0-171">허브에서 클라이언트 메서드 호출하기</span><span class="sxs-lookup"><span data-stu-id="02eb0-171">Call client methods from hub</span></span>
+## <a name="call-client-methods-from-hub"></a><span data-ttu-id="4784a-171">허브에서 클라이언트 메서드 호출하기</span><span class="sxs-lookup"><span data-stu-id="4784a-171">Call client methods from hub</span></span>
 
-<span data-ttu-id="02eb0-172">연결을 만든 다음, 그러나 연결을 시작하기 전에 `connection.On`을 이용해서 허브가 호출할 메서드를 정의합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-172">Define methods the hub calls using `connection.On` after building, but before starting the connection.</span></span>
+<span data-ttu-id="4784a-172">연결을 만든 다음, 그러나 연결을 시작하기 전에 `connection.On`을 이용해서 허브가 호출할 메서드를 정의합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-172">Define methods the hub calls using `connection.On` after building, but before starting the connection.</span></span>
 
 [!code-csharp[Define client methods](dotnet-client/sample/signalrchatclient/MainWindow.xaml.cs?name=snippet_ConnectionOn)]
 
-<span data-ttu-id="02eb0-173">위의 `connection.On` 내부의 코드는 서버 쪽 코드에서 `SendAsync` 메서드를 사용하여 이 코드를 호출할 때 실행됩니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-173">The preceding code in `connection.On` runs when server-side code calls it using the `SendAsync` method.</span></span>
+<span data-ttu-id="4784a-173">위의 `connection.On` 내부의 코드는 서버 쪽 코드에서 `SendAsync` 메서드를 사용하여 이 코드를 호출할 때 실행됩니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-173">The preceding code in `connection.On` runs when server-side code calls it using the `SendAsync` method.</span></span>
 
 [!code-csharp[Call client method](dotnet-client/sample/signalrchat/hubs/chathub.cs?name=snippet_SendMessage)]
 
-## <a name="error-handling-and-logging"></a><span data-ttu-id="02eb0-174">오류 처리 및 로깅</span><span class="sxs-lookup"><span data-stu-id="02eb0-174">Error handling and logging</span></span>
+## <a name="error-handling-and-logging"></a><span data-ttu-id="4784a-174">오류 처리 및 로깅</span><span class="sxs-lookup"><span data-stu-id="4784a-174">Error handling and logging</span></span>
 
-<span data-ttu-id="02eb0-175">try-catch 문을 이용해서 오류를 처리합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-175">Handle errors with a try-catch statement.</span></span> <span data-ttu-id="02eb0-176">`Exception` 개체를 검사해서 오류가 발생한 후 수행할 적절한 동작을 결정합니다.</span><span class="sxs-lookup"><span data-stu-id="02eb0-176">Inspect the `Exception` object to determine the proper action to take after an error occurs.</span></span>
+<span data-ttu-id="4784a-175">try-catch 문을 이용해서 오류를 처리합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-175">Handle errors with a try-catch statement.</span></span> <span data-ttu-id="4784a-176">`Exception` 개체를 검사해서 오류가 발생한 후 수행할 적절한 동작을 결정합니다.</span><span class="sxs-lookup"><span data-stu-id="4784a-176">Inspect the `Exception` object to determine the proper action to take after an error occurs.</span></span>
 
 [!code-csharp[Logging](dotnet-client/sample/signalrchatclient/MainWindow.xaml.cs?name=snippet_ErrorHandling)]
 
-## <a name="additional-resources"></a><span data-ttu-id="02eb0-177">추가 자료</span><span class="sxs-lookup"><span data-stu-id="02eb0-177">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="4784a-177">추가 자료</span><span class="sxs-lookup"><span data-stu-id="4784a-177">Additional resources</span></span>
 
-* [<span data-ttu-id="02eb0-178">허브</span><span class="sxs-lookup"><span data-stu-id="02eb0-178">Hubs</span></span>](xref:signalr/hubs)
-* [<span data-ttu-id="02eb0-179">JavaScript 클라이언트</span><span class="sxs-lookup"><span data-stu-id="02eb0-179">JavaScript client</span></span>](xref:signalr/javascript-client)
-* [<span data-ttu-id="02eb0-180">Azure에 게시하기</span><span class="sxs-lookup"><span data-stu-id="02eb0-180">Publish to Azure</span></span>](xref:signalr/publish-to-azure-web-app)
-* [<span data-ttu-id="02eb0-181">Azure SignalR 서비스 서버 리스 설명서</span><span class="sxs-lookup"><span data-stu-id="02eb0-181">Azure SignalR Service serverless documentation</span></span>](/azure/azure-signalr/signalr-concept-serverless-development-config)
+* [<span data-ttu-id="4784a-178">허브</span><span class="sxs-lookup"><span data-stu-id="4784a-178">Hubs</span></span>](xref:signalr/hubs)
+* [<span data-ttu-id="4784a-179">JavaScript 클라이언트</span><span class="sxs-lookup"><span data-stu-id="4784a-179">JavaScript client</span></span>](xref:signalr/javascript-client)
+* [<span data-ttu-id="4784a-180">Azure에 게시하기</span><span class="sxs-lookup"><span data-stu-id="4784a-180">Publish to Azure</span></span>](xref:signalr/publish-to-azure-web-app)
+* [<span data-ttu-id="4784a-181">Azure SignalR 서비스 서버 리스 설명서</span><span class="sxs-lookup"><span data-stu-id="4784a-181">Azure SignalR Service serverless documentation</span></span>](/azure/azure-signalr/signalr-concept-serverless-development-config)
