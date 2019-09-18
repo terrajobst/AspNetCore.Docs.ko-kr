@@ -290,7 +290,7 @@ services.AddOptions<MyOptions>("optionalName")
 
 ## <a name="options-validation"></a>옵션 유효성 검사
 
-옵션 유효성 검사를 사용하면 옵션이 구성될 때 옵션의 유효성을 검사할 수 있습니다. 옵션이 유효하면 `true`를 반환하고 옵션이 유효하지 않으면 `false`를 반환하는 유효성 검사 메서드를 사용하여 `Validate`를 호출합니다.
+옵션 유효성 검사를 사용하면 옵션이 구성될 때 옵션의 유효성을 검사할 수 있습니다. 옵션이 유효하면 `true`를 반환하고 옵션이 유효하지 않으면 `false`를 반환하는 유효성 검사 메서드로 `Validate`를 호출합니다.
 
 ```csharp
 // Registration
@@ -704,7 +704,7 @@ services.AddOptions<MyOptions>("optionalName")
 
 ## <a name="options-validation"></a>옵션 유효성 검사
 
-옵션 유효성 검사를 사용하면 옵션이 구성될 때 옵션의 유효성을 검사할 수 있습니다. 옵션이 유효하면 `true`를 반환하고 옵션이 유효하지 않으면 `false`를 반환하는 유효성 검사 메서드를 사용하여 `Validate`를 호출합니다.
+옵션 유효성 검사를 사용하면 옵션이 구성될 때 옵션의 유효성을 검사할 수 있습니다. 옵션이 유효하면 `true`를 반환하고 옵션이 유효하지 않으면 `false`를 반환하는 유효성 검사 메서드로 `Validate`를 호출합니다.
 
 ```csharp
 // Registration
