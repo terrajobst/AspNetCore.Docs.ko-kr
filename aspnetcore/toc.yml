@@ -153,6 +153,9 @@
 - name: 자습서(Microsoft Learn)
   displayName: tutorial
   items:
+    - name: 웹앱
+      displayName: 'tutorial, razor, razor pages, ui'
+      href: /learn/modules/create-razor-pages-aspnet-core/
     - name: Web API 앱
       href: /learn/modules/build-web-api-net-core/
     - name: 데이터 액세스
@@ -435,6 +438,8 @@
           uid: tutorials/get-started-with-nswag
     - name: 작업 반환 형식
       uid: web-api/action-return-types
+    - name: JSON 패치 요청 처리
+      uid: web-api/jsonpatch
     - name: 응답 데이터 서식 지정
       uid: web-api/advanced/formatting
     - name: 사용자 지정 포맷터
@@ -540,6 +545,10 @@
   items:
     - name: gRPC 서비스 소개
       uid: grpc/index
+    - name: 자습서
+      items:
+        - name: gRPC 서비스 시작
+          uid: tutorials/grpc/grpc-start
     - name: 'C#을 사용하는 gRPC 서비스'
       uid: grpc/basics
     - name: ASP.NET Core를 사용하는 gRPC 서비스
@@ -558,6 +567,8 @@
       uid: grpc/migration
     - name: gRPC 서비스와 HTTP API 비교
       uid: grpc/comparison
+    - name: 샘플
+      href: 'https://github.com/grpc/grpc-dotnet/tree/master/examples'
     - name: 문제 해결
       uid: grpc/troubleshoot
 - name: '테스트, 디버깅 및 문제 해결'
@@ -994,7 +1005,7 @@
     - name: IP 수신 허용 목록
       uid: security/ip-safelist
     - name: 애플리케이션 보안 - OWASP
-      href: 'https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/DotNet_Security_Cheat_Sheet.md'
+      href: 'https://cheatsheetseries.owasp.org/cheatsheets/DotNet_Security_Cheat_Sheet.html'
     - name: Blazor
       items:
         - name: 개요
