@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/01/2019
 uid: security/key-vault-configuration
-ms.openlocfilehash: fe6cdca1f7180f9da26fe2838e529becb26ccd45
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: f16891182d274333ddc05eea401c06468e0717b1
+ms.sourcegitcommit: b1e480e1736b0fe0e4d8dce4a4cf5c8e47fc2101
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081108"
+ms.lasthandoff: 09/19/2019
+ms.locfileid: "71108089"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>ASP.NET Core의 Azure Key Vault 구성 공급자
 
@@ -90,13 +90,13 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 
 1. 다음 명령을 사용 하 여 리소스 그룹을 만듭니다. `{RESOURCE GROUP NAME}` 여기서는 새 리소스 그룹의 리소스 그룹 이름이 고 `{LOCATION}` 은 Azure 지역 (데이터 센터)입니다.
 
-   ```console
+   ```azure-cli
    az group create --name "{RESOURCE GROUP NAME}" --location {LOCATION}
    ```
 
 1. 다음 명령을 사용 하 여 리소스 그룹에 키 자격 증명 모음을 만듭니다 `{KEY VAULT NAME}` . 여기서은 새 키 자격 증명 모음에 `{LOCATION}` 대 한 이름이 고은 Azure 지역 (데이터 센터)입니다.
 
-   ```console
+   ```azure-cli
    az keyvault create --name "{KEY VAULT NAME}" --resource-group "{RESOURCE GROUP NAME}" --location {LOCATION}
    ```
 
@@ -106,7 +106,7 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 
    다음 암호는 샘플 앱에서 사용 하기 위한 것입니다. 값에는 사용자 `_prod` 암호에서 개발 환경에 로드 `_dev` 된 접미사 값과 구분 하는 접미사가 포함 됩니다. 을 `{KEY VAULT NAME}` 이전 단계에서 만든 key vault의 이름으로 바꿉니다.
 
-   ```console
+   ```azure-cli
    az keyvault secret set --vault-name "{KEY VAULT NAME}" --name "SecretName" --value "secret_value_1_prod"
    az keyvault secret set --vault-name "{KEY VAULT NAME}" --name "Section--SecretName" --value "secret_value_2_prod"
    ```
@@ -176,7 +176,7 @@ Azure App Service에 배포 된 앱은 서비스를 만들 때 Azure AD에 자�
 
 Azure CLI 및 응용 프로그램의 개체 ID를 사용 하 여 앱에 `list` 키 `get` 자격 증명 모음에 액세스할 수 있는 및 권한을 제공 합니다.
 
-```console
+```azure-cli
 az keyvault set-policy --name '{KEY VAULT NAME}' --object-id {OBJECT ID} --secret-permissions get list
 ```
 
@@ -240,7 +240,7 @@ Azure CLI, PowerShell 또는 Azure Portal를 사용 하 여 **앱을 다시 시�
 
 1. 비밀은 다음 Azure CLI 명령을 사용 하 여 Azure Key Vault에 저장 됩니다.
 
-   ```console
+   ```azure-cli
    az keyvault secret set --vault-name "{KEY VAULT NAME}" --name "5000-AppSecret" --value "5.0.0.0_secret_value_prod"
    az keyvault secret set --vault-name "{KEY VAULT NAME}" --name "5100-AppSecret" --value "5.1.0.0_secret_value_prod"
    ```
