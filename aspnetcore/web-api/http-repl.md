@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/29/2019
 uid: web-api/http-repl
-ms.openlocfilehash: b93641c96ad093b40aaa887f19409d4c2e1490df
-ms.sourcegitcommit: efb9c16321b34f8ede802822b26eb983de16479b
+ms.openlocfilehash: 8ef49797fed3379e33810f311bfc474e524122e0
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/09/2019
-ms.locfileid: "70842271"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71082582"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>HTTP REPL을 사용하여 웹 API 테스트
 
@@ -44,7 +44,7 @@ HTTP REPL(Read-Eval-Print Loop):
 
 HTTP REPL을 설치하려면 다음 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet tool install -g Microsoft.dotnet-httprepl --version "3.0.0-*"
 ```
 

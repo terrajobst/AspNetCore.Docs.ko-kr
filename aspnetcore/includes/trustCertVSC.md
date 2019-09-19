@@ -1,6 +1,6 @@
 * 다음 명령을 실행하여 HTTPS 개발 인증서를 신뢰합니다.
 
-  ```console
+  ```dotnetcli
   dotnet dev-certs https --trust
   ```
   

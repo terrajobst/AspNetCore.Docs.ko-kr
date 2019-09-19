@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/migrations
-ms.openlocfilehash: fcb238c132a774200e9f54f1141f5ba79fa2f802
-ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
+ms.openlocfilehash: 3ee95d9b648a90c90d06e33a30b568626a1eb0aa
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69975159"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71080832"
 ---
 # <a name="tutorial-using-the-migrations-feature---aspnet-mvc-with-ef-core"></a>자습서: 마이그레이션 기능 사용 - ASP.NET MVC 및 EF Core 사용
 
@@ -51,7 +51,7 @@ ms.locfileid: "69975159"
 > [!NOTE]
 > 데이터베이스 이름을 변경하는 대신, 데이터베이스를 삭제할 수 있습니다. **SSOX(SQL Server 개체 탐색기)** 또는 `database drop` CLI 명령을 사용합니다.
 >
-> ```console
+> ```dotnetcli
 > dotnet ef database drop
 > ```
 >
@@ -71,7 +71,7 @@ ms.locfileid: "69975159"
 
 명령 창에서 다음 명령을 입력합니다.
 
-```console
+```dotnetcli
 dotnet ef migrations add InitialCreate
 ```
 
@@ -112,7 +112,7 @@ Done. To undo this action, use 'ef migrations remove'
 
 명령 창에서 다음 명령을 입력하여 데이터베이스 및 테이블을 만듭니다.
 
-```console
+```dotnetcli
 dotnet ef database update
 ```
 

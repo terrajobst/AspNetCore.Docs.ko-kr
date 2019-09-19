@@ -10,7 +10,7 @@
 
 `h` 스위치를 사용하여 `aspnet-codegenerator razorpage` 명령에 대한 도움말을 확인합니다.
 
-```console
+```dotnetcli
 dotnet aspnet-codegenerator razorpage -h
 ```
 

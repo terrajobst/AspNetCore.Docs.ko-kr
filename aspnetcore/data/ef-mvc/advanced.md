@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/advanced
-ms.openlocfilehash: 913511948def86cb2065459a3fcf5f16362a92d5
-ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
+ms.openlocfilehash: 7a67efad187f29773c1cac7a5a2457d02080114b
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69975040"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71080544"
 ---
 # <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>자습서: 고급 시나리오에 대해 알아보기 - ASP.NET MVC 및 EF Core 사용
 
@@ -235,7 +235,7 @@ SSOX에서 데이터베이스를 삭제하려면 데이터베이스를 마우스
 
 CLI를 사용하여 데이터베이스를 삭제하려면 `database drop` CLI 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet ef database drop
 ```
 

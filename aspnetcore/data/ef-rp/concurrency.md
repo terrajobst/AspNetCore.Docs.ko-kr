@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: da57633c345ec087b1a4f24ddc7771e7a2d04720
-ms.sourcegitcommit: 0774a61a3a6c1412a7da0e7d932dc60c506441fc
+ms.openlocfilehash: c9cbf8fd3ed85f32b3c166bf2df702fd26df4fc3
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/27/2019
-ms.locfileid: "70059087"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71080985"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---concurrency---8-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 동시성 - 8/8
 
@@ -156,7 +156,7 @@ SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 
 
 * 터미널에서 다음 명령을 실행합니다.
 
-  ```console
+  ```dotnetcli
   dotnet ef migrations add RowVersion
   ```
 
@@ -190,7 +190,7 @@ SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 
 
 * 터미널에서 다음 명령을 실행합니다.
 
-  ```console
+  ```dotnetcli
   dotnet ef database update
   ```
 
@@ -216,13 +216,13 @@ SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 
 
   **Windows:**
 
-  ```console
+  ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Department -dc SchoolContext -udl -outDir Pages\Departments --referenceScriptLibraries
   ```
 
   **Linux 또는 macOS:**
 
-  ```console
+  ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Department -dc SchoolContext -udl -outDir Pages/Departments --referenceScriptLibraries
   ```
 
@@ -494,7 +494,7 @@ Visual Studio의 출력 창에서 T-SQL EF Core 생성을 확인할 수 있습�
 
 프로젝트를 빌드합니다. 명령 창에서 다음을 입력합니다.
 
-```console
+```dotnetcli
 dotnet ef migrations add RowVersion
 dotnet ef database update
 ```
@@ -520,7 +520,7 @@ dotnet ef database update
 
  다음 명령을 실행합니다.
 
-  ```console
+  ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Department -dc SchoolContext -udl -outDir Pages\Departments --referenceScriptLibraries
   ```
 

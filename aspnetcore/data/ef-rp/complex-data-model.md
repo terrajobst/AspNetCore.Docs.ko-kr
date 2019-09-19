@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: ab29cf687c80551d275cae69f28b7576016bfff6
-ms.sourcegitcommit: e6bd2bbe5683e9a7dbbc2f2eab644986e6dc8a87
+ms.openlocfilehash: 78ff36b291b3215460d9ae8e560f49871862d19f
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/03/2019
-ms.locfileid: "70238129"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71080979"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---data-model---5-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 데이터 모델 - 5/8
 
@@ -197,7 +197,7 @@ SqliteException: SQLite Error 1: 'no such column: s.FirstName'.
 
 * 프로젝트 폴더의 명령 창을 엽니다. 다음 명령을 입력하여 새 마이그레이션을 만들고 데이터베이스를 업데이트합니다.
 
-  ```console
+  ```dotnetcli
   dotnet ef migrations add ColumnFirstName
   dotnet ef database update
   ```
@@ -213,7 +213,7 @@ SqliteException: SQLite Error 1: 'no such column: s.FirstName'.
 * *Migrations* 폴더를 삭제합니다.
 * 다음 명령을 실행하여 데이터베이스를 삭제하고, 새 초기 마이그레이션을 만들고, 마이그레이션을 적용합니다.
 
-  ```console
+  ```dotnetcli
   dotnet ef database drop --force
   dotnet ef migrations add InitialCreate
   dotnet ef database update
@@ -612,13 +612,13 @@ EF Core가 새로운 데이터베이스를 만들도록 강제하려면 데이�
 
 * 다음 명령을 실행합니다.
 
-  ```console
+  ```dotnetcli
   dotnet ef database drop --force
   ```
 
 * *마이그레이션* 폴더를 삭제 한 후 다음 명령을 실행합니다.
 
-  ```console
+  ```dotnetcli
   dotnet ef migrations add InitialCreate
   dotnet ef database update
   ```
@@ -705,7 +705,7 @@ SQLite 도구를 사용하여 데이터베이스를 검사합니다.
 
 * Visual Studio Code와 함께 SQL Server LocalDB를 사용하는 경우 다음 명령을 실행합니다.
 
-  ```console
+  ```dotnetcli
   dotnet ef database update
   ```
 
@@ -839,7 +839,7 @@ Update-Database
 
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-```console
+```dotnetcli
 dotnet ef migrations add ColumnFirstName
 dotnet ef database update
 ```
@@ -1246,13 +1246,13 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-```PMC
+```powershell
 Add-Migration ComplexDataModel
 ```
 
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-```console
+```dotnetcli
 dotnet ef migrations add ComplexDataModel
 ```
 
@@ -1303,10 +1303,10 @@ PMC에서 `Get-Help about_EntityFrameworkCore`를 실행하여 도움말 정보�
 
 명령 창에서 다음을 입력합니다.
 
- ```console
- dotnet ef database drop
+```dotnetcli
+dotnet ef database drop
 dotnet ef database update
- ```
+```
 
 ---
 

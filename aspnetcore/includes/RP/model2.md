@@ -22,7 +22,7 @@ RazorPagesMovie 프로젝트에서 *Data*라는 새 폴더를 만듭니다. 다�
 
 RazorPagesMovie 프로젝트의 터미널을 엽니다.  디자인/레이아웃 표시줄에서 프로젝트 이름을 마우스 오른쪽 단추로 클릭하고 터미널에서 **도구 > 열기**로 이동합니다. 터미널에서 다음 .NET Core CLI 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet tool install --global dotnet-ef --version 3.0.0-*
 dotnet add package Microsoft.EntityFrameworkCore.SQLite --version 3.0.0-*
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 3.0.0-*
@@ -57,11 +57,10 @@ using Microsoft.EntityFrameworkCore;
 
 다음 .NET Core CLI 명령을 실행하여 SQLite 및 CodeGeneration.Design을 프로젝트에 추가합니다.
 
-```console
+```dotnetcli
 dotnet add package Microsoft.EntityFrameworkCore.SQLite
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet add package Microsoft.EntityFrameworkCore.Design
-
 ```
 
 스캐폴딩에는 `Microsoft.VisualStudio.Web.CodeGeneration.Design` 패키지가 필요합니다.

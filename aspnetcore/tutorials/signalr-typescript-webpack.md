@@ -6,12 +6,12 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/23/2019
 uid: tutorials/signalr-typescript-webpack
-ms.openlocfilehash: 628fbb9940ad14cb15e3abd88b8b6a524b24d70a
-ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
+ms.openlocfilehash: 99628b4f52980e6d32c70d11bb0d8a770dac7f86
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/06/2019
-ms.locfileid: "70773956"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081578"
 ---
 # <a name="use-aspnet-core-signalr-with-typescript-and-webpack"></a>TypeScript 및 WebPack과 함께 ASP.NET Core SignalR 사용
 
@@ -70,7 +70,7 @@ Visual Studio 구성이 완료되었습니다. 이제 프로젝트를 만들어�
 
 **통합 터미널**에서 다음 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet new web -o SignalRWebPack
 ```
 
@@ -249,7 +249,7 @@ dotnet new web -o SignalRWebPack
 
 1. 프로젝트 루트에서 다음 명령을 실행하여 앱을 빌드하고 실행합니다.
 
-    ```console
+    ```dotnetcli
     dotnet run
     ```
 
@@ -305,7 +305,7 @@ Visual Studio 구성이 완료되었습니다. 이제 프로젝트를 만들어�
 
 **통합 터미널**에서 다음 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet new web -o SignalRWebPack
 ```
 
@@ -484,7 +484,7 @@ dotnet new web -o SignalRWebPack
 
 1. 프로젝트 루트에서 다음 명령을 실행하여 앱을 빌드하고 실행합니다.
 
-    ```console
+    ```dotnetcli
     dotnet run
     ```
 

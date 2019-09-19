@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2019
 uid: host-and-deploy/iis/transform-webconfig
-ms.openlocfilehash: 58dee024f5b032d1ef13df02648727b6a07eac1f
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: 32e66007d527f7f7b7cfd88d3bebc9b808251941
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67813356"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081457"
 ---
 # <a name="transform-webconfig"></a>web.config 변환
 
@@ -58,7 +58,7 @@ ms.locfileid: "67813356"
 
 구성이 *Release*로 설정되면 변환이 적용됩니다.
 
-```console
+```dotnetcli
 dotnet publish --configuration Release
 ```
 
@@ -92,7 +92,7 @@ dotnet publish --configuration Release
 
 프로필이 *FolderProfile*인 경우 변환이 적용됩니다.
 
-```console
+```dotnetcli
 dotnet publish --configuration Release /p:PublishProfile=FolderProfile
 ```
 
@@ -128,7 +128,7 @@ dotnet publish --configuration Release /p:PublishProfile=FolderProfile
 
 환경이 *Production*인 경우 변환이 적용됩니다.
 
-```console
+```dotnetcli
 dotnet publish --configuration Release /p:EnvironmentName=Production
 ```
 
@@ -166,7 +166,7 @@ Visual Studio에서 게시하고 게시 프로필을 사용하는 경우 <xref:h
 
 `CustomTransformFileName` 속성이 [dotnet publish](/dotnet/core/tools/dotnet-publish) 명령에 전달되면 변환이 적용됩니다.
 
-```console
+```dotnetcli
 dotnet publish --configuration Release /p:CustomTransformFileName=custom.transform
 ```
 
@@ -176,7 +176,7 @@ dotnet publish --configuration Release /p:CustomTransformFileName=custom.transfo
 
 *web.config* 파일의 변환을 방지하려면 MSBuild 속성 `$(IsWebConfigTransformDisabled)`를 설정합니다.
 
-```console
+```dotnetcli
 dotnet publish /p:IsWebConfigTransformDisabled=true
 ```
 

@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/10/2019
 uid: host-and-deploy/health-checks
-ms.openlocfilehash: cc30b3fc67cec42eada20aed494642cf6d88b289
-ms.sourcegitcommit: e7c56e8da5419bbc20b437c2dd531dedf9b0dc6b
+ms.openlocfilehash: 8fdb1332882fd25bd61f5403a3b1f10e8a0bc7f7
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/10/2019
-ms.locfileid: "70878443"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081526"
 ---
 # <a name="health-checks-in-aspnet-core"></a>ASP.NET Core의 상태 검사
 
@@ -82,7 +82,7 @@ public class BasicStartup
 
 샘플 앱을 사용하여 기본 구성 시나리오를 실행하려면 명령 셸의 프로젝트 폴더에서 다음 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet run --scenario basic
 ```
 
@@ -332,7 +332,7 @@ app.UseEndpoints(endpoints =>
 
 샘플 앱을 사용하여 데이터베이스 프로브 시나리오를 실행하려면 명령 셸의 프로젝트 폴더에서 다음 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet run --scenario db
 ```
 
@@ -370,7 +370,7 @@ app.UseEndpoints(endpoints =>
 
 명령 셸의 프로젝트 폴더에서 다음 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet run --scenario dbcontext
 ```
 
@@ -456,7 +456,7 @@ app.UseEndpoints(endpoints =>
 
 샘플 앱을 사용하여 준비 상태/활동성 구성 시나리오를 실행하려면 명령 셸의 프로젝트 폴더에서 다음 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet run --scenario liveness
 ```
 
@@ -519,7 +519,7 @@ app.UseEndpoints(endpoints =>
 
 샘플 앱을 사용하여 사용자 지정 응답 기록기 출력으로 메트릭 기반 프로브를 실행하려면 명령 셸의 프로젝트 폴더에서 다음 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet run --scenario writer
 ```
 
@@ -615,7 +615,7 @@ app.UseEndpoints(endpoints =>
 
 샘플 앱을 사용하여 관리 포트 구성 시나리오를 실행하려면 명령 셸의 프로젝트 폴더에서 다음 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet run --scenario port
 ```
 
@@ -821,7 +821,7 @@ public class BasicStartup
 
 샘플 앱을 사용하여 기본 구성 시나리오를 실행하려면 명령 셸의 프로젝트 폴더에서 다음 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet run --scenario basic
 ```
 
@@ -1047,7 +1047,7 @@ app.UseHealthChecks("/health");
 
 샘플 앱을 사용하여 데이터베이스 프로브 시나리오를 실행하려면 명령 셸의 프로젝트 폴더에서 다음 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet run --scenario db
 ```
 
@@ -1082,7 +1082,7 @@ app.UseHealthChecks("/health");
 
 명령 셸의 프로젝트 폴더에서 다음 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet run --scenario dbcontext
 ```
 
@@ -1157,7 +1157,7 @@ app.UseHealthChecks("/health/live", new HealthCheckOptions()
 
 샘플 앱을 사용하여 준비 상태/활동성 구성 시나리오를 실행하려면 명령 셸의 프로젝트 폴더에서 다음 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet run --scenario liveness
 ```
 
@@ -1221,7 +1221,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 샘플 앱을 사용하여 사용자 지정 응답 기록기 출력으로 메트릭 기반 프로브를 실행하려면 명령 셸의 프로젝트 폴더에서 다음 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet run --scenario writer
 ```
 
@@ -1290,7 +1290,7 @@ dotnet run --scenario writer
 
 샘플 앱을 사용하여 관리 포트 구성 시나리오를 실행하려면 명령 셸의 프로젝트 폴더에서 다음 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet run --scenario port
 ```
 

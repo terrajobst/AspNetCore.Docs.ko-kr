@@ -5,12 +5,12 @@ description: ASP.NET Core MVC를 시작하는 방법을 알아봅니다.
 ms.author: riande
 ms.date: 08/05/2019
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 36f4811f876a6e35440445103a1f86ae06b31b6a
-ms.sourcegitcommit: 476ea5ad86a680b7b017c6f32098acd3414c0f6c
+ms.openlocfilehash: 52d8fc631075408991d3a2e62cdaccf681c5927f
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/14/2019
-ms.locfileid: "69022515"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71082152"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>ASP.NET Core MVC 시작
 
@@ -78,7 +78,7 @@ Visual Studio에서는 방금 만든 MVC 프로젝트에 대한 기본 템플릿
 * 디렉터리(`cd`)를 프로젝트를 포함하는 폴더로 변경합니다.
 * 다음 명령을 실행합니다.
 
-   ```console
+   ```dotnetcli
    dotnet new mvc -o MvcMovie
    code -r MvcMovie
    ```
@@ -228,7 +228,7 @@ Visual Studio에서는 방금 만든 MVC 프로젝트에 대한 기본 템플릿
 * 디렉터리(`cd`)를 프로젝트를 포함하는 폴더로 변경합니다.
 * 다음 명령을 실행합니다.
 
-   ```console
+   ```dotnetcli
    dotnet new mvc -o MvcMovie
    code -r MvcMovie
    ```

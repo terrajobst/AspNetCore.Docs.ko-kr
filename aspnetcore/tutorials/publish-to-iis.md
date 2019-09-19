@@ -7,16 +7,16 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/08/2019
 uid: tutorials/publish-to-iis
-ms.openlocfilehash: c31beae16f46153daac188ab1638e5530584ac88
-ms.sourcegitcommit: 776367717e990bdd600cb3c9148ffb905d56862d
+ms.openlocfilehash: 4ac7b3a2f738e443263dd888f556e0aff7c8099b
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/09/2019
-ms.locfileid: "68927093"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71082366"
 ---
 # <a name="publish-an-aspnet-core-app-to-iis"></a>IIS에 ASP.NET Core 앱 게시
 
-[Luke Latham](https://github.com/guardrex)으로
+작성자: [Luke Latham](https://github.com/guardrex)
 
 이 자습서에서는 IIS 서버에서 ASP.NET Core 앱을 호스트하는 방법을 보여 줍니다.
 
@@ -84,7 +84,7 @@ IIS 서버에 *.NET Core 호스팅 번들*을 설치합니다. 번들은 .NET Co
 
 1. 명령 셸에서 [dotnet publish](/dotnet/core/tools/dotnet-publish) 명령을 사용하여 릴리스 구성에 있는 앱을 게시합니다.
 
-   ```console
+   ```dotnetcli
    dotnet publish --configuration Release
    ```
 

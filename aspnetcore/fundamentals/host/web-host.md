@@ -6,22 +6,22 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/14/2019
 uid: fundamentals/host/web-host
-ms.openlocfilehash: c5d5b723b31a5c211a47e378e50be858fda0b2bd
-ms.sourcegitcommit: 9f11685382eb1f4dd0fb694dea797adacedf9e20
+ms.openlocfilehash: d387098662cc832cc0e49b6a1636f0ebcc7308de
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/21/2019
-ms.locfileid: "67313791"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081684"
 ---
 # <a name="aspnet-core-web-host"></a>ASP.NET Core 웹 호스트
 
-[Luke Latham](https://github.com/guardrex)으로
+작성자: [Luke Latham](https://github.com/guardrex)
 
 ASP.NET Core 앱은 *호스트*를 구성 및 실행합니다. 호스트는 앱 시작 및 수명 관리를 담당합니다. 최소한으로 호스트는 서버 및 요청 처리 파이프라인을 구성합니다. 호스트는 로깅, 종속성 주입 및 구성을 설정할 수도 있습니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 
-이 문서에서는 웹 앱 호스팅을 위한 웹 호스트에 대해 다룹니다. 다른 유형의 앱은 [일반 호스트](xref:fundamentals/host/generic-host)를 사용합니다.
+이 문서에서는 이전 버전과의 호환성을 위해서만 사용 가능한 상태를 유지하는 웹 호스트에 설명합니다. 모든 앱 유형에 [일반 호스트](xref:fundamentals/host/generic-host)를 사용하는 것이 좋습니다.
 
 ::: moniker-end
 
@@ -431,7 +431,7 @@ public class Program
 
 특정 URL에서 실행하는 호스트를 지정하려면 [dotnet run](/dotnet/core/tools/dotnet-run) 실행 시 원하는 값을 명령 프롬프트에서 전달할 수 있습니다. 명령줄 인수는 *hostsettings.json* 파일의 `urls` 값을 재정의하고, 서버는 포트 8080에서 수신합니다.
 
-```console
+```dotnetcli
 dotnet run --urls "http://*:8080"
 ```
 

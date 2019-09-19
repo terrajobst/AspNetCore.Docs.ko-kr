@@ -5,12 +5,12 @@ description: 이 자습서에서는 ASP.NET Core 앱에서 .NET Core CLI 파일 
 ms.author: riande
 ms.date: 05/31/2018
 uid: tutorials/dotnet-watch
-ms.openlocfilehash: 03b4f7f4ade5268915482a659890c7edc2d9a852
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 5462f89a3b5a257ed0a6a8439efb077653fb14f6
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64889878"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71082242"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>파일 감시자를 사용하여 ASP.NET Core 앱 개발
 
@@ -24,7 +24,7 @@ ms.locfileid: "64889878"
 
 명령 셸에서 *WebApp* 폴더로 이동합니다. 다음 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet run
 ```
 
@@ -61,7 +61,7 @@ API 제품으로 이동합니다(`http://localhost:<port number>/api/math/produc
 
 1. 다음 명령을 실행하여 `Microsoft.DotNet.Watcher.Tools` 패키지를 설치합니다.
 
-    ```console
+    ```dotnetcli
     dotnet restore
     ```
 
@@ -177,7 +177,7 @@ public static int Product(int a, int b)
 
 파일이 두 프로젝트를 감시하는 시작하려면 *test* 폴더를 변경합니다. 다음 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet watch msbuild /t:Test
 ```
 

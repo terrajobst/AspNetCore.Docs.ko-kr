@@ -24,7 +24,7 @@ ASP.NET Core는 환경 변수를 사용하여 런타임 환경에 따라 앱 동
 
 ## <a name="environments"></a>환경
 
-ASP.NET Core는 앱 시작 시 환경 변수 `ASPNETCORE_ENVIRONMENT`를 읽고 [IHostingEnvironment.EnvironmentName](/dotnet/api/microsoft.aspnetcore.hosting.ihostingenvironment.environmentname)에 그 값을 저장합니다. `ASPNETCORE_ENVIRONMENT`를 임의의 값으로 설정할 수 있지만 프레임워크는 [Development](/dotnet/api/microsoft.aspnetcore.hosting.environmentname.development), [Staging](/dotnet/api/microsoft.aspnetcore.hosting.environmentname.staging) 및 [Production](/dotnet/api/microsoft.aspnetcore.hosting.environmentname.production)의 [세 가지 값](/dotnet/api/microsoft.aspnetcore.hosting.environmentname)을 지원합니다. `ASPNETCORE_ENVIRONMENT`가 설정되지 않은 경우 기본값은 `Production`입니다.
+ASP.NET Core는 앱 시작 시 환경 변수 `ASPNETCORE_ENVIRONMENT`를 읽고 [IHostingEnvironment.EnvironmentName](/dotnet/api/microsoft.aspnetcore.hosting.ihostingenvironment.environmentname)에 값을 저장합니다. `ASPNETCORE_ENVIRONMENT`를 임의의 값으로 설정할 수 있지만 [세 개의 값](/dotnet/api/microsoft.aspnetcore.hosting.environmentname)은 프레임워크에서 지원됩니다. [개발](/dotnet/api/microsoft.aspnetcore.hosting.environmentname.development), [스테이징](/dotnet/api/microsoft.aspnetcore.hosting.environmentname.staging) 및 [프로덕션](/dotnet/api/microsoft.aspnetcore.hosting.environmentname.production). `ASPNETCORE_ENVIRONMENT`가 설정되지 않은 경우 기본값은 `Production`입니다.
 
 [!code-csharp[](environments/sample/EnvironmentsSample/Startup.cs?name=snippet)]
 
@@ -47,7 +47,7 @@ Windows 및 macOS에서 환경 변수 및 값은 대/소문자를 구분하지 �
 
 개발 환경은 프로덕션에서 노출해서는 안 되는 기능을 활성화할 수 있습니다. 예를 들어 ASP.NET Core 템플릿은 개발 환경에서 [개발자 예외 페이지](xref:fundamentals/error-handling#developer-exception-page)를 활성화합니다.
 
-로컬 컴퓨터 개발을 위한 환경은 프로젝트의 *Properties\launchSettings.json* 파일에서 설정할 수 있습니다. *launchSettings.json*의 환경 값은 시스템 환경에 설정된 값을 재정의합니다.
+로컬 컴퓨터 개발을 위한 환경은 프로젝트의 *Properties\launchSettings.json* 파일에서 설정할 수 있습니다. *launchSettings.json*의 환경 값은 시스템 환경에서 설정된 값을 재정의합니다.
 
 다음 JSON은 *launchSettings.json* 파일의 세 가지 프로필을 보여줍니다.
 
@@ -157,7 +157,7 @@ Visual Studio 프로젝트 속성 **Debug** 탭은 *launchSettings.json* 파일�
 }
 ```
 
-*Properties/launchSettings.json*과 같은 방식으로 `dotnet run`을 사용하여 앱을 시작할 경우 프로젝트의 *.vscode/launch.json* 파일은 읽히지 않습니다. *launchSettings.json* 파일이 없는 개발 환경에서 앱을 시작할 때는 환경 변수 또는 `dotnet run` 명령에 대한 명령줄 인수로 환경을 설정합니다.
+*Properties/launchSettings.json*과 같은 방식으로 `dotnet run`을 사용하여 앱을 시작할 때 프로젝트의 *.vscode/launch.json* 파일은 읽히지 않습니다. *launchSettings.json* 파일이 없는 개발 환경에서 앱을 시작할 때는 `dotnet run` 명령에 대한 환경 변수 또는 명령줄 인수로 환경을 설정합니다.
 
 ### <a name="production"></a>프로덕션
 
@@ -181,7 +181,7 @@ Visual Studio 프로젝트 속성 **Debug** 탭은 *launchSettings.json* 파일�
 1. **SETTINGS** 그룹에서 **애플리케이션 설정** 블레이드를 선택합니다.
 1. **애플리케이션 설정** 영역에서 **새 설정 추가**를 선택합니다.
 1. **이름**에 `ASPNETCORE_ENVIRONMENT`를 입력합니다. **값**에는 환경을 입력합니다(예: `Staging`).
-1. 배포 슬롯을 교환할 때 환경 설정을 현재 슬롯으로 유지하려면 **슬롯 설정** 확인란을 선택합니다. 자세한 내용은 [Azure 설명서: 어떤 설정이 교환되나요?](/azure/app-service/web-sites-staged-publishing)를 참조하세요.
+1. 배포 슬롯을 교환할 때 환경 설정을 현재 슬롯으로 유지하려면 **슬롯 설정** 확인란을 선택합니다. 자세한 내용은 [Azure 설명서: 교환된 설정은? ](/azure/app-service/web-sites-staged-publishing)를 참조하세요.
 1. 블레이드 상단에서 **저장**을 선택합니다.
 
 Azure App Service는 Azure 포털에서 앱 설정(환경 변수)이 추가, 변경 또는 삭제된 후 앱을 자동으로 다시 시작합니다.
@@ -240,7 +240,7 @@ Windows에서 전역적으로 값을 설정하려면 다음 방법 중 하나를
 
 **프로젝트 파일 또는 게시 프로필**
 
-**Windows IIS 배포의 경우:** `<EnvironmentName>` 속성을 게시 프로필(*.pubxml*) 또는 프로젝트 파일에 포함합니다. 이 방법은 프로젝트가 게시될 때 *web.config*에 환경을 설정합니다.
+**Windows IIS 배포의 경우:** `<EnvironmentName>` 속성을 게시 프로필( *.pubxml*) 또는 프로젝트 파일에 포함합니다. 이 방법은 프로젝트가 게시될 때 *web.config*에 환경을 설정합니다.
 
 ```xml
 <PropertyGroup>
@@ -288,9 +288,9 @@ Linux 배포판의 경우 세션 기반 변수 설정을 위해 명령 프롬프
 
 환경별 구성을 로드하려면 다음을 권장합니다.
 
-* *appsettings* 파일(*appsettings.\<Environment>.json*). [구성: 파일 구성 공급자](xref:fundamentals/configuration/index#file-configuration-provider)를 참조하세요.
-* 환경 변수(앱이 호스팅되는 각 시스템에서 설정). [구성: 파일 구성 공급자](xref:fundamentals/configuration/index#file-configuration-provider) 및 [개발에서 앱 비밀의 안전한 스토리지: 환경 변수](xref:security/app-secrets#environment-variables)를 참조하세요.
-* 암호 관리자(개발 환경에만 해당). <xref:security/app-secrets>을 참조하세요.
+* *appsettings* 파일(*appsettings.\<Environment>.json*) [구성: 파일 구성 공급자](xref:fundamentals/configuration/index#file-configuration-provider)를 참조하세요.
+* 환경 변수(앱이 호스팅되는 각 시스템에서 설정) [구성: 파일 구성 공급자](xref:fundamentals/configuration/index#file-configuration-provider) 및 [개발에서 앱 비밀의 안전한 스토리지: 환경 변수](xref:security/app-secrets#environment-variables)를 참조하세요.
+* 비밀 관리자(개발 환경에만 해당) <xref:security/app-secrets>을 참조하세요.
 
 ## <a name="environment-based-startup-class-and-methods"></a>환경에 따른 시작 클래스 및 메서드
 

@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 07/04/2019
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: c2c815735ad1b4dcec761b26ea3992a4effebe62
-ms.sourcegitcommit: 979dbfc5e9ce09b9470789989cddfcfb57079d94
+ms.openlocfilehash: 1043a578f66d5bb57f4a81e9fe21afa5e3c37cb8
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/31/2019
-ms.locfileid: "68682699"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081504"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet aspnet-codegenerator
 
@@ -25,13 +25,13 @@ ms.locfileid: "68682699"
 
 `dotnet-aspnet-codegenerator`는 설치해야 하는 [전역 도구](/dotnet/core/tools/global-tools)입니다. 다음 명령은 `dotnet-aspnet-codegenerator` 도구의 안정적인 최신 버전을 설치합니다.
 
-```console
+```dotnetcli
 dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
 다음 명령은 `dotnet-aspnet-codegenerator`를 설치된 .NET Core SDK에서 사용 가능한 안정적인 최신 버전으로 업데이트합니다.
 
-```console
+```dotnetcli
 dotnet tool update -g dotnet-aspnet-codegenerator
 ```
 
@@ -58,7 +58,7 @@ dotnet aspnet-codegenerator [-h|--help]
   컨트롤러| [컨트롤러 스캐폴딩](/aspnet/core/tutorials/first-mvc-app/adding-model) |
   ID  | [ID 스캐폴딩](/aspnet/core/security/authentication/scaffold-identity) |
   razorpage | [Razor 페이지 스캐폴딩](/aspnet/core/tutorials/razor-pages/model) |
-  view      | [보기 스캐폴딩](/aspnet/core/mvc/views/overview) |
+  보기      | [보기 스캐폴딩](/aspnet/core/mvc/views/overview) |
 
 ## <a name="options"></a>옵션
 
@@ -72,7 +72,7 @@ NuGet 패키지 디렉터리를 지정합니다.
 
 `-tfm|--target-framework`
 
-사용할 대상 [프레임워크](/dotnet/standard/frameworks)입니다. 예를 들어, `net46`을 입력합니다.
+사용할 대상 [프레임워크](/dotnet/standard/frameworks)입니다. 예: `net46`.
 
 `-b|--build-base-path`
 
@@ -137,7 +137,7 @@ NuGet 패키지 디렉터리를 지정합니다.
 
 `-h` 스위치를 사용하여 `aspnet-codegenerator controller` 명령에 대한 도움말을 확인합니다.
 
-```console
+```dotnetcli
 dotnet aspnet-codegenerator controller -h
 ```
 
@@ -158,7 +158,7 @@ Razor Pages는 새 페이지 이름 및 사용할 템플릿을 지정하여 개�
 
 예를 들어 다음 명령은 편집 템플릿을 사용하여 *MyEdit.cshtml* 및 *MyEdit.cshtml.cs*를 생성합니다.
 
-```console
+```dotnetcli
 dotnet aspnet-codegenerator razorpage MyEdit Edit -m Movie -dc RazorPagesMovieContext -outDir Pages/Movies
 ```
 
@@ -184,7 +184,7 @@ dotnet aspnet-codegenerator razorpage MyEdit Edit -m Movie -dc RazorPagesMovieCo
 
 `-h` 스위치를 사용하여 `aspnet-codegenerator razorpage` 명령에 대한 도움말을 확인합니다.
 
-```console
+```dotnetcli
 dotnet aspnet-codegenerator razorpage -h
 ```
 

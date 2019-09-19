@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/inheritance
-ms.openlocfilehash: 60d97137fbc6a08152b7b8a631b7a32940875b38
-ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
+ms.openlocfilehash: 8e092ac47b2fd5fb6f3a0524bf1c559b7c3935c4
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69975098"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71080433"
 ---
 # <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>자습서: 상속 구현 - ASP.NET MVC 및 EF Core 사용
 
@@ -93,7 +93,7 @@ Person 엔터티 형식을 *SchoolContext.cs*에 추가합니다. 새 줄이 강
 
 변경 내용을 저장하고 프로젝트를 빌드합니다. 그런 다음, 프로젝트 폴더에서 명령 창을 열고 다음 명령을 입력합니다.
 
-```console
+```dotnetcli
 dotnet ef migrations add Inheritance
 ```
 
@@ -127,7 +127,7 @@ dotnet ef migrations add Inheritance
 
 `database update` 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet ef database update
 ```
 

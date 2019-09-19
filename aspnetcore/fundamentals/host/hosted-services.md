@@ -7,16 +7,16 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/03/2019
 uid: fundamentals/host/hosted-services
-ms.openlocfilehash: 3d4279a291182da60c0cb2fbb93a3922ed673cde
-ms.sourcegitcommit: 776367717e990bdd600cb3c9148ffb905d56862d
+ms.openlocfilehash: 1db3ee1a9bcc0d41edf24df55bcd8d54fb0e9724
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/09/2019
-ms.locfileid: "68914019"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081775"
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>ASP.NET Core에서 호스팅되는 서비스를 사용하는 백그라운드 작업
 
-[Luke Latham](https://github.com/guardrex)으로
+작성자: [Luke Latham](https://github.com/guardrex)
 
 ASP.NET Core에서 백그라운드 작업은 *호스팅되는 서비스*로 구현될 수 있습니다. 호스티드 서비스는 <xref:Microsoft.Extensions.Hosting.IHostedService> 인터페이스를 구현하는 백그라운드 작업 논리가 있는 클래스입니다. 이 토픽에서는 세 가지 호스팅되는 서비스 예제를 제공합니다.
 
@@ -49,7 +49,7 @@ ASP.NET Core Worker Service 템플릿은 장기간 실행되는 서비스 앱을
 
 명령 셸에서 [dotnet new](/dotnet/core/tools/dotnet-new) 명령과 함께 Worker Service(`worker`) 템플릿을 사용합니다. 다음 예제에서는 `ContosoWorkerService`라는 Worker Service 앱을 만듭니다. 명령이 실행될 때 `ContosoWorkerService` 앱의 폴더가 자동으로 만들어집니다.
 
-```console
+```dotnetcli
 dotnet new worker -o ContosoWorkerService
 ```
 

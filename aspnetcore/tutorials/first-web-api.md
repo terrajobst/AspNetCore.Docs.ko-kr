@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/27/2019
 uid: tutorials/first-web-api
-ms.openlocfilehash: 25bfccb136d875b454034bd011828c9f3b6cd3d8
-ms.sourcegitcommit: de17150e5ec7507d7114dde0e5dbc2e45a66ef53
+ms.openlocfilehash: 1cc4fffc50978a3a958a96e1eb250cb85a8d2879
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/28/2019
-ms.locfileid: "70113294"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71082060"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>자습서: ASP.NET Core를 사용하여 웹 API 만들기
 
@@ -81,7 +81,7 @@ ms.locfileid: "70113294"
 * 디렉터리(`cd`)를 프로젝트 폴더를 포함하는 폴더로 변경합니다.
 * 다음 명령을 실행합니다.
 
-   ```console
+   ```dotnetcli
    dotnet new webapi -o TodoApi
    cd TodoAPI
    dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 3.0.0-*
@@ -116,7 +116,7 @@ ms.locfileid: "70113294"
 
 프로젝트 폴더에서 명령 터미널을 열고 다음 명령을 실행합니다.
 
-   ```console
+   ```dotnetcli
    dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 3.0.0-*
    dotnet add package Microsoft.EntityFrameworkCore.InMemory --version 3.0.0-*
    ```
@@ -280,7 +280,7 @@ ASP.NET Core에서는 DB 컨텍스트와 같은 서비스를 [DI(종속성 주�
 
 다음 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 3.0.0-*
 dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.0.0-*
 dotnet tool install --global dotnet-aspnet-codegenerator
@@ -388,7 +388,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 * 새 요청을 만듭니다.
 * HTTP 메서드를 **GET**으로 설정합니다.
-* 요청 URL을 `https://localhost:<port>/api/TodoItems`로 설정합니다. 예를 들어, `https://localhost:5001/api/TodoItems`을 입력합니다.
+* 요청 URL을 `https://localhost:<port>/api/TodoItems`로 설정합니다. 예: `https://localhost:5001/api/TodoItems`.
 * Postman에서 **두 개의 창 보기**를 설정합니다.
 * **보내기**를 선택합니다.
 
@@ -533,7 +533,7 @@ Postman을 사용하여 할 일 항목을 삭제합니다.
 * 디렉터리(`cd`)를 프로젝트 폴더를 포함하는 폴더로 변경합니다.
 * 다음 명령을 실행합니다.
 
-   ```console
+   ```dotnetcli
    dotnet new webapi -o TodoApi
    code -r TodoApi
    ```
@@ -762,7 +762,7 @@ ASP.NET Core에서는 DB 컨텍스트와 같은 서비스를 [DI(종속성 주�
 
 * 새 요청을 만듭니다.
   * HTTP 메서드를 **GET**으로 설정합니다.
-  * 요청 URL을 `https://localhost:<port>/api/todo`로 설정합니다. 예를 들어, `https://localhost:5001/api/todo`을 입력합니다.
+  * 요청 URL을 `https://localhost:<port>/api/todo`로 설정합니다. 예: `https://localhost:5001/api/todo`.
 * Postman에서 **두 개의 창 보기**를 설정합니다.
 * **보내기**를 선택합니다.
 

@@ -6,12 +6,12 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 07/08/2019
 uid: tutorials/signalr
-ms.openlocfilehash: 53d3763a93cc72b6bcf85b64a706500299b3597f
-ms.sourcegitcommit: 040aedca220ed24ee1726e6886daf6906f95a028
+ms.openlocfilehash: 2dfa994b9763a0139cb70cbf9847ac3b02b568e4
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/15/2019
-ms.locfileid: "67893713"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081964"
 ---
 # <a name="tutorial-get-started-with-aspnet-core-signalr"></a>자습서: ASP.NET Core SignalR 시작
 
@@ -68,7 +68,7 @@ ms.locfileid: "67893713"
 
 * 다음 명령을 실행합니다.
 
-   ```console
+   ```dotnetcli
    dotnet new webapp -o SignalRChat
    code -r SignalRChat
    ```
@@ -110,7 +110,7 @@ SignalR 서버 라이브러리는 ASP.NET Core 3.0 공유 프레임워크에 포
 
 * 통합 터미널에서 다음 명령을 실행하여 LibMan을 설치합니다.
 
-  ```console
+  ```dotnetcli
   dotnet tool install -g Microsoft.Web.LibraryManager.Cli
   ```
 
@@ -137,7 +137,7 @@ SignalR 서버 라이브러리는 ASP.NET Core 3.0 공유 프레임워크에 포
 
 * **터미널**에서 다음 명령을 실행하여 LibMan을 설치합니다.
 
-  ```console
+  ```dotnetcli
   dotnet tool install -g Microsoft.Web.LibraryManager.Cli
   ```
 
@@ -220,7 +220,7 @@ SignalR 서버는 SignalR에 SignalR 요청을 전달하도록 구성되어야 �
 
 * 통합 터미널에서 다음 명령을 실행합니다.
 
-  ```console
+  ```dotnetcli
   dotnet run -p SignalRChat.csproj
   ```
 
@@ -242,7 +242,8 @@ SignalR 서버는 SignalR에 SignalR 요청을 전달하도록 구성되어야 �
 > * 앱이 작동하지 않는 경우 브라우저 개발자 도구(F12)를 열고 콘솔로 이동합니다. HTML 및 JavaScript 코드와 관련된 오류를 볼 수 있습니다. 예를 들어 지정되지 않은 다른 폴더에 *signalr.js*를 넣었다고 가정합니다. 이 경우 해당 파일에 대한 참조는 작동하지 않으며 콘솔에 404 오류가 표시됩니다.
 >   ![signalr.js 찾을 수 없음 오류](signalr/_static/3.x/f12-console.png)
 > * Chrome에서 ERR_SPDY_INADEQUATE_TRANSPORT_SECURITY 오류가 발생하거나 Firefox에서 NS_ERROR_NET_INADEQUATE_SECURITY 오류가 발생하는 경우, 다음 명령을 실행하여 개발 인증서를 업데이트합니다.
->   ```
+>
+>   ```dotnetcli
 >   dotnet dev-certs https --clean
 >   dotnet dev-certs https --trust
 >   ```
@@ -309,7 +310,7 @@ SignalR에 대해 자세히 알아보려면 다음을 참조하세요.
 
 * 다음 명령을 실행합니다.
 
-   ```console
+   ```dotnetcli
    dotnet new webapp -o SignalRChat
    code -r SignalRChat
    ```
@@ -352,7 +353,7 @@ SignalR 서버 라이브러리는 `Microsoft.AspNetCore.App` 메타패키지에 
 
 * 통합 터미널에서 다음 명령을 실행하여 LibMan을 설치합니다.
 
-  ```console
+  ```dotnetcli
   dotnet tool install -g Microsoft.Web.LibraryManager.Cli
   ```
 
@@ -379,7 +380,7 @@ SignalR 서버 라이브러리는 `Microsoft.AspNetCore.App` 메타패키지에 
 
 * **터미널**에서 다음 명령을 실행하여 LibMan을 설치합니다.
 
-  ```console
+  ```dotnetcli
   dotnet tool install -g Microsoft.Web.LibraryManager.Cli
   ```
 
@@ -462,7 +463,7 @@ SignalR 서버는 SignalR에 SignalR 요청을 전달하도록 구성되어야 �
 
 * 통합 터미널에서 다음 명령을 실행합니다.
 
-  ```console
+  ```dotnetcli
   dotnet run -p SignalRChat.csproj
   ```
 
