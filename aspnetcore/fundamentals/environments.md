@@ -24,7 +24,7 @@ ASP.NET Core는 환경 변수를 사용하여 런타임 환경에 따라 앱 동
 
 ## <a name="environments"></a>환경
 
-ASP.NET Core는 앱 시작 시 환경 변수 `ASPNETCORE_ENVIRONMENT`를 읽고 [IHostingEnvironment.EnvironmentName](/dotnet/api/microsoft.aspnetcore.hosting.ihostingenvironment.environmentname)에 값을 저장합니다. `ASPNETCORE_ENVIRONMENT`를 임의의 값으로 설정할 수 있지만 [세 개의 값](/dotnet/api/microsoft.aspnetcore.hosting.environmentname)은 프레임워크에서 지원됩니다. [개발](/dotnet/api/microsoft.aspnetcore.hosting.environmentname.development), [스테이징](/dotnet/api/microsoft.aspnetcore.hosting.environmentname.staging) 및 [프로덕션](/dotnet/api/microsoft.aspnetcore.hosting.environmentname.production). `ASPNETCORE_ENVIRONMENT`가 설정되지 않은 경우 기본값은 `Production`입니다.
+ASP.NET Core는 앱 시작 시 환경 변수 `ASPNETCORE_ENVIRONMENT`를 읽고 [IHostingEnvironment.EnvironmentName](/dotnet/api/microsoft.aspnetcore.hosting.ihostingenvironment.environmentname)에 그 값을 저장합니다. `ASPNETCORE_ENVIRONMENT`를 임의의 값으로 설정할 수 있지만 프레임워크는 [Development](/dotnet/api/microsoft.aspnetcore.hosting.environmentname.development), [Staging](/dotnet/api/microsoft.aspnetcore.hosting.environmentname.staging) 및 [Production](/dotnet/api/microsoft.aspnetcore.hosting.environmentname.production)의 [세 가지 값](/dotnet/api/microsoft.aspnetcore.hosting.environmentname)을 지원합니다. `ASPNETCORE_ENVIRONMENT`가 설정되지 않은 경우 기본값은 `Production`입니다.
 
 [!code-csharp[](environments/sample/EnvironmentsSample/Startup.cs?name=snippet)]
 
@@ -37,19 +37,19 @@ ASP.NET Core는 앱 시작 시 환경 변수 `ASPNETCORE_ENVIRONMENT`를 읽고 
   * `Production`
   * `Staging_2`
 
-[환경 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/environment-tag-helper)는 `IHostingEnvironment.EnvironmentName`의 값을 사용하여 요소에 표시를 포함하거나 제외합니다.
+[Environment 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/environment-tag-helper)는 `IHostingEnvironment.EnvironmentName`의 값을 사용하여 요소에 태그를 포함하거나 제외합니다.
 
 [!code-cshtml[](environments/sample-snapshot/EnvironmentsSample/Pages/About.cshtml)]
 
-Windows와 macOS에서 환경 변수 및 값은 대/소문자를 구분하지 않습니다. Linux 환경 변수 및 값은 기본적으로 **대/소문자를 구분**합니다.
+Windows 및 macOS에서 환경 변수 및 값은 대/소문자를 구분하지 않습니다. Linux 환경 변수 및 값은 기본적으로 **대/소문자를 구분**합니다.
 
 ### <a name="development"></a>개발
 
 개발 환경은 프로덕션에서 노출해서는 안 되는 기능을 활성화할 수 있습니다. 예를 들어 ASP.NET Core 템플릿은 개발 환경에서 [개발자 예외 페이지](xref:fundamentals/error-handling#developer-exception-page)를 활성화합니다.
 
-로컬 컴퓨터 개발을 위한 환경은 프로젝트의 *Properties\launchSettings.json* 파일에서 설정할 수 있습니다. *launchSettings.json*의 환경 값은 시스템 환경에서 설정된 값을 재정의합니다.
+로컬 컴퓨터 개발을 위한 환경은 프로젝트의 *Properties\launchSettings.json* 파일에서 설정할 수 있습니다. *launchSettings.json*의 환경 값은 시스템 환경에 설정된 값을 재정의합니다.
 
-다음 JSON에는 *launchSettings.json* 파일의 세 가지 프로필이 표시되어 있습니다.
+다음 JSON은 *launchSettings.json* 파일의 세 가지 프로필을 보여줍니다.
 
 ```json
 {
@@ -111,14 +111,14 @@ Windows와 macOS에서 환경 변수 및 값은 대/소문자를 구분하지 �
 
 * `IISExpress`
 * `IIS`
-* `Project`(Kestrel 시작)
+* `Project`(Kestrel을 시작합니다.)
 
-앱이 [dotnet run](/dotnet/core/tools/dotnet-run)으로 시작하는 경우:
+[dotnet run](/dotnet/core/tools/dotnet-run)으로 앱을 시작하는 경우:
 
-* 가능한 경우 *launchSettings.json*을 읽습니다. *launchSettings.json*의 `environmentVariables` 설정은 환경 변수를 재정의합니다.
+* 가능한 경우 *launchSettings.json*을 읽습니다. *launchSettings.json*의 `environmentVariables` 설정이 환경 변수를 재정의합니다.
 * 호스팅 환경이 표시됩니다.
 
-다음 출력은 [dotnet run](/dotnet/core/tools/dotnet-run)으로 시작되는 앱을 보여 줍니다.
+다음 출력은 [dotnet run](/dotnet/core/tools/dotnet-run)으로 시작된 앱을 보여 줍니다.
 
 ```bash
 PS C:\Websites\EnvironmentsSample> dotnet run
@@ -136,9 +136,9 @@ Visual Studio 프로젝트 속성 **Debug** 탭은 *launchSettings.json* 파일�
 웹 서버가 다시 시작되기 전에는 프로젝트 프로필의 변경 내용이 적용되지 않을 수 있습니다. 해당 환경에 대한 변경 내용을 감지하려면 Kestrel을 다시 시작해야 합니다.
 
 > [!WARNING]
-> *launchSettings.json*은 암호를 저장하지 않아야 합니다. [암호 관리자 도구](xref:security/app-secrets)를 사용하여 로컬 개발에 대한 암호를 저장할 수 있습니다.
+> *launchSettings.json*은 암호를 저장하지 않아야 합니다. [암호 관리자 도구](xref:security/app-secrets)를 사용하여 로컬 개발에 사용되는 암호를 저장할 수 있습니다.
 
-[Visual Studio Code](https://code.visualstudio.com/)를 사용하는 경우 환경 변수는 *.vscode/launch.json* 파일에서 설정할 수 있습니다. 다음 예제에서는 환경을 `Development`로 설정합니다.
+[Visual Studio Code](https://code.visualstudio.com/)를 사용하는 경우 환경 변수는 *.vscode/launch.json* 파일에서 설정할 수 있습니다. 다음 예제는 환경을 `Development`로 설정합니다.
 
 ```json
 {
@@ -157,7 +157,7 @@ Visual Studio 프로젝트 속성 **Debug** 탭은 *launchSettings.json* 파일�
 }
 ```
 
-*Properties/launchSettings.json*과 같은 방식으로 `dotnet run`을 사용하여 앱을 시작할 때 프로젝트의 *.vscode/launch.json* 파일은 읽히지 않습니다. *launchSettings.json* 파일이 없는 개발 환경에서 앱을 시작할 때는 `dotnet run` 명령에 대한 환경 변수 또는 명령줄 인수로 환경을 설정합니다.
+*Properties/launchSettings.json*과 같은 방식으로 `dotnet run`을 사용하여 앱을 시작할 경우 프로젝트의 *.vscode/launch.json* 파일은 읽히지 않습니다. *launchSettings.json* 파일이 없는 개발 환경에서 앱을 시작할 때는 환경 변수 또는 `dotnet run` 명령에 대한 명령줄 인수로 환경을 설정합니다.
 
 ### <a name="production"></a>프로덕션
 
@@ -169,9 +169,9 @@ Visual Studio 프로젝트 속성 **Debug** 탭은 *launchSettings.json* 파일�
 * 친숙한 오류 페이지를 사용하도록 설정합니다.
 * 프로덕션 로깅 및 모니터링을 사용합니다. 예: [Application Insights](/azure/application-insights/app-insights-asp-net-core).
 
-## <a name="set-the-environment"></a>환경 변수를 설정합니다.
+## <a name="set-the-environment"></a>환경 설정
 
-테스트를 위해 특정 환경을 설정하는 것이 유용합니다. 환경을 설정하지 않으면 대부분의 디버깅 기능을 사용하지 않는 `Production`으로 기본값이 지정됩니다. 환경 설정에 대한 메서드는 운영 체제에 따라 다릅니다.
+테스트를 위해 특정 환경을 설정하는 것이 유용한 경우가 종종 있습니다. 환경을 설정하지 않으면 대부분의 디버깅 기능을 사용하지 않는 `Production`으로 기본값이 지정됩니다. 환경을 설정하는 방법은 운영 체제에 따라 다릅니다.
 
 ### <a name="azure-app-service"></a>Azure App Service
 
@@ -180,15 +180,15 @@ Visual Studio 프로젝트 속성 **Debug** 탭은 *launchSettings.json* 파일�
 1. **App Services** 블레이드에서 앱을 선택합니다.
 1. **SETTINGS** 그룹에서 **애플리케이션 설정** 블레이드를 선택합니다.
 1. **애플리케이션 설정** 영역에서 **새 설정 추가**를 선택합니다.
-1. **이름 입력**의 경우, `ASPNETCORE_ENVIRONMENT`를 제공합니다. **값 입력**의 경우 환경을 제공합니다(예: `Staging`).
-1. 배포 슬롯을 교환할 때 환경 설정을 현재 슬롯으로 유지하려면 **슬롯 설정** 확인란을 선택합니다. 자세한 내용은 [Azure 설명서: 교환된 설정은? ](/azure/app-service/web-sites-staged-publishing)를 참조하세요.
+1. **이름**에 `ASPNETCORE_ENVIRONMENT`를 입력합니다. **값**에는 환경을 입력합니다(예: `Staging`).
+1. 배포 슬롯을 교환할 때 환경 설정을 현재 슬롯으로 유지하려면 **슬롯 설정** 확인란을 선택합니다. 자세한 내용은 [Azure 설명서: 어떤 설정이 교환되나요?](/azure/app-service/web-sites-staged-publishing)를 참조하세요.
 1. 블레이드 상단에서 **저장**을 선택합니다.
 
-Azure App Service는 Azure Portal에서 앱 설정(환경 변수)이 추가, 변경 또는 삭제된 후 앱을 자동으로 다시 시작합니다.
+Azure App Service는 Azure 포털에서 앱 설정(환경 변수)이 추가, 변경 또는 삭제된 후 앱을 자동으로 다시 시작합니다.
 
 ### <a name="windows"></a>Windows
 
-현재 세션에 `ASPNETCORE_ENVIRONMENT`를 설정하려면 앱이 [dotnet run](/dotnet/core/tools/dotnet-run)을 사용하여 시작할 때 다음 명령이 사용됩니다.
+앱이 [dotnet run](/dotnet/core/tools/dotnet-run)을 사용하여 시작할 때 현재 세션에 대한 `ASPNETCORE_ENVIRONMENT`를 설정하려면 다음 명령이 사용됩니다.
 
 **명령 프롬프트**
 
@@ -202,7 +202,7 @@ set ASPNETCORE_ENVIRONMENT=Development
 $Env:ASPNETCORE_ENVIRONMENT = "Development"
 ```
 
-이러한 명령은 현재 창에만 적용됩니다. 창이 닫히면 `ASPNETCORE_ENVIRONMENT` 설정이 기본 설정 또는 컴퓨터 값으로 되돌아갑니다.
+이 명령들은 현재 창에만 적용됩니다. 창이 닫히면 `ASPNETCORE_ENVIRONMENT` 설정이 기본 설정 또는 컴퓨터 값으로 되돌아갑니다.
 
 Windows에서 전역적으로 값을 설정하려면 다음 방법 중 하나를 사용합니다.
 
@@ -212,7 +212,7 @@ Windows에서 전역적으로 값을 설정하려면 다음 방법 중 하나를
 
   ![ASPNET Core 환경 변수](environments/_static/windows_aspnetcore_environment.png)
 
-* 관리 명령 프롬프트를 열고 `setx` 명령을 사용하거나 관리 PowerShell 명령 프롬프트를 열고 `[Environment]::SetEnvironmentVariable`을 사용합니다.
+* 관리자 권한의 명령 프롬프트를 열고 `setx` 명령을 사용하거나 관리자 권한의 PowerShell 명령 프롬프트를 열고 `[Environment]::SetEnvironmentVariable`을 사용합니다.
 
   **명령 프롬프트**
 
@@ -220,7 +220,7 @@ Windows에서 전역적으로 값을 설정하려면 다음 방법 중 하나를
   setx ASPNETCORE_ENVIRONMENT Development /M
   ```
 
-  `/M` 스위치는 시스템 수준에서 환경 변수를 설정함을 나타냅니다. `/M` 스위치를 사용하지 않으면 환경 변수가 사용자 계정으로 설정됩니다.
+  `/M` 스위치는 시스템 수준에서 환경 변수를 설정함을 나타냅니다. `/M` 스위치를 사용하지 않으면 환경 변수가 사용자 계정에 대해 설정됩니다.
 
   **PowerShell**
 
@@ -228,13 +228,13 @@ Windows에서 전역적으로 값을 설정하려면 다음 방법 중 하나를
   [Environment]::SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development", "Machine")
   ```
 
-  `Machine` 옵션 값은 시스템 수준에서 환경 변수를 설정함을 나타냅니다. 옵션 값이 `User`로 변경되면 환경 변수가 사용자 계정으로 설정됩니다.
+  `Machine` 옵션 값은 시스템 수준에서 환경 변수를 설정함을 나타냅니다. 옵션 값이 `User`로 변경되면 환경 변수가 사용자 계정에 대해 설정됩니다.
 
 `ASPNETCORE_ENVIRONMENT` 환경 변수를 전역적으로 설정하면 값이 설정된 후 열리는 모든 명령 창에서 `dotnet run`에 대해 적용됩니다.
 
 **web.config**
 
-*web.config*를 사용하여 `ASPNETCORE_ENVIRONMENT`환경 변수를 설정하려면 <xref:host-and-deploy/aspnet-core-module#setting-environment-variables>의 *환경 변수 설정* 섹션을 참조하세요.
+*web.config*를 사용하여 `ASPNETCORE_ENVIRONMENT` 환경 변수를 설정하려면 <xref:host-and-deploy/aspnet-core-module#setting-environment-variables>의 *환경 변수 설정* 섹션을 참조하세요.
 
 ::: moniker range=">= aspnetcore-2.2"
 
@@ -250,12 +250,12 @@ Windows에서 전역적으로 값을 설정하려면 다음 방법 중 하나를
 
 ::: moniker-end
 
-**IIS 애플리케이션 풀마다**
+**IIS 응용 프로그램 풀 별**
 
-격리된 애플리케이션 풀에서 실행되는(IIS 10.0 이상에서 지원됨) 앱에 대한 `ASPNETCORE_ENVIRONMENT` 환경 변수를 설정하려면, [ 환경 변수 &lt;environmentVariables&gt;](/iis/configuration/system.applicationHost/applicationPools/add/environmentVariables/#appcmdexe) 항목의 *AppCmd.exe 명령* 섹션을 참조하세요. `ASPNETCORE_ENVIRONMENT` 환경 변수를 앱 풀에 대해 설정하면 해당 값이 시스템 수준의 설정을 재정의합니다.
+격리된 응용 프로그램 풀에서 실행되는(IIS 10.0 이상에서 지원됨) 앱에 대한 `ASPNETCORE_ENVIRONMENT` 환경 변수를 설정하려면, [환경 변수 &lt;environmentVariables&gt;](/iis/configuration/system.applicationHost/applicationPools/add/environmentVariables/#appcmdexe) 항목의 *AppCmd.exe 명령* 섹션을 참조하세요. `ASPNETCORE_ENVIRONMENT` 환경 변수를 앱 풀에 대해 설정하면 해당 값이 시스템 수준의 설정을 재정의합니다.
 
 > [!IMPORTANT]
-> IIS에서 앱을 호스팅하고 `ASPNETCORE_ENVIRONMENT` 환경 변수를 추가 또는 변경할 때 다음 방법 중 하나를 사용하여 앱에서 선택한 새 값을 가져옵니다.
+> IIS에서 앱을 호스팅하고 `ASPNETCORE_ENVIRONMENT` 환경 변수를 추가 또는 변경하는 경우 다음 방법 중 하나를 사용하여 앱에서 새 값을 가져옵니다.
 >
 > * 명령 프롬프트에서 `net stop was /y` 다음에 `net start w3svc`를 실행합니다.
 > * 서버를 다시 시작합니다.
@@ -282,21 +282,21 @@ export ASPNETCORE_ENVIRONMENT=Development
 
 ### <a name="linux"></a>Linux
 
-Linux 배포의 경우 세션 기반 변수 설정에 대한 명령 프롬프트에서 `export` 명령 또는 컴퓨터 수준 환경 설정에 대한 *bash_profile* 파일을 사용합니다.
+Linux 배포판의 경우 세션 기반 변수 설정을 위해 명령 프롬프트에서 `export` 명령을 사용하거나 컴퓨터 수준 환경 설정을 위해 *bash_profile* 파일을 사용합니다.
 
 ### <a name="configuration-by-environment"></a>환경별 구성
 
 환경별 구성을 로드하려면 다음을 권장합니다.
 
-* *appsettings* 파일(*appsettings.\<Environment>.json*) [구성: 파일 구성 공급자](xref:fundamentals/configuration/index#file-configuration-provider)를 참조하세요.
-* 환경 변수(앱이 호스팅되는 각 시스템에서 설정) [구성: 파일 구성 공급자](xref:fundamentals/configuration/index#file-configuration-provider) 및 [개발에서 앱 비밀의 안전한 스토리지: 환경 변수](xref:security/app-secrets#environment-variables)를 참조하세요.
-* 비밀 관리자(개발 환경에만 해당) <xref:security/app-secrets>을 참조하세요.
+* *appsettings* 파일(*appsettings.\<Environment>.json*). [구성: 파일 구성 공급자](xref:fundamentals/configuration/index#file-configuration-provider)를 참조하세요.
+* 환경 변수(앱이 호스팅되는 각 시스템에서 설정). [구성: 파일 구성 공급자](xref:fundamentals/configuration/index#file-configuration-provider) 및 [개발에서 앱 비밀의 안전한 스토리지: 환경 변수](xref:security/app-secrets#environment-variables)를 참조하세요.
+* 암호 관리자(개발 환경에만 해당). <xref:security/app-secrets>을 참조하세요.
 
 ## <a name="environment-based-startup-class-and-methods"></a>환경에 따른 시작 클래스 및 메서드
 
 ### <a name="startup-class-conventions"></a>시작 클래스 규칙
 
-ASP.NET Core 앱이 시작되면 [시작 클래스](xref:fundamentals/startup)가 앱을 부트스트랩합니다. 앱은 다양한 환경(예: `StartupDevelopment`)에 대한 별도의 `Startup` 클래스를 정의할 수 있으며 적절한 `Startup` 클래스는 런타임에 선택됩니다. 해당 이름 접미사가 현재 환경과 일치하는 클래스에 우선 순위가 부여됩니다. 일치하는 `Startup{EnvironmentName}` 클래스를 찾을 수 없으면 `Startup` 클래스가 사용됩니다.
+ASP.NET Core 앱이 시작되면 [Startup 클래스](xref:fundamentals/startup)가 앱을 부트스트랩합니다. 앱은 다양한 환경에 대한 별도의 `Startup` 클래스를 정의할 수 있으며(예: `StartupDevelopment`) 런타임에 적절한 `Startup` 클래스가 선택됩니다. 이름 접미사가 현재 환경과 일치하는 클래스에 우선 순위가 부여됩니다. 일치하는 `Startup{EnvironmentName}` 클래스를 찾을 수 없으면 `Startup` 클래스가 사용됩니다.
 
 환경 기반 `Startup` 클래스를 구현하려면 사용 중인 각 환경에 대한 `Startup{EnvironmentName}` 클래스와 폴백 `Startup` 클래스를 만듭니다.
 
