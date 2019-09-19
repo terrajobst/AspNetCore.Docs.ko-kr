@@ -111,7 +111,7 @@ Windows 및 macOS에서 환경 변수 및 값은 대/소문자를 구분하지 �
 
 * `IISExpress`
 * `IIS`
-* `Project` (Kestrel을 시작합니다.)
+* `Project`(Kestrel을 시작합니다.)
 
 [dotnet run](/dotnet/core/tools/dotnet-run)으로 앱을 시작하는 경우:
 
@@ -133,7 +133,7 @@ Visual Studio 프로젝트 속성 **Debug** 탭은 *launchSettings.json* 파일�
 
 ![프로젝트 속성 설정 환경 변수](environments/_static/project-properties-debug.png)
 
-웹 서버가 다시 시작되기 전까지는 프로젝트 프로필의 변경 내용이 적용되지 않을 것입니다. 해당 환경에 대한 변경 내용을 감지하려면 Kestrel을 다시 시작해야 합니다.
+웹 서버가 다시 시작되기 전에는 프로젝트 프로필의 변경 내용이 적용되지 않을 수 있습니다. 해당 환경에 대한 변경 내용을 감지하려면 Kestrel을 다시 시작해야 합니다.
 
 > [!WARNING]
 > *launchSettings.json*은 암호를 저장하지 않아야 합니다. [암호 관리자 도구](xref:security/app-secrets)를 사용하여 로컬 개발에 사용되는 암호를 저장할 수 있습니다.
@@ -178,10 +178,10 @@ Visual Studio 프로젝트 속성 **Debug** 탭은 *launchSettings.json* 파일�
 [Azure App Service](https://azure.microsoft.com/services/app-service/)에서 환경을 설정하려면 다음 단계를 수행합니다.
 
 1. **App Services** 블레이드에서 앱을 선택합니다.
-1. **설정** 그룹에서 **구성** 블레이드를 선택합니다.
-1. **응용 프로그램 설정** 영역에서 **새 응용 프로그램 설정**을 선택합니다.
+1. **SETTINGS** 그룹에서 **애플리케이션 설정** 블레이드를 선택합니다.
+1. **애플리케이션 설정** 영역에서 **새 설정 추가**를 선택합니다.
 1. **이름**에 `ASPNETCORE_ENVIRONMENT`를 입력합니다. **값**에는 환경을 입력합니다(예: `Staging`).
-1. 배포 슬롯을 교환할 때 환경 설정을 현재 슬롯으로 유지하려면 **배포 슬롯 설정** 확인란을 선택합니다. 자세한 내용은 [Azure 설명서: 어떤 설정이 교환되나요?](/azure/app-service/web-sites-staged-publishing)를 참조하세요.
+1. 배포 슬롯을 교환할 때 환경 설정을 현재 슬롯으로 유지하려면 **슬롯 설정** 확인란을 선택합니다. 자세한 내용은 [Azure 설명서: 어떤 설정이 교환되나요?](/azure/app-service/web-sites-staged-publishing)를 참조하세요.
 1. 블레이드 상단에서 **저장**을 선택합니다.
 
 Azure App Service는 Azure 포털에서 앱 설정(환경 변수)이 추가, 변경 또는 삭제된 후 앱을 자동으로 다시 시작합니다.
