@@ -146,7 +146,7 @@ HTTP.sys 구성 지침은 <xref:fundamentals/servers/httpsys>를 참조하세요
 
 ## <a name="custom-servers"></a>사용자 지정 서버
 
-기본 제공 서버가 앱의 요구 사항을 충족하지 않으면 사용자 지정 서버 구현을 만들 수 있습니다. [OWIN(Open Web Interface for .NET) 가이드](xref:fundamentals/owin)에서는 [Nowin](https://github.com/Bobris/Nowin) 기반 <xref:Microsoft.AspNetCore.Hosting.Server.IServer> 구현을 작성하는 방법을 보여 줍니다. 앱이 사용하는 기능 인터페이스에만 구현이 필요합니다. 최소한 <xref:Microsoft.AspNetCore.Http.Features.IHttpRequestFeature> 및 <xref:Microsoft.AspNetCore.Http.Features.IHttpResponseFeature>가 지원되어야 합니다.
+기본 제공 서버가 앱의 요구 사항을 충족하지 않으면 사용자 지정 서버 구현을 만들 수 있습니다. [OWIN(Open Web Interface for .NET) 가이드](xref:fundamentals/owin)에서는 [Nowin](https://github.com/Bobris/Nowin) 기반 <xref:Microsoft.AspNetCore.Hosting.Server.IServer> 구현을 작성하는 방법을 보여 줍니다. 앱이 사용하는 기능 인터페이스에만 구현이 필요하지만, 최소한 <xref:Microsoft.AspNetCore.Http.Features.IHttpRequestFeature> 및 <xref:Microsoft.AspNetCore.Http.Features.IHttpResponseFeature>는 지원되어야 합니다.
 
 ## <a name="server-startup"></a>서버 시작
 
@@ -172,14 +172,14 @@ IDE(통합 개발 환경)이나 편집기가 앱을 시작하는 경우 서버�
   * 대상 프레임워크: .NET Core 2.2 이상
 * [HTTP.sys](xref:fundamentals/servers/httpsys#http2-support)
   * Windows Server 2016/Windows 10 이상
-  * 대상 프레임워크: HTTP.sys 배포에는 적용할 수 없습니다.
+  * 대상 프레임워크: HTTP.sys 배포에는 적용되지 않습니다.
 * [IIS(In-Process)](xref:host-and-deploy/iis/index#http2-support)
   * Windows Server 2016/Windows 10 이상, IIS 10 이상
   * 대상 프레임워크: .NET Core 2.2 이상
 * [IIS(Out-of-Process)](xref:host-and-deploy/iis/index#http2-support)
   * Windows Server 2016/Windows 10 이상, IIS 10 이상
   * 공개 에지 서버 연결은 HTTP/2를 사용하지만 Kestrel에 대한 역방향 프록시 연결은 HTTP/1.1을 사용합니다.
-  * 대상 프레임워크: IIS Out-of-process 배포에는 적용할 수 없습니다.
+  * 대상 프레임워크: IIS Out-of-Process 배포에는 적용되지 않습니다.
 
 &dagger;Kestrel은 Windows Server 2012 R2와 Windows 8.1에서의 HTTP/2 지원을 제한했습니다. 이러한 운영 체제에서 사용할 수 있는 지원 가능 TLS 암호 그룹 목록이 제한되므로 지원이 제한됩니다. TLS 연결을 보호하는 데 ECDSA(타원 곡선 디지털 서명 알고리즘)를 사용하여 생성된 인증서가 필요할 수 있습니다.
 
@@ -189,11 +189,11 @@ IDE(통합 개발 환경)이나 편집기가 앱을 시작하는 경우 서버�
 
 * [HTTP.sys](xref:fundamentals/servers/httpsys#http2-support)
   * Windows Server 2016/Windows 10 이상
-  * 대상 프레임워크: HTTP.sys 배포에는 적용할 수 없습니다.
+  * 대상 프레임워크: HTTP.sys 배포에는 적용되지 않습니다.
 * [IIS(Out-of-Process)](xref:host-and-deploy/iis/index#http2-support)
   * Windows Server 2016/Windows 10 이상, IIS 10 이상
   * 공개 에지 서버 연결은 HTTP/2를 사용하지만 Kestrel에 대한 역방향 프록시 연결은 HTTP/1.1을 사용합니다.
-  * 대상 프레임워크: IIS Out-of-process 배포에는 적용할 수 없습니다.
+  * 대상 프레임워크: IIS Out-of-Process 배포에는 적용되지 않습니다.
 
 ::: moniker-end
 
