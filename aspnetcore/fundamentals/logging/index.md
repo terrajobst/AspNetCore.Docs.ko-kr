@@ -1,5 +1,5 @@
 ---
-title: .NET Core 및 ASP.NET Core 로그인
+title: .NET Core 및 ASP.NET Core의 로깅
 author: tdykstra
 description: Microsoft.Extensions.Logging NuGet 패키지에서 제공하는 로깅 프레임워크 사용법을 알아보세요.
 monikerRange: '>= aspnetcore-2.1'
@@ -14,17 +14,17 @@ ms.contentlocale: ko-KR
 ms.lasthandoff: 09/18/2019
 ms.locfileid: "71081154"
 ---
-# <a name="logging-in-net-core-and-aspnet-core"></a>.NET Core 및 ASP.NET Core 로그인
+# <a name="logging-in-net-core-and-aspnet-core"></a>.NET Core 및 ASP.NET Core의 로깅
 
 작성자: [Tom Dykstra](https://github.com/tdykstra) 및 [Steve Smith](https://ardalis.com/)
 
-.NET Core는 다양한 기본 제공 및 타사 로깅 공급자에서 작동하는 로깅 API를 지원합니다. 이 문서에서는 기본 제공 공급자에서 로깅 API를 사용하는 방법을 보여줍니다.
+.NET Core는 다양한 기본 제공 및 타사 로깅 공급자에서 작동하는 로깅 API를 지원합니다. 이 문서에서는 기본 제공 공급자를 이용하여 로깅 API를 사용하는 방법을 보여줍니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 
 이 문서에 사용된 대부분의 코드 예제는 ASP.NET Core 앱에서 가져온 것입니다. 해당 코드 조각의 로깅 관련 부분은 [제네릭 호스트](xref:fundamentals/host/generic-host)를 사용하는 모든 .NET Core 앱에 적용됩니다. 비 웹 콘솔 앱에서 제네릭 호스트를 사용하는 방법에 대한 자세한 내용은 [호스트된 서비스](xref:fundamentals/host/hosted-services)를 참조하세요.
 
-제네릭 호스트가 없는 앱의 로깅 코드는 [공급자 추가](#add-providers) 및 [로거 생성](#create-logs) 방식에 따라 달라집니다. 비 호스트 코드 예제는 문서의 해당 섹션에 나와 있습니다.
+제네릭 호스트를 사용하지 않는 앱의 로깅 코드는 [공급자 추가](#add-providers) 및 [로거 생성](#create-logs) 방식에 따라 달라집니다. 비 호스트 코드 예제는 문서의 해당 섹션에 나와 있습니다.
 
 ::: moniker-end
 
@@ -32,7 +32,7 @@ ms.locfileid: "71081154"
 
 ## <a name="add-providers"></a>공급자 추가
 
-로깅 공급자는 로그를 표시하거나 저장합니다. 예를 들어 콘솔 공급자는 콘솔에 로그를 표시하고 Azure Application Insights 공급자는 이를 Azure Application Insights에 저장합니다. 여러 공급자를 추가하여 로그를 여러 대상으로 보낼 수 있습니다.
+로깅 공급자는 로그를 표시하거나 저장합니다. 예를 들어 콘솔 공급자는 콘솔에 로그를 표시하고 Azure Application Insights 공급자는 로그를 Azure Application Insights에 저장합니다. 여러 공급자를 추가하여 로그를 여러 대상으로 보낼 수 있습니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -53,7 +53,7 @@ ms.locfileid: "71081154"
 * EventSource
 * EventLog(Windows에서 실행 중인 경우에만)
 
-기본 제공자를 자신이 선택한 것으로 바꿀 수 있습니다. <xref:Microsoft.Extensions.Logging.LoggingBuilderExtensions.ClearProviders%2A>를 호출하여 원하는 공급자를 추가합니다.
+이 기본 공급자들을 자신이 선택한 공급자로 대체할 수 있습니다. <xref:Microsoft.Extensions.Logging.LoggingBuilderExtensions.ClearProviders%2A>를 호출하고 원하는 공급자를 추가합니다.
 
 [!code-csharp[](index/samples/3.x/TodoApiSample/Program.cs?name=snippet_AddProvider&highlight=5)]
 
@@ -67,33 +67,33 @@ ms.locfileid: "71081154"
 
 앞의 코드는 `Microsoft.Extensions.Logging` 및 `Microsoft.Extensions.Configuration`에 대한 참조를 요구합니다.
 
-기본 프로젝트 템플릿은 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A>를 호출하여 다음과 같은 로깅 공급자를 추가합니다.
+기본 프로젝트 템플릿은 다음과 같은 로깅 공급자를 추가하는 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A>를 호출합니다.
 
 * 콘솔
 * 디버그
-* EventSource(ASP.NET Core 2.2에서 시작)
+* EventSource(ASP.NET Core 2.2부터 시작)
 
 [!code-csharp[](index/samples/2.x/TodoApiSample/Program.cs?name=snippet_TemplateCode&highlight=7)]
 
-`CreateDefaultBuilder`를 사용하는 경우 기본 제공자를 사용자가 선택한 대로 바꿀 수 있습니다. <xref:Microsoft.Extensions.Logging.LoggingBuilderExtensions.ClearProviders%2A>를 호출하여 원하는 공급자를 추가합니다.
+`CreateDefaultBuilder`를 사용하는 경우 이 기본 공급자들을 자신이 선택한 공급자로 대체할 수 있습니다. <xref:Microsoft.Extensions.Logging.LoggingBuilderExtensions.ClearProviders%2A>를 호출하고 원하는 공급자를 추가합니다.
 
 [!code-csharp[](index/samples/2.x/TodoApiSample/Program.cs?name=snippet_LogFromMain&highlight=18-22)]
 
 ::: moniker-end
 
-문서의 뒷부분에 나오는 [기본 제공 로깅 공급자](#built-in-logging-providers) 및 [타사 로깅 공급자](#third-party-logging-providers)에 대해 자세히 알아봅니다.
+문서의 뒷부분에 나오는 [기본 제공 로깅 공급자](#built-in-logging-providers) 및 [타사 로깅 공급자](#third-party-logging-providers)에서 더 자세히 알아봅니다.
 
 ## <a name="create-logs"></a>로그 만들기
 
-로그를 만들려면 <xref:Microsoft.Extensions.Logging.ILogger%601> 개체를 사용합니다. 웹앱 또는 호스트된 서비스에서 DI(종속성 주입)로부터 `ILogger`를 가져옵니다. 비 호스트 콘솔 앱에서 `LoggerFactory`를 사용하여 `ILogger`를 만듭니다.
+로그를 만들려면 <xref:Microsoft.Extensions.Logging.ILogger%601> 개체를 사용합니다. 웹앱 또는 호스트되는 서비스에서는 DI(종속성 주입)로부터 `ILogger`를 가져옵니다. 비 호스트 콘솔 앱에서는 `LoggerFactory`를 사용하여 `ILogger`를 만듭니다.
 
-다음 ASP.NET Core 예제에서는 `TodoApiSample.Pages.AboutModel`을 사용하여 로거를 범주로서 만듭니다. 로그 *범주*는 각 로그와 연결된 문자열입니다. DI에서 제공한 `ILogger<T>` 인스턴스는 `T` 형식의 정규화된 이름을 가진 로그를 범주로서 만듭니다. 
+다음 ASP.NET Core 예제는 `TodoApiSample.Pages.AboutModel`을 범주로 사용하여 로거를 만듭니다. 로그 *범주*는 각 로그와 연결된 문자열입니다. DI에서 제공한 `ILogger<T>` 인스턴스는 `T` 형식의 정규화된 이름을 범주로 가진 로그를 만듭니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 
 [!code-csharp[](index/samples/3.x/TodoApiSample/Pages/About.cshtml.cs?name=snippet_LoggerDI&highlight=3,5,7)]
 
-다음의 비호스트 콘솔 앱 예제에서 로거는 `LoggingConsoleApp.Program`을 사용하여 범주로 만드는 데 사용됩니다.
+다음의 비 호스트 콘솔 앱 예제는 `LoggingConsoleApp.Program`을 범주로 사용하는 로거를 만듭니다.
 
 [!code-csharp[](index/samples/3.x/LoggingConsoleApp/Program.cs?name=snippet_LoggerFactory&highlight=10)]
 
@@ -125,7 +125,7 @@ ms.locfileid: "71081154"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-### <a name="create-logs-in-the-program-class"></a>프로그램 클래스에서 로그 만들기
+### <a name="create-logs-in-the-program-class"></a>Program 클래스에서 로그 만들기
 
 ASP.NET Core 앱의 `Program` 클래스에서 로그를 작성하려면 호스트를 빌드한 후 DI에서 `ILogger` 인스턴스를 가져옵니다.
 
@@ -133,24 +133,24 @@ ASP.NET Core 앱의 `Program` 클래스에서 로그를 작성하려면 호스�
 
 ### <a name="create-logs-in-the-startup-class"></a>Startup 클래스에서 로그 만들기
 
-ASP.NET Core 앱의 `Startup.Configure` 메서드에서 로그를 작성하려면 메서드 서명에 `ILogger` 매개 변수를 포함합니다.
+ASP.NET Core 앱의 `Startup.Configure` 메서드에서 로그를 작성하려면 메서드 시그니처에 `ILogger` 매개 변수를 포함합니다.
 
 [!code-csharp[](index/samples/3.x/TodoApiSample/Startup.cs?name=snippet_Configure&highlight=1,5)]
 
-`Startup.ConfigureServices` 메서드에서 DI 컨테이너 설치가 완료되기 전에 로그를 작성하는 작업은 지원되지 않습니다.
+`Startup.ConfigureServices` 메서드에서 DI 컨테이너 설정이 완료되기 전에 로그를 작성하는 작업은 지원되지 않습니다.
 
-* `Startup` 생성자에 대한 로거 삽입은 지원되지 않습니다.
-* `Startup.ConfigureServices` 메서드 시그니처에 대한 로거 삽입은 지원되지 않습니다.
+* `Startup` 생성자에 대한 로거 주입은 지원되지 않습니다.
+* `Startup.ConfigureServices` 메서드 시그니처에 대한 로거 주입은 지원되지 않습니다.
 
-이러한 제한의 이유는 로깅이 DI와 구성에 종속되며, 구성은 DI에 종속되기 때문입니다. DI 컨테이너는 `ConfigureServices`가 완료될 때까지 설정되지 않습니다.
+이러한 제한의 이유는 로깅이 DI와 구성에 종속되며, 이는 결국 DI에 종속되기 때문입니다. DI 컨테이너는 `ConfigureServices`가 완료될 때까지 설정되지 않습니다.
 
-`Startup`에 대한 로거의 생성자 삽입은 이전 버전의 ASP.NET Core에서 작동하는데, 이는 웹 호스트에 대해 별도의 DI 컨테이너가 생성되기 때문입니다. 제네릭 호스트에 대해 하나의 컨테이너만 생성되는 이유에 대한 자세한 내용은 [호환성이 손상되는 변경 공지](https://github.com/aspnet/Announcements/issues/353)를 참조하세요.
+이전 버전의 ASP.NET Core에서는 `Startup`에 대한 로거의 생성자 주입이 작동하는데, 이는 웹 호스트에 대한 별도의 DI 컨테이너가 생성되기 때문입니다. 제네릭 호스트에 대해 하나의 컨테이너만 생성되는 이유에 대한 자세한 내용은 [호환성이 손상되는 변경 공지](https://github.com/aspnet/Announcements/issues/353)를 참조하세요.
 
-`ILogger<T>`에 종속된 서비스를 구성해야 하는 경우에도 여전히 생성자 삽입을 사용하거나 팩터리 메서드를 제공하여 이를 수행할 수 있습니다. 팩터리 메서드 접근 방식은 다른 옵션이 없는 경우에만 권장됩니다. 예를 들어 DI의 서비스를 사용하여 속성을 채워야 한다고 가정해 보겠습니다.
+`ILogger<T>`에 종속된 서비스를 구성해야 하는 경우에도 여전히 생성자 주입을 사용하거나 팩터리 메서드를 제공하여 이를 수행할 수 있습니다. 팩터리 메서드 접근 방식은 다른 옵션이 없는 경우에만 권장됩니다. 예를 들어 DI의 서비스를 사용하여 속성을 채워야 한다고 가정해 보겠습니다.
 
 [!code-csharp[](index/samples/3.x/TodoApiSample/Startup.cs?name=snippet_ConfigureServices&highlight=6-10)]
 
-앞서 강조 표시된 코드 `Func`는 DI 컨테이너가 `MyService`의 인스턴스를 처음 생성해야 할 때 실행됩니다. 이러한 방식으로 등록된 서비스에 액세스할 수 있습니다.
+위에 강조 표시된 코드 `Func`는 DI 컨테이너가 `MyService`의 인스턴스를 처음 생성해야 할 때 실행됩니다. 이러한 방식으로 등록된 서비스에 액세스할 수 있습니다.
 
 ::: moniker-end
 
@@ -158,11 +158,11 @@ ASP.NET Core 앱의 `Startup.Configure` 메서드에서 로그를 작성하려�
 
 ### <a name="create-logs-in-startup"></a>시작 시 로그 만들기
 
-`Startup` 클래스에 로그를 작성하려면 생성자 시그니처에 `ILogger` 매개 변수를 포함시킵니다.
+`Startup` 클래스에서 로그를 작성하려면 생성자 시그니처에 `ILogger` 매개 변수를 포함합니다.
 
 [!code-csharp[](index/samples/2.x/TodoApiSample/Startup.cs?name=snippet_Startup&highlight=3,5,8,20,27)]
 
-### <a name="create-logs-in-the-program-class"></a>프로그램 클래스에서 로그 만들기
+### <a name="create-logs-in-the-program-class"></a>Program 클래스에서 로그 만들기
 
 `Program` 클래스에 로그를 작성하려면 DI에서 `ILogger` 인스턴스를 가져옵니다.
 
@@ -170,9 +170,9 @@ ASP.NET Core 앱의 `Startup.Configure` 메서드에서 로그를 작성하려�
 
 ::: moniker-end
 
-### <a name="no-asynchronous-logger-methods"></a>비동기 로거 메서드 없음
+### <a name="no-asynchronous-logger-methods"></a>비동기 로거 메서드 미지원
 
-로깅은 매우 빨라서 비동기 코드의 성능 비용을 들일 필요가 없습니다. 로깅 데이터 저장소가 느린 경우 직접 작성하지 마세요. 로그 메시지를 처음에 빠른 저장소에 작성한 다음, 나중에 느린 저장소로 이동하는 것이 좋습니다. 예를 들어 SQL Server에 로그하는 경우 `Log` 메서드는 동기식이므로 `Log` 메서드에서 직접 로그하지는 않습니다. 대신 동기적으로 로그 메시지를 메모리 내 큐에 추가하고 백그라운드 작업자가 큐에서 메시지를 풀하여 SQL Server에 대해 비동기 데이터 푸시 작업을 수행하도록 합니다.
+로깅은 매우 빨라서 비동기 코드의 성능 비용을 들일 필요가 없습니다. 로깅 데이터 저장소가 느린 경우 직접 작성하지 마세요. 먼저 로그 메시지를 빠른 저장소에 작성한 다음, 나중에 느린 저장소로 이동하는 것이 좋습니다. 예를 들어 SQL Server에 로깅하는 경우 `Log` 메서드는 동기식이므로 `Log` 메서드에서 직접 로깅하지는 않습니다. 대신 동기적으로 로그 메시지를 메모리 내 큐에 추가하고 백그라운드 작업자가 큐에서 메시지를 풀하여 SQL Server에 대해 비동기 데이터 푸시 작업을 수행하도록 합니다.
 
 ## <a name="configuration"></a>구성
 
@@ -182,7 +182,7 @@ ASP.NET Core 앱의 `Startup.Configure` 메서드에서 로그를 작성하려�
 * 명령줄 인수.
 * 환경 변수.
 * 메모리 내 .NET 개체.
-* 암호화되지 않은 [암호 관리자](xref:security/app-secrets) 스토리지.
+* 암호화되지 않은 [암호 관리자](xref:security/app-secrets) 저장소.
 * 암호화된 사용자 저장소(예:[Azure Key Vault](xref:security/key-vault-configuration)).
 * 사용자 지정 공급자(설치 또는 생성된).
 
@@ -206,11 +206,11 @@ ASP.NET Core 앱의 `Startup.Configure` 메서드에서 로그를 작성하려�
 }
 ```
 
-`Logging` 속성은 `LogLevel` 및 로그 공급자 속성을 포함할 수 있습니다(콘솔이 표시됨).
+`Logging` 속성은 `LogLevel` 및 로그 공급자 속성을 포함할 수 있습니다(Console이 나타나 있습니다).
 
 `Logging` 아래의 `LogLevel` 속성은 선택한 범주에 대해 로그할 최소 [수준](#log-level)을 지정합니다. 이 예제에서는 `System` 및 `Microsoft` 범주는 `Information` 수준으로 로그되고 다른 모든 범주는 `Debug` 수준으로 로그됩니다.
 
-`Logging` 아래의 다른 속성은 로깅 공급자를 지정합니다. 이 예제는 콘솔 공급자를 위한 것입니다. 공급자가 [로그 범위](#log-scopes)를 지원하는 경우 `IncludeScopes`는 사용 가능 여부를 나타냅니다. 공급자 속성(예: 예제에서 `Console`)은 `LogLevel` 속성을 지정할 수도 있습니다. 공급자 아래의 `LogLevel`은 해당 공급자에 대한 로그 수준을 지정합니다.
+`Logging` 아래의 다른 속성은 로깅 공급자를 지정합니다. 이 예제는 콘솔 공급자에 대한 것입니다. 공급자가 [로그 범위](#log-scopes)를 지원하는 경우 `IncludeScopes`는 사용 가능 여부를 나타냅니다. 공급자 속성(예: 예제에서 `Console`)은 `LogLevel` 속성을 지정할 수도 있습니다. 공급자 아래의 `LogLevel`은 해당 공급자에 대한 로그 수준을 지정합니다.
 
 수준이 `Logging.{providername}.LogLevel`에 지정된 경우 `Logging.LogLevel`에 설정된 모든 수준을 재정의합니다.
 
@@ -266,7 +266,7 @@ info: Microsoft.AspNetCore.Hosting.Internal.WebHost[2]
 
 ::: moniker-end
 
-이전 로그는 `http://localhost:5000/api/todo/0`의 샘플 앱에 HTTP Get 요청을 하여 생성되었습니다.
+위의 로그는 샘플 앱의 `http://localhost:5000/api/todo/0`에 HTTP Get 요청을 하여 생성되었습니다.
 
 다음은 Visual Studio에서 샘플 앱을 실행할 때 디버그 창에 나타나는 것과 동일한 로그의 예입니다.
 
@@ -284,7 +284,7 @@ Microsoft.AspNetCore.Routing.EndpointMiddleware: Information: Executed endpoint 
 Microsoft.AspNetCore.Hosting.Diagnostics: Information: Request finished in 98.41300000000001ms 404
 ```
 
-이전 섹션에 표시된 `ILogger` 호출을 통해 생성된 로그는 "TodoApiSample"로 시작합니다. "Microsoft" 범주로 시작하는 로그는 ASP.NET Core 프레임워크 코드에서 온 것입니다. ASP.NET Core 및 애플리케이션 코드는 동일한 로깅 API와 공급자를 사용합니다.
+이전 섹션에 표시된 `ILogger` 호출을 통해 생성된 로그는 "TodoApiSample"로 시작합니다. "Microsoft" 범주로 시작하는 로그는 ASP.NET Core 프레임워크 코드에서 온 것입니다. ASP.NET Core 및 응용 프로그램 코드는 동일한 로깅 API와 공급자를 사용합니다.
 
 ::: moniker-end
 
@@ -300,7 +300,7 @@ Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker:Information: Executed 
 Microsoft.AspNetCore.Hosting.Internal.WebHost:Information: Request finished in 316.3195ms 404
 ```
 
-이전 섹션에 표시된 `ILogger` 호출을 통해 생성된 로그는 "TodoApi"로 시작합니다. "Microsoft" 범주로 시작하는 로그는 ASP.NET Core 프레임워크 코드에서 온 것입니다. ASP.NET Core 및 애플리케이션 코드는 동일한 로깅 API와 공급자를 사용합니다.
+이전 섹션에 표시된 `ILogger` 호출을 통해 생성된 로그는 "TodoApi"로 시작합니다. "Microsoft" 범주로 시작하는 로그는 ASP.NET Core 프레임워크 코드에서 온 것입니다. ASP.NET Core 및 응용 프로그램 코드는 동일한 로깅 API와 공급자를 사용합니다.
 
 ::: moniker-end
 
@@ -312,7 +312,7 @@ Microsoft.AspNetCore.Hosting.Internal.WebHost:Information: Request finished in 3
 
 ## <a name="log-category"></a>로그 범주
 
-`ILogger` 개체가 생성되면 개체에 대한 *범주*가 지정됩니다. 해당 범주는 `ILogger`의 해당 인스턴스에서 만든 각 로그 메시지에 포함됩니다. 범주는 문자열일 수 있지만 "TodoApi.Controllers.TodoController"와 같은 클래스 이름을 사용하는 것이 규칙입니다.
+`ILogger` 개체가 생성되면 개체에 대한 *범주*가 지정됩니다. 해당 범주는 `ILogger`의 해당 인스턴스에서 만든 각 로그 메시지에 포함됩니다. 범주는 임의의 문자열 일 수 있지만 "TodoApi.Controllers.TodoController"와 같은 클래스 이름을 사용하는 것이 규칙입니다.
 
 `ILogger<T>`를 사용하여 `T`의 정규화된 형식 이름을 범주로 사용하는 `ILogger` 인스턴스를 가져옵니다.
 
@@ -346,9 +346,9 @@ Microsoft.AspNetCore.Hosting.Internal.WebHost:Information: Request finished in 3
 
 ## <a name="log-level"></a>로그 수준
 
-모든 로그는 <xref:Microsoft.Extensions.Logging.LogLevel> 값을 지정합니다. 로그 수준은 심각도 또는 중요도를 나타냅니다. 예를 들어 메서드가 정상적으로 종료되면 `Information` 로그를 작성하고 메서드가 *404 찾을 수 없음* 상태 코드를 반환할 때 `Warning` 로그를 작성할 수 있습니다.
+모든 로그는 <xref:Microsoft.Extensions.Logging.LogLevel> 값을 지정합니다. 로그 수준은 심각도 또는 중요도를 나타냅니다. 예를 들어 메서드가 정상적으로 종료되면 `Information` 로그를 작성하고 메서드가 *404 찾을 수 없음* 상태 코드를 반환하면 `Warning` 로그를 작성할 수 있습니다.
 
-다음 코드에서는 `Information` 및 `Warning` 코드를 만듭니다.
+다음 코드는 `Information` 및 `Warning` 로그를 만듭니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -362,37 +362,37 @@ Microsoft.AspNetCore.Hosting.Internal.WebHost:Information: Request finished in 3
 
 ::: moniker-end
 
-이전 코드에서 첫 번째 매개 변수는 [로그 이벤트 ID](#log-event-id)입니다. 두 번째 매개 변수는 나머지 메서드 매개 변수가 제공하는 인수 값에 대한 자리 표시자가 있는 메시지 템플릿입니다. 메서드 매개 변수는 이 문서의 뒷부분에 있는 [메시지 템플릿 섹션](#log-message-template)에 설명되어 있습니다.
+위의 코드에서 첫 번째 매개 변수는 [로그 이벤트 ID](#log-event-id)입니다. 두 번째 매개 변수는 나머지 메서드 매개 변수가 제공하는 인수 값에 대한 자리 표시자를 포함하고 있는 메시지 템플릿입니다. 메서드 매개 변수는 이 문서의 뒷부분에 있는 [메시지 템플릿 섹션](#log-message-template)에 설명되어 있습니다.
 
-메서드 이름(예: `LogInformation` 및 `LogWarning`)의 수준을 포함하는 로그 메서드는 [ILogger에 대한 확장 메서드](xref:Microsoft.Extensions.Logging.LoggerExtensions)입니다. 이러한 메서드는 `LogLevel` 매개 변수를 사용하는 `Log` 메서드를 호출합니다. 이러한 확장 메서드 중 하나를 호출하는 대신 `Log` 메서드를 직접 호출할 수 있지만, 구문이 비교적 복잡합니다. 자세한 내용은 <xref:Microsoft.Extensions.Logging.ILogger> 및 [로거 확장 소스 코드](https://github.com/aspnet/Extensions/blob/release/2.2/src/Logging/Logging.Abstractions/src/LoggerExtensions.cs)를 참조하세요.
+메서드 이름에 수준을 포함하는 로그 메서드(예: `LogInformation` 및 `LogWarning`)는 [ILogger에 대한 확장 메서드](xref:Microsoft.Extensions.Logging.LoggerExtensions)입니다. 이 메서드들은 `LogLevel` 매개 변수를 사용하는 `Log` 메서드를 호출합니다. 이러한 확장 메서드 중 하나를 호출하는 대신 `Log` 메서드를 직접 호출할 수도 있지만, 구문이 비교적 복잡합니다. 자세한 내용은 <xref:Microsoft.Extensions.Logging.ILogger> 및 [로거 확장 소스 코드](https://github.com/aspnet/Extensions/blob/release/2.2/src/Logging/Logging.Abstractions/src/LoggerExtensions.cs)를 참조하세요.
 
-ASP.NET Core는 다음 로그 수준을 정의하며, 여기에 가장 낮은 심각도에서 가장 높은 심각도 순으로 정렬됩니다.
+ASP.NET Core는 다음과 같은 로그 수준을 정의하며, 여기에는 가장 낮은 심각도에서 가장 높은 심각도 순으로 정렬되어 있습니다.
 
-* 추적 = 0
+* Trace = 0
 
-  일반적으로 디버깅에만 유용한 정보입니다. 이러한 메시지는 중요한 애플리케이션 데이터를 포함할 수 있으므로 프로덕션 환경에서 사용하면 안 됩니다. *기본적으로 사용하지 않도록 설정됩니다.*
+  일반적으로 디버깅에만 유용한 정보입니다. 이러한 메시지는 중요한 응용 프로그램 데이터를 포함할 수 있으므로 프로덕션 환경에서 사용하면 안 됩니다. *기본적으로 사용하지 않도록 설정됩니다.*
 
-* 디버그 = 1
+* Debug = 1
 
-  개발 및 디버깅에 유용할 수 있는 정보입니다. 예제: `Entering method Configure with flag set to true.` 로그 볼륨이 크기 때문에 문제 해결 시에만 `Debug` 수준 로그를 프로덕션 환경에서 사용합니다.
+  개발 및 디버깅에 유용할 수 있는 정보입니다. 예: `Entering method Configure with flag set to true.` 로그 볼륨이 크기 때문에 `Debug` 수준 로그는 문제 해결 시에만 프로덕션 환경에서 사용합니다.
 
-* 정보 = 2
+* Information = 2
 
   앱의 일반적인 흐름을 추적합니다. 이러한 로그는 일반적으로 장기적인 가치가 있습니다. 예: `Request received for path /api/todo`
 
-* 경고 = 3
+* Warning = 3
 
-  앱 흐름에 비정상적이거나 예기치 않은 이벤트가 있습니다. 앱이 중지되지 않지만 조사해야 하는 오류 또는 기타 조건이 여기에 포함될 수 있습니다. 처리된 예외는 `Warning` 로그 수준을 사용하는 일반적인 장소입니다. 예: `FileNotFoundException for file quotes.txt.`
+  앱의 흐름에서 비정상적이거나 예기치 않은 이벤트를 위한 수준입니다. 앱이 중지되지는 않지만 조사해야 하는 오류 또는 기타 조건이 여기에 포함될 수 있습니다. 처리된 예외는 `Warning` 로그 수준을 사용하는 일반적인 장소입니다. 예: `FileNotFoundException for file quotes.txt.`
 
-* 오류 = 4
+* Error = 4
 
-  처리할 수 없는 오류 및 예외입니다. 이러한 메시지는 전체 앱 오류가 아닌 현재 동작 또는 작업(예: 현재 HTTP 요청)의 오류를 의미합니다. 예제 로그 메시지: `Cannot insert record due to duplicate key violation.`
+  처리할 수 없는 오류 및 예외를 위한 수준입니다. 이러한 메시지는 전체 앱 오류가 아닌 현재 동작 또는 작업(예: 현재 HTTP 요청)의 오류를 의미합니다. 예제 로그 메시지: `Cannot insert record due to duplicate key violation.`
 
-* 중요 = 5
+* Critical = 5
 
-  즉각적인 대응이 필요한 오류입니다. 예: 데이터 손실 시나리오, 디스크 공간 부족.
+  즉각적인 대응이 필요한 오류를 위한 수준입니다. 예: 데이터 손실 시나리오, 디스크 공간 부족.
 
-로그 수준을 사용하여 특정 스토리지 매체 또는 디스플레이 창에 기록되는 로그 출력의 양을 제어합니다. 예:
+로그 수준을 사용하여 특정 스토리지 매체 또는 디스플레이 창에 기록되는 로그 출력의 양을 제어합니다. 예를 들어:
 
 * 프로덕션 환경에서 `Trace` ~ `Information` 수준을 볼륨 데이터 저장소로 보냅니다. 값 데이터 저장소에 `Warning` ~ `Critical`을 보냅니다.
 * 개발 중에 `Warning` ~ `Critical`을 콘솔에 보내고 문제 해결 시 `Trace` ~ `Information`을 추가합니다.
@@ -479,7 +479,7 @@ info: Microsoft.AspNetCore.Hosting.Internal.WebHost[2]
 
 ## <a name="log-event-id"></a>로그 이벤트 ID
 
-각 로그는 *이벤트 ID*를 지정할 수 있습니다. 샘플 앱은 로컬로 정의된 `LoggingEvents` 클래스를 사용하여 이 작업을 수행합니다.
+각 로그는 *이벤트 ID*를 지정할 수 있습니다. 샘플 앱은 로컬에 정의된 `LoggingEvents` 클래스를 사용하여 이 작업을 수행합니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -499,7 +499,7 @@ info: Microsoft.AspNetCore.Hosting.Internal.WebHost[2]
 
 이벤트 ID는 이벤트 집합을 연결합니다. 예를 들어 페이지에서 항목 목록을 표시하는 것과 관련된 모든 로그는 1001일 수 있습니다.
 
-로깅 공급자는 이벤트 ID를 ID 필드, 로그 메시지에 저장하거나 전혀 저장할 수 없습니다. 디버그 공급자는 이벤트 ID를 표시하지 않습니다. 콘솔 공급자는 범주 뒤에 대괄호로 이벤트 ID를 표시합니다.
+로깅 공급자는 이벤트 ID를 ID 필드, 로그 메시지에 저장하거나 또는 전혀 저장하지 않을 수도 있습니다. 디버그 공급자는 이벤트 ID를 표시하지 않습니다. 콘솔 공급자는 범주 뒤에 대괄호로 이벤트 ID를 표시합니다.
 
 ```console
 info: TodoApi.Controllers.TodoController[1002]
@@ -510,7 +510,7 @@ warn: TodoApi.Controllers.TodoController[4000]
 
 ## <a name="log-message-template"></a>로그 메시지 템플릿
 
-각 로그는 메시지 템플릿을 지정합니다. 메시지 템플릿에는 인수가 제공되는 자리 표시자를 포함할 수 있습니다. 숫자가 아니라 자리 표시자의 이름을 사용합니다.
+각 로그는 메시지 템플릿을 지정합니다. 메시지 템플릿에는 인수가 제공되는 자리 표시자를 포함할 수 있습니다. 번호가 아닌 자리 표시자의 이름을 사용합니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -524,7 +524,7 @@ warn: TodoApi.Controllers.TodoController[4000]
 
 ::: moniker-end
 
-값을 제공하는 데 사용되는 매개 변수를 결정하는 것은 자리 표시자의 번호가 아닌 이름입니다. 다음 코드에서는 매개 변수 이름이 메시지 템플릿 순서를 벗어났습니다.
+값을 제공하는 데 사용되는 매개 변수를 결정하는 것은 자리 표시자의 이름이 아닌 순서입니다. 다음 코드에서는 매개 변수 이름이 메시지 템플릿 순서와 일치하지 않습니다.
 
 ```csharp
 string p1 = "parm1";
@@ -546,7 +546,7 @@ _logger.LogInformation("Getting item {ID} at {RequestTime}", id, DateTime.Now);
 
 Azure Table Storage에 로그를 보내는 경우 각 Azure Table 엔터티는 로그 데이터에 대한 쿼리를 간소화하는 `ID` 및 `RequestTime` 속성을 가질 수 있습니다. 쿼리는 문자 메시지의 시간 초과를 구문 분석하지 않고 특정 `RequestTime` 범위 내의 모든 로그를 찾을 수 있습니다.
 
-## <a name="logging-exceptions"></a>로깅 처리
+## <a name="logging-exceptions"></a>예외 로깅
 
 로거 메서드는 다음 예제와 같이 예외를 전달할 수 있는 오버로드를 갖고 있습니다.
 
@@ -562,7 +562,7 @@ Azure Table Storage에 로그를 보내는 경우 각 Azure Table 엔터티는 �
 
 ::: moniker-end
 
-공급자들은 다양한 방식으로 예외 정보를 처리합니다. 다음은 위에서 보여드린 코드의 디버그 공급자 출력의 예제입니다.
+공급자마다 다양한 방식으로 예외 정보를 처리합니다. 다음은 위에서 살펴본 코드의 디버그 공급자 출력의 예제입니다.
 
 ```text
 TodoApiSample.Controllers.TodoController: Warning: GetById(55) NOT FOUND
@@ -571,7 +571,7 @@ System.Exception: Item not found exception.
    at TodoApiSample.Controllers.TodoController.GetById(String id) in C:\TodoApiSample\Controllers\TodoController.cs:line 226
 ```
 
-## <a name="log-filtering"></a>로깅 필터링
+## <a name="log-filtering"></a>로그 필터링
 
 특정 공급자 및 범주 또는 모든 공급자나 모든 범주의 최소 로그 수준을 지정할 수 있습니다. 최소 수준 미만인 로그는 해당 공급자에게 전달되지 않으므로 표시되거나 저장되지 않습니다.
 
@@ -579,7 +579,7 @@ System.Exception: Item not found exception.
 
 ### <a name="create-filter-rules-in-configuration"></a>구성에서 필터 규칙 만들기
 
-프로젝트 템플릿 코드는 `CreateDefaultBuilder`를 호출하여 콘솔 및 디버그 공급자에 대한 로깅을 설정합니다. [이 문서 앞](#configuration)에서 설명한 것처럼 `CreateDefaultBuilder` 메서드는 `Logging` 섹션에서 구성을 조회하는 로깅을 설정합니다.
+프로젝트 템플릿 코드는 `CreateDefaultBuilder`를 호출하여 콘솔 및 디버그 공급자에 대한 로깅을 설정합니다. [이 문서의 앞](#configuration)에서 설명한 것처럼 `CreateDefaultBuilder` 메서드는 `Logging` 섹션에서 구성을 조회하는 로깅을 설정합니다.
 
 구성 데이터는 다음 예제와 같이 공급자 및 범주별로 최소 로그 수준을 지정합니다.
 
@@ -599,7 +599,7 @@ System.Exception: Item not found exception.
 
 ### <a name="filter-rules-in-code"></a>코드의 필터 규칙
 
-다음 예제에서는 코드에 필터 규칙을 등록하는 방법을 보여줍니다.
+다음 예제는 코드에서 필터 규칙을 등록하는 방법을 보여줍니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -617,18 +617,18 @@ System.Exception: Item not found exception.
 
 ### <a name="how-filtering-rules-are-applied"></a>필터링 규칙 적용 방식
 
-이전 예제의 구성 데이터 및 `AddFilter` 코드는 다음 표에 표시된 규칙을 만듭니다. 처음 6개는 구성 예제에서 가져온 것이고 마지막 2개는 코드 예제에서 가져온 것입니다.
+이전 예제의 구성 데이터 및 `AddFilter` 코드는 다음 표에 표시된 규칙을 만듭니다. 처음 6개는 구성 예제로부터 비롯된 것이고 마지막 2개는 코드 예제로부터 비롯된 것입니다.
 
-| 수 | 공급자      | 다음으로 시작하는 범주...          | 최소 로그 수준 |
+| 번호 | 공급자      | 다음으로 시작하는 범주...          | 최소 로그 수준 |
 | :----: | ------------- | --------------------------------------- | ----------------- |
-| 1      | 디버그         | 모든 범주                          | 정보       |
-| 2      | 콘솔       | Microsoft.AspNetCore.Mvc.Razor.Internal | 경고           |
-| 3      | 콘솔       | Microsoft.AspNetCore.Mvc.Razor.Razor    | 디버그             |
-| 4      | 콘솔       | Microsoft.AspNetCore.Mvc.Razor          | 오류             |
-| 5      | 콘솔       | 모든 범주                          | 정보       |
-| 6      | 모든 공급자 | 모든 범주                          | 디버그             |
-| 7      | 모든 공급자 | 시스템                                  | 디버그             |
-| 8      | 디버그         | Microsoft                               | 추적             |
+| 1      | 디버그         | 모든 범주                          | Information       |
+| 2      | 콘솔       | Microsoft.AspNetCore.Mvc.Razor.Internal | Warning           |
+| 3      | 콘솔       | Microsoft.AspNetCore.Mvc.Razor.Razor    | Debug             |
+| 4      | 콘솔       | Microsoft.AspNetCore.Mvc.Razor          | Error             |
+| 5      | 콘솔       | 모든 범주                          | Information       |
+| 6      | 모든 공급자 | 모든 범주                          | Debug             |
+| 7      | 모든 공급자 | System                                  | Debug             |
+| 8      | 디버그         | Microsoft                               | Trace             |
 
 `ILogger` 개체를 만들 때 `ILoggerFactory` 개체는 공급자마다 해당 로거에 적용할 단일 규칙을 선택합니다. `ILogger` 인스턴스에서 작성된 모든 메시지는 선택한 규칙에 따라 필터링됩니다. 사용 가능한 규칙 중에서 각 공급자 및 범주 쌍에 적용 가능한 가장 구체적인 규칙이 선택됩니다.
 
@@ -639,19 +639,19 @@ System.Exception: Item not found exception.
 * 여러 규칙을 선택하는 경우 **마지막** 규칙을 사용합니다.
 * 규칙을 선택하지 않는 경우 `MinimumLevel`을 사용합니다.
 
-앞의 규칙 목록을 통해 "Microsoft.AspNetCore.Mvc.Razor.RazorViewEngine" 범주에 대한 `ILogger` 개체를 만든다고 가정합니다.
+앞의 규칙 목록을 사용하여 "Microsoft.AspNetCore.Mvc.Razor.RazorViewEngine" 범주에 대한 `ILogger` 개체를 만든다고 가정합니다.
 
 * 디버그 공급자에게는 규칙 1, 6, 8이 적용됩니다. 규칙 8이 가장 구체적이므로 선택됩니다.
 * 콘솔 공급자에게는 규칙 3, 4, 5, 6이 적용됩니다. 규칙 3이 가장 구체적입니다.
 
-결과 `ILogger` 인스턴스는 `Trace` 수준 이상의 로그를 디버그 공급자에게 보냅니다. `Debug` 수준 이상의 로그가 콘솔 공급자에게 전송됩니다.
+결과 `ILogger` 인스턴스는 `Trace` 수준 이상의 로그를 디버그 공급자에게 보냅니다. `Debug` 수준 이상의 로그는 콘솔 공급자에게 전송됩니다.
 
 ### <a name="provider-aliases"></a>공급자 별칭
 
 각 공급자는 정규화된 형식 이름 대신 구성에서 사용할 수 있는 *별칭*을 정의합니다.  기본 공급자의 경우 다음 별칭을 사용합니다.
 
-* 콘솔
-* 디버그
+* Console
+* Debug
 * EventSource
 * EventLog
 * TraceSource
@@ -661,7 +661,7 @@ System.Exception: Item not found exception.
 
 ### <a name="default-minimum-level"></a>기본 최소 수준
 
-특정 공급자 및 범주에 대한 구성 또는 코드의 규칙이 적용되지 않는 경우에만 효력이 있는 최소 수준 설정이 있습니다. 다음 예제는 최소 수준을 설정하는 방법을 보여 줍니다.
+특정 공급자 및 범주에 대한 구성 또는 코드의 규칙이 적용되지 않는 경우에만 적용되는 최소 수준 설정이 있습니다. 다음 예제는 최소 수준을 설정하는 방법을 보여 줍니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -701,15 +701,15 @@ System.Exception: Item not found exception.
 | ----------------------------------- | ----- |
 | Microsoft.AspNetCore                | 일반 ASP.NET Core 진단. |
 | Microsoft.AspNetCore.DataProtection | 고려되고, 발견되고, 사용된 키. |
-| Microsoft.AspNetCore.HostFiltering  | 호스트가 허용됩니다. |
+| Microsoft.AspNetCore.HostFiltering  | 호스트 허용. |
 | Microsoft.AspNetCore.Hosting        | HTTP 요청을 완료하는 데 걸린 시간과 시작 시간. 로드된 호스팅 시작 어셈블리. |
 | Microsoft.AspNetCore.Mvc            | MVC 및 Razor 진단. 모델 바인딩, 필터 실행, 뷰 컴파일 작업 선택. |
 | Microsoft.AspNetCore.Routing        | 경로 일치 정보. |
 | Microsoft.AspNetCore.Server         | 연결 시작, 중지 및 활성 응답 유지. HTTPS 인증서 정보. |
-| Microsoft.AspNetCore.StaticFiles    | 파일이 제공되었습니다. |
+| Microsoft.AspNetCore.StaticFiles    | 제공된 파일. |
 | Microsoft.EntityFrameworkCore       | 일반 Entity Framework Core 진단. 데이터베이스 작업 및 구성, 변경 내용 검색, 마이그레이션. |
 
-## <a name="log-scopes"></a>로그 점수
+## <a name="log-scopes"></a>로그 범위
 
  *범위*는 논리적 작업 집합을 그룹화할 수 있습니다. 이 그룹화는 집합의 일부로 생성된 각 로그에 동일한 데이터를 연결하는 데 사용될 수 있습니다. 예를 들어 트랜잭션 처리의 일부로 생성되는 모든 로그에는 트랜잭션 ID가 포함될 수 있습니다.
 
@@ -748,7 +748,7 @@ System.Exception: Item not found exception.
 >
 > 구성에 대한 자세한 내용은 [구성](#configuration) 섹션을 참조하세요.
 
-각 로그 메시지는 범위 정보를 포함하고 있습니다.
+각 로그 메시지는 범위 정보를 포함합니다.
 
 ```
 info: TodoApiSample.Controllers.TodoController[1002]
@@ -772,7 +772,7 @@ ASP.NET Core는 다음 공급자를 제공합니다.
 * [AzureAppServicesBlob](#azure-app-service-provider)
 * [ApplicationInsights](#azure-application-insights-trace-logging)
 
-ASP.NET Core 모듈을 사용한 stdout 및 디버그 로깅에 대한 자세한 내용은 <xref:test/troubleshoot-azure-iis> 및 <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>을 참조하세요.
+ASP.NET Core 모듈을 사용한 표준 출력(stdout) 및 디버그 로깅에 대한 자세한 내용은 <xref:test/troubleshoot-azure-iis> 및 <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>을 참조하세요.
 
 ### <a name="console-provider"></a>콘솔 공급자
 
@@ -800,13 +800,13 @@ logging.AddDebug();
 
 ### <a name="eventsource-provider"></a>EventSource 공급자
 
-ASP.NET Core 1.1.0 이상을 대상으로 하는 앱의 경우 [Microsoft.Extensions.Logging.EventSource](https://www.nuget.org/packages/Microsoft.Extensions.Logging.EventSource) 공급자 패키지가 이벤트 추적을 구현할 수 있습니다. Windows에서는 [ETW](https://msdn.microsoft.com/library/windows/desktop/bb968803)를 사용합니다. 플랫폼 간 공급자이지만 이벤트를 수집하지 않으며 Linux 또는 macOS용 도구를 표시합니다.
+ASP.NET Core 1.1.0 이상을 대상으로 하는 앱의 경우 [Microsoft.Extensions.Logging.EventSource](https://www.nuget.org/packages/Microsoft.Extensions.Logging.EventSource) 공급자 패키지로 이벤트 추적을 구현할 수 있습니다. Windows에서는 [ETW](https://msdn.microsoft.com/library/windows/desktop/bb968803)를 사용합니다. 이 공급자는 플랫폼 간 공급자이지만 Linux 또는 macOS 용 이벤트 수집 및 표시 도구는 아직 없습니다.
 
 ```csharp
 logging.AddEventSourceLogger();
 ```
 
-로그를 수집하고 보는 좋은 방법은 [PerfView 유틸리티](https://github.com/Microsoft/perfview)를 사용하는 것입니다. ETW 로그를 보는 다른 도구가 있지만, PerfView는 ASP.NET Core에서 내보내는 ETW 이벤트를 처리하기에 가장 좋은 환경을 제공합니다.
+로그를 수집하고 보는 좋은 방법은 [PerfView 유틸리티](https://github.com/Microsoft/perfview)를 사용하는 것입니다. ETW 로그를 보는 다른 도구도 있지만, PerfView는 ASP.NET Core에서 내보내는 ETW 이벤트를 처리하기에 가장 좋은 환경을 제공합니다.
 
 이 공급자가 기록한 이벤트를 수집하도록 PerfView를 구성하려면 **추가 공급자** 목록에 `*Microsoft-Extensions-Logging` 문자열을 추가합니다. (문자열의 시작 부분에 별표를 누락하지 마세요.)
 
@@ -844,13 +844,13 @@ logging.AddAzureWebAppDiagnostics();
 
 ::: moniker range=">= aspnetcore-3.0"
 
-이 공급자 패키지는 공유 프레임워크에 포함되지 않습니다. 이 공급자를 사용하려면 프로젝트에 공급자 패키지를 추가합니다.
+이 공급자 패키지는 공유 프레임워크에 포함되어 있지 않습니다. 이 공급자를 사용하려면 프로젝트에 공급자 패키지를 추가합니다.
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
 
-공급자 패키지는 [Microsoft.AspNetCore.App 메타패키지](xref:fundamentals/metapackage-app)에 포함되어 있지 않습니다. .NET Framework를 대상으로 지정하거나 `Microsoft.AspNetCore.App` 메타패키지를 참조하는 경우 공급자 패키지를 프로젝트에 추가합니다. 
+이 공급자 패키지는 [Microsoft.AspNetCore.App 메타패키지](xref:fundamentals/metapackage-app)에 포함되어 있지 않습니다. .NET Framework를 대상으로 지정하거나 `Microsoft.AspNetCore.App` 메타패키지를 참조하는 경우 공급자 패키지를 프로젝트에 추가합니다. 
 
 ::: moniker-end
 
@@ -876,14 +876,14 @@ logging.AddAzureWebAppDiagnostics();
 
 ::: moniker-end
 
-App Service 앱에 배포할 때 애플리케이션은 Azure Portal **App Service** 페이지의 [App Service 로그](/azure/app-service/web-sites-enable-diagnostic-log/#enablediag) 섹션에 있는 설정을 따릅니다. 다음 설정이 업데이트되면 앱을 다시 시작하거나 재배포하지 않아도 변경 내용이 즉시 적용됩니다.
+App Service 앱에 배포할 때 응용 프로그램은 Azure 포털 **App Service** 페이지의 [App Service 로그](/azure/app-service/web-sites-enable-diagnostic-log/#enablediag) 섹션에 있는 설정을 따릅니다. 다음 설정이 업데이트되면 앱을 다시 시작하거나 재배포하지 않아도 변경 내용이 즉시 적용됩니다.
 
 * **애플리케이션 로깅(파일 시스템)**
 * **애플리케이션 로깅(Blob)**
 
 로그 파일의 기본 위치는 *D:\\home\\LogFiles\\Application* 폴더이며, 기본 파일 이름은 *diagnostics-yyyymmdd.txt*입니다. 기본 파일 크기 제한은 10MB이고, 보존되는 기본 최대 파일 수는 2입니다. 기본 BLOB 이름은 *{app-name}{timestamp}/yyyy/mm/dd/hh/{guid}-applicationLog.txt*입니다.
 
-공급자는 프로젝트가 Azure 환경에서 실행되는 경우에만 작동합니다. 프로젝트를 로컬로 실행하는 경우에는 아무 영향도 없습니다&mdash;Blob에 대한 로컬 파일 또는 로컬 개발 스토리지에 기록하지 않습니다.
+공급자는 프로젝트가 Azure 환경에서 실행되는 경우에만 작동합니다. 프로젝트를 로컬로 실행하는 경우에는 아무 영향도 없습니다&mdash;로컬 파일 또는 로컬 개발 스토리지에 Blob을 기록하지 않습니다.
 
 #### <a name="azure-log-streaming"></a>Azure 로그 스트리밍
 
@@ -907,7 +907,7 @@ Azure 로그 스트리밍을 구성하려면:
 
 로깅 공급자는 ASP.NET Core에 대한 모든 사용 가능한 원격 분석을 제공하는 패키지인 [Microsoft.ApplicationInsights.AspNetCore](https://www.nuget.org/packages/Microsoft.ApplicationInsights.AspNetCore)의 종속성으로 포함됩니다. 이 패키지를 사용하는 경우 공급자 패키지를 설치할 필요가 없습니다.
 
-ASP.NET 4.x용으로 제공되는 [Microsoft.ApplicationInsights.Web](https://www.nuget.org/packages/Microsoft.ApplicationInsights.Web) 패키지&mdash;를 사용하지 마세요.
+ASP.NET 4.x용으로 제공되는 [Microsoft.ApplicationInsights.Web](https://www.nuget.org/packages/Microsoft.ApplicationInsights.Web) 패키지를 사용하지 마세요.
 
 자세한 내용은 다음 리소스를 참조하세요.
 
@@ -922,7 +922,7 @@ ASP.NET 4.x용으로 제공되는 [Microsoft.ApplicationInsights.Web](https://ww
 ASP.NET Core와 호환되는 타사 로깅 프레임워크는 다음과 같습니다.
 
 * [elmah.io](https://elmah.io/)([GitHub 리포지토리](https://github.com/elmahio/Elmah.Io.Extensions.Logging))
-* [Gelf](https://docs.graylog.org/en/2.3/pages/gelf.html) ([GitHub 리포지토리](https://github.com/mattwcole/gelf-extensions-logging))
+* [Gelf](https://docs.graylog.org/en/2.3/pages/gelf.html)([GitHub 리포지토리](https://github.com/mattwcole/gelf-extensions-logging))
 * [JSNLog](https://jsnlog.com/)([GitHub 리포지토리](https://github.com/mperdeck/jsnlog))
 * [KissLog.net](https://kisslog.net/)([GitHub 리포지토리](https://github.com/catalingavan/KissLog-net))
 * [Loggr](https://loggr.net/)([GitHub 리포지토리](https://github.com/imobile3/Loggr.Extensions.Logging))
