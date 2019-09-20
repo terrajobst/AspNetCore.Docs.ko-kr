@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/12/2019
 uid: web-api/index
-ms.openlocfilehash: 6e1868690a2c384307a23c89467505d3ed8916db
-ms.sourcegitcommit: 805f625d16d74e77f02f5f37326e5aceafcb78e3
+ms.openlocfilehash: aab9b848eb6e69055b019c9253c716898e9847e2
+ms.sourcegitcommit: a11f09c10ef3d4eeab7ae9ce993e7f30427741c1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/13/2019
-ms.locfileid: "70985468"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71149344"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>ASP.NET Core로 Web API 만들기
 
@@ -159,7 +159,7 @@ namespace WebApiSample
 
 ::: moniker-end
 
-## <a name="automatic-http-400-responses"></a>자동 HTTP 400 응답
+### <a name="automatic-http-400-responses"></a>자동 HTTP 400 응답
 
 `[ApiController]` 특성은 HTTP 400 응답을 자동으로 트리거하는 모델 유효성 검사 오류를 만듭니다. 따라서 다음 코드는 작업 메서드에서 불필요합니다.
 
@@ -172,7 +172,7 @@ if (!ModelState.IsValid)
 
 ASP.NET Core MVC는 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter> 작업 필터를 사용하여 위의 검사를 수행합니다.
 
-### <a name="default-badrequest-response"></a>기본 BadRequest 응답 
+### <a name="default-badrequest-response"></a>기본 BadRequest 응답
 
 호환성 버전이 2.1이면 HTTP 400 응답에 대한 기본 응답 형식은 <xref:Microsoft.AspNetCore.Mvc.SerializableError>입니다. 다음 요청 본문은 직렬화된 형식의 예제입니다.
 
@@ -206,36 +206,6 @@ ASP.NET Core MVC는 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInva
 
 * 웹 API 응답에서 오류를 지정하기 위해 머신이 읽을 수 있는 형식을 제공합니다.
 * [RFC 7807 사양](https://tools.ietf.org/html/rfc7807)을 준수합니다.
-
-기본 응답 형식을 `SerializableError`로 변경하려면 `Startup.ConfigureServices`에서 강조된 변경 내용을 적용합니다.
-
-::: moniker-end
-
-::: moniker range=">= aspnetcore-3.0"
-
-[!code-csharp[](index/samples/3.x/Startup.cs?name=snippet_DisableProblemDetailsInvalidModelStateResponseFactory&highlight=4-13)]
-
-::: moniker-end
-
-::: moniker range="= aspnetcore-2.2"
-
-[!code-csharp[](index/samples/2.x/Startup.cs?name=snippet_DisableProblemDetailsInvalidModelStateResponseFactory&highlight=5-14)]
-
-::: moniker-end
-
-### <a name="customize-badrequest-response"></a>BadRequest 응답 사용자 지정
-
-유효성 검사 오류로 발생하는 응답을 사용자 지정하려면 <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.InvalidModelStateResponseFactory>를 사용합니다. 예:
-
-::: moniker range=">= aspnetcore-3.0"
-
-[!code-csharp[](index/samples/3.x/Startup.cs?name=snippet_ConfigureBadRequestResponse&highlight=4-20)]
-
-::: moniker-end
-
-::: moniker range="<= aspnetcore-2.2"
-
-[!code-csharp[](index/samples/2.x/Startup.cs?name=snippet_ConfigureBadRequestResponse&highlight=5-21)]
 
 ::: moniker-end
 
@@ -283,7 +253,7 @@ ASP.NET Core MVC는 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInva
 
 `[ApiController]` 특성은 작업 매개 변수의 기본 데이터 원본에 유추 규칙을 적용합니다. 이러한 규칙을 통해 작업 매개 변수에 특성을 적용하여 바인딩 소스를 수동으로 식별할 필요가 없습니다. 바인딩 소스 유추 규칙은 다음과 같이 동작합니다.
 
-* `[FromBody]`는 복합 형식 매개 변수에 대해 유추됩니다. `[FromBody]` 유추 규칙은 <xref:Microsoft.AspNetCore.Http.IFormCollection> 및 <xref:System.Threading.CancellationToken> 같이 특별한 의미를 지닌 복합 기본 제공 형식에는 적용되지 않습니다. 바인딩 소스 유추 코드는 이러한 특별한 형식을 무시합니다. 
+* `[FromBody]`는 복합 형식 매개 변수에 대해 유추됩니다. `[FromBody]` 유추 규칙은 <xref:Microsoft.AspNetCore.Http.IFormCollection> 및 <xref:System.Threading.CancellationToken> 같이 특별한 의미를 지닌 복합 기본 제공 형식에는 적용되지 않습니다. 바인딩 소스 유추 코드는 이러한 특별한 형식을 무시합니다.
 * `[FromForm]`은 <xref:Microsoft.AspNetCore.Http.IFormFile> 및 <xref:Microsoft.AspNetCore.Http.IFormFileCollection> 형식의 작업 매개 변수에 대해 유추됩니다. 단순 또는 사용자 정의 형식에 대해서는 유추되지 않습니다.
 * `[FromRoute]`는 경로 템플릿에서 매개 변수와 일치하는 작업 매개 변수 이름에 대해 유추됩니다. 둘 이상의 경로가 작업 매개 변수와 일치하는 경우 모든 경로 값은 `[FromRoute]`로 간주됩니다.
 * `[FromQuery]`는 다른 작업 매개 변수에 대해 유추됩니다.
@@ -375,22 +345,6 @@ ASP.NET Core MVC는 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInva
 }
 ```
 
-### <a name="customize-problemdetails-response"></a>ProblemDetails 응답 사용자 지정
-
-<xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.ClientErrorMapping*> 속성을 사용하여 `ProblemDetails` 응답의 내용을 구성합니다. 예를 들어 다음 코드는 404 응답에 대해 `type` 속성을 업데이트합니다.
-
-::: moniker range=">= aspnetcore-3.0"
-
-[!code-csharp[](index/samples/3.x/Startup.cs?name=snippet_ConfigureApiBehaviorOptions&highlight=8-9)]
-
-::: moniker-end
-
-::: moniker range="<= aspnetcore-2.2"
-
-[!code-csharp[](index/samples/2.x/Startup.cs?name=snippet_ConfigureApiBehaviorOptions&highlight=9-10)]
-
-::: moniker-end
-
 ### <a name="disable-problemdetails-response"></a>ProblemDetails 응답 사용 안 함
 
 <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressMapClientErrors*> 속성이 `true`로 설정된 경우 `ProblemDetails` 인스턴스의 자동 생성이 사용되지 않습니다. 다음 코드를 `Startup.ConfigureServices`에 추가합니다.
@@ -407,9 +361,10 @@ ASP.NET Core MVC는 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInva
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>추가 자료 
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:web-api/action-return-types>
+* <xref:web-api/handle-errors>
 * <xref:web-api/advanced/custom-formatters>
 * <xref:web-api/advanced/formatting>
 * <xref:tutorials/web-api-help-pages-using-swagger>
