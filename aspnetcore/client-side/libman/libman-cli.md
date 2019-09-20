@@ -41,7 +41,7 @@ dotnet tool install -g Microsoft.Web.LibraryManager.Cli --version 1.0.94-g606058
 
 위의 예제에서 .NET Core 글로벌 도구는 로컬 Windows 컴퓨터의 *C:\Temp\Microsoft.Web.LibraryManager.Cli.1.0.94-g606058a278.nupkg* 파일에서 설치 됩니다.
 
-## <a name="usage"></a>사용법
+## <a name="usage"></a>사용
 
 CLI를 성공적으로 설치한 후에는 다음 명령을 사용할 수 있습니다.
 

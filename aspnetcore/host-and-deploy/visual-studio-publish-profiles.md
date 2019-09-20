@@ -279,7 +279,7 @@ msbuild {PATH}
 * {PROFILE} &ndash; 게시 프로필의 이름입니다.
 * {USERNAME} &ndash; MSDeploy 사용자 이름입니다. {USERNAME}은 게시 프로필에서 찾을 수 있습니다.
 * {PASSWORD} &ndash; MSDeploy 암호입니다. *{PROFILE}.PublishSettings* 파일에서 {PASSWORD}를 가져옵니다. 다음 위치에서 *.PublishSettings* 파일을 다운로드합니다.
-  * **솔루션 탐색기**: 보기 ****클라우드 탐색기**를 선택합니다. Azure 구독으로 연결합니다. **App Services**를 엽니다. 앱을 마우스 오른쪽 단추로 클릭합니다. **게시 프로필 다운로드**를 선택합니다.
+  * **솔루션 탐색기**: **보기** > **클라우드 탐색기** 를 선택합니다. Azure 구독으로 연결합니다. **App Services**를 엽니다. 앱을 마우스 오른쪽 단추로 클릭합니다. **게시 프로필 다운로드**를 선택합니다.
   * Azure Portal: 웹앱의 **개요** 패널에서 **게시 프로필 가져오기**를 선택합니다.
 
 다음 예제에서는 *AzureWebApp - 웹 배포*라는 게시 프로필을 사용합니다.
