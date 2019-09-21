@@ -7,16 +7,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/13/2019
 uid: blazor/call-web-api
-ms.openlocfilehash: 152a2d5ac9a4325592ca414e9ea5e70c947d079f
-ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
+ms.openlocfilehash: 23131ac0357b722e7f229fcfe5dab8590cf34739
+ms.sourcegitcommit: e5a74f882c14eaa0e5639ff082355e130559ba83
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/13/2019
-ms.locfileid: "70963700"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71168051"
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>ASP.NET Core Blazor에서 web API 호출
 
 By [Luke Latham](https://github.com/guardrex) 및 [Daniel Roth](https://github.com/danroth27)
+
+[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 Blazor weasembomapps는 미리 구성 `HttpClient` 된 서비스를 사용 하 여 web api를 호출 합니다. Blazor JSON 도우미를 사용 하거나를 <xref:System.Net.Http.HttpRequestMessage>사용 하 여 JavaScript [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 옵션을 포함할 수 있는 요청을 작성 합니다.
 

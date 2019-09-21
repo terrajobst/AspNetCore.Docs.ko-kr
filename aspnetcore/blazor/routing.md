@@ -7,16 +7,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/06/2019
 uid: blazor/routing
-ms.openlocfilehash: 1c61eedf7dbf0bbc8796eaa11360783b9d7aba6c
-ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
+ms.openlocfilehash: 6d9d1614b6e0cc9f4711de0db4513ada4841809f
+ms.sourcegitcommit: e5a74f882c14eaa0e5639ff082355e130559ba83
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/13/2019
-ms.locfileid: "70963865"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71168183"
 ---
 # <a name="aspnet-core-blazor-routing"></a>ASP.NET Core Blazor 라우팅
 
 [Luke Latham](https://github.com/guardrex)으로
+
+[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 Blazor apps에서 요청을 라우팅하는 방법 및 `NavLink` 구성 요소를 사용 하 여 탐색 링크를 만드는 방법을 알아봅니다.
 

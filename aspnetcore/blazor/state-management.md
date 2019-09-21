@@ -7,16 +7,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/05/2019
 uid: blazor/state-management
-ms.openlocfilehash: e1c3b030f466a820d49c36839d7ee26bb7cea4d3
-ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
+ms.openlocfilehash: 2acb91785e8c5fc34070d5428b89119667945753
+ms.sourcegitcommit: e5a74f882c14eaa0e5639ff082355e130559ba83
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/13/2019
-ms.locfileid: "70963862"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71168210"
 ---
 # <a name="aspnet-core-blazor-state-management"></a>ASP.NET Core Blazor 상태 관리
 
 작성자: [Steve Sanderson](https://github.com/SteveSandersonMS)
+
+[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 Blazor 서버는 상태 저장 앱 프레임 워크입니다. 대부분의 경우 앱은 서버에 지속적으로 연결을 유지 합니다. 사용자의 상태는 *회로*의 서버 메모리에 보관 됩니다. 
 
