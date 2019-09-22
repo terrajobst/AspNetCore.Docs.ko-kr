@@ -7,21 +7,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/15/2019
 uid: blazor/forms-validation
-ms.openlocfilehash: 2fd76db90a53e328cd2ac8f452fba58365db0384
-ms.sourcegitcommit: dc5b293e08336dc236de66ed1834f7ef78359531
+ms.openlocfilehash: c68ebf7f7bf07b6c243ab16307716cea13870446
+ms.sourcegitcommit: 04ce94b3c1b01d167f30eed60c1c95446dfe759d
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/16/2019
-ms.locfileid: "71011065"
+ms.lasthandoff: 09/21/2019
+ms.locfileid: "71176349"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET Core Blazor 폼 및 유효성 검사
 
 작성자: [Daniel Roth](https://github.com/danroth27) 및 [Luke Latham](https://github.com/guardrex)
 
 폼 및 유효성 검사는 [데이터 주석을](xref:mvc/models/validation)사용 하 여 Blazor에서 지원 됩니다.
-
-> [!NOTE]
-> 양식 및 유효성 검사 시나리오는 각 미리 보기 릴리스에서 변경 될 수 있습니다.
 
 다음 `ExampleModel` 형식은 데이터 주석을 사용 하 여 유효성 검사 논리를 정의 합니다.
 

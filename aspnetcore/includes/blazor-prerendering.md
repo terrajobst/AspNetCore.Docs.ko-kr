@@ -32,7 +32,6 @@ Blazor 서버 앱은 렌더링 되지 않지만 브라우저와의 연결이 설
 @page "/prerendered-interop"
 @using Microsoft.AspNetCore.Components
 @using Microsoft.JSInterop
-@inject IComponentContext ComponentContext
 @inject IJSRuntime JSRuntime
 
 <p>
@@ -59,32 +58,5 @@ Blazor 서버 앱은 렌더링 되지 않지만 브라우저와의 연결이 설
             StateHasChanged();
         }
     }
-}
-```
-
-앱이 현재 콘텐츠를 렌더링 하는지 여부에 따라 다른 콘텐츠를 조건부로 렌더링 하려면 `IsConnected` `IComponentContext` 서비스에서 속성을 사용 합니다. Blazor 서버 응용 프로그램의 `IsConnected` 경우은 `true` 클라이언트에 대 한 활성 연결이 있는 경우에만를 반환 합니다. Blazor weasembomapps에서 항상를 반환 `true` 합니다.
-
-```cshtml
-@page "/isconnected-example"
-@using Microsoft.AspNetCore.Components.Services
-@inject IComponentContext ComponentContext
-
-<h1>IsConnected Example</h1>
-
-<p>
-    Current state:
-    <strong id="connected-state">
-        @(ComponentContext.IsConnected ? "connected" : "not connected")
-    </strong>
-</p>
-
-<p>
-    Clicks:
-    <strong id="count">@count</strong>
-    <button id="increment-count" @onclick="@(() => count++)">Click me</button>
-</p>
-
-@code {
-    private int count;
 }
 ```

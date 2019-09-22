@@ -5,14 +5,14 @@ description: .NET Core에서 gRPC를 사용할 때 발생 하는 오류 문제�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.custom: mvc
-ms.date: 09/05/2019
+ms.date: 09/21/2019
 uid: grpc/troubleshoot
-ms.openlocfilehash: 33864ceb18304eb1d3413bcc9aebacd6eaffdbc6
-ms.sourcegitcommit: e7c56e8da5419bbc20b437c2dd531dedf9b0dc6b
+ms.openlocfilehash: 15377ba4b31ce9319df300b23e5a95c67bca7db4
+ms.sourcegitcommit: 04ce94b3c1b01d167f30eed60c1c95446dfe759d
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/10/2019
-ms.locfileid: "70878494"
+ms.lasthandoff: 09/21/2019
+ms.locfileid: "71176504"
 ---
 # <a name="troubleshoot-grpc-on-net-core"></a>.NET Core에서 gRPC 문제 해결
 
@@ -52,7 +52,7 @@ static async Task Main(string[] args)
 
 .NET gRPC 클라이언트를 사용 하려면 서비스에 신뢰할 수 있는 인증서가 있어야 합니다. 다음 오류 메시지는 신뢰할 수 있는 인증서가 없는 gRPC 서비스를 호출할 때 반환 됩니다.
 
-> 처리되지 않은 예외가 발생했습니다. System.Net.Http.HttpRequestException: SSL 연결을 설정할 수 없습니다. 내부 예외를 참조 하십시오.
+> 처리되지 않은 예외가 발생했습니다. 시스템 .Net. Http HttpRequestException: SSL 연결을 설정할 수 없습니다. 내부 예외를 참조 하십시오.
 > ---> 합니다. AuthenticationException: 유효성 검사 절차에 따르면 원격 인증서가 잘못 되었습니다.
 
 응용 프로그램을 로컬로 테스트 하 고 ASP.NET Core HTTPS 개발 인증서를 신뢰할 수 없는 경우이 오류가 표시 될 수 있습니다. 이 문제의 해결 지침은 [Windows 및 macOS에서의 ASP.NET Core HTTPS 개발 인증서 신뢰](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos)를 참조하세요.
@@ -62,7 +62,8 @@ static async Task Main(string[] args)
 ```csharp
 var httpClientHandler = new HttpClientHandler();
 // Return `true` to allow certificates that are untrusted/invalid
-httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true;
+httpClientHandler.ServerCertificateCustomValidationCallback = 
+    HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
 var httpClient = new HttpClient(httpClientHandler);
 
 var channel = GrpcChannel.ForAddress("https://localhost:5001",
@@ -79,7 +80,8 @@ var client = new Greet.GreeterClient(channel);
 
 ```csharp
 // This switch must be set before creating the GrpcChannel/HttpClient.
-AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+AppContext.SetSwitch(
+    "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
 
 // The port number(5000) must match the port of the gRPC server.
 var channel = GrpcChannel.ForAddress("http://localhost:5000");
@@ -104,7 +106,8 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
             webBuilder.ConfigureKestrel(options =>
             {
                 // Setup a HTTP/2 endpoint without TLS.
-                options.ListenLocalhost(5000, o => o.Protocols = HttpProtocols.Http2);
+                options.ListenLocalhost(5000, o => o.Protocols = 
+                    HttpProtocols.Http2);
             });
             webBuilder.UseStartup<Startup>();
         });

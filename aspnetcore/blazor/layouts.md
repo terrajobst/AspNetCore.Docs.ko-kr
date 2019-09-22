@@ -5,14 +5,14 @@ description: Blazor apps에 대해 재사용 가능한 레이아웃 구성 요�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/06/2019
+ms.date: 09/21/2019
 uid: blazor/layouts
-ms.openlocfilehash: 05a38c10e18407d50422192ab1ddf3ff4b0f3a5b
-ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
+ms.openlocfilehash: 6ae795f720cd2cc1010ebec46bcee877b31d20c6
+ms.sourcegitcommit: 04ce94b3c1b01d167f30eed60c1c95446dfe759d
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/07/2019
-ms.locfileid: "70800368"
+ms.lasthandoff: 09/21/2019
+ms.locfileid: "71176431"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>ASP.NET Core Blazor 레이아웃
 
@@ -45,6 +45,8 @@ Blazor 앱 템플릿 중 하나를 `MainLayout` 기반으로 하는 앱에서 �
 
 `Router` 구성 요소에 대 한 자세한 내용은을 <xref:blazor/routing>참조 하십시오.
 
+구성 요소 또는 폴더 단위로 재정의 될 수 있으므로, 레이아웃을 라우터에 기본 레이아웃으로 지정 하는 것이 좋습니다. 가장 일반적인 방법인 라우터를 사용 하 여 앱의 기본 레이아웃을 설정 하는 것이 좋습니다.
+
 ## <a name="specify-a-layout-in-a-component"></a>구성 요소에 레이아웃 지정
 
 Razor 지시어 `@layout` 를 사용 하 여 레이아웃을 구성 요소에 적용 합니다. 컴파일러는 구성 `@layout` 요소 클래스 `LayoutAttribute`에 적용 되는를로 변환 합니다.
@@ -52,6 +54,8 @@ Razor 지시어 `@layout` 를 사용 하 여 레이아웃을 구성 요소에 �
 다음 `MasterList` 구성 요소의 내용이의 `@Body`위치에서에 삽입 `MasterLayout` 됩니다.
 
 [!code-cshtml[](layouts/sample_snapshot/3.x/MasterList.razor?highlight=1)]
+
+구성 요소에서 직접 레이아웃을 지정 하면 라우터에서 가져온 *기본 레이아웃* 집합 또는 `@layout` *_imports. razor*에서 가져온 지시문이 재정의 됩니다.
 
 ## <a name="centralized-layout-selection"></a>중앙 레이아웃 선택
 
@@ -66,6 +70,8 @@ Razor 지시어 `@layout` 를 사용 하 여 레이아웃을 구성 요소에 �
 [!code-cshtml[](layouts/sample_snapshot/3.x/_Imports.razor)]
 
 *_Imports. razor* 파일은 [razor 뷰 및 페이지에 대 한 _ViewImports 파일과](xref:mvc/views/layout#importing-shared-directives) 비슷하지만 특히 razor 구성 요소 파일에 적용 됩니다.
+
+_Imports에 레이아웃을 지정 *합니다. razor* 는 라우터의 *기본 레이아웃*으로 지정 된 레이아웃을 재정의 합니다.
 
 ## <a name="nested-layouts"></a>중첩 레이아웃
 

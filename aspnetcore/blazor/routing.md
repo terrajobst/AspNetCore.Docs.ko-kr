@@ -5,14 +5,14 @@ description: 앱에서 요청을 라우팅하는 방법 및 NavLink 구성 요�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/06/2019
+ms.date: 09/21/2019
 uid: blazor/routing
-ms.openlocfilehash: 6d9d1614b6e0cc9f4711de0db4513ada4841809f
-ms.sourcegitcommit: e5a74f882c14eaa0e5639ff082355e130559ba83
+ms.openlocfilehash: d6fb3f03be94ff99ac3ed434265e6cd6b752c625
+ms.sourcegitcommit: 04ce94b3c1b01d167f30eed60c1c95446dfe759d
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71168183"
+ms.lasthandoff: 09/21/2019
+ms.locfileid: "71176395"
 ---
 # <a name="aspnet-core-blazor-routing"></a>ASP.NET Core Blazor 라우팅
 
@@ -27,6 +27,8 @@ Blazor apps에서 요청을 라우팅하는 방법 및 `NavLink` 구성 요소�
 Blazor 서버는 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)에 통합 됩니다. ASP.NET Core 앱은 `MapBlazorHub` 에서 `Startup.Configure`대화형 구성 요소에 대 한 들어오는 연결을 허용 하도록 구성 됩니다.
 
 [!code-csharp[](routing/samples_snapshot/3.x/Startup.cs?highlight=5)]
+
+가장 일반적인 구성은 모든 요청을 Blazor Server 앱의 서버 쪽에 대 한 호스트 역할을 하는 Razor 페이지로 라우팅하는 것입니다. 규칙에 따라 *호스트* 페이지의 이름은 일반적으로 *_Host*입니다. 호스트 파일에 지정 된 경로는 경로 일치에서 낮은 우선 순위로 작동 하므로 *대체 경로* 라고 합니다. 다른 경로가 일치 하지 않는 경우 대체 (fallback) 경로를 고려 합니다. 이렇게 하면 앱이 Blazor 서버 앱을 방해 하지 않고 다른 컨트롤러 및 페이지를 사용할 수 있습니다.
 
 ## <a name="route-templates"></a>경로 템플릿
 
