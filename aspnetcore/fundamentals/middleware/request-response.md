@@ -7,12 +7,12 @@ ms.author: jukotali
 ms.custom: mvc
 ms.date: 08/29/2019
 uid: fundamentals/middleware/request-response
-ms.openlocfilehash: e992401da2d194b178afbe51a293d103def0f940
-ms.sourcegitcommit: e6bd2bbe5683e9a7dbbc2f2eab644986e6dc8a87
+ms.openlocfilehash: 5e531c0ce0ed48097054fd81ddc3655a66cc7c5f
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/03/2019
-ms.locfileid: "70238145"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081682"
 ---
 # <a name="request-and-response-operations-in-aspnet-core"></a>ASP.NET Core의 요청 및 응답 작업
 
@@ -20,7 +20,7 @@ ms.locfileid: "70238145"
 
 이 문서에서는 요청 본문을 읽고 응답 본문을 쓰는 방법을 설명합니다. 미들웨어를 작성할 때 이러한 작업에 대한 코드가 필요할 수 있습니다. 미들웨어 작성 외에, MVC 및 Razor Pages에서 작업이 처리되기 때문에 사용자 지정 코드는 일반적으로 필요하지 않습니다.
 
-요청 및 응답 본문에 대한 두 가지 추상(<xref:System.IO.Stream> 및 <xref:System.IO.Pipelines.Pipe>)이 있습니다. 요청 읽기에서 [HttpRequest.Body](xref:Microsoft.AspNetCore.Http.HttpRequest.Body)는 <xref:System.IO.Stream>이고, `HttpRequest.BodyReader`는 <xref:System.IO.Pipelines.PipeReader>입니다. 응답 쓰기에서 [HttpResponse.Body](xref:Microsoft.AspNetCore.Http.HttpResponse.Body)는 이고, `HttpResponse.BodyWriter`는 <xref:System.IO.Pipelines.PipeWriter>입니다.
+요청 및 응답 본문에 대한 두 가지 추상(<xref:System.IO.Stream> 및 <xref:System.IO.Pipelines.Pipe>)이 있습니다. 요청 읽기에서 [HttpRequest.Body](xref:Microsoft.AspNetCore.Http.HttpRequest.Body)는 <xref:System.IO.Stream>이고, `HttpRequest.BodyReader`는 <xref:System.IO.Pipelines.PipeReader>입니다. 응답 쓰기에서 [HttpResponse.Body](xref:Microsoft.AspNetCore.Http.HttpResponse.Body)는 <xref:System.IO.Stream>이고 `HttpResponse.BodyWriter`는 <xref:System.IO.Pipelines.PipeWriter>입니다.
 
 스트림보다 파이프라인이 권장됩니다. 일부 간단한 작업에서는 스트림이 더 편리할 수도 있지만, 파이프라인은 성능상의 장점이 있고 대부분의 시나리오에서 더 편리합니다. ASP.NET Core는 내부적으로 스트림 대신 파이프라인을 사용하기 시작했습니다. 다음과 같은 경우를 예로 들 수 있습니다.
 
@@ -64,7 +64,7 @@ ms.locfileid: "70238145"
 
 [!code-csharp[](request-response/samples/3.x/RequestResponseSample/Startup.cs?name=GetListOfStringFromPipe)]
 
-이 예제에서는 스트림 구현에 포함된 많은 문제를 해결합니다.
+이 예제에서는 스트림 구현에 포함된 많은 문제를 수정합니다.
 
 * `PipeReader`에서 사용되지 않은 바이트를 처리하므로 문자열 버퍼가 필요하지 않습니다.
 * 인코드된 문자열은 반환된 문자열 목록에 직접 추가됩니다.

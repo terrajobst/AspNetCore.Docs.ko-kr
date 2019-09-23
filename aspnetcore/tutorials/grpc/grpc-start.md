@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 8/26/2019
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: 7f80ead06f00037ae51b35d40dff9bc7f99bc5d8
-ms.sourcegitcommit: 8b36f75b8931ae3f656e2a8e63572080adc78513
+ms.openlocfilehash: 924aa3880fc7f2aa777d4ab2e5ea3bed38e227d4
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/05/2019
-ms.locfileid: "70310576"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081196"
 ---
 # <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>자습서: ASP.NET Core에서 gRPC 클라이언트 및 서버 만들기
 
@@ -51,7 +51,7 @@ ms.locfileid: "70310576"
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Visual Studio를 시작하고 **새 프로젝트 만들기**를 선택합니다. 또는 Visual Studio **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.
-* **새 프로젝트 만들기** 대화 상자에서 **gPRC 서비스**를 선택한 후 **다음**을 선택합니다.
+* **새 프로젝트 만들기** 대화 상자에서 **gRPC 서비스**를 선택한 후 **다음**을 선택합니다.
 
   ![**새 프로젝트 만들기** 대화 상자](~/tutorials/grpc/grpc-start/static/cnp.png)
 
@@ -67,7 +67,7 @@ ms.locfileid: "70310576"
 * 디렉터리(`cd`)를 프로젝트를 포함하는 폴더로 변경합니다.
 * 다음 명령을 실행합니다.
 
-  ```console
+  ```dotnetcli
   dotnet new grpc -o GrpcGreeter
   code -r GrpcGreeter
   ```
@@ -82,9 +82,9 @@ ms.locfileid: "70310576"
 
 터미널에서 다음 명령을 실행합니다.
 
-```console
-  dotnet new grpc -o GrpcGreeter
-  cd GrpcGreeter
+```dotnetcli
+dotnet new grpc -o GrpcGreeter
+cd GrpcGreeter
 ```
 
 이전 명령은 [.NET Core CLI](/dotnet/core/tools/dotnet)를 사용하여 gRPC 서비스를 만듭니다.
@@ -153,7 +153,7 @@ info: Microsoft.Hosting.Lifetime[0]
 * 디렉터리(`cd`)를 프로젝트를 포함하는 폴더로 변경합니다.
 * 다음 명령을 실행합니다.
 
-  ```console
+  ```dotnetcli
   dotnet new console -o GrpcGreeterClient
   code -r GrpcGreeterClient
   ```
@@ -200,7 +200,7 @@ PMC(패키지 관리자 콘솔) 또는 NuGet 패키지 관리를 사용하여 �
 
 **통합 터미널**에서 다음 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet add GrpcGreeterClient.csproj package Grpc.Net.Client
 dotnet add GrpcGreeterClient.csproj package Google.Protobuf
 dotnet add GrpcGreeterClient.csproj package Grpc.Tools

@@ -5,14 +5,14 @@ description: Blazor 앱을 단계별로 빌드합니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/23/2019
+ms.date: 09/15/2019
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: ea1111f43b6b8b4f47061056e8ad8d505f92dba6
-ms.sourcegitcommit: 43c6335b5859282f64d66a7696c5935a2bcdf966
+ms.openlocfilehash: b433d793ae615bc4ece7c63bebd72d349adf43ee
+ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/07/2019
-ms.locfileid: "70800482"
+ms.lasthandoff: 09/18/2019
+ms.locfileid: "71081258"
 ---
 # <a name="build-your-first-blazor-app"></a>첫 번째 Blazor 앱 빌드
 
@@ -57,7 +57,7 @@ HTML 구문을 사용하여 구성 요소를 다른 구성 요소에 포함합�
 
 1. `Index` 구성 요소(*Index.razor*)에 `<Counter />` 요소를 추가하여 `Counter` 구성 요소를 앱의 `Index` 구성 요소에 추가합니다.
 
-   이 환경에 Blazor 클라이언트 쪽을 사용하는 경우에는 `SurveyPrompt` 구성 요소가 `Index` 구성 요소에 사용됩니다. `<SurveyPrompt>` 요소를 `<Counter />` 요소로 바꿉니다. 이 환경에 Blazor 서버 쪽 앱을 사용하는 경우에는 `Index` 구성 요소에 `<Counter />` 구성 요소를 추가합니다.
+   이 환경에 Blazor WebAssembly를 사용하는 경우에는 `SurveyPrompt` 구성 요소가 `Index` 구성 요소에 사용됩니다. `<SurveyPrompt>` 요소를 `<Counter />` 요소로 바꿉니다. 이 환경에 Blazor 서버 앱을 사용하는 경우에는 `Index` 구성 요소에 `<Counter />` 구성 요소를 추가합니다.
 
    *Pages/Index.razor*:
 
@@ -97,11 +97,11 @@ HTML 구문을 사용하여 구성 요소를 다른 구성 요소에 포함합�
 
 ## <a name="dependency-injection"></a>종속성 주입
 
-앱의 서비스 컨테이너에 등록된 서비스는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)를 통해 구성 요소에서 사용할 수 있습니다. `@inject` 지시문을 사용하여 서비스를 구성 요소에 삽입합니다.
+Blazor 서버 앱을 사용하는 경우 `WeatherForecastService` 서비스는 `Startup.ConfigureServices`에 [singleton](xref:fundamentals/dependency-injection#service-lifetimes)으로 등록됩니다. 서비스 인스턴스는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)을 통해 앱 전체에서 사용할 수 있습니다.
 
-`FetchData` 구성 요소의 지시문을 검사합니다.
+[!code-csharp[](build-your-first-blazor-app/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
-Blazor 서버 쪽 앱을 사용하는 경우 `WeatherForecastService` 서비스는 [싱글톤](xref:fundamentals/dependency-injection#service-lifetimes)으로 등록되므로, 서비스의 한 인스턴스를 앱 전체에서 사용할 수 있습니다. `@inject` 지시문은 `WeatherForecastService` 서비스의 인스턴스를 구성 요소에 삽입하는 데 사용됩니다.
+`@inject` 지시문은 `WeatherForecastService` 서비스의 인스턴스를 `FetchData` 구성 요소에 삽입하는 데 사용됩니다.
 
 *Pages/FetchData.razor*:
 
@@ -111,7 +111,7 @@ Blazor 서버 쪽 앱을 사용하는 경우 `WeatherForecastService` 서비스�
 
 [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData2.razor?highlight=6)]
 
-Blazor 클라이언트 쪽 앱을 사용하는 경우 `HttpClient`를 삽입하여 *wwwroot/sample-data* 폴더의 *weather.json* 파일에서 일기 예보 데이터를 가져옵니다.
+Blazor WebAssembly 앱을 사용하는 경우 `HttpClient`를 삽입하여 *wwwroot/sample-data* 폴더의 *weather.json* 파일에서 일기 예보 데이터를 가져옵니다.
 
 *Pages/FetchData.razor*:
 
@@ -120,7 +120,6 @@ Blazor 클라이언트 쪽 앱을 사용하는 경우 `HttpClient`를 삽입하�
 [\@foreach](/dotnet/csharp/language-reference/keywords/foreach-in) 루프는 각 예측 인스턴스를 날씨 데이터 테이블의 행으로 렌더링하는 데 사용됩니다.
 
 [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData3.razor?highlight=11-19)]
-
 
 ## <a name="build-a-todo-list"></a>할 일 목록 빌드
 
