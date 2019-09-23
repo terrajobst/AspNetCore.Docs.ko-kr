@@ -312,7 +312,7 @@ Microsoft.AspNetCore.Hosting.Internal.WebHost:Information: Request finished in 3
 
 ## <a name="log-category"></a>로그 범주
 
-`ILogger` 개체가 생성되면 개체에 대한 *범주*가 지정됩니다. 해당 범주는 `ILogger`의 해당 인스턴스에서 만든 각 로그 메시지에 포함됩니다. 범주는 임의의 문자열 일 수 있지만 "TodoApi.Controllers.TodoController"와 같은 클래스 이름을 사용하는 것이 규칙입니다.
+`ILogger` 개체가 생성되면 개체에 대한 *범주*가 지정됩니다. 해당 범주는 `ILogger`의 해당 인스턴스에서 만든 각 로그 메시지에 포함됩니다. 범주는 임의의 문자열일 수 있지만 "TodoApi.Controllers.TodoController"와 같은 클래스 이름을 사용하는 것이 규칙입니다.
 
 `ILogger<T>`를 사용하여 `T`의 정규화된 형식 이름을 범주로 사용하는 `ILogger` 인스턴스를 가져옵니다.
 
@@ -701,7 +701,7 @@ System.Exception: Item not found exception.
 | ----------------------------------- | ----- |
 | Microsoft.AspNetCore                | 일반 ASP.NET Core 진단. |
 | Microsoft.AspNetCore.DataProtection | 고려되고, 발견되고, 사용된 키. |
-| Microsoft.AspNetCore.HostFiltering  | 호스트 허용. |
+| Microsoft.AspNetCore.HostFiltering  | 허용되는 호스트. |
 | Microsoft.AspNetCore.Hosting        | HTTP 요청을 완료하는 데 걸린 시간과 시작 시간. 로드된 호스팅 시작 어셈블리. |
 | Microsoft.AspNetCore.Mvc            | MVC 및 Razor 진단. 모델 바인딩, 필터 실행, 뷰 컴파일 작업 선택. |
 | Microsoft.AspNetCore.Routing        | 경로 일치 정보. |
