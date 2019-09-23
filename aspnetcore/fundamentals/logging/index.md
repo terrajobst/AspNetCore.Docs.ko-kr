@@ -48,8 +48,8 @@ ms.locfileid: "71081154"
 
 기본 ASP.NET Core 프로젝트 템플릿은 다음과 같은 로깅 공급자를 추가하는 <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder%2A>를 호출합니다.
 
-* 콘솔
-* 디버그
+* Console
+* Debug
 * EventSource
 * EventLog(Windows에서 실행 중인 경우에만)
 
@@ -69,13 +69,13 @@ ms.locfileid: "71081154"
 
 기본 프로젝트 템플릿은 다음과 같은 로깅 공급자를 추가하는 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A>를 호출합니다.
 
-* 콘솔
-* 디버그
+* Console
+* Debug
 * EventSource(ASP.NET Core 2.2부터 시작)
 
 [!code-csharp[](index/samples/2.x/TodoApiSample/Program.cs?name=snippet_TemplateCode&highlight=7)]
 
-`CreateDefaultBuilder`를 사용하는 경우 이 기본 공급자들을 자신이 선택한 공급자로 대체할 수 있습니다. <xref:Microsoft.Extensions.Logging.LoggingBuilderExtensions.ClearProviders%2A>를 호출하고 원하는 공급자를 추가합니다.
+`CreateDefaultBuilder`를 사용하는 경우 기본 제공자를 사용자가 선택한 대로 바꿀 수 있습니다. <xref:Microsoft.Extensions.Logging.LoggingBuilderExtensions.ClearProviders%2A>를 호출하고 원하는 공급자를 추가합니다.
 
 [!code-csharp[](index/samples/2.x/TodoApiSample/Program.cs?name=snippet_LogFromMain&highlight=18-22)]
 
@@ -87,7 +87,7 @@ ms.locfileid: "71081154"
 
 로그를 만들려면 <xref:Microsoft.Extensions.Logging.ILogger%601> 개체를 사용합니다. 웹앱 또는 호스트되는 서비스에서는 DI(종속성 주입)로부터 `ILogger`를 가져옵니다. 비 호스트 콘솔 앱에서는 `LoggerFactory`를 사용하여 `ILogger`를 만듭니다.
 
-다음 ASP.NET Core 예제는 `TodoApiSample.Pages.AboutModel`을 범주로 사용하여 로거를 만듭니다. 로그 *범주*는 각 로그와 연결된 문자열입니다. DI에서 제공한 `ILogger<T>` 인스턴스는 `T` 형식의 정규화된 이름을 범주로 가진 로그를 만듭니다.
+다음 ASP.NET Core 예제는 `TodoApiSample.Pages.AboutModel`을 범주로 사용하여 로거를 만듭니다. 로그 *범주*는 각 로그와 연결된 문자열입니다. DI에서 제공한 `ILogger<T>` 인스턴스는 `T` 형식의 정규화된 이름을 범주로 가진 로그를 만듭니다. 
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -172,7 +172,7 @@ ASP.NET Core 앱의 `Startup.Configure` 메서드에서 로그를 작성하려�
 
 ### <a name="no-asynchronous-logger-methods"></a>비동기 로거 메서드 미지원
 
-로깅은 매우 빨라서 비동기 코드의 성능 비용을 들일 필요가 없습니다. 로깅 데이터 저장소가 느린 경우 직접 작성하지 마세요. 먼저 로그 메시지를 빠른 저장소에 작성한 다음, 나중에 느린 저장소로 이동하는 것이 좋습니다. 예를 들어 SQL Server에 로깅하는 경우 `Log` 메서드는 동기식이므로 `Log` 메서드에서 직접 로깅하지는 않습니다. 대신 동기적으로 로그 메시지를 메모리 내 큐에 추가하고 백그라운드 작업자가 큐에서 메시지를 풀하여 SQL Server에 대해 비동기 데이터 푸시 작업을 수행하도록 합니다.
+로깅은 매우 빨라서 비동기 코드의 성능 비용을 들일 필요가 없습니다. 로깅 데이터 저장소가 느린 경우 직접 작성하지 마세요. 로그 메시지를 처음에 빠른 저장소에 작성한 다음, 나중에 느린 저장소로 이동하는 것이 좋습니다. 예를 들어 SQL Server에 로그하는 경우 `Log` 메서드는 동기식이므로 `Log` 메서드에서 직접 로그하지는 않습니다. 대신 동기적으로 로그 메시지를 메모리 내 큐에 추가하고 백그라운드 작업자가 큐에서 메시지를 풀하여 SQL Server에 대해 비동기 데이터 푸시 작업을 수행하도록 합니다.
 
 ## <a name="configuration"></a>구성
 
@@ -284,7 +284,7 @@ Microsoft.AspNetCore.Routing.EndpointMiddleware: Information: Executed endpoint 
 Microsoft.AspNetCore.Hosting.Diagnostics: Information: Request finished in 98.41300000000001ms 404
 ```
 
-이전 섹션에 표시된 `ILogger` 호출을 통해 생성된 로그는 "TodoApiSample"로 시작합니다. "Microsoft" 범주로 시작하는 로그는 ASP.NET Core 프레임워크 코드에서 온 것입니다. ASP.NET Core 및 응용 프로그램 코드는 동일한 로깅 API와 공급자를 사용합니다.
+이전 섹션에 표시된 `ILogger` 호출을 통해 생성된 로그는 "TodoApiSample"로 시작합니다. "Microsoft" 범주로 시작하는 로그는 ASP.NET Core 프레임워크 코드에서 온 것입니다. ASP.NET Core 및 애플리케이션 코드는 동일한 로깅 API와 공급자를 사용합니다.
 
 ::: moniker-end
 
@@ -300,7 +300,7 @@ Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker:Information: Executed 
 Microsoft.AspNetCore.Hosting.Internal.WebHost:Information: Request finished in 316.3195ms 404
 ```
 
-이전 섹션에 표시된 `ILogger` 호출을 통해 생성된 로그는 "TodoApi"로 시작합니다. "Microsoft" 범주로 시작하는 로그는 ASP.NET Core 프레임워크 코드에서 온 것입니다. ASP.NET Core 및 응용 프로그램 코드는 동일한 로깅 API와 공급자를 사용합니다.
+이전 섹션에 표시된 `ILogger` 호출을 통해 생성된 로그는 "TodoApi"로 시작합니다. "Microsoft" 범주로 시작하는 로그는 ASP.NET Core 프레임워크 코드에서 온 것입니다. ASP.NET Core 및 애플리케이션 코드는 동일한 로깅 API와 공급자를 사용합니다.
 
 ::: moniker-end
 
@@ -312,7 +312,7 @@ Microsoft.AspNetCore.Hosting.Internal.WebHost:Information: Request finished in 3
 
 ## <a name="log-category"></a>로그 범주
 
-`ILogger` 개체가 생성되면 개체에 대한 *범주*가 지정됩니다. 해당 범주는 `ILogger`의 해당 인스턴스에서 만든 각 로그 메시지에 포함됩니다. 범주는 임의의 문자열일 수 있지만 "TodoApi.Controllers.TodoController"와 같은 클래스 이름을 사용하는 것이 규칙입니다.
+`ILogger` 개체가 생성되면 개체에 대한 *범주*가 지정됩니다. 해당 범주는 `ILogger`의 해당 인스턴스에서 만든 각 로그 메시지에 포함됩니다. 범주는 문자열일 수 있지만 "TodoApi.Controllers.TodoController"와 같은 클래스 이름을 사용하는 것이 규칙입니다.
 
 `ILogger<T>`를 사용하여 `T`의 정규화된 형식 이름을 범주로 사용하는 `ILogger` 인스턴스를 가져옵니다.
 
@@ -374,7 +374,7 @@ ASP.NET Core는 다음과 같은 로그 수준을 정의하며, 여기에는 가
 
 * Debug = 1
 
-  개발 및 디버깅에 유용할 수 있는 정보입니다. 예: `Entering method Configure with flag set to true.` 로그 볼륨이 크기 때문에 `Debug` 수준 로그는 문제 해결 시에만 프로덕션 환경에서 사용합니다.
+  개발 및 디버깅에 유용할 수 있는 정보입니다. 예제: `Entering method Configure with flag set to true.` 로그 볼륨이 크기 때문에 문제 해결 시에만 `Debug` 수준 로그를 프로덕션 환경에서 사용합니다.
 
 * Information = 2
 
@@ -621,14 +621,14 @@ System.Exception: Item not found exception.
 
 | 번호 | 공급자      | 다음으로 시작하는 범주...          | 최소 로그 수준 |
 | :----: | ------------- | --------------------------------------- | ----------------- |
-| 1      | 디버그         | 모든 범주                          | Information       |
-| 2      | 콘솔       | Microsoft.AspNetCore.Mvc.Razor.Internal | Warning           |
-| 3      | 콘솔       | Microsoft.AspNetCore.Mvc.Razor.Razor    | Debug             |
-| 4      | 콘솔       | Microsoft.AspNetCore.Mvc.Razor          | Error             |
-| 5      | 콘솔       | 모든 범주                          | Information       |
+| 1      | Debug         | 모든 범주                          | Information       |
+| 2      | Console       | Microsoft.AspNetCore.Mvc.Razor.Internal | Warning           |
+| 3      | Console       | Microsoft.AspNetCore.Mvc.Razor.Razor    | Debug             |
+| 4      | Console       | Microsoft.AspNetCore.Mvc.Razor          | Error             |
+| 5      | Console       | 모든 범주                          | Information       |
 | 6      | 모든 공급자 | 모든 범주                          | Debug             |
-| 7      | 모든 공급자 | System                                  | Debug             |
-| 8      | 디버그         | Microsoft                               | Trace             |
+| 7      | 모든 공급자 | 시스템                                  | Debug             |
+| 8      | Debug         | Microsoft                               | Trace             |
 
 `ILogger` 개체를 만들 때 `ILoggerFactory` 개체는 공급자마다 해당 로거에 적용할 단일 규칙을 선택합니다. `ILogger` 인스턴스에서 작성된 모든 메시지는 선택한 규칙에 따라 필터링됩니다. 사용 가능한 규칙 중에서 각 공급자 및 범주 쌍에 적용 가능한 가장 구체적인 규칙이 선택됩니다.
 
@@ -639,7 +639,7 @@ System.Exception: Item not found exception.
 * 여러 규칙을 선택하는 경우 **마지막** 규칙을 사용합니다.
 * 규칙을 선택하지 않는 경우 `MinimumLevel`을 사용합니다.
 
-앞의 규칙 목록을 사용하여 "Microsoft.AspNetCore.Mvc.Razor.RazorViewEngine" 범주에 대한 `ILogger` 개체를 만든다고 가정합니다.
+앞의 규칙 목록을 통해 "Microsoft.AspNetCore.Mvc.Razor.RazorViewEngine" 범주에 대한 `ILogger` 개체를 만든다고 가정합니다.
 
 * 디버그 공급자에게는 규칙 1, 6, 8이 적용됩니다. 규칙 8이 가장 구체적이므로 선택됩니다.
 * 콘솔 공급자에게는 규칙 3, 4, 5, 6이 적용됩니다. 규칙 3이 가장 구체적입니다.
@@ -679,7 +679,7 @@ System.Exception: Item not found exception.
 
 ### <a name="filter-functions"></a>필터 함수
 
-필터 함수는 구성 또는 코드를 통해 규칙이 할당되지 않은 모든 공급자와 범주에 대해 호출됩니다. 함수의 코드는 공급자 형식, 범주 및 로그 수준에 액세스할 수 있습니다. 예:
+필터 함수는 구성 또는 코드를 통해 규칙이 할당되지 않은 모든 공급자와 범주에 대해 호출됩니다. 함수의 코드는 공급자 형식, 범주 및 로그 수준에 액세스할 수 있습니다. 예를 들어:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -907,7 +907,7 @@ Azure 로그 스트리밍을 구성하려면:
 
 로깅 공급자는 ASP.NET Core에 대한 모든 사용 가능한 원격 분석을 제공하는 패키지인 [Microsoft.ApplicationInsights.AspNetCore](https://www.nuget.org/packages/Microsoft.ApplicationInsights.AspNetCore)의 종속성으로 포함됩니다. 이 패키지를 사용하는 경우 공급자 패키지를 설치할 필요가 없습니다.
 
-ASP.NET 4.x용으로 제공되는 [Microsoft.ApplicationInsights.Web](https://www.nuget.org/packages/Microsoft.ApplicationInsights.Web) 패키지를 사용하지 마세요.
+ASP.NET 4.x용으로 제공되는 [Microsoft.ApplicationInsights.Web](https://www.nuget.org/packages/Microsoft.ApplicationInsights.Web) 패키지&mdash;를 사용하지 마세요.
 
 자세한 내용은 다음 리소스를 참조하세요.
 
