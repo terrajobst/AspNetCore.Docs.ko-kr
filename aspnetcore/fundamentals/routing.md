@@ -19,13 +19,13 @@ ms.locfileid: "67167090"
 
 ::: moniker range="<= aspnetcore-1.1"
 
-이 항목의 1.1 버전을 얻으려면 [ASP.NET Core에서 라우팅(버전 1.1, PDF)](https://webpifeed.blob.core.windows.net/webpifeed/Partners/Routing_1.x.pdf)을 다운로드하세요.
+이 항목의 1.1 버전에 대해서는 [ASP.NET Core에서 라우팅(버전 1.1, PDF)](https://webpifeed.blob.core.windows.net/webpifeed/Partners/Routing_1.x.pdf)을 다운로드하세요.
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.2"
 
-라우팅은 요청 URI를 엔드포인트 선택기에 매핑하고, 들어오는 요청을 엔드포인트로 디스패치합니다. 경로는 앱에서 정의되고 앱 시작 시 구성됩니다. 경로는 요청에 포함된 URL에서 필요에 따라 값을 추출할 수 있으며 이러한 값은 요청 처리를 위해 사용될 수 있습니다. 또한 라우팅은 앱의 경로 정보를 사용하여 엔드포인트 선택기에 매핑되는 URL을 생성할 수도 있습니다.
+라우팅은 요청 URI를 엔드포인트 선택기에 매핑하고 들어오는 요청을 엔드포인트로 디스패치합니다. 경로는 앱에서 정의되고 앱 시작 시 구성됩니다. 경로는 요청에 포함된 URL에서 필요에 따라 값을 추출할 수 있으며 이러한 값은 요청 처리를 위해 사용될 수 있습니다. 또한 라우팅은 앱의 경로 정보를 사용하여 엔드포인트 선택기에 매핑되는 URL을 생성할 수도 있습니다.
 
 ::: moniker-end
 
@@ -38,7 +38,7 @@ services.AddMvc()
     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 ```
 
-<xref:Microsoft.AspNetCore.Mvc.MvcOptions.EnableEndpointRouting> 옵션은 라우팅에서 내부적으로 엔드포인트 기반 논리를 사용해야 하는지, 아니면 ASP.NET Core 2.1 이하의 <xref:Microsoft.AspNetCore.Routing.IRouter> 기반 논리를 사용해야 하는지의 여부를 결정합니다. 호환성 버전이 2.2 이상으로 설정된 경우 기본값은 `true`입니다. 이전 라우팅 논리를 사용하려면 값을 `false`으로 설정합니다.
+<xref:Microsoft.AspNetCore.Mvc.MvcOptions.EnableEndpointRouting> 옵션은 라우팅에서 내부적으로 엔드포인트 기반 논리를 사용해야 하는지, 또는 ASP.NET Core 2.1 이하의 <xref:Microsoft.AspNetCore.Routing.IRouter> 기반 논리를 사용해야 하는지 여부를 결정합니다. 호환성 버전이 2.2 이상으로 설정된 경우 기본값은 `true`입니다. 이전 라우팅 논리를 사용하려면 값을 `false`로 설정합니다.
 
 ```csharp
 // Use the routing logic of ASP.NET Core 2.1 or earlier:
@@ -52,7 +52,7 @@ services.AddMvc(options => options.EnableEndpointRouting = false)
 
 ::: moniker range="< aspnetcore-2.2"
 
-라우팅은 요청 URI를 경로 처리기에 매핑하고, 들어오는 요청을 디스패치합니다. 경로는 앱에서 정의되고 앱 시작 시 구성됩니다. 경로는 요청에 포함된 URL에서 필요에 따라 값을 추출할 수 있으며 이러한 값은 요청 처리를 위해 사용될 수 있습니다. 앱에서 구성된 경로를 사용하여 라우팅은 경로 처리기에 매핑되는 URL을 생성할 수 있습니다.
+라우팅은 요청 URI를 경로 처리기에 매핑하고 들어오는 요청을 디스패치합니다. 경로는 앱에서 정의되고 앱 시작 시 구성됩니다. 경로는 요청에 포함된 URL에서 필요에 따라 값을 추출할 수 있으며 이러한 값은 요청 처리를 위해 사용될 수 있습니다. 라우팅은 앱에 구성된 경로를 사용하여 경로 처리기에 매핑되는 URL을 생성할 수 있습니다.
 
 ::: moniker-end
 
@@ -68,18 +68,18 @@ services.AddMvc()
 ::: moniker-end
 
 > [!IMPORTANT]
-> 이 문서에서는 낮은 수준의 ASP.NET Core 라우팅을 설명합니다. ASP.NET Core MVC 라우팅에 대한 내용은 <xref:mvc/controllers/routing>을 참조하세요. Razor Pages의 라우팅 규칙에 대한 자세한 내용은 <xref:razor-pages/razor-pages-conventions>을 참조하세요.
+> 이 문서에서는 낮은 수준의 ASP.NET Core 라우팅을 설명합니다. ASP.NET Core MVC 라우팅에 대한 내용은 <xref:mvc/controllers/routing>을 참조하세요. Razor Pages의 라우팅 규칙에 대한 내용은 <xref:razor-pages/razor-pages-conventions>을 참조하세요.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="routing-basics"></a>라우팅 기본 사항
 
-대부분의 앱은 URL이 읽을 수 있고 의미 있도록 기본적이고 설명적인 라우팅 체계를 선택해야 합니다. 기본 기존 경로 `{controller=Home}/{action=Index}/{id?}`:
+대부분의 앱은 URL을 읽을 수 있고 의미를 담고 있도록 기본적이고 서술적인 라우팅 체계를 선택해야 합니다. 기본 기존 경로인 `{controller=Home}/{action=Index}/{id?}`는:
 
-* 기본적이고 설명이 포함된 라우팅 체계를 지원합니다.
-* UI 기반 앱에 대한 유용한 시작 지점입니다.
+* 기본적이고 서술적인 라우팅 체계를 지원합니다.
+* UI 기반 앱에 대한 유용한 시작점입니다.
 
-개발자는 일반적으로 [특성 라우팅](xref:mvc/controllers/routing#attribute-routing) 또는 기존의 전용 경로를 사용하여 특수한 상황(예: 블로그 및 전자 상거래 엔드포인트)에서 앱의 트래픽이 높은 영역에 간결한 추가 경로를 추가합니다.
+일반적으로 개발자는 [특성 라우팅](xref:mvc/controllers/routing#attribute-routing) 또는 전용 기존 경로를 사용하여 특수한 상황에서 앱의 트래픽이 높은 영역(예: 블로그 및 전자 상거래 엔드포인트)에 간결한 추가 경로를 추가합니다.
 
 웹 API는 특성 라우팅을 사용하여 작업이 HTTP 동사로 표현되는 리소스 집합으로 앱의 기능을 모델링해야 합니다. 즉 동일한 논리 리소스의 많은 작업(예: GET, POST)이 동일한 URL을 사용합니다. 특성 라우팅은 API의 공용 엔드포인트 레이아웃을 신중하게 설계하는 데 필요한 제어 수준을 제공합니다.
 
