@@ -5,14 +5,14 @@ description: 이 문서에는 Azure 호스트 및 배포 리소스의 링크가 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/07/2019
+ms.date: 07/28/2019
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: 7736888c43aafd2f64e3d7b079f2099fe548a825
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 4dc150ff4534e42e1995a185f650cea9df70ccc4
+ms.sourcegitcommit: d34b2627a69bc8940b76a949de830335db9701d3
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081083"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71187054"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Azure App Service에 ASP.NET Core 앱 배포
 
@@ -97,7 +97,17 @@ Azure Portal에서 앱 설정을 만들거나 수정하고**저장** 단추를 �
 
 ## <a name="monitoring-and-logging"></a>모니터링 및 로깅
 
-Azure App Service는 ASP.NET Core 앱에 대한 로깅 통합을 사용할 수 있게 하는 **ASP.NET Core 로깅 확장**을 제공합니다. App Service에 확장명을 자동으로 추가하려면 Visual Studio의 **게시** 프로세스를 **App Service** 게시 프로필과 함께 사용하세요. Visual Studio를 사용하여 앱을 배포하지 않는 경우 App Service의 **개발 도구** > **확장** 대화 상자를 통해 Azure Portal에 확장을 수동으로 설치하세요.
+::: moniker range=">= aspnetcore-3.0"
+
+App Service에 배포된 ASP.NET Core 앱은 자동으로 App Service 확장인 **ASP.NET Core 로깅 통합**을 받습니다. 확장을 사용하면 Azure App Service에서 ASP.NET Core 앱에서 로깅 통합이 가능합니다.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+App Service에 배포된 ASP.NET Core 앱은 자동으로 App Service 확장인 **ASP.NET Core 로깅 확장**을 받습니다. 확장을 사용하면 Azure App Service에서 ASP.NET Core 앱에서 로깅 통합이 가능합니다.
+
+::: moniker-end
 
 모니터링, 로깅 및 문제 해결에 대한 자세한 내용은 다음 문서를 참조하세요.
 
@@ -128,10 +138,21 @@ Azure App Service/IIS에서 호스트하는 앱의 일반적인 배포 구성 �
 * Redis Cache
 
 자세한 내용은 <xref:security/data-protection/implementation/key-storage-providers>을 참조하세요.
+<a name="deploy-aspnet-core-preview-release-to-azure-app-service"></a>
+<!-- revert this after 3.0 supported
+## Deploy ASP.NET Core preview release to Azure App Service
 
-## <a name="deploy-aspnet-core-preview-release-to-azure-app-service"></a>Azure App Service에 ASP.NET Core 미리 보기 릴리스 배포
+Use one of the following approaches if the app relies on a preview release of .NET Core:
 
-앱이 .NET Core의 미리 보기 릴리스를 사용하는 경우 다음 방법 중 하나를 사용합니다.
+* [Install the preview site extension](#install-the-preview-site-extension).
+* [Deploy a self-contained preview app](#deploy-a-self-contained-preview-app).
+* [Use Docker with Web Apps for containers](#use-docker-with-web-apps-for-containers).
+-->
+## <a name="deploy-aspnet-core-30-to-azure-app-service"></a>Azure App Service에 ASP.NET Core 3.0 배포
+
+Azure App Service에 ASP.NET Core 3.0을 곧 제공할 예정입니다.
+
+앱이 .NET Core 3.0을 사용하는 경우 다음 방법 중 하나를 사용합니다.
 
 * [미리 보기 사이트 확장을 설치](#install-the-preview-site-extension)합니다.
 * [자체 포함 미리 보기 앱을 배포합니다](#deploy-a-self-contained-preview-app).
@@ -230,7 +251,7 @@ ARM 템플릿을 사용하여 앱을 만들고 배포하는 경우 `siteextensio
 
 1. 명령 셸에서 [dotnet publish](/dotnet/core/tools/dotnet-publish) 명령을 사용하여 릴리스 구성에 있는 앱을 게시합니다. 다음 예제에서는 앱이 프레임워크 종속 앱으로 게시됩니다.
 
-   ```dotnetcli
+   ```console
    dotnet publish --configuration Release
    ```
 
@@ -268,7 +289,7 @@ ARM 템플릿을 사용하여 앱을 만들고 배포하는 경우 `siteextensio
 
 1. 명령 셸에서 [dotnet publish](/dotnet/core/tools/dotnet-publish) 명령을 사용하여 호스트의 런타임에 대한 릴리스 구성에 있는 앱을 게시합니다. 다음 예제에서 앱은 `win-x86` RID에 게시됩니다. `--runtime` 옵션에 제공된 RID를 프로젝트 파일의 `<RuntimeIdentifier>`(또는 `<RuntimeIdentifiers>`) 속성에 제공해야 합니다.
 
-   ```dotnetcli
+   ```console
    dotnet publish --configuration Release --runtime win-x86
    ```
 

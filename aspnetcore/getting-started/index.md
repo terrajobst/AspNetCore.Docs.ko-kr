@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core를 사용하여 기본 Hello World 앱을 만들고 실행하는 간단한 자습서입니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/15/2019
+ms.date: 09/22/2019
 uid: getting-started
-ms.openlocfilehash: d1edf91f1b37ba2b69732471dc6c1f306ac5ad24
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 0f05ab120d64832a4bc2fd70921efc7238ee9eac
+ms.sourcegitcommit: d34b2627a69bc8940b76a949de830335db9701d3
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081115"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71187062"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>자습서: ASP.NET Core 시작
 
@@ -31,7 +31,7 @@ ms.locfileid: "71081115"
 
 ## <a name="prerequisites"></a>전제 조건
 
-* [.NET Core 2.2 SDK](https://www.microsoft.com/net/download/all)
+[!INCLUDE[](~/includes/3.0-SDK.md)]
 
 ## <a name="create-a-web-app-project"></a>웹앱 프로젝트 만들기
 
@@ -40,6 +40,11 @@ ms.locfileid: "71081115"
 ```dotnetcli
 dotnet new webapp -o aspnetcoreapp
 ```
+
+이전 명령은
+
+* 새 웹앱을 만듭니다.  
+* `-o` 매개 변수는 앱의 원본 파일을 사용하여 *aspnetcoreapp*라는 이름의 디렉터리를 만듭니다.
 
 ### <a name="trust-the-development-certificate"></a>개발 인증서 신뢰
 
