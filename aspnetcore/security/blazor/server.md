@@ -5,14 +5,14 @@ description: Blazor Server 앱에 대 한 보안 위협을 완화 하는 방법�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/07/2019
+ms.date: 09/23/2019
 uid: security/blazor/server
-ms.openlocfilehash: 72788980ff7c7bd56f55e4e84d820a3684f7275e
-ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
+ms.openlocfilehash: 706f504738d9c6e5af3c368c382424f2e206bcbf
+ms.sourcegitcommit: 79eeb17604b536e8f34641d1e6b697fb9a2ee21f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/13/2019
-ms.locfileid: "70964241"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71211715"
 ---
 # <a name="secure-aspnet-core-blazor-server-apps"></a>Blazor Server 앱 보안 ASP.NET Core
 
@@ -99,7 +99,7 @@ DoS (서비스 거부) 공격에는 서버에서 하나 이상의 리소스를 �
 | `CircuitOptions.MaxBufferedUnacknowledgedRenderBatches` | 승인 되지 않은 최대 렌더링 일괄 처리 수 서버는 지정 된 시간에 회로 당 메모리에 유지 하 여 강력한 다시 연결을 지원 합니다. 한도에 도달 하면 클라이언트에서 하나 이상의 일괄 처리를 승인할 때까지 서버가 새 렌더링 일괄 처리 생성을 중지 합니다. | 10 |
 
 
-| SignalR 및 ASP.NET Core 제한             | Description | 기본값 |
+| SignalR 및 ASP.NET Core 제한             | 설명 | 기본값 |
 | ------------------------------------------ | ----------- | ------- |
 | `CircuitOptions.MaximumReceiveMessageSize` | 개별 메시지의 메시지 크기입니다. | 32 KB |
 
@@ -145,7 +145,7 @@ JavaScript에서 .NET 메서드로의 호출을 신뢰 하지 않습니다. .NET
 
 이벤트는 Blazor 서버 앱에 대 한 진입점을 제공 합니다. 웹 앱에서 끝점을 보호 하는 것과 동일한 규칙이 Blazor Server 앱에서 이벤트 처리에 적용 됩니다. 악의적인 클라이언트는 이벤트에 대 한 페이로드로 전송 하려는 모든 데이터를 보낼 수 있습니다.
 
-예를 들어:
+예:
 
 * 에 대 한 `<select>` 변경 이벤트는 앱이 클라이언트에 제공 하는 옵션에 포함 되지 않은 값을 보낼 수 있습니다.
 * 는 `<input>` 클라이언트 쪽 유효성 검사를 무시 하 고 모든 텍스트 데이터를 서버에 보낼 수 있습니다.

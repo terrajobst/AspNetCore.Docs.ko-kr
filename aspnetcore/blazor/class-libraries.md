@@ -5,14 +5,14 @@ description: 외부 구성 요소 라이브러리의 Blazor apps에 구성 요�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/13/2019
+ms.date: 09/23/2019
 uid: blazor/class-libraries
-ms.openlocfilehash: 91c4ffb29649c162fc15e5cb70dc60144b53afea
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: d9ef276357e95d97b7d89427c5e237aceea7a0d3
+ms.sourcegitcommit: 79eeb17604b536e8f34641d1e6b697fb9a2ee21f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71080658"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71207105"
 ---
 # <a name="aspnet-core-razor-components-class-libraries"></a>ASP.NET Core Razor 구성 요소 클래스 라이브러리
 
@@ -33,7 +33,7 @@ Blazor에 대 한 환경을 <xref:blazor/get-started> 구성 하려면 문서의
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. 새 프로젝트를 만듭니다.
-1. **Razor 클래스 라이브러리**를 선택 합니다. **다음**을 선택합니다.
+1. **Razor 클래스 라이브러리**를 선택 합니다. **새로 만들기**를 선택합니다.
 1. **새 Razor 클래스 라이브러리 만들기** 대화 상자에서 **만들기**를 선택 합니다.
 1. **프로젝트 이름** 필드에 프로젝트 이름을 제공하거나 기본 프로젝트 이름을 수락합니다. 이 항목의 예제에서는 프로젝트 이름을 `MyComponentLib1`사용 합니다. **만들기**를 선택합니다.
 1. 솔루션에 RCL을 추가 합니다.

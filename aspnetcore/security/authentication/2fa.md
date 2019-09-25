@@ -7,12 +7,12 @@ ms.author: riande
 ms.date: 09/22/2018
 ms.custom: mvc, seodec18
 uid: security/authentication/2fa
-ms.openlocfilehash: 96b4cc98f191d7c24637b8f352acbed3f46806f8
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 68219579be9b7a7b25da6e348054e1ff2015cf5f
+ms.sourcegitcommit: e54672f5c493258dc449fac5b98faf47eb123b28
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64893430"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71248387"
 ---
 # <a name="two-factor-authentication-with-sms-in-aspnet-core"></a>ASP.NET Core에서 SMS 사용한 2 단계 인증
 
@@ -27,29 +27,29 @@ ms.locfileid: "64893430"
 
 ## <a name="create-a-new-aspnet-core-project"></a>새 ASP.NET Core 프로젝트 만들기
 
-라는 새 ASP.NET Core 웹 앱 만들기 `Web2FA` 개별 사용자 계정을 사용 합니다. 지침에 따라 <xref:security/enforcing-ssl> 를 설정 하 고 HTTPS가 필요 합니다.
+라는 새 ASP.NET Core 웹 앱 만들기 `Web2FA` 개별 사용자 계정을 사용 합니다. 의 <xref:security/enforcing-ssl> 지침에 따라 HTTPS를 설정 및 요구 합니다.
 
 ### <a name="create-an-sms-account"></a>SMS 계정 만들기
 
-예를 들어 SMS 계정을 만들 [twilio](https://www.twilio.com/) 하거나 [ASPSMS](https://www.aspsms.com/asp.net/identity/core/testcredits/)합니다. 인증 자격 증명을 기록 (twilio: accountSid 및 authToken, ASPSMS에 대 한 합니다. 사용자 키 및 암호)입니다.
+예를 들어 SMS 계정을 만들 [twilio](https://www.twilio.com/) 하거나 [ASPSMS](https://www.aspsms.com/asp.net/identity/core/testcredits/)합니다. 인증 자격 증명을 기록 합니다 (twilio: accountSid 및 authToken에 대해 다음을 수행 합니다. Userkey 및 Password).
 
 #### <a name="figuring-out-sms-provider-credentials"></a>SMS 공급자 자격 증명 확인
 
-**Twilio:**
+**Twilio**
 
-Twilio 계정의 대시보드 탭에서 복사 합니다 **계정 SID** 하 고 **인증 토큰**합니다.
+Twilio 계정의 대시보드 탭에서 **계정 SID** 및 **인증 토큰**을 복사 합니다.
 
 **ASPSMS:**
 
-계정 설정을에서 이동 **Userkey** 와 함께 복사 및 사용자 **암호**합니다.
+계정 설정에서 **Userkey** 로 이동 하 여 **암호**와 함께 복사 합니다.
 
 키 암호 관리자 도구를 사용 하 여 이러한 값을 나중에 저장 됩니다 것 `SMSAccountIdentification` 고 `SMSAccountPassword`입니다.
 
 #### <a name="specifying-senderid--originator"></a>SenderID 지정 / 송신자
 
-**Twilio:** 숫자 탭에서 복사 하면 Twilio **전화번호**합니다.
+**Twilio** 숫자 탭에서 Twilio **전화 번호**를 복사 합니다.
 
-**ASPSMS:** 보낸 사람 잠금 해제 메뉴 내에서 하나 이상의 보낸 사람을 잠금 해제 하거나 (모든 네트워크에서 지원 되지 않음)는 영숫자 보낸 사람을 선택 합니다.
+**ASPSMS:** 보낸 사람 잠금 해제 메뉴 내에서 하나 이상의 발신자의 잠금을 해제 하거나 영숫자 송신자 (모든 네트워크에서 지원 되지 않음)를 선택 합니다.
 
 저장 하겠습니다. 나중에 키에 암호 관리자 도구를 사용 하 여이 값 `SMSAccountFrom`합니다.
 
@@ -70,7 +70,7 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 
 * SMS 공급자에 대 한 NuGet 패키지를 추가 합니다. 관리자 콘솔 (PMC (패키지)를 실행 합니다.
 
-**Twilio:**
+**Twilio**
 
 `Install-Package Twilio`
 
@@ -80,9 +80,11 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 
 * 코드를 추가 합니다 *Services/MessageServices.cs* SMS를 사용 하도록 설정 하려면 파일입니다. Twilio 또는 ASPSMS 섹션 중 하나를 사용 합니다.
 
-**Twilio:** [!code-csharp[](2fa/sample/Web2FA/Services/MessageServices_twilio.cs)]
+**Twilio**  
+[!code-csharp[](2fa/sample/Web2FA/Services/MessageServices_twilio.cs)]
 
-**ASPSMS:** [!code-csharp[](2fa/sample/Web2FA/Services/MessageServices_ASPSMS.cs)]
+**ASPSMS:**  
+[!code-csharp[](2fa/sample/Web2FA/Services/MessageServices_ASPSMS.cs)]
 
 ### <a name="configure-startup-to-use-smsoptions"></a>사용 하는 시작 구성 `SMSoptions`
 
@@ -92,7 +94,7 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 
 ### <a name="enable-two-factor-authentication"></a>2 단계 인증을 사용 하도록 설정
 
-엽니다는 *Views/Manage/Index.cshtml* Razor 뷰 파일과 주석 문자 (따라서 없는 태그는 주석) 제거 합니다.
+*Views/Manage/Index. cshtml* Razor 뷰 파일을 열고 주석 문자를 제거 합니다. 태그는 주석 처리 되지 않습니다.
 
 ## <a name="log-in-with-two-factor-authentication"></a>2 단계 인증으로 로그인
 
@@ -140,7 +142,7 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 
 ## <a name="account-lockout-for-protecting-against-brute-force-attacks"></a>무차별 대입 공격 으로부터 보호 하기 위한 계정 잠금
 
-2FA를 사용 하 여 계정 잠금 것이 좋습니다. 사용자가 로컬 계정 또는 소셜 계정을 통해 로그인 되 면 각 실패 한 시도 2FA에 저장 됩니다. 사용자가 잠겨 실패 한 최대 액세스 시도 횟수에 도달 하는 경우 (기본값: 5 분 잠금 5에 대 한 액세스 시도가 실패 한 후). 실패 한 액세스 시도 횟수를 다시 설정 하 고 시계를 다시 설정 하는 성공적으로 인증 합니다. 최대 액세스 시도 실패 하 고 사용 하 여 잠금 시간을 설정할 수 있습니다 [MaxFailedAccessAttempts](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions.maxfailedaccessattempts) 하 고 [DefaultLockoutTimeSpan](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions.defaultlockouttimespan)합니다. 다음 10 분 동안 10에 대 한 액세스 시도가 실패 한 후 계정 잠금을 구성 합니다.
+2FA를 사용 하 여 계정 잠금 것이 좋습니다. 사용자가 로컬 계정 또는 소셜 계정을 통해 로그인 되 면 각 실패 한 시도 2FA에 저장 됩니다. 실패 한 최대 액세스 시도 횟수에 도달 하면 사용자가 잠깁니다 (기본값: 5 분 액세스 시도 실패 후 5 분 잠금). 실패 한 액세스 시도 횟수를 다시 설정 하 고 시계를 다시 설정 하는 성공적으로 인증 합니다. 최대 액세스 시도 실패 하 고 사용 하 여 잠금 시간을 설정할 수 있습니다 [MaxFailedAccessAttempts](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions.maxfailedaccessattempts) 하 고 [DefaultLockoutTimeSpan](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions.defaultlockouttimespan)합니다. 다음 10 분 동안 10에 대 한 액세스 시도가 실패 한 후 계정 잠금을 구성 합니다.
 
 [!code-csharp[](2fa/sample/Web2FA/Startup.cs?name=snippet2&highlight=13-17)]
 
