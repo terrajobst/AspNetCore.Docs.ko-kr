@@ -6,18 +6,18 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/03/2019
 uid: grpc/aspnetcore
-ms.openlocfilehash: 28e6b8589bbe0b6a3723b64736c723c883302571
-ms.sourcegitcommit: e6bd2bbe5683e9a7dbbc2f2eab644986e6dc8a87
+ms.openlocfilehash: 18a6dd2ddd4f3c3c4466e3b96dd1748fd0972e39
+ms.sourcegitcommit: fae6f0e253f9d62d8f39de5884d2ba2b4b2a6050
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/03/2019
-ms.locfileid: "70238169"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71250795"
 ---
 # <a name="grpc-services-with-aspnet-core"></a>ASP.NET Core를 사용하는 gRPC 서비스
 
 이 문서에서는 ASP.NET Core를 사용 하 여 gRPC 서비스를 시작 하는 방법을 보여 줍니다.
 
-## <a name="prerequisites"></a>필수 구성 요소
+## <a name="prerequisites"></a>전제 조건
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -67,7 +67,7 @@ ASP.NET Core 미들웨어 및 기능이 라우팅 파이프라인을 공유 하�
 Kestrel gRPC 끝점:
 
 * HTTP/2가 필요 합니다.
-* HTTPS를 사용 하 여 보안을 설정 해야 합니다.
+* [TLS (전송 계층 보안](https://tools.ietf.org/html/rfc5246))로 보호 되어야 합니다.
 
 #### <a name="http2"></a>HTTP/2
 
@@ -75,58 +75,28 @@ gRPC에는 h t t p/2가 필요 합니다. ASP.NET Core에 대 한 gRPC는 HttpRe
 
 Kestrel은 최신 운영 체제에서 [HTTP/2를 지원](xref:fundamentals/servers/kestrel#http2-support) 합니다. Kestrel 끝점은 기본적으로 HTTP/1.1 및 HTTP/2 연결을 지원 하도록 구성 됩니다.
 
-#### <a name="https"></a>HTTPS
+#### <a name="tls"></a>TLS
 
-GRPC에 사용 되는 kestrel 끝점은 HTTPS로 보호 되어야 합니다. 개발 시에는 ASP.NET Core 개발 인증서가 있는 경우 `https://localhost:5001` 에서 HTTPS 끝점이 자동으로 만들어집니다. 구성이 필요하지 않습니다.
+GRPC에 사용 되는 kestrel 끝점은 TLS로 보호 되어야 합니다. 개발에서 TLS로 보안이 설정 된 끝점은 ASP.NET Core 개발 인증서 `https://localhost:5001` 가 있는 경우에서 자동으로 만들어집니다. 구성이 필요하지 않습니다. 접두사 `https` 는 kestrel 끝점이 TLS를 사용 하 고 있는지 확인 합니다.
 
-프로덕션 내에 HTTPS가 명시적으로 구성되어야 합니다. 다음 *appsettings* 예제에서는 HTTPS를 사용 하 여 보호 되는 HTTP/2 끝점이 제공 됩니다.
+프로덕션에서는 TLS를 명시적으로 구성 해야 합니다. 다음 *appsettings* 예에서는 TLS로 보호 되는 HTTP/2 끝점이 제공 됩니다.
 
-```json
-{
-  "Kestrel": {
-    "Endpoints": {
-      "HttpsDefaultCert": {
-        "Url": "https://localhost:5001",
-        "Protocols": "Http2"
-      }
-    },
-    "Certificates": {
-      "Default": {
-        "Path": "<path to .pfx file>",
-        "Password": "<certificate password>"
-      }
-    }
-  }
-}
-```
+[!code-json[](~/grpc/aspnetcore/sample/appsettings.json?highlight=4)]
 
 또는 *Program.cs*에서 Kestrel 끝점을 구성할 수 있습니다.
 
-```csharp
-public static IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
-        .ConfigureWebHostDefaults(webBuilder =>
-        {
-            webBuilder.ConfigureKestrel(options =>
-            {
-                // This endpoint will use HTTP/2 and HTTPS on port 5001.
-                options.Listen(IPAddress.Any, 5001, listenOptions =>
-                {
-                    listenOptions.Protocols = HttpProtocols.Http2;
-                    listenOptions.UseHttps("<path to .pfx file>", 
-                        "<certificate password>");
-                });
-            });
-            webBuilder.UseStartup<Startup>();
-        });
-```
+[!code-csharp[](~/grpc/aspnetcore/sample/Program.cs?highlight=7&name=snippet)]
 
-HTTP/2 끝점이 HTTPS 없이 구성 된 경우 끝점의 [ListenOptions](xref:fundamentals/servers/kestrel#listenoptionsprotocols) 을로 `HttpProtocols.Http2`설정 해야 합니다. `HttpProtocols.Http1AndHttp2`HTTP/2를 협상 하려면 HTTPS가 필요 하기 때문에를 사용할 수 없습니다. HTTPS를 사용 하지 않으면 끝점에 대 한 모든 연결의 기본값은 HTTP/1.1 및 gRPC 호출이 실패 합니다.
+#### <a name="protocol-negotiation"></a>프로토콜 협상
 
-Kestrel에서 HTTP/2 및 HTTPS를 사용 하도록 설정 하는 방법에 대 한 자세한 내용은 [kestrel 끝점 구성](xref:fundamentals/servers/kestrel#endpoint-configuration)을 참조 하세요.
+TLS는 통신 보안을 유지 하는 데 사용 됩니다. 끝점에서 여러 프로토콜을 지 원하는 경우 클라이언트와 서버 간의 연결 프로토콜을 협상 하는 데 TLS [응용 프로그램 계층 프로토콜 협상 (ALPN)](https://tools.ietf.org/html/rfc7301#section-3) 핸드셰이크가 사용 됩니다. 이 협상은 연결에서 HTTP/1.1 또는 HTTP/2를 사용 하는지 여부를 결정 합니다.
+
+TLS 없이 HTTP/2 끝점을 구성 하는 경우 끝점의 [ListenOptions](xref:fundamentals/servers/kestrel#listenoptionsprotocols) 을로 `HttpProtocols.Http2`설정 해야 합니다. 여러 프로토콜 (예: `HttpProtocols.Http1AndHttp2`)이 있는 끝점은 협상이 없으므로 TLS 없이 사용할 수 없습니다. 안전 하지 않은 끝점에 대 한 모든 연결은 기본적으로 HTTP/1.1 및 gRPC 호출에 실패 합니다.
+
+Kestrel을 사용 하 여 HTTP/2 및 TLS를 사용 하는 방법에 대 한 자세한 내용은 [kestrel 끝점 구성](xref:fundamentals/servers/kestrel#endpoint-configuration)을 참조 하세요.
 
 > [!NOTE]
-> macOS는 [TLS (Transport Layer Security)](https://tools.ietf.org/html/rfc5246)가 있는 ASP.NET Core grpc를 지원 하지 않습니다. macOS에서 gRPC 서비스를 성공적으로 실행하려면 추가 구성이 필요합니다. 자세한 내용은 [macOS에서 ASP.NET Core gRPC 앱을 시작할 수 없음](xref:grpc/troubleshoot#unable-to-start-aspnet-core-grpc-app-on-macos)을 참조하세요.
+> macOS는 TLS를 사용하는 ASP.NET Core gRPC를 지원하지 않습니다. macOS에서 gRPC 서비스를 성공적으로 실행하려면 추가 구성이 필요합니다. 자세한 내용은 [macOS에서 ASP.NET Core gRPC 앱을 시작할 수 없음](xref:grpc/troubleshoot#unable-to-start-aspnet-core-grpc-app-on-macos)을 참조하세요.
 
 ## <a name="integration-with-aspnet-core-apis"></a>ASP.NET Core Api와 통합
 

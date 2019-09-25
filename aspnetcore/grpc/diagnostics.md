@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/23/2019
 uid: grpc/diagnostics
-ms.openlocfilehash: ce6ad96d9e26c9cd3844093536745f8f9bea4a76
-ms.sourcegitcommit: 0365af91518004c4a44a30dc3a8ac324558a399b
+ms.openlocfilehash: 7194e91b40a08c4a7ee619b8f207900af2683aa1
+ms.sourcegitcommit: fae6f0e253f9d62d8f39de5884d2ba2b4b2a6050
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71204326"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71250731"
 ---
 # <a name="logging-and-diagnostics-in-grpc-on-net"></a>.NET의 gRPC에서 로깅 및 진단
 
@@ -28,11 +28,11 @@ GRPC 서비스는 ASP.NET Core에서 호스트 되므로 ASP.NET Core 로깅 시
 
 grpc는 범주 아래에 `Grpc` 로그를 추가 합니다. Grpc에서 자세한 로그를 사용 하도록 설정 하려면 `Grpc` 의 `LogLevel` `Logging`하위 섹션 `Debug` 에 다음 항목을 추가 하 여 *appsettings* 파일의 수준에 대 한 접두사를 구성 합니다.
 
-[!code-json[](diagnostics/logging-config.json?highlight=7)]
+[!code-json[](diagnostics/sample/logging-config.json?highlight=7)]
 
 다음을 사용 하 여 `ConfigureLogging` *Startup.cs* 에서 구성할 수도 있습니다.
 
-[!code-csharp[](diagnostics/logging-config-code.cs?highlight=5)]
+[!code-csharp[](diagnostics/sample/logging-config-code.cs?highlight=5)]
 
 JSON 기반 구성을 사용 하지 않는 경우 구성 시스템에서 다음 구성 값을 설정 합니다.
 
@@ -46,7 +46,7 @@ JSON 기반 구성을 사용 하지 않는 경우 구성 시스템에서 다음 
 
 Grpc 서비스 `Debug` 수준에서 콘솔 출력의 예는 다음과 같습니다.
 
-```
+```console
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
       Request starting HTTP/2 POST https://localhost:5001/Greet.Greeter/SayHello application/grpc
 info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
@@ -82,19 +82,19 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 
 .Net 클라이언트에서 로그를 가져오기 위해 클라이언트의 채널을 만들 `GrpcChannelOptions.LoggerFactory` 때 속성을 설정할 수 있습니다. ASP.NET Core 앱에서 gRPC 서비스를 호출 하는 경우에는 DI (종속성 주입)에서로 거 팩터리를 확인할 수 있습니다.
 
-[!code-csharp[](diagnostics/net-client-dependency-injection.cs?highlight=7,16)]
+[!code-csharp[](diagnostics/sample/net-client-dependency-injection.cs?highlight=7,16)]
 
 클라이언트 로깅을 사용 하도록 설정 하는 다른 방법은 [Grpc 클라이언트 팩터리](xref:grpc/clientfactory) 를 사용 하 여 클라이언트를 만드는 것입니다. 클라이언트 팩터리에 등록 되 고 DI에서 확인 된 gRPC 클라이언트는 자동으로 앱의 구성 된 로깅을 사용 합니다.
 
 앱에서 DI를 사용 하지 않는 경우 [server.loggerfactory](xref:Microsoft.Extensions.Logging.LoggerFactory.Create*)를 사용 하 `ILoggerFactory` 여 새 인스턴스를 만들 수 있습니다. 이 메서드에 액세스 하려면 앱에 [Microsoft Extensions.](https://www.nuget.org/packages/microsoft.extensions.logging/) i n i 패키지를 추가 합니다.
 
-[!code-csharp[](diagnostics/net-client-loggerfactory-create.cs?highlight=1,8)]
+[!code-csharp[](diagnostics/sample/net-client-loggerfactory-create.cs?highlight=1,8)]
 
 ### <a name="sample-logging-output"></a>샘플 로깅 출력
 
 다음은 grpc 클라이언트 `Debug` 수준에 있는 콘솔 출력의 예입니다.
 
-```
+```console
 dbug: Grpc.Net.Client.Internal.GrpcCall[1]
       Starting gRPC call. Method type: 'Unary', URI: 'https://localhost:5001/Greet.Greeter/SayHello'.
 dbug: Grpc.Net.Client.Internal.GrpcCall[6]
