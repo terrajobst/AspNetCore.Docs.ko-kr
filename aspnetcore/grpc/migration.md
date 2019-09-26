@@ -4,14 +4,14 @@ author: juntaoluo
 description: ASP.NET Core 스택 위에서 실행 되도록 기존 C 코어 기반 gRPC 앱을 이동 하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
-ms.date: 03/31/2019
+ms.date: 09/25/2019
 uid: grpc/migration
-ms.openlocfilehash: 39aa711a1a47cf11ec5b08903b4130c7caa1501c
-ms.sourcegitcommit: 476ea5ad86a680b7b017c6f32098acd3414c0f6c
+ms.openlocfilehash: 8f0d9dd980fa3281f30dc29d329d10ccd352ae72
+ms.sourcegitcommit: 994da92edb0abf856b1655c18880028b15a28897
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/14/2019
-ms.locfileid: "69022292"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71278706"
 ---
 # <a name="migrating-grpc-services-from-c-core-to-aspnet-core"></a>C 코어에서 ASP.NET Core로 gRPC 서비스 마이그레이션
 
@@ -49,14 +49,14 @@ public void ConfigureServices(IServiceCollection services)
 
 C 코어 기반 앱 `grpc.max_receive_message_length` 에서 및 `grpc.max_send_message_length` 와 같은 설정은 [서버 인스턴스를 생성할](https://grpc.io/grpc/csharp/api/Grpc.Core.Server.html#Grpc_Core_Server__ctor_System_Collections_Generic_IEnumerable_Grpc_Core_ChannelOption__)때로 `ChannelOption` 구성 됩니다.
 
-ASP.NET Core에서 grpc는 `GrpcServiceOptions` 유형을 통해 구성을 제공 합니다. 예를 들어 gRPC 서비스의 최대 수신 메시지 크기는 다음을 통해 `AddGrpc`구성할 수 있습니다.
+ASP.NET Core에서 grpc는 `GrpcServiceOptions` 유형을 통해 구성을 제공 합니다. 예를 들어 gRPC 서비스의 최대 수신 메시지 크기는를 통해 `AddGrpc`구성할 수 있습니다. 다음 예에서는 기본값 `ReceiveMaxMessageSize` 4mb를 16mb로 변경 합니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddGrpc(options =>
     {
-        options.ReceiveMaxMessageSize = 16384; // 16 MB
+        options.ReceiveMaxMessageSize = 16 * 1024 * 1024; // 16 MB
     });
 }
 ```
