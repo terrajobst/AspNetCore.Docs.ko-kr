@@ -30,7 +30,7 @@ Kestrel은 ASP.NET Core 프로젝트 템플릿에 포함된 기본 웹 서버입
 
   ![Kestrel이 역방향 프록시 서버 없이 직접 인터넷과 통신합니다.](kestrel/_static/kestrel-to-internet2.png)
 
-* [IIS(인터넷 정보 서비스)](https://www.iis.net/), [Nginx](https://nginx.org) 또는 [Apache](https://httpd.apache.org/)와 같은 *역방향 프록시 서버*와 함께 사용 역방향 프록시 서버는 인터넷에서 HTTP 요청을 받아서 Kestrel에 전달합니다.
+* [IIS(인터넷 정보 서비스)](https://www.iis.net/), [Nginx](https://nginx.org) 또는 [Apache](https://httpd.apache.org/) 같은 *역방향 프록시 서버*와 함께 사용합니다. 역방향 프록시 서버는 인터넷에서 HTTP 요청을 받아서 Kestrel에 전달합니다.
 
   ![Kestrel이 IIS, Nginx 또는 Apache 같은 역방향 프록시 서버를 통해 간접적으로 인터넷과 통신합니다.](kestrel/_static/kestrel-to-internet.png)
 
@@ -50,7 +50,7 @@ ASP.NET Core는 다음과 함께 제공됩니다.
 
 [IIS](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture) 또는 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)를 사용하는 경우 앱은 다음 중 하나에서 실행됩니다.
 
-* IIS HTTP 서버를 사용하는 IIS 작업자 프로세스([In Process 호스팅 모델](#hosting-models))와 동일한 프로세스에서 권장되는 구성은 *In process*입니다.
+* IIS 작업자 프로세스와 동일한 프로세스에서 IIS HTTP 서버를 사용하여 실행됩니다([In-Process 호스팅 모델](#hosting-models)). *In-Process*가 권장되는 구성입니다.
 * IIS 작업자 프로세스와 다른 별도의 프로세스에서 [Kestrel 서버](#kestrel)를 사용하여 실행됩니다([Out-of-Process 호스팅 모델](#hosting-models)).
 
 [ASP.NET Core 모듈](xref:host-and-deploy/aspnet-core-module)은 IIS와 In-Process IIS HTTP 서버 또는 Kestrel 간의 네이티브 IIS 요청을 처리하는 네이티브 IIS 모듈입니다. 자세한 내용은 <xref:host-and-deploy/aspnet-core-module>을 참조하세요.

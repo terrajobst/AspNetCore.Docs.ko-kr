@@ -20,17 +20,7 @@
 
 ### <a name="add-nuget-packages-and-ef-tools"></a>NuGet 패키지 및 EF 도구 추가
 
-다음 .NET Core CLI 명령을 실행합니다.
-
-```dotnetcli
-dotnet tool install --global dotnet-ef --version 3.0.0-*
-dotnet add package Microsoft.EntityFrameworkCore.SQLite --version 3.0.0-*
-dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 3.0.0-*
-dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.0.0-*
-dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 3.0.0-*
-```
-
-위의 명령은 .NET CLI 및 여러 패키지의 Entity Framework Core 도구를 프로젝트에 추가합니다. 스캐폴딩에는 `Microsoft.VisualStudio.Web.CodeGeneration.Design` 패키지가 필요합니다.
+[!INCLUDE[](~/includes/add-EF-NuGet-SQLite-CLI.md)]
 
 <a name="reg"></a>
 

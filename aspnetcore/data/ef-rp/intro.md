@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 07/22/2019
 uid: data/ef-rp/intro
-ms.openlocfilehash: 107b348b4484301b86eeb5528833914fe4c1eaf7
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 6b7d2ca1cea23efd195f1ae0e0a749c6d2d9b622
+ms.sourcegitcommit: d34b2627a69bc8940b76a949de830335db9701d3
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71080922"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71186960"
 ---
 # <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>ASP.NET Core에서 Entity Framework Core를 사용한 Razor 페이지 - 자습서 1/8
 
@@ -87,7 +87,7 @@ SQLite를 사용하도록 선택하는 경우 [SQLite용 DB 브라우저](https:
 * 프로젝트 폴더의 명령 프롬프트에서 다음 명령을 실행합니다.
 
   ```dotnetcli
-  dotnet tool install --global dotnet-ef --version 3.0.0-*
+  dotnet tool install --global dotnet-ef
   dotnet ef database update
   ```
 
@@ -106,7 +106,7 @@ SQLite를 사용하도록 선택하는 경우 [SQLite용 DB 브라우저](https:
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Visual Studio **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.
-* **새 ASP.NET Core 웹 애플리케이션**을 선택합니다.
+* **ASP.NET Core 웹 애플리케이션**을 선택합니다.
 * 프로젝트 이름을 *ContosoUniversity*로 지정합니다. 코드를 복사하여 붙여넣을 때 네임스페이스가 일치하도록 대문자 표시를 포함하여 정확한 이름을 사용해야 합니다.
 * 드롭다운에서 **.NET Core** 및 **ASP.NET Core 3.0**을 선택한 후 **웹 애플리케이션**을 선택합니다.
 
@@ -227,14 +227,17 @@ EF Core는 속성 이름이 `<navigation property name><primary key property nam
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * 다음 .NET Core CLI 명령을 실행하여 필요한 NuGet 패키지를 설치합니다.
-
+<!-- TO DO  After testing, Replace with
+[!INCLUDE[](~/includes/includes/add-EF-NuGet-SQLite-CLI.md)]
+remove dotnet tool install --global  below
+ -->
   ```dotnetcli
-  dotnet add package Microsoft.EntityFrameworkCore.SQLite --version 3.0.0-*
-  dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 3.0.0-*
-  dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.0.0-*
-  dotnet add package Microsoft.EntityFrameworkCore.Tools --version 3.0.0-*
-  dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 3.0.0-*
-  dotnet add package Microsoft.Extensions.Logging.Debug --version 3.0.0-*
+  dotnet add package Microsoft.EntityFrameworkCore.SQLite
+  dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+  dotnet add package Microsoft.EntityFrameworkCore.Design
+  dotnet add package Microsoft.EntityFrameworkCore.Tools
+  dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+  dotnet add package Microsoft.Extensions.Logging.Debug
   ```
 
   스캐폴딩에는 Microsoft.VisualStudio.Web.CodeGeneration.Design 패키지가 필요합니다. 앱은 SQL Server를 사용하지 않지만 스캐폴딩 도구에는 SQL Server 패키지가 필요합니다.
@@ -244,7 +247,7 @@ EF Core는 속성 이름이 `<navigation property name><primary key property nam
 * 다음 명령을 실행하여 [aspnet-codegenerator 스캐폴딩 도구](xref:fundamentals/tools/dotnet-aspnet-codegenerator)를 설치합니다.
 
   ```dotnetcli
-  dotnet tool install --global dotnet-aspnet-codegenerator --version 3.0.0-*
+  dotnet tool install --global dotnet-aspnet-codegenerator
   ```
 
 * 다음 명령을 실행하여 학생 페이지를 스캐폴드합니다.
@@ -760,7 +763,7 @@ EF Core를 사용하는 비동기 코드를 작성할 때 고려해야 할 몇 �
 
 
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [이 자습서의 YouTube 버전](https://www.youtube.com/watch?v=P7iTtQnkrNs)
 

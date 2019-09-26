@@ -5,12 +5,12 @@ description: 간단한 ASP.NET Core 앱에 모델을 추가합니다.
 ms.author: riande
 ms.date: 8/15/2019
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: b0efaf76cb2172f5b7568e42065b99b1259949de
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 5ad31a2536ad70590eaa767cf20068512241f36b
+ms.sourcegitcommit: 14b25156e34c82ed0495b4aff5776ac5b1950b5e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71082004"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71295471"
 ---
 # <a name="add-a-model-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 모델 추가
 
@@ -62,28 +62,14 @@ ms.locfileid: "71082004"
 PMC에서 다음 명령을 실행합니다.
 
 ```powershell
-Install-Package Microsoft.EntityFrameworkCore.SqlServer -IncludePrerelease
+Install-Package Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 앞의 명령은 EF Core SQL Server 공급자를 추가합니다. 이 공급자 패키지는 EF Core 패키지를 종속성으로 설치합니다. 추가 패키지는 자습서 뒷부분의 스캐폴딩 단계에서 자동으로 설치됩니다.
 
 # <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
-다음 .NET Core CLI 명령을 실행합니다.
-
-```dotnetcli
-dotnet tool install --global dotnet-ef --version 3.0.0-*
-dotnet add package Microsoft.EntityFrameworkCore.SQLite --version 3.0.0-*
-dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 3.0.0-*
-dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.0.0-*
-dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 3.0.0-*
-```
-
-앞의 명령은 다음을 추가합니다.
-
-* .NET CLI에 대한 Entity Framework Core 도구.
-* EF Core 패키지를 종속성으로 설치하는 EF Core SQLite 공급자.
-* 스캐폴딩에 필요한 패키지: `Microsoft.VisualStudio.Web.CodeGeneration.Design` 및 `Microsoft.EntityFrameworkCore.SqlServer`.
+[!INCLUDE[](~/includes/add-EF-NuGet-SQLite-CLI.md)]
 
 ---
 
@@ -169,7 +155,7 @@ using Microsoft.EntityFrameworkCore;
 
 * **보기:** 확인된 각 옵션의 기본값 선택 유지
 * **컨트롤러 이름:** 기본값 *MoviesController* 유지
-* **추가** 선택
+* **추가**를 선택합니다.
 
 Visual Studio에서 다음을 만듭니다.
 
@@ -188,7 +174,7 @@ Visual Studio에서 다음을 만듭니다.
     export PATH=$HOME/.dotnet/tools:$PATH
   ```
 
-* 다음 명령을 실행합니다.
+* 다음 명령 실행:
 
   ```dotnetcli
    dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -196,11 +182,11 @@ Visual Studio에서 다음을 만듭니다.
 
   [!INCLUDE [explains scaffold generated params](~/includes/mvc-intro/model4.md)]
 
-### <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+### <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * 프로젝트 디렉터리(*Program.cs*, *Startup.cs* 및 *.csproj* 파일이 포함된 디렉터리)에서 명령 창을 엽니다.
 
-* 다음 명령을 실행합니다.
+* 다음 명령 실행:
 
   ```dotnetcli
    dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -374,7 +360,7 @@ return View(movie);
 
 `Model` 개체가 강력한 형식이기 때문에(`IEnumerable<Movie>` 개체처럼) 루프의 각 항목은 `Movie`으로 입력됩니다. 즉, 여러 가지 이점 중에서 코드의 컴파일 시간 검사를 가져올 수 있습니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [태그 도우미](xref:mvc/views/tag-helpers/intro)
 * [전역화 및 지역화](xref:fundamentals/localization)
@@ -457,7 +443,7 @@ Visual Studio에서 다음을 만듭니다.
     export PATH=$HOME/.dotnet/tools:$PATH
   ```
 
-* 다음 명령을 실행합니다.
+* 다음 명령 실행:
 
   ```dotnetcli
    dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -467,7 +453,7 @@ Visual Studio에서 다음을 만듭니다.
 
 <!-- Mac -------------------------->
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * 프로젝트 디렉터리(*Program.cs*, *Startup.cs* 및 *.csproj* 파일이 포함된 디렉터리)에서 명령 창을 엽니다.
 * 스캐폴딩 도구를 설치합니다.
@@ -476,7 +462,7 @@ Visual Studio에서 다음을 만듭니다.
    dotnet tool install --global dotnet-aspnet-codegenerator
    ```
 
-* 다음 명령을 실행합니다.
+* 다음 명령 실행:
 
   ```dotnetcli
    dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -683,7 +669,7 @@ return View(movie);
 
 `Model` 개체가 강력한 형식이기 때문에(`IEnumerable<Movie>` 개체처럼) 루프의 각 항목은 `Movie`으로 입력됩니다. 즉, 여러 가지 이점 중에서 코드를 검사하는 컴파일 시간을 가져올 수 있습니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [태그 도우미](xref:mvc/views/tag-helpers/intro)
 * [전역화 및 지역화](xref:fundamentals/localization)

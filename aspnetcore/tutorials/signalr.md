@@ -4,20 +4,20 @@ author: bradygaster
 description: 이 자습서에서는 ASP.NET Core SignalR을 사용하는 채팅 앱을 만듭니다.
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 07/08/2019
+ms.date: 09/24/2019
 uid: tutorials/signalr
-ms.openlocfilehash: 2dfa994b9763a0139cb70cbf9847ac3b02b568e4
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 7a6574bd3c463f0890f5dc076944f1ab0f0c919a
+ms.sourcegitcommit: e54672f5c493258dc449fac5b98faf47eb123b28
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081964"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71248395"
 ---
 # <a name="tutorial-get-started-with-aspnet-core-signalr"></a>자습서: ASP.NET Core SignalR 시작
 
 ::: moniker range=">= aspnetcore-3.0"
 
-본 자습서에서는 SignalR을 이용해서 실시간 앱을 구현하기 위한 기본 사항을 알려줍니다. 다음과 같은 작업을 수행하는 방법을 살펴봅니다.
+본 자습서에서는 SignalR을 이용해서 실시간 앱을 구현하기 위한 기본 사항을 알려줍니다. 다음 방법을 알아봅니다.
 
 > [!div class="checklist"]
 > * 웹 프로젝트를 만듭니다.
@@ -40,7 +40,7 @@ ms.locfileid: "71081964"
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-3.0.md)]
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-3.0.md)]
 
@@ -73,7 +73,7 @@ ms.locfileid: "71081964"
    code -r SignalRChat
    ```
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * 메뉴에서 **파일 > 새 솔루션**을 선택합니다.
 
@@ -125,7 +125,7 @@ SignalR 서버 라이브러리는 ASP.NET Core 3.0 공유 프레임워크에 포
   * 파일을 *wwwroot/lib/signalr* 대상으로 복사합니다.
   * 지정된 파일만 복사합니다.
 
-  출력은 다음 예와 같습니다.
+  출력은 다음 예제와 유사합니다.
 
   ```console
   wwwroot/lib/signalr/dist/browser/signalr.js written to disk
@@ -133,7 +133,7 @@ SignalR 서버 라이브러리는 ASP.NET Core 3.0 공유 프레임워크에 포
   Installed library "@aspnet/signalr@next" to "wwwroot/lib/signalr"
   ```
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * **터미널**에서 다음 명령을 실행하여 LibMan을 설치합니다.
 
@@ -154,7 +154,7 @@ SignalR 서버 라이브러리는 ASP.NET Core 3.0 공유 프레임워크에 포
   * 파일을 *wwwroot/lib/signalr* 대상으로 복사합니다.
   * 지정된 파일만 복사합니다.
 
-  출력은 다음 예와 같습니다.
+  출력은 다음 예제와 유사합니다.
 
   ```console
   wwwroot/lib/signalr/dist/browser/signalr.js written to disk
@@ -224,7 +224,7 @@ SignalR 서버는 SignalR에 SignalR 요청을 전달하도록 구성되어야 �
   dotnet run -p SignalRChat.csproj
   ```
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * 메뉴에서 **실행 > 디버깅하지 않고 시작**을 선택합니다.
 
@@ -259,7 +259,7 @@ SignalR에 대해 자세히 알아보려면 다음을 참조하세요.
 
 ::: moniker range="< aspnetcore-3.0"
 
-본 자습서에서는 SignalR을 이용해서 실시간 앱을 구현하기 위한 기본 사항을 알려줍니다. 다음과 같은 작업을 수행하는 방법을 살펴봅니다.
+본 자습서에서는 SignalR을 이용해서 실시간 앱을 구현하기 위한 기본 사항을 알려줍니다. 다음 방법을 알아봅니다.
 
 > [!div class="checklist"]
 > * 웹 프로젝트를 만듭니다.
@@ -282,7 +282,7 @@ SignalR에 대해 자세히 알아보려면 다음을 참조하세요.
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-2.2.md)]
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-2.2.md)]
 
@@ -315,13 +315,13 @@ SignalR에 대해 자세히 알아보려면 다음을 참조하세요.
    code -r SignalRChat
    ```
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * 메뉴에서 **파일 > 새 솔루션**을 선택합니다.
 
 * **.NET Core > 앱 > ASP.NET Core 웹앱**(**ASP.NET Core 웹앱(MVC) 선택 안 함**)을 선택합니다.
 
-* **새로 만들기**를 선택합니다.
+* **다음**을 선택합니다.
 
 * 프로젝트 이름을 *SignalRChat*로 지정한 다음, **만들기**를 선택합니다.
 
@@ -368,7 +368,7 @@ SignalR 서버 라이브러리는 `Microsoft.AspNetCore.App` 메타패키지에 
   * 파일을 *wwwroot/lib/signalr* 대상으로 복사합니다.
   * 지정된 파일만 복사합니다.
 
-  출력은 다음 예와 같습니다.
+  출력은 다음 예제와 유사합니다.
 
   ```console
   wwwroot/lib/signalr/dist/browser/signalr.js written to disk
@@ -376,7 +376,7 @@ SignalR 서버 라이브러리는 `Microsoft.AspNetCore.App` 메타패키지에 
   Installed library "@aspnet/signalr@1.0.3" to "wwwroot/lib/signalr"
   ```
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * **터미널**에서 다음 명령을 실행하여 LibMan을 설치합니다.
 
@@ -397,7 +397,7 @@ SignalR 서버 라이브러리는 `Microsoft.AspNetCore.App` 메타패키지에 
   * 파일을 *wwwroot/lib/signalr* 대상으로 복사합니다.
   * 지정된 파일만 복사합니다.
 
-  출력은 다음 예와 같습니다.
+  출력은 다음 예제와 유사합니다.
 
   ```console
   wwwroot/lib/signalr/dist/browser/signalr.js written to disk
@@ -467,7 +467,7 @@ SignalR 서버는 SignalR에 SignalR 요청을 전달하도록 구성되어야 �
   dotnet run -p SignalRChat.csproj
   ```
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * 메뉴에서 **실행 > 디버깅하지 않고 시작**을 선택합니다.
 
@@ -485,9 +485,13 @@ SignalR 서버는 SignalR에 SignalR 요청을 전달하도록 구성되어야 �
 > 앱이 작동하지 않는 경우 브라우저 개발자 도구(F12)를 열고 콘솔로 이동합니다. HTML 및 JavaScript 코드와 관련된 오류를 볼 수 있습니다. 예를 들어 지정되지 않은 다른 폴더에 *signalr.js*를 넣었다고 가정합니다. 이 경우 해당 파일에 대한 참조는 작동하지 않으며 콘솔에 404 오류가 표시됩니다.
 > ![signalr.js 찾을 수 없음 오류](signalr/_static/2.x/f12-console.png)
 
+## <a name="additional-resources"></a>추가 리소스
+
+* [이 자습서의 YouTube 버전](https://www.youtube.com/watch?v=iKlVmu-r0JQ)
+
 ## <a name="next-steps"></a>다음 단계
 
-본 자습서에서는 다음 작업에 관한 방법을 학습했습니다.
+이 자습서에서는 다음 방법에 대해 알아보았습니다.
 
 > [!div class="checklist"]
 > * 웹앱 프로젝트를 만듭니다.

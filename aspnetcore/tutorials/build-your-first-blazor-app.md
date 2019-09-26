@@ -7,16 +7,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/15/2019
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: b433d793ae615bc4ece7c63bebd72d349adf43ee
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 10feb5467a6a6b5a43e0df739fa72902af9854da
+ms.sourcegitcommit: e5a74f882c14eaa0e5639ff082355e130559ba83
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081258"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71168365"
 ---
 # <a name="build-your-first-blazor-app"></a>첫 번째 Blazor 앱 빌드
 
 작성자: [Daniel Roth](https://github.com/danroth27) 및 [Luke Latham](https://github.com/guardrex)
+
+[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 이 자습서에서는 Blazor 앱을 빌드 및 수정하는 방법을 보여 줍니다.
 

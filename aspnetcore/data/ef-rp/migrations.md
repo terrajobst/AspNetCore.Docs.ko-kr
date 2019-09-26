@@ -5,12 +5,12 @@ description: 이 자습서에서는 ASP.NET Core MVC 앱에서 데이터 모델 
 ms.author: riande
 ms.date: 07/22/2019
 uid: data/ef-rp/migrations
-ms.openlocfilehash: 8a4929a905c6a488231d7d29e1101f6fd887477f
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: efcf62d56a7b4cee4780d5f0475b4ef363fe1897
+ms.sourcegitcommit: d34b2627a69bc8940b76a949de830335db9701d3
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71082075"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71187079"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---migrations---4-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 마이그레이션 - 4/8
 
@@ -45,7 +45,7 @@ Drop-Database
 * 명령 프롬프트에서 다음 명령을 실행하여 EF CLI 도구를 설치합니다.
 
   ```dotnetcli
-  dotnet tool install --global dotnet-ef --version 3.0.0-*
+  dotnet tool install --global dotnet-ef
   ```
 
 * 명령 프롬프트에서 프로젝트 폴더로 이동합니다. 프로젝트 폴더에는 *ContosoUniversity.csproj* 파일이 포함되어 있습니다.
@@ -140,7 +140,7 @@ Login failed for user 'user name'.
 
 솔루션은 명령 프롬프트에서 `dotnet ef database update`를 실행해야 할 수 있습니다.
 
-### <a name="additional-resources"></a>추가 자료
+### <a name="additional-resources"></a>추가 리소스
 
 * [EF Core CLI](/ef/core/miscellaneous/cli/dotnet).
 * [패키지 관리자 콘솔(Visual Studio)](/ef/core/miscellaneous/cli/powershell)
@@ -306,9 +306,9 @@ The login failed.
 Login failed for user 'user name'.
 ```
 
-해결책: `dotnet ef database update` 실행
+해결 방법: `dotnet ef database update` 실행
 
-### <a name="additional-resources"></a>추가 자료
+### <a name="additional-resources"></a>추가 리소스
 
 * [이 자습서의 YouTube 버전](https://www.youtube.com/watch?v=OWSUuMLKTJo)
 * [.NET Core CLI](/ef/core/miscellaneous/cli/dotnet)

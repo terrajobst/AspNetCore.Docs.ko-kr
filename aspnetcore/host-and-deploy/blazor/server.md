@@ -5,14 +5,14 @@ description: ASP.NET Core를 사용하여 Blazor 서버 앱을 호스트 및 배
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/07/2019
+ms.date: 09/23/2019
 uid: host-and-deploy/blazor/server
-ms.openlocfilehash: a393d620924d847e674a09972515a8130a15fc6a
-ms.sourcegitcommit: 092061c4f6ef46ed2165fa84de6273d3786fb97e
+ms.openlocfilehash: aedef7fe695dd4a0cbf04d3f3e9947f33f7afa40
+ms.sourcegitcommit: 79eeb17604b536e8f34641d1e6b697fb9a2ee21f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/13/2019
-ms.locfileid: "70964229"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71211612"
 ---
 # <a name="host-and-deploy-blazor-server"></a>Blazor 서버 호스트 및 배포
 

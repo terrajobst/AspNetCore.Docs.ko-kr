@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/12/2019
 uid: host-and-deploy/proxy-load-balancer
-ms.openlocfilehash: 4f04e6cae120ee88734855252542e2bfc2f194a0
-ms.sourcegitcommit: 849af69ee3c94cdb9fd8fa1f1bb8f5a5dda7b9eb
+ms.openlocfilehash: 3243f5d3254e6585ff9ca48900a3326aa9b6f502
+ms.sourcegitcommit: 8a36be1bfee02eba3b07b7a86085ec25c38bae6b
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/22/2019
-ms.locfileid: "67856164"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71219180"
 ---
 # <a name="configure-aspnet-core-to-work-with-proxy-servers-and-load-balancers"></a>프록시 서버 및 부하 분산 장치를 사용하도록 ASP.NET Core 구성
 
@@ -45,7 +45,7 @@ ASP.NET Core의 권장 구성에서 앱은 IIS/ASP.NET Core 모듈, Nginx 또는
 
 전달된 헤더 미들웨어 [기본 설정](#forwarded-headers-middleware-options)을 구성할 수 있습니다. 기본 설정은 다음과 같습니다.
 
-* 앱과 요청 소스 사이에는 ‘하나의 프록시’만 있습니다.
+* 앱과 요청 소스 사이에는 ‘하나의 프록시’만 있습니다. 
 * 알려진 프록시 및 알려진 네트워크의 경우 루프백 주소만 구성됩니다.
 * 전달된 헤더의 이름은 `X-Forwarded-For` 및 `X-Forwarded-Proto`입니다.
 
@@ -299,18 +299,18 @@ app.Run(async (context) =>
 app.Use(async (context, next) =>
 {
     // Request method, scheme, and path
-    _logger.LogDebug("Request Method: {METHOD}", context.Request.Method);
-    _logger.LogDebug("Request Scheme: {SCHEME}", context.Request.Scheme);
-    _logger.LogDebug("Request Path: {PATH}", context.Request.Path);
+    _logger.LogDebug("Request Method: {Method}", context.Request.Method);
+    _logger.LogDebug("Request Scheme: {Scheme}", context.Request.Scheme);
+    _logger.LogDebug("Request Path: {Path}", context.Request.Path);
 
     // Headers
     foreach (var header in context.Request.Headers)
     {
-        _logger.LogDebug("Header: {KEY}: {VALUE}", header.Key, header.Value);
+        _logger.LogDebug("Header: {Key}: {Value}", header.Key, header.Value);
     }
 
     // Connection: RemoteIp
-    _logger.LogDebug("Request RemoteIp: {REMOTE_IP_ADDRESS}", 
+    _logger.LogDebug("Request RemoteIp: {RemoteIpAddress}", 
         context.Connection.RemoteIpAddress);
 
     await next();
