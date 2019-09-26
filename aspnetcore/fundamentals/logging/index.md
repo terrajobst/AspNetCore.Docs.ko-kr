@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/11/2019
 uid: fundamentals/logging/index
-ms.openlocfilehash: 90b439603dd51ff02e40045b9420876d7200bef1
-ms.sourcegitcommit: 8a36be1bfee02eba3b07b7a86085ec25c38bae6b
+ms.openlocfilehash: 2d517a89c6002b5c85e98128605f95585354f8db
+ms.sourcegitcommit: e54672f5c493258dc449fac5b98faf47eb123b28
 ms.translationtype: HT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 09/24/2019
-ms.locfileid: "71219166"
+ms.locfileid: "71248252"
 ---
 # <a name="logging-in-net-core-and-aspnet-core"></a>.NET Core 및 ASP.NET Core의 로깅
 
@@ -936,7 +936,7 @@ ASP.NET Core와 호환되는 타사 로깅 프레임워크는 다음과 같습�
 타사 프레임워크를 사용하는 방법은 다음과 같이 기본 공급자 중 하나를 사용하는 방법과 비슷합니다.
 
 1. 프로젝트에 NuGet 패키지를 추가합니다.
-1. `ILoggerFactory`를 호출합니다.
+1. 로깅 프레임워크에서 제공하는 `ILoggerFactory` 확장 메서드를 호출합니다.
 
 자세한 내용은 각 공급자의 설명서를 참조하세요. 타사 로깅 공급자는 Microsoft에서 지원되지 않습니다.
 

@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
 ms.date: 09/19/2019
 uid: razor-pages/index
-ms.openlocfilehash: 7e27bbc84816bd282b2b8de936772eb5c597d74f
-ms.sourcegitcommit: 79eeb17604b536e8f34641d1e6b697fb9a2ee21f
+ms.openlocfilehash: bccdd7e5c1c90dd76ca1b788dbf09000c5cbe14b
+ms.sourcegitcommit: fae6f0e253f9d62d8f39de5884d2ba2b4b2a6050
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/24/2019
-ms.locfileid: "71207377"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71256182"
 ---
 # <a name="introduction-to-razor-pages-in-aspnet-core"></a>ASP.NET Core의 Razor 페이지 소개
 
@@ -281,7 +281,9 @@ Razor 페이지는 기본적으로 비 `GET` 동사에 대해서만 속성을 �
   * 클라이언트 쪽 유효성 검사.
   * 유효성 검사 오류 렌더링.
 
-* 다음 HTML을 생성합니다. [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create5.html)]
+* 다음 HTML을 생성합니다.
+
+  [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create5.html)]
 
 이름 값 없이 만들기 양식을 게시하면 “이름 필드는 필수입니다.”라는 오류 메시지가 표시됩니다. 양식에서. 클라이언트에서 JavaScript를 사용하는 경우 서버에 게시하지 않고 브라우저에 오류를 표시합니다.
 
@@ -396,7 +398,9 @@ Razor 페이지의 뷰 검색에는 *Pages* 폴더가 포함됩니다. MVC 컨�
 
 `@namespace`*는 기존 Razor 뷰에서도 동작합니다.*
 
-*Pages/Create.cshtml* 뷰 파일은 다음과 같습니다. [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create3.cshtml?highlight=2-3)]
+*Pages/Create.cshtml* 뷰 파일은 다음과 같습니다.
+
+[!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create3.cshtml?highlight=2-3)]
 
 *_ViewImports.cshtml* 및 앞의 레이아웃 파일로 업데이트된 *Pages/Create.cshtml* 뷰 파일:
 
