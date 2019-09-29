@@ -191,7 +191,7 @@ public class ValuesController : ControllerBase
 * 처리기가 범위를 벗어나기 전에 처리기의 서비스가 삭제될 수 있습니다.
 * 삭제된 처리기 서비스로 인해 처리기가 실패합니다.
 
-일단 등록되면 처리기 형식을 전달하여 <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.AddHttpMessageHandler*>를 호출할 수 있습니다.
+일단 등록되면 처리기 형식으로 전달하여 <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.AddHttpMessageHandler*>를 호출할 수 있습니다.
 
 ::: moniker-end
 
@@ -254,7 +254,7 @@ Polly 기반 처리기를 추가하는 데 사용할 수 있는 추가 확장 �
 
 `IHttpClientFactory`에서 `CreateClient`가 호출될 때마다 새로운 `HttpClient` 인스턴스가 반환됩니다. 명명된 클라이언트마다 <xref:System.Net.Http.HttpMessageHandler>가 존재합니다. 팩터리는 `HttpMessageHandler` 인스턴스의 수명을 관리합니다.
 
-`IHttpClientFactory`는 리소스 사용을 줄이기 위해 팩터리에서 만든 `HttpMessageHandler` 인스턴스를 풀링합니다. 수명이 만료되지 않은 경우, 새 `HttpClient` 인스턴스를 만들 때 풀에서 `HttpMessageHandler` 인스턴스가 재사용 될 수 있습니다.
+`IHttpClientFactory`는 리소스 사용을 줄이기 위해 팩터리에서 만든 `HttpMessageHandler` 인스턴스를 풀링합니다. 수명이 만료되지 않은 경우, 새 `HttpClient` 인스턴스를 만들 때 풀에서 `HttpMessageHandler` 인스턴스가 재사용될 수 있습니다.
 
 일반적으로 각 처리기는 자체적인 기본 HTTP 연결을 관리하므로 처리기의 풀링이 적합합니다. 필요한 것보다 많은 처리기를 만들면 연결 지연이 발생할 수 있습니다. 또한 일부 처리기는 무한정으로 연결을 열어 놓아 처리기가 DNS 변경에 대응하는 것을 막을 수 있습니다.
 
