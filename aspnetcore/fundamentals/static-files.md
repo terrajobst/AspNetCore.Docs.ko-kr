@@ -54,7 +54,7 @@ HTML, CSS, 이미지 및 JavaScript와 같은 정적 파일은 ASP.NET Core 앱�
 
 ::: moniker range=">= aspnetcore-2.1"
 
-.NET Framework를 대상으로 하는 경우 [Microsoft.AspNetCore.StaticFiles](https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles/) 패키지를 프로젝트에 추가합니다. .NET Core를 대상으로 하는 경우 [Microsoft.AspNetCore.App 메타패키지](xref:fundamentals/metapackage-app)에 이 패키지가 포함하고 있습니다.
+.NET Framework를 대상으로 하는 경우 [Microsoft.AspNetCore.StaticFiles](https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles/) 패키지를 프로젝트에 추가합니다. .NET Core를 대상으로 하는 경우 [Microsoft.AspNetCore.App 메타패키지](xref:fundamentals/metapackage-app)에 이 패키지가 포함되어 있습니다.
 
 ::: moniker-end
 
@@ -122,7 +122,7 @@ HTML, CSS, 이미지 및 JavaScript와 같은 정적 파일은 ASP.NET Core 앱�
 
 정적 파일 미들웨어는 권한 부여 검사를 제공하지 않습니다. *wwwroot* 아래의 항목을 비롯한 제공되는 모든 파일은 공개적으로 사용할 수 있습니다. 권한 부여를 기반으로 파일을 제공하려면 다음을 수행합니다.
 
-* 파일을 *wwwroot* 외부의 정적 파일 미들웨어에 액세스할 수 있는 아무 디렉터리에나 저장합니다.
+* 파일을 *wwwroot* 외부의 정적 파일 미들웨어에 액세스할 수 있는 임의의 디렉터리에 저장합니다.
 * 권한 부여가 적용되는 작업 메서드를 통해서 파일을 제공합니다. [FileResult](/dotnet/api/microsoft.aspnetcore.mvc.fileresult) 개체를 반환하세요.
 
   [!code-csharp[](static-files/samples/1x/Controllers/HomeController.cs?name=snippet_BannerImageAction)]
@@ -173,7 +173,7 @@ HTML, CSS, 이미지 및 JavaScript와 같은 정적 파일은 ASP.NET Core 앱�
 
 [UseFileServer](/dotnet/api/microsoft.aspnetcore.builder.fileserverextensions.usefileserver#Microsoft_AspNetCore_Builder_FileServerExtensions_UseFileServer_Microsoft_AspNetCore_Builder_IApplicationBuilder_)는 `UseStaticFiles`, `UseDefaultFiles` 및 `UseDirectoryBrowser`의 기능을 병행합니다.
 
-다음 코드는 정적 파일 제공 및 기본 파일을 활성화합니다. 디렉터리 검색은 활성화되지 않았습니다.
+다음 코드는 정적 파일 및 기본 파일 제공을 활성화합니다. 디렉터리 검색은 활성화되지 않습니다.
 
 ```csharp
 app.UseFileServer();
@@ -204,7 +204,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 
 [!code-csharp[](static-files/samples/1x/StartupUseFileServer.cs?name=snippet_ConfigureServicesMethod)]
 
-위의 파일 계층 구조 및 코드를 사용하면 URL은 다음과 같이 해결됩니다.
+URL은 파일 계층 구조 및 이전 코드를 사용하여 다음과 같이 확인합니다.
 
 | URI            |                             응답  |
 | ------- | ------|
@@ -242,7 +242,7 @@ app.UseFileServer(enableDirectoryBrowsing: true);
 ### <a name="considerations"></a>고려 사항
 
 > [!WARNING]
-> `UseDirectoryBrowser` 및 `UseStaticFiles`는 비밀 정보를 누출 할 수 있습니다. 프로덕션 환경에서는 디렉터리 검색을 비활성화하는 것이 좋습니다. `UseStaticFiles` 또는 `UseDirectoryBrowser`를 통해 어떤 디렉터리가 활성화되었는지 주의 깊게 검토하세요. 전체 디렉터리와 해당 하위 디렉터리는 공개적으로 액세스할 수 있습니다. *\<content_root>/wwwroot*와 같은 전용 디렉터리에 공개적으로 제공하는 데 적합한 파일을 저장하세요. MVC 보기, Razor 페이지(2.x에만 해당), 구성 파일 등과 이러한 파일을 분리하세요.
+> `UseDirectoryBrowser` 및 `UseStaticFiles`는 비밀 정보를 누출할 수 있습니다. 프로덕션 환경에서는 디렉터리 검색을 비활성화하는 것이 좋습니다. `UseStaticFiles` 또는 `UseDirectoryBrowser`를 통해 어떤 디렉터리가 활성화되었는지 주의 깊게 검토하세요. 전체 디렉터리와 해당 하위 디렉터리는 공개적으로 액세스할 수 있습니다. *\<content_root>/wwwroot*와 같은 전용 디렉터리에 공개적으로 제공하는 데 적합한 파일을 저장하세요. MVC 보기, Razor 페이지(2.x에만 해당), 구성 파일 등과 이러한 파일을 분리하세요.
 
 * `UseDirectoryBrowser` 및 `UseStaticFiles`로 노출된 콘텐츠에 대한 URL은 기본 파일 시스템의 대/소문자 구분 및 문자 제한이 적용됩니다. 예를 들어 Windows는 대/소문자를 구분하지 않는 반면 macOS 및 Linux는 그렇지 않습니다.
 
@@ -254,9 +254,9 @@ app.UseFileServer(enableDirectoryBrowsing: true);
     1. **동작** 사이드바에서 **제거**를 클릭합니다.
 
 > [!WARNING]
-> IIS 정적 파일 처리기를 사용하도록 설정**되고** ASP.NET Core 모듈이 올바르게 구성되지 않은 경우, 정적 파일이 제공됩니다. 예를 들어 *web.config* 파일이 배포되지 않았을 수 있습니다.
+> IIS 정적 파일 처리기를 사용하도록 설정되었으며 **그리고** ASP.NET Core 모듈이 올바르게 구성되지 않은 경우, 정적 파일이 제공됩니다. 예를 들어 *web.config* 파일이 배포되지 않았을 수 있습니다.
 
-* 코드 파일( *.cs* 및 *.cshtml* 포함)을 앱 프로젝트의 웹 루트 외부에 배치하세요. 그러면 논리적 분리가 앱의 클라이언트 쪽 콘텐츠 및 서버 기반 코드 사이에 만들어집니다. 이렇게하면 서버 쪽 코드가 유출되지 않습니다.
+* 코드 파일( *.cs* 및 *.cshtml* 포함)을 앱 프로젝트의 웹 루트 외부에 배치하세요. 그러면 논리적 분리가 앱의 클라이언트 쪽 콘텐츠 및 서버 기반 코드 사이에 만들어집니다. 이렇게 하면 서버 쪽 코드가 유출되지 않습니다.
 
 ## <a name="additional-resources"></a>추가 자료
 
