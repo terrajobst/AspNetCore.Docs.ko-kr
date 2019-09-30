@@ -50,7 +50,7 @@ HTML, CSS, 이미지 및 JavaScript와 같은 정적 파일은 ASP.NET Core 앱�
   * **images**
   * **js**
 
-*images* 하위 폴더에 있는 파일에 액세스하기 위한 URI 형식은 *http://\<server_address>/images/\<image_file_name>* 입니다. 예를 들어 *http://localhost:9189/images/banner3.svg*와 같습니다.
+*images* 하위 폴더에 있는 파일에 액세스하기 위한 URI 형식은 *http://\<server_address>/images/\<image_file_name>* 입니다. 예: *http://localhost:9189/images/banner3.svg* .
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -100,7 +100,7 @@ HTML, CSS, 이미지 및 JavaScript와 같은 정적 파일은 ASP.NET Core 앱�
 
 [!code-csharp[](static-files/samples/1x/StartupTwoStaticFiles.cs?name=snippet_ConfigureMethod&highlight=5-10)]
 
-위의 코드에서 *MyStaticFiles* 디렉터리 계층 구조는 *StaticFiles* URI 세그먼트를 통해 공개적으로 노출됩니다. *http://\<server_address>/StaticFiles/images/banner1.svg*에 대한 요청은 *banner1.svg* 파일을 제공합니다.
+위의 코드에서 *MyStaticFiles* 디렉터리 계층 구조가 *StaticFiles* URI 세그먼트를 통해 공개적으로 노출됩니다. *http://\<server_address>/StaticFiles/images/banner1.svg*에 대한 요청은 *banner1.svg* 파일을 제공합니다.
 
 다음 태그는 *MyStaticFiles/images/banner1.svg*를 참조합니다.
 
@@ -137,7 +137,7 @@ HTML, CSS, 이미지 및 JavaScript와 같은 정적 파일은 ASP.NET Core 앱�
 
 [!code-csharp[](static-files/samples/1x/StartupBrowse.cs?name=snippet_ConfigureServicesMethod&highlight=3)]
 
-위의 코드를 통해 URL *http://\<server_address>/MyImages*를 사용하여 각 파일 및 폴더에 대한 링크가 제공되는 *wwwroot/images* 폴더의 디렉터리 검색을 사용할 수 있습니다.
+위의 코드를 통해 각 파일 및 폴더에 대한 링크가 있는 URL *http://\<server_address>/MyImages*를 사용하여 *wwwroot/images* 폴더의 디렉터리 검색을 사용할 수 있습니다.
 
 ![디렉터리 검색](static-files/_static/dir-browse.png)
 
@@ -228,7 +228,7 @@ URL은 파일 계층 구조 및 이전 코드를 사용하여 다음과 같이 �
 
 ## <a name="non-standard-content-types"></a>비표준 콘텐츠 형식
 
-정적 파일 미들웨어는 거의 400가지의 알려진 파일 콘텐츠 형식을 이해합니다. 사용자가 알 수 없는 파일 형식의 파일을 요청하는 경우 정적 파일 미들웨어가 해당 요청을 파이프라인의 다음 미들웨어로 전달합니다. 요청을 처리한 미들웨어가 없으면 ‘404 찾을 수 없음’ 응답이 반환됩니다. 디렉터리 검색이 사용 가능한 경우 파일에 대한 링크가 디렉터리 목록에 표시됩니다.
+정적 파일 미들웨어는 거의 400가지의 알려진 파일 콘텐츠 형식을 이해합니다. 사용자가 알 수 없는 파일 형식의 파일을 요청하는 경우 정적 파일 미들웨어가 해당 요청을 파이프라인의 다음 미들웨어로 전달합니다. 요청을 처리한 미들웨어가 없으면 ‘404 찾을 수 없음’ 응답이 반환됩니다.  디렉터리 검색이 사용 가능한 경우 파일에 대한 링크가 디렉터리 목록에 표시됩니다.
 
 다음 코드는 알 수 없는 형식 제공을 사용하도록 설정하고 알 수 없는 파일을 이미지로 렌더링합니다.
 
@@ -242,7 +242,7 @@ URL은 파일 계층 구조 및 이전 코드를 사용하여 다음과 같이 �
 ### <a name="considerations"></a>고려 사항
 
 > [!WARNING]
-> `UseDirectoryBrowser` 및 `UseStaticFiles`는 비밀 정보를 누출할 수 있습니다. 프로덕션 환경에서는 디렉터리 검색을 비활성화하는 것이 좋습니다. `UseStaticFiles` 또는 `UseDirectoryBrowser`를 통해 어떤 디렉터리가 활성화되었는지 주의 깊게 검토하세요. 전체 디렉터리와 해당 하위 디렉터리는 공개적으로 액세스할 수 있습니다. *\<content_root>/wwwroot*와 같은 전용 디렉터리에 공개적으로 제공하는 데 적합한 파일을 저장하세요. MVC 보기, Razor 페이지(2.x에만 해당), 구성 파일 등과 이러한 파일을 분리하세요.
+> `UseDirectoryBrowser` 및 `UseStaticFiles`는 비밀 정보를 누출 할 수 있습니다. 프로덕션 환경에서 디렉터리 검색을 비활성화하는 것이 좋습니다. `UseStaticFiles` 또는 `UseDirectoryBrowser`를 통해 어떤 디렉터리가 활성화되었는지 주의 깊게 검토합니다. 전체 디렉터리와 해당 하위 디렉터리는 공개적으로 액세스할 수 있습니다. *\<content_root>/wwwroot*와 같이 전용 디렉터리에 공개적으로 제공하는 데 적합한 파일을 저장합니다. MVC 뷰, Razor 페이지(2.x에만 해당), 구성 파일 등으로 이러한 파일을 구분합니다.
 
 * `UseDirectoryBrowser` 및 `UseStaticFiles`로 노출된 콘텐츠에 대한 URL은 기본 파일 시스템의 대/소문자 구분 및 문자 제한이 적용됩니다. 예를 들어 Windows는 대/소문자를 구분하지 않는 반면 macOS 및 Linux는 그렇지 않습니다.
 
@@ -256,7 +256,7 @@ URL은 파일 계층 구조 및 이전 코드를 사용하여 다음과 같이 �
 > [!WARNING]
 > IIS 정적 파일 처리기를 사용하도록 설정되었으며 **그리고** ASP.NET Core 모듈이 올바르게 구성되지 않은 경우, 정적 파일이 제공됩니다. 예를 들어 *web.config* 파일이 배포되지 않았을 수 있습니다.
 
-* 코드 파일( *.cs* 및 *.cshtml* 포함)을 앱 프로젝트의 웹 루트 외부에 배치하세요. 그러면 논리적 분리가 앱의 클라이언트 쪽 콘텐츠 및 서버 기반 코드 사이에 만들어집니다. 이렇게 하면 서버 쪽 코드가 유출되지 않습니다.
+* 코드 파일( *.cs* 및 *.cshtml* 포함)을 앱 프로젝트의 웹 루트 외부에 배치합니다. 따라서 논리적 분리가 앱의 클라이언트 쪽 콘텐츠 및 서버 기반 코드 사이에 만들어집니다. 그러면 서버 쪽 코드가 유출되지 않습니다.
 
 ## <a name="additional-resources"></a>추가 자료
 

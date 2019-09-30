@@ -186,7 +186,7 @@ public class ValuesController : ControllerBase
 
 ::: moniker range="< aspnetcore-2.2"
 
-위의 코드에서 `ValidateHeaderHandler`는 DI에 등록됩니다. 처리기는 범위가 지정되지 않은, 일시적 서비스로 DI에 등록**되어야** 합니다. 처리기가 범위가 지정된 서비스로 등록되고 처리기가 종속된 모든 서비스 중 하나가 삭제되면:
+위의 코드에서 `ValidateHeaderHandler`는 DI에 등록됩니다. 처리기는 범위가 지정되지 않은, 임시 서비스로 DI에 등록**되어야** 합니다. 처리기가 범위 지정 서비스로 등록되고 처리기가 종속된 모든 서비스는 삭제 가능합니다.
 
 * 처리기가 범위를 벗어나기 전에 처리기의 서비스가 삭제될 수 있습니다.
 * 삭제된 처리기 서비스로 인해 처리기가 실패합니다.

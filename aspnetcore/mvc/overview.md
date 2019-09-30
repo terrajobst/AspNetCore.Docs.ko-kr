@@ -16,7 +16,7 @@ ms.locfileid: "68707817"
 
 작성자: [Steve Smith](https://ardalis.com/)
 
-ASP.NET Core MVC는 모델-보기-컨트롤러 디자인 패턴을 사용하여 웹앱 및 API를 빌드할 수 있는 풍부한 프레임워크입니다.
+ASP.NET Core MVC는 모델-보기-컨트롤러 디자인 패턴을 사용하여 웹앱 및 API를 만들 수 있는 풍부한 프레임워크입니다.
 
 ## <a name="what-is-the-mvc-pattern"></a>MVC 패턴이란?
 
