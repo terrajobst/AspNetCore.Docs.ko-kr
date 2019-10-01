@@ -1,111 +1,129 @@
 ---
 title: ASP.NET Core에서 애플리케이션 파트
-author: ardalis
-description: 앱의 리소스에 대한 추상화인 애플리케이션 파트를 사용하여 어셈블리에서 기능을 검색하거나 로드하지 않도록 하는 방법을 알아봅니다.
+author: rick-anderson
+description: ASP.NET Core의 애플리케이션 파트를 사용하여 컨트롤러, 보기, Razor Pages 등을 공유
 ms.author: riande
-ms.date: 01/04/2017
+ms.date: 05/14/2019
 uid: mvc/extensibility/app-parts
-ms.openlocfilehash: 4900ccf5589500db076f8cecd9da198c6a7ceea4
-ms.sourcegitcommit: 41f2c1a6b316e6e368a4fd27a8b18d157cef91e1
+ms.openlocfilehash: 4b4c8c554a7045a180b56cf9998ab1a8496cde1b
+ms.sourcegitcommit: 79eeb17604b536e8f34641d1e6b697fb9a2ee21f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/21/2019
-ms.locfileid: "69886460"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71207355"
 ---
-<!-- DO NOT MAKE CHANGES BEFORE https://github.com/aspnet/AspNetCore.Docs/pull/12376 Merges -->
+# <a name="share-controllers-views-razor-pages-and-more-with-application-parts-in-aspnet-core"></a><span data-ttu-id="2b499-103">ASP.NET Core의 애플리케이션 파트를 사용하여 컨트롤러, 보기, Razor Pages 등을 공유</span><span class="sxs-lookup"><span data-stu-id="2b499-103">Share controllers, views, Razor Pages and more with Application Parts in ASP.NET Core</span></span>
 
-# <a name="application-parts-in-aspnet-core"></a><span data-ttu-id="1acfe-103">ASP.NET Core에서 애플리케이션 파트</span><span class="sxs-lookup"><span data-stu-id="1acfe-103">Application Parts in ASP.NET Core</span></span>
+<span data-ttu-id="2b499-104">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="2b499-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
-<span data-ttu-id="1acfe-104">[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="1acfe-104">[View or download sample code](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="2b499-105">[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([다운로드 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="2b499-105">[View or download sample code](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-<span data-ttu-id="1acfe-105">*애플리케이션 파트*는 컨트롤러, 보기 구성 요소 또는 태그 도우미와 같은 MVC 기능이 검색할 수 있는 애플리케이션의 리소스에 대한 추상화입니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-105">An *Application Part* is an abstraction over the resources of an application, from which MVC features like controllers, view components, or tag helpers may be discovered.</span></span> <span data-ttu-id="1acfe-106">애플리케이션 파트의 한 가지 예로는 AssemblyPart가 있습니다. 여기서는 어셈블리 참조를 캡슐화하고 표시 유형 및 컴파일 참조를 노출합니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-106">One example of an application part is an AssemblyPart, which encapsulates an assembly reference and exposes types and compilation references.</span></span> <span data-ttu-id="1acfe-107">*기능 공급자*는 애플리케이션 파트를 사용하여 ASP.NET Core MVC 앱의 기능을 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-107">*Feature providers* work with application parts to populate the features of an ASP.NET Core MVC app.</span></span> <span data-ttu-id="1acfe-108">애플리케이션 파트에 대한 주요 사용 사례는 어셈블리에서 MVC 기능을 검색(또는 로드를 방지)하도록 앱을 구성하는 것입니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-108">The main use case for application parts is to allow you to configure your app to discover (or avoid loading) MVC features from an assembly.</span></span>
+<span data-ttu-id="2b499-106">*애플리케이션 파트*는 앱의 리소스에 대한 추상화입니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-106">An *Application Part* is an abstraction over the resources of an app.</span></span> <span data-ttu-id="2b499-107">애플리케이션 파트를 사용하면 ASP.NET Core 컨트롤러, 보기 구성 요소, 태그 도우미, Razor Pages, Razor 컴파일 소스 등을 검색할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-107">Application Parts allow ASP.NET Core to discover controllers, view components, tag helpers, Razor Pages, razor compilation sources, and more.</span></span> <span data-ttu-id="2b499-108">[AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart)는 애플리케이션 파트입니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-108">[AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) is an Application part.</span></span> <span data-ttu-id="2b499-109">`AssemblyPart`는 어셈블리 참조를 캡슐화하고 형식 및 컴파일 참조를 공개합니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-109">`AssemblyPart` encapsulates an assembly reference and exposes types and compilation references.</span></span>
 
-## <a name="introducing-application-parts"></a><span data-ttu-id="1acfe-109">애플리케이션 파트 소개</span><span class="sxs-lookup"><span data-stu-id="1acfe-109">Introducing Application Parts</span></span>
+<span data-ttu-id="2b499-110">*기능 공급자*는 애플리케이션 파트를 사용하여 ASP.NET Core 앱의 기능을 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-110">*Feature providers* work with application parts to populate the features of an ASP.NET Core app.</span></span> <span data-ttu-id="2b499-111">애플리케이션 파트에 대한 주요 사용 사례는 어셈블리에서 ASP.NET Core 기능을 검색(또는 로드를 방지)하도록 앱을 구성하는 것입니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-111">The main use case for application parts is to configure an app to discover (or avoid loading) ASP.NET Core features from an assembly.</span></span> <span data-ttu-id="2b499-112">예를 들어 여러 앱 간에 공통적인 기능을 공유하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-112">For example, you might want to share common functionality between multiple apps.</span></span> <span data-ttu-id="2b499-113">애플리케이션 파트를 사용하여 여러 앱에서 컨트롤러, 보기, Razor Pages, Razor 컴파일 소스, 태그 도우미 등을 포함하는 어셈블리(DLL)를 공유할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-113">Using Application Parts, you can share an assembly (DLL) containing controllers, views, Razor Pages, razor compilation sources, Tag Helpers, and more with multiple apps.</span></span> <span data-ttu-id="2b499-114">여러 프로젝트에서 코드를 복제하려면 어셈블리를 공유하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-114">Sharing an assembly is preferred to duplicating code in multiple projects.</span></span>
 
-<span data-ttu-id="1acfe-110">MVC 앱은 [애플리케이션 파트](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.applicationpart)에서 해당 기능을 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-110">MVC apps load their features from [application parts](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.applicationpart).</span></span> <span data-ttu-id="1acfe-111">특히 [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart) 클래스는 어셈블리에서 지원하는 애플리케이션 파트를 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-111">In particular, the [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart) class represents an application part that's backed by an assembly.</span></span> <span data-ttu-id="1acfe-112">이러한 클래스를 사용하여 컨트롤러, 보기 구성 요소, 태그 도우미 및 Razor 컴파일 원본과 같은 MVC 기능을 검색하고 로드할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-112">You can use these classes to discover and load MVC features, such as controllers, view components, tag helpers, and razor compilation sources.</span></span> <span data-ttu-id="1acfe-113">[ApplicationPartManager](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.applicationpartmanager)는 MVC 앱에 사용할 수 있는 애플리케이션 파트 및 기능 공급자를 추적합니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-113">The [ApplicationPartManager](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.applicationpartmanager) is responsible for tracking the application parts and feature providers available to the MVC app.</span></span> <span data-ttu-id="1acfe-114">MVC를 구성하는 경우 `Startup`에서 `ApplicationPartManager`와 상호 작용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-114">You can interact with the `ApplicationPartManager` in `Startup` when you configure MVC:</span></span>
+<span data-ttu-id="2b499-115">ASP.NET Core 앱은 <xref:System.Web.WebPages.ApplicationPart>로부터 기능을 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-115">ASP.NET Core apps load features from <xref:System.Web.WebPages.ApplicationPart>.</span></span> <span data-ttu-id="2b499-116"><xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> 클래스는 어셈블리에서 지원하는 애플리케이션 파트를 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-116">The <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> class represents an application part that's backed by an assembly.</span></span>
 
-```csharp
-// create an assembly part from a class's assembly
-var assembly = typeof(Startup).GetTypeInfo().Assembly;
-services.AddMvc()
-    .AddApplicationPart(assembly);
+## <a name="load-aspnet-core-features"></a><span data-ttu-id="2b499-117">ASP.NET Core 기능 로드</span><span class="sxs-lookup"><span data-stu-id="2b499-117">Load ASP.NET Core features</span></span>
 
-// OR
-var assembly = typeof(Startup).GetTypeInfo().Assembly;
-var part = new AssemblyPart(assembly);
-services.AddMvc()
-    .ConfigureApplicationPartManager(apm => apm.ApplicationParts.Add(part));
+<span data-ttu-id="2b499-118">`ApplicationPart` 및 `AssemblyPart` 클래스를 사용하여 ASP.NET Core 기능(컨트롤러, 보기 구성 요소 등)을 검색 및 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-118">Use the `ApplicationPart` and `AssemblyPart` classes to discover and load ASP.NET Core features (controllers, view components, etc.).</span></span> <span data-ttu-id="2b499-119"><xref:Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartManager>는 사용할 수 있는 애플리케이션 파트 및 기능 공급자를 추적합니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-119">The <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartManager> tracks the application parts and feature providers available.</span></span> <span data-ttu-id="2b499-120">`ApplicationPartManager`는 `Startup.ConfigureServices`에 구성되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-120">`ApplicationPartManager` is configured in `Startup.ConfigureServices`:</span></span>
+
+[!code-csharp[](./app-parts/sample1/WebAppParts/Startup.cs?name=snippet)]
+
+<span data-ttu-id="2b499-121">다음 코드는 `AssemblyPart`를 사용하여 `ApplicationPartManager` 구성에 대한 대체 방법을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-121">The following code provides an alternative approach to configuring `ApplicationPartManager` using `AssemblyPart`:</span></span>
+
+[!code-csharp[](./app-parts/sample1/WebAppParts/Startup2.cs?name=snippet)]
+
+<span data-ttu-id="2b499-122">위의 두 코드 샘플은 어셈블리로부터 `SharedController`를 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-122">The preceding two code samples load the `SharedController` from an assembly.</span></span> <span data-ttu-id="2b499-123">`SharedController`는 애플리케이션의 프로젝트에 포함되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-123">The `SharedController` is not in the application's project.</span></span> <span data-ttu-id="2b499-124">[WebAppParts 솔루션](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample1/WebAppParts) 샘플 다운로드를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="2b499-124">See the [WebAppParts solution](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample1/WebAppParts) sample download.</span></span>
+
+### <a name="include-views"></a><span data-ttu-id="2b499-125">보기 포함</span><span class="sxs-lookup"><span data-stu-id="2b499-125">Include views</span></span>
+
+<span data-ttu-id="2b499-126">어셈블리에 보기를 포함하려면:</span><span class="sxs-lookup"><span data-stu-id="2b499-126">To include views in the assembly:</span></span>
+
+* <span data-ttu-id="2b499-127">다음 표시를 공유 프로젝트 파일에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-127">Add the following markup to the shared project file:</span></span>
+
+  ```csproj
+  <ItemGroup>
+      <EmbeddedResource Include="Views\**\*.cshtml" />
+  </ItemGroup>
+  ```
+
+* <span data-ttu-id="2b499-128"><xref:Microsoft.Extensions.FileProviders.EmbeddedFileProvider>를 <xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngine>에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-128">Add the <xref:Microsoft.Extensions.FileProviders.EmbeddedFileProvider> to the <xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngine>:</span></span>
+
+  [!code-csharp[](./app-parts/sample1/WebAppParts/StartupViews.cs?name=snippet&highlight=3-7)]
+
+### <a name="prevent-loading-resources"></a><span data-ttu-id="2b499-129">리소스 로드 방지</span><span class="sxs-lookup"><span data-stu-id="2b499-129">Prevent loading resources</span></span>
+
+<span data-ttu-id="2b499-130">애플리케이션 파트를 사용하여 리소스가 특정 어셈블리나 위치에서 로드되는 것을 *방지*할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-130">Application parts can be used to *avoid* loading resources in a particular assembly or location.</span></span> <span data-ttu-id="2b499-131"><xref:Microsoft.AspNetCore.Mvc.ApplicationParts> 컬렉션의 멤버를 추가 또는 제거하여 리소스를 숨기거나 사용 가능하게 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-131">Add or remove members of the  <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> collection to hide or make available resources.</span></span> <span data-ttu-id="2b499-132">`ApplicationParts` 컬렉션에 있는 항목의 순서는 중요하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-132">The order of the entries in the `ApplicationParts` collection isn't important.</span></span> <span data-ttu-id="2b499-133">컨테이너에서 서비스를 구성하는 데 사용하기 전에 `ApplicationPartManager`를 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-133">Configure the `ApplicationPartManager` before using it to configure services in the container.</span></span> <span data-ttu-id="2b499-134">예를 들어 `AddControllersAsServices`를 호출하기 전에 `ApplicationPartManager`를 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-134">For example, configure the `ApplicationPartManager` before invoking `AddControllersAsServices`.</span></span> <span data-ttu-id="2b499-135">`ApplicationParts` 컬렉션에서 `Remove`를 호출하여 리소스를 제거합니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-135">Call `Remove` on the `ApplicationParts` collection to remove a resource.</span></span>
+
+<span data-ttu-id="2b499-136">다음 코드는 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts>를 사용하여 앱에서 `MyDependentLibrary`를 제거합니다. [!code-csharp[](./app-parts/sample1/WebAppParts/StartupRm.cs?name=snippet)]</span><span class="sxs-lookup"><span data-stu-id="2b499-136">The following code uses <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> to remove `MyDependentLibrary` from the app: [!code-csharp[](./app-parts/sample1/WebAppParts/StartupRm.cs?name=snippet)]</span></span>
+
+<span data-ttu-id="2b499-137">`ApplicationPartManager`에는 다음을 위한 파트가 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-137">The `ApplicationPartManager` includes parts for:</span></span>
+
+* <span data-ttu-id="2b499-138">앱의 어셈블리 및 종속 어셈블리.</span><span class="sxs-lookup"><span data-stu-id="2b499-138">The app's assembly and dependent assemblies.</span></span>
+* <span data-ttu-id="2b499-139">`Microsoft.AspNetCore.Mvc.TagHelpers`.</span><span class="sxs-lookup"><span data-stu-id="2b499-139">`Microsoft.AspNetCore.Mvc.TagHelpers`.</span></span>
+* <span data-ttu-id="2b499-140">`Microsoft.AspNetCore.Mvc.Razor`.</span><span class="sxs-lookup"><span data-stu-id="2b499-140">`Microsoft.AspNetCore.Mvc.Razor`.</span></span>
+
+## <a name="application-feature-providers"></a><span data-ttu-id="2b499-141">애플리케이션 기능 공급자</span><span class="sxs-lookup"><span data-stu-id="2b499-141">Application feature providers</span></span>
+
+<span data-ttu-id="2b499-142">애플리케이션 기능 공급자는 애플리케이션 파트를 검사하고 해당 파트에 대한 기능을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-142">Application feature providers examine application parts and provide features for those parts.</span></span> <span data-ttu-id="2b499-143">다음 ASP.NET Core 기능에는 기본으로 제공되는 기능 공급자가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-143">There are built-in feature providers for the following ASP.NET Core features:</span></span>
+
+* [<span data-ttu-id="2b499-144">Controllers</span><span class="sxs-lookup"><span data-stu-id="2b499-144">Controllers</span></span>](/dotnet/api/microsoft.aspnetcore.mvc.controllers.controllerfeatureprovider)
+* [<span data-ttu-id="2b499-145">태그 도우미</span><span class="sxs-lookup"><span data-stu-id="2b499-145">Tag Helpers</span></span>](/dotnet/api/microsoft.aspnetcore.mvc.razor.taghelpers.taghelperfeatureprovider)
+* [<span data-ttu-id="2b499-146">보기 구성 요소</span><span class="sxs-lookup"><span data-stu-id="2b499-146">View Components</span></span>](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponents.viewcomponentfeatureprovider)
+
+<span data-ttu-id="2b499-147">기능 공급자는 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1>에서 상속됩니다. 여기서 `T`는 기능의 형식입니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-147">Feature providers inherit from <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1>, where `T` is the type of the feature.</span></span> <span data-ttu-id="2b499-148">기능 공급자는 이전에 나열된 임의의 기능 형식에 대해 구현할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-148">Feature providers can be implemented for any of the previously listed feature types.</span></span> <span data-ttu-id="2b499-149">`ApplicationPartManager.FeatureProviders`에서 기능 공급자의 순서는 런타임 동작에 영향을 줄 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-149">The order of feature providers in the `ApplicationPartManager.FeatureProviders` can impact run time behavior.</span></span> <span data-ttu-id="2b499-150">나중에 추가된 공급자는 이전에 추가된 공급자가 수행한 작업에 반응할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-150">Later added providers can react to actions taken by earlier added providers.</span></span>
+
+### <a name="generic-controller-feature"></a><span data-ttu-id="2b499-151">제네릭 컨트롤러 기능</span><span class="sxs-lookup"><span data-stu-id="2b499-151">Generic controller feature</span></span>
+
+<span data-ttu-id="2b499-152">ASP.NET Core는 [제네릭 컨트롤러](/dotnet/csharp/programming-guide/generics/generic-classes)를 무시합니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-152">ASP.NET Core ignores [generic controllers](/dotnet/csharp/programming-guide/generics/generic-classes).</span></span> <span data-ttu-id="2b499-153">제네릭 컨트롤러에는 형식 매개 변수(예: `MyController<T>`)가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-153">A generic controller has a type parameter (for example, `MyController<T>`).</span></span> <span data-ttu-id="2b499-154">다음 샘플은 지정된 형식 목록에 대한 제네릭 컨트롤러 인스턴스를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-154">The following sample adds generic controller instances for a specified list of types:</span></span>
+
+[!code-csharp[](./app-parts/sample2/AppPartsSample/GenericControllerFeatureProvider.cs?name=snippet)]
+
+<span data-ttu-id="2b499-155">이 형식은 `EntityTypes.Types`에 정의됩니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-155">The types are defined in `EntityTypes.Types`:</span></span>
+
+[!code-csharp[](./app-parts/sample2/AppPartsSample/Models/EntityTypes.cs?name=snippet)]
+
+<span data-ttu-id="2b499-156">기능 공급자는 `Startup`에 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-156">The feature provider is added in `Startup`:</span></span>
+
+[!code-csharp[](./app-parts/sample2/AppPartsSample/Startup.cs?name=snippet)]
+
+<span data-ttu-id="2b499-157">라우팅에 사용되는 제네릭 컨트롤러 이름은 *위젯*이 아닌 *GenericController\`1[위젯]* 의 형식입니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-157">Generic controller names used for routing are of the form *GenericController\`1[Widget]* rather than *Widget*.</span></span> <span data-ttu-id="2b499-158">다음 특성은 컨트롤러에서 사용하는 제네릭 형식에 해당하도록 이름을 수정합니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-158">The following attribute modifies the name to correspond to the generic type used by the controller:</span></span>
+
+[!code-csharp[](./app-parts/sample2/AppPartsSample/GenericControllerNameConvention.cs)]
+
+<span data-ttu-id="2b499-159">`GenericController` 클래스는:</span><span class="sxs-lookup"><span data-stu-id="2b499-159">The `GenericController` class:</span></span>
+
+[!code-csharp[](./app-parts/sample2/AppPartsSample/GenericController.cs)]
+
+<span data-ttu-id="2b499-160">예를 들어 `https://localhost:5001/Sprocket`의 URL을 요청하면 다음 응답이 발생합니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-160">For example, requesting a URL of `https://localhost:5001/Sprocket` results in the following response:</span></span>
+
+```text
+Hello from a generic Sprocket controller.
 ```
 
-<span data-ttu-id="1acfe-115">기본적으로 MVC는 (다른 어셈블리에서도) 종속성 트리를 검색하고 컨트롤러를 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-115">By default MVC will search the dependency tree and find controllers (even in other assemblies).</span></span> <span data-ttu-id="1acfe-116">임의의 어셈블리를 로드하려면(예: 컴파일 타임 시 참조되지 않는 플러그 인에서) 애플리케이션 파트를 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-116">To load an arbitrary assembly (for instance, from a plugin that isn't referenced at compile time), you can use an application part.</span></span>
+### <a name="display-available-features"></a><span data-ttu-id="2b499-161">사용 가능 기능 표시</span><span class="sxs-lookup"><span data-stu-id="2b499-161">Display available features</span></span>
 
-<span data-ttu-id="1acfe-117">애플리케이션 파트를 사용하여 특정 어셈블리 또는 위치에서 컨트롤러를 찾지 않도록 *방지*할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-117">You can use application parts to *avoid* looking for controllers in a particular assembly or location.</span></span> <span data-ttu-id="1acfe-118">`ApplicationPartManager`의 `ApplicationParts` 컬렉션을 수정하여 앱에 사용할 수 있는 파트(또는 어셈블리)를 제어할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-118">You can control which parts (or assemblies) are available to the app by modifying the `ApplicationParts` collection of the `ApplicationPartManager`.</span></span> <span data-ttu-id="1acfe-119">`ApplicationParts` 컬렉션에 있는 항목의 순서는 중요하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-119">The order of the entries in the `ApplicationParts` collection isn't important.</span></span> <span data-ttu-id="1acfe-120">컨테이너에서 서비스를 구성하는 데 사용하기 전에 `ApplicationPartManager`를 완전히 구성해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-120">It's important to fully configure the `ApplicationPartManager` before using it to configure services in the container.</span></span> <span data-ttu-id="1acfe-121">예를 들어 `AddControllersAsServices`를 호출하기 전에 `ApplicationPartManager`를 완벽하게 구성해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-121">For example, you should fully configure the `ApplicationPartManager` before invoking `AddControllersAsServices`.</span></span> <span data-ttu-id="1acfe-122">이 작업에 실패하면 메서드 호출이 이후에 추가된 애플리케이션 파트의 컨트롤러가 애플리케이션에 잘못된 동작이 발생할 수 있는 영향을 받지 않는다는 것을 의미합니다(서비스로 등록되지 않음).</span><span class="sxs-lookup"><span data-stu-id="1acfe-122">Failing to do so, will mean that controllers in application parts added after that method call won't be affected (won't get registered as services) which might result in incorrect behavior of your application.</span></span>
+<span data-ttu-id="2b499-162">앱에 사용 가능한 기능은 [종속성 주입](../../fundamentals/dependency-injection.md)을 통해 `ApplicationPartManager`를 요청하여 열거할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-162">The features available to an app can be enumerated by requesting an `ApplicationPartManager` through [dependency injection](../../fundamentals/dependency-injection.md):</span></span>
 
-<span data-ttu-id="1acfe-123">사용하지 않을 컨트롤러를 포함하는 어셈블리가 있는 경우 `ApplicationPartManager`에서 제거합니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-123">If you have an assembly that contains controllers you don't want to be used, remove it from the `ApplicationPartManager`:</span></span>
+[!code-csharp[](./app-parts/sample2/AppPartsSample/Controllers/FeaturesController.cs?highlight=16,25-27)]
 
-```csharp
-services.AddMvc()
-    .ConfigureApplicationPartManager(apm =>
-    {
-        var dependentLibrary = apm.ApplicationParts
-            .FirstOrDefault(part => part.Name == "DependentLibrary");
+<span data-ttu-id="2b499-163">[샘플 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample2)는 위의 코드를 사용하여 앱 기능을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="2b499-163">The [download sample](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample2) uses the preceding code to display the app features:</span></span>
 
-        if (dependentLibrary != null)
-        {
-           apm.ApplicationParts.Remove(dependentLibrary);
-        }
-    })
+```text
+Controllers:
+    - FeaturesController
+    - HomeController
+    - HelloController
+    - GenericController`1
+    - GenericController`1
+Tag Helpers:
+    - PrerenderTagHelper
+    - AnchorTagHelper
+    - CacheTagHelper
+    - DistributedCacheTagHelper
+    - EnvironmentTagHelper
+    - Additional Tag Helpers omitted for brevity.
+View Components:
+    - SampleViewComponent
 ```
-
-<span data-ttu-id="1acfe-124">`ApplicationPartManager`에는 프로젝트의 어셈블리 및 해당 종속 어셈블리 외에도 기본적으로 `Microsoft.AspNetCore.Mvc.TagHelpers` 및 `Microsoft.AspNetCore.Mvc.Razor`의 파트가 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-124">In addition to your project's assembly and its dependent assemblies, the `ApplicationPartManager` will include parts for `Microsoft.AspNetCore.Mvc.TagHelpers` and `Microsoft.AspNetCore.Mvc.Razor` by default.</span></span>
-
-## <a name="application-feature-providers"></a><span data-ttu-id="1acfe-125">애플리케이션 기능 공급자</span><span class="sxs-lookup"><span data-stu-id="1acfe-125">Application Feature Providers</span></span>
-
-<span data-ttu-id="1acfe-126">애플리케이션 기능 공급자는 애플리케이션 파트를 검사하고 해당 파트에 대한 기능을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-126">Application Feature Providers examine application parts and provide features for those parts.</span></span> <span data-ttu-id="1acfe-127">다음 MVC 기능에 대한 기본 제공 기능 공급자가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-127">There are built-in feature providers for the following MVC features:</span></span>
-
-* [<span data-ttu-id="1acfe-128">Controllers</span><span class="sxs-lookup"><span data-stu-id="1acfe-128">Controllers</span></span>](/dotnet/api/microsoft.aspnetcore.mvc.controllers.controllerfeatureprovider)
-* [<span data-ttu-id="1acfe-129">메타데이터 참조</span><span class="sxs-lookup"><span data-stu-id="1acfe-129">Metadata Reference</span></span>](/dotnet/api/microsoft.aspnetcore.mvc.razor.compilation.metadatareferencefeatureprovider)
-* [<span data-ttu-id="1acfe-130">태그 도우미</span><span class="sxs-lookup"><span data-stu-id="1acfe-130">Tag Helpers</span></span>](/dotnet/api/microsoft.aspnetcore.mvc.razor.taghelpers.taghelperfeatureprovider)
-* [<span data-ttu-id="1acfe-131">보기 구성 요소</span><span class="sxs-lookup"><span data-stu-id="1acfe-131">View Components</span></span>](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponents.viewcomponentfeatureprovider)
-
-<span data-ttu-id="1acfe-132">기능 공급자는 `IApplicationFeatureProvider<T>`에서 상속됩니다. 여기서 `T`는 기능의 형식입니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-132">Feature providers inherit from `IApplicationFeatureProvider<T>`, where `T` is the type of the feature.</span></span> <span data-ttu-id="1acfe-133">위에 나열된 MVC 기능 형식에 대한 고유한 공급자를 구현할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-133">You can implement your own feature providers for any of MVC's feature types listed above.</span></span> <span data-ttu-id="1acfe-134">나중에 공급자가 이전 공급자 수행한 작업에 반응할 수 있으므로 `ApplicationPartManager.FeatureProviders` 컬렉션에서 기능 공급자의 순서는 중요할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-134">The order of feature providers in the `ApplicationPartManager.FeatureProviders` collection can be important, since later providers can react to actions taken by previous providers.</span></span>
-
-### <a name="sample-generic-controller-feature"></a><span data-ttu-id="1acfe-135">예제: 제네릭 컨트롤러 기능</span><span class="sxs-lookup"><span data-stu-id="1acfe-135">Sample: Generic controller feature</span></span>
-
-<span data-ttu-id="1acfe-136">기본적으로 ASP.NET Core MVC는 제네릭 컨트롤러(예: `SomeController<T>`)를 무시합니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-136">By default, ASP.NET Core MVC ignores generic controllers (for example, `SomeController<T>`).</span></span> <span data-ttu-id="1acfe-137">이 샘플에서는 기본 공급자 이후에 실행되고 지정된 목록 형식에 대한 제네릭 컨트롤러 인스턴스를 추가하는 컨트롤러 기능 공급자를 사용합니다(`EntityTypes.Types`에 정의됨).</span><span class="sxs-lookup"><span data-stu-id="1acfe-137">This sample uses a controller feature provider that runs after the default provider and adds generic controller instances for a specified list of types (defined in `EntityTypes.Types`):</span></span>
-
-[!code-csharp[](./app-parts/sample/AppPartsSample/GenericControllerFeatureProvider.cs?highlight=13&range=18-36)]
-
-<span data-ttu-id="1acfe-138">엔터티 형식:</span><span class="sxs-lookup"><span data-stu-id="1acfe-138">The entity types:</span></span>
-
-[!code-csharp[](./app-parts/sample/AppPartsSample/Model/EntityTypes.cs?range=6-16)]
-
-<span data-ttu-id="1acfe-139">기능 공급자는 `Startup`에 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-139">The feature provider is added in `Startup`:</span></span>
-
-```csharp
-services.AddMvc()
-    .ConfigureApplicationPartManager(apm => 
-        apm.FeatureProviders.Add(new GenericControllerFeatureProvider()));
-```
-
-<span data-ttu-id="1acfe-140">기본적으로 라우팅에 사용되는 제네릭 컨트롤러 이름은 *위젯*이 아닌 *GenericController\`1[위젯]* 의 형식입니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-140">By default, the generic controller names used for routing would be of the form *GenericController\`1[Widget]* instead of *Widget*.</span></span> <span data-ttu-id="1acfe-141">다음 특성을 사용하여 컨트롤러에서 사용하는 제네릭 형식에 해당하도록 이름을 수정합니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-141">The following attribute is used to modify the name to correspond to the generic type used by the controller:</span></span>
-
-[!code-csharp[](./app-parts/sample/AppPartsSample/GenericControllerNameConvention.cs)]
-
-<span data-ttu-id="1acfe-142">`GenericController` 클래스:</span><span class="sxs-lookup"><span data-stu-id="1acfe-142">The `GenericController` class:</span></span>
-
-[!code-csharp[](./app-parts/sample/AppPartsSample/GenericController.cs?highlight=5-6)]
-
-<span data-ttu-id="1acfe-143">일치하는 경로를 요청하는 경우 결과:</span><span class="sxs-lookup"><span data-stu-id="1acfe-143">The result, when a matching route is requested:</span></span>
-
-![샘플 앱의 예제 출력은 '제네릭 Sproket 컨트롤러에서 인사드립니다.'로 읽습니다.](app-parts/_static/generic-controller.png)
-
-### <a name="sample-display-available-features"></a><span data-ttu-id="1acfe-145">예제: 사용 가능 기능 표시</span><span class="sxs-lookup"><span data-stu-id="1acfe-145">Sample: Display available features</span></span>
-
-<span data-ttu-id="1acfe-146">[종속성 주입](../../fundamentals/dependency-injection.md)을 통해 `ApplicationPartManager`을 요청하고 적절한 기능의 인스턴스를 채우는 데 사용하여 앱에 제공되는 채워진 기능을 반복할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="1acfe-146">You can iterate through the populated features available to your app by requesting an `ApplicationPartManager` through [dependency injection](../../fundamentals/dependency-injection.md) and using it to populate instances of the appropriate features:</span></span>
-
-[!code-csharp[](./app-parts/sample/AppPartsSample/Controllers/FeaturesController.cs?highlight=16,25-27)]
-
-<span data-ttu-id="1acfe-147">예제 출력:</span><span class="sxs-lookup"><span data-stu-id="1acfe-147">Example output:</span></span>
-
-![샘플 앱의 예제 출력](app-parts/_static/available-features.png)
