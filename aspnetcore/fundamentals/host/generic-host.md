@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/01/2019
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: 261abae499a0d5f807a14aebd224949881067bc7
-ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
+ms.openlocfilehash: 75af6dc58d31aaad888b14640268bf05c193272d
+ms.sourcegitcommit: e54672f5c493258dc449fac5b98faf47eb123b28
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/06/2019
-ms.locfileid: "70773805"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71248282"
 ---
 # <a name="net-generic-host"></a>.NET 일반 호스트
 
@@ -90,7 +90,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
   * 명령줄 인수.
 * 다음 [로깅](xref:fundamentals/logging/index) 공급자를 추가합니다.
   * 콘솔
-  * 디버그
+  * Debug
   * EventSource
   * EventLog(Windows에서 실행 중인 경우에만)
 * 환경이 개발 중일 때 [범위 유효성 검사](xref:fundamentals/dependency-injection#scope-validation) 및 [종속성 유효성 검사](xref:Microsoft.Extensions.DependencyInjection.ServiceProviderOptions.ValidateOnBuild)를 사용하도록 설정합니다.
@@ -113,7 +113,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 * [IHostLifetime](#ihostlifetime)
 * [IHostEnvironment / IWebHostEnvironment](#ihostenvironment)
 
-모든 프레임워크에서 제공한 서비스 목록은 <xref:fundamentals/dependency-injection#framework-provided-services>를 참조하세요.
+프레임워크에서 제공하는 서비스에 대한 자세한 내용은 <xref:fundamentals/dependency-injection#framework-provided-services>를 참조하세요.
 
 ## <a name="ihostapplicationlifetime"></a>IHostApplicationLifetime
 
@@ -376,7 +376,7 @@ webBuilder.UseStartup<Startup>();
 
 ### <a name="urls"></a>URL
 
-서버에서 요청을 수신해야 하는 포트와 프로토콜을 포함하는 세미클론으로 구분된 IP 주소 또는 호스트 주소의 목록입니다. 예: `http://localhost:123`. “\*”를 사용하여 서버가 지정된 포트 및 프로토콜을 사용하는 IP 주소 또는 호스트 이름에서 요청을 수신해야 함을 나타냅니다(예: `http://*:5000`). 프로토콜(`http://` 또는 `https://`)은 각 URL에 포함되어 있어야 합니다. 지원되는 형식은 서버마다 다릅니다.
+서버에서 요청을 수신해야 하는 포트와 프로토콜을 포함하는 세미클론으로 구분된 IP 주소 또는 호스트 주소의 목록입니다. 예: `http://localhost:123` “\*”를 사용하여 서버가 지정된 포트 및 프로토콜을 사용하는 IP 주소 또는 호스트 이름에서 요청을 수신해야 함을 나타냅니다(예: `http://*:5000`). 프로토콜(`http://` 또는 `https://`)은 각 URL에 포함되어 있어야 합니다. 지원되는 형식은 서버마다 다릅니다.
 
 **키**: urls  
 **형식**: *string*  
@@ -575,7 +575,7 @@ var host = new HostBuilder()
 
 [!code-csharp[](generic-host/samples-snapshot/2.x/GenericHostSample/Program.cs?name=snippet_UseContentRoot)]
 
-### <a name="environment"></a>환경
+### <a name="environment"></a>Environment
 
 앱의 [환경](xref:fundamentals/environments)을 설정합니다.
 
@@ -963,6 +963,6 @@ public class MyClass
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:fundamentals/host/hosted-services>

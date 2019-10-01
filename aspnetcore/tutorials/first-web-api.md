@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/27/2019
 uid: tutorials/first-web-api
-ms.openlocfilehash: 1cc4fffc50978a3a958a96e1eb250cb85a8d2879
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 5e5215f246c6c7a805a4c99f485d51a2fb3c712d
+ms.sourcegitcommit: cf9ffcce4fe0b69fe795aae9ae06e99fdb18bdfc
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71082060"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71306672"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>자습서: ASP.NET Core를 사용하여 웹 API 만들기
 
@@ -21,7 +21,7 @@ ms.locfileid: "71082060"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-이 자습서에서는 다음과 같은 작업을 수행하는 방법을 살펴봅니다.
+이 자습서에서는 다음 방법에 대해 알아봅니다.
 
 > [!div class="checklist"]
 > * 웹 API 프로젝트를 만듭니다.
@@ -58,7 +58,7 @@ ms.locfileid: "71082060"
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-3.0.md)]
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-3.0.md)]
 
@@ -71,7 +71,7 @@ ms.locfileid: "71082060"
 * **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.
 * **ASP.NET Core 웹 애플리케이션** 템플릿을 선택하고 **다음**을 클릭합니다.
 * 프로젝트 이름을 *TodoApi*로 지정하고 **만들기**를 클릭합니다.
-* **새 ASP.NET Core 웹 애플리케이션 만들기** 대화 상자에서 **.NET Core** 및 **ASP.NET Core 3.0**이 선택되었는지 확인합니다. **API** 템플릿을 선택하고 **만들기**를 클릭합니다. **Docker 지원 사용**을 선택하지 **마세요**.
+* **새 ASP.NET Core 웹 애플리케이션 만들기** 대화 상자에서 **.NET Core** 및 **ASP.NET Core 3.0**이 선택되었는지 확인합니다. **API** 템플릿을 선택하고 **만들기**를 클릭합니다.
 
 ![VS 새 프로젝트 대화 상자](first-web-api/_static/vs3.png)
 
@@ -84,8 +84,8 @@ ms.locfileid: "71082060"
    ```dotnetcli
    dotnet new webapi -o TodoApi
    cd TodoAPI
-   dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 3.0.0-*
-   dotnet add package Microsoft.EntityFrameworkCore.InMemory --version 3.0.0-*
+   dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+   dotnet add package Microsoft.EntityFrameworkCore.InMemory
    code -r ../TodoApi
    ```
 
@@ -96,7 +96,7 @@ ms.locfileid: "71082060"
   * 새 웹 API 프로젝트를 만들고 Visual Studio Code에서 엽니다.
   * 다음 섹션에서 필요한 NuGet 패키지를 추가합니다.
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * **파일** > **새 솔루션**을 선택합니다.
 
@@ -117,8 +117,8 @@ ms.locfileid: "71082060"
 프로젝트 폴더에서 명령 터미널을 열고 다음 명령을 실행합니다.
 
    ```dotnetcli
-   dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 3.0.0-*
-   dotnet add package Microsoft.EntityFrameworkCore.InMemory --version 3.0.0-*
+   dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+   dotnet add package Microsoft.EntityFrameworkCore.InMemory
    ```
 
 ---
@@ -137,7 +137,7 @@ IIS Express 인증서를 신뢰해야 하는지 묻는 대화 상자가 표시�
 
 Ctrl+F5 키를 눌러 앱을 실행합니다. 브라우저에서 다음 URL [https://localhost:5001/WeatherForecast](https://localhost:5001/WeatherForecast)로 이동합니다.
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 **실행** > **디버깅 시작**을 선택하여 앱을 시작합니다. Mac용 Visual Studio가 브라우저를 시작하고 `https://localhost:<port>`로 이동합니다. 여기서 `<port>`는 임의로 선택된 포트 번호입니다. HTTP 404(찾을 수 없음) 오류가 반환됩니다. `/WeatherForecast`를 URL에 추가합니다(URL을 `https://localhost:<port>/WeatherForecast`로 변경).
 
@@ -198,7 +198,7 @@ Ctrl+F5 키를 눌러 앱을 실행합니다. 브라우저에서 다음 URL [htt
 
 * 다음 코드를 사용하여 *Models* 폴더에 `TodoItem` 클래스를 추가합니다.
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * 프로젝트를 마우스 오른쪽 단추로 클릭합니다. **추가** > **새 폴더**를 선택합니다. 폴더 이름을 *Models*로 지정합니다.
 
@@ -227,9 +227,8 @@ Ctrl+F5 키를 눌러 앱을 실행합니다. 브라우저에서 다음 URL [htt
 ### <a name="add-microsoftentityframeworkcoresqlserver"></a>Microsoft.EntityFrameworkCore.SqlServer 추가
 
 * **도구** 메뉴에서 **NuGet 패키지 관리자 > 솔루션용 NuGet 패키지 관리**를 선택합니다.
-* **시험판 포함** 확인란을 선택합니다.
 * **찾아보기** 탭을 선택한 다음 검색 상자에 **Microsoft.EntityFrameworkCore.SqlServer**를 입력합니다.
-* 왼쪽 창에서 **Microsoft.EntityFrameworkCore.SqlServer V3.0.0-preview**를 선택합니다.
+* 왼쪽 창에서  **Microsoft.EntityFrameworkCore.SqlServer**를 선택합니다.
 * 오른쪽 창에서 **프로젝트** 확인란을 선택하고 **설치**를 선택합니다.
 * 위 지침에 따라 `Microsoft.EntityFrameworkCore.InMemory` NuGet 패키지를 추가합니다.
 
@@ -274,15 +273,15 @@ ASP.NET Core에서는 DB 컨텍스트와 같은 서비스를 [DI(종속성 주�
 
   * **모델 클래스**에서 **TodoItem (TodoAPI.Models)** 을 선택합니다.
   * **데이터 컨텍스트 클래스**에서 **TodoContext (TodoAPI.Models)** 를 선택합니다.
-  * **추가** 선택
+  * **추가**를 선택합니다.
 
 # <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
 다음 명령을 실행합니다.
 
 ```dotnetcli
-dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 3.0.0-*
-dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.0.0-*
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet tool install --global dotnet-aspnet-codegenerator
 dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext  -outDir Controllers
 ```
@@ -388,7 +387,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 * 새 요청을 만듭니다.
 * HTTP 메서드를 **GET**으로 설정합니다.
-* 요청 URL을 `https://localhost:<port>/api/TodoItems`로 설정합니다. 예: `https://localhost:5001/api/TodoItems`.
+* 요청 URL을 `https://localhost:<port>/api/TodoItems`로 설정합니다. 예: `https://localhost:5001/api/TodoItems`
 * Postman에서 **두 개의 창 보기**를 설정합니다.
 * **보내기**를 선택합니다.
 
@@ -460,7 +459,7 @@ Postman을 사용하여 할 일 항목을 삭제합니다.
 
 * 메서드를 `DELETE`로 설정합니다.
 * 예를 들어 삭제할 개체의 URI를 `https://localhost:5001/api/TodoItems/1`로 설정합니다.
-* **보내기** 선택
+* **보내기**를 선택합니다.
 
 ## <a name="call-the-web-api-with-javascript"></a>JavaScript를 사용하여 웹 API 호출
 
@@ -470,7 +469,7 @@ Postman을 사용하여 할 일 항목을 삭제합니다.
 
 ::: moniker range="< aspnetcore-3.0"
 
-이 자습서에서는 다음과 같은 작업을 수행하는 방법을 살펴봅니다.
+이 자습서에서는 다음 방법에 대해 알아봅니다.
 
 > [!div class="checklist"]
 > * 웹 API 프로젝트를 만듭니다.
@@ -510,7 +509,7 @@ Postman을 사용하여 할 일 항목을 삭제합니다.
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-2.2.md)]
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-2.2.md)]
 
@@ -542,7 +541,7 @@ Postman을 사용하여 할 일 항목을 삭제합니다.
 
 * 프로젝트에 필수 자산을 추가하려는지 묻는 대화 상자가 나타나면 **예**를 선택합니다.
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * **파일** > **새 솔루션**을 선택합니다.
 
@@ -574,7 +573,7 @@ IIS Express 인증서를 신뢰해야 하는지 묻는 대화 상자가 표시�
 
 Ctrl+F5 키를 눌러 앱을 실행합니다. 브라우저에서 다음 URL [https://localhost:5001/api/values](https://localhost:5001/api/values)로 이동합니다.
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 **실행** > **디버깅 시작**을 선택하여 앱을 시작합니다. Mac용 Visual Studio가 브라우저를 시작하고 `https://localhost:<port>`로 이동합니다. 여기서 `<port>`는 임의로 선택된 포트 번호입니다. HTTP 404(찾을 수 없음) 오류가 반환됩니다. `/api/values`를 URL에 추가합니다(URL을 `https://localhost:<port>/api/values`로 변경).
 
@@ -604,7 +603,7 @@ Ctrl+F5 키를 눌러 앱을 실행합니다. 브라우저에서 다음 URL [htt
 
 * 다음 코드를 사용하여 *Models* 폴더에 `TodoItem` 클래스를 추가합니다.
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * 프로젝트를 마우스 오른쪽 단추로 클릭합니다. **추가** > **새 폴더**를 선택합니다. 폴더 이름을 *Models*로 지정합니다.
 
@@ -762,7 +761,7 @@ ASP.NET Core에서는 DB 컨텍스트와 같은 서비스를 [DI(종속성 주�
 
 * 새 요청을 만듭니다.
   * HTTP 메서드를 **GET**으로 설정합니다.
-  * 요청 URL을 `https://localhost:<port>/api/todo`로 설정합니다. 예: `https://localhost:5001/api/todo`.
+  * 요청 URL을 `https://localhost:<port>/api/todo`로 설정합니다. 예: `https://localhost:5001/api/todo`
 * Postman에서 **두 개의 창 보기**를 설정합니다.
 * **보내기**를 선택합니다.
 
@@ -859,7 +858,7 @@ Postman을 사용하여 할 일 항목을 삭제합니다.
 
 * 메서드를 `DELETE`로 설정합니다.
 * 예를 들어 삭제할 개체의 URI를 `https://localhost:5001/api/todo/1`로 설정합니다.
-* **보내기** 선택
+* **보내기**를 선택합니다.
 
 샘플 앱을 사용하면 모든 항목을 삭제할 수 있습니다. 하지만 마지막 항목이 삭제되면 다음에 API를 호출하는 경우 모델 클래스 생성자에서 새로운 항목이 생성됩니다.
 
@@ -914,7 +913,13 @@ Fetch는 요청 본문에서 할 일 항목을 사용하여 HTTP POST 요청을 
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>추가 자료
+<a name="auth"></a>
+
+## <a name="add-authentication-support-to-a-web-api"></a>웹 API에 인증 지원 추가
+
+[IdentityServer4](https://identityserver4.readthedocs.io/en/latest/quickstarts/0_overview.html) 자습서를 참조하세요l.
+
+## <a name="additional-resources"></a>추가 리소스
 
 [이 자습서에서 샘플 코드 보기 또는 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples) [다운로드하는 방법](xref:index#how-to-download-a-sample)을 참조하세요.
 

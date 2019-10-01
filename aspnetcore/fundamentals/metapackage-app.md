@@ -1,21 +1,47 @@
 ---
-title: ASP.NET Core 2.1 이상용 Microsoft.AspNetCore.App 메타패키지
+title: ASP.NET Core용 Microsoft.AspNetCore.App 메타패키지
 author: Rick-Anderson
-description: Microsoft.AspNetCore.App 메타패키지에는 지원되는 모든 ASP.NET Core 및 Entity Framework Core 패키지가 포함됩니다.
+description: Microsoft.AspNetCore.App 공유 프레임워크
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-ms.date: 04/21/2019
+ms.date: 09/24/2019
 uid: fundamentals/metapackage-app
-ms.openlocfilehash: 913e3d83fbf1af7ea995a88202f86c60b359a7e2
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 8435445890ce00f33ab9a8692f5442b1609192da
+ms.sourcegitcommit: 8a36be1bfee02eba3b07b7a86085ec25c38bae6b
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65085660"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71219105"
 ---
-# <a name="microsoftaspnetcoreapp-metapackage-for-aspnet-core-21-or-later"></a>ASP.NET Core 2.1 이상용 Microsoft.AspNetCore.App 메타패키지
+# <a name="microsoftaspnetcoreapp-for-aspnet-core"></a>ASP.NET Core용 Microsoft.AspNetCore.App
 
-이 기능을 사용하려면 .NET Core 2.1 이상을 대상으로 하는 ASP.NET Core 2.1 이상이 필요합니다.
+::: moniker range=">= aspnetcore-3.0"
+
+ ASP.NET Core 공유 프레임워크(`Microsoft.AspNetCore.App`)에는 Microsoft에서 개발하고 지원하는 어셈블리가 포함되어 있습니다. `Microsoft.AspNetCore.App`은 [.NET Core 3.0 이상의 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0)가 설치된 경우에 설치됩니다. *공유 프레임워크*는 머신에 설치된 어셈블리( *.dll* 파일) 세트이며 런타임 구성 요소 및 타기팅 팩을 포함합니다. 자세한 내용은 [공유 프레임워크](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/)를 참조하세요.
+
+* `Microsoft.NET.Sdk.Web` SDK를 대상으로 하는 프로젝트는 `Microsoft.AspNetCore.App` 프레임워크를 암시적으로 참조합니다.
+
+이러한 프로젝트에는 추가 참조가 필요하지 않습니다.
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+    ...
+</Project>
+```
+
+ASP .NET Core 공유 프레임워크:
+
+* 타사 종속성을 포함하지 않습니다.
+* ASP.NET Core 팀에서 지원되는 모든 패키지를 포함합니다.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+이 기능을 사용하려면 .NET Core 2.x를 대상으로 하는 ASP.NET Core 2.x가 필요합니다.
 
 ASP.NET Core용 [Microsoft.AspNetCore.App](https://www.nuget.org/packages/Microsoft.AspNetCore.App) [메타패키지](/dotnet/core/packages#metapackages):
 
@@ -23,7 +49,7 @@ ASP.NET Core용 [Microsoft.AspNetCore.App](https://www.nuget.org/packages/Micros
 * 이전에 언급한 것 이외의 타사 종속성을 포함하는 것을 제외하고 ASP.NET Core 팀에서 지원하는 모든 패키지를 포함합니다.
 * 이전에 언급한 것 이외의 타사 종속성을 포함하는 것을 제외하고 Entity Framework 팀에서 지원하는 모든 패키지를 포함합니다.
 
-ASP.NET Core 2.1 이상 Entity Framework Core 2.1 이상의 모든 기능은 `Microsoft.AspNetCore.App` 패키지에 포함됩니다. ASP.NET Core 2.1 이상을 대상으로 하는 기본 프로젝트 템플릿에는 이 패키지를 사용합니다. ASP.NET Core 2.1 이상과 Entity Framework Core 2.1 이상을 대상으로 하는 애플리케이션은 `Microsoft.AspNetCore.App` 패키지를 사용하는 것이 좋습니다.
+ASP.NET Core 2.x 및 Entity Framework Core 2.x의 모든 기능은 `Microsoft.AspNetCore.App` 패키지에 포함됩니다. ASP.NET Core 2.x를 대상으로 하는 기본 프로젝트 템플릿은 이 패키지를 사용합니다. ASP.NET Core 2.x와 Entity Framework Core 2.x를 대상으로 하는 애플리케이션은 `Microsoft.AspNetCore.App` 패키지를 사용하는 것이 좋습니다.
 
 `Microsoft.AspNetCore.App` 메타패키지의 버전 번호는 최소 ASP.NET Core 버전 및 Entity Framework Core 버전을 나타냅니다.
 
@@ -35,13 +61,13 @@ ASP.NET Core 2.1 이상 Entity Framework Core 2.1 이상의 모든 기능은 `Mi
 
 `Microsoft.AspNetCore.App` 메타패키지를 사용하는 애플리케이션은 ASP.NET Core 공유 프레임워크를 자동으로 활용합니다. `Microsoft.AspNetCore.App` 메타패키지를 사용할 경우, 참조되는 ASP.NET Core NuGet 패키지의 자산이 애플리케이션을 사용하여 배포되지 **않습니다**. 이러한 자산은 &mdash; ASP.NET Core 공유 프레임워크에 포함됩니다. 공유 프레임워크의 자산은 애플리케이션 시작 시간 단축을 위해 미리 컴파일됩니다. 자세한 내용은 [공유 프레임워크](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/)를 참조하세요.
 
-다음 프로젝트 파일은 ASP.NET Core용 `Microsoft.AspNetCore.App` 메타패키지를 참조하며 일반적인 ASP.NET Core 2.1 템플릿을 나타냅니다.
+다음 프로젝트 파일은 ASP.NET Core용 `Microsoft.AspNetCore.App` 메타패키지를 참조하며 일반적인 ASP.NET Core 2.2 템플릿을 나타냅니다.
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -51,11 +77,13 @@ ASP.NET Core 2.1 이상 Entity Framework Core 2.1 이상의 모든 기능은 `Mi
 </Project>
 ```
 
-이전의 표시는 일반적인 ASP.NET Core 2.1 이상의 템플릿을 나타냅니다. `Microsoft.AspNetCore.App` 패키지 참조의 버전 번호는 지정하지 않습니다. 버전이 지정되지 않은 경우 SDK에서 [암시적](https://github.com/dotnet/core/blob/master/release-notes/1.0/sdk/1.0-rc3-implicit-package-refs.md) 버전, 즉 `Microsoft.NET.Sdk.Web`을 지정합니다. SDK에서 지정하는 암시적 버전을 사용하고, 패키지 참조에 버전 번호를 명시적으로 설정하지 않는 것이 좋습니다. 이 접근 방식에 대한 질문이 있는 경우 GitHub의 [Microsoft.AspNetCore.App 암시적 버전에 대한 토론](https://github.com/aspnet/AspNetCore.Docs/issues/6430)에 의견을 남겨 주세요.
+이전의 표시는 일반적인 ASP.NET Core 2.x 템플릿을 나타냅니다. `Microsoft.AspNetCore.App` 패키지 참조의 버전 번호는 지정하지 않습니다. 버전이 지정되지 않은 경우 SDK에서 [암시적](https://github.com/dotnet/core/blob/master/release-notes/1.0/sdk/1.0-rc3-implicit-package-refs.md) 버전, 즉 `Microsoft.NET.Sdk.Web`을 지정합니다. SDK에서 지정하는 암시적 버전을 사용하고, 패키지 참조에 버전 번호를 명시적으로 설정하지 않는 것이 좋습니다. 이 접근 방식에 대한 질문이 있는 경우 GitHub의 [Microsoft.AspNetCore.App 암시적 버전에 대한 토론](https://github.com/aspnet/AspNetCore.Docs/issues/6430)에 의견을 남겨 주세요.
 
 휴대용 앱의 암시적 버전은 `major.minor.0`으로 설정됩니다. 공유 프레임워크 롤포워드 메커니즘은 설치된 공유 프레임워크 중 최신 호환 버전에서 앱을 실행합니다. 개발, 테스트 및 프로덕션에서 동일한 버전이 사용되도록 하려면 모든 환경에 동일한 버전의 공유 프레임워크를 설치하도록 하세요. 자체 포함 앱의 경우 암시적 버전 번호가 설치된 SDK에 포함된 공유 프레임워크의 `major.minor.patch`로 설정됩니다.
 
-`Microsoft.AspNetCore.App` 참조에 버전 번호를 지정해도 해당 버전의 고유 프레임워크가 선택된다고 보장할 수 **없습니다**. 예를 들어 "2.1.1" 버전을 지정했는데 "2.1.3"이 설치되는 경우가 있습니다. 이 경우 앱은 "2.1.3"을 사용합니다. 권장되는 방법은 아니지만 롤포워드를 비활성화할 수 있습니다(패치 및/또는 부 버전). DotNet 호스트 롤포워드 및 이 동작을 구성하는 방법에 대한 자세한 내용은 [DotNet 호스트 롤포워드](https://github.com/dotnet/core-setup/blob/master/Documentation/design-docs/roll-forward-on-no-candidate-fx.md)를 참조하세요.
+`Microsoft.AspNetCore.App` 참조에 버전 번호를 지정해도 해당 버전의 고유 프레임워크가 선택된다고 보장할 수 **없습니다**. 예를 들어 "2.2.1" 버전을 지정했는데 "2.2.3"이 설치되는 경우가 있습니다. 이 경우 앱은 "2.2.3"을 사용합니다. 권장되는 방법은 아니지만 롤포워드를 비활성화할 수 있습니다(패치 및/또는 부 버전). DotNet 호스트 롤포워드 및 이 동작을 구성하는 방법에 대한 자세한 내용은 [DotNet 호스트 롤포워드](https://github.com/dotnet/core-setup/blob/master/Documentation/design-docs/roll-forward-on-no-candidate-fx.md)를 참조하세요.
+
+::: moniker-end
 
 ::: moniker range="= aspnetcore-2.1"
 
@@ -68,6 +96,8 @@ ASP.NET Core 2.1 이상 Entity Framework Core 2.1 이상의 모든 기능은 `Mi
 * 이것은 .NET Core 2.1 SDK의 알려진 문제입니다.
 
 ::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
 
 <a name="update"></a>
 
@@ -83,3 +113,5 @@ ASP.NET Core를 업데이트하려면:
  애플리케이션을 다시 시작하면 애플리케이션이 최신 설치 버전으로 롤포워드됩니다. 프로젝트 파일에서 `Microsoft.AspNetCore.App` 버전 번호를 업데이트할 필요는 없습니다. 자세한 내용은 [Framework 종속 앱 롤포워드](/dotnet/core/versions/selection#framework-dependent-apps-roll-forward)를 참조하세요.
 
 애플리케이션에서 이전에 `Microsoft.AspNetCore.All`을 사용한 경우 [Microsoft.AspNetCore.All에서 Microsoft.AspNetCore.App으로 마이그레이션](xref:fundamentals/metapackage#migrate)을 참조하세요.
+
+::: moniker-end

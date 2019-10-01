@@ -5,14 +5,14 @@ description: ASP.NET Core에서 종속성 주입을 구현하는 방법 및 사�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/14/2019
+ms.date: 09/24/2019
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: a984bb766e6876db4f8ed4c850a1984ba87d627d
-ms.sourcegitcommit: 476ea5ad86a680b7b017c6f32098acd3414c0f6c
+ms.openlocfilehash: fefd0b9df71d5b0e7c30a31620292fd37eeecfa4
+ms.sourcegitcommit: e54672f5c493258dc449fac5b98faf47eb123b28
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/14/2019
-ms.locfileid: "69022284"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71248268"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>ASP.NET Core에서 종속성 주입
 
@@ -26,7 +26,7 @@ MVC 컨트롤러 내의 종속성 주입에 대한 자세한 내용은 <xref:mvc
 
 ## <a name="overview-of-dependency-injection"></a>종속성 주입 개요
 
-‘종속성’은 다른 개체에 필요한 모든 개체입니다. 앱의 다른 클래스가 종속된 `MyDependency` 클래스에서 `WriteMessage` 메서드를 사용하는 다음 코드를 살펴보세요.
+‘종속성’은 다른 개체에 필요한 모든 개체입니다.  앱의 다른 클래스가 종속된 `MyDependency` 클래스에서 `WriteMessage` 메서드를 사용하는 다음 코드를 살펴보세요.
 
 ```csharp
 public class MyDependency
@@ -70,17 +70,37 @@ public class IndexModel : PageModel
 
 * 인퍼테이스 또는 기본 클래스를 사용하여 종속성 구현을 추상화합니다.
 * 서비스 컨테이너에 종속성 등록. ASP.NET Core는 서비스 컨테이너인 <xref:System.IServiceProvider>를 기본 제공합니다. 서비스는 앱의 `Startup.ConfigureServices` 메서드에서 등록됩니다.
-* 서비스가 사용되는 클래스의 생성자에 주입됨. 프레임워크가 종속성의 인스턴스를 만들고 더 이상 필요하지 않으면 삭제하는 작업을 담당합니다.
+* 서비스가 사용되는 클래스의 생성자에 주입됨.  프레임워크가 종속성의 인스턴스를 만들고 더 이상 필요하지 않으면 삭제하는 작업을 담당합니다.
 
 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples)에서 `IMyDependency` 인터페이스는 서비스가 앱에 제공하는 메서드를 정의합니다.
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Interfaces/IMyDependency.cs?name=snippet1)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Interfaces/IMyDependency.cs?name=snippet1)]
+
+::: moniker-end
 
 이 인터페이스는 구체적인 형식 `MyDependency`에서 구현됩니다.
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Services/MyDependency.cs?name=snippet1)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Services/MyDependency.cs?name=snippet1)]
 
-`MyDependency`는 자신의 생성자에서 <xref:Microsoft.Extensions.Logging.ILogger`1>를 요청합니다. 종속성 주입을 연결된 방식으로 사용하는 일은 특별한 경우가 아닙니다. 요청된 각 종속성은 차례로 자체 종속성을 요청합니다. 컨테이너는 그래프의 종속성을 해결하고 완전히 해결된 서비스를 반환합니다. 해결해야 하는 종속성이 모인 집합은 일반적으로 종속성 트리, 종속성 그래프 또는 개체 그래프라고 합니다.
+::: moniker-end
+
+`MyDependency`는 자신의 생성자에서 <xref:Microsoft.Extensions.Logging.ILogger`1>를 요청합니다. 종속성 주입을 연결된 방식으로 사용하는 일은 특별한 경우가 아닙니다. 요청된 각 종속성은 차례로 자체 종속성을 요청합니다. 컨테이너는 그래프의 종속성을 해결하고 완전히 해결된 서비스를 반환합니다. 해결해야 하는 종속성이 모인 집합은 일반적으로 종속성 트리, 종속성 그래프 또는 개체 그래프라고 합니다    .
 
 `IMyDependency` 및 `ILogger<TCategoryName>`는 서비스 컨테이너에 등록되어야 합니다. `IMyDependency`는 `Startup.ConfigureServices`에서 등록됩니다. `ILogger<TCategoryName>`은 로깅 추상화 인프라에서 등록하므로, 프레임워크에서 기본적으로 등록한 [프레임워크 제공 서비스](#framework-provided-services)입니다.
 
@@ -92,7 +112,17 @@ services.AddSingleton(typeof(ILogger<T>), typeof(Logger<T>));
 
 샘플 앱에서 `IMyDependency` 서비스는 구체적인 형식 `MyDependency`로 등록됩니다. 이 등록은 서비스 수명을 단일 요청의 수명으로 지정합니다. [서비스 수명](#service-lifetimes)에 대해서는 이 항목의 뒷부분에서 설명합니다.
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Startup.cs?name=snippet1&highlight=5)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Startup.cs?name=snippet1&highlight=5)]
+
+::: moniker-end
 
 > [!NOTE]
 > 각 `services.Add{SERVICE_NAME}` 확장 메서드는 서비스를 추가(및 잠재적으로 구성)합니다. 예를 들어 `services.AddMvc()`는 Razor 페이지와 MVC에서 요청하는 서비스를 추가합니다. 앱에서 이 규칙을 따르는 것이 좋습니다. 확장 메서드를 [Microsoft.Extensions.DependencyInjection](/dotnet/api/microsoft.extensions.dependencyinjection) 네임스페이스에 배치하여 서비스 등록 그룹을 캡슐화합니다.
@@ -117,34 +147,92 @@ public class MyDependency : IMyDependency
 
 샘플 앱에서는 `IMyDependency` 인스턴스가 요청되며 이 인스턴스는 서비스의 `WriteMessage` 메서드를 호출하는 데 사용됩니다.
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Pages/Index.cshtml.cs?name=snippet1&highlight=3,6,13,29-30)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Pages/Index.cshtml.cs?name=snippet1&highlight=3,6,13,29-30)]
+
+::: moniker-end
+
+## <a name="services-injected-into-startup"></a>시작에 삽입된 서비스
+
+제네릭 호스트(<xref:Microsoft.Extensions.Hosting.IHostBuilder>)를 사용할 경우 다음 서비스 유형만 `Startup` 생성자에 삽입할 수 있습니다.
+
+* `IWebHostEnvironment`
+* <xref:Microsoft.Extensions.Hosting.IHostEnvironment>
+* <xref:Microsoft.Extensions.Configuration.IConfiguration>
+
+서비스는 `Startup.Configure`에 삽입할 수 있습니다.
+
+```csharp
+public void Configure(IApplicationBuilder app, IOptions<MyOptions> options)
+{
+    ...
+}
+```
+
+자세한 내용은 <xref:fundamentals/startup>을 참조하세요.
 
 ## <a name="framework-provided-services"></a>프레임워크에서 제공하는 서비스
 
-`Startup.ConfigureServices` 메서드는 Entity Framework Core 및 ASP.NET Core MVC와 같은 플랫폼 기능을 비롯해 앱이 사용하는 서비스를 정의합니다. 처음에 `ConfigureServices`에 제공되는 `IServiceCollection`에는 다음과 같은 서비스가 정의되어 있습니다([호스트가 구성된 방법](xref:fundamentals/index#host)에 따라 달라집니다).
+`Startup.ConfigureServices` 메서드는 Entity Framework Core 및 ASP.NET Core MVC와 같은 플랫폼 기능을 비롯해 앱이 사용하는 서비스를 정의합니다. 처음에 `ConfigureServices`에 제공되는 `IServiceCollection`에는 [호스트가 구성된 방법](xref:fundamentals/index#host)에 따라 달라지는 프레임워크에 의해 정의되는 서비스가 있습니다. ASP.NET Core 템플릿을 기반으로 하는 앱의 경우 프레임워크에 의해 등록된 수백 개의 서비스를 가지는 것은 드문 일이 아닙니다. 다음 표에는 프레임워크에서 등록한 서비스들의 작은 샘플이 나열되어 있습니다.
 
-| 서비스 종류 | 수명 |
+::: moniker range=">= aspnetcore-3.0"
+
+| 서비스 유형 | 수명 |
 | ------------ | -------- |
-| <xref:Microsoft.AspNetCore.Hosting.Builder.IApplicationBuilderFactory?displayProperty=fullName> | Transient |
-| <xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime?displayProperty=fullName> | Singleton |
-| <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment?displayProperty=fullName> | Singleton |
+| <xref:Microsoft.AspNetCore.Hosting.Builder.IApplicationBuilderFactory?displayProperty=fullName> | 임시 |
+| `IHostApplicationLifetime` | Singleton |
+| `IWebHostEnvironment` | Singleton |
 | <xref:Microsoft.AspNetCore.Hosting.IStartup?displayProperty=fullName> | Singleton |
-| <xref:Microsoft.AspNetCore.Hosting.IStartupFilter?displayProperty=fullName> | Transient |
+| <xref:Microsoft.AspNetCore.Hosting.IStartupFilter?displayProperty=fullName> | 임시 |
 | <xref:Microsoft.AspNetCore.Hosting.Server.IServer?displayProperty=fullName> | Singleton |
-| <xref:Microsoft.AspNetCore.Http.IHttpContextFactory?displayProperty=fullName> | Transient |
+| <xref:Microsoft.AspNetCore.Http.IHttpContextFactory?displayProperty=fullName> | 임시 |
 | <xref:Microsoft.Extensions.Logging.ILogger`1?displayProperty=fullName> | Singleton |
 | <xref:Microsoft.Extensions.Logging.ILoggerFactory?displayProperty=fullName> | Singleton |
 | <xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider?displayProperty=fullName> | Singleton |
-| <xref:Microsoft.Extensions.Options.IConfigureOptions`1?displayProperty=fullName> | Transient |
+| <xref:Microsoft.Extensions.Options.IConfigureOptions`1?displayProperty=fullName> | 임시 |
 | <xref:Microsoft.Extensions.Options.IOptions`1?displayProperty=fullName> | Singleton |
 | <xref:System.Diagnostics.DiagnosticSource?displayProperty=fullName> | Singleton |
 | <xref:System.Diagnostics.DiagnosticListener?displayProperty=fullName> | Singleton |
 
-서비스 컬렉션 확장 메서드를 사용하여 서비스(및 필요한 경우 해당 종속 서비스)를 등록할 수 있는 경우 단일 `Add{SERVICE_NAME}` 확장 메서드를 사용하여 해당 서비스에 필요한 모든 서비스를 등록하는 것이 규칙입니다. 다음 코드는 확장 메서드 [AddDbContext\<TContext>](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext), <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.AddIdentityCore*> 및 <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddMvc*>를 사용하여 컨테이너에 서비스를 추가하는 방법을 보여 주는 예제입니다.
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+| 서비스 유형 | 수명 |
+| ------------ | -------- |
+| <xref:Microsoft.AspNetCore.Hosting.Builder.IApplicationBuilderFactory?displayProperty=fullName> | 임시 |
+| <xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime?displayProperty=fullName> | Singleton |
+| <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment?displayProperty=fullName> | Singleton |
+| <xref:Microsoft.AspNetCore.Hosting.IStartup?displayProperty=fullName> | Singleton |
+| <xref:Microsoft.AspNetCore.Hosting.IStartupFilter?displayProperty=fullName> | 임시 |
+| <xref:Microsoft.AspNetCore.Hosting.Server.IServer?displayProperty=fullName> | Singleton |
+| <xref:Microsoft.AspNetCore.Http.IHttpContextFactory?displayProperty=fullName> | 임시 |
+| <xref:Microsoft.Extensions.Logging.ILogger`1?displayProperty=fullName> | Singleton |
+| <xref:Microsoft.Extensions.Logging.ILoggerFactory?displayProperty=fullName> | Singleton |
+| <xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider?displayProperty=fullName> | Singleton |
+| <xref:Microsoft.Extensions.Options.IConfigureOptions`1?displayProperty=fullName> | 임시 |
+| <xref:Microsoft.Extensions.Options.IOptions`1?displayProperty=fullName> | Singleton |
+| <xref:System.Diagnostics.DiagnosticSource?displayProperty=fullName> | Singleton |
+| <xref:System.Diagnostics.DiagnosticListener?displayProperty=fullName> | Singleton |
+
+::: moniker-end
+
+## <a name="register-additional-services-with-extension-methods"></a>확장 메서드를 사용하여 추가 서비스 등록
+
+서비스 컬렉션 확장 메서드를 사용하여 서비스(및 필요한 경우 해당 종속 서비스)를 등록할 수 있는 경우 단일 `Add{SERVICE_NAME}` 확장 메서드를 사용하여 해당 서비스에 필요한 모든 서비스를 등록하는 것이 규칙입니다. 다음 코드는 확장 메서드 [AddDbContext\<TContext>](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) 및 <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.AddIdentityCore*>를 사용하여 컨테이너에 서비스를 추가하는 방법을 보여 주는 예제입니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
+    ...
+
     services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -152,7 +240,7 @@ public void ConfigureServices(IServiceCollection services)
         .AddEntityFrameworkStores<ApplicationDbContext>()
         .AddDefaultTokenProviders();
 
-    services.AddMvc();
+    ...
 }
 ```
 
@@ -162,7 +250,7 @@ public void ConfigureServices(IServiceCollection services)
 
 등록된 각 서비스의 수명을 적절히 선택합니다. ASP.NET Core 서비스는 다음 수명을 사용하여 구성할 수 있습니다.
 
-### <a name="transient"></a>Transient
+### <a name="transient"></a>임시
 
 Transient 수명 서비스(<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddTransient*>)는 서비스 컨테이너에서 요청할 때마다 만들어집니다. 이 수명은 간단한 상태 비저장 서비스에 가장 적합합니다.
 
@@ -184,13 +272,13 @@ Scoped 수명 서비스(<xref:Microsoft.Extensions.DependencyInjection.ServiceCo
 
 각 서비스 등록 확장 메서드는 특정 시나리오에 유용한 오버로드를 제공합니다.
 
-| 메서드 | 자동<br>개체<br>삭제 | 여러<br>구현 | 인수 전달 |
+| 방법 | 자동<br>개체<br>삭제 | 여러<br>구현 | 인수 전달 |
 | ------ | :-----------------------------: | :-------------------------: | :-------: |
 | `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>예제:<br>`services.AddScoped<IMyDep, MyDep>();` | 예 | 예 | 아니요 |
-| `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>예:<br>`services.AddScoped<IMyDep>(sp => new MyDep());`<br>`services.AddScoped<IMyDep>(sp => new MyDep("A string!"));` | 예 | 예 | 예 |
+| `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>예제:<br>`services.AddScoped<IMyDep>(sp => new MyDep());`<br>`services.AddScoped<IMyDep>(sp => new MyDep("A string!"));` | 예 | 예 | 예 |
 | `Add{LIFETIME}<{IMPLEMENTATION}>()`<br>예제:<br>`services.AddScoped<MyDep>();` | 예 | 아니요 | 아니요 |
-| `Add{LIFETIME}<{SERVICE}>(new {IMPLEMENTATION})`<br>예:<br>`services.AddScoped<IMyDep>(new MyDep());`<br>`services.AddScoped<IMyDep>(new MyDep("A string!"));` | 아니요 | 예 | 예 |
-| `Add{LIFETIME}(new {IMPLEMENTATION})`<br>예:<br>`services.AddScoped(new MyDep());`<br>`services.AddScoped(new MyDep("A string!"));` | 아니요 | 아니요 | 예 |
+| `Add{LIFETIME}<{SERVICE}>(new {IMPLEMENTATION})`<br>예제:<br>`services.AddScoped<IMyDep>(new MyDep());`<br>`services.AddScoped<IMyDep>(new MyDep("A string!"));` | 아니요 | 예 | 예 |
+| `Add{LIFETIME}(new {IMPLEMENTATION})`<br>예제:<br>`services.AddScoped(new MyDep());`<br>`services.AddScoped(new MyDep("A string!"));` | 아니요 | 아니요 | 예 |
 
 형식 삭제에 대한 자세한 내용은 [서비스의 삭제](#disposal-of-services) 섹션을 참조하세요. 여러 구현에 대한 일반적인 시나리오는 [테스트용 모의 형식](xref:test/integration-tests#inject-mock-services)입니다.
 
@@ -248,11 +336,31 @@ Entity Framework 컨텍스트는 일반적으로 [범위가 지정된 수명](#s
 
 이러한 수명 및 등록 옵션 간의 차이점을 살펴보려면 작업을 고유한 ID인 `OperationId`가 부여된 작업으로 나타내는 다음 인터페이스들을 고려해 보세요. 다음 인터페이스들에 대해 작업 서비스의 수명을 구성하는 방법에 따라 컨테이너는 클래스에서 요청할 때 서비스의 같은 인스턴스나 다른 인스턴스를 제공합니다.
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Interfaces/IOperation.cs?name=snippet1)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Interfaces/IOperation.cs?name=snippet1)]
+
+::: moniker-end
 
 인터페이스들은 `Operation` 클래스에서 구현됩니다. `Operation` 생성자는 GUID가 제공되지 않는 경우 GUID를 생성합니다.
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Models/Operation.cs?name=snippet1)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Models/Operation.cs?name=snippet1)]
+
+::: moniker-end
 
 `OperationService`는 각각 다른 `Operation` 형식에 종속되어 등록됩니다. 종속성 주입을 통해 `OperationService`를 요청하면 종속 서비스의 수명에 따라 각 서비스의 새 인스턴스나 기존 인스턴스를 받습니다.
 
@@ -260,21 +368,51 @@ Entity Framework 컨텍스트는 일반적으로 [범위가 지정된 수명](#s
 * 클라이언트 요청에 따라 범위가 지정된 서비스가 생성되면 `IOperationScoped` 서비스의 `OperationId`는 클라이언트 요청 내의 `OperationService`와 같습니다. 전체 클라이언트 요청에서 두 서비스는 다른 `OperationId` 값을 공유합니다.
 * 싱글톤 및 싱글톤 인스턴스 서비스가 한 번 생성되어 모든 클라이언트 요청 및 모든 서비스에서 사용될 경우 `OperationId`는 모든 서비스 요청에서 동일합니다.
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Services/OperationService.cs?name=snippet1)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Services/OperationService.cs?name=snippet1)]
+
+::: moniker-end
 
 `Startup.ConfigureServices`에서 각 형식이 자신의 명명된 수명에 따라 컨테이너에 추가됩니다.
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Startup.cs?name=snippet1&highlight=6-9,12)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Startup.cs?name=snippet1&highlight=6-9,12)]
+
+::: moniker-end
 
 `IOperationSingletonInstance` 서비스는 알려진 ID가 `Guid.Empty`인 특정 인스턴스를 사용 중입니다. 이 형식이 사용 중임을 명확하게 알 수 있습니다(이 인스턴스의 GUID는 모두 0입니다).
 
 이 샘플 앱은 개별 요청 내의 개체 수명과 개별 요청 간의 개체 수명을 보여 줍니다. 샘플 앱의 `IndexModel`은 각 종류의 `IOperation` 형식과 `OperationService`를 요청합니다. 그런 다음, 페이지에서는 속성 할당을 통해 페이지 모델 클래스 및 서비스의 `OperationId` 값을 모두 표시합니다.
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Pages/Index.cshtml.cs?name=snippet1&highlight=7-11,14-18,21-25)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Pages/Index.cshtml.cs?name=snippet1&highlight=7-11,14-18,21-25)]
+
+::: moniker-end
 
 다음 출력은 두 요청의 결과를 보여 줍니다.
 
-**첫 번째 요청:**:
+**첫 번째 요청:** :
 
 컨트롤러 작업:
 
@@ -316,30 +454,93 @@ Singleton: 01271bc1-9e31-48e7-8f7c-7261b040ded9
 
 [IServiceScopeFactory.CreateScope](xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory.CreateScope*)를 사용하여 <xref:Microsoft.Extensions.DependencyInjection.IServiceScope>를 만들어서 앱 범위 내로 범위가 지정된 서비스를 해결합니다. 이 방법은 시작 시 범위가 지정된 서비스에 액세스하여 초기화 작업을 실행하는 데 유용합니다. 다음 예제에서는 `Program.Main`에서 `MyScopedService`에 대한 컨텍스트를 가져오는 방법을 보여 줍니다.
 
+::: moniker range=">= aspnetcore-3.0"
+
 ```csharp
-public static void Main(string[] args)
+using System;
+using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+
+public class Program
 {
-    var host = CreateWebHostBuilder(args).Build();
-
-    using (var serviceScope = host.Services.CreateScope())
+    public static async Task Main(string[] args)
     {
-        var services = serviceScope.ServiceProvider;
+        var host = CreateHostBuilder(args).Build();
 
-        try
+        using (var serviceScope = host.Services.CreateScope())
         {
-            var serviceContext = services.GetRequiredService<MyScopedService>();
-            // Use the context here
+            var services = serviceScope.ServiceProvider;
+
+            try
+            {
+                var serviceContext = services.GetRequiredService<MyScopedService>();
+                // Use the context here
+            }
+            catch (Exception ex)
+            {
+                var logger = services.GetRequiredService<ILogger<Program>>();
+                logger.LogError(ex, "An error occurred.");
+            }
         }
-        catch (Exception ex)
-        {
-            var logger = services.GetRequiredService<ILogger<Program>>();
-            logger.LogError(ex, "An error occurred.");
-        }
+    
+        await host.RunAsync();
     }
 
-    host.Run();
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
 }
 ```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+```csharp
+using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        var host = CreateWebHostBuilder(args).Build();
+
+        using (var serviceScope = host.Services.CreateScope())
+        {
+            var services = serviceScope.ServiceProvider;
+
+            try
+            {
+                var serviceContext = services.GetRequiredService<MyScopedService>();
+                // Use the context here
+            }
+            catch (Exception ex)
+            {
+                var logger = services.GetRequiredService<ILogger<Program>>();
+                logger.LogError(ex, "An error occurred.");
+            }
+        }
+    
+        await host.RunAsync();
+    }
+
+    public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+        WebHost.CreateDefaultBuilder(args)
+            .UseStartup<Startup>();
+}
+```
+
+::: moniker-end
 
 ## <a name="scope-validation"></a>범위 유효성 검사
 
@@ -350,7 +551,7 @@ public static void Main(string[] args)
 
 루트 서비스 공급자는 <xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider*>를 호출할 때 만들어집니다. 루트 서비스 공급자의 수명은 공급자가 앱과 함께 시작되고 앱이 종료될 때 삭제되는 앱/서버의 수명에 해당합니다.
 
-범위가 지정된 서비스는 서비스를 만든 컨테이너에 의해 삭제됩니다. 범위가 지정된 서비스가 루트 컨테이너에서 만들어지는 경우 서비스의 수명은 효과적으로 싱글톤으로 승격됩니다. 해당 서비스는 앱/서버가 종료될 때 루트 컨테이너에 의해서만 삭제되기 때문입니다. 서비스 범위의 유효성 검사는 `BuildServiceProvider`가 호출될 경우 이러한 상황을 감지합니다.
+범위가 지정된 서비스는 서비스를 만든 컨테이너에 의해 삭제됩니다. 범위가 지정된 서비스가 루트 컨테이너에서 만들어지는 경우 서비스의 수명은 사실상 싱글톤으로 승격됩니다. 해당 서비스는 앱/서버가 종료될 때 루트 컨테이너에 의해서만 삭제되기 때문입니다. 서비스 범위의 유효성 검사는 `BuildServiceProvider`가 호출될 경우 이러한 상황을 감지합니다.
 
 자세한 내용은 <xref:fundamentals/host/web-host#scope-validation>을 참조하세요.
 
@@ -405,7 +606,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="default-service-container-replacement"></a>기본 서비스 컨테이너 바꾸기
 
-기본 제공 서비스 컨테이너는 프레임워크 및 대부분의 소비자 앱의 요구를 충족하기 위한 것입니다. 지원하지 않는 특정 기능이 필요하지 않는 한 기본 제공 컨테이너를 사용하는 것이 좋습니다. 기본 제공 컨테이너에서 찾을 수 없는 타사 컨테이너에서 지원되는 일부 기능들로는 다음과 같은 것들이 있습니다.
+기본 제공 서비스 컨테이너는 프레임워크 및 대부분의 소비자 앱의 요구를 충족하기 위한 것입니다. 기본 제공 컨테이너가 지원하지 않는 특정 기능이 필요하지 않는 한, 다음과 같은 기본 제공 컨테이너를 사용하는 것이 좋습니다.
 
 * 속성 삽입
 * 이름에 기반한 삽입
@@ -413,49 +614,17 @@ public void ConfigureServices(IServiceCollection services)
 * 사용자 지정 수명 관리
 * 초기화 지연에 대한 `Func<T>` 지원
 
-어댑터를 지원하는 일부 컨테이너의 목록은 [종속성 주입 readme.md 파일](https://github.com/aspnet/Extensions/tree/master/src/DependencyInjection)을 참조하세요.
+다음 타사 컨테이너는 ASP.NET Core 앱에서 사용할 수 있습니다.
 
-다음 샘플은 기본 제공 컨테이너를 [Autofac](https://autofac.org/)로 대체합니다.
+* [Autofac](https://autofac.readthedocs.io/en/latest/integration/aspnetcore.html)
+* [DryIoc](https://www.nuget.org/packages/DryIoc.Microsoft.DependencyInjection)
+* [유예](https://www.nuget.org/packages/Grace.DependencyInjection.Extensions)
+* [LightInject](https://github.com/seesharper/LightInject.Microsoft.DependencyInjection)
+* [Lamar](https://jasperfx.github.io/lamar/)
+* [Stashbox](https://github.com/z4kn4fein/stashbox-extensions-dependencyinjection)
+* [Unity](https://www.nuget.org/packages/Unity.Microsoft.DependencyInjection)
 
-* 적절한 컨테이너 패키지를 설치합니다.
-
-  * [Autofac](https://www.nuget.org/packages/Autofac/)
-  * [Autofac.Extensions.DependencyInjection](https://www.nuget.org/packages/Autofac.Extensions.DependencyInjection/)
-
-* `Startup.ConfigureServices`에서 컨테이너를 구성하고 `IServiceProvider`를 반환합니다.
-
-    ```csharp
-    public IServiceProvider ConfigureServices(IServiceCollection services)
-    {
-        services.AddMvc();
-        // Add other framework services
-
-        // Add Autofac
-        var containerBuilder = new ContainerBuilder();
-        containerBuilder.RegisterModule<DefaultModule>();
-        containerBuilder.Populate(services);
-        var container = containerBuilder.Build();
-        return new AutofacServiceProvider(container);
-    }
-    ```
-
-    타사 컨테이너를 사용하려면 `Startup.ConfigureServices`가 `IServiceProvider`를 반환해야 합니다.
-
-* `DefaultModule`에 Autofac을 구성합니다.
-
-    ```csharp
-    public class DefaultModule : Module
-    {
-        protected override void Load(ContainerBuilder builder)
-        {
-            builder.RegisterType<CharacterRepository>().As<ICharacterRepository>();
-        }
-    }
-    ```
-
-런타임 시 형식을 확인하고 종속성을 주입하는 데 Autofac이 사용됩니다. ASP.NET Core에서 Autofac을 사용하는 방법에 대한 자세한 내용은 [Autofac documentation](https://docs.autofac.org/en/latest/integration/aspnetcore.html)(Autofac 설명서)을 참조하세요.
-
-### <a name="thread-safety"></a>스레드로부터의 안전성
+### <a name="thread-safety"></a>스레드 보안
 
 스레드로부터 안전한 싱글톤 서비스를 만듭니다. 싱글톤 서비스가 Transient 서비스에 대한 종속성을 갖는 경우 Transient 서비스는 싱글톤에서 사용되는 방식에 따라 스레드로부터 안전성이 필요할 수 있습니다.
 
@@ -469,7 +638,7 @@ public void ConfigureServices(IServiceCollection services)
 
 * 서비스에 정적으로 액세스(예를 들어 다른 곳에 사용하기 위해 [IApplicationBuilder.ApplicationServices](xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices)를 정적으로 입력)하지 마세요.
 
-* ‘서비스 로케이터 패턴’을 사용하지 마세요. 예를 들어 DI를 대신 사용할 수 있는 경우 서비스 인스턴스를 가져오기 위해 <xref:System.IServiceProvider.GetService*>를 호출하지 마세요.
+* ‘서비스 로케이터 패턴’을 사용하지 마세요.  예를 들어 DI를 대신 사용할 수 있는 경우 서비스 인스턴스를 가져오기 위해 <xref:System.IServiceProvider.GetService*>를 호출하지 마세요.
 
   **잘못된 예:**
 
@@ -514,9 +683,9 @@ public void ConfigureServices(IServiceCollection services)
 
 모든 권장 사항과 마찬가지로, 권장 사항을 무시해야 하는 상황이 발생할 수 있습니다. 예외는 드물게 발생하며, 대부분 프레임워크 자체 내에서 특별한 경우에만 발생합니다.
 
-DI는 정적/전역 개체 액세스 패턴의 ‘대안’입니다. 고정 개체 액세스와 함께 사용할 경우 DI의 장점을 실현할 수 없습니다.
+DI는 정적/전역 개체 액세스 패턴의 ‘대안’입니다.  고정 개체 액세스와 함께 사용할 경우 DI의 장점을 실현할 수 없습니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:mvc/views/dependency-injection>
 * <xref:mvc/controllers/dependency-injection>
