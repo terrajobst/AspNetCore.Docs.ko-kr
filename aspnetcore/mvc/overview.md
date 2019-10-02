@@ -143,7 +143,7 @@ public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = 
 
 ### <a name="dependency-injection"></a>종속성 주입
 
-ASP.NET Core는 기본적으로 [DI(종속성 주입 )](../fundamentals/dependency-injection.md)를 지원합니다. ASP.NET Core MVC에서 [컨트롤러](controllers/dependency-injection.md)는 생성자를 통해서 필요한 서비스를 요청하여 [명시적 종속성 원칙](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)을 따를 수 있습니다.
+ASP.NET Core는 기본적으로 [DI(종속성 주입 )](../fundamentals/dependency-injection.md)를 지원합니다. ASP.NET Core MVC에서 [컨트롤러](controllers/dependency-injection.md)는 생성자를 통해서 필요한 서비스를 요청하여 [명시적 종속성 원칙](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)을 따르도록 할 수 있습니다.
 
 또한 앱에서 `@inject` 지시문을 사용하여 [보기 파일에서 종속성 주입](views/dependency-injection.md)을 사용할 수 있습니다.
 
