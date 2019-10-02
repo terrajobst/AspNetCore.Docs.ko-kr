@@ -15,7 +15,7 @@ ms.locfileid: "70985566"
 ---
 # <a name="partial-views-in-aspnet-core"></a>ASP.NET Core의 부분 보기
 
-작성자: [Steve Smith](https://ardalis.com/), [Luke Latham](https://github.com/guardrex), [Maher JENDOUBI](https://twitter.com/maherjend), [Rick Anderson](https://twitter.com/RickAndMSFT), [Scott Sauber](https://twitter.com/scottsauber)
+작성자: [Steve Smith](https://ardalis.com/), [Luke Latham](https://github.com/guardrex), [Maher JENDOUBI](https://twitter.com/maherjend), [Rick Anderson](https://twitter.com/RickAndMSFT) 및 [Scott Sauber](https://twitter.com/scottsauber)
 
 부분 보기는 다른 태그 파일의 렌더링된 출력  *내에서* HTML 출력을 렌더링하는 [Razor](xref:mvc/views/razor) 태그 파일( *.cshtml*)입니다.
 
@@ -33,14 +33,14 @@ ms.locfileid: "70985566"
 
 * 큰 태그 파일을 작은 구성 요소로 나눕니다.
 
-  여러 논리적 조각으로 구성된 크고 복잡한 태그 파일에서는 부분 보기로 구분된 각 부분에 대해 작업하는 것이 유용합니다. 태그에는 전체 페이지 구조와 부분 보기에 대한 참조만 포함되므로 태그 파일의 코드는 관리 가능합니다.
-* 태그 파일에서 공통 태그 콘텐츠의 중복을 줄입니다.
+  여러 개의 논리적 부분으로 구성된 크고 복잡한 태그 파일은 부분 보기로 분리된 각 부분으로 작업하는 것이 유용합니다. 태그에는 전체 페이지 구조와 부분 보기에 대한 참조만 포함되므로 태그 파일의 코드를 관리하기가 쉽습니다.
+* 태그 파일들 간의 공통 태그 콘텐츠 중복을 줄입니다.
 
-  태그 파일에서 동일한 태그 요소가 사용되면 부분 보기가 태그 콘텐츠의 중복을 하나의 부분 보기 파일로 제거합니다. 부분 보기에서 태그가 변경되면 부분 보기를 사용하는 태그 파일의 렌더링된 출력을 업데이트합니다.
+  태그 파일들 간에 동일한 태그 요소가 사용될 때 부분 보기가 태그 콘텐츠의 중복을 하나의 부분 보기 파일로 제거합니다. 부분 보기에서 태그가 변경되면 부분 보기를 사용하는 태그 파일들의 렌더링된 출력이 수정됩니다.
 
-부분 보기는 일반 레이아웃 요소를 유지 관리하는 데 사용해서는 안 됩니다. 일반 레이아웃 요소는 [_Layout.cshtml](xref:mvc/views/layout) 파일에서 지정해야 합니다.
+공통 레이아웃 요소를 유지 관리하기 위해서 부분 보기를 사용해서는 안 됩니다. 공통 레이아웃 요소는 [_Layout.cshtml](xref:mvc/views/layout) 파일에 지정해야 합니다.
 
-태그를 렌더링하려면 복잡한 렌더링 논리 또는 코드 실행이 필요한 부분 보기를 사용하지 마세요. 부분 보기 대신 [보기 구성 요소](xref:mvc/views/view-components)를 사용합니다.
+태그를 렌더링하기 위해 복잡한 렌더링 논리 또는 코드 실행이 필요한 경우 부분 보기를 사용하지 마세요. 부분 보기 대신 [보기 구성 요소](xref:mvc/views/view-components)를 사용합니다.
 
 ## <a name="declare-partial-views"></a>부분 보기 선언
 
@@ -48,7 +48,7 @@ ms.locfileid: "70985566"
 
 부분 보기는 ‘보기’ 폴더(MVC) 또는 *Pages* 폴더(Razor Pages)에서 유지 관리되는 *.cshtml* 태그 파일입니다. 
 
-ASP.NET Core MVC에서 컨트롤러의 <xref:Microsoft.AspNetCore.Mvc.ViewResult>는 보기 또는 부분 보기를 반환할 수 있습니다. Razor Pages에서 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel>은 <xref:Microsoft.AspNetCore.Mvc.PartialViewResult> 개체로 표시되는 부분 보기를 반환할 수 있습니다. 부분 보기 참조 및 렌더링은 [부분 보기 참조](#reference-a-partial-view) 섹션에 설명되어 있습니다.
+ASP.NET Core MVC에서 컨트롤러의 <xref:Microsoft.AspNetCore.Mvc.ViewResult>는 보기 또는 부분 보기를 반환할 수 있습니다. Razor 페이지에서 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel>은 <xref:Microsoft.AspNetCore.Mvc.PartialViewResult> 개체로 표시되는 부분 보기를 반환할 수 있습니다. 부분 보기 참조 및 렌더링은 [부분 보기 참조](#reference-a-partial-view) 섹션에 설명되어 있습니다.
 
 MVC 보기 또는 페이지 렌더링과 달리 부분 보기는 *_ViewStart.cshtml*을 실행하지 않습니다. *_ViewStart.cshtml*에 대한 자세한 내용은 <xref:mvc/views/layout>을 참조하세요.
 
@@ -72,7 +72,7 @@ MVC 보기 렌더링과 달리 부분 보기는 *_ViewStart.cshtml*을 실행하
 
 ::: moniker range=">= aspnetcore-2.0"
 
-### <a name="use-a-partial-view-in-a-razor-pages-pagemodel"></a>Razor Pages PageModel에서 부분 보기 사용
+### <a name="use-a-partial-view-in-a-razor-pages-pagemodel"></a>Razor 페이지 PageModel에서 부분 보기 사용
 
 ASP.NET Core 2.0 또는 2.1에서 다음 처리기 메서드는 응답에 대해 *\_AuthorPartialRP.cshtml* 부분 보기를 렌더링합니다.
 
