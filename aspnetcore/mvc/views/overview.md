@@ -170,7 +170,7 @@ public IActionResult Contact()
 }
 ```
 
-보기에 제공할 수 있는 모델 유형에 대한 제한은 없습니다. 동작(메서드)가 거의 또는 전혀 정의되지 않은 POCO(Plain Old CLR Object) viewmodel을 사용하는 것이 좋습니다. 일반적으로 viewmodel 클래스는 앱의 루트에서 *Models* 폴더 또는 별도의 *ViewModels* 폴더에 저장됩니다. 위의 예제에 사용된 *Address* viewmodel은 *Address.cs*라는 파일에 저장된 POCO viewmodel입니다.
+보기에 제공할 수 있는 모델 유형에 대한 제한은 없습니다. 동작(메서드)이 거의 또는 전혀 정의되지 않은 POCO(Plain Old CLR Object) viewmodel을 사용하는 것이 좋습니다. 일반적으로 viewmodel 클래스는 앱의 루트에서 *Models* 폴더 또는 별도의 *ViewModels* 폴더에 저장됩니다. 위의 예제에 사용된 *Address* viewmodel은 *Address.cs*라는 파일에 저장된 POCO viewmodel입니다.
 
 ```csharp
 namespace WebApplication1.ViewModels
