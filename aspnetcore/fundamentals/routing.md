@@ -396,7 +396,7 @@ URL 생성에 대한 자세한 내용은 [URL 생성 참조](#url-generation-ref
 
 별표(`*`) 또는 이중 별표(`**`)를 경로 매개 변수의 접두사로 사용하여 URI의 나머지 부분에 바인딩할 수 있습니다. 이러한 매개 변수는 *범용* 매개 변수라고 합니다. 예를 들어 `blog/{**slug}`는 `/blog`로 시작하고 모든 값(`slug` 경로 값에 할당된)이 뒤따르는 모든 URI와 일치합니다. 범용 매개 변수는 빈 문자열과 일치시킬 수도 있습니다.
 
-catch-all 매개 변수는 경로 구분 기호(`/`) 문자를 포함하여 URL을 생성하는 데 경로가 사용될 때 적절한 문자를 이스케이프합니다. 예를 들어 경로 값이 `{ path = "my/path" }`인 경로 `foo/{*path}`는 `foo/my%2Fpath`를 생성합니다. 이스케이프된 슬래시에 주의하세요. 경로 구분 기호 문자를 왕복하려면 `**` 경로 매개 변수 접두사를 사용합니다. `{ path = "my/path" }`가 있는 경로 `foo/{**path}`은 `foo/my/path`를 생성합니다.
+catch-all 매개 변수는 경로 구분 기호(`/`) 문자를 포함하여 URL을 생성하는 데 경로가 사용될 때 적절한 문자를 이스케이프합니다. 예를 들어 경로 값이 `{ path = "my/path" }`인 경로 `foo/{*path}`는 `foo/my%2Fpath`를 생성합니다. 이스케이프된 슬래시에 주의하세요. 경로 구분 기호 문자를 왕복하려면 `**` 경로 매개 변수 접두사를 사용합니다. `{ path = "my/path" }`를 사용하는 경로 `foo/{**path}`는 `foo/my/path`를 생성합니다.
 
 경로 매개 변수에는 등호(`=`)로 구분된 매개 변수 이름 뒤에 기본값을 지정하여 지정된 *기본값*이 있을 수 있습니다. 예를 들어 `{controller=Home}`은 `controller`에 대한 기본값으로 `Home`을 정의합니다. URL에 매개 변수에 대한 값이 없는 경우 기본값이 사용됩니다. 경로 매개 변수는 `id?`와 같이 매개 변수 이름의 끝에 물음표(`?`)를 추가하면 선택적이 됩니다. 선택적 값과 기본 경로 매개 변수 간의 차이점은 기본값이 있는 경로 매개 변수는 항상 값을 생성한다는 것입니다. 선택적 매개 변수에는 요청 URL에서 값을 제공하는 경우에만 값이 있습니다.
 
@@ -476,14 +476,14 @@ public User GetUserById(int id) { }
 
 ASP.NET Core 프레임워크는 정규식 생성자에 `RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.CultureInvariant`를 추가합니다. 이러한 멤버에 대한 설명은 <xref:System.Text.RegularExpressions.RegexOptions>를 참조하세요.
 
-정규식은 라우팅 및 C# 언어에서 사용하는 것과 유사한 구분 기호 및 토큰을 사용합니다. 정규식 토큰은 이스케이프되어야 합니다. 라우팅에서 `^\d{3}-\d{2}-\d{4}$` 정규식을 사용하려면 `\` 문자열 이스케이프 문자를 이스케이프할 수 있도록 식의 문자열에 제공된 `\`(단일 백슬래시) 문자가 C# 원본 파일의 `\\`(이중 백슬래시) 문자로 있어야 합니다([약어 문자열 리터럴](/dotnet/csharp/language-reference/keywords/string)을 사용하지 않는 한). 라우팅 매개 변수 구분 기호 문자(`{`, `}`, `[`, `]`)를 이스케이프하려면 식에서 해당 문자를 이중으로 사용합니다(`{{`, `}`, `[[`, `]]`). 다음 표는 정규식 및 이스케이프된 버전을 보여 줍니다.
+정규식은 라우팅 및 C# 언어에서 사용하는 것과 유사한 구분 기호 및 토큰을 사용합니다. 정규식 토큰은 이스케이프되어야 합니다. 라우팅에서 `^\d{3}-\d{2}-\d{4}$`라는 정규식을 사용하려면, C# 소스 파일에서는 `\` 문자열 이스케이프 문자를 이스케이프하기 위해서 식 문자열의 `\`(단일 백슬래시) 문자를 `\\`(이중 백슬래시) 문자로 제공해야 합니다([약어 문자열 리터럴](/dotnet/csharp/language-reference/keywords/string)을 사용하지 않는 한). 라우팅 매개 변수 구분 기호 문자(`{`, `}`, `[`, `]`)를 이스케이프하려면 식에서 해당 문자를 이중으로 사용합니다(`{{`, `}`, `[[`, `]]`). 다음 표는 정규식 및 이스케이프된 버전을 보여 줍니다.
 
 | 정규식    | 이스케이프된 정규식     |
 | --------------------- | ------------------------------ |
 | `^\d{3}-\d{2}-\d{4}$` | `^\\d{{3}}-\\d{{2}}-\\d{{4}}$` |
 | `^[a-z]{2}$`          | `^[[a-z]]{{2}}$`               |
 
-라우팅에 사용되는 정규식은 캐럿(`^`) 문자로 시작하고 문자열의 시작 위치와 일치하는 경우가 많습니다. 식은 달러 기호(`$`) 문자로 끝나고 문자열의 끝과 일치하는 경우가 많습니다. `^` 및 `$` 문자는 정규식이 전체 경로 매개 변수 값과 일치하도록 합니다. `^` 및 `$` 문자 없이 정규식은 문자열 내의 모든 하위 문자열과 일치합니다. 이는 종종 원하는 것이 아닙니다. 다음 표에서는 예제를 제공하고, 일치하거나 일치에 실패하는 이유를 설명합니다.
+라우팅에 사용되는 정규식은 캐럿(`^`) 문자로 시작하고 문자열의 시작 위치와 일치하는 경우가 많습니다. 식은 달러 기호(`$`) 문자로 끝나고 문자열의 끝과 일치하는 경우가 많습니다. `^` 및 `$` 문자는 정규식이 전체 경로 매개 변수 값과 일치하도록 합니다. `^` 및 `$` 문자가 없는 정규식은 문자열 내의 모든 하위 문자열과 일치하는데, 이는 종종 원하는 것이 아닙니다. 다음 표에서는 예제를 제공하고, 일치하거나 일치에 실패하는 이유를 설명합니다.
 
 | 식   | 문자열    | 일치 | 주석               |
 | ------------ | --------- | :---: |  -------------------- |
@@ -549,7 +549,7 @@ routes.MapRoute(
     template: "{controller:slugify=Home}/{action:slugify=Index}/{id?}");
 ```
 
-이전 경로를 사용하면 `SubscriptionManagementController.GetAll()` 작업이 URI `/subscription-management/get-all`과 일치됩니다. 매개 변수 변환기는 링크를 생성하는 데 사용되는 경로 값을 변경하지 않습니다. 예를 들어 `Url.Action("GetAll", "SubscriptionManagement")`는 `/subscription-management/get-all`을 출력합니다.
+위의 경로를 사용하면 `SubscriptionManagementController.GetAll()` 작업이 URI `/subscription-management/get-all`과 일치합니다. 매개 변수 변환기는 링크를 생성하는 데 사용되는 경로 값을 변경하지 않습니다. 예를 들어 `Url.Action("GetAll", "SubscriptionManagement")`는 `/subscription-management/get-all`을 출력합니다.
 
 ASP.NET Core는 생성된 경로와 함께 매개 변수 변환기를 사용하기 위한 API 규칙을 제공합니다.
 
@@ -562,7 +562,7 @@ ASP.NET Core는 생성된 경로와 함께 매개 변수 변환기를 사용하�
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/Startup.cs?name=snippet_Dictionary)]
 
-위의 샘플 끝부분에서 생성된 <xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath>는 `/package/create/123`입니다. 사전은 "추적 패키지 경로" 템플릿, `package/{operation}/{id}`의 `operation` 및 `id` 경로 값을 제공합니다. 자세한 내용은 [라우팅 미들웨어 사용](#use-routing-middleware) 섹션의 샘플 코드 또는 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples)을 참조하세요.
+위의 샘플 끝부분에서 생성된 <xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath>는 `/package/create/123`입니다. 사전은 "Track Package Route" 템플릿인 `package/{operation}/{id}`의 `operation` 및 `id` 경로 값을 제공합니다. 자세한 내용은 [라우팅 미들웨어 사용](#use-routing-middleware) 섹션의 샘플 코드 또는 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples)을 참조하세요.
 
 <xref:Microsoft.AspNetCore.Routing.VirtualPathContext> 생성자에 대한 두 번째 매개 변수는 *앰비언트 값*의 컬렉션입니다. 개발자가 요청 컨텍스트 내에서 지정해야 하는 값의 수를 제한하므로 앰비언트 값은 사용하기 편리합니다. 현재 요청의 현재 경로 값은 링크 생성에 대한 앰비언트 값으로 간주됩니다. ASP.NET Core MVC 앱의 `HomeController`에 대한 `About` 작업에서는 `Index` 작업에 연결하기 위해 컨트롤러 경로 값을 지정할 필요가 없으며, `Home`이라는 앰비언트 값이 사용됩니다.
 
@@ -982,7 +982,7 @@ URL 생성에 대한 자세한 내용은 [URL 생성 참조](#url-generation-ref
 
 별표(`*`) 또는 이중 별표(`**`)를 경로 매개 변수의 접두사로 사용하여 URI의 나머지 부분에 바인딩할 수 있습니다. 이러한 매개 변수는 *범용* 매개 변수라고 합니다. 예를 들어 `blog/{**slug}`는 `/blog`로 시작하고 모든 값(`slug` 경로 값에 할당된)이 뒤따르는 모든 URI와 일치합니다. 범용 매개 변수는 빈 문자열과 일치시킬 수도 있습니다.
 
-catch-all 매개 변수는 경로 구분 기호(`/`) 문자를 포함하여 URL을 생성하는 데 경로가 사용될 때 적절한 문자를 이스케이프합니다. 예를 들어 경로 값이 `{ path = "my/path" }`인 경로 `foo/{*path}`는 `foo/my%2Fpath`를 생성합니다. 이스케이프된 슬래시에 주의하세요. 경로 구분 기호 문자를 왕복하려면 `**` 경로 매개 변수 접두사를 사용합니다. `{ path = "my/path" }`가 있는 경로 `foo/{**path}`은 `foo/my/path`를 생성합니다.
+catch-all 매개 변수는 경로 구분 기호(`/`) 문자를 포함하여 URL을 생성하는 데 경로가 사용될 때 적절한 문자를 이스케이프합니다. 예를 들어 경로 값이 `{ path = "my/path" }`인 경로 `foo/{*path}`는 `foo/my%2Fpath`를 생성합니다. 이스케이프된 슬래시에 주의하세요. 경로 구분 기호 문자를 왕복하려면 `**` 경로 매개 변수 접두사를 사용합니다. `{ path = "my/path" }`를 사용하는 경로 `foo/{**path}`는 `foo/my/path`를 생성합니다.
 
 경로 매개 변수에는 등호(`=`)로 구분된 매개 변수 이름 뒤에 기본값을 지정하여 지정된 *기본값*이 있을 수 있습니다. 예를 들어 `{controller=Home}`은 `controller`에 대한 기본값으로 `Home`을 정의합니다. URL에 매개 변수에 대한 값이 없는 경우 기본값이 사용됩니다. 경로 매개 변수는 `id?`에서와 같이 매개 변수 이름의 끝에 물음표(`?`)를 추가하여 선택적으로 만듭니다. 선택적 값과 기본 경로 매개 변수 간의 차이점은 기본값이 있는 경로 매개 변수는 항상 값을 생성한다는 것입니다. 선택적 매개 변수에는 요청 URL에서 값을 제공하는 경우에만 값이 있습니다.
 
@@ -1062,14 +1062,14 @@ public User GetUserById(int id) { }
 
 ASP.NET Core 프레임워크는 정규식 생성자에 `RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.CultureInvariant`를 추가합니다. 이러한 멤버에 대한 설명은 <xref:System.Text.RegularExpressions.RegexOptions>를 참조하세요.
 
-정규식은 라우팅 및 C# 언어에서 사용하는 것과 유사한 구분 기호 및 토큰을 사용합니다. 정규식 토큰은 이스케이프되어야 합니다. 라우팅에서 `^\d{3}-\d{2}-\d{4}$` 정규식을 사용하려면 `\` 문자열 이스케이프 문자를 이스케이프할 수 있도록 식의 문자열에 제공된 `\`(단일 백슬래시) 문자가 C# 원본 파일의 `\\`(이중 백슬래시) 문자로 있어야 합니다([약어 문자열 리터럴](/dotnet/csharp/language-reference/keywords/string)을 사용하지 않는 한). 라우팅 매개 변수 구분 기호 문자(`{`, `}`, `[`, `]`)를 이스케이프하려면 식에서 해당 문자를 이중으로 사용합니다(`{{`, `}`, `[[`, `]]`). 다음 표는 정규식 및 이스케이프된 버전을 보여 줍니다.
+정규식은 라우팅 및 C# 언어에서 사용하는 것과 유사한 구분 기호 및 토큰을 사용합니다. 정규식 토큰은 이스케이프되어야 합니다. 라우팅에서 `^\d{3}-\d{2}-\d{4}$`라는 정규식을 사용하려면, C# 소스 파일에서는 `\` 문자열 이스케이프 문자를 이스케이프하기 위해서 식 문자열의 `\`(단일 백슬래시) 문자를 `\\`(이중 백슬래시) 문자로 제공해야 합니다([약어 문자열 리터럴](/dotnet/csharp/language-reference/keywords/string)을 사용하지 않는 한). 라우팅 매개 변수 구분 기호 문자(`{`, `}`, `[`, `]`)를 이스케이프하려면 식에서 해당 문자를 이중으로 사용합니다(`{{`, `}`, `[[`, `]]`). 다음 표는 정규식 및 이스케이프된 버전을 보여 줍니다.
 
 | 정규식    | 이스케이프된 정규식     |
 | --------------------- | ------------------------------ |
 | `^\d{3}-\d{2}-\d{4}$` | `^\\d{{3}}-\\d{{2}}-\\d{{4}}$` |
 | `^[a-z]{2}$`          | `^[[a-z]]{{2}}$`               |
 
-라우팅에 사용되는 정규식은 캐럿(`^`) 문자로 시작하고 문자열의 시작 위치와 일치하는 경우가 많습니다. 식은 달러 기호(`$`) 문자로 끝나고 문자열의 끝과 일치하는 경우가 많습니다. `^` 및 `$` 문자는 정규식이 전체 경로 매개 변수 값과 일치하도록 합니다. `^` 및 `$` 문자 없이 정규식은 문자열 내의 모든 하위 문자열과 일치합니다. 이는 종종 원하는 것이 아닙니다. 다음 표에서는 예제를 제공하고, 일치하거나 일치에 실패하는 이유를 설명합니다.
+라우팅에 사용되는 정규식은 캐럿(`^`) 문자로 시작하고 문자열의 시작 위치와 일치하는 경우가 많습니다. 식은 달러 기호(`$`) 문자로 끝나고 문자열의 끝과 일치하는 경우가 많습니다. `^` 및 `$` 문자는 정규식이 전체 경로 매개 변수 값과 일치하도록 합니다. `^` 및 `$` 문자가 없는 정규식은 문자열 내의 모든 하위 문자열과 일치하는데, 이는 종종 원하는 것이 아닙니다. 다음 표에서는 예제를 제공하고, 일치하거나 일치에 실패하는 이유를 설명합니다.
 
 | 식   | 문자열    | 일치 | 주석               |
 | ------------ | --------- | :---: |  -------------------- |
@@ -1135,7 +1135,7 @@ routes.MapRoute(
     template: "{controller:slugify=Home}/{action:slugify=Index}/{id?}");
 ```
 
-이전 경로를 사용하면 `SubscriptionManagementController.GetAll()` 작업이 URI `/subscription-management/get-all`과 일치됩니다. 매개 변수 변환기는 링크를 생성하는 데 사용되는 경로 값을 변경하지 않습니다. 예를 들어 `Url.Action("GetAll", "SubscriptionManagement")`는 `/subscription-management/get-all`을 출력합니다.
+위의 경로를 사용하면 `SubscriptionManagementController.GetAll()` 작업이 URI `/subscription-management/get-all`과 일치합니다. 매개 변수 변환기는 링크를 생성하는 데 사용되는 경로 값을 변경하지 않습니다. 예를 들어 `Url.Action("GetAll", "SubscriptionManagement")`는 `/subscription-management/get-all`을 출력합니다.
 
 ASP.NET Core는 생성된 경로와 함께 매개 변수 변환기를 사용하기 위한 API 규칙을 제공합니다.
 
@@ -1148,7 +1148,7 @@ ASP.NET Core는 생성된 경로와 함께 매개 변수 변환기를 사용하�
 
 [!code-csharp[](routing/samples/2.x/RoutingSample/Startup.cs?name=snippet_Dictionary)]
 
-위의 샘플 끝부분에서 생성된 <xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath>는 `/package/create/123`입니다. 사전은 "추적 패키지 경로" 템플릿, `package/{operation}/{id}`의 `operation` 및 `id` 경로 값을 제공합니다. 자세한 내용은 [라우팅 미들웨어 사용](#use-routing-middleware) 섹션의 샘플 코드 또는 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples)을 참조하세요.
+위의 샘플 끝부분에서 생성된 <xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath>는 `/package/create/123`입니다. 사전은 "Track Package Route" 템플릿인 `package/{operation}/{id}`의 `operation` 및 `id` 경로 값을 제공합니다. 자세한 내용은 [라우팅 미들웨어 사용](#use-routing-middleware) 섹션의 샘플 코드 또는 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples)을 참조하세요.
 
 <xref:Microsoft.AspNetCore.Routing.VirtualPathContext> 생성자에 대한 두 번째 매개 변수는 *앰비언트 값*의 컬렉션입니다. 개발자가 요청 컨텍스트 내에서 지정해야 하는 값의 수를 제한하므로 앰비언트 값은 사용하기 편리합니다. 현재 요청의 현재 경로 값은 링크 생성에 대한 앰비언트 값으로 간주됩니다. ASP.NET Core MVC 앱의 `HomeController`에 대한 `About` 작업에서는 `Index` 작업에 연결하기 위해 컨트롤러 경로 값을 지정할 필요가 없으며, `Home`이라는 앰비언트 값이 사용됩니다.
 
@@ -1516,14 +1516,14 @@ public User GetUserById(int id) { }
 
 ASP.NET Core 프레임워크는 정규식 생성자에 `RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.CultureInvariant`를 추가합니다. 이러한 멤버에 대한 설명은 <xref:System.Text.RegularExpressions.RegexOptions>를 참조하세요.
 
-정규식은 라우팅 및 C# 언어에서 사용하는 것과 유사한 구분 기호 및 토큰을 사용합니다. 정규식 토큰은 이스케이프되어야 합니다. 라우팅에서 `^\d{3}-\d{2}-\d{4}$` 정규식을 사용하려면 `\` 문자열 이스케이프 문자를 이스케이프할 수 있도록 식의 문자열에 제공된 `\`(단일 백슬래시) 문자가 C# 원본 파일의 `\\`(이중 백슬래시) 문자로 있어야 합니다([약어 문자열 리터럴](/dotnet/csharp/language-reference/keywords/string)을 사용하지 않는 한). 라우팅 매개 변수 구분 기호 문자(`{`, `}`, `[`, `]`)를 이스케이프하려면 식에서 해당 문자를 이중으로 사용합니다(`{{`, `}`, `[[`, `]]`). 다음 표는 정규식 및 이스케이프된 버전을 보여 줍니다.
+정규식은 라우팅 및 C# 언어에서 사용하는 것과 유사한 구분 기호 및 토큰을 사용합니다. 정규식 토큰은 이스케이프되어야 합니다. 라우팅에서 `^\d{3}-\d{2}-\d{4}$`라는 정규식을 사용하려면, C# 소스 파일에서는 `\` 문자열 이스케이프 문자를 이스케이프하기 위해서 식 문자열의 `\`(단일 백슬래시) 문자를 `\\`(이중 백슬래시) 문자로 제공해야 합니다([약어 문자열 리터럴](/dotnet/csharp/language-reference/keywords/string)을 사용하지 않는 한). 라우팅 매개 변수 구분 기호 문자(`{`, `}`, `[`, `]`)를 이스케이프하려면 식에서 해당 문자를 이중으로 사용합니다(`{{`, `}`, `[[`, `]]`). 다음 표는 정규식 및 이스케이프된 버전을 보여 줍니다.
 
 | 정규식    | 이스케이프된 정규식     |
 | --------------------- | ------------------------------ |
 | `^\d{3}-\d{2}-\d{4}$` | `^\\d{{3}}-\\d{{2}}-\\d{{4}}$` |
 | `^[a-z]{2}$`          | `^[[a-z]]{{2}}$`               |
 
-라우팅에 사용되는 정규식은 캐럿(`^`) 문자로 시작하고 문자열의 시작 위치와 일치하는 경우가 많습니다. 식은 달러 기호(`$`) 문자로 끝나고 문자열의 끝과 일치하는 경우가 많습니다. `^` 및 `$` 문자는 정규식이 전체 경로 매개 변수 값과 일치하도록 합니다. `^` 및 `$` 문자 없이 정규식은 문자열 내의 모든 하위 문자열과 일치합니다. 이는 종종 원하는 것이 아닙니다. 다음 표에서는 예제를 제공하고, 일치하거나 일치에 실패하는 이유를 설명합니다.
+라우팅에 사용되는 정규식은 캐럿(`^`) 문자로 시작하고 문자열의 시작 위치와 일치하는 경우가 많습니다. 식은 달러 기호(`$`) 문자로 끝나고 문자열의 끝과 일치하는 경우가 많습니다. `^` 및 `$` 문자는 정규식이 전체 경로 매개 변수 값과 일치하도록 합니다. `^` 및 `$` 문자가 없는 정규식은 문자열 내의 모든 하위 문자열과 일치하는데, 이는 종종 원하는 것이 아닙니다. 다음 표에서는 예제를 제공하고, 일치하거나 일치에 실패하는 이유를 설명합니다.
 
 | 식   | 문자열    | 일치 | 주석               |
 | ------------ | --------- | :---: |  -------------------- |
@@ -1564,7 +1564,7 @@ public ActionResult<string> Get(string id)
 
 [!code-csharp[](routing/samples/2.x/RoutingSample/Startup.cs?name=snippet_Dictionary)]
 
-위의 샘플 끝부분에서 생성된 <xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath>는 `/package/create/123`입니다. 사전은 "추적 패키지 경로" 템플릿, `package/{operation}/{id}`의 `operation` 및 `id` 경로 값을 제공합니다. 자세한 내용은 [라우팅 미들웨어 사용](#use-routing-middleware) 섹션의 샘플 코드 또는 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples)을 참조하세요.
+위의 샘플 끝부분에서 생성된 <xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath>는 `/package/create/123`입니다. 사전은 "Track Package Route" 템플릿인 `package/{operation}/{id}`의 `operation` 및 `id` 경로 값을 제공합니다. 자세한 내용은 [라우팅 미들웨어 사용](#use-routing-middleware) 섹션의 샘플 코드 또는 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples)을 참조하세요.
 
 <xref:Microsoft.AspNetCore.Routing.VirtualPathContext> 생성자에 대한 두 번째 매개 변수는 *앰비언트 값*의 컬렉션입니다. 개발자가 요청 컨텍스트 내에서 지정해야 하는 값의 수를 제한하므로 앰비언트 값은 사용하기 편리합니다. 현재 요청의 현재 경로 값은 링크 생성에 대한 앰비언트 값으로 간주됩니다. ASP.NET Core MVC 앱의 `HomeController`에 대한 `About` 작업에서는 `Index` 작업에 연결하기 위해 컨트롤러 경로 값을 지정할 필요가 없으며, `Home`이라는 앰비언트 값이 사용됩니다.
 
