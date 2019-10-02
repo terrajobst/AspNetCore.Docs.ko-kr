@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core MVC에서 뷰
+title: ASP.NET Core MVC에서 보기
 author: ardalis
-description: ASP.NET Core MVC에서 뷰가 앱의 데이터 프레젠테이션과 사용자 상호 작용을 처리하는 방식에 대해 알아봅니다.
+description: ASP.NET Core MVC에서 보기가 앱의 데이터 프레젠테이션과 사용자 상호 작용을 처리하는 방식에 대해 알아봅니다.
 ms.author: riande
 ms.date: 04/03/2019
 uid: mvc/views/overview
@@ -12,21 +12,21 @@ ms.contentlocale: ko-KR
 ms.lasthandoff: 04/27/2019
 ms.locfileid: "64891348"
 ---
-# <a name="views-in-aspnet-core-mvc"></a>ASP.NET Core MVC에서 뷰
+# <a name="views-in-aspnet-core-mvc"></a>ASP.NET Core MVC에서 보기
 
 작성자: [Steve Smith](https://ardalis.com/) 및 [Luke Latham](https://github.com/guardrex)
 
-이 문서에서는 ASP.NET Core MVC 애플리케이션에서 사용된 뷰에 대해 설명합니다. Razor 페이지에 대한 자세한 내용은 [Razor 페이지 소개](xref:razor-pages/index)를 참조하세요.
+이 항목에서는 ASP.NET Core MVC 응용 프로그램에서 사용되는 보기에 대해 설명합니다. Razor 페이지에 대한 자세한 내용은 [Razor 페이지 소개](xref:razor-pages/index)를 참조하세요.
 
-MVC(Model-View-Controller) 패턴에서 *보기*는 앱의 데이터 프레젠테이션과 사용자 상호 작용을 처리합니다. 뷰는 [Razor 태그](xref:mvc/views/razor)가 포함된 HTML 템플릿입니다. Razor 태그는 클라이언트에 전송된 웹 페이지를 생성하기 위해 HTML과 상호 작용하는 코드입니다.
+MVC(Model-View-Controller) 패턴에서 *보기*는 앱의 데이터 프레젠테이션과 사용자 상호 작용을 처리합니다. 보기는 [Razor 태그](xref:mvc/views/razor)가 포함된 HTML 템플릿입니다. Razor 태그는 클라이언트로 전송되는 웹 페이지를 생성하기 위해 HTML과 상호 작용하는 코드입니다.
 
-ASP.NET Core MVC에서 뷰는 Razor 태그에서 [C# 프로그래밍 언어](/dotnet/csharp/)를 사용하는 *.cshtml* 파일입니다. 일반적으로 뷰 파일은 앱의 [컨트롤러](xref:mvc/controllers/actions) 각각에 대해 명명된 폴더로 그룹화됩니다. 이 폴더는 앱의 루트에서 *Views* 폴더에 저장됩니다.
+ASP.NET Core MVC의 보기는 Razor 태그에서 [C# 프로그래밍 언어](/dotnet/csharp/)를 사용하는 *.cshtml* 파일입니다. 일반적으로 보기 파일은 앱의 [컨트롤러](xref:mvc/controllers/actions) 각각에 대해 명명된 폴더로 그룹화됩니다. 이 폴더는 앱 루트의 *Views* 폴더에 저장됩니다.
 
-![Visual Studio의 솔루션 탐색기에서 Views 폴더는 About.cshtml, Contact.cshtml 및 Index.cshtml 파일을 표시하도록 Home 폴더가 열린 상태로 열려 있습니다.](overview/_static/views_solution_explorer.png)
+![Visual Studio의 솔루션 탐색기에 About.cshtml, Contact.cshtml 및 Index.cshtml 파일을 표시하도록 Home 폴더가 열린 상태로 Views 폴더가 열려 있습니다.](overview/_static/views_solution_explorer.png)
 
-*Home* 컨트롤러는 *Views* 폴더 내에 *Home* 폴더로 표시됩니다. *Home* 폴더에는 *About*, *Contact* 및 *Index*(홈페이지)에 대한 뷰가 포함됩니다. 사용자가 이러한 세 웹 페이지 중 하나를 요청하면 *Home* 컨트롤러의 컨트롤러 작업에 따라 웹 페이지를 작성하고 사용자에게 반환하는 데 사용되는 세 가지 뷰가 결정됩니다.
+*Home* 컨트롤러는 *Views* 폴더 내에 *Home* 폴더로 표시됩니다. *Home* 폴더는 *About*, *Contact* 및 *Index*(홈페이지) 웹 페이지에 대한 보기를 포함하고 있습니다. 사용자가 이러한 세 웹 페이지 중 하나를 요청하면 *Home* 컨트롤러의 컨트롤러 작업이 세 가지 보기 중 어떤 보기를 사용하여 웹 페이지를 만들고 사용자에게 반환할지 결정합니다.
 
-[레이아웃](xref:mvc/views/layout)을 사용하여 일관된 웹 페이지 섹션을 제공하고 코드 반복을 줄입니다. 레이아웃에는 보통 머리글, 탐색 및 메뉴 요소 및 바닥글이 포함됩니다. 머리글 및 바닥글에는 일반적으로 다양한 메타데이터 요소에 대한 상용구 태그와 스크립트 및 스타일 자산에 대한 링크가 포함됩니다. 레이아웃을 통해 뷰에서 이 상용구 태그를 피할 수 있습니다.
+일관된 웹 페이지 섹션을 제공하고 코드 반복을 줄이려면 [레이아웃](xref:mvc/views/layout)을 사용하세요. 레이아웃에는 보통 머리글, 탐색 및 메뉴 요소 및 바닥글이 포함됩니다. 머리글 및 바닥글에는 일반적으로 다양한 메타데이터 요소에 대한 상용구 태그와 스크립트 및 스타일 자산에 대한 링크가 포함됩니다. 레이아웃을 사용하면 이런 상용구 태그가 보기에 포함되는 것을 피할 수 있습니다.
 
 [부분 뷰](xref:mvc/views/partial)는 재사용 가능한 뷰 부분을 관리하여 코드 중복을 줄입니다. 예를 들어, 부분 뷰는 여러 뷰에 나타나는 블로그 웹 사이트의 작성자 약력에 유용합니다. 작성자 약력은 일반적인 뷰 콘텐츠이며 웹 페이지의 콘텐츠를 생성하기 위해 코드를 실행하지 않아도 됩니다. 작성자 약력 콘텐츠는 모델 바인딩만으로 뷰에 제공되므로 이러한 콘텐츠 유형에는 부분 뷰를 사용하는 것이 좋습니다.
 
