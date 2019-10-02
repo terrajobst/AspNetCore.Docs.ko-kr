@@ -43,11 +43,11 @@ ASP.NET Core MVC의 보기는 Razor 태그에서 [C# 프로그래밍 언어](/do
 
 ## <a name="creating-a-view"></a>보기 만들기
 
-컨트롤러에 관한 뷰는 *Views/[ControllerName]* 폴더에 생성됩니다. 컨트롤러 간에 공유되는 뷰는 *Views/Shared* 폴더에 배치됩니다. 뷰를 만들려면 새 파일을 추가하고 연결된 컨트롤러 작업과 동일한 이름을 *.cshtml* 파일 확장명으로 지정합니다. *Home* 컨트롤러에서 *About* 작업에 해당하는 뷰를 만들려면 *Views/Home* 폴더에 *About.cshtml* 파일을 만듭니다.
+컨트롤러에 관한 보기는 *Views/[ControllerName]* 폴더에 생성됩니다. 컨트롤러 간에 공유되는 보기는 *Views/Shared* 폴더에 배치됩니다. 보기를 만들려면 새 파일을 추가하고 연결된 컨트롤러 작업과 동일한 이름과 함께 *.cshtml* 파일 확장명을 지정합니다. *Home* 컨트롤러에서 *About* 작업에 해당하는 보기를 만들려면 *Views/Home* 폴더에 *About.cshtml* 파일을 만듭니다.
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/Home/About.cshtml)]
 
-*Razor* 태그는 `@` 기호로 시작됩니다. C# 코드를 중괄호(`{ ... }`)로 설정된 [Razor 코드 블록](xref:mvc/views/razor#razor-code-blocks) 내에 배치하여 C# 문을 실행합니다. 예를 들어 위에 표시된 `ViewData["Title"]`에 "About"이 할당된 부분을 참조하세요. `@` 기호로 값을 참조하기만 하면 HTML 내에 값을 표시할 수 있습니다. 위의 `<h2>` 및 `<h3>` 요소의 내용을 참조하세요.
+*Razor* 태그는 `@` 기호로 시작됩니다. C# 코드를 중괄호(`{ ... }`)로 설정된 [Razor 코드 블록](xref:mvc/views/razor#razor-code-blocks) 내에 배치하여 C# 문을 실행합니다. 예를 들어 위에 표시된 `ViewData["Title"]`에 "About"을 할당하는 부분을 참조하세요. `@` 기호로 값을 참조하기만 하면 HTML 내에서 이 값을 표시할 수 있습니다. 위의 `<h2>` 및 `<h3>` 요소의 내용을 참조하세요.
 
 위에 표시된 보기 콘텐츠는 사용자에게 렌더링되는 전체 웹 페이지의 일부분일 뿐입니다. 페이지 레이아웃의 나머지 부분 및 보기의 다른 일반적인 측면은 다른 보기 파일에 지정됩니다. 자세한 내용은 [레이아웃 항목](xref:mvc/views/layout)을 참조하세요.
 
@@ -89,18 +89,18 @@ ASP.NET Core MVC의 보기는 Razor 태그에서 [C# 프로그래밍 언어](/do
 
 `View` 메서드(`return View();`)의 기본 동작은 호출된 작업 메서드와 같은 이름의 보기를 반환하는 것입니다. 예를 들어 컨트롤러의 *About* `ActionResult` 메서드 이름은 *About.cshtml*이라는 이름의 보기 파일을 검색하는 데 사용됩니다. 먼저, 런타임은 *Views/[ControllerName]* 폴더에서 보기를 찾습니다. 이 위치에서 일치하는 보기를 찾지 못하면 *Shared* 폴더에서 보기를 검색합니다.
 
-`return View();`로 암시적으로 `ViewResult`를 반환하거나 `return View("<ViewName>");`로 명시적으로 뷰 이름을 `View` 메서드에 전달하는 것은 문제가 되지 않습니다. 두 경우 모두, 뷰 검색 시 일치하는 뷰 파일을 다음 순서로 검색합니다.
+`return View();`를 사용하여 암시적으로 `ViewResult`를 반환하거나 `return View("<ViewName>");`를 사용하여 명시적으로 보기 이름을 `View` 메서드에 전달하는 것은 문제가 되지 않습니다. 두 경우 모두, 보기 검색 시 일치하는 보기 파일을 다음 순서로 검색합니다.
 
    1. *Views/\[ControllerName]/\[ViewName].cshtml*
    1. *Views/Shared/\[ViewName].cshtml*
 
-뷰 이름 대신 뷰 파일 경로를 제공할 수 있습니다. 앱 루트에서 시작하는 절대 경로를 사용하는 경우(필요에 따라 "/" 또는 "~ /"로 시작) *.cshtml* 확장명을 지정해야 합니다.
+보기 이름 대신 보기 파일의 경로를 제공할 수 있습니다. 앱 루트에서 시작하는 절대 경로를 사용하는 경우(필요에 따라 "/" 또는 "~ /"로 시작하는) *.cshtml* 확장명을 지정해야 합니다.
 
 ```csharp
 return View("Views/Home/About.cshtml");
 ```
 
-상재 경로를 사용하여 *.cshtml* 확장명 없이 다른 디렉터리에 뷰를 지정할 수도 있습니다. `HomeController` 내에서 상대 경로로 *Manage* 뷰의 *Index* 뷰를 반환할 수 있습니다.
+상대 경로를 사용하여 *.cshtml* 확장명 없이 다른 디렉터리의 보기를 지정할 수도 있습니다. `HomeController` 내에서 상대 경로로 *Manage* 보기의 *Index* 보기를 반환할 수 있습니다.
 
 ```csharp
 return View("../Manage/Index");
@@ -210,7 +210,7 @@ Viewmodel 형식 및 비즈니스 모델 형식 모두에 같은 클래스를 �
 
 **ViewData**
 
-`ViewData`는 `string` 키를 통해 액세스된 [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) 개체입니다. 문자열 데이터는 캐스트할 필요 없이 직접 저장 및 사용할 수 있지만 추출할 때는 다른 `ViewData` 개체 값을 특정 형식으로 캐스트해야 합니다. `ViewData`를 사용하여 컨트롤러에서 뷰로, [부분 뷰](xref:mvc/views/partial) 및 [레이아웃](xref:mvc/views/layout)을 포함한 뷰 내에서 데이터를 전달할 수 있습니다.
+`ViewData`는 `string` 키를 통해 액세스하는 [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) 개체입니다. 문자열 데이터는 캐스트할 필요 없이 직접 저장 및 사용할 수 있지만 다른 `ViewData` 개체 값을 추출할 때는 특정 형식으로 캐스트해야 합니다. `ViewData`를 사용하여 컨트롤러에서 보기로, [부분 보기](xref:mvc/views/partial) 및 [레이아웃](xref:mvc/views/layout)을 포함한 보기 내에서 데이터를 전달할 수 있습니다.
 
 다음은 작업에서 `ViewData`를 사용하여 인사말 및 주소에 대한 값을 설정하는 예제입니다.
 
@@ -350,7 +350,7 @@ public IActionResult SomeAction()
     ...
 ```
 
-문자열에는 `ViewData`에 대한 캐스트가 필요하지 않습니다. 캐스팅없이 `@ViewData["Title"]`를 사용할 수 있습니다.
+`ViewData`의 문자열은 캐스트가 필요하지 않습니다. 캐스팅 없이 `@ViewData["Title"]`을 사용할 수 있습니다.
 
 `ViewData`와 `ViewBag`을 동시에 사용하면 속성을 읽고 쓰는 작업을 혼합 및 일치시킬 수 있습니다. 다음 태그가 렌더링됩니다.
 
