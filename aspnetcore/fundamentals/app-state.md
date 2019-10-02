@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/12/2019
 uid: fundamentals/app-state
-ms.openlocfilehash: 578be568b58dc630e8aabf8cb355266766741b9e
-ms.sourcegitcommit: 116bfaeab72122fa7d586cdb2e5b8f456a2dc92a
+ms.openlocfilehash: ccb37a422d972ab9113bb4115473d054282dac87
+ms.sourcegitcommit: 994da92edb0abf856b1655c18880028b15a28897
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/05/2019
-ms.locfileid: "70384734"
+ms.lasthandoff: 09/25/2019
+ms.locfileid: "71278687"
 ---
 # <a name="session-and-app-state-in-aspnet-core"></a>ASP.NET Core에서 세션 및 앱 상태
 
@@ -304,7 +304,7 @@ app.Run(async (context) =>
     }
     ```
 
-## <a name="common-errors"></a>일반적인 오류
+## <a name="common-errors"></a>일반 오류
 
 * "'Microsoft.AspNetCore.Session.DistributedSessionStore'를 활성화하려고 시도하는 동안 'Microsoft.Extensions.Caching.Distributed.IDistributedCache' 형식에 대한 서비스를 확인할 수 없습니다."
 
@@ -315,7 +315,11 @@ app.Run(async (context) =>
   예를 들어 사용자는 세션에 쇼핑 카트를 저장합니다. 사용자가 카트에 항목을 추가하지만 커밋이 실패합니다. 앱은 실패에 대해 알지 못하므로 항목이 카트에 추가되었다고 보고하지만, 이는 사실이 아닙니다.
 
   권장되는 오류 확인 방법은 앱이 세션에 작성을 완료하면 앱 코드에서 `await feature.Session.CommitAsync();`를 호출하는 것입니다. 백업 저장소를 사용할 수 없는 경우 `CommitAsync`에서 예외를 throw합니다. `CommitAsync`가 실패하면 앱에서 예외를 처리할 수 있습니다. `LoadAsync`는 같은 조건에서 데이터 저장소를 사용할 수 없는 경우 throw됩니다.
+  
+## <a name="signalr-and-session-state"></a>SignalR 및 세션 상태
 
-## <a name="additional-resources"></a>추가 자료
+SignalR 앱은 세션 상태를 사용하여 정보를 저장해서는 안 됩니다. SignalR 앱은 허브에서 `Context.Items`의 연결 상태별로 저장할 수 있습니다. <!-- https://github.com/aspnet/SignalR/issues/2139 -->
+
+## <a name="additional-resources"></a>추가 리소스
 
 <xref:host-and-deploy/web-farm>

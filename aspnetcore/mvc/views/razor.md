@@ -3,14 +3,14 @@ title: ASP.NET Core에 대한 Razor 구문 참조
 author: rick-anderson
 description: 웹 페이지에 서버 기반 코드를 포함하는 Razor 태그 구문에 대해 알아봅니다.
 ms.author: riande
-ms.date: 08/05/2019
+ms.date: 09/19/2019
 uid: mvc/views/razor
-ms.openlocfilehash: 75bf0e792ff7975f03e0f7c2fa6a71ed74d813e1
-ms.sourcegitcommit: 2eb605f4f20ac4dd9de6c3b3e3453e108a357a21
+ms.openlocfilehash: 9a319f7efb6d879559afd9faca6955aba719fa2f
+ms.sourcegitcommit: e5a74f882c14eaa0e5639ff082355e130559ba83
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/06/2019
-ms.locfileid: "68819802"
+ms.lasthandoff: 09/20/2019
+ms.locfileid: "71168299"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>ASP.NET Core에 대한 Razor 구문 참조
 
@@ -652,7 +652,7 @@ Razor Pages 예제는 다음 표에 나와 있습니다.
 * *Pages/_ViewImports.cshtml*에는 `@namespace Hello.World`가 포함되어 있습니다.
 * 각 페이지에는 `Hello.World`가 네임스페이스의 루트로 포함되어 있습니다.
 
-| 페이지                                        | 네임스페이스                             |
+| Page                                        | 네임스페이스                             |
 | ------------------------------------------- | ------------------------------------- |
 | *Pages/Index.cshtml*                        | `Hello.World`                         |
 | *Pages/MorePages/Page.cshtml*               | `Hello.World.MorePages`               |
@@ -664,7 +664,7 @@ Razor Pages 예제는 다음 표에 나와 있습니다.
 
 이전 예제의 *EvenMorePages* 폴더에 `@namespace Another.Planet`이 포함된 가져오기 파일이 있으면(또는 *Pages/MorePages/EvenMorePages/Page.cshtml* 파일에 `@namespace Another.Planet` 포함), 다음 표에 결과가 표시됩니다.
 
-| 페이지                                        | 네임스페이스               |
+| Page                                        | 네임스페이스               |
 | ------------------------------------------- | ----------------------- |
 | *Pages/Index.cshtml*                        | `Hello.World`           |
 | *Pages/MorePages/Page.cshtml*               | `Hello.World.MorePages` |
@@ -738,6 +738,12 @@ Razor에서는 구성 요소에 대한 이벤트 처리 기능을 제공합니�
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
 구성 요소 참조(`@ref`)에서는 해당 인스턴스에 대해 명령을 실행할 수 있도록 구성 요소 인스턴스를 참조하는 방법을 제공합니다. 자세한 내용은 <xref:blazor/components#capture-references-to-components>을 참조하세요.
+
+### <a name="typeparam"></a>\@typeparam
+
+*이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
+
+`@typeparam` 지시문은 생성된 구성 요소 클래스에 대한 제네릭 형식 매개 변수를 선언합니다. 자세한 내용은 <xref:blazor/components#generic-typed-components>을 참조하세요.
 
 ::: moniker-end
 
@@ -857,7 +863,7 @@ public class Pet
 ### <a name="razor-keywords"></a>Razor 키워드
 
 * 페이지(ASP.NET Core 2.1 이상 필요)
-* 네임스페이스(namespace)
+* namespace
 * 함수
 * 상속
 * model

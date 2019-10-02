@@ -7,21 +7,27 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/25/2018
 uid: fundamentals/metapackage
-ms.openlocfilehash: 5d49213e6d694f121d8301c94ba71782b2dc45cf
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 91f39fc59e5682fb19f8cbc6e9ebe5b30e5dcf3c
+ms.sourcegitcommit: 8a36be1bfee02eba3b07b7a86085ec25c38bae6b
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65086941"
+ms.lasthandoff: 09/24/2019
+ms.locfileid: "71219140"
 ---
 # <a name="microsoftaspnetcoreall-metapackage-for-aspnet-core-20"></a>ASP.NET Core 2.0용 Microsoft.AspNetCore.All 메타패키지
+
+::: moniker range=">= aspnetcore-3.0"
+
+`Microsoft.AspNetCore.All` 메타패키지는 ASP.NET Core 3.0 이상에 포함되어 있지 않습니다. 자세한 내용은 [이 GitHub 문제](https://github.com/aspnet/Announcements/issues/314)를 참조하세요.
+
+::: moniker-end
 
 > [!NOTE]
 > ASP.NET Core 2.1 이상을 대상으로 하는 애플리케이션은 이 패키지가 아닌 [Microsoft.AspNetCore.App 메타패키지](xref:fundamentals/metapackage-app)를 사용하는 것이 좋습니다. 이 문서의 [Microsoft.AspNetCore.All에서 Microsoft.AspNetCore.App으로 마이그레이션](#migrate)을 참조하세요.
 
 이 기능을 사용하려면 .NET Core 2.x를 대상으로 하는 ASP.NET Core 2.x가 필요합니다.
 
-[Microsoft.AspNetCore.All](https://www.nuget.org/packages/Microsoft.AspNetCore.All)은 공유 프레임워크를 참조하는 메타패키지입니다. 공유 프레임워크는 앱 폴더에 없는 어셈블리(*.dll* 파일) 세트입니다. 공유 프레임워크는 앱을 실행할 머신에 설치해야 합니다. 자세한 내용은 [공유 프레임워크](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/)를 참조하세요.
+[Microsoft.AspNetCore.All](https://www.nuget.org/packages/Microsoft.AspNetCore.All)은 공유 프레임워크를 참조하는 메타패키지입니다. 공유 프레임워크는 앱 폴더에 없는 어셈블리( *.dll* 파일) 세트입니다.  공유 프레임워크는 앱을 실행할 머신에 설치해야 합니다. 자세한 내용은 [공유 프레임워크](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/)를 참조하세요.
 
 `Microsoft.AspNetCore.All`이 참조하는 공유 프레임워크에는 다음이 포함됩니다.
 
@@ -86,7 +92,7 @@ ASP.NET Core 2.1 이상에서는 버전 없이 `Microsoft.AspNetCore.All` 패키
 
 ## <a name="update-aspnet-core-21"></a>ASP.NET Core 2.1 업데이트
 
-2.1 이상의 경우 `Microsoft.AspNetCore.App` 메타패키지로 마이그레이션하는 것이 좋습니다. `Microsoft.AspNetCore.All` 메타패키지를 계속 사용하고 최신 패치 버전이 배포되었는지 확인하려면:
+2\.1 이상의 경우 `Microsoft.AspNetCore.App` 메타패키지로 마이그레이션하는 것이 좋습니다. `Microsoft.AspNetCore.All` 메타패키지를 계속 사용하고 최신 패치 버전이 배포되었는지 확인하려면:
 
 * 개발 머신 및 빌드 서버: 최신 [.NET Core SDK](https://www.microsoft.com/net/download)를 설치합니다.
 * 배포 서버: 최신 [.NET Core 런타임](https://www.microsoft.com/net/download)을 설치합니다.

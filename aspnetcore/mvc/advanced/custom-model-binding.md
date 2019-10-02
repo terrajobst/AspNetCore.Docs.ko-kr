@@ -5,12 +5,12 @@ description: 모델 바인딩을 통해 컨트롤러 작업이 ASP.NET Core의 �
 ms.author: riande
 ms.date: 11/13/2018
 uid: mvc/advanced/custom-model-binding
-ms.openlocfilehash: 91f42393ffee3249f9167e10eaea7b279a7cb70b
-ms.sourcegitcommit: e7c56e8da5419bbc20b437c2dd531dedf9b0dc6b
+ms.openlocfilehash: b2fbe6a9f11315d1fb8863fbf62e8929c7ff3fc2
+ms.sourcegitcommit: d34b2627a69bc8940b76a949de830335db9701d3
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/10/2019
-ms.locfileid: "70878404"
+ms.lasthandoff: 09/23/2019
+ms.locfileid: "71186876"
 ---
 # <a name="custom-model-binding-in-aspnet-core"></a>ASP.NET Core의 사용자 지정 모델 바인딩
 
@@ -132,9 +132,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 
 ### <a name="polymorphic-model-binding"></a>다형 모델 바인딩
 
-파생 형식의 다른 모델에 바인딩하는 것을 다형 모델 바인딩이라고 합니다. 요청 값을 특정 파생 모델 형식에 바인딩해야 하는 경우 사용자 지정 모델 바인딩이 필요합니다. 이 방법이 필요하지 않은 한 다형 모델 바인딩은 하지 않는 것이 좋습니다. 다형 모델 바인딩을 사용하면 바인딩된 모델에 대해 추론하기 어려워집니다. 그러나 앱에 다형 모델 바인딩이 필요한 경우 구현은 다음 코드와 비슷합니다.
-
-파생 형식의 다른 모델에 바인딩하는 것을 다형 모델 바인딩이라고 합니다. 요청 값을 특정 파생 모델 형식에 바인딩해야 하는 경우 사용자 지정 모델 바인딩이 필요합니다. 다형 모델 바인딩에는 다음과 같은 특성이 있습니다.
+파생 형식의 다른 모델에 바인딩하는 것을 다형 모델 바인딩이라고 합니다. 요청 값을 특정 파생 모델 형식에 바인딩해야 하는 경우 다형 사용자 지정 모델 바인딩이 필요합니다. 다형 모델 바인딩에는 다음과 같은 특성이 있습니다.
 
 * 모든 언어와 상호 운용할 수 있도록 설계된 REST API에는 일반적이지 않습니다.
 * 바인딩된 모델에 대해 추론하기 어려워집니다.
