@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 06/21/2019
 uid: tutorials/get-started-with-nswag
-ms.openlocfilehash: cdaa5aff3007030c70bc959bbf07903bdf39e736
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 5e62a8cc50947969d42981350b65a24781929d62
+ms.sourcegitcommit: fe88748b762525cb490f7e39089a4760f6a73a24
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71082426"
+ms.lasthandoff: 09/30/2019
+ms.locfileid: "71691192"
 ---
 # <a name="get-started-with-nswag-and-aspnet-core"></a>NSwag 및 ASP.NET Core 시작
 
@@ -104,13 +104,13 @@ dotnet add TodoApi.csproj package NSwag.AspNetCore
 * [NSwagStudio](https://github.com/RicoSuter/NSwag/wiki/NSwagStudio) &ndash; C# 또는 TypeScript에서 API 클라이언트 코드를 생성하기 위한 Windows 데스크톱 앱.
 * 프로젝트 내에서 코드 생성을 위한 [NSwag.CodeGeneration.CSharp](https://www.nuget.org/packages/NSwag.CodeGeneration.CSharp/) 또는 [NSwag.CodeGeneration.TypeScript](https://www.nuget.org/packages/NSwag.CodeGeneration.TypeScript/) NuGet 패키지.
 * [명령줄](https://github.com/RicoSuter/NSwag/wiki/CommandLine)의 NSwag.
-* [NSwag.MSBuild](https://github.com/RicoSuter/NSwag/wiki/MSBuild) NuGet 패키지.
+* [NSwag.MSBuild](https://github.com/RicoSuter/NSwag/wiki/NSwag.MSBuild) NuGet 패키지.
 * C# 또는 TypeScript에서 API 클라이언트 코드 생성을 위한 [Unchase OpenAPI(Swagger) 연결된 서비스](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseopenapiconnectedservice) &ndash; Visual Studio 연결된 서비스. 또한 NSwag를 사용하여 OpenAPI 서비스용 C# 컨트롤러를 생성합니다.
 
 ### <a name="generate-code-with-nswagstudio"></a>NSwagStudio로 코드 생성
 
 * [NSwagStudio GitHub 리포지토리](https://github.com/RicoSuter/NSwag/wiki/NSwagStudio)의 지침에 따라 NSwagStudio를 설치합니다.
-* NSwagStudio를 시작하고 **Swagger 사양 URL** 텍스트 상자에 *swagger.json* 파일 URL을 입력합니다. 예: *http://localhost:44354/swagger/v1/swagger.json* .
+* NSwagStudio를 시작하고 **Swagger 사양 URL** 텍스트 상자에 *swagger.json* 파일 URL을 입력합니다. 예를 들어 *http://localhost:44354/swagger/v1/swagger.json* 와 같습니다.
 * **로컬 복사본 만들기** 단추를 클릭하여 Swagger 사양의 JSON 표시를 생성합니다.
 
   ![Swagger 사양의 로컬 복사본 만들기](web-api-help-pages-using-swagger/_static/CreateLocalCopy-NSwagStudio.PNG)

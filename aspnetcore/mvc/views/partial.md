@@ -21,7 +21,7 @@ ms.locfileid: "70985566"
 
 ::: moniker range=">= aspnetcore-2.1"
 
-‘부분 보기’라는 용어는 MVC 앱(여기서 태그 파일을 ‘보기’라고 함) 또는 Razor Pages 앱(여기서 태그 파일을 ‘페이지’라고 함)을 개발하는 데 사용됩니다.    이 주제에서는 일반적으로 MVC 보기 및 Razor Pages 페이지를 ‘태그 파일’로 참조합니다. 
+*부분 보기*라는 용어는 MVC 앱(태그 파일을 *보기*라고 부름) 또는 Razor 페이지 앱(태그 파일을 *페이지*라고 부름)을 개발할 때 사용됩니다. 이 항목에서는 일반적으로 MVC 보기 및 Razor 페이지의 페이지를 *태그 파일*이라고 부릅니다.
 
 ::: moniker-end
 
@@ -46,7 +46,7 @@ ms.locfileid: "70985566"
 
 ::: moniker range=">= aspnetcore-2.0"
 
-부분 보기는 ‘보기’ 폴더(MVC) 또는 *Pages* 폴더(Razor Pages)에서 유지 관리되는 *.cshtml* 태그 파일입니다. 
+부분 보기는 *Views* 폴더(MVC) 또는 *Pages* 폴더(Razor 페이지)에서 유지 관리되는 *.cshtml* 태그 파일입니다.
 
 ASP.NET Core MVC에서 컨트롤러의 <xref:Microsoft.AspNetCore.Mvc.ViewResult>는 보기 또는 부분 보기를 반환할 수 있습니다. Razor 페이지에서 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel>은 <xref:Microsoft.AspNetCore.Mvc.PartialViewResult> 개체로 표시되는 부분 보기를 반환할 수 있습니다. 부분 보기 참조 및 렌더링은 [부분 보기 참조](#reference-a-partial-view) 섹션에 설명되어 있습니다.
 
@@ -58,7 +58,7 @@ MVC 보기 또는 페이지 렌더링과 달리 부분 보기는 *_ViewStart.csh
 
 ::: moniker range="< aspnetcore-2.0"
 
-부분 보기는 ‘보기’ 폴더에서 유지 관리되는 *.cshtml* 태그 파일입니다. 
+부분 보기는 *Views* 폴더에서 유지 관리되는 *.cshtml* 태그 파일입니다.
 
 컨트롤러의 <xref:Microsoft.AspNetCore.Mvc.ViewResult>는 보기 또는 부분 보기를 반환할 수 있습니다. 부분 보기 참조 및 렌더링은 [부분 보기 참조](#reference-a-partial-view) 섹션에 설명되어 있습니다.
 
@@ -74,7 +74,7 @@ MVC 보기 렌더링과 달리 부분 보기는 *_ViewStart.cshtml*을 실행하
 
 ### <a name="use-a-partial-view-in-a-razor-pages-pagemodel"></a>Razor 페이지 PageModel에서 부분 보기 사용
 
-ASP.NET Core 2.0 또는 2.1에서 다음 처리기 메서드는 응답에 대해 *\_AuthorPartialRP.cshtml* 부분 보기를 렌더링합니다.
+ASP.NET Core 2.0 또는 2.1에서 다음 처리기 메서드는 응답으로 *\_AuthorPartialRP.cshtml* 부분 보기를 렌더링합니다.
 
 ```csharp
 public IActionResult OnGetPartial() =>

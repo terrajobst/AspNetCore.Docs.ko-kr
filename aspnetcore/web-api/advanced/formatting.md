@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 8/22/2019
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 5861a8e353b8fac95ca51aca7b44a768d3c2ffb7
-ms.sourcegitcommit: 0365af91518004c4a44a30dc3a8ac324558a399b
+ms.openlocfilehash: e503df3d81efbb2800503c0cb4ff5ae093b6e1ac
+ms.sourcegitcommit: 023495344053dc59115c80538f0ece935e7490a2
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71199055"
+ms.lasthandoff: 09/28/2019
+ms.locfileid: "71592359"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>ASP.NET Core Web API에서 응답 데이터 서식 지정
 
@@ -157,7 +157,7 @@ ASP.NET Core 3.0 이전에는 `Newtonsoft.Json` 패키지를 사용하여 구현
 
 일부 기능은 `System.Text.Json` 기반 포맷터와 잘 호환되지 않고 `Newtonsoft.Json` 기반 포맷터에 대한 참조를 필요로 할 수 있습니다. 앱이 다음과 같은 경우 `Newtonsoft.Json` 기반 포맷터를 계속해서 사용합니다.
 
-* `Newtonsoft.Json` 속성을 사용합니다. 예를 들면 `[JsonProperty]` 또는 `[JsonIgnore]`과 같습니다.
+* `Newtonsoft.Json` 속성을 사용합니다. 예를 들어 `[JsonProperty]` 또는 `[JsonIgnore]`로 이름을 지정할 수 있습니다.
 * 직렬화 설정을 사용자 지정합니다.
 * `Newtonsoft.Json`은 제공하는 기능에 의존합니다.
 * `Microsoft.AspNetCore.Mvc.JsonResult.SerializerSettings`를 구성하는 경우. ASP.NET Core 3.0 이전의 `JsonResult.SerializerSettings`는 `Newtonsoft.Json` 고유의 `JsonSerializerSettings`의 인스턴스를 허용합니다.
@@ -169,7 +169,7 @@ ASP.NET Core 3.0 이전에는 `Newtonsoft.Json` 패키지를 사용하여 구현
 services.AddControllers().AddNewtonsoftJson(options =>
 {
     // Use the default property (Pascal) casing
-    options.SerializerSettings.ContractResolver = new DefautlContractResolver();
+    options.SerializerSettings.ContractResolver = new DefaultContractResolver();
 
     // Configure a custom converter
     options.SerializerOptions.Converters.Add(new MyCustomJsonConverter());
@@ -250,7 +250,7 @@ XML 형식 지정은 [Microsoft.AspNetCore.Mvc.Formatters.Xml](https://www.nuget
 
 위 경로를 사용하면 요청된 형식을 선택적 파일 확장명으로 지정할 수 있습니다. [`[FormatFilter]`](xref:Microsoft.AspNetCore.Mvc.FormatFilterAttribute) 특성은 `RouteData`에서 형식 값의 존재 여부를 검사하며, 응답이 생성될 때 응답 형식을 적절한 포맷터에 매핑합니다.
 
-|           라우팅        |             포맷터              |
+|           경로        |             포맷터              |
 |------------------------|------------------------------------|
 |   `/api/products/5`    |    기본 출력 포맷터    |
 | `/api/products/5.json` | JSON 포맷터(구성된 경우) |
