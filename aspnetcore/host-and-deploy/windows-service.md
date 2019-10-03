@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/09/2019
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: 995fdd2bbba30ff983bc2055fcb97c14541e2ac6
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 544037a2a1f836e51b4f10551316312ef55c68da
+ms.sourcegitcommit: fe88748b762525cb490f7e39089a4760f6a73a24
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081476"
+ms.lasthandoff: 09/30/2019
+ms.locfileid: "71688075"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>Windows 서비스에서 ASP.NET Core 호스트
 
@@ -36,21 +36,7 @@ ASP.NET Core Worker Service 템플릿은 장기간 실행되는 서비스 앱을
 1. .NET Core 템플릿에서 Worker Service 앱을 만듭니다.
 1. [앱 구성](#app-configuration) 섹션의 지침에 따라 Windows Service로 실행할 수 있도록 Worker Service 앱을 업데이트합니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
-
-1. 새 프로젝트를 만듭니다.
-1. **새 ASP.NET Core 웹 애플리케이션**을 선택합니다. **새로 만들기**를 선택합니다.
-1. **프로젝트 이름** 필드에 프로젝트 이름을 제공하거나 기본 프로젝트 이름을 수락합니다. **만들기**를 선택합니다.
-1. **새 ASP.NET Core 웹 애플리케이션 만들기** 대화 상자에서 **.NET Core** 및 **ASP.NET Core 3.0**이 선택되었는지 확인합니다.
-1. **Worker Service** 템플릿을 선택합니다. **만들기**를 선택합니다.
-
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
-
-명령 셸에서 [dotnet new](/dotnet/core/tools/dotnet-new) 명령과 함께 Worker Service(`worker`) 템플릿을 사용합니다. 다음 예제에서는 `ContosoWorkerService`라는 Worker Service 앱을 만듭니다. 명령이 실행될 때 `ContosoWorkerService` 앱의 폴더가 자동으로 만들어집니다.
-
-```dotnetcli
-dotnet new worker -o ContosoWorkerService
-```
+[!INCLUDE[](~/includes/worker-template-instructions.md)]
 
 ---
 

@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/28/2019
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: 4dc150ff4534e42e1995a185f650cea9df70ccc4
-ms.sourcegitcommit: d34b2627a69bc8940b76a949de830335db9701d3
+ms.openlocfilehash: 7489868fac513948cbe6f48391e7260a34b2175e
+ms.sourcegitcommit: dc96d76f6b231de59586fcbb989a7fb5106d26a8
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71187054"
+ms.lasthandoff: 10/01/2019
+ms.locfileid: "71703759"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Azure App Service에 ASP.NET Core 앱 배포
 
@@ -27,6 +27,8 @@ Visual Studio를 사용하여 ASP.NET Core 웹앱을 만들고 Windows의 Azure 
 
 [App Service on Linux에서 ASP.NET Core 앱 만들기](/azure/app-service/containers/quickstart-dotnetcore)  
 명령줄을 사용하여 ASP.NET Core 웹앱을 만들고 Linux의 Azure App Service에 배포합니다.
+
+Azure 앱 서비스에서 사용할 수 있는 ASP.NET Core 버전은 [ASP.NET Core on App Service Dashboard](https://aspnetcoreon.azurewebsites.net/)를 참조하세요.
 
 다음 문서는 ASP.NET Core 설명서에 제공됩니다.
 
