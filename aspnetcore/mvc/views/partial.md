@@ -129,7 +129,7 @@ ASP.NET Core 2.2 이상에서 처리기 메서드는 <xref:Microsoft.AspNetCore.
 <partial name="_PartialName" />
 ```
 
-파일 확장자가 있는 경우 태그 도우미는 반드시 부분 보기를 호출하는 태그 파일과 동일한 폴더에 있는 부분 보기를 참조합니다.
+파일 확장자가 있는 경우 태그 도우미는 부분 보기를 호출하는 태그 파일과 동일한 폴더에 있어야 하는 부분 보기를 참조합니다.
 
 ```cshtml
 <partial name="_PartialName.cshtml" />
@@ -169,7 +169,7 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 @await Html.PartialAsync("_PartialName")
 ```
 
-파일 확장자가 있는 경우 HTML 도우미는 반드시 부분 보기를 호출하는 태그 파일과 동일한 폴더에 있는 부분 보기를 참조합니다.
+파일 확장자가 있는 경우 HTML 도우미는 부분 보기를 호출하는 태그 파일과 동일한 폴더에 있어야 하는 부분 보기를 참조합니다.
 
 ```cshtml
 @await Html.PartialAsync("_PartialName.cshtml")
