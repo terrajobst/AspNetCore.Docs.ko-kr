@@ -43,7 +43,7 @@ ASP.NET Core MVC의 보기는 Razor 태그에서 [C# 프로그래밍 언어](/do
 
 ## <a name="creating-a-view"></a>보기 만들기
 
-컨트롤러에 관한 보기는 *Views/[ControllerName]* 폴더에 생성됩니다. 컨트롤러 간에 공유되는 보기는 *Views/Shared* 폴더에 배치됩니다. 보기를 만들려면 새 파일을 추가하고 연결된 컨트롤러 작업과 동일한 이름과 함께 *.cshtml* 파일 확장명을 지정합니다. *Home* 컨트롤러에서 *About* 작업에 해당하는 보기를 만들려면 *Views/Home* 폴더에 *About.cshtml* 파일을 만듭니다.
+컨트롤러에 관한 뷰는 *Views/[ControllerName]* 폴더에 생성됩니다. 컨트롤러 간에 공유되는 뷰는 *Views/Shared* 폴더에 배치됩니다. 뷰를 만들려면 새 파일을 추가하고 연결된 컨트롤러 작업과 동일한 이름을 *.cshtml* 파일 확장명으로 지정합니다. *Home* 컨트롤러에서 *About* 작업에 해당하는 뷰를 만들려면 *Views/Home* 폴더에 *About.cshtml* 파일을 만듭니다.
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/Home/About.cshtml)]
 
@@ -89,7 +89,7 @@ ASP.NET Core MVC의 보기는 Razor 태그에서 [C# 프로그래밍 언어](/do
 
 `View` 메서드(`return View();`)의 기본 동작은 호출된 작업 메서드와 같은 이름의 보기를 반환하는 것입니다. 예를 들어 컨트롤러의 *About* `ActionResult` 메서드 이름은 *About.cshtml*이라는 이름의 보기 파일을 검색하는 데 사용됩니다. 먼저, 런타임은 *Views/[ControllerName]* 폴더에서 보기를 찾습니다. 이 위치에서 일치하는 보기를 찾지 못하면 *Shared* 폴더에서 보기를 검색합니다.
 
-`return View();`를 사용하여 암시적으로 `ViewResult`를 반환하거나 `return View("<ViewName>");`를 사용하여 명시적으로 보기 이름을 `View` 메서드에 전달하는 것은 문제가 되지 않습니다. 두 경우 모두, 보기 검색 시 일치하는 보기 파일을 다음 순서로 검색합니다.
+`return View();`;`를 사용하여 암시적으로 `ViewResult`를 반환하거나 `return View("<ViewName>");`를 사용하여 명시적으로 보기 이름을 `View` 메서드에 전달하는 것은 문제가 되지 않습니다. 두 경우 모두, 보기 검색 시 일치하는 보기 파일을 다음 순서로 검색합니다.
 
    1. *Views/\[ControllerName]/\[ViewName].cshtml*
    1. *Views/Shared/\[ViewName].cshtml*
@@ -100,7 +100,7 @@ ASP.NET Core MVC의 보기는 Razor 태그에서 [C# 프로그래밍 언어](/do
 return View("Views/Home/About.cshtml");
 ```
 
-상대 경로를 사용하여 *.cshtml* 확장명 없이 다른 디렉터리의 보기를 지정할 수도 있습니다. `HomeController` 내에서 상대 경로로 *Manage* 보기의 *Index* 보기를 반환할 수 있습니다.
+상재 경로를 사용하여 *.cshtml* 확장명 없이 다른 디렉터리에 뷰를 지정할 수도 있습니다. `HomeController` 내에서 상대 경로로 *Manage* 뷰의 *Index* 뷰를 반환할 수 있습니다.
 
 ```csharp
 return View("../Manage/Index");
@@ -199,7 +199,7 @@ Viewmodel 형식 및 비즈니스 모델 형식 모두에 같은 클래스를 �
 | 다음 사이에 데이터 전달 ...                        | 예제                                                                        |
 | ------------------------------------------------- | ------------------------------------------------------------------------------ |
 | 컨트롤러 및 보기                             | 드롭다운 목록을 데이터로 채웁니다.                                          |
-| 뷰 및 [레이아웃 뷰](xref:mvc/views/layout)   | 뷰 파일의 레이아웃 뷰에서 **\<title>** 요소 콘텐츠를 설정합니다.  |
+| 보기 및 [레이아웃 보기](xref:mvc/views/layout)   | 보기 파일에서 레이아웃 보기의 **\<title>** 요소 콘텐츠를 설정합니다.  |
 | [부분 보기](xref:mvc/views/partial) 및 보기 | 사용자가 요청한 웹 페이지에 따라 데이터를 표시하는 위젯입니다.      |
 
 이 컬렉션은 컨트롤러 및 보기의 `ViewData` 또는 `ViewBag` 속성을 통해 참조할 수 있습니다. `ViewData` 속성은 약한 형식 개체의 사전입니다. `ViewBag` 속성은 기본 `ViewData` 컬렉션에 대해 동적 속성을 제공하는 `ViewData` 주변의 래퍼입니다. 참고: 키 조회는 `ViewData` 및 `ViewBag`에 대해 둘 다 대/소문자를 구분하지 않습니다.
@@ -350,7 +350,7 @@ public IActionResult SomeAction()
     ...
 ```
 
-`ViewData`의 문자열은 캐스트가 필요하지 않습니다. 캐스팅 없이 `@ViewData["Title"]`을 사용할 수 있습니다.
+`ViewData`의 문자열은 캐스트가 필요하지 않습니다. 캐스팅없이 `@ViewData["Title"]`를 사용할 수 있습니다.
 
 `ViewData`와 `ViewBag`을 동시에 사용하면 속성을 읽고 쓰는 작업을 혼합 및 일치시킬 수 있습니다. 다음 태그가 렌더링됩니다.
 

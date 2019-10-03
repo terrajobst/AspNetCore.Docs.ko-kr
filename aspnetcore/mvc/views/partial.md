@@ -209,14 +209,14 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 
 ### <a name="synchronous-html-helper"></a>동기 HTML 도우미
 
-`PartialAsync` 및 `RenderPartialAsync`의 해당하는 동기 항목은 각각 <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.Partial*> 및 <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.RenderPartial*>입니다. 교착 상태인 시나리오가 있으므로 동기 해당 항목을 사용하지 않는 것이 좋습니다. 동기 메서드는 이후 릴리스에서 제거 대상으로 지정됩니다.
+<xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.Partial*> 및 <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.RenderPartial*>은 각각 `PartialAsync` 및 `RenderPartialAsync`에 해당하는 동기 항목입니다. 교착 상태가 발생하는 시나리오가 있으므로 동기 해당 항목은 사용하지 않는 것이 좋습니다. 동기 메서드는 이후 릴리스에서 제거 대상으로 지정되었습니다.
 
 > [!IMPORTANT]
-> 코드를 실행해야 하는 경우 부분 보기 대신 [보기 구성 요소](xref:mvc/views/view-components)를 사용합니다.
+> 코드를 실행해야 하는 경우 부분 보기 대신 [보기 구성 요소](xref:mvc/views/view-components)를 사용하세요.
 
 ::: moniker range=">= aspnetcore-2.1"
 
-`Partial` 또는 `RenderPartial` 호출 시 Visual Studio 분석기 경고가 발생합니다. 예를 들어 `Partial`의 존재는 다음 경고 메시지를 생성합니다.
+`Partial` 또는 `RenderPartial` 호출 시 Visual Studio 분석기 경고가 발생합니다. 예를 들어 `Partial`이 존재하면 다음 경고 메시지를 생성합니다.
 
 > IHtmlHelper.Partial 사용 시 애플리케이션이 교착 상태가 될 수 있습니다. &lt;부분&gt; 태그 도우미 또는 IHtmlHelper.PartialAsync를 사용하세요.
 
@@ -226,14 +226,14 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 
 ## <a name="partial-view-discovery"></a>부분 보기 검색
 
-파일 확장자 없는 이름으로 부분 보기를 참조하는 경우, 다음 위치가 명시된 순서로 검색됩니다.
+파일 확장자 없이 이름으로 부분 보기를 참조하는 경우, 다음 위치가 명시된 순서로 검색됩니다.
 
 ::: moniker range=">= aspnetcore-2.1"
 
 **Razor 페이지**
 
-1. 현재 페이지의 폴더를 실행 중
-1. 페이지의 폴더 위에 있는 디렉터리 그래프
+1. 현재 실행 중인 페이지의 폴더
+1. 페이지의 폴더 상위의 디렉터리 그래프
 1. `/Shared`
 1. `/Pages/Shared`
 1. `/Views/Shared`
@@ -261,12 +261,12 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 
 다음 규칙이 부분 보기 검색에 적용됩니다.
 
-* 부분 보기가 다른 폴더에 있는 경우 파일 이름이 같은 다른 부분 보기가 허용됩니다.
+* 부분 보기가 다른 폴더에 존재할 경우 파일 이름이 같은 다른 부분 보기가 허용됩니다.
 * 파일 확장명 없는 이름으로 부분 보기를 참조할 때 부분 보기가 호출자의 폴더와 ‘공유’ 폴더에 모두 있는 경우 호출자 폴더에 있는 부분 보기가 부분 보기를 제공합니다.  호출자의 폴더에 부분 보기가 없는 경우 부분 보기는 ‘공유’ 폴더에서 제공됩니다.  ‘공유’ 폴더의 부분 보기를 ‘공유 부분 보기’ 또는 ‘기본 부분 보기’라고 합니다.   
 * 부분 보기는 ‘연결’ 가능하며, 순환 참조가 호출에 의해 형성되지 않는 경우 다른 부분 보기를 호출할 수 있습니다.  상대 경로는 항상, 파일의 루트 또는 부모가 아닌 현재 파일에 상대적입니다.
 
 > [!NOTE]
-> 부분 보기에 정의된 [Razor](xref:mvc/views/razor) `section`은 부모 태그 파일에 표시되지 않습니다. `section`만 정의되어 있는 부분 보기에 표시됩니다.
+> 부분 보기에 정의된 [Razor](xref:mvc/views/razor) `section`은 부모 태그 파일에는 표시되지 않습니다. `section`은 정의되어 있는 부분 보기에만 표시됩니다.
 
 ## <a name="access-data-from-partial-views"></a>부분 보기에서 데이터 액세스
 
@@ -278,7 +278,7 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 @await Html.PartialAsync("_PartialName", customViewData)
 ```
 
-모델을 부분 보기에 전달할 수 있습니다. 모델은 사용자 지정 개체일 수 있습니다. `PartialAsync`(콘텐츠 블록을 호출자에게 렌더링함) 또는 `RenderPartialAsync`(콘텐츠를 출력으로 스트리밍함)를 사용하여 모델을 전달할 수 있습니다.
+부분 보기에 모델을 전달할 수도 있습니다. 모델은 사용자 지정 개체일 수 있습니다. `PartialAsync`(콘텐츠 블록을 호출자에게 렌더링함) 또는 `RenderPartialAsync`(콘텐츠를 출력으로 스트리밍함)를 사용하여 모델을 전달할 수 있습니다.
 
 ```cshtml
 @await Html.PartialAsync("_PartialName", model)
@@ -304,7 +304,7 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 
 ::: moniker-end
 
-샘플 앱의 다음 태그는 *Views/Articles/Read.cshtml* 보기를 표시합니다. 보기에는 두 개의 부분 보기가 있습니다. 두 번째 부분 보기는 모델 및 `ViewData`를 부분 보기에 전달합니다. `ViewDataDictionary` 생성자 오버로드를 사용하여 기존 `ViewData` 사전을 유지하면서 새로운 `ViewData` 사전을 전달합니다.
+샘플 앱의 다음 태그는 *Views/Articles/Read.cshtml* 보기를 보여줍니다. 보기에는 두 개의 부분 보기가 있습니다. 두 번째 부분 보기는 모델 및 `ViewData`를 부분 보기에 전달합니다. `ViewDataDictionary` 생성자 오버로드를 사용하여 기존 `ViewData` 사전을 유지하면서 새로운 `ViewData` 사전을 전달합니다.
 
 [!code-cshtml[](partial/sample/PartialViewsSample/Views/Articles/Read.cshtml?name=snippet_ReadPartialView&highlight=5,15-20)]
 
@@ -320,14 +320,14 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 
 > Abraham Lincoln
 >
-> &lt;공유 부분 보기 파일 경로&gt;의 부분 보기입니다.
+> This partial view from &lt;shared partial view file path&gt;.
 > 1863/11/19 12:00:00 AM
 
 두 번째 부분 보기는 문서의 섹션을 렌더링합니다.
 
 > 섹션 1 인덱스: 0
 >
-> 4개의 점수, 7년 전 ...
+> Four score and seven years ago ...
 >
 > 섹션 2 인덱스: 1
 >
@@ -335,7 +335,7 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 >
 > 섹션 3 인덱스: 2
 >
-> 그러나 크게 볼 때 우리는 전념할 수 없습 ...
+> But, in a larger sense, we can not dedicate ...
 
 ## <a name="additional-resources"></a>추가 자료
 
