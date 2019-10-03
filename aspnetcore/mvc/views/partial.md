@@ -89,7 +89,7 @@ public IActionResult OnGetPartial() =>
 
 ::: moniker range=">= aspnetcore-2.2"
 
-ASP.NET Core 2.2 이상에서 처리기 메서드는 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageBase.Partial*> 메서드를 대신 호출하여 `PartialViewResult` 프로젝트를 생성할 수 있습니다.
+ASP.NET Core 2.2 이상에서 처리기 메서드는 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageBase.Partial*> 메서드를 대신 호출하여 `PartialViewResult` 개체를 생성할 수 있습니다.
 
 [!code-csharp[](partial/sample/PartialViewsSample/Pages/DiscoveryRP.cshtml.cs?name=snippet_OnGetPartial)]
 
@@ -123,7 +123,7 @@ ASP.NET Core 2.2 이상에서 처리기 메서드는 <xref:Microsoft.AspNetCore.
 
 [부분 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper)에는 ASP.NET Core 2.1 이상이 필요합니다.
 
-부분 태그 도우미는 콘텐츠를 비동기식으로 렌더링하며 HTML 같은 구문을 사용합니다.
+부분 태그 도우미는 콘텐츠를 비동기식으로 렌더링하며 HTML과 비슷한 구문을 사용합니다.
 
 ```cshtml
 <partial name="_PartialName" />
@@ -151,7 +151,7 @@ ASP.NET Core 2.2 이상에서 처리기 메서드는 <xref:Microsoft.AspNetCore.
 <partial name="/Views/Folder/_PartialName.cshtml" />
 ```
 
-다음 예제는 상대 경로가 있는 부분 보기를 참조합니다.
+다음 예제는 상대 경로를 사용하여 부분 보기를 참조합니다.
 
 ```cshtml
 <partial name="../Account/_PartialName.cshtml" />
@@ -163,7 +163,7 @@ ASP.NET Core 2.2 이상에서 처리기 메서드는 <xref:Microsoft.AspNetCore.
 
 ### <a name="asynchronous-html-helper"></a>비동기 HTML 도우미
 
-HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.PartialAsync*>를 사용하는 것입니다. `PartialAsync`는 <xref:System.Threading.Tasks.Task%601>에 래핑된 <xref:Microsoft.AspNetCore.Html.IHtmlContent> 형식을 반환합니다. 대기된 호출 접두사로 `@` 문자를 사용하여 메서드를 참조합니다.
+HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.PartialAsync*>를 사용하는 것입니다. `PartialAsync`는 <xref:System.Threading.Tasks.Task%601>에 래핑된 <xref:Microsoft.AspNetCore.Html.IHtmlContent> 형식을 반환합니다. 이 메서드는 대기된 호출에 접두사로 `@` 문자를 사용하여 참조합니다.
 
 ```cshtml
 @await Html.PartialAsync("_PartialName")
@@ -195,7 +195,7 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 @await Html.PartialAsync("/Views/Folder/_PartialName.cshtml")
 ```
 
-다음 예제는 상대 경로가 있는 부분 보기를 참조합니다.
+다음 예제는 상대 경로를 사용하여 부분 보기를 참조합니다.
 
 ```cshtml
 @await Html.PartialAsync("../Account/_LoginPartial.cshtml")
@@ -205,7 +205,7 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 
 [!code-cshtml[](partial/sample/PartialViewsSample/Views/Home/Discovery.cshtml?name=snippet_RenderPartialAsync)]
 
-`RenderPartialAsync` 스트림은 콘텐츠를 렌더링했으므로 일부 시나리오에서 더 나은 성능을 제공합니다. 성능이 중요한 상황에서는 두 가지 방법을 모두 사용하여 페이지를 벤치마크하고 빠른 응답을 생성하는 방법을 사용합니다.
+`RenderPartialAsync` 스트림은 콘텐츠를 렌더링하므로 일부 시나리오에서 더 나은 성능을 제공합니다. 성능이 중요한 상황에서는 두 가지 방법을 모두 사용하여 페이지를 벤치마크하고 빠른 응답을 생성하는 방법을 사용합니다.
 
 ### <a name="synchronous-html-helper"></a>동기 HTML 도우미
 
