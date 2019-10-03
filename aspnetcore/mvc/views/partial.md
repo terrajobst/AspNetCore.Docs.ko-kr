@@ -17,7 +17,7 @@ ms.locfileid: "70985566"
 
 작성자: [Steve Smith](https://ardalis.com/), [Luke Latham](https://github.com/guardrex), [Maher JENDOUBI](https://twitter.com/maherjend), [Rick Anderson](https://twitter.com/RickAndMSFT) 및 [Scott Sauber](https://twitter.com/scottsauber)
 
-부분 보기는 다른 태그 파일의 렌더링된 출력  *내에서* HTML 출력을 렌더링하는 [Razor](xref:mvc/views/razor) 태그 파일( *.cshtml*)입니다.
+부분 보기는 다른 태그 파일의 렌더링된 출력 *내에서* HTML 출력을 렌더링하는 [Razor](xref:mvc/views/razor) 태그 파일( *.cshtml*)입니다.
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -262,15 +262,15 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 다음 규칙이 부분 보기 검색에 적용됩니다.
 
 * 부분 보기가 다른 폴더에 존재할 경우 파일 이름이 같은 다른 부분 보기가 허용됩니다.
-* 파일 확장명 없는 이름으로 부분 보기를 참조할 때 부분 보기가 호출자의 폴더와 ‘공유’ 폴더에 모두 있는 경우 호출자 폴더에 있는 부분 보기가 부분 보기를 제공합니다.  호출자의 폴더에 부분 보기가 없는 경우 부분 보기는 ‘공유’ 폴더에서 제공됩니다.  ‘공유’ 폴더의 부분 보기를 ‘공유 부분 보기’ 또는 ‘기본 부분 보기’라고 합니다.   
-* 부분 보기는 ‘연결’ 가능하며, 순환 참조가 호출에 의해 형성되지 않는 경우 다른 부분 보기를 호출할 수 있습니다.  상대 경로는 항상, 파일의 루트 또는 부모가 아닌 현재 파일에 상대적입니다.
+* 파일 확장명 없이 이름으로 부분 보기를 참조하면서 부분 보기가 호출자의 폴더와 *Shared* 폴더 모두에 존재할 경우 호출자 폴더에 위치해 있는 부분 보기가 부분 보기를 제공합니다. 호출자의 폴더에 부분 보기가 존재하지 않으면 부분 보기는 *Shared* 폴더에서 제공됩니다. *Shared* 폴더의 부분 보기를 *공유 부분 보기* 또는 *기본 부분 보기*라고 합니다.
+* 부분 보기는 *연쇄적으로 연결* 가능하며, 호출에 의해 순환 참조가 형성되지 않는 이상 부분 보기가 다른 부분 보기를 호출할 수 있습니다. 상대 경로는 루트 또는 파일의 부모가 아니라 항상 현재 파일에 상대적입니다.
 
 > [!NOTE]
 > 부분 보기에 정의된 [Razor](xref:mvc/views/razor) `section`은 부모 태그 파일에는 표시되지 않습니다. `section`은 정의되어 있는 부분 보기에만 표시됩니다.
 
 ## <a name="access-data-from-partial-views"></a>부분 보기에서 데이터 액세스
 
-부분 보기가 인스턴스화되면 부모의 `ViewData` 사전의 ‘사본’을 수신합니다.  부분 보기 내에서 데이터에 대한 업데이트는 부모 보기에 유지되지 않습니다. 부분 보기에서 변경된 `ViewData`는 부분 보기가 반환될 때 손실됩니다.
+부분 보기가 인스턴스화되면 부모의 `ViewData` 사전의 *사본*을 수신합니다. 부분 보기 내에서 수행된 데이터 수정은 부모 보기에는 반영되지 않습니다. 부분 보기에서 변경된 `ViewData`는 부분 보기가 반환될 때 손실됩니다.
 
 다음 예는 [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) 인스턴스를 부분 보기에 전달하는 방법을 보여 줍니다.
 
@@ -316,7 +316,7 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 
 [!code-cshtml[](partial/sample/PartialViewsSample/Views/Articles/_ArticleSection.cshtml)]
 
-런타임 시 부분은 부모 태그 파일의 렌더링된 출력에 렌더링됩니다. 여기서 자체는 공유 *_Layout.cshtml* 내에서 렌더링됩니다. 첫 번째 부분 보기는 문서 작성자의 이름과 게시 날짜를 렌더링합니다.
+런타임 시 부분은 부모 태그 파일의 렌더링된 출력에 렌더링되며, 그 자체는 공유 *_Layout.cshtml* 내에서 렌더링됩니다. 첫 번째 부분 보기는 문서 작성자의 이름과 게시 날짜를 렌더링합니다.
 
 > Abraham Lincoln
 >
@@ -325,15 +325,15 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 
 두 번째 부분 보기는 문서의 섹션을 렌더링합니다.
 
-> 섹션 1 인덱스: 0
+> Section One Index: 0
 >
 > Four score and seven years ago ...
 >
-> 섹션 2 인덱스: 1
+> Section Two Index: 1
 >
-> 지금 멋진 전투에 참여하고 있습니다. 테스트 중...
+> Now we are engaged in a great civil war, testing ...
 >
-> 섹션 3 인덱스: 2
+> Section Three Index: 2
 >
 > But, in a larger sense, we can not dedicate ...
 
