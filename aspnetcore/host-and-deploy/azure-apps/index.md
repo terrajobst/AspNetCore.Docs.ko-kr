@@ -5,14 +5,14 @@ description: 이 문서에는 Azure 호스트 및 배포 리소스의 링크가 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/28/2019
+ms.date: 10/02/2019
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: 7489868fac513948cbe6f48391e7260a34b2175e
-ms.sourcegitcommit: dc96d76f6b231de59586fcbb989a7fb5106d26a8
+ms.openlocfilehash: bda4923adb0f9769f883ef64f7902c8650308222
+ms.sourcegitcommit: 73e255e846e414821b8cc20ffa3aec946735cd4e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/01/2019
-ms.locfileid: "71703759"
+ms.lasthandoff: 10/03/2019
+ms.locfileid: "71924895"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Azure App Service에 ASP.NET Core 앱 배포
 
@@ -292,7 +292,7 @@ ARM 템플릿을 사용하여 앱을 만들고 배포하는 경우 `siteextensio
 1. 명령 셸에서 [dotnet publish](/dotnet/core/tools/dotnet-publish) 명령을 사용하여 호스트의 런타임에 대한 릴리스 구성에 있는 앱을 게시합니다. 다음 예제에서 앱은 `win-x86` RID에 게시됩니다. `--runtime` 옵션에 제공된 RID를 프로젝트 파일의 `<RuntimeIdentifier>`(또는 `<RuntimeIdentifiers>`) 속성에 제공해야 합니다.
 
    ```console
-   dotnet publish --configuration Release --runtime win-x86
+   dotnet publish --configuration Release --runtime win-x86 --self-contained
    ```
 
 1. *bin/Release/{TARGET FRAMEWORK}/{RUNTIME IDENTIFIER}/publish* 디렉터리의 콘텐츠를 App Service의 사이트로 이동합니다. 로컬 하드 드라이브 또는 네트워크 공유에서 *게시* 폴더 콘텐츠를 Kudu 콘솔의 App Service로 직접 끌어오는 경우에는 Kudu 콘솔의 `D:\home\site\wwwroot` 폴더로 파일을 끕니다.

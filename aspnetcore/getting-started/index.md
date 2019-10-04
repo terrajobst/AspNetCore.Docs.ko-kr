@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/22/2019
 uid: getting-started
-ms.openlocfilehash: c9cd5e05f52c8bdefa931adc654087dac91e2f05
-ms.sourcegitcommit: e644258c95dd50a82284f107b9bf3becbc43b2b2
+ms.openlocfilehash: 798f1ee87c05d886d8991e3f0230c8ebc6341ba8
+ms.sourcegitcommit: 73e255e846e414821b8cc20ffa3aec946735cd4e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/26/2019
-ms.locfileid: "71317759"
+ms.lasthandoff: 10/03/2019
+ms.locfileid: "71925098"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>자습서: ASP.NET Core 시작
 
@@ -44,7 +44,7 @@ dotnet new webapp -o aspnetcoreapp
 이전 명령은
 
 * 새 웹앱을 만듭니다.  
-* `-o` 매개 변수는 앱의 원본 파일을 사용하여 *aspnetcoreapp*라는 이름의 디렉터리를 만듭니다.
+* `-o aspnetcoreapp` 매개 변수는 앱의 원본 파일을 사용하여 *aspnetcoreapp*라는 이름의 디렉터리를 만듭니다.
 
 ### <a name="trust-the-development-certificate"></a>개발 인증서 신뢰
 
@@ -93,7 +93,7 @@ cd aspnetcoreapp
 dotnet watch run
 ```
 
-명령 셸에서 앱이 시작되었음을 나타낸 후 [https://localhost:5001](https://localhost:5001)로 이동합니다. **동의**를 클릭하여 개인정보처리방침 정책에 동의합니다. 이 앱은 개인 정보를 보관하지 않습니다.
+명령 셸에서 앱이 시작되었음을 나타낸 후 [https://localhost:5001](https://localhost:5001)로 이동합니다.
 
 ## <a name="edit-a-razor-page"></a>Razor 페이지 편집
 
