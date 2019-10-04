@@ -7,12 +7,12 @@ ms.author: jamesnk
 ms.custom: mvc
 ms.date: 09/21/2019
 uid: grpc/troubleshoot
-ms.openlocfilehash: 15377ba4b31ce9319df300b23e5a95c67bca7db4
-ms.sourcegitcommit: 04ce94b3c1b01d167f30eed60c1c95446dfe759d
+ms.openlocfilehash: c31f499b008cdec9d759e804b18965156ca99f30
+ms.sourcegitcommit: d8b12cc1716ee329d7bd2300e201b61e15d506ac
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/21/2019
-ms.locfileid: "71176504"
+ms.lasthandoff: 10/04/2019
+ms.locfileid: "71942898"
 ---
 # <a name="troubleshoot-grpc-on-net-core"></a>.NET Core에서 gRPC 문제 해결
 
@@ -151,3 +151,21 @@ Grpc 클라이언트 앱에서 gRPC 호출에는 구체적 클라이언트만 �
   <Protobuf Include="Protos\greet.proto" GrpcServices="Client" />
 </ItemGroup>
 ```
+
+## <a name="wpf-projects-unable-to-generated-grpc-c-assets-from-proto-files"></a>WPF 프로젝트는 *@no__t -2* 파일에서 C# grpc 자산을 생성할 수 없습니다.
+
+WPF 프로젝트에는 gRPC 코드 생성이 올바르게 작동 하지 않도록 하는 [알려진 문제가](https://github.com/dotnet/wpf/issues/810) 있습니다. @No__t-0 및 *.* r a r 파일을 참조 하 여 WPF 프로젝트에서 생성 된 모든 grpc 형식은 다음과 같이 사용 될 때 컴파일 오류를 생성 합니다.
+
+> 오류 CS0246: ' MyGrpcServices ' 형식 또는 네임 스페이스 이름을 찾을 수 없습니다. using 지시문 또는 어셈블리 참조가 있는지 확인 하십시오.
+
+이 문제는 다음을 통해 해결할 수 있습니다.
+
+1. 새 .NET Core 클래스 라이브러리 프로젝트를 만듭니다.
+2. 새 프로젝트에서 참조를 추가 하 [ C# *@no__t -3* 파일에서 코드 생성을 사용 하도록 설정 합니다.
+    * 패키지 참조를 [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/) 패키지에 추가합니다.
+    * *@No__t -1* 파일을 @no__t 항목 그룹에 추가 합니다.
+3. WPF 응용 프로그램에서 새 프로젝트에 대 한 참조를 추가 합니다.
+
+WPF 응용 프로그램은 새 클래스 라이브러리 프로젝트에서 gRPC 생성 형식을 사용할 수 있습니다.
+
+[!INCLUDE[](~/includes/gRPCazure.md)]

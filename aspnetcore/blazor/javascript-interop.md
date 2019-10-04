@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/23/2019
 uid: blazor/javascript-interop
-ms.openlocfilehash: 2b5d1433fce6e09adf3caa58e55e678b00ad98ee
-ms.sourcegitcommit: 79eeb17604b536e8f34641d1e6b697fb9a2ee21f
+ms.openlocfilehash: b30bce6ef3ebf1cd2f4f3fe8d046e1db9b6929d5
+ms.sourcegitcommit: 73e255e846e414821b8cc20ffa3aec946735cd4e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/24/2019
-ms.locfileid: "71211651"
+ms.lasthandoff: 10/03/2019
+ms.locfileid: "71924642"
 ---
 # <a name="aspnet-core-blazor-javascript-interop"></a>ASP.NET Core Blazor JavaScript interop
 
@@ -38,7 +38,7 @@ Blazor 서버 앱의 경우:
 
 다음 예제는 실험적 JavaScript 기반 디코더 인 [Textdecoder](https://developer.mozilla.org/docs/Web/API/TextDecoder)를 기반으로 합니다. 이 예제에서는 C# 메서드에서 JavaScript 함수를 호출 하는 방법을 보여 줍니다. JavaScript 함수는 C# 메서드에서 바이트 배열을 받아 배열을 디코딩하고 표시를 위해 구성 요소에 텍스트를 반환 합니다.
 
-Wwwroot/index.html (Blazor weasembom) 또는 *Pages/_Host* (Blazor Server)의 `TextDecoder` 요소내에서를사용하여전달된배열을디코딩하는함수를제공`<head>` 합니다.
+*Wwwroot/index.html* (Blazor Weasembom) 또는 *Pages/_Host* (Blazor Server)의 `<head>` 요소 내에서-3을 @no__t 사용 하 여 전달 된 배열을 디코딩하는 함수를 제공 합니다.
 
 [!code-html[](javascript-interop/samples_snapshot/index-script.html)]
 
@@ -81,7 +81,7 @@ Wwwroot/index.html (Blazor weasembom) 또는 *Pages/_Host* (Blazor Server)의 `T
 
 [!code-javascript[](./common/samples/3.x/BlazorSample/wwwroot/exampleJsInterop.js?highlight=2-7)]
 
-JavaScript 파일 `<script>` 을 참조 하는 태그를 *wwwroot/index.html* 파일 (Blazor weasembmboms) 또는 *Pages/_Host* 파일 (Blazor Server)에 저장 합니다.
+*Wwwroot/index.html* 파일 (Blazor Weasembmboms) 또는 *Pages/_Host* 파일 (Blazor Server)에서 JavaScript 파일을 참조 하는 `<script>` 태그를 저장 합니다.
 
 *wwwroot/index.html* (Blazor Weasembambmbsembse):
 
@@ -139,7 +139,7 @@ Blazor `IJSRuntime` 서버 시나리오의 경우 추상화는 비동기입니�
 ```
 
 > [!NOTE]
-> Blazor가 참조 된 요소와 상호 작용할 때 DOM을 채우거 나 조작 하는 방법으로 캡처된 요소 참조를 사용 **하지** 마세요. 이렇게 하면 선언적 렌더링 모델을 방해할 수 있습니다.
+> 캡처한 요소 참조를 DOM을 채우는 방법으로 사용 **하지** 마십시오. 이렇게 하면 선언적 렌더링 모델을 방해할 수 있습니다.
 
 .Net 코드와 관련 하 여 `ElementReference` 은 불투명 핸들입니다. 에서 수행할 수 있는 *유일한* 작업 `ElementReference` 은 javascript interop를 통해 javascript 코드에 전달 하는 것입니다. 이렇게 하면 JavaScript 쪽 코드는 일반 DOM api에서 사용할 수 `HTMLElement` 있는 인스턴스를 수신 합니다.
 
