@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/22/2019
 uid: getting-started
-ms.openlocfilehash: 798f1ee87c05d886d8991e3f0230c8ebc6341ba8
-ms.sourcegitcommit: 73e255e846e414821b8cc20ffa3aec946735cd4e
+ms.openlocfilehash: 116a22bce80257948bfcc02c03a74a4b5568b8b5
+ms.sourcegitcommit: 4649814d1ae32248419da4e8f8242850fd8679a5
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/03/2019
-ms.locfileid: "71925098"
+ms.lasthandoff: 10/05/2019
+ms.locfileid: "71975685"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>자습서: ASP.NET Core 시작
 
@@ -75,8 +75,6 @@ dotnet dev-certs https --trust
 이 명령은 시스템 키 집합에 인증서를 설치하기 위해 암호를 묻는 메시지를 표시할 수 있습니다. 개발 인증서를 신뢰하는 데 동의하는 경우 암호를 입력합니다.
 
 # <a name="linuxtablinux"></a>[Linux](#tab/linux)
-
-Linux용 Windows 하위 시스템의 경우 [Linux용 Windows 하위 시스템에서 HTTPS 인증서 신뢰](xref:security/enforcing-ssl#wsl)를 참조하세요.
 
 HTTPS 개발 인증서를 신뢰하는 방법은 Linux 배포에 대한 설명서를 참조하세요.
 
