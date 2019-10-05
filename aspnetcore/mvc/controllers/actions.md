@@ -87,18 +87,18 @@ ms.locfileid: "64890258"
 
 #### <a name="3-methods-resulting-in-a-non-empty-response-body-formatted-in-a-content-type-negotiated-with-the-client"></a>3. 클라이언트와 협상된 콘텐츠 형식으로 서식이 지정된 비어 있지 않은 응답 본문으로 이어지는 메서드
 
-이 범주는 **콘텐츠 협상**으로 더 잘 알려져 있습니다. [콘텐츠 협상](xref:web-api/advanced/formatting#content-negotiation)은 작업이 [ObjectResult](/dotnet/api/microsoft.aspnetcore.mvc.objectresult) 형식 또는 [IActionResult](/dotnet/api/microsoft.aspnetcore.mvc.iactionresult) 구현 외 항목을 반환할 때마다 적용됩니다. 비`IActionResult` 구현을 반환하는 작업(예: `object`)도 서식 있는 응답을 반환합니다.
+이 범주는 **콘텐츠 협상**으로 더 잘 알려져 있습니다. [콘텐츠 협상](xref:web-api/advanced/formatting#content-negotiation)은 작업이 [ObjectResult](/dotnet/api/microsoft.aspnetcore.mvc.objectresult) 형식 또는 [IActionResult](/dotnet/api/microsoft.aspnetcore.mvc.iactionresult) 구현 이외의 형식을 반환할 때마다 적용됩니다. 비 `IActionResult` 구현을 반환하는 작업(예: `object`)도 서식화된 응답을 반환합니다.
 
 이 형식의 몇 가지 도우미 메서드에는 `BadRequest`, `CreatedAtRoute` 및 `Ok`가 포함됩니다. 이러한 메서드의 예에는 각각 `return BadRequest(modelState);`, `return CreatedAtRoute("routename", values, newobject);` 및 `return Ok(value);`가 있습니다. `BadRequest` 및 `Ok`는 값이 전달될 때만 콘텐츠 협상을 수행합니다. 값을 전달하지 않으면 대신 HTTP 상태 코드 결과 형식으로 제공합니다. 반면, `CreatedAtRoute` 메서드는 해당 오버로드에서는 모두 값이 전달되어야 하므로 항상 콘텐츠 협상을 수행합니다.
 
-### <a name="cross-cutting-concerns"></a>교차 편집 문제
+### <a name="cross-cutting-concerns"></a>횡단 관심사
 
-애플리케이션은 일반적으로 해당 워크플로의 일부를 공유합니다. 예를 들어 쇼핑 카트 액세스를 위해 인증이 필요한 앱이나 일부 페이지에서 데이터를 캐시하는 앱이 있습니다. 작업 메서드 전후로 논리를 수행하려면 *필터*를 사용합니다. 교차 편집 문제에서 [필터](xref:mvc/controllers/filters)를 사용하면 중복을 줄일 수 있습니다.
+응용 프로그램은 일반적으로 해당 워크플로의 일부를 공유합니다. 예를 들어 쇼핑 카트 액세스를 위해 인증이 필요한 앱이나 일부 페이지에서 데이터를 캐시하는 앱이 있습니다. 작업 메서드 전후로 논리를 수행하려면 *필터*를 사용합니다. 횡단 관심사에서 [필터](xref:mvc/controllers/filters)를 사용하면 중복을 줄일 수 있습니다.
 
 `[Authorize]`와 같은 대부분의 필터 특성은 원하는 세분성 수준에 따라 컨트롤러 또는 작업 수준에 적용할 수 있습니다.
 
-오류 처리 및 응답 캐시는 종종 교차 편집 문제입니다.
+오류 처리 및 응답 캐시는 종종 횡단 관심사입니다.
 * [오류 처리](xref:mvc/controllers/filters#exception-filters)
 * [응답 캐싱](xref:performance/caching/response)
 
-많은 교차 편집 문제는 필터 또는 사용자 지정 [미들웨어](xref:fundamentals/middleware/index)를 사용하여 처리할 수 있습니다.
+많은 횡단 관심사는 필터 또는 사용자 지정 [미들웨어](xref:fundamentals/middleware/index)를 사용하여 처리할 수 있습니다.
