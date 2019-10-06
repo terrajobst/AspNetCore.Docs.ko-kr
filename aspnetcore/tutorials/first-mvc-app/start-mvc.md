@@ -148,10 +148,10 @@ Ctrl+F5를 눌러 디버거 없이 실행합니다.
 
 [!INCLUDE[](~/includes/trustCertMac.md)]
 
-* 주소 표시줄에 `localhost:port#`이 표시되고 `example.com` 등은 표시되지 않습니다. 그 이유는 `localhost`가 로컬 컴퓨터의 표준 이름이기 때문입니다. Visual Studio에서 웹 프로젝트를 만들 경우 웹 서버에는 임의 포트가 사용됩니다. 앱을 실행할 경우 다른 포트 번호가 표시됩니다.
+* 주소 표시줄에는 `localhost:port#`이 표시되고 `example.com` 같은 주소는 표시되지 않습니다. 그 이유는 `localhost`가 로컬 컴퓨터의 표준 이름이기 때문입니다. Visual Studio에서 웹 프로젝트를 만들 경우 웹 서버에 임의 포트가 사용됩니다. 앱을 실행할 경우 다른 포트 번호가 표시됩니다.
 * **실행** 메뉴 항목에서 앱을 디버그 또는 비 디버그 모드로 시작할 수 있습니다.
 
-  다음 이미지에 앱이 나와 있습니다.
+  다음 이미지는 앱을 보여줍니다.
 
   ![홈 또는 인덱스 페이지](./start-mvc/_static/output_macos.png)
 
@@ -273,7 +273,7 @@ Visual Studio는 방금 만든 MVC 프로젝트에 대해 기본 템플릿을 �
 
   ![IIS Express](start-mvc/_static/iis_express.png)
 
-* **Accept**를 선택하여 추적에 동의합니다. 이 앱은 개인 정보를 추적하지 않습니다. 템플릿 생성 코드는 [GDPR(일반 데이터 보호 규정)](xref:security/gdpr)을 준수하는데 도움이 되는 자산을 포함하고 있습니다.
+* **Accept**를 선택하여 추적에 동의합니다. 이 앱은 개인 정보를 추적하지 않습니다. 템플릿 생성 코드는 [GDPR(일반 데이터 보호 규정)](xref:security/gdpr)을 준수하는 데 도움이 되는 자산을 포함하고 있습니다.
 
   ![홈 또는 인덱스 페이지](start-mvc/_static/privacy.png)
 
@@ -305,14 +305,14 @@ Ctrl+F5를 눌러 디버거 없이 실행합니다.
 
 [!INCLUDE[](~/includes/trustCertMac.md)]
 
-* 주소 표시줄에 `localhost:port#`이 표시되고 `example.com` 등은 표시되지 않습니다. 그 이유는 `localhost`가 로컬 컴퓨터의 표준 이름이기 때문입니다. Visual Studio에서 웹 프로젝트를 만들 경우 웹 서버에는 임의 포트가 사용됩니다. 앱을 실행할 경우 다른 포트 번호가 표시됩니다.
+* 주소 표시줄에는 `localhost:port#`이 표시되고 `example.com` 같은 주소는 표시되지 않습니다. 그 이유는 `localhost`가 로컬 컴퓨터의 표준 이름이기 때문입니다. Visual Studio에서 웹 프로젝트를 만들 경우 웹 서버에 임의 포트가 사용됩니다. 앱을 실행할 경우 다른 포트 번호가 표시됩니다.
 * **실행** 메뉴 항목에서 앱을 디버그 또는 비 디버그 모드로 시작할 수 있습니다.
 
-* **승인**을 선택하여 추적에 동의합니다. 이 앱은 개인 정보를 추적하지 않습니다. 템플릿 생성 코드는 [GDPR(일반 데이터 보호 규정)](xref:security/gdpr)을 충족할 수 있도록 자산을 포함합니다.
+* **Accept**를 선택하여 추적에 동의합니다. 이 앱은 개인 정보를 추적하지 않습니다. 템플릿 생성 코드는 [GDPR(일반 데이터 보호 규정)](xref:security/gdpr)을 준수하는 데 도움이 되는 자산을 포함하고 있습니다.
 
   ![홈 또는 인덱스 페이지](./start-mvc/_static/output_privacy_macos.png)
 
-  다음 이미지에서는 추적을 승인한 후에 앱을 보여줍니다.
+  다음 이미지는 추적을 승인한 후의 앱을 보여줍니다.
 
   ![홈 또는 인덱스 페이지](./start-mvc/_static/output_macos.png)
 

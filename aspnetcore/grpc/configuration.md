@@ -7,12 +7,12 @@ ms.author: jamesnk
 ms.custom: mvc
 ms.date: 09/05/2019
 uid: grpc/configuration
-ms.openlocfilehash: 42574b43b4751efc37ff3a827716df4cb8130842
-ms.sourcegitcommit: 0365af91518004c4a44a30dc3a8ac324558a399b
+ms.openlocfilehash: 3ef92f10d914ef9fa3e13a7bdd5c863bab297f57
+ms.sourcegitcommit: 73e255e846e414821b8cc20ffa3aec946735cd4e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71199077"
+ms.lasthandoff: 10/03/2019
+ms.locfileid: "71925216"
 ---
 # <a name="grpc-for-net-configuration"></a>.NET 용 gRPC 구성
 
@@ -20,7 +20,7 @@ ms.locfileid: "71199077"
 
 grpc 서비스는 *Startup.cs*에서 `AddGrpc` 로 구성 됩니다. 다음 표에서는 gRPC 서비스를 구성 하는 옵션을 설명 합니다.
 
-| 옵션 | 기본값 | 설명 |
+| 옵션 | Default Value | 설명 |
 | ------ | ------------- | ----------- |
 | `MaxSendMessageSize` | `null` | 서버에서 보낼 수 있는 최대 메시지 크기 (바이트)입니다. 구성 된 최대 메시지 크기를 초과 하는 메시지를 전송 하려고 하면 예외가 발생 합니다. |
 | `MaxReceiveMessageSize` | 4MB | 서버에서 받을 수 있는 최대 메시지 크기 (바이트)입니다. 서버에서이 한도를 초과 하는 메시지를 수신 하는 경우 예외가 throw 됩니다. 이 값을 늘리면 서버가 더 큰 메시지를 수신할 수 있지만 메모리 소비에 부정적인 영향을 줄 수 있습니다. |
@@ -41,7 +41,7 @@ grpc 서비스는 *Startup.cs*에서 `AddGrpc` 로 구성 됩니다. 다음 표�
 
 gRPC 클라이언트 구성이에 `GrpcChannelOptions`설정 되어 있습니다. 다음 표에서는 gRPC 채널을 구성 하는 옵션을 설명 합니다.
 
-| 옵션 | 기본값 | 설명 |
+| 옵션 | Default Value | 설명 |
 | ------ | ------------- | ----------- |
 | `HttpClient` | 새 인스턴스 | Grpc 호출을 수행 하는 데 사용 되는 `HttpClient` 입니다. 클라이언트를 설정 하 여 사용자 지정 `HttpClientHandler`을 구성 하거나 grpc 호출에 대 한 HTTP 파이프라인에 추가 처리기를 추가할 수 있습니다. 을 지정 `HttpClient` 하지 않으면 채널에 대 한 `HttpClient` 새 인스턴스가 만들어집니다. 자동으로 삭제 됩니다. |
 | `DisposeHttpClient` | `false` | 및가 지정 `true` `GrpcChannel` 된 경우이 삭제 되 면 인스턴스가삭제됩니다.`HttpClient` `HttpClient` |
@@ -57,6 +57,8 @@ gRPC 클라이언트 구성이에 `GrpcChannelOptions`설정 되어 있습니다
 * 클라이언트를 만듭니다.
 
 [!code-csharp[](~/grpc/configuration/sample/Program.cs?name=snippet&highlight=3-8)]
+
+[!INCLUDE[](~/includes/gRPCazure.md)]
 
 ## <a name="additional-resources"></a>추가 자료
 
