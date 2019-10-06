@@ -5,12 +5,12 @@ description: ASP.NET Core 앱에서 Id를 사용 합니다. 암호 요구 사항
 ms.author: riande
 ms.date: 03/26/2019
 uid: security/authentication/identity
-ms.openlocfilehash: 979681cfc196aca9fb5097583d99a086e1c597ba
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 6701eb0ac1b1abb8699a5a529bcc29f295e5c7c9
+ms.sourcegitcommit: 4115bf0e850c13d4e655beb5ab5e8ff431173cb6
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71082460"
+ms.lasthandoff: 10/06/2019
+ms.locfileid: "71981916"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>ASP.NET Core Identity 소개
 
@@ -20,7 +20,7 @@ ASP.NET Core Id는 ASP.NET Core 앱에 로그인 기능을 추가 하는 멤버 
 
 SQL Server 데이터베이스를 사용 하 여 id를 구성 하 여 사용자 이름, 암호 및 프로필 데이터를 저장할 수 있습니다. 또는 Azure Table Storage와 같은 또 다른 영구 저장소를 사용할 수 있습니다.
 
-[샘플 코드 보기 또는 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample/src/ASPNETCore-IdentityDemoComplete/) ([다운로드 방법)](xref:index#how-to-download-a-sample).
+[샘플 코드 보기 또는 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample/src/ASPNETCore-IdentityDemoComplete/) ([다운로드 방법)](xref:index#how-to-download-a-sample)
 
 이 항목에서는 Id를 사용 하 여 사용자를 등록 하 고 로그인 하 고 로그 아웃 하는 방법에 대해 알아봅니다. Id를 사용 하는 앱을 만드는 방법에 대 한 자세한 내용은이 문서의 끝에 있는 다음 단계 섹션을 참조 하세요.
 
@@ -30,13 +30,13 @@ SQL Server 데이터베이스를 사용 하 여 id를 구성 하 여 사용자 �
 
 ## <a name="adddefaultidentity-and-addidentity"></a>AddDefaultIdentity 및 AddIdentity
 
-[AddDefaultIdentity](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionuiextensions.adddefaultidentity?view=aspnetcore-2.1#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionUIExtensions_AddDefaultIdentity__1_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Identity_IdentityOptions__) 는 ASP.NET Core 2.1에서 도입 되었습니다. 호출은 `AddDefaultIdentity` 다음을 호출 하는 것과 비슷합니다.
+[AddDefaultIdentity](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionuiextensions.adddefaultidentity?view=aspnetcore-2.1#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionUIExtensions_AddDefaultIdentity__1_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Identity_IdentityOptions__) 는 ASP.NET Core 2.1에서 도입 되었습니다. @No__t-0을 호출 하는 것은 다음을 호출 하는 것과 비슷합니다.
 
 * [AddIdentity](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.addidentity?view=aspnetcore-2.1#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_AddIdentity__2_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Identity_IdentityOptions__)
 * [AddDefaultUI](/dotnet/api/microsoft.aspnetcore.identity.identitybuilderuiextensions.adddefaultui?view=aspnetcore-2.1#Microsoft_AspNetCore_Identity_IdentityBuilderUIExtensions_AddDefaultUI_Microsoft_AspNetCore_Identity_IdentityBuilder_)
 * [AddDefaultTokenProviders](/dotnet/api/microsoft.aspnetcore.identity.identitybuilderextensions.adddefaulttokenproviders?view=aspnetcore-2.1#Microsoft_AspNetCore_Identity_IdentityBuilderExtensions_AddDefaultTokenProviders_Microsoft_AspNetCore_Identity_IdentityBuilder_)
 
-자세한 내용은 [AddDefaultIdentity source](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) 를 참조 하세요.
+자세한 내용은 [AddDefaultIdentity source](https://github.com/aspnet/AspNetCore/blob/release/3.0/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) 를 참조 하세요.
 
 ::: moniker-end
 
@@ -59,7 +59,7 @@ dotnet new webapp --auth Individual -o WebApp1
 
 ---
 
-생성 된 프로젝트는 [Razor 클래스 라이브러리로](xref:razor-pages/ui-class) [ASP.NET Core id](xref:security/authentication/identity) 를 제공 합니다. Id Razor 클래스 라이브러리는 `Identity` 영역을 사용 하 여 끝점을 노출 합니다. 예:
+생성 된 프로젝트는 [Razor 클래스 라이브러리로](xref:razor-pages/ui-class) [ASP.NET Core id](xref:security/authentication/identity) 를 제공 합니다. Id Razor 클래스 라이브러리는 `Identity` 영역이 있는 끝점을 노출 합니다. 예를 들어 다음과 같은 가치를 제공해야 합니다.
 
 * /Identity/Account/Login
 * /Identity/Account/Logout
@@ -93,7 +93,7 @@ dotnet ef database update
 
 ### <a name="configure-identity-services"></a>Id 서비스 구성
 
-서비스는에 `ConfigureServices`추가 됩니다. 일반적인 패턴은 모든 `Add{Service}` 메서드를 호출한 후 모든 `services.Configure{Service}` 메서드를 호출하는 것입니다.
+서비스는 `ConfigureServices`에 추가 됩니다. 일반적인 패턴은 모든 `Add{Service}` 메서드를 호출한 후 모든 `services.Configure{Service}` 메서드를 호출하는 것입니다.
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -143,7 +143,7 @@ Register, Login 및 LogOut 파일을 추가 합니다.
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-**WebApp1**이름으로 프로젝트를 만든 경우 다음 명령을 실행 합니다. 그렇지 않으면에 대해 `ApplicationDbContext`올바른 네임 스페이스를 사용 합니다.
+**WebApp1**이름으로 프로젝트를 만든 경우 다음 명령을 실행 합니다. 그렇지 않으면 `ApplicationDbContext`에 대해 올바른 네임 스페이스를 사용 합니다.
 
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
@@ -158,7 +158,7 @@ PowerShell은 세미콜론을 명령 구분 기호로 사용 합니다. PowerShe
 
 ::: moniker range=">= aspnetcore-2.1"
 
-   사용자가 **등록** 링크 `RegisterModel.OnPostAsync` 를 클릭 하면 작업이 호출 됩니다. 사용자는 `_userManager` 개체에 대해 [createasync](/dotnet/api/microsoft.aspnetcore.identity.usermanager-1.createasync#Microsoft_AspNetCore_Identity_UserManager_1_CreateAsync__0_System_String_) 를 사용 하 여 만들어집니다. `_userManager`는 종속성 주입에 의해 제공 됩니다.
+   사용자가 **등록** 링크를 클릭 하면 `RegisterModel.OnPostAsync` 동작이 호출 됩니다. 사용자는 `_userManager` 개체에 대해 [Createasync](/dotnet/api/microsoft.aspnetcore.identity.usermanager-1.createasync#Microsoft_AspNetCore_Identity_UserManager_1_CreateAsync__0_System_String_) 를 사용 하 여 만들어집니다. `_userManager`은 종속성 주입에 의해 제공 됩니다.):
 
    [!code-csharp[](identity/sample/WebApp1/Areas/Identity/Pages/Account/Register.cshtml.cs?name=snippet&highlight=7,22)]
 
@@ -166,7 +166,7 @@ PowerShell은 세미콜론을 명령 구분 기호로 사용 합니다. PowerShe
 
 ::: moniker range="= aspnetcore-2.0"
 
-   사용자가 **등록** 링크 `Register` 를 클릭 하면 작업이에서 `AccountController`호출 됩니다. `Register` 액션은 `_userManager` 개체의 (종속성 주입으로 `AccountController`에 제공된) `CreateAsync`를 호출해서 사용자를 생성합니다:
+   사용자가 **등록** 링크를 클릭 하면-2 @no__t에서 `Register` 동작이 호출 됩니다. `Register` 액션은 `_userManager` 개체의 (종속성 주입으로 `AccountController`에 제공된) `CreateAsync`를 호출해서 사용자를 생성합니다:
 
    [!code-csharp[](identity/sample/src/ASPNET-IdentityDemo/Controllers/AccountController.cs?name=snippet_register&highlight=11)]
 
@@ -185,11 +185,11 @@ PowerShell은 세미콜론을 명령 구분 기호로 사용 합니다. PowerShe
 * **로그인** 링크가 선택 됩니다.
 * 사용자가 액세스 권한이 없는 제한 된 페이지에 액세스 **하거나** 시스템이 인증 되지 않은 경우에 액세스 하려고 합니다.
 
-로그인 페이지의 폼이 제출 `OnPostAsync` 되 면 동작이 호출 됩니다. `PasswordSignInAsync`는 종속성 주입에 `_signInManager` 의해 제공 되는 개체에서 호출 됩니다.
+로그인 페이지의 양식이 제출 되 면 `OnPostAsync` 동작이 호출 됩니다. `PasswordSignInAsync`은 종속성 주입에 의해 제공 되는 `_signInManager` 개체에서 호출 됩니다.
 
    [!code-csharp[](identity/sample/WebApp1/Areas/Identity/Pages/Account/Login.cshtml.cs?name=snippet&highlight=10-11)]
 
-   기본 `Controller` 클래스는 컨트롤러의 메서드에서 접근할 수 있는 `User` 속성을 제공합니다. 예를 들어를 열거 `User.Claims` 하 고 권한 부여 결정을 내릴 수 있습니다. 자세한 내용은 <xref:security/authorization/introduction>을 참조하세요.
+   기본 `Controller` 클래스는 컨트롤러의 메서드에서 접근할 수 있는 `User` 속성을 제공합니다. 예를 들어 `User.Claims`을 열거 하 고 권한 부여 결정을 내릴 수 있습니다. 자세한 내용은 <xref:security/authorization/introduction>을 참조하세요.
 
 ::: moniker-end
 
@@ -201,7 +201,7 @@ PowerShell은 세미콜론을 명령 구분 기호로 사용 합니다. PowerShe
 
 [!code-csharp[](identity/sample/src/ASPNET-IdentityDemo/Controllers/AccountController.cs?name=snippet_login&highlight=13-14)]
 
-기본 (`Controller` 또는 `PageModel`) 클래스는 속성을 `User` 노출 합니다. 예를 들어 `User.Claims` 를 열거 하 여 권한 부여 결정을 내릴 수 있습니다.
+Base (`Controller` 또는 `PageModel`) 클래스는 `User` 속성을 노출 합니다. 예를 들어 `User.Claims`을 열거 하 여 권한 부여 결정을 내릴 수 있습니다.
 
 ::: moniker-end
 
@@ -209,7 +209,7 @@ PowerShell은 세미콜론을 명령 구분 기호로 사용 합니다. PowerShe
 
 ::: moniker range=">= aspnetcore-2.1"
 
-**로그 아웃** 링크는 작업을 `LogoutModel.OnPost` 호출 합니다. 
+**로그 아웃** 링크는 `LogoutModel.OnPost` 동작을 호출 합니다. 
 
 [!code-csharp[](identity/sample/WebApp1/Areas/Identity/Pages/Account/Logout.cshtml.cs)]
 
@@ -227,13 +227,13 @@ Post는 *Pages/Shared/_LoginPartial*에서 지정 됩니다.
 
    [!code-csharp[](identity/sample/src/ASPNET-IdentityDemo/Controllers/AccountController.cs?name=snippet_logout&highlight=7)]
 
-   위의 코드는 메서드를 `_signInManager.SignOutAsync` 호출 합니다. `SignOutAsync`메서드는 쿠키에 저장된 사용자의 클레임을 삭제합니다.
+   위의 코드는 `_signInManager.SignOutAsync` 메서드를 호출 합니다. `SignOutAsync`메서드는 쿠키에 저장된 사용자의 클레임을 삭제합니다.
 
 ::: moniker-end
 
 ## <a name="test-identity"></a>테스트 Id
 
-기본 웹 프로젝트 템플릿을 사용 하면 홈 페이지에 익명으로 액세스할 수 있습니다. Id를 테스트 하려면 개인 [`[Authorize]`](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute) 정보 페이지에를 추가 합니다.
+기본 웹 프로젝트 템플릿을 사용 하면 홈 페이지에 익명으로 액세스할 수 있습니다. Id를 테스트 하려면 [`[Authorize]`](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute) 을 개인 정보 페이지에 추가 합니다.
 
 [!code-csharp[](identity/sample/WebApp1/Pages/Privacy.cshtml.cs?highlight=6)]
 

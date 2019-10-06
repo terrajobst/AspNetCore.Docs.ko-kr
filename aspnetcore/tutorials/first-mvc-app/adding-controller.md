@@ -100,7 +100,7 @@ URL에서 컨트롤러에 일부 매개 변수 정보를 전달하도록 코드�
 위의 코드는:
 
 * C#의 선택적 매개 변수 기능을 사용하여 `numTimes` 매개 변수에 대해 전달된 값이 없는 경우 해당 매개 변수의 기본값이 1임을 나타냅니다. <!-- remove for simplified -->
-* `HtmlEncoder.Default.Encode`를 사용하여 악의적인 입력(예: JavaScript)에서 응용 프로그램을 보호합니다.
+* `HtmlEncoder.Default.Encode`를 사용하여 악의적인 입력(예: JavaScript)으로부터 응용 프로그램을 보호합니다.
 * `$"Hello {name}, NumTimes is: {numTimes}"`에서 [보간된 문자열](/dotnet/articles/csharp/language-reference/keywords/interpolated-strings)을 사용합니다. <!-- remove for simplified -->
 
 앱을 실행하고 다음으로 이동합니다.
@@ -220,7 +220,7 @@ URL에서 컨트롤러에 일부 매개 변수 정보를 전달하도록 코드�
 위의 코드는:
 
 * C#의 선택적 매개 변수 기능을 사용하여 `numTimes` 매개 변수에 대해 전달된 값이 없는 경우 해당 매개 변수의 기본값이 1임을 나타냅니다. <!-- remove for simplified -->
-* `HtmlEncoder.Default.Encode`를 사용하여 악의적인 입력(예: JavaScript)에서 응용 프로그램을 보호합니다.
+* `HtmlEncoder.Default.Encode`를 사용하여 악의적인 입력(예: JavaScript)으로부터 응용 프로그램을 보호합니다.
 * `$"Hello {name}, NumTimes is: {numTimes}"`에서 [보간된 문자열](/dotnet/articles/csharp/language-reference/keywords/interpolated-strings)을 사용합니다. <!-- remove for simplified -->
 
 앱을 실행하고 다음으로 이동합니다.
