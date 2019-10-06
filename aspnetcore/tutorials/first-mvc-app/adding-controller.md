@@ -110,7 +110,7 @@ URL에서 컨트롤러에 일부 매개 변수 정보를 전달하도록 코드�
 
 ![Hello Rick, NumTimes의 애플리케이션 응답을 보여주는 브라우저 창은 다음과 같습니다. 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
 
-위의 이미지에서 URL 세그먼트(`Parameters`)를 사용하지 않고 `name` 및 `numTimes` 매개 변수가 [쿼리 문자열](https://wikipedia.org/wiki/Query_string)로 전달됩니다. 위 URL에서 `?`(물음표)는 구분 기호이고 쿼리 문자열이 이어집니다. `&` 문자는 쿼리 문자열을 구분합니다.
+위의 이미지에서는 URL 세그먼트(`Parameters`)를 사용하지 않고 `name` 및 `numTimes` 매개 변수가 [쿼리 문자열](https://wikipedia.org/wiki/Query_string)로 전달됩니다. 위 URL에서 `?`(물음표)는 구분 기호로 쿼리 문자열이 이어집니다. `&` 문자는 쿼리 문자열을 구분합니다.
 
 `Welcome` 메서드를 다음 코드로 바꿉니다.
 
@@ -229,7 +229,7 @@ URL에서 컨트롤러에 일부 매개 변수 정보를 전달하도록 코드�
 
 ![Hello Rick, NumTimes의 애플리케이션 응답을 보여주는 브라우저 창은 다음과 같습니다. 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
 
-위의 이미지에서 URL 세그먼트(`Parameters`)를 사용하지 않고 `name` 및 `numTimes` 매개 변수가 [쿼리 문자열](https://wikipedia.org/wiki/Query_string)로 전달됩니다. 위 URL에서 `?`(물음표)는 구분 기호이고 쿼리 문자열이 이어집니다. `&` 문자는 쿼리 문자열을 구분합니다.
+위의 이미지에서는 URL 세그먼트(`Parameters`)를 사용하지 않고 `name` 및 `numTimes` 매개 변수가 [쿼리 문자열](https://wikipedia.org/wiki/Query_string)로 전달됩니다. 위 URL에서 `?`(물음표)는 구분 기호로 쿼리 문자열이 이어집니다. `&` 문자는 쿼리 문자열을 구분합니다.
 
 `Welcome` 메서드를 다음 코드로 바꿉니다.
 
