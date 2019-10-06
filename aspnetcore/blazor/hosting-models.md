@@ -5,14 +5,14 @@ description: Blazor Weasembomand Blazor 서버 호스팅 모델을 이해 합니
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/23/2019
+ms.date: 10/03/2019
 uid: blazor/hosting-models
-ms.openlocfilehash: 766b52df82f75ea1223e20d8471faa5732311f91
-ms.sourcegitcommit: 79eeb17604b536e8f34641d1e6b697fb9a2ee21f
+ms.openlocfilehash: bc3ad9c7c4731b685fc161844d9f55e51722c0ea
+ms.sourcegitcommit: 73e255e846e414821b8cc20ffa3aec946735cd4e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/24/2019
-ms.locfileid: "71207235"
+ms.lasthandoff: 10/03/2019
+ms.locfileid: "71924666"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor 호스팅 모델
 
@@ -133,11 +133,14 @@ Blazor 서버 앱은 네트워크 대기 시간 및 메모리 사용을 줄여 U
 
 Blazor 서버 앱은 서버에 대 한 활성 SignalR 연결이 필요 합니다. 연결이 끊어지면 앱이 서버에 다시 연결을 시도 합니다. 클라이언트의 상태가 아직 메모리에 있으면 클라이언트 세션이 상태 손실 없이 다시 시작 됩니다.
 
-클라이언트에서 연결이 끊어진 것을 감지 하면 클라이언트에서 다시 연결을 시도 하는 동안 기본 UI가 표시 됩니다. 다시 연결이 실패 하는 경우 사용자에 게 다시 시도 하는 옵션이 제공 됩니다. UI를 사용자 지정 하려면 `components-reconnect-modal` *_Host* Razor 페이지 `id` 에서로 요소를 정의 합니다. 클라이언트는 연결 상태에 따라 다음 CSS 클래스 중 하나를 사용 하 여이 요소를 업데이트 합니다.
+클라이언트에서 연결이 끊어진 것을 감지 하면 클라이언트에서 다시 연결을 시도 하는 동안 기본 UI가 표시 됩니다. 다시 연결이 실패 하는 경우 사용자에 게 다시 시도 하는 옵션이 제공 됩니다. UI를 사용자 지정 하려면 *_Host* Razor 페이지에서 `id`로 `components-reconnect-modal` 인 요소를 정의 합니다. 클라이언트는 연결 상태에 따라 다음 CSS 클래스 중 하나를 사용 하 여이 요소를 업데이트 합니다.
 
-* `components-reconnect-show`&ndash; 연결이 끊어져서 클라이언트에서 다시 연결을 시도 했음을 나타내는 UI를 표시 합니다.
+* @no__t 0 &ndash;은 연결을 끊고 클라이언트를 다시 연결 하려고 함을 나타내는 UI를 표시 합니다.
 * `components-reconnect-hide`&ndash; 클라이언트에 활성 연결이 있으며 UI를 숨깁니다.
-* `components-reconnect-failed`&ndash; 다시 연결 하지 못했습니다. 다시 연결을 다시 시도 하려면 `window.Blazor.reconnect()`를 호출 합니다.
+* `components-reconnect-failed` @no__t 네트워크 오류로 인해 다시 연결 하지 못했습니다. 다시 연결을 시도 하려면 `window.Blazor.reconnect()`을 호출 합니다.
+* `components-reconnect-rejected` &ndash; 다시 연결이 거부 되었습니다. 서버에 도달 했지만 연결이 거부 되었으며 서버의 사용자 상태가 사라졌습니다. 앱을 다시 로드 하려면 `location.reload()`을 호출 합니다. 이 연결 상태는 다음과 같은 경우에 발생할 수 있습니다.
+  * 회로 (서버 쪽 코드)의 작동이 중단 됩니다.
+  * 서버에서 사용자의 상태를 삭제 하기에 충분 한 길이의 클라이언트 연결이 끊겼습니다. 사용자가 상호 작용 하는 구성 요소의 인스턴스가 삭제 됩니다.
 
 ### <a name="stateful-reconnection-after-prerendering"></a>렌더링 후 상태 저장 다시 연결
 
