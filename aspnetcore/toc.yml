@@ -122,13 +122,8 @@
               uid: data/ef-rp/update-related-data
             - name: 동시성 충돌 처리
               uid: data/ef-rp/concurrency
-        - name: 'MVC, 기존 데이터베이스를 사용한 EF Core'
+        - name: MVC를 사용한 EF Core
           displayName: tutorial
-          href: /ef/core/get-started/aspnetcore/existing-db?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
-        - name: 'MVC, 새 데이터베이스를 사용한 EF Core'
-          displayName: tutorial
-          href: /ef/core/get-started/aspnetcore/new-db?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
-        - name: 'MVC, 10개 자습서를 사용한 EF Core'
           items:
             - name: 개요
               uid: data/ef-mvc/index
@@ -231,8 +226,6 @@
           uid: razor-pages/filter
         - name: 경로 및 앱 규칙
           uid: razor-pages/razor-pages-conventions
-        - name: 파일 업로드
-          uid: razor-pages/upload-files
         - name: Razor SDK
           uid: razor-pages/sdk
     - name: MVC
@@ -271,8 +264,6 @@
           uid: mvc/controllers/actions
         - name: 라우팅
           uid: mvc/controllers/routing
-        - name: 파일 업로드
-          uid: mvc/models/file-uploads
         - name: 종속성 주입 - 컨트롤러
           uid: mvc/controllers/dependency-injection
         - name: 종속성 주입 - 보기
@@ -418,6 +409,8 @@
           uid: mvc/controllers/filters
         - name: 영역
           uid: mvc/controllers/areas
+        - name: 파일 업로드
+          uid: mvc/models/file-uploads
         - name: 앱 파트
           uid: mvc/extensibility/app-parts
         - name: aspnet-codegenerator
@@ -632,11 +625,7 @@
               uid: data/ef-rp/update-related-data
             - name: 동시성 충돌 처리
               uid: data/ef-rp/concurrency
-        - name: 'MVC, 새 데이터베이스를 사용한 EF Core'
-          href: /ef/core/get-started/aspnetcore/new-db?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
-        - name: 'MVC, 기존 데이터베이스를 사용한 EF Core'
-          href: /ef/core/get-started/aspnetcore/existing-db?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
-        - name: 'MVC, 10개 자습서를 사용한 EF Core'
+        - name: MVC를 사용한 EF Core
           items:
             - name: 개요
               uid: data/ef-mvc/index
