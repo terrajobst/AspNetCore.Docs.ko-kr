@@ -205,7 +205,7 @@ Remove link for simplified tutorial.
 
 앱으로 이동하고 URL 세그먼트를 제공하지 않는 경우 "Home" 컨트롤러에 기본값으로 지정되고 위에 강조 표시된 템플릿 줄에 "Index" 메서드가 지정됩니다.
 
-첫 번째 URL 세그먼트는 실행할 컨트롤러 클래스를 결정합니다. 따라서 `localhost:{PORT}/HelloWorld`은 `HelloWorldController` 클래스에 매핑됩니다. URL 세그먼트의 두 번째 부분은 클래스의 작업 메서드를 결정합니다. 따라서 `localhost:{PORT}/HelloWorld/Index`는 실행할 `HelloWorldController` 클래스의 `Index` 메서드를 발생시킵니다. `localhost:{PORT}/HelloWorld`로만 이동했음에도 기본적으로 `Index` 메서드가 호출되었음에 주의하세요. 메서드 이름이 명시적으로 지정되지 않으면 `Index`가 컨트롤러에서 호출되는 기본 메서드이기 때문입니다. URL 세그먼트의 세 번째 부분(`id`)은 경로 데이터입니다. 경로 데이터는 자습서의 뒷 부분에서 설명합니다.
+첫 번째 URL 세그먼트는 실행할 컨트롤러 클래스를 결정합니다. 따라서 `localhost:{PORT}/HelloWorld`는 `HelloWorldController` 클래스에 매핑됩니다. URL 세그먼트의 두 번째 부분은 클래스의 작업 메서드를 결정합니다. 따라서 `localhost:{PORT}/HelloWorld/Index`는 실행할 `HelloWorldController` 클래스의 `Index` 메서드를 발생시킵니다. `localhost:{PORT}/HelloWorld`로만 이동했음에도 기본적으로 `Index` 메서드가 호출되었음에 주의하세요. 이는 `Index`가 메서드 이름이 명시적으로 지정되지 않으면 컨트롤러에서 호출되는 기본 메서드이기 때문입니다. URL 세그먼트의 세 번째 부분(`id`)은 경로 데이터입니다. 경로 데이터는 자습서의 뒷 부분에서 설명합니다.
 
 `https://localhost:{PORT}/HelloWorld/Welcome`으로 이동합니다. `Welcome` 메서드가 실행되고 문자열 `This is the Welcome action method...`를 반환합니다. 이 URL의 경우 컨트롤러는 `HelloWorld`이고 `Welcome`이 작업 메서드입니다. 아직 URL의 `[Parameters]` 부분을 사용하지 않았습니다.
 
