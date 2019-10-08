@@ -17,13 +17,13 @@ ms.locfileid: "65084857"
 
 작성자: [Steve Smith](https://ardalis.com/)
 
-ASP.NET MVC 작업은 소규모 파일에 대해서는 단순 모델 바인딩을, 대규모 파일에 대해서는 스트리밍을 사용하여 하나 이상의 파일 업로딩을 지원합니다.
+ASP.NET MVC 작업은 작은 파일에 대해서는 단순 모델 바인딩을, 큰 파일에 대해서는 스트리밍을 사용하여 하나 이상의 파일 업로딩을 지원합니다.
 
-[GitHub에서 샘플 보기 또는 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/sample/FileUploadSample)
+[GitHub에서 예제 보기 또는 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/sample/FileUploadSample)
 
 ## <a name="uploading-small-files-with-model-binding"></a>모델 바인딩을 사용하여 작은 파일 업로딩
 
-작은 파일을 업로드하기 위해 다중 파트 HTML 양식을 사용하거나 JavaScript를 사용하여 POST 요청을 생성할 수 있습니다. 다중 업로드된 파일을 지원하고 Razor를 사용하는 양식 예제가 아래에 나와 있습니다.
+작은 파일을 업로드하기 위해서는 다중 파트 HTML 양식을 사용하거나 JavaScript를 사용하여 POST 요청을 구성할 수 있습니다. 여러 개의 업로드된 파일을 지원하는 Razor를 사용한 예제 양식은 다음과 같습니다.
 
 ```html
 <form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
@@ -41,11 +41,11 @@ ASP.NET MVC 작업은 소규모 파일에 대해서는 단순 모델 바인딩�
 </form>
 ```
 
-파일 업로드를 지원하려면 HTML 양식에서 `multipart/form-data`의 `enctype`을 지정해야 합니다. 위에 표시된 `files` 입력 요소에서는 다중 파일 업로드를 지원합니다. 이 입력 요소에서 `multiple` 특성을 생략하면 하나의 파일만 업로드할 수 있습니다. 위의 태그는 브라우저에서 다음과 같이 렌더링합니다.
+파일 업로드를 지원하려면 HTML 양식에 `multipart/form-data`의 `enctype`을 지정해야 합니다. 위에 표시된 `files` 입력 요소에서는 다중 파일 업로드를 지원합니다. 이 입력 요소에서 `multiple` 특성을 생략하면 하나의 파일만 업로드할 수 있습니다. 위의 태그는 브라우저에서 다음과 같이 렌더링됩니다.
 
 ![파일 업로드 양식](file-uploads/_static/upload-form.png)
 
-서버에 업로드된 개별 파일은 [IFormFile](/dotnet/api/microsoft.aspnetcore.http.iformfile) 인터페이스를 사용하여 [모델 바인딩](xref:mvc/models/model-binding)을 통해 액세스할 수 있습니다. `IFormFile`에는 다음 구조체가 있습니다.
+서버에 업로드된 개별 파일은 [IFormFile](/dotnet/api/microsoft.aspnetcore.http.iformfile) 인터페이스를 사용하여 [모델 바인딩](xref:mvc/models/model-binding)을 통해 액세스할 수 있습니다. `IFormFile`은 다음과 같은 구조를 갖고 있습니다.
 
 ```csharp
 public interface IFormFile
@@ -65,7 +65,7 @@ public interface IFormFile
 > [!WARNING]
 > 유효성 검사없이 `FileName` 속성을 의존하거나 신뢰하지 마세요. `FileName` 속성은 표시 목적으로만 사용해야 합니다.
 
-모델 바인딩 및 `IFormFile` 인터페이스를 사용하여 파일을 업로드할 경우, 작업 메서드는 단일 `IFormFile` 또는 여러 파일을 나타내는 `IEnumerable<IFormFile>`(또는 `List<IFormFile>`)을 받아들일 수 있습니다. 다음 예제에서는 하나 이상의 업로드된 파일을 반복하여 로컬 파일 시스템에 저장하고 업로드된 파일의 총 수와 크기를 반환합니다.
+모델 바인딩 및 `IFormFile` 인터페이스를 사용하여 파일을 업로드할 경우, 작업 메서드는 단일 `IFormFile` 또는 여러 파일을 나타내는 `IEnumerable<IFormFile>`(또는 `List<IFormFile>`)을 받을 수 있습니다. 다음 예제는 하나 이상의 업로드된 파일을 반복하여 로컬 파일 시스템에 저장하고 업로드된 파일의 총 수와 크기를 반환합니다.
 
 [!INCLUDE [GetTempFileName](../../includes/GetTempFileName.md)]
 
@@ -82,7 +82,7 @@ public class ApplicationUser : IdentityUser
 }
 ```
 
-`IFormFile` 형식의 viewmodel 속성을 지정합니다.
+`IFormFile` 형식의 ViewModel 속성을 지정합니다.
 
 ```csharp
 public class RegisterViewModel
@@ -94,7 +94,7 @@ public class RegisterViewModel
 ```
 
 > [!NOTE]
-> 위에 표시된 것처럼 `IFormFile`을 작업 메서드 매개 변수 또는 viewmodel 속성으로 직접 사용할 수 있습니다.
+> 위에서 볼 수 있는 것처럼 `IFormFile`을 작업 메서드의 매개 변수 또는 ViewModel 속성으로 직접 사용할 수 있습니다.
 
 `IFormFile`을 스트림에 복사하고 바이트 배열로 저장합니다.
 
@@ -126,18 +126,18 @@ public async Task<IActionResult> Register(RegisterViewModel model)
 ```
 
 > [!NOTE]
-> 관계형 데이터베이스에 이진 데이터를 저장하는 경우 성능에 나쁜 영향을 줄 수 있으므로 주의하세요.
+> 관계형 데이터베이스에 이진 데이터를 저장할 경우 성능에 나쁜 영향을 줄 수 있으므로 주의하세요.
 
 ## <a name="uploading-large-files-with-streaming"></a>스트리밍을 사용하여 큰 파일 업로딩
 
-파일 업로드의 크기 또는 빈도로 인해 앱에 대한 리소스 문제가 발생하는 경우 위에 표시된 모델 바인딩 접근 방식과 마찬가지로 전체를 버퍼링하는 대신 파일 업로드를 스트리밍하는 것이 좋습니다. `IFormFile`을 사용하고 모델 바인딩이 훨씬 간단한 솔루션이지만 스트리밍을 제대로 구현하려면 여러 단계를 거쳐야 합니다.
+파일 업로드의 크기 또는 빈도로 인해 앱에 리소스 문제가 발생하는 경우, 위에서 살펴본 모델 바인딩 접근 방식처럼 전체를 버퍼링하는 대신 파일 업로드를 스트리밍하는 것이 좋습니다. `IFormFile` 및 모델 바인딩을 사용하는 방법이 훨씬 간단한 솔루션인 반면, 스트리밍을 제대로 구현하려면 여러 단계를 거쳐야 합니다.
 
 > [!NOTE]
-> 버퍼링된 단일 파일이 64KB를 초과하면 이 파일은 RAM에서 서버의 디스크에 있는 임시 파일로 이동됩니다. 파일 업로드에서 사용되는 리소스(디스크, RAM)는 동시 파일 업로드 크기와 수에 따라 달라집니다. 스트리밍은 성능에 관한 것이 아니라 규모에 관한 것입니다. 너무 많은 업로드를 버퍼링하려고 하면 메모리 또는 디스크 공간이 부족할 때 사이트가 중단됩니다.
+> 버퍼링된 단일 파일이 64KB를 초과하면 이 파일은 RAM에서 서버의 디스크에 있는 임시 파일로 이동됩니다. 파일 업로드에서 사용되는 리소스(디스크, RAM)는 동시 파일 업로드 크기와 수에 따라 달라집니다. 스트리밍은 성능에 관한 것이 아니라 규모에 관한 것입니다. 너무 많은 업로드를 버퍼링하려고 하면 메모리 또는 디스크 공간이 부족할 경우 사이트가 중단됩니다.
 
-다음 예제에서는 JavaScript/Angular를 사용하여 컨트롤러 작업에 스트리밍하는 것을 보여 줍니다. 사용자 지정 필터 특성을 사용하여 파일의 위조 방지 토큰이 생성되고 요청 본문 대신 HTTP 헤더에 전달됩니다. 작업 메서드에서 업로드된 데이터를 직접 처리하므로 다른 필터에서 모델 바인딩을 사용할 수 없습니다. 작업 내에서 양식의 콘텐츠는 각 개별 `MultipartSection`을 읽고 적절하게 파일을 처리하거나 콘텐츠를 저장하는 `MultipartReader`를 사용하여 읽습니다. 모든 섹션을 읽은 후 작업에서 자체 모델 바인딩을 수행합니다.
+다음 예제는 JavaScript/Angular를 사용하여 컨트롤러 작업에 스트리밍하는 것을 보여 줍니다. 사용자 지정 필터 특성을 사용하여 파일의 위조 방지 토큰을 생성하고 요청 본문 대신 HTTP 헤더로 전달합니다. 작업 메서드에서 업로드된 데이터를 직접 처리하므로 모델 바인딩은 다른 필터에 의해 비활성됩니다. 작업 내에서 양식의 콘텐츠는 각 개별 `MultipartSection`을 읽고 적절하게 파일을 처리하거나 콘텐츠를 저장하는 `MultipartReader`를 사용하여 읽습니다. 모든 섹션을 읽은 후 작업에서 자체 모델 바인딩을 수행합니다.
 
-초기 작업에서는 양식을 로드하고 위조 방지 토큰을 쿠키에 저장합니다(`GenerateAntiforgeryTokenCookieForAjax` 특성을 통해).
+초기 작업은 양식을 로드하고 위조 방지 토큰을 쿠키에 저장합니다(`GenerateAntiforgeryTokenCookieForAjax` 특성을 통해).
 
 ```csharp
 [HttpGet]
@@ -152,15 +152,15 @@ public IActionResult Index()
 
 [!code-csharp[](file-uploads/sample/FileUploadSample/Filters/GenerateAntiforgeryTokenCookieForAjaxAttribute.cs?name=snippet1)]
 
-Angular는 `X-XSRF-TOKEN`으로 명명된 요청 헤더에서 위조 방지 토큰을 자동으로 전달합니다. *Startup.cs*의 해당 구성에서 이 헤더를 참조하도록 ASP.NET Core MVC 앱이 구성됩니다.
+Angular는 자동으로 `X-XSRF-TOKEN`으로 명명된 요청 헤더에 위조 방지 토큰을 전달합니다. ASP.NET Core MVC 앱은 *Startup.cs*의 구성에서 이 헤더를 참조하도록 구성됩니다.
 
 [!code-csharp[](file-uploads/sample/FileUploadSample/Startup.cs?name=snippet1)]
 
-아래 표시된 `DisableFormValueModelBinding` 특성은 `Upload` 작업 메서드에 대한 모델 바인딩을 사용하지 않도록 설정하는 데 사용됩니다.
+아래 표시된 `DisableFormValueModelBinding` 특성은 `Upload` 작업 메서드에 대해 모델 바인딩을 사용하지 않도록 설정하는 데 사용됩니다.
 
 [!code-csharp[](file-uploads/sample/FileUploadSample/Filters/DisableFormValueModelBindingAttribute.cs?name=snippet1)]
 
-모델 바인딩이 사용되지 않으므로 `Upload` 작업 메서드는 매개 변수를 받아들이지 않습니다. `ControllerBase`의 `Request` 속성으로 직접 작동합니다. `MultipartReader`는 각 섹션을 읽는 데 사용됩니다. 파일이 GUID 파일 이름으로 저장되고 키/값 데이터가 `KeyValueAccumulator`에 저장됩니다. 모든 섹션을 읽었으면 `KeyValueAccumulator`의 내용이 양식 데이터를 모델 형식으로 바인딩하는 데 사용됩니다.
+모델 바인딩이 사용되지 않으므로 `Upload` 작업 메서드는 매개 변수를 받지 않습니다. `ControllerBase`의 `Request` 속성을 사용하여 직접 작동합니다. `MultipartReader`는 각 섹션을 읽는 데 사용됩니다. 파일은 GUID 파일 이름으로 저장되고 키/값 데이터는 `KeyValueAccumulator`에 저장됩니다. 모든 섹션을 읽었으면 `KeyValueAccumulator`의 내용이 양식 데이터를 모델 형식으로 바인딩하는 데 사용됩니다.
 
 전체 `Upload` 메서드는 다음과 같습니다.
 
@@ -194,8 +194,8 @@ The request filtering module is configured to deny a request that exceeds the re
 </system.webServer>
 ```
 
-이 설정은 IIS에만 적용됩니다. Kestrel에서 호스팅하는 경우 기본적으로 동작이 발생하지 않습니다. 자세한 내용은 [요청 제한 \<requestLimits\>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/)을 참조하세요.
+이 설정은 IIS에만 적용됩니다. Kestrel에서 호스팅하는 경우 기본적으로 이 동작은 발생하지 않습니다. 자세한 내용은 [요청 제한 \<requestLimits\>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/)을 참조하세요.
 
-### <a name="null-reference-exception-with-iformfile"></a>IFormFile을 사용한 Null 참조 예외
+### <a name="null-reference-exception-with-iformfile"></a>IFormFile 사용 시 Null 참조 예외
 
-컨트롤러가 `IFormFile`을 사용하여 업로드된 파일을 수락하고 있지만 값이 항상 null인 경우 HTML 양식에서 `enctype` 값을 `multipart/form-data`로 지정하는지 확인합니다. `<form>` 요소에 이 특성이 설정되어 있지 않은 경우 파일 업로드가 발생하지 않고 모든 바인딩된 `IFormFile` 인수는 null이 됩니다.
+컨트롤러가 `IFormFile`을 사용하여 업로드된 파일을 수락하지만 항상 값이 null인 경우, HTML 양식이 `enctype` 값으로 `multipart/form-data`를 지정하고 있는지 확인합니다. `<form>` 요소에 이 특성이 설정되어 있지 않은 경우 파일 업로드가 발생하지 않고 모든 바인딩된 `IFormFile` 인수는 null이 됩니다.
