@@ -3,14 +3,14 @@ title: ASP.NET Core에 대한 Razor 구문 참조
 author: rick-anderson
 description: 웹 페이지에 서버 기반 코드를 포함하는 Razor 태그 구문에 대해 알아봅니다.
 ms.author: riande
-ms.date: 09/19/2019
+ms.date: 09/28/2019
 uid: mvc/views/razor
-ms.openlocfilehash: 9a319f7efb6d879559afd9faca6955aba719fa2f
-ms.sourcegitcommit: e5a74f882c14eaa0e5639ff082355e130559ba83
+ms.openlocfilehash: 6f8835419dbf4c271617f57484c3408e0af30617
+ms.sourcegitcommit: f62014bb558ff6f8fdaef2e96cb05986e216aacd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71168299"
+ms.lasthandoff: 09/28/2019
+ms.locfileid: "71592325"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>ASP.NET Core에 대한 Razor 구문 참조
 
@@ -227,7 +227,7 @@ HTML 태그로 묶이지 않은 HTML을 렌더링하려면 이 방법을 사용�
 * `<text>` 태그 사이의 콘텐츠만 렌더링됩니다.
 * `<text>` 태그 앞 또는 뒤에 있는 공백은 HTML 출력에 나타나지 않습니다.
 
-### <a name="explicit-line-transition-with-colon"></a>\@&colon;를 사용하여 명시적 줄 전환
+### <a name="explicit-line-transition"></a>명시적 줄 전환
 
 코드 블록 내부의 나머지 전체 줄을 HTML로 렌더링하려면 `@:` 구문을 사용합니다.
 
@@ -652,7 +652,7 @@ Razor Pages 예제는 다음 표에 나와 있습니다.
 * *Pages/_ViewImports.cshtml*에는 `@namespace Hello.World`가 포함되어 있습니다.
 * 각 페이지에는 `Hello.World`가 네임스페이스의 루트로 포함되어 있습니다.
 
-| Page                                        | 네임스페이스                             |
+| 페이지                                        | 네임스페이스                             |
 | ------------------------------------------- | ------------------------------------- |
 | *Pages/Index.cshtml*                        | `Hello.World`                         |
 | *Pages/MorePages/Page.cshtml*               | `Hello.World.MorePages`               |
@@ -664,7 +664,7 @@ Razor Pages 예제는 다음 표에 나와 있습니다.
 
 이전 예제의 *EvenMorePages* 폴더에 `@namespace Another.Planet`이 포함된 가져오기 파일이 있으면(또는 *Pages/MorePages/EvenMorePages/Page.cshtml* 파일에 `@namespace Another.Planet` 포함), 다음 표에 결과가 표시됩니다.
 
-| Page                                        | 네임스페이스               |
+| 페이지                                        | 네임스페이스               |
 | ------------------------------------------- | ----------------------- |
 | *Pages/Index.cshtml*                        | `Hello.World`           |
 | *Pages/MorePages/Page.cshtml*               | `Hello.World.MorePages` |
@@ -863,7 +863,7 @@ public class Pet
 ### <a name="razor-keywords"></a>Razor 키워드
 
 * 페이지(ASP.NET Core 2.1 이상 필요)
-* namespace
+* 네임스페이스(namespace)
 * 함수
 * 상속
 * model

@@ -4,14 +4,14 @@ author: tdykstra
 description: 이 자습서에서는 관련된 데이터 즉, Entity Framework에서 탐색 속성으로 로드하는 데이터를 읽고 표시합니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/22/2019
+ms.date: 09/28/2019
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: f53f8edef7fe8690d0e414bc094d81dc99ad198a
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 02b52dee0b661ad26cd6fa9fea08fcea3d7dd9bd
+ms.sourcegitcommit: f62014bb558ff6f8fdaef2e96cb05986e216aacd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71082098"
+ms.lasthandoff: 09/28/2019
+ms.locfileid: "71592295"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---read-related-data---6-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 관련 데이터 읽기 - 6/8
 
@@ -258,7 +258,7 @@ ms.locfileid: "71082098"
   }
   ```
 
-* 각 강사가 가르치는 과정을 표시하는 **Courses** 열을 추가합니다. 이 razor 구문에 대한 자세한 내용은 [`@:`를 사용하여 명시적 줄 전환](xref:mvc/views/razor#explicit-line-transition-with-)을 참조하세요.
+* 각 강사가 가르치는 과정을 표시하는 **Courses** 열을 추가합니다. 이 razor 구문에 대한 자세한 내용은 [명시적 줄 전환](xref:mvc/views/razor#explicit-line-transition)을 참조하세요.
 
 * 선택된 강사 및 과정의 `tr` 요소에 `class="success"`를 동적으로 추가하는 코드를 추가합니다. 부트스트랩 클래스를 사용하여 선택된 행에 대한 배경색을 설정합니다.
 
@@ -527,7 +527,7 @@ Where 조건과 함께 `Single`을 사용하는 것은 개인적으로 선호하
   }
   ```
 
-* 각 강사가 가르치는 과정을 표시하는 **Courses** 열을 추가했습니다. 이 razor 구문에 대한 자세한 내용은 [`@:`를 사용하여 명시적 줄 전환](xref:mvc/views/razor#explicit-line-transition-with-)을 참조하세요.
+* 각 강사가 가르치는 과정을 표시하는 **Courses** 열을 추가했습니다. 이 razor 구문에 대한 자세한 내용은 [명시적 줄 전환](xref:mvc/views/razor#explicit-line-transition)을 참조하세요.
 
 * 선택된 강사의 `tr` 요소에 `class="success"`를 동적으로 추가하는 코드를 추가했습니다. 부트스트랩 클래스를 사용하여 선택된 행에 대한 배경색을 설정합니다.
 

@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 08/13/2019
 uid: grpc/authn-and-authz
-ms.openlocfilehash: 19018c4ffae1228055a4858b496f135d015625b4
-ms.sourcegitcommit: 89fcc6cb3e12790dca2b8b62f86609bed6335be9
+ms.openlocfilehash: e8dd384ec43a66e56891925dcaa529085fa200c7
+ms.sourcegitcommit: 6d26ab647ede4f8e57465e29b03be5cb130fc872
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/13/2019
-ms.locfileid: "68993282"
+ms.lasthandoff: 10/07/2019
+ms.locfileid: "71999853"
 ---
 # <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>ASP.NET Core에 대 한 gRPC의 인증 및 권한 부여
 
@@ -23,7 +23,7 @@ ms.locfileid: "68993282"
 
 gRPC는 [ASP.NET Core 인증과](xref:security/authentication/identity) 함께 사용 하 여 각 호출에 사용자를 연결할 수 있습니다.
 
-다음은 grpc 및 ASP.NET Core `Startup.Configure` 인증을 사용 하는 예제입니다.
+다음은 gRPC 및 ASP.NET Core 인증을 사용 하는 `Startup.Configure`의 예입니다.
 
 ```csharp
 public void Configure(IApplicationBuilder app)
@@ -41,11 +41,11 @@ public void Configure(IApplicationBuilder app)
 ```
 
 > [!NOTE]
-> ASP.NET Core 인증 미들웨어를 등록 하는 순서는 중요 합니다. 항상 `UseAuthentication` 및`UseAuthorization` 전후를 호출 합니다.`UseEndpoints` `UseRouting`
+> ASP.NET Core 인증 미들웨어를 등록 하는 순서는 중요 합니다. 항상 `UseAuthentication`을 호출 하 고-2 @no__t 후-3 @no__t 앞에 @no__t 합니다.
 
-호출 하는 동안 앱에서 사용 하는 인증 메커니즘을 구성 해야 합니다. 인증 구성은에 `Startup.ConfigureServices` 추가 되 고 앱이 사용 하는 인증 메커니즘에 따라 달라질 수 있습니다. ASP.NET Core 앱을 보호 하는 방법에 대 한 예제는 [인증 샘플](xref:security/authentication/samples)을 참조 하세요.
+호출 하는 동안 앱에서 사용 하는 인증 메커니즘을 구성 해야 합니다. 인증 구성은 `Startup.ConfigureServices`에 추가 되며 앱에서 사용 하는 인증 메커니즘에 따라 다릅니다. ASP.NET Core 앱을 보호 하는 방법에 대 한 예제는 [인증 샘플](xref:security/authentication/samples)을 참조 하세요.
 
-인증이 설정 된 후에는를 `ServerCallContext`통해 grpc 서비스 메서드에서 사용자에 액세스할 수 있습니다.
+인증이 설정 된 후에는 `ServerCallContext`을 통해 gRPC 서비스 메서드에서 사용자에 액세스할 수 있습니다.
 
 ```csharp
 public override Task<BuyTicketsResponse> BuyTickets(
@@ -80,14 +80,40 @@ public bool DoAuthenticatedCall(
 }
 ```
 
+채널에서 `ChannelCredentials`을 구성 하는 방법은 gRPC 호출을 사용 하 여 서비스에 토큰을 전송 하는 대체 방법입니다. 자격 증명은 gRPC 호출이 수행 될 때마다 실행 되므로 토큰을 직접 전달 하는 여러 위치에서 코드를 작성할 필요가 없습니다.
+
+다음 예제의 자격 증명은 모든 gRPC 호출로 토큰을 보내도록 채널을 구성 합니다.
+
+```csharp
+private static GrpcChannel CreateAuthenticatedChannel(string address)
+{
+    var credentials = CallCredentials.FromInterceptor((context, metadata) =>
+    {
+        if (!string.IsNullOrEmpty(_token))
+        {
+            metadata.Add("Authorization", $"Bearer {_token}");
+        }
+        return Task.CompletedTask;
+    });
+
+    // SslCredentials is used here because this channel is using TLS.
+    // Channels that aren't using TLS should use ChannelCredentials.Insecure instead.
+    var channel = GrpcChannel.ForAddress(address, new GrpcChannelOptions
+    {
+        Credentials = ChannelCredentials.Create(new SslCredentials(), credentials)
+    });
+    return channel;
+}
+```
+
 ### <a name="client-certificate-authentication"></a>클라이언트 인증서 인증
 
-클라이언트는 인증을 위해 클라이언트 인증서를 제공할 수도 있습니다. [인증서 인증은](https://tools.ietf.org/html/rfc5246#section-7.4.4) ASP.NET Core 하기 전에는 매우 긴 TLS 수준에서 발생 합니다. 요청이 ASP.NET Core 들어가면 [클라이언트 인증서 인증 패키지](xref:security/authentication/certauth) 를 사용 하 여에 대 한 `ClaimsPrincipal`인증서를 확인할 수 있습니다.
+클라이언트는 인증을 위해 클라이언트 인증서를 제공할 수도 있습니다. [인증서 인증은](https://tools.ietf.org/html/rfc5246#section-7.4.4) ASP.NET Core 하기 전에는 매우 긴 TLS 수준에서 발생 합니다. 요청이 ASP.NET Core 들어가면 [클라이언트 인증서 인증 패키지](xref:security/authentication/certauth) 를 사용 하 여 인증서를 `ClaimsPrincipal`로 해결할 수 있습니다.
 
 > [!NOTE]
 > 클라이언트 인증서를 허용 하도록 호스트를 구성 해야 합니다. Kestrel, IIS 및 Azure에서 클라이언트 인증서를 허용 하는 방법에 대 한 정보는 [인증서를 요구 하도록 호스트 구성](xref:security/authentication/certauth#configure-your-host-to-require-certificates) 을 참조 하세요.
 
-.Net grpc 클라이언트에서 클라이언트 인증서가에 `HttpClientHandler` 추가 된 후 grpc 클라이언트를 만드는 데 사용 됩니다.
+.NET gRPC 클라이언트에서 클라이언트 인증서가 @no__t에 추가 되 고,이는 gRPC 클라이언트를 만드는 데 사용 됩니다.
 
 ```csharp
 public Ticketer.TicketerClient CreateClientWithCert(
@@ -98,11 +124,13 @@ public Ticketer.TicketerClient CreateClientWithCert(
     var handler = new HttpClientHandler();
     handler.ClientCertificates.Add(certificate);
 
-    // Create the gRPC client
-    var httpClient = new HttpClient(handler);
-    httpClient.BaseAddress = new Uri(baseAddress);
+    // Create the gRPC channel
+    var channel = GrpcChannel.ForAddress(baseAddress, new GrpcChannelOptions
+    {
+        HttpClient = new HttpClient(handler)
+    });
 
-    return GrpcClient.Create<Ticketer.TicketerClient>(httpClient);
+    return new Ticketer.TicketerClient(channel);
 }
 ```
 
@@ -122,8 +150,8 @@ public Ticketer.TicketerClient CreateClientWithCert(
 
 인증을 사용 하도록 gRPC 클라이언트를 구성 하는 것은 사용 하는 인증 메커니즘에 따라 다릅니다. 이전 전달자 토큰 및 클라이언트 인증서 예제는 grpc 클라이언트를 사용 하 여 gRPC 호출로 인증 메타 데이터를 보내도록 구성할 수 있는 몇 가지 방법을 보여 줍니다.
 
-* 강력한 형식의 grpc 클라이언트는 `HttpClient` 내부적으로를 사용 합니다. 인증은에 [`HttpClientHandler`](/dotnet/api/system.net.http.httpclienthandler)구성 하거나 사용자 지정 [`HttpMessageHandler`](/dotnet/api/system.net.http.httpmessagehandler) 인스턴스 `HttpClient`를에 추가 하 여 구성할 수 있습니다.
-* 각 grpc 호출에는 선택적 `CallOptions` 인수가 있습니다. 옵션의 헤더 컬렉션을 사용 하 여 사용자 지정 헤더를 보낼 수 있습니다.
+* 강력한 형식의 gRPC 클라이언트는 `HttpClient`을 내부적으로 사용 합니다. [@No__t-1](/dotnet/api/system.net.http.httpclienthandler)에 인증을 구성 하거나 `HttpClient`에 사용자 지정 [`HttpMessageHandler`](/dotnet/api/system.net.http.httpmessagehandler) 인스턴스를 추가할 수 있습니다.
+* 각 gRPC 호출에는 선택적 `CallOptions` 인수가 있습니다. 옵션의 헤더 컬렉션을 사용 하 여 사용자 지정 헤더를 보낼 수 있습니다.
 
 > [!NOTE]
 > Windows 인증 (NTLM/Kerberos/Negotiate)은 gRPC와 함께 사용할 수 없습니다. gRPC에는 h t t p/2가 필요 하며, HTTP/2는 Windows 인증을 지원 하지 않습니다.
@@ -139,7 +167,7 @@ public class TicketerService : Ticketer.TicketerBase
 }
 ```
 
-`[Authorize]` 특성의 생성자 인수 및 속성을 이용해서 특정 [권한 부여 정책](xref:security/authorization/policies)을 만족하는 사용자만 접근할 수 있도록 제한할 수 있습니다. 예를 들어, 라는 `MyAuthorizationPolicy`사용자 지정 권한 부여 정책을 사용 하는 경우 해당 정책과 일치 하는 사용자만 다음 코드를 사용 하 여 서비스에 액세스할 수 있도록 합니다.
+`[Authorize]` 특성의 생성자 인수 및 속성을 이용해서 특정 [권한 부여 정책](xref:security/authorization/policies)을 만족하는 사용자만 접근할 수 있도록 제한할 수 있습니다. 예를 들어 `MyAuthorizationPolicy` 이라고 하는 사용자 지정 권한 부여 정책을 사용 하는 경우 해당 정책과 일치 하는 사용자만 다음 코드를 사용 하 여 서비스에 액세스할 수 있도록 합니다.
 
 ```csharp
 [Authorize("MyAuthorizationPolicy")]
@@ -148,7 +176,7 @@ public class TicketerService : Ticketer.TicketerBase
 }
 ```
 
-개별 서비스 메서드에도 특성을 `[Authorize]` 적용할 수 있습니다. 현재 사용자가 메서드와 클래스 **모두** 에 적용 된 정책과 일치 하지 않는 경우 호출자에 게 오류가 반환 됩니다.
+개별 서비스 메서드에는 `[Authorize]` 특성도 적용 될 수 있습니다. 현재 사용자가 메서드와 클래스 **모두** 에 적용 된 정책과 일치 하지 않는 경우 호출자에 게 오류가 반환 됩니다.
 
 ```csharp
 [Authorize]

@@ -3,35 +3,33 @@ title: OpenAPI를 사용한 ASP.NET Core 앱 개발
 author: ryanbrandenburg
 description: "'Microsoft dotnet-openapi' 도구를 사용하여 OpenAPI 파일에 참조를 추가하는 방법을 보여줍니다."
 ms.author: rybrande
-ms.date: 08/26/2019
+ms.date: 09/26/2019
 monikerRange: '>= aspnetcore-3.0'
 uid: web-api/Microsoft.dotnet-openapi
-ms.openlocfilehash: a9b38bb7e69744d72867bf69cecf1fa92d7c15b3
-ms.sourcegitcommit: d34b2627a69bc8940b76a949de830335db9701d3
+ms.openlocfilehash: f5eae9e871bc8efc30d500769adb845ff244a90c
+ms.sourcegitcommit: e644258c95dd50a82284f107b9bf3becbc43b2b2
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71187367"
+ms.lasthandoff: 09/26/2019
+ms.locfileid: "71317769"
 ---
 # <a name="develop-aspnet-core-apps-using-openapi-tools"></a>OpenAPI 도구를 사용한 ASP.NET Core 앱 개발
 
 Ryan Brandenburg가 개발
 
-`Microsoft.dotnet-openapi`는 프로젝트 내에서 [OpenAPI](https://github.com/OAI/OpenAPI-Specification) 참조를 관리하기 위한 .NET Core 전역 도구입니다.
+[Microsoft.dotnet-openapi](https://www.nuget.org/packages/Microsoft.dotnet-openapi)은 [OpenAPI](https://github.com/OAI/OpenAPI-Specification) 참조를 관리하기 위한 [.NET Core 전역 도구](/dotnet/core/tools/global-tools)입니다.
 
 ## <a name="installation"></a>설치
 
 `Microsoft.dotnet-openapi`를 설치하려면 다음 명령을 실행합니다.
 
-```console
+```dotnetcli
 dotnet tool install -g Microsoft.dotnet-openapi
 ```
 
-`Microsoft.dotnet-openapi`는 [.NET Core 전역 도구](/dotnet/core/tools/global-tools)입니다.
-
 ## <a name="add"></a>추가
 
-이 페이지의 명령 중 하나를 사용하여 OpenAPI 참조를 추가하면 다음과 유사한 `<OpenApiReference />`가 *.csproj* 파일에 추가됩니다.
+이 페이지의 명령 중 하나를 사용하여 OpenAPI 참조를 추가하면 다음과 유사한 `<OpenApiReference />` 요소가 *.csproj* 파일에 추가됩니다.
 
 ```xml
 <OpenApiReference Include="openapi.json" />

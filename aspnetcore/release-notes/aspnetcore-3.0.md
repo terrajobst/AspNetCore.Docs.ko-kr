@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core 3.0의 새로운 기능에 대해 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/23/2019
+ms.date: 09/26/2019
 uid: aspnetcore-3.0
-ms.openlocfilehash: 490d00da7282e2efe28fcc52e593dd71d7324d3f
-ms.sourcegitcommit: 0365af91518004c4a44a30dc3a8ac324558a399b
+ms.openlocfilehash: ec3de5b35883752b7b3dbefceccec55da3986f39
+ms.sourcegitcommit: dc96d76f6b231de59586fcbb989a7fb5106d26a8
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71198986"
+ms.lasthandoff: 10/01/2019
+ms.locfileid: "71703672"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3.0의 새로운 기능
 
@@ -316,8 +316,19 @@ Json.NET을 ASP.NET Core 3.0에 추가하려면 [Newtonsoft.Json 기반 JSON 형
 
 다음 목록에는 새 Razor 지시문이 포함되어 있습니다.
 
-* [@attribute](xref:mvc/views/razor#attribute) &ndash; `@attribute` 지시문은 지정된 특성을 생성된 페이지 또는 보기의 클래스에 추가합니다. 예: `@attribute [Authorize]`
-* [@implements](xref:mvc/views/razor#implements) &ndash; `@implements` 지시문은 생성된 클래스의 인터페이스를 구현합니다. 예: `@implements IDisposable`
+* [@attribute](xref:mvc/views/razor#attribute) &ndash; `@attribute` 지시문은 지정된 특성을 생성된 페이지 또는 보기의 클래스에 추가합니다. 예: `@attribute [Authorize]`.
+* [@implements](xref:mvc/views/razor#implements) &ndash; `@implements` 지시문은 생성된 클래스의 인터페이스를 구현합니다. 예: `@implements IDisposable`.
+
+## <a name="identityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>IdentityServer4는 웹 API 및 SPA에 대한 인증 및 권한 부여를 지원합니다.
+
+[IdentityServer4](https://identityserver.io)는 ASP.NET Core 3.0용 OpenID Connect 및 OAuth 2.0 프레임워크입니다. IdentityServer4에서는 다음과 같은 보안 기능을 사용할 수 있습니다.
+
+* AaaS(Authentication as a Service)
+* 여러 애플리케이션 유형에 대한 SSO(Single Sign-On/Off)
+* API에 대한 액세스 제어
+* 페더레이션 게이트웨이
+
+자세한 내용은 [IdentityServer4 시작](http://docs.identityserver.io/en/latest/index.html)을 참조하세요.
 
 ## <a name="certificate-and-kerberos-authentication"></a>인증서 및 Kerberos 인증
 
@@ -412,7 +423,7 @@ ASP.NET Core 3.0 릴리스 전에는 웹 호스트의 호스트 구성에 대해
 * 연결 어댑터는 Kestrel에서 제거되었고 연결 미들웨어로 대체되었습니다. 이는 ASP.NET Core 파이프라인의 HTTP 미들웨어와 비슷하며, 하위 수준 연결을 위한 것입니다.
 * Kestrel 전송 계층이 `Connections.Abstractions`에서 공용 인터페이스로 공개되었습니다.
 * 후행 헤더를 새 컬렉션으로 이동하여 헤더와 트레일러 사이의 모호성을 해결했습니다.
-* `HttpReqeuest.Body.Read`와 같은 동기 IO API는 앱 크래시로 이어지는 일반적인 스레드 굶주림 현상(starvation)의 원인입니다. 3\.0에서 `AllowSynchronousIO`는 기본적으로 사용하지 않도록 설정됩니다.
+* `HttpRequest.Body.Read`와 같은 동기 IO API는 앱 크래시로 이어지는 일반적인 스레드 굶주림 현상(starvation)의 원인입니다. 3\.0에서 `AllowSynchronousIO`는 기본적으로 사용하지 않도록 설정됩니다.
 
 자세한 내용은 <xref:migration/22-to-30#kestrel>을 참조하세요.
 
@@ -420,9 +431,9 @@ ASP.NET Core 3.0 릴리스 전에는 웹 호스트의 호스트 구성에 대해
 
 HTTP/2는 HTTPS 엔드포인트에 대해 Kestrel에서 기본적으로 사용하도록 설정되어 있습니다. 운영 체제에서 지원되는 경우 IIS 또는 HTTP.sys에 대한 HTTP/2 지원이 사용하도록 설정되어 있습니다.
 
-## <a name="request-counters"></a>요청 카운터
+## <a name="eventcounters-on-request"></a>EventCounters 요청
 
-호스팅 EventSource(Microsoft.AspNetCore.Hosting)는 들어오는 요청과 관련된 다음과 같은 EventCounters를 내보냅니다.
+호스팅 EventSource인 `Microsoft.AspNetCore.Hosting`은 들어오는 요청과 관련된 다음과 같은 새 <xref:System.Diagnostics.Tracing.EventCounter> 형식을 내보냅니다.
 
 * `requests-per-second`
 * `total-requests`
@@ -457,14 +468,14 @@ app.UseEndpoints(endpoints =>
 * 권한 부여가 필요합니다.
 * CORS가 필요합니다.
 
-자세한 내용은 다음 문서를 참조하세요.
+자세한 내용은 다음 항목을 참조하세요.
 
 * <xref:migration/22-to-30#health-checks>
 * <xref:host-and-deploy/health-checks>
 
 ## <a name="pipes-on-httpcontext"></a>HttpContext의 파이프
 
-이제 <xref:System.IO.Pipelines> API를 사용하여 요청 본문을 읽고 응답 본문을 쓸 수 있습니다. 이 <!-- <xref:Microsoft.AspNetCore.Http.HttpRequest.BodyReader> --> `HttpRequest.BodyReader` 속성은 요청 본문을 읽는 데 사용할 수 있는 <xref:System.IO.Pipelines.PipeReader>를 제공합니다. 이 <!-- <xref:Microsoft.AspNetCore.Http.> --> `HttpResponse.BodyWriter` 속성은 응답 본문을 쓰는 데 사용할 수 있는 <xref:System.IO.Pipelines.PipeWriter>를 제공합니다. `HttpRequest.BodyReader`는 `HttpRequest.Body` 스트림의 아날로그입니다. `HttpResponse.BodyWriter`는 `HttpResponse.Body` 스트림의 아날로그입니다.
+이제 <xref:System.IO.Pipelines> API를 사용하여 요청 본문을 읽고 응답 본문을 쓸 수 있습니다. Component <!-- <xref:Microsoft.AspNetCore.Http.HttpRequest.BodyReader> --> `HttpRequest.BodyReader` 속성은 요청 본문을 읽는 데 사용할 수 있는 <xref:System.IO.Pipelines.PipeReader>를 제공합니다. Component <!-- <xref:Microsoft.AspNetCore.Http.> --> `HttpResponse.BodyWriter` 속성은 응답 본문을 쓰는 데 사용할 수 있는 <xref:System.IO.Pipelines.PipeWriter>를 제공합니다. `HttpRequest.BodyReader`는 `HttpRequest.Body` 스트림의 아날로그입니다. `HttpResponse.BodyWriter`는 `HttpResponse.Body` 스트림의 아날로그입니다.
 
 <!-- indirectly related, https://github.com/dotnet/docs/pull/14414 won't be published by 9/23  -->
 
@@ -488,7 +499,7 @@ IIS에서 ASP.NET Core 앱을 호스팅할 때 시작 오류가 발생하면 더
 
 이 시나리오는 ASP.NET Core 3.0에서 해결되었습니다. `ASPNETCORE_FORWARDEDHEADERS_ENABLED` 환경 변수가 `true`로 설정된 경우 호스트는 [전달된 헤더 미들웨어](xref:host-and-deploy/proxy-load-balancer#forwarded-headers-middleware-options)를 사용하도록 설정합니다. `ASPNETCORE_FORWARDEDHEADERS_ENABLED`는 컨테이너 이미지에서 `true`로 설정됩니다.
 
-## <a name="performance-improvements"></a>성능 개선
+## <a name="performance-improvements"></a>성능 향상
 
 ASP.NET Core 3.0에는 메모리 사용을 줄이고 처리량을 향상시키는 다음과 같은 여러 개선 사항이 포함되어 있습니다.
 
