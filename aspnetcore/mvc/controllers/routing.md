@@ -16,15 +16,15 @@ ms.locfileid: "65087512"
 
 작성자: [Ryan Nowak](https://github.com/rynowak) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-ASP.NET Core MVC는 라우팅 [미들웨어](xref:fundamentals/middleware/index)를 사용하여 들어오는 요청의 URL을 작업과 매칭 및 매핑합니다. 경로는 시작 코드 또는 특성에서 정의됩니다. 경로는 URL 경로를 동작과 매칭하는 방법을 설명합니다. 경로는 응답에서 전송되는 URL(링크인 경우)을 생성하는 데에도 사용됩니다.
+ASP.NET Core MVC는 라우팅 [미들웨어](xref:fundamentals/middleware/index)를 사용하여 들어오는 요청의 URL을 매칭하고 작업에 매핑합니다. 경로는 시작 코드 또는 특성에서 정의됩니다. 경로는 URL 경로를 작업에 매칭하는 방법을 설명합니다. 경로는 응답으로 전송되는 URL(링크 용)을 생성하기 위해서도 사용됩니다.
 
-작업은 일반적인 방식으로 라우팅되거나 특성 라우팅됩니다. 컨트롤러 또는 작업에 경로를 배치하면 해당 경로가 특성 라우팅됩니다. 자세한 내용은 [혼합 라우팅](#routing-mixed-ref-label)을 참조하세요.
+작업은 규약 기반으로 라우팅되거나 특성 라우팅됩니다. 컨트롤러 또는 작업에 경로를 배치하면 해당 경로가 특성 라우팅됩니다. 자세한 내용은 [혼합 라우팅](#routing-mixed-ref-label)을 참조하세요.
 
-이 문서에는 MVC와 라우팅 사이의 상호 작용과 일반 MVC 앱이 라우팅 기능을 사용하는 방식에 대해 설명되어 있습니다. 고급 라우팅에 대한 자세한 내용은 [라우팅](xref:fundamentals/routing)을 참조하세요.
+이 항목에서는 MVC와 라우팅 간의 상호 작용 및 일반적인 MVC 앱이 라우팅 기능을 사용하는 방식에 관해서 설명합니다. 고급 라우팅에 대한 자세한 내용은 [라우팅](xref:fundamentals/routing)을 참조하세요.
 
 ## <a name="setting-up-routing-middleware"></a>라우팅 미들웨어 설정
 
-*구성된* 메서드에서 다음과 비슷한 코드를 볼 수 있습니다.
+*Configure* 메서드에서 다음과 비슷한 코드를 볼 수 있습니다.
 
 ```csharp
 app.UseMvc(routes =>
@@ -33,7 +33,7 @@ app.UseMvc(routes =>
 });
 ```
 
-`UseMvc` 호출 내부에서, `MapRoute`는 `default` 경로라고 부르는 단일 경로를 만드는 데 사용됩니다. 대부분의 MVC 앱은 `default` 경로와 비슷한 템플릿이 포함된 경로를 사용합니다.
+`UseMvc` 호출 내부에서 `MapRoute`를 사용하여 `default` 경로라고 부르는 단일 경로를 생성합니다. 대부분의 MVC 앱은 `default` 경로와 비슷한 템플릿을 갖는 경로를 사용합니다.
 
 `"{controller=Home}/{action=Index}/{id?}"` 경로 템플릿은 경로를 토큰화하여 `/Products/Details/5` 같은 URL 경로를 매칭하고 `{ controller = Products, action = Details, id = 5 }` 경로 값을 추출합니다. MVC는 `ProductsController`라는 컨트롤러를 찾아 `Details` 작업을 실행하려고 시도합니다.
 
@@ -44,23 +44,23 @@ public class ProductsController : Controller
 }
 ```
 
-이 예제에서 모델 바인딩은 이 작업을 호출할 때 `id = 5` 값을 사용하여 `id` 매개 변수를 `5`로 설정합니다. 자세한 내용은 [모델 바인딩](../models/model-binding.md)을 참조하세요.
+이 예제에서 이 작업을 호출할 때 모델 바인딩이 `id = 5` 값을 사용하여 `id` 매개 변수를 `5`로 설정합니다. 자세한 내용은 [모델 바인딩](../models/model-binding.md)을 참조하세요.
 
-`default` 경로 사용:
+`default` 경로를 사용하여:
 
 ```csharp
 routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
 ```
 
-경로 템플릿:
+경로 템플릿의:
 
-* `{controller=Home}`은 `Home`을 기본 `controller`로 정의
+* `{controller=Home}`은 `Home`을 기본 `controller`로 정의합니다.
 
-* `{action=Index}`는 `Index`를 기본 `action`으로 정의
+* `{action=Index}`는 `Index`를 기본 `action`으로 정의합니다.
 
-* `{id?}`는 `id`를 선택 사항으로 정의
+* `{id?}`는 `id`를 선택 사항으로 정의합니다.
 
-기본 및 선택적 경로 매개 변수는 매칭을 위해 URL 경로에 꼭 있어야 하는 것은 아닙니다. 경로 템플릿 구문에 대한 자세한 설명은 [경로 템플릿 참조](../../fundamentals/routing.md#route-template-reference)를 참조하세요.
+기본 및 선택적 경로 매개 변수는 매칭을 위해 URL 경로에 반드시 있어야 하는 것은 아닙니다. 경로 템플릿 구문에 대한 자세한 설명은 [경로 템플릿 참조](../../fundamentals/routing.md#route-template-reference)를 참조하세요.
 
 `"{controller=Home}/{action=Index}/{id?}"`는 URL 경로 `/`를 매칭할 수 있으며 `{ controller = Home, action = Index }` 경로 값을 생성합니다. `controller` 및 `action`의 값으로 기본값이 사용되며, URL 경로에 해당 세그먼트 없기 때문에 `id`가 값을 생성하지 않습니다. MVC는 이러한 경로 값을 사용하여 `HomeController` 및 `Index` 작업을 선택합니다.
 
@@ -71,7 +71,7 @@ public class HomeController : Controller
 }
 ```
 
-이 컨트롤러 정의와 경로 템플릿을 사용하면 다음 URL 경로에 대해 `HomeController.Index` 작업이 실행됩니다.
+이러한 컨트롤러 정의와 경로 템플릿을 사용하면 다음 URL 경로에 대해 `HomeController.Index` 작업이 실행됩니다.
 
 * `/Home/Index/17`
 
@@ -81,13 +81,13 @@ public class HomeController : Controller
 
 * `/`
 
-편의 메서드 `UseMvcWithDefaultRoute`:
+편의 메서드인 `UseMvcWithDefaultRoute`를 사용하여:
 
 ```csharp
 app.UseMvcWithDefaultRoute();
 ```
 
-다음을 바꾸는 데 사용됩니다.
+다음을 대체할 수 있습니다.
 
 ```csharp
 app.UseMvc(routes =>
@@ -96,7 +96,7 @@ app.UseMvc(routes =>
 });
 ```
 
-`UseMvc` 및 `UseMvcWithDefaultRoute`는 `RouterMiddleware` 인스턴스를 미들웨어 파이프라인에 추가합니다. MVC는 미들웨어와 직접 상호 작용하지 않고 라우팅을 사용하여 요청을 처리합니다. MVC는 `MvcRouteHandler` 인스턴스를 통해 경로에 연결됩니다. `UseMvc` 내부의 코드는 다음과 비슷합니다.
+`UseMvc` 및 `UseMvcWithDefaultRoute`는 미들웨어 파이프라인에 `RouterMiddleware` 인스턴스를 추가합니다. MVC는 미들웨어와 직접 상호 작용하지 않고 라우팅을 사용하여 요청을 처리합니다. MVC는 `MvcRouteHandler`의 인스턴스를 통해 경로에 연결됩니다. `UseMvc` 내부의 코드는 다음과 비슷합니다.
 
 ```csharp
 var routes = new RouteBuilder(app);
@@ -111,37 +111,37 @@ routes.DefaultHandler = new MvcRouteHandler(...);
 app.UseRouter(routes.Build());
 ```
 
-`UseMvc`는 경로를 직접 정의하지 않고, `attribute` 경로에 대한 경로 컬렉션에 자리 표시자를 추가합니다. `UseMvc(Action<IRouteBuilder>)` 오버로드를 사용하여 고유의 경로를 추가하고 특성 라우팅도 지원할 수 있습니다.  `UseMvc` 및 모든 변형은 특성 경로에 대한 자리 표시자를 추가합니다. 특성 라우팅은 `UseMvc`를 구성하는 방법에 관계없이 항상 사용할 수 있습니다. `UseMvcWithDefaultRoute`는 기본 경로를 정의하고 특성 라우팅을 지원합니다. [특성 라우팅](#attribute-routing-ref-label) 섹션에는 특성 라우팅에 대한 자세한 내용이 포함되어 있습니다.
+`UseMvc`는 아무런 경로도 직접 정의하지 않고 경로 컬렉션에 `attribute` 경로에 대한 자리 표시자만 추가합니다. `UseMvc(Action<IRouteBuilder>)` 오버로드를 사용하면 고유의 경로를 추가하고 특성 라우팅도 지원할 수 있습니다.  `UseMvc` 및 모든 변형은 특성 경로에 대한 자리 표시자를 추가합니다. 특성 라우팅은 `UseMvc`를 구성하는 방법에 관계없이 항상 사용할 수 있습니다. `UseMvcWithDefaultRoute`는 기본 경로를 정의하고 특성 라우팅을 지원합니다. [특성 라우팅](#attribute-routing-ref-label) 섹션에는 특성 라우팅에 대한 자세한 내용이 포함되어 있습니다.
 
 <a name="routing-conventional-ref-label"></a>
 
 ## <a name="conventional-routing"></a>규칙 기반 라우팅
 
-`default` 경로:
+`default` 경로인:
 
 ```csharp
 routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
 ```
 
-*규칙 기반 라우팅*의 예입니다. URL 경로에 대한 *규칙*을 설정하기 때문에 이 스타일을 *규칙 기반 라우팅*이라고 부릅니다.
+는 *규칙 기반 라우팅*의 예제입니다. URL 경로에 대한 *규칙*을 설정하기 때문에 이 스타일을 *규칙 기반 라우팅*이라고 부릅니다.
 
 * 첫 번째 경로 세그먼트는 컨트롤러 이름에 매핑됩니다.
 
-* 두 번째는 작업 이름에 매핑됩니다.
+* 두 번째 세그먼트는 작업 이름에 매핑됩니다.
 
 * 세 번째 세그먼트는 모델 엔터티에 매핑하는 데 사용되는 선택적 `id`에 사용됩니다.
 
-이 `default` 경로를 사용하면 URL 경로 `/Products/List`는 `ProductsController.List` 작업에 매핑되고 `/Blog/Article/17`은 `BlogController.Article`에 매핑됩니다. 이 매핑은 **오직** 컨트롤러 및 작업 이름만을 기준으로 하며 네임스페이스, 원본 파일 위치 또는 메서드 매개 변수를 기준으로 하지 않습니다.
+이 `default` 경로를 사용하면 URL 경로 `/Products/List`는 `ProductsController.List` 작업에 매핑되고 `/Blog/Article/17`은 `BlogController.Article`에 매핑됩니다. 매핑은 **오직** 컨트롤러 및 작업 이름만을 기준으로 하며 네임스페이스, 원본 파일 위치 또는 메서드 매개 변수를 기준으로 하지 않습니다.
 
 > [!TIP]
-> 규칙 기반 라우팅을 기본 경로와 함께 사용하면 정의하는 각 작업에 대한 새 URL 패턴 없이도 신속하게 애플리케이션을 빌드할 수 있습니다. CRUD 스타일 작업이 있는 애플리케이션의 경우 컨트롤러 전체에서 URL을 일관적으로 유지하면 코드를 단순화하고 UI의 예측 가능성을 높이는 데 도움이 됩니다.
+> 기본 경로와 함께 규칙 기반 라우팅을 사용하면 정의하는 각 작업마다 새 URL 패턴을 만들지 않고도 신속하게 응용 프로그램을 만들 수 있습니다. CRUD 스타일의 작업을 수행하는 응용 프로그램의 경우 컨트롤러 전반에서 URL을 일관적으로 유지하면 코드를 단순화하고 UI의 예측 가능성을 높이는 데 도움이 됩니다.
 
 > [!WARNING]
-> `id`는 경로 템플릿에서 선택 사항으로 정의됩니다. 즉, URL의 일부로 제공되는 ID 없이도 작업을 실행할 수 있습니다. 일반적으로 URL에서 `id`가 생략되면 모델 바인딩에 의해 `0`으로 설정되고, 그 결과 `id == 0`과 일치하는 데이터베이스에서 엔터티를 찾을 수 없습니다. 특성 라우팅을 사용하면 일부 작업에만 필요하고 다른 작업에는 필요하지 않은 ID를 세밀하게 제어할 수 있습니다. `id` 같은 선택적 매개 변수가 올바른 사용법에 표시될 가능성이 있는 경우 전통적으로 설명서에 이러한 선택적 매개 변수가 포함됩니다.
+> `id`는 경로 템플릿에서 선택 사항으로 정의됩니다. 즉, URL의 일부로 제공되는 ID 없이도 작업을 실행할 수 있습니다. 일반적으로 URL에서 `id`가 생략되면 모델 바인딩에 의해 `0`으로 설정되고, 그 결과 데이터베이스에서 `id == 0`과 일치하는 엔터티를 찾을 수 없습니다. 특성 라우팅을 사용하면 일부 작업에는 필요하고 다른 작업에는 필요하지 않은 ID를 만들기 위해 세밀하게 제어할 수 있습니다. 일반적으로 `id` 같은 선택적 매개 변수가 올바른 사용법으로 나타날 가능성이 있는 경우 설명서에 이러한 선택적 매개 변수가 포함됩니다.
 
 ## <a name="multiple-routes"></a>여러 경로
 
-`MapRoute`에 더 많은 호출을 추가하여 `UseMvc` 내부에 여러 경로를 추가할 수 있습니다. 이렇게 하면 여러 규칙을 정의하거나 다음과 같은 특정 작업에만 사용되는 규칙 기반 경로를 추가할 수 있습니다.
+`MapRoute`에 대한 더 많은 호출을 추가하여 `UseMvc` 내부에서 여러 경로를 추가할 수 있습니다. 이렇게 하면 여러 규칙을 정의하거나 다음과 같이 특정 작업에만 사용되는 규칙 기반 경로를 추가할 수 있습니다.
 
 ```csharp
 app.UseMvc(routes =>
@@ -152,9 +152,9 @@ app.UseMvc(routes =>
 });
 ```
 
-여기서 `blog` 경로는 규칙 기반 라우팅 시스템을 사용하지만 특정 작업에만 활용되는 *전용 규칙 기반 경로*입니다. `controller` 및 `action`은 경로 템플릿에 매개 변수로 표시되지 않기 때문에 기본값만 가질 수 있으며, 따라서 이 경로는 항상 `BlogController.Article` 작업에 매핑됩니다.
+여기서 `blog` 경로는 규칙 기반 라우팅 시스템을 사용하지만 특정 작업에만 활용되는 *전용 규칙 기반 경로*입니다. `controller` 및 `action`이 경로 템플릿에 매개 변수로 표시되지 않기 때문에 기본값만 가질 수 있으며, 따라서 이 경로는 항상 `BlogController.Article` 작업에 매핑됩니다.
 
-경로 컬렉션의 경로는 순서가 지정되며 추가된 순서대로 처리됩니다. 따라서 이 예제의 `blog` 경로는 `default` 경로보다 먼저 시도됩니다.
+경로 컬렉션의 경로는 순서대로 정렬되며 추가된 순서대로 처리됩니다. 따라서 이 예제의 `blog` 경로는 `default` 경로보다 먼저 시도됩니다.
 
 > [!NOTE]
 > *전용 규칙 기반 경로*는 종종 `{*article}` 같은 범용 경로 매개 변수를 사용하여 URL 경로의 나머지 부분을 캡처합니다. 이 경우 경로가 '너무 많은 욕심'을 부리게 됩니다. 즉, 다른 경로와 매칭하려는 URL과 매칭됩니다. 이 '욕심 많은' 경로를 경로 테이블의 뒷부분에 배치하면 이 문제를 해결할 수 있습니다.
@@ -552,7 +552,7 @@ public class MyApiControllerAttribute : Attribute, IRouteTemplateProvider
 
 MVC 애플리케이션은 규칙 기반 라우팅과 특성 라우팅을 혼합해서 사용할 수 있습니다. 일반적으로 브라우저의 HTML 페이지를 처리하는 컨트롤러에는 규칙 기반 경로를 사용하고 REST API를 제공하는 컨트롤러에는 특성 라우팅을 사용합니다.
 
-작업은 일반적인 방식으로 라우팅되거나 특성 라우팅됩니다. 컨트롤러 또는 작업에 경로를 배치하면 해당 경로가 특성 라우팅됩니다. 특성 경로를 정의하는 동작은 규칙 기반 경로를 통해 도달할 수 없으며 그 반대도 마찬가지입니다. 컨트롤러의 **모든** 경로 특성은 컨트롤러에 있는 모든 작업에서 특성 라우팅을 사용하게 만듭니다.
+작업은 규약 기반으로 라우팅되거나 특성 라우팅됩니다. 컨트롤러 또는 작업에 경로를 배치하면 해당 경로가 특성 라우팅됩니다. 특성 경로를 정의하는 동작은 규칙 기반 경로를 통해 도달할 수 없으며 그 반대도 마찬가지입니다. 컨트롤러의 **모든** 경로 특성은 컨트롤러에 있는 모든 작업에서 특성 라우팅을 사용하게 만듭니다.
 
 > [!NOTE]
 > 두 라우팅 시스템의 차이는 URL이 경로 템플릿과 일치한 후 적용되는 프로세스입니다. 규칙 기반 라우팅에서는 일치 항목의 경로 값을 사용하여 모든 규칙 기반 라우팅된 작업의 조회 테이블에서 작업 및 컨트롤러를 선택합니다. 특성 라우팅에서 각 템플릿은 이미 작업과 연결되어 있으며, 더 이상의 조회가 필요 없습니다.
