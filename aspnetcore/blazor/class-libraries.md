@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/23/2019
 uid: blazor/class-libraries
-ms.openlocfilehash: d9ef276357e95d97b7d89427c5e237aceea7a0d3
-ms.sourcegitcommit: 79eeb17604b536e8f34641d1e6b697fb9a2ee21f
+ms.openlocfilehash: 2e042b43c6db24e0ecac727be100575fe1275e17
+ms.sourcegitcommit: 6d26ab647ede4f8e57465e29b03be5cb130fc872
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/24/2019
-ms.locfileid: "71207105"
+ms.lasthandoff: 10/07/2019
+ms.locfileid: "71999779"
 ---
 # <a name="aspnet-core-razor-components-class-libraries"></a>ASP.NET Core Razor 구성 요소 클래스 라이브러리
 
@@ -28,25 +28,25 @@ ms.locfileid: "71207105"
 
 ## <a name="create-an-rcl"></a>RCL 만들기
 
-Blazor에 대 한 환경을 <xref:blazor/get-started> 구성 하려면 문서의 지침을 따르세요.
+@No__t-0 문서의 지침에 따라 Blazor 환경을 구성 합니다.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. 새 프로젝트를 만듭니다.
-1. **Razor 클래스 라이브러리**를 선택 합니다. **새로 만들기**를 선택합니다.
+1. **Razor 클래스 라이브러리**를 선택 합니다. **다음**을 선택합니다.
 1. **새 Razor 클래스 라이브러리 만들기** 대화 상자에서 **만들기**를 선택 합니다.
-1. **프로젝트 이름** 필드에 프로젝트 이름을 제공하거나 기본 프로젝트 이름을 수락합니다. 이 항목의 예제에서는 프로젝트 이름을 `MyComponentLib1`사용 합니다. **만들기**를 선택합니다.
+1. **프로젝트 이름** 필드에 프로젝트 이름을 제공하거나 기본 프로젝트 이름을 수락합니다. 이 항목의 예제에서는 프로젝트 이름 `MyComponentLib1`을 사용 합니다. **만들기**를 선택합니다.
 1. 솔루션에 RCL을 추가 합니다.
-   1. 솔루션을 마우스 오른쪽 단추로 클릭 합니다. **기존 프로젝트** **추가** > 를 선택 합니다.
+   1. 솔루션을 마우스 오른쪽 단추로 클릭 합니다. @No__t**기존 프로젝트**1 **추가**를 선택 합니다.
    1. RCL의 프로젝트 파일로 이동 합니다.
    1. RCL의 프로젝트 파일 ( *.csproj*)을 선택 합니다.
 1. 앱에서 RCL 참조를 추가 합니다.
-   1. 앱 프로젝트를 마우스 오른쪽 단추로 클릭 합니다. **참조** **추가** > 를 선택 합니다.
+   1. 앱 프로젝트를 마우스 오른쪽 단추로 클릭 합니다. @No__t **추가** **참조**추가를 선택 합니다.
    1. RCL 프로젝트를 선택 합니다. **확인**을 선택합니다.
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-1. 명령 셸에서 [dotnet new](/dotnet/core/tools/dotnet-new) 명령과 함께 **Razor 클래스 라이브러리** 템플릿 (`razorclasslib`)을 사용 합니다. 다음 예에서는 라는 `MyComponentLib1`rcl을 만듭니다. 명령이 실행 될 때 `MyComponentLib1` 가 포함 된 폴더가 자동으로 생성 됩니다.
+1. 명령 셸에서 [dotnet new](/dotnet/core/tools/dotnet-new) 명령과 함께 **Razor 클래스 라이브러리** 템플릿 (`razorclasslib`)을 사용 합니다. 다음 예제에서는 `MyComponentLib1` 이라는 RCL을 만듭니다. @No__t를 포함 하는 폴더는 명령이 실행 될 때 자동으로 생성 됩니다.
 
    ```dotnetcli
    dotnet new razorclasslib -o MyComponentLib1
@@ -65,11 +65,11 @@ Blazor에 대 한 환경을 <xref:blazor/get-started> 구성 하려면 문서의
 다른 프로젝트의 라이브러리에 정의 된 구성 요소를 사용 하려면 다음 방법 중 하나를 사용 합니다.
 
 * 전체 형식 이름에 네임 스페이스를 사용 합니다.
-* Razor의 [ \@using](xref:mvc/views/razor#using) 지시문을 사용 합니다. 개별 구성 요소는 이름으로 추가할 수 있습니다.
+* Razor의 [\@using](xref:mvc/views/razor#using) 지시문을 사용 합니다. 개별 구성 요소는 이름으로 추가할 수 있습니다.
 
-다음 예제 `MyComponentLib1` 에서은 `SalesReport` 구성 요소를 포함 하는 구성 요소 라이브러리입니다.
+다음 예제에서 `MyComponentLib1`은 `SalesReport` 구성 요소를 포함 하는 구성 요소 라이브러리입니다.
 
-네임 `SalesReport` 스페이스의 전체 형식 이름을 사용 하 여 구성 요소를 참조할 수 있습니다.
+@No__t-0 구성 요소는 네임 스페이스를 사용 하 여 전체 형식 이름을 사용 하 여 참조할 수 있습니다.
 
 ```cshtml
 <h1>Hello, world!</h1>
@@ -79,7 +79,7 @@ Welcome to your new app.
 <MyComponentLib1.SalesReport />
 ```
 
-`@using` 지시문을 사용 하 여 라이브러리를 범위로 가져오는 경우 구성 요소를 참조할 수도 있습니다.
+@No__t-0 지시어를 사용 하 여 라이브러리를 범위로 가져오는 경우 구성 요소를 참조할 수도 있습니다.
 
 ```cshtml
 @using MyComponentLib1
@@ -91,7 +91,7 @@ Welcome to your new app.
 <SalesReport />
 ```
 
-최상위 수준 *가져오기. razor* 파일에 지시문을포함하여전체프로젝트에서라이브러리의구성요소를사용할수있도록합니다.`@using MyComponentLib1` 모든 수준에서 *_Import. razor* 파일에 지시문을 추가 하 여 폴더 내의 단일 페이지 또는 페이지 집합에 네임 스페이스를 적용 합니다.
+전체 프로젝트에서 라이브러리의 구성 요소를 사용할 수 있도록 하려면 `@using MyComponentLib1` 지시문을 최상위 Import-module 파일에 포함 합니다 *.* 모든 수준에서 *_Import. razor* 파일에 지시문을 추가 하 여 폴더 내의 단일 페이지 또는 페이지 집합에 네임 스페이스를 적용 합니다.
 
 ## <a name="build-pack-and-ship-to-nuget"></a>빌드, 팩 및 NuGet에 제공
 
@@ -101,11 +101,7 @@ Welcome to your new app.
 dotnet pack
 ```
 
-명령 셸에서 [dotnet nuget publish](/dotnet/core/tools/dotnet-nuget-push) 명령을 사용 하 여 NuGet에 패키지를 업로드 합니다.
-
-```dotnetcli
-dotnet nuget publish
-```
+명령 셸에서 [dotnet nuget push](/dotnet/core/tools/dotnet-nuget-push) 명령을 사용 하 여 NuGet에 패키지를 업로드 합니다.
 
 ## <a name="create-a-razor-components-class-library-with-static-assets"></a>정적 자산을 사용 하 여 Razor 구성 요소 클래스 라이브러리 만들기
 

@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/24/2019
 uid: fundamentals/routing
-ms.openlocfilehash: 14fe4bf9266ec6b2d588fa26d7a460531e33aa30
-ms.sourcegitcommit: 14b25156e34c82ed0495b4aff5776ac5b1950b5e
+ms.openlocfilehash: c8037d79c79c5b7eb3b99d9724aa3e5361f92b8c
+ms.sourcegitcommit: 5d25a7f22c50ca6fdd0f8ecd8e525822e1b35b7a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/26/2019
-ms.locfileid: "71295500"
+ms.lasthandoff: 09/28/2019
+ms.locfileid: "71482040"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core에서 라우팅
 
@@ -123,9 +123,9 @@ URL 생성은 라우팅이 경로 값의 집합을 기반으로 하는 URL 경�
 > [!WARNING]
 > <xref:Microsoft.AspNetCore.Routing.LinkGenerator> 메서드 호출 시 다음과 같은 의미에 주의하세요.
 >
-> * 들어오는 요청의 `Host` 헤더의 유효성을 검사하지 않는 앱 구성에서는 `GetUri*` 확장 메서드를 신중하게 사용하세요. 들어오는 요청의 `Host` 헤더의 유효성을 검사하지 않으면 신뢰할 수 없는 요청 입력이 보기/페이지에 포함된 URI로 클라이언트에 다시 보내질 수 있습니다. 모든 프로덕션 앱은 알려진 유효한 값에 대해 `Host` 헤더의 유효성을 검사하도록 서버를 구성하는 것이 좋습니다.
+> * 들어오는 요청의 `GetUri*` 헤더의 유효성을 검사하지 않는 앱 구성에서는 `Host` 확장 메서드를 신중하게 사용하세요. 들어오는 요청의 `Host` 헤더의 유효성을 검사하지 않으면 신뢰할 수 없는 요청 입력이 보기/페이지에 포함된 URI로 클라이언트에 다시 보내질 수 있습니다. 모든 프로덕션 앱은 알려진 유효한 값에 대해 `Host` 헤더의 유효성을 검사하도록 서버를 구성하는 것이 좋습니다.
 >
-> * 미들웨어에서 `Map` 또는 `MapWhen`과 함께 <xref:Microsoft.AspNetCore.Routing.LinkGenerator>를 사용할 때는 신중하게 사용하세요. `Map*`는 실행 중인 요청의 기본 경로를 변경하여 링크 생성의 출력에 영향을 줍니다. 모든 <xref:Microsoft.AspNetCore.Routing.LinkGenerator> API는 기본 경로를 지정할 수 있습니다. 링크 생성에 대한 `Map*`의 영향을 취소하려면 항상 빈 기본 경로를 지정합니다.
+> * 미들웨어에서 `MapWhen` 또는 <xref:Microsoft.AspNetCore.Routing.LinkGenerator>과 함께 `Map`를 사용할 때는 신중하게 사용하세요. `Map*`는 실행 중인 요청의 기본 경로를 변경하여 링크 생성의 출력에 영향을 줍니다. 모든 <xref:Microsoft.AspNetCore.Routing.LinkGenerator> API는 기본 경로를 지정할 수 있습니다. 링크 생성에 대한 `Map*`의 영향을 취소하려면 항상 빈 기본 경로를 지정합니다.
 
 ## <a name="differences-from-earlier-versions-of-routing"></a>이전 버전의 라우팅과의 차이점
 
@@ -204,7 +204,7 @@ URL 생성은 라우팅이 경로 값의 집합을 기반으로 하는 URL 경�
 
   ASP.NET Core 이전 버전의 단일 별표 범용 매개 변수 구문(`{*myparametername}`)은 계속 지원되며, 슬래시가 인코딩됩니다.
 
-  | 라우팅              | 다음을 사용하여 생성되는 링크<br>`Url.Action(new { category = "admin/products" })`&hellip; |
+  | 경로              | 다음을 사용하여 생성되는 링크<br>`Url.Action(new { category = "admin/products" })`&hellip; |
   | ------------------ | --------------------------------------------------------------------- |
   | `/search/{*page}`  | `/search/admin%2Fproducts`(슬래시가 인코딩됨)             |
   | `/search/{**page}` | `/search/admin/products`                                              |
@@ -356,7 +356,7 @@ URL 생성에 대한 자세한 내용은 [URL 생성 참조](#url-generation-ref
 
 다음 표는 지정된 URI에 대한 응답을 보여줍니다.
 
-| URI                    | response                                          |
+| URI                    | 응답                                          |
 | ---------------------- | ------------------------------------------------- |
 | `/package/create/3`    | Hello! Route values: [operation, create], [id, 3] |
 | `/package/track/-3`    | Hello! Route values: [operation, track], [id, -3] |
@@ -441,7 +441,7 @@ catch-all 매개 변수는 경로 구분 기호(`/`) 문자를 포함하여 URL�
 
 다음 표에서는 경로 제약 조건 예제 및 예상되는 해당 동작을 보여 줍니다.
 
-| 제약 조건 | 예 | 일치하는 예제 | 메모 |
+| 제약 조건 | 예 | 일치하는 예제 | 참고 |
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | 임의의 정수와 일치 |
 | `bool` | `{active:bool}` | `true`, `FALSE` | `true` 또는 `false` 일치(대/소문자 구분하지 않음) |
@@ -759,7 +759,7 @@ ASP.NET Core 2.2 이상의 엔드포인트 라우팅과 ASP.NET Core 이전 버�
   var link = Url.Action("ReadPost", "Blog", new { id = 17, });
   ```
 
-  `IRouter` 기반 라우팅을 사용하면 `BlogController`가 없거나 `ReadPost` 작업 메서드가 없는 경우에도 결과는 항상 `/Blog/ReadPost/17`입니다. 예상대로, 작업 메서드가 존재할 경우 ASP.NET Core 2.2 이상의 엔드포인트 라우팅은 `/Blog/ReadPost/17`을 생성합니다. *그러나 작업이 존재하지 않을 경우 엔드포인트 라우팅은 빈 문자열을 생성합니다.* 개념적으로 엔드포인트 라우팅은 작업이 존재하지 않는 경우 엔드포인트가 존재한다고 가정하지 않습니다.
+  `IRouter` 기반 라우팅을 사용하면 `BlogController`가 존재하지 않거나 `ReadPost` 작업 메서드가 존재하지 않는 경우에도 결과는 항상 `/Blog/ReadPost/17`입니다. 예상대로, 작업 메서드가 존재할 경우 ASP.NET Core 2.2 이상의 엔드포인트 라우팅은 `/Blog/ReadPost/17`을 생성합니다. *그러나 작업이 존재하지 않을 경우 엔드포인트 라우팅은 빈 문자열을 생성합니다.* 개념적으로 엔드포인트 라우팅은 작업이 존재하지 않는 경우 엔드포인트가 존재한다고 가정하지 않습니다.
 
 * 링크 생성 *앰비언트 값 무효화 알고리즘*은 엔드포인트 라우팅에서 사용할 때 다르게 작동합니다.
 
@@ -790,7 +790,7 @@ ASP.NET Core 2.2 이상의 엔드포인트 라우팅과 ASP.NET Core 이전 버�
 
   ASP.NET Core 이전 버전의 단일 별표 범용 매개 변수 구문(`{*myparametername}`)은 계속 지원되며, 슬래시가 인코딩됩니다.
 
-  | 라우팅              | 다음을 사용하여 생성되는 링크<br>`Url.Action(new { category = "admin/products" })`&hellip; |
+  | 경로              | 다음을 사용하여 생성되는 링크<br>`Url.Action(new { category = "admin/products" })`&hellip; |
   | ------------------ | --------------------------------------------------------------------- |
   | `/search/{*page}`  | `/search/admin%2Fproducts`(슬래시가 인코딩됨)             |
   | `/search/{**page}` | `/search/admin/products`                                              |
@@ -852,7 +852,7 @@ routes.MapRoute(
     template: "{controller=Home}/{action=Index}/{id:int}");
 ```
 
-이 템플릿은 `/Products/Details/Apples`가 아닌 `/Products/Details/17`과 같이 URL 경로와 일치시킵니다. 경로 제약 조건은 <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>를 구현하고 경로 값을 검사하여 확인합니다. 이 예제에서 경로 값 `id`는 정수로 변환할 수 있어야 합니다. 프레임워크에서 제공하는 경로 제약 조건에 대한 설명은 [경로 제약 조건 참조](#route-constraint-reference)를 참조하세요.
+이 템플릿은 `/Products/Details/Apples`가 아닌 `/Products/Details/17`과 같은 URL 경로와 일치합니다. 경로 제약 조건은 <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>를 구현하고 경로 값을 검사하여 확인합니다. 이 예제에서 경로 값 `id`는 정수로 변환할 수 있어야 합니다. 프레임워크에서 제공하는 경로 제약 조건에 대한 설명은 [경로 제약 조건 참조](#route-constraint-reference)를 참조하세요.
 
 <xref:Microsoft.AspNetCore.Builder.MapRouteRouteBuilderExtensions.MapRoute*>의 추가 오버로드는 `constraints`, `dataTokens` 및 `defaults`에 대한 값을 허용합니다. 이러한 매개 변수의 일반적인 사용법은 익명 형식의 속성 이름이 경로 매개 변수 이름과 일치하는 익명 형식의 개체를 전달하는 것입니다.
 
@@ -942,7 +942,7 @@ URL 생성에 대한 자세한 내용은 [URL 생성 참조](#url-generation-ref
 
 다음 표는 지정된 URI에 대한 응답을 보여줍니다.
 
-| URI                    | response                                          |
+| URI                    | 응답                                          |
 | ---------------------- | ------------------------------------------------- |
 | `/package/create/3`    | Hello! Route values: [operation, create], [id, 3] |
 | `/package/track/-3`    | Hello! Route values: [operation, track], [id, -3] |
@@ -984,7 +984,7 @@ URL 생성에 대한 자세한 내용은 [URL 생성 참조](#url-generation-ref
 
 catch-all 매개 변수는 경로 구분 기호(`/`) 문자를 포함하여 URL을 생성하는 데 경로가 사용될 때 적절한 문자를 이스케이프합니다. 예를 들어 경로 값이 `{ path = "my/path" }`인 경로 `foo/{*path}`는 `foo/my%2Fpath`를 생성합니다. 이스케이프된 슬래시에 주의하세요. 경로 구분 기호 문자를 왕복하려면 `**` 경로 매개 변수 접두사를 사용합니다. `{ path = "my/path" }`를 사용하는 경로 `foo/{**path}`는 `foo/my/path`를 생성합니다.
 
-경로 매개 변수에는 등호(`=`)로 구분된 매개 변수 이름 뒤에 기본값을 지정하여 지정된 *기본값*이 있을 수 있습니다. 예를 들어 `{controller=Home}`은 `controller`에 대한 기본값으로 `Home`을 정의합니다. URL에 매개 변수에 대한 값이 없는 경우 기본값이 사용됩니다. 경로 매개 변수는 `id?`에서와 같이 매개 변수 이름의 끝에 물음표(`?`)를 추가하여 선택적으로 만듭니다. 선택적 값과 기본 경로 매개 변수 간의 차이점은 기본값이 있는 경로 매개 변수는 항상 값을 생성한다는 것입니다. 선택적 매개 변수에는 요청 URL에서 값을 제공하는 경우에만 값이 있습니다.
+경로 매개 변수에는 등호(`=`)로 구분된 매개 변수 이름 뒤에 기본값을 지정하여 지정된 *기본값*이 있을 수 있습니다. 예를 들어 `{controller=Home}`은 `controller`에 대한 기본값으로 `Home`을 정의합니다. URL에 매개 변수에 대한 값이 없는 경우 기본값이 사용됩니다. 경로 매개 변수는 `id?`와 같이 매개 변수 이름의 끝에 물음표(`?`)를 추가하면 선택적이 됩니다. 선택적 값과 기본 경로 매개 변수 간의 차이점은 기본값이 있는 경로 매개 변수는 항상 값을 생성한다는 것입니다. 선택적 매개 변수에는 요청 URL에서 값을 제공하는 경우에만 값이 있습니다.
 
 경로 매개 변수에는 URL에서 바인딩된 경로 값과 일치해야 한다는 제약 조건이 있을 수 있습니다. 경로 매개 변수 이름 뒤에 콜론(`:`)과 제약 조건 이름을 추가하여 경로 매개 변수에서 *인라인 제약 조건*을 지정합니다. 제약 조건에 인수가 필요한 경우 제약 조건 이름 뒤에 인수를 괄호(`(...)`)로 묶습니다. 또 다른 콜론(`:`) 및 제약 조건 이름을 추가하여 여러 인라인 제약 조건을 지정할 수 있습니다.
 
@@ -1027,7 +1027,7 @@ catch-all 매개 변수는 경로 구분 기호(`/`) 문자를 포함하여 URL�
 
 다음 표에서는 경로 제약 조건 예제 및 예상되는 해당 동작을 보여 줍니다.
 
-| 제약 조건 | 예 | 일치하는 예제 | 메모 |
+| 제약 조건 | 예 | 일치하는 예제 | 참고 |
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | 임의의 정수와 일치 |
 | `bool` | `{active:bool}` | `true`, `FALSE` | `true` 또는 `false` 일치(대/소문자 구분하지 않음) |
@@ -1088,7 +1088,7 @@ ASP.NET Core 프레임워크는 정규식 생성자에 `RegexOptions.IgnoreCase 
 
 기본 제공 경로 제약 조건 외에도 <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> 인터페이스를 구현하여 사용자 지정 경로 제약 조건을 만들 수 있습니다. <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> 인터페이스에는 제약 조건이 충족되는 경우 `true`를 반환하고 그렇지 않은 경우 `false`를 반환하는 `Match` 단일 메서드가 포함됩니다.
 
-사용자 지정 <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>를 사용하려면 앱의 서비스 컨테이너에 있는 앱의 <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>에 경로 제약 조건 형식을 등록해야 합니다. <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>은 경로 제약 조건 키를 해당 제약 조건의 유효성을 검사하는 <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> 구현과 매핑하는 사전입니다. `Startup.ConfigureServices`에서 [services.AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) 호출의 일부로 또는 `services.Configure<RouteOptions>`를 사용하여 직접 <xref:Microsoft.AspNetCore.Routing.RouteOptions>를 구성하여 앱의 <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>을 업데이트할 수 있습니다. 예:
+사용자 지정 <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>를 사용하려면 앱의 서비스 컨테이너에 있는 앱의 <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>에 경로 제약 조건 형식을 등록해야 합니다. <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>은 경로 제약 조건 키를 해당 제약 조건의 유효성을 검사하는 <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> 구현과 매핑하는 사전입니다. `Startup.ConfigureServices`에서 [services.AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) 호출의 일부로 또는 `services.Configure<RouteOptions>`를 사용하여 직접 <xref:Microsoft.AspNetCore.Routing.RouteOptions>를 구성하여 앱의 <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>을 수정할 수 있습니다. 예:
 
 ```csharp
 services.AddRouting(options =>
@@ -1394,7 +1394,7 @@ URL 생성에 대한 자세한 내용은 [URL 생성 참조](#url-generation-ref
 
 다음 표는 지정된 URI에 대한 응답을 보여줍니다.
 
-| URI                    | response                                          |
+| URI                    | 응답                                          |
 | ---------------------- | ------------------------------------------------- |
 | `/package/create/3`    | Hello! Route values: [operation, create], [id, 3] |
 | `/package/track/-3`    | Hello! Route values: [operation, track], [id, -3] |
@@ -1481,7 +1481,7 @@ catch-all 매개 변수는 경로 구분 기호(`/`) 문자를 포함하여 URL�
 
 다음 표에서는 경로 제약 조건 예제 및 예상되는 해당 동작을 보여 줍니다.
 
-| 제약 조건 | 예 | 일치하는 예제 | 메모 |
+| 제약 조건 | 예 | 일치하는 예제 | 참고 |
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | 임의의 정수와 일치 |
 | `bool` | `{active:bool}` | `true`, `FALSE` | `true` 또는 `false` 일치(대/소문자 구분하지 않음) |
@@ -1542,7 +1542,7 @@ ASP.NET Core 프레임워크는 정규식 생성자에 `RegexOptions.IgnoreCase 
 
 기본 제공 경로 제약 조건 외에도 <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> 인터페이스를 구현하여 사용자 지정 경로 제약 조건을 만들 수 있습니다. <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> 인터페이스에는 제약 조건이 충족되는 경우 `true`를 반환하고 그렇지 않은 경우 `false`를 반환하는 `Match` 단일 메서드가 포함됩니다.
 
-사용자 지정 <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>를 사용하려면 앱의 서비스 컨테이너에 있는 앱의 <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>에 경로 제약 조건 형식을 등록해야 합니다. <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>은 경로 제약 조건 키를 해당 제약 조건의 유효성을 검사하는 <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> 구현과 매핑하는 사전입니다. `Startup.ConfigureServices`에서 [services.AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) 호출의 일부로 또는 `services.Configure<RouteOptions>`를 사용하여 직접 <xref:Microsoft.AspNetCore.Routing.RouteOptions>를 구성하여 앱의 <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>을 업데이트할 수 있습니다. 예:
+사용자 지정 <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>를 사용하려면 앱의 서비스 컨테이너에 있는 앱의 <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>에 경로 제약 조건 형식을 등록해야 합니다. <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>은 경로 제약 조건 키를 해당 제약 조건의 유효성을 검사하는 <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> 구현과 매핑하는 사전입니다. `Startup.ConfigureServices`에서 [services.AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) 호출의 일부로 또는 `services.Configure<RouteOptions>`를 사용하여 직접 <xref:Microsoft.AspNetCore.Routing.RouteOptions>를 구성하여 앱의 <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>을 수정할 수 있습니다. 예:
 
 ```csharp
 services.AddRouting(options =>

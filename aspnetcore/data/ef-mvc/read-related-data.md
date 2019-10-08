@@ -3,15 +3,15 @@ title: '자습서: 관련 데이터 읽기 - ASP.NET MVC 및 EF Core 사용'
 description: 이 자습서에서는 관련 데이터 즉, Entity Framework에서 탐색 속성으로 로드하는 데이터를 읽고 표시합니다.
 author: tdykstra
 ms.author: riande
-ms.date: 03/27/2019
+ms.date: 09/28/2019
 ms.topic: tutorial
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: 2bf556dae5d30819c54ecc3f0dadfbd3316db1cc
-ms.sourcegitcommit: 0774a61a3a6c1412a7da0e7d932dc60c506441fc
+ms.openlocfilehash: cb691dce757a72a01bfd29717710d1be590c4150
+ms.sourcegitcommit: f62014bb558ff6f8fdaef2e96cb05986e216aacd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/27/2019
-ms.locfileid: "70059107"
+ms.lasthandoff: 09/28/2019
+ms.locfileid: "71592283"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>자습서: 관련 데이터 읽기 - ASP.NET MVC 및 EF Core 사용
 
@@ -188,7 +188,7 @@ Entity Framework와 같은 ORM(개체-관계형 매핑) 소프트웨어에서 �
   }
   ```
 
-* 각 강사가 가르치는 과정을 표시하는 **Courses** 열을 추가했습니다. 자세한 내용은 Razor 구문 문서의 [@를 사용하여 명시적으로 줄 전환:](xref:mvc/views/razor#explicit-line-transition-with-) 섹션을 참조하세요.
+* 각 강사가 가르치는 과정을 표시하는 **Courses** 열을 추가했습니다. 자세한 내용은 Razor 구문 문서의 [명시적 줄 전환](xref:mvc/views/razor#explicit-line-transition) 섹션을 참조하세요.
 
 * 선택된 강사의 `tr` 요소에 `class="success"`를 동적으로 추가하는 코드를 추가했습니다. 부트스트랩 클래스를 사용하여 선택된 행에 대한 배경색을 설정합니다.
 

@@ -5,14 +5,14 @@ description: ASP.NET Core에서 호스팅되는 서비스를 사용하는 백그
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/18/2019
+ms.date: 09/26/2019
 uid: fundamentals/host/hosted-services
-ms.openlocfilehash: 8df86b10d7ba853edb3265df0e02eabbf8a2c058
-ms.sourcegitcommit: fa61d882be9d0c48bd681f2efcb97e05522051d0
+ms.openlocfilehash: 0eaa3a62370c1e413840bb65f597dc664adafc38
+ms.sourcegitcommit: fe88748b762525cb490f7e39089a4760f6a73a24
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71205704"
+ms.lasthandoff: 09/30/2019
+ms.locfileid: "71688091"
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>ASP.NET Core에서 호스팅되는 서비스를 사용하는 백그라운드 작업
 
@@ -37,29 +37,7 @@ ASP.NET Core에서 백그라운드 작업은 *호스팅되는 서비스*로 구�
 
 ASP.NET Core Worker Service 템플릿은 장기간 실행되는 서비스 앱을 작성하기 위한 시작점을 제공합니다. 템플릿을 호스팅되는 서비스 앱의 기반으로 사용하려면 다음을 수행합니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
-
-1. 새 프로젝트 만들기
-1. **ASP.NET Core 웹 애플리케이션**을 선택합니다. **다음**을 선택합니다.
-1. **프로젝트 이름** 필드에 프로젝트 이름을 제공하거나 기본 프로젝트 이름을 수락합니다. **만들기**를 선택합니다.
-1. **새 ASP.NET Core 웹 애플리케이션 만들기** 대화 상자에서 **.NET Core** 및 **ASP.NET Core 3.0**이 선택되었는지 확인합니다.
-1. **Worker Service** 템플릿을 선택합니다. **만들기**를 선택합니다.
-
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
-
-1. 새 프로젝트 만들기
-1. 사이드바에서 **.NET Core** 아래에 있는 **앱**을 선택합니다.
-1. **ASP.NET Core** 아래에 있는 **작업자**를 선택합니다. **다음**을 선택합니다.
-1. **대상 프레임워크**에 대해 **.NET Core 3.0**을 선택합니다. **다음**을 선택합니다.
-1. **프로젝트 이름** 필드에 이름을 입력합니다. **만들기**를 선택합니다.
-
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
-
-명령 셸에서 [dotnet new](/dotnet/core/tools/dotnet-new) 명령과 함께 Worker Service(`worker`) 템플릿을 사용합니다. 다음 예제에서는 `ContosoWorker`라는 Worker Service 앱을 만듭니다. 명령이 실행될 때 `ContosoWorker` 앱의 폴더가 자동으로 만들어집니다.
-
-```dotnetcli
-dotnet new worker -o ContosoWorker
-```
+[!INCLUDE[](~/includes/worker-template-instructions.md)]
 
 ---
 
@@ -123,10 +101,12 @@ dotnet new worker -o ContosoWorker
 
 ## <a name="backgroundservice"></a>BackgroundService
 
-`BackgroundService`는 장기 실행 <xref:Microsoft.Extensions.Hosting.IHostedService>를 구현하기 위한 기본 클래스입니다. `BackgroundService`는 백그라운드 작업에 대해 두 가지 메서드를 정의합니다.
+`BackgroundService`는 장기 실행 <xref:Microsoft.Extensions.Hosting.IHostedService>를 구현하기 위한 기본 클래스입니다. `BackgroundService`는 서비스의 논리를 포함하는 `ExecuteAsync(CancellationToken stoppingToken)` 추상 메서드를 제공합니다. [IHostedService.StopAsync](xref:Microsoft.Extensions.Hosting.IHostedService.StopAsync*)가 호출되면 `stoppingToken`이 트리거됩니다. 이 메서드를 구현하면 백그라운드 서비스의 전체 수명을 나타내는 `Task`가 반환됩니다.
 
-* <xref:Microsoft.Extensions.Hosting.IHostedService>가 시작되면 `ExecuteAsync(CancellationToken stoppingToken)` &ndash; `ExecuteAsync`가 호출됩니다. 구현은 수행되는 장기 실행 작업의 수명을 나타내는 `Task`를 반환해야 합니다. [IHostedService.StopAsync](xref:Microsoft.Extensions.Hosting.IHostedService.StopAsync*)가 호출되면 `stoppingToken`이 트리거됩니다.
-* 애플리케이션 호스트가 정상적으로 종료될 때 `StopAsync(CancellationToken stoppingToken)` &ndash; `StopAsync`가 트리거됩니다. `stoppingToken`은 종료 프로세스가 더 이상 정상이 아님을 나타냅니다.
+또한 `IHostedService`에 정의된 메서드를 *선택적으로* 재정의하여 서비스에 대한 시작 및 종료 코드를 실행할 수도 있습니다.
+
+* 애플리케이션 호스트가 정상적으로 종료될 때 `StopAsync(CancellationToken cancellationToken)` &ndash; `StopAsync`가 호출됩니다. 호스트가 서비스를 강제로 종료하기로 결정한 경우 `cancellationToken` 신호가 전송됩니다. 이 메서드를 재정의하는 경우 기본 클래스 메서드를 **** 호출(및 `await`)하여 서비스가 올바르게 종료되도록 해야 합니다.
+* `StartAsync(CancellationToken cancellationToken)` &ndash; `StartAsync`가 백그라운드 서비스를 시작하기 위해 호출됩니다. 시작 프로세스가 중단되면 `cancellationToken` 신호가 전송됩니다. 구현은 서비스의 시작 프로세스를 나타내는 `Task`를 반환합니다. 이 `Task`가 완료될 때까지 추가 서비스가 시작되지 않습니다. 이 메서드를 재정의하는 경우 기본 클래스 메서드를 **** 호출(및 `await`)하여 서비스가 올바르게 시작되도록 해야 합니다.
 
 ## <a name="timed-background-tasks"></a>시간이 지정된 백그라운드 작업
 
@@ -279,7 +259,7 @@ ASP.NET Core에서 백그라운드 작업은 *호스팅되는 서비스*로 구�
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * [IHostedService 및 BackgroundService 클래스를 사용하여 마이크로 서비스에서 백그라운드 작업 구현](/dotnet/standard/microservices-architecture/multi-container-microservice-net-applications/background-tasks-with-ihostedservice)
 * <xref:System.Threading.Timer>
