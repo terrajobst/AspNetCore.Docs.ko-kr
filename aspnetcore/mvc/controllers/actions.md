@@ -51,7 +51,7 @@ ms.locfileid: "64890258"
 
 ### <a name="controller-helper-methods"></a>컨트롤러 도우미 메서드
 
-컨트롤러는 일반적으로 [Controller](/dotnet/api/microsoft.aspnetcore.mvc.controller)에서 상속됩니다. 단, 이는 필수가 아닙니다. `Controller`에서 파생됨으로써 세 가지 범주의 도우미 메서드에 액세스 할 수 있습니다.
+컨트롤러는 일반적으로 [Controller](/dotnet/api/microsoft.aspnetcore.mvc.controller)를 상속합니다. 단, 이는 필수가 아닙니다. `Controller`에서 파생됨으로써 세 가지 범주의 도우미 메서드에 액세스할 수 있습니다.
 
 #### <a name="1-methods-resulting-in-an-empty-response-body"></a>1. 빈 응답 본문을 만드는 메서드
 
@@ -65,7 +65,7 @@ ms.locfileid: "64890258"
 
 * **리디렉션**
 
-    이 형식은 작업 또는 대상에 리디렉션을 반환합니다(`Redirect`, `LocalRedirect`, `RedirectToAction` 또는 `RedirectToRoute` 사용하여). 예를 들어 `return RedirectToAction("Complete", new {id = 123});`은 `Complete`로 리디렉션하고 익명 개체를 전달합니다.
+    이 형식은 작업 또는 대상에 리디렉션을 반환합니다(`Redirect`, `LocalRedirect`, `RedirectToAction` 또는 `RedirectToRoute`를 사용하여). 예를 들어 `return RedirectToAction("Complete", new {id = 123});`은 `Complete`로 리디렉션하고 익명 개체를 전달합니다.
 
     리디렉션 결과 형식은 주로 `Location` HTTP 응답 헤더를 추가한다는 점에서 HTTP 상태 코드 형식과 다릅니다.
 
