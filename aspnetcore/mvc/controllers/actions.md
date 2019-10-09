@@ -51,13 +51,13 @@ ms.locfileid: "64890258"
 
 ### <a name="controller-helper-methods"></a>컨트롤러 도우미 메서드
 
-컨트롤러는 일반적으로 [Controller](/dotnet/api/microsoft.aspnetcore.mvc.controller)에서 상속합니다. 단, 이는 필수가 아닙니다. `Controller`에서의 파생은 도우미 메서드의 세 범주에 대한 액세스를 제공합니다.
+컨트롤러는 일반적으로 [Controller](/dotnet/api/microsoft.aspnetcore.mvc.controller)를 상속합니다. 단, 이는 필수가 아닙니다. `Controller`에서 파생됨으로써 세 가지 범주의 도우미 메서드에 액세스할 수 있습니다.
 
-#### <a name="1-methods-resulting-in-an-empty-response-body"></a>1. 빈 응답 본문으로 이어지는 메서드
+#### <a name="1-methods-resulting-in-an-empty-response-body"></a>1. 빈 응답 본문을 만드는 메서드
 
-응답 본문에 설명할 콘텐츠가 없으므로 `Content-Type` HTTP 응답 헤더가 포함되지 않습니다.
+응답 본문에 기술할 콘텐츠가 없으므로 `Content-Type` HTTP 응답 헤더가 포함되지 않습니다.
 
-이 범주 내의 두 가지 결과 형식은 리디렉션과 HTTP 상태 코드입니다.
+이 범주의 두 가지 결과 형식은 리디렉션과 HTTP 상태 코드입니다.
 
 * **HTTP 상태 코드**
 
@@ -65,15 +65,15 @@ ms.locfileid: "64890258"
 
 * **리디렉션**
 
-    이 형식은 작업 또는 대상에 리디렉션을 반환합니다(`Redirect`, `LocalRedirect`, `RedirectToAction` 또는 `RedirectToRoute` 사용). 예를 들어 `return RedirectToAction("Complete", new {id = 123});`은 `Complete`로 리디렉션하여 익명 개체를 전달합니다.
+    이 형식은 작업 또는 대상에 리디렉션을 반환합니다(`Redirect`, `LocalRedirect`, `RedirectToAction` 또는 `RedirectToRoute`를 사용하여). 예를 들어 `return RedirectToAction("Complete", new {id = 123});`은 `Complete`로 리디렉션하고 익명 개체를 전달합니다.
 
     리디렉션 결과 형식은 주로 `Location` HTTP 응답 헤더를 추가한다는 점에서 HTTP 상태 코드 형식과 다릅니다.
 
-#### <a name="2-methods-resulting-in-a-non-empty-response-body-with-a-predefined-content-type"></a>2. 미리 정의된 콘텐츠 형식의 비어 있지 않은 응답 본문으로 이어지는 메서드
+#### <a name="2-methods-resulting-in-a-non-empty-response-body-with-a-predefined-content-type"></a>2. 미리 정의된 콘텐츠 형식의 비어 있지 않은 응답 본문을 만드는 메서드
 
 이 범주의 도우미 메서드 대부분은 `ContentType` 속성을 포함하고 있으므로 응답 본문을 설명하기 위해서 `Content-Type` 응답 헤더를 설정할 수 있습니다.
 
-이 범주 내의 두 가지 결과 형식은 [보기](xref:mvc/views/overview)와 [서식 있는 응답](xref:web-api/advanced/formatting)입니다.
+이 범주의 두 가지 결과 형식은 [보기](xref:mvc/views/overview)와 [서식화된 응답](xref:web-api/advanced/formatting)입니다.
 
 * **보기**
 
@@ -83,13 +83,13 @@ ms.locfileid: "64890258"
 
     이 형식은 JSON 또는 비슷한 데이터 교환 형식을 반환하여 개체를 특정 방식으로 표시합니다. 예를 들어 `return Json(customer);`은 제공된 개체를 JSON 형식으로 직렬화합니다.
     
-    이 형식의 다른 일반적인 방법에는 `File` 및 `PhysicalFile`이 포함됩니다. 예를 들어 `return PhysicalFile(customerFilePath, "text/xml");`은 [PhysicalFileResult](/dotnet/api/microsoft.aspnetcore.mvc.physicalfileresult)를 반환합니다.
+    이 형식의 다른 일반적인 메서드에는 `File` 및 `PhysicalFile`이 포함됩니다. 예를 들어 `return PhysicalFile(customerFilePath, "text/xml");`은 [PhysicalFileResult](/dotnet/api/microsoft.aspnetcore.mvc.physicalfileresult)를 반환합니다.
 
-#### <a name="3-methods-resulting-in-a-non-empty-response-body-formatted-in-a-content-type-negotiated-with-the-client"></a>3. 클라이언트와 협상된 콘텐츠 형식으로 서식이 지정된 비어 있지 않은 응답 본문으로 이어지는 메서드
+#### <a name="3-methods-resulting-in-a-non-empty-response-body-formatted-in-a-content-type-negotiated-with-the-client"></a>3. 클라이언트와 협상된 콘텐츠 형식으로 서식이 지정된 비어 있지 않은 응답 본문을 만드는 메서드
 
 이 범주는 **콘텐츠 협상**으로 더 잘 알려져 있습니다. [콘텐츠 협상](xref:web-api/advanced/formatting#content-negotiation)은 작업이 [ObjectResult](/dotnet/api/microsoft.aspnetcore.mvc.objectresult) 형식 또는 [IActionResult](/dotnet/api/microsoft.aspnetcore.mvc.iactionresult) 구현 이외의 형식을 반환할 때마다 적용됩니다. 비 `IActionResult` 구현을 반환하는 작업(예: `object`)도 서식화된 응답을 반환합니다.
 
-이 형식의 몇 가지 도우미 메서드에는 `BadRequest`, `CreatedAtRoute` 및 `Ok`가 포함됩니다. 이러한 메서드의 예에는 각각 `return BadRequest(modelState);`, `return CreatedAtRoute("routename", values, newobject);` 및 `return Ok(value);`가 있습니다. `BadRequest` 및 `Ok`는 값이 전달될 때만 콘텐츠 협상을 수행합니다. 값을 전달하지 않으면 대신 HTTP 상태 코드 결과 형식으로 제공합니다. 반면, `CreatedAtRoute` 메서드는 해당 오버로드에서는 모두 값이 전달되어야 하므로 항상 콘텐츠 협상을 수행합니다.
+이 형식의 몇 가지 도우미 메서드에는 `BadRequest`, `CreatedAtRoute` 및 `Ok`가 포함됩니다. 이러한 메서드의 예로는 각각 `return BadRequest(modelState);`, `return CreatedAtRoute("routename", values, newobject);` 및 `return Ok(value);`가 있습니다. `BadRequest` 및 `Ok`는 값이 전달될 때만 콘텐츠 협상을 수행합니다. 값을 전달하지 않으면 대신 HTTP 상태 코드 결과 형식을 제공합니다. 반면, `CreatedAtRoute` 메서드는 해당 오버로드에서 모두 값이 전달되어야 하므로 항상 콘텐츠 협상을 수행합니다.
 
 ### <a name="cross-cutting-concerns"></a>횡단 관심사
 
