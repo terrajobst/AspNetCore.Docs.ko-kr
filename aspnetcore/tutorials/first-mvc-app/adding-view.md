@@ -42,7 +42,7 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
   * **Razor 뷰**를 선택합니다.
 
-  * *이름* 상자 값의 **Index.cshtml**을 유지하세요.
+  * *이름* 상자 값은 **Index.cshtml**을 유지하세요.
 
   * **추가**를 선택합니다.
 
@@ -82,7 +82,7 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
 메뉴 링크를 선택합니다(**MvcMovie**, **Home** 및 **Privacy**). 각 페이지는 동일한 메뉴 레이아웃을 보여줍니다. 메뉴 레이아웃은 *Views/Shared/_Layout.cshtml* 파일에서 구현됩니다. *Views/Shared/_Layout.cshtml* 파일을 엽니다.
 
-[레이아웃](xref:mvc/views/layout) 템플릿을 사용하면 한 곳에서 사이트의 HTML 컨테이너 레이아웃을 지정한 다음 사이트의 여러 페이지에 걸쳐 적용할 수 있습니다. `@RenderBody()` 줄을 찾습니다. `RenderBody`는 개발자가 만든 모든 보기 전용 페이지가 표시되는 자리 표시자이며 레이아웃 페이지으로 *감싸입니다*. 예를 들어 **Privacy** 링크를 선택하는 경우 **Views/Home/Privacy.cshtml** 보기가 `RenderBody` 메서드 내부에 렌더링됩니다.
+[레이아웃](xref:mvc/views/layout) 템플릿을 사용하면 한 곳에서 사이트의 HTML 컨테이너 레이아웃을 지정한 다음 사이트에서 여러 페이지에 걸쳐 적용할 수 있습니다. `@RenderBody()` 줄을 찾습니다. `RenderBody`는 사용자가 만드는 모든 보기 전용 페이지가 표시되는 자리 표시자이며 레이아웃 페이지에서 *래핑됩니다*. 예를 들어 **개인 정보** 링크를 선택하는 경우 **Views/Home/Privacy.cshtml** 보기는 `RenderBody` 메서드 내에서 렌더링됩니다.
 
 ## <a name="change-the-title-footer-and-menu-link-in-the-layout-file"></a>레이아웃 파일의 제목, 바닥글 및 메뉴 링크 변경
 
@@ -149,7 +149,7 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
 `ViewData` 사전 개체는 보기에 전달될 데이터를 담고 있습니다.
 
-*Views/HelloWorld/Welcome.cshtml*이라는 Welcome 보기 템플릿을 만듭니다.
+*Views/HelloWorld/Welcome.cshtml*이라는 환영 보기 템플릿을 만듭니다.
 
 *Welcome.cshtml* 보기 템플릿에 "Hello" `NumTimes`를 표시하는 반복을 만듭니다. *Views/HelloWorld/Welcome.cshtml*의 콘텐츠를 다음으로 대체합니다.
 
@@ -163,7 +163,7 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
 ![Welcome 레이블과 네 번 표시되는 Hello Rick 문장을 보여주는 Welcome 보기](~/tutorials/first-mvc-app/adding-view/_static/rick2.png)
 
-위의 예제에서는 컨트롤러에서 보기로 데이터를 전달하는 데 `ViewData` 사전이 사용되었습니다. 자습서의 뒷부분에서는 컨트롤러에서 보기로 데이터를 전달하기 위해 ViewModel이 사용됩니다. 데이터를 전달하기 위해 ViewModel을 사용하는 방식이 일반적으로 `ViewData` 사전 방식보다 훨씬 많이 사용됩니다. 자세한 내용은 [When to use ViewBag, ViewData, or TempData](https://www.rachelappel.com/when-to-use-viewbag-viewdata-or-tempdata-in-asp-net-mvc-3-applications/)(ViewBag, ViewData 또는 TempData를 사용하는 경우)를 참조하세요.
+위의 예제에서는 컨트롤러에서 보기로 데이터를 전달하는 데 `ViewData` 사전이 사용되었습니다. 자습서의 뒷부분에서는 컨트롤러에서 보기로 데이터를 전달하기 위해 보기 모델이 사용됩니다. 데이터를 전달하기 위해 보기 모델을 사용하는 방식이 일반적으로 `ViewData` 사전 방식보다 훨씬 많이 사용됩니다. 자세한 내용은 [When to use ViewBag, ViewData, or TempData](https://www.rachelappel.com/when-to-use-viewbag-viewdata-or-tempdata-in-asp-net-mvc-3-applications/)(ViewBag, ViewData 또는 TempData를 사용하는 경우)를 참조하세요.
 
 다음 자습서에서는 영화 데이터베이스가 만들어집니다.
 
@@ -199,7 +199,7 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
   * **Razor 뷰**를 선택합니다.
 
-  * *이름* 상자 값의 **Index.cshtml**을 유지하세요.
+  * *이름* 상자 값 **Index.cshtml**을 유지하세요.
 
   * **추가**를 선택합니다.
 
@@ -239,7 +239,7 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
 메뉴 링크를 선택합니다(**MvcMovie**, **Home** 및 **Privacy**). 각 페이지는 동일한 메뉴 레이아웃을 보여줍니다. 메뉴 레이아웃은 *Views/Shared/_Layout.cshtml* 파일에서 구현됩니다. *Views/Shared/_Layout.cshtml* 파일을 엽니다.
 
-[레이아웃](xref:mvc/views/layout) 템플릿을 사용하면 한 곳에서 사이트의 HTML 컨테이너 레이아웃을 지정한 다음 사이트의 여러 페이지에 걸쳐 적용할 수 있습니다. `@RenderBody()` 줄을 찾습니다. `RenderBody`는 개발자가 만든 모든 보기 전용 페이지가 표시되는 자리 표시자이며 레이아웃 페이지으로 *감싸입니다*. 예를 들어 **Privacy** 링크를 선택하는 경우 **Views/Home/Privacy.cshtml** 보기가 `RenderBody` 메서드 내부에 렌더링됩니다.
+[레이아웃](xref:mvc/views/layout) 템플릿을 사용하면 한 곳에서 사이트의 HTML 컨테이너 레이아웃을 지정한 다음 사이트의 여러 페이지에 걸쳐 적용할 수 있습니다. `@RenderBody()` 줄을 찾습니다. `RenderBody`는 개발자가 만든 모든 보기 전용 페이지가 표시되는 자리 표시자이며 레이아웃 페이지으로 *래핑됩니다*. 예를 들어 **Privacy** 링크를 선택하는 경우 **Views/Home/Privacy.cshtml** 보기가 `RenderBody` 메서드 내부에 렌더링됩니다.
 
 ## <a name="change-the-title-footer-and-menu-link-in-the-layout-file"></a>레이아웃 파일의 제목, 바닥글 및 메뉴 링크 변경
 
@@ -323,7 +323,7 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
 ![Welcome 레이블과 네 번 표시되는 Hello Rick 문장을 보여주는 Welcome 보기](~/tutorials/first-mvc-app/adding-view/_static/rick2.png)
 
-위의 예제에서는 컨트롤러에서 보기로 데이터를 전달하는 데 `ViewData` 사전이 사용되었습니다. 자습서의 뒷부분에서는 컨트롤러에서 보기로 데이터를 전달하기 위해 ViewModel이 사용됩니다. 데이터를 전달하기 위해 ViewModel을 사용하는 방식이 일반적으로 `ViewData` 사전 방식보다 훨씬 많이 사용됩니다. 자세한 내용은 [When to use ViewBag, ViewData, or TempData](https://www.rachelappel.com/when-to-use-viewbag-viewdata-or-tempdata-in-asp-net-mvc-3-applications/)(ViewBag, ViewData 또는 TempData를 사용하는 경우)를 참조하세요.
+위의 샘플에서 컨트롤러에서 보기로 데이터를 전달하는 데 `ViewData` 사전이 사용되었습니다. 자습서의 뒷부분에서 보기 모델은 컨트롤러에서 보기로 데이터를 전달하는 데 사용됩니다. 데이터를 전달하는 보기 모델 방법은 일반적으로 `ViewData` 사전 접근 방법보다 훨씬 많이 사용됩니다. 자세한 내용은 [When to use ViewBag, ViewData, or TempData](https://www.rachelappel.com/when-to-use-viewbag-viewdata-or-tempdata-in-asp-net-mvc-3-applications/)(ViewBag, ViewData 또는 TempData를 사용하는 경우)를 참조하세요.
 
 다음 자습서에서는 영화 데이터베이스가 만들어집니다.
 
