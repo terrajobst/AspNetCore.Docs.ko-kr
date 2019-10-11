@@ -1,18 +1,18 @@
 ---
 title: .NET Core 및 ASP.NET Core의 로깅
-author: tdykstra
+author: rick-anderson
 description: Microsoft.Extensions.Logging NuGet 패키지에서 제공하는 로깅 프레임워크 사용법을 알아보세요.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/07/2019
+ms.date: 10/08/2019
 uid: fundamentals/logging/index
-ms.openlocfilehash: 9f7b39cc1c557356b75608817db4e8d6f61af794
-ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
+ms.openlocfilehash: 697e6cf0cd1b51ad6c2942e21bc084d1fe6bfa4e
+ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/07/2019
-ms.locfileid: "72007029"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72259740"
 ---
 # <a name="logging-in-net-core-and-aspnet-core"></a>.NET Core 및 ASP.NET Core의 로깅
 
@@ -392,10 +392,14 @@ ASP.NET Core는 다음과 같은 로그 수준을 정의하며, 여기에는 가
 
   즉각적인 대응이 필요한 오류를 위한 수준입니다. 예: 데이터 손실 시나리오, 디스크 공간 부족.
 
-로그 수준을 사용하여 특정 스토리지 매체 또는 디스플레이 창에 기록되는 로그 출력의 양을 제어합니다. 예를 들어:
+로그 수준을 사용하여 특정 스토리지 매체 또는 디스플레이 창에 기록되는 로그 출력의 양을 제어합니다. 예:
 
-* 프로덕션 환경에서 `Trace` ~ `Information` 수준을 볼륨 데이터 저장소로 보냅니다. 값 데이터 저장소에 `Warning` ~ `Critical`을 보냅니다.
-* 개발 중에 `Warning` ~ `Critical`을 콘솔에 보내고 문제 해결 시 `Trace` ~ `Information`을 추가합니다.
+* 프로덕션:
+  * `Trace`~`Information` 수준 로깅은 자세한 로그 메시지를 대량으로 생성합니다. 비용을 관리하고 데이터 저장소 제한을 초과하지 않으려면 `Trace`~`Information` 수준 메시지를 대용량, 저비용 데이터 저장소에 기록합니다.
+  * `Warning`~`Critical` 수준 로깅에서 생성되는 로그 메시지는 일반적으로 수량 및 용량이 더 적습니다. 따라서 비용 및 저장소 제한은 대개의 경우 문제가 되지 않으므로 데이터 저장소를 유연하게 선택할 수 있습니다.
+* 개발 중:
+  * `Warning`~`Critical` 메시지를 콘솔에 기록합니다.
+  * 문제 해결 시 `Trace`~`Information` 메시지를 추가합니다.
 
 이 문서의 뒷부분에 나오는 [로그 필터링](#log-filtering) 섹션에서는 공급자가 처리하는 로그 수준을 제어하는 방법을 설명합니다.
 
@@ -909,7 +913,7 @@ Azure 로그 스트리밍을 구성하려면:
 
 ASP.NET 4.x용으로 제공되는 [Microsoft.ApplicationInsights.Web](https://www.nuget.org/packages/Microsoft.ApplicationInsights.Web) 패키지&mdash;를 사용하지 마세요.
 
-자세한 내용은 다음 리소스를 참조하세요.
+자세한 내용은 다음 리소스를 참조하십시오.
 
 * [Application Insights 개요](/azure/application-insights/app-insights-overview)
 * [ASP.NET Core 애플리케이션용 Application Insights](/azure/azure-monitor/app/asp-net-core) - 로깅과 함께 전체 범위 Application Insights 원격 분석을 구현하려면 여기에서 시작합니다.

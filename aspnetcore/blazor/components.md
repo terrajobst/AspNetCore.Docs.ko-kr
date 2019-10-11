@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/05/2019
 uid: blazor/components
-ms.openlocfilehash: 438b3802087e2ac3df4cbe69a700b878c1cbbf63
-ms.sourcegitcommit: 73a451e9a58ac7102f90b608d661d8c23dd9bbaf
-ms.translationtype: HT
+ms.openlocfilehash: 3e0966bf978c99fc00db7682bea3292306cbb03c
+ms.sourcegitcommit: d81912782a8b0bd164f30a516ad80f8defb5d020
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/08/2019
-ms.locfileid: "72037428"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72179031"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -194,30 +194,42 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 ## <a name="data-binding"></a>데이터 바인딩
 
-구성 요소와 DOM 요소 모두에 대 한 데이터 바인딩은 [@bind](xref:mvc/views/razor#bind) 특성을 사용 하 여 수행 됩니다. 다음 예에서는 `_italicsCheck` 필드를 확인란의 선택 된 상태에 바인딩합니다.
+구성 요소와 DOM 요소 모두에 대 한 데이터 바인딩은 [@bind](xref:mvc/views/razor#bind) 특성을 사용 하 여 수행 됩니다. 다음 예에서는 `CurrentValue` 속성을 텍스트 상자의 값에 바인딩합니다.
 
 ```cshtml
-<input type="checkbox" class="form-check-input" id="italicsCheck" 
-    @bind="_italicsCheck" />
+<input @bind="CurrentValue" />
+
+@code {
+    private string CurrentValue { get; set; }
+}
 ```
 
-확인란을 선택 하 고 선택 취소 하면 속성의 값이 각각 `true` 및 `false`로 업데이트 됩니다.
+텍스트 상자가 포커스를 잃으면 속성의 값이 업데이트 됩니다.
 
-확인란은 속성의 값을 변경 하는 것이 아니라 구성 요소가 렌더링 되는 경우에만 UI에서 업데이트 됩니다. 이벤트 처리기 코드를 실행 한 후 구성 요소를 자체적으로 렌더링 하므로 속성 업데이트는 일반적으로 UI에 즉시 반영 됩니다.
+텍스트 상자는 구성 요소가 렌더링 되는 경우에만 UI에서 업데이트 되며 속성의 값을 변경 하는 것에 대 한 응답으로는 업데이트 되지 않습니다. 이벤트 처리기 코드를 실행 한 후 구성 요소를 자체적으로 렌더링 하므로 속성 업데이트는 *일반적으로* 이벤트 처리기가 트리거되는 즉시 UI에 반영 됩니다.
 
 @No__t-1 속성 (`<input @bind="CurrentValue" />`)과 함께 `@bind`을 사용 하는 것은 기본적으로 다음과 같습니다.
 
 ```cshtml
 <input value="@CurrentValue"
-    @onchange="@((ChangeEventArgs __e) => CurrentValue = __e.Value)" />
+    @onchange="@((ChangeEventArgs __e) => CurrentValue = 
+        __e.Value.ToString())" />
+        
+@code {
+    private string CurrentValue { get; set; }
+}
 ```
 
-구성 요소가 렌더링 되 면 입력 요소의 @no__t 0은 `CurrentValue` 속성에서 가져옵니다. 사용자가 텍스트 상자에를 입력 하면 `onchange` 이벤트가 발생 하 고 `CurrentValue` 속성이 변경 된 값으로 설정 됩니다. 실제로는 `@bind`은 형식 변환이 수행 되는 몇 가지 경우를 처리 하기 때문에 코드 생성은 약간 더 복잡 합니다. 원칙적으로 `@bind`은 식의 현재 값을 `value` 특성과 연결 하 고 등록 된 처리기를 사용 하 여 변경 내용을 처리 합니다.
+구성 요소가 렌더링 되 면 입력 요소의 @no__t 0은 `CurrentValue` 속성에서 가져옵니다. 사용자가 텍스트 상자에를 입력 하 고 요소 포커스를 변경 하면 `onchange` 이벤트가 발생 하 고 `CurrentValue` 속성이 변경 된 값으로 설정 됩니다. 실제로 코드 생성은 `@bind`은 형식 변환이 수행 되는 경우를 처리 하기 때문에 더 복잡 합니다. 원칙적으로 `@bind`은 식의 현재 값을 `value` 특성과 연결 하 고 등록 된 처리기를 사용 하 여 변경 내용을 처리 합니다.
 
 @No__t-1 구문을 사용 하 여 `onchange` 이벤트를 처리 하는 것 외에도 `event` 매개 변수 ([@no__t](xref:mvc/views/razor#bind))를 사용 하 여 [@bind-value](xref:mvc/views/razor#bind) 특성을 지정 하 여 다른 이벤트를 사용 하 여 속성 또는 필드를 바인딩할 수 있습니다. 다음 예에서는 `oninput` 이벤트의 `CurrentValue` 속성을 바인딩합니다.
 
 ```cshtml
 <input @bind-value="CurrentValue" @bind-value:event="oninput" />
+
+@code {
+    private string CurrentValue { get; set; }
+}
 ```
 
 요소가 포커스를 잃을 때 발생 하는 `onchange`과 달리 텍스트 상자의 값이 변경 되 면 `oninput`이 발생 합니다.
@@ -1417,14 +1429,14 @@ builder.AddContent(1, "Second");
 
 코드가 처음으로 실행 될 때 `someFlag` @no__t이-1 이면 작성기에서 다음을 수신 합니다.
 
-| Sequence | type      | data   |
+| Sequence | 형식      | data   |
 | :------: | --------- | :----: |
 | 0        | 텍스트 노드 | 첫째  |
 | 1        | 텍스트 노드 | Second |
 
 @No__t-0이-1 @no__t 되 고 태그가 다시 렌더링 된다고 가정 합니다. 이번에는 작성기가 다음을 받습니다.
 
-| Sequence | 형식       | data   |
+| Sequence | type       | data   |
 | :------: | ---------- | :----: |
 | 1        | 텍스트 노드  | Second |
 
@@ -1456,7 +1468,7 @@ builder.AddContent(seq++, "Second");
 
 이 결과는 이전 사례와 동일 하므로 부정적인 문제가 없습니다. `someFlag`은 두 번째 렌더링에서 `false` 이며 출력은 다음과 같습니다.
 
-| Sequence | type      | data   |
+| Sequence | 형식      | data   |
 | :------: | --------- | ------ |
 | 0        | 텍스트 노드 | Second |
 

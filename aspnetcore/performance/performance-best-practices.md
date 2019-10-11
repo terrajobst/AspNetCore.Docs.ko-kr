@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 09/26/2019
 uid: performance/performance-best-practices
-ms.openlocfilehash: f056f692c59da1fb42c0487be97dfeef05d0ad05
-ms.sourcegitcommit: d81912782a8b0bd164f30a516ad80f8defb5d020
+ms.openlocfilehash: c239c6d86e460f8fb80dfc47b88c090a796c617d
+ms.sourcegitcommit: c452e6af92e130413106c4863193f377cde4cd9c
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72179631"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72246482"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core 성능 모범 사례
 
@@ -175,7 +175,6 @@ ASP.NET Core의 모든 IO는 비동기입니다. 서버는 동기 및 비동기 
 > 요청이 클 경우 전체 HTTP 요청 본문을 메모리로 읽으면 OOM (메모리 부족) 조건이 발생할 수 있습니다. OOM은 서비스 거부를 유발할 수 있습니다.  자세한 내용은이 문서의 [메모리에 대 한 대량 요청 본문 또는 응답 본문 읽기 방지](#arlb) 를 참조 하세요.
 
 ## <a name="prefer-readasformasync-over-requestform"></a>요청을 통해 ReadAsFormAsync를 선호 합니다.
-<!-- TODO Review required. I change all the API's here from original -->
 
 `HttpContext.Request.ReadFormAsync` 대신 `HttpContext.Request.Form`를 사용합니다.
 `HttpContext.Request.Form`은 다음 조건 에서만 안전 하 게 읽을 수 있습니다.
@@ -255,9 +254,6 @@ ASP.NET Core 3.0는 기본적으로 JSON serialization에 대해 <xref:System.Te
 
 ## <a name="do-not-use-the-httpcontext-after-the-request-is-complete"></a>요청이 완료 된 후에 HttpContext를 사용 하지 마십시오.
 
-<!-- TODO Review, original uses `in flight`, which won't MT (Machine translate) 
-`HttpContext` is only valid as long as there is an active HTTP request `in flight`.
--->
 `HttpContext`은 ASP.NET Core 파이프라인에 활성 HTTP 요청이 있는 동안에만 유효 합니다. 전체 ASP.NET Core 파이프라인은 모든 요청을 실행 하는 대리자의 비동기 체인입니다. 이 체인에서 반환 된 `Task`이 완료 되 면 `HttpContext`이 재활용 됩니다.
 
 **이 작업을 수행 하지 마십시오.** 다음 예에서는 `async void`을 사용 합니다.
@@ -299,14 +295,14 @@ ASP.NET Core 3.0는 기본적으로 JSON serialization에 대해 <xref:System.Te
 * 백그라운드 작업 항목에서 범위를 만들기 위해 <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory>을 삽입 합니다. `IServiceScopeFactory`은 단일 항목입니다.
 * 백그라운드 스레드에서 새 종속성 주입 범위를 만듭니다.
 * 는 컨트롤러에서 아무것도 참조 하지 않습니다.
-* 들어오는 요청에서 `PokemonDbContext`을 캡처하지 않습니다.
+* 들어오는 요청에서 `ContosoDbContext`을 캡처하지 않습니다.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/FireAndForgetSecondController.cs?name=snippet2)]
 
 강조 표시 된 코드는 다음과 같습니다.
 
 * 백그라운드 작업의 수명 범위를 만들고 해당 작업에서 서비스를 확인 합니다.
-* 는 올바른 범위에서 `PokemonDbContext`을 사용 합니다.
+* 는 올바른 범위에서 `ContosoDbContext`을 사용 합니다.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/FireAndForgetSecondController.cs?name=snippet2&highlight=9-16)]
 
