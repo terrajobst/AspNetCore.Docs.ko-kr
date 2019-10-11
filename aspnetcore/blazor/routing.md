@@ -5,14 +5,14 @@ description: 앱에서 요청을 라우팅하는 방법 및 NavLink 구성 요�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/23/2019
+ms.date: 10/09/2019
 uid: blazor/routing
-ms.openlocfilehash: 76266aedd4655161f1f50a8beb0936660d452912
-ms.sourcegitcommit: 6d26ab647ede4f8e57465e29b03be5cb130fc872
+ms.openlocfilehash: 8f48112237e6dd3fed88404c53b8d7d9137ef6ff
+ms.sourcegitcommit: 0b8a7571bf7acf85bf16118acb2435001cbe4b5d
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/07/2019
-ms.locfileid: "71999818"
+ms.lasthandoff: 10/10/2019
+ms.locfileid: "72236535"
 ---
 # <a name="aspnet-core-blazor-routing"></a>ASP.NET Core Blazor 라우팅
 
@@ -85,7 +85,13 @@ Blazor 서버는 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)에 �
 
 @No__t-0 매개 변수를 사용 하 여 라우팅할 수 있는 구성 요소를 검색할 때 고려할 `Router` 구성 요소에 대 한 추가 어셈블리를 지정 합니다. 지정 된 어셈블리는 @no__t 64, 어셈블리에 추가 된 것으로 간주 됩니다. 다음 예제에서 `Component1`은 참조 된 클래스 라이브러리에 정의 된 라우팅할 수 있는 구성 요소입니다. 다음 `AdditionalAssemblies` 예제에서는 `Component1`에 대 한 라우팅을 지원 합니다.
 
-< Router AppAssembly = "typeof (Program). 어셈블리 "AdditionalAssemblies =" new [] {typeof (Component1). Assembly} > ... </Router>
+```cshtml
+<Router
+    AppAssembly="typeof(Program).Assembly"
+    AdditionalAssemblies="new[] { typeof(Component1).Assembly }>
+    ...
+</Router>
+```
 
 ## <a name="route-parameters"></a>경로 매개 변수
 

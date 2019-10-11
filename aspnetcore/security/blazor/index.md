@@ -5,14 +5,14 @@ description: Blazor 인증 및 권한 부여 시나리오에 대해 알아봅니
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/23/2019
+ms.date: 10/05/2019
 uid: security/blazor/index
-ms.openlocfilehash: b0536b4290cd39397ceb440e0508b75d0373bc88
-ms.sourcegitcommit: 79eeb17604b536e8f34641d1e6b697fb9a2ee21f
+ms.openlocfilehash: 1fcd54e954d09e66b8bb1c9a51ef56193f3acf93
+ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/24/2019
-ms.locfileid: "71211731"
+ms.lasthandoff: 10/07/2019
+ms.locfileid: "72007427"
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor 인증 및 권한 부여
 
@@ -117,6 +117,8 @@ The command creates a folder named with the value provided for the `{APP NAME}` 
 
 Blazor WebAssembly 앱에서는 사용자가 클라이언트 쪽 코드를 모두 수정할 수 있기 때문에 인증 확인을 무시할 수 있습니다. JavaScript SPA 프레임워크 또는 모든 운영 체제의 네이티브 앱을 포함하여 모든 클라이언트 쪽 앱 기술에는 동일하게 적용됩니다.
 
+[Microsoft.AspNetCore.Components.Authorization](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.Authorization/)에 대한 패키지 참조를 앱의 프로젝트 파일에 추가합니다.
+
 Blazor WebAssembly 앱에 대한 사용자 지정 `AuthenticationStateProvider` 서비스 구현은 다음 섹션에서 설명합니다.
 
 ## <a name="authenticationstateprovider-service"></a>AuthenticationStateProvider 서비스
@@ -131,6 +133,7 @@ Blazor 서버 앱에는 ASP.NET Core의 `HttpContext.User`에서 인증 상태 �
 
 ```cshtml
 @page "/"
+@using Microsoft.AspNetCore.Components.Authorization
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
 <button @onclick="@LogUsername">Write user info to console</button>
@@ -162,18 +165,25 @@ DI(종속성 주입) 및 서비스에 대한 자세한 내용은 <xref:blazor/de
 Blazor WebAssembly 앱을 빌드하는 경우 또는 앱의 사양에 사용자 지정 공급자가 필요한 경우, 공급자를 구현하고 `GetAuthenticationStateAsync`를 재정의합니다.
 
 ```csharp
-class CustomAuthStateProvider : AuthenticationStateProvider
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.Authorization;
+
+namespace BlazorSample.Services
 {
-    public override Task<AuthenticationState> GetAuthenticationStateAsync()
+    public class CustomAuthStateProvider : AuthenticationStateProvider
     {
-        var identity = new ClaimsIdentity(new[]
+        public override Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            new Claim(ClaimTypes.Name, "mrfibuli"),
-        }, "Fake authentication type");
+            var identity = new ClaimsIdentity(new[]
+            {
+                new Claim(ClaimTypes.Name, "mrfibuli"),
+            }, "Fake authentication type");
 
-        var user = new ClaimsPrincipal(identity);
+            var user = new ClaimsPrincipal(identity);
 
-        return Task.FromResult(new AuthenticationState(user));
+            return Task.FromResult(new AuthenticationState(user));
+        }
     }
 }
 ```
@@ -181,10 +191,10 @@ class CustomAuthStateProvider : AuthenticationStateProvider
 `CustomAuthStateProvider` 서비스는 `Startup.ConfigureServices`에 등록됩니다.
 
 ```csharp
-public void ConfigureServices(IServiceCollection services)
-{
-    services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
-}
+// using Microsoft.AspNetCore.Components.Authorization;
+// using BlazorSample.Services;
+
+services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 ```
 
 `CustomAuthStateProvider`를 사용하면 모든 사용자가 사용자 이름 `mrfibuli`로 인증됩니다.
@@ -218,6 +228,9 @@ public void ConfigureServices(IServiceCollection services)
     }
 }
 ```
+
+> [!NOTE]
+> Blazor WebAssembly 앱 구성 요소에서 `Microsoft.AspNetCore.Components.Authorization` 네임스페이스(`@using Microsoft.AspNetCore.Components.Authorization`)를 추가합니다.
 
 `user.Identity.IsAuthenticated`가 `true`이면, 클레임을 열거하고 역할의 멤버 자격을 평가할 수 있습니다.
 
@@ -339,7 +352,7 @@ Blazor에서는 인증 상태를 ‘비동기적으로’ 확인할 수 있습�
 
 ## <a name="authorize-attribute"></a>[Authorize] 특성
 
-앱이 MVC 컨트롤러 또는 Razor 페이지에서 `[Authorize]`를 사용할 수 있는 것과 마찬가지로, Razor 구성 요소에서 `[Authorize]`를 사용할 수도 있습니다.
+`[Authorize]` 특성은 Razor 구성 요소에서 사용될 수 있습니다.
 
 ```cshtml
 @page "/"
@@ -348,10 +361,11 @@ Blazor에서는 인증 상태를 ‘비동기적으로’ 확인할 수 있습�
 You can only see this if you're signed in.
 ```
 
+> [!NOTE]
+> Blazor WebAssembly 앱 구성 요소에서 `Microsoft.AspNetCore.Authorization` 네임스페이스(`@using Microsoft.AspNetCore.Authorization`)를 이 섹션의 예제에 추가합니다.
+
 > [!IMPORTANT]
 > Blazor 라우터를 통해 연결된 `@page` 구성 요소에서만 `[Authorize]`를 사용합니다. 권한 부여는 라우팅의 일부로만 수행되고, 페이지에 렌더링된 자식 구성 요소에 대해서는 수행되지 ‘않습니다’.  페이지 내의 특정 파트 표시 권한을 부여하려면 `AuthorizeView`를 대신 사용합니다.
-
-구성 요소를 컴파일하기 위해 해당 구성 요소 또는 *_Imports.razor* 파일에 `@using Microsoft.AspNetCore.Authorization`을 추가해야 할 수도 있습니다.
 
 `[Authorize]` 특성은 역할 기반 또는 정책 기반 권한 부여도 지원합니다. 역할 기반 권한 부여의 경우 `Roles` 매개 변수를 사용합니다.
 
@@ -460,6 +474,14 @@ Not authorized.
     }
 }
 ```
+
+> [!NOTE]
+> Blazor WebAssembly 앱 구성 요소에서 `Microsoft.AspNetCore.Authorization` 및 `Microsoft.AspNetCore.Components.Authorization` 네임스페이스를 추가합니다.
+>
+> ```cshtml
+> @using Microsoft.AspNetCore.Authorization
+> @using Microsoft.AspNetCore.Components.Authorization
+> ```
 
 ## <a name="authorization-in-blazor-webassembly-apps"></a>Blazor WebAssembly 앱의 권한 부여
 

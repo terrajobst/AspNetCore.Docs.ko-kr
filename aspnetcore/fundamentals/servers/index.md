@@ -1,18 +1,18 @@
 ---
 title: ASP.NET Core의 웹 서버 구현
-author: tdykstra
+author: rick-anderson
 description: ASP.NET Core의 웹 서버 Kestrel 및 HTTP.sys를 알아봅니다. 서버를 선택하는 방법 및 역방향 프록시 서버를 사용하는 시기에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 08/10/2019
 uid: fundamentals/servers/index
-ms.openlocfilehash: cfea559725a644f167aa3afdf88c78bace4b5950
-ms.sourcegitcommit: dc5b293e08336dc236de66ed1834f7ef78359531
+ms.openlocfilehash: 3bdc2bf776946b8fae8886a37ecd3ed5e3f860fe
+ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/16/2019
-ms.locfileid: "71011147"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72259829"
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>ASP.NET Core의 웹 서버 구현
 

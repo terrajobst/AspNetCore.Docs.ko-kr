@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 8/26/2019
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: 8c0f57e69d4cdee5b5f5510d7db04991ed6df475
-ms.sourcegitcommit: fae6f0e253f9d62d8f39de5884d2ba2b4b2a6050
+ms.openlocfilehash: 9eeb71ca751005780560f0f2200edc2013541c34
+ms.sourcegitcommit: 73e255e846e414821b8cc20ffa3aec946735cd4e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/25/2019
-ms.locfileid: "71250822"
+ms.lasthandoff: 10/03/2019
+ms.locfileid: "71925219"
 ---
 # <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>자습서: ASP.NET Core에서 gRPC 클라이언트 및 서버 만들기
 
@@ -23,7 +23,7 @@ ms.locfileid: "71250822"
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/grpc/grpc-start/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-이 자습서에서는 다음을 수행합니다.
+이 자습서에서는 다음을 수행했습니다.
 
 > [!div class="checklist"]
 > * gRPC 서버를 만듭니다.
@@ -40,7 +40,7 @@ ms.locfileid: "71250822"
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-3.0.md)]
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-3.0.md)]
 
@@ -64,7 +64,7 @@ ms.locfileid: "71250822"
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * [통합 터미널](https://code.visualstudio.com/docs/editor/integrated-terminal)을 엽니다.
-* 디렉터리(`cd`)를 프로젝트를 포함하는 폴더로 변경합니다.
+* 프로젝트를 포함할 폴더로 디렉터리를 변경(`cd`)합니다.
 * 다음 명령을 실행합니다.
 
   ```dotnetcli
@@ -78,7 +78,7 @@ ms.locfileid: "71250822"
   다음과 같은 대화 상자가 표시됩니다. **‘GrpcGreeter’에서 빌드 및 디버그에 필요한 자산이 누락되었습니다. 추가할까요?**
 * **예**를 선택합니다.
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 터미널에서 다음 명령을 실행합니다.
 
@@ -107,7 +107,7 @@ Visual Studio에서 **파일** > **열기**를 선택한 다음 *GrpcGreeter.sln
 
 * `dotnet run`을 사용하여 명령줄에서 gRPC Greeter 프로젝트 *GrpcGreeter*를 실행합니다.
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 * `dotnet run`을 사용하여 명령줄에서 gRPC Greeter 프로젝트 *GrpcGreeter*를 실행합니다.
 
@@ -150,7 +150,7 @@ info: Microsoft.Hosting.Lifetime[0]
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * [통합 터미널](https://code.visualstudio.com/docs/editor/integrated-terminal)을 엽니다.
-* 디렉터리(`cd`)를 프로젝트를 포함하는 폴더로 변경합니다.
+* 프로젝트를 포함할 폴더로 디렉터리를 변경(`cd`)합니다.
 * 다음 명령을 실행합니다.
 
   ```dotnetcli
@@ -158,7 +158,7 @@ info: Microsoft.Hosting.Lifetime[0]
   code -r GrpcGreeterClient
   ```
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 [Mac용 Visual Studio를 사용하여 macOS에서 완전한 .NET Core 솔루션 빌드](/dotnet/core/tutorials/using-on-mac-vs-full-solution)의 지침에 따라 *GrpcGreeterClient*라는 이름의 콘솔 앱을 만듭니다.
 
@@ -206,7 +206,7 @@ dotnet add GrpcGreeterClient.csproj package Google.Protobuf
 dotnet add GrpcGreeterClient.csproj package Grpc.Tools
 ```
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 * **Solution Pad** > **패키지 추가**에서 **패키지** 폴더를 마우스 오른쪽 단추로 클릭합니다.
 * 검색 상자에 **Grpc.Net.Client**를 입력합니다.
@@ -229,7 +229,7 @@ dotnet add GrpcGreeterClient.csproj package Grpc.Tools
 
   *GrpcGreeterClient.csproj* 파일을 선택합니다.
 
-  # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+  # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
   프로젝트를 마우스 오른쪽 단추로 클릭하고 **도구** > **파일 편집**을 선택합니다.
 
@@ -277,7 +277,7 @@ Greeter 클라이언트가 비동기 `SayHello` 메서드를 호출합니다. `S
 * 클라이언트를 시작합니다.
 
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 * Greeter 서비스를 시작합니다.
 * 클라이언트를 시작합니다.
@@ -314,6 +314,8 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 
 > [!NOTE]
 > 이 문서의 코드에는 gRPC 서비스 보호를 위해 ASP.NET Core HTTPS 개발 인증서가 필요합니다. 클라이언트가 `The remote certificate is invalid according to the validation procedure.`라는 메시지와 함께 실패하는 경우에는 개발 인증서를 신뢰할 수 없습니다. 이 문제의 해결 지침은 [Windows 및 macOS에서의 ASP.NET Core HTTPS 개발 인증서 신뢰](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos)를 참조하세요.
+
+[!INCLUDE[](~/includes/gRPCazure.md)]
 
 ### <a name="next-steps"></a>다음 단계
 

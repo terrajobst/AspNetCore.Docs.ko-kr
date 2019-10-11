@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/18/2019
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: 12665fb2e7a9c75747f5c83129a617aea6adfbbf
-ms.sourcegitcommit: e644258c95dd50a82284f107b9bf3becbc43b2b2
+ms.openlocfilehash: 64503ed55438b24f2d3d87092107408ddcb515d7
+ms.sourcegitcommit: fcdf9aaa6c45c1a926bd870ed8f893bdb4935152
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/26/2019
-ms.locfileid: "71317702"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72165269"
 ---
 # <a name="docker-images-for-aspnet-core"></a>ASP.NET Core의 Docker 이미지
 
@@ -19,7 +19,7 @@ ms.locfileid: "71317702"
 
 이 자습서에서는 다음을 수행했습니다.
 > [!div class="checklist"]
-> * Microsoft .NET Core Docker 이미지에 대해 알아보기 
+> * Microsoft .NET Core Docker 이미지에 대해 알아보기
 > * ASP.NET Core 샘플 앱 다운로드
 > * 샘플 앱을 로컬로 실행
 > * Linux 컨테이너에서 샘플 앱 실행
@@ -36,13 +36,21 @@ ms.locfileid: "71317702"
 
   샘플에서는 앱을 빌드하는 데 이 이미지를 사용합니다. 이미지는 CLI(명령줄 도구)가 포함된 .NET Core SDK를 포함합니다. 이미지는 로컬 개발, 디버깅 및 유닛 테스트에 최적화되어 있습니다. 개발 및 컴파일용으로 설치된 도구는 이 이미지를 비교적 큰 이미지로 만듭니다. 
 
-* `dotnet/core/aspnet` 
+* `dotnet/core/aspnet`
 
    샘플에서는 앱을 실행하는 데 이 이미지를 사용합니다. 이 이미지는 ASP.NET Core 런타임 및 라이브러리를 포함하며 프로덕션에서 실행 중인 앱에 최적화되어 있습니다. 배포 및 앱 시작 속도를 위해 디자인된 이 이미지는 비교적 작기 때문에 Docker 레지스트리에서 Docker 호스트까지 네트워크 성능이 최적화됩니다. 앱을 실행하는 데 필요한 이진 파일 및 콘텐츠만 컨테이너에 복사됩니다. 콘텐츠를 실행할 준비가 되면 `Docker run`부터 앱 시작까지 가장 빠른 시간에 수행할 수 있습니다. 동적 코드 컴파일은 Docker 모델에 필요하지 않습니다.
 
 ## <a name="prerequisites"></a>전제 조건
+::: moniker range="< aspnetcore-3.0"
+
+* [.NET Core 2.2 SDK](https://www.microsoft.com/net/core)
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
 
 * [.NET Core SDK 3.0](https://dotnet.microsoft.com/download)
+
+::: moniker-end
 
 * Docker 클라이언트 18.03 이상
 
@@ -168,6 +176,8 @@ ms.locfileid: "71317702"
 
 Docker 컨테이너 내에서 수동으로 게시된 애플리케이션을 사용하려면 새 Dockerfile을 만들고 `docker build .` 명령을 사용하여 컨테이너를 빌드합니다.
 
+::: moniker range="< aspnetcore-3.0"
+
 ```console
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
 WORKDIR /app
@@ -200,6 +210,51 @@ COPY --from=build /app/aspnetapp/out ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
+
+```console
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
+WORKDIR /app
+COPY published/aspnetapp.dll ./
+ENTRYPOINT ["dotnet", "aspnetapp.dll"]
+```
+
+### <a name="the-dockerfile"></a>Dockerfile
+
+이전에 실행한 `docker build` 명령에서 사용되는 *Dockerfile*은 다음과 같습니다.  이 섹션에서 빌드 및 배포하기 위해 사용한 것과 동일한 방식으로 `dotnet publish`를 사용합니다.  
+
+```dockerfile
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
+WORKDIR /app
+
+# copy csproj and restore as distinct layers
+COPY *.sln .
+COPY aspnetapp/*.csproj ./aspnetapp/
+RUN dotnet restore
+
+# copy everything else and build app
+COPY aspnetapp/. ./aspnetapp/
+WORKDIR /app/aspnetapp
+RUN dotnet publish -c Release -o out
+
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
+WORKDIR /app
+COPY --from=build /app/aspnetapp/out ./
+ENTRYPOINT ["dotnet", "aspnetapp.dll"]
+```
+
+::: moniker-end
+
+```console
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
+WORKDIR /app
+COPY published/aspnetapp.dll ./
+ENTRYPOINT ["dotnet", "aspnetapp.dll"]
+```
+
 ## <a name="additional-resources"></a>추가 자료
 
 * [Docker 빌드 명령](https://docs.docker.com/engine/reference/commandline/build)
@@ -210,15 +265,6 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 * [Debugging with Visual Studio Code](https://code.visualstudio.com/docs/nodejs/debugging-recipes#_debug-nodejs-in-docker-containers)(Visual Studio Code를 사용한 디버깅) 
 
 ## <a name="next-steps"></a>다음 단계
-
-이 자습서에서는 다음을 수행했습니다.
-> [!div class="checklist"]
-> * Microsoft .NET Core Docker 이미지에 대해 알아보기 
-> * ASP.NET Core 샘플 앱 다운로드
-> * 샘플 앱을 로컬로 실행
-> * Linux 컨테이너에서 샘플 앱 실행
-> * Windows 컨테이너에서 샘플 실행
-> * 수동으로 빌드 및 배포
 
 샘플 앱이 포함된 Git 리포지토리도 문서를 포함합니다. 리포지토리에서 사용 가능한 리소스의 개요를 보려면 [README 파일](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/README.md)을 참조하세요. 특히, HTTPS를 구현하는 방법을 알아봅니다.
 
