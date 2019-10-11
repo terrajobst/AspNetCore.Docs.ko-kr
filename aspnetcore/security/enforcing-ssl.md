@@ -1,144 +1,208 @@
 ---
 title: ASP.NET Core에서 HTTPS 적용
 author: rick-anderson
-description: ASP.NET Core 웹 앱에 HTTPS/TLS를 요구 하는 방법에 알아봅니다.
+description: ASP.NET Core 웹 앱에서 HTTPS/TLS를 요구 하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/01/2018
+ms.date: 09/14/2019
 uid: security/enforcing-ssl
-ms.openlocfilehash: 08ce50775d1b5348cb0528a1724cec2e5c72dae2
-ms.sourcegitcommit: 4ef0362ef8b6e5426fc5af18f22734158fe587e1
+ms.openlocfilehash: 044e9d594fa037214d80898e3ecc420d80a6f869
+ms.sourcegitcommit: 73a451e9a58ac7102f90b608d661d8c23dd9bbaf
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67152901"
+ms.lasthandoff: 10/08/2019
+ms.locfileid: "72037625"
 ---
-# <a name="enforce-https-in-aspnet-core"></a><span data-ttu-id="11185-103">ASP.NET Core에서 HTTPS 적용</span><span class="sxs-lookup"><span data-stu-id="11185-103">Enforce HTTPS in ASP.NET Core</span></span>
+# <a name="enforce-https-in-aspnet-core"></a><span data-ttu-id="af881-103">ASP.NET Core에서 HTTPS 적용</span><span class="sxs-lookup"><span data-stu-id="af881-103">Enforce HTTPS in ASP.NET Core</span></span>
 
-<span data-ttu-id="11185-104">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="11185-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+<span data-ttu-id="af881-104">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="af881-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
-<span data-ttu-id="11185-105">이 문서에서는 다음과 같은 내용을 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="11185-105">This document shows how to:</span></span>
+<span data-ttu-id="af881-105">이 문서에서는 다음과 같은 내용을 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="af881-105">This document shows how to:</span></span>
 
-* <span data-ttu-id="11185-106">모든 요청에 대 한 HTTPS가 필요 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-106">Require HTTPS for all requests.</span></span>
-* <span data-ttu-id="11185-107">모든 HTTP 요청을 HTTPS로 리디렉션하는 방법.</span><span class="sxs-lookup"><span data-stu-id="11185-107">Redirect all HTTP requests to HTTPS.</span></span>
+* <span data-ttu-id="af881-106">모든 요청에 대해 HTTPS를 요구 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-106">Require HTTPS for all requests.</span></span>
+* <span data-ttu-id="af881-107">모든 HTTP 요청을 HTTPS로 리디렉션합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-107">Redirect all HTTP requests to HTTPS.</span></span>
 
-<span data-ttu-id="11185-108">API가 없습니다. 첫 번째 요청 시 중요 한 데이터를 보낸 클라이언트를 방지할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-108">No API can prevent a client from sending sensitive data on the first request.</span></span>
-
-::: moniker range="< aspnetcore-3.0"
-
-> [!WARNING]
-> ## <a name="api-projects"></a><span data-ttu-id="11185-109">API 프로젝트</span><span class="sxs-lookup"><span data-stu-id="11185-109">API projects</span></span>
->
-> <span data-ttu-id="11185-110">수행할 **되지** 사용 하 여 [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) 중요 한 정보를 수신 하는 Web Api에서 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-110">Do **not** use [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) on Web APIs that receive sensitive information.</span></span> <span data-ttu-id="11185-111">`RequireHttpsAttribute` 브라우저는 HTTP에서 HTTPS로 리디렉션하 HTTP 상태 코드를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-111">`RequireHttpsAttribute` uses HTTP status codes to redirect browsers from HTTP to HTTPS.</span></span> <span data-ttu-id="11185-112">API 클라이언트 이해 하지 못하거나 HTTP에서 HTTPS로 리디렉션 준수 될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-112">API clients may not understand or obey redirects from HTTP to HTTPS.</span></span> <span data-ttu-id="11185-113">이러한 클라이언트는 HTTP를 통해 정보를 보낼 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-113">Such clients may send information over HTTP.</span></span> <span data-ttu-id="11185-114">Web Api을 수행 해야합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-114">Web APIs should either:</span></span>
->
-> * <span data-ttu-id="11185-115">HTTP에서 수신 대기할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-115">Not listen on HTTP.</span></span>
-> * <span data-ttu-id="11185-116">상태 코드 400 (잘못 된 요청)를 사용 하 여 연결을 닫고 요청을 제공 하지 마십시오.</span><span class="sxs-lookup"><span data-stu-id="11185-116">Close the connection with status code 400 (Bad Request) and not serve the request.</span></span>
-::: moniker-end
+<span data-ttu-id="af881-108">API가 없으면 클라이언트가 첫 번째 요청에서 중요 한 데이터를 전송 하지 못할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-108">No API can prevent a client from sending sensitive data on the first request.</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
 > [!WARNING]
-> ## <a name="api-projects"></a><span data-ttu-id="11185-117">API 프로젝트</span><span class="sxs-lookup"><span data-stu-id="11185-117">API projects</span></span>
+> ## <a name="api-projects"></a><span data-ttu-id="af881-109">API 프로젝트</span><span class="sxs-lookup"><span data-stu-id="af881-109">API projects</span></span>
 >
-> <span data-ttu-id="11185-118">수행할 **되지** 사용 하 여 [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) 중요 한 정보를 수신 하는 Web Api에서 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-118">Do **not** use [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) on Web APIs that receive sensitive information.</span></span> <span data-ttu-id="11185-119">`RequireHttpsAttribute` 브라우저는 HTTP에서 HTTPS로 리디렉션하 HTTP 상태 코드를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-119">`RequireHttpsAttribute` uses HTTP status codes to redirect browsers from HTTP to HTTPS.</span></span> <span data-ttu-id="11185-120">API 클라이언트 이해 하지 못하거나 HTTP에서 HTTPS로 리디렉션 준수 될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-120">API clients may not understand or obey redirects from HTTP to HTTPS.</span></span> <span data-ttu-id="11185-121">이러한 클라이언트는 HTTP를 통해 정보를 보낼 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-121">Such clients may send information over HTTP.</span></span> <span data-ttu-id="11185-122">Web Api을 수행 해야합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-122">Web APIs should either:</span></span>
+> <span data-ttu-id="af881-110">중요 한 정보를 수신 하는 웹 Api에 [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) 를 사용 **하지** 마세요.</span><span class="sxs-lookup"><span data-stu-id="af881-110">Do **not** use [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) on Web APIs that receive sensitive information.</span></span> <span data-ttu-id="af881-111">`RequireHttpsAttribute`은 HTTP 상태 코드를 사용 하 여 HTTP에서 HTTPS로 브라우저를 리디렉션합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-111">`RequireHttpsAttribute` uses HTTP status codes to redirect browsers from HTTP to HTTPS.</span></span> <span data-ttu-id="af881-112">API 클라이언트는 HTTP에서 HTTPS로의 리디렉션을 인식 하거나 준수 하지 않을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-112">API clients may not understand or obey redirects from HTTP to HTTPS.</span></span> <span data-ttu-id="af881-113">이러한 클라이언트는 HTTP를 통해 정보를 보낼 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-113">Such clients may send information over HTTP.</span></span> <span data-ttu-id="af881-114">웹 Api는 다음 중 하나를 수행 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-114">Web APIs should either:</span></span>
 >
-> * <span data-ttu-id="11185-123">HTTP에서 수신 대기할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-123">Not listen on HTTP.</span></span>
-> * <span data-ttu-id="11185-124">상태 코드 400 (잘못 된 요청)를 사용 하 여 연결을 닫고 요청을 제공 하지 마십시오.</span><span class="sxs-lookup"><span data-stu-id="11185-124">Close the connection with status code 400 (Bad Request) and not serve the request.</span></span>
+> * <span data-ttu-id="af881-115">HTTP에서 수신 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-115">Not listen on HTTP.</span></span>
+> * <span data-ttu-id="af881-116">상태 코드 400 (잘못 된 요청)이 포함 된 연결을 닫고 요청을 제공 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-116">Close the connection with status code 400 (Bad Request) and not serve the request.</span></span>
 >
-> ## <a name="hsts-and-api-projects"></a><span data-ttu-id="11185-125">HSTS 및 API 프로젝트</span><span class="sxs-lookup"><span data-stu-id="11185-125">HSTS and API projects</span></span>
+> ## <a name="hsts-and-api-projects"></a><span data-ttu-id="af881-117">HSTS 및 API 프로젝트</span><span class="sxs-lookup"><span data-stu-id="af881-117">HSTS and API projects</span></span>
 >
-> <span data-ttu-id="11185-126">기본 API 프로젝트를 포함 하지 마세요 [HSTS](#hsts) HSTS는 일반적으로 브라우저 유일한 명령 때문입니다.</span><span class="sxs-lookup"><span data-stu-id="11185-126">The default API projects don't include [HSTS](#hsts) because HSTS is generally a browser only instruction.</span></span> <span data-ttu-id="11185-127">휴대폰 또는 데스크톱 앱의 경우와 같은 다른 호출자 마십시오 **되지** 지침을 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="11185-127">Other callers, such as phone or desktop apps, do **not** obey the instruction.</span></span> <span data-ttu-id="11185-128">브라우저 내 에서도 단일 HTTP 통해 API에 인증 된 호출에 위험 안전 하지 않은 네트워크.</span><span class="sxs-lookup"><span data-stu-id="11185-128">Even within browsers, a single authenticated call to an API over HTTP has risks on insecure networks.</span></span> <span data-ttu-id="11185-129">만 수신 하 고 HTTPS를 통해 응답 API 프로젝트를 구성 하는 보안 방법이입니다.</span><span class="sxs-lookup"><span data-stu-id="11185-129">The secure approach is to configure API projects to only listen to and respond over HTTPS.</span></span>
+> <span data-ttu-id="af881-118">HSTS는 일반적으로 브라우저 전용 명령 이므로 기본 API 프로젝트는 [Hsts](#hsts) 를 포함 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-118">The default API projects don't include [HSTS](#hsts) because HSTS is generally a browser only instruction.</span></span> <span data-ttu-id="af881-119">전화 또는 데스크톱 앱과 같은 다른 호출자는 지침을 따르지 **않습니다** .</span><span class="sxs-lookup"><span data-stu-id="af881-119">Other callers, such as phone or desktop apps, do **not** obey the instruction.</span></span> <span data-ttu-id="af881-120">브라우저 내 에서도 HTTP를 통한 API에 대 한 인증 된 단일 호출은 안전 하지 않은 네트워크에서 위험이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-120">Even within browsers, a single authenticated call to an API over HTTP has risks on insecure networks.</span></span> <span data-ttu-id="af881-121">안전한 방법은 HTTPS를 통해서만 수신 대기 하 고 응답 하도록 API 프로젝트를 구성 하는 것입니다.</span><span class="sxs-lookup"><span data-stu-id="af881-121">The secure approach is to configure API projects to only listen to and respond over HTTPS.</span></span>
 
 ::: moniker-end
 
-## <a name="require-https"></a><span data-ttu-id="11185-130">HTTPS 필요</span><span class="sxs-lookup"><span data-stu-id="11185-130">Require HTTPS</span></span>
+::: moniker range="<= aspnetcore-2.2"
 
-::: moniker range=">= aspnetcore-2.1"
+> [!WARNING]
+> ## <a name="api-projects"></a><span data-ttu-id="af881-122">API 프로젝트</span><span class="sxs-lookup"><span data-stu-id="af881-122">API projects</span></span>
+>
+> <span data-ttu-id="af881-123">중요 한 정보를 수신 하는 웹 Api에 [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) 를 사용 **하지** 마세요.</span><span class="sxs-lookup"><span data-stu-id="af881-123">Do **not** use [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) on Web APIs that receive sensitive information.</span></span> <span data-ttu-id="af881-124">`RequireHttpsAttribute`은 HTTP 상태 코드를 사용 하 여 HTTP에서 HTTPS로 브라우저를 리디렉션합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-124">`RequireHttpsAttribute` uses HTTP status codes to redirect browsers from HTTP to HTTPS.</span></span> <span data-ttu-id="af881-125">API 클라이언트는 HTTP에서 HTTPS로의 리디렉션을 인식 하거나 준수 하지 않을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-125">API clients may not understand or obey redirects from HTTP to HTTPS.</span></span> <span data-ttu-id="af881-126">이러한 클라이언트는 HTTP를 통해 정보를 보낼 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-126">Such clients may send information over HTTP.</span></span> <span data-ttu-id="af881-127">웹 Api는 다음 중 하나를 수행 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-127">Web APIs should either:</span></span>
+>
+> * <span data-ttu-id="af881-128">HTTP에서 수신 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-128">Not listen on HTTP.</span></span>
+> * <span data-ttu-id="af881-129">상태 코드 400 (잘못 된 요청)이 포함 된 연결을 닫고 요청을 제공 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-129">Close the connection with status code 400 (Bad Request) and not serve the request.</span></span>
 
-<span data-ttu-id="11185-131">ASP.NET Core는 프로덕션 웹 앱 호출을 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-131">We recommend that production ASP.NET Core web apps call:</span></span>
+::: moniker-end
 
-* <span data-ttu-id="11185-132">HTTPS 리디렉션을 미들웨어 (<xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection*>) HTTP 요청을 HTTPS로 리디렉션할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-132">HTTPS Redirection Middleware (<xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection*>) to redirect HTTP requests to HTTPS.</span></span>
-* <span data-ttu-id="11185-133">HSTS 미들웨어 ([UseHsts](#http-strict-transport-security-protocol-hsts)) 클라이언트로 HTTP 엄격한 전송 보안 프로토콜 (HSTS) 헤더를 보내도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-133">HSTS Middleware ([UseHsts](#http-strict-transport-security-protocol-hsts)) to send HTTP Strict Transport Security Protocol (HSTS) headers to clients.</span></span>
+## <a name="require-https"></a><span data-ttu-id="af881-130">HTTPS 필요</span><span class="sxs-lookup"><span data-stu-id="af881-130">Require HTTPS</span></span>
 
-> [!NOTE]
-> <span data-ttu-id="11185-134">역방향 프록시 구성에 배포 된 앱 프록시 연결 보안 (HTTPS)을 처리할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-134">Apps deployed in a reverse proxy configuration allow the proxy to handle connection security (HTTPS).</span></span> <span data-ttu-id="11185-135">프록시는 또한 HTTPS 간의 리디렉션으로 처리, 경우 HTTPS 리디렉션을 미들웨어를 사용할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-135">If the proxy also handles HTTPS redirection, there's no need to use HTTPS Redirection Middleware.</span></span> <span data-ttu-id="11185-136">프록시 서버도 HSTS 헤더를 작성을 처리 하는 경우 (예를 들어 [이상에서 IIS 10.0 (1709) 네이티브 HSTS 지원](/iis/get-started/whats-new-in-iis-10-version-1709/iis-10-version-1709-hsts#iis-100-version-1709-native-hsts-support)), HSTS 미들웨어는 앱에서 필요 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-136">If the proxy server also handles writing HSTS headers (for example, [native HSTS support in IIS 10.0 (1709) or later](/iis/get-started/whats-new-in-iis-10-version-1709/iis-10-version-1709-hsts#iis-100-version-1709-native-hsts-support)), HSTS Middleware isn't required by the app.</span></span> <span data-ttu-id="11185-137">자세한 내용은 [옵트 아웃 HTTPS/HSTS의 프로젝트 생성 시](#opt-out-of-httpshsts-on-project-creation)합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-137">For more information, see [Opt-out of HTTPS/HSTS on project creation](#opt-out-of-httpshsts-on-project-creation).</span></span>
+<span data-ttu-id="af881-131">프로덕션 ASP.NET Core 웹 앱을 사용 하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-131">We recommend that production ASP.NET Core web apps use:</span></span>
 
-### <a name="usehttpsredirection"></a><span data-ttu-id="11185-138">UseHttpsRedirection</span><span class="sxs-lookup"><span data-stu-id="11185-138">UseHttpsRedirection</span></span>
-
-<span data-ttu-id="11185-139">다음 코드 호출 `UseHttpsRedirection` 에 `Startup` 클래스:</span><span class="sxs-lookup"><span data-stu-id="11185-139">The following code calls `UseHttpsRedirection` in the `Startup` class:</span></span>
-
-[!code-csharp[](enforcing-ssl/sample/Startup.cs?name=snippet1&highlight=13)]
-
-<span data-ttu-id="11185-140">위의 강조 표시 된 코드:</span><span class="sxs-lookup"><span data-stu-id="11185-140">The preceding highlighted code:</span></span>
-
-* <span data-ttu-id="11185-141">기본값을 사용 하 여 [HttpsRedirectionOptions.RedirectStatusCode](/dotnet/api/microsoft.aspnetcore.httpspolicy.httpsredirectionoptions.redirectstatuscode) ([Status307TemporaryRedirect](/dotnet/api/microsoft.aspnetcore.http.statuscodes.status307temporaryredirect)).</span><span class="sxs-lookup"><span data-stu-id="11185-141">Uses the default [HttpsRedirectionOptions.RedirectStatusCode](/dotnet/api/microsoft.aspnetcore.httpspolicy.httpsredirectionoptions.redirectstatuscode) ([Status307TemporaryRedirect](/dotnet/api/microsoft.aspnetcore.http.statuscodes.status307temporaryredirect)).</span></span>
-* <span data-ttu-id="11185-142">기본값을 사용 하 여 [HttpsRedirectionOptions.HttpsPort](/dotnet/api/microsoft.aspnetcore.httpspolicy.httpsredirectionoptions.httpsport) 의해 재정의 되지 않는 (null)은 `ASPNETCORE_HTTPS_PORT` 환경 변수 또는 [IServerAddressesFeature](/dotnet/api/microsoft.aspnetcore.hosting.server.features.iserveraddressesfeature)합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-142">Uses the default [HttpsRedirectionOptions.HttpsPort](/dotnet/api/microsoft.aspnetcore.httpspolicy.httpsredirectionoptions.httpsport) (null) unless overridden by the `ASPNETCORE_HTTPS_PORT` environment variable or [IServerAddressesFeature](/dotnet/api/microsoft.aspnetcore.hosting.server.features.iserveraddressesfeature).</span></span>
-
-<span data-ttu-id="11185-143">영구 리디렉션 보다는 임시 리디렉션을 사용 하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-143">We recommend using temporary redirects rather than permanent redirects.</span></span> <span data-ttu-id="11185-144">링크 캐싱을 개발 환경에서 불안정 한 동작이 발생할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-144">Link caching can cause unstable behavior in development environments.</span></span> <span data-ttu-id="11185-145">비 개발 환경에서 앱이 영구 리디렉션 상태 코드를 전송 하려는 경우 참조를 [프로덕션 환경에서 영구적인 리디렉션을 구성](#configure-permanent-redirects-in-production) 섹션입니다.</span><span class="sxs-lookup"><span data-stu-id="11185-145">If you prefer to send a permanent redirect status code when the app is in a non-Development environment, see the [Configure permanent redirects in production](#configure-permanent-redirects-in-production) section.</span></span> <span data-ttu-id="11185-146">사용 하는 것이 좋습니다 [HSTS](#http-strict-transport-security-protocol-hsts) 만 리소스를 보호 하는 클라이언트에 알릴 수 요청 (프로덕션)에 앱에 전송 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-146">We recommend using [HSTS](#http-strict-transport-security-protocol-hsts) to signal to clients that only secure resource requests should be sent to the app (only in production).</span></span>
-
-### <a name="port-configuration"></a><span data-ttu-id="11185-147">포트 구성</span><span class="sxs-lookup"><span data-stu-id="11185-147">Port configuration</span></span>
-
-<span data-ttu-id="11185-148">포트를 안전 하지 않은 요청을 HTTPS로 리디렉션하는 미들웨어에 대 한 사용할 수 있어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-148">A port must be available for the middleware to redirect an insecure request to HTTPS.</span></span> <span data-ttu-id="11185-149">사용 가능한 포트가 없는 경우:</span><span class="sxs-lookup"><span data-stu-id="11185-149">If no port is available:</span></span>
-
-* <span data-ttu-id="11185-150">HTTPS로 리디렉션 발생 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-150">Redirection to HTTPS doesn't occur.</span></span>
-* <span data-ttu-id="11185-151">미들웨어 "리디렉션에 대 한 https 포트를 확인 하지 못했습니다." 경고를 기록 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-151">The middleware logs the warning "Failed to determine the https port for redirect."</span></span>
-
-<span data-ttu-id="11185-152">다음 방법 중 하나를 사용 하 여 HTTPS 포트를 지정 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-152">Specify the HTTPS port using any of the following approaches:</span></span>
-
-* <span data-ttu-id="11185-153">설정할 [HttpsRedirectionOptions.HttpsPort](#options)합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-153">Set [HttpsRedirectionOptions.HttpsPort](#options).</span></span>
-* <span data-ttu-id="11185-154">설정 된 `ASPNETCORE_HTTPS_PORT` 환경 변수 또는 [https_port 웹 호스트 구성 설정을](xref:fundamentals/host/web-host#https-port):</span><span class="sxs-lookup"><span data-stu-id="11185-154">Set the `ASPNETCORE_HTTPS_PORT` environment variable or [https_port Web Host configuration setting](xref:fundamentals/host/web-host#https-port):</span></span>
-
-  <span data-ttu-id="11185-155">**키**: `https_port`</span><span class="sxs-lookup"><span data-stu-id="11185-155">**Key**: `https_port`</span></span>  
-  <span data-ttu-id="11185-156">**형식**: *string*</span><span class="sxs-lookup"><span data-stu-id="11185-156">**Type**: *string*</span></span>  
-  <span data-ttu-id="11185-157">**기본값**: 기본값은 설정되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-157">**Default**: A default value isn't set.</span></span>  
-  <span data-ttu-id="11185-158">**설정 방법**: `UseSetting`</span><span class="sxs-lookup"><span data-stu-id="11185-158">**Set using**: `UseSetting`</span></span>  
-  <span data-ttu-id="11185-159">**환경 변수**: `<PREFIX_>HTTPS_PORT` (접두사 `ASPNETCORE_` 사용 하는 경우는 [웹 호스트](xref:fundamentals/host/web-host).)</span><span class="sxs-lookup"><span data-stu-id="11185-159">**Environment variable**: `<PREFIX_>HTTPS_PORT` (The prefix is `ASPNETCORE_` when using the [Web Host](xref:fundamentals/host/web-host).)</span></span>
-
-  <span data-ttu-id="11185-160">구성 하는 경우는 <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> 에서 `Program`:</span><span class="sxs-lookup"><span data-stu-id="11185-160">When configuring an <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> in `Program`:</span></span>
-
-  [!code-csharp[](enforcing-ssl/sample-snapshot/Program.cs?name=snippet_Program&highlight=10)]
-* <span data-ttu-id="11185-161">보안 체계를 사용 하 여 포트를 표시 합니다 `ASPNETCORE_URLS` 환경 변수입니다.</span><span class="sxs-lookup"><span data-stu-id="11185-161">Indicate a port with the secure scheme using the `ASPNETCORE_URLS` environment variable.</span></span> <span data-ttu-id="11185-162">환경 변수는 서버를 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-162">The environment variable configures the server.</span></span> <span data-ttu-id="11185-163">미들웨어는 HTTPS 포트를 통해 직접 검색 <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature>합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-163">The middleware indirectly discovers the HTTPS port via <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature>.</span></span> <span data-ttu-id="11185-164">역방향 프록시 배포에이 방법은 작동 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-164">This approach doesn't work in reverse proxy deployments.</span></span>
-* <span data-ttu-id="11185-165">개발에서에 HTTPS URL을 설정 *launchsettings.json*합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-165">In development, set an HTTPS URL in *launchsettings.json*.</span></span> <span data-ttu-id="11185-166">IIS Express를 사용 하는 경우에 HTTPS를 사용 하도록 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-166">Enable HTTPS when IIS Express is used.</span></span>
-* <span data-ttu-id="11185-167">공용 edge 배포에 대 한 HTTPS URL 끝점을 구성 [Kestrel](xref:fundamentals/servers/kestrel) 서버 또는 [HTTP.sys](xref:fundamentals/servers/httpsys) 서버.</span><span class="sxs-lookup"><span data-stu-id="11185-167">Configure an HTTPS URL endpoint for a public-facing edge deployment of [Kestrel](xref:fundamentals/servers/kestrel) server or [HTTP.sys](xref:fundamentals/servers/httpsys) server.</span></span> <span data-ttu-id="11185-168">만 **하나의 HTTPS 포트** 앱에서 사용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="11185-168">Only **one HTTPS port** is used by the app.</span></span> <span data-ttu-id="11185-169">미들웨어를 통해 포트 검색 <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature>합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-169">The middleware discovers the port via <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature>.</span></span>
+* <span data-ttu-id="af881-132">Https 리디렉션 미들웨어 (<xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection*>)-HTTP 요청을 HTTPS로 리디렉션합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-132">HTTPS Redirection Middleware (<xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection*>) to redirect HTTP requests to HTTPS.</span></span>
+* <span data-ttu-id="af881-133">클라이언트에 HSTS (HTTP Strict Transport Security Protocol) 헤더를 전송 하는 HSTS 미들웨어 ([Usehsts](#http-strict-transport-security-protocol-hsts))</span><span class="sxs-lookup"><span data-stu-id="af881-133">HSTS Middleware ([UseHsts](#http-strict-transport-security-protocol-hsts)) to send HTTP Strict Transport Security Protocol (HSTS) headers to clients.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="11185-170">역방향 프록시 구성에서 앱 실행 될 때 <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> 사용할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-170">When an app is run in a reverse proxy configuration, <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> isn't available.</span></span> <span data-ttu-id="11185-171">이 섹션에서 설명한 다른 방법 중 하나를 사용 하 여 포트를 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-171">Set the port using one of the other approaches described in this section.</span></span>
+> <span data-ttu-id="af881-134">역방향 프록시 구성에 배포 된 앱을 통해 프록시가 연결 보안 (HTTPS)을 처리할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-134">Apps deployed in a reverse proxy configuration allow the proxy to handle connection security (HTTPS).</span></span> <span data-ttu-id="af881-135">프록시가 HTTPS 리디렉션을 처리 하는 경우에는 HTTPS 리디렉션 미들웨어를 사용할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-135">If the proxy also handles HTTPS redirection, there's no need to use HTTPS Redirection Middleware.</span></span> <span data-ttu-id="af881-136">또한 프록시 서버에서 HSTS 헤더 쓰기를 처리 하는 경우 (예: [IIS 10.0 (1709) 이상에서 기본 hsts 지원](/iis/get-started/whats-new-in-iis-10-version-1709/iis-10-version-1709-hsts#iis-100-version-1709-native-hsts-support)) 앱에 Hsts 미들웨어가 필요 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-136">If the proxy server also handles writing HSTS headers (for example, [native HSTS support in IIS 10.0 (1709) or later](/iis/get-started/whats-new-in-iis-10-version-1709/iis-10-version-1709-hsts#iis-100-version-1709-native-hsts-support)), HSTS Middleware isn't required by the app.</span></span> <span data-ttu-id="af881-137">자세한 내용은 [프로젝트를 만들 때 HTTPS/HSTS 옵트아웃 (Opt out)](#opt-out-of-httpshsts-on-project-creation)을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="af881-137">For more information, see [Opt-out of HTTPS/HSTS on project creation](#opt-out-of-httpshsts-on-project-creation).</span></span>
 
-<span data-ttu-id="11185-172">Kestrel 또는 HTTP.sys를에 지 서버는 공용으로 사용 하면 둘 다에서 수신 대기 하도록 Kestrel 또는 HTTP.sys를 구성 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-172">When Kestrel or HTTP.sys is used as a public-facing edge server, Kestrel or HTTP.sys must be configured to listen on both:</span></span>
+### <a name="usehttpsredirection"></a><span data-ttu-id="af881-138">UseHttpsRedirection</span><span class="sxs-lookup"><span data-stu-id="af881-138">UseHttpsRedirection</span></span>
 
-* <span data-ttu-id="11185-173">클라이언트가 리디렉션되는 위치 보안 포트 (일반적으로 프로덕션 및 개발에서 5001 443).</span><span class="sxs-lookup"><span data-stu-id="11185-173">The secure port where the client is redirected (typically, 443 in production and 5001 in development).</span></span>
-* <span data-ttu-id="11185-174">안전 하지 않은 포트 (일반적으로 프로덕션 환경에서 80) 및 개발에는 5000입니다.</span><span class="sxs-lookup"><span data-stu-id="11185-174">The insecure port (typically, 80 in production and 5000 in development).</span></span>
+<span data-ttu-id="af881-139">다음 코드는 `Startup` 클래스에서 `UseHttpsRedirection`을 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-139">The following code calls `UseHttpsRedirection` in the `Startup` class:</span></span>
 
-<span data-ttu-id="11185-175">안전 하지 않은 포트는 안전 하지 않은 요청을 받고 보안 포트에 클라이언트를 리디렉션할 클라이언트 앱에 대 한 순서에서 액세스할 수 있어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-175">The insecure port must be accessible by the client in order for the app to receive an insecure request and redirect the client to the secure port.</span></span>
+::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="11185-176">자세한 내용은 [Kestrel 끝점 구성을](xref:fundamentals/servers/kestrel#endpoint-configuration) 또는 <xref:fundamentals/servers/httpsys>합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-176">For more information, see [Kestrel endpoint configuration](xref:fundamentals/servers/kestrel#endpoint-configuration) or <xref:fundamentals/servers/httpsys>.</span></span>
+[!code-csharp[](enforcing-ssl/sample-snapshot/3.x/Startup.cs?name=snippet1&highlight=14)]
 
-### <a name="deployment-scenarios"></a><span data-ttu-id="11185-177">배포 시나리오</span><span class="sxs-lookup"><span data-stu-id="11185-177">Deployment scenarios</span></span>
+::: moniker-end
 
-<span data-ttu-id="11185-178">클라이언트와 서버 간의 모든 방화벽 통신 포트가 트래픽에 대해 열려 있어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-178">Any firewall between the client and server must also have communication ports open for traffic.</span></span>
+::: moniker range="<= aspnetcore-2.2"
 
-<span data-ttu-id="11185-179">요청은 역방향 프록시 구성에서 전달 하는 경우 사용 하 여 [전달 된 헤더 미들웨어](xref:host-and-deploy/proxy-load-balancer) HTTPS 리디렉션을 미들웨어를 호출 하기 전에 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-179">If requests are forwarded in a reverse proxy configuration, use [Forwarded Headers Middleware](xref:host-and-deploy/proxy-load-balancer) before calling HTTPS Redirection Middleware.</span></span> <span data-ttu-id="11185-180">헤더 미들웨어 업데이트를 전달 합니다 `Request.Scheme`를 사용 하 여는 `X-Forwarded-Proto` 헤더입니다.</span><span class="sxs-lookup"><span data-stu-id="11185-180">Forwarded Headers Middleware updates the `Request.Scheme`, using the `X-Forwarded-Proto` header.</span></span> <span data-ttu-id="11185-181">미들웨어 허용 Uri 및 기타 보안 정책이 제대로 작동 하려면 리디렉션합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-181">The middleware permits redirect URIs and other security policies to work correctly.</span></span> <span data-ttu-id="11185-182">전달 된 헤더 미들웨어를 사용 하지 않는 경우 백 엔드 앱 올바른 스키마 수신 및 리디렉션 루프가 하지 않을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-182">When Forwarded Headers Middleware isn't used, the backend app might not receive the correct scheme and end up in a redirect loop.</span></span> <span data-ttu-id="11185-183">일반적인 최종 사용자 오류 메시지 리디렉션이 너무 많습니다. 발생 한 경우</span><span class="sxs-lookup"><span data-stu-id="11185-183">A common end user error message is that too many redirects have occurred.</span></span>
+[!code-csharp[](enforcing-ssl/sample-snapshot/2.x/Startup.cs?name=snippet1&highlight=13)]
 
-<span data-ttu-id="11185-184">Azure App Service에 배포할 때의 지침에 따라 [자습서: 기존 사용자 지정 SSL 인증서를 Azure Web Apps에 바인딩](/azure/app-service/app-service-web-tutorial-custom-ssl)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="11185-184">When deploying to Azure App Service, follow the guidance in [Tutorial: Bind an existing custom SSL certificate to Azure Web Apps](/azure/app-service/app-service-web-tutorial-custom-ssl).</span></span>
+::: moniker-end
 
-### <a name="options"></a><span data-ttu-id="11185-185">옵션</span><span class="sxs-lookup"><span data-stu-id="11185-185">Options</span></span>
+<span data-ttu-id="af881-140">앞에서 강조 표시 된 코드:</span><span class="sxs-lookup"><span data-stu-id="af881-140">The preceding highlighted code:</span></span>
 
-<span data-ttu-id="11185-186">다음 코드 호출을 강조 표시 [AddHttpsRedirection](/dotnet/api/microsoft.aspnetcore.builder.httpsredirectionservicesextensions.addhttpsredirection) 미들웨어 옵션을 구성 하려면:</span><span class="sxs-lookup"><span data-stu-id="11185-186">The following highlighted code calls [AddHttpsRedirection](/dotnet/api/microsoft.aspnetcore.builder.httpsredirectionservicesextensions.addhttpsredirection) to configure middleware options:</span></span>
+* <span data-ttu-id="af881-141">기본 [HttpsRedirectionOptions](/dotnet/api/microsoft.aspnetcore.httpspolicy.httpsredirectionoptions.redirectstatuscode) ([Status307TemporaryRedirect](/dotnet/api/microsoft.aspnetcore.http.statuscodes.status307temporaryredirect))를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-141">Uses the default [HttpsRedirectionOptions.RedirectStatusCode](/dotnet/api/microsoft.aspnetcore.httpspolicy.httpsredirectionoptions.redirectstatuscode) ([Status307TemporaryRedirect](/dotnet/api/microsoft.aspnetcore.http.statuscodes.status307temporaryredirect)).</span></span>
+* <span data-ttu-id="af881-142">@No__t-1 환경 변수 또는 [IServerAddressesFeature](/dotnet/api/microsoft.aspnetcore.hosting.server.features.iserveraddressesfeature)에 의해 재정의 되지 않는 한 기본 [HttpsRedirectionOptions](/dotnet/api/microsoft.aspnetcore.httpspolicy.httpsredirectionoptions.httpsport) (null)를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-142">Uses the default [HttpsRedirectionOptions.HttpsPort](/dotnet/api/microsoft.aspnetcore.httpspolicy.httpsredirectionoptions.httpsport) (null) unless overridden by the `ASPNETCORE_HTTPS_PORT` environment variable or [IServerAddressesFeature](/dotnet/api/microsoft.aspnetcore.hosting.server.features.iserveraddressesfeature).</span></span>
 
-[!code-csharp[](enforcing-ssl/sample/Startup.cs?name=snippet2&highlight=14-99)]
+<span data-ttu-id="af881-143">영구 리디렉션이 아닌 임시 리디렉션을 사용 하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-143">We recommend using temporary redirects rather than permanent redirects.</span></span> <span data-ttu-id="af881-144">링크 캐싱은 개발 환경에서 불안정 한 동작을 일으킬 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-144">Link caching can cause unstable behavior in development environments.</span></span> <span data-ttu-id="af881-145">앱이 개발 환경에 있지 않은 경우 영구 리디렉션 상태 코드를 보내려면 [프로덕션에서 영구 리디렉션 구성](#configure-permanent-redirects-in-production) 섹션을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="af881-145">If you prefer to send a permanent redirect status code when the app is in a non-Development environment, see the [Configure permanent redirects in production](#configure-permanent-redirects-in-production) section.</span></span> <span data-ttu-id="af881-146">[Hsts](#http-strict-transport-security-protocol-hsts) 를 사용 하 여 보안 리소스 요청만 앱에 전송 되어야 한다는 것을 클라이언트에 알리는 것이 좋습니다 (프로덕션 환경 에서만).</span><span class="sxs-lookup"><span data-stu-id="af881-146">We recommend using [HSTS](#http-strict-transport-security-protocol-hsts) to signal to clients that only secure resource requests should be sent to the app (only in production).</span></span>
 
-<span data-ttu-id="11185-187">호출 `AddHttpsRedirection` 값을 변경 하는 데 필요한 전용인 `HttpsPort` 또는 `RedirectStatusCode`합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-187">Calling `AddHttpsRedirection` is only necessary to change the values of `HttpsPort` or `RedirectStatusCode`.</span></span>
+### <a name="port-configuration"></a><span data-ttu-id="af881-147">포트 구성</span><span class="sxs-lookup"><span data-stu-id="af881-147">Port configuration</span></span>
 
-<span data-ttu-id="11185-188">위의 강조 표시 된 코드:</span><span class="sxs-lookup"><span data-stu-id="11185-188">The preceding highlighted code:</span></span>
+<span data-ttu-id="af881-148">미들웨어가 안전 하지 않은 요청을 HTTPS로 리디렉션하는 데 포트를 사용할 수 있어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-148">A port must be available for the middleware to redirect an insecure request to HTTPS.</span></span> <span data-ttu-id="af881-149">포트를 사용할 수 없는 경우:</span><span class="sxs-lookup"><span data-stu-id="af881-149">If no port is available:</span></span>
 
-* <span data-ttu-id="11185-189">집합 [HttpsRedirectionOptions.RedirectStatusCode](xref:Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionOptions.RedirectStatusCode*) 에 <xref:Microsoft.AspNetCore.Http.StatusCodes.Status307TemporaryRedirect>, 기본 값입니다.</span><span class="sxs-lookup"><span data-stu-id="11185-189">Sets [HttpsRedirectionOptions.RedirectStatusCode](xref:Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionOptions.RedirectStatusCode*) to <xref:Microsoft.AspNetCore.Http.StatusCodes.Status307TemporaryRedirect>, which is the default value.</span></span> <span data-ttu-id="11185-190">필드를 사용 합니다 <xref:Microsoft.AspNetCore.Http.StatusCodes> 클래스에 대 한 할당 `RedirectStatusCode`합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-190">Use the fields of the <xref:Microsoft.AspNetCore.Http.StatusCodes> class for assignments to `RedirectStatusCode`.</span></span>
-* <span data-ttu-id="11185-191">HTTPS 포트를 5001로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-191">Sets the HTTPS port to 5001.</span></span> <span data-ttu-id="11185-192">기본값은 443입니다.</span><span class="sxs-lookup"><span data-stu-id="11185-192">The default value is 443.</span></span>
+* <span data-ttu-id="af881-150">HTTPS로의 리디렉션이 발생 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-150">Redirection to HTTPS doesn't occur.</span></span>
+* <span data-ttu-id="af881-151">미들웨어는 "리디렉션을 위한 https 포트를 결정 하지 못했습니다." 경고를 기록 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-151">The middleware logs the warning "Failed to determine the https port for redirect."</span></span>
 
-#### <a name="configure-permanent-redirects-in-production"></a><span data-ttu-id="11185-193">프로덕션 환경에서 영구 리디렉션 구성</span><span class="sxs-lookup"><span data-stu-id="11185-193">Configure permanent redirects in production</span></span>
+<span data-ttu-id="af881-152">다음 방법 중 하나를 사용 하 여 HTTPS 포트를 지정 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-152">Specify the HTTPS port using any of the following approaches:</span></span>
 
-<span data-ttu-id="11185-194">미들웨어를 전송 하도록 기본값을 [Status307TemporaryRedirect](/dotnet/api/microsoft.aspnetcore.http.statuscodes.status307temporaryredirect) 모든 리디렉션을 사용 하 여 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-194">The middleware defaults to sending a [Status307TemporaryRedirect](/dotnet/api/microsoft.aspnetcore.http.statuscodes.status307temporaryredirect) with all redirects.</span></span> <span data-ttu-id="11185-195">비 개발 환경에서 앱이 영구 리디렉션 상태 코드를 전송 하려는 경우 미들웨어 옵션 구성 된 비 개발 환경에 대 한 조건부 검사를 래핑하십시오.</span><span class="sxs-lookup"><span data-stu-id="11185-195">If you prefer to send a permanent redirect status code when the app is in a non-Development environment, wrap the middleware options configuration in a conditional check for a non-Development environment.</span></span>
+* <span data-ttu-id="af881-153">[HttpsRedirectionOptions](#options)를 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-153">Set [HttpsRedirectionOptions.HttpsPort](#options).</span></span>
 
-<span data-ttu-id="11185-196">구성 하는 경우는 `IWebHostBuilder` 에 *Startup.cs*:</span><span class="sxs-lookup"><span data-stu-id="11185-196">When configuring an `IWebHostBuilder` in *Startup.cs*:</span></span>
+::: moniker range=">= aspnetcore-3.0"
+
+* <span data-ttu-id="af881-154">@No__t-0 [호스트 설정을](/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0#https_port)설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-154">Set the `https_port` [host setting](/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0#https_port):</span></span>
+
+  * <span data-ttu-id="af881-155">호스트 구성에서.</span><span class="sxs-lookup"><span data-stu-id="af881-155">In host configuration.</span></span>
+  * <span data-ttu-id="af881-156">@No__t-0 환경 변수를 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-156">By setting the `ASPNETCORE_HTTPS_PORT` environment variable.</span></span>
+  * <span data-ttu-id="af881-157">Appsettings에서 최상위 항목을 추가 *합니다. json*:</span><span class="sxs-lookup"><span data-stu-id="af881-157">By adding a top-level entry in *appsettings.json*:</span></span>
+
+    [!code-json[](enforcing-ssl/sample-snapshot/3.x/appsettings.json?highlight=2)]
+
+* <span data-ttu-id="af881-158">[ASPNETCORE_URLS 환경 변수](/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0#urls)를 사용 하 여 보안 체계가 있는 포트를 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-158">Indicate a port with the secure scheme using the [ASPNETCORE_URLS environment variable](/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0#urls).</span></span> <span data-ttu-id="af881-159">환경 변수는 서버를 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-159">The environment variable configures the server.</span></span> <span data-ttu-id="af881-160">미들웨어는 <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature>을 통해 HTTPS 포트를 간접적으로 검색 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-160">The middleware indirectly discovers the HTTPS port via <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature>.</span></span> <span data-ttu-id="af881-161">이 방법은 역방향 프록시 배포에서 작동 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-161">This approach doesn't work in reverse proxy deployments.</span></span>
+
+::: moniker-end
+
+::: moniker range="<= aspnetcore-2.2"
+
+* <span data-ttu-id="af881-162">@No__t-0 [호스트 설정을](xref:fundamentals/host/web-host#https-port)설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-162">Set the `https_port` [host setting](xref:fundamentals/host/web-host#https-port):</span></span>
+
+  * <span data-ttu-id="af881-163">호스트 구성에서.</span><span class="sxs-lookup"><span data-stu-id="af881-163">In host configuration.</span></span>
+  * <span data-ttu-id="af881-164">@No__t-0 환경 변수를 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-164">By setting the `ASPNETCORE_HTTPS_PORT` environment variable.</span></span>
+  * <span data-ttu-id="af881-165">Appsettings에서 최상위 항목을 추가 *합니다. json*:</span><span class="sxs-lookup"><span data-stu-id="af881-165">By adding a top-level entry in *appsettings.json*:</span></span>
+
+    [!code-json[](enforcing-ssl/sample-snapshot/2.x/appsettings.json?highlight=2)]
+
+* <span data-ttu-id="af881-166">[ASPNETCORE_URLS 환경 변수](xref:fundamentals/host/web-host#server-urls)를 사용 하 여 보안 체계가 있는 포트를 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-166">Indicate a port with the secure scheme using the [ASPNETCORE_URLS environment variable](xref:fundamentals/host/web-host#server-urls).</span></span> <span data-ttu-id="af881-167">환경 변수는 서버를 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-167">The environment variable configures the server.</span></span> <span data-ttu-id="af881-168">미들웨어는 <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature>을 통해 HTTPS 포트를 간접적으로 검색 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-168">The middleware indirectly discovers the HTTPS port via <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature>.</span></span> <span data-ttu-id="af881-169">이 방법은 역방향 프록시 배포에서 작동 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-169">This approach doesn't work in reverse proxy deployments.</span></span>
+
+::: moniker-end
+
+* <span data-ttu-id="af881-170">개발에서 *launchsettings. json*에 HTTPS URL을 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-170">In development, set an HTTPS URL in *launchsettings.json*.</span></span> <span data-ttu-id="af881-171">IIS Express 사용 하는 경우 HTTPS를 사용 하도록 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-171">Enable HTTPS when IIS Express is used.</span></span>
+
+* <span data-ttu-id="af881-172">[Kestrel](xref:fundamentals/servers/kestrel) 서버 또는 [http.sys](xref:fundamentals/servers/httpsys) 서버의 공용에 지 배포에 대 한 HTTPS URL 끝점을 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-172">Configure an HTTPS URL endpoint for a public-facing edge deployment of [Kestrel](xref:fundamentals/servers/kestrel) server or [HTTP.sys](xref:fundamentals/servers/httpsys) server.</span></span> <span data-ttu-id="af881-173">앱에서 **HTTPS 포트** 를 하나만 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-173">Only **one HTTPS port** is used by the app.</span></span> <span data-ttu-id="af881-174">미들웨어는 <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature>을 통해 포트를 검색 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-174">The middleware discovers the port via <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature>.</span></span>
+
+> [!NOTE]
+> <span data-ttu-id="af881-175">앱이 역방향 프록시 구성에서 실행 되는 경우 <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature>을 사용할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-175">When an app is run in a reverse proxy configuration, <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> isn't available.</span></span> <span data-ttu-id="af881-176">이 섹션에 설명 된 다른 방법 중 하나를 사용 하 여 포트를 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-176">Set the port using one of the other approaches described in this section.</span></span>
+
+### <a name="edge-deployments"></a><span data-ttu-id="af881-177">Edge 배포</span><span class="sxs-lookup"><span data-stu-id="af881-177">Edge deployments</span></span> 
+
+<span data-ttu-id="af881-178">Kestrel 또는 HTTP.SYS를 공용에 지 서버로 사용 하는 경우 Kestrel 또는 HTTP.SYS를 모두 수신 하도록 구성 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-178">When Kestrel or HTTP.sys is used as a public-facing edge server, Kestrel or HTTP.sys must be configured to listen on both:</span></span>
+
+* <span data-ttu-id="af881-179">클라이언트가 리디렉션되는 보안 포트 (일반적으로 프로덕션의 경우 443, 개발 중인 경우 5001)</span><span class="sxs-lookup"><span data-stu-id="af881-179">The secure port where the client is redirected (typically, 443 in production and 5001 in development).</span></span>
+* <span data-ttu-id="af881-180">안전 하지 않은 포트 (일반적으로 프로덕션의 경우 80, 개발에서 5000)</span><span class="sxs-lookup"><span data-stu-id="af881-180">The insecure port (typically, 80 in production and 5000 in development).</span></span>
+
+<span data-ttu-id="af881-181">응용 프로그램이 안전 하지 않은 요청을 받고 클라이언트를 보안 포트로 리디렉션하도록 클라이언트에서 보안 되지 않은 포트에 액세스할 수 있어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-181">The insecure port must be accessible by the client in order for the app to receive an insecure request and redirect the client to the secure port.</span></span>
+
+<span data-ttu-id="af881-182">자세한 내용은 [Kestrel 끝점 구성](xref:fundamentals/servers/kestrel#endpoint-configuration) 또는 <xref:fundamentals/servers/httpsys>을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="af881-182">For more information, see [Kestrel endpoint configuration](xref:fundamentals/servers/kestrel#endpoint-configuration) or <xref:fundamentals/servers/httpsys>.</span></span>
+
+### <a name="deployment-scenarios"></a><span data-ttu-id="af881-183">배포 시나리오</span><span class="sxs-lookup"><span data-stu-id="af881-183">Deployment scenarios</span></span>
+
+<span data-ttu-id="af881-184">클라이언트와 서버 간의 모든 방화벽에는 트래픽에 대 한 통신 포트도 열려 있어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-184">Any firewall between the client and server must also have communication ports open for traffic.</span></span>
+
+<span data-ttu-id="af881-185">역방향 프록시 구성에서 요청을 전달 하는 경우 HTTPS 리디렉션 미들웨어를 호출 하기 전에 [전달 된 헤더 미들웨어](xref:host-and-deploy/proxy-load-balancer) 를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-185">If requests are forwarded in a reverse proxy configuration, use [Forwarded Headers Middleware](xref:host-and-deploy/proxy-load-balancer) before calling HTTPS Redirection Middleware.</span></span> <span data-ttu-id="af881-186">전달 된 헤더 미들웨어는 `X-Forwarded-Proto` 헤더를 사용 하 여 `Request.Scheme`을 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-186">Forwarded Headers Middleware updates the `Request.Scheme`, using the `X-Forwarded-Proto` header.</span></span> <span data-ttu-id="af881-187">미들웨어는 리디렉션 Uri 및 기타 보안 정책이 제대로 작동 하도록 허용 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-187">The middleware permits redirect URIs and other security policies to work correctly.</span></span> <span data-ttu-id="af881-188">전달 된 헤더 미들웨어를 사용 하지 않는 경우 백엔드 앱은 올바른 체계를 수신 하지 않고 리디렉션 루프에서 종료 될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-188">When Forwarded Headers Middleware isn't used, the backend app might not receive the correct scheme and end up in a redirect loop.</span></span> <span data-ttu-id="af881-189">일반적인 최종 사용자 오류 메시지는 너무 많은 리디렉션이 발생 한 것입니다.</span><span class="sxs-lookup"><span data-stu-id="af881-189">A common end user error message is that too many redirects have occurred.</span></span>
+
+<span data-ttu-id="af881-190">Azure App Service에 배포 하는 경우 [Tutorial의 지침을 따르세요. 기존 사용자 지정 SSL 인증서를 Azure Web Apps에 바인딩](/azure/app-service/app-service-web-tutorial-custom-ssl)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="af881-190">When deploying to Azure App Service, follow the guidance in [Tutorial: Bind an existing custom SSL certificate to Azure Web Apps](/azure/app-service/app-service-web-tutorial-custom-ssl).</span></span>
+
+### <a name="options"></a><span data-ttu-id="af881-191">변수</span><span class="sxs-lookup"><span data-stu-id="af881-191">Options</span></span>
+
+<span data-ttu-id="af881-192">다음 강조 표시 된 코드는 [AddHttpsRedirection](/dotnet/api/microsoft.aspnetcore.builder.httpsredirectionservicesextensions.addhttpsredirection) 을 호출 하 여 미들웨어 옵션을 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-192">The following highlighted code calls [AddHttpsRedirection](/dotnet/api/microsoft.aspnetcore.builder.httpsredirectionservicesextensions.addhttpsredirection) to configure middleware options:</span></span>
+
+
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](enforcing-ssl/sample-snapshot/3.x/Startup.cs?name=snippet2&highlight=14-18)]
+
+::: moniker-end
+
+::: moniker range="<= aspnetcore-2.2"
+
+[!code-csharp[](enforcing-ssl/sample-snapshot/2.x/Startup.cs?name=snippet2&highlight=14-18)]
+
+::: moniker-end
+
+
+<span data-ttu-id="af881-193">@No__t-0을 호출 하는 것은 `HttpsPort` 또는 `RedirectStatusCode`의 값을 변경 하는 데만 필요 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-193">Calling `AddHttpsRedirection` is only necessary to change the values of `HttpsPort` or `RedirectStatusCode`.</span></span>
+
+<span data-ttu-id="af881-194">앞에서 강조 표시 된 코드:</span><span class="sxs-lookup"><span data-stu-id="af881-194">The preceding highlighted code:</span></span>
+
+* <span data-ttu-id="af881-195">[HttpsRedirectionOptions](xref:Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionOptions.RedirectStatusCode*) 를 기본값 인 <xref:Microsoft.AspNetCore.Http.StatusCodes.Status307TemporaryRedirect>로 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-195">Sets [HttpsRedirectionOptions.RedirectStatusCode](xref:Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionOptions.RedirectStatusCode*) to <xref:Microsoft.AspNetCore.Http.StatusCodes.Status307TemporaryRedirect>, which is the default value.</span></span> <span data-ttu-id="af881-196">@No__t-0 클래스의 필드를 사용 하 여 `RedirectStatusCode`로 지정 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-196">Use the fields of the <xref:Microsoft.AspNetCore.Http.StatusCodes> class for assignments to `RedirectStatusCode`.</span></span>
+* <span data-ttu-id="af881-197">HTTPS 포트를 5001으로 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-197">Sets the HTTPS port to 5001.</span></span> <span data-ttu-id="af881-198">기본값은 443입니다.</span><span class="sxs-lookup"><span data-stu-id="af881-198">The default value is 443.</span></span>
+
+#### <a name="configure-permanent-redirects-in-production"></a><span data-ttu-id="af881-199">프로덕션 환경에서 영구 리디렉션 구성</span><span class="sxs-lookup"><span data-stu-id="af881-199">Configure permanent redirects in production</span></span>
+
+<span data-ttu-id="af881-200">미들웨어는 기본적으로 모든 리디렉션을 사용 하 여 [Status307TemporaryRedirect](/dotnet/api/microsoft.aspnetcore.http.statuscodes.status307temporaryredirect) 를 보냅니다.</span><span class="sxs-lookup"><span data-stu-id="af881-200">The middleware defaults to sending a [Status307TemporaryRedirect](/dotnet/api/microsoft.aspnetcore.http.statuscodes.status307temporaryredirect) with all redirects.</span></span> <span data-ttu-id="af881-201">앱이 개발 환경에 있지 않은 경우 영구 리디렉션 상태 코드를 보내려면 비 개발 환경에 대 한 조건부 검사에서 미들웨어 옵션 구성을 래핑합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-201">If you prefer to send a permanent redirect status code when the app is in a non-Development environment, wrap the middleware options configuration in a conditional check for a non-Development environment.</span></span>
+
+::: moniker range=">= aspnetcore-3.0"
+
+<span data-ttu-id="af881-202">*Startup.cs*에서 서비스를 구성 하는 경우:</span><span class="sxs-lookup"><span data-stu-id="af881-202">When configuring services in *Startup.cs*:</span></span>
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    // IWebHostEnvironment (stored in _env) is injected into the Startup class.
+    if (!_env.IsDevelopment())
+    {
+        services.AddHttpsRedirection(options =>
+        {
+            options.RedirectStatusCode = StatusCodes.Status308PermanentRedirect;
+            options.HttpsPort = 443;
+        });
+    }
+}
+```
+
+::: moniker-end
+
+::: moniker range="<= aspnetcore-2.2"
+
+<span data-ttu-id="af881-203">*Startup.cs*에서 서비스를 구성 하는 경우:</span><span class="sxs-lookup"><span data-stu-id="af881-203">When configuring services in *Startup.cs*:</span></span>
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -155,105 +219,113 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-## <a name="https-redirection-middleware-alternative-approach"></a><span data-ttu-id="11185-197">HTTPS 리디렉션을 미들웨어에 대 한 대안 정보</span><span class="sxs-lookup"><span data-stu-id="11185-197">HTTPS Redirection Middleware alternative approach</span></span>
-
-<span data-ttu-id="11185-198">HTTPS 리디렉션을 미들웨어를 사용 하는 대신 (`UseHttpsRedirection`) URL 재작성 미들웨어를 사용 하는 것 (`AddRedirectToHttps`).</span><span class="sxs-lookup"><span data-stu-id="11185-198">An alternative to using HTTPS Redirection Middleware (`UseHttpsRedirection`) is to use URL Rewriting Middleware (`AddRedirectToHttps`).</span></span> <span data-ttu-id="11185-199">`AddRedirectToHttps` 리디렉션 실행 될 때 상태 코드 및 포트를 설정할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-199">`AddRedirectToHttps` can also set the status code and port when the redirect is executed.</span></span> <span data-ttu-id="11185-200">자세한 내용은 [URL 재작성 미들웨어](xref:fundamentals/url-rewriting)합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-200">For more information, see [URL Rewriting Middleware](xref:fundamentals/url-rewriting).</span></span>
-
-<span data-ttu-id="11185-201">추가 리디렉션 규칙을 요구 하지 않고 HTTPS로 리디렉션, 하는 경우 HTTPS 리디렉션을 미들웨어를 사용 하는 것이 좋습니다 (`UseHttpsRedirection`)이이 항목에서 설명 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-201">When redirecting to HTTPS without the requirement for additional redirect rules, we recommend using HTTPS Redirection Middleware (`UseHttpsRedirection`) described in this topic.</span></span>
-
 ::: moniker-end
 
-::: moniker range="< aspnetcore-2.1"
 
-<span data-ttu-id="11185-202">합니다 [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) HTTPS가 필요 하는 데 사용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="11185-202">The [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) is used to require HTTPS.</span></span> <span data-ttu-id="11185-203">`[RequireHttpsAttribute]` 컨트롤러 또는 메서드를 데코레이팅 할 수 있습니다 또는 전체적으로 적용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-203">`[RequireHttpsAttribute]` can decorate controllers or methods, or can be applied globally.</span></span> <span data-ttu-id="11185-204">특성을 전역적으로 적용 하려면 다음 코드를 추가 합니다 `ConfigureServices` 에서 `Startup`:</span><span class="sxs-lookup"><span data-stu-id="11185-204">To apply the attribute globally, add the following code to `ConfigureServices` in `Startup`:</span></span>
+## <a name="https-redirection-middleware-alternative-approach"></a><span data-ttu-id="af881-204">HTTPS 리디렉션 미들웨어 대체 방법</span><span class="sxs-lookup"><span data-stu-id="af881-204">HTTPS Redirection Middleware alternative approach</span></span>
 
-[!code-csharp[](~/security/authentication/accconfirm/sample/WebApp1/Startup.cs?name=snippet2&highlight=4-999)]
+<span data-ttu-id="af881-205">HTTPS 리디렉션 미들웨어 (`UseHttpsRedirection`)를 사용 하는 대신 URL 재작성 미들웨어 (`AddRedirectToHttps`)를 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-205">An alternative to using HTTPS Redirection Middleware (`UseHttpsRedirection`) is to use URL Rewriting Middleware (`AddRedirectToHttps`).</span></span> <span data-ttu-id="af881-206">`AddRedirectToHttps`은 리디렉션이 실행 될 때 상태 코드 및 포트를 설정할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-206">`AddRedirectToHttps` can also set the status code and port when the redirect is executed.</span></span> <span data-ttu-id="af881-207">자세한 내용은 [URL 재작성 미들웨어](xref:fundamentals/url-rewriting)를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="af881-207">For more information, see [URL Rewriting Middleware](xref:fundamentals/url-rewriting).</span></span>
 
-<span data-ttu-id="11185-205">위의 강조 표시된 코드는 모든 요청에 `HTTPS` 를 사용하도록 강제하며, 그 결과 HTTP 요청은 무시됩니다.</span><span class="sxs-lookup"><span data-stu-id="11185-205">The preceding highlighted code requires all requests use `HTTPS`; therefore, HTTP requests are ignored.</span></span> <span data-ttu-id="11185-206">다음에 강조 표시된 코드는 모든 HTTP 요청을 HTTPS로 리디렉션합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-206">The following highlighted code redirects all HTTP requests to HTTPS:</span></span>
-
-[!code-csharp[](authentication/accconfirm/sample/WebApp1/Startup.cs?name=snippet_AddRedirectToHttps&highlight=7-999)]
-
-<span data-ttu-id="11185-207">자세한 내용은 [URL 재작성 미들웨어](xref:fundamentals/url-rewriting)합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-207">For more information, see [URL Rewriting Middleware](xref:fundamentals/url-rewriting).</span></span> <span data-ttu-id="11185-208">또한 미들웨어 리디렉션 실행 될 때 상태 코드 또는 상태 코드와 포트를 설정 하려면 앱을 허용 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-208">The middleware also permits the app to set the status code or the status code and the port when the redirect is executed.</span></span>
-
-<span data-ttu-id="11185-209">전역으로 HTTPS를 요구하는 것이 보안상 가장 안전한 모범 사례입니다 (`options.Filters.Add(new RequireHttpsAttribute());`).</span><span class="sxs-lookup"><span data-stu-id="11185-209">Requiring HTTPS globally (`options.Filters.Add(new RequireHttpsAttribute());`) is a security best practice.</span></span> <span data-ttu-id="11185-210">적용 된 `[RequireHttps]` 모든 컨트롤러/Razor 페이지에는 특성에 전역적으로 HTTPS를 요구 하는 것 만큼 안전로 간주 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-210">Applying the `[RequireHttps]` attribute to all controllers/Razor Pages isn't considered as secure as requiring HTTPS globally.</span></span> <span data-ttu-id="11185-211">보장할 수 없습니다는 `[RequireHttps]` 새 컨트롤러 및 Razor 페이지는 추가 특성이 적용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="11185-211">You can't guarantee the `[RequireHttps]` attribute is applied when new controllers and Razor Pages are added.</span></span>
-
-::: moniker-end
-
-::: moniker range=">= aspnetcore-2.1"
+<span data-ttu-id="af881-208">추가 리디렉션 규칙을 요구 하지 않고 HTTPS로 리디렉션하는 경우이 항목에서 설명 하는 HTTPS 리디렉션 미들웨어 (`UseHttpsRedirection`)를 사용 하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-208">When redirecting to HTTPS without the requirement for additional redirect rules, we recommend using HTTPS Redirection Middleware (`UseHttpsRedirection`) described in this topic.</span></span>
 
 <a name="hsts"></a>
 
-## <a name="http-strict-transport-security-protocol-hsts"></a><span data-ttu-id="11185-212">HTTP 엄격한 전송 보안 프로토콜 (HSTS)</span><span class="sxs-lookup"><span data-stu-id="11185-212">HTTP Strict Transport Security Protocol (HSTS)</span></span>
+## <a name="http-strict-transport-security-protocol-hsts"></a><span data-ttu-id="af881-209">HTTP HSTS (Strict Transport Security Protocol)</span><span class="sxs-lookup"><span data-stu-id="af881-209">HTTP Strict Transport Security Protocol (HSTS)</span></span>
 
-<span data-ttu-id="11185-213">당 [OWASP](https://www.owasp.org/index.php/About_The_Open_Web_Application_Security_Project)하십시오 [HTTP 엄격한 전송 보안 (HSTS)](https://www.owasp.org/index.php/HTTP_Strict_Transport_Security_Cheat_Sheet) 응답 헤더를 사용 하 여 웹 앱에서 지정 하는 옵트인 보안 향상 된 기능입니다.</span><span class="sxs-lookup"><span data-stu-id="11185-213">Per [OWASP](https://www.owasp.org/index.php/About_The_Open_Web_Application_Security_Project), [HTTP Strict Transport Security (HSTS)](https://www.owasp.org/index.php/HTTP_Strict_Transport_Security_Cheat_Sheet) is an opt-in security enhancement that's specified by a web app through the use of a response header.</span></span> <span data-ttu-id="11185-214">경우는 [HSTS를 지 원하는 브라우저](https://www.owasp.org/index.php/HTTP_Strict_Transport_Security_Cheat_Sheet#Browser_Support) 이 헤더를 수신 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-214">When a [browser that supports HSTS](https://www.owasp.org/index.php/HTTP_Strict_Transport_Security_Cheat_Sheet#Browser_Support) receives this header:</span></span>
+<span data-ttu-id="af881-210">[OWASP](https://www.owasp.org/index.php/About_The_Open_Web_Application_Security_Project)에 따라 [hsts (HTTP Strict Transport security)](https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html) 는 응답 헤더를 사용 하 여 웹 앱에서 지정 하는 옵트인 (opt in) 보안 기능입니다.</span><span class="sxs-lookup"><span data-stu-id="af881-210">Per [OWASP](https://www.owasp.org/index.php/About_The_Open_Web_Application_Security_Project), [HTTP Strict Transport Security (HSTS)](https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html) is an opt-in security enhancement that's specified by a web app through the use of a response header.</span></span> <span data-ttu-id="af881-211">[HSTS를 지 원하는 브라우저가](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html#browser-support) 이 헤더를 수신 하는 경우:</span><span class="sxs-lookup"><span data-stu-id="af881-211">When a [browser that supports HSTS](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html#browser-support) receives this header:</span></span>
 
-* <span data-ttu-id="11185-215">브라우저에는 모든 통신이 HTTP를 통해 보낼 수 없는 도메인에 대 한 구성을 저장 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-215">The browser stores configuration for the domain that prevents sending any communication over HTTP.</span></span> <span data-ttu-id="11185-216">브라우저 강제로 HTTPS를 통해 모든 통신을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-216">The browser forces all communication over HTTPS.</span></span>
-* <span data-ttu-id="11185-217">브라우저에서 신뢰할 수 없거나 잘못 된 인증서를 사용 하 여 사용자를 방지 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-217">The browser prevents the user from using untrusted or invalid certificates.</span></span> <span data-ttu-id="11185-218">브라우저 사용자가 일시적으로 이러한 인증서를 신뢰 하는 프롬프트를 비활성화 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-218">The browser disables prompts that allow a user to temporarily trust such a certificate.</span></span>
+* <span data-ttu-id="af881-212">브라우저는 HTTP를 통한 통신 전송을 방지 하는 도메인에 대 한 구성을 저장 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-212">The browser stores configuration for the domain that prevents sending any communication over HTTP.</span></span> <span data-ttu-id="af881-213">브라우저는 HTTPS를 통한 모든 통신을 강제로 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-213">The browser forces all communication over HTTPS.</span></span>
+* <span data-ttu-id="af881-214">브라우저는 사용자가 신뢰할 수 없거나 유효 하지 않은 인증서를 사용 하지 못하도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-214">The browser prevents the user from using untrusted or invalid certificates.</span></span> <span data-ttu-id="af881-215">브라우저는 사용자가 이러한 인증서를 일시적으로 신뢰할 수 있도록 하는 프롬프트를 사용 하지 않도록 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-215">The browser disables prompts that allow a user to temporarily trust such a certificate.</span></span>
 
-<span data-ttu-id="11185-219">HSTS는 클라이언트에서 적용 하기 때문에 몇 가지 제한 사항이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-219">Because HSTS is enforced by the client it has some limitations:</span></span>
+<span data-ttu-id="af881-216">HSTS는 클라이언트에 의해 적용 되므로 다음과 같은 몇 가지 제한 사항이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-216">Because HSTS is enforced by the client it has some limitations:</span></span>
 
-* <span data-ttu-id="11185-220">클라이언트는 HSTS를 지원 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-220">The client must support HSTS.</span></span>
-* <span data-ttu-id="11185-221">HSTS는 HSTS 정책을 설정 하려면 하나 이상의 성공적인 HTTPS 요청에 필요 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-221">HSTS requires at least one successful HTTPS request to establish the HSTS policy.</span></span>
-* <span data-ttu-id="11185-222">응용 프로그램이 모든 HTTP 요청을 확인 하 고 리디렉션 하거나 HTTP 요청을 거부 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-222">The application must check every HTTP request and redirect or reject the HTTP request.</span></span>
+* <span data-ttu-id="af881-217">클라이언트는 HSTS를 지원 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-217">The client must support HSTS.</span></span>
+* <span data-ttu-id="af881-218">HSTS는 HSTS 정책을 설정 하기 위해 하나 이상의 성공한 HTTPS 요청이 필요 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-218">HSTS requires at least one successful HTTPS request to establish the HSTS policy.</span></span>
+* <span data-ttu-id="af881-219">응용 프로그램은 모든 HTTP 요청을 확인 하 고 HTTP 요청을 리디렉션하거나 거부 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-219">The application must check every HTTP request and redirect or reject the HTTP request.</span></span>
 
-<span data-ttu-id="11185-223">ASP.NET Core 2.1 이상을 사용 하 여 HSTS를 구현 합니다 `UseHsts` 확장 메서드.</span><span class="sxs-lookup"><span data-stu-id="11185-223">ASP.NET Core 2.1 or later implements HSTS with the `UseHsts` extension method.</span></span> <span data-ttu-id="11185-224">다음 코드 호출 `UseHsts` 에 앱이 없는 경우 [개발 모드](xref:fundamentals/environments):</span><span class="sxs-lookup"><span data-stu-id="11185-224">The following code calls `UseHsts` when the app isn't in [development mode](xref:fundamentals/environments):</span></span>
+<span data-ttu-id="af881-220">ASP.NET Core 2.1 이상에서는 `UseHsts` 확장 메서드를 사용 하 여 HSTS를 구현 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-220">ASP.NET Core 2.1 and later implements HSTS with the `UseHsts` extension method.</span></span> <span data-ttu-id="af881-221">다음 코드는 앱이 [개발 모드가](xref:fundamentals/environments)아닐 때 @no__t를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-221">The following code calls `UseHsts` when the app isn't in [development mode](xref:fundamentals/environments):</span></span>
 
-[!code-csharp[](enforcing-ssl/sample/Startup.cs?name=snippet1&highlight=10)]
+::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="11185-225">`UseHsts` 권장 되지 않습니다 개발에서 HSTS 설정이 항상 캐시할 수 있기 때문에 브라우저에서.</span><span class="sxs-lookup"><span data-stu-id="11185-225">`UseHsts` isn't recommended in development because the HSTS settings are highly cacheable by browsers.</span></span> <span data-ttu-id="11185-226">기본적으로 `UseHsts` 로컬 루프백 주소를 제외 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-226">By default, `UseHsts` excludes the local loopback address.</span></span>
-
-<span data-ttu-id="11185-227">프로덕션 환경에 대 한 초기 설정 처음에 대 한 HTTPS를 구현 [HstsOptions.MaxAge](xref:Microsoft.AspNetCore.HttpsPolicy.HstsOptions.MaxAge*) 중 하나를 사용 하는 작은 값으로는 <xref:System.TimeSpan> 메서드.</span><span class="sxs-lookup"><span data-stu-id="11185-227">For production environments implementing HTTPS for the first time, set the initial [HstsOptions.MaxAge](xref:Microsoft.AspNetCore.HttpsPolicy.HstsOptions.MaxAge*) to a small value using one of the <xref:System.TimeSpan> methods.</span></span> <span data-ttu-id="11185-228">값을 설정할 시간에서 전혀 보다 하루를 HTTP로 HTTPS 인프라를 되돌려야 하는 경우.</span><span class="sxs-lookup"><span data-stu-id="11185-228">Set the value from hours to no more than a single day in case you need to revert the HTTPS infrastructure to HTTP.</span></span> <span data-ttu-id="11185-229">HTTPS 구성의 유지 가능성에 확신한 후 늘릴 HSTS 최대 처리 기간 값 자주 사용 되는 값은 1 년입니다.</span><span class="sxs-lookup"><span data-stu-id="11185-229">After you're confident in the sustainability of the HTTPS configuration, increase the HSTS max-age value; a commonly used value is one year.</span></span>
-
-<span data-ttu-id="11185-230">다음 예를 참조하십시오.</span><span class="sxs-lookup"><span data-stu-id="11185-230">The following code:</span></span>
-
-[!code-csharp[](enforcing-ssl/sample/Startup.cs?name=snippet2&highlight=5-12)]
-
-* <span data-ttu-id="11185-231">Strict-전송-보안 헤더의 미리 로드 매개 변수를 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-231">Sets the preload parameter of the Strict-Transport-Security header.</span></span> <span data-ttu-id="11185-232">Preload의 일부가 아닌 합니다 [RFC HSTS 사양](https://tools.ietf.org/html/rfc6797), 있지만 HSTS 새로 설치할 때 사이트를 미리 로드 하려면 웹 브라우저에서 지원 됩니다.</span><span class="sxs-lookup"><span data-stu-id="11185-232">Preload isn't part of the [RFC HSTS specification](https://tools.ietf.org/html/rfc6797), but is supported by web browsers to preload HSTS sites on fresh install.</span></span> <span data-ttu-id="11185-233">자세한 내용은 [https://hstspreload.org/](https://hstspreload.org/)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="11185-233">See [https://hstspreload.org/](https://hstspreload.org/) for more information.</span></span>
-* <span data-ttu-id="11185-234">사용 하도록 설정 [includeSubDomain](https://tools.ietf.org/html/rfc6797#section-6.1.2), 호스트 하위 도메인에 HSTS 정책을 적용 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-234">Enables [includeSubDomain](https://tools.ietf.org/html/rfc6797#section-6.1.2), which applies the HSTS policy to Host subdomains.</span></span>
-* <span data-ttu-id="11185-235">60 일로 Strict-전송-보안 헤더의 최대 처리 기간 매개 변수를 명시적으로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-235">Explicitly sets the max-age parameter of the Strict-Transport-Security header to 60 days.</span></span> <span data-ttu-id="11185-236">설정 하지 않으면 기본값은 30 일입니다.</span><span class="sxs-lookup"><span data-stu-id="11185-236">If not set, defaults to 30 days.</span></span> <span data-ttu-id="11185-237">참조 된 [최대 처리 기간 지시문](https://tools.ietf.org/html/rfc6797#section-6.1.1) 자세한 내용은 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-237">See the [max-age directive](https://tools.ietf.org/html/rfc6797#section-6.1.1) for more information.</span></span>
-* <span data-ttu-id="11185-238">추가 `example.com` 를 제외 하는 호스트의 목록입니다.</span><span class="sxs-lookup"><span data-stu-id="11185-238">Adds `example.com` to the list of hosts to exclude.</span></span>
-
-<span data-ttu-id="11185-239">`UseHsts` 다음 루프백 호스트를 제외:</span><span class="sxs-lookup"><span data-stu-id="11185-239">`UseHsts` excludes the following loopback hosts:</span></span>
-
-* <span data-ttu-id="11185-240">`localhost`은: IPv4 루프백 주소입니다.</span><span class="sxs-lookup"><span data-stu-id="11185-240">`localhost` : The IPv4 loopback address.</span></span>
-* <span data-ttu-id="11185-241">`127.0.0.1`은: IPv4 루프백 주소입니다.</span><span class="sxs-lookup"><span data-stu-id="11185-241">`127.0.0.1` : The IPv4 loopback address.</span></span>
-* <span data-ttu-id="11185-242">`[::1]`은: IPv6 루프백 주소입니다.</span><span class="sxs-lookup"><span data-stu-id="11185-242">`[::1]` : The IPv6 loopback address.</span></span>
+[!code-csharp[](enforcing-ssl/sample-snapshot/3.x/Startup.cs?name=snippet1&highlight=11)]
 
 ::: moniker-end
 
-::: moniker range=">= aspnetcore-2.1"
+::: moniker range="<= aspnetcore-2.2"
 
-## <a name="opt-out-of-httpshsts-on-project-creation"></a><span data-ttu-id="11185-243">옵트아웃 HTTPS/HSTS 프로젝트 생성 시</span><span class="sxs-lookup"><span data-stu-id="11185-243">Opt-out of HTTPS/HSTS on project creation</span></span>
+[!code-csharp[](enforcing-ssl/sample-snapshot/2.x/Startup.cs?name=snippet1&highlight=10)]
 
-<span data-ttu-id="11185-244">연결 보안 공용 네트워크의에 지에서 처리 되는 일부 백 엔드 서비스 시나리오에서는 각 노드에 연결 보안 구성 필요 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="11185-244">In some backend service scenarios where connection security is handled at the public-facing edge of the network, configuring connection security at each node isn't required.</span></span> <span data-ttu-id="11185-245">웹 앱 또는 Visual Studio의 템플릿에서 생성 된 [새 dotnet](/dotnet/core/tools/dotnet-new) 명령 사용 [HTTPS 간의 리디렉션으로](#require-https) 및 [HSTS](#http-strict-transport-security-protocol-hsts)합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-245">Web apps generated from the templates in Visual Studio or from the [dotnet new](/dotnet/core/tools/dotnet-new) command enable [HTTPS redirection](#require-https) and [HSTS](#http-strict-transport-security-protocol-hsts).</span></span> <span data-ttu-id="11185-246">이러한 시나리오를 필요로 하지 않는 배포에 대 한 있습니다 수 옵트아웃 HTTPS/HSTS 서식 파일에서 앱을 만들 때.</span><span class="sxs-lookup"><span data-stu-id="11185-246">For deployments that don't require these scenarios, you can opt-out of HTTPS/HSTS when the app is created from the template.</span></span>
+::: moniker-end
 
-<span data-ttu-id="11185-247">옵트아웃 하려면 HTTPS/HSTS입니다.</span><span class="sxs-lookup"><span data-stu-id="11185-247">To opt-out of HTTPS/HSTS:</span></span>
+<span data-ttu-id="af881-222">`UseHsts`은 브라우저에서 HSTS 설정을 캐시할 수 있으므로 개발에 권장 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-222">`UseHsts` isn't recommended in development because the HSTS settings are highly cacheable by browsers.</span></span> <span data-ttu-id="af881-223">기본적으로 `UseHsts`은 로컬 루프백 주소를 제외 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-223">By default, `UseHsts` excludes the local loopback address.</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="11185-248">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="11185-248">Visual Studio</span></span>](#tab/visual-studio) 
+<span data-ttu-id="af881-224">처음으로 HTTPS를 구현 하는 프로덕션 환경의 경우 <xref:System.TimeSpan> 방법 중 하나를 사용 하 여 초기 [MaxAge](xref:Microsoft.AspNetCore.HttpsPolicy.HstsOptions.MaxAge*) 을 작은 값으로 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-224">For production environments that are implementing HTTPS for the first time, set the initial [HstsOptions.MaxAge](xref:Microsoft.AspNetCore.HttpsPolicy.HstsOptions.MaxAge*) to a small value using one of the <xref:System.TimeSpan> methods.</span></span> <span data-ttu-id="af881-225">HTTPS 인프라를 HTTP로 되돌려야 하는 경우에는 값을 하루에 한 번 이상으로 설정 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-225">Set the value from hours to no more than a single day in case you need to revert the HTTPS infrastructure to HTTP.</span></span> <span data-ttu-id="af881-226">HTTPS 구성의 유지 가능성을 확신 하는 경우 HSTS 최대 기간 값을 늘립니다. 일반적으로 사용 되는 값은 1 년입니다.</span><span class="sxs-lookup"><span data-stu-id="af881-226">After you're confident in the sustainability of the HTTPS configuration, increase the HSTS max-age value; a commonly used value is one year.</span></span>
 
-<span data-ttu-id="11185-249">선택 취소 합니다 **HTTPS에 대 한 구성** 확인란 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-249">Uncheck the **Configure for HTTPS** check box.</span></span>
+<span data-ttu-id="af881-227">다음 예를 참조하십시오.</span><span class="sxs-lookup"><span data-stu-id="af881-227">The following code:</span></span>
 
-![새 ASP.NET Core 웹 응용 프로그램 대화 상자 표시 HTTPS 확인란의 선택을 취소에 대 한 구성입니다.](enforcing-ssl/_static/out.png)
 
-# <a name="net-core-clitabnetcore-cli"></a>[<span data-ttu-id="11185-251">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="11185-251">.NET Core CLI</span></span>](#tab/netcore-cli) 
+::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="11185-252">`--no-https` 옵션을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-252">Use the `--no-https` option.</span></span> <span data-ttu-id="11185-253">예</span><span class="sxs-lookup"><span data-stu-id="11185-253">For example</span></span>
+[!code-csharp[](enforcing-ssl/sample-snapshot/3.x/Startup.cs?name=snippet2&highlight=5-12)]
 
-```console
+::: moniker-end
+
+::: moniker range="<= aspnetcore-2.2"
+
+[!code-csharp[](enforcing-ssl/sample-snapshot/2.x/Startup.cs?name=snippet2&highlight=5-12)]
+
+::: moniker-end
+
+
+* <span data-ttu-id="af881-228">엄격한 전송 보안 헤더의 미리 로드 매개 변수를 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-228">Sets the preload parameter of the Strict-Transport-Security header.</span></span> <span data-ttu-id="af881-229">프리 로드는 [RFC hsts 사양의](https://tools.ietf.org/html/rfc6797)일부가 아니지만 웹 브라우저가 새로 설치 시 hsts 사이트를 미리 로드 하도록 지원 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-229">Preload isn't part of the [RFC HSTS specification](https://tools.ietf.org/html/rfc6797), but is supported by web browsers to preload HSTS sites on fresh install.</span></span> <span data-ttu-id="af881-230">자세한 내용은 [https://hstspreload.org/](https://hstspreload.org/)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="af881-230">See [https://hstspreload.org/](https://hstspreload.org/) for more information.</span></span>
+* <span data-ttu-id="af881-231">도메인을 호스트 하는 데 HSTS 정책을 적용 하는 [Includesubdomain 도메인](https://tools.ietf.org/html/rfc6797#section-6.1.2)을 사용 하도록 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-231">Enables [includeSubDomain](https://tools.ietf.org/html/rfc6797#section-6.1.2), which applies the HSTS policy to Host subdomains.</span></span>
+* <span data-ttu-id="af881-232">엄격한 전송 보안 헤더의 최대 보존 기간 매개 변수를 60 일로 명시적으로 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-232">Explicitly sets the max-age parameter of the Strict-Transport-Security header to 60 days.</span></span> <span data-ttu-id="af881-233">설정 되지 않은 경우 기본값은 30 일입니다.</span><span class="sxs-lookup"><span data-stu-id="af881-233">If not set, defaults to 30 days.</span></span> <span data-ttu-id="af881-234">자세한 내용은 [최대 사용 기간 지시문](https://tools.ietf.org/html/rfc6797#section-6.1.1) 을 참조 하십시오.</span><span class="sxs-lookup"><span data-stu-id="af881-234">See the [max-age directive](https://tools.ietf.org/html/rfc6797#section-6.1.1) for more information.</span></span>
+* <span data-ttu-id="af881-235">제외할 호스트 목록에 `example.com`을 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-235">Adds `example.com` to the list of hosts to exclude.</span></span>
+
+<span data-ttu-id="af881-236">`UseHsts`은 다음 루프백 호스트를 제외 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-236">`UseHsts` excludes the following loopback hosts:</span></span>
+
+* <span data-ttu-id="af881-237">`localhost`은: IPv4 루프백 주소입니다.</span><span class="sxs-lookup"><span data-stu-id="af881-237">`localhost` : The IPv4 loopback address.</span></span>
+* <span data-ttu-id="af881-238">`127.0.0.1`은: IPv4 루프백 주소입니다.</span><span class="sxs-lookup"><span data-stu-id="af881-238">`127.0.0.1` : The IPv4 loopback address.</span></span>
+* <span data-ttu-id="af881-239">`[::1]`은: IPv6 루프백 주소입니다.</span><span class="sxs-lookup"><span data-stu-id="af881-239">`[::1]` : The IPv6 loopback address.</span></span>
+
+## <a name="opt-out-of-httpshsts-on-project-creation"></a><span data-ttu-id="af881-240">프로젝트를 만들 때 HTTPS/HSTS 옵트아웃 (Opt out)</span><span class="sxs-lookup"><span data-stu-id="af881-240">Opt-out of HTTPS/HSTS on project creation</span></span>
+
+<span data-ttu-id="af881-241">네트워크의 공용 가장자리에서 연결 보안이 처리 되는 일부 백 엔드 서비스 시나리오에서는 각 노드에서 연결 보안을 구성할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-241">In some backend service scenarios where connection security is handled at the public-facing edge of the network, configuring connection security at each node isn't required.</span></span> <span data-ttu-id="af881-242">Visual Studio 또는 [dotnet new](/dotnet/core/tools/dotnet-new) 명령에서 템플릿에서 생성 된 웹 앱은 [HTTPS 리디렉션과](#require-https) [hsts](#http-strict-transport-security-protocol-hsts)를 사용 하도록 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-242">Web apps that are generated from the templates in Visual Studio or from the [dotnet new](/dotnet/core/tools/dotnet-new) command enable [HTTPS redirection](#require-https) and [HSTS](#http-strict-transport-security-protocol-hsts).</span></span> <span data-ttu-id="af881-243">이러한 시나리오가 필요 하지 않은 배포의 경우 템플릿에서 앱을 만들 때 HTTPS/HSTS를 옵트아웃 (opt out) 할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-243">For deployments that don't require these scenarios, you can opt-out of HTTPS/HSTS when the app is created from the template.</span></span>
+
+<span data-ttu-id="af881-244">HTTPS/HSTS를 옵트아웃 (opt out) 하려면:</span><span class="sxs-lookup"><span data-stu-id="af881-244">To opt-out of HTTPS/HSTS:</span></span>
+
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="af881-245">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="af881-245">Visual Studio</span></span>](#tab/visual-studio) 
+
+<span data-ttu-id="af881-246">**HTTPS에 대해 구성** 확인란의 선택을 취소 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-246">Uncheck the **Configure for HTTPS** check box.</span></span>
+
+::: moniker range=">= aspnetcore-3.0"
+
+![HTTPS에 대해 구성 확인란을 선택 하지 않은 새 ASP.NET Core 웹 응용 프로그램 대화 상자](enforcing-ssl/_static/out-vs2019.png)
+
+::: moniker-end
+
+::: moniker range="<= aspnetcore-2.2"
+
+![HTTPS에 대해 구성 확인란을 선택 하지 않은 새 ASP.NET Core 웹 응용 프로그램 대화 상자](enforcing-ssl/_static/out.png)
+
+::: moniker-end
+
+
+# <a name="net-core-clitabnetcore-cli"></a>[<span data-ttu-id="af881-249">.NET Core CLI</span><span class="sxs-lookup"><span data-stu-id="af881-249">.NET Core CLI</span></span>](#tab/netcore-cli) 
+
+<span data-ttu-id="af881-250">`--no-https` 옵션을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-250">Use the `--no-https` option.</span></span> <span data-ttu-id="af881-251">예</span><span class="sxs-lookup"><span data-stu-id="af881-251">For example</span></span>
+
+```dotnetcli
 dotnet new webapp --no-https
 ```
 
 ---
 
-::: moniker-end
-
-::: moniker range=">= aspnetcore-2.1"
-
 <a name="trust"></a>
 
-## <a name="trust-the-aspnet-core-https-development-certificate-on-windows-and-macos"></a><span data-ttu-id="11185-254">Windows 및 macOS에서 ASP.NET Core HTTPS 개발 인증서를 신뢰 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-254">Trust the ASP.NET Core HTTPS development certificate on Windows and macOS</span></span>
+## <a name="trust-the-aspnet-core-https-development-certificate-on-windows-and-macos"></a><span data-ttu-id="af881-252">Windows 및 macOS에서 ASP.NET Core HTTPS 개발 인증서 신뢰</span><span class="sxs-lookup"><span data-stu-id="af881-252">Trust the ASP.NET Core HTTPS development certificate on Windows and macOS</span></span>
 
-<span data-ttu-id="11185-255">.NET core SDK에는 HTTPS 개발 인증서를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-255">.NET Core SDK includes a HTTPS development certificate.</span></span> <span data-ttu-id="11185-256">인증서는 첫 실행 경험의 일부로 설치 됩니다.</span><span class="sxs-lookup"><span data-stu-id="11185-256">The certificate is installed as part of the first-run experience.</span></span> <span data-ttu-id="11185-257">예를 들어 `dotnet --info` 다음과 유사한 출력을 생성 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-257">For example, `dotnet --info` produces output similar to the following:</span></span>
+<span data-ttu-id="af881-253">.NET Core SDK에는 HTTPS 개발 인증서가 포함 되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-253">The .NET Core SDK includes an HTTPS development certificate.</span></span> <span data-ttu-id="af881-254">인증서는 첫 실행 환경의 일부로 설치 됩니다.</span><span class="sxs-lookup"><span data-stu-id="af881-254">The certificate is installed as part of the first-run experience.</span></span> <span data-ttu-id="af881-255">예를 들어 `dotnet --info`은 다음과 유사한 출력을 생성 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-255">For example, `dotnet --info` produces output similar to the following:</span></span>
 
 ```text
 ASP.NET Core
@@ -264,39 +336,89 @@ For establishing trust on other platforms refer to the platform specific documen
 For more information on configuring HTTPS see https://go.microsoft.com/fwlink/?linkid=848054.
 ```
 
-<span data-ttu-id="11185-258">.NET Core SDK를 설치하면 로컬 사용자 인증서 저장소에 ASP.NET Core HTTPS 개발 인증서가 설치됩니다.</span><span class="sxs-lookup"><span data-stu-id="11185-258">Installing the .NET Core SDK installs the ASP.NET Core HTTPS development certificate to the local user certificate store.</span></span> <span data-ttu-id="11185-259">인증서가 설치 되었지만 신뢰할 수 있는 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-259">The certificate has been installed, but it's not trusted.</span></span> <span data-ttu-id="11185-260">인증서 신뢰 dotnet 실행 하는 일회성 단계를 수행 `dev-certs` 도구:</span><span class="sxs-lookup"><span data-stu-id="11185-260">To trust the certificate perform the one-time step to run the dotnet `dev-certs` tool:</span></span>
+<span data-ttu-id="af881-256">.NET Core SDK를 설치하면 로컬 사용자 인증서 저장소에 ASP.NET Core HTTPS 개발 인증서가 설치됩니다.</span><span class="sxs-lookup"><span data-stu-id="af881-256">Installing the .NET Core SDK installs the ASP.NET Core HTTPS development certificate to the local user certificate store.</span></span> <span data-ttu-id="af881-257">인증서가 설치 되었지만 트러스트 되지 않았습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-257">The certificate has been installed, but it's not trusted.</span></span> <span data-ttu-id="af881-258">인증서를 신뢰 하려면 1 회 단계를 수행 하 여 dotnet `dev-certs` 도구를 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-258">To trust the certificate perform the one-time step to run the dotnet `dev-certs` tool:</span></span>
 
-```console
+```dotnetcli
 dotnet dev-certs https --trust
 ```
 
-<span data-ttu-id="11185-261">다음 명령은 `dev-certs` 도구에 대한 도움말을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-261">The following command provides help on the `dev-certs` tool:</span></span>
+<span data-ttu-id="af881-259">다음 명령은 `dev-certs` 도구에 대한 도움말을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-259">The following command provides help on the `dev-certs` tool:</span></span>
 
-```console
+```dotnetcli
 dotnet dev-certs https --help
 ```
 
-## <a name="how-to-set-up-a-developer-certificate-for-docker"></a><span data-ttu-id="11185-262">Docker에 대 한 개발자 인증서를 설정 하는 방법</span><span class="sxs-lookup"><span data-stu-id="11185-262">How to set up a developer certificate for Docker</span></span>
+## <a name="how-to-set-up-a-developer-certificate-for-docker"></a><span data-ttu-id="af881-260">Docker 용 개발자 인증서를 설정 하는 방법</span><span class="sxs-lookup"><span data-stu-id="af881-260">How to set up a developer certificate for Docker</span></span>
 
-<span data-ttu-id="11185-263">참조 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/6199)합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-263">See [this GitHub issue](https://github.com/aspnet/AspNetCore.Docs/issues/6199).</span></span>
-
-::: moniker-end
+<span data-ttu-id="af881-261">이 [GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/6199)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="af881-261">See [this GitHub issue](https://github.com/aspnet/AspNetCore.Docs/issues/6199).</span></span>
 
 <a name="wsl"></a>
 
-## <a name="trust-https-certificate-from-windows-subsystem-for-linux"></a><span data-ttu-id="11185-264">Linux 용 Windows 하위 시스템에서 HTTPS 인증서를 신뢰 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-264">Trust HTTPS certificate from Windows Subsystem for Linux</span></span>
+## <a name="trust-https-certificate-from-windows-subsystem-for-linux"></a><span data-ttu-id="af881-262">Linux 용 Windows 하위 시스템에서 HTTPS 인증서 신뢰</span><span class="sxs-lookup"><span data-stu-id="af881-262">Trust HTTPS certificate from Windows Subsystem for Linux</span></span>
 
-<span data-ttu-id="11185-265">Windows 하위 시스템에 대 한 WSL (Linux) HTTPS 자체 서명 된 인증서를 생성합니다. WSL 인증서를 신뢰 하는 Windows 인증서 저장소를 구성 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-265">The Windows Subsystem for Linux (WSL) generates a HTTPS self-signed cert. To configure the Windows certificate store to trust the WSL certificate:</span></span>
+<span data-ttu-id="af881-263">WSL (Linux 용 Windows 하위 시스템)은 HTTPS 자체 서명 된 인증서를 생성 합니다. WSL 인증서를 신뢰 하도록 Windows 인증서 저장소를 구성 하려면:</span><span class="sxs-lookup"><span data-stu-id="af881-263">The Windows Subsystem for Linux (WSL) generates a HTTPS self-signed cert. To configure the Windows certificate store to trust the WSL certificate:</span></span>
 
-* <span data-ttu-id="11185-266">WSL 생성 된 인증서를 내보내려면 다음 명령을 실행 합니다. `dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p <cryptic-password>`</span><span class="sxs-lookup"><span data-stu-id="11185-266">Run the following command to export the WSL generated certificate: `dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p <cryptic-password>`</span></span>
-* <span data-ttu-id="11185-267">WSL 창에서 다음 명령을 실행 합니다. `ASPNETCORE_Kestrel__Certificates__Default__Password="<cryptic-password>" ASPNETCORE_Kestrel__Certificates__Default__Path=/mnt/c/Users/user-name/.aspnet/https/aspnetapp.pfx dotnet watch run`</span><span class="sxs-lookup"><span data-stu-id="11185-267">In a WSL window, run the following command: `ASPNETCORE_Kestrel__Certificates__Default__Password="<cryptic-password>" ASPNETCORE_Kestrel__Certificates__Default__Path=/mnt/c/Users/user-name/.aspnet/https/aspnetapp.pfx dotnet watch run`</span></span>
+* <span data-ttu-id="af881-264">다음 명령을 실행 하 여 WSL 생성 된 인증서를 내보냅니다. `dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p <cryptic-password>`</span><span class="sxs-lookup"><span data-stu-id="af881-264">Run the following command to export the WSL generated certificate: `dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p <cryptic-password>`</span></span>
+* <span data-ttu-id="af881-265">WSL 창에서 다음 명령을 실행 합니다. `ASPNETCORE_Kestrel__Certificates__Default__Password="<cryptic-password>" ASPNETCORE_Kestrel__Certificates__Default__Path=/mnt/c/Users/user-name/.aspnet/https/aspnetapp.pfx dotnet watch run`</span><span class="sxs-lookup"><span data-stu-id="af881-265">In a WSL window, run the following command: `ASPNETCORE_Kestrel__Certificates__Default__Password="<cryptic-password>" ASPNETCORE_Kestrel__Certificates__Default__Path=/mnt/c/Users/user-name/.aspnet/https/aspnetapp.pfx dotnet watch run`</span></span>
 
-  <span data-ttu-id="11185-268">위의 명령은 Linux Windows 신뢰할 수 있는 인증서를 사용 하므로 환경 변수를 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="11185-268">The preceding command sets the environment variables so Linux uses the Windows trusted certificate.</span></span>
+  <span data-ttu-id="af881-266">위의 명령은 Linux에서 Windows 신뢰할 수 있는 인증서를 사용 하도록 환경 변수를 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-266">The preceding command sets the environment variables so Linux uses the Windows trusted certificate.</span></span>
 
-## <a name="additional-information"></a><span data-ttu-id="11185-269">추가 정보</span><span class="sxs-lookup"><span data-stu-id="11185-269">Additional information</span></span>
+## <a name="troubleshoot-certificate-problems"></a><span data-ttu-id="af881-267">인증서 문제 해결</span><span class="sxs-lookup"><span data-stu-id="af881-267">Troubleshoot certificate problems</span></span>
+
+<span data-ttu-id="af881-268">이 섹션에서는 ASP.NET Core HTTPS 개발 인증서를 [설치 하 고 신뢰할 수](#trust)있는 경우에 대 한 도움말을 제공 하지만 인증서를 신뢰할 수 없다는 브라우저 경고가 계속 표시 됩니다.</span><span class="sxs-lookup"><span data-stu-id="af881-268">This section provides help when the ASP.NET Core HTTPS development certificate has been [installed and trusted](#trust), but you still have browser warnings that the certificate is not trusted.</span></span>
+
+### <a name="all-platforms---certificate-not-trusted"></a><span data-ttu-id="af881-269">모든 플랫폼-인증서를 신뢰할 수 없음</span><span class="sxs-lookup"><span data-stu-id="af881-269">All platforms - certificate not trusted</span></span>
+
+<span data-ttu-id="af881-270">다음 명령을 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-270">Run the following commands:</span></span>
+
+```dotnetcli
+dotnet dev-certs https --clean
+dotnet dev-certs https --trust
+```
+
+<span data-ttu-id="af881-271">열려 있는 모든 브라우저 인스턴스를 닫습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-271">Close any browser instances open.</span></span> <span data-ttu-id="af881-272">앱에 대 한 새 브라우저 창을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="af881-272">Open a new browser window to app.</span></span> <span data-ttu-id="af881-273">인증서 신뢰는 브라우저에 의해 캐시 됩니다.</span><span class="sxs-lookup"><span data-stu-id="af881-273">Certificate trust is cached by browsers.</span></span>
+
+<span data-ttu-id="af881-274">위의 명령은 대부분의 브라우저 트러스트 문제를 해결 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-274">The preceding commands solve most browser trust issues.</span></span> <span data-ttu-id="af881-275">브라우저에서 아직 인증서를 신뢰 하지 않는 경우에는 다음 플랫폼 관련 제안 사항을 따르세요.</span><span class="sxs-lookup"><span data-stu-id="af881-275">If the browser is still not trusting the certificate, follow the platform specific suggestions that follow.</span></span>
+
+### <a name="docker---certificate-not-trusted"></a><span data-ttu-id="af881-276">Docker-인증서를 신뢰할 수 없음</span><span class="sxs-lookup"><span data-stu-id="af881-276">Docker - certificate not trusted</span></span>
+
+* <span data-ttu-id="af881-277">*C:\Users @ no__t-1USER} \AppData\Roaming\ASP.NET\Https* 폴더를 삭제 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-277">Delete the *C:\Users\{USER}\AppData\Roaming\ASP.NET\Https* folder.</span></span>
+* <span data-ttu-id="af881-278">솔루션을 정리 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-278">Clean the solution.</span></span> <span data-ttu-id="af881-279">*bin* 및 *obj* 폴더를 삭제합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-279">Delete the *bin* and *obj* folders.</span></span>
+* <span data-ttu-id="af881-280">개발 도구를 다시 시작 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-280">Restart the development tool.</span></span> <span data-ttu-id="af881-281">예를 들어 Visual Studio, Visual Studio Code 또는 Mac용 Visual Studio입니다.</span><span class="sxs-lookup"><span data-stu-id="af881-281">For example, Visual Studio, Visual Studio Code, or Visual Studio for Mac.</span></span>
+
+### <a name="windows---certificate-not-trusted"></a><span data-ttu-id="af881-282">Windows-인증서를 신뢰할 수 없음</span><span class="sxs-lookup"><span data-stu-id="af881-282">Windows - certificate not trusted</span></span>
+
+* <span data-ttu-id="af881-283">인증서 저장소의 인증서를 확인 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-283">Check the certificates in the certificate store.</span></span> <span data-ttu-id="af881-284">@No__t-2 및 `Current User > Trusted root certification authorities > Certificates` 모두에서 `ASP.NET Core HTTPS development certificate`의 이름을 가진 `localhost` 인증서가 있어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-284">There should be a `localhost` certificate with the `ASP.NET Core HTTPS development certificate` friendly name both under `Current User > Personal > Certificates` and `Current User > Trusted root certification authorities > Certificates`</span></span>
+* <span data-ttu-id="af881-285">모든 찾은 인증서를 개인 및 신뢰할 수 있는 루트 인증 기관에서 제거 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-285">Remove all the found certificates from both Personal and Trusted root certification authorities.</span></span> <span data-ttu-id="af881-286">IIS Express localhost 인증서를 제거 **하지** 마십시오.</span><span class="sxs-lookup"><span data-stu-id="af881-286">Do **not** remove the IIS Express localhost certificate.</span></span>
+* <span data-ttu-id="af881-287">다음 명령을 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-287">Run the following commands:</span></span>
+
+```dotnetcli
+dotnet dev-certs https --clean
+dotnet dev-certs https --trust
+```
+
+<span data-ttu-id="af881-288">열려 있는 모든 브라우저 인스턴스를 닫습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-288">Close any browser instances open.</span></span> <span data-ttu-id="af881-289">앱에 대 한 새 브라우저 창을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="af881-289">Open a new browser window to app.</span></span>
+
+### <a name="os-x---certificate-not-trusted"></a><span data-ttu-id="af881-290">OS X-인증서를 신뢰할 수 없음</span><span class="sxs-lookup"><span data-stu-id="af881-290">OS X - certificate not trusted</span></span>
+
+* <span data-ttu-id="af881-291">키 집합 액세스를 엽니다.</span><span class="sxs-lookup"><span data-stu-id="af881-291">Open KeyChain Access.</span></span>
+* <span data-ttu-id="af881-292">시스템 키 집합을 선택 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-292">Select the System keychain.</span></span>
+* <span data-ttu-id="af881-293">Localhost 인증서가 있는지 확인 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-293">Check for the presence of a localhost certificate.</span></span>
+* <span data-ttu-id="af881-294">모든 사용자가 신뢰할 수 있음을 나타내기 위해 아이콘에 `+` 기호가 포함 되어 있는지 확인 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-294">Check that it contains a `+` symbol on the icon to indicate its trusted for all users.</span></span>
+* <span data-ttu-id="af881-295">시스템 키 집합에서 인증서를 제거 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-295">Remove the certificate from the system keychain.</span></span>
+* <span data-ttu-id="af881-296">다음 명령을 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="af881-296">Run the following commands:</span></span>
+
+```dotnetcli
+dotnet dev-certs https --clean
+dotnet dev-certs https --trust
+```
+
+<span data-ttu-id="af881-297">열려 있는 모든 브라우저 인스턴스를 닫습니다.</span><span class="sxs-lookup"><span data-stu-id="af881-297">Close any browser instances open.</span></span> <span data-ttu-id="af881-298">앱에 대 한 새 브라우저 창을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="af881-298">Open a new browser window to app.</span></span>
+
+## <a name="additional-information"></a><span data-ttu-id="af881-299">추가 정보</span><span class="sxs-lookup"><span data-stu-id="af881-299">Additional information</span></span>
 
 * <xref:host-and-deploy/proxy-load-balancer>
-* [<span data-ttu-id="11185-270">Apache 사용 하 여 Linux에서 ASP.NET Core를 호스트 합니다. HTTPS 구성</span><span class="sxs-lookup"><span data-stu-id="11185-270">Host ASP.NET Core on Linux with Apache: HTTPS configuration</span></span>](xref:host-and-deploy/linux-apache#https-configuration)
-* [<span data-ttu-id="11185-271">Nginx 사용 하 여 Linux에서 ASP.NET Core를 호스트 합니다. HTTPS 구성</span><span class="sxs-lookup"><span data-stu-id="11185-271">Host ASP.NET Core on Linux with Nginx: HTTPS configuration</span></span>](xref:host-and-deploy/linux-nginx#https-configuration)
-* [<span data-ttu-id="11185-272">IIS에서 SSL 설정 하는 방법</span><span class="sxs-lookup"><span data-stu-id="11185-272">How to Set Up SSL on IIS</span></span>](/iis/manage/configuring-security/how-to-set-up-ssl-on-iis)
-* [<span data-ttu-id="11185-273">OWASP HSTS 브라우저 지원</span><span class="sxs-lookup"><span data-stu-id="11185-273">OWASP HSTS browser support</span></span>](https://www.owasp.org/index.php/HTTP_Strict_Transport_Security_Cheat_Sheet#Browser_Support)
+* <span data-ttu-id="af881-300">Apache를 사용 하는 Linux의 [Host ASP.NET Core: HTTPS 구성 @ no__t-0</span><span class="sxs-lookup"><span data-stu-id="af881-300">[Host ASP.NET Core on Linux with Apache: HTTPS configuration](xref:host-and-deploy/linux-apache#https-configuration)</span></span>
+* <span data-ttu-id="af881-301">Nginx를 사용 하 여 Linux에서 [Host ASP.NET Core: HTTPS 구성 @ no__t-0</span><span class="sxs-lookup"><span data-stu-id="af881-301">[Host ASP.NET Core on Linux with Nginx: HTTPS configuration](xref:host-and-deploy/linux-nginx#https-configuration)</span></span>
+* [<span data-ttu-id="af881-302">IIS에서 SSL을 설정하는 방법</span><span class="sxs-lookup"><span data-stu-id="af881-302">How to Set Up SSL on IIS</span></span>](/iis/manage/configuring-security/how-to-set-up-ssl-on-iis)
+* [<span data-ttu-id="af881-303">OWASP HSTS 브라우저 지원</span><span class="sxs-lookup"><span data-stu-id="af881-303">OWASP HSTS browser support</span></span>](https://www.owasp.org/index.php/HTTP_Strict_Transport_Security_Cheat_Sheet#Browser_Support)
