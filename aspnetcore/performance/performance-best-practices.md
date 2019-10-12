@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 09/26/2019
 uid: performance/performance-best-practices
-ms.openlocfilehash: c239c6d86e460f8fb80dfc47b88c090a796c617d
-ms.sourcegitcommit: c452e6af92e130413106c4863193f377cde4cd9c
-ms.translationtype: HT
+ms.openlocfilehash: a2952f5234cdef7f749a1af8dd4adcb887290629
+ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/10/2019
-ms.locfileid: "72246482"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72259778"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core 성능 모범 사례
 
@@ -174,7 +174,16 @@ ASP.NET Core의 모든 IO는 비동기입니다. 서버는 동기 및 비동기 
 > [!WARNING]
 > 요청이 클 경우 전체 HTTP 요청 본문을 메모리로 읽으면 OOM (메모리 부족) 조건이 발생할 수 있습니다. OOM은 서비스 거부를 유발할 수 있습니다.  자세한 내용은이 문서의 [메모리에 대 한 대량 요청 본문 또는 응답 본문 읽기 방지](#arlb) 를 참조 하세요.
 
-## <a name="prefer-readasformasync-over-requestform"></a>요청을 통해 ReadAsFormAsync를 선호 합니다.
+**다음 작업을 수행 합니다.** 다음 예제는 버퍼링 되지 않은 요청 본문을 사용 하 여 완전 비동기입니다.
+
+[!code-csharp[](performance-best-practices/samples/3.0/Controllers/MyFirstController.cs?name=snippet3)]
+
+위의 코드는 전체 HTTP 요청 본문을 메모리에 비동기적으로 읽습니다.
+
+> [!WARNING]
+> 요청이 클 경우 전체 HTTP 요청 본문을 메모리로 읽으면 OOM (메모리 부족) 조건이 발생할 수 있습니다. OOM은 서비스 거부를 유발할 수 있습니다.  자세한 내용은이 문서의 [메모리에 대 한 대량 요청 본문 또는 응답 본문 읽기 방지](#arlb) 를 참조 하세요.
+
+## <a name="prefer-readformasync-over-requestform"></a>요청을 통해 ReadFormAsync를 선호 합니다.
 
 `HttpContext.Request.ReadFormAsync` 대신 `HttpContext.Request.Form`를 사용합니다.
 `HttpContext.Request.Form`은 다음 조건 에서만 안전 하 게 읽을 수 있습니다.
