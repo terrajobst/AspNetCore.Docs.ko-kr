@@ -140,7 +140,7 @@ using Microsoft.EntityFrameworkCore;
 
 **솔루션 탐색기**에서 *Controllers* 폴더를 마우스 오른쪽 단추로 클릭하고 **> 추가 > 스캐폴드 항목 새로 만들기**를 선택합니다.
 
-![위의 단계 보기](adding-model/_static/add_controller21.png)
+![위 단계의 보기](adding-model/_static/add_controller21.png)
 
 **스캐폴드 추가** 대화 상자에서 **보기 포함 MVC 컨트롤러, Entity Framework > 추가 사용**을 선택합니다.
 
@@ -157,9 +157,9 @@ using Microsoft.EntityFrameworkCore;
 * **컨트롤러 이름:** 기본값 *MoviesController* 유지
 * **추가**를 선택합니다.
 
-Visual Studio에서 다음을 만듭니다.
+Visual Studio가 다음을 만듭니다.
 
-* 동영상 컨트롤러(*Controllers/MoviesController.cs*)
+* 영화 컨트롤러(*Controllers/MoviesController.cs*)
 * 만들기, 삭제, 세부 정보, 편집 및 인덱스 페이지에 대한 Razor 뷰 파일(*Views/Movies/\*.cshtml*)
 
 이 파일의 자동 생성을 *스캐폴딩*이라고 합니다.
@@ -168,13 +168,13 @@ Visual Studio에서 다음을 만듭니다.
 
 * 프로젝트 디렉터리(*Program.cs*, *Startup.cs* 및 *.csproj* 파일이 포함된 디렉터리)에서 명령 창을 엽니다.
 
-* Linux에서 스캐폴드 도구 경로를 내보냅니다.
+* Linux에서는 스캐폴드 도구 경로를 내보냅니다.
 
   ```console
     export PATH=$HOME/.dotnet/tools:$PATH
   ```
 
-* 다음 명령 실행:
+* 다음 명령을 실행합니다.
 
   ```dotnetcli
    dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -186,7 +186,7 @@ Visual Studio에서 다음을 만듭니다.
 
 * 프로젝트 디렉터리(*Program.cs*, *Startup.cs* 및 *.csproj* 파일이 포함된 디렉터리)에서 명령 창을 엽니다.
 
-* 다음 명령 실행:
+* 다음 명령을 실행합니다.
 
   ```dotnetcli
    dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -248,7 +248,7 @@ dotnet ef database update
 
 ### <a name="the-initialcreate-class"></a>InitialCreate 클래스
 
-*Migrations/{timestamp}_InitialCreate.cs* 마이그레이션 파일을 검사합니다.
+*Migrations/{timestamp}_InitialCreate.cs* 마이그레이션 파일을 확인합니다.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Migrations/20190805165915_InitialCreate.cs?name=snippet)]
 
@@ -258,9 +258,9 @@ dotnet ef database update
 
 ## <a name="test-the-app"></a>앱 테스트
 
-* 앱을 실행하고 **동영상 앱** 링크를 클릭합니다.
+* 앱을 실행하고 **Movie App** 링크를 클릭합니다.
 
-  다음 중 하나와 비슷한 예외가 발생하는 경우:
+  다음 중 하나와 비슷한 예외가 발생할 경우:
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -277,43 +277,43 @@ dotnet ef database update
 ---
   [마이그레이션 단계](#migration)를 누락했을 수 있습니다.
 
-* **만들기** 페이지를 테스트합니다. 데이터를 입력하고 제출합니다.
+* **Create** 페이지를 테스트합니다. 데이터를 입력하고 제출합니다.
 
   > [!NOTE]
   > `Price` 필드에는 소수점을 입력하지 못할 수도 있습니다. 소수점으로 쉼표(",")를 사용하는 영어가 아닌 로캘 및 미국 영어가 아닌 날짜 형식에 대해 [jQuery 유효성 검사](https://jqueryvalidation.org/)를 지원하려면 앱을 글로벌화해야 합니다. 세계화 지침은 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)를 참조하세요.
 
-* **편집**, **세부 정보** 및 **삭제** 링크를 테스트합니다.
+* **Edit**, **Details** 및 **Delete** 링크를 테스트합니다.
 
-## <a name="dependency-injection-in-the-controller"></a>컨트롤러의 종속성 주입
+## <a name="dependency-injection-in-the-controller"></a>컨트롤러에서 종속성 주입
 
-*Controllers/MoviesController.cs* 파일을 열고 생성자를 검사합니다.
+*Controllers/MoviesController.cs* 파일을 열고 생성자를 확인합니다.
 
 <!-- l.. Make copy of Movies controller (or use the old one as I did in the 3.0 upgrade) because we comment out the initial index method and update it later  -->
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_1)]
 
-생성자는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 컨트롤러에 데이터베이스 컨텍스트(`MvcMovieContext`)를 삽입할 수 있습니다. 컨트롤러의 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 메서드 각각에서 데이터베이스 컨텍스트를 사용합니다.
+생성자는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 컨트롤러에 데이터베이스 컨텍스트(`MvcMovieContext`)를 주입합니다. 컨트롤러의 각 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 메서드에서 해당 데이터베이스 컨텍스트를 사용합니다.
 
 <a name="strongly-typed-models-keyword-label"></a>
 <a name="strongly-typed-models-and-the--keyword"></a>
 
 ## <a name="strongly-typed-models-and-the-model-keyword"></a>강력한 형식의 모델 및 @model 키워드
 
-이 자습서의 앞부분에서 언급했듯이 컨트롤러가 `ViewData` 사전을 사용하여 데이터 또는 개체를 뷰에 전달할 수 있는 방법이 표시되었습니다. `ViewData` 사전은 확인할 정보를 전달하는 편리한 런타임에 바인딩된 방법을 제공하는 동적 개체입니다.
+이 자습서의 앞부분에서는 컨트롤러가 `ViewData` 사전을 사용하여 데이터 또는 개체를 보기에 전달하는 방법을 살펴봤습니다. `ViewData` 사전은 정보를 보기에 전달하기 위한 편리한 런타임 바인딩 방법을 제공하는 동적 개체입니다.
 
-또한 MVC는 확인할 강력한 형식의 모델 개체를 전달하는 기능을 제공합니다. 이 강력한 형식의 방법을 통해 컴파일 시간 코드 검사를 수행할 수 있습니다. 스캐폴딩 메커니즘은 `MoviesController` 클래스 및 뷰에서 이 방법(즉, 강력한 형식의 모델 전달)을 사용했습니다.
+또한 MVC는 보기에 강력한 형식의 모델 개체를 전달하는 기능도 제공합니다. 강력한 형식의 방법을 사용하면 컴파일 시에 코드 검사를 수행할 수 있습니다. 스캐폴딩 메커니즘은 `MoviesController` 클래스 및 보기에서 이 방법(즉, 강력한 형식의 모델 전달)을 사용합니다.
 
-*Controllers/MoviesController.cs* 파일에서 생성된 `Details` 메서드를 검사합니다.
+*Controllers/MoviesController.cs* 파일에서 생성된 `Details` 메서드를 확인합니다.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_details)]
 
-`id` 매개 변수는 일반적으로 경로 데이터 변수로 전달됩니다. 예를 들어 `https://localhost:5001/movies/details/1`은 다음을 설정합니다.
+일반적으로 `id` 매개 변수는 경로 데이터 변수로 전달됩니다. 예를 들어 `https://localhost:5001/movies/details/1`은 다음을 설정합니다.
 
-* `movies` 컨트롤러에 대한 컨트롤러(첫 번째 URL 세그먼트)
-* `details`에 대한 작업(두 번째 URL 세그먼트)
-* 1에 대한 ID(마지막 URL 세그먼트)
+* 컨트롤러를 `movies` 컨트롤러로 설정(첫 번째 URL 세그먼트)
+* 작업을 `details`로 설정(두 번째 URL 세그먼트)
+* ID를 1로 설정(마지막 URL 세그먼트)
 
-다음과 같이 쿼리 문자열을 사용하여 `id`에 전달할 수 있습니다.
+다음과 같이 쿼리 문자열을 사용하여 `id`에 전달할 수도 있습니다.
 
 `https://localhost:5001/movies/details?id=1`
 
@@ -326,44 +326,44 @@ var movie = await _context.Movie
     .FirstOrDefaultAsync(m => m.Id == id);
 ```
 
-영화가 있으면 `Movie` 모델의 인스턴스를 `Details` 뷰에 전달합니다.
+영화를 찾으면 `Movie` 모델의 인스턴스를 `Details` 보기에 전달합니다.
 
 ```csharp
 return View(movie);
    ```
 
-*Views/Movies/Details.cshtml* 파일의 내용을 검사합니다.
+*Views/Movies/Details.cshtml* 파일의 내용을 확인합니다.
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/DetailsOriginal.cshtml)]
 
-뷰 파일 맨 위에 있는 `@model` 문은 뷰에 필요한 개체의 형식을 지정합니다. 동영상 컨트롤러가 만들어진 후 다음 `@model` 문이 포함되었습니다.
+보기 파일 맨 위에 있는 `@model` 문은 보기에 필요한 개체 형식을 지정합니다. 영화 컨트롤러가 만들어질 때 다음 `@model` 문이 포함됩니다.
 
 ```HTML
 @model MvcMovie.Models.Movie
    ```
 
-이 `@model` 지시문을 사용하면 컨트롤러가 뷰에 전달한 동영상에 액세스할 수 있습니다. `Model` 개체는 강력한 형식입니다. 예를 들어 *Details.cshtml* 뷰에서 코드는 각 영화 필드를 강력한 형식의 `Model` 개체를 사용하여 `DisplayNameFor` 및 `DisplayFor` HTML 도우미에 전달합니다. 또한 `Create` 및 `Edit` 메서드 및 뷰는 `Movie` 모델 개체를 전달합니다.
+`@model` 지시문을 사용하면 컨트롤러가 보기에 전달한 영화에 액세스할 수 있습니다. `Model` 개체는 강력한 형식입니다. 예를 들어 *Details.cshtml* 보기의 코드는 각 영화 필드를 강력한 형식의 `Model` 개체를 사용하여 `DisplayNameFor` 및 `DisplayFor` HTML 도우미에 전달합니다. 또한 `Create` 및 `Edit` 메서드와 보기도 `Movie` 모델 개체를 전달합니다.
 
-영화 컨트롤러에서 *Index.cshtml* 뷰 및 `Index` 메서드를 검사합니다. 코드가 `View` 메서드를 호출하는 경우 `List` 개체를 생성하는 방법을 확인합니다. 이 코드는 `Index` 작업 메서드의 `Movies` 목록을 뷰에 전달합니다.
+*Index.cshtml* 보기 및 영화 컨트롤러의 `Index` 메서드를 확인합니다. 코드가 `View` 메서드를 호출할 때 `List` 개체를 생성하는 방법에 유의하세요. 이 코드는 `Index` 작업 메서드에서 보기로 `Movies` 목록을 전달합니다.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_index)]
 
-동영상 컨트롤러가 만들어진 경우 스캐폴딩은 다음 `@model` 문을 *Index.cshtml* 파일의 맨 위에 포함했습니다.
+영화 컨트롤러가 만들어질 때 스캐폴딩은 다음 `@model` 문을 *Index.cshtml* 파일의 맨 위에 포함시킵니다.
 
 <!-- Copy Index.cshtml to IndexOriginal.cshtml -->
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?range=1)]
 
-`@model` 지시문을 사용하면 강력한 형식인 `Model` 개체를 사용하여 컨트롤러가 뷰에 전달된 영화 목록에 액세스할 수 있습니다. 예를 들어 *Index.cshtml* 뷰에서 코드는 강력한 형식의 `Model` 개체에 `foreach` 문을 포함한 영화를 반복합니다.
+`@model` 지시문을 사용하면 강력한 형식인 `Model` 개체를 사용하여 컨트롤러가 보기에 전달한 영화 목록에 액세스할 수 있습니다. 예를 들어 *Index.cshtml* 보기에서 코드는 강력한 형식의 `Model` 개체에 대해 `foreach` 문을 사용하여 영화를 반복합니다.
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?highlight=1,31,34,37,40,43,46-48)]
 
-`Model` 개체가 강력한 형식이기 때문에(`IEnumerable<Movie>` 개체처럼) 루프의 각 항목은 `Movie`으로 입력됩니다. 즉, 여러 가지 이점 중에서 코드의 컴파일 시간 검사를 가져올 수 있습니다.
+`Model` 개체가 강력한 형식이기 때문에(`IEnumerable<Movie>` 개체처럼) 루프의 각 항목은 `Movie` 형식입니다. 즉, 여러 가지 이점 중에서도 코드의 컴파일 시 검사를 수행할 수 있다는 뜻입니다.
 
 ## <a name="additional-resources"></a>추가 리소스
 
 * [태그 도우미](xref:mvc/views/tag-helpers/intro)
-* [전역화 및 지역화](xref:fundamentals/localization)
+* [세계화 및 지역화](xref:fundamentals/localization)
 
 > [!div class="step-by-step"]
 > [이전 뷰 추가](adding-view.md)
@@ -377,7 +377,7 @@ return View(movie);
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-*Models* 폴더> **추가** > **클래스**를 마우스 오른쪽 단추로 클릭합니다. 클래스의 이름을 **동영상**으로 지정합니다.
+*Models* 폴더> **추가** > **클래스**를 마우스 오른쪽 단추로 클릭합니다. 클래스의 이름을 **Movie**로 지정합니다.
 
 [!INCLUDE [model 1b](~/includes/mvc-intro/model1b.md)]
 
@@ -390,15 +390,15 @@ return View(movie);
 
 ---
 
-## <a name="scaffold-the-movie-model"></a>동영상 모델 스캐폴드
+## <a name="scaffold-the-movie-model"></a>영화 모델 스캐폴드
 
-이 섹션에서는 동영상 모델을 스캐폴 합니다. 즉, 스캐폴드 도구는 동영상 모델에서 CRUD(만들기, 읽기, 업데이트 및 삭제) 작업을 위한 페이지를 생성합니다.
+이 섹션에서는 영화 모델을 스캐폴드 합니다. 즉, 스캐폴드 도구로 영화 모델에 대한 CRUD(생성, 읽기, 수정 및 삭제) 작업을 위한 페이지를 생성합니다.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 **솔루션 탐색기**에서 *Controllers* 폴더를 마우스 오른쪽 단추로 클릭하고 **> 추가 > 스캐폴드 항목 새로 만들기**를 선택합니다.
 
-![위의 단계 보기](adding-model/_static/add_controller21.png)
+![위 단계의 보기](adding-model/_static/add_controller21.png)
 
 **스캐폴드 추가** 대화 상자에서 **보기 포함 MVC 컨트롤러, Entity Framework > 추가 사용**을 선택합니다.
 
@@ -413,17 +413,17 @@ return View(movie);
 
 * **보기:** 확인된 각 옵션의 기본값 선택 유지
 * **컨트롤러 이름:** 기본값 *MoviesController* 유지
-* **추가** 선택
+* **추가**를 선택합니다.
 
 ![컨트롤러 추가 대화 상자](adding-model/_static/add_controller2.png)
 
-Visual Studio에서 다음을 만듭니다.
+Visual Studio가 다음을 만듭니다.
 
 * Entity Framework Core [데이터베이스 컨텍스트 클래스](xref:data/ef-mvc/intro#create-the-database-context)(*Data/MvcMovieContext.cs*)
-* 동영상 컨트롤러(*Controllers/MoviesController.cs*)
+* 영화 컨트롤러(*Controllers/MoviesController.cs*)
 * 만들기, 삭제, 세부 정보, 편집 및 인덱스 페이지에 대한 Razor 뷰 파일(*Views/Movies/\*.cshtml*)
 
-[CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete)(만들기, 읽기, 업데이트 및 삭제) 작업 메서드와 뷰 및 데이터베이스 컨텍스트의 자동 생성을 *스캐폴딩*이라고 합니다.
+[CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete)(생성, 읽기, 수정 및 삭제) 작업 메서드와 보기 및 데이터베이스 컨텍스트의 자동 생성을 *스캐폴딩*이라고 합니다.
 
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -437,13 +437,13 @@ Visual Studio에서 다음을 만듭니다.
    dotnet tool install --global dotnet-aspnet-codegenerator
    ```
 
-* Linux에서 스캐폴드 도구 경로를 내보냅니다.
+* Linux에서는 스캐폴드 도구 경로를 내보냅니다.
 
   ```console
     export PATH=$HOME/.dotnet/tools:$PATH
   ```
 
-* 다음 명령 실행:
+* 다음 명령을 실행합니다.
 
   ```dotnetcli
    dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -462,7 +462,7 @@ Visual Studio에서 다음을 만듭니다.
    dotnet tool install --global dotnet-aspnet-codegenerator
    ```
 
-* 다음 명령 실행:
+* 다음 명령을 실행합니다.
 
   ```dotnetcli
    dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -584,7 +584,7 @@ Login failed for user 'User-name'.
   > [!NOTE]
   > `Price` 필드에는 소수점을 입력하지 못할 수도 있습니다. 소수점으로 쉼표(",")를 사용하는 영어가 아닌 로캘 및 미국 영어가 아닌 날짜 형식에 대해 [jQuery 유효성 검사](https://jqueryvalidation.org/)를 지원하려면 앱을 글로벌화해야 합니다. 세계화 지침은 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)를 참조하세요.
 
-* **편집**, **세부 정보** 및 **삭제** 링크를 테스트합니다.
+* **Edit**, **Details** 및 **Delete** 링크를 테스트합니다.
 
 `Startup` 클래스를 검사합니다.
 
@@ -595,34 +595,34 @@ Login failed for user 'User-name'.
 * `services.AddDbContext<MvcMovieContext>(options =>`는 사용할 데이터베이스 및 연결 문자열을 지정합니다.
 * `=>`은 [람다 연산자](/dotnet/articles/csharp/language-reference/operators/lambda-operator)입니다.
 
-*Controllers/MoviesController.cs* 파일을 열고 생성자를 검사합니다.
+*Controllers/MoviesController.cs* 파일을 열고 생성자를 확인합니다.
 
 <!-- l.. Make copy of Movies controller because we comment out the initial index method and update it later  -->
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_1)]
 
-생성자는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 컨트롤러에 데이터베이스 컨텍스트(`MvcMovieContext`)를 삽입할 수 있습니다. 컨트롤러의 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 메서드 각각에서 데이터베이스 컨텍스트를 사용합니다.
+생성자는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 컨트롤러에 데이터베이스 컨텍스트(`MvcMovieContext`)를 주입합니다. 컨트롤러의 각 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 메서드에서 해당 데이터베이스 컨텍스트를 사용합니다.
 
 <a name="strongly-typed-models-keyword-label"></a>
 <a name="strongly-typed-models-and-the--keyword"></a>
 
 ## <a name="strongly-typed-models-and-the-model-keyword"></a>강력한 형식의 모델 및 @model 키워드
 
-이 자습서의 앞부분에서 언급했듯이 컨트롤러가 `ViewData` 사전을 사용하여 데이터 또는 개체를 뷰에 전달할 수 있는 방법이 표시되었습니다. `ViewData` 사전은 확인할 정보를 전달하는 편리한 런타임에 바인딩된 방법을 제공하는 동적 개체입니다.
+이 자습서의 앞부분에서는 컨트롤러가 `ViewData` 사전을 사용하여 데이터 또는 개체를 보기에 전달하는 방법을 살펴봤습니다. `ViewData` 사전은 정보를 보기에 전달하기 위한 편리한 런타임 바인딩 방법을 제공하는 동적 개체입니다.
 
-또한 MVC는 확인할 강력한 형식의 모델 개체를 전달하는 기능을 제공합니다. 이렇게 강력하게 형식화된 방법을 사용하면 코드를 검사하는 컴파일 시간을 개선할 수 있습니다. 스캐폴딩 메커니즘은 메서드 및 뷰를 만든 경우 `MoviesController` 클래스 및 뷰에서 이 방법(즉, 강력한 형식의 모델 전달)을 사용했습니다.
+또한 MVC는 보기에 강력한 형식의 모델 개체를 전달하는 기능도 제공합니다. 이렇게 강력하게 형식화된 방법을 사용하면 코드를 검사하는 컴파일 시간을 개선할 수 있습니다. 스캐폴딩 메커니즘은 메서드 및 뷰를 만든 경우 `MoviesController` 클래스 및 뷰에서 이 방법(즉, 강력한 형식의 모델 전달)을 사용했습니다.
 
 *Controllers/MoviesController.cs* 파일에서 생성된 `Details` 메서드를 검사합니다.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_details)]
 
-`id` 매개 변수는 일반적으로 경로 데이터 변수로 전달됩니다. 예를 들어 `https://localhost:5001/movies/details/1`은 다음을 설정합니다.
+일반적으로 `id` 매개 변수는 경로 데이터 변수로 전달됩니다. 예를 들어 `https://localhost:5001/movies/details/1`은 다음을 설정합니다.
 
-* `movies` 컨트롤러에 대한 컨트롤러(첫 번째 URL 세그먼트)
-* `details`에 대한 작업(두 번째 URL 세그먼트)
-* 1에 대한 ID(마지막 URL 세그먼트)
+* 컨트롤러를 `movies` 컨트롤러로 설정(첫 번째 URL 세그먼트)
+* 작업을 `details`로 설정(두 번째 URL 세그먼트)
+* ID를 1로 설정(마지막 URL 세그먼트)
 
-다음과 같이 쿼리 문자열을 사용하여 `id`에 전달할 수 있습니다.
+다음과 같이 쿼리 문자열을 사용하여 `id`에 전달할 수도 있습니다.
 
 `https://localhost:5001/movies/details?id=1`
 
@@ -635,13 +635,13 @@ var movie = await _context.Movie
     .FirstOrDefaultAsync(m => m.Id == id);
 ```
 
-영화가 있으면 `Movie` 모델의 인스턴스를 `Details` 뷰에 전달합니다.
+영화를 찾으면 `Movie` 모델의 인스턴스를 `Details` 보기에 전달합니다.
 
 ```csharp
 return View(movie);
    ```
 
-*Views/Movies/Details.cshtml* 파일의 내용을 검사합니다.
+*Views/Movies/Details.cshtml* 파일의 내용을 확인합니다.
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/DetailsOriginal.cshtml)]
 
@@ -651,9 +651,9 @@ return View(movie);
 @model MvcMovie.Models.Movie
    ```
 
-이 `@model` 지시문을 사용하면 강력한 형식인 `Model` 개체를 사용하여 컨트롤러가 뷰에 전달된 영화에 액세스할 수 있습니다. 예를 들어 *Details.cshtml* 뷰에서 코드는 각 영화 필드를 강력한 형식의 `Model` 개체를 사용하여 `DisplayNameFor` 및 `DisplayFor` HTML 도우미에 전달합니다. 또한 `Create` 및 `Edit` 메서드 및 뷰는 `Movie` 모델 개체를 전달합니다.
+이 `@model` 지시문을 사용하면 강력한 형식인 `Model` 개체를 사용하여 컨트롤러가 뷰에 전달된 영화에 액세스할 수 있습니다. 예를 들어 *Details.cshtml* 뷰에서 코드는 각 영화 필드를 강력한 형식의 `Model` 개체를 사용하여 `DisplayNameFor` 및 `DisplayFor` HTML 도우미에 전달합니다. 또한 `Create` 및 `Edit` 메서드와 보기도 `Movie` 모델 개체를 전달합니다.
 
-영화 컨트롤러에서 *Index.cshtml* 뷰 및 `Index` 메서드를 검사합니다. 코드가 `View` 메서드를 호출하는 경우 `List` 개체를 생성하는 방법을 확인합니다. 이 코드는 `Index` 작업 메서드의 `Movies` 목록을 뷰에 전달합니다.
+*Index.cshtml* 보기 및 영화 컨트롤러의 `Index` 메서드를 확인합니다. 코드가 `View` 메서드를 호출하는 경우 `List` 개체를 생성하는 방법을 확인합니다. 이 코드는 `Index` 작업 메서드의 `Movies` 목록을 뷰에 전달합니다.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_index)]
 
@@ -663,16 +663,16 @@ return View(movie);
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?range=1)]
 
-`@model` 지시문을 사용하면 강력한 형식인 `Model` 개체를 사용하여 컨트롤러가 뷰에 전달된 영화 목록에 액세스할 수 있습니다. 예를 들어 *Index.cshtml* 뷰에서 코드는 강력한 형식의 `Model` 개체에 `foreach` 문을 포함한 영화를 반복합니다.
+`@model` 지시문을 사용하면 강력한 형식인 `Model` 개체를 사용하여 컨트롤러가 보기에 전달한 영화 목록에 액세스할 수 있습니다. 예를 들어 *Index.cshtml* 뷰에서 코드는 강력한 형식의 `Model` 개체에 `foreach` 문을 포함한 영화를 반복합니다.
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?highlight=1,31,34,37,40,43,46-48)]
 
-`Model` 개체가 강력한 형식이기 때문에(`IEnumerable<Movie>` 개체처럼) 루프의 각 항목은 `Movie`으로 입력됩니다. 즉, 여러 가지 이점 중에서 코드를 검사하는 컴파일 시간을 가져올 수 있습니다.
+`Model` 개체가 강력한 형식이기 때문에(`IEnumerable<Movie>` 개체처럼) 루프의 각 항목은 `Movie` 형식입니다. 즉, 여러 가지 이점 중에서 코드를 검사하는 컴파일 시간을 가져올 수 있습니다.
 
 ## <a name="additional-resources"></a>추가 리소스
 
 * [태그 도우미](xref:mvc/views/tag-helpers/intro)
-* [전역화 및 지역화](xref:fundamentals/localization)
+* [세계화 및 지역화](xref:fundamentals/localization)
 
 > [!div class="step-by-step"]
 > [이전 뷰 추가](adding-view.md)
