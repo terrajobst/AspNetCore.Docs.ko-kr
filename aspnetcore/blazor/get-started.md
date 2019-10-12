@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/25/2019
 uid: blazor/get-started
-ms.openlocfilehash: 5aec91eff7de0732a47fec1aafa5e094c89c37a4
-ms.sourcegitcommit: 14b25156e34c82ed0495b4aff5776ac5b1950b5e
+ms.openlocfilehash: ef9113dbfdbbd5920c4358cdac0c77c60f40b7c8
+ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/26/2019
-ms.locfileid: "71295439"
+ms.lasthandoff: 10/12/2019
+ms.locfileid: "72288802"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>ASP.NET Core Blazor 시작 하기
 
@@ -38,11 +38,11 @@ Blazor 시작 하기:
 
    2 \. 새 프로젝트를 만듭니다.
 
-   3\. **Blazor App**을 선택 합니다. **새로 만들기**를 선택합니다.
+   3\. **Blazor App**을 선택 합니다. **다음**을 선택합니다.
 
    4 \. **프로젝트 이름** 필드에 프로젝트 이름을 제공하거나 기본 프로젝트 이름을 수락합니다. **위치** 항목이 올바른지 확인 하거나 프로젝트의 위치를 제공 합니다. **만들기**를 선택합니다.
 
-   5\. Blazor weasembomexperience 환경에 대해 **Blazor Weasembomapp** 템플릿을 선택 합니다. Blazor 서버 환경의 경우 **Blazor Server 앱** 템플릿을 선택 합니다. **만들기**를 선택합니다. 두 Blazor 호스팅 모델에 대 한 자세한 내용은 *Blazor Server* 및 *Blazor Weasembomommbmbsembmbsembmbsembse.* <xref:blazor/hosting-models>
+   5\. Blazor weasembomexperience 환경에 대해 **Blazor Weasembomapp** 템플릿을 선택 합니다. Blazor 서버 환경의 경우 **Blazor Server 앱** 템플릿을 선택 합니다. **만들기**를 선택합니다. 두 Blazor 호스팅 모델에 대 한 자세한 내용은 *Blazor Server* 및 *Blazor Weasembmbambmbsembmbsemba*<xref:blazor/hosting-models>를 참조 하세요.
 
    6\. **F5** 키를 눌러 앱을 실행합니다.
 
@@ -67,13 +67,13 @@ Blazor 시작 하기:
       dotnet new blazorserver -o WebApplication1
       ```
 
-      두 Blazor 호스팅 모델에 대 한 자세한 내용은 *Blazor Server* 및 *Blazor Weasembomommbmbsembmbsembmbsembse.* <xref:blazor/hosting-models>
+      두 Blazor 호스팅 모델에 대 한 자세한 내용은 *Blazor Server* 및 *Blazor Weasembmbambmbsembmbsemba*<xref:blazor/hosting-models>를 참조 하세요.
 
    4 \. Visual Studio Code에서 *WebApplication1* 폴더를 엽니다.
 
    5\. Blazor 서버 프로젝트의 경우 IDE는 프로젝트를 빌드 및 디버그 하기 위해 자산을 추가 하도록 요청 합니다. **예**를 선택합니다.
 
-   6\. Blazor 서버 앱을 사용 하는 경우 Visual Studio Code 디버거를 사용 하 여 앱을 실행 합니다. Blazor weasembomapp을 사용 하는 경우 `dotnet run` 앱의 프로젝트 폴더에서를 실행 합니다.
+   6\. Blazor 서버 앱을 사용 하는 경우 Visual Studio Code 디버거를 사용 하 여 앱을 실행 합니다. Blazor Weasembomapp을 사용 하는 경우 앱의 프로젝트 폴더에서 `dotnet run`을 실행 합니다.
 
    7 \. 브라우저에서 `https://localhost:5001`로 이동합니다.
 
@@ -115,7 +115,7 @@ Blazor 시작 하기:
    dotnet run
    ```
 
-   두 Blazor 호스팅 모델에 대 한 자세한 내용은 *Blazor Server* 및 *Blazor Weasembomommbmbsembmbsembmbsembse.* <xref:blazor/hosting-models>
+   두 Blazor 호스팅 모델에 대 한 자세한 내용은 *Blazor Server* 및 *Blazor Weasembmbambmbsembmbsemba*<xref:blazor/hosting-models>를 참조 하세요.
 
    브라우저에서 `https://localhost:5001`로 이동합니다.
 
@@ -127,47 +127,47 @@ Blazor 시작 하기:
 * 카운터
 * 데이터 페치
 
-카운터 페이지에서 **Click me** 단추를 선택하여 페이지 새로 고침 없이 카운터를 증분합니다. 웹 페이지에서 카운터를 증가 시키려면 JavaScript를 작성 해야 하지만 Razor 구성 요소는을 사용 하 C#여 더 나은 접근 방식을 제공 합니다.
+카운터 페이지에서 **Click me** 단추를 선택하여 페이지 새로 고침 없이 카운터를 증분합니다. 웹 페이지에서 카운터를 증가 시키려면 JavaScript를 작성 해야 하지만 Blazor을 사용 C#하면 됩니다.
 
 *Pages/Counter.razor*:
 
 [!code-cshtml[](get-started/samples_snapshot/3.x/Counter1.razor?highlight=7,12-15)]
 
-맨 위에 `/counter` 있는지시문`@page` 에 지정 된 대로 브라우저에서에 대 한 요청은 구성요소가해당콘텐츠를렌더링하도록합니다.`Counter` 구성 요소는 렌더링 트리의 메모리 내 표현으로 렌더링 되어 유연 하 고 효율적인 방식으로 UI를 업데이트 하는 데 사용할 수 있습니다.
+브라우저에서 `/counter`에 대 한 요청은 맨 위에 있는 `@page` 지시문에 지정 된 대로 `Counter` 구성 요소가 해당 내용을 렌더링 합니다. 구성 요소는 렌더링 트리의 메모리 내 표현으로 렌더링 되어 유연 하 고 효율적인 방식으로 UI를 업데이트 하는 데 사용할 수 있습니다.
 
 **[클릭** ] 단추를 선택할 때마다:
 
-* `onclick` 이벤트가 발생 합니다.
+* @No__t-0 이벤트가 발생 합니다.
 * `IncrementCount` 메서드가 호출됩니다.
-* `currentCount` 가 증가 합니다.
+* @No__t-0이 증가 합니다.
 * 구성 요소가 다시 렌더링 됩니다.
 
 런타임은 새 콘텐츠를 이전 콘텐츠와 비교 하 고 변경 된 콘텐츠만 문서 개체 모델 (DOM)에 적용 합니다.
 
-HTML 구문을 사용 하 여 구성 요소를 다른 구성 요소에 추가 합니다. 예를 들어 `Counter` `Index` 구성 요소에 `<Counter />` 요소를 추가 하 여 응용 프로그램의 홈페이지에 구성 요소를 추가 합니다.
+HTML 구문을 사용 하 여 구성 요소를 다른 구성 요소에 추가 합니다. 예를 들어 `Index` 구성 요소에 `<Counter />` 요소를 추가 하 여 `Counter` 구성 요소를 앱 홈 페이지에 추가 합니다.
 
 *Pages/Index.razor*:
 
 [!code-cshtml[](get-started/samples_snapshot/3.x/Index1.razor?highlight=7)]
 
-앱을 실행합니다. 홈 페이지에는 `Counter` 구성 요소에서 제공 하는 고유한 카운터가 있습니다.
+앱을 실행합니다. 홈페이지에는 `Counter` 구성 요소에서 제공 하는 고유한 카운터가 있습니다.
 
-구성 요소 매개 변수는 자식 구성 요소에 대 한 속성을 설정할 수 있도록 하는 특성 또는 [자식 콘텐츠](xref:blazor/components#child-content)를 사용 하 여 지정 됩니다. `Counter` 구성 요소에 매개 변수를 추가 하려면 `@code` 구성 요소의 블록을 업데이트 합니다.
+구성 요소 매개 변수는 자식 구성 요소에 대 한 속성을 설정할 수 있도록 하는 특성 또는 [자식 콘텐츠](xref:blazor/components#child-content)를 사용 하 여 지정 됩니다. @No__t-0 구성 요소에 매개 변수를 추가 하려면 구성 요소의 `@code` 블록을 업데이트 합니다.
 
-* 특성`[Parameter]` 을 사용 하 여 `IncrementAmount` 에 대 한 public 속성을 추가 합니다.
+* @No__t-1 특성을 사용 하 여 `IncrementAmount`에 대 한 public 속성을 추가 합니다.
 * `currentCount` 값을 늘릴 때 `IncrementAmount`를 사용하도록 `IncrementCount` 메서드를 변경합니다.
 
 *Pages/Counter.razor*:
 
 [!code-cshtml[](get-started/samples_snapshot/3.x/Counter2.razor?highlight=12-13,17)]
 
-특성을 `IncrementAmount` 사용 하 `Index` 여 구성 `<Counter>` 요소의 요소에를 지정 합니다.
+특성을 사용 하 여 `Index` 구성 요소의 `<Counter>` 요소에 `IncrementAmount`을 지정 합니다.
 
 *Pages/Index.razor*:
 
 [!code-cshtml[](get-started/samples_snapshot/3.x/Index2.razor?highlight=7)]
 
-앱을 실행합니다. 구성 요소에는 클릭 단추를 선택할 때마다 10 씩 증가 하는 고유한 카운터가 있습니다. `Index` 의 `Counter` 구성 요소 ( `/counter` *카운터. razor*)는 계속 해 서 1 씩 증가 합니다.
+앱을 실행합니다. @No__t-0 구성 요소에는 **클릭** 단추를 선택할 때마다 10 씩 증가 하는 고유한 카운터가 있습니다. @No__t-2의 `Counter` 구성 요소 ( *. razor*)는 1 씩 계속 증가 합니다.
 
 ## <a name="next-steps"></a>다음 단계
 
