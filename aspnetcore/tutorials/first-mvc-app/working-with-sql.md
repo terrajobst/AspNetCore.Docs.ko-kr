@@ -5,12 +5,12 @@ description: ASP.NET Core MVC 앱에서 SQL Server LocalDB 또는 SQLite를 사�
 ms.author: riande
 ms.date: 8/16/2019
 uid: tutorials/first-mvc-app/working-with-sql
-ms.openlocfilehash: d2784d9edc32b79e67dbcd193be55b44bc8d2c49
-ms.sourcegitcommit: 7a46973998623aead757ad386fe33602b1658793
+ms.openlocfilehash: cb356bca50540d7c471cf625a26bfe2dd155b627
+ms.sourcegitcommit: 3ffcd8cbff8b49128733842f72270bc58279de70
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/15/2019
-ms.locfileid: "69487638"
+ms.lasthandoff: 10/04/2019
+ms.locfileid: "71955914"
 ---
 # <a name="work-with-sql-in-aspnet-core"></a>ASP.NET Core에서 SQL 작업
 
@@ -93,7 +93,7 @@ if (context.Movie.Any())
 
 *Program.cs*의 내용을 다음 코드로 바꿉니다.
 
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Program.cs)]
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Program.cs)]
 
 앱 테스트
 
@@ -106,7 +106,7 @@ if (context.Movie.Any())
 
     ![IIS Express 시스템 트레이 아이콘](working-with-sql/_static/iisExIcon.png)
 
-    ![바로 가기 메뉴](working-with-sql/_static/stopIIS.png)
+    ![상황에 맞는 메뉴](working-with-sql/_static/stopIIS.png)
 
     * 비디버그 모드에서 VS를 실행했던 경우 F5 키를 눌러 디버그 모드에서 실행되도록 합니다.
     * 디버그 모드에서 VS를 실행했던 경우 디버거를 중지하고 F5 키를 누릅니다.
@@ -218,7 +218,7 @@ if (context.Movie.Any())
 
     ![IIS Express 시스템 트레이 아이콘](working-with-sql/_static/iisExIcon.png)
 
-    ![바로 가기 메뉴](working-with-sql/_static/stopIIS.png)
+    ![상황에 맞는 메뉴](working-with-sql/_static/stopIIS.png)
 
     * 비디버그 모드에서 VS를 실행했던 경우 F5 키를 눌러 디버그 모드에서 실행되도록 합니다.
     * 디버그 모드에서 VS를 실행했던 경우 디버거를 중지하고 F5 키를 누릅니다.

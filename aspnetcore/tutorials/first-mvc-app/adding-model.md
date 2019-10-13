@@ -160,7 +160,7 @@ using Microsoft.EntityFrameworkCore;
 Visual Studio가 다음을 만듭니다.
 
 * 영화 컨트롤러(*Controllers/MoviesController.cs*)
-* Create, Delete, Details, Edit, 및 Index 페이지에 대한 Razor 보기 파일(*Views/Movies/\*.cshtml*)
+* 만들기, 삭제, 세부 정보, 편집 및 인덱스 페이지에 대한 Razor 보기 파일(*Views/Movies/\*.cshtml*)
 
 이러한 파일의 자동 생성을 *스캐폴딩*이라고 합니다.
 
@@ -421,7 +421,7 @@ Visual Studio가 다음을 만듭니다.
 
 * Entity Framework Core [데이터베이스 컨텍스트 클래스](xref:data/ef-mvc/intro#create-the-database-context)(*Data/MvcMovieContext.cs*)
 * 영화 컨트롤러(*Controllers/MoviesController.cs*)
-* Create, Delete, Details, Edit, 및 Index 페이지에 대한 Razor 보기 파일(*Views/Movies/\*.cshtml*)
+* 만들기, 삭제, 세부 정보, 편집 및 인덱스 페이지에 대한 Razor 보기 파일(*Views/Movies/\*.cshtml*)
 
 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete)(생성, 읽기, 수정 및 삭제) 작업 메서드와 보기 및 데이터베이스 컨텍스트의 자동 생성을 *스캐폴딩*이라고 합니다.
 

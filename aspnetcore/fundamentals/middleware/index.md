@@ -5,14 +5,14 @@ description: ASP.NET Core 미들웨어 및 요청 파이프라인에 대해 알�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/22/2019
+ms.date: 10/08/2019
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 674e89cd22ce113474dfbba44b57d9255446fc3e
-ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
+ms.openlocfilehash: 8f5c3aabf17e78ae9675048602317c54f08e82a7
+ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/06/2019
-ms.locfileid: "70773776"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72259821"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core 미들웨어
 
@@ -68,7 +68,7 @@ ASP.NET Core 요청 파이프라인은 하나씩 차례로 호출되는 요청 �
 1. 예외/오류 처리
    * 앱이 개발 환경에서 실행되는 경우:
      * 개발자 예외 페이지 미들웨어(<xref:Microsoft.AspNetCore.Builder.DeveloperExceptionPageExtensions.UseDeveloperExceptionPage*>)가 앱 런타임 오류를 보고합니다.
-     * 데이터베이스 오류 페이지 미들웨어(<xref:Microsoft.AspNetCore.Builder.DatabaseErrorPageExtensions.UseDatabaseErrorPage*>)가 데이터베이스 런타임 오류를 보고합니다.
+     * 데이터베이스 오류 페이지 미들웨어가 데이터베이스 런타임 오류를 보고합니다.
    * 프로덕션 환경에서 앱을 실행하는 경우:
      * 예외 처리기 미들웨어(<xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler*>)가 다음 미들웨어에서 던져진 예외를 잡습니다.
      * HTTP HSTS(엄격한 전송 보안 프로토콜) 미들웨어(<xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts*>)가 `Strict-Transport-Security` 헤더를 추가합니다.
@@ -80,6 +80,18 @@ ASP.NET Core 요청 파이프라인은 하나씩 차례로 호출되는 요청 �
 1. 권한 부여 미들웨어(`UseAuthorization`)는 사용자에게 보안 리소스에 액세스할 수 있는 권한을 부여합니다.
 1. 세션 미들웨어(<xref:Microsoft.AspNetCore.Builder.SessionMiddlewareExtensions.UseSession*>)가 세션 상태를 설정 및 유지합니다. 앱이 세션 상태를 사용하는 경우에는 쿠키 정책 미들웨어 이후 및 MVC 미들웨어 이전에 세션 미들웨어를 호출하세요.
 1. 엔드포인트 라우팅 미들웨어(`MapRazorPages`를 포함하는 `UseEndpoints`)를 사용하여 요청 파이프라인에 Razor Pages 엔드포인트를 추가합니다.
+
+<!--
+
+FUTURE UPDATE
+
+On the next topic overhaul/release update, add API crosslink to "Database Error Page Middleware" in Item 1 of the list ...
+
+Microsoft.AspNetCore.Builder.DatabaseErrorPageExtensions.UseDatabaseErrorPage*
+
+... when available via the API docs.
+
+-->
 
 ```csharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -142,7 +154,7 @@ public void Configure(IApplicationBuilder app)
 1. 예외/오류 처리
    * 앱이 개발 환경에서 실행되는 경우:
      * 개발자 예외 페이지 미들웨어(<xref:Microsoft.AspNetCore.Builder.DeveloperExceptionPageExtensions.UseDeveloperExceptionPage*>)가 앱 런타임 오류를 보고합니다.
-     * 데이터베이스 오류 페이지 미들웨어(<xref:Microsoft.AspNetCore.Builder.DatabaseErrorPageExtensions.UseDatabaseErrorPage*>)가 데이터베이스 런타임 오류를 보고합니다.
+     * 데이터베이스 오류 페이지 미들웨어(`Microsoft.AspNetCore.Builder.DatabaseErrorPageExtensions.UseDatabaseErrorPage`)가 데이터베이스 런타임 오류를 보고합니다.
    * 프로덕션 환경에서 앱을 실행하는 경우:
      * 예외 처리기 미들웨어(<xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler*>)가 다음 미들웨어에서 던져진 예외를 잡습니다.
      * HTTP HSTS(엄격한 전송 보안 프로토콜) 미들웨어(<xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts*>)가 `Strict-Transport-Security` 헤더를 추가합니다.

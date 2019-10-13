@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core 3.0의 새로운 기능에 대해 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/26/2019
+ms.date: 10/08/2019
 uid: aspnetcore-3.0
-ms.openlocfilehash: ec3de5b35883752b7b3dbefceccec55da3986f39
-ms.sourcegitcommit: dc96d76f6b231de59586fcbb989a7fb5106d26a8
+ms.openlocfilehash: 90433773bec2efc5a2bc39d71ce7ae324b922046
+ms.sourcegitcommit: fcdf9aaa6c45c1a926bd870ed8f893bdb4935152
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/01/2019
-ms.locfileid: "71703672"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72165363"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3.0의 새로운 기능
 
@@ -302,7 +302,7 @@ subject.complete();
 
 위의 두 코드 조각과 같은 코드를 사용하여 실시간 스트리밍 환경을 만들 수 있습니다.
 
-### <a name="new-json-serialization"></a>새로운 JSON 직렬화
+## <a name="new-json-serialization"></a>새로운 JSON 직렬화
 
 ASP.NET Core 3.0은 이제 JSON 직렬화를 위해 기본적으로 <xref:System.Text.Json>을 사용합니다.
 
@@ -397,7 +397,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 Angular 템플릿은 Angular 8을 사용하는 것으로 업데이트되었습니다.
 
-RCL(Razor 클래스 라이브러리) 템플릿은 기본적으로 Razor 구성 요소 개발로 설정됩니다. Visual Studio의 새 템플릿 옵션은 페이지 및 보기에 대한 템플릿 지원을 제공합니다. 명령 셸의 템플릿으로부터 RCL을 생성할 때 `-support-pages-and-views` 옵션(`dotnet new razorclasslib -support-pages-and-views`)을 전달합니다.
+RCL(Razor 클래스 라이브러리) 템플릿은 기본적으로 Razor 구성 요소 개발로 설정됩니다. Visual Studio의 새 템플릿 옵션은 페이지 및 보기에 대한 템플릿 지원을 제공합니다. 명령 셸의 템플릿으로부터 RCL을 생성할 때 `--support-pages-and-views` 옵션(`dotnet new razorclasslib --support-pages-and-views`)을 전달합니다.
 
 ## <a name="generic-host"></a>제네릭 호스트
 

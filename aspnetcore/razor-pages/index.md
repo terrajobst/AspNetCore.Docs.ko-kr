@@ -4,14 +4,14 @@ author: Rick-Anderson
 description: 페이지 코딩 중심의 시나리오에서 ASP.NET Core의 Razor 페이지를 사용하면 MVC를 사용할 때보다 어떻게 더 쉽고 생산적인지 알아봅니다.
 monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
-ms.date: 09/19/2019
+ms.date: 10/07/2019
 uid: razor-pages/index
-ms.openlocfilehash: 63938b0347dc698a67f2ba8c083097c55c6c9c66
-ms.sourcegitcommit: 73e255e846e414821b8cc20ffa3aec946735cd4e
+ms.openlocfilehash: 61b1c3a17b378524c8fea9004b615c2d3d480135
+ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/03/2019
-ms.locfileid: "71925272"
+ms.lasthandoff: 10/07/2019
+ms.locfileid: "72007466"
 ---
 # <a name="introduction-to-razor-pages-in-aspnet-core"></a>ASP.NET Core의 Razor 페이지 소개
 
@@ -583,7 +583,7 @@ URL에서 쿼리 문자열 `?handler=JoinList`를 사용하지 않으려면 경�
 
 ### <a name="specify-that-razor-pages-are-at-the-content-root"></a>Razor 페이지를 콘텐츠 루트로 지정하기
 
-기본적으로 Razor 페이지의 루트 경로는 */Pages* 디렉터리입니다. <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.WithRazorPagesAtContentRoot*>를 추가하여 Razor Pages가 앱의 콘텐츠 루트(<xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath>)가 되도록 지정:
+기본적으로 Razor 페이지의 루트 경로는 */Pages* 디렉터리입니다. <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.WithRazorPagesAtContentRoot*>을(를) 추가하여 Razor Pages가 앱의 [콘텐츠 루트](xref:fundamentals/index#content-root)(<xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath>)가 되도록 지정:
 
 [!code-cs[](index/3.0sample/RazorPagesContacts/StartupWithRazorPagesAtContentRoot.cs?name=snippet)]
 
@@ -1092,7 +1092,7 @@ URL에서 쿼리 문자열 `?handler=JoinList`를 사용하지 않으려면 경�
 
 ### <a name="specify-that-razor-pages-are-at-the-content-root"></a>Razor 페이지를 콘텐츠 루트로 지정하기
 
-기본적으로 Razor 페이지의 루트 경로는 */Pages* 디렉터리입니다. [AddMvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_)에 [WithRazorPagesAtContentRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvcbuilderextensions.withrazorpagesatcontentroot)를 추가하여 Razor 페이지를 앱의 콘텐츠 루트([ContentRootPath](/dotnet/api/microsoft.aspnetcore.hosting.ihostingenvironment.contentrootpath))로 지정합니다.
+기본적으로 Razor 페이지의 루트 경로는 */Pages* 디렉터리입니다. [AddMvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_)에 [WithRazorPagesAtContentRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvcbuilderextensions.withrazorpagesatcontentroot)를 추가하여 Razor Pages를 앱의 [콘텐츠 루트](xref:fundamentals/index#content-root)([ContentRootPath](/dotnet/api/microsoft.aspnetcore.hosting.ihostingenvironment.contentrootpath))로 지정합니다.
 
 ```csharp
 services.AddMvc()
