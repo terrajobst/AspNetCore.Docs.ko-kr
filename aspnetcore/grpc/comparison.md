@@ -1,19 +1,19 @@
 ---
-title: GRPC 서비스와 HTTP Api 비교
+title: gRPC 서비스와 HTTP API 비교
 author: jamesnk
 description: GRPC와 HTTP Api를 비교한 방법과 권장 시나리오를 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/25/2019
 uid: grpc/comparison
-ms.openlocfilehash: 935078d890998fe6af366e3f6a7bf21f53c20cf7
-ms.sourcegitcommit: a7813a776809a5029c94aa503ee71994f156231f
+ms.openlocfilehash: 5c3ea7a78401e6483425fa0774b3051b3d20f516
+ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/25/2019
-ms.locfileid: "71267721"
+ms.lasthandoff: 10/12/2019
+ms.locfileid: "72289042"
 ---
-# <a name="compare-grpc-services-with-http-apis"></a>GRPC 서비스와 HTTP Api 비교
+# <a name="compare-grpc-services-with-http-apis"></a>gRPC 서비스와 HTTP API 비교
 
 별 [뉴턴-킹](https://twitter.com/jamesnk)
 
@@ -55,7 +55,7 @@ gRPC는 http 1.x에서 상당한 성능 이점을 제공 하는 http의 주요 �
 
 JSON을 사용 하는 HTTP API에 대 한 공식 사양이 없습니다. 개발자는 Url, HTTP 동사 및 응답 코드의 가장 좋은 형식을 논의 합니다.
 
-[Grpc 사양은](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md) grpc 서비스에서 따라야 하는 형식에 대 한 지침입니다. gRPC는 플랫폼 및 구현에서 gPRC가 일치 하므로 논쟁을 제거 하 고 개발자 시간을 절약 합니다.
+[Grpc 사양은](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md) grpc 서비스에서 따라야 하는 형식에 대 한 지침입니다. grpc는 플랫폼 및 구현에서 일치 하므로 논쟁을 제거 하 고 개발자 시간을 절약 합니다.
 
 ### <a name="streaming"></a>스트리밍
 
@@ -79,9 +79,9 @@ gRPC는 클라이언트가 RPC가 완료 될 때까지 대기 하는 기간을 �
 gRPC는 다음과 같은 시나리오에 적합 합니다.
 
 * **마이크로 서비스** &ndash; grpc는 대기 시간이 짧고 처리량이 높은 통신을 위해 설계 되었습니다. gRPC는 효율성이 중요 한 경량 마이크로 서비스에 적합 합니다.
-* **지점 간 실시간 통신** &ndash; grpc는 양방향 스트리밍을 위한 뛰어난 지원 기능을 제공 합니다. gRPC 서비스는 폴링을 사용 하지 않고 실시간으로 메시지를 푸시할 수 있습니다.
-* **Polyglot 환경** &ndash; grpc 도구는 널리 사용 되는 모든 개발 언어를 지원 하므로 grpc를 다중 언어 환경에 적합 하 게 선택할 수 있습니다.
-* **네트워크 제한 환경** &ndash; grpc 메시지는 경량 메시지 형식인 Protobuf를 사용 하 여 직렬화 됩니다. GRPC 메시지는 항상 해당 하는 JSON 메시지 보다 작습니다.
+* **Point to point 실시간 통신** &ndash; grpc는 양방향 스트리밍을 지원 합니다. gRPC 서비스는 폴링을 사용 하지 않고 실시간으로 메시지를 푸시할 수 있습니다.
+* **Polyglot environment** &ndash; grpc 도구는 널리 사용 되는 모든 개발 언어를 지원 하 고, grpc를 다중 언어 환경에 적합 하 게 선택할 수 있습니다.
+* **네트워크 제한 환경** &ndash; grpc 메시지는 경량 메시지 형식인 Protobuf를 사용 하 여 serialize 됩니다. GRPC 메시지는 항상 해당 하는 JSON 메시지 보다 작습니다.
 
 ## <a name="grpc-weaknesses"></a>gRPC 약점
 
@@ -105,9 +105,9 @@ gRPC 메시지는 기본적으로 Protobuf로 인코딩됩니다. Protobuf는 �
 
 다른 프레임 워크는 다음과 같은 시나리오에서 gRPC 보다 권장 됩니다.
 
-* **브라우저에서 액세스할 수 있는 api** &ndash; grpc는 브라우저에서 완전히 지원 되지 않습니다. gRPC-웹은 브라우저 지원을 제공할 수 있지만 제한 사항이 있으며 서버 프록시를 소개 합니다.
-* **실시간 통신 브로드캐스트** &ndash; grpc는 스트리밍을 통한 실시간 통신을 지원 하지만 등록 된 연결에 메시지를 브로드캐스트하는 개념이 없습니다. 예를 들어 대화방의 모든 클라이언트에 새 채팅 메시지를 보내야 하는 대화방 시나리오에서 각 gRPC 호출은 클라이언트에 새 채팅 메시지를 개별적으로 스트리밍하는 데 필요 합니다. [SignalR](xref:signalr/introduction) 는이 시나리오에 유용한 프레임 워크입니다. SignalR에는 영구 연결의 개념과 메시지 브로드캐스팅을 위한 기본 제공 지원이 있습니다.
-* **프로세스 간 통신** &ndash; 들어오는 grpc 호출을 허용 하려면 프로세스에서 HTTP/2 서버를 호스팅해야 합니다. Windows의 경우 프로세스 간 통신 [파이프](/dotnet/standard/io/pipe-operations) 는 빠르고 간단한 통신 방법입니다.
+* 브라우저에서 **액세스할 수 있는 api** @no__t 1 grpc는 브라우저에서 완전히 지원 되지 않습니다. gRPC-웹은 브라우저 지원을 제공할 수 있지만 제한 사항이 있으며 서버 프록시를 소개 합니다.
+* **브로드캐스트 실시간 통신** &ndash; grpc는 스트리밍을 통해 실시간 통신을 지원 하지만 등록 된 연결에 메시지를 브로드캐스트하는 개념이 없습니다. 예를 들어 대화방의 모든 클라이언트에 새 채팅 메시지를 보내야 하는 대화방 시나리오에서 각 gRPC 호출은 클라이언트에 새 채팅 메시지를 개별적으로 스트리밍하는 데 필요 합니다. [SignalR](xref:signalr/introduction) 는이 시나리오에 유용한 프레임 워크입니다. SignalR에는 영구 연결의 개념과 메시지 브로드캐스팅을 위한 기본 제공 지원이 있습니다.
+* **프로세스 간 통신** &ndash; 프로세스에서 들어오는 grpc 호출을 허용 하는 HTTP/2 서버를 호스팅해야 합니다. Windows의 경우 프로세스 간 통신 [파이프](/dotnet/standard/io/pipe-operations) 는 빠르고 간단한 통신 방법입니다.
 
 ## <a name="additional-resources"></a>추가 자료
 

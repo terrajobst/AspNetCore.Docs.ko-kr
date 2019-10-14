@@ -5,14 +5,14 @@ description: 앱 시작 및 수명 관리를 담당하는 .NET Core 일반 호�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/01/2019
+ms.date: 10/07/2019
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: 75af6dc58d31aaad888b14640268bf05c193272d
-ms.sourcegitcommit: e54672f5c493258dc449fac5b98faf47eb123b28
+ms.openlocfilehash: 1582955cd18e6739111af05c9a892cd5cb4e270d
+ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/24/2019
-ms.locfileid: "71248282"
+ms.lasthandoff: 10/07/2019
+ms.locfileid: "72007233"
 ---
 # <a name="net-generic-host"></a>.NET 일반 호스트
 
@@ -26,7 +26,7 @@ ms.locfileid: "71248282"
 
 * DI(종속성 주입)
 * 로깅
-* 구성
+* Configuration
 * `IHostedService` 구현
 
 호스트가 시작되면 DI 컨테이너에서 찾은 <xref:Microsoft.Extensions.Hosting.IHostedService>의 각 구현 시 `IHostedService.StartAsync`를 호출합니다. 웹앱에서 `IHostedService` 구현 중 하나는 [HTTP 서버 구현](xref:fundamentals/index#servers)을 시작하는 웹 서비스입니다.
@@ -78,7 +78,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> 메서드는 다음 작업을 수행합니다.
 
-* 콘텐츠 루트를 <xref:System.IO.Directory.GetCurrentDirectory*>에서 반환된 경로로 설정합니다.
+* [콘텐츠 루트](xref:fundamentals/index#content-root)를 <xref:System.IO.Directory.GetCurrentDirectory*>에서 반환된 경로로 설정합니다.
 * 다음에서 호스트 구성을 로드합니다.
   * 접두사가 "DOTNET_"인 환경 변수.
   * 명령줄 인수.
@@ -89,7 +89,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
   * 환경 변수.
   * 명령줄 인수.
 * 다음 [로깅](xref:fundamentals/logging/index) 공급자를 추가합니다.
-  * 콘솔
+  * Console
   * Debug
   * EventSource
   * EventLog(Windows에서 실행 중인 경우에만)
@@ -119,7 +119,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 <xref:Microsoft.Extensions.Hosting.IHostApplicationLifetime>(이전의 `IApplicationLifetime`) 서비스를 모든 클래스에 삽입하여 사후 시작 및 정상 종료 작업을 처리합니다. 인터페이스의 세 가지 속성은 앱 시작 및 앱 중지 이벤트 처리기 메서드를 등록하는 데 사용되는 취소 토큰입니다. 인터페이스에는 `StopApplication` 메서드도 포함됩니다.
 
-다음 예제는 `IApplicationLifetime` 이벤트를 등록하는 `IHostedService` 구현입니다.
+다음 예제는 `IHostApplicationLifetime` 이벤트를 등록하는 `IHostedService` 구현입니다.
 
 [!code-csharp[](generic-host/samples-snapshot/3.x/LifetimeEventsHostedService.cs?name=snippet_LifetimeEvents)]
 
@@ -199,6 +199,11 @@ Host.CreateDefaultBuilder(args)
     .UseContentRoot("c:\\content-root")
     //...
 ```
+
+자세한 내용은 다음을 참조하세요.
+
+* [기본 사항: 콘텐츠 루트](xref:fundamentals/index#content-root)
+* [WebRoot](#webroot)
 
 ### <a name="environmentname"></a>EnvironmentName
 
@@ -376,7 +381,7 @@ webBuilder.UseStartup<Startup>();
 
 ### <a name="urls"></a>URL
 
-서버에서 요청을 수신해야 하는 포트와 프로토콜을 포함하는 세미클론으로 구분된 IP 주소 또는 호스트 주소의 목록입니다. 예: `http://localhost:123` “\*”를 사용하여 서버가 지정된 포트 및 프로토콜을 사용하는 IP 주소 또는 호스트 이름에서 요청을 수신해야 함을 나타냅니다(예: `http://*:5000`). 프로토콜(`http://` 또는 `https://`)은 각 URL에 포함되어 있어야 합니다. 지원되는 형식은 서버마다 다릅니다.
+서버에서 요청을 수신해야 하는 포트와 프로토콜을 포함하는 세미클론으로 구분된 IP 주소 또는 호스트 주소의 목록입니다. 예: `http://localhost:123`. “\*”를 사용하여 서버가 지정된 포트 및 프로토콜을 사용하는 IP 주소 또는 호스트 이름에서 요청을 수신해야 함을 나타냅니다(예: `http://*:5000`). 프로토콜(`http://` 또는 `https://`)은 각 URL에 포함되어 있어야 합니다. 지원되는 형식은 서버마다 다릅니다.
 
 **키**: urls  
 **형식**: *string*  
@@ -397,7 +402,7 @@ Kestrel에는 자체 끝점 구성 API가 있습니다. 자세한 내용은 <xre
 
 **키**: webroot  
 **형식**: *string*  
-**기본값**: *(콘텐츠 루트)/wwwroot*(경로가 존재하는 경우). 경로가 존재하지 않으면 no-op 파일 공급자가 사용됩니다.  
+**기본값**: 기본값은 `wwwroot`입니다. *{content root}/wwwroot* 경로가 존재해야 합니다. 경로가 존재하지 않으면 no-op 파일 공급자가 사용됩니다.  
 **환경 변수**: `<PREFIX_>WEBROOT`
 
 이 값을 설정하려면 환경 변수를 사용하거나 `UseWebRoot`를 호출합니다.
@@ -405,6 +410,11 @@ Kestrel에는 자체 끝점 구성 API가 있습니다. 자세한 내용은 <xre
 ```csharp
 webBuilder.UseWebRoot("public");
 ```
+
+자세한 내용은 다음을 참조하세요.
+
+* [기본 사항: 웹 루트](xref:fundamentals/index#web-root)
+* [ContentRootPath](#contentrootpath)
 
 ## <a name="manage-the-host-lifetime"></a>호스트 수명 관리
 
@@ -575,7 +585,9 @@ var host = new HostBuilder()
 
 [!code-csharp[](generic-host/samples-snapshot/2.x/GenericHostSample/Program.cs?name=snippet_UseContentRoot)]
 
-### <a name="environment"></a>Environment
+자세한 내용은 [기본 사항: 콘텐츠 루트](xref:fundamentals/index#content-root)를 참조하세요.
+
+### <a name="environment"></a>환경
 
 앱의 [환경](xref:fundamentals/environments)을 설정합니다.
 
@@ -963,6 +975,6 @@ public class MyClass
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:fundamentals/host/hosted-services>

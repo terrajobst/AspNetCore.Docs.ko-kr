@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/21/2019
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: b96d15e732b78fd834e16347739b5a3a2ba2e98d
-ms.sourcegitcommit: e644258c95dd50a82284f107b9bf3becbc43b2b2
+ms.openlocfilehash: d3cef72de22e54f7e65ddf9f1446eb32256d0c71
+ms.sourcegitcommit: 73e255e846e414821b8cc20ffa3aec946735cd4e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/26/2019
-ms.locfileid: "71317783"
+ms.lasthandoff: 10/03/2019
+ms.locfileid: "71924977"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Swashbuckle 및 ASP.NET Core 시작
 
@@ -39,7 +39,7 @@ Swashbuckle에 대한 세 가지 주 구성 요소는 다음과 같습니다.
   * 다음 명령을 실행합니다.
 
     ```powershell
-    Install-Package Swashbuckle.AspNetCore -Version 5.0.0-rc3
+    Install-Package Swashbuckle.AspNetCore -Version 5.0.0-rc4
     ```
 
 * **NuGet 패키지 관리** 대화 상자에서:
@@ -62,7 +62,7 @@ Swashbuckle에 대한 세 가지 주 구성 요소는 다음과 같습니다.
 **통합 터미널**에서 다음 명령을 실행합니다.
 
 ```dotnetcli
-dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.0.0-rc3
+dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.0.0-rc4
 ```
 
 ### <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
@@ -70,7 +70,7 @@ dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.0.0-rc3
 다음 명령을 실행합니다.
 
 ```dotnetcli
-dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.0.0-rc3
+dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.0.0-rc4
 ```
 
 ---

@@ -4,14 +4,14 @@ author: ardalis
 description: 필터 작동 방법 및 ASP.NET Core에서 사용하는 방법을 자세히 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/08/2019
+ms.date: 09/28/2019
 uid: mvc/controllers/filters
-ms.openlocfilehash: 50b199744f32ad19335080da406db69665ec1ae9
-ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
+ms.openlocfilehash: ed48c2074360768b8d8c5af7057b353b00592394
+ms.sourcegitcommit: 73a451e9a58ac7102f90b608d661d8c23dd9bbaf
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/12/2019
-ms.locfileid: "67856157"
+ms.lasthandoff: 10/08/2019
+ms.locfileid: "72037704"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core에서 필터링
 
@@ -261,7 +261,7 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 
 `ServiceFilterAttribute`를 사용할 때 [ServiceFilterAttribute.IsReusable](xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute.IsReusable) 설정:
 
-* 필터 인스턴스가 원래 생성된 요청 범위 밖에서 재사용될 가능성이 *있음*을 암시하는 것입니다. ASP.NET Core 런타임은 다음을 보장하지 않습니다.
+* 필터 인스턴스가 원래 생성된 요청 범위 외부에서 재사용될 가능성이 *있음*을 암시하는 것입니다. ASP.NET Core 런타임은 다음을 보장하지 않습니다.
 
   * 필터의 단일 인스턴스 생성.
   * 필터는 나중에 DI 컨테이너에서 다시 요청되지 않습니다.
@@ -371,7 +371,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 `IAsyncActionFilter`의 경우 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate>에 대한 호출:
 
 * 후속 작업 필터 및 작업 메서드를 실행합니다.
-* `ActionExecutedContext`을 반환합니다.
+* `ActionExecutedContext`를 반환합니다.
 
 단락(short-circuit) 처리하려면 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext.Result?displayProperty=fullName>을 결과 인스턴스에 할당하고 `next`(`ActionExecutionDelegate`)를 호출하지 않아야 합니다.
 
@@ -437,9 +437,12 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/LoggingAddHeaderFilter.cs?name=snippet_ResultFilter)]
 
-실행되는 결과의 종류는 작업에 따라 다릅니다. 보기를 반환하는 작업에는 실행되는 <xref:Microsoft.AspNetCore.Mvc.ViewResult>의 일부인 모든 Razor 프로세스가 포함됩니다. API 메서드는 실행 결과의 일부로 일부 serialization을 수행할 수 있습니다. [작업 결과](xref:mvc/controllers/actions)에 대한 자세한 정보
+실행되는 결과의 종류는 작업에 따라 다릅니다. 보기를 반환하는 작업에는 실행되는 <xref:Microsoft.AspNetCore.Mvc.ViewResult>의 일부인 모든 Razor 프로세스가 포함됩니다. API 메서드는 실행 결과의 일부로 일부 serialization을 수행할 수 있습니다. [작업 결과](xref:mvc/controllers/actions)에 대해 자세히 알아봅니다.
 
-결과 필터는 작업 또는 작업 필터가 작업 결과 생성하는 성공적인 결과에 대해서만 실행됩니다. 예외 필터가 예외를 처리하는 경우 결과 필터는 실행되지 않습니다.
+결과 필터는 작업 또는 작업 필터가 작업 결과를 생성하는 경우에만 실행됩니다. 다음 경우에는 결과 필터가 실행되지 않습니다.
+
+* 인증 필터 또는 리소스 필터가 파이프라인을 단락(short circuit)합니다.
+* 예외 필터는 작업 결과를 생성하여 예외를 처리합니다.
 
 <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuting*?displayProperty=fullName> 메서드는 <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel?displayProperty=fullName>를 `true`로 설정하여 작업 결과 및 후속 결과 필터를 단락(short-circuit) 처리할 수 있습니다. 일반적으로 빈 응답을 생성하지 않도록 단락(short-circuit) 처리하는 경우 응답 개체에 작성합니다. `IResultFilter.OnResultExecuting`에서 예외 throw:
 
@@ -471,12 +474,10 @@ If an exception was thrown **IN THE RESULT FILTER**, the response body is not se
 
 ### <a name="ialwaysrunresultfilter-and-iasyncalwaysrunresultfilter"></a>IAlwaysRunResultFilter 및 IAsyncAlwaysRunResultFilter
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IAlwaysRunResultFilter> 및 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncAlwaysRunResultFilter> 인터페이스는 모든 작업 결과에 대해 실행되는 <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter> 구현을 선언합니다. 필터는 다음 경우가 아닌 한 모든 작업 결과에 적용됩니다.
+<xref:Microsoft.AspNetCore.Mvc.Filters.IAlwaysRunResultFilter> 및 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncAlwaysRunResultFilter> 인터페이스는 모든 작업 결과에 대해 실행되는 <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter> 구현을 선언합니다. 여기에는 다음에 의해 생성되는 작업 결과가 포함됩니다.
 
-* <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter> 또는 <xref:Microsoft.AspNetCore.Mvc.Filters.IAuthorizationFilter>(은)는 응답을 적용하고 단락(short-circuit) 처리합니다.
-* 예외 필터는 작업 결과를 생성하여 예외를 처리합니다.
-
-`IExceptionFilter` 및 `IAuthorizationFilter` 이외의 필터는 `IAlwaysRunResultFilter` 및 `IAsyncAlwaysRunResultFilter`을 단락(short-circuit) 처리하지 않습니다.
+* 단락(short circuit)하는 권한 부여 필터 및 리소스 필터
+* 예외 필터
 
 예를 들어 다음 필터는 항상 작업 결과(콘텐츠 협상이 실패할 경우 *422 Unprocessable Entity* 상태 코드가 포함된 <xref:Microsoft.AspNetCore.Mvc.ObjectResult>)를 실행 및 설정합니다.
 
