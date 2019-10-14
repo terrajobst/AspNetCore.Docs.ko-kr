@@ -221,7 +221,7 @@ Update-Database
 
 * `Update-Database`: 이전 명령이 만든 최신 마이그레이션으로 데이터베이스를 수정합니다. 이 명령은 데이터베이스를 만드는 *Migrations/{time-stamp}_InitialCreate.cs* 파일의 `Up` 메서드를 실행합니다.
 
-  데이터베이스 수정 명령은 다음 경고를 생성합니다.
+  데이터베이스 수정 명령은 다음 경고를 생성합니다. 
 
   > No type was specified for the decimal column ‘Price’ on entity type ‘Movie’. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using ‘HasColumnType()’.
 
