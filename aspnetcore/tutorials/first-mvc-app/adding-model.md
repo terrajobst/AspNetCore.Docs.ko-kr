@@ -42,12 +42,12 @@ ms.locfileid: "71295471"
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Models/Movie.cs)]
 
-`Movie` 클래스에는 기본 키에 대해 데이터베이스에 필요한 `Id` 필드가 포함되어 있습니다.
+`Movie` 클래스에는 데이터베이스에서 기본 키에 필요한 `Id` 필드가 포함되어 있습니다.
 
-`ReleaseDate`에 대한 [DataType](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.internal.datatypeattributeadapter) 특성은 데이터 형식(`Date`)을 지정합니다. 이 특성 사용:
+`ReleaseDate`에 대한 [DataType](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.internal.datatypeattributeadapter) 특성은 데이터 형식(`Date`)을 지정합니다. 이 특성을 사용하면:
 
-  * 사용자는 날짜 필드에 시간 정보를 입력할 필요가 없습니다.
-  * 시간 정보가 아니라 날짜만 표시됩니다.
+  * 사용자가 날짜 필드에 시간 정보를 입력할 필요가 없습니다.
+  * 시간 정보 없이 날짜만 표시됩니다.
 
 [DataAnnotations](/dotnet/api/system.componentmodel.dataannotations)는 이후 자습서에서 다룹니다.
 
@@ -65,7 +65,7 @@ PMC에서 다음 명령을 실행합니다.
 Install-Package Microsoft.EntityFrameworkCore.SqlServer
 ```
 
-앞의 명령은 EF Core SQL Server 공급자를 추가합니다. 이 공급자 패키지는 EF Core 패키지를 종속성으로 설치합니다. 추가 패키지는 자습서 뒷부분의 스캐폴딩 단계에서 자동으로 설치됩니다.
+앞의 명령은 EF Core SQL Server 공급자를 추가합니다. 이 공급자 패키지는 EF Core 패키지를 종속성으로 설치합니다. 추가적인 패키지는 자습서 뒷부분의 스캐폴딩 단계에서 자동으로 설치됩니다.
 
 # <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -77,7 +77,7 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 
 ## <a name="create-a-database-context-class"></a>데이터베이스 컨텍스트 클래스 만들기
 
-`Movie` 모델에 대한 EF Core 기능(만들기, 읽기, 업데이트, 삭제)을 조정하려면 데이터베이스 컨텍스트 클래스가 필요합니다. 데이터베이스 컨텍스트는 [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)에서 파생되며 데이터 모델에 포함할 엔터티를 지정합니다.
+`Movie` 모델에 대한 EF Core 기능(생성, 읽기, 수정, 삭제)을 조정하려면 데이터베이스 컨텍스트 클래스가 필요합니다. 데이터베이스 컨텍스트는 [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)에서 파생되며 데이터 모델에 포함할 엔터티를 지정합니다.
 
 *Data* 폴더를 만듭니다.
 
@@ -91,7 +91,7 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 
 ## <a name="register-the-database-context"></a>데이터베이스 컨텍스트 등록
 
-ASP.NET Core는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)를 사용하여 빌드됩니다. 서비스(예: EF Core DB 컨텍스트)는 애플리케이션 시작 중에 DI에 등록되어야 합니다. 이러한 서비스(예: Razor 페이지)가 필요한 구성 요소에는 생성자 매개 변수를 통해 이러한 서비스가 제공됩니다. DB 컨텍스트 인스턴스를 가져오는 생성자 코드는 자습서 뒷부분에 나옵니다. 이 섹션에서는 DI 컨테이너에 데이터베이스 컨텍스트를 등록합니다.
+ASP.NET Core는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)를 사용하여 만들어집니다. 서비스(예: EF Core DB 컨텍스트)는 응용 프로그램 시작 중에 DI에 등록되어야 합니다. 이러한 서비스(예: Razor 페이지)가 필요한 구성 요소는 생성자 매개 변수를 통해 해당 서비스를 제공받습니다. DB 컨텍스트 인스턴스를 가져오는 생성자 코드는 자습서 뒷부분에 나옵니다. 이 섹션에서는 DI 컨테이너에 데이터베이스 컨텍스트를 등록합니다.
 
 *Startup.cs* 맨 위에 다음 `using` 문을 추가합니다.
 
@@ -112,7 +112,7 @@ using Microsoft.EntityFrameworkCore;
 
 ---
 
-[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 개체에서 메서드를 호출하여 연결 문자열의 이름을 컨텍스트에 전달합니다. 로컬 개발의 경우 [ASP.NET Core 구성 시스템](xref:fundamentals/configuration/index)은 *appsettings.json* 파일에서 연결 문자열을 읽습니다.
+연결 문자열 이름은 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 개체의 메서드를 호출하여 컨텍스트에 전달됩니다. 로컬 개발의 경우 [ASP.NET Core 구성 시스템](xref:fundamentals/configuration/index)은 *appsettings.json* 파일에서 연결 문자열을 읽습니다.
 
 <a name="cs"></a>
 
@@ -132,9 +132,9 @@ using Microsoft.EntityFrameworkCore;
 
 컴파일러 오류에 대한 검사로 프로젝트를 빌드합니다.
 
-## <a name="scaffold-movie-pages"></a>동영상 페이지 스캐폴드
+## <a name="scaffold-movie-pages"></a>영화 페이지 스캐폴드
 
-스캐폴딩 도구를 사용하여 동영상 모델에 대한 CRUD(만들기, 읽기, 업데이트 및 삭제) 페이지를 생성합니다.
+스캐폴딩 도구를 사용하여 영화 모델에 대한 CRUD(생성, 읽기, 수정 및 삭제) 페이지를 생성합니다.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -162,7 +162,7 @@ Visual Studio가 다음을 만듭니다.
 * 영화 컨트롤러(*Controllers/MoviesController.cs*)
 * 만들기, 삭제, 세부 정보, 편집 및 인덱스 페이지에 대한 Razor 뷰 파일(*Views/Movies/\*.cshtml*)
 
-이 파일의 자동 생성을 *스캐폴딩*이라고 합니다.
+이러한 파일의 자동 생성을 *스캐폴딩*이라고 합니다.
 
 ### <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) 
 
@@ -204,7 +204,7 @@ Visual Studio가 다음을 만듭니다.
 
 ## <a name="initial-migration"></a>초기 마이그레이션
 
-EF Core [마이그레이션](xref:data/ef-mvc/migrations) 기능을 사용하여 데이터베이스를 만듭니다. 마이그레이션은 데이터 모델과 일치하도록 데이터베이스를 만들고 업데이트할 수 있는 도구 세트입니다.
+EF Core [마이그레이션](xref:data/ef-mvc/migrations) 기능을 사용하여 데이터베이스를 만듭니다. 마이그레이션은 데이터 모델과 일치하도록 데이터베이스를 만들고 수정할 수 있는 도구 모음입니다.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -221,7 +221,7 @@ Update-Database
 
 * `Update-Database`: 이전 명령이 만든 최신 마이그레이션으로 데이터베이스를 업데이트합니다. 이 명령은 데이터베이스를 만드는 `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* 파일을 실행합니다.
 
-  데이터베이스 업데이트 명령은 다음 경고를 생성합니다. 
+  데이터베이스 수정 명령은 다음 경고를 생성합니다. 
 
   > 엔터티 형식 ‘Movie’에서 10진수 열 ‘Price’의 형식이 지정되지 않았습니다. 그러면 값이 기본 전체 자릿수 및 소수 자릿수에 적합하지 않은 경우 자동으로 잘립니다. ‘HasColumnType()’를 사용하여 모든 값을 수용할 수 있는 SQL Server 열 형식을 명시적으로 지정합니다.
 
@@ -540,7 +540,7 @@ Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(int rc, sqlite3 db)
 
 ## <a name="examine-the-context-registered-with-dependency-injection"></a>종속성 주입을 사용하여 등록된 컨텍스트 검사
 
-ASP.NET Core는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)를 사용하여 빌드됩니다. 서비스(예: EF Core DB 컨텍스트)는 애플리케이션 시작 중에 DI에 등록됩니다. 이러한 서비스(예: Razor 페이지)가 필요한 구성 요소에는 생성자 매개 변수를 통해 이러한 서비스가 제공됩니다. DB 컨텍스트 인스턴스를 가져오는 생성자 코드는 자습서 뒷부분에 나옵니다.
+ASP.NET Core는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)를 사용하여 만들어집니다. 서비스(예: EF Core DB 컨텍스트)는 애플리케이션 시작 중에 DI에 등록됩니다. 이러한 서비스(예: Razor 페이지)가 필요한 구성 요소는 생성자 매개 변수를 통해 해당 서비스를 제공받습니다. DB 컨텍스트 인스턴스를 가져오는 생성자 코드는 자습서 뒷부분에 나옵니다.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -556,7 +556,7 @@ ASP.NET Core는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)�
 
 이전 코드에서는 엔터티 집합에 대해 [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) 속성을 만듭니다. Entity Framework 용어에서 엔터티 집합은 일반적으로 데이터베이스 테이블에 해당합니다. 엔터티는 테이블의 행에 해당합니다.
 
-[DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 개체에서 메서드를 호출하여 연결 문자열의 이름을 컨텍스트에 전달합니다. 로컬 개발의 경우 [ASP.NET Core 구성 시스템](xref:fundamentals/configuration/index)은 *appsettings.json* 파일에서 연결 문자열을 읽습니다.
+연결 문자열 이름은 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 개체의 메서드를 호출하여 컨텍스트에 전달됩니다. 로컬 개발의 경우 [ASP.NET Core 구성 시스템](xref:fundamentals/configuration/index)은 *appsettings.json* 파일에서 연결 문자열을 읽습니다.
 
 # <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
