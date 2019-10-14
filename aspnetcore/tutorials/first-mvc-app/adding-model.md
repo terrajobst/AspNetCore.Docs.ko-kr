@@ -504,7 +504,7 @@ Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(int rc, sqlite3 db)
 
 ## <a name="initial-migration"></a>초기 마이그레이션
 
-이 섹션에서는 다음 작업이 완료합니다.
+이 섹션에서는 다음 작업을 완료합니다.
 
 * 초기 마이그레이션을 추가합니다.
 * 초기 마이그레이션을 사용하여 데이터베이스를 수정합니다.

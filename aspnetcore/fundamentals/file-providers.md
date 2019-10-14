@@ -5,14 +5,14 @@ description: ASP.NET Core에서 파일 공급자를 사용하여 파일 시스�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/26/2019
+ms.date: 10/07/2019
 uid: fundamentals/file-providers
-ms.openlocfilehash: 44c439dce893d486668bf8ac3f20cdf7952c5186
-ms.sourcegitcommit: 0774a61a3a6c1412a7da0e7d932dc60c506441fc
+ms.openlocfilehash: 3a92b44efc70d156596ee9fe80b4f6a65266e73d
+ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/27/2019
-ms.locfileid: "70059090"
+ms.lasthandoff: 10/07/2019
+ms.locfileid: "72007171"
 ---
 # <a name="file-providers-in-aspnet-core"></a>ASP.NET Core의 파일 공급자
 
@@ -22,7 +22,7 @@ ms.locfileid: "70059090"
 
 ASP.NET Core에서 파일 공급자를 사용하여 파일 시스템 액세스를 추상화합니다. 파일 공급자는 ASP.NET Core 프레임워크 전체에서 사용됩니다.
 
-* 예를 들어,`IWebHostEnvironment`는 응용 프로그램의 콘텐츠 루트와 웹 루트를 `IFileProvider` 형식으로 노출합니다.
+* `IWebHostEnvironment`는 앱의 [콘텐츠 루트](xref:fundamentals/index#content-root)와 [웹 루트](xref:fundamentals/index#web-root)를 `IFileProvider` 형식으로 노출합니다.
 * [정적 파일 미들웨어](xref:fundamentals/static-files)는 파일 공급자를 사용해서 정적 파일을 찾습니다.
 * [Razor](xref:mvc/views/razor)는 파일 공급자를 사용하여 페이지 및 뷰를 찾습니다.
 * .NET Core 도구는 파일 공급자와 GLOB 패턴을 사용해서 게시해야 할 파일을 지정합니다.
@@ -171,7 +171,7 @@ Docker 컨테이너나 네트워크 공유 같은 일부 파일 시스템은 변
 
 ASP.NET Core에서 파일 공급자를 사용하여 파일 시스템 액세스를 추상화합니다. 파일 공급자는 ASP.NET Core 프레임워크 전체에서 사용됩니다.
 
-* 예를 들어,<xref:Microsoft.Extensions.Hosting.IHostingEnvironment>는 응용 프로그램의 콘텐츠 루트와 웹 루트를 `IFileProvider` 형식으로 노출합니다.
+* <xref:Microsoft.Extensions.Hosting.IHostingEnvironment>는 앱의 [콘텐츠 루트](xref:fundamentals/index#content-root)와 [웹 루트](xref:fundamentals/index#web-root)를 `IFileProvider` 형식으로 노출합니다.
 * [정적 파일 미들웨어](xref:fundamentals/static-files)는 파일 공급자를 사용해서 정적 파일을 찾습니다.
 * [Razor](xref:mvc/views/razor)는 파일 공급자를 사용하여 페이지 및 뷰를 찾습니다.
 * .NET Core 도구는 파일 공급자와 GLOB 패턴을 사용해서 게시해야 할 파일을 지정합니다.

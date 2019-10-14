@@ -5,14 +5,14 @@ description: Windows 서비스에서 ASP.NET Core 앱을 호스트하는 방법�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/09/2019
+ms.date: 10/07/2019
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: 544037a2a1f836e51b4f10551316312ef55c68da
-ms.sourcegitcommit: fe88748b762525cb490f7e39089a4760f6a73a24
+ms.openlocfilehash: 32226c06ba005b4a61c473d6584b2b762733dcbd
+ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/30/2019
-ms.locfileid: "71688075"
+ms.lasthandoff: 10/07/2019
+ms.locfileid: "72007303"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>Windows 서비스에서 ASP.NET Core 호스트
 
@@ -49,7 +49,7 @@ ASP.NET Core Worker Service 템플릿은 장기간 실행되는 서비스 앱을
 [Microsoft.Extensions.Hosting.WindowsServices](https://www.nuget.org/packages/Microsoft.Extensions.Hosting.WindowsServices) 패키지에서 제공된 `IHostBuilder.UseWindowsService`는 호스트를 빌드할 때 호출됩니다. 앱이 Windows 서비스로 실행되는 경우 이 메서드는 다음과 같이 합니다.
 
 * 호스트 수명을 `WindowsServiceLifetime`으로 설정합니다.
-* 콘텐츠 루트를 설정합니다.
+* [콘텐츠 루트](xref:fundamentals/index#content-root)를 설정합니다.
 * 애플리케이션 이름을 기본 소스 이름으로 사용하여 이벤트 로그에 대한 로깅을 사용하도록 설정합니다.
   * *appsettings.Production.json* 파일에서 `Logging:LogLevel:Default` 키를 사용하여 로그 수준을 구성할 수 있습니다.
   * 관리자만 새 이벤트 소스를 만들 수 있습니다. 애플리케이션 이름을 사용하여 이벤트 소스를 만들 수 없는 경우 *Application* 소스에 경고가 기록되고 이벤트 로그가 사용하지 않도록 설정됩니다.
@@ -326,7 +326,7 @@ Windows 서비스에 대해 <xref:System.IO.Directory.GetCurrentDirectory*>를 �
 
 ### <a name="set-the-content-root-path-to-the-apps-folder"></a>콘텐츠 루트 경로를 앱 폴더로 설정
 
-<xref:Microsoft.Extensions.Hosting.IHostingEnvironment.ContentRootPath*>는 서비스가 만들어질 때 `binPath` 인수에 제공된 것과 같은 경로입니다. `GetCurrentDirectory`를 호출하여 설정 파일의 경로를 만드는 대신, 앱의 콘텐츠 루트 경로를 사용하여 <xref:System.IO.Directory.SetCurrentDirectory*>를 호출합니다.
+<xref:Microsoft.Extensions.Hosting.IHostingEnvironment.ContentRootPath*>는 서비스가 만들어질 때 `binPath` 인수에 제공된 것과 같은 경로입니다. `GetCurrentDirectory`를 호출하여 설정 파일의 경로를 만드는 대신, 앱의 [콘텐츠 루트](xref:fundamentals/index#content-root) 경로를 사용하여 <xref:System.IO.Directory.SetCurrentDirectory*>를 호출합니다.
 
 `Program.Main`에서 서비스 실행 파일의 폴더 경로를 확인하고 이 경로를 사용하여 앱의 콘텐츠 루트를 설정합니다.
 
