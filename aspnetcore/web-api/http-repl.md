@@ -5,14 +5,14 @@ description: HTTP REPL .NET Core 전역 도구를 사용하여 ASP.NET Core 웹 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 08/29/2019
+ms.date: 10/07/2019
 uid: web-api/http-repl
-ms.openlocfilehash: 086ac141a04ab4a560f2c26fb049ef8a5493dc97
-ms.sourcegitcommit: d34b2627a69bc8940b76a949de830335db9701d3
+ms.openlocfilehash: bb3757f51487a307ebfb97452b80995f84e95e4b
+ms.sourcegitcommit: 73a451e9a58ac7102f90b608d661d8c23dd9bbaf
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71187245"
+ms.lasthandoff: 10/08/2019
+ms.locfileid: "72037716"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>HTTP REPL을 사용하여 웹 API 테스트
 
@@ -50,7 +50,7 @@ dotnet tool install -g Microsoft.dotnet-httprepl
 
 [.NET Core 글로벌 도구](/dotnet/core/tools/global-tools#install-a-global-tool)가 [Microsoft.dotnet-httprepl](https://www.nuget.org/packages/Microsoft.dotnet-httprepl) NuGet 패키지에서 설치됩니다.
 
-## <a name="usage"></a>사용
+## <a name="usage"></a>사용법
 
 도구를 성공적으로 설치한 후 다음 명령을 실행하여 HTTP REPL을 시작합니다.
 
@@ -355,7 +355,7 @@ pref set editor.command.default "C:\Program Files\Microsoft VS Code\Code.exe"
 
 ---
 
-특정 CLI 인수를 사용하여 기본 텍스트 편집기를 시작하려면 `editor.command.default.arguments` 키를 설정합니다. 예를 들어 Visual Studio Code가 기본 텍스트 편집기이며 항상 HTTP REPL이 확장을 사용하지 않도록 설정한 새 세션에서 Visual Studio Code를 열도록 하는 경우를 가정합니다. 다음 명령 실행:
+특정 CLI 인수를 사용하여 기본 텍스트 편집기를 시작하려면 `editor.command.default.arguments` 키를 설정합니다. 예를 들어 Visual Studio Code가 기본 텍스트 편집기이며 항상 HTTP REPL이 확장을 사용하지 않도록 설정한 새 세션에서 Visual Studio Code를 열도록 하는 경우를 가정합니다. 다음 명령을 실행합니다.
 
 ```console
 pref set editor.command.default.arguments "--disable-extensions --new-window"
@@ -790,25 +790,107 @@ options <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:
 
 HTTP 요청 헤더를 설정하려면 다음 방법 중 하나를 사용합니다.
 
-1. HTTP 요청을 사용하여 인라인으로 설정합니다. 예:
+* HTTP 요청을 사용하여 인라인으로 설정합니다. 예:
 
-  ```console
-  https://localhost:5001/people~ post -h Content-Type=application/json
-  ```
+    ```console
+    https://localhost:5001/people~ post -h Content-Type=application/json
+    ```
+    
+    앞의 방법을 사용하는 경우 개별 HTTP 요청 헤더에는 자체 `-h` 옵션이 필요합니다.
 
-  앞의 방법을 사용하는 경우 개별 HTTP 요청 헤더에는 자체 `-h` 옵션이 필요합니다.
+* HTTP 요청을 보내기 전에 설정합니다. 예:
 
-1. HTTP 요청을 보내기 전에 설정합니다. 예:
+    ```console
+    https://localhost:5001/people~ set header Content-Type application/json
+    ```
+    
+    요청을 보내기 전에 헤더를 설정하는 경우 헤더는 명령 셸 세션 기간에 설정된 상태로 유지됩니다. 헤더를 지우려면 빈 값을 제공합니다. 예:
+    
+    ```console
+    https://localhost:5001/people~ set header Content-Type
+    ```
 
-  ```console
-  https://localhost:5001/people~ set header Content-Type application/json
-  ```
+## <a name="test-secured-endpoints"></a>보안 엔드포인트 테스트
 
-  요청을 보내기 전에 헤더를 설정하는 경우 헤더는 명령 셸 세션 기간에 설정된 상태로 유지됩니다. 헤더를 지우려면 빈 값을 제공합니다. 예:
+HTTP REPL은 HTTP 요청 헤더를 사용하여 보안 엔드포인트의 테스트를 지원합니다. 지원되는 인증 및 권한 부여 체계의 예로는 기본 인증, JWT 전달자 토큰 및 다이제스트 인증이 있습니다. 예를 들어 다음 명령을 사용하여 엔드포인트에 전달자 토큰을 보낼 수 있습니다.
 
-  ```console
-  https://localhost:5001/people~ set header Content-Type
-  ```
+```console
+set header Authorization "bearer <TOKEN VALUE>"
+```
+
+Azure에서 호스트되는 엔드포인트에 액세스하거나 [Azure REST API](/rest/api/azure/)를 사용하려면 전달자 토큰이 필요합니다. [Azure CLI](/cli/azure/)를 통해 Azure 구독에 대한 전달자 토큰을 가져오려면 다음 단계를 사용합니다. HTTP REPL은 HTTP 요청 헤더에서 전달자 토큰을 설정하고 Azure App Service Web Apps의 목록을 검색합니다.
+
+1. Azure에 로그인합니다.
+
+    ```azcli
+    az login
+    ```
+
+1. 다음 명령을 사용하여 구독 ID를 가져옵니다.
+
+    ```azcli
+    az account show --query id
+    ```
+
+1. 구독 ID를 복사하고 다음 명령을 실행합니다.
+
+    ```azcli
+    az account set --subscription "<SUBSCRIPTION ID>"
+    ```
+
+1. 다음 명령을 사용하여 전달자 토큰을 가져옵니다.
+
+    ```azcli
+    az account get-access-token --query accessToken
+    ```
+
+1. HTTP REPL을 통해 Azure REST API에 연결합니다.
+
+    ```console
+    httprepl https://management.azure.com
+    ```
+
+1. `Authorization` HTTP 요청 헤더를 설정합니다.
+
+    ```console
+    https://management.azure.com/> set header Authorization "bearer <ACCESS TOKEN>"
+    ```
+
+1. 구독으로 이동합니다.
+
+    ```console
+    https://management.azure.com/> cd subscriptions/<SUBSCRIPTION ID>
+    ```
+
+1. 구독의 Azure App Service Web Apps 목록을 가져옵니다.
+
+    ```console
+    https://management.azure.com/subscriptions/{SUBSCRIPTION ID}> get providers/Microsoft.Web/sites?api-version=2016-08-01
+    ```
+
+    다음 응답이 표시됩니다.
+
+    ```console
+    HTTP/1.1 200 OK
+    Cache-Control: no-cache
+    Content-Length: 35948
+    Content-Type: application/json; charset=utf-8
+    Date: Thu, 19 Sep 2019 23:04:03 GMT
+    Expires: -1
+    Pragma: no-cache
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    X-Content-Type-Options: nosniff
+    x-ms-correlation-request-id: <em>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</em>
+    x-ms-original-request-ids: <em>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</em>
+    x-ms-ratelimit-remaining-subscription-reads: 11999
+    x-ms-request-id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    x-ms-routing-request-id: WESTUS:xxxxxxxxxxxxxxxx:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx
+    {
+      "value": [
+        <AZURE RESOURCES LIST>
+      ]
+    }
+    ```
 
 ## <a name="toggle-http-request-display"></a>HTTP 요청 표시 토글
 
@@ -952,7 +1034,7 @@ https://localhost:5001/~ clear
 https://localhost:5001/~
 ```
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * [REST API 요청](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods)
 * [HTTP REPL GitHub 리포지토리](https://github.com/aspnet/HttpRepl)

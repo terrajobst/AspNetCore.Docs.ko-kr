@@ -1,21 +1,20 @@
 ---
 title: ASP.NET Core 웹 호스트
-author: guardrex
+author: rick-anderson
 description: 앱 시작 및 수명 관리를 담당하는 ASP.NET Core의 웹 호스트에 대해 알아봅니다.
+monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/14/2019
+ms.date: 10/07/2019
 uid: fundamentals/host/web-host
-ms.openlocfilehash: d387098662cc832cc0e49b6a1636f0ebcc7308de
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: bc18b5490d232758b796d33a62cd8d1a7dd7289f
+ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081684"
+ms.lasthandoff: 10/07/2019
+ms.locfileid: "72007102"
 ---
 # <a name="aspnet-core-web-host"></a>ASP.NET Core 웹 호스트
-
-작성자: [Luke Latham](https://github.com/guardrex)
 
 ASP.NET Core 앱은 *호스트*를 구성 및 실행합니다. 호스트는 앱 시작 및 수명 관리를 담당합니다. 최소한으로 호스트는 서버 및 요청 처리 파이프라인을 구성합니다. 호스트는 로깅, 종속성 주입 및 구성을 설정할 수도 있습니다.
 
@@ -25,7 +24,7 @@ ASP.NET Core 앱은 *호스트*를 구성 및 실행합니다. 호스트는 앱 
 
 ::: moniker-end
 
-::: moniker range="<= aspnetcore-2.2"
+::: moniker range="< aspnetcore-3.0"
 
 이 문서에서는 웹앱 호스트를 위한 웹 호스트에 대해 다룹니다. 다른 종류의 앱인 경우 [일반 호스트](xref:fundamentals/host/generic-host)를 사용합니다.
 
@@ -56,7 +55,7 @@ public class Program
 `CreateDefaultBuilder`는 다음 작업을 수행합니다.
 
 * 앱의 호스팅 구성 공급자를 사용하여 [Kestrel](xref:fundamentals/servers/kestrel) 서버를 웹 서버로 구성합니다. Kestrel 서버의 기본 옵션은 <xref:fundamentals/servers/kestrel#kestrel-options>을 참조하세요.
-* 콘텐츠 루트를 [Directory.GetCurrentDirectory](/dotnet/api/system.io.directory.getcurrentdirectory)에서 반환된 경로로 설정합니다.
+* [콘텐츠 루트](xref:fundamentals/index#content-root)를 [Directory.GetCurrentDirectory](/dotnet/api/system.io.directory.getcurrentdirectory)에서 반환된 경로로 설정합니다.
 * 다음에서 [호스트 구성](#host-configuration-values)을 로드합니다.
   * 접두사가 `ASPNETCORE_`인 환경 변수(예: `ASPNETCORE_ENVIRONMENT`).
   * 명령줄 인수.
@@ -122,7 +121,7 @@ public class Program
 
 ::: moniker-end
 
-*콘텐츠 루트*는 호스트가 MVC 뷰 파일과 같은 콘텐츠 파일을 검색하는 위치를 결정합니다. 앱이 프로젝트의 루트 폴더에서 시작되면 프로젝트의 루트 폴더가 콘텐츠 루트로 사용됩니다. 이것이 [Visual Studio](https://visualstudio.microsoft.com) 및 [dotnet 새 템플릿](/dotnet/core/tools/dotnet-new)에서 사용되는 기본값입니다.
+[콘텐츠 루트](xref:fundamentals/index#content-root)는 호스트가 MVC 뷰 파일과 같은 콘텐츠 파일을 검색하는 위치를 결정합니다. 앱이 프로젝트의 루트 폴더에서 시작되면 프로젝트의 루트 폴더가 콘텐츠 루트로 사용됩니다. 이것이 [Visual Studio](https://visualstudio.microsoft.com) 및 [dotnet 새 템플릿](/dotnet/core/tools/dotnet-new)에서 사용되는 기본값입니다.
 
 앱 구성에 대한 자세한 내용은 <xref:fundamentals/configuration/index>를 참조하세요.
 
@@ -143,7 +142,17 @@ public class Program
 
 ### <a name="application-key-name"></a>애플리케이션 키(이름)
 
+::: moniker range=">= aspnetcore-3.0"
+
+[UseStartup](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.usestartup) 또는 [Configure](/dotnet/api/microsoft.aspnetcore.hosting.istartup.configure)가 호스트 생성 중에 호출되는 경우 `IWebHostEnvironment.ApplicationName` 속성이 자동으로 설정됩니다. 해당 값은 앱의 진입점을 포함하는 어셈블리의 이름으로 설정됩니다. 값을 명시적으로 설정하려면 [WebHostDefaults.ApplicationKey](/dotnet/api/microsoft.aspnetcore.hosting.webhostdefaults.applicationkey)를 사용합니다.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [UseStartup](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.usestartup) 또는 [구성](/dotnet/api/microsoft.aspnetcore.hosting.istartup.configure)이 호스트 생성 중에 호출되는 경우 [IHostingEnvironment.ApplicationName](/dotnet/api/microsoft.extensions.hosting.ihostingenvironment.applicationname) 속성이 자동으로 설정됩니다. 해당 값은 앱의 진입점을 포함하는 어셈블리의 이름으로 설정됩니다. 값을 명시적으로 설정하려면 [WebHostDefaults.ApplicationKey](/dotnet/api/microsoft.aspnetcore.hosting.webhostdefaults.applicationkey)를 사용합니다.
+
+::: moniker-end
 
 **키**: applicationName  
 **형식**: *string*  
@@ -175,7 +184,7 @@ WebHost.CreateDefaultBuilder(args)
 
 ### <a name="content-root"></a>콘텐츠 루트
 
-이 설정은 ASP.NET Core가 MVC 뷰와 같은 콘텐츠 파일을 검색하기 시작하는 지점을 결정합니다. 
+이 설정은 ASP.NET Core가 콘텐츠 파일을 검색하기 시작하는 지점을 결정합니다.
 
 **키**: contentRoot  
 **형식**: *string*  
@@ -183,12 +192,17 @@ WebHost.CreateDefaultBuilder(args)
 **설정 방법**: `UseContentRoot`  
 **환경 변수**: `ASPNETCORE_CONTENTROOT`
 
-콘텐츠 루트는 또한 [웹 루트 설정](#web-root)에 대한 기본 경로로 사용됩니다. 경로가 존재하지 않는 경우 호스트가 시작되지 않습니다.
+콘텐츠 루트는 또한 [웹 루트](xref:fundamentals/index#web-root)에 대한 기본 경로로 사용됩니다. 콘텐츠 루트 경로가 존재하지 않는 경우 호스트가 시작되지 않습니다.
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
     .UseContentRoot("c:\\<content-root>")
 ```
+
+자세한 내용은 다음을 참조하세요.
+
+* [기본 사항: 콘텐츠 루트](xref:fundamentals/index#content-root)
+* [웹 루트](#web-root)
 
 ### <a name="detailed-errors"></a>자세한 오류
 
@@ -373,7 +387,7 @@ WebHost.CreateDefaultBuilder(args)
 
 **키**: webroot  
 **형식**: *string*  
-**기본값**: 기본값이 지정되지 않은 경우 기본값은 “(Content Root)/wwwroot”입니다(경로가 존재하는 경우). 경로가 존재하지 않다면 no-op 파일 공급자가 사용됩니다.  
+**기본값**: 기본값은 `wwwroot`입니다. *{content root}/wwwroot* 경로가 존재해야 합니다. 경로가 존재하지 않으면 no-op 파일 공급자가 사용됩니다.  
 **설정 방법**: `UseWebRoot`  
 **환경 변수**: `ASPNETCORE_WEBROOT`
 
@@ -381,6 +395,11 @@ WebHost.CreateDefaultBuilder(args)
 WebHost.CreateDefaultBuilder(args)
     .UseWebRoot("public")
 ```
+
+자세한 내용은 다음을 참조하세요.
+
+* [기본 사항: 웹 루트](xref:fundamentals/index#web-root)
+* [콘텐츠 루트](#content-root)
 
 ## <a name="override-configuration"></a>구성 재정의
 
@@ -507,7 +526,7 @@ using (var host = WebHost.Start("http://localhost:8080", app => app.Response.Wri
 
 앱이 `http://localhost:8080`에서 응답한다는 점을 제외하고 **Start(RequestDelegate app)** 와 동일한 결과가 생성됩니다.
 
-**Start(Action&lt;IRouteBuilder&gt; routeBuilder)**
+**Start(Action\<IRouteBuilder> routeBuilder)**
 
 `IRouteBuilder`의 인스턴스([Microsoft.AspNetCore.Routing](https://www.nuget.org/packages/Microsoft.AspNetCore.Routing/))를 사용하여 라우팅 미들웨어를 사용합니다.
 
@@ -541,7 +560,7 @@ using (var host = WebHost.Start(router => router
 
 `WaitForShutdown`은 중단(Ctrl-C/SIGINT 또는 SIGTERM)이 발생할 때까지 차단합니다. 앱은 `Console.WriteLine` 메시지를 표시하고 종료하기 위한 키 입력을 대기합니다.
 
-**Start(string url, Action&lt;IRouteBuilder&gt; routeBuilder)**
+**Start(string url, Action\<IRouteBuilder> routeBuilder)**
 
 URL 및 `IRouteBuilder`의 인스턴스를 사용합니다.
 
@@ -562,9 +581,9 @@ using (var host = WebHost.Start("http://localhost:8080", router => router
 }
 ```
 
-앱이 `http://localhost:8080`에서 응답한다는 점을 제외하고 **Start(Action&lt;IRouteBuilder&gt; routeBuilder)** 와 동일한 결과가 생성됩니다.
+앱이 `http://localhost:8080`에서 응답한다는 점을 제외하고 **Start(Action\<IRouteBuilder> routeBuilder)** 와 동일한 결과가 생성됩니다.
 
-**StartWith(Action&lt;IApplicationBuilder&gt; app)**
+**StartWith(Action\<IApplicationBuilder> app)**
 
 대리자를 제공하여 `IApplicationBuilder`를 구성합니다.
 
@@ -585,7 +604,7 @@ using (var host = WebHost.StartWith(app =>
 
 `http://localhost:5000`에 대한 브라우저에서 요청을 수행하여 “Hello World!” 응답을 수신합니다. `WaitForShutdown`은 중단(Ctrl-C/SIGINT 또는 SIGTERM)이 발생할 때까지 차단합니다. 앱은 `Console.WriteLine` 메시지를 표시하고 종료하기 위한 키 입력을 대기합니다.
 
-**StartWith(string url, Action&lt;IApplicationBuilder&gt; app)**
+**StartWith(string url, Action\<IApplicationBuilder> app)**
 
 URL 및 대리자를 제공하여 `IApplicationBuilder`를 구성합니다.
 
@@ -604,7 +623,104 @@ using (var host = WebHost.StartWith("http://localhost:8080", app =>
 }
 ```
 
-앱이 `http://localhost:8080`에서 응답한다는 점을 제외하고 **StartWith(Action&lt;IApplicationBuilder&gt; app)** 와 동일한 결과가 생성됩니다.
+앱이 `http://localhost:8080`에서 응답한다는 점을 제외하고 **StartWith(Action\<IApplicationBuilder> app)** 와 동일한 결과가 생성됩니다.
+
+::: moniker range=">= aspnetcore-3.0"
+
+## <a name="iwebhostenvironment-interface"></a>IWebHostEnvironment 인터페이스
+
+`IWebHostEnvironment` 인터페이스는 앱의 웹 호스팅 환경에 대한 정보를 제공합니다. 해당 속성 및 확장 메서드를 사용하기 위해 [생성자 주입](xref:fundamentals/dependency-injection)을 사용하여 `IWebHostEnvironment`를 가져옵니다.
+
+```csharp
+public class CustomFileReader
+{
+    private readonly IWebHostEnvironment _env;
+
+    public CustomFileReader(IWebHostEnvironment env)
+    {
+        _env = env;
+    }
+
+    public string ReadFile(string filePath)
+    {
+        var fileProvider = _env.WebRootFileProvider;
+        // Process the file here
+    }
+}
+```
+
+[규칙 기반 접근 방식](xref:fundamentals/environments#environment-based-startup-class-and-methods)은 시작할 때 환경에 따라 앱을 구성하는 데 사용할 수 있습니다. 또는 `ConfigureServices`에서 사용할 수 있도록 `IWebHostEnvironment`를 `Startup` 생성자에 주입합니다.
+
+```csharp
+public class Startup
+{
+    public Startup(IWebHostEnvironment env)
+    {
+        HostingEnvironment = env;
+    }
+
+    public IWebHostEnvironment HostingEnvironment { get; }
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        if (HostingEnvironment.IsDevelopment())
+        {
+            // Development configuration
+        }
+        else
+        {
+            // Staging/Production configuration
+        }
+
+        var contentRootPath = HostingEnvironment.ContentRootPath;
+    }
+}
+```
+
+> [!NOTE]
+> `IsDevelopment` 확장 메서드 외에 `IWebHostEnvironment`는 `IsStaging`, `IsProduction` 및 `IsEnvironment(string environmentName)` 메서드를 제공합니다. 자세한 내용은 <xref:fundamentals/environments>을 참조하세요.
+
+또한 `IWebHostEnvironment` 서비스를 파이프라인 처리를 설정하기 위한 `Configure` 메서드에 직접 주입할 수 있습니다.
+
+```csharp
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    if (env.IsDevelopment())
+    {
+        // In Development, use the Developer Exception Page
+        app.UseDeveloperExceptionPage();
+    }
+    else
+    {
+        // In Staging/Production, route exceptions to /error
+        app.UseExceptionHandler("/error");
+    }
+
+    var contentRootPath = env.ContentRootPath;
+}
+```
+
+사용자 지정 [미들웨어](xref:fundamentals/middleware/write)를 만들 때 `IWebHostEnvironment`를 `Invoke` 메서드에 주입할 수 있습니다.
+
+```csharp
+public async Task Invoke(HttpContext context, IWebHostEnvironment env)
+{
+    if (env.IsDevelopment())
+    {
+        // Configure middleware for Development
+    }
+    else
+    {
+        // Configure middleware for Staging/Production
+    }
+
+    var contentRootPath = env.ContentRootPath;
+}
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
 
 ## <a name="ihostingenvironment-interface"></a>IHostingEnvironment 인터페이스
 
@@ -697,6 +813,77 @@ public async Task Invoke(HttpContext context, IHostingEnvironment env)
 }
 ```
 
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
+
+## <a name="ihostapplicationlifetime-interface"></a>IHostApplicationLifetime 인터페이스
+
+`IHostApplicationLifetime`은 시작 후 및 종료 작업을 허용합니다. 인터페이스에서 세 가지 속성은 취소 토큰으로, 시작 및 종료 이벤트를 정의하는 `Action` 메서드를 등록하는 데 사용됩니다.
+
+| 취소 토큰    | 트리거되는 경우: |
+| --------------------- | --------------------- |
+| `ApplicationStarted`  | 호스트가 완벽하게 시작되었습니다. |
+| `ApplicationStopped`  | 호스트가 정상적으로 종료되었습니다. 모든 요청이 처리되어야 합니다. 종료는 이 이벤트가 완료될 때까지 차단합니다. |
+| `ApplicationStopping` | 호스트가 정상적으로 종료되고 있습니다. 요청은 계속 처리할 수 있습니다. 종료는 이 이벤트가 완료될 때까지 차단합니다. |
+
+```csharp
+public class Startup
+{
+    public void Configure(IApplicationBuilder app, IHostApplicationLifetime appLifetime)
+    {
+        appLifetime.ApplicationStarted.Register(OnStarted);
+        appLifetime.ApplicationStopping.Register(OnStopping);
+        appLifetime.ApplicationStopped.Register(OnStopped);
+
+        Console.CancelKeyPress += (sender, eventArgs) =>
+        {
+            appLifetime.StopApplication();
+            // Don't terminate the process immediately, wait for the Main thread to exit gracefully.
+            eventArgs.Cancel = true;
+        };
+    }
+
+    private void OnStarted()
+    {
+        // Perform post-startup activities here
+    }
+
+    private void OnStopping()
+    {
+        // Perform on-stopping activities here
+    }
+
+    private void OnStopped()
+    {
+        // Perform post-stopped activities here
+    }
+}
+```
+
+`StopApplication`은 앱의 종료를 요청합니다. 다음 클래스에서는 `StopApplication`을 사용하여 해당 클래스의 `Shutdown` 메서드를 호출하는 경우 앱을 정상 종료합니다.
+
+```csharp
+public class MyClass
+{
+    private readonly IHostApplicationLifetime _appLifetime;
+
+    public MyClass(IHostApplicationLifetime appLifetime)
+    {
+        _appLifetime = appLifetime;
+    }
+
+    public void Shutdown()
+    {
+        _appLifetime.StopApplication();
+    }
+}
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 ## <a name="iapplicationlifetime-interface"></a>IApplicationLifetime 인터페이스
 
 [IApplicationLifetime](/dotnet/api/microsoft.aspnetcore.hosting.iapplicationlifetime)은 사후 시작 및 종료 작업을 고려합니다. 인터페이스에서 세 가지 속성은 취소 토큰으로, 시작 및 종료 이벤트를 정의하는 `Action` 메서드를 등록하는 데 사용됩니다.
@@ -759,6 +946,8 @@ public class MyClass
     }
 }
 ```
+
+::: moniker-end
 
 ## <a name="scope-validation"></a>범위 유효성 검사
 

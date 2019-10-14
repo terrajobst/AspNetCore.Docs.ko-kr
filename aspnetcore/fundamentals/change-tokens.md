@@ -4,14 +4,14 @@ author: guardrex
 description: 변경 토큰을 사용하여 변경 내용을 추적하는 방법에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-ms.date: 08/27/2019
+ms.date: 10/07/2019
 uid: fundamentals/change-tokens
-ms.openlocfilehash: 86cde7b60f5c398fc6bb215b593643c05565cf3c
-ms.sourcegitcommit: 116bfaeab72122fa7d586cdb2e5b8f456a2dc92a
+ms.openlocfilehash: bb30d7a4c7dc82200821c60a49c314b246562111
+ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/05/2019
-ms.locfileid: "70384704"
+ms.lasthandoff: 10/07/2019
+ms.locfileid: "72007203"
 ---
 # <a name="detect-changes-with-change-tokens-in-aspnet-core"></a>ASP.NET Core에서 변경 토큰을 사용하여 변경 내용 검색
 
@@ -172,7 +172,7 @@ UI의 단추로 모니터링을 사용 설정 및 해제합니다.
 1. [IFileProviders.Watch](xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*)를 통해 파일 공급자로부터 변경 토큰을 가져옵니다. 파일이 수정될 때 토큰의 콜백이 트리거됩니다.
 1. [상대(sliding) 만료](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.SlidingExpiration) 기간과 함께 파일 콘텐츠가 캐시됩니다. 변경 토큰은 [MemoryCacheEntryExtensions.AddExpirationToken](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken*)과 연결되어 파일이 캐시되는 동안 변경되면 캐시 항목을 제거합니다.
 
-다음 예제에서 파일은 앱의 콘텐츠 루트에 저장됩니다. `IWebHostEnvironment.ContentRootFileProvider`는 앱의 `IWebHostEnvironment.ContentRootPath`를 가리키는 <xref:Microsoft.Extensions.FileProviders.IFileProvider>를 가져오는 데 사용됩니다. `filePath`는 [IFileInfo.PhysicalPath](xref:Microsoft.Extensions.FileProviders.IFileInfo.PhysicalPath)를 사용하여 가져옵니다.
+다음 예제에서 파일은 앱의 [콘텐츠 루트](xref:fundamentals/index#content-root)에 저장됩니다. `IWebHostEnvironment.ContentRootFileProvider`는 앱의 `IWebHostEnvironment.ContentRootPath`를 가리키는 <xref:Microsoft.Extensions.FileProviders.IFileProvider>를 가져오는 데 사용됩니다. `filePath`는 [IFileInfo.PhysicalPath](xref:Microsoft.Extensions.FileProviders.IFileInfo.PhysicalPath)를 사용하여 가져옵니다.
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Services/FileService.cs?name=snippet1)]
 
@@ -370,7 +370,7 @@ UI의 단추로 모니터링을 사용 설정 및 해제합니다.
 1. [IFileProviders.Watch](xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*)를 통해 파일 공급자로부터 변경 토큰을 가져옵니다. 파일이 수정될 때 토큰의 콜백이 트리거됩니다.
 1. [상대(sliding) 만료](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.SlidingExpiration) 기간과 함께 파일 콘텐츠가 캐시됩니다. 변경 토큰은 [MemoryCacheEntryExtensions.AddExpirationToken](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken*)과 연결되어 파일이 캐시되는 동안 변경되면 캐시 항목을 제거합니다.
 
-다음 예제에서 파일은 앱의 콘텐츠 루트에 저장됩니다. [IHostingEnvironment.ContentRootFileProvider](xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootFileProvider)는 앱의 <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath>를 가리키는 <xref:Microsoft.Extensions.FileProviders.IFileProvider>를 가져오는 데 사용합니다. `filePath`는 [IFileInfo.PhysicalPath](xref:Microsoft.Extensions.FileProviders.IFileInfo.PhysicalPath)를 사용하여 가져옵니다.
+다음 예제에서 파일은 앱의 [콘텐츠 루트](xref:fundamentals/index#content-root)에 저장됩니다. [IHostingEnvironment.ContentRootFileProvider](xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootFileProvider)는 앱의 <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath>를 가리키는 <xref:Microsoft.Extensions.FileProviders.IFileProvider>를 가져오는 데 사용합니다. `filePath`는 [IFileInfo.PhysicalPath](xref:Microsoft.Extensions.FileProviders.IFileInfo.PhysicalPath)를 사용하여 가져옵니다.
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Services/FileService.cs?name=snippet1)]
 

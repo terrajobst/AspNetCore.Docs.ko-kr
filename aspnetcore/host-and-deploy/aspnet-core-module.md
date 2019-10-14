@@ -5,14 +5,14 @@ description: ASP.NET Core 앱을 호스팅하기 위해 ASP.NET Core 모듈을 �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/24/2019
+ms.date: 10/08/2019
 uid: host-and-deploy/aspnet-core-module
-ms.openlocfilehash: 811aafce6686b446440b146efd7449b598ed1722
-ms.sourcegitcommit: e54672f5c493258dc449fac5b98faf47eb123b28
+ms.openlocfilehash: c1c34f368cb3f7767bf0f229ff70c5ab53c6005f
+ms.sourcegitcommit: fcdf9aaa6c45c1a926bd870ed8f893bdb4935152
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/24/2019
-ms.locfileid: "71248351"
+ms.lasthandoff: 10/09/2019
+ms.locfileid: "72165319"
 ---
 # <a name="aspnet-core-module"></a>ASP.NET Core 모듈
 
@@ -79,13 +79,15 @@ ASP.NET Core 앱의 기본값은 In-process 호스팅 모델입니다.
 
 ### <a name="out-of-process-hosting-model"></a>Out-of-Process 호스팅 모델
 
-Out-of-Process 호스팅용 앱을 구성하려면 `<AspNetCoreHostingModel>` 속성 값을 `OutOfProcess`로 설정합니다(In-process 호스팅은 기본값인 `InProcess`로 설정됨).
+Out-of-Process 호스팅을 위해 앱을 구성하려면 프로젝트 파일( *.csproj*)에서 `<AspNetCoreHostingModel>` 속성의 값을 `OutOfProcess`로 설정합니다.
 
 ```xml
 <PropertyGroup>
   <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
 </PropertyGroup>
 ```
+
+In-Process 호스팅은 기본값 `InProcess`로 설정됩니다.
 
 [Kestrel](xref:fundamentals/servers/kestrel) 서버는 IIS HTTP 서버(`IISHttpServer`) 대신 사용됩니다.
 
@@ -182,11 +184,11 @@ IIS 하위 애플리케이션 구성에 대한 자세한 내용은 <xref:host-an
 | `stdoutLogEnabled` | <p>선택적 부울 특성입니다.</p><p>true인 경우 **processPath**에 지정된 프로세스에 대한 **stdout** 및 **stderr**이 **stdoutLogFile**에 지정된 파일로 리디렉션됩니다.</p> | `false` |
 | `stdoutLogFile` | <p>선택적 문자열 특성입니다.</p><p>**processPath**에 지정된 프로세스에서 **stdout** 및 **stderr**이 기록되는 상대 또는 절대 파일 경로를 지정합니다. 상대 경로는 사이트 루트에 상대적인 경로입니다. `.`로 시작하는 모든 경로는 사이트 루트에 상대적인 경로이고 다른 모든 경로는 절대 경로로 처리됩니다. 경로에 제공된 모든 폴더는 로그 파일을 만들 때 모듈에 의해 생성됩니다. 타임스탬프, 프로세스 ID 및 파일 확장명( *.log*)은 밑줄 구분 기호를 사용하여 **stdoutLogFile** 경로의 마지막 세그먼트에 추가됩니다. `.\logs\stdout`이 값으로 제공되는 경우 예제 stdout 로그는 2018년 2월 5일 19시 41분 32초에 프로세스 ID 1934를 사용하여 저장될 경우 *logs* 폴더에 *stdout_20180205194132_1934.log*로 저장됩니다.</p> | `aspnetcore-stdout` |
 
-### <a name="setting-environment-variables"></a>환경 변수 설정
+### <a name="set-environment-variables"></a>환경 변수 설정
 
 `processPath` 특성에서 프로세스에 대한 환경 변수를 지정할 수 있습니다. `<environmentVariables>` 컬렉션 요소의 `<environmentVariable>` 자식 요소를 사용하여 환경 변수를 지정합니다. 이 섹션에 설정된 환경 변수가 시스템 환경 변수보다 우선 적용됩니다.
 
-다음 예제에서는 두 개의 환경 변수를 설정합니다. `ASPNETCORE_ENVIRONMENT`는 앱의 환경을 `Development`로 구성합니다. 앱 예외를 디버그할 때 [개발자 예외 페이지](xref:fundamentals/error-handling)를 강제로 로드하기 위해 개발자가 *web.config* 파일에서 이 값을 일시적으로 설정할 수 있습니다. `CONFIG_DIR`은 개발자가 앱 구성 파일을 로드할 경로를 생성하기 위해 시작 시 값을 읽는 코드를 작성한 사용자 정의 환경 변수의 예입니다.
+다음 예제에서는 *web.config*에서 두 가지 환경 변수를 설정합니다. `ASPNETCORE_ENVIRONMENT`는 앱 환경을 `Development`로 구성합니다. 앱 예외를 디버그할 때 [개발자 예외 페이지](xref:fundamentals/error-handling)를 강제로 로드하기 위해 개발자가 *web.config* 파일에서 이 값을 일시적으로 설정할 수 있습니다. `CONFIG_DIR`은 개발자가 앱 구성 파일을 로드할 경로를 생성하기 위해 시작 시 값을 읽는 코드를 작성한 사용자 정의 환경 변수의 예입니다.
 
 ```xml
 <aspNetCore processPath="dotnet"
@@ -245,7 +247,7 @@ stdout 로그는 앱 시작 문제를 해결하는 경우에만 사용하는 것
 
 `stdoutLogEnabled`가 false이면 앱 시작 시 발생하는 오류가 캡처되어 최대 30KB의 이벤트 로그로 내보냅니다. 시작 후에는 모든 추가 로그가 삭제됩니다.
 
-다음 샘플 `aspNetCore` 요소는 Azure App Service에서 호스트되는 앱에 대한 stdout 로깅을 구성합니다. 로컬 로깅에는 로컬 경로 또는 네트워크 공유 경로가 허용됩니다. AppPool 사용자 ID에 제공된 경로에 쓸 수 있는 권한이 있는지 확인합니다.
+*web.config* 파일의 `aspNetCore` 요소에 대한 다음 샘플은 Azure App Service에서 호스트되는 앱에 대한 stdout 로깅을 구성합니다. 로컬 로깅에는 로컬 경로 또는 네트워크 공유 경로가 허용됩니다. AppPool 사용자 ID에 제공된 경로에 쓸 수 있는 권한이 있는지 확인합니다.
 
 ```xml
 <aspNetCore processPath="dotnet"
@@ -304,7 +306,7 @@ ASP.NET Core 모듈은 개선된 진단 로그를 제공하도록 구성할 수 
 
 *In-process 호스팅 모델을 사용하는 경우에만 적용됩니다.*
 
-바이트 단위의 `stackSize` 설정을 사용하여 관리형 스택 크기를 구성합니다. 기본 크기는 `1048576`바이트(1MB)입니다.
+*web.config*에서 바이트 단위의 `stackSize` 설정을 사용하여 관리형 스택 크기를 구성합니다. 기본 크기는 `1048576`바이트(1MB)입니다.
 
 ```xml
 <aspNetCore processPath="dotnet"
@@ -356,7 +358,7 @@ dotnet-hosting-{VERSION}.exe OPT_NO_SHARED_CONFIG_CHECK=1
 
 ## <a name="module-schema-and-configuration-file-locations"></a>모듈, 스키마 및 구성 파일 위치
 
-### <a name="module"></a>모듈
+### <a name="module"></a>Module
 
 **IIS(x86/amd64):**
 
@@ -392,7 +394,7 @@ dotnet-hosting-{VERSION}.exe OPT_NO_SHARED_CONFIG_CHECK=1
 
 * %ProgramFiles%\IIS Express\config\schema\aspnetcore_schema_v2.xml
 
-### <a name="configuration"></a>구성
+### <a name="configuration"></a>Configuration
 
 **IIS**
 
@@ -741,7 +743,7 @@ dotnet-hosting-{VERSION}.exe OPT_NO_SHARED_CONFIG_CHECK=1
 
 ## <a name="module-schema-and-configuration-file-locations"></a>모듈, 스키마 및 구성 파일 위치
 
-### <a name="module"></a>모듈
+### <a name="module"></a>Module
 
 **IIS(x86/amd64):**
 
@@ -777,7 +779,7 @@ dotnet-hosting-{VERSION}.exe OPT_NO_SHARED_CONFIG_CHECK=1
 
 * %ProgramFiles%\IIS Express\config\schema\aspnetcore_schema_v2.xml
 
-### <a name="configuration"></a>구성
+### <a name="configuration"></a>Configuration
 
 **IIS**
 
@@ -975,7 +977,7 @@ IIS 공유 구성을 사용할 경우 다음 단계를 수행합니다.
 
 ## <a name="module-schema-and-configuration-file-locations"></a>모듈, 스키마 및 구성 파일 위치
 
-### <a name="module"></a>모듈
+### <a name="module"></a>Module
 
 **IIS(x86/amd64):**
 
@@ -999,7 +1001,7 @@ IIS 공유 구성을 사용할 경우 다음 단계를 수행합니다.
 
 * %ProgramFiles%\IIS Express\config\schema\aspnetcore_schema.xml
 
-### <a name="configuration"></a>구성
+### <a name="configuration"></a>Configuration
 
 **IIS**
 
@@ -1015,7 +1017,7 @@ IIS 공유 구성을 사용할 경우 다음 단계를 수행합니다.
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:host-and-deploy/iis/index>
 * [ASP.NET Core 모듈 GitHub 리포지토리(참조 소스)](https://github.com/aspnet/AspNetCoreModule)

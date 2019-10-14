@@ -5,14 +5,14 @@ description: ASP.NET Core, CDN(Content Delivery Network), 파일 서버 및 GitH
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/23/2019
+ms.date: 10/07/2019
 uid: host-and-deploy/blazor/webassembly
-ms.openlocfilehash: cdb424137d80b280873347c1352fc43d23b4aec3
-ms.sourcegitcommit: 79eeb17604b536e8f34641d1e6b697fb9a2ee21f
+ms.openlocfilehash: a0a11f3aed9035000e79844fbec7cdd17b73fdaa
+ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/24/2019
-ms.locfileid: "71211618"
+ms.lasthandoff: 10/07/2019
+ms.locfileid: "72007341"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 호스트 및 배포
 
@@ -199,7 +199,7 @@ URL 다시 생성을 처리하려면 *index.html* 페이지로 요청 리디렉�
 
 ### <a name="content-root"></a>콘텐츠 루트
 
-`--contentroot` 인수는 앱의 콘텐츠 파일을 포함하는 디렉터리에 대한 절대 경로를 설정합니다. 다음 예제에서 `/content-root-path`는 앱의 콘텐츠 루트 경로입니다.
+`--contentroot` 인수는 앱의 콘텐츠 파일을 포함하는 디렉터리([콘텐츠 루트](xref:fundamentals/index#content-root))에 대한 절대 경로를 설정합니다. 다음 예제에서 `/content-root-path`는 앱의 콘텐츠 루트 경로입니다.
 
 * 명령 프롬프트에서 앱을 로컬로 실행할 때 인수를 전달합니다. 앱의 디렉터리에서 다음을 실행합니다.
 

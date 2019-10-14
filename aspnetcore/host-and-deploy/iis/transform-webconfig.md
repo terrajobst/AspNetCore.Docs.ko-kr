@@ -5,14 +5,14 @@ description: ASP.NET Core 앱을 게시할 때 web.config 파일을 변환하는
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/07/2019
+ms.date: 10/07/2019
 uid: host-and-deploy/iis/transform-webconfig
-ms.openlocfilehash: 32e66007d527f7f7b7cfd88d3bebc9b808251941
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: d28c362a200ad433e316bc1af710231a169a30a4
+ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081457"
+ms.lasthandoff: 10/07/2019
+ms.locfileid: "72007307"
 ---
 # <a name="transform-webconfig"></a>web.config 변환
 
@@ -28,7 +28,7 @@ ms.locfileid: "71081457"
 이 변환은 다음 *web.config* 생성 시나리오 중 하나에 대해 발생합니다.
 
 * `Microsoft.NET.Sdk.Web` SDK에서 자동으로 생성되는 경우
-* 앱의 콘텐츠 루트에서 개발자가 제공하는 경우
+* 앱의 [콘텐츠 루트](xref:fundamentals/index#content-root)에서 개발자가 제공하는 경우
 
 ## <a name="build-configuration"></a>빌드 구성
 

@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core 웹앱에서 정적 파일을 제공 및 보호하고 정적 파일 호스팅 미들웨어 동작을 구성하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/8/2019
+ms.date: 10/07/2019
 uid: fundamentals/static-files
-ms.openlocfilehash: 1c665d1206e984fe41e9f57bb5356839c354dde2
-ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
+ms.openlocfilehash: 2f153551a86860616469200862723528e4a8cc1c
+ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68308190"
+ms.lasthandoff: 10/07/2019
+ms.locfileid: "72007321"
 ---
 # <a name="static-files-in-aspnet-core"></a>ASP.NET Core의 정적 파일
 
@@ -23,7 +23,7 @@ HTML, CSS, 이미지 및 JavaScript와 같은 정적 파일은 ASP.NET Core 앱�
 
 ## <a name="serve-static-files"></a>정적 파일 제공
 
-정적 파일은 프로젝트의 웹 루트 디렉터리 내에 저장됩니다. 기본 디렉터리는 *\<content_root>/wwwroot*이지만, [UseWebRoot](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.usewebroot#Microsoft_AspNetCore_Hosting_HostingAbstractionsWebHostBuilderExtensions_UseWebRoot_Microsoft_AspNetCore_Hosting_IWebHostBuilder_System_String_) 메서드를 통해 변경할 수 있습니다. 자세한 정보는 [콘텐츠 루트](xref:fundamentals/index#content-root) 및 [웹 루트](xref:fundamentals/index#web-root)를 참조하세요.
+정적 파일은 프로젝트의 [웹 루트](xref:fundamentals/index#web-root) 디렉터리 내에 저장됩니다. 기본 디렉터리는 *{content root}/wwwroot*이지만, [UseWebRoot](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.usewebroot#Microsoft_AspNetCore_Hosting_HostingAbstractionsWebHostBuilderExtensions_UseWebRoot_Microsoft_AspNetCore_Hosting_IWebHostBuilder_System_String_) 메서드를 통해 변경할 수 있습니다. 자세한 정보는 [콘텐츠 루트](xref:fundamentals/index#content-root) 및 [웹 루트](xref:fundamentals/index#web-root)를 참조하세요.
 
 앱의 웹 호스트에서 콘텐츠 루트 디렉터리를 인식하도록 해야 합니다.
 
@@ -43,7 +43,7 @@ HTML, CSS, 이미지 및 JavaScript와 같은 정적 파일은 ASP.NET Core 앱�
 
 ::: moniker-end
 
-정적 파일은 웹 루트에 상대적인 경로를 통해 액세스할 수 있습니다. 예를 들어 **웹 응용 프로그램** 프로젝트 템플릿에는 *wwwroot* 폴더 내에 여러 폴더가 포함되어 있습니다.
+정적 파일은 [웹 루트](xref:fundamentals/index#web-root)에 상대적인 경로를 통해 액세스할 수 있습니다. 예를 들어 **웹 응용 프로그램** 프로젝트 템플릿에는 *wwwroot* 폴더 내에 여러 폴더가 포함되어 있습니다.
 
 * **wwwroot**
   * **css**
@@ -78,15 +78,15 @@ HTML, CSS, 이미지 및 JavaScript와 같은 정적 파일은 ASP.NET Core 앱�
 
 [!code-csharp[](static-files/samples/1x/StartupStaticFiles.cs?name=snippet_ConfigureMethod&highlight=3)]
 
-매개 변수가 없는 `UseStaticFiles` 메서드 오버로드는 웹 루트에 있는 파일을 제공 가능으로 표시합니다. 다음 표시는 *wwwroot/images/banner1.svg*를 참조합니다.
+매개 변수가 없는 `UseStaticFiles` 메서드 오버로드는 [웹 루트](xref:fundamentals/index#web-root)에 있는 파일을 제공 가능으로 표시합니다. 다음 표시는 *wwwroot/images/banner1.svg*를 참조합니다.
 
 [!code-cshtml[](static-files/samples/1x/Views/Home/Index.cshtml?name=snippet_static_file_wwwroot)]
 
-위의 코드에서 물결표 문자 `~/`는 webroot를 가리킵니다. 자세한 내용은 [웹 루트](xref:fundamentals/index#web-root)를 참조하세요.
+위의 코드에서 물결표 문자 `~/`는 [웹 루트](xref:fundamentals/index#web-root)를 가리킵니다.
 
 ### <a name="serve-files-outside-of-web-root"></a>웹 루트 외부의 파일 제공
 
-제공할 정적 파일이 웹 루트 외부에 있는 디렉터리 계층 구조를 고려해보세요.
+제공할 정적 파일이 [웹 루트](xref:fundamentals/index#web-root) 외부에 있는 디렉터리 계층 구조를 고려해보세요.
 
 * **wwwroot**
   * **css**
@@ -108,7 +108,7 @@ HTML, CSS, 이미지 및 JavaScript와 같은 정적 파일은 ASP.NET Core 앱�
 
 ### <a name="set-http-response-headers"></a>HTTP 응답 헤더 설정
 
-[StaticFileOptions](/dotnet/api/microsoft.aspnetcore.builder.staticfileoptions) 개체를 사용하여 HTTP 응답 헤더를 설정할 수 있습니다. 다음 코드는 웹 루트에서 제공되는 정적 파일을 구성하는 것 외에도 `Cache-Control` 헤더를 설정합니다.
+[StaticFileOptions](/dotnet/api/microsoft.aspnetcore.builder.staticfileoptions) 개체를 사용하여 HTTP 응답 헤더를 설정할 수 있습니다. 다음 코드는 [웹 루트](xref:fundamentals/index#web-root)에서 제공되는 정적 파일을 구성하는 것 외에도 `Cache-Control` 헤더를 설정합니다.
 
 [!code-csharp[](static-files/samples/1x/StartupAddHeader.cs?name=snippet_ConfigureMethod)]
 
@@ -256,7 +256,7 @@ URL은 파일 계층 구조 및 이전 코드를 사용하여 다음과 같이 �
 > [!WARNING]
 > IIS 정적 파일 처리기를 사용하도록 설정되었으며 **그리고** ASP.NET Core 모듈이 올바르게 구성되지 않은 경우, 정적 파일이 제공됩니다. 예를 들어 *web.config* 파일이 배포되지 않았을 수 있습니다.
 
-* 코드 파일( *.cs* 및 *.cshtml* 포함)을 앱 프로젝트의 웹 루트 외부에 배치합니다. 따라서 논리적 분리가 앱의 클라이언트 쪽 콘텐츠 및 서버 기반 코드 사이에 만들어집니다. 그러면 서버 쪽 코드가 유출되지 않습니다.
+* 코드 파일( *.cs* 및 *.cshtml* 포함)을 앱 프로젝트의 [웹 루트](xref:fundamentals/index#web-root) 외부에 배치합니다. 따라서 논리적 분리가 앱의 클라이언트 쪽 콘텐츠 및 서버 기반 코드 사이에 만들어집니다. 그러면 서버 쪽 코드가 유출되지 않습니다.
 
 ## <a name="additional-resources"></a>추가 자료
 
