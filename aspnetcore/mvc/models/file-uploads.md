@@ -382,7 +382,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 * *Pages/BufferedSingleFileUploadDb.cshtml.cs*
 
 > [!WARNING]
-> 관계형 데이터베이스에 이진 데이터를 저장하는 경우 성능에 나쁜 영향을 줄 수 있으므로 주의하세요.
+> 관계형 데이터베이스에 이진 데이터를 저장할 경우 성능에 나쁜 영향을 줄 수 있으므로 주의하세요.
 >
 > 유효성 검사 없이 <xref:Microsoft.AspNetCore.Http.IFormFile>의 `FileName` 속성을 의존하거나 신뢰하지 마세요. `FileName` 속성은 반드시 HTML 인코딩 후 표시 목적으로만 사용해야 합니다.
 >
@@ -703,7 +703,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 </system.webServer>
 ```
 
-이 설정은 IIS에만 적용됩니다. Kestrel에서 호스팅하는 경우 기본적으로 동작이 발생하지 않습니다. 자세한 내용은 [요청 제한 \<requestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/)을 참조하세요.
+이 설정은 IIS에만 적용됩니다. Kestrel에서 호스팅하는 경우 기본적으로 이 동작은 발생하지 않습니다. 자세한 내용은 [요청 제한 \<requestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/)을 참조하세요.
 
 ASP.NET Core 모듈의 제한 사항 또는 IIS 요청 필터링 모듈의 존재로 인해 업로드가 2GB 또는 4GB로 제한될 수 있습니다. 자세한 내용은 [크기가 2GB 이상인 파일을 업로드할 수 없음(aspnet/AspNetCore #2711)](https://github.com/aspnet/AspNetCore/issues/2711)을 참조하세요.
 
@@ -726,7 +726,7 @@ The request filtering module is configured to deny a request that exceeds the re
 
 연결 오류 및 서버 연결 다시 설정은 업로드된 파일이 Kestrel의 최대 요청 본문 크기를 초과함을 나타낼 수 있습니다. 자세한 내용은 [Kestrel 최대 요청 본문 크기](#kestrel-maximum-request-body-size) 섹션을 참조하세요. Kestrel 클라이언트 연결 제한을 조정해야 할 수도 있습니다.
 
-### <a name="null-reference-exception-with-iformfile"></a>IFormFile을 사용한 Null 참조 예외
+### <a name="null-reference-exception-with-iformfile"></a>IFormFile 사용 시 Null 참조 예외
 
 컨트롤러에서 <xref:Microsoft.AspNetCore.Http.IFormFile>을 사용하여 업로드된 파일을 수락하지만 값이 `null`이면 HTML 양식에서 `multipart/form-data`의 `enctype` 값을 지정하는지 확인합니다. `<form>` 요소에서 이 특성이 설정되지 않으면 파일 업로드가 실행되지 않고 바인딩된 <xref:Microsoft.AspNetCore.Http.IFormFile> 인수는 모두 `null`이 됩니다. 또한 [양식 데이터의 업로드 이름 지정이 앱의 이름 지정과 일치](#match-name-attribute-value-to-parameter-name-of-post-method)하는지 확인합니다.
 
@@ -1096,7 +1096,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 * *Pages/BufferedSingleFileUploadDb.cshtml.cs*
 
 > [!WARNING]
-> 관계형 데이터베이스에 이진 데이터를 저장하는 경우 성능에 나쁜 영향을 줄 수 있으므로 주의하세요.
+> 관계형 데이터베이스에 이진 데이터를 저장할 경우 성능에 나쁜 영향을 줄 수 있으므로 주의하세요.
 >
 > 유효성 검사 없이 <xref:Microsoft.AspNetCore.Http.IFormFile>의 `FileName` 속성을 의존하거나 신뢰하지 마세요. `FileName` 속성은 반드시 HTML 인코딩 후 표시 목적으로만 사용해야 합니다.
 >
@@ -1410,7 +1410,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 </system.webServer>
 ```
 
-이 설정은 IIS에만 적용됩니다. Kestrel에서 호스팅하는 경우 기본적으로 동작이 발생하지 않습니다. 자세한 내용은 [요청 제한 \<requestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/)을 참조하세요.
+이 설정은 IIS에만 적용됩니다. Kestrel에서 호스팅하는 경우 기본적으로 이 동작은 발생하지 않습니다. 자세한 내용은 [요청 제한 \<requestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/)을 참조하세요.
 
 ASP.NET Core 모듈의 제한 사항 또는 IIS 요청 필터링 모듈의 존재로 인해 업로드가 2GB 또는 4GB로 제한될 수 있습니다. 자세한 내용은 [크기가 2GB 이상인 파일을 업로드할 수 없음(aspnet/AspNetCore #2711)](https://github.com/aspnet/AspNetCore/issues/2711)을 참조하세요.
 
@@ -1433,7 +1433,7 @@ The request filtering module is configured to deny a request that exceeds the re
 
 연결 오류 및 서버 연결 다시 설정은 업로드된 파일이 Kestrel의 최대 요청 본문 크기를 초과함을 나타낼 수 있습니다. 자세한 내용은 [Kestrel 최대 요청 본문 크기](#kestrel-maximum-request-body-size) 섹션을 참조하세요. Kestrel 클라이언트 연결 제한을 조정해야 할 수도 있습니다.
 
-### <a name="null-reference-exception-with-iformfile"></a>IFormFile을 사용한 Null 참조 예외
+### <a name="null-reference-exception-with-iformfile"></a>IFormFile 사용 시 Null 참조 예외
 
 컨트롤러에서 <xref:Microsoft.AspNetCore.Http.IFormFile>을 사용하여 업로드된 파일을 수락하지만 값이 `null`이면 HTML 양식에서 `multipart/form-data`의 `enctype` 값을 지정하는지 확인합니다. `<form>` 요소에서 이 특성이 설정되지 않으면 파일 업로드가 실행되지 않고 바인딩된 <xref:Microsoft.AspNetCore.Http.IFormFile> 인수는 모두 `null`이 됩니다. 또한 [양식 데이터의 업로드 이름 지정이 앱의 이름 지정과 일치](#match-name-attribute-value-to-parameter-name-of-post-method)하는지 확인합니다.
 
