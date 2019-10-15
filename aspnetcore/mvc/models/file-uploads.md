@@ -20,7 +20,7 @@ ms.locfileid: "72179299"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩을 사용하여 하나 이상의 파일을 업로드하고, 대용량 파일의 경우에는 버퍼링되지 않은 스트리밍을 지원합니다.
+ASP.NET Core는 작은 파일의 경우에는 버퍼링된 모델 바인딩을 사용하여 하나 이상의 파일을 업로드하고, 큰 파일의 경우에는 버퍼링되지 않는 스트리밍을 지원합니다.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
