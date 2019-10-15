@@ -52,7 +52,7 @@ MVC 패턴을 사용하면 앱의 다양한 측면(입력 논리, 비즈니스 �
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 **솔루션 탐색기** 에서 **컨트롤러 > 추가 > 새 파일** 을 마우스 오른쪽 단추로 클릭합니다.
-![바로 가기 메뉴](~/tutorials/first-mvc-app-mac/adding-controller/_static/add_controller.png)
+![상황에 맞는 메뉴](~/tutorials/first-mvc-app-mac/adding-controller/_static/add_controller.png)
 
 **ASP.NET Core** 및 **MVC 컨트롤러 클래스**를 선택합니다.
 
