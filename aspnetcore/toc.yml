@@ -256,7 +256,7 @@
               uid: tutorials/first-mvc-app/validation
             - name: 세부 정보 및 삭제 메서드 검사
               uid: tutorials/first-mvc-app/details
-        - name: 보기
+        - name: 뷰
           uid: mvc/views/overview
         - name: 부분 뷰
           uid: mvc/views/partial
@@ -310,7 +310,7 @@
           uid: blazor/debug
         - name: 웹 API 호출
           uid: blazor/call-web-api
-        - name: 호스팅 및 배포
+        - name: 호스트 및 배포
           items:
             - name: 개요
               uid: host-and-deploy/blazor/index
@@ -507,7 +507,7 @@
         - name: JavaScript API 참조
           href: /javascript/api/?view=signalr-js-latest
           displayName: signalr
-    - name: 호스팅 및 크기 조정
+    - name: 호스트 및 규모
       displayName: signalr
       items:
         - name: 개요
@@ -569,6 +569,8 @@
       uid: grpc/diagnostics
     - name: 보안 고려 사항
       uid: grpc/security
+    - name: dotnet-grpc를 사용하여 Protobuf 참조를 관리하세요.
+      uid: grpc/dotnet-grpc
     - name: C-core에서 gRPC 서비스 마이그레이션
       uid: grpc/migration
     - name: gRPC 서비스와 HTTP API 비교
@@ -661,13 +663,13 @@
           href: /azure/visual-studio/vs-storage-aspnet5-getting-started-queues?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
         - name: Table Storage
           href: /azure/visual-studio/vs-storage-aspnet5-getting-started-tables?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
-- name: 호스팅 및 배포
+- name: 호스트 및 배포
   displayName: publish
   items:
     - name: 개요
       displayName: 'azure, deploy, publish'
       uid: host-and-deploy/index
-    - name: Azure App Service에서 호스트
+    - name: Azure App Service
       displayName: 'deploy, publish'
       items:
         - name: 개요
@@ -717,7 +719,7 @@
         - name: 다음 단계
           displayName: 'azure, deploy, publish'
           uid: azure/devops/next-steps
-    - name: IIS를 사용하여 Windows에서 호스트
+    - name: IIS
       displayName: 'deploy, publish'
       items:
         - name: 개요
@@ -749,16 +751,16 @@
     - name: HTTP.sys
       displayName: 'deploy, publish, server'
       uid: fundamentals/servers/httpsys
-    - name: Windows 서비스에서 호스트
+    - name: Windows 서비스
       displayName: 'deploy, publish'
       uid: host-and-deploy/windows-service
-    - name: Nginx를 사용하여 Linux에서 호스트
+    - name: Nginx를 사용하는 Linux
       displayName: 'deploy, publish'
       uid: host-and-deploy/linux-nginx
-    - name: Apache를 사용하여 Linux에서 호스트
+    - name: Apache를 사용하는 Linux
       displayName: 'deploy, publish'
       uid: host-and-deploy/linux-apache
-    - name: Docker에서 호스트
+    - name: Docker
       displayName: 'deploy, publish'
       items:
         - name: 개요
@@ -779,7 +781,7 @@
     - name: 프록시 및 부하 분산 장치 구성
       displayName: 'deploy, publish'
       uid: host-and-deploy/proxy-load-balancer
-    - name: 웹 팜에서 호스트
+    - name: 웹 팜
       displayName: 'deploy, publish'
       uid: host-and-deploy/web-farm
     - name: Visual Studio 게시 프로필

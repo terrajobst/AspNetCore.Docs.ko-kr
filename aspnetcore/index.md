@@ -4,14 +4,14 @@ author: rick-anderson
 description: 클라우드 기반 인터넷에 연결된 최신 애플리케이션을 빌드하기 위한 플랫폼 간 고성능 오픈 소스 프레임워크인 ASP.NET Core에 대한 소개를 가져옵니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/07/2019
+ms.date: 10/10/2019
 uid: index
-ms.openlocfilehash: c9b33b16de354c8bac804e8fd5e8e3ce3af688fc
-ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
+ms.openlocfilehash: 1ccc1f5d095833e89fc20127ee23b8fa3dc4c79f
+ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/06/2019
-ms.locfileid: "70773717"
+ms.lasthandoff: 10/12/2019
+ms.locfileid: "72289059"
 ---
 # <a name="introduction-to-aspnet-core"></a>ASP.NET Core 소개
 
@@ -44,7 +44,7 @@ ASP.NET Core MVC에서는 [Web API](xref:tutorials/first-web-api) 및 [웹앱](x
 
 ## <a name="client-side-development"></a>클라이언트 쪽 개발
 
-ASP.NET Core는 [Blazor](xref:blazor/index), [Angular](xref:spa/angular), [React](xref:spa/react), [부트스트랩](https://getbootstrap.com/) 등 유명한 클라이언트 쪽 프레임워크 및 라이브러리와 원활하게 통합됩니다. 자세한 내용은 <xref:blazor/index> 및 ‘클라이언트 쪽 개발’의 관련 항목을 참조하세요.
+ASP.NET Core는 [Blazor](xref:blazor/index), [Angular](xref:spa/angular), [React](xref:spa/react), [부트스트랩](https://getbootstrap.com/) 등 유명한 클라이언트 쪽 프레임워크 및 라이브러리와 원활하게 통합됩니다. 자세한 내용은 <xref:blazor/index> 및 ‘클라이언트 쪽 개발’의 관련 항목을 참조하세요. 
 
 <a name="target-framework"></a>
 
@@ -77,10 +77,12 @@ ASP.NET Core 앱 개발을 소개하는 자습서 및 문서는 다음 순서대
 
    |앱 형식  |시나리오  |자습서  |
    |----------|----------|----------|
-   |웹앱       | 새로운 개발의 경우        |[Razor 페이지 시작](xref:tutorials/razor-pages/razor-pages-start) |
-   |웹앱       | MVC 앱을 유지 관리하는 경우 |[MVC 시작](xref:tutorials/first-mvc-app/start-mvc)|
-   |Web API       |                            |[웹 API 만들기](xref:tutorials/first-web-api)\*  |
-   |실시간 앱 |                            |[SignalR 시작](xref:tutorials/signalr) |
+   |웹앱                   | 새로운 개발의 경우        |[Razor 페이지 시작](xref:tutorials/razor-pages/razor-pages-start) |
+   |웹앱                   | MVC 앱을 유지 관리하는 경우 |[MVC 시작](xref:tutorials/first-mvc-app/start-mvc)|
+   |Web API                   |                            |[웹 API 만들기](xref:tutorials/first-web-api)\*  |
+   |실시간 앱             |                            |[SignalR 시작](xref:tutorials/signalr) |
+   |Blazor 앱                |                            |[Blazor 시작](xref:blazor/get-started) |
+   |원격 프로시저 호출 앱 |                            |[gRPC 서비스 시작](xref:tutorials/grpc/grpc-start) |
 
 1. 기본 데이터 액세스를 수행하는 방법을 보여주는 자습서를 수행하세요.
 
@@ -107,7 +109,7 @@ ASP.NET Core 앱 개발을 소개하는 자습서 및 문서는 다음 순서대
 
 ### <a name="preprocessor-directives-in-sample-code"></a>샘플 코드의 전처리기 지시문
 
-여러 시나리오를 보여주기 위해 샘플 앱은 `#define` 및 `#if-#else/#elif-#endif` C# 문을 사용하여 샘플 코드의 다양한 섹션을 선택적으로 컴파일하고 실행합니다. 이 방법을 사용하는 해당 샘플의 경우 C# 파일 상단에 있는 `#define` 문을 실행할 시나리오와 연결된 기호로 설정합니다. 시나리오를 실행하기 위해 일부 샘플에서는 여러 파일의 맨 위에 기호를 설정해야 합니다.
+여러 시나리오를 보여주기 위해 샘플 앱은 `#define` 및 `#if-#else/#elif-#endif` 전처리기 지시문을 사용하여 샘플 코드의 다양한 섹션을 선택적으로 컴파일하고 실행합니다. 이 방법을 사용하는 해당 샘플의 경우 C# 파일 상단에 있는 `#define` 지시문을 설정하여 실행할 시나리오와 연결된 기호를 정의합니다. 시나리오를 실행하기 위해 일부 샘플은 여러 파일의 맨 위에 기호를 정의해야 합니다.
 
 예를 들어, 다음 `#define` 기호 목록은 네 가지 시나리오를 사용할 수 있음을 나타냅니다(기호당 하나의 시나리오). 현재 샘플 구성에서는 `TemplateCode` 시나리오를 실행합니다.
 
@@ -125,34 +127,33 @@ ASP.NET Core 앱 개발을 소개하는 자습서 및 문서는 다음 순서대
 
 ### <a name="regions-in-sample-code"></a>샘플 코드의 지역
 
-일부 샘플 앱에는 [#region](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-region) 및 [#endregion](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-endregion) C# 문으로 둘러싼 코드의 섹션이 포함됩니다. 설명서 빌드 시스템은 렌더링된 설명서 토픽에 이러한 지역을 삽입합니다.  
+일부 샘플 앱에는 [#region](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-region) 및 [#endregion](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-endregion) C# 지시문으로 둘러싼 코드의 섹션이 포함됩니다. 설명서 빌드 시스템은 렌더링된 설명서 토픽에 이러한 지역을 삽입합니다.  
 
-지역 이름에는 일반적으로 "snippet"이라는 단어가 포함됩니다. 다음 예제에서는 `snippet_FilterInCode`라는 지역을 보여줍니다.
+지역 이름에는 일반적으로 "snippet"이라는 단어가 포함됩니다. 다음 예제에서는 `snippet_WebHostDefaults`라는 지역을 보여줍니다.
 
 ```csharp
-#region snippet_FilterInCode
-WebHost.CreateDefaultBuilder(args)
-    .UseStartup<Startup>()
-    .ConfigureLogging(logging =>
-        logging.AddFilter("System", LogLevel.Debug)
-            .AddFilter<DebugLoggerProvider>("Microsoft", LogLevel.Trace))
-            .Build();
+#region snippet_WebHostDefaults
+Host.CreateDefaultBuilder(args)
+    .ConfigureWebHostDefaults(webBuilder =>
+    {
+        webBuilder.UseStartup<Startup>();
+    });
 #endregion
 ```
 
 이전 C# 코드 조각은 다음 줄을 포함한 항목의 markdown 파일에서 참조됩니다.
 
 ```md
-[!code-csharp[](sample/SampleApp/Program.cs?name=snippet_FilterInCode)]
+[!code-csharp[](sample/SampleApp/Program.cs?name=snippet_WebHostDefaults)]
 ```
 
-코드를 둘러싸고 있는 `#region` 및 `#endregion` 문을 안전하게 무시(또는 제거)할 수 있습니다. 항목에 설명된 샘플 시나리오를 실행하려는 경우 이러한 명령문 내에서 코드를 변경하지 마십시오. 다른 시나리오를 실험하는 경우 자유롭게 코드를 변경할 수 있습니다.
+코드를 둘러싸고 있는 `#region` 및 `#endregion` 지시문을 안전하게 무시(또는 제거)할 수 있습니다. 항목에 설명된 샘플 시나리오를 실행하려는 경우 이러한 지시문 내에서 코드를 변경하지 마세요. 다른 시나리오를 실험하는 경우 자유롭게 코드를 변경할 수 있습니다.
 
 자세한 내용은 다음을 참조하세요. [ASP.NET 설명서에 참여: 코드 조각](https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md#code-snippets).
 
 ## <a name="next-steps"></a>다음 단계
 
-자세한 내용은 다음 리소스를 참조하세요.
+자세한 내용은 다음 리소스를 참조하십시오.
 
 * <xref:getting-started>
 * <xref:tutorials/publish-to-azure-webapp-using-vs>

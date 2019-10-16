@@ -5,18 +5,18 @@ description: Windows Server IIS(인터넷 정보 서비스)에서 ASP.NET Core �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/07/2019
+ms.date: 10/11/2019
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 8131e9b8e6a3bb3643f41a9be57c5bd2e511476c
-ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
+ms.openlocfilehash: c11a46220f0055f4d3d14c84065281f642a4cbe7
+ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/07/2019
-ms.locfileid: "72007364"
+ms.lasthandoff: 10/12/2019
+ms.locfileid: "72289026"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS가 있는 Windows에서 ASP.NET Core 호스팅
 
-작성자: [Luke Latham](https://github.com/guardrex)
+[Luke Latham](https://github.com/guardrex)으로
 
 IIS 서버에 ASP.NET Core 앱을 게시하는 방법에 대한 자습서 경험은 <xref:tutorials/publish-to-iis>을(를) 참조하세요.
 
@@ -408,7 +408,7 @@ IIS에 ASP.NET Core 배포에 대한 자세한 내용은 [IIS 관리자를 위�
 
 * 웹 배포를 사용하고 프로젝트 파일에서 `Microsoft.NET.Sdk.Web`을 참조합니다. *app_offline.htm* 파일은 웹앱 디렉터리의 루트에 배치됩니다. 파일이 있는 경우 ASP.NET Core 모듈은 앱을 정상적으로 종료하고, 배포하는 동안 *app_offline.htm* 파일을 제공합니다. 자세한 내용은 [ASP.NET Core 모듈 구성 참조](xref:host-and-deploy/aspnet-core-module#app_offlinehtm)를 참조하세요.
 * 서버의 IIS 관리자에서 앱 풀을 수동으로 중지합니다.
-* PowerShell을 사용하여 *app_offline.html*을 삭제합니다(PowerShell 5 이상 필요).
+* PowerShell을 사용하여 *app_offline.htm*을 삭제합니다(PowerShell 5 이상 필요).
 
   ```PowerShell
   $pathToApp = 'PATH_TO_APP'

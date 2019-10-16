@@ -5,14 +5,14 @@ description: 중요한 요청 정보를 종종 숨기는 프록시 서버 및 �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/12/2019
+ms.date: 10/07/2019
 uid: host-and-deploy/proxy-load-balancer
-ms.openlocfilehash: 3243f5d3254e6585ff9ca48900a3326aa9b6f502
-ms.sourcegitcommit: 8a36be1bfee02eba3b07b7a86085ec25c38bae6b
+ms.openlocfilehash: 5eb69c2a253d1b8c42edd39b64b595898e6fb948
+ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/24/2019
-ms.locfileid: "71219180"
+ms.lasthandoff: 10/07/2019
+ms.locfileid: "72007284"
 ---
 # <a name="configure-aspnet-core-to-work-with-proxy-servers-and-load-balancers"></a>프록시 서버 및 부하 분산 장치를 사용하도록 ASP.NET Core 구성
 
@@ -252,6 +252,60 @@ if (string.Equals(
 }
 ```
 
+::: moniker range=">= aspnetcore-3.0"
+
+## <a name="certificate-forwarding"></a>인증서 전달 
+
+### <a name="azure"></a>Azure
+
+인증서 전달에 대한 Azure App Service를 구성하려면 [Azure App Service에 대한 TLS 상호 인증 구성](/azure/app-service/app-service-web-configure-tls-mutual-auth)을 참조하세요. 다음 지침은 ASP.NET Core 앱 구성과 관련됩니다.
+
+`Startup.Configure`에서 `app.UseAuthentication();` 호출 앞에 다음 코드를 추가합니다.
+
+```csharp
+app.UseCertificateForwarding();
+```
+
+
+인증서 전달 미들웨어를 구성하여 Azure를 사용하는 헤더 이름을 지정합니다. `Startup.ConfigureServices`에서 다음 코드를 추가하여 미들웨어가 인증서를 빌드하는 헤더를 구성합니다.
+
+```csharp
+services.AddCertificateForwarding(options =>
+    options.CertificateHeader = "X-ARR-ClientCert");
+```
+
+### <a name="other-web-proxies"></a>다른 웹 프록시
+
+IIS 또는 Azure App Service의 ARR(애플리케이션 요청 라우팅)이 아닌 프록시를 사용하는 경우 HTTP 헤더에서 받은 인증서를 전달하도록 프록시를 구성합니다. `Startup.Configure`에서 `app.UseAuthentication();` 호출 앞에 다음 코드를 추가합니다.
+
+```csharp
+app.UseCertificateForwarding();
+```
+
+인증서 전달 미들웨어를 구성하여 헤더 이름을 지정합니다. `Startup.ConfigureServices`에서 다음 코드를 추가하여 미들웨어가 인증서를 빌드하는 헤더를 구성합니다.
+
+```csharp
+services.AddCertificateForwarding(options =>
+    options.CertificateHeader = "YOUR_CERTIFICATE_HEADER_NAME");
+```
+
+프록시가 Nginx에서와 같이 인증서를 base64 인코딩하지 않는 경우 `HeaderConverter` 옵션을 설정합니다. `Startup.ConfigureServices`에서 다음 예제를 참조하세요.
+
+```csharp
+services.AddCertificateForwarding(options =>
+{
+    options.CertificateHeader = "YOUR_CUSTOM_HEADER_NAME";
+    options.HeaderConverter = (headerValue) => 
+    {
+        var clientCertificate = 
+           /* some conversion logic to create an X509Certificate2 */
+        return clientCertificate;
+    }
+});
+```
+
+::: moniker-end
+
 ## <a name="troubleshoot"></a>문제 해결
 
 헤더가 예상대로 전달되지 않으면 [로깅](xref:fundamentals/logging/index)을 사용하도록 설정합니다. 로그가 문제를 해결하기에 충분한 정보를 제공하지 않으면 서버가 수신하는 요청 헤더를 열거합니다. 인라인 미들웨어를 사용하여 앱 응답에 요청 헤더를 쓰거나 헤더를 기록합니다. 
@@ -337,54 +391,7 @@ services.Configure<ForwardedHeadersOptions>(options =>
 > [!IMPORTANT]
 > 신뢰할 수 있는 프록시 및 네트워크만 헤더를 전달할 수 있습니다. 그렇지 않을 경우 [IP 스푸핑](https://www.iplocation.net/ip-spoofing) 공격이 가능합니다.
 
-## <a name="certificate-forwarding"></a>인증서 전달 
-
-### <a name="on-azure"></a>Azure에서
-
-Azure Web Apps를 구성하려면 [Azure 설명서](/azure/app-service/app-service-web-configure-tls-mutual-auth)를 참조하세요. 앱의 `Startup.Configure` 메서드에서 `app.UseAuthentication();`에 대한 호출 앞에 다음 코드를 추가합니다.
-
-```csharp
-app.UseCertificateForwarding();
-```
-
-Azure를 사용하는 헤더 이름을 지정하려면 인증서 전달 미들웨어를 구성해야 합니다. 앱의 `Startup.ConfigureServices` 메서드에서 다음 코드를 추가하여 미들웨어가 인증서를 빌드하는 헤더를 구성합니다.
-
-```csharp
-services.AddCertificateForwarding(options =>
-    options.CertificateHeader = "X-ARR-ClientCert");
-```
-
-### <a name="with-other-web-proxies"></a>다른 웹 프록시 사용
-
-IIS 또는 Azure의 Web Apps 애플리케이션 요청 라우팅이 아닌 프록시를 사용하는 경우 HTTP 헤더에서 받은 인증서를 전달하도록 프록시를 구성합니다. 앱의 `Startup.Configure` 메서드에서 `app.UseAuthentication();`에 대한 호출 앞에 다음 코드를 추가합니다.
-
-```csharp
-app.UseCertificateForwarding();
-```
-
-헤더 이름을 지정하려면 인증서 전달 미들웨어를 구성해야 합니다. 앱의 `Startup.ConfigureServices` 메서드에서 다음 코드를 추가하여 미들웨어가 인증서를 빌드하는 헤더를 구성합니다.
-
-```csharp
-services.AddCertificateForwarding(options =>
-    options.CertificateHeader = "YOUR_CERTIFICATE_HEADER_NAME");
-```
-
-마지막으로 프록시가 인증서를 인코딩하는 base64(Nginx를 사용하는 경우처럼)가 아닌 다른 작업을 수행하는 경우 `HeaderConverter` 옵션을 설정합니다. `Startup.ConfigureServices`에서 다음 예제를 참조하세요.
-
-```csharp
-services.AddCertificateForwarding(options =>
-{
-    options.CertificateHeader = "YOUR_CUSTOM_HEADER_NAME";
-    options.HeaderConverter = (headerValue) => 
-    {
-        var clientCertificate = 
-           /* some conversion logic to create an X509Certificate2 */
-        return clientCertificate;
-    }
-});
-```
-
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:host-and-deploy/web-farm>
 * [Microsoft Security Advisory CVE-2018-0787: ASP.NET Core Elevation Of Privilege Vulnerability](https://github.com/aspnet/Announcements/issues/295)(Microsoft 보안 공지 CVE-2018-0787: ASP.NET Core 권한 상승 취약성)

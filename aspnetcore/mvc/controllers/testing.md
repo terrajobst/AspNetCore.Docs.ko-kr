@@ -28,7 +28,7 @@ ms.locfileid: "71199098"
 
 [단위 테스트](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)는 앱의 일부분을 인프라 및 종속성과 분리하여 테스트를 수행합니다. 컨트롤러 논리를 단위 테스트 할 때 단일 작업의 콘텐츠만 테스트되고, 작업의 종속성 또는 프레임워크 자체의 동작은 테스트되지 않습니다.
 
-컨트롤러의 동작에 초점을 맞춰 컨트롤러 작업의 단위 테스트를 설정하세요. 컨트롤러 단위 테스트는 [필터](xref:mvc/controllers/filters), [라우팅](xref:fundamentals/routing), [모델 바인딩](xref:mvc/models/model-binding) 같은 시나리오를 피합니다. 요청에 총괄적으로 응답하는 구성 요소 간의 상호 작용을 다루는 테스트는 ‘통합 테스트’에서 처리됩니다. 통합 테스트에 대한 자세한 내용은 <xref:test/integration-tests>를 참조하세요.
+컨트롤러의 동작에 초점을 맞춰 컨트롤러 작업의 단위 테스트를 설정하세요. 컨트롤러 단위 테스트는 [필터](xref:mvc/controllers/filters), [라우팅](xref:fundamentals/routing), [모델 바인딩](xref:mvc/models/model-binding) 같은 시나리오를 피합니다. 요청에 전체적으로 응답하는 구성 요소 간의 상호 작용을 다루는 테스트는 ‘통합 테스트’에서 처리됩니다. 통합 테스트에 대한 자세한 내용은 <xref:test/integration-tests>를 참조하세요.
 
 사용자 지정 필터 및 경로를 작성할 때, 특정 컨트롤러 작업에 대한 테스트의 일부로서가 아니라, 별도로 단위 테스트를 수행하세요.
 

@@ -7,6 +7,7 @@ ASP.NET Core는 다음과 같은 이점을 제공합니다.
 * Windows, macOS 및 Linux에서 개발하고 실행할 수 있습니다.
 * 오픈 소스이며 [커뮤니티에 중점](https://live.asp.net/)을 둡니다.
 * [최신 클라이언트 쪽 프레임워크](xref:blazor/index) 및 워크플로 개발을 통합합니다.
+* [gRPC](xref:grpc/index)를 사용하여 RPC(원격 프로시저 호출) 서비스 호스팅을 지원합니다.
 * 클라우드를 갖춘 환경 기반 [구성 시스템](xref:fundamentals/configuration/index)입니다.
 * [종속성 주입](xref:fundamentals/dependency-injection)이 기본 제공됩니다.
 * 간단한 [고성능](https://github.com/aspnet/benchmarks) 모듈식 HTTP 요청 파이프라인을 포함합니다.
