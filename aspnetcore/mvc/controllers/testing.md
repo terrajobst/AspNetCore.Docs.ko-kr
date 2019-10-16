@@ -245,7 +245,7 @@ Home 컨트롤러의 `HTTP POST Index` 메서드는 다음을 확인합니다.
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Controllers/SessionController.cs?name=snippet_SessionController&highlight=12-16,18-22,31)]
 
-단위 테스트에는 세션 컨트롤러 `Index` 작업에 각 `return` 시나리오에 대한 하나의 테스트가 포함되어 있습니다.
+단위 테스트에는 Session 컨트롤러 `Index` 작업의 각 `return` 시나리오마다 하나씩의 테스트가 포함되어 있습니다.
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/SessionControllerTests.cs?name=snippet_SessionControllerTests&highlight=2,11-14,18,31-32,36,50-55)]
 
@@ -292,7 +292,7 @@ API 호출을 통해 직접 비즈니스 도메인 엔터티를 반환하지 마
 
 ASP.NET Core 2.1 이상에서 [ActionResult\<T](xref:web-api/action-return-types#actionresultt-type)(<xref:Microsoft.AspNetCore.Mvc.ActionResult%601>)는 `ActionResult`에서 파생된 형식을 반환하거나 특정 형식을 반환할 수 있습니다.
 
-샘플 앱에는 지정된 세션 `id`에 대한 `List<IdeaDTO>`를 반환하는 메서드가 포함되어 있습니다. 세션 `id`가 없으면 컨트롤러는 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*>를 반환합니다.
+예제 앱에는 지정된 세션 `id`에 대한 `List<IdeaDTO>`를 반환하는 메서드가 포함되어 있습니다. 세션 `id`가 없으면 컨트롤러는 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*>를 반환합니다.
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Api/IdeasController.cs?name=snippet_ForSessionActionResult&highlight=10,21)]
 
@@ -307,7 +307,7 @@ ASP.NET Core 2.1 이상에서 [ActionResult\<T](xref:web-api/action-return-types
 
 유효한 세션 `id`에 대한 두 번째 테스트는 메서드가 다음을 반환하는지 확인합니다.
 
-* `List<IdeaDTO>` 유형의 `ActionResult`.
+* `ActionResult` 형식이 `List<IdeaDTO>`입니다.
 * [ActionResult\<T>.Value](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)가 `List<IdeaDTO>` 유형입니다.
 * 목록의 첫 번째 항목은 모의 세션(`GetTestSession` 호출로 얻음)에 저장된 아이디어와 일치하는 유효한 아이디어입니다.
 
@@ -333,12 +333,12 @@ ASP.NET Core 2.1 이상에서 [ActionResult\<T](xref:web-api/action-return-types
 
 유효한 세션 `id`에 대한, 마지막 테스트는 다음을 확인합니다.
 
-* 메서드가 `BrainstormSession` 유형의 `ActionResult`를 반환함.
+* 메서드가 `BrainstormSession` 형식의 `ActionResult`를 반환합니다.
 * [ActionResult\<T>.Result](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*)는 <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult>입니다. `CreatedAtActionResult`가 `Location` 헤더가 있는 *201 생성됨* 응답과 유사함.
 * [ActionResult\<T>.Value](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)는 `BrainstormSession` 유형입니다.
 * 세션을 수정하기 위한 모의 호출 `UpdateAsync(testSession)`가 실행됩니다. `Verifiable` 메서드 호출은 어설션에서 `mockRepo.Verify()`를 실행하여 확인됩니다.
 * 세션에 대해 두 개의 `Idea` 개체가 반환됩니다.
-* 마지막 항목(`UpdateAsync`에 대한 모의 호출에 의해 추가된 `Idea`)이 테스트의 세션에 추가된 `newIdea`와 일치함.
+* 마지막 항목(`UpdateAsync`에 대한 모의 호출에 의해 추가된 `Idea`)이 테스트의 세션에 추가된 `newIdea`와 일치합니다.
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_CreateActionResult_ReturnsNewlyCreatedIdeaForSession&highlight=20-22,28-34)]
 
