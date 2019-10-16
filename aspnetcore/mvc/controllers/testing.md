@@ -28,7 +28,7 @@ ms.locfileid: "71199098"
 
 [단위 테스트](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)는 앱의 일부분을 인프라 및 종속성과 분리하여 테스트를 수행합니다. 컨트롤러 논리를 단위 테스트 할 때 단일 작업의 콘텐츠만 테스트되고, 작업의 종속성 또는 프레임워크 자체의 동작은 테스트되지 않습니다.
 
-컨트롤러의 동작에 초점을 맞춰 컨트롤러 동작의 단위 테스트를 설정합니다. 컨트롤러 단위 테스트는 [필터](xref:mvc/controllers/filters), [라우팅](xref:fundamentals/routing), [모델 바인딩](xref:mvc/models/model-binding) 같은 시나리오를 방지합니다. 전체적으로 요청에 응답하는 구성 요소 간 상호 작용을 포함하는 테스트는 ‘통합 테스트’에서 처리합니다. 통합 테스트에 대한 자세한 내용은 <xref:test/integration-tests>를 참조하세요.
+컨트롤러의 동작에 초점을 맞춰 컨트롤러 동작의 단위 테스트를 설정합니다. 컨트롤러 단위 테스트는 [필터](xref:mvc/controllers/filters), [라우팅](xref:fundamentals/routing), [모델 바인딩](xref:mvc/models/model-binding) 같은 시나리오를 방지합니다. 전체적으로 요청에 응답하는 구성 요소 간 상호 작용을 포함하는 테스트는 ‘통합 테스트’에서 처리합니다.  통합 테스트에 대한 자세한 내용은 <xref:test/integration-tests>를 참조하세요.
 
 사용자 지정 필터 및 경로를 작성할 때, 특정 컨트롤러 작업에 대한 테스트의 일부로서가 아니라, 별도로 단위 테스트를 수행하세요.
 
@@ -40,7 +40,7 @@ ms.locfileid: "71199098"
 
 * [명시적 종속성 원칙](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)을 따릅니다.
 * [DI(종속성 주입)](xref:fundamentals/dependency-injection)에서 `IBrainstormSessionRepository`의 인스턴스를 제공할 것으로 기대합니다.
-* [Moq](https://www.nuget.org/packages/Moq/)와 같은 모의 개체 프레임워크를 사용하여 모의 `IBrainstormSessionRepository` 서비스로 테스트할 수 있습니다. ‘모의 개체’는 테스트에 사용되는 사전 결정된 속성 및 메서드 동작 집합이 있는 제작된 개체입니다. 자세한 내용은 [통합 테스트 소개](xref:test/integration-tests#introduction-to-integration-tests)를 참조하세요.
+* [Moq](https://www.nuget.org/packages/Moq/)와 같은 모의 개체 프레임워크를 사용하여 모의 `IBrainstormSessionRepository` 서비스로 테스트할 수 있습니다. ‘모의 개체’는 테스트에 사용되는 사전 결정된 속성 및 메서드 동작 집합이 있는 제작된 개체입니다.  자세한 내용은 [통합 테스트 소개](xref:test/integration-tests#introduction-to-integration-tests)를 참조하세요.
 
 `HTTP GET Index` 메서드는 반복 또는 분기가 없고 한 가지 메서드만 호출합니다. 이 작업의 단위 테스트는 다음을 수행합니다.
 
@@ -57,7 +57,7 @@ ms.locfileid: "71199098"
 
 Home 컨트롤러의 `HTTP POST Index` 메서드는 다음을 확인합니다.
 
-* [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*)가 `false`인 경우 작업 메서드가 적절한 데이터와 함께 ‘400 잘못된 요청’ <xref:Microsoft.AspNetCore.Mvc.ViewResult>를 반환함.
+* [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*)가 `false`인 경우 작업 메서드가 적절한 데이터와 함께 ‘400 잘못된 요청’ <xref:Microsoft.AspNetCore.Mvc.ViewResult>를 반환함. 
 * `ModelState.IsValid`가 `true`인 경우:
   * 리포지토리의 `Add` 메서드를 호출합니다.
   * <xref:Microsoft.AspNetCore.Mvc.RedirectToActionResult>가 올바른 인수와 함께 반환됩니다.
@@ -113,11 +113,11 @@ API 호출을 통해 직접 비즈니스 도메인 엔터티를 반환하지 마
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ApiIdeasControllerTests5&highlight=5,7-8,15-18)]
 
-`ModelState`가 유효하지 않을 때 `Create` 메서드의 동작을 테스트하기 위해 샘플 앱은 테스트의 일부로 컨트롤러에 모델 오류를 추가합니다. 단위 테스트에서 모델 유효성 검사 또는 모델 바인딩을 테스트하지 말고, &mdash;잘못된 값이 나타나면 작업 메서드의 동작만 테스트`ModelState`하세요.
+`ModelState`가 유효하지 않을 때 `Create` 메서드의 동작을 테스트하기 위해 예제 앱은 테스트의 일부로 컨트롤러에 모델 오류를 추가합니다. 단위 테스트에서 모델 유효성 검사 또는 모델 바인딩을 테스트하지 말고, &mdash;잘못된 `ModelState`에 직면했을 때의 작업 메서드 동작만 테스트하세요.
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ApiIdeasControllerTests1&highlight=7,13)]
 
-두 번째 `Create` 테스트는 `null`을 반환하는 리포지토리를 사용하므로 모의 리포지토리가 `null`을 반환하도록 구성됩니다. 테스트 데이터베이스를 만들고(메모리 내부에 또는 다른 위치에) 이 결과를 반환하는 쿼리를 작성할 필요가 없습니다. 샘플 코드에 나온 것과 같이 단일 명령문으로 테스트할 수 있습니다.
+두 번째 `Create` 테스트는 `null`을 반환하는 리포지토리에 의존하므로 모의 리포지토리가 `null`을 반환하도록 구성됩니다. 테스트 데이터베이스를 만들고(메모리 내부에 또는 다른 위치에) 이 결과를 반환하는 쿼리를 작성할 필요가 없습니다. 예제 코드에서 볼 수 있는 것처럼 단일 명령문으로 테스트할 수 있습니다.
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ApiIdeasControllerTests2&highlight=7-8,15)]
 
@@ -129,7 +129,7 @@ API 호출을 통해 직접 비즈니스 도메인 엔터티를 반환하지 마
 
 ASP.NET Core 2.1 이상에서 [ActionResult\<T](xref:web-api/action-return-types#actionresultt-type)(<xref:Microsoft.AspNetCore.Mvc.ActionResult%601>)는 `ActionResult`에서 파생된 형식을 반환하거나 특정 형식을 반환할 수 있습니다.
 
-샘플 앱에는 지정된 세션 `id`에 대한 `List<IdeaDTO>`를 반환하는 메서드가 포함되어 있습니다. 세션 `id`가 없으면 컨트롤러는 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*>를 반환합니다.
+예제 앱에는 지정된 세션 `id`에 대한 `List<IdeaDTO>`를 반환하는 메서드가 포함되어 있습니다. 세션 `id`가 없으면 컨트롤러는 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*>를 반환합니다.
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Api/IdeasController.cs?name=snippet_ForSessionActionResult&highlight=10,21)]
 
@@ -137,30 +137,30 @@ ASP.NET Core 2.1 이상에서 [ActionResult\<T](xref:web-api/action-return-types
 
 첫 번째 테스트는 컨트롤러가 `ActionResult`를 반환하지만 존재하지 않는 세션 `id`에 대한 존재하지 않는 아이디어 목록을 반환하는지 확인합니다.
 
-* `ActionResult` 유형이 `ActionResult<List<IdeaDTO>>`임.
-* <xref:Microsoft.AspNetCore.Mvc.ActionResult`1.Result*>는 <xref:Microsoft.AspNetCore.Mvc.NotFoundObjectResult>임.
+* `ActionResult` 형식이 `ActionResult<List<IdeaDTO>>`입니다.
+* <xref:Microsoft.AspNetCore.Mvc.ActionResult`1.Result*>는 <xref:Microsoft.AspNetCore.Mvc.NotFoundObjectResult>입니다.
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ForSessionActionResult_ReturnsNotFoundObjectResultForNonexistentSession&highlight=7,10,13-14)]
 
 유효한 세션 `id`에 대한 두 번째 테스트는 메서드가 다음을 반환하는지 확인합니다.
 
-* `List<IdeaDTO>` 유형의 `ActionResult`.
+* `ActionResult` 형식이 `List<IdeaDTO>`입니다.
 * [ActionResult\<T>.Value](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)가 `List<IdeaDTO>` 유형입니다.
-* 목록의 첫 번째 항목은 모의 세션(`GetTestSession` 호출로 얻음)에 저장된 아이디어와 일치하는 유효한 아이디어임.
+* 목록의 첫 번째 항목은 모의 세션(`GetTestSession` 호출로 얻음)에 저장된 아이디어와 일치하는 유효한 아이디어입니다.
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ForSessionActionResult_ReturnsIdeasForSession&highlight=7-8,15-18)]
 
-샘플 앱에는 지정된 세션에 대한 새 `Idea`를 작성하는 메서드도 포함되어 있습니다. 컨트롤러는 다음을 반환합니다.
+예제 앱에는 지정된 세션에 대한 새 `Idea`를 작성하는 메서드도 포함되어 있습니다. 컨트롤러는 다음을 반환합니다.
 
-* 잘못된 모델의 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*>.
+* 잘못된 모델에 대한 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*>.
 * <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*>(세션이 없는 경우).
-* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*>(세션이 새 아이디어로 업데이트될 때).
+* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*>(세션이 새 아이디어로 수정될 때).
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Api/IdeasController.cs?name=snippet_CreateActionResult&highlight=9,16,29)]
 
 세 개의 `CreateActionResult` 테스트는 `ApiIdeasControllerTests`에 포함되어 있습니다.
 
-첫 번째 텍스트는 잘못된 모델에 대해 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*>가 반환되는지 확인합니다.
+첫 번째 테스트는 잘못된 모델에 대해 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*>가 반환되는지 확인합니다.
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_CreateActionResult_ReturnsBadRequest_GivenInvalidModel&highlight=7,13-14)]
 
@@ -168,14 +168,14 @@ ASP.NET Core 2.1 이상에서 [ActionResult\<T](xref:web-api/action-return-types
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_CreateActionResult_ReturnsNotFoundObjectResultForNonexistentSession&highlight=5,15,22-23)]
 
-유효한 세션 `id`의 경우 최종 테스트는 다음을 확인합니다.
+유효한 세션 `id`에 대한, 마지막 테스트는 다음을 확인합니다.
 
-* 메서드가 `BrainstormSession` 유형의 `ActionResult`를 반환함.
+* 메서드가 `BrainstormSession` 형식의 `ActionResult`를 반환합니다.
 * [ActionResult\<T>.Result](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*)는 <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult>입니다. `CreatedAtActionResult`가 `Location` 헤더가 있는 *201 생성됨* 응답과 유사함.
 * [ActionResult\<T>.Value](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)는 `BrainstormSession` 유형입니다.
-* 세션을 업데이트하기 위한 모의 호출 `UpdateAsync(testSession)`가 실행됨. `Verifiable` 메서드 호출은 어설션에서 `mockRepo.Verify()`를 실행하여 확인됨.
-* 세션에 대해 두 개의 `Idea` 개체가 반환됨.
-* 마지막 항목(`UpdateAsync`에 대한 모의 호출에 의해 추가된 `Idea`)이 테스트의 세션에 추가된 `newIdea`와 일치함.
+* 세션을 수정하기 위한 모의 호출 `UpdateAsync(testSession)`가 실행됩니다. `Verifiable` 메서드 호출은 어설션에서 `mockRepo.Verify()`를 실행하여 확인됩니다.
+* 세션에 대해 두 개의 `Idea` 개체가 반환됩니다.
+* 마지막 항목(`UpdateAsync`에 대한 모의 호출에 의해 추가된 `Idea`)이 테스트의 세션에 추가된 `newIdea`와 일치합니다.
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_CreateActionResult_ReturnsNewlyCreatedIdeaForSession&highlight=20-22,28-34)]
 
@@ -191,7 +191,7 @@ ASP.NET Core 2.1 이상에서 [ActionResult\<T](xref:web-api/action-return-types
 
 [단위 테스트](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)는 앱의 일부분을 인프라 및 종속성과 분리하여 테스트를 수행합니다. 컨트롤러 논리를 단위 테스트 할 때 단일 작업의 콘텐츠만 테스트되고, 작업의 종속성 또는 프레임워크 자체의 동작은 테스트되지 않습니다.
 
-컨트롤러의 동작에 초점을 맞춰 컨트롤러 동작의 단위 테스트를 설정합니다. 컨트롤러 단위 테스트는 [필터](xref:mvc/controllers/filters), [라우팅](xref:fundamentals/routing), [모델 바인딩](xref:mvc/models/model-binding) 같은 시나리오를 방지합니다. 전체적으로 요청에 응답하는 구성 요소 간 상호 작용을 포함하는 테스트는 ‘통합 테스트’에서 처리합니다. 통합 테스트에 대한 자세한 내용은 <xref:test/integration-tests>를 참조하세요.
+컨트롤러의 동작에 초점을 맞춰 컨트롤러 동작의 단위 테스트를 설정합니다. 컨트롤러 단위 테스트는 [필터](xref:mvc/controllers/filters), [라우팅](xref:fundamentals/routing), [모델 바인딩](xref:mvc/models/model-binding) 같은 시나리오를 방지합니다. 전체적으로 요청에 응답하는 구성 요소 간 상호 작용을 포함하는 테스트는 ‘통합 테스트’에서 처리합니다.  통합 테스트에 대한 자세한 내용은 <xref:test/integration-tests>를 참조하세요.
 
 사용자 지정 필터 및 경로를 작성할 때, 특정 컨트롤러 작업에 대한 테스트의 일부로서가 아니라, 별도로 단위 테스트를 수행하세요.
 
@@ -203,7 +203,7 @@ ASP.NET Core 2.1 이상에서 [ActionResult\<T](xref:web-api/action-return-types
 
 * [명시적 종속성 원칙](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)을 따릅니다.
 * [DI(종속성 주입)](xref:fundamentals/dependency-injection)에서 `IBrainstormSessionRepository`의 인스턴스를 제공할 것으로 기대합니다.
-* [Moq](https://www.nuget.org/packages/Moq/)와 같은 모의 개체 프레임워크를 사용하여 모의 `IBrainstormSessionRepository` 서비스로 테스트할 수 있습니다. ‘모의 개체’는 테스트에 사용되는 사전 결정된 속성 및 메서드 동작 집합이 있는 제작된 개체입니다. 자세한 내용은 [통합 테스트 소개](xref:test/integration-tests#introduction-to-integration-tests)를 참조하세요.
+* [Moq](https://www.nuget.org/packages/Moq/)와 같은 모의 개체 프레임워크를 사용하여 모의 `IBrainstormSessionRepository` 서비스로 테스트할 수 있습니다. ‘모의 개체’는 테스트에 사용되는 사전 결정된 속성 및 메서드 동작 집합이 있는 제작된 개체입니다.  자세한 내용은 [통합 테스트 소개](xref:test/integration-tests#introduction-to-integration-tests)를 참조하세요.
 
 `HTTP GET Index` 메서드는 반복 또는 분기가 없고 한 가지 메서드만 호출합니다. 이 작업의 단위 테스트는 다음을 수행합니다.
 
@@ -220,7 +220,7 @@ ASP.NET Core 2.1 이상에서 [ActionResult\<T](xref:web-api/action-return-types
 
 Home 컨트롤러의 `HTTP POST Index` 메서드는 다음을 확인합니다.
 
-* [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*)가 `false`인 경우 작업 메서드가 적절한 데이터와 함께 ‘400 잘못된 요청’ <xref:Microsoft.AspNetCore.Mvc.ViewResult>를 반환함.
+* [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*)가 `false`인 경우 작업 메서드가 적절한 데이터와 함께 ‘400 잘못된 요청’ <xref:Microsoft.AspNetCore.Mvc.ViewResult>를 반환함. 
 * `ModelState.IsValid`가 `true`인 경우:
   * 리포지토리의 `Add` 메서드를 호출합니다.
   * <xref:Microsoft.AspNetCore.Mvc.RedirectToActionResult>가 올바른 인수와 함께 반환됩니다.
@@ -276,11 +276,11 @@ API 호출을 통해 직접 비즈니스 도메인 엔터티를 반환하지 마
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ApiIdeasControllerTests5&highlight=5,7-8,15-18)]
 
-`ModelState`가 유효하지 않을 때 `Create` 메서드의 동작을 테스트하기 위해 샘플 앱은 테스트의 일부로 컨트롤러에 모델 오류를 추가합니다. 단위 테스트에서 모델 유효성 검사 또는 모델 바인딩을 테스트하지 말고, &mdash;잘못된 값이 나타나면 작업 메서드의 동작만 테스트`ModelState`하세요.
+`ModelState`가 유효하지 않을 때 `Create` 메서드의 동작을 테스트하기 위해 샘플 앱은 테스트의 일부로 컨트롤러에 모델 오류를 추가합니다. 단위 테스트에서 모델 유효성 검사 또는 모델 바인딩을 테스트하지 말고, &mdash;잘못된 `ModelState`에 직면했을 때의 작업 메서드 동작만 테스트하세요.
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ApiIdeasControllerTests1&highlight=7,13)]
 
-두 번째 `Create` 테스트는 `null`을 반환하는 리포지토리를 사용하므로 모의 리포지토리가 `null`을 반환하도록 구성됩니다. 테스트 데이터베이스를 만들고(메모리 내부에 또는 다른 위치에) 이 결과를 반환하는 쿼리를 작성할 필요가 없습니다. 샘플 코드에 나온 것과 같이 단일 명령문으로 테스트할 수 있습니다.
+두 번째 `Create` 테스트는 `null`을 반환하는 리포지토리에 의존하므로 모의 리포지토리가 `null`을 반환하도록 구성됩니다. 테스트 데이터베이스를 만들고(메모리 내부에 또는 다른 위치에) 이 결과를 반환하는 쿼리를 작성할 필요가 없습니다. 예제 코드에서 볼 수 있는 것처럼 단일 명령문으로 테스트할 수 있습니다.
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ApiIdeasControllerTests2&highlight=7-8,15)]
 
@@ -300,8 +300,8 @@ ASP.NET Core 2.1 이상에서 [ActionResult\<T](xref:web-api/action-return-types
 
 첫 번째 테스트는 컨트롤러가 `ActionResult`를 반환하지만 존재하지 않는 세션 `id`에 대한 존재하지 않는 아이디어 목록을 반환하는지 확인합니다.
 
-* `ActionResult` 유형이 `ActionResult<List<IdeaDTO>>`임.
-* <xref:Microsoft.AspNetCore.Mvc.ActionResult`1.Result*>는 <xref:Microsoft.AspNetCore.Mvc.NotFoundObjectResult>임.
+* `ActionResult` 형식이 `ActionResult<List<IdeaDTO>>`입니다.
+* <xref:Microsoft.AspNetCore.Mvc.ActionResult`1.Result*>는 <xref:Microsoft.AspNetCore.Mvc.NotFoundObjectResult>입니다.
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ForSessionActionResult_ReturnsNotFoundObjectResultForNonexistentSession&highlight=7,10,13-14)]
 
@@ -309,21 +309,21 @@ ASP.NET Core 2.1 이상에서 [ActionResult\<T](xref:web-api/action-return-types
 
 * `List<IdeaDTO>` 유형의 `ActionResult`.
 * [ActionResult\<T>.Value](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)가 `List<IdeaDTO>` 유형입니다.
-* 목록의 첫 번째 항목은 모의 세션(`GetTestSession` 호출로 얻음)에 저장된 아이디어와 일치하는 유효한 아이디어임.
+* 목록의 첫 번째 항목은 모의 세션(`GetTestSession` 호출로 얻음)에 저장된 아이디어와 일치하는 유효한 아이디어입니다.
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ForSessionActionResult_ReturnsIdeasForSession&highlight=7-8,15-18)]
 
-샘플 앱에는 지정된 세션에 대한 새 `Idea`를 작성하는 메서드도 포함되어 있습니다. 컨트롤러는 다음을 반환합니다.
+예제 앱에는 지정된 세션에 대한 새 `Idea`를 작성하는 메서드도 포함되어 있습니다. 컨트롤러는 다음을 반환합니다.
 
-* 잘못된 모델의 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*>.
+* 잘못된 모델에 대한 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*>.
 * <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*>(세션이 없는 경우).
-* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*>(세션이 새 아이디어로 업데이트될 때).
+* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*>(세션이 새 아이디어로 수정될 때).
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Api/IdeasController.cs?name=snippet_CreateActionResult&highlight=9,16,29)]
 
 세 개의 `CreateActionResult` 테스트는 `ApiIdeasControllerTests`에 포함되어 있습니다.
 
-첫 번째 텍스트는 잘못된 모델에 대해 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*>가 반환되는지 확인합니다.
+첫 번째 테스트는 잘못된 모델에 대해 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*>가 반환되는지 확인합니다.
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_CreateActionResult_ReturnsBadRequest_GivenInvalidModel&highlight=7,13-14)]
 
@@ -331,13 +331,13 @@ ASP.NET Core 2.1 이상에서 [ActionResult\<T](xref:web-api/action-return-types
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_CreateActionResult_ReturnsNotFoundObjectResultForNonexistentSession&highlight=5,15,22-23)]
 
-유효한 세션 `id`의 경우 최종 테스트는 다음을 확인합니다.
+유효한 세션 `id`에 대한, 마지막 테스트는 다음을 확인합니다.
 
 * 메서드가 `BrainstormSession` 유형의 `ActionResult`를 반환함.
 * [ActionResult\<T>.Result](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*)는 <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult>입니다. `CreatedAtActionResult`가 `Location` 헤더가 있는 *201 생성됨* 응답과 유사함.
 * [ActionResult\<T>.Value](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*)는 `BrainstormSession` 유형입니다.
-* 세션을 업데이트하기 위한 모의 호출 `UpdateAsync(testSession)`가 실행됨. `Verifiable` 메서드 호출은 어설션에서 `mockRepo.Verify()`를 실행하여 확인됨.
-* 세션에 대해 두 개의 `Idea` 개체가 반환됨.
+* 세션을 수정하기 위한 모의 호출 `UpdateAsync(testSession)`가 실행됩니다. `Verifiable` 메서드 호출은 어설션에서 `mockRepo.Verify()`를 실행하여 확인됩니다.
+* 세션에 대해 두 개의 `Idea` 개체가 반환됩니다.
 * 마지막 항목(`UpdateAsync`에 대한 모의 호출에 의해 추가된 `Idea`)이 테스트의 세션에 추가된 `newIdea`와 일치함.
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_CreateActionResult_ReturnsNewlyCreatedIdeaForSession&highlight=20-22,28-34)]
