@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core의 보기에 종속성 주입
 author: ardalis
-description: ASP.NET Core가 MVC 보기에서 종속성 주입을 지원하는 방법을 알아봅니다.
+description: ASP.NET Core가 MVC 보기에 종속성 주입을 지원하는 방법을 알아봅니다.
 ms.author: riande
 ms.date: 10/14/2016
 uid: mvc/views/dependency-injection
