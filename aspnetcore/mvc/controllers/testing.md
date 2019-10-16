@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core에서 컨트롤러 논리 테스트
 author: ardalis
-description: ASP.NET Core에서 Moq 및 xUnit로 컨트롤러 논리를 테스트하는 방법을 알아봅니다.
+description: ASP.NET Core에서 Moq 및 xUnit으로 컨트롤러 논리를 테스트하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc

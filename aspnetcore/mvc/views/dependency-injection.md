@@ -106,4 +106,4 @@ ASP.NET Core는 보기에 대한 [종속성 주입](xref:fundamentals/dependency
 
 ## <a name="see-also"></a>참고 항목
 
-* Simon Timms 블로그: [Getting Lookup Data Into Your View](https://blog.simontimms.com/2015/06/09/getting-lookup-data-into-you-view/)(보기로 조회 데이터 가져오기)
+* Simon Timms 블로그: [Getting Lookup Data Into Your View](https://blog.simontimms.com/2015/06/09/getting-lookup-data-into-you-view/)(보기에 조회 데이터 가져오기)
