@@ -5,14 +5,14 @@ description: Blazor apps에서 구성 요소에 서비스를 삽입 하는 방�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/23/2019
+ms.date: 10/15/2019
 uid: blazor/dependency-injection
-ms.openlocfilehash: 00c874e43496eaad8841db91843f41a299813aec
-ms.sourcegitcommit: 79eeb17604b536e8f34641d1e6b697fb9a2ee21f
+ms.openlocfilehash: b548f0e50e1a60b74969e5bbee43860be9ba5a7f
+ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/24/2019
-ms.locfileid: "71207170"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72391146"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core Blazor 종속성 주입
 
@@ -25,7 +25,7 @@ Blazor는 [DI (종속성 주입)](xref:fundamentals/dependency-injection)를 지
 DI는 중앙 위치에 구성 된 서비스에 액세스 하기 위한 기술입니다. Blazor 앱에서 다음과 같은 작업을 수행할 수 있습니다.
 
 * 단일 *서비스 라고 하는 여러* 구성 요소에서 서비스 클래스의 단일 인스턴스를 공유 합니다.
-* 참조 추상화를 사용 하 여 구체적인 서비스 클래스의 구성 요소를 분리 합니다. 예를 들어 앱의 데이터 `IDataAccess` 에 액세스 하기 위한 인터페이스를 생각해 보겠습니다. 인터페이스는 구체적 `DataAccess` 클래스에서 구현 되 고 앱의 서비스 컨테이너에 서비스로 등록 됩니다. 구성 요소가 DI를 사용 하 여 `IDataAccess` 구현을 수신 하는 경우 구성 요소가 구체적인 형식에 연결 되지 않습니다. 단위 테스트에서 모의 구현을 위해 구현을 바꿀 수 있습니다.
+* 참조 추상화를 사용 하 여 구체적인 서비스 클래스의 구성 요소를 분리 합니다. 예를 들어, 응용 프로그램의 데이터에 액세스 하는 경우-0 @no__t 인터페이스를 고려해 보세요. 인터페이스는 구체적 `DataAccess` 클래스에서 구현 되 고 앱의 서비스 컨테이너에 서비스로 등록 됩니다. 구성 요소가 DI를 사용 하 여 `IDataAccess` 구현을 수신 하는 경우 구성 요소가 구체적인 형식에 연결 되지 않습니다. 단위 테스트에서 모의 구현을 위해 구현을 바꿀 수 있습니다.
 
 ## <a name="default-services"></a>기본 서비스
 
@@ -33,15 +33,15 @@ DI는 중앙 위치에 구성 된 서비스에 액세스 하기 위한 기술입
 
 | 서비스 | 수명 | 설명 |
 | ------- | -------- | ----------- |
-| <xref:System.Net.Http.HttpClient> | Singleton | URI로 식별 되는 리소스에서 http 요청을 보내고 HTTP 응답을 받기 위한 메서드를 제공 합니다. 이 인스턴스 `HttpClient` 는 백그라운드에서 HTTP 트래픽을 처리 하는 데 브라우저를 사용 합니다. [BaseAddress](xref:System.Net.Http.HttpClient.BaseAddress) 는 앱의 기본 URI 접두사로 자동으로 설정 됩니다. 자세한 내용은 <xref:blazor/call-web-api>을 참조하세요. |
-| `IJSRuntime` | Singleton | JavaScript 호출이 디스패치되는 JavaScript 런타임의 인스턴스를 나타냅니다. 자세한 내용은 <xref:blazor/javascript-interop>을 참조하세요. |
+| <xref:System.Net.Http.HttpClient> | Singleton | URI로 식별 되는 리소스에서 http 요청을 보내고 HTTP 응답을 받기 위한 메서드를 제공 합니다. 이 `HttpClient`의 인스턴스는 백그라운드에서 HTTP 트래픽을 처리 하기 위해 브라우저를 사용 합니다. [BaseAddress](xref:System.Net.Http.HttpClient.BaseAddress) 는 앱의 기본 URI 접두사로 자동으로 설정 됩니다. 자세한 내용은 <xref:blazor/call-web-api>을 참조하십시오. |
+| `IJSRuntime` | Singleton | JavaScript 호출이 디스패치되는 JavaScript 런타임의 인스턴스를 나타냅니다. 자세한 내용은 <xref:blazor/javascript-interop>을 참조하십시오. |
 | `NavigationManager` | Singleton | Uri 및 탐색 상태를 사용 하기 위한 도우미를 포함 합니다. 자세한 내용은 [URI 및 탐색 상태 도우미](xref:blazor/routing#uri-and-navigation-state-helpers)를 참조 하세요. |
 
 사용자 지정 서비스 공급자는 테이블에 나열 된 기본 서비스를 자동으로 제공 하지 않습니다. 사용자 지정 서비스 공급자를 사용 하 고 표에 표시 된 서비스가 필요한 경우 새 서비스 공급자에 필요한 서비스를 추가 합니다.
 
 ## <a name="add-services-to-an-app"></a>앱에 서비스 추가
 
-새 앱을 만든 후 메서드를 검사 `Startup.ConfigureServices` 합니다.
+새 앱을 만든 후 `Startup.ConfigureServices` 메서드를 검사 합니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -50,7 +50,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-메서드에는 서비스 설명자 개체 <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>의 목록 (<xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor>)이 전달 됩니다. `ConfigureServices` 서비스 설명자를 서비스 컬렉션에 제공 하 여 서비스를 추가 합니다. 다음 예제에서는 `IDataAccess` 인터페이스 및 구체적인 구현 `DataAccess`에 대 한 개념을 보여 줍니다.
+@No__t-0 메서드에는 서비스 설명자 개체의 목록 (<xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor>) 인 @no__t 1이 전달 됩니다. 서비스 설명자를 서비스 컬렉션에 제공 하 여 서비스를 추가 합니다. 다음 예제에서는 `IDataAccess` 인터페이스와 구체적인 구현 `DataAccess` 인 개념을 보여 줍니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -63,28 +63,28 @@ public void ConfigureServices(IServiceCollection services)
 
 | 수명 | 설명 |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped*> | Blazor Weasembomapps는 현재 DI 범위의 개념을가지고 있지 않습니다. `Scoped`-등록 된 서비스는 `Singleton` 서비스 처럼 작동 합니다. 그러나 Blazor 서버 호스팅 모델은 `Scoped` 수명을 지원 합니다. Blazor Server 앱에서 범위가 지정 된 서비스 등록 범위는 *연결*로 지정 됩니다. 따라서 현재 사용자로 범위를 지정 해야 하는 서비스에 대해 범위 지정 서비스를 사용 하는 것이 좋습니다. 현재 의도는 브라우저에서 클라이언트 쪽을 실행 하는 경우에도 마찬가지입니다. |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton*> | DI는 서비스의 *단일 인스턴스* 를 만듭니다. 서비스를 필요로 하 `Singleton` 는 모든 구성 요소는 동일한 서비스의 인스턴스를 수신 합니다. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped*> | Blazor Weasembomapps는 현재 DI 범위의 개념을가지고 있지 않습니다. @no__t 64, 서비스는 `Singleton` 서비스와 동일 하 게 작동 합니다. 그러나 Blazor 서버 호스팅 모델은 `Scoped` 수명을 지원 합니다. Blazor Server 앱에서 범위가 지정 된 서비스 등록 범위는 *연결*로 지정 됩니다. 따라서 현재 사용자로 범위를 지정 해야 하는 서비스에 대해 범위 지정 서비스를 사용 하는 것이 좋습니다. 현재 의도는 브라우저에서 클라이언트 쪽을 실행 하는 경우에도 마찬가지입니다. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton*> | DI는 서비스의 *단일 인스턴스* 를 만듭니다. @No__t-0 서비스를 필요로 하는 모든 구성 요소는 동일한 서비스의 인스턴스를 수신 합니다. |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient*> | 구성 요소가 서비스 컨테이너에서 `Transient` 서비스의 인스턴스를 가져올 때마다 서비스의 *새 인스턴스* 를 수신 합니다. |
 
-DI 시스템은 ASP.NET Core에서 DI 시스템을 기반으로 합니다. 자세한 내용은 <xref:fundamentals/dependency-injection>을 참조하세요.
+DI 시스템은 ASP.NET Core에서 DI 시스템을 기반으로 합니다. 자세한 내용은 <xref:fundamentals/dependency-injection>을 참조하십시오.
 
 ## <a name="request-a-service-in-a-component"></a>구성 요소에서 서비스 요청
 
-서비스 컬렉션에 서비스를 추가한 후에는 [ \@주입](xref:mvc/views/razor#inject) Razor 지시어를 사용 하 여 서비스를 구성 요소에 삽입 합니다. `@inject`에는 두 개의 매개 변수가 있습니다.
+서비스 컬렉션에 서비스를 추가한 후에는 [\@inject](xref:mvc/views/razor#inject) Razor 지시어를 사용 하 여 서비스를 구성 요소에 삽입 합니다. `@inject`에는 두 개의 매개 변수가 있습니다.
 
-* 삽입할 &ndash; 서비스의 형식을 입력 합니다.
+* Type &ndash; 삽입할 서비스의 형식입니다.
 * 속성 &ndash; 삽입 된 app service를 받는 속성의 이름입니다. 속성에는 수동으로 만들 필요가 없습니다. 컴파일러가 속성을 만듭니다.
 
-자세한 내용은 <xref:mvc/views/dependency-injection>을 참조하세요.
+자세한 내용은 <xref:mvc/views/dependency-injection>을 참조하십시오.
 
-여러 개의 `@inject` 문을 사용 하 여 여러 서비스를 삽입 합니다.
+여러 `@inject` 문을 사용 하 여 여러 서비스를 삽입 합니다.
 
-다음 예제에서는 `@inject`을 사용하는 방법을 보여 줍니다. 을 구현 `Services.IDataAccess` 하는 서비스는 구성 요소의 속성 `DataRepository`에 삽입 됩니다. 코드에서 추상화를 `IDataAccess` 사용 하는 방법에 유의 하세요.
+다음 예제에서는 `@inject`을 사용하는 방법을 보여 줍니다. @No__t-0을 구현 하는 서비스는 구성 요소의 속성 `DataRepository`에 삽입 됩니다. @No__t-0 추상화만 사용 하는 코드를 확인 합니다.
 
 [!code-cshtml[](dependency-injection/samples_snapshot/3.x/CustomerList.razor?highlight=2-3,23)]
 
-내부적으로 생성 된 속성 (`DataRepository`)은 `InjectAttribute` 특성을 사용 하 여 데코 레이트 됩니다. 일반적으로이 특성은 직접 사용 되지 않습니다. 구성 요소에 기본 클래스가 필요 하 고 기본 클래스에도 삽입 된 속성이 필요 하면를 수동으로 추가 합니다 `InjectAttribute`.
+내부적으로 생성 된 속성 (`DataRepository`)은 `InjectAttribute` 특성으로 데코 레이트 됩니다. 일반적으로이 특성은 직접 사용 되지 않습니다. 구성 요소에 기본 클래스가 필요 하 고 기본 클래스에도 삽입 된 속성이 필요 하면 `InjectAttribute`을 수동으로 추가 합니다.
 
 ```csharp
 public class ComponentBase : IComponent
@@ -96,7 +96,7 @@ public class ComponentBase : IComponent
 }
 ```
 
-기본 클래스에서 파생 된 구성 요소에서는 `@inject` 지시문이 필요 하지 않습니다. 기본 `InjectAttribute` 클래스의는 충분 합니다.
+기본 클래스에서 파생 된 구성 요소에서는 `@inject` 지시문이 필요 하지 않습니다. 기본 클래스의 `InjectAttribute` 이면 충분 합니다.
 
 ```cshtml
 @page "/demo"
@@ -107,7 +107,7 @@ public class ComponentBase : IComponent
 
 ## <a name="use-di-in-services"></a>서비스에서 DI 사용
 
-복잡 한 서비스에는 추가 서비스가 필요할 수 있습니다. 이전 예제 `DataAccess` 에서에는 `HttpClient` 기본 서비스가 필요할 수 있습니다. `@inject`(또는 `InjectAttribute`)를 서비스에서 사용할 수 없습니다. 대신 *생성자 삽입* 을 사용 해야 합니다. 서비스의 생성자에 매개 변수를 추가 하 여 필요한 서비스를 추가 합니다. DI는 서비스를 만들 때 생성자에 필요한 서비스를 인식 하 여 적절 하 게 제공 합니다.
+복잡 한 서비스에는 추가 서비스가 필요할 수 있습니다. 이전 예제에서 `DataAccess`은 @no__t 1 기본 서비스가 필요할 수 있습니다. `@inject` (또는 `InjectAttribute`)은 서비스에서 사용할 수 없습니다. 대신 *생성자 삽입* 을 사용 해야 합니다. 서비스의 생성자에 매개 변수를 추가 하 여 필요한 서비스를 추가 합니다. DI는 서비스를 만들 때 생성자에 필요한 서비스를 인식 하 여 적절 하 게 제공 합니다.
 
 ```csharp
 public class DataAccess : IDataAccess
@@ -131,7 +131,7 @@ public class DataAccess : IDataAccess
 
 ASP.NET Core 앱에서 범위가 지정 된 서비스는 일반적으로 현재 요청으로 범위가 지정 됩니다. 요청이 완료 된 후에는 모든 범위 지정 또는 임시 서비스가 DI 시스템에 의해 삭제 됩니다. Blazor Server 앱에서 요청 범위는 클라이언트 연결 기간 동안 지속 되므로 임시 및 범위가 지정 된 서비스가 예상 보다 훨씬 오래 지속 될 수 있습니다.
 
-서비스의 범위를 구성 요소의 수명으로 범위를 지정할 수 있도록 `OwningComponentBase` 에서는 `OwningComponentBase<TService>` 및 기본 클래스를 사용할 수 있습니다. 이러한 기본 클래스는 구성 `ScopedServices` 요소의 수명으로 `IServiceProvider` 범위가 지정 된 서비스를 확인 하는 형식의 속성을 노출 합니다. Razor의 기본 클래스에서 상속 되는 구성 요소를 작성 하려면 `@inherits` 지시문을 사용 합니다.
+서비스 범위를 구성 요소의 수명으로 범위를 지정할 때는 `OwningComponentBase` 및 `OwningComponentBase<TService>` 기본 클래스를 사용할 수 있습니다. 이러한 기본 클래스는 구성 요소의 수명으로 범위가 지정 된 서비스를 확인 하는 `IServiceProvider` 형식의 `ScopedServices` 속성을 노출 합니다. Razor의 기본 클래스에서 상속 되는 구성 요소를 작성 하려면 `@inherits` 지시문을 사용 합니다.
 
 ```cshtml
 @page "/users"
@@ -148,7 +148,7 @@ ASP.NET Core 앱에서 범위가 지정 된 서비스는 일반적으로 현재 
 ```
 
 > [!NOTE]
-> 또는를 사용 하 `@inject` 여 구성 요소에 삽입 된 서비스는 `InjectAttribute` 구성 요소의 범위에 생성 되지 않으며 요청 범위에 연결 됩니다.
+> @No__t-0 또는 `InjectAttribute`을 사용 하 여 구성 요소에 삽입 된 서비스는 구성 요소의 범위에서 만들어지지 않으며 요청 범위에 연결 됩니다.
 
 ## <a name="additional-resources"></a>추가 자료
 

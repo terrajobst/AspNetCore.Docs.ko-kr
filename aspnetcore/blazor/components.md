@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/05/2019
 uid: blazor/components
-ms.openlocfilehash: 3e0966bf978c99fc00db7682bea3292306cbb03c
-ms.sourcegitcommit: d81912782a8b0bd164f30a516ad80f8defb5d020
+ms.openlocfilehash: a71bbf3921417cbd23aeb14d0d78ad8354d6e93a
+ms.sourcegitcommit: dd026eceee79e943bd6b4a37b144803b50617583
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72179031"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72378682"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -238,7 +238,7 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 사용자가 데이터 바인딩된 요소에 구문 분석할 수 없는 값을 제공 하면 bind 이벤트가 트리거될 때 구문 분석할 수 없는 값이 자동으로 이전 값으로 되돌아갑니다.
 
-다음과 같은 시나리오를 고려해 보세요.
+다음 시나리오를 고려하세요.
 
 * @No__t-0 요소는 초기 값이 `123` 인 `int` 형식에 바인딩됩니다.
 
@@ -454,11 +454,11 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 
 지원 되는 `EventArgs`은 다음 표에 나와 있습니다.
 
-| 이벤트 | 클래스 |
+| 이벤트(event) | 인스턴스 |
 | ----- | ----- |
 | 클립보드        | `ClipboardEventArgs` |
 | 옵니다             | `DragEventArgs` &ndash; `DataTransfer` 및 `DataTransferItem`은 항목 데이터를 끌어 놓은 상태입니다. |
-| 오류            | `ErrorEventArgs` |
+| Error            | `ErrorEventArgs` |
 | 포커스            | `FocusEventArgs` &ndash;은 `relatedTarget`에 대 한 지원을 포함 하지 않습니다. |
 | `<input>` 변경 | `ChangeEventArgs` |
 | 키보드         | `KeyboardEventArgs` |
@@ -692,7 +692,7 @@ Password:
 구성 요소가 렌더링 되 면 `loginDialog` 필드가 `MyLoginDialog` 자식 구성 요소 인스턴스로 채워집니다. 그런 다음 구성 요소 인스턴스에서 .NET 메서드를 호출할 수 있습니다.
 
 > [!IMPORTANT]
-> @No__t-0 변수는 구성 요소가 렌더링 된 후에만 채워지고 출력에는 `MyLoginDialog` 요소가 포함 됩니다. 이 시점까지 참조할 항목이 없습니다. 구성 요소에서 렌더링을 완료 한 후에 구성 요소 참조를 조작 하려면 `OnAfterRenderAsync` 또는 `OnAfterRender` 메서드를 사용 합니다.
+> @No__t-0 변수는 구성 요소가 렌더링 된 후에만 채워지고 출력에는 `MyLoginDialog` 요소가 포함 됩니다. 이 시점까지 참조할 항목이 없습니다. 구성 요소에서 렌더링을 완료 한 후에 구성 요소 참조를 조작 하려면 [OnAfterRenderAsync 또는 OnAfterRender 메서드](#lifecycle-methods)를 사용 합니다.
 
 구성 요소 참조를 캡처하는 것은 [요소 참조를 캡처하](xref:blazor/javascript-interop#capture-references-to-elements)는 데 유사한 구문을 사용 하지만 [JavaScript interop](xref:blazor/javascript-interop) 기능은 아닙니다. 구성 요소 참조는 JavaScript 코드 @ no__t-0they're에 전달 되지 않습니다.
 
@@ -760,7 +760,7 @@ public class NotifierService
 
 요소 또는 구성 요소 목록을 렌더링할 때 이후에 요소나 구성 요소가 변경 되는 경우 Blazor의 diff 알고리즘은 유지할 수 있는 이전 요소 또는 구성 요소와 모델 개체가 이러한 요소에 매핑되는 방법을 결정 해야 합니다. 일반적으로이 프로세스는 자동 이며 무시 해도 되지만 프로세스를 제어 하는 경우가 있습니다.
 
-다음 예를 살펴 보십시오.
+다음 예제를 참조하세요.
 
 ```csharp
 @foreach (var person in People)
@@ -841,6 +841,9 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
+> [!NOTE]
+> 구성 요소 초기화 중 비동기 작업은 `OnInitializedAsync` 수명 주기 이벤트 중에 발생 해야 합니다.
+
 동기 작업의 경우 `OnInitialized`을 사용 합니다.
 
 ```csharp
@@ -859,6 +862,9 @@ protected override async Task OnParametersSetAsync()
 }
 ```
 
+> [!NOTE]
+> 매개 변수 및 속성 값을 적용할 때 비동기 작업은 `OnParametersSetAsync` 수명 주기 이벤트 중에 발생 해야 합니다.
+
 ```csharp
 protected override void OnParametersSet()
 {
@@ -868,7 +874,7 @@ protected override void OnParametersSet()
 
 `OnAfterRenderAsync` 및 `OnAfterRender`은 구성 요소가 렌더링을 완료 한 후에 호출 됩니다. 요소 및 구성 요소 참조가이 시점에 채워집니다. 렌더링 된 DOM 요소에 대해 작동 하는 타사 JavaScript 라이브러리 활성화와 같이 렌더링 된 콘텐츠를 사용 하 여 추가 초기화 단계를 수행 하려면이 단계를 사용 합니다.
 
-*서버에서 사전 렌더링을 할 때 `OnAfterRender`이 호출 되지 않습니다.*
+서버에서 사전 렌더링을 할 때 `OnAfterRender`이 *호출 되지 않습니다.*
 
 @No__t-1 및 `OnAfterRender`에 대 한 `firstRender` 매개 변수는 다음과 같습니다.
 
@@ -884,6 +890,9 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
     }
 }
 ```
+
+> [!NOTE]
+> 렌더링 직후 비동기 작업은 `OnAfterRenderAsync` 수명 주기 이벤트 중에 발생 해야 합니다.
 
 ```csharp
 protected override void OnAfterRender(bool firstRender)
@@ -993,7 +1002,7 @@ Razor로 작성 된 구성 요소의 네임 스페이스는 (우선 순위)를 �
 
 * Razor 파일 (*razor*) 태그에 [@namespace](xref:mvc/views/razor#namespace) 지정 (`@namespace BlazorSample.MyNamespace`).
 * 프로젝트 파일 (`<RootNamespace>BlazorSample</RootNamespace>`)에서 프로젝트의 `RootNamespace`입니다.
-* 프로젝트 파일의 파일 이름 ( *.csproj*)에서 가져온 프로젝트 이름 및 프로젝트 루트에서 구성 요소로의 경로입니다. 예를 들어 프레임 워크는 *{PROJECT ROOT}/Pages/Index.razor* (*BlazorSample*)를 네임 스페이스 `BlazorSample.Pages`로 확인 합니다. 구성 요소 C# 는 이름 바인딩 규칙을 따릅니다. 이 예제에서 `Index` 구성 요소의 경우 범위의 구성 요소는 모든 구성 요소입니다.
+* 프로젝트 파일의 파일 이름 (*.csproj*)에서 가져온 프로젝트 이름 및 프로젝트 루트에서 구성 요소로의 경로입니다. 예를 들어 프레임 워크는 *{PROJECT ROOT}/Pages/Index.razor* (*BlazorSample*)를 네임 스페이스 `BlazorSample.Pages`로 확인 합니다. 구성 요소 C# 는 이름 바인딩 규칙을 따릅니다. 이 예제에서 `Index` 구성 요소의 경우 범위의 구성 요소는 모든 구성 요소입니다.
   * 같은 폴더 *에 있습니다.*
   * 프로젝트 루트에서 다른 네임 스페이스를 명시적으로 지정 하지 않은 구성 요소입니다.
 
@@ -1051,7 +1060,7 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값�
 <input type="checkbox" />
 ```
 
-자세한 내용은 <xref:mvc/views/razor>을 참조하세요.
+자세한 내용은 <xref:mvc/views/razor>을 참조하십시오.
 
 > [!WARNING]
 > ASP.NET 형식이 `bool` 인 경우에는 [aria를 누르는](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons)등의 일부 HTML 특성이 제대로 작동 하지 않습니다. 이러한 경우에는-1 @no__t 대신 `string` 유형을 사용 합니다.
@@ -1170,7 +1179,7 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값�
 
 샘플 앱의 다음 예제에서 `ThemeInfo` 클래스는 응용 프로그램의 지정 된 부분에 있는 모든 단추가 동일한 스타일을 공유할 수 있도록 구성 요소 계층 구조의 아래로 이동 하는 테마 정보를 지정 합니다.
 
-*UIThemeClasses/ThemeInfo.cs*:
+*UIThemeClasses/ThemeInfo*:
 
 ```csharp
 public class ThemeInfo
@@ -1294,7 +1303,7 @@ public class ThemeInfo
 
 [!code-cshtml[](common/samples/3.x/BlazorSample/Pages/CascadingValuesParametersTabSet.razor?name=snippet_TabSet)]
 
-자식 `Tab` 구성 요소는 `TabSet`에 매개 변수로 명시적으로 전달 되지 않습니다. 대신 자식 `Tab` 구성 요소는 `TabSet`의 자식 콘텐츠에 속합니다. 그러나 `TabSet`은 헤더와 활성 탭을 렌더링할 수 있도록 각 `Tab` 구성 요소에 대해 알고 있어야 합니다. 추가 코드를 요구 하지 않고이 조정을 사용 하도록 설정 하기 위해 `TabSet` 구성 요소는 *자체를 연계 값으로 제공* 하 여 하위 `Tab` 구성 요소에서 선택할 수 있습니다.
+자식 `Tab` 구성 요소는 `TabSet`에 매개 변수로 명시적으로 전달 되지 않습니다. 대신 자식 `Tab` 구성 요소는 `TabSet`의 자식 콘텐츠에 속합니다. 그러나 `TabSet`은 헤더와 활성 탭을 렌더링할 수 있도록 각 `Tab` 구성 요소에 대해 알고 있어야 합니다. 추가 코드를 요구 하지 않고이 조정을 사용 하기 위해 `TabSet` 구성 요소는 *자체를 연계 값으로 제공* 하 여 하위 `Tab` 구성 요소에서 선택할 수 있습니다.
 
 `TabSet` 구성 요소:
 
@@ -1429,14 +1438,14 @@ builder.AddContent(1, "Second");
 
 코드가 처음으로 실행 될 때 `someFlag` @no__t이-1 이면 작성기에서 다음을 수신 합니다.
 
-| Sequence | 형식      | data   |
+| Sequence | Type      | 데이터   |
 | :------: | --------- | :----: |
 | 0        | 텍스트 노드 | 첫째  |
 | 1        | 텍스트 노드 | Second |
 
 @No__t-0이-1 @no__t 되 고 태그가 다시 렌더링 된다고 가정 합니다. 이번에는 작성기가 다음을 받습니다.
 
-| Sequence | type       | data   |
+| Sequence | Type       | 데이터   |
 | :------: | ---------- | :----: |
 | 1        | 텍스트 노드  | Second |
 
@@ -1461,14 +1470,14 @@ builder.AddContent(seq++, "Second");
 
 이제 첫 번째 출력은 다음과 같습니다.
 
-| Sequence | 형식      | data   |
+| Sequence | Type      | 데이터   |
 | :------: | --------- | :----: |
 | 0        | 텍스트 노드 | 첫째  |
 | 1        | 텍스트 노드 | Second |
 
 이 결과는 이전 사례와 동일 하므로 부정적인 문제가 없습니다. `someFlag`은 두 번째 렌더링에서 `false` 이며 출력은 다음과 같습니다.
 
-| Sequence | 형식      | data   |
+| Sequence | Type      | 데이터   |
 | :------: | --------- | ------ |
 | 0        | 텍스트 노드 | Second |
 
@@ -1562,7 +1571,7 @@ public class CultureController : Controller
 ```
 
 > [!WARNING]
-> @No__t-0 작업 결과를 사용 하 여 열린 리디렉션 공격을 방지 합니다. 자세한 내용은 <xref:security/preventing-open-redirects>을 참조하세요.
+> @No__t-0 작업 결과를 사용 하 여 열린 리디렉션 공격을 방지 합니다. 자세한 내용은 <xref:security/preventing-open-redirects>을 참조하십시오.
 
 다음 구성 요소는 사용자가 문화권을 선택할 때 초기 리디렉션을 수행 하는 방법의 예를 보여 줍니다.
 
@@ -1607,17 +1616,17 @@ Blazor의 `@bind` 기능은 사용자의 현재 문화권에 따라 세계화를
 * `IStringLocalizer<>`은 Blazor apps에서 *지원 됩니다* .
 * `IHtmlLocalizer<>`, `IViewLocalizer<>` 및 데이터 주석 지역화는 MVC 시나리오 ASP.NET Core Blazor apps에서 **지원 되지 않습니다** .
 
-자세한 내용은 <xref:fundamentals/localization>을 참조하세요.
+자세한 내용은 <xref:fundamentals/localization>을 참조하십시오.
 
 ## <a name="scalable-vector-graphics-svg-images"></a>SVG (스케일러블 벡터 그래픽) 이미지
 
-Blazor는 HTML을 렌더링 하므로 SVG (확장 가능한 벡터 그래픽)*이미지 (* )를 비롯 한 브라우저 지원 이미지는 `<img>` 태그를 통해 지원 됩니다.
+Blazor는 HTML을 렌더링 하므로 SVG (확장 가능한 벡터 그래픽)*이미지 (*)를 비롯 한 브라우저 지원 이미지는 `<img>` 태그를 통해 지원 됩니다.
 
 ```html
 <img alt="Example image" src="some-image.svg" />
 ```
 
-마찬가지로, 스타일 시트 파일 ( *.css*)의 css 규칙에서 SVG 이미지가 지원 됩니다.
+마찬가지로, 스타일 시트 파일 (*.css*)의 css 규칙에서 SVG 이미지가 지원 됩니다.
 
 ```css
 .my-element {

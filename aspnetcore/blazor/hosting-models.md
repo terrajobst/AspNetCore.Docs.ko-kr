@@ -5,14 +5,14 @@ description: Blazor Weasembomand Blazor 서버 호스팅 모델을 이해 합니
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/03/2019
+ms.date: 10/15/2019
 uid: blazor/hosting-models
-ms.openlocfilehash: bc3ad9c7c4731b685fc161844d9f55e51722c0ea
-ms.sourcegitcommit: 73e255e846e414821b8cc20ffa3aec946735cd4e
+ms.openlocfilehash: 072f9bbdcf7171ede63383b085f9f0f030bf1076
+ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/03/2019
-ms.locfileid: "71924666"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72391164"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor 호스팅 모델
 
@@ -22,7 +22,7 @@ ms.locfileid: "71924666"
 
 Blazor는 [WeasembmbBlazor](https://webassembly.org/)(*Blazor server*) ASP.NET Core의 서버 쪽에서 브라우저에서 클라이언트 쪽을 실행 하도록 디자인 된웹 프레임 워크입니다. 호스팅 모델에 관계 없이 앱 및 구성 요소 모델은 *동일*합니다.
 
-이 문서에서 설명 하는 호스팅 모델에 대 한 프로젝트를 만들려면 <xref:blazor/get-started>를 참조 하십시오.
+이 문서에서 설명 하는 호스팅 모델에 대 한 프로젝트를 만들려면 <xref:blazor/get-started>을 참조 하세요.
 
 ## <a name="blazor-webassembly"></a>Blazor WebAssembly
 
@@ -61,12 +61,12 @@ Blazor 서버 호스팅 모델을 사용 하면 앱이 ASP.NET Core 앱 내에�
 
 Blazor 서버 호스팅 모델을 사용 하 여 Blazor 앱을 만들려면 ASP.NET Core **Blazor Server 앱** 템플릿 ([dotnet new blazorserver](/dotnet/core/tools/dotnet-new))을 사용 합니다. ASP.NET Core 앱은 Blazor Server 앱을 호스팅하고 클라이언트가 연결 하는 SignalR 끝점을 만듭니다.
 
-ASP.NET Core 앱은 추가할 앱 `Startup` 클래스를 참조 합니다.
+ASP.NET Core 앱은 추가할 앱의 `Startup` 클래스를 참조 합니다.
 
 * 서버 쪽 서비스.
 * 요청 처리 파이프라인에 대 한 앱입니다.
 
-*Blazor* 스크립트&dagger; 는 클라이언트 연결을 설정 합니다. 필요에 따라 앱 상태를 유지 하 고 복원 하는 것은 앱의 책임입니다 (예: 네트워크 연결이 끊어진 경우).
+*Blazor* 스크립트 @ no__t-1은 클라이언트 연결을 설정 합니다. 필요에 따라 앱 상태를 유지 하 고 복원 하는 것은 앱의 책임입니다 (예: 네트워크 연결이 끊어진 경우).
 
 Blazor 서버 호스팅 모델은 몇 가지 이점을 제공 합니다.
 
@@ -83,7 +83,7 @@ Blazor 서버 호스팅을 단점이 있습니다.
 * 여러 사용자가 있는 앱의 경우에는 확장성이 어렵습니다. 서버는 여러 클라이언트 연결을 관리 하 고 클라이언트 상태를 처리 해야 합니다.
 * 앱을 제공 하려면 ASP.NET Core 서버가 필요 합니다. 서버를 사용 하지 않는 배포 시나리오 (예: CDN에서 앱 제공)를 사용할 수 없습니다.
 
-&dagger;*Blazor* 스크립트는 ASP.NET Core 공유 프레임 워크의 포함 리소스에서 제공 됩니다.
+@no__t- *blazor* 스크립트는 ASP.NET Core 공유 프레임 워크의 포함 리소스에서 제공 됩니다.
 
 ### <a name="comparison-to-server-rendered-ui"></a>서버에서 렌더링 된 UI 비교
 
@@ -106,7 +106,7 @@ Blazor의 UI 업데이트는 다음에 의해 트리거됩니다.
 
 그래프가 계산 되며 UI *diff* (차이)가 계산 됩니다. 이러한 차이는 클라이언트에서 UI를 업데이트 하는 데 필요한 최소한의 DOM 편집 집합입니다. Diff는 클라이언트에 이진 형식으로 전송 되 고 브라우저에서 적용 됩니다.
 
-사용자가 클라이언트에서 다른 구성 요소를 탐색 한 후에 구성 요소가 삭제 됩니다. 사용자가 구성 요소와 상호 작용 하는 동안에는 구성 요소의 상태 (서비스, 리소스)가 서버 메모리에 보관 되어야 합니다. 서버에서 많은 구성 요소의 상태를 동시에 유지 관리할 수 있기 때문에 메모리 소모는 해결 해야 하는 문제입니다. 서버 메모리를 최적으로 사용 하기 위해 Blazor Server 앱을 제작 하는 방법에 대 한 지침은 <xref:security/blazor/server>을 참조 하십시오.
+사용자가 클라이언트에서 다른 구성 요소를 탐색 한 후에 구성 요소가 삭제 됩니다. 사용자가 구성 요소와 상호 작용 하는 동안에는 구성 요소의 상태 (서비스, 리소스)가 서버 메모리에 보관 되어야 합니다. 서버에서 많은 구성 요소의 상태를 동시에 유지 관리할 수 있기 때문에 메모리 소모는 해결 해야 하는 문제입니다. 서버 메모리를 최적으로 사용 하기 위해 Blazor Server 앱을 제작 하는 방법에 대 한 지침은 <xref:security/blazor/server>을 참조 하세요.
 
 ### <a name="circuits"></a>배선
 
@@ -122,9 +122,9 @@ UI 대기 시간은 시작 된 작업에서 UI를 업데이트 하는 데 걸리
 
 개인 회사 네트워크로 제한 된 lob (기간 업무) 앱의 경우 네트워크 대기 시간으로 인 한 대기 시간에 대 한 사용자의 영향은 일반적으로 imperceptible입니다. 인터넷을 통해 배포 된 앱의 경우 특히 사용자가 지리적으로 광범위 하 게 분산 된 경우 대기 시간이 달라질 수 있습니다.
 
-메모리 사용은 앱 대기 시간에도 영향을 주지 않습니다. 메모리 사용이 증가 하면 가비지 수집 또는 페이징 메모리가 디스크에 자주 발생 하므로 앱 성능이 저하 되 고 결과적으로 UI 대기 시간이 증가 합니다. 자세한 내용은 <xref:security/blazor/server>을 참조하세요.
+메모리 사용은 앱 대기 시간에도 영향을 주지 않습니다. 메모리 사용이 증가 하면 가비지 수집 또는 페이징 메모리가 디스크에 자주 발생 하므로 앱 성능이 저하 되 고 결과적으로 UI 대기 시간이 증가 합니다. 자세한 내용은 <xref:security/blazor/server>을 참조하십시오.
 
-Blazor 서버 앱은 네트워크 대기 시간 및 메모리 사용을 줄여 UI 대기 시간을 최소화 하도록 최적화 되어야 합니다. 네트워크 대기 시간을 측정 하는 방법은을 <xref:host-and-deploy/blazor/server#measure-network-latency>참조 하십시오. SignalR 및 Blazor에 대 한 자세한 내용은 다음을 참조 하세요.
+Blazor 서버 앱은 네트워크 대기 시간 및 메모리 사용을 줄여 UI 대기 시간을 최소화 하도록 최적화 되어야 합니다. 네트워크 대기 시간을 측정 하는 방법은 <xref:host-and-deploy/blazor/server#measure-network-latency>을 참조 하세요. SignalR 및 Blazor에 대 한 자세한 내용은 다음을 참조 하세요.
 
 * <xref:host-and-deploy/blazor/server>
 * <xref:security/blazor/server>
@@ -136,7 +136,7 @@ Blazor 서버 앱은 서버에 대 한 활성 SignalR 연결이 필요 합니다
 클라이언트에서 연결이 끊어진 것을 감지 하면 클라이언트에서 다시 연결을 시도 하는 동안 기본 UI가 표시 됩니다. 다시 연결이 실패 하는 경우 사용자에 게 다시 시도 하는 옵션이 제공 됩니다. UI를 사용자 지정 하려면 *_Host* Razor 페이지에서 `id`로 `components-reconnect-modal` 인 요소를 정의 합니다. 클라이언트는 연결 상태에 따라 다음 CSS 클래스 중 하나를 사용 하 여이 요소를 업데이트 합니다.
 
 * @no__t 0 &ndash;은 연결을 끊고 클라이언트를 다시 연결 하려고 함을 나타내는 UI를 표시 합니다.
-* `components-reconnect-hide`&ndash; 클라이언트에 활성 연결이 있으며 UI를 숨깁니다.
+* `components-reconnect-hide` @no__t 클라이언트에 활성 연결이 있습니다. UI를 숨깁니다.
 * `components-reconnect-failed` @no__t 네트워크 오류로 인해 다시 연결 하지 못했습니다. 다시 연결을 시도 하려면 `window.Blazor.reconnect()`을 호출 합니다.
 * `components-reconnect-rejected` &ndash; 다시 연결이 거부 되었습니다. 서버에 도달 했지만 연결이 거부 되었으며 서버의 사용자 상태가 사라졌습니다. 앱을 다시 로드 하려면 `location.reload()`을 호출 합니다. 이 연결 상태는 다음과 같은 경우에 발생할 수 있습니다.
   * 회로 (서버 쪽 코드)의 작동이 중단 됩니다.
@@ -154,7 +154,7 @@ Blazor 서버 앱은 서버에 대 한 활성 SignalR 연결이 필요 합니다
 </body>
 ```
 
-`RenderMode`구성 요소가 있는지 여부를 구성 합니다.
+`RenderMode`은 구성 요소가 있는지 여부를 구성 합니다.
 
 * 는 페이지에 미리 렌더링 된 됩니다.
 * 는 페이지에서 정적 HTML로 렌더링 되거나 사용자 에이전트에서 Blazor 앱을 부트스트랩 하는 데 필요한 정보가 포함 되어 있습니다.
@@ -179,7 +179,7 @@ Blazor 서버 앱은 서버에 대 한 활성 SignalR 연결이 필요 합니다
 * 렌더링에 사용 되는 초기 구성 요소 상태가 손실 됩니다.
 * 새 구성 요소 상태는 SignalR 연결이 설정 될 때 생성 됩니다.
 
-다음 Razor 페이지는 구성 요소 `Counter` 를 렌더링 합니다.
+다음 Razor 페이지는 `Counter` 구성 요소를 렌더링 합니다.
 
 ```cshtml
 <h1>My Razor Page</h1>
@@ -189,7 +189,7 @@ Blazor 서버 앱은 서버에 대 한 활성 SignalR 연결이 필요 합니다
 
 ### <a name="render-noninteractive-components-from-razor-pages-and-views"></a>Razor 페이지 및 뷰에서 비 대화형 구성 요소 렌더링
 
-다음 Razor 페이지에서 구성 요소는 `MyComponent` 폼을 사용 하 여 지정 된 초기 값을 사용 하 여 정적으로 렌더링 됩니다.
+다음 Razor 페이지에서 `MyComponent` 구성 요소는 폼을 사용 하 여 지정 된 초기 값을 사용 하 여 정적으로 렌더링 됩니다.
 
 ```cshtml
 <h1>My Razor Page</h1>
@@ -208,7 +208,7 @@ Blazor 서버 앱은 서버에 대 한 활성 SignalR 연결이 필요 합니다
 }
 ```
 
-는 `MyComponent` 정적으로 렌더링 되므로 구성 요소는 대화형이 될 수 없습니다.
+@No__t-0은 정적으로 렌더링 되므로 구성 요소는 대화형이 될 수 없습니다.
 
 ### <a name="detect-when-the-app-is-prerendering"></a>앱이 사전 렌더링 되는 경우 검색
 
@@ -220,8 +220,8 @@ Blazor 서버 앱은 서버에 대 한 활성 SignalR 연결이 필요 합니다
 
 *Pages/_Host* 파일에서 SignalR client를 구성 하려면 다음을 수행 합니다.
 
-* *Blazor 스크립트* 에 대 한 `<script>` 태그에 특성을추가합니다.`autostart="false"`
-* 을 `Blazor.start` 호출 하 고 SignalR builder를 지정 하는 구성 개체를 전달 합니다.
+* *Blazor* 스크립트에 대 한 `<script>` 태그에 `autostart="false"` 특성을 추가 합니다.
+* @No__t-0을 호출 하 고 SignalR builder를 지정 하는 구성 개체를 전달 합니다.
 
 ```html
 <script src="_framework/blazor.server.js" autostart="false"></script>

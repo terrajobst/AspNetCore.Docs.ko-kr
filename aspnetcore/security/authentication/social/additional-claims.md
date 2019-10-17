@@ -5,18 +5,18 @@ description: 외부 공급자에서 추가 클레임 및 토큰을 설정 하는
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/01/2019
+ms.date: 10/15/2019
 uid: security/authentication/social/additional-claims
-ms.openlocfilehash: cdf263df8d1aa17ea3820a16ecbd10abce9d683d
-ms.sourcegitcommit: 73e255e846e414821b8cc20ffa3aec946735cd4e
+ms.openlocfilehash: 72710d249d3210208dd9b0356a700ba02a0b727a
+ms.sourcegitcommit: dd026eceee79e943bd6b4a37b144803b50617583
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/03/2019
-ms.locfileid: "71925148"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72378880"
 ---
 # <a name="persist-additional-claims-and-tokens-from-external-providers-in-aspnet-core"></a>ASP.NET Core의 외부 공급자에서 추가 클레임 및 토큰 유지
 
-[Luke Latham](https://github.com/guardrex)으로
+작성자: [Luke Latham](https://github.com/guardrex)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -24,9 +24,9 @@ ASP.NET Core 앱은 Facebook, Google, Microsoft, Twitter 등의 외부 인증 �
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/social/additional-claims/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>사전 요구 사항
+## <a name="prerequisites"></a>Prerequisites
 
-앱에서 지원할 외부 인증 공급자를 결정 합니다. 각 공급자에 대해 앱을 등록 하 고 클라이언트 ID 및 클라이언트 암호를 가져옵니다. 자세한 내용은 <xref:security/authentication/social/index>을 참조하세요. 샘플 앱은 [Google 인증 공급자](xref:security/authentication/google-logins)를 사용 합니다.
+앱에서 지원할 외부 인증 공급자를 결정 합니다. 각 공급자에 대해 앱을 등록 하 고 클라이언트 ID 및 클라이언트 암호를 가져옵니다. 자세한 내용은 <xref:security/authentication/social/index>을 참조하십시오. 샘플 앱은 [Google 인증 공급자](xref:security/authentication/google-logins)를 사용 합니다.
 
 ## <a name="set-the-client-id-and-client-secret"></a>클라이언트 ID 및 클라이언트 암호를 설정 합니다.
 
@@ -47,7 +47,7 @@ OAuth 인증 공급자는 클라이언트 ID 및 클라이언트 암호를 사�
 
 @No__t-0을 지정 하 여 공급자에서 검색할 사용 권한 목록을 지정 합니다. 일반적인 외부 공급자에 대 한 인증 범위는 다음 표에 나와 있습니다.
 
-| 공급자  | Scope                                                            |
+| Provider  | Scope                                                            |
 | --------- | ---------------------------------------------------------------- |
 | Facebook  | `https://www.facebook.com/dialog/oauth`                          |
 | Google    | `https://www.googleapis.com/auth/userinfo.profile`               |
@@ -110,7 +110,7 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 사용자는 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction>에서 파생 하 고 추상 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.Run*> 메서드를 구현 하 여 사용자 지정 작업을 정의할 수 있습니다.
 
-자세한 내용은 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims>을 참조하세요.
+자세한 내용은 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims>을 참조하십시오.
 
 ## <a name="removal-of-claim-actions-and-claims"></a>클레임 작업 및 클레임 제거
 
@@ -164,9 +164,9 @@ ASP.NET Core 앱은 Facebook, Google, Microsoft, Twitter 등의 외부 인증 �
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/social/additional-claims/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>사전 요구 사항
+## <a name="prerequisites"></a>Prerequisites
 
-앱에서 지원할 외부 인증 공급자를 결정 합니다. 각 공급자에 대해 앱을 등록 하 고 클라이언트 ID 및 클라이언트 암호를 가져옵니다. 자세한 내용은 <xref:security/authentication/social/index>을 참조하세요. 샘플 앱은 [Google 인증 공급자](xref:security/authentication/google-logins)를 사용 합니다.
+앱에서 지원할 외부 인증 공급자를 결정 합니다. 각 공급자에 대해 앱을 등록 하 고 클라이언트 ID 및 클라이언트 암호를 가져옵니다. 자세한 내용은 <xref:security/authentication/social/index>을 참조하십시오. 샘플 앱은 [Google 인증 공급자](xref:security/authentication/google-logins)를 사용 합니다.
 
 ## <a name="set-the-client-id-and-client-secret"></a>클라이언트 ID 및 클라이언트 암호를 설정 합니다.
 
@@ -187,7 +187,7 @@ OAuth 인증 공급자는 클라이언트 ID 및 클라이언트 암호를 사�
 
 @No__t-0을 지정 하 여 공급자에서 검색할 사용 권한 목록을 지정 합니다. 일반적인 외부 공급자에 대 한 인증 범위는 다음 표에 나와 있습니다.
 
-| 공급자  | Scope                                                            |
+| Provider  | Scope                                                            |
 | --------- | ---------------------------------------------------------------- |
 | Facebook  | `https://www.facebook.com/dialog/oauth`                          |
 | Google    | `https://www.googleapis.com/auth/userinfo.profile`               |
@@ -250,7 +250,7 @@ options.Scope.Add("https://www.googleapis.com/auth/user.birthday.read");
 
 사용자는 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction>에서 파생 하 고 추상 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims.ClaimAction.Run*> 메서드를 구현 하 여 사용자 지정 작업을 정의할 수 있습니다.
 
-자세한 내용은 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims>을 참조하세요.
+자세한 내용은 <xref:Microsoft.AspNetCore.Authentication.OAuth.Claims>을 참조하십시오.
 
 ## <a name="removal-of-claim-actions-and-claims"></a>클레임 작업 및 클레임 제거
 
