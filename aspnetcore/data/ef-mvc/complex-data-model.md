@@ -1,18 +1,18 @@
 ---
 title: '자습서: 복잡한 데이터 모델 만들기 - ASP.NET MVC 및 EF Core 사용'
 description: 이 자습서에서는 더 많은 엔터티 및 관계를 추가하고, 서식 지정, 유효성 검사 및 매핑 규칙을 지정하여 데이터 모델을 사용자 지정합니다.
-author: tdykstra
+author: rick-anderson
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/complex-data-model
-ms.openlocfilehash: 85a11ba082fc8f6b364019f6cefcd5b1fe5a9215
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 313d951ccdd45ae1209ffd9612d24738822fbed8
+ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71080467"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72259601"
 ---
 # <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>자습서: 복잡한 데이터 모델 만들기 - ASP.NET MVC 및 EF Core 사용
 
@@ -54,7 +54,7 @@ ms.locfileid: "71080467"
 
 [!code-csharp[](intro/samples/cu/Models/Student.cs?name=snippet_DataType&highlight=3,12-13)]
 
-`DataType` 특성은 데이터베이스 내장 형식보다 구체적인 데이터 형식을 지정하는 데 사용됩니다. 이 경우에는 날짜 및 시간이 아닌 날짜만 추적하고자 합니다. `DataType` 열거형은 날짜, 시간, 전화 번호, 통화, 이메일 주소 등과 같은 다양한 데이터 형식을 제공합니다. `DataType` 특성을 통해 애플리케이션에서 자동으로 유형별 기능을 제공하도록 설정할 수도 있습니다. 예를 들어, `DataType.EmailAddress`에 대해 `mailto:` 링크를 만들고 HTML5를 지원하는 브라우저에서 `DataType.Date`에 대해 날짜 선택기를 제공할 수 있습니다. `DataType` 특성은 HTML 5 브라우저가 인식할 수 있는 HTML 5 `data-`(데이터 대시로 발음) 특성을 내보냅니다. `DataType` 특성은 유효성 검사를 제공하지 않습니다.
+`DataType` 특성은 데이터베이스 내장 형식보다 구체적인 데이터 형식을 지정하는 데 사용됩니다. 이 경우에는 날짜 및 시간이 아닌 날짜만 추적하고자 합니다. `DataType` 열거형은 날짜, 시간, 전화 번호, 통화, 이메일 주소 등과 같은 다양한 데이터 형식을 제공합니다. `DataType` 특성을 통해 응용 프로그램에서 자동으로 유형별 기능을 제공하도록 설정할 수도 있습니다. 예를 들어, `DataType.EmailAddress`에 대해 `mailto:` 링크를 만들고 HTML5를 지원하는 브라우저에서 `DataType.Date`에 대해 날짜 선택기를 제공할 수 있습니다. `DataType` 특성은 HTML 5 브라우저가 인식할 수 있는 HTML 5 `data-`(데이터 대시로 발음) 특성을 내보냅니다. `DataType` 특성은 유효성 검사를 제공하지 않습니다.
 
 `DataType.Date`는 표시되는 날짜의 서식을 지정하지 않습니다. 기본적으로 데이터 필드는 서버의 CultureInfo의 기본 형식에 따라 표시됩니다.
 

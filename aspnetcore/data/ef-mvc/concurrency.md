@@ -1,18 +1,18 @@
 ---
 title: '자습서: 동시성 처리 - ASP.NET MVC 및 EF Core 사용'
 description: 이 자습서에는 여러 사용자가 동시에 같은 엔터티를 업데이트하는 경우 충돌을 처리하는 방법을 보여 줍니다.
-author: tdykstra
+author: rick-anderson
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: e8c88ed2811ad221d94c963c6e14fea9bc1607ea
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 227128607460f9b5821bd0697fde3f393cf6daa9
+ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71080454"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72259431"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>자습서: 동시성 처리 - ASP.NET MVC 및 EF Core 사용
 

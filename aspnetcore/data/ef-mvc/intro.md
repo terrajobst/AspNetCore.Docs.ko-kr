@@ -1,18 +1,18 @@
 ---
 title: '자습서: ASP.NET MVC 웹앱에서 EF Core 시작'
 description: 이는 Contoso University 샘플 애플리케이션을 처음부터 빌드하는 방법을 설명하는 일련의 자습서 중 첫 번째입니다.
-author: tdykstra
+author: rick-anderson
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/06/2019
 ms.topic: tutorial
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 3450ac5b46e2a03b5d58c8760b78a52065343992
-ms.sourcegitcommit: 6189b0ced9c115248c6ede02efcd0b29d31f2115
+ms.openlocfilehash: a8909d391ae1a35e9c8155df767ab157701c8a51
+ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/23/2019
-ms.locfileid: "69985364"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72259452"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>자습서: ASP.NET MVC 웹앱에서 EF Core 시작
 

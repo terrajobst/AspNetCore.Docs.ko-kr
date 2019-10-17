@@ -1,16 +1,16 @@
 ---
 title: ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 마이그레이션 - 4/8
-author: tdykstra
+author: rick-anderson
 description: 이 자습서에서는 ASP.NET Core MVC 앱에서 데이터 모델 변경 관리를 위해 EF Core 마이그레이션 기능을 사용하는 것을 시작합니다.
 ms.author: riande
 ms.date: 07/22/2019
 uid: data/ef-rp/migrations
-ms.openlocfilehash: efcf62d56a7b4cee4780d5f0475b4ef363fe1897
-ms.sourcegitcommit: d34b2627a69bc8940b76a949de830335db9701d3
+ms.openlocfilehash: e6f44a32a473f8f3bacfa4d9608deba2f879b6b6
+ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71187079"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72259712"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---migrations---4-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 마이그레이션 - 4/8
 
@@ -140,7 +140,7 @@ Login failed for user 'user name'.
 
 솔루션은 명령 프롬프트에서 `dotnet ef database update`를 실행해야 할 수 있습니다.
 
-### <a name="additional-resources"></a>추가 리소스
+### <a name="additional-resources"></a>추가 자료
 
 * [EF Core CLI](/ef/core/miscellaneous/cli/dotnet).
 * [패키지 관리자 콘솔(Visual Studio)](/ef/core/miscellaneous/cli/powershell)
@@ -306,9 +306,9 @@ The login failed.
 Login failed for user 'user name'.
 ```
 
-해결 방법: `dotnet ef database update` 실행
+해결책: `dotnet ef database update`를 실행합니다.
 
-### <a name="additional-resources"></a>추가 리소스
+### <a name="additional-resources"></a>추가 자료
 
 * [이 자습서의 YouTube 버전](https://www.youtube.com/watch?v=OWSUuMLKTJo)
 * [.NET Core CLI](/ef/core/miscellaneous/cli/dotnet)

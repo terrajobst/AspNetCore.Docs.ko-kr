@@ -1,18 +1,18 @@
 ---
 title: '자습서: 상속 구현 - ASP.NET MVC 및 EF Core 사용'
 description: 이 자습서에서는 ASP.NET Core 애플리케이션에서 Entity Framework Core를 사용하여 데이터 모델에서 상속을 구현하는 방법을 보여 줍니다.
-author: tdykstra
+author: rick-anderson
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/inheritance
-ms.openlocfilehash: 8e092ac47b2fd5fb6f3a0524bf1c559b7c3935c4
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: c10df60a43f5d59f3ce13afd38aad42b88c80516
+ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71080433"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72259398"
 ---
 # <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>자습서: 상속 구현 - ASP.NET MVC 및 EF Core 사용
 

@@ -1,18 +1,18 @@
 ---
 title: '자습서: CRUD 기능 구현 - ASP.NET MVC 및 EF Core 사용'
 description: 이 자습서에서는 MVC 스캐폴딩이 컨트롤러 및 보기에서 자동으로 만드는 CRUD(만들기, 읽기, 업데이트, 삭제) 코드를 검토하고 사용자 지정합니다.
-author: tdykstra
+author: rick-anderson
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2019
 ms.topic: tutorial
 uid: data/ef-mvc/crud
-ms.openlocfilehash: 843ac3523f3ab4bd43f8970ff8e8e2f997fec4d2
-ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
+ms.openlocfilehash: f0c5bcff4c4b0808f9b4703e1429c3a6d1a7a2d7
+ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69975071"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72259726"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>자습서: CRUD 기능 구현 - ASP.NET MVC 및 EF Core 사용
 

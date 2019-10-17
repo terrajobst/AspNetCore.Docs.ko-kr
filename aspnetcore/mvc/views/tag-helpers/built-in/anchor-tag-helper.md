@@ -4,14 +4,14 @@ author: pkellner
 description: ASP.NET Core 앵커 태그 도우미 특성 및 HTML 앵커 태그의 동작을 확장할 때 각 특성이 담당하는 역할을 확인합니다.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 04/18/2019
+ms.date: 10/13/2019
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: 44fc4ff6334e33630974181021aa1a6880a89917
-ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
+ms.openlocfilehash: 3ff8a52361b4911a5bb3163a8ea6ae90e504e4ef
+ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/12/2019
-ms.locfileid: "67856218"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72333944"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>ASP.NET Core의 앵커 태그 도우미
 
@@ -47,7 +47,7 @@ ms.locfileid: "67856218"
 <a href="/Home">All Speakers</a>
 ```
 
-## <a name="asp-action"></a>asp-action
+### <a name="asp-action"></a>asp-action
 
 [asp-action](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Action*) 특성값은 생성되는 `href` 특성에 포함될 컨트롤러 액션의 이름을 나타냅니다. 다음 태그는 생성된 `href` 특성값을 스피커 평가 페이지로 설정합니다.
 
@@ -135,7 +135,7 @@ ms.locfileid: "67856218"
 
 `asp-route` 와 `asp-controller` 또는 `asp-action` 을 동시에 지정하면 기대하는 것과 다른 경로가 생성될 수 있습니다. 경로 충돌을 방지하려면 `asp-route`를 `asp-controller` 및 `asp-action` 특성과 함께 사용하지 않아야 합니다.
 
-## <a name="asp-all-route-data"></a>asp-all-route-data
+### <a name="asp-all-route-data"></a>asp-all-route-data
 
 [asp-all-route-data](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) 특성은 키-값 쌍 사전을 만들 수 있도록 지원해줍니다. 키는 매개 변수 이름이고, 값은 매개 변수값입니다.
 
@@ -173,15 +173,15 @@ ms.locfileid: "67856218"
 
 [asp-area](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Area*) 특성은 적절한 경로를 설정하기 위해 사용되는 영역 이름을 설정합니다. 다음 예제에서는 `asp-area` 특성으로 인해 경로가 다시 매핑되는 방식을 보여 줍니다.
 
-### <a name="usage-in-razor-pages"></a>Razor Pages에서 사용
+#### <a name="usage-in-razor-pages"></a>Razor Pages에서 사용
 
 Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 
-다음 디렉터리 계층 구조를 고려합니다.
+다음 디렉터리 계층 구조를 고려해보세요.
 
 * **{Project name}**
   * **wwwroot**
-  * **Areas**
+  * **영역**
     * **세션**
       * **페이지**
         * *\_ViewStart.cshtml*
@@ -207,13 +207,13 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 >
 >   [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_AllowAreas)]
 
-### <a name="usage-in-mvc"></a>MVC에서의 사용법
+#### <a name="usage-in-mvc"></a>MVC에서의 사용법
 
-다음 디렉터리 계층 구조를 고려합니다.
+다음 디렉터리 계층 구조를 고려해보세요.
 
 * **{Project name}**
   * **wwwroot**
-  * **Areas**
+  * **영역**
     * **Blogs**
       * **Controllers**
         * *HomeController.cs*
