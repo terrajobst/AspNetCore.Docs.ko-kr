@@ -1,56 +1,56 @@
 ---
 title: ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 마이그레이션 - 4/8
-author: tdykstra
+author: rick-anderson
 description: 이 자습서에서는 ASP.NET Core MVC 앱에서 데이터 모델 변경 관리를 위해 EF Core 마이그레이션 기능을 사용하는 것을 시작합니다.
 ms.author: riande
 ms.date: 07/22/2019
 uid: data/ef-rp/migrations
-ms.openlocfilehash: efcf62d56a7b4cee4780d5f0475b4ef363fe1897
-ms.sourcegitcommit: d34b2627a69bc8940b76a949de830335db9701d3
+ms.openlocfilehash: e6f44a32a473f8f3bacfa4d9608deba2f879b6b6
+ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71187079"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72259712"
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---migrations---4-of-8"></a><span data-ttu-id="ffed8-103">ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 마이그레이션 - 4/8</span><span class="sxs-lookup"><span data-stu-id="ffed8-103">Razor Pages with EF Core in ASP.NET Core - Migrations - 4 of 8</span></span>
+# <a name="razor-pages-with-ef-core-in-aspnet-core---migrations---4-of-8"></a><span data-ttu-id="9b0a7-103">ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 마이그레이션 - 4/8</span><span class="sxs-lookup"><span data-stu-id="9b0a7-103">Razor Pages with EF Core in ASP.NET Core - Migrations - 4 of 8</span></span>
 
-<span data-ttu-id="ffed8-104">작성자: [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="ffed8-104">By [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog), and [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+<span data-ttu-id="9b0a7-104">작성자: [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="9b0a7-104">By [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog), and [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
 [!INCLUDE [about the series](~/includes/RP-EF/intro.md)]
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="ffed8-105">이 자습서에서는 데이터 모델 변경 관리를 위한 EF Core 마이그레이션 기능을 도입합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-105">This tutorial introduces the EF Core migrations feature for managing data model changes.</span></span>
+<span data-ttu-id="9b0a7-105">이 자습서에서는 데이터 모델 변경 관리를 위한 EF Core 마이그레이션 기능을 도입합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-105">This tutorial introduces the EF Core migrations feature for managing data model changes.</span></span>
 
-<span data-ttu-id="ffed8-106">새 앱이 개발되면 데이터 모델이 자주 변경됩니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-106">When a new app is developed, the data model changes frequently.</span></span> <span data-ttu-id="ffed8-107">모델이 변경될 때마다 모델이 데이터베이스와 동기화 해제됩니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-107">Each time the model changes, the model gets out of sync with the database.</span></span> <span data-ttu-id="ffed8-108">이 자습서 시리즈는 존재하지 않는 경우 데이터베이스를 만들도록 Entity Framework를 구성하여 시작되었습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-108">This tutorial series started by configuring the Entity Framework to create the database if it doesn't exist.</span></span> <span data-ttu-id="ffed8-109">데이터 모델이 변경될 때마다 데이터베이스를 삭제해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-109">Each time the data model changes, you have to drop the database.</span></span> <span data-ttu-id="ffed8-110">다음에 앱이 실행되면 `EnsureCreated`가 호출되어 새 데이터 모델과 일치하도록 데이터베이스를 다시 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-110">The next time the app runs, the call to `EnsureCreated` re-creates the database to match the new data model.</span></span> <span data-ttu-id="ffed8-111">그런 다음, `DbInitializer` 클래스가 실행되어 새 데이터베이스를 시드합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-111">The `DbInitializer` class then runs to seed the new database.</span></span>
+<span data-ttu-id="9b0a7-106">새 앱이 개발되면 데이터 모델이 자주 변경됩니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-106">When a new app is developed, the data model changes frequently.</span></span> <span data-ttu-id="9b0a7-107">모델이 변경될 때마다 모델이 데이터베이스와 동기화 해제됩니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-107">Each time the model changes, the model gets out of sync with the database.</span></span> <span data-ttu-id="9b0a7-108">이 자습서 시리즈는 존재하지 않는 경우 데이터베이스를 만들도록 Entity Framework를 구성하여 시작되었습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-108">This tutorial series started by configuring the Entity Framework to create the database if it doesn't exist.</span></span> <span data-ttu-id="9b0a7-109">데이터 모델이 변경될 때마다 데이터베이스를 삭제해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-109">Each time the data model changes, you have to drop the database.</span></span> <span data-ttu-id="9b0a7-110">다음에 앱이 실행되면 `EnsureCreated`가 호출되어 새 데이터 모델과 일치하도록 데이터베이스를 다시 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-110">The next time the app runs, the call to `EnsureCreated` re-creates the database to match the new data model.</span></span> <span data-ttu-id="9b0a7-111">그런 다음, `DbInitializer` 클래스가 실행되어 새 데이터베이스를 시드합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-111">The `DbInitializer` class then runs to seed the new database.</span></span>
 
-<span data-ttu-id="ffed8-112">데이터베이스를 데이터 모델과 동기화된 상태로 유지하는 이 접근 방식은 앱을 프로덕션 환경에 배포할 때까지 잘 작동합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-112">This approach to keeping the database in sync with the data model works well until you deploy the app to production.</span></span> <span data-ttu-id="ffed8-113">앱이 프로덕션 환경에서 실행 중인 경우 일반적으로 유지 관리해야 하는 데이터를 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-113">When the app is running in production, it's usually storing data that needs to be maintained.</span></span> <span data-ttu-id="ffed8-114">앱은 변경(예: 새 열 추가)될 때마다 테스트 데이터베이스로 시작될 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-114">The app can't start with a test database each time a change is made (such as adding a new column).</span></span> <span data-ttu-id="ffed8-115">EF Core 마이그레이션 기능은 EF Core가 새 데이터베이스를 만드는 대신 데이터베이스 스키마를 업데이트하도록 설정하여 이 문제를 해결합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-115">The EF Core Migrations feature solves this problem by enabling EF Core to update the database schema instead of creating a new database.</span></span>
+<span data-ttu-id="9b0a7-112">데이터베이스를 데이터 모델과 동기화된 상태로 유지하는 이 접근 방식은 앱을 프로덕션 환경에 배포할 때까지 잘 작동합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-112">This approach to keeping the database in sync with the data model works well until you deploy the app to production.</span></span> <span data-ttu-id="9b0a7-113">앱이 프로덕션 환경에서 실행 중인 경우 일반적으로 유지 관리해야 하는 데이터를 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-113">When the app is running in production, it's usually storing data that needs to be maintained.</span></span> <span data-ttu-id="9b0a7-114">앱은 변경(예: 새 열 추가)될 때마다 테스트 데이터베이스로 시작될 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-114">The app can't start with a test database each time a change is made (such as adding a new column).</span></span> <span data-ttu-id="9b0a7-115">EF Core 마이그레이션 기능은 EF Core가 새 데이터베이스를 만드는 대신 데이터베이스 스키마를 업데이트하도록 설정하여 이 문제를 해결합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-115">The EF Core Migrations feature solves this problem by enabling EF Core to update the database schema instead of creating a new database.</span></span>
 
-<span data-ttu-id="ffed8-116">데이터 모델이 변경될 때 데이터베이스를 삭제하고 다시 작성하는 대신 마이그레이션은 스키마를 업데이트하고 기존 데이터를 유지합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-116">Rather than dropping and recreating the database when the data model changes, migrations updates the schema and retains existing data.</span></span>
+<span data-ttu-id="9b0a7-116">데이터 모델이 변경될 때 데이터베이스를 삭제하고 다시 작성하는 대신 마이그레이션은 스키마를 업데이트하고 기존 데이터를 유지합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-116">Rather than dropping and recreating the database when the data model changes, migrations updates the schema and retains existing data.</span></span>
 
 [!INCLUDE[](~/includes/sqlite-warn.md)]
 
-## <a name="drop-the-database"></a><span data-ttu-id="ffed8-117">데이터베이스 삭제</span><span class="sxs-lookup"><span data-stu-id="ffed8-117">Drop the database</span></span>
+## <a name="drop-the-database"></a><span data-ttu-id="9b0a7-117">데이터베이스 삭제</span><span class="sxs-lookup"><span data-stu-id="9b0a7-117">Drop the database</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="ffed8-118">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="ffed8-118">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="9b0a7-118">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9b0a7-118">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="ffed8-119">SSOX(**SQL Server 개체 탐색기**)를 사용하여 데이터베이스를 삭제하거나, PMC(**패키지 관리자 콘솔**)에서 다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-119">Use **SQL Server Object Explorer** (SSOX) to delete the database, or run the following command in the **Package Manager Console** (PMC):</span></span>
+<span data-ttu-id="9b0a7-119">SSOX(**SQL Server 개체 탐색기**)를 사용하여 데이터베이스를 삭제하거나, PMC(**패키지 관리자 콘솔**)에서 다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-119">Use **SQL Server Object Explorer** (SSOX) to delete the database, or run the following command in the **Package Manager Console** (PMC):</span></span>
 
 ```powershell
 Drop-Database
 ```
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="ffed8-120">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="ffed8-120">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="9b0a7-120">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="9b0a7-120">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-* <span data-ttu-id="ffed8-121">명령 프롬프트에서 다음 명령을 실행하여 EF CLI 도구를 설치합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-121">Run the following command at a command prompt to install the EF CLI tools:</span></span>
+* <span data-ttu-id="9b0a7-121">명령 프롬프트에서 다음 명령을 실행하여 EF CLI 도구를 설치합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-121">Run the following command at a command prompt to install the EF CLI tools:</span></span>
 
   ```dotnetcli
   dotnet tool install --global dotnet-ef
   ```
 
-* <span data-ttu-id="ffed8-122">명령 프롬프트에서 프로젝트 폴더로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-122">In the command prompt, navigate to the project folder.</span></span> <span data-ttu-id="ffed8-123">프로젝트 폴더에는 *ContosoUniversity.csproj* 파일이 포함되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-123">The project folder contains the *ContosoUniversity.csproj* file.</span></span>
+* <span data-ttu-id="9b0a7-122">명령 프롬프트에서 프로젝트 폴더로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-122">In the command prompt, navigate to the project folder.</span></span> <span data-ttu-id="9b0a7-123">프로젝트 폴더에는 *ContosoUniversity.csproj* 파일이 포함되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-123">The project folder contains the *ContosoUniversity.csproj* file.</span></span>
 
-* <span data-ttu-id="ffed8-124">*CU.db* 파일을 삭제하거나 다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-124">Delete the *CU.db* file, or run the following command:</span></span>
+* <span data-ttu-id="9b0a7-124">*CU.db* 파일을 삭제하거나 다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-124">Delete the *CU.db* file, or run the following command:</span></span>
 
   ```dotnetcli
   dotnet ef database drop --force
@@ -58,20 +58,20 @@ Drop-Database
 
 ---
 
-## <a name="create-an-initial-migration"></a><span data-ttu-id="ffed8-125">초기 마이그레이션 만들기</span><span class="sxs-lookup"><span data-stu-id="ffed8-125">Create an initial migration</span></span>
+## <a name="create-an-initial-migration"></a><span data-ttu-id="9b0a7-125">초기 마이그레이션 만들기</span><span class="sxs-lookup"><span data-stu-id="9b0a7-125">Create an initial migration</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="ffed8-126">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="ffed8-126">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="9b0a7-126">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9b0a7-126">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="ffed8-127">PMC에서 다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-127">Run the following commands in the PMC:</span></span>
+<span data-ttu-id="9b0a7-127">PMC에서 다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-127">Run the following commands in the PMC:</span></span>
 
 ```powershell
 Add-Migration InitialCreate
 Update-Database
 ```
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="ffed8-128">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="ffed8-128">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="9b0a7-128">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="9b0a7-128">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-<span data-ttu-id="ffed8-129">명령 프롬프트가 프로젝트 폴더에 있는지 확인하고 다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-129">Make sure the command prompt is in the project folder, and run the following commands:</span></span>
+<span data-ttu-id="9b0a7-129">명령 프롬프트가 프로젝트 폴더에 있는지 확인하고 다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-129">Make sure the command prompt is in the project folder, and run the following commands:</span></span>
 
 ```dotnetcli
 dotnet ef migrations add InitialCreate
@@ -80,57 +80,57 @@ dotnet ef database update
 
 ---
 
-## <a name="up-and-down-methods"></a><span data-ttu-id="ffed8-130">Up 및 Down 메서드</span><span class="sxs-lookup"><span data-stu-id="ffed8-130">Up and Down methods</span></span>
+## <a name="up-and-down-methods"></a><span data-ttu-id="9b0a7-130">Up 및 Down 메서드</span><span class="sxs-lookup"><span data-stu-id="9b0a7-130">Up and Down methods</span></span>
 
-<span data-ttu-id="ffed8-131">EF Core `migrations add` 명령은 데이터베이스를 만드는 코드를 생성했습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-131">The EF Core `migrations add` command generated code to create the database.</span></span> <span data-ttu-id="ffed8-132">이 마이그레이션 코드는 *마이그레이션\<timestamp>_InitialCreate.cs* 파일에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-132">This migrations code is in the *Migrations\<timestamp>_InitialCreate.cs* file.</span></span> <span data-ttu-id="ffed8-133">`InitialCreate` 클래스의 `Up` 메서드는 데이터 모델 엔터티 집합에 해당하는 데이터베이스 테이블을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-133">The `Up` method of the `InitialCreate` class creates the database tables that correspond to the data model entity sets.</span></span> <span data-ttu-id="ffed8-134">`Down` 메서드는 다음 예제처럼 테이블을 삭제합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-134">The `Down` method deletes them, as shown in the following example:</span></span>
+<span data-ttu-id="9b0a7-131">EF Core `migrations add` 명령은 데이터베이스를 만드는 코드를 생성했습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-131">The EF Core `migrations add` command generated code to create the database.</span></span> <span data-ttu-id="9b0a7-132">이 마이그레이션 코드는 *마이그레이션\<timestamp>_InitialCreate.cs* 파일에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-132">This migrations code is in the *Migrations\<timestamp>_InitialCreate.cs* file.</span></span> <span data-ttu-id="9b0a7-133">`InitialCreate` 클래스의 `Up` 메서드는 데이터 모델 엔터티 집합에 해당하는 데이터베이스 테이블을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-133">The `Up` method of the `InitialCreate` class creates the database tables that correspond to the data model entity sets.</span></span> <span data-ttu-id="9b0a7-134">`Down` 메서드는 다음 예제처럼 테이블을 삭제합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-134">The `Down` method deletes them, as shown in the following example:</span></span>
 
 [!code-csharp[](intro/samples/cu30/Migrations/20190731193522_InitialCreate.cs)]
 
-<span data-ttu-id="ffed8-135">위의 코드는 초기 마이그레이션에 대한 코드입니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-135">The preceding code is for the initial migration.</span></span> <span data-ttu-id="ffed8-136">코드:</span><span class="sxs-lookup"><span data-stu-id="ffed8-136">The code:</span></span>
+<span data-ttu-id="9b0a7-135">위의 코드는 초기 마이그레이션에 대한 코드입니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-135">The preceding code is for the initial migration.</span></span> <span data-ttu-id="9b0a7-136">코드:</span><span class="sxs-lookup"><span data-stu-id="9b0a7-136">The code:</span></span>
 
-* <span data-ttu-id="ffed8-137">`migrations add InitialCreate` 명령에서 생성되었습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-137">Was generated by the `migrations add InitialCreate` command.</span></span> 
-* <span data-ttu-id="ffed8-138">`database update` 명령에서 실행됩니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-138">Is executed by the `database update` command.</span></span>
-* <span data-ttu-id="ffed8-139">데이터베이스 컨텍스트 클래스에 지정된 데이터 모델의 데이터베이스를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-139">Creates a database for the data model specified by the database context class.</span></span>
+* <span data-ttu-id="9b0a7-137">`migrations add InitialCreate` 명령에서 생성되었습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-137">Was generated by the `migrations add InitialCreate` command.</span></span> 
+* <span data-ttu-id="9b0a7-138">`database update` 명령에서 실행됩니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-138">Is executed by the `database update` command.</span></span>
+* <span data-ttu-id="9b0a7-139">데이터베이스 컨텍스트 클래스에 지정된 데이터 모델의 데이터베이스를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-139">Creates a database for the data model specified by the database context class.</span></span>
 
-<span data-ttu-id="ffed8-140">파일 이름에는 마이그레이션 이름 매개 변수(이 예제에서 "InitialCreate")가 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-140">The migration name parameter ("InitialCreate" in the example) is used for the file name.</span></span> <span data-ttu-id="ffed8-141">마이그레이션 이름은 임의의 유효한 파일 이름이 될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-141">The migration name can be any valid file name.</span></span> <span data-ttu-id="ffed8-142">마이그레이션에서 수행 중인 작업을 요약한 단어 또는 구를 선택하는 것이 가장 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-142">It's best to choose a word or phrase that summarizes what is being done in the migration.</span></span> <span data-ttu-id="ffed8-143">예를 들어 부서 테이블을 추가한 마이그레이션은 "AddDepartmentTable"이라고 할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-143">For example, a migration that added a department table might be called "AddDepartmentTable."</span></span>
+<span data-ttu-id="9b0a7-140">파일 이름에는 마이그레이션 이름 매개 변수(이 예제에서 "InitialCreate")가 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-140">The migration name parameter ("InitialCreate" in the example) is used for the file name.</span></span> <span data-ttu-id="9b0a7-141">마이그레이션 이름은 임의의 유효한 파일 이름이 될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-141">The migration name can be any valid file name.</span></span> <span data-ttu-id="9b0a7-142">마이그레이션에서 수행 중인 작업을 요약한 단어 또는 구를 선택하는 것이 가장 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-142">It's best to choose a word or phrase that summarizes what is being done in the migration.</span></span> <span data-ttu-id="9b0a7-143">예를 들어 부서 테이블을 추가한 마이그레이션은 "AddDepartmentTable"이라고 할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-143">For example, a migration that added a department table might be called "AddDepartmentTable."</span></span>
 
-## <a name="the-migrations-history-table"></a><span data-ttu-id="ffed8-144">마이그레이션 기록 테이블</span><span class="sxs-lookup"><span data-stu-id="ffed8-144">The migrations history table</span></span>
+## <a name="the-migrations-history-table"></a><span data-ttu-id="9b0a7-144">마이그레이션 기록 테이블</span><span class="sxs-lookup"><span data-stu-id="9b0a7-144">The migrations history table</span></span>
 
-* <span data-ttu-id="ffed8-145">SSOX 또는 SQLite 도구를 사용하여 데이터베이스를 검사합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-145">Use SSOX or your SQLite tool to inspect the database.</span></span>
-* <span data-ttu-id="ffed8-146">`__EFMigrationsHistory` 테이블이 추가된 것을 볼 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-146">Notice the addition of an `__EFMigrationsHistory` table.</span></span> <span data-ttu-id="ffed8-147">`__EFMigrationsHistory` 테이블은 데이터베이스에 적용된 마이그레이션을 추적합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-147">The `__EFMigrationsHistory` table keeps track of which migrations have been applied to the database.</span></span>
-* <span data-ttu-id="ffed8-148">`__EFMigrationsHistory` 테이블의 데이터를 봅니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-148">View the data in the `__EFMigrationsHistory` table.</span></span> <span data-ttu-id="ffed8-149">첫 번째 마이그레이션에 대해 한 행을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-149">It shows one row for the first migration.</span></span>
+* <span data-ttu-id="9b0a7-145">SSOX 또는 SQLite 도구를 사용하여 데이터베이스를 검사합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-145">Use SSOX or your SQLite tool to inspect the database.</span></span>
+* <span data-ttu-id="9b0a7-146">`__EFMigrationsHistory` 테이블이 추가된 것을 볼 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-146">Notice the addition of an `__EFMigrationsHistory` table.</span></span> <span data-ttu-id="9b0a7-147">`__EFMigrationsHistory` 테이블은 데이터베이스에 적용된 마이그레이션을 추적합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-147">The `__EFMigrationsHistory` table keeps track of which migrations have been applied to the database.</span></span>
+* <span data-ttu-id="9b0a7-148">`__EFMigrationsHistory` 테이블의 데이터를 봅니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-148">View the data in the `__EFMigrationsHistory` table.</span></span> <span data-ttu-id="9b0a7-149">첫 번째 마이그레이션에 대해 한 행을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-149">It shows one row for the first migration.</span></span>
 
-## <a name="the-data-model-snapshot"></a><span data-ttu-id="ffed8-150">데이터 모델 스냅샷</span><span class="sxs-lookup"><span data-stu-id="ffed8-150">The data model snapshot</span></span>
+## <a name="the-data-model-snapshot"></a><span data-ttu-id="9b0a7-150">데이터 모델 스냅샷</span><span class="sxs-lookup"><span data-stu-id="9b0a7-150">The data model snapshot</span></span>
 
-<span data-ttu-id="ffed8-151">마이그레이션에서는 현재 데이터 모델의 ‘스냅샷’을 *Migrations/SchoolContextModelSnapshot.cs*에 만듭니다. </span><span class="sxs-lookup"><span data-stu-id="ffed8-151">Migrations creates a *snapshot* of the current data model in *Migrations/SchoolContextModelSnapshot.cs*.</span></span> <span data-ttu-id="ffed8-152">마이그레이션을 추가하면 EF가 현재 데이터 모델을 스냅샷 파일과 비교하여 변경 내용을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-152">When you add a migration, EF determines what changed by comparing the current data model to the snapshot file.</span></span>
+<span data-ttu-id="9b0a7-151">마이그레이션에서는 현재 데이터 모델의 ‘스냅샷’을 *Migrations/SchoolContextModelSnapshot.cs*에 만듭니다. </span><span class="sxs-lookup"><span data-stu-id="9b0a7-151">Migrations creates a *snapshot* of the current data model in *Migrations/SchoolContextModelSnapshot.cs*.</span></span> <span data-ttu-id="9b0a7-152">마이그레이션을 추가하면 EF가 현재 데이터 모델을 스냅샷 파일과 비교하여 변경 내용을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-152">When you add a migration, EF determines what changed by comparing the current data model to the snapshot file.</span></span>
 
-<span data-ttu-id="ffed8-153">스냅샷 파일이 데이터 모델의 상태를 추적하므로 `<timestamp>_<migrationname>.cs` 파일을 삭제하여 마이그레이션을 삭제할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-153">Because the snapshot file tracks the state of the data model, you can't delete a migration by deleting the `<timestamp>_<migrationname>.cs` file.</span></span> <span data-ttu-id="ffed8-154">가장 최근 마이그레이션을 백업하려면 `migrations remove` 명령을 사용해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-154">To back out the most recent migration, you have to use the `migrations remove` command.</span></span> <span data-ttu-id="ffed8-155">이 명령은 마이그레이션을 삭제하고 스냅샷이 올바르게 다시 설정되도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-155">That command deletes the migration and ensures the snapshot is correctly reset.</span></span> <span data-ttu-id="ffed8-156">자세한 내용은 [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="ffed8-156">For more information, see [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).</span></span>
+<span data-ttu-id="9b0a7-153">스냅샷 파일이 데이터 모델의 상태를 추적하므로 `<timestamp>_<migrationname>.cs` 파일을 삭제하여 마이그레이션을 삭제할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-153">Because the snapshot file tracks the state of the data model, you can't delete a migration by deleting the `<timestamp>_<migrationname>.cs` file.</span></span> <span data-ttu-id="9b0a7-154">가장 최근 마이그레이션을 백업하려면 `migrations remove` 명령을 사용해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-154">To back out the most recent migration, you have to use the `migrations remove` command.</span></span> <span data-ttu-id="9b0a7-155">이 명령은 마이그레이션을 삭제하고 스냅샷이 올바르게 다시 설정되도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-155">That command deletes the migration and ensures the snapshot is correctly reset.</span></span> <span data-ttu-id="9b0a7-156">자세한 내용은 [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-156">For more information, see [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).</span></span>
 
-## <a name="remove-ensurecreated"></a><span data-ttu-id="ffed8-157">EnsureCreated 제거</span><span class="sxs-lookup"><span data-stu-id="ffed8-157">Remove EnsureCreated</span></span>
+## <a name="remove-ensurecreated"></a><span data-ttu-id="9b0a7-157">EnsureCreated 제거</span><span class="sxs-lookup"><span data-stu-id="9b0a7-157">Remove EnsureCreated</span></span>
 
-<span data-ttu-id="ffed8-158">이 자습서 시리즈는 `EnsureCreated`를 사용하여 시작되었습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-158">This tutorial series started by using `EnsureCreated`.</span></span> <span data-ttu-id="ffed8-159">`EnsureCreated`는 마이그레이션 기록 테이블을 만들지 않으므로 마이그레이션과 함께 사용할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-159">`EnsureCreated` doesn't create a migrations history table and so can't be used with migrations.</span></span> <span data-ttu-id="ffed8-160">데이터베이스를 삭제하고 자주 다시 생성하는 테스트 또는 신속한 프로토타입 만들기를 위해 디자인되었습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-160">It's designed for testing or rapid prototyping where the database is dropped and re-created frequently.</span></span>
+<span data-ttu-id="9b0a7-158">이 자습서 시리즈는 `EnsureCreated`를 사용하여 시작되었습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-158">This tutorial series started by using `EnsureCreated`.</span></span> <span data-ttu-id="9b0a7-159">`EnsureCreated`는 마이그레이션 기록 테이블을 만들지 않으므로 마이그레이션과 함께 사용할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-159">`EnsureCreated` doesn't create a migrations history table and so can't be used with migrations.</span></span> <span data-ttu-id="9b0a7-160">데이터베이스를 삭제하고 자주 다시 생성하는 테스트 또는 신속한 프로토타입 만들기를 위해 디자인되었습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-160">It's designed for testing or rapid prototyping where the database is dropped and re-created frequently.</span></span>
 
-<span data-ttu-id="ffed8-161">이 지점부터 자습서에서는 마이그레이션을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-161">From this point forward, the tutorials will use migrations.</span></span>
+<span data-ttu-id="9b0a7-161">이 지점부터 자습서에서는 마이그레이션을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-161">From this point forward, the tutorials will use migrations.</span></span>
 
-<span data-ttu-id="ffed8-162">*Data/DBInitializer.cs*에서 다음 줄을 주석으로 처리합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-162">In *Data/DBInitializer.cs*, comment out the following line:</span></span>
+<span data-ttu-id="9b0a7-162">*Data/DBInitializer.cs*에서 다음 줄을 주석으로 처리합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-162">In *Data/DBInitializer.cs*, comment out the following line:</span></span>
 
 ```csharp
 context.Database.EnsureCreated();
 ```
-<span data-ttu-id="ffed8-163">앱을 실행하고 데이터베이스가 시드되는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-163">Run the app and verify that the database is seeded.</span></span>
+<span data-ttu-id="9b0a7-163">앱을 실행하고 데이터베이스가 시드되는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-163">Run the app and verify that the database is seeded.</span></span>
 
-## <a name="applying-migrations-in-production"></a><span data-ttu-id="ffed8-164">프로덕션 환경에서 마이그레이션 적용</span><span class="sxs-lookup"><span data-stu-id="ffed8-164">Applying migrations in production</span></span>
+## <a name="applying-migrations-in-production"></a><span data-ttu-id="9b0a7-164">프로덕션 환경에서 마이그레이션 적용</span><span class="sxs-lookup"><span data-stu-id="9b0a7-164">Applying migrations in production</span></span>
 
-<span data-ttu-id="ffed8-165">프로덕션 앱은 애플리케이션 시작 시 [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_)를 호출하지 **않는 것이** 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-165">We recommend that production apps **not** call [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) at application startup.</span></span> <span data-ttu-id="ffed8-166">`Migrate`는 서버 팜에 배포된 앱에서 호출하면 안 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-166">`Migrate` shouldn't be called from an app that is deployed to a server farm.</span></span> <span data-ttu-id="ffed8-167">앱이 여러 서버 인스턴스로 확장되는 경우 데이터베이스 스키마 업데이트가 여러 서버에서 발생하거나 읽기/쓰기 권한과 충돌하지 않도록 하는 것이 어렵습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-167">If the app is scaled out to multiple server instances, it's hard to ensure database schema updates don't happen from multiple servers or conflict with read/write access.</span></span>
+<span data-ttu-id="9b0a7-165">프로덕션 앱은 애플리케이션 시작 시 [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_)를 호출하지 **않는 것이** 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-165">We recommend that production apps **not** call [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) at application startup.</span></span> <span data-ttu-id="9b0a7-166">`Migrate`는 서버 팜에 배포된 앱에서 호출하면 안 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-166">`Migrate` shouldn't be called from an app that is deployed to a server farm.</span></span> <span data-ttu-id="9b0a7-167">앱이 여러 서버 인스턴스로 확장되는 경우 데이터베이스 스키마 업데이트가 여러 서버에서 발생하거나 읽기/쓰기 권한과 충돌하지 않도록 하는 것이 어렵습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-167">If the app is scaled out to multiple server instances, it's hard to ensure database schema updates don't happen from multiple servers or conflict with read/write access.</span></span>
 
-<span data-ttu-id="ffed8-168">데이터베이스 마이그레이션은 배포의 일부로 제어된 방식으로 수행되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-168">Database migration should be done as part of deployment, and in a controlled way.</span></span> <span data-ttu-id="ffed8-169">프로덕션 데이터베이스 마이그레이션 방법은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-169">Production database migration approaches include:</span></span>
+<span data-ttu-id="9b0a7-168">데이터베이스 마이그레이션은 배포의 일부로 제어된 방식으로 수행되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-168">Database migration should be done as part of deployment, and in a controlled way.</span></span> <span data-ttu-id="9b0a7-169">프로덕션 데이터베이스 마이그레이션 방법은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-169">Production database migration approaches include:</span></span>
 
-* <span data-ttu-id="ffed8-170">마이그레이션을 사용하여 SQL 스크립트를 작성하고 배포 시 SQL 스크립트 사용</span><span class="sxs-lookup"><span data-stu-id="ffed8-170">Using migrations to create SQL scripts and using the SQL scripts in deployment.</span></span>
-* <span data-ttu-id="ffed8-171">제어된 환경에서 `dotnet ef database update` 실행</span><span class="sxs-lookup"><span data-stu-id="ffed8-171">Running `dotnet ef database update` from a controlled environment.</span></span>
+* <span data-ttu-id="9b0a7-170">마이그레이션을 사용하여 SQL 스크립트를 작성하고 배포 시 SQL 스크립트 사용</span><span class="sxs-lookup"><span data-stu-id="9b0a7-170">Using migrations to create SQL scripts and using the SQL scripts in deployment.</span></span>
+* <span data-ttu-id="9b0a7-171">제어된 환경에서 `dotnet ef database update` 실행</span><span class="sxs-lookup"><span data-stu-id="9b0a7-171">Running `dotnet ef database update` from a controlled environment.</span></span>
 
-## <a name="troubleshooting"></a><span data-ttu-id="ffed8-172">문제 해결</span><span class="sxs-lookup"><span data-stu-id="ffed8-172">Troubleshooting</span></span>
+## <a name="troubleshooting"></a><span data-ttu-id="9b0a7-172">문제 해결</span><span class="sxs-lookup"><span data-stu-id="9b0a7-172">Troubleshooting</span></span>
 
-<span data-ttu-id="ffed8-173">앱에서 SQL Server LocalDB를 사용하고 다음 예외를 표시하는 경우:</span><span class="sxs-lookup"><span data-stu-id="ffed8-173">If the app uses SQL Server LocalDB and displays the following exception:</span></span>
+<span data-ttu-id="9b0a7-173">앱에서 SQL Server LocalDB를 사용하고 다음 예외를 표시하는 경우:</span><span class="sxs-lookup"><span data-stu-id="9b0a7-173">If the app uses SQL Server LocalDB and displays the following exception:</span></span>
 
 ```text
 SqlException: Cannot open database "ContosoUniversity" requested by the login.
@@ -138,61 +138,61 @@ The login failed.
 Login failed for user 'user name'.
 ```
 
-<span data-ttu-id="ffed8-174">솔루션은 명령 프롬프트에서 `dotnet ef database update`를 실행해야 할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-174">The solution may be to run `dotnet ef database update` at a command prompt.</span></span>
+<span data-ttu-id="9b0a7-174">솔루션은 명령 프롬프트에서 `dotnet ef database update`를 실행해야 할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-174">The solution may be to run `dotnet ef database update` at a command prompt.</span></span>
 
-### <a name="additional-resources"></a><span data-ttu-id="ffed8-175">추가 리소스</span><span class="sxs-lookup"><span data-stu-id="ffed8-175">Additional resources</span></span>
+### <a name="additional-resources"></a><span data-ttu-id="9b0a7-175">추가 자료</span><span class="sxs-lookup"><span data-stu-id="9b0a7-175">Additional resources</span></span>
 
-* <span data-ttu-id="ffed8-176">[EF Core CLI](/ef/core/miscellaneous/cli/dotnet).</span><span class="sxs-lookup"><span data-stu-id="ffed8-176">[EF Core CLI](/ef/core/miscellaneous/cli/dotnet).</span></span>
-* [<span data-ttu-id="ffed8-177">패키지 관리자 콘솔(Visual Studio)</span><span class="sxs-lookup"><span data-stu-id="ffed8-177">Package Manager Console (Visual Studio)</span></span>](/ef/core/miscellaneous/cli/powershell)
+* <span data-ttu-id="9b0a7-176">[EF Core CLI](/ef/core/miscellaneous/cli/dotnet).</span><span class="sxs-lookup"><span data-stu-id="9b0a7-176">[EF Core CLI](/ef/core/miscellaneous/cli/dotnet).</span></span>
+* [<span data-ttu-id="9b0a7-177">패키지 관리자 콘솔(Visual Studio)</span><span class="sxs-lookup"><span data-stu-id="9b0a7-177">Package Manager Console (Visual Studio)</span></span>](/ef/core/miscellaneous/cli/powershell)
 
-## <a name="next-steps"></a><span data-ttu-id="ffed8-178">다음 단계</span><span class="sxs-lookup"><span data-stu-id="ffed8-178">Next steps</span></span>
+## <a name="next-steps"></a><span data-ttu-id="9b0a7-178">다음 단계</span><span class="sxs-lookup"><span data-stu-id="9b0a7-178">Next steps</span></span>
 
-<span data-ttu-id="ffed8-179">다음 자습서에서는 데이터 모델을 빌드하여 엔터티 속성 및 새 엔터티를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-179">The next tutorial builds out the data model, adding entity properties and new entities.</span></span>
+<span data-ttu-id="9b0a7-179">다음 자습서에서는 데이터 모델을 빌드하여 엔터티 속성 및 새 엔터티를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-179">The next tutorial builds out the data model, adding entity properties and new entities.</span></span>
 
 > [!div class="step-by-step"]
-> <span data-ttu-id="ffed8-180">[이전 자습서](xref:data/ef-rp/sort-filter-page)
-> [다음 자습서](xref:data/ef-rp/complex-data-model)</span><span class="sxs-lookup"><span data-stu-id="ffed8-180">[Previous tutorial](xref:data/ef-rp/sort-filter-page)
+> <span data-ttu-id="9b0a7-180">[이전 자습서](xref:data/ef-rp/sort-filter-page)
+> [다음 자습서](xref:data/ef-rp/complex-data-model)</span><span class="sxs-lookup"><span data-stu-id="9b0a7-180">[Previous tutorial](xref:data/ef-rp/sort-filter-page)
 [Next tutorial](xref:data/ef-rp/complex-data-model)</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="ffed8-181">이 자습서에서는 데이터 모델 변경 관리를 위한 EF Core 마이그레이션 기능이 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-181">In this tutorial, the EF Core migrations feature for managing data model changes is used.</span></span>
+<span data-ttu-id="9b0a7-181">이 자습서에서는 데이터 모델 변경 관리를 위한 EF Core 마이그레이션 기능이 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-181">In this tutorial, the EF Core migrations feature for managing data model changes is used.</span></span>
 
-<span data-ttu-id="ffed8-182">해결할 수 없는 문제가 발생한 경우 [완성된 앱](
-https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)을 다운로드합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-182">If you run into problems you can't solve, download the [completed app](
+<span data-ttu-id="9b0a7-182">해결할 수 없는 문제가 발생한 경우 [완성된 앱](
+https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)을 다운로드합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-182">If you run into problems you can't solve, download the [completed app](
 https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples).</span></span>
 
-<span data-ttu-id="ffed8-183">새 앱이 개발되면 데이터 모델이 자주 변경됩니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-183">When a new app is developed, the data model changes frequently.</span></span> <span data-ttu-id="ffed8-184">모델이 변경될 때마다 모델이 데이터베이스와 동기화 해제됩니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-184">Each time the model changes, the model gets out of sync with the database.</span></span> <span data-ttu-id="ffed8-185">이 자습서는 존재하지 않는 경우 데이터베이스를 만들도록 Entity Framework를 구성하여 시작되었습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-185">This tutorial started by configuring the Entity Framework to create the database if it doesn't exist.</span></span> <span data-ttu-id="ffed8-186">데이터 모델이 변경될 때마다 다음이 수행됩니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-186">Each time the data model changes:</span></span>
+<span data-ttu-id="9b0a7-183">새 앱이 개발되면 데이터 모델이 자주 변경됩니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-183">When a new app is developed, the data model changes frequently.</span></span> <span data-ttu-id="9b0a7-184">모델이 변경될 때마다 모델이 데이터베이스와 동기화 해제됩니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-184">Each time the model changes, the model gets out of sync with the database.</span></span> <span data-ttu-id="9b0a7-185">이 자습서는 존재하지 않는 경우 데이터베이스를 만들도록 Entity Framework를 구성하여 시작되었습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-185">This tutorial started by configuring the Entity Framework to create the database if it doesn't exist.</span></span> <span data-ttu-id="9b0a7-186">데이터 모델이 변경될 때마다 다음이 수행됩니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-186">Each time the data model changes:</span></span>
 
-* <span data-ttu-id="ffed8-187">DB가 삭제됩니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-187">The DB is dropped.</span></span>
-* <span data-ttu-id="ffed8-188">EF는 모델과 일치하는 새 항목을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-188">EF creates a new one that matches the model.</span></span>
-* <span data-ttu-id="ffed8-189">앱은 테스트 데이터로 DB를 시드합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-189">The app seeds the DB with test data.</span></span>
+* <span data-ttu-id="9b0a7-187">DB가 삭제됩니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-187">The DB is dropped.</span></span>
+* <span data-ttu-id="9b0a7-188">EF는 모델과 일치하는 새 항목을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-188">EF creates a new one that matches the model.</span></span>
+* <span data-ttu-id="9b0a7-189">앱은 테스트 데이터로 DB를 시드합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-189">The app seeds the DB with test data.</span></span>
 
-<span data-ttu-id="ffed8-190">DB를 데이터 모델과 동기화된 상태로 유지하는 이 접근 방식은 앱을 프로덕션 환경에 배포할 때까지 잘 작동합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-190">This approach to keeping the DB in sync with the data model works well until you deploy the app to production.</span></span> <span data-ttu-id="ffed8-191">앱이 프로덕션 환경에서 실행 중인 경우 일반적으로 유지 관리해야 하는 데이터를 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-191">When the app is running in production, it's usually storing data that needs to be maintained.</span></span> <span data-ttu-id="ffed8-192">앱은 변경(예: 새 열 추가)될 때마다 테스트 DB로 시작될 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-192">The app can't start with a test DB each time a change is made (such as adding a new column).</span></span> <span data-ttu-id="ffed8-193">EF Core 마이그레이션 기능은 EF Core에서 새 DB를 만드는 대신 DB 스키마를 업데이트하도록 하여 이 문제를 해결합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-193">The EF Core Migrations feature solves this problem by enabling EF Core to update the DB schema instead of creating a new DB.</span></span>
+<span data-ttu-id="9b0a7-190">DB를 데이터 모델과 동기화된 상태로 유지하는 이 접근 방식은 앱을 프로덕션 환경에 배포할 때까지 잘 작동합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-190">This approach to keeping the DB in sync with the data model works well until you deploy the app to production.</span></span> <span data-ttu-id="9b0a7-191">앱이 프로덕션 환경에서 실행 중인 경우 일반적으로 유지 관리해야 하는 데이터를 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-191">When the app is running in production, it's usually storing data that needs to be maintained.</span></span> <span data-ttu-id="9b0a7-192">앱은 변경(예: 새 열 추가)될 때마다 테스트 DB로 시작될 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-192">The app can't start with a test DB each time a change is made (such as adding a new column).</span></span> <span data-ttu-id="9b0a7-193">EF Core 마이그레이션 기능은 EF Core에서 새 DB를 만드는 대신 DB 스키마를 업데이트하도록 하여 이 문제를 해결합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-193">The EF Core Migrations feature solves this problem by enabling EF Core to update the DB schema instead of creating a new DB.</span></span>
 
-<span data-ttu-id="ffed8-194">데이터 모델이 변경될 때 DB를 삭제하고 다시 작성하는 대신 마이그레이션은 스키마를 업데이트하고 기존 데이터를 유지합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-194">Rather than dropping and recreating the DB when the data model changes, migrations updates the schema and retains existing data.</span></span>
+<span data-ttu-id="9b0a7-194">데이터 모델이 변경될 때 DB를 삭제하고 다시 작성하는 대신 마이그레이션은 스키마를 업데이트하고 기존 데이터를 유지합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-194">Rather than dropping and recreating the DB when the data model changes, migrations updates the schema and retains existing data.</span></span>
 
-## <a name="drop-the-database"></a><span data-ttu-id="ffed8-195">데이터베이스 삭제</span><span class="sxs-lookup"><span data-stu-id="ffed8-195">Drop the database</span></span>
+## <a name="drop-the-database"></a><span data-ttu-id="9b0a7-195">데이터베이스 삭제</span><span class="sxs-lookup"><span data-stu-id="9b0a7-195">Drop the database</span></span>
 
-<span data-ttu-id="ffed8-196">SSOX(**SQL Server 개체 탐색기**) 또는 `database drop` 명령을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-196">Use **SQL Server Object Explorer** (SSOX) or the `database drop` command:</span></span>
+<span data-ttu-id="9b0a7-196">SSOX(**SQL Server 개체 탐색기**) 또는 `database drop` 명령을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-196">Use **SQL Server Object Explorer** (SSOX) or the `database drop` command:</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="ffed8-197">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="ffed8-197">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="9b0a7-197">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9b0a7-197">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="ffed8-198">PMC(**패키지 관리자 콘솔**)에서 다음 명령을 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-198">In the **Package Manager Console** (PMC), run the following command:</span></span>
+<span data-ttu-id="9b0a7-198">PMC(**패키지 관리자 콘솔**)에서 다음 명령을 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-198">In the **Package Manager Console** (PMC), run the following command:</span></span>
 
 ```PMC
 Drop-Database
 ```
 
-<span data-ttu-id="ffed8-199">PMC에서 `Get-Help about_EntityFrameworkCore`를 실행하여 도움말 정보를 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-199">Run `Get-Help about_EntityFrameworkCore` from the PMC to get help information.</span></span>
+<span data-ttu-id="9b0a7-199">PMC에서 `Get-Help about_EntityFrameworkCore`를 실행하여 도움말 정보를 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-199">Run `Get-Help about_EntityFrameworkCore` from the PMC to get help information.</span></span>
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="ffed8-200">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="ffed8-200">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="9b0a7-200">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="9b0a7-200">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-<span data-ttu-id="ffed8-201">명령 창을 열고 프로젝트 폴더로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-201">Open a command window and navigate to the project folder.</span></span> <span data-ttu-id="ffed8-202">프로젝트 폴더에는 *Startup.cs* 파일이 포함되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-202">The project folder contains the *Startup.cs* file.</span></span>
+<span data-ttu-id="9b0a7-201">명령 창을 열고 프로젝트 폴더로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-201">Open a command window and navigate to the project folder.</span></span> <span data-ttu-id="9b0a7-202">프로젝트 폴더에는 *Startup.cs* 파일이 포함되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-202">The project folder contains the *Startup.cs* file.</span></span>
 
-<span data-ttu-id="ffed8-203">명령 창에서 다음을 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-203">Enter the following in the command window:</span></span>
+<span data-ttu-id="9b0a7-203">명령 창에서 다음을 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-203">Enter the following in the command window:</span></span>
 
  ```dotnetcli
  dotnet ef database drop
@@ -200,18 +200,18 @@ Drop-Database
 
 ---
 
-## <a name="create-an-initial-migration-and-update-the-db"></a><span data-ttu-id="ffed8-204">초기 마이그레이션 만들기 및 DB 업데이트</span><span class="sxs-lookup"><span data-stu-id="ffed8-204">Create an initial migration and update the DB</span></span>
+## <a name="create-an-initial-migration-and-update-the-db"></a><span data-ttu-id="9b0a7-204">초기 마이그레이션 만들기 및 DB 업데이트</span><span class="sxs-lookup"><span data-stu-id="9b0a7-204">Create an initial migration and update the DB</span></span>
 
-<span data-ttu-id="ffed8-205">프로젝트를 빌드하고 첫 번째 마이그레이션을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-205">Build the project and create the first migration.</span></span>
+<span data-ttu-id="9b0a7-205">프로젝트를 빌드하고 첫 번째 마이그레이션을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-205">Build the project and create the first migration.</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="ffed8-206">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="ffed8-206">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="9b0a7-206">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9b0a7-206">Visual Studio</span></span>](#tab/visual-studio)
 
 ```PMC
 Add-Migration InitialCreate
 Update-Database
 ```
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="ffed8-207">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="ffed8-207">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="9b0a7-207">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="9b0a7-207">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
 ```dotnetcli
 dotnet ef migrations add InitialCreate
@@ -220,88 +220,88 @@ dotnet ef database update
 
 ---
 
-### <a name="examine-the-up-and-down-methods"></a><span data-ttu-id="ffed8-208">Up 및 Down 메서드 검사</span><span class="sxs-lookup"><span data-stu-id="ffed8-208">Examine the Up and Down methods</span></span>
+### <a name="examine-the-up-and-down-methods"></a><span data-ttu-id="9b0a7-208">Up 및 Down 메서드 검사</span><span class="sxs-lookup"><span data-stu-id="9b0a7-208">Examine the Up and Down methods</span></span>
 
-<span data-ttu-id="ffed8-209">EF Core `migrations add` 명령은 DB를 생성하는 코드를 생성했습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-209">The EF Core `migrations add` command  generated code to create the DB.</span></span> <span data-ttu-id="ffed8-210">이 마이그레이션 코드는 *마이그레이션\<timestamp>_InitialCreate.cs* 파일에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-210">This migrations code is in the *Migrations\<timestamp>_InitialCreate.cs* file.</span></span> <span data-ttu-id="ffed8-211">`InitialCreate` 클래스dml `Up` 메서드는 데이터 모델 엔터티 집합에 해당하는 DB 테이블을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-211">The `Up` method of the `InitialCreate` class creates the DB tables that correspond to the data model entity sets.</span></span> <span data-ttu-id="ffed8-212">`Down` 메서드는 다음 예제처럼 테이블을 삭제합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-212">The `Down` method deletes them, as shown in the following example:</span></span>
+<span data-ttu-id="9b0a7-209">EF Core `migrations add` 명령은 DB를 생성하는 코드를 생성했습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-209">The EF Core `migrations add` command  generated code to create the DB.</span></span> <span data-ttu-id="9b0a7-210">이 마이그레이션 코드는 *마이그레이션\<timestamp>_InitialCreate.cs* 파일에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-210">This migrations code is in the *Migrations\<timestamp>_InitialCreate.cs* file.</span></span> <span data-ttu-id="9b0a7-211">`InitialCreate` 클래스dml `Up` 메서드는 데이터 모델 엔터티 집합에 해당하는 DB 테이블을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-211">The `Up` method of the `InitialCreate` class creates the DB tables that correspond to the data model entity sets.</span></span> <span data-ttu-id="9b0a7-212">`Down` 메서드는 다음 예제처럼 테이블을 삭제합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-212">The `Down` method deletes them, as shown in the following example:</span></span>
 
 [!code-csharp[](intro/samples/cu21/Migrations/20180626224812_InitialCreate.cs?range=7-24,77-88)]
 
-<span data-ttu-id="ffed8-213">마이그레이션에서는 마이그레이션을 위한 데이터 모델 변경을 구현하기 위해 `Up` 메서드를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-213">Migrations calls the `Up` method to implement the data model changes for a migration.</span></span> <span data-ttu-id="ffed8-214">업데이트를 롤백하는 명령을 입력하면 마이그레이션에서 `Down` 메서드를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-214">When you enter a command to roll back the update, migrations calls the `Down` method.</span></span>
+<span data-ttu-id="9b0a7-213">마이그레이션에서는 마이그레이션을 위한 데이터 모델 변경을 구현하기 위해 `Up` 메서드를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-213">Migrations calls the `Up` method to implement the data model changes for a migration.</span></span> <span data-ttu-id="9b0a7-214">업데이트를 롤백하는 명령을 입력하면 마이그레이션에서 `Down` 메서드를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-214">When you enter a command to roll back the update, migrations calls the `Down` method.</span></span>
 
-<span data-ttu-id="ffed8-215">위의 코드는 초기 마이그레이션에 대한 코드입니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-215">The preceding code is for the initial migration.</span></span> <span data-ttu-id="ffed8-216">이 코드는 `migrations add InitialCreate` 명령을 실행할 때 만들어집니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-216">That code was created when the `migrations add InitialCreate` command was run.</span></span> <span data-ttu-id="ffed8-217">파일 이름에는 마이그레이션 이름 매개 변수(이 예제에서 "InitialCreate")가 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-217">The migration name parameter ("InitialCreate" in the example) is used for the file name.</span></span> <span data-ttu-id="ffed8-218">마이그레이션 이름은 임의의 유효한 파일 이름이 될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-218">The migration name can be any valid file name.</span></span> <span data-ttu-id="ffed8-219">마이그레이션에서 수행 중인 작업을 요약한 단어 또는 구를 선택하는 것이 가장 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-219">It's best to choose a word or phrase that summarizes what is being done in the migration.</span></span> <span data-ttu-id="ffed8-220">예를 들어 부서 테이블을 추가한 마이그레이션은 "AddDepartmentTable"이라고 할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-220">For example, a migration that added a department table might be called "AddDepartmentTable."</span></span>
+<span data-ttu-id="9b0a7-215">위의 코드는 초기 마이그레이션에 대한 코드입니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-215">The preceding code is for the initial migration.</span></span> <span data-ttu-id="9b0a7-216">이 코드는 `migrations add InitialCreate` 명령을 실행할 때 만들어집니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-216">That code was created when the `migrations add InitialCreate` command was run.</span></span> <span data-ttu-id="9b0a7-217">파일 이름에는 마이그레이션 이름 매개 변수(이 예제에서 "InitialCreate")가 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-217">The migration name parameter ("InitialCreate" in the example) is used for the file name.</span></span> <span data-ttu-id="9b0a7-218">마이그레이션 이름은 임의의 유효한 파일 이름이 될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-218">The migration name can be any valid file name.</span></span> <span data-ttu-id="9b0a7-219">마이그레이션에서 수행 중인 작업을 요약한 단어 또는 구를 선택하는 것이 가장 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-219">It's best to choose a word or phrase that summarizes what is being done in the migration.</span></span> <span data-ttu-id="9b0a7-220">예를 들어 부서 테이블을 추가한 마이그레이션은 "AddDepartmentTable"이라고 할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-220">For example, a migration that added a department table might be called "AddDepartmentTable."</span></span>
 
-<span data-ttu-id="ffed8-221">초기 마이그레이션이 생성되었고 DB가 존재하는 경우:</span><span class="sxs-lookup"><span data-stu-id="ffed8-221">If the initial migration is created and the DB exists:</span></span>
+<span data-ttu-id="9b0a7-221">초기 마이그레이션이 생성되었고 DB가 존재하는 경우:</span><span class="sxs-lookup"><span data-stu-id="9b0a7-221">If the initial migration is created and the DB exists:</span></span>
 
-* <span data-ttu-id="ffed8-222">DB 만들기 코드가 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-222">The DB creation code is generated.</span></span>
-* <span data-ttu-id="ffed8-223">DB는 데이터 모델과 이미 일치하므로 DB 만들기 코드를 실행할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-223">The DB creation code doesn't need to run because the DB already matches the data model.</span></span> <span data-ttu-id="ffed8-224">DB 만들기 코드가 실행되면 DB가 데이터 모델과 이미 일치하므로 아무것도 변경되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-224">If the DB creation code is run, it doesn't make any changes because the DB already matches the data model.</span></span>
+* <span data-ttu-id="9b0a7-222">DB 만들기 코드가 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-222">The DB creation code is generated.</span></span>
+* <span data-ttu-id="9b0a7-223">DB는 데이터 모델과 이미 일치하므로 DB 만들기 코드를 실행할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-223">The DB creation code doesn't need to run because the DB already matches the data model.</span></span> <span data-ttu-id="9b0a7-224">DB 만들기 코드가 실행되면 DB가 데이터 모델과 이미 일치하므로 아무것도 변경되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-224">If the DB creation code is run, it doesn't make any changes because the DB already matches the data model.</span></span>
 
-<span data-ttu-id="ffed8-225">앱이 새 환경에 배포되면 DB 만들기 코드를 실행하여 DB를 만들어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-225">When the app is deployed to a new environment, the DB creation code must be run to create the DB.</span></span>
+<span data-ttu-id="9b0a7-225">앱이 새 환경에 배포되면 DB 만들기 코드를 실행하여 DB를 만들어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-225">When the app is deployed to a new environment, the DB creation code must be run to create the DB.</span></span>
 
-<span data-ttu-id="ffed8-226">이전에 DB는 삭제되었거나 존재하지 않으므로 마이그레이션에서 새 DB를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-226">Previously the DB was dropped and doesn't exist, so migrations creates the new DB.</span></span>
+<span data-ttu-id="9b0a7-226">이전에 DB는 삭제되었거나 존재하지 않으므로 마이그레이션에서 새 DB를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-226">Previously the DB was dropped and doesn't exist, so migrations creates the new DB.</span></span>
 
-### <a name="the-data-model-snapshot"></a><span data-ttu-id="ffed8-227">데이터 모델 스냅샷</span><span class="sxs-lookup"><span data-stu-id="ffed8-227">The data model snapshot</span></span>
+### <a name="the-data-model-snapshot"></a><span data-ttu-id="9b0a7-227">데이터 모델 스냅샷</span><span class="sxs-lookup"><span data-stu-id="9b0a7-227">The data model snapshot</span></span>
 
-<span data-ttu-id="ffed8-228">마이그레이션은 *Migrations/SchoolContextModelSnapshot.cs*에 현재 데이터베이스 스키마의 *스냅숏*을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-228">Migrations create a *snapshot* of the current database schema in *Migrations/SchoolContextModelSnapshot.cs*.</span></span> <span data-ttu-id="ffed8-229">마이그레이션을 추가하면 EF가 데이터 모델을 스냅샷 파일과 비교하여 변경 내용을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-229">When you add a migration, EF determines what changed by comparing the data model to the snapshot file.</span></span>
+<span data-ttu-id="9b0a7-228">마이그레이션은 *Migrations/SchoolContextModelSnapshot.cs*에 현재 데이터베이스 스키마의 *스냅숏*을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-228">Migrations create a *snapshot* of the current database schema in *Migrations/SchoolContextModelSnapshot.cs*.</span></span> <span data-ttu-id="9b0a7-229">마이그레이션을 추가하면 EF가 데이터 모델을 스냅샷 파일과 비교하여 변경 내용을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-229">When you add a migration, EF determines what changed by comparing the data model to the snapshot file.</span></span>
 
-<span data-ttu-id="ffed8-230">마이그레이션을 삭제하려면 다음 명령을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-230">To delete a migration, use the following command:</span></span>
+<span data-ttu-id="9b0a7-230">마이그레이션을 삭제하려면 다음 명령을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-230">To delete a migration, use the following command:</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="ffed8-231">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="ffed8-231">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="9b0a7-231">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9b0a7-231">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="ffed8-232">마이그레이션 제거</span><span class="sxs-lookup"><span data-stu-id="ffed8-232">Remove-Migration</span></span>
+<span data-ttu-id="9b0a7-232">마이그레이션 제거</span><span class="sxs-lookup"><span data-stu-id="9b0a7-232">Remove-Migration</span></span>
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="ffed8-233">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="ffed8-233">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="9b0a7-233">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="9b0a7-233">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
 ```dotnetcli
 dotnet ef migrations remove
 ```
 
-<span data-ttu-id="ffed8-234">자세한 내용은 [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="ffed8-234">For more information, see [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).</span></span>
+<span data-ttu-id="9b0a7-234">자세한 내용은 [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-234">For more information, see [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).</span></span>
 
 ---
 
-<span data-ttu-id="ffed8-235">마이그레이션 제거 명령은 마이그레이션을 삭제하고 스냅샷이 올바르게 다시 설정되도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-235">The remove migrations command deletes the migration and ensures the snapshot is correctly reset.</span></span>
+<span data-ttu-id="9b0a7-235">마이그레이션 제거 명령은 마이그레이션을 삭제하고 스냅샷이 올바르게 다시 설정되도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-235">The remove migrations command deletes the migration and ensures the snapshot is correctly reset.</span></span>
 
-### <a name="remove-ensurecreated-and-test-the-app"></a><span data-ttu-id="ffed8-236">EnsureCreated 제거 및 앱 테스트</span><span class="sxs-lookup"><span data-stu-id="ffed8-236">Remove EnsureCreated and test the app</span></span>
+### <a name="remove-ensurecreated-and-test-the-app"></a><span data-ttu-id="9b0a7-236">EnsureCreated 제거 및 앱 테스트</span><span class="sxs-lookup"><span data-stu-id="9b0a7-236">Remove EnsureCreated and test the app</span></span>
 
-<span data-ttu-id="ffed8-237">초기 개발에는 `EnsureCreated`가 사용되었습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-237">For early development, `EnsureCreated` was used.</span></span> <span data-ttu-id="ffed8-238">이 자습서에서는 마이그레이션이 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-238">In this tutorial, migrations are used.</span></span> <span data-ttu-id="ffed8-239">`EnsureCreated`에는 다음과 같은 제한 사항이 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-239">`EnsureCreated` has the following limitations:</span></span>
+<span data-ttu-id="9b0a7-237">초기 개발에는 `EnsureCreated`가 사용되었습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-237">For early development, `EnsureCreated` was used.</span></span> <span data-ttu-id="9b0a7-238">이 자습서에서는 마이그레이션이 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-238">In this tutorial, migrations are used.</span></span> <span data-ttu-id="9b0a7-239">`EnsureCreated`에는 다음과 같은 제한 사항이 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-239">`EnsureCreated` has the following limitations:</span></span>
 
-* <span data-ttu-id="ffed8-240">마이그레이션을 무시하고 DB 및 스키마를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-240">Bypasses migrations and creates the DB and schema.</span></span>
-* <span data-ttu-id="ffed8-241">마이그레이션 테이블을 만들지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-241">Doesn't create a migrations table.</span></span>
-* <span data-ttu-id="ffed8-242">마이그레이션에 사용할 수 *없습니다*.</span><span class="sxs-lookup"><span data-stu-id="ffed8-242">Can *not* be used with migrations.</span></span>
-* <span data-ttu-id="ffed8-243">DB를 삭제하고 자주 다시 생성하는 테스트 또는 신속한 프로토타입 만들기를 위해 설계되었습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-243">Is designed for testing or rapid prototyping where the DB is dropped and re-created frequently.</span></span>
+* <span data-ttu-id="9b0a7-240">마이그레이션을 무시하고 DB 및 스키마를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-240">Bypasses migrations and creates the DB and schema.</span></span>
+* <span data-ttu-id="9b0a7-241">마이그레이션 테이블을 만들지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-241">Doesn't create a migrations table.</span></span>
+* <span data-ttu-id="9b0a7-242">마이그레이션에 사용할 수 *없습니다*.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-242">Can *not* be used with migrations.</span></span>
+* <span data-ttu-id="9b0a7-243">DB를 삭제하고 자주 다시 생성하는 테스트 또는 신속한 프로토타입 만들기를 위해 설계되었습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-243">Is designed for testing or rapid prototyping where the DB is dropped and re-created frequently.</span></span>
 
-<span data-ttu-id="ffed8-244">`EnsureCreated`를 제거합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-244">Remove `EnsureCreated`:</span></span>
+<span data-ttu-id="9b0a7-244">`EnsureCreated`를 제거합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-244">Remove `EnsureCreated`:</span></span>
 
 ```csharp
 context.Database.EnsureCreated();
 ```
 
-<span data-ttu-id="ffed8-245">앱을 실행하고 DB이 시드되었는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-245">Run the app and verify the DB is seeded.</span></span>
+<span data-ttu-id="9b0a7-245">앱을 실행하고 DB이 시드되었는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-245">Run the app and verify the DB is seeded.</span></span>
 
-### <a name="inspect-the-database"></a><span data-ttu-id="ffed8-246">데이터베이스 검사</span><span class="sxs-lookup"><span data-stu-id="ffed8-246">Inspect the database</span></span>
+### <a name="inspect-the-database"></a><span data-ttu-id="9b0a7-246">데이터베이스 검사</span><span class="sxs-lookup"><span data-stu-id="9b0a7-246">Inspect the database</span></span>
 
-<span data-ttu-id="ffed8-247">**SQL Server 개체 탐색기**를 사용하여 DB를 검사합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-247">Use **SQL Server Object Explorer** to inspect the DB.</span></span> <span data-ttu-id="ffed8-248">`__EFMigrationsHistory` 테이블이 추가된 것을 볼 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-248">Notice the addition of an `__EFMigrationsHistory` table.</span></span> <span data-ttu-id="ffed8-249">`__EFMigrationsHistory` 테이블은 DB에 적용된 마이그레이션을 추적합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-249">The `__EFMigrationsHistory` table keeps track of which migrations have been applied to the DB.</span></span> <span data-ttu-id="ffed8-250">`__EFMigrationsHistory` 테이블의 데이터를 보면 첫 번째 마이그레이션에 대해 한 행이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-250">View the data in the `__EFMigrationsHistory` table, it shows one row for the first migration.</span></span> <span data-ttu-id="ffed8-251">앞의 CLI 출력 예제의 마지막 로그는 이 행을 만드는 INSERT 문을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-251">The last log in the preceding CLI output example shows the INSERT statement that creates this row.</span></span>
+<span data-ttu-id="9b0a7-247">**SQL Server 개체 탐색기**를 사용하여 DB를 검사합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-247">Use **SQL Server Object Explorer** to inspect the DB.</span></span> <span data-ttu-id="9b0a7-248">`__EFMigrationsHistory` 테이블이 추가된 것을 볼 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-248">Notice the addition of an `__EFMigrationsHistory` table.</span></span> <span data-ttu-id="9b0a7-249">`__EFMigrationsHistory` 테이블은 DB에 적용된 마이그레이션을 추적합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-249">The `__EFMigrationsHistory` table keeps track of which migrations have been applied to the DB.</span></span> <span data-ttu-id="9b0a7-250">`__EFMigrationsHistory` 테이블의 데이터를 보면 첫 번째 마이그레이션에 대해 한 행이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-250">View the data in the `__EFMigrationsHistory` table, it shows one row for the first migration.</span></span> <span data-ttu-id="9b0a7-251">앞의 CLI 출력 예제의 마지막 로그는 이 행을 만드는 INSERT 문을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-251">The last log in the preceding CLI output example shows the INSERT statement that creates this row.</span></span>
 
-<span data-ttu-id="ffed8-252">앱을 실행하고 모든 항목이 작동하는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-252">Run the app and verify that everything works.</span></span>
+<span data-ttu-id="9b0a7-252">앱을 실행하고 모든 항목이 작동하는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-252">Run the app and verify that everything works.</span></span>
 
-## <a name="applying-migrations-in-production"></a><span data-ttu-id="ffed8-253">프로덕션 환경에서 마이그레이션 적용</span><span class="sxs-lookup"><span data-stu-id="ffed8-253">Applying migrations in production</span></span>
+## <a name="applying-migrations-in-production"></a><span data-ttu-id="9b0a7-253">프로덕션 환경에서 마이그레이션 적용</span><span class="sxs-lookup"><span data-stu-id="9b0a7-253">Applying migrations in production</span></span>
 
-<span data-ttu-id="ffed8-254">프로덕션 앱은 애플리케이션 시작 시 [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_)를 호출하지 **않는 것이** 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-254">We recommend production apps should **not** call [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) at application startup.</span></span> <span data-ttu-id="ffed8-255">서버 팜의 앱에서 `Migrate`를 호출하면 안됩니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-255">`Migrate` shouldn't be called from an app in server farm.</span></span> <span data-ttu-id="ffed8-256">예를 들어, 앱이 스케일 아웃으로 클라우드에 배포된 경우(앱의 여러 인스턴스가 실행 중임)</span><span class="sxs-lookup"><span data-stu-id="ffed8-256">For example, if the app has been cloud deployed with scale-out (multiple instances of the app are running).</span></span>
+<span data-ttu-id="9b0a7-254">프로덕션 앱은 애플리케이션 시작 시 [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_)를 호출하지 **않는 것이** 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-254">We recommend production apps should **not** call [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) at application startup.</span></span> <span data-ttu-id="9b0a7-255">서버 팜의 앱에서 `Migrate`를 호출하면 안됩니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-255">`Migrate` shouldn't be called from an app in server farm.</span></span> <span data-ttu-id="9b0a7-256">예를 들어, 앱이 스케일 아웃으로 클라우드에 배포된 경우(앱의 여러 인스턴스가 실행 중임)</span><span class="sxs-lookup"><span data-stu-id="9b0a7-256">For example, if the app has been cloud deployed with scale-out (multiple instances of the app are running).</span></span>
 
-<span data-ttu-id="ffed8-257">데이터베이스 마이그레이션은 배포의 일부로 제어된 방식으로 수행되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-257">Database migration should be done as part of deployment, and in a controlled way.</span></span> <span data-ttu-id="ffed8-258">프로덕션 데이터베이스 마이그레이션 방법은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-258">Production database migration approaches include:</span></span>
+<span data-ttu-id="9b0a7-257">데이터베이스 마이그레이션은 배포의 일부로 제어된 방식으로 수행되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-257">Database migration should be done as part of deployment, and in a controlled way.</span></span> <span data-ttu-id="9b0a7-258">프로덕션 데이터베이스 마이그레이션 방법은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-258">Production database migration approaches include:</span></span>
 
-* <span data-ttu-id="ffed8-259">마이그레이션을 사용하여 SQL 스크립트를 작성하고 배포 시 SQL 스크립트 사용</span><span class="sxs-lookup"><span data-stu-id="ffed8-259">Using migrations to create SQL scripts and using the SQL scripts in deployment.</span></span>
-* <span data-ttu-id="ffed8-260">제어된 환경에서 `dotnet ef database update` 실행</span><span class="sxs-lookup"><span data-stu-id="ffed8-260">Running `dotnet ef database update` from a controlled environment.</span></span>
+* <span data-ttu-id="9b0a7-259">마이그레이션을 사용하여 SQL 스크립트를 작성하고 배포 시 SQL 스크립트 사용</span><span class="sxs-lookup"><span data-stu-id="9b0a7-259">Using migrations to create SQL scripts and using the SQL scripts in deployment.</span></span>
+* <span data-ttu-id="9b0a7-260">제어된 환경에서 `dotnet ef database update` 실행</span><span class="sxs-lookup"><span data-stu-id="9b0a7-260">Running `dotnet ef database update` from a controlled environment.</span></span>
 
-<span data-ttu-id="ffed8-261">EF Core는 `__MigrationsHistory` 테이블을 사용하여 마이그레이션을 실행해야 하는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-261">EF Core uses the `__MigrationsHistory` table to see if any migrations need to run.</span></span> <span data-ttu-id="ffed8-262">DB가 최신 상태이면 마이그레이션이 실행되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-262">If the DB is up-to-date, no migration is run.</span></span>
+<span data-ttu-id="9b0a7-261">EF Core는 `__MigrationsHistory` 테이블을 사용하여 마이그레이션을 실행해야 하는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-261">EF Core uses the `__MigrationsHistory` table to see if any migrations need to run.</span></span> <span data-ttu-id="9b0a7-262">DB가 최신 상태이면 마이그레이션이 실행되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-262">If the DB is up-to-date, no migration is run.</span></span>
 
-## <a name="troubleshooting"></a><span data-ttu-id="ffed8-263">문제 해결</span><span class="sxs-lookup"><span data-stu-id="ffed8-263">Troubleshooting</span></span>
+## <a name="troubleshooting"></a><span data-ttu-id="9b0a7-263">문제 해결</span><span class="sxs-lookup"><span data-stu-id="9b0a7-263">Troubleshooting</span></span>
 
-<span data-ttu-id="ffed8-264">[완료된 앱](
-https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21snapshots/cu-part4-migrations)을 다운로드합니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-264">Download the [completed app](
+<span data-ttu-id="9b0a7-264">[완료된 앱](
+https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21snapshots/cu-part4-migrations)을 다운로드합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-264">Download the [completed app](
 https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21snapshots/cu-part4-migrations).</span></span>
 
-<span data-ttu-id="ffed8-265">앱에서는 다음과 같은 예외가 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="ffed8-265">The app generates the following exception:</span></span>
+<span data-ttu-id="9b0a7-265">앱에서는 다음과 같은 예외가 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-265">The app generates the following exception:</span></span>
 
 ```text
 SqlException: Cannot open database "ContosoUniversity" requested by the login.
@@ -309,19 +309,19 @@ The login failed.
 Login failed for user 'user name'.
 ```
 
-<span data-ttu-id="ffed8-266">해결 방법: `dotnet ef database update` 실행</span><span class="sxs-lookup"><span data-stu-id="ffed8-266">Solution: Run `dotnet ef database update`</span></span>
+<span data-ttu-id="9b0a7-266">해결책: `dotnet ef database update`를 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="9b0a7-266">Solution: Run `dotnet ef database update`</span></span>
 
-### <a name="additional-resources"></a><span data-ttu-id="ffed8-267">추가 리소스</span><span class="sxs-lookup"><span data-stu-id="ffed8-267">Additional resources</span></span>
+### <a name="additional-resources"></a><span data-ttu-id="9b0a7-267">추가 자료</span><span class="sxs-lookup"><span data-stu-id="9b0a7-267">Additional resources</span></span>
 
-* [<span data-ttu-id="ffed8-268">이 자습서의 YouTube 버전</span><span class="sxs-lookup"><span data-stu-id="ffed8-268">YouTube version of this tutorial</span></span>](https://www.youtube.com/watch?v=OWSUuMLKTJo)
-* <span data-ttu-id="ffed8-269">[.NET Core CLI](/ef/core/miscellaneous/cli/dotnet)</span><span class="sxs-lookup"><span data-stu-id="ffed8-269">[.NET Core CLI](/ef/core/miscellaneous/cli/dotnet).</span></span>
-* [<span data-ttu-id="ffed8-270">패키지 관리자 콘솔(Visual Studio)</span><span class="sxs-lookup"><span data-stu-id="ffed8-270">Package Manager Console (Visual Studio)</span></span>](/ef/core/miscellaneous/cli/powershell)
+* [<span data-ttu-id="9b0a7-268">이 자습서의 YouTube 버전</span><span class="sxs-lookup"><span data-stu-id="9b0a7-268">YouTube version of this tutorial</span></span>](https://www.youtube.com/watch?v=OWSUuMLKTJo)
+* <span data-ttu-id="9b0a7-269">[.NET Core CLI](/ef/core/miscellaneous/cli/dotnet)</span><span class="sxs-lookup"><span data-stu-id="9b0a7-269">[.NET Core CLI](/ef/core/miscellaneous/cli/dotnet).</span></span>
+* [<span data-ttu-id="9b0a7-270">패키지 관리자 콘솔(Visual Studio)</span><span class="sxs-lookup"><span data-stu-id="9b0a7-270">Package Manager Console (Visual Studio)</span></span>](/ef/core/miscellaneous/cli/powershell)
 
 
 
 > [!div class="step-by-step"]
-> <span data-ttu-id="ffed8-271">[이전](xref:data/ef-rp/sort-filter-page)
-> [다음](xref:data/ef-rp/complex-data-model)</span><span class="sxs-lookup"><span data-stu-id="ffed8-271">[Previous](xref:data/ef-rp/sort-filter-page)
+> <span data-ttu-id="9b0a7-271">[이전](xref:data/ef-rp/sort-filter-page)
+> [다음](xref:data/ef-rp/complex-data-model)</span><span class="sxs-lookup"><span data-stu-id="9b0a7-271">[Previous](xref:data/ef-rp/sort-filter-page)
 [Next](xref:data/ef-rp/complex-data-model)</span></span>
 
 ::: moniker-end
