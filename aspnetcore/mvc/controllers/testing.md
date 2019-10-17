@@ -189,7 +189,7 @@ ASP.NET Core 2.1 이상에서 [ActionResult\<T](xref:web-api/action-return-types
 
 ## <a name="unit-tests-of-controller-logic"></a>컨트롤러 논리의 단위 테스트
 
-[단위 테스트](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)는 앱의 일부분을 인프라 및 종속성과 분리하여 테스트를 수행합니다. 컨트롤러 논리를 단위 테스트 할 때 단일 작업의 콘텐츠만 테스트되고, 작업의 종속성 또는 프레임워크 자체의 동작은 테스트되지 않습니다.
+[단위 테스트](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)는 앱의 일부분을 인프라 및 종속성과 분리하여 테스트를 수행합니다. 컨트롤러 논리를 단위 테스트할 때 단일 작업의 콘텐츠만 테스트되고, 작업의 종속성 또는 프레임워크 자체의 동작은 테스트되지 않습니다.
 
 컨트롤러의 동작에 초점을 맞춰 컨트롤러 작업의 단위 테스트를 설정하세요. 컨트롤러 단위 테스트는 [필터](xref:mvc/controllers/filters), [라우팅](xref:fundamentals/routing), [모델 바인딩](xref:mvc/models/model-binding) 같은 시나리오를 피합니다. 요청에 총괄적으로 응답하는 구성 요소 간의 상호 작용을 다루는 테스트는 ‘통합 테스트’에서 처리됩니다.  통합 테스트에 대한 자세한 내용은 <xref:test/integration-tests>를 참조하세요.
 
@@ -203,7 +203,7 @@ ASP.NET Core 2.1 이상에서 [ActionResult\<T](xref:web-api/action-return-types
 
 * [명시적 종속성 원칙](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)을 따릅니다.
 * [DI(종속성 주입)](xref:fundamentals/dependency-injection)에서 `IBrainstormSessionRepository`의 인스턴스를 제공할 것으로 기대합니다.
-* [Moq](https://www.nuget.org/packages/Moq/)과 같은 모의 개체 프레임워크를 사용하여 모의 `IBrainstormSessionRepository` 서비스로 테스트할 수 있습니다. ‘모의 개체’는 테스트에 사용되는 미리 정해진 일련의 속성 및 메서드 동작을 갖는 만들어진 개체입니다.  자세한 내용은 [통합 테스트 소개](xref:test/integration-tests#introduction-to-integration-tests)를 참조하세요.
+* [Moq](https://www.nuget.org/packages/Moq/)과 같은 모의 개체 프레임워크를 사용하여 모의 `IBrainstormSessionRepository` 서비스로 테스트할 수 있습니다. ‘모의 개체’는 테스트에 사용되는 미리 정해진 일련의 속성 및 메서드 동작을 갖는 만들어진 개체입니다. 자세한 내용은 [통합 테스트 소개](xref:test/integration-tests#introduction-to-integration-tests)를 참조하세요.
 
 `HTTP GET Index` 메서드는 반복 또는 분기가 없고 한 가지 메서드만 호출합니다. 이 작업의 단위 테스트는 다음을 수행합니다.
 
