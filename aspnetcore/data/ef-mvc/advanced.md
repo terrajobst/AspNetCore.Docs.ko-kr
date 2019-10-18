@@ -1,18 +1,18 @@
 ---
 title: '자습서: 고급 시나리오에 대해 알아보기 - ASP.NET MVC 및 EF Core 사용'
 description: 이 자습서에서는 Entity Framework Core를 사용하는 ASP.NET Core 웹앱 개발의 기본 개념을 넘어 유용한 토픽을 소개합니다.
-author: tdykstra
+author: rick-anderson
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/advanced
-ms.openlocfilehash: 7a67efad187f29773c1cac7a5a2457d02080114b
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: d4a2aad6d93cc9a53c730323620de59fead6d5ab
+ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71080544"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72259593"
 ---
 # <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>자습서: 고급 시나리오에 대해 알아보기 - ASP.NET MVC 및 EF Core 사용
 

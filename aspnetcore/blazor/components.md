@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/05/2019
 uid: blazor/components
-ms.openlocfilehash: 3e0966bf978c99fc00db7682bea3292306cbb03c
-ms.sourcegitcommit: d81912782a8b0bd164f30a516ad80f8defb5d020
+ms.openlocfilehash: cd48111e8d601fc67e8a938fcdd686759a9ddeca
+ms.sourcegitcommit: ce2bfb01f2cc7dd83f8a97da0689d232c71bcdc4
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72179031"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72531112"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -37,8 +37,8 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 구성 요소 멤버는 `@`로 시작 하는 식을 사용 하 C# 여 구성 요소의 렌더링 논리의 일부로 사용할 수 있습니다. 예를 들어 필드 C# 는 필드 이름 앞에 `@`을 접두사로 하 여 렌더링 됩니다. 다음 예에서는를 평가 하 고 렌더링 합니다.
 
-* -0은 `font-style`에 대 한 CSS 속성 값을 @no__t 합니다.
-* `<h1>` 요소의 내용에 `_headingText`입니다.
+* `font-style`에 대 한 CSS 속성 값을 `_headingFontStyle` 합니다.
+* `<h1>` 요소의 내용에 `_headingText` 합니다.
 
 ```cshtml
 <h1 style="font-style:@_headingFontStyle">@_headingText</h1>
@@ -81,27 +81,27 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 *인덱스 razor* 의 다음 태그는 @no__t 1 인스턴스를 렌더링 합니다.
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Pages/Index.razor?name=snippet_HeadingComponent)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/Index.razor?name=snippet_HeadingComponent)]
 
 *Components/HeadingComponent*:
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Components/HeadingComponent.razor)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Components/HeadingComponent.razor)]
 
 구성 요소에 구성 요소 이름과 일치 하지 않는 대문자 첫 글자가 포함 된 HTML 요소가 포함 된 경우 요소에 예기치 않은 이름이 있음을 나타내는 경고가 내보내집니다. 구성 요소 네임 스페이스에 대 한 `@using` 문을 추가 하면 구성 요소를 사용할 수 있게 되므로 경고가 제거 됩니다.
 
 ## <a name="component-parameters"></a>구성 요소 매개 변수
 
-구성 요소에는 구성 요소 매개 변수를 포함할 수 있습니다 .이 *매개 변수*는 구성 요소 클래스에서 `[Parameter]` 특성을 사용 하 여 정의 됩니다. 특성을 사용하여 태그에서 구성 요소의 인수를 지정합니다.
+구성 요소는 구성 요소 클래스의 공용 속성을 사용 하 여 정의 되는 *구성 요소 매개 변수*를 포함할 수 있습니다 .이 매개 변수는 `[Parameter]` 특성 특성을 사용하여 태그에서 구성 요소의 인수를 지정합니다.
 
 *Components/ChildComponent. razor*:
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Components/ChildComponent.razor?highlight=11-12)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=11-12)]
 
 다음 예제에서 `ParentComponent`은 `ChildComponent`의 `Title` 속성 값을 설정 합니다.
 
 *Pages/ParentComponent. razor*:
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Pages/ParentComponent.razor?name=snippet_ParentComponent&highlight=5-6)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/ParentComponent.razor?name=snippet_ParentComponent&highlight=5-6)]
 
 ## <a name="child-content"></a>자식 콘텐츠
 
@@ -111,7 +111,7 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 *Components/ChildComponent. razor*:
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Components/ChildComponent.razor?highlight=3,14-15)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=3,14-15)]
 
 > [!NOTE]
 > @No__t-0 콘텐츠를 받는 속성의 이름은 규칙에 따라 `ChildContent`로 지정 해야 합니다.
@@ -120,7 +120,7 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 *Pages/ParentComponent. razor*:
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Pages/ParentComponent.razor?name=snippet_ParentComponent&highlight=7-8)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/ParentComponent.razor?name=snippet_ParentComponent&highlight=7-8)]
 
 ## <a name="attribute-splatting-and-arbitrary-parameters"></a>특성 스 플랫 및 임의 매개 변수
 
@@ -190,7 +190,7 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 }
 ```
 
-@No__t-1의 `CaptureUnmatchedValues` 속성은 매개 변수가 다른 매개 변수와 일치 하지 않는 모든 특성을 일치 시킬 수 있도록 합니다. 구성 요소는 `CaptureUnmatchedValues` 인 단일 매개 변수만 정의할 수 있습니다. @No__t-0과 함께 사용 되는 속성 형식은 문자열 키가 있는 `Dictionary<string, object>`에서 할당할 수 있어야 합니다. 이 시나리오에서 `IEnumerable<KeyValuePair<string, object>>` 또는 `IReadOnlyDictionary<string, object>`도 옵션입니다.
+@No__t_1의 `CaptureUnmatchedValues` 속성을 사용 하면 매개 변수는 다른 매개 변수와 일치 하지 않는 모든 특성을 일치 시킬 수 있습니다. 구성 요소는 `CaptureUnmatchedValues` 인 단일 매개 변수만 정의할 수 있습니다. @No__t-0과 함께 사용 되는 속성 형식은 문자열 키가 있는 `Dictionary<string, object>`에서 할당할 수 있어야 합니다. 이 시나리오에서 `IEnumerable<KeyValuePair<string, object>>` 또는 `IReadOnlyDictionary<string, object>`도 옵션입니다.
 
 ## <a name="data-binding"></a>데이터 바인딩
 
@@ -238,7 +238,7 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 사용자가 데이터 바인딩된 요소에 구문 분석할 수 없는 값을 제공 하면 bind 이벤트가 트리거될 때 구문 분석할 수 없는 값이 자동으로 이전 값으로 되돌아갑니다.
 
-다음과 같은 시나리오를 고려해 보세요.
+다음 시나리오를 고려하세요.
 
 * @No__t-0 요소는 초기 값이 `123` 인 `int` 형식에 바인딩됩니다.
 
@@ -454,11 +454,11 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 
 지원 되는 `EventArgs`은 다음 표에 나와 있습니다.
 
-| 이벤트 | 클래스 |
+| 이벤트(event) | 인스턴스 |
 | ----- | ----- |
 | 클립보드        | `ClipboardEventArgs` |
 | 옵니다             | `DragEventArgs` &ndash; `DataTransfer` 및 `DataTransferItem`은 항목 데이터를 끌어 놓은 상태입니다. |
-| 오류            | `ErrorEventArgs` |
+| Error            | `ErrorEventArgs` |
 | 포커스            | `FocusEventArgs` &ndash;은 `relatedTarget`에 대 한 지원을 포함 하지 않습니다. |
 | `<input>` 변경 | `ChangeEventArgs` |
 | 키보드         | `KeyboardEventArgs` |
@@ -513,11 +513,11 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 
 샘플 앱의 `ChildComponent`은 샘플의 `ParentComponent`에서 `EventCallback` 대리자를 수신 하도록 단추의 @no__t 1 처리기를 설정 하는 방법을 보여 줍니다. @No__t-0은 `MouseEventArgs`로 입력 됩니다 .이는 주변 장치의 `onclick` 이벤트에 적합 합니다.
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Components/ChildComponent.razor?highlight=5-7,17-18)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=5-7,17-18)]
 
 @No__t-0은 자식의 `EventCallback<T>`을 `ShowMessage` 메서드로 설정 합니다.
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Pages/ParentComponent.razor?name=snippet_ParentComponent&highlight=6,16-19)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/ParentComponent.razor?name=snippet_ParentComponent&highlight=6,16-19)]
 
 @No__t에서 단추가 선택 된 경우-0:
 
@@ -692,7 +692,7 @@ Password:
 구성 요소가 렌더링 되 면 `loginDialog` 필드가 `MyLoginDialog` 자식 구성 요소 인스턴스로 채워집니다. 그런 다음 구성 요소 인스턴스에서 .NET 메서드를 호출할 수 있습니다.
 
 > [!IMPORTANT]
-> @No__t-0 변수는 구성 요소가 렌더링 된 후에만 채워지고 출력에는 `MyLoginDialog` 요소가 포함 됩니다. 이 시점까지 참조할 항목이 없습니다. 구성 요소에서 렌더링을 완료 한 후에 구성 요소 참조를 조작 하려면 `OnAfterRenderAsync` 또는 `OnAfterRender` 메서드를 사용 합니다.
+> @No__t-0 변수는 구성 요소가 렌더링 된 후에만 채워지고 출력에는 `MyLoginDialog` 요소가 포함 됩니다. 이 시점까지 참조할 항목이 없습니다. 구성 요소에서 렌더링을 완료 한 후에 구성 요소 참조를 조작 하려면 [OnAfterRenderAsync 또는 OnAfterRender 메서드](#lifecycle-methods)를 사용 합니다.
 
 구성 요소 참조를 캡처하는 것은 [요소 참조를 캡처하](xref:blazor/javascript-interop#capture-references-to-elements)는 데 유사한 구문을 사용 하지만 [JavaScript interop](xref:blazor/javascript-interop) 기능은 아닙니다. 구성 요소 참조는 JavaScript 코드 @ no__t-0they're에 전달 되지 않습니다.
 
@@ -760,7 +760,7 @@ public class NotifierService
 
 요소 또는 구성 요소 목록을 렌더링할 때 이후에 요소나 구성 요소가 변경 되는 경우 Blazor의 diff 알고리즘은 유지할 수 있는 이전 요소 또는 구성 요소와 모델 개체가 이러한 요소에 매핑되는 방법을 결정 해야 합니다. 일반적으로이 프로세스는 자동 이며 무시 해도 되지만 프로세스를 제어 하는 경우가 있습니다.
 
-다음 예를 살펴 보십시오.
+다음 예제를 참조하세요.
 
 ```csharp
 @foreach (var person in People)
@@ -841,6 +841,9 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
+> [!NOTE]
+> 구성 요소 초기화 중 비동기 작업은 `OnInitializedAsync` 수명 주기 이벤트 중에 발생 해야 합니다.
+
 동기 작업의 경우 `OnInitialized`을 사용 합니다.
 
 ```csharp
@@ -859,6 +862,9 @@ protected override async Task OnParametersSetAsync()
 }
 ```
 
+> [!NOTE]
+> 매개 변수 및 속성 값을 적용할 때 비동기 작업은 `OnParametersSetAsync` 수명 주기 이벤트 중에 발생 해야 합니다.
+
 ```csharp
 protected override void OnParametersSet()
 {
@@ -868,7 +874,7 @@ protected override void OnParametersSet()
 
 `OnAfterRenderAsync` 및 `OnAfterRender`은 구성 요소가 렌더링을 완료 한 후에 호출 됩니다. 요소 및 구성 요소 참조가이 시점에 채워집니다. 렌더링 된 DOM 요소에 대해 작동 하는 타사 JavaScript 라이브러리 활성화와 같이 렌더링 된 콘텐츠를 사용 하 여 추가 초기화 단계를 수행 하려면이 단계를 사용 합니다.
 
-*서버에서 사전 렌더링을 할 때 `OnAfterRender`이 호출 되지 않습니다.*
+서버에서 사전 렌더링을 할 때 `OnAfterRender`이 *호출 되지 않습니다.*
 
 @No__t-1 및 `OnAfterRender`에 대 한 `firstRender` 매개 변수는 다음과 같습니다.
 
@@ -884,6 +890,9 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
     }
 }
 ```
+
+> [!NOTE]
+> 렌더링 직후 비동기 작업은 `OnAfterRenderAsync` 수명 주기 이벤트 중에 발생 해야 합니다.
 
 ```csharp
 protected override void OnAfterRender(bool firstRender)
@@ -959,7 +968,7 @@ Blazor의 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로
 
 여러 경로 템플릿을 구성 요소에 적용할 수 있습니다. 다음 구성 요소는 `/BlazorRoute` 및 `/DifferentBlazorRoute`에 대 한 요청에 응답 합니다.
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Pages/BlazorRoute.razor?name=snippet_BlazorRoute)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/BlazorRoute.razor?name=snippet_BlazorRoute)]
 
 ## <a name="route-parameters"></a>경로 매개 변수
 
@@ -967,7 +976,7 @@ Blazor의 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로
 
 *경로 매개 변수 구성 요소*:
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Pages/RouteParameter.razor?name=snippet_RouteParameter)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/RouteParameter.razor?name=snippet_RouteParameter)]
 
 선택적 매개 변수는 지원 되지 않으므로 위의 예제에서 두 개의 `@page` 지시문이 적용 됩니다. 첫 번째는 매개 변수 없이 구성 요소에 대 한 탐색을 허용 합니다. 두 번째 `@page` 지시어는 `{text}` 경로 매개 변수를 사용 하 고 값을 `Text` 속성에 할당 합니다.
 
@@ -979,11 +988,11 @@ Blazor의 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로
 
 *Pages/BlazorRocks*:
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Pages/BlazorRocks.razor?name=snippet_BlazorRocks)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/BlazorRocks.razor?name=snippet_BlazorRocks)]
 
 *BlazorRocksBase.cs*:
 
-[!code-csharp[](common/samples/3.x/BlazorSample/Pages/BlazorRocksBase.cs)]
+[!code-csharp[](common/samples/3.x/BlazorWebAssemblySample/Pages/BlazorRocksBase.cs)]
 
 기본 클래스는 `ComponentBase`에서 파생 되어야 합니다.
 
@@ -1051,7 +1060,7 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값�
 <input type="checkbox" />
 ```
 
-자세한 내용은 <xref:mvc/views/razor>을 참조하세요.
+자세한 내용은 <xref:mvc/views/razor>을 참조하십시오.
 
 > [!WARNING]
 > ASP.NET 형식이 `bool` 인 경우에는 [aria를 누르는](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons)등의 일부 HTML 특성이 제대로 작동 하지 않습니다. 이러한 경우에는-1 @no__t 대신 `string` 유형을 사용 합니다.
@@ -1087,7 +1096,7 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값�
 
 `TableTemplate` 구성 요소:
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Components/TableTemplate.razor)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Components/TableTemplate.razor)]
 
 템플릿 기반 구성 요소를 사용 하는 경우 매개 변수 이름과 일치 하는 자식 요소를 사용 하 여 템플릿 매개 변수를 지정할 수 있습니다 (다음 예제에서는 `TableHeader` 및 `RowTemplate`).
 
@@ -1140,7 +1149,7 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값�
 
 일반적으로 템플릿 구성 요소는 형식화 되어 있습니다. 예를 들어, 일반 `ListViewTemplate` 구성 요소를 사용 하 여 1 @no__t 값을 렌더링할 수 있습니다. 제네릭 구성 요소를 정의 하려면 [@typeparam](xref:mvc/views/razor#typeparam) 지시어를 사용 하 여 형식 매개 변수를 지정 합니다.
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Components/ListViewTemplate.razor)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Components/ListViewTemplate.razor)]
 
 제네릭 형식의 구성 요소를 사용 하는 경우 가능 하면 형식 매개 변수가 유추 됩니다.
 
@@ -1170,7 +1179,7 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값�
 
 샘플 앱의 다음 예제에서 `ThemeInfo` 클래스는 응용 프로그램의 지정 된 부분에 있는 모든 단추가 동일한 스타일을 공유할 수 있도록 구성 요소 계층 구조의 아래로 이동 하는 테마 정보를 지정 합니다.
 
-*UIThemeClasses/ThemeInfo.cs*:
+*UIThemeClasses/ThemeInfo*:
 
 ```csharp
 public class ThemeInfo
@@ -1288,23 +1297,23 @@ public class ThemeInfo
 
 샘플 앱에는 탭에서 구현 하는 @no__t 0 인터페이스가 있습니다.
 
-[!code-csharp[](common/samples/3.x/BlazorSample/UIInterfaces/ITab.cs)]
+[!code-csharp[](common/samples/3.x/BlazorWebAssemblySample/UIInterfaces/ITab.cs)]
 
 @No__t-0 구성 요소는 `TabSet` @no__t 구성 요소를 사용 합니다.
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Pages/CascadingValuesParametersTabSet.razor?name=snippet_TabSet)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/CascadingValuesParametersTabSet.razor?name=snippet_TabSet)]
 
-자식 `Tab` 구성 요소는 `TabSet`에 매개 변수로 명시적으로 전달 되지 않습니다. 대신 자식 `Tab` 구성 요소는 `TabSet`의 자식 콘텐츠에 속합니다. 그러나 `TabSet`은 헤더와 활성 탭을 렌더링할 수 있도록 각 `Tab` 구성 요소에 대해 알고 있어야 합니다. 추가 코드를 요구 하지 않고이 조정을 사용 하도록 설정 하기 위해 `TabSet` 구성 요소는 *자체를 연계 값으로 제공* 하 여 하위 `Tab` 구성 요소에서 선택할 수 있습니다.
+자식 `Tab` 구성 요소는 `TabSet`에 매개 변수로 명시적으로 전달 되지 않습니다. 대신 자식 `Tab` 구성 요소는 `TabSet`의 자식 콘텐츠에 속합니다. 그러나 `TabSet`은 헤더와 활성 탭을 렌더링할 수 있도록 각 `Tab` 구성 요소에 대해 알고 있어야 합니다. 추가 코드를 요구 하지 않고이 조정을 사용 하기 위해 `TabSet` 구성 요소는 *자체를 연계 값으로 제공* 하 여 하위 `Tab` 구성 요소에서 선택할 수 있습니다.
 
 `TabSet` 구성 요소:
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Components/TabSet.razor)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Components/TabSet.razor)]
 
 하위 `Tab` 구성 요소는 포함 하는 `TabSet`을 연계 매개 변수로 캡처하기 때문에 @no__t 2 구성 요소는 `TabSet`에 자신을 추가 하 고 활성화 된 탭을 조정 합니다.
 
 `Tab` 구성 요소:
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Components/Tab.razor)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Components/Tab.razor)]
 
 ## <a name="razor-templates"></a>Razor 템플릿
 
@@ -1397,7 +1406,7 @@ public class ThemeInfo
 }
 ```
 
-> ! 내용의 @No__t-0의 형식은 렌더링 작업의 *결과* 를 처리할 수 있도록 합니다. Blazor framework 구현의 내부 세부 정보입니다. 이러한 형식은 *불안정* 한 것으로 간주 되며 이후 릴리스에서 변경 될 수 있습니다.
+> ! 내용의 @No__t_0 형식을 사용 하면 렌더링 작업의 *결과* 를 처리할 수 있습니다. Blazor framework 구현의 내부 세부 정보입니다. 이러한 형식은 *불안정* 한 것으로 간주 되며 이후 릴리스에서 변경 될 수 있습니다.
 
 ### <a name="sequence-numbers-relate-to-code-line-numbers-and-not-execution-order"></a>시퀀스 번호는 코드 줄 번호와 관련 되 고 실행 순서와는 관련이 없습니다.
 
@@ -1429,14 +1438,14 @@ builder.AddContent(1, "Second");
 
 코드가 처음으로 실행 될 때 `someFlag` @no__t이-1 이면 작성기에서 다음을 수신 합니다.
 
-| Sequence | 형식      | data   |
+| Sequence | Type      | 데이터   |
 | :------: | --------- | :----: |
 | 0        | 텍스트 노드 | 첫째  |
 | 1        | 텍스트 노드 | Second |
 
 @No__t-0이-1 @no__t 되 고 태그가 다시 렌더링 된다고 가정 합니다. 이번에는 작성기가 다음을 받습니다.
 
-| Sequence | type       | data   |
+| Sequence | Type       | 데이터   |
 | :------: | ---------- | :----: |
 | 1        | 텍스트 노드  | Second |
 
@@ -1461,14 +1470,14 @@ builder.AddContent(seq++, "Second");
 
 이제 첫 번째 출력은 다음과 같습니다.
 
-| Sequence | 형식      | data   |
+| Sequence | Type      | 데이터   |
 | :------: | --------- | :----: |
 | 0        | 텍스트 노드 | 첫째  |
 | 1        | 텍스트 노드 | Second |
 
 이 결과는 이전 사례와 동일 하므로 부정적인 문제가 없습니다. `someFlag`은 두 번째 렌더링에서 `false` 이며 출력은 다음과 같습니다.
 
-| Sequence | 형식      | data   |
+| Sequence | Type      | 데이터   |
 | :------: | --------- | ------ |
 | 0        | 텍스트 노드 | Second |
 
@@ -1562,7 +1571,7 @@ public class CultureController : Controller
 ```
 
 > [!WARNING]
-> @No__t-0 작업 결과를 사용 하 여 열린 리디렉션 공격을 방지 합니다. 자세한 내용은 <xref:security/preventing-open-redirects>을 참조하세요.
+> @No__t-0 작업 결과를 사용 하 여 열린 리디렉션 공격을 방지 합니다. 자세한 내용은 <xref:security/preventing-open-redirects>을 참조하십시오.
 
 다음 구성 요소는 사용자가 문화권을 선택할 때 초기 리디렉션을 수행 하는 방법의 예를 보여 줍니다.
 
@@ -1607,7 +1616,7 @@ Blazor의 `@bind` 기능은 사용자의 현재 문화권에 따라 세계화를
 * `IStringLocalizer<>`은 Blazor apps에서 *지원 됩니다* .
 * `IHtmlLocalizer<>`, `IViewLocalizer<>` 및 데이터 주석 지역화는 MVC 시나리오 ASP.NET Core Blazor apps에서 **지원 되지 않습니다** .
 
-자세한 내용은 <xref:fundamentals/localization>을 참조하세요.
+자세한 내용은 <xref:fundamentals/localization>을 참조하십시오.
 
 ## <a name="scalable-vector-graphics-svg-images"></a>SVG (스케일러블 벡터 그래픽) 이미지
 

@@ -3,14 +3,14 @@ title: ASP.NET Core MVC 시작
 author: rick-anderson
 description: ASP.NET Core MVC를 시작하는 방법을 알아봅니다.
 ms.author: riande
-ms.date: 08/05/2019
+ms.date: 10/16/2019
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 52d8fc631075408991d3a2e62cdaccf681c5927f
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: f07afb15c0a31110c20d96a5db5c02030cefe5d5
+ms.sourcegitcommit: e71b6a85b0e94a600af607107e298f932924c849
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71082152"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72519093"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>ASP.NET Core MVC 시작
 
@@ -66,7 +66,7 @@ ms.locfileid: "71082152"
 
 * **웹 애플리케이션(Model-View-Controller)** 을 선택한 다음, **만들기**를 선택합니다.
 
-![새 프로젝트 대화 상자, 왼쪽 창의 .NET Core, ASP.NET Core 웹 ](start-mvc/_static/new_project22-21.png)
+![새 프로젝트 대화 상자, 왼쪽 창의 .NET Core, ASP.NET Core 웹 ](start-mvc/_static/new_project30.png)
 
 Visual Studio는 방금 만든 MVC 프로젝트에 대해 기본 템플릿을 사용했습니다. 프로젝트 이름을 입력하고 몇 가지 옵션을 선택하여 바로 작동하는 앱을 만들었습니다. 이 프로젝트가 기본 시작 프로젝트입니다.
 
@@ -116,7 +116,7 @@ Visual Studio는 방금 만든 MVC 프로젝트에 대해 기본 템플릿을 �
 
 [!INCLUDE[](~/includes/trustCertVS.md)]
 
-* Visual Studio가 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)를 시작하고 앱을 실행합니다. 주소 표시줄에 `example.com` 같은 주소 대신 `localhost:port#`가 표시되는 점에 유의하세요. 그 이유는 `localhost`가 로컬 컴퓨터의 표준 이름이기 때문입니다. Visual Studio에서 웹 프로젝트를 만들 경우 웹 서버에 임의 포트가 사용됩니다.
+* Visual Studio가 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)를 시작하고 앱을 실행합니다. 주소 표시줄에 `localhost:port#` 같은 주소 대신 `example.com`가 표시되는 점에 유의하세요. 그 이유는 `localhost`가 로컬 컴퓨터의 표준 이름이기 때문입니다. Visual Studio에서 웹 프로젝트를 만들 경우 웹 서버에 임의 포트가 사용됩니다.
 * Ctrl+F5(비 디버그 모드)를 사용하여 앱을 시작하면 코드를 변경하고, 파일을 저장하고, 브라우저를 새로 고치고, 코드 변경 내용을 확인할 수 있습니다. 대부분의 개발자는 앱을 빠르게 시작하고 변경 내용을 확인하기 위해 비 디버그 모드를 선호합니다.
 * **디버그** 메뉴 항목에서 앱을 디버그 또는 비 디버그 모드로 시작할 수 있습니다.
 

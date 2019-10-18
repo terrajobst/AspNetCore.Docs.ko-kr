@@ -1,17 +1,17 @@
 ---
 title: ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 동시성 - 8/8
-author: tdykstra
+author: rick-anderson
 description: 이 자습서에는 여러 사용자가 동시에 같은 엔터티를 업데이트하는 경우 충돌을 처리하는 방법을 보여 줍니다.
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: c9cbf8fd3ed85f32b3c166bf2df702fd26df4fc3
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 944e746624bf5fe7c586a521059fa4eb34b0f1e7
+ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71080985"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72259388"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---concurrency---8-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 동시성 - 8/8
 

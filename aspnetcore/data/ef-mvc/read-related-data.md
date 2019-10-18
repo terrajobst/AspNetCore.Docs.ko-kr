@@ -1,17 +1,17 @@
 ---
 title: '자습서: 관련 데이터 읽기 - ASP.NET MVC 및 EF Core 사용'
 description: 이 자습서에서는 관련 데이터 즉, Entity Framework에서 탐색 속성으로 로드하는 데이터를 읽고 표시합니다.
-author: tdykstra
+author: rick-anderson
 ms.author: riande
 ms.date: 09/28/2019
 ms.topic: tutorial
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: cb691dce757a72a01bfd29717710d1be590c4150
-ms.sourcegitcommit: f62014bb558ff6f8fdaef2e96cb05986e216aacd
+ms.openlocfilehash: 1a16f905669d0192d713cbba9bfc6e3e75008b5d
+ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/28/2019
-ms.locfileid: "71592283"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72259427"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>자습서: 관련 데이터 읽기 - ASP.NET MVC 및 EF Core 사용
 

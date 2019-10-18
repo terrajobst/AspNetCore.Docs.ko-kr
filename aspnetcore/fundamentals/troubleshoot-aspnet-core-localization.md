@@ -5,12 +5,12 @@ description: ASP.NET Core 앱에서 지역화 관련 문제를 진단하는 방�
 ms.author: riande
 ms.date: 01/24/2019
 uid: fundamentals/troubleshoot-aspnet-core-localization
-ms.openlocfilehash: c76732c1a0389818f8f9efae8fe384ca0f9ca308
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
+ms.openlocfilehash: 98e06a92af0b6c045095ac803196bf4b1f25e5c5
+ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087373"
+ms.lasthandoff: 10/12/2019
+ms.locfileid: "72289018"
 ---
 # <a name="troubleshoot-aspnet-core-localization"></a>ASP.NET Core 지역화 문제 해결
 
@@ -75,6 +75,7 @@ _**힌트:** `CookieRequestCultureProvider`를 사용하는 경우 지역화 쿠
 
 - 다음과 같이 `RequestCultureProviders` 목록에서 0의 위치에 있는 사용자 지정 공급 기업을 삽입합니다.
 
+::: moniker range="< aspnetcore-3.0"
 ```csharp
 options.RequestCultureProviders.Insert(0, new CustomRequestCultureProvider(async context =>
     {
@@ -82,6 +83,17 @@ options.RequestCultureProviders.Insert(0, new CustomRequestCultureProvider(async
         return new ProviderCultureResult("en");
     }));
 ```
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
+```csharp
+options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async context =>
+    {
+        // My custom request culture logic
+        return new ProviderCultureResult("en");
+    }));
+```
+::: moniker-end
 
 - `AddInitialRequestCultureProvider` 확장 메서드를 사용하여 사용자 지정 공급 기업을 초기 공급 기업으로 설정합니다.
 
