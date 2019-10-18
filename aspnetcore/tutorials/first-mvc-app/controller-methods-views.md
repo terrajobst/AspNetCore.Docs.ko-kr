@@ -20,7 +20,7 @@ ms.locfileid: "67815411"
 
 ![인덱스 보기: 릴리스 날짜는 한 단어(공백 없음)이며 모든 동영상 릴리스 날짜는 오전 12시를 표시합니다.](working-with-sql/_static/m55.png)
 
-*Models/Movie.cs* 파일을 열고 아래 표시된 강조 표시된 줄을 추가합니다.
+*Models/Movie.cs* 파일을 열고 아래에 강조 표시된 줄을 추가합니다.
 
 [!code-csharp[](start-mvc/sample/MvcMovie22/Models/MovieDateFixed.cs?name=snippet_1&highlight=2,3,12-13,17)]
 
@@ -28,15 +28,15 @@ ms.locfileid: "67815411"
 
 Entity Framework Core가 `Price`를 데이터베이스의 통화에 올바르게 매핑할 수 있도록 `[Column(TypeName = "decimal(18, 2)")]` 데이터 주석이 필요합니다. 자세한 내용은 [데이터 형식](/ef/core/modeling/relational/data-types)을 참조하세요.
 
-`Movies` 컨트롤러로 이동하고 **편집** 링크 위에 마우스 포인터를 놓으면 대상 URL이 표시됩니다.
+`Movies` 컨트롤러로 이동하고 **Edit** 링크 위에 마우스 포인터를 올려놓으면 대상 URL이 표시됩니다.
 
-![브라우저 창에서 편집 링크에 마우스를 가져가면 https://localhost:5001/Movies/Edit/5 의 링크 Url이 표시됩니다.](~/tutorials/first-mvc-app/controller-methods-views/_static/edit7.png)
+![브라우저 창에서 편집 링크에 마우스를 가져가면 https://localhost:5001/Movies/Edit/5의 링크 Url이 표시됩니다.](~/tutorials/first-mvc-app/controller-methods-views/_static/edit7.png)
 
-**편집**, **세부 정보** 및 **삭제** 링크는 *Views/Movies/Index.cshtml* 파일의 Core MVC 앵커 태그 도우미에 의해 생성됩니다.
+**Edit**, **Details** 및 **Delete** 링크는 *Views/Movies/Index.cshtml* 파일의 Core MVC 앵커 태그 도우미에 의해서 생성됩니다.
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexOriginal.cshtml?highlight=1-3&range=46-50)]
 
-[태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하면 서버 쪽 코드를 Razor 파일에서 HTML 요소를 만들고 렌더링하는 데 사용할 수 있습니다. 위의 코드에서는 `AnchorTagHelper`가 컨트롤러 작업 메서드와 경로 ID로부터 HTML `href` 특성 값을 동적으로 생성합니다. 선호하는 브라우저에서 **소스 보기**를 사용하거나 개발자 도구를 통해 생성된 표시를 검사합니다. 생성된 HTML의 일부는 다음과 같습니다.
+[태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하면 서버 쪽 코드를 사용하여 Razor 파일에서 HTML 요소를 만들고 렌더링 할 수 있습니다. 위의 코드에서는 `AnchorTagHelper`가 컨트롤러 작업 메서드 및 경로 ID로부터 HTML `href` 특성 값을 동적으로 생성합니다. 선호하는 브라우저에서 **소스 보기**나 개발자 도구를 사용하여 생성된 태그를 확인합니다. 생성된 HTML의 일부는 다음과 같습니다.
 
 ```html
  <td>
@@ -46,21 +46,21 @@ Entity Framework Core가 `Price`를 데이터베이스의 통화에 올바르게
 </td>
 ```
 
-*Startup.cs* 파일의 [라우팅](xref:mvc/controllers/routing) 설정에 대한 형식을 다시 호출합니다.
+*Startup.cs* 파일에 설정된 [라우팅](xref:mvc/controllers/routing) 형식을 다시 기억해보세요.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Startup.cs?name=snippet_1&highlight=5)]
 
 ASP.NET Core는 `https://localhost:5001/Movies/Edit/4`를 매개 변수 `Id`가 4인 `Movies` 컨트롤러의 `Edit` 작업 메서드에 대한 요청으로 해석합니다. 컨트롤러 메서드는 작업 메서드라고도 합니다.
 
-[태그 도우미](xref:mvc/views/tag-helpers/intro)는 ASP.NET Core의 가장 인기 있는 새로운 기능 중 하나입니다. 자세한 내용은 [추가 리소스](#additional-resources)를 참조하세요.
+[태그 도우미](xref:mvc/views/tag-helpers/intro)는 ASP.NET Core의 가장 인기 있는 새로운 기능 중 하나입니다. 자세한 내용은 [추가 자료](#additional-resources)를 참조하세요.
 
-`Movies` 컨트롤러를 열고 두 `Edit` 작업 메서드를 검사합니다. 다음 코드는 동영상을 페치하여 *Edit.cshtml* Razor 파일에서 생성된 편집 양식에 기입하는 `HTTP GET Edit` 메서드를 보여 줍니다.
+`Movies` 컨트롤러를 열고 두 `Edit` 작업 메서드를 검사합니다. 다음 코드는 동영상을 페치하여 *Edit.cshtml* Razor 파일에서 생성된 편집 양식에 기입하는 `HTTP GET Edit` 메서드를 보여 줍니다. 
 
 ::: moniker range=">= aspnetcore-2.1"
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie21/Controllers/MC1.cs?name=snippet_edit1)]
 
-다음 코드는게시된 동영상 값을 처리하는 `HTTP POST Edit` 메서드를 보여 줍니다.
+다음 코드는 게시된 영화 값을 처리하는 `HTTP POST Edit` 메서드를 보여줍니다.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/MC1.cs?name=snippet_edit2)]
 
@@ -70,7 +70,7 @@ ASP.NET Core는 `https://localhost:5001/Movies/Edit/4`를 매개 변수 `Id`가 
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/MC1.cs?name=snippet_edit1)]
 
-다음 코드는게시된 동영상 값을 처리하는 `HTTP POST Edit` 메서드를 보여 줍니다.
+다음 코드는 게시된 영화 값을 처리하는 `HTTP POST Edit` 메서드를 보여줍니다.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/MC1.cs?name=snippet_edit2)]
 
@@ -116,7 +116,7 @@ ASP.NET Core는 `https://localhost:5001/Movies/Edit/4`를 매개 변수 `Id`가 
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Shared/edit_view_source.html?highlight=1,6,10,17,24,28)]
 
-`<input>` 요소는 `action` 특성이 `/Movies/Edit/id` URL에 게시되도록 설정된 `HTML <form>` 요소에 있습니다. 양식 데이터는 `Save` 단추를 클릭하면 서버에 게시됩니다. `</form>` 요소를 닫기 전 마지막 줄은 [양식 태그 도우미](xref:mvc/views/working-with-forms)에서 생성된 숨겨진 [XSRF](xref:security/anti-request-forgery) 토큰을 나타냅니다.
+`<input>` 요소는 `action` 특성이 `/Movies/Edit/id` URL에 게시되도록 설정된 `HTML <form>` 요소에 있습니다. 양식 데이터는 `Save` 단추를 클릭하면 서버에 게시됩니다. `</form>` 요소를 닫기 전 마지막 줄은 [양식 태그 도우미](xref:mvc/views/working-with-forms)에서 생성된 숨겨진 [XSRF](xref:security/anti-request-forgery) 토큰을 나타냅니다. 
 
 ## <a name="processing-the-post-request"></a>POST 요청 처리
 
