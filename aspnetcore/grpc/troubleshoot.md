@@ -92,7 +92,7 @@ var client = new Greet.GreeterClient(channel);
 
 Kestrel은 macOS에서 TLS를 사용 하는 HTTP/2 및 Windows 7과 같은 이전 Windows 버전을 지원 하지 않습니다. ASP.NET Core gRPC 템플릿 및 샘플은 기본적으로 TLS를 사용 합니다. GRPC 서버를 시작 하려고 하면 다음과 같은 오류 메시지가 표시 됩니다.
 
-> IPv4 루프백 인터페이스의 https://localhost:5001에 바인딩할 수 없습니다. ' n u s e/2는 n e t 2를 통해 TLS를 지원 하지 않습니다. '가 없습니다.
+> IPv4 루프백 인터페이스의 https://localhost:5001 에 바인딩할 수 없습니다. ' n u s e/2는 n e t 2를 통해 TLS를 지원 하지 않습니다. '가 없습니다.
 
 이 문제를 해결 하려면 Kestrel 및 gRPC 클라이언트에서 TLS *없이* HTTP/2를 사용 하도록 구성 합니다. 개발 하는 동안에만이 작업을 수행 해야 합니다. TLS를 사용 하지 않으면 암호화 하지 않고 gRPC 메시지가 전송 됩니다.
 
