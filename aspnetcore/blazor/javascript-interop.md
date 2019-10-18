@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/15/2019
 uid: blazor/javascript-interop
-ms.openlocfilehash: b4776a20c6da6c722d2c057d19863c570f530a21
-ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
+ms.openlocfilehash: a8c3a0951761faab1c11507834aeef2507388d71
+ms.sourcegitcommit: ce2bfb01f2cc7dd83f8a97da0689d232c71bcdc4
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72391059"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72531132"
 ---
 # <a name="aspnet-core-blazor-javascript-interop"></a>ASP.NET Core Blazor JavaScript interop
 
@@ -38,11 +38,11 @@ Blazor 서버 앱의 경우:
 
 다음 예제는 실험적 JavaScript 기반 디코더 인 [Textdecoder](https://developer.mozilla.org/docs/Web/API/TextDecoder)를 기반으로 합니다. 이 예제에서는 C# 메서드에서 JavaScript 함수를 호출 하는 방법을 보여 줍니다. JavaScript 함수는 C# 메서드에서 바이트 배열을 받아 배열을 디코딩하고 표시를 위해 구성 요소에 텍스트를 반환 합니다.
 
-*Wwwroot/index.html* (Blazor Weasembom) 또는 *Pages/_Host* (Blazor Server)의 `<head>` 요소 내에서-3을 @no__t 사용 하 여 전달 된 배열을 디코딩하는 함수를 제공 합니다.
+*Wwwroot/index.html* (Blazor Weasembom) 또는 *Pages/_Host* (Blazor Server)의 `<head>` 요소 내에서 `TextDecoder`를 사용 하 여 전달 된 배열을 디코딩하는 함수를 제공 합니다.
 
 [!code-html[](javascript-interop/samples_snapshot/index-script.html)]
 
-앞의 예제에 표시 된 코드와 같은 JavaScript 코드는 스크립트 파일에 대 한 참조를 사용 하 여 JavaScript 파일 (*.js*)에서 로드할 수도 있습니다.
+앞의 예제에 표시 된 코드와 같은 JavaScript 코드는 스크립트 파일에 대 한 참조를 사용 하 여 JavaScript 파일 ( *.js*)에서 로드할 수도 있습니다.
 
 ```html
 <script src="exampleJsInterop.js"></script>
@@ -61,7 +61,7 @@ Blazor 서버 앱의 경우:
 
   [!code-cshtml[](javascript-interop/samples_snapshot/inject-abstraction.razor?highlight=1)]
 
-* @No__t-0 추상화를 클래스 (*.cs*)에 삽입 합니다.
+* @No__t-0 추상화를 클래스 ( *.cs*)에 삽입 합니다.
 
   [!code-csharp[](javascript-interop/samples_snapshot/inject-abstraction-class.cs?highlight=5)]
 
@@ -79,17 +79,17 @@ Blazor 서버 앱의 경우:
 
 *wwwroot/exampleJsInterop*:
 
-[!code-javascript[](./common/samples/3.x/BlazorSample/wwwroot/exampleJsInterop.js?highlight=2-7)]
+[!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=2-7)]
 
-*Wwwroot/index.html* 파일 (Blazor Weasembmboms) 또는 *Pages/_Host* 파일 (Blazor Server)에서 JavaScript 파일을 참조 하는 `<script>` 태그를 저장 합니다.
+JavaScript 파일을 참조 하는 `<script>` 태그를 *wwwroot/index.html* 파일 (Blazor Weasembmboms) 또는 *Pages/_Host* 파일 (Blazor Server)에 저장 합니다.
 
 *wwwroot/index.html* (Blazor):
 
-[!code-html[](./common/samples/3.x/BlazorSample/wwwroot/index.html?highlight=15)]
+[!code-html[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/index.html?highlight=15)]
 
 *Pages/_Host* (Blazor 서버):
 
-[!code-cshtml[](javascript-interop/samples_snapshot/_Host.cshtml?highlight=29)]
+[!code-cshtml[](./common/samples/3.x/BlazorServerSample/Pages/_Host.cshtml?highlight=21)]
 
 @No__t-1 태그는 동적으로 업데이트할 수 없으므로 구성 요소 파일에 `<script>` 태그를 넣지 마세요.
 
@@ -105,7 +105,7 @@ Blazor 서버 앱의 경우:
 
 *Pages/JSInterop*:
 
-[!code-cshtml[](./common/samples/3.x/BlazorSample/Pages/JsInterop.razor?name=snippet_JSInterop1&highlight=3,19-21,23-25)]
+[!code-cshtml[](./common/samples/3.x/BlazorWebAssemblySample/Pages/JsInterop.razor?name=snippet_JSInterop1&highlight=3,19-21,23-25)]
 
 1. 구성 요소의 **트리거 Javascript 프롬프트** 단추를 선택 하 여 `TriggerJsPrompt`을 실행 하면 *wwwroot/exampleJsInterop* 파일에 제공 된 JavaScript `showPrompt` 함수가 호출 됩니다.
 1. @No__t-0 함수는 HTML로 인코딩하고 구성 요소에 반환 되는 사용자 입력 (사용자 이름)을 허용 합니다. 이 구성 요소는 사용자의 이름을 지역 변수에 저장 합니다. `name`입니다.
@@ -186,13 +186,13 @@ JavaScript에서 정적 .NET 메서드를 호출 하려면 `DotNet.invokeMethod`
 
 *Pages/JsInterop*:
 
-[!code-cshtml[](./common/samples/3.x/BlazorSample/Pages/JsInterop.razor?name=snippet_JSInterop2&highlight=7-11)]
+[!code-cshtml[](./common/samples/3.x/BlazorWebAssemblySample/Pages/JsInterop.razor?name=snippet_JSInterop2&highlight=7-11)]
 
 클라이언트에 제공 된 JavaScript는 .Net C# 메서드를 호출 합니다.
 
 *wwwroot/exampleJsInterop*:
 
-[!code-javascript[](./common/samples/3.x/BlazorSample/wwwroot/exampleJsInterop.js?highlight=8-14)]
+[!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=8-14)]
 
 **.Net 정적 메서드 ReturnArrayAsync 트리거** 단추를 선택한 경우 브라우저의 웹 개발자 도구에서 콘솔 출력을 검사 합니다.
 
@@ -218,23 +218,23 @@ JavaScript에서 .NET 인스턴스 메서드를 호출할 수도 있습니다. J
 
 *Pages/JsInterop*:
 
-[!code-cshtml[](./common/samples/3.x/BlazorSample/Pages/JsInterop.razor?name=snippet_JSInterop3&highlight=8-9)]
+[!code-cshtml[](./common/samples/3.x/BlazorWebAssemblySample/Pages/JsInterop.razor?name=snippet_JSInterop3&highlight=8-9)]
 
 `CallHelloHelperSayHello`은 `HelloHelper`의 새 인스턴스를 사용 하 여-1 @no__t JavaScript 함수를 호출 합니다.
 
 *JsInteropClasses/ExampleJsInterop*:
 
-[!code-csharp[](./common/samples/3.x/BlazorSample/JsInteropClasses/ExampleJsInterop.cs?name=snippet1&highlight=10-16)]
+[!code-csharp[](./common/samples/3.x/BlazorWebAssemblySample/JsInteropClasses/ExampleJsInterop.cs?name=snippet1&highlight=10-16)]
 
 *wwwroot/exampleJsInterop*:
 
-[!code-javascript[](./common/samples/3.x/BlazorSample/wwwroot/exampleJsInterop.js?highlight=15-18)]
+[!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=15-18)]
 
 이 이름은 `HelloHelper.Name` 속성을 설정 하는 `HelloHelper`의 생성자에 전달 됩니다. JavaScript 함수 `sayHello`이 실행 될 때 `HelloHelper.SayHello`은 JavaScript 함수에 의해 콘솔에 기록 되는 `Hello, {Name}!` 메시지를 반환 합니다.
 
 *JsInteropClasses/HelloHelper*:
 
-[!code-csharp[](./common/samples/3.x/BlazorSample/JsInteropClasses/HelloHelper.cs?name=snippet1&highlight=5,10-11)]
+[!code-csharp[](./common/samples/3.x/BlazorWebAssemblySample/JsInteropClasses/HelloHelper.cs?name=snippet1&highlight=5,10-11)]
 
 브라우저의 웹 개발자 도구에 있는 콘솔 출력:
 
