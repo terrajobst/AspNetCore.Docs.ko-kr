@@ -6,29 +6,31 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/15/2019
+no-loc:
+- Blazor
 uid: blazor/routing
-ms.openlocfilehash: d9f81c8aa2cf07f8bfaede65efcb7328088f55b9
-ms.sourcegitcommit: ce2bfb01f2cc7dd83f8a97da0689d232c71bcdc4
+ms.openlocfilehash: d4b76c00f79f333884fa7e30b27eadc6e36de287
+ms.sourcegitcommit: a166291c6708f5949c417874108332856b53b6a9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/17/2019
-ms.locfileid: "72531143"
+ms.lasthandoff: 10/18/2019
+ms.locfileid: "72589930"
 ---
-# <a name="aspnet-core-blazor-routing"></a>ASP.NET Core Blazor 라우팅
+# <a name="aspnet-core-opno-locblazor-routing"></a>ASP.NET Core Blazor 라우팅
 
 작성자: [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Blazor apps에서 요청을 라우팅하는 방법 및 `NavLink` 구성 요소를 사용 하 여 탐색 링크를 만드는 방법에 대해 알아봅니다.
+요청을 라우팅하는 방법 및 `NavLink` 구성 요소를 사용 하 여 Blazor 앱에서 탐색 링크를 만드는 방법에 대해 알아봅니다.
 
 ## <a name="aspnet-core-endpoint-routing-integration"></a>ASP.NET Core 끝점 라우팅 통합
 
-Blazor 서버는 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)에 통합 됩니다. ASP.NET Core 앱은 `Startup.Configure`에서 `MapBlazorHub`를 사용 하 여 대화형 구성 요소에 대 한 들어오는 연결을 허용 하도록 구성 됩니다.
+Blazor Server는 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)에 통합 됩니다. ASP.NET Core 앱은 `Startup.Configure`에서 `MapBlazorHub`를 사용 하 여 대화형 구성 요소에 대 한 들어오는 연결을 허용 하도록 구성 됩니다.
 
 [!code-csharp[](routing/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
-가장 일반적인 구성은 모든 요청을 Blazor Server 앱의 서버 쪽에 대 한 호스트 역할을 하는 Razor 페이지로 라우팅하는 것입니다. 규칙에 따라 *호스트* 페이지의 이름은 일반적으로 *_Host*입니다. 호스트 파일에 지정 된 경로는 경로 일치에서 낮은 우선 순위로 작동 하므로 *대체 경로* 라고 합니다. 다른 경로가 일치 하지 않는 경우 대체 (fallback) 경로를 고려 합니다. 이렇게 하면 앱이 Blazor 서버 앱을 방해 하지 않고 다른 컨트롤러 및 페이지를 사용할 수 있습니다.
+가장 일반적인 구성은 모든 요청을 Razor 페이지로 라우팅하는 것입니다 .이 페이지는 Blazor Server 앱의 서버 쪽 파트에 대 한 호스트 역할을 합니다. 규칙에 따라 *호스트* 페이지의 이름은 일반적으로 *_Host*입니다. 호스트 파일에 지정 된 경로는 경로 일치에서 낮은 우선 순위로 작동 하므로 *대체 경로* 라고 합니다. 다른 경로가 일치 하지 않는 경우 대체 (fallback) 경로를 고려 합니다. 이를 통해 앱은 Blazor Server 앱을 방해 하지 않고 다른 컨트롤러 및 페이지를 사용할 수 있습니다.
 
 ## <a name="route-templates"></a>경로 템플릿
 
@@ -59,7 +61,7 @@ Blazor 서버는 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)에 �
 [!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/BlazorRoute.razor?name=snippet_BlazorRoute)]
 
 > [!IMPORTANT]
-> Url이 올바르게 확인 될 수 있도록 앱은 *wwwroot/index.html* 파일 (Blazor Weasembome) 또는 *Pages/_Host* 파일 (Blazor Server `href`)에 `<base>` 태그를 포함 해야 합니다 (`<base href="/">`). 자세한 내용은 <xref:host-and-deploy/blazor/index#app-base-path>을 참조하십시오.
+> Url이 올바르게 확인 될 수 있도록 앱은 *wwwroot/index.html* 파일에 `<base>` 태그를 포함 해야 합니다 (Blazor Weasembomomeembse). 또는 *Pages/_Host* 파일 (Blazor Server)에 `href` 특성에 지정 된 앱 기본 경로 (`<base href="/">`)를 포함 해야 합니다. 자세한 내용은 <xref:host-and-deploy/blazor/index#app-base-path>을 참조하십시오.
 
 ## <a name="provide-custom-content-when-content-isnt-found"></a>콘텐츠를 찾을 수 없는 경우 사용자 지정 콘텐츠 제공
 
@@ -99,7 +101,7 @@ Blazor 서버는 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)에 �
 
 [!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/RouteParameter.razor?name=snippet_RouteParameter&highlight=2,7-8)]
 
-선택적 매개 변수는 ASP.NET Core 3.0에서 Blazor apps에 대해 지원 되지 않습니다. 이전 예제에서는 두 개의 `@page` 지시문이 적용 됩니다. 첫 번째는 매개 변수 없이 구성 요소에 대 한 탐색을 허용 합니다. 두 번째 `@page` 지시어는 `{text}` 경로 매개 변수를 사용 하 고 값을 `Text` 속성에 할당 합니다.
+선택적 매개 변수는 3.0 ASP.NET Core에서 Blazor 앱에 대해 지원 되지 않습니다. 이전 예제에서는 두 개의 `@page` 지시문이 적용 됩니다. 첫 번째는 매개 변수 없이 구성 요소에 대 한 탐색을 허용 합니다. 두 번째 `@page` 지시어는 `{text}` 경로 매개 변수를 사용 하 고 값을 `Text` 속성에 할당 합니다.
 
 ## <a name="route-constraints"></a>경로 제약 조건
 
@@ -130,7 +132,7 @@ Blazor 서버는 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)에 �
 
 ### <a name="routing-with-urls-that-contain-dots"></a>점이 포함 된 Url로 라우팅
 
-Blazor Server 앱에서 *_Host* 의 기본 경로는 `/` (`@page "/"`)입니다. URL이 파일을 요청 하는 것으로 나타나기 때문에 점 (`.`)을 포함 하는 요청 URL이 기본 경로와 일치 하지 않습니다. Blazor 앱은 존재 하지 않는 정적 파일에 대해 *404-찾을 수* 없음 응답을 반환 합니다. 점이 포함 된 경로를 사용 하려면 다음 경로 템플릿을 사용 하 여 _Host를 구성 *합니다* .
+@No__t_0 Server 앱에서 *_Host* 의 기본 경로는 `/` (`@page "/"`)입니다. URL이 파일을 요청 하는 것으로 나타나기 때문에 점 (`.`)을 포함 하는 요청 URL이 기본 경로와 일치 하지 않습니다. @No__t_0 앱은 존재 하지 않는 정적 파일에 대해 *404-찾을 수* 없음 응답을 반환 합니다. 점이 포함 된 경로를 사용 하려면 다음 경로 템플릿을 사용 하 여 _Host를 구성 *합니다* .
 
 ```cshtml
 @page "/{**path}"
@@ -177,7 +179,7 @@ Blazor Server 앱에서 *_Host* 의 기본 경로는 `/` (`@page "/"`)입니다.
 | 멤버 | 설명 |
 | ------ | ----------- |
 | `Uri` | 현재 절대 URI를 가져옵니다. |
-| `BaseUri` | 절대 URI를 생성 하기 위해 상대 URI 경로 앞에 추가할 수 있는 기본 URI (후행 슬래시 포함)를 가져옵니다. 일반적으로 `BaseUri`는 *wwwroot/index.html* (Blazor Weasembmbe) 또는 *Pages/_Host* (Blazor Server)의 문서 `<base>` 요소에 있는 `href` 특성에 해당 합니다. |
+| `BaseUri` | 절대 URI를 생성 하기 위해 상대 URI 경로 앞에 추가할 수 있는 기본 URI (후행 슬래시 포함)를 가져옵니다. 일반적으로 `BaseUri`는 *wwwroot/index.html* *(Blazor* weasembmbembembembembembembembembembmbembembembs Blazor)의 문서 `<base>` 요소에 있는 `href` 특성에 |
 | `NavigateTo` | 지정 된 URI로 이동 합니다. @No__t_0 `true` 경우:<ul><li>클라이언트 쪽 라우팅이 무시 됩니다.</li><li>URI가 일반적으로 클라이언트 쪽 라우터에서 처리 되는지 여부와 상관 없이 브라우저는 서버에서 새 페이지를 강제로 로드 합니다.</li></ul> |
 | `LocationChanged` | 탐색 위치가 변경 될 때 발생 하는 이벤트입니다. |
 | `ToAbsoluteUri` | 상대 URI를 절대 URI로 변환 합니다. |
