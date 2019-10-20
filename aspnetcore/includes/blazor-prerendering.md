@@ -15,18 +15,18 @@ Blazor 서버 앱은 렌더링 되지 않지만 브라우저와의 연결이 설
     {
         if (firstRender)
         {
-            JSRuntime.InvokeAsync<object>(
+            JSRuntime.InvokeVoidAsync(
                 "setElementValue", myInput, "Value set after render");
         }
     }
 }
 ```
 
-다음 구성 요소는 사전 렌더링과 호환 되는 방식으로 구성 요소의 초기화 논리의 일부로 JavaScript interop를 사용 하는 방법을 보여 줍니다. 구성 요소는 내부 `OnAfterRenderAsync`에서 렌더링 업데이트를 트리거할 수 있음을 보여 줍니다. 개발자는이 시나리오에서 무한 루프를 만드는 것을 피해 야 합니다.
+다음 구성 요소는 사전 렌더링과 호환 되는 방식으로 구성 요소의 초기화 논리의 일부로 JavaScript interop를 사용 하는 방법을 보여 줍니다. 구성 요소는 `OnAfterRenderAsync` 내부에서 렌더링 업데이트를 트리거할 수 있음을 보여 줍니다. 개발자는이 시나리오에서 무한 루프를 만드는 것을 피해 야 합니다.
 
-가 호출 되는 경우 `OnAfterRenderAsync` 는구성요소가렌더링될때까지JavaScript요소가없으므로이전수명주기메서드에서는사용되지않고에서만사용됩니다.`ElementRef` `JSRuntime.InvokeAsync`
+@No__t_0를 호출 하는 경우 구성 요소가 렌더링 될 때까지 JavaScript 요소가 없으므로 이전 수명 주기 방법이 아닌 `OnAfterRenderAsync` 에서만 `ElementRef` 사용 됩니다.
 
-`StateHasChanged`는 구성 요소를 JavaScript interop 호출에서 가져온 새 상태로 rerender 위해 호출 됩니다. 가 인 `StateHasChanged` 경우`null`에만이 호출 되기 때문에 코드에서 무한 루프를 만들지 않습니다. `infoFromJs`
+`StateHasChanged`는 JavaScript interop 호출에서 가져온 새 상태로 구성 요소를 rerender 호출 됩니다. @No__t_1 `null` 경우에만 `StateHasChanged` 호출 되기 때문에 코드에서 무한 루프를 만들지 않습니다.
 
 ```cshtml
 @page "/prerendered-interop"
