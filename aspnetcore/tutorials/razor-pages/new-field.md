@@ -6,121 +6,121 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: 0629605f4d5597a9694cb20ce00b91ff4a768468
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 1b08e1515afe656b95be9fb436caa00cd53ab9ad
+ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71082465"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72334100"
 ---
-# <a name="add-a-new-field-to-a-razor-page-in-aspnet-core"></a><span data-ttu-id="da279-103">ASP.NET Core의 Razor 페이지에 새 필드 추가</span><span class="sxs-lookup"><span data-stu-id="da279-103">Add a new field to a Razor Page in ASP.NET Core</span></span>
+# <a name="add-a-new-field-to-a-razor-page-in-aspnet-core"></a><span data-ttu-id="c37b4-103">ASP.NET Core의 Razor 페이지에 새 필드 추가</span><span class="sxs-lookup"><span data-stu-id="c37b4-103">Add a new field to a Razor Page in ASP.NET Core</span></span>
 
-<span data-ttu-id="da279-104">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="da279-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+<span data-ttu-id="c37b4-104">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="c37b4-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
 [!INCLUDE[](~/includes/rp/download.md)]
 
-<span data-ttu-id="da279-105">[Entity Framework](/ef/core/get-started/aspnetcore/new-db) 단원에서 Code First 마이그레이션은 다음 작업에 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="da279-105">In this section [Entity Framework](/ef/core/get-started/aspnetcore/new-db) Code First Migrations is used to:</span></span>
+<span data-ttu-id="c37b4-105">[Entity Framework](/ef/core/get-started/aspnetcore/new-db) 단원에서 Code First 마이그레이션은 다음 작업에 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-105">In this section [Entity Framework](/ef/core/get-started/aspnetcore/new-db) Code First Migrations is used to:</span></span>
 
-* <span data-ttu-id="da279-106">모델에 새 필드를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-106">Add a new field to the model.</span></span>
-* <span data-ttu-id="da279-107">데이터베이스로 새 필드 스키마 변경 내용을 마이그레이션합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-107">Migrate the new field schema change to the database.</span></span>
+* <span data-ttu-id="c37b4-106">모델에 새 필드를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-106">Add a new field to the model.</span></span>
+* <span data-ttu-id="c37b4-107">데이터베이스로 새 필드 스키마 변경 내용을 마이그레이션합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-107">Migrate the new field schema change to the database.</span></span>
 
-<span data-ttu-id="da279-108">EF Code First를 사용하여 자동으로 데이터베이스를 만들 경우 Code First는</span><span class="sxs-lookup"><span data-stu-id="da279-108">When using EF Code First to automatically create a database, Code First:</span></span>
+<span data-ttu-id="c37b4-108">EF Code First를 사용하여 자동으로 데이터베이스를 만들 경우 Code First는</span><span class="sxs-lookup"><span data-stu-id="c37b4-108">When using EF Code First to automatically create a database, Code First:</span></span>
 
-* <span data-ttu-id="da279-109">데이터베이스에 테이블을 추가하여 데이터베이스의 스키마가 생성된 모델 클래스와 동기화되어 있는지 여부를 추적합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-109">Adds a table to the database to track whether the schema of the database is in sync with the model classes it was generated from.</span></span>
-* <span data-ttu-id="da279-110">모델 클래스가 DB와 동기화되지 않으면 EF는 예외를 throw합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-110">If the model classes aren't in sync with the DB, EF throws an exception.</span></span>
+* <span data-ttu-id="c37b4-109">데이터베이스에 `__EFMigrationsHistory` 테이블을 추가하여 데이터베이스의 스키마가 생성된 모델 클래스와 동기화되어 있는지 여부를 추적합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-109">Adds an `__EFMigrationsHistory` table to the database to track whether the schema of the database is in sync with the model classes it was generated from.</span></span>
+* <span data-ttu-id="c37b4-110">모델 클래스가 DB와 동기화되지 않으면 EF는 예외를 throw합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-110">If the model classes aren't in sync with the DB, EF throws an exception.</span></span>
 
-<span data-ttu-id="da279-111">동기화된 스키마/모델의 자동 확인을 통해 일관성이 없는 데이터베이스/코드 문제를 쉽게 찾을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="da279-111">Automatic verification of schema/model in sync makes it easier to find inconsistent database/code issues.</span></span>
+<span data-ttu-id="c37b4-111">동기화된 스키마/모델의 자동 확인을 통해 일관성이 없는 데이터베이스/코드 문제를 쉽게 찾을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-111">Automatic verification of schema/model in sync makes it easier to find inconsistent database/code issues.</span></span>
 
-## <a name="adding-a-rating-property-to-the-movie-model"></a><span data-ttu-id="da279-112">영화 모델에 등급 속성 추가</span><span class="sxs-lookup"><span data-stu-id="da279-112">Adding a Rating Property to the Movie Model</span></span>
+## <a name="adding-a-rating-property-to-the-movie-model"></a><span data-ttu-id="c37b4-112">영화 모델에 등급 속성 추가</span><span class="sxs-lookup"><span data-stu-id="c37b4-112">Adding a Rating Property to the Movie Model</span></span>
 
-<span data-ttu-id="da279-113">*Models/Movie.cs* 파일을 열고 `Rating` 속성을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-113">Open the *Models/Movie.cs* file and add a `Rating` property:</span></span>
+<span data-ttu-id="c37b4-113">*Models/Movie.cs* 파일을 열고 `Rating` 속성을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-113">Open the *Models/Movie.cs* file and add a `Rating` property:</span></span>
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRating.cs?highlight=13&name=snippet)]
 
-<span data-ttu-id="da279-114">앱을 빌드합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-114">Build the app.</span></span>
+<span data-ttu-id="c37b4-114">앱을 빌드합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-114">Build the app.</span></span>
 
-<span data-ttu-id="da279-115">*Pages/Movies/Index.cshtml*를 편집하고 `Rating` 필드를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-115">Edit *Pages/Movies/Index.cshtml*, and add a `Rating` field:</span></span>
+<span data-ttu-id="c37b4-115">*Pages/Movies/Index.cshtml*를 편집하고 `Rating` 필드를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-115">Edit *Pages/Movies/Index.cshtml*, and add a `Rating` field:</span></span>
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/SnapShots/IndexRating.cshtml?highlight=40-42,62-64)]
 
-<span data-ttu-id="da279-116">다음 페이지를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-116">Update the following pages:</span></span>
+<span data-ttu-id="c37b4-116">다음 페이지를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-116">Update the following pages:</span></span>
 
-* <span data-ttu-id="da279-117">삭제 및 세부 정보 페이지에 `Rating` 필드를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-117">Add the `Rating` field to the Delete and Details pages.</span></span>
-* <span data-ttu-id="da279-118">[Create.cshtml](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml)을 `Rating` 필드로 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-118">Update [Create.cshtml](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml) with a `Rating` field.</span></span>
-* <span data-ttu-id="da279-119">편집 페이지에 `Rating` 필드를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-119">Add the `Rating` field to the Edit Page.</span></span>
+* <span data-ttu-id="c37b4-117">삭제 및 세부 정보 페이지에 `Rating` 필드를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-117">Add the `Rating` field to the Delete and Details pages.</span></span>
+* <span data-ttu-id="c37b4-118">[Create.cshtml](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml)을 `Rating` 필드로 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-118">Update [Create.cshtml](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml) with a `Rating` field.</span></span>
+* <span data-ttu-id="c37b4-119">편집 페이지에 `Rating` 필드를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-119">Add the `Rating` field to the Edit Page.</span></span>
 
-<span data-ttu-id="da279-120">앱은 새 필드를 포함하도록 DB가 업데이트될 때까지 작동하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="da279-120">The app won't work until the DB is updated to include the new field.</span></span> <span data-ttu-id="da279-121">지금 실행하면 앱은 `SqlException`을 throw합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-121">If run now, the app throws a `SqlException`:</span></span>
+<span data-ttu-id="c37b4-120">앱은 새 필드를 포함하도록 DB가 업데이트될 때까지 작동하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-120">The app won't work until the DB is updated to include the new field.</span></span> <span data-ttu-id="c37b4-121">데이터베이스를 업데이트하지 않고 앱을 실행하면 `SqlException`이 발생합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-121">Running the app without updating the database throws a `SqlException`:</span></span>
 
 `SqlException: Invalid column name 'Rating'.`
 
-<span data-ttu-id="da279-122">이 오류는 데이터베이스의 동영상 테이블의 스키마와 다른 업데이트된 동영상 모델 클래스로 인해 발생됩니다.</span><span class="sxs-lookup"><span data-stu-id="da279-122">This error is caused by the updated Movie model class being different than the schema of the Movie table of the database.</span></span> <span data-ttu-id="da279-123">(데이터베이스 테이블에 `Rating` 열이 없습니다.)</span><span class="sxs-lookup"><span data-stu-id="da279-123">(There's no `Rating` column in the database table.)</span></span>
+<span data-ttu-id="c37b4-122">`SqlException` 예외는 업데이트된 영화 모델 클래스가 데이터베이스의 영화 테이블의 스키마와 다르면 발생합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-122">The `SqlException` exception is caused by the updated Movie model class being different than the schema of the Movie table of the database.</span></span> <span data-ttu-id="c37b4-123">(데이터베이스 테이블에 `Rating` 열이 없습니다.)</span><span class="sxs-lookup"><span data-stu-id="c37b4-123">(There's no `Rating` column in the database table.)</span></span>
 
-<span data-ttu-id="da279-124">오류를 해결하는 몇 가지 방법이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="da279-124">There are a few approaches to resolving the error:</span></span>
+<span data-ttu-id="c37b4-124">오류를 해결하는 몇 가지 방법이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-124">There are a few approaches to resolving the error:</span></span>
 
-1. <span data-ttu-id="da279-125">새 모델 클래스 스키마를 사용하여 Entity Framework를 자동으로 삭제하고 데이터베이스를 다시 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="da279-125">Have the Entity Framework automatically drop and re-create the database using the new model class schema.</span></span> <span data-ttu-id="da279-126">이 방법은 개발 주기의 초기 단계에서 편리하며 신속하게 모델 및 데이터베이스 스키마를 함께 개발할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="da279-126">This approach is convenient early in the development cycle; it allows you to quickly evolve the model and database schema together.</span></span> <span data-ttu-id="da279-127">단점은 데이터베이스의 기존 데이터를 잃게 된다는 것입니다.</span><span class="sxs-lookup"><span data-stu-id="da279-127">The downside is that you lose existing data in the database.</span></span> <span data-ttu-id="da279-128">프로덕션 데이터베이스에서 이 방법을 사용하지 마세요.</span><span class="sxs-lookup"><span data-stu-id="da279-128">Don't use this approach on a production database!</span></span> <span data-ttu-id="da279-129">테스트 데이터로 데이터베이스를 자동으로 시드하도록 스키마에서 DB를 삭제하고 이니셜라이저를 사용하는 것은 종종 앱을 개발하는 효율적인 방법입니다.</span><span class="sxs-lookup"><span data-stu-id="da279-129">Dropping the DB on schema changes and using an initializer to automatically seed the database with test data is often a productive way to develop an app.</span></span>
+1. <span data-ttu-id="c37b4-125">새 모델 클래스 스키마를 사용하여 Entity Framework를 자동으로 삭제하고 데이터베이스를 다시 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-125">Have the Entity Framework automatically drop and re-create the database using the new model class schema.</span></span> <span data-ttu-id="c37b4-126">이 방법은 개발 주기의 초기 단계에서 편리하며 신속하게 모델 및 데이터베이스 스키마를 함께 개발할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-126">This approach is convenient early in the development cycle; it allows you to quickly evolve the model and database schema together.</span></span> <span data-ttu-id="c37b4-127">단점은 데이터베이스의 기존 데이터를 잃게 된다는 것입니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-127">The downside is that you lose existing data in the database.</span></span> <span data-ttu-id="c37b4-128">프로덕션 데이터베이스에서 이 방법을 사용하지 마세요.</span><span class="sxs-lookup"><span data-stu-id="c37b4-128">Don't use this approach on a production database!</span></span> <span data-ttu-id="c37b4-129">테스트 데이터로 데이터베이스를 자동으로 시드하도록 스키마에서 DB를 삭제하고 이니셜라이저를 사용하는 것은 종종 앱을 개발하는 효율적인 방법입니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-129">Dropping the DB on schema changes and using an initializer to automatically seed the database with test data is often a productive way to develop an app.</span></span>
 
-2. <span data-ttu-id="da279-130">모델 클래스와 일치하도록 기존 데이터베이스의 스키마를 명시적으로 수정합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-130">Explicitly modify the schema of the existing database so that it matches the model classes.</span></span> <span data-ttu-id="da279-131">이 방법의 장점은 데이터를 유지한다는 점입니다.</span><span class="sxs-lookup"><span data-stu-id="da279-131">The advantage of this approach is that you keep your data.</span></span> <span data-ttu-id="da279-132">이러한 변경을 수동으로 수행하거나 데이터베이스 변경 스크립트를 만들어 수행할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="da279-132">You can make this change either manually or by creating a database change script.</span></span>
+2. <span data-ttu-id="c37b4-130">모델 클래스와 일치하도록 기존 데이터베이스의 스키마를 명시적으로 수정합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-130">Explicitly modify the schema of the existing database so that it matches the model classes.</span></span> <span data-ttu-id="c37b4-131">이 방법의 장점은 데이터를 유지한다는 점입니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-131">The advantage of this approach is that you keep your data.</span></span> <span data-ttu-id="c37b4-132">이러한 변경을 수동으로 수행하거나 데이터베이스 변경 스크립트를 만들어 수행할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-132">You can make this change either manually or by creating a database change script.</span></span>
 
-3. <span data-ttu-id="da279-133">Code First 마이그레이션을 사용하여 데이터베이스 스키마를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-133">Use Code First Migrations to update the database schema.</span></span>
+3. <span data-ttu-id="c37b4-133">Code First 마이그레이션을 사용하여 데이터베이스 스키마를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-133">Use Code First Migrations to update the database schema.</span></span>
 
-<span data-ttu-id="da279-134">이 자습서의 경우 Code First 마이그레이션을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-134">For this tutorial, use Code First Migrations.</span></span>
+<span data-ttu-id="c37b4-134">이 자습서의 경우 Code First 마이그레이션을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-134">For this tutorial, use Code First Migrations.</span></span>
 
-<span data-ttu-id="da279-135">새 열에 대해 값을 제공하도록 `SeedData` 클래스를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-135">Update the `SeedData` class so that it provides a value for the new column.</span></span> <span data-ttu-id="da279-136">샘플 변경은 아래에 표시되지만 각 `new Movie` 블록에 대해 이 변경을 수행하려고 합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-136">A sample change is shown below, but you'll want to make this change for each `new Movie` block.</span></span>
+<span data-ttu-id="c37b4-135">새 열에 대해 값을 제공하도록 `SeedData` 클래스를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-135">Update the `SeedData` class so that it provides a value for the new column.</span></span> <span data-ttu-id="c37b4-136">샘플 변경은 아래에 표시되지만 각 `new Movie` 블록에 대해 이 변경을 수행하려고 합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-136">A sample change is shown below, but you'll want to make this change for each `new Movie` block.</span></span>
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
 
-<span data-ttu-id="da279-137">[완료된 SeedData.cs 파일](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Models/SeedDataRating.cs)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="da279-137">See the [completed SeedData.cs file](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Models/SeedDataRating.cs).</span></span>
+<span data-ttu-id="c37b4-137">[완료된 SeedData.cs 파일](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Models/SeedDataRating.cs)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="c37b4-137">See the [completed SeedData.cs file](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Models/SeedDataRating.cs).</span></span>
 
-<span data-ttu-id="da279-138">솔루션을 빌드합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-138">Build the solution.</span></span>
+<span data-ttu-id="c37b4-138">솔루션을 빌드합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-138">Build the solution.</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="da279-139">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="da279-139">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="c37b4-139">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="c37b4-139">Visual Studio</span></span>](#tab/visual-studio)
 
 <a name="pmc"></a>
 
-### <a name="add-a-migration-for-the-rating-field"></a><span data-ttu-id="da279-140">등급 필드에 대한 마이그레이션을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-140">Add a migration for the rating field</span></span>
+### <a name="add-a-migration-for-the-rating-field"></a><span data-ttu-id="c37b4-140">등급 필드에 대한 마이그레이션을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-140">Add a migration for the rating field</span></span>
 
-<span data-ttu-id="da279-141">**도구** 메뉴에서 **NuGet 패키지 관리자 > 패키지 관리자 콘솔**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-141">From the **Tools** menu, select **NuGet Package Manager > Package Manager Console**.</span></span>
-<span data-ttu-id="da279-142">PMC에서 다음 명령을 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-142">In the PMC, enter the following commands:</span></span>
+<span data-ttu-id="c37b4-141">**도구** 메뉴에서 **NuGet 패키지 관리자 > 패키지 관리자 콘솔**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-141">From the **Tools** menu, select **NuGet Package Manager > Package Manager Console**.</span></span>
+<span data-ttu-id="c37b4-142">PMC에서 다음 명령을 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-142">In the PMC, enter the following commands:</span></span>
 
 ```powershell
 Add-Migration Rating
 Update-Database
 ```
 
-<span data-ttu-id="da279-143">`Add-Migration` 명령은 프레임워크에 다음 작업을 지시합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-143">The `Add-Migration` command tells the framework to:</span></span>
+<span data-ttu-id="c37b4-143">`Add-Migration` 명령은 프레임워크에 다음 작업을 지시합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-143">The `Add-Migration` command tells the framework to:</span></span>
 
-* <span data-ttu-id="da279-144">`Movie` 모델을 `Movie` DB 스키마와 비교합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-144">Compare the `Movie` model with the `Movie` DB schema.</span></span>
-* <span data-ttu-id="da279-145">DB 스키마를 새 모델로 마이그레이션하도록 코드를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="da279-145">Create code to migrate the DB schema to the new model.</span></span>
+* <span data-ttu-id="c37b4-144">`Movie` 모델을 `Movie` DB 스키마와 비교합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-144">Compare the `Movie` model with the `Movie` DB schema.</span></span>
+* <span data-ttu-id="c37b4-145">DB 스키마를 새 모델로 마이그레이션하도록 코드를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-145">Create code to migrate the DB schema to the new model.</span></span>
 
-<span data-ttu-id="da279-146">"Rating" 이름은 임의로 지정되며 마이그레이션 파일의 이름을 지정하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="da279-146">The name "Rating" is arbitrary and is used to name the migration file.</span></span> <span data-ttu-id="da279-147">마이그레이션 파일에 의미 있는 이름을 사용하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="da279-147">It's helpful to use a meaningful name for the migration file.</span></span>
+<span data-ttu-id="c37b4-146">"Rating" 이름은 임의로 지정되며 마이그레이션 파일의 이름을 지정하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-146">The name "Rating" is arbitrary and is used to name the migration file.</span></span> <span data-ttu-id="c37b4-147">마이그레이션 파일에 의미 있는 이름을 사용하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-147">It's helpful to use a meaningful name for the migration file.</span></span>
 
-<span data-ttu-id="da279-148">`Update-Database` 명령은 스키마 변경 내용을 데이터베이스에 적용하기 위한 프레임워크를 알려줍니다.</span><span class="sxs-lookup"><span data-stu-id="da279-148">The `Update-Database` command tells the framework to apply the schema changes to the database.</span></span>
+<span data-ttu-id="c37b4-148">`Update-Database` 명령은 프레임워크에게 스키마 변경 내용을 데이터베이스에 적용하고 기존 데이터를 보존하라고 명령합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-148">The `Update-Database` command tells the framework to apply the schema changes to the database and to preserve existing data.</span></span>
 
 <a name="ssox"></a>
 
-<span data-ttu-id="da279-149">DB의 모든 레코드를 삭제하는 경우 이니셜라이저에서 DB를 시드하고 `Rating` 필드를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-149">If you delete all the records in the DB, the initializer will seed the DB and include the `Rating` field.</span></span> <span data-ttu-id="da279-150">브라우저 또는 [SSOX](xref:tutorials/razor-pages/sql#ssox)(Sql Server 개체 탐색기)에서 삭제 링크를 사용하여 이를 수행할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="da279-150">You can do this with the delete links in the browser or from [Sql Server Object Explorer](xref:tutorials/razor-pages/sql#ssox) (SSOX).</span></span>
+<span data-ttu-id="c37b4-149">DB의 모든 레코드를 삭제하는 경우 이니셜라이저에서 DB를 시드하고 `Rating` 필드를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-149">If you delete all the records in the DB, the initializer will seed the DB and include the `Rating` field.</span></span> <span data-ttu-id="c37b4-150">브라우저 또는 [SSOX](xref:tutorials/razor-pages/sql#ssox)(Sql Server 개체 탐색기)에서 삭제 링크를 사용하여 이를 수행할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-150">You can do this with the delete links in the browser or from [Sql Server Object Explorer](xref:tutorials/razor-pages/sql#ssox) (SSOX).</span></span>
 
-<span data-ttu-id="da279-151">다른 옵션은 데이터베이스를 삭제하고 마이그레이션을 사용하여 데이터베이스를 다시 만드는 것입니다.</span><span class="sxs-lookup"><span data-stu-id="da279-151">Another option is to delete the database and use migrations to re-create the database.</span></span> <span data-ttu-id="da279-152">SSOX에서 데이터베이스를 삭제하려면:</span><span class="sxs-lookup"><span data-stu-id="da279-152">To delete the database in SSOX:</span></span>
+<span data-ttu-id="c37b4-151">다른 옵션은 데이터베이스를 삭제하고 마이그레이션을 사용하여 데이터베이스를 다시 만드는 것입니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-151">Another option is to delete the database and use migrations to re-create the database.</span></span> <span data-ttu-id="c37b4-152">SSOX에서 데이터베이스를 삭제하려면:</span><span class="sxs-lookup"><span data-stu-id="c37b4-152">To delete the database in SSOX:</span></span>
 
-* <span data-ttu-id="da279-153">SSOX에서 데이터베이스를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-153">Select the database in SSOX.</span></span>
-* <span data-ttu-id="da279-154">데이터베이스를 마우스 오른쪽 단추로 클릭하고 *삭제*를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-154">Right click on the database, and select *Delete*.</span></span>
-* <span data-ttu-id="da279-155">**기존 연결 닫기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-155">Check **Close existing connections**.</span></span>
-* <span data-ttu-id="da279-156">**확인**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-156">Select **OK**.</span></span>
-* <span data-ttu-id="da279-157">[PMC](xref:tutorials/razor-pages/new-field#pmc)에서 데이터베이스를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-157">In the [PMC](xref:tutorials/razor-pages/new-field#pmc), update the database:</span></span>
+* <span data-ttu-id="c37b4-153">SSOX에서 데이터베이스를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-153">Select the database in SSOX.</span></span>
+* <span data-ttu-id="c37b4-154">데이터베이스를 마우스 오른쪽 단추로 클릭하고 *삭제*를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-154">Right click on the database, and select *Delete*.</span></span>
+* <span data-ttu-id="c37b4-155">**기존 연결 닫기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-155">Check **Close existing connections**.</span></span>
+* <span data-ttu-id="c37b4-156">**확인**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-156">Select **OK**.</span></span>
+* <span data-ttu-id="c37b4-157">[PMC](xref:tutorials/razor-pages/new-field#pmc)에서 데이터베이스를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-157">In the [PMC](xref:tutorials/razor-pages/new-field#pmc), update the database:</span></span>
 
   ```powershell
   Update-Database
   ```
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="da279-158">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="da279-158">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="c37b4-158">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="c37b4-158">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-### <a name="drop-and-re-create-the-database"></a><span data-ttu-id="da279-159">데이터베이스를 삭제하고 다시 만들기</span><span class="sxs-lookup"><span data-stu-id="da279-159">Drop and re-create the database</span></span>
+### <a name="drop-and-re-create-the-database"></a><span data-ttu-id="c37b4-159">데이터베이스를 삭제하고 다시 만들기</span><span class="sxs-lookup"><span data-stu-id="c37b4-159">Drop and re-create the database</span></span>
 
 [!INCLUDE[](~/includes/RP-mvc-shared/sqlite-warn.md)]
 
-<span data-ttu-id="da279-160">마이그레이션 폴더를 삭제합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-160">Delete the migration folder.</span></span>  <span data-ttu-id="da279-161">다음 명령을 사용하여 데이터베이스를 다시 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="da279-161">Use the following commands to recreate the database.</span></span>
+<span data-ttu-id="c37b4-160">마이그레이션 폴더를 삭제합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-160">Delete the migration folder.</span></span>  <span data-ttu-id="c37b4-161">다음 명령을 사용하여 데이터베이스를 다시 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-161">Use the following commands to recreate the database.</span></span>
 
 ```dotnetcli
 dotnet ef database drop
@@ -130,15 +130,15 @@ dotnet ef database update
 
 ---
 
-<span data-ttu-id="da279-162">앱을 실행하고 `Rating` 필드를 사용하여 동영상을 만들고/편집/표시할 수 있는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-162">Run the app and verify you can create/edit/display movies with a `Rating` field.</span></span> <span data-ttu-id="da279-163">데이터베이스가 시드되지 않은 경우 `SeedData.Initialize` 메서드에서 중단점을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-163">If the database isn't seeded, set a break point in the `SeedData.Initialize` method.</span></span>
+<span data-ttu-id="c37b4-162">앱을 실행하고 `Rating` 필드를 사용하여 동영상을 만들고/편집/표시할 수 있는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-162">Run the app and verify you can create/edit/display movies with a `Rating` field.</span></span> <span data-ttu-id="c37b4-163">데이터베이스가 시드되지 않은 경우 `SeedData.Initialize` 메서드에서 중단점을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-163">If the database isn't seeded, set a break point in the `SeedData.Initialize` method.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="da279-164">추가 자료</span><span class="sxs-lookup"><span data-stu-id="da279-164">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="c37b4-164">추가 자료</span><span class="sxs-lookup"><span data-stu-id="c37b4-164">Additional resources</span></span>
 
-* [<span data-ttu-id="da279-165">이 자습서의 YouTube 버전</span><span class="sxs-lookup"><span data-stu-id="da279-165">YouTube version of this tutorial</span></span>](https://youtu.be/3i7uMxiGGR8)
+* [<span data-ttu-id="c37b4-165">이 자습서의 YouTube 버전</span><span class="sxs-lookup"><span data-stu-id="c37b4-165">YouTube version of this tutorial</span></span>](https://youtu.be/3i7uMxiGGR8)
 
 > [!div class="step-by-step"]
-> <span data-ttu-id="da279-166">[이전: 검색 추가](xref:tutorials/razor-pages/search)
-> [다음: 유효성 검사 추가](xref:tutorials/razor-pages/validation)</span><span class="sxs-lookup"><span data-stu-id="da279-166">[Previous: Adding Search](xref:tutorials/razor-pages/search)
+> <span data-ttu-id="c37b4-166">[이전: 검색 추가](xref:tutorials/razor-pages/search)
+> [다음: 유효성 검사 추가](xref:tutorials/razor-pages/validation)</span><span class="sxs-lookup"><span data-stu-id="c37b4-166">[Previous: Adding Search](xref:tutorials/razor-pages/search)
 [Next: Adding Validation](xref:tutorials/razor-pages/validation)</span></span>
 
 ::: moniker-end
@@ -147,106 +147,106 @@ dotnet ef database update
 
 [!INCLUDE[](~/includes/rp/download.md)]
 
-<span data-ttu-id="da279-167">[Entity Framework](/ef/core/get-started/aspnetcore/new-db) 단원에서 Code First 마이그레이션은 다음 작업에 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="da279-167">In this section [Entity Framework](/ef/core/get-started/aspnetcore/new-db) Code First Migrations is used to:</span></span>
+<span data-ttu-id="c37b4-167">[Entity Framework](/ef/core/get-started/aspnetcore/new-db) 단원에서 Code First 마이그레이션은 다음 작업에 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-167">In this section [Entity Framework](/ef/core/get-started/aspnetcore/new-db) Code First Migrations is used to:</span></span>
 
-* <span data-ttu-id="da279-168">모델에 새 필드를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-168">Add a new field to the model.</span></span>
-* <span data-ttu-id="da279-169">데이터베이스로 새 필드 스키마 변경 내용을 마이그레이션합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-169">Migrate the new field schema change to the database.</span></span>
+* <span data-ttu-id="c37b4-168">모델에 새 필드를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-168">Add a new field to the model.</span></span>
+* <span data-ttu-id="c37b4-169">데이터베이스로 새 필드 스키마 변경 내용을 마이그레이션합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-169">Migrate the new field schema change to the database.</span></span>
 
-<span data-ttu-id="da279-170">EF Code First를 사용하여 자동으로 데이터베이스를 만들 경우 Code First는</span><span class="sxs-lookup"><span data-stu-id="da279-170">When using EF Code First to automatically create a database, Code First:</span></span>
+<span data-ttu-id="c37b4-170">EF Code First를 사용하여 자동으로 데이터베이스를 만들 경우 Code First는</span><span class="sxs-lookup"><span data-stu-id="c37b4-170">When using EF Code First to automatically create a database, Code First:</span></span>
 
-* <span data-ttu-id="da279-171">데이터베이스에 테이블을 추가하여 데이터베이스의 스키마가 생성된 모델 클래스와 동기화되어 있는지 여부를 추적합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-171">Adds a table to the database to track whether the schema of the database is in sync with the model classes it was generated from.</span></span>
-* <span data-ttu-id="da279-172">모델 클래스가 DB와 동기화되지 않으면 EF는 예외를 throw합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-172">If the model classes aren't in sync with the DB, EF throws an exception.</span></span>
+* <span data-ttu-id="c37b4-171">데이터베이스에 테이블을 추가하여 데이터베이스의 스키마가 생성된 모델 클래스와 동기화되어 있는지 여부를 추적합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-171">Adds a table to the database to track whether the schema of the database is in sync with the model classes it was generated from.</span></span>
+* <span data-ttu-id="c37b4-172">모델 클래스가 DB와 동기화되지 않으면 EF는 예외를 throw합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-172">If the model classes aren't in sync with the DB, EF throws an exception.</span></span>
 
-<span data-ttu-id="da279-173">동기화된 스키마/모델의 자동 확인을 통해 일관성이 없는 데이터베이스/코드 문제를 쉽게 찾을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="da279-173">Automatic verification of schema/model in sync makes it easier to find inconsistent database/code issues.</span></span>
+<span data-ttu-id="c37b4-173">동기화된 스키마/모델의 자동 확인을 통해 일관성이 없는 데이터베이스/코드 문제를 쉽게 찾을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-173">Automatic verification of schema/model in sync makes it easier to find inconsistent database/code issues.</span></span>
 
-## <a name="adding-a-rating-property-to-the-movie-model"></a><span data-ttu-id="da279-174">영화 모델에 등급 속성 추가</span><span class="sxs-lookup"><span data-stu-id="da279-174">Adding a Rating Property to the Movie Model</span></span>
+## <a name="adding-a-rating-property-to-the-movie-model"></a><span data-ttu-id="c37b4-174">영화 모델에 등급 속성 추가</span><span class="sxs-lookup"><span data-stu-id="c37b4-174">Adding a Rating Property to the Movie Model</span></span>
 
-<span data-ttu-id="da279-175">*Models/Movie.cs* 파일을 열고 `Rating` 속성을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-175">Open the *Models/Movie.cs* file and add a `Rating` property:</span></span>
+<span data-ttu-id="c37b4-175">*Models/Movie.cs* 파일을 열고 `Rating` 속성을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-175">Open the *Models/Movie.cs* file and add a `Rating` property:</span></span>
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Models/MovieDateRating.cs?highlight=13&name=snippet)]
 
-<span data-ttu-id="da279-176">앱을 빌드합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-176">Build the app.</span></span>
+<span data-ttu-id="c37b4-176">앱을 빌드합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-176">Build the app.</span></span>
 
-<span data-ttu-id="da279-177">*Pages/Movies/Index.cshtml*를 편집하고 `Rating` 필드를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-177">Edit *Pages/Movies/Index.cshtml*, and add a `Rating` field:</span></span>
+<span data-ttu-id="c37b4-177">*Pages/Movies/Index.cshtml*를 편집하고 `Rating` 필드를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-177">Edit *Pages/Movies/Index.cshtml*, and add a `Rating` field:</span></span>
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/IndexRating.cshtml?highlight=40-42,61-63)]
 
-<span data-ttu-id="da279-178">다음 페이지를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-178">Update the following pages:</span></span>
+<span data-ttu-id="c37b4-178">다음 페이지를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-178">Update the following pages:</span></span>
 
-* <span data-ttu-id="da279-179">삭제 및 세부 정보 페이지에 `Rating` 필드를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-179">Add the `Rating` field to the Delete and Details pages.</span></span>
-* <span data-ttu-id="da279-180">[Create.cshtml](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml)을 `Rating` 필드로 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-180">Update [Create.cshtml](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml) with a `Rating` field.</span></span>
-* <span data-ttu-id="da279-181">편집 페이지에 `Rating` 필드를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-181">Add the `Rating` field to the Edit Page.</span></span>
+* <span data-ttu-id="c37b4-179">삭제 및 세부 정보 페이지에 `Rating` 필드를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-179">Add the `Rating` field to the Delete and Details pages.</span></span>
+* <span data-ttu-id="c37b4-180">[Create.cshtml](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml)을 `Rating` 필드로 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-180">Update [Create.cshtml](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml) with a `Rating` field.</span></span>
+* <span data-ttu-id="c37b4-181">편집 페이지에 `Rating` 필드를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-181">Add the `Rating` field to the Edit Page.</span></span>
 
-<span data-ttu-id="da279-182">앱은 새 필드를 포함하도록 DB가 업데이트될 때까지 작동하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="da279-182">The app won't work until the DB is updated to include the new field.</span></span> <span data-ttu-id="da279-183">지금 실행하면 앱은 `SqlException`을 throw합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-183">If run now, the app throws a `SqlException`:</span></span>
+<span data-ttu-id="c37b4-182">앱은 새 필드를 포함하도록 DB가 업데이트될 때까지 작동하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-182">The app won't work until the DB is updated to include the new field.</span></span> <span data-ttu-id="c37b4-183">지금 실행하면 앱은 `SqlException`을 throw합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-183">If run now, the app throws a `SqlException`:</span></span>
 
 `SqlException: Invalid column name 'Rating'.`
 
-<span data-ttu-id="da279-184">이 오류는 데이터베이스의 동영상 테이블의 스키마와 다른 업데이트된 동영상 모델 클래스로 인해 발생됩니다.</span><span class="sxs-lookup"><span data-stu-id="da279-184">This error is caused by the updated Movie model class being different than the schema of the Movie table of the database.</span></span> <span data-ttu-id="da279-185">(데이터베이스 테이블에 `Rating` 열이 없습니다.)</span><span class="sxs-lookup"><span data-stu-id="da279-185">(There's no `Rating` column in the database table.)</span></span>
+<span data-ttu-id="c37b4-184">이 오류는 데이터베이스의 동영상 테이블의 스키마와 다른 업데이트된 동영상 모델 클래스로 인해 발생됩니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-184">This error is caused by the updated Movie model class being different than the schema of the Movie table of the database.</span></span> <span data-ttu-id="c37b4-185">(데이터베이스 테이블에 `Rating` 열이 없습니다.)</span><span class="sxs-lookup"><span data-stu-id="c37b4-185">(There's no `Rating` column in the database table.)</span></span>
 
-<span data-ttu-id="da279-186">오류를 해결하는 몇 가지 방법이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="da279-186">There are a few approaches to resolving the error:</span></span>
+<span data-ttu-id="c37b4-186">오류를 해결하는 몇 가지 방법이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-186">There are a few approaches to resolving the error:</span></span>
 
-1. <span data-ttu-id="da279-187">새 모델 클래스 스키마를 사용하여 Entity Framework를 자동으로 삭제하고 데이터베이스를 다시 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="da279-187">Have the Entity Framework automatically drop and re-create the database using the new model class schema.</span></span> <span data-ttu-id="da279-188">이 방법은 개발 주기의 초기 단계에서 편리하며 신속하게 모델 및 데이터베이스 스키마를 함께 개발할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="da279-188">This approach is convenient early in the development cycle; it allows you to quickly evolve the model and database schema together.</span></span> <span data-ttu-id="da279-189">단점은 데이터베이스의 기존 데이터를 잃게 된다는 것입니다.</span><span class="sxs-lookup"><span data-stu-id="da279-189">The downside is that you lose existing data in the database.</span></span> <span data-ttu-id="da279-190">프로덕션 데이터베이스에서 이 방법을 사용하지 마세요.</span><span class="sxs-lookup"><span data-stu-id="da279-190">Don't use this approach on a production database!</span></span> <span data-ttu-id="da279-191">테스트 데이터로 데이터베이스를 자동으로 시드하도록 스키마에서 DB를 삭제하고 이니셜라이저를 사용하는 것은 종종 앱을 개발하는 효율적인 방법입니다.</span><span class="sxs-lookup"><span data-stu-id="da279-191">Dropping the DB on schema changes and using an initializer to automatically seed the database with test data is often a productive way to develop an app.</span></span>
+1. <span data-ttu-id="c37b4-187">새 모델 클래스 스키마를 사용하여 Entity Framework를 자동으로 삭제하고 데이터베이스를 다시 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-187">Have the Entity Framework automatically drop and re-create the database using the new model class schema.</span></span> <span data-ttu-id="c37b4-188">이 방법은 개발 주기의 초기 단계에서 편리하며 신속하게 모델 및 데이터베이스 스키마를 함께 개발할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-188">This approach is convenient early in the development cycle; it allows you to quickly evolve the model and database schema together.</span></span> <span data-ttu-id="c37b4-189">단점은 데이터베이스의 기존 데이터를 잃게 된다는 것입니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-189">The downside is that you lose existing data in the database.</span></span> <span data-ttu-id="c37b4-190">프로덕션 데이터베이스에서 이 방법을 사용하지 마세요.</span><span class="sxs-lookup"><span data-stu-id="c37b4-190">Don't use this approach on a production database!</span></span> <span data-ttu-id="c37b4-191">테스트 데이터로 데이터베이스를 자동으로 시드하도록 스키마에서 DB를 삭제하고 이니셜라이저를 사용하는 것은 종종 앱을 개발하는 효율적인 방법입니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-191">Dropping the DB on schema changes and using an initializer to automatically seed the database with test data is often a productive way to develop an app.</span></span>
 
-2. <span data-ttu-id="da279-192">모델 클래스와 일치하도록 기존 데이터베이스의 스키마를 명시적으로 수정합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-192">Explicitly modify the schema of the existing database so that it matches the model classes.</span></span> <span data-ttu-id="da279-193">이 방법의 장점은 데이터를 유지한다는 점입니다.</span><span class="sxs-lookup"><span data-stu-id="da279-193">The advantage of this approach is that you keep your data.</span></span> <span data-ttu-id="da279-194">이러한 변경을 수동으로 수행하거나 데이터베이스 변경 스크립트를 만들어 수행할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="da279-194">You can make this change either manually or by creating a database change script.</span></span>
+2. <span data-ttu-id="c37b4-192">모델 클래스와 일치하도록 기존 데이터베이스의 스키마를 명시적으로 수정합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-192">Explicitly modify the schema of the existing database so that it matches the model classes.</span></span> <span data-ttu-id="c37b4-193">이 방법의 장점은 데이터를 유지한다는 점입니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-193">The advantage of this approach is that you keep your data.</span></span> <span data-ttu-id="c37b4-194">이러한 변경을 수동으로 수행하거나 데이터베이스 변경 스크립트를 만들어 수행할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-194">You can make this change either manually or by creating a database change script.</span></span>
 
-3. <span data-ttu-id="da279-195">Code First 마이그레이션을 사용하여 데이터베이스 스키마를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-195">Use Code First Migrations to update the database schema.</span></span>
+3. <span data-ttu-id="c37b4-195">Code First 마이그레이션을 사용하여 데이터베이스 스키마를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-195">Use Code First Migrations to update the database schema.</span></span>
 
-<span data-ttu-id="da279-196">이 자습서의 경우 Code First 마이그레이션을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-196">For this tutorial, use Code First Migrations.</span></span>
+<span data-ttu-id="c37b4-196">이 자습서의 경우 Code First 마이그레이션을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-196">For this tutorial, use Code First Migrations.</span></span>
 
-<span data-ttu-id="da279-197">새 열에 대해 값을 제공하도록 `SeedData` 클래스를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-197">Update the `SeedData` class so that it provides a value for the new column.</span></span> <span data-ttu-id="da279-198">샘플 변경은 아래에 표시되지만 각 `new Movie` 블록에 대해 이 변경을 수행하려고 합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-198">A sample change is shown below, but you'll want to make this change for each `new Movie` block.</span></span>
+<span data-ttu-id="c37b4-197">새 열에 대해 값을 제공하도록 `SeedData` 클래스를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-197">Update the `SeedData` class so that it provides a value for the new column.</span></span> <span data-ttu-id="c37b4-198">샘플 변경은 아래에 표시되지만 각 `new Movie` 블록에 대해 이 변경을 수행하려고 합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-198">A sample change is shown below, but you'll want to make this change for each `new Movie` block.</span></span>
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
 
-<span data-ttu-id="da279-199">[완료된 SeedData.cs 파일](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Models/SeedDataRating.cs)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="da279-199">See the [completed SeedData.cs file](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Models/SeedDataRating.cs).</span></span>
+<span data-ttu-id="c37b4-199">[완료된 SeedData.cs 파일](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Models/SeedDataRating.cs)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="c37b4-199">See the [completed SeedData.cs file](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Models/SeedDataRating.cs).</span></span>
 
-<span data-ttu-id="da279-200">솔루션을 빌드합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-200">Build the solution.</span></span>
+<span data-ttu-id="c37b4-200">솔루션을 빌드합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-200">Build the solution.</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="da279-201">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="da279-201">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="c37b4-201">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="c37b4-201">Visual Studio</span></span>](#tab/visual-studio)
 
 <a name="pmc"></a>
 
-### <a name="add-a-migration-for-the-rating-field"></a><span data-ttu-id="da279-202">등급 필드에 대한 마이그레이션을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-202">Add a migration for the rating field</span></span>
+### <a name="add-a-migration-for-the-rating-field"></a><span data-ttu-id="c37b4-202">등급 필드에 대한 마이그레이션을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-202">Add a migration for the rating field</span></span>
 
-<span data-ttu-id="da279-203">**도구** 메뉴에서 **NuGet 패키지 관리자 > 패키지 관리자 콘솔**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-203">From the **Tools** menu, select **NuGet Package Manager > Package Manager Console**.</span></span>
-<span data-ttu-id="da279-204">PMC에서 다음 명령을 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-204">In the PMC, enter the following commands:</span></span>
+<span data-ttu-id="c37b4-203">**도구** 메뉴에서 **NuGet 패키지 관리자 > 패키지 관리자 콘솔**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-203">From the **Tools** menu, select **NuGet Package Manager > Package Manager Console**.</span></span>
+<span data-ttu-id="c37b4-204">PMC에서 다음 명령을 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-204">In the PMC, enter the following commands:</span></span>
 
 ```powershell
 Add-Migration Rating
 Update-Database
 ```
 
-<span data-ttu-id="da279-205">`Add-Migration` 명령은 프레임워크에 다음 작업을 지시합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-205">The `Add-Migration` command tells the framework to:</span></span>
+<span data-ttu-id="c37b4-205">`Add-Migration` 명령은 프레임워크에 다음 작업을 지시합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-205">The `Add-Migration` command tells the framework to:</span></span>
 
-* <span data-ttu-id="da279-206">`Movie` 모델을 `Movie` DB 스키마와 비교합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-206">Compare the `Movie` model with the `Movie` DB schema.</span></span>
-* <span data-ttu-id="da279-207">DB 스키마를 새 모델로 마이그레이션하도록 코드를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="da279-207">Create code to migrate the DB schema to the new model.</span></span>
+* <span data-ttu-id="c37b4-206">`Movie` 모델을 `Movie` DB 스키마와 비교합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-206">Compare the `Movie` model with the `Movie` DB schema.</span></span>
+* <span data-ttu-id="c37b4-207">DB 스키마를 새 모델로 마이그레이션하도록 코드를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-207">Create code to migrate the DB schema to the new model.</span></span>
 
-<span data-ttu-id="da279-208">"Rating" 이름은 임의로 지정되며 마이그레이션 파일의 이름을 지정하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="da279-208">The name "Rating" is arbitrary and is used to name the migration file.</span></span> <span data-ttu-id="da279-209">마이그레이션 파일에 의미 있는 이름을 사용하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="da279-209">It's helpful to use a meaningful name for the migration file.</span></span>
+<span data-ttu-id="c37b4-208">"Rating" 이름은 임의로 지정되며 마이그레이션 파일의 이름을 지정하는 데 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-208">The name "Rating" is arbitrary and is used to name the migration file.</span></span> <span data-ttu-id="c37b4-209">마이그레이션 파일에 의미 있는 이름을 사용하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-209">It's helpful to use a meaningful name for the migration file.</span></span>
 
-<span data-ttu-id="da279-210">`Update-Database` 명령은 스키마 변경 내용을 데이터베이스에 적용하기 위한 프레임워크를 알려줍니다.</span><span class="sxs-lookup"><span data-stu-id="da279-210">The `Update-Database` command tells the framework to apply the schema changes to the database.</span></span>
+<span data-ttu-id="c37b4-210">`Update-Database` 명령은 스키마 변경 내용을 데이터베이스에 적용하기 위한 프레임워크를 알려줍니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-210">The `Update-Database` command tells the framework to apply the schema changes to the database.</span></span>
 
 <a name="ssox"></a>
 
-<span data-ttu-id="da279-211">DB의 모든 레코드를 삭제하는 경우 이니셜라이저에서 DB를 시드하고 `Rating` 필드를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-211">If you delete all the records in the DB, the initializer will seed the DB and include the `Rating` field.</span></span> <span data-ttu-id="da279-212">브라우저 또는 [SSOX](xref:tutorials/razor-pages/sql#ssox)(Sql Server 개체 탐색기)에서 삭제 링크를 사용하여 이를 수행할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="da279-212">You can do this with the delete links in the browser or from [Sql Server Object Explorer](xref:tutorials/razor-pages/sql#ssox) (SSOX).</span></span>
+<span data-ttu-id="c37b4-211">DB의 모든 레코드를 삭제하는 경우 이니셜라이저에서 DB를 시드하고 `Rating` 필드를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-211">If you delete all the records in the DB, the initializer will seed the DB and include the `Rating` field.</span></span> <span data-ttu-id="c37b4-212">브라우저 또는 [SSOX](xref:tutorials/razor-pages/sql#ssox)(Sql Server 개체 탐색기)에서 삭제 링크를 사용하여 이를 수행할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-212">You can do this with the delete links in the browser or from [Sql Server Object Explorer](xref:tutorials/razor-pages/sql#ssox) (SSOX).</span></span>
 
-<span data-ttu-id="da279-213">다른 옵션은 데이터베이스를 삭제하고 마이그레이션을 사용하여 데이터베이스를 다시 만드는 것입니다.</span><span class="sxs-lookup"><span data-stu-id="da279-213">Another option is to delete the database and use migrations to re-create the database.</span></span> <span data-ttu-id="da279-214">SSOX에서 데이터베이스를 삭제하려면:</span><span class="sxs-lookup"><span data-stu-id="da279-214">To delete the database in SSOX:</span></span>
+<span data-ttu-id="c37b4-213">다른 옵션은 데이터베이스를 삭제하고 마이그레이션을 사용하여 데이터베이스를 다시 만드는 것입니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-213">Another option is to delete the database and use migrations to re-create the database.</span></span> <span data-ttu-id="c37b4-214">SSOX에서 데이터베이스를 삭제하려면:</span><span class="sxs-lookup"><span data-stu-id="c37b4-214">To delete the database in SSOX:</span></span>
 
-* <span data-ttu-id="da279-215">SSOX에서 데이터베이스를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-215">Select the database in SSOX.</span></span>
-* <span data-ttu-id="da279-216">데이터베이스를 마우스 오른쪽 단추로 클릭하고 *삭제*를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-216">Right click on the database, and select *Delete*.</span></span>
-* <span data-ttu-id="da279-217">**기존 연결 닫기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-217">Check **Close existing connections**.</span></span>
-* <span data-ttu-id="da279-218">**확인**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-218">Select **OK**.</span></span>
-* <span data-ttu-id="da279-219">[PMC](xref:tutorials/razor-pages/new-field#pmc)에서 데이터베이스를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-219">In the [PMC](xref:tutorials/razor-pages/new-field#pmc), update the database:</span></span>
+* <span data-ttu-id="c37b4-215">SSOX에서 데이터베이스를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-215">Select the database in SSOX.</span></span>
+* <span data-ttu-id="c37b4-216">데이터베이스를 마우스 오른쪽 단추로 클릭하고 *삭제*를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-216">Right click on the database, and select *Delete*.</span></span>
+* <span data-ttu-id="c37b4-217">**기존 연결 닫기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-217">Check **Close existing connections**.</span></span>
+* <span data-ttu-id="c37b4-218">**확인**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-218">Select **OK**.</span></span>
+* <span data-ttu-id="c37b4-219">[PMC](xref:tutorials/razor-pages/new-field#pmc)에서 데이터베이스를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-219">In the [PMC](xref:tutorials/razor-pages/new-field#pmc), update the database:</span></span>
 
   ```powershell
   Update-Database
   ```
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="da279-220">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="da279-220">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="c37b4-220">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="c37b4-220">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-### <a name="drop-and-re-create-the-database"></a><span data-ttu-id="da279-221">데이터베이스를 삭제하고 다시 만들기</span><span class="sxs-lookup"><span data-stu-id="da279-221">Drop and re-create the database</span></span>
+### <a name="drop-and-re-create-the-database"></a><span data-ttu-id="c37b4-221">데이터베이스를 삭제하고 다시 만들기</span><span class="sxs-lookup"><span data-stu-id="c37b4-221">Drop and re-create the database</span></span>
 
 [!INCLUDE[](~/includes/RP-mvc-shared/sqlite-warn.md)]
 
-<span data-ttu-id="da279-222">데이터베이스를 삭제하고 마이그레이션을 사용하여 데이터베이스를 다시 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="da279-222">Delete the database and use migrations to re-create the database.</span></span> <span data-ttu-id="da279-223">데이터베이스를 삭제하려면 데이터베이스 파일(*MvcMovie.db*)을 삭제합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-223">To delete the database, delete the database file (*MvcMovie.db*).</span></span> <span data-ttu-id="da279-224">그런 다음, `ef database update` 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-224">Then run the `ef database update` command:</span></span>
+<span data-ttu-id="c37b4-222">데이터베이스를 삭제하고 마이그레이션을 사용하여 데이터베이스를 다시 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-222">Delete the database and use migrations to re-create the database.</span></span> <span data-ttu-id="c37b4-223">데이터베이스를 삭제하려면 데이터베이스 파일(*MvcMovie.db*)을 삭제합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-223">To delete the database, delete the database file (*MvcMovie.db*).</span></span> <span data-ttu-id="c37b4-224">그런 다음, `ef database update` 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-224">Then run the `ef database update` command:</span></span>
 
 ```dotnetcli
 dotnet ef database update
@@ -254,15 +254,15 @@ dotnet ef database update
 
 ---
 
-<span data-ttu-id="da279-225">앱을 실행하고 `Rating` 필드를 사용하여 동영상을 만들고/편집/표시할 수 있는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-225">Run the app and verify you can create/edit/display movies with a `Rating` field.</span></span> <span data-ttu-id="da279-226">데이터베이스가 시드되지 않은 경우 `SeedData.Initialize` 메서드에서 중단점을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="da279-226">If the database isn't seeded, set a break point in the `SeedData.Initialize` method.</span></span>
+<span data-ttu-id="c37b4-225">앱을 실행하고 `Rating` 필드를 사용하여 동영상을 만들고/편집/표시할 수 있는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-225">Run the app and verify you can create/edit/display movies with a `Rating` field.</span></span> <span data-ttu-id="c37b4-226">데이터베이스가 시드되지 않은 경우 `SeedData.Initialize` 메서드에서 중단점을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="c37b4-226">If the database isn't seeded, set a break point in the `SeedData.Initialize` method.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="da279-227">추가 자료</span><span class="sxs-lookup"><span data-stu-id="da279-227">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="c37b4-227">추가 자료</span><span class="sxs-lookup"><span data-stu-id="c37b4-227">Additional resources</span></span>
 
-* [<span data-ttu-id="da279-228">이 자습서의 YouTube 버전</span><span class="sxs-lookup"><span data-stu-id="da279-228">YouTube version of this tutorial</span></span>](https://youtu.be/3i7uMxiGGR8)
+* [<span data-ttu-id="c37b4-228">이 자습서의 YouTube 버전</span><span class="sxs-lookup"><span data-stu-id="c37b4-228">YouTube version of this tutorial</span></span>](https://youtu.be/3i7uMxiGGR8)
 
 > [!div class="step-by-step"]
-> <span data-ttu-id="da279-229">[이전: 검색 추가](xref:tutorials/razor-pages/search)
-> [다음: 유효성 검사 추가](xref:tutorials/razor-pages/validation)</span><span class="sxs-lookup"><span data-stu-id="da279-229">[Previous: Adding Search](xref:tutorials/razor-pages/search)
+> <span data-ttu-id="c37b4-229">[이전: 검색 추가](xref:tutorials/razor-pages/search)
+> [다음: 유효성 검사 추가](xref:tutorials/razor-pages/validation)</span><span class="sxs-lookup"><span data-stu-id="c37b4-229">[Previous: Adding Search](xref:tutorials/razor-pages/search)
 [Next: Adding Validation](xref:tutorials/razor-pages/validation)</span></span>
 
 ::: moniker-end
