@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 8/22/2019
 uid: web-api/advanced/formatting
-ms.openlocfilehash: e503df3d81efbb2800503c0cb4ff5ae093b6e1ac
-ms.sourcegitcommit: 023495344053dc59115c80538f0ece935e7490a2
+ms.openlocfilehash: 78fe620ea8fdd681a276253f77939bcb2a56ebb9
+ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/28/2019
-ms.locfileid: "71592359"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72391286"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>ASP.NET Core Web API에서 응답 데이터 서식 지정
 
@@ -57,9 +57,7 @@ ASP.NET Core MVC는 응답 데이터 서식 지정을 지원합니다. 응답 �
 
 [!code-csharp[](./formatting/sample/Controllers/AuthorsController.cs?name=snippet_search)]
 
-다른 형식이 요청되지 않는 한 JSON 형식 응답이 반환되고 서버는 요청된 형식을 반환할 수 있습니다. [Fiddler](https://www.telerik.com/fiddler) 또는 [Postman](https://www.getpostman.com/tools)과 같은 도구는 반환 형식을 지정하도록 `Accept` 헤더를 설정할 수 있습니다. `Accept`에 서버가 지원하는 형식이 포함되어 있을 때 해당 형식이 반환됩니다.
-
-기본적으로 ASP.NET Core는 JSON만 지원합니다. 기본값을 변경하지 않는 앱의 경우 클라이언트 요청에 관계 없이 항상 JSON 형식 응답이 반환됩니다. 다음 섹션에서는 추가적인 포맷터를 추가하는 방법을 보여줍니다.
+기본적으로 ASP.NET Core는 `application/json`, `text/json`, `text/plain` 미디어 형식을 지원합니다. [Fiddler](https://www.telerik.com/fiddler) 또는 [Postman](https://www.getpostman.com/tools)과 같은 도구는 반환 형식을 지정하도록 `Accept` 요청 헤더를 설정할 수 있습니다. `Accept` 헤더에 서버가 지원하는 형식이 포함되어 있으면 해당 형식이 반환됩니다. 다음 섹션에서는 추가적인 포맷터를 추가하는 방법을 보여줍니다.
 
 컨트롤러 작업은 POCO(Plain Old CLR Objects)를 반환할 수 있습니다. POCO가 반환되면 런타임에서는 개체를 래핑하는`ObjectResult`를 자동으로 만듭니다. 클라이언트는 형식이 지정된 직렬화된 개체를 가져옵니다. 반환되는 개체가 `null`이면 `204 No Content` 응답이 반환됩니다.
 
@@ -221,16 +219,16 @@ XML 형식 지정은 [Microsoft.AspNetCore.Mvc.Formatters.Xml](https://www.nuget
 
 ### <a name="special-case-formatters"></a>특수한 사례 포맷터
 
-일부 특수한 경우 기본 제공 포맷터를 사용하여 구현됩니다. 기본적으로 `string` 반환 형식은 *text/plain*(`Accept` 헤더를 통해 요청된 경우 *text/html*)으로 형식이 지정됩니다. 이 동작은 <xref:Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter>를 제거하여 삭제할 수 있습니다. 포맷터들은 `Configure` 방법에서 제거됩니다. 모델 개체 반환 형식이 있는 작업은 `null`을 반환하는 경우 `204 No Content`를 반환합니다. 이 동작은 <xref:Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter>를 제거하여 삭제할 수 있습니다. 다음 코드를 `TextOutputFormatter` 및 `HttpNoContentOutputFormatter`를 제거합니다.
+일부 특수한 경우 기본 제공 포맷터를 사용하여 구현됩니다. 기본적으로 `string` 반환 형식은 *text/plain*(`Accept` 헤더를 통해 요청된 경우 *text/html*)으로 형식이 지정됩니다. 이 동작은 <xref:Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter>를 제거하여 삭제할 수 있습니다. 포맷터들은 `ConfigureServices` 방법에서 제거됩니다. 모델 개체 반환 형식이 있는 작업은 `null`을 반환하는 경우 `204 No Content`를 반환합니다. 이 동작은 <xref:Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter>를 제거하여 삭제할 수 있습니다. 다음 코드를 `StringOutputFormatter` 및 `HttpNoContentOutputFormatter`를 제거합니다.
 
 ::: moniker range=">= aspnetcore-3.0"
-[!code-csharp[](./formatting/3.0sample/StartupTextOutputFormatter.cs?name=snippet)]
+[!code-csharp[](./formatting/3.0sample/StartupStringOutputFormatter.cs?name=snippet)]
 ::: moniker-end
 ::: moniker range="< aspnetcore-3.0"
-[!code-csharp[](./formatting/sample/StartupTextOutputFormatter.cs?name=snippet)]
+[!code-csharp[](./formatting/sample/StartupStringOutputFormatter.cs?name=snippet)]
 ::: moniker-end
 
-`TextOutputFormatter` 없이 `string` 반환 형식은 `406 Not Acceptable`을 반환합니다. XML 포맷터가 있는 경우 `TextOutputFormatter`가 제거되면 `string` 반환 형식의 서식을 지정합니다.
+`StringOutputFormatter`가 없으면 기본 제공 JSON 포맷터가 `string` 반환 형식의 형식을 지정합니다. 기본 제공 JSON 포맷터가 제거되고 XML 포맷터를 사용할 수 있는 경우, XML 포맷터가 `string` 반환 형식의 형식을 지정합니다. 그렇지 않으면 `string` 반환 형식이 `406 Not Acceptable`을 반환합니다.
 
 `HttpNoContentOutputFormatter`가 없으면 null 개체는 구성된 포맷터를 사용하여 서식이 지정됩니다. 예:
 

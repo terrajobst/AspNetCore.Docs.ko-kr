@@ -5,14 +5,14 @@ description: Blazor 앱을 단계별로 빌드합니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/15/2019
+ms.date: 10/15/2019
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 10feb5467a6a6b5a43e0df739fa72902af9854da
-ms.sourcegitcommit: e5a74f882c14eaa0e5639ff082355e130559ba83
+ms.openlocfilehash: c357b324905ee3a4c9f4bd167dbbcacaf7e1bc76
+ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71168365"
+ms.lasthandoff: 10/16/2019
+ms.locfileid: "72391201"
 ---
 # <a name="build-your-first-blazor-app"></a>첫 번째 Blazor 앱 빌드
 
@@ -99,6 +99,8 @@ HTML 구문을 사용하여 구성 요소를 다른 구성 요소에 포함합�
 
 ## <a name="dependency-injection"></a>종속성 주입
 
+### <a name="blazor-server-experience"></a>Blazor 서버 환경
+
 Blazor 서버 앱을 사용하는 경우 `WeatherForecastService` 서비스는 `Startup.ConfigureServices`에 [singleton](xref:fundamentals/dependency-injection#service-lifetimes)으로 등록됩니다. 서비스 인스턴스는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)을 통해 앱 전체에서 사용할 수 있습니다.
 
 [!code-csharp[](build-your-first-blazor-app/samples_snapshot/3.x/Startup.cs?highlight=5)]
@@ -113,13 +115,15 @@ Blazor 서버 앱을 사용하는 경우 `WeatherForecastService` 서비스는 `
 
 [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData2.razor?highlight=6)]
 
+### <a name="blazor-webassembly-experience"></a>Blazor WebAssembly 환경
+
 Blazor WebAssembly 앱을 사용하는 경우 `HttpClient`를 삽입하여 *wwwroot/sample-data* 폴더의 *weather.json* 파일에서 일기 예보 데이터를 가져옵니다.
 
 *Pages/FetchData.razor*:
 
 [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData1_client.razor?highlight=7-8)]
 
-[\@foreach](/dotnet/csharp/language-reference/keywords/foreach-in) 루프는 각 예측 인스턴스를 날씨 데이터 테이블의 행으로 렌더링하는 데 사용됩니다.
+[@foreach](/dotnet/csharp/language-reference/keywords/foreach-in) 루프는 각 예측 인스턴스를 날씨 데이터 테이블의 행으로 렌더링하는 데 사용됩니다.
 
 [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData3.razor?highlight=11-19)]
 

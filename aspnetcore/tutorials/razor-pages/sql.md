@@ -5,12 +5,12 @@ description: 데이터베이스 및 ASP.NET Core 작업을 설명합니다.
 ms.author: riande
 ms.date: 7/22/2019
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: 197697f28e9faa45c1ac2b7f993bde15994957e5
-ms.sourcegitcommit: 051f068c78931432e030b60094c38376d64d013e
+ms.openlocfilehash: b5acb573f8fa39e5300ecdb359113d8697d78934
+ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/24/2019
-ms.locfileid: "68440386"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72334225"
 ---
 # <a name="work-with-a-database-and-aspnet-core"></a>데이터베이스 및 ASP.NET Core 작업
 
@@ -38,7 +38,7 @@ ASP.NET Core [구성](xref:fundamentals/configuration/index) 시스템은 `Conne
 
 데이터베이스의 이름 값(`Database={Database name}`)은 생성된 코드에 따라 달라집니다. 이름 값은 임의적입니다.
 
-[!code-json[](razor-pages-start/sample/RazorPagesMovie30/appsettings.json)]
+[!code-json[](razor-pages-start/sample/RazorPagesMovie30/appsettings.json?highlight=10-12)]
 
 # <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -52,7 +52,7 @@ ASP.NET Core [구성](xref:fundamentals/configuration/index) 시스템은 `Conne
 
 ## <a name="sql-server-express-localdb"></a>SQL Server Express LocalDB
 
-LocalDB는 프로그램 개발용으로 대상이 지정된 간단한 버전의 SQL Server Express 데이터베이스 엔진입니다. LocalDB는 요청 시 시작하고 사용자 모드에서 실행되므로 복잡한 구성이 없습니다. 기본적으로 LocalDB 데이터베이스는 `C:/Users/<user/>` 디렉터리에서 `*.mdf` 파일을 만듭니다.
+LocalDB는 프로그램 개발용으로 대상이 지정된 간단한 버전의 SQL Server Express 데이터베이스 엔진입니다. LocalDB는 요청 시 시작하고 사용자 모드에서 실행되므로 복잡한 구성이 없습니다. 기본적으로 LocalDB 데이터베이스는 `C:\Users\<user>\` 디렉터리에서 `*.mdf` 파일을 만듭니다.
 
 <a name="ssox"></a>
 * **보기** 메뉴에서 SSOX(**SQL Server 개체 탐색기**)를 엽니다.
@@ -107,10 +107,10 @@ if (context.Movie.Any())
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Program.cs)]
 
-프로덕션 앱은 `Database.Migrate`를 호출하지 않습니다. `Update-Database`가 실행되지 않는 경우 다음 예외를 방지하기 위해 위의 코드에 추가됩니다.
+`Update-Database`가 실행되지 않은 경우 다음 예외가 발생합니다.
 
-SqlException: 로그인에서 요청한 “RazorPagesMovieContext-21” 데이터베이스를 열 수 없습니다. 로그인에 실패했습니다.
-'user name' 사용자에 대한 로그인에 실패했습니다.
+> `SqlException: Cannot open database "RazorPagesMovieContext-" requested by the login. The login failed.`
+> `Login failed for user 'user name'.`
 
 ### <a name="test-the-app"></a>앱 테스트
 
@@ -123,7 +123,7 @@ SqlException: 로그인에서 요청한 “RazorPagesMovieContext-21” 데이�
 
     ![IIS Express 시스템 트레이 아이콘](../first-mvc-app/working-with-sql/_static/iisExIcon.png)
 
-    ![바로 가기 메뉴](sql/_static/stopIIS.png)
+    ![상황에 맞는 메뉴](sql/_static/stopIIS.png)
 
     * 비디버그 모드에서 VS를 실행했던 경우 F5 키를 눌러 디버그 모드에서 실행되도록 합니다.
     * 디버그 모드에서 VS를 실행했던 경우 디버거를 중지하고 F5 키를 누릅니다.
@@ -267,7 +267,7 @@ SqlException: 로그인에서 요청한 “RazorPagesMovieContext-21” 데이�
 
     ![IIS Express 시스템 트레이 아이콘](../first-mvc-app/working-with-sql/_static/iisExIcon.png)
 
-    ![바로 가기 메뉴](sql/_static/stopIIS.png)
+    ![상황에 맞는 메뉴](sql/_static/stopIIS.png)
 
     * 비디버그 모드에서 VS를 실행했던 경우 F5 키를 눌러 디버그 모드에서 실행되도록 합니다.
     * 디버그 모드에서 VS를 실행했던 경우 디버거를 중지하고 F5 키를 누릅니다.
