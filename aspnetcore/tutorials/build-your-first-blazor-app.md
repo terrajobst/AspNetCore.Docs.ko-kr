@@ -26,7 +26,7 @@ ms.locfileid: "72391201"
 
 ## <a name="build-components"></a>구성 요소 빌드
 
-1. *Pages* 폴더에 있는 앱의 3개 페이지로 각각 이동합니다. 홈, 카운터 및 Fetch 데이터. 이 페이지는 Razor 구성 요소 파일 *Index.razor*, *Counter.razor* 및 *FetchData.razor*로 구현됩니다.
+1. *Pages* 폴더에 위치한 앱의 세 페이지 Home, Counter, 및 Fetch data를 각각 둘러봅니다. 이 페이지들은 Razor 구성 요소 파일 *Index.razor*, *Counter.razor* 및 *FetchData.razor*로 구현됩니다.
 
 1. Counter 페이지에서 **Click me** 단추를 선택하여 페이지 새로 고침 없이 카운터를 증가시킵니다. 웹 페이지의 카운터를 증가시키려면 일반적으로 JavaScript를 작성해야 하지만, Blazor는 C#을 사용하여 더 나은 접근 방식을 제공합니다.
 
@@ -117,7 +117,7 @@ Blazor 서버 앱을 사용할 경우 `WeatherForecastService` 서비스가 `Sta
 
 ### <a name="blazor-webassembly-experience"></a>Blazor WebAssembly 환경
 
-Blazor WebAssembly 앱을 사용하는 경우 `HttpClient`를 삽입하여 *wwwroot/sample-data* 폴더의 *weather.json* 파일에서 일기 예보 데이터를 가져옵니다.
+Blazor WebAssembly 앱을 사용할 경우 *wwwroot/sample-data* 폴더의 *weather.json* 파일에서 일기 예보 데이터를 가져오기 위해서 `HttpClient`가 주입됩니다.
 
 *Pages/FetchData.razor*:
 
@@ -190,13 +190,14 @@ Blazor WebAssembly 앱을 사용하는 경우 `HttpClient`를 삽입하여 *wwwr
 
    [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/ToDo8.razor?highlight=19-26)]
 
-1. 앱을 다시 빌드하고 실행합니다. 할 일 목록에 몇 개의 할 일 항목을 추가하여 새 코드를 테스트합니다.
+1. 해당 값이 바인딩되었는지 확인하기 위해 `<h1>` 헤더를 수정하여 완료되지 않은(`IsDone`이 `false`) 할 일 항목 수를 표시합니다.
+
 
 1. 각 할 일 항목의 제목 텍스트를 편집 가능하게 설정하고 확인란을 통해 사용자가 완료된 항목을 추적하도록 도울 수 있습니다. 각 할 일 항목의 확인란 입력을 추가하고 해당 값을 `IsDone` 속성에 바인딩합니다. `@todo.Title`을 `@todo.Title`에 바인딩된 `<input>` 요소로 변경합니다.
 
    [!code-cshtml[](build-your-first-blazor-app/samples_snapshot/3.x/ToDo9.razor?highlight=5-6)]
 
-1. 해당 값이 바인딩되었는지 확인하기 위해 `<h1>` 헤더를 수정하여 완료되지 않은(`IsDone`이 `false`) 할 일 항목 수를 표시합니다.
+1. 해당 값이 바인딩되었는지 확인하가 위해 `<h1>` 헤더를 수정하여 완료되지 않은(`IsDone`이 `false`) 할 일 항목 수를 표시합니다.
 
    ```cshtml
    <h1>Todo (@todos.Count(todo => !todo.IsDone))</h1>
