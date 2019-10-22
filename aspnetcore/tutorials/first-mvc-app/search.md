@@ -65,7 +65,7 @@ var movies = from m in _context.Movie
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/MoviesController.cs?highlight=1,6,8&name=snippet_1stSearch)]
 
-*Views/Movies/Index.cshtml* 파일을 열고 아래에 강조 표시된 `<form>` 표시를 추가합니다.
+*Views/Movies/Index.cshtml* 파일을 열고 아래의 강조 표시된 `<form>` 표시를 추가합니다.
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexForm1.cshtml?highlight=10-16&range=4-21)]
 
@@ -142,7 +142,7 @@ var movies = from m in _context.Movie
 
 이전 코드에서 `DisplayNameFor` HTML 도우미는 람다 식에서 참조되는 `Title` 속성을 검사하여 표시 이름을 확인합니다. 람다 식이 평가되지 않고 검사되기 때문에 `model`, `model.Movies` 또는 `model.Movies[0]`가 `null`이거나 비어 있더라도 액세스 위반을 수신하지 않습니다. 람다 식이 계산될 경우(예: `@Html.DisplayFor(modelItem => item.Title)`) 모델의 속성 값이 평가됩니다.
 
-장르로, 영화 제목으로, 그리고 둘 가지 모두로 검색하여 앱을 테스트합니다.
+장르로, 영화 제목으로, 그리고 두 가지 모두로 검색하여 앱을 테스트합니다.
 
 ![https://localhost:5001/Movies?MovieGenre=Comedy&SearchString=2 의 결과를 보여주는 브라우저 창](~/tutorials/first-mvc-app/search/_static/s2.png)
 
