@@ -5,14 +5,14 @@ description: ASP.NET Core의 플랫폼 간 웹 서버인 Kestrel에 대해 알�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/13/2019
+ms.date: 10/15/2019
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: b1c28f084e67d9cce74258433aa0c884878c2520
-ms.sourcegitcommit: dc5b293e08336dc236de66ed1834f7ef78359531
+ms.openlocfilehash: 5565011f6531ef5e95eb02f310e7107f9ed547b2
+ms.sourcegitcommit: dd026eceee79e943bd6b4a37b144803b50617583
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/16/2019
-ms.locfileid: "71011170"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72378876"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>ASP.NET Core에서 Kestrel 웹 서버 구현
 
@@ -87,6 +87,8 @@ ASP.NET Core 프로젝트 템플릿은 기본적으로 Kestrel을 사용합니�
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Program.cs?name=snippet_DefaultBuilder&highlight=7)]
 
+`CreateDefaultBuilder`와 호스트 빌드에 대한 자세한 내용은 <xref:fundamentals/host/generic-host#set-up-a-host>의 *호스트 설정* 및 *기본 작성기 설정* 섹션을 참조하세요.
+
 `CreateDefaultBuilder` 및 `ConfigureWebHostDefaults`를 호출한 후 추가 구성을 제공하려면 `ConfigureKestrel`을 사용합니다.
 
 ```csharp
@@ -135,6 +137,59 @@ Kestrel 웹 서버에는 인터넷 연결 배포에 특히 유용한 제약 조�
 ```csharp
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 ```
+
+다음 예에서 C# 코드로 구성된 Kestrel 옵션도 [구성 공급자](xref:fundamentals/configuration/index)를 사용하여 설정할 수 있습니다. 예를 들어 파일 구성 공급자는 *appsettings.json* 또는 *appsettings.{Environment}.json* 파일에서 Kestrel 구성을 로드할 수 있습니다.
+
+```json
+{
+  "Kestrel": {
+    "Limits": {
+      "MaxConcurrentConnections": 100,
+      "MaxConcurrentUpgradedConnections": 100
+    },
+    "DisableStringReuse": true
+  }
+}
+```
+
+다음 방법 중 **하나**를 사용합니다.
+
+* `Startup.ConfigureServices`에서 Kestrel을 구성합니다.
+
+  1. `IConfiguration`의 인스턴스를 `Startup` 클래스에 삽입합니다. 다음 예에서는 삽입된 구성이 `Configuration` 속성에 할당된 것으로 가정합니다.
+  2. `Startup.ConfigureServices`에서 구성의 `Kestrel` 섹션을 Kestrel의 구성으로 로드합니다.
+
+     ```csharp
+     // using Microsoft.Extensions.Configuration
+
+     public void ConfigureServices(IServiceCollection services)
+     {
+         services.Configure<KestrelServerOptions>(
+             Configuration.GetSection("Kestrel"));
+     }
+     ```
+
+* 호스트를 빌드할 때 Kestrel을 구성합니다.
+
+  *Program.cs*에서 구성의 `Kestrel` 섹션을 Kestrel의 구성으로 로드합니다.
+
+  ```csharp
+  // using Microsoft.Extensions.DependencyInjection;
+
+  public static IHostBuilder CreateHostBuilder(string[] args) =>
+      Host.CreateDefaultBuilder(args)
+          .ConfigureServices((context, services) =>
+          {
+              services.Configure<KestrelServerOptions>(
+                  context.Configuration.GetSection("Kestrel"));
+          })
+          .ConfigureWebHostDefaults(webBuilder =>
+          {
+              webBuilder.UseStartup<Startup>();
+          });
+  ```
+
+위의 두 방법 모두 [구성 공급자](xref:fundamentals/configuration/index)에 사용할 수 있습니다.
 
 ### <a name="keep-alive-timeout"></a>Keep-alive 시간 제한
 
@@ -220,7 +275,7 @@ Kestrel은 데이터가 지정된 속도(바이트/초)로 도착하는지 1초�
 `Http2.MaxStreamsPerConnection`은 HTTP/2 연결당 동시 요청 스트림 수를 제한합니다. 초과 스트림은 거부됩니다.
 
 ```csharp
-.ConfigureKestrel(serverOptions =>
+webBuilder.ConfigureKestrel(serverOptions =>
 {
     serverOptions.Limits.Http2.MaxStreamsPerConnection = 100;
 });
@@ -233,7 +288,7 @@ Kestrel은 데이터가 지정된 속도(바이트/초)로 도착하는지 1초�
 HPACK 디코더는 HTTP/2 연결에 대한 HTTP 헤더의 압축을 풉니다. `Http2.HeaderTableSize`는 HPACK 디코더가 사용하는 헤더 압축 테이블의 크기를 제한합니다. 값은 8진수로 제공되며 영(0)보다 커야 합니다.
 
 ```csharp
-.ConfigureKestrel(serverOptions =>
+webBuilder.ConfigureKestrel(serverOptions =>
 {
     serverOptions.Limits.Http2.HeaderTableSize = 4096;
 });
@@ -246,7 +301,7 @@ HPACK 디코더는 HTTP/2 연결에 대한 HTTP 헤더의 압축을 풉니다. `
 `Http2.MaxFrameSize`는 서버에서 받거나 보낸 HTTP/2 연결 프레임 페이로드의 최대 허용 크기를 나타냅니다. 값은 8진수로 제공되며 2^14(16,384)와 2^24-1(16,777,215) 사이여야 합니다.
 
 ```csharp
-.ConfigureKestrel(serverOptions =>
+webBuilder.ConfigureKestrel(serverOptions =>
 {
     serverOptions.Limits.Http2.MaxFrameSize = 16384;
 });
@@ -259,7 +314,7 @@ HPACK 디코더는 HTTP/2 연결에 대한 HTTP 헤더의 압축을 풉니다. `
 `Http2.MaxRequestHeaderFieldSize`는 요청 헤더 값의 8진수로 허용되는 최대 크기를 나타냅니다. 이 한도는 모두 압축된 표현과 압축되지 않은 표현으로 이름과 값 모두에 적용됩니다. 값은 0보다 커야 합니다(0).
 
 ```csharp
-.ConfigureKestrel(serverOptions =>
+webBuilder.ConfigureKestrel(serverOptions =>
 {
     serverOptions.Limits.Http2.MaxRequestHeaderFieldSize = 8192;
 });
@@ -272,7 +327,7 @@ HPACK 디코더는 HTTP/2 연결에 대한 HTTP 헤더의 압축을 풉니다. `
 `Http2.InitialConnectionWindowSize`는 연결당 모든 요청(스트림)을 통해 한 번에 집계하는 서버 버퍼의 최대 요청 본문 데이터를 바이트 단위로 나타냅니다. 요청은 `Http2.InitialStreamWindowSize`에 의해서도 제한됩니다. 값은 65,535보다 크거나 같아야 하며 2^31(2,147,483,648)보다 작아야 합니다.
 
 ```csharp
-.ConfigureKestrel(serverOptions =>
+webBuilder.ConfigureKestrel(serverOptions =>
 {
     serverOptions.Limits.Http2.InitialConnectionWindowSize = 131072;
 });
@@ -285,7 +340,7 @@ HPACK 디코더는 HTTP/2 연결에 대한 HTTP 헤더의 압축을 풉니다. `
 `Http2.InitialStreamWindowSize`는 요청(스트림)당 한 번에 서버 버퍼의 최대 요청 본문 데이터를 바이트 단위로 나타냅니다. 요청은 `Http2.InitialConnectionWindowSize`에 의해서도 제한됩니다. 값은 65,535보다 크거나 같아야 하며 2^31(2,147,483,648)보다 작아야 합니다.
 
 ```csharp
-.ConfigureKestrel(serverOptions =>
+webBuilder.ConfigureKestrel(serverOptions =>
 {
     serverOptions.Limits.Http2.InitialStreamWindowSize = 98304;
 });
@@ -348,20 +403,13 @@ HPACK 디코더는 HTTP/2 연결에 대한 HTTP 헤더의 압축을 풉니다. `
 지정된 각 엔드포인트에 대해 실행할 구성 `Action`을 지정합니다. `ConfigureEndpointDefaults`의 여러 차례 호출은 `Action`에 앞서 마지막으로 지정된 `Action`으로 바꿉니다.
 
 ```csharp
-public static IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
-        .ConfigureWebHostDefaults(webBuilder =>
-        {
-            webBuilder.ConfigureKestrel(serverOptions =>
-            {
-                serverOptions.ConfigureEndpointDefaults(listenOptions =>
-                {
-                    // Configure endpoint defaults
-                });
-            })
-            .UseStartup<Startup>();
-        });
-}
+webBuilder.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ConfigureEndpointDefaults(listenOptions =>
+    {
+        // Configure endpoint defaults
+    });
+});
 ```
 
 ### <a name="configurehttpsdefaultsactionhttpsconnectionadapteroptions"></a>ConfigureHttpsDefaults(Action\<HttpsConnectionAdapterOptions>)
@@ -369,21 +417,14 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 각 HTTPS 엔드포인트에 대해 실행할 구성 `Action`을 지정합니다. `ConfigureHttpsDefaults`의 여러 차례 호출은 `Action`에 앞서 마지막으로 지정된 `Action`으로 바꿉니다.
 
 ```csharp
-public static IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
-        .ConfigureWebHostDefaults(webBuilder =>
-        {
-            webBuilder.ConfigureKestrel(serverOptions =>
-            {
-                serverOptions.ConfigureHttpsDefaults(listenOptions =>
-                {
-                    // certificate is an X509Certificate2
-                    listenOptions.ServerCertificate = certificate;
-                });
-            })
-            .UseStartup<Startup>();
-        });
-}
+webBuilder.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ConfigureHttpsDefaults(listenOptions =>
+    {
+        // certificate is an X509Certificate2
+        listenOptions.ServerCertificate = certificate;
+    });
+});
 ```
 
 ### <a name="configureiconfiguration"></a>Configure(IConfiguration)
@@ -512,19 +553,14 @@ Kestrel은 `http://localhost:5000` 및 `https://localhost:5001`에서 수신 대
 * `options.Configure(context.Configuration.GetSection("{SECTION}"))`은 구성된 엔드포인트의 설정을 보완하는 데 사용될 수 있는 `.Endpoint(string name, listenOptions => { })` 메서드를 통해 `KestrelConfigurationLoader`를 반환합니다.
 
 ```csharp
-public static IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
-        .ConfigureWebHostDefaults(webBuilder =>
+webBuilder.UseKestrel((context, serverOptions) =>
+{
+    serverOptions.Configure(context.Configuration.GetSection("Kestrel"))
+        .Endpoint("HTTPS", listenOptions =>
         {
-            webBuilder.UseKestrel((context, serverOptions) =>
-            {
-                serverOptions.Configure(context.Configuration.GetSection("Kestrel"))
-                    .Endpoint("HTTPS", listenOptions =>
-                    {
-                        listenOptions.HttpsOptions.SslProtocols = SslProtocols.Tls12;
-                    });
-            });
+            listenOptions.HttpsOptions.SslProtocols = SslProtocols.Tls12;
         });
+});
 ```
 
 `KestrelServerOptions.ConfigurationLoader`에 액세스하여 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>에서 제공한 로더와 같이 기존 로더에서 반복을 유지할 수 있습니다.
@@ -538,23 +574,18 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 `ConfigureEndpointDefaults` 및 `ConfigureHttpsDefaults`는 이전 시나리오에서 지정된 기본 인증서 재정의를 포함한 `ListenOptions` 및 `HttpsConnectionAdapterOptions`에 대해 기본 설정을 변경하는 데 사용될 수 있습니다. `ConfigureEndpointDefaults` 및 `ConfigureHttpsDefaults`는 모든 엔드포인트가 구성되기 전에 호출해야 합니다.
 
 ```csharp
-public static IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
-        .ConfigureWebHostDefaults(webBuilder =>
-        {
-            webBuilder.ConfigureKestrel(serverOptions =>
-            {
-                serverOptions.ConfigureEndpointDefaults(listenOptions =>
-                {
-                    // Configure endpoint defaults
-                });
+webBuilder.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ConfigureEndpointDefaults(listenOptions =>
+    {
+        // Configure endpoint defaults
+    });
 
-                serverOptions.ConfigureHttpsDefaults(listenOptions =>
-                {
-                    listenOptions.SslProtocols = SslProtocols.Tls12;
-                });
-            });
-        });
+    serverOptions.ConfigureHttpsDefaults(listenOptions =>
+    {
+        listenOptions.SslProtocols = SslProtocols.Tls12;
+    });
+});
 ```
 
 *SNI에 대한 Kestrel 지원*
@@ -569,45 +600,39 @@ SNI 지원에는 다음 항목이 필요합니다.
 * 모든 웹 사이트는 동일한 Kestrel 인스턴스에서 실행합니다. Kestrel은 역방향 프록시 없이 여러 인스턴스에서 IP 주소와 포트를 공유하도록 지원하지 않습니다.
 
 ```csharp
-public static IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
-        .ConfigureWebHostDefaults(webBuilder =>
+webBuilder.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ListenAnyIP(5005, listenOptions =>
+    {
+        listenOptions.UseHttps(httpsOptions =>
         {
-            webBuilder.ConfigureKestrel(serverOptions =>
+            var localhostCert = CertificateLoader.LoadFromStoreCert(
+                "localhost", "My", StoreLocation.CurrentUser,
+                allowInvalid: true);
+            var exampleCert = CertificateLoader.LoadFromStoreCert(
+                "example.com", "My", StoreLocation.CurrentUser,
+                allowInvalid: true);
+            var subExampleCert = CertificateLoader.LoadFromStoreCert(
+                "sub.example.com", "My", StoreLocation.CurrentUser,
+                allowInvalid: true);
+            var certs = new Dictionary<string, X509Certificate2>(
+                StringComparer.OrdinalIgnoreCase);
+            certs["localhost"] = localhostCert;
+            certs["example.com"] = exampleCert;
+            certs["sub.example.com"] = subExampleCert;
+
+            httpsOptions.ServerCertificateSelector = (connectionContext, name) =>
             {
-                serverOptions.ListenAnyIP(5005, listenOptions =>
+                if (name != null && certs.TryGetValue(name, out var cert))
                 {
-                    listenOptions.UseHttps(httpsOptions =>
-                    {
-                        var localhostCert = CertificateLoader.LoadFromStoreCert(
-                            "localhost", "My", StoreLocation.CurrentUser,
-                            allowInvalid: true);
-                        var exampleCert = CertificateLoader.LoadFromStoreCert(
-                            "example.com", "My", StoreLocation.CurrentUser,
-                            allowInvalid: true);
-                        var subExampleCert = CertificateLoader.LoadFromStoreCert(
-                            "sub.example.com", "My", StoreLocation.CurrentUser,
-                            allowInvalid: true);
-                        var certs = new Dictionary<string, X509Certificate2>(
-                            StringComparer.OrdinalIgnoreCase);
-                        certs["localhost"] = localhostCert;
-                        certs["example.com"] = exampleCert;
-                        certs["sub.example.com"] = subExampleCert;
-    
-                        httpsOptions.ServerCertificateSelector = (connectionContext, name) =>
-                        {
-                            if (name != null && certs.TryGetValue(name, out var cert))
-                            {
-                                return cert;
-                            }
-    
-                            return exampleCert;
-                        };
-                    });
-                });
-            })
-            .UseStartup<Startup>();
+                    return cert;
+                }
+
+                return exampleCert;
+            };
         });
+    });
+});
 ```
 
 ### <a name="bind-to-a-tcp-socket"></a>TCP 소켓에 바인딩
@@ -683,7 +708,7 @@ HTTP/2에 대한 TLS 제한 사항:
 다음 예제는 포트 8000에서 HTTP/1.1 및 HTTP/2 연결을 허용합니다. 연결은 제공된 인증서를 사용하여 TLS로 보호됩니다.
 
 ```csharp
-.ConfigureKestrel(serverOptions =>
+webBuilder.ConfigureKestrel(serverOptions =>
 {
     serverOptions.Listen(IPAddress.Any, 8000, listenOptions =>
     {
@@ -692,70 +717,113 @@ HTTP/2에 대한 TLS 제한 사항:
 });
 ```
 
-선택적으로 연결 미들웨어를 사용하여 각 연결 단위로 특정 암호에 대한 TLS 핸드셰이크를 필터링합니다.
+필요할 경우 연결 미들웨어를 사용하여 각 연결을 기준으로 특정 암호에 대한 TLS 핸드셰이크를 필터링합니다.
+
+다음 예는 앱에서 지원하지 않는 모든 암호화 알고리즘에 대해 <xref:System.NotSupportedException>을 throw합니다. 또는 [ITlsHandshakeFeature CipherAlgorithm](xref:Microsoft.AspNetCore.Connections.Features.ITlsHandshakeFeature.CipherAlgorithm)을 정의하고 허용되는 암호 그룹 목록과 비교합니다.
+
+[CipherAlgorithmType.Null](xref:System.Security.Authentication.CipherAlgorithmType) 암호화 알고리즘과 함께 사용되는 암호화는 없습니다.
 
 ```csharp
 // using System.Net;
 // using Microsoft.AspNetCore.Connections;
 
-.ConfigureKestrel(serverOptions =>
+webBuilder.ConfigureKestrel(serverOptions =>
 {
     serverOptions.Listen(IPAddress.Any, 8000, listenOptions =>
     {
         listenOptions.UseHttps("testCert.pfx", "testPassword");
-        listenOptions.UseConnectionHandler<TlsFilterConnectionHandler>();
+        listenOptions.UseTlsFilter();
     });
 });
 ```
 
 ```csharp
 using System;
-using System.Buffers;
 using System.Security.Authentication;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Connections.Features;
 
-public class TlsFilterConnectionHandler : ConnectionHandler
+namespace Microsoft.AspNetCore.Connections
 {
-    public override async Task OnConnectedAsync(ConnectionContext connection)
+    public static class TlsFilterConnectionMiddlewareExtensions
     {
-        var tlsFeature = connection.Features.Get<ITlsHandshakeFeature>();
-
-        // Throw NotSupportedException for any cipher algorithm that the app doesn't
-        // wish to support. Alternatively, define and compare
-        // ITlsHandshakeFeature.CipherAlgorithm to a list of acceptable cipher
-        // suites.
-        //
-        // A ITlsHandshakeFeature.CipherAlgorithm of CipherAlgorithmType.Null
-        // indicates that no cipher algorithm supported by Kestrel matches the
-        // requested algorithm(s).
-        if (tlsFeature.CipherAlgorithm == CipherAlgorithmType.Null)
+        public static IConnectionBuilder UseTlsFilter(
+            this IConnectionBuilder builder)
         {
-            throw new NotSupportedException("Prohibited cipher: " + tlsFeature.CipherAlgorithm);
-        }
-
-        while (true)
-        {
-            var result = await connection.Transport.Input.ReadAsync();
-            var buffer = result.Buffer;
-
-            if (!buffer.IsEmpty)
+            return builder.Use((connection, next) =>
             {
-                await connection.Transport.Output.WriteAsync(buffer.ToArray());
-            }
-            else if (result.IsCompleted)
-            {
-                break;
-            }
+                var tlsFeature = connection.Features.Get<ITlsHandshakeFeature>();
 
-            connection.Transport.Input.AdvanceTo(buffer.End);
+                if (tlsFeature.CipherAlgorithm == CipherAlgorithmType.Null)
+                {
+                    throw new NotSupportedException("Prohibited cipher: " +
+                        tlsFeature.CipherAlgorithm);
+                }
+
+                return next();
+            });
         }
     }
 }
 ```
 
-구성에서 프로토콜 설정 
+<xref:Microsoft.AspNetCore.Connections.IConnectionBuilder> 람다를 통해 연결 필터링을 구성할 수도 있습니다.
+
+```csharp
+// using System;
+// using System.Net;
+// using System.Security.Authentication;
+// using Microsoft.AspNetCore.Connections;
+// using Microsoft.AspNetCore.Connections.Features;
+
+webBuilder.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.Listen(IPAddress.Any, 8000, listenOptions =>
+    {
+        listenOptions.UseHttps("testCert.pfx", "testPassword");
+        listenOptions.Use((context, next) =>
+        {
+            var tlsFeature = context.Features.Get<ITlsHandshakeFeature>();
+
+            if (tlsFeature.CipherAlgorithm == CipherAlgorithmType.Null)
+            {
+                throw new NotSupportedException(
+                    $"Prohibited cipher: {tlsFeature.CipherAlgorithm}");
+            }
+
+            return next();
+        });
+    });
+});
+```
+
+Linux에서 <xref:System.Net.Security.CipherSuitesPolicy>를 사용하여 각 연결을 기준으로 TLS 핸드셰이크를 필터링할 수 있습니다.
+
+```csharp
+// using System.Net.Security;
+// using Microsoft.AspNetCore.Hosting;
+// using Microsoft.AspNetCore.Server.Kestrel.Core;
+// using Microsoft.Extensions.DependencyInjection;
+// using Microsoft.Extensions.Hosting;
+
+webBuilder.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ConfigureHttpsDefaults(listenOptions =>
+    {
+        listenOptions.OnAuthenticate = (context, sslOptions) =>
+        {
+            sslOptions.CipherSuitesPolicy = new CipherSuitesPolicy(
+                new[]
+                {
+                    TlsCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+                    TlsCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
+                    // ...
+                });
+        };
+    });
+});
+```
+
+구성에서 프로토콜 설정
 
 `CreateDefaultBuilder`는 기본적으로 `serverOptions.Configure(context.Configuration.GetSection("Kestrel"))`을 호출하여 Kestrel 구성을 로드합니다.
 
@@ -959,6 +1027,8 @@ ASP.NET Core 프로젝트 템플릿은 기본적으로 Kestrel을 사용합니�
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Program.cs?name=snippet_DefaultBuilder&highlight=7)]
 
+`CreateDefaultBuilder`와 호스트 빌드에 대한 자세한 내용은 <xref:fundamentals/host/web-host#set-up-a-host>의 *호스트 설정* 섹션을 참조하세요.
+
 `CreateDefaultBuilder`를 호출한 후 추가 구성을 제공하려면 `ConfigureKestrel`을 사용합니다.
 
 ```csharp
@@ -1002,6 +1072,55 @@ Kestrel 웹 서버에는 인터넷 연결 배포에 특히 유용한 제약 조�
 ```csharp
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 ```
+
+다음 예에서 C# 코드로 구성된 Kestrel 옵션도 [구성 공급자](xref:fundamentals/configuration/index)를 사용하여 설정할 수 있습니다. 예를 들어 파일 구성 공급자는 *appsettings.json* 또는 *appsettings.{Environment}.json* 파일에서 Kestrel 구성을 로드할 수 있습니다.
+
+```json
+{
+  "Kestrel": {
+    "Limits": {
+      "MaxConcurrentConnections": 100,
+      "MaxConcurrentUpgradedConnections": 100
+    }
+  }
+}
+```
+
+다음 방법 중 **하나**를 사용합니다.
+
+* `Startup.ConfigureServices`에서 Kestrel을 구성합니다.
+
+  1. `IConfiguration`의 인스턴스를 `Startup` 클래스에 삽입합니다. 다음 예에서는 삽입된 구성이 `Configuration` 속성에 할당된 것으로 가정합니다.
+  2. `Startup.ConfigureServices`에서 구성의 `Kestrel` 섹션을 Kestrel의 구성으로 로드합니다.
+
+     ```csharp
+     // using Microsoft.Extensions.Configuration
+
+     public void ConfigureServices(IServiceCollection services)
+     {
+         services.Configure<KestrelServerOptions>(
+             Configuration.GetSection("Kestrel"));
+     }
+     ```
+
+* 호스트를 빌드할 때 Kestrel을 구성합니다.
+
+  *Program.cs*에서 구성의 `Kestrel` 섹션을 Kestrel의 구성으로 로드합니다.
+
+  ```csharp
+  // using Microsoft.Extensions.DependencyInjection;
+
+  public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+      WebHost.CreateDefaultBuilder(args)
+          .ConfigureServices((context, services) =>
+          {
+              services.Configure<KestrelServerOptions>(
+                  context.Configuration.GetSection("Kestrel"));
+          })
+          .UseStartup<Startup>();
+  ```
+
+위의 두 방법 모두 [구성 공급자](xref:fundamentals/configuration/index)에 사용할 수 있습니다.
 
 ### <a name="keep-alive-timeout"></a>Keep-alive 시간 제한
 
@@ -1589,9 +1708,7 @@ private class TlsFilterAdapter : IConnectionAdapter
         // ITlsHandshakeFeature.CipherAlgorithm to a list of acceptable cipher
         // suites.
         //
-        // A ITlsHandshakeFeature.CipherAlgorithm of CipherAlgorithmType.Null
-        // indicates that no cipher algorithm supported by Kestrel matches the
-        // requested algorithm(s).
+        // No encryption is used with a CipherAlgorithmType.Null cipher algorithm.
         if (tlsFeature.CipherAlgorithm == CipherAlgorithmType.Null)
         {
             throw new NotSupportedException("Prohibited cipher: " + tlsFeature.CipherAlgorithm);
@@ -1616,7 +1733,7 @@ private class TlsFilterAdapter : IConnectionAdapter
 }
 ```
 
-구성에서 프로토콜 설정 
+구성에서 프로토콜 설정
 
 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>는 기본적으로 `serverOptions.Configure(context.Configuration.GetSection("Kestrel"))`을 호출하여 Kestrel 구성을 로드합니다.
 
@@ -1811,6 +1928,8 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
+`CreateDefaultBuilder`와 호스트 빌드에 대한 자세한 내용은 <xref:fundamentals/host/web-host#set-up-a-host>의 *호스트 설정* 섹션을 참조하세요.
+
 ## <a name="kestrel-options"></a>Kestrel 옵션
 
 Kestrel 웹 서버에는 인터넷 연결 배포에 특히 유용한 제약 조건 구성 옵션이 있습니다.
@@ -1822,6 +1941,55 @@ Kestrel 웹 서버에는 인터넷 연결 배포에 특히 유용한 제약 조�
 ```csharp
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 ```
+
+다음 예에서 C# 코드로 구성된 Kestrel 옵션도 [구성 공급자](xref:fundamentals/configuration/index)를 사용하여 설정할 수 있습니다. 예를 들어 파일 구성 공급자는 *appsettings.json* 또는 *appsettings.{Environment}.json* 파일에서 Kestrel 구성을 로드할 수 있습니다.
+
+```json
+{
+  "Kestrel": {
+    "Limits": {
+      "MaxConcurrentConnections": 100,
+      "MaxConcurrentUpgradedConnections": 100
+    }
+  }
+}
+```
+
+다음 방법 중 **하나**를 사용합니다.
+
+* `Startup.ConfigureServices`에서 Kestrel을 구성합니다.
+
+  1. `IConfiguration`의 인스턴스를 `Startup` 클래스에 삽입합니다. 다음 예에서는 삽입된 구성이 `Configuration` 속성에 할당된 것으로 가정합니다.
+  2. `Startup.ConfigureServices`에서 구성의 `Kestrel` 섹션을 Kestrel의 구성으로 로드합니다.
+
+     ```csharp
+     // using Microsoft.Extensions.Configuration
+
+     public void ConfigureServices(IServiceCollection services)
+     {
+         services.Configure<KestrelServerOptions>(
+             Configuration.GetSection("Kestrel"));
+     }
+     ```
+
+* 호스트를 빌드할 때 Kestrel을 구성합니다.
+
+  *Program.cs*에서 구성의 `Kestrel` 섹션을 Kestrel의 구성으로 로드합니다.
+
+  ```csharp
+  // using Microsoft.Extensions.DependencyInjection;
+
+  public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+      WebHost.CreateDefaultBuilder(args)
+          .ConfigureServices((context, services) =>
+          {
+              services.Configure<KestrelServerOptions>(
+                  context.Configuration.GetSection("Kestrel"));
+          })
+          .UseStartup<Startup>();
+  ```
+
+위의 두 방법 모두 [구성 공급자](xref:fundamentals/configuration/index)에 사용할 수 있습니다.
 
 ### <a name="keep-alive-timeout"></a>Keep-alive 시간 제한
 
