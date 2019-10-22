@@ -5,14 +5,14 @@ description: 데이터에 바인딩하고, 이벤트를 처리 하 고, 구성 �
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/05/2019
+ms.date: 10/20/2019
 uid: blazor/components
-ms.openlocfilehash: cd48111e8d601fc67e8a938fcdd686759a9ddeca
-ms.sourcegitcommit: ce2bfb01f2cc7dd83f8a97da0689d232c71bcdc4
+ms.openlocfilehash: 065a3a078c56f813ed38f85d7414f22061217dff
+ms.sourcegitcommit: eb4fcdeb2f9e8413117624de42841a4997d1d82d
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/17/2019
-ms.locfileid: "72531112"
+ms.lasthandoff: 10/21/2019
+ms.locfileid: "72697955"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -30,7 +30,7 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 구성 요소에 대 한 UI는 HTML을 사용 하 여 정의 됩니다. 동적 렌더링 논리(예: 루프, 조건, 식)는 [Razor](xref:mvc/views/razor)라는 포함된 C# 구문을 사용하여 추가됩니다. 앱이 컴파일되면 HTML 태그 및 C# 렌더링 논리가 구성 요소 클래스로 변환 됩니다. 생성 된 클래스의 이름은 파일 이름과 일치 합니다.
 
-구성 요소 클래스의 멤버는 `@code` 블록에서 정의됩니다. @No__t-0 블록에서 구성 요소 상태 (속성, 필드)는 이벤트 처리를 위한 메서드나 다른 구성 요소 논리를 정의 하는 데 지정 됩니다. 두 개 이상의 `@code` 블록이 허용됩니다.
+구성 요소 클래스의 멤버는 `@code` 블록에서 정의됩니다. @No__t_0 블록에서 구성 요소 상태 (속성, 필드)는 이벤트 처리를 위한 메서드나 다른 구성 요소 논리를 정의 하는 데 지정 됩니다. 두 개 이상의 `@code` 블록이 허용됩니다.
 
 > [!NOTE]
 > ASP.NET Core 3.0의 이전 미리 보기에서 `@functions` 블록은 Razor 구성 요소에서 `@code` 블록과 동일한 용도로 사용 되었습니다. `@functions` 블록은 Razor 구성 요소에서 계속 작동 하지만 ASP.NET Core 3.0 Preview 6 이상에서 `@code` 블록을 사용 하는 것이 좋습니다.
@@ -51,7 +51,7 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 구성 요소가 처음 렌더링 되 면 구성 요소는 이벤트에 대 한 응답으로 렌더링 트리를 다시 생성 합니다. 그런 다음 Blazor는 새 렌더링 트리를 이전 렌더링 트리와 비교 하 여 브라우저의 DOM (문서 개체 모델)에 적용 합니다.
 
-구성 요소는 C# 일반 클래스 이며 프로젝트 내의 어느 위치에 나 배치할 수 있습니다. 웹 페이지를 생성 하는 구성 요소는 일반적으로 *Pages* 폴더에 있습니다. 페이지를 지정 하지 않는 구성 요소는 일반적으로 *공유* 폴더 또는 프로젝트에 추가 된 사용자 지정 폴더에 배치 됩니다. 사용자 지정 폴더를 사용 하려면 부모 구성 요소 또는 앱의 *_Imports. razor* 파일에 사용자 지정 폴더의 네임 스페이스를 추가 합니다. 예를 들어 다음 네임 스페이스는 응용 프로그램의 루트 네임 스페이스가-1 @no__t 때 *구성* 요소 폴더의 구성 요소를 사용할 수 있도록 합니다.
+구성 요소는 C# 일반 클래스 이며 프로젝트 내의 어느 위치에 나 배치할 수 있습니다. 웹 페이지를 생성 하는 구성 요소는 일반적으로 *Pages* 폴더에 있습니다. 페이지를 지정 하지 않는 구성 요소는 일반적으로 *공유* 폴더 또는 프로젝트에 추가 된 사용자 지정 폴더에 배치 됩니다. 사용자 지정 폴더를 사용 하려면 부모 구성 요소 또는 앱의 *_Imports. razor* 파일에 사용자 지정 폴더의 네임 스페이스를 추가 합니다. 예를 들어 다음 네임 스페이스는 응용 프로그램의 루트 네임 스페이스가 `WebApplication` 때 *구성 요소* 폴더의 구성 요소를 사용할 수 있도록 합니다.
 
 ```cshtml
 @using WebApplication.Components
@@ -79,7 +79,7 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 특성 바인딩은 대/소문자를 구분 합니다. 예를 들어 `@bind`은 유효 하 고 `@Bind`은 유효 하지 않습니다.
 
-*인덱스 razor* 의 다음 태그는 @no__t 1 인스턴스를 렌더링 합니다.
+다음은 *인덱스 razor* 의 다음 태그를 `HeadingComponent` 인스턴스를 렌더링 합니다.
 
 [!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/Index.razor?name=snippet_HeadingComponent)]
 
@@ -107,14 +107,14 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 구성 요소는 다른 구성 요소의 콘텐츠를 설정할 수 있습니다. 할당 구성 요소는 받는 구성 요소를 지정 하는 태그 사이에 콘텐츠를 제공 합니다.
 
-다음 예제에서 `ChildComponent`에는 렌더링할 UI 세그먼트를 나타내는 `RenderFragment`를 나타내는 @no__t 1 속성이 있습니다. @No__t의 값은 콘텐츠를 렌더링 해야 하는 구성 요소의 태그에 배치 됩니다. @No__t-0의 값은 부모 구성 요소에서 수신 되 고 부트스트랩 패널의 `panel-body` 내에서 렌더링 됩니다.
+다음 예제에서 `ChildComponent`에는 렌더링할 UI 세그먼트를 나타내는 `RenderFragment`를 나타내는 `ChildContent` 속성이 있습니다. @No__t_0의 값은 콘텐츠를 렌더링 해야 하는 구성 요소의 태그에 배치 됩니다. @No__t_0 값은 부모 구성 요소에서 수신 되 고 부트스트랩 패널의 `panel-body` 내에서 렌더링 됩니다.
 
 *Components/ChildComponent. razor*:
 
 [!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=3,14-15)]
 
 > [!NOTE]
-> @No__t-0 콘텐츠를 받는 속성의 이름은 규칙에 따라 `ChildContent`로 지정 해야 합니다.
+> @No__t_0 콘텐츠를 받는 속성은 규칙에 따라 `ChildContent` 이름이 지정 되어야 합니다.
 
 다음 `ParentComponent`은 `<ChildComponent>` 태그 안에 내용을 배치 하 여 `ChildComponent`을 렌더링 하기 위한 콘텐츠를 제공할 수 있습니다.
 
@@ -124,7 +124,7 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 ## <a name="attribute-splatting-and-arbitrary-parameters"></a>특성 스 플랫 및 임의 매개 변수
 
-구성 요소는 구성 요소의 선언 된 매개 변수 외에 추가 특성도 캡처하고 렌더링할 수 있습니다. [@No__t-2](xref:mvc/views/razor#attributes) Razor 지시문을 사용 하 여 구성 요소를 렌더링할 때 사전에 추가 특성을 캡처한 다음 요소로 *splatted* 수 있습니다. 이 시나리오는 다양 한 사용자 지정을 지 원하는 태그 요소를 생성 하는 구성 요소를 정의 하는 경우에 유용 합니다. 예를 들어 많은 매개 변수를 지 원하는 `<input>`에 대해 개별적으로 특성을 정의 하는 것이 번거로울 수 있습니다.
+구성 요소는 구성 요소의 선언 된 매개 변수 외에 추가 특성도 캡처하고 렌더링할 수 있습니다. [@No__t_2](xref:mvc/views/razor#attributes) Razor 지시어를 사용 하 여 구성 요소를 렌더링할 때 사전에 추가 특성을 캡처한 다음 요소로 *splatted* 수 있습니다. 이 시나리오는 다양 한 사용자 지정을 지 원하는 태그 요소를 생성 하는 구성 요소를 정의 하는 경우에 유용 합니다. 예를 들어 많은 매개 변수를 지 원하는 `<input>`에 대해 개별적으로 특성을 정의 하는 것이 번거로울 수 있습니다.
 
 다음 예제에서 첫 번째 `<input>` 요소 (`id="useIndividualParams"`)는 개별 구성 요소 매개 변수를 사용 하는 반면 두 번째 `<input>` 요소 (`id="useAttributesDict"`)는 특성 스 플랫를 사용 합니다.
 
@@ -190,7 +190,7 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 }
 ```
 
-@No__t_1의 `CaptureUnmatchedValues` 속성을 사용 하면 매개 변수는 다른 매개 변수와 일치 하지 않는 모든 특성을 일치 시킬 수 있습니다. 구성 요소는 `CaptureUnmatchedValues` 인 단일 매개 변수만 정의할 수 있습니다. @No__t-0과 함께 사용 되는 속성 형식은 문자열 키가 있는 `Dictionary<string, object>`에서 할당할 수 있어야 합니다. 이 시나리오에서 `IEnumerable<KeyValuePair<string, object>>` 또는 `IReadOnlyDictionary<string, object>`도 옵션입니다.
+@No__t_1의 `CaptureUnmatchedValues` 속성을 사용 하면 매개 변수는 다른 매개 변수와 일치 하지 않는 모든 특성을 일치 시킬 수 있습니다. 구성 요소는 `CaptureUnmatchedValues` 인 단일 매개 변수만 정의할 수 있습니다. @No__t_0에 사용 되는 속성 형식은 문자열 키가 있는 `Dictionary<string, object>`에서 할당할 수 있어야 합니다. 이 시나리오에서 `IEnumerable<KeyValuePair<string, object>>` 또는 `IReadOnlyDictionary<string, object>`도 옵션입니다.
 
 ## <a name="data-binding"></a>데이터 바인딩
 
@@ -208,7 +208,7 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 텍스트 상자는 구성 요소가 렌더링 되는 경우에만 UI에서 업데이트 되며 속성의 값을 변경 하는 것에 대 한 응답으로는 업데이트 되지 않습니다. 이벤트 처리기 코드를 실행 한 후 구성 요소를 자체적으로 렌더링 하므로 속성 업데이트는 *일반적으로* 이벤트 처리기가 트리거되는 즉시 UI에 반영 됩니다.
 
-@No__t-1 속성 (`<input @bind="CurrentValue" />`)과 함께 `@bind`을 사용 하는 것은 기본적으로 다음과 같습니다.
+@No__t_1 속성 (`<input @bind="CurrentValue" />`)과 함께 `@bind`를 사용 하는 것은 기본적으로 다음과 같습니다.
 
 ```cshtml
 <input value="@CurrentValue"
@@ -220,9 +220,9 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 }
 ```
 
-구성 요소가 렌더링 되 면 입력 요소의 @no__t 0은 `CurrentValue` 속성에서 가져옵니다. 사용자가 텍스트 상자에를 입력 하 고 요소 포커스를 변경 하면 `onchange` 이벤트가 발생 하 고 `CurrentValue` 속성이 변경 된 값으로 설정 됩니다. 실제로 코드 생성은 `@bind`은 형식 변환이 수행 되는 경우를 처리 하기 때문에 더 복잡 합니다. 원칙적으로 `@bind`은 식의 현재 값을 `value` 특성과 연결 하 고 등록 된 처리기를 사용 하 여 변경 내용을 처리 합니다.
+구성 요소가 렌더링 되 면 input 요소의 `value` `CurrentValue` 속성에서 제공 됩니다. 사용자가 텍스트 상자에를 입력 하 고 요소 포커스를 변경 하면 `onchange` 이벤트가 발생 하 고 `CurrentValue` 속성이 변경 된 값으로 설정 됩니다. 실제로 코드 생성은 `@bind`은 형식 변환이 수행 되는 경우를 처리 하기 때문에 더 복잡 합니다. 원칙적으로 `@bind`은 식의 현재 값을 `value` 특성과 연결 하 고 등록 된 처리기를 사용 하 여 변경 내용을 처리 합니다.
 
-@No__t-1 구문을 사용 하 여 `onchange` 이벤트를 처리 하는 것 외에도 `event` 매개 변수 ([@no__t](xref:mvc/views/razor#bind))를 사용 하 여 [@bind-value](xref:mvc/views/razor#bind) 특성을 지정 하 여 다른 이벤트를 사용 하 여 속성 또는 필드를 바인딩할 수 있습니다. 다음 예에서는 `oninput` 이벤트의 `CurrentValue` 속성을 바인딩합니다.
+@No__t_1 구문을 사용 하 여 `onchange` 이벤트를 처리 하는 것 외에도 `event` 매개 변수 ([ @bind-value:event](xref:mvc/views/razor#bind))를 사용 하 여 [@bind-value](xref:mvc/views/razor#bind) 특성을 지정 하 여 다른 이벤트를 사용 하 여 속성 또는 필드를 바인딩할 수 있습니다. 다음 예에서는 `oninput` 이벤트의 `CurrentValue` 속성을 바인딩합니다.
 
 ```cshtml
 <input @bind-value="CurrentValue" @bind-value:event="oninput" />
@@ -240,7 +240,7 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 다음 시나리오를 고려하세요.
 
-* @No__t-0 요소는 초기 값이 `123` 인 `int` 형식에 바인딩됩니다.
+* @No__t_0 요소는 `123` 초기 값을 사용 하 여 `int` 형식에 바인딩됩니다.
 
   ```cshtml
   <input @bind="MyProperty" />
@@ -254,11 +254,11 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 위의 시나리오에서 요소 값은 `123`으로 되돌아갑니다. 값 `123.45`이 `123`의 원래 값을 사용 하 여 거부 되 면 사용자는 해당 값이 허용 되지 않았음을 인식 합니다.
 
-기본적으로 바인딩은 요소의 `onchange` 이벤트 (`@bind="{PROPERTY OR FIELD}"`)에 적용 됩니다. @No__t-0을 사용 하 여 다른 이벤트를 설정 합니다. @No__t-0 이벤트 (`@bind-value:event="oninput"`)의 경우 변경할지는 구문 분석할 값을 제공 하는 키 입력 후에 발생 합니다. @No__t -1 바인딩된 형식의 `oninput` 이벤트를 대상으로 지정 하는 경우 사용자는 `.` 문자를 입력할 수 없습니다. @No__t-0 문자는 즉시 제거 되므로 사용자는 전체 숫자만 허용 되는 즉각적인 피드백을 받습니다. 사용자가 구문 분석할 수 없는 @no__t 값을 지울 수 있어야 하는 경우와 같이 `oninput` 이벤트의 값을 되돌리는 것이 적합 하지 않은 시나리오가 있습니다. 대안은 다음과 같습니다.
+기본적으로 바인딩은 요소의 `onchange` 이벤트 (`@bind="{PROPERTY OR FIELD}"`)에 적용 됩니다. @No__t_0를 사용 하 여 다른 이벤트를 설정 합니다. @No__t_0 이벤트 (`@bind-value:event="oninput"`)의 경우 변경할지는 구문 분석할 값을 제공 하는 키 입력 후에 발생 합니다. @No__t_1 바인딩된 형식의 `oninput` 이벤트를 대상으로 지정 하는 경우 사용자는 `.` 문자를 입력할 수 없습니다. @No__t_0 문자는 즉시 제거 되므로 사용자는 전체 숫자만 허용 되는 즉각적인 피드백을 받습니다. 사용자가 구문 분석할 수 없는 `<input>` 값을 지울 수 있어야 하는 경우와 같이 `oninput` 이벤트의 값을 되돌리는 것이 적합 하지 않은 시나리오가 있습니다. 대안은 다음과 같습니다.
 
-* @No__t-0 이벤트를 사용 하지 마세요. 기본 `onchange` 이벤트 (`@bind="{PROPERTY OR FIELD}"`)를 사용 합니다 .이 이벤트는 요소가 포커스를 잃을 때까지 잘못 된 값을 되돌리지 않습니다.
-* @No__t-0 또는 `string`과 같은 nullable 형식에 바인딩하고, 잘못 된 항목을 처리 하는 사용자 지정 논리를 제공 합니다.
-* @No__t-1 또는 `InputDate`와 같은 [폼 유효성 검사 구성 요소](xref:blazor/forms-validation)를 사용 합니다. 양식 유효성 검사 구성 요소에는 잘못 된 입력을 관리 하기 위한 기본 제공 지원이 있습니다. 양식 유효성 검사 구성 요소:
+* @No__t_0 이벤트를 사용 하지 마세요. 기본 `onchange` 이벤트 (`@bind="{PROPERTY OR FIELD}"`)를 사용 합니다 .이 이벤트는 요소가 포커스를 잃을 때까지 잘못 된 값을 되돌리지 않습니다.
+* @No__t_0 또는 `string`와 같은 nullable 형식에 바인딩하고 잘못 된 항목을 처리 하는 사용자 지정 논리를 제공 합니다.
+* @No__t_1 또는 `InputDate`와 같은 [폼 유효성 검사 구성 요소](xref:blazor/forms-validation)를 사용 합니다. 양식 유효성 검사 구성 요소에는 잘못 된 입력을 관리 하기 위한 기본 제공 지원이 있습니다. 양식 유효성 검사 구성 요소:
   * 사용자가 연결 된 `EditContext`에 대해 잘못 된 입력 및 수신 유효성 검사 오류를 제공할 수 있도록 허용 합니다.
   * 사용자가 추가 webform 데이터를 입력 하는 것을 방해 하지 않고 UI에서 유효성 검사 오류를 표시 합니다.
 
@@ -266,7 +266,7 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 `@bind` 값은 현재 문화권의 규칙을 사용 하 여 표시 및 구문 분석을 위해 형식이 지정 됩니다.
 
-@No__t-0 속성에서 현재 문화권에 액세스할 수 있습니다.
+현재 문화권은 <xref:System.Globalization.CultureInfo.CurrentCulture?displayProperty=fullName> 속성에서 액세스할 수 있습니다.
 
 [InvariantCulture](xref:System.Globalization.CultureInfo.InvariantCulture) 는 다음 필드 형식 (`<input type="{TYPE}" />`)에 사용 됩니다.
 
@@ -285,7 +285,7 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 * `month`
 * `week`
 
-`@bind`은 `@bind:culture` 매개 변수를 지원 하 여 값을 구문 분석 하 고 서식을 지정 하는 데 <xref:System.Globalization.CultureInfo?displayProperty=fullName>를 제공 합니다. @No__t-0 및 `number` 필드 형식을 사용할 때는 문화권을 지정 하지 않는 것이 좋습니다. `date` 및 `number`은 필수 문화권을 제공 하는 기본 제공 Blazor 지원입니다.
+`@bind`은 `@bind:culture` 매개 변수를 지원 하 여 값을 구문 분석 하 고 서식을 지정 하는 데 <xref:System.Globalization.CultureInfo?displayProperty=fullName>를 제공 합니다. @No__t_0 및 `number` 필드 형식을 사용할 때는 문화권을 지정 하지 않는 것이 좋습니다. `date` 및 `number`은 필수 문화권을 제공 하는 기본 제공 Blazor 지원입니다.
 
 사용자의 문화권을 설정 하는 방법에 대 한 자세한 내용은 [지역화](#localization) 섹션을 참조 하십시오.
 
@@ -309,7 +309,7 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 * <xref:System.DateTimeOffset?displayProperty=fullName>
 * <xref:System.DateTimeOffset?displayProperty=fullName>?
 
-@No__t-0 특성은 `<input>` 요소의 `value`에 적용할 날짜 형식을 지정 합니다. 이 형식은 `onchange` 이벤트가 발생할 때 값을 구문 분석 하는 데도 사용 됩니다.
+@No__t_0 특성은 `<input>` 요소의 `value`에 적용할 날짜 형식을 지정 합니다. 이 형식은 `onchange` 이벤트가 발생할 때 값을 구문 분석 하는 데도 사용 됩니다.
 
 Blazor에서 날짜 형식을 기본적으로 지원 하기 때문에 `date` 필드 형식의 형식을 지정 하는 것은 권장 되지 않습니다.
 
@@ -361,7 +361,7 @@ Blazor에서 날짜 형식을 기본적으로 지원 하기 때문에 `date` 필
 }
 ```
 
-@No__t-0을 로드 하면 다음과 같은 태그가 생성 됩니다.
+@No__t_0 로드 하면 다음과 같은 태그가 생성 됩니다.
 
 ```html
 <h1>Parent Component</h1>
@@ -373,7 +373,7 @@ Blazor에서 날짜 형식을 기본적으로 지원 하기 때문에 `date` 필
 <p>Year: 1978</p>
 ```
 
-@No__t-1의 단추를 선택 하 여 `ParentYear` 속성 값이 변경 되 면-3 @no__t의 `Year` 속성이 업데이트 됩니다. @No__t-0의 새 값은 `ParentComponent`이 주문형 인 경우 UI에서 렌더링 됩니다.
+@No__t_1의 단추를 선택 하 여 `ParentYear` 속성 값이 변경 되 면 `ChildComponent`의 `Year` 속성이 업데이트 됩니다. @No__t_0의 새 값은 `ParentComponent`을 수행 하는 경우 UI에서 렌더링 됩니다.
 
 ```html
 <h1>Parent Component</h1>
@@ -385,7 +385,7 @@ Blazor에서 날짜 형식을 기본적으로 지원 하기 때문에 `date` 필
 <p>Year: 1986</p>
 ```
 
-@No__t-0 매개 변수는 `Year` 매개 변수의 형식과 일치 하는 도우미 `YearChanged` 이벤트를 포함 하기 때문에 바인딩할 수 있습니다.
+@No__t_0 매개 변수는 `Year` 매개 변수 형식과 일치 하는 도우미 `YearChanged` 이벤트를 포함 하기 때문에 바인딩할 수 있습니다.
 
 규칙에 따라 `<ChildComponent @bind-Year="ParentYear" />`은 기본적으로 다음을 작성 하는 것과 같습니다.
 
@@ -401,7 +401,7 @@ Blazor에서 날짜 형식을 기본적으로 지원 하기 때문에 `date` 필
 
 ## <a name="event-handling"></a>이벤트 처리
 
-Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 형식의 값을 사용 하 여 @no__t-@no__t @no__t 0 이라는 HTML 요소 특성의 경우 Razor 구성 요소는 특성의 값을 이벤트 처리기로 처리 합니다. 특성 이름은 항상 [-1 {event} @no__t](xref:mvc/views/razor#onevent)형식이 지정 됩니다.
+Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 형식 값을 사용 하는 `on{event}` (예: `onclick` 및 `onsubmit`) 이라는 HTML 요소 특성의 경우 Razor 구성 요소는 특성의 값을 이벤트 처리기로 처리 합니다. 특성 이름은 항상 [{event} @on](xref:mvc/views/razor#onevent)서식 지정 됩니다.
 
 다음 코드는 UI에서 단추가 선택 될 때 `UpdateHeading` 메서드를 호출 합니다.
 
@@ -431,7 +431,7 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 }
 ```
 
-이벤트 처리기는 비동기 일 수도 있고 <xref:System.Threading.Tasks.Task>을 반환할 수도 있습니다. @No__t를 수동으로 호출할 필요가 없습니다. 예외가 발생 하면 기록 됩니다.
+이벤트 처리기는 비동기 일 수도 있고 <xref:System.Threading.Tasks.Task>을 반환할 수도 있습니다. @No__t_0를 수동으로 호출할 필요가 없습니다. 예외가 발생 하면 기록 됩니다.
 
 다음 예제에서는 단추가 선택 될 때 `UpdateHeading`이 비동기적으로 호출 됩니다.
 
@@ -511,18 +511,18 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 
 중첩 된 구성 요소를 사용 하는 일반적인 시나리오는 자식 구성 요소 이벤트가 발생 하는 경우 부모 구성 요소의 메서드를 실행 하려는 것입니다. 예를 들어 자식 구성 요소 이벤트가 발생 하는 경우에는 `onclick` 이벤트가 발생 합니다. 구성 요소 간에 이벤트를 노출 하려면 `EventCallback`을 사용 합니다. 부모 구성 요소는 자식 구성 요소의 `EventCallback`에 콜백 메서드를 할당할 수 있습니다.
 
-샘플 앱의 `ChildComponent`은 샘플의 `ParentComponent`에서 `EventCallback` 대리자를 수신 하도록 단추의 @no__t 1 처리기를 설정 하는 방법을 보여 줍니다. @No__t-0은 `MouseEventArgs`로 입력 됩니다 .이는 주변 장치의 `onclick` 이벤트에 적합 합니다.
+샘플 앱의 `ChildComponent`는 단추의 `onclick` 처리기가 샘플의 `ParentComponent`에서 `EventCallback` 대리자를 받도록 설정 하는 방법을 보여 줍니다. @No__t_0는 주변 장치의 `onclick` 이벤트에 적절 한 `MouseEventArgs`으로 입력 됩니다.
 
 [!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=5-7,17-18)]
 
-@No__t-0은 자식의 `EventCallback<T>`을 `ShowMessage` 메서드로 설정 합니다.
+@No__t_0은 자식의 `EventCallback<T>`를 `ShowMessage` 메서드로 설정 합니다.
 
 [!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/ParentComponent.razor?name=snippet_ParentComponent&highlight=6,16-19)]
 
-@No__t에서 단추가 선택 된 경우-0:
+@No__t_0에서 단추가 선택 된 경우:
 
-* @No__t-0의 `ShowMessage` 메서드가 호출 됩니다. `messageText`이 업데이트 되어 `ParentComponent`에 표시 됩니다.
-* @No__t-0에 대 한 호출은 콜백 메서드에 필요 하지 않습니다 (`ShowMessage`). 자식 이벤트가 자식 내에서 실행 되는 이벤트 처리기의 rerendering 구성 요소를 트리거하는 것 처럼 `StateHasChanged`은 자동 @no__t으로 호출 됩니다.
+* @No__t_0의 `ShowMessage` 메서드가 호출 됩니다. `messageText`이 업데이트 되어 `ParentComponent`에 표시 됩니다.
+* @No__t_0 호출은 콜백의 메서드 (`ShowMessage`)에서 필요 하지 않습니다. 자식 이벤트가 자식 내에서 실행 되는 이벤트 처리기의 rerendering 구성 요소를 트리거하는 것 처럼 `StateHasChanged`는 자동으로 호출 되어 `ParentComponent`을 rerender 합니다.
 
 `EventCallback` 및 `EventCallback<T>`은 비동기 대리자를 허용 합니다. `EventCallback<T>`은 강력한 형식이 며 특정 인수 형식이 필요 합니다. `EventCallback`은 약하게 형식화 되며 모든 인수 형식을 허용 합니다.
 
@@ -539,7 +539,7 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 }
 ```
 
-@No__t-2를 사용 하 여 `EventCallback` 또는 `EventCallback<T>`을 호출 하 고 <xref:System.Threading.Tasks.Task>을 기다립니다.
+@No__t_2를 사용 하 여 `EventCallback` 또는 `EventCallback<T>`를 호출 하 고 <xref:System.Threading.Tasks.Task>를 기다립니다.
 
 ```csharp
 await callback.InvokeAsync(arg);
@@ -547,7 +547,7 @@ await callback.InvokeAsync(arg);
 
 이벤트 처리 및 바인딩 구성 요소 매개 변수를 사용 하려면 `EventCallback` 및 `EventCallback<T>`을 사용 합니다.
 
-@No__t-1 보다 강력한 형식의 `EventCallback<T>`을 사용 하는 것이 좋습니다. `EventCallback<T>`은 구성 요소의 사용자에 게 더 나은 오류 피드백을 제공 합니다. 다른 UI 이벤트 처리기와 마찬가지로 이벤트 매개 변수를 지정 하는 것은 선택 사항입니다. 콜백에 전달 된 값이 없는 경우 `EventCallback`을 사용 합니다.
+@No__t_1 보다 강력한 형식의 `EventCallback<T>`를 사용 하는 것이 좋습니다. `EventCallback<T>`은 구성 요소의 사용자에 게 더 나은 오류 피드백을 제공 합니다. 다른 UI 이벤트 처리기와 마찬가지로 이벤트 매개 변수를 지정 하는 것은 선택 사항입니다. 콜백에 전달 된 값이 없는 경우 `EventCallback`을 사용 합니다.
 
 ## <a name="chained-bind"></a>연결 된 바인딩
 
@@ -557,7 +557,7 @@ await callback.InvokeAsync(arg);
 
 다음 `PasswordField` 구성 요소 (*Passwordfield. razor*):
 
-* @No__t-0 요소의 값을 `Password` 속성으로 설정 합니다.
+* @No__t_0 요소의 값을 `Password` 속성으로 설정 합니다.
 * [Eventcallback](#eventcallback)을 사용 하 여 `Password` 속성의 변경 내용을 부모 구성 요소에 노출 합니다.
 
 ```cshtml
@@ -595,7 +595,7 @@ Password:
 }
 ```
 
-@No__t-0 구성 요소는 다른 구성 요소에서 사용 됩니다.
+@No__t_0 구성 요소는 다른 구성 요소에서 사용 됩니다.
 
 ```cshtml
 <PasswordField @bind-Password="password" />
@@ -607,8 +607,8 @@ Password:
 
 위의 예에서 암호에 대 한 검사 또는 트랩 오류를 수행 하려면 다음을 수행 합니다.
 
-* @No__t-0에 대 한 지원 필드를 만듭니다 (다음 예제 코드에서는-1 @no__t).
-* @No__t-0 setter에서 검사 또는 트랩 오류를 수행 합니다.
+* @No__t_0에 대 한 지원 필드를 만듭니다 (다음 예제 코드에서 `password`).
+* @No__t_0 setter에서 확인 또는 트랩 오류를 수행 합니다.
 
 다음 예에서는 암호 값에 공백을 사용 하는 경우 사용자에 게 즉각적인 피드백을 제공 합니다.
 
@@ -692,9 +692,9 @@ Password:
 구성 요소가 렌더링 되 면 `loginDialog` 필드가 `MyLoginDialog` 자식 구성 요소 인스턴스로 채워집니다. 그런 다음 구성 요소 인스턴스에서 .NET 메서드를 호출할 수 있습니다.
 
 > [!IMPORTANT]
-> @No__t-0 변수는 구성 요소가 렌더링 된 후에만 채워지고 출력에는 `MyLoginDialog` 요소가 포함 됩니다. 이 시점까지 참조할 항목이 없습니다. 구성 요소에서 렌더링을 완료 한 후에 구성 요소 참조를 조작 하려면 [OnAfterRenderAsync 또는 OnAfterRender 메서드](#lifecycle-methods)를 사용 합니다.
+> @No__t_0 변수는 구성 요소가 렌더링 된 후에만 채워지고 출력에는 `MyLoginDialog` 요소가 포함 됩니다. 이 시점까지 참조할 항목이 없습니다. 구성 요소에서 렌더링을 완료 한 후에 구성 요소 참조를 조작 하려면 [OnAfterRenderAsync 또는 OnAfterRender 메서드](#lifecycle-methods)를 사용 합니다.
 
-구성 요소 참조를 캡처하는 것은 [요소 참조를 캡처하](xref:blazor/javascript-interop#capture-references-to-elements)는 데 유사한 구문을 사용 하지만 [JavaScript interop](xref:blazor/javascript-interop) 기능은 아닙니다. 구성 요소 참조는 JavaScript 코드 @ no__t-0they're에 전달 되지 않습니다.
+구성 요소 참조를 캡처하는 것은 [요소 참조를 캡처하](xref:blazor/javascript-interop#capture-references-to-elements)는 데 유사한 구문을 사용 하지만 [JavaScript interop](xref:blazor/javascript-interop) 기능은 아닙니다. 구성 요소 참조는 JavaScript 코드 &mdash;they 전달 되지 않습니다. .NET 코드 에서만 사용 됩니다.
 
 > [!NOTE]
 > 구성 요소 참조를 사용 하 여 자식 구성 요소의 상태를 변경할 수 **없습니다** . 대신, 일반 선언적 매개 변수를 사용 하 여 자식 구성 요소에 데이터를 전달 합니다. 일반적인 선언적 매개 변수를 사용 하면 자식 구성 요소가 자동으로 올바른 시간에 rerender 됩니다.
@@ -721,7 +721,7 @@ public class NotifierService
 }
 ```
 
-@No__t-0을 사용 하 여 구성 요소를 업데이트 합니다.
+@No__t_0 사용 하 여 구성 요소를 업데이트 합니다.
 
 ```cshtml
 @page "/"
@@ -756,7 +756,7 @@ public class NotifierService
 
 위의 예제에서 `NotifierService`은 Blazor의 `SynchronizationContext` 외부에서 구성 요소의 `OnNotify` 메서드를 호출 합니다. `InvokeAsync`은 올바른 컨텍스트로 전환 하 고 렌더링을 큐에 대기 하는 데 사용 됩니다.
 
-## <a name="use-key-to-control-the-preservation-of-elements-and-components"></a>@No__t-0key를 사용 하 여 요소 및 구성 요소 유지 관리
+## <a name="use-key-to-control-the-preservation-of-elements-and-components"></a>@No__t_0key를 사용 하 여 요소 및 구성 요소 유지 관리
 
 요소 또는 구성 요소 목록을 렌더링할 때 이후에 요소나 구성 요소가 변경 되는 경우 Blazor의 diff 알고리즘은 유지할 수 있는 이전 요소 또는 구성 요소와 모델 개체가 이러한 요소에 매핑되는 방법을 결정 해야 합니다. 일반적으로이 프로세스는 자동 이며 무시 해도 되지만 프로세스를 제어 하는 경우가 있습니다.
 
@@ -774,7 +774,7 @@ public class NotifierService
 }
 ```
 
-@No__t-0 컬렉션의 콘텐츠는 삽입, 삭제 또는 다시 정렬 된 항목으로 변경 될 수 있습니다. 구성 요소가 렌더링 하면 `<DetailsEditor>` 구성 요소가 서로 다른 `Details` 매개 변수 값을 받도록 변경 될 수 있습니다. 이로 인해 예상 보다 더 복잡 한 rerendering 발생할 수 있습니다. 경우에 따라 rerendering는 손실 요소 포커스와 같은 표시 되는 동작 차이를 일으킬 수 있습니다.
+@No__t_0 컬렉션의 콘텐츠는 삽입, 삭제 또는 다시 정렬 된 항목으로 변경 될 수 있습니다. 구성 요소가 렌더링 하면 `<DetailsEditor>` 구성 요소가 서로 다른 `Details` 매개 변수 값을 받도록 변경 될 수 있습니다. 이로 인해 예상 보다 더 복잡 한 rerendering 발생할 수 있습니다. 경우에 따라 rerendering는 손실 요소 포커스와 같은 표시 되는 동작 차이를 일으킬 수 있습니다.
 
 매핑 프로세스는 `@key` 지시문 특성을 사용 하 여 제어할 수 있습니다. `@key`은 키의 값에 따라 요소 또는 구성 요소를 보존 하도록 diff 알고리즘을 설정 합니다.
 
@@ -790,22 +790,22 @@ public class NotifierService
 }
 ```
 
-@No__t-0 컬렉션이 변경 되 면 diff 알고리즘은 @no__t 1 인스턴스와 `person` 인스턴스 간의 연결을 유지 합니다.
+@No__t_0 컬렉션이 변경 되 면 diff 알고리즘은 `<DetailsEditor>` 인스턴스와 `person` 인스턴스 간의 연결을 유지 합니다.
 
-* @No__t-0이 `People` 목록에서 삭제 되 면 해당 `<DetailsEditor>` 인스턴스만 UI에서 제거 됩니다. 다른 인스턴스는 변경 되지 않은 상태로 유지 됩니다.
-* @No__t-0이 목록에서 특정 위치에 삽입 되는 경우 한 개의 새 `<DetailsEditor>` 인스턴스가 해당 위치에 삽입 됩니다. 다른 인스턴스는 변경 되지 않은 상태로 유지 됩니다.
-* @No__t-0 항목이 다시 정렬 되 면 해당 하는 @no__t 1 인스턴스가 유지 되 고 UI에서 다시 정렬 됩니다.
+* @No__t_1 목록에서 `Person` 삭제 된 경우 해당 `<DetailsEditor>` 인스턴스만 UI에서 제거 됩니다. 다른 인스턴스는 변경 되지 않은 상태로 유지 됩니다.
+* @No__t_0 목록에서 특정 위치에 삽입 되는 경우 해당 위치에 하나의 새 `<DetailsEditor>` 인스턴스가 삽입 됩니다. 다른 인스턴스는 변경 되지 않은 상태로 유지 됩니다.
+* @No__t_0 항목이 다시 정렬 되 면 해당 `<DetailsEditor>` 인스턴스가 유지 되 고 UI에서 다시 정렬 됩니다.
 
 일부 시나리오에서는 `@key`을 사용 하면 rerendering의 복잡성을 최소화 하 고 DOM의 상태 저장 부분 (예: 포커스 위치)에 대 한 잠재적인 문제를 방지할 수 있습니다.
 
 > [!IMPORTANT]
 > 키는 각 컨테이너 요소 또는 구성 요소에 대해 로컬입니다. 문서 전체에서 키를 전역적으로 비교 하지 않습니다.
 
-### <a name="when-to-use-key"></a>@No__t-0key를 사용 하는 경우
+### <a name="when-to-use-key"></a>사용 해야 하는 경우 \@key
 
 일반적으로 목록이 렌더링 될 때마다 (예: `@foreach` 블록) `@key`을 사용 하 고 `@key`를 정의 하는 데 적합 한 값이 있는지를 이해 하는 것이 좋습니다.
 
-Blazor를 @no__t 사용 하 여 개체가 변경 될 때 요소가 요소 또는 구성 요소 하위 트리를 유지 하지 않도록 할 수도 있습니다.
+또한 `@key`를 사용 하 여 개체가 변경 될 때 Blazor가 요소 또는 구성 요소 하위 트리를 유지 하지 못하게 할 수 있습니다.
 
 ```cshtml
 <div @key="currentPerson">
@@ -813,22 +813,22 @@ Blazor를 @no__t 사용 하 여 개체가 변경 될 때 요소가 요소 또는
 </div>
 ```
 
-@No__t 0으로 변경 되는 경우 `@key` 특성 지시문은 Blazor는 전체 `<div>` 및 해당 하위 항목을 삭제 하 고 새 요소와 구성 요소를 사용 하 여 UI 내에서 하위 트리를 다시 작성 하도록 합니다. @No__t-0이 변경 될 때 UI 상태가 유지 되지 않도록 해야 하는 경우이 방법이 유용할 수 있습니다.
+@No__t_0 변경 하는 경우 `@key` 특성 지시어는 강제로 전체 `<div>` 및 해당 하위 항목을 삭제 하 고 새 요소 및 구성 요소를 사용 하 여 UI 내에서 하위 트리를 다시 Blazor 합니다. 이는 `@currentPerson` 변경 될 때 UI 상태가 유지 되지 않도록 해야 하는 경우에 유용할 수 있습니다.
 
-### <a name="when-not-to-use-key"></a>@No__t-0key를 사용 하지 않는 경우
+### <a name="when-not-to-use-key"></a>@No__t_0key 사용 하지 않는 경우
 
-@No__t-0으로 diff 때 성능 비용이 발생 합니다. 성능 비용은 크지 않지만 요소를 제어 하거나 구성 요소 유지 규칙을 제어 하는 경우에만 `@key`을 지정 합니다.
+@No__t_0으로 diff 때 성능 비용이 발생 합니다. 성능 비용은 크지 않지만 요소를 제어 하거나 구성 요소 유지 규칙을 제어 하는 경우에만 `@key`을 지정 합니다.
 
-@No__t-0이 사용 되지 않더라도 Blazor는 자식 요소와 구성 요소 인스턴스를 최대한 많이 보존 합니다. @No__t-0을 사용 하는 유일한 장점은 매핑을 선택 하는 diff 알고리즘이 아닌 유지 된 구성 요소 인스턴스에 모델 인스턴스가 매핑되 *는 방식을* 제어 하는 것입니다.
+@No__t_0 사용 되지 않더라도 Blazor는 자식 요소와 구성 요소 인스턴스를 최대한 많이 보존 합니다. @No__t_0를 사용 하는 유일한 장점은 매핑을 선택 하는 diff 알고리즘 대신 모델 인스턴스가 유지 된 구성 요소 인스턴스에 매핑되 *는 방식을* 제어 하는 것입니다.
 
-### <a name="what-values-to-use-for-key"></a>@No__t-0key에 사용할 값
+### <a name="what-values-to-use-for-key"></a>@No__t_0key에 사용할 값
 
 일반적으로 `@key`에 대해 다음과 같은 종류의 값 중 하나를 제공 하는 것이 좋습니다.
 
 * 모델 개체 인스턴스 (예: 이전 예제와 같이 `Person` 인스턴스). 이렇게 하면 개체 참조 일치를 기반으로 유지 됩니다.
 * 고유 식별자 (예: `int` 형식의 기본 키 값, `string` 또는 `Guid`).
 
-@No__t-0에 사용 되는 값이 충돌 하지 않는지 확인 합니다. 동일한 부모 요소 내에서 충돌 방지 값이 검색 되는 경우 Blazor는 기존 요소나 구성 요소를 새 요소나 구성 요소에 명확 하 게 매핑할 수 없기 때문에 예외를 throw 합니다. 개체 인스턴스 또는 기본 키 값과 같은 고유 값만 사용 합니다.
+@No__t_0에 사용 되는 값이 충돌 하지 않는지 확인 합니다. 동일한 부모 요소 내에서 충돌 방지 값이 검색 되는 경우 Blazor는 기존 요소나 구성 요소를 새 요소나 구성 요소에 명확 하 게 매핑할 수 없기 때문에 예외를 throw 합니다. 개체 인스턴스 또는 기본 키 값과 같은 고유 값만 사용 합니다.
 
 ## <a name="lifecycle-methods"></a>수명 주기 메서드
 
@@ -876,7 +876,7 @@ protected override void OnParametersSet()
 
 서버에서 사전 렌더링을 할 때 `OnAfterRender`이 *호출 되지 않습니다.*
 
-@No__t-1 및 `OnAfterRender`에 대 한 `firstRender` 매개 변수는 다음과 같습니다.
+@No__t_1 및 `OnAfterRender`에 대 한 `firstRender` 매개 변수는 다음과 같습니다.
 
 * 구성 요소 인스턴스를 처음 호출할 때 `true`으로 설정 합니다.
 * 초기화 작업이 한 번만 수행 되도록 합니다.
@@ -906,9 +906,9 @@ protected override void OnAfterRender(bool firstRender)
 
 ### <a name="handle-incomplete-async-actions-at-render"></a>렌더링 시 불완전 한 비동기 작업 처리
 
-수명 주기 이벤트에서 수행 되는 비동기 작업은 구성 요소를 렌더링 하기 전에 완료 되지 않았을 수 있습니다. 수명 주기 메서드를 실행 하는 동안 개체의 @no__t 0 이거나 데이터로 불완전 하 게 채워질 수 있습니다. 개체가 초기화 되었는지 확인 하는 렌더링 논리를 제공 합니다. 개체를 @no__t 하는 동안 자리 표시자 UI 요소를 렌더링 합니다 (예: 로드 메시지).
+수명 주기 이벤트에서 수행 되는 비동기 작업은 구성 요소를 렌더링 하기 전에 완료 되지 않았을 수 있습니다. 수명 주기 메서드를 실행 하는 동안 개체가 데이터와 `null` 되거나 불완전 하 게 채워질 수 있습니다. 개체가 초기화 되었는지 확인 하는 렌더링 논리를 제공 합니다. 개체를 `null` 하는 동안 자리 표시자 UI 요소 (예: 로드 메시지)를 렌더링 합니다.
 
-Blazor 템플릿의 `FetchData` 구성 요소에서 `OnInitializedAsync`은 비동기적 수신 예측 데이터 (`forecasts`)로 재정의 됩니다. @No__t-0 `null` 이면 사용자에 게 로드 메시지가 표시 됩니다. @No__t-1에서 반환 된 @no__t 0이 완료 되 면 구성 요소는 업데이트 된 상태를 사용 하 여 다시 시작 됩니다.
+Blazor 템플릿의 `FetchData` 구성 요소에서 `OnInitializedAsync`은 비동기적 수신 예측 데이터 (`forecasts`)로 재정의 됩니다. @No__t_0 `null` 되 면 로드 메시지가 사용자에 게 표시 됩니다. @No__t_1에서 반환 된 `Task` 완료 되 면 구성 요소는 업데이트 된 상태를 사용 하 여 수행 됩니다.
 
 *Pages/FetchData.razor*:
 
@@ -927,11 +927,11 @@ public override void SetParameters(ParameterView parameters)
 }
 ```
 
-@No__t-0이 호출 되지 않은 경우 사용자 지정 코드는 필요한 방식으로 들어오는 매개 변수 값을 해석할 수 있습니다. 예를 들어 클래스의 속성에는 들어오는 매개 변수를 할당할 필요가 없습니다.
+@No__t_0를 호출 하지 않으면 사용자 지정 코드는 필요한 방식으로 들어오는 매개 변수 값을 해석할 수 있습니다. 예를 들어 클래스의 속성에는 들어오는 매개 변수를 할당할 필요가 없습니다.
 
 ### <a name="suppress-refreshing-of-the-ui"></a>UI 새로 고침 안 함
 
-`ShouldRender`은 UI를 새로 고치지 않도록 재정의할 수 있습니다. 구현에서 `true`을 반환 하면 UI가 새로 고쳐집니다. @No__t-0이 재정의 된 경우에도 구성 요소가 항상 처음에 렌더링 됩니다.
+`ShouldRender`은 UI를 새로 고치지 않도록 재정의할 수 있습니다. 구현에서 `true`을 반환 하면 UI가 새로 고쳐집니다. @No__t_0를 재정의 하더라도 구성 요소가 항상 처음에 렌더링 됩니다.
 
 ```csharp
 protected override bool ShouldRender()
@@ -944,7 +944,7 @@ protected override bool ShouldRender()
 
 ## <a name="component-disposal-with-idisposable"></a>IDisposable을 사용한 구성 요소 삭제
 
-구성 요소가 @no__t를 구현 하는 경우 구성 요소가 UI에서 제거 되 면 [Dispose 메서드가](/dotnet/standard/garbage-collection/implementing-dispose) 호출 됩니다. 다음 구성 요소는 `@implements IDisposable` 및 `Dispose` 메서드를 사용 합니다.
+구성 요소가 <xref:System.IDisposable>를 구현 하는 경우 UI에서 구성 요소가 제거 되 면 [Dispose 메서드가](/dotnet/standard/garbage-collection/implementing-dispose) 호출 됩니다. 다음 구성 요소는 `@implements IDisposable` 및 `Dispose` 메서드를 사용 합니다.
 
 ```csharp
 @using System
@@ -960,11 +960,14 @@ protected override bool ShouldRender()
 }
 ```
 
+> [!NOTE]
+> @No__t_1에서 `StateHasChanged`를 호출 하는 것은 지원 되지 않습니다. `StateHasChanged`은 해체 중인 렌더러의 일부로 호출 될 수 있습니다. 해당 지점에서 UI 업데이트 요청은 지원 되지 않습니다.
+
 ## <a name="routing"></a>라우팅
 
 Blazor의 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로 템플릿을 제공 하 여 수행 됩니다.
 
-@No__t-0 지시문이 있는 Razor 파일이 컴파일되면 생성 된 클래스에 경로 템플릿을 지정 하는 @no__t 1이 제공 됩니다. 런타임에 라우터는 `RouteAttribute`으로 구성 요소 클래스를 검색 하 고 요청 된 URL과 일치 하는 경로 템플릿을 포함 하는 구성 요소를 렌더링 합니다.
+@No__t_0 지시어를 사용 하 여 Razor 파일이 컴파일되면 생성 된 클래스에 경로 템플릿을 지정 하는 <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> 제공 됩니다. 런타임에 라우터는 `RouteAttribute`으로 구성 요소 클래스를 검색 하 고 요청 된 URL과 일치 하는 경로 템플릿을 포함 하는 구성 요소를 렌더링 합니다.
 
 여러 경로 템플릿을 구성 요소에 적용할 수 있습니다. 다음 구성 요소는 `/BlazorRoute` 및 `/DifferentBlazorRoute`에 대 한 요청에 응답 합니다.
 
@@ -980,21 +983,106 @@ Blazor의 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로
 
 선택적 매개 변수는 지원 되지 않으므로 위의 예제에서 두 개의 `@page` 지시문이 적용 됩니다. 첫 번째는 매개 변수 없이 구성 요소에 대 한 탐색을 허용 합니다. 두 번째 `@page` 지시어는 `{text}` 경로 매개 변수를 사용 하 고 값을 `Text` 속성에 할당 합니다.
 
-## <a name="base-class-inheritance-for-a-code-behind-experience"></a>"코드 숨김으로" 환경에 대 한 기본 클래스 상속
+::: moniker range=">= aspnetcore-3.1"
 
-구성 요소 파일은 동일한 파일 C# 의 HTML 태그와 처리 코드를 혼합 합니다. @No__t-0 지시어를 사용 하 여 구성 요소 태그를 처리 코드에서 분리 하는 "코드 숨김이" 환경으로 Blazor apps를 제공할 수 있습니다.
+## <a name="partial-class-support"></a>Partial 클래스 지원
 
-[샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) 은 구성 요소가 기본 @no__t 클래스를 상속 하는 방법을 보여 줍니다.-1은 구성 요소의 속성과 메서드를 제공 하는 데 사용할 수 있습니다.
+Razor 구성 요소는 부분 클래스로 생성 됩니다. Razor 구성 요소는 다음 방법 중 하나를 사용 하 여 작성 됩니다.
+
+* C#코드는 HTML 태그와 Razor 코드를 포함 하는 [@code](xref:mvc/views/razor#code) 블록에서 단일 파일로 정의 됩니다. Blazor 템플릿은이 접근 방식을 사용 하 여 Razor 구성 요소를 정의 합니다.
+* C#코드는 partial 클래스로 정의 된 코드 숨김이 파일에 배치 됩니다.
+
+다음 예제에서는 Blazor 템플릿에서 생성 된 앱에서 `@code` 블록을 사용 하는 기본 `Counter` 구성 요소를 보여 줍니다. HTML 태그, Razor 코드 및 C# 코드는 동일한 파일에 있습니다.
+
+*카운터. razor*:
+
+```cshtml
+@page "/counter"
+
+<h1>Counter</h1>
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    int currentCount = 0;
+
+    void IncrementCount()
+    {
+        currentCount++;
+    }
+}
+```
+
+Partial 클래스를 포함 하는 코드를 사용 하 여 `Counter` 구성 요소를 만들 수도 있습니다.
+
+*카운터. razor*:
+
+```cshtml
+@page "/counter"
+
+<h1>Counter</h1>
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+```
+
+*Counter.razor.cs*:
+
+```csharp
+namespace BlazorApp.Pages
+{
+    public partial class Counter
+    {
+        int currentCount = 0;
+
+        void IncrementCount()
+        {
+            currentCount++;
+        }
+    }
+}
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.1"
+
+## <a name="specify-a-component-base-class"></a>구성 요소 기본 클래스 지정
+
+@No__t_0 지시어를 사용 하 여 구성 요소에 대 한 기본 클래스를 지정할 수 있습니다.
+
+[샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) 은 구성 요소가 기본 클래스 `BlazorRocksBase`를 상속 하 여 구성 요소의 속성과 메서드를 제공 하는 방법을 보여 줍니다.
 
 *Pages/BlazorRocks*:
 
-[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/BlazorRocks.razor?name=snippet_BlazorRocks)]
+```cshtml
+@page "/BlazorRocks"
+@inherits BlazorRocksBase
+
+<h1>@BlazorRocksText</h1>
+```
 
 *BlazorRocksBase.cs*:
 
-[!code-csharp[](common/samples/3.x/BlazorWebAssemblySample/Pages/BlazorRocksBase.cs)]
+```csharp
+using Microsoft.AspNetCore.Components;
+
+namespace BlazorSample
+{
+    public class BlazorRocksBase : ComponentBase
+    {
+        public string BlazorRocksText { get; set; } = 
+            "Blazor rocks the browser!";
+    }
+}
+```
 
 기본 클래스는 `ComponentBase`에서 파생 되어야 합니다.
+
+::: moniker-end
 
 ## <a name="import-components"></a>구성 요소 가져오기
 
@@ -1018,7 +1106,7 @@ This is the Index page.
 <NavMenu></NavMenu>
 ```
 
-[@No__t-1](xref:mvc/views/razor#using) 지시문이 필요 하지 않은 정규화 된 이름을 사용 하 여 구성 요소를 참조할 수도 있습니다.
+[@No__t_1](xref:mvc/views/razor#using) 지시문이 필요 하지 않은 정규화 된 이름을 사용 하 여 구성 요소를 참조할 수도 있습니다.
 
 ```cshtml
 This is the Index page.
@@ -1027,7 +1115,7 @@ This is the Index page.
 ```
 
 > [!NOTE]
-> @No__t 0 한정자는 지원 되지 않습니다.
+> @No__t_0 한정자는 지원 되지 않습니다.
 >
 > 별칭이 지정 된 `using` 문 (예: `@using Foo = Bar`)이 있는 구성 요소 가져오기는 지원 되지 않습니다.
 >
@@ -1035,7 +1123,7 @@ This is the Index page.
 
 ## <a name="conditional-html-element-attributes"></a>조건부 HTML 요소 특성
 
-HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값이-0 또는 `null` @no__t 이면 특성이 렌더링 되지 않습니다. 값이-0 @no__t 이면 특성은 최소화 된 상태로 렌더링 됩니다.
+HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값이 `false` 또는 `null` 이면 특성이 렌더링 되지 않습니다. 값이 `true` 이면 특성이 최소화 된 상태로 렌더링 됩니다.
 
 다음 예제에서 `IsCompleted`은 `checked`이 요소의 태그에서 렌더링 되는지 여부를 결정 합니다.
 
@@ -1048,13 +1136,13 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값�
 }
 ```
 
-@No__t-0 `true` 이면 확인란은 다음과 같이 렌더링 됩니다.
+@No__t_0 `true` 이면 확인란은 다음과 같이 렌더링 됩니다.
 
 ```html
 <input type="checkbox" checked />
 ```
 
-@No__t-0 `false` 이면 확인란은 다음과 같이 렌더링 됩니다.
+@No__t_0 `false` 이면 확인란은 다음과 같이 렌더링 됩니다.
 
 ```html
 <input type="checkbox" />
@@ -1063,7 +1151,7 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값�
 자세한 내용은 <xref:mvc/views/razor>을 참조하십시오.
 
 > [!WARNING]
-> ASP.NET 형식이 `bool` 인 경우에는 [aria를 누르는](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons)등의 일부 HTML 특성이 제대로 작동 하지 않습니다. 이러한 경우에는-1 @no__t 대신 `string` 유형을 사용 합니다.
+> ASP.NET 형식이 `bool` 인 경우에는 [aria를 누르는](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons)등의 일부 HTML 특성이 제대로 작동 하지 않습니다. 이러한 경우 `bool` 대신 `string` 유형을 사용 합니다.
 
 ## <a name="raw-html"></a>원시 HTML
 
@@ -1147,7 +1235,7 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값�
 
 ### <a name="generic-typed-components"></a>제네릭 형식의 구성 요소
 
-일반적으로 템플릿 구성 요소는 형식화 되어 있습니다. 예를 들어, 일반 `ListViewTemplate` 구성 요소를 사용 하 여 1 @no__t 값을 렌더링할 수 있습니다. 제네릭 구성 요소를 정의 하려면 [@typeparam](xref:mvc/views/razor#typeparam) 지시어를 사용 하 여 형식 매개 변수를 지정 합니다.
+일반적으로 템플릿 구성 요소는 형식화 되어 있습니다. 예를 들어 일반 `ListViewTemplate` 구성 요소를 사용 하 여 `IEnumerable<T>` 값을 렌더링할 수 있습니다. 제네릭 구성 요소를 정의 하려면 [@typeparam](xref:mvc/views/razor#typeparam) 지시어를 사용 하 여 형식 매개 변수를 지정 합니다.
 
 [!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Components/ListViewTemplate.razor)]
 
@@ -1188,7 +1276,7 @@ public class ThemeInfo
 }
 ```
 
-상위 구성 요소는 연계 값 구성 요소를 사용 하 여 연계 값을 제공할 수 있습니다. @No__t-0 구성 요소는 구성 요소 계층의 하위 트리를 래핑하고 해당 하위 트리 내의 모든 구성 요소에 단일 값을 제공 합니다.
+상위 구성 요소는 연계 값 구성 요소를 사용 하 여 연계 값을 제공할 수 있습니다. @No__t_0 구성 요소는 구성 요소 계층의 하위 트리를 래핑하고 해당 하위 트리 내의 모든 구성 요소에 단일 값을 제공 합니다.
 
 예를 들어 샘플 앱은 `@Body` 속성의 레이아웃 본문을 구성 하는 모든 구성 요소에 대 한 연계 매개 변수로 앱 레이아웃 중 하나에서 테마 정보 (`ThemeInfo`)를 지정 합니다. `ButtonClass`은 레이아웃 구성 요소에서 `btn-success` 값이 할당 됩니다. 모든 하위 구성 요소는 `ThemeInfo` 연계 개체를 통해이 속성을 사용할 수 있습니다.
 
@@ -1258,7 +1346,7 @@ public class ThemeInfo
 }
 ```
 
-동일한 하위 트리 내에서 동일한 형식의 여러 값을 계단식으로 배열 하려면 각 `CascadingValue` 구성 요소와 해당 `CascadingParameter`에 고유한 `Name` 문자열을 제공 합니다. 다음 예에서는 두 개의 `CascadingValue` 구성 요소가 @no__t 이름으로-1의 서로 다른 인스턴스를 변경 합니다.
+동일한 하위 트리 내에서 동일한 형식의 여러 값을 계단식으로 배열 하려면 각 `CascadingValue` 구성 요소와 해당 `CascadingParameter`에 고유한 `Name` 문자열을 제공 합니다. 다음 예에서는 두 개의 `CascadingValue` 구성 요소가 이름별로 `MyCascadingType`의 다른 인스턴스를 계단식으로 배열 합니다.
 
 ```cshtml
 <CascadingValue Value=@ParentCascadeParameter1 Name="CascadeParam1">
@@ -1295,11 +1383,11 @@ public class ThemeInfo
 
 연계 매개 변수를 사용 하면 구성 요소 계층 구조 전체에서 공동 작업할 수 있습니다. 예를 들어 샘플 앱에서 다음 *Tabset* 예제를 살펴보세요.
 
-샘플 앱에는 탭에서 구현 하는 @no__t 0 인터페이스가 있습니다.
+샘플 앱에는 탭에서 구현 하는 `ITab` 인터페이스가 있습니다.
 
 [!code-csharp[](common/samples/3.x/BlazorWebAssemblySample/UIInterfaces/ITab.cs)]
 
-@No__t-0 구성 요소는 `TabSet` @no__t 구성 요소를 사용 합니다.
+@No__t_0 구성 요소는 여러 `Tab` 구성 요소를 포함 하는 `TabSet` 구성 요소를 사용 합니다.
 
 [!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/CascadingValuesParametersTabSet.razor?name=snippet_TabSet)]
 
@@ -1309,7 +1397,7 @@ public class ThemeInfo
 
 [!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Components/TabSet.razor)]
 
-하위 `Tab` 구성 요소는 포함 하는 `TabSet`을 연계 매개 변수로 캡처하기 때문에 @no__t 2 구성 요소는 `TabSet`에 자신을 추가 하 고 활성화 된 탭을 조정 합니다.
+하위 `Tab` 구성 요소는 포함 하는 `TabSet`를 연계 매개 변수로 캡처하여 `Tab` 구성 요소가 `TabSet`에 추가 되 고 활성화 되는 탭을 조정 합니다.
 
 `Tab` 구성 요소:
 
@@ -1371,7 +1459,7 @@ public class ThemeInfo
 }
 ```
 
-다음 예제에서 `CreateComponent` 메서드의 루프는 세 개의 `PetDetails` 개의 구성 요소를 생성 합니다. @No__t-0 메서드를 호출 하 여 구성 요소를 만드는 경우 (`OpenComponent` 및 `AddAttribute`) 시퀀스 번호는 소스 코드 줄 번호입니다. Blazor 차이점 알고리즘은 고유 호출 호출이 아닌 개별 코드 줄에 해당 하는 시퀀스 번호를 사용 합니다. @No__t-0 메서드를 사용 하 여 구성 요소를 만드는 경우 시퀀스 번호에 대 한 인수를 하드 코딩 합니다. **계산 또는 카운터를 사용 하 여 시퀀스 번호를 생성 하면 성능이 저하 될 수 있습니다.** 자세한 내용은 [시퀀스 번호를 코드 줄 번호와 관련 되 고 실행 순서와는 관련이 없습니다](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) . 섹션을 참조 하세요.
+다음 예제에서 `CreateComponent` 메서드의 루프는 세 개의 `PetDetails` 개의 구성 요소를 생성 합니다. @No__t_0 메서드를 호출 하 여 구성 요소를 만드는 경우 (`OpenComponent` 및 `AddAttribute`) 시퀀스 번호는 소스 코드 줄 번호입니다. Blazor 차이점 알고리즘은 고유 호출 호출이 아닌 개별 코드 줄에 해당 하는 시퀀스 번호를 사용 합니다. @No__t_0 메서드를 사용 하 여 구성 요소를 만드는 경우 시퀀스 번호에 대 한 인수를 하드 코딩 합니다. **계산 또는 카운터를 사용 하 여 시퀀스 번호를 생성 하면 성능이 저하 될 수 있습니다.** 자세한 내용은 [시퀀스 번호를 코드 줄 번호와 관련 되 고 실행 순서와는 관련이 없습니다](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) . 섹션을 참조 하세요.
 
 `BuiltContent` 구성 요소:
 
@@ -1436,14 +1524,14 @@ if (someFlag)
 builder.AddContent(1, "Second");
 ```
 
-코드가 처음으로 실행 될 때 `someFlag` @no__t이-1 이면 작성기에서 다음을 수신 합니다.
+코드가 처음 실행 될 때 `someFlag` `true` 경우 작성기는 다음을 수신 합니다.
 
 | Sequence | Type      | 데이터   |
 | :------: | --------- | :----: |
 | 0        | 텍스트 노드 | 첫째  |
 | 1        | 텍스트 노드 | Second |
 
-@No__t-0이-1 @no__t 되 고 태그가 다시 렌더링 된다고 가정 합니다. 이번에는 작성기가 다음을 받습니다.
+@No__t_0 `false` 되 고 태그가 다시 렌더링 된다고 가정 합니다. 이번에는 작성기가 다음을 받습니다.
 
 | Sequence | Type       | 데이터   |
 | :------: | ---------- | :----: |
@@ -1494,7 +1582,7 @@ builder.AddContent(seq++, "Second");
 
 * 시퀀스 번호가 동적으로 생성 되 면 앱 성능이 저하 됩니다.
 * 컴파일 시간에 캡처되는 경우를 제외 하 고 필요한 정보가 존재 하지 않기 때문에 프레임 워크는 런타임에 고유한 시퀀스 번호를 자동으로 만들 수 없습니다.
-* 수동으로 구현 된 `RenderTreeBuilder` 논리의 긴 블록을 작성 하지 마세요. @No__t-0 파일을 선호 하 고 컴파일러가 시퀀스 번호를 처리할 수 있도록 합니다. 수동 `RenderTreeBuilder` 논리를 방지할 수 없는 경우 긴 코드 블록을 `OpenRegion` @ no__t @ no__t-3 호출에서 래핑된 작은 조각으로 분할 합니다. 각 영역에는 고유한 시퀀스 번호 공간이 있으므로 각 지역 내에서 0 (또는 다른 임의의 임의의 숫자)으로 다시 시작할 수 있습니다.
+* 수동으로 구현 된 `RenderTreeBuilder` 논리의 긴 블록을 작성 하지 마세요. @No__t_0 파일을 선호 하 고 컴파일러가 시퀀스 번호를 처리할 수 있도록 합니다. 수동 `RenderTreeBuilder` 논리를 방지할 수 없는 경우 긴 코드 블록을 `OpenRegion` / `CloseRegion` 호출에 래핑된 작은 조각으로 분할 합니다. 각 영역에는 고유한 시퀀스 번호 공간이 있으므로 각 지역 내에서 0 (또는 다른 임의의 임의의 숫자)으로 다시 시작할 수 있습니다.
 * 시퀀스 번호가 하드 코딩 된 경우 diff 알고리즘에서는 값이 증가 하는 시퀀스 번호만 필요 합니다. 초기 값과 간격은 관련이 없습니다. 한 가지 합법적인 옵션은 코드 줄 번호를 시퀀스 번호로 사용 하거나 0부터 시작 하 여 또는 수백 (또는 선호 하는 간격) 만큼 증가 하는 것입니다. 
 * Blazor는 시퀀스 번호를 사용 하지만 다른 트리 diff UI 프레임 워크는이를 사용 하지 않습니다. 시퀀스 번호를 사용 하는 경우 diff는 훨씬 더 빠르며, Blazor는 `.razor` 파일을 작성 하는 개발자를 위해 자동으로 시퀀스 번호를 처리 하는 컴파일 단계를 활용 합니다.
 
@@ -1545,7 +1633,7 @@ public class HostModel : PageModel
 
 ## <a name="provide-ui-to-choose-the-culture"></a>문화권을 선택 하는 UI 제공
 
-사용자가 문화권을 선택할 수 있도록 UI를 제공 하려면 *리디렉션 기반 방법을* 사용 하는 것이 좋습니다. 이 프로세스는 사용자가 보안 리소스에 대 한 액세스를 시도할 때 웹 앱에서 수행 하는 작업과 비슷합니다. @ no__t-0 사용자가 로그인 페이지로 리디렉션되고 다시 원래 리소스로 리디렉션됩니다. 
+사용자가 문화권을 선택할 수 있도록 UI를 제공 하려면 *리디렉션 기반 방법을* 사용 하는 것이 좋습니다. 이 프로세스는 사용자가 보안 &mdash;the 리소스에 액세스 하려고 할 때 사용자가 로그인 페이지로 리디렉션되고 원래 리소스로 다시 리디렉션되는 경우 웹 앱에서 발생 하는 작업과 비슷합니다. 
 
 앱은 컨트롤러에 대 한 리디렉션을 통해 사용자가 선택한 문화권을 유지 합니다. 컨트롤러는 사용자가 선택한 문화권을 쿠키로 설정 하 고 사용자를 다시 원래 URI로 리디렉션합니다.
 
@@ -1571,7 +1659,7 @@ public class CultureController : Controller
 ```
 
 > [!WARNING]
-> @No__t-0 작업 결과를 사용 하 여 열린 리디렉션 공격을 방지 합니다. 자세한 내용은 <xref:security/preventing-open-redirects>을 참조하십시오.
+> @No__t_0 작업 결과를 사용 하 여 열린 리디렉션 공격을 방지 합니다. 자세한 내용은 <xref:security/preventing-open-redirects>을 참조하십시오.
 
 다음 구성 요소는 사용자가 문화권을 선택할 때 초기 리디렉션을 수행 하는 방법의 예를 보여 줍니다.
 

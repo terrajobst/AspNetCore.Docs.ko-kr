@@ -6,21 +6,33 @@ Blazor 서버 앱은 렌더링 되지 않지만 브라우저와의 연결이 설
 @using Microsoft.JSInterop
 @inject IJSRuntime JSRuntime
 
-<input @ref="myInput" value="Value set during render" />
+<div @ref="divElement">Text during render</div>
 
 @code {
-    private ElementReference myInput;
+    private ElementReference divElement;
 
-    protected override void OnAfterRender(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            JSRuntime.InvokeVoidAsync(
-                "setElementValue", myInput, "Value set after render");
+            await JSRuntime.InvokeVoidAsync(
+                "setElementText", divElement, "Text after render");
         }
     }
 }
 ```
+
+앞의 예제 코드에서는 *wwwroot/index.html* (Blazor Weasembmbe) 또는 *Pages/_Host* (Blazor Server)의 `<head>` 요소 내에 `setElementText` JavaScript 함수를 제공 합니다. 함수는 `IJSRuntime.InvokeVoidAsync`를 사용 하 여 호출 되 고 값을 반환 하지 않습니다.
+
+```html
+<!--  -->
+<script>
+  window.setElementText = (element, text) => element.innerText = text;
+</script>
+```
+
+> [!WARNING]
+> 앞의 예제에서는 데모용 으로만 DOM (문서 개체 모델)을 직접 수정 합니다. Javascript로 DOM을 직접 수정 하는 것은 JavaScript가 Blazor의 변경 내용 추적을 방해할 수 있기 때문에 대부분의 시나리오에서 권장 되지 않습니다.
 
 다음 구성 요소는 사전 렌더링과 호환 되는 방식으로 구성 요소의 초기화 논리의 일부로 JavaScript interop를 사용 하는 방법을 보여 줍니다. 구성 요소는 `OnAfterRenderAsync` 내부에서 렌더링 업데이트를 트리거할 수 있음을 보여 줍니다. 개발자는이 시나리오에서 무한 루프를 만드는 것을 피해 야 합니다.
 
@@ -39,24 +51,36 @@ Blazor 서버 앱은 렌더링 되지 않지만 브라우저와의 연결이 설
     <strong id="val-get-by-interop">@(infoFromJs ?? "No value yet")</strong>
 </p>
 
-<p>
-    Set value via JS interop call:
-    <input id="val-set-by-interop" @ref="myElem" />
-</p>
+Set value via JS interop call:
+<div id="val-set-by-interop" @ref="divElement"></div>
 
 @code {
     private string infoFromJs;
-    private ElementReference myElem;
+    private ElementReference divElement;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender && infoFromJs == null)
         {
             infoFromJs = await JSRuntime.InvokeAsync<string>(
-                "setElementValue", myElem, "Hello from interop call");
+                "setElementText", divElement, "Hello from interop call!");
 
             StateHasChanged();
         }
     }
 }
 ```
+
+앞의 예제 코드에서는 *wwwroot/index.html* (Blazor Weasembmbe) 또는 *Pages/_Host* (Blazor Server)의 `<head>` 요소 내에 `setElementText` JavaScript 함수를 제공 합니다. 함수는 `IJSRuntime.InvokeAsync`를 사용 하 여 호출 되 고 값을 반환 합니다.
+
+```html
+<script>
+  window.setElementText = (element, text) => {
+    element.innerText = text;
+    return text;
+  };
+</script>
+```
+
+> [!WARNING]
+> 앞의 예제에서는 데모용 으로만 DOM (문서 개체 모델)을 직접 수정 합니다. Javascript로 DOM을 직접 수정 하는 것은 JavaScript가 Blazor의 변경 내용 추적을 방해할 수 있기 때문에 대부분의 시나리오에서 권장 되지 않습니다.
