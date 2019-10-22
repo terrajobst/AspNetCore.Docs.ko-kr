@@ -5,12 +5,12 @@ description: 스캐폴딩을 통해 생성된 Razor 페이지를 설명합니다
 ms.author: riande
 ms.date: 08/17/2019
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: 00a8458b9bee4d30c5774a980ff5c23fb8872737
-ms.sourcegitcommit: 38cac2552029fc19428722bb204ff9e16eb94225
+ms.openlocfilehash: 939ed5c3cdf33d8d99712e3166d8d07d3bac719f
+ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/18/2019
-ms.locfileid: "69573148"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72334092"
 ---
 # <a name="scaffolded-razor-pages-in-aspnet-core"></a>ASP.NET Core의 스캐폴드된 Razor 페이지
 
@@ -30,9 +30,9 @@ ms.locfileid: "69573148"
 
 Razor 페이지는 `PageModel`에서 파생됩니다. 일반적으로 `PageModel` 파생 클래스를 `<PageName>Model`이라고 합니다. 생성자는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 `RazorPagesMovieContext`를 페이지에 추가합니다. 모든 스캐폴드된 페이지가 이 패턴을 따릅니다. Entity Framework로 비동기 프로그래밍에 대한 자세한 내용은 [비동기 코드](xref:data/ef-rp/intro#asynchronous-code)를 참조하세요.
 
-페이지에 대한 요청을 만들면 `OnGetAsync` 메서드가 Razor 페이지에 동영상 목록을 반환합니다. 페이지 상태를 초기화하기 위해 `OnGetAsync` 또는 `OnGet`이 Razor 페이지에서 호출됩니다. 이 경우 `OnGetAsync`는 동영상 목록을 가져와 표시합니다.
+페이지에 대한 요청을 만들면 `OnGetAsync` 메서드가 Razor 페이지에 동영상 목록을 반환합니다. `OnGetAsync` 또는 `OnGet`을 호출하여 페이지 상태를 초기화합니다. 이 경우 `OnGetAsync`는 동영상 목록을 가져와 표시합니다.
 
-`OnGet`에서 `void`를 반환하거나 `OnGetAsync`에서 `Task`를 반환하면 반환 메서드가 사용되지 않은 것입니다. 반환 형식이 `IActionResult` 또는 `Task<IActionResult>`이면 반환 문을 제공해야 합니다. *Pages/Movies/Create.cshtml.cs* `OnPostAsync` 메서드를 예로 들 수 있습니다.
+`OnGet`이 `void`를 반환하거나 `OnGetAsync`가 `Task`를 반환하면 return 문이 사용되지 않은 것입니다. 반환 형식이 `IActionResult` 또는 `Task<IActionResult>`이면 반환 문을 제공해야 합니다. *Pages/Movies/Create.cshtml.cs* `OnPostAsync` 메서드를 예로 들 수 있습니다.
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml.cs?name=snippet)]
 
@@ -41,6 +41,8 @@ Razor 페이지는 `PageModel`에서 파생됩니다. 일반적으로 `PageModel
 [!code-cshtml[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Index.cshtml)]
 
 Razor는 HTML에서 C# 또는 Razor 관련 태그로 전환될 수 있습니다. `@` 기호 뒤에 [Razor 예약 키워드](xref:mvc/views/razor#razor-reserved-keywords)가 사용되면 이 기호는 Razor 관련 태그로 전환됩니다. 이외의 경우에는 C#으로 전환됩니다.
+
+### <a name="the-page-directive"></a>@page 지시문
 
 `@page` Razor 지시문은 파일을 MVC 작업으로 만들고, 이것은 요청을 처리할 수 있음을 의미합니다. `@page`는 페이지의 첫 번째 Razor 지시문이어야 합니다. `@page`는 Razor 관련 태그로 전환되는 하나의 예입니다. 자세한 내용은 [Razor 구문](xref:mvc/views/razor#razor-syntax)을 참조하세요.
 
@@ -62,7 +64,7 @@ Razor는 HTML에서 C# 또는 Razor 관련 태그로 전환될 수 있습니다.
 
 ### <a name="the-layout-page"></a>레이아웃 페이지
 
-메뉴 링크를 선택합니다(**RazorPagesMovie**, **홈** 및 **개인 정보**). 각 페이지는 동일한 메뉴 레이아웃을 표시합니다. 메뉴 레이아웃은 *Pages/Shared/_Layout.cshtml* 파일에서 구현됩니다. *Pages/Shared/_Layout.cshtml* 파일을 엽니다.
+메뉴 링크를 선택합니다(**RazorPagesMovie**, **홈** 및 **개인 정보**). 각 페이지는 동일한 메뉴 레이아웃을 보여줍니다. 메뉴 레이아웃은 *Pages/Shared/_Layout.cshtml* 파일에서 구현됩니다. *Pages/Shared/_Layout.cshtml* 파일을 엽니다.
 
 [레이아웃](xref:mvc/views/layout) 템플릿을 사용하여 HTML 컨테이너 레이아웃을 다음과 같이 지정할 수 있습니다.
 
@@ -81,7 +83,7 @@ Razor는 HTML에서 C# 또는 Razor 관련 태그로 전환될 수 있습니다.
 
 강조 표시된 이전 태그는 C#으로 전환되는 Razor의 예제입니다. `{` 및 `}` 문자로 C# 코드 블록을 묶습니다.
 
-`PageModel` 기본 클래스에는 데이터를 추가하고 뷰에 전달하는 데 사용할 수 있는 `ViewData` 사전 속성이 있습니다. 키/쌍 패턴을 사용하여 개체를 `ViewData` 사전에 추가합니다. 이전 샘플에서는 `"Title"` 속성이 `ViewData` 사전에 추가됩니다.
+`PageModel` 기본 클래스에는 데이터를 뷰에 전달하는 데 사용할 수 있는 `ViewData` 사전 속성이 있습니다. 키/쌍 패턴을 사용하여 개체를 `ViewData` 사전에 추가합니다. 이전 샘플에서는 `"Title"` 속성이 `ViewData` 사전에 추가됩니다.
 
 `"Title"` 속성은 *Pages/Shared/_Layout.cshtml* 파일에서 사용됩니다. 다음 태그는 *_Layout.cshtml* 파일의 처음 몇 줄을 표시합니다.
 
@@ -253,9 +255,9 @@ Razor는 HTML에서 C# 또는 Razor 관련 태그로 전환될 수 있습니다.
 
 ### <a name="the-layout-page"></a>레이아웃 페이지
 
-메뉴 링크를 선택합니다(**RazorPagesMovie**, **홈** 및 **개인 정보**). 각 페이지는 동일한 메뉴 레이아웃을 표시합니다. 메뉴 레이아웃은 *Pages/Shared/_Layout.cshtml* 파일에서 구현됩니다. *Pages/Shared/_Layout.cshtml* 파일을 엽니다.
+메뉴 링크를 선택합니다(**RazorPagesMovie**, **홈** 및 **개인 정보**). 각 페이지는 동일한 메뉴 레이아웃을 보여줍니다. 메뉴 레이아웃은 *Pages/Shared/_Layout.cshtml* 파일에서 구현됩니다. *Pages/Shared/_Layout.cshtml* 파일을 엽니다.
 
-[레이아웃](xref:mvc/views/layout) 템플릿을 사용하면 한 곳에서 사이트의 HTML 컨테이너 레이아웃을 지정한 다음 사이트에서 여러 페이지에 걸쳐 적용할 수 있습니다. `@RenderBody()` 줄을 찾습니다. `RenderBody`는 사용자가 만드는 모든 페이지 특정 보기가 표시되는 자리 표시자이며 레이아웃 페이지에서 ‘래핑됩니다’.  예를 들어 **개인 정보** 링크를 선택하는 경우 **Pages/Privacy.cshtml** 보기는 `RenderBody` 메서드 내에서 렌더링됩니다.
+[레이아웃](xref:mvc/views/layout) 템플릿을 사용하면 한 곳에서 사이트의 HTML 컨테이너 레이아웃을 지정한 다음 사이트의 여러 페이지에 걸쳐 적용할 수 있습니다. `@RenderBody()` 줄을 찾습니다. `RenderBody`는 사용자가 만드는 모든 페이지 특정 보기가 표시되는 자리 표시자이며 레이아웃 페이지에서 ‘래핑됩니다’.  예를 들어 **개인 정보** 링크를 선택하는 경우 **Pages/Privacy.cshtml** 보기는 `RenderBody` 메서드 내에서 렌더링됩니다.
 
 <a name="vd"></a>
 

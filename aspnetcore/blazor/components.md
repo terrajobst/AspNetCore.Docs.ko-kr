@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/05/2019
 uid: blazor/components
-ms.openlocfilehash: a71bbf3921417cbd23aeb14d0d78ad8354d6e93a
-ms.sourcegitcommit: dd026eceee79e943bd6b4a37b144803b50617583
+ms.openlocfilehash: cd48111e8d601fc67e8a938fcdd686759a9ddeca
+ms.sourcegitcommit: ce2bfb01f2cc7dd83f8a97da0689d232c71bcdc4
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/15/2019
-ms.locfileid: "72378682"
+ms.lasthandoff: 10/17/2019
+ms.locfileid: "72531112"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -37,8 +37,8 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 구성 요소 멤버는 `@`로 시작 하는 식을 사용 하 C# 여 구성 요소의 렌더링 논리의 일부로 사용할 수 있습니다. 예를 들어 필드 C# 는 필드 이름 앞에 `@`을 접두사로 하 여 렌더링 됩니다. 다음 예에서는를 평가 하 고 렌더링 합니다.
 
-* -0은 `font-style`에 대 한 CSS 속성 값을 @no__t 합니다.
-* `<h1>` 요소의 내용에 `_headingText`입니다.
+* `font-style`에 대 한 CSS 속성 값을 `_headingFontStyle` 합니다.
+* `<h1>` 요소의 내용에 `_headingText` 합니다.
 
 ```cshtml
 <h1 style="font-style:@_headingFontStyle">@_headingText</h1>
@@ -81,27 +81,27 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 *인덱스 razor* 의 다음 태그는 @no__t 1 인스턴스를 렌더링 합니다.
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Pages/Index.razor?name=snippet_HeadingComponent)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/Index.razor?name=snippet_HeadingComponent)]
 
 *Components/HeadingComponent*:
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Components/HeadingComponent.razor)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Components/HeadingComponent.razor)]
 
 구성 요소에 구성 요소 이름과 일치 하지 않는 대문자 첫 글자가 포함 된 HTML 요소가 포함 된 경우 요소에 예기치 않은 이름이 있음을 나타내는 경고가 내보내집니다. 구성 요소 네임 스페이스에 대 한 `@using` 문을 추가 하면 구성 요소를 사용할 수 있게 되므로 경고가 제거 됩니다.
 
 ## <a name="component-parameters"></a>구성 요소 매개 변수
 
-구성 요소에는 구성 요소 매개 변수를 포함할 수 있습니다 .이 *매개 변수*는 구성 요소 클래스에서 `[Parameter]` 특성을 사용 하 여 정의 됩니다. 특성을 사용하여 태그에서 구성 요소의 인수를 지정합니다.
+구성 요소는 구성 요소 클래스의 공용 속성을 사용 하 여 정의 되는 *구성 요소 매개 변수*를 포함할 수 있습니다 .이 매개 변수는 `[Parameter]` 특성 특성을 사용하여 태그에서 구성 요소의 인수를 지정합니다.
 
 *Components/ChildComponent. razor*:
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Components/ChildComponent.razor?highlight=11-12)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=11-12)]
 
 다음 예제에서 `ParentComponent`은 `ChildComponent`의 `Title` 속성 값을 설정 합니다.
 
 *Pages/ParentComponent. razor*:
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Pages/ParentComponent.razor?name=snippet_ParentComponent&highlight=5-6)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/ParentComponent.razor?name=snippet_ParentComponent&highlight=5-6)]
 
 ## <a name="child-content"></a>자식 콘텐츠
 
@@ -111,7 +111,7 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 *Components/ChildComponent. razor*:
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Components/ChildComponent.razor?highlight=3,14-15)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=3,14-15)]
 
 > [!NOTE]
 > @No__t-0 콘텐츠를 받는 속성의 이름은 규칙에 따라 `ChildContent`로 지정 해야 합니다.
@@ -120,7 +120,7 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 *Pages/ParentComponent. razor*:
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Pages/ParentComponent.razor?name=snippet_ParentComponent&highlight=7-8)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/ParentComponent.razor?name=snippet_ParentComponent&highlight=7-8)]
 
 ## <a name="attribute-splatting-and-arbitrary-parameters"></a>특성 스 플랫 및 임의 매개 변수
 
@@ -190,7 +190,7 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 }
 ```
 
-@No__t-1의 `CaptureUnmatchedValues` 속성은 매개 변수가 다른 매개 변수와 일치 하지 않는 모든 특성을 일치 시킬 수 있도록 합니다. 구성 요소는 `CaptureUnmatchedValues` 인 단일 매개 변수만 정의할 수 있습니다. @No__t-0과 함께 사용 되는 속성 형식은 문자열 키가 있는 `Dictionary<string, object>`에서 할당할 수 있어야 합니다. 이 시나리오에서 `IEnumerable<KeyValuePair<string, object>>` 또는 `IReadOnlyDictionary<string, object>`도 옵션입니다.
+@No__t_1의 `CaptureUnmatchedValues` 속성을 사용 하면 매개 변수는 다른 매개 변수와 일치 하지 않는 모든 특성을 일치 시킬 수 있습니다. 구성 요소는 `CaptureUnmatchedValues` 인 단일 매개 변수만 정의할 수 있습니다. @No__t-0과 함께 사용 되는 속성 형식은 문자열 키가 있는 `Dictionary<string, object>`에서 할당할 수 있어야 합니다. 이 시나리오에서 `IEnumerable<KeyValuePair<string, object>>` 또는 `IReadOnlyDictionary<string, object>`도 옵션입니다.
 
 ## <a name="data-binding"></a>데이터 바인딩
 
@@ -513,11 +513,11 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 
 샘플 앱의 `ChildComponent`은 샘플의 `ParentComponent`에서 `EventCallback` 대리자를 수신 하도록 단추의 @no__t 1 처리기를 설정 하는 방법을 보여 줍니다. @No__t-0은 `MouseEventArgs`로 입력 됩니다 .이는 주변 장치의 `onclick` 이벤트에 적합 합니다.
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Components/ChildComponent.razor?highlight=5-7,17-18)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=5-7,17-18)]
 
 @No__t-0은 자식의 `EventCallback<T>`을 `ShowMessage` 메서드로 설정 합니다.
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Pages/ParentComponent.razor?name=snippet_ParentComponent&highlight=6,16-19)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/ParentComponent.razor?name=snippet_ParentComponent&highlight=6,16-19)]
 
 @No__t에서 단추가 선택 된 경우-0:
 
@@ -968,7 +968,7 @@ Blazor의 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로
 
 여러 경로 템플릿을 구성 요소에 적용할 수 있습니다. 다음 구성 요소는 `/BlazorRoute` 및 `/DifferentBlazorRoute`에 대 한 요청에 응답 합니다.
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Pages/BlazorRoute.razor?name=snippet_BlazorRoute)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/BlazorRoute.razor?name=snippet_BlazorRoute)]
 
 ## <a name="route-parameters"></a>경로 매개 변수
 
@@ -976,7 +976,7 @@ Blazor의 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로
 
 *경로 매개 변수 구성 요소*:
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Pages/RouteParameter.razor?name=snippet_RouteParameter)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/RouteParameter.razor?name=snippet_RouteParameter)]
 
 선택적 매개 변수는 지원 되지 않으므로 위의 예제에서 두 개의 `@page` 지시문이 적용 됩니다. 첫 번째는 매개 변수 없이 구성 요소에 대 한 탐색을 허용 합니다. 두 번째 `@page` 지시어는 `{text}` 경로 매개 변수를 사용 하 고 값을 `Text` 속성에 할당 합니다.
 
@@ -988,11 +988,11 @@ Blazor의 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로
 
 *Pages/BlazorRocks*:
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Pages/BlazorRocks.razor?name=snippet_BlazorRocks)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/BlazorRocks.razor?name=snippet_BlazorRocks)]
 
 *BlazorRocksBase.cs*:
 
-[!code-csharp[](common/samples/3.x/BlazorSample/Pages/BlazorRocksBase.cs)]
+[!code-csharp[](common/samples/3.x/BlazorWebAssemblySample/Pages/BlazorRocksBase.cs)]
 
 기본 클래스는 `ComponentBase`에서 파생 되어야 합니다.
 
@@ -1002,7 +1002,7 @@ Razor로 작성 된 구성 요소의 네임 스페이스는 (우선 순위)를 �
 
 * Razor 파일 (*razor*) 태그에 [@namespace](xref:mvc/views/razor#namespace) 지정 (`@namespace BlazorSample.MyNamespace`).
 * 프로젝트 파일 (`<RootNamespace>BlazorSample</RootNamespace>`)에서 프로젝트의 `RootNamespace`입니다.
-* 프로젝트 파일의 파일 이름 (*.csproj*)에서 가져온 프로젝트 이름 및 프로젝트 루트에서 구성 요소로의 경로입니다. 예를 들어 프레임 워크는 *{PROJECT ROOT}/Pages/Index.razor* (*BlazorSample*)를 네임 스페이스 `BlazorSample.Pages`로 확인 합니다. 구성 요소 C# 는 이름 바인딩 규칙을 따릅니다. 이 예제에서 `Index` 구성 요소의 경우 범위의 구성 요소는 모든 구성 요소입니다.
+* 프로젝트 파일의 파일 이름 ( *.csproj*)에서 가져온 프로젝트 이름 및 프로젝트 루트에서 구성 요소로의 경로입니다. 예를 들어 프레임 워크는 *{PROJECT ROOT}/Pages/Index.razor* (*BlazorSample*)를 네임 스페이스 `BlazorSample.Pages`로 확인 합니다. 구성 요소 C# 는 이름 바인딩 규칙을 따릅니다. 이 예제에서 `Index` 구성 요소의 경우 범위의 구성 요소는 모든 구성 요소입니다.
   * 같은 폴더 *에 있습니다.*
   * 프로젝트 루트에서 다른 네임 스페이스를 명시적으로 지정 하지 않은 구성 요소입니다.
 
@@ -1096,7 +1096,7 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값�
 
 `TableTemplate` 구성 요소:
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Components/TableTemplate.razor)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Components/TableTemplate.razor)]
 
 템플릿 기반 구성 요소를 사용 하는 경우 매개 변수 이름과 일치 하는 자식 요소를 사용 하 여 템플릿 매개 변수를 지정할 수 있습니다 (다음 예제에서는 `TableHeader` 및 `RowTemplate`).
 
@@ -1149,7 +1149,7 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값�
 
 일반적으로 템플릿 구성 요소는 형식화 되어 있습니다. 예를 들어, 일반 `ListViewTemplate` 구성 요소를 사용 하 여 1 @no__t 값을 렌더링할 수 있습니다. 제네릭 구성 요소를 정의 하려면 [@typeparam](xref:mvc/views/razor#typeparam) 지시어를 사용 하 여 형식 매개 변수를 지정 합니다.
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Components/ListViewTemplate.razor)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Components/ListViewTemplate.razor)]
 
 제네릭 형식의 구성 요소를 사용 하는 경우 가능 하면 형식 매개 변수가 유추 됩니다.
 
@@ -1297,23 +1297,23 @@ public class ThemeInfo
 
 샘플 앱에는 탭에서 구현 하는 @no__t 0 인터페이스가 있습니다.
 
-[!code-csharp[](common/samples/3.x/BlazorSample/UIInterfaces/ITab.cs)]
+[!code-csharp[](common/samples/3.x/BlazorWebAssemblySample/UIInterfaces/ITab.cs)]
 
 @No__t-0 구성 요소는 `TabSet` @no__t 구성 요소를 사용 합니다.
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Pages/CascadingValuesParametersTabSet.razor?name=snippet_TabSet)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/CascadingValuesParametersTabSet.razor?name=snippet_TabSet)]
 
 자식 `Tab` 구성 요소는 `TabSet`에 매개 변수로 명시적으로 전달 되지 않습니다. 대신 자식 `Tab` 구성 요소는 `TabSet`의 자식 콘텐츠에 속합니다. 그러나 `TabSet`은 헤더와 활성 탭을 렌더링할 수 있도록 각 `Tab` 구성 요소에 대해 알고 있어야 합니다. 추가 코드를 요구 하지 않고이 조정을 사용 하기 위해 `TabSet` 구성 요소는 *자체를 연계 값으로 제공* 하 여 하위 `Tab` 구성 요소에서 선택할 수 있습니다.
 
 `TabSet` 구성 요소:
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Components/TabSet.razor)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Components/TabSet.razor)]
 
 하위 `Tab` 구성 요소는 포함 하는 `TabSet`을 연계 매개 변수로 캡처하기 때문에 @no__t 2 구성 요소는 `TabSet`에 자신을 추가 하 고 활성화 된 탭을 조정 합니다.
 
 `Tab` 구성 요소:
 
-[!code-cshtml[](common/samples/3.x/BlazorSample/Components/Tab.razor)]
+[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Components/Tab.razor)]
 
 ## <a name="razor-templates"></a>Razor 템플릿
 
@@ -1406,7 +1406,7 @@ public class ThemeInfo
 }
 ```
 
-> ! 내용의 @No__t-0의 형식은 렌더링 작업의 *결과* 를 처리할 수 있도록 합니다. Blazor framework 구현의 내부 세부 정보입니다. 이러한 형식은 *불안정* 한 것으로 간주 되며 이후 릴리스에서 변경 될 수 있습니다.
+> ! 내용의 @No__t_0 형식을 사용 하면 렌더링 작업의 *결과* 를 처리할 수 있습니다. Blazor framework 구현의 내부 세부 정보입니다. 이러한 형식은 *불안정* 한 것으로 간주 되며 이후 릴리스에서 변경 될 수 있습니다.
 
 ### <a name="sequence-numbers-relate-to-code-line-numbers-and-not-execution-order"></a>시퀀스 번호는 코드 줄 번호와 관련 되 고 실행 순서와는 관련이 없습니다.
 
@@ -1620,13 +1620,13 @@ Blazor의 `@bind` 기능은 사용자의 현재 문화권에 따라 세계화를
 
 ## <a name="scalable-vector-graphics-svg-images"></a>SVG (스케일러블 벡터 그래픽) 이미지
 
-Blazor는 HTML을 렌더링 하므로 SVG (확장 가능한 벡터 그래픽)*이미지 (*)를 비롯 한 브라우저 지원 이미지는 `<img>` 태그를 통해 지원 됩니다.
+Blazor는 HTML을 렌더링 하므로 SVG (확장 가능한 벡터 그래픽)*이미지 (* )를 비롯 한 브라우저 지원 이미지는 `<img>` 태그를 통해 지원 됩니다.
 
 ```html
 <img alt="Example image" src="some-image.svg" />
 ```
 
-마찬가지로, 스타일 시트 파일 (*.css*)의 css 규칙에서 SVG 이미지가 지원 됩니다.
+마찬가지로, 스타일 시트 파일 ( *.css*)의 css 규칙에서 SVG 이미지가 지원 됩니다.
 
 ```css
 .my-element {

@@ -5,12 +5,12 @@ description: ASP.NET Core 앱에서 생성된 페이지를 업데이트하는 �
 ms.author: riande
 ms.date: 12/20/2018
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: f1f69b7facf584d46248405c808e75bdd8448d2b
-ms.sourcegitcommit: 051f068c78931432e030b60094c38376d64d013e
+ms.openlocfilehash: 0f6535462fe2d308825bf7289c10d2b0690cebd4
+ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/24/2019
-ms.locfileid: "68440319"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72334106"
 ---
 # <a name="update-the-generated-pages-in-an-aspnet-core-app"></a>ASP.NET Core 앱에서 생성된 페이지 업데이트
 
@@ -53,6 +53,8 @@ ms.locfileid: "68440319"
 ```
 
 동적으로 생성된 링크는 쿼리 문자열이 포함된 동영상 ID를 전달합니다(예: `https://localhost:5001/Movies/Details?id=1`의 `?id=1`).
+
+### <a name="add-route-template"></a>경로 템플릿 추가
 
 편집, 세부 정보 및 삭제 Razor 페이지를 "{id:int}" 경로 템플릿을 사용하도록 업데이트합니다. 이러한 각 페이지에 대한 page 지시문을 `@page`에서 `@page "{id:int}"`로 변경합니다. 앱을 실행한 다음 소스를 봅니다. 생성된 HTML에서 URL의 경로 부분에 ID를 추가합니다.
 

@@ -5,18 +5,16 @@ description: ASP.NET Core에서 다른 언어와 문화권으로의 콘텐츠 �
 ms.author: riande
 ms.date: 01/14/2017
 uid: fundamentals/localization
-ms.openlocfilehash: 6dfbeae201a3586dfea6620917083130c4985b22
-ms.sourcegitcommit: dc96d76f6b231de59586fcbb989a7fb5106d26a8
+ms.openlocfilehash: 9ed133c93a9ec95c63869b710d120eca9fda1b6e
+ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/01/2019
-ms.locfileid: "71703806"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72333725"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Core에서 세계화 및 지역화
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT), [Damien Bowden](https://twitter.com/damien_bod), [Bart Calixto](https://twitter.com/bartmax), [Nadeem Afana](https://afana.me/) 및 [Hisham Bin Ateya](https://twitter.com/hishambinateya)
-
-이 문서가 ASP.NET Core 3.0에 맞게 업데이트될 때까지 Hisham의 블로그 [ASP.NET Core 3.0에서 지역화의 새로운 기능](http://hishambinateya.com/what-is-new-in-localization-in-asp.net-core-3.0)을 참조하세요.
 
 ASP.NET Core를 사용하여 다국어 웹 사이트를 만들면 더 광범위한 사용자가 사이트를 사용할 수 있습니다. ASP.NET Core는 다른 언어 및 문화권의 지역화를 위한 서비스 및 미들웨어를 제공합니다.
 
@@ -76,7 +74,7 @@ HTML을 포함하는 리소스에 대해 `IHtmlLocalizer<T>` 구현을 사용합
 
 프랑스어 리소스 파일은 다음을 포함할 수 있습니다.
 
-| 키 | 값 |
+| Key | 값 |
 | ----- | ------ |
 | `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
 
@@ -275,10 +273,36 @@ using Microsoft.Extensions.Localization;
 
 6. 언어를 누른 다음, **위로 이동**을 누릅니다.
 
+::: moniker range=">= aspnetcore-3.0"
+### <a name="the-content-language-http-header"></a>콘텐츠-언어 HTTP 헤더
+
+[콘텐츠-언어](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Language) 엔터티 헤더:
+
+ - 대상 그룹을 위한 언어를 설명하는 데 사용됩니다.
+ - 사용자가 사용자 기본 설정 언어에 따라 구별할 수 있습니다.
+
+엔터티 헤더는 HTTP 요청 및 응답에 모두 사용됩니다.
+
+ASP.NET Core 3.0에서는 속성 `ApplyCurrentCultureToResponseHeaders`를 설정하여 `Content-Language` 헤더를 추가할 수 있습니다.
+
+`Content-Language` 헤더 추가:
+
+ - RequestLocalizationMiddleware가 `CurrentUICulture`를 사용하여 `Content-Language` 헤더를 설정할 수 있습니다.
+ - 응답 헤더 `Content-Language`를 명시적으로 설정하지 않아도 됩니다.
+
+```csharp
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    ApplyCurrentCultureToResponseHeaders = true
+});
+```
+::: moniker-end
+
 ### <a name="use-a-custom-provider"></a>사용자 지정 공급자 사용
 
 소비자가 자신의 언어 및 문화권을 데이터베이스에 저장하도록 하기를 원한다고 가정합니다. 공급자를 작성하여 사용자에 대한 이러한 값을 조회할 수 있습니다. 다음 코드에서는 사용자 지정 공급자를 추가하는 방법을 보여 줍니다.
 
+::: moniker range="< aspnetcore-3.0"
 ```csharp
 private const string enUSCulture = "en-US";
 
@@ -301,6 +325,32 @@ services.Configure<RequestLocalizationOptions>(options =>
     }));
 });
 ```
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
+```csharp
+private const string enUSCulture = "en-US";
+
+services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new[]
+    {
+        new CultureInfo(enUSCulture),
+        new CultureInfo("fr")
+    };
+
+    options.DefaultRequestCulture = new RequestCulture(culture: enUSCulture, uiCulture: enUSCulture);
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+
+    options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async context =>
+    {
+        // My custom request culture logic
+        return new ProviderCultureResult("en");
+    }));
+});
+```
+::: moniker-end
 
 `RequestLocalizationOptions`를 사용하여 지역화 공급자를 추가하거나 제거합니다.
 
@@ -341,7 +391,11 @@ services.Configure<RequestLocalizationOptions>(options =>
 * 부모 문화권: 특정 문화권을 포함하는 중립 문화권입니다. (예: "en"은 "en-US" 및 "en-GB"의 부모 문화권)
 * 로캘: 로캘은 문화권과 동일합니다.
 
-[!INCLUDE[](~/includes/currency.md)]
+[!INCLUDE[](~/includes/localization/currency.md)]
+
+::: moniker range=">= aspnetcore-3.0"
+[!INCLUDE[](~/includes/localization/unsupported-culture-log-level.md)]
+::: moniker-end
 
 ## <a name="additional-resources"></a>추가 자료
 
@@ -351,3 +405,4 @@ services.Configure<RequestLocalizationOptions>(options =>
 * [.resx 파일의 리소스](/dotnet/framework/resources/working-with-resx-files-programmatically)
 * [Microsoft 다국어 앱 도구 키트](https://marketplace.visualstudio.com/items?itemName=MultilingualAppToolkit.MultilingualAppToolkit-18308)
 * [지역화 및 제네릭](https://github.com/hishamco/hishambinateya.com/blob/master/Posts/localization-and-generics.md)
+* [ASP.NET Core 3.0에서 지역화의 새로운 기능](http://hishambinateya.com/what-is-new-in-localization-in-asp.net-core-3.0)

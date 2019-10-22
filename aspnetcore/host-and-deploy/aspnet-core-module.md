@@ -5,14 +5,14 @@ description: ASP.NET Core 앱을 호스팅하기 위해 ASP.NET Core 모듈을 �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/08/2019
+ms.date: 10/13/2019
 uid: host-and-deploy/aspnet-core-module
-ms.openlocfilehash: c1c34f368cb3f7767bf0f229ff70c5ab53c6005f
-ms.sourcegitcommit: fcdf9aaa6c45c1a926bd870ed8f893bdb4935152
+ms.openlocfilehash: 917ee462a8f9592120685b53d059a661cb4a7452
+ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72165319"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72333886"
 ---
 # <a name="aspnet-core-module"></a>ASP.NET Core 모듈
 
@@ -76,6 +76,8 @@ ASP.NET Core 앱의 기본값은 In-process 호스팅 모델입니다.
       app.UseAuthentication();
   }
   ```
+  
+  * [웹 패키지(단일 파일) 배포](/aspnet/web-forms/overview/deployment/web-deployment-in-the-enterprise/deploying-web-packages)는 지원되지 않습니다.
 
 ### <a name="out-of-process-hosting-model"></a>Out-of-Process 호스팅 모델
 
