@@ -5,12 +5,12 @@ description: 간단한 ASP.NET Core MVC 앱에 보기 추가
 ms.author: riande
 ms.date: 8/04/2019
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 1c29b59f9306774316ff37eeb57cc441fe5c7370
-ms.sourcegitcommit: 2eb605f4f20ac4dd9de6c3b3e3453e108a357a21
+ms.openlocfilehash: de75c3b0651c0cda6629af786d7db9dc83bc4fef
+ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/06/2019
-ms.locfileid: "68820086"
+ms.lasthandoff: 10/12/2019
+ms.locfileid: "72288827"
 ---
 # <a name="add-a-view-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 보기 추가
 
@@ -74,7 +74,7 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
-`https://localhost:{PORT}/HelloWorld`로 이동합니다. `HelloWorldController`에서 `Index` 메서드는 많은 작업을 수행하지 않았습니다. `return View();` 문을 실행했습니다. 해당 문은 메서드가 브라우저에 대한 응답을 렌더링하기 위해 보기 템플릿 파일을 사용해야 함을 지정했습니다. 보기 템플릿 파일 이름을 지정하지 않았기 때문에 MVC는 기본적으로 기본 보기 파일을 사용하도록 설정되었습니다. 기본 보기 파일은 메서드(`Index`)와 이름이 같으므로 */Views/HelloWorld/Index.cshtml*이 사용됩니다. 아래 이미지는 보기에서 하드 코드된 “Hello from our View Template!” 문자열을 보여줍니다.
+`https://localhost:{PORT}/HelloWorld`로 이동합니다. `HelloWorldController`의 `Index` 메서드는 많은 작업을 수행하지 않았습니다. `return View();` 문만 실행합니다. 해당 문은 메서드가 브라우저에 대한 응답을 렌더링하기 위해 보기 템플릿 파일을 사용해야 함을 지정합니다. 보기 템플릿 파일 이름을 지정하지 않았기 때문에 MVC는 기본적으로 기본 보기 파일을 사용합니다. 기본 보기 파일은 메서드(`Index`)와 이름이 같으므로 */Views/HelloWorld/Index.cshtml*이 사용됩니다. 아래 이미지는 보기에 하드 코딩된 “Hello from our View Template!” 문자열을 보여줍니다.
 
 ![브라우저 창](~/tutorials/first-mvc-app/adding-view/_static/hell_template.png)
 
@@ -86,7 +86,7 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
 ## <a name="change-the-title-footer-and-menu-link-in-the-layout-file"></a>레이아웃 파일의 제목, 바닥글 및 메뉴 링크 변경
 
-*Views\Shared\_Layout.cshtml* 파일의 내용을 다음 태그로 대체합니다. 변경 내용은 강조 표시되어 있습니다.
+*Views/Shared/_Layout.cshtml* 파일의 내용을 다음 태그로 대체합니다. 변경 내용은 강조 표시되어 있습니다.
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Views/Shared/_Layout.cshtml?highlight=6,14,40)]
 
@@ -97,9 +97,9 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
 위의 태그에서 이 앱이 [Areas](xref:mvc/controllers/areas)를 사용하지 않기 때문에 `asp-area=""` [앵커 태그 도우미 특성](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) 및 특성 값이 생략되었습니다.
 
-**참고**: `Movies` 컨트롤러가 구현되지 않았습니다. 이 시점에서 `Movie App` 링크는 작동하지 않습니다.
+**참고**: `Movies` 컨트롤러는 아직 구현되지 않았습니다. 이 시점에서 `Movie App` 링크는 작동하지 않습니다.
 
-변경 내용을 저장하고 **개인 정보** 링크를 선택합니다. 브라우저 탭의 제목에서 **개인정보처리방침 - Mvc 동영상** 대신 **개인정보처리방침 - 동영상 앱**을 표시하는 방법을 확인합니다.
+변경 내용을 저장하고 **Privacy** 링크를 선택합니다. 브라우저 탭의 제목으로 **Privacy Policy - Mvc Movie** 대신 **Privacy Policy - Movie App**이 표시됨을 확인합니다.
 
 ![개인 정보 탭](~/tutorials/first-mvc-app/adding-view/_static/about2.png)
 
@@ -127,23 +127,23 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 <title>@ViewData["Title"] - Movie App</title>
    ```
 
-변경 내용을 저장하고 `https://localhost:{PORT}/HelloWorld`로 이동합니다. 브라우저 제목, 기본 제목 및 작은 제목이 변경된 것을 확인합니다. (브라우저에서 변경 내용을 확인할 수 없는 경우 캐시된 콘텐츠를 보고 있을 수도 있습니다. 브라우저에서 Ctrl+F5 키를 눌러 로드될 서버에서 응답을 강제로 적용합니다.) 브라우저 제목은 *Index.cshtml* 보기 템플릿에서 설정한 `ViewData["Title"]` 및 레이아웃 파일에 추가된 추가 "- Movie App"으로 만들어집니다.
+변경 내용을 저장하고 `https://localhost:{PORT}/HelloWorld`로 이동합니다. 브라우저 제목, 기본 제목 및 작은 제목이 변경된 것을 확인합니다. (브라우저에서 변경 내용을 확인할 수 없는 경우 캐시된 콘텐츠를 보고 있을 수도 있습니다. 브라우저에서 Ctrl+F5 키를 눌러서 로드될 응답을 강제로 서버에서 가져옵니다.) 브라우저 제목은 *Index.cshtml* 보기 템플릿에서 설정한 `ViewData["Title"]` 및 레이아웃 파일에 추가된 추가적인 "- Movie App"으로 만들어집니다.
 
 *Index.cshtml* 보기 템플릿의 콘텐츠가 *Views/Shared/_Layout.cshtml* 보기 템플릿과 병합되었습니다. 단일 HTML 응답이 브라우저로 전송되었습니다. 레이아웃 템플릿을 사용하면 응용 프로그램의 모든 페이지에 걸쳐 적용되는 변경 내용을 쉽게 만들 수 있습니다. 자세한 내용은 [레이아웃](xref:mvc/views/layout)을 참조하세요.
 
 ![영화 목록 보기](~/tutorials/first-mvc-app/adding-view/_static/hell3.png)
 
-그렇지만 일부 “데이터”(이 경우 “Hello from our View Template!” 메시지)는 하드 코드되었습니다. MVC 애플리케이션에는 "V"(보기)가 있으며 "C"(컨트롤러)가 있지만 "M"(모델)은 아직 없습니다.
+그렇지만 일부 “데이터”(이 경우 “Hello from our View Template!” 메시지)는 하드 코딩되었습니다. 이 MVC 응용 프로그램에는 "V"(보기)가 있고 "C"(컨트롤러)가 있지만 아직 "M"(모델)은 없습니다.
 
 ## <a name="passing-data-from-the-controller-to-the-view"></a>컨트롤러에서 보기로 데이터 전달
 
 컨트롤러 작업은 들어오는 URL 요청에 대한 응답으로 호출됩니다. 컨트롤러 클래스는 들어오는 브라우저 요청을 처리하는 코드가 작성된 위치입니다. 컨트롤러는 데이터 원본에서 데이터를 검색하고 브라우저에 다시 전송할 응답의 유형을 결정합니다. 보기 템플릿은 브라우저에 대한 HTML 응답을 만들고 서식을 지정하기 위해서 컨트롤러에서 사용될 수 있습니다.
 
-컨트롤러는 보기 템플릿에서 응답을 렌더링하기 위해 필요한 데이터를 제공할 책임이 있습니다. 모범 사례: 보기 템플릿은 비즈니스 논리를 수행하거나 데이터베이스와 직접 상호 작용하지 **않아야** 합니다. 대신 보기 템플릿은 컨트롤러에 의해 제공되는 데이터와만 작동해야 합니다. 이 "문제의 분리"를 유지 관리하면 코드를 깨끗하고, 테스트 가능하고 유지 관리 가능하게 유지할 수 있습니다.
+컨트롤러는 보기 템플릿에서 응답을 렌더링하기 위해 필요한 데이터를 제공할 책임이 있습니다. 모범 사례 에 따라 보기 템플릿은 비즈니스 논리를 수행하거나 데이터베이스와 직접 상호 작용하지 **않아야** 합니다. 대신 보기 템플릿은 컨트롤러가 제공하는 데이터만 이용해서 작업해야 합니다. 이 "문제의 분리"를 유지 관리하면 코드를 깨끗하고, 테스트 가능하고 유지 관리 가능하게 유지할 수 있습니다.
 
-현재 `HelloWorldController` 클래스에서 `Welcome` 메서드는 `name` 및 `ID` 매개 변수를 가져온 다음 값을 브라우저로 직접 출력합니다. 컨트롤러가 이 응답을 문자열로 렌더링하게 하는 대신, 보기 템플릿을 사용하도록 컨트롤러를 변경합니다. 보기 템플릿은 응답을 생성합니다. 즉, 응답을 생성하기 위해 컨트롤러에서 보기로 일부 적절한 데이터를 전달해야 합니다. 보기 템플릿에서 액세스할 수 있도록 보기 템플릿이 `ViewData` 사전에서 필요한 동적 데이터(매개 변수)를 컨트롤러에서 배치하도록 하여 이를 수행합니다.
+현재 `HelloWorldController` 클래스에서 `Welcome` 메서드는 `name` 및 `ID` 매개 변수를 가져온 다음 값을 브라우저로 직접 출력합니다. 컨트롤러가 이 응답을 문자열로 렌더링하게 하는 대신, 보기 템플릿을 사용하도록 컨트롤러를 변경합니다. 보기 템플릿은 동적으로 응답을 생성하는데, 이는 다시 말해서 응답을 생성하기 위해 컨트롤러에서 보기로 일부 적절한 데이터를 전달해야 한다는 뜻입니다. 컨트롤러가 보기 템플릿에 필요한 동적 데이터(매개 변수)를 보기 템플릿이 액세스 할 수 있는 `ViewData` 사전에 넣음으로써 이를 수행할 수 있습니다.
 
-*HelloWorldController.cs*에서 `Message` 및 `NumTimes` 값을 `ViewData` 사전에 추가하도록 `Welcome` 메서드를 변경합니다. `ViewData` 사전은 동적 개체로 어떤 유형이든 사용할 수 있음을 의미합니다. 어떤 것을 내부에 넣을 때까지 `ViewData` 개체에는 정의된 속성이 없습니다. [MVC 모델 바인딩 시스템](xref:mvc/models/model-binding)은 주소 표시줄의 쿼리 문자열에서 메서드의 매개 변수로 명명된 매개 변수(`name` 및 `numTimes`)를 자동으로 매핑합니다. 전체 *HelloWorldController.cs* 파일은 다음과 같습니다.
+*HelloWorldController.cs*에서 `Message` 및 `NumTimes` 값을 `ViewData` 사전에 추가하도록 `Welcome` 메서드를 변경합니다. `ViewData`사전은 동적 개체로, 이는 어떤 형식이든지 사용할 수 있음을 의미합니다. `ViewData` 개체에 무언가 넣을 때까지 이 개체에는 정의된 속성이 없습니다. [MVC 모델 바인딩 시스템](xref:mvc/models/model-binding)은 주소 표시줄의 쿼리 문자열에서 메서드의 매개 변수로 명명된 매개 변수(`name` 및 `numTimes`)를 자동으로 매핑합니다. 전체 *HelloWorldController.cs* 파일은 다음과 같습니다.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_5)]
 
@@ -151,7 +151,7 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
 *Views/HelloWorld/Welcome.cshtml*이라는 환영 보기 템플릿을 만듭니다.
 
-"Hello" `NumTimes`를 표시하는 *Welcome.cshtml* 보기 템플릿에 반복을 만듭니다. *Views/HelloWorld/Welcome.cshtml*의 콘텐츠를 다음으로 대체합니다.
+*Welcome.cshtml* 보기 템플릿에 "Hello" `NumTimes`를 표시하는 반복을 만듭니다. *Views/HelloWorld/Welcome.cshtml*의 콘텐츠를 다음으로 대체합니다.
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Welcome.cshtml)]
 
@@ -199,7 +199,7 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
   * **Razor 뷰**를 선택합니다.
 
-  * *이름* 상자 값 **Index.cshtml**을 유지하세요.
+  * *이름* 상자 값은 **Index.cshtml**을 유지하세요.
 
   * **추가**를 선택합니다.
 
@@ -231,7 +231,7 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
-`https://localhost:{PORT}/HelloWorld`로 이동합니다. `HelloWorldController`에서 `Index` 메서드는 많은 작업을 수행하지 않았습니다. `return View();` 문을 실행했습니다. 해당 문은 메서드가 브라우저에 대한 응답을 렌더링하기 위해 보기 템플릿 파일을 사용해야 함을 지정했습니다. 보기 템플릿 파일 이름을 지정하지 않았기 때문에 MVC는 기본적으로 기본 보기 파일을 사용하도록 설정되었습니다. 기본 보기 파일은 메서드(`Index`)와 이름이 같으므로 */Views/HelloWorld/Index.cshtml*이 사용됩니다. 아래 이미지는 보기에서 하드 코드된 “Hello from our View Template!” 문자열을 보여줍니다.
+`https://localhost:{PORT}/HelloWorld`로 이동합니다. `HelloWorldController`의 `Index` 메서드는 많은 작업을 수행하지 않았습니다. `return View();` 문만 실행합니다. 해당 문은 메서드가 브라우저에 대한 응답을 렌더링하기 위해 보기 템플릿 파일을 사용해야 함을 지정합니다. 보기 템플릿 파일 이름을 지정하지 않았기 때문에 MVC는 기본적으로 기본 보기 파일을 사용합니다. 기본 보기 파일은 메서드(`Index`)와 이름이 같으므로 */Views/HelloWorld/Index.cshtml*이 사용됩니다. 아래 이미지는 보기에 하드 코딩된 “Hello from our View Template!” 문자열을 보여줍니다.
 
 ![브라우저 창](~/tutorials/first-mvc-app/adding-view/_static/hell_template.png)
 
@@ -257,9 +257,9 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 > We haven't implemented the `Movies` controller yet, so if you click the `Movie App` link, you get a 404 (Not found) error.
 -->
 
-**참고**: `Movies` 컨트롤러가 구현되지 않았습니다. 이 시점에서 `Movie App` 링크는 작동하지 않습니다.
+**참고**: `Movies` 컨트롤러는 아직 구현되지 않았습니다. 이 시점에서 `Movie App` 링크는 작동하지 않습니다.
 
-변경 내용을 저장하고 **개인 정보** 링크를 선택합니다. 브라우저 탭의 제목에서 **개인정보처리방침 - Mvc 동영상** 대신 **개인정보처리방침 - 동영상 앱**을 표시하는 방법을 확인합니다.
+변경 내용을 저장하고 **Privacy** 링크를 선택합니다. 브라우저 탭의 제목으로 **Privacy Policy - Mvc Movie** 대신 **Privacy Policy - Movie App**이 표시됨을 확인합니다.
 
 ![개인 정보 탭](~/tutorials/first-mvc-app/adding-view/_static/about2.png)
 
@@ -287,23 +287,23 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 <title>@ViewData["Title"] - Movie App</title>
    ```
 
-변경 내용을 저장하고 `https://localhost:{PORT}/HelloWorld`로 이동합니다. 브라우저 제목, 기본 제목 및 작은 제목이 변경된 것을 확인합니다. (브라우저에서 변경 내용을 확인할 수 없는 경우 캐시된 콘텐츠를 보고 있을 수도 있습니다. 브라우저에서 Ctrl+F5 키를 눌러 로드될 서버에서 응답을 강제로 적용합니다.) 브라우저 제목은 *Index.cshtml* 보기 템플릿에서 설정한 `ViewData["Title"]` 및 레이아웃 파일에 추가된 추가 "- Movie App"으로 만들어집니다.
+변경 내용을 저장하고 `https://localhost:{PORT}/HelloWorld`로 이동합니다. 브라우저 제목, 기본 제목 및 작은 제목이 변경된 것을 확인합니다. (브라우저에서 변경 내용을 확인할 수 없는 경우 캐시된 콘텐츠를 보고 있을 수도 있습니다. 브라우저에서 Ctrl+F5 키를 눌러서 로드될 응답을 강제로 서버에서 가져옵니다.) 브라우저 제목은 *Index.cshtml* 보기 템플릿에서 설정한 `ViewData["Title"]` 및 레이아웃 파일에 추가된 추가적인 "- Movie App"으로 만들어집니다.
 
 또한 *Index.cshtml* 보기 템플릿에서 콘텐츠가 *Views/Shared/_Layout.cshtml* 보기 템플릿으로 병합되고 단일 HTML 응답이 브라우저로 전송된 방식을 확인합니다. 레이아웃 템플릿을 사용하면 응용 프로그램의 모든 페이지에 걸쳐 적용되는 변경 내용을 쉽게 만들 수 있습니다. 자세한 내용은 [레이아웃](xref:mvc/views/layout)을 참조하세요.
 
 ![영화 목록 보기](~/tutorials/first-mvc-app/adding-view/_static/hell3.png)
 
-그렇지만 일부 “데이터”(이 경우 “Hello from our View Template!” 메시지)는 하드 코드되었습니다. MVC 애플리케이션에는 "V"(보기)가 있으며 "C"(컨트롤러)가 있지만 "M"(모델)은 아직 없습니다.
+그렇지만 일부 “데이터”(이 경우 “Hello from our View Template!” 메시지)는 하드 코딩되었습니다. 이 MVC 응용 프로그램에는 "V"(보기)가 있고 "C"(컨트롤러)가 있지만 아직 "M"(모델)은 없습니다.
 
 ## <a name="passing-data-from-the-controller-to-the-view"></a>컨트롤러에서 보기로 데이터 전달
 
 컨트롤러 작업은 들어오는 URL 요청에 대한 응답으로 호출됩니다. 컨트롤러 클래스는 들어오는 브라우저 요청을 처리하는 코드가 작성된 위치입니다. 컨트롤러는 데이터 원본에서 데이터를 검색하고 브라우저에 다시 전송할 응답의 유형을 결정합니다. 보기 템플릿은 브라우저에 대한 HTML 응답을 만들고 서식을 지정하기 위해서 컨트롤러에서 사용될 수 있습니다.
 
-컨트롤러는 보기 템플릿에서 응답을 렌더링하기 위해 필요한 데이터를 제공할 책임이 있습니다. 모범 사례: 보기 템플릿은 비즈니스 논리를 수행하거나 데이터베이스와 직접 상호 작용하지 **않아야** 합니다. 대신 보기 템플릿은 컨트롤러에 의해 제공되는 데이터와만 작동해야 합니다. 이 "문제의 분리"를 유지 관리하면 코드를 깨끗하고, 테스트 가능하고 유지 관리 가능하게 유지할 수 있습니다.
+컨트롤러는 보기 템플릿에서 응답을 렌더링하기 위해 필요한 데이터를 제공할 책임이 있습니다. 모범 사례 에 따라 보기 템플릿은 비즈니스 논리를 수행하거나 데이터베이스와 직접 상호 작용하지 **않아야** 합니다. 대신 보기 템플릿은 컨트롤러가 제공하는 데이터만 이용해서 작업해야 합니다. 이 "문제의 분리"를 유지 관리하면 코드를 깨끗하고, 테스트 가능하고 유지 관리 가능하게 유지할 수 있습니다.
 
-현재 `HelloWorldController` 클래스에서 `Welcome` 메서드는 `name` 및 `ID` 매개 변수를 가져온 다음 값을 브라우저로 직접 출력합니다. 컨트롤러가 이 응답을 문자열로 렌더링하게 하는 대신, 보기 템플릿을 사용하도록 컨트롤러를 변경합니다. 보기 템플릿은 응답을 생성합니다. 즉, 응답을 생성하기 위해 컨트롤러에서 보기로 일부 적절한 데이터를 전달해야 합니다. 보기 템플릿에서 액세스할 수 있도록 보기 템플릿이 `ViewData` 사전에서 필요한 동적 데이터(매개 변수)를 컨트롤러에서 배치하도록 하여 이를 수행합니다.
+현재 `HelloWorldController` 클래스에서 `Welcome` 메서드는 `name` 및 `ID` 매개 변수를 가져온 다음 값을 브라우저로 직접 출력합니다. 컨트롤러가 이 응답을 문자열로 렌더링하게 하는 대신, 보기 템플릿을 사용하도록 컨트롤러를 변경합니다. 보기 템플릿은 동적으로 응답을 생성하는데, 이는 다시 말해서 응답을 생성하기 위해 컨트롤러에서 보기로 일부 적절한 데이터를 전달해야 한다는 뜻입니다. 컨트롤러가 보기 템플릿에 필요한 동적 데이터(매개 변수)를 보기 템플릿이 액세스 할 수 있는 `ViewData` 사전에 넣음으로써 이를 수행할 수 있습니다.
 
-*HelloWorldController.cs*에서 `Message` 및 `NumTimes` 값을 `ViewData` 사전에 추가하도록 `Welcome` 메서드를 변경합니다. `ViewData` 사전은 동적 개체로 어떤 유형이든 사용할 수 있음을 의미합니다. 어떤 것을 내부에 넣을 때까지 `ViewData` 개체에는 정의된 속성이 없습니다. [MVC 모델 바인딩 시스템](xref:mvc/models/model-binding)은 주소 표시줄의 쿼리 문자열에서 메서드의 매개 변수로 명명된 매개 변수(`name` 및 `numTimes`)를 자동으로 매핑합니다. 전체 *HelloWorldController.cs* 파일은 다음과 같습니다.
+*HelloWorldController.cs*에서 `Message` 및 `NumTimes` 값을 `ViewData` 사전에 추가하도록 `Welcome` 메서드를 변경합니다. `ViewData`사전은 동적 개체로, 이는 어떤 형식이든지 사용할 수 있음을 의미합니다. `ViewData` 개체에 무언가 넣을 때까지 이 개체에는 정의된 속성이 없습니다. [MVC 모델 바인딩 시스템](xref:mvc/models/model-binding)은 주소 표시줄의 쿼리 문자열에서 메서드의 매개 변수로 명명된 매개 변수(`name` 및 `numTimes`)를 자동으로 매핑합니다. 전체 *HelloWorldController.cs* 파일은 다음과 같습니다.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_5)]
 
@@ -311,7 +311,7 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
 *Views/HelloWorld/Welcome.cshtml*이라는 환영 보기 템플릿을 만듭니다.
 
-"Hello" `NumTimes`를 표시하는 *Welcome.cshtml* 보기 템플릿에 반복을 만듭니다. *Views/HelloWorld/Welcome.cshtml*의 콘텐츠를 다음으로 대체합니다.
+*Welcome.cshtml* 보기 템플릿에 "Hello" `NumTimes`를 표시하는 반복을 만듭니다. *Views/HelloWorld/Welcome.cshtml*의 콘텐츠를 다음으로 대체합니다.
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Welcome.cshtml)]
 

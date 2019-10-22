@@ -5,20 +5,20 @@ description: 구성 API를 사용하여 ASP.NET Core 앱을 구성하는 방법�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/12/2019
+ms.date: 10/18/2019
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 357a3d89648086f0329cd16bc9d72863df9bdcd6
-ms.sourcegitcommit: 8a36be1bfee02eba3b07b7a86085ec25c38bae6b
+ms.openlocfilehash: 0a9b1a1a08617ef4ca8a36295cec8910ec111acd
+ms.sourcegitcommit: a166291c6708f5949c417874108332856b53b6a9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/24/2019
-ms.locfileid: "71217791"
+ms.lasthandoff: 10/18/2019
+ms.locfileid: "72589913"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core의 구성
 
-작성자: [Luke Latham](https://github.com/guardrex)
+[Luke Latham](https://github.com/guardrex)으로
 
-ASP.NET Core의 앱 구성은 ‘구성 공급자’가 설정한 키-값 쌍을 기반으로 합니다. 구성 공급자는 다양한 구성 소스에서 구성 데이터를 키-값 쌍으로 읽어 들입니다.
+ASP.NET Core의 앱 구성은 ‘구성 공급자’가 설정한 키-값 쌍을 기반으로 합니다.  구성 공급자는 다양한 구성 소스에서 구성 데이터를 키-값 쌍으로 읽어 들입니다.
 
 * Azure Key Vault
 * Azure App Configuration
@@ -47,7 +47,7 @@ ASP.NET Core의 앱 구성은 ‘구성 공급자’가 설정한 키-값 쌍을
 using Microsoft.Extensions.Configuration;
 ```
 
-‘옵션 패턴’은 이 항목에 설명된 구성 개념의 확장입니다. 옵션은 클래스를 사용하여 관련 설정 그룹을 나타냅니다. 자세한 내용은 <xref:fundamentals/configuration/options>을 참조하세요.
+‘옵션 패턴’은 이 항목에 설명된 구성 개념의 확장입니다.  옵션은 클래스를 사용하여 관련 설정 그룹을 나타냅니다. 자세한 내용은 <xref:fundamentals/configuration/options>을 참조하세요.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
@@ -193,7 +193,7 @@ public class IndexModel : PageModel
 
 | 공급자 | 다음에서 구성 제공&hellip; |
 | -------- | ----------------------------------- |
-| [Azure Key Vault 구성 공급자](xref:security/key-vault-configuration)(‘보안’ 항목) | Azure Key Vault |
+| [Azure Key Vault 구성 공급자](xref:security/key-vault-configuration)(‘보안’ 항목)  | Azure Key Vault |
 | [Azure App Configuration 공급자](/azure/azure-app-configuration/quickstart-aspnet-core-app)(Azure 설명서) | Azure App Configuration |
 | [명령줄 구성 공급자](#command-line-configuration-provider) | 명령줄 매개 변수 |
 | [사용자 지정 구성 공급자](#custom-configuration-provider) | 사용자 지정 소스 |
@@ -201,7 +201,7 @@ public class IndexModel : PageModel
 | [파일 구성 공급자](#file-configuration-provider) | 파일(INI, JSON, XML) |
 | [파일별 키 구성 공급자](#key-per-file-configuration-provider) | 디렉터리 파일 |
 | [메모리 구성 공급자](#memory-configuration-provider) | 메모리 내 컬렉션 |
-| [사용자 비밀(비밀 관리자)](xref:security/app-secrets)(‘보안’ 항목) | 사용자 프로필 디렉터리의 파일 |
+| [사용자 비밀(비밀 관리자)](xref:security/app-secrets)(‘보안’ 항목)  | 사용자 프로필 디렉터리의 파일 |
 
 시작 시 구성 공급자에서 지정한 순서로 구성 소스를 읽습니다. 이 항목의 구성 공급자는 코드에서 정렬할 수 있는 순서가 아니라 사전순으로 설명되어 있습니다. 코드에서는 기본 구성 소스에 대한 우선 순위에 맞게 구성 공급자를 정렬하세요.
 
@@ -395,7 +395,7 @@ public static readonly Dictionary<string, string> _switchMappings =
 
 생성된 스위치 매핑 사전은 다음 표의 데이터를 포함합니다.
 
-| 키       | 값             |
+| Key       | 값             |
 | --------- | ----------------- |
 | `-CLKey1` | `CommandLineKey1` |
 | `-CLKey2` | `CommandLineKey2` |
@@ -408,7 +408,7 @@ dotnet run -CLKey1=value1 -CLKey2=value2
 
 앞의 명령을 실행한 후 구성에는 다음 표에 표시된 값이 포함됩니다.
 
-| 키               | 값    |
+| Key               | 값    |
 | ----------------- | -------- |
 | `CommandLineKey1` | `value1` |
 | `CommandLineKey2` | `value2` |
@@ -617,10 +617,10 @@ JSON 구성 공급자를 먼저 설정합니다. 따라서 사용자 비밀, 환
 1. 샘플 앱을 실행합니다. 브라우저를 열어 `http://localhost:5000`의 앱으로 이동합니다.
 1. 표에 표시된 대로 환경에 따라 다른 구성에 대한 키-값 쌍이 출력에 포함되어 있는지 확인합니다. 로깅 구성 키는 콜론(`:`)을 계층 구분 기호로 사용합니다.
 
-| 키                        | 개발 값 | 프로덕션 값 |
+| Key                        | 개발 값 | 프로덕션 값 |
 | -------------------------- | :---------------: | :--------------: |
-| Logging:LogLevel:System    | Information       | Information      |
-| Logging:LogLevel:Microsoft | Information       | Information      |
+| Logging:LogLevel:System    | 정보       | 정보      |
+| Logging:LogLevel:Microsoft | 정보       | 정보      |
 | Logging:LogLevel:Default   | Debug             | Error            |
 | AllowedHosts               | *                 | *                |
 
@@ -773,7 +773,7 @@ public static readonly Dictionary<string, string> _dict =
 
 ## <a name="getvalue"></a>GetValue
 
-[ConfigurationBinder.GetValue\<T>](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*)는 지정된 키를 사용하여 구성에서 값을 추출하고 해당 값을 지정된 형식으로 변환합니다. 오버로드를 사용하면 키를 찾을 수 없는 경우 기본값을 제공할 수 있습니다.
+[ConfigurationBinder.GetValue\<T>](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*)는 지정된 키를 사용하여 구성에서 하나의 값을 추출하고 해당 값을 지정된 비컬렉션 형식으로 변환합니다. 오버로드는 기본값을 허용합니다.
 
 다음 예제가 하는 일:
 
@@ -883,7 +883,7 @@ var sectionExists = _config.GetSection("section2:subsection2").Exists();
 
 ## <a name="bind-to-a-class"></a>클래스에 바인딩
 
-‘옵션 패턴’을 사용하여 관련 설정 그룹을 나타내는 클래스에 구성을 바인딩할 수 있습니다. 자세한 내용은 <xref:fundamentals/configuration/options>을 참조하세요.
+‘옵션 패턴’을 사용하여 관련 설정 그룹을 나타내는 클래스에 구성을 바인딩할 수 있습니다.  자세한 내용은 <xref:fundamentals/configuration/options>을 참조하세요.
 
 구성 값이 문자열로 반환되지만, <xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*>를 호출하면 [POCO](https://wikipedia.org/wiki/Plain_Old_CLR_Object) 개체를 생성할 수 있습니다.
 
@@ -917,7 +917,7 @@ var sectionExists = _config.GetSection("section2:subsection2").Exists();
 
 다음 구성 키-값 쌍이 생성됩니다.
 
-| 키                   | 값                                             |
+| Key                   | 값                                             |
 | --------------------- | ------------------------------------------------- |
 | starship:name         | USS Enterprise                                    |
 | starship:registry     | NCC-1701                                          |
@@ -996,7 +996,7 @@ TvShow = tvShow;
 
 ## <a name="bind-an-array-to-a-class"></a>클래스에 배열 바인딩
 
-다음 샘플 앱은 이 섹션에서 설명하는 개념을 보여 줍니다.
+다음 샘플 앱은 이 섹션에서 설명하는 개념을 보여 줍니다. 
 
 <xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*>는 구성 키에 배열 인덱스를 사용하여 배열을 개체에 바인딩하는 것을 지원합니다. 숫자 키 세그먼트(`:0:`, `:1:`, &hellip; `:{n}:`)를 노출하는 모든 배열 형식은 POCO 클래스 배열에 배열 바인딩할 수 있습니다.
 
@@ -1007,7 +1007,7 @@ TvShow = tvShow;
 
 다음 표에 표시된 구성 키 및 값을 사용하세요.
 
-| 키             | 값  |
+| Key             | 값  |
 | :-------------: | :----: |
 | array:entries:0 | value0 |
 | array:entries:1 | value1 |
@@ -1097,7 +1097,7 @@ config.AddJsonFile(
 
 표에 표시된 키-값 쌍이 구성으로 로드됩니다.
 
-| 키             | 값  |
+| Key             | 값  |
 | :-------------: | :----: |
 | array:entries:3 | value3 |
 
@@ -1130,7 +1130,7 @@ JSON 파일에 배열이 포함된 경우 0부터 시작하는 섹션 인덱스�
 
 JSON 구성 공급자는 구성 데이터를 다음 키-값 쌍으로 읽습니다.
 
-| 키                     | 값  |
+| Key                     | 값  |
 | ----------------------- | :----: |
 | json_array:key          | valueA |
 | json_array:subsection:0 | valueB |

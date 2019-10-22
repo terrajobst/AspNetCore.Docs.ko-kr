@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/28/2019
 uid: mvc/controllers/filters
-ms.openlocfilehash: ed48c2074360768b8d8c5af7057b353b00592394
-ms.sourcegitcommit: 73a451e9a58ac7102f90b608d661d8c23dd9bbaf
+ms.openlocfilehash: 0c3597f24e02af40517e12a86127b140ed4fb550
+ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/08/2019
-ms.locfileid: "72037704"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72333929"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core에서 필터링
 
@@ -158,7 +158,7 @@ ASP.NET Core에는 하위 클래스를 지정하고 사용자 지정할 수 있�
 
 `TestController`:
 
-* `SampleActionFilterAttribute`(`[SampleActionFilter]`)(을)를 `FilterTest2` 작업에 적용합니다.
+* `SampleActionFilterAttribute`(`[SampleActionFilter]`)를 `FilterTest2` 작업에 적용합니다.
 * `OnActionExecuting` 및 `OnActionExecuted`를 재정의합니다.
 
 [!code-csharp[](./filters/sample/FiltersSample/Controllers/TestController.cs?name=snippet)]
@@ -449,18 +449,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * 작업 결과 및 후속 필터의 실행을 방지합니다.
 * 성공적인 결과 대신 실패로 처리됩니다.
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuted*?displayProperty=fullName> 메서드가 실행되면:
-
-* 응답이 클라이언트로 전송되었을 가능성이 있으며 변경할 수 없습니다.
-* 예외가 throw된 경우 응답 본문이 전송되지 않습니다.
-
-<!-- Review preceding "If an exception was thrown: Original 
-When the OnResultExecuted method runs, the response has likely been sent to the client and cannot be changed further (unless an exception was thrown).
-
-SHould that be , 
-If an exception was thrown **IN THE RESULT FILTER**, the response body is not sent.
-
- -->
+<xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuted*?displayProperty=fullName> 메서드가 실행될 때 응답이 이미 클라이언트에 전송되었을 수 있습니다. 이미 클라이언트에 전송된 응답은 변경할 수 없습니다.
 
 `ResultExecutedContext.Canceled`는 작업 결과 실행이 다른 필터에 의해 단락(short-circuit) 처리된 경우 `true`로 설정됩니다.
 
@@ -532,7 +521,7 @@ What's a non-named attribute?
 
 미들웨어를 필터로 사용하려면 필터 파이프라인에 삽입할 미들웨어를 지정하는 `Configure` 메서드를 포함한 형식을 만듭니다. 요청에서 현재 문화권을 설정하는 지역화 미들웨어를 사용하는 예제는 다음과 같습니다.
 
-[!code-csharp[](./filters/sample/FiltersSample/Filters/LocalizationPipeline.cs?name=snippet_MiddlewareFilter&highlight=3,21)]
+[!code-csharp[](./filters/sample/FiltersSample/Filters/LocalizationPipeline.cs?name=snippet_MiddlewareFilter&highlight=3,22)]
 
 <xref:Microsoft.AspNetCore.Mvc.MiddlewareFilterAttribute>를 사용하여 미들웨어 실행:
 
@@ -542,5 +531,5 @@ What's a non-named attribute?
 
 ## <a name="next-actions"></a>다음 작업
 
-* [Razor Pages에 대한 필터 메서드](xref:razor-pages/filter) 참조
+* [Razor Pages에 대한 필터 메서드](xref:razor-pages/filter)를 참조하세요.
 * 필터를 실험하려면 [GitHub 샘플을 다운로드하고, 테스트하고, 수정](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample)합니다.

@@ -5,14 +5,14 @@ description: Windows Server에서 IIS를 통해 실행될 경우 ASP.NET Core �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/08/2019
+ms.date: 10/10/2019
 uid: host-and-deploy/iis/development-time-iis-support
-ms.openlocfilehash: f2d5dbbdc80eec035616ddea234ee5d3343eeae8
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: e5da4f7202bf31e65c366d6f7de54212f5b0fed7
+ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815189"
+ms.lasthandoff: 10/11/2019
+ms.locfileid: "72259806"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>ASP.NET Core용 Visual Studio의 개발 시간 IIS 지원
 
@@ -140,7 +140,7 @@ Visual Studio를 사용하지 않는 경우에는 *속성* 폴더의 [launchSett
 관리자 권한으로 Visual Studio를 실행합니다.
 
 * 빌드 구성 드롭다운 목록이 **디버그**로 설정되었는지 확인합니다.
-* [실행] 단추를 **IIS** 프로필로 설정하고 단추를 선택하여 앱을 시작합니다.
+* [디버깅 시작 단추](/visualstudio/debugger/debugger-feature-tour)를 **IIS** 프로필로 설정하고 단추를 선택하여 앱을 시작합니다.
 
 관리자로 실행하고 있지 않으면 Visual Studio에서 다시 시작하라는 메시지가 표시될 수 있습니다. 메시지가 표시되면 Visual Studio를 다시 시작합니다.
 

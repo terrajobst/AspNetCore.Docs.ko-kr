@@ -4,14 +4,14 @@ author: coderandhiker
 description: ASP.NET Core에서 HttpContext에 액세스하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/27/2018
+ms.date: 10/11/2018
 uid: fundamentals/httpcontext
-ms.openlocfilehash: 373c036e0839ce51259e23f8503fbe4691b48751
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 888adf6d61e6968127385952e65f942e86b7eb63
+ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64886518"
+ms.lasthandoff: 10/12/2019
+ms.locfileid: "72288973"
 ---
 # <a name="access-httpcontext-in-aspnet-core"></a>ASP.NET Core에서 HttpContext에 액세스
 

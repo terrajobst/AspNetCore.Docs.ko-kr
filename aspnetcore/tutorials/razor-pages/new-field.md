@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: 0629605f4d5597a9694cb20ce00b91ff4a768468
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 1b08e1515afe656b95be9fb436caa00cd53ab9ad
+ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71082465"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72334100"
 ---
 # <a name="add-a-new-field-to-a-razor-page-in-aspnet-core"></a>ASP.NET Core의 Razor 페이지에 새 필드 추가
 
@@ -28,7 +28,7 @@ ms.locfileid: "71082465"
 
 EF Code First를 사용하여 자동으로 데이터베이스를 만들 경우 Code First는
 
-* 데이터베이스에 테이블을 추가하여 데이터베이스의 스키마가 생성된 모델 클래스와 동기화되어 있는지 여부를 추적합니다.
+* 데이터베이스에 `__EFMigrationsHistory` 테이블을 추가하여 데이터베이스의 스키마가 생성된 모델 클래스와 동기화되어 있는지 여부를 추적합니다.
 * 모델 클래스가 DB와 동기화되지 않으면 EF는 예외를 throw합니다.
 
 동기화된 스키마/모델의 자동 확인을 통해 일관성이 없는 데이터베이스/코드 문제를 쉽게 찾을 수 있습니다.
@@ -51,11 +51,11 @@ EF Code First를 사용하여 자동으로 데이터베이스를 만들 경우 C
 * [Create.cshtml](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml)을 `Rating` 필드로 업데이트합니다.
 * 편집 페이지에 `Rating` 필드를 추가합니다.
 
-앱은 새 필드를 포함하도록 DB가 업데이트될 때까지 작동하지 않습니다. 지금 실행하면 앱은 `SqlException`을 throw합니다.
+앱은 새 필드를 포함하도록 DB가 업데이트될 때까지 작동하지 않습니다. 데이터베이스를 업데이트하지 않고 앱을 실행하면 `SqlException`이 발생합니다.
 
 `SqlException: Invalid column name 'Rating'.`
 
-이 오류는 데이터베이스의 동영상 테이블의 스키마와 다른 업데이트된 동영상 모델 클래스로 인해 발생됩니다. (데이터베이스 테이블에 `Rating` 열이 없습니다.)
+`SqlException` 예외는 업데이트된 영화 모델 클래스가 데이터베이스의 영화 테이블의 스키마와 다르면 발생합니다. (데이터베이스 테이블에 `Rating` 열이 없습니다.)
 
 오류를 해결하는 몇 가지 방법이 있습니다.
 
@@ -96,7 +96,7 @@ Update-Database
 
 "Rating" 이름은 임의로 지정되며 마이그레이션 파일의 이름을 지정하는 데 사용됩니다. 마이그레이션 파일에 의미 있는 이름을 사용하는 것이 좋습니다.
 
-`Update-Database` 명령은 스키마 변경 내용을 데이터베이스에 적용하기 위한 프레임워크를 알려줍니다.
+`Update-Database` 명령은 프레임워크에게 스키마 변경 내용을 데이터베이스에 적용하고 기존 데이터를 보존하라고 명령합니다.
 
 <a name="ssox"></a>
 

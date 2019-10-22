@@ -7,16 +7,16 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/26/2019
 uid: fundamentals/host/hosted-services
-ms.openlocfilehash: 0eaa3a62370c1e413840bb65f597dc664adafc38
-ms.sourcegitcommit: fe88748b762525cb490f7e39089a4760f6a73a24
+ms.openlocfilehash: c1fbb5ae8ffc4ee506f42df6a4cbbe845b2b903d
+ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/30/2019
-ms.locfileid: "71688091"
+ms.lasthandoff: 10/15/2019
+ms.locfileid: "72333651"
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>ASP.NET Core에서 호스팅되는 서비스를 사용하는 백그라운드 작업
 
-작성자: [Luke Latham](https://github.com/guardrex)
+작성자: [Luke Latham](https://github.com/guardrex) 및 [Jeow Li Huan](https://github.com/huan086)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -147,13 +147,17 @@ ASP.NET Core Worker Service 템플릿은 장기간 실행되는 서비스 앱을
 
 * `BackgroundProcessing` 메서드는 `ExecuteAsync`에서 대기하고 있는 `Task`를 반환합니다.
 * `BackgroundProcessing`에서 큐의 백그라운드 작업이 큐에서 제거되고 실행됩니다.
+* 작업 항목은 `StopAsync`에서 서비스가 중지되기 전에 대기 상태입니다.
 
-[!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/QueuedHostedService.cs?name=snippet1&highlight=28,39-40,44)]
+[!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/QueuedHostedService.cs?name=snippet1&highlight=28-29,33)]
 
 입력 장치에서 `w` 키가 선택될 때마다 `MonitorLoop` 서비스가 호스팅된 서비스에 대해 큐에 넣는 작업을 처리합니다.
 
 * `IBackgroundTaskQueue`가 `MonitorLoop` 서비스에 삽입됩니다.
 * `IBackgroundTaskQueue.QueueBackgroundWorkItem`이 호출되어 작업 항목을 큐에 넣습니다.
+* 작업 항목은 장기 실행 백그라운드 작업을 시뮬레이션합니다.
+  * 세 번의 5초 지연이 실행됩니다(`Task.Delay`).
+  * 작업이 취소되면 `try-catch` 문이 <xref:System.OperationCanceledException>을 트래핑합니다.
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/MonitorLoop.cs?name=snippet_Monitor&highlight=7,33)]
 
@@ -234,7 +238,7 @@ ASP.NET Core에서 백그라운드 작업은 *호스팅되는 서비스*로 구�
 
 ## <a name="queued-background-tasks"></a>대기 중인 백그라운드 작업
 
-백그라운드 작업 큐는 .NET 4.x <xref:System.Web.Hosting.HostingEnvironment.QueueBackgroundWorkItem*>([ASP.NET Core용으로 기본 제공될 예정](https://github.com/aspnet/Hosting/issues/1280))을 기반으로 합니다.
+백그라운드 작업 큐는 .NET Framework 4.x <xref:System.Web.Hosting.HostingEnvironment.QueueBackgroundWorkItem*>([ASP.NET Core용으로 기본 제공될 예정](https://github.com/aspnet/Hosting/issues/1280))을 기반으로 합니다.
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Services/BackgroundTaskQueue.cs?name=snippet1)]
 

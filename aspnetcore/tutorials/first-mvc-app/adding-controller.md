@@ -18,7 +18,7 @@ ms.locfileid: "68820057"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-MVC( Model-View-Controller) 아키텍처 패턴은 다음 세 가지 주요 구성 요소로 앱을 구분합니다. **M**odel, **V**iew 및 **C**ontroller. MVC 패턴을 통해 기존 모놀리식 응용 프로그램보다 쉽게 테스트 가능하고 업데이트할 수 있는 앱을 만들 수 있습니다. MVC 기반 앱에는 다음이 포함됩니다.
+MVC(Model-View-Controller) 아키텍처 패턴은 **M**odel, **V**iew 및 **C**ontroller의 세 가지 주요 구성 요소로 앱을 분리합니다. **M**odel, **V**iew 및 **C**ontroller. MVC 패턴을 사용하면 기존 모놀리식 앱보다 더욱 테스트 가능하고 수정하기 쉬운 앱을 만들 수 있습니다. MVC 기반의 앱은 다음을 포함합니다.
 
 * **M**odels: 앱의 데이터를 나타내는 클래스입니다. 모델 클래스는 유효성 검사 논리를 사용하여 해당 데이터에 대한 비즈니스 규칙을 적용합니다. 일반적으로 모델 개체는 데이터베이스에서 모델 상태를 검색하고 저장합니다. 이 자습서에서 `Movie` 모델은 데이터베이스에서 영화 데이터를 검색하고 이를 뷰에 제공하거나 수정합니다. 수정된 데이터는 데이터베이스에 기록됩니다.
 
@@ -34,8 +34,8 @@ MVC 패턴을 사용하면 앱의 다양한 측면(입력 논리, 비즈니스 �
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **솔루션 탐색기** 에서 **컨트롤러 > 추가 > 컨트롤러**
-  ![바로 가기 메뉴](adding-controller/_static/add_controller.png)를 오른쪽 단추로 클릭
+* **솔루션 탐색기**에서 마우스 오른쪽 단추로**Controllers > 추가 > 컨트롤러**
+  ![를 클릭합니다](adding-controller/_static/add_controller.png)상황에 맞는 메뉴
 
 * **스캐폴드 추가** 대화 상자에서 **MVC 컨트롤러 - 비어 있음**을 선택합니다.
 
@@ -132,7 +132,7 @@ URL에서 컨트롤러에 일부 매개 변수 정보를 전달하도록 코드�
 
 ::: moniker range="< aspnetcore-3.0"
 
-MVC( Model-View-Controller) 아키텍처 패턴은 다음 세 가지 주요 구성 요소로 앱을 구분합니다. **M**odel, **V**iew 및 **C**ontroller. MVC 패턴을 통해 기존 모놀리식 응용 프로그램보다 쉽게 테스트 가능하고 업데이트할 수 있는 앱을 만들 수 있습니다. MVC 기반 앱에는 다음이 포함됩니다.
+MVC(Model-View-Controller) 아키텍처 패턴은 **M**odel, **V**iew 및 **C**ontroller의 세 가지 주요 구성 요소로 앱을 분리합니다. **M**odel, **V**iew 및 **C**ontroller. MVC 패턴을 사용하면 기존 모놀리식 앱보다 더욱 테스트 가능하고 수정하기 쉬운 앱을 만들 수 있습니다. MVC 기반의 앱은 다음을 포함합니다.
 
 * **M**odels: 앱의 데이터를 나타내는 클래스입니다. 모델 클래스는 유효성 검사 논리를 사용하여 해당 데이터에 대한 비즈니스 규칙을 적용합니다. 일반적으로 모델 개체는 데이터베이스에서 모델 상태를 검색하고 저장합니다. 이 자습서에서 `Movie` 모델은 데이터베이스에서 영화 데이터를 검색하고 이를 뷰에 제공하거나 수정합니다. 수정된 데이터는 데이터베이스에 기록됩니다.
 
@@ -148,8 +148,8 @@ MVC 패턴을 사용하면 앱의 다양한 측면(입력 논리, 비즈니스 �
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **솔루션 탐색기** 에서 **컨트롤러 > 추가 > 컨트롤러**
-  ![바로 가기 메뉴](adding-controller/_static/add_controller.png)를 오른쪽 단추로 클릭
+* **솔루션 탐색기**에서마우스 오른쪽 단추로**Controllers > 추가 > 컨트롤러**
+  ![를 클릭합니다](adding-controller/_static/add_controller.png)상황에 맞는 메뉴
 
 * **스캐폴드 추가** 대화 상자에서 **MVC 컨트롤러 - 비어 있음**을 선택합니다.
 
@@ -166,7 +166,7 @@ MVC 패턴을 사용하면 앱의 다양한 측면(입력 논리, 비즈니스 �
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 **솔루션 탐색기** 에서 **컨트롤러 > 추가 > 새 파일** 을 마우스 오른쪽 단추로 클릭합니다.
-![바로 가기 메뉴](~/tutorials/first-mvc-app-mac/adding-controller/_static/add_controller.png)
+![상황에 맞는 메뉴](~/tutorials/first-mvc-app-mac/adding-controller/_static/add_controller.png)
 
 **ASP.NET Core** 및 **MVC 컨트롤러 클래스**를 선택합니다.
 

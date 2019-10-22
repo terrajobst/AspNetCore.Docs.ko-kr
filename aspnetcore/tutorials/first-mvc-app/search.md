@@ -114,7 +114,9 @@ var movies = from m in _context.Movie
 영화 장르 보기 모델은 다음을 포함합니다.
 
 * 영화 목록.
+
 * 장르 목록을 담고 있는 `SelectList`. 이를 이용해서 사용자는 목록에서 장르를 선택할 수 있습니다.
+
 * 선택한 장르가 담긴 `MovieGenre`.
 * 사용자가 검색 텍스트 상자에 입력한 텍스트가 담긴 `SearchString`.
 
