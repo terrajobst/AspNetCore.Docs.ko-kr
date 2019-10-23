@@ -86,16 +86,16 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
 ## <a name="change-the-title-footer-and-menu-link-in-the-layout-file"></a>레이아웃 파일의 제목, 바닥글 및 메뉴 링크 변경
 
-*Views/Shared/_Layout.cshtml* 파일의 내용을 다음 태그로 대체합니다. 변경 내용은 강조 표시되어 있습니다.
+*Views/Shared/_Layout.cshtml* 파일의 내용을 다음 태그로 대체합니다. 변경 내용이 강조 표시되어 있습니다.
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Views/Shared/_Layout.cshtml?highlight=6,14,40)]
 
 위에 태그에서는 다음과 같은 변경을 수행했습니다.
 
 * `MvcMovie` 3개를 `Movie App`으로 변경했습니다.
-* 앵커 요소 `<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MvcMovie</a>`를 `<a class="navbar-brand" asp-controller="Movies" asp-action="Index">Movie App</a>`로 변경.
+* 앵커 요소 `<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MvcMovie</a>`를 `<a class="navbar-brand" asp-controller="Movies" asp-action="Index">Movie App</a>`로 변경했습니다.
 
-위의 태그에서 이 앱이 [Areas](xref:mvc/controllers/areas)를 사용하지 않기 때문에 `asp-area=""` [앵커 태그 도우미 특성](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) 및 특성 값이 생략되었습니다.
+이 앱은 [영역](xref:mvc/controllers/areas)을 사용하지 않기 때문에 위의 태그에서 `asp-area=""` [앵커 태그 도우미 특성](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) 및 특성 값이 생략되었습니다.
 
 **참고**: `Movies` 컨트롤러는 아직 구현되지 않았습니다. 이 시점에서 `Movie App` 링크는 작동하지 않습니다.
 

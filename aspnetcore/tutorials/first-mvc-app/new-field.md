@@ -69,7 +69,7 @@ dotnet build
 
 이전 "양식 그룹"을 복사/붙여넣기하고 intelliSense에서 필드를 업데이트하도록 할 수 있습니다. IntelliSense는 [태그 도우미](xref:mvc/views/tag-helpers/intro)와 함께 작동합니다.
 
-![개발자가 보기의 두 번째 레이블 요소에서 asp-for의 특성 값에 대해 문자 R을 입력했습니다. 목록에서 자동으로 강조 표시되는 Rating을 포함하여 사용 가능한 필드를 보여 주는 Intellisense 바로 가기 메뉴가 표시되었습니다. 개발자가 필드를 클릭하거나 키보드에서 Enter 키를 누르면 값은 Rating으로 설정됩니다.](new-field/_static/cr.png)
+![개발자가 보기의 두 번째 레이블 요소에서 asp-for의 특성 값에 대해 문자 R을 입력했습니다. 목록에서 자동으로 강조 표시되는 Rating을 비롯한 사용 가능한 필드를 보여 주는 Intellisense 상황에 맞는 메뉴가 나타납니다. 개발자가 필드를 클릭하거나 키보드에서 Enter 키를 누르면 값이 Rating으로 설정됩니다.](new-field/_static/cr.png)
 
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -77,27 +77,27 @@ dotnet build
 
 ---
 
-나머지 템플릿을 업데이트합니다.
+나머지 템플릿을 수정합니다.
 
-새 열에 대해 값을 제공하도록 `SeedData` 클래스를 업데이트합니다. 샘플 변경은 아래에 표시되지만 각 `new Movie`에 대해 이 변경을 수행하려고 합니다.
+새 열에 대한 값을 제공하도록 `SeedData` 클래스를 수정합니다. 아래에서 변경 예제를 볼 수 있지만 각 `new Movie`마다 이 변경을 수행해야 합니다.
 
 [!code-csharp[](start-mvc/sample/MvcMovie/Models/SeedDataRating.cs?name=snippet1&highlight=6)]
 
-앱은 새 필드를 포함하도록 DB가 업데이트될 때까지 작동하지 않습니다. 이제 실행된 경우 `SqlException`이 throw됩니다.
+새 필드를 포함하도록 DB가 수정될 때까지 앱은 작동하지 않습니다. 지금 앱을 실행하면 `SqlException`이 던져집니다.
 
 `SqlException: Invalid column name 'Rating'.`
 
-이 오류는 업데이트된 영화 모델 클래스가 기존 데이터베이스의 영화 테이블 스키마와 다르기 때문에 발생합니다. (데이터베이스 테이블에 `Rating` 열이 없습니다.)
+이 오류는 수정된 Movie 모델 클래스가 기존 데이터베이스의 Movie 테이블 스키마와 다르기 때문에 발생합니다. (데이터베이스 테이블에 `Rating` 열이 없습니다.)
 
-오류를 해결하는 몇 가지 방법이 있습니다.
+이 오류를 해결할 수 있는 몇 가지 방법이 있습니다.
 
 1. Entity Framework에서 새 모델 클래스 스키마에 따라 데이터베이스를 자동으로 삭제하고 다시 만들도록 합니다. 이 방법은 테스트 데이터베이스에서 활발한 개발을 수행할 때 개발 주기의 초기 단계에서 매우 편리하며 신속하게 모델 및 데이터베이스 스키마를 함께 개발할 수 있습니다. 그러나 단점은 데이터베이스에서 기존 데이터를 손실한다는 것입니다. 따라서 프로덕션 데이터베이스에서 이 방법을 사용하지 않으려 합니다. 테스트 데이터로 데이터베이스를 자동으로 시드하는 데 이니셜라이저를 사용하는 것은 종종 애플리케이션을 개발하는 효율적인 방법입니다. 이는 초기 개발과 SQLite를 사용할 때 좋은 방법입니다.
 
-2. 모델 클래스와 일치하도록 기존 데이터베이스의 스키마를 명시적으로 수정합니다. 이 방법의 장점은 데이터를 유지한다는 점입니다. 이러한 변경을 수동으로 수행하거나 데이터베이스 변경 스크립트를 만들어 수행할 수 있습니다.
+2. 모델 클래스와 일치하도록 기존 데이터베이스의 스키마를 명시적으로 수정합니다. 이 방법의 장점은 데이터가 유지된다는 점입니다. 이러한 변경을 수동으로 수행하거나 데이터베이스 변경 스크립트를 만들어 수행할 수 있습니다.
 
-3. Code First 마이그레이션을 사용하여 데이터베이스 스키마를 업데이트합니다.
+3. Code First 마이그레이션을 사용하여 데이터베이스 스키마를 수정합니다.
 
-이 자습서의 경우 Code First 마이그레이션이 사용됩니다.
+이 자습서에서는 Code First 마이그레이션을 사용합니다.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -116,7 +116,7 @@ Update-Database
 
 "Rating" 이름은 임의로 지정되며 마이그레이션 파일의 이름을 지정하는 데 사용됩니다. 마이그레이션 파일에 의미 있는 이름을 사용하는 것이 좋습니다.
 
-DB의 모든 레코드가 삭제되면 initialize 메서드가 DB를 시드하고 `Rating` 필드를 포함합니다.
+DB의 모든 레코드가 삭제되면 이니셜라이즈 메서드가 DB를 시드하고 `Rating` 필드를 포함합니다.
 
 # <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -131,7 +131,7 @@ dotnet ef database update
 ---
 <!-- End of VS tabs -->
 
-앱을 실행하고 `Rating` 필드를 사용하여 동영상을 만들고/편집/표시할 수 있는지 확인합니다. `Edit`, `Details` 및 `Delete` 보기 템플릿에 `Rating` 필드를 추가해야 합니다.
+앱을 실행하고 `Rating` 필드를 사용하여 영화를 만들고/편집/표시할 수 있는지 확인합니다. `Edit`, `Details` 및 `Delete` 보기 템플릿에도 `Rating` 필드를 추가해야 합니다.
 
 > [!div class="step-by-step"]
 > [이전](search.md)
