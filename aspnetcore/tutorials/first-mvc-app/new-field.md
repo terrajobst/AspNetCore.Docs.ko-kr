@@ -17,23 +17,23 @@ ms.locfileid: "71082309"
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[Entity Framework](/ef/core/get-started/aspnetcore/new-db) 단원에서 Code First 마이그레이션은 다음 작업에 사용됩니다.
+이 섹션에서는 [Entity Framework](/ef/core/get-started/aspnetcore/new-db) Code First 마이그레이션으로 다음 작업을 수행합니다.
 
 * 모델에 새 필드를 추가합니다.
 * 새 필드를 데이터베이스로 마이그레이션합니다.
 
-EF Code First를 사용하여 자동으로 데이터베이스를 만들 경우 Code First는:
+EF Code First를 사용하여 자동으로 데이터베이스를 만들 경우 Code First는 다음 작업을 수행합니다.
 
 * 데이터베이스 스키마를 추적하기 위해 데이터베이스에 테이블을 추가합니다.
-* 데이터베이스가 생성된 모델 클래스와 동기화되었는지 확인합니다. 동기화되어 있지 않은 경우 EF에서 예외를 throw합니다. 이렇게 하면 더 쉽게 일관성이 없는 데이터베이스/코드 문제를 찾을 수 있습니다.
+* 데이터베이스가 생성된 모델 클래스와 동기화되어 있는지 확인합니다. 동기화되어 있지 않다면 EF에서 예외를 던집니다. 이렇게 하면 더 쉽게 일관성이 없는 데이터베이스/코드 문제를 찾을 수 있습니다.
 
-## <a name="add-a-rating-property-to-the-movie-model"></a>영화 모델에 등급 속성 추가
+## <a name="add-a-rating-property-to-the-movie-model"></a>영화 모델에 Rating 속성 추가
 
 *Models/Movie.cs*에 `Rating` 속성을 추가합니다.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Models/MovieDateRating.cs?highlight=13&name=snippet)]
 
-앱 빌드
+앱을 빌드합니다.
 
 ### <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -51,19 +51,19 @@ dotnet build
 
 ------
 
-`Movie` 클래스에 새 필드를 추가했으므로 이 새 속성이 포함되도록 바인딩 허용 목록을 업데이트해야 합니다. *MoviesController.cs*에서 `Rating` 속성을 포함하도록 `Create` 및 `Edit` 동작 메서드에 대해 `[Bind]` 속성을 업데이트합니다.
+`Movie` 클래스에 새 필드를 추가했으므로 이 새 속성이 포함되도록 바인딩 허용 목록을 수정해야 합니다. *MoviesController.cs*에서 `Rating` 속성을 포함하도록 `Create` 및 `Edit` 작업 메서드에 대한 `[Bind]` 특성을 수정합니다.
 
 ```csharp
 [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")]
    ```
 
-브라우저 보기에서 새 `Rating` 속성을 표시, 작성 및 편집하기 위해 보기 템플릿을 업데이트합니다.
+브라우저 보기에서 새 `Rating` 속성을 표시, 작성 및 편집하기 위해 보기 템플릿을 수정합니다.
 
 */Views/Movies/Index.cshtml* 파일을 편집하고 `Rating` 필드를 추가합니다.
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexGenreRating.cshtml?highlight=16,38&range=24-64)]
 
-`Rating` 필드로 */Views/Movies/Create.cshtml*을 업데이트합니다.
+`Rating` 필드를 사용하여 */Views/Movies/Create.cshtml*을 수정합니다.
 
 # <a name="visual-studio--visual-studio-for-mactabvisual-studiovisual-studio-mac"></a>[Visual Studio / Visual Studio for Mac](#tab/visual-studio+visual-studio-mac)
 
