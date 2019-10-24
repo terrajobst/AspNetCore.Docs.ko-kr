@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 8/22/2019
 uid: performance/caching/memory
-ms.openlocfilehash: aa39503f034cf46fa4317a1f3cbb8d130afd1b8c
-ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
+ms.openlocfilehash: d6b2aa363c552fdbda7f6e9ec5d476768c17d8a5
+ms.sourcegitcommit: 810d5831169770ee240d03207d6671dabea2486e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/15/2019
-ms.locfileid: "72333744"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72779186"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>ASP.NET Core 메모리 내 캐시
 
@@ -56,6 +56,7 @@ ASP.NET 4.x에서 ASP.NET Core로 코드를 이식할 때 `System.Runtime.Cachin
 > [!WARNING]
 > [종속성 주입](xref:fundamentals/dependency-injection) 에서 *공유* 메모리 캐시를 사용 하 고 `SetSize`, `Size` 또는 `SizeLimit`를 호출 하 여 캐시 크기를 제한 하면 앱에 오류가 발생할 수 있습니다. 캐시에 크기 제한이 설정 된 경우 모든 항목은 추가 될 때 크기를 지정 해야 합니다. 이로 인해 개발자가 공유 캐시를 사용 하는 항목을 완전히 제어할 수 없기 때문에 문제가 발생할 수 있습니다. 예를 들어 Entity Framework Core는 공유 캐시를 사용 하 고 크기를 지정 하지 않습니다. 앱이 캐시 크기 제한을 설정 하 고 EF Core를 사용 하는 경우 앱은 `InvalidOperationException`을 throw 합니다.
 > @No__t_0, `Size` 또는 `SizeLimit`를 사용 하 여 캐시를 제한 하려면 캐싱을 위한 캐시 singleton을 만듭니다. 자세한 내용 및 예제는 [SetSize, Size 및 SizeLimit를 사용 하 여 캐시 크기 제한](#use-setsize-size-and-sizelimit-to-limit-cache-size)을 참조 하세요.
+> 공유 캐시는 다른 프레임 워크 또는 라이브러리에서 공유 하는 캐시입니다. 예를 들어 EF Core는 공유 캐시를 사용 하 고 크기를 지정 하지 않습니다. 
 
 메모리 내 캐싱은 [종속성 주입](xref:fundamentals/dependency-injection)을 사용 하 여 앱에서 참조 되는 *서비스* 입니다. 생성자에서 `IMemoryCache` 인스턴스를 요청 합니다.
 
