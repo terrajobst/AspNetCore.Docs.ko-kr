@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: 1b08e1515afe656b95be9fb436caa00cd53ab9ad
-ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
+ms.openlocfilehash: b31711eb6f797de2de1559a3303e14b32a88f1ff
+ms.sourcegitcommit: b3ebf96560b75b752d0e71161d788da800ad0999
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/15/2019
-ms.locfileid: "72334100"
+ms.lasthandoff: 10/24/2019
+ms.locfileid: "72822378"
 ---
 # <a name="add-a-new-field-to-a-razor-page-in-aspnet-core"></a>ASP.NET Core의 Razor 페이지에 새 필드 추가
 
@@ -21,7 +21,7 @@ ms.locfileid: "72334100"
 
 [!INCLUDE[](~/includes/rp/download.md)]
 
-[Entity Framework](/ef/core/get-started/aspnetcore/new-db) 단원에서 Code First 마이그레이션은 다음 작업에 사용됩니다.
+이 섹션에서는 [Entity Framework](/ef/core/get-started/aspnetcore/new-db) Code First 마이그레이션으로 다음 작업을 수행합니다.
 
 * 모델에 새 필드를 추가합니다.
 * 데이터베이스로 새 필드 스키마 변경 내용을 마이그레이션합니다.
@@ -43,6 +43,8 @@ EF Code First를 사용하여 자동으로 데이터베이스를 만들 경우 C
 
 *Pages/Movies/Index.cshtml*를 편집하고 `Rating` 필드를 추가합니다.
 
+<a name="addrat"></a>
+
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/SnapShots/IndexRating.cshtml?highlight=40-42,62-64)]
 
 다음 페이지를 업데이트합니다.
@@ -51,23 +53,23 @@ EF Code First를 사용하여 자동으로 데이터베이스를 만들 경우 C
 * [Create.cshtml](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml)을 `Rating` 필드로 업데이트합니다.
 * 편집 페이지에 `Rating` 필드를 추가합니다.
 
-앱은 새 필드를 포함하도록 DB가 업데이트될 때까지 작동하지 않습니다. 데이터베이스를 업데이트하지 않고 앱을 실행하면 `SqlException`이 발생합니다.
+새 필드를 포함하도록 DB가 수정될 때까지 앱은 작동하지 않습니다. 데이터베이스를 업데이트하지 않고 앱을 실행하면 `SqlException`이 발생합니다.
 
 `SqlException: Invalid column name 'Rating'.`
 
 `SqlException` 예외는 업데이트된 영화 모델 클래스가 데이터베이스의 영화 테이블의 스키마와 다르면 발생합니다. (데이터베이스 테이블에 `Rating` 열이 없습니다.)
 
-오류를 해결하는 몇 가지 방법이 있습니다.
+이 오류를 해결할 수 있는 몇 가지 방법이 있습니다.
 
 1. 새 모델 클래스 스키마를 사용하여 Entity Framework를 자동으로 삭제하고 데이터베이스를 다시 만듭니다. 이 방법은 개발 주기의 초기 단계에서 편리하며 신속하게 모델 및 데이터베이스 스키마를 함께 개발할 수 있습니다. 단점은 데이터베이스의 기존 데이터를 잃게 된다는 것입니다. 프로덕션 데이터베이스에서 이 방법을 사용하지 마세요. 테스트 데이터로 데이터베이스를 자동으로 시드하도록 스키마에서 DB를 삭제하고 이니셜라이저를 사용하는 것은 종종 앱을 개발하는 효율적인 방법입니다.
 
-2. 모델 클래스와 일치하도록 기존 데이터베이스의 스키마를 명시적으로 수정합니다. 이 방법의 장점은 데이터를 유지한다는 점입니다. 이러한 변경을 수동으로 수행하거나 데이터베이스 변경 스크립트를 만들어 수행할 수 있습니다.
+2. 모델 클래스와 일치하도록 기존 데이터베이스의 스키마를 명시적으로 수정합니다. 이 방법의 장점은 데이터가 유지된다는 점입니다. 이러한 변경을 수동으로 수행하거나 데이터베이스 변경 스크립트를 만들어 수행할 수 있습니다.
 
 3. Code First 마이그레이션을 사용하여 데이터베이스 스키마를 업데이트합니다.
 
 이 자습서의 경우 Code First 마이그레이션을 사용합니다.
 
-새 열에 대해 값을 제공하도록 `SeedData` 클래스를 업데이트합니다. 샘플 변경은 아래에 표시되지만 각 `new Movie` 블록에 대해 이 변경을 수행하려고 합니다.
+새 열에 대한 값을 제공하도록 `SeedData` 클래스를 수정합니다. 샘플 변경은 아래에 표시되지만 각 `new Movie` 블록에 대해 이 변경을 수행하려고 합니다.
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
 
@@ -130,7 +132,7 @@ dotnet ef database update
 
 ---
 
-앱을 실행하고 `Rating` 필드를 사용하여 동영상을 만들고/편집/표시할 수 있는지 확인합니다. 데이터베이스가 시드되지 않은 경우 `SeedData.Initialize` 메서드에서 중단점을 설정합니다.
+앱을 실행하고 `Rating` 필드를 사용하여 영화를 만들고/편집/표시할 수 있는지 확인합니다. 데이터베이스가 시드되지 않은 경우 `SeedData.Initialize` 메서드에서 중단점을 설정합니다.
 
 ## <a name="additional-resources"></a>추가 자료
 
@@ -146,7 +148,7 @@ dotnet ef database update
 
 [!INCLUDE[](~/includes/rp/download.md)]
 
-[Entity Framework](/ef/core/get-started/aspnetcore/new-db) 단원에서 Code First 마이그레이션은 다음 작업에 사용됩니다.
+이 섹션에서는 [Entity Framework](/ef/core/get-started/aspnetcore/new-db) Code First 마이그레이션으로 다음 작업을 수행합니다.
 
 * 모델에 새 필드를 추가합니다.
 * 데이터베이스로 새 필드 스키마 변경 내용을 마이그레이션합니다.
@@ -182,17 +184,17 @@ EF Code First를 사용하여 자동으로 데이터베이스를 만들 경우 C
 
 이 오류는 데이터베이스의 동영상 테이블의 스키마와 다른 업데이트된 동영상 모델 클래스로 인해 발생됩니다. (데이터베이스 테이블에 `Rating` 열이 없습니다.)
 
-오류를 해결하는 몇 가지 방법이 있습니다.
+이 오류를 해결할 수 있는 몇 가지 방법이 있습니다.
 
 1. 새 모델 클래스 스키마를 사용하여 Entity Framework를 자동으로 삭제하고 데이터베이스를 다시 만듭니다. 이 방법은 개발 주기의 초기 단계에서 편리하며 신속하게 모델 및 데이터베이스 스키마를 함께 개발할 수 있습니다. 단점은 데이터베이스의 기존 데이터를 잃게 된다는 것입니다. 프로덕션 데이터베이스에서 이 방법을 사용하지 마세요. 테스트 데이터로 데이터베이스를 자동으로 시드하도록 스키마에서 DB를 삭제하고 이니셜라이저를 사용하는 것은 종종 앱을 개발하는 효율적인 방법입니다.
 
-2. 모델 클래스와 일치하도록 기존 데이터베이스의 스키마를 명시적으로 수정합니다. 이 방법의 장점은 데이터를 유지한다는 점입니다. 이러한 변경을 수동으로 수행하거나 데이터베이스 변경 스크립트를 만들어 수행할 수 있습니다.
+2. 모델 클래스와 일치하도록 기존 데이터베이스의 스키마를 명시적으로 수정합니다. 이 방법의 장점은 데이터가 유지된다는 점입니다. 이러한 변경을 수동으로 수행하거나 데이터베이스 변경 스크립트를 만들어 수행할 수 있습니다.
 
 3. Code First 마이그레이션을 사용하여 데이터베이스 스키마를 업데이트합니다.
 
 이 자습서의 경우 Code First 마이그레이션을 사용합니다.
 
-새 열에 대해 값을 제공하도록 `SeedData` 클래스를 업데이트합니다. 샘플 변경은 아래에 표시되지만 각 `new Movie` 블록에 대해 이 변경을 수행하려고 합니다.
+새 열에 대한 값을 제공하도록 `SeedData` 클래스를 수정합니다. 샘플 변경은 아래에 표시되지만 각 `new Movie` 블록에 대해 이 변경을 수행하려고 합니다.
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Models/SeedDataRating.cs?name=snippet1&highlight=8)]
 
@@ -253,7 +255,7 @@ dotnet ef database update
 
 ---
 
-앱을 실행하고 `Rating` 필드를 사용하여 동영상을 만들고/편집/표시할 수 있는지 확인합니다. 데이터베이스가 시드되지 않은 경우 `SeedData.Initialize` 메서드에서 중단점을 설정합니다.
+앱을 실행하고 `Rating` 필드를 사용하여 영화를 만들고/편집/표시할 수 있는지 확인합니다. 데이터베이스가 시드되지 않은 경우 `SeedData.Initialize` 메서드에서 중단점을 설정합니다.
 
 ## <a name="additional-resources"></a>추가 자료
 
