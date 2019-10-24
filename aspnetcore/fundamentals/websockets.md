@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/10/2019
 uid: fundamentals/websockets
-ms.openlocfilehash: 5d4d9b02bd45e6650aa56448a3663cad06b3b45e
-ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
+ms.openlocfilehash: 098e6826d6f7114baceb9578dc6d9883eb83f0aa
+ms.sourcegitcommit: a166291c6708f5949c417874108332856b53b6a9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69975452"
+ms.lasthandoff: 10/18/2019
+ms.locfileid: "72589700"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>ASP.NET Core에서 WebSocket 지원
 
@@ -78,7 +78,7 @@ ms.locfileid: "69975452"
 이때 다음과 같은 설정을 구성할 수 있습니다.
 
 * `KeepAliveInterval` - 프록시가 연결을 유지할 수 있도록 클라이언트로 "핑(ping)" 프레임을 전송하는 빈도입니다. 기본값은 2분입니다.
-* `ReceiveBufferSize` - 데이터 수신에 사용되는 버퍼의 크기입니다. 고급 사용자는 데이터 크기에 따라 성능 튜닝이 필요할 경우 이 값을 변경해야 할 수도 있습니다. 기본값은 4KB입니다.
+* <xref:Microsoft.AspNetCore.Builder.WebSocketOptions.ReceiveBufferSize> - 데이터 수신에 사용되는 버퍼의 크기입니다. 고급 사용자는 데이터 크기에 따라 성능 튜닝이 필요할 경우 이 값을 변경해야 할 수도 있습니다. 기본값은 4KB입니다.
 * `AllowedOrigins` - WebSocket 요청에 허용된 원본 헤더 값의 목록입니다. 기본적으로 모든 원본이 허용됩니다. 자세한 내용은 아래의 "WebSocket 원본 제한"을 참조하세요.
 
 ::: moniker-end

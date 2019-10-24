@@ -5,14 +5,14 @@ description: 선택한 도구를 사용 하 여 Blazor 앱을 빌드하여 Blazo
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/15/2019
+ms.date: 10/21/2019
 uid: blazor/get-started
-ms.openlocfilehash: fc368be5eb2e5d8f7c80071dc86a02ae986a685f
-ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
+ms.openlocfilehash: 80ff7b42a44e722dd27bc4fde53a066863448e10
+ms.sourcegitcommit: 810d5831169770ee240d03207d6671dabea2486e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72391050"
+ms.lasthandoff: 10/22/2019
+ms.locfileid: "72779119"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>ASP.NET Core Blazor 시작 하기
 
@@ -40,13 +40,13 @@ Blazor 시작 하기:
 
    2 \. 새 프로젝트를 만듭니다.
 
-   3. **Blazor App**을 선택 합니다. **새로 만들기**를 선택합니다.
+   3\. **Blazor App**을 선택 합니다. **새로 만들기**를 선택합니다.
 
    4 \. **프로젝트 이름** 필드에 프로젝트 이름을 제공하거나 기본 프로젝트 이름을 수락합니다. **위치** 항목이 올바른지 확인 하거나 프로젝트의 위치를 제공 합니다. **만들기**를 선택합니다.
 
-   5. Blazor weasembomexperience 환경에 대해 **Blazor Weasembomapp** 템플릿을 선택 합니다. Blazor 서버 환경의 경우 **Blazor Server 앱** 템플릿을 선택 합니다. **만들기**를 선택합니다. 두 Blazor 호스팅 모델에 대 한 자세한 내용은 *Blazor Server* 및 *Blazor Weasembmbambmbsembmbsemba*<xref:blazor/hosting-models>를 참조 하세요.
+   5\. Blazor weasembomexperience 환경에 대해 **Blazor Weasembomapp** 템플릿을 선택 합니다. Blazor 서버 환경의 경우 **Blazor Server 앱** 템플릿을 선택 합니다. **만들기**를 선택합니다. 두 Blazor 호스팅 모델에 대 한 자세한 내용은 *Blazor Server* 및 *Blazor Weasembmbambmbsembmbsemba*<xref:blazor/hosting-models>를 참조 하세요.
 
-   6. **F5** 키를 눌러 앱을 실행합니다.
+   6\. **Ctrl**+**F5**를 눌러 앱을 실행합니다.
 
    > [!NOTE]
    > ASP.NET Core Blazor (Preview 6 이전 버전)의 이전 미리 보기 릴리스에 대해 Blazor Visual Studio 확장을 설치한 경우 확장을 제거할 수 있습니다. 이제 명령 셸에서 Blazor 템플릿을 설치 하면 Visual Studio에서 템플릿을 노출 하기에 충분 합니다.
@@ -57,7 +57,7 @@ Blazor 시작 하기:
 
    2 \. [ C# Visual Studio Code 확장에 대 한](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)최신 버전을 설치 합니다.
 
-   3. Blazor Weasembomexperience 환경의 경우 명령 셸에서 다음 명령을 실행 합니다.
+   3\. Blazor Weasembomexperience 환경의 경우 명령 셸에서 다음 명령을 실행 합니다.
 
       ```dotnetcli
       dotnet new blazorwasm -o WebApplication1
@@ -73,9 +73,9 @@ Blazor 시작 하기:
 
    4 \. Visual Studio Code에서 *WebApplication1* 폴더를 엽니다.
 
-   5. Blazor 서버 프로젝트의 경우 IDE는 프로젝트를 빌드 및 디버그 하기 위해 자산을 추가 하도록 요청 합니다. **예**를 선택합니다.
+   5\. Blazor 서버 프로젝트의 경우 IDE는 프로젝트를 빌드 및 디버그 하기 위해 자산을 추가 하도록 요청 합니다. **예**를 선택합니다.
 
-   6. Blazor 서버 앱을 사용 하는 경우 Visual Studio Code 디버거를 사용 하 여 앱을 실행 합니다. Blazor Weasembomapp을 사용 하는 경우 앱의 프로젝트 폴더에서 `dotnet run`을 실행 합니다.
+   6\. Blazor 서버 앱을 사용 하는 경우 Visual Studio Code 디버거를 사용 하 여 앱을 실행 합니다. Blazor Weasembomapp을 사용 하는 경우 앱의 프로젝트 폴더에서 `dotnet run`을 실행 합니다.
 
    7 \. 브라우저에서 `https://localhost:5001`로 이동합니다.
 
@@ -143,13 +143,13 @@ Blazor 시작 하기:
 
    2 \. 필요에 따라 Blazor **weASP.NET 및 웹 개발** 워크 로드를 사용 하 여 [Visual Studio 16.4 Preview 2](https://visualstudio.microsoft.com/vs/preview/) 이상을 설치 합니다.
 
-   3. 새 프로젝트를 만듭니다.
+   3\. 새 프로젝트를 만듭니다.
 
    4 \. **Blazor App**을 선택 합니다. **새로 만들기**를 선택합니다.
 
-   5. **프로젝트 이름** 필드에 프로젝트 이름을 제공하거나 기본 프로젝트 이름을 수락합니다. **위치** 항목이 올바른지 확인 하거나 프로젝트의 위치를 제공 합니다. **만들기**를 선택합니다.
+   5\. **프로젝트 이름** 필드에 프로젝트 이름을 제공하거나 기본 프로젝트 이름을 수락합니다. **위치** 항목이 올바른지 확인 하거나 프로젝트의 위치를 제공 합니다. **만들기**를 선택합니다.
 
-   6. Blazor weasembomexperience 환경에 대해 **Blazor Weasembomapp** 템플릿을 선택 합니다. Blazor 서버 환경의 경우 **Blazor Server 앱** 템플릿을 선택 합니다. **만들기**를 선택합니다. 두 Blazor 호스팅 모델에 대 한 자세한 내용은 *Blazor Server* 및 *Blazor Weasembmbambmbsembmbsemba*<xref:blazor/hosting-models>를 참조 하세요.
+   6\. Blazor weasembomexperience 환경에 대해 **Blazor Weasembomapp** 템플릿을 선택 합니다. Blazor 서버 환경의 경우 **Blazor Server 앱** 템플릿을 선택 합니다. **만들기**를 선택합니다. 두 Blazor 호스팅 모델에 대 한 자세한 내용은 *Blazor Server* 및 *Blazor Weasembmbambmbsembmbsemba*<xref:blazor/hosting-models>를 참조 하세요.
 
    7 \. **F5** 키를 눌러 앱을 실행합니다.
 
@@ -162,7 +162,7 @@ Blazor 시작 하기:
 
    2 \. [ C# Visual Studio Code 확장에 대 한](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)최신 버전을 설치 합니다.
 
-   3. Blazor Weasembomexperience 환경의 경우 명령 셸에서 다음 명령을 실행 합니다.
+   3\. Blazor Weasembomexperience 환경의 경우 명령 셸에서 다음 명령을 실행 합니다.
 
       ```dotnetcli
       dotnet new blazorwasm -o WebApplication1
@@ -178,9 +178,9 @@ Blazor 시작 하기:
 
    4 \. Visual Studio Code에서 *WebApplication1* 폴더를 엽니다.
 
-   5. Blazor 서버 프로젝트의 경우 IDE는 프로젝트를 빌드 및 디버그 하기 위해 자산을 추가 하도록 요청 합니다. **예**를 선택합니다.
+   5\. Blazor 서버 프로젝트의 경우 IDE는 프로젝트를 빌드 및 디버그 하기 위해 자산을 추가 하도록 요청 합니다. **예**를 선택합니다.
 
-   6. Blazor 서버 앱을 사용 하는 경우 Visual Studio Code 디버거를 사용 하 여 앱을 실행 합니다. Blazor Weasembomapp을 사용 하는 경우 앱의 프로젝트 폴더에서 `dotnet run`을 실행 합니다.
+   6\. Blazor 서버 앱을 사용 하는 경우 Visual Studio Code 디버거를 사용 하 여 앱을 실행 합니다. Blazor Weasembomapp을 사용 하는 경우 앱의 프로젝트 폴더에서 `dotnet run`을 실행 합니다.
 
    7 \. 브라우저에서 `https://localhost:5001`로 이동합니다.
 
@@ -236,7 +236,7 @@ Blazor 시작 하기:
 * 카운터
 * 데이터 페치
 
-카운터 페이지에서 **Click me** 단추를 선택하여 페이지 새로 고침 없이 카운터를 증분합니다. 웹 페이지에서 카운터를 증가 시키려면 JavaScript를 작성 해야 하지만 Blazor을 사용 C#하면 됩니다.
+Counter 페이지에서 **Click me** 단추를 선택하여 페이지 새로 고침 없이 카운터를 증가시킵니다. 웹 페이지에서 카운터를 증가 시키려면 JavaScript를 작성 해야 하지만 Blazor을 사용 C#하면 됩니다.
 
 *Pages/Counter.razor*:
 
@@ -246,9 +246,9 @@ Blazor 시작 하기:
 
 **[클릭** ] 단추를 선택할 때마다:
 
-* @No__t-0 이벤트가 발생 합니다.
+* @No__t_0 이벤트가 발생 합니다.
 * `IncrementCount` 메서드가 호출됩니다.
-* @No__t-0이 증가 합니다.
+* @No__t_0 증가 합니다.
 * 구성 요소가 다시 렌더링 됩니다.
 
 런타임은 새 콘텐츠를 이전 콘텐츠와 비교 하 고 변경 된 콘텐츠만 문서 개체 모델 (DOM)에 적용 합니다.
@@ -261,10 +261,10 @@ HTML 구문을 사용 하 여 구성 요소를 다른 구성 요소에 추가 �
 
 앱을 실행합니다. 홈페이지에는 `Counter` 구성 요소에서 제공 하는 고유한 카운터가 있습니다.
 
-구성 요소 매개 변수는 자식 구성 요소에 대 한 속성을 설정할 수 있도록 하는 특성 또는 [자식 콘텐츠](xref:blazor/components#child-content)를 사용 하 여 지정 됩니다. @No__t-0 구성 요소에 매개 변수를 추가 하려면 구성 요소의 `@code` 블록을 업데이트 합니다.
+구성 요소 매개 변수는 자식 구성 요소에 대 한 속성을 설정할 수 있도록 하는 특성 또는 [자식 콘텐츠](xref:blazor/components#child-content)를 사용 하 여 지정 됩니다. @No__t_0 구성 요소에 매개 변수를 추가 하려면 구성 요소의 `@code` 블록을 업데이트 합니다.
 
-* @No__t-1 특성을 사용 하 여 `IncrementAmount`에 대 한 public 속성을 추가 합니다.
-* `currentCount` 값을 늘릴 때 `IncrementAmount`를 사용하도록 `IncrementCount` 메서드를 변경합니다.
+* @No__t_1 특성을 사용 하 여 `IncrementAmount`에 대 한 public 속성을 추가 합니다.
+* `currentCount` 값을 증가시킬 때 `IncrementAmount`를 사용하도록 `IncrementCount` 메서드를 변경합니다.
 
 *Pages/Counter.razor*:
 
@@ -276,7 +276,7 @@ HTML 구문을 사용 하 여 구성 요소를 다른 구성 요소에 추가 �
 
 [!code-cshtml[](get-started/samples_snapshot/3.x/Index2.razor?highlight=7)]
 
-앱을 실행합니다. @No__t-0 구성 요소에는 **클릭** 단추를 선택할 때마다 10 씩 증가 하는 고유한 카운터가 있습니다. @No__t-2의 `Counter` 구성 요소 (*. razor*)는 1 씩 계속 증가 합니다.
+앱을 실행합니다. @No__t_0 구성 요소에는 **클릭** 단추를 선택할 때마다 10 씩 증가 하는 고유한 카운터가 있습니다. @No__t_2의 `Counter` 구성 요소 ( *. razor*)는 1 씩 계속 증가 합니다.
 
 ## <a name="next-steps"></a>다음 단계
 

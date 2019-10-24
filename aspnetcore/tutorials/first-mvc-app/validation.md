@@ -51,9 +51,9 @@ MVC 및 Entity Framework Core Code First가 제공하는 유효성 검사 지원
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc//sample/MvcMovie/Controllers/MoviesController.cs?name=snippetCreate)]
 
-첫 번째(HTTP GET) `Create` 작업 메서드는 최초 Create 양식을 표시합니다. 두 번째(`[HttpPost]`) 버전은 양식 게시를 처리합니다. 두 번째 `Create` 메서드(`[HttpPost]` 버전)은 `ModelState.IsValid`를 호출하여 영화의 유효성 검사 오류 여부를 확인합니다. 이 메서드를 호출하면 개체에 적용된 모든 유효성 검사 특성이 평가됩니다. 개체에 유효성 검사 오류가 있으면 `Create` 메서드는 양식을 다시 표시합니다. 오류가 없으면 메서드가 데이터베이스에 새 영화를 저장합니다. 이 영화 예제에서는 클라이언트 쪽에서 유효성 검사 오류가 감지되면 서버에 양식이 게시되지 않으며, 두 번째 `Create` 메서드가 절대 호출되지 않습니다. 브라우저에서 JavaScript를 사용하지 않으면 클라이언트 유효성 검사가 비활성화되며 모든 유효성 검사 오류를 감지하는 HTTP POST `Create` 메서드 `ModelState.IsValid`를 테스트할 수 있습니다.
+첫 번째(HTTP GET) `Create` 작업 메서드는 최초 Create 양식을 표시합니다. 두 번째(`[HttpPost]`) 버전은 양식 게시를 처리합니다. 두 번째 `Create` 메서드(`[HttpPost]` 버전)는 `ModelState.IsValid`를 호출하여 영화의 유효성 검사 오류 여부를 확인합니다. 이 메서드를 호출하면 개체에 적용된 모든 유효성 검사 특성이 평가됩니다. 개체에 유효성 검사 오류가 있으면 `Create` 메서드는 양식을 다시 표시합니다. 오류가 없으면 메서드가 데이터베이스에 새 영화를 저장합니다. 이 영화 예제에서는 클라이언트 쪽에서 유효성 검사 오류가 감지되면 서버에 양식이 게시되지 않으며, 두 번째 `Create` 메서드가 절대 호출되지 않습니다. 브라우저에서 JavaScript를 사용하지 않으면 클라이언트 유효성 검사가 비활성화되며 모든 유효성 검사 오류를 감지하는 HTTP POST `Create` 메서드 `ModelState.IsValid`를 테스트할 수 있습니다.
 
-`[HttpPost] Create` 메서드에서 중단점을 설정하고 메서드가 호출되지 않았는지 확인할 수 있으며, 유효성 검사 오류가 감지되면 클라이언트 쪽 유효성 검사가 양식 데이터를 제출하지 않습니다. 브라우저에서 JavaScript를 사용하지 않고 오류가 있는 상태로 양식을 제출하면 중단점에 이르게 됩니다. JavaScript 없이도 여전히 완전한 유효성 검사가 가능합니다.
+`[HttpPost] Create` 메서드에서 중단점을 설정하고 메서드가 호출되지 않았는지 확인할 수 있으며, 유효성 검사 오류가 감지되면 클라이언트 쪽 유효성 검사가 양식 데이터를 제출하지 않습니다. 브라우저에서 JavaScript를 사용하지 않고 오류가 있는 상태로 양식을 제출하면 중단점에 이르게 됩니다. JavaScript 없이도 여전히 완전한 유효성 검사가 가능합니다. 
 
 다음 이미지는 FireFox 브라우저에서 JavaScript를 사용하지 않도록 설정하는 방법을 보여줍니다.
 

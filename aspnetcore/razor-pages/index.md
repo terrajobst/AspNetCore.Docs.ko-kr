@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
 ms.date: 10/07/2019
 uid: razor-pages/index
-ms.openlocfilehash: 61b1c3a17b378524c8fea9004b615c2d3d480135
-ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
+ms.openlocfilehash: d12cf7f4f45c98c292b0d035c99e051d9b779e9a
+ms.sourcegitcommit: 383017d7060a6d58f6a79cf4d7335d5b4b6c5659
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/07/2019
-ms.locfileid: "72007466"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72816130"
 ---
 # <a name="introduction-to-razor-pages-in-aspnet-core"></a>ASP.NET Core의 Razor 페이지 소개
 
@@ -140,7 +140,7 @@ db 컨텍스트는 다음과 같습니다.
 * 앞 예제의 `OnPostAsync` 코드는 일반적인 컨트롤러 코드와 비슷합니다.
 * [모델 바인딩](xref:mvc/models/model-binding), [유효성 검사](xref:mvc/models/validation) 및 작업 결과와 은 MVC의 기본적인 기능들이 대부분 컨트롤러 및 Razor Pages와 동일하게 작동합니다. 
 
-위의 `OnPostAsync` 메서드는 다음과 같습니다.
+기존 `OnPostAsync` 메서드는 다음과 같습니다.
 
 [!code-cs[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_OnPostAsync)]
 
@@ -212,7 +212,7 @@ Razor 페이지는 기본적으로 비 `GET` 동사에 대해서만 속성을 �
 
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml?range=21)]
 
-이 `<a /a>`[앵커 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)는 Edit 페이지에 대한 링크를 생성하기 위해 `asp-route-{value}` 특성을 사용합니다. 링크에는 연락처 ID와 함께 경로 데이터가 포함됩니다. 예: `https://localhost:5001/Edit/1`. [태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하면 서버 쪽 코드를 Razor 파일에서 HTML 요소를 만들고 렌더링하는 데 사용할 수 있습니다.
+이 `<a /a>`[앵커 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)는 Edit 페이지에 대한 링크를 생성하기 위해 `asp-route-{value}` 특성을 사용합니다. 링크에는 연락처 ID와 함께 경로 데이터가 포함됩니다. 예: `https://localhost:5001/Edit/1`. [태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하면 서버 쪽 코드를 사용하여 Razor 파일에서 HTML 요소를 만들고 렌더링 할 수 있습니다.
 
 *Index.cshtml* 파일에는 각 고객 연락처에 대한 삭제 단추를 만들기 위한 태그가 포함되어 있습니다.
 
@@ -267,7 +267,7 @@ Razor 페이지는 기본적으로 비 `GET` 동사에 대해서만 속성을 �
 
 `Customer` 모델 고려:
 
-[!code-cs[](index/sample/RazorPagesContacts/Data/Customer.cs)]
+[!code-cs[](index/3.0sample/RazorPagesContacts/Models/Customer.cs)]
 
 다음 *Create.cshtml* 뷰파일 사용:
 
@@ -733,7 +733,7 @@ db 컨텍스트는 다음과 같습니다.
 * 앞 예제의 `OnPostAsync` 코드는 일반적인 컨트롤러 코드와 비슷합니다.
 * [모델 바인딩](xref:mvc/models/model-binding), [유효성 검사](xref:mvc/models/validation), [유효성 검사](xref:mvc/models/validation) 및 작업 결과 같은 MVC의 기본적인 기능들이 대부분 공유됩니다.
 
-위의 `OnPostAsync` 메서드는 다음과 같습니다.
+기존 `OnPostAsync` 메서드는 다음과 같습니다.
 
 [!code-cs[](index/sample/RazorPagesContacts/Pages/Create.cshtml.cs?name=snippet_OnPostAsync)]
 
@@ -768,7 +768,7 @@ Razor 페이지는 기본적으로 비 `GET` 동사에 대해서만 속성을 �
 
 [!code-cshtml[](index/sample/RazorPagesContacts/Pages/Index.cshtml?range=21)]
 
-이 `<a asp-page="./Edit" asp-route-id="@contact.Id">Edit</a>`[앵커 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)는 Edit 페이지에 대한 링크를 생성하기 위해 `asp-route-{value}` 특성을 사용합니다. 링크에는 연락처 ID와 함께 경로 데이터가 포함됩니다. 예: `https://localhost:5001/Edit/1`. [태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하면 서버 쪽 코드를 Razor 파일에서 HTML 요소를 만들고 렌더링하는 데 사용할 수 있습니다. 태그 도우미는 `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`를 통해 사용할 수 있습니다.
+이 `<a asp-page="./Edit" asp-route-id="@contact.Id">Edit</a>`[앵커 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)는 Edit 페이지에 대한 링크를 생성하기 위해 `asp-route-{value}` 특성을 사용합니다. 링크에는 연락처 ID와 함께 경로 데이터가 포함됩니다. 예: `https://localhost:5001/Edit/1`. [태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하면 서버 쪽 코드를 사용하여 Razor 파일에서 HTML 요소를 만들고 렌더링 할 수 있습니다. 태그 도우미는 `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`를 통해 사용할 수 있습니다.
 
 *Pages/Edit.cshtml* 파일은 다음과 같습니다.
 
