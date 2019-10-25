@@ -5,14 +5,14 @@ description: ASP.NET Core에서 종속성 주입을 구현하는 방법 및 사�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/24/2019
+ms.date: 10/12/2019
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: fefd0b9df71d5b0e7c30a31620292fd37eeecfa4
-ms.sourcegitcommit: e54672f5c493258dc449fac5b98faf47eb123b28
+ms.openlocfilehash: b07ed6d1c23454c95778a5942de615684b70bc36
+ms.sourcegitcommit: a166291c6708f5949c417874108332856b53b6a9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/24/2019
-ms.locfileid: "71248268"
+ms.lasthandoff: 10/18/2019
+ms.locfileid: "72589896"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>ASP.NET Core에서 종속성 주입
 
@@ -184,19 +184,19 @@ public void Configure(IApplicationBuilder app, IOptions<MyOptions> options)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-| 서비스 유형 | 수명 |
+| 서비스 종류 | 수명 |
 | ------------ | -------- |
-| <xref:Microsoft.AspNetCore.Hosting.Builder.IApplicationBuilderFactory?displayProperty=fullName> | 임시 |
+| <xref:Microsoft.AspNetCore.Hosting.Builder.IApplicationBuilderFactory?displayProperty=fullName> | Transient |
 | `IHostApplicationLifetime` | Singleton |
 | `IWebHostEnvironment` | Singleton |
 | <xref:Microsoft.AspNetCore.Hosting.IStartup?displayProperty=fullName> | Singleton |
-| <xref:Microsoft.AspNetCore.Hosting.IStartupFilter?displayProperty=fullName> | 임시 |
+| <xref:Microsoft.AspNetCore.Hosting.IStartupFilter?displayProperty=fullName> | Transient |
 | <xref:Microsoft.AspNetCore.Hosting.Server.IServer?displayProperty=fullName> | Singleton |
-| <xref:Microsoft.AspNetCore.Http.IHttpContextFactory?displayProperty=fullName> | 임시 |
+| <xref:Microsoft.AspNetCore.Http.IHttpContextFactory?displayProperty=fullName> | Transient |
 | <xref:Microsoft.Extensions.Logging.ILogger`1?displayProperty=fullName> | Singleton |
 | <xref:Microsoft.Extensions.Logging.ILoggerFactory?displayProperty=fullName> | Singleton |
 | <xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider?displayProperty=fullName> | Singleton |
-| <xref:Microsoft.Extensions.Options.IConfigureOptions`1?displayProperty=fullName> | 임시 |
+| <xref:Microsoft.Extensions.Options.IConfigureOptions`1?displayProperty=fullName> | Transient |
 | <xref:Microsoft.Extensions.Options.IOptions`1?displayProperty=fullName> | Singleton |
 | <xref:System.Diagnostics.DiagnosticSource?displayProperty=fullName> | Singleton |
 | <xref:System.Diagnostics.DiagnosticListener?displayProperty=fullName> | Singleton |
@@ -205,19 +205,19 @@ public void Configure(IApplicationBuilder app, IOptions<MyOptions> options)
 
 ::: moniker range="< aspnetcore-3.0"
 
-| 서비스 유형 | 수명 |
+| 서비스 종류 | 수명 |
 | ------------ | -------- |
-| <xref:Microsoft.AspNetCore.Hosting.Builder.IApplicationBuilderFactory?displayProperty=fullName> | 임시 |
+| <xref:Microsoft.AspNetCore.Hosting.Builder.IApplicationBuilderFactory?displayProperty=fullName> | Transient |
 | <xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime?displayProperty=fullName> | Singleton |
 | <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment?displayProperty=fullName> | Singleton |
 | <xref:Microsoft.AspNetCore.Hosting.IStartup?displayProperty=fullName> | Singleton |
-| <xref:Microsoft.AspNetCore.Hosting.IStartupFilter?displayProperty=fullName> | 임시 |
+| <xref:Microsoft.AspNetCore.Hosting.IStartupFilter?displayProperty=fullName> | Transient |
 | <xref:Microsoft.AspNetCore.Hosting.Server.IServer?displayProperty=fullName> | Singleton |
-| <xref:Microsoft.AspNetCore.Http.IHttpContextFactory?displayProperty=fullName> | 임시 |
+| <xref:Microsoft.AspNetCore.Http.IHttpContextFactory?displayProperty=fullName> | Transient |
 | <xref:Microsoft.Extensions.Logging.ILogger`1?displayProperty=fullName> | Singleton |
 | <xref:Microsoft.Extensions.Logging.ILoggerFactory?displayProperty=fullName> | Singleton |
 | <xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider?displayProperty=fullName> | Singleton |
-| <xref:Microsoft.Extensions.Options.IConfigureOptions`1?displayProperty=fullName> | 임시 |
+| <xref:Microsoft.Extensions.Options.IConfigureOptions`1?displayProperty=fullName> | Transient |
 | <xref:Microsoft.Extensions.Options.IOptions`1?displayProperty=fullName> | Singleton |
 | <xref:System.Diagnostics.DiagnosticSource?displayProperty=fullName> | Singleton |
 | <xref:System.Diagnostics.DiagnosticListener?displayProperty=fullName> | Singleton |
@@ -250,7 +250,7 @@ public void ConfigureServices(IServiceCollection services)
 
 등록된 각 서비스의 수명을 적절히 선택합니다. ASP.NET Core 서비스는 다음 수명을 사용하여 구성할 수 있습니다.
 
-### <a name="transient"></a>임시
+### <a name="transient"></a>Transient
 
 Transient 수명 서비스(<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddTransient*>)는 서비스 컨테이너에서 요청할 때마다 만들어집니다. 이 수명은 간단한 상태 비저장 서비스에 가장 적합합니다.
 
@@ -270,15 +270,15 @@ Scoped 수명 서비스(<xref:Microsoft.Extensions.DependencyInjection.ServiceCo
 
 ## <a name="service-registration-methods"></a>서비스 등록 메서드
 
-각 서비스 등록 확장 메서드는 특정 시나리오에 유용한 오버로드를 제공합니다.
+서비스 등록 확장 메서드는 특정 시나리오에 유용한 오버로드를 제공합니다.
 
-| 방법 | 자동<br>개체<br>삭제 | 여러<br>구현 | 인수 전달 |
+| 메서드 | 자동<br>개체<br>삭제 | 여러<br>구현 | 인수 전달 |
 | ------ | :-----------------------------: | :-------------------------: | :-------: |
-| `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>예제:<br>`services.AddScoped<IMyDep, MyDep>();` | 예 | 예 | 아니요 |
-| `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>예제:<br>`services.AddScoped<IMyDep>(sp => new MyDep());`<br>`services.AddScoped<IMyDep>(sp => new MyDep("A string!"));` | 예 | 예 | 예 |
-| `Add{LIFETIME}<{IMPLEMENTATION}>()`<br>예제:<br>`services.AddScoped<MyDep>();` | 예 | 아니요 | 아니요 |
-| `Add{LIFETIME}<{SERVICE}>(new {IMPLEMENTATION})`<br>예제:<br>`services.AddScoped<IMyDep>(new MyDep());`<br>`services.AddScoped<IMyDep>(new MyDep("A string!"));` | 아니요 | 예 | 예 |
-| `Add{LIFETIME}(new {IMPLEMENTATION})`<br>예제:<br>`services.AddScoped(new MyDep());`<br>`services.AddScoped(new MyDep("A string!"));` | 아니요 | 아니요 | 예 |
+| `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>예:<br>`services.AddSingleton<IMyDep, MyDep>();` | 예 | 예 | 아니요 |
+| `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>예:<br>`services.AddSingleton<IMyDep>(sp => new MyDep());`<br>`services.AddSingleton<IMyDep>(sp => new MyDep("A string!"));` | 예 | 예 | 예 |
+| `Add{LIFETIME}<{IMPLEMENTATION}>()`<br>예:<br>`services.AddSingleton<MyDep>();` | 예 | 아니요 | 아니요 |
+| `AddSingleton<{SERVICE}>(new {IMPLEMENTATION})`<br>예:<br>`services.AddSingleton<IMyDep>(new MyDep());`<br>`services.AddSingleton<IMyDep>(new MyDep("A string!"));` | 아니요 | 예 | 예 |
+| `AddSingleton(new {IMPLEMENTATION})`<br>예:<br>`services.AddSingleton(new MyDep());`<br>`services.AddSingleton(new MyDep("A string!"));` | 아니요 | 아니요 | 예 |
 
 형식 삭제에 대한 자세한 내용은 [서비스의 삭제](#disposal-of-services) 섹션을 참조하세요. 여러 구현에 대한 일반적인 시나리오는 [테스트용 모의 형식](xref:test/integration-tests#inject-mock-services)입니다.
 
@@ -624,7 +624,7 @@ public void ConfigureServices(IServiceCollection services)
 * [Stashbox](https://github.com/z4kn4fein/stashbox-extensions-dependencyinjection)
 * [Unity](https://www.nuget.org/packages/Unity.Microsoft.DependencyInjection)
 
-### <a name="thread-safety"></a>스레드 보안
+### <a name="thread-safety"></a>스레드로부터의 안전성
 
 스레드로부터 안전한 싱글톤 서비스를 만듭니다. 싱글톤 서비스가 Transient 서비스에 대한 종속성을 갖는 경우 Transient 서비스는 싱글톤에서 사용되는 방식에 따라 스레드로부터 안전성이 필요할 수 있습니다.
 
@@ -685,7 +685,7 @@ public void ConfigureServices(IServiceCollection services)
 
 DI는 정적/전역 개체 액세스 패턴의 ‘대안’입니다.  고정 개체 액세스와 함께 사용할 경우 DI의 장점을 실현할 수 없습니다.
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:mvc/views/dependency-injection>
 * <xref:mvc/controllers/dependency-injection>
