@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core 앱의 Details 및 Delete 메서드 검사
+title: ASP.NET Core 앱의 Details 및 Delete 메서드 검토
 author: rick-anderson
 description: 기본적인 ASP.NET Core MVC 앱에서 Details 컨트롤러 메서드 및 보기에 대해 알아봅니다.
 ms.author: riande
@@ -12,7 +12,7 @@ ms.contentlocale: ko-KR
 ms.lasthandoff: 08/09/2019
 ms.locfileid: "68862979"
 ---
-# <a name="examine-the-details-and-delete-methods-of-an-aspnet-core-app"></a>ASP.NET Core 앱의 Details 및 Delete 메서드 검사
+# <a name="examine-the-details-and-delete-methods-of-an-aspnet-core-app"></a>ASP.NET Core 앱의 Details 및 Delete 메서드 검토
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
