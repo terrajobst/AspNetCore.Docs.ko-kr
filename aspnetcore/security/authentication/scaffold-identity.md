@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: f3ae089d344d95ed84c9720ab4ba2c697400901e
-ms.sourcegitcommit: dc96d76f6b231de59586fcbb989a7fb5106d26a8
+ms.openlocfilehash: ca2046563281efc3c1cd8f4fec73fe4f8d3fbdda
+ms.sourcegitcommit: 383017d7060a6d58f6a79cf4d7335d5b4b6c5659
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/01/2019
-ms.locfileid: "71703767"
+ms.lasthandoff: 10/23/2019
+ms.locfileid: "72816117"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>ASP.NET Core 프로젝트의 스 캐 폴드 Id
 
@@ -35,7 +35,7 @@ Id 스 캐 폴더를 실행 하면 프로젝트 디렉터리에 *ScaffoldingRead
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-@No__t-0 클래스에 다음의 강조 표시 된 호출을 추가 합니다.
+`Startup` 클래스에 다음의 강조 표시 된 호출을 추가 합니다.
 
 [!code-csharp[](scaffold-identity/sample/StartupEmpty.cs?name=snippet1&highlight=5,20-23)]
 
@@ -76,7 +76,7 @@ Id는 *Areas/identity/IdentityHostingStartup*에서 구성 됩니다. 자세한 
 
 ### <a name="enable-authentication"></a>인증 사용
 
-@No__t-1 클래스의 `Configure` 메서드에서 `UseStaticFiles` 후에 [Useauthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) 을 호출 합니다.
+`Startup` 클래스의 `Configure` 메서드에서 `UseStaticFiles`후에 [Useauthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) 을 호출 합니다.
 
 [!code-csharp[](scaffold-identity/sample/StartupRPnoAuth.cs?name=snippet1&highlight=29)]
 
@@ -84,7 +84,7 @@ Id는 *Areas/identity/IdentityHostingStartup*에서 구성 됩니다. 자세한 
 
 ### <a name="layout-changes"></a>레이아웃 변경
 
-선택 사항: 레이아웃 파일에 로그인 부분 (`_LoginPartial`)을 추가 합니다.
+선택 사항: 로그인 부분 (`_LoginPartial`)을 레이아웃 파일에 추가 합니다.
 
 [!code-html[Main](scaffold-identity/sample/_Layout.cshtml?highlight=37)]
 
@@ -98,8 +98,7 @@ uld option: Use Local DB, not SQLite
 dotnet new webapp -au Individual -uld -o RPauth
 cd RPauth
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
-dotnet restore
-dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files Account.Register
+dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Register"
 -->
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
@@ -133,7 +132,7 @@ Id는 *Areas/identity/IdentityHostingStartup*에서 구성 됩니다. 자세한 
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-@No__t-1 후에 [Useauthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) 을 호출 합니다.
+`UseStaticFiles`후에 [Useauthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) 을 호출 합니다.
 
 [!code-csharp[](scaffold-identity/sample/StartupMvcNoAuth.cs?name=snippet1&highlight=23)]
 
@@ -146,7 +145,7 @@ dotnet new mvc -au Individual -o MvcAuth
 cd MvcAuth
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet restore
-dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext --files Account.Register
+dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --files "Account.Login;Account.Register"
 -->
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
@@ -171,11 +170,85 @@ Id UI에 대 한 모든 권한을 유지 하려면 Id 스 캐 폴더를 실행 �
 
 [!code-csharp[](scaffold-identity/sample/StartupFull.cs?name=snippet3)]
 
-@No__t-0 구현을 등록 합니다. 예를 들면 다음과 같습니다.
+`IEmailSender` 구현을 등록 합니다. 예를 들면 다음과 같습니다.
 
 [!code-csharp[](scaffold-identity/sample/StartupFull.cs?name=snippet4)]
 
 [!code-csharp[](scaffold-identity/sample/StartupFull.cs?name=snippet)]
+
+<!--
+uld option: Use Local DB, not SQLite
+
+dotnet new webapp -au Individual -uld -o RPauth
+cd RPauth
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
+-->
+## <a name="disable-register-page"></a>등록 페이지 사용 안 함
+
+사용자 등록을 사용 하지 않도록 설정 하려면:
+
+* 스 캐 폴드 Id입니다. Account. Register, Account. Login 및 Account. RegisterConfirmation 같이 포함 됩니다. 예를 들면,
+
+  ```dotnetcli
+   dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
+  ```
+
+* 사용자가이 끝점에서 등록할 수 없도록 *영역/i d/페이지/계정/등록을 업데이트 합니다* .
+
+  [!code-csharp[](scaffold-identity/sample/Register.cshtml.cs?name=snippet)]
+
+* 이전 변경 내용과 일치 하도록 *영역/i d/페이지/계정*
+
+  [!code-cshtml[](scaffold-identity/sample/Register.cshtml)]
+
+* *영역/i d/페이지/계정/로그인* 에서 등록 링크를 주석으로 처리 하거나 제거 합니다.
+
+```cshtml
+@*
+<p>
+    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+</p>
+*@
+```
+
+* *영역/i d/페이지/계정/* a p 확인 페이지를 업데이트 합니다.
+
+  * Cshtml 파일에서 코드 및 링크를 제거 합니다.
+  * `PageModel`에서 확인 코드를 제거 합니다.
+
+  ```csharp
+   [AllowAnonymous]
+    public class RegisterConfirmationModel : PageModel
+    {
+        public IActionResult OnGet()
+        {  
+            return Page();
+        }
+    }
+  ```
+  
+### <a name="use-another-app-to-add-users"></a>다른 앱을 사용 하 여 사용자 추가
+
+웹 앱 외부에 사용자를 추가 하는 메커니즘을 제공 합니다. 사용자를 추가 하는 옵션은 다음과 같습니다.
+
+* 전용 관리 웹 앱입니다.
+* 콘솔 앱입니다.
+
+다음 코드에서는 사용자를 추가 하는 한 가지 방법을 간략하게 설명 합니다.
+
+* 사용자 목록을 메모리로 읽습니다.
+* 각 사용자에 대해 강력한 고유 암호가 생성 됩니다.
+* 사용자가 Id 데이터베이스에 추가 됩니다.
+* 사용자에 게 알림이 표시 되 고 암호를 변경 하 라는 메시지가 표시 됩니다.
+
+[!code-csharp[](scaffold-identity/consoleAddUser/Program.cs?name=snippet)]
+
+다음 코드에서는 사용자를 추가 하는 방법을 설명 합니다.
+
+[!code-csharp[](scaffold-identity/consoleAddUser/Data/SeedData.cs?name=snippet)]
+
+프로덕션 시나리오의 경우 유사한 접근 방식을 사용할 수 있습니다.
 
 ## <a name="additional-resources"></a>추가 자료
 
