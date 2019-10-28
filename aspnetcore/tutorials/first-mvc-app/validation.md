@@ -85,7 +85,7 @@ JavaScript를 사용하지 않도록 설정한 뒤에 잘못된 데이터를 게
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc//sample/MvcMovie/Models/MovieDateRatingDA.cs?highlight=2,6&name=snippet2)]
 
-`DataType` 특성은 데이터의 서식을 지정하도록 뷰 엔진에 대한 힌트만을 제공합니다(그리고 URL에 대한 `<a>` 및 이메일에 대한 `<a href="mailto:EmailAddress.com">`과 같은 요소/특성 제공). `RegularExpression` 특성을 사용하여 데이터 형식의 유효성을 검사할 수 있습니다. `DataType` 특성은 데이터베이스 내장 형식보다 구체적인 데이터 형식을 지정하는 데 사용되며 유효성 검사 특성이 아닙니다. 이 경우에는 시간이 아닌 날짜만 추적하고자 합니다. `DataType` 열거형은 날짜, 시간, 전화 번호, 통화, 전자 메일 주소 등과 같은 많은 데이터 형식을 제공합니다. `DataType` 특성을 통해 응용 프로그램에서 자동으로 유형별 기능을 제공하도록 설정할 수도 있습니다. 예를 들어, `DataType.EmailAddress`에 대해 `mailto:` 링크를 만들고 HTML5를 지원하는 브라우저에서 `DataType.Date`에 대해 날짜 선택기를 제공할 수 있습니다. `DataType` 특성은 HTML 5 브라우저가 인식할 수 있는 HTML 5 `data-`(데이터 대시로 발음) 특성을 내보냅니다. `DataType` 특성은 유효성 검사를 제공하지 **않습니다**.
+`DataType` 특성은 데이터에 서식을 지정하도록(그리고 URL에 대한 `<a>` 및 이메일에 대한 `<a href="mailto:EmailAddress.com">`과 같은 요소/특성을 제공하도록) 보기 엔진에 대한 힌트만 제공합니다. `RegularExpression` 특성을 사용하여 데이터 서식의 유효성을 검사할 수 있습니다. `DataType` 특성은 데이터베이스 내장 형식보다 구체적인 데이터 형식을 지정하는 데 사용되며 유효성 검사 특성이 아닙니다. 이 예제에서는 시간을 제외한 날짜만 추적하고자 합니다. `DataType` 열거형은 Date, Time, PhoneNumber, Currency, EmailAddress를 비롯한 많은 데이터 형식을 제공합니다. `DataType` 특성을 통해 응용 프로그램에서 자동으로 형식별 기능을 제공하도록 설정할 수도 있습니다. 예를 들어, `DataType.EmailAddress`에 대해 `mailto:` 링크를 만들고 HTML5를 지원하는 브라우저에서 `DataType.Date`에 대해 날짜 선택기를 제공할 수 있습니다. `DataType` 특성은 HTML 5 브라우저가 인식할 수 있는 HTML 5 `data-`(데이터 대시라고 발음합니다) 특성을 내보냅니다. `DataType` 특성은 유효성 검사를 전혀 제공하지 **않습니다**.
 
 `DataType.Date`는 표시되는 날짜의 서식을 지정하지 않습니다. 기본적으로 데이터 필드는 서버 `CultureInfo`의 기본 형식에 따라 표시됩니다.
 
