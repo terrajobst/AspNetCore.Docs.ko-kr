@@ -71,7 +71,7 @@ JavaScript를 사용하지 않도록 설정한 뒤에 잘못된 데이터를 게
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/CreateRatingBrevity.html)]
 
-이전 태그는 최초 양식을 표시 및 오류 발생 시 양식을 다시 표시하기 위해 작업 메서드에서 사용됩니다.
+위의 태크는 최초 양식을 표시하고 오류 발생 시 양식을 다시 표시하기 위해 작업 메서드에서 사용됩니다.
 
 [입력 태그 도우미](xref:mvc/views/working-with-forms)는 [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) 특성을 사용하여 클라이언트 쪽의 jQuery 유효성 검사에 필요한 HTML 특성을 생성합니다. [유효성 검사 태그 도우미](xref:mvc/views/working-with-forms#the-validation-tag-helpers)는 유효성 검사 오류를 표시합니다. 자세한 내용은 [유효성 검사](xref:mvc/models/validation)를 참조하세요.
 
