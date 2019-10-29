@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/31/2018
 uid: security/ip-safelist
-ms.openlocfilehash: 02e44135ab1742d44691cfda8c4167f21d6efa4e
-ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
+ms.openlocfilehash: ca5b0f8088773027f7403120247cbeca8900bcf5
+ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69975640"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73034337"
 ---
 # <a name="client-ip-safelist-for-aspnet-core"></a>ASP.NET Core에 대 한 클라이언트 IP safelist
 
@@ -35,7 +35,7 @@ ms.locfileid: "69975640"
 
 ## <a name="middleware"></a>미들웨어
 
-메서드 `Configure` 는 미들웨어를 추가 하 고 생성자 매개 변수에 safelist 문자열을 전달 합니다.
+`Configure` 메서드는 미들웨어를 추가 하 고 생성자 매개 변수에 safelist 문자열을 전달 합니다.
 
 [!code-csharp[](ip-safelist/samples/2.x/ClientIpAspNetCore/Startup.cs?name=snippet_Configure&highlight=10)]
 
@@ -47,7 +47,7 @@ ms.locfileid: "69975640"
 
 특정 컨트롤러 또는 작업 메서드에만 safelist을 사용 하려면 작업 필터를 사용 합니다. 예를 들면 다음과 같습니다. 
 
-[!code-csharp[](ip-safelist/samples/2.x/ClientIpAspNetCore/Filters/ClientIdCheckFilter.cs)]
+[!code-csharp[](ip-safelist/samples/2.x/ClientIpAspNetCore/Filters/ClientIpCheckFilter.cs)]
 
 작업 필터가 서비스 컨테이너에 추가 됩니다.
 
@@ -63,7 +63,7 @@ ms.locfileid: "69975640"
 
 Razor Pages 앱에 대 한 safelist을 사용 하려면 Razor Pages 필터를 사용 합니다. 예를 들면 다음과 같습니다. 
 
-[!code-csharp[](ip-safelist/samples/2.x/ClientIpAspNetCore/Filters/ClientIdCheckPageFilter.cs)]
+[!code-csharp[](ip-safelist/samples/2.x/ClientIpAspNetCore/Filters/ClientIpCheckPageFilter.cs)]
 
 이 필터는 MVC Filters 컬렉션에 추가 하 여 사용할 수 있습니다.
 

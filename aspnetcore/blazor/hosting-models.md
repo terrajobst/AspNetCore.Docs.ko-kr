@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/15/2019
 uid: blazor/hosting-models
-ms.openlocfilehash: 072f9bbdcf7171ede63383b085f9f0f030bf1076
-ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
+ms.openlocfilehash: be67c129af4f071d10719e0bbf121de761dde9f4
+ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72391164"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73033999"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor 호스팅 모델
 
@@ -66,7 +66,7 @@ ASP.NET Core 앱은 추가할 앱의 `Startup` 클래스를 참조 합니다.
 * 서버 쪽 서비스.
 * 요청 처리 파이프라인에 대 한 앱입니다.
 
-*Blazor* 스크립트 @ no__t-1은 클라이언트 연결을 설정 합니다. 필요에 따라 앱 상태를 유지 하 고 복원 하는 것은 앱의 책임입니다 (예: 네트워크 연결이 끊어진 경우).
+*Blazor* 스크립트&dagger; 클라이언트 연결을 설정 합니다. 필요에 따라 앱 상태를 유지 하 고 복원 하는 것은 앱의 책임입니다 (예: 네트워크 연결이 끊어진 경우).
 
 Blazor 서버 호스팅 모델은 몇 가지 이점을 제공 합니다.
 
@@ -83,7 +83,7 @@ Blazor 서버 호스팅을 단점이 있습니다.
 * 여러 사용자가 있는 앱의 경우에는 확장성이 어렵습니다. 서버는 여러 클라이언트 연결을 관리 하 고 클라이언트 상태를 처리 해야 합니다.
 * 앱을 제공 하려면 ASP.NET Core 서버가 필요 합니다. 서버를 사용 하지 않는 배포 시나리오 (예: CDN에서 앱 제공)를 사용할 수 없습니다.
 
-@no__t- *blazor* 스크립트는 ASP.NET Core 공유 프레임 워크의 포함 리소스에서 제공 됩니다.
+&dagger;*blazor* 스크립트는 ASP.NET Core 공유 프레임 워크의 포함 리소스에서 제공 됩니다.
 
 ### <a name="comparison-to-server-rendered-ui"></a>서버에서 렌더링 된 UI 비교
 
@@ -133,11 +133,11 @@ Blazor 서버 앱은 네트워크 대기 시간 및 메모리 사용을 줄여 U
 
 Blazor 서버 앱은 서버에 대 한 활성 SignalR 연결이 필요 합니다. 연결이 끊어지면 앱이 서버에 다시 연결을 시도 합니다. 클라이언트의 상태가 아직 메모리에 있으면 클라이언트 세션이 상태 손실 없이 다시 시작 됩니다.
 
-클라이언트에서 연결이 끊어진 것을 감지 하면 클라이언트에서 다시 연결을 시도 하는 동안 기본 UI가 표시 됩니다. 다시 연결이 실패 하는 경우 사용자에 게 다시 시도 하는 옵션이 제공 됩니다. UI를 사용자 지정 하려면 *_Host* Razor 페이지에서 `id`로 `components-reconnect-modal` 인 요소를 정의 합니다. 클라이언트는 연결 상태에 따라 다음 CSS 클래스 중 하나를 사용 하 여이 요소를 업데이트 합니다.
+클라이언트에서 연결이 끊어진 것을 감지 하면 클라이언트에서 다시 연결을 시도 하는 동안 기본 UI가 표시 됩니다. 다시 연결이 실패 하는 경우 사용자에 게 다시 시도 하는 옵션이 제공 됩니다. UI를 사용자 지정 하려면 *_Host* Razor 페이지에서 `components-reconnect-modal` `id`로 요소를 정의 합니다. 클라이언트는 연결 상태에 따라 다음 CSS 클래스 중 하나를 사용 하 여이 요소를 업데이트 합니다.
 
-* @no__t 0 &ndash;은 연결을 끊고 클라이언트를 다시 연결 하려고 함을 나타내는 UI를 표시 합니다.
-* `components-reconnect-hide` @no__t 클라이언트에 활성 연결이 있습니다. UI를 숨깁니다.
-* `components-reconnect-failed` @no__t 네트워크 오류로 인해 다시 연결 하지 못했습니다. 다시 연결을 시도 하려면 `window.Blazor.reconnect()`을 호출 합니다.
+* 연결 끊김을 나타내는 UI를 표시 하 고 클라이언트를 다시 연결 하려고 하는 `components-reconnect-show` &ndash; 합니다.
+* 클라이언트에 활성 연결이 &ndash; `components-reconnect-hide` UI를 숨깁니다.
+* 네트워크 오류로 인해 `components-reconnect-failed` &ndash; 다시 연결 하지 못했습니다. 다시 연결을 시도 하려면 `window.Blazor.reconnect()`을 호출 합니다.
 * `components-reconnect-rejected` &ndash; 다시 연결이 거부 되었습니다. 서버에 도달 했지만 연결이 거부 되었으며 서버의 사용자 상태가 사라졌습니다. 앱을 다시 로드 하려면 `location.reload()`을 호출 합니다. 이 연결 상태는 다음과 같은 경우에 발생할 수 있습니다.
   * 회로 (서버 쪽 코드)의 작동이 중단 됩니다.
   * 서버에서 사용자의 상태를 삭제 하기에 충분 한 길이의 클라이언트 연결이 끊겼습니다. 사용자가 상호 작용 하는 구성 요소의 인스턴스가 삭제 됩니다.
@@ -208,7 +208,7 @@ Blazor 서버 앱은 서버에 대 한 활성 SignalR 연결이 필요 합니다
 }
 ```
 
-@No__t-0은 정적으로 렌더링 되므로 구성 요소는 대화형이 될 수 없습니다.
+`MyComponent` 정적으로 렌더링 되므로 구성 요소는 대화형이 될 수 없습니다.
 
 ### <a name="detect-when-the-app-is-prerendering"></a>앱이 사전 렌더링 되는 경우 검색
 
@@ -221,14 +221,14 @@ Blazor 서버 앱은 서버에 대 한 활성 SignalR 연결이 필요 합니다
 *Pages/_Host* 파일에서 SignalR client를 구성 하려면 다음을 수행 합니다.
 
 * *Blazor* 스크립트에 대 한 `<script>` 태그에 `autostart="false"` 특성을 추가 합니다.
-* @No__t-0을 호출 하 고 SignalR builder를 지정 하는 구성 개체를 전달 합니다.
+* `Blazor.start`를 호출 하 고 SignalR builder를 지정 하는 구성 개체를 전달 합니다.
 
 ```html
 <script src="_framework/blazor.server.js" autostart="false"></script>
 <script>
   Blazor.start({
     configureSignalR: function (builder) {
-      builder.configureLogging(2); // LogLevel.Information
+      builder.configureLogging("information"); // LogLevel.Information
     }
   });
 </script>

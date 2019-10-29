@@ -5,14 +5,14 @@ description: Azure Key Vault 구성 공급자를 사용 하 여 런타임에 로
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/14/2019
+ms.date: 10/27/2019
 uid: security/key-vault-configuration
-ms.openlocfilehash: c8e76068dbcf2a59a15fa75a1fc5aa0032e6acc5
-ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
+ms.openlocfilehash: acc3a77cdeb3ba73d8467d465128106e461efa7c
+ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/15/2019
-ms.locfileid: "72334204"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73034325"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>ASP.NET Core의 Azure Key Vault 구성 공급자
 
@@ -104,7 +104,7 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 
    Azure Key Vault 비밀 이름은 영숫자 문자와 대시로 제한 됩니다. 계층 값 (구성 섹션)은 `--` (대시 두 개)를 구분 기호로 사용 합니다. 일반적으로 [ASP.NET Core 구성](xref:fundamentals/configuration/index)의 하위 키에서 섹션을 구분 하는 데 사용 되는 콜론은 key vault 암호 이름에 사용할 수 없습니다. 따라서 비밀을 앱의 구성으로 로드할 때 콜론에 대해 두 개의 대시를 사용 하 고 대체 합니다.
 
-   다음 암호는 샘플 앱에서 사용 하기 위한 것입니다. 값에는 사용자 암호에서 개발 환경에 로드 된 `_dev` 접미사 값과 구분 하는 `_prod` 접미사가 포함 됩니다. @No__t_0을 이전 단계에서 만든 key vault의 이름으로 바꿉니다.
+   다음 암호는 샘플 앱에서 사용 하기 위한 것입니다. 값에는 사용자 암호에서 개발 환경에 로드 된 `_dev` 접미사 값과 구분 하는 `_prod` 접미사가 포함 됩니다. `{KEY VAULT NAME}`을 이전 단계에서 만든 key vault의 이름으로 바꿉니다.
 
    ```azure-cli
    az keyvault secret set --vault-name "{KEY VAULT NAME}" --name "SecretName" --value "secret_value_1_prod"
@@ -139,7 +139,7 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 1. **저장**을 선택합니다.
 1. 앱을 배포 합니다.
 
-@No__t_0 샘플 앱은 암호 이름과 같은 이름으로 `IConfigurationRoot`에서 구성 값을 가져옵니다.
+`Certificate` 샘플 앱은 암호 이름과 같은 이름으로 `IConfigurationRoot`에서 구성 값을 가져옵니다.
 
 * 비 계층 구조 값: `SecretName`의 값은 `config["SecretName"]`를 사용 하 여 가져옵니다.
 * 계층적 값 (섹션): `:` (콜론) 표기법 또는 `GetSection` 확장 메서드를 사용 합니다. 다음 방법 중 하나를 사용 하 여 구성 값을 가져옵니다.
@@ -186,7 +186,7 @@ Azure CLI, PowerShell 또는 Azure Portal를 사용 하 여 **앱을 다시 시�
 
 * 연결 문자열 없이 `AzureServiceTokenProvider` 클래스의 인스턴스를 만듭니다. 연결 문자열이 제공 되지 않으면 공급자는 Azure 리소스에 대 한 관리 되는 id에서 액세스 토큰을 가져오려고 시도 합니다.
 * 새 `KeyVaultClient` `AzureServiceTokenProvider` 인스턴스 토큰 콜백을 사용 하 여 만들어집니다.
-* @No__t_0 인스턴스는 모든 암호 값을 로드 하 고 키 이름에서 이중 대시 (`--`)를 콜론 (`:`)으로 바꾸는 `IKeyVaultSecretManager`의 기본 구현과 함께 사용 됩니다.
+* `KeyVaultClient` 인스턴스는 모든 암호 값을 로드 하 고 키 이름에서 이중 대시 (`--`)를 콜론 (`:`)으로 바꾸는 `IKeyVaultSecretManager`의 기본 구현과 함께 사용 됩니다.
 
 [!code-csharp[](key-vault-configuration/sample/Program.cs?name=snippet2&highlight=13-21)]
 
@@ -202,7 +202,9 @@ Azure CLI, PowerShell 또는 Azure Portal를 사용 하 여 **앱을 다시 시�
 
 앱을 실행 하면 웹 페이지에 로드 된 비밀 값이 표시 됩니다. 개발 환경에서 비밀 값은 사용자 비밀에서 제공 되기 때문에 `_dev` 접미사가 있습니다. 프로덕션 환경에서 값은 Azure Key Vault에서 제공 되기 때문에 `_prod` 접미사로 로드 됩니다.
 
-@No__t_0 오류가 표시 되 면 앱이 Azure AD에 등록 되 고 키 자격 증명 모음에 대 한 액세스 권한을 제공 했는지 확인 합니다. Azure에서 서비스를 다시 시작 했는지 확인 합니다.
+`Access denied` 오류가 표시 되 면 앱이 Azure AD에 등록 되 고 키 자격 증명 모음에 대 한 액세스 권한을 제공 했는지 확인 합니다. Azure에서 서비스를 다시 시작 했는지 확인 합니다.
+
+관리 되는 id 및 Azure DevOps 파이프라인에서 공급자를 사용 하는 방법에 대 한 자세한 내용은 [관리 서비스 id를 사용 하 여 VM에 대 한 Azure Resource Manager 서비스 연결 만들기](/azure/devops/pipelines/library/connect-to-azure#create-an-azure-resource-manager-service-connection-to-a-vm-with-a-managed-service-identity)를 참조 하세요.
 
 ## <a name="use-a-key-name-prefix"></a>키 이름 접두사 사용
 
@@ -217,11 +219,11 @@ Azure CLI, PowerShell 또는 Azure Portal를 사용 하 여 **앱을 다시 시�
 
 [!code-csharp[](key-vault-configuration/sample_snapshot/Program.cs?highlight=30-34)]
 
-@No__t_0 구현은 비밀의 버전 접두사에 반응 하 여 구성에 적절 한 비밀을 로드 합니다.
+`IKeyVaultSecretManager` 구현은 비밀의 버전 접두사에 반응 하 여 구성에 적절 한 비밀을 로드 합니다.
 
 [!code-csharp[](key-vault-configuration/sample_snapshot/Startup.cs?name=snippet1)]
 
-@No__t_0 메서드는 버전 접두사가 있는 공급자를 찾기 위해 자격 증명 모음 암호를 반복 하는 공급자 알고리즘에 의해 호출 됩니다. @No__t_0를 사용 하 여 버전 접두사를 발견 하면 알고리즘은 `GetKey` 메서드를 사용 하 여 비밀 이름의 구성 이름을 반환 합니다. 암호 이름에서 버전 접두사를 제거 하 고 앱의 구성 이름-값 쌍으로 로드 하기 위한 비밀 이름의 나머지를 반환 합니다.
+`Load` 메서드는 버전 접두사가 있는 공급자를 찾기 위해 자격 증명 모음 암호를 반복 하는 공급자 알고리즘에 의해 호출 됩니다. `Load`를 사용 하 여 버전 접두사를 발견 하면 알고리즘은 `GetKey` 메서드를 사용 하 여 비밀 이름의 구성 이름을 반환 합니다. 암호 이름에서 버전 접두사를 제거 하 고 앱의 구성 이름-값 쌍으로 로드 하기 위한 비밀 이름의 나머지를 반환 합니다.
 
 이 방법이 구현 되는 경우:
 
@@ -255,9 +257,9 @@ Azure CLI, PowerShell 또는 Azure Portal를 사용 하 여 **앱을 다시 시�
    az keyvault secret set --vault-name "{KEY VAULT NAME}" --name "5100-AppSecret" --value "5.1.0.0_secret_value_prod"
    ```
 
-1. 앱이 실행 되 면 키 자격 증명 모음 비밀이 로드 됩니다. @No__t_0에 대 한 문자열 비밀이 응용 프로그램의 프로젝트 파일 (`5.0.0.0`)에 지정 된 앱 버전과 일치 합니다.
+1. 앱이 실행 되 면 키 자격 증명 모음 비밀이 로드 됩니다. `5000-AppSecret`에 대 한 문자열 비밀이 응용 프로그램의 프로젝트 파일 (`5.0.0.0`)에 지정 된 앱 버전과 일치 합니다.
 
-1. @No__t_0 (대시 포함) 버전이 키 이름에서 제거 됩니다. 앱 전체에서 키 `AppSecret` 사용 하 여 구성을 읽으면 비밀 값이 로드 됩니다.
+1. `5000` (대시 포함) 버전이 키 이름에서 제거 됩니다. 앱 전체에서 키 `AppSecret` 사용 하 여 구성을 읽으면 비밀 값이 로드 됩니다.
 
 1. 응용 프로그램의 버전이 프로젝트 파일에서 `5.1.0.0` 변경 되 고 앱이 다시 실행 되는 경우 반환 되는 암호 값은 개발 환경에서 `5.1.0.0_secret_value_dev` 되 고 프로덕션 환경에서 `5.1.0.0_secret_value_prod` 됩니다.
 

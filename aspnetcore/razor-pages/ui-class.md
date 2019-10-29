@@ -1,18 +1,17 @@
 ---
 title: ASP.NET Core를 사용하여 클래스 라이브러리에서 재사용 가능한 Razor UI
 author: Rick-Anderson
-description: 부분 뷰를 사용 하 여 ASP.NET Core에서 클래스 라이브러리에 다시 사용할 수 있는 Razor UI를 만드는 방법에 설명 합니다.
-monikerRange: '>= aspnetcore-2.1'
+description: ASP.NET Core의 클래스 라이브러리에서 부분 뷰를 사용 하 여 재사용 가능한 Razor UI를 만드는 방법을 설명 합니다.
 ms.author: riande
-ms.date: 10/08/2019
+ms.date: 10/26/2019
 ms.custom: mvc, seodec18
 uid: razor-pages/ui-class
-ms.openlocfilehash: dcd24f7dafd198f88cdf84d1ab67c84f45428a95
-ms.sourcegitcommit: d81912782a8b0bd164f30a516ad80f8defb5d020
+ms.openlocfilehash: ff12eea5406c4f5392a466728741000e3dd16fc1
+ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72179329"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73034228"
 ---
 # <a name="create-reusable-ui-using-the-razor-class-library-project-in-aspnet-core"></a>ASP.NET Core에서 Razor 클래스 라이브러리 프로젝트를 사용 하 여 다시 사용할 수 있는 UI 만들기
 
@@ -28,23 +27,22 @@ Razor 뷰, 페이지, 컨트롤러, 페이지 모델, [razor 구성 요소](xref
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Visual Studio **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.
-* **새 ASP.NET Core 웹 응용 프로그램**을 선택합니다.
-* 라이브러리 이름 지정(예: "RazorClassLib") > **확인**입니다. 생성된 보기 라이브러리와 파일 이름 충돌을 방지하려면 라이브러리 이름이 `.Views`로 끝나지 않도록 합니다.
-* **ASP.NET Core 3.0** 이상을 선택 했는지 확인 합니다.
-* **Razor 클래스 라이브러리** > **OK**를 선택 합니다.
+* Visual Studio에서 새 **프로젝트 만들기를**선택 합니다.
+* **Razor 클래스 라이브러리** > **다음**을 선택 합니다.
+* 라이브러리 이름 (예: "RazorClassLib")을 > 하 여 **만듭니다**. 생성된 보기 라이브러리와 파일 이름 충돌을 방지하려면 라이브러리 이름이 `.Views`로 끝나지 않도록 합니다.
+* 보기를 지원 해야 하는 경우 **지원 페이지 및 보기** 를 선택 합니다. 기본적으로 Razor Pages만 지원 됩니다. **만들기**를 선택합니다.
 
-RCL(Razor 클래스 라이브러리) 템플릿은 기본적으로 Razor 구성 요소 개발로 설정됩니다. Visual Studio의 템플릿 옵션은 페이지 및 뷰에 대 한 템플릿을 지원 합니다.
+RCL(Razor 클래스 라이브러리) 템플릿은 기본적으로 Razor 구성 요소 개발로 설정됩니다. **지원 페이지 및 보기** 옵션은 페이지 및 보기를 지원 합니다.
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-명령줄에서 `dotnet new razorclasslib`을 실행합니다. 예를 들어 다음과 같은 가치를 제공해야 합니다.
+명령줄에서 `dotnet new razorclasslib`을 실행합니다. 예를 들면,
 
 ```dotnetcli
 dotnet new razorclasslib -o RazorUIClassLib
 ```
 
-RCL(Razor 클래스 라이브러리) 템플릿은 기본적으로 Razor 구성 요소 개발로 설정됩니다. @No__t-0 옵션 (`dotnet new razorclasslib --support-pages-and-views`)을 전달 하 여 페이지 및 보기에 대 한 지원을 제공 합니다.
+RCL(Razor 클래스 라이브러리) 템플릿은 기본적으로 Razor 구성 요소 개발로 설정됩니다. `--support-pages-and-views` 옵션 (`dotnet new razorclasslib --support-pages-and-views`)을 전달 하 여 페이지 및 보기에 대 한 지원을 제공 합니다.
 
 자세한 내용은 [dotnet new](/dotnet/core/tools/dotnet-new)를 참조합니다. 생성된 보기 라이브러리와 파일 이름 충돌을 방지하려면 라이브러리 이름이 `.Views`로 끝나지 않도록 합니다.
 
@@ -52,7 +50,7 @@ RCL(Razor 클래스 라이브러리) 템플릿은 기본적으로 Razor 구성 �
 
 RCL에 Razor 파일을 추가합니다.
 
-ASP.NET Core 템플릿은 가정 RCL 콘텐츠를 *영역* 폴더입니다. @No__t-2가 아닌 `~/Pages`에서 콘텐츠를 노출 하는 RCL을 만들려면 [Rcl 페이지 레이아웃](#rcl-pages-layout) 을 참조 하세요.
+ASP.NET Core 템플릿은 RCL 콘텐츠가 *영역* 폴더에 있다고 가정 합니다. `~/Areas/Pages`대신 `~/Pages`에서 콘텐츠를 노출 하는 RCL을 만들려면 [Rcl 페이지 레이아웃](#rcl-pages-layout) 을 참조 하세요.
 
 ## <a name="reference-rcl-content"></a>RCL 콘텐츠 참조
 
@@ -71,12 +69,12 @@ RCL은 다음에서 참조할 수 있습니다.
 
 ### <a name="rcl-pages-layout"></a>RCL 페이지 레이아웃
 
-RCL 콘텐츠 웹 앱의 일부인 것 처럼 참조 *페이지* 폴더를 다음 파일 구조로 RCL 프로젝트를 만듭니다.
+RCL 콘텐츠를 웹 앱의 *Pages* 폴더에 포함 된 것 처럼 참조 하려면 다음 파일 구조를 사용 하 여 rcl 프로젝트를 만듭니다.
 
 * *RazorUIClassLib/페이지*
-* *RazorUIClassLib/페이지/공유*
+* *RazorUIClassLib/Pages/Shared*
 
-가정 *RazorUIClassLib/페이지/Shared* 부분 파일이 두: *_Header.cshtml* 하 고 *_Footer.cshtml*합니다. 합니다 `<partial>` 태그를 추가할 수 없습니다 *_Layout.cshtml* 파일:
+*RazorUIClassLib/Pages/Shared* 에 두 개의 부분 파일이 포함 되어 있다고 가정 합니다. *_Header* 및 *_header. cshtml* `<partial>` 태그를 Layout. cshtml 파일에 추가할 수 있습니다 *(_s)* .
 
 ```cshtml
 <body>
@@ -112,26 +110,26 @@ RCL에 TypeScript 파일을 포함 하려면 다음을 수행 합니다.
 
 1. TypeScript *폴더 외부에 TypeScript* 파일 (.ts *)을 저장 합니다.* 예를 들어 *클라이언트* 폴더에 파일을 저장 합니다.
 
-1. *Wwwroot* 폴더에 대 한 TypeScript 빌드 출력을 구성 합니다. 프로젝트 파일에서-1 @no__t 내의 `TypescriptOutDir` 속성을 설정 합니다.
+1. *Wwwroot* 폴더에 대 한 TypeScript 빌드 출력을 구성 합니다. 프로젝트 파일에서 `PropertyGroup` 내부에 `TypescriptOutDir` 속성을 설정 합니다.
 
    ```xml
    <TypescriptOutDir>wwwroot</TypescriptOutDir>
    ```
 
-1. 프로젝트 파일에서 `PropertyGroup`의 내부에 다음 대상을 추가 하 여 TypeScript 대상을 `ResolveCurrentProjectStaticWebAssets` 대상의 종속성으로 포함 합니다.
+1. 프로젝트 파일의 `PropertyGroup` 내부에 다음 대상을 추가 하 여 TypeScript 대상을 `ResolveCurrentProjectStaticWebAssets` 대상의 종속성으로 포함 합니다.
 
    ```xml
-  <ResolveCurrentProjectStaticWebAssetsInputsDependsOn>
-    CompileTypeScript;
-    $(ResolveCurrentProjectStaticWebAssetsInputs)
-  </ResolveCurrentProjectStaticWebAssetsInputsDependsOn>
+   <ResolveCurrentProjectStaticWebAssetsInputsDependsOn>
+     CompileTypeScript;
+     $(ResolveCurrentProjectStaticWebAssetsInputs)
+   </ResolveCurrentProjectStaticWebAssetsInputsDependsOn>
    ```
 
 ### <a name="consume-content-from-a-referenced-rcl"></a>참조 된 RCL에서 콘텐츠 사용
 
-RCL의 *wwwroot* 폴더에 포함 된 파일은-1 @no__t 접두사에서 사용 하는 앱에 노출 됩니다. 예를 들어, Razor. *Class .lib* 라는 라이브러리는 `_content/Razor.Class.Lib/`의 정적 내용에 대 한 경로를 생성 합니다.
+RCL의 *wwwroot* 폴더에 포함 된 파일은 `_content/{LIBRARY NAME}/`접두사에서 사용 하는 앱에 노출 됩니다. 예를 들어, *Razor.* t c m. c a t. c a t. c a t. `_content/Razor.Class.Lib/`c a t.
 
-소비 앱은 `<script>`, `<style>`, `<img>` 및 기타 HTML 태그를 사용 하 여 라이브러리에서 제공 하는 정적 자산을 참조 합니다. 사용 중인 앱은 `Startup.Configure`에서 [정적 파일을 지원](xref:fundamentals/static-files) 해야 합니다.
+소비 앱은 `<script>`, `<style>`, `<img>`및 기타 HTML 태그를 사용 하 여 라이브러리에서 제공 하는 정적 자산을 참조 합니다. 소비 하는 앱은 `Startup.Configure`에서 [정적 파일 지원을](xref:fundamentals/static-files) 사용 하도록 설정 해야 합니다.
 
 ```csharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -144,7 +142,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 }
 ```
 
-빌드 출력에서 사용 하는 앱을 실행 하는 경우 (`dotnet run`) 정적 웹 자산은 개발 환경에서 기본적으로 사용 됩니다. 빌드 출력에서 실행 될 때 다른 환경에서 자산을 지원 하려면 *Program.cs*의 호스트 작성기에서 `UseStaticWebAssets`을 호출 합니다.
+빌드 출력 (`dotnet run`)에서 사용 하는 앱을 실행 하는 경우 개발 환경에서 정적 웹 자산이 기본적으로 사용 됩니다. 빌드 출력에서 실행 될 때 다른 환경에서 자산을 지원 하려면 *Program.cs*의 호스트 작성기에서 `UseStaticWebAssets`를 호출 합니다.
 
 ```csharp
 using Microsoft.AspNetCore.Hosting;
@@ -167,7 +165,7 @@ public class Program
 }
 ```
 
-게시 된 출력 (`dotnet publish`)에서 앱을 실행 하는 경우에는 `UseStaticWebAssets`을 호출할 필요가 없습니다.
+게시 된 출력 (`dotnet publish`)에서 앱을 실행 하는 경우 `UseStaticWebAssets`를 호출할 필요가 없습니다.
 
 ### <a name="multi-project-development-flow"></a>다중 프로젝트 개발 흐름
 
@@ -180,7 +178,7 @@ RCL을 빌드할 때 정적 웹 자산 위치를 설명 하는 매니페스트�
 
 ### <a name="publish"></a>게시
 
-앱이 게시 되 면 모든 참조 된 프로젝트 및 패키지의 동반 자산이 `_content/{LIBRARY NAME}/` 아래에 있는 게시 된 앱의 *wwwroot* 폴더로 복사 됩니다.
+앱이 게시 되 면 모든 참조 된 프로젝트 및 패키지의 동반 자산이 `_content/{LIBRARY NAME}/`아래 게시 된 앱의 *wwwroot* 폴더로 복사 됩니다.
 
 ::: moniker-end
 
@@ -195,10 +193,10 @@ Razor 뷰, 페이지, 컨트롤러, 페이지 모델, [razor 구성 요소](xref
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Visual Studio **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.
-* **새 ASP.NET Core 웹 응용 프로그램**을 선택합니다.
+* **새 ASP.NET Core 웹 애플리케이션**을 선택합니다.
 * 라이브러리 이름 지정(예: "RazorClassLib") > **확인**입니다. 생성된 보기 라이브러리와 파일 이름 충돌을 방지하려면 라이브러리 이름이 `.Views`로 끝나지 않도록 합니다.
 * **ASP.NET Core 2.1** 이상이 선택됐는지 확인합니다.
-* **Razor 클래스 라이브러리** > **OK**를 선택 합니다.
+* **Razor 클래스 라이브러리** > **확인을**선택 합니다.
 
 RCL에는 다음과 같은 프로젝트 파일이 있습니다.
 
@@ -206,7 +204,7 @@ RCL에는 다음과 같은 프로젝트 파일이 있습니다.
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-명령줄에서 `dotnet new razorclasslib`을 실행합니다. 예를 들어 다음과 같습니다.
+명령줄에서 `dotnet new razorclasslib`을 실행합니다. 예를 들면,
 
 ```dotnetcli
 dotnet new razorclasslib -o RazorUIClassLib
@@ -218,7 +216,7 @@ dotnet new razorclasslib -o RazorUIClassLib
 
 RCL에 Razor 파일을 추가합니다.
 
-ASP.NET Core 템플릿은 가정 RCL 콘텐츠를 *영역* 폴더입니다. @No__t-2가 아닌 `~/Pages`에서 콘텐츠를 노출 하는 RCL을 만들려면 [Rcl 페이지 레이아웃](#rcl-pages-layout) 을 참조 하세요.
+ASP.NET Core 템플릿은 RCL 콘텐츠가 *영역* 폴더에 있다고 가정 합니다. `~/Areas/Pages`대신 `~/Pages`에서 콘텐츠를 노출 하는 RCL을 만들려면 [Rcl 페이지 레이아웃](#rcl-pages-layout) 을 참조 하세요.
 
 ## <a name="reference-rcl-content"></a>RCL 콘텐츠 참조
 
@@ -227,7 +225,7 @@ RCL은 다음에서 참조할 수 있습니다.
 * NuGet 패키지. [NuGet 패키지 만들기](/nuget/create-packages/creating-a-package), [dotnet 추가 패키지](/dotnet/core/tools/dotnet-add-package) 및 [NuGet 패키지 만들기 및 게시](/nuget/quickstart/create-and-publish-a-package-using-visual-studio)를 참조합니다.
 * *{ProjectName}.csproj*. [dotnet-add reference](/dotnet/core/tools/dotnet-add-reference)를 참조합니다.
 
-## <a name="walkthrough-create-an-rcl-project-and-use-from-a-razor-pages-project"></a>연습: RCL 프로젝트를 만들고 Razor Pages 프로젝트에서 사용
+## <a name="walkthrough-create-an-rcl-project-and-use-from-a-razor-pages-project"></a>연습: RCL 프로젝트 만들기 및 Razor Pages 프로젝트에서 사용
 
 [전체 프로젝트](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples)를 다운로드하여 만들지 않고 테스트할 수 있습니다. 샘플 다운로드에는 프로젝트를 쉽게 테스트하게 하는 링크와 추가 코드가 포함됩니다. 샘플 다운로드 대 단계별 지침에 대한 주석을 사용하여 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/6098)에서 사용자 의견을 그대로 둘 수 있습니다.
 
@@ -266,10 +264,10 @@ dotnet run
 RCL 프로젝트를 만듭니다.
 
 * Visual Studio **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.
-* **새 ASP.NET Core 웹 응용 프로그램**을 선택합니다.
-* 앱 이름을 **RazorUIClassLib** > **OK**로 합니다.
+* **새 ASP.NET Core 웹 애플리케이션**을 선택합니다.
+* 앱 이름을 **RazorUIClassLib** > **확인**합니다.
 * **ASP.NET Core 2.1** 이상이 선택됐는지 확인합니다.
-* **Razor 클래스 라이브러리** > **OK**를 선택 합니다.
+* **Razor 클래스 라이브러리** > **확인을**선택 합니다.
 * *RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml*이라는 Razor 부분 보기 파일을 추가합니다.
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
@@ -284,15 +282,15 @@ dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
 
 이전 명령은:
 
-* @No__t-0 RCL을 만듭니다.
+* `RazorUIClassLib` RCL을 만듭니다.
 * Razor _Message 페이지를 만들어 RCL에 추가합니다. `-np` 매개 변수는 `PageModel`가 없는 페이지를 만듭니다.
-* 만듭니다는 [_ViewStart.cshtml](xref:mvc/views/layout#running-code-before-each-view) 파일과 RCL에 추가 합니다.
+* [_Viewicicica](xref:mvc/views/layout#running-code-before-each-view) 파일을 만들고 rcl에 추가 합니다.
 
-합니다 *_ViewStart.cshtml* 파일 (다음 섹션에 추가 됩니다)이 표시 되는 Razor 페이지 프로젝트의 레이아웃을 사용 해야 합니다.
+_Viewicicic\\sticica는 Razor Pages 프로젝트의 레이아웃 (다음 섹션에 추가 됨)을 사용 해야 합니다.
 
 ---
 
-### <a name="add-razor-files-and-folders-to-the-project"></a>Razor 파일 및 폴더를 프로젝트에 추가
+### <a name="add-razor-files-and-folders-to-the-project"></a>프로젝트에 Razor 파일 및 폴더 추가
 
 * *RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml*에서 태그를 다음 코드로 바꿉니다.
 
@@ -302,13 +300,13 @@ dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
 
   [!code-cshtml[](ui-class/samples/cli/RazorUIClassLib/Areas/MyFeature/Pages/Page1.cshtml)]
 
-  `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`은 부분 보기(`<partial name="_Message" />`)를 사용해야 합니다. `@addTagHelper` 지시문을 포함하지 않고 *_ViewImports.cshtml* 파일을 추가할 수 있습니다. 예를 들어 다음과 같습니다.
+  `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`은 부분 보기(`<partial name="_Message" />`)를 사용해야 합니다. `@addTagHelper` 지시문을 포함하지 않고 *_ViewImports.cshtml* 파일을 추가할 수 있습니다. 예를 들면,
 
   ```dotnetcli
   dotnet new viewimports -o RazorUIClassLib/Areas/MyFeature/Pages
   ```
 
-  에 대 한 자세한 *_ViewImports.cshtml*를 참조 하세요 [공유 된 지시문 가져오기](xref:mvc/views/layout#importing-shared-directives)
+  _ViewImports에 대 한 자세한 내용은 [공유 지시문 가져오기](xref:mvc/views/layout#importing-shared-directives) 를 참조 하세요 *.*
 
 * 컴파일러 오류가 없는지 확인하려면 클래스 라이브러리를 빌드하십시오.
 
@@ -324,8 +322,8 @@ dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
 
 Razor 페이지 웹앱을 만듭니다.
 
-* **솔루션 탐색기**에서 솔루션을 마우스 오른쪽 단추로 클릭 하 > @no__t 2**새 프로젝트**를 **추가** 합니다.
-* **새 ASP.NET Core 웹 응용 프로그램**을 선택합니다.
+* **솔루션 탐색기**에서 솔루션을 마우스 오른쪽 단추로 클릭 하 > >**새 프로젝트**를 **추가** 합니다.
+* **새 ASP.NET Core 웹 애플리케이션**을 선택합니다.
 * **WebApp1** 앱 이름을 지정합니다.
 * **ASP.NET Core 2.1** 이상이 선택됐는지 확인합니다.
 * **웹 응용 프로그램** > **확인을**선택 합니다.
@@ -333,7 +331,7 @@ Razor 페이지 웹앱을 만듭니다.
 * **솔루션 탐색기**에서 **WebApp1**를 마우스 오른쪽 단추로 클릭하고 **스타트업 프로젝트로 설정**을 선택합니다.
 * **솔루션 탐색기**에서 **WebApp1** 을 마우스 오른쪽 단추로 클릭 하 고 **빌드 종속성** > **프로젝트 종속성**을 선택 합니다.
 * **RazorUIClassLib**를 **WebApp1**의 종속성으로 확인합니다.
-* **솔루션 탐색기**에서 **WebApp1** 을 마우스 오른쪽 단추로 클릭 하 고 **추가** > **참조**를 선택 합니다.
+* **솔루션 탐색기**에서 **WebApp1** 을 마우스 오른쪽 단추로 클릭 하 고 > **참조** **추가** 를 선택 합니다.
 * **참조 관리자** 대화 상자에서 **RazorUIClassLib** > **OK**를 선택 합니다.
 
 앱을 실행합니다.
@@ -361,7 +359,7 @@ dotnet run
 
 ### <a name="test-webapp1"></a>WebApp1 테스트
 
-@No__t-0으로 이동 하 여 Razor UI 클래스 라이브러리가 사용 중인지 확인 합니다.
+`/MyFeature/Page1`로 이동 하 여 Razor UI 클래스 라이브러리가 사용 중인지 확인 합니다.
 
 ## <a name="override-views-partial-views-and-pages"></a>보기, 부분 보기 및 페이지 재정의
 
@@ -373,12 +371,12 @@ dotnet run
 
 ### <a name="rcl-pages-layout"></a>RCL 페이지 레이아웃
 
-RCL 콘텐츠 웹 앱의 일부인 것 처럼 참조 *페이지* 폴더를 다음 파일 구조로 RCL 프로젝트를 만듭니다.
+RCL 콘텐츠를 웹 앱의 *Pages* 폴더에 포함 된 것 처럼 참조 하려면 다음 파일 구조를 사용 하 여 rcl 프로젝트를 만듭니다.
 
 * *RazorUIClassLib/페이지*
-* *RazorUIClassLib/페이지/공유*
+* *RazorUIClassLib/Pages/Shared*
 
-가정 *RazorUIClassLib/페이지/Shared* 부분 파일이 두: *_Header.cshtml* 하 고 *_Footer.cshtml*합니다. 합니다 `<partial>` 태그를 추가할 수 없습니다 *_Layout.cshtml* 파일:
+*RazorUIClassLib/Pages/Shared* 에 두 개의 부분 파일이 포함 되어 있다고 가정 합니다. *_Header* 및 *_header. cshtml* `<partial>` 태그를 Layout. cshtml 파일에 추가할 수 있습니다 *(_s)* .
 
 ```cshtml
 <body>
