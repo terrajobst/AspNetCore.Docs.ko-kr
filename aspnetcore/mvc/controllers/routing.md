@@ -585,7 +585,7 @@ result: /UrlGeneration/Destination
 
 경로 템플릿에 있는 각 경로 매개 변수의 값은 이름을 값 및 앰비언트 값과 매칭한 값으로 바뀝니다. 값이 없는 경로 매개 변수는 기본값이 있는 경우 기본값을 사용할 수 있고, 값이 선택 사항인 경우 건너뛰어도 됩니다(이 예제의 `id`처럼). 필요한 경로 매개 변수에 해당 값이 없는 경우 URL 생성에 실패합니다. 경로에 대한 URL 생성이 실패하면 모든 경로를 시도하거나 일치 항목을 찾을 때까지 그 다음 경로를 시도합니다.
 
-위의 `Url.Action` 예에서는 규칙 기반 라우팅으로 가정했습니다. 개념은 다르지만 URL 생성 원리는 특성 라우팅과 비슷합니다. 규칙 기반 라우팅에서 경로 값은 템플릿을 확장하는 데 사용되고, `controller` 및 `action`의 경로 값은 일반적으로 해당 템플릿에 표시됩니다. 라우팅에서 매핑된 URL이 *규칙*을 따르기 때문입니다. 특성 라우팅에서는 `controller` 및 `action`의 경로 값이 템플릿에 표시되지 않는 대신, 사용할 템플릿을 조회하는 데 사용됩니다.
+위의 `Url.Action`예제는 규칙 기반 라우팅을 가정합니다. 개념은 다르지만 URL 생성 원리는 특성 라우팅과 비슷하게 동작합니다. 규칙 기반 라우팅에서 경로 값은 템플릿을 확장하는 데 사용되고, 일반적으로`controller` 및 `action`의 경로 값은 해당 템플릿에 표시됩니다. 라우팅에서 매핑된 URL이 *규칙*을 따르기 때문입니다. 특성 라우팅에서는 `controller` 및 `action`의 경로 값이 템플릿에 표시되지 않는 대신, 사용할 템플릿을 조회하는 데 사용됩니다.
 
 이 예제는 특성 라우팅을 사용합니다.
 
@@ -607,12 +607,12 @@ MVC는 모든 특성 라우팅 작업의 조회 테이블을 작성하고 `contr
 > [!WARNING]
 > URL 경로는 계층적입니다. 위의 예에서 `{ c = Cheryl }` 값을 추가하면 두 `{ c = Carol, d = David }` 값이 모두 무시됩니다. 이 경우 `d`의 값이 없기 때문에 URL 생성이 실패합니다. 원하는 `c` 및 `d` 값을 지정해야 합니다.  기본 경로(`{controller}/{action}/{id?}`)를 사용해도 이 문제가 발생할 가능성은 있지만, `Url.Action`이 항상 `controller` 및 `action` 값을 명시적으로 지정하기 때문에 실제로 이 동작이 발생하는 경우는 극히 드뭅니다.
 
-또한 `Url.Action` 오버로드가 길면 `controller` 및 `action`이 아닌 경로 매개 변수의 값을 제공하기 위해 추가 *경로 값* 개체가 사용됩니다. `Url.Action("Buy", "Products", new { id = 17 })`처럼 `id`와 함께 사용되는 것을 흔히 볼 수 있습니다. 관례상 *경로 값* 개체는 일반적으로 무명 형식의 개체지만, `IDictionary<>` 또는 *오래된 일반 .NET 개체*일 수도 있습니다. 경로 매개 변수와 일치하지 않는 추가 경로 값은 쿼리 문자열에 포함됩니다.
+`Url.Action` 의 긴 오버로드에서는 `controller` 및 `action` 이외의 경로 매개 변수의 값을 제공하기 위한 추가 *경로 값* 개체가 사용됩니다. `Url.Action("Buy", "Products", new { id = 17 })`처럼 `id`와 함께 사용되는 것을 흔히 볼 수 있습니다. 관례상 *경로 값* 개체는 대부분 무명 형식의 개체지만, `IDictionary<>` 또는 *오래된 일반 .NET 개체*일 수도 있습니다. 경로 매개 변수와 일치하지 않는 추가 경로 값들은 쿼리 문자열에 포함됩니다.
 
 [!code-csharp[](routing/sample/main/Controllers/TestController.cs)]
 
 > [!TIP]
-> 절대 URL을 만들려면 `protocol`: `Url.Action("Buy", "Products", new { id = 17 }, protocol: Request.Scheme)`를 수락하는 오버로드를 사용합니다.
+> 절대 URL을 만들려면 `protocol`: `Url.Action("Buy", "Products", new { id = 17 }, protocol: Request.Scheme)`을 받는 오버로드를 사용합니다.
 
 <a name="routing-gen-urls-route-ref-label"></a>
 
@@ -669,9 +669,9 @@ app.UseMvc(routes =>
 });
 ```
 
-이러한 경로 정의를 사용하면 `Url.Action("Index", "Home")`에서 `default` 경로를 사용하여 URL 경로 `/`를 생성합니다. 그런데 그 이유는 무엇일까요? `{ controller = Home, action = Index }` 경로 값이면 `blog`를 사용하여 URL을 생성하기에 충분하고, 그 결과는 `/blog?action=Index&controller=Home`가 될 것이라 추측할 수 있습니다.
+이러한 경로 정의를 사용하면 `Url.Action("Index", "Home")`은 `default` 경로를 사용하여 URL 경로 `/`를 생성합니다. 그런데 그 이유는 무엇일까요? `{ controller = Home, action = Index }` 경로 값이면 `blog`를 사용하여 URL을 생성하기에 충분하며, 그 결과는 `/blog?action=Index&controller=Home`가 될 것이라고 추측할 수도 있습니다.
 
-전용 규칙 기반 경로는 URL 생성과 관련하여 경로의 "지나친 욕심"을 방지하는 해당 경로 매개 변수가 없는 기본 값의 특별한 동작을 사용합니다. 이 예에서 기본값은 `{ controller = Blog, action = Article }`이고, `controller` 및 `action`이 경로 매개 변수로 표시되지 않습니다. 라우팅에서 URL 생성을 수행할 때 입력한 값이 기본값과 일치해야 합니다. `{ controller = Home, action = Index }` 값이 `{ controller = Blog, action = Article }`과 일치하지 않기 때문에 `blog`를 사용한 URL 생성은 실패합니다. 그 후 라우팅이 `default`로 대체되고, 이것은 성공합니다.
+전용 규칙 기반 경로는 URL 생성과 관련하여 경로의 "지나친 욕심"을 방지하는 해당 경로 매개 변수가 없는 기본 값의 특별한 동작을 사용합니다. 이 예제에서 기본값은 `{ controller = Blog, action = Article }`이고, `controller` 및 `action`이 경로 매개 변수로 표시되지 않습니다. 라우팅이 URL 생성을 수행할 때 입력한 값이 기본값과 일치해야 합니다. `{ controller = Home, action = Index }` 값이 `{ controller = Blog, action = Article }`과 일치하지 않기 때문에 `blog`를 사용한 URL 생성은 실패합니다. 그 후 라우팅이 `default`로 대체되고, 이것은 성공합니다.
 
 <a name="routing-areas-ref-label"></a>
 
@@ -705,7 +705,7 @@ app.UseMvc(routes =>
 [!code-csharp[](routing/sample/AreasRouting/Controllers/UsersController.cs)]
 
 > [!NOTE]
-> 각 컨트롤러의 네임스페이스는 완전성을 위해 여기에 사용되었습니다. 네임스페이스가 없으면 컨트롤러에서 이름 충돌이 발생하고 컴파일러 오류가 생성됩니다. 클래스 네임스페이스는 MVC의 라우팅에 영향을 주지 않습니다.
+> 각 컨트롤러의 네임스페이스는 완전성을 위해서 사용되었습니다. 네임스페이스가 없으면 컨트롤러에서 이름 충돌이 발생하고 컴파일러 오류가 생성됩니다. 클래스 네임스페이스는 MVC의 라우팅에 영향을 주지 않습니다.
 
 처음 두 컨트롤러는 영역의 구성원이며, `area` 경로 값으로 해당 영역 이름을 제공하는 경우에만 매칭됩니다. 세 번째 컨트롤러는 어떤 영역의 구성원도 아니며, 라우팅에서 `area`에 대한 값을 제공하지 않을 때에만 매칭됩니다.
 
@@ -739,7 +739,7 @@ public class ProductsController : Controller
 
 기본 규칙 기반 경로를 사용한다고 가정할 때, URL 경로 `/Products/Edit`는 여기에 보이는 두 작업 **모두**와 매칭하는 `{ controller = Products, action = Edit }` 값을 생성합니다. `IActionConstraint` 용어에서는 두 작업이 경로 데이터와 매칭되므로 두 작업이 후보로 간주된다고 말할 수 있습니다.
 
-`HttpGetAttribute`가 실행되면 *Edit()* 는 *GET*의 일치 항목이지만 다른 HTTP 동사의 일치 항목은 아닙니다. `Edit(...)` 작업은 정의된 제약 조건이 없으므로 모든 HTTP 동사와 매칭됩니다. 따라서 `POST`를 가정하면 `Edit(...)`만 일치합니다. 하지만 `GET`의 경우 두 작업이 여전히 매칭될 수 있지만, `IActionConstraint`가 포함된 작업은 포함되지 않은 작업보다 항상 *더 좋은* 것으로 간주됩니다. 따라서 `Edit()`에는 `[HttpGet]`가 있으므로 보다 구체적인 것으로 간주되며, 두 작업이 매칭될 수 있는 경우에 선택됩니다.
+`HttpGetAttribute`가 실행되면 *Edit()* 는 *GET*에 대해서만 일치하고 다른 HTTP 동사에 대해서는 일치하지 않습니다. `Edit(...)` 작업은 정의된 제약 조건이 없으므로 모든 HTTP 동사와 매칭됩니다. 따라서 `POST`를 고려해본다면 `Edit(...)`만 일치합니다. 하지만 `GET`의 경우에는 여전히 두 작업 모두 매칭될 수 있습니다. 그러나`IActionConstraint`가 적용된 작업이 적용되지 않은 작업보다 항상 *더 적합한* 것으로 간주됩니다. 따라서 `Edit()`에는 `[HttpGet]`가 있으므로 보다 구체적인 것으로 간주되며, 두 작업이 모두 매칭될 수 있는 경우에도 이 작업이 선택됩니다.
 
 개념적으로 `IActionConstraint`는 *오버로딩*의 한 가지 형태이지만, 같은 이름의 메서드를 오버로딩하는 대신, 동일한 URL을 매칭하는 작업 간에 오버로딩합니다. 특성 라우팅에서도 `IActionConstraint`를 사용하며, 다른 두 컨트롤러의 작업이 모두 후보로 간주될 수 있습니다.
 

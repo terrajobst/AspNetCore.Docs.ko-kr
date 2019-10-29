@@ -28,9 +28,9 @@ ms.locfileid: "72590022"
 > * 모델 클래스와 데이터베이스 컨텍스트를 추가합니다.
 > * CRUD 메서드로 컨트롤러를 스캐폴드합니다.
 > * 라우팅, URL 경로 및 반환 값을 구성합니다.
-> * Postman을 사용하여 웹 API 호출
+> * Postman을 사용하여 웹 API를 호출합니다.
 
-작업을 완료하면 웹 API는 데이터베이스에 저장된 “할 일” 항목을 관리할 수 있게 됩니다.
+과정을 마치면 웹 API를 통해 데이터베이스에 저장된 “할 일” 항목을 관리할 수 있습니다.
 
 ## <a name="overview"></a>개요
 
@@ -58,7 +58,7 @@ ms.locfileid: "72590022"
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-3.0.md)]
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-3.0.md)]
 
@@ -91,12 +91,12 @@ ms.locfileid: "72590022"
 
 * 프로젝트에 필수 자산을 추가하려는지 묻는 대화 상자가 나타나면 **예**를 선택합니다.
 
-  이전 명령은:
+  이전 명령은
 
   * 새 웹 API 프로젝트를 만들고 Visual Studio Code에서 엽니다.
   * 다음 섹션에서 필요한 NuGet 패키지를 추가합니다.
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * **파일** > **새 솔루션**을 선택합니다.
 
@@ -137,7 +137,7 @@ IIS Express 인증서를 신뢰해야 하는지 묻는 대화 상자가 표시�
 
 Ctrl+F5 키를 눌러 앱을 실행합니다. 브라우저에서 다음 URL [https://localhost:5001/WeatherForecast](https://localhost:5001/WeatherForecast)로 이동합니다.
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 **실행** > **디버깅 시작**을 선택하여 앱을 시작합니다. Mac용 Visual Studio가 브라우저를 시작하고 `https://localhost:<port>`로 이동합니다. 여기서 `<port>`는 임의로 선택된 포트 번호입니다. HTTP 404(찾을 수 없음) 오류가 반환됩니다. `/WeatherForecast`를 URL에 추가합니다(URL을 `https://localhost:<port>/WeatherForecast`로 변경).
 
@@ -198,7 +198,7 @@ Ctrl+F5 키를 눌러 앱을 실행합니다. 브라우저에서 다음 URL [htt
 
 * 다음 코드를 사용하여 *Models* 폴더에 `TodoItem` 클래스를 추가합니다.
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * 프로젝트를 마우스 오른쪽 단추로 클릭합니다. **추가** > **새 폴더**를 선택합니다. 폴더 이름을 *Models*로 지정합니다.
 
@@ -238,7 +238,7 @@ Ctrl+F5 키를 눌러 앱을 실행합니다. 브라우저에서 다음 URL [htt
 
 * *Models* 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **클래스**를 선택합니다. 클래스 이름을 *TodoContext*로 지정하고 **추가**를 클릭합니다.
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 * `TodoContext` 클래스를 *Models* 폴더에 추가합니다.
 
@@ -256,7 +256,7 @@ ASP.NET Core에서는 DB 컨텍스트와 같은 서비스를 [DI(종속성 주�
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Startup.cs?highlight=7-8,23-24&name=snippet_all)]
 
-위의 코드는:
+위의 코드는
 
 * 사용되지 않는 `using` 선언을 제거합니다.
 * DI 컨테이너에 데이터베이스 컨텍스트를 추가합니다.
@@ -275,7 +275,7 @@ ASP.NET Core에서는 DB 컨텍스트와 같은 서비스를 [DI(종속성 주�
   * **데이터 컨텍스트 클래스**에서 **TodoContext (TodoApi.Models)** 를 선택합니다.
   * **추가**를 선택합니다.
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 다음 명령을 실행합니다.
 
@@ -286,7 +286,7 @@ dotnet tool install --global dotnet-aspnet-codegenerator
 dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
 ```
 
-이전 명령은:
+이전 명령은
 
 * 스캐폴딩에 필요한 NuGet 패키지를 추가합니다.
 * 스캐폴딩 엔진(`dotnet-aspnet-codegenerator`)을 설치합니다
@@ -300,7 +300,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 * [[ApiController]](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) 특성을 사용하여 클래스를 데코레이팅합니다. 이 특성은 컨트롤러가 웹 API 요청에 응답함을 나타냅니다. 특성을 사용하도록 설정하는 특정 동작에 대한 정보는 <xref:web-api/index>를 참조하세요.
 * DI를 사용하여 데이터베이스 컨텍스트(`TodoContext`)를 컨트롤러에 삽입합니다. 컨트롤러의 각 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 메서드에서 해당 데이터베이스 컨텍스트를 사용합니다.
 
-## <a name="examine-the-posttodoitem-create-method"></a>PostTodoItem 만들기 메서드를 검사합니다.
+## <a name="examine-the-posttodoitem-create-method"></a>PostTodoItem 만들기 메서드 검사
 
 `PostTodoItem`의 return 문이 [nameof](/dotnet/csharp/language-reference/operators/nameof) 연산자를 사용하도록 바꿉니다.
 
@@ -314,14 +314,14 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 * 응답에 대한 [위치](https://developer.mozilla.org/docs/Web/HTTP/Headers/Location) 헤더를 추가합니다. `Location` 헤더는 새로 만들어진 할 일 항목의 [URI](https://developer.mozilla.org/docs/Glossary/URI)를 지정합니다. 자세한 내용은 [10.2.2 201 생성됨](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)을 참조하세요.
 * `Location` 헤더의 URI를 만들려면 `GetTodoItem` 작업을 참조합니다. C# `nameof` 키워드는 `CreatedAtAction` 호출에서 작업 이름의 하드 코딩을 방지하는 데 사용됩니다.
 
-### <a name="install-postman"></a>Postman 설치
+### <a name="install-postman"></a>Postman을 설치합니다.
 
 이 자습서에서는 Postman을 사용하여 웹 API를 테스트합니다.
 
-* [Postman](https://www.getpostman.com/downloads/) 설치
+* [Postman](https://www.getpostman.com/downloads/)을 설치합니다.
 * 웹앱을 시작합니다.
 * Postman을 시작합니다.
-* **SSL 인증서 확인** 사용 안 함
+* **SSL 인증서 확인**을 사용하지 않도록 설정합니다.
 * **파일** > **설정**(**일반** 탭)에서 **SSL 인증서 확인**을 사용하지 않게 설정합니다.
     > [!WARNING]
     > 컨트롤러를 테스트한 후에 SSL 인증서 확인을 다시 사용하도록 설정합니다.
@@ -478,7 +478,7 @@ Postman을 사용하여 할 일 항목을 삭제합니다.
 > * CRUD 메서드 추가
 > * 라우팅 및 URL 경로 구성
 > * 반환 값 지정
-> * Postman을 사용하여 웹 API 호출
+> * Postman을 사용하여 웹 API를 호출합니다.
 > * JavaScript를 사용하여 웹 API를 호출합니다.
 
 작업을 완료하면 웹 API는 관계형 데이터베이스에 저장된 "할 일" 항목을 관리할 수 있게 됩니다.
@@ -509,7 +509,7 @@ Postman을 사용하여 할 일 항목을 삭제합니다.
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-2.2.md)]
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-2.2.md)]
 
@@ -541,7 +541,7 @@ Postman을 사용하여 할 일 항목을 삭제합니다.
 
 * 프로젝트에 필수 자산을 추가하려는지 묻는 대화 상자가 나타나면 **예**를 선택합니다.
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * **파일** > **새 솔루션**을 선택합니다.
 
@@ -573,7 +573,7 @@ IIS Express 인증서를 신뢰해야 하는지 묻는 대화 상자가 표시�
 
 Ctrl+F5 키를 눌러 앱을 실행합니다. 브라우저에서 다음 URL [https://localhost:5001/api/values](https://localhost:5001/api/values)로 이동합니다.
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 **실행** > **디버깅 시작**을 선택하여 앱을 시작합니다. Mac용 Visual Studio가 브라우저를 시작하고 `https://localhost:<port>`로 이동합니다. 여기서 `<port>`는 임의로 선택된 포트 번호입니다. HTTP 404(찾을 수 없음) 오류가 반환됩니다. `/api/values`를 URL에 추가합니다(URL을 `https://localhost:<port>/api/values`로 변경).
 
@@ -603,7 +603,7 @@ Ctrl+F5 키를 눌러 앱을 실행합니다. 브라우저에서 다음 URL [htt
 
 * 다음 코드를 사용하여 *Models* 폴더에 `TodoItem` 클래스를 추가합니다.
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * 프로젝트를 마우스 오른쪽 단추로 클릭합니다. **추가** > **새 폴더**를 선택합니다. 폴더 이름을 *Models*로 지정합니다.
 
@@ -631,7 +631,7 @@ Ctrl+F5 키를 눌러 앱을 실행합니다. 브라우저에서 다음 URL [htt
 
 * *Models* 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **클래스**를 선택합니다. 클래스 이름을 *TodoContext*로 지정하고 **추가**를 클릭합니다.
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 * `TodoContext` 클래스를 *Models* 폴더에 추가합니다.
 
@@ -649,7 +649,7 @@ ASP.NET Core에서는 DB 컨텍스트와 같은 서비스를 [DI(종속성 주�
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Startup1.cs?highlight=5,8,25-26&name=snippet_all)]
 
-위의 코드는:
+위의 코드는
 
 * 사용되지 않는 `using` 선언을 제거합니다.
 * DI 컨테이너에 데이터베이스 컨텍스트를 추가합니다.
@@ -666,7 +666,7 @@ ASP.NET Core에서는 DB 컨텍스트와 같은 서비스를 [DI(종속성 주�
 
   ![검색 상자의 컨트롤러 및 웹 API 컨트롤러가 선택된 새 항목 추가 대화 상자](first-web-api/_static/new_controller.png)
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 * *Controllers* 폴더에 `TodoController`라는 클래스를 만듭니다.
 
@@ -676,7 +676,7 @@ ASP.NET Core에서는 DB 컨텍스트와 같은 서비스를 [DI(종속성 주�
 
   [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController2.cs?name=snippet_todo1)]
 
-위의 코드는:
+위의 코드는
 
 * 메서드 없이 API 컨트롤러 클래스를 정의합니다.
 * [[ApiController]](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) 특성을 사용하여 클래스를 데코레이팅합니다. 이 특성은 컨트롤러가 웹 API 요청에 응답함을 나타냅니다. 특성을 사용하도록 설정하는 특정 동작에 대한 정보는 <xref:web-api/index>를 참조하세요.
@@ -750,7 +750,7 @@ ASP.NET Core에서는 DB 컨텍스트와 같은 서비스를 [DI(종속성 주�
 
 * **파일** > **설정**(**일반** 탭)에서 **SSL 인증서 확인**을 사용하지 않게 설정합니다.
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 * **Postman** > **기본 설정**(**일반** 탭)에서 **SSL 인증서 확인**을 사용하지 않게 설정합니다. 또는 렌치를 선택하고 **설정**을 선택한 다음 SSL 인증서 확인을 사용하지 않게 설정합니다.
 
