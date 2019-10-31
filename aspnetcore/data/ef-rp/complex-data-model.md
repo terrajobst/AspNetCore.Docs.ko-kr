@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: 2461bc398cd237dac04f4eb8832c70290663ff56
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: 1244b2e23a842538ff2fca01a513317a690afe7c
+ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259491"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73034025"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---data-model---5-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 데이터 모델 - 5/8
 
@@ -682,7 +682,7 @@ SQLite 도구를 사용하여 데이터베이스를 검사합니다.
 
 다음 강조 표시된 코드를 추가합니다. 새 코드는 `.CreateTable( name: "Department"` 블록 뒤로 이동합니다.
 
-[!code-csharp[](intro/samples/cu30snapshots/5-complex/Migrations/ ComplexDataModel.cs?name=snippet_CreateDefaultValue&highlight=23-31)]
+[!code-csharp[](intro/samples/cu30snapshots/5-complex/Migrations/ComplexDataModel.cs?name=snippet_CreateDefaultValue&highlight=23-31)]
 
 앞의 변경 내용으로 `ComplexDataModel.Up` 메서드를 실행한 후에 기존 `Course` 행은 “Temp” 부서에 연결됩니다.
 

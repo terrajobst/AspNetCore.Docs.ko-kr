@@ -5,18 +5,18 @@ description: 통합 테스트를 사용하여 앱의 구성 요소가 데이터�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/14/2019
+ms.date: 10/28/2019
 uid: test/integration-tests
-ms.openlocfilehash: c0fede8f9f46d1b10502055d8e1fe7caa48cf351
-ms.sourcegitcommit: 810d5831169770ee240d03207d6671dabea2486e
+ms.openlocfilehash: 33f3e29bc649fa65efdff0c47e54a83662005577
+ms.sourcegitcommit: de0fc77487a4d342bcc30965ec5c142d10d22c03
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/22/2019
-ms.locfileid: "72779225"
+ms.lasthandoff: 10/30/2019
+ms.locfileid: "73143371"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>ASP.NET Core의 통합 테스트
 
-By [Luke Latham 문자](https://github.com/guardrex) 및 [Steve Smith](https://ardalis.com/)
+By [Luke Latham](https://github.com/guardrex), [Javier Calvarro e](https://github.com/javiercn), [Steve Smith](https://ardalis.com/)및 [jos van der Til](https://jvandertil.nl)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -130,8 +130,6 @@ SUT의 [환경이](xref:fundamentals/environments) 설정 되지 않은 경우 �
 
 테스트 클래스는 클래스에 테스트를 포함 하 고 클래스의 테스트에서 공유 개체 인스턴스를 제공 하는 클래스 *fixture* 인터페이스 ([IClassFixture](https://xunit.github.io/docs/shared-context#class-fixture))를 구현 합니다.
 
-### <a name="basic-test-of-app-endpoints"></a>앱 끝점의 기본 테스트
-
 다음 테스트 클래스 `BasicTests`에서는 `WebApplicationFactory`를 사용 하 여 SUT를 부트스트랩 하 고 `Get_EndpointsReturnSuccessAndCorrectContentType`테스트 메서드에 [Httpclient](/dotnet/api/system.net.http.httpclient) 를 제공 합니다. 메서드는 응답 상태 코드가 성공 (200-299 범위의 상태 코드) 되었는지 확인 하 고 `Content-Type` 헤더는 여러 앱 페이지에 대해 `text/html; charset=utf-8`입니다.
 
 [CreateClient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) 는 리디렉션을 자동으로 따르며 쿠키를 처리 하는 `HttpClient`의 인스턴스를 만듭니다.
@@ -139,25 +137,6 @@ SUT의 [환경이](xref:fundamentals/environments) 설정 되지 않은 경우 �
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/BasicTests.cs?name=snippet1)]
 
 기본적으로 [Gdpr 동의 정책을](xref:security/gdpr) 사용 하는 경우 요청에서 필수가 아닌 쿠키가 유지 되지 않습니다. TempData 공급자가 사용 하는 쿠키와 같이 필수가 아닌 쿠키를 유지 하려면 테스트에서 필수로 표시 합니다. 쿠키를 필수로 표시 하는 방법에 대 한 지침은 [필수 쿠키](xref:security/gdpr#essential-cookies)를 참조 하세요.
-
-### <a name="test-a-secure-endpoint"></a>보안 끝점 테스트
-
-`BasicTests` 클래스의 다른 테스트는 보안 끝점이 인증 되지 않은 사용자를 앱의 로그인 페이지로 리디렉션하는 지 확인 합니다.
-
-SUT에서 `/SecurePage` 페이지는 [AuthorizePage](/dotnet/api/microsoft.extensions.dependencyinjection.pageconventioncollectionextensions.authorizepage) 규칙을 사용 하 여 페이지에 [AuthorizeFilter](/dotnet/api/microsoft.aspnetcore.mvc.authorization.authorizefilter) 를 적용 합니다. 자세한 내용은 [Razor Pages 권한 부여 규칙](xref:security/authorization/razor-pages-authorization#require-authorization-to-access-a-page)을 참조 하세요.
-
-[!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Startup.cs?name=snippet1)]
-
-`Get_SecurePageRequiresAnAuthenticatedUser` 테스트에서 [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) 를 `false`으로 설정 하 여 리디렉션을 허용 하지 않도록 [WebApplicationFactoryClientOptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions) 를 설정 합니다.
-
-[!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/BasicTests.cs?name=snippet2)]
-
-클라이언트에서 리디렉션을 따르도록 허용 하지 않으면 다음 검사를 수행할 수 있습니다.
-
-* SUT에서 반환 된 상태 코드는 HttpStatusCode 결과에 대해 확인할 수 있습니다 [.](/dotnet/api/system.net.httpstatuscode) 이는 로그인 페이지에 대 한 리디렉션 이후의 최종 상태 코드는 [HttpStatusCode](/dotnet/api/system.net.httpstatuscode)입니다.
-* 응답 헤더의 `Location` 헤더 값은 마지막 로그인 페이지 응답이 아닌 `http://localhost/Identity/Account/Login`로 시작 하는 것을 확인 하기 위해 확인 됩니다 .이 값은 `Location` 헤더가 존재 하지 않습니다.
-
-`WebApplicationFactoryClientOptions`에 대 한 자세한 내용은 [클라이언트 옵션](#client-options) 섹션을 참조 하세요.
 
 ## <a name="customize-webapplicationfactory"></a>WebApplicationFactory 사용자 지정
 
@@ -190,7 +169,7 @@ SUT에서 `/SecurePage` 페이지는 [AuthorizePage](/dotnet/api/microsoft.exten
 
    [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/IndexPageTests.cs?name=snippet1)]
 
-   샘플 응용 프로그램의 클라이언트는 다음 리디렉션이 `HttpClient` 않도록 구성 되어 있습니다. [보안 끝점 테스트](#test-a-secure-endpoint) 섹션에서 설명한 대로이를 통해 테스트에서 앱의 첫 번째 응답의 결과를 확인할 수 있습니다. 첫 번째 응답은 `Location` 헤더를 사용 하는 이러한 테스트 대부분의 리디렉션입니다.
+   샘플 응용 프로그램의 클라이언트는 다음 리디렉션이 `HttpClient` 않도록 구성 되어 있습니다. [모의 인증](#mock-authentication) 섹션의 뒷부분에서 설명한 대로 테스트에서 앱의 첫 번째 응답의 결과를 확인할 수 있습니다. 첫 번째 응답은 `Location` 헤더를 사용 하는 이러한 테스트 대부분의 리디렉션입니다.
 
 3. 일반적인 테스트는 `HttpClient` 및 도우미 메서드를 사용 하 여 요청 및 응답을 처리 합니다.
 
@@ -297,6 +276,50 @@ _client = _factory.CreateClient(clientOptions);
     Mr. Scarman, and time is my business.">
 ```
 
+## <a name="mock-authentication"></a>모의 인증
+
+`AuthTests` 클래스의 테스트는 보안 끝점을 확인 합니다.
+
+* 인증 되지 않은 사용자를 앱의 로그인 페이지로 리디렉션합니다.
+* 인증 된 사용자에 대 한 콘텐츠를 반환 합니다.
+
+SUT에서 `/SecurePage` 페이지는 [AuthorizePage](/dotnet/api/microsoft.extensions.dependencyinjection.pageconventioncollectionextensions.authorizepage) 규칙을 사용 하 여 페이지에 [AuthorizeFilter](/dotnet/api/microsoft.aspnetcore.mvc.authorization.authorizefilter) 를 적용 합니다. 자세한 내용은 [Razor Pages 권한 부여 규칙](xref:security/authorization/razor-pages-authorization#require-authorization-to-access-a-page)을 참조 하세요.
+
+[!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Startup.cs?name=snippet1)]
+
+`Get_SecurePageRedirectsAnUnauthenticatedUser` 테스트에서 [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) 를 `false`으로 설정 하 여 리디렉션을 허용 하지 않도록 [WebApplicationFactoryClientOptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions) 를 설정 합니다.
+
+[!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/AuthTests.cs?name=snippet2)]
+
+클라이언트에서 리디렉션을 따르도록 허용 하지 않으면 다음 검사를 수행할 수 있습니다.
+
+* SUT에서 반환 된 상태 코드는 HttpStatusCode 결과에 대해 확인할 수 있습니다 [.](/dotnet/api/system.net.httpstatuscode) 이는 로그인 페이지에 대 한 리디렉션 이후의 최종 상태 코드는 [HttpStatusCode](/dotnet/api/system.net.httpstatuscode)입니다.
+* 응답 헤더의 `Location` 헤더 값은 마지막 로그인 페이지 응답이 아닌 `http://localhost/Identity/Account/Login`로 시작 하는 것을 확인 하기 위해 확인 됩니다 .이 값은 `Location` 헤더가 존재 하지 않습니다.
+
+테스트 앱은 인증 및 권한 부여의 측면을 테스트 하기 위해 [ConfigureTestServices](/dotnet/api/microsoft.aspnetcore.testhost.webhostbuilderextensions.configuretestservices) 에서 <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1>를 mock 할 수 있습니다. 최소한의 시나리오는 AuthenticateResult을 반환 [합니다.](xref:Microsoft.AspNetCore.Authentication.AuthenticateResult.Success*)
+
+[!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/AuthTests.cs?name=snippet4&highlight=11-18)]
+
+`TestAuthHandler`는 인증 체계가 `ConfigureTestServices`에 대해 등록 된 `AddAuthentication` `Test`으로 설정 된 경우 사용자를 인증 하기 위해 호출 됩니다.
+
+[!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/AuthTests.cs?name=snippet3&highlight=7-12)]
+
+`WebApplicationFactoryClientOptions`에 대 한 자세한 내용은 [클라이언트 옵션](#client-options) 섹션을 참조 하세요.
+
+## <a name="set-the-environment"></a>환경 설정
+
+기본적으로 SUT의 호스트 및 앱 환경은 개발 환경을 사용 하도록 구성 됩니다. SUT의 환경을 재정의 하려면:
+
+* `ASPNETCORE_ENVIRONMENT` 환경 변수를 설정 합니다 (예: `Staging`, `Production`또는 기타 사용자 지정 값 (예: `Testing`)).
+* `ASPNETCORE`를 접두사로 사용 하는 환경 변수를 읽도록 테스트 앱의 `CreateHostBuilder`를 재정의 합니다.
+
+```csharp
+protected override IHostBuilder CreateHostBuilder() => 
+    base.CreateHostBuilder()
+        .ConfigureHostConfiguration(
+            config => config.AddEnvironmentVariables("ASPNETCORE"));
+```
+
 ## <a name="how-the-test-infrastructure-infers-the-app-content-root-path"></a>테스트 인프라가 앱 콘텐츠 루트 경로를 유추 하는 방법
 
 `WebApplicationFactory` 생성자는 `TEntryPoint` 어셈블리 `System.Reflection.Assembly.FullName`와 같은 키를 사용 하 여 통합 테스트가 포함 된 어셈블리에서 [WebApplicationFactoryContentRootAttribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) 를 검색 하 여 앱 [콘텐츠 루트](xref:fundamentals/index#content-root) 경로를 유추 합니다. 올바른 키를 가진 특성을 찾을 수 없는 경우 `WebApplicationFactory`은 솔루션 파일 ( *.sln*)을 검색 하는 것으로 대체 되 고 `TEntryPoint` 어셈블리 이름을 솔루션 디렉터리에 추가 합니다. 응용 프로그램 루트 디렉터리 (콘텐츠 루트 경로)는 뷰와 콘텐츠 파일을 검색 하는 데 사용 됩니다.
@@ -353,8 +376,9 @@ SUT는 다음과 같은 특징을 가진 Razor Pages 메시지 시스템입니�
 
 | 응용 프로그램 디렉터리 테스트 | 설명 |
 | ------------------ | ----------- |
-| *BasicTests* | *BasicTests.cs* 에는 라우팅을 위한 테스트 메서드, 인증 되지 않은 사용자가 보안 페이지에 액세스 하는 방법, GitHub 사용자 프로필 가져오기 및 프로필의 사용자 로그인 확인이 포함 됩니다. |
-| *IntegrationTests* | *IndexPageTests.cs* 사용자 지정 `WebApplicationFactory` 클래스를 사용 하 여 인덱스 페이지에 대 한 통합 테스트를 포함 합니다. |
+| *AuthTests* | 다음에 대 한 테스트 메서드를 포함 합니다.<ul><li>인증 되지 않은 사용자가 보안 페이지에 액세스 합니다.</li><li>모의 <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1>를 사용 하 여 인증 된 사용자가 보안 페이지에 액세스 합니다.</li><li>GitHub 사용자 프로필을 가져오고 프로필의 사용자 로그인을 확인 합니다.</li></ul> |
+| *BasicTests* | 라우팅 및 콘텐츠 형식에 대 한 테스트 메서드를 포함 합니다. |
+| *IntegrationTests* | 사용자 지정 `WebApplicationFactory` 클래스를 사용 하 여 인덱스 페이지에 대 한 통합 테스트를 포함 합니다. |
 | *도우미/유틸리티* | <ul><li>*Utilities.cs* 에는 테스트 데이터로 데이터베이스를 시드 하는 데 사용 되는 `InitializeDbForTests` 메서드가 포함 되어 있습니다.</li><li>*HtmlHelpers.cs* 는 테스트 메서드에서 사용할 AngleSharp `IHtmlDocument`을 반환 하는 메서드를 제공 합니다.</li><li>*HttpClientExtensions.cs* 는 `SendAsync`에 대 한 오버 로드를 제공 하 여 sut에 요청을 제출 합니다.</li></ul> |
 
 테스트 프레임 워크는 [Xunit](https://xunit.github.io/)입니다. [AspNetCore. TestHost](/dotnet/api/microsoft.aspnetcore.testhost)( [testserver](/dotnet/api/microsoft.aspnetcore.testhost.testserver)포함)를 사용 하 여 통합 테스트를 수행 합니다. [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing) 패키지는 테스트 호스트와 테스트 서버를 구성 하는 데 사용 되기 때문에 `TestHost` 및 `TestServer` 패키지는 테스트 응용 프로그램의 프로젝트 파일 또는 테스트의 개발자 구성에서 직접 패키지 참조를 요구 하지 않습니다. 다운로드.
@@ -477,8 +501,6 @@ SUT의 [환경이](xref:fundamentals/environments) 설정 되지 않은 경우 �
 
 테스트 클래스는 클래스에 테스트를 포함 하 고 클래스의 테스트에서 공유 개체 인스턴스를 제공 하는 클래스 *fixture* 인터페이스 ([IClassFixture](https://xunit.github.io/docs/shared-context#class-fixture))를 구현 합니다.
 
-### <a name="basic-test-of-app-endpoints"></a>앱 끝점의 기본 테스트
-
 다음 테스트 클래스 `BasicTests`에서는 `WebApplicationFactory`를 사용 하 여 SUT를 부트스트랩 하 고 `Get_EndpointsReturnSuccessAndCorrectContentType`테스트 메서드에 [Httpclient](/dotnet/api/system.net.http.httpclient) 를 제공 합니다. 메서드는 응답 상태 코드가 성공 (200-299 범위의 상태 코드) 되었는지 확인 하 고 `Content-Type` 헤더는 여러 앱 페이지에 대해 `text/html; charset=utf-8`입니다.
 
 [CreateClient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) 는 리디렉션을 자동으로 따르며 쿠키를 처리 하는 `HttpClient`의 인스턴스를 만듭니다.
@@ -486,25 +508,6 @@ SUT의 [환경이](xref:fundamentals/environments) 설정 되지 않은 경우 �
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/BasicTests.cs?name=snippet1)]
 
 기본적으로 [Gdpr 동의 정책을](xref:security/gdpr) 사용 하는 경우 요청에서 필수가 아닌 쿠키가 유지 되지 않습니다. TempData 공급자가 사용 하는 쿠키와 같이 필수가 아닌 쿠키를 유지 하려면 테스트에서 필수로 표시 합니다. 쿠키를 필수로 표시 하는 방법에 대 한 지침은 [필수 쿠키](xref:security/gdpr#essential-cookies)를 참조 하세요.
-
-### <a name="test-a-secure-endpoint"></a>보안 끝점 테스트
-
-`BasicTests` 클래스의 다른 테스트는 보안 끝점이 인증 되지 않은 사용자를 앱의 로그인 페이지로 리디렉션하는 지 확인 합니다.
-
-SUT에서 `/SecurePage` 페이지는 [AuthorizePage](/dotnet/api/microsoft.extensions.dependencyinjection.pageconventioncollectionextensions.authorizepage) 규칙을 사용 하 여 페이지에 [AuthorizeFilter](/dotnet/api/microsoft.aspnetcore.mvc.authorization.authorizefilter) 를 적용 합니다. 자세한 내용은 [Razor Pages 권한 부여 규칙](xref:security/authorization/razor-pages-authorization#require-authorization-to-access-a-page)을 참조 하세요.
-
-[!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Startup.cs?name=snippet1)]
-
-`Get_SecurePageRequiresAnAuthenticatedUser` 테스트에서 [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) 를 `false`으로 설정 하 여 리디렉션을 허용 하지 않도록 [WebApplicationFactoryClientOptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions) 를 설정 합니다.
-
-[!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/BasicTests.cs?name=snippet2)]
-
-클라이언트에서 리디렉션을 따르도록 허용 하지 않으면 다음 검사를 수행할 수 있습니다.
-
-* SUT에서 반환 된 상태 코드는 HttpStatusCode 결과에 대해 확인할 수 있습니다 [.](/dotnet/api/system.net.httpstatuscode) 이는 로그인 페이지에 대 한 리디렉션 이후의 최종 상태 코드는 [HttpStatusCode](/dotnet/api/system.net.httpstatuscode)입니다.
-* 응답 헤더의 `Location` 헤더 값은 마지막 로그인 페이지 응답이 아닌 `http://localhost/Identity/Account/Login`로 시작 하는 것을 확인 하기 위해 확인 됩니다 .이 값은 `Location` 헤더가 존재 하지 않습니다.
-
-`WebApplicationFactoryClientOptions`에 대 한 자세한 내용은 [클라이언트 옵션](#client-options) 섹션을 참조 하세요.
 
 ## <a name="customize-webapplicationfactory"></a>WebApplicationFactory 사용자 지정
 
@@ -520,7 +523,7 @@ SUT에서 `/SecurePage` 페이지는 [AuthorizePage](/dotnet/api/microsoft.exten
 
    [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/IndexPageTests.cs?name=snippet1)]
 
-   샘플 응용 프로그램의 클라이언트는 다음 리디렉션이 `HttpClient` 않도록 구성 되어 있습니다. [보안 끝점 테스트](#test-a-secure-endpoint) 섹션에서 설명한 대로이를 통해 테스트에서 앱의 첫 번째 응답의 결과를 확인할 수 있습니다. 첫 번째 응답은 `Location` 헤더를 사용 하는 이러한 테스트 대부분의 리디렉션입니다.
+   샘플 응용 프로그램의 클라이언트는 다음 리디렉션이 `HttpClient` 않도록 구성 되어 있습니다. [모의 인증](#mock-authentication) 섹션의 뒷부분에서 설명한 대로 테스트에서 앱의 첫 번째 응답의 결과를 확인할 수 있습니다. 첫 번째 응답은 `Location` 헤더를 사용 하는 이러한 테스트 대부분의 리디렉션입니다.
 
 3. 일반적인 테스트는 `HttpClient` 및 도우미 메서드를 사용 하 여 요청 및 응답을 처리 합니다.
 
@@ -627,6 +630,50 @@ _client = _factory.CreateClient(clientOptions);
     Mr. Scarman, and time is my business.">
 ```
 
+## <a name="mock-authentication"></a>모의 인증
+
+`AuthTests` 클래스의 테스트는 보안 끝점을 확인 합니다.
+
+* 인증 되지 않은 사용자를 앱의 로그인 페이지로 리디렉션합니다.
+* 인증 된 사용자에 대 한 콘텐츠를 반환 합니다.
+
+SUT에서 `/SecurePage` 페이지는 [AuthorizePage](/dotnet/api/microsoft.extensions.dependencyinjection.pageconventioncollectionextensions.authorizepage) 규칙을 사용 하 여 페이지에 [AuthorizeFilter](/dotnet/api/microsoft.aspnetcore.mvc.authorization.authorizefilter) 를 적용 합니다. 자세한 내용은 [Razor Pages 권한 부여 규칙](xref:security/authorization/razor-pages-authorization#require-authorization-to-access-a-page)을 참조 하세요.
+
+[!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Startup.cs?name=snippet1)]
+
+`Get_SecurePageRedirectsAnUnauthenticatedUser` 테스트에서 [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) 를 `false`으로 설정 하 여 리디렉션을 허용 하지 않도록 [WebApplicationFactoryClientOptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions) 를 설정 합니다.
+
+[!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/AuthTests.cs?name=snippet2)]
+
+클라이언트에서 리디렉션을 따르도록 허용 하지 않으면 다음 검사를 수행할 수 있습니다.
+
+* SUT에서 반환 된 상태 코드는 HttpStatusCode 결과에 대해 확인할 수 있습니다 [.](/dotnet/api/system.net.httpstatuscode) 이는 로그인 페이지에 대 한 리디렉션 이후의 최종 상태 코드는 [HttpStatusCode](/dotnet/api/system.net.httpstatuscode)입니다.
+* 응답 헤더의 `Location` 헤더 값은 마지막 로그인 페이지 응답이 아닌 `http://localhost/Identity/Account/Login`로 시작 하는 것을 확인 하기 위해 확인 됩니다 .이 값은 `Location` 헤더가 존재 하지 않습니다.
+
+테스트 앱은 인증 및 권한 부여의 측면을 테스트 하기 위해 [ConfigureTestServices](/dotnet/api/microsoft.aspnetcore.testhost.webhostbuilderextensions.configuretestservices) 에서 <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1>를 mock 할 수 있습니다. 최소한의 시나리오는 AuthenticateResult을 반환 [합니다.](xref:Microsoft.AspNetCore.Authentication.AuthenticateResult.Success*)
+
+[!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/AuthTests.cs?name=snippet4&highlight=11-18)]
+
+`TestAuthHandler`는 인증 체계가 `ConfigureTestServices`에 대해 등록 된 `AddAuthentication` `Test`으로 설정 된 경우 사용자를 인증 하기 위해 호출 됩니다.
+
+[!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/AuthTests.cs?name=snippet3&highlight=7-12)]
+
+`WebApplicationFactoryClientOptions`에 대 한 자세한 내용은 [클라이언트 옵션](#client-options) 섹션을 참조 하세요.
+
+## <a name="set-the-environment"></a>환경 설정
+
+기본적으로 SUT의 호스트 및 앱 환경은 개발 환경을 사용 하도록 구성 됩니다. SUT의 환경을 재정의 하려면:
+
+* `ASPNETCORE_ENVIRONMENT` 환경 변수를 설정 합니다 (예: `Staging`, `Production`또는 기타 사용자 지정 값 (예: `Testing`)).
+* `ASPNETCORE`를 접두사로 사용 하는 환경 변수를 읽도록 테스트 앱의 `CreateHostBuilder`를 재정의 합니다.
+
+```csharp
+protected override IHostBuilder CreateHostBuilder() => 
+    base.CreateHostBuilder()
+        .ConfigureHostConfiguration(
+            config => config.AddEnvironmentVariables("ASPNETCORE"));
+```
+
 ## <a name="how-the-test-infrastructure-infers-the-app-content-root-path"></a>테스트 인프라가 앱 콘텐츠 루트 경로를 유추 하는 방법
 
 `WebApplicationFactory` 생성자는 `TEntryPoint` 어셈블리 `System.Reflection.Assembly.FullName`와 같은 키를 사용 하 여 통합 테스트가 포함 된 어셈블리에서 [WebApplicationFactoryContentRootAttribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) 를 검색 하 여 앱 [콘텐츠 루트](xref:fundamentals/index#content-root) 경로를 유추 합니다. 올바른 키를 가진 특성을 찾을 수 없는 경우 `WebApplicationFactory`은 솔루션 파일 ( *.sln*)을 검색 하는 것으로 대체 되 고 `TEntryPoint` 어셈블리 이름을 솔루션 디렉터리에 추가 합니다. 응용 프로그램 루트 디렉터리 (콘텐츠 루트 경로)는 뷰와 콘텐츠 파일을 검색 하는 데 사용 됩니다.
@@ -693,8 +740,9 @@ SUT는 다음과 같은 특징을 가진 Razor Pages 메시지 시스템입니�
 
 | 응용 프로그램 디렉터리 테스트 | 설명 |
 | ------------------ | ----------- |
-| *BasicTests* | *BasicTests.cs* 에는 라우팅을 위한 테스트 메서드, 인증 되지 않은 사용자가 보안 페이지에 액세스 하는 방법, GitHub 사용자 프로필 가져오기 및 프로필의 사용자 로그인 확인이 포함 됩니다. |
-| *IntegrationTests* | *IndexPageTests.cs* 사용자 지정 `WebApplicationFactory` 클래스를 사용 하 여 인덱스 페이지에 대 한 통합 테스트를 포함 합니다. |
+| *AuthTests* | 다음에 대 한 테스트 메서드를 포함 합니다.<ul><li>인증 되지 않은 사용자가 보안 페이지에 액세스 합니다.</li><li>모의 <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1>를 사용 하 여 인증 된 사용자가 보안 페이지에 액세스 합니다.</li><li>GitHub 사용자 프로필을 가져오고 프로필의 사용자 로그인을 확인 합니다.</li></ul> |
+| *BasicTests* | 라우팅 및 콘텐츠 형식에 대 한 테스트 메서드를 포함 합니다. |
+| *IntegrationTests* | 사용자 지정 `WebApplicationFactory` 클래스를 사용 하 여 인덱스 페이지에 대 한 통합 테스트를 포함 합니다. |
 | *도우미/유틸리티* | <ul><li>*Utilities.cs* 에는 테스트 데이터로 데이터베이스를 시드 하는 데 사용 되는 `InitializeDbForTests` 메서드가 포함 되어 있습니다.</li><li>*HtmlHelpers.cs* 는 테스트 메서드에서 사용할 AngleSharp `IHtmlDocument`을 반환 하는 메서드를 제공 합니다.</li><li>*HttpClientExtensions.cs* 는 `SendAsync`에 대 한 오버 로드를 제공 하 여 sut에 요청을 제출 합니다.</li></ul> |
 
 테스트 프레임 워크는 [Xunit](https://xunit.github.io/)입니다. [AspNetCore. TestHost](/dotnet/api/microsoft.aspnetcore.testhost)( [testserver](/dotnet/api/microsoft.aspnetcore.testhost.testserver)포함)를 사용 하 여 통합 테스트를 수행 합니다. [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing) 패키지는 테스트 호스트와 테스트 서버를 구성 하는 데 사용 되기 때문에 `TestHost` 및 `TestServer` 패키지는 테스트 응용 프로그램의 프로젝트 파일 또는 테스트의 개발자 구성에서 직접 패키지 참조를 요구 하지 않습니다. 다운로드.
@@ -712,6 +760,6 @@ SUT는 다음과 같은 특징을 가진 Razor Pages 메시지 시스템입니�
 ## <a name="additional-resources"></a>추가 자료
 
 * [단위 테스트](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)
-* [Razor 페이지 단위 테스트](xref:test/razor-pages-tests)
-* [미들웨어](xref:fundamentals/middleware/index)
-* [테스트 컨트롤러](xref:mvc/controllers/testing)
+* <xref:test/razor-pages-tests>
+* <xref:fundamentals/middleware/index>
+* <xref:mvc/controllers/testing>

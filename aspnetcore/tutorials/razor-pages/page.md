@@ -5,12 +5,12 @@ description: 스캐폴딩을 통해 생성된 Razor 페이지를 설명합니다
 ms.author: riande
 ms.date: 08/17/2019
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: 939ed5c3cdf33d8d99712e3166d8d07d3bac719f
-ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
+ms.openlocfilehash: 594fd6186cc73aa054fc9a1478850fa01e481ef2
+ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/15/2019
-ms.locfileid: "72334092"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73034205"
 ---
 # <a name="scaffolded-razor-pages-in-aspnet-core"></a>ASP.NET Core의 스캐폴드된 Razor 페이지
 
@@ -49,7 +49,7 @@ Razor는 HTML에서 C# 또는 Razor 관련 태그로 전환될 수 있습니다.
 다음 HTML 도우미에서 사용되는 람다 식을 살펴봅니다.
 
 ```cshtml
-@Html.DisplayNameFor(model => model.Movie[0].Title))
+@Html.DisplayNameFor(model => model.Movie[0].Title)
 ```
 
 `DisplayNameFor` HTML 도우미는 람다 식에서 참조되는 `Title` 속성을 검사하여 표시 이름을 확인합니다. 람다 식은 계산되는 것이 아니라 검사됩니다. 즉, `model`, `model.Movie` 또는 `model.Movie[0]`가 `null`이거나 비어 있을 경우 액세스 위반이 없습니다. 람다 식이 계산될 경우(예: `@Html.DisplayFor(modelItem => item.Title)` 사용) 모델의 속성 값이 계산됩니다.
@@ -119,7 +119,7 @@ changing in in the next step.
 다른 링크(**홈**, **RpMovie**, **만들기**, **편집** 및 **삭제**)를 테스트합니다. 각 페이지에서 설정되는 제목은 브라우저 탭에서 확인할 수 있습니다. 페이지의 책갈피를 지정하면 제목이 책갈피에 사용됩니다.
 
 > [!NOTE]
-> `Price` 필드에는 소수점을 입력하지 못할 수도 있습니다. 소수점으로 쉼표(“,”)를 사용하는 영어가 아닌 로캘 및 미국 영어가 아닌 날짜 형식에 대해 [jQuery 유효성 검사](https://jqueryvalidation.org/)를 지원하려면 앱을 전역화하는 단계를 수행해야 합니다. 소수점 추가에 대한 지침은 이 [GitHub 문제 4076](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)을 참조하세요.
+> `Price` 필드에 소수점을 입력하지 못할 수도 있습니다. 소수점으로 쉼표(“,”)를 사용하는 영어가 아닌 로캘 및 미국 영어가 아닌 날짜 형식에 대해 [jQuery 유효성 검사](https://jqueryvalidation.org/)를 지원하려면 앱을 전역화하는 단계를 수행해야 합니다. 소수점 추가에 대한 지침은 이 [GitHub 문제 4076](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)을 참조하세요.
 
 `Layout` 속성은 *Pages/_ViewStart.cshtml* 파일에서 설정됩니다.
 
@@ -173,7 +173,7 @@ Visual Studio에서는 다음 태그를 태그 도우미에 사용되는 독특�
 * `<input asp-for="Movie.Title" class="form-control" />`
 * `<span asp-validation-for="Movie.Title" class="text-danger"></span>`
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 Visual Studio에서는 다음 태그를 태그 도우미에 사용되는 독특한 굵은 글꼴로 표시합니다.
 
@@ -240,7 +240,7 @@ Razor는 HTML에서 C# 또는 Razor 관련 태그로 전환될 수 있습니다.
 다음 HTML 도우미에서 사용되는 람다 식을 살펴봅니다.
 
 ```cshtml
-@Html.DisplayNameFor(model => model.Movie[0].Title))
+@Html.DisplayNameFor(model => model.Movie[0].Title)
 ```
 
 `DisplayNameFor` HTML 도우미는 람다 식에서 참조되는 `Title` 속성을 검사하여 표시 이름을 확인합니다. 람다 식은 계산되는 것이 아니라 검사됩니다. 즉, `model`, `model.Movie` 또는 `model.Movie[0]`가 `null`이거나 비어 있을 경우 액세스 위반이 없습니다. 람다 식이 계산될 경우(예: `@Html.DisplayFor(modelItem => item.Title)` 사용) 모델의 속성 값이 계산됩니다.
@@ -305,7 +305,7 @@ changing in in the next step.
 다른 링크(**홈**, **RpMovie**, **만들기**, **편집** 및 **삭제**)를 테스트합니다. 각 페이지에서 설정되는 제목은 브라우저 탭에서 확인할 수 있습니다. 페이지의 책갈피를 지정하면 제목이 책갈피에 사용됩니다.
 
 > [!NOTE]
-> `Price` 필드에는 소수점을 입력하지 못할 수도 있습니다. 소수점으로 쉼표(“,”)를 사용하는 영어가 아닌 로캘 및 미국 영어가 아닌 날짜 형식에 대해 [jQuery 유효성 검사](https://jqueryvalidation.org/)를 지원하려면 앱을 전역화하는 단계를 수행해야 합니다. 소수점 추가에 대한 지침은 이 [GitHub 문제 4076](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)에 나와 있습니다.
+> `Price` 필드에 소수점을 입력하지 못할 수도 있습니다. 소수점으로 쉼표(“,”)를 사용하는 영어가 아닌 로캘 및 미국 영어가 아닌 날짜 형식에 대해 [jQuery 유효성 검사](https://jqueryvalidation.org/)를 지원하려면 앱을 전역화하는 단계를 수행해야 합니다. 소수점 추가에 대한 지침은 이 [GitHub 문제 4076](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)에 나와 있습니다.
 
 `Layout` 속성은 *Pages/_ViewStart.cshtml* 파일에서 설정됩니다.
 
@@ -347,7 +347,7 @@ Visual Studio에서는 `<form method="post">` 태그를 태그 도우미에 사�
 
 태그 도우미(예: `<form method="post">`)에 대한 자세한 내용은 [ASP.NET Core의 태그 도우미](xref:mvc/views/tag-helpers/intro)를 참조하세요.
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 Mac용 Visual Studio에서는 `<form method="post">` 태그를 태그 도우미에 사용되는 독특한 굵은 글꼴로 표시합니다.
 

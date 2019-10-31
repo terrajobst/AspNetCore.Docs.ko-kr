@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/28/2019
 uid: mvc/controllers/filters
-ms.openlocfilehash: 0c3597f24e02af40517e12a86127b140ed4fb550
-ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
+ms.openlocfilehash: 6a83b8e85b68a9b8796aeed2fd39108dbeed3266
+ms.sourcegitcommit: 032113208bb55ecfb2faeb6d3e9ea44eea827950
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/15/2019
-ms.locfileid: "72333929"
+ms.lasthandoff: 10/31/2019
+ms.locfileid: "73190529"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core에서 필터링
 
@@ -404,7 +404,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 다음 샘플 예외 필터는 사용자 지정 오류 보기를 사용하여 앱을 개발 중인 경우에 발생하는 예외에 대한 세부 정보를 표시합니다.
 
-[!code-csharp[](./filters/sample/FiltersSample/Filters/CustomExceptionFilterAttribute.cs?name=snippet_ExceptionFilter&highlight=16-19)]
+[!code-csharp[](./filters/sample/FiltersSample/Filters/CustomExceptionFilter.cs?name=snippet_ExceptionFilter&highlight=16-19)]
 
 예외 필터:
 

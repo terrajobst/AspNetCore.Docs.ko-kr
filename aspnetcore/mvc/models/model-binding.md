@@ -6,12 +6,12 @@ ms.assetid: 0be164aa-1d72-4192-bd6b-192c9c301164
 ms.author: riande
 ms.date: 05/31/2019
 uid: mvc/models/model-binding
-ms.openlocfilehash: 298e305cf918117ec2d313060a7420a1e721a365
-ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
+ms.openlocfilehash: aeb2da7e11df1eab5a17e2ae0a3971420c9383b4
+ms.sourcegitcommit: 032113208bb55ecfb2faeb6d3e9ea44eea827950
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69975291"
+ms.lasthandoff: 10/31/2019
+ms.locfileid: "73190601"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core의 모델 바인딩
 
@@ -394,7 +394,7 @@ ASP.NET Core는 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute) 특�
   public ActionResult<Pet> Create(Pet pet)
   ```
 
-  자세한 내용은 [XML Serialization 소개](https://docs.microsoft.com/en-us/dotnet/standard/serialization/introducing-xml-serialization)를 참조하세요.
+  자세한 내용은 [XML Serialization 소개](/dotnet/standard/serialization/introducing-xml-serialization)를 참조하세요.
 
 ## <a name="exclude-specified-types-from-model-binding"></a>모델 바인딩에서 지정된 형식 제외
 

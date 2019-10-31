@@ -5,14 +5,14 @@ description: Windows Server에서 IIS를 통해 실행될 경우 ASP.NET Core �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/10/2019
+ms.date: 10/26/2019
 uid: host-and-deploy/iis/development-time-iis-support
-ms.openlocfilehash: e5da4f7202bf31e65c366d6f7de54212f5b0fed7
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: 2d2c8d8e4b39d18a3a727e2a2bdef3be566897c1
+ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259806"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73034152"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>ASP.NET Core용 Visual Studio의 개발 시간 IIS 지원
 
@@ -152,7 +152,6 @@ Visual Studio를 사용하지 않는 경우에는 *속성* 폴더의 [launchSett
 ## <a name="additional-resources"></a>추가 자료
 
 * [IIS에서 IIS 관리자 시작](/iis/get-started/getting-started-with-iis/getting-started-with-the-iis-manager-in-iis-7-and-iis-8)
-* [IIS가 있는 Windows에서 ASP.NET Core 호스팅](xref:host-and-deploy/iis/index)
-* [ASP.NET Core 모듈 소개](xref:host-and-deploy/aspnet-core-module)
-* [ASP.NET Core 모듈 구성 참조](xref:host-and-deploy/aspnet-core-module)
-* [HTTPS 적용](xref:security/enforcing-ssl)
+* <xref:host-and-deploy/iis/index>
+* <xref:host-and-deploy/aspnet-core-module>
+* <xref:security/enforcing-ssl>
