@@ -7,18 +7,20 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 03/07/2019
 uid: spa/react
-ms.openlocfilehash: 0e61c5b3e31a0b050d356b8f8e16306dc1e2a7f3
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: bbe5328bfa5b4187989a00c3c94e98dabc5d032a
+ms.sourcegitcommit: 032113208bb55ecfb2faeb6d3e9ea44eea827950
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71080411"
+ms.lasthandoff: 10/31/2019
+ms.locfileid: "73190522"
 ---
 # <a name="use-the-react-project-template-with-aspnet-core"></a>ASP.NET Core에 React 프로젝트 템플릿 사용
 
 업데이트된 React 프로젝트 템플릿은 React 및 CRA([create-react-app](https://github.com/facebookincubator/create-react-app)) 규칙을 사용하여 풍부한 클라이언트 쪽 UI(사용자 인터페이스)를 구현하는 ASP.NET Core 앱에 대한 편리한 시작점을 제공합니다.
 
 이 템플릿은 API 백 엔드로 사용되는 ASP.NET Core 프로젝트 및 UI로 사용되는 표준 CRA React 프로젝트를 둘 다 만드는 것과 동일하지만, 단일 단위로 빌드 및 게시할 수 있는 단일 앱 프로젝트에 두 프로젝트를 모두 편리하게 호스트할 수 있습니다.
+
+반응 프로젝트 템플릿은 SSR (서버 쪽 렌더링)를 위한 것이 아닙니다. 반응 및 node.js가 있는 SSR의 경우 [다음 .js](https://github.com/zeit/next.js/) 또는 [Razzle](https://github.com/jaredpalmer/razzle)을 고려 하세요.
 
 ## <a name="create-a-new-app"></a>새 앱 만들기
 
@@ -59,7 +61,7 @@ Visual Studio 또는 .NET Core CLI에서 앱을 실행합니다.
 
 ## <a name="install-npm-packages"></a>npm 패키지 설치
 
-타사 npm 패키지를 설치하려면 *ClientApp* 하위 디렉터리에서 명령 프롬프트를 사용합니다. 예를 들어:
+타사 npm 패키지를 설치하려면 *ClientApp* 하위 디렉터리에서 명령 프롬프트를 사용합니다. 예를 들면,
 
 ```console
 cd ClientApp
