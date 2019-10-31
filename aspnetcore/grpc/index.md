@@ -17,7 +17,7 @@ ms.locfileid: "71925165"
 
 작성자: [John Luo](https://github.com/juntaoluo) 및 [James Newton-King](https://twitter.com/jamesnk)
 
-[gRPC](https://grpc.io/docs/guides/)는 언어에 제약받지 않는 고성능 RPC(원격 프로시저 호출) 프레임워크입니다.
+[gRPC](https://grpc.io/docs/guides/)는 언어에 제약 받지 않는 고성능 RPC(원격 프로시저 호출) 프레임워크입니다.
 
 gRPC의 주요 이점은 다음과 같습니다.
 * 최신 고성능 경량 RPC 프레임워크입니다.

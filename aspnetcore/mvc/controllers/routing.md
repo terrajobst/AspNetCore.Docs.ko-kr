@@ -35,7 +35,7 @@ app.UseMvc(routes =>
 
 `UseMvc` 호출 내부에서 `MapRoute`를 사용하여 `default` 경로라고 부르는 단일 경로를 생성합니다. 대부분의 MVC 앱은 `default` 경로와 비슷한 템플릿을 갖는 경로를 사용합니다.
 
-`"{controller=Home}/{action=Index}/{id?}"` 경로 템플릿은 경로를 토큰화하여 `/Products/Details/5` 같은 URL 경로를 매칭하고 `{ controller = Products, action = Details, id = 5 }` 경로 값을 추출합니다. MVC는 `ProductsController`라는 컨트롤러를 찾아 `Details` 작업을 실행하려고 시도합니다.
+`"{controller=Home}/{action=Index}/{id?}"` 경로 템플릿은 `/Products/Details/5`와 같은 URL 경로를 매칭하고 경로를 토큰화하여 `{ controller = Products, action = Details, id = 5 }` 경로 값을 추출합니다. MVC는 `ProductsController`라는 컨트롤러를 찾아 `Details` 작업을 실행하려고 시도합니다.
 
 ```csharp
 public class ProductsController : Controller
@@ -62,7 +62,7 @@ routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
 
 기본 및 선택적 경로 매개 변수는 매칭을 위해 URL 경로에 반드시 있어야 하는 것은 아닙니다. 경로 템플릿 구문에 대한 자세한 설명은 [경로 템플릿 참조](../../fundamentals/routing.md#route-template-reference)를 참조하세요.
 
-`"{controller=Home}/{action=Index}/{id?}"`는 URL 경로 `/`를 매칭할 수 있으며 `{ controller = Home, action = Index }` 경로 값을 생성합니다. `controller` 및 `action`의 값으로 기본값이 사용되며, URL 경로에 해당 세그먼트 없기 때문에 `id`가 값을 생성하지 않습니다. MVC는 이러한 경로 값을 사용하여 `HomeController` 및 `Index` 작업을 선택합니다.
+`"{controller=Home}/{action=Index}/{id?}"`는 URL 경로 `/`를 매칭할 수 있으며 `{ controller = Home, action = Index }` 경로 값을 생성합니다. `controller` 및 `action` 값으로 기본값이 사용되며, `id`는 URL 경로에 해당 세그먼트가 없기 때문에 값을 생성하지 않습니다. MVC는 이러한 경로 값을 사용하여 `HomeController` 및 `Index` 작업을 선택합니다.
 
 ```csharp
 public class HomeController : Controller
@@ -367,7 +367,7 @@ public class HomeController : Controller
 
 ### <a name="ordering-attribute-routes"></a>특성 경로 순서 지정
 
-정의된 순서대로 실행되는 규칙 기반 경로와는 달리, 특성 라우팅은 트리를 만들고 모든 경로를 동시에 매칭합니다. 이 동작은 경로 전체가 이상적인 순서로 정렬된 것처럼 수행됩니다. 가장 구체적인 경로는 일반적인 경로보다 먼저 실행될 가능성이 있습니다.
+정의된 순서대로 실행되는 규칙 기반 경로와는 달리, 특성 라우팅은 트리를 만들고 모든 경로를 동시에 매칭합니다. 이 동작은 경로 전체가 이상적인 순서로 정렬된 것처럼 수행됩니다. 가장 구체적인 경로가 일반적인 경로보다 먼저 실행될 가능성이 있습니다.
 
 예를 들어 `blog/search/{topic}` 같은 경로는 `blog/{*article}` 같은 경로보다 구체적입니다. 논리적으로 말해서, 기본적으로 `blog/search/{topic}` 경로가 가장 먼저 '실행'됩니다. 유일하게 합리적인 순서이기 때문입니다. 규칙 기반 라우팅을 사용하면 개발자가 원하는 순서대로 경로를 배치해야 합니다.
 
@@ -406,7 +406,7 @@ public class ProductsController : MyBaseController
 }
 ```
 
-토큰 교체는 특성 경로에 정의된 경로 이름에도 적용됩니다. `[Route("[controller]/[action]", Name="[controller]_[action]")]`는 각 작업의 고유한 경로 이름을 생성합니다.
+토큰 교체는 특성 경로에 정의된 경로 이름에도 적용됩니다. `[Route("[controller]/[action]", Name="[controller]_[action]")]`는 각 작업에 대해 고유한 경로 이름을 생성합니다.
 
 리터럴 토큰 교체 구분 기호 `[` 또는 `]`와 매칭하려면 문자(`[[` 또는 `]]`)를 반복하여 이스케이프합니다.
 
@@ -536,7 +536,7 @@ public class MyApiControllerAttribute : Attribute, IRouteTemplateProvider
 }
 ```
 
-위의 예제에 나오는 특성은 `[MyApiController]`가 적용되면 자동으로 `Template`을 `"api/[controller]"`로 설정합니다.
+위의 예제의 특성은 `[MyApiController]`가 적용되면 자동으로 `Template`을 `"api/[controller]"`로 설정합니다.
 
 <a name="routing-app-model-ref-label"></a>
 

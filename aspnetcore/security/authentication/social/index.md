@@ -1,31 +1,30 @@
 ---
 title: ASP.NET Core에서 Facebook, Google 및 외부 공급자 인증
 author: rick-anderson
-description: 이 자습서에는 외부 인증 공급자에 OAuth 2.0을 사용하여 ASP.NET Core 2.x 앱을 빌드하는 방법을 보여줍니다.
+description: 이 자습서에는 외부 인증 공급자에 OAuth 2.0을 사용하여 ASP.NET Core 앱을 빌드하는 방법을 보여줍니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/10/2019
+ms.date: 10/21/2019
 uid: security/authentication/social/index
-ms.openlocfilehash: edaf9eeaf02879b2f7816bab0eb373a7de640c05
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 627ca483d60514d85e38c0e346ff5aef64ad9fee
+ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71082513"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73034302"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>ASP.NET Core에서 Facebook, Google 및 외부 공급자 인증
 
 작성자: [Valeriy Novytskyy](https://github.com/01binary) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-이 자습서에서는 사용자가 외부 인증 공급 기업의 자격 증명으로 OAuth 2.0을 사용하여 로그인할 수 있도록 ASP.NET Core 2.2 앱을 빌드하는 방법을 보여줍니다.
+이 자습서에서는 사용자가 외부 인증 공급 기업의 자격 증명으로 OAuth 2.0을 사용하여 로그인할 수 있도록 ASP.NET Core 3.0 앱을 빌드하는 방법을 보여줍니다.
 
-[Facebook](xref:security/authentication/facebook-logins), [Twitter](xref:security/authentication/twitter-logins), [Google](xref:security/authentication/google-logins) 및 [Microsoft](xref:security/authentication/microsoft-logins) 공급자는 다음 섹션에서 다룹니다. 다른 공급자는 [AspNet.Security.OAuth.Providers](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers) 및 [AspNet.Security.OpenId.Providers](https://github.com/aspnet-contrib/AspNet.Security.OpenId.Providers)와 같은 타사 패키지에서 사용할 수 있습니다.
-
-![Facebook, Twitter, Google Plus 및 Windows용 소셜 미디어 아이콘](index/_static/social.png)
+[Facebook](xref:security/authentication/facebook-logins), [Twitter](xref:security/authentication/twitter-logins), [Google](xref:security/authentication/google-logins) 및 [Microsoft](xref:security/authentication/microsoft-logins) 공급자는 다음 섹션에서 다루고 이 문서에서 만든 시작 프로젝트를 사용합니다. 다른 공급자는 [AspNet.Security.OAuth.Providers](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers) 및 [AspNet.Security.OpenId.Providers](https://github.com/aspnet-contrib/AspNet.Security.OpenId.Providers)와 같은 타사 패키지에서 사용할 수 있습니다.
 
 사용자가 기존 자격 증명으로 로그인할 수 있도록 설정:
+
 * 사용자에게 편리합니다.
-* 로그인 프로세스를 관리하는 많은 복잡한 과정을 타사로 이전합니다. 
+* 로그인 프로세스를 관리하는 많은 복잡한 과정을 타사로 이전합니다.
 
 소셜 로그인이 트래픽 및 고객 변환을 제공할 수 있는 방법에 대한 예제는 [Facebook](https://www.facebook.com/unsupportedbrowser) 및 [Twitter](https://dev.twitter.com/resources/case-studies)의 사례 연구를 참조하세요.
 
@@ -36,36 +35,32 @@ ms.locfileid: "71082513"
 * 새 프로젝트를 만듭니다.
 * **ASP.NET Core 웹 애플리케이션** 및 **다음**을 선택합니다.
 * **프로젝트 이름**을 제공하고 **위치**를 확인하거나 변경합니다. **만들기**를 선택합니다.
-* 드롭다운에서 **ASP.NET Core 2.2**를 선택합니다. 템플릿 목록에서 **웹 애플리케이션**을 선택합니다.
+* 드롭다운에서 **ASP.NET Core 3.0**을 선택한 다음, **웹 애플리케이션**을 선택합니다.
 * **인증**에서 **변경**을 선택하고 인증을 **개별 사용자 계정**으로 설정합니다. **확인**을 선택합니다.
 * **새 ASP.NET Core 웹 애플리케이션 만들기** 창에서 **만들기**를 선택합니다.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
-* [통합 터미널](https://code.visualstudio.com/docs/editor/integrated-terminal)을 엽니다.
+* 터미널을 엽니다.  Visual Studio Code에서 [통합 터미널](https://code.visualstudio.com/docs/editor/integrated-terminal)을 열 수 있습니다.
 
-* 디렉터리(`cd`)를 프로젝트를 포함하는 폴더로 변경합니다.
+* 프로젝트를 포함할 폴더로 디렉터리를 변경(`cd`)합니다.
 
-* 다음 명령을 실행합니다.
+* Windows의 경우 다음 명령을 실행합니다.
 
   ```dotnetcli
   dotnet new webapp -o WebApp1 -au Individual -uld
-  code -r WebApp1
+  ```
+
+  macOS 및 Linux의 경우 다음 명령을 실행합니다.
+
+  ```dotnetcli
+  dotnet new webapp -o WebApp1 -au Individual
   ```
 
   * `dotnet new` 명령은 *WebApp1* 폴더에서 새 Razor Pages 프로젝트를 만듭니다.
-  * `-uld`는 SQLite 대신 LocalDB를 사용합니다. SQLite를 사용하려면 `-uld`를 생략합니다.
   * `-au Individual`은 개별 인증을 위한 코드를 만듭니다.
+  * `-uld`에서는 Windows용 SQL Server Express의 경량 버전인 LocalDB를 사용합니다. SQLite를 사용하려면 `-uld`를 생략합니다.
   * `code` 명령은 Visual Studio Code의 새 인스턴스에서 *WebApp1* 폴더를 엽니다.
-
-* **가 있는 대화 상자가 나타나고 'WebApp1'에서 빌드 및 디버그에 필요한 자산이 누락되었습니다. 추가할까요?** **예**를 선택합니다.
-
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
-
-* **파일** > **새 솔루션**을 선택합니다.
-* 사이드바에서 **.NET Core** > **앱**을 선택합니다. **웹 애플리케이션** 템플릿을 선택합니다. **새로 만들기**를 선택합니다.
-* **대상프레임 워크** 드롭다운을 **.NET Core 2.2**로 설정합니다. **새로 만들기**를 선택합니다.
-* **프로젝트 이름**을 제공하세요. **위치**를 확인하거나 변경합니다. **만들기**를 선택합니다.
 
 ---
 
