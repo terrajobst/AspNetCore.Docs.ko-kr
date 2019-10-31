@@ -5,14 +5,14 @@ description: Windows Server IIS(인터넷 정보 서비스)에서 ASP.NET Core �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/13/2019
+ms.date: 10/26/2019
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: bf535134277a08103ba8ce55eeed540a9fce8260
-ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
+ms.openlocfilehash: 179ab4c97426c9d3cb8ed069d2059d767d755533
+ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/15/2019
-ms.locfileid: "72333872"
+ms.lasthandoff: 10/29/2019
+ms.locfileid: "73034262"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS가 있는 Windows에서 ASP.NET Core 호스팅
 
@@ -129,8 +129,6 @@ ASP.NET Core 모듈은 동적 포트를 생성하여 백 엔드 프로세스에 
 
 모듈을 사용하는 경우 `UseUrls` 호출 또는 Kestrel의 `Listen` API가 필요하지 않습니다. `UseUrls` 또는 `Listen`을 호출하는 경우 Kestrel은 IIS 없이 앱을 실행할 때만 지정된 포트에서 수신 대기합니다.
 
-In-process 및 out-of-process 호스팅 모델에 대한 자세한 내용은 [ASP.NET Core 모듈](xref:host-and-deploy/aspnet-core-module) 및 [ASP.NET Core 모듈 구성 참조](xref:host-and-deploy/aspnet-core-module)를 참조하세요.
-
 ::: moniker-end
 
 ASP.NET Core 모듈 구성 지침은 <xref:host-and-deploy/aspnet-core-module>을 참조하세요.
@@ -221,7 +219,7 @@ services.Configure<IISOptions>(options =>
 <Project Sdk="Microsoft.NET.Sdk.Web">
 ```
 
-프로젝트에 *web.config* 파일이 없는 경우, [ASP.NET Core 모듈](xref:host-and-deploy/aspnet-core-module)을 구성하기 위해 올바른 *processPath* 및 *인수*로 파일이 생성되어 [게시된 출력](xref:host-and-deploy/directory-structure)으로 이동됩니다.
+프로젝트에 *web.config* 파일이 없는 경우, ASP.NET Core 모듈을 구성하기 위해 올바른 *processPath* 및 *‘인수’* 로 파일이 생성되어 [게시된 출력](xref:host-and-deploy/directory-structure)으로 이동됩니다.
 
 프로젝트에 *web.config* 파일이 있는 경우, ASP.NET Core 모듈을 구성하기 위해 올바른 *processPath* 및 *인수*로 파일이 변환되어 게시된 출력으로 이동됩니다. 변환은 이 파일의 IIS 구성 설정을 수정하지 않습니다.
 
@@ -235,7 +233,7 @@ services.Configure<IISOptions>(options =>
 </PropertyGroup>
 ```
 
-웹 SDK가 파일을 변환하지 않도록 설정하는 경우 개발자가 *processPath* 및 *인수*를 수동으로 설정해야 합니다. 자세한 내용은 [ASP.NET Core 모듈 구성 참조](xref:host-and-deploy/aspnet-core-module)를 참조하세요.
+웹 SDK가 파일을 변환하지 않도록 설정하는 경우 개발자가 *processPath* 및 *인수*를 수동으로 설정해야 합니다. 자세한 내용은 <xref:host-and-deploy/aspnet-core-module>을 참조하세요.
 
 ### <a name="webconfig-file-location"></a>web.config 파일 위치
 
@@ -332,6 +330,10 @@ services.Configure<IISOptions>(options =>
    * `OPT_NO_X86=1` &ndash; x86 런타임 설치를 건너뜁니다. 32비트 앱을 호스팅하지 않음을 아는 경우 이 매개 변수를 사용합니다. 향후 32비트와 64비트 앱을 모두 호스트할 수 있는 기회가 있는 경우 이 매개 변수를 사용하지 않고 두 런타임을 모두 설치합니다.
    * `OPT_NO_SHARED_CONFIG_CHECK=1` &ndash; 공유 구성(*applicationHost.config*)이 IIS 설치와 동일한 머신에 있는 경우 IIS 공유 구성 사용 선택을 해제합니다. *ASP.NET Core 2.2 이상 호스팅 번들러 설치 관리자에 대해서만 사용할 수 있습니다.* 자세한 내용은 <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>을 참조하세요.
 1. 시스템을 다시 시작하거나 명령 셸에서 **net stop was /y**, **net start w3svc**를 차례로 실행합니다. IIS를 다시 시작하면 설치 관리자에서 변경된 시스템 PATH(환경 변수)의 내용이 수집됩니다.
+
+호스팅 번들을 설치할 때 IIS에서 개별 사이트를 수동으로 중지하지 않아도 됩니다. IIS가 다시 시작되면 호스트된 앱(IIS 사이트)이 다시 시작됩니다. 앱은 [애플리케이션 초기화 모듈](#application-initialization-module-and-idle-timeout)을 포함하여 첫 번째 요청을 받으면 다시 시작됩니다.
+
+ASP.NET Core에서는 공유 프레임워크 패키지의 패치 릴리스에 대한 롤포워드 동작을 채택합니다. IIS에서 호스트된 앱이 IIS를 통해 다시 시작되는 경우 앱은 첫 번째 요청을 받을 때 참조된 패키지의 최신 패치 릴리스와 함께 로드됩니다. IIS를 다시 시작하지 않으면 작업자 프로세스가 재생되고 첫 번째 요청을 받을 때 앱이 다시 시작되고 롤포워드 동작을 나타냅니다.
 
 > [!NOTE]
 > IIS 공유 구성에 대한 자세한 내용은 [IIS 공유 구성을 사용하는 ASP.NET Core 모듈](xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration)을 참조하세요.
@@ -528,13 +530,19 @@ ASP.NET Core 앱을 다른 ASP.NET Core 앱에서 하위 앱으로 호스팅하�
 
 하위 앱에 대한 별도의 앱 풀 할당은 In-process 호스팅 모델을 사용할 때 필요합니다.
 
-In-process 호스팅 모델 및 ASP.NET Core 모듈 구성에 대한 자세한 내용은 <xref:host-and-deploy/aspnet-core-module> 및 <xref:host-and-deploy/aspnet-core-module>을 참조하세요.
+In-process 호스팅 모델 및 ASP.NET Core 모듈 구성에 대한 자세한 내용은 <xref:host-and-deploy/aspnet-core-module>을(를) 참조하세요.
 
 ## <a name="configuration-of-iis-with-webconfig"></a>web.config를 사용하여 IIS 구성
 
 IIS 구성은 ASP.NET Core 모듈을 사용하여 ASP.NET Core 앱에 대해 작동하는 IIS 시나리오에서 *web.config*에 포함된 `<system.webServer>` 섹션의 영향을 받습니다. 예를 들어, IIS 구성은 동적 압축에 대해 작동합니다. IIS가 동적 압축을 사용하도록 서버 수준에서 구성된 경우, 앱의 *web.config* 파일에 포함된 `<urlCompression>` 요소가 ASP.NET Core 앱에 대해 이를 비활성화할 수 있습니다.
 
-자세한 내용은 [\<system.webServer>에 대한 구성 참조](/iis/configuration/system.webServer/), [ASP.NET Core 모듈 구성 참조](xref:host-and-deploy/aspnet-core-module) 및 [ASP.NET Core와 IIS 모듈](xref:host-and-deploy/iis/modules)을 참조하세요. 격리된 앱 풀에서 실행되는 개별 앱에 대해 환경 변수를 설정하려면(IIS 10.0 이상에서 지원됨), IIS 참조 문서에서 [환경 변수 \<environmentVariables>](/iis/configuration/system.applicationHost/applicationPools/add/environmentVariables/#appcmdexe) 항목의 *AppCmd.exe 명령* 섹션을 참조하세요.
+자세한 내용은 다음 항목을 참조하세요.
+
+* [\<system.webServer>의 구성 참조](/iis/configuration/system.webServer/)
+* <xref:host-and-deploy/aspnet-core-module>
+* <xref:host-and-deploy/iis/modules>
+
+격리된 앱 풀에서 실행되는 개별 앱에 대해 환경 변수를 설정하려면(IIS 10.0 이상에서 지원됨), IIS 참조 문서에서 [환경 변수 \<environmentVariables>](/iis/configuration/system.applicationHost/applicationPools/add/environmentVariables/#appcmdexe) 항목의 *AppCmd.exe 명령* 섹션을 참조하세요.
 
 ## <a name="configuration-sections-of-webconfig"></a>web.config 구성 섹션
 
@@ -728,11 +736,8 @@ IIS 설명서에서 IIS에 대해 자세히 알아보세요.
 .NET Core 앱 배포 모델에 자세히 알아보세요.  
 [.NET Core 애플리케이션 배포](/dotnet/core/deploying/)
 
-ASP.NET Core 모듈이 Kestrel 웹 서버에서 역방향 프록시 서버로 IIS 또는 IIS Express를 어떻게 사용하도록 허용하는지 알아봅니다.  
-[ASP.NET Core 모듈](xref:host-and-deploy/aspnet-core-module)
-
-ASP.NET Core 앱을 호스팅하기 위해 ASP.NET Core 모듈을 구성하는 방법을 알아봅니다.  
-[ASP.NET Core 모듈 구성 참조](xref:host-and-deploy/aspnet-core-module)
+구성 지침을 포함하여 ASP.NET Core 모듈에 대해 알아봅니다.  
+<xref:host-and-deploy/aspnet-core-module>
 
 게시된 ASP.NET Core 앱의 디렉터리 구조에 대해 알아봅니다.  
 [디렉터리 구조](xref:host-and-deploy/directory-structure)
