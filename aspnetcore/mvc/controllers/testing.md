@@ -26,7 +26,7 @@ ms.locfileid: "71199098"
 
 ## <a name="unit-tests-of-controller-logic"></a>컨트롤러 논리의 단위 테스트
 
-[단위 테스트](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)는 앱의 일부분을 인프라 및 종속성과 분리하여 테스트를 수행합니다. 컨트롤러 논리를 단위 테스트 할 때 단일 작업의 콘텐츠만 테스트되고, 작업의 종속성 또는 프레임워크 자체의 동작은 테스트되지 않습니다.
+[단위 테스트](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)는 앱의 일부분을 인프라 및 종속성과 분리하여 테스트를 수행합니다. 컨트롤러 논리를 단위 테스트할 때 단일 작업의 콘텐츠만 테스트되고, 작업의 종속성 또는 프레임워크 자체의 동작은 테스트되지 않습니다.
 
 컨트롤러의 동작에 초점을 맞춰 컨트롤러 동작의 단위 테스트를 설정합니다. 컨트롤러 단위 테스트는 [필터](xref:mvc/controllers/filters), [라우팅](xref:fundamentals/routing), [모델 바인딩](xref:mvc/models/model-binding) 같은 시나리오를 방지합니다. 전체적으로 요청에 응답하는 구성 요소 간 상호 작용을 포함하는 테스트는 ‘통합 테스트’에서 처리합니다.  통합 테스트에 대한 자세한 내용은 <xref:test/integration-tests>를 참조하세요.
 
@@ -189,7 +189,7 @@ ASP.NET Core 2.1 이상에서 [ActionResult\<T](xref:web-api/action-return-types
 
 ## <a name="unit-tests-of-controller-logic"></a>컨트롤러 논리의 단위 테스트
 
-[단위 테스트](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)는 앱의 일부분을 인프라 및 종속성과 분리하여 테스트를 수행합니다. 컨트롤러 논리를 단위 테스트 할 때 단일 작업의 콘텐츠만 테스트되고, 작업의 종속성 또는 프레임워크 자체의 동작은 테스트되지 않습니다.
+[단위 테스트](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)는 앱의 일부분을 인프라 및 종속성과 분리하여 테스트를 수행합니다. 컨트롤러 논리를 단위 테스트할 때 단일 작업의 콘텐츠만 테스트되고, 작업의 종속성 또는 프레임워크 자체의 동작은 테스트되지 않습니다.
 
 컨트롤러의 동작에 초점을 맞춰 컨트롤러 동작의 단위 테스트를 설정합니다. 컨트롤러 단위 테스트는 [필터](xref:mvc/controllers/filters), [라우팅](xref:fundamentals/routing), [모델 바인딩](xref:mvc/models/model-binding) 같은 시나리오를 방지합니다. 전체적으로 요청에 응답하는 구성 요소 간 상호 작용을 포함하는 테스트는 ‘통합 테스트’에서 처리합니다.  통합 테스트에 대한 자세한 내용은 <xref:test/integration-tests>를 참조하세요.
 
