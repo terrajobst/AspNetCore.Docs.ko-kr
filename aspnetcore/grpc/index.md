@@ -17,21 +17,21 @@ ms.locfileid: "71925165"
 
 작성자: [John Luo](https://github.com/juntaoluo) 및 [James Newton-King](https://twitter.com/jamesnk)
 
-[gRPC](https://grpc.io/docs/guides/)는 언어 제약이 없는 고성능 RPC(원격 프로시저 호출) 프레임워크입니다.
+[gRPC](https://grpc.io/docs/guides/)는 언어에 제약 받지 않는 고성능 RPC(원격 프로시저 호출) 프레임워크입니다.
 
 gRPC의 주요 이점은 다음과 같습니다.
-* 최신 고성능 경량 RPC 프레임워크.
-* 기본적으로 프로토콜 버퍼를 사용하는 계약 우선 API 개발로, 언어 제약이 없는 구현이 가능합니다.
-* 강력한 형식의 서버 및 클라이언트를 생성하는 여러 언어에 사용할 수 있는 도구입니다.
+* 최신 고성능 경량 RPC 프레임워크입니다.
+* 기본적으로 프로토콜 버퍼를 사용하는 계약 중심 API 개발로 언어에 구애받지 않는 구현이 가능합니다.
+* 여러 언어에서 강력한 형식의 서버 및 클라이언트를 생성할 수 있는 도구입니다.
 * 클라이언트, 서버 및 양방향 스트리밍 호출을 지원합니다.
-* Protobuf 이진 serialization을 통한 네트워크 사용량 감소.
+* Protobuf 이진 직렬화를 사용하여 네트워크 사용량이 감소합니다.
 
-이러한 이점으로 인해 gRPC가 다음과 같은 분야에 이상적이 되도록 합니다.
+이러한 이점으로 인해 gRPC는 다음과 같은 분야에 이상적입니다.
 * 효율성이 중요한 경량 마이크로 서비스.
-* 개발을 위해 여러 언어가 필요한 다언어 시스템.
+* 개발을 위해 여러 언어가 필요한 다중 언어 시스템.
 * 스트리밍 요청 또는 응답을 처리해야 하는 지점 간 실시간 서비스.
 
-## <a name="c-tooling-support-for-proto-files"></a>.proto 파일의 C# 도구 지원
+## <a name="c-tooling-support-for-proto-files"></a>.proto 파일에 대한 C# 도구 지원
 
 gRPC는 API 개발에 계약 중심 접근 방식을 사용합니다. 서비스 및 메시지는 다음과 같은 *\*.proto* 파일에 정의됩니다.
 
@@ -53,7 +53,7 @@ message HelloReply {
 
 서비스, 클라이언트 및 메시지에 대한 .NET 형식은 프로젝트에서 *\*.proto* 파일을 포함하여 자동으로 생성됩니다.
 
-* 패키지 참조를 [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/) 패키지에 추가합니다.
+* [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/) 패키지에 대한 패키지 참조를 추가합니다.
 * `<Protobuf>` 항목 그룹에 *\*.proto* 파일을 추가합니다.
 
 ```xml
@@ -117,7 +117,7 @@ var response = await client.SayHello(
 Console.WriteLine(response.Message);
 ```
 
-gRPC 클라이언트는 gRPC 서비스에 대한 장기간 연결을 나타내는 채널을 사용하여 만들어집니다. `GrpcChannel.ForAddress`를 사용하여 채널을 만들 수 있습니다.
+gRPC 클라이언트는 gRPC 서비스에 대한 수명이 긴 연결을 나타내는 채널을 사용하여 만들어집니다. `GrpcChannel.ForAddress`를 사용하여 채널을 만들 수 있습니다.
 
 클라이언트를 만들고 다른 서비스 메서드를 호출하는 방법에 대한 자세한 내용은 <xref:grpc/client> 문서를 참조하세요.
 
