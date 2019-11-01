@@ -10,7 +10,7 @@ dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 
 앞의 명령은 다음을 추가합니다.
 
-* [aspnet-codegenerator 스캐폴딩 도구](xref:fundamentals/tools/dotnet-aspnet-codegenerator).
+* [aspnet-codegenerator 스캐폴딩 도구](xref:fundamentals/tools/dotnet-aspnet-codegenerator)
 * .NET Core CLI에 대한 Entity Framework Core 도구.
 * EF Core 패키지를 종속성으로 설치하는 EF Core SQLite 공급자.
 * 스캐폴딩에 필요한 패키지: `Microsoft.VisualStudio.Web.CodeGeneration.Design` 및 `Microsoft.EntityFrameworkCore.SqlServer`.
