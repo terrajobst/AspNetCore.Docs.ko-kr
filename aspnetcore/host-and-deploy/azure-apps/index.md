@@ -1,18 +1,18 @@
 ---
 title: Azure App Service에 ASP.NET Core 앱 배포
-author: guardrex
+author: bradygaster
 description: 이 문서에는 Azure 호스트 및 배포 리소스의 링크가 포함됩니다.
 monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
+ms.author: bradyg
 ms.custom: mvc
-ms.date: 10/02/2019
+ms.date: 10/11/2019
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: bda4923adb0f9769f883ef64f7902c8650308222
-ms.sourcegitcommit: 73e255e846e414821b8cc20ffa3aec946735cd4e
+ms.openlocfilehash: 392868b4fc9105279f8f3b10436a9915123e7070
+ms.sourcegitcommit: 032113208bb55ecfb2faeb6d3e9ea44eea827950
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/03/2019
-ms.locfileid: "71924895"
+ms.lasthandoff: 10/31/2019
+ms.locfileid: "73190633"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Azure App Service에 ASP.NET Core 앱 배포
 
@@ -29,6 +29,8 @@ Visual Studio를 사용하여 ASP.NET Core 웹앱을 만들고 Windows의 Azure 
 명령줄을 사용하여 ASP.NET Core 웹앱을 만들고 Linux의 Azure App Service에 배포합니다.
 
 Azure 앱 서비스에서 사용할 수 있는 ASP.NET Core 버전은 [ASP.NET Core on App Service Dashboard](https://aspnetcoreon.azurewebsites.net/)를 참조하세요.
+
+[App Service 공지](https://github.com/Azure/app-service-announcements/) 리포지토리를 구독하고 문제를 모니터링합니다. App Service 팀은 App Service에 도착하는 공지 및 시나리오를 정기적으로 게시합니다.
 
 다음 문서는 ASP.NET Core 설명서에 제공됩니다.
 
@@ -141,24 +143,48 @@ Azure App Service/IIS에서 호스트하는 앱의 일반적인 배포 구성 �
 
 자세한 내용은 <xref:security/data-protection/implementation/key-storage-providers>을 참조하세요.
 <a name="deploy-aspnet-core-preview-release-to-azure-app-service"></a>
-<!-- revert this after 3.0 supported
-## Deploy ASP.NET Core preview release to Azure App Service
 
-Use one of the following approaches if the app relies on a preview release of .NET Core:
-
-* [Install the preview site extension](#install-the-preview-site-extension).
-* [Deploy a self-contained preview app](#deploy-a-self-contained-preview-app).
-* [Use Docker with Web Apps for containers](#use-docker-with-web-apps-for-containers).
--->
 ## <a name="deploy-aspnet-core-30-to-azure-app-service"></a>Azure App Service에 ASP.NET Core 3.0 배포
 
-Azure App Service에 ASP.NET Core 3.0을 곧 제공할 예정입니다.
+ASP.NET Core 3.0은 Azure App Service에서 지원됩니다. .NET Core 3.0 이후의 .NET Core 버전 미리 보기 릴리스를 배포하려면 다음 방법 중 하나를 사용합니다. 이러한 접근 방식은 런타임을 사용할 수 있지만, SDK가 Azure App Service에 설치되지 않은 경우에도 사용됩니다.
 
-앱이 .NET Core 3.0을 사용하는 경우 다음 방법 중 하나를 사용합니다.
-
-* [미리 보기 사이트 확장을 설치](#install-the-preview-site-extension)합니다.
+* [Azure Pipelines를 사용하여 .NET Core SDK 버전 지정](#specify-the-net-core-sdk-version-using-azure-pipelines)
 * [자체 포함 미리 보기 앱을 배포합니다](#deploy-a-self-contained-preview-app).
 * [Web Apps for Containers에서 Docker를 사용](#use-docker-with-web-apps-for-containers)합니다.
+* [미리 보기 사이트 확장을 설치](#install-the-preview-site-extension)합니다.
+
+### <a name="specify-the-net-core-sdk-version-using-azure-pipelines"></a>Azure Pipelines를 사용하여 .NET Core SDK 버전 지정
+
+[Azure App Service CI/CD 시나리오](/azure/app-service/deploy-continuous-deployment)를 사용하여 Azure DevOps와 함께 연속 통합 빌드를 설정합니다. Azure DevOps 빌드를 만든 후에 원하는 경우 특정 SDK 버전을 사용하도록 빌드를 구성합니다. 
+
+#### <a name="specify-the-net-core-sdk-version"></a>.NET Core SDK 버전 지정
+
+App Service 배포 센터를 사용하여 Azure DevOps 빌드를 만들 때 기본 빌드 파이프라인에 `Restore`, `Build`, `Test` 및 `Publish`에 대한 단계가 포함됩니다. SDK 버전을 지정하려면 에이전트 작업 목록에서 **추가(+)** 단추를 선택하여 새 단계를 추가합니다. 검색 창에서 **.NET Core SDK**를 검색합니다. 
+
+![.NET Core SDK 단계 추가](index/add-sdk-step.png)
+
+다음 단계에서 지정된 .NET Core SDK 버전이 사용되도록 이 단계를 빌드의 첫 번째 위치로 이동합니다. .NET Core SDK의 버전을 지정합니다. 이 예제에서 SDK는 `3.0.100`로 설정됩니다.
+
+![완료된 SDK 단계](index/sdk-step-first-place.png)
+
+[SCD(자체 포함 게시)](/dotnet/core/deploying/#self-contained-deployments-scd)를 게시하려면 `Publish` 단계에서 SCD를 구성하고 [RID(런타임 식별자)](/dotnet/core/rid-catalog)를 제공합니다.
+
+![자체 포함 게시](index/self-contained.png)
+
+### <a name="deploy-a-self-contained-preview-app"></a>자체 포함 미리 보기 앱 배포
+
+미리 보기 런타임을 대상으로 하는 [SCD(자체 포함 배포)](/dotnet/core/deploying/#self-contained-deployments-scd)는 배포 시 미리 보기 런타임을 전달합니다.
+
+자체 포함된 앱을 배포하는 경우:
+
+* Azure App Service의 사이트에는 [미리 보기 사이트 확장](#install-the-preview-site-extension)이 필요하지 않습니다.
+* 앱은 [FDD(프레임워크 종속 배포)](/dotnet/core/deploying#framework-dependent-deployments-fdd)에 대해 게시할 때와 다른 접근 방식으로 공개해야 합니다.
+
+[자체 포함된 앱 배포](#deploy-the-app-self-contained) 섹션의 지침을 따릅니다.
+
+### <a name="use-docker-with-web-apps-for-containers"></a>Web Apps for Containers에서 Docker 사용
+
+[Docker 허브](https://hub.docker.com/r/microsoft/aspnetcore/)에는 최신 미리 보기 Docker 이미지가 포함됩니다. 이미지는 기본 이미지로 사용할 수 있습니다. 이미지를 사용하고 일반적으로 Web App for Containers에 배포합니다.
 
 ### <a name="install-the-preview-site-extension"></a>미리 보기 사이트 확장 설치
 
@@ -205,21 +231,6 @@ Azure App Service에 ASP.NET Core 3.0을 곧 제공할 예정입니다.
 ARM 템플릿을 사용하여 앱을 만들고 배포하는 경우 `siteextensions` 리소스 형식을 사용하여 웹앱에 사이트 확장을 추가할 수 있습니다. 예:
 
 [!code-json[](index/sample/arm.json?highlight=2)]
-
-### <a name="deploy-a-self-contained-preview-app"></a>자체 포함 미리 보기 앱 배포
-
-미리 보기 런타임을 대상으로 하는 [SCD(자체 포함 배포)](/dotnet/core/deploying/#self-contained-deployments-scd)는 배포 시 미리 보기 런타임을 전달합니다.
-
-자체 포함된 앱을 배포하는 경우:
-
-* Azure App Service의 사이트에는 [미리 보기 사이트 확장](#install-the-preview-site-extension)이 필요하지 않습니다.
-* 앱은 [FDD(프레임워크 종속 배포)](/dotnet/core/deploying#framework-dependent-deployments-fdd)에 대해 게시할 때와 다른 접근 방식으로 공개해야 합니다.
-
-[자체 포함된 앱 배포](#deploy-the-app-self-contained) 섹션의 지침을 따릅니다.
-
-### <a name="use-docker-with-web-apps-for-containers"></a>Web Apps for Containers에서 Docker 사용
-
-[Docker 허브](https://hub.docker.com/r/microsoft/aspnetcore/)에는 최신 미리 보기 Docker 이미지가 포함됩니다. 이미지는 기본 이미지로 사용할 수 있습니다. 이미지를 사용하고 일반적으로 Web App for Containers에 배포합니다.
 
 ## <a name="publish-and-deploy-the-app"></a>앱 게시 및 배포
 
