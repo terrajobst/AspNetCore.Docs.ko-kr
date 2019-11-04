@@ -218,7 +218,7 @@ dotnet add GrpcGreeterClient.csproj package Grpc.Tools
 ### <a name="add-greetproto"></a>greet.proto 추가
 
 * gRPC 클라이언트 프로젝트에서 *Protos* 폴더를 만듭니다.
-* *Protos\greet.proto* 파일을 gRPC Greeter 서비스에서 gRPC 클라이언트 프로젝트로 복사합니다.
+* gRPC Greeter 서비스에서 *Protos\greet.proto* 파일을 gRPC 클라이언트 프로젝트로 복사합니다.
 * *GrpcGreeterClient.csproj* 프로젝트 파일을 편집합니다.
 
   # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
@@ -284,7 +284,7 @@ Greeter 클라이언트가 비동기 `SayHello` 메서드를 호출합니다. `S
 
 ---
 
-클라이언트가 이름 *GreeterClient*가 포함된 메시지와 함께 인사말을 서비스에 보냅니다. 서비스는 "Hello GreeterClient"라는 메시지를 응답으로 보냅니다. "Hello GreeterClient" 응답이 명령 프롬프트에 표시됩니다.
+클라이언트가 *GreeterClient*라는 이름을 포함한 메시지와 함께 인사말을 서비스에 보냅니다. 서비스는 "Hello GreeterClient"라는 메시지를 응답으로 보냅니다. "Hello GreeterClient" 응답이 명령 프롬프트에 표시됩니다.
 
 ```console
 Greeting: Hello GreeterClient
