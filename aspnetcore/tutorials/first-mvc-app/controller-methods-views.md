@@ -16,21 +16,21 @@ ms.locfileid: "67815411"
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-영화 앱을 멋지게 시작했지만 그 외형이 이상적이지는 않습니다. 예를 들어 **ReleaseDate**는 두 단어여야 합니다.
+동영상 앱을 적절하게 시작했지만 프레젠테이션은 이상적이지 않습니다. 예를 들어 **ReleaseDate**는 두 단어여야 합니다.
 
-![Index 보기: 릴리스 날짜가 한 단어(공백 없음)이고 모든 영화 릴리스 날짜가 오전 12시로 표시됩니다.](working-with-sql/_static/m55.png)
+![인덱스 보기: 릴리스 날짜는 한 단어(공백 없음)이며 모든 동영상 릴리스 날짜는 오전 12시를 표시합니다.](working-with-sql/_static/m55.png)
 
 *Models/Movie.cs* 파일을 열고 아래에 강조 표시된 줄을 추가합니다.
 
 [!code-csharp[](start-mvc/sample/MvcMovie22/Models/MovieDateFixed.cs?name=snippet_1&highlight=2,3,12-13,17)]
 
-[DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6)에 대해서는 다음 자습서에서 다룹니다. [Display](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.metadata.displaymetadata) 특성은 필드의 이름으로 표시할 내용을 지정합니다(이 경우 "ReleaseDate" 대신 "Release Date"). [DataType](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.internal.datatypeattributeadapter) 특성은 필드에 저장된 시간 정보가 표시되지 않도록 데이터의 형식(날짜)을 지정합니다.
+[DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6)에 대해서는 다음 자습서에서 다룹니다. [Display](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.metadata.displaymetadata) 특성은 필드의 이름으로 표시할 내용을 지정합니다(이 경우 "ReleaseDate" 대신 "Release Date") [DataType](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.internal.datatypeattributeadapter) 특성은 필드에 저장된 시간 정보가 표시되지 않도록 데이터의 형식(날짜)을 지정합니다.
 
 Entity Framework Core가 `Price`를 데이터베이스의 통화에 올바르게 매핑하기 위해서는 `[Column(TypeName = "decimal(18, 2)")]` 데이터 주석이 필요합니다. 자세한 내용은 [데이터 형식](/ef/core/modeling/relational/data-types)을 참조하세요.
 
 `Movies` 컨트롤러로 이동하고 **Edit** 링크 위에 마우스 포인터를 올려놓으면 대상 URL이 표시됩니다.
 
-![브라우저 창에서 Edit 링크에 마우스를 가져가면 https://localhost:5001/Movies/Edit/5 의 링크 Url이 표시됩니다.](~/tutorials/first-mvc-app/controller-methods-views/_static/edit7.png)
+![브라우저 창에서 편집 링크에 마우스를 가져가면 https://localhost:5001/Movies/Edit/5 의 링크 Url이 표시됩니다.](~/tutorials/first-mvc-app/controller-methods-views/_static/edit7.png)
 
 **Edit**, **Details** 및 **Delete** 링크는 *Views/Movies/Index.cshtml* 파일의 Core MVC 앵커 태그 도우미에 의해서 생성됩니다.
 
@@ -54,7 +54,7 @@ ASP.NET Core는 `https://localhost:5001/Movies/Edit/4`를 매개 변수 `Id`가 
 
 [태그 도우미](xref:mvc/views/tag-helpers/intro)는 ASP.NET Core의 가장 인기 있는 새로운 기능 중 하나입니다. 자세한 내용은 [추가 자료](#additional-resources)를 참조하세요.
 
-`Movies` 컨트롤러를 열고 두 `Edit` 작업 메서드를 검토해보세요. 다음 코드는 영화를 페치하고 *Edit.cshtml* Razor 파일에서 생성된 편집 양식을 채우는 `HTTP GET Edit` 메서드를 보여줍니다.
+`Movies` 컨트롤러를 열고 두 `Edit` 작업 메서드를 검사합니다. 다음 코드는 동영상을 페치하여 *Edit.cshtml* Razor 파일에서 생성된 편집 양식에 기입하는 `HTTP GET Edit` 메서드를 보여 줍니다.
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -116,7 +116,7 @@ ASP.NET Core는 `https://localhost:5001/Movies/Edit/4`를 매개 변수 `Id`가 
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Shared/edit_view_source.html?highlight=1,6,10,17,24,28)]
 
-`<input>` 요소는 `action` 특성이 `/Movies/Edit/id` URL에 게시되도록 설정된 `HTML <form>` 요소에 위치합니다. 양식 데이터는 `Save` 단추를 클릭하면 서버에 게시됩니다. `</form>` 요소를 닫기 전 마지막 줄은 [Form 태그 도우미](xref:mvc/views/working-with-forms)에서 생성된 숨겨진 [XSRF](xref:security/anti-request-forgery) 토큰을 나타냅니다.
+`<input>` 요소는 `action` 특성이 `/Movies/Edit/id` URL에 게시되도록 설정된 `HTML <form>` 요소의 내부에 위치합니다. 양식 데이터는 `Save` 단추를 클릭하면 서버에 게시됩니다. `</form>` 요소를 닫기 전 마지막 줄은 [Form 태그 도우미](xref:mvc/views/working-with-forms)에서 생성된 숨겨진 [XSRF](xref:security/anti-request-forgery) 토큰을 나타냅니다.
 
 ## <a name="processing-the-post-request"></a>POST 요청 처리
 
@@ -140,7 +140,7 @@ ASP.NET Core는 `https://localhost:5001/Movies/Edit/4`를 매개 변수 `Id`가 
 
 양식을 서버에 게시하기 전에 클라이언트 쪽 유효성 검사가 필드의 모든 유효성 검사 규칙을 확인합니다. 유효성 검사 오류가 있으면 오류 메시지를 표시하고 양식을 게시하지 않습니다. JavaScript를 사용하지 않을 경우 클라이언트 쪽 유효성 검사가 수행되지 않으나 서버에서 유효하지 않은 게시 값을 탐지하며 양식 값이 오류 메시지와 함께 다시 표시됩니다. 이 자습서의 뒷부분에서 [모델 유효성 검사](xref:mvc/models/validation)를 더 자세히 다룹니다. *Views/Movies/Edit.cshtml* 보기 템플릿의 [Validation 태그 도우미](xref:mvc/views/working-with-forms)는 적절한 오류 메시지의 표시를 담당합니다.
 
-![Edit 보기: abc에 대한 올바르지 않은 Price 값 예외는 Price 필드가 숫자여야 함을 표시합니다. xyz에 대한 올바르지 않은 Release Date 값 예외는 올바른 날짜를 입력하라고 표시합니다.](~/tutorials/first-mvc-app/controller-methods-views/_static/val.png)
+![보기 편집: abc의 올바르지 않은 가격 값 예외에서는 필드 가격이 숫자여야 한다고 표시합니다. xyz의 잘못된 출시일 값 예외에서는 올바른 날짜를 입력하라고 표시합니다.](~/tutorials/first-mvc-app/controller-methods-views/_static/val.png)
 
 영화 컨트롤러의 모든 `HttpGet` 메서드는 유사한 패턴을 따릅니다. 영화 개체(`Index`의 경우 개체 목록)를 가져오고 해당 개체(모델)를 보기에 전달합니다. `Create` 메서드는 빈 영화 개체를 `Create` 보기에 전달합니다. 생성, 편집, 삭제 또는 어떤 식으로든 데이터를 수정하는 모든 메서드는 메서드의 `[HttpPost]` 오버로드에서 해당 작업을 수행합니다. `HTTP GET` 메서드에서 데이터를 수정하는 것은 보안상 위험합니다. `HTTP GET` 메서드에서 데이터를 수정하는 것은 GET 요청이 응용 프로그램의 상태를 변경해서는 안 된다는 HTTP 모범 사례와 구조적 [REST](http://rest.elkstein.org/) 패턴에도 위배됩니다. 다시 말해 GET 작업 수행은 부작용 없이 안전하고 영속 데이터를 수정하지 않는 방법으로 이루어져야 합니다.
 

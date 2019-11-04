@@ -75,7 +75,7 @@ ms.locfileid: "72259674"
   * `dotnet new` 명령은 *GrpcGreeter* 폴더에 새 gRPC 서비스를 만듭니다.
   * `code` 명령은 Visual Studio Code의 새 인스턴스에서 *GrpcGreeter* 폴더를 엽니다.
 
-  다음과 같은 대화 상자가 표시됩니다. **Required assets to build and debug are missing from 'GrpcGreeter'. Add them?** 라는 대화 상자가 나타납니다.
+  다음과 같은 대화 상자가 표시됩니다. **‘GrpcGreeter’에서 빌드 및 디버그에 필요한 자산이 누락되었습니다.  Add them?** 라는 대화 상자가 나타납니다.
 * **Yes**를 선택합니다.
 
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
@@ -136,7 +136,7 @@ info: Microsoft.Hosting.Lifetime[0]
 * *greet.proto* &ndash; *Protos/greet.proto* 파일은 `Greeter` gRPC를 정의하고 gRPC 서버 자산 생성에 사용됩니다. 자세한 내용은 [gRPC 소개](xref:grpc/index)를 참조하세요.
 * *Services* 폴더: `Greeter` 서비스의 구현을 포함합니다.
 * *appSettings.json* &ndash; Kestrel에서 사용하는 프로토콜과 같은 구성 데이터를 포함합니다. 자세한 내용은 <xref:fundamentals/configuration/index>를 참조하세요.
-* *Program.cs* &ndash; gRPC 서비스의 진입점을 포함합니다. 자세한 내용은 <xref:fundamentals/host/generic-host>을 참조하세요.
+* *Program.cs* &ndash; gRPC 서비스의 진입점을 포함합니다. 자세한 내용은 <xref:fundamentals/host/generic-host>를 참조하세요.
 * *Startup.cs* &ndash; 앱 동작을 구성하는 코드를 포함합니다. 자세한 내용은 [앱 시작](xref:fundamentals/startup)을 참조하세요.
 
 ## <a name="create-the-grpc-client-in-a-net-console-app"></a>.NET 콘솔 앱에서 gRPC 클라이언트 만들기
@@ -144,7 +144,7 @@ info: Microsoft.Hosting.Lifetime[0]
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Visual Studio의 두 번째 인스턴스를 열고 **새 프로젝트 만들기**를 선택합니다.
-* **새 프로젝트 만들기** 대화 상자에서 **콘솔 앱(.NET Core)**을 선택한 후 **다음**을 선택합니다.
+* **새 프로젝트 만들기** 대화 상자에서 **콘솔 앱(.NET Core)** 을 선택한 후 **다음**을 선택합니다.
 * **이름** 텍스트 상자에 **GrpcGreeterClient**를 입력하고 **만들기**를 선택합니다.
 
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
@@ -170,7 +170,7 @@ gRPC 클라이언트 프로젝트에는 다음 패키지가 필요합니다.
 
 * [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client)는 .NET Core 클라이언트를 포함합니다.
 * [Google.Protobuf](https://www.nuget.org/packages/Google.Protobuf/)는 C#용 protobuf 메시지 API를 포함합니다.
-* [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/)는 protobuf 파일에 대한 C# 도구 지원을 포함합니다. 도구 패키지는 런타임에는 필요하지 않으므로 종속성은 `PrivateAssets="All"`로 표시됩니다.
+* [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/)는 protobuf 파일에 대한 C# 도구 지원을 포함합니다. 도구 패키지는 런타임에 필요하지 않으므로 종속성은 `PrivateAssets="All"`로 표시됩니다.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -190,7 +190,7 @@ PMC(패키지 관리자 콘솔) 또는 NuGet 패키지 관리를 사용하여 �
 
 #### <a name="manage-nuget-packages-option-to-install-packages"></a>NuGet 패키지 관리를 사용한 패키지 설치
 
-* **솔루션 탐색기**에서 프로젝트를 마우스 오른쪽 단추로 클릭하여 **NuGet 패키지 관리**를 선택합니다.
+* **솔루션 탐색기** > **NuGet 패키지 관리**에서 프로젝트를 마우스 오른쪽 단추로 클릭
 * **찾아보기** 탭을 선택합니다.
 * 검색 상자에 **Grpc.Net.Client**를 입력합니다.
 * **찾아보기** 탭에서 **Grpc.Net.Client** 패키지를 선택하고 **설치**를 선택합니다.
@@ -218,7 +218,7 @@ dotnet add GrpcGreeterClient.csproj package Grpc.Tools
 ### <a name="add-greetproto"></a>greet.proto 추가
 
 * gRPC 클라이언트 프로젝트에서 *Protos* 폴더를 만듭니다.
-* gRPC Greeter 서비스에서 *Protos\greet.proto* 파일을 gRPC 클라이언트 프로젝트로 복사합니다.
+* *Protos\greet.proto* 파일을 gRPC Greeter 서비스에서 gRPC 클라이언트 프로젝트로 복사합니다.
 * *GrpcGreeterClient.csproj* 프로젝트 파일을 편집합니다.
 
   # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
@@ -284,7 +284,7 @@ Greeter 클라이언트가 비동기 `SayHello` 메서드를 호출합니다. `S
 
 ---
 
-클라이언트가 *GreeterClient*라는 이름을 포함한 메시지와 함께 인사말을 서비스에 보냅니다. 서비스는 "Hello GreeterClient"라는 메시지를 응답으로 보냅니다. "Hello GreeterClient" 응답이 명령 프롬프트에 표시됩니다.
+클라이언트가 이름 *GreeterClient*가 포함된 메시지와 함께 인사말을 서비스에 보냅니다. 서비스는 "Hello GreeterClient"라는 메시지를 응답으로 보냅니다. "Hello GreeterClient" 응답이 명령 프롬프트에 표시됩니다.
 
 ```console
 Greeting: Hello GreeterClient
