@@ -37,7 +37,7 @@ var movies = from m in _context.Movie
 
 위의 `s => s.Title.Contains()` 코드는 [람다 식](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions)입니다. 람다는 메서드 기반 [LINQ](/dotnet/standard/using-linq) 쿼리에서 [Where](/dotnet/api/system.linq.enumerable.where) 메서드 또는 `Contains`(위의 코드에서 사용됨)와 같은 표준 쿼리 연산자 메서드의 인수로 사용됩니다. LINQ 쿼리는 정의될 때 또는 메서드(예: `Where`, `Contains` 또는 `OrderBy`)를 호출하여 수정될 때 실행되지 않습니다. 대신 쿼리 실행이 지연됩니다.  즉, 실제로 결정된 값이 반복되거나 `ToListAsync` 메서드가 호출될 때까지 식의 계산이 지연된다는 뜻입니다. 지연된 쿼리 실행에 대한 자세한 내용은 [쿼리 실행](/dotnet/framework/data/adonet/ef/language-reference/query-execution)을 참조하세요.
 
-참고: [Contains](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.contains) 메서드는 위에 나타난 C# 코드가 아닌 데이터베이스에서 실행됩니다. 쿼리에 대한 대/소문자 구분은 데이터베이스 및 데이터 정렬에 따라 달라집니다. SQL Server에서는 [Contains](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.contains)는 대/소문자를 구분하지 않는 [SQL LIKE](/sql/t-sql/language-elements/like-transact-sql)로 매핑됩니다. SQLite에서는 기본 데이터 정렬을 사용할 경우 대/소문자를 구분합니다.
+참고: [Contains](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.contains) 메서드는 위에 표시된 C# 코드에서가 아닌 데이터베이스에서 실행됩니다. 쿼리에 대한 대/소문자 구분은 데이터베이스 및 데이터 정렬에 따라 달라집니다. SQL Server에서 [Contains](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.contains)는 대/소문자를 구분하는 [SQL LIKE](/sql/t-sql/language-elements/like-transact-sql)로 매핑됩니다. SQLite에서 기본 데이터 정렬과 함께 대/소문자를 구분합니다.
 
 `/Movies/Index`로 이동합니다. 쿼리 문자열(예: `?searchString=Ghost`)을 URL에 추가합니다. 필터링된 영화가 표시됩니다.
 
@@ -47,7 +47,7 @@ var movies = from m in _context.Movie
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Startup.cs?highlight=5&name=snippet_1)]
 
-매개 변수 및 존재하는 모든 `searchString` 항목을 `id`로 변경합니다.
+매개 변수를 `id`로, `searchString`의 모든 항목을 `id`로 변경합니다.
 
 기존 `Index` 메서드는 다음과 같습니다.
 
@@ -85,7 +85,7 @@ var movies = from m in _context.Movie
 
 ![From HttpPost Index: filter on ghost 응답을 보여주는 브라우저 창](~/tutorials/first-mvc-app/search/_static/fo.png)
 
-그러나 이 `Index` 메서드의 `[HttpPost]` 버전을 추가하더라도 이를 모두 구현하는 방법에는 한계가 있습니다. 특정 검색을 책갈피로 설정하거나 동일하게 필터링된 영화 목록을 보기 위해 클릭할 수 있는 링크를 친구에게 보내려고 한다고 가정합니다. HTTP POST 요청의 URL은 GET 요청의 URL(localhost:{PORT}/Movies/Index)과 동일합니다. URL에 검색 정보가 없습니다. 검색 문자열 정보는 [양식 필드 값](https://developer.mozilla.org/docs/Learn/HTML/Forms/Sending_and_retrieving_form_data)으로 서버에 전송됩니다. 이는 브라우저 개발자 도구 또는 뛰어난 [Fiddler 도구](https://www.telerik.com/fiddler)에서 확인할 수 있습니다. 아래 이미지는 Chrome 브라우저 개발자 도구를 보여줍니다.
+그러나 이 `[HttpPost]` 버전의 `Index` 메서드를 추가하는 경우에도 이를 모두 구현하는 방법은 제한됩니다. 특정 검색을 책갈피로 설정하거나 동일하게 필터링된 영화 목록을 보기 위해 클릭할 수 있는 링크를 친구에게 보내려고 한다고 가정합니다. HTTP POST 요청의 URL은 GET 요청의 URL(localhost:{PORT}/Movies/Index)과 동일합니다. URL에는 검색 정보가 없습니다. 검색 문자열 정보는 [양식 필드 값](https://developer.mozilla.org/docs/Learn/HTML/Forms/Sending_and_retrieving_form_data)으로 서버에 전송됩니다. 브라우저 개발자 도구 또는 뛰어난 [Fiddler 도구](https://www.telerik.com/fiddler)에서 확인할 수 있습니다. 아래 이미지에서는 Chrome 브라우저 개발자 도구를 보여줍니다.
 
 ![Microsoft Edge 개발자 도구의 네트워크 탭이 ghost라는 searchString 값을 가진 요청 본문을 보여줍니다.](~/tutorials/first-mvc-app/search/_static/f12_rb.png)
 
@@ -114,9 +114,7 @@ var movies = from m in _context.Movie
 영화 장르 보기 모델은 다음을 포함합니다.
 
 * 영화 목록.
-
-* 장르 목록을 담고 있는 `SelectList`. 이를 이용해서 사용자는 목록에서 장르를 선택할 수 있습니다.
-
+* 장르 목록을 담고 있는`SelectList` 이를 이용해서 사용자는 목록에서 장르를 선택할 수 있습니다.
 * 선택한 장르가 담긴 `MovieGenre`.
 * 사용자가 검색 텍스트 상자에 입력한 텍스트가 담긴 `SearchString`.
 
@@ -134,7 +132,7 @@ var movies = from m in _context.Movie
 
 ## <a name="add-search-by-genre-to-the-index-view"></a>Index 보기에 장르별 검색 추가
 
-*Views/Movies/*의 `Index.cshtml`을 다음과 같이 수정합니다.
+*Views/Movies/* 에 있는 `Index.cshtml`을 다음과 같이 업데이트합니다.
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexFormGenreNoRating.cshtml?highlight=1,15,16,17,19,28,31,34,37,43)]
 

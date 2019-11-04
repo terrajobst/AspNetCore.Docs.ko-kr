@@ -57,7 +57,7 @@ ms.locfileid: "71199098"
 
 Home 컨트롤러의 `HTTP POST Index` 메서드는 다음을 확인합니다.
 
-* [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*)가 `false`인 경우 작업 메서드가 적절한 데이터와 함께 ‘400 잘못된 요청’ <xref:Microsoft.AspNetCore.Mvc.ViewResult>를 반환합니다. 
+* [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*)가 `false` 인 경우 작업 메서드가 적절한 데이터와 함께 *400 잘못된 요청* <xref:Microsoft.AspNetCore.Mvc.ViewResult>를 반환합니다.
 * `ModelState.IsValid`가 `true`인 경우:
   * 리포지토리의 `Add` 메서드를 호출합니다.
   * <xref:Microsoft.AspNetCore.Mvc.RedirectToActionResult>가 올바른 인수와 함께 반환됩니다.
@@ -220,7 +220,7 @@ ASP.NET Core 2.1 이상에서 [ActionResult\<T](xref:web-api/action-return-types
 
 Home 컨트롤러의 `HTTP POST Index` 메서드는 다음을 확인합니다.
 
-* [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*)가 `false`인 경우 작업 메서드가 적절한 데이터와 함께 ‘400 잘못된 요청’ <xref:Microsoft.AspNetCore.Mvc.ViewResult>를 반환합니다. 
+* [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*)가 `false` 인 경우 작업 메서드가 적절한 데이터와 함께 *400 잘못된 요청* <xref:Microsoft.AspNetCore.Mvc.ViewResult>를 반환합니다.
 * `ModelState.IsValid`가 `true`인 경우:
   * 리포지토리의 `Add` 메서드를 호출합니다.
   * <xref:Microsoft.AspNetCore.Mvc.RedirectToActionResult>가 올바른 인수와 함께 반환됩니다.

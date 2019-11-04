@@ -16,7 +16,7 @@ ms.locfileid: "71295471"
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT) 및 [Tom Dykstra](https://github.com/tdykstra)
 
-이 섹션에서는 데이터베이스에서 동영상을 관리하기 위한 클래스를 추가합니다. 이러한 클래스는 **M**VC 앱의 "**M**odel" 부분입니다.
+이 섹션에서는 데이터베이스에서 영화를 관리하기 위한 클래스를 추가합니다. 이러한 클래스는 **M**VC 앱의 "**M**odel" 부분이 됩니다.
 
 이러한 클래스를 EF Core([Entity Framework Core](/ef/core))와 함께 사용하여 데이터베이스 작업을 수행합니다. EF Core는 작성해야 할 데이터 액세스 코드를 간소화하는 ORM(개체-관계형 매핑) 프레임워크입니다.
 
@@ -157,10 +157,10 @@ using Microsoft.EntityFrameworkCore;
 * **컨트롤러 이름:** 기본값 *MoviesController* 유지
 * **추가**를 선택합니다.
 
-Visual Studio가 다음을 만듭니다.
+Visual Studio가 다음을 만듭니다
 
 * 영화 컨트롤러(*Controllers/MoviesController.cs*)
-* Create, Delete, Details, Edit, 및 Index 페이지에 대한 Razor 보기 파일*Views/Movies/\*.cshtml*)
+* Create, Delete, Details, Edit, 및 Index 페이지에 대한 Razor 보기 파일(*Views/Movies/\*.cshtml*)
 
 이러한 파일의 자동 생성을 *스캐폴딩*이라고 합니다.
 
@@ -198,7 +198,7 @@ Visual Studio가 다음을 만듭니다.
 
 <!-- End of tabs                  -->
 
-데이터베이스가 없으므로 아직 스캐폴드된 페이지를 사용할 수 없습니다. 앱을 실행하고 **동영상 앱** 링크를 클릭하면 ‘데이터베이스를 열 수 없음’  또는 *‘해당 테이블이 없음:* Movie’ 오류 메시지가 표시됩니다.
+데이터베이스가 없으므로 아직 스캐폴드된 페이지를 사용할 수 없습니다. 앱을 실행하고 **Movie App** 링크를 클릭하면 *Cannot open database* 또는 *no such table: Movie 오류 메시지가 표시됩니다.* Movie’ 오류 메시지가 표시됩니다.
 
 <a name="migration"></a>
 
@@ -417,11 +417,11 @@ return View(movie);
 
 ![컨트롤러 추가 대화 상자](adding-model/_static/add_controller2.png)
 
-Visual Studio가 다음을 만듭니다.
+Visual Studio가 다음을 만듭니다
 
 * Entity Framework Core [데이터베이스 컨텍스트 클래스](xref:data/ef-mvc/intro#create-the-database-context)(*Data/MvcMovieContext.cs*)
 * 영화 컨트롤러(*Controllers/MoviesController.cs*)
-* Create, Delete, Details, Edit, 및 Index 페이지에 대한 Razor 보기 파일*Views/Movies/\*.cshtml*)
+* Create, Delete, Details, Edit, 및 Index 페이지에 대한 Razor 보기 파일(*Views/Movies/\*.cshtml*)
 
 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete)(생성, 읽기, 수정 및 삭제) 작업 메서드와 보기 및 데이터베이스 컨텍스트의 자동 생성을 *스캐폴딩*이라고 합니다.
 

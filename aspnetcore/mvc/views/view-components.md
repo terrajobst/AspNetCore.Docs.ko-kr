@@ -69,7 +69,7 @@ ms.locfileid: "68670089"
 보기 구성 요소는 `Task<IViewComponentResult>`를 반환하는 `InvokeAsync` 메서드 또는 `IViewComponentResult`를 반환하는 동기 `Invoke` 메서드에서 해당 논리를 정의합니다. 매개 변수는 모델 바인딩이 아니라 보기 구성 요소 호출에서 직접 가져옵니다. 보기 구성 요소는 요청을 직접 처리하지 않습니다. 일반적으로 보기 구성 요소는 모델을 초기화하고 `View` 메서드를 호출하여 보기에 전달합니다. 요약해보면 보기 구성 요소 메서드는 다음과 같습니다.
 
 * `Task<IViewComponentResult>`를 반환하는 `InvokeAsync` 메서드 또는 `IViewComponentResult`를 반환하는 동기 `Invoke` 메서드를 정의합니다.
-* 일반적으로 모델을 초기화하고 이를 `ViewComponent` `View` 메서드를 호출하여 보기에 전달합니다.
+* 일반적으로 모델을 초기화하고 `ViewComponent` `View` 메서드를 호출하여 이를 보기에 전달합니다.
 * 매개 변수는 HTTP가 아닌 호출 메서드에서 가져옵니다. 모델 바인딩이 없습니다.
 * HTTP 엔드포인트로 직접 연결할 수 없습니다. (일반적으로 보기의) 코드에서 호출됩니다. 보기 구성 요소는 요청을 처리하지 않습니다.
 * 현재 HTTP 요청의 세부 정보가 아닌 시그니처에 오버로드됩니다.
@@ -170,8 +170,8 @@ ASP.NET Core 1.1 이상에서는 [태그 도우미](xref:mvc/views/tag-helpers/i
 
 * 위의 `[ViewComponent]` 특성은 구성 요소와 연관된 보기를 찾을 때 `PriorityList` 이름을 사용하고, 보기에서 클래스 구성 요소를 참조할 때 "PriorityList" 문자열을 사용하도록 보기 구성 요소 선택기에게 지시합니다. 나중에 보다 자세히 설명합니다.
 * 이 구성 요소에서는 [종속성 주입](../../fundamentals/dependency-injection.md)을 사용하여 데이터 컨텍스트를 사용할 수 있도록 합니다.
-* `InvokeAsync`는 보기에서 호출할 수 있는 메서드를 노출하며 임의 개수의 인수를 사용할 수 있습니다.
-* `InvokeAsync` 메서드는 `isDone` 및 `maxPriority` 매개변수를 만족하는 `ToDo` 항목 집합을 반환합니다.
+* `InvokeAsync`는 보기에서 호출할 수 있는 메서드를 노출하며 임의의 개수의 인수를 사용할 수 있습니다.
+* `InvokeAsync` 메서드는 `isDone` 및 `maxPriority` 매개 변수를 만족하는 `ToDo` 항목 집합을 반환합니다.
 
 ### <a name="create-the-view-component-razor-view"></a>보기 구성 요소 Razor 보기 만들기
 
