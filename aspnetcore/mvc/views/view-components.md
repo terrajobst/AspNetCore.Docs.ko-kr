@@ -56,13 +56,13 @@ ms.locfileid: "68670089"
 * `[ViewComponent]` 특성을 사용하여 클래스를 데코레이팅하거나 `[ViewComponent]` 특성이 사용된 클래스에서 파생
 * 이름이 *ViewComponent* 접미사로 끝나는 클래스 만들기
 
-컨트롤러와 마찬가지로, 뷰 구성 요소는 공용이고 비중첩 및 비추상 클래스여야 합니다. 뷰 구성 요소 이름은 "ViewComponent" 접미사가 제거된 클래스 이름입니다. 또한 `ViewComponentAttribute.Name` 속성을 사용하여 명시적으로 지정할 수도 있습니다.
+컨트롤러와 마찬가지로 보기 구성 요소는 공용, 비중첩 및 비추상 클래스이어야 합니다. 보기 구성 요소의 이름은 "ViewComponent" 접미사가 제거된 클래스 이름입니다. 또한 `ViewComponentAttribute.Name` 속성을 사용하여 명시적으로 지정할 수도 있습니다.
 
 보기 구성 요소 클래스는 다음과 같은 특징을 갖고 있습니다.
 
 * 생성자 [종속성 주입](../../fundamentals/dependency-injection.md)을 완벽하게 지원합니다.
 
-* 컨트롤러 수명 주기를 따르지 않습니다. 즉, 뷰 구성 요소에 [필터](../controllers/filters.md)를 사용할 수 없습니다.
+* public class컨트롤러 수명 주기에 참여하지 않으므로 보기 구성 요소에서는 [필터](../controllers/filters.md)를 사용할 수 없습니다.
 
 ### <a name="view-component-methods"></a>보기 구성 요소 메서드
 
@@ -160,7 +160,7 @@ ASP.NET Core 1.1 이상에서는 [태그 도우미](xref:mvc/views/tag-helpers/i
 코드에 대한 참고 사항:
 
 * 보기 구성 요소 클래스는 프로젝트의 **모든** 폴더에 포함될 수 있습니다.
-* 클래스 이름 PriorityList**ViewComponent**는 **ViewComponent** 접미사로 끝나기 때문에 런타임은 뷰에서 클래스 구성 요소를 참조할 때 "PriorityList" 문자열을 사용합니다. 나중에 보다 자세히 설명하겠습니다.
+* 클래스 이름 PriorityList**ViewComponent**는 **ViewComponent** 접미사로 끝나기 때문에 런타임이 보기에서 클래스 구성 요소를 참조할 때 "PriorityList" 문자열을 사용합니다. 나중에 보다 자세히 설명합니다.
 * `[ViewComponent]` 특성은 보기 구성 요소를 참조하는 데 사용되는 이름을 변경할 수 있습니다. 예를 들어 클래스의 이름을 `XYZ`로 지정하고 `ViewComponent` 특성을 적용할 수 있습니다.
 
   ```csharp
@@ -168,7 +168,7 @@ ASP.NET Core 1.1 이상에서는 [태그 도우미](xref:mvc/views/tag-helpers/i
      public class XYZ : ViewComponent
      ```
 
-* 위의 `[ViewComponent]` 특성은 구성 요소와 연관된 뷰를 찾을 때 `PriorityList` 이름을 사용하고, 뷰에서 클래스 구성 요소를 참조할 때 "PriorityList" 문자열을 사용하도록 뷰 구성 요소 선택기에 지시합니다. 나중에 보다 자세히 설명하겠습니다.
+* 위의 `[ViewComponent]` 특성은 구성 요소와 연관된 보기를 찾을 때 `PriorityList` 이름을 사용하고, 보기에서 클래스 구성 요소를 참조할 때 "PriorityList" 문자열을 사용하도록 보기 구성 요소 선택기에게 지시합니다. 나중에 보다 자세히 설명합니다.
 * 이 구성 요소에서는 [종속성 주입](../../fundamentals/dependency-injection.md)을 사용하여 데이터 컨텍스트를 사용할 수 있도록 합니다.
 * `InvokeAsync`는 보기에서 호출할 수 있는 메서드를 노출하며 임의의 개수의 인수를 사용할 수 있습니다.
 * `InvokeAsync` 메서드는 `isDone` 및 `maxPriority` 매개 변수를 만족하는 `ToDo` 항목 집합을 반환합니다.
@@ -206,7 +206,7 @@ ASP.NET Core 1.1 이상에서는 [태그 도우미](xref:mvc/views/tag-helpers/i
 
 ### <a name="specifying-a-view-name"></a>보기 이름 지정
 
-복잡한 뷰 구성 요소에는 조건에 따라 기본값이 아닌 뷰를 지정해야 할 수 있습니다. 다음 코드에서 `InvokeAsync` 메서드에서 "PVC" 뷰를 지정하는 방법을 보여 줍니다. `PriorityListViewComponent` 클래스에서 `InvokeAsync` 메서드를 업데이트합니다.
+복잡한 보기 구성 요소에서는 조건에 따라 기본값이 아닌 보기를 지정해야 할 수도 있습니다. 다음 코드는 `InvokeAsync` 메서드에서 "PVC" 보기를 지정하는 방법을 보여 줍니다. `PriorityListViewComponent` 클래스에서 `InvokeAsync` 메서드를 수정합니다.
 
 [!code-csharp[](../../mvc/views/view-components/sample/ViewCompFinal/ViewComponents/PriorityListViewComponentFinal.cs?highlight=4,5,6,7,8,9&range=28-39)]
 
@@ -248,7 +248,7 @@ PVC 보기가 렌더링되지 않는다면 우선 순위가 4 이상인 보기 �
 
 ### <a name="avoiding-hard-coded-strings"></a>하드 코드된 문자열 방지
 
-컴파일 시간 안전성을 원하는 경우 하드 코드된 뷰 구성 요소 이름을 클래스 이름으로 바꿀 수 있습니다. "ViewComponent" 접미사 없이 뷰 구성 요소를 만듭니다.
+컴파일 시간 안전성을 원하는 경우 하드 코드된 보기 구성 요소 이름을 클래스 이름으로 바꿀 수 있습니다. "ViewComponent" 접미사 없이 보기 구성 요소를 만듭니다.
 
 [!code-csharp[](../../mvc/views/view-components/sample/ViewCompFinal/ViewComponents/PriorityList.cs?highlight=10&range=5-35)]
 
