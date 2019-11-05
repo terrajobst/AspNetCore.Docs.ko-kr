@@ -51,7 +51,7 @@ message HelloReply {
 }
 ```
 
-서비스, 클라이언트 및 메시지에 대한 .NET 형식은 프로젝트에서 *\*.proto* 파일을 포함하여 자동으로 생성됩니다.
+프로젝트에 *\*.proto* 파일을 포함하면 서비스, 클라이언트 및 메시지에 대한 .NET 형식이 자동으로 생성됩니다.
 
 * [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/) 패키지에 대한 패키지 참조를 추가합니다.
 * `<Protobuf>` 항목 그룹에 *\*.proto* 파일을 추가합니다.
@@ -92,7 +92,7 @@ public class GreeterService : Greeter.GreeterBase
 }
 ```
 
-`GreeterService`는 *\*.proto* 파일의 `Greeter` 서비스에서 생성되는 `GreeterBase` 형식에서 상속됩니다. *Startup.cs*의 클라이언트에서 서비스에 액세스할 수 있습니다.
+`GreeterService`는 *\*.proto* 파일의 `Greeter` 서비스에서 생성되는 `GreeterBase` 형식에서 상속됩니다. 이 서비스는 *Startup.cs*에서 클라이언트가 액세스할 수 있게 구성됩니다.
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -105,7 +105,7 @@ ASP.NET Core의 gRPC 서비스에 대한 자세한 내용은 <xref:grpc/aspnetco
 
 ## <a name="call-grpc-services-with-a-net-client"></a>.NET 클라이언트로 gRPC 서비스 호출
 
-gRPC 클라이언트는 [ *\*.proto* 파일에서 생성](xref:grpc/basics#generated-c-assets)되는 구체적인 클라이언트 형식입니다. 구체적인 gRPC 클라이언트에는 *\*.proto* 파일에서 gRPC 서비스로 변환하는 메서드가 있습니다.
+gRPC 클라이언트는 [ *\*.proto* 파일에서 생성](xref:grpc/basics#generated-c-assets)되는 구체적인 클라이언트 형식입니다. 구체적인 gRPC 클라이언트에는 *\*.proto* 파일에서 gRPC 서비스로 변환되는 메서드가 있습니다.
 
 ```csharp
 var channel = GrpcChannel.ForAddress("https://localhost:5001");
