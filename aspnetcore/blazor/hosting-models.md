@@ -5,14 +5,14 @@ description: Blazor Weasembomand Blazor 서버 호스팅 모델을 이해 합니
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/15/2019
+ms.date: 11/03/2019
 uid: blazor/hosting-models
-ms.openlocfilehash: be67c129af4f071d10719e0bbf121de761dde9f4
-ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
+ms.openlocfilehash: d1b9e6ab7ba93c00a569be309f2334df9e3f4140
+ms.sourcegitcommit: e5d4768aaf85703effb4557a520d681af8284e26
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/29/2019
-ms.locfileid: "73033999"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73616586"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor 호스팅 모델
 
@@ -146,6 +146,22 @@ Blazor 서버 앱은 서버에 대 한 활성 SignalR 연결이 필요 합니다
 
 서버에 대 한 클라이언트 연결이 설정 되기 전에 서버에서 UI를 미리 렌더링 하도록 Blazor 서버 앱이 기본적으로 설정 되어 있습니다. 이는 *_Host* Razor 페이지에 설정 되어 있습니다.
 
+::: moniker range=">= aspnetcore-3.1"
+
+```cshtml
+<body>
+    <app>
+      <component type="typeof(App)" render-mode="ServerPrerendered" />
+    </app>
+
+    <script src="_framework/blazor.server.js"></script>
+</body>
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.1"
+
 ```cshtml
 <body>
     <app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
@@ -154,10 +170,24 @@ Blazor 서버 앱은 서버에 대 한 활성 SignalR 연결이 필요 합니다
 </body>
 ```
 
+::: moniker-end
+
 `RenderMode`은 구성 요소가 있는지 여부를 구성 합니다.
 
 * 는 페이지에 미리 렌더링 된 됩니다.
 * 는 페이지에서 정적 HTML로 렌더링 되거나 사용자 에이전트에서 Blazor 앱을 부트스트랩 하는 데 필요한 정보가 포함 되어 있습니다.
+
+::: moniker range=">= aspnetcore-3.1"
+
+| `RenderMode`        | 설명 |
+| ------------------- | ----------- |
+| `ServerPrerendered` | 구성 요소를 정적 HTML로 렌더링 하 고 Blazor 서버 앱에 대 한 마커를 포함 합니다. 사용자 에이전트가 시작 되 면이 표식은 Blazor 앱을 부트스트랩 하는 데 사용 됩니다. |
+| `Server`            | Blazor 서버 앱에 대 한 마커를 렌더링 합니다. 구성 요소의 출력은 포함 되지 않습니다. 사용자 에이전트가 시작 되 면이 표식은 Blazor 앱을 부트스트랩 하는 데 사용 됩니다. |
+| `Static`            | 구성 요소를 정적 HTML로 렌더링 합니다. |
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.1"
 
 | `RenderMode`        | 설명 |
 | ------------------- | ----------- |
@@ -165,9 +195,65 @@ Blazor 서버 앱은 서버에 대 한 활성 SignalR 연결이 필요 합니다
 | `Server`            | Blazor 서버 앱에 대 한 마커를 렌더링 합니다. 구성 요소의 출력은 포함 되지 않습니다. 사용자 에이전트가 시작 되 면이 표식은 Blazor 앱을 부트스트랩 하는 데 사용 됩니다. 매개 변수는 지원 되지 않습니다. |
 | `Static`            | 구성 요소를 정적 HTML로 렌더링 합니다. 매개 변수가 지원 됩니다. |
 
+::: moniker-end
+
 정적 HTML 페이지에서 서버 구성 요소를 렌더링 하는 것은 지원 되지 않습니다.
 
-클라이언트는 앱을 미리 렌더링 하는 데 사용 된 상태와 동일한 상태를 사용 하 여 서버에 다시 연결 합니다. 앱의 상태가 아직 메모리에 있는 경우 SignalR 연결이 설정 된 후에 구성 요소 상태가 다시 발생 하지 않습니다.
+`RenderMode` `ServerPrerendered`되 면 구성 요소는 초기에 페이지의 일부로 정적으로 렌더링 됩니다. 브라우저에서 서버로 다시 연결 하면 구성 요소가 *다시*렌더링 되 고 구성 요소가 대화형으로 설정 됩니다. 구성 요소를 초기화 하는 [수명 주기 메서드](xref:blazor/components#lifecycle-methods) (`OnInitialized{Async}`)가 있는 경우 메서드는 *두 번*실행 됩니다.
+
+* 구성 요소가 정적으로 미리 렌더링 된 된 경우
+* 서버 연결이 설정 된 후
+
+이로 인해 구성 요소가 최종적으로 렌더링 될 때 UI에 표시 되는 데이터가 크게 변경 될 수 있습니다.
+
+Blazor 서버 앱에서 이중 렌더링 시나리오를 방지 하려면 다음을 수행 합니다.
+
+* 렌더링 중에 상태를 캐시 하 고 앱이 다시 시작 된 후 상태를 검색 하는 데 사용할 수 있는 식별자를 전달 합니다.
+* 렌더링 중에 식별자를 사용 하 여 구성 요소 상태를 저장 합니다.
+* 렌더링 후 식별자를 사용 하 여 캐시 된 상태를 검색 합니다.
+
+다음 코드는 이중 렌더링을 방지 하는 템플릿 기반 Blazor 서버 앱에서 업데이트 된 `WeatherForecastService`를 보여 줍니다.
+
+```csharp
+public class WeatherForecastService
+{
+    private static readonly string[] Summaries = new[]
+    {
+        "Freezing", "Bracing", "Chilly", "Cool", "Mild",
+        "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+    };
+    
+    public WeatherForecastService(IMemoryCache memoryCache)
+    {
+        MemoryCache = memoryCache;
+    }
+    
+    public IMemoryCache MemoryCache { get; }
+
+    public Task<WeatherForecast[]> GetForecastAsync(DateTime startDate)
+    {
+        return MemoryCache.GetOrCreateAsync(startDate, async e =>
+        {
+            e.SetOptions(new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = 
+                    TimeSpan.FromSeconds(30)
+            });
+
+            var rng = new Random();
+
+            await Task.Delay(TimeSpan.FromSeconds(10));
+
+            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            {
+                Date = startDate.AddDays(index),
+                TemperatureC = rng.Next(-20, 55),
+                Summary = Summaries[rng.Next(Summaries.Length)]
+            }).ToArray();
+        });
+    }
+}
+```
 
 ### <a name="render-stateful-interactive-components-from-razor-pages-and-views"></a>Razor 페이지 및 뷰에서 상태 저장 대화형 구성 요소 렌더링
 
@@ -181,15 +267,63 @@ Blazor 서버 앱은 서버에 대 한 활성 SignalR 연결이 필요 합니다
 
 다음 Razor 페이지는 `Counter` 구성 요소를 렌더링 합니다.
 
+::: moniker range=">= aspnetcore-3.1"
+
+```cshtml
+<h1>My Razor Page</h1>
+
+<component type="typeof(Counter)" render-mode="ServerPrerendered" 
+    param-InitialValue="InitialValue" />
+
+@code {
+    [BindProperty(SupportsGet=true)]
+    public int InitialValue { get; set; }
+}
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.1"
+
 ```cshtml
 <h1>My Razor Page</h1>
 
 @(await Html.RenderComponentAsync<Counter>(RenderMode.ServerPrerendered))
+
+@code {
+    [BindProperty(SupportsGet=true)]
+    public int InitialValue { get; set; }
+}
 ```
+
+::: moniker-end
 
 ### <a name="render-noninteractive-components-from-razor-pages-and-views"></a>Razor 페이지 및 뷰에서 비 대화형 구성 요소 렌더링
 
 다음 Razor 페이지에서 `MyComponent` 구성 요소는 폼을 사용 하 여 지정 된 초기 값을 사용 하 여 정적으로 렌더링 됩니다.
+
+::: moniker range=">= aspnetcore-3.1"
+
+```cshtml
+<h1>My Razor Page</h1>
+
+<form>
+    <input type="number" asp-for="InitialValue" />
+    <button type="submit">Set initial value</button>
+</form>
+
+<component type="typeof(Counter)" render-mode="Static" 
+    param-InitialValue="InitialValue" />
+
+@code {
+    [BindProperty(SupportsGet=true)]
+    public int InitialValue { get; set; }
+}
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.1"
 
 ```cshtml
 <h1>My Razor Page</h1>
@@ -207,6 +341,8 @@ Blazor 서버 앱은 서버에 대 한 활성 SignalR 연결이 필요 합니다
     public int InitialValue { get; set; }
 }
 ```
+
+::: moniker-end
 
 `MyComponent` 정적으로 렌더링 되므로 구성 요소는 대화형이 될 수 없습니다.
 
