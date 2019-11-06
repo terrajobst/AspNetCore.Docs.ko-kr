@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core에서 애플리케이션 모델 작업
+title: ASP.NET Core에서 응용 프로그램 모델 작업
 author: ardalis
 description: MVC 요소가 ASP.NET Core에서 작동하는 방법을 수정하려면 애플리케이션 모델을 읽고 조작하는 방법을 알아봅니다.
 ms.author: riande
@@ -12,7 +12,7 @@ ms.contentlocale: ko-KR
 ms.lasthandoff: 07/11/2019
 ms.locfileid: "67815504"
 ---
-# <a name="work-with-the-application-model-in-aspnet-core"></a>ASP.NET Core에서 애플리케이션 모델 작업
+# <a name="work-with-the-application-model-in-aspnet-core"></a>ASP.NET Core에서 응용 프로그램 모델 작업
 
 작성자: [Steve Smith](https://ardalis.com/)
 
@@ -120,7 +120,7 @@ MVC 옵션을 추가하거나 `Attribute`를 구현하고 컨트롤러, 작업 �
 
 ### <a name="sample-modifying-the-parametermodel"></a>예제: ParameterModel 수정
 
-`BindingInfo`를 수정하는 작업 매개 변수에 다음 규칙을 적용할 수 있습니다. 다음과 같은 규칙의 매개 변수는 경로 매개 변수여야 합니다. 다른 잠재적인 바인딩 소스(예: 쿼리 문자열 값)는 무시됩니다.
+다음 규칙을 작업 매개 변수에 적용하여 `BindingInfo`를 수정할 수 있습니다. 다음과 같은 규칙의 매개 변수는 경로 매개 변수여야 합니다. 다른 잠재적인 바인딩 소스(예: 쿼리 문자열 값)는 무시됩니다.
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Conventions/MustBeInRouteParameterModelConvention.cs)]
 
