@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/15/2018
 uid: security/authorization/resourcebased
-ms.openlocfilehash: 835592521c714e270595e1448ae6e0aed1707b77
-ms.sourcegitcommit: a166291c6708f5949c417874108332856b53b6a9
+ms.openlocfilehash: acc931da1be0940fac72b0aabe07ab17ca7e63bd
+ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/18/2019
-ms.locfileid: "72589999"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73659997"
 ---
 # <a name="resource-based-authorization-in-aspnet-core"></a>ASP.NET Core에서 리소스 기반 권한 부여
 
@@ -19,7 +19,17 @@ ms.locfileid: "72589999"
 
 특성 평가는 페이지 처리기 또는 문서를 로드 하는 작업을 실행 하기 전에 데이터 바인딩 전에 발생 합니다. 이러한 이유로 `[Authorize]` 특성을 사용한 선언적 권한 부여는 충분 하지 않습니다. 대신, 사용자 지정 권한 부여 메서드를 호출할 수 있습니다. &mdash;a 스타일은 *명령적 권한 부여*라고 합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+::: moniker range=">= aspnetcore-3.0"
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/3_0) ([다운로드 방법](xref:index#how-to-download-a-sample))
+::: moniker-end
+
+ ::: moniker range=">= aspnetcore-2.0 < aspnetcore-3.0"
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/2_2) ([다운로드 방법](xref:index#how-to-download-a-sample))
+::: moniker-end
+
+::: moniker range="<= aspnetcore-1.1"
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/1_1) ([다운로드 방법](xref:index#how-to-download-a-sample))
+::: moniker-end
 
 [권한 부여로 보호 되는 사용자 데이터를 사용 하 여 ASP.NET Core 앱 만들기](xref:security/authorization/secure-data) 리소스 기반 권한 부여를 사용 하는 샘플 앱을 포함 합니다.
 
@@ -27,7 +37,7 @@ ms.locfileid: "72589999"
 
 권한 부여는 [IAuthorizationService](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationservice) 서비스로 구현 되 고 `Startup` 클래스 내의 서비스 컬렉션에 등록 됩니다. 이 서비스는 페이지 처리기 나 작업에 대 한 [종속성 주입](xref:fundamentals/dependency-injection) 을 통해 사용할 수 있습니다.
 
-[!code-csharp[](resourcebased/samples/ResourceBasedAuthApp2/Controllers/DocumentController.cs?name=snippet_IAuthServiceDI&highlight=6)]
+[!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Controllers/DocumentController.cs?name=snippet_IAuthServiceDI&highlight=6)]
 
 `IAuthorizationService`에는 두 가지 `AuthorizeAsync` 메서드 오버 로드가 있습니다. 하나는 리소스와 정책 이름을 수락 하 고 다른 하나는 리소스를 수락 하 고 다른 하나는 평가할 요구 사항의 목록입니다.
 
@@ -66,13 +76,13 @@ Task<bool> AuthorizeAsync(ClaimsPrincipal user,
 
 ::: moniker range=">= aspnetcore-2.0"
 
-[!code-csharp[](resourcebased/samples/ResourceBasedAuthApp2/Pages/Document/Edit.cshtml.cs?name=snippet_DocumentEditHandler)]
+[!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Pages/Document/Edit.cshtml.cs?name=snippet_DocumentEditHandler)]
 
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-1.1"
 
-[!code-csharp[](resourcebased/samples/ResourceBasedAuthApp1/Controllers/DocumentController.cs?name=snippet_DocumentEditAction)]
+[!code-csharp[](resourcebased/samples/1_1/ResourceBasedAuthApp1/Controllers/DocumentController.cs?name=snippet_DocumentEditAction)]
 
 ::: moniker-end
 
@@ -84,39 +94,48 @@ Handler 클래스는 요구 사항과 리소스 형식을 모두 지정 합니�
 
 ::: moniker range=">= aspnetcore-2.0"
 
-[!code-csharp[](resourcebased/samples/ResourceBasedAuthApp2/Services/DocumentAuthorizationHandler.cs?name=snippet_HandlerAndRequirement)]
+[!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Services/DocumentAuthorizationHandler.cs?name=snippet_HandlerAndRequirement)]
 
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-1.1"
 
-[!code-csharp[](resourcebased/samples/ResourceBasedAuthApp1/Services/DocumentAuthorizationHandler.cs?name=snippet_HandlerAndRequirement)]
+[!code-csharp[](resourcebased/samples/1_1/ResourceBasedAuthApp1/Services/DocumentAuthorizationHandler.cs?name=snippet_HandlerAndRequirement)]
 
 ::: moniker-end
 
-앞의 예제에서 `SameAuthorRequirement`는 보다 일반적인 `SpecificAuthorRequirement` 클래스의 특별 한 경우를 가정 합니다. @No__t_0 클래스 (표시 되지 않음)에는 작성자의 이름을 나타내는 `Name` 속성이 포함 되어 있습니다. @No__t_0 속성을 현재 사용자로 설정할 수 있습니다.
+앞의 예제에서 `SameAuthorRequirement`는 보다 일반적인 `SpecificAuthorRequirement` 클래스의 특별 한 경우를 가정 합니다. `SpecificAuthorRequirement` 클래스 (표시 되지 않음)에는 작성자의 이름을 나타내는 `Name` 속성이 포함 되어 있습니다. `Name` 속성을 현재 사용자로 설정할 수 있습니다.
 
-@No__t_0에 요구 사항 및 처리기를 등록 합니다.
+`Startup.ConfigureServices`에 요구 사항 및 처리기를 등록 합니다.
 
-[!code-csharp[](resourcebased/samples/ResourceBasedAuthApp2/Startup.cs?name=snippet_ConfigureServicesSample&highlight=3-7,9)]
+::: moniker range=">= aspnetcore-3.0"
+[!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Startup.cs?name=snippet_ConfigureServicesSample&highlight=4-8,10)]
+::: moniker-end
+
+ ::: moniker range=">= aspnetcore-2.0 < aspnetcore-3.0"
+[!code-csharp[](resourcebased/samples/2_2/ResourceBasedAuthApp2/Startup.cs?name=snippet_ConfigureServicesSample&highlight=3-7,9)]
+::: moniker-end
+
+::: moniker range="<= aspnetcore-1.1"
+[!code-csharp[](resourcebased/samples/1_1/ResourceBasedAuthApp1/Startup.cs?name=snippet_ConfigureServicesSample&highlight=3-7,9)]
+::: moniker-end
 
 ### <a name="operational-requirements"></a>운영 요구 사항
 
 CRUD (만들기, 읽기, 업데이트, 삭제) 작업의 결과에 따라 결정을 내리는 경우 [Operationauthorizationrequirement 사항](/dotnet/api/microsoft.aspnetcore.authorization.infrastructure.operationauthorizationrequirement) 도우미 클래스를 사용 합니다. 이 클래스를 사용 하면 각 작업 형식에 대 한 개별 클래스 대신 단일 처리기를 작성할 수 있습니다. 이를 사용 하려면 몇 가지 작업 이름을 제공 합니다.
 
-[!code-csharp[](resourcebased/samples/ResourceBasedAuthApp2/Services/DocumentAuthorizationCrudHandler.cs?name=snippet_OperationsClass)]
+[!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Services/DocumentAuthorizationCrudHandler.cs?name=snippet_OperationsClass)]
 
 처리기는 `OperationAuthorizationRequirement` 요구 사항과 `Document` 리소스를 사용 하 여 다음과 같이 구현 됩니다.
 
-::: moniker range=">= aspnetcore-2.0"
-
-[!code-csharp[](resourcebased/samples/ResourceBasedAuthApp2/Services/DocumentAuthorizationCrudHandler.cs?name=snippet_Handler)]
+ ::: moniker range=">= aspnetcore-2.0"
+[!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Services/DocumentAuthorizationCrudHandler.cs?name=snippet_Handler)]
 
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-1.1"
 
-[!code-csharp[](resourcebased/samples/ResourceBasedAuthApp1/Services/DocumentAuthorizationCrudHandler.cs?name=snippet_Handler)]
+[!code-csharp[](resourcebased/samples/1_1/ResourceBasedAuthApp1/Services/DocumentAuthorizationCrudHandler.cs?name=snippet_Handler)]
 
 ::: moniker-end
 
@@ -133,7 +152,7 @@ CRUD (만들기, 읽기, 업데이트, 삭제) 작업의 결과에 따라 결정
 
 ::: moniker range=">= aspnetcore-2.0"
 
-[!code-csharp[](resourcebased/samples/ResourceBasedAuthApp2/Pages/Document/View.cshtml.cs?name=snippet_DocumentViewHandler&highlight=10-11)]
+[!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Pages/Document/View.cshtml.cs?name=snippet_DocumentViewHandler&highlight=10-11)]
 
 권한 부여가 성공 하면 문서를 보는 페이지가 반환 됩니다. 권한 부여가 실패 하지만 사용자가 인증 되는 경우 `ForbidResult`를 반환 하면 권한 부여에 실패 했다는 인증 미들웨어에 게 알립니다. 인증을 수행 해야 하는 경우 `ChallengeResult` 반환 됩니다. 대화형 브라우저 클라이언트의 경우 사용자를 로그인 페이지로 리디렉션하는 것이 적합할 수 있습니다.
 
@@ -141,7 +160,7 @@ CRUD (만들기, 읽기, 업데이트, 삭제) 작업의 결과에 따라 결정
 
 ::: moniker range="<= aspnetcore-1.1"
 
-[!code-csharp[](resourcebased/samples/ResourceBasedAuthApp1/Controllers/DocumentController.cs?name=snippet_DocumentViewAction&highlight=11-12)]
+[!code-csharp[](resourcebased/samples/1_1/ResourceBasedAuthApp1/Controllers/DocumentController.cs?name=snippet_DocumentViewAction&highlight=11-12)]
 
 권한 부여가 성공 하면 문서에 대 한 뷰가 반환 됩니다. 권한 부여가 실패 한 경우 `ChallengeResult`를 반환 하면 권한 부여가 실패 했다는 인증 미들웨어에 게 알리고 미들웨어는 적절 한 응답을 받을 수 있습니다. 적절 한 응답에서 401 또는 403 상태 코드를 반환할 수 있습니다. 대화형 브라우저 클라이언트의 경우 사용자를 로그인 페이지로 리디렉션하는 것을 의미할 수 있습니다.
 

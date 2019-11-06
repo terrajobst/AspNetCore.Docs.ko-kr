@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/05/2019
 uid: performance/memory
-ms.openlocfilehash: 48397e9fe7da912c1930f17fb86b686f0a20c60e
-ms.sourcegitcommit: 897d4abff58505dae86b2947c5fe3d1b80d927f3
+ms.openlocfilehash: 8f6b47ecde6f265bfb9437234b89f11f7d235869
+ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 11/06/2019
-ms.locfileid: "73638161"
+ms.locfileid: "73660009"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core의 메모리 관리 및 GC (가비지 수집)
 
@@ -70,7 +70,7 @@ ASP.NET Core 앱이 시작 되 면 GC는 다음과 같습니다.
 
 [Memoryleak 샘플 앱](https://github.com/sebastienros/memoryleak) 은 GitHub에서 사용할 수 있습니다. MemoryLeak 앱:
 
-* 앱에 대 한 실제 메모리 및 GC 데이터를 수집 하는 진단 컨트롤러를 포함 합니다.
+* 앱에 대 한 실시간 메모리 및 GC 데이터를 수집 하는 진단 컨트롤러를 포함 합니다.
 * 에는 메모리 및 GC 데이터를 표시 하는 인덱스 페이지가 있습니다. 인덱스 페이지는 매 초 마다 새로 고쳐집니다.
 * 다양 한 메모리 로드 패턴을 제공 하는 API 컨트롤러를 포함 합니다.
 * 는 지원 되는 도구가 아닙니다. 그러나 ASP.NET Core 앱의 메모리 사용 패턴을 표시 하는 데 사용할 수 있습니다.
@@ -114,7 +114,7 @@ public ActionResult<string> GetBigString()
 
 위의 차트는 다음을 보여 줍니다.
 
-* 22 RPS
+* 22K RPS
 * 0 세대 GC 컬렉션은 초당 여러 번 발생 합니다.
 * 앱이 초당 더 많은 메모리를 할당 했기 때문에 1 세대 수집이 트리거됩니다.
 * 작업 집합은 약 500 MB의 상수입니다.
