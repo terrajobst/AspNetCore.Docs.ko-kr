@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core에서 데이터를 메모리에 캐시하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 8/22/2019
+ms.date: 11/2/2019
 uid: performance/caching/memory
-ms.openlocfilehash: d6b2aa363c552fdbda7f6e9ec5d476768c17d8a5
-ms.sourcegitcommit: 810d5831169770ee240d03207d6671dabea2486e
+ms.openlocfilehash: 1114d154ed1af09958df63ae718712177bbf6db0
+ms.sourcegitcommit: 09f4a5ded39cc8204576fe801d760bd8b611f3aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/22/2019
-ms.locfileid: "72779186"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73611438"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>ASP.NET Core 메모리 내 캐시
 
@@ -55,14 +55,14 @@ ASP.NET 4.x에서 ASP.NET Core로 코드를 이식할 때 `System.Runtime.Cachin
 
 > [!WARNING]
 > [종속성 주입](xref:fundamentals/dependency-injection) 에서 *공유* 메모리 캐시를 사용 하 고 `SetSize`, `Size` 또는 `SizeLimit`를 호출 하 여 캐시 크기를 제한 하면 앱에 오류가 발생할 수 있습니다. 캐시에 크기 제한이 설정 된 경우 모든 항목은 추가 될 때 크기를 지정 해야 합니다. 이로 인해 개발자가 공유 캐시를 사용 하는 항목을 완전히 제어할 수 없기 때문에 문제가 발생할 수 있습니다. 예를 들어 Entity Framework Core는 공유 캐시를 사용 하 고 크기를 지정 하지 않습니다. 앱이 캐시 크기 제한을 설정 하 고 EF Core를 사용 하는 경우 앱은 `InvalidOperationException`을 throw 합니다.
-> @No__t_0, `Size` 또는 `SizeLimit`를 사용 하 여 캐시를 제한 하려면 캐싱을 위한 캐시 singleton을 만듭니다. 자세한 내용 및 예제는 [SetSize, Size 및 SizeLimit를 사용 하 여 캐시 크기 제한](#use-setsize-size-and-sizelimit-to-limit-cache-size)을 참조 하세요.
+> `SetSize`, `Size`또는 `SizeLimit`를 사용 하 여 캐시를 제한 하려면 캐싱을 위한 캐시 singleton을 만듭니다. 자세한 내용 및 예제는 [SetSize, Size 및 SizeLimit를 사용 하 여 캐시 크기 제한](#use-setsize-size-and-sizelimit-to-limit-cache-size)을 참조 하세요.
 > 공유 캐시는 다른 프레임 워크 또는 라이브러리에서 공유 하는 캐시입니다. 예를 들어 EF Core는 공유 캐시를 사용 하 고 크기를 지정 하지 않습니다. 
 
 메모리 내 캐싱은 [종속성 주입](xref:fundamentals/dependency-injection)을 사용 하 여 앱에서 참조 되는 *서비스* 입니다. 생성자에서 `IMemoryCache` 인스턴스를 요청 합니다.
 
 [!code-csharp[](memory/3.0sample/WebCacheSample/Controllers/HomeController.cs?name=snippet_ctor)]
 
-다음 코드에서는 [TryGetValue](/dotnet/api/microsoft.extensions.caching.memory.imemorycache.trygetvalue?view=aspnetcore-2.0#Microsoft_Extensions_Caching_Memory_IMemoryCache_TryGetValue_System_Object_System_Object__) 를 사용 하 여 시간이 캐시에 있는지 확인 합니다. 시간이 캐시 되지 않으면 새 항목이 만들어지고 [Set](/dotnet/api/microsoft.extensions.caching.memory.cacheextensions.set?view=aspnetcore-2.0#Microsoft_Extensions_Caching_Memory_CacheExtensions_Set__1_Microsoft_Extensions_Caching_Memory_IMemoryCache_System_Object___0_Microsoft_Extensions_Caching_Memory_MemoryCacheEntryOptions_)을 사용 하 여 캐시에 추가 됩니다. @No__t_0 클래스는 다운로드 샘플의 일부입니다.
+다음 코드에서는 [TryGetValue](/dotnet/api/microsoft.extensions.caching.memory.imemorycache.trygetvalue?view=aspnetcore-2.0#Microsoft_Extensions_Caching_Memory_IMemoryCache_TryGetValue_System_Object_System_Object__) 를 사용 하 여 시간이 캐시에 있는지 확인 합니다. 시간이 캐시 되지 않으면 새 항목이 만들어지고 [Set](/dotnet/api/microsoft.extensions.caching.memory.cacheextensions.set?view=aspnetcore-2.0#Microsoft_Extensions_Caching_Memory_CacheExtensions_Set__1_Microsoft_Extensions_Caching_Memory_IMemoryCache_System_Object___0_Microsoft_Extensions_Caching_Memory_MemoryCacheEntryOptions_)을 사용 하 여 캐시에 추가 됩니다. `CacheKeys` 클래스는 다운로드 샘플의 일부입니다.
 
 [!code-csharp[](memory/3.0sample/WebCacheSample/CacheKeys.cs)]
 
@@ -108,14 +108,14 @@ ASP.NET 4.x에서 ASP.NET Core로 코드를 이식할 때 `System.Runtime.Cachin
 
 ## <a name="use-setsize-size-and-sizelimit-to-limit-cache-size"></a>SetSize, Size 및 SizeLimit를 사용 하 여 캐시 크기 제한
 
-@No__t_0 인스턴스는 필요에 따라 크기 제한을 지정 하 고 적용할 수 있습니다. 캐시 크기 제한에는 항목의 크기를 측정 하는 메커니즘이 없기 때문에 정의 된 측정 단위가 없습니다. 캐시 크기 제한이 설정 된 경우 모든 항목의 크기를 지정 해야 합니다. ASP.NET Core 런타임은 메모리 압력에 따라 캐시 크기를 제한 하지 않습니다. 캐시 크기를 제한 하는 것은 개발자에 게 있습니다. 지정 된 크기는 개발자가 선택 하는 단위입니다.
+`MemoryCache` 인스턴스는 필요에 따라 크기 제한을 지정 하 고 적용할 수 있습니다. 캐시 크기 제한에는 항목의 크기를 측정 하는 메커니즘이 없기 때문에 정의 된 측정 단위가 없습니다. 캐시 크기 제한이 설정 된 경우 모든 항목의 크기를 지정 해야 합니다. ASP.NET Core 런타임은 메모리 압력에 따라 캐시 크기를 제한 하지 않습니다. 캐시 크기를 제한 하는 것은 개발자에 게 있습니다. 지정 된 크기는 개발자가 선택 하는 단위입니다.
 
 예를 들면,
 
 * 웹 앱이 주로 문자열을 캐싱하는 경우 각 캐시 엔트리 크기는 문자열 길이가 될 수 있습니다.
 * 앱은 모든 항목의 크기를 1로 지정 하 고, 크기 제한은 항목 수를 지정 합니다.
 
-@No__t_0를 설정 하지 않으면 캐시가 바인딩되지 않고 증가 합니다. 시스템 메모리가 부족할 때 ASP.NET Core 런타임은 캐시를 자르지 않습니다. 앱은 다음에 맞게 설계 되었습니다.
+<xref:Microsoft.Extensions.Caching.Memory.MemoryCacheOptions.SizeLimit>를 설정 하지 않으면 캐시가 바인딩되지 않고 증가 합니다. 시스템 메모리가 부족할 때 ASP.NET Core 런타임은 캐시를 자르지 않습니다. 앱은 다음에 맞게 설계 되었습니다.
 
 * 캐시 증가를 제한 합니다.
 * 사용 가능한 메모리가 제한 된 경우 <xref:Microsoft.Extensions.Caching.Memory.MemoryCache.Compact*> 또는 <xref:Microsoft.Extensions.Caching.Memory.MemoryCache.Remove*>를 호출 합니다.
@@ -158,15 +158,18 @@ ASP.NET 4.x에서 ASP.NET Core로 코드를 이식할 때 `System.Runtime.Cachin
 
 ## <a name="cache-dependencies"></a>캐시 종속성
 
-다음 샘플에서는 종속 항목이 만료 된 경우 캐시 항목을 만료 하는 방법을 보여 줍니다. 캐시 된 항목에 `CancellationChangeToken` 추가 됩니다. @No__t_1에서 `Cancel`를 호출 하면 두 캐시 항목이 모두 제거 됩니다.
+다음 샘플에서는 종속 항목이 만료 된 경우 캐시 항목을 만료 하는 방법을 보여 줍니다. 캐시 된 항목에 <xref:Microsoft.Extensions.Primitives.CancellationChangeToken> 추가 됩니다. `CancellationTokenSource`에서 `Cancel`를 호출 하면 두 캐시 항목이 모두 제거 됩니다.
 
 [!code-csharp[](memory/3.0sample/WebCacheSample/Controllers/HomeController.cs?name=snippet_ed)]
 
-@No__t_0를 사용 하면 여러 캐시 항목을 하나의 그룹으로 제거할 수 있습니다. 위의 코드에서 `using` 패턴을 사용 하 여 `using` 블록 내에 만들어진 캐시 항목은 트리거와 만료 설정을 상속 합니다.
+<xref:System.Threading.CancellationTokenSource>를 사용 하면 여러 캐시 항목을 하나의 그룹으로 제거할 수 있습니다. 위의 코드에서 `using` 패턴을 사용 하 여 `using` 블록 내에 만들어진 캐시 항목은 트리거와 만료 설정을 상속 합니다.
 
 ## <a name="additional-notes"></a>추가 참고 사항
 
-* 만료는 백그라운드에서 발생 하지 않습니다. 만료 된 항목에 대 한 캐시를 적극적으로 검색 하는 타이머가 없습니다. 캐시의 모든 작업 (`Get`, `Set`, `Remove`)은 만료 된 항목에 대 한 백그라운드 검색을 트리거할 수 있습니다. @No__t_0 (`CancelAfter`)의 타이머는 또한 항목을 제거 하 고 만료 된 항목에 대 한 검색을 트리거합니다. 예를 들어 `SetAbsoluteExpiration(TimeSpan.FromHours(1))`를 사용 하는 대신 등록 된 토큰에 대해 `CancellationTokenSource.CancelAfter(TimeSpan.FromHours(1))`를 사용 합니다. 이 토큰이 발생 하면 엔트리를 즉시 제거 하 고 제거 콜백을 발생 시킵니다. 자세한 내용은 [이 GitHub 문제](https://github.com/aspnet/Caching/issues/248)를 참조하세요.
+* 만료는 백그라운드에서 발생 하지 않습니다. 만료 된 항목에 대 한 캐시를 적극적으로 검색 하는 타이머가 없습니다. 캐시의 모든 작업 (`Get`, `Set`, `Remove`)은 만료 된 항목에 대 한 백그라운드 검색을 트리거할 수 있습니다. `CancellationTokenSource` (<xref:System.Threading.CancellationTokenSource.CancelAfter*>)의 타이머는 또한 항목을 제거 하 고 만료 된 항목에 대 한 검색을 트리거합니다. 다음 예에서는 등록 된 토큰에 대해 [CancellationTokenSource (TimeSpan)](/dotnet/api/system.threading.cancellationtokensource.-ctor) 을 사용 합니다. 이 토큰이 발생 하면 엔트리를 즉시 제거 하 고 제거 콜백을 발생 시킵니다.
+
+[!code-csharp[](memory/3.0sample/WebCacheSample/Controllers/HomeController.cs?name=snippet_ae)]
+
 * 콜백을 사용 하 여 캐시 항목을 다시 채우는 경우:
 
   * 콜백이 완료 되지 않아 여러 요청에서 캐시 된 키 값이 비어 있는 것을 찾을 수 있습니다.
@@ -229,9 +232,9 @@ ASP.NET 4.x에서 ASP.NET Core로 코드를 이식할 때 `System.Runtime.Cachin
 
 > [!WARNING]
 > [종속성 주입](xref:fundamentals/dependency-injection) 에서 *공유* 메모리 캐시를 사용 하 고 `SetSize`, `Size` 또는 `SizeLimit`를 호출 하 여 캐시 크기를 제한 하면 앱에 오류가 발생할 수 있습니다. 캐시에 크기 제한이 설정 된 경우 모든 항목은 추가 될 때 크기를 지정 해야 합니다. 이로 인해 개발자가 공유 캐시를 사용 하는 항목을 완전히 제어할 수 없기 때문에 문제가 발생할 수 있습니다. 예를 들어 Entity Framework Core는 공유 캐시를 사용 하 고 크기를 지정 하지 않습니다. 앱이 캐시 크기 제한을 설정 하 고 EF Core를 사용 하는 경우 앱은 `InvalidOperationException`을 throw 합니다.
-> @No__t_0, `Size` 또는 `SizeLimit`를 사용 하 여 캐시를 제한 하려면 캐싱을 위한 캐시 singleton을 만듭니다. 자세한 내용 및 예제는 [SetSize, Size 및 SizeLimit를 사용 하 여 캐시 크기 제한](#use-setsize-size-and-sizelimit-to-limit-cache-size)을 참조 하세요.
+> `SetSize`, `Size`또는 `SizeLimit`를 사용 하 여 캐시를 제한 하려면 캐싱을 위한 캐시 singleton을 만듭니다. 자세한 내용 및 예제는 [SetSize, Size 및 SizeLimit를 사용 하 여 캐시 크기 제한](#use-setsize-size-and-sizelimit-to-limit-cache-size)을 참조 하세요.
 
-메모리 내 캐싱은 [종속성 주입](../../fundamentals/dependency-injection.md)을 사용 하 여 앱에서 참조 되는 *서비스* 입니다. @No__t_1에서 `AddMemoryCache`를 호출 합니다.
+메모리 내 캐싱은 [종속성 주입](../../fundamentals/dependency-injection.md)을 사용 하 여 앱에서 참조 되는 *서비스* 입니다. `ConfigureServices`에서 `AddMemoryCache`를 호출 합니다.
 
 [!code-csharp[](memory/sample/WebCache/Startup.cs?highlight=9)]
 
@@ -277,14 +280,14 @@ ASP.NET 4.x에서 ASP.NET Core로 코드를 이식할 때 `System.Runtime.Cachin
 
 ## <a name="use-setsize-size-and-sizelimit-to-limit-cache-size"></a>SetSize, Size 및 SizeLimit를 사용 하 여 캐시 크기 제한
 
-@No__t_0 인스턴스는 필요에 따라 크기 제한을 지정 하 고 적용할 수 있습니다. 캐시 크기 제한에는 항목의 크기를 측정 하는 메커니즘이 없기 때문에 정의 된 측정 단위가 없습니다. 캐시 크기 제한이 설정 된 경우 모든 항목의 크기를 지정 해야 합니다. ASP.NET Core 런타임은 메모리 압력에 따라 캐시 크기를 제한 하지 않습니다. 캐시 크기를 제한 하는 것은 개발자에 게 있습니다. 지정 된 크기는 개발자가 선택 하는 단위입니다.
+`MemoryCache` 인스턴스는 필요에 따라 크기 제한을 지정 하 고 적용할 수 있습니다. 캐시 크기 제한에는 항목의 크기를 측정 하는 메커니즘이 없기 때문에 정의 된 측정 단위가 없습니다. 캐시 크기 제한이 설정 된 경우 모든 항목의 크기를 지정 해야 합니다. ASP.NET Core 런타임은 메모리 압력에 따라 캐시 크기를 제한 하지 않습니다. 캐시 크기를 제한 하는 것은 개발자에 게 있습니다. 지정 된 크기는 개발자가 선택 하는 단위입니다.
 
 예를 들면,
 
 * 웹 앱이 주로 문자열을 캐싱하는 경우 각 캐시 엔트리 크기는 문자열 길이가 될 수 있습니다.
 * 앱은 모든 항목의 크기를 1로 지정 하 고, 크기 제한은 항목 수를 지정 합니다.
 
-@No__t_0를 설정 하지 않으면 캐시가 바인딩되지 않고 증가 합니다. 시스템 메모리가 부족할 때 ASP.NET Core 런타임은 캐시를 자르지 않습니다. 앱은 다음에 맞게 설계 되었습니다.
+<xref:Microsoft.Extensions.Caching.Memory.MemoryCacheOptions.SizeLimit>를 설정 하지 않으면 캐시가 바인딩되지 않고 증가 합니다. 시스템 메모리가 부족할 때 ASP.NET Core 런타임은 캐시를 자르지 않습니다. 앱은 다음에 맞게 설계 되었습니다.
 
 * 캐시 증가를 제한 합니다.
 * 사용 가능한 메모리가 제한 된 경우 <xref:Microsoft.Extensions.Caching.Memory.MemoryCache.Compact*> 또는 <xref:Microsoft.Extensions.Caching.Memory.MemoryCache.Remove*>를 호출 합니다.
@@ -327,11 +330,11 @@ ASP.NET 4.x에서 ASP.NET Core로 코드를 이식할 때 `System.Runtime.Cachin
 
 ## <a name="cache-dependencies"></a>캐시 종속성
 
-다음 샘플에서는 종속 항목이 만료 된 경우 캐시 항목을 만료 하는 방법을 보여 줍니다. 캐시 된 항목에 `CancellationChangeToken` 추가 됩니다. @No__t_1에서 `Cancel`를 호출 하면 두 캐시 항목이 모두 제거 됩니다.
+다음 샘플에서는 종속 항목이 만료 된 경우 캐시 항목을 만료 하는 방법을 보여 줍니다. 캐시 된 항목에 <xref:Microsoft.Extensions.Primitives.CancellationChangeToken> 추가 됩니다. `CancellationTokenSource`에서 `Cancel`를 호출 하면 두 캐시 항목이 모두 제거 됩니다.
 
 [!code-csharp[](memory/sample/WebCache/Controllers/HomeController.cs?name=snippet_ed)]
 
-@No__t_0를 사용 하면 여러 캐시 항목을 하나의 그룹으로 제거할 수 있습니다. 위의 코드에서 `using` 패턴을 사용 하 여 `using` 블록 내에 만들어진 캐시 항목은 트리거와 만료 설정을 상속 합니다.
+`CancellationTokenSource`를 사용 하면 여러 캐시 항목을 하나의 그룹으로 제거할 수 있습니다. 위의 코드에서 `using` 패턴을 사용 하 여 `using` 블록 내에 만들어진 캐시 항목은 트리거와 만료 설정을 상속 합니다.
 
 ## <a name="additional-notes"></a>추가 참고 사항
 

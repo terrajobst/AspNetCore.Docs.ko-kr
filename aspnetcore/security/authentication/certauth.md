@@ -4,18 +4,18 @@ author: blowdart
 description: IIS 및 HTTP.SYS 용 ASP.NET Core에서 인증서 인증을 구성 하는 방법에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
-ms.date: 08/19/2019
+ms.date: 11/05/2019
 uid: security/authentication/certauth
-ms.openlocfilehash: bb375cf380175daf2399f3b56f543819ee5692b8
-ms.sourcegitcommit: 07cd66e367d080acb201c7296809541599c947d1
+ms.openlocfilehash: 081935e6e6248b5fe9b7bf4cd966dc73761d2ec1
+ms.sourcegitcommit: 897d4abff58505dae86b2947c5fe3d1b80d927f3
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/17/2019
-ms.locfileid: "71039250"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73634049"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core에서 인증서 인증 구성
 
-`Microsoft.AspNetCore.Authentication.Certificate`ASP.NET Core에 대 한 [인증서 인증과](https://tools.ietf.org/html/rfc5246#section-7.4.4) 유사한 구현을 포함 합니다. 인증서 인증은 ASP.NET Core 하기 전에는 매우 긴 TLS 수준에서 발생 합니다. 보다 정확 하 게,이는 인증서의 유효성을 검사 한 다음 해당 인증서를에 대해 `ClaimsPrincipal`확인할 수 있는 이벤트를 제공 하는 인증 처리기입니다. 
+`Microsoft.AspNetCore.Authentication.Certificate`에는 ASP.NET Core에 대 한 [인증서 인증과](https://tools.ietf.org/html/rfc5246#section-7.4.4) 비슷한 구현이 포함 되어 있습니다. 인증서 인증은 ASP.NET Core 하기 전에는 매우 긴 TLS 수준에서 발생 합니다. 보다 정확 하 게,이는 인증서의 유효성을 검사 한 다음 해당 인증서를 `ClaimsPrincipal`에 대해 확인할 수 있는 이벤트를 제공 하는 인증 처리기입니다. 
 
 인증서 인증을 위해 [호스트를 구성](#configure-your-host-to-require-certificates) 하 고, IIS, Kestrel, Azure Web Apps 또는 사용 중인 다른 모든 항목을 사용 합니다.
 
@@ -32,11 +32,11 @@ ms.locfileid: "71039250"
 
 HTTPS 인증서를 획득 하 고 적용 하며 인증서를 요구 하도록 [호스트를 구성](#configure-your-host-to-require-certificates) 합니다.
 
-웹 앱에서 `Microsoft.AspNetCore.Authentication.Certificate` 패키지에 대 한 참조를 추가 합니다. 그런 다음 `app.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).UseCertificateAuthentication(...);` `OnCertificateValidated` 메서드에서와 함께를 호출 하 여 요청을 통해 보낸 클라이언트 인증서에 대 한 모든 보충 유효성 검사를 수행할 수 있는 대리자를 제공 합니다. `Startup.Configure` 해당 정보를로 `ClaimsPrincipal` 변환 하 고 `context.Principal` 속성에 설정 합니다.
+웹 앱에서 `Microsoft.AspNetCore.Authentication.Certificate` 패키지에 대 한 참조를 추가 합니다. 그런 다음 `Startup.ConfigureServices` 메서드에서 옵션과 함께 `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);`를 호출 하 여 요청과 함께 전송 된 클라이언트 인증서에 대 한 모든 보충 유효성 검사를 수행할 수 있는 `OnCertificateValidated` 대리자를 제공 합니다. 해당 정보를 `ClaimsPrincipal` 설정 하 고 `context.Principal` 속성에 설정 합니다.
 
-인증이 실패 하는 경우이 처리기는 `403 (Forbidden)` 정상적으로 응답 `401 (Unauthorized)`을 반환 합니다. 초기 TLS 연결 중에 인증이 수행 되어야 한다는 것을 의미 합니다. 처리기에 도달할 때까지 너무 늦습니다. 익명 연결에서 인증서를 사용 하는 연결로의 연결을 업그레이드할 수 있는 방법은 없습니다.
+인증이 실패 하는 경우이 처리기는 `401 (Unauthorized)``403 (Forbidden)` 응답을 반환 합니다. 초기 TLS 연결 중에 인증이 수행 되어야 한다는 것을 의미 합니다. 처리기에 도달할 때까지 너무 늦습니다. 익명 연결에서 인증서를 사용 하는 연결로의 연결을 업그레이드할 수 있는 방법은 없습니다.
 
-또한 `app.UseAuthentication();` 메서드에`Startup.Configure` 를 추가 합니다. 그렇지 않으면 인증서에서 생성 된 것으로 `ClaimsPrincipal` 설정 되지 않습니다. 예를 들어:
+또한 `Startup.Configure` 메서드에 `app.UseAuthentication();`를 추가 합니다. 그렇지 않으면 HttpContext는 인증서에서 만든 `ClaimsPrincipal` 설정 되지 않습니다. 예를 들면,
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -59,7 +59,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 ## <a name="configure-certificate-validation"></a>인증서 유효성 검사 구성
 
-`CertificateAuthenticationOptions` 처리기에는 인증서에 대해 수행 해야 하는 최소 유효성 검사 인 몇 가지 기본 제공 유효성 검사가 있습니다. 이러한 각 설정은 기본적으로 사용 하도록 설정 되어 있습니다.
+`CertificateAuthenticationOptions` 처리기에는 인증서에 대해 수행 해야 하는 최소한의 유효성 검사를 수행 하는 몇 가지 기본 제공 유효성 검사가 있습니다. 이러한 각 설정은 기본적으로 사용 하도록 설정 되어 있습니다.
 
 ### <a name="allowedcertificatetypes--chained-selfsigned-or-all-chained--selfsigned"></a>AllowedCertificateTypes = 체인, SelfSigned 또는 모두 (연결 된 | SelfSigned)
 
@@ -83,7 +83,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 해지 검사를 수행 하는 방법을 지정 하는 플래그입니다.
 
-인증 기관에 연결 하는 동안 오래 지연에서 온라인 확인을 지정 될 수 있습니다.
+온라인 검사를 지정 하면 인증 기관에 연결 하는 동안 지연 시간이 길어질 수 있습니다.
 
 해지 검사는 인증서가 루트 인증서에 연결 된 경우에만 수행 됩니다.
 
@@ -95,8 +95,8 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 처리기에는 두 가지 이벤트가 있습니다.
 
-* `OnAuthenticationFailed`&ndash; 인증 하는 동안 예외가 발생 하 여 반응할 수 있는 경우 호출 됩니다.
-* `OnCertificateValidated`&ndash; 인증서의 유효성을 검사 하 고 유효성 검사를 통과 했으며 기본 보안 주체가 생성 된 후에 호출 됩니다. 이 이벤트를 사용 하 여 사용자 고유의 유효성 검사를 수행 하 고 보안 주체를 확대 하거나 바꿀 수 있습니다. 예를 들면 다음과 같습니다.
+* 인증 하는 동안 예외가 발생 하 고 대응할 수 있는 경우 `OnAuthenticationFailed` &ndash; 호출 됩니다.
+* 인증서의 유효성을 검사 하 고 유효성 검사를 통과 하 여 기본 보안 주체를 만든 후에 호출 &ndash; `OnCertificateValidated`. 이 이벤트를 사용 하 여 사용자 고유의 유효성 검사를 수행 하 고 보안 주체를 확대 하거나 바꿀 수 있습니다. 예를 들면 다음과 같습니다.
   * 인증서가 서비스에 알려져 있는지 확인 하는 중입니다.
   * 사용자 고유의 보안 주체를 구성 합니다. `Startup.ConfigureServices`에서 다음 예제를 참조하세요.
 
@@ -132,7 +132,7 @@ services.AddAuthentication(
     });
 ```
 
-인바운드 인증서가 추가 유효성 검사를 충족 하지 않는 경우 오류 원인 `context.Fail("failure reason")` 으로를 호출 합니다.
+인바운드 인증서가 추가 유효성 검사를 충족 하지 않는 경우 실패 이유를 사용 하 여 `context.Fail("failure reason")`를 호출 합니다.
 
 실제 기능을 사용 하려면 데이터베이스 또는 다른 유형의 사용자 저장소에 연결 하는 종속성 주입에 등록 된 서비스를 호출 하는 것이 좋습니다. 대리자에 전달 된 컨텍스트를 사용 하 여 서비스에 액세스 합니다. `Startup.ConfigureServices`에서 다음 예제를 참조하세요.
 
@@ -177,7 +177,7 @@ services.AddAuthentication(
     });
 ```
 
-개념적으로 인증서의 유효성 검사는 권한 부여에 대 한 문제입니다. 예를 들어, 권한 부여 정책에서 발급자 또는 지문을 포함 `OnCertificateValidated`하는 것이 아니라 확인을 추가 하는 것은 완벽 하 게 허용 됩니다.
+개념적으로 인증서의 유효성 검사는 권한 부여에 대 한 문제입니다. 예를 들어 `OnCertificateValidated`에 포함 되지 않고 권한 부여 정책의 발급자 또는 지문을 추가 하는 것은 완벽 하 게 사용할 수 있습니다.
 
 ## <a name="configure-your-host-to-require-certificates"></a>인증서를 요구 하도록 호스트 구성
 
@@ -186,16 +186,24 @@ services.AddAuthentication(
 *Program.cs*에서 다음과 같이 Kestrel을 구성 합니다.
 
 ```csharp
-public static IWebHost BuildWebHost(string[] args) =>
-    WebHost.CreateDefaultBuilder(args)
-        .UseStartup<Startup>()
-        .ConfigureKestrel(options =>
-        {
-            options.ConfigureHttpsDefaults(opt => 
-                opt.ClientCertificateMode = 
-                    ClientCertificateMode.RequireCertificate);
-        })
-        .Build();
+
+public static void Main(string[] args)
+{
+    CreateHostBuilder(args).Build().Run();
+}
+
+public static IHostBuilder CreateHostBuilder(string[] args)
+{
+    return Host.CreateDefaultBuilder(args)
+               .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                    webBuilder.ConfigureKestrel(o =>
+                    {
+                        o.ConfigureHttpsDefaults(o => o.ClientCertificateMode = ClientCertificateMode.RequireCertificate);
+                    });
+                });
+}
 ```
 
 ### <a name="iis"></a>IIS

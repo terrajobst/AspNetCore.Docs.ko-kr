@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/25/2019
 uid: grpc/migration
-ms.openlocfilehash: 596eca0f510387a18472eb353672980e0a8e0d24
-ms.sourcegitcommit: eb4fcdeb2f9e8413117624de42841a4997d1d82d
+ms.openlocfilehash: c4c07808540c9af370bfa253e8154a8a19f0f3de
+ms.sourcegitcommit: 897d4abff58505dae86b2947c5fe3d1b80d927f3
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/21/2019
-ms.locfileid: "72697994"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73634066"
 ---
 # <a name="migrating-grpc-services-from-c-core-to-aspnet-core"></a>C 코어에서 ASP.NET Core로 gRPC 서비스 마이그레이션
 
@@ -80,9 +80,27 @@ public class GreeterService : Greeter.GreeterBase
 
 C 코어 기반 앱은 [Server. Ports 속성](https://grpc.io/grpc/csharp/api/Grpc.Core.Server.html#Grpc_Core_Server_Ports)을 통해 HTTPS를 구성 합니다. ASP.NET Core에서 서버를 구성 하는 데 비슷한 개념을 사용 합니다. 예를 들어 Kestrel은이 기능에 대해 [끝점 구성을](xref:fundamentals/servers/kestrel#endpoint-configuration) 사용 합니다.
 
-## <a name="interceptors-and-middleware"></a>인터셉터 및 미들웨어
+## <a name="grpc-interceptors-vs-middleware"></a>gRPC 인터셉터 vs 미들웨어
 
-ASP.NET Core [미들웨어](xref:fundamentals/middleware/index) 는 C 코어 기반 grpc 앱의 인터셉터와 비교할 때 비슷한 기능을 제공 합니다. 미들웨어와 인터셉터는 모두 gRPC 요청을 처리 하는 파이프라인을 생성 하는 데 사용 되는 것과 개념적으로 동일 합니다. 파이프라인의 다음 구성 요소 전이나 후에 작업을 수행할 수 있습니다. 그러나 ASP.NET Core 미들웨어는 기본 HTTP/2 메시지에 대해 작동 하는 반면 인터셉터는 [ServerCallContext](https://grpc.io/grpc/csharp/api/Grpc.Core.ServerCallContext.html)을 사용 하 여 추상화의 grpc 계층에서 작동 합니다.
+ASP.NET Core [미들웨어](xref:fundamentals/middleware/index) 는 C 코어 기반 grpc 앱의 인터셉터와 비교할 때 비슷한 기능을 제공 합니다. ASP.NET Core 미들웨어 및 인터셉터는 개념적으로 유사 합니다. 양방향
+
+* 는 gRPC 요청을 처리 하는 파이프라인을 생성 하는 데 사용 됩니다.
+* 파이프라인의 다음 구성 요소 전이나 후에 작업을 수행할 수 있습니다.
+* `HttpContext`에 대 한 액세스를 제공 합니다.
+  * 미들웨어에서 `HttpContext`는 매개 변수입니다.
+  * 인터셉터에서 `HttpContext`는 `ServerCallContext.GetHttpContext` 확장 메서드와 `ServerCallContext` 매개 변수를 사용 하 여 액세스할 수 있습니다. 이 기능은 ASP.NET Core에서 실행 되는 인터셉터에만 적용 됩니다.
+
+ASP.NET Core 미들웨어와의 gRPC 인터셉터 차이점:
+
+* 인터셉터
+  * [ServerCallContext](https://grpc.io/grpc/csharp/api/Grpc.Core.ServerCallContext.html)를 사용 하 여 추상화의 grpc 계층에서 작동 합니다.
+  * 다음에 대 한 액세스를 제공 합니다.
+    * 호출에 전송 된 deserialize 된 메시지입니다.
+    * 메시지를 serialize 하기 전에 호출에서 반환 되는 메시지입니다.
+* 미들웨어
+  * GRPC 인터셉터 이전에 실행 됩니다.
+  * 기본 HTTP/2 메시지에서 작동 합니다.
+  * 는 요청 및 응답 스트림의 바이트에만 액세스할 수 있습니다.
 
 ## <a name="additional-resources"></a>추가 자료
 

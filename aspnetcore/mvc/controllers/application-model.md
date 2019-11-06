@@ -120,7 +120,7 @@ Then(`Order=-990`):
 
 ### <a name="sample-modifying-the-parametermodel"></a>예제: ParameterModel 수정
 
-다음 규칙을 작업 매개 변수에 적용하여 `BindingInfo`를 수정할 수 있습니다. 다음 규칙은 해당 매개 변수가 경로 매개 변수일 것을 요구합니다. 다른 잠재적인 바인딩 소스(예: 쿼리 문자열 값)는 무시됩니다.
+다음 규칙을 작업 매개 변수에 적용하여 `BindingInfo`를 수정할 수 있습니다. 다음 규칙은 해당 매개 변수가 경로 매개 변수여야 합니다. 다른 잠재적인 바인딩 소스(예: 쿼리 문자열 값)는 무시됩니다.
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Conventions/MustBeInRouteParameterModelConvention.cs)]
 
