@@ -134,7 +134,7 @@ Then(`Order=-990`):
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Conventions/CustomActionNameAttribute.cs)]
 
-특성이 `HomeController`의 작업 메서드에 적용되었습니다.
+해당 특성이 `HomeController`의 작업 메서드에 적용되었습니다.
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Controllers/HomeController.cs?name=ActionModelConvention&highlight=2)]
 

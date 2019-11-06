@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/24/2019
 uid: fundamentals/routing
-ms.openlocfilehash: c8037d79c79c5b7eb3b99d9724aa3e5361f92b8c
-ms.sourcegitcommit: 5d25a7f22c50ca6fdd0f8ecd8e525822e1b35b7a
+ms.openlocfilehash: 8b4da4e1e262ec82225413d0338b3492d0b5e152
+ms.sourcegitcommit: 032113208bb55ecfb2faeb6d3e9ea44eea827950
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/28/2019
-ms.locfileid: "71482040"
+ms.lasthandoff: 10/31/2019
+ms.locfileid: "73190510"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core에서 라우팅
 
@@ -70,12 +70,12 @@ URL 생성 지원을 사용하면 URL을 하드 코딩하지 않고 앱을 개�
 
 URL 일치는 라우팅이 들어오는 요청을 *엔드포인트*로 디스패치하는 프로세스입니다. 이 프로세스는 URL 경로의 데이터를 기반으로 하지만 요청에 있는 모든 데이터를 고려하도록 확장될 수 있습니다. 요청을 별도의 처리기로 디스패치하는 기능은 앱의 크기와 복잡성을 확장하는 핵심입니다.
 
-라우팅 미들웨어가 실행되면 엔드포인트(`Endpoint`) 및 경로 값을 <xref:Microsoft.AspNetCore.Http.HttpContext>의 기능으로 설정합니다. 현재 요청의 경우 다음과 같이 동작합니다.
+라우팅 미들웨어가 실행되면 엔드포인트(`Endpoint`)를 설정하고 값을 <xref:Microsoft.AspNetCore.Http.HttpContext>의 기능으로 라우팅합니다. 현재 요청의 경우 다음과 같이 동작합니다.
 
 * `HttpContext.GetEndpoint`를 호출하면 엔드포인트를 가져옵니다.
 * `HttpRequest.RouteValues`는 경로 값의 컬렉션을 가져옵니다.
 
-라우팅 미들웨어 뒤에 실행되는 미들웨어는 엔드포인트를 보고, 작업을 수행할 수 있습니다. 예를 들어 권한 부여 미들웨어는 엔드포인트의 메타데이터 컬렉션에서 권한 부여 정책에 대한 정보를 얻을 수 있습니다. 요청 처리 파이프라인의 모든 미들웨어가 실행된 후에 선택한 엔드포인트의 대리자가 호출됩니다.
+라우팅 미들웨어 뒤에 실행되는 미들웨어는 엔드포인트를 보고, 작업을 수행할 수 있습니다. 예를 들어 권한 부여 미들웨어는 엔드포인트의 메타데이터 컬렉션에서 권한 부여 정책을 조사할 수 있습니다. 요청 처리 파이프라인의 미들웨어가 모두 실행된 후에 선택한 엔드포인트의 대리자가 호출됩니다.
 
 엔드포인트 라우팅의 라우팅 시스템은 모든 디스패치를 결정합니다. 미들웨어가 선택된 엔드포인트를 기반으로 정책을 적용하므로 디스패치 또는 응용 프로그램의 보안 정책에 영향을 미칠 수 있는 모든 결정은 라우팅 시스템 내에서 이루어져야 합니다.
 
@@ -591,6 +591,81 @@ routes.MapRoute("blog_route", "blog/{*slug}",
 복잡한 세그먼트(예: `[Route("/x{token}y")]`)는 non-greedy 방식으로 오른쪽에서 왼쪽으로 리터럴을 매칭하여 처리됩니다. 복잡한 세그먼트 일치 방법에 대한 자세한 설명은 [이 코드](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)를 참조하세요. [코드 샘플](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)은 ASP.NET Core에서 사용되지 않지만 복잡한 세그먼트에 대한 적절한 설명을 제공합니다.
 <!-- While that code is no longer used by ASP.NET Core for complex segment matching, it provides a good match to the current algorithm. The [current code](https://github.com/aspnet/AspNetCore/blob/91514c9af7e0f4c44029b51f05a01c6fe4c96e4c/src/Http/Routing/src/Matching/DfaMatcherBuilder.cs#L227-L244) is too abstracted from matching to be useful for understanding complex segment matching.
 -->
+
+## <a name="configuring-endpoint-metadata"></a>엔드포인트 메타데이터 구성
+
+다음 링크는 엔드포인트 메타데이터를 구성하는 방법에 대한 정보를 제공합니다.
+
+* [엔드포인트 라우팅을 사용하여 Cors 사용](xref:security/cors#enable-cors-with-endpoint-routing)
+* 사용자 지정 `[MinimumAgeAuthorize]` 특성을 사용하는 [IAuthorizationPolicyProvider 샘플](https://github.com/aspnet/AspNetCore/tree/release/3.0/src/Security/samples/CustomPolicyProvider)
+* [[권한 부여] 특성으로 인증 테스트](xref:security/authentication/identity#test-identity)
+* <xref:Microsoft.AspNetCore.Builder.AuthorizationEndpointConventionBuilderExtensions.RequireAuthorization*>
+* [[권한 부여] 특성을 갖는 체계 선택](xref:security/authorization/limitingidentitybyscheme#selecting-the-scheme-with-the-authorize-attribute)
+* [[권한 부여] 특성을 사용하여 정책 적용](xref:security/authorization/policies#applying-policies-to-mvc-controllers)
+* <xref:security/authorization/roles>
+
+<a name="hostmatch"></a>
+
+## <a name="host-matching-in-routes-with-requirehost"></a>RequireHost가 있는 경로의 호스트 일치
+
+`RequireHost`는 지정된 호스트가 필요한 경로에 제약 조건을 적용합니다. `RequireHost` 또는 `[Host]` 매개 변수는 다음이 될 수 있습니다.
+
+* 호스트: `www.domain.com`(아무 포트에서나 `www.domain.com`과 일치)
+* 와일드카드가 있는 호스트: `*.domain.com`(아무 포트에서나 `www.domain.com`, `subdomain.domain.com` 또는 `www.subdomain.domain.com`과 일치)
+* 포트: `*:5000`(아무 호스트에서나 포트 5000과 일치)
+* 호스트 및 포트: `www.domain.com:5000`, `*.domain.com:5000`(호스트 및 포트 일치)
+
+`RequireHost` 또는 `[Host]`를 사용하여 여러 매개 변수를 지정할 수 있습니다. 제약 조건은 모든 매개 변수에 유효한 호스트와 일치합니다. 예를 들어, `[Host("domain.com", "*.domain.com")]`은 `domain.com`, `www.domain.com` 또는 `subdomain.domain.com`과 일치합니다.
+
+다음 코드는 `RequireHost`를 사용하여 경로상에 있는 지정된 호스트를 요구합니다.
+
+```csharp
+public void Configure(IApplicationBuilder app)
+{
+    app.UseRouting();
+
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapGet("/", context => context.Response.WriteAsync("Hi Contoso!"))
+            .RequireHost("contoso.com");
+        endpoints.MapGet("/", context => context.Response.WriteAsync("Hi AdventureWorks!"))
+            .RequireHost("adventure-works.com");
+        endpoints.MapHealthChecks("/healthz").RequireHost("*:8080");
+    });
+}
+```
+
+다음 코드는 `[Host]` 특성을 사용하여 컨트롤러에 있는 지정된 호스트를 요구합니다.
+
+```csharp
+[Host("contoso.com", "adventure-works.com")]
+public class HomeController : Controller
+{
+    private readonly ILogger<HomeController> _logger;
+
+    public HomeController(ILogger<HomeController> logger)
+    {
+        _logger = logger;
+    }
+
+    public IActionResult Index()
+    {
+        return View();
+    }
+
+    [Host("example.com:8080")]
+    public IActionResult Privacy()
+    {
+        return View();
+    }
+
+}
+```
+
+`[Host]` 특성이 컨트롤러 메서드와 작업 메서드에 모두 적용될 경우
+
+* 작업의 특성이 사용됩니다.
+* 컨트롤러의 특성은 무시됩니다.
 
 ::: moniker-end
 
