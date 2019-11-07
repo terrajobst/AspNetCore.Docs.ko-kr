@@ -62,7 +62,7 @@ ms.locfileid: "68670089"
 
 * 생성자 [종속성 주입](../../fundamentals/dependency-injection.md)을 완벽하게 지원합니다.
 
-* public class컨트롤러 수명 주기에 참여하지 않으므로 보기 구성 요소에서는 [필터](../controllers/filters.md)를 사용할 수 없습니다.
+* 컨트롤러 수명 주기에 참여하지 않으므로 보기 구성 요소에서는 [필터](../controllers/filters.md)를 사용할 수 없습니다.
 
 ### <a name="view-component-methods"></a>보기 구성 요소 메서드
 
@@ -145,7 +145,7 @@ ASP.NET Core 1.1 이상에서는 [태그 도우미](xref:mvc/views/tag-helpers/i
 
 [!code-csharp[](view-components/sample/ViewCompFinal/Controllers/ToDoController.cs?name=snippet_IndexVC)]
 
-## <a name="walkthrough-creating-a-simple-view-component"></a>연습: 간단한 뷰 구성 요소 만들기
+## <a name="walkthrough-creating-a-simple-view-component"></a>연습: 간단한 보기 구성 요소 만들기
 
 시작 코드를 [다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/view-components/sample), 빌드 및 테스트합니다. *ToDo* 항목의 목록을 표시하는 `ToDo` 컨트롤러가 포함된 간단한 프로젝트입니다.
 
@@ -165,8 +165,8 @@ ASP.NET Core 1.1 이상에서는 [태그 도우미](xref:mvc/views/tag-helpers/i
 
   ```csharp
   [ViewComponent(Name = "PriorityList")]
-     public class XYZ : ViewComponent
-     ```
+  public class XYZ : ViewComponent
+  ```
 
 * 위의 `[ViewComponent]` 특성은 구성 요소와 연관된 보기를 찾을 때 `PriorityList` 이름을 사용하고, 보기에서 클래스 구성 요소를 참조할 때 "PriorityList" 문자열을 사용하도록 보기 구성 요소 선택기에게 지시합니다. 나중에 보다 자세히 설명합니다.
 * 이 구성 요소에서는 [종속성 주입](../../fundamentals/dependency-injection.md)을 사용하여 데이터 컨텍스트를 사용할 수 있도록 합니다.
@@ -184,7 +184,7 @@ ASP.NET Core 1.1 이상에서는 [태그 도우미](xref:mvc/views/tag-helpers/i
 
   [!code-cshtml[](view-components/sample/ViewCompFinal/Views/Shared/Components/PriorityList/Default1.cshtml)]
 
-   Razor 뷰는 `TodoItem` 목록을 가져와 표시합니다. 뷰 구성 요소 `InvokeAsync` 메서드가 뷰의 이름을 전달하지 않은 경우(샘플에서처럼) 규칙에 따라 뷰 이름으로 *Default*가 사용됩니다. 자습서의 뒷부분에서 뷰 이름을 전달하는 방법을 보여 줍니다. 특정 컨트롤러에 대한 기본 스타일 지정을 재정의하려면 컨트롤러 관련 뷰 폴더에 뷰를 추가합니다(예: *Views/ToDo/Components/PriorityList/Default.cshtml)* .
+   Razor 보기는 `TodoItem` 목록을 가져와서 표시합니다. 보기 구성 요소의 `InvokeAsync` 메서드가 보기의 이름을 전달하지 않은 경우(예제에서처럼) 규칙에 따라 보기 이름으로 *Default*가 사용됩니다. 자습서의 뒷부분에서 보기 이름을 전달하는 방법을 살펴봅니다. 특정 컨트롤러에 대한 기본 스타일 지정을 재정의하려면 컨트롤러 관련 보기 폴더에 보기를 추가합니다(예: *Views/ToDo/Components/PriorityList/Default.cshtml)*.
 
     보기 구성 요소가 컨트롤러에 관한 것이면 컨트롤러 관련 폴더에 추가할 수 있습니다(*Views/ToDo/Components/PriorityList/Default.cshtml*).
 
