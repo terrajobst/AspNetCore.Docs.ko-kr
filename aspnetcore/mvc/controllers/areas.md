@@ -47,22 +47,22 @@ Razor Pages를 사용하는 경우 이 문서에서 [Razor Pages가 있는 영�
 *제품* 및 *서비스*의 두 논리 그룹이 있는 앱을 고려합니다. 영역을 사용하면 폴더 구조는 다음과 유사합니다.
 
 * 프로젝트 이름
-  * 영역
-    * 제품
-      * 컨트롤러
+  * Areas
+    * Products
+      * Controllers
         * HomeController.cs
         * ManageController.cs
-      * 보기
-        * 홈
+      * Views
+        * Home
           * Index.cshtml
-        * 관리
+        * Manage
           * Index.cshtml
           * About.cshtml
-    * 서비스
-      * 컨트롤러
+    * Services
+      * Controllers
         * HomeController.cs
-      * 보기
-        * 홈
+      * Views
+        * Home
           * Index.cshtml
 
 영역을 사용할 때 이전 레이아웃이 일반적이지만, 이 폴더 구조를 사용하려면 보기 파일만 필요합니다. 보기 검색은 일치하는 영역 보기 파일을 다음 순서로 검색합니다.
@@ -137,17 +137,17 @@ ASP.NET Core 2.2와 함께 `MapAreaRoute`를 사용하는 경우 [이 GitHub 문
 Razor Pages가 있는 영역은 앱 루트에 *Areas/<area name>/Pages* 폴더가 있어야 합니다. [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples)에서는 다음 폴더 구조가 사용됩니다.
 
 * 프로젝트 이름
-  * 영역
-    * 제품
+  * Areas
+    * Products
       * Pages
         * _ViewImports
-        * 정보
-        * 인덱스
-    * 서비스
+        * About
+        * Index
+    * Services
       * Pages
-        * 관리
-          * 정보
-          * 인덱스
+        * Manage
+          * About
+          * Index
 
 ### <a name="link-generation-with-razor-pages-and-areas"></a>Razor Pages 및 영역과 링크 생성
 

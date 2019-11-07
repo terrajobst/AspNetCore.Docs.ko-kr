@@ -32,7 +32,7 @@ ASP.NET Core에서 ‘필터’를 사용하면 요청 처리 파이프라인의
 
 ## <a name="how-filters-work"></a>필터 작동 방법
 
-필터는 ‘필터 파이프라인’이라고도 하는 ‘ASP.NET Core 동작 호출 파이프라인’내에서 실행됩니다.    필터 파이프라인은 ASP.NET Core가 실행할 작업을 선택한 후에 실행됩니다.
+필터는 ‘필터 파이프라인’이라고도 하는 ‘ASP.NET Core 동작 호출 파이프라인’내에서 실행됩니다.    필터 파이프라인은 ASP.NET Core가 실행할 작업을 선택한 이후에 실행됩니다.
 
 ![다른 미들웨어, 라우팅 미들웨어, 작업 선택 영역 및 ASP.NET Core 작업 호출 파이프라인을 통해 요청이 처리됩니다. 응답이 클라이언트에 전송되기 전에 작업 선택 영역, 라우팅 미들웨어 및 기타 다양한 미들웨어를 통해 요청 처리가 계속됩니다.](filters/_static/filter-pipeline-1.png)
 
@@ -130,14 +130,14 @@ ASP.NET Core에는 하위 클래스를 지정하고 사용자 지정할 수 있�
   
 다음 예제는 필터 메서드가 동기 작업 필터에 대해 호출되는 순서를 보여줍니다.
 
-| Sequence | 필터 범위 | 필터 메서드 |
+| 순서 | 필터 범위 | 필터 메서드 |
 |:--------:|:------------:|:-------------:|
-| 1 | Global | `OnActionExecuting` |
+| 1 | 전역 | `OnActionExecuting` |
 | 2 | 컨트롤러 | `OnActionExecuting` |
 | 3 | 메서드 | `OnActionExecuting` |
 | 4 | 메서드 | `OnActionExecuted` |
 | 5 | 컨트롤러 | `OnActionExecuted` |
-| 6 | Global | `OnActionExecuted` |
+| 6 | 전역 | `OnActionExecuted` |
 
 이 시퀀스는 다음을 보여 줍니다.
 
@@ -190,12 +190,12 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 
 앞의 예와 동일한 3개의 작업 필터를 고려합니다. 컨트롤러와 전역 필터의 `Order` 속성이 각각 1과 2로 설정된 경우에는 실행 순서가 반대가 됩니다.
 
-| Sequence | 필터 범위 | `Order` 속성 | 필터 메서드 |
+| 순서 | 필터 범위 | `Order` 속성 | 필터 메서드 |
 |:--------:|:------------:|:-----------------:|:-------------:|
 | 1 | 메서드 | 0 | `OnActionExecuting` |
 | 2 | 컨트롤러 | 1  | `OnActionExecuting` |
-| 3 | Global | 2  | `OnActionExecuting` |
-| 4 | Global | 2  | `OnActionExecuted` |
+| 3 | 전역 | 2  | `OnActionExecuting` |
+| 4 | 전역 | 2  | `OnActionExecuted` |
 | 5 | 컨트롤러 | 1  | `OnActionExecuted` |
 | 6 | 메서드 | 0  | `OnActionExecuted` |
 
@@ -266,7 +266,7 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
   * 필터의 단일 인스턴스 생성.
   * 필터는 나중에 DI 컨테이너에서 다시 요청되지 않습니다.
 
-* 싱글톤이 아닌 수명이 지정된 서비스에 의존하는 필터와 함께 사용하지 마세요.
+* 싱글톤 이외의 수명이 지정된 서비스에 의존하는 필터와 함께 사용하지 마세요.
 
  <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>를 구현합니다. `IFilterFactory`은 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> 인스턴스를 만들기 위해 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 메서드를 노출합니다. `CreateInstance`는 DI에서 지정된 형식을 로드합니다.
 
@@ -282,7 +282,7 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 `TypeFilterAttribute`를 사용할 때 [TypeFilterAttribute.IsReusable](xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute.IsReusable) 설정:
 * 필터 인스턴스가 원래 생성된 요청 범위 밖에서 재사용될 가능성이 *있음*을 암시하는 것입니다. ASP.NET Core 런타임은 단일 필터 인스턴스가 생성되도록 보장하지 않습니다.
 
-* 싱글톤이 아닌 수명이 지정된 서비스에 의존하는 필터와 함께 사용하지 마세요.
+* 싱글톤 이외의 수명이 지정된 서비스에 의존하는 필터와 함께 사용하지 마세요.
 
 다음 예제에서는 `TypeFilterAttribute`를 사용하여 인수를 형식에 전달하는 방법을 보여줍니다.
 
