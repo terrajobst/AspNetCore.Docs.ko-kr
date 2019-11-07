@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/21/2019
 uid: blazor/get-started
-ms.openlocfilehash: 80ff7b42a44e722dd27bc4fde53a066863448e10
-ms.sourcegitcommit: 810d5831169770ee240d03207d6671dabea2486e
+ms.openlocfilehash: 48d7ff4bf23273daf43128831aa46cfab3d982fe
+ms.sourcegitcommit: 897d4abff58505dae86b2947c5fe3d1b80d927f3
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/22/2019
-ms.locfileid: "72779119"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73634025"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>ASP.NET Core Blazor 시작 하기
 
@@ -29,7 +29,7 @@ Blazor 시작 하기:
 1. 명령 셸에서 다음 명령을 실행 하 여 [Blazor Weasembomtemplate](xref:blazor/hosting-models#blazor-webassembly) 을 설치 합니다. [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.Templates/) 패키지에는 미리 보기 버전이 있지만 Blazor Weasembmbveris는 미리 보기로 제공 됩니다.
 
    ```dotnetcli
-   dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.1.0-preview1.19508.20
+   dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.1.0-preview2.19528.8
    ```
 
 1. 선택한 도구에 대 한 지침을 따르세요.
@@ -246,9 +246,9 @@ Counter 페이지에서 **Click me** 단추를 선택하여 페이지 새로 고
 
 **[클릭** ] 단추를 선택할 때마다:
 
-* @No__t_0 이벤트가 발생 합니다.
+* `onclick` 이벤트가 발생 합니다.
 * `IncrementCount` 메서드가 호출됩니다.
-* @No__t_0 증가 합니다.
+* `currentCount` 증가 합니다.
 * 구성 요소가 다시 렌더링 됩니다.
 
 런타임은 새 콘텐츠를 이전 콘텐츠와 비교 하 고 변경 된 콘텐츠만 문서 개체 모델 (DOM)에 적용 합니다.
@@ -261,9 +261,9 @@ HTML 구문을 사용 하 여 구성 요소를 다른 구성 요소에 추가 �
 
 앱을 실행합니다. 홈페이지에는 `Counter` 구성 요소에서 제공 하는 고유한 카운터가 있습니다.
 
-구성 요소 매개 변수는 자식 구성 요소에 대 한 속성을 설정할 수 있도록 하는 특성 또는 [자식 콘텐츠](xref:blazor/components#child-content)를 사용 하 여 지정 됩니다. @No__t_0 구성 요소에 매개 변수를 추가 하려면 구성 요소의 `@code` 블록을 업데이트 합니다.
+구성 요소 매개 변수는 자식 구성 요소에 대 한 속성을 설정할 수 있도록 하는 특성 또는 [자식 콘텐츠](xref:blazor/components#child-content)를 사용 하 여 지정 됩니다. `Counter` 구성 요소에 매개 변수를 추가 하려면 구성 요소의 `@code` 블록을 업데이트 합니다.
 
-* @No__t_1 특성을 사용 하 여 `IncrementAmount`에 대 한 public 속성을 추가 합니다.
+* `[Parameter]` 특성을 사용 하 여 `IncrementAmount`에 대 한 public 속성을 추가 합니다.
 * `currentCount` 값을 증가시킬 때 `IncrementAmount`를 사용하도록 `IncrementCount` 메서드를 변경합니다.
 
 *Pages/Counter.razor*:
@@ -276,7 +276,7 @@ HTML 구문을 사용 하 여 구성 요소를 다른 구성 요소에 추가 �
 
 [!code-cshtml[](get-started/samples_snapshot/3.x/Index2.razor?highlight=7)]
 
-앱을 실행합니다. @No__t_0 구성 요소에는 **클릭** 단추를 선택할 때마다 10 씩 증가 하는 고유한 카운터가 있습니다. @No__t_2의 `Counter` 구성 요소 ( *. razor*)는 1 씩 계속 증가 합니다.
+앱을 실행합니다. `Index` 구성 요소에는 **클릭** 단추를 선택할 때마다 10 씩 증가 하는 고유한 카운터가 있습니다. `/counter`의 `Counter` 구성 요소 ( *. razor*)는 1 씩 계속 증가 합니다.
 
 ## <a name="next-steps"></a>다음 단계
 

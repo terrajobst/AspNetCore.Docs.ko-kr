@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/29/2019
 uid: tutorials/first-web-api
-ms.openlocfilehash: 6f2d62600da828261ecfc3a1df688ce914eccf33
-ms.sourcegitcommit: a166291c6708f5949c417874108332856b53b6a9
+ms.openlocfilehash: abb55ea12583374639f28945037cb6aa41a5a32d
+ms.sourcegitcommit: 77c8be22d5e88dd710f42c739748869f198865dd
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/18/2019
-ms.locfileid: "72590022"
+ms.lasthandoff: 11/01/2019
+ms.locfileid: "73427042"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>자습서: ASP.NET Core를 사용하여 웹 API 만들기
 
@@ -917,13 +917,13 @@ jQuery는 요청 본문에 있는 할 일 항목을 사용하여 HTTP POST 요�
 
 ## <a name="add-authentication-support-to-a-web-api"></a>웹 API에 인증 지원 추가
 
-[IdentityServer4](https://identityserver4.readthedocs.io/en/latest/quickstarts/0_overview.html) 자습서를 참조하세요l.
+[!INCLUDE[](~/includes/IdentityServer4.md)]
 
 ## <a name="additional-resources"></a>추가 자료
 
 [이 자습서에서 샘플 코드 보기 또는 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples) [다운로드하는 방법](xref:index#how-to-download-a-sample)을 참조하세요.
 
-자세한 내용은 다음 리소스를 참조하십시오.
+자세한 내용은 다음 자료를 참조하세요.
 
 * <xref:web-api/index>
 * <xref:tutorials/web-api-help-pages-using-swagger>
