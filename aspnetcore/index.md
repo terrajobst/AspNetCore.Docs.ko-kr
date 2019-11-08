@@ -4,14 +4,14 @@ author: rick-anderson
 description: 클라우드 기반 인터넷에 연결된 최신 애플리케이션을 빌드하기 위한 플랫폼 간 고성능 오픈 소스 프레임워크인 ASP.NET Core에 대한 소개를 가져옵니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/10/2019
+ms.date: 11/03/2019
 uid: index
-ms.openlocfilehash: 1ccc1f5d095833e89fc20127ee23b8fa3dc4c79f
-ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
+ms.openlocfilehash: edbdce19656af64d7c2c0ee554bc5213a0d0c50e
+ms.sourcegitcommit: 09f4a5ded39cc8204576fe801d760bd8b611f3aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/12/2019
-ms.locfileid: "72289059"
+ms.lasthandoff: 11/05/2019
+ms.locfileid: "73611405"
 ---
 # <a name="introduction-to-aspnet-core"></a>ASP.NET Core 소개
 
@@ -99,6 +99,10 @@ ASP.NET Core 앱 개발을 소개하는 자습서 및 문서는 다음 순서대
 
 \* 브라우저에서 [수행할 새로운 웹 API 자습서](https://docs.microsoft.com/learn/modules/build-web-api-net-core)가 있으며 로컬 IDE를 설치할 필요가 없습니다.  해당 코드는 [Azure Cloud Shell](https://azure.microsoft.com/features/cloud-shell/)에서 실행되고, [curl](https://curl.haxx.se/)은 테스트에 사용됩니다.
 
+## <a name="migration-from-the-net-framework"></a>.NET Framework에서 마이그레이션
+
+ASP.NET 앱을 ASP.NET Core로 마이그레이션에 대한 참조 가이드는 <migration/proper-to-2x/index>를 참조하세요.
+
 ## <a name="how-to-download-a-sample"></a>샘플 다운로드 방법
 
 대부분의 문서 및 자습서에는 샘플 코드에 대한 링크가 포함됩니다.
@@ -153,7 +157,7 @@ Host.CreateDefaultBuilder(args)
 
 ## <a name="next-steps"></a>다음 단계
 
-자세한 내용은 다음 리소스를 참조하십시오.
+자세한 내용은 다음 자료를 참조하세요.
 
 * <xref:getting-started>
 * <xref:tutorials/publish-to-azure-webapp-using-vs>
