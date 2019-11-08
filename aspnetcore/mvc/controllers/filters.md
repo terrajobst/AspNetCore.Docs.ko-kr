@@ -397,7 +397,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 ## <a name="exception-filters"></a>예외 필터
 
-예외 필터:
+예외 필터는:
 
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter> 또는 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter>를 구현합니다. 
 * 일반적인 오류 처리 정책을 구현하는 데 사용할 수 있습니다.
@@ -406,7 +406,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/CustomExceptionFilter.cs?name=snippet_ExceptionFilter&highlight=16-19)]
 
-예외 필터:
+예외 필터는:
 
 * before 및 after 이벤트는 없습니다.
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException*> 또는 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync*>를 구현합니다.
@@ -415,12 +415,12 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 예외를 처리하려면 <xref:System.Web.Mvc.ExceptionContext.ExceptionHandled> 속성을 `true`로 설정하거나 응답을 작성합니다. 그러면 예외가 전파되지 않습니다. 예외 필터는 예외를 “성공”으로 변환할 수 없습니다. 작업 필터에서만 가능합니다.
 
-예외 필터:
+예외 필터는:
 
 * 작업 내에서 발생하는 트래핑 예외에 좋습니다.
 * 오류 처리 미들웨어만큼 유연하지 않습니다.
 
-예외 처리의 경우 미들웨어를 선호합니다. 어떤 작업 메서드가 호출되는지에 따라 오류 처리 방식이 ‘다른’ 경우에만 예외 필터를 사용합니다.  예를 들어 앱에는 API 엔드포인트 및 보기/HTML 모두에 대한 작업 메서드가 있을 수 있습니다. API 엔드포인트는 JSON으로 오류 정보를 반환할 수 있습니다. 반면 보기 기반 작업은 HTML로 오류 페이지를 반환할 수 있습니다.
+예외 처리에는 미들웨어를 사용하는 것이 좋습니다. 어떤 작업 메서드가 호출되는지에 따라 오류 처리 방식이 ‘다른’ 경우에만 예외 필터를 사용합니다.  예를 들어 앱에 API 엔드포인트와 보기/HTML에 대한 작업 메서드가 모두 있을 수 있습니다. API 엔드포인트는 JSON으로 오류 정보를 반환할 수 있습니다. 반면 보기 기반 작업은 HTML로 오류 페이지를 반환할 수 있습니다.
 
 ## <a name="result-filters"></a>결과 필터
 
@@ -459,7 +459,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/MyAsyncResponseFilter.cs?name=snippet)]
 
-프레임워크는 하위 클래스를 지정할 수 있는 추상 `ResultFilterAttribute`를 제공합니다. 이전에 표시된 [AddHeaderAttribute](#add-header-attribute) 클래스는 결과 필터 특성의 예제입니다.
+프레임워크는 서브클래싱할 수 있는 추상 `ResultFilterAttribute`를 제공합니다. 이전에 살펴본 [AddHeaderAttribute](#add-header-attribute) 클래스는 결과 필터 특성의 예제입니다.
 
 ### <a name="ialwaysrunresultfilter-and-iasyncalwaysrunresultfilter"></a>IAlwaysRunResultFilter 및 IAsyncAlwaysRunResultFilter
 
