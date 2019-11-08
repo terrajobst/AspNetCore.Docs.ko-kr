@@ -5,14 +5,14 @@ description: 선택한 도구를 사용 하 여 Blazor 앱을 빌드하여 Blazo
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/21/2019
+ms.date: 11/07/2019
 uid: blazor/get-started
-ms.openlocfilehash: 48d7ff4bf23273daf43128831aa46cfab3d982fe
-ms.sourcegitcommit: 897d4abff58505dae86b2947c5fe3d1b80d927f3
+ms.openlocfilehash: b5043c7e4549800c1ab49bc37dd8f3568975d4aa
+ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73634025"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73799237"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>ASP.NET Core Blazor 시작 하기
 
@@ -132,7 +132,7 @@ Blazor 시작 하기:
 1. 필요에 따라 [.Net Core 3.1 PREVIEW SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1) 를 설치한 다음 명령 셸에서 다음 명령을 실행 하 여 [Blazor Weasembomtemplate](xref:blazor/hosting-models#blazor-webassembly) 을 설치 합니다.
 
    ```dotnetcli
-   dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.1.0-preview1.19508.20
+   dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.1.0-preview2.19528.8
    ```
 
 1. 선택한 도구에 대 한 지침을 따르세요.
