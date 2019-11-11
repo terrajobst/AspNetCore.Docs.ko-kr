@@ -5,14 +5,14 @@ description: CentOS에서 Apache를 역방향 프록시 서버로 설정하여 K
 monikerRange: '>= aspnetcore-2.1'
 ms.author: shboyer
 ms.custom: mvc
-ms.date: 03/31/2019
+ms.date: 11/05/2019
 uid: host-and-deploy/linux-apache
-ms.openlocfilehash: ec14bce5d8ada9a56ccc44d1159373dc73a09c1b
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: fce91db736908e433ba6803319aa8984bb68a554
+ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081888"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73659880"
 ---
 # <a name="host-aspnet-core-on-linux-with-apache"></a>Apache를 사용하여 Linux에서 ASP.NET Core 호스트
 
@@ -484,7 +484,7 @@ sudo nano /etc/httpd/conf.d/ratelimit.conf
 
 ### <a name="long-request-header-fields"></a>긴 요청 헤더 필드
 
-앱이 프록시 서버의 기본 설정(일반적으로 8,190바이트)에서 허용하는 것보다 긴 요청 헤더 필드가 필요한 경우 [LimitRequestFieldSize](https://httpd.apache.org/docs/2.4/mod/core.html#LimitRequestFieldSize) 지시문의 값을 조정합니다. 적용할 값은 시나리오에 따라 다릅니다. 자세한 내용은 서버의 설명서를 참조하세요.
+프록시 서버 기본 설정은 일반적으로 요청 헤더 필드를 8,190바이트로 제한합니다. 앱에 기본값보다 긴 필드가 필요할 수 있습니다(예: [Azure Active Directory](https://azure.microsoft.com/services/active-directory/)를 사용하는 앱). 더 긴 필드가 필요한 경우 프록시 서버의 [LimitRequestFieldSize](https://httpd.apache.org/docs/2.4/mod/core.html#LimitRequestFieldSize) 지시문을 조정해야 합니다. 적용할 값은 시나리오에 따라 달라집니다. 자세한 내용은 서버의 설명서를 참조하세요.
 
 > [!WARNING]
 > 필요한 경우가 아니면 `LimitRequestFieldSize`의 기본값을 늘리지 마세요. 값을 늘리면 악의적인 사용자의 버퍼 오버런(오버플로) 및 DoS(서비스 거부) 공격의 위험이 증가됩니다.

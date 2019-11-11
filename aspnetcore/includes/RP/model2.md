@@ -71,4 +71,5 @@ using Microsoft.EntityFrameworkCore;
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
 
 오류에 대한 검사 방법으로 프로젝트를 빌드합니다.
+
 ::: moniker-end

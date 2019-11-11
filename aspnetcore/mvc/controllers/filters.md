@@ -468,7 +468,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * 단락하는 권한 부여 필터 및 리소스 필터
 * 예외 필터
 
-예를 들어 다음 필터는 항상 실행되어 콘텐츠 협상이 실패할 경우 작업 결과(<xref:Microsoft.AspNetCore.Mvc.ObjectResult>)를 422 Unprocessable Entity 상태 코드로 설정합니다.
+예를 들어 다음 필터는 항상 실행되어 콘텐츠 협상이 실패할 경우 작업 결과(<xref:Microsoft.AspNetCore.Mvc.ObjectResult>)를 *422 Unprocessable Entity* 상태 코드로 설정합니다.
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/UnprocessableResultFilter.cs?name=snippet)]
 

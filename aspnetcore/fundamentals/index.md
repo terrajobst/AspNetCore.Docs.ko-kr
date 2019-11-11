@@ -5,14 +5,14 @@ description: ASP.NET Core 앱을 구축하기 위한 기본적인 개념을 알�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/07/2019
+ms.date: 11/07/2019
 uid: fundamentals/index
-ms.openlocfilehash: a70d6aa05a2c92d19076b8d6e4ea24d7554368b6
-ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
+ms.openlocfilehash: 7173a732a04bf3e598adef298fa9120c15dd52fb
+ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/07/2019
-ms.locfileid: "72007124"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73799379"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core 기본 사항
 
@@ -302,6 +302,14 @@ ASP.NET Core에는 다음과 같은 오류를 처리하기 위한 기본 제공 
 웹 루트 경로는 *{content root}/wwwroot*를 기본값으로 지정하지만 [호스트를 빌드](#host)할 때 다른 웹 루트를 지정할 수도 있습니다. 자세한 내용은 [웹 루트](xref:fundamentals/host/web-host#web-root)를 참조하세요.
 
 ::: moniker-end
+
+프로젝트 파일에서 [\<Content> project item](/visualstudio/msbuild/common-msbuild-project-items#content)을 사용하여 *wwwroot*에 파일을 게시하지 못하도록 합니다. 다음 예에서는 *wwwroot/local* 디렉터리 및 하위 디렉터리에 콘텐츠를 게시하지 못하도록 합니다.
+
+```xml
+<ItemGroup>
+  <Content Update="wwwroot\local\**\*.*" CopyToPublishDirectory="Never" />
+</ItemGroup>
+```
 
 Razor( *.cshtml*) 파일에서는 물결표 슬래시(`~/`)가 웹 루트를 가리킵니다. `~/`(으)로 시작하는 경로를 *가상 경로*라고 합니다.
 

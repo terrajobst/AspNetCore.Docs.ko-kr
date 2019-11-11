@@ -5,14 +5,14 @@ description: ASP.NET Core에서 종속성 주입을 구현하는 방법 및 사�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/12/2019
+ms.date: 11/05/2019
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: b07ed6d1c23454c95778a5942de615684b70bc36
-ms.sourcegitcommit: a166291c6708f5949c417874108332856b53b6a9
+ms.openlocfilehash: c46e7322e86c2836a15bd0720995a8634bb185be
+ms.sourcegitcommit: 897d4abff58505dae86b2947c5fe3d1b80d927f3
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/18/2019
-ms.locfileid: "72589896"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73634018"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>ASP.NET Core에서 종속성 주입
 
@@ -571,7 +571,7 @@ public class Program
 모범 사례는 다음과 같습니다.
 
 * 종속성 주입을 사용하여 종속성을 가져오도록 서비스를 디자인합니다.
-* 상태를 저장하는 정적 메서드 호출을 사용하지 마세요.
+* 상태 저장 정적 클래스 및 멤버를 사용하지 마세요. 대신 singleton 서비스를 사용하여 전역 상태를 만들지 않도록 앱을 디자인합니다.
 * 서비스 내의 종속 클래스를 직접 인스턴스화하지 마세요. 직접 인스턴스화는 코드를 특정 구현에 결합합니다.
 * 앱 클래스를 작고 잘 구성되고 쉽게 테스트할 수 있도록 만듭니다.
 
