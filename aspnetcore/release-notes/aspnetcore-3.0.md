@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core 3.0의 새로운 기능에 대해 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/08/2019
+ms.date: 10/31/2019
 uid: aspnetcore-3.0
-ms.openlocfilehash: 90433773bec2efc5a2bc39d71ce7ae324b922046
-ms.sourcegitcommit: fcdf9aaa6c45c1a926bd870ed8f893bdb4935152
+ms.openlocfilehash: 8c53d8a9fa222ca40f26dc713ec3b70ddde76539
+ms.sourcegitcommit: eb2fe5ad2e82fab86ca952463af8d017ba659b25
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/09/2019
-ms.locfileid: "72165363"
+ms.lasthandoff: 11/01/2019
+ms.locfileid: "73416118"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3.0의 새로운 기능
 
@@ -321,14 +321,16 @@ Json.NET을 ASP.NET Core 3.0에 추가하려면 [Newtonsoft.Json 기반 JSON 형
 
 ## <a name="identityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>IdentityServer4는 웹 API 및 SPA에 대한 인증 및 권한 부여를 지원합니다.
 
-[IdentityServer4](https://identityserver.io)는 ASP.NET Core 3.0용 OpenID Connect 및 OAuth 2.0 프레임워크입니다. IdentityServer4에서는 다음과 같은 보안 기능을 사용할 수 있습니다.
+ASP.NET Core 3.0에서는 웹 API 권한 부여에 대한 지원을 사용하여 SPA(단일 페이지 앱)의 인증을 제공합니다. 사용자를 인증하고 저장하기 위한 ASP.NET Core ID는 Open ID Connect 구현하기 위해 [IdentityServer4](https://identityserver.io/)와 통합됩니다.
+
+IdentityServer4는 ASP.NET Core 3.0용 OpenID Connect 및 OAuth 2.0 프레임워크입니다. 다음과 같은 보안 기능을 제공합니다.
 
 * AaaS(Authentication as a Service)
 * 여러 애플리케이션 유형에 대한 SSO(Single Sign-On/Off)
 * API에 대한 액세스 제어
 * 페더레이션 게이트웨이
 
-자세한 내용은 [IdentityServer4 시작](http://docs.identityserver.io/en/latest/index.html)을 참조하세요.
+자세한 내용은[IdentityServer4 설명서](http://docs.identityserver.io/en/latest/index.html) 또는 [SPA의 인증 및 권한 부여](xref:security/authentication/identity/spa)를 참조하세요.
 
 ## <a name="certificate-and-kerberos-authentication"></a>인증서 및 Kerberos 인증
 
@@ -392,7 +394,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 웹 UI 템플릿(컨트롤러 및 보기를 사용하는 Razor Pages, MVC)에서 다음이 제거되었습니다.
 
-* 쿠키 동의 UI가 더 이상 포함되지 않습니다. ASP.NET Core 3.0 템플릿에서 생성한 앱에서 쿠키 동의 기능을 사용하려면 <xref:security/gdpr>를 참조하세요.
+* 쿠키 동의 UI가 더 이상 포함되지 않습니다. ASP.NET Core 3.0 템플릿에서 생성한 앱에서 쿠키 동의 기능을 사용하려면 <xref:security/gdpr>을 참조하세요.
 * 스크립트 및 관련 정적 자산은 이제 CDN을 사용하는 대신 로컬 파일로 참조됩니다. 자세한 내용은 [스크립트 및 관련 정적 자산은 현재 환경을 기반으로 CDN을 사용하는 대신 로컬 파일로 참조됩니다(aspnet/AspNetCore.Docs #14350)](https://github.com/aspnet/AspNetCore.Docs/issues/14350)를 참조하세요.
 
 Angular 템플릿은 Angular 8을 사용하는 것으로 업데이트되었습니다.
@@ -407,7 +409,7 @@ ASP.NET Core 3.0 템플릿은 <xref:fundamentals/host/generic-host>를 사용합
 
 ASP.NET Core 3.0 릴리스 전에는 웹 호스트의 호스트 구성에 대해 `ASPNETCORE_`가 접두사로 추가된 환경 변수가 로드되었습니다. 3\.0에서 `AddEnvironmentVariables`는 `CreateDefaultBuilder`와의 호스트 구성을 위해 `DOTNET_`가 접두사로 추가된 환경 변수를 로드하는 데 사용됩니다.
 
-### <a name="changes-to-startup-contructor-injection"></a>Startup 생성자 주입에 대한 변경 내용
+### <a name="changes-to-startup-constructor-injection"></a>Startup 생성자 주입의 변경 내용
 
 제네릭 호스트는 `Startup` 생성자 주입에 대해서만 다음 형식을 지원합니다.
 

@@ -5,14 +5,14 @@ description: Ubuntu 16.04에서 Nginx를 역방향 프록시로 설정하여 Kes
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/31/2019
+ms.date: 11/05/2019
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: b71bc0464892f15ef8db0324a8e66a28a6192577
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: c6ae86ec9ac54ddf2d487fd72156199fbdd029ef
+ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71080869"
+ms.lasthandoff: 11/06/2019
+ms.locfileid: "73659866"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>Nginx를 사용하여 Linux에서 ASP.NET Core 호스트
 
@@ -287,7 +287,7 @@ sudo journalctl -fu kestrel-helloapp.service --since "2016-10-18" --until "2016-
 
 ## <a name="long-request-header-fields"></a>긴 요청 헤더 필드
 
-앱이 프록시 서버의 기본 설정(일반적으로 플랫폼에 따라 4K 또는 8K)에서 허용하는 것보다 긴 헤더 필드를 요청해야 하는 경우, 다음 지시문을 조정해야 합니다. 적용할 값은 시나리오에 따라 다릅니다. 자세한 내용은 서버의 설명서를 참조하세요.
+프록시 서버 기본 설정은 일반적으로 플랫폼에 따라 요청 헤더 필드를 4K 또는 8K로 제한합니다. 앱에 기본값보다 긴 필드가 필요할 수 있습니다(예: [Azure Active Directory](https://azure.microsoft.com/services/active-directory/)를 사용하는 앱). 더 긴 필드가 필요한 경우 프록시 서버의 기본 설정을 조정해야 합니다. 적용할 값은 시나리오에 따라 달라집니다. 자세한 내용은 서버의 설명서를 참조하세요.
 
 * [proxy_buffer_size](https://nginx.org/docs/http/ngx_http_proxy_module.html#proxy_buffer_size)
 * [proxy_buffers](https://nginx.org/docs/http/ngx_http_proxy_module.html#proxy_buffers)

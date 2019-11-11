@@ -14,3 +14,5 @@ dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 * .NET Core CLI에 대한 Entity Framework Core 도구.
 * EF Core 패키지를 종속성으로 설치하는 EF Core SQLite 공급자.
 * 스캐폴딩에 필요한 패키지: `Microsoft.VisualStudio.Web.CodeGeneration.Design` 및 `Microsoft.EntityFrameworkCore.SqlServer`.
+
+앱이 환경별로 데이터베이스 컨텍스트를 구성하도록 허용하는 여러 환경 구성에 대한 지침은 <xref:fundamentals/environments#environment-based-startup-class-and-methods>를 참조하세요.

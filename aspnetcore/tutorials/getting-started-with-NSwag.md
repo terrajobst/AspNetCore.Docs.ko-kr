@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 06/21/2019
 uid: tutorials/get-started-with-nswag
-ms.openlocfilehash: 5e62a8cc50947969d42981350b65a24781929d62
-ms.sourcegitcommit: fe88748b762525cb490f7e39089a4760f6a73a24
+ms.openlocfilehash: 23927e6ce0a7b29ce3f32d4e7f7d3f234257ca9b
+ms.sourcegitcommit: eb2fe5ad2e82fab86ca952463af8d017ba659b25
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/30/2019
-ms.locfileid: "71691192"
+ms.lasthandoff: 11/01/2019
+ms.locfileid: "73416166"
 ---
 # <a name="get-started-with-nswag-and-aspnet-core"></a>NSwag 및 ASP.NET Core 시작
 
@@ -64,7 +64,7 @@ NSwag를 사용하면 기존 API가 필요하지 않으므로 Swagger를 통합�
   * 검색 상자에 “NSwag.AspNetCore” 입력
   * **찾아보기** 탭에서 "NSwag.AspNetCore" 패키지를 선택하고 **설치** 클릭
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * **Solution Pad**에서 *Packages* 폴더를 마우스 오른쪽 단추로 클릭 > **패키지 추가...** 선택
 * **패키지 추가** 창의 **소스** 드롭다운을 “nuget.org”로 설정
@@ -211,7 +211,7 @@ XML 주석을 사용하려면 다음 단계를 수행합니다.
 
 ::: moniker-end
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -265,7 +265,7 @@ NSwag는 [리플렉션](/dotnet/csharp/programming-guide/concepts/reflection)을
 
 ::: moniker range=">= aspnetcore-2.1"
 
- NSwag는 [리플렉션](/dotnet/csharp/programming-guide/concepts/reflection)을 사용하고 웹 API 작업의 권장 반환 형식은 [ActionResult\<T>](xref:Microsoft.AspNetCore.Mvc.ActionResult%601)이므로 `T`로 정의된 반환 형식만 유추할 수 있습니다. 다른 가능한 반환 형식은 자동으로 유추할 수 없습니다.
+NSwag는 [리플렉션](/dotnet/csharp/programming-guide/concepts/reflection)을 사용하고 웹 API 작업의 권장 반환 형식은 [ActionResult\<T>](xref:Microsoft.AspNetCore.Mvc.ActionResult%601)이므로 `T`로 정의된 반환 형식만 유추할 수 있습니다. 다른 가능한 반환 형식은 자동으로 유추할 수 없습니다.
 
 다음 예제를 참조하세요.
 

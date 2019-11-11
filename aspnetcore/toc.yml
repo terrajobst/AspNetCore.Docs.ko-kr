@@ -399,7 +399,7 @@
               href: 'mvc/views/working-with-forms.md#the-validation-summary-tag-helper'
     - name: 고급
       items:
-        - name: 뷰 구성 요소
+        - name: 보기 구성 요소
           uid: mvc/views/view-components
         - name: 뷰 컴파일
           uid: mvc/views/view-compilation
@@ -1020,6 +1020,8 @@
   items:
     - name: 개요
       uid: performance/performance-best-practices
+    - name: 메모리 및 GC
+      uid: performance/memory
     - name: 응답 캐싱
       items:
         - name: 개요
