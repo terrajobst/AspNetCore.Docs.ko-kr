@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core에서 애플리케이션 파트
 author: rick-anderson
-description: ASP.NET Core의 애플리케이션 파트를 사용하여 컨트롤러, 보기, Razor Pages 등을 공유
+description: ASP.NET Core의 응용 프로그램 파트를 사용하여 컨트롤러, 보기, Razor Pages 등을 공유
 ms.author: riande
 ms.date: 05/14/2019
 uid: mvc/extensibility/app-parts
@@ -12,7 +12,7 @@ ms.contentlocale: ko-KR
 ms.lasthandoff: 09/24/2019
 ms.locfileid: "71207355"
 ---
-# <a name="share-controllers-views-razor-pages-and-more-with-application-parts-in-aspnet-core"></a>ASP.NET Core의 애플리케이션 파트를 사용하여 컨트롤러, 보기, Razor Pages 등을 공유
+# <a name="share-controllers-views-razor-pages-and-more-with-application-parts-in-aspnet-core"></a>ASP.NET Core의 응용 프로그램 파트를 사용하여 컨트롤러, 보기, Razor Pages 등을 공유
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 

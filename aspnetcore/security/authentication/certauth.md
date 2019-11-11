@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
 ms.date: 11/07/2019
 uid: security/authentication/certauth
-ms.openlocfilehash: 0db23c325f0b1f5a6500e3b2549db170e3df97c5
-ms.sourcegitcommit: 68d804d60e104c81fe77a87a9af70b5df2726f60
+ms.openlocfilehash: 0062bc0d7688ebcc67f8240da7166d89493f6639
+ms.sourcegitcommit: 4818385c3cfe0805e15138a2c1785b62deeaab90
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/08/2019
-ms.locfileid: "73830710"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73897029"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core에서 인증서 인증 구성
 
@@ -36,7 +36,7 @@ HTTPS 인증서를 획득 하 고 적용 하며 인증서를 요구 하도록 [�
 
 인증이 실패 하는 경우이 처리기는 `401 (Unauthorized)``403 (Forbidden)` 응답을 반환 합니다. 초기 TLS 연결 중에 인증이 수행 되어야 한다는 것을 의미 합니다. 처리기에 도달할 때까지 너무 늦습니다. 익명 연결에서 인증서를 사용 하는 연결로의 연결을 업그레이드할 수 있는 방법은 없습니다.
 
-또한 `Startup.Configure` 메서드에 `app.UseAuthentication();`를 추가 합니다. 그렇지 않으면 `HttpContext.User` 인증서에서 만든 `ClaimsPrincipal`로 설정 되지 않습니다. 예를 들면,
+또한 `Startup.Configure` 메서드에 `app.UseAuthentication();`를 추가 합니다. 그렇지 않으면 `HttpContext.User` 인증서에서 만든 `ClaimsPrincipal`로 설정 되지 않습니다. 예를 들어 다음과 같은 가치를 제공해야 합니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -229,21 +229,35 @@ IIS 관리자에서 다음 단계를 완료 합니다.
 Azure Web Apps에서 인증서는 `X-ARR-ClientCert`라는 사용자 지정 요청 헤더로 전달 됩니다. 이를 사용 하려면 `Startup.ConfigureServices`에서 인증서 전달을 구성 합니다.
 
 ```csharp
-services.AddCertificateForwarding(options =>
+public void ConfigureServices(IServiceCollection services)
 {
-    options.CertificateHeader = "X-ARR-ClientCert";
-    options.HeaderConverter = (headerValue) =>
+    // ...
+    
+    services.AddCertificateForwarding(options =>
     {
-        X509Certificate2 clientCertificate = null;
-        if(!string.IsNullOrWhiteSpace(headerValue))
+        options.CertificateHeader = "X-ARR-ClientCert";
+        options.HeaderConverter = (headerValue) =>
         {
-            byte[] bytes = StringToByteArray(headerValue);
-            clientCertificate = new X509Certificate2(bytes);
-        }
+            X509Certificate2 clientCertificate = null;
+            if(!string.IsNullOrWhiteSpace(headerValue))
+            {
+                byte[] bytes = StringToByteArray(headerValue);
+                clientCertificate = new X509Certificate2(bytes);
+            }
 
-        return clientCertificate;
-    };
-});
+            return clientCertificate;
+        };
+    });
+}
+
+private static byte[] StringToByteArray(string hex)
+{
+    int NumberChars = hex.Length;
+    byte[] bytes = new byte[NumberChars / 2];
+    for (int i = 0; i < NumberChars; i += 2)
+        bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+    return bytes;
+}
 ```
 
 그러면 `Startup.Configure` 메서드가 미들웨어를 추가 합니다. `UseCertificateForwarding`는 `UseAuthentication`를 호출 하기 전에 호출 되며 `UseAuthorization`됩니다.
@@ -434,7 +448,7 @@ Get-ChildItem -Path cert:\localMachine\my\141594A0AE38CBBECED7AF680F7945CD51D8F2
 Export-Certificate -Cert cert:\localMachine\my\141594A0AE38CBBECED7AF680F7945CD51D8F28A -FilePath child_b_from_a_dev_damienbod.crt
 ```
 
-루트, 중간 또는 자식 인증서를 사용 하는 경우 필요에 따라 발급자 또는 주체를 사용 하 여 인증서의 유효성을 검사할 수 있습니다.
+루트, 중간 또는 자식 인증서를 사용 하는 경우 필요에 따라 지문 또는 PublicKey를 사용 하 여 인증서의 유효성을 검사할 수 있습니다.
 
 ```csharp
 using System.Collections.Generic;
