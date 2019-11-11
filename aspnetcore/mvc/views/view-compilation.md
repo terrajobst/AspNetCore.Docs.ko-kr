@@ -5,14 +5,14 @@ description: Razor 파일의 컴파일이 ASP.NET Core 앱에서 발생하는 �
 monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/20/2019
+ms.date: 10/31/2019
 uid: mvc/views/view-compilation
-ms.openlocfilehash: 0aa632bce32ef44f65d92639284c64c1d00e952e
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 95fa0d72ed9c088945707ac6b79c3fbde35a5a30
+ms.sourcegitcommit: eb2fe5ad2e82fab86ca952463af8d017ba659b25
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71080818"
+ms.lasthandoff: 11/01/2019
+ms.locfileid: "73416144"
 ---
 # <a name="razor-file-compilation-in-aspnet-core"></a>ASP.NET Core의 Razor 파일 컴파일
 
@@ -38,13 +38,14 @@ Razor 파일은 런타임 시에 관련 Razor Page 또는 MVC 보기가 호출�
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Razor 파일은 [Razor SDK](xref:razor-pages/sdk)를 사용하여 빌드 및 게시 시에 컴파일됩니다. 애플리케이션을 구성하여 런타임 컴파일을 선택적으로 활성화할 수 있습니다.
+확장명이 *cshtml*인 Razor 파일은 [Razor SDK](xref:razor-pages/sdk)를 사용하여 빌드 및 게시 시 모두에 컴파일됩니다. 애플리케이션을 구성하여 런타임 컴파일을 선택적으로 활성화할 수 있습니다.
 
 ::: moniker-end
 
 ## <a name="razor-compilation"></a>Razor 컴파일
 
 ::: moniker range=">= aspnetcore-3.0"
+
 Razor 파일의 빌드 및 게시 시 컴파일은 Razor SDK에 의해 기본적으로 활성화됩니다. 런타임 컴파일이 활성화되면 Razor 파일이 편집될 경우 해당 파일이 갱신될 수 있도록 빌드 시 컴파일을 보완합니다.
 
 ::: moniker-end

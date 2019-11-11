@@ -32,7 +32,7 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
 
 ## <a name="how-filters-work"></a>필터 작동 방법
 
-필터는 ‘필터 파이프라인’이라고도 하는 ‘ASP.NET Core 동작 호출 파이프라인’내에서 실행됩니다.    필터 파이프라인은 ASP.NET Core가 실행할 작업을 선택한 후에 실행됩니다.
+필터는 ‘필터 파이프라인’이라고도 하는 ‘ASP.NET Core 동작 호출 파이프라인’내에서 실행됩니다.  필터 파이프라인은 ASP.NET Core가 실행할 작업을 선택한 후에 실행됩니다.
 
 ![요청은 기타 미들웨어, 라우팅 미들웨어, 작업 선택 및 ASP.NET Core 작업 호출 파이프라인을 통해서 처리됩니다. 요청 처리는 응답이 클라이언트에 전송되기 전에 다시 반대로 작업 선택, 라우팅 미들웨어 및 기타 다양한 미들웨어를 통해서 계속됩니다.](filters/_static/filter-pipeline-1.png)
 
@@ -420,7 +420,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * 작업 내에서 발생하는 예외를 잡는 데 좋습니다.
 * 오류 처리 미들웨어만큼 유연하지 않습니다.
 
-예외 처리의 경우 미들웨어를 선호합니다. 어떤 작업 메서드가 호출되는지에 따라 오류 처리 방식이 ‘다른’ 경우에만 예외 필터를 사용합니다.  예를 들어 앱에는 API 엔드포인트 및 보기/HTML 모두에 대한 작업 메서드가 있을 수 있습니다. API 엔드포인트는 JSON으로 오류 정보를 반환할 수 있습니다. 반면 보기 기반 작업은 HTML로 오류 페이지를 반환할 수 있습니다.
+예외 처리의 경우 미들웨어를 선호합니다. 어떤 작업 메서드가 호출되는지에 따라 오류 처리 방식이 ‘다른’ 경우에만 예외 필터를 사용합니다. 예를 들어 앱에는 API 엔드포인트 및 보기/HTML 모두에 대한 작업 메서드가 있을 수 있습니다. API 엔드포인트는 JSON으로 오류 정보를 반환할 수 있습니다. 반면 보기 기반 작업은 HTML로 오류 페이지를 반환할 수 있습니다.
 
 ## <a name="result-filters"></a>결과 필터
 
@@ -468,30 +468,30 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * 단락하는 권한 부여 필터 및 리소스 필터
 * 예외 필터
 
-예를 들어 다음 필터는 항상 작업 결과(콘텐츠 협상이 실패할 경우 *422 Unprocessable Entity* 상태 코드가 포함된 <xref:Microsoft.AspNetCore.Mvc.ObjectResult>)를 실행 및 설정합니다.
+예를 들어 다음 필터는 항상 실행되어 콘텐츠 협상이 실패할 경우 작업 결과(<xref:Microsoft.AspNetCore.Mvc.ObjectResult>)를 *422 Unprocessable Entity* 상태 코드로 설정합니다.
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/UnprocessableResultFilter.cs?name=snippet)]
 
 ### <a name="ifilterfactory"></a>IFilterFactory
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata>를 구현합니다. 따라서 `IFilterFactory` 인스턴스를 필터 파이프라인에서 `IFilterMetadata` 인스턴스로 사용할 수 있습니다. 런타임이 필터를 호출하려고 준비하는 경우 `IFilterFactory`으로 캐스팅을 시도합니다. 해당 캐스팅에 성공하면 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 메서드를 호출하여 호출되는 `IFilterMetadata` 인스턴스를 만듭니다. 앱이 시작될 때 정확한 필터 파이프라인을 명시적으로 설정할 필요가 없으므로 유연한 디자인을 제공합니다.
+<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata>를 구현합니다. 따라서 필터 파이프라인 어디에서나 `IFilterFactory` 인스턴스를 `IFilterMetadata` 인스턴스로 사용할 수 있습니다. 런타임이 필터를 호출하려고 준비할 때 `IFilterFactory`로 캐스팅을 시도합니다. 해당 캐스팅에 성공하면 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 메서드를 호출하여 호출되는 `IFilterMetadata` 인스턴스를 만듭니다. 앱이 시작될 때 정확한 필터 파이프라인을 명시적으로 설정할 필요가 없으므로 유연한 디자인을 제공합니다.
 
 필터를 만드는 다른 방법으로 사용자 지정 특성 구현을 사용하여 `IFilterFactory`를 구현할 수 있습니다.
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/AddHeaderWithFactoryAttribute.cs?name=snippet_IFilterFactory&highlight=1,4,5,6,7)]
 
-[다운로드 샘플](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample)을 실행하여 앞의 코드를 테스트할 수 있습니다.
+[다운로드 예제](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample)를 실행하여 이전 코드를 테스트할 수 있습니다.
 
 * F12 개발자 도구를 호출합니다.
 * `https://localhost:5001/Sample/HeaderWithFactory`로 이동합니다.
 
-F12 개발자 도구는 샘플 코드에 의해 추가된 다음 응답 헤더를 표시합니다.
+F12 개발자 도구는 예제 코드에 의해 추가된 다음 응답 헤더를 표시합니다.
 
-* **작성자:** `Joe Smith`
+* **author:** `Joe Smith`
 * **globaladdheader:** `Result filter added to MvcOptions.Filters`
 * **internal:** `My header`
 
-앞의 코드는 **internal:** `My header` 응답 헤더를 만듭니다.
+이전 코드는 **internal:** `My header` 응답 헤더를 만듭니다.
 
 ### <a name="ifilterfactory-implemented-on-an-attribute"></a>특성에서 구현된 IFilterFactory
 
@@ -513,17 +513,17 @@ What's a non-named attribute?
 
 [!code-csharp[](./filters/sample/FiltersSample/Controllers/HomeController.cs?name=snippet&highlight=1)]
 
-앞의 코드에서 `[SampleActionFilter]`로 메서드를 장식하는 것은 `SampleActionFilter`을 적용하는 데 선호되는 방법입니다.
+이전 코드에서 `[SampleActionFilter]`로 메서드를 장식하는 것이 `SampleActionFilter`을 적용하는 데 선호되는 방법입니다.
 
 ## <a name="using-middleware-in-the-filter-pipeline"></a>필터 파이프라인에서 미들웨어 사용
 
 리소스 필터는 파이프라인의 뒷부분에 제공되는 모든 실행을 둘러싼다는 점에서 [미들웨어](xref:fundamentals/middleware/index)처럼 작동합니다. 하지만 필터는 ASP.NET Core 런타임의 일부라는 점에서 미들웨어와 다릅니다. 즉, ASP.NET Core 컨텍스트 및 구문에 액세스할 수 있습니다.
 
-미들웨어를 필터로 사용하려면 필터 파이프라인에 삽입할 미들웨어를 지정하는 `Configure` 메서드를 포함한 형식을 만듭니다. 요청에서 현재 문화권을 설정하는 지역화 미들웨어를 사용하는 예제는 다음과 같습니다.
+미들웨어를 필터로 사용하려면 필터 파이프라인에 삽입할 미들웨어를 지정하는 `Configure` 메서드를 포함한 형식을 만듭니다. 다음 예제는 지역화 미들웨어를 사용하여 요청에 대한 현재 문화권을 설정합니다.
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/LocalizationPipeline.cs?name=snippet_MiddlewareFilter&highlight=3,22)]
 
-<xref:Microsoft.AspNetCore.Mvc.MiddlewareFilterAttribute>를 사용하여 미들웨어 실행:
+<xref:Microsoft.AspNetCore.Mvc.MiddlewareFilterAttribute>를 사용하여 미들웨어를 실행합니다.
 
 [!code-csharp[](./filters/sample/FiltersSample/Controllers/HomeController.cs?name=snippet_MiddlewareFilter&highlight=2)]
 
@@ -532,4 +532,4 @@ What's a non-named attribute?
 ## <a name="next-actions"></a>다음 작업
 
 * [Razor Pages에 대한 필터 메서드](xref:razor-pages/filter)를 참조하세요.
-* 필터를 실험하려면 [GitHub 샘플을 다운로드하고, 테스트하고, 수정](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample)합니다.
+* 필터를 실험하려면 [GitHub 예제를 다운로드하고, 테스트하고, 수정](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample)합니다.

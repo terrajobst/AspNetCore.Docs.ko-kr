@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/24/2019
 uid: fundamentals/routing
-ms.openlocfilehash: 8b4da4e1e262ec82225413d0338b3492d0b5e152
-ms.sourcegitcommit: 032113208bb55ecfb2faeb6d3e9ea44eea827950
+ms.openlocfilehash: be4493cc927bd5437a2c9dab00b6a555756195bb
+ms.sourcegitcommit: eb2fe5ad2e82fab86ca952463af8d017ba659b25
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/31/2019
-ms.locfileid: "73190510"
+ms.lasthandoff: 11/01/2019
+ms.locfileid: "73416128"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core에서 라우팅
 
@@ -127,7 +127,7 @@ URL 생성은 라우팅이 경로 값의 집합을 기반으로 하는 URL 경�
 >
 > * 미들웨어에서 `MapWhen` 또는 <xref:Microsoft.AspNetCore.Routing.LinkGenerator>과 함께 `Map`를 사용할 때는 신중하게 사용하세요. `Map*`는 실행 중인 요청의 기본 경로를 변경하여 링크 생성의 출력에 영향을 줍니다. 모든 <xref:Microsoft.AspNetCore.Routing.LinkGenerator> API는 기본 경로를 지정할 수 있습니다. 링크 생성에 대한 `Map*`의 영향을 취소하려면 항상 빈 기본 경로를 지정합니다.
 
-## <a name="differences-from-earlier-versions-of-routing"></a>이전 버전의 라우팅과의 차이점
+## <a name="endpoint-routing-differences-from-earlier-versions-of-routing"></a>이전 버전의 라우팅과의 끝점 라우팅 차이점
 
 엔드포인트 라우팅과 ASP.NET Core 2.2 이전 버전의 라우팅 간에는 다음과 같은 몇 가지 차이점이 있습니다.
 
