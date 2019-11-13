@@ -149,7 +149,7 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
 <xref:Microsoft.AspNetCore.Mvc.Controller> 기본 클래스에서 상속되는 모든 컨트롤러에는 [Controller.OnActionExecuting](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*),  [Controller.OnActionExecutionAsync](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*) 및 [Controller.OnActionExecuted](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*) 메서드가 포함됩니다. 이러한 메서드는:
 
 * 특정 작업에 대해 실행되는 필터를 래핑합니다.
-* `OnActionExecuting`는 모든 작업 필터 이전에 호출됩니다.
+* 지정된 작업을 위해 실행되는 필터를 래핑합니다.
 * `OnActionExecuted`는 모든 작업 필터 이후에 호출됩니다.
 * `OnActionExecutionAsync`는 모든 작업 필터 이전에 호출됩니다. 작업 메서드 이후 `next` 이후의 필터 코드가 실행됩니다.
 
@@ -219,7 +219,7 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 
 ## <a name="dependency-injection"></a>종속성 주입
 
-필터는 형식 또는 인스턴스로 추가될 수 있습니다. 인스턴스가 추가되면 모든 요청에 해당 인스턴스가 사용됩니다. 형식이 추가되면 해당 필터는 형식으로 활성화됩니다. 형식으로 활성화된 필터는 다음을 의미합니다.
+형식별 또는 인스턴스별 필터를 추가될 수 있습니다. 인스턴스가 추가되면 모든 요청에 해당 인스턴스가 사용됩니다. 형식이 추가되면 해당 필터는 형식으로 활성화됩니다. 형식으로 활성화된 필터는 다음을 의미합니다.
 
 * 각 요청에 대해 인스턴스가 만들어집니다.
 * 모든 생성자 종속성이 DI([종속성 주입](xref:fundamentals/dependency-injection))를 통해서 채워집니다.
@@ -278,7 +278,7 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 * `TypeFilterAttribute`을 사용하여 참조되는 형식은 DI 컨테이너를 사용하여 등록할 필요가 없습니다. DI 컨테이너에서 충족하는 종속성을 갖고 있습니다.
 * `TypeFilterAttribute`는 형식에 대한 생성자 인수를 필요에 따라 받을 수 있습니다.
 
-`TypeFilterAttribute`를 사용할 때 [TypeFilterAttribute.IsReusable](xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute.IsReusable) 설정하면:
+`TypeFilterAttribute`를 사용할 때 [TypeFilterAttribute.IsReusable](xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute.IsReusable)을 설정하면:
 
 * 필터 인스턴스가 원래 생성된 요청 범위 밖에서 재사용될 가능성이 *있음*을 암시하는 것입니다. ASP.NET Core 런타임은 단일 필터 인스턴스가 생성되도록 보장하지 않습니다.
 
@@ -437,7 +437,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/LoggingAddHeaderFilter.cs?name=snippet_ResultFilter)]
 
-실행되는 결과의 종류는 작업에 따라 다릅니다. 보기를 반환하는 작업에는 실행중인 <xref:Microsoft.AspNetCore.Mvc.ViewResult>의 일부로 모든 Razor 프로세스가 포함됩니다. API 메서드는 결과 실행의 일부로 어떤 직렬화를 수행할 수 있습니다. [작업 결과](xref:mvc/controllers/actions)에 대해 자세히 알아보세요.
+실행되는 결과의 종류는 작업에 따라 다릅니다. 보기를 반환하는 작업에는 실행 중인 <xref:Microsoft.AspNetCore.Mvc.ViewResult>의 일부로 모든 Razor 프로세스가 포함됩니다. API 메서드는 결과 실행의 일부로 어떤 직렬화를 수행할 수 있습니다. [작업 결과](xref:mvc/controllers/actions)에 대해 자세히 알아보세요.
 
 결과 필터는 작업 또는 작업 필터가 작업 결과를 생성하는 경우에만 실행됩니다. 다음 경우에는 결과 필터가 실행되지 않습니다.
 
@@ -459,7 +459,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/MyAsyncResponseFilter.cs?name=snippet)]
 
-프레임워크는 서브클래싱 할 수 있는 추상 `ResultFilterAttribute`를 제공합니다. 이전에 살펴본 [AddHeaderAttribute](#add-header-attribute) 클래스는 결과 필터 특성의 예제입니다.
+프레임워크는 서브클래싱할 수 있는 추상 `ResultFilterAttribute`를 제공합니다. 이전에 살펴본 [AddHeaderAttribute](#add-header-attribute) 클래스는 결과 필터 특성의 예제입니다.
 
 ### <a name="ialwaysrunresultfilter-and-iasyncalwaysrunresultfilter"></a>IAlwaysRunResultFilter 및 IAsyncAlwaysRunResultFilter
 
