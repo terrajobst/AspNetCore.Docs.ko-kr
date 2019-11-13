@@ -56,9 +56,7 @@ ASP.NET Core 앱은 <xref:System.Web.WebPages.ApplicationPart>로부터 기능�
 
 응용 프로그램 파트를 사용하여 특정 어셈블리나 위치에서 리소스가 로드되는 것을 *방지*할 수 있습니다. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> 컬렉션의 멤버를 추가 또는 제거하여 리소스를 숨기거나 사용 가능하게 만듭니다. `ApplicationParts` 컬렉션의 항목 순서는 중요하지 않습니다. 컨테이너에서 서비스를 구성하는 데 사용하기 전에 `ApplicationPartManager`를 구성하세요. 예를 들어 `AddControllersAsServices`를 호출하기 전에 `ApplicationPartManager`를 구성합니다. `ApplicationParts` 컬렉션에서 `Remove`를 호출하여 리소스를 제거합니다.
 
-다음 코드는 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts>를 사용하여 앱에서 `MyDependentLibrary`를 제거합니다.
-
-  [!code-csharp[](./app-parts/sample1/WebAppParts/StartupRm.cs?name=snippet)]
+다음 코드는 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts>를 사용하여 앱에서 `MyDependentLibrary`를 제거합니다.[!code-csharp[](./app-parts/sample1/WebAppParts/StartupRm.cs?name=snippet)]
 
 `ApplicationPartManager`는 다음에 대한 파트를 포함합니다.
 
