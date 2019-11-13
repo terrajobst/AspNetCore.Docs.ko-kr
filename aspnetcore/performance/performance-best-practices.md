@@ -4,14 +4,16 @@ author: mjrousos
 description: ASP.NET Core 앱의 성능을 향상 하 고 일반적인 성능 문제를 방지 하기 위한 팁입니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-ms.date: 09/26/2019
+ms.date: 11/12/2019
+no-loc:
+- SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 1cd4ca6fccfee674f46e87ba051e049f7daa5b66
-ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
+ms.openlocfilehash: 279bf352580e5e45fc005e800ee536871210409b
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73799521"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73963253"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core 성능 모범 사례
 
@@ -21,7 +23,7 @@ ms.locfileid: "73799521"
 
 ## <a name="cache-aggressively"></a>적극적으로 캐시
 
-캐싱은이 문서의 여러 부분에서 설명 합니다. 자세한 내용은 <xref:performance/caching/response>을 참조하십시오.
+캐싱은이 문서의 여러 부분에서 설명 합니다. 자세한 내용은 <xref:performance/caching/response>를 참조하세요.
 
 ## <a name="understand-hot-code-paths"></a>핫 코드 경로 이해
 
@@ -72,7 +74,7 @@ ASP.NET Core 앱의 일반적인 성능 문제는 비동기 일 수 있는 호�
 
 * 모든 데이터 액세스 Api를 비동기적 **으로 호출 합니다** .
 * 필요한 것 보다 더 많은 데이터를 검색 **하지** 않습니다. 현재 HTTP 요청에 필요한 데이터만 반환 하는 쿼리를 작성 합니다.
-* 약간 오래 된 데이터를 사용할 수 있는 경우 데이터베이스 또는 원격 서비스에서 검색 되는 자주 액세스 하는 데이터를 캐시 하 **는 것이 좋습니다.** 시나리오에 따라 [Memorycache](xref:performance/caching/memory) 또는 [microsoft.web.distributedcache](xref:performance/caching/distributed)를 사용 합니다. 자세한 내용은 <xref:performance/caching/response>을 참조하십시오.
+* 약간 오래 된 데이터를 사용할 수 있는 경우 데이터베이스 또는 원격 서비스에서 검색 되는 자주 액세스 하는 데이터를 캐시 하 **는 것이 좋습니다.** 시나리오에 따라 [Memorycache](xref:performance/caching/memory) 또는 [microsoft.web.distributedcache](xref:performance/caching/distributed)를 사용 합니다. 자세한 내용은 <xref:performance/caching/response>를 참조하세요.
 * 네트워크 왕복 **을 최소화 합니다** . 목표는 여러 호출이 아닌 단일 호출에서 필요한 데이터를 검색 하는 것입니다.
 * 읽기 전용 용도로 데이터에 액세스할 때 Entity Framework Core에서 [추적 안 함 쿼리](/ef/core/querying/tracking#no-tracking-queries) **를 사용 합니다** . EF Core 추적 되지 않는 쿼리 결과를 보다 효율적으로 반환할 수 있습니다.
 * LINQ 쿼리 **를 필터링 하** 고 집계 (예: `.Where`, `.Select`또는 `.Sum` 문 포함) 하 여 데이터베이스에서 필터링을 수행 하도록 합니다.
