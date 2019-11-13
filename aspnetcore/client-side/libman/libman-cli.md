@@ -4,64 +4,66 @@ author: scottaddie
 description: ASP.NET Core 프로젝트에서 기능 CLI (명령줄 인터페이스)를 사용 하는 방법에 대해 알아봅니다.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 08/30/2018
+ms.date: 11/12/2019
+no-loc:
+- SignalR
 uid: client-side/libman/libman-cli
-ms.openlocfilehash: cf61bab2f0c3fc33d293968b8ac380cb56958d29
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 8b2b1e45ab4685482554ac439b0276e0cf381609
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71080628"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73962796"
 ---
-# <a name="use-the-libman-command-line-interface-cli-with-aspnet-core"></a><span data-ttu-id="9da7d-103">ASP.NET Core에서 기능을 사용 하 여 CLI (명령줄 인터페이스)를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-103">Use the LibMan command-line interface (CLI) with ASP.NET Core</span></span>
+# <a name="use-the-libman-command-line-interface-cli-with-aspnet-core"></a><span data-ttu-id="abc72-103">ASP.NET Core에서 기능을 사용 하 여 CLI (명령줄 인터페이스)를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-103">Use the LibMan command-line interface (CLI) with ASP.NET Core</span></span>
 
-<span data-ttu-id="9da7d-104">작성자: [Scott Addie](https://twitter.com/Scott_Addie)</span><span class="sxs-lookup"><span data-stu-id="9da7d-104">By [Scott Addie](https://twitter.com/Scott_Addie)</span></span>
+<span data-ttu-id="abc72-104">작성자: [Scott Addie](https://twitter.com/Scott_Addie)</span><span class="sxs-lookup"><span data-stu-id="abc72-104">By [Scott Addie](https://twitter.com/Scott_Addie)</span></span>
 
-<span data-ttu-id="9da7d-105">이 기능을 지 원하는 플랫폼 간 도구는 .NET [Core에서 지원](xref:client-side/libman/index) 되는 모든 플랫폼에서 지원 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-105">The [LibMan](xref:client-side/libman/index) CLI is a cross-platform tool that's supported everywhere .NET Core is supported.</span></span>
+<span data-ttu-id="abc72-105">이 기능을 지 원하는 플랫폼 간 도구는 .NET [Core에서 지원](xref:client-side/libman/index) 되는 모든 플랫폼에서 지원 됩니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-105">The [LibMan](xref:client-side/libman/index) CLI is a cross-platform tool that's supported everywhere .NET Core is supported.</span></span>
 
-## <a name="prerequisites"></a><span data-ttu-id="9da7d-106">필수 구성 요소</span><span class="sxs-lookup"><span data-stu-id="9da7d-106">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="abc72-106">Prerequisites</span><span class="sxs-lookup"><span data-stu-id="abc72-106">Prerequisites</span></span>
 
 * [!INCLUDE [2.1-SDK](../../includes/2.1-SDK.md)]
 
-## <a name="installation"></a><span data-ttu-id="9da7d-107">설치</span><span class="sxs-lookup"><span data-stu-id="9da7d-107">Installation</span></span>
+## <a name="installation"></a><span data-ttu-id="abc72-107">설치</span><span class="sxs-lookup"><span data-stu-id="abc72-107">Installation</span></span>
 
-<span data-ttu-id="9da7d-108">을 설치 하려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-108">To install the LibMan CLI:</span></span>
+<span data-ttu-id="abc72-108">을 설치 하려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-108">To install the LibMan CLI:</span></span>
 
 ```dotnetcli
 dotnet tool install -g Microsoft.Web.LibraryManager.Cli
 ```
 
-<span data-ttu-id="9da7d-109">[.Net Core 전역 도구](/dotnet/core/tools/global-tools#install-a-global-tool) 는 [Microsoft web.config](https://www.nuget.org/packages/Microsoft.Web.LibraryManager.Cli/) 패키지에서 설치 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-109">A [.NET Core Global Tool](/dotnet/core/tools/global-tools#install-a-global-tool) is installed from the [Microsoft.Web.LibraryManager.Cli](https://www.nuget.org/packages/Microsoft.Web.LibraryManager.Cli/) NuGet package.</span></span>
+<span data-ttu-id="abc72-109">[.Net Core 전역 도구](/dotnet/core/tools/global-tools#install-a-global-tool) 는 [Microsoft web.config](https://www.nuget.org/packages/Microsoft.Web.LibraryManager.Cli/) 패키지에서 설치 됩니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-109">A [.NET Core Global Tool](/dotnet/core/tools/global-tools#install-a-global-tool) is installed from the [Microsoft.Web.LibraryManager.Cli](https://www.nuget.org/packages/Microsoft.Web.LibraryManager.Cli/) NuGet package.</span></span>
 
-<span data-ttu-id="9da7d-110">특정 NuGet 패키지 원본에서 패키지를 설치 하려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-110">To install the LibMan CLI from a specific NuGet package source:</span></span>
+<span data-ttu-id="abc72-110">특정 NuGet 패키지 원본에서 패키지를 설치 하려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-110">To install the LibMan CLI from a specific NuGet package source:</span></span>
 
 ```dotnetcli
 dotnet tool install -g Microsoft.Web.LibraryManager.Cli --version 1.0.94-g606058a278 --add-source C:\Temp\
 ```
 
-<span data-ttu-id="9da7d-111">위의 예제에서 .NET Core 글로벌 도구는 로컬 Windows 컴퓨터의 *C:\Temp\Microsoft.Web.LibraryManager.Cli.1.0.94-g606058a278.nupkg* 파일에서 설치 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-111">In the preceding example, a .NET Core Global Tool is installed from the local Windows machine's *C:\Temp\Microsoft.Web.LibraryManager.Cli.1.0.94-g606058a278.nupkg* file.</span></span>
+<span data-ttu-id="abc72-111">위의 예제에서 .NET Core 글로벌 도구는 로컬 Windows 컴퓨터의 *C:\Temp\Microsoft.Web.LibraryManager.Cli.1.0.94-g606058a278.nupkg* 파일에서 설치 됩니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-111">In the preceding example, a .NET Core Global Tool is installed from the local Windows machine's *C:\Temp\Microsoft.Web.LibraryManager.Cli.1.0.94-g606058a278.nupkg* file.</span></span>
 
-## <a name="usage"></a><span data-ttu-id="9da7d-112">사용</span><span class="sxs-lookup"><span data-stu-id="9da7d-112">Usage</span></span>
+## <a name="usage"></a><span data-ttu-id="abc72-112">사용 현황</span><span class="sxs-lookup"><span data-stu-id="abc72-112">Usage</span></span>
 
-<span data-ttu-id="9da7d-113">CLI를 성공적으로 설치한 후에는 다음 명령을 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-113">After successful installation of the CLI, the following command can be used:</span></span>
+<span data-ttu-id="abc72-113">CLI를 성공적으로 설치한 후에는 다음 명령을 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-113">After successful installation of the CLI, the following command can be used:</span></span>
 
 ```console
 libman
 ```
 
-<span data-ttu-id="9da7d-114">설치 된 CLI 버전을 보려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-114">To view the installed CLI version:</span></span>
+<span data-ttu-id="abc72-114">설치 된 CLI 버전을 보려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-114">To view the installed CLI version:</span></span>
 
 ```console
 libman --version
 ```
 
-<span data-ttu-id="9da7d-115">사용 가능한 CLI 명령을 보려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-115">To view the available CLI commands:</span></span>
+<span data-ttu-id="abc72-115">사용 가능한 CLI 명령을 보려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-115">To view the available CLI commands:</span></span>
 
 ```console
 libman --help
 ```
 
-<span data-ttu-id="9da7d-116">위의 명령은 다음과 유사한 출력을 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-116">The preceding command displays output similar to the following:</span></span>
+<span data-ttu-id="abc72-116">위의 명령은 다음과 유사한 출력을 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-116">The preceding command displays output similar to the following:</span></span>
 
 ```console
  1.0.163+g45474d37ed
@@ -88,53 +90,53 @@ Commands:
 Use "libman [command] --help" for more information about a command.
 ```
 
-<span data-ttu-id="9da7d-117">다음 섹션에서는 사용 가능한 CLI 명령에 대해 간략하게 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-117">The following sections outline the available CLI commands.</span></span>
+<span data-ttu-id="abc72-117">다음 섹션에서는 사용 가능한 CLI 명령에 대해 간략하게 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-117">The following sections outline the available CLI commands.</span></span>
 
-## <a name="initialize-libman-in-the-project"></a><span data-ttu-id="9da7d-118">프로젝트에서이를 초기화 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-118">Initialize LibMan in the project</span></span>
+## <a name="initialize-libman-in-the-project"></a><span data-ttu-id="abc72-118">프로젝트에서이를 초기화 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-118">Initialize LibMan in the project</span></span>
 
-<span data-ttu-id="9da7d-119">이 명령은 파일 (없는 경우)을 *만듭니다.* `libman init`</span><span class="sxs-lookup"><span data-stu-id="9da7d-119">The `libman init` command creates a *libman.json* file if one doesn't exist.</span></span> <span data-ttu-id="9da7d-120">기본 항목 템플릿 콘텐츠를 사용 하 여 파일을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-120">The file is created with the default item template content.</span></span>
+<span data-ttu-id="abc72-119">`libman init` *명령은 파일 (* 없는 경우)을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-119">The `libman init` command creates a *libman.json* file if one doesn't exist.</span></span> <span data-ttu-id="abc72-120">기본 항목 템플릿 콘텐츠를 사용 하 여 파일을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-120">The file is created with the default item template content.</span></span>
 
-### <a name="synopsis"></a><span data-ttu-id="9da7d-121">개요</span><span class="sxs-lookup"><span data-stu-id="9da7d-121">Synopsis</span></span>
+### <a name="synopsis"></a><span data-ttu-id="abc72-121">개요</span><span class="sxs-lookup"><span data-stu-id="abc72-121">Synopsis</span></span>
 
 ```console
 libman init [-d|--default-destination] [-p|--default-provider] [--verbosity]
 libman init [-h|--help]
 ```
 
-### <a name="options"></a><span data-ttu-id="9da7d-122">옵션</span><span class="sxs-lookup"><span data-stu-id="9da7d-122">Options</span></span>
+### <a name="options"></a><span data-ttu-id="abc72-122">옵션</span><span class="sxs-lookup"><span data-stu-id="abc72-122">Options</span></span>
 
-<span data-ttu-id="9da7d-123">다음 옵션은 `libman init` 명령에 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-123">The following options are available for the `libman init` command:</span></span>
+<span data-ttu-id="abc72-123">다음 옵션은 `libman init` 명령에 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-123">The following options are available for the `libman init` command:</span></span>
 
 * `-d|--default-destination <PATH>`
 
-  <span data-ttu-id="9da7d-124">현재 폴더에 상대적인 경로입니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-124">A path relative to the current folder.</span></span> <span data-ttu-id="9da7d-125">라이브러리 파일은 라이브러리에 대 한 속성이 정의 `destination` 되어 있지 않은 *경우에는*이 위치에 설치 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-125">Library files are installed in this location if no `destination` property is defined for a library in *libman.json*.</span></span> <span data-ttu-id="9da7d-126">값 `<PATH>` 은이 `defaultDestination` 속성에 기록 *됩니다.*</span><span class="sxs-lookup"><span data-stu-id="9da7d-126">The `<PATH>` value is written to the `defaultDestination` property of *libman.json*.</span></span>
+  <span data-ttu-id="abc72-124">현재 폴더에 상대적인 경로입니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-124">A path relative to the current folder.</span></span> <span data-ttu-id="abc72-125">라이브러리 파일은 라이브러리에 대 한 `destination` 속성이 정의 되지 않은 *경우에는*이 위치에 설치 됩니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-125">Library files are installed in this location if no `destination` property is defined for a library in *libman.json*.</span></span> <span data-ttu-id="abc72-126">`<PATH>` 값은 해당 `defaultDestination` 속성에 기록 *됩니다.*</span><span class="sxs-lookup"><span data-stu-id="abc72-126">The `<PATH>` value is written to the `defaultDestination` property of *libman.json*.</span></span>
 
 * `-p|--default-provider <PROVIDER>`
 
-  <span data-ttu-id="9da7d-127">지정 된 라이브러리에 대해 정의 된 공급자가 없는 경우 사용할 공급자입니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-127">The provider to use if no provider is defined for a given library.</span></span> <span data-ttu-id="9da7d-128">값 `<PROVIDER>` 은이 `defaultProvider` 속성에 기록 *됩니다.*</span><span class="sxs-lookup"><span data-stu-id="9da7d-128">The `<PROVIDER>` value is written to the `defaultProvider` property of *libman.json*.</span></span> <span data-ttu-id="9da7d-129">을 `<PROVIDER>` 다음 값 중 하나로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-129">Replace `<PROVIDER>` with one of the following values:</span></span>
+  <span data-ttu-id="abc72-127">지정 된 라이브러리에 대해 정의 된 공급자가 없는 경우 사용할 공급자입니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-127">The provider to use if no provider is defined for a given library.</span></span> <span data-ttu-id="abc72-128">`<PROVIDER>` 값은 해당 `defaultProvider` 속성에 기록 *됩니다.*</span><span class="sxs-lookup"><span data-stu-id="abc72-128">The `<PROVIDER>` value is written to the `defaultProvider` property of *libman.json*.</span></span> <span data-ttu-id="abc72-129">`<PROVIDER>`을 다음 값 중 하나로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-129">Replace `<PROVIDER>` with one of the following values:</span></span>
 
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
-### <a name="examples"></a><span data-ttu-id="9da7d-130">예</span><span class="sxs-lookup"><span data-stu-id="9da7d-130">Examples</span></span>
+### <a name="examples"></a><span data-ttu-id="abc72-130">예제</span><span class="sxs-lookup"><span data-stu-id="abc72-130">Examples</span></span>
 
-<span data-ttu-id="9da7d-131">ASP.NET Core 프로젝트에서이 파일을 만들려면 다음을 수행 *합니다* .</span><span class="sxs-lookup"><span data-stu-id="9da7d-131">To create a *libman.json* file in an ASP.NET Core project:</span></span>
+<span data-ttu-id="abc72-131">ASP.NET Core 프로젝트에서이 파일을 만들려면 다음을 수행 *합니다* .</span><span class="sxs-lookup"><span data-stu-id="abc72-131">To create a *libman.json* file in an ASP.NET Core project:</span></span>
 
-* <span data-ttu-id="9da7d-132">프로젝트 루트로 이동 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-132">Navigate to the project root.</span></span>
-* <span data-ttu-id="9da7d-133">다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-133">Run the following command:</span></span>
+* <span data-ttu-id="abc72-132">프로젝트 루트로 이동 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-132">Navigate to the project root.</span></span>
+* <span data-ttu-id="abc72-133">다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-133">Run the following command:</span></span>
 
   ```console
   libman init
   ```
 
-* <span data-ttu-id="9da7d-134">기본 공급자의 이름을 입력 하거나 키를 눌러 `Enter` 기본 cdnjs 공급자를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-134">Type the name of the default provider, or press `Enter` to use the default CDNJS provider.</span></span> <span data-ttu-id="9da7d-135">유효한 값은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-135">Valid values include:</span></span>
+* <span data-ttu-id="abc72-134">기본 공급자의 이름을 입력 하거나 `Enter`를 눌러 기본 CDNJS 공급자를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-134">Type the name of the default provider, or press `Enter` to use the default CDNJS provider.</span></span> <span data-ttu-id="abc72-135">유효한 값은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-135">Valid values include:</span></span>
 
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
   ![liman init 명령-기본 공급자](_static/libman-init-provider.png)
 
-<span data-ttu-id="9da7d-137">다음 콘텐츠를 사용 하 여 프로젝트 루트 *에 파일을 추가 합니다.*</span><span class="sxs-lookup"><span data-stu-id="9da7d-137">A *libman.json* file is added to the project root with the following content:</span></span>
+<span data-ttu-id="abc72-137">다음 콘텐츠를 사용 하 여 프로젝트 루트 *에 파일을 추가 합니다.*</span><span class="sxs-lookup"><span data-stu-id="abc72-137">A *libman.json* file is added to the project root with the following content:</span></span>
 
 ```json
 {
@@ -144,48 +146,48 @@ libman init [-h|--help]
 }
 ```
 
-## <a name="add-library-files"></a><span data-ttu-id="9da7d-138">라이브러리 파일 추가하기</span><span class="sxs-lookup"><span data-stu-id="9da7d-138">Add library files</span></span>
+## <a name="add-library-files"></a><span data-ttu-id="abc72-138">라이브러리 파일 추가</span><span class="sxs-lookup"><span data-stu-id="abc72-138">Add library files</span></span>
 
-<span data-ttu-id="9da7d-139">이 `libman install` 명령은 라이브러리 파일을 다운로드 하 여 프로젝트에 설치 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-139">The `libman install` command downloads and installs library files into the project.</span></span> <span data-ttu-id="9da7d-140">파일이 없는 경우 추가 됩니다 *.*</span><span class="sxs-lookup"><span data-stu-id="9da7d-140">A *libman.json* file is added if one doesn't exist.</span></span> <span data-ttu-id="9da7d-141">라이브러리 파일에 대 한 구성 세부 정보를 저장 하도록 *라이브러리 파일을* 수정 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-141">The *libman.json* file is modified to store configuration details for the library files.</span></span>
+<span data-ttu-id="abc72-139">`libman install` 명령은 라이브러리 파일을 다운로드 하 여 프로젝트에 설치 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-139">The `libman install` command downloads and installs library files into the project.</span></span> <span data-ttu-id="abc72-140">파일이 없는 경우 추가 됩니다 *.*</span><span class="sxs-lookup"><span data-stu-id="abc72-140">A *libman.json* file is added if one doesn't exist.</span></span> <span data-ttu-id="abc72-141">라이브러리 파일에 대 한 구성 세부 정보를 저장 하도록 *라이브러리 파일을* 수정 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-141">The *libman.json* file is modified to store configuration details for the library files.</span></span>
 
-### <a name="synopsis"></a><span data-ttu-id="9da7d-142">개요</span><span class="sxs-lookup"><span data-stu-id="9da7d-142">Synopsis</span></span>
+### <a name="synopsis"></a><span data-ttu-id="abc72-142">개요</span><span class="sxs-lookup"><span data-stu-id="abc72-142">Synopsis</span></span>
 
 ```console
 libman install <LIBRARY> [-d|--destination] [--files] [-p|--provider] [--verbosity]
 libman install [-h|--help]
 ```
 
-### <a name="arguments"></a><span data-ttu-id="9da7d-143">인수</span><span class="sxs-lookup"><span data-stu-id="9da7d-143">Arguments</span></span>
+### <a name="arguments"></a><span data-ttu-id="abc72-143">인수</span><span class="sxs-lookup"><span data-stu-id="abc72-143">Arguments</span></span>
 
 `LIBRARY`
 
-<span data-ttu-id="9da7d-144">설치할 라이브러리의 이름입니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-144">The name of the library to install.</span></span> <span data-ttu-id="9da7d-145">이 이름에는 버전 번호 표기법 (예: `@1.2.0`)이 포함 될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-145">This name may include version number notation (for example, `@1.2.0`).</span></span>
+<span data-ttu-id="abc72-144">설치할 라이브러리의 이름입니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-144">The name of the library to install.</span></span> <span data-ttu-id="abc72-145">이 이름에는 버전 번호 표기법 (예: `@1.2.0`)이 포함 될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-145">This name may include version number notation (for example, `@1.2.0`).</span></span>
 
-### <a name="options"></a><span data-ttu-id="9da7d-146">옵션</span><span class="sxs-lookup"><span data-stu-id="9da7d-146">Options</span></span>
+### <a name="options"></a><span data-ttu-id="abc72-146">옵션</span><span class="sxs-lookup"><span data-stu-id="abc72-146">Options</span></span>
 
-<span data-ttu-id="9da7d-147">다음 옵션은 `libman install` 명령에 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-147">The following options are available for the `libman install` command:</span></span>
+<span data-ttu-id="abc72-147">다음 옵션은 `libman install` 명령에 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-147">The following options are available for the `libman install` command:</span></span>
 
 * `-d|--destination <PATH>`
 
-  <span data-ttu-id="9da7d-148">라이브러리를 설치할 위치입니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-148">The location to install the library.</span></span> <span data-ttu-id="9da7d-149">지정 하지 않으면 기본 위치가 사용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-149">If not specified, the default location is used.</span></span> <span data-ttu-id="9da7d-150">지정 된 `defaultDestination` 속성이 없습니다 *. json*에는이 옵션이 필요 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-150">If no `defaultDestination` property is specified in *libman.json*, this option is required.</span></span>
+  <span data-ttu-id="abc72-148">라이브러리를 설치할 위치입니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-148">The location to install the library.</span></span> <span data-ttu-id="abc72-149">지정 하지 않으면 기본 위치가 사용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-149">If not specified, the default location is used.</span></span> <span data-ttu-id="abc72-150">`defaultDestination` 속성이 지정 되지 않은 *경우에는*이 옵션이 필요 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-150">If no `defaultDestination` property is specified in *libman.json*, this option is required.</span></span>
 
 * `--files <FILE>`
 
-  <span data-ttu-id="9da7d-151">라이브러리에서 설치할 파일의 이름을 지정 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-151">Specify the name of the file to install from the library.</span></span> <span data-ttu-id="9da7d-152">지정 하지 않으면 라이브러리의 모든 파일이 설치 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-152">If not specified, all files from the library are installed.</span></span> <span data-ttu-id="9da7d-153">설치할 파일 `--files` 마다 하나의 옵션을 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-153">Provide one `--files` option per file to be installed.</span></span> <span data-ttu-id="9da7d-154">상대 경로도 지원 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-154">Relative paths are supported too.</span></span> <span data-ttu-id="9da7d-155">예를 들어 `--files dist/browser/signalr.js`을 참조하십시오.</span><span class="sxs-lookup"><span data-stu-id="9da7d-155">For example: `--files dist/browser/signalr.js`.</span></span>
+  <span data-ttu-id="abc72-151">라이브러리에서 설치할 파일의 이름을 지정 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-151">Specify the name of the file to install from the library.</span></span> <span data-ttu-id="abc72-152">지정 하지 않으면 라이브러리의 모든 파일이 설치 됩니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-152">If not specified, all files from the library are installed.</span></span> <span data-ttu-id="abc72-153">설치할 파일 마다 하나의 `--files` 옵션을 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-153">Provide one `--files` option per file to be installed.</span></span> <span data-ttu-id="abc72-154">상대 경로도 지원 됩니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-154">Relative paths are supported too.</span></span> <span data-ttu-id="abc72-155">예를 들어 `--files dist/browser/signalr.js`을 참조하십시오.</span><span class="sxs-lookup"><span data-stu-id="abc72-155">For example: `--files dist/browser/signalr.js`.</span></span>
 
 * `-p|--provider <PROVIDER>`
 
-  <span data-ttu-id="9da7d-156">라이브러리 획득에 사용할 공급자의 이름입니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-156">The name of the provider to use for the library acquisition.</span></span> <span data-ttu-id="9da7d-157">을 `<PROVIDER>` 다음 값 중 하나로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-157">Replace `<PROVIDER>` with one of the following values:</span></span>
+  <span data-ttu-id="abc72-156">라이브러리 획득에 사용할 공급자의 이름입니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-156">The name of the provider to use for the library acquisition.</span></span> <span data-ttu-id="abc72-157">`<PROVIDER>`을 다음 값 중 하나로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-157">Replace `<PROVIDER>` with one of the following values:</span></span>
   
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
-  <span data-ttu-id="9da7d-158">지정 `defaultProvider` 하지 않은 경우에 *는이 속성* 을 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-158">If not specified, the `defaultProvider` property in *libman.json* is used.</span></span> <span data-ttu-id="9da7d-159">지정 된 `defaultProvider` 속성이 없습니다 *. json*에는이 옵션이 필요 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-159">If no `defaultProvider` property is specified in *libman.json*, this option is required.</span></span>
+  <span data-ttu-id="abc72-158">`defaultProvider` 지정 하지 *않으면이 속성을 사용 합니다.*</span><span class="sxs-lookup"><span data-stu-id="abc72-158">If not specified, the `defaultProvider` property in *libman.json* is used.</span></span> <span data-ttu-id="abc72-159">`defaultProvider` 속성이 지정 되지 않은 *경우에는*이 옵션이 필요 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-159">If no `defaultProvider` property is specified in *libman.json*, this option is required.</span></span>
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
-### <a name="examples"></a><span data-ttu-id="9da7d-160">예</span><span class="sxs-lookup"><span data-stu-id="9da7d-160">Examples</span></span>
+### <a name="examples"></a><span data-ttu-id="abc72-160">예제</span><span class="sxs-lookup"><span data-stu-id="abc72-160">Examples</span></span>
 
-<span data-ttu-id="9da7d-161">다음을 고려 하십시오 *. json* 파일:</span><span class="sxs-lookup"><span data-stu-id="9da7d-161">Consider the following *libman.json* file:</span></span>
+<span data-ttu-id="abc72-161">다음을 고려 하십시오 *. json* 파일:</span><span class="sxs-lookup"><span data-stu-id="abc72-161">Consider the following *libman.json* file:</span></span>
 
 ```json
 {
@@ -195,13 +197,13 @@ libman install [-h|--help]
 }
 ```
 
-<span data-ttu-id="9da7d-162">JQuery 버전 3.2.1 *jquery* 파일을 CDNJS 공급자를 사용 하는 *wwwroot/scripts/jQuery* 폴더에 설치 하려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-162">To install the jQuery version 3.2.1 *jquery.min.js* file to the *wwwroot/scripts/jquery* folder using the CDNJS provider:</span></span>
+<span data-ttu-id="abc72-162">JQuery 버전 3.2.1 *jquery* 파일을 CDNJS 공급자를 사용 하는 *wwwroot/scripts/jQuery* 폴더에 설치 하려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-162">To install the jQuery version 3.2.1 *jquery.min.js* file to the *wwwroot/scripts/jquery* folder using the CDNJS provider:</span></span>
 
 ```console
 libman install jquery@3.2.1 --provider cdnjs --destination wwwroot/scripts/jquery --files jquery.min.js
 ```
 
-<span data-ttu-id="9da7d-163">이 *파일은* 다음과 유사 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-163">The *libman.json* file resembles the following:</span></span>
+<span data-ttu-id="abc72-163">이 *파일은* 다음과 유사 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-163">The *libman.json* file resembles the following:</span></span>
 
 ```json
 {
@@ -219,20 +221,20 @@ libman install jquery@3.2.1 --provider cdnjs --destination wwwroot/scripts/jquer
 }
 ```
 
-<span data-ttu-id="9da7d-164">파일 시스템 공급자를 사용 하 여 *C\\: temp\\contosoCalendar\\*  에서 *node.js* 및 *calendar .css* 파일을 설치 하려면:</span><span class="sxs-lookup"><span data-stu-id="9da7d-164">To install the *calendar.js* and *calendar.css* files from *C:\\temp\\contosoCalendar\\* using the file system provider:</span></span>
+<span data-ttu-id="abc72-164">파일 시스템 공급자를 사용 하 여 *C:\\temp\\contosoCalendar\\* 에서 *node.js* 및 *calendar .css* 파일을 설치 하려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-164">To install the *calendar.js* and *calendar.css* files from *C:\\temp\\contosoCalendar\\* using the file system provider:</span></span>
 
   ```console
   libman install C:\temp\contosoCalendar\ --provider filesystem --files calendar.js --files calendar.css
   ```
 
-<span data-ttu-id="9da7d-165">다음은 두 가지 이유로 표시 되는 메시지입니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-165">The following prompt appears for two reasons:</span></span>
+<span data-ttu-id="abc72-165">다음은 두 가지 이유로 표시 되는 메시지입니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-165">The following prompt appears for two reasons:</span></span>
 
-* <span data-ttu-id="9da7d-166">이 파일에는 `defaultDestination` 속성이 포함 되어 있지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-166">The *libman.json* file doesn't contain a `defaultDestination` property.</span></span>
-* <span data-ttu-id="9da7d-167">명령 `libman install` 에 `-d|--destination` 옵션이 포함 되어 있지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-167">The `libman install` command doesn't contain the `-d|--destination` option.</span></span>
+* <span data-ttu-id="abc72-166">이 파일에는 `defaultDestination` 속성이 포함 되어 있지 않습니다 *.*</span><span class="sxs-lookup"><span data-stu-id="abc72-166">The *libman.json* file doesn't contain a `defaultDestination` property.</span></span>
+* <span data-ttu-id="abc72-167">`libman install` 명령에는 `-d|--destination` 옵션이 포함 되어 있지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-167">The `libman install` command doesn't contain the `-d|--destination` option.</span></span>
 
 ![\man 설치 명령-대상](_static/libman-install-destination.png)
 
-<span data-ttu-id="9da7d-169">기본 대상을 승인한 후 *에는 다음과* 같은 경우에 해당 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-169">After accepting the default destination, the *libman.json* file resembles the following:</span></span>
+<span data-ttu-id="abc72-169">기본 대상을 승인한 후 *에는 다음과* 같은 경우에 해당 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-169">After accepting the default destination, the *libman.json* file resembles the following:</span></span>
 
 ```json
 {
@@ -259,100 +261,100 @@ libman install jquery@3.2.1 --provider cdnjs --destination wwwroot/scripts/jquer
 }
 ```
 
-## <a name="restore-library-files"></a><span data-ttu-id="9da7d-170">라이브러리 파일 복원하기</span><span class="sxs-lookup"><span data-stu-id="9da7d-170">Restore library files</span></span>
+## <a name="restore-library-files"></a><span data-ttu-id="abc72-170">라이브러리 파일 복원</span><span class="sxs-lookup"><span data-stu-id="abc72-170">Restore library files</span></span>
 
-<span data-ttu-id="9da7d-171">이 명령은 라이브러리 *파일을 설치 합니다.* `libman restore`</span><span class="sxs-lookup"><span data-stu-id="9da7d-171">The `libman restore` command installs library files defined in *libman.json*.</span></span> <span data-ttu-id="9da7d-172">다음 규칙이 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-172">The following rules apply:</span></span>
+<span data-ttu-id="abc72-171">`libman restore` 명령은 라이브러리 파일을 설치 *합니다.*</span><span class="sxs-lookup"><span data-stu-id="abc72-171">The `libman restore` command installs library files defined in *libman.json*.</span></span> <span data-ttu-id="abc72-172">이 때 적용되는 규칙은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-172">The following rules apply:</span></span>
 
-* <span data-ttu-id="9da7d-173">프로젝트 루트에 없습니다 *. json* 파일이 없으면 오류가 반환 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-173">If no *libman.json* file exists in the project root, an error is returned.</span></span>
-* <span data-ttu-id="9da7d-174">라이브러리에서 공급자를 지정 하 `defaultProvider` 는 경우에는 라이브러리의 속성이 무시 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-174">If a library specifies a provider, the `defaultProvider` property in *libman.json* is ignored.</span></span>
-* <span data-ttu-id="9da7d-175">라이브러리에서 대상을 지정 하 `defaultDestination` 는 경우에는 라이브러리 의 속성이 무시 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-175">If a library specifies a destination, the `defaultDestination` property in *libman.json* is ignored.</span></span>
+* <span data-ttu-id="abc72-173">프로젝트 루트에 없습니다 *. json* 파일이 없으면 오류가 반환 됩니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-173">If no *libman.json* file exists in the project root, an error is returned.</span></span>
+* <span data-ttu-id="abc72-174">라이브러리에서 공급자를 지정 하는 *경우에는* 라이브러리의 `defaultProvider` 속성이 무시 됩니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-174">If a library specifies a provider, the `defaultProvider` property in *libman.json* is ignored.</span></span>
+* <span data-ttu-id="abc72-175">라이브러리에서 대상을 지정 하는 *경우에는* 라이브러리의 `defaultDestination` 속성이 무시 됩니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-175">If a library specifies a destination, the `defaultDestination` property in *libman.json* is ignored.</span></span>
 
-### <a name="synopsis"></a><span data-ttu-id="9da7d-176">개요</span><span class="sxs-lookup"><span data-stu-id="9da7d-176">Synopsis</span></span>
+### <a name="synopsis"></a><span data-ttu-id="abc72-176">개요</span><span class="sxs-lookup"><span data-stu-id="abc72-176">Synopsis</span></span>
 
 ```console
 libman restore [--verbosity]
 libman restore [-h|--help]
 ```
 
-### <a name="options"></a><span data-ttu-id="9da7d-177">변수</span><span class="sxs-lookup"><span data-stu-id="9da7d-177">Options</span></span>
+### <a name="options"></a><span data-ttu-id="abc72-177">옵션</span><span class="sxs-lookup"><span data-stu-id="abc72-177">Options</span></span>
 
-<span data-ttu-id="9da7d-178">다음 옵션은 `libman restore` 명령에 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-178">The following options are available for the `libman restore` command:</span></span>
+<span data-ttu-id="abc72-178">다음 옵션은 `libman restore` 명령에 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-178">The following options are available for the `libman restore` command:</span></span>
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
-### <a name="examples"></a><span data-ttu-id="9da7d-179">예</span><span class="sxs-lookup"><span data-stu-id="9da7d-179">Examples</span></span>
+### <a name="examples"></a><span data-ttu-id="abc72-179">예제</span><span class="sxs-lookup"><span data-stu-id="abc72-179">Examples</span></span>
 
-<span data-ttu-id="9da7d-180">라이브러리 파일을 복원 하려면 다음을 수행 합니다. *json*:</span><span class="sxs-lookup"><span data-stu-id="9da7d-180">To restore the library files defined in *libman.json*:</span></span>
+<span data-ttu-id="abc72-180">라이브러리 파일을 복원 하려면 다음을 수행 합니다. *json*:</span><span class="sxs-lookup"><span data-stu-id="abc72-180">To restore the library files defined in *libman.json*:</span></span>
 
 ```console
 libman restore
 ```
 
-## <a name="delete-library-files"></a><span data-ttu-id="9da7d-181">라이브러리 파일 삭제하기</span><span class="sxs-lookup"><span data-stu-id="9da7d-181">Delete library files</span></span>
+## <a name="delete-library-files"></a><span data-ttu-id="abc72-181">라이브러리 파일 삭제</span><span class="sxs-lookup"><span data-stu-id="abc72-181">Delete library files</span></span>
 
-<span data-ttu-id="9da7d-182">`libman clean` 명령을 통해 이전에 라이브러리 파일을 제거 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-182">The `libman clean` command deletes library files previously restored via LibMan.</span></span> <span data-ttu-id="9da7d-183">이 작업이 삭제 된 후 비어 있게 되는 폴더입니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-183">Folders that become empty after this operation are deleted.</span></span> <span data-ttu-id="9da7d-184">라이브러리 파일의 연결 된 구성 `libraries` 은 제거 되지 않습니다 *.*</span><span class="sxs-lookup"><span data-stu-id="9da7d-184">The library files' associated configurations in the `libraries` property of *libman.json* aren't removed.</span></span>
+<span data-ttu-id="abc72-182">`libman clean` 명령은 해당 라이브러리 파일을 제거 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-182">The `libman clean` command deletes library files previously restored via LibMan.</span></span> <span data-ttu-id="abc72-183">이 작업이 삭제 된 후 비어 있게 되는 폴더입니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-183">Folders that become empty after this operation are deleted.</span></span> <span data-ttu-id="abc72-184">라이브러리 파일의 연결 된 구성은 라이브러리 파일의 `libraries` 속성에 있습니다. *json* 은 제거 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-184">The library files' associated configurations in the `libraries` property of *libman.json* aren't removed.</span></span>
 
-### <a name="synopsis"></a><span data-ttu-id="9da7d-185">개요</span><span class="sxs-lookup"><span data-stu-id="9da7d-185">Synopsis</span></span>
+### <a name="synopsis"></a><span data-ttu-id="abc72-185">개요</span><span class="sxs-lookup"><span data-stu-id="abc72-185">Synopsis</span></span>
 
 ```console
 libman clean [--verbosity]
 libman clean [-h|--help]
 ```
 
-### <a name="options"></a><span data-ttu-id="9da7d-186">변수</span><span class="sxs-lookup"><span data-stu-id="9da7d-186">Options</span></span>
+### <a name="options"></a><span data-ttu-id="abc72-186">옵션</span><span class="sxs-lookup"><span data-stu-id="abc72-186">Options</span></span>
 
-<span data-ttu-id="9da7d-187">다음 옵션은 `libman clean` 명령에 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-187">The following options are available for the `libman clean` command:</span></span>
+<span data-ttu-id="abc72-187">다음 옵션은 `libman clean` 명령에 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-187">The following options are available for the `libman clean` command:</span></span>
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
-### <a name="examples"></a><span data-ttu-id="9da7d-188">예</span><span class="sxs-lookup"><span data-stu-id="9da7d-188">Examples</span></span>
+### <a name="examples"></a><span data-ttu-id="abc72-188">예제</span><span class="sxs-lookup"><span data-stu-id="abc72-188">Examples</span></span>
 
-<span data-ttu-id="9da7d-189">라이브러리 파일을 삭제 하려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-189">To delete library files installed via LibMan:</span></span>
+<span data-ttu-id="abc72-189">라이브러리 파일을 삭제 하려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-189">To delete library files installed via LibMan:</span></span>
 
 ```console
 libman clean
 ```
 
-## <a name="uninstall-library-files"></a><span data-ttu-id="9da7d-190">라이브러리 파일 제거하기</span><span class="sxs-lookup"><span data-stu-id="9da7d-190">Uninstall library files</span></span>
+## <a name="uninstall-library-files"></a><span data-ttu-id="abc72-190">라이브러리 파일 제거</span><span class="sxs-lookup"><span data-stu-id="abc72-190">Uninstall library files</span></span>
 
-<span data-ttu-id="9da7d-191">다음 `libman uninstall` 명령을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-191">The `libman uninstall` command:</span></span>
+<span data-ttu-id="abc72-191">`libman uninstall` 명령은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-191">The `libman uninstall` command:</span></span>
 
-* <span data-ttu-id="9da7d-192">지정 된 라이브러리와 연결 된 모든 파일을 *라이브러리의 대상에서 삭제 합니다.*</span><span class="sxs-lookup"><span data-stu-id="9da7d-192">Deletes all files associated with the specified library from the destination in *libman.json*.</span></span>
-* <span data-ttu-id="9da7d-193">연결 된 라이브러리 구성을 제거 합니다 *.*</span><span class="sxs-lookup"><span data-stu-id="9da7d-193">Removes the associated library configuration from *libman.json*.</span></span>
+* <span data-ttu-id="abc72-192">지정 된 라이브러리와 연결 된 모든 파일을 *라이브러리의 대상에서 삭제 합니다.*</span><span class="sxs-lookup"><span data-stu-id="abc72-192">Deletes all files associated with the specified library from the destination in *libman.json*.</span></span>
+* <span data-ttu-id="abc72-193">연결 된 라이브러리 구성을 제거 합니다 *.*</span><span class="sxs-lookup"><span data-stu-id="abc72-193">Removes the associated library configuration from *libman.json*.</span></span>
 
-<span data-ttu-id="9da7d-194">다음과 같은 경우 오류가 발생 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-194">An error occurs when:</span></span>
+<span data-ttu-id="abc72-194">다음과 같은 경우 오류가 발생 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-194">An error occurs when:</span></span>
 
-* <span data-ttu-id="9da7d-195">프로젝트 루트에 없습니다 *. json* 파일이 없습니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-195">No *libman.json* file exists in the project root.</span></span>
-* <span data-ttu-id="9da7d-196">지정 된 라이브러리가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-196">The specified library doesn't exist.</span></span>
+* <span data-ttu-id="abc72-195">프로젝트 루트에 없습니다 *. json* 파일이 없습니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-195">No *libman.json* file exists in the project root.</span></span>
+* <span data-ttu-id="abc72-196">지정 된 라이브러리가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-196">The specified library doesn't exist.</span></span>
 
-<span data-ttu-id="9da7d-197">이름이 같은 라이브러리가 둘 이상 설치 되어 있으면 하나를 선택 하 라는 메시지가 표시 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-197">If more than one library with the same name is installed, you're prompted to choose one.</span></span>
+<span data-ttu-id="abc72-197">이름이 같은 라이브러리가 둘 이상 설치 되어 있으면 하나를 선택 하 라는 메시지가 표시 됩니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-197">If more than one library with the same name is installed, you're prompted to choose one.</span></span>
 
-### <a name="synopsis"></a><span data-ttu-id="9da7d-198">개요</span><span class="sxs-lookup"><span data-stu-id="9da7d-198">Synopsis</span></span>
+### <a name="synopsis"></a><span data-ttu-id="abc72-198">개요</span><span class="sxs-lookup"><span data-stu-id="abc72-198">Synopsis</span></span>
 
 ```console
 libman uninstall <LIBRARY> [--verbosity]
 libman uninstall [-h|--help]
 ```
 
-### <a name="arguments"></a><span data-ttu-id="9da7d-199">인수</span><span class="sxs-lookup"><span data-stu-id="9da7d-199">Arguments</span></span>
+### <a name="arguments"></a><span data-ttu-id="abc72-199">인수</span><span class="sxs-lookup"><span data-stu-id="abc72-199">Arguments</span></span>
 
 `LIBRARY`
 
-<span data-ttu-id="9da7d-200">제거할 라이브러리의 이름입니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-200">The name of the library to uninstall.</span></span> <span data-ttu-id="9da7d-201">이 이름에는 버전 번호 표기법 (예: `@1.2.0`)이 포함 될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-201">This name may include version number notation (for example, `@1.2.0`).</span></span>
+<span data-ttu-id="abc72-200">제거할 라이브러리의 이름입니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-200">The name of the library to uninstall.</span></span> <span data-ttu-id="abc72-201">이 이름에는 버전 번호 표기법 (예: `@1.2.0`)이 포함 될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-201">This name may include version number notation (for example, `@1.2.0`).</span></span>
 
-### <a name="options"></a><span data-ttu-id="9da7d-202">변수</span><span class="sxs-lookup"><span data-stu-id="9da7d-202">Options</span></span>
+### <a name="options"></a><span data-ttu-id="abc72-202">옵션</span><span class="sxs-lookup"><span data-stu-id="abc72-202">Options</span></span>
 
-<span data-ttu-id="9da7d-203">다음 옵션은 `libman uninstall` 명령에 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-203">The following options are available for the `libman uninstall` command:</span></span>
+<span data-ttu-id="abc72-203">다음 옵션은 `libman uninstall` 명령에 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-203">The following options are available for the `libman uninstall` command:</span></span>
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
-### <a name="examples"></a><span data-ttu-id="9da7d-204">예</span><span class="sxs-lookup"><span data-stu-id="9da7d-204">Examples</span></span>
+### <a name="examples"></a><span data-ttu-id="abc72-204">예제</span><span class="sxs-lookup"><span data-stu-id="abc72-204">Examples</span></span>
 
-<span data-ttu-id="9da7d-205">다음을 고려 하십시오 *. json* 파일:</span><span class="sxs-lookup"><span data-stu-id="9da7d-205">Consider the following *libman.json* file:</span></span>
+<span data-ttu-id="abc72-205">다음을 고려 하십시오 *. json* 파일:</span><span class="sxs-lookup"><span data-stu-id="abc72-205">Consider the following *libman.json* file:</span></span>
 
 [!code-json[](samples/LibManSample/libman.json)]
 
-* <span data-ttu-id="9da7d-206">JQuery를 제거 하려면 다음 명령 중 하나를 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-206">To uninstall jQuery, either of the following commands succeed:</span></span>
+* <span data-ttu-id="abc72-206">JQuery를 제거 하려면 다음 명령 중 하나를 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-206">To uninstall jQuery, either of the following commands succeed:</span></span>
 
   ```console
   libman uninstall jquery
@@ -362,75 +364,75 @@ libman uninstall [-h|--help]
   libman uninstall jquery@3.3.1
   ```
 
-* <span data-ttu-id="9da7d-207">`filesystem` 공급자를 통해 설치 된 lodash 파일을 제거 하려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-207">To uninstall the Lodash files installed via the `filesystem` provider:</span></span>
+* <span data-ttu-id="abc72-207">`filesystem` 공급자를 통해 설치 된 Lodash 파일을 제거 하려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-207">To uninstall the Lodash files installed via the `filesystem` provider:</span></span>
 
   ```console
   libman uninstall C:\temp\lodash\
   ```
 
-## <a name="update-library-version"></a><span data-ttu-id="9da7d-208">라이브러리 버전 업데이트</span><span class="sxs-lookup"><span data-stu-id="9da7d-208">Update library version</span></span>
+## <a name="update-library-version"></a><span data-ttu-id="abc72-208">라이브러리 버전 업데이트</span><span class="sxs-lookup"><span data-stu-id="abc72-208">Update library version</span></span>
 
-<span data-ttu-id="9da7d-209">이 `libman update` 명령은 지정 된 버전에 라이브러리를 통해 설치 된 라이브러리를 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-209">The `libman update` command updates a library installed via LibMan to the specified version.</span></span>
+<span data-ttu-id="abc72-209">`libman update` 명령은 지정 된 버전에 라이브러리를 통해 설치 된 라이브러리를 업데이트 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-209">The `libman update` command updates a library installed via LibMan to the specified version.</span></span>
 
-<span data-ttu-id="9da7d-210">다음과 같은 경우 오류가 발생 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-210">An error occurs when:</span></span>
+<span data-ttu-id="abc72-210">다음과 같은 경우 오류가 발생 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-210">An error occurs when:</span></span>
 
-* <span data-ttu-id="9da7d-211">프로젝트 루트에 없습니다 *. json* 파일이 없습니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-211">No *libman.json* file exists in the project root.</span></span>
-* <span data-ttu-id="9da7d-212">지정 된 라이브러리가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-212">The specified library doesn't exist.</span></span>
+* <span data-ttu-id="abc72-211">프로젝트 루트에 없습니다 *. json* 파일이 없습니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-211">No *libman.json* file exists in the project root.</span></span>
+* <span data-ttu-id="abc72-212">지정 된 라이브러리가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-212">The specified library doesn't exist.</span></span>
 
-<span data-ttu-id="9da7d-213">이름이 같은 라이브러리가 둘 이상 설치 되어 있으면 하나를 선택 하 라는 메시지가 표시 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-213">If more than one library with the same name is installed, you're prompted to choose one.</span></span>
+<span data-ttu-id="abc72-213">이름이 같은 라이브러리가 둘 이상 설치 되어 있으면 하나를 선택 하 라는 메시지가 표시 됩니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-213">If more than one library with the same name is installed, you're prompted to choose one.</span></span>
 
-### <a name="synopsis"></a><span data-ttu-id="9da7d-214">개요</span><span class="sxs-lookup"><span data-stu-id="9da7d-214">Synopsis</span></span>
+### <a name="synopsis"></a><span data-ttu-id="abc72-214">개요</span><span class="sxs-lookup"><span data-stu-id="abc72-214">Synopsis</span></span>
 
 ```console
 libman update <LIBRARY> [-pre] [--to] [--verbosity]
 libman update [-h|--help]
 ```
 
-### <a name="arguments"></a><span data-ttu-id="9da7d-215">인수</span><span class="sxs-lookup"><span data-stu-id="9da7d-215">Arguments</span></span>
+### <a name="arguments"></a><span data-ttu-id="abc72-215">인수</span><span class="sxs-lookup"><span data-stu-id="abc72-215">Arguments</span></span>
 
 `LIBRARY`
 
-<span data-ttu-id="9da7d-216">업데이트할 라이브러리의 이름입니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-216">The name of the library to update.</span></span>
+<span data-ttu-id="abc72-216">업데이트할 라이브러리의 이름입니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-216">The name of the library to update.</span></span>
 
-### <a name="options"></a><span data-ttu-id="9da7d-217">옵션</span><span class="sxs-lookup"><span data-stu-id="9da7d-217">Options</span></span>
+### <a name="options"></a><span data-ttu-id="abc72-217">옵션</span><span class="sxs-lookup"><span data-stu-id="abc72-217">Options</span></span>
 
-<span data-ttu-id="9da7d-218">다음 옵션은 `libman update` 명령에 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-218">The following options are available for the `libman update` command:</span></span>
+<span data-ttu-id="abc72-218">다음 옵션은 `libman update` 명령에 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-218">The following options are available for the `libman update` command:</span></span>
 
 * `-pre`
 
-  <span data-ttu-id="9da7d-219">라이브러리의 최신 시험판 버전을 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-219">Obtain the latest prerelease version of the library.</span></span>
+  <span data-ttu-id="abc72-219">라이브러리의 최신 시험판 버전을 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-219">Obtain the latest prerelease version of the library.</span></span>
 
 * `--to <VERSION>`
 
-  <span data-ttu-id="9da7d-220">라이브러리의 특정 버전을 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-220">Obtain a specific version of the library.</span></span>
+  <span data-ttu-id="abc72-220">라이브러리의 특정 버전을 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-220">Obtain a specific version of the library.</span></span>
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
-### <a name="examples"></a><span data-ttu-id="9da7d-221">예</span><span class="sxs-lookup"><span data-stu-id="9da7d-221">Examples</span></span>
+### <a name="examples"></a><span data-ttu-id="abc72-221">예제</span><span class="sxs-lookup"><span data-stu-id="abc72-221">Examples</span></span>
 
-* <span data-ttu-id="9da7d-222">JQuery를 최신 버전으로 업데이트 하려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-222">To update jQuery to the latest version:</span></span>
+* <span data-ttu-id="abc72-222">JQuery를 최신 버전으로 업데이트 하려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-222">To update jQuery to the latest version:</span></span>
 
   ```console
   libman update jquery
   ```
 
-* <span data-ttu-id="9da7d-223">JQuery를 버전 3.3.1로 업데이트 하려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-223">To update jQuery to version 3.3.1:</span></span>
+* <span data-ttu-id="abc72-223">JQuery를 버전 3.3.1로 업데이트 하려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-223">To update jQuery to version 3.3.1:</span></span>
 
   ```console
   libman update jquery --to 3.3.1
   ```
 
-* <span data-ttu-id="9da7d-224">JQuery를 최신 시험판 버전으로 업데이트 하려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-224">To update jQuery to the latest prerelease version:</span></span>
+* <span data-ttu-id="abc72-224">JQuery를 최신 시험판 버전으로 업데이트 하려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-224">To update jQuery to the latest prerelease version:</span></span>
 
   ```console
   libman update jquery -pre
   ```
 
-## <a name="manage-library-cache"></a><span data-ttu-id="9da7d-225">라이브러리 캐시 관리</span><span class="sxs-lookup"><span data-stu-id="9da7d-225">Manage library cache</span></span>
+## <a name="manage-library-cache"></a><span data-ttu-id="abc72-225">라이브러리 캐시 관리</span><span class="sxs-lookup"><span data-stu-id="abc72-225">Manage library cache</span></span>
 
-<span data-ttu-id="9da7d-226">`libman cache` 명령은 라이브러리 캐시를 관리 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-226">The `libman cache` command manages the LibMan library cache.</span></span> <span data-ttu-id="9da7d-227">공급자 `filesystem` 는 라이브러리 캐시를 사용 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-227">The `filesystem` provider doesn't use the library cache.</span></span>
+<span data-ttu-id="abc72-226">`libman cache` 명령은 라이브러리 캐시를 관리 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-226">The `libman cache` command manages the LibMan library cache.</span></span> <span data-ttu-id="abc72-227">`filesystem` 공급자는 라이브러리 캐시를 사용 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-227">The `filesystem` provider doesn't use the library cache.</span></span>
 
-### <a name="synopsis"></a><span data-ttu-id="9da7d-228">개요</span><span class="sxs-lookup"><span data-stu-id="9da7d-228">Synopsis</span></span>
+### <a name="synopsis"></a><span data-ttu-id="abc72-228">개요</span><span class="sxs-lookup"><span data-stu-id="abc72-228">Synopsis</span></span>
 
 ```console
 libman cache clean [<PROVIDER>] [--verbosity]
@@ -438,31 +440,31 @@ libman cache list [--files] [--libraries] [--verbosity]
 libman cache [-h|--help]
 ```
 
-### <a name="arguments"></a><span data-ttu-id="9da7d-229">인수</span><span class="sxs-lookup"><span data-stu-id="9da7d-229">Arguments</span></span>
+### <a name="arguments"></a><span data-ttu-id="abc72-229">인수</span><span class="sxs-lookup"><span data-stu-id="abc72-229">Arguments</span></span>
 
 `PROVIDER`
 
-<span data-ttu-id="9da7d-230">`clean` 명령 에서만 사용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-230">Only used with the `clean` command.</span></span> <span data-ttu-id="9da7d-231">정리할 공급자 캐시를 지정 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-231">Specifies the provider cache to clean.</span></span> <span data-ttu-id="9da7d-232">유효한 값은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-232">Valid values include:</span></span>
+<span data-ttu-id="abc72-230">`clean` 명령 에서만 사용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-230">Only used with the `clean` command.</span></span> <span data-ttu-id="abc72-231">정리할 공급자 캐시를 지정 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-231">Specifies the provider cache to clean.</span></span> <span data-ttu-id="abc72-232">유효한 값은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-232">Valid values include:</span></span>
 
 [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
-### <a name="options"></a><span data-ttu-id="9da7d-233">옵션</span><span class="sxs-lookup"><span data-stu-id="9da7d-233">Options</span></span>
+### <a name="options"></a><span data-ttu-id="abc72-233">옵션</span><span class="sxs-lookup"><span data-stu-id="abc72-233">Options</span></span>
 
-<span data-ttu-id="9da7d-234">다음 옵션은 `libman cache` 명령에 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-234">The following options are available for the `libman cache` command:</span></span>
+<span data-ttu-id="abc72-234">다음 옵션은 `libman cache` 명령에 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-234">The following options are available for the `libman cache` command:</span></span>
 
 * `--files`
 
-  <span data-ttu-id="9da7d-235">캐시 된 파일의 이름을 나열 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-235">List the names of files that are cached.</span></span>
+  <span data-ttu-id="abc72-235">캐시 된 파일의 이름을 나열 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-235">List the names of files that are cached.</span></span>
 
 * `--libraries`
 
-  <span data-ttu-id="9da7d-236">캐시 된 라이브러리의 이름을 나열 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-236">List the names of libraries that are cached.</span></span>
+  <span data-ttu-id="abc72-236">캐시 된 라이브러리의 이름을 나열 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-236">List the names of libraries that are cached.</span></span>
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
-### <a name="examples"></a><span data-ttu-id="9da7d-237">예</span><span class="sxs-lookup"><span data-stu-id="9da7d-237">Examples</span></span>
+### <a name="examples"></a><span data-ttu-id="abc72-237">예제</span><span class="sxs-lookup"><span data-stu-id="abc72-237">Examples</span></span>
 
-* <span data-ttu-id="9da7d-238">공급자 당 캐시 된 라이브러리의 이름을 보려면 다음 명령 중 하나를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-238">To view the names of cached libraries per provider, use one of the following commands:</span></span>
+* <span data-ttu-id="abc72-238">공급자 당 캐시 된 라이브러리의 이름을 보려면 다음 명령 중 하나를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-238">To view the names of cached libraries per provider, use one of the following commands:</span></span>
 
   ```console
   libman cache list
@@ -472,7 +474,7 @@ libman cache [-h|--help]
   libman cache list --libraries
   ```
 
-  <span data-ttu-id="9da7d-239">다음과 비슷한 출력이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-239">Output similar to the following is displayed:</span></span>
+  <span data-ttu-id="abc72-239">다음과 비슷한 출력이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-239">Output similar to the following is displayed:</span></span>
 
   ```console
   Cache contents:
@@ -489,13 +491,13 @@ libman cache [-h|--help]
       react
   ```
 
-* <span data-ttu-id="9da7d-240">공급자 당 캐시 된 라이브러리 파일의 이름을 보려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-240">To view the names of cached library files per provider:</span></span>
+* <span data-ttu-id="abc72-240">공급자 당 캐시 된 라이브러리 파일의 이름을 보려면 다음을 수행 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-240">To view the names of cached library files per provider:</span></span>
 
   ```console
   libman cache list --files
   ```
 
-  <span data-ttu-id="9da7d-241">다음과 비슷한 출력이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-241">Output similar to the following is displayed:</span></span>
+  <span data-ttu-id="abc72-241">다음과 비슷한 출력이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-241">Output similar to the following is displayed:</span></span>
 
   ```console
   Cache contents:
@@ -538,15 +540,15 @@ libman cache [-h|--help]
           metadata.json
   ```
 
-  <span data-ttu-id="9da7d-242">위의 출력은 jQuery 버전 3.2.1 및 3.3.1가 CDNJS 공급자 아래에 캐시 됨을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-242">Notice the preceding output shows that jQuery versions 3.2.1 and 3.3.1 are cached under the CDNJS provider.</span></span>
+  <span data-ttu-id="abc72-242">위의 출력은 jQuery 버전 3.2.1 및 3.3.1가 CDNJS 공급자 아래에 캐시 됨을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-242">Notice the preceding output shows that jQuery versions 3.2.1 and 3.3.1 are cached under the CDNJS provider.</span></span>
 
-* <span data-ttu-id="9da7d-243">CDNJS 공급자에 대 한 라이브러리 캐시를 비우려면:</span><span class="sxs-lookup"><span data-stu-id="9da7d-243">To empty the library cache for the CDNJS provider:</span></span>
+* <span data-ttu-id="abc72-243">CDNJS 공급자에 대 한 라이브러리 캐시를 비우려면:</span><span class="sxs-lookup"><span data-stu-id="abc72-243">To empty the library cache for the CDNJS provider:</span></span>
 
   ```console
   libman cache clean cdnjs
   ```
 
-  <span data-ttu-id="9da7d-244">Cdnjs 공급자 캐시 `libman cache list` 를 비운 후 명령은 다음을 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-244">After emptying the CDNJS provider cache, the `libman cache list` command displays the following:</span></span>
+  <span data-ttu-id="abc72-244">CDNJS 공급자 캐시를 비운 후 `libman cache list` 명령은 다음을 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-244">After emptying the CDNJS provider cache, the `libman cache list` command displays the following:</span></span>
 
   ```console
   Cache contents:
@@ -559,13 +561,13 @@ libman cache [-h|--help]
       (empty)
   ```
 
-* <span data-ttu-id="9da7d-245">지원 되는 모든 공급자에 대 한 캐시를 비우려면:</span><span class="sxs-lookup"><span data-stu-id="9da7d-245">To empty the cache for all supported providers:</span></span>
+* <span data-ttu-id="abc72-245">지원 되는 모든 공급자에 대 한 캐시를 비우려면:</span><span class="sxs-lookup"><span data-stu-id="abc72-245">To empty the cache for all supported providers:</span></span>
 
   ```console
   libman cache clean
   ```
 
-  <span data-ttu-id="9da7d-246">모든 공급자 캐시를 `libman cache list` 비운 후 명령은 다음을 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="9da7d-246">After emptying all provider caches, the `libman cache list` command displays the following:</span></span>
+  <span data-ttu-id="abc72-246">모든 공급자 캐시를 비운 후 `libman cache list` 명령은 다음을 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="abc72-246">After emptying all provider caches, the `libman cache list` command displays the following:</span></span>
 
   ```console
   Cache contents:
@@ -576,8 +578,8 @@ libman cache [-h|--help]
       (empty)
   ```
 
-## <a name="additional-resources"></a><span data-ttu-id="9da7d-247">추가 자료</span><span class="sxs-lookup"><span data-stu-id="9da7d-247">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="abc72-247">추가 자료</span><span class="sxs-lookup"><span data-stu-id="abc72-247">Additional resources</span></span>
 
-* [<span data-ttu-id="9da7d-248">글로벌 도구 설치</span><span class="sxs-lookup"><span data-stu-id="9da7d-248">Install a Global Tool</span></span>](/dotnet/core/tools/global-tools#install-a-global-tool)
+* [<span data-ttu-id="abc72-248">글로벌 도구 설치</span><span class="sxs-lookup"><span data-stu-id="abc72-248">Install a Global Tool</span></span>](/dotnet/core/tools/global-tools#install-a-global-tool)
 * <xref:client-side/libman/libman-vs>
-* [<span data-ttu-id="9da7d-249">LibMan GitHub 리포지토리</span><span class="sxs-lookup"><span data-stu-id="9da7d-249">LibMan GitHub repository</span></span>](https://github.com/aspnet/LibraryManager)
+* [<span data-ttu-id="abc72-249">LibMan GitHub 리포지토리</span><span class="sxs-lookup"><span data-stu-id="abc72-249">LibMan GitHub repository</span></span>](https://github.com/aspnet/LibraryManager)
