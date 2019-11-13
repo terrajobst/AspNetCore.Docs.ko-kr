@@ -24,7 +24,7 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
 * 권한 부여(사용자가 권한이 없는 리소스에 액세스하는 것을 방지).
 * 응답 캐싱(요청 파이프라인을 단락하여 캐시된 응답 반환).
 
-사용자 지정 필터를 만들어 횡단 관심사를 처리할 수 있습니다. 횡단 관심사의 사례로는 오류 처리, 캐싱, 구성, 권한 부여 및 로깅을 들 수 있습니다.  필터는 코드 중복을 방지합니다. 예를 들어 오류 처리 예외 필터는 오류 처리를 통합할 수 있습니다.
+사용자 지정 필터를 만들어 횡단 관심사를 처리할 수 있습니다. 횡단 관심사의 사례로는 오류 처리, 캐싱, 구성, 권한 부여 및 로깅을 들 수 있습니다. 필터는 코드 중복을 방지합니다. 예를 들어 오류 처리 예외 필터는 오류 처리를 통합할 수 있습니다.
 
 이 문서는 Razor Pages, API 컨트롤러 및 보기를 사용하는 컨트롤러에 적용됩니다.
 
@@ -32,7 +32,7 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
 
 ## <a name="how-filters-work"></a>필터 작동 방법
 
-필터는 ‘필터 파이프라인’이라고도 하는 ‘ASP.NET Core 동작 호출 파이프라인’내에서 실행됩니다.  필터 파이프라인은 ASP.NET Core가 실행할 작업을 선택한 후에 실행됩니다.
+필터는 *필터 파이프라인*이라고도 하는 *ASP.NET Core 작업 호출 파이프라인* 내에서 실행됩니다. 필터 파이프라인은 ASP.NET Core가 실행할 작업을 선택한 이후에 실행됩니다.
 
 ![요청은 기타 미들웨어, 라우팅 미들웨어, 작업 선택 및 ASP.NET Core 작업 호출 파이프라인을 통해서 처리됩니다. 요청 처리는 응답이 클라이언트에 전송되기 전에 다시 반대로 작업 선택, 라우팅 미들웨어 및 기타 다양한 미들웨어를 통해서 계속됩니다.](filters/_static/filter-pipeline-1.png)
 
@@ -44,7 +44,7 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
 
 * [리소스 필터](#resource-filters):
 
-  * 권한 부여 후 실행됩니다.  
+  * 권한 부여 후 실행됩니다.
   * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting*>는 나머지 필터 파이프라인보다 먼저 코드를 실행할 수 있습니다. 예를 들어 `OnResourceExecuting`는 모델 바인딩 전에 코드를 실행할 수 있습니다.
   * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted*>는 파이프라인의 나머지 부분이 완료된 후에 코드를 실행할 수 있습니다.
 
@@ -70,7 +70,7 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/SampleAsyncActionFilter.cs?name=snippet)]
 
-이전 코드에서 `SampleAsyncActionFilter`에는 작업 메서드를 실행하는 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate>(`next`)가 포함되어 있습니다.  각 `On-Stage-ExecutionAsync` 메서드는 필터의 파이프라인 단계를 실행하는 `FilterType-ExecutionDelegate`를 받습니다.
+이전 코드에서 `SampleAsyncActionFilter`에는 작업 메서드를 실행하는 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate>(`next`)가 포함되어 있습니다. 각 `On-Stage-ExecutionAsync` 메서드는 필터의 파이프라인 단계를 실행하는 `FilterType-ExecutionDelegate`를 받습니다.
 
 ### <a name="multiple-filter-stages"></a>여러 필터 단계
 
@@ -117,7 +117,7 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
 
 ### <a name="default-order-of-execution"></a>기본 실행 순서
 
-파이프라인의 특정 단계에 여러 개의 필터가 있는 경우 범위가 기본 필터 실행 순서를 결정합니다.  전역 필터는 클래스 필터를 둘러싸고 클래스 필터는 다시 메서드 필터를 둘러쌉니다.
+파이프라인의 특정 단계에 여러 개의 필터가 있는 경우 범위가 기본 필터 실행 순서를 결정합니다. 전역 필터는 클래스 필터를 둘러싸고 클래스 필터는 다시 메서드 필터를 둘러쌉니다.
 
 필터 중첩의 결과로 필터의 *after* 코드는 *before* 코드의 역순으로 실행됩니다. 필터의 순서는 다음과 같습니다.
 
@@ -146,17 +146,16 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
 
 ### <a name="controller-and-razor-page-level-filters"></a>컨트롤러 및 Razor Page 수준 필터
 
-<xref:Microsoft.AspNetCore.Mvc.Controller> 기본 클래스에서 상속되는 모든 컨트롤러에는 [Controller.OnActionExecuting](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*), [Controller.OnActionExecutionAsync](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*) 및 [Controller.OnActionExecuted](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*)
-`OnActionExecuted` 메서드가 포함됩니다. 이러한 메서드는: 다음 메서드는
+<xref:Microsoft.AspNetCore.Mvc.Controller> 기본 클래스에서 상속되는 모든 컨트롤러에는 [Controller.OnActionExecuting](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*),  [Controller.OnActionExecutionAsync](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*) 및 [Controller.OnActionExecuted](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*) 메서드가 포함됩니다. 이러한 메서드는:
 
+* 특정 작업에 대해 실행되는 필터를 래핑합니다.
 * 지정된 작업을 위해 실행되는 필터를 래핑합니다.
-* `OnActionExecuting`는 작업 필터 이전에 호출됩니다.
 * `OnActionExecuted`는 모든 작업 필터 이후에 호출됩니다.
-* `OnActionExecutionAsync`는 작업 필터 이전에 호출됩니다. 작업 메서드 이후 `next`가 실행된 후의 필터 코드.
+* `OnActionExecutionAsync`는 모든 작업 필터 이전에 호출됩니다. 작업 메서드 이후 `next` 이후의 필터 코드가 실행됩니다.
 
-예를 들어 다운로드 예제에서 `MySampleActionFilter`은 시작할 때 전역적으로 적용됩니다.
+예를 들어 다운로드 예제에서 `MySampleActionFilter`는 시작할 때 전역적으로 적용됩니다.
 
-`TestController`는:
+`TestController`에서는:
 
 * `SampleActionFilterAttribute`(`[SampleActionFilter]`)를 `FilterTest2` 작업에 적용합니다.
 * `OnActionExecuting` 및 `OnActionExecuted`를 재정의합니다.
@@ -227,7 +226,7 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 
 특성으로 구현되고 컨트롤러 클래스 또는 작업 메서드에 직접 추가된 필터는 DI([종속성 주입](xref:fundamentals/dependency-injection))에서 제공하는 생성자 종속성을 가질 수 없습니다. DI는 다음과 같은 이유로 생성자 종속성을 제공할 수 없습니다.
 
-* 특성이 적용될 때 해당 생성자 매개 변수가 제공되어야 하기 때문입니다. 
+* 특성이 적용될 때 해당 생성자 매개 변수가 제공되어야 하기 때문입니다.
 * 특성이 작동하는 방법의 제한 사항입니다.
 
 다음 필터는 DI에서 제공하는 생성자 종속성을 지원합니다.
@@ -276,10 +275,11 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 
 `TypeFilterAttribute` 형식은 DI 컨테이너에서 직접 해결되지 않기 때문입니다.
 
-* `TypeFilterAttribute`을 사용하여 참조되는 형식은 DI 컨테이너를 사용하여 등록할 필요가 없습니다.  DI 컨테이너에서 충족하는 종속성을 갖고 있습니다.
+* `TypeFilterAttribute`을 사용하여 참조되는 형식은 DI 컨테이너를 사용하여 등록할 필요가 없습니다. DI 컨테이너에서 충족하는 종속성을 갖고 있습니다.
 * `TypeFilterAttribute`는 형식에 대한 생성자 인수를 필요에 따라 받을 수 있습니다.
 
 `TypeFilterAttribute`를 사용할 때 [TypeFilterAttribute.IsReusable](xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute.IsReusable)을 설정하면:
+
 * 필터 인스턴스가 원래 생성된 요청 범위 밖에서 재사용될 가능성이 *있음*을 암시하는 것입니다. ASP.NET Core 런타임은 단일 필터 인스턴스가 생성되도록 보장하지 않습니다.
 
 * 싱글톤 이외의 수명이 지정된 서비스에 의존하는 필터와 함께 사용하지 마세요.
@@ -399,7 +399,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 예외 필터는:
 
-* <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter> 또는 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter>를 구현합니다. 
+* <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter> 또는 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter>를 구현합니다.
 * 공통 오류 처리 정책을 구현하는 데 사용할 수 있습니다.
 
 다음 예제 예외 필터는 사용자 지정 오류 보기를 사용하여 앱을 개발 중인 경우에 발생하는 예외에 대한 세부 정보를 표시합니다.
@@ -420,7 +420,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * 작업 내에서 발생하는 예외를 잡는 데 좋습니다.
 * 오류 처리 미들웨어만큼 유연하지 않습니다.
 
-예외 처리의 경우 미들웨어를 선호합니다. 어떤 작업 메서드가 호출되는지에 따라 오류 처리 방식이 ‘다른’ 경우에만 예외 필터를 사용합니다. 예를 들어 앱에는 API 엔드포인트 및 보기/HTML 모두에 대한 작업 메서드가 있을 수 있습니다. API 엔드포인트는 JSON으로 오류 정보를 반환할 수 있습니다. 반면 보기 기반 작업은 HTML로 오류 페이지를 반환할 수 있습니다.
+예외 처리에는 미들웨어를 사용하는 것이 좋습니다. 어떤 작업 메서드가 호출되는지에 따라 오류 처리 방식이 *다른* 경우에만 예외 필터를 사용하세요. 예를 들어 앱에 API 엔드포인트와 보기/HTML에 대한 작업 메서드가 모두 있을 수 있습니다. API 엔드포인트는 JSON으로 오류 정보를 반환할 수 있습니다. 반면 보기 기반 작업은 HTML로 오류 페이지를 반환할 수 있습니다.
 
 ## <a name="result-filters"></a>결과 필터
 
@@ -459,7 +459,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/MyAsyncResponseFilter.cs?name=snippet)]
 
-프레임워크는 서브클래싱 할 수 있는 추상 `ResultFilterAttribute`를 제공합니다. 이전에 표시된 [AddHeaderAttribute](#add-header-attribute) 클래스는 결과 필터 특성의 예제입니다.
+프레임워크는 서브클래싱할 수 있는 추상 `ResultFilterAttribute`를 제공합니다. 이전에 살펴본 [AddHeaderAttribute](#add-header-attribute) 클래스는 결과 필터 특성의 예제입니다.
 
 ### <a name="ialwaysrunresultfilter-and-iasyncalwaysrunresultfilter"></a>IAlwaysRunResultFilter 및 IAsyncAlwaysRunResultFilter
 
