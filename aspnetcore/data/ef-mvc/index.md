@@ -5,14 +5,20 @@ description: ''
 ms.author: riande
 ms.date: 03/27/2017
 uid: data/ef-mvc/index
-ms.openlocfilehash: 9d0be37a5eacb42723fda89a87385ed184f255fb
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: 469b16cfe3cdd41abd133df59036baf92ff04e42
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259661"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73962640"
 ---
 # <a name="aspnet-core-mvc-with-ef-core---tutorial-series"></a>ASP.NET Core MVC 및 EF Core - 자습서 시리즈
+
+::: moniker range=">= aspnetcore-3.0"
+
+이 자습서는 ASP.NET Core 3.0에 맞게 업데이트되지 **않았습니다**. [Razor Pages 버전](xref:data/ef-rp/intro)이 업데이트되었습니다. 업데이트 가능 시기에 대해서는 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/13920)를 참조하세요.
+
+::: moniker-end
 
 [!INCLUDE [RP better than MVC](../../includes/RP-EF/rp-over-mvc.md)]
 
