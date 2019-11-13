@@ -71,7 +71,7 @@ Then(`Order=-990`):
 
 ## <a name="conventions"></a>규칙
 
-응용 프로그램 모델은 전체 모델 또는 공급자를 재정의하는 것 보다 모델의 동작을 더 간단하게 사용자 지정할 수 있는 방법을 제공하는 규칙 추상화를 정의합니다. 앱의 동작을 수정할 경우 이러한 추상화를 사용하는 것이 좋습니다. 규칙은 사용자 지정을 동적으로 적용하는 코드를 작성할 수 있는 방법을 제공합니다. [필터](xref:mvc/controllers/filters)는 프레임워크의 동작을 수정하는 방법을 제공하는 반면, 사용자 지정을 통해 전체 앱이 함께 연결되는 방법을 제어할 수 있습니다.
+응용 프로그램 모델은 전체 모델 또는 공급자를 재정의하는 것보다 모델의 동작을 더 간단하게 사용자 지정할 수 있는 방법을 제공하는 규칙 추상화를 정의합니다. 앱의 동작을 수정할 경우 이러한 추상화를 사용하는 것이 좋습니다. 규칙은 사용자 지정을 동적으로 적용하는 코드를 작성할 수 있는 방법을 제공합니다. [필터](xref:mvc/controllers/filters)는 프레임워크의 동작을 수정하는 방법을 제공하는 반면, 사용자 지정을 통해 전체 앱이 함께 연결되는 방법을 제어할 수 있습니다.
 
 사용할 수 있는 규칙은 다음과 같습니다.
 
@@ -173,7 +173,7 @@ Web API 호환성 Shim을 사용하려면 프로젝트에 패키지를 추가한
 services.AddMvc().AddWebApiConventions();
 ```
 
-Shim에서 제공하는 규칙은 특정 특성이 적용된 앱의 일부에만 적용됩니다. 다음 네 가지 특성이 Shim의 규칙에 따라 규칙을 수정해야하는 컨트롤러를 제어하는 데 사용됩니다.
+shim에서 제공하는 규칙은 특정 특성이 적용된 앱의 일부에만 적용됩니다. 다음 네 가지 특성이 shim의 규칙에 따라 규칙을 수정해야 하는 컨트롤러를 제어하는 데 사용됩니다.
 
 * [UseWebApiActionConventionsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.webapicompatshim.usewebapiactionconventionsattribute)
 * [UseWebApiOverloadingAttribute](/dotnet/api/microsoft.aspnetcore.mvc.webapicompatshim.usewebapioverloadingattribute)
