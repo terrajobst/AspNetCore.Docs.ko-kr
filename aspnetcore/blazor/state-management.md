@@ -6,34 +6,36 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/15/2019
+no-loc:
+- Blazor
 uid: blazor/state-management
-ms.openlocfilehash: 67042fa9b86125fe95d877dbce246abeb6f35dd0
-ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
+ms.openlocfilehash: 408d44a3f2e81a165e8b786c6d2efc9329082e30
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72391271"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73962820"
 ---
-# <a name="aspnet-core-blazor-state-management"></a>ASP.NET Core Blazor 상태 관리
+# <a name="aspnet-core-opno-locblazor-state-management"></a>ASP.NET Core Blazor 상태 관리
 
 작성자: [Steve Sanderson](https://github.com/SteveSandersonMS)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Blazor 서버는 상태 저장 앱 프레임 워크입니다. 대부분의 경우 앱은 서버에 지속적으로 연결을 유지 합니다. 사용자의 상태는 *회로*의 서버 메모리에 보관 됩니다. 
+Blazor Server는 상태 저장 앱 프레임 워크입니다. 대부분의 경우 앱은 서버에 지속적으로 연결을 유지 합니다. 사용자의 상태는 *회로*의 서버 메모리에 보관 됩니다. 
 
 사용자 회로에 대해 유지 되는 상태 예는 다음과 같습니다.
 
-* 렌더링 된 UI @ no__t-0은 구성 요소 인스턴스의 계층 구조와 가장 최근 렌더링 출력입니다.
+* 렌더링 된 UI는 구성 요소 인스턴스의 계층 구조와 가장 최근 렌더링 출력&mdash;합니다.
 * 구성 요소 인스턴스의 모든 필드와 속성 값입니다.
 * 회로로 범위가 지정 된 [DI (종속성 주입)](xref:fundamentals/dependency-injection) 서비스 인스턴스에 저장 된 데이터입니다.
 
 > [!NOTE]
-> 이 문서에서는 Blazor Server 앱에서 상태 지 속성을 다룹니다. Blazor Weasembomapps는 [브라우저에서 클라이언트 쪽 상태 지 속성](#client-side-in-the-browser) 을 활용할 수 있지만이 문서의 범위를 벗어나는 사용자 지정 솔루션 또는 타사 패키지를 요구 합니다.
+> 이 문서에서는 Blazor Server 앱의 상태 지 속성에 대해 설명 합니다. Blazor Weasembomapps 앱은 [브라우저에서 클라이언트 쪽 상태 지 속성](#client-side-in-the-browser) 을 활용할 수 있지만이 문서의 범위를 벗어나는 사용자 지정 솔루션 또는 타사 패키지를 요구 합니다.
 
-## <a name="blazor-circuits"></a>Blazor 회로
+## <a name="opno-locblazor-circuits"></a>Blazor 회로
 
-사용자가 임시 네트워크 연결 손실을 경험 하는 경우 Blazor는 사용자를 원래 회로에 다시 연결 하 여 앱을 계속 사용할 수 있도록 시도 합니다. 그러나 서버 메모리의 원래 회로에 사용자를 다시 연결 하는 것은 항상 가능 하지는 않습니다.
+사용자가 임시 네트워크 연결 Blazor 손실을 경험 하는 경우 사용자가 앱을 계속 사용할 수 있도록 원래 회로에 사용자를 다시 연결 하려고 시도 합니다. 그러나 서버 메모리의 원래 회로에 사용자를 다시 연결 하는 것은 항상 가능 하지는 않습니다.
 
 * 서버는 연결 되지 않은 회로를 계속 유지할 수 없습니다. 서버는 시간이 초과 되거나 서버의 메모리가 부족 한 경우 연결이 끊어진 회로를 해제 해야 합니다.
 * 다중 서버, 부하 분산 된 배포 환경에서는 지정 된 시간에 서버 처리 요청을 사용할 수 없게 될 수 있습니다. 개별 서버는 전체 요청 볼륨을 더 이상 처리할 필요가 없을 때 실패할 수도 있고 자동으로 제거 될 수도 있습니다. 사용자가 다시 연결 하려고 할 때 원본 서버를 사용 하지 못할 수 있습니다.
@@ -50,7 +52,7 @@ Blazor 서버는 상태 저장 앱 프레임 워크입니다. 대부분의 경�
 
 일반적으로 회로 간에 상태를 유지 관리 하는 것은 사용자가 이미 존재 하는 데이터를 읽는 것이 아니라 데이터를 적극적으로 만드는 시나리오에 적용 됩니다.
 
-단일 회로 이상의 상태를 유지 하려면 *데이터를 서버 메모리에 저장 하지 마세요*. 앱은 데이터를 다른 저장소 위치에 보관 해야 합니다. 상태 지 속성은 자동으로 수행 되지 않습니다. no__t-0 상태 저장 데이터 지 속성을 구현 하도록 앱을 개발할 때 단계를 수행 해야 합니다.
+단일 회로 이상의 상태를 유지 하려면 *데이터를 서버 메모리에 저장 하지 마세요*. 앱은 데이터를 다른 저장소 위치에 보관 해야 합니다. 상태 지 속성은 자동&mdash;되지 않습니다. 상태 저장 데이터 지 속성을 구현 하기 위해 앱을 개발할 때 단계를 수행 해야 합니다.
 
 데이터 지 속성은 일반적으로 사용자가 소요 된 작업을 수행 하는 높은 가치의 상태에만 필요 합니다. 다음 예에서는 상태를 유지 하 여 상업적 활동에 시간 또는 지원을 저장할 수도 있습니다.
 
@@ -64,7 +66,7 @@ Blazor 서버는 상태 저장 앱 프레임 워크입니다. 대부분의 경�
 
 ## <a name="where-to-persist-state"></a>상태를 유지 하는 위치
 
-Blazor 서버 앱에서 상태를 유지 하기 위한 세 가지 공통 위치가 있습니다. 각 방법은 서로 다른 시나리오에 가장 적합 하며, 다음과 같은 다양 한 주의 사항이 있습니다.
+Blazor Server 앱에서 상태를 유지 하기 위한 세 가지 공통 위치가 있습니다. 각 방법은 서로 다른 시나리오에 가장 적합 하며, 다음과 같은 다양 한 주의 사항이 있습니다.
 
 * [데이터베이스의 서버 쪽](#server-side-in-a-database)
 * [URL](#url)
@@ -95,14 +97,14 @@ Azure 데이터 저장소 옵션에 대 한 자세한 내용은 [Azure Storage �
 * 사용자가 페이지를 수동으로 다시 로드 하는 경우입니다.
 * 웹 서버를 사용할 수 없게 되 면 사용자는 다른 서버에 연결 하기 위해 페이지를 강제로 다시 로드 해야 합니다.
 
-@No__t-0 지시어를 사용 하 여 URL 패턴을 정의 하는 방법에 대 한 자세한 내용은 <xref:blazor/routing>을 참조 하세요.
+`@page` 지시어를 사용 하 여 URL 패턴을 정의 하는 방법에 대 한 자세한 내용은 <xref:blazor/routing>을 참조 하세요.
 
 ### <a name="client-side-in-the-browser"></a>브라우저의 클라이언트 쪽
 
 사용자가 적극적으로 만드는 임시 데이터의 경우 일반적인 백업 저장소는 브라우저의 `localStorage` 및 `sessionStorage` 컬렉션입니다. 회로를 중단 한 경우에는 저장 된 상태를 관리 하거나 지울 필요가 없습니다 .이는 서버 쪽 저장소의 장점입니다.
 
 > [!NOTE]
-> 이 섹션의 "클라이언트 쪽"은 [Blazor Weasembom호스팅 모델이](xref:blazor/hosting-models#blazor-webassembly)아니라 브라우저의 클라이언트 쪽 시나리오를 나타냅니다. `localStorage` 및 `sessionStorage`은 Blazor Weasembomapps에서 사용할 수 있지만 사용자 지정 코드를 작성 하거나 타사 패키지를 사용 하는 경우에만 사용할 수 있습니다.
+> 이 섹션의 "클라이언트 쪽"은 [Blazor Weasembom호스팅 모델이](xref:blazor/hosting-models#blazor-webassembly)아닌 브라우저의 클라이언트 쪽 시나리오를 나타냅니다. `localStorage` 및 `sessionStorage`는 Blazor Weasembomapps에서 사용할 수 있지만 사용자 지정 코드를 작성 하거나 타사 패키지를 사용 하는 경우에만 사용할 수 있습니다.
 
 `localStorage` 및 `sessionStorage`은 다음과 같이 다릅니다.
 
@@ -120,7 +122,7 @@ Azure 데이터 저장소 옵션에 대 한 자세한 내용은 [Azure Storage �
 
 * 서버측 데이터베이스를 사용 하는 것과 유사 하 게 데이터 로드 및 저장은 비동기식입니다.
 * 서버 쪽 데이터베이스와 달리, 요청 된 페이지는 렌더링 전 단계에서 브라우저에 존재 하지 않기 때문에 렌더링 중에는 저장소를 사용할 수 없습니다.
-* Blazor 서버 앱에 대해 몇 킬로바이트의 데이터를 저장 하는 것이 합리적입니다. 네트워크를 통해 데이터를 로드 하 고 저장 하기 때문에 몇 킬로바이트 이상에서 성능 영향을 고려해 야 합니다.
+* 몇 킬로바이트의 데이터 저장소는 Blazor 서버 앱에 대해 유지 하는 것이 합리적입니다. 네트워크를 통해 데이터를 로드 하 고 저장 하기 때문에 몇 킬로바이트 이상에서 성능 영향을 고려해 야 합니다.
 * 사용자가 데이터를 보거나 조작할 수 있습니다. [데이터 보호가](xref:security/data-protection/introduction) ASP.NET Core 위험을 완화할 수 있습니다.
 
 ## <a name="third-party-browser-storage-solutions"></a>타사 브라우저 저장소 솔루션
@@ -131,23 +133,23 @@ ASP.NET Core의 [데이터 보호](xref:security/data-protection/introduction)�
 
 ## <a name="protected-browser-storage-experimental-package"></a>보호 된 브라우저 저장소 실험적 패키지
 
-@No__t-1 및 `sessionStorage`에 대 한 [데이터 보호](xref:security/data-protection/introduction) 를 제공 하는 NuGet 패키지의 예는 [AspNetCore. ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)입니다.
+`localStorage` 및 `sessionStorage`에 대 한 [데이터 보호](xref:security/data-protection/introduction) 를 제공 하는 NuGet 패키지의 예는 [ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)입니다.
 
 > [!WARNING]
 > `Microsoft.AspNetCore.ProtectedBrowserStorage`은 현재 프로덕션 사용에 적합 하지 않은 지원 되지 않는 실험적 패키지입니다.
 
 ### <a name="installation"></a>설치
 
-@No__t-0 패키지를 설치 하려면:
+`Microsoft.AspNetCore.ProtectedBrowserStorage` 패키지를 설치 하려면:
 
-1. Blazor Server 앱 프로젝트에서 [AspNetCore ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)에 패키지 참조를 추가 합니다.
-1. 최상위 HTML에서 (예: 기본 프로젝트 템플릿의 *Pages/_Host* 파일에서) 다음 `<script>` 태그를 추가 합니다.
+1. Blazor Server 앱 프로젝트에서 [AspNetCore에 ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)에 대 한 패키지 참조를 추가 합니다.
+1. 최상위 HTML (예: 기본 프로젝트 템플릿의 *Pages/_Host* 파일)에서 다음 `<script>` 태그를 추가 합니다.
 
    ```html
    <script src="_content/Microsoft.AspNetCore.ProtectedBrowserStorage/protectedBrowserStorage.js"></script>
    ```
 
-1. @No__t-0 메서드에서 `AddProtectedBrowserStorage`을 호출 하 여 서비스 컬렉션에 `localStorage` 및 `sessionStorage` 서비스를 추가 합니다.
+1. `Startup.ConfigureServices` 메서드에서 `AddProtectedBrowserStorage`를 호출 하 여 서비스 컬렉션에 `localStorage` 및 `sessionStorage` 서비스를 추가 합니다.
 
    ```csharp
    services.AddProtectedBrowserStorage();
@@ -167,7 +169,7 @@ ASP.NET Core의 [데이터 보호](xref:security/data-protection/introduction)�
 @inject ProtectedSessionStorage ProtectedSessionStore
 ```
 
-@No__t-0 문은 구성 요소 대신 *_Imports. razor* 파일에 배치할 수 있습니다. *_Imports. razor* 파일을 사용 하면 앱의 더 큰 세그먼트 또는 전체 앱에서 네임 스페이스를 사용할 수 있습니다.
+`@using` 문은 구성 요소가 아닌 *_Imports razor* 파일에 배치할 수 있습니다. *_Imports razor* 파일을 사용 하면 앱의 더 큰 세그먼트 또는 전체 앱에서 네임 스페이스를 사용할 수 있습니다.
 
 프로젝트 템플릿의 `Counter` 구성 요소에서 `currentCount` 값을 유지 하려면 `ProtectedSessionStore.SetAsync`을 사용 하도록 `IncrementCount` 메서드를 수정 합니다.
 
@@ -181,7 +183,7 @@ private async Task IncrementCount()
 
 더 크고 현실적인 앱에서 개별 필드의 저장은 거의 발생 하지 않습니다. 앱은 복합 상태를 포함 하는 전체 모델 개체를 저장할 가능성이 높습니다. `ProtectedSessionStore`은 JSON 데이터를 자동으로 직렬화 및 deserialize 합니다.
 
-위의 코드 예제에서 `currentCount` 데이터는 사용자의 브라우저에 `sessionStorage['count']`로 저장 됩니다. 데이터는 일반 텍스트로 저장 되지 않고 ASP.NET Core의 [데이터 보호](xref:security/data-protection/introduction)를 사용 하 여 보호 됩니다. @No__t-0이 브라우저의 개발자 콘솔에서 평가 되는 경우 암호화 된 데이터를 볼 수 있습니다.
+위의 코드 예제에서 `currentCount` 데이터는 사용자의 브라우저에 `sessionStorage['count']` 저장 됩니다. 데이터는 일반 텍스트로 저장 되지 않고 ASP.NET Core의 [데이터 보호](xref:security/data-protection/introduction)를 사용 하 여 보호 됩니다. 브라우저의 개발자 콘솔에서 `sessionStorage['count']`를 평가 하는 경우 암호화 된 데이터를 볼 수 있습니다.
 
 사용자가 나중에 `Counter` 구성 요소로 반환 하는 경우 `currentCount` 데이터를 복구 하려면 (완전히 새로운 회로를 사용 하는 경우 포함) `ProtectedSessionStore.GetAsync`를 사용 합니다.
 
@@ -205,7 +207,7 @@ protected override async Task OnInitializedAsync()
 
 브라우저 저장소는 비동기 (네트워크 연결을 통해 액세스 됨) 이기 때문에 데이터를 로드 하 고 구성 요소에서 사용할 수 있을 때까지 항상 기간이 있습니다. 최상의 결과를 위해 빈 데이터 나 기본 데이터를 표시 하는 대신 로드가 진행 되는 동안 로드 상태 메시지를 렌더링 합니다.
 
-한 가지 방법은 데이터가 `null` (로드 중) 인지 여부를 추적 하는 것입니다. 기본 `Counter` 구성 요소에서 카운트는 `int`에 저장 됩니다. 형식 (`int`)에 물음표 (`?`)를 추가 하 여 @no__t 0을 허용 하도록 설정 합니다.
+한 가지 방법은 데이터가 `null` (로드 중) 인지 여부를 추적 하는 것입니다. 기본 `Counter` 구성 요소에서 카운트는 `int`에 저장 됩니다. 형식 (`int`)에 물음표 (`?`)를 추가 하 여 `currentCount` nullable로 설정 합니다.
 
 ```csharp
 private int? currentCount;
@@ -239,7 +241,7 @@ else
 
 오류를 해결 하는 한 가지 방법은 사전 렌더링을 사용 하지 않도록 설정 하는 것입니다. 일반적으로 앱이 브라우저 기반 저장소를 많이 사용 하는 경우이 옵션을 선택 하는 것이 좋습니다. 응용 프로그램은 `localStorage` 또는 `sessionStorage`을 사용할 수 있을 때까지 유용한 콘텐츠를 미리 만들 수 없기 때문에 응용 프로그램에서 복잡성을 더하고 앱을 활용 하지 않습니다.
 
-렌더링을 사용 하지 않도록 설정 하려면 *Pages/_Host* 파일을 열고 `Html.RenderComponentAsync<App>(RenderMode.Server)`로 호출을 변경 합니다.
+렌더링을 사용 하지 않도록 설정 하려면 *Pages/_Host cshtml* 파일을 열고 `Html.RenderComponentAsync<App>(RenderMode.Server)`호출을 변경 합니다.
 
 비 렌더링은 `localStorage` 또는 `sessionStorage`을 사용 하지 않는 다른 페이지에 유용할 수 있습니다. 렌더링을 사용 하도록 설정 된 상태로 유지 하려면 브라우저가 회로에 연결 될 때까지 로드 작업을 지연 시킵니다. 카운터 값을 저장 하는 예제는 다음과 같습니다.
 
@@ -282,7 +284,7 @@ else
 
 많은 구성 요소가 브라우저 기반 저장소를 사용 하는 경우 상태 공급자 코드를 여러 번 다시 구현 하면 코드 중복이 생성 됩니다. 코드 중복을 방지 하는 한 가지 옵션은 상태 공급자 논리를 캡슐화 하는 *상태 제공자 부모 구성 요소* 를 만드는 것입니다. 자식 구성 요소는 상태 지 속성 메커니즘에 관계 없이 지속형 데이터를 사용할 수 있습니다.
 
-@No__t-0 구성 요소의 다음 예제에서는 카운터 데이터가 유지 됩니다.
+다음 `CounterStateProvider` 구성 요소 예제에서는 카운터 데이터가 유지 됩니다.
 
 ```cshtml
 @using Microsoft.AspNetCore.ProtectedBrowserStorage
@@ -320,9 +322,9 @@ else
 }
 ```
 
-@No__t-0 구성 요소는 로드가 완료 될 때까지 자식 콘텐츠를 렌더링 하지 않고 로드 단계를 처리 합니다.
+`CounterStateProvider` 구성 요소는 로드가 완료 될 때까지 자식 콘텐츠를 렌더링 하지 않고 로드 단계를 처리 합니다.
 
-@No__t-0 구성 요소를 사용 하려면 카운터 상태에 액세스 해야 하는 다른 구성 요소 주위에 구성 요소의 인스턴스를 래핑합니다. 앱의 모든 구성 요소에서 상태를 액세스할 수 있도록 하려면 `App` 구성 요소 (*응용 프로그램 razor*)의 `Router` 주위에 `CounterStateProvider` 구성 요소를 래핑합니다.
+`CounterStateProvider` 구성 요소를 사용 하려면 카운터 상태에 액세스 해야 하는 다른 구성 요소 주위에 구성 요소의 인스턴스를 래핑합니다. 앱의 모든 구성 요소에서 상태를 액세스할 수 있도록 하려면 `App` 구성 요소 (*응용 프로그램 razor*)의 `Router` 주위에 `CounterStateProvider` 구성 요소를 래핑합니다.
 
 ```cshtml
 <CounterStateProvider>

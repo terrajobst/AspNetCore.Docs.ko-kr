@@ -1,33 +1,35 @@
 ---
-title: 확장을 위해 ASP.NET Core SignalR 백플레인으로 redis
+title: Redis 백플레인 for ASP.NET Core SignalR 확장
 author: bradygaster
-description: Redis 백플레인 ASP.NET Core SignalR 앱에 대 한 확장을 사용 하도록 설정 하는 방법에 알아봅니다.
+description: Redis 후면판을 설정 하 여 ASP.NET Core SignalR 앱에 대 한 확장을 사용 하도록 설정 하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 11/28/2018
+ms.date: 11/12/2019
+no-loc:
+- SignalR
 uid: signalr/redis-backplane
-ms.openlocfilehash: adf9bbce1353fd811a4044e173533f76bc4193de
-ms.sourcegitcommit: 4ef0362ef8b6e5426fc5af18f22734158fe587e1
+ms.openlocfilehash: 379d46fcaabb8eb0d04e521a5ad698229f947b7c
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67152921"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73963913"
 ---
-# <a name="set-up-a-redis-backplane-for-aspnet-core-signalr-scale-out"></a>ASP.NET Core SignalR 확장에 대 한를 Redis 백플레인으로 설정
+# <a name="set-up-a-redis-backplane-for-aspnet-core-opno-locsignalr-scale-out"></a>ASP.NET Core SignalR 스케일 아웃에 대 한 Redis 후면판 설정
 
-하 여 [Andrew Stanton-nurse](https://twitter.com/anurse)하십시오 [Brady Gaster](https://twitter.com/bradygaster), 및 [Tom Dykstra](https://github.com/tdykstra),
+[Andrew Stanton-간호사](https://twitter.com/anurse), [Brady Gaster](https://twitter.com/bradygaster)및 [Tom Dykstra](https://github.com/tdykstra)
 
-이 문서에서는 설정의 SignalR 특정 측면을 설명 된 [Redis](https://redis.io/) 는 ASP.NET Core SignalR 앱 크기 조정에 사용할 서버를 합니다.
+이 문서에서는 ASP.NET Core SignalR 앱을 확장 하는 데 사용할 [Redis](https://redis.io/) 서버를 설정 하는 SignalR관련 사항을 설명 합니다.
 
-## <a name="set-up-a-redis-backplane"></a>Redis 백플레인 설정
+## <a name="set-up-a-redis-backplane"></a>Redis 후면판 설정
 
 * Redis 서버를 배포 합니다.
 
   > [!IMPORTANT] 
-  > 프로덕션 사용에 대 한 Redis 백플레인 SignalR 앱과 동일한 데이터 센터에서 실행 하는 경우에이 좋습니다. 그렇지 않은 경우 네트워크 대기 시간 성능 저하 됩니다. SignalR 앱은 Azure 클라우드에서 실행 중인 경우 Azure SignalR Service를 Redis 백플레인으로 대신 권장 합니다. Azure Redis Cache Service를 사용 하 여 개발 및 테스트 환경 수 있습니다.
+  > Redis 후면판은 프로덕션 사용을 위해 SignalR 앱과 동일한 데이터 센터에서 실행 되는 경우에만 권장 됩니다. 그렇지 않으면 네트워크 대기 시간이 성능을 저하 시킵니다. SignalR 앱이 Azure 클라우드에서 실행 되는 경우 Redis 후면판 대신 Azure SignalR 서비스를 권장 합니다. 개발 및 테스트 환경에 Azure Redis Cache 서비스를 사용할 수 있습니다.
 
-  자세한 내용은 다음 리소스를 참조하세요.
+  자세한 내용은 다음 자료를 참조하세요.
 
   * <xref:signalr/scale>
   * [Redis 설명서](https://redis.io/)
@@ -35,9 +37,9 @@ ms.locfileid: "67152921"
 
 ::: moniker range="= aspnetcore-2.1"
 
-* SignalR 앱을 설치 합니다 `Microsoft.AspNetCore.SignalR.Redis` NuGet 패키지. (또한는 `Microsoft.AspNetCore.SignalR.StackExchangeRedis` 패키지, 하지만 하나는 ASP.NET Core 2.2 이상용.)
+* SignalR 앱에서 `Microsoft.AspNetCore.SignalR.Redis` NuGet 패키지를 설치 합니다. `Microsoft.AspNetCore.SignalR.StackExchangeRedis` 패키지도 있지만 ASP.NET Core 2.2 이상에 대 한 것입니다.
 
-* 에 `Startup.ConfigureServices` 메서드를 호출 `AddRedis` 후 `AddSignalR`:
+* `Startup.ConfigureServices` 메서드에서 `AddSignalR`후에 `AddRedis`를 호출 합니다.
 
   ```csharp
   services.AddSignalR().AddRedis("<your_Redis_connection_string>");
@@ -45,9 +47,9 @@ ms.locfileid: "67152921"
 
 * 필요에 따라 옵션을 구성 합니다.
  
-  연결 문자열 또는 대부분의 옵션을 설정할 수 있습니다 합니다 [ConfigurationOptions](https://stackexchange.github.io/StackExchange.Redis/Configuration#configuration-options) 개체입니다. 에 지정 된 옵션 `ConfigurationOptions` 연결 문자열에 설정 하는 것을 재정의 합니다.
+  대부분의 옵션은 연결 문자열 또는 [Configurationoptions](https://stackexchange.github.io/StackExchange.Redis/Configuration#configuration-options) 개체에서 설정할 수 있습니다. `ConfigurationOptions`에 지정 된 옵션은 연결 문자열에 설정 된 옵션을 재정의 합니다.
 
-  다음 예제에서 옵션을 설정 하는 방법을 보여 줍니다는 `ConfigurationOptions` 개체입니다. 이 예제에서는 채널 접두사를 여러 앱에서 동일한 Redis 인스턴스를 공유할 수 있도록 다음 단계에 설명 된 대로
+  다음 예제에서는 `ConfigurationOptions` 개체에서 옵션을 설정 하는 방법을 보여 줍니다. 이 예제에서는 다음 단계에 설명 된 것 처럼 여러 앱이 동일한 Redis 인스턴스를 공유할 수 있도록 채널 접두사를 추가 합니다.
 
   ```csharp
   services.AddSignalR()
@@ -56,7 +58,7 @@ ms.locfileid: "67152921"
     });
   ```
 
-  위의 코드에서 `options.Configuration` 연결 문자열에 지정 된 항목으로 초기화 됩니다.
+  위의 코드에서 `options.Configuration`는 연결 문자열에 지정 된 항목을 사용 하 여 초기화 됩니다.
 
 ::: moniker-end
 
@@ -64,10 +66,10 @@ ms.locfileid: "67152921"
 
 * SignalR 앱에서 다음 NuGet 패키지 중 하나를 설치 합니다.
 
-  * `Microsoft.AspNetCore.SignalR.StackExchangeRedis` -StackExchange.Redis 2.x.x로 지정 되었지만에 따라 달라 집니다. ASP.NET Core 2.2 이상용 권장 되는 패키지입니다.
-  * `Microsoft.AspNetCore.SignalR.Redis` -StackExchange.Redis 1.X.X에 따라 달라 집니다. ASP.NET Core 3.0에서이 패키지를 발송 되지 됩니다.
+  * `Microsoft.AspNetCore.SignalR.StackExchangeRedis`-StackExchange 2. X.X.에 종속 됩니다. ASP.NET Core 2.2 이상에 권장 되는 패키지입니다.
+  * `Microsoft.AspNetCore.SignalR.Redis`-StackExchange 1. X.X.에 종속 됩니다. 이 패키지는 ASP.NET Core 3.0에 전달 되지 않습니다.
 
-* 에 `Startup.ConfigureServices` 메서드를 호출 `AddStackExchangeRedis` 후 `AddSignalR`:
+* `Startup.ConfigureServices` 메서드에서 `AddSignalR`후에 `AddStackExchangeRedis`를 호출 합니다.
 
   ```csharp
   services.AddSignalR().AddStackExchangeRedis("<your_Redis_connection_string>");
@@ -75,9 +77,9 @@ ms.locfileid: "67152921"
 
 * 필요에 따라 옵션을 구성 합니다.
  
-  연결 문자열 또는 대부분의 옵션을 설정할 수 있습니다 합니다 [ConfigurationOptions](https://stackexchange.github.io/StackExchange.Redis/Configuration#configuration-options) 개체입니다. 에 지정 된 옵션 `ConfigurationOptions` 연결 문자열에 설정 하는 것을 재정의 합니다.
+  대부분의 옵션은 연결 문자열 또는 [Configurationoptions](https://stackexchange.github.io/StackExchange.Redis/Configuration#configuration-options) 개체에서 설정할 수 있습니다. `ConfigurationOptions`에 지정 된 옵션은 연결 문자열에 설정 된 옵션을 재정의 합니다.
 
-  다음 예제에서 옵션을 설정 하는 방법을 보여 줍니다는 `ConfigurationOptions` 개체입니다. 이 예제에서는 채널 접두사를 여러 앱에서 동일한 Redis 인스턴스를 공유할 수 있도록 다음 단계에 설명 된 대로
+  다음 예제에서는 `ConfigurationOptions` 개체에서 옵션을 설정 하는 방법을 보여 줍니다. 이 예제에서는 다음 단계에 설명 된 것 처럼 여러 앱이 동일한 Redis 인스턴스를 공유할 수 있도록 채널 접두사를 추가 합니다.
 
   ```csharp
   services.AddSignalR()
@@ -86,17 +88,17 @@ ms.locfileid: "67152921"
     });
   ```
 
-  위의 코드에서 `options.Configuration` 연결 문자열에 지정 된 항목으로 초기화 됩니다.
+  위의 코드에서 `options.Configuration`는 연결 문자열에 지정 된 항목을 사용 하 여 초기화 됩니다.
 
-  Redis 옵션에 대 한 자세한 내용은 참조는 [StackExchange Redis 설명서](https://stackexchange.github.io/StackExchange.Redis/Configuration.html)합니다.
+  Redis 옵션에 대 한 자세한 내용은 [Stackexchange Redis 설명서](https://stackexchange.github.io/StackExchange.Redis/Configuration.html)를 참조 하세요.
 
 ::: moniker-end
 
-* Redis 서버 하나를 여러 SignalR 앱에 대 한 사용 하는 경우 각 SignalR 앱에 대 한 다양 한 채널 접두사를 사용 합니다.
+* 여러 SignalR 앱에 대해 하나의 Redis 서버를 사용 하는 경우 각 SignalR 앱에 대해 다른 채널 접두사를 사용 합니다.
 
-  다른 채널 접두사를 사용 하는 다른 사용자 로부터 하나의 SignalR 앱을 격리 채널 접두사를 설정 합니다. 서로 다른 접두사를 할당 하지 않으면, 모든 자체 클라이언트로 하나의 앱에서 보낸 메시지를 백플레인으로 Redis 서버를 사용 하는 모든 앱의 모든 클라이언트에 전환 됩니다.
+  채널 접두사를 설정 하면 다른 채널 접두사를 사용 하는 다른 SignalR 앱에서 하나의 앱을 격리 합니다. 서로 다른 접두사를 할당 하지 않으면 한 앱에서 모든 자체 클라이언트로 전송 되는 메시지는 Redis 서버를 후면판으로 사용 하는 모든 앱의 모든 클라이언트로 이동 합니다.
 
-* 서버 팜 부하 분산 고정 세션에 대 한 소프트웨어를 구성 합니다. 그렇게 하는 방법에 대 한 설명서의 몇 가지 예는 다음과 같습니다.
+* 고정 세션에 대해 서버 팜 부하 분산 소프트웨어를 구성 합니다. 이 작업을 수행 하는 방법에 대 한 설명서의 몇 가지 예는 다음과 같습니다.
 
   * [IIS](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing)
   * [HAProxy](https://www.haproxy.com/blog/load-balancing-affinity-persistence-sticky-sessions-what-you-need-to-know/)
@@ -105,15 +107,15 @@ ms.locfileid: "67152921"
 
 ## <a name="redis-server-errors"></a>Redis 서버 오류
 
-Redis 서버 다운 되 면 SignalR 메시지를 배달할 수 없습니다를 나타내는 예외를 throw 합니다. 몇 가지 일반적인 예외 메시지:
+Redis 서버 작동이 중단 되 면 메시지가 배달 되지 않음을 나타내는 예외를 throw SignalR. 몇 가지 일반적인 예외 메시지:
 
-* *실패 한 쓰기 메시지*
-* *'MethodName' 허브 메서드를 호출 하지 못했습니다.*
+* *메시지를 쓰지 못했습니다.*
+* *' MethodName ' 허브 메서드를 호출 하지 못했습니다.*
 * *Redis에 연결 하지 못했습니다.*
 
-SignalR은 서버가 다시 작동 하는 경우 보낼 메시지를 버퍼링 하지 않습니다. Redis 서버가 다운 된 동안 전송 된 모든 메시지는 손실 됩니다.
+SignalR는 서버를 백업할 때 메시지를 전송 하도록 버퍼링 하지 않습니다. Redis 서버를 종료 하는 동안 전송 된 모든 메시지는 손실 됩니다.
 
-SignalR에는 Redis 서버를 다시 사용할 때 자동으로 다시 연결 합니다.
+Redis 서버를 다시 사용할 수 있게 되 면 SignalR 자동으로 다시 연결 됩니다.
 
 ### <a name="custom-behavior-for-connection-failures"></a>연결 실패에 대 한 사용자 지정 동작
 
@@ -186,11 +188,11 @@ services.AddSignalR()
 
 ## <a name="redis-clustering"></a>Redis 클러스터링
 
-[Redis 클러스터링](https://redis.io/topics/cluster-spec) 여러 Redis 서버를 사용 하 여 고가용성을 달성 하기 위한 메서드입니다. 공식적으로 지원 되지 않으면 클러스터링 하지만 작동 될 수 있습니다.
+[Redis 클러스터링](https://redis.io/topics/cluster-spec) 은 여러 Redis 서버를 사용 하 여 고가용성을 달성 하는 방법입니다. 클러스터링은 공식적으로 지원 되지 않지만 작동할 수 있습니다.
 
 ## <a name="next-steps"></a>다음 단계
 
-자세한 내용은 다음 리소스를 참조하세요.
+자세한 내용은 다음 자료를 참조하세요.
 
 * <xref:signalr/scale>
 * [Redis 설명서](https://redis.io/documentation)

@@ -1,28 +1,30 @@
 ---
-title: ASP.NET Core Blazor에서 web API 호출
+title: ASP.NET Core Blazor에서 web API를 호출 합니다.
 author: guardrex
 description: CORS (크로스-원본 자원 공유) 요청 만들기를 포함 하 여 JSON 도우미를 사용 하 여 Blazor 앱에서 web API를 호출 하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/15/2019
+no-loc:
+- Blazor
 uid: blazor/call-web-api
-ms.openlocfilehash: b08fdf5c2f9a523314b1744a33087eb64fa4c14a
-ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
+ms.openlocfilehash: b5c57317005d0072410542bad322458b1cb3f5ee
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72390846"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73962721"
 ---
-# <a name="call-a-web-api-from-aspnet-core-blazor"></a>ASP.NET Core Blazor에서 web API 호출
+# <a name="call-a-web-api-from-aspnet-core-opno-locblazor"></a>ASP.NET Core Blazor에서 web API를 호출 합니다.
 
 By [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27)및 [Juan De la Cruz](https://github.com/juandelacruz23)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Blazor Weasembomapps는 미리 구성 된 `HttpClient` 서비스를 사용 하 여 web Api를 호출 합니다. Blazor JSON 도우미를 사용 하거나 <xref:System.Net.Http.HttpRequestMessage>을 사용 하 여 JavaScript [FETCH API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 옵션을 포함할 수 있는 요청을 작성 합니다.
+Blazor Weasembomapps는 미리 구성 된 `HttpClient` 서비스를 사용 하 여 web Api를 호출 합니다. Blazor JSON 도우미 또는 <xref:System.Net.Http.HttpRequestMessage>를 사용 하 여 JavaScript [FETCH API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 옵션을 포함할 수 있는 요청을 작성 합니다.
 
-Blazor 서버 앱은 일반적으로 <xref:System.Net.Http.IHttpClientFactory>을 사용 하 여 만든 <xref:System.Net.Http.HttpClient> 인스턴스를 사용 하 여 web Api를 호출 합니다. 자세한 내용은 <xref:fundamentals/http-requests>을 참조하십시오.
+Blazor Server apps는 일반적으로 <xref:System.Net.Http.IHttpClientFactory>를 사용 하 여 만든 <xref:System.Net.Http.HttpClient> 인스턴스를 사용 하 여 web Api를 호출 합니다 자세한 내용은 <xref:fundamentals/http-requests>를 참조하세요.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
@@ -33,9 +35,9 @@ Blazor Weasemboma 예제는 샘플 앱에서 다음 구성 요소를 참조 하�
 
 ## <a name="httpclient-and-json-helpers"></a>HttpClient 및 JSON 도우미
 
-Blazor Weasembomapps에서 [Httpclient](xref:fundamentals/http-requests) 는 다시 원본 서버로 요청을 만들기 위해 미리 구성 된 서비스로 사용할 수 있습니다. @No__t-0 JSON 도우미를 사용 하려면 `Microsoft.AspNetCore.Blazor.HttpClient`에 대 한 패키지 참조를 추가 합니다. `HttpClient` 및 JSON 도우미는 타사 웹 API 끝점을 호출 하는 데에도 사용 됩니다. `HttpClient`은 브라우저 [인출 API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 를 사용 하 여 구현 되며 동일한 원본 정책의 적용을 포함 하 여 해당 제한 사항이 적용 됩니다.
+Blazor Weasembomapps에서 [Httpclient](xref:fundamentals/http-requests) 는 다시 원본 서버로 요청을 만들기 위해 미리 구성 된 서비스로 사용할 수 있습니다. `HttpClient` JSON 도우미를 사용 하려면 `Microsoft.AspNetCore.Blazor.HttpClient`에 대 한 패키지 참조를 추가 합니다. `HttpClient` 및 JSON 도우미는 타사 웹 API 끝점을 호출 하는 데에도 사용 됩니다. `HttpClient`은 브라우저 [인출 API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 를 사용 하 여 구현 되며 동일한 원본 정책의 적용을 포함 하 여 해당 제한 사항이 적용 됩니다.
 
-클라이언트의 기본 주소가 원래 서버의 주소로 설정 됩니다. @No__t-1 지시어를 사용 하 여 `HttpClient` 인스턴스를 삽입 합니다.
+클라이언트의 기본 주소가 원래 서버의 주소로 설정 됩니다. `@inject` 지시어를 사용 하 여 `HttpClient` 인스턴스를 삽입 합니다.
 
 ```cshtml
 @using System.Net.Http
@@ -61,7 +63,7 @@ JSON 도우미 메서드는 URI (다음 예제의 웹 API)에 요청을 보내�
 
 * `GetJsonAsync` &ndash;은 HTTP GET 요청을 보내고 JSON 응답 본문을 구문 분석 하 여 개체를 만듭니다.
 
-  다음 코드에서 `_todoItems`은 구성 요소에 의해 표시 됩니다. @No__t-0 메서드는 구성 요소의 렌더링 ([Oninitializedasync](xref:blazor/components#lifecycle-methods))이 완료 될 때 트리거됩니다. 전체 예제는 샘플 앱을 참조 하세요.
+  다음 코드에서 `_todoItems`는 구성 요소에 의해 표시 됩니다. `GetTodoItems` 메서드는 구성 요소의 렌더링 ([Oninitializedasync](xref:blazor/components#lifecycle-methods))이 완료 될 때 트리거됩니다. 전체 예제는 샘플 앱을 참조 하세요.
 
   ```cshtml
   @using System.Net.Http
@@ -77,7 +79,7 @@ JSON 도우미 메서드는 URI (다음 예제의 웹 API)에 요청을 보내�
 
 * `PostJsonAsync` &ndash;은 JSON으로 인코딩된 콘텐츠를 포함 하 여 HTTP POST 요청을 보내고 JSON 응답 본문을 구문 분석 하 여 개체를 만듭니다.
 
-  다음 코드에서 `_newItemName`은 구성 요소의 바인딩된 요소에 의해 제공 됩니다. @No__t-0 메서드는 `<button>` 요소를 선택 하 여 트리거됩니다. 전체 예제는 샘플 앱을 참조 하세요.
+  다음 코드에서 `_newItemName`는 구성 요소의 바인딩된 요소에 의해 제공 됩니다. `AddItem` 메서드는 `<button>` 요소를 선택 하 여 트리거됩니다. 전체 예제는 샘플 앱을 참조 하세요.
 
   ```cshtml
   @using System.Net.Http
@@ -99,7 +101,7 @@ JSON 도우미 메서드는 URI (다음 예제의 웹 API)에 요청을 보내�
 
 * `PutJsonAsync` &ndash;은 JSON으로 인코딩된 콘텐츠를 포함 하 여 HTTP PUT 요청을 보냅니다.
 
-  다음 코드에서 `Name` 및 `IsCompleted`에 대 한 `_editItem` 값은 구성 요소의 바인딩된 요소에서 제공 됩니다. 항목의 `Id`은 UI의 다른 부분에서 항목을 선택 하 고 `EditItem`을 호출할 때 설정 됩니다. @No__t-0 메서드는 Save `<button>` 요소를 선택 하 여 트리거됩니다. 전체 예제는 샘플 앱을 참조 하세요.
+  다음 코드에서 `Name` 및 `IsCompleted`에 대 한 `_editItem` 값은 구성 요소의 바인딩된 요소에 의해 제공 됩니다. 항목의 `Id`은 UI의 다른 부분에서 항목을 선택 하 고 `EditItem`을 호출할 때 설정 됩니다. `SaveItem` 메서드는 Save `<button>` 요소를 선택 하 여 트리거됩니다. 전체 예제는 샘플 앱을 참조 하세요.
 
   ```cshtml
   @using System.Net.Http
@@ -153,7 +155,7 @@ JSON 도우미 메서드는 URI (다음 예제의 웹 API)에 요청을 보내�
 
 ## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>Fetch API 요청 옵션이 포함 된 HttpClient 및 HttpRequestMessage
 
-Blazor weambmbomemboma에서 실행 되는 경우 [Httpclient](xref:fundamentals/http-requests) 를 사용 하 고-1을 @no__t 하 여 요청을 사용자 지정 합니다. 예를 들어 요청 URI, HTTP 메서드 및 원하는 요청 헤더를 지정할 수 있습니다.
+Weasembmbomapp에서 Blazor 하 여 실행 하는 경우 [Httpclient](xref:fundamentals/http-requests) 및 <xref:System.Net.Http.HttpRequestMessage>를 사용 하 여 요청을 사용자 지정 합니다. 예를 들어 요청 URI, HTTP 메서드 및 원하는 요청 헤더를 지정할 수 있습니다.
 
 요청에 대 한 `WebAssemblyHttpMessageHandler.FetchArgs` 속성을 사용 하 여 기본 JavaScript [FETCH API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 에 요청 옵션을 제공 합니다. 다음 예제와 같이 `credentials` 속성은 다음 값 중 하나로 설정 됩니다.
 
@@ -208,7 +210,7 @@ CORS 요청에서 자격 증명 (권한 부여 쿠키/헤더)을 보낼 때 `Aut
 
 * 요청 원본 (`http://localhost:5000`, `https://localhost:5001`).
 * 모든 메서드 (verb).
-* `Content-Type` 및 `Authorization` 머리글입니다. 사용자 지정 헤더 (예: `x-custom-header`)를 허용 하려면-1 @no__t를 호출할 때 헤더를 나열 합니다.
+* `Content-Type` 및 `Authorization` 머리글입니다. 사용자 지정 헤더 (예: `x-custom-header`)를 허용 하려면 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>를 호출할 때 헤더를 나열 합니다.
 * 클라이언트 쪽 JavaScript 코드에 의해 설정 된 자격 증명입니다 (`credentials` 속성이 `include`로 설정).
 
 ```csharp

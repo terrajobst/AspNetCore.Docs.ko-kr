@@ -4,28 +4,30 @@ author: jamesnk
 description: 클라이언트 팩터리를 사용 하 여 gRPC 클라이언트를 만드는 방법에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 08/21/2019
+ms.date: 11/12/2019
+no-loc:
+- SignalR
 uid: grpc/clientfactory
-ms.openlocfilehash: 5d719893e96ae017e2de0ee1744003d2d67a49c9
-ms.sourcegitcommit: f65d8765e4b7c894481db9b37aa6969abc625a48
+ms.openlocfilehash: 3042bb61367f8b9a9f3142217ad329270ab2cca5
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/06/2019
-ms.locfileid: "70773673"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73963677"
 ---
 # <a name="grpc-client-factory-integration-in-net-core"></a>.NET Core에서 gRPC 클라이언트 팩터리 통합
 
-grpc 통합 `HttpClientFactory` 은 grpc 클라이언트를 중앙 집중식으로 만드는 방법을 제공 합니다. [독립 실행형 gRPC 클라이언트 인스턴스를 구성](xref:grpc/client)하는 대신 사용할 수 있습니다. 공장 통합은 [Grpc .net. ClientFactory](https://www.nuget.org/packages/Grpc.Net.ClientFactory) NuGet 패키지에서 사용할 수 있습니다.
+`HttpClientFactory`와 gRPC 통합은 gRPC 클라이언트를 중앙 집중식으로 만드는 방법을 제공 합니다. [독립 실행형 gRPC 클라이언트 인스턴스를 구성](xref:grpc/client)하는 대신 사용할 수 있습니다. 공장 통합은 [Grpc .net. ClientFactory](https://www.nuget.org/packages/Grpc.Net.ClientFactory) NuGet 패키지에서 사용할 수 있습니다.
 
 팩터리는 다음과 같은 이점을 제공 합니다.
 
 * 논리적 gRPC 클라이언트 인스턴스를 구성 하기 위한 중앙 위치를 제공 합니다.
-* 기본의 수명을 관리 합니다.`HttpClientMessageHandler`
+* 기본 `HttpClientMessageHandler`의 수명을 관리 합니다.
 * ASP.NET Core gRPC 서비스에서 최종 기한 및 취소 자동 전파
 
 ## <a name="register-grpc-clients"></a>GRPC 클라이언트 등록
 
-Grpc 클라이언트를 등록 하려면 내에서 `AddGrpcClient` `Startup.ConfigureServices`grpc 형식의 클라이언트 클래스 및 서비스 주소를 지정 하 여 제네릭 확장 메서드를 사용할 수 있습니다.
+GRPC 클라이언트를 등록 하기 위해 `Startup.ConfigureServices`내에서 일반 `AddGrpcClient` 확장 메서드를 사용 하 여 gRPC 형식의 클라이언트 클래스 및 서비스 주소를 지정할 수 있습니다.
 
 ```csharp
 services.AddGrpcClient<Greeter.GreeterClient>(o =>
@@ -34,7 +36,7 @@ services.AddGrpcClient<Greeter.GreeterClient>(o =>
 });
 ```
 
-GRPC 클라이언트 형식은 DI (종속성 주입)를 사용 하 여 일시적으로 등록 됩니다. 이제 DI를 사용 하 여 만든 형식에서 클라이언트를 직접 삽입 하 고 사용할 수 있습니다. ASP.NET Core MVC 컨트롤러, SignalR hubs 및 gRPC 서비스는 gRPC 클라이언트가 자동으로 삽입 될 수 있는 위치입니다.
+GRPC 클라이언트 형식은 DI (종속성 주입)를 사용 하 여 일시적으로 등록 됩니다. 이제 DI를 사용 하 여 만든 형식에서 클라이언트를 직접 삽입 하 고 사용할 수 있습니다. ASP.NET Core MVC 컨트롤러, SignalR 허브 및 gRPC 서비스는 gRPC 클라이언트가 자동으로 삽입 될 수 있는 위치입니다.
 
 ```csharp
 public class AggregatorService : Aggregator.AggregatorBase
@@ -63,7 +65,7 @@ public class AggregatorService : Aggregator.AggregatorBase
 
 ## <a name="configure-httpclient"></a>HttpClient 구성
 
-`HttpClientFactory`grpc `HttpClient` 클라이언트에서 사용 하는를 만듭니다. 표준 `HttpClientFactory` 메서드는 나가는 요청 미들웨어를 추가 하거나의 `HttpClient`기본 `HttpClientHandler` 를 구성 하는 데 사용할 수 있습니다.
+`HttpClientFactory` gRPC 클라이언트에서 사용 하는 `HttpClient`을 만듭니다. 표준 `HttpClientFactory` 메서드는 나가는 요청 미들웨어를 추가 하거나 `HttpClient`의 기본 `HttpClientHandler`를 구성 하는 데 사용할 수 있습니다.
 
 ```csharp
 services
@@ -86,7 +88,7 @@ services
 gRPC 관련 메서드는 다음에 사용할 수 있습니다.
 
 * GRPC 클라이언트의 기본 채널을 구성 합니다.
-* 클라이언트 `Interceptor` 에서 grpc 호출을 만들 때 사용할 인스턴스를 추가 합니다.
+* 클라이언트에서 gRPC 호출을 만들 때 사용할 `Interceptor` 인스턴스를 추가 합니다.
 
 ```csharp
 services
@@ -103,7 +105,7 @@ services
 
 ## <a name="deadline-and-cancellation-propagation"></a>최종 기한 및 취소 전파
 
-grpc 서비스의 팩터리에서 만든 grpc 클라이언트는 최종 기한 및 취소 토큰을 `EnableCallContextPropagation()` 자식 호출에 자동으로 전파 하도록를 사용 하 여 구성할 수 있습니다. `EnableCallContextPropagation()` 확장 메서드는 [Grpc.AspNetCore.Server.ClientFactory](https://www.nuget.org/packages/Grpc.AspNetCore.Server.ClientFactory) NuGet 패키지에서 사용할 수 있습니다.
+gRPC 서비스의 팩터리에서 만든 gRPC 클라이언트는 최종 기한 및 취소 토큰을 자식 호출에 자동으로 전파 하도록 `EnableCallContextPropagation()`를 사용 하 여 구성할 수 있습니다. `EnableCallContextPropagation()` 확장 메서드는 [Grpc.AspNetCore.Server.ClientFactory](https://www.nuget.org/packages/Grpc.AspNetCore.Server.ClientFactory) NuGet 패키지에서 사용할 수 있습니다.
 
 호출 컨텍스트 전파는 현재 gRPC 요청 컨텍스트에서 최종 기한 및 취소 토큰을 읽고 gRPC 클라이언트에서 수행 하는 나가는 호출에 자동으로 전파 하는 방식으로 작동 합니다. 호출 컨텍스트 전파는 복잡 한 중첩 된 gRPC 시나리오에서 항상 최종 기한 및 취소를 전파 하는 좋은 방법입니다.
 
