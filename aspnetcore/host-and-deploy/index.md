@@ -5,14 +5,14 @@ description: 호스팅 환경을 설정하고 ASP.NET Core 앱을 배포하는 �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/12/2019
+ms.date: 11/07/2019
 uid: host-and-deploy/index
-ms.openlocfilehash: 068c5f357b8010d78493a78a10c353e3317f3867
-ms.sourcegitcommit: b4ef2b00f3e1eb287138f8b43c811cb35a100d3e
+ms.openlocfilehash: aa6e3da5f40211535037c671de913ab3219f063a
+ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/21/2019
-ms.locfileid: "65969893"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73799330"
 ---
 # <a name="host-and-deploy-aspnet-core"></a>ASP.NET Core 호스트 및 배포
 
@@ -68,6 +68,10 @@ Visual Studio를 사용하여 Azure에 앱을 게시하는 방법은 <xref:tutor
 ## <a name="publish-with-msdeploy-on-windows"></a>Windows에서 MSDeploy를 사용하여 게시
 
 [dotnet msbuild](/dotnet/core/tools/dotnet-msbuild) 명령을 사용하여 Windows 명령 프롬프트에서 수행하는 방법을 비롯하여 Visual Studio 게시 프로필을 사용하여 앱을 게시하는 방법에 대한 지침은 <xref:host-and-deploy/visual-studio-publish-profiles>를 참조하세요.
+
+## <a name="internet-information-services-iis"></a>IIS(인터넷 정보 서비스)
+
+*web.config* 파일에 제공된 구성을 사용하여 IIS(인터넷 정보 서비스)에 배포하는 경우 <xref:host-and-deploy/iis/index>의 문서를 참조하세요.
 
 ## <a name="host-in-a-web-farm"></a>웹 팜에서 호스트
 

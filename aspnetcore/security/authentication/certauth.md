@@ -4,14 +4,14 @@ author: blowdart
 description: IIS 및 HTTP.SYS 용 ASP.NET Core에서 인증서 인증을 구성 하는 방법에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
-ms.date: 11/05/2019
+ms.date: 11/07/2019
 uid: security/authentication/certauth
-ms.openlocfilehash: 081935e6e6248b5fe9b7bf4cd966dc73761d2ec1
-ms.sourcegitcommit: 897d4abff58505dae86b2947c5fe3d1b80d927f3
+ms.openlocfilehash: 0062bc0d7688ebcc67f8240da7166d89493f6639
+ms.sourcegitcommit: 4818385c3cfe0805e15138a2c1785b62deeaab90
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73634049"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73897029"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core에서 인증서 인증 구성
 
@@ -36,7 +36,7 @@ HTTPS 인증서를 획득 하 고 적용 하며 인증서를 요구 하도록 [�
 
 인증이 실패 하는 경우이 처리기는 `401 (Unauthorized)``403 (Forbidden)` 응답을 반환 합니다. 초기 TLS 연결 중에 인증이 수행 되어야 한다는 것을 의미 합니다. 처리기에 도달할 때까지 너무 늦습니다. 익명 연결에서 인증서를 사용 하는 연결로의 연결을 업그레이드할 수 있는 방법은 없습니다.
 
-또한 `Startup.Configure` 메서드에 `app.UseAuthentication();`를 추가 합니다. 그렇지 않으면 HttpContext는 인증서에서 만든 `ClaimsPrincipal` 설정 되지 않습니다. 예를 들면,
+또한 `Startup.Configure` 메서드에 `app.UseAuthentication();`를 추가 합니다. 그렇지 않으면 `HttpContext.User` 인증서에서 만든 `ClaimsPrincipal`로 설정 되지 않습니다. 예를 들어 다음과 같은 가치를 제공해야 합니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -186,7 +186,6 @@ services.AddAuthentication(
 *Program.cs*에서 다음과 같이 Kestrel을 구성 합니다.
 
 ```csharp
-
 public static void Main(string[] args)
 {
     CreateHostBuilder(args).Build().Run();
@@ -219,3 +218,268 @@ IIS 관리자에서 다음 단계를 완료 합니다.
 ### <a name="azure-and-custom-web-proxies"></a>Azure 및 사용자 지정 웹 프록시
 
 인증서 전달 미들웨어를 구성 하는 방법은 [호스트 및 배포 설명서](xref:host-and-deploy/proxy-load-balancer#certificate-forwarding) 를 참조 하세요.
+
+### <a name="use-certificate-authentication-in-azure-web-apps"></a>Azure Web Apps에서 인증서 인증 사용
+
+`AddCertificateForwarding` 메서드는 다음을 지정 하는 데 사용 됩니다.
+
+* 클라이언트 헤더 이름입니다.
+* `HeaderConverter` 속성을 사용 하 여 인증서를 로드 하는 방법입니다.
+
+Azure Web Apps에서 인증서는 `X-ARR-ClientCert`라는 사용자 지정 요청 헤더로 전달 됩니다. 이를 사용 하려면 `Startup.ConfigureServices`에서 인증서 전달을 구성 합니다.
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    // ...
+    
+    services.AddCertificateForwarding(options =>
+    {
+        options.CertificateHeader = "X-ARR-ClientCert";
+        options.HeaderConverter = (headerValue) =>
+        {
+            X509Certificate2 clientCertificate = null;
+            if(!string.IsNullOrWhiteSpace(headerValue))
+            {
+                byte[] bytes = StringToByteArray(headerValue);
+                clientCertificate = new X509Certificate2(bytes);
+            }
+
+            return clientCertificate;
+        };
+    });
+}
+
+private static byte[] StringToByteArray(string hex)
+{
+    int NumberChars = hex.Length;
+    byte[] bytes = new byte[NumberChars / 2];
+    for (int i = 0; i < NumberChars; i += 2)
+        bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+    return bytes;
+}
+```
+
+그러면 `Startup.Configure` 메서드가 미들웨어를 추가 합니다. `UseCertificateForwarding`는 `UseAuthentication`를 호출 하기 전에 호출 되며 `UseAuthorization`됩니다.
+
+```csharp
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    ...
+    
+    app.UseRouting();
+
+    app.UseCertificateForwarding();
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllers();
+    });
+}
+```
+
+별도의 클래스를 사용 하 여 유효성 검사 논리를 구현할 수 있습니다. 이 예제에서는 동일한 자체 서명 된 인증서를 사용 하기 때문에 인증서만 사용할 수 있는지 확인 합니다. 클라이언트 인증서와 서버 인증서의 지문이 일치 하는지 확인 합니다. 그렇지 않으면 인증서를 사용할 수 있으며 인증 하는 데 충분 합니다. 이는 `AddCertificate` 메서드 내에서 사용 됩니다. 중간 또는 자식 인증서를 사용 하는 경우 여기에서 주체 또는 발급자의 유효성을 검사할 수도 있습니다.
+
+```csharp
+using System.IO;
+using System.Security.Cryptography.X509Certificates;
+
+namespace AspNetCoreCertificateAuthApi
+{
+    public class MyCertificateValidationService
+    {
+        public bool ValidateCertificate(X509Certificate2 clientCertificate)
+        {
+            // Do not hardcode passwords in production code, use thumbprint or key vault
+            var cert = new X509Certificate2(Path.Combine("sts_dev_cert.pfx"), "1234");
+            if (clientCertificate.Thumbprint == cert.Thumbprint)
+            {
+                return true;
+            }
+
+            return false;
+        }
+    }
+}
+```
+
+#### <a name="implement-an-httpclient-using-a-certificate"></a>인증서를 사용 하 여 HttpClient 구현
+
+웹 API 클라이언트는 `IHttpClientFactory` 인스턴스를 사용 하 여 만든 `HttpClient`를 사용 합니다. 이는 `HttpClient`에 대 한 처리기를 정의 하는 방법을 제공 하지 않으므로 `HttpRequestMessage`를 사용 하 여 `X-ARR-ClientCert` 요청 헤더에 인증서를 추가 합니다. 인증서는 `GetRawCertDataString` 메서드를 사용 하 여 문자열로 추가 됩니다. 
+
+```csharp
+private async Task<JsonDocument> GetApiDataAsync()
+{
+    try
+    {
+        // Do not hardcode passwords in production code, use thumbprint or key vault
+        var cert = new X509Certificate2(Path.Combine(_environment.ContentRootPath, "sts_dev_cert.pfx"), "1234");
+
+        var client = _clientFactory.CreateClient();
+
+        var request = new HttpRequestMessage()
+        {
+            RequestUri = new Uri("https://localhost:44379/api/values"),
+            Method = HttpMethod.Get,
+        };
+
+        request.Headers.Add("X-ARR-ClientCert", cert.GetRawCertDataString());
+        var response = await client.SendAsync(request);
+
+        if (response.IsSuccessStatusCode)
+        {
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var data = JsonDocument.Parse(responseContent);
+
+            return data;
+        }
+
+        throw new ApplicationException($"Status code: {response.StatusCode}, Error: {response.ReasonPhrase}");
+    }
+    catch (Exception e)
+    {
+        throw new ApplicationException($"Exception {e}");
+    }
+}
+```
+
+서버에 올바른 인증서를 보내면 데이터가 반환 됩니다. 인증서 나 잘못 된 인증서를 보낸 경우 HTTP 403 상태 코드가 반환 됩니다.
+
+### <a name="create-certificates-in-powershell"></a>PowerShell에서 인증서 만들기
+
+인증서 만들기는이 흐름을 설정 하는 가장 어려운 부분입니다. `New-SelfSignedCertificate` PowerShell cmdlet을 사용 하 여 루트 인증서를 만들 수 있습니다. 인증서를 만들 때 강력한 암호를 사용 합니다. 표시 된 대로 `KeyUsageProperty` 매개 변수 및 `KeyUsage` 매개 변수를 추가 하는 것이 중요 합니다.
+
+#### <a name="create-root-ca"></a>루트 CA 만들기
+
+```powershell
+New-SelfSignedCertificate -DnsName "root_ca_dev_damienbod.com", "root_ca_dev_damienbod.com" -CertStoreLocation "cert:\LocalMachine\My" -NotAfter (Get-Date).AddYears(20) -FriendlyName "root_ca_dev_damienbod.com" -KeyUsageProperty All -KeyUsage CertSign, CRLSign, DigitalSignature
+
+$mypwd = ConvertTo-SecureString -String "1234" -Force -AsPlainText
+
+Get-ChildItem -Path cert:\localMachine\my\"The thumbprint..." | Export-PfxCertificate -FilePath C:\git\root_ca_dev_damienbod.pfx -Password $mypwd
+
+Export-Certificate -Cert cert:\localMachine\my\"The thumbprint..." -FilePath root_ca_dev_damienbod.crt
+```
+
+#### <a name="install-in-the-trusted-root"></a>신뢰할 수 있는 루트에 설치
+
+호스트 시스템에서 루트 인증서를 신뢰할 수 있어야 합니다. 인증 기관에서 만들지 않은 루트 인증서는 기본적으로 신뢰할 수 없습니다. 다음 링크는 Windows에서이 작업을 수행 하는 방법을 설명 합니다.
+
+https://social.msdn.microsoft.com/Forums/SqlServer/5ed119ef-1704-4be4-8a4f-ef11de7c8f34/a-certificate-chain-processed-but-terminated-in-a-root-certificate-which-is-not-trusted-by-the
+
+#### <a name="intermediate-certificate"></a>중간 인증서
+
+이제 루트 인증서에서 중간 인증서를 만들 수 있습니다. 이는 모든 사용 사례에는 필요 하지 않지만 많은 인증서를 만들거나 인증서 그룹을 활성화 하거나 비활성화 해야 할 수도 있습니다. `TextExtension` 매개 변수는 인증서의 기본 제약 조건에서 경로 길이를 설정 하는 데 필요 합니다.
+
+그런 다음 Windows 호스트 시스템의 신뢰할 수 있는 중간 인증서에 중간 인증서를 추가할 수 있습니다.
+
+```powershell
+$mypwd = ConvertTo-SecureString -String "1234" -Force -AsPlainText
+
+$parentcert = ( Get-ChildItem -Path cert:\LocalMachine\My\"The thumbprint of the root..." )
+
+New-SelfSignedCertificate -certstorelocation cert:\localmachine\my -dnsname "intermediate_dev_damienbod.com" -Signer $parentcert -NotAfter (Get-Date).AddYears(20) -FriendlyName "intermediate_dev_damienbod.com" -KeyUsageProperty All -KeyUsage CertSign, CRLSign, DigitalSignature -TextExtension @("2.5.29.19={text}CA=1&pathlength=1")
+
+Get-ChildItem -Path cert:\localMachine\my\"The thumbprint..." | Export-PfxCertificate -FilePath C:\git\AspNetCoreCertificateAuth\Certs\intermediate_dev_damienbod.pfx -Password $mypwd
+
+Export-Certificate -Cert cert:\localMachine\my\"The thumbprint..." -FilePath intermediate_dev_damienbod.crt
+```
+
+#### <a name="create-child-certificate-from-intermediate-certificate"></a>중간 인증서에서 자식 인증서 만들기
+
+중간 인증서에서 자식 인증서를 만들 수 있습니다. 이 엔터티는 최종 엔터티 이며 더 이상 자식 인증서를 만들 필요가 없습니다.
+
+```powershell
+$parentcert = ( Get-ChildItem -Path cert:\LocalMachine\My\"The thumbprint from the Intermediate certificate..." )
+
+New-SelfSignedCertificate -certstorelocation cert:\localmachine\my -dnsname "child_a_dev_damienbod.com" -Signer $parentcert -NotAfter (Get-Date).AddYears(20) -FriendlyName "child_a_dev_damienbod.com"
+
+$mypwd = ConvertTo-SecureString -String "1234" -Force -AsPlainText
+
+Get-ChildItem -Path cert:\localMachine\my\"The thumbprint..." | Export-PfxCertificate -FilePath C:\git\AspNetCoreCertificateAuth\Certs\child_a_dev_damienbod.pfx -Password $mypwd
+
+Export-Certificate -Cert cert:\localMachine\my\"The thumbprint..." -FilePath child_a_dev_damienbod.crt
+```
+
+#### <a name="create-child-certificate-from-root-certificate"></a>루트 인증서에서 자식 인증서 만들기
+
+루트 인증서에서 직접 자식 인증서를 만들 수도 있습니다. 
+
+```powershell
+$rootcert = ( Get-ChildItem -Path cert:\LocalMachine\My\"The thumbprint from the root cert..." )
+
+New-SelfSignedCertificate -certstorelocation cert:\localmachine\my -dnsname "child_a_dev_damienbod.com" -Signer $rootcert -NotAfter (Get-Date).AddYears(20) -FriendlyName "child_a_dev_damienbod.com"
+
+$mypwd = ConvertTo-SecureString -String "1234" -Force -AsPlainText
+
+Get-ChildItem -Path cert:\localMachine\my\"The thumbprint..." | Export-PfxCertificate -FilePath C:\git\AspNetCoreCertificateAuth\Certs\child_a_dev_damienbod.pfx -Password $mypwd
+
+Export-Certificate -Cert cert:\localMachine\my\"The thumbprint..." -FilePath child_a_dev_damienbod.crt
+```
+
+#### <a name="example-root---intermediate-certificate---certificate"></a>예제 루트-중간 인증서-인증서
+
+```powershell
+$mypwdroot = ConvertTo-SecureString -String "1234" -Force -AsPlainText
+$mypwd = ConvertTo-SecureString -String "1234" -Force -AsPlainText
+
+New-SelfSignedCertificate -DnsName "root_ca_dev_damienbod.com", "root_ca_dev_damienbod.com" -CertStoreLocation "cert:\LocalMachine\My" -NotAfter (Get-Date).AddYears(20) -FriendlyName "root_ca_dev_damienbod.com" -KeyUsageProperty All -KeyUsage CertSign, CRLSign, DigitalSignature
+
+Get-ChildItem -Path cert:\localMachine\my\0C89639E4E2998A93E423F919B36D4009A0F9991 | Export-PfxCertificate -FilePath C:\git\root_ca_dev_damienbod.pfx -Password $mypwdroot
+
+Export-Certificate -Cert cert:\localMachine\my\0C89639E4E2998A93E423F919B36D4009A0F9991 -FilePath root_ca_dev_damienbod.crt
+
+$rootcert = ( Get-ChildItem -Path cert:\LocalMachine\My\0C89639E4E2998A93E423F919B36D4009A0F9991 )
+
+New-SelfSignedCertificate -certstorelocation cert:\localmachine\my -dnsname "child_a_dev_damienbod.com" -Signer $rootcert -NotAfter (Get-Date).AddYears(20) -FriendlyName "child_a_dev_damienbod.com" -KeyUsageProperty All -KeyUsage CertSign, CRLSign, DigitalSignature -TextExtension @("2.5.29.19={text}CA=1&pathlength=1")
+
+Get-ChildItem -Path cert:\localMachine\my\BA9BF91ED35538A01375EFC212A2F46104B33A44 | Export-PfxCertificate -FilePath C:\git\AspNetCoreCertificateAuth\Certs\child_a_dev_damienbod.pfx -Password $mypwd
+
+Export-Certificate -Cert cert:\localMachine\my\BA9BF91ED35538A01375EFC212A2F46104B33A44 -FilePath child_a_dev_damienbod.crt
+
+$parentcert = ( Get-ChildItem -Path cert:\LocalMachine\My\BA9BF91ED35538A01375EFC212A2F46104B33A44 )
+
+New-SelfSignedCertificate -certstorelocation cert:\localmachine\my -dnsname "child_b_from_a_dev_damienbod.com" -Signer $parentcert -NotAfter (Get-Date).AddYears(20) -FriendlyName "child_b_from_a_dev_damienbod.com" 
+
+Get-ChildItem -Path cert:\localMachine\my\141594A0AE38CBBECED7AF680F7945CD51D8F28A | Export-PfxCertificate -FilePath C:\git\AspNetCoreCertificateAuth\Certs\child_b_from_a_dev_damienbod.pfx -Password $mypwd
+
+Export-Certificate -Cert cert:\localMachine\my\141594A0AE38CBBECED7AF680F7945CD51D8F28A -FilePath child_b_from_a_dev_damienbod.crt
+```
+
+루트, 중간 또는 자식 인증서를 사용 하는 경우 필요에 따라 지문 또는 PublicKey를 사용 하 여 인증서의 유효성을 검사할 수 있습니다.
+
+```csharp
+using System.Collections.Generic;
+using System.IO;
+using System.Security.Cryptography.X509Certificates;
+
+namespace AspNetCoreCertificateAuthApi
+{
+    public class MyCertificateValidationService 
+    {
+        public bool ValidateCertificate(X509Certificate2 clientCertificate)
+        {
+            return CheckIfThumbprintIsValid(clientCertificate);
+        }
+
+        private bool CheckIfThumbprintIsValid(X509Certificate2 clientCertificate)
+        {
+            var listOfValidThumbprints = new List<string>
+            {
+                "141594A0AE38CBBECED7AF680F7945CD51D8F28A",
+                "0C89639E4E2998A93E423F919B36D4009A0F9991",
+                "BA9BF91ED35538A01375EFC212A2F46104B33A44"
+            };
+
+            if (listOfValidThumbprints.Contains(clientCertificate.Thumbprint))
+            {
+                return true;
+            }
+
+            return false;
+        }
+    }
+}
+```

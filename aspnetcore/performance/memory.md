@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/05/2019
 uid: performance/memory
-ms.openlocfilehash: 8f6b47ecde6f265bfb9437234b89f11f7d235869
-ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
+ms.openlocfilehash: 4c25c069aa2a6088c0549d786ecdd487ab7b9ea5
+ms.sourcegitcommit: 4818385c3cfe0805e15138a2c1785b62deeaab90
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73660009"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73896941"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core의 메모리 관리 및 GC (가비지 수집)
 
@@ -82,7 +82,7 @@ MemoryLeak를 실행 합니다. 할당 된 메모리는 GC가 발생할 때까�
 차트에는 메모리 사용량에 대 한 두 개의 값이 표시 됩니다.
 
 - 할당 됨: 관리 되는 개체가 차지 하는 메모리 양
-- 작업 집합: 프로세스에서 사용 하는 총 실제 메모리 (RAM)입니다. 표시 되는 작업 집합은 작업 관리자가 표시할 수 있는 값과 동일 합니다.
+- [작업 집합](/windows/win32/memory/working-set): 현재 실제 메모리에 상주 하는 프로세스의 가상 주소 공간에 있는 페이지 집합입니다. 표시 되는 작업 집합은 작업 관리자에 표시 되는 것과 동일한 값입니다.
 
 ### <a name="transient-objects"></a>임시 개체
 
@@ -139,7 +139,7 @@ Json 모드는 프로젝트 파일이 나 게시 된 앱의 *runtimeconfig.templ
 
 프로젝트 파일에서 `ServerGarbageCollection`를 변경 하려면 앱을 다시 빌드해야 합니다.
 
-**참고:** 단일 코어가 있는 컴퓨터에서는 서버 가비지 수집을 사용할 수 **없습니다** . 자세한 내용은 <xref:System.Runtime.GCSettings.IsServerGC>을 참조하십시오.
+**참고:** 단일 코어가 있는 컴퓨터에서는 서버 가비지 수집을 사용할 수 **없습니다** . 자세한 내용은 <xref:System.Runtime.GCSettings.IsServerGC>를 참조하세요.
 
 다음 이미지는 워크스테이션 GC를 사용 하는 5K RPS 아래의 메모리 프로필을 보여 줍니다.
 

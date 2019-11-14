@@ -5,14 +5,14 @@ description: ASP.NET Core 앱 내에서 호스트 되는 단일 페이지 앱과
 monikerRange: '>= aspnetcore-3.0'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 10/29/2019
+ms.date: 11/08/2019
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 5ed5fb61e5989b291523332c6a2ec332f9ca0f6b
-ms.sourcegitcommit: e5d4768aaf85703effb4557a520d681af8284e26
+ms.openlocfilehash: f58d92634ce1ef6110533d56c40b7520dda90514
+ms.sourcegitcommit: 4818385c3cfe0805e15138a2c1785b62deeaab90
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/05/2019
-ms.locfileid: "73616615"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73897045"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>SPAs에 대 한 인증 및 권한 부여
 
@@ -182,6 +182,30 @@ services.Configure<JwtBearerOptions>(
         ...
     });
 ```
+
+API의 JWT 처리기는 `JwtBearerEvents`을 사용 하 여 인증 프로세스를 제어할 수 있는 이벤트를 발생 시킵니다. API 권한 부여에 대 한 지원을 제공 하기 위해 `AddIdentityServerJwt`는 자체 이벤트 처리기를 등록 합니다.
+
+이벤트 처리를 사용자 지정 하려면 필요한 만큼 추가 논리를 사용 하 여 기존 이벤트 처리기를 래핑합니다. 예를 들어 다음과 같은 가치를 제공해야 합니다.
+
+```csharp
+services.Configure<JwtBearerOptions>(
+    IdentityServerJwtConstants.IdentityServerJwtBearerScheme,
+    options =>
+    {
+        var onTokenValidated = options.Events.OnTokenValidated;       
+        
+        options.Events.OnTokenValidated = async context =>
+        {
+            await onTokenValidated(context);
+            ...
+        }
+    });
+```
+
+위의 코드에서 `OnTokenValidated` 이벤트 처리기는 사용자 지정 구현으로 대체 됩니다. 구현:
+
+1. API 권한 부여 지원에서 제공 하는 원래 구현을 호출 합니다.
+1. 고유한 사용자 지정 논리를 실행 합니다.
 
 ## <a name="protect-a-client-side-route-angular"></a>클라이언트 쪽 경로 (각도) 보호
 

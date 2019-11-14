@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/12/2019
 uid: web-api/index
-ms.openlocfilehash: aab9b848eb6e69055b019c9253c716898e9847e2
-ms.sourcegitcommit: a11f09c10ef3d4eeab7ae9ce993e7f30427741c1
+ms.openlocfilehash: 122de0a225668a7523eec900e2ad8fdac56d7886
+ms.sourcegitcommit: 4818385c3cfe0805e15138a2c1785b62deeaab90
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/20/2019
-ms.locfileid: "71149344"
+ms.lasthandoff: 11/09/2019
+ms.locfileid: "73897018"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>ASP.NET Core로 Web API 만들기
 
@@ -46,7 +46,7 @@ Web API는 <xref:Microsoft.AspNetCore.Mvc.ControllerBase>에서 파생되는 하
 
 다음은 `ControllerBase`가 제공하는 메서드의 몇 가지 예입니다.
 
-|메서드   |참고 사항    |
+|메서드   |참고    |
 |---------|---------|
 |<xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*>| 400 상태 코드를 반환합니다.|
 |<xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*>|404 상태 코드를 반환합니다.|
@@ -64,7 +64,7 @@ Web API는 <xref:Microsoft.AspNetCore.Mvc.ControllerBase>에서 파생되는 하
 
 다음은 사용 가능한 특성의 몇 가지 예입니다.
 
-|특성|참고 사항|
+|특성|참고|
 |---------|-----|
 |[[Route]](<xref:Microsoft.AspNetCore.Mvc.RouteAttribute>)      |컨트롤러 또는 작업의 URL 패턴을 지정합니다.|
 |[[Bind]](<xref:Microsoft.AspNetCore.Mvc.BindAttribute>)        |모델 바인딩에 포함할 접두사 및 속성을 지정합니다.|
@@ -159,7 +159,7 @@ namespace WebApiSample
 
 ::: moniker-end
 
-### <a name="automatic-http-400-responses"></a>자동 HTTP 400 응답
+## <a name="automatic-http-400-responses"></a>자동 HTTP 400 응답
 
 `[ApiController]` 특성은 HTTP 400 응답을 자동으로 트리거하는 모델 유효성 검사 오류를 만듭니다. 따라서 다음 코드는 작업 메서드에서 불필요합니다.
 

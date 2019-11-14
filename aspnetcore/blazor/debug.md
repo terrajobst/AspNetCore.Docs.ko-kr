@@ -1,26 +1,28 @@
 ---
 title: 디버그 ASP.NET Core Blazor
 author: guardrex
-description: Blazor apps를 디버그 하는 방법을 알아봅니다.
+description: Blazor 앱을 디버그 하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/15/2019
+no-loc:
+- Blazor
 uid: blazor/debug
-ms.openlocfilehash: 9fc3f1d2dd7dc79d2ba3d64bff6e0f92ac2cf6dc
-ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
+ms.openlocfilehash: 3096ad9b3a6904804f239d61f374adcd4d851978
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72391179"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73963142"
 ---
-# <a name="debug-aspnet-core-blazor"></a>디버그 ASP.NET Core Blazor
+# <a name="debug-aspnet-core-opno-locblazor"></a>디버그 ASP.NET Core Blazor
 
 [Daniel Roth](https://github.com/danroth27)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-*조기에* 지원 됩니다. Blazor weambmbomomomomommbommbommbommbommbommboma에서 실행 되는
+*조기에* 지원 됩니다. Blazor weasembommbomapps에서 실행 되는 응용 프로그램은
 
 디버거 기능이 제한 됩니다. 사용 가능한 시나리오는 다음과 같습니다.
 
@@ -31,7 +33,7 @@ ms.locfileid: "72391179"
 
 다음을 할 *수 없습니다*.
 
-* -0, `string` 또는 `bool`가 아닌 모든 지역에 대 한 값을 관찰 @no__t 합니다.
+* `int`, `string`또는 `bool`아닌 모든 지역에 대 한 값을 관찰 합니다.
 * 모든 클래스 속성 또는 필드의 값을 관찰 합니다.
 * 변수를 마우스로 가리켜 해당 값을 확인 합니다.
 * 콘솔에서 식을 계산 합니다.
@@ -49,24 +51,24 @@ ms.locfileid: "72391179"
 
 ## <a name="procedure"></a>프로시저
 
-1. @No__t-0 구성에서 Blazor Weasembomapp를 실행 합니다. @No__t-0 옵션을 [dotnet run](/dotnet/core/tools/dotnet-run) 명령에 전달 합니다. `dotnet run --configuration Debug`.
+1. `Debug` 구성에서 Blazor Weasembomapp 앱을 실행 합니다. `--configuration Debug` 옵션을 [dotnet run](/dotnet/core/tools/dotnet-run) 명령에 전달 합니다. `dotnet run --configuration Debug`.
 1. 브라우저에서 앱에 액세스 합니다.
 1. 개발자 도구 패널이 아닌 앱에 키보드 포커스를 둡니다. 디버깅을 시작할 때 개발자 도구 패널을 닫을 수 있습니다.
-1. 다음 Blazor 바로 가기 키를 선택 합니다.
+1. 다음 Blazor관련 바로 가기 키를 선택 합니다.
    * Windows/Linux의 `Shift+Alt+D`
    * macOS의 `Shift+Cmd+D`
 1. 화면에 나열 된 단계에 따라 원격 디버깅을 사용 하도록 설정 하 고 브라우저를 다시 시작 합니다.
-1. 다음 Blazor 바로 가기 키를 다시 선택 하 여 디버그 세션을 시작 합니다.
+1. 다음 Blazor관련 바로 가기 키를 다시 선택 하 여 디버그 세션을 시작 합니다.
    * Windows/Linux의 `Shift+Alt+D`
    * macOS의 `Shift+Cmd+D`
 
 ## <a name="enable-remote-debugging"></a>원격 디버깅 사용
 
-원격 디버깅을 사용 하지 않도록 설정 하면 Chrome에서 디버깅 가능한 브라우저 탭 오류 페이지를 **찾을 수 없습니다** . 페이지가 생성 됩니다. 오류 페이지에는 Blazor 디버깅 프록시가 앱에 연결할 수 있도록 디버깅 포트가 열려 있는 상태로 Chrome을 실행 하기 위한 지침이 포함 되어 있습니다. *모든 chrome 인스턴스를 닫고* 설명 대로 chrome을 다시 시작 합니다.
+원격 디버깅을 사용 하지 않도록 설정 하면 Chrome에서 디버깅 가능한 브라우저 탭 오류 페이지를 **찾을 수 없습니다** . 페이지가 생성 됩니다. 오류 페이지에는 디버깅 포트가 열려 있는 상태에서 Chrome을 실행 하는 지침이 포함 되어 Blazor 디버깅 프록시가 앱에 연결할 수 있습니다. *모든 chrome 인스턴스를 닫고* 설명 대로 chrome을 다시 시작 합니다.
 
 ## <a name="debug-the-app"></a>앱 디버그
 
-원격 디버깅을 사용 하도록 설정 된 상태에서 Chrome을 실행 하면 디버깅 바로 가기 키가 새 디버거 탭을 엽니다. 잠시 후에 **소스** 탭에는 앱의 .net 어셈블리 목록이 표시 됩니다. 각 어셈블리를 확장 하 고 디버깅에 사용할 수 있는 *.cs*/*. razor* 소스 파일을 찾습니다. 중단점을 설정 하 고, 앱의 탭으로 다시 전환 하 고, 코드가 실행 될 때 중단점이 적중 됩니다. 중단점이 적중 되 면 코드 또는 resume (`F8`) 코드를 통해 단일 단계 (`F10`)가 정상적으로 실행 됩니다.
+원격 디버깅을 사용 하도록 설정 된 상태에서 Chrome을 실행 하면 디버깅 바로 가기 키가 새 디버거 탭을 엽니다. 잠시 후에 **소스** 탭에는 앱의 .net 어셈블리 목록이 표시 됩니다. 각 어셈블리를 확장 하 고 디버깅에 사용할 수 있는 *.cs*/ *. razor* 소스 파일을 찾습니다. 중단점을 설정 하 고, 앱의 탭으로 다시 전환 하 고, 코드가 실행 될 때 중단점이 적중 됩니다. 중단점이 적중 되 면 코드 또는 resume (`F8`) 코드를 통해 단일 단계 (`F10`)가 정상적으로 실행 됩니다.
 
 Blazor는 [Chrome DevTools 프로토콜](https://chromedevtools.github.io/devtools-protocol/) 을 구현 하 고를 사용 하 여 프로토콜을 보강 하는 디버깅 프록시를 제공 합니다. 네트워크 관련 정보입니다. 디버그 바로 가기 키를 누르면 Blazor는 프록시의 Chrome DevTools를 가리킵니다. 프록시는 디버깅 하려는 브라우저 창에 연결 됩니다. 따라서 원격 디버깅을 사용 하도록 설정 해야 합니다.
 
