@@ -4,14 +4,17 @@ author: rick-anderson
 description: 클라우드 기반 인터넷에 연결된 최신 애플리케이션을 빌드하기 위한 플랫폼 간 고성능 오픈 소스 프레임워크인 ASP.NET Core에 대한 소개를 가져옵니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/03/2019
+ms.date: 11/12/2019
+no-loc:
+- Blazor
+- SignalR
 uid: index
-ms.openlocfilehash: edbdce19656af64d7c2c0ee554bc5213a0d0c50e
-ms.sourcegitcommit: 09f4a5ded39cc8204576fe801d760bd8b611f3aa
+ms.openlocfilehash: dc1acd9e31fdc4f626c9dee2f378252c802491b6
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/05/2019
-ms.locfileid: "73611405"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73963644"
 ---
 # <a name="introduction-to-aspnet-core"></a>ASP.NET Core 소개
 
@@ -44,7 +47,7 @@ ASP.NET Core MVC에서는 [Web API](xref:tutorials/first-web-api) 및 [웹앱](x
 
 ## <a name="client-side-development"></a>클라이언트 쪽 개발
 
-ASP.NET Core는 [Blazor](xref:blazor/index), [Angular](xref:spa/angular), [React](xref:spa/react), [부트스트랩](https://getbootstrap.com/) 등 유명한 클라이언트 쪽 프레임워크 및 라이브러리와 원활하게 통합됩니다. 자세한 내용은 <xref:blazor/index> 및 ‘클라이언트 쪽 개발’의 관련 항목을 참조하세요. 
+ASP.NET Core는 [Blazor](xref:blazor/index), [Angular](xref:spa/angular), [React](xref:spa/react) 및 [부트스트랩](https://getbootstrap.com/) 등 유명한 클라이언트 쪽 프레임워크 및 라이브러리와 원활하게 통합합니다. 자세한 내용은 <xref:blazor/index> 및 ‘클라이언트 쪽 개발’의 관련 항목을 참조하세요. 
 
 <a name="target-framework"></a>
 
@@ -80,8 +83,8 @@ ASP.NET Core 앱 개발을 소개하는 자습서 및 문서는 다음 순서대
    |웹앱                   | 새로운 개발의 경우        |[Razor 페이지 시작](xref:tutorials/razor-pages/razor-pages-start) |
    |웹앱                   | MVC 앱을 유지 관리하는 경우 |[MVC 시작](xref:tutorials/first-mvc-app/start-mvc)|
    |Web API                   |                            |[웹 API 만들기](xref:tutorials/first-web-api)\*  |
-   |실시간 앱             |                            |[SignalR 시작](xref:tutorials/signalr) |
-   |Blazor 앱                |                            |[Blazor 시작](xref:blazor/get-started) |
+   |실시간 앱             |                            |[SignalR 시작하기](xref:tutorials/signalr) |
+   |Blazor 앱                |                            |[Blazor 시작하기](xref:blazor/get-started) |
    |원격 프로시저 호출 앱 |                            |[gRPC 서비스 시작](xref:tutorials/grpc/grpc-start) |
 
 1. 기본 데이터 액세스를 수행하는 방법을 보여주는 자습서를 수행하세요.
