@@ -4,13 +4,13 @@ author: rick-anderson
 description: JavaScript를 사용하여 ASP.NET Core 웹 API를 호출하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/15/2019
+ms.date: 08/27/2019
 uid: tutorials/web-api-javascript
-ms.openlocfilehash: bbe261307f6f68af002cb98cc4895888ade7f61c
-ms.sourcegitcommit: dd026eceee79e943bd6b4a37b144803b50617583
+ms.openlocfilehash: 0070816149d64fc1d71d453eb0f135050c78597a
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/15/2019
+ms.lasthandoff: 11/13/2019
 ms.locfileid: "72378699"
 ---
 # <a name="tutorial-call-an-aspnet-core-web-api-with-javascript"></a>자습서: JavaScript로 ASP.NET Core 웹 API 호출하기
@@ -18,6 +18,14 @@ ms.locfileid: "72378699"
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 이 자습서에서는 [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API)를 사용하여 JavaScript로 ASP.NET Core 웹 API를 호출하는 방법을 보여줍니다.
+
+::: moniker range="< aspnetcore-3.0"
+
+ASP.NET Core 2.2의 경우에는 [JavaScript를 사용하여 웹 API 호출하기](xref:tutorials/first-web-api#call-the-web-api-with-javascript) 버전 2.2를 참조하세요.
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
 
 ## <a name="prerequisites"></a>전제 조건
 
@@ -67,9 +75,9 @@ HTML 페이지를 로컬에서 테스트하려면 ASP.NET Core 프로젝트의 �
 
 * `item` 변수는 할 일 항목의 개체 리터럴 표현을 생성하기 위해 선언됩니다.
 * Fetch 요청은 다음 옵션으로 구성됩니다.
-  * `method` - POST HTTP 작업 동사를 지정합니다.
-  * `body` - 요청 본문의 JSON 표현을 지정합니다. JSON은 `item`에 저장된 개체 리터럴을 [JSON.stringify](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) 함수로 전달하여 생성됩니다.
-  * `headers` - `Accept` 및 `Content-Type` HTTP 요청 헤더를 지정합니다. 두 헤더 모두 `application/json`으로 설정되어 개별적으로 수신 및 전송되는 미디어 유형을 지정합니다.
+    * `method` - POST HTTP 작업 동사를 지정합니다.
+    * `body` - 요청 본문의 JSON 표현을 지정합니다. JSON은 `item`에 저장된 개체 리터럴을 [JSON.stringify](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) 함수로 전달하여 생성됩니다.
+    * `headers` - `Accept` 및 `Content-Type` HTTP 요청 헤더를 지정합니다. 두 헤더 모두 `application/json`으로 설정되어 개별적으로 수신 및 전송되는 미디어 유형을 지정합니다.
 * HTTP POST 요청은 *api/TodoItems* 경로에 전송됩니다.
 
 [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_AddItem)]
@@ -95,3 +103,5 @@ HTML 페이지를 로컬에서 테스트하려면 ASP.NET Core 프로젝트의 �
 
 > [!div class="nextstepaction"]
 > <xref:tutorials/get-started-with-swashbuckle>
+
+::: moniker-end

@@ -200,4 +200,6 @@ Razor Pages를 사용한 영역은 앱 루트에 *Areas/<area name>/Pages* 폴�
 
 ### <a name="publishing-areas"></a>영역 게시
 
+
 *.csproj 파일에 `<Project Sdk="Microsoft.NET.Sdk.Web">`이 포함되면 *.cshtml 파일 및 *wwwroot* 디렉터리 내의 모든 파일이 출력에 게시됩니다.
+
