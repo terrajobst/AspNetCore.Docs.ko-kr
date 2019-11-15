@@ -171,7 +171,7 @@ Razor Pages를 사용한 영역은 앱 루트에 *Areas/<area name>/Pages* 폴�
 
 ### <a name="import-namespace-and-tag-helpers-with-_viewimports-file"></a>_ViewImports 파일을 사용하여 네임스페이스 및 태그 도우미 가져오기
 
-각 영역의 *Pages* 폴더에 *_ViewImports.cshtml* 파일을 추가하여 네임스페이스 및 태그 도우미를 폴더의 각 Razor 페이지로 가져올 수 있습니다.
+각 영역의 *Pages* 폴더에 *_ViewImports.cshtml* 파일을 추가하여 네임스페이스 및 태그 도우미를 폴더의 각 Razor Page로 가져올 수 있습니다.
 
 *_ViewImports.cshtml* 파일이 없는 샘플 코드의 *Services* 영역을 살펴보겠습니다. 다음 태그는 */Services/Manage/About* Razor 페이지를 보여 줍니다.
 
@@ -200,4 +200,4 @@ Razor Pages를 사용한 영역은 앱 루트에 *Areas/<area name>/Pages* 폴�
 
 ### <a name="publishing-areas"></a>영역 게시
 
-*.cshtml 파일에 `<Project Sdk="Microsoft.NET.Sdk.Web">`이 포함되면 *wwwroot* 디렉터리 내의 모든 *.csproj 파일 및 파일이 출력되도록 게시합니다.
+*.csproj 파일에 `<Project Sdk="Microsoft.NET.Sdk.Web">``이 포함되면 *.cshtml 파일 및 *wwwroot* 디렉터리 내의 모든 파일이 출력에 게시됩니다.
