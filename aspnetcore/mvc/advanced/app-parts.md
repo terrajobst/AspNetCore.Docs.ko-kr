@@ -82,7 +82,7 @@ ASP.NET Core는 [제네릭 컨트롤러](/dotnet/csharp/programming-guide/generi
 
 [!code-csharp[](./app-parts/sample2/AppPartsSample/GenericControllerFeatureProvider.cs?name=snippet)]
 
-대상 형식은 `EntityTypes.Types`에 정의됩니다.
+이 형식은 `EntityTypes.Types`에 정의됩니다.
 
 [!code-csharp[](./app-parts/sample2/AppPartsSample/Models/EntityTypes.cs?name=snippet)]
 
