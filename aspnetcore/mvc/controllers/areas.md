@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core의 영역
 author: rick-anderson
-description: 관련 기능을 별개의 네임스페이스(라우팅 용) 및 폴더 구조(보기 용)의 그룹으로 구조화하는 데 사용되는 ASP.NET 기능인 영역에 대해 알아봅니다.
+description: 관련 기능을 별도의 네임스페이스(라우팅용) 및 폴더 구조(보기용)로 그룹화하는 데 사용되는 ASP.NET MVC 기능인 영역에 대해 알아봅니다.
 ms.author: riande
 ms.date: 08/16/2019
 uid: mvc/controllers/areas
@@ -16,7 +16,7 @@ ms.locfileid: "70024739"
 
 작성자: [Dhananjay Kumar](https://twitter.com/debug_mode) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-영역은 관련 기능을 별개의 네임스페이스(라우팅 용) 및 폴더 구조(보기 용)의 그룹으로 구조화하는 데 사용되는 ASP.NET 기능입니다. 영역을 사용하면 `controller` 및 `action` 또는 Razor Page `page`에 또 다른 경로 매개 변수인 `area`를 추가하여 라우팅을 위한 계층 구조를 만들 수 있습니다.
+영역은 관련 기능을 별개의 네임스페이스(라우팅용) 및 폴더 구조(보기용)의 그룹으로 구조화하는 데 사용되는 ASP.NET 기능입니다. 영역을 사용하면 `controller` 및 `action` 또는 Razor Page `page`에 또 다른 경로 매개 변수인 `area`를 추가하여 라우팅을 위한 계층 구조를 만들 수 있습니다.
 
 영역은 ASP.NET Core 웹앱을 자체적인 Razor Pages, 컨트롤러, 보기 및 모델 집합을 갖는 각각의 작은 기능 그룹으로 분할하는 방법을 제공합니다. 영역은 사실상 앱 내부의 구조입니다. ASP.NET Core 웹 프로젝트에서 페이지, 모델, 컨트롤러 및 보기와 같은 논리적 구성 요소는 서로 다른 폴더에 보관됩니다. ASP.NET Core 런타임은 명명 규칙을 사용하여 이러한 구성 요소 간의 관계를 만듭니다. 대형 앱의 경우 앱을 높은 수준의 개별적인 영역으로 나누는 것이 유리할 수 있습니다. 결제, 청구 및 검색과 같은 여러 비즈니스 단위가 있는 전자상거래 앱을 예로 들 수 있습니다. 이러한 각 단위는 보기, 컨트롤러, Razor Pages 및 모델을 포함한 고유의 영역을 갖습니다.
 
@@ -190,7 +190,7 @@ Razor Pages를 사용한 영역은 앱 루트에 *Areas/<area name>/Pages* 폴�
 
 [!code-cshtml[](areas/samples/RPareas/Areas/Products/Pages/About.cshtml)]
 
-이전 파일에서 네임스페이스와 `@addTagHelper` 지시문은 *Areas/Products/Pages/_ViewImports.cshtml* 파일을 통해서 파일로 가져온 것입니다.
+이전 파일에서 네임스페이스와 `@addTagHelper` 지시문은 *Areas/Products/Pages/_ViewImports.cshtml* 파일을 통해 파일로 가져온 것입니다.
 
 자세한 내용은 [태그 도우미 범위 관리](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) 및 [공유 지시문 가져오기](xref:mvc/views/layout#importing-shared-directives)를 참조하세요.
 
