@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
 ms.date: 10/07/2019
 uid: razor-pages/index
-ms.openlocfilehash: 61e15b9b9b8f84de36621c301ecb9d33b21dff88
-ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
+ms.openlocfilehash: 67cc4f9b261372996d612f922c9f491f53948ece
+ms.sourcegitcommit: ddc813f0f1fb293861a01597532919945b0e7fe5
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/29/2019
-ms.locfileid: "73034272"
+ms.lasthandoff: 11/23/2019
+ms.locfileid: "74412076"
 ---
 # <a name="introduction-to-razor-pages-in-aspnet-core"></a>ASP.NET Core의 Razor 페이지 소개
 
@@ -35,7 +35,7 @@ Razor Pages를 사용하면 컨트롤러 및 뷰를 사용하는 것보다 더 �
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-3.0.md)]
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-3.0.md)]
 
@@ -53,7 +53,7 @@ Razor Pages 프로젝트를 만드는 방법에 대한 자세한 내용은 [Razo
 
 명령줄에서 `dotnet new webapp`을 실행합니다.
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 명령줄에서 `dotnet new webapp`을 실행합니다.
 
@@ -65,7 +65,7 @@ Mac용 Visual Studio에서 생성된 *.csproj* 파일을 엽니다.
 
 Razor 페이지는 *Startup.cs*에서 사용할 수 있게 설정됩니다.
 
-[!code-cs[](index/3.0sample/RazorPagesIntro/Startup.cs?name=snippet_Startup&highlight=12)]
+[!code-cs[](index/3.0sample/RazorPagesIntro/Startup.cs?name=snippet_Startup&highlight=12,36)]
 
 기본적인 페이지를 살펴보겠습니다. <a name="OnGet"></a>
 
@@ -273,7 +273,7 @@ Razor 페이지는 기본적으로 비 `GET` 동사에 대해서만 속성을 �
 
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create3.cshtml?highlight=3,8-9,15-99)]
 
-위의 코드는:
+위의 코드는
 
 * jQuery 및 jQuery 유효성 검사 스크립트를 포함합니다.
 * `<div />` 및 `<span />` [태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하여 다음을 사용하도록 설정합니다.
@@ -299,19 +299,19 @@ Razor 페이지는 기본적으로 비 `GET` 동사에 대해서만 속성을 �
 이 유효성 검사 특성은 적용되는 모델 속성에 시행하려는 동작을 지정합니다.
 
 * `Required` 및 `MinimumLength` 특성은 속성에 값이 있어야 하지만 사용자가 이 유효성 검사를 만족하기 위해 공백을 입력하는 것을 막을 수 없다는 것을 나타냅니다.
-* `RegularExpression` 특성은 입력될 수 있는 문자를 제한하는 데 사용됩니다. 앞의 코드에서 “Genre”는 다음 조건을 충족해야 합니다.
+* `RegularExpression` 특성은 입력할 수 있는 문자를 제한하는 데 사용됩니다. 이전 코드에서 “Genre”는 다음 조건을 충족해야 합니다.
 
   * 문자만 사용해야 합니다.
-  * 첫 글자는 대문자로 입력해야 합니다. 공백, 숫자 및 특수 문자는 허용되지 않습니다.
+  * 첫 번째 문자는 대문자여야 합니다 공백, 숫자 및 특수 문자는 허용되지 않습니다.
 
 * `RegularExpression` “Rating”은 다음 조건을 충족해야 합니다.
 
   * 첫 번째 문자는 대문자여야 합니다.
-  * 이어진 공백에서는 특수 문자와 숫자가 허용됩니다. “PG-13”은 등급인 경우 유효하지만 “Genre”에는 허용되지 않습니다.
+  * 이어진 공백에서는 특수 문자와 숫자가 허용됩니다. “PG-13”은 등급에서는 유효하지만 “Genre”에서는 허용되지 않습니다.
 
-* `Range` 특성은 지정된 범위 내의 값을 제한합니다.
+* `Range` 특성은 지정한 범위 내로 값을 제한합니다.
 * `StringLength` 특성은 문자열 속성의 최대 길이와, 필요에 따라 최소 길이를 설정합니다.
-* 값 형식(예: `decimal`, `int`, `float`, `DateTime`)은 기본적으로 필요하며 `[Required]` 특성은 필요하지 않습니다.
+* 값 형식(예: `decimal`, `int`, `float`, `DateTime`)은 기본적으로 필수적이며 `[Required]` 특성이 필요하지 않습니다.
 
 `Movie` 모델에 대한 만들기 페이지에 잘못된 값이 포함된 오류가 표시됩니다.
 
@@ -628,7 +628,7 @@ Razor 페이지는 페이지 코딩 중심의 시나리오를 보다 쉽고 생�
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-2.2.md)]
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-2.2.md)]
 
