@@ -42,15 +42,15 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-키 링 저장소 위치 (예: [Persistkeystoazureblobstorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage))를 설정 합니다. @No__t를 호출 하면 키 링 저장소 위치를 포함 하 여 자동 데이터 보호 설정을 사용 하지 않도록 설정 하는 [IXmlEncryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmlencryptor) 를 구현 하므로 위치를 설정 해야 합니다. 앞의 예제에서는 Azure Blob Storage를 사용 하 여 키 링을 유지 합니다. 자세한 내용은 [Key storage 공급자를 참조 하세요. Azure Storage](xref:security/data-protection/implementation/key-storage-providers#azure-storage)를 참조하세요. [Persistkeystofilesystem](xref:security/data-protection/implementation/key-storage-providers#file-system)을 사용 하 여 키 링을 로컬로 유지할 수도 있습니다.
+키 링 저장소 위치 (예: [Persistkeystoazureblobstorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage))를 설정 합니다. `ProtectKeysWithAzureKeyVault`를 호출 하면 키 링 저장소 위치를 포함 하 여 자동 데이터 보호 설정을 사용 하지 않도록 설정 하는 [IXmlEncryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmlencryptor) 을 구현 하기 때문에 위치를 설정 해야 합니다. 앞의 예제에서는 Azure Blob Storage를 사용 하 여 키 링을 유지 합니다. 자세한 내용은 [키 저장소 공급자: Azure Storage](xref:security/data-protection/implementation/key-storage-providers#azure-storage)를 참조 하세요. [Persistkeystofilesystem](xref:security/data-protection/implementation/key-storage-providers#file-system)을 사용 하 여 키 링을 로컬로 유지할 수도 있습니다.
 
-@No__t-0은 키 암호화에 사용 되는 key vault 키 식별자입니다. 예를 들어 `contosokeyvault`에서 `dataprotection` 이라는 키 자격 증명 모음에 생성 된 키에는 키 식별자 `https://contosokeyvault.vault.azure.net/keys/dataprotection/`가 있습니다. 키 **래핑** 및 키 자격 증명 모음에 대 한 **키 래핑 권한을** 앱에 제공 합니다.
+`keyIdentifier` 키 암호화에 사용 되는 key vault 키 식별자입니다. 예를 들어 `contosokeyvault`에서 `dataprotection` 이라는 키 자격 증명 모음에서 만든 키에는 키 식별자 `https://contosokeyvault.vault.azure.net/keys/dataprotection/`있습니다. 키 **래핑** 및 키 자격 증명 모음에 대 한 **키 래핑 권한을** 앱에 제공 합니다.
 
 `ProtectKeysWithAzureKeyVault` 오버 로드:
 
 * [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder, KeyVaultClient, String)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_Microsoft_Azure_KeyVault_KeyVaultClient_System_String_) 는 [KeyVaultClient](/dotnet/api/microsoft.azure.keyvault.keyvaultclient) 를 사용 하 여 데이터 보호 시스템에서 키 자격 증명 모음을 사용할 수 있도록 합니다.
-* [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder, string, string, X509Certificate2)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_Security_Cryptography_X509Certificates_X509Certificate2_) 를 사용 하 여 데이터 보호 시스템에서 키 자격 증명 모음을 사용할 수 있도록 하는 `ClientId`과 [X509Certificate](/dotnet/api/system.security.cryptography.x509certificates.x509certificate2) 를 사용할 수 있습니다.
-* [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder, string, string, string)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_String_) 은 `ClientId` 및 `ClientSecret`를 사용 하 여 데이터 보호 시스템에서 키 자격 증명 모음을 사용할 수 있도록 허용 합니다.
+* [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder, string, string, X509Certificate2)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_Security_Cryptography_X509Certificates_X509Certificate2_) 를 `ClientId` 사용 하 여 데이터 보호 시스템이 키 자격 증명 모음을 사용 [하도록 할 수](/dotnet/api/system.security.cryptography.x509certificates.x509certificate2) 있습니다.
+* [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder, string, string, string)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_String_) 를 `ClientSecret` `ClientId` 사용 하 여 데이터 보호 시스템이 키 자격 증명 모음을 사용 하도록 설정할 수 있습니다.
 
 ::: moniker-end
 
@@ -139,7 +139,7 @@ public void ConfigureServices(IServiceCollection services)
 
 앱 간에 보호 된 페이로드를 공유 하려면:
 
-* 동일한 값을 사용 하 여 각 응용 프로그램에서 <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*>을 구성 합니다.
+* 동일한 값을 사용 하 여 각 앱에 <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*>를 구성 합니다.
 * 앱에서 동일한 버전의 데이터 보호 API 스택을 사용 합니다. 앱의 프로젝트 파일에서 다음 중 **하나** 를 수행 합니다.
   * [AspNetCore 메타 패키지](xref:fundamentals/metapackage-app)를 통해 동일한 공유 프레임 워크 버전을 참조 합니다.
   * 동일한 [데이터 보호 패키지](xref:security/data-protection/introduction#package-layout) 버전을 참조 합니다.
@@ -154,7 +154,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="disableautomatickeygeneration"></a>DisableAutomaticKeyGeneration
 
-키 만료가 다가오더라도 앱이 자동으로 키를 롤링하지 않도록 (새로운 키를 생성하지 않도록) 구성해야 하는 시나리오도 있을 수 있습니다. 한 가지 사례는 앱들이 주/보조 관계를 갖도록 설정되어 있어서 주 앱만 키 관리 작업을 수행하고 나머지 모든 보조 앱들은 단순히 키 링의 읽기 전용 뷰만 갖고 있는 경우입니다. @No__t-0을 사용 하 여 시스템을 구성 하 여 키 링을 읽기 전용으로 처리 하도록 보조 앱을 구성할 수 있습니다.
+키 만료가 다가오더라도 앱이 자동으로 키를 롤링하지 않도록 (새로운 키를 생성하지 않도록) 구성해야 하는 시나리오도 있을 수 있습니다. 한 가지 사례는 앱들이 주/보조 관계를 갖도록 설정되어 있어서 주 앱만 키 관리 작업을 수행하고 나머지 모든 보조 앱들은 단순히 키 링의 읽기 전용 뷰만 갖고 있는 경우입니다. <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.DisableAutomaticKeyGeneration*>를 사용 하 여 시스템을 구성 하 여 키 링을 읽기 전용으로 처리 하도록 보조 앱을 구성할 수 있습니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -166,14 +166,14 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="per-application-isolation"></a>응용 프로그램별 격리
 
-ASP.NET Core 호스트에 의해서 데이터 보호 시스템이 제공되는 경우, 여러 앱이 동일한 작업자 프로세스 계정으로 실행되고 동일한 마스터 키 관련 자료를 사용하더라도 서로 자동으로 격리됩니다 이는 IsolateApps 요소의 @no__t 한정자와 약간 비슷합니다.
+ASP.NET Core 호스트에 의해서 데이터 보호 시스템이 제공되는 경우, 여러 앱이 동일한 작업자 프로세스 계정으로 실행되고 동일한 마스터 키 관련 자료를 사용하더라도 서로 자동으로 격리됩니다 이는 System.web의 `<machineKey>` 요소에 있는 IsolateApps 한정자와 약간 비슷합니다.
 
-격리 메커니즘은 로컬 컴퓨터의 각 앱을 고유 테 넌 트로 간주 하 여 작동 하므로 지정 된 앱에 대 한 <xref:Microsoft.AspNetCore.DataProtection.IDataProtector>은 자동으로 앱 ID를 판별자로 포함 합니다. 앱의 고유 ID는 앱의 실제 경로입니다.
+격리 메커니즘은 로컬 컴퓨터의 각 앱을 고유 테 넌 트로 간주 하 여 작동 하므로 지정 된 앱에 대 한 루트 <xref:Microsoft.AspNetCore.DataProtection.IDataProtector>에는 자동으로 앱 ID가 판별자로 포함 됩니다. 앱의 고유 ID는 앱의 실제 경로입니다.
 
 * IIS에서 호스트 되는 앱의 경우 고유 ID는 앱의 IIS 실제 경로입니다. 웹 팜 환경에 앱을 배포 하는 경우이 값은 안정적입니다. IIS 환경이 웹 팜의 모든 컴퓨터에서 유사 하 게 구성 되어 있다고 가정 합니다.
 * [Kestrel 서버](xref:fundamentals/servers/index#kestrel)에서 실행 되는 자체 호스트 된 앱의 경우 고유 ID는 디스크의 앱에 대 한 실제 경로입니다.
 
-고유 식별자는 다시 설정 된 상태로 유지 되도록 설계 되었습니다. @ no__t-0 개인 앱과 컴퓨터 자체를 모두 다시 설정 합니다.
+고유 식별자는 개별 앱과 컴퓨터 자체의&mdash;다시 설정 된 상태로 유지 되도록 설계 되었습니다.
 
 이 격리 메커니즘은 응용 프로그램에 악의적인 의사가 없음을 전제로 합니다. 악의적인 응용 프로그램은 언제든지 동일한 작업자 프로세스 계정으로 동작하는 다른 모든 응용 프로그램에 영향을 미칠 수 있습니다. 응용 프로그램들 간에 서로 신뢰할 수 없는 공유 호스팅 환경에서는 호스팅 공급자가 응용 프로그램의 기본 키 저장소를 분리하는 등, OS 수준에서 응용 프로그램 간에 격리를 담보할 수 있는 조치를 취해야만 합니다.
 
@@ -380,9 +380,9 @@ services.AddDataProtection()
 
 ## <a name="persisting-keys-with-redis"></a>Redis를 사용 하 여 키 유지
 
-[Redis 데이터 지 속성](/azure/azure-cache-for-redis/cache-how-to-premium-persistence) 을 지 원하는 Redis 버전만 사용 하 여 키를 저장 해야 합니다. [Azure Blob storage](/azure/storage/blobs/storage-blobs-introduction) 는 영구적 이며 키를 저장 하는 데 사용할 수 있습니다. 자세한 내용은 [이 GitHub 문제](https://github.com/aspnet/AspNetCore/issues/13476)합니다.
+[Redis 데이터 지 속성](/azure/azure-cache-for-redis/cache-how-to-premium-persistence) 을 지 원하는 Redis 버전만 사용 하 여 키를 저장 해야 합니다. [Azure Blob storage](/azure/storage/blobs/storage-blobs-introduction) 는 영구적 이며 키를 저장 하는 데 사용할 수 있습니다. 자세한 내용은 [이 GitHub 이슈](https://github.com/aspnet/AspNetCore/issues/13476)를 참조하세요.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:security/data-protection/configuration/non-di-scenarios>
 * <xref:security/data-protection/configuration/machine-wide-policy>
