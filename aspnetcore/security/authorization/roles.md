@@ -12,17 +12,17 @@ ms.contentlocale: ko-KR
 ms.lasthandoff: 11/06/2019
 ms.locfileid: "73660044"
 ---
-# <a name="role-based-authorization-in-aspnet-core"></a>ASP.NET Core에서 역할 기반 권한 부여
+# <a name="role-based-authorization-in-aspnet-core"></a>ASP.NET Core의 역할 기반 권한 부여
 
 <a name="security-authorization-role-based"></a>
 
-ID가 생성되면 하나 이상의 역할에 속할 수 있습니다. 예를 들어 Tracy는 Administrator 및 User 역할에 속하지만 Scott은 User 역할에만 속할 수 있습니다. 이러한 역할을 만들고 관리하는 방법은 권한 부여 프로세스의 백업 저장소에 따라 달라집니다. 역할은 [ClaimsPrincipal](/dotnet/api/system.security.claims.claimsprincipal) 클래스의 [IsInRole](/dotnet/api/system.security.principal.genericprincipal.isinrole) 메서드를 통해서 개발자에게 노출됩니다.
+ID가 생성되면 하나 이상의 역할에 속할 수 있습니다. 예를 들어 Tracy는 Administrator 및 User 역할에 속하지만 Scott은 User 역할에만 속할 수 있습니다. 이러한 역할을 만들고 관리하는 방법은 권한 부여 프로세스의 백업 저장소에 따라 달라집니다. 역할은 [ClaimsPrincipal](/dotnet/api/system.security.claims.claimsprincipal) 클래스의 [IsInRole](/dotnet/api/system.security.principal.genericprincipal.isinrole) 메서드를 통해 개발자에 게 노출 됩니다.
 
 ## <a name="adding-role-checks"></a>역할 검사 추가
 
-역할 기반 권한 부여 검사는 선언적입니다. 개발자는 컨트롤러나 컨트롤러 내의 작업에 대해 현재 사용자가 요청한 리소스에 액세스하기 위해 반드시 멤버여야만 하는 역할을 지정하여 역할 기반 권한 부여 검사를 코드 내부에 포함시킵니다.
+역할 기반 권한 부여 검사는 개발자가 코드 내에이를 포함 하 여, 컨트롤러 또는 컨트롤러 내의 작업에 대해 포함 하 여 요청 된 리소스에 액세스 하기 위해 현재 사용자가 멤버 여야 하는 역할을 지정 하&mdash;합니다.
 
-예를 들어 다음 코드는 `Administrator` 역할의 멤버인 사용자만 `AdministrationController`의 모든 작업에 액세스할 수 있도록 제한합니다.
+예를 들어 다음 코드는 `Administrator` 역할의 멤버인 사용자에 대 한 `AdministrationController` 작업에 대 한 액세스를 제한 합니다.
 
 ```csharp
 [Authorize(Roles = "Administrator")]
@@ -42,7 +42,7 @@ public class SalaryController : Controller
 
 이 컨트롤러는 `HRManager` 역할 또는 `Finance` 역할의 멤버인 사용자만 액세스할 수 있습니다.
 
-여러 개의 특성을 적용할 경우 액세스하는 사용자는 지정된 모든 역할의 멤버여야 합니다. 다음 예제에서 사용자는 `PowerUser` 및 `ControlPanelUser` 역할 양쪽의 멤버여야 합니다.
+여러 특성을 적용 하는 경우 액세스 하는 사용자는 지정 된 모든 역할의 멤버 여야 합니다. 다음 샘플을 사용 하려면 사용자가 `PowerUser` 및 `ControlPanelUser` 역할의 멤버 여야 합니다.
 
 ```csharp
 [Authorize(Roles = "PowerUser")]
@@ -92,8 +92,8 @@ public class ControlPanelController : Controller
 
 Razor Pages의 경우 다음 중 한 가지 방법을 통해서 `AuthorizeAttribute`를 적용할 수 있습니다.
 
-* [규칙](xref:razor-pages/razor-pages-conventions#page-model-action-conventions)을 사용합니다. 또는
-* `PageModel` 인스턴스에 `AuthorizeAttribute`를 적용합니다.
+* [규칙](xref:razor-pages/razor-pages-conventions#page-model-action-conventions)사용 또는
+* `PageModel` 인스턴스에 `AuthorizeAttribute` 적용:
 
 ```csharp
 [Authorize(Policy = "RequireAdministratorRole")]
@@ -107,7 +107,6 @@ public class UpdateModel : PageModel
 
 > [!IMPORTANT]
 > `AuthorizeAttribute`를 비롯한 필터 특성은 PageModel에만 적용할 수 있으며 특정 페이지 처리기 메서드에는 적용할 수 없습니다.
-
 ::: moniker-end
 
 <a name="security-authorization-role-policy"></a>
@@ -147,7 +146,7 @@ public void ConfigureServices(IServiceCollection services)
 ```
 ::: moniker-end
 
-정책은 `AuthorizeAttribute` 특성의 `Policy` 속성을 사용하여 적용됩니다.
+정책은 `AuthorizeAttribute` 특성의 `Policy` 속성을 사용 하 여 적용 됩니다.
 
 ```csharp
 [Authorize(Policy = "RequireAdministratorRole")]
