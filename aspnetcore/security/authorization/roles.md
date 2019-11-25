@@ -31,7 +31,7 @@ public class AdministrationController : Controller
 }
 ```
 
-쉼표로 구분된 목록을 지정하여 여러 역할을 지정할 수 있습니다.
+쉼표로 구분된 목록으로 여러 역할을 지정할 수 있습니다.
 
 ```csharp
 [Authorize(Roles = "HRManager,Finance")]
