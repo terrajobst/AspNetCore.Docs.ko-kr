@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/complex-data-model
-ms.openlocfilehash: 313d951ccdd45ae1209ffd9612d24738822fbed8
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: b8b1ade4c8c29d34200bf8c0944cff6adec0bb95
+ms.sourcegitcommit: f40c9311058c9b1add4ec043ddc5629384af6c56
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259601"
+ms.lasthandoff: 11/21/2019
+ms.locfileid: "74288964"
 ---
 # <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>자습서: 복잡한 데이터 모델 만들기 - ASP.NET MVC 및 EF Core 사용
 
@@ -22,7 +22,7 @@ ms.locfileid: "72259601"
 
 ![엔터티 다이어그램](complex-data-model/_static/diagram.png)
 
-이 자습서에서는 다음을 수행했습니다.
+이 자습서에서는 다음과 같은 작업을 수행합니다.
 
 > [!div class="checklist"]
 > * 데이터 모델 사용자 지정
@@ -54,7 +54,7 @@ ms.locfileid: "72259601"
 
 [!code-csharp[](intro/samples/cu/Models/Student.cs?name=snippet_DataType&highlight=3,12-13)]
 
-`DataType` 특성은 데이터베이스 내장 형식보다 구체적인 데이터 형식을 지정하는 데 사용됩니다. 이 경우에는 날짜 및 시간이 아닌 날짜만 추적하고자 합니다. `DataType` 열거형은 날짜, 시간, 전화 번호, 통화, 이메일 주소 등과 같은 다양한 데이터 형식을 제공합니다. `DataType` 특성을 통해 응용 프로그램에서 자동으로 유형별 기능을 제공하도록 설정할 수도 있습니다. 예를 들어, `DataType.EmailAddress`에 대해 `mailto:` 링크를 만들고 HTML5를 지원하는 브라우저에서 `DataType.Date`에 대해 날짜 선택기를 제공할 수 있습니다. `DataType` 특성은 HTML 5 브라우저가 인식할 수 있는 HTML 5 `data-`(데이터 대시로 발음) 특성을 내보냅니다. `DataType` 특성은 유효성 검사를 제공하지 않습니다.
+`DataType` 특성은 데이터베이스 내장 형식보다 구체적인 데이터 형식을 지정하는 데 사용됩니다. 이 경우에는 날짜 및 시간이 아닌 날짜만 추적하고자 합니다. `DataType` 열거형은 날짜, 시간, 전화 번호, 통화, 이메일 주소 등과 같은 다양한 데이터 형식을 제공합니다. `DataType` 특성을 통해 응용 프로그램에서 자동으로 형식별 기능을 제공하도록 설정할 수도 있습니다. 예를 들어, `DataType.EmailAddress`에 대해 `mailto:` 링크를 만들고 HTML5를 지원하는 브라우저에서 `DataType.Date`에 대해 날짜 선택기를 제공할 수 있습니다. `DataType` 특성은 HTML 5 브라우저가 인식할 수 있는 HTML 5 `data-`(데이터 대시로 발음) 특성을 내보냅니다. `DataType` 특성은 유효성 검사를 제공하지 않습니다.
 
 `DataType.Date`는 표시되는 날짜의 서식을 지정하지 않습니다. 기본적으로 데이터 필드는 서버의 CultureInfo의 기본 형식에 따라 표시됩니다.
 
@@ -70,7 +70,7 @@ ms.locfileid: "72259601"
 
 * 브라우저는 HTML5 기능을 활성화할 수 있습니다(예: 달력 컨트롤, 로캘에 적합한 통화 기호, 이메일 링크, 일부 클라이언트 쪽 입력 유효성 검사 등을 표시하기 위해).
 
-* 기본적으로 브라우저는 사용자의 로캘에 따른 올바른 형식을 사용하여 데이터를 렌더링합니다.
+* 기본적으로 브라우저는 사용자의 로캘에 따른 올바른 서식을 사용하여 데이터를 렌더링합니다.
 
 자세한 내용은 [\<입력> 태그 도우미 설명서](../../mvc/views/working-with-forms.md#the-input-tag-helper)를 참조하세요.
 
@@ -153,13 +153,14 @@ dotnet ef database update
 
 ### <a name="the-required-attribute"></a>필수 특성
 
-`Required` 특성에서 이름 속성은 필수 필드입니다. `Required` 특성은 값 형식(DateTime, int, double, float 등)과 같은 null을 허용하지 않는 형식에 필요하지 않습니다. null일 수 없는 형식은 자동으로 필수 필드로 처리됩니다.
+`Required` 특성에서 이름 속성은 필수 필드입니다. `Required` 특성은 값 형식(DateTime, int, double, float 등)과 같은 null을 허용하지 않는 형식에 필요하지 않습니다. Null일 수 없는 형식은 자동으로 필수 필드로 처리됩니다.
 
-`Required` 특성을 제거하고, `StringLength` 특성에 대한 최소 길이 매개 변수로 바꿀 수 있습니다.
+`MinimumLength`가 적용되려면 `Required` 특성이 `MinimumLength`와 함께 사용되어야 합니다.
 
 ```csharp
 [Display(Name = "Last Name")]
-[StringLength(50, MinimumLength=1)]
+[Required]
+[StringLength(50, MinimumLength=2)]
 public string LastName { get; set; }
 ```
 
@@ -513,7 +514,7 @@ dotnet ef database update
 
 ## <a name="next-steps"></a>다음 단계
 
-이 자습서에서는 다음을 수행했습니다.
+이 자습서에서는 다음과 같은 작업을 수행합니다.
 
 > [!div class="checklist"]
 > * 데이터 모델 사용자 지정

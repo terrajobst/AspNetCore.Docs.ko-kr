@@ -5,16 +5,18 @@ description: Blazor에서 양식 및 필드 유효성 검사 시나리오를 사
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/04/2019
+ms.date: 11/21/2019
+no-loc:
+- Blazor
 uid: blazor/forms-validation
-ms.openlocfilehash: 6dcc36c5133367493b476655dbdf73b75db9d168
-ms.sourcegitcommit: a7bbe3890befead19440075b05b9674351f98872
+ms.openlocfilehash: f1df213b16bb7ecd6a771700291d834776dee475
+ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/10/2019
-ms.locfileid: "73905742"
+ms.lasthandoff: 11/22/2019
+ms.locfileid: "74317176"
 ---
-# <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET Core Blazor 폼 및 유효성 검사
+# <a name="aspnet-core-opno-locblazor-forms-and-validation"></a>ASP.NET Core Blazor 폼 및 유효성 검사
 
 작성자: [Daniel Roth](https://github.com/danroth27) 및 [Luke Latham](https://github.com/guardrex)
 
@@ -193,7 +195,24 @@ public class Starship
 
 `DataAnnotationsValidator` 구성 요소는 데이터 주석을 사용 하 여 종속 된 `EditContext`에 대 한 유효성 검사 지원을 연결 합니다. 데이터 주석을 사용 하 여 유효성 검사 지원을 활성화 하려면이 명시적인 제스처가 필요 합니다. 데이터 주석과 다른 유효성 검사 시스템을 사용 하려면 `DataAnnotationsValidator`를 사용자 지정 구현으로 바꿉니다. ASP.NET Core 구현은 참조 소스: [DataAnnotationsValidator](https://github.com/aspnet/AspNetCore/blob/master/src/Components/Forms/src/DataAnnotationsValidator.cs)/[AddDataAnnotationsValidation](https://github.com/aspnet/AspNetCore/blob/master/src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs)에서 검사할 수 있습니다.
 
+Blazor는 두 가지 유형의 유효성 검사를 수행 합니다.
+
+* 필드 *유효성 검사* 는 사용자가 필드 밖으로 탭 할 때 수행 됩니다. 필드의 유효성을 검사 하는 동안 `DataAnnotationsValidator` 구성 요소는 보고 된 모든 유효성 검사 결과를 필드와 연결 합니다.
+* 사용자가 폼을 제출 하면 *모델 유효성 검사가* 수행 됩니다. 모델 유효성 검사 중에 `DataAnnotationsValidator` 구성 요소는 유효성 검사 결과가 보고 하는 멤버 이름을 기준으로 필드를 결정 합니다. 개별 멤버와 연결 되지 않은 유효성 검사 결과는 필드가 아니라 모델과 연결 됩니다.
+
+### <a name="validation-summary-and-validation-message-components"></a>유효성 검사 요약 및 유효성 검사 메시지 구성 요소
+
 `ValidationSummary` 구성 요소는 [유효성 검사 요약 태그 도우미](xref:mvc/views/working-with-forms#the-validation-summary-tag-helper)와 비슷한 모든 유효성 검사 메시지를 요약 합니다.
+
+```csthml
+<ValidationSummary />
+```
+
+`Model` 매개 변수를 사용 하 여 특정 모델에 대 한 유효성 검사 메시지를 출력 합니다.
+  
+```csthml
+<ValidationSummary Model="@starship" />
+```
 
 `ValidationMessage` 구성 요소는 [유효성 검사 메시지 태그 도우미](xref:mvc/views/working-with-forms#the-validation-message-tag-helper)와 비슷한 특정 필드에 대 한 유효성 검사 메시지를 표시 합니다. `For` 특성과 모델 속성의 이름을 지정 하는 람다 식을 사용 하 여 유효성을 검사 하기 위한 필드를 지정 합니다.
 
@@ -203,15 +222,86 @@ public class Starship
 
 `ValidationMessage` 및 `ValidationSummary` 구성 요소는 임의 특성을 지원 합니다. 구성 요소 매개 변수와 일치 하지 않는 특성은 생성 된 `<div>` 또는 `<ul>` 요소에 추가 됩니다.
 
+### <a name="custom-validation-attributes"></a>사용자 지정 유효성 검사 특성
+
+[사용자 지정 유효성 검사 특성](xref:mvc/models/validation#custom-attributes)을 사용 하는 경우 유효성 검사 결과가 필드와 올바르게 연결 되도록 하려면 <xref:System.ComponentModel.DataAnnotations.ValidationResult>를 만들 때 유효성 검사 컨텍스트의 <xref:System.ComponentModel.DataAnnotations.ValidationContext.MemberName>를 전달 합니다.
+
+```csharp
+using System;
+using System.ComponentModel.DataAnnotations;
+
+private class MyCustomValidator : ValidationAttribute
+{
+    protected override ValidationResult IsValid(object value, 
+        ValidationContext validationContext)
+    {
+        ...
+
+        return new ValidationResult("Validation message to user.",
+            new[] { validationContext.MemberName });
+    }
+}
+```
+
 ::: moniker range=">= aspnetcore-3.1"
 
-**AspNetCore. Blazor-유효성 검사 패키지**
+### <a name="opno-locblazor-data-annotations-validation-package"></a>데이터 주석 유효성 검사 패키지 Blazor
 
-[Blazor AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.DataAnnotations.Validation) 은 `DataAnnotationsValidator` 구성 요소를 사용 하 여 유효성 검사 환경 간격을 채우는 패키지입니다. 패키지는 현재 *실험적*이며 이후 릴리스에서 ASP.NET Core 프레임 워크에 이러한 시나리오를 추가할 계획입니다.
+[AspNetCoreBlazor입니다. DataAnnotations. 유효성 검사](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.DataAnnotations.Validation) 는 `DataAnnotationsValidator` 구성 요소를 사용 하 여 유효성 검사 환경 간격을 채우는 패키지입니다. 패키지가 현재 *실험적*입니다.
 
-`DataAnnotationsValidator` 구성 요소는 유효성 검사 모델에 대 한 복합 속성의 하위 속성 유효성을 검사 하지 않습니다. 컬렉션 형식 속성의 항목에 대 한 유효성이 검사 되지 않습니다. 이러한 유형의 유효성을 검사 하기 위해 `Microsoft.AspNetCore.Blazor.DataAnnotations.Validation` 패키지는 `ObjectGraphDataAnnotationsValidator` 구성 요소와 함께 작동 하는 `ValidateComplexType` 유효성 검사 특성을 소개 합니다. 사용 중인 이러한 형식의 예는 [aspnet/Samples GitHub 리포지토리에서 Blazor Validation 샘플 ](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/Validation)을 참조 하세요.
+### <a name="compareproperty-attribute"></a>[CompareProperty] 특성
 
-<xref:System.ComponentModel.DataAnnotations.CompareAttribute> `DataAnnotationsValidator` 구성 요소에서 제대로 작동 하지 않습니다. `Microsoft.AspNetCore.Blazor.DataAnnotations.Validation` 패키지에서는 이러한 제한 사항을 해결 하는 추가 유효성 검사 특성 `ComparePropertyAttribute`를 소개 합니다. Blazor 앱에서 `ComparePropertyAttribute`은 `CompareAttribute`을 직접 대체 합니다. 자세한 내용은 [Onvalidsubmit EditForm (aspnet/AspNetCore \#10643)로 Compareattribute를 무시](https://github.com/aspnet/AspNetCore/issues/10643#issuecomment-543909748)하는 방법을 참조 하세요.
+<xref:System.ComponentModel.DataAnnotations.CompareAttribute> `DataAnnotationsValidator` 구성 요소에서 제대로 작동 하지 않습니다. [AspNetCoreBlazor입니다. DataAnnotations. 유효성 검사](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.DataAnnotations.Validation) *실험적* 패키지는 이러한 제한을 해결 하는 추가 유효성 검사 특성 `ComparePropertyAttribute`을 제공 합니다. Blazor 앱에서 `[CompareProperty]`는 `[Compare]` 특성을 직접 대체 합니다. 자세한 내용은 [Onvalidsubmit EditForm (aspnet/AspNetCore #10643)에서 Compareattribute를 무시](https://github.com/aspnet/AspNetCore/issues/10643#issuecomment-543909748)하는 방법을 참조 하세요.
+
+### <a name="nested-models-collection-types-and-complex-types"></a>중첩 된 모델, 컬렉션 형식 및 복합 형식
+
+Blazor은 기본 제공 `DataAnnotationsValidator`에서 데이터 주석을 사용 하 여 양식 입력의 유효성을 검사 하는 기능을 지원 합니다. 그러나 `DataAnnotationsValidator`는 컬렉션 또는 복합 형식 속성이 아닌 폼에 바인딩된 모델의 최상위 속성에 대해서만 유효성을 검사 합니다.
+
+컬렉션 및 복합 형식 속성을 포함 하 여 바인딩된 모델의 전체 개체 그래프의 유효성을 검사 하려면BlazorAspNetCore에서 *제공 하는* `ObjectGraphDataAnnotationsValidator`을 사용 합니다. [ DataAnnotations. 유효성 검사](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.DataAnnotations.Validation) 패키지:
+
+```cshtml
+<EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
+    <ObjectGraphDataAnnotationsValidator />
+    ...
+</EditForm>
+```
+
+`[ValidateComplexType]`를 사용 하 여 모델 속성에 주석을 추가 합니다. 다음 모델 클래스에서 `ShipDescription` 클래스에는 모델이 폼에 바인딩될 때 유효성을 검사 하기 위한 추가 데이터 주석이 포함 되어 있습니다.
+
+*Starship.cs*:
+
+```csharp
+using System;
+using System.ComponentModel.DataAnnotations;
+
+public class Starship
+{
+    ...
+
+    [ValidateComplexType]
+    public ShipDescription ShipDescription { get; set; }
+
+    ...
+}
+```
+
+*ShipDescription.cs*:
+
+```csharp
+using System;
+using System.ComponentModel.DataAnnotations;
+
+public class ShipDescription
+{
+    [Required]
+    [StringLength(40, ErrorMessage = "Description too long (40 char).")]
+    public string ShortDescription { get; set; }
+    
+    [Required]
+    [StringLength(240, ErrorMessage = "Description too long (240 char).")]
+    public string LongDescription { get; set; }
+}
+```
 
 ::: moniker-end
 
@@ -219,6 +309,6 @@ public class Starship
 
 ### <a name="validation-of-complex-or-collection-type-properties"></a>복합 형식 또는 컬렉션 형식 속성의 유효성 검사
 
-모델의 속성에 적용 되는 유효성 검사 특성은 폼이 제출 될 때 유효성을 검사 합니다. 그러나 모델의 복합 데이터 형식 또는 컬렉션의 속성은 `DataAnnotationsValidator` 구성 요소에의 한 폼 전송에서 유효성이 검사 되지 않습니다. 이 시나리오에서 중첩 된 유효성 검사 특성을 적용 하려면 사용자 지정 유효성 검사 구성 요소를 사용 합니다. 예제는 [aspnet/Samples GitHub 리포지토리에서 Blazor Validation 샘플](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/Validation)을 참조 하세요.
+모델의 속성에 적용 되는 유효성 검사 특성은 폼이 제출 될 때 유효성을 검사 합니다. 그러나 모델의 복합 데이터 형식 또는 컬렉션의 속성은 `DataAnnotationsValidator` 구성 요소에의 한 폼 전송에서 유효성이 검사 되지 않습니다. 이 시나리오에서 중첩 된 유효성 검사 특성을 적용 하려면 사용자 지정 유효성 검사 구성 요소를 사용 합니다. 예제는 [Blazor 유효성 검사 샘플 (aspnet/샘플)](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/Validation)을 참조 하세요.
 
 ::: moniker-end

@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 03/18/2019
 uid: mvc/views/tag-helpers/intro
-ms.openlocfilehash: 870ce2eb28f384b380cc1178842325dc28199f09
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: 15f94fd1c619e9f69c5783f664eafc9ca28f86f9
+ms.sourcegitcommit: 8157e5a351f49aeef3769f7d38b787b4386aad5f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67814985"
+ms.lasthandoff: 11/20/2019
+ms.locfileid: "74239854"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>ASP.NET Core의 태그 도우미
 
@@ -97,7 +97,7 @@ FQN을 사용하여 보기에 태그 도우미를 추가하려면 먼저 FQN(`Au
 
 `@removeTagHelper`는 `@addTagHelper`와 동일한 두 개의 매개 변수를 갖고 있으며, 이전에 추가된 태그 도우미를 제거합니다. 예를 들어 특정 보기에 적용된 `@removeTagHelper`는 보기에서 지정된 태그 도우미를 제거합니다. *Views/Folder/_ViewImports.cshtml* 파일에 `@removeTagHelper`를 사용하면 *폴더*에 있는 모든 보기에서 지정된 태그 도우미가 제거됩니다.
 
-### <a name="controlling-tag-helper-scope-with-the-viewimportscshtml-file"></a>*_ViewImports.cshtml* 파일을 사용하여 태그 도우미 범위 제어
+### <a name="controlling-tag-helper-scope-with-the-_viewimportscshtml-file"></a>*_ViewImports.cshtml* 파일을 사용하여 태그 도우미 범위 제어
 
 보기 폴더에 *_ViewImports.cshtml*을 추가할 수 있습니다. 그러면 보기 엔진이 해당 파일과 *Views/_ViewImports.cshtml* 파일의 지시문을 적용합니다. *홈* 보기에 대한 비어 있는 *Views/Home/_ViewImports.cshtml* 파일을 추가한 경우 변경되는 내용이 없습니다. *_ViewImports.cshtml* 파일은 추가 파일이기 때문입니다. *Views/Home/_ViewImports.cshtml* 파일(기본 *Views/_ViewImports.cshtml* 파일에 없음)에 추가되는 `@addTagHelper` 지시문은 *홈* 폴더에 있는 보기에만 태그 도우미를 노출합니다.
 
@@ -132,6 +132,22 @@ FQN을 사용하여 보기에 태그 도우미를 추가하려면 먼저 FQN(`Au
 ## <a name="self-closing-tag-helpers"></a>자체 닫는 태그 도우미
 
 여러 태그 도우미를 자체 닫는 태그로 사용할 수 없습니다. 일부 태그 도우미는 자체 닫는 태그로 설계되었습니다. 자체 닫는 태그로 설계되지 않은 태그 도우미를 사용하면 렌더링된 출력이 표시되지 않습니다. 태그 도우미를 자체적으로 닫으면 렌더링된 출력에 자체 닫는 태그가 생성됩니다. 자세한 내용은 [태그 도우미 작성](xref:mvc/views/tag-helpers/authoring)에서 [이 메모](xref:mvc/views/tag-helpers/authoring#self-closing)를 참조하세요.
+
+## <a name="c-in-tag-helpers-attributedeclaration"></a>태그 도우미 특성/선언의 C# 
+
+태그 도우미는 요소의 특성 또는 태그 선언 영역에서 C#을 허용하지 않습니다. 예를 들어 다음 코드는 잘못되었습니다.
+
+```cshtml
+<input asp-for="LastName"  
+       @(Model?.LicenseId == null ? "disabled" : string.Empty) />
+```
+
+위 코드는 다음과 같이 작성할 수 있습니다.
+
+```cshtml
+<input asp-for="LastName" 
+       disabled="@(Model?.LicenseId == null)" />
+```
 
 ## <a name="intellisense-support-for-tag-helpers"></a>태그 도우미에 대한 IntelliSense 지원
 

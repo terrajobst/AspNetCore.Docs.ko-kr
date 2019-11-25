@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/07/2019
 uid: fundamentals/servers/index
-ms.openlocfilehash: e542dd4506eb77f949c0c87bea3044397bbb1b8f
-ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
+ms.openlocfilehash: d46793ef54c99fe609b5983c5a658fb7b20032fa
+ms.sourcegitcommit: f40c9311058c9b1add4ec043ddc5629384af6c56
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73799401"
+ms.lasthandoff: 11/21/2019
+ms.locfileid: "74289059"
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>ASP.NET Core의 웹 서버 구현
 
@@ -22,7 +22,7 @@ ASP.NET Core 앱은 In-Process HTTP 서버 구현을 사용하여 실행됩니�
 
 ## <a name="kestrel"></a>Kestrel
 
-Kestrel은 ASP.NET Core 프로젝트 템플릿에 포함된 기본 웹 서버입니다.
+Kestrel은 ASP.NET Core 프로젝트 템플릿에서 지정된 기본 웹 서버입니다.
 
 다음과 같이 Kestrel을 사용할 수 있습니다.
 
@@ -158,7 +158,7 @@ IDE(통합 개발 환경)이나 편집기가 앱을 시작하는 경우 서버�
 
 프로젝트의 폴더에 있는 명령 프롬프트에서 앱을 시작할 때 [dotnet run](/dotnet/core/tools/dotnet-run)은 서버 및 앱을 시작합니다(Kestrel 및 HTTP.sys만 해당). `Debug`(기본값) 또는 `Release`로 설정되어 있는 `-c|--configuration` 옵션으로 구성을 지정합니다.
 
-*launchSettings.json* 파일은 `dotnet run`을 사용하거나 Visual Studio와 같은 도구에 기본 제공되는 디버거를 사용하여 앱을 시작할 때 구성을 제공합니다. 시작 프로필이 *launchSettings.json* 파일에 있는 경우`dotnet run` 명령에 `--launch-profile {PROFILE NAME}` 옵션을 사용하거나 Visual Studio에서 프로필을 선택합니다. 자세한 내용은 [dotnet run](/dotnet/core/tools/dotnet-run) 및 [.NET Core 배포 패키징](/dotnet/core/build/distribution-packaging)을 참조하세요.
+*launchSettings.json* 파일은 `dotnet run`을 사용하거나 Visual Studio와 같은 도구에 기본 제공되는 디버거를 사용하여 앱을 시작할 때 구성을 제공합니다. 시작 프로필이 *launchSettings.json* 파일에 있는 경우 `dotnet run` 명령에 `--launch-profile {PROFILE NAME}` 옵션을 사용하거나 Visual Studio에서 프로필을 선택합니다. 자세한 내용은 [dotnet run](/dotnet/core/tools/dotnet-run) 및 [.NET Core 배포 패키징](/dotnet/core/build/distribution-packaging)을 참조하세요.
 
 ## <a name="http2-support"></a>HTTP/2 지원
 

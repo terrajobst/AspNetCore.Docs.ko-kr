@@ -5,14 +5,14 @@ description: ASP.NET Core 앱의 여러 환경에서 앱 동작을 제어하는 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/05/2019
+ms.date: 11/07/2019
 uid: fundamentals/environments
-ms.openlocfilehash: 91fa2a78e62dff65704a3dda826f45f27bad6064
-ms.sourcegitcommit: 897d4abff58505dae86b2947c5fe3d1b80d927f3
+ms.openlocfilehash: 7e49499e94fb9ea82a0ba17e4e9de05c6a2d4e98
+ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73634089"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73799308"
 ---
 # <a name="use-multiple-environments-in-aspnet-core"></a>ASP.NET Core에서 여러 환경 사용
 
@@ -262,7 +262,7 @@ Windows에서 전역적으로 값을 설정하려면 다음 방법 중 하나를
 
 **프로젝트 파일 또는 게시 프로필**
 
-**Windows IIS 배포의 경우:** `<EnvironmentName>` 속성을 게시 프로필( *.pubxml*) 또는 프로젝트 파일에 포함합니다. 이 방법은 프로젝트가 게시될 때 *web.config*에 환경을 설정합니다.
+**Windows IIS 배포의 경우:** `<EnvironmentName>` 속성을 [게시 프로필(.pubxml)](xref:host-and-deploy/visual-studio-publish-profiles) 또는 프로젝트 파일에 포함합니다. 이 방법은 프로젝트가 게시될 때 *web.config*에 환경을 설정합니다.
 
 ```xml
 <PropertyGroup>

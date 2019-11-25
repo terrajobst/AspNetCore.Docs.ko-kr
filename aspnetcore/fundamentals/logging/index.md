@@ -5,14 +5,14 @@ description: Microsoft.Extensions.Logging NuGet 패키지에서 제공하는 로
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/05/2019
+ms.date: 11/19/2019
 uid: fundamentals/logging/index
-ms.openlocfilehash: 2cb19d251ad69ebd7d18480c14857e948c69b747
-ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
+ms.openlocfilehash: b23e64077290f0f613e904651e4bb640fcbba95d
+ms.sourcegitcommit: f40c9311058c9b1add4ec043ddc5629384af6c56
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73659967"
+ms.lasthandoff: 11/21/2019
+ms.locfileid: "74289084"
 ---
 # <a name="logging-in-net-core-and-aspnet-core"></a>.NET Core 및 ASP.NET Core의 로깅
 
@@ -311,8 +311,6 @@ public class Program
 
 예를 들어 로깅 구성은 일반적으로 앱 설정 파일의 `Logging` 섹션에서 제공됩니다. 다음 예제에서는 일반적인 *appsettings.Development.json* 파일의 콘텐츠를 보여줍니다.
 
-::: moniker range=">= aspnetcore-2.1"
-
 ```json
 {
   "Logging": {
@@ -337,7 +335,7 @@ public class Program
 
 수준이 `Logging.{providername}.LogLevel`에 지정된 경우 `Logging.LogLevel`에 설정된 모든 수준을 재정의합니다.
 
-::: moniker-end
+로깅 API는 앱이 실행되는 동안 로그 수준을 변경하는 시나리오를 포함하지 않습니다. 그러나 일부 구성 공급자는 구성을 다시 로드할 수 있으며 이는 로깅 구성에 대한 즉각적인 영향을 줍니다. 예를 들어 [파일 구성 공급자](xref:fundamentals/configuration/index#file-configuration-provider)는 설정 파일을 읽기 위해 `CreateDefaultBuilder`에 의해 추가되며 기본적으로 로깅 구성을 다시 로드합니다. 앱이 실행되는 동안 코드에서 구성이 변경되면 앱 [IConfigurationRoot.Reload](xref:Microsoft.Extensions.Configuration.IConfigurationRoot.Reload*)를 호출하여 앱의 로깅 구성을 업데이트할 수 있습니다.
 
 구성 공급자 구현에 대한 자세한 내용은 <xref:fundamentals/configuration/index>를 참조하세요.
 
@@ -706,7 +704,7 @@ System.Exception: Item not found exception.
 
 ### <a name="create-filter-rules-in-configuration"></a>구성에서 필터 규칙 만들기
 
-프로젝트 템플릿 코드는 `CreateDefaultBuilder`를 호출하여 콘솔 및 디버그 공급자에 대한 로깅을 설정합니다. [이 문서의 앞](#configuration)에서 설명한 것처럼 `CreateDefaultBuilder` 메서드는 `Logging` 섹션에서 구성을 조회하는 로깅을 설정합니다.
+프로젝트 템플릿 코드는 `CreateDefaultBuilder`를 호출하여 콘솔, 디버그 및 EventSource(ASP.NET Core 2.2 이상) 공급자에 대한 로깅을 설정합니다. [이 문서의 앞](#configuration)에서 설명한 것처럼 `CreateDefaultBuilder` 메서드는 `Logging` 섹션에서 구성을 조회하는 로깅을 설정합니다.
 
 구성 데이터는 다음 예제와 같이 공급자 및 범주별로 최소 로그 수준을 지정합니다.
 
@@ -892,7 +890,7 @@ ASP.NET Core는 다음 공급자를 제공합니다.
 
 * [콘솔](#console-provider)
 * [디버그](#debug-provider)
-* [EventSource](#eventsource-provider)
+* [EventSource](#event-source-provider)
 * [EventLog](#windows-eventlog-provider)
 * [TraceSource](#tracesource-provider)
 * [AzureAppServicesFile](#azure-app-service-provider)
@@ -925,15 +923,121 @@ Linux에서 이 공급자는 */var/log/message*에 로그를 씁니다.
 logging.AddDebug();
 ```
 
-### <a name="eventsource-provider"></a>EventSource 공급자
+### <a name="event-source-provider"></a>이벤트 원본 공급자
 
-ASP.NET Core 1.1.0 이상을 대상으로 하는 앱의 경우 [Microsoft.Extensions.Logging.EventSource](https://www.nuget.org/packages/Microsoft.Extensions.Logging.EventSource) 공급자 패키지로 이벤트 추적을 구현할 수 있습니다. Windows에서는 [ETW](https://msdn.microsoft.com/library/windows/desktop/bb968803)를 사용합니다. 이 공급자는 플랫폼 간 공급자이지만 Linux 또는 macOS 용 이벤트 수집 및 표시 도구는 아직 없습니다.
+[Microsoft.Extensions.Logging.EventSource](https://www.nuget.org/packages/Microsoft.Extensions.Logging.EventSource) 공급자 패키지는 `Microsoft-Extensions-Logging` 이름을 사용하여 플랫폼 간 이벤트 원본에 씁니다. Windows에서 공급자는 [ETW](https://msdn.microsoft.com/library/windows/desktop/bb968803)를 사용합니다.
 
 ```csharp
 logging.AddEventSourceLogger();
 ```
 
-로그를 수집하고 보는 좋은 방법은 [PerfView 유틸리티](https://github.com/Microsoft/perfview)를 사용하는 것입니다. ETW 로그를 보는 다른 도구도 있지만, PerfView는 ASP.NET Core에서 내보내는 ETW 이벤트를 처리하기에 가장 좋은 환경을 제공합니다.
+호스트를 빌드하기 위해 `CreateDefaultBuilder`가 호출되면 이벤트 원본 공급자가 자동으로 추가됩니다.
+
+::: moniker range=">= aspnetcore-3.0"
+
+#### <a name="dotnet-trace-tooling"></a>dotnet 추적 도구
+
+[dotnet 추적](/dotnet/core/diagnostics/dotnet-trace) 도구는 실행 중인 프로세스의 .NET Core 추적을 수집할 수 있도록 하는 플랫폼 간 CLI 전역 도구입니다. 이 도구는 <xref:Microsoft.Extensions.Logging.EventSource.LoggingEventSource>를 사용하여 <xref:Microsoft.Extensions.Logging.EventSource> 공급자 데이터를 수집합니다.
+
+다음 명령을 사용하여 dotnet 추적 도구를 설치합니다.
+
+```dotnetcli
+dotnet tool install --global dotnet-trace
+```
+
+Dotnet 추적 도구를 사용하여 앱에서 추적을 수집합니다.
+
+1. 앱이 `CreateDefaultBuilder`를 사용하여 호스트를 빌드하지 않는 경우 [이벤트 원본 공급자](#event-source-provider)를 앱의 로깅 구성에 추가합니다.
+
+1. `dotnet run` 명령으로 앱을 실행합니다.
+
+1. .NET Core 앱의 PID(프로세스 식별자)를 확인합니다.
+
+   * Windows에서 다음 접근 방식 중 하나를 사용합니다.
+     * 작업 관리자(Ctrl + Alt + Del)
+     * [tasklist 명령](/windows-server/administration/windows-commands/tasklist)
+     * [Get-Process Powershell 명령](/powershell/module/microsoft.powershell.management/get-process)
+   * Linux에서는 [pidof 명령](https://refspecs.linuxfoundation.org/LSB_5.0.0/LSB-Core-generic/LSB-Core-generic/pidof.html)을 사용합니다.
+
+   앱의 어셈블리와 동일한 이름의 프로세스에 대한 PID를 찾습니다.
+
+1. `dotnet trace` 명령을 실행합니다.
+
+   일반 명령 구문:
+
+   ```dotnetcli
+   dotnet trace collect -p {PID} 
+       --providers Microsoft-Extensions-Logging:{Keyword}:{Event Level}
+           :FilterSpecs=\"
+               {Logger Category 1}:{Event Level 1};
+               {Logger Category 2}:{Event Level 2};
+               ...
+               {Logger Category N}:{Event Level N}\"
+   ```
+
+   PowerShell 명령 셸을 사용하는 경우 `--providers` 값을 작은따옴표(`'`)로 묶습니다.
+
+   ```dotnetcli
+   dotnet trace collect -p {PID} 
+       --providers 'Microsoft-Extensions-Logging:{Keyword}:{Event Level}
+           :FilterSpecs=\"
+               {Logger Category 1}:{Event Level 1};
+               {Logger Category 2}:{Event Level 2};
+               ...
+               {Logger Category N}:{Event Level N}\"'
+   ```
+
+   Windows가 아닌 플랫폼에서는 출력 추적 파일의 형식을 `speedscope`로 변경하는 `-f speedscope` 옵션을 추가합니다.
+
+   | 키워드 | 설명 |
+   | :-----: | ----------- |
+   | 1       | `LoggingEventSource`에 대한 로그 메타 이벤트입니다. `ILogger`)에서 이벤트를 기록하지 않습니다. |
+   | 2       | `ILogger.Log()`가 호출될 때 `Message` 이벤트 설정을 켭니다. 서식 지정되지 않은 프로그래밍 방식으로 정보를 제공합니다. |
+   | 4       | `ILogger.Log()`가 호출될 때 `FormatMessage` 이벤트 설정을 켭니다. 서식 지정된 문자열 버전의 정보를 제공합니다. |
+   | 8       | `ILogger.Log()`가 호출될 때 `MessageJson` 이벤트 설정을 켭니다. 인수의 JSON 표현을 제공합니다. |
+
+   | 이벤트 수준 | 설명     |
+   | :---------: | --------------- |
+   | 0           | `LogAlways`     |
+   | 1           | `Critical`      |
+   | 2           | `Error`         |
+   | 3           | `Warning`       |
+   | 4           | `Informational` |
+   | 5           | `Verbose`       |
+
+   `FilterSpecs` `{Logger Category}` 및 `{Event Level}`에 대한 항목은 추가 로그 필터링 조건을 나타냅니다. `FilterSpecs` 항목을 세미콜론(`;`)으로 구분합니다.
+
+   Windows 명령 셸을 사용하는 예(`--providers` 값에 작은따옴표를 사용하지 **않음**):
+
+   ```dotnetcli
+   dotnet trace collect -p {PID} --providers Microsoft-Extensions-Logging:4:2:FilterSpecs=\"Microsoft.AspNetCore.Hosting*:4\"
+   ```
+
+   이전 명령은 다음과 같이 활성화됩니다.
+
+   * (`2`) 오류에 대해 형식이 지정된 문자열(`4`)을 생성하는 이벤트 원본 로거입니다.
+   * `Informational` 로깅 수준에서 `Microsoft.AspNetCore.Hosting` 로깅(`4`).
+
+1. Enter 키 또는 Ctrl + C를 눌러 dotnet 추적 도구를 중지합니다.
+
+   추적은 `dotnet trace` 명령이 실행되는 폴더에 *trace.nettrace* 이름으로 저장됩니다.
+
+1. [Perfview](#perfview)를 사용하여 추적을 엽니다. *trace.nettrace* 파일을 열고 추적 이벤트를 탐색합니다.
+
+자세한 내용은 다음을 참조하세요.
+
+* [성능 분석 유틸리티 추적(dotnet 추적)](/dotnet/core/diagnostics/dotnet-trace)(.NET Core 설명서)
+* [성능 분석 유틸리티 추적(dotnet 추적)](https://github.com/dotnet/diagnostics/blob/master/documentation/dotnet-trace-instructions.md)(dotnet/진단 GitHub 리포지토리 설명서)
+* [LoggingEventSource 클래스](xref:Microsoft.Extensions.Logging.EventSource.LoggingEventSource)(.NET API 브라우저)
+* <xref:System.Diagnostics.Tracing.EventLevel>
+* [LoggingEventSource reference source(3.0)](https://github.com/aspnet/Extensions/blob/release/3.0/src/Logging/Logging.EventSource/src/LoggingEventSource.cs) &ndash; 다른 버전에 대한 참조 소스를 가져오려면 분기를 `release/{Version}`으로 변경합니다. 여기서 `{Version}`은 원하는 ASP.NET Core 버전입니다.
+* [Perfview](#perfview) &ndash; 이벤트 원본 추적을 보는 데 유용합니다.
+
+#### <a name="perfview"></a>Perfview
+
+::: moniker-end
+
+[PerfView 유틸리티](https://github.com/Microsoft/perfview)를 사용하여 로그를 수집하고 볼 수 있습니다. ETW 로그를 보는 다른 도구도 있지만, PerfView는 ASP.NET Core에서 내보내는 ETW 이벤트를 처리하기에 가장 좋은 환경을 제공합니다.
 
 이 공급자가 기록한 이벤트를 수집하도록 PerfView를 구성하려면 **추가 공급자** 목록에 `*Microsoft-Extensions-Logging` 문자열을 추가합니다. (문자열의 시작 부분에 별표를 누락하지 마세요.)
 
@@ -975,7 +1079,7 @@ logging.AddAzureWebAppDiagnostics();
 
 ::: moniker-end
 
-::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
+::: moniker range="< aspnetcore-3.0"
 
 이 공급자 패키지는 [Microsoft.AspNetCore.App 메타패키지](xref:fundamentals/metapackage-app)에 포함되어 있지 않습니다. .NET Framework를 대상으로 지정하거나 `Microsoft.AspNetCore.App` 메타패키지를 참조하는 경우 공급자 패키지를 프로젝트에 추가합니다. 
 
@@ -1024,7 +1128,7 @@ Azure 로그 스트리밍을 구성하려면:
 
 * 앱의 포털 페이지에서 **App Service 로그** 페이지로 이동합니다.
 * **애플리케이션 로깅(파일 시스템)** 을 **On**으로 설정합니다.
-* 로그 **수준**을 선택합니다.
+* 로그 **수준**을 선택합니다. 이 설정은 앱의 다른 로깅 공급자가 아닌 Azure 로그 스트리밍에만 적용됩니다.
 
 **로그 스트림** 페이지로 이동하여 앱 메시지를 봅니다. 앱이 `ILogger` 인터페이스를 통해 기록한 것입니다.
 

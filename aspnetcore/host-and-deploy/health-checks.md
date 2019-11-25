@@ -5,14 +5,14 @@ description: 앱 및 데이터베이스와 같은 ASP.NET Core 인프라의 상�
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/03/2019
+ms.date: 11/13/2019
 uid: host-and-deploy/health-checks
-ms.openlocfilehash: c7cf1c432d2186f0e2f9f5082e8a2229d8a5ef8f
-ms.sourcegitcommit: 9e85c2562df5e108d7933635c830297f484bb775
+ms.openlocfilehash: 4a4606a58178018f0d71d467d4c8b6c9982c09dc
+ms.sourcegitcommit: 231780c8d7848943e5e9fd55e93f437f7e5a371d
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/04/2019
-ms.locfileid: "73463023"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74116001"
 ---
 # <a name="health-checks-in-aspnet-core"></a>ASP.NET Core의 상태 검사
 
@@ -148,6 +148,40 @@ services.AddHealthChecks()
 services.AddHealthChecks()
     .AddCheck("Example", () =>
         HealthCheckResult.Healthy("Example is OK!"), tags: new[] { "example" });
+```
+
+<xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddTypeActivatedCheck*>를 호출하여 상태 검사 구현에 인수를 전달합니다. 다음 예제에서 `TestHealthCheckWithArgs`는 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck.CheckHealthAsync*>가 호출될 때 사용할 정수 및 문자열을 허용합니다.
+
+```csharp
+private class TestHealthCheckWithArgs : IHealthCheck
+{
+    public TestHealthCheckWithArgs(int i, string s)
+    {
+        I = i;
+        S = s;
+    }
+
+    public int I { get; set; }
+
+    public string S { get; set; }
+
+    public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, 
+        CancellationToken cancellationToken = default)
+    {
+        ...
+    }
+}
+```
+
+`TestHealthCheckWithArgs`는 구현에 전달된 정수 및 문자열로 `AddTypeActivatedCheck`를 호출하여 등록됩니다.
+
+```csharp
+services.AddHealthChecks()
+    .AddTypeActivatedCheck<TestHealthCheckWithArgs>(
+        "test", 
+        failureStatus: HealthStatus.Degraded, 
+        tags: new[] { "example" }, 
+        args: new object[] { 5, "string" });
 ```
 
 ## <a name="use-health-checks-routing"></a>상태 검사 라우팅 사용

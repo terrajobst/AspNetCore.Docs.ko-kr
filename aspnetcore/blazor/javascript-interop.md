@@ -5,16 +5,16 @@ description: Blazor apps에서 JavaScript의 .NET 및 .NET 메서드에서 JavaS
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/16/2019
+ms.date: 11/21/2019
 no-loc:
 - Blazor
 uid: blazor/javascript-interop
-ms.openlocfilehash: 76437ef00e00f5de1b995b4f0b1a09e5876dff8f
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: f55eda512f8dcf0695c2e7f4655db83b26ea4159
+ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73962836"
+ms.lasthandoff: 11/22/2019
+ms.locfileid: "74317193"
 ---
 # <a name="aspnet-core-opno-locblazor-javascript-interop"></a>JavaScript interop Blazor ASP.NET Core
 
@@ -24,18 +24,18 @@ ms.locfileid: "73962836"
 
 Blazor 앱은 JavaScript 코드에서 .NET 및 .NET 메서드의 JavaScript 함수를 호출할 수 있습니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[샘플 코드 보기 또는 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="invoke-javascript-functions-from-net-methods"></a>.NET 메서드에서 JavaScript 함수 호출
 
-.NET 코드에서 JavaScript 함수를 호출 해야 하는 경우가 있습니다. 예를 들어 JavaScript 호출은 JavaScript 라이브러리의 브라우저 기능 또는 기능을 앱에 노출할 수 있습니다.
+.NET 코드에서 JavaScript 함수를 호출 해야 하는 경우가 있습니다. 예를 들어 JavaScript 호출은 JavaScript 라이브러리의 브라우저 기능 또는 기능을 앱에 노출할 수 있습니다. 이 시나리오를 *JavaScript 상호 운용성* (*JS interop*) 이라고 합니다.
 
-.NET에서 JavaScript를 호출 하려면 `IJSRuntime` 추상화를 사용 합니다. `InvokeAsync<T>` 메서드는 원하는 수의 JSON serialize 가능 인수와 함께 호출 하려는 JavaScript 함수에 대 한 식별자를 사용 합니다. 함수 식별자는 전역 범위 (`window`)를 기준으로 합니다. `window.someScope.someFunction`를 호출 하려는 경우에는 식별자가 `someScope.someFunction`됩니다. 호출 되기 전에 함수를 등록할 필요가 없습니다. 반환 형식 `T`도 JSON serializable 이어야 합니다.
+.NET에서 JavaScript를 호출 하려면 `IJSRuntime` 추상화를 사용 합니다. `InvokeAsync<T>` 메서드는 원하는 수의 JSON serialize 가능 인수와 함께 호출 하려는 JavaScript 함수에 대 한 식별자를 사용 합니다. 함수 식별자는 전역 범위 (`window`)를 기준으로 합니다. `window.someScope.someFunction`를 호출 하려는 경우에는 식별자가 `someScope.someFunction`됩니다. 호출 되기 전에 함수를 등록할 필요가 없습니다. 반환 형식 `T` JSON serializable 이어야 합니다.
 
 Blazor Server 앱의 경우:
 
-* Blazor Server 앱에서 여러 사용자 요청을 처리 합니다. JavaScript 함수를 호출 하려면 구성 요소에서 `JSRuntime.Current`을 호출 하지 마세요.
-* `IJSRuntime` 추상화를 삽입 하 고 삽입 된 개체를 사용 하 여 JavaScript interop 호출을 실행 합니다.
+* Blazor Server 앱에서 여러 사용자 요청을 처리 합니다. JavaScript 함수를 호출 하기 위해 구성 요소에서 `JSRuntime.Current`를 호출 하지 마세요.
+* `IJSRuntime` 추상화를 삽입 하 고 삽입 된 개체를 사용 하 여 JS interop 호출을 실행 합니다.
 * Blazor 앱은 렌더링 되지 않지만 브라우저와의 연결이 설정 되지 않았기 때문에 JavaScript를 호출할 수 없습니다. 자세한 내용은 [Blazor 앱이 사전 렌더링 되는 경우 검색](#detect-when-a-blazor-app-is-prerendering) 섹션을 참조 하세요.
 
 다음 예제는 실험적 JavaScript 기반 디코더 인 [Textdecoder](https://developer.mozilla.org/docs/Web/API/TextDecoder)를 기반으로 합니다. 이 예제에서는 C# 메서드에서 JavaScript 함수를 호출 하는 방법을 보여 줍니다. JavaScript 함수는 C# 메서드에서 바이트 배열을 받아 배열을 디코딩하고 표시를 위해 구성 요소에 텍스트를 반환 합니다.
@@ -57,7 +57,7 @@ Blazor Server 앱의 경우:
 
 [!code-cshtml[](javascript-interop/samples_snapshot/call-js-example.razor?highlight=2,34-35)]
 
-##  <a name="use-of-ijsruntime"></a>IJSRuntime 사용
+## <a name="use-of-ijsruntime"></a>IJSRuntime 사용
 
 `IJSRuntime` 추상화를 사용 하려면 다음 방법 중 하나를 채택 합니다.
 
@@ -86,10 +86,10 @@ Blazor Server 앱의 경우:
 
 이 항목과 함께 제공 되는 클라이언트 쪽 샘플 앱에서는 사용자 입력을 받고 환영 메시지를 표시 하기 위해 DOM과 상호 작용 하는 두 가지 JavaScript 함수를 앱에서 사용할 수 있습니다.
 
-* `showPrompt` &ndash;은 사용자 입력 (사용자 이름)을 수락 하 고 이름을 호출자에 게 반환 하 라는 프롬프트를 생성 합니다.
-* `displayWelcome` &ndash;은 `welcome`의 `id` 인 DOM 개체에 대 한 시작 메시지를 호출자에 게 할당 합니다.
+* `showPrompt` &ndash;에서 사용자 입력을 수락 하는 프롬프트 (사용자 이름)를 생성 하 고 이름을 호출자에 게 반환 합니다.
+* `displayWelcome` &ndash;는 `welcome``id`를 사용 하 여 호출자의 시작 메시지를 DOM 개체에 할당 합니다.
 
-*wwwroot/exampleJsInterop*:
+*wwwroot/exampleJsInterop.js*:
 
 [!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=2-7)]
 
@@ -105,11 +105,11 @@ JavaScript 파일을 참조 하는 `<script>` 태그를 *wwwroot/index.html* 파
 
 `<script>` 태그를 동적으로 업데이트할 수 없으므로 구성 요소 파일에 `<script>` 태그를 넣지 마세요.
 
-.NET 메서드는 `IJSRuntime.InvokeAsync<T>`을 호출 하 여 *exampleJsInterop* 파일의 JavaScript 함수를 사용 하 여 상호 운용 합니다.
+.NET 메서드는 `IJSRuntime.InvokeAsync<T>`를 호출 하 여 *exampleJsInterop* 파일의 JavaScript 함수를 사용 하 여 상호 운용 합니다.
 
-`IJSRuntime` 추상화는 Blazor 서버 시나리오를 허용 하는 비동기입니다. 앱이 Blazor Weasembomapp이 고 JavaScript 함수를 동기적으로 호출 하려는 경우에는 다운 캐스트를 `IJSInProcessRuntime` 하 고 대신 `Invoke<T>`를 호출 합니다. 대부분의 JavaScript interop 라이브러리는 비동기 Api를 사용 하 여 모든 시나리오에서 라이브러리를 사용할 수 있도록 하는 것이 좋습니다.
+`IJSRuntime` 추상화는 Blazor 서버 시나리오를 허용 하는 비동기입니다. 앱이 Blazor Weasembomapp이 고 JavaScript 함수를 동기적으로 호출 하려는 경우에는 다운 캐스트를 `IJSInProcessRuntime` 하 고 대신 `Invoke<T>`를 호출 합니다. 대부분의 JS interop 라이브러리는 비동기 Api를 사용 하 여 모든 시나리오에서 라이브러리를 사용할 수 있도록 하는 것이 좋습니다.
 
-샘플 앱에는 JavaScript interop를 설명 하는 구성 요소가 포함 되어 있습니다. 구성 요소:
+샘플 앱에는 JS interop를 시연 하는 구성 요소가 포함 되어 있습니다. 구성 요소:
 
 * JavaScript 프롬프트를 통해 사용자 입력을 받습니다.
 * 처리를 위해 구성 요소에 텍스트를 반환 합니다.
@@ -119,8 +119,8 @@ JavaScript 파일을 참조 하는 `<script>` 태그를 *wwwroot/index.html* 파
 
 [!code-cshtml[](./common/samples/3.x/BlazorWebAssemblySample/Pages/JsInterop.razor?name=snippet_JSInterop1&highlight=3,19-21,23-25)]
 
-1. 구성 요소의 **트리거 Javascript 프롬프트** 단추를 선택 하 여 `TriggerJsPrompt`을 실행 하면 *wwwroot/exampleJsInterop* 파일에 제공 된 JavaScript `showPrompt` 함수가 호출 됩니다.
-1. `showPrompt` 함수는 사용자 입력 (사용자 이름)을 허용 하며,이는 HTML로 인코딩하고 구성 요소로 반환 됩니다. 이 구성 요소는 사용자의 이름을 지역 변수에 저장 합니다. `name`입니다.
+1. 구성 요소의 **트리거 Javascript 프롬프트** 단추를 선택 하 여 `TriggerJsPrompt`를 실행 하면 *wwwroot/exampleJsInterop* 파일에 제공 된 javascript `showPrompt` 함수를 호출 합니다.
+1. `showPrompt` 함수는 사용자 입력 (사용자 이름)을 허용 하며,이는 HTML로 인코딩하고 구성 요소로 반환 됩니다. 이 구성 요소는 `name`지역 변수에 사용자 이름을 저장 합니다.
 1. `name`에 저장 된 문자열은 환영 메시지에 통합 됩니다 .이 메시지는 환영 메시지를 머리글 태그에 렌더링 하는 `displayWelcome`JavaScript 함수에 전달 됩니다.
 
 ## <a name="call-a-void-javascript-function"></a>Void JavaScript 함수 호출
@@ -133,7 +133,7 @@ JavaScript 파일을 참조 하는 `<script>` 태그를 *wwwroot/index.html* 파
 
 ## <a name="capture-references-to-elements"></a>요소에 대 한 참조 캡처
 
-일부 [JavaScript interop](xref:blazor/javascript-interop) 시나리오에서는 HTML 요소에 대 한 참조가 필요 합니다. 예를 들어, UI 라이브러리에서 초기화를 위해 요소 참조를 요구 하거나, `focus` 또는 `play`과 같은 명령 Api를 요소에서 호출 해야 할 수 있습니다.
+일부 JS interop 시나리오에서는 HTML 요소에 대 한 참조가 필요 합니다. 예를 들어, UI 라이브러리에서 초기화를 위해 요소 참조를 요구 하거나, `focus` 또는 `play`와 같은 요소에서 명령 같은 Api를 호출 해야 할 수 있습니다.
 
 다음 방법을 사용 하 여 구성 요소의 HTML 요소에 대 한 참조를 캡처합니다.
 
@@ -150,14 +150,27 @@ JavaScript 파일을 참조 하는 `<script>` 태그를 *wwwroot/index.html* 파
 }
 ```
 
-> [!NOTE]
-> 캡처한 요소 참조를 DOM을 채우는 방법으로 사용 **하지** 마십시오. 이렇게 하면 선언적 렌더링 모델을 방해할 수 있습니다.
+> [!WARNING]
+> Blazor와 상호 작용 하지 않는 빈 요소의 내용은 요소 참조를 사용 하 여 변경할 수 있습니다. 이 시나리오는 타사 API가 요소에 콘텐츠를 제공 하는 경우에 유용 합니다. Blazor는 요소와 상호 작용 하지 않으므로 요소와 DOM의 Blazor표시 간에 충돌이 발생할 가능성이 없습니다.
+>
+> 다음 예제에서는 Blazor DOM과 상호 작용 하 여이 요소의 목록 항목 (`<li>`)을 채우기 때문에 순서가 지정 되지 않은 목록 (`ul`)의 *콘텐츠를 변경할 수 있습니다* .
+>
+> ```cshtml
+> <ul ref="MyList">
+>     @foreach (var item in Todos)
+>     {
+>         <li>@item.Text</li>
+>     }
+> </ul>
+> ```
+>
+> JS interop에서 요소 `MyList`의 내용을 capture 하 고 Blazor 요소에 차이을 적용 하려고 하면 차이는 DOM과 일치 하지 않습니다.
 
-.NET 코드와 관련 하 여 `ElementReference`은 불투명 핸들입니다. `ElementReference`로 수행할 수 있는 *유일한* 작업은 javascript interop를 통해 javascript 코드에 전달 하는 것입니다. 이렇게 하면 JavaScript 쪽 코드가 일반적인 DOM Api에서 사용할 수 있는 `HTMLElement` 인스턴스를 수신 합니다.
+.NET 코드와 관련 하 여 `ElementReference` 불투명 핸들입니다. `ElementReference`로 수행할 수 있는 *유일한* 작업은 JS interop를 통해 JavaScript 코드에 전달 하는 것입니다. 이렇게 하면 JavaScript 쪽 코드가 일반적인 DOM Api와 함께 사용할 수 있는 `HTMLElement` 인스턴스를 수신 합니다.
 
 예를 들어 다음 코드는 요소에 포커스를 설정할 수 있도록 하는 .NET 확장 메서드를 정의 합니다.
 
-*exampleJsInterop*:
+*exampleJsInterop.js*:
 
 ```javascript
 window.exampleJsFunctions = {
@@ -186,7 +199,7 @@ public static Task Focus(this ElementReference elementRef, IJSRuntime jsRuntime)
 [!code-cshtml[](javascript-interop/samples_snapshot/component2.razor?highlight=1,4,12)]
 
 > [!IMPORTANT]
-> `username` 변수는 구성 요소가 렌더링 된 후에만 채워집니다. 채워지지 않은 `ElementReference`이 JavaScript 코드에 전달 되 면 JavaScript 코드는 `null` 값을 받습니다. 구성 요소에서 렌더링을 완료 한 후 요소 참조를 조작 하려면 (요소에 초기 포커스를 설정 하려면) `OnAfterRenderAsync` 또는 `OnAfterRender` [구성 요소 수명 주기 방법을](xref:blazor/components#lifecycle-methods)사용 합니다.
+> `username` 변수는 구성 요소가 렌더링 된 후에만 채워집니다. JavaScript 코드에 채워지지 않은 `ElementReference` 전달 되 면 JavaScript 코드는 `null`값을 받습니다. 구성 요소에서 렌더링을 완료 한 후 요소 참조를 조작 하려면 (요소에 초기 포커스를 설정 하려면) `OnAfterRenderAsync` 또는 `OnAfterRender` [구성 요소 수명 주기 메서드](xref:blazor/components#lifecycle-methods)를 사용 합니다.
 
 ## <a name="invoke-net-methods-from-javascript-functions"></a>JavaScript 함수에서 .NET 메서드 호출
 
@@ -194,7 +207,7 @@ public static Task Focus(this ElementReference elementRef, IJSRuntime jsRuntime)
 
 JavaScript에서 정적 .NET 메서드를 호출 하려면 `DotNet.invokeMethod` 또는 `DotNet.invokeMethodAsync` 함수를 사용 합니다. 호출할 정적 메서드의 식별자, 함수를 포함 하는 어셈블리의 이름 및 인수를 전달 합니다. 비동기 버전은 Blazor 서버 시나리오를 지원 하기 위해 선호 됩니다. JavaScript에서 .NET 메서드를 호출 하려면 .NET 메서드가 public, static 및 `[JSInvokable]` 특성을 가져야 합니다. 기본적으로 메서드 식별자는 메서드 이름 이지만 `JSInvokableAttribute` 생성자를 사용 하 여 다른 식별자를 지정할 수 있습니다. Open 제네릭 메서드를 호출 하는 것은 현재 지원 되지 않습니다.
 
-샘플 앱에는 `int`s C# 배열을 반환 하는 메서드가 포함 되어 있습니다. `JSInvokable` 특성이 메서드에 적용 됩니다.
+샘플 앱에는 `int`C# s의 배열을 반환 하는 메서드가 포함 되어 있습니다. `JSInvokable` 특성이 메서드에 적용 됩니다.
 
 *Pages/JsInterop*:
 
@@ -202,7 +215,7 @@ JavaScript에서 정적 .NET 메서드를 호출 하려면 `DotNet.invokeMethod`
 
 클라이언트에 제공 된 JavaScript는 .Net C# 메서드를 호출 합니다.
 
-*wwwroot/exampleJsInterop*:
+*wwwroot/exampleJsInterop.js*:
 
 [!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=8-14)]
 
@@ -234,17 +247,17 @@ JavaScript에서 .NET 인스턴스 메서드를 호출할 수도 있습니다. J
 
 `CallHelloHelperSayHello`는 `HelloHelper`의 새 인스턴스와 `sayHello` JavaScript 함수를 호출 합니다.
 
-*JsInteropClasses/ExampleJsInterop*:
+*JsInteropClasses/ExampleJsInterop.cs*:
 
 [!code-csharp[](./common/samples/3.x/BlazorWebAssemblySample/JsInteropClasses/ExampleJsInterop.cs?name=snippet1&highlight=10-16)]
 
-*wwwroot/exampleJsInterop*:
+*wwwroot/exampleJsInterop.js*:
 
 [!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=15-18)]
 
-이 이름은 `HelloHelper.Name` 속성을 설정 하는 `HelloHelper`의 생성자에 전달 됩니다. JavaScript 함수 `sayHello`이 실행 될 때 `HelloHelper.SayHello`은 JavaScript 함수에 의해 콘솔에 기록 되는 `Hello, {Name}!` 메시지를 반환 합니다.
+이 이름은 `HelloHelper.Name` 속성을 설정 하는 `HelloHelper`의 생성자에 전달 됩니다. JavaScript 함수 `sayHello` 실행 되 면 `HelloHelper.SayHello` JavaScript 함수를 통해 콘솔에 기록 되는 `Hello, {Name}!` 메시지를 반환 합니다.
 
-*JsInteropClasses/HelloHelper*:
+*JsInteropClasses/HelloHelper.cs*:
 
 [!code-csharp[](./common/samples/3.x/BlazorWebAssemblySample/JsInteropClasses/HelloHelper.cs?name=snippet1&highlight=5,10-11)]
 
@@ -256,13 +269,13 @@ Hello, Blazor!
 
 ## <a name="share-interop-code-in-a-class-library"></a>클래스 라이브러리의 interop 코드 공유
 
-JavaScript interop 코드는 클래스 라이브러리에 포함 될 수 있으며,이를 통해 NuGet 패키지의 코드를 공유할 수 있습니다.
+JS interop 코드를 클래스 라이브러리에 포함 하 여 NuGet 패키지의 코드를 공유할 수 있습니다.
 
 클래스 라이브러리는 빌드된 어셈블리에 포함 된 JavaScript 리소스를 처리 합니다. JavaScript 파일은 *wwwroot* 폴더에 배치 됩니다. 도구는 라이브러리가 빌드될 때 리소스를 포함 하는 작업을 담당 합니다.
 
 빌드된 NuGet 패키지는 NuGet 패키지를 참조 하는 것과 동일한 방식으로 앱의 프로젝트 파일에서 참조 됩니다. 패키지가 복원 된 후에는 앱 코드가 JavaScript를로 호출할 수 있습니다 C#.
 
-자세한 내용은 <xref:blazor/class-libraries>를 참조하세요.
+자세한 내용은 <xref:blazor/class-libraries>을 참조하세요.
 
 ## <a name="harden-js-interop-calls"></a>JS interop 호출 강화
 
@@ -282,4 +295,4 @@ JS interop는 네트워킹 오류로 인해 실패할 수 있으며 신뢰할 �
       TimeSpan.FromSeconds({SECONDS}), new[] { "Arg1" });
   ```
 
-리소스 소모에 대 한 자세한 내용은 <xref:security/blazor/server>을 참조 하세요.
+리소스 소모에 대 한 자세한 내용은 <xref:security/blazor/server>를 참조 하세요.

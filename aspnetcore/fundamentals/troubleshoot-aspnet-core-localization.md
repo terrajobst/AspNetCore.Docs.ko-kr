@@ -5,12 +5,12 @@ description: ASP.NET Core 앱에서 지역화 관련 문제를 진단하는 방�
 ms.author: riande
 ms.date: 01/24/2019
 uid: fundamentals/troubleshoot-aspnet-core-localization
-ms.openlocfilehash: 98e06a92af0b6c045095ac803196bf4b1f25e5c5
-ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
+ms.openlocfilehash: 229e274a22e170d984a16d3b1ee64ebc38c4ef77
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/12/2019
-ms.locfileid: "72289018"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73963343"
 ---
 # <a name="troubleshoot-aspnet-core-localization"></a>ASP.NET Core 지역화 문제 해결
 
@@ -100,6 +100,9 @@ options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async 
 ## <a name="root-namespace-issues"></a>루트 네임스페이스 문제
 
 어셈블리의 루트 네임 스페이스가 어셈블리 이름과 다르면 지역화가 기본적으로 작동하지 않습니다. 이 문제를 방지하려면 [여기](xref:fundamentals/localization?view=aspnetcore-2.2#resource-file-naming)에 자세히 설명된 대로 [RootNamespace](/dotnet/api/microsoft.extensions.localization.rootnamespaceattribute?view=aspnetcore-2.1)를 사용합니다.
+
+> [!WARNING]
+> 이 오류는 프로젝트 이름이 유효한 .NET 식별자가 아닌 경우 발생할 수 있습니다. 예를 들어 `my-project-name.csproj`가 루트 네임스페이스 `my_project_name`과 어셈블리 이름 `my-project-name`을 사용하면 이 오류가 발생합니다. 
 
 ## <a name="resources--build-action"></a>리소스 및 빌드 작업
 

@@ -9,12 +9,12 @@ ms.date: 10/15/2019
 no-loc:
 - Blazor
 uid: blazor/state-management
-ms.openlocfilehash: 408d44a3f2e81a165e8b786c6d2efc9329082e30
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 38ee5fccdf476f08c9f39d01b53c81b48eea04bf
+ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73962820"
+ms.lasthandoff: 11/22/2019
+ms.locfileid: "74317180"
 ---
 # <a name="aspnet-core-opno-locblazor-state-management"></a>ASP.NET Core Blazor 상태 관리
 
@@ -56,7 +56,7 @@ Blazor Server는 상태 저장 앱 프레임 워크입니다. 대부분의 경�
 
 데이터 지 속성은 일반적으로 사용자가 소요 된 작업을 수행 하는 높은 가치의 상태에만 필요 합니다. 다음 예에서는 상태를 유지 하 여 상업적 활동에 시간 또는 지원을 저장할 수도 있습니다.
 
-* 다단계 webform &ndash;은 해당 상태가 손실 된 경우 사용자가 다단계 프로세스의 여러 완료 된 단계에 대 한 데이터를 다시 입력 하는 데 시간이 많이 걸립니다. 이 시나리오에서는 사용자가 다단계 폼에서 다른 곳으로 이동 하 여 나중에 폼으로 돌아갈 경우 상태가 손실 됩니다.
+* 다단계 webform &ndash; 해당 상태가 손실 된 경우 사용자가 다단계 프로세스의 여러 완료 된 단계에 대 한 데이터를 다시 입력 하는 데 시간이 많이 걸립니다. 이 시나리오에서는 사용자가 다단계 폼에서 다른 곳으로 이동 하 여 나중에 폼으로 돌아갈 경우 상태가 손실 됩니다.
 * 쇼핑 카트 &ndash; 잠재적인 수익을 나타내는 앱의 상업적으로 중요 한 구성 요소를 유지 관리할 수 있습니다. 사용자가 자신의 상태를 상실 하 고 장바구니는 나중에 사이트로 돌아올 때 더 많은 제품이 나 서비스를 구매할 수 있습니다.
 
 일반적으로 전송 되지 않은 로그인 대화 상자에 입력 한 사용자 이름과 같이 쉽게 다시 만들어진 상태를 유지할 필요는 없습니다.
@@ -95,7 +95,7 @@ Azure 데이터 저장소 옵션에 대 한 자세한 내용은 [Azure Storage �
 브라우저의 주소 표시줄의 내용은 유지 됩니다.
 
 * 사용자가 페이지를 수동으로 다시 로드 하는 경우입니다.
-* 웹 서버를 사용할 수 없게 되 면 사용자는 다른 서버에 연결 하기 위해 페이지를 강제로 다시 로드 해야 합니다.
+* 웹 서버를 사용할 수 없게 되는 경우 사용자는 다른 서버에 연결 하기 위해 페이지를 강제로 다시 로드 해야 합니다&mdash;.
 
 `@page` 지시어를 사용 하 여 URL 패턴을 정의 하는 방법에 대 한 자세한 내용은 <xref:blazor/routing>을 참조 하세요.
 
@@ -106,17 +106,17 @@ Azure 데이터 저장소 옵션에 대 한 자세한 내용은 [Azure Storage �
 > [!NOTE]
 > 이 섹션의 "클라이언트 쪽"은 [Blazor Weasembom호스팅 모델이](xref:blazor/hosting-models#blazor-webassembly)아닌 브라우저의 클라이언트 쪽 시나리오를 나타냅니다. `localStorage` 및 `sessionStorage`는 Blazor Weasembomapps에서 사용할 수 있지만 사용자 지정 코드를 작성 하거나 타사 패키지를 사용 하는 경우에만 사용할 수 있습니다.
 
-`localStorage` 및 `sessionStorage`은 다음과 같이 다릅니다.
+`localStorage`와 `sessionStorage`는 다음과 같습니다.
 
 * `localStorage`은 사용자의 브라우저로 범위가 지정 됩니다. 사용자가 페이지를 다시 로드 하거나 브라우저를 닫고 다시 열면 상태가 지속 됩니다. 사용자가 여러 브라우저 탭을 여는 경우 상태는 탭에서 공유 됩니다. 데이터는 명시적으로 지울 때까지 `localStorage`에 유지 됩니다.
 * `sessionStorage`은 사용자의 브라우저 탭으로 범위가 지정 됩니다. 사용자가 탭을 다시 로드 하면 상태가 지속 됩니다. 사용자가 탭 또는 브라우저를 닫으면 상태가 손실 됩니다. 사용자가 여러 브라우저 탭을 여는 경우 각 탭에는 고유한 독립 버전의 데이터가 있습니다.
 
-일반적으로 `sessionStorage`은를 사용 하는 것이 더 안전 합니다. `sessionStorage`은 사용자가 여러 탭을 열고 다음을 발견할 위험을 방지 합니다.
+일반적으로 `sessionStorage`를 사용 하는 것이 더 안전 합니다. `sessionStorage`는 사용자가 여러 탭을 열고 다음을 발견할 위험을 방지 합니다.
 
 * 상태 저장소의 여러 탭에 있는 버그
 * 탭이 다른 탭의 상태를 덮어쓸 때 혼동 되는 동작입니다.
 
-앱이 브라우저를 닫고 다시 여는 동안 상태를 유지 해야 하는 경우 `localStorage`을 선택 하는 것이 좋습니다.
+앱이 브라우저를 닫고 다시 여는 동안 상태를 유지 해야 하는 경우에는 `localStorage`를 선택 하는 것이 좋습니다.
 
 브라우저 저장소 사용에 대 한 주의 사항:
 
@@ -133,10 +133,10 @@ ASP.NET Core의 [데이터 보호](xref:security/data-protection/introduction)�
 
 ## <a name="protected-browser-storage-experimental-package"></a>보호 된 브라우저 저장소 실험적 패키지
 
-`localStorage` 및 `sessionStorage`에 대 한 [데이터 보호](xref:security/data-protection/introduction) 를 제공 하는 NuGet 패키지의 예는 [ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)입니다.
+[ 및 ](xref:security/data-protection/introduction)에 대한 `localStorage`데이터 보호`sessionStorage`를 제공 하는 NuGet 패키지의 예는 [AspNetCore. ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)입니다.
 
 > [!WARNING]
-> `Microsoft.AspNetCore.ProtectedBrowserStorage`은 현재 프로덕션 사용에 적합 하지 않은 지원 되지 않는 실험적 패키지입니다.
+> 현재는 지원 되지 않는 실험적 패키지를 프로덕션 환경에 적합 하 게 사용할 수 없습니다. `Microsoft.AspNetCore.ProtectedBrowserStorage`
 
 ### <a name="installation"></a>설치
 
@@ -157,12 +157,12 @@ ASP.NET Core의 [데이터 보호](xref:security/data-protection/introduction)�
 
 ### <a name="save-and-load-data-within-a-component"></a>구성 요소 내에서 데이터 저장 및 로드
 
-브라우저 저장소에 데이터를 로드 하거나 저장 해야 하는 모든 구성 요소에서 [@inject](xref:blazor/dependency-injection#request-a-service-in-a-component) 을 사용 하 여 다음 중 하나의 인스턴스를 삽입 합니다.
+브라우저 저장소에 데이터를 로드 하거나 저장 해야 하는 모든 구성 요소에서 [@inject](xref:blazor/dependency-injection#request-a-service-in-a-component) 를 사용 하 여 다음 중 하나의 인스턴스를 삽입 합니다.
 
 * `ProtectedLocalStorage`
 * `ProtectedSessionStorage`
 
-사용 하려는 백업 저장소에 따라 선택이 달라 집니다. 다음 예제에서는 `sessionStorage`이 사용 됩니다.
+사용 하려는 백업 저장소에 따라 선택이 달라 집니다. 다음 예제에서는 `sessionStorage` 사용 됩니다.
 
 ```cshtml
 @using Microsoft.AspNetCore.ProtectedBrowserStorage
@@ -171,7 +171,7 @@ ASP.NET Core의 [데이터 보호](xref:security/data-protection/introduction)�
 
 `@using` 문은 구성 요소가 아닌 *_Imports razor* 파일에 배치할 수 있습니다. *_Imports razor* 파일을 사용 하면 앱의 더 큰 세그먼트 또는 전체 앱에서 네임 스페이스를 사용할 수 있습니다.
 
-프로젝트 템플릿의 `Counter` 구성 요소에서 `currentCount` 값을 유지 하려면 `ProtectedSessionStore.SetAsync`을 사용 하도록 `IncrementCount` 메서드를 수정 합니다.
+프로젝트 템플릿의 `Counter` 구성 요소에 `currentCount` 값을 유지 하려면 `ProtectedSessionStore.SetAsync`를 사용 하도록 `IncrementCount` 메서드를 수정 합니다.
 
 ```csharp
 private async Task IncrementCount()
@@ -181,11 +181,11 @@ private async Task IncrementCount()
 }
 ```
 
-더 크고 현실적인 앱에서 개별 필드의 저장은 거의 발생 하지 않습니다. 앱은 복합 상태를 포함 하는 전체 모델 개체를 저장할 가능성이 높습니다. `ProtectedSessionStore`은 JSON 데이터를 자동으로 직렬화 및 deserialize 합니다.
+더 크고 현실적인 앱에서 개별 필드의 저장은 거의 발생 하지 않습니다. 앱은 복합 상태를 포함 하는 전체 모델 개체를 저장할 가능성이 높습니다. `ProtectedSessionStore`는 JSON 데이터를 자동으로 직렬화 및 deserialize 합니다.
 
 위의 코드 예제에서 `currentCount` 데이터는 사용자의 브라우저에 `sessionStorage['count']` 저장 됩니다. 데이터는 일반 텍스트로 저장 되지 않고 ASP.NET Core의 [데이터 보호](xref:security/data-protection/introduction)를 사용 하 여 보호 됩니다. 브라우저의 개발자 콘솔에서 `sessionStorage['count']`를 평가 하는 경우 암호화 된 데이터를 볼 수 있습니다.
 
-사용자가 나중에 `Counter` 구성 요소로 반환 하는 경우 `currentCount` 데이터를 복구 하려면 (완전히 새로운 회로를 사용 하는 경우 포함) `ProtectedSessionStore.GetAsync`를 사용 합니다.
+사용자가 나중에 `Counter` 구성 요소로 반환 하는 경우 `currentCount` 데이터를 복구 하려면 (완전히 새로운 회로를 포함 하는 경우 포함) `ProtectedSessionStore.GetAsync`를 사용 합니다.
 
 ```csharp
 protected override async Task OnInitializedAsync()
@@ -194,7 +194,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-구성 요소의 매개 변수가 탐색 상태를 포함 하는 경우 `ProtectedSessionStore.GetAsync`을 호출 하 고 결과를 `OnInitializedAsync`가 아닌 `OnParametersSetAsync`로 할당 합니다. `OnInitializedAsync`은 구성 요소가 처음 인스턴스화될 때 한 번만 호출 됩니다. `OnInitializedAsync`은 나중에 사용자가 다른 URL로 이동 하는 경우 나중에 다시 호출 되지 않습니다.
+구성 요소의 매개 변수에 탐색 상태가 포함 된 경우 `ProtectedSessionStore.GetAsync`를 호출 하 고 `OnInitializedAsync`아닌 `OnParametersSetAsync`에 결과를 할당 합니다. `OnInitializedAsync`는 구성 요소가 처음 인스턴스화될 때 한 번만 호출 됩니다. 사용자가 동일한 페이지에 남아 있는 동안 다른 URL로 이동 하는 경우 나중에 `OnInitializedAsync`을 다시 호출 하지 않습니다.
 
 > [!WARNING]
 > 이 섹션의 예제는 서버에서 렌더링을 사용 하도록 설정 하지 않은 경우에만 작동 합니다. 렌더링을 사용 하는 경우 다음과 유사한 오류가 생성 됩니다.
@@ -207,7 +207,7 @@ protected override async Task OnInitializedAsync()
 
 브라우저 저장소는 비동기 (네트워크 연결을 통해 액세스 됨) 이기 때문에 데이터를 로드 하 고 구성 요소에서 사용할 수 있을 때까지 항상 기간이 있습니다. 최상의 결과를 위해 빈 데이터 나 기본 데이터를 표시 하는 대신 로드가 진행 되는 동안 로드 상태 메시지를 렌더링 합니다.
 
-한 가지 방법은 데이터가 `null` (로드 중) 인지 여부를 추적 하는 것입니다. 기본 `Counter` 구성 요소에서 카운트는 `int`에 저장 됩니다. 형식 (`int`)에 물음표 (`?`)를 추가 하 여 `currentCount` nullable로 설정 합니다.
+한 가지 방법은 데이터가 `null` (로드 중) 인지 여부를 추적 하는 것입니다. 기본 `Counter` 구성 요소에서 개수는 `int`에 저장 됩니다. 형식 (`int`)에 물음표 (`?`)를 추가 하 여 `currentCount` nullable로 설정 합니다.
 
 ```csharp
 private int? currentCount;
@@ -235,15 +235,25 @@ else
 * 사용자의 브라우저에 대 한 대화형 연결이 존재 하지 않습니다.
 * 브라우저에 JavaScript 코드를 실행할 수 있는 페이지가 아직 없습니다.
 
-`localStorage` 또는 `sessionStorage`은 렌더링을 수행 하는 동안 사용할 수 없습니다. 구성 요소가 저장소와 상호 작용 하려고 하면 다음과 유사한 오류가 생성 됩니다.
+`localStorage` 또는 `sessionStorage`는 렌더링 중에는 사용할 수 없습니다. 구성 요소가 저장소와 상호 작용 하려고 하면 다음과 유사한 오류가 생성 됩니다.
 
 > 지금은 JavaScript interop 호출을 실행할 수 없습니다. 구성 요소가 미리 렌더링 된 되 고 있기 때문입니다.
 
-오류를 해결 하는 한 가지 방법은 사전 렌더링을 사용 하지 않도록 설정 하는 것입니다. 일반적으로 앱이 브라우저 기반 저장소를 많이 사용 하는 경우이 옵션을 선택 하는 것이 좋습니다. 응용 프로그램은 `localStorage` 또는 `sessionStorage`을 사용할 수 있을 때까지 유용한 콘텐츠를 미리 만들 수 없기 때문에 응용 프로그램에서 복잡성을 더하고 앱을 활용 하지 않습니다.
+오류를 해결 하는 한 가지 방법은 사전 렌더링을 사용 하지 않도록 설정 하는 것입니다. 일반적으로 앱이 브라우저 기반 저장소를 많이 사용 하는 경우이 옵션을 선택 하는 것이 좋습니다. 응용 프로그램은 `localStorage` 또는 `sessionStorage`를 사용할 수 있을 때까지 유용한 콘텐츠를 다시 만들 수 없기 때문에, 응용 프로그램에서 복잡성을 추가 하 고 앱을 사용 하면
+
+::: moniker range=">= aspnetcore-3.1"
+
+렌더링을 사용 하지 않도록 설정 하려면 *Pages/_Host cshtml* 파일을 열고 `Component` 태그 도우미의 `render-mode`에 대 한 호출을 `Server`로 변경 합니다.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.1"
 
 렌더링을 사용 하지 않도록 설정 하려면 *Pages/_Host cshtml* 파일을 열고 `Html.RenderComponentAsync<App>(RenderMode.Server)`호출을 변경 합니다.
 
-비 렌더링은 `localStorage` 또는 `sessionStorage`을 사용 하지 않는 다른 페이지에 유용할 수 있습니다. 렌더링을 사용 하도록 설정 된 상태로 유지 하려면 브라우저가 회로에 연결 될 때까지 로드 작업을 지연 시킵니다. 카운터 값을 저장 하는 예제는 다음과 같습니다.
+::: moniker-end
+
+`localStorage` 또는 `sessionStorage`사용 하지 않는 다른 페이지에는 렌더링에 유용할 수 있습니다. 렌더링을 사용 하도록 설정 된 상태로 유지 하려면 브라우저가 회로에 연결 될 때까지 로드 작업을 지연 시킵니다. 카운터 값을 저장 하는 예제는 다음과 같습니다.
 
 ```cshtml
 @using Microsoft.AspNetCore.ProtectedBrowserStorage
@@ -355,9 +365,9 @@ else
 }
 ```
 
-이전 구성 요소는 `ProtectedBrowserStorage`과 상호 작용 하는 데 필요 하지 않으며 "로드 중" 단계를 처리 하지도 않습니다.
+이전 구성 요소는 `ProtectedBrowserStorage`상호 작용 하는 데 필요 하지 않으며 "로드 중" 단계를 처리 하지도 않습니다.
 
-앞에서 설명한 대로 미리 렌더링을 처리 하기 위해 카운터 데이터를 사용 하는 모든 구성 요소가 자동 렌더링에서 자동으로 작동 하도록 `CounterStateProvider`을 수정할 수 있습니다. 자세한 내용은 [렌더링 핸들 렌더링](#handle-prerendering) 섹션을 참조 하세요.
+앞에서 설명한 대로 미리 렌더링을 처리 하기 위해 카운터 데이터를 사용 하는 모든 구성 요소가 자동 렌더링에서 자동으로 작동 하도록 `CounterStateProvider` 수정할 수 있습니다. 자세한 내용은 [렌더링 핸들 렌더링](#handle-prerendering) 섹션을 참조 하세요.
 
 일반적으로 *상태 제공자 부모 구성 요소* 패턴을 권장 합니다.
 

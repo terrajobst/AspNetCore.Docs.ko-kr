@@ -3,14 +3,14 @@ title: ASP.NET Core MVC 개요
 author: ardalis
 description: 모델-보기-컨트롤러 디자인 패턴을 사용하여 웹앱 및 API를 빌드할 수 있는 풍부한 프레임워크인 ASP.NET Core MVC에 대해 알아봅니다.
 ms.author: riande
-ms.date: 08/01/2019
+ms.date: 11/07/2019
 uid: mvc/overview
-ms.openlocfilehash: 7f09751850cbfa7bb3dc79656d4530445a9767b1
-ms.sourcegitcommit: 3204bc89ae6354b61ee0a9b2770ebe5214b7790c
+ms.openlocfilehash: 4f4ea3da8563cabaaa6183c6835c2f1eb8c387b4
+ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/01/2019
-ms.locfileid: "68707817"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73799490"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>ASP.NET Core MVC 개요
 
@@ -20,7 +20,7 @@ ASP.NET Core MVC는 모델-보기-컨트롤러 디자인 패턴을 사용하여 
 
 ## <a name="what-is-the-mvc-pattern"></a>MVC 패턴이란?
 
-MVC(Model-View-Controller) 아키텍처 패턴은 응용 프로그램을 모델, 보기, 컨트롤러라는 세 가지 주요 구성 요소로 구분합니다. 이 패턴은 [문제를 분리](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns)하는 데 도움이 됩니다. 이 패턴을 사용하면 사용자 요청은 모델 작업을 담당하는 컨트롤러에 라우팅되어 사용자 작업을 수행하고/수행하거나 쿼리 결과를 검색합니다. 컨트롤러는 사용자에게 표시할 보기를 선택하고, 보기에 필요한 모델 데이터를 제공합니다.
+MVC(Model-View-Controller) 아키텍처 패턴은 애플리케이션을 모델, 뷰, 컨트롤러라는 세 가지 주요 구성 요소로 구분합니다. 이 패턴은 [문제를 분리](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns)하는 데 도움이 됩니다. 이 패턴을 사용하면 사용자 요청은 모델 작업을 담당하는 컨트롤러에 라우팅되어 사용자 작업을 수행하고/수행하거나 쿼리 결과를 검색합니다. 컨트롤러는 사용자에게 표시할 보기를 선택하고, 보기에 필요한 모델 데이터를 제공합니다.
 
 다음 다이어그램은 세 가지 주요 구성 요소 및 다른 구성 요소를 참조하는 구성 요소를 보여줍니다.
 
@@ -41,10 +41,10 @@ MVC 응용 프로그램의 모델은 응용 프로그램 및 비즈니스 논리
 
 ### <a name="controller-responsibilities"></a>컨트롤러의 책임
 
-컨트롤러는 사용자 상호 작용을 처리하고, 모델을 작업하고, 궁극적으로 렌더링할 보기를 선택하는 구성 요소입니다. MVC 응용 프로그램에서 보기는 정보만 표시합니다. 컨트롤러가 사용자 입력 및 상호 작용을 처리하고 응답합니다. MVC 패턴에서 컨트롤러는 초기 진입점으로, 작업할 모델과 렌더링할 보기를 선택할 책임이 있습니다(그 이름처럼 지정된 요청에 앱이 응답하는 방식을 제어합니다).
+컨트롤러는 사용자 상호 작용을 처리하고, 모델을 작업하고, 궁극적으로 렌더링할 보기를 선택하는 구성 요소입니다. MVC 애플리케이션에서 보기는 정보만 표시합니다. 컨트롤러가 사용자 입력 및 상호 작용을 처리하고 응답합니다. MVC 패턴에서 컨트롤러는 초기 진입점으로, 작업할 모델과 렌더링할 보기를 선택할 책임이 있습니다(그 이름처럼 앱이 지정된 요청에 응답하는 방식을 제어).
 
 > [!NOTE]
-> 컨트롤러에 너무 많은 책임을 부여하여 지나치게 복잡하게 만들면 안 됩니다. 컨트롤러 논리가 너무 복잡해지지 않도록 컨트롤러에서 도메인 모델로 비즈니스 논리를 옮깁니다.
+> 컨트롤러에 너무 많은 책임을 부여하여 지나치게 복잡하게 만들면 안 됩니다. 컨트롤러 논리가 너무 복잡해지지 않도록 컨트롤러에서 도메인 모델로 비즈니스 논리를 푸시합니다.
 
 >[!TIP]
 > 컨트롤러 작업이 같은 종류의 작업을 자주 수행하는 것을 발견하는 경우 이러한 공통 작업을 [필터](#filters)로 이동합니다.
@@ -170,7 +170,7 @@ ASP.NET Core는 기본적으로 [DI(종속성 주입 )](../fundamentals/dependen
 public class AccountController : Controller
 ```
 
-### <a name="areas"></a>영역
+### <a name="areas"></a>Areas
 
 [영역](controllers/areas.md)은 대규모 ASP.NET Core MVC 웹앱을 더 작은 기능 그룹으로 분할하는 방법을 제공합니다. 영역은 응용 프로그램 내부의 MVC 구조입니다. MVC 프로젝트에서 모델, 컨트롤러, 보기와 같은 논리적 구성 요소는 서로 다른 폴더에 보관되며 MVC는 명명 규칙을 사용하여 이러한 구성 요소 간의 관계를 만듭니다. 대형 앱의 경우 앱을 별도의 고급 기능 영역으로 나누는 것이 좋습니다. 결제, 청구 및 검색 등과 같은 여러 비즈니스 단위가 있는 전자상거래 앱을 예로 들 수 있습니다. 이러한 각 단위는 자체적인 논리 구성 요소 보기, 컨트롤러 및 모델을 갖습니다.
 
@@ -254,3 +254,8 @@ MVC의 Razor 보기는 모델을 기반으로 하는 강력한 형식의 보기�
 <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> 메서드를 사용하면 ASP.NET Core MVC 2.1 이상에서 도입된 주요 동작 변경 내용을 앱이 옵트인(opt-in) 또는 옵트아웃(opt-out)할 수 있습니다.
 
 자세한 내용은 <xref:mvc/compatibility-version>을 참조하세요.
+
+## <a name="additional-resources"></a>추가 자료
+
+* [MyTested.AspNetCore.Mvc - ASP.NET Core MVC용 흐름 테스트 라이브러리](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc) &ndash; 강력한 형식의 단위 테스트 라이브러리로, MVC 및 웹 API 앱 테스트를 위한 흐름 인터페이스를 제공합니다. (*Microsoft에서 유지 관리하거나 지원하지 않습니다.* )
+

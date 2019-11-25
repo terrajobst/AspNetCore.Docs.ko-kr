@@ -4,20 +4,23 @@ author: rick-anderson
 description: ASP.NET Core 3.0의 새로운 기능에 대해 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/31/2019
+ms.date: 11/12/2019
+no-loc:
+- Blazor
+- SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: 8c53d8a9fa222ca40f26dc713ec3b70ddde76539
-ms.sourcegitcommit: eb2fe5ad2e82fab86ca952463af8d017ba659b25
+ms.openlocfilehash: c3dde383507ec919f82b5268ddbf23911c3d24f8
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/01/2019
-ms.locfileid: "73416118"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73963117"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3.0의 새로운 기능
 
 이 문서에서는 ASP.NET Core 3.0의 가장 큰 변경 내용을 중점적으로 설명하고 관련 문서의 링크를 제공합니다.
 
-## <a name="blazor"></a>Blazor
+## Blazor
 
 Blazor는 .NET을 사용하여 대화형 클라이언트 쪽 웹 UI를 빌드하기 위한 ASP.NET Core 내의 새로운 프레임워크입니다.
 
@@ -25,7 +28,7 @@ Blazor는 .NET을 사용하여 대화형 클라이언트 쪽 웹 UI를 빌드하
 * .NET에서 작성된 서버 쪽 및 클라이언트 쪽 앱 논리를 공유합니다.
 * 모바일 브라우저를 포함한 광범위한 브라우저 지원을 위해 UI를 HTML 및 CSS로 렌더링합니다.
 
-Blazor 프레임워크 지원되는 시나리오:
+Blazor 프레임워크 지원 시나리오:
 
 * 재사용 가능한 UI 구성 요소(Razor 구성 요소)
 * 클라이언트 쪽 라우팅
@@ -37,11 +40,11 @@ Blazor 프레임워크 지원되는 시나리오:
 
 자세한 내용은 <xref:blazor/index>을 참조하세요.
 
-### <a name="blazor-server"></a>Blazor 서버
+### <a name="opno-locblazor-server"></a>Blazor 서버
 
-Razor는 UI 업데이트 적용 방법에서 구성 요소 렌더링 논리를 분리합니다. Blazor 서버에서는 ASP.NET Core 앱의 서버에서 Razor 구성 요소를 호스팅할 수 있도록 지원합니다. UI 업데이트는 SignalR 연결을 통해 처리됩니다. Blazor 서버는 ASP.NET Core 3.0에서 지원됩니다.
+Blazor는 UI 업데이트 적용 방법에서 구성 요소 렌더링 논리를 분리합니다. Blazor 서버에서는 ASP.NET Core 앱의 서버에서 Razor 구성 요소를 호스팅할 수 있도록 지원합니다. UI 업데이트는 SignalR 연결을 통해 처리됩니다. Blazor 서버는 ASP.NET Core 3.0에서 지원됩니다.
 
-### <a name="blazor-webassembly-preview"></a>Blazor WebAssembly(미리 보기)
+### <a name="opno-locblazor-webassembly-preview"></a>Blazor WebAssembly(미리 보기)
 
 Blazor 앱은 WebAssembly 기반 .NET 런타임을 사용하여 브라우저에서 직접 실행할 수도 있습니다. Blazor WebAssembly는 미리 보기로 제공되며, ASP.NET Core 3.0에서 지원되지 *않습니다*. Blazor WebAssembly는 ASP.NET Core의 이후 릴리스에서 지원될 예정입니다.
 
@@ -76,9 +79,9 @@ ASP.NET Core 3.0의 gRPC 기능에는 다음이 포함됩니다.
 
 자세한 내용은 <xref:grpc/index>을 참조하세요.
 
-## <a name="signalr"></a>SignalR
+## SignalR
 
-마이그레이션 지침은 [Update SignalR code](xref:migration/22-to-30#signalr)를 참조하세요. SignalR는 이제 `System.Text.Json`을 사용하여 JSON 메시지를 직렬화 및 역직렬화합니다. `Newtonsoft.Json` 기반 직렬 변환기를 복원하려면 [Newtonsoft.Json으로 전환](xref:migration/22-to-30#switch-to-newtonsoftjson)에서 지침을 참조하세요.
+마이그레이션 지침은 [SignalR 코드 업데이트](xref:migration/22-to-30#signalr)를 참조하세요. 이제 SignalR이 `System.Text.Json`을 사용하여 JSON 메시지를 직렬화 및 역직렬화합니다. `Newtonsoft.Json` 기반 직렬 변환기를 복원하려면 [Newtonsoft.Json으로 전환](xref:migration/22-to-30#switch-to-newtonsoftjson)에서 지침을 참조하세요.
 
 SignalR용 JavaScript 및 .NET Clients에서 자동 다시 연결을 위해 지원이 추가되었습니다. 기본적으로 클라이언트는 즉시 다시 연결을 시도하고 필요한 경우 2, 10, 30초 후에 다시 시도합니다. 클라이언트는 다시 연결되면 새로운 연결 ID를 수신합니다. 자동 다시 연결 옵트인(opt-in:):
 
@@ -105,7 +108,7 @@ const connection = new signalR.HubConnectionBuilder()
 
 다시 연결을 시도하는 동안 다시 연결을 시도하고 있음을 사용자에게 알리기 위해 앱 UI를 업데이트합니다.
 
-연결이 중단될 때 UI 피드백을 제공하기 위해 SignalR 클라이언트 API는 다음과 같은 이벤트 처리기를 포함 하도록 확장되었습니다.
+연결이 중단될 때 UI 피드백을 제공하기 위해 SignalR 클라이언트 API는 다음과 같은 이벤트 처리기를 포함하도록 확장되었습니다.
 
 * `onreconnecting`:  개발자에게 UI를 사용하지 않도록 설정하거나 사용자에게 해당 앱이 오프라인 상태임을 알릴 수 있는 기회를 제공합니다.
 * `onreconnected`: 개발자에게 연결이 다시 구축되면 UI를 업데이트할 수 있는 기회를 제공합니다.
@@ -255,7 +258,7 @@ app.UseRouting(routes =>
 });
 ```
 
-ASP.NET Core 3.0 SignalR에는 다음이 추가되었습니다.
+ASP.NET Core 3.0 SignalR에는 다음 기능이 추가되었습니다.
 
 클라이언트-서버 스트리밍 클라이언트-서버 스트리밍을 사용하는 경우 서버 쪽 메서드는 `IAsyncEnumerable<T>` 또는 `ChannelReader<T>`의 인스턴스를 사용할 수 있습니다. 다음 C# 샘플에서 허브에 있는 `UploadStream` 메서드는 다음 클라이언트로부터 문자열 스트림을 받게 됩니다.
 

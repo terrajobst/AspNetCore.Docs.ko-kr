@@ -5,14 +5,16 @@ description: 요청 간 세션 및 앱 상태를 유지하는 방법을 검색�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/12/2019
+ms.date: 11/12/2019
+no-loc:
+- SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: ccb37a422d972ab9113bb4115473d054282dac87
-ms.sourcegitcommit: 994da92edb0abf856b1655c18880028b15a28897
+ms.openlocfilehash: b80b1e72eb2f25e9c9fe07a0c33c14ecf5ae05aa
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/25/2019
-ms.locfileid: "71278687"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73963476"
 ---
 # <a name="session-and-app-state-in-aspnet-core"></a>ASP.NET Core에서 세션 및 앱 상태
 
@@ -52,7 +54,7 @@ HTTP는 상태 비저장 프로토콜입니다. HTTP 요청은 추가 단계를 
 세션 상태는 사용자가 웹앱을 탐색하는 동안 사용자 데이터를 스토리지하기 위한 ASP.NET Core 시나리오입니다. 세션 상태는 앱에서 유지 관리하는 저장소를 사용하여 클라이언트의 요청 간에 데이터를 유지합니다. 세션 데이터는 캐시에 의해 백업되고 임시 데이터로 간주되므로 사이트는 세션 데이터 없이 계속 작동합니다. 중요한 애플리케이션 데이터는 사용자 데이터베이스에 저장되고 성능 최적화로 세션에 캐시되어야 합니다.
 
 > [!NOTE]
-> [SignalR Hub](xref:signalr/hubs)가 HTTP 컨텍스트와 독립적으로 실행될 수 있으므로, 세션은 [SignalR](xref:signalr/index) 앱에서 지원되지 않습니다. 예를 들어, 허브에서 긴 폴링 요청이 HTTP 컨텍스트 수명을 초과하여 계속 열려 있을 경우 이 문제가 발생할 수 있습니다.
+> [SignalR 허브](xref:signalr/hubs)가 HTTP 컨텍스트와 독립적으로 실행될 수 있으므로, 세션은 [SignalR](xref:signalr/index) 앱에서 지원되지 않습니다. 예를 들어, 허브에서 긴 폴링 요청이 HTTP 컨텍스트 수명을 초과하여 계속 열려 있을 경우 이 문제가 발생할 수 있습니다.
 
 ASP.NET Core는 각 요청과 함께 앱으로 전송되는 세션 ID를 포함하는 쿠키를 클라이언트에 제공하여 세션 상태를 유지합니다. 앱은 세션 ID를 사용하여 세션 데이터를 가져옵니다.
 
@@ -304,7 +306,7 @@ app.Run(async (context) =>
     }
     ```
 
-## <a name="common-errors"></a>일반 오류
+## <a name="common-errors"></a>일반적인 오류
 
 * "'Microsoft.AspNetCore.Session.DistributedSessionStore'를 활성화하려고 시도하는 동안 'Microsoft.Extensions.Caching.Distributed.IDistributedCache' 형식에 대한 서비스를 확인할 수 없습니다."
 
@@ -316,10 +318,10 @@ app.Run(async (context) =>
 
   권장되는 오류 확인 방법은 앱이 세션에 작성을 완료하면 앱 코드에서 `await feature.Session.CommitAsync();`를 호출하는 것입니다. 백업 저장소를 사용할 수 없는 경우 `CommitAsync`에서 예외를 throw합니다. `CommitAsync`가 실패하면 앱에서 예외를 처리할 수 있습니다. `LoadAsync`는 같은 조건에서 데이터 저장소를 사용할 수 없는 경우 throw됩니다.
   
-## <a name="signalr-and-session-state"></a>SignalR 및 세션 상태
+## <a name="opno-locsignalr-and-session-state"></a>SignalR과 세션 상태
 
 SignalR 앱은 세션 상태를 사용하여 정보를 저장해서는 안 됩니다. SignalR 앱은 허브에서 `Context.Items`의 연결 상태별로 저장할 수 있습니다. <!-- https://github.com/aspnet/SignalR/issues/2139 -->
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 <xref:host-and-deploy/web-farm>

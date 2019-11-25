@@ -9,12 +9,12 @@ ms.date: 11/12/2019
 no-loc:
 - SignalR
 uid: signalr/redis-backplane
-ms.openlocfilehash: 379d46fcaabb8eb0d04e521a5ad698229f947b7c
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 0461fc6a212ba78111bc2054cca74951721c5820
+ms.sourcegitcommit: f40c9311058c9b1add4ec043ddc5629384af6c56
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963913"
+ms.lasthandoff: 11/21/2019
+ms.locfileid: "74289034"
 ---
 # <a name="set-up-a-redis-backplane-for-aspnet-core-opno-locsignalr-scale-out"></a>ASP.NET Core SignalR 스케일 아웃에 대 한 Redis 후면판 설정
 
@@ -29,7 +29,7 @@ ms.locfileid: "73963913"
   > [!IMPORTANT] 
   > Redis 후면판은 프로덕션 사용을 위해 SignalR 앱과 동일한 데이터 센터에서 실행 되는 경우에만 권장 됩니다. 그렇지 않으면 네트워크 대기 시간이 성능을 저하 시킵니다. SignalR 앱이 Azure 클라우드에서 실행 되는 경우 Redis 후면판 대신 Azure SignalR 서비스를 권장 합니다. 개발 및 테스트 환경에 Azure Redis Cache 서비스를 사용할 수 있습니다.
 
-  자세한 내용은 다음 자료를 참조하세요.
+  자세한 내용은 다음 리소스를 참조하세요.
 
   * <xref:signalr/scale>
   * [Redis 설명서](https://redis.io/)
@@ -37,8 +37,7 @@ ms.locfileid: "73963913"
 
 ::: moniker range="= aspnetcore-2.1"
 
-* SignalR 앱에서 `Microsoft.AspNetCore.SignalR.Redis` NuGet 패키지를 설치 합니다. `Microsoft.AspNetCore.SignalR.StackExchangeRedis` 패키지도 있지만 ASP.NET Core 2.2 이상에 대 한 것입니다.
-
+* SignalR 앱에서 `Microsoft.AspNetCore.SignalR.Redis` NuGet 패키지를 설치 합니다.
 * `Startup.ConfigureServices` 메서드에서 `AddSignalR`후에 `AddRedis`를 호출 합니다.
 
   ```csharp
@@ -62,19 +61,54 @@ ms.locfileid: "73963913"
 
 ::: moniker-end
 
-::: moniker range="> aspnetcore-2.1"
+::: moniker range="= aspnetcore-2.2"
 
 * SignalR 앱에서 다음 NuGet 패키지 중 하나를 설치 합니다.
 
   * `Microsoft.AspNetCore.SignalR.StackExchangeRedis`-StackExchange 2. X.X.에 종속 됩니다. ASP.NET Core 2.2 이상에 권장 되는 패키지입니다.
-  * `Microsoft.AspNetCore.SignalR.Redis`-StackExchange 1. X.X.에 종속 됩니다. 이 패키지는 ASP.NET Core 3.0에 전달 되지 않습니다.
+  * `Microsoft.AspNetCore.SignalR.Redis`-StackExchange 1. X.X.에 종속 됩니다. 이 패키지는 ASP.NET Core 3.0 이상에 포함 되어 있지 않습니다.
 
-* `Startup.ConfigureServices` 메서드에서 `AddSignalR`후에 `AddStackExchangeRedis`를 호출 합니다.
+* `Startup.ConfigureServices` 메서드에서 <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions.AddStackExchangeRedis*>를 호출 합니다.
 
   ```csharp
   services.AddSignalR().AddStackExchangeRedis("<your_Redis_connection_string>");
   ```
 
+ `Microsoft.AspNetCore.SignalR.Redis`사용 하는 경우 <xref:Microsoft.Extensions.DependencyInjection.RedisDependencyInjectionExtensions.AddRedis*>를 호출 합니다.
+
+* 필요에 따라 옵션을 구성 합니다.
+ 
+  대부분의 옵션은 연결 문자열 또는 [Configurationoptions](https://stackexchange.github.io/StackExchange.Redis/Configuration#configuration-options) 개체에서 설정할 수 있습니다. `ConfigurationOptions`에 지정 된 옵션은 연결 문자열에 설정 된 옵션을 재정의 합니다.
+
+  다음 예제에서는 `ConfigurationOptions` 개체에서 옵션을 설정 하는 방법을 보여 줍니다. 이 예제에서는 다음 단계에 설명 된 것 처럼 여러 앱이 동일한 Redis 인스턴스를 공유할 수 있도록 채널 접두사를 추가 합니다.
+
+  ```csharp
+  services.AddSignalR()
+    .AddStackExchangeRedis(connectionString, options => {
+        options.Configuration.ChannelPrefix = "MyApp";
+    });
+  ```
+
+ `Microsoft.AspNetCore.SignalR.Redis`사용 하는 경우 <xref:Microsoft.Extensions.DependencyInjection.RedisDependencyInjectionExtensions.AddRedis*>를 호출 합니다.
+
+  위의 코드에서 `options.Configuration`는 연결 문자열에 지정 된 항목을 사용 하 여 초기화 됩니다.
+
+  Redis 옵션에 대 한 자세한 내용은 [Stackexchange Redis 설명서](https://stackexchange.github.io/StackExchange.Redis/Configuration.html)를 참조 하세요.
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
+
+* SignalR 앱에서 다음 NuGet 패키지를 설치 합니다.
+
+  * `Microsoft.AspNetCore.SignalR.StackExchangeRedis`
+  
+* `Startup.ConfigureServices` 메서드에서 <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions.AddStackExchangeRedis*>를 호출 합니다.
+
+  ```csharp
+  services.AddSignalR().AddStackExchangeRedis("<your_Redis_connection_string>");
+  ```
+  
 * 필요에 따라 옵션을 구성 합니다.
  
   대부분의 옵션은 연결 문자열 또는 [Configurationoptions](https://stackexchange.github.io/StackExchange.Redis/Configuration#configuration-options) 개체에서 설정할 수 있습니다. `ConfigurationOptions`에 지정 된 옵션은 연결 문자열에 설정 된 옵션을 재정의 합니다.
@@ -192,7 +226,7 @@ services.AddSignalR()
 
 ## <a name="next-steps"></a>다음 단계
 
-자세한 내용은 다음 자료를 참조하세요.
+자세한 내용은 다음 리소스를 참조하세요.
 
 * <xref:signalr/scale>
 * [Redis 설명서](https://redis.io/documentation)

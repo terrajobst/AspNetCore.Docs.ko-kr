@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/09/2019
 uid: web-api/action-return-types
-ms.openlocfilehash: 991265810324d6339ebf346ff9aa14c479112af9
-ms.sourcegitcommit: fa61d882be9d0c48bd681f2efcb97e05522051d0
+ms.openlocfilehash: c409170a24225e160c1c53e7294590589e114f7f
+ms.sourcegitcommit: 231780c8d7848943e5e9fd55e93f437f7e5a371d
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71205762"
+ms.lasthandoff: 11/15/2019
+ms.locfileid: "74116090"
 ---
 # <a name="controller-action-return-types-in-aspnet-core-web-api"></a>ASP.NET Core 웹 API에서 컨트롤러 작업 반환 형식
 
@@ -50,7 +50,7 @@ ASP.NET Core에서는 웹 API 컨트롤러 작업 반환 형식에 다음 옵션
 
 ### <a name="return-ienumerablet-or-iasyncenumerablet"></a>IEnumerable\<T> 또는 IAsyncEnumerable\<T> 반환
 
-ASP.NET Core 2.2 이하 버전에서 작업에서 <xref:System.Collections.Generic.IAsyncEnumerable%601>를 반환하면 Serializer에 의한 동기 컬렉션 반복이 발생합니다. 그 결과는 호출 차단이며 스레드 풀 고갈의 가능성도 있습니다. 예를 들어 웹 API의 데이터 액세스 요구 사항에 대해 EF(Entity Framework) Core를 사용하고 있다고 가정합니다. 직렬화하는 동안 다음 작업의 반환 형식이 동기적으로 열거됩니다.
+ASP.NET Core 2.2 이하 버전에서 작업에서 <xref:System.Collections.Generic.IEnumerable%601>를 반환하면 Serializer에 의한 동기 컬렉션 반복이 발생합니다. 그 결과는 호출 차단이며 스레드 풀 고갈의 가능성도 있습니다. 예를 들어 웹 API의 데이터 액세스 요구 사항에 대해 EF(Entity Framework) Core를 사용하고 있다고 가정합니다. 직렬화하는 동안 다음 작업의 반환 형식이 동기적으로 열거됩니다.
 
 ```csharp
 public IEnumerable<Product> GetOnSaleProducts() =>
@@ -189,7 +189,7 @@ public ActionResult<IEnumerable<Product>> Get() =>
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:mvc/controllers/actions>
 * <xref:mvc/models/validation>

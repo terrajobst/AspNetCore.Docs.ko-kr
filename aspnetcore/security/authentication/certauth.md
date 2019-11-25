@@ -4,14 +4,14 @@ author: blowdart
 description: IIS 및 HTTP.SYS 용 ASP.NET Core에서 인증서 인증을 구성 하는 방법에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
-ms.date: 11/07/2019
+ms.date: 11/14/2019
 uid: security/authentication/certauth
-ms.openlocfilehash: 0062bc0d7688ebcc67f8240da7166d89493f6639
-ms.sourcegitcommit: 4818385c3cfe0805e15138a2c1785b62deeaab90
+ms.openlocfilehash: 2ed3e88adf3bdb7528f47492b6eb5792f99f20d8
+ms.sourcegitcommit: f91d322f790123d41ec3271fa084ae20ed9f89a6
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/09/2019
-ms.locfileid: "73897029"
+ms.lasthandoff: 11/18/2019
+ms.locfileid: "74154999"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core에서 인증서 인증 구성
 
@@ -204,6 +204,9 @@ public static IHostBuilder CreateHostBuilder(string[] args)
                 });
 }
 ```
+
+> [!NOTE]
+> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*>를 호출 **하기 전에** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*>를 호출 하 여 만든 끝점에는 기본값이 적용 되지 않습니다.
 
 ### <a name="iis"></a>IIS
 

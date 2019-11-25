@@ -4,14 +4,16 @@ author: rick-anderson
 description: ASP.NET Core 2.2의 새로운 기능에 대해 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2018
+ms.date: 11/12/2019
+no-loc:
+- SignalR
 uid: aspnetcore-2.2
-ms.openlocfilehash: 88a202d85c4d4ed7a395dba78feea29ef4637732
-ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
+ms.openlocfilehash: fca653158c95e7c1a11f25f4076830fe3e7e93ae
+ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69975706"
+ms.lasthandoff: 11/12/2019
+ms.locfileid: "73963130"
 ---
 # <a name="whats-new-in-aspnet-core-22"></a>ASP.NET Core 2.2의 새로운 기능
 
@@ -21,7 +23,7 @@ ms.locfileid: "69975706"
 
 OpenAPI(이전에 Swagger라고도 함)는 REST API를 설명하는 언어 중립적 사양입니다. OpenAPI 에코시스템에는 사양을 사용하여 클라이언트 코드를 검색, 테스트 및 생성할 수 있는 도구가 있습니다. ASP.NET Core MVC에서 OpenAPI 문서 생성 및 시각화 지원은 [NSwag](https://github.com/RicoSuter/NSwag) 및 [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)와 같은 커뮤니티 기반 프로젝트를 통해 제공됩니다. ASP.NET Core 2.2는 OpenAPI 문서를 만들기 위해 향상된 도구 및 런타임 환경을 제공합니다.
 
-자세한 내용은 다음 리소스를 참조하세요.
+자세한 내용은 다음 자료를 참조하세요.
 
 * <xref:web-api/advanced/analyzers>
 * <xref:web-api/advanced/conventions>
@@ -35,7 +37,7 @@ ASP.NET Core 2.1은 HTTP 응답과 관련된 오류 세부 정보를 포함하�
 
 ASP.NET Core 2.2는 요청 디스패치를 향상시키기 위해 새로운 *엔드포인트 라우팅* 시스템을 사용합니다. 변경 사항에는 새로운 링크 생성 API 멤버 및 경로 매개 변수 변환기가 포함됩니다.
 
-자세한 내용은 다음 리소스를 참조하세요.
+자세한 내용은 다음 자료를 참조하세요.
 
 * [2.2의 엔드포인트 라우팅](https://blogs.msdn.microsoft.com/webdev/2018/08/27/asp-net-core-2-2-0-preview1-endpoint-routing/)
 * [경로 매개 변수 변환기](https://www.hanselman.com/blog/ASPNETCore22ParameterTransformersForCleanURLGenerationAndSlugsInRazorPagesOrMVC.aspx)(**라우팅** 섹션 참조)
@@ -63,7 +65,7 @@ HTTP/2는 HTTP 프로토콜의 주요 수정 버전입니다. HTTP/2의 주목�
 
 ## <a name="kestrel-configuration"></a>Kestrel 구성
 
-이전 버전의 ASP.NET Core에서는 Kestrel 옵션이 `UseKestrel`을 호출하여 구성되었습니다. 2\.2에서 Kestrel 옵션은 호스트 빌더에서 `ConfigureKestrel`을 호출하여 구성됩니다. 이 변경으로 인해 In Process 호스팅의 `IServer` 등록 순서 문제가 해결됩니다. 자세한 내용은 다음 리소스를 참조하세요.
+이전 버전의 ASP.NET Core에서는 Kestrel 옵션이 `UseKestrel`을 호출하여 구성되었습니다. 2\.2에서 Kestrel 옵션은 호스트 빌더에서 `ConfigureKestrel`을 호출하여 구성됩니다. 이 변경으로 인해 In Process 호스팅의 `IServer` 등록 순서 문제가 해결됩니다. 자세한 내용은 다음 자료를 참조하세요.
 
 * [UseIIS 충돌 완료](https://github.com/aspnet/KestrelHttpServer/issues/2760)
 * [ConfigureKestrel을 사용하여 Kestrel 서버 옵션 구성](xref:fundamentals/servers/kestrel?view=aspnetcore-2.2#how-to-use-kestrel-in-aspnet-core-apps)
@@ -74,11 +76,11 @@ HTTP/2는 HTTP 프로토콜의 주요 수정 버전입니다. HTTP/2의 주목�
 
 자세한 내용은 [IIS에 대한 In Process 호스팅](xref:host-and-deploy/aspnet-core-module?view=aspnetcore-2.2#in-process-hosting-model)을 참조하세요.
 
-## <a name="signalr-java-client"></a>SignalR Java 클라이언트
+## <a name="opno-locsignalr-java-client"></a>SignalR Java 클라이언트
 
-ASP.NET Core 2.2는 SignalR용 Java Client를 도입합니다. 이 클라이언트는 Android 앱을 포함하여 Java 코드에서 ASP.NET Core SignalR 서버에 연결할 수 있도록 지원합니다.
+ASP.NET Core 2.2는 SignalR용 Java 클라이언트를 도입합니다. 이 클라이언트는 Android 앱을 포함하여 Java 코드에서 ASP.NET Core SignalR 서버에 연결할 수 있도록 지원합니다.
 
-자세한 내용은 [ASP.NET Core SignalR Java 클라이언트](https://docs.microsoft.com/aspnet/core/signalr/java-client?view=aspnetcore-2.2)을 참조하세요.
+자세한 내용은 [ASP.NET Core SignalR Java 클라이언트](https://docs.microsoft.com/aspnet/core/signalr/java-client?view=aspnetcore-2.2)를 참조하세요.
 
 ## <a name="cors-improvements"></a>CORS 기능 향상
 

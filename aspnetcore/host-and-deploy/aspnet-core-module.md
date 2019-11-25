@@ -5,14 +5,14 @@ description: ASP.NET Core 앱을 호스팅하기 위해 ASP.NET Core 모듈을 �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/24/2019
+ms.date: 11/07/2019
 uid: host-and-deploy/aspnet-core-module
-ms.openlocfilehash: 42ff4438738931fde70e123031412bcfc8a83efb
-ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
+ms.openlocfilehash: c9bbd36b8a55b837f6d78abf99215c5496895a39
+ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/29/2019
-ms.locfileid: "73034208"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73799409"
 ---
 # <a name="aspnet-core-module"></a>ASP.NET Core 모듈
 
@@ -208,7 +208,7 @@ IIS 하위 애플리케이션 구성에 대한 자세한 내용은 <xref:host-an
 ```
 
 > [!NOTE]
-> *web.config*에서 환경을 직접 설정하는 대안으로 게시 프로필( *.pubxml*) 또는 프로젝트 파일에 `<EnvironmentName>` 속성을 포함합니다. 이 방법은 프로젝트가 게시될 때 *web.config*에 환경을 설정합니다.
+> *web.config*에서 환경을 직접 설정하는 대안으로 [게시 프로필(.pubxml)](xref:host-and-deploy/visual-studio-publish-profiles) 또는 프로젝트 파일에 `<EnvironmentName>` 속성을 포함합니다. 이 방법은 프로젝트가 게시될 때 *web.config*에 환경을 설정합니다.
 >
 > ```xml
 > <PropertyGroup>
@@ -623,7 +623,7 @@ IIS 하위 애플리케이션 구성에 대한 자세한 내용은 <xref:host-an
 ```
 
 > [!NOTE]
-> *web.config*에서 환경을 직접 설정하는 대안으로 게시 프로필( *.pubxml*) 또는 프로젝트 파일에 `<EnvironmentName>` 속성을 포함합니다. 이 방법은 프로젝트가 게시될 때 *web.config*에 환경을 설정합니다.
+> *web.config*에서 환경을 직접 설정하는 대안으로 [게시 프로필(.pubxml)](xref:host-and-deploy/visual-studio-publish-profiles) 또는 프로젝트 파일에 `<EnvironmentName>` 속성을 포함합니다. 이 방법은 프로젝트가 게시될 때 *web.config*에 환경을 설정합니다.
 >
 > ```xml
 > <PropertyGroup>

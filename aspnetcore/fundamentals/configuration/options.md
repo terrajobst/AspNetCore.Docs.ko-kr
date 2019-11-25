@@ -5,14 +5,14 @@ description: 옵션 패턴을 사용하여 ASP.NET Core 앱에서 관련된 설�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/28/2019
+ms.date: 11/18/2019
 uid: fundamentals/configuration/options
-ms.openlocfilehash: f9e94e8d1736b7ffaa2640aba03da6b239a34f0a
-ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
+ms.openlocfilehash: 4192bab8acef7c4f7bdf1ac481c468cd0a835420
+ms.sourcegitcommit: 8157e5a351f49aeef3769f7d38b787b4386aad5f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/29/2019
-ms.locfileid: "73034022"
+ms.lasthandoff: 11/20/2019
+ms.locfileid: "74239787"
 ---
 # <a name="options-pattern-in-aspnet-core"></a>ASP.NET Core의 옵션 패턴
 
@@ -162,11 +162,16 @@ delegate_option1 = value1_configured_by_delegate, delegate_option2 = 500
 subOption1 = subvalue1_from_json, subOption2 = 200
 ```
 
-## <a name="options-provided-by-a-view-model-or-with-direct-view-injection"></a>직접 보기 주입 또는 보기 모델에 의해 제공되는 옵션
+## <a name="options-injection"></a>옵션 삽입
 
-직접 보기 주입 또는 보기 모델에 의해 제공되는 옵션은 샘플 앱에 예제 &num;4로 설명되어 있습니다.
+옵션 삽입은 샘플 앱에 예제 &num;4로 설명되어 있습니다.
 
-옵션은 뷰 모델 또는 <xref:Microsoft.Extensions.Options.IOptionsMonitor%601>를 보기에 직접 주입하여 제공할 수 있습니다(*Pages/Index.cshtml.cs*).
+다음에 <xref:Microsoft.Extensions.Options.IOptionsMonitor%601>를 삽입합니다.
+
+* [@inject](xref:mvc/views/razor#inject) Razor 지시문이 있는 Razor 페이지 또는 MVC 뷰입니다.
+* 페이지 또는 뷰 모델입니다.
+
+샘플 앱의 다음 예제는 페이지 모델(*Pages/Index.cshtml.cs*)에 <xref:Microsoft.Extensions.Options.IOptionsMonitor%601>를 삽입합니다.
 
 [!code-csharp[](options/samples/3.x/OptionsSample/Pages/Index.cshtml.cs?range=9)]
 
@@ -186,9 +191,12 @@ subOption1 = subvalue1_from_json, subOption2 = 200
 
 <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601>을 사용하여 구성 데이터를 다시 로드하는 방법은 샘플 앱에 예제 &num;5로 설명되어 있습니다.
 
-<xref:Microsoft.Extensions.Options.IOptionsSnapshot%601>은 최소한의 처리 오버헤드로 옵션 다시 로드를 지원합니다.
+<xref:Microsoft.Extensions.Options.IOptionsSnapshot%601>을 사용하면, 옵션은 엑세스될 때 요청 당 한 번씩 계산되고 요청의 수명 동안 캐시됩니다.
 
-옵션은 엑세스될 때 요청 당 한 번씩 계산되고 요청의 수명 동안 캐시됩니다.
+`IOptionsMonitor`와 `IOptionsSnapshot`의 차이점은 다음과 같습니다.
+
+* `IOptionsMonitor`는 언제든지 현재 옵션 값을 검색하는 [싱글톤 서비스](xref:fundamentals/dependency-injection#singleton)로, 싱글톤 종속성에서 특히 유용합니다.
+* `IOptionsSnapshot`은 [범위가 지정된 서비스](xref:fundamentals/dependency-injection#scoped)이며 `IOptionsSnapshot<T>` 개체가 생성될 때 옵션의 스냅샷을 제공합니다. 옵션 스냅숏은 임시 및 범위가 지정된 종속성과 함께 사용하도록 설계되었습니다.
 
 다음 예제에는 *appsettings.json*이 변경된 후 새 <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601>을 만드는 방법이 설명되어 있습니다(*Pages/Index.cshtml.cs*). 서버에 대한 여러 요청은 파일이 변경되고 구성이 다시 로드될 때까지 *appsettings.json* 파일에서 제공하는 상수 값을 반환합니다.
 
@@ -578,11 +586,16 @@ delegate_option1 = value1_configured_by_delegate, delegate_option2 = 500
 subOption1 = subvalue1_from_json, subOption2 = 200
 ```
 
-## <a name="options-provided-by-a-view-model-or-with-direct-view-injection"></a>직접 보기 주입 또는 보기 모델에 의해 제공되는 옵션
+## <a name="options-injection"></a>옵션 삽입
 
-직접 보기 주입 또는 보기 모델에 의해 제공되는 옵션은 샘플 앱에 예제 &num;4로 설명되어 있습니다.
+옵션 삽입은 샘플 앱에 예제 &num;4로 설명되어 있습니다.
 
-옵션은 뷰 모델 또는 <xref:Microsoft.Extensions.Options.IOptionsMonitor%601>를 보기에 직접 주입하여 제공할 수 있습니다(*Pages/Index.cshtml.cs*).
+다음에 <xref:Microsoft.Extensions.Options.IOptionsMonitor%601>를 삽입합니다.
+
+* [@inject](xref:mvc/views/razor#inject) Razor 지시문이 있는 Razor 페이지 또는 MVC 뷰입니다.
+* 페이지 또는 뷰 모델입니다.
+
+샘플 앱의 다음 예제는 페이지 모델(*Pages/Index.cshtml.cs*)에 <xref:Microsoft.Extensions.Options.IOptionsMonitor%601>를 삽입합니다.
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=9)]
 
@@ -602,9 +615,12 @@ subOption1 = subvalue1_from_json, subOption2 = 200
 
 <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601>을 사용하여 구성 데이터를 다시 로드하는 방법은 샘플 앱에 예제 &num;5로 설명되어 있습니다.
 
-<xref:Microsoft.Extensions.Options.IOptionsSnapshot%601>은 최소한의 처리 오버헤드로 옵션 다시 로드를 지원합니다.
+<xref:Microsoft.Extensions.Options.IOptionsSnapshot%601>을 사용하면, 옵션은 엑세스될 때 요청 당 한 번씩 계산되고 요청의 수명 동안 캐시됩니다.
 
-옵션은 엑세스될 때 요청 당 한 번씩 계산되고 요청의 수명 동안 캐시됩니다.
+`IOptionsMonitor`와 `IOptionsSnapshot`의 차이점은 다음과 같습니다.
+
+* `IOptionsMonitor`는 언제든지 현재 옵션 값을 검색하는 [싱글톤 서비스](xref:fundamentals/dependency-injection#singleton)로, 싱글톤 종속성에서 특히 유용합니다.
+* `IOptionsSnapshot`은 [범위가 지정된 서비스](xref:fundamentals/dependency-injection#scoped)이며 `IOptionsSnapshot<T>` 개체가 생성될 때 옵션의 스냅샷을 제공합니다. 옵션 스냅숏은 임시 및 범위가 지정된 종속성과 함께 사용하도록 설계되었습니다.
 
 다음 예제에는 *appsettings.json*이 변경된 후 새 <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601>을 만드는 방법이 설명되어 있습니다(*Pages/Index.cshtml.cs*). 서버에 대한 여러 요청은 파일이 변경되고 구성이 다시 로드될 때까지 *appsettings.json* 파일에서 제공하는 상수 값을 반환합니다.
 

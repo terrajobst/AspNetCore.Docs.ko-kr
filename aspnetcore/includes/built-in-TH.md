@@ -8,8 +8,6 @@
 
 **[환경 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/environment-tag-helper)**
 
-**[FormActionTagHelper](xref:mvc/views/working-with-forms#the-form-action-tag-helper)**
-
 **[폼 태그 도우미](xref:mvc/views/working-with-forms#the-form-tag-helper)**
 
 **[양식 작업 태그 도우미](xref:mvc/views/working-with-forms#the-form-action-tag-helper)**
@@ -20,13 +18,11 @@
 
 **[레이블 태그 도우미](xref:mvc/views/working-with-forms#the-label-tag-helper)**
 
-**[LinkTagHelper](xref:mvc/views/tag-helpers/builtin-th/link-tag-helper)**
-
-[comment]: **[OptionTagHelper](xref:mvc/views/tag-helpers/builtin-th/option-tag-helper)**
-
-**[ScriptTagHelper](xref:mvc/views/tag-helpers/builtin-th/script-tag-helper)**
+**[링크 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/link-tag-helper)**
 
 **[부분 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper)**
+
+**[스크립트 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/script-tag-helper)**
 
 **[선택 태그 도우미](xref:mvc/views/working-with-forms#the-select-tag-helper)**
 
