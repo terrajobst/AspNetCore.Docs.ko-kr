@@ -260,7 +260,7 @@
           uid: mvc/views/overview
         - name: 부분 뷰
           uid: mvc/views/partial
-        - name: 컨트롤러
+        - name: Controllers
           uid: mvc/controllers/actions
         - name: 라우팅
           uid: mvc/controllers/routing
@@ -381,14 +381,20 @@
               uid: mvc/views/tag-helpers/builtin-th/environment-tag-helper
             - name: Form
               href: 'mvc/views/working-with-forms.md#the-form-tag-helper'
+            - name: 양식 작업
+              href: 'mvc/views/working-with-forms.md#the-form-action-tag-helper'
             - name: 이미지
               uid: mvc/views/tag-helpers/builtin-th/image-tag-helper
             - name: 입력
               href: 'mvc/views/working-with-forms.md#the-input-tag-helper'
             - name: 레이블
               href: 'mvc/views/working-with-forms.md#the-label-tag-helper'
+            - name: 링크
+              uid: mvc/views/tag-helpers/builtin-th/link-tag-helper
             - name: Partial
               uid: mvc/views/tag-helpers/builtin-th/partial-tag-helper
+            - name: 스크립트
+              uid: mvc/views/tag-helpers/builtin-th/script-tag-helper
             - name: 선택
               href: 'mvc/views/working-with-forms.md#the-select-tag-helper'
             - name: 텍스트 영역
@@ -407,7 +413,7 @@
           uid: mvc/controllers/application-model
         - name: 필터
           uid: mvc/controllers/filters
-        - name: 영역
+        - name: Areas
           uid: mvc/controllers/areas
         - name: 파일 업로드
           uid: mvc/models/file-uploads

@@ -5,69 +5,69 @@ description: ASP.NET Core 앱의 여러 환경에서 앱 동작을 제어하는 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/05/2019
+ms.date: 11/07/2019
 uid: fundamentals/environments
-ms.openlocfilehash: 91fa2a78e62dff65704a3dda826f45f27bad6064
-ms.sourcegitcommit: 897d4abff58505dae86b2947c5fe3d1b80d927f3
+ms.openlocfilehash: 7e49499e94fb9ea82a0ba17e4e9de05c6a2d4e98
+ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73634089"
+ms.lasthandoff: 11/07/2019
+ms.locfileid: "73799308"
 ---
-# <a name="use-multiple-environments-in-aspnet-core"></a><span data-ttu-id="b2e9a-103">ASP.NET Core에서 여러 환경 사용</span><span class="sxs-lookup"><span data-stu-id="b2e9a-103">Use multiple environments in ASP.NET Core</span></span>
+# <a name="use-multiple-environments-in-aspnet-core"></a><span data-ttu-id="8df76-103">ASP.NET Core에서 여러 환경 사용</span><span class="sxs-lookup"><span data-stu-id="8df76-103">Use multiple environments in ASP.NET Core</span></span>
 
-<span data-ttu-id="b2e9a-104">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="b2e9a-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+<span data-ttu-id="8df76-104">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="8df76-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
-<span data-ttu-id="b2e9a-105">ASP.NET Core는 환경 변수를 사용하여 런타임 환경에 따라 앱 동작을 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-105">ASP.NET Core configures app behavior based on the runtime environment using an environment variable.</span></span>
+<span data-ttu-id="8df76-105">ASP.NET Core는 환경 변수를 사용하여 런타임 환경에 따라 앱 동작을 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-105">ASP.NET Core configures app behavior based on the runtime environment using an environment variable.</span></span>
 
-<span data-ttu-id="b2e9a-106">[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/environments/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="b2e9a-106">[View or download sample code](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/environments/sample) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="8df76-106">[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/environments/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="8df76-106">[View or download sample code](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/environments/sample) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-## <a name="environments"></a><span data-ttu-id="b2e9a-107">환경</span><span class="sxs-lookup"><span data-stu-id="b2e9a-107">Environments</span></span>
+## <a name="environments"></a><span data-ttu-id="8df76-107">환경</span><span class="sxs-lookup"><span data-stu-id="8df76-107">Environments</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="b2e9a-108">ASP.NET Core는 앱 시작 시 환경 변수 `ASPNETCORE_ENVIRONMENT`를 읽고 [IWebHostEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName)에 값을 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-108">ASP.NET Core reads the environment variable `ASPNETCORE_ENVIRONMENT` at app startup and stores the value in [IWebHostEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName).</span></span> <span data-ttu-id="b2e9a-109">`ASPNETCORE_ENVIRONMENT`를 임의의 값으로 설정할 수 있지만 세 개의 값은 프레임워크에서 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-109">`ASPNETCORE_ENVIRONMENT` can be set to any value, but three values are provided by the framework:</span></span>
+<span data-ttu-id="8df76-108">ASP.NET Core는 앱 시작 시 환경 변수 `ASPNETCORE_ENVIRONMENT`를 읽고 [IWebHostEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName)에 값을 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-108">ASP.NET Core reads the environment variable `ASPNETCORE_ENVIRONMENT` at app startup and stores the value in [IWebHostEnvironment.EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName).</span></span> <span data-ttu-id="8df76-109">`ASPNETCORE_ENVIRONMENT`를 임의의 값으로 설정할 수 있지만 세 개의 값은 프레임워크에서 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-109">`ASPNETCORE_ENVIRONMENT` can be set to any value, but three values are provided by the framework:</span></span>
 
 * <xref:Microsoft.Extensions.Hosting.Environments.Development>
 * <xref:Microsoft.Extensions.Hosting.Environments.Staging>
-* <span data-ttu-id="b2e9a-110"><xref:Microsoft.Extensions.Hosting.Environments.Production>(기본값)</span><span class="sxs-lookup"><span data-stu-id="b2e9a-110"><xref:Microsoft.Extensions.Hosting.Environments.Production> (default)</span></span>
+* <span data-ttu-id="8df76-110"><xref:Microsoft.Extensions.Hosting.Environments.Production>(기본값)</span><span class="sxs-lookup"><span data-stu-id="8df76-110"><xref:Microsoft.Extensions.Hosting.Environments.Production> (default)</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="b2e9a-111">ASP.NET Core는 앱 시작 시 환경 변수 `ASPNETCORE_ENVIRONMENT`를 읽고 [IHostingEnvironment.EnvironmentName](xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName)에 그 값을 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-111">ASP.NET Core reads the environment variable `ASPNETCORE_ENVIRONMENT` at app startup and stores the value in [IHostingEnvironment.EnvironmentName](xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName).</span></span> <span data-ttu-id="b2e9a-112">`ASPNETCORE_ENVIRONMENT`를 임의의 값으로 설정할 수 있지만 세 개의 값은 프레임워크에서 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-112">`ASPNETCORE_ENVIRONMENT` can be set to any value, but three values are provided by the framework:</span></span>
+<span data-ttu-id="8df76-111">ASP.NET Core는 앱 시작 시 환경 변수 `ASPNETCORE_ENVIRONMENT`를 읽고 [IHostingEnvironment.EnvironmentName](xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName)에 그 값을 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-111">ASP.NET Core reads the environment variable `ASPNETCORE_ENVIRONMENT` at app startup and stores the value in [IHostingEnvironment.EnvironmentName](xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName).</span></span> <span data-ttu-id="8df76-112">`ASPNETCORE_ENVIRONMENT`를 임의의 값으로 설정할 수 있지만 세 개의 값은 프레임워크에서 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-112">`ASPNETCORE_ENVIRONMENT` can be set to any value, but three values are provided by the framework:</span></span>
 
 * <xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Development>
 * <xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Staging>
-* <span data-ttu-id="b2e9a-113"><xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Production>(기본값)</span><span class="sxs-lookup"><span data-stu-id="b2e9a-113"><xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Production> (default)</span></span>
+* <span data-ttu-id="8df76-113"><xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Production>(기본값)</span><span class="sxs-lookup"><span data-stu-id="8df76-113"><xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Production> (default)</span></span>
 
 ::: moniker-end
 
 [!code-csharp[](environments/sample/EnvironmentsSample/Startup.cs?name=snippet)]
 
-<span data-ttu-id="b2e9a-114">위의 코드는</span><span class="sxs-lookup"><span data-stu-id="b2e9a-114">The preceding code:</span></span>
+<span data-ttu-id="8df76-114">위의 코드는</span><span class="sxs-lookup"><span data-stu-id="8df76-114">The preceding code:</span></span>
 
-* <span data-ttu-id="b2e9a-115">`ASPNETCORE_ENVIRONMENT`이 `Development`로 설정된 경우 [UseDeveloperExceptionPage](/dotnet/api/microsoft.aspnetcore.builder.developerexceptionpageextensions.usedeveloperexceptionpage)를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-115">Calls [UseDeveloperExceptionPage](/dotnet/api/microsoft.aspnetcore.builder.developerexceptionpageextensions.usedeveloperexceptionpage) when `ASPNETCORE_ENVIRONMENT` is set to `Development`.</span></span>
-* <span data-ttu-id="b2e9a-116">`ASPNETCORE_ENVIRONMENT`의 값이 다음 중 하나로 설정된 경우 [UseExceptionHandler](/dotnet/api/microsoft.aspnetcore.builder.exceptionhandlerextensions.useexceptionhandler)를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-116">Calls [UseExceptionHandler](/dotnet/api/microsoft.aspnetcore.builder.exceptionhandlerextensions.useexceptionhandler) when the value of `ASPNETCORE_ENVIRONMENT` is set one of the following:</span></span>
+* <span data-ttu-id="8df76-115">`ASPNETCORE_ENVIRONMENT`이 `Development`로 설정된 경우 [UseDeveloperExceptionPage](/dotnet/api/microsoft.aspnetcore.builder.developerexceptionpageextensions.usedeveloperexceptionpage)를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-115">Calls [UseDeveloperExceptionPage](/dotnet/api/microsoft.aspnetcore.builder.developerexceptionpageextensions.usedeveloperexceptionpage) when `ASPNETCORE_ENVIRONMENT` is set to `Development`.</span></span>
+* <span data-ttu-id="8df76-116">`ASPNETCORE_ENVIRONMENT`의 값이 다음 중 하나로 설정된 경우 [UseExceptionHandler](/dotnet/api/microsoft.aspnetcore.builder.exceptionhandlerextensions.useexceptionhandler)를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-116">Calls [UseExceptionHandler](/dotnet/api/microsoft.aspnetcore.builder.exceptionhandlerextensions.useexceptionhandler) when the value of `ASPNETCORE_ENVIRONMENT` is set one of the following:</span></span>
 
   * `Staging`
   * `Production`
   * `Staging_2`
 
-<span data-ttu-id="b2e9a-117">[Environment 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/environment-tag-helper)는 `IHostingEnvironment.EnvironmentName`의 값을 사용하여 요소에 태그를 포함하거나 제외합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-117">The [Environment Tag Helper](xref:mvc/views/tag-helpers/builtin-th/environment-tag-helper) uses the value of `IHostingEnvironment.EnvironmentName` to include or exclude markup in the element:</span></span>
+<span data-ttu-id="8df76-117">[Environment 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/environment-tag-helper)는 `IHostingEnvironment.EnvironmentName`의 값을 사용하여 요소에 태그를 포함하거나 제외합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-117">The [Environment Tag Helper](xref:mvc/views/tag-helpers/builtin-th/environment-tag-helper) uses the value of `IHostingEnvironment.EnvironmentName` to include or exclude markup in the element:</span></span>
 
 [!code-cshtml[](environments/sample-snapshot/EnvironmentsSample/Pages/About.cshtml)]
 
-<span data-ttu-id="b2e9a-118">Windows 및 macOS에서 환경 변수 및 값은 대/소문자를 구분하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-118">On Windows and macOS, environment variables and values aren't case sensitive.</span></span> <span data-ttu-id="b2e9a-119">Linux 환경 변수 및 값은 기본적으로 **대/소문자를 구분**합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-119">Linux environment variables and values are **case sensitive** by default.</span></span>
+<span data-ttu-id="8df76-118">Windows 및 macOS에서 환경 변수 및 값은 대/소문자를 구분하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-118">On Windows and macOS, environment variables and values aren't case sensitive.</span></span> <span data-ttu-id="8df76-119">Linux 환경 변수 및 값은 기본적으로 **대/소문자를 구분**합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-119">Linux environment variables and values are **case sensitive** by default.</span></span>
 
-### <a name="development"></a><span data-ttu-id="b2e9a-120">개발</span><span class="sxs-lookup"><span data-stu-id="b2e9a-120">Development</span></span>
+### <a name="development"></a><span data-ttu-id="8df76-120">개발</span><span class="sxs-lookup"><span data-stu-id="8df76-120">Development</span></span>
 
-<span data-ttu-id="b2e9a-121">개발 환경은 프로덕션에서 노출해서는 안 되는 기능을 활성화할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-121">The development environment can enable features that shouldn't be exposed in production.</span></span> <span data-ttu-id="b2e9a-122">예를 들어 ASP.NET Core 템플릿은 개발 환경에서 [개발자 예외 페이지](xref:fundamentals/error-handling#developer-exception-page)를 활성화합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-122">For example, the ASP.NET Core templates enable the [Developer Exception Page](xref:fundamentals/error-handling#developer-exception-page) in the development environment.</span></span>
+<span data-ttu-id="8df76-121">개발 환경은 프로덕션에서 노출해서는 안 되는 기능을 활성화할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-121">The development environment can enable features that shouldn't be exposed in production.</span></span> <span data-ttu-id="8df76-122">예를 들어 ASP.NET Core 템플릿은 개발 환경에서 [개발자 예외 페이지](xref:fundamentals/error-handling#developer-exception-page)를 활성화합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-122">For example, the ASP.NET Core templates enable the [Developer Exception Page](xref:fundamentals/error-handling#developer-exception-page) in the development environment.</span></span>
 
-<span data-ttu-id="b2e9a-123">로컬 컴퓨터 개발을 위한 환경은 프로젝트의 *Properties\launchSettings.json* 파일에서 설정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-123">The environment for local machine development can be set in the *Properties\launchSettings.json* file of the project.</span></span> <span data-ttu-id="b2e9a-124">*launchSettings.json*의 환경 값은 시스템 환경에 설정된 값을 재정의합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-124">Environment values set in *launchSettings.json* override values set in the system environment.</span></span>
+<span data-ttu-id="8df76-123">로컬 컴퓨터 개발을 위한 환경은 프로젝트의 *Properties\launchSettings.json* 파일에서 설정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-123">The environment for local machine development can be set in the *Properties\launchSettings.json* file of the project.</span></span> <span data-ttu-id="8df76-124">*launchSettings.json*의 환경 값은 시스템 환경에 설정된 값을 재정의합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-124">Environment values set in *launchSettings.json* override values set in the system environment.</span></span>
 
-<span data-ttu-id="b2e9a-125">다음 JSON은 *launchSettings.json* 파일의 세 가지 프로필을 보여줍니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-125">The following JSON shows three profiles from a *launchSettings.json* file:</span></span>
+<span data-ttu-id="8df76-125">다음 JSON은 *launchSettings.json* 파일의 세 가지 프로필을 보여줍니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-125">The following JSON shows three profiles from a *launchSettings.json* file:</span></span>
 
 ```json
 {
@@ -112,7 +112,7 @@ ms.locfileid: "73634089"
 ```
 
 > [!NOTE]
-> <span data-ttu-id="b2e9a-126">*launchSettings.json*의 `applicationUrl` 속성은 서버 URL의 목록을 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-126">The `applicationUrl` property in *launchSettings.json* can specify a list of server URLs.</span></span> <span data-ttu-id="b2e9a-127">목록의 URL 사이에 세미콜론을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-127">Use a semicolon between the URLs in the list:</span></span>
+> <span data-ttu-id="8df76-126">*launchSettings.json*의 `applicationUrl` 속성은 서버 URL의 목록을 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-126">The `applicationUrl` property in *launchSettings.json* can specify a list of server URLs.</span></span> <span data-ttu-id="8df76-127">목록의 URL 사이에 세미콜론을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-127">Use a semicolon between the URLs in the list:</span></span>
 >
 > ```json
 > "EnvironmentsSample": {
@@ -125,18 +125,18 @@ ms.locfileid: "73634089"
 > }
 > ```
 
-<span data-ttu-id="b2e9a-128">[dotnet run](/dotnet/core/tools/dotnet-run)을 사용하여 앱을 시작하면 `"commandName": "Project"`를 포함한 첫 번째 프로필이 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-128">When the app is launched with [dotnet run](/dotnet/core/tools/dotnet-run), the first profile with `"commandName": "Project"` is used.</span></span> <span data-ttu-id="b2e9a-129">`commandName`의 값은 시작할 웹 서버를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-129">The value of `commandName` specifies the web server to launch.</span></span> <span data-ttu-id="b2e9a-130">`commandName`은 다음 중 하나일 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-130">`commandName` can be any one of the following:</span></span>
+<span data-ttu-id="8df76-128">[dotnet run](/dotnet/core/tools/dotnet-run)을 사용하여 앱을 시작하면 `"commandName": "Project"`를 포함한 첫 번째 프로필이 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-128">When the app is launched with [dotnet run](/dotnet/core/tools/dotnet-run), the first profile with `"commandName": "Project"` is used.</span></span> <span data-ttu-id="8df76-129">`commandName`의 값은 시작할 웹 서버를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-129">The value of `commandName` specifies the web server to launch.</span></span> <span data-ttu-id="8df76-130">`commandName`은 다음 중 하나일 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-130">`commandName` can be any one of the following:</span></span>
 
 * `IISExpress`
 * `IIS`
-* <span data-ttu-id="b2e9a-131">`Project`(Kestrel을 시작합니다.)</span><span class="sxs-lookup"><span data-stu-id="b2e9a-131">`Project` (which launches Kestrel)</span></span>
+* <span data-ttu-id="8df76-131">`Project`(Kestrel을 시작합니다.)</span><span class="sxs-lookup"><span data-stu-id="8df76-131">`Project` (which launches Kestrel)</span></span>
 
-<span data-ttu-id="b2e9a-132">[dotnet run](/dotnet/core/tools/dotnet-run)으로 앱을 시작하는 경우:</span><span class="sxs-lookup"><span data-stu-id="b2e9a-132">When an app is launched with [dotnet run](/dotnet/core/tools/dotnet-run):</span></span>
+<span data-ttu-id="8df76-132">[dotnet run](/dotnet/core/tools/dotnet-run)으로 앱을 시작하는 경우:</span><span class="sxs-lookup"><span data-stu-id="8df76-132">When an app is launched with [dotnet run](/dotnet/core/tools/dotnet-run):</span></span>
 
-* <span data-ttu-id="b2e9a-133">가능한 경우 *launchSettings.json*을 읽습니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-133">*launchSettings.json* is read if available.</span></span> <span data-ttu-id="b2e9a-134">*launchSettings.json*의 `environmentVariables` 설정이 환경 변수를 재정의합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-134">`environmentVariables` settings in *launchSettings.json* override environment variables.</span></span>
-* <span data-ttu-id="b2e9a-135">호스팅 환경이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-135">The hosting environment is displayed.</span></span>
+* <span data-ttu-id="8df76-133">가능한 경우 *launchSettings.json*을 읽습니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-133">*launchSettings.json* is read if available.</span></span> <span data-ttu-id="8df76-134">*launchSettings.json*의 `environmentVariables` 설정이 환경 변수를 재정의합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-134">`environmentVariables` settings in *launchSettings.json* override environment variables.</span></span>
+* <span data-ttu-id="8df76-135">호스팅 환경이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-135">The hosting environment is displayed.</span></span>
 
-<span data-ttu-id="b2e9a-136">다음 출력은 [dotnet run](/dotnet/core/tools/dotnet-run)으로 시작된 앱을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-136">The following output shows an app started with [dotnet run](/dotnet/core/tools/dotnet-run):</span></span>
+<span data-ttu-id="8df76-136">다음 출력은 [dotnet run](/dotnet/core/tools/dotnet-run)으로 시작된 앱을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-136">The following output shows an app started with [dotnet run](/dotnet/core/tools/dotnet-run):</span></span>
 
 ```bash
 PS C:\Websites\EnvironmentsSample> dotnet run
@@ -147,16 +147,16 @@ Now listening on: http://localhost:54340
 Application started. Press Ctrl+C to shut down.
 ```
 
-<span data-ttu-id="b2e9a-137">Visual Studio 프로젝트 속성 **Debug** 탭은 *launchSettings.json* 파일을 편집할 수 있는 GUI를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-137">The Visual Studio project properties **Debug** tab provides a GUI to edit the *launchSettings.json* file:</span></span>
+<span data-ttu-id="8df76-137">Visual Studio 프로젝트 속성 **Debug** 탭은 *launchSettings.json* 파일을 편집할 수 있는 GUI를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-137">The Visual Studio project properties **Debug** tab provides a GUI to edit the *launchSettings.json* file:</span></span>
 
 ![프로젝트 속성 설정 환경 변수](environments/_static/project-properties-debug.png)
 
-<span data-ttu-id="b2e9a-139">웹 서버가 다시 시작되기 전에는 프로젝트 프로필의 변경 내용이 적용되지 않을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-139">Changes made to project profiles may not take effect until the web server is restarted.</span></span> <span data-ttu-id="b2e9a-140">해당 환경에 대한 변경 내용을 감지하려면 Kestrel을 다시 시작해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-140">Kestrel must be restarted before it can detect changes made to its environment.</span></span>
+<span data-ttu-id="8df76-139">웹 서버가 다시 시작되기 전에는 프로젝트 프로필의 변경 내용이 적용되지 않을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-139">Changes made to project profiles may not take effect until the web server is restarted.</span></span> <span data-ttu-id="8df76-140">해당 환경에 대한 변경 내용을 감지하려면 Kestrel을 다시 시작해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-140">Kestrel must be restarted before it can detect changes made to its environment.</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="b2e9a-141">*launchSettings.json*은 암호를 저장하지 않아야 합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-141">*launchSettings.json* shouldn't store secrets.</span></span> <span data-ttu-id="b2e9a-142">[암호 관리자 도구](xref:security/app-secrets)를 사용하여 로컬 개발에 사용되는 암호를 저장할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-142">The [Secret Manager tool](xref:security/app-secrets) can be used to store secrets for local development.</span></span>
+> <span data-ttu-id="8df76-141">*launchSettings.json*은 암호를 저장하지 않아야 합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-141">*launchSettings.json* shouldn't store secrets.</span></span> <span data-ttu-id="8df76-142">[암호 관리자 도구](xref:security/app-secrets)를 사용하여 로컬 개발에 사용되는 암호를 저장할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-142">The [Secret Manager tool](xref:security/app-secrets) can be used to store secrets for local development.</span></span>
 
-<span data-ttu-id="b2e9a-143">[Visual Studio Code](https://code.visualstudio.com/)를 사용하는 경우 환경 변수는 *.vscode/launch.json* 파일에서 설정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-143">When using [Visual Studio Code](https://code.visualstudio.com/), environment variables can be set in the *.vscode/launch.json* file.</span></span> <span data-ttu-id="b2e9a-144">다음 예제는 환경을 `Development`로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-144">The following example sets the environment to `Development`:</span></span>
+<span data-ttu-id="8df76-143">[Visual Studio Code](https://code.visualstudio.com/)를 사용하는 경우 환경 변수는 *.vscode/launch.json* 파일에서 설정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-143">When using [Visual Studio Code](https://code.visualstudio.com/), environment variables can be set in the *.vscode/launch.json* file.</span></span> <span data-ttu-id="8df76-144">다음 예제는 환경을 `Development`로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-144">The following example sets the environment to `Development`:</span></span>
 
 ```json
 {
@@ -175,94 +175,94 @@ Application started. Press Ctrl+C to shut down.
 }
 ```
 
-<span data-ttu-id="b2e9a-145">*Properties/launchSettings.json*과 같은 방식으로 `dotnet run`을 사용하여 앱을 시작할 때 프로젝트의 *.vscode/launch.json* 파일은 읽히지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-145">A *.vscode/launch.json* file in the project isn't read when starting the app with `dotnet run` in the same way as *Properties/launchSettings.json*.</span></span> <span data-ttu-id="b2e9a-146">*launchSettings.json* 파일이 없는 개발 환경에서 앱을 시작할 때는 `dotnet run` 명령에 대한 환경 변수 또는 명령줄 인수로 환경을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-146">When launching an app in development that doesn't have a *launchSettings.json* file, either set the environment with an environment variable or a command-line argument to the `dotnet run` command.</span></span>
+<span data-ttu-id="8df76-145">*Properties/launchSettings.json*과 같은 방식으로 `dotnet run`을 사용하여 앱을 시작할 때 프로젝트의 *.vscode/launch.json* 파일은 읽히지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-145">A *.vscode/launch.json* file in the project isn't read when starting the app with `dotnet run` in the same way as *Properties/launchSettings.json*.</span></span> <span data-ttu-id="8df76-146">*launchSettings.json* 파일이 없는 개발 환경에서 앱을 시작할 때는 `dotnet run` 명령에 대한 환경 변수 또는 명령줄 인수로 환경을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-146">When launching an app in development that doesn't have a *launchSettings.json* file, either set the environment with an environment variable or a command-line argument to the `dotnet run` command.</span></span>
 
-### <a name="production"></a><span data-ttu-id="b2e9a-147">Production</span><span class="sxs-lookup"><span data-stu-id="b2e9a-147">Production</span></span>
+### <a name="production"></a><span data-ttu-id="8df76-147">Production</span><span class="sxs-lookup"><span data-stu-id="8df76-147">Production</span></span>
 
-<span data-ttu-id="b2e9a-148">프로덕션 환경은 보안, 성능 및 앱 견고성을 최대화하도록 구성되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-148">The production environment should be configured to maximize security, performance, and app robustness.</span></span> <span data-ttu-id="b2e9a-149">개발과 다른 몇 가지 일반적인 설정은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-149">Some common settings that differ from development include:</span></span>
+<span data-ttu-id="8df76-148">프로덕션 환경은 보안, 성능 및 앱 견고성을 최대화하도록 구성되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-148">The production environment should be configured to maximize security, performance, and app robustness.</span></span> <span data-ttu-id="8df76-149">개발과 다른 몇 가지 일반적인 설정은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-149">Some common settings that differ from development include:</span></span>
 
-* <span data-ttu-id="b2e9a-150">캐싱.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-150">Caching.</span></span>
-* <span data-ttu-id="b2e9a-151">클라이언트 쪽 리소스가 번들로 제공되고, 축소되며, 잠재적으로 CDN에서 처리됩니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-151">Client-side resources are bundled, minified, and potentially served from a CDN.</span></span>
-* <span data-ttu-id="b2e9a-152">진단 오류 페이지를 사용하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-152">Diagnostic error pages disabled.</span></span>
-* <span data-ttu-id="b2e9a-153">친숙한 오류 페이지를 사용하도록 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-153">Friendly error pages enabled.</span></span>
-* <span data-ttu-id="b2e9a-154">프로덕션 로깅 및 모니터링을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-154">Production logging and monitoring enabled.</span></span> <span data-ttu-id="b2e9a-155">예: [Application Insights](/azure/application-insights/app-insights-asp-net-core).</span><span class="sxs-lookup"><span data-stu-id="b2e9a-155">For example, [Application Insights](/azure/application-insights/app-insights-asp-net-core).</span></span>
+* <span data-ttu-id="8df76-150">캐싱.</span><span class="sxs-lookup"><span data-stu-id="8df76-150">Caching.</span></span>
+* <span data-ttu-id="8df76-151">클라이언트 쪽 리소스가 번들로 제공되고, 축소되며, 잠재적으로 CDN에서 처리됩니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-151">Client-side resources are bundled, minified, and potentially served from a CDN.</span></span>
+* <span data-ttu-id="8df76-152">진단 오류 페이지를 사용하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-152">Diagnostic error pages disabled.</span></span>
+* <span data-ttu-id="8df76-153">친숙한 오류 페이지를 사용하도록 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-153">Friendly error pages enabled.</span></span>
+* <span data-ttu-id="8df76-154">프로덕션 로깅 및 모니터링을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-154">Production logging and monitoring enabled.</span></span> <span data-ttu-id="8df76-155">예: [Application Insights](/azure/application-insights/app-insights-asp-net-core).</span><span class="sxs-lookup"><span data-stu-id="8df76-155">For example, [Application Insights](/azure/application-insights/app-insights-asp-net-core).</span></span>
 
-## <a name="set-the-environment"></a><span data-ttu-id="b2e9a-156">환경 설정</span><span class="sxs-lookup"><span data-stu-id="b2e9a-156">Set the environment</span></span>
+## <a name="set-the-environment"></a><span data-ttu-id="8df76-156">환경 설정</span><span class="sxs-lookup"><span data-stu-id="8df76-156">Set the environment</span></span>
 
-<span data-ttu-id="b2e9a-157">환경 변수 또는 플랫폼 설정을 사용하여 테스트하기 위해 특정 환경을 설정하면 유용한 경우가 많습니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-157">It's often useful to set a specific environment for testing with an environment variable or platform setting.</span></span> <span data-ttu-id="b2e9a-158">환경을 설정하지 않으면 대부분의 디버깅 기능을 사용하지 않는 `Production`으로 기본값이 지정됩니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-158">If the environment isn't set, it defaults to `Production`, which disables most debugging features.</span></span> <span data-ttu-id="b2e9a-159">환경을 설정하는 방법은 운영 체제에 따라 다릅니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-159">The method for setting the environment depends on the operating system.</span></span>
+<span data-ttu-id="8df76-157">환경 변수 또는 플랫폼 설정을 사용하여 테스트하기 위해 특정 환경을 설정하면 유용한 경우가 많습니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-157">It's often useful to set a specific environment for testing with an environment variable or platform setting.</span></span> <span data-ttu-id="8df76-158">환경을 설정하지 않으면 대부분의 디버깅 기능을 사용하지 않는 `Production`으로 기본값이 지정됩니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-158">If the environment isn't set, it defaults to `Production`, which disables most debugging features.</span></span> <span data-ttu-id="8df76-159">환경을 설정하는 방법은 운영 체제에 따라 다릅니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-159">The method for setting the environment depends on the operating system.</span></span>
 
-<span data-ttu-id="b2e9a-160">호스트를 빌드할 때 앱에서 읽은 마지막 환경 설정에 따라 앱의 환경이 결정됩니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-160">When the host is built, the last environment setting read by the app determines the app's environment.</span></span> <span data-ttu-id="b2e9a-161">앱을 실행하는 동안에는 앱 환경을 변경할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-161">The app's environment can't be changed while the app is running.</span></span>
+<span data-ttu-id="8df76-160">호스트를 빌드할 때 앱에서 읽은 마지막 환경 설정에 따라 앱의 환경이 결정됩니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-160">When the host is built, the last environment setting read by the app determines the app's environment.</span></span> <span data-ttu-id="8df76-161">앱을 실행하는 동안에는 앱 환경을 변경할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-161">The app's environment can't be changed while the app is running.</span></span>
 
-### <a name="environment-variable-or-platform-setting"></a><span data-ttu-id="b2e9a-162">환경 변수 또는 플랫폼 설정</span><span class="sxs-lookup"><span data-stu-id="b2e9a-162">Environment variable or platform setting</span></span>
+### <a name="environment-variable-or-platform-setting"></a><span data-ttu-id="8df76-162">환경 변수 또는 플랫폼 설정</span><span class="sxs-lookup"><span data-stu-id="8df76-162">Environment variable or platform setting</span></span>
 
-#### <a name="azure-app-service"></a><span data-ttu-id="b2e9a-163">Azure App Service</span><span class="sxs-lookup"><span data-stu-id="b2e9a-163">Azure App Service</span></span>
+#### <a name="azure-app-service"></a><span data-ttu-id="8df76-163">Azure App Service</span><span class="sxs-lookup"><span data-stu-id="8df76-163">Azure App Service</span></span>
 
-<span data-ttu-id="b2e9a-164">[Azure App Service](https://azure.microsoft.com/services/app-service/)에서 환경을 설정하려면 다음 단계를 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-164">To set the environment in [Azure App Service](https://azure.microsoft.com/services/app-service/), perform the following steps:</span></span>
+<span data-ttu-id="8df76-164">[Azure App Service](https://azure.microsoft.com/services/app-service/)에서 환경을 설정하려면 다음 단계를 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-164">To set the environment in [Azure App Service](https://azure.microsoft.com/services/app-service/), perform the following steps:</span></span>
 
-1. <span data-ttu-id="b2e9a-165">**App Services** 블레이드에서 앱을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-165">Select the app from the **App Services** blade.</span></span>
-1. <span data-ttu-id="b2e9a-166">**SETTINGS** 그룹에서 **애플리케이션 설정** 블레이드를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-166">In the **SETTINGS** group, select the **Application settings** blade.</span></span>
-1. <span data-ttu-id="b2e9a-167">**애플리케이션 설정** 영역에서 **새 설정 추가**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-167">In the **Application settings** area, select **Add new setting**.</span></span>
-1. <span data-ttu-id="b2e9a-168">**이름**에 `ASPNETCORE_ENVIRONMENT`를 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-168">For **Enter a name**, provide `ASPNETCORE_ENVIRONMENT`.</span></span> <span data-ttu-id="b2e9a-169">**값**에는 환경을 입력합니다(예: `Staging`).</span><span class="sxs-lookup"><span data-stu-id="b2e9a-169">For **Enter a value**, provide the environment (for example, `Staging`).</span></span>
-1. <span data-ttu-id="b2e9a-170">배포 슬롯을 교환할 때 환경 설정을 현재 슬롯으로 유지하려면 **슬롯 설정** 확인란을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-170">Select the **Slot Setting** check box if you wish the environment setting to remain with the current slot when deployment slots are swapped.</span></span> <span data-ttu-id="b2e9a-171">자세한 내용은 [Azure 설명서: 교환된 설정은? ](/azure/app-service/web-sites-staged-publishing)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-171">For more information, see [Azure Documentation: Which settings are swapped?](/azure/app-service/web-sites-staged-publishing).</span></span>
-1. <span data-ttu-id="b2e9a-172">블레이드 상단에서 **저장**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-172">Select **Save** at the top of the blade.</span></span>
+1. <span data-ttu-id="8df76-165">**App Services** 블레이드에서 앱을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-165">Select the app from the **App Services** blade.</span></span>
+1. <span data-ttu-id="8df76-166">**SETTINGS** 그룹에서 **애플리케이션 설정** 블레이드를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-166">In the **SETTINGS** group, select the **Application settings** blade.</span></span>
+1. <span data-ttu-id="8df76-167">**애플리케이션 설정** 영역에서 **새 설정 추가**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-167">In the **Application settings** area, select **Add new setting**.</span></span>
+1. <span data-ttu-id="8df76-168">**이름**에 `ASPNETCORE_ENVIRONMENT`를 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-168">For **Enter a name**, provide `ASPNETCORE_ENVIRONMENT`.</span></span> <span data-ttu-id="8df76-169">**값**에는 환경을 입력합니다(예: `Staging`).</span><span class="sxs-lookup"><span data-stu-id="8df76-169">For **Enter a value**, provide the environment (for example, `Staging`).</span></span>
+1. <span data-ttu-id="8df76-170">배포 슬롯을 교환할 때 환경 설정을 현재 슬롯으로 유지하려면 **슬롯 설정** 확인란을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-170">Select the **Slot Setting** check box if you wish the environment setting to remain with the current slot when deployment slots are swapped.</span></span> <span data-ttu-id="8df76-171">자세한 내용은 [Azure 설명서: 교환된 설정은? ](/azure/app-service/web-sites-staged-publishing)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="8df76-171">For more information, see [Azure Documentation: Which settings are swapped?](/azure/app-service/web-sites-staged-publishing).</span></span>
+1. <span data-ttu-id="8df76-172">블레이드 상단에서 **저장**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-172">Select **Save** at the top of the blade.</span></span>
 
-<span data-ttu-id="b2e9a-173">Azure App Service는 Azure 포털에서 앱 설정(환경 변수)이 추가, 변경 또는 삭제된 후 앱을 자동으로 다시 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-173">Azure App Service automatically restarts the app after an app setting (environment variable) is added, changed, or deleted in the Azure portal.</span></span>
+<span data-ttu-id="8df76-173">Azure App Service는 Azure 포털에서 앱 설정(환경 변수)이 추가, 변경 또는 삭제된 후 앱을 자동으로 다시 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-173">Azure App Service automatically restarts the app after an app setting (environment variable) is added, changed, or deleted in the Azure portal.</span></span>
 
-#### <a name="windows"></a><span data-ttu-id="b2e9a-174">Windows</span><span class="sxs-lookup"><span data-stu-id="b2e9a-174">Windows</span></span>
+#### <a name="windows"></a><span data-ttu-id="8df76-174">Windows</span><span class="sxs-lookup"><span data-stu-id="8df76-174">Windows</span></span>
 
-<span data-ttu-id="b2e9a-175">앱이 [dotnet run](/dotnet/core/tools/dotnet-run)을 사용하여 시작할 때 현재 세션에 대한 `ASPNETCORE_ENVIRONMENT`를 설정하려면 다음 명령이 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-175">To set the `ASPNETCORE_ENVIRONMENT` for the current session when the app is started using [dotnet run](/dotnet/core/tools/dotnet-run), the following commands are used:</span></span>
+<span data-ttu-id="8df76-175">앱이 [dotnet run](/dotnet/core/tools/dotnet-run)을 사용하여 시작할 때 현재 세션에 대한 `ASPNETCORE_ENVIRONMENT`를 설정하려면 다음 명령이 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-175">To set the `ASPNETCORE_ENVIRONMENT` for the current session when the app is started using [dotnet run](/dotnet/core/tools/dotnet-run), the following commands are used:</span></span>
 
-<span data-ttu-id="b2e9a-176">**명령 프롬프트**</span><span class="sxs-lookup"><span data-stu-id="b2e9a-176">**Command prompt**</span></span>
+<span data-ttu-id="8df76-176">**명령 프롬프트**</span><span class="sxs-lookup"><span data-stu-id="8df76-176">**Command prompt**</span></span>
 
 ```console
 set ASPNETCORE_ENVIRONMENT=Development
 ```
 
-<span data-ttu-id="b2e9a-177">**PowerShell**</span><span class="sxs-lookup"><span data-stu-id="b2e9a-177">**PowerShell**</span></span>
+<span data-ttu-id="8df76-177">**PowerShell**</span><span class="sxs-lookup"><span data-stu-id="8df76-177">**PowerShell**</span></span>
 
 ```powershell
 $Env:ASPNETCORE_ENVIRONMENT = "Development"
 ```
 
-<span data-ttu-id="b2e9a-178">이 명령들은 현재 창에만 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-178">These commands only take effect for the current window.</span></span> <span data-ttu-id="b2e9a-179">창이 닫히면 `ASPNETCORE_ENVIRONMENT` 설정이 기본 설정 또는 컴퓨터 값으로 되돌아갑니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-179">When the window is closed, the `ASPNETCORE_ENVIRONMENT` setting reverts to the default setting or machine value.</span></span>
+<span data-ttu-id="8df76-178">이 명령들은 현재 창에만 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-178">These commands only take effect for the current window.</span></span> <span data-ttu-id="8df76-179">창이 닫히면 `ASPNETCORE_ENVIRONMENT` 설정이 기본 설정 또는 컴퓨터 값으로 되돌아갑니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-179">When the window is closed, the `ASPNETCORE_ENVIRONMENT` setting reverts to the default setting or machine value.</span></span>
 
-<span data-ttu-id="b2e9a-180">Windows에서 전역적으로 값을 설정하려면 다음 방법 중 하나를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-180">To set the value globally in Windows, use either of the following approaches:</span></span>
+<span data-ttu-id="8df76-180">Windows에서 전역적으로 값을 설정하려면 다음 방법 중 하나를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-180">To set the value globally in Windows, use either of the following approaches:</span></span>
 
-* <span data-ttu-id="b2e9a-181">**제어판** > **시스템** > **고급 시스템 설정**을 열고 `ASPNETCORE_ENVIRONMENT` 값을 추가하거나 편집합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-181">Open the **Control Panel** > **System** > **Advanced system settings** and add or edit the `ASPNETCORE_ENVIRONMENT` value:</span></span>
+* <span data-ttu-id="8df76-181">**제어판** > **시스템** > **고급 시스템 설정**을 열고 `ASPNETCORE_ENVIRONMENT` 값을 추가하거나 편집합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-181">Open the **Control Panel** > **System** > **Advanced system settings** and add or edit the `ASPNETCORE_ENVIRONMENT` value:</span></span>
 
   ![시스템 고급 속성](environments/_static/systemsetting_environment.png)
 
   ![ASPNET Core 환경 변수](environments/_static/windows_aspnetcore_environment.png)
 
-* <span data-ttu-id="b2e9a-184">관리자 권한의 명령 프롬프트를 열고 `setx` 명령을 사용하거나 관리자 권한의 PowerShell 명령 프롬프트를 열고 `[Environment]::SetEnvironmentVariable`을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-184">Open an administrative command prompt and use the `setx` command or open an administrative PowerShell command prompt and use `[Environment]::SetEnvironmentVariable`:</span></span>
+* <span data-ttu-id="8df76-184">관리자 권한의 명령 프롬프트를 열고 `setx` 명령을 사용하거나 관리자 권한의 PowerShell 명령 프롬프트를 열고 `[Environment]::SetEnvironmentVariable`을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-184">Open an administrative command prompt and use the `setx` command or open an administrative PowerShell command prompt and use `[Environment]::SetEnvironmentVariable`:</span></span>
 
-  <span data-ttu-id="b2e9a-185">**명령 프롬프트**</span><span class="sxs-lookup"><span data-stu-id="b2e9a-185">**Command prompt**</span></span>
+  <span data-ttu-id="8df76-185">**명령 프롬프트**</span><span class="sxs-lookup"><span data-stu-id="8df76-185">**Command prompt**</span></span>
 
   ```console
   setx ASPNETCORE_ENVIRONMENT Development /M
   ```
 
-  <span data-ttu-id="b2e9a-186">`/M` 스위치는 시스템 수준에서 환경 변수를 설정함을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-186">The `/M` switch indicates to set the environment variable at the system level.</span></span> <span data-ttu-id="b2e9a-187">`/M` 스위치를 사용하지 않으면 환경 변수가 사용자 계정에 대해 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-187">If the `/M` switch isn't used, the environment variable is set for the user account.</span></span>
+  <span data-ttu-id="8df76-186">`/M` 스위치는 시스템 수준에서 환경 변수를 설정함을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-186">The `/M` switch indicates to set the environment variable at the system level.</span></span> <span data-ttu-id="8df76-187">`/M` 스위치를 사용하지 않으면 환경 변수가 사용자 계정에 대해 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-187">If the `/M` switch isn't used, the environment variable is set for the user account.</span></span>
 
-  <span data-ttu-id="b2e9a-188">**PowerShell**</span><span class="sxs-lookup"><span data-stu-id="b2e9a-188">**PowerShell**</span></span>
+  <span data-ttu-id="8df76-188">**PowerShell**</span><span class="sxs-lookup"><span data-stu-id="8df76-188">**PowerShell**</span></span>
 
   ```powershell
   [Environment]::SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development", "Machine")
   ```
 
-  <span data-ttu-id="b2e9a-189">`Machine` 옵션 값은 시스템 수준에서 환경 변수를 설정함을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-189">The `Machine` option value indicates to set the environment variable at the system level.</span></span> <span data-ttu-id="b2e9a-190">옵션 값이 `User`로 변경되면 환경 변수가 사용자 계정에 대해 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-190">If the option value is changed to `User`, the environment variable is set for the user account.</span></span>
+  <span data-ttu-id="8df76-189">`Machine` 옵션 값은 시스템 수준에서 환경 변수를 설정함을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-189">The `Machine` option value indicates to set the environment variable at the system level.</span></span> <span data-ttu-id="8df76-190">옵션 값이 `User`로 변경되면 환경 변수가 사용자 계정에 대해 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-190">If the option value is changed to `User`, the environment variable is set for the user account.</span></span>
 
-<span data-ttu-id="b2e9a-191">`ASPNETCORE_ENVIRONMENT` 환경 변수를 전역적으로 설정하면 값이 설정된 후 열리는 모든 명령 창에서 `dotnet run`에 대해 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-191">When the `ASPNETCORE_ENVIRONMENT` environment variable is set globally, it takes effect for `dotnet run` in any command window opened after the value is set.</span></span>
+<span data-ttu-id="8df76-191">`ASPNETCORE_ENVIRONMENT` 환경 변수를 전역적으로 설정하면 값이 설정된 후 열리는 모든 명령 창에서 `dotnet run`에 대해 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-191">When the `ASPNETCORE_ENVIRONMENT` environment variable is set globally, it takes effect for `dotnet run` in any command window opened after the value is set.</span></span>
 
-<span data-ttu-id="b2e9a-192">**web.config**</span><span class="sxs-lookup"><span data-stu-id="b2e9a-192">**web.config**</span></span>
+<span data-ttu-id="8df76-192">**web.config**</span><span class="sxs-lookup"><span data-stu-id="8df76-192">**web.config**</span></span>
 
-<span data-ttu-id="b2e9a-193">*web.config*를 사용하여 `ASPNETCORE_ENVIRONMENT` 환경 변수를 설정하려면 <xref:host-and-deploy/aspnet-core-module#setting-environment-variables>의 *환경 변수 설정* 섹션을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-193">To set the `ASPNETCORE_ENVIRONMENT` environment variable with *web.config*, see the *Setting environment variables* section of <xref:host-and-deploy/aspnet-core-module#setting-environment-variables>.</span></span>
+<span data-ttu-id="8df76-193">*web.config*를 사용하여 `ASPNETCORE_ENVIRONMENT` 환경 변수를 설정하려면 <xref:host-and-deploy/aspnet-core-module#setting-environment-variables>의 *환경 변수 설정* 섹션을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="8df76-193">To set the `ASPNETCORE_ENVIRONMENT` environment variable with *web.config*, see the *Setting environment variables* section of <xref:host-and-deploy/aspnet-core-module#setting-environment-variables>.</span></span>
 
 ::: moniker range=">= aspnetcore-2.2"
 
-<span data-ttu-id="b2e9a-194">**프로젝트 파일 또는 게시 프로필**</span><span class="sxs-lookup"><span data-stu-id="b2e9a-194">**Project file or publish profile**</span></span>
+<span data-ttu-id="8df76-194">**프로젝트 파일 또는 게시 프로필**</span><span class="sxs-lookup"><span data-stu-id="8df76-194">**Project file or publish profile**</span></span>
 
-<span data-ttu-id="b2e9a-195">**Windows IIS 배포의 경우:** `<EnvironmentName>` 속성을 게시 프로필( *.pubxml*) 또는 프로젝트 파일에 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-195">**For Windows IIS deployments:** Include the `<EnvironmentName>` property in the publish profile (*.pubxml*) or project file.</span></span> <span data-ttu-id="b2e9a-196">이 방법은 프로젝트가 게시될 때 *web.config*에 환경을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-196">This approach sets the environment in *web.config* when the project is published:</span></span>
+<span data-ttu-id="8df76-195">**Windows IIS 배포의 경우:** `<EnvironmentName>` 속성을 [게시 프로필(.pubxml)](xref:host-and-deploy/visual-studio-publish-profiles) 또는 프로젝트 파일에 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-195">**For Windows IIS deployments:** Include the `<EnvironmentName>` property in the [publish profile (.pubxml)](xref:host-and-deploy/visual-studio-publish-profiles) or project file.</span></span> <span data-ttu-id="8df76-196">이 방법은 프로젝트가 게시될 때 *web.config*에 환경을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-196">This approach sets the environment in *web.config* when the project is published:</span></span>
 
 ```xml
 <PropertyGroup>
@@ -272,81 +272,81 @@ $Env:ASPNETCORE_ENVIRONMENT = "Development"
 
 ::: moniker-end
 
-<span data-ttu-id="b2e9a-197">**IIS 응용 프로그램 풀 별**</span><span class="sxs-lookup"><span data-stu-id="b2e9a-197">**Per IIS Application Pool**</span></span>
+<span data-ttu-id="8df76-197">**IIS 응용 프로그램 풀 별**</span><span class="sxs-lookup"><span data-stu-id="8df76-197">**Per IIS Application Pool**</span></span>
 
-<span data-ttu-id="b2e9a-198">격리된 응용 프로그램 풀에서 실행되는(IIS 10.0 이상에서 지원됨) 앱에 대한 `ASPNETCORE_ENVIRONMENT` 환경 변수를 설정하려면, [환경 변수 &lt;environmentVariables&gt;](/iis/configuration/system.applicationHost/applicationPools/add/environmentVariables/#appcmdexe) 항목의 *AppCmd.exe 명령* 섹션을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-198">To set the `ASPNETCORE_ENVIRONMENT` environment variable for an app running in an isolated Application Pool (supported on IIS 10.0 or later), see the *AppCmd.exe command* section of the [Environment Variables &lt;environmentVariables&gt;](/iis/configuration/system.applicationHost/applicationPools/add/environmentVariables/#appcmdexe) topic.</span></span> <span data-ttu-id="b2e9a-199">`ASPNETCORE_ENVIRONMENT` 환경 변수를 앱 풀에 대해 설정하면 해당 값이 시스템 수준의 설정을 재정의합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-199">When the `ASPNETCORE_ENVIRONMENT` environment variable is set for an app pool, its value overrides a setting at the system level.</span></span>
+<span data-ttu-id="8df76-198">격리된 응용 프로그램 풀에서 실행되는(IIS 10.0 이상에서 지원됨) 앱에 대한 `ASPNETCORE_ENVIRONMENT` 환경 변수를 설정하려면, [환경 변수 &lt;environmentVariables&gt;](/iis/configuration/system.applicationHost/applicationPools/add/environmentVariables/#appcmdexe) 항목의 *AppCmd.exe 명령* 섹션을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="8df76-198">To set the `ASPNETCORE_ENVIRONMENT` environment variable for an app running in an isolated Application Pool (supported on IIS 10.0 or later), see the *AppCmd.exe command* section of the [Environment Variables &lt;environmentVariables&gt;](/iis/configuration/system.applicationHost/applicationPools/add/environmentVariables/#appcmdexe) topic.</span></span> <span data-ttu-id="8df76-199">`ASPNETCORE_ENVIRONMENT` 환경 변수를 앱 풀에 대해 설정하면 해당 값이 시스템 수준의 설정을 재정의합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-199">When the `ASPNETCORE_ENVIRONMENT` environment variable is set for an app pool, its value overrides a setting at the system level.</span></span>
 
 > [!IMPORTANT]
-> <span data-ttu-id="b2e9a-200">IIS에서 앱을 호스팅하고 `ASPNETCORE_ENVIRONMENT` 환경 변수를 추가 또는 변경하는 경우 다음 방법 중 하나를 사용하여 앱에서 새 값을 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-200">When hosting an app in IIS and adding or changing the `ASPNETCORE_ENVIRONMENT` environment variable, use any one of the following approaches to have the new value picked up by apps:</span></span>
+> <span data-ttu-id="8df76-200">IIS에서 앱을 호스팅하고 `ASPNETCORE_ENVIRONMENT` 환경 변수를 추가 또는 변경하는 경우 다음 방법 중 하나를 사용하여 앱에서 새 값을 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-200">When hosting an app in IIS and adding or changing the `ASPNETCORE_ENVIRONMENT` environment variable, use any one of the following approaches to have the new value picked up by apps:</span></span>
 >
-> * <span data-ttu-id="b2e9a-201">명령 프롬프트에서 `net stop was /y` 다음에 `net start w3svc`를 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-201">Execute `net stop was /y` followed by `net start w3svc` from a command prompt.</span></span>
-> * <span data-ttu-id="b2e9a-202">서버를 다시 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-202">Restart the server.</span></span>
+> * <span data-ttu-id="8df76-201">명령 프롬프트에서 `net stop was /y` 다음에 `net start w3svc`를 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-201">Execute `net stop was /y` followed by `net start w3svc` from a command prompt.</span></span>
+> * <span data-ttu-id="8df76-202">서버를 다시 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-202">Restart the server.</span></span>
 
-#### <a name="macos"></a><span data-ttu-id="b2e9a-203">macOS</span><span class="sxs-lookup"><span data-stu-id="b2e9a-203">macOS</span></span>
+#### <a name="macos"></a><span data-ttu-id="8df76-203">macOS</span><span class="sxs-lookup"><span data-stu-id="8df76-203">macOS</span></span>
 
-<span data-ttu-id="b2e9a-204">macOS에 대한 현재 환경 설정은 앱을 실행할 때 인라인으로 수행할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-204">Setting the current environment for macOS can be performed in-line when running the app:</span></span>
+<span data-ttu-id="8df76-204">macOS에 대한 현재 환경 설정은 앱을 실행할 때 인라인으로 수행할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-204">Setting the current environment for macOS can be performed in-line when running the app:</span></span>
 
 ```bash
 ASPNETCORE_ENVIRONMENT=Development dotnet run
 ```
 
-<span data-ttu-id="b2e9a-205">또는 앱을 실행하기 전에 `export`를 사용하여 환경을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-205">Alternatively, set the environment with `export` prior to running the app:</span></span>
+<span data-ttu-id="8df76-205">또는 앱을 실행하기 전에 `export`를 사용하여 환경을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-205">Alternatively, set the environment with `export` prior to running the app:</span></span>
 
 ```bash
 export ASPNETCORE_ENVIRONMENT=Development
 ```
 
-<span data-ttu-id="b2e9a-206">컴퓨터 수준 환경 변수는 *.bashrc* 또는 *.bash_profile* 파일에서 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-206">Machine-level environment variables are set in the *.bashrc* or *.bash_profile* file.</span></span> <span data-ttu-id="b2e9a-207">임의의 텍스트 편집기를 사용하여 파일을 편집합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-207">Edit the file using any text editor.</span></span> <span data-ttu-id="b2e9a-208">다음 명령문을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-208">Add the following statement:</span></span>
+<span data-ttu-id="8df76-206">컴퓨터 수준 환경 변수는 *.bashrc* 또는 *.bash_profile* 파일에서 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-206">Machine-level environment variables are set in the *.bashrc* or *.bash_profile* file.</span></span> <span data-ttu-id="8df76-207">임의의 텍스트 편집기를 사용하여 파일을 편집합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-207">Edit the file using any text editor.</span></span> <span data-ttu-id="8df76-208">다음 명령문을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-208">Add the following statement:</span></span>
 
 ```bash
 export ASPNETCORE_ENVIRONMENT=Development
 ```
 
-#### <a name="linux"></a><span data-ttu-id="b2e9a-209">Linux</span><span class="sxs-lookup"><span data-stu-id="b2e9a-209">Linux</span></span>
+#### <a name="linux"></a><span data-ttu-id="8df76-209">Linux</span><span class="sxs-lookup"><span data-stu-id="8df76-209">Linux</span></span>
 
-<span data-ttu-id="b2e9a-210">Linux 배포판의 경우 세션 기반 변수 설정을 위해 명령 프롬프트에서 `export` 명령을 사용하거나 컴퓨터 수준 환경 설정을 위해 *bash_profile* 파일을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-210">For Linux distros, use the `export` command at a command prompt for session-based variable settings and *bash_profile* file for machine-level environment settings.</span></span>
+<span data-ttu-id="8df76-210">Linux 배포판의 경우 세션 기반 변수 설정을 위해 명령 프롬프트에서 `export` 명령을 사용하거나 컴퓨터 수준 환경 설정을 위해 *bash_profile* 파일을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-210">For Linux distros, use the `export` command at a command prompt for session-based variable settings and *bash_profile* file for machine-level environment settings.</span></span>
 
-### <a name="set-the-environment-in-code"></a><span data-ttu-id="b2e9a-211">코드에서 환경 설정</span><span class="sxs-lookup"><span data-stu-id="b2e9a-211">Set the environment in code</span></span>
+### <a name="set-the-environment-in-code"></a><span data-ttu-id="8df76-211">코드에서 환경 설정</span><span class="sxs-lookup"><span data-stu-id="8df76-211">Set the environment in code</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="b2e9a-212">호스트를 빌드할 때 <xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.UseEnvironment*>를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-212">Call <xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.UseEnvironment*> when building the host.</span></span> <span data-ttu-id="b2e9a-213"><xref:fundamentals/host/generic-host#environmentname>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-213">See <xref:fundamentals/host/generic-host#environmentname>.</span></span>
+<span data-ttu-id="8df76-212">호스트를 빌드할 때 <xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.UseEnvironment*>를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-212">Call <xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.UseEnvironment*> when building the host.</span></span> <span data-ttu-id="8df76-213"><xref:fundamentals/host/generic-host#environmentname>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="8df76-213">See <xref:fundamentals/host/generic-host#environmentname>.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="b2e9a-214">호스트를 빌드할 때 <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseEnvironment*>를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-214">Call <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseEnvironment*> when building the host.</span></span> <span data-ttu-id="b2e9a-215"><xref:fundamentals/host/web-host#environment>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-215">See <xref:fundamentals/host/web-host#environment>.</span></span>
+<span data-ttu-id="8df76-214">호스트를 빌드할 때 <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseEnvironment*>를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-214">Call <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseEnvironment*> when building the host.</span></span> <span data-ttu-id="8df76-215"><xref:fundamentals/host/web-host#environment>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="8df76-215">See <xref:fundamentals/host/web-host#environment>.</span></span>
 
 ::: moniker-end
 
-### <a name="configuration-by-environment"></a><span data-ttu-id="b2e9a-216">환경별 구성</span><span class="sxs-lookup"><span data-stu-id="b2e9a-216">Configuration by environment</span></span>
+### <a name="configuration-by-environment"></a><span data-ttu-id="8df76-216">환경별 구성</span><span class="sxs-lookup"><span data-stu-id="8df76-216">Configuration by environment</span></span>
 
-<span data-ttu-id="b2e9a-217">환경별 구성을 로드하려면 다음을 권장합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-217">To load configuration by environment, we recommend:</span></span>
+<span data-ttu-id="8df76-217">환경별 구성을 로드하려면 다음을 권장합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-217">To load configuration by environment, we recommend:</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-* <span data-ttu-id="b2e9a-218">*appsettings* 파일(*appsettings.{Environment}.json*).</span><span class="sxs-lookup"><span data-stu-id="b2e9a-218">*appsettings* files (*appsettings.{Environment}.json*).</span></span> <span data-ttu-id="b2e9a-219"><xref:fundamentals/configuration/index#json-configuration-provider>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-219">See <xref:fundamentals/configuration/index#json-configuration-provider>.</span></span>
-* <span data-ttu-id="b2e9a-220">환경 변수(앱이 호스팅되는 각 시스템에서 설정).</span><span class="sxs-lookup"><span data-stu-id="b2e9a-220">Environment variables (set on each system where the app is hosted).</span></span> <span data-ttu-id="b2e9a-221"><xref:fundamentals/host/generic-host#environmentname> 및 <xref:security/app-secrets#environment-variables>을 참조하십시오.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-221">See <xref:fundamentals/host/generic-host#environmentname> and <xref:security/app-secrets#environment-variables>.</span></span>
-* <span data-ttu-id="b2e9a-222">비밀 관리자(개발 환경에만 해당).</span><span class="sxs-lookup"><span data-stu-id="b2e9a-222">Secret Manager (in the Development environment only).</span></span> <span data-ttu-id="b2e9a-223"><xref:security/app-secrets>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-223">See <xref:security/app-secrets>.</span></span>
+* <span data-ttu-id="8df76-218">*appsettings* 파일(*appsettings.{Environment}.json*).</span><span class="sxs-lookup"><span data-stu-id="8df76-218">*appsettings* files (*appsettings.{Environment}.json*).</span></span> <span data-ttu-id="8df76-219"><xref:fundamentals/configuration/index#json-configuration-provider>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="8df76-219">See <xref:fundamentals/configuration/index#json-configuration-provider>.</span></span>
+* <span data-ttu-id="8df76-220">환경 변수(앱이 호스팅되는 각 시스템에서 설정).</span><span class="sxs-lookup"><span data-stu-id="8df76-220">Environment variables (set on each system where the app is hosted).</span></span> <span data-ttu-id="8df76-221"><xref:fundamentals/host/generic-host#environmentname> 및 <xref:security/app-secrets#environment-variables>을 참조하십시오.</span><span class="sxs-lookup"><span data-stu-id="8df76-221">See <xref:fundamentals/host/generic-host#environmentname> and <xref:security/app-secrets#environment-variables>.</span></span>
+* <span data-ttu-id="8df76-222">비밀 관리자(개발 환경에만 해당).</span><span class="sxs-lookup"><span data-stu-id="8df76-222">Secret Manager (in the Development environment only).</span></span> <span data-ttu-id="8df76-223"><xref:security/app-secrets>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="8df76-223">See <xref:security/app-secrets>.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-* <span data-ttu-id="b2e9a-224">*appsettings* 파일(*appsettings.{Environment}.json*).</span><span class="sxs-lookup"><span data-stu-id="b2e9a-224">*appsettings* files (*appsettings.{Environment}.json*).</span></span> <span data-ttu-id="b2e9a-225"><xref:fundamentals/configuration/index#json-configuration-provider>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-225">See <xref:fundamentals/configuration/index#json-configuration-provider>.</span></span>
-* <span data-ttu-id="b2e9a-226">환경 변수(앱이 호스팅되는 각 시스템에서 설정).</span><span class="sxs-lookup"><span data-stu-id="b2e9a-226">Environment variables (set on each system where the app is hosted).</span></span> <span data-ttu-id="b2e9a-227"><xref:fundamentals/host/web-host#environment> 및 <xref:security/app-secrets#environment-variables>을 참조하십시오.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-227">See <xref:fundamentals/host/web-host#environment> and <xref:security/app-secrets#environment-variables>.</span></span>
-* <span data-ttu-id="b2e9a-228">비밀 관리자(개발 환경에만 해당).</span><span class="sxs-lookup"><span data-stu-id="b2e9a-228">Secret Manager (in the Development environment only).</span></span> <span data-ttu-id="b2e9a-229"><xref:security/app-secrets>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-229">See <xref:security/app-secrets>.</span></span>
+* <span data-ttu-id="8df76-224">*appsettings* 파일(*appsettings.{Environment}.json*).</span><span class="sxs-lookup"><span data-stu-id="8df76-224">*appsettings* files (*appsettings.{Environment}.json*).</span></span> <span data-ttu-id="8df76-225"><xref:fundamentals/configuration/index#json-configuration-provider>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="8df76-225">See <xref:fundamentals/configuration/index#json-configuration-provider>.</span></span>
+* <span data-ttu-id="8df76-226">환경 변수(앱이 호스팅되는 각 시스템에서 설정).</span><span class="sxs-lookup"><span data-stu-id="8df76-226">Environment variables (set on each system where the app is hosted).</span></span> <span data-ttu-id="8df76-227"><xref:fundamentals/host/web-host#environment> 및 <xref:security/app-secrets#environment-variables>을 참조하십시오.</span><span class="sxs-lookup"><span data-stu-id="8df76-227">See <xref:fundamentals/host/web-host#environment> and <xref:security/app-secrets#environment-variables>.</span></span>
+* <span data-ttu-id="8df76-228">비밀 관리자(개발 환경에만 해당).</span><span class="sxs-lookup"><span data-stu-id="8df76-228">Secret Manager (in the Development environment only).</span></span> <span data-ttu-id="8df76-229"><xref:security/app-secrets>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="8df76-229">See <xref:security/app-secrets>.</span></span>
 
 ::: moniker-end
 
-## <a name="environment-based-startup-class-and-methods"></a><span data-ttu-id="b2e9a-230">환경에 따른 시작 클래스 및 메서드</span><span class="sxs-lookup"><span data-stu-id="b2e9a-230">Environment-based Startup class and methods</span></span>
+## <a name="environment-based-startup-class-and-methods"></a><span data-ttu-id="8df76-230">환경에 따른 시작 클래스 및 메서드</span><span class="sxs-lookup"><span data-stu-id="8df76-230">Environment-based Startup class and methods</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-### <a name="inject-iwebhostenvironment-into-startupconfigure"></a><span data-ttu-id="b2e9a-231">IWebHostEnvironment를 Startup.Configure에 삽입</span><span class="sxs-lookup"><span data-stu-id="b2e9a-231">Inject IWebHostEnvironment into Startup.Configure</span></span>
+### <a name="inject-iwebhostenvironment-into-startupconfigure"></a><span data-ttu-id="8df76-231">IWebHostEnvironment를 Startup.Configure에 삽입</span><span class="sxs-lookup"><span data-stu-id="8df76-231">Inject IWebHostEnvironment into Startup.Configure</span></span>
 
-<span data-ttu-id="b2e9a-232">`Startup.Configure`에 <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment>를 삽입합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-232">Inject <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> into `Startup.Configure`.</span></span> <span data-ttu-id="b2e9a-233">이 접근 방식은 앱에서 환경별 코드 차이가 최소인 몇 가지 환경의 `Startup.Configure`만 조정해야 하는 경우에 유용합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-233">This approach is useful when the app only requires adjusting `Startup.Configure` for a few environments with minimal code differences per environment.</span></span>
+<span data-ttu-id="8df76-232">`Startup.Configure`에 <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment>를 삽입합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-232">Inject <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> into `Startup.Configure`.</span></span> <span data-ttu-id="8df76-233">이 접근 방식은 앱에서 환경별 코드 차이가 최소인 몇 가지 환경의 `Startup.Configure`만 조정해야 하는 경우에 유용합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-233">This approach is useful when the app only requires adjusting `Startup.Configure` for a few environments with minimal code differences per environment.</span></span>
 
 ```csharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -362,14 +362,14 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 }
 ```
 
-### <a name="inject-iwebhostenvironment-into-the-startup-class"></a><span data-ttu-id="b2e9a-234">IWebHostEnvironment를 Startup 클래스에 삽입</span><span class="sxs-lookup"><span data-stu-id="b2e9a-234">Inject IWebHostEnvironment into the Startup class</span></span>
+### <a name="inject-iwebhostenvironment-into-the-startup-class"></a><span data-ttu-id="8df76-234">IWebHostEnvironment를 Startup 클래스에 삽입</span><span class="sxs-lookup"><span data-stu-id="8df76-234">Inject IWebHostEnvironment into the Startup class</span></span>
 
-<span data-ttu-id="b2e9a-235">`Startup` 생성자에 <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment>를 삽입합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-235">Inject <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> into the `Startup` constructor.</span></span> <span data-ttu-id="b2e9a-236">이 접근 방식은 앱에서 환경별 코드 차이가 최소인 몇 가지 환경만 `Startup`을 구성해야 하는 경우에 유용합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-236">This approach is useful when the app requires configuring `Startup` for only a few environments with minimal code differences per environment.</span></span>
+<span data-ttu-id="8df76-235">`Startup` 생성자에 <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment>를 삽입합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-235">Inject <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> into the `Startup` constructor.</span></span> <span data-ttu-id="8df76-236">이 접근 방식은 앱에서 환경별 코드 차이가 최소인 몇 가지 환경만 `Startup`을 구성해야 하는 경우에 유용합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-236">This approach is useful when the app requires configuring `Startup` for only a few environments with minimal code differences per environment.</span></span>
 
-<span data-ttu-id="b2e9a-237">다음 예제에서는</span><span class="sxs-lookup"><span data-stu-id="b2e9a-237">In the following example:</span></span>
+<span data-ttu-id="8df76-237">다음 예제에서는</span><span class="sxs-lookup"><span data-stu-id="8df76-237">In the following example:</span></span>
 
-* <span data-ttu-id="b2e9a-238">환경은 `_env` 필드에 유지됩니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-238">The environment is held in the `_env` field.</span></span>
-* <span data-ttu-id="b2e9a-239">`_env`는 `ConfigureServices` 및 `Configure`에서 사용되어 앱의 환경에 따라 시작 구성을 적용합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-239">`_env` is used in `ConfigureServices` and `Configure` to apply startup configuration based on the app's environment.</span></span>
+* <span data-ttu-id="8df76-238">환경은 `_env` 필드에 유지됩니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-238">The environment is held in the `_env` field.</span></span>
+* <span data-ttu-id="8df76-239">`_env`는 `ConfigureServices` 및 `Configure`에서 사용되어 앱의 환경에 따라 시작 구성을 적용합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-239">`_env` is used in `ConfigureServices` and `Configure` to apply startup configuration based on the app's environment.</span></span>
 
 ```csharp
 public class Startup
@@ -415,9 +415,9 @@ public class Startup
 
 ::: moniker range="< aspnetcore-3.0"
 
-### <a name="inject-ihostingenvironment-into-startupconfigure"></a><span data-ttu-id="b2e9a-240">IHostingEnvironment를 Startup.Configure에 삽입</span><span class="sxs-lookup"><span data-stu-id="b2e9a-240">Inject IHostingEnvironment into Startup.Configure</span></span>
+### <a name="inject-ihostingenvironment-into-startupconfigure"></a><span data-ttu-id="8df76-240">IHostingEnvironment를 Startup.Configure에 삽입</span><span class="sxs-lookup"><span data-stu-id="8df76-240">Inject IHostingEnvironment into Startup.Configure</span></span>
 
-<span data-ttu-id="b2e9a-241">`Startup.Configure`에 <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment>를 삽입합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-241">Inject <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment> into `Startup.Configure`.</span></span> <span data-ttu-id="b2e9a-242">이 접근 방식은 앱에서 환경별 코드 차이가 최소인 몇 가지 환경만 `Startup.Configure`를 구성해야 하는 경우에 유용합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-242">This approach is useful when the app only requires configuring `Startup.Configure` for only a few environments with minimal code differences per environment.</span></span>
+<span data-ttu-id="8df76-241">`Startup.Configure`에 <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment>를 삽입합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-241">Inject <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment> into `Startup.Configure`.</span></span> <span data-ttu-id="8df76-242">이 접근 방식은 앱에서 환경별 코드 차이가 최소인 몇 가지 환경만 `Startup.Configure`를 구성해야 하는 경우에 유용합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-242">This approach is useful when the app only requires configuring `Startup.Configure` for only a few environments with minimal code differences per environment.</span></span>
 
 ```csharp
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -433,14 +433,14 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-### <a name="inject-ihostingenvironment-into-the-startup-class"></a><span data-ttu-id="b2e9a-243">IHostingEnvironment를 Startup 클래스에 삽입</span><span class="sxs-lookup"><span data-stu-id="b2e9a-243">Inject IHostingEnvironment into the Startup class</span></span>
+### <a name="inject-ihostingenvironment-into-the-startup-class"></a><span data-ttu-id="8df76-243">IHostingEnvironment를 Startup 클래스에 삽입</span><span class="sxs-lookup"><span data-stu-id="8df76-243">Inject IHostingEnvironment into the Startup class</span></span>
 
-<span data-ttu-id="b2e9a-244">`Startup` 생성자에 <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment>를 삽입하고 `Startup` 클래스 전체에서 하기 위해 서비스를 필드에 할당합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-244">Inject <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment> into the `Startup` constructor and assign the service to a field for use throughout the `Startup` class.</span></span> <span data-ttu-id="b2e9a-245">이 접근 방식은 앱에서 환경별 코드 차이가 최소인 몇 가지 환경만 시작을 구성해야 하는 경우에 유용합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-245">This approach is useful when the app requires configuring startup for only a few environments with minimal code differences per environment.</span></span>
+<span data-ttu-id="8df76-244">`Startup` 생성자에 <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment>를 삽입하고 `Startup` 클래스 전체에서 하기 위해 서비스를 필드에 할당합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-244">Inject <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment> into the `Startup` constructor and assign the service to a field for use throughout the `Startup` class.</span></span> <span data-ttu-id="8df76-245">이 접근 방식은 앱에서 환경별 코드 차이가 최소인 몇 가지 환경만 시작을 구성해야 하는 경우에 유용합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-245">This approach is useful when the app requires configuring startup for only a few environments with minimal code differences per environment.</span></span>
 
-<span data-ttu-id="b2e9a-246">다음 예제에서는</span><span class="sxs-lookup"><span data-stu-id="b2e9a-246">In the following example:</span></span>
+<span data-ttu-id="8df76-246">다음 예제에서는</span><span class="sxs-lookup"><span data-stu-id="8df76-246">In the following example:</span></span>
 
-* <span data-ttu-id="b2e9a-247">환경은 `_env` 필드에 유지됩니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-247">The environment is held in the `_env` field.</span></span>
-* <span data-ttu-id="b2e9a-248">`_env`는 `ConfigureServices` 및 `Configure`에서 사용되어 앱의 환경에 따라 시작 구성을 적용합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-248">`_env` is used in `ConfigureServices` and `Configure` to apply startup configuration based on the app's environment.</span></span>
+* <span data-ttu-id="8df76-247">환경은 `_env` 필드에 유지됩니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-247">The environment is held in the `_env` field.</span></span>
+* <span data-ttu-id="8df76-248">`_env`는 `ConfigureServices` 및 `Configure`에서 사용되어 앱의 환경에 따라 시작 구성을 적용합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-248">`_env` is used in `ConfigureServices` and `Configure` to apply startup configuration based on the app's environment.</span></span>
 
 ```csharp
 public class Startup
@@ -484,11 +484,11 @@ public class Startup
 
 ::: moniker-end
 
-### <a name="startup-class-conventions"></a><span data-ttu-id="b2e9a-249">시작 클래스 규칙</span><span class="sxs-lookup"><span data-stu-id="b2e9a-249">Startup class conventions</span></span>
+### <a name="startup-class-conventions"></a><span data-ttu-id="8df76-249">시작 클래스 규칙</span><span class="sxs-lookup"><span data-stu-id="8df76-249">Startup class conventions</span></span>
 
-<span data-ttu-id="b2e9a-250">ASP.NET Core 앱이 시작되면 [Startup 클래스](xref:fundamentals/startup)가 앱을 부트스트랩합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-250">When an ASP.NET Core app starts, the [Startup class](xref:fundamentals/startup) bootstraps the app.</span></span> <span data-ttu-id="b2e9a-251">앱은 다양한 환경에 대한 별도의 `Startup` 클래스를 정의할 수 있습니다(예: `StartupDevelopment`).</span><span class="sxs-lookup"><span data-stu-id="b2e9a-251">The app can define separate `Startup` classes for different environments (for example, `StartupDevelopment`).</span></span> <span data-ttu-id="b2e9a-252">런타임에 적절한 `Startup` 클래스가 선택됩니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-252">The appropriate `Startup` class is selected at runtime.</span></span> <span data-ttu-id="b2e9a-253">이름 접미사가 현재 환경과 일치하는 클래스에 우선 순위가 부여됩니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-253">The class whose name suffix matches the current environment is prioritized.</span></span> <span data-ttu-id="b2e9a-254">일치하는 `Startup{EnvironmentName}` 클래스를 찾을 수 없으면 `Startup` 클래스가 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-254">If a matching `Startup{EnvironmentName}` class isn't found, the `Startup` class is used.</span></span> <span data-ttu-id="b2e9a-255">이 접근 방식은 앱에서 환경별 코드 차이가 최소인 몇 가지 환경의 시작을 구성해야 하는 경우에 유용합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-255">This approach is useful when the app requires configuring startup for several environments with many code differences per environment.</span></span>
+<span data-ttu-id="8df76-250">ASP.NET Core 앱이 시작되면 [Startup 클래스](xref:fundamentals/startup)가 앱을 부트스트랩합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-250">When an ASP.NET Core app starts, the [Startup class](xref:fundamentals/startup) bootstraps the app.</span></span> <span data-ttu-id="8df76-251">앱은 다양한 환경에 대한 별도의 `Startup` 클래스를 정의할 수 있습니다(예: `StartupDevelopment`).</span><span class="sxs-lookup"><span data-stu-id="8df76-251">The app can define separate `Startup` classes for different environments (for example, `StartupDevelopment`).</span></span> <span data-ttu-id="8df76-252">런타임에 적절한 `Startup` 클래스가 선택됩니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-252">The appropriate `Startup` class is selected at runtime.</span></span> <span data-ttu-id="8df76-253">이름 접미사가 현재 환경과 일치하는 클래스에 우선 순위가 부여됩니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-253">The class whose name suffix matches the current environment is prioritized.</span></span> <span data-ttu-id="8df76-254">일치하는 `Startup{EnvironmentName}` 클래스를 찾을 수 없으면 `Startup` 클래스가 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-254">If a matching `Startup{EnvironmentName}` class isn't found, the `Startup` class is used.</span></span> <span data-ttu-id="8df76-255">이 접근 방식은 앱에서 환경별 코드 차이가 최소인 몇 가지 환경의 시작을 구성해야 하는 경우에 유용합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-255">This approach is useful when the app requires configuring startup for several environments with many code differences per environment.</span></span>
 
-<span data-ttu-id="b2e9a-256">환경 기반 `Startup` 클래스를 구현하려면 사용 중인 각 환경에 대한 `Startup{EnvironmentName}` 클래스와 폴백 `Startup` 클래스를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-256">To implement environment-based `Startup` classes, create a `Startup{EnvironmentName}` class for each environment in use and a fallback `Startup` class:</span></span>
+<span data-ttu-id="8df76-256">환경 기반 `Startup` 클래스를 구현하려면 사용 중인 각 환경에 대한 `Startup{EnvironmentName}` 클래스와 폴백 `Startup` 클래스를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-256">To implement environment-based `Startup` classes, create a `Startup{EnvironmentName}` class for each environment in use and a fallback `Startup` class:</span></span>
 
 ```csharp
 // Startup class to use in the Development environment
@@ -529,7 +529,7 @@ public class Startup
 }
 ```
 
-<span data-ttu-id="b2e9a-257">어셈블리 이름을 허용하는 [UseStartup(IWebHostBuilder, String)](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.usestartup) 오버로드를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-257">Use the [UseStartup(IWebHostBuilder, String)](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.usestartup) overload that accepts an assembly name:</span></span>
+<span data-ttu-id="8df76-257">어셈블리 이름을 허용하는 [UseStartup(IWebHostBuilder, String)](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.usestartup) 오버로드를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-257">Use the [UseStartup(IWebHostBuilder, String)](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.usestartup) overload that accepts an assembly name:</span></span>
 
 ```csharp
 public static void Main(string[] args)
@@ -546,13 +546,13 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args)
 }
 ```
 
-### <a name="startup-method-conventions"></a><span data-ttu-id="b2e9a-258">시작 메서드 규칙</span><span class="sxs-lookup"><span data-stu-id="b2e9a-258">Startup method conventions</span></span>
+### <a name="startup-method-conventions"></a><span data-ttu-id="8df76-258">시작 메서드 규칙</span><span class="sxs-lookup"><span data-stu-id="8df76-258">Startup method conventions</span></span>
 
-<span data-ttu-id="b2e9a-259">[Configure](/dotnet/api/microsoft.aspnetcore.hosting.startupbase.configure) 및 [ConfigureServices](/dotnet/api/microsoft.aspnetcore.hosting.startupbase.configureservices)는 `Configure<EnvironmentName>` 및 `Configure<EnvironmentName>Services` 양식의 환경 특정 버전을 지원합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-259">[Configure](/dotnet/api/microsoft.aspnetcore.hosting.startupbase.configure) and [ConfigureServices](/dotnet/api/microsoft.aspnetcore.hosting.startupbase.configureservices) support environment-specific versions of the form `Configure<EnvironmentName>` and `Configure<EnvironmentName>Services`.</span></span> <span data-ttu-id="b2e9a-260">이 접근 방식은 앱에서 환경별 코드 차이가 최소인 몇 가지 환경의 시작을 구성해야 하는 경우에 유용합니다.</span><span class="sxs-lookup"><span data-stu-id="b2e9a-260">This approach is useful when the app requires configuring startup for several environments with many code differences per environment.</span></span>
+<span data-ttu-id="8df76-259">[Configure](/dotnet/api/microsoft.aspnetcore.hosting.startupbase.configure) 및 [ConfigureServices](/dotnet/api/microsoft.aspnetcore.hosting.startupbase.configureservices)는 `Configure<EnvironmentName>` 및 `Configure<EnvironmentName>Services` 양식의 환경 특정 버전을 지원합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-259">[Configure](/dotnet/api/microsoft.aspnetcore.hosting.startupbase.configure) and [ConfigureServices](/dotnet/api/microsoft.aspnetcore.hosting.startupbase.configureservices) support environment-specific versions of the form `Configure<EnvironmentName>` and `Configure<EnvironmentName>Services`.</span></span> <span data-ttu-id="8df76-260">이 접근 방식은 앱에서 환경별 코드 차이가 최소인 몇 가지 환경의 시작을 구성해야 하는 경우에 유용합니다.</span><span class="sxs-lookup"><span data-stu-id="8df76-260">This approach is useful when the app requires configuring startup for several environments with many code differences per environment.</span></span>
 
 [!code-csharp[](environments/sample/EnvironmentsSample/Startup.cs?name=snippet_all&highlight=15,42)]
 
-## <a name="additional-resources"></a><span data-ttu-id="b2e9a-261">추가 자료</span><span class="sxs-lookup"><span data-stu-id="b2e9a-261">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="8df76-261">추가 자료</span><span class="sxs-lookup"><span data-stu-id="8df76-261">Additional resources</span></span>
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/configuration/index>
