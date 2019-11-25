@@ -5,20 +5,20 @@ description: 웹 팜 환경에서 공유 리소스가 있는 ASP.NET Core 앱의
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/12/2019
+ms.date: 11/07/2019
 uid: host-and-deploy/web-farm
-ms.openlocfilehash: df1be8cc76a5017923f26636a241b69881dfcc81
-ms.sourcegitcommit: b4ef2b00f3e1eb287138f8b43c811cb35a100d3e
+ms.openlocfilehash: 16ec2162be8199857d0f2d0ff989ec4cdc6c3277
+ms.sourcegitcommit: 68d804d60e104c81fe77a87a9af70b5df2726f60
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/21/2019
-ms.locfileid: "65970103"
+ms.lasthandoff: 11/08/2019
+ms.locfileid: "73830698"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>웹 팜에 ASP.NET Core 호스트
 
 작성자: [Luke Latham](https://github.com/guardrex) 및 [Chris Ross](https://github.com/Tratcher)
 
-‘웹 팜’은 여러 앱 인스턴스를 호스트하는 둘 이상의 웹 서버(또는 ‘노드’)의 그룹입니다. 사용자의 요청이 웹 팜에 도착하면 ‘부하 분산 장치’가 요청을 웹 팜의 노드에 배포합니다. 웹 팜은 다음을 개선합니다.
+‘웹 팜’은 여러 앱 인스턴스를 호스트하는 둘 이상의 웹 서버(또는 ‘노드’)의 그룹입니다.   사용자의 요청이 웹 팜에 도착하면 ‘부하 분산 장치’가 요청을 웹 팜의 노드에 배포합니다.  웹 팜은 다음을 개선합니다.
 
 * **안정성/가용성** &ndash; 하나 이상의 노드가 실패하면 부하 분산 장치는 요청을 다른 작동 노드로 라우팅하여 요청 처리를 계속할 수 있습니다.
 * **용량/성능** &ndash; 여러 노드가 단일 서버보다 더 많은 요청을 처리할 수 있습니다. 부하 분산 장치는 노드에 요청을 배포하여 워크로드를 분산합니다.
@@ -48,7 +48,7 @@ ms.locfileid: "65970103"
 
 ### <a name="data-protection"></a>데이터 보호
 
-[ASP.NET Core 데이터 보호 시스템](xref:security/data-protection/introduction)은 앱에서 데이터를 보호하는 데 사용됩니다. 데이터 보호에는 ‘키 링’에 저장된 암호화 키 집합을 사용합니다. 데이터 보호 시스템이 초기화되면 키 링을 로컬로 저장하는 [기본 설정](xref:security/data-protection/configuration/default-settings)을 적용합니다. 기본 구성에서는 고유 키 링이 웹 팜의 각 노드에 저장됩니다. 따라서 각 웹 팜 노드는 다른 노드의 앱으로 암호화된 데이터를 암호 해독할 수 없습니다. 일반적으로 웹 팜에서 앱을 호스트하는 경우에는 기본 구성이 적합하지 않습니다. 공유 키 링을 구현하는 대신 항상 사용자 요청을 동일한 노드로 라우팅할 수 있습니다. 웹 팜 배포의 데이터 보호 시스템 구성에 대한 자세한 내용은 <xref:security/data-protection/configuration/overview>를 참조하세요.
+[ASP.NET Core 데이터 보호 시스템](xref:security/data-protection/introduction)은 앱에서 데이터를 보호하는 데 사용됩니다. 데이터 보호에는 ‘키 링’에 저장된 암호화 키 집합을 사용합니다.  데이터 보호 시스템이 초기화되면 키 링을 로컬로 저장하는 [기본 설정](xref:security/data-protection/configuration/default-settings)을 적용합니다. 기본 구성에서는 고유 키 링이 웹 팜의 각 노드에 저장됩니다. 따라서 각 웹 팜 노드는 다른 노드의 앱으로 암호화된 데이터를 암호 해독할 수 없습니다. 일반적으로 웹 팜에서 앱을 호스트하는 경우에는 기본 구성이 적합하지 않습니다. 공유 키 링을 구현하는 대신 항상 사용자 요청을 동일한 노드로 라우팅할 수 있습니다. 웹 팜 배포의 데이터 보호 시스템 구성에 대한 자세한 내용은 <xref:security/data-protection/configuration/overview>를 참조하세요.
 
 ### <a name="caching"></a>캐싱
 
@@ -88,3 +88,7 @@ ms.locfileid: "65970103"
 ## <a name="obtain-data-from-apps"></a>앱에서 데이터 얻기
 
 웹 팜 앱이 요청에 응답할 수 있는 경우 터미널 인라인 미들웨어를 사용하여 앱에서 요청, 연결 및 추가 데이터를 가져옵니다. 자세한 내용과 샘플 코드는 <xref:test/troubleshoot#obtain-data-from-an-app>을 참조하세요.
+
+## <a name="additional-resources"></a>추가 자료
+
+* [Windows용 사용자 지정 스크립트 확장](/azure/virtual-machines/extensions/custom-script-windows) &ndash; Azure 가상 머신에서 스크립트를 다운로드하여 실행합니다. 이는 배포 후 구성 및 소프트웨어 설치에 유용합니다.
