@@ -587,8 +587,6 @@
       uid: grpc/troubleshoot
 - name: '테스트, 디버깅 및 문제 해결'
   items:
-    - name: 단위 테스트
-      href: /dotnet/core/testing/unit-testing-with-dotnet-test?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
     - name: Razor 페이지 단위 테스트
       uid: test/razor-pages-tests
     - name: 테스트 컨트롤러
