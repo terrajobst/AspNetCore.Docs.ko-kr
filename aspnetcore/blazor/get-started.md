@@ -1,7 +1,7 @@
 ---
-title: Get started with ASP.NET Core Blazor
+title: ASP.NET Core Blazor 시작하기
 author: guardrex
-description: Get started with Blazor by building a Blazor app with the tooling of your choice.
+description: 선택한 도구를 사용 하 여 Blazor 앱을 빌드하여 Blazor를 시작 합니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
@@ -16,70 +16,70 @@ ms.contentlocale: ko-KR
 ms.lasthandoff: 11/20/2019
 ms.locfileid: "74239714"
 ---
-# <a name="get-started-with-aspnet-core-opno-locblazor"></a>Get started with ASP.NET Core Blazor
+# <a name="get-started-with-aspnet-core-opno-locblazor"></a>ASP.NET Core Blazor 시작하기
 
 작성자: [Daniel Roth](https://github.com/danroth27) 및 [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Get started with Blazor:
+Blazor시작:
 
 ::: moniker range=">= aspnetcore-3.1"
 
-1. Install the [.NET Core 3.1 Preview SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1).
+1. [.Net Core 3.1 PREVIEW SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1)를 설치 합니다.
 
-1. Install the [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) template by running the following command in a command shell. The [Microsoft.AspNetCore.Blazor.Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.Templates/) package has a preview version while Blazor WebAssembly is in preview.
+1. 명령 셸에서 다음 명령을 실행 하 여 [Blazor Weasembomtemplate](xref:blazor/hosting-models#blazor-webassembly) 을 설치 합니다. [AspNetCoreBlazor입니다. 템플릿](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.Templates/) 패키지에는 미리 보기 버전이 있지만 Blazor Weasembmbveris는 미리 보기로 제공 됩니다.
 
    ```dotnetcli
    dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.1.0-preview3.19555.2
    ```
 
-1. Follow the guidance for your choice of tooling:
+1. 선택한 도구에 대 한 지침을 따르세요.
 
    # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-   1\. Install [Visual Studio 16.4 Preview 2 or later](https://visualstudio.microsoft.com/vs/preview/) with the **ASP.NET and web development** workload.
+   1 \. **ASP.NET 및 웹 개발** 워크 로드를 사용 하 여 [Visual Studio 16.4 Preview 2](https://visualstudio.microsoft.com/vs/preview/) 이상을 설치 합니다.
 
-   2\. 새 프로젝트를 만듭니다.
+   2 \. 새 프로젝트를 만듭니다.
 
-   3\. Select **Blazor App**. **새로 만들기**를 선택합니다.
+   3\. **Blazor 앱**을 선택 합니다. **다음**을 선택합니다.
 
-   4\. **프로젝트 이름** 필드에 프로젝트 이름을 제공하거나 기본 프로젝트 이름을 수락합니다. Confirm the **Location** entry is correct or provide a location for the project. **만들기**를 선택합니다.
+   4 \. **프로젝트 이름** 필드에 프로젝트 이름을 제공하거나 기본 프로젝트 이름을 수락합니다. **위치** 항목이 올바른지 확인 하거나 프로젝트의 위치를 제공 합니다. **만들기**를 선택합니다.
 
-   5\. For a Blazor WebAssembly experience, choose the **Blazor WebAssembly App** template. For a Blazor Server experience, choose the **Blazor Server App** template. **만들기**를 선택합니다. For information on the two Blazor hosting models, *Blazor Server* and *Blazor WebAssembly*, see <xref:blazor/hosting-models>.
+   5\. Blazor weasembomexperience의 경우 **Blazor Weasembomapp** 템플릿을 선택 합니다. Blazor 서버 환경에 대해 **Blazor Server 앱** 템플릿을 선택 합니다. **만들기**를 선택합니다. 두 Blazor 호스팅 모델에 대 한 자세한 내용은 *Blazor Server* 및 *Blazor* 를 <xref:blazor/hosting-models>참조 하세요.
 
    6\. **Ctrl**+**F5**를 눌러 앱을 실행합니다.
 
    > [!NOTE]
-   > If you installed the Blazor Visual Studio extension for a prior preview release of ASP.NET Core Blazor (Preview 6 or earlier), you can uninstall the extension. Installing the Blazor templates in a command shell is now sufficient to surface the templates in Visual Studio.
+   > ASP.NET Core Blazor (Preview 6 이전 버전)의 이전 미리 보기 릴리스에 대 한 Blazor Visual Studio 확장을 설치한 경우 확장을 제거할 수 있습니다. 이제 명령 셸에서 Blazor 템플릿을 설치 하면 Visual Studio에서 템플릿을 노출 하기에 충분 합니다.
 
    # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-   1\. [Visual Studio Code](https://code.visualstudio.com/)를 설치합니다.
+   1 \. [Visual Studio Code](https://code.visualstudio.com/)를 설치합니다.
 
-   2\. Install the latest [C# for Visual Studio Code extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp).
+   2 \. [ C# Visual Studio Code 확장에 대 한](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)최신 버전을 설치 합니다.
 
-   3\. For a Blazor WebAssembly experience, execute the following command in a command shell:
+   3\. Blazor Weasembomexperience의 경우 명령 셸에서 다음 명령을 실행 합니다.
 
       ```dotnetcli
       dotnet new blazorwasm -o WebApplication1
       ```
 
-      For a Blazor Server experience, execute the following command in a command shell:
+      Blazor 서버 환경의 경우 명령 셸에서 다음 명령을 실행 합니다.
 
       ```dotnetcli
       dotnet new blazorserver -o WebApplication1
       ```
 
-      For information on the two Blazor hosting models, *Blazor Server* and *Blazor WebAssembly*, see <xref:blazor/hosting-models>.
+      두 Blazor 호스팅 모델에 대 한 자세한 내용은 *Blazor Server* 및 *Blazor* 를 <xref:blazor/hosting-models>참조 하세요.
 
-   4\. Open the *WebApplication1* folder in Visual Studio Code.
+   4 \. Visual Studio Code에서 *WebApplication1* 폴더를 엽니다.
 
-   5\. For a Blazor Server project, the IDE requests that you add assets to build and debug the project. **Yes**를 선택합니다.
+   5\. Blazor Server 프로젝트의 경우 IDE는 프로젝트를 빌드 및 디버그 하기 위해 자산을 추가 하도록 요청 합니다. **예**를 선택합니다.
 
-   6\. If using a Blazor Server app, run the app using the Visual Studio Code debugger. If using a Blazor WebAssembly app, execute `dotnet run` from the app's project folder.
+   6\. Blazor Server 앱을 사용 하는 경우 Visual Studio Code 디버거를 사용 하 여 앱을 실행 합니다. Blazor Weasembomapp을 사용 하는 경우 앱의 프로젝트 폴더에서 `dotnet run`를 실행 합니다.
 
-   7\. 브라우저에서 `https://localhost:5001`로 이동합니다.
+   7 \. 브라우저에서 `https://localhost:5001`로 이동합니다.
 
    <!--
 
@@ -103,7 +103,7 @@ Get started with Blazor:
 
    # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
-   For a Blazor WebAssembly experience, execute the following commands in a command shell:
+   Blazor Weasembomexperience의 경우 명령 셸에서 다음 명령을 실행 합니다.
 
    ```dotnetcli
    dotnet new blazorwasm -o WebApplication1
@@ -111,7 +111,7 @@ Get started with Blazor:
    dotnet run
    ```
 
-   For a Blazor Server experience, execute the following commands in a command shell:
+   Blazor 서버 환경의 경우 명령 셸에서 다음 명령을 실행 합니다.
 
    ```dotnetcli
    dotnet new blazorserver -o WebApplication1
@@ -119,7 +119,7 @@ Get started with Blazor:
    dotnet run
    ```
 
-   For information on the two Blazor hosting models, *Blazor Server* and *Blazor WebAssembly*, see <xref:blazor/hosting-models>.
+   두 Blazor 호스팅 모델에 대 한 자세한 내용은 *Blazor Server* 및 *Blazor* 를 <xref:blazor/hosting-models>참조 하세요.
 
    브라우저에서 `https://localhost:5001`로 이동합니다.
 
@@ -129,62 +129,62 @@ Get started with Blazor:
 
 ::: moniker range="< aspnetcore-3.1"
 
-1. Install the latest [.NET Core 3.0 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0) release.
+1. 최신 [.Net Core 3.0 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0) 릴리스를 설치 합니다.
 
-1. Optionally install the [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) template by installing the [.NET Core 3.1 Preview SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1) and then running the following command in a command shell:
+1. 필요에 따라 [.Net Core 3.1 PREVIEW SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1) 를 설치 하 고 명령 셸에서 다음 명령을 실행 하 여 [Blazor Weasembomtemplate](xref:blazor/hosting-models#blazor-webassembly) 템플릿을 설치 합니다.
 
    ```dotnetcli
    dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.1.0-preview3.19555.2
    ```
 
-1. Follow the guidance for your choice of tooling:
+1. 선택한 도구에 대 한 지침을 따르세요.
 
    # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-   1\. Install the latest [Visual Studio](https://visualstudio.com/vs/) with the **ASP.NET and web development** workload.
+   1 \. **ASP.NET 및 웹 개발** 워크 로드를 사용 하 여 최신 [Visual Studio](https://visualstudio.com/vs/) 를 설치 합니다.
 
-   2\. Optionally install [Visual Studio 16.4 Preview 2 or later](https://visualstudio.microsoft.com/vs/preview/) with the **ASP.NET and web development** workload for Blazor WebAssembly app development.
+   2 \. 필요 Blazor에 따라 **ASP.NET 및 웹 개발** 워크 로드를 사용 하 여 [Visual Studio 16.4 Preview 2](https://visualstudio.microsoft.com/vs/preview/) 이상을 설치 합니다.
 
    3\. 새 프로젝트를 만듭니다.
 
-   4\. Select **Blazor App**. **새로 만들기**를 선택합니다.
+   4 \. **Blazor 앱**을 선택 합니다. **다음**을 선택합니다.
 
-   5\. **프로젝트 이름** 필드에 프로젝트 이름을 제공하거나 기본 프로젝트 이름을 수락합니다. Confirm the **Location** entry is correct or provide a location for the project. **만들기**를 선택합니다.
+   5\. **프로젝트 이름** 필드에 프로젝트 이름을 제공하거나 기본 프로젝트 이름을 수락합니다. **위치** 항목이 올바른지 확인 하거나 프로젝트의 위치를 제공 합니다. **만들기**를 선택합니다.
 
-   6\. For a Blazor WebAssembly experience, choose the **Blazor WebAssembly App** template. For a Blazor Server experience, choose the **Blazor Server App** template. **만들기**를 선택합니다. For information on the two Blazor hosting models, *Blazor Server* and *Blazor WebAssembly*, see <xref:blazor/hosting-models>.
+   6\. Blazor weasembomexperience의 경우 **Blazor Weasembomapp** 템플릿을 선택 합니다. Blazor 서버 환경에 대해 **Blazor Server 앱** 템플릿을 선택 합니다. **만들기**를 선택합니다. 두 Blazor 호스팅 모델에 대 한 자세한 내용은 *Blazor Server* 및 *Blazor* 를 <xref:blazor/hosting-models>참조 하세요.
 
-   7\. **F5** 키를 눌러 앱을 실행합니다.
+   7 \. **F5** 키를 눌러 앱을 실행합니다.
 
    > [!NOTE]
-   > If you installed the Blazor Visual Studio extension for a prior preview release of ASP.NET Core Blazor (Preview 6 or earlier), you can uninstall the extension. Installing the Blazor templates in a command shell is now sufficient to surface the templates in Visual Studio.
+   > ASP.NET Core Blazor (Preview 6 이전 버전)의 이전 미리 보기 릴리스에 대 한 Blazor Visual Studio 확장을 설치한 경우 확장을 제거할 수 있습니다. 이제 명령 셸에서 Blazor 템플릿을 설치 하면 Visual Studio에서 템플릿을 노출 하기에 충분 합니다.
 
    # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-   1\. [Visual Studio Code](https://code.visualstudio.com/)를 설치합니다.
+   1 \. [Visual Studio Code](https://code.visualstudio.com/)를 설치합니다.
 
-   2\. Install the latest [C# for Visual Studio Code extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp).
+   2 \. [ C# Visual Studio Code 확장에 대 한](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)최신 버전을 설치 합니다.
 
-   3\. For a Blazor WebAssembly experience, execute the following command in a command shell:
+   3\. Blazor Weasembomexperience의 경우 명령 셸에서 다음 명령을 실행 합니다.
 
       ```dotnetcli
       dotnet new blazorwasm -o WebApplication1
       ```
 
-      For a Blazor Server experience, execute the following command in a command shell:
+      Blazor 서버 환경의 경우 명령 셸에서 다음 명령을 실행 합니다.
 
       ```dotnetcli
       dotnet new blazorserver -o WebApplication1
       ```
 
-      For information on the two Blazor hosting models, *Blazor Server* and *Blazor WebAssembly*, see <xref:blazor/hosting-models>.
+      두 Blazor 호스팅 모델에 대 한 자세한 내용은 *Blazor Server* 및 *Blazor* 를 <xref:blazor/hosting-models>참조 하세요.
 
-   4\. Open the *WebApplication1* folder in Visual Studio Code.
+   4 \. Visual Studio Code에서 *WebApplication1* 폴더를 엽니다.
 
-   5\. For a Blazor Server project, the IDE requests that you add assets to build and debug the project. **Yes**를 선택합니다.
+   5\. Blazor Server 프로젝트의 경우 IDE는 프로젝트를 빌드 및 디버그 하기 위해 자산을 추가 하도록 요청 합니다. **예**를 선택합니다.
 
-   6\. If using a Blazor Server app, run the app using the Visual Studio Code debugger. If using a Blazor WebAssembly app, execute `dotnet run` from the app's project folder.
+   6\. Blazor Server 앱을 사용 하는 경우 Visual Studio Code 디버거를 사용 하 여 앱을 실행 합니다. Blazor Weasembomapp을 사용 하는 경우 앱의 프로젝트 폴더에서 `dotnet run`를 실행 합니다.
 
-   7\. 브라우저에서 `https://localhost:5001`로 이동합니다.
+   7 \. 브라우저에서 `https://localhost:5001`로 이동합니다.
 
    <!--
 
@@ -208,7 +208,7 @@ Get started with Blazor:
 
    # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
-   For a Blazor WebAssembly experience, execute the following commands in a command shell:
+   Blazor Weasembomexperience의 경우 명령 셸에서 다음 명령을 실행 합니다.
 
    ```dotnetcli
    dotnet new blazorwasm -o WebApplication1
@@ -216,7 +216,7 @@ Get started with Blazor:
    dotnet run
    ```
 
-   For a Blazor Server experience, execute the following commands in a command shell:
+   Blazor 서버 환경의 경우 명령 셸에서 다음 명령을 실행 합니다.
 
    ```dotnetcli
    dotnet new blazorserver -o WebApplication1
@@ -224,7 +224,7 @@ Get started with Blazor:
    dotnet run
    ```
 
-   For information on the two Blazor hosting models, *Blazor Server* and *Blazor WebAssembly*, see <xref:blazor/hosting-models>.
+   두 Blazor 호스팅 모델에 대 한 자세한 내용은 *Blazor Server* 및 *Blazor* 를 <xref:blazor/hosting-models>참조 하세요.
 
    브라우저에서 `https://localhost:5001`로 이동합니다.
 
@@ -232,53 +232,53 @@ Get started with Blazor:
 
 ::: moniker-end
 
-Multiple pages are available from tabs in the sidebar:
+세로 막대의 탭에서 여러 페이지를 사용할 수 있습니다.
 
-* Home
+* 홈
 * 카운터
-* Fetch data
+* 데이터 페치
 
-Counter 페이지에서 **Click me** 단추를 선택하여 페이지 새로 고침 없이 카운터를 증가시킵니다. Incrementing a counter in a webpage normally requires writing JavaScript, but with Blazor you can use C#.
+카운터 페이지에서 **Click me** 단추를 선택하여 페이지 새로 고침 없이 카운터를 증분합니다. 웹 페이지에서 카운터를 증가 시키려면 JavaScript를 작성 해야 하지만를 사용할 C#수 Blazor.
 
 *Pages/Counter.razor*:
 
 [!code-cshtml[](get-started/samples_snapshot/3.x/Counter1.razor?highlight=7,12-15)]
 
-A request for `/counter` in the browser, as specified by the `@page` directive at the top, causes the `Counter` component to render its content. Components render into an in-memory representation of the render tree that can then be used to update the UI in a flexible and efficient way.
+맨 위에 있는 `@page` 지시문에 지정 된 대로 브라우저의 `/counter`에 대 한 요청은 `Counter` 구성 요소가 해당 내용을 렌더링 합니다. 구성 요소는 렌더링 트리의 메모리 내 표현으로 렌더링 되어 유연 하 고 효율적인 방식으로 UI를 업데이트 하는 데 사용할 수 있습니다.
 
-Each time the **Click me** button is selected:
+**[클릭** ] 단추를 선택할 때마다:
 
-* The `onclick` event is fired.
+* `onclick` 이벤트가 발생 합니다.
 * `IncrementCount` 메서드가 호출됩니다.
-* The `currentCount` is incremented.
-* The component is rendered again.
+* `currentCount` 증가 합니다.
+* 구성 요소가 다시 렌더링 됩니다.
 
-The runtime compares the new content to the previous content and only applies the changed content to the Document Object Model (DOM).
+런타임은 새 콘텐츠를 이전 콘텐츠와 비교 하 고 변경 된 콘텐츠만 문서 개체 모델 (DOM)에 적용 합니다.
 
-Add a component to another component using HTML syntax. For example, add the `Counter` component to the app's homepage by adding a `<Counter />` element to the `Index` component.
+HTML 구문을 사용 하 여 구성 요소를 다른 구성 요소에 추가 합니다. 예를 들어 `Index` 구성 요소에 `<Counter />` 요소를 추가 하 여 앱의 홈페이지에 `Counter` 구성 요소를 추가 합니다.
 
 *Pages/Index.razor*:
 
 [!code-cshtml[](get-started/samples_snapshot/3.x/Index1.razor?highlight=7)]
 
-앱을 실행합니다. The homepage has its own counter provided by the `Counter` component.
+앱을 실행합니다. 홈페이지에는 `Counter` 구성 요소에서 제공 하는 고유한 카운터가 있습니다.
 
-Component parameters are specified using attributes or [child content](xref:blazor/components#child-content), which allow you to set properties on the child component. To add a parameter to the `Counter` component, update the component's `@code` block:
+구성 요소 매개 변수는 자식 구성 요소에 대 한 속성을 설정할 수 있도록 하는 특성 또는 [자식 콘텐츠](xref:blazor/components#child-content)를 사용 하 여 지정 됩니다. `Counter` 구성 요소에 매개 변수를 추가 하려면 구성 요소의 `@code` 블록을 업데이트 합니다.
 
-* Add a public property for `IncrementAmount` with a `[Parameter]` attribute.
-* `currentCount` 값을 증가시킬 때 `IncrementAmount`를 사용하도록 `IncrementCount` 메서드를 변경합니다.
+* `[Parameter]` 특성을 사용 하 여 `IncrementAmount`에 대 한 public 속성을 추가 합니다.
+* `IncrementCount` 값을 늘릴 때 `IncrementAmount`를 사용하도록 `currentCount` 메서드를 변경합니다.
 
 *Pages/Counter.razor*:
 
 [!code-cshtml[](get-started/samples_snapshot/3.x/Counter2.razor?highlight=12-13,17)]
 
-Specify the `IncrementAmount` in the `Index` component's `<Counter>` element using an attribute.
+특성을 사용 하 여 `Index` 구성 요소의 `<Counter>` 요소에 `IncrementAmount`를 지정 합니다.
 
 *Pages/Index.razor*:
 
 [!code-cshtml[](get-started/samples_snapshot/3.x/Index2.razor?highlight=7)]
 
-앱을 실행합니다. The `Index` component has its own counter that increments by ten each time the **Click me** button is selected. The `Counter` component (*Counter.razor*) at `/counter` continues to increment by one.
+앱을 실행합니다. `Index` 구성 요소에는 **클릭** 단추를 선택할 때마다 10 씩 증가 하는 고유한 카운터가 있습니다. `/counter`의 `Counter` 구성 요소 ( *. razor*)는 1 씩 계속 증가 합니다.
 
 ## <a name="next-steps"></a>다음 단계
 

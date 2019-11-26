@@ -133,7 +133,7 @@ ASP.NET Core의 [데이터 보호](xref:security/data-protection/introduction)�
 
 ## <a name="protected-browser-storage-experimental-package"></a>보호 된 브라우저 저장소 실험적 패키지
 
-[ 및 ](xref:security/data-protection/introduction)에 대한 `localStorage`데이터 보호`sessionStorage`를 제공 하는 NuGet 패키지의 예는 [AspNetCore. ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)입니다.
+`localStorage` 및 `sessionStorage`에 대 한 [데이터 보호](xref:security/data-protection/introduction) 를 제공 하는 NuGet 패키지의 예는 [ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)입니다.
 
 > [!WARNING]
 > 현재는 지원 되지 않는 실험적 패키지를 프로덕션 환경에 적합 하 게 사용할 수 없습니다. `Microsoft.AspNetCore.ProtectedBrowserStorage`

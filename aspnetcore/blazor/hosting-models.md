@@ -29,7 +29,7 @@ Blazor은 웹 프레임 워크를 사용 *Blazor* ASP.NET Core *Blazor* 하 여 
 
 ## <a name="opno-locblazor-webassembly"></a>Blazor WebAssembly
 
-Blazor에 대 한 주 호스팅 모델이 브라우저에서 클라이언트 쪽을 제대로 실행 하 고 있습니다. Blazor 앱, 해당 종속성 및 .NET 런타임이 브라우저에 다운로드 됩니다. 해당 앱은 브라우저 UI 스레드에서 직접 실행됩니다. UI 업데이트 및 이벤트 처리는 동일한 프로세스 내에서 발생 합니다. 응용 프로그램의 자산은 정적 콘텐츠를 클라이언트에 제공할 수 있는 웹 서버 또는 서비스에 정적 파일로 배포 됩니다.
+Blazor에 대 한 주 호스팅 모델이 브라우저에서 클라이언트 쪽을 제대로 실행 하 고 있습니다. Blazor 앱, 해당 앱의 종속성 및 .NET 런타임이 브라우저에 다운로드됩니다. 해당 앱은 브라우저 UI 스레드에서 직접 실행됩니다. UI 업데이트 및 이벤트 처리는 동일한 프로세스 내에서 발생 합니다. 응용 프로그램의 자산은 정적 콘텐츠를 클라이언트에 제공할 수 있는 웹 서버 또는 서비스에 정적 파일로 배포 됩니다.
 
 ![[! OP. NO-LOC (Blazor)] Weasemboma: [! OP. NO-LOC (Blazor)] 앱은 브라우저 내의 UI 스레드에서 실행 됩니다.](hosting-models/_static/blazor-webassembly.png)
 
@@ -58,7 +58,7 @@ Blazor Weasembmbamboming에는 다음과 같은 단점이 있습니다.
 
 ## <a name="opno-locblazor-server"></a>Blazor 서버
 
-Blazor 서버 호스팅 모델을 사용 하면 앱이 ASP.NET Core 앱 내에서 서버에 실행 됩니다. UI 업데이트, 이벤트 처리 및 JavaScript 호출은 [SignalR](xref:signalr/introduction) 연결을 통해 처리 됩니다.
+Blazor 서버 호스팅 모델을 사용 하면 앱이 ASP.NET Core 앱 내에서 서버에 실행 됩니다. UI 업데이트, 이벤트 처리 및 JavaScript 호출은 [SignalR](xref:signalr/introduction) 연결을 통해 처리됩니다.
 
 ![브라우저는 서버에서 [!를 사용 하 여 ASP.NET Core 앱 내에서 호스팅되는 앱과 상호 작용 합니다. OP. NO LOC (SignalR)] 연결입니다.](hosting-models/_static/blazor-server.png)
 
@@ -140,7 +140,7 @@ Blazor 서버 앱에는 서버에 대 한 활성 SignalR 연결이 필요 합니
 
 Blazor Server 앱은 서버에서 UI 상태를 설정 하는 첫 번째 클라이언트 요청에 대 한 응답으로 prerenders. 클라이언트는 SignalR 연결을 만들려고 할 때 동일한 서버에 다시 연결 해야 합니다. 둘 이상의 백 엔드 서버를 사용 하는 Blazor Server 앱은 SignalR 연결에 대 한 *고정 세션* 을 구현 해야 합니다.
 
-Blazor Server 앱에는 [Azure SignalR 서비스](/azure/azure-signalr) 를 사용 하는 것이 좋습니다. 서비스를 사용 하면 Blazor Server 앱을 많은 수의 동시 SignalR 연결로 확장할 수 있습니다. 고정 세션은 서비스의 `ServerStickyMode` 옵션 또는 구성 값을 `Required`로 설정 하 여 Azure SignalR 서비스에 대해 사용 하도록 설정 됩니다. 자세한 내용은 <xref:host-and-deploy/blazor/server#signalr-configuration>을 참조하세요.
+[ 서버 앱에 SignalRAzure ](/azure/azure-signalr) ServiceBlazor를 사용하는 것이 좋습니다. 이 서비스를 사용하면 Blazor 서버 앱을 다수의 동시 SignalR 연결로 확장할 수 있습니다. 고정 세션은 서비스의 `ServerStickyMode` 옵션 또는 구성 값을 `Required`로 설정 하 여 Azure SignalR 서비스에 대해 사용 하도록 설정 됩니다. 자세한 내용은 <xref:host-and-deploy/blazor/server#signalr-configuration>을 참조하세요.
 
 IIS를 사용 하는 경우 응용 프로그램 요청 라우팅을 사용 하 여 고정 세션을 사용할 수 있습니다. 자세한 내용은 [응용 프로그램 요청 라우팅을 사용 하는 HTTP 부하 분산](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing)을 참조 하세요.
 

@@ -24,7 +24,7 @@ ASP.NET Core SignalR은 ASP.NET Core에서 지 원하는 모든 서버 플랫폼
 
 ## <a name="javascript-client"></a>JavaScript 클라이언트
 
-[JavaScript 클라이언트](xref:signalr/javascript-client)는 NodeJS 8 이상의 버전과 다음 브라우저에서 실행됩니다.
+[JavaScript 클라이언트](xref:signalr/javascript-client) 는 nodejs 8 이상 버전과 다음 브라우저에서 실행 됩니다.
 
 | 브라우저                         | 버전         |
 | ------------------------------- | --------------- |
@@ -44,12 +44,12 @@ ASP.NET Core SignalR은 ASP.NET Core에서 지 원하는 모든 서버 플랫폼
 
 ## <a name="java-client"></a>Java 클라이언트
 
-[Java 클라이언트](xref:signalr/java-client)는 Java 8 이상의 버전을 지원합니다.
+[Java 클라이언트](xref:signalr/java-client) 는 java 8 이상 버전을 지원 합니다.
 
 ## <a name="unsupported-clients"></a>지원되지 않는 클라이언트
 
 다음 클라이언트는 사용할 수는 있지만 실험적이거나 비공식적입니다. 현재 지원 되지 않으며 그렇지 않을 수도 있습니다.
 
-* [C++ 클라이언트](https://github.com/aspnet/SignalR/tree/master/clients/cpp)
+* [C++클라이언트로](https://github.com/aspnet/SignalR/tree/master/clients/cpp)
 
 * [Swift 클라이언트](https://github.com/moozzyk/SignalR-Client-Swift)

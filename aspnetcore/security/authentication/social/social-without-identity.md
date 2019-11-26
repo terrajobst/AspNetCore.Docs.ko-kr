@@ -27,7 +27,7 @@ ms.locfileid: "74289110"
 * [Twitter 인증](xref:security/authentication/twitter-logins)
 * [기타 공급자](xref:security/authentication/otherlogins)
 
-## <a name="configuration"></a>구성
+## <a name="configuration"></a>Configuration
 
 `ConfigureServices` 메서드에서 <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*>, <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*>및 <xref:Microsoft.Extensions.DependencyInjection.GoogleExtensions.AddGoogle*> 메서드를 사용 하 여 앱의 인증 체계를 구성 합니다.
 
@@ -41,7 +41,7 @@ ms.locfileid: "74289110"
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*>
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*>
 
-앱의 `DefaultScheme`을 [CookieAuthenticationDefaults](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) ("쿠키")로 설정 하면 해당 확장 메서드에 대 한 기본 스키마로 쿠키를 사용 하도록 앱을 구성 합니다. 앱의 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme>을 [GoogleDefaults](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ("Google")로 설정 하면 Google을 `ChallengeAsync`호출에 대 한 기본 체계로 사용 하도록 앱이 구성 됩니다. `DefaultChallengeScheme`는 `DefaultScheme`를 재정의합니다. 설정 시 `DefaultScheme`를 재정의 하는 추가 속성은 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions>를 참조 하세요.
+앱의 `DefaultScheme`을 [CookieAuthenticationDefaults](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) ("쿠키")로 설정 하면 해당 확장 메서드에 대 한 기본 스키마로 쿠키를 사용 하도록 앱을 구성 합니다. 앱의 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme>을 [GoogleDefaults](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ("Google")로 설정 하면 Google을 `ChallengeAsync`호출에 대 한 기본 체계로 사용 하도록 앱이 구성 됩니다. `DefaultChallengeScheme` `DefaultScheme`를 재정의 합니다. 설정 시 `DefaultScheme`를 재정의 하는 추가 속성은 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions>를 참조 하세요.
 
 `Startup.Configure`에서 `UseAuthentication`를 호출 하 고 `UseRouting` 및 `UseEndpoints`호출 사이에 `UseAuthorization` 합니다. 이는 `HttpContext.User` 속성을 설정 하 고 요청에 대 한 권한 부여 미들웨어를 실행 합니다.
 
@@ -82,7 +82,7 @@ ms.locfileid: "74289110"
 * [Twitter 인증](xref:security/authentication/twitter-logins)
 * [기타 공급자](xref:security/authentication/otherlogins)
 
-## <a name="configuration"></a>구성
+## <a name="configuration"></a>Configuration
 
 `ConfigureServices` 메서드에서 `AddAuthentication`, `AddCookie`및 `AddGoogle` 메서드를 사용 하 여 앱의 인증 체계를 구성 합니다.
 
@@ -96,7 +96,7 @@ ms.locfileid: "74289110"
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*>
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*>
 
-앱의 `DefaultScheme`을 [CookieAuthenticationDefaults](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) ("쿠키")로 설정 하면 해당 확장 메서드에 대 한 기본 스키마로 쿠키를 사용 하도록 앱을 구성 합니다. 앱의 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme>을 [GoogleDefaults](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ("Google")로 설정 하면 Google을 `ChallengeAsync`호출에 대 한 기본 체계로 사용 하도록 앱이 구성 됩니다. `DefaultChallengeScheme`는 `DefaultScheme`를 재정의합니다. 설정 시 `DefaultScheme`를 재정의 하는 추가 속성은 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions>를 참조 하세요.
+앱의 `DefaultScheme`을 [CookieAuthenticationDefaults](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) ("쿠키")로 설정 하면 해당 확장 메서드에 대 한 기본 스키마로 쿠키를 사용 하도록 앱을 구성 합니다. 앱의 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme>을 [GoogleDefaults](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ("Google")로 설정 하면 Google을 `ChallengeAsync`호출에 대 한 기본 체계로 사용 하도록 앱이 구성 됩니다. `DefaultChallengeScheme` `DefaultScheme`를 재정의 합니다. 설정 시 `DefaultScheme`를 재정의 하는 추가 속성은 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions>를 참조 하세요.
 
 `Configure` 메서드에서 `UseAuthentication` 메서드를 호출 하 여 `HttpContext.User` 속성을 설정 하는 인증 미들웨어를 호출 합니다. `UseMvcWithDefaultRoute` 또는 `UseMvc`를 호출 하기 전에 `UseAuthentication` 메서드를 호출 합니다.
 

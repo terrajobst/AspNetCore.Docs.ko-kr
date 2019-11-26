@@ -369,7 +369,7 @@ WSL (Linux 용 Windows 하위 시스템)은 HTTPS 자체 서명 된 인증서를
 
 ### <a name="all-platforms---certificate-not-trusted"></a>모든 플랫폼-인증서를 신뢰할 수 없음
 
-다음 명령을 실행합니다.
+다음 명령을 실행 합니다.
 
 ```dotnetcli
 dotnet dev-certs https --clean
@@ -390,7 +390,7 @@ dotnet dev-certs https --trust
 
 * 인증서 저장소의 인증서를 확인 합니다. `Current User > Personal > Certificates` `Current User > Trusted root certification authorities > Certificates` 및에서 `ASP.NET Core HTTPS development certificate` 이름이 `localhost` 인증서가 있어야 합니다.
 * 모든 찾은 인증서를 개인 및 신뢰할 수 있는 루트 인증 기관에서 제거 합니다. IIS Express localhost 인증서를 제거 **하지** 마십시오.
-* 다음 명령을 실행합니다.
+* 다음 명령을 실행 합니다.
 
 ```dotnetcli
 dotnet dev-certs https --clean
@@ -406,7 +406,7 @@ dotnet dev-certs https --trust
 * Localhost 인증서가 있는지 확인 합니다.
 * 모든 사용자가 신뢰할 수 있음을 나타내기 위해 아이콘에 `+` 기호가 포함 되어 있는지 확인 합니다.
 * 시스템 키 집합에서 인증서를 제거 합니다.
-* 다음 명령을 실행합니다.
+* 다음 명령을 실행 합니다.
 
 ```dotnetcli
 dotnet dev-certs https --clean
