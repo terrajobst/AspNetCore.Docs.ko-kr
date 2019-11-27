@@ -5,22 +5,22 @@ description: 데이터에 바인딩하고, 이벤트를 처리 하 고, 구성 �
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/21/2019
+ms.date: 11/23/2019
 no-loc:
 - Blazor
 uid: blazor/components
-ms.openlocfilehash: 267a6f5aa96feeecc280238abbef86949750b07e
-ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
+ms.openlocfilehash: 89c92fbd5a3939cd2b4a34c39163767bcdf73bb8
+ms.sourcegitcommit: 918d7000b48a2892750264b852bad9e96a1165a7
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/22/2019
-ms.locfileid: "74317208"
+ms.lasthandoff: 11/27/2019
+ms.locfileid: "74550314"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
 By [Luke Latham](https://github.com/guardrex) 및 [Daniel Roth](https://github.com/danroth27)
 
-[샘플 코드 보기 또는 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 Blazor 앱은 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소는 페이지, 대화 상자 또는 양식과 같은 UI (사용자 인터페이스)의 자체 포함 청크입니다. 구성 요소는 데이터를 삽입 하거나 UI 이벤트에 응답 하는 데 필요한 HTML 태그와 처리 논리를 포함 합니다. 구성 요소는 유연 하 고 간단 합니다. 프로젝트 간에 중첩, 재사용 및 공유 될 수 있습니다.
 
@@ -329,7 +329,7 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 
 사용자가 데이터 바인딩된 요소에 구문 분석할 수 없는 값을 제공 하면 bind 이벤트가 트리거될 때 구문 분석할 수 없는 값이 자동으로 이전 값으로 되돌아갑니다.
 
-다음과 같은 시나리오를 고려해 보세요.
+다음 시나리오를 고려하세요.
 
 * `<input>` 요소는 `123`초기 값을 사용 하 여 `int` 형식에 바인딩됩니다.
 
@@ -545,19 +545,19 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 
 지원 되는 `EventArgs` 다음 표에 나와 있습니다.
 
-| 이벤트            | 클래스                | DOM 이벤트 및 참고 사항 |
+| 이벤트(event)            | 클래스                | DOM 이벤트 및 참고 사항 |
 | ---------------- | -------------------- | -------------------- |
-| 클립보드        | `ClipboardEventArgs` | `oncut`, `oncopy`, `onpaste` |
+| 클립보드        | `ClipboardEventArgs` | `oncut`에서 `oncopy`에서 `onpaste` |
 | 옵니다             | `DragEventArgs`      | `ondrag`, `ondragstart`, `ondragenter`, `ondragleave`, `ondragover`, `ondrop`, `ondragend`<br><br>끌어온 항목 데이터를 포함 하는 `DataTransfer` 및 `DataTransferItem`. |
-| Error            | `ErrorEventArgs`     | `onerror` |
-| 이벤트            | `EventArgs`          | *일반*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onended`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*클립보드*<br>`onbeforecut`, `onbeforecopy`, `onbeforepaste`<br><br>*입력*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, `onsubmit`<br><br>*미디어만*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting` |
+| 오류            | `ErrorEventArgs`     | `onerror` |
+| 이벤트(event)            | `EventArgs`          | *일반*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onended`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*클립보드*<br>`onbeforecut`에서 `onbeforecopy`에서 `onbeforepaste`<br><br>*입력*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, `onsubmit`<br><br>*미디어만*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting` |
 | 포커스            | `FocusEventArgs`     | `onfocus`, `onblur`, `onfocusin`, `onfocusout`<br><br>`relatedTarget`에 대 한 지원을 포함 하지 않습니다. |
 | 입력            | `ChangeEventArgs`    | `onchange`, `oninput` |
-| 키보드         | `KeyboardEventArgs`  | `onkeydown`, `onkeypress`, `onkeyup` |
-| 마우스            | `MouseEventArgs`     | `onclick`, `oncontextmenu`, `ondblclick`, `onmousedown`, `onmouseup`, `onmouseover`, `onmousemove`, `onmouseout` |
+| 키보드         | `KeyboardEventArgs`  | `onkeydown`에서 `onkeypress`에서 `onkeyup` |
+| 마우스            | `MouseEventArgs`     | `onclick`, `oncontextmenu`, `ondblclick`, `onmousedown`, `onmouseup`, `onmouseover`, `onmousemove`, `onmouseout`입니다. |
 | 마우스 포인터    | `PointerEventArgs`   | `onpointerdown`, `onpointerup`, `onpointercancel`, `onpointermove`, `onpointerover`, `onpointerout`, `onpointerenter`, `onpointerleave`, `ongotpointercapture`, `onlostpointercapture` |
 | 마우스 휠      | `WheelEventArgs`     | `onwheel`, `onmousewheel` |
-| 진행률         | `ProgressEventArgs`  | `onabort`, `onload`, `onloadend`, `onloadstart`, `onprogress`, `ontimeout` |
+| 진행 중         | `ProgressEventArgs`  | `onabort`, `onload`, `onloadend`, `onloadstart`, `onprogress`, `ontimeout` |
 | 터치            | `TouchEventArgs`     | `ontouchstart`, `ontouchend`, `ontouchmove`, `ontouchenter`, `ontouchleave`, `ontouchcancel`<br><br>`TouchPoint` 터치를 구분 하는 장치에서 단일 접촉 지점을 나타냅니다. |
 
 위의 표에서 이벤트의 속성 및 이벤트 처리 동작에 대 한 자세한 내용은 [참조 소스의 EventArgs 클래스 (aspnet/AspNetCore release/3.0 분기)](https://github.com/aspnet/AspNetCore/tree/release/3.0/src/Components/Web/src/Web)를 참조 하세요.
@@ -922,7 +922,7 @@ public class NotifierService
 
 요소 또는 구성 요소 목록을 렌더링할 때 이후에 요소 또는 구성 요소가 변경 되는 경우 Blazor의 diff 알고리즘은 유지할 수 있는 이전 요소 또는 구성 요소와 모델 개체가 이러한 요소에 매핑되는 방법을 결정 해야 합니다. 일반적으로이 프로세스는 자동 이며 무시 해도 되지만 프로세스를 제어 하는 경우가 있습니다.
 
-다음 예를 살펴 보십시오.
+다음 예제를 참조하세요.
 
 ```csharp
 @foreach (var person in People)
@@ -1145,6 +1145,8 @@ Blazor 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로 �
 
 선택적 매개 변수는 지원 되지 않으므로 위의 예제에서 두 개의 `@page` 지시문이 적용 됩니다. 첫 번째는 매개 변수 없이 구성 요소에 대 한 탐색을 허용 합니다. 두 번째 `@page` 지시어는 `{text}` route 매개 변수를 사용 하 여 `Text` 속성에 값을 할당 합니다.
 
+*Catch-* 여러 폴더 경계에서 경로를 캡처하는 모든 매개 변수 구문 (`*`/`**`)은 razor 구성 요소 (*razor*)에서 지원 **되지 않습니다** .
+
 ::: moniker range=">= aspnetcore-3.1"
 
 ## <a name="partial-class-support"></a>Partial 클래스 지원
@@ -1310,7 +1312,7 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값�
 <input type="checkbox" />
 ```
 
-자세한 내용은 <xref:mvc/views/razor>을 참조하세요.
+자세한 내용은 <xref:mvc/views/razor>를 참조하세요.
 
 > [!WARNING]
 > ASP.NET 형식이 `bool`경우에는 [aria를 누르는](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons)등의 일부 HTML 특성이 제대로 작동 하지 않습니다. 이러한 경우 `bool`대신 `string` 유형을 사용 합니다.
@@ -1688,14 +1690,14 @@ builder.AddContent(1, "Second");
 
 코드가 처음 실행 될 때 `someFlag` `true`경우 작성기는 다음을 수신 합니다.
 
-| Sequence | 형식      | data   |
+| Sequence | 형식      | 데이터   |
 | :------: | --------- | :----: |
 | 0        | 텍스트 노드 | 첫째  |
 | 1        | 텍스트 노드 | Second |
 
 `someFlag` `false`되 고 태그가 다시 렌더링 된다고 가정 합니다. 이번에는 작성기가 다음을 받습니다.
 
-| Sequence | 형식       | data   |
+| Sequence | 형식       | 데이터   |
 | :------: | ---------- | :----: |
 | 1        | 텍스트 노드  | Second |
 
@@ -1720,14 +1722,14 @@ builder.AddContent(seq++, "Second");
 
 이제 첫 번째 출력은 다음과 같습니다.
 
-| Sequence | 형식      | data   |
+| Sequence | 형식      | 데이터   |
 | :------: | --------- | :----: |
 | 0        | 텍스트 노드 | 첫째  |
 | 1        | 텍스트 노드 | Second |
 
 이 결과는 이전 사례와 동일 하므로 부정적인 문제가 없습니다. `someFlag`은 두 번째 렌더링에서 `false` 되며 출력은 다음과 같습니다.
 
-| Sequence | 형식      | data   |
+| Sequence | 형식      | 데이터   |
 | :------: | --------- | ------ |
 | 0        | 텍스트 노드 | Second |
 
@@ -1825,7 +1827,7 @@ public class CultureController : Controller
 ```
 
 > [!WARNING]
-> `LocalRedirect` 작업 결과를 사용 하 여 열린 리디렉션 공격을 방지 합니다. 자세한 내용은 <xref:security/preventing-open-redirects>을 참조하세요.
+> `LocalRedirect` 작업 결과를 사용 하 여 열린 리디렉션 공격을 방지 합니다. 자세한 내용은 <xref:security/preventing-open-redirects>를 참조하세요.
 
 다음 구성 요소는 사용자가 문화권을 선택할 때 초기 리디렉션을 수행 하는 방법의 예를 보여 줍니다.
 
@@ -1870,7 +1872,7 @@ Blazor의 `@bind` 기능은 사용자의 현재 문화권에 따라 세계화를
 * `IStringLocalizer<>`은 Blazor 앱에서 *지원 됩니다* .
 * `IHtmlLocalizer<>`, `IViewLocalizer<>`및 데이터 주석 지역화는 MVC 시나리오 ASP.NET Core Blazor 앱에서 **지원 되지 않습니다** .
 
-자세한 내용은 <xref:fundamentals/localization>을 참조하세요.
+자세한 내용은 <xref:fundamentals/localization>를 참조하세요.
 
 ## <a name="scalable-vector-graphics-svg-images"></a>SVG (스케일러블 벡터 그래픽) 이미지
 

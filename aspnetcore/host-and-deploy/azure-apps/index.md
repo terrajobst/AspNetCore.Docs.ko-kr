@@ -5,14 +5,14 @@ description: 이 문서에는 Azure 호스트 및 배포 리소스의 링크가 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 10/11/2019
+ms.date: 11/07/2019
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: 392868b4fc9105279f8f3b10436a9915123e7070
-ms.sourcegitcommit: 032113208bb55ecfb2faeb6d3e9ea44eea827950
+ms.openlocfilehash: f9fc6e706046165c142e19ca38d97ac21914dc9b
+ms.sourcegitcommit: a104ba258ae7c0b3ee7c6fa7eaea1ddeb8b6eb73
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/31/2019
-ms.locfileid: "73190633"
+ms.lasthandoff: 11/25/2019
+ms.locfileid: "74478763"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Azure App Service에 ASP.NET Core 앱 배포
 
@@ -52,6 +52,8 @@ ASP.NET Core 프로젝트를 사용하여 경고 및 오류를 이해하고 문�
 ## <a name="application-configuration"></a>애플리케이션 구성
 
 ### <a name="platform"></a>플랫폼
+
+A 시리즈 컴퓨팅(기본) 또는 그 이상의 호스트 계층에서 호스트되는 앱의 경우 Azure Portal의 앱 설정에서 App Services 앱의 플랫폼 아키텍처(x86/x64)가 설정됩니다. 앱의 게시 설정(예: Visual Studio [게시 프로필(.pubxml)](xref:host-and-deploy/visual-studio-publish-profiles))이 Azure Portal의 앱 서비스 구성 설정과 일치하는지 확인합니다.
 
 ::: moniker range=">= aspnetcore-2.2"
 
@@ -213,9 +215,11 @@ App Service 배포 센터를 사용하여 Azure DevOps 빌드를 만들 때 기�
    x64 미리 보기 런타임이 설치된 경우 명령이 `True`를 반환합니다.
 
 > [!NOTE]
-> A 시리즈 컴퓨팅 또는 더 나은 호스트 계층에서 호스트되는 앱이 필요한 경우 Azure Portal의 앱 설정에서 App Services 앱의 플랫폼 아키텍처(x86/x64)를 설정합니다. 앱이 in-process 모드에서 실행되고 플랫폼 아키텍처가 64비트(x64)에 대해 구성되는 경우 ASP.NET Core 모듈은 64비트 미리 보기 런타임을 사용합니다(있는 경우). **ASP.NET Core {X.Y}(x64) 런타임** 확장을 설치합니다.
+> A 시리즈 컴퓨팅(기본) 또는 그 이상의 호스트 계층에서 호스트되는 앱의 경우 Azure Portal의 앱 설정에서 App Services 앱의 플랫폼 아키텍처(x86/x64)가 설정됩니다. 앱의 게시 설정(예: Visual Studio [게시 프로필(.pubxml)](xref:host-and-deploy/visual-studio-publish-profiles))이 Azure Portal의 앱 서비스 구성 설정과 일치하는지 확인합니다.
 >
-> x64 미리 보기 런타임을 설치한 후에 Kudu PowerShell 명령 창에서 다음 명령을 실행하여 설치를 확인합니다. 명령에서 `{X.Y}`에 대한 ASP.NET Core 런타임 버전을 대체합니다.
+> 앱이 in-process 모드에서 실행되고 플랫폼 아키텍처가 64비트(x64)에 대해 구성되는 경우 ASP.NET Core 모듈은 64비트 미리 보기 런타임을 사용합니다(있는 경우). Azure Portal을 사용하여 **ASP.NET Core {X.Y}(x64) 런타임** 확장을 설치합니다.
+>
+> x64 미리 보기 런타임을 설치한 후에 Azure Kudu PowerShell 명령 창에서 다음 명령을 실행하여 설치를 확인합니다. 다음 명령에서 `{X.Y}`에 대한 ASP.NET Core 런타임 버전을 대체합니다.
 >
 > ```powershell
 > Test-Path D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x64\
@@ -234,16 +238,16 @@ ARM 템플릿을 사용하여 앱을 만들고 배포하는 경우 `siteextensio
 
 ## <a name="publish-and-deploy-the-app"></a>앱 게시 및 배포
 
-### <a name="deploy-the-app-framework-dependent"></a>프레임워크 종속 앱 배포
-
 ::: moniker range=">= aspnetcore-2.2"
 
-64비트 [프레임워크 종속 배포](/dotnet/core/deploying/#framework-dependent-deployments-fdd)의 경우:
+64 비트 배포의 경우:
 
 * 64비트 .NET Core SDK를 사용하여 64비트 앱을 빌드합니다.
 * App Service의 **구성** > **일반 설정**에서 **플랫폼**을 **64비트**로 설정합니다. 플랫폼 비트 수를 선택할 수 있도록 하려면 앱에서 기본 이상의 서비스 플랜을 사용해야 합니다.
 
 ::: moniker-end
+
+### <a name="deploy-the-app-framework-dependent"></a>프레임워크 종속 앱 배포
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 

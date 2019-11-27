@@ -5,16 +5,16 @@ description: 선택한 도구를 사용 하 여 Blazor 앱을 빌드하여 Blazo
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/07/2019
+ms.date: 11/25/2019
 no-loc:
 - Blazor
 uid: blazor/get-started
-ms.openlocfilehash: 198093b37cb4f440eb7b520d18004304aea570a5
-ms.sourcegitcommit: 8157e5a351f49aeef3769f7d38b787b4386aad5f
+ms.openlocfilehash: 7d495bddde3c01c743db9757204a5cf59d8b160b
+ms.sourcegitcommit: 918d7000b48a2892750264b852bad9e96a1165a7
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/20/2019
-ms.locfileid: "74239714"
+ms.lasthandoff: 11/27/2019
+ms.locfileid: "74550320"
 ---
 # <a name="get-started-with-aspnet-core-opno-locblazor"></a>ASP.NET Core Blazor 시작하기
 
@@ -42,7 +42,7 @@ Blazor시작:
 
    2 \. 새 프로젝트를 만듭니다.
 
-   3\. **Blazor 앱**을 선택 합니다. **다음**을 선택합니다.
+   3\. **Blazor 앱**을 선택 합니다. **새로 만들기**를 선택합니다.
 
    4 \. **프로젝트 이름** 필드에 프로젝트 이름을 제공하거나 기본 프로젝트 이름을 수락합니다. **위치** 항목이 올바른지 확인 하거나 프로젝트의 위치를 제공 합니다. **만들기**를 선택합니다.
 
@@ -75,31 +75,31 @@ Blazor시작:
 
    4 \. Visual Studio Code에서 *WebApplication1* 폴더를 엽니다.
 
-   5\. Blazor Server 프로젝트의 경우 IDE는 프로젝트를 빌드 및 디버그 하기 위해 자산을 추가 하도록 요청 합니다. **예**를 선택합니다.
+   5\. Blazor Server 프로젝트의 경우 IDE는 프로젝트를 빌드 및 디버그 하기 위해 자산을 추가 하도록 요청 합니다. **Yes**를 선택합니다.
 
    6\. Blazor Server 앱을 사용 하는 경우 Visual Studio Code 디버거를 사용 하 여 앱을 실행 합니다. Blazor Weasembomapp을 사용 하는 경우 앱의 프로젝트 폴더에서 `dotnet run`를 실행 합니다.
 
    7 \. 브라우저에서 `https://localhost:5001`로 이동합니다.
 
-   <!--
+   # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-   # [Visual Studio for Mac](#tab/visual-studio-mac)
+   1 \. [Mac용 Visual Studio](https://visualstudio.microsoft.com/vs/mac/)를 설치 합니다. [업데이트 채널을 미리 보기로](/visualstudio/mac/install-preview)전환 합니다.
 
-   1\. Install [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/). Switch the [Update channel to Preview](/visualstudio/mac/install-preview).
+   2 \. **파일** > **새 솔루션** 을 선택 하거나 **새 프로젝트**를 만듭니다.
 
-   2\. Select **File** > **New Solution** or **New Project**.
+   3\. 사이드바에서 **.Net Core** > **앱**을 선택 합니다.
 
-   3\. In the sidebar, select **.NET Core** > **App**.
+   4 \. **Blazor Server 앱** 템플릿을 선택 합니다. 현재 Mac용 Visual Studio에서는 Blazor 서버 템플릿만 사용할 수 있습니다. Blazor Weasembomexperience의 경우 **.NET Core CLI** 탭의 지침을 따르세요. Blazor 서버 템플릿을 선택한 후 **다음**을 선택 합니다. 두 Blazor 호스팅 모델에 대 한 자세한 내용은 *Blazor Server* 및 *Blazor* 를 <xref:blazor/hosting-models>참조 하세요.
 
-   4\. For a Blazor Server experience, select the **Blazor Server App** template. For a Blazor WebAssembly experience, select the **Blazor WebAssembly App** template. Select **Next**. For information on the two Blazor hosting models, *Blazor Server* and *Blazor WebAssembly*, see <xref:blazor/hosting-models>.
+   <!-- For a Blazor WebAssembly experience, select the **Blazor WebAssembly App** template. Select **Next**. -->
 
-   5\. The **Target Framework** defaults to **.NET Core 3.0**. Select **Next**.
+   5\. **대상 프레임 워크** 는 기본적으로 **.net core 3.0** (또는 3.1 Preview SDK가 설치 된 경우 **.net core 3.1** )로 설정 됩니다. 프레임 워크를 선택 하 고 **다음**을 선택 합니다.
 
-   6\. In the **Project Name** field, enter `WebApplication1`. Select **Create**.
+   6\. **프로젝트 이름** 필드에서 앱 이름을 `WebApplication1`로 합니다. **만들기**를 선택합니다.
 
-   7\. Select **Run** > **Run Without Debugging** to run the app *without the debugger*. Running with the debugger isn't supported at this time.
+   7 \. **디버깅 하지 않고** 실행 > 실행을 선택 하 여 *디버거 없이*앱 **을 실행 합니다** . **디버깅 시작** 을 사용 하 여 앱을 실행 하 고 *디버거를 사용*하 여 앱을 실행 합니다.
 
-   -->
+       If a prompt appears to trust the development certificate, trust the certificate and continue.
 
    # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
@@ -147,7 +147,7 @@ Blazor시작:
 
    3\. 새 프로젝트를 만듭니다.
 
-   4 \. **Blazor 앱**을 선택 합니다. **다음**을 선택합니다.
+   4 \. **Blazor 앱**을 선택 합니다. **새로 만들기**를 선택합니다.
 
    5\. **프로젝트 이름** 필드에 프로젝트 이름을 제공하거나 기본 프로젝트 이름을 수락합니다. **위치** 항목이 올바른지 확인 하거나 프로젝트의 위치를 제공 합니다. **만들기**를 선택합니다.
 
@@ -180,31 +180,31 @@ Blazor시작:
 
    4 \. Visual Studio Code에서 *WebApplication1* 폴더를 엽니다.
 
-   5\. Blazor Server 프로젝트의 경우 IDE는 프로젝트를 빌드 및 디버그 하기 위해 자산을 추가 하도록 요청 합니다. **예**를 선택합니다.
+   5\. Blazor Server 프로젝트의 경우 IDE는 프로젝트를 빌드 및 디버그 하기 위해 자산을 추가 하도록 요청 합니다. **Yes**를 선택합니다.
 
    6\. Blazor Server 앱을 사용 하는 경우 Visual Studio Code 디버거를 사용 하 여 앱을 실행 합니다. Blazor Weasembomapp을 사용 하는 경우 앱의 프로젝트 폴더에서 `dotnet run`를 실행 합니다.
 
    7 \. 브라우저에서 `https://localhost:5001`로 이동합니다.
 
-   <!--
+   # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-   # [Visual Studio for Mac](#tab/visual-studio-mac)
+   1 \. [Mac용 Visual Studio](https://visualstudio.microsoft.com/vs/mac/)를 설치 합니다. [업데이트 채널을 미리 보기로](/visualstudio/mac/install-preview)전환 합니다.
 
-   1\. Install [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/). Switch the [Update channel to Preview](/visualstudio/mac/install-preview).
+   2 \. **파일** > **새 솔루션** 을 선택 하거나 **새 프로젝트**를 만듭니다.
 
-   2\. Select **File** > **New Solution** or **New Project**.
+   3\. 사이드바에서 **.Net Core** > **앱**을 선택 합니다.
 
-   3\. In the sidebar, select **.NET Core** > **App**.
+   4 \. **Blazor Server 앱** 템플릿을 선택 합니다. 현재 Mac용 Visual Studio에서는 Blazor 서버 템플릿만 사용할 수 있습니다. Blazor Weasembomexperience의 경우 **.NET Core CLI** 탭의 지침을 따르세요. Blazor 서버 템플릿을 선택한 후 **다음**을 선택 합니다. 두 Blazor 호스팅 모델에 대 한 자세한 내용은 *Blazor Server* 및 *Blazor* 를 <xref:blazor/hosting-models>참조 하세요.
 
-   4\. For a Blazor Server experience, select the **Blazor Server App** template. For a Blazor WebAssembly experience, select the **Blazor WebAssembly App** template. Select **Next**. For information on the two Blazor hosting models, *Blazor Server* and *Blazor WebAssembly*, see <xref:blazor/hosting-models>.
+   <!-- For a Blazor WebAssembly experience, select the **Blazor WebAssembly App** template. Select **Next**. -->
 
-   5\. The **Target Framework** defaults to **.NET Core 3.0**. Select **Next**.
+   5\. **대상 프레임 워크** 는 기본적으로 **.net core 3.0** (또는 3.1 Preview SDK가 설치 된 경우 **.net core 3.1** )로 설정 됩니다. 프레임 워크를 선택 하 고 **다음**을 선택 합니다.
 
-   6\. In the **Project Name** field, enter `WebApplication1`. Select **Create**.
+   6\. **프로젝트 이름** 필드에서 앱 이름을 `WebApplication1`로 합니다. **만들기**를 선택합니다.
 
-   7\. Select **Run** > **Run Without Debugging** to run the app *without the debugger*. Running with the debugger isn't supported at this time.
+   7 \. **디버깅 하지 않고** 실행 > 실행을 선택 하 여 *디버거 없이*앱 **을 실행 합니다** . **디버깅 시작** 을 사용 하 여 앱을 실행 하 고 *디버거를 사용*하 여 앱을 실행 합니다.
 
-   -->
+       If a prompt appears to trust the development certificate, trust the certificate and continue.
 
    # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
@@ -238,7 +238,7 @@ Blazor시작:
 * 카운터
 * 데이터 페치
 
-카운터 페이지에서 **Click me** 단추를 선택하여 페이지 새로 고침 없이 카운터를 증분합니다. 웹 페이지에서 카운터를 증가 시키려면 JavaScript를 작성 해야 하지만를 사용할 C#수 Blazor.
+Counter 페이지에서 **Click me** 단추를 선택하여 페이지 새로 고침 없이 카운터를 증가시킵니다. 웹 페이지에서 카운터를 증가 시키려면 JavaScript를 작성 해야 하지만를 사용할 C#수 Blazor.
 
 *Pages/Counter.razor*:
 
@@ -266,7 +266,7 @@ HTML 구문을 사용 하 여 구성 요소를 다른 구성 요소에 추가 �
 구성 요소 매개 변수는 자식 구성 요소에 대 한 속성을 설정할 수 있도록 하는 특성 또는 [자식 콘텐츠](xref:blazor/components#child-content)를 사용 하 여 지정 됩니다. `Counter` 구성 요소에 매개 변수를 추가 하려면 구성 요소의 `@code` 블록을 업데이트 합니다.
 
 * `[Parameter]` 특성을 사용 하 여 `IncrementAmount`에 대 한 public 속성을 추가 합니다.
-* `IncrementCount` 값을 늘릴 때 `IncrementAmount`를 사용하도록 `currentCount` 메서드를 변경합니다.
+* `currentCount` 값을 증가시킬 때 `IncrementAmount`를 사용하도록 `IncrementCount` 메서드를 변경합니다.
 
 *Pages/Counter.razor*:
 
@@ -286,4 +286,5 @@ HTML 구문을 사용 하 여 구성 요소를 다른 구성 요소에 추가 �
 
 ## <a name="additional-resources"></a>추가 자료
 
+* <xref:blazor/templates>
 * <xref:signalr/introduction>
