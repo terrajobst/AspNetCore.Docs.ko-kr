@@ -282,6 +282,8 @@
           uid: blazor/hosting-models
         - name: 첫 번째 앱 빌드
           uid: tutorials/first-blazor-app
+        - name: 템플릿
+          uid: blazor/templates
         - name: 구성 요소
           uid: blazor/components
         - name: 양식 및 유효성 검사
@@ -1100,6 +1102,9 @@
       uid: fundamentals/middleware/extensibility-third-party-container
 - name: 마이그레이션
   items:
+    - name: 3.0 - 3.1
+      displayName: 'migrate, migration'
+      uid: migration/30-to-31
     - name: 2.2-3.0
       displayName: 'migrate, migration'
       uid: migration/22-to-30
