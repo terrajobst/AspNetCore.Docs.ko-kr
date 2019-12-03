@@ -5,17 +5,17 @@ description: Blazor 처리 되지 않은 예외를 관리 하는 방법 및 오�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/21/2019
+ms.date: 11/23/2019
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/handle-errors
-ms.openlocfilehash: f2fa59259f1dd36f50e81256bddea265e347554b
-ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
+ms.openlocfilehash: 9784b357c2cdeb7422bbe40a39f881c97f6d716a
+ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/22/2019
-ms.locfileid: "74317160"
+ms.lasthandoff: 12/02/2019
+ms.locfileid: "74680995"
 ---
 # <a name="handle-errors-in-aspnet-core-opno-locblazor-apps"></a>ASP.NET Core Blazor 앱의 오류 처리
 
@@ -89,9 +89,9 @@ Blazor는 발생 하는 대부분의 처리 되지 않은 예외를 심각 하 �
 
 ## <a name="log-errors-with-a-persistent-provider"></a>영구 공급자를 사용 하 여 오류 기록
 
-처리 되지 않은 예외가 발생 하는 경우 예외는 서비스 컨테이너에 구성 된 <xref:Microsoft.Extensions.Logging.ILogger> 인스턴스에 기록 됩니다. 기본적으로 Blazor 앱은 콘솔 로깅 공급자를 사용 하 여 콘솔 출력에 기록 합니다. 로그 크기와 로그 회전을 관리 하는 공급자를 사용 하 여 보다 영구적인 위치에 로깅하는 것이 좋습니다. 자세한 내용은 <xref:fundamentals/logging/index>을 참조하세요.
+처리 되지 않은 예외가 발생 하는 경우 예외는 서비스 컨테이너에 구성 된 <xref:Microsoft.Extensions.Logging.ILogger> 인스턴스에 기록 됩니다. 기본적으로 Blazor 앱은 콘솔 로깅 공급자를 사용 하 여 콘솔 출력에 기록 합니다. 로그 크기와 로그 회전을 관리 하는 공급자를 사용 하 여 보다 영구적인 위치에 로깅하는 것이 좋습니다. 자세한 내용은 <xref:fundamentals/logging/index>를 참조하세요.
 
-개발 하는 동안 Blazor는 일반적으로 디버깅에 도움이 되도록 브라우저 콘솔에 예외의 전체 세부 정보를 보냅니다. 프로덕션에서 브라우저 콘솔의 자세한 오류는 기본적으로 사용 하지 않도록 설정 되어 있습니다. 즉, 오류가 클라이언트로 전송 되지 않지만 예외의 전체 세부 정보는 여전히 서버 쪽에 기록 됩니다. 자세한 내용은 <xref:fundamentals/error-handling>을 참조하세요.
+개발 하는 동안 Blazor는 일반적으로 디버깅에 도움이 되도록 브라우저 콘솔에 예외의 전체 세부 정보를 보냅니다. 프로덕션에서 브라우저 콘솔의 자세한 오류는 기본적으로 사용 하지 않도록 설정 되어 있습니다. 즉, 오류가 클라이언트로 전송 되지 않지만 예외의 전체 세부 정보는 여전히 서버 쪽에 기록 됩니다. 자세한 내용은 <xref:fundamentals/error-handling>를 참조하세요.
 
 로깅할 인시던트 및 로깅 된 인시던트의 심각도 수준을 결정 해야 합니다. 악의적인 사용자가 의도적으로 오류를 트리거할 수 있습니다. 예를 들어 제품 정보를 표시 하는 구성 요소의 URL에서 알 수 없는 `ProductId` 제공 되는 오류에서 인시던트를 기록 하지 않습니다. 일부 오류는 로깅에 대 한 심각도가 높은 인시던트로 처리 되지 않습니다.
 
@@ -122,7 +122,7 @@ Blazor 구성 요소의 인스턴스를 만들 때:
 
 ### <a name="lifecycle-methods"></a>수명 주기 메서드
 
-구성 요소의 수명 동안 Blazor는 수명 주기 메서드를 호출 합니다.
+구성 요소의 수명 동안 Blazor는 [수명 주기 메서드](xref:blazor/lifecycle)를 호출 합니다.
 
 * `OnInitialized` / `OnInitializedAsync`
 * `OnParametersSet` / `OnParametersSetAsync`
@@ -173,7 +173,7 @@ Blazor 구성 요소의 인스턴스를 만들 때:
 
 구성 요소의 `Dispose` 메서드가 처리 되지 않은 예외를 throw 하는 경우 해당 예외는 회로에 치명적입니다. 삭제 논리에서 예외를 throw 할 수 있는 경우 앱은 오류 처리 및 로깅이 [포함 된 try-catch 문을 사용](/dotnet/csharp/language-reference/keywords/try-catch) 하 여 예외를 트래핑 해야 합니다.
 
-구성 요소 삭제에 대 한 자세한 내용은 <xref:blazor/components#component-disposal-with-idisposable>를 참조 하세요.
+구성 요소 삭제에 대 한 자세한 내용은 <xref:blazor/lifecycle#component-disposal-with-idisposable>를 참조 하세요.
 
 ### <a name="javascript-interop"></a>JavaScript interop
 
@@ -192,7 +192,7 @@ Blazor 구성 요소의 인스턴스를 만들 때:
 
 .NET 쪽 또는 메서드 호출의 JavaScript 쪽에서 오류 처리 코드를 사용 하는 옵션이 있습니다.
 
-자세한 내용은 <xref:blazor/javascript-interop>을 참조하세요.
+자세한 내용은 <xref:blazor/javascript-interop>를 참조하세요.
 
 ### <a name="circuit-handlers"></a>회로 처리기
 
@@ -277,7 +277,7 @@ Blazor 구성 요소는 `Html.RenderComponentAsync`를 사용 하 여 미리 렌
 
 ### <a name="custom-render-tree-logic"></a>사용자 지정 렌더링 트리 논리
 
-대부분의 Blazor 구성 요소는 *razor* 파일로 구현 되며, 출력을 렌더링 하기 위해 `RenderTreeBuilder` 작동 하는 논리를 생성 하도록 컴파일됩니다. 개발자는 절차적 C# 코드를 사용 하 여 `RenderTreeBuilder` 논리를 수동으로 구현할 수 있습니다. 자세한 내용은 <xref:blazor/components#manual-rendertreebuilder-logic>을 참조하세요.
+대부분의 Blazor 구성 요소는 *razor* 파일로 구현 되며, 출력을 렌더링 하기 위해 `RenderTreeBuilder` 작동 하는 논리를 생성 하도록 컴파일됩니다. 개발자는 절차적 C# 코드를 사용 하 여 `RenderTreeBuilder` 논리를 수동으로 구현할 수 있습니다. 자세한 내용은 <xref:blazor/components#manual-rendertreebuilder-logic>를 참조하세요.
 
 > [!WARNING]
 > 수동 렌더링 트리 작성기 논리를 사용 하는 것은 일반적인 구성 요소 개발에는 권장 되지 않는 고급 및 안전 하지 않은 시나리오로 간주 됩니다.

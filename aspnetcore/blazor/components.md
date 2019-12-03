@@ -9,12 +9,12 @@ ms.date: 11/23/2019
 no-loc:
 - Blazor
 uid: blazor/components
-ms.openlocfilehash: 89c92fbd5a3939cd2b4a34c39163767bcdf73bb8
-ms.sourcegitcommit: 918d7000b48a2892750264b852bad9e96a1165a7
+ms.openlocfilehash: 764e5e7db995b2dcadccf6d93c826ccf32c9ba04
+ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/27/2019
-ms.locfileid: "74550314"
+ms.lasthandoff: 12/02/2019
+ms.locfileid: "74681008"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -522,7 +522,7 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 }
 ```
 
-이벤트 처리기는 비동기 일 수도 있고 <xref:System.Threading.Tasks.Task>반환 될 수도 있습니다. `StateHasChanged()`를 수동으로 호출할 필요가 없습니다. 예외가 발생 하면 기록 됩니다.
+이벤트 처리기는 비동기 일 수도 있고 <xref:System.Threading.Tasks.Task>반환 될 수도 있습니다. [Statehaschanged](xref:blazor/lifecycle#state-changes)를 수동으로 호출할 필요가 없습니다. 예외가 발생 하면 기록 됩니다.
 
 다음 예제에서는 단추를 선택 하면 `UpdateHeading`를 비동기적으로 호출 합니다.
 
@@ -614,7 +614,7 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 `ChildComponent`에서 단추가 선택 된 경우:
 
 * `ParentComponent`의 `ShowMessage` 메서드가 호출 됩니다. `messageText` 업데이트 되 고 `ParentComponent`에 표시 됩니다.
-* `StateHasChanged` 호출은 콜백의 메서드 (`ShowMessage`)에서 필요 하지 않습니다. 자식 이벤트가 자식 내에서 실행 되는 이벤트 처리기의 rerendering 구성 요소를 트리거하는 것 처럼 `StateHasChanged`는 자동으로 호출 되어 `ParentComponent`을 rerender 합니다.
+* [Statehaschanged](xref:blazor/lifecycle#state-changes) 호출은 콜백의 메서드 (`ShowMessage`)에서 필요 하지 않습니다. 자식 이벤트가 자식 내에서 실행 되는 이벤트 처리기의 rerendering 구성 요소를 트리거하는 것 처럼 `StateHasChanged`는 자동으로 호출 되어 `ParentComponent`을 rerender 합니다.
 
 `EventCallback` 및 `EventCallback<T>`는 비동기 대리자를 허용 합니다. `EventCallback<T>`은 강력한 형식이 며 특정 인수 형식이 필요 합니다. `EventCallback` 약하게 형식화 되며 모든 인수 유형을 허용 합니다.
 
@@ -854,7 +854,7 @@ Password:
 구성 요소가 렌더링 되 면 `loginDialog` 필드가 `MyLoginDialog` 자식 구성 요소 인스턴스로 채워집니다. 그런 다음 구성 요소 인스턴스에서 .NET 메서드를 호출할 수 있습니다.
 
 > [!IMPORTANT]
-> `loginDialog` 변수는 구성 요소가 렌더링 된 후에만 채워지고 출력에는 `MyLoginDialog` 요소가 포함 됩니다. 이 시점까지 참조할 항목이 없습니다. 구성 요소에서 렌더링을 완료 한 후에 구성 요소 참조를 조작 하려면 [OnAfterRenderAsync 또는 OnAfterRender 메서드](#lifecycle-methods)를 사용 합니다.
+> `loginDialog` 변수는 구성 요소가 렌더링 된 후에만 채워지고 출력에는 `MyLoginDialog` 요소가 포함 됩니다. 이 시점까지 참조할 항목이 없습니다. 구성 요소에서 렌더링을 완료 한 후에 구성 요소 참조를 조작 하려면 [OnAfterRenderAsync 또는 OnAfterRender 메서드](xref:blazor/lifecycle#after-component-render)를 사용 합니다.
 
 구성 요소 참조를 캡처하는 것은 [요소 참조를 캡처하](xref:blazor/javascript-interop#capture-references-to-elements)는 데 유사한 구문을 사용 하지만 [JavaScript interop](xref:blazor/javascript-interop) 기능은 아닙니다. 구성 요소 참조는 JavaScript 코드에 전달 되지&mdash;.NET 코드 에서만 사용 됩니다.
 
@@ -863,7 +863,7 @@ Password:
 
 ## <a name="invoke-component-methods-externally-to-update-state"></a>외부에서 구성 요소 메서드를 호출 하 여 상태 업데이트
 
-Blazor는 `SynchronizationContext`를 사용 하 여 단일 논리적 실행 스레드를 적용 합니다. 구성 요소의 수명 주기 메서드 및 Blazor에 의해 발생 하는 모든 이벤트 콜백이이 `SynchronizationContext`실행 됩니다. 외부 이벤트 (예: 타이머 또는 다른 알림)를 기반으로 구성 요소를 업데이트 해야 하는 경우 Blazor의 `SynchronizationContext`에 디스패치할 `InvokeAsync` 메서드를 사용 합니다.
+Blazor는 `SynchronizationContext`를 사용 하 여 단일 논리적 실행 스레드를 적용 합니다. 구성 요소의 [수명 주기 메서드](xref:blazor/lifecycle) 및 Blazor에 의해 발생 하는 모든 이벤트 콜백이이 `SynchronizationContext`실행 됩니다. 외부 이벤트 (예: 타이머 또는 다른 알림)를 기반으로 구성 요소를 업데이트 해야 하는 경우 Blazor의 `SynchronizationContext`에 디스패치할 `InvokeAsync` 메서드를 사용 합니다.
 
 예를 들어 업데이트 된 상태의 수신 구성 요소를 알릴 수 있는 알림 *서비스* 를 살펴보겠습니다.
 
@@ -991,139 +991,6 @@ public class NotifierService
 * 고유 식별자 (예: `int`, `string`, `Guid`)의 기본 키 값입니다.
 
 `@key`에 사용 되는 값이 충돌 하지 않는지 확인 합니다. 동일한 부모 요소 내에서 충돌 방지 값이 검색 되는 경우 기존 요소나 구성 요소를 새 요소나 구성 요소에 명확 하 게 매핑할 수 없기 때문에 Blazor 예외를 throw 합니다. 개체 인스턴스 또는 기본 키 값과 같은 고유 값만 사용 합니다.
-
-## <a name="lifecycle-methods"></a>수명 주기 메서드
-
-`OnInitializedAsync` 하 고 `OnInitialized` 코드를 실행 하 여 구성 요소를 초기화 합니다. 비동기 작업을 수행 하려면 작업에서 `OnInitializedAsync` 및 `await` 키워드를 사용 합니다.
-
-```csharp
-protected override async Task OnInitializedAsync()
-{
-    await ...
-}
-```
-
-> [!NOTE]
-> 구성 요소 초기화 중 비동기 작업은 `OnInitializedAsync` 수명 주기 이벤트 중에 발생 해야 합니다.
-
-동기 작업의 경우 `OnInitialized`를 사용 합니다.
-
-```csharp
-protected override void OnInitialized()
-{
-    ...
-}
-```
-
-`OnParametersSetAsync` 및 `OnParametersSet`는 구성 요소가 부모 로부터 매개 변수를 수신 하 고 값이 속성에 할당 될 때 호출 됩니다. 이러한 메서드는 구성 요소 초기화 후와 부모 구성 요소가 렌더링 될 때마다 실행 됩니다.
-
-```csharp
-protected override async Task OnParametersSetAsync()
-{
-    await ...
-}
-```
-
-> [!NOTE]
-> 매개 변수 및 속성 값을 적용할 때 비동기 작업은 `OnParametersSetAsync` 수명 주기 이벤트 중에 발생 해야 합니다.
-
-```csharp
-protected override void OnParametersSet()
-{
-    ...
-}
-```
-
-`OnAfterRenderAsync` 및 `OnAfterRender`는 구성 요소가 렌더링을 완료 한 후에 호출 됩니다. 요소 및 구성 요소 참조가이 시점에 채워집니다. 렌더링 된 DOM 요소에 대해 작동 하는 타사 JavaScript 라이브러리 활성화와 같이 렌더링 된 콘텐츠를 사용 하 여 추가 초기화 단계를 수행 하려면이 단계를 사용 합니다.
-
-*서버에서 사전 렌더링을 할 때 `OnAfterRender`가 호출 되지 않습니다.*
-
-`OnAfterRenderAsync` 및 `OnAfterRender`에 대 한 `firstRender` 매개 변수는 다음과 같습니다.
-
-* 구성 요소 인스턴스를 처음 호출할 때 `true`로 설정 합니다.
-* 초기화 작업이 한 번만 수행 되도록 합니다.
-
-```csharp
-protected override async Task OnAfterRenderAsync(bool firstRender)
-{
-    if (firstRender)
-    {
-        await ...
-    }
-}
-```
-
-> [!NOTE]
-> 렌더링 직후 비동기 작업은 `OnAfterRenderAsync` 수명 주기 이벤트 중에 발생 해야 합니다.
-
-```csharp
-protected override void OnAfterRender(bool firstRender)
-{
-    if (firstRender)
-    {
-        ...
-    }
-}
-```
-
-### <a name="handle-incomplete-async-actions-at-render"></a>렌더링 시 불완전 한 비동기 작업 처리
-
-수명 주기 이벤트에서 수행 되는 비동기 작업은 구성 요소를 렌더링 하기 전에 완료 되지 않았을 수 있습니다. 수명 주기 메서드를 실행 하는 동안 개체가 데이터와 `null` 되거나 불완전 하 게 채워질 수 있습니다. 개체가 초기화 되었는지 확인 하는 렌더링 논리를 제공 합니다. 개체를 `null`하는 동안 자리 표시자 UI 요소 (예: 로드 메시지)를 렌더링 합니다.
-
-Blazor 템플릿의 `FetchData` 구성 요소에서 `OnInitializedAsync`은 비동기적 receive 예측 데이터 (`forecasts`)로 재정의 됩니다. `forecasts` `null`되 면 로드 메시지가 사용자에 게 표시 됩니다. `OnInitializedAsync`에서 반환 된 `Task` 완료 되 면 구성 요소는 업데이트 된 상태를 사용 하 여 수행 됩니다.
-
-*Pages/FetchData.razor*:
-
-[!code-cshtml[](components/samples_snapshot/3.x/FetchData.razor?highlight=9)]
-
-### <a name="execute-code-before-parameters-are-set"></a>매개 변수를 설정 하기 전에 코드를 실행 합니다.
-
-매개 변수를 설정 하기 전에 코드를 실행 하도록 `SetParameters`를 재정의할 수 있습니다.
-
-```csharp
-public override void SetParameters(ParameterView parameters)
-{
-    ...
-
-    base.SetParameters(parameters);
-}
-```
-
-`base.SetParameters`를 호출 하지 않으면 사용자 지정 코드는 필요한 방식으로 들어오는 매개 변수 값을 해석할 수 있습니다. 예를 들어 클래스의 속성에는 들어오는 매개 변수를 할당할 필요가 없습니다.
-
-### <a name="suppress-refreshing-of-the-ui"></a>UI 새로 고침 안 함
-
-UI를 새로 고치지 않도록 `ShouldRender`을 재정의할 수 있습니다. 구현에서 `true`반환 하는 경우 UI가 새로 고쳐집니다. `ShouldRender`를 재정의 하더라도 구성 요소가 항상 처음에 렌더링 됩니다.
-
-```csharp
-protected override bool ShouldRender()
-{
-    var renderUI = true;
-
-    return renderUI;
-}
-```
-
-## <a name="component-disposal-with-idisposable"></a>IDisposable을 사용한 구성 요소 삭제
-
-구성 요소가 <xref:System.IDisposable>를 구현 하는 경우 UI에서 구성 요소가 제거 되 면 [Dispose 메서드가](/dotnet/standard/garbage-collection/implementing-dispose) 호출 됩니다. 다음 구성 요소는 `@implements IDisposable` 및 `Dispose` 메서드를 사용 합니다.
-
-```csharp
-@using System
-@implements IDisposable
-
-...
-
-@code {
-    public void Dispose()
-    {
-        ...
-    }
-}
-```
-
-> [!NOTE]
-> `Dispose`에서 `StateHasChanged`를 호출 하는 것은 지원 되지 않습니다. `StateHasChanged`은 해체 중인 렌더러의 일부로 호출 될 수 있습니다. 해당 지점에서 UI 업데이트 요청은 지원 되지 않습니다.
 
 ## <a name="routing"></a>라우팅
 

@@ -5,16 +5,16 @@ description: Blazor Server 앱에서 상태를 유지 하는 방법에 대해 �
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/15/2019
+ms.date: 11/23/2019
 no-loc:
 - Blazor
 uid: blazor/state-management
-ms.openlocfilehash: 38ee5fccdf476f08c9f39d01b53c81b48eea04bf
-ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
+ms.openlocfilehash: facd6c2747bb0b31404c3c4fce25b76cd141932e
+ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/22/2019
-ms.locfileid: "74317180"
+ms.lasthandoff: 12/02/2019
+ms.locfileid: "74680982"
 ---
 # <a name="aspnet-core-opno-locblazor-state-management"></a>ASP.NET Core Blazor 상태 관리
 
@@ -74,7 +74,7 @@ Blazor Server 앱에서 상태를 유지 하기 위한 세 가지 공통 위치�
 
 ### <a name="server-side-in-a-database"></a>데이터베이스의 서버 쪽
 
-영구 데이터 지 속성 또는 여러 사용자 또는 장치에 걸쳐 있어야 하는 모든 데이터의 경우에는 독립 된 서버 쪽 데이터베이스를 선택 하는 것이 가장 좋습니다. 다음 옵션을 사용할 수 있습니다.
+영구 데이터 지 속성 또는 여러 사용자 또는 장치에 걸쳐 있어야 하는 모든 데이터의 경우에는 독립 된 서버 쪽 데이터베이스를 선택 하는 것이 가장 좋습니다. 사용 가능한 옵션은 다음과 같습니다.
 
 * 관계형 SQL 데이터베이스
 * 키-값 저장소
@@ -194,7 +194,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-구성 요소의 매개 변수에 탐색 상태가 포함 된 경우 `ProtectedSessionStore.GetAsync`를 호출 하 고 `OnInitializedAsync`아닌 `OnParametersSetAsync`에 결과를 할당 합니다. `OnInitializedAsync`는 구성 요소가 처음 인스턴스화될 때 한 번만 호출 됩니다. 사용자가 동일한 페이지에 남아 있는 동안 다른 URL로 이동 하는 경우 나중에 `OnInitializedAsync`을 다시 호출 하지 않습니다.
+구성 요소의 매개 변수에 탐색 상태가 포함 된 경우 `ProtectedSessionStore.GetAsync`를 호출 하 고 `OnInitializedAsync`아닌 `OnParametersSetAsync`에 결과를 할당 합니다. `OnInitializedAsync`는 구성 요소가 처음 인스턴스화될 때 한 번만 호출 됩니다. 사용자가 동일한 페이지에 남아 있는 동안 다른 URL로 이동 하는 경우 나중에 `OnInitializedAsync`을 다시 호출 하지 않습니다. 자세한 내용은 <xref:blazor/lifecycle>를 참조하세요.
 
 > [!WARNING]
 > 이 섹션의 예제는 서버에서 렌더링을 사용 하도록 설정 하지 않은 경우에만 작동 합니다. 렌더링을 사용 하는 경우 다음과 유사한 오류가 생성 됩니다.

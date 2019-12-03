@@ -5,16 +5,16 @@ description: CORS (크로스-원본 자원 공유) 요청 만들기를 포함 �
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/15/2019
+ms.date: 11/23/2019
 no-loc:
 - Blazor
 uid: blazor/call-web-api
-ms.openlocfilehash: b5c57317005d0072410542bad322458b1cb3f5ee
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: ffc9904c5746fbf0fafa10cf054666608942650c
+ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73962721"
+ms.lasthandoff: 12/02/2019
+ms.locfileid: "74680904"
 ---
 # <a name="call-a-web-api-from-aspnet-core-opno-locblazor"></a>ASP.NET Core Blazor에서 web API를 호출 합니다.
 
@@ -35,7 +35,7 @@ Blazor Weasemboma 예제는 샘플 앱에서 다음 구성 요소를 참조 하�
 
 ## <a name="httpclient-and-json-helpers"></a>HttpClient 및 JSON 도우미
 
-Blazor Weasembomapps에서 [Httpclient](xref:fundamentals/http-requests) 는 다시 원본 서버로 요청을 만들기 위해 미리 구성 된 서비스로 사용할 수 있습니다. `HttpClient` JSON 도우미를 사용 하려면 `Microsoft.AspNetCore.Blazor.HttpClient`에 대 한 패키지 참조를 추가 합니다. `HttpClient` 및 JSON 도우미는 타사 웹 API 끝점을 호출 하는 데에도 사용 됩니다. `HttpClient`은 브라우저 [인출 API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 를 사용 하 여 구현 되며 동일한 원본 정책의 적용을 포함 하 여 해당 제한 사항이 적용 됩니다.
+Blazor Weasembomapps에서 [Httpclient](xref:fundamentals/http-requests) 는 다시 원본 서버로 요청을 만들기 위해 미리 구성 된 서비스로 사용할 수 있습니다. `HttpClient` JSON 도우미를 사용 하려면 `Microsoft.AspNetCore.Blazor.HttpClient`에 대 한 패키지 참조를 추가 합니다. 타사 웹 API 끝점을 호출 하는 데에도 `HttpClient` 및 JSON 도우미가 사용 됩니다. `HttpClient`는 브라우저 [인출 API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 를 사용 하 여 구현 되며 동일한 원본 정책의 적용을 포함 하 여 해당 제한 사항이 적용 됩니다.
 
 클라이언트의 기본 주소가 원래 서버의 주소로 설정 됩니다. `@inject` 지시어를 사용 하 여 `HttpClient` 인스턴스를 삽입 합니다.
 
@@ -47,8 +47,8 @@ Blazor Weasembomapps에서 [Httpclient](xref:fundamentals/http-requests) 는 다
 다음 예에서 Todo 웹 API는 만들기, 읽기, 업데이트 및 삭제 (CRUD) 작업을 처리 합니다. 예제는를 저장 하는 `TodoItem` 클래스를 기반으로 합니다.
 
 * ID (`Id`, `long`) &ndash; 항목의 고유 ID입니다.
-* 이름 (`Name`, `string`) &ndash; 항목 이름입니다.
-* Status (`IsComplete`, `bool`) &ndash; 표시는 Todo 항목이 완료 되었는지 여부를 나타냅니다.
+* 항목의 이름 (`Name`, `string`) &ndash; 이름입니다.
+* 상태 (`IsComplete`, `bool`&ndash;)는 Todo 항목이 완료 되었는지 여부를 나타냅니다.
 
 ```csharp
 private class TodoItem
@@ -61,9 +61,9 @@ private class TodoItem
 
 JSON 도우미 메서드는 URI (다음 예제의 웹 API)에 요청을 보내고 응답을 처리 합니다.
 
-* `GetJsonAsync` &ndash;은 HTTP GET 요청을 보내고 JSON 응답 본문을 구문 분석 하 여 개체를 만듭니다.
+* `GetJsonAsync` &ndash;는 HTTP GET 요청을 보내고 JSON 응답 본문을 구문 분석 하 여 개체를 만듭니다.
 
-  다음 코드에서 `_todoItems`는 구성 요소에 의해 표시 됩니다. `GetTodoItems` 메서드는 구성 요소의 렌더링 ([Oninitializedasync](xref:blazor/components#lifecycle-methods))이 완료 될 때 트리거됩니다. 전체 예제는 샘플 앱을 참조 하세요.
+  다음 코드에서 `_todoItems`는 구성 요소에 의해 표시 됩니다. `GetTodoItems` 메서드는 구성 요소의 렌더링 ([Oninitializedasync](xref:blazor/lifecycle#component-initialization-methods))이 완료 될 때 트리거됩니다. 전체 예제는 샘플 앱을 참조 하세요.
 
   ```cshtml
   @using System.Net.Http
@@ -77,7 +77,7 @@ JSON 도우미 메서드는 URI (다음 예제의 웹 API)에 요청을 보내�
   }
   ```
 
-* `PostJsonAsync` &ndash;은 JSON으로 인코딩된 콘텐츠를 포함 하 여 HTTP POST 요청을 보내고 JSON 응답 본문을 구문 분석 하 여 개체를 만듭니다.
+* `PostJsonAsync` &ndash;는 JSON으로 인코딩된 콘텐츠를 포함 하 여 HTTP POST 요청을 보내고 JSON 응답 본문을 구문 분석 하 여 개체를 만듭니다.
 
   다음 코드에서 `_newItemName`는 구성 요소의 바인딩된 요소에 의해 제공 됩니다. `AddItem` 메서드는 `<button>` 요소를 선택 하 여 트리거됩니다. 전체 예제는 샘플 앱을 참조 하세요.
 
@@ -99,9 +99,9 @@ JSON 도우미 메서드는 URI (다음 예제의 웹 API)에 요청을 보내�
   }
   ```
 
-* `PutJsonAsync` &ndash;은 JSON으로 인코딩된 콘텐츠를 포함 하 여 HTTP PUT 요청을 보냅니다.
+* `PutJsonAsync` &ndash;는 JSON으로 인코딩된 콘텐츠를 포함 하 여 HTTP PUT 요청을 보냅니다.
 
-  다음 코드에서 `Name` 및 `IsCompleted`에 대 한 `_editItem` 값은 구성 요소의 바인딩된 요소에 의해 제공 됩니다. 항목의 `Id`은 UI의 다른 부분에서 항목을 선택 하 고 `EditItem`을 호출할 때 설정 됩니다. `SaveItem` 메서드는 Save `<button>` 요소를 선택 하 여 트리거됩니다. 전체 예제는 샘플 앱을 참조 하세요.
+  다음 코드에서 `Name` 및 `IsCompleted`에 대 한 `_editItem` 값은 구성 요소의 바인딩된 요소에 의해 제공 됩니다. 항목의 `Id`은 UI의 다른 부분에서 항목을 선택 하 고 `EditItem`를 호출할 때 설정 됩니다. `SaveItem` 메서드는 Save `<button>` 요소를 선택 하 여 트리거됩니다. 전체 예제는 샘플 앱을 참조 하세요.
 
   ```cshtml
   @using System.Net.Http
@@ -128,7 +128,7 @@ JSON 도우미 메서드는 URI (다음 예제의 웹 API)에 요청을 보내�
 
 <xref:System.Net.Http>에는 HTTP 요청을 보내고 HTTP 응답을 받기 위한 추가 확장 메서드가 포함 되어 있습니다. [DeleteAsync](xref:System.Net.Http.HttpClient.DeleteAsync*) 는 HTTP DELETE 요청을 web API로 보내는 데 사용 됩니다.
 
-다음 코드에서 Delete `<button>` 요소는 `DeleteItem` 메서드를 호출 합니다. 바인딩된 `<input>` 요소는 삭제할 항목의 `id`을 제공 합니다. 전체 예제는 샘플 앱을 참조 하세요.
+다음 코드에서 Delete `<button>` 요소는 `DeleteItem` 메서드를 호출 합니다. 바인딩된 `<input>` 요소는 삭제할 항목의 `id`를 제공 합니다. 전체 예제는 샘플 앱을 참조 하세요.
 
 ```cshtml
 @using System.Net.Http
@@ -151,7 +151,7 @@ JSON 도우미 메서드는 URI (다음 예제의 웹 API)에 요청을 보내�
 
 샘플 앱에서는 Web API 호출 구성 요소 (*Pages/CallWebAPI*)에서 CORS를 사용 하는 방법을 보여 줍니다.
 
-다른 사이트에서 CORS (크로스-원본 자원 공유) 요청을 앱에 만들도록 허용 하려면 <xref:security/cors>을 참조 하세요.
+다른 사이트에서 CORS (크로스-원본 자원 공유) 요청을 앱에 만들도록 허용 하려면 <xref:security/cors>를 참조 하세요.
 
 ## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>Fetch API 요청 옵션이 포함 된 HttpClient 및 HttpRequestMessage
 
@@ -159,9 +159,9 @@ Weasembmbomapp에서 Blazor 하 여 실행 하는 경우 [Httpclient](xref:funda
 
 요청에 대 한 `WebAssemblyHttpMessageHandler.FetchArgs` 속성을 사용 하 여 기본 JavaScript [FETCH API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 에 요청 옵션을 제공 합니다. 다음 예제와 같이 `credentials` 속성은 다음 값 중 하나로 설정 됩니다.
 
-* `FetchCredentialsOption.Include` ("include") &ndash;은 크로스-원본 요청에 대해서도 브라우저에서 쿠키 또는 HTTP 인증 헤더와 같은 자격 증명을 보내도록 합니다. CORS 정책이 자격 증명을 허용 하도록 구성 된 경우에만 허용 됩니다.
-* `FetchCredentialsOption.Omit` ("생략") &ndash;은 브라우저가 자격 증명 (예: 쿠키 또는 HTTP 인증 헤더)을 보내지 않도록 합니다.
-* `FetchCredentialsOption.SameOrigin` ("동일 원본") &ndash;은 대상 URL이 호출 하는 응용 프로그램과 동일한 원본에 있는 경우에만 쿠키 또는 HTTP 인증 헤더와 같은 자격 증명을 보내도록 브라우저에 조언 합니다.
+* `FetchCredentialsOption.Include` ("include") &ndash;는 크로스-원본 요청에 대해서도 브라우저에서 쿠키 또는 HTTP 인증 헤더와 같은 자격 증명을 보내도록 권장 합니다. CORS 정책이 자격 증명을 허용 하도록 구성 된 경우에만 허용 됩니다.
+* `FetchCredentialsOption.Omit` ("생략") &ndash; 브라우저에서 자격 증명 (예: 쿠키 또는 HTTP 인증 헤더)을 보내지 않도록 조언 합니다.
+* `FetchCredentialsOption.SameOrigin` ("동일 원본") &ndash; 대상 URL이 호출 하는 응용 프로그램과 동일한 원본에 있는 경우에만 브라우저에서 쿠키 또는 HTTP 인증 헤더와 같은 자격 증명을 보내도록 권장 합니다.
 
 ```cshtml
 @using System.Net.Http
@@ -204,14 +204,14 @@ Weasembmbomapp에서 Blazor 하 여 실행 하는 경우 [Httpclient](xref:funda
 
 Fetch API 옵션에 대 한 자세한 내용은 [MDN 웹 문서: WindowOrWorkerGlobalScope ():P arameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)를 참조 하세요.
 
-CORS 요청에서 자격 증명 (권한 부여 쿠키/헤더)을 보낼 때 `Authorization` 헤더가 CORS 정책에서 허용 되어야 합니다.
+CORS 요청에 대 한 자격 증명 (권한 부여 쿠키/헤더)을 보낼 때 CORS 정책에서 `Authorization` 헤더를 허용 해야 합니다.
 
 다음 정책에는에 대 한 구성이 포함 되어 있습니다.
 
 * 요청 원본 (`http://localhost:5000`, `https://localhost:5001`).
 * 모든 메서드 (verb).
-* `Content-Type` 및 `Authorization` 머리글입니다. 사용자 지정 헤더 (예: `x-custom-header`)를 허용 하려면 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>를 호출할 때 헤더를 나열 합니다.
-* 클라이언트 쪽 JavaScript 코드에 의해 설정 된 자격 증명입니다 (`credentials` 속성이 `include`로 설정).
+* `Content-Type` 및 `Authorization` 헤더. 사용자 지정 헤더 (예: `x-custom-header`)를 허용 하려면 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>를 호출할 때 헤더를 나열 합니다.
+* 클라이언트 쪽 JavaScript 코드에 의해 설정 된 자격 증명 (`credentials` 속성이 `include`로 설정).
 
 ```csharp
 app.UseCors(policy => 
@@ -221,7 +221,7 @@ app.UseCors(policy =>
     .AllowCredentials());
 ```
 
-자세한 내용은 <xref:security/cors> 및 샘플 응용 프로그램의 HTTP 요청 테스터 구성 요소 (*Components/HTTPRequestTester. razor*)를 참조 하세요.
+자세한 내용은 <xref:security/cors> 및 샘플 앱의 HTTP 요청 테스터 구성 요소 (*Components/HTTPRequestTester*)를 참조 하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 
