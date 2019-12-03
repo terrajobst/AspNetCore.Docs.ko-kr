@@ -5,16 +5,16 @@ description: ASP.NET Core SignalR 라이브러리에서 실시간 기능을 앱�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 11/12/2019
+ms.date: 11/27/2019
 no-loc:
 - SignalR
 uid: signalr/introduction
-ms.openlocfilehash: 7108d9f223db78937dd1203a1cb4b890006b20ec
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: e84dd0d086cbfc80a80bc10baa33979da9b5d137
+ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963948"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74717236"
 ---
 # <a name="introduction-to-aspnet-core-opno-locsignalr"></a>ASP.NET Core SignalR 소개
 
@@ -42,7 +42,7 @@ ASP.NET Core에 대 한 SignalR 몇 가지 기능은 다음과 같습니다.
 
 ## <a name="transports"></a>전송
 
-SignalR는 실시간 통신을 처리 하는 몇 가지 방법을 지원 합니다.
+SignalR는 실시간 통신을 처리 하는 다음과 같은 기술을 지원 합니다 (정상적인 대체 순서 대로).
 
 * [WebSockets](https://tools.ietf.org/html/rfc7118)
 * 서버에서 보낸 이벤트
