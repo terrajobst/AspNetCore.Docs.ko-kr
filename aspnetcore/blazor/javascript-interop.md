@@ -5,16 +5,16 @@ description: Blazor apps에서 JavaScript의 .NET 및 .NET 메서드에서 JavaS
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/23/2019
+ms.date: 12/02/2019
 no-loc:
 - Blazor
 uid: blazor/javascript-interop
-ms.openlocfilehash: 79555ca6c987e2ca57e0cfab9779024498fdd58b
-ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
+ms.openlocfilehash: 108fdac8667f407adba3470de4eb8e35883cefbf
+ms.sourcegitcommit: 169ea5116de729c803685725d96450a270bc55b7
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/02/2019
-ms.locfileid: "74681029"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74733832"
 ---
 # <a name="aspnet-core-opno-locblazor-javascript-interop"></a>JavaScript interop Blazor ASP.NET Core
 
@@ -30,7 +30,7 @@ Blazor 앱은 JavaScript 코드에서 .NET 및 .NET 메서드의 JavaScript 함�
 
 .NET 코드에서 JavaScript 함수를 호출 해야 하는 경우가 있습니다. 예를 들어 JavaScript 호출은 JavaScript 라이브러리의 브라우저 기능 또는 기능을 앱에 노출할 수 있습니다. 이 시나리오를 *JavaScript 상호 운용성* (*JS interop*) 이라고 합니다.
 
-.NET에서 JavaScript를 호출 하려면 `IJSRuntime` 추상화를 사용 합니다. `InvokeAsync<T>` 메서드는 원하는 수의 JSON serialize 가능 인수와 함께 호출 하려는 JavaScript 함수에 대 한 식별자를 사용 합니다. 함수 식별자는 전역 범위 (`window`)를 기준으로 합니다. `window.someScope.someFunction`를 호출 하려는 경우에는 식별자가 `someScope.someFunction`됩니다. 호출 되기 전에 함수를 등록할 필요가 없습니다. 반환 형식 `T` JSON serializable 이어야 합니다.
+.NET에서 JavaScript를 호출 하려면 `IJSRuntime` 추상화를 사용 합니다. `InvokeAsync<T>` 메서드는 원하는 수의 JSON serialize 가능 인수와 함께 호출 하려는 JavaScript 함수에 대 한 식별자를 사용 합니다. 함수 식별자는 전역 범위 (`window`)를 기준으로 합니다. `window.someScope.someFunction`를 호출 하려는 경우에는 식별자가 `someScope.someFunction`됩니다. 호출 되기 전에 함수를 등록할 필요가 없습니다. 반환 형식 `T` JSON serializable 이어야 합니다. `T`는 반환 되는 JSON 형식에 가장 잘 매핑되는 .NET 형식과 일치 해야 합니다.
 
 Blazor Server 앱의 경우:
 
@@ -180,26 +180,41 @@ window.exampleJsFunctions = {
 }
 ```
 
-`IJSRuntime.InvokeAsync<T>`를 사용 하 고 `ElementReference`와 `exampleJsFunctions.focusElement`를 호출 하 여 요소에 포커스를 둡니다.
+값을 반환 하지 않는 JavaScript 함수를 호출 하려면 `IJSRuntime.InvokeVoidAsync`을 사용 합니다. 다음 코드는 캡처된 `ElementReference`로 이전 JavaScript 함수를 호출 하 여 사용자 이름 입력에 포커스를 설정 합니다.
 
 [!code-cshtml[](javascript-interop/samples_snapshot/component1.razor?highlight=1,3,11-12)]
 
-확장 메서드를 사용 하 여 요소에 초점을 맞추기 위해 `IJSRuntime` 인스턴스를 수신 하는 정적 확장 메서드를 만듭니다.
+확장 메서드를 사용 하려면 `IJSRuntime` 인스턴스를 수신 하는 정적 확장 메서드를 만듭니다.
 
 ```csharp
-public static Task Focus(this ElementReference elementRef, IJSRuntime jsRuntime)
+public static async Task Focus(this ElementReference elementRef, IJSRuntime jsRuntime)
 {
-    return jsRuntime.InvokeAsync<object>(
+    await jsRuntime.InvokeVoidAsync(
         "exampleJsFunctions.focusElement", elementRef);
 }
 ```
 
-메서드는 개체에서 직접 호출 됩니다. 다음 예에서는 `JsInteropClasses` 네임 스페이스에서 정적 `Focus` 메서드를 사용할 수 있다고 가정 합니다.
+`Focus` 메서드는 개체에서 직접 호출 됩니다. 다음 예에서는 `Focus` 메서드를 `JsInteropClasses` 네임 스페이스에서 사용할 수 있다고 가정 합니다.
 
-[!code-cshtml[](javascript-interop/samples_snapshot/component2.razor?highlight=1,4,12)]
+[!code-cshtml[](javascript-interop/samples_snapshot/component2.razor?highlight=1-4,12)]
 
 > [!IMPORTANT]
 > `username` 변수는 구성 요소가 렌더링 된 후에만 채워집니다. JavaScript 코드에 채워지지 않은 `ElementReference` 전달 되 면 JavaScript 코드는 `null`값을 받습니다. 구성 요소에서 요소에 대 한 초기 포커스를 설정 하기 위해 렌더링을 완료 한 후 요소 참조를 조작 하려면 [OnAfterRenderAsync 또는 OnAfterRender 구성 요소 수명 주기 메서드](xref:blazor/lifecycle#after-component-render)를 사용 합니다.
+
+제네릭 형식으로 작업 하 고 값을 반환 하는 경우 [\<t >](xref:System.Threading.Tasks.ValueTask`1)를 사용 합니다.
+
+```csharp
+public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef, 
+    IJSRuntime jsRuntime)
+{
+    return jsRuntime.InvokeAsync<T>(
+        "exampleJsFunctions.doSomethingGeneric", elementRef);
+}
+```
+
+`GenericMethod`는 형식을 사용 하 여 개체에서 직접 호출 됩니다. 다음 예에서는 `GenericMethod` `JsInteropClasses` 네임 스페이스에서 사용할 수 있다고 가정 합니다.
+
+[!code-cshtml[](javascript-interop/samples_snapshot/component3.razor?highlight=17)]
 
 ## <a name="invoke-net-methods-from-javascript-functions"></a>JavaScript 함수에서 .NET 메서드 호출
 
@@ -296,3 +311,7 @@ JS interop는 네트워킹 오류로 인해 실패할 수 있으며 신뢰할 �
   ```
 
 리소스 소모에 대 한 자세한 내용은 <xref:security/blazor/server>를 참조 하세요.
+
+## <a name="additional-resources"></a>추가 자료
+
+* [InteropComponent 예 (aspnet/AspNetCore GitHub 리포지토리, 3.0 릴리스 분기)](https://github.com/aspnet/AspNetCore/blob/release/3.0/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)

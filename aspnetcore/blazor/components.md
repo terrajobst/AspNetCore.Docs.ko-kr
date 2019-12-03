@@ -5,16 +5,16 @@ description: 데이터에 바인딩하고, 이벤트를 처리 하 고, 구성 �
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/23/2019
+ms.date: 11/27/2019
 no-loc:
 - Blazor
 uid: blazor/components
-ms.openlocfilehash: 764e5e7db995b2dcadccf6d93c826ccf32c9ba04
-ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
+ms.openlocfilehash: 19636b0f10e71133eddece918b1bb9e2bc25a226
+ms.sourcegitcommit: 169ea5116de729c803685725d96450a270bc55b7
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/02/2019
-ms.locfileid: "74681008"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74733845"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -71,6 +71,8 @@ Blazor 앱은 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 <component type="typeof(Counter)" render-mode="ServerPrerendered" 
     param-IncrementAmount="10" />
 ```
+
+매개 변수 전달 (예: 앞의 예제에서 `IncrementAmount`)은 지원 됩니다.
 
 구성 요소가 있는지 여부를 구성 하 `RenderMode` 다음을 수행 합니다.
 
@@ -402,7 +404,11 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 
 `@bind:format` 특성은 `<input>` 요소의 `value`에 적용할 날짜 형식을 지정 합니다. 이 형식은 `onchange` 이벤트가 발생할 때 값을 구문 분석 하는 데도 사용 됩니다.
 
-Blazor에서 날짜 형식을 기본적으로 지원 하기 때문에 `date` 필드 형식에 대 한 형식을 지정 하는 것은 권장 되지 않습니다.
+Blazor에서 날짜 형식을 기본적으로 지원 하기 때문에 `date` 필드 형식에 대 한 형식을 지정 하는 것은 권장 되지 않습니다. 권장 사항에도 불구 하 고 `date` 필드 형식과 함께 형식이 제공 되는 경우 바인딩이 제대로 작동 하려면 `yyyy-MM-dd` 날짜 형식만 사용 합니다.
+
+```razor
+<input type="date" @bind="StartDate" @bind:format="yyyy-MM-dd">
+```
 
 **구성 요소 매개 변수**
 

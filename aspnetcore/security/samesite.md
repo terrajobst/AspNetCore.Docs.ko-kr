@@ -1,19 +1,19 @@
 ---
-title: SameSite
+title: ASP.NET Core에서 SameSite 쿠키 작업
 author: rick-anderson
 description: 를 사용 하 여 ASP.NET Core 쿠키를 SameSite 하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/11/2019
+ms.date: 12/03/2019
 uid: security/samesite
-ms.openlocfilehash: 91c69c4caf0644c1f40750233175ddb4c02d7cfe
-ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
+ms.openlocfilehash: 988069a66cc4772583444303948bff2e47ff4310
+ms.sourcegitcommit: 169ea5116de729c803685725d96450a270bc55b7
 ms.translationtype: MT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 12/03/2019
-ms.locfileid: "74717438"
+ms.locfileid: "74733988"
 ---
-# <a name="working-with-samesite-cookies-in-aspnet-core"></a>ASP.NET Core에서 SameSite 쿠키 작업
+# <a name="work-with-samesite-cookies-in-aspnet-core"></a>ASP.NET Core에서 SameSite 쿠키 작업
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
