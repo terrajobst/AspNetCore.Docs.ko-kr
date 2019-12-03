@@ -286,6 +286,8 @@
           uid: blazor/templates
         - name: 구성 요소
           uid: blazor/components
+        - name: 수명 주기
+          uid: blazor/lifecycle
         - name: 양식 및 유효성 검사
           uid: blazor/forms-validation
         - name: 구성 요소 라이브러리
@@ -819,6 +821,8 @@
       uid: security/index
     - name: 인증
       items:
+        - name: 개요
+          uid: security/authentication/index
         - name: ID 소개
           uid: security/authentication/identity
         - name: SPA를 사용하는 ID
