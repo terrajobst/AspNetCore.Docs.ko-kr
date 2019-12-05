@@ -12,6 +12,8 @@
   uid: getting-started
 - name: 새로운 기능
   items:
+    - name: 3.1의 새로운 기능
+      uid: aspnetcore-3.1
     - name: 3.0의 새로운 기능
       uid: aspnetcore-3.0
     - name: 2.2의 새로운 기능
@@ -1016,6 +1018,8 @@
       uid: security/cors
     - name: 앱 간 쿠키 공유
       uid: security/cookie-sharing
+    - name: SameSite 쿠키
+      uid: security/samesite
     - name: IP 수신 허용 목록
       uid: security/ip-safelist
     - name: 애플리케이션 보안 - OWASP
