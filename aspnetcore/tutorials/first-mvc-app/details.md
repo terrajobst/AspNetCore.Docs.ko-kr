@@ -5,12 +5,12 @@ description: 기본적인 ASP.NET Core MVC 앱에서 Details 컨트롤러 메서
 ms.author: riande
 ms.date: 12/13/2018
 uid: tutorials/first-mvc-app/details
-ms.openlocfilehash: d19e8cdb63da2bb9c66db1943dfcec183d432401
-ms.sourcegitcommit: 2719c70cd15a430479ab4007ff3e197fbf5dfee0
+ms.openlocfilehash: 04eb2efa4e67d84e575580a6248d0b5b567064af
+ms.sourcegitcommit: b3e1e31e5d8bdd94096cf27444594d4a7b065525
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/09/2019
-ms.locfileid: "68862979"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74803385"
 ---
 # <a name="examine-the-details-and-delete-methods-of-an-aspnet-core-app"></a>ASP.NET Core 앱의 Details 및 Delete 메서드 검토
 
@@ -22,7 +22,7 @@ Movie 컨트롤러를 열고 `Details` 메서드를 검토합니다.
 
 이 작업 메서드를 만든 MVC 스캐폴딩 엔진은 메서드를 호출하는 HTTP 요청을 보여주는 주석을 추가합니다. 이 경우 `Movies` 컨트롤러, `Details` 메서드 및 `id` 값의 세 가지 URL 세그먼트를 가진 GET 요청입니다. 이러한 세그먼트는 *Startup.cs*에서 정의되었다는 점을 기억하세요.
 
-[!code-csharp[](start-mvc/sample/MvcMovie/Startup.cs?highlight=5&name=snippet_1)]
+[!code-csharp[](start-mvc/sample/MvcMovie3/Startup.cs?highlight=5&name=snippet_1)]
 
 EF를 사용하면 `FirstOrDefaultAsync` 메서드를 이용하여 데이터를 쉽게 검색할 수 있습니다. 메서드에 기본 구성된 중요한 보안 기능은 영화를 사용하여 무언가 작업을 시도하기 전에 검색 메서드가 영화를 발견했는지부터 코드에서 확인하는 것입니다. 예를 들어 해커는 링크에서 만든 URL을 `http://localhost:{PORT}/Movies/Details/1`에서 `http://localhost:{PORT}/Movies/Details/12345`(또는 실제 영화를 나타내지 않는 다른 값)와 같은 URL로 변경하여 사이트에 오류를 발생시킬 수 있습니다. Null 영화를 검사하지 않으면 앱은 예외를 던집니다.
 

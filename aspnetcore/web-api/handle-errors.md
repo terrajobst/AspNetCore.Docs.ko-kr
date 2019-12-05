@@ -7,12 +7,12 @@ ms.author: prkrishn
 ms.custom: mvc
 ms.date: 09/27/2019
 uid: web-api/handle-errors
-ms.openlocfilehash: dc21d4b2cf096b8d38b0a24d739e6874186004e7
-ms.sourcegitcommit: 5d25a7f22c50ca6fdd0f8ecd8e525822e1b35b7a
+ms.openlocfilehash: 457ad7449c608c3b1b0acd729626e07808f55897
+ms.sourcegitcommit: ddc813f0f1fb293861a01597532919945b0e7fe5
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/28/2019
-ms.locfileid: "71551737"
+ms.lasthandoff: 11/23/2019
+ms.locfileid: "74412096"
 ---
 # <a name="handle-errors-in-aspnet-core-web-apis"></a>ASP.NET Core 웹 API에서 오류 처리
 
@@ -121,7 +121,7 @@ HTML 형식 응답은 Postman과 같은 도구를 사용하여 테스트하는 �
 
 비개발 환경에서는 [예외 처리 미들웨어](xref:fundamentals/error-handling)를 사용하여 오류 페이로드를 생성할 수 있습니다.
 
-1. `Startup.Configure`에서 <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler*>를 호출하여 미들웨어를 사용합니다.
+1. `Startup.Configure`에서 <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler%2A>를 호출하여 미들웨어를 사용합니다.
 
     ::: moniker range=">= aspnetcore-3.0"
 
@@ -301,7 +301,7 @@ public void ConfigureServices(IServiceCollection serviceCollection)
 
 ### <a name="use-apibehavioroptionsclienterrormapping"></a>ApiBehaviorOptions.ClientErrorMapping 사용
 
-<xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.ClientErrorMapping*> 속성을 사용하여 `ProblemDetails` 응답의 내용을 구성합니다. 예를 들어 `Startup.ConfigureServices` 내의 다음 코드는 404 응답에 대해 `type` 속성을 업데이트합니다.
+<xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.ClientErrorMapping%2A> 속성을 사용하여 `ProblemDetails` 응답의 내용을 구성합니다. 예를 들어 `Startup.ConfigureServices` 내의 다음 코드는 404 응답에 대해 `type` 속성을 업데이트합니다.
 
 ::: moniker-end
 
@@ -313,6 +313,6 @@ public void ConfigureServices(IServiceCollection serviceCollection)
 
 ::: moniker range="= aspnetcore-2.2"
 
-[!code-csharp[](index/samples/2.x/Startup.cs?name=snippet_ConfigureApiBehaviorOptions&highlight=9-10)]
+[!code-csharp[](index/samples/2.x/2.2/Startup.cs?name=snippet_ConfigureApiBehaviorOptions&highlight=9-10)]
 
 ::: moniker-end

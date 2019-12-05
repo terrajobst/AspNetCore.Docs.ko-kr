@@ -5,14 +5,14 @@ description: HTTP REPL .NET Core 전역 도구를 사용하여 ASP.NET Core 웹 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 10/07/2019
+ms.date: 12/02/2019
 uid: web-api/http-repl
-ms.openlocfilehash: bb3757f51487a307ebfb97452b80995f84e95e4b
-ms.sourcegitcommit: 73a451e9a58ac7102f90b608d661d8c23dd9bbaf
+ms.openlocfilehash: c6e3ab5685b5bd0b154d20585fb0d187f81da641
+ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/08/2019
-ms.locfileid: "72037716"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74717167"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>HTTP REPL을 사용하여 웹 API 테스트
 
@@ -270,7 +270,7 @@ colors.status=BoldYellow
 https://localhost:5001/people~ pref set colors.json White
 ```
 
-[허용되는 색](https://github.com/aspnet/HttpRepl/blob/01d5c3c3373e98fe566ff5ef8a17c571de880293/src/Microsoft.Repl/ConsoleHandling/AllowedColors.cs)만 사용할 수 있습니다. 이후의 HTTP 요청은 새 색 지정을 사용하여 출력을 표시합니다.
+[허용되는 색](https://github.com/dotnet/HttpRepl/blob/01d5c3c3373e98fe566ff5ef8a17c571de880293/src/Microsoft.Repl/ConsoleHandling/AllowedColors.cs)만 사용할 수 있습니다. 이후의 HTTP 요청은 새 색 지정을 사용하여 출력을 표시합니다.
 
 특정 색 키가 설정되지 않은 경우에는 보다 일반적인 키가 고려됩니다. 이 대체 동작을 보여 주려면 다음 예제를 참조하세요.
 
@@ -1037,4 +1037,4 @@ https://localhost:5001/~
 ## <a name="additional-resources"></a>추가 자료
 
 * [REST API 요청](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods)
-* [HTTP REPL GitHub 리포지토리](https://github.com/aspnet/HttpRepl)
+* [HTTP REPL GitHub 리포지토리](https://github.com/dotnet/HttpRepl)

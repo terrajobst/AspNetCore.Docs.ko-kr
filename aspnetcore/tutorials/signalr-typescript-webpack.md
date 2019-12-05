@@ -1,28 +1,30 @@
 ---
 title: TypeScript 및 WebPack과 함께 ASP.NET Core SignalR 사용
 author: ssougnez
-description: 이 자습서에서는 해당 클라이언트가 TypeScript로 작성된 ASP.NET Core SignalR 웹앱을 번들링 및 빌드하도록 WebPack을 구성합니다.
+description: 이 자습서에서는 클라이언트가 TypeScript로 작성된 ASP.NET Core SignalR 웹앱을 번들링 및 빌드하도록 WebPack을 구성합니다.
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 10/04/2019
+ms.date: 11/21/2019
+no-loc:
+- SignalR
 uid: tutorials/signalr-typescript-webpack
-ms.openlocfilehash: 630e8cb5efe9c313479960626d3d864c4923cbd1
-ms.sourcegitcommit: 3ffcd8cbff8b49128733842f72270bc58279de70
+ms.openlocfilehash: a7c99c9e79647995886aec5b3a91584fd2f24451
+ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/04/2019
-ms.locfileid: "71955928"
+ms.lasthandoff: 11/22/2019
+ms.locfileid: "74317481"
 ---
-# <a name="use-aspnet-core-signalr-with-typescript-and-webpack"></a>TypeScript 및 WebPack과 함께 ASP.NET Core SignalR 사용
+# <a name="use-aspnet-core-opno-locsignalr-with-typescript-and-webpack"></a>TypeScript 및 WebPack과 함께 ASP.NET Core SignalR 사용
 
 작성자: [Sébastien Sougnez](https://twitter.com/ssougnez) 및 [Scott Addie](https://twitter.com/Scott_Addie)
 
-[WebPack](https://webpack.js.org/)을 사용하여 개발자가 웹앱의 클라이언트 쪽 리소스를 번들링 및 빌드할 수 있습니다. 본 자습서에서는 클라이언트가 [TypeScript](https://www.typescriptlang.org/)로 작성된 ASP.NET Core SignalR 웹앱에서 WebPack을 사용하는 방법을 보여줍니다.
+[WebPack](https://webpack.js.org/)을 사용하면 개발자가 웹 앱의 클라이언트 쪽 리소스를 번들링 및 빌드할 수 있습니다. 이 자습서에서는 클라이언트가 [TypeScript](https://www.typescriptlang.org/)로 작성된 ASP.NET Core SignalR 웹앱에서 WebPack을 사용하는 방법을 보여줍니다.
 
 이 자습서에서는 다음과 같은 작업을 수행하는 방법을 살펴봅니다.
 
 > [!div class="checklist"]
-> * ASP.NET Core SignalR 앱 스캐폴드
+> * 시작 ASP.NET Core SignalR 앱 스캐폴드
 > * SignalR TypeScript 클라이언트 구성
 > * WebPack을 사용하여 빌드 파이프라인 구성
 > * SignalR 서버 구성
@@ -175,13 +177,13 @@ dotnet new web -o SignalRWebPack
 
    [!code-csharp[Startup](signalr-typescript-webpack/sample/3.x/Startup.cs?name=snippet_UseSignalR&highlight=3)]
 
-1. `Startup.ConfigureServices` 메서드에서 [AddSignalR](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr#Microsoft_Extensions_DependencyInjection_SignalRDependencyInjectionExtensions_AddSignalR_Microsoft_Extensions_DependencyInjection_IServiceCollection_)을 호출합니다. 이는 SignalR 서비스를 프로젝트에 추가합니다.
+1. `Startup.ConfigureServices` 메서드에서 [AddSignalR](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr#Microsoft_Extensions_DependencyInjection_SignalRDependencyInjectionExtensions_AddSignalR_Microsoft_Extensions_DependencyInjection_IServiceCollection_)을 호출합니다. 그러면 SignalR 서비스가 프로젝트에 추가됩니다.
 
    [!code-csharp[Startup](signalr-typescript-webpack/sample/3.x/Startup.cs?name=snippet_AddSignalR)]
 
 1. 프로젝트 루트에 *Hubs*라는 새 디렉터리를 생성합니다. 그 목적은 다음 단계에서 생성되는 SignalR 허브를 저장하는 것입니다.
 
-1. 다음 내용을 포함한 허브 *Hubs/ChatHub.cs*를 생성합니다.
+1. 다음 내용을 포함한 *Hubs/ChatHub.cs* 허브를 생성합니다.
 
     [!code-csharp[ChatHub](signalr-typescript-webpack/sample/3.x/snippets/ChatHub.cs?name=snippet_ChatHubStubClass)]
 
@@ -196,10 +198,10 @@ dotnet new web -o SignalRWebPack
 1. 프로젝트 루트에서 다음 명령을 실행합니다.
 
     ```console
-    npm install @aspnet/signalr
+    npm install @microsoft/signalr
     ```
 
-    앞의 명령은 클라이언트가 서버에 메시지를 보낼 수 있도록 하는 [SignalR TypeScript 클라이언트](https://www.npmjs.com/package/@aspnet/signalr)를 설치합니다.
+    이 명령은 클라이언트에서 서버로 메시지를 전송할 수 있게 해주는 [SignalR TypeScript 클라이언트](https://www.npmjs.com/package/@microsoft/signalr)를 설치합니다.
 
 1. 강조 표시된 코드를 *src/index.ts* 파일에 추가합니다.
 
@@ -223,7 +225,7 @@ dotnet new web -o SignalRWebPack
 
     이 예에서 TypeScript 클라이언트는 `newMessage`로 식별된 메시지를 보냅니다. C# `NewMessage` 메서드에는 클라이언트가 보낸 데이터가 필요합니다. [Clients.All](/dotnet/api/microsoft.aspnetcore.signalr.ihubclients-1.all)에 대한 [SendAsync](/dotnet/api/microsoft.aspnetcore.signalr.clientproxyextensions.sendasync) 메서드를 호출합니다. 수신된 메시지를 허브에 연결된 모든 클라이언트에 보냅니다.
 
-## <a name="test-the-app"></a>앱 테스트
+## <a name="test-the-app"></a>앱을 테스트합니다.
 
 다음 단계를 사용하여 앱이 작동하는지 확인합니다.
 
@@ -406,7 +408,7 @@ dotnet new web -o SignalRWebPack
 
     이 코드는 사용자가 전체 URL을 입력하는지 아니면 웹앱의 루트 URL만 입력하는지 관계없이 서버가 *index.html* 파일을 찾아서 제공할 수 있도록 합니다.
 
-1. `Startup.ConfigureServices` 메서드에서 [AddSignalR](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr#Microsoft_Extensions_DependencyInjection_SignalRDependencyInjectionExtensions_AddSignalR_Microsoft_Extensions_DependencyInjection_IServiceCollection_)을 호출합니다. 이는 SignalR 서비스를 프로젝트에 추가합니다.
+1. `Startup.ConfigureServices` 메서드에서 [AddSignalR](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr#Microsoft_Extensions_DependencyInjection_SignalRDependencyInjectionExtensions_AddSignalR_Microsoft_Extensions_DependencyInjection_IServiceCollection_)을 호출합니다. 그러면 SignalR 서비스가 프로젝트에 추가됩니다.
 
     [!code-csharp[Startup](signalr-typescript-webpack/sample/2.x/Startup.cs?name=snippet_AddSignalR)]
 
@@ -416,7 +418,7 @@ dotnet new web -o SignalRWebPack
 
 1. 프로젝트 루트에 *Hubs*라는 새 디렉터리를 생성합니다. 그 목적은 다음 단계에서 생성되는 SignalR 허브를 저장하는 것입니다.
 
-1. 다음 내용을 포함한 허브 *Hubs/ChatHub.cs*를 생성합니다.
+1. 다음 내용을 포함한 *Hubs/ChatHub.cs* 허브를 생성합니다.
 
     [!code-csharp[ChatHub](signalr-typescript-webpack/sample/2.x/snippets/ChatHub.cs?name=snippet_ChatHubStubClass)]
 
@@ -431,10 +433,10 @@ dotnet new web -o SignalRWebPack
 1. 프로젝트 루트에서 다음 명령을 실행합니다.
 
     ```console
-    npm install @aspnet/signalr
+    npm install @microsoft/signalr
     ```
 
-    앞의 명령은 클라이언트가 서버에 메시지를 보낼 수 있도록 하는 [SignalR TypeScript 클라이언트](https://www.npmjs.com/package/@aspnet/signalr)를 설치합니다.
+    이 명령은 클라이언트에서 서버로 메시지를 전송할 수 있게 해주는 [SignalR TypeScript 클라이언트](https://www.npmjs.com/package/@microsoft/signalr)를 설치합니다.
 
 1. 강조 표시된 코드를 *src/index.ts* 파일에 추가합니다.
 
@@ -458,7 +460,7 @@ dotnet new web -o SignalRWebPack
 
     이 예에서 TypeScript 클라이언트는 `newMessage`로 식별된 메시지를 보냅니다. C# `NewMessage` 메서드에는 클라이언트가 보낸 데이터가 필요합니다. [Clients.All](/dotnet/api/microsoft.aspnetcore.signalr.ihubclients-1.all)에 대한 [SendAsync](/dotnet/api/microsoft.aspnetcore.signalr.clientproxyextensions.sendasync) 메서드를 호출합니다. 수신된 메시지를 허브에 연결된 모든 클라이언트에 보냅니다.
 
-## <a name="test-the-app"></a>앱 테스트
+## <a name="test-the-app"></a>앱을 테스트합니다.
 
 다음 단계를 사용하여 앱이 작동하는지 확인합니다.
 
