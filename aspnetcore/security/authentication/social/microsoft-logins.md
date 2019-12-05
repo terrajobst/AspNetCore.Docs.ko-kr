@@ -4,31 +4,33 @@ author: rick-anderson
 description: 이 샘플에서는 Microsoft 계정 사용자 인증을 기존 ASP.NET Core 앱에 통합 하는 방법을 보여 줍니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/11/2019
+ms.date: 12/4/2019
+monikerRange: '>= aspnetcore-3.0'
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: 91ace293fd16cd180b3d5c183c637af6db1d08c3
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: ddaae1a25a1dcf167ffae0f24b480e2cde6aca5b
+ms.sourcegitcommit: f4cd3828e26e6d549ba8d0c36a17be35ad9e5a51
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71082334"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74825459"
 ---
 # <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>ASP.NET Core를 사용 하 여 Microsoft 계정 외부 로그인 설정
 
 작성자: [Valeriy Novytskyy](https://github.com/01binary) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-이 샘플에서는 사용자가 [이전 페이지](xref:security/authentication/social/index)에서 만든 ASP.NET Core 2.2 프로젝트를 사용 하 여 Microsoft 계정에 로그인 할 수 있도록 하는 방법을 보여 줍니다.
+이 샘플에서는 사용자가 [이전 페이지](xref:security/authentication/social/index)에서 만든 ASP.NET Core 3.0 프로젝트를 사용 하 여 Microsoft 계정에 로그인 할 수 있도록 하는 방법을 보여 줍니다.
 
 ## <a name="create-the-app-in-microsoft-developer-portal"></a>Microsoft 개발자 포털에서 앱 만들기
 
+* 프로젝트에 [AspNetCore. MicrosoftAccount](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.MicrosoftAccount/) NuGet 패키지를 추가 합니다.
 * [Azure Portal-앱 등록](https://go.microsoft.com/fwlink/?linkid=2083908) 페이지로 이동 하 고 Microsoft 계정를 만들거나 로그인 합니다.
 
-Microsoft 계정 없는 경우 **만들기**를 선택 합니다. 로그인 한 후 **앱 등록** 페이지로 리디렉션됩니다.
+Microsoft 계정 없는 경우 **만들기**를 선택 합니다. 로그인 하면 **앱 등록** 페이지로 리디렉션됩니다.
 
 * **새 등록** 선택
-* **이름을**입력 합니다.
+* **이름**을 입력합니다.
 * **지원 되는 계정 유형에**대 한 옵션을 선택 합니다.  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts -->
-* **URI 리디렉션**에서 추가 된로 `/signin-microsoft` 개발 URL을 입력 합니다. 예를 들어, `https://localhost:44389/signin-microsoft`을 입력합니다. 이 샘플의 뒷부분에서 구성 된 Microsoft 인증 체계는 OAuth 흐름을 `/signin-microsoft` 구현 하는 경로에서 요청을 자동으로 처리 합니다.
+* **URI 리디렉션**에서 `/signin-microsoft` 추가 된 개발 URL을 입력 합니다. 예를 들어 `https://localhost:5001/signin-microsoft`과 같은 형식입니다. 이 샘플의 뒷부분에서 구성 된 Microsoft 인증 체계는 OAuth 흐름을 구현 하는 `/signin-microsoft` 경로에서 요청을 자동으로 처리 합니다.
 * **등록** 선택
 
 ### <a name="create-client-secret"></a>클라이언트 암호 만들기
@@ -37,31 +39,31 @@ Microsoft 계정 없는 경우 **만들기**를 선택 합니다. 로그인 한 
 * **클라이언트 암호**에서 **새 클라이언트 암호** 를 선택 합니다.
 
   * 클라이언트 암호에 대 한 설명을 추가 합니다.
-  * **추가** 단추를 선택 합니다.
+  * **추가** 단추를 선택합니다.
 
 * **클라이언트 암호**에서 클라이언트 암호의 값을 복사 합니다.
 
 > [!NOTE]
-> URI 세그먼트가 `/signin-microsoft` Microsoft 인증 공급자의 기본 콜백으로 설정 되어 있습니다. [MicrosoftAccountOptions](/dotnet/api/microsoft.aspnetcore.authentication.microsoftaccount.microsoftaccountoptions) 클래스의 상속 된 [Remoteauthenticationoptions. callbackpath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) 속성을 통해 Microsoft 인증 미들웨어를 구성 하는 동안 기본 콜백 URI를 변경할 수 있습니다.
+> `/signin-microsoft` URI 세그먼트가 Microsoft 인증 공급자의 기본 콜백으로 설정 되어 있습니다. [MicrosoftAccountOptions](/dotnet/api/microsoft.aspnetcore.authentication.microsoftaccount.microsoftaccountoptions) 클래스의 상속 된 [Remoteauthenticationoptions. callbackpath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) 속성을 통해 Microsoft 인증 미들웨어를 구성 하는 동안 기본 콜백 URI를 변경할 수 있습니다.
 
 ## <a name="store-the-microsoft-client-id-and-client-secret"></a>Microsoft 클라이언트 ID 및 클라이언트 암호 저장
 
-다음 명령을 실행 하 여 [비밀 Manager](xref:security/app-secrets)를 `ClientSecret` 안전 하 게 저장 `ClientId` 하 고 사용 합니다.
+다음 명령을 실행 하 여 [비밀 Manager](xref:security/app-secrets)를 사용 하 `ClientId` 및 `ClientSecret`를 안전 하 게 저장 합니다.
 
 ```dotnetcli
 dotnet user-secrets set Authentication:Microsoft:ClientId <Client-Id>
 dotnet user-secrets set Authentication:Microsoft:ClientSecret <Client-Secret>
 ```
 
-[비밀 관리자](xref:security/app-secrets)를 사용 하 `ClientId` 여 `ClientSecret` Microsoft 및와 같은 중요 한 설정을 응용 프로그램 구성에 연결 합니다. 이 샘플의 목적을 위해 토큰 `Authentication:Microsoft:ClientId` 의 이름을 및 `Authentication:Microsoft:ClientSecret`으로 합니다.
+[비밀 관리자](xref:security/app-secrets)를 사용 하 여 Microsoft `ClientId` 및 `ClientSecret`와 같은 중요 한 설정을 응용 프로그램 구성에 연결 합니다. 이 샘플의 목적에 맞게 토큰의 이름을 `Authentication:Microsoft:ClientId` 하 고 `Authentication:Microsoft:ClientSecret`합니다.
 
 [!INCLUDE[](~/includes/environmentVarableColon.md)]
 
 ## <a name="configure-microsoft-account-authentication"></a>Microsoft 계정 인증 구성
 
-Microsoft 계정 서비스를 `Startup.ConfigureServices`추가 합니다.
+`Startup.ConfigureServices`에 Microsoft 계정 서비스를 추가 합니다.
 
-[!code-csharp[](~/security/authentication/social/social-code/StartupMS.cs?name=snippet&highlight=10-14)]
+[!code-csharp[](~/security/authentication/social/social-code/3.x/StartupMS3x.cs?name=snippet&highlight=10-14)]
 
 [!INCLUDE [default settings configuration](includes/default-settings.md)]
 
@@ -71,7 +73,7 @@ Microsoft 계정 인증에서 지 원하는 구성 옵션에 대 한 자세한 �
 
 ## <a name="sign-in-with-microsoft-account"></a>Microsoft에 로그인 계정
 
-을 실행 하 고 **로그인**을 클릭 합니다. Microsoft에 로그인 할 수 있는 옵션이 나타납니다. Microsoft를 클릭 하면 인증을 위해 Microsoft로 리디렉션됩니다. Microsoft 계정 (아직 로그인 하지 않은 경우)을 사용 하 여 로그인 한 후 앱에서 사용자의 정보에 액세스 하도록 허용 하 라는 메시지가 표시 됩니다.
+앱을 실행 하 고 **로그인**을 클릭 합니다. Microsoft에 로그인 할 수 있는 옵션이 나타납니다. Microsoft를 클릭 하면 인증을 위해 Microsoft로 리디렉션됩니다. Microsoft 계정을 사용 하 여 로그인 한 후에 앱에서 사용자의 정보에 액세스 하도록 허용 하 라는 메시지가 표시 됩니다.
 
 **예** 를 탭 하면 전자 메일을 설정할 수 있는 웹 사이트로 다시 리디렉션됩니다.
 
@@ -84,7 +86,7 @@ Microsoft 계정 인증에서 지 원하는 구성 옵션에 대 한 자세한 �
 * Microsoft 계정 공급자가 로그인 오류 페이지로 리디렉션되는 경우 Uri에서 `#` (해시 태그) 바로 다음에 나오는 오류 제목 및 설명 쿼리 문자열 매개 변수를 확인 합니다.
 
   오류 메시지가 Microsoft 인증 문제를 나타내는 것 처럼 보이지만 가장 일반적인 원인은 **웹** 플랫폼에 지정 된 **리디렉션 uri** 와 일치 하지 않는 응용 프로그램 uri입니다.
-* 에서 `services.AddIdentity` *를 호출 하 여 id가 구성 되지 않은 경우 인증을 시도 하면 ArgumentException이 발생 합니다. `ConfigureServices` ' SignInScheme ' 옵션을 제공*해야 합니다. 이 샘플에서 사용 되는 프로젝트 템플릿은이 작업이 수행 되도록 합니다.
+* `ConfigureServices`에서 `services.AddIdentity`를 호출 하 여 Id가 구성 되지 않은 경우 인증을 시도 하면 ArgumentException이 발생 합니다. *' SignInScheme ' 옵션을 제공 해야*합니다. 이 샘플에서 사용 되는 프로젝트 템플릿은이 작업이 수행 되도록 합니다.
 * 사이트 데이터베이스를 초기 마이그레이션을 적용 하 여 만들어지지 않은, 경우 받습니다 *요청을 처리 하는 동안 데이터베이스 작업이 실패 했습니다.* 오류입니다. 탭 **마이그레이션 적용** 데이터베이스를 만들고 오류 지 나 새로 고침 합니다.
 
 ## <a name="next-steps"></a>다음 단계
