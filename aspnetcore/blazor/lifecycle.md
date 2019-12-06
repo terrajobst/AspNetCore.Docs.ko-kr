@@ -5,16 +5,16 @@ description: ASP.NET Core Blazor 앱에서 Razor 구성 요소 수명 주기 메
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/26/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 uid: blazor/lifecycle
-ms.openlocfilehash: 1482f6b2147c74b11836e8029401bb8bcb3cdb2d
-ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
+ms.openlocfilehash: 280ea832f492852e425e3e15c61cac54fd1e39d6
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/02/2019
-ms.locfileid: "74681376"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74879677"
 ---
 # <a name="aspnet-core-opno-locblazor-lifecycle"></a>ASP.NET Core Blazor 수명 주기
 
@@ -64,7 +64,7 @@ public override async Task SetParametersAsync(ParameterView parameters)
 
 <xref:Microsoft.AspNetCore.Components.ParameterView>은 `SetParametersAsync` 호출 될 때마다 매개 변수 값의 전체 집합을 포함 합니다.
 
-`SetParametersAsync`의 기본 구현에서는 `ParameterView`에 해당 값이 있는 `[Parameter]` 또는 `[CascadingParameter]` 특성으로 데코레이팅된 각 속성의 값을 설정 합니다. `ParameterView`에 해당 값이 없는 매개 변수는 변경 되지 않은 상태로 유지 됩니다.
+`SetParametersAsync`의 기본 구현에서는 각 속성의 값을 `ParameterView`에 해당 하는 값이 있는 `[Parameter]` 또는 `[CascadingParameter]` 특성으로 설정 합니다. `ParameterView`에 해당 값이 없는 매개 변수는 변경 되지 않은 상태로 유지 됩니다.
 
 `base.SetParametersAync`를 호출 하지 않으면 사용자 지정 코드는 필요한 방식으로 들어오는 매개 변수 값을 해석할 수 있습니다. 예를 들어 클래스의 속성에 들어오는 매개 변수를 할당할 필요는 없습니다.
 

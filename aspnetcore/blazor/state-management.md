@@ -9,12 +9,12 @@ ms.date: 11/23/2019
 no-loc:
 - Blazor
 uid: blazor/state-management
-ms.openlocfilehash: facd6c2747bb0b31404c3c4fce25b76cd141932e
-ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
+ms.openlocfilehash: ed203458126f3b4c97103c88a465e3eb5953a775
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/02/2019
-ms.locfileid: "74680982"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74879708"
 ---
 # <a name="aspnet-core-opno-locblazor-state-management"></a>ASP.NET Core Blazor 상태 관리
 
@@ -133,7 +133,7 @@ ASP.NET Core의 [데이터 보호](xref:security/data-protection/introduction)�
 
 ## <a name="protected-browser-storage-experimental-package"></a>보호 된 브라우저 저장소 실험적 패키지
 
-`localStorage` 및 `sessionStorage`에 대 한 [데이터 보호](xref:security/data-protection/introduction) 를 제공 하는 NuGet 패키지의 예는 [ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)입니다.
+`localStorage` 및 `sessionStorage`에 대한 [데이터 보호](xref:security/data-protection/introduction)를 제공 하는 NuGet 패키지의 예는 [AspNetCore. ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)입니다.
 
 > [!WARNING]
 > 현재는 지원 되지 않는 실험적 패키지를 프로덕션 환경에 적합 하 게 사용할 수 없습니다. `Microsoft.AspNetCore.ProtectedBrowserStorage`
@@ -157,7 +157,7 @@ ASP.NET Core의 [데이터 보호](xref:security/data-protection/introduction)�
 
 ### <a name="save-and-load-data-within-a-component"></a>구성 요소 내에서 데이터 저장 및 로드
 
-브라우저 저장소에 데이터를 로드 하거나 저장 해야 하는 모든 구성 요소에서 [@inject](xref:blazor/dependency-injection#request-a-service-in-a-component) 를 사용 하 여 다음 중 하나의 인스턴스를 삽입 합니다.
+브라우저 저장소에 데이터를 로드 하거나 저장 해야 하는 모든 구성 요소에서 [`@inject`](xref:blazor/dependency-injection#request-a-service-in-a-component) 를 사용 하 여 다음 중 하나의 인스턴스를 삽입 합니다.
 
 * `ProtectedLocalStorage`
 * `ProtectedSessionStorage`

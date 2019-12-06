@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: e82f28afdac8517f72538094d97f28bdcfe46102
-ms.sourcegitcommit: 918d7000b48a2892750264b852bad9e96a1165a7
+ms.openlocfilehash: bc0ea4a777e8684a7b0925377b8a19a45c2b531c
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/27/2019
-ms.locfileid: "74551536"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74879662"
 ---
 # <a name="aspnet-core-opno-locblazor-templates"></a>Blazor 템플릿 ASP.NET Core
 
@@ -61,7 +61,7 @@ Blazor 템플릿에서 생성 된 Blazor 앱을 구성 하는 파일 및 폴더�
 
 * *응용 프로그램 razor* 는 <xref:Microsoft.AspNetCore.Components.Routing.Router> 구성 요소를 사용 하 여 클라이언트 쪽 라우팅을 설정 하는 앱의 루트 구성 요소를 &ndash; 합니다. `Router` 구성 요소는 브라우저 탐색을 가로채서 요청 된 주소와 일치 하는 페이지를 렌더링 합니다.
 
-* *페이지* 폴더 &ndash; Blazor 앱을 구성 하는 라우팅 가능 구성 요소/페이지 (*Razor*)를 포함 합니다. 각 페이지에 대 한 경로는 [@page](xref:mvc/views/razor#page) 지시어를 사용 하 여 지정 됩니다. 템플릿에는 다음 구성 요소가 포함 되어 있습니다.
+* *페이지* 폴더 &ndash; Blazor 앱을 구성 하는 라우팅 가능 구성 요소/페이지 (*Razor*)를 포함 합니다. 각 페이지에 대 한 경로는 [`@page`](xref:mvc/views/razor#page) 지시어를 사용 하 여 지정 됩니다. 템플릿에는 다음 구성 요소가 포함 되어 있습니다.
   * 홈 페이지를 구현 하는 `Index` (*인덱스 razor*) &ndash;입니다.
   * 카운터 페이지를 구현 하는 *`Counter` (&ndash;)입니다.*
   * `Error` (*오류. razor*, Blazor Server 앱에만 해당) 앱에서 처리 되지 않은 예외가 발생 하면 렌더링 &ndash;.
@@ -71,7 +71,7 @@ Blazor 템플릿에서 생성 된 Blazor 앱을 구성 하는 파일 및 폴더�
   * `MainLayout` (*mainlayout. razor*)는 앱의 레이아웃 구성 요소 &ndash; 합니다.
   * `NavMenu` (*NavMenu*) &ndash;는 사이드바 탐색을 구현 합니다. 다른 Razor 구성 요소에 대 한 탐색 링크를 렌더링 하는 [NavLink 구성 요소](xref:blazor/routing#navlink-component) (<xref:Microsoft.AspNetCore.Components.Routing.NavLink>)를 포함 합니다. 구성 요소가 로드 될 때 `NavLink` 구성 요소가 자동으로 선택 된 상태를 표시 하므로 사용자가 현재 표시 되는 구성 요소를 파악할 수 있습니다.
 
-* *_Imports razor* &ndash;에는 네임 스페이스에 대 한 [@using](xref:mvc/views/razor#using) 지시문과 같은 응용 프로그램의 구성 요소 (*Razor*)에 포함할 일반적인 razor 지시문이 포함 되어 있습니다.
+* *_Imports razor* &ndash;에는 네임 스페이스에 대 한 [`@using`](xref:mvc/views/razor#using) 지시문과 같은 응용 프로그램의 구성 요소 (*Razor*)에 포함할 일반적인 razor 지시문이 포함 되어 있습니다.
 
 * *데이터* 폴더 (Blazor 서버) &ndash;에는 응용 프로그램의 `FetchData` 구성 요소에 예제 날씨 데이터를 제공 하는 `WeatherForecastService`의 `WeatherForecast` 클래스 및 구현이 포함 되어 있습니다.
 

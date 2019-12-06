@@ -4,14 +4,14 @@ author: steve-smith
 description: 악의적인 웹 사이트가 클라이언트 브라우저와 앱 간의 상호 작용에 영향을 줄 수 있는 웹 앱에 대 한 공격을 방지 하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/11/2019
+ms.date: 12/05/2019
 uid: security/anti-request-forgery
-ms.openlocfilehash: c3d32a93bcbf9f3897c10e68ba4e43d269a3ea80
-ms.sourcegitcommit: b3e1e31e5d8bdd94096cf27444594d4a7b065525
+ms.openlocfilehash: 54e153af55f28d9a89bbf16bce1c17f876567b59
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74803372"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880801"
 ---
 # <a name="prevent-cross-site-request-forgery-xsrfcsrf-attacks-in-aspnet-core"></a>ASP.NET Core에서 교차 사이트 요청 위조 (XSRF/CSRF) 공격 방지
 
@@ -172,7 +172,7 @@ CSRF 공격 으로부터 보호 하는 가장 일반적인 방법은 STP ( *동�
 }
 ```
 
-HTML 도우미 [@Html.AntiForgeryToken](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.htmlhelper.antiforgerytoken)와 함께 태그 도우미를 사용 하지 않고 `<form>` 요소에 위조 방지 토큰을 명시적으로 추가 합니다.
+HTML 도우미 [`@Html.AntiForgeryToken`](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.htmlhelper.antiforgerytoken)와 함께 태그 도우미를 사용 하지 않고 `<form>` 요소에 위조 방지 토큰을 명시적으로 추가 합니다.
 
 ```cshtml
 <form action="/" method="post">
@@ -305,7 +305,7 @@ public async Task<IActionResult> RemoveLogin(RemoveLoginViewModel account)
 }
 ```
 
-`ValidateAntiForgeryToken` 특성에는 HTTP GET 요청을 포함 하 여 데코 레이트 된 작업 메서드에 대 한 요청 토큰이 필요 합니다. `ValidateAntiForgeryToken` 특성이 앱 컨트롤러 전체에 적용 되는 경우 `IgnoreAntiforgeryToken` 특성으로 재정의할 수 있습니다.
+`ValidateAntiForgeryToken` 특성에는 HTTP GET 요청을 포함 하 여 표시 되는 작업 메서드에 대 한 요청의 토큰이 필요 합니다. `ValidateAntiForgeryToken` 특성이 앱 컨트롤러 전체에 적용 되는 경우 `IgnoreAntiforgeryToken` 특성으로 재정의할 수 있습니다.
 
 > [!NOTE]
 > ASP.NET Core는 위조 방지 토큰 추가를 지원 하지 않으므로 요청을 자동으로 가져옵니다.

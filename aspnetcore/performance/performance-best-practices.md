@@ -4,16 +4,16 @@ author: mjrousos
 description: ASP.NET Core 앱의 성능을 향상 하 고 일반적인 성능 문제를 방지 하기 위한 팁입니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-ms.date: 11/12/2019
+ms.date: 12/05/2019
 no-loc:
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 64d231ca435ccbfe9bfcd839a2b67fcee68c0cc6
-ms.sourcegitcommit: 8157e5a351f49aeef3769f7d38b787b4386aad5f
+ms.openlocfilehash: bd30776d527b4ac9f44005e9f5d03fec7cfda2e6
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/20/2019
-ms.locfileid: "74239885"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880926"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core 성능 모범 사례
 
@@ -23,7 +23,7 @@ ms.locfileid: "74239885"
 
 ## <a name="cache-aggressively"></a>적극적으로 캐시
 
-캐싱은이 문서의 여러 부분에서 설명 합니다. 자세한 내용은 <xref:performance/caching/response>을 참조하세요.
+캐싱은이 문서의 여러 부분에서 설명 합니다. 자세한 내용은 <xref:performance/caching/response>를 참조하세요.
 
 ## <a name="understand-hot-code-paths"></a>핫 코드 경로 이해
 
@@ -56,7 +56,7 @@ ASP.NET Core 앱의 일반적인 성능 문제는 비동기 일 수 있는 호�
 권장 사항:
 
 * 자주 사용 되는 많은 개체를 캐싱하는 **것이 좋습니다** . 큰 개체를 캐시 하면 비용이 많이 드는 할당이 방지 됩니다.
-* [`ArrayPool<T>`](/dotnet/api/system.buffers.arraypool-1) 를 사용 하 여 대량 배열을 저장 하는 방식으로 풀 버퍼를 **수행** 합니다.
+* [ArrayPool\<t >](/dotnet/api/system.buffers.arraypool-1) 를 사용 하 여 대량 배열을 저장 함으로써 풀 버퍼를 **수행** 합니다.
 * [핫 코드 경로](#understand-hot-code-paths)에 단기 수명이 많은 개체를 할당 **하지 마세요** .
 
 [Perfview](https://github.com/Microsoft/perfview) 및 검사에서 GC (가비지 수집) 통계를 검토 하 여 위와 같은 메모리 문제를 진단할 수 있습니다.
@@ -75,7 +75,7 @@ ASP.NET Core 앱의 일반적인 성능 문제는 비동기 일 수 있는 호�
 
 * 모든 데이터 액세스 Api를 비동기적 **으로 호출 합니다** .
 * 필요한 것 보다 더 많은 데이터를 검색 **하지** 않습니다. 현재 HTTP 요청에 필요한 데이터만 반환 하는 쿼리를 작성 합니다.
-* 약간 오래 된 데이터를 사용할 수 있는 경우 데이터베이스 또는 원격 서비스에서 검색 되는 자주 액세스 하는 데이터를 캐시 하 **는 것이 좋습니다.** 시나리오에 따라 [Memorycache](xref:performance/caching/memory) 또는 [microsoft.web.distributedcache](xref:performance/caching/distributed)를 사용 합니다. 자세한 내용은 <xref:performance/caching/response>을 참조하세요.
+* 약간 오래 된 데이터를 사용할 수 있는 경우 데이터베이스 또는 원격 서비스에서 검색 되는 자주 액세스 하는 데이터를 캐시 하 **는 것이 좋습니다.** 시나리오에 따라 [Memorycache](xref:performance/caching/memory) 또는 [microsoft.web.distributedcache](xref:performance/caching/distributed)를 사용 합니다. 자세한 내용은 <xref:performance/caching/response>를 참조하세요.
 * 네트워크 왕복 **을 최소화 합니다** . 목표는 여러 호출이 아닌 단일 호출에서 필요한 데이터를 검색 하는 것입니다.
 * 읽기 전용 용도로 데이터에 액세스할 때 Entity Framework Core에서 [추적 안 함 쿼리](/ef/core/querying/tracking#no-tracking-queries) **를 사용 합니다** . EF Core 추적 되지 않는 쿼리 결과를 보다 효율적으로 반환할 수 있습니다.
 * LINQ 쿼리 **를 필터링 하** 고 집계 (예: `.Where`, `.Select`또는 `.Sum` 문 포함) 하 여 데이터베이스에서 필터링을 수행 하도록 합니다.
@@ -140,7 +140,7 @@ ASP.NET Core 앱에 대 한 대부분의 요청은 컨트롤러 또는 페이지
 
 ## <a name="use-the-latest-aspnet-core-release"></a>최신 ASP.NET Core 릴리스 사용
 
-ASP.NET Core의 새 릴리스에는 성능 향상이 포함 되어 있습니다. .NET Core 및 ASP.NET Core의 최적화는 일반적으로 최신 버전이 이전 버전을 내지만 것을 의미 합니다. 예를 들어 .NET Core 2.1은 [`Span<T>`](https://msdn.microsoft.com/magazine/mt814808.aspx)에서 컴파일된 정규식 및 benefitted에 대 한 지원을 추가 했습니다. ASP.NET Core 2.2에는 HTTP/2에 대 한 지원이 추가 되었습니다. [ASP.NET Core 3.0](xref:aspnetcore-3.0) 은 메모리 사용을 줄이고 처리량을 향상 시키는 많은 향상 된 기능을 추가 합니다. 성능이 우선 되는 경우 ASP.NET Core의 현재 버전으로 업그레이드 하는 것이 좋습니다.
+ASP.NET Core의 새 릴리스에는 성능 향상이 포함 되어 있습니다. .NET Core 및 ASP.NET Core의 최적화는 일반적으로 최신 버전이 이전 버전을 내지만 것을 의미 합니다. 예를 들어 .NET Core 2.1은 [\<t > 범위](https://msdn.microsoft.com/magazine/mt814808.aspx)에서 컴파일된 정규식 및 benefitted에 대 한 지원을 추가 했습니다. ASP.NET Core 2.2에는 HTTP/2에 대 한 지원이 추가 되었습니다. [ASP.NET Core 3.0](xref:aspnetcore-3.0) 은 메모리 사용을 줄이고 처리량을 향상 시키는 많은 향상 된 기능을 추가 합니다. 성능이 우선 되는 경우 ASP.NET Core의 현재 버전으로 업그레이드 하는 것이 좋습니다.
 
 ## <a name="minimize-exceptions"></a>예외 최소화
 

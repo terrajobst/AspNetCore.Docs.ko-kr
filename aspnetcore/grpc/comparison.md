@@ -4,16 +4,16 @@ author: jamesnk
 description: GRPC와 HTTP Api를 비교한 방법과 권장 시나리오를 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 11/12/2019
+ms.date: 12/05/2019
 no-loc:
 - SignalR
 uid: grpc/comparison
-ms.openlocfilehash: ceb24d656827548492a6fa326681922297fc481b
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 8935e665dfd5d8f9afa002f475c202ec0f0ee657
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963655"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880675"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>gRPC 서비스와 HTTP API 비교
 
@@ -31,7 +31,7 @@ ms.locfileid: "73963655"
 | 프로토콜         | HTTP/2                                             | HTTP                          |
 | Payload          | [Protobuf (소형, 이진)](#performance)           | JSON (매우 큼, 사람이 읽을 수 있음)  |
 | Prescriptiveness | [Strict 사양](#strict-specification)      | 토너가. 모든 HTTP가 유효 합니다.     |
-| 스트리밍        | [클라이언트, 서버, 양방향](#streaming)       | 클라이언트, 서버                |
+| Streaming        | [클라이언트, 서버, 양방향](#streaming)       | 클라이언트, 서버                |
 | 브라우저 지원  | [아니요 (grpc-웹 필요)](#limited-browser-support) | 예                           |
 | 보안         | 전송 (TLS)                                    | 전송 (TLS)               |
 | 클라이언트 코드 생성 | [예](#code-generation)                      | OpenAPI + 타사 도구 |
@@ -49,7 +49,7 @@ gRPC는 http 1.x에서 상당한 성능 이점을 제공 하는 http의 주요 �
 
 ### <a name="code-generation"></a>코드 생성
 
-모든 gRPC 프레임 워크는 코드 생성에 대 한 최고 수준의 지원을 제공 합니다. GRPC 개발에 대 한 핵심 파일은 gRPC 서비스 및 메시지의 계약을 정의 하는 [ .pfile](https://developers.google.com/protocol-buffers/docs/proto3)입니다. 이 파일 gRPC 프레임 워크에서 코드는 서비스 기본 클래스, 메시지 및 전체 클라이언트를 생성 합니다.
+모든 gRPC 프레임 워크는 코드 생성에 대 한 최고 수준의 지원을 제공 합니다. GRPC 개발에 대 한 핵심 파일은 gRPC 서비스 및 메시지의 계약을 정의 하는 [.pfile](https://developers.google.com/protocol-buffers/docs/proto3)입니다. 이 파일 gRPC 프레임 워크에서 코드는 서비스 기본 클래스, 메시지 및 전체 클라이언트를 생성 합니다.
 
 서버와 클라이언트 간에 *proto* 파일을 공유 하 여 메시지와 클라이언트 코드를 종단 간에서 생성할 수 있습니다. 클라이언트의 코드 생성은 클라이언트와 서버에서 메시지의 중복을 제거 하 고 강력한 형식의 클라이언트를 만듭니다. 클라이언트를 작성 하지 않아도 많은 서비스를 갖춘 응용 프로그램에 상당한 개발 시간이 절감 됩니다.
 
@@ -59,7 +59,7 @@ JSON을 사용 하는 HTTP API에 대 한 공식 사양이 없습니다. 개발�
 
 [Grpc 사양은](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md) grpc 서비스에서 따라야 하는 형식에 대 한 지침입니다. grpc는 플랫폼 및 구현에서 일치 하므로 논쟁을 제거 하 고 개발자 시간을 절약 합니다.
 
-### <a name="streaming"></a>스트리밍
+### <a name="streaming"></a>Streaming
 
 H t t p/2는 수명이 긴 실시간 통신 스트림에 대 한 기초를 제공 합니다. gRPC는 HTTP/2를 통한 스트리밍을 위한 최고 수준의 지원을 제공 합니다.
 

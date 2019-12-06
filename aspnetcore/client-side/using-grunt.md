@@ -1,62 +1,62 @@
 ---
-title: ASP.NET Core에서 사용 하 여 Grunt
+title: ASP.NET Core에서 Grunt 사용
 author: rick-anderson
-description: ASP.NET Core에서 사용 하 여 Grunt
+description: ASP.NET Core에서 Grunt 사용
 ms.author: riande
-ms.date: 06/18/2019
+ms.date: 12/05/2019
 uid: client-side/using-grunt
-ms.openlocfilehash: f3832bd1fe5721fbda114103ac11a8d55312bcb2
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: e516b85da7e94d0c93be642086fede0a11fea3c2
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67813560"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74879788"
 ---
-# <a name="use-grunt-in-aspnet-core"></a>ASP.NET Core에서 사용 하 여 Grunt
+# <a name="use-grunt-in-aspnet-core"></a>ASP.NET Core에서 Grunt 사용
 
-Grunt은 스크립트 축소, TypeScript 컴파일, 코드 품질 다름이 도구, 프로세서를 전 하는 CSS, 및 클라이언트 개발을 지원 하기 위해 수행 해야 하는 모든 반복 작업에 대 한 자동화 하는 JavaScript 작업 실행 기는 합니다. Visual Studio에서 grunt 완전히 지원 됩니다.
+Grunt는 스크립트 축소, TypeScript 컴파일, 코드 품질 "보풀이 없는" 도구, CSS 이전 프로세서 및 클라이언트 개발을 지원 하기 위해 수행 해야 하는 반복적인 chore을 자동화 하는 JavaScript 작업 runner입니다. Grunt는 Visual Studio에서 완벽 하 게 지원 됩니다.
 
-이 예제에서는 빈 ASP.NET Core 프로젝트의 시작 점으로에서 클라이언트 빌드 프로세스를 자동화 하는 방법을 보여 줍니다.
+이 예제에서는 빈 ASP.NET Core 프로젝트를 시작 지점으로 사용 하 여 클라이언트 빌드 프로세스를 처음부터 자동화 하는 방법을 보여 줍니다.
 
-완성 된 예제에서는 대상 배포 디렉터리를 정리, JavaScript 파일을 결합, 코드 품질을 확인, JavaScript 파일 콘텐츠를 압축 및 웹 응용 프로그램의 루트에 배포 합니다. 다음 패키지를 사용 합니다.
+완성 된 예제에서는 대상 배포 디렉터리를 정리 하 고, JavaScript 파일을 결합 하 고, 코드 품질을 검사 하 고, JavaScript 파일 콘텐츠를 압축 하 고, 웹 응용 프로그램의 루트에 배포 합니다. 다음 패키지를 사용 합니다.
 
-* **grunt**: Grunt 작업 실행 기 패키지입니다.
+* **grunt**: grunt task runner 패키지입니다.
 
-* **grunt-contrib-clean**: 파일 또는 디렉터리를 제거 하는 플러그 인입니다.
+* **grunt-clean**: 파일이 나 디렉터리를 제거 하는 플러그 인입니다.
 
-* **grunt-contrib-jshint**: JavaScript 코드 품질을 검토 하는 플러그 인입니다.
+* **grunt-jshint**: JavaScript 코드 품질을 검토 하는 플러그 인입니다.
 
-* **grunt-contrib-concat**: 단일 파일에 파일을 조인 하는 플러그 인입니다.
+* **grunt-concat**: 파일을 단일 파일로 조인 하는 플러그 인입니다.
 
-* **grunt-contrib-uglify**: 크기를 줄이기 위해 JavaScript를 축소 하는 플러그 인입니다.
+* **grunt-uglify**: 크기를 줄이기 위해 JavaScript를 축소 하는 플러그 인입니다.
 
-* **grunt-contrib-watch**: 파일 작업을 감시 하는 플러그 인입니다.
+* **grunt-watch**: 파일 작업을 감시 하는 플러그 인입니다.
 
 ## <a name="preparing-the-application"></a>응용 프로그램 준비
 
-시작 하려면 새 빈 웹 응용 프로그램을 설정 하 고 TypeScript 예제 파일을 추가 합니다. TypeScript 파일 자동으로 기본 Visual Studio 설정을 사용 하 여 JavaScript로 컴파일되는 및 Grunt를 사용 하 여 처리 하는 데는 원료 됩니다.
+시작 하려면 새 빈 웹 응용 프로그램을 설정 하 고 TypeScript 예제 파일을 추가 합니다. TypeScript 파일은 기본 Visual Studio 설정을 사용 하 여 JavaScript로 자동으로 컴파일되며 Grunt를 사용 하 여 처리 하는 원시 자료가 됩니다.
 
-1. Visual Studio에서 만드는 새 `ASP.NET Web Application`합니다.
+1. Visual Studio에서 새 `ASP.NET Web Application`를 만듭니다.
 
-2. 에 **새 ASP.NET 프로젝트** 대화 상자에서 ASP.NET Core를 선택 **빈** 템플릿을 확인 단추를 클릭 합니다.
+2. **새 ASP.NET 프로젝트** 대화 상자에서 **빈** 템플릿 ASP.NET Core 선택 하 고 확인 단추를 클릭 합니다.
 
-3. 솔루션 탐색기에서 프로젝트 구조를 검토 합니다. 합니다 `\src` 폴더에 빈 포함 `wwwroot` 및 `Dependencies` 노드.
+3. 솔루션 탐색기에서 프로젝트 구조를 검토 합니다. `\src` 폴더는 빈 `wwwroot` 및 `Dependencies` 노드를 포함 합니다.
 
     ![빈 웹 솔루션](using-grunt/_static/grunt-solution-explorer.png)
 
-4. 라는 새 폴더 추가 `TypeScript` 프로젝트 디렉터리에 있습니다.
+4. 프로젝트 디렉터리에 `TypeScript` 라는 새 폴더를 추가 합니다.
 
-5. 모든 파일을 추가 하기 전에 Visual Studio 옵션에 있는지 확인 ' 컴파일 저장 시 ' 체크 TypeScript 파일에 대 한 합니다. 이동할 **도구가** > **옵션** > **텍스트 편집기** > **Typescript**  >  **프로젝트**:
+5. 파일을 추가 하기 전에 Visual Studio에 TypeScript 파일에 대해 ' 저장 시 컴파일 ' 옵션이 선택 되어 있는지 확인 합니다. **도구** > **옵션** > **Typescript** > **프로젝트** > **텍스트 편집기** 로 이동 합니다.
 
-    ![TypeScript 파일 자동 컴파일 설정 옵션](using-grunt/_static/typescript-options.png)
+    ![TypeScript 파일의 자동 컴파일 설정 옵션](using-grunt/_static/typescript-options.png)
 
-6. 마우스 오른쪽 단추로 클릭 합니다 `TypeScript` 디렉터리 및 선택 **추가 > 새 항목** 상황에 맞는 메뉴입니다. 선택 된 **JavaScript 파일** 항목 및 파일 이름을 *Tastes.ts* (참고는 \*.ts 확장). 아래 TypeScript 코드 줄을 파일에 복사 (저장할 때, 새 *Tastes.js* JavaScript 소스 파일이 표시 됩니다).
+6. `TypeScript` 디렉터리를 마우스 오른쪽 단추로 클릭 하 고 상황에 맞는 메뉴에서 **> 새 항목 추가** 를 선택 합니다. **JavaScript 파일** 항목을 선택 하 고 파일 이름을 *취향* 로 \*. 아래 TypeScript 코드 줄을 파일에 복사 합니다. 저장할 때 새 *취향* 파일이 JavaScript 원본과 함께 표시 됩니다.
 
     ```typescript
     enum Tastes { Sweet, Sour, Salty, Bitter }
     ```
 
-7. 두 번째 파일을 추가 합니다 **TypeScript** 디렉터리 이름을 `Food.ts`입니다. 파일에 아래 코드를 복사 합니다.
+7. **TypeScript** 디렉터리에 두 번째 파일을 추가 하 고 이름을 `Food.ts`로 만듭니다. 아래 코드를 파일에 복사 합니다.
 
     ```typescript
     class Food {
@@ -85,18 +85,18 @@ Grunt은 스크립트 축소, TypeScript 컴파일, 코드 품질 다름이 도�
 
 ## <a name="configuring-npm"></a>NPM 구성
 
-다음으로, grunt 및 grunt 작업을 다운로드 하려면 NPM을 구성 합니다.
+다음으로 NPM를 구성 하 여 grunt 및 grunt를 다운로드 합니다.
 
-1. 솔루션 탐색기에서 프로젝트를 마우스 오른쪽 단추로 클릭 하 고 선택 **추가 > 새 항목** 상황에 맞는 메뉴입니다. 선택는 **NPM 구성 파일** 항목, 기본 이름을 그대로 *package.json*를 클릭 합니다 **추가** 단추입니다.
+1. 솔루션 탐색기에서 프로젝트를 마우스 오른쪽 단추로 클릭 하 고 상황에 맞는 메뉴에서 **> 새 항목 추가** 를 선택 합니다. **NPM 구성 파일** 항목을 선택 하 고 기본 이름인 *package*를 그대로 두고 **추가** 단추를 클릭 합니다.
 
-2. 에 *package.json* 파일에 `devDependencies` 중괄호 개체 "grunt"를 입력 합니다. 선택 `grunt` Intellisense에서 나열 하 고 Enter 키를 누릅니다. Visual Studio grunt 패키지 이름을 따옴표를 콜론을 추가 합니다. 콜론의 오른쪽에 Intellisense 목록 맨 위에서 패키지의 안정적인 최신 버전 선택 (키를 눌러 `Ctrl-Space` Intellisense 표시 하지 않는 경우).
+2. *Package. json* 파일의 `devDependencies` 개체 중괄호 내에 "grunt"를 입력 합니다. Intellisense 목록에서 `grunt`을 선택 하 고 Enter 키를 누릅니다. Visual Studio는 grunt 패키지 이름을 인용 하 고 콜론을 추가 합니다. 콜론의 오른쪽에 있는 최신 버전의 패키지를 Intellisense 목록 위쪽에서 선택 합니다. Intellisense가 나타나지 않으면 `Ctrl-Space`를 누릅니다.
 
     ![grunt Intellisense](using-grunt/_static/devdependencies-grunt.png)
 
     > [!NOTE]
-    > NPM을 사용 [유의 적 버전](https://semver.org/) 종속성을 구성 합니다. 번호 매기기 체계를 사용 하 여 패키지를 식별 하는 의미 체계 버전 관리, 라고도 SemVer \<주요 >.\< 부 버전 >. \<패치 >. Intellisense만 몇 가지 일반적인 옵션을 표시 하 여 의미 체계 버전 관리를 간소화 합니다. (위의 예에서 0.4.5) Intellisense 목록에 맨 위 항목에는 패키지의 안정적인 최신 버전으로 간주 됩니다. 캐럿 (^) 기호가 일치 하는 가장 최근의 주 버전 항목과 물결표 (~) 최신 부 버전. 참조 된 [NPM semver 버전 파서 참조](https://www.npmjs.com/package/semver) SemVer 제공 하는 전체 표현 가이드로 합니다.
+    > NPM은 [의미 체계 버전 관리](https://semver.org/) 를 사용 하 여 종속성을 구성 합니다. SemVer 라고도 하는 의미 체계 버전 관리는 번호 매기기 체계가 \<주 > 패키지를 식별 합니다.\<부 >입니다. 패치 >를\<합니다. Intellisense는 몇 가지 일반적인 선택 항목만 표시 하 여 의미 체계 버전 관리를 간소화 합니다. Intellisense 목록의 맨 위 항목 (위 예제의 0.4.5)은 최신 안정적인 패키지 버전으로 간주 됩니다. 캐럿 (^) 기호는 가장 최근의 주 버전과 일치 하 고 물결표 (~)는 가장 최근의 부 버전과 일치 합니다. SemVer에서 제공 하는 전체 표현을에 대 한 지침으로 [NPM semver 버전 파서 참조](https://www.npmjs.com/package/semver) 를 참조 하세요.
 
-3. 로드에 대 한 자세한 종속성 grunt 추가-contrib-\* 에 대 한 패키지 *정리*를 *jshint*를 *concat*를 *uglify*, 및 *조사식* 아래 예와에서 같이 합니다. 버전은 예제와 일치 하지 않아도 됩니다.
+3. 아래 예제와 같이 *clean*, *jshint*, *concat*, *uglify*및 *watch* 에 대 한\* grunt 패키지를 로드 하는 데 더 많은 종속성을 추가 합니다. 버전은 예제와 일치 하지 않아도 됩니다.
 
     ```json
     "devDependencies": {
@@ -109,24 +109,24 @@ Grunt은 스크립트 축소, TypeScript 컴파일, 코드 품질 다름이 도�
     }
     ```
 
-4. 저장 된 *package.json* 파일입니다.
+4. *Package. json* 파일을 저장 합니다.
 
-각 패키지 `devDependencies` 항목 각 패키지에 필요한 파일과 함께 다운로드 됩니다. 패키지 파일을 찾을 수 있습니다 합니다 *node_modules* 사용 하 여 디렉터리를 **모든 파일 표시** 단추 **솔루션 탐색기**합니다.
+각 `devDependencies` 항목에 대 한 패키지가 각 패키지에 필요한 파일과 함께 다운로드 됩니다. **솔루션 탐색기**의 **모든 파일 표시** 단추를 사용 하도록 설정 하면 *node_modules* 디렉터리에서 패키지 파일을 찾을 수 있습니다.
 
 ![grunt node_modules](using-grunt/_static/node-modules.png)
 
 > [!NOTE]
-> 해야 할 경우 종속성을 수동으로 복원할 수 있습니다 **솔루션 탐색기** 마우스 오른쪽 단추로 클릭 하 여 `Dependencies\NPM` 선택 하는 **패키지 복원** 메뉴 옵션입니다.
+> 필요한 경우 `Dependencies\NPM`을 마우스 오른쪽 단추로 클릭 하 고 **패키지 복원** 메뉴 옵션을 선택 하 여 **솔루션 탐색기** 에서 종속성을 수동으로 복원할 수 있습니다.
 
 ![패키지 복원](using-grunt/_static/restore-packages.png)
 
 ## <a name="configuring-grunt"></a>Grunt 구성
 
-Grunt 이라는 매니페스트를 사용 하 여 구성 됩니다 *Gruntfile.js* 정의 하는, 로드 하 고 수동으로 실행 하거나 Visual Studio에서 이벤트에 따라 자동으로 실행 되도록 구성할 수 있는 작업을 등록 합니다.
+Grunt는 수동으로 실행 하거나 Visual Studio의 이벤트에 따라 자동으로 실행 되도록 구성할 수 있는 작업을 정의, 로드 및 등록 하는 *Gruntfile* 라는 매니페스트를 사용 하 여 구성 됩니다.
 
-1. 프로젝트를 마우스 오른쪽 단추로 누르고 **추가** > **새 항목**합니다. 선택 합니다 **JavaScript 파일** 항목 템플릿, 이름을 *Gruntfile.js*, 클릭 하 고는 **추가** 단추.
+1. 프로젝트를 마우스 오른쪽 단추로 클릭 하 고 **추가** > **새 항목**을 선택 합니다. **JavaScript 파일** 항목 템플릿을 선택 하 고 이름을 *Gruntfile*로 변경한 다음 **추가** 단추를 클릭 합니다.
 
-1. 다음 코드를 추가 *Gruntfile.js*합니다. `initConfig` 각 패키지에 대 한 옵션을 설정 하는 함수 및 모듈의 나머지 부분 로드 하 고 작업을 등록 합니다.
+1. *Gruntfile*에 다음 코드를 추가 합니다. `initConfig` 함수는 각 패키지에 대 한 옵션을 설정 하 고 나머지 모듈은 작업을 로드 및 등록 합니다.
 
    ```javascript
    module.exports = function (grunt) {
@@ -135,7 +135,7 @@ Grunt 이라는 매니페스트를 사용 하 여 구성 됩니다 *Gruntfile.js
    };
    ```
 
-1. 내 합니다 `initConfig` 함수에 대 한 옵션을 추가 합니다 합니다 `clean` 예제에 표시 된 대로 작업 *Gruntfile.js* 아래. `clean` 작업 디렉터리 문자열 배열을 허용 합니다. 이 태스크에서 파일을 제거 *wwwroot/lib* 전체를 제거 하 고 *임시/* 디렉터리입니다.
+1. `initConfig` 함수 내에서 아래 예제 *Gruntfile* 같이 `clean` 작업에 대 한 옵션을 추가 합니다. `clean` 태스크는 디렉터리 문자열의 배열을 허용 합니다. 이 작업은 *wwwroot/lib* 에서 파일을 제거 하 고 전체 */임시* 디렉터리를 제거 합니다.
 
     ```javascript
     module.exports = function (grunt) {
@@ -145,34 +145,34 @@ Grunt 이라는 매니페스트를 사용 하 여 구성 됩니다 *Gruntfile.js
     };
     ```
 
-1. 아래는 `initConfig` 함수를 호출을 추가 `grunt.loadNpmTasks`합니다. 이렇게 하면 작업 실행 가능한 Visual Studio에서.
+1. `initConfig` 함수 아래에 `grunt.loadNpmTasks`에 대 한 호출을 추가 합니다. 그러면 Visual Studio에서 작업을 실행할 수 있습니다.
 
     ```javascript
     grunt.loadNpmTasks("grunt-contrib-clean");
     ```
 
-1. 저장할 *Gruntfile.js*합니다. 파일은 아래 스크린샷과 같은 비슷해야 합니다.
+1. *Gruntfile*를 저장 합니다. 파일은 아래 스크린샷에서와 같이 표시 됩니다.
 
     ![초기 gruntfile](using-grunt/_static/gruntfile-js-initial.png)
 
-1. 마우스 오른쪽 단추로 클릭 *Gruntfile.js* 선택한 **Task Runner 탐색기** 상황에 맞는 메뉴입니다. 합니다 **Task Runner 탐색기** 창이 열립니다.
+1. *Gruntfile* 를 마우스 오른쪽 단추로 클릭 하 고 상황에 맞는 메뉴에서 **작업 Runner 탐색기** 를 선택 합니다. **작업 러너 탐색기** 창이 열립니다.
 
     ![작업 러너 탐색기 메뉴](using-grunt/_static/task-runner-explorer-menu.png)
 
-1. 확인 `clean` 아래에 표시 **태스크** 에 **Task Runner 탐색기**합니다.
+1. **작업 러너 탐색기**의 **작업** 아래에 `clean` 표시 되는지 확인 합니다.
 
-    ![작업 러너 탐색기 태스크 목록](using-grunt/_static/task-runner-explorer-tasks.png)
+    ![작업 러너 탐색기 작업 목록](using-grunt/_static/task-runner-explorer-tasks.png)
 
-1. 정리 작업을 마우스 오른쪽 단추로 클릭 **실행** 상황에 맞는 메뉴입니다. 명령 창에는 작업의 진행률이 표시 됩니다.
+1. 정리 작업을 마우스 오른쪽 단추로 클릭 하 고 상황에 맞는 메뉴에서 **실행** 을 선택 합니다. 명령 창에 작업 진행률이 표시 됩니다.
 
-    ![작업 러너 탐색기 실행 정리 작업](using-grunt/_static/task-runner-explorer-run-clean.png)
+    ![작업 러너 탐색기 정리 작업 실행](using-grunt/_static/task-runner-explorer-run-clean.png)
 
     > [!NOTE]
-    > 파일 또는 디렉터리가 아직 정리에 있습니다. 원하는 경우 솔루션 탐색기에서이 수동으로 만들 수 있으며 다음 테스트로 정리 작업을 실행 수 있습니다.
+    > 아직 정리할 파일이 나 디렉터리가 없습니다. 원하는 경우 솔루션 탐색기에서 수동으로 만든 다음 테스트로 정리 작업을 실행할 수 있습니다.
 
-1. 에 `initConfig` 함수에 대 한 항목을 추가 `concat` 아래 코드를 사용 합니다.
+1. `initConfig` 함수에서 아래 코드를 사용 하 여 `concat`에 대 한 항목을 추가 합니다.
 
-    `src` 속성 배열 이러한 결합 해야 순서로 결합 하는 파일을 나열 합니다. `dest` 속성 생성 되는 결합된 된 파일에 경로 할당 합니다.
+    `src` 속성 배열에는 결합할 파일이 결합 되는 순서 대로 나열 됩니다. `dest` 속성은 생성 된 결합 된 파일에 경로를 할당 합니다.
 
     ```javascript
     concat: {
@@ -184,11 +184,11 @@ Grunt 이라는 매니페스트를 사용 하 여 구성 됩니다 *Gruntfile.js
     ```
 
     > [!NOTE]
-    > `all` 위의 코드에서 속성은 대상의 이름입니다. 목표는 여러 빌드 환경 수 있도록 일부 Grunt 작업에 사용 됩니다. IntelliSense를 사용 하 여 기본 제공 대상을 보거나 직접 지정할 수 있습니다.
+    > 위의 코드에서 `all` 속성은 대상의 이름입니다. 대상은 여러 빌드 환경을 허용 하기 위해 일부 Grunt 작업에서 사용 됩니다. IntelliSense를 사용 하 여 기본 제공 대상을 보거나 직접 지정할 수 있습니다.
 
-1. 추가 된 `jshint` 아래 코드를 사용 하 여 작업 합니다.
+1. 아래 코드를 사용 하 여 `jshint` 작업을 추가 합니다.
 
-    jshint `code-quality` 있는 모든 JavaScript 파일에 대 한 유틸리티를 실행 합니다 *temp* 디렉터리입니다.
+    Jshint `code-quality` 유틸리티는 *temp* 디렉터리에 있는 모든 JavaScript 파일에 대해 실행 됩니다.
 
     ```javascript
     jshint: {
@@ -200,11 +200,11 @@ Grunt 이라는 매니페스트를 사용 하 여 구성 됩니다 *Gruntfile.js
     ```
 
     > [!NOTE]
-    > 옵션 "-W069"는 오류가 때 생성 한 jshint JavaScript는 괄호, 즉 점 표기법 대신 속성을 할당 하는 구문을 `Tastes["Sweet"]` 대신 `Tastes.Sweet`합니다. 옵션을 계속 하는 프로세스의 나머지 부분을 허용 하도록 경고를 해제 합니다.
+    > "-W069" 옵션은 JavaScript에서 대괄호 구문을 사용 하 여 점 표기법 대신 (`Tastes["Sweet"]` `Tastes.Sweet`대신에 속성을 할당할 때 발생 하는 오류입니다. 옵션은 나머지 프로세스를 계속할 수 있도록 경고를 끕니다.
 
-1. 추가 된 `uglify` 아래 코드를 사용 하 여 작업 합니다.
+1. 아래 코드를 사용 하 여 `uglify` 작업을 추가 합니다.
 
-    축소 작업은 *combined.js* 파일이 임시 디렉터리에서 찾은 wwwroot/lib 표준 명명 규칙에 따라에 결과 파일을 만듭니다  *\<파일 이름\>. min.js*.
+    이 작업은 축소 *파일* 이름\>. s t a t e m. s e r v e r *\<파일 이름*에 대 한 표준 명명 규칙에 따라 wwwroot/lib에 결과 파일을 만듭니다.
 
     ```javascript
     uglify: {
@@ -215,7 +215,7 @@ Grunt 이라는 매니페스트를 사용 하 여 구성 됩니다 *Gruntfile.js
     },
     ```
 
-1. 에 대 한 호출 아래의 `grunt.loadNpmTasks` 로드 하는 `grunt-contrib-clean`에서 jshint, concat에 대 한 동일한 호출을 포함 하 고 아래 코드를 사용 하 여 uglify입니다.
+1. `grunt-contrib-clean`를 로드 하는 `grunt.loadNpmTasks`에 대 한 호출에서 아래 코드를 사용 하 여 jshint, concat 및 uglify에 대 한 동일한 호출을 포함 합니다.
 
     ```javascript
     grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -223,36 +223,36 @@ Grunt 이라는 매니페스트를 사용 하 여 구성 됩니다 *Gruntfile.js
     grunt.loadNpmTasks('grunt-contrib-uglify');
     ```
 
-1. 저장할 *Gruntfile.js*합니다. 파일은 아래 예제와 비슷해야 합니다.
+1. *Gruntfile*를 저장 합니다. 파일은 아래 예제와 같이 표시 됩니다.
 
-    ![전체 grunt 파일 예제](using-grunt/_static/gruntfile-js-complete.png)
+    ![complete grunt 파일 예제](using-grunt/_static/gruntfile-js-complete.png)
 
-1. 있음을 합니다 **Task Runner 탐색기** 작업 목록은 `clean`, `concat`, `jshint` 및 `uglify` 작업 합니다. 순서로 각 태스크를 실행 하 고 결과를 관찰 **솔루션 탐색기**합니다. 각 태스크는 오류 없이 실행 해야 합니다.
+1. **작업 러너 탐색기** 작업 목록에 `clean`, `concat`, `jshint` 및 `uglify` 태스크가 포함 되어 있습니다. 각 작업을 순서 대로 실행 하 고 **솔루션 탐색기**의 결과를 확인 합니다. 각 태스크는 오류 없이 실행 되어야 합니다.
 
-    ![각 태스크를 실행 하는 task runner 탐색기](using-grunt/_static/task-runner-explorer-run-each-task.png)
+    ![작업 러너 탐색기 각 작업 실행](using-grunt/_static/task-runner-explorer-run-each-task.png)
 
-    Concat 태스크를 만듭니다 *combined.js* 파일을 임시 디렉터리에 배치 합니다. `jshint` 단순히 작업 실행 및 출력을 생성 하지 않습니다. 합니다 `uglify` 태스크를 만듭니다 *combined.min.js* 파일과에 배치 *wwwroot/lib*합니다. 완료 되 면 솔루션 아래 스크린샷과 비슷하게 표시 됩니다.
+    Concat 작업은 결합 된 새 *.js* 파일을 만들고 임시 디렉터리에 배치 합니다. `jshint` 작업은 단순히 실행 되 고 출력을 생성 하지 않습니다. `uglify` 태스크는 결합 된 새 *.70.js* 파일을 만들어 *wwwroot/lib*에 배치 합니다. 완료 되 면 솔루션은 아래 스크린샷에서와 같이 표시 됩니다.
 
-    ![솔루션 탐색기에서 모든 작업](using-grunt/_static/solution-explorer-after-all-tasks.png)
+    ![모든 작업 후의 솔루션 탐색기](using-grunt/_static/solution-explorer-after-all-tasks.png)
 
     > [!NOTE]
-    > 각 패키지에 대 한 옵션에 대 한 자세한 내용은 방문 [ https://www.npmjs.com/ ](https://www.npmjs.com/) 및 기본 페이지에서 검색 상자에 패키지 이름 조회 합니다. 예를 들어, 모든 매개 변수를 설명 하는 설명서 링크를 표시 하려면 grunt contrib 정리 패키지를 조회할 수 있습니다.
+    > 각 패키지에 대 한 옵션에 대 한 자세한 내용을 보려면 [https://www.npmjs.com/](https://www.npmjs.com/) 를 방문 하 여 기본 페이지의 검색 상자에서 패키지 이름을 조회 합니다. 예를 들어 grunt 패키지를 조회 하 여 모든 매개 변수를 설명 하는 설명서 링크를 가져올 수 있습니다.
 
-### <a name="all-together-now"></a>모두 통합
+### <a name="all-together-now"></a>요약정리
 
-Grunt를 사용 하 여 `registerTask()` 특정 순서로 일련의 작업을 실행 하는 방법입니다. 예를 들어, 위의 단계를 정리 하는 순서로-> 예제를 실행 하려면 concat-> jshint-> uglify 모듈에 아래 코드를 추가 합니다. 코드는 initConfig 외부 loadNpmTasks() 호출에 동일한 수준에 추가 되어야 합니다.
+Grunt `registerTask()` 메서드를 사용 하 여 특정 순서로 일련의 작업을 실행할 수 있습니다. 예를 들어 위 예제 단계를 정리 > concat-> jshint-> uglify 순서에서 실행 하려면 모듈에 아래 코드를 추가 합니다. InitConfig 외부의 loadNpmTasks () 호출과 같은 수준에 코드를 추가 해야 합니다.
 
 ```javascript
 grunt.registerTask("all", ['clean', 'concat', 'jshint', 'uglify']);
 ```
 
-별칭 작업에서 Task Runner 탐색기에서 새 작업이 표시 됩니다. 마우스 오른쪽 단추로 클릭 하 고 다른 작업 처럼 실행할 수 있습니다. `all` 태스크가 실행 됩니다 `clean`, `concat`, `jshint` 및 `uglify`를 순서 대로 합니다.
+새 작업은 작업 러너 탐색기의 별칭 작업 아래에 표시 됩니다. 마우스 오른쪽 단추를 클릭 하 고 다른 작업과 마찬가지로 실행할 수 있습니다. `all` 태스크는 `clean`, `concat`, `jshint` 및 `uglify`순서 대로 실행 됩니다.
 
 ![별칭 grunt 작업](using-grunt/_static/alias-tasks.png)
 
 ## <a name="watching-for-changes"></a>변경 내용 감시하기
 
-`watch` 작업 파일 및 디렉터리를 유지 합니다. 시계 변경 내용을 감지한 경우 자동으로 작업을 트리거합니다. 아래 코드에 변경 내용을 감시 하려면 initConfig 추가할 \*TypeScript 디렉터리의.js 파일입니다. JavaScript 파일이 변경 되 면 `watch` 실행될지는 `all` 작업 합니다.
+`watch` 태스크는 파일 및 디렉터리에 대 한 눈을 유지 합니다. 변경 내용이 검색 되 면 조사식이 자동으로 작업을 트리거합니다. InitConfig에 아래 코드를 추가 하 여 TypeScript 디렉터리에 \*.js 파일의 변경 내용을 감시 합니다. JavaScript 파일이 변경 되 면 `watch`에서 `all` 작업을 실행 합니다.
 
 ```javascript
 watch: {
@@ -261,26 +261,26 @@ watch: {
 }
 ```
 
-호출을 추가 `loadNpmTasks()` 표시할는 `watch` Task Runner 탐색기에서 작업 합니다.
+`loadNpmTasks()`에 대 한 호출을 추가 하 여 Task Runner 탐색기에서 `watch` 작업을 표시 합니다.
 
 ```javascript
 grunt.loadNpmTasks('grunt-contrib-watch');
 ```
 
-Task Runner 탐색기에 있는 watch 작업을 마우스 오른쪽 단추로 클릭 하 고 상황에 맞는 메뉴에서 실행을 선택 합니다. "대기 중..."이 실행 중인 보기 작업을 보여 주는 명령 창에 표시 됩니다. 메시지. TypeScript 파일 중 하나를 열고 하 고 공백을 추가 파일을 저장 합니다. 조사식 작업 트리거 되 고 순서 대로 실행 하는 다른 작업을 트리거합니다. 다음 스크린샷은 샘플 실행을 보여 줍니다.
+작업 러너 탐색기에서 조사식 작업을 마우스 오른쪽 단추로 클릭 하 고 상황에 맞는 메뉴에서 실행을 선택 합니다. 실행 중인 조사식 작업을 보여 주는 명령 창에 "대기 중 ..."이 표시 됩니다. 메시지. TypeScript 파일 중 하나를 열고, 공백을 추가한 다음, 파일을 저장 합니다. 그러면 조사식 태스크가 트리거되고 다른 작업이 순서 대로 실행 되도록 트리거합니다. 아래 스크린샷은 샘플 실행을 보여 줍니다.
 
-![작업 출력을 실행](using-grunt/_static/watch-running.png)
+![실행 중인 작업 출력](using-grunt/_static/watch-running.png)
 
 ## <a name="binding-to-visual-studio-events"></a>Visual Studio 이벤트에 바인딩
 
-Visual Studio에서 작업할 때마다 작업을 수동으로 시작 하려는 경우가 아니면 작업을 바인딩할 수 있습니다 **하기 전에 빌드**, **후 빌드**합니다 **정리**, 및  **프로젝트 열기** 이벤트입니다.
+Visual Studio에서 작업할 때마다 수동으로 작업을 시작 하려는 경우가 아니면 빌드 **전**, **빌드 후** **정리**및 **프로젝트 열기** 이벤트 이후에 작업을 바인딩합니다.
 
-바인딩 하겠습니다 `watch` Visual Studio가 열릴 때마다 실행 되도록 합니다. Task Runner 탐색기에서 보기 작업을 마우스 오른쪽 단추로 클릭 하 고 선택 **바인딩 > 프로젝트 열기** 상황에 맞는 메뉴입니다.
+Visual Studio가 열릴 때마다 실행 되도록 `watch`를 바인딩합니다. 작업 러너 탐색기에서 조사식 작업을 마우스 오른쪽 단추로 클릭 하 고 상황에 맞는 메뉴에서 **바인딩** > **프로젝트 열기** 를 선택 합니다.
 
-![프로젝트 열기 작업을 바인딩합니다](using-grunt/_static/bindings-project-open.png)
+![열려 있는 프로젝트에 작업 바인딩](using-grunt/_static/bindings-project-open.png)
 
-언로드하고 프로젝트를 다시 로드 합니다. 프로젝트 다시 로드 되 면 조사식 작업 실행을 자동으로 시작 됩니다.
+프로젝트를 언로드하고 다시 로드 합니다. 프로젝트가 다시 로드 되 면 조사식 태스크가 자동으로 실행 되기 시작 합니다.
 
 ## <a name="summary"></a>요약
 
-Grunt를 강력한 작업 실행 기 대부분의 클라이언트 빌드 작업을 자동화 하는 경우 Grunt NPM의 패키지 및 Visual Studio와의 통합 도구 기능 제공을 활용 합니다. Visual Studio의 Task Runner 탐색기 구성 파일의 변경 사항을 감지 하 고 작업을 실행 하 고 실행 중인 작업을 보고 Visual Studio 이벤트에 작업을 바인딩할 하는 편리한 인터페이스를 제공 합니다.
+Grunt는 대부분의 클라이언트 빌드 작업을 자동화 하는 데 사용할 수 있는 강력한 작업 러너입니다. Grunt는 NPM를 활용 하 여 패키지를 제공 하 고 기능 도구를 Visual Studio와 통합 합니다. Visual Studio의 작업 러너 탐색기는 구성 파일에 대 한 변경 내용을 검색 하 고 작업을 실행 하 고, 실행 중인 작업을 보고, 작업을 Visual Studio 이벤트에 바인딩하는 편리한 인터페이스를 제공 합니다.

@@ -9,12 +9,12 @@ ms.date: 11/27/2019
 no-loc:
 - Blazor
 uid: blazor/components
-ms.openlocfilehash: 19636b0f10e71133eddece918b1bb9e2bc25a226
-ms.sourcegitcommit: 169ea5116de729c803685725d96450a270bc55b7
+ms.openlocfilehash: 9cdbae0bde8f6c44dc8b680dccbf9c8f96043c7f
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/03/2019
-ms.locfileid: "74733845"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74879700"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -171,7 +171,7 @@ Blazor 앱은 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 ## <a name="attribute-splatting-and-arbitrary-parameters"></a>특성 스 플랫 및 임의 매개 변수
 
-구성 요소는 구성 요소의 선언 된 매개 변수 외에 추가 특성도 캡처하고 렌더링할 수 있습니다. [@attributes](xref:mvc/views/razor#attributes) Razor 지시어를 사용 하 여 구성 요소를 렌더링할 때 사전에 추가 특성을 캡처한 다음 요소로 *splatted* 수 있습니다. 이 시나리오는 다양 한 사용자 지정을 지 원하는 태그 요소를 생성 하는 구성 요소를 정의 하는 경우에 유용 합니다. 예를 들어 많은 매개 변수를 지 원하는 `<input>`에 대해 개별적으로 특성을 정의 하는 것이 번거로울 수 있습니다.
+구성 요소는 구성 요소의 선언 된 매개 변수 외에 추가 특성도 캡처하고 렌더링할 수 있습니다. [`@attributes`](xref:mvc/views/razor#attributes) Razor 지시어를 사용 하 여 구성 요소를 렌더링할 때 사전에 추가 특성을 캡처한 다음 요소로 *splatted* 수 있습니다. 이 시나리오는 다양 한 사용자 지정을 지 원하는 태그 요소를 생성 하는 구성 요소를 정의 하는 경우에 유용 합니다. 예를 들어 많은 매개 변수를 지 원하는 `<input>`에 대해 개별적으로 특성을 정의 하는 것이 번거로울 수 있습니다.
 
 다음 예제에서 첫 번째 `<input>` 요소 (`id="useIndividualParams"`)는 개별 구성 요소 매개 변수를 사용 하 고, 두 번째 `<input>` 요소 (`id="useAttributesDict"`)는 특성 스 플랫를 사용 합니다.
 
@@ -287,7 +287,7 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 
 ## <a name="data-binding"></a>데이터 바인딩
 
-구성 요소와 DOM 요소 모두에 대 한 데이터 바인딩은 [@bind](xref:mvc/views/razor#bind) 특성을 사용 하 여 수행 됩니다. 다음 예제에서는 `CurrentValue` 속성을 텍스트 상자의 값에 바인딩합니다.
+구성 요소와 DOM 요소 모두에 대 한 데이터 바인딩은 [`@bind`](xref:mvc/views/razor#bind) 특성을 사용 하 여 수행 됩니다. 다음 예제에서는 `CurrentValue` 속성을 텍스트 상자의 값에 바인딩합니다.
 
 ```cshtml
 <input @bind="CurrentValue" />
@@ -315,7 +315,7 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 
 구성 요소가 렌더링 되 면 input 요소의 `value` `CurrentValue` 속성에서 제공 됩니다. 사용자가 텍스트 상자에를 입력 하 고 요소 포커스를 변경 하면 `onchange` 이벤트가 발생 하 고 `CurrentValue` 속성이 변경 된 값으로 설정 됩니다. 실제로는 `@bind`에서 형식 변환이 수행 되는 경우를 처리 하므로 코드 생성은 더 복잡 합니다. 원칙적으로 `@bind`은 식의 현재 값을 `value` 특성과 연결 하 고 등록 된 처리기를 사용 하 여 변경 내용을 처리 합니다.
 
-`@bind` 구문을 사용 하 여 `onchange` 이벤트를 처리 하는 것 외에도 `event` 매개 변수 ([@bind-value:event](xref:mvc/views/razor#bind))를 사용 하 여 [@bind-value](xref:mvc/views/razor#bind) 특성을 지정 하 여 다른 이벤트를 사용 하 여 속성 또는 필드를 바인딩할 수 있습니다. 다음 예에서는 `oninput` 이벤트의 `CurrentValue` 속성을 바인딩합니다.
+`@bind` 구문을 사용 하 여 `onchange` 이벤트를 처리 하는 것 외에도 `event` 매개 변수 ([`@bind-value:event`](xref:mvc/views/razor#bind))를 사용 하 여 [`@bind-value`](xref:mvc/views/razor#bind) 특성을 지정 하 여 다른 이벤트를 사용 하 여 속성 또는 필드를 바인딩할 수 있습니다. 다음 예에서는 `oninput` 이벤트의 `CurrentValue` 속성을 바인딩합니다.
 
 ```cshtml
 <input @bind-value="CurrentValue" @bind-value:event="oninput" />
@@ -384,7 +384,7 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 
 **서식 문자열**
 
-데이터 바인딩은 [@bind:format](xref:mvc/views/razor#bind)를 사용 하 여 <xref:System.DateTime> 형식 문자열과 함께 작동 합니다. 통화 또는 숫자 형식과 같은 다른 형식 식은 현재 사용할 수 없습니다.
+데이터 바인딩은 [`@bind:format`](xref:mvc/views/razor#bind)를 사용 하 여 <xref:System.DateTime> 형식 문자열과 함께 작동 합니다. 통화 또는 숫자 형식과 같은 다른 형식 식은 현재 사용할 수 없습니다.
 
 ```cshtml
 <input @bind="StartDate" @bind:format="yyyy-MM-dd" />
@@ -498,7 +498,7 @@ Blazor에서 날짜 형식을 기본적으로 지원 하기 때문에 `date` 필
 
 ## <a name="event-handling"></a>이벤트 처리
 
-Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 형식 값을 사용 하는 `on{EVENT}` (예: `onclick` 및 `onsubmit`) 이라는 HTML 요소 특성의 경우 Razor 구성 요소는 특성의 값을 이벤트 처리기로 처리 합니다. 특성 이름은 항상 [{EVENT}@on](xref:mvc/views/razor#onevent)서식 지정 됩니다.
+Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 형식 값을 사용 하는 `on{EVENT}` (예: `onclick` 및 `onsubmit`) 이라는 HTML 요소 특성의 경우 Razor 구성 요소는 특성의 값을 이벤트 처리기로 처리 합니다. 특성의 이름은 항상 [`@on{EVENT}`](xref:mvc/views/razor#onevent)서식 지정 됩니다.
 
 다음 코드는 UI에서 단추가 선택 될 때 `UpdateHeading` 메서드를 호출 합니다.
 
@@ -554,9 +554,9 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 | 이벤트(event)            | 클래스                | DOM 이벤트 및 참고 사항 |
 | ---------------- | -------------------- | -------------------- |
 | 클립보드        | `ClipboardEventArgs` | `oncut`에서 `oncopy`에서 `onpaste` |
-| 옵니다             | `DragEventArgs`      | `ondrag`, `ondragstart`, `ondragenter`, `ondragleave`, `ondragover`, `ondrop`, `ondragend`<br><br>끌어온 항목 데이터를 포함 하는 `DataTransfer` 및 `DataTransferItem`. |
+| 끌기             | `DragEventArgs`      | `ondrag`, `ondragstart`, `ondragenter`, `ondragleave`, `ondragover`, `ondrop`, `ondragend`<br><br>끌어온 항목 데이터를 포함 하는 `DataTransfer` 및 `DataTransferItem`. |
 | 오류            | `ErrorEventArgs`     | `onerror` |
-| 이벤트(event)            | `EventArgs`          | *일반*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onended`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*클립보드*<br>`onbeforecut`에서 `onbeforecopy`에서 `onbeforepaste`<br><br>*입력*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, `onsubmit`<br><br>*미디어만*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting` |
+| 이벤트(event)            | `EventArgs`          | *일반*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onended`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*클립보드*<br>`onbeforecut`에서 `onbeforecopy`에서 `onbeforepaste`<br><br>*입력*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, `onsubmit`<br><br>*미디어*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting` |
 | 포커스            | `FocusEventArgs`     | `onfocus`, `onblur`, `onfocusin`, `onfocusout`<br><br>`relatedTarget`에 대 한 지원을 포함 하지 않습니다. |
 | 입력            | `ChangeEventArgs`    | `onchange`, `oninput` |
 | 키보드         | `KeyboardEventArgs`  | `onkeydown`에서 `onkeypress`에서 `onkeyup` |
@@ -651,7 +651,7 @@ await callback.InvokeAsync(arg);
 
 ### <a name="prevent-default-actions"></a>기본 동작 방지
 
-[@on{event}:P reventdefault](xref:mvc/views/razor#oneventpreventdefault) 지시어 특성을 사용 하 여 이벤트에 대 한 기본 동작을 방지 합니다.
+이벤트에 대 한 기본 동작을 방지 하려면 [`@on{EVENT}:preventDefault`](xref:mvc/views/razor#oneventpreventdefault) 지시어 특성을 사용 합니다.
 
 입력 장치에서 키를 선택 하 고 요소 포커스가 텍스트 상자에 있는 경우 브라우저는 일반적으로 텍스트 상자에 키 문자를 표시 합니다. 다음 예에서는 `@onkeypress:preventDefault` 지시어 특성을 지정 하 여 기본 동작을 방지 합니다. 카운터가 증가 하 고 **+** 키가 `<input>` 요소의 값으로 캡처되지 않습니다.
 
@@ -683,7 +683,7 @@ await callback.InvokeAsync(arg);
 
 ### <a name="stop-event-propagation"></a>이벤트 전파 중지
 
-[@on{EVENT}: stopPropagation](xref:mvc/views/razor#oneventstoppropagation) 지시어 특성을 사용 하 여 이벤트 전파를 중지 합니다.
+[`@on{EVENT}:stopPropagation`](xref:mvc/views/razor#oneventstoppropagation) 지시어 특성을 사용 하 여 이벤트 전파를 중지 합니다.
 
 다음 예제에서 확인란을 선택 하면 두 번째 자식 `<div>`의 click 이벤트가 부모 `<div>`에 전파 되지 않습니다.
 
@@ -841,7 +841,7 @@ Password:
 
 구성 요소 참조는 `Show` 또는 `Reset`와 같이 해당 인스턴스에 대 한 명령을 실행할 수 있도록 구성 요소 인스턴스를 참조 하는 방법을 제공 합니다. 구성 요소 참조를 캡처하려면:
 
-* 자식 구성 요소에 [@ref](xref:mvc/views/razor#ref) 특성을 추가 합니다.
+* 자식 구성 요소에 [`@ref`](xref:mvc/views/razor#ref) 특성을 추가 합니다.
 * 자식 구성 요소와 동일한 유형으로 필드를 정의 합니다.
 
 ```cshtml
@@ -1026,7 +1026,7 @@ Blazor 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로 �
 
 Razor 구성 요소는 부분 클래스로 생성 됩니다. Razor 구성 요소는 다음 방법 중 하나를 사용 하 여 작성 됩니다.
 
-* C#코드는 HTML 태그와 Razor 코드를 포함 하는 [@code](xref:mvc/views/razor#code) 블록에서 단일 파일로 정의 됩니다. Blazor 템플릿은이 접근 방식을 사용 하 여 Razor 구성 요소를 정의 합니다.
+* C#코드는 HTML 태그와 Razor 코드를 포함 하는 [`@code`](xref:mvc/views/razor#code) 블록에서 단일 파일로 정의 됩니다. Blazor 템플릿은이 접근 방식을 사용 하 여 Razor 구성 요소를 정의 합니다.
 * C#코드는 partial 클래스로 정의 된 코드 숨김이 파일에 배치 됩니다.
 
 다음 예제에서는 Blazor 템플릿에서 생성 된 앱에서 `@code` 블록을 사용 하는 기본 `Counter` 구성 요소를 보여 줍니다. HTML 태그, Razor 코드 및 C# 코드는 동일한 파일에 있습니다.
@@ -1125,13 +1125,13 @@ namespace BlazorSample
 
 Razor로 작성 된 구성 요소의 네임 스페이스는 (우선 순위)를 기반으로 합니다.
 
-* Razor 파일 (*razor*) 태그에 지정 [@namespace](xref:mvc/views/razor#namespace) (`@namespace BlazorSample.MyNamespace`).
+* Razor 파일 (*razor*) 태그에 지정 [`@namespace`](xref:mvc/views/razor#namespace) (`@namespace BlazorSample.MyNamespace`).
 * 프로젝트 파일 (`<RootNamespace>BlazorSample</RootNamespace>`)에서 프로젝트의 `RootNamespace`입니다.
 * 프로젝트 파일의 파일 이름 ( *.csproj*)에서 가져온 프로젝트 이름 및 프로젝트 루트에서 구성 요소로의 경로입니다. 예를 들어 프레임 워크는 네임 스페이스 `BlazorSample.Pages` *{PROJECT ROOT}/Pages/Index.razor* (*BlazorSample*)를 확인 합니다. 구성 요소 C# 는 이름 바인딩 규칙을 따릅니다. 이 예의 `Index` 구성 요소에 대 한 범위에 있는 구성 요소는 모든 구성 요소입니다.
   * 같은 폴더 *에 있습니다.*
   * 프로젝트 루트에서 다른 네임 스페이스를 명시적으로 지정 하지 않은 구성 요소입니다.
 
-다른 네임 스페이스에 정의 된 구성 요소는 Razor의 [@using](xref:mvc/views/razor#using) 지시어를 사용 하 여 범위로 가져옵니다.
+다른 네임 스페이스에 정의 된 구성 요소는 Razor의 [`@using`](xref:mvc/views/razor#using) 지시어를 사용 하 여 범위로 가져옵니다.
 
 *BlazorSample/Shared/* folder에 다른 구성 요소인 `NavMenu.razor`있는 경우 다음 `@using` 문을 사용 하 여 `Index.razor`에서 구성 요소를 사용할 수 있습니다.
 
@@ -1143,7 +1143,7 @@ This is the Index page.
 <NavMenu></NavMenu>
 ```
 
-[@using](xref:mvc/views/razor#using) 지시문이 필요 하지 않은 정규화 된 이름을 사용 하 여 구성 요소를 참조할 수도 있습니다.
+[`@using`](xref:mvc/views/razor#using) 지시문이 필요 하지 않은 정규화 된 이름을 사용 하 여 구성 요소를 참조할 수도 있습니다.
 
 ```cshtml
 This is the Index page.
@@ -1272,7 +1272,7 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값�
 
 ### <a name="generic-typed-components"></a>제네릭 형식의 구성 요소
 
-일반적으로 템플릿 구성 요소는 형식화 되어 있습니다. 예를 들어 일반 `ListViewTemplate` 구성 요소를 사용 하 여 `IEnumerable<T>` 값을 렌더링할 수 있습니다. 제네릭 구성 요소를 정의 하려면 [@typeparam](xref:mvc/views/razor#typeparam) 지시어를 사용 하 여 형식 매개 변수를 지정 합니다.
+일반적으로 템플릿 구성 요소는 형식화 되어 있습니다. 예를 들어 일반 `ListViewTemplate` 구성 요소를 사용 하 여 `IEnumerable<T>` 값을 렌더링할 수 있습니다. 제네릭 구성 요소를 정의 하려면 [`@typeparam`](xref:mvc/views/razor#typeparam) 지시어를 사용 하 여 형식 매개 변수를 지정 합니다.
 
 [!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Components/ListViewTemplate.razor)]
 
@@ -1304,7 +1304,7 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값�
 
 샘플 앱의 다음 예제에서 `ThemeInfo` 클래스는 응용 프로그램의 지정 된 부분에 있는 모든 단추가 동일한 스타일을 공유할 수 있도록 구성 요소 계층 구조의 아래로 이동 하는 테마 정보를 지정 합니다.
 
-*UIThemeClasses/ThemeInfo*:
+*UIThemeClasses/ThemeInfo.cs*:
 
 ```csharp
 public class ThemeInfo

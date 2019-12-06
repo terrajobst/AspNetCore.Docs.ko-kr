@@ -1,38 +1,38 @@
 ---
-title: ASP.NET Core에서 정책 구성표
+title: ASP.NET Core의 정책 스키마
 author: rick-anderson
-description: 인증 정책 체계 쉽게 단일 논리 인증 체계
+description: 인증 정책 스키마를 사용 하면 단일 논리 인증 체계를 보다 쉽게 수행할 수 있습니다.
 ms.author: riande
-ms.date: 02/28/2019
+ms.date: 12/05/2019
 uid: security/authentication/policyschemes
-ms.openlocfilehash: be03f349455c673b0739935ad20e596325c8cb74
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: f02d8e5cac20a9b60c5eddbd28253efacf682ea1
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815291"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880711"
 ---
-# <a name="policy-schemes-in-aspnet-core"></a>ASP.NET Core에서 정책 구성표
+# <a name="policy-schemes-in-aspnet-core"></a>ASP.NET Core의 정책 스키마
 
-인증 정책 스키마 쉽게 잠재적으로 여러 가지 방법을 사용 하 여 단일 논리 인증 체계를 해야 합니다. 예를 들어 정책 구성표를 제외한 다른 과제에 대해 Google 인증 및 쿠키 인증 사용할 수 있습니다. 인증 정책 체계 있도록 합니다.
+인증 정책 스키마를 사용 하면 단일 논리 인증 체계에서 잠재적으로 여러 방법을 사용할 수 있습니다. 예를 들어 정책 체계가 챌린지에 Google 인증을 사용 하 고 다른 모든 항목에 대 한 쿠키 인증을 사용할 수 있습니다. 인증 정책 스키마는 다음과 같습니다.
 
-* 모든 인증 작업을 다른 체계를 전달 하는 일을 쉽게 합니다.
+* 다른 체계에 인증 작업을 쉽게 전달할 수 있습니다.
 * 요청에 따라 동적으로 전달 합니다.
 
-사용 하 여 파생 된 모든 인증 체계 <xref:Microsoft.AspNetCore.Authentication.AuthenticationSchemeOptions> 및 관련 [ `AuthenticationHandler<TOptions>` ](/dotnet/api/microsoft.aspnetcore.authentication.authenticationhandler-1):
+파생 <xref:Microsoft.AspNetCore.Authentication.AuthenticationSchemeOptions>를 사용 하는 모든 인증 스키마와 관련 [Authenticationhandler\<TOptions >](/dotnet/api/microsoft.aspnetcore.authentication.authenticationhandler-1):
 
-* ASP.NET Core 2.1 이상 정책 스키마를 자동으로 됩니다.
-* 구성 체계의 옵션을 통해 사용할 수 있습니다.
+* 는 ASP.NET Core 2.1 이상에서 자동으로 정책 스키마를 구성 합니다.
+* 구성표의 옵션을 구성 하 여 사용할 수 있습니다.
 
 [!code-csharp[sample](policyschemes/samples/AuthenticationSchemeOptions.cs?name=snippet)]
 
 ## <a name="examples"></a>예
 
-다음 예제에서는 하위 수준 체계를 결합 하는 더 높은 수준 체계를 보여 줍니다. 문제를 Google 인증을 사용 하 고 다른 모든 항목에 대 한 쿠키 인증을 사용 하는 키를 누릅니다.
+다음 예에서는 하위 수준 스키마를 조합 하는 더 높은 수준의 스키마를 보여 줍니다. Google 인증은 챌린지에 사용 되며 쿠키 인증은 다른 모든 항목에 사용 됩니다.
 
 [!code-csharp[sample](policyschemes/samples/Startup.cs?name=snippet1)]
 
-다음 예제에서는 요청 별로 스키마를 동적으로 선택할 수 있습니다. 즉, 쿠키 및 API 인증을 조합 하는 방법.
+다음 예에서는 요청당 스키마를 동적으로 선택할 수 있습니다. 즉, 쿠키와 API 인증을 혼합 하는 방법:
 
  <!-- REVIEW, missing If set in public Func<HttpContext, string> ForwardDefaultSelector -->
 

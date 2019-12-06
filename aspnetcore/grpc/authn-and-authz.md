@@ -4,14 +4,14 @@ author: jamesnk
 description: ASP.NET Core에 대 한 gRPC에서 인증 및 권한 부여를 사용 하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 08/13/2019
+ms.date: 12/05/2019
 uid: grpc/authn-and-authz
-ms.openlocfilehash: 84903ee781588ff525d1dfce6a313e3867794762
-ms.sourcegitcommit: 76d7fff62014c3db02564191ab768acea00f1b26
+ms.openlocfilehash: 258b34113f3c3d9ef2031a43295ea5806b1e22ff
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/05/2019
-ms.locfileid: "74852703"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880685"
 ---
 # <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>ASP.NET Core에 대 한 gRPC의 인증 및 권한 부여
 
@@ -150,7 +150,7 @@ public Ticketer.TicketerClient CreateClientWithCert(
 
 인증을 사용 하도록 gRPC 클라이언트를 구성 하는 것은 사용 하는 인증 메커니즘에 따라 다릅니다. 이전 전달자 토큰 및 클라이언트 인증서 예제는 grpc 클라이언트를 사용 하 여 gRPC 호출로 인증 메타 데이터를 보내도록 구성할 수 있는 몇 가지 방법을 보여 줍니다.
 
-* 강력한 형식의 gRPC 클라이언트는 내부적으로 `HttpClient`를 사용 합니다. [`HttpClientHandler`](/dotnet/api/system.net.http.httpclienthandler)에 대 한 인증을 구성 하거나 사용자 지정 [`HttpMessageHandler`](/dotnet/api/system.net.http.httpmessagehandler) 인스턴스를 `HttpClient`에 추가할 수 있습니다.
+* 강력한 형식의 gRPC 클라이언트는 내부적으로 `HttpClient`를 사용 합니다. [Httpclienthandler](/dotnet/api/system.net.http.httpclienthandler)에 인증을 구성 하거나 사용자 지정 [httpmessagehandler](/dotnet/api/system.net.http.httpmessagehandler) 인스턴스를 `HttpClient`에 추가할 수 있습니다.
 * 각 gRPC 호출에는 선택적 `CallOptions` 인수가 있습니다. 옵션의 헤더 컬렉션을 사용 하 여 사용자 지정 헤더를 보낼 수 있습니다.
 
 > [!NOTE]
@@ -158,7 +158,7 @@ public Ticketer.TicketerClient CreateClientWithCert(
 
 ## <a name="authorize-users-to-access-services-and-service-methods"></a>사용자에 게 서비스 및 서비스 메서드에 액세스할 수 있는 권한 부여
 
-기본적으로 인증 되지 않은 사용자가 서비스의 모든 메서드를 호출할 수 있습니다. 인증을 요구 하려면 [[권한 부여]](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 특성을 서비스에 적용 합니다.
+기본적으로 인증 되지 않은 사용자가 서비스의 모든 메서드를 호출할 수 있습니다. 인증을 요구 하려면 서비스에 [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) 특성을 적용 합니다.
 
 ```csharp
 [Authorize]

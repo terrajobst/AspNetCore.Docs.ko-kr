@@ -4,20 +4,20 @@ author: rick-anderson
 description: ASP.NET Core에서 메모리를 관리 하는 방법 및 GC (가비지 수집기)의 작동 방식에 대해 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/05/2019
+ms.date: 12/05/2019
 uid: performance/memory
-ms.openlocfilehash: 4c25c069aa2a6088c0549d786ecdd487ab7b9ea5
-ms.sourcegitcommit: 4818385c3cfe0805e15138a2c1785b62deeaab90
+ms.openlocfilehash: 85e34c9faa31a1020a4200eb99003455ca435ec3
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/09/2019
-ms.locfileid: "73896941"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880942"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core의 메모리 관리 및 GC (가비지 수집)
 
 [Sébastien Ros](https://github.com/sebastienros) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-.NET 등의 관리 되는 프레임 워크 에서도 메모리 관리가 복잡 합니다. 메모리 문제를 분석 하 고 이해 하는 것은 어려울 수 있습니다. 이 문서는 다음과 같습니다.
+.NET 등의 관리 되는 프레임 워크 에서도 메모리 관리가 복잡 합니다. 메모리 문제를 분석 하 고 이해 하는 것은 어려울 수 있습니다. 이 문서의 내용은 다음과 같습니다.
 
 * 는 많은 *메모리 누수로* 인해 발생 했으며 *GC가 작동 하지 않습니다* . 이러한 문제의 대부분은 .NET Core에서 메모리 소비가 어떻게 작동 하는지 이해 하거나 측정 방법을 이해 하지 못하는 경우에 발생 합니다.
 * 문제가 있는 메모리 사용을 보여 주고 대체 방법을 제안 합니다.
@@ -274,7 +274,7 @@ public int GetLOH1(int size)
 - [ResponseCaching/스트림/StreamUtilities .cs](https://github.com/aspnet/AspNetCore/blob/v3.0.0/src/Middleware/ResponseCaching/src/Streams/StreamUtilities.cs#L16)
 - [ResponseCaching/MemoryResponseCache](https://github.com/aspnet/ResponseCaching/blob/c1cb7576a0b86e32aec990c22df29c780af29ca5/src/Microsoft.AspNetCore.ResponseCaching/Internal/MemoryResponseCache.cs#L55)
 
-자세한 내용은 다음을 참조하십시오.
+자세한 내용은  항목을 참조하세요.
 
 * [대량 개체 힙 검사](https://devblogs.microsoft.com/dotnet/large-object-heap-uncovered-from-an-old-msdn-article/)
 * [Large object 힙](/dotnet/standard/garbage-collection/large-object-heap)
@@ -373,7 +373,7 @@ NuGet 패키지의 경우 이러한 풀을 관리 하는 데 도움이 되는 �
 
 위의 차트에서 0 세대 수집은 초당 한 번 수행 됩니다.
 
-위의 코드는 [`ArrayPool<T>`](xref:System.Buffers.ArrayPool`1)를 사용 하 여 `byte` 버퍼를 풀링 하 여 최적화할 수 있습니다. 정적 인스턴스는 요청에서 재사용 됩니다.
+위의 코드는 [ArrayPool\<t >](xref:System.Buffers.ArrayPool`1)를 사용 하 여 `byte` 버퍼를 풀링 하 여 최적화할 수 있습니다. 정적 인스턴스는 요청에서 재사용 됩니다.
 
 이 방법의 다른 기능은 풀링된 개체가 API에서 반환 된다는 것입니다. 즉, 다음을 의미 합니다.
 

@@ -5,16 +5,16 @@ description: Blazor 앱이 서비스를 구성 요소에 삽입할 수 있는 �
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/27/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 uid: blazor/dependency-injection
-ms.openlocfilehash: 165cfa7a98cdd523c25d5c4bfc8e2c9d0ef1ad22
-ms.sourcegitcommit: 169ea5116de729c803685725d96450a270bc55b7
+ms.openlocfilehash: 17dd0f927064ae7c2b1e3e439fd93e2cb220a5a4
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/03/2019
-ms.locfileid: "74733819"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74879775"
 ---
 # <a name="aspnet-core-opno-locblazor-dependency-injection"></a>ASP.NET Core Blazor 종속성 주입
 
@@ -86,7 +86,7 @@ DI 시스템은 ASP.NET Core에서 DI 시스템을 기반으로 합니다. 자�
 
 [!code-cshtml[](dependency-injection/samples_snapshot/3.x/CustomerList.razor?highlight=2-3,23)]
 
-내부적으로 생성 된 속성 (`DataRepository`)은 `InjectAttribute` 특성으로 데코 레이트 됩니다. 일반적으로이 특성은 직접 사용 되지 않습니다. 구성 요소에 기본 클래스가 필요 하 고 기본 클래스에도 삽입 된 속성이 필요 하면 `InjectAttribute`를 수동으로 추가 합니다.
+내부적으로 생성 된 속성 (`DataRepository`)은 `InjectAttribute` 특성을 사용 합니다. 일반적으로이 특성은 직접 사용 되지 않습니다. 구성 요소에 기본 클래스가 필요 하 고 기본 클래스에도 삽입 된 속성이 필요 하면 `InjectAttribute`를 수동으로 추가 합니다.
 
 ```csharp
 public class ComponentBase : IComponent

@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/14/2019
 uid: security/authorization/iauthorizationpolicyprovider
-ms.openlocfilehash: 4f6a4ea209ebe30759f9f14b15b0385399b36ead
-ms.sourcegitcommit: 231780c8d7848943e5e9fd55e93f437f7e5a371d
+ms.openlocfilehash: fe07a113a29ed3e14679e3f3f2249b0810c17593
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/15/2019
-ms.locfileid: "74116065"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880701"
 ---
 # <a name="custom-authorization-policy-providers-using-iauthorizationpolicyprovider-in-aspnet-core"></a>ASP.NET Core에서 IAuthorizationPolicyProvider를 사용 하는 사용자 지정 권한 부여 정책 공급자 
 
@@ -31,7 +31,7 @@ ms.locfileid: "74116065"
 
 ASP.NET Core 앱은 `IAuthorizationPolicyProvider` 인터페이스의 구현을 사용 하 여 권한 부여 정책을 검색 합니다. 기본적으로 [Defaultauthorizationpolicyprovider](/dotnet/api/microsoft.aspnetcore.authorization.defaultauthorizationpolicyprovider) 가 등록 되 고 사용 됩니다. `DefaultAuthorizationPolicyProvider`는 `IServiceCollection.AddAuthorization` 호출에 제공 된 `AuthorizationOptions`에서 정책을 반환 합니다.
 
-앱의 [종속성 주입](xref:fundamentals/dependency-injection) 컨테이너에 다른 `IAuthorizationPolicyProvider` 구현을 등록 하 여이 동작을 사용자 지정할 수 있습니다. 
+앱의 [종속성 주입](xref:fundamentals/dependency-injection) 컨테이너에 다른 `IAuthorizationPolicyProvider` 구현을 등록 하 여이 동작을 사용자 지정 합니다. 
 
 `IAuthorizationPolicyProvider` 인터페이스에는 세 가지 Api가 포함 되어 있습니다.
 
