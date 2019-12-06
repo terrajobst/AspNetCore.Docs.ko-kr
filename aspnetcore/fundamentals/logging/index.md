@@ -5,14 +5,14 @@ description: Microsoft.Extensions.Logging NuGet 패키지에서 제공하는 로
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/19/2019
+ms.date: 12/04/2019
 uid: fundamentals/logging/index
-ms.openlocfilehash: 23ce2d09d2ce9f415ce71bcd7c21c29cb2a040fc
-ms.sourcegitcommit: 918d7000b48a2892750264b852bad9e96a1165a7
+ms.openlocfilehash: 49d598330948c5f4a137c534094e14ed5e01e27c
+ms.sourcegitcommit: f4cd3828e26e6d549ba8d0c36a17be35ad9e5a51
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/27/2019
-ms.locfileid: "74550357"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74825485"
 ---
 # <a name="logging-in-net-core-and-aspnet-core"></a>.NET Core 및 ASP.NET Core의 로깅
 
@@ -48,10 +48,10 @@ ms.locfileid: "74550357"
 
 기본 ASP.NET Core 프로젝트 템플릿은 다음과 같은 로깅 공급자를 추가하는 <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder%2A>를 호출합니다.
 
-* Console
-* Debug
-* EventSource
-* EventLog(Windows에서 실행 중인 경우에만)
+* [콘솔](#console-provider)
+* [디버그](#debug-provider)
+* [EventSource](#event-source-provider)
+* [EventLog](#windows-eventlog-provider)(Windows에서 실행 중인 경우에만)
 
 이 기본 공급자들을 자신이 선택한 공급자로 대체할 수 있습니다. <xref:Microsoft.Extensions.Logging.LoggingBuilderExtensions.ClearProviders%2A>를 호출하고 원하는 공급자를 추가합니다.
 
@@ -129,7 +129,7 @@ ms.locfileid: "74550357"
 
 ASP.NET Core 앱의 `Program` 클래스에서 로그를 작성하려면 호스트를 빌드한 후 DI에서 `ILogger` 인스턴스를 가져옵니다.
 
-[!code-csharp[](index/samples/3.x/TodoApiSample/Program.cs?name=snippet_LogFromMain&highlight=9,10)]
+[!code-csharp[](index/samples_snapshot/3.x/TodoApiSample/Program.cs?highlight=9,10)]
 
 호스트 생성 중 로깅은 직접 지원되지 않습니다. 그러나 별도의 로거를 사용할 수 있습니다. 다음 예에서는 [Serilog](https://serilog.net/) 로거를 사용하여 `CreateHostBuilder`에 로그인합니다. `AddSerilog`에서 `Log.Logger`에 지정된 정적 구성을 사용합니다.
 
@@ -1051,7 +1051,11 @@ Dotnet 추적 도구를 사용하여 앱에서 추적을 수집합니다.
 logging.AddEventLog();
 ```
 
-[AddEventLog 오버로드](xref:Microsoft.Extensions.Logging.EventLoggerFactoryExtensions)를 사용하여 <xref:Microsoft.Extensions.Logging.EventLog.EventLogSettings>를 전달할 수 있습니다.
+[AddEventLog 오버로드](xref:Microsoft.Extensions.Logging.EventLoggerFactoryExtensions)를 사용하여 <xref:Microsoft.Extensions.Logging.EventLog.EventLogSettings>를 전달할 수 있습니다. `null`이거나 지정하지 않으면 다음 기본 설정이 사용됩니다.
+
+* `LogName` &ndash; “애플리케이션”
+* `SourceName` &ndash; “.NET 런타임”
+* `MachineName` &ndash; 로컬 컴퓨터
 
 ### <a name="tracesource-provider"></a>TraceSource 공급자
 

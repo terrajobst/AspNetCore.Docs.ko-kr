@@ -4,14 +4,14 @@ author: mjrousos
 description: ASP.NET Core의 인증에 대해 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/22/2019
+ms.date: 12/04/2019
 uid: security/authentication/index
-ms.openlocfilehash: 5e6c875188831c468bc6ca52ce71c5961b43573c
-ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
+ms.openlocfilehash: 324b2669d3b69e4757a284e4ae7e1de5f4e87e5a
+ms.sourcegitcommit: 05ca05a5c8f6ae556aaad66ad9e4ec1e6b643c77
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/02/2019
-ms.locfileid: "74681364"
+ms.lasthandoff: 12/04/2019
+ms.locfileid: "74810245"
 ---
 # <a name="overview-of-aspnet-core-authentication"></a>ASP.NET Core 인증 개요
 
@@ -57,7 +57,7 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 * 인증 처리기.
 * 처리기의 특정 인스턴스를 구성하기 위한 옵션입니다.
 
-체계는 연결된 처리기의 인증, 챌린지 및 금지 동작을 참조하기 위한 메커니즘으로 유용합니다. 예를 들어, 권한 부여 정책은 사용자를 인증하는 데 사용해야 하는 권한 부여 체계(또는 체계)를 이름으로 지정할 수 있습니다. 인증을 구성할 때 기본 인증 체계를 지정하는 것이 일반적입니다. 리소스에서 특정 체계를 요청하지 않는 한, 기본 체계가 사용됩니다. 또한 다음과 같은 작업을 수행할 수 있습니다.
+체계는 연결된 처리기의 인증, 챌린지 및 금지 동작을 참조하기 위한 메커니즘으로 유용합니다. 예를 들어, 권한 부여 정책은 체계 이름을 사용하여 사용자를 인증하는 데 사용해야 하는 권한 부여 체계(또는 체계)를 지정할 수 있습니다. 인증을 구성할 때 기본 인증 체계를 지정하는 것이 일반적입니다. 리소스에서 특정 체계를 요청하지 않는 한, 기본 체계가 사용됩니다. 또한 다음과 같은 작업을 수행할 수 있습니다.
 
 * 인증, 챌린지 및 금지 작업에 사용할 다른 기본 체계를 지정합니다.
 * [정책 체계](xref:security/authentication/policyschemes)를 사용하여 여러 스키마를 하나로 결합합니다.

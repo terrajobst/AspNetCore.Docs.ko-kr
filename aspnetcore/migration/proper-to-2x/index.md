@@ -3,14 +3,14 @@ title: ASP.NET에서 ASP.NET Core로 마이그레이션
 author: isaac2004
 description: 기존 ASP.NET MVC 또는 Web API 앱을 ASP.NET Core.web으로 마이그레이션하기 위한 지침을 받으세요.
 ms.author: scaddie
-ms.date: 12/11/2018
+ms.date: 10/18/2019
 uid: migration/proper-to-2x/index
-ms.openlocfilehash: 9c97b9c0f13a265ab5c90225dcd5a581a1272701
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: 1564b644b774939c3c242a41812851917e96d2b2
+ms.sourcegitcommit: a166291c6708f5949c417874108332856b53b6a9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815474"
+ms.lasthandoff: 10/18/2019
+ms.locfileid: "74803346"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>ASP.NET에서 ASP.NET Core로 마이그레이션
 
@@ -154,6 +154,10 @@ ASP.NET Core에서 정적 파일은 별도로 구성되지 않는 한 “웹 루
 
 > [!NOTE]
 > ASP.NET Core의 정적 파일 지원에 대한 자세한 내용은 [정적 파일](xref:fundamentals/static-files)을 참조하세요.
+
+## <a name="multi-value-cookies"></a>다중 값 쿠키
+
+[다중 값 쿠키](xref:System.Web.HttpCookie.Values)는 ASP.NET Core에서 지원되지 않습니다. 값마다 하나의 쿠키를 만듭니다.
 
 ## <a name="additional-resources"></a>추가 자료
 
