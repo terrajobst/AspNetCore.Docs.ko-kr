@@ -350,8 +350,6 @@
               uid: client-side/libman/libman-vs
         - name: Grunt
           uid: client-side/using-grunt
-        - name: Bower
-          uid: client-side/bower
         - name: 번들 및 축소
           uid: client-side/bundling-and-minification
         - name: 브라우저 링크
@@ -557,6 +555,13 @@
     - name: 로깅 및 진단
       displayName: signalr
       uid: signalr/diagnostics
+    - name: 사양
+      displayName: 'signalr, specs'
+      items:
+        - name: 허브 프로토콜
+          href: 'https://github.com/aspnet/AspNetCore/blob/master/src/SignalR/docs/specs/HubProtocol.md'
+        - name: 전송 프로토콜
+          href: 'https://github.com/aspnet/AspNetCore/blob/master/src/SignalR/docs/specs/TransportProtocols.md'
 - name: 원격 프로시저 호출 앱
   items:
     - name: gRPC 서비스 소개
