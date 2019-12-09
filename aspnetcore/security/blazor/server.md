@@ -5,17 +5,17 @@ description: Blazor Server 앱에 대 한 보안 위협을 완화 하는 방법�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/12/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/server
-ms.openlocfilehash: 5cf83a4dd255959e8840fca3a8194b5b4e2ad0a8
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 2d644b84b304a31ad0debc16164ad155c7f7da65
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963872"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74944284"
 ---
 # <a name="secure-aspnet-core-opno-locblazor-server-apps"></a>Blazor Server 앱 보안 ASP.NET Core
 
@@ -97,14 +97,14 @@ DoS (서비스 거부) 공격에는 서버에서 하나 이상의 리소스를 �
 | Blazor Server 앱 제한                            | 설명 | 기본 |
 | ------------------------------------------------------- | ----------- | ------- |
 | `CircuitOptions.DisconnectedCircuitMaxRetained`         | 지정 된 서버에서 한 번에 메모리에 보유 하는 연결 되지 않은 최대 회로 수입니다. | 100 |
-| `CircuitOptions.DisconnectedCircuitRetentionPeriod`     | 연결이 끊어지기 전에 연결이 끊어진 회로가 메모리에 보관 되는 최대 시간입니다. | 3 분 |
+| `CircuitOptions.DisconnectedCircuitRetentionPeriod`     | 연결이 끊어지기 전에 연결이 끊어진 회로가 메모리에 보관 되는 최대 시간입니다. | 3분 |
 | `CircuitOptions.JSInteropDefaultCallTimeout`            | 비동기 JavaScript 함수 호출 시간이 초과 될 때까지 서버가 대기 하는 최대 시간입니다. | 1분 |
 | `CircuitOptions.MaxBufferedUnacknowledgedRenderBatches` | 승인 되지 않은 최대 렌더링 일괄 처리 수 서버는 지정 된 시간에 회로 당 메모리에 유지 하 여 강력한 다시 연결을 지원 합니다. 한도에 도달 하면 클라이언트에서 하나 이상의 일괄 처리를 승인할 때까지 서버가 새 렌더링 일괄 처리 생성을 중지 합니다. | 10 |
 
 
 | SignalR 및 ASP.NET Core 제한             | 설명 | 기본 |
 | ------------------------------------------ | ----------- | ------- |
-| `CircuitOptions.MaximumReceiveMessageSize` | 개별 메시지의 메시지 크기입니다. | 32 KB |
+| `CircuitOptions.MaximumReceiveMessageSize` | 개별 메시지의 메시지 크기입니다. | 32KB |
 
 ## <a name="interactions-with-the-browser-client"></a>브라우저와의 상호 작용 (클라이언트)
 
@@ -148,7 +148,7 @@ JavaScript에서 .NET 메서드로의 호출을 신뢰 하지 않습니다. .NET
 
 이벤트는 Blazor 서버 앱에 대 한 진입점을 제공 합니다. 웹 앱에서 끝점을 보호 하는 것과 동일한 규칙이 Blazor Server 앱에서 이벤트 처리에 적용 됩니다. 악의적인 클라이언트는 이벤트에 대 한 페이로드로 전송 하려는 모든 데이터를 보낼 수 있습니다.
 
-예를 들어 다음과 같은 가치를 제공해야 합니다.
+예를 들면 다음과 같습니다.:
 
 * `<select>`에 대 한 변경 이벤트는 앱이 클라이언트에 제공 하는 옵션에 포함 되지 않은 값을 보낼 수 있습니다.
 * `<input>`는 클라이언트 쪽 유효성 검사를 무시 하 고 모든 텍스트 데이터를 서버에 보낼 수 있습니다.
@@ -159,7 +159,7 @@ Blazor 서버 이벤트는 비동기적 이므로 새 렌더링을 생성 하 �
 
 사용자가 카운터를 최대 3 번 증가 시킬 수 있도록 하는 카운터 구성 요소를 고려 합니다. 카운터를 증가 시키는 단추는 `count`값에 따라 조건부로 결정 됩니다.
 
-```cshtml
+```razor
 <p>Count: @count<p>
 
 @if (count < 3)
@@ -180,7 +180,7 @@ Blazor 서버 이벤트는 비동기적 이므로 새 렌더링을 생성 하 �
 
 클라이언트는 프레임 워크에서이 구성 요소의 새 렌더링을 생성 하기 전에 하나 이상의 증분 이벤트를 디스패치할 수 있습니다. 따라서 단추가 UI에 의해 빠르게 제거 되지 않기 때문에 사용자가 `count`를 *세 번 이상* 증가 시킬 수 있습니다. 다음 예제에서는 3 개의 `count` 증분에 대 한 제한을 얻기 위한 올바른 방법을 보여 줍니다.
 
-```cshtml
+```razor
 <p>Count: @count<p>
 
 @if (count < 3)
@@ -208,7 +208,7 @@ Blazor 서버 이벤트는 비동기적 이므로 새 렌더링을 생성 하 �
 
 이벤트 콜백에서 외부 서비스 또는 데이터베이스에서 데이터를 가져오는 것과 같이 장기 실행 작업을 호출 하는 경우 가드를 사용 하는 것이 좋습니다. 가드는 작업이 진행 중인 동안 시각적 피드백을 사용 하 여 사용자가 여러 작업을 큐에 대기 시킬 수 없도록 합니다. 다음 구성 요소 코드는 서버에서 데이터를 가져오는 `GetForecastAsync` 동안 `true` `isLoading` 설정 합니다. `isLoading` `true`되는 동안에는 UI에서 단추가 사용 하지 않도록 설정 됩니다.
 
-```cshtml
+```razor
 @page "/fetchdata"
 @using BlazorServerSample.Data
 @inject WeatherForecastService ForecastService
@@ -235,7 +235,7 @@ Blazor 서버 이벤트는 비동기적 이므로 새 렌더링을 생성 하 �
 
 [여러 디스패치 방지](#guard-against-multiple-dispatches) 섹션에 설명 된 대로 가드를 사용 하는 것 외에도 <xref:System.Threading.CancellationToken> 사용 하 여 구성 요소가 삭제 될 때 장기 실행 작업을 취소 하는 것이 좋습니다. 이 방법에는 구성 요소에서 *삭제 후 사용* 을 방지 하는 추가 혜택이 있습니다.
 
-```cshtml
+```razor
 @implements IDisposable
 
 ...
@@ -291,8 +291,8 @@ ASP.NET Core apps를 보호 하기 위한 지침은 Blazor Server 앱에 적용 
 
 다음을 사용 하 여 자세한 오류 사용:
 
-* `CircuitOptions.DetailedErrors`
-* 구성 키를 `DetailedErrors` 합니다. 예를 들어 `ASPNETCORE_DETAILEDERRORS` 환경 변수를 `true`값으로 설정 합니다.
+* `CircuitOptions.DetailedErrors`.
+* `DetailedErrors` 구성 키입니다. 예를 들어 `ASPNETCORE_DETAILEDERRORS` 환경 변수를 `true`값으로 설정 합니다.
 
 > [!WARNING]
 > 인터넷의 클라이언트에 오류 정보를 노출 하는 것은 항상 피해 야 하는 보안 위험입니다.

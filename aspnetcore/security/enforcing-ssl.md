@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core 웹 앱에서 HTTPS/TLS를 요구 하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/14/2019
+ms.date: 12/06/2019
 uid: security/enforcing-ssl
-ms.openlocfilehash: 82cd2e52f3bd929682b9eae24611ad04fd9f8682
-ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
+ms.openlocfilehash: 032105c67e15ab94635ae6fadea103450c7eb0fb
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/22/2019
-ms.locfileid: "74317365"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74944241"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>ASP.NET Core에서 HTTPS 적용
 
@@ -150,7 +150,7 @@ Kestrel 또는 HTTP.SYS를 공용에 지 서버로 사용 하는 경우 Kestrel 
 
 Azure App Service에 배포할 때 [자습서: Azure Web Apps에 기존 사용자 지정 SSL 인증서 바인딩](/azure/app-service/app-service-web-tutorial-custom-ssl)의 지침을 따릅니다.
 
-### <a name="options"></a>옵션
+### <a name="options"></a>Options
 
 다음 강조 표시 된 코드는 [AddHttpsRedirection](/dotnet/api/microsoft.aspnetcore.builder.httpsredirectionservicesextensions.addhttpsredirection) 을 호출 하 여 미들웨어 옵션을 구성 합니다.
 
@@ -173,7 +173,7 @@ Azure App Service에 배포할 때 [자습서: Azure Web Apps에 기존 사용�
 앞에서 강조 표시 된 코드:
 
 * [HttpsRedirectionOptions](xref:Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionOptions.RedirectStatusCode*) 를 <xref:Microsoft.AspNetCore.Http.StatusCodes.Status307TemporaryRedirect>설정 합니다 .이 값은 기본값입니다. `RedirectStatusCode`에 대 한 할당에 <xref:Microsoft.AspNetCore.Http.StatusCodes> 클래스의 필드를 사용 합니다.
-* HTTPS 포트를 5001으로 설정 합니다. 기본값은 443입니다.
+* HTTPS 포트를 5001으로 설정 합니다.
 
 #### <a name="configure-permanent-redirects-in-production"></a>프로덕션 환경에서 영구 리디렉션 구성
 
@@ -369,7 +369,7 @@ WSL (Linux 용 Windows 하위 시스템)은 HTTPS 자체 서명 된 인증서를
 
 ### <a name="all-platforms---certificate-not-trusted"></a>모든 플랫폼-인증서를 신뢰할 수 없음
 
-다음 명령을 실행 합니다.
+다음 명령을 실행합니다.
 
 ```dotnetcli
 dotnet dev-certs https --clean
@@ -390,7 +390,7 @@ dotnet dev-certs https --trust
 
 * 인증서 저장소의 인증서를 확인 합니다. `Current User > Personal > Certificates` `Current User > Trusted root certification authorities > Certificates` 및에서 `ASP.NET Core HTTPS development certificate` 이름이 `localhost` 인증서가 있어야 합니다.
 * 모든 찾은 인증서를 개인 및 신뢰할 수 있는 루트 인증 기관에서 제거 합니다. IIS Express localhost 인증서를 제거 **하지** 마십시오.
-* 다음 명령을 실행 합니다.
+* 다음 명령을 실행합니다.
 
 ```dotnetcli
 dotnet dev-certs https --clean
@@ -406,7 +406,7 @@ dotnet dev-certs https --trust
 * Localhost 인증서가 있는지 확인 합니다.
 * 모든 사용자가 신뢰할 수 있음을 나타내기 위해 아이콘에 `+` 기호가 포함 되어 있는지 확인 합니다.
 * 시스템 키 집합에서 인증서를 제거 합니다.
-* 다음 명령을 실행 합니다.
+* 다음 명령을 실행합니다.
 
 ```dotnetcli
 dotnet dev-certs https --clean

@@ -5,16 +5,16 @@ description: Blazor에서 양식 및 필드 유효성 검사 시나리오를 사
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/21/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 uid: blazor/forms-validation
-ms.openlocfilehash: f1df213b16bb7ecd6a771700291d834776dee475
-ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
+ms.openlocfilehash: f4c1845ee4b6ff9274b7117167367ccdd9f36c12
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/22/2019
-ms.locfileid: "74317176"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74943695"
 ---
 # <a name="aspnet-core-opno-locblazor-forms-and-validation"></a>ASP.NET Core Blazor 폼 및 유효성 검사
 
@@ -111,7 +111,7 @@ public class Starship
 
 다음 폼은 `Starship` 모델에 정의 된 유효성 검사를 사용 하 여 사용자 입력의 유효성을 검사 합니다.
 
-```cshtml
+```razor
 @page "/FormsValidation"
 
 <h1>Starfleet Starship Database</h1>
@@ -180,7 +180,7 @@ public class Starship
 
 다음 태그를 사용 하 여 구성 요소를 만들고 `InputText` 사용 되는 것 처럼 구성 요소를 사용 합니다.
 
-```cshtml
+```razor
 @inherits InputText
 
 <input 
@@ -204,19 +204,19 @@ Blazor는 두 가지 유형의 유효성 검사를 수행 합니다.
 
 `ValidationSummary` 구성 요소는 [유효성 검사 요약 태그 도우미](xref:mvc/views/working-with-forms#the-validation-summary-tag-helper)와 비슷한 모든 유효성 검사 메시지를 요약 합니다.
 
-```csthml
+```razor
 <ValidationSummary />
 ```
 
 `Model` 매개 변수를 사용 하 여 특정 모델에 대 한 유효성 검사 메시지를 출력 합니다.
   
-```csthml
+```razor
 <ValidationSummary Model="@starship" />
 ```
 
 `ValidationMessage` 구성 요소는 [유효성 검사 메시지 태그 도우미](xref:mvc/views/working-with-forms#the-validation-message-tag-helper)와 비슷한 특정 필드에 대 한 유효성 검사 메시지를 표시 합니다. `For` 특성과 모델 속성의 이름을 지정 하는 람다 식을 사용 하 여 유효성을 검사 하기 위한 필드를 지정 합니다.
 
-```cshtml
+```razor
 <ValidationMessage For="@(() => starship.MaximumAccommodation)" />
 ```
 
@@ -259,7 +259,7 @@ Blazor은 기본 제공 `DataAnnotationsValidator`에서 데이터 주석을 사
 
 컬렉션 및 복합 형식 속성을 포함 하 여 바인딩된 모델의 전체 개체 그래프의 유효성을 검사 하려면BlazorAspNetCore에서 *제공 하는* `ObjectGraphDataAnnotationsValidator`을 사용 합니다. [ DataAnnotations. 유효성 검사](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.DataAnnotations.Validation) 패키지:
 
-```cshtml
+```razor
 <EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
     <ObjectGraphDataAnnotationsValidator />
     ...

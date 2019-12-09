@@ -5,16 +5,16 @@ description: 앱에서 요청을 라우팅하는 방법 및 NavLink 구성 요�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/23/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 uid: blazor/routing
-ms.openlocfilehash: 2c139db4e44679fbd9f3455a2d2543be0e128765
-ms.sourcegitcommit: 918d7000b48a2892750264b852bad9e96a1165a7
+ms.openlocfilehash: 1690434f48141bc83e7bc02e22cb763430eaa10d
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/27/2019
-ms.locfileid: "74550330"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74944020"
 ---
 # <a name="aspnet-core-opno-locblazor-routing"></a>ASP.NET Core Blazor 라우팅
 
@@ -36,7 +36,7 @@ Blazor Server는 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)에 �
 
 `Router` 구성 요소는 지정 된 경로를 사용 하 여 각 구성 요소로 라우팅할 수 있도록 합니다. `Router` 구성 요소가 *응용 프로그램 razor* 파일에 표시 됩니다.
 
-```cshtml
+```razor
 <Router AppAssembly="typeof(Startup).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
@@ -58,7 +58,12 @@ Blazor Server는 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)에 �
 
 여러 경로 템플릿을 구성 요소에 적용할 수 있습니다. 다음 구성 요소는 `/BlazorRoute` 및 `/DifferentBlazorRoute`에 대 한 요청에 응답 합니다.
 
-[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/BlazorRoute.razor?name=snippet_BlazorRoute)]
+```razor
+@page "/BlazorRoute"
+@page "/DifferentBlazorRoute"
+
+<h1>Blazor routing</h1>
+```
 
 > [!IMPORTANT]
 > Url이 올바르게 확인 될 수 있도록 앱은 *wwwroot/index.html* 파일에 `<base>` 태그를 포함 해야 합니다 (Blazor Weasembomeembsembse). 또는 *Pages/_Host. cshtml* 파일 (Blazor Server)에 `href` 특성에 지정 된 앱 기본 경로 (`<base href="/">`)를 포함 해야 합니다. 자세한 내용은 <xref:host-and-deploy/blazor/index#app-base-path>를 참조하세요.
@@ -69,7 +74,7 @@ Blazor Server는 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)에 �
 
 *응용 프로그램 razor* 파일에서 `Router` 구성 요소의 `NotFound` template 매개 변수에 사용자 지정 콘텐츠를 설정 합니다.
 
-```cshtml
+```razor
 <Router AppAssembly="typeof(Startup).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
@@ -87,7 +92,7 @@ Blazor Server는 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)에 �
 
 `AdditionalAssemblies` 매개 변수를 사용 하 여 라우팅할 수 있는 구성 요소를 검색할 때 고려할 `Router` 구성 요소에 대 한 추가 어셈블리를 지정 합니다. 지정 된 어셈블리는 `AppAssembly`지정 된 어셈블리 외에도 고려 됩니다. 다음 예제에서 `Component1`는 참조 된 클래스 라이브러리에 정의 된 라우팅 가능한 구성 요소입니다. 다음 `AdditionalAssemblies` 예제에서는 `Component1`에 대 한 라우팅을 지원 합니다.
 
-```cshtml
+```razor
 <Router
     AppAssembly="typeof(Program).Assembly"
     AdditionalAssemblies="new[] { typeof(Component1).Assembly }">
@@ -99,7 +104,22 @@ Blazor Server는 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)에 �
 
 라우터는 경로 매개 변수를 사용 하 여 해당 구성 요소 매개 변수를 동일한 이름 (대/소문자 구분 안 함)으로 채웁니다.
 
-[!code-cshtml[](common/samples/3.x/BlazorWebAssemblySample/Pages/RouteParameter.razor?name=snippet_RouteParameter&highlight=2,7-8)]
+```razor
+@page "/RouteParameter"
+@page "/RouteParameter/{text}"
+
+<h1>Blazor is @Text!</h1>
+
+@code {
+    [Parameter]
+    public string Text { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Text = Text ?? "fantastic";
+    }
+}
+```
 
 선택적 매개 변수는 3.0 ASP.NET Core에서 Blazor 앱에 대해 지원 되지 않습니다. 이전 예제에서는 두 개의 `@page` 지시문이 적용 됩니다. 첫 번째는 매개 변수 없이 구성 요소에 대 한 탐색을 허용 합니다. 두 번째 `@page` 지시어는 `{text}` route 매개 변수를 사용 하 여 `Text` 속성에 값을 할당 합니다.
 
@@ -112,7 +132,7 @@ Blazor Server는 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)에 �
 * 요청 URL에 `Id` 경로 세그먼트가 있습니다.
 * `Id` 세그먼트가 정수 (`int`)입니다.
 
-[!code-cshtml[](routing/samples_snapshot/3.x/Constraint.razor?highlight=1)]
+[!code-razor[](routing/samples_snapshot/3.x/Constraint.razor?highlight=1)]
 
 다음 표에 표시 된 경로 제약 조건을 사용할 수 있습니다. 고정 문화권과 일치 하는 경로 제약 조건에 대 한 자세한 내용은 테이블 아래 경고를 참조 하세요.
 
@@ -152,9 +172,9 @@ Blazor Server 앱에서 *_Host* 의 기본 경로는 `/` (`@page "/"`)입니다.
 
 탐색 링크를 만들 때 HTML 하이퍼링크 요소 (`<a>`) 대신 `NavLink` 구성 요소를 사용 합니다. `NavLink` 구성 요소는 `href` 현재 URL과 일치 하는지 여부에 따라 `active` CSS 클래스를 전환 하는 것을 제외 하 고 `<a>` 요소 처럼 동작 합니다. 사용자는 `active` 클래스를 사용 하 여 표시 된 탐색 링크 중에서 활성 페이지가 되는 페이지를 이해할 수 있습니다.
 
-다음 `NavMenu` 구성 요소는 `NavLink` 구성 요소를 사용 하는 방법을 보여 주는 [부트스트랩](https://getbootstrap.com/docs/) 탐색 모음을 만듭니다.
+다음 `NavMenu` 구성 요소는 `NavLink` 구성 요소를 사용하는 방법을 보여 주는 [부트스트랩](https://getbootstrap.com/docs/) 탐색 모음을 만듭니다.
 
-[!code-cshtml[](routing/samples_snapshot/3.x/NavMenu.razor?highlight=4,9)]
+[!code-razor[](routing/samples_snapshot/3.x/NavMenu.razor?highlight=4,9)]
 
 `<NavLink>` 요소의 `Match` 특성에 할당할 수 있는 두 가지 `NavLinkMatch` 옵션은 다음과 같습니다.
 
@@ -165,7 +185,7 @@ Blazor Server 앱에서 *_Host* 의 기본 경로는 `/` (`@page "/"`)입니다.
 
 추가 `NavLink` 구성 요소 특성이 렌더링 된 앵커 태그로 전달 됩니다. 다음 예제에서 `NavLink` 구성 요소는 `target` 특성을 포함 합니다.
 
-```cshtml
+```razor
 <NavLink href="my-page" target="_blank">My page</NavLink>
 ```
 
@@ -190,7 +210,7 @@ Blazor Server 앱에서 *_Host* 의 기본 경로는 `/` (`@page "/"`)입니다.
 
 단추를 선택 하면 다음 구성 요소가 앱의 `Counter` 구성 요소로 이동 합니다.
 
-```cshtml
+```razor
 @page "/navigate"
 @inject NavigationManager NavigationManager
 

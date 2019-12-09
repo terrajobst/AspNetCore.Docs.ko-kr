@@ -5,16 +5,16 @@ description: Blazor Server 앱에서 상태를 유지 하는 방법에 대해 �
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/23/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 uid: blazor/state-management
-ms.openlocfilehash: ed203458126f3b4c97103c88a465e3eb5953a775
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 7351ee2438c6adf675b8aa5e8ecdb1b2da7b4f23
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74879708"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74943929"
 ---
 # <a name="aspnet-core-opno-locblazor-state-management"></a>ASP.NET Core Blazor 상태 관리
 
@@ -164,7 +164,7 @@ ASP.NET Core의 [데이터 보호](xref:security/data-protection/introduction)�
 
 사용 하려는 백업 저장소에 따라 선택이 달라 집니다. 다음 예제에서는 `sessionStorage` 사용 됩니다.
 
-```cshtml
+```razor
 @using Microsoft.AspNetCore.ProtectedBrowserStorage
 @inject ProtectedSessionStorage ProtectedSessionStore
 ```
@@ -215,7 +215,7 @@ private int? currentCount;
 
 개수 및 **증가값** 단추를 무조건 표시 하는 대신 데이터가 로드 된 경우에만 이러한 요소를 표시 하도록 선택 합니다.
 
-```cshtml
+```razor
 @if (currentCount.HasValue)
 {
     <p>Current count: <strong>@currentCount</strong></p>
@@ -255,7 +255,7 @@ else
 
 `localStorage` 또는 `sessionStorage`사용 하지 않는 다른 페이지에는 렌더링에 유용할 수 있습니다. 렌더링을 사용 하도록 설정 된 상태로 유지 하려면 브라우저가 회로에 연결 될 때까지 로드 작업을 지연 시킵니다. 카운터 값을 저장 하는 예제는 다음과 같습니다.
 
-```cshtml
+```razor
 @using Microsoft.AspNetCore.ProtectedBrowserStorage
 @inject ProtectedLocalStorage ProtectedLocalStore
 
@@ -296,7 +296,7 @@ else
 
 다음 `CounterStateProvider` 구성 요소 예제에서는 카운터 데이터가 유지 됩니다.
 
-```cshtml
+```razor
 @using Microsoft.AspNetCore.ProtectedBrowserStorage
 @inject ProtectedSessionStorage ProtectedSessionStore
 
@@ -336,7 +336,7 @@ else
 
 `CounterStateProvider` 구성 요소를 사용 하려면 카운터 상태에 액세스 해야 하는 다른 구성 요소 주위에 구성 요소의 인스턴스를 래핑합니다. 앱의 모든 구성 요소에서 상태를 액세스할 수 있도록 하려면 `App` 구성 요소 (*응용 프로그램 razor*)의 `Router` 주위에 `CounterStateProvider` 구성 요소를 래핑합니다.
 
-```cshtml
+```razor
 <CounterStateProvider>
     <Router AppAssembly="typeof(Startup).Assembly">
         ...
@@ -346,7 +346,7 @@ else
 
 래핑된 구성 요소는 지속형 카운터 상태를 수신 하 고 수정할 수 있습니다. 다음 `Counter` 구성 요소는 패턴을 구현 합니다.
 
-```cshtml
+```razor
 @page "/counter"
 
 <p>Current count: <strong>@CounterStateProvider.CurrentCount</strong></p>

@@ -5,17 +5,17 @@ description: Blazor Weasembmbsemboma 및 Blazor Server 호스팅 모델을 이�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/23/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 38db9804c9cdd1aa31ca48af2dd9ec2e85175156
-ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
+ms.openlocfilehash: 7676d16bddf146ea38619ed35c5e32c5bce731de
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/02/2019
-ms.locfileid: "74681047"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74943769"
 ---
 # <a name="aspnet-core-opno-locblazor-hosting-models"></a>ASP.NET Core Blazor 호스팅 모델
 
@@ -150,7 +150,7 @@ IIS를 사용 하는 경우 응용 프로그램 요청 라우팅을 사용 하 �
 
 UI를 사용자 지정 하려면 _Host의 `<body>`에 `components-reconnect-modal` `id`를 사용 하 여 요소를 정의 *합니다. cshtml* Razor 페이지:
 
-```html
+```cshtml
 <div id="components-reconnect-modal">
     ...
 </div>
@@ -323,7 +323,7 @@ public class WeatherForecastService
 
 ### <a name="render-noninteractive-components-from-razor-pages-and-views"></a>Razor 페이지 및 뷰에서 비 대화형 구성 요소 렌더링
 
-다음 Razor 페이지에서 `MyComponent` 구성 요소는 폼을 사용 하 여 지정 된 초기 값을 사용 하 여 정적으로 렌더링 됩니다.
+다음 Razor 페이지에서 `Counter` 구성 요소는 폼을 사용 하 여 지정 된 초기 값을 사용 하 여 정적으로 렌더링 됩니다.
 
 ::: moniker range=">= aspnetcore-3.1"
 
@@ -356,7 +356,7 @@ public class WeatherForecastService
     <button type="submit">Set initial value</button>
 </form>
 
-@(await Html.RenderComponentAsync<MyComponent>(RenderMode.Static, 
+@(await Html.RenderComponentAsync<Counter>(RenderMode.Static, 
     new { InitialValue = InitialValue }))
 
 @code {

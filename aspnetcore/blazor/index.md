@@ -5,17 +5,17 @@ description: ASP.NET Core 앱에서 .NET을 사용하여 대화형 클라이언�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc, seoapril2019
-ms.date: 11/12/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: 8b656a7461c78475432722540ad628258cfe19c4
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 4ab6af649afe66d92fb2ea07d3abed057f321bce
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73962920"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74943721"
 ---
 # <a name="introduction-to-aspnet-core-opno-locblazor"></a>ASP.NET Core Blazor 소개
 
@@ -53,7 +53,7 @@ Blazor 앱은 *구성 요소*를 기반으로 합니다. Blazor의 구성 요소
 
 다음 Razor 태그는 다른 구성 요소 내에 중첩될 수 있는 구성 요소(*Dialog.razor*)를 보여 줍니다.
 
-```cshtml
+```razor
 <div>
     <h1>@Title</h1>
 
@@ -84,7 +84,7 @@ Blazor는 UI 컴퍼지션에 자연스러운 HTML 태그를 사용합니다. HTM
 
 *Index.razor*:
 
-```cshtml
+```razor
 @page "/"
 
 <h1>Hello, world!</h1>

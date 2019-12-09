@@ -5,17 +5,17 @@ description: Blazor 처리 되지 않은 예외를 관리 하는 방법 및 오�
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/01/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/handle-errors
-ms.openlocfilehash: e737a8a85e7eb83d95618d71e85b0307c54b0766
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: d73eb9a0dd0ec7a4bec4b7b9aeaaa4a9ee888bce
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74879692"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74943708"
 ---
 # <a name="handle-errors-in-aspnet-core-opno-locblazor-apps"></a>ASP.NET Core Blazor 앱의 오류 처리
 
@@ -138,7 +138,7 @@ Blazor 구성 요소의 인스턴스를 만들 때:
   * `loadFailed`은 사용자에 게 오류 메시지를 표시 하는 데 사용 되는 `true`로 설정 됩니다.
   * 오류가 기록 됩니다.
 
-[!code-cshtml[](handle-errors/samples_snapshot/3.x/product-details.razor?highlight=11,27-39)]
+[!code-razor[](handle-errors/samples_snapshot/3.x/product-details.razor?highlight=11,27-39)]
 
 ### <a name="rendering-logic"></a>렌더링 논리
 
@@ -148,7 +148,7 @@ Blazor 구성 요소의 인스턴스를 만들 때:
 
 렌더링 논리에서 null 참조 예외가 발생 하지 않도록 하려면 해당 멤버에 액세스 하기 전에 `null` 개체를 확인 합니다. 다음 예에서는 `person.Address` `null`경우 `person.Address` 속성이 액세스 되지 않습니다.
 
-[!code-cshtml[](handle-errors/samples_snapshot/3.x/person-example.razor?highlight=1)]
+[!code-razor[](handle-errors/samples_snapshot/3.x/person-example.razor?highlight=1)]
 
 위의 코드는 `person` `null`되지 않는다고 가정 합니다. 일반적으로 코드 구조는 구성 요소가 렌더링 될 때 개체가 존재 하는 것을 보장 합니다. 이러한 경우에는 렌더링 논리에서 `null`를 확인 하지 않아도 됩니다. 이전 예제에서는 구성 요소가 인스턴스화될 때 `person` 만들어지기 때문에 `person`가 존재 하도록 보장 될 수 있습니다.
 

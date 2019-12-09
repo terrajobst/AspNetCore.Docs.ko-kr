@@ -5,16 +5,16 @@ description: 외부 구성 요소 라이브러리의 Blazor 앱에 구성 요소
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/23/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 uid: blazor/class-libraries
-ms.openlocfilehash: d4cc4124c9dc28ed6da0923b919919df4965f89f
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 6bac007e3e1d046d6b16a3a0be6dc5976b99b766
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73962705"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74943877"
 ---
 # <a name="aspnet-core-razor-components-class-libraries"></a>ASP.NET Core Razor 구성 요소 클래스 라이브러리
 
@@ -73,7 +73,7 @@ ms.locfileid: "73962705"
 
 네임 스페이스에서 전체 형식 이름을 사용 하 여 `SalesReport` 구성 요소를 참조할 수 있습니다.
 
-```cshtml
+```razor
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
@@ -83,7 +83,7 @@ Welcome to your new app.
 
 `@using` 지시어를 사용 하 여 라이브러리를 범위로 가져오는 경우 구성 요소를 참조할 수도 있습니다.
 
-```cshtml
+```razor
 @using MyComponentLib1
 
 <h1>Hello, world!</h1>

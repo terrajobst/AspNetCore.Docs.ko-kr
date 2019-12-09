@@ -5,16 +5,16 @@ description: 선택한 도구를 사용 하 여 Blazor 앱을 빌드하여 Blazo
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/03/2019
+ms.date: 12/09/2019
 no-loc:
 - Blazor
 uid: blazor/get-started
-ms.openlocfilehash: d356a06849f54434c492dc68f57f7edc8805de22
-ms.sourcegitcommit: 5974e3e66dab3398ecf2324fbb82a9c5636f70de
+ms.openlocfilehash: e368ecaf931d392de7e52ec2d5a2dfd171c2c86f
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/03/2019
-ms.locfileid: "74778780"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74943768"
 ---
 # <a name="get-started-with-aspnet-core-opno-locblazor"></a>ASP.NET Core Blazor 시작하기
 
@@ -95,7 +95,7 @@ Blazor시작:
 
    <!-- For a Blazor WebAssembly experience, select the **Blazor WebAssembly App** template. Select **Next**. -->
 
-   5\. **대상 프레임 워크** 는 기본적으로 **.net core 3.0** (또는 3.1 Preview SDK가 설치 된 경우 **.net core 3.1** )로 설정 됩니다. 프레임 워크를 선택 하 고 **다음**을 선택 합니다.
+   5\. **대상 프레임 워크** 를 **.net Core 3.1** 로 설정 하 고 **다음**을 선택 합니다.
 
    6\. **프로젝트 이름** 필드에서 앱 이름을 `WebApplication1`로 합니다. **만들기**를 선택합니다.
 
@@ -202,7 +202,7 @@ Blazor시작:
 
    <!-- For a Blazor WebAssembly experience, select the **Blazor WebAssembly App** template. Select **Next**. -->
 
-   5\. **대상 프레임 워크** 는 기본적으로 **.net core 3.0** (또는 3.1 Preview SDK가 설치 된 경우 **.net core 3.1** )로 설정 됩니다. 프레임 워크를 선택 하 고 **다음**을 선택 합니다.
+   5\. **대상 프레임 워크** 를 **.net Core 3.0** 로 설정 하 고 **다음**을 선택 합니다.
 
    6\. **프로젝트 이름** 필드에서 앱 이름을 `WebApplication1`로 합니다. **만들기**를 선택합니다.
 
@@ -246,7 +246,7 @@ Counter 페이지에서 **Click me** 단추를 선택하여 페이지 새로 고
 
 *Pages/Counter.razor*:
 
-[!code-cshtml[](get-started/samples_snapshot/3.x/Counter1.razor?highlight=7,12-15)]
+[!code-razor[](get-started/samples_snapshot/3.x/Counter1.razor?highlight=7,12-15)]
 
 맨 위에 있는 `@page` 지시문에 지정 된 대로 브라우저의 `/counter`에 대 한 요청은 `Counter` 구성 요소가 해당 내용을 렌더링 합니다. 구성 요소는 렌더링 트리의 메모리 내 표현으로 렌더링 되어 유연 하 고 효율적인 방식으로 UI를 업데이트 하는 데 사용할 수 있습니다.
 
@@ -263,7 +263,7 @@ HTML 구문을 사용 하 여 구성 요소를 다른 구성 요소에 추가 �
 
 *Pages/Index.razor*:
 
-[!code-cshtml[](get-started/samples_snapshot/3.x/Index1.razor?highlight=7)]
+[!code-razor[](get-started/samples_snapshot/3.x/Index1.razor?highlight=7)]
 
 앱을 실행합니다. 홈페이지에는 `Counter` 구성 요소에서 제공 하는 고유한 카운터가 있습니다.
 
@@ -274,13 +274,13 @@ HTML 구문을 사용 하 여 구성 요소를 다른 구성 요소에 추가 �
 
 *Pages/Counter.razor*:
 
-[!code-cshtml[](get-started/samples_snapshot/3.x/Counter2.razor?highlight=12-13,17)]
+[!code-razor[](get-started/samples_snapshot/3.x/Counter2.razor?highlight=12-13,17)]
 
 특성을 사용 하 여 `Index` 구성 요소의 `<Counter>` 요소에 `IncrementAmount`를 지정 합니다.
 
 *Pages/Index.razor*:
 
-[!code-cshtml[](get-started/samples_snapshot/3.x/Index2.razor?highlight=7)]
+[!code-razor[](get-started/samples_snapshot/3.x/Index2.razor?highlight=7)]
 
 앱을 실행합니다. `Index` 구성 요소에는 **클릭** 단추를 선택할 때마다 10 씩 증가 하는 고유한 카운터가 있습니다. `/counter`의 `Counter` 구성 요소 ( *. razor*)는 1 씩 계속 증가 합니다.
 

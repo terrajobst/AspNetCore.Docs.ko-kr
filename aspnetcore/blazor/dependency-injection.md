@@ -9,12 +9,12 @@ ms.date: 12/05/2019
 no-loc:
 - Blazor
 uid: blazor/dependency-injection
-ms.openlocfilehash: 17dd0f927064ae7c2b1e3e439fd93e2cb220a5a4
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: aad6cfee500b5cb502470f6a4a7cb5756df09dc4
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74879775"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74943786"
 ---
 # <a name="aspnet-core-opno-locblazor-dependency-injection"></a>ASP.NET Core Blazor 종속성 주입
 
@@ -84,7 +84,7 @@ DI 시스템은 ASP.NET Core에서 DI 시스템을 기반으로 합니다. 자�
 
 다음 예제에서는 `@inject`을 사용하는 방법을 보여 줍니다. `Services.IDataAccess` 구현 하는 서비스는 구성 요소의 속성 `DataRepository`에 삽입 됩니다. 코드가 `IDataAccess` 추상화를 사용 하는 방법에 유의 하세요.
 
-[!code-cshtml[](dependency-injection/samples_snapshot/3.x/CustomerList.razor?highlight=2-3,23)]
+[!code-razor[](dependency-injection/samples_snapshot/3.x/CustomerList.razor?highlight=2-3,23)]
 
 내부적으로 생성 된 속성 (`DataRepository`)은 `InjectAttribute` 특성을 사용 합니다. 일반적으로이 특성은 직접 사용 되지 않습니다. 구성 요소에 기본 클래스가 필요 하 고 기본 클래스에도 삽입 된 속성이 필요 하면 `InjectAttribute`를 수동으로 추가 합니다.
 
@@ -100,7 +100,7 @@ public class ComponentBase : IComponent
 
 기본 클래스에서 파생 된 구성 요소에서는 `@inject` 지시문이 필요 하지 않습니다. 기본 클래스의 `InjectAttribute` 면 충분 합니다.
 
-```cshtml
+```razor
 @page "/demo"
 @inherits ComponentBase
 
@@ -135,7 +135,7 @@ ASP.NET Core 앱에서 범위가 지정 된 서비스는 일반적으로 현재 
 
 서비스의 범위를 구성 요소의 수명으로 범위를 지정할 수 있도록에서는 `OwningComponentBase` 및 `OwningComponentBase<TService>` 기본 클래스를 사용할 수 있습니다. 이러한 기본 클래스는 구성 요소의 수명으로 범위가 지정 된 서비스를 확인 하는 `IServiceProvider` 형식의 `ScopedServices` 속성을 노출 합니다. Razor의 기본 클래스에서 상속 되는 구성 요소를 작성 하려면 `@inherits` 지시문을 사용 합니다.
 
-```cshtml
+```razor
 @page "/users"
 @attribute [Authorize]
 @inherits OwningComponentBase<Data.ApplicationDbContext>
