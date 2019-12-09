@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/22/2019
 uid: web-api/index
-ms.openlocfilehash: 3f52e4ce2d26902324ab30e0bda7ed8a4942daa0
-ms.sourcegitcommit: ddc813f0f1fb293861a01597532919945b0e7fe5
+ms.openlocfilehash: 5ef8b4d012f4ed90339ffea191612e4dc365d958
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/23/2019
-ms.locfileid: "74412048"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880537"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>ASP.NET Core로 Web API 만들기
 
@@ -66,17 +66,17 @@ Web API는 <xref:Microsoft.AspNetCore.Mvc.ControllerBase>에서 파생되는 하
 
 |특성|참고|
 |---------|-----|
-|[[Route]](<xref:Microsoft.AspNetCore.Mvc.RouteAttribute>)      |컨트롤러 또는 작업의 URL 패턴을 지정합니다.|
-|[[Bind]](<xref:Microsoft.AspNetCore.Mvc.BindAttribute>)        |모델 바인딩에 포함할 접두사 및 속성을 지정합니다.|
-|[[HttpGet]](<xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute>)  |HTTP GET 작업 동사를 지원하는 작업을 식별합니다.|
-|[[Consumes]](<xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute>)|작업에서 허용하는 데이터 형식을 지정합니다.|
-|[[Produces]](<xref:Microsoft.AspNetCore.Mvc.ProducesAttribute>)|작업에서 반환하는 데이터 형식을 지정합니다.|
+|[`[Route]`](<xref:Microsoft.AspNetCore.Mvc.RouteAttribute>)      |컨트롤러 또는 작업의 URL 패턴을 지정합니다.|
+|[`[Bind]`](<xref:Microsoft.AspNetCore.Mvc.BindAttribute>)        |모델 바인딩에 포함할 접두사 및 속성을 지정합니다.|
+|[`[HttpGet]`](<xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute>)  |HTTP GET 작업 동사를 지원하는 작업을 식별합니다.|
+|[`[Consumes]`](<xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute>)|작업에서 허용하는 데이터 형식을 지정합니다.|
+|[`[Produces]`](<xref:Microsoft.AspNetCore.Mvc.ProducesAttribute>)|작업에서 반환하는 데이터 형식을 지정합니다.|
 
 사용 가능한 특성이 포함된 목록은 <xref:Microsoft.AspNetCore.Mvc> 네임스페이스를 참조하세요.
 
 ## <a name="apicontroller-attribute"></a>ApiController 특성
 
-[[ApiController]](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) 특성을 컨트롤러 클래스에 적용하여 다음과 같이 독자적인 API 관련 동작을 사용할 수 있습니다.
+[`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) 특성을 컨트롤러 클래스에 적용하여 다음과 같이 독자적인 API 관련 동작을 사용할 수 있습니다.
 
 * [특성 라우팅 요구 사항](#attribute-routing-requirement)
 * [자동 HTTP 400 응답](#automatic-http-400-responses)
@@ -241,12 +241,12 @@ ASP.NET Core MVC는 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInva
 
 |특성|바인딩 원본 |
 |---------|---------|
-|[[FromBody]](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute)     | 요청 본문 |
-|[[FromForm]](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute)     | 요청 본문에서 양식 데이터 |
-|[[FromHeader]](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute) | 요청 헤더 |
-|[[FromQuery]](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute)   | 요청 쿼리 문자열 매개 변수 |
-|[[FromRoute]](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute)   | 현재 요청의 경로 데이터 |
-|[[FromServices]](xref:mvc/controllers/dependency-injection#action-injection-with-fromservices) | 작업 매개 변수로 삽입된 요청 서비스 |
+|[`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute)     | 요청 본문 |
+|[`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute)     | 요청 본문에서 양식 데이터 |
+|[`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute) | 요청 헤더 |
+|[`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute)   | 요청 쿼리 문자열 매개 변수 |
+|[`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute)   | 현재 요청의 경로 데이터 |
+|[`[FromServices]`](xref:mvc/controllers/dependency-injection#action-injection-with-fromservices) | 작업 매개 변수로 삽입된 요청 서비스 |
 
 > [!WARNING]
 > 값에 `%2f`(즉, `/`)이 포함될 수 있는 경우 `[FromRoute]`를 사용하지 않습니다. `%2f`는 `/`로 이스케이프가 해제되지 않습니다. 값에 `%2f`가 포함될 수 있으면 `[FromQuery]`를 사용합니다.
@@ -322,7 +322,7 @@ ASP.NET Core MVC는 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInva
 
 ## <a name="multipartform-data-request-inference"></a>다중 파트/폼 데이터 요청 유추
 
-작업 매개 변수를 [[FromForm]](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) 특성으로 주석 처리하는 경우 `[ApiController]` 특성이 유추 규칙에 적용됩니다. `multipart/form-data` 요청 콘텐츠 형식이 유추됩니다.
+작업 매개 변수를 [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) 특성으로 주석 처리하는 경우 `[ApiController]` 특성이 유추 규칙에 적용됩니다. `multipart/form-data` 요청 콘텐츠 형식이 유추됩니다.
 
 기본 동작을 사용하지 않으려면 `Startup.ConfigureServices`에서 <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressConsumesConstraintForFormFileParameters> 속성을 `true`로 설정합니다.
 

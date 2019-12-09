@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/index
-ms.openlocfilehash: 2ebc4d72191dff33a7fb6170650be67c3836cdaa
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 693ac1a5b5bcaf8a9bbf0ff9ab63fb41764e3888
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73964011"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880451"
 ---
 # <a name="aspnet-core-opno-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor 인증 및 권한 부여
 
@@ -398,7 +398,7 @@ You can only see this if you're signed in.
 `AuthorizeRouteView` 구성 요소와 함께 `Router` 구성 요소를 사용하면 다음과 같은 경우 앱이 사용자 지정 콘텐츠를 지정할 수 있습니다.
 
 * 콘텐츠를 찾을 수 없는 경우
-* 사용자가 구성 요소에 적용된 `[Authorize]` 조건을 충족하지 못하는 경우. `[Authorize]` 특성은 [[Authorize] 특성](#authorize-attribute) 섹션에서 설명합니다.
+* 사용자가 구성 요소에 적용된 `[Authorize]` 조건을 충족하지 못하는 경우. `[Authorize]` 특성은 [`[Authorize]` 속성](#authorize-attribute) 섹션에서 설명합니다.
 * 비동기 인증이 진행 중인 경우
 
 기본 Blazor 서버 프로젝트 템플릿에서 *App.razor* 파일은 사용자 지정 콘텐츠를 설정하는 방법을 보여 줍니다.
