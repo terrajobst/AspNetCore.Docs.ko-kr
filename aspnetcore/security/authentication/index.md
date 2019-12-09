@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/04/2019
 uid: security/authentication/index
-ms.openlocfilehash: 324b2669d3b69e4757a284e4ae7e1de5f4e87e5a
-ms.sourcegitcommit: 05ca05a5c8f6ae556aaad66ad9e4ec1e6b643c77
+ms.openlocfilehash: 40b2fb59b96486435a2ec0a7d69bee5ab4a814d2
+ms.sourcegitcommit: 76d7fff62014c3db02564191ab768acea00f1b26
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74810245"
+ms.lasthandoff: 12/05/2019
+ms.locfileid: "74852716"
 ---
 # <a name="overview-of-aspnet-core-authentication"></a>ASP.NET Core 인증 개요
 
@@ -80,14 +80,14 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 ### <a name="authenticate"></a>인증
 
-인증 체계의 인증 작업은 요청 컨텍스트를 기반으로 사용자의 id를 구성합니다. 인증에 성공했는지와 그런 경우 인증 티켓의 사용자 ID를 나타내는 <xref:Microsoft.AspNetCore.Authentication.AuthenticateResult>을(를) 반환합니다. HttpContext.AuthenticateAsync를 참조하세요. 인증 예는 다음과 같습니다.
+인증 체계의 인증 작업은 요청 컨텍스트를 기반으로 사용자의 id를 구성합니다. 인증에 성공했는지와 그런 경우 인증 티켓의 사용자 ID를 나타내는 <xref:Microsoft.AspNetCore.Authentication.AuthenticateResult>을(를) 반환합니다. `HttpContext.AuthenticateAsync`을 참조하세요. 인증 예는 다음과 같습니다.
 
 * 쿠키에서 사용자 ID를 생성하는 쿠키 인증 체계입니다.
 * JWT 전달자 체계는 JWT 전달자 토큰을 역직렬화하고 유효성을 검사하여 사용자 ID를 생성합니다.
 
 ### <a name="challenge"></a>과제
 
-인증 챌린지는 인증되지 않은 사용자가 인증을 요구하는 엔드포인트를 요청하는 경우 권한 부여를 수행하여 호출됩니다. 인증 챌린지를 발행합니다(예를 들어, 익명 사용자가 제한된 리소스를 요청하거나 로그인 링크를 클릭하는 경우). 권한 부여는 지정된 인증 체계를 사용하여 챌린지를 호출하거나, 기본값(지정되지 않은 경우)을 호출합니다. HttpContext.ChallengeAsync를 참조하세요. 인증 챌린지 예는 다음과 같습니다.
+인증 챌린지는 인증되지 않은 사용자가 인증을 요구하는 엔드포인트를 요청하는 경우 권한 부여를 수행하여 호출됩니다. 인증 챌린지를 발행합니다(예를 들어, 익명 사용자가 제한된 리소스를 요청하거나 로그인 링크를 클릭하는 경우). 권한 부여는 지정된 인증 체계를 사용하여 챌린지를 호출하거나, 기본값(지정되지 않은 경우)을 호출합니다. `HttpContext.ChallengeAsync`을 참조하세요. 인증 챌린지 예는 다음과 같습니다.
 
 * 사용자를 로그인 페이지로 리디렉션하는 쿠키 인증 체계입니다.
 * `www-authenticate: bearer` 헤더를 사용하여 401 결과를 반환하는 JWT 전달자 체계입니다.
@@ -96,7 +96,7 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 ### <a name="forbid"></a>금지
 
-인증된 사용자가 액세스를 허용하지 않는 리소스에 액세스를 시도할 때 인증 체계의 금지 작업이 권한 부여에 의해 호출됩니다. HttpContext.ForbidAsync를 참조하세요. 인증 금지 예는 다음과 같습니다.
+인증된 사용자가 액세스를 허용하지 않는 리소스에 액세스를 시도할 때 인증 체계의 금지 작업이 권한 부여에 의해 호출됩니다. `HttpContext.ForbidAsync`을 참조하세요. 인증 금지 예는 다음과 같습니다.
 * 액세스를 사용할 수 없음을 나타내는 페이지로 리디렉션하는 쿠키 인증 체계입니다.
 * 403 결과를 반환하는 JWT 전달자 체계입니다.
 * 사용자가 리소스에 대한 액세스 권한을 요청할 수 있는 페이지로 리디렉션하는 사용자 지정 인증 체계입니다.
