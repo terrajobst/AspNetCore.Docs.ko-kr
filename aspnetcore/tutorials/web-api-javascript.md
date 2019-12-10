@@ -4,14 +4,14 @@ author: rick-anderson
 description: JavaScript를 사용하여 ASP.NET Core 웹 API를 호출하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/27/2019
+ms.date: 11/26/2019
 uid: tutorials/web-api-javascript
-ms.openlocfilehash: 0070816149d64fc1d71d453eb0f135050c78597a
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 5a31aa2974eb41938db89f97c070c352a26290fd
+ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/13/2019
-ms.locfileid: "72378699"
+ms.lasthandoff: 12/02/2019
+ms.locfileid: "74681177"
 ---
 # <a name="tutorial-call-an-aspnet-core-web-api-with-javascript"></a>자습서: JavaScript로 ASP.NET Core 웹 API 호출하기
 
@@ -44,13 +44,15 @@ ASP.NET Core 2.2의 경우에는 [JavaScript를 사용하여 웹 API 호출하�
 
     [!code-csharp[](first-web-api/samples/3.0/TodoApi/StartupJavaScript.cs?highlight=8-9&name=snippet_configure)]
 
-1. 프로젝트 루트에 *wwwroot* 디렉터리를 생성합니다.
+1. 프로젝트 루트에서 *wwwroot* 폴더를 만듭니다.
 
-1. *index.html*이라는 HTML 파일을 *wwwroot* 디렉터리에 추가합니다. 다음 표시로 콘텐츠를 바꿉니다.
+1. *wwwroot* 폴더 안에 *js* 폴더를 만듭니다.
+
+1. *index.html*이라는 HTML 파일을 *wwwroot* 폴더에 추가합니다. *index.html*의 콘텐츠를 다음 마크업으로 바꿉니다.
 
     [!code-html[](first-web-api/samples/3.0/TodoApi/wwwroot/index.html)]
 
-1. *site.js*라는 JavaScript 파일을 *wwwroot* 디렉터리에 추가합니다. 다음 코드로 콘텐츠를 바꿉니다.
+1. *site.js*라는 JavaScript 파일을 *wwwroot/js* 폴더에 추가합니다. *site.js*의 콘텐츠를 다음 코드로 바꿉니다.
 
     [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_SiteJs)]
 
@@ -75,9 +77,9 @@ HTML 페이지를 로컬에서 테스트하려면 ASP.NET Core 프로젝트의 �
 
 * `item` 변수는 할 일 항목의 개체 리터럴 표현을 생성하기 위해 선언됩니다.
 * Fetch 요청은 다음 옵션으로 구성됩니다.
-    * `method` - POST HTTP 작업 동사를 지정합니다.
-    * `body` - 요청 본문의 JSON 표현을 지정합니다. JSON은 `item`에 저장된 개체 리터럴을 [JSON.stringify](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) 함수로 전달하여 생성됩니다.
-    * `headers` - `Accept` 및 `Content-Type` HTTP 요청 헤더를 지정합니다. 두 헤더 모두 `application/json`으로 설정되어 개별적으로 수신 및 전송되는 미디어 유형을 지정합니다.
+  * `method` - POST HTTP 작업 동사를 지정합니다.
+  * `body` - 요청 본문의 JSON 표현을 지정합니다. JSON은 `item`에 저장된 개체 리터럴을 [JSON.stringify](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) 함수로 전달하여 생성됩니다.
+  * `headers` - `Accept` 및 `Content-Type` HTTP 요청 헤더를 지정합니다. 두 헤더 모두 `application/json`으로 설정되어 개별적으로 수신 및 전송되는 미디어 유형을 지정합니다.
 * HTTP POST 요청은 *api/TodoItems* 경로에 전송됩니다.
 
 [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_AddItem)]

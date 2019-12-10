@@ -3,14 +3,14 @@ title: ASP.NET Core에 대한 Razor 구문 참조
 author: rick-anderson
 description: 웹 페이지에 서버 기반 코드를 포함하는 Razor 태그 구문에 대해 알아봅니다.
 ms.author: riande
-ms.date: 09/28/2019
+ms.date: 11/09/2019
 uid: mvc/views/razor
-ms.openlocfilehash: 6f8835419dbf4c271617f57484c3408e0af30617
-ms.sourcegitcommit: f62014bb558ff6f8fdaef2e96cb05986e216aacd
+ms.openlocfilehash: dea1cd8986757b0bafab9ba9e8aa358a57a6b5eb
+ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/28/2019
-ms.locfileid: "71592325"
+ms.lasthandoff: 11/22/2019
+ms.locfileid: "74317400"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>ASP.NET Core에 대한 Razor 구문 참조
 
@@ -676,7 +676,7 @@ Razor Pages 예제는 다음 표에 나와 있습니다.
 
 `@page` 지시문은 표시되는 파일 형식에 따라 서로 다른 효과를 냅니다. 지시문:
 
-* *.cshtml* 파일에서 파일은 Razor 페이지를 나타냅니다. 자세한 내용은 <xref:razor-pages/index>을 참조하세요.
+* *.cshtml* 파일에서 파일은 Razor 페이지를 나타냅니다. 자세한 내용은 [사용자 지정 경로](xref:razor-pages/index#custom-routes) 및 <xref:razor-pages/index>를 참조하세요.
 * Razor 구성 요소가 요청을 직접 처리하도록 지정합니다. 자세한 내용은 <xref:blazor/routing>을 참조하세요.
 
 ::: moniker-end
@@ -721,11 +721,31 @@ Razor Pages 예제는 다음 표에 나와 있습니다.
 
 구성 요소의 데이터 바인딩은 `@bind` 특성을 사용하여 수행됩니다. 자세한 내용은 <xref:blazor/components#data-binding>을 참조하세요.
 
-### <a name="onevent"></a>\@on{event}
+### <a name="onevent"></a>\@on{EVENT}
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
 Razor에서는 구성 요소에 대한 이벤트 처리 기능을 제공합니다. 자세한 내용은 <xref:blazor/components#event-handling>을 참조하세요.
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.1"
+
+### <a name="oneventpreventdefault"></a>\@on{EVENT}:preventDefault
+
+*이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
+
+이벤트의 기본 작업을 방지합니다.
+
+### <a name="oneventstoppropagation"></a>\@on{EVENT}:stopPropagation
+
+*이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
+
+이벤트의 이벤트 전파를 중지합니다.
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
 
 ### <a name="key"></a>\@key
 
@@ -852,7 +872,7 @@ public class Pet
 
 [태그 도우미](xref:mvc/views/tag-helpers/intro)와 관련된 세 가지 지시문이 있습니다.
 
-| 지시문 | 함수 |
+| 지시문 | 기능 |
 | --------- | -------- |
 | [@addTagHelper](xref:mvc/views/tag-helpers/intro#add-helper-label) | 보기에 태그 도우미를 제공합니다. |
 | [@removeTagHelper](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | 보기에서 이전에 추가된 태그 도우미를 제거합니다. |

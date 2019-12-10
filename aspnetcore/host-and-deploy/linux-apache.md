@@ -5,14 +5,14 @@ description: CentOS에서 Apache를 역방향 프록시 서버로 설정하여 K
 monikerRange: '>= aspnetcore-2.1'
 ms.author: shboyer
 ms.custom: mvc
-ms.date: 11/05/2019
+ms.date: 12/02/2019
 uid: host-and-deploy/linux-apache
-ms.openlocfilehash: fce91db736908e433ba6803319aa8984bb68a554
-ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
+ms.openlocfilehash: 730ed1847ec5728657d56db3ccf0f1f5fab6b5dd
+ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73659880"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74717366"
 ---
 # <a name="host-aspnet-core-on-linux-with-apache"></a>Apache를 사용하여 Linux에서 ASP.NET Core 호스트
 
@@ -24,10 +24,13 @@ ms.locfileid: "73659880"
 
 * sudo 권한을 가진 표준 사용자 계정으로 CentOS 7을 실행하는 서버가 필요합니다.
 * 서버에서 .NET Core 런타임을 설치합니다.
-   1. [.NET Core 모든 다운로드 페이지](https://www.microsoft.com/net/download/all)로 이동합니다.
-   1. **런타임** 아래의 목록에서 최신 미리 보기 상태가 아닌 런타임을 선택합니다.
-   1. CentOS/Oracle에 대한 지침을 선택하고 따릅니다.
+   1. [.NET Core 다운로드 페이지](https://dotnet.microsoft.com/download/dotnet-core)를 참조하세요.
+   1. 미리 보기가 아닌 최신 .NET Core 버전을 선택합니다.
+   1. **앱 실행 - 런타임**에 있는 테이블에서 미리 보기가 아닌 최신 런타임을 다운로드합니다.
+   1. Linux **패키지 관리자 지침** 링크를 선택하고 CentOS 지침을 따릅니다.
 * 기존 ASP.NET Core 앱입니다.
+
+공유 프레임워크를 업그레이드한 후 나중에 언제든지 서버에서 호스트되는 ASP.NET Core 앱을 다시 시작합니다.
 
 ## <a name="publish-and-copy-over-the-app"></a>앱 게시 및 복사
 
@@ -381,6 +384,10 @@ sudo systemctl restart httpd
 
 ## <a name="additional-apache-suggestions"></a>추가 Apache 제안
 
+### <a name="restart-apps-with-shared-framework-updates"></a>공유 프레임워크 업데이트를 사용하여 앱 다시 시작
+
+서버에서 공유 프레임워크를 업그레이드한 후 서버에서 호스트되는 ASP.NET Core 앱을 다시 시작합니다.
+
 ### <a name="additional-headers"></a>추가 헤더
 
 악의적인 공격으로부터 보호하기 위해 몇 가지 헤더를 수정하거나 추가해야 합니다. `mod_headers` 모듈이 설치되었는지 확인합니다.
@@ -391,7 +398,7 @@ sudo yum install mod_headers
 
 #### <a name="secure-apache-from-clickjacking-attacks"></a>클릭재킹(clickjacking) 공격으로부터 Apache 보호
 
-또한 ‘UI 교정 공격’이라고도 하는[클릭재킹(Clickjacking)](https://blog.qualys.com/securitylabs/2015/10/20/clickjacking-a-common-implementation-mistake-that-can-put-your-websites-in-danger)은 웹 사이트 방문자를 속여서 현재 방문 중인 것과 다른 페이지에서 링크 또는 단추를 클릭하게 하는 악의적인 공격입니다. `X-FRAME-OPTIONS`를 사용하여 사이트를 보호합니다.
+또한 ‘UI 교정 공격’이라고도 하는[클릭재킹(Clickjacking)](https://blog.qualys.com/securitylabs/2015/10/20/clickjacking-a-common-implementation-mistake-that-can-put-your-websites-in-danger)은 웹 사이트 방문자를 속여서 현재 방문 중인 것과 다른 페이지에서 링크 또는 단추를 클릭하게 하는 악의적인 공격입니다.  `X-FRAME-OPTIONS`를 사용하여 사이트를 보호합니다.
 
 클릭재킹 공격을 완화하려면:
 
@@ -407,7 +414,7 @@ sudo yum install mod_headers
 
 #### <a name="mime-type-sniffing"></a>MIME 형식 검색
 
-`X-Content-Type-Options` 헤더는 Internet Explorer에서 ‘MIME 스니핑’을 방지합니다(파일 콘텐츠에서 파일의 `Content-Type` 확인). 서버에서 `nosniff` 옵션 집합을 사용하여 `Content-Type` 헤더를 `text/html`로 설정하는 경우 Internet Explorer는 파일 콘텐츠에 관계없이 콘텐츠를 `text/html`로 렌더링합니다.
+`X-Content-Type-Options` 헤더는 Internet Explorer에서 ‘MIME 스니핑’을 방지합니다(파일 콘텐츠에서 파일의 `Content-Type` 확인).  서버에서 `nosniff` 옵션 집합을 사용하여 `Content-Type` 헤더를 `text/html`로 설정하는 경우 Internet Explorer는 파일 콘텐츠에 관계없이 콘텐츠를 `text/html`로 렌더링합니다.
 
 *httpd.conf* 파일을 편집합니다.
 

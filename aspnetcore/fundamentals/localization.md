@@ -3,14 +3,14 @@ title: ASP.NET Core에서 세계화 및 지역화
 author: rick-anderson
 description: ASP.NET Core에서 다른 언어와 문화권으로의 콘텐츠 지역화를 위한 서비스 및 미들웨어를 제공하는 방법을 알아봅니다.
 ms.author: riande
-ms.date: 01/14/2017
+ms.date: 11/30/2019
 uid: fundamentals/localization
-ms.openlocfilehash: 36235e305037c0bbf20093327e2a0ff21b3de809
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 645f680436336acbe1d5c2854a242527c9b4b9cb
+ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963673"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74717405"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Core에서 세계화 및 지역화
 
@@ -276,7 +276,7 @@ using Microsoft.Extensions.Localization;
 
 6. 언어를 누른 다음, **위로 이동**을 누릅니다.
 
-::: moniker range=">= aspnetcore-3.0"
+::: moniker range=">= aspnetcore-3.1"
 ### <a name="the-content-language-http-header"></a>콘텐츠-언어 HTTP 헤더
 
 [콘텐츠-언어](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Language) 엔터티 헤더:
@@ -286,7 +286,7 @@ using Microsoft.Extensions.Localization;
 
 엔터티 헤더는 HTTP 요청 및 응답에 모두 사용됩니다.
 
-ASP.NET Core 3.0에서는 속성 `ApplyCurrentCultureToResponseHeaders`를 설정하여 `Content-Language` 헤더를 추가할 수 있습니다.
+속성 `ApplyCurrentCultureToResponseHeaders`을(를) 설정하여 `Content-Language` 헤더를 추가할 수 있습니다.
 
 `Content-Language` 헤더 추가:
 
@@ -373,6 +373,10 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 *_SelectLanguagePartial.cshtml*을 이 프로젝트에 대한 샘플 코드에 플러그 인할 수 없습니다. [GitHub](https://github.com/aspnet/entropy)의 **Localization.StarterWeb** 프로젝트에는 [종속성 주입](dependency-injection.md) 컨테이너를 통해 Razor 부분에 `RequestLocalizationOptions`를 흐르도록 하는 코드가 있습니다.
 
+## <a name="model-binding-route-data-and-query-strings"></a>모델 바인딩 경로 데이터 및 쿼리 문자열
+
+[모델 바인딩 경로 데이터 및 쿼리 문자열의 세계화 동작](xref:mvc/models/model-binding#glob)을 참조하세요.
+
 ## <a name="globalization-and-localization-terms"></a>세계화 및 지역화 용어
 
 또한 앱을 지역화하는 프로세스에는 최신 소프트웨어 개발에 일반적으로 사용되는 관련 문자 집합에 대한 기본적인 이해 및 관련된 문제에 대한 이해가 필요합니다. 모든 컴퓨터가 텍스트를 숫자(코드)로 저장하지만 다른 시스템은 다른 숫자를 사용하여 동일한 텍스트를 저장합니다. 지역화 프로세스는 특정 문화권/로캘에 대한 앱 UI(사용자 인터페이스) 번역을 참조합니다.
@@ -407,5 +411,4 @@ services.Configure<RequestLocalizationOptions>(options =>
 * [.NET 애플리케이션 전역화 및 지역화](/dotnet/standard/globalization-localization/index)
 * [.resx 파일의 리소스](/dotnet/framework/resources/working-with-resx-files-programmatically)
 * [Microsoft 다국어 앱 도구 키트](https://marketplace.visualstudio.com/items?itemName=MultilingualAppToolkit.MultilingualAppToolkit-18308)
-* [지역화 및 제네릭](https://github.com/hishamco/hishambinateya.com/blob/master/Posts/localization-and-generics.md)
-* [ASP.NET Core 3.0에서 지역화의 새로운 기능](http://hishambinateya.com/what-is-new-in-localization-in-asp.net-core-3.0)
+* [지역화 및 제네릭](http://hishambinateya.com/localization-and-generics)

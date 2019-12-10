@@ -1,26 +1,28 @@
 ---
 title: ASP.NET Core Blazor용 링커 구성
 author: guardrex
-description: Blazor 앱을 빌드할 때 IL(Intermediate Language) 링커를 제어하는 방법을 알아봅니다.
+description: Blazor 앱을 빌드할 때 IL(중간 언어) 링커를 제어하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/15/2019
+ms.date: 11/21/2019
+no-loc:
+- Blazor
 uid: host-and-deploy/blazor/configure-linker
-ms.openlocfilehash: a7e59e63c163986c40155e230dc644028e78e5fd
-ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
+ms.openlocfilehash: 0bc987d72d2f684b1ecbd4a883e9a09fac7c801e
+ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72391455"
+ms.lasthandoff: 11/22/2019
+ms.locfileid: "74317282"
 ---
-# <a name="configure-the-linker-for-aspnet-core-blazor"></a>ASP.NET Core Blazor용 링커 구성
+# <a name="configure-the-linker-for-aspnet-core-opno-locblazor"></a>ASP.NET Core Blazor용 링커 구성
 
 [Luke Latham](https://github.com/guardrex)으로
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Blazor는 릴리스 빌드 중에 [IL(중간 언어)](/dotnet/standard/managed-code#intermediate-language--execution) 연결을 수행하여 앱의 출력 어셈블리에서 불필요한 IL을 제거합니다.
+Blazor은(는) 빌드 중에 [IL(중간 언어)](/dotnet/standard/managed-code#intermediate-language--execution) 연결을 수행하여 앱의 출력 어셈블리에서 불필요한 IL을 제거합니다.
 
 다음 방법 중 하나를 사용하여 어셈블리 연결을 제어합니다.
 
@@ -29,7 +31,7 @@ Blazor는 릴리스 빌드 중에 [IL(중간 언어)](/dotnet/standard/managed-c
 
 ## <a name="disable-linking-with-a-msbuild-property"></a>MSBuild 속성을 사용하여 연결을 사용하지 않도록 설정
 
-게시를 포함하는 앱이 빌드되면 릴리스 모드에서 연결이 기본적으로 활성화됩니다. 모든 어셈블리에 대한 연결을 비활성화하려면 프로젝트 파일에서 `BlazorLinkOnBuild` MSBuild 속성을 `false`로 설정합니다.
+게시를 포함하는 앱이 빌드되면 연결이 기본적으로 활성화됩니다. 모든 어셈블리에 대한 연결을 비활성화하려면 프로젝트 파일에서 `BlazorLinkOnBuild` MSBuild 속성을 `false`로 설정합니다.
 
 ```xml
 <PropertyGroup>
@@ -80,3 +82,29 @@ XML 구성 파일을 제공하고 프로젝트 파일에서 해당 파일을 MSB
 ```
 
 자세한 내용은 [IL 링커: Xml 설명자 구문](https://github.com/mono/linker/blob/master/src/linker/README.md#syntax-of-xml-descriptor)을 참조하세요.
+
+### <a name="configure-the-linker-for-internationalization"></a>국제화를 위한 링커 구성
+
+기본적으로 Blazor WebAssembly 앱에 대한 Blazor의 링커 구성은 명시적으로 요청된 로캘을 제외하고 국제화 정보를 제거합니다. 이 어셈블리를 제거하면 앱 크기를 최소화합니다.
+
+유지되는 I18N 어셈블리 종류를 제어하려면 프로젝트 파일에서 `<MonoLinkerI18NAssemblies>` MSBuild 속성을 설정합니다.
+
+```xml
+<PropertyGroup>
+  <MonoLinkerI18NAssemblies>{all|none|REGION1,REGION2,...}</MonoLinkerI18NAssemblies>
+</PropertyGroup>
+```
+
+| 지역 값     | Mono 지역 어셈블리    |
+| ---------------- | ----------------------- |
+| `all`            | 포함된 모든 어셈블리 |
+| `cjk`            | *I18N.CJK.dll*          |
+| `mideast`        | *I18N.MidEast.dll*      |
+| `none`(기본값) | 없음                    |
+| `other`          | *I18N.Other.dll*        |
+| `rare`           | *I18N.Rare.dll*         |
+| `west`           | *I18N.West.dll*         |
+
+여러 값을 지정할 경우 쉼표를 사용하여 구분합니다(예: `mideast,west`).
+
+자세한 내용은 [I18N: Pnetlib 국제화 프레임워크 라이브러리(mono/mono GitHub 리포지토리)](https://github.com/mono/mono/tree/master/mcs/class/I18N)를 참조하세요.

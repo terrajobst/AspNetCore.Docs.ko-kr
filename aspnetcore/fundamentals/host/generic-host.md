@@ -5,14 +5,14 @@ description: 앱 시작 및 수명 관리를 담당하는 .NET Core 일반 호�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/15/2019
+ms.date: 12/02/2019
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: f14917ad924e2c762a14c2cb5f51391d4be06e7b
-ms.sourcegitcommit: dd026eceee79e943bd6b4a37b144803b50617583
+ms.openlocfilehash: 2ed4af109b5ccd303a03a0d9167649dda7793126
+ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/15/2019
-ms.locfileid: "72378749"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74717024"
 ---
 # <a name="net-generic-host"></a>.NET 일반 호스트
 
@@ -129,7 +129,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 `Microsoft.Extensions.Hosting.Internal.ConsoleLifetime`은 기본 `IHostLifetime` 구현입니다. `ConsoleLifetime`:
 
-* Ctrl+C/SIGINT 또는 SIGTERM을 수신 대기하고 <xref:Microsoft.Extensions.Hosting.IApplicationLifetime.StopApplication*>을 호출하여 종료 프로세스를 시작합니다.
+* Ctrl+C/SIGINT 또는 SIGTERM을 수신 대기하고 <xref:Microsoft.Extensions.Hosting.IHostApplicationLifetime.StopApplication*>을 호출하여 종료 프로세스를 시작합니다.
 * [RunAsync](#runasync) 및 [WaitForShutdownAsync](#waitforshutdownasync)와 같은 확장의 차단을 해제합니다.
 
 ## <a name="ihostenvironment"></a>IHostEnvironment
@@ -140,9 +140,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 * [EnvironmentName](#environmentname)
 * [ContentRootPath](#contentrootpath)
 
-웹앱은 `IHostEnvironment`를 상속하고 다음을 추가하는 `IWebHostEnvironment` 인터페이스 구현합니다.
-
-* [WebRootPath](#webroot)
+웹앱은 `IHostEnvironment`를 상속하고 [WebRootPath](#webroot)를 추가하는 `IWebHostEnvironment` 인터페이스를 구현합니다.
 
 ## <a name="host-configuration"></a>호스트 구성
 
@@ -226,7 +224,7 @@ Host.CreateDefaultBuilder(args)
 
 [HostOptions.ShutdownTimeout](xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*)이 <xref:Microsoft.Extensions.Hosting.IHost.StopAsync*>에 대한 시간 제한을 설정합니다. 기본값은 5초입니다.  시간 제한 기간 동안 호스트는 다음을 수행합니다.
 
-* [IHostApplicationLifetime.ApplicationStopping](/dotnet/api/microsoft.aspnetcore.hosting.iapplicationlifetime.applicationstopping)을 트리거합니다.
+* [IHostApplicationLifetime.ApplicationStopping](/dotnet/api/microsoft.aspnetcore.hosting.ihostapplicationlifetime.applicationstopping)을 트리거합니다.
 * 중지하지 못한 서비스에 대한 오류를 로깅하면서 호스팅된 서비스 중지를 시도합니다.
 
 모든 호스팅된 서비스가 중지하기 전에 시간 제한 기간이 만료되면 앱이 종료될 때 모든 활성화된 나머지 서비스가 중지됩니다. 처리를 완료하지 않은 경우에도 서비스가 중지됩니다. 서비스를 중지하는 데 시간이 더 필요한 경우 시간 제한을 늘립니다.

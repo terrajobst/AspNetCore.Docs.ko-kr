@@ -4,14 +4,14 @@ author: stevejgordon
 description: IHttpClientFactory 인터페이스를 사용하여 ASP.NET Core에서 논리적 HttpClient 인스턴스를 관리하는 방법에 대해 알아봅니다.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 10/27/2019
+ms.date: 11/27/2019
 uid: fundamentals/http-requests
-ms.openlocfilehash: a963833acfa12889c8ae3dac443962682e1cb931
-ms.sourcegitcommit: 032113208bb55ecfb2faeb6d3e9ea44eea827950
+ms.openlocfilehash: f33444b8fc08dc022da7700af53a218600290162
+ms.sourcegitcommit: 169ea5116de729c803685725d96450a270bc55b7
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/31/2019
-ms.locfileid: "73190590"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74733923"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>ASP.NET Core에서 IHttpClientFactory를 사용하여 HTTP 요청 만들기
 
@@ -26,7 +26,7 @@ ms.locfileid: "73190590"
 * 기본 `HttpClientMessageHandler` 인스턴스의 풀링 및 수명을 관리합니다. 자동 관리가 `HttpClient` 수명을 수동으로 관리할 때 발생하는 일반적인 DNS(Domain Name System) 문제를 방지해 줍니다.
 * 팩터리에서 만든 클라이언트를 통해 전송된 모든 요청에 대해 구성 가능한 로깅 경험(`ILogger`을 통해)을 추가합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([다운로드 방법](xref:index#how-to-download-a-sample)). 다운로드 예제는 영역을 테스트하기 위한 기초적인 앱을 제공합니다.
 
 이 항목 버전의 샘플 코드는 <xref:System.Text.Json>을 사용하여 HTTP 응답으로 반환된 JSON 콘텐츠를 역직렬화합니다. `Json.NET` 및 `ReadAsAsync<T>`를 사용하는 샘플의 경우, 버전 선택기를 사용하여 이 항목의 2.x 버전을 선택하세요.
 
@@ -288,6 +288,35 @@ Polly 정책을 중첩하는 것은 일반적입니다.
 
 장기간 단일 `HttpClient` 인스턴스를 활성 상태로 유지하는 것은 `IHttpClientFactory`가 등장하기 전에 사용되던 일반적인 패턴입니다. 이 패턴은 `IHttpClientFactory`로 마이그레이션한 이후에는 불필요합니다.
 
+### <a name="alternatives-to-ihttpclientfactory"></a>IHttpClientFactory의 대안
+
+DI 지원 앱에서 `IHttpClientFactory`을(를) 사용하면 다음이 방지됩니다.
+
+* `HttpMessageHandler` 인스턴스를 풀링하여 리소스 소모 문제가 발생했습니다.
+* 정기적으로 `HttpMessageHandler` 인스턴스를 순환하여 오래된 DNS 문제가 발생했습니다.
+
+수명이 긴 <xref:System.Net.Http.SocketsHttpHandler> 인스턴스를 사용하여 위의 문제를 해결하는 다른 방법이 있습니다.
+
+- 앱 시작 시 `SocketsHttpHandler`의 인스턴스를 만들고 앱 수명 동안 사용합니다.
+- DNS 새로 고침 시간에 따라 적절한 값으로 <xref:System.Net.Http.SocketsHttpHandler.PooledConnectionLifetime>을(를) 구성합니다.
+- 필요에 따라 `new HttpClient(handler, dispostHandler: false)`을(를) 사용하여 `HttpClient` 인스턴스를 만듭니다.
+
+위의 방법은 비슷한 방식으로 `IHttpClientFactory`에서 해결하는 리소스 관리 문제를 해결합니다.
+
+- `SocketsHttpHandler`은(는) `HttpClient` 인스턴스 간에 연결을 공유합니다. 이와 같이 공유하면 소켓이 소모되지 않도록 합니다.
+- 오래된 DNS 문제를 방지하기 위해 `SocketsHttpHandler`에서 `PooledConnectionLifetime`에 따라 연결을 순환합니다.
+
+### <a name="cookies"></a>쿠키
+
+풀링된 `HttpMessageHandler` 인스턴스는 `CookieContainer` 개체를 공유합니다. 예상치 못한 `CookieContainer` 개체 공유로 잘못된 코드가 발생하는 경우가 많습니다. 쿠키가 필요한 앱의 경우 다음 중 하나를 고려하세요.
+
+ - 자동 쿠키 처리 사용 안 함
+ - `IHttpClientFactory` 방지
+
+<xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*>을(를) 호출하여 자동 쿠키 처리를 사용하지 않도록 설정합니다.
+
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
+
 ## <a name="logging"></a>로깅
 
 `IHttpClientFactory`을 통해 만든 클라이언트는 모든 요청에 대한 로그 메시지를 기록합니다. 기본 로그 메시지를 보려면 로깅 구성에서 적절한 정보 수준을 사용하도록 설정합니다. 요청 헤더의 로깅 등과 같은 추가 로깅은 추적 수준에서만 포함됩니다.
@@ -361,7 +390,7 @@ Polly 정책을 중첩하는 것은 일반적입니다.
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet1)]
 
-일단 등록하고 나면 코드는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)를 사용하여 서비스를 주입할 수 있는 모든 곳에서 `IHttpClientFactory`를 받을 수 있습니다. `IHttpClientFactory`는 `HttpClient` 인스턴스를 만드는 데 사용할 수 있습니다.
+일단 등록하고 나면 코드는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)를 사용하여 서비스를 주입할 수 있는 모든 곳에서 `IHttpClientFactory`를 받을 수 있습니다. `IHttpClientFactory`을(를) 사용하여 `HttpClient` 인스턴스를 만들 수 있습니다.
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Pages/BasicUsage.cshtml.cs?name=snippet1&highlight=9-12,21)]
 
@@ -481,7 +510,7 @@ public class ValuesController : ControllerBase
 
 위의 코드에서는 기본 처리기를 정의합니다. `X-API-KEY` 헤더가 요청에 포함되었는지 확인합니다. 헤더가 누락된 경우 HTTP 호출을 방지하고 적합한 응답을 반환할 수 있습니다.
 
-등록하는 동안 하나 이상의 처리기가 `HttpClient`의 구성에 추가될 수 있습니다. 이 작업은 <xref:Microsoft.Extensions.DependencyInjection.IHttpClientBuilder>의 확장 메서드를 통해 수행합니다.
+등록하는 동안 하나 이상의 처리기를 `HttpClient`의 구성에 추가할 수 있습니다. 이 작업은 <xref:Microsoft.Extensions.DependencyInjection.IHttpClientBuilder>의 확장 메서드를 통해 수행합니다.
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet5)]
 
@@ -560,6 +589,35 @@ Polly 기반 처리기를 추가하는 데 사용할 수 있는 추가 확장 �
 
 장기간 단일 `HttpClient` 인스턴스를 활성 상태로 유지하는 것은 `IHttpClientFactory`가 등장하기 전에 사용되던 일반적인 패턴입니다. 이 패턴은 `IHttpClientFactory`로 마이그레이션한 이후에는 불필요합니다.
 
+### <a name="alternatives-to-ihttpclientfactory"></a>IHttpClientFactory의 대안
+
+DI 지원 앱에서 `IHttpClientFactory`을(를) 사용하면 다음이 방지됩니다.
+
+* `HttpMessageHandler` 인스턴스를 풀링하여 리소스 소모 문제가 발생했습니다.
+* 정기적으로 `HttpMessageHandler` 인스턴스를 순환하여 오래된 DNS 문제가 발생했습니다.
+
+수명이 긴 <xref:System.Net.Http.SocketsHttpHandler> 인스턴스를 사용하여 위의 문제를 해결하는 다른 방법이 있습니다.
+
+- 앱 시작 시 `SocketsHttpHandler`의 인스턴스를 만들고 앱 수명 동안 사용합니다.
+- DNS 새로 고침 시간에 따라 적절한 값으로 <xref:System.Net.Http.SocketsHttpHandler.PooledConnectionLifetime>을(를) 구성합니다.
+- 필요에 따라 `new HttpClient(handler, dispostHandler: false)`을(를) 사용하여 `HttpClient` 인스턴스를 만듭니다.
+
+위의 방법은 비슷한 방식으로 `IHttpClientFactory`에서 해결하는 리소스 관리 문제를 해결합니다.
+
+- `SocketsHttpHandler`은(는) `HttpClient` 인스턴스 간에 연결을 공유합니다. 이와 같이 공유하면 소켓이 소모되지 않도록 합니다.
+- 오래된 DNS 문제를 방지하기 위해 `SocketsHttpHandler`에서 `PooledConnectionLifetime`에 따라 연결을 순환합니다.
+
+### <a name="cookies"></a>쿠키
+
+풀링된 `HttpMessageHandler` 인스턴스는 `CookieContainer` 개체를 공유합니다. 예상치 못한 `CookieContainer` 개체 공유로 잘못된 코드가 발생하는 경우가 많습니다. 쿠키가 필요한 앱의 경우 다음 중 하나를 고려하세요.
+
+ - 자동 쿠키 처리 사용 안 함
+ - `IHttpClientFactory` 방지
+
+<xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*>을(를) 호출하여 자동 쿠키 처리를 사용하지 않도록 설정합니다.
+
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
+
 ## <a name="logging"></a>로깅
 
 `IHttpClientFactory`을 통해 만든 클라이언트는 모든 요청에 대한 로그 메시지를 기록합니다. 기본 로그 메시지를 보려면 로깅 구성에서 적절한 정보 수준을 사용하도록 설정합니다. 요청 헤더의 로깅 등과 같은 추가 로깅은 추적 수준에서만 포함됩니다.
@@ -637,7 +695,7 @@ Polly 기반 처리기를 추가하는 데 사용할 수 있는 추가 확장 �
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet1)]
 
-일단 등록하고 나면 코드는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)를 사용하여 서비스를 주입할 수 있는 모든 곳에서 `IHttpClientFactory`를 받을 수 있습니다. `IHttpClientFactory`는 `HttpClient` 인스턴스를 만드는 데 사용할 수 있습니다.
+일단 등록하고 나면 코드는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)를 사용하여 서비스를 주입할 수 있는 모든 곳에서 `IHttpClientFactory`를 받을 수 있습니다. `IHttpClientFactory`을(를) 사용하여 `HttpClient` 인스턴스를 만들 수 있습니다.
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Pages/BasicUsage.cshtml.cs?name=snippet1&highlight=9-12,21)]
 
@@ -757,7 +815,7 @@ public class ValuesController : ControllerBase
 
 위의 코드에서는 기본 처리기를 정의합니다. `X-API-KEY` 헤더가 요청에 포함되었는지 확인합니다. 헤더가 누락된 경우 HTTP 호출을 방지하고 적합한 응답을 반환할 수 있습니다.
 
-등록하는 동안 하나 이상의 처리기가 `HttpClient`의 구성에 추가될 수 있습니다. 이 작업은 <xref:Microsoft.Extensions.DependencyInjection.IHttpClientBuilder>의 확장 메서드를 통해 수행합니다.
+등록하는 동안 하나 이상의 처리기를 `HttpClient`의 구성에 추가할 수 있습니다. 이 작업은 <xref:Microsoft.Extensions.DependencyInjection.IHttpClientBuilder>의 확장 메서드를 통해 수행합니다.
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet5)]
 
@@ -838,6 +896,35 @@ Polly 기반 처리기를 추가하는 데 사용할 수 있는 추가 확장 �
 클라이언트의 삭제는 불필요합니다. 삭제는 나가는 요청을 취소하고 <xref:System.IDisposable.Dispose*>를 호출한 후에는 지정된 `HttpClient` 인스턴스가 사용될 수 없도록 보장합니다. `IHttpClientFactory`는 `HttpClient` 인스턴스에서 사용되는 리소스를 추적하고 삭제합니다. `HttpClient` 인스턴스는 일반적으로 삭제가 필요하지 않은 .NET 개체로 간주할 수 있습니다.
 
 장기간 단일 `HttpClient` 인스턴스를 활성 상태로 유지하는 것은 `IHttpClientFactory`가 등장하기 전에 사용되던 일반적인 패턴입니다. 이 패턴은 `IHttpClientFactory`로 마이그레이션한 이후에는 불필요합니다.
+
+### <a name="alternatives-to-ihttpclientfactory"></a>IHttpClientFactory의 대안
+
+DI 지원 앱에서 `IHttpClientFactory`을(를) 사용하면 다음이 방지됩니다.
+
+* `HttpMessageHandler` 인스턴스를 풀링하여 리소스 소모 문제가 발생했습니다.
+* 정기적으로 `HttpMessageHandler` 인스턴스를 순환하여 오래된 DNS 문제가 발생했습니다.
+
+수명이 긴 <xref:System.Net.Http.SocketsHttpHandler> 인스턴스를 사용하여 위의 문제를 해결하는 다른 방법이 있습니다.
+
+- 앱 시작 시 `SocketsHttpHandler`의 인스턴스를 만들고 앱 수명 동안 사용합니다.
+- DNS 새로 고침 시간에 따라 적절한 값으로 <xref:System.Net.Http.SocketsHttpHandler.PooledConnectionLifetime>을(를) 구성합니다.
+- 필요에 따라 `new HttpClient(handler, dispostHandler: false)`을(를) 사용하여 `HttpClient` 인스턴스를 만듭니다.
+
+위의 방법은 비슷한 방식으로 `IHttpClientFactory`에서 해결하는 리소스 관리 문제를 해결합니다.
+
+- `SocketsHttpHandler`은(는) `HttpClient` 인스턴스 간에 연결을 공유합니다. 이와 같이 공유하면 소켓이 소모되지 않도록 합니다.
+- 오래된 DNS 문제를 방지하기 위해 `SocketsHttpHandler`에서 `PooledConnectionLifetime`에 따라 연결을 순환합니다.
+
+### <a name="cookies"></a>쿠키
+
+풀링된 `HttpMessageHandler` 인스턴스는 `CookieContainer` 개체를 공유합니다. 예상치 못한 `CookieContainer` 개체 공유로 잘못된 코드가 발생하는 경우가 많습니다. 쿠키가 필요한 앱의 경우 다음 중 하나를 고려하세요.
+
+ - 자동 쿠키 처리 사용 안 함
+ - `IHttpClientFactory` 방지
+
+<xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*>을(를) 호출하여 자동 쿠키 처리를 사용하지 않도록 설정합니다.
+
+[!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
 ## <a name="logging"></a>로깅
 

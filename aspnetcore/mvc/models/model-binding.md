@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core에서 모델 바인딩의 작동 방법 및 해당 동작을 사용자 지정하는 방법을 알아봅니다.
 ms.assetid: 0be164aa-1d72-4192-bd6b-192c9c301164
 ms.author: riande
-ms.date: 11/15/2019
+ms.date: 11/21/2019
 uid: mvc/models/model-binding
-ms.openlocfilehash: a025419a5b4d2c2e3e5c5a7850df281ddd3164ea
-ms.sourcegitcommit: f91d322f790123d41ec3271fa084ae20ed9f89a6
+ms.openlocfilehash: a49fec38a6d38bbd33e9461cbcceb39bfe810f5c
+ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/18/2019
-ms.locfileid: "74155047"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74717288"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core의 모델 바인딩
 
@@ -83,18 +83,18 @@ ASP.NET Core 2.1 이상에서 사용할 수 있습니다.  모델 바인딩이 �
 
 기본적으로 모델 바인딩은 HTTP 요청의 다음 원본에서 키-값 쌍의 양식으로 데이터를 가져옵니다.
 
-1. 양식 필드 
+1. 양식 필드
 1. 요청 본문([[ApiController] 특성이 있는 컨트롤러](xref:web-api/index#binding-source-parameter-inference)의 경우)
 1. 경로 데이터
 1. 쿼리 문자열 매개 변수
-1. 업로드된 파일 
+1. 업로드된 파일
 
-각 대상 매개 변수 또는 속성의 경우 원본은 이 목록에 표시된 순서대로 검사됩니다. 몇 가지 예외도 있습니다.
+각 대상 매개 변수 또는 속성의 경우, 소스가 이 목록에 표시된 순서대로 검사됩니다. 몇 가지 예외도 있습니다.
 
 * 경로 데이터 및 쿼리 문자열 값은 단순 형식에 대해서만 사용됩니다.
 * 업로드된 파일은 `IFormFile` 또는 `IEnumerable<IFormFile>`을 구현하는 대상 유형에만 바인딩됩니다.
 
-기본 동작이 올바른 결과를 제공하지 않는 경우 다음 특성 중 하나를 사용하여 지정된 대상을 사용하도록 원본을 지정할 수 있습니다. 
+기본 소스가 올바르지 않으면 다음 특성 중 하나를 사용하여 소스를 지정합니다.
 
 * [[FromQuery]](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute) - 쿼리 문자열에서 값을 가져옵니다. 
 * [[FromRoute]](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute) - 경로 데이터에서 값을 가져옵니다.
@@ -114,9 +114,34 @@ ASP.NET Core 2.1 이상에서 사용할 수 있습니다.  모델 바인딩이 �
 
 ### <a name="frombody-attribute"></a>[FromBody] 특성
 
-요청 본문 데이터는 요청의 콘텐츠 형식과 관련된 입력 포맷터를 사용하여 구문 분석됩니다. 입력 포맷터는 [이 문서의 뒷부분](#input-formatters)에 설명되어 있습니다.
+매개 변수에 `[FromBody]` 특성을 적용하여 HTTP 요청의 본문에서 해당 속성을 채웁니다. ASP.NET Core 런타임은 본문을 읽을 책임을 입력 포맷터에 위임합니다. 입력 포맷터는 [이 문서의 뒷부분](#input-formatters)에 설명되어 있습니다.
 
-작업 메서드당 둘 이상의 매개 변수에 `[FromBody]`를 적용하지 마십시오. ASP.NET Core 런타임은 요청 스트림을 읽는 책임을 입력 포맷터에 위임합니다. 요청 스트림을 읽으면 더 이상 다른 `[FromBody]` 매개 변수를 바인딩하기 위해 다시 읽을 수 없습니다.
+`[FromBody]`이(가) 복합 형식 매개 변수에 적용되는 경우 해당 속성에 적용된 모든 바인딩 소스 특성은 무시됩니다. 예를 들어, 다음 `Create` 작업은 해당 `pet` 매개 변수가 본문에서 채워지도록 지정합니다.
+
+```csharp
+public ActionResult<Pet> Create([FromBody] Pet pet)
+```
+
+`Pet` 클래스는 `Breed` 속성이 쿼리 문자열 매개 변수에서 채워지도록 지정합니다.
+
+```csharp
+public class Pet
+{
+    public string Name { get; set; }
+
+    [FromQuery] // Attribute is ignored.
+    public string Breed { get; set; }
+}
+```
+
+앞의 예제에서:
+
+* `[FromQuery]` 특성은 무시됩니다.
+* `Breed` 속성은 쿼리 문자열 매개 변수에서 채워지지 않습니다. 
+
+입력 포맷터는 본문만 읽고 바인딩 소스 특성은 인식하지 않습니다. 본문에 적절한 값이 있는 경우 해당 값은 `Breed` 속성을 채우는 데 사용됩니다.
+
+작업 메서드당 둘 이상의 매개 변수에 `[FromBody]`를 적용하지 마십시오. 입력 포맷터에서 요청 스트림을 읽으면 더 이상 다른 `[FromBody]` 매개 변수를 바인딩하기 위해 다시 읽을 수 없습니다.
 
 ### <a name="additional-sources"></a>추가 원본
 
@@ -355,6 +380,27 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
   * selectedCourses["1050"]="Chemistry"
   * selectedCourses["2000"]="Economics"
+
+<a name="glob"></a>
+
+## <a name="globalization-behavior-of-model-binding-route-data-and-query-strings"></a>모델 바인딩 경로 데이터 및 쿼리 문자열의 세계화 동작
+
+ASP.NET Core 경로 값 공급자와 쿼리 문자열 값 공급자:
+
+* 값을 고정 문화권으로 처리합니다.
+* URL을 고정 문화권으로 간주합니다.
+
+이와 대조적으로, 양식 데이터에서 가져온 값은 문화권을 구분하여 변환을 수행합니다. 이는 기본적으로 URL을 로캘 간에 공유할 수 있도록 설계되었습니다.
+
+ASP.NET Core 경로 값 공급자와 쿼리 문자열 값 공급자가 문화권 구분 변환을 수행하도록 하려면 다음을 수행합니다.
+
+* <xref:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProviderFactory>에서 상속됩니다.
+* [QueryStringValueProviderFactory](https://github.com/aspnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/ModelBinding/QueryStringValueProviderFactory.cs) 또는 [RouteValueValueProviderFactory](https://github.com/aspnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/ModelBinding/RouteValueProviderFactory.cs)에서 코드를 복사합니다.
+* 값 공급자 생성자로 전달된 [문화권 값](https://github.com/aspnet/AspNetCore/blob/e625fe29b049c60242e8048b4ea743cca65aa7b5/src/Mvc/Mvc.Core/src/ModelBinding/QueryStringValueProviderFactory.cs#L30)을 [CultureInfo.CurrentCulture](xref:System.Globalization.CultureInfo.CurrentCulture)로 바꿉니다.
+* MVC 옵션의 기본 값 공급자 팩터리를 새 값으로 바꿉니다.
+
+[!code-csharp[](model-binding/samples/StartupMB.cs?name=snippet)]
+[!code-csharp[](model-binding/samples/StartupMB.cs?name=snippet1)]
 
 ## <a name="special-data-types"></a>특수 데이터 형식
 

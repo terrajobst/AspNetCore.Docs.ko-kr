@@ -5,12 +5,12 @@ description: MVC 요소가 ASP.NET Core에서 작동하는 방법을 수정하�
 ms.author: riande
 ms.date: 10/14/2016
 uid: mvc/controllers/application-model
-ms.openlocfilehash: f7f64c8b3a63ec66936772e724edb57037654059
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: 4e264dc7cc63955df42df0b9eeeb7b82ae286241
+ms.sourcegitcommit: 169ea5116de729c803685725d96450a270bc55b7
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815504"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74733962"
 ---
 # <a name="work-with-the-application-model-in-aspnet-core"></a>ASP.NET Core에서 응용 프로그램 모델 작업
 
@@ -38,7 +38,7 @@ ASP.NET Core MVC 응용 프로그램 모델의 구조는 다음과 같습니다.
 
 ASP.NET Core MVC는 [IApplicationModelProvider](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.iapplicationmodelprovider) 인터페이스에 의해 정의된 공급자 패턴을 사용하여 응용 프로그램 모델을 로드합니다. 이 섹션에서는 해당 공급자가 작동하는 방법에 대한 일부 내부 구현 세부 사항을 다룹니다. 이는 규칙을 사용하여 응용 프로그램 모델을 활용하는 대부분의 앱이 수행해야 하는 고급 항목입니다.
 
-`IApplicationModelProvider` 인터페이스의 구현은 서로 "래핑"하며, 각 구현은 해당 `Order` 속성에 따라 오름차순으로 `OnProvidersExecuting`을 호출합니다. 그런 다음 `OnProvidersExecuted` 메서드는 역순으로 호출됩니다. 프레임워크는 여러 공급자를 정의합니다.
+`IApplicationModelProvider` 인터페이스의 구현은 서로 "래핑"하며, 각 구현은 해당 `Order` 속성에 따라 오름차순으로 `OnProvidersExecuting`을 호출합니다. `OnProvidersExecuted` 메서드는 역순으로 호출됩니다. 프레임워크는 여러 공급자를 정의합니다.
 
 First(`Order=-1000`):
 
@@ -63,7 +63,7 @@ Then(`Order=-990`):
 * 컨텍스트에 작업 메서드 매개 변수 추가
 * 경로 및 기타 특성 적용
 
-일부 기본 제공 동작은 `DefaultApplicationModelProvider`에 의해 구현됩니다. 이 공급자는 [`ControllerModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.controllermodel)의 구성을 담당하며, 이는 [`ActionModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.actionmodel), [`PropertyModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.propertymodel) 및 [`ParameterModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.parametermodel) 인스턴스를 차례로 참조합니다. `DefaultApplicationModelProvider` 클래스는 향후 변경될 수 있는 내부 프레임워크 구현 세부 사항입니다.
+일부 기본 제공 동작은 `DefaultApplicationModelProvider`에 의해 구현됩니다. 이 공급자는 [`ControllerModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.controllermodel)의 구성을 담당하며, 이는 [`ActionModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.actionmodel), [`PropertyModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.propertymodel) 및 [`ParameterModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.parametermodel) 인스턴스를 차례로 참조합니다. `DefaultApplicationModelProvider` 클래스는 향후 변경될 수 있는 내부 프레임워크 구현 세부 사항입니다. 
 
 `AuthorizationApplicationModelProvider`는 `AuthorizeFilter` 및 `AllowAnonymousFilter` 특성과 관련된 동작의 적용을 담당합니다. [이 특성들에 대해 자세히 알아보세요](xref:security/authorization/simple).
 
@@ -71,7 +71,7 @@ Then(`Order=-990`):
 
 ## <a name="conventions"></a>규칙
 
-응용 프로그램 모델은 전체 모델 또는 공급자를 재정의하는 것보다 모델의 동작을 더 간단하게 사용자 지정할 수 있는 방법을 제공하는 규칙 추상화를 정의합니다. 앱의 동작을 수정할 경우 이러한 추상화를 사용하는 것이 좋습니다. 규칙은 사용자 지정을 동적으로 적용하는 코드를 작성할 수 있는 방법을 제공합니다. [필터](xref:mvc/controllers/filters)는 프레임워크의 동작을 수정하는 방법을 제공하는 반면, 사용자 지정을 통해 전체 앱이 함께 연결되는 방법을 제어할 수 있습니다.
+응용 프로그램 모델은 전체 모델 또는 공급자를 재정의하는 것보다 모델의 동작을 더 간단하게 사용자 지정할 수 있는 방법을 제공하는 규칙 추상화를 정의합니다. 앱의 동작을 수정할 경우 이러한 추상화를 사용하는 것이 좋습니다. 규칙은 사용자 지정을 동적으로 적용하는 코드를 작성할 수 있는 방법을 제공합니다. [필터](xref:mvc/controllers/filters)는 프레임워크의 동작을 수정하는 방법을 제공하는 반면, 사용자 지정을 통해 전체 앱이 함께 작동하는 방법을 제어할 수 있습니다.
 
 사용할 수 있는 규칙은 다음과 같습니다.
 
@@ -84,7 +84,7 @@ Then(`Order=-990`):
 
 ### <a name="sample-modifying-the-applicationmodel"></a>예제: ApplicationModel 수정
 
-다음 규칙은 응용 프로그램 모델에 속성을 추가하는 데 사용됩니다.
+다음 규칙은 응용 프로그램 모델에 속성을 추가하는 데 사용됩니다. 
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Conventions/ApplicationDescription.cs)]
 
@@ -120,7 +120,7 @@ Then(`Order=-990`):
 
 ### <a name="sample-modifying-the-parametermodel"></a>예제: ParameterModel 수정
 
-다음 규칙을 작업 매개 변수에 적용하여 `BindingInfo`를 수정할 수 있습니다. 다음 규칙은 해당 매개 변수가 경로 매개 변수여야 합니다. 다른 잠재적인 바인딩 소스(예: 쿼리 문자열 값)는 무시됩니다.
+`BindingInfo`를 수정하는 작업 매개 변수에 다음 규칙을 적용할 수 있습니다. 다음과 같은 규칙의 매개 변수는 경로 매개 변수여야 합니다. 다른 잠재적인 바인딩 소스(예: 쿼리 문자열 값)는 무시됩니다.
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Conventions/MustBeInRouteParameterModelConvention.cs)]
 
@@ -204,4 +204,4 @@ shim에서 제공하는 규칙은 특정 특성이 적용된 앱의 일부에만
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Conventions/EnableApiExplorerApplicationConvention.cs)]
 
-이 접근 방식(및 필요한 경우 추가 규칙)을 사용하여 앱 내의 모든 수준에서 API 가시성을 사용하거나 사용하지 않을 수 있습니다.
+이 접근 방식(및 필요한 경우 추가 규칙)을 사용하여 앱 내의 모든 수준에서 API 가시성을 사용하거나 사용하지 않을 수 있습니다. 

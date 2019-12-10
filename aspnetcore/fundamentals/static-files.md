@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/07/2019
 uid: fundamentals/static-files
-ms.openlocfilehash: b989b90100318ac874dc399daf65ef7d21c5549f
-ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
+ms.openlocfilehash: 00bab51cb411552c884f85fa63d42d0691b401b1
+ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73799478"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74717275"
 ---
 # <a name="static-files-in-aspnet-core"></a>ASP.NET Core의 정적 파일
 
@@ -238,6 +238,10 @@ URL은 파일 계층 구조 및 이전 코드를 사용하여 다음과 같이 �
 
 > [!WARNING]
 > [ServeUnknownFileTypes](/dotnet/api/microsoft.aspnetcore.builder.staticfileoptions.serveunknownfiletypes#Microsoft_AspNetCore_Builder_StaticFileOptions_ServeUnknownFileTypes)를 사용하도록 설정하면 보안 위험이 발생합니다. 기본적으로 비활성화되어 있으며 사용은 권장되지 않습니다. [FileExtensionContentTypeProvider](#fileextensioncontenttypeprovider)는 비표준 확장명을 가진 파일을 제공하는 것보다 안전한 대체 방법을 제공합니다.
+
+## <a name="serve-files-from-multiple-locations"></a>여러 위치에서 파일 제공
+
+`UseStaticFiles` 및 `UseFileServer`은(는) *wwwroot*를 가리키는 파일 공급자를 기본값으로 설정합니다. 다른 위치에서 파일을 제공하기 위해 다른 파일 공급자와 `UseStaticFiles` 및 `UseFileServer`의 추가 인스턴스를 제공할 수 있습니다. 자세한 내용은 [이 GitHub 이슈](https://github.com/aspnet/AspNetCore.Docs/issues/15578)를 참조하세요.
 
 ### <a name="considerations"></a>고려 사항
 
