@@ -2,26 +2,25 @@
 title: ASP.NET Core에서 HttpContext에 액세스
 author: coderandhiker
 description: ASP.NET Core에서 HttpContext에 액세스하는 방법을 알아봅니다.
+monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/11/2018
+ms.date: 12/03/2019
 uid: fundamentals/httpcontext
-ms.openlocfilehash: 0bf40f9cd2554f5ba01ccc06001fa4f1940d51a5
-ms.sourcegitcommit: f40c9311058c9b1add4ec043ddc5629384af6c56
+ms.openlocfilehash: 8a7ee180380c42ea745c91b8e6a18c1baa820220
+ms.sourcegitcommit: 5974e3e66dab3398ecf2324fbb82a9c5636f70de
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/21/2019
-ms.locfileid: "74289044"
+ms.lasthandoff: 12/03/2019
+ms.locfileid: "74778741"
 ---
-# <a name="access-httpcontext-in-aspnet-core"></a><span data-ttu-id="d3f1d-103">ASP.NET Core에서 HttpContext에 액세스</span><span class="sxs-lookup"><span data-stu-id="d3f1d-103">Access HttpContext in ASP.NET Core</span></span>
+# <a name="access-httpcontext-in-aspnet-core"></a><span data-ttu-id="75388-103">ASP.NET Core에서 HttpContext에 액세스</span><span class="sxs-lookup"><span data-stu-id="75388-103">Access HttpContext in ASP.NET Core</span></span>
 
-<span data-ttu-id="d3f1d-104">ASP.NET Core 앱은 [IHttpContextAccessor](/dotnet/api/microsoft.aspnetcore.http.ihttpcontextaccessor) 인터페이스 및 기본 구현 [HttpContextAccessor](/dotnet/api/microsoft.aspnetcore.http.httpcontextaccessor)를 통해 `HttpContext`에 액세스합니다.</span><span class="sxs-lookup"><span data-stu-id="d3f1d-104">ASP.NET Core apps access the `HttpContext` through the [IHttpContextAccessor](/dotnet/api/microsoft.aspnetcore.http.ihttpcontextaccessor) interface and its default implementation [HttpContextAccessor](/dotnet/api/microsoft.aspnetcore.http.httpcontextaccessor).</span></span> <span data-ttu-id="d3f1d-105">서비스 내에서 `HttpContext`에 액세스가 필요한 경우에만 `IHttpContextAccessor`를 사용할 필요가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="d3f1d-105">It's only necessary to use `IHttpContextAccessor` when you need access to the `HttpContext` inside a service.</span></span>
+<span data-ttu-id="75388-104">ASP.NET Core 앱은 <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> 인터페이스 및 기본 구현 <xref:Microsoft.AspNetCore.Http.HttpContextAccessor>을(를) 통해 `HttpContext`에 액세스합니다.</span><span class="sxs-lookup"><span data-stu-id="75388-104">ASP.NET Core apps access `HttpContext` through the <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> interface and its default implementation <xref:Microsoft.AspNetCore.Http.HttpContextAccessor>.</span></span> <span data-ttu-id="75388-105">서비스 내에서 `HttpContext`에 액세스가 필요한 경우에만 `IHttpContextAccessor`를 사용할 필요가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="75388-105">It's only necessary to use `IHttpContextAccessor` when you need access to the `HttpContext` inside a service.</span></span>
 
-::: moniker range=">= aspnetcore-2.0"
+## <a name="use-httpcontext-from-razor-pages"></a><span data-ttu-id="75388-106">Razor Pages에서 HttpContext 사용</span><span class="sxs-lookup"><span data-stu-id="75388-106">Use HttpContext from Razor Pages</span></span>
 
-## <a name="use-httpcontext-from-razor-pages"></a><span data-ttu-id="d3f1d-106">Razor Pages에서 HttpContext 사용</span><span class="sxs-lookup"><span data-stu-id="d3f1d-106">Use HttpContext from Razor Pages</span></span>
-
-<span data-ttu-id="d3f1d-107">Razor Pages [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel)은 다음과 같이 [HttpContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.httpcontext) 속성을 공개합니다.</span><span class="sxs-lookup"><span data-stu-id="d3f1d-107">The Razor Pages [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) exposes the [HttpContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.httpcontext) property:</span></span>
+<span data-ttu-id="75388-107">Razor Pages <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel>은(는) <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> 속성을 노출합니다.</span><span class="sxs-lookup"><span data-stu-id="75388-107">The Razor Pages <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> exposes the <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> property:</span></span>
 
 ```csharp
 public class AboutModel : PageModel
@@ -35,21 +34,21 @@ public class AboutModel : PageModel
 }
 ```
 
-::: moniker-end
+## <a name="use-httpcontext-from-a-razor-view"></a><span data-ttu-id="75388-108">Razor 보기에서 HttpContext 사용</span><span class="sxs-lookup"><span data-stu-id="75388-108">Use HttpContext from a Razor view</span></span>
 
-## <a name="use-httpcontext-from-a-razor-view"></a><span data-ttu-id="d3f1d-108">Razor 보기에서 HttpContext 사용</span><span class="sxs-lookup"><span data-stu-id="d3f1d-108">Use HttpContext from a Razor view</span></span>
-
-<span data-ttu-id="d3f1d-109">Razor 보기는 보기에서 [RazorPage.Context](/dotnet/api/microsoft.aspnetcore.mvc.razor.razorpage.context#Microsoft_AspNetCore_Mvc_Razor_RazorPage_Context) 속성을 통해 `HttpContext`를 직접 노출합니다.</span><span class="sxs-lookup"><span data-stu-id="d3f1d-109">Razor views expose the `HttpContext` directly via a [RazorPage.Context](/dotnet/api/microsoft.aspnetcore.mvc.razor.razorpage.context#Microsoft_AspNetCore_Mvc_Razor_RazorPage_Context) property on the view.</span></span> <span data-ttu-id="d3f1d-110">다음 예제에서는 Windows 인증을 사용하여 인트라넷 앱에서 현재 사용자 이름을 검색합니다.</span><span class="sxs-lookup"><span data-stu-id="d3f1d-110">The following example retrieves the current username in an Intranet app using Windows Authentication:</span></span>
+<span data-ttu-id="75388-109">Razor 보기는 보기에서 [RazorPage.Context](xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context) 속성을 통해 `HttpContext`를 직접 노출합니다.</span><span class="sxs-lookup"><span data-stu-id="75388-109">Razor views expose the `HttpContext` directly via a [RazorPage.Context](xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context) property on the view.</span></span> <span data-ttu-id="75388-110">다음 예제에서는 Windows 인증을 사용하여 인트라넷 앱에서 현재 사용자 이름을 검색합니다.</span><span class="sxs-lookup"><span data-stu-id="75388-110">The following example retrieves the current username in an intranet app using Windows Authentication:</span></span>
 
 ```cshtml
 @{
     var username = Context.User.Identity.Name;
+    
+    ...
 }
 ```
 
-## <a name="use-httpcontext-from-a-controller"></a><span data-ttu-id="d3f1d-111">컨트롤러에서 HttpContext 사용</span><span class="sxs-lookup"><span data-stu-id="d3f1d-111">Use HttpContext from a controller</span></span>
+## <a name="use-httpcontext-from-a-controller"></a><span data-ttu-id="75388-111">컨트롤러에서 HttpContext 사용</span><span class="sxs-lookup"><span data-stu-id="75388-111">Use HttpContext from a controller</span></span>
 
-<span data-ttu-id="d3f1d-112">컨트롤러는 다음과 같이 [ControllerBase.HttpContext](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.httpcontext) 속성을 공개합니다.</span><span class="sxs-lookup"><span data-stu-id="d3f1d-112">Controllers expose the [ControllerBase.HttpContext](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.httpcontext) property:</span></span>
+<span data-ttu-id="75388-112">컨트롤러는 다음과 같이 [ControllerBase.HttpContext](xref:Microsoft.AspNetCore.Mvc.ControllerBase.HttpContext) 속성을 공개합니다.</span><span class="sxs-lookup"><span data-stu-id="75388-112">Controllers expose the [ControllerBase.HttpContext](xref:Microsoft.AspNetCore.Mvc.ControllerBase.HttpContext) property:</span></span>
 
 ```csharp
 public class HomeController : Controller
@@ -57,38 +56,38 @@ public class HomeController : Controller
     public IActionResult About()
     {
         var pathBase = HttpContext.Request.PathBase;
-        // Do something with the PathBase.
+
+        ...
 
         return View();
     }
 }
 ```
 
-## <a name="use-httpcontext-from-middleware"></a><span data-ttu-id="d3f1d-113">미들웨어에서 HttpContext 사용</span><span class="sxs-lookup"><span data-stu-id="d3f1d-113">Use HttpContext from middleware</span></span>
+## <a name="use-httpcontext-from-middleware"></a><span data-ttu-id="75388-113">미들웨어에서 HttpContext 사용</span><span class="sxs-lookup"><span data-stu-id="75388-113">Use HttpContext from middleware</span></span>
 
-<span data-ttu-id="d3f1d-114">사용자 지정 미들웨어 구성 요소를 사용할 경우 `HttpContext`는 `Invoke` 또는 `InvokeAsync` 메서드로 전달되며 미들웨어가 구성될 때 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="d3f1d-114">When working with custom middleware components, `HttpContext` is passed into the `Invoke` or `InvokeAsync` method and can be accessed when the middleware is configured:</span></span>
+<span data-ttu-id="75388-114">사용자 지정 미들웨어 구성 요소를 사용할 경우 `HttpContext`는 `Invoke` 또는 `InvokeAsync` 메서드로 전달되며 미들웨어가 구성될 때 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="75388-114">When working with custom middleware components, `HttpContext` is passed into the `Invoke` or `InvokeAsync` method and can be accessed when the middleware is configured:</span></span>
 
 ```csharp
 public class MyCustomMiddleware
 {
     public Task InvokeAsync(HttpContext context)
     {
-        // Middleware initialization optionally using HttpContext
+        ...
     }
 }
 ```
 
-## <a name="use-httpcontext-from-custom-components"></a><span data-ttu-id="d3f1d-115">사용자 지정 구성 요소에서 HttpContext 사용</span><span class="sxs-lookup"><span data-stu-id="d3f1d-115">Use HttpContext from custom components</span></span>
+## <a name="use-httpcontext-from-custom-components"></a><span data-ttu-id="75388-115">사용자 지정 구성 요소에서 HttpContext 사용</span><span class="sxs-lookup"><span data-stu-id="75388-115">Use HttpContext from custom components</span></span>
 
-<span data-ttu-id="d3f1d-116">`HttpContext`에 액세스해야 하는 기타 프레임워크 및 사용자 지정 구성 요소의 경우 기본 제공 [종속성 주입](xref:fundamentals/dependency-injection) 컨테이너를 사용하여 종속성을 등록하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="d3f1d-116">For other framework and custom components that require access to `HttpContext`, the recommended approach is to register a dependency using the built-in [dependency injection](xref:fundamentals/dependency-injection) container.</span></span> <span data-ttu-id="d3f1d-117">종속성 주입 컨테이너는 `IHttpContextAccessor`를 해당 생성자에서 종속성으로 선언하는 모든 클래스에 이를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="d3f1d-117">The dependency injection container supplies the `IHttpContextAccessor` to any classes that declare it as a dependency in their constructors.</span></span>
+<span data-ttu-id="75388-116">`HttpContext`에 액세스해야 하는 기타 프레임워크 및 사용자 지정 구성 요소의 경우 기본 제공 [종속성 주입](xref:fundamentals/dependency-injection) 컨테이너를 사용하여 종속성을 등록하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="75388-116">For other framework and custom components that require access to `HttpContext`, the recommended approach is to register a dependency using the built-in [dependency injection](xref:fundamentals/dependency-injection) container.</span></span> <span data-ttu-id="75388-117">종속성 주입 컨테이너는 `IHttpContextAccessor`를 해당 생성자에서 종속성으로 선언하는 모든 클래스에 이를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="75388-117">The dependency injection container supplies the `IHttpContextAccessor` to any classes that declare it as a dependency in their constructors:</span></span>
 
-::: moniker range=">= aspnetcore-2.1"
+::: moniker range=">= aspnetcore-3.0"
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-     services.AddMvc()
-         .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+     services.AddControllersWithViews();
      services.AddHttpContextAccessor();
      services.AddTransient<IUserRepository, UserRepository>();
 }
@@ -96,23 +95,24 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker-end
 
-::: moniker range="<= aspnetcore-2.0"
+::: moniker range="< aspnetcore-3.0"
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-     services.AddMvc();
-     services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+     services.AddMvc()
+         .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+     services.AddHttpContextAccessor();
      services.AddTransient<IUserRepository, UserRepository>();
 }
 ```
 
 ::: moniker-end
 
-<span data-ttu-id="d3f1d-118">다음 예제에서는</span><span class="sxs-lookup"><span data-stu-id="d3f1d-118">In the following example:</span></span>
+<span data-ttu-id="75388-118">다음 예제에서는</span><span class="sxs-lookup"><span data-stu-id="75388-118">In the following example:</span></span>
 
-* <span data-ttu-id="d3f1d-119">`UserRepository`는 `IHttpContextAccessor`에 대한 종속성을 선언합니다.</span><span class="sxs-lookup"><span data-stu-id="d3f1d-119">`UserRepository` declares its dependency on `IHttpContextAccessor`.</span></span>
-* <span data-ttu-id="d3f1d-120">종속성 주입이 종속성 체인을 확인하고 `UserRepository` 인스턴스를 만들 경우 종속성이 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="d3f1d-120">The dependency is supplied when dependency injection resolves the dependency chain and creates an instance of `UserRepository`.</span></span>
+* <span data-ttu-id="75388-119">`UserRepository`는 `IHttpContextAccessor`에 대한 종속성을 선언합니다.</span><span class="sxs-lookup"><span data-stu-id="75388-119">`UserRepository` declares its dependency on `IHttpContextAccessor`.</span></span>
+* <span data-ttu-id="75388-120">종속성 주입이 종속성 체인을 확인하고 `UserRepository` 인스턴스를 만들 경우 종속성이 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="75388-120">The dependency is supplied when dependency injection resolves the dependency chain and creates an instance of `UserRepository`.</span></span>
 
 ```csharp
 public class UserRepository : IUserRepository
@@ -132,19 +132,19 @@ public class UserRepository : IUserRepository
 }
 ```
 
-## <a name="httpcontext-access-from-a-background-thread"></a><span data-ttu-id="d3f1d-121">백그라운드 스레드에서 HttpContext 액세스</span><span class="sxs-lookup"><span data-stu-id="d3f1d-121">HttpContext access from a background thread</span></span>
+## <a name="httpcontext-access-from-a-background-thread"></a><span data-ttu-id="75388-121">백그라운드 스레드에서 HttpContext 액세스</span><span class="sxs-lookup"><span data-stu-id="75388-121">HttpContext access from a background thread</span></span>
 
-<span data-ttu-id="d3f1d-122">`HttpContext`는 스레드로부터 안전하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="d3f1d-122">`HttpContext` is not thread-safe.</span></span> <span data-ttu-id="d3f1d-123">요청을 처리하지 않고 `HttpContext`의 속성을 읽거나 쓰면 `NullReferenceException`이 나타날 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="d3f1d-123">Reading or writing properties of the `HttpContext` outside of processing a request can result in a `NullReferenceException`.</span></span>
+<span data-ttu-id="75388-122">`HttpContext`은(는) 스레드로부터 안전하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="75388-122">`HttpContext` isn't thread-safe.</span></span> <span data-ttu-id="75388-123">요청을 처리하지 않고 `HttpContext`의 속성을 읽거나 쓰면 <xref:System.NullReferenceException>이 나타날 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="75388-123">Reading or writing properties of the `HttpContext` outside of processing a request can result in a <xref:System.NullReferenceException>.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="d3f1d-124">요청을 처리하지 않고 `HttpContext`를 사용하면 `NullReferenceException`이 자주 발생합니다.</span><span class="sxs-lookup"><span data-stu-id="d3f1d-124">Using `HttpContext` outside of processing a request often results in a `NullReferenceException`.</span></span> <span data-ttu-id="d3f1d-125">앱에서 드물게 발생하는 `NullReferenceException`을 생성하는 경우 백그라운드 처리를 시작하거나 요청이 완료된 후 처리를 계속하는 코드의 일부를 검토합니다.</span><span class="sxs-lookup"><span data-stu-id="d3f1d-125">If your app generates sporadic `NullReferenceException`s , review parts of the code that start background processing, or that continue processing after a request completes.</span></span> <span data-ttu-id="d3f1d-126">컨트롤러 메서드를 `async void`로 정의하는 것과 같은 오류를 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="d3f1d-126">Look for mistakes, such as defining a controller method as `async void`.</span></span>
+> <span data-ttu-id="75388-124">앱에서 드물게 발생하는 `NullReferenceException` 오류를 생성하는 경우 백그라운드 처리를 시작하거나 요청이 완료된 후 처리를 계속하는 코드의 일부를 검토합니다.</span><span class="sxs-lookup"><span data-stu-id="75388-124">If your app generates sporadic `NullReferenceException` errors, review parts of the code that start background processing or that continue processing after a request completes.</span></span> <span data-ttu-id="75388-125">컨트롤러 메서드를 `async void`로 정의하는 것과 같은 오류를 찾습니다.</span><span class="sxs-lookup"><span data-stu-id="75388-125">Look for mistakes, such as defining a controller method as `async void`.</span></span>
 
-<span data-ttu-id="d3f1d-127">`HttpContext` 데이터로 백그라운드 작업을 안전하게 수행하려면:</span><span class="sxs-lookup"><span data-stu-id="d3f1d-127">To safely perform background work with `HttpContext` data:</span></span>
+<span data-ttu-id="75388-126">`HttpContext` 데이터로 백그라운드 작업을 안전하게 수행하려면:</span><span class="sxs-lookup"><span data-stu-id="75388-126">To safely perform background work with `HttpContext` data:</span></span>
 
-* <span data-ttu-id="d3f1d-128">요청 처리 중에 필요한 데이터를 복사합니다.</span><span class="sxs-lookup"><span data-stu-id="d3f1d-128">Copy the required data during request processing.</span></span>
-* <span data-ttu-id="d3f1d-129">복사된 데이터를 백그라운드 작업에 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="d3f1d-129">Pass the copied data to a background task.</span></span>
+* <span data-ttu-id="75388-127">요청 처리 중에 필요한 데이터를 복사합니다.</span><span class="sxs-lookup"><span data-stu-id="75388-127">Copy the required data during request processing.</span></span>
+* <span data-ttu-id="75388-128">복사된 데이터를 백그라운드 작업에 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="75388-128">Pass the copied data to a background task.</span></span>
 
-<span data-ttu-id="d3f1d-130">안전하지 않은 코드를 방지하려면 `HttpContext`를 백그라운드 작업을 수행하는 메서드에 전달하지 않습니다. 대신 필요한 데이터를 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="d3f1d-130">To avoid unsafe code, never pass the `HttpContext` into a method that does background work - pass the data you need instead.</span></span>
+<span data-ttu-id="75388-129">안전하지 않은 코드를 방지하려면 백그라운드 작업을 수행하는 메서드에 `HttpContext`을(를) 전달하지 마세요.</span><span class="sxs-lookup"><span data-stu-id="75388-129">To avoid unsafe code, never pass the `HttpContext` into a method that performs background work.</span></span> <span data-ttu-id="75388-130">필요한 데이터를 대신 전달하세요.</span><span class="sxs-lookup"><span data-stu-id="75388-130">Pass the required data instead.</span></span> <span data-ttu-id="75388-131">다음 예제에서는 이메일 보내기를 시작하기 위해 `SendEmailCore`을(를) 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="75388-131">In the following example, `SendEmailCore` is called to start sending an email.</span></span> <span data-ttu-id="75388-132">`correlationId`은(는) `HttpContext`이(가) 아닌, `SendEmailCore`에 전달됩니다.</span><span class="sxs-lookup"><span data-stu-id="75388-132">The `correlationId` is passed to `SendEmailCore`, not the `HttpContext`.</span></span> <span data-ttu-id="75388-133">`SendEmailCore`이(가) 완료될 때까지 코드 실행이 대기하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="75388-133">Code execution doesn't wait for `SendEmailCore` to complete:</span></span>
 
 ```csharp
 public class EmailController : Controller
@@ -153,13 +153,13 @@ public class EmailController : Controller
     {
         var correlationId = HttpContext.Request.Headers["x-correlation-id"].ToString();
 
-        // Starts sending an email, but doesn't wait for it to complete
         _ = SendEmailCore(correlationId);
+
         return View();
     }
 
     private async Task SendEmailCore(string correlationId)
     {
-        // send the email
+        ...
     }
 }
