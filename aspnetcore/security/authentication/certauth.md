@@ -4,14 +4,14 @@ author: blowdart
 description: IIS 및 HTTP.SYS 용 ASP.NET Core에서 인증서 인증을 구성 하는 방법에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
-ms.date: 11/14/2019
+ms.date: 12/09/2019
 uid: security/authentication/certauth
-ms.openlocfilehash: 2ed3e88adf3bdb7528f47492b6eb5792f99f20d8
-ms.sourcegitcommit: f91d322f790123d41ec3271fa084ae20ed9f89a6
+ms.openlocfilehash: 38ee8a6767191bb3eee4286e49b96162b14d9889
+ms.sourcegitcommit: 4e3edff24ba6e43a103fee1b126c9826241bb37b
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/18/2019
-ms.locfileid: "74154999"
+ms.lasthandoff: 12/10/2019
+ms.locfileid: "74959062"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core에서 인증서 인증 구성
 
@@ -36,14 +36,14 @@ HTTPS 인증서를 획득 하 고 적용 하며 인증서를 요구 하도록 [�
 
 인증이 실패 하는 경우이 처리기는 `401 (Unauthorized)``403 (Forbidden)` 응답을 반환 합니다. 초기 TLS 연결 중에 인증이 수행 되어야 한다는 것을 의미 합니다. 처리기에 도달할 때까지 너무 늦습니다. 익명 연결에서 인증서를 사용 하는 연결로의 연결을 업그레이드할 수 있는 방법은 없습니다.
 
-또한 `Startup.Configure` 메서드에 `app.UseAuthentication();`를 추가 합니다. 그렇지 않으면 `HttpContext.User` 인증서에서 만든 `ClaimsPrincipal`로 설정 되지 않습니다. 예를 들어 다음과 같은 가치를 제공해야 합니다.
+또한 `Startup.Configure` 메서드에 `app.UseAuthentication();`를 추가 합니다. 그렇지 않으면 `HttpContext.User` 인증서에서 만든 `ClaimsPrincipal`로 설정 되지 않습니다. 예를 들면 다음과 같습니다.:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddAuthentication(
         CertificateAuthenticationDefaults.AuthenticationScheme)
-            .AddCertificate();
+        .AddCertificate();
     // All the other service configuration.
 }
 
@@ -83,7 +83,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 해지 검사를 수행 하는 방법을 지정 하는 플래그입니다.
 
-온라인 검사를 지정 하면 인증 기관에 연결 하는 동안 지연 시간이 길어질 수 있습니다.
+인증 기관에 연결 하는 동안 오래 지연에서 온라인 확인을 지정 될 수 있습니다.
 
 해지 검사는 인증서가 루트 인증서에 연결 된 경우에만 수행 됩니다.
 
@@ -194,19 +194,21 @@ public static void Main(string[] args)
 public static IHostBuilder CreateHostBuilder(string[] args)
 {
     return Host.CreateDefaultBuilder(args)
-               .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                    webBuilder.ConfigureKestrel(o =>
-                    {
-                        o.ConfigureHttpsDefaults(o => o.ClientCertificateMode = ClientCertificateMode.RequireCertificate);
-                    });
-                });
+        .ConfigureWebHostDefaults(webBuilder =>
+        {
+            webBuilder.UseStartup<Startup>();
+            webBuilder.ConfigureKestrel(o =>
+            {
+                o.ConfigureHttpsDefaults(o => 
+            o.ClientCertificateMode = 
+                ClientCertificateMode.RequireCertificate);
+            });
+        });
 }
 ```
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*>를 호출 **하기 전에** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*>를 호출 하 여 만든 끝점에는 기본값이 적용 되지 않습니다.
+> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*>를 호출하기 **전에** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*>을 호출하여 생성된 엔드포인트는 기본값이 적용되지 않습니다.
 
 ### <a name="iis"></a>IIS
 
@@ -234,14 +236,13 @@ Azure Web Apps에서 인증서는 `X-ARR-ClientCert`라는 사용자 지정 요�
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-    // ...
-    
     services.AddCertificateForwarding(options =>
     {
         options.CertificateHeader = "X-ARR-ClientCert";
         options.HeaderConverter = (headerValue) =>
         {
             X509Certificate2 clientCertificate = null;
+        
             if(!string.IsNullOrWhiteSpace(headerValue))
             {
                 byte[] bytes = StringToByteArray(headerValue);
@@ -257,8 +258,12 @@ private static byte[] StringToByteArray(string hex)
 {
     int NumberChars = hex.Length;
     byte[] bytes = new byte[NumberChars / 2];
+
     for (int i = 0; i < NumberChars; i += 2)
+    {
         bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+    }
+
     return bytes;
 }
 ```
@@ -269,7 +274,7 @@ private static byte[] StringToByteArray(string hex)
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
     ...
-    
+
     app.UseRouting();
 
     app.UseCertificateForwarding();
@@ -295,8 +300,11 @@ namespace AspNetCoreCertificateAuthApi
     {
         public bool ValidateCertificate(X509Certificate2 clientCertificate)
         {
-            // Do not hardcode passwords in production code, use thumbprint or key vault
-            var cert = new X509Certificate2(Path.Combine("sts_dev_cert.pfx"), "1234");
+            // Do not hardcode passwords in production code
+            // Use thumbprint or key vault
+            var cert = new X509Certificate2(
+                Path.Combine("sts_dev_cert.pfx"), "1234");
+
             if (clientCertificate.Thumbprint == cert.Thumbprint)
             {
                 return true;
@@ -317,11 +325,12 @@ private async Task<JsonDocument> GetApiDataAsync()
 {
     try
     {
-        // Do not hardcode passwords in production code, use thumbprint or key vault
-        var cert = new X509Certificate2(Path.Combine(_environment.ContentRootPath, "sts_dev_cert.pfx"), "1234");
-
+        // Do not hardcode passwords in production code
+        // Use thumbprint or key vault
+        var cert = new X509Certificate2(
+            Path.Combine(_environment.ContentRootPath, 
+                "sts_dev_cert.pfx"), "1234");
         var client = _clientFactory.CreateClient();
-
         var request = new HttpRequestMessage()
         {
             RequestUri = new Uri("https://localhost:44379/api/values"),
@@ -339,7 +348,9 @@ private async Task<JsonDocument> GetApiDataAsync()
             return data;
         }
 
-        throw new ApplicationException($"Status code: {response.StatusCode}, Error: {response.ReasonPhrase}");
+        throw new ApplicationException(
+            $"Status code: {response.StatusCode}, " +
+            $"Error: {response.ReasonPhrase}");
     }
     catch (Exception e)
     {

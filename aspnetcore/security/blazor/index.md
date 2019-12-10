@@ -5,17 +5,17 @@ description: Blazor 인증 및 권한 부여 시나리오에 대해 알아봅니
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/12/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/index
-ms.openlocfilehash: 693ac1a5b5bcaf8a9bbf0ff9ab63fb41764e3888
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: d3860a5e7f6ae5a3193d657b77fc593c9bd39131
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880451"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74944202"
 ---
 # <a name="aspnet-core-opno-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor 인증 및 권한 부여
 
@@ -134,7 +134,7 @@ Blazor 서버 앱에는 ASP.NET Core의 `HttpContext.User`에서 인증 상태 �
 
 `AuthenticationStateProvider` 서비스는 다음 예제와 같이 현재 사용자의 <xref:System.Security.Claims.ClaimsPrincipal> 데이터를 제공할 수 있습니다.
 
-```cshtml
+```razor
 @page "/"
 @using Microsoft.AspNetCore.Components.Authorization
 @inject AuthenticationStateProvider AuthenticationStateProvider
@@ -206,7 +206,7 @@ services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 
 사용자가 실행한 작업을 수행하는 경우와 같이 절차적 논리에 인증 상태 데이터가 필요한 경우 `Task<AuthenticationState>` 형식의 연계 매개 변수를 정의하여 인증 상태 데이터를 가져옵니다.
 
-```cshtml
+```razor
 @page "/"
 
 <button @onclick="@LogUsername">Log username</button>
@@ -237,9 +237,9 @@ services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 
 `user.Identity.IsAuthenticated`가 `true`이면, 클레임을 열거하고 역할의 멤버 자격을 평가할 수 있습니다.
 
-`AuthorizeRouteView` 및 `CascadingAuthenticationState` 구성 요소를 사용하여 `Task<AuthenticationState>` 연계 매개 변수를 설정합니다.
+`AuthorizeRouteView`, `CascadingAuthenticationState` 구성 요소 및 *App.razor* 파일을 사용하여 `Task<AuthenticationState>` 연계 매개 변수를 설정합니다.
 
-```cshtml
+```razor
 <Router AppAssembly="@typeof(Program).Assembly">
     <Found Context="routeData">
         <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
@@ -273,7 +273,7 @@ services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 
 이 구성 요소는 로그인한 사용자 정보에 액세스하는 데 사용할 수 있는 `AuthenticationState` 형식의 `context` 변수를 공개합니다.
 
-```cshtml
+```razor
 <AuthorizeView>
     <h1>Hello, @context.User.Identity.Name!</h1>
     <p>You can only see this content if you're authenticated.</p>
@@ -282,7 +282,7 @@ services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 
 사용자가 인증되지 않은 경우에 표시할 다른 콘텐츠를 제공할 수도 있습니다.
 
-```cshtml
+```razor
 <AuthorizeView>
     <Authorized>
         <h1>Hello, @context.User.Identity.Name!</h1>
@@ -310,7 +310,7 @@ UI 옵션이나 액세스를 제어하는 역할 또는 정책과 같은 권한 
 
 역할 기반 권한 부여의 경우 `Roles` 매개 변수를 사용합니다.
 
-```cshtml
+```razor
 <AuthorizeView Roles="admin, superuser">
     <p>You can only see this if you're an admin or superuser.</p>
 </AuthorizeView>
@@ -320,7 +320,7 @@ UI 옵션이나 액세스를 제어하는 역할 또는 정책과 같은 권한 
 
 정책 기반 권한 부여의 경우 `Policy` 매개 변수를 사용합니다.
 
-```cshtml
+```razor
 <AuthorizeView Policy="content-editor">
     <p>You can only see this if you satisfy the "content-editor" policy.</p>
 </AuthorizeView>
@@ -338,7 +338,7 @@ Blazor에서는 인증 상태를 *비동기적으로* 확인할 수 있습니다
 
 인증이 진행되는 동안 `AuthorizeView`는 기본적으로 아무 콘텐츠도 표시하지 않습니다. 인증 중에 콘텐츠를 표시하려면 `<Authorizing>` 요소를 사용합니다.
 
-```cshtml
+```razor
 <AuthorizeView>
     <Authorized>
         <h1>Hello, @context.User.Identity.Name!</h1>
@@ -357,7 +357,7 @@ Blazor에서는 인증 상태를 *비동기적으로* 확인할 수 있습니다
 
 `[Authorize]` 특성은 Razor 구성 요소에서 사용될 수 있습니다.
 
-```cshtml
+```razor
 @page "/"
 @attribute [Authorize]
 
@@ -372,7 +372,7 @@ You can only see this if you're signed in.
 
 `[Authorize]` 특성은 역할 기반 또는 정책 기반 권한 부여도 지원합니다. 역할 기반 권한 부여의 경우 `Roles` 매개 변수를 사용합니다.
 
-```cshtml
+```razor
 @page "/"
 @attribute [Authorize(Roles = "admin, superuser")]
 
@@ -381,7 +381,7 @@ You can only see this if you're signed in.
 
 정책 기반 권한 부여의 경우 `Policy` 매개 변수를 사용합니다.
 
-```cshtml
+```razor
 @page "/"
 @attribute [Authorize(Policy = "content-editor")]
 
@@ -403,7 +403,7 @@ You can only see this if you're signed in.
 
 기본 Blazor 서버 프로젝트 템플릿에서 *App.razor* 파일은 사용자 지정 콘텐츠를 설정하는 방법을 보여 줍니다.
 
-```cshtml
+```razor
 <Router AppAssembly="@typeof(Program).Assembly">
     <Found Context="routeData">
         <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
@@ -445,7 +445,7 @@ Not authorized.
 
 앱이 절차적 논리의 일부로 권한 부여 규칙을 확인해야 하는 경우, `Task<AuthenticationState>` 형식의 연계 매개 변수를 사용하여 사용자의 <xref:System.Security.Claims.ClaimsPrincipal>을 가져옵니다. `IAuthorizationService` 등의 다른 서비스와 `Task<AuthenticationState>`를 결합하여 정책을 평가할 수 있습니다.
 
-```cshtml
+```razor
 @inject IAuthorizationService AuthorizationService
 
 <button @onclick="@DoSomething">Do something important</button>
@@ -481,7 +481,7 @@ Not authorized.
 > [!NOTE]
 > Blazor WebAssembly 앱 구성 요소에서 `Microsoft.AspNetCore.Authorization` 및 `Microsoft.AspNetCore.Components.Authorization` 네임스페이스를 추가합니다.
 >
-> ```cshtml
+> ```razor
 > @using Microsoft.AspNetCore.Authorization
 > @using Microsoft.AspNetCore.Components.Authorization
 > ```
@@ -502,7 +502,7 @@ Blazor WebAssembly 앱에서는 사용자가 클라이언트 쪽 코드를 모�
 
 인증을 사용할 수 있는 Blazor 서버 템플릿으로 프로젝트를 만들지 않았을 가능성이 큽니다. *App.razor* 등의 UI 트리 일부를 `<CascadingAuthenticationState>`로 다음과 같이 래핑합니다.
 
-```cshtml
+```razor
 <CascadingAuthenticationState>
     <Router AppAssembly="typeof(Startup).Assembly">
         ...
