@@ -5,16 +5,16 @@ description: Blazor 앱을 단계별로 빌드합니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/27/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 2a83761b598a339aeaf8bec6f8fd50d09e608f0c
-ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
+ms.openlocfilehash: 11ff540a70ebdb8baa0c7adb98cb1dfe27d91e50
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/02/2019
-ms.locfileid: "74681216"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74944189"
 ---
 # <a name="build-your-first-opno-locblazor-app"></a>첫 번째 Blazor 앱 빌드
 
@@ -125,7 +125,7 @@ Blazor WebAssembly 앱을 사용할 경우 *wwwroot/sample-data* 폴더의 *weat
 
 [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData1_client.razor?highlight=7-8)]
 
-[@foreach](/dotnet/csharp/language-reference/keywords/foreach-in) 루프는 각 예측 인스턴스를 날씨 데이터 테이블의 행으로 렌더링하는 데 사용됩니다.
+[`@foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) 루프는 각 예측 인스턴스를 날씨 데이터 테이블의 행으로 렌더링하는 데 사용됩니다.
 
 [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData3.razor?highlight=11-19)]
 
@@ -184,7 +184,7 @@ Blazor WebAssembly 앱을 사용할 경우 *wwwroot/sample-data* 폴더의 *weat
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/ToDo7.razor?highlight=2)]
 
-   ```cshtml
+   ```razor
    <input placeholder="Something todo" @bind="newTodo" />
    ```
 

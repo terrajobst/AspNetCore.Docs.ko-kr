@@ -1,17 +1,17 @@
 ---
 title: Swagger/OpenAPI를 사용한 ASP.NET Core Web API 도움말 페이지
-author: rsuter
+author: RicoSuter
 description: 이 자습서에서는 Swagger를 추가하여 Web API 앱에 대한 설명서 및 도움말 페이지를 생성하는 연습을 제공합니다.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 09/20/2018
+ms.date: 12/07/2019
 uid: tutorials/web-api-help-pages-using-swagger
-ms.openlocfilehash: 06a942ca213c7c0a58932494be0ed23cb6896d48
-ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
+ms.openlocfilehash: 4408e02996b958bf009903aa1e4eeda9ad4f457c
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/12/2019
-ms.locfileid: "67856089"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74944085"
 ---
 # <a name="aspnet-core-web-api-help-pages-with-swagger--openapi"></a>Swagger/OpenAPI를 사용한 ASP.NET Core 웹 API 도움말 페이지
 

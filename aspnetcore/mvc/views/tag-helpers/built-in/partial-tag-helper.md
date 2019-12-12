@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 04/06/2019
 uid: mvc/views/tag-helpers/builtin-th/partial-tag-helper
-ms.openlocfilehash: 757c407bbae9c33c5b05a1edc01a37c2ced8dd36
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 508f91cdcd93c149602223250520eecb73625b24
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64890288"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880982"
 ---
 # <a name="partial-tag-helper-in-aspnet-core"></a>ASP.NET Core의 부분 태그 도우미
 
@@ -30,14 +30,14 @@ ms.locfileid: "64890288"
 * [HTML 도우미 구문](xref:mvc/views/partial#reference-a-partial-view) 대신 사용할 수 있습니다.
 * 부분 보기를 비동기적으로 렌더링합니다.
 
-부분 보기 렌더링을 위한 HTML 도우미 옵션은 다음과 같습니다.
+부분 뷰를 렌더링하기 위한 HTML 도우미의 옵션은 다음과 같습니다.
 
-* [@await Html.PartialAsync](/dotnet/api/microsoft.aspnetcore.mvc.rendering.htmlhelperpartialextensions.partialasync)
-* [@await Html.RenderPartialAsync](/dotnet/api/microsoft.aspnetcore.mvc.rendering.htmlhelperpartialextensions.renderpartialasync)
-* [@Html.Partial](/dotnet/api/microsoft.aspnetcore.mvc.rendering.htmlhelperpartialextensions.partial)
-* [@Html.RenderPartial](/dotnet/api/microsoft.aspnetcore.mvc.rendering.htmlhelperpartialextensions.renderpartial)
+* [`@await Html.PartialAsync`](/dotnet/api/microsoft.aspnetcore.mvc.rendering.htmlhelperpartialextensions.partialasync)
+* [`@await Html.RenderPartialAsync`](/dotnet/api/microsoft.aspnetcore.mvc.rendering.htmlhelperpartialextensions.renderpartialasync)
+* [`@Html.Partial`](/dotnet/api/microsoft.aspnetcore.mvc.rendering.htmlhelperpartialextensions.partial)
+* [`@Html.RenderPartial`](/dotnet/api/microsoft.aspnetcore.mvc.rendering.htmlhelperpartialextensions.renderpartial)
 
-*제품* 모델은 이 문서 전반의 샘플에서 사용됩니다.
+이 문서의 예제 전반에서는 *Product* 모델이 사용됩니다.
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Models/Product.cs)]
 

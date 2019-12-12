@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/04/2019
 uid: mvc/models/file-uploads
-ms.openlocfilehash: b57ad4fe62de38085c11d7026d278cc6e0c565ce
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 20e58660185a3055e06e92d9136e80e2394a470d
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963152"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74881065"
 ---
 # <a name="upload-files-in-aspnet-core"></a>ASP.NET Core에서 파일 업로드
 
@@ -686,7 +686,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 }
 ```
 
-`RequestSizeLimitAttribute`은 [@attribute](xref:mvc/views/razor#attribute) Razor 지시문을 사용하여 적용할 수도 있습니다.
+`RequestSizeLimitAttribute`은 [`@attribute`](xref:mvc/views/razor#attribute) Razor 지시문을 사용하여 적용할 수도 있습니다.
 
 ```cshtml
 @attribute [RequestSizeLimitAttribute(52428800)]

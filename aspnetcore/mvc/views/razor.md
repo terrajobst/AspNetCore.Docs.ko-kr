@@ -3,20 +3,20 @@ title: ASP.NET Core에 대한 Razor 구문 참조
 author: rick-anderson
 description: 웹 페이지에 서버 기반 코드를 포함하는 Razor 태그 구문에 대해 알아봅니다.
 ms.author: riande
-ms.date: 11/09/2019
+ms.date: 12/05/2019
 uid: mvc/views/razor
-ms.openlocfilehash: dea1cd8986757b0bafab9ba9e8aa358a57a6b5eb
-ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
+ms.openlocfilehash: baac0ac38a0781cb9c16689cf3e29526b602d8da
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/22/2019
-ms.locfileid: "74317400"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74944254"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>ASP.NET Core에 대한 Razor 구문 참조
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT), [Luke Latham](https://github.com/guardrex), [Taylor Mullen](https://twitter.com/ntaylormullen) 및 [Dan Vicarel](https://github.com/Rabadash8820)
 
-Razor는 웹 페이지에 서버 기반 코드를 포함하는 태그 구문입니다. Razor 구문은 Razor 태그, C# 및 HTML로 구성됩니다. Razor를 포함하는 파일의 확장명은 일반적으로 *.cshtml*입니다. Razor는 [Razor 구성 요소](xref:blazor/components) 파일( *.razor*)에도 있습니다.
+Razor는 웹 페이지에 서버 기반 코드를 포함하는 태그 구문입니다. Razor 구문은 Razor 태그, C# 및 HTML로 구성됩니다. Razor를 포함하는 파일의 확장명은 일반적으로 *.cshtml*입니다. Razor는 [Razor 구성 요소](xref:blazor/components) 파일(*.razor*)에도 있습니다.
 
 ## <a name="rendering-html"></a>HTML 렌더링
 
@@ -461,13 +461,13 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 
 `@code` 블록을 사용하면 [Razor 구성 요소](xref:blazor/components)를 통해 C# 멤버(필드, 속성 및 메서드)를 구성 요소에 추가할 수 있습니다.
 
-```cshtml
+```razor
 @code {
     // C# members (fields, properties, and methods)
 }
 ```
 
-Razor 구성 요소의 경우 `@code`는 [@functions](#functions)의 별칭이며 `@functions` 대신 권장됩니다. 두 개 이상의 `@code` 블록이 허용됩니다.
+Razor 구성 요소의 경우 `@code`는 [`@functions`](#functions)의 별칭이며 `@functions` 대신 권장됩니다. 두 개 이상의 `@code` 블록이 허용됩니다.
 
 ::: moniker-end
 
@@ -874,9 +874,9 @@ public class Pet
 
 | 지시문 | 기능 |
 | --------- | -------- |
-| [@addTagHelper](xref:mvc/views/tag-helpers/intro#add-helper-label) | 보기에 태그 도우미를 제공합니다. |
-| [@removeTagHelper](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | 보기에서 이전에 추가된 태그 도우미를 제거합니다. |
-| [@tagHelperPrefix](xref:mvc/views/tag-helpers/intro#prefix-razor-directives-label) | 태그 도우미를 지원하고 태그 도우미 사용을 명시적으로 만들어주는 태그 접두사를 지정합니다. |
+| [`@addTagHelper`](xref:mvc/views/tag-helpers/intro#add-helper-label) | 보기에 태그 도우미를 제공합니다. |
+| [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | 보기에서 이전에 추가된 태그 도우미를 제거합니다. |
+| [`@tagHelperPrefix`](xref:mvc/views/tag-helpers/intro#prefix-razor-directives-label) | 태그 도우미를 지원하고 태그 도우미 사용을 명시적으로 만들어주는 태그 접두사를 지정합니다. |
 
 ## <a name="razor-reserved-keywords"></a>Razor 예약 키워드
 

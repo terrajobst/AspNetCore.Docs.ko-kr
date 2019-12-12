@@ -4,7 +4,7 @@
 
 RazorPagesMovie 프로젝트에서 *Data*라는 새 폴더를 만듭니다. 다음 `RazorPagesMovieContext` 클래스를 *Data* 폴더에 추가:
 
-[!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Data/RazorPagesMovieContext.cs)]
+[!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Data/RazorPagesMovieContext.cs)]
 
 이전 코드에서는 엔터티 집합에 대한 `DbSet` 속성을 만듭니다. Entity Framework 용어에서 엔터티 집합은 일반적으로 데이터베이스 테이블에 해당하고 엔터티는 테이블의 행에 해당합니다.
 
@@ -29,7 +29,7 @@ RazorPagesMovie 프로젝트에서 *Data*라는 새 폴더를 만듭니다. 다�
 *Startup.cs* 맨 위에 다음 `using` 문을 추가합니다.
 
 ```csharp
-using RazorPagesMovie.Models;
+using RazorPagesMovie.Data;
 using Microsoft.EntityFrameworkCore;
 ```
 
