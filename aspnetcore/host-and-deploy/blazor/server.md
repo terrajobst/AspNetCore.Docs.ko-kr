@@ -5,63 +5,63 @@ description: ASP.NET Core를 사용하여 Blazor 서버 앱을 호스트 및 배
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/21/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/server
-ms.openlocfilehash: b688d000f26c9b230d9fdee8423b3194145fe1aa
-ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
+ms.openlocfilehash: d45d355eabc53fc90bcda4cb7be22fb6a9f04541
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/22/2019
-ms.locfileid: "74317305"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74944336"
 ---
-# <a name="host-and-deploy-opno-locblazor-server"></a><span data-ttu-id="c9616-103">Blazor 서버 호스트 및 배포</span><span class="sxs-lookup"><span data-stu-id="c9616-103">Host and deploy Blazor Server</span></span>
+# <a name="host-and-deploy-opno-locblazor-server"></a><span data-ttu-id="f2bf6-103">Blazor 서버 호스트 및 배포</span><span class="sxs-lookup"><span data-stu-id="f2bf6-103">Host and deploy Blazor Server</span></span>
 
-<span data-ttu-id="c9616-104">작성자: [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com) 및 [Daniel Roth](https://github.com/danroth27)</span><span class="sxs-lookup"><span data-stu-id="c9616-104">By [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com), and [Daniel Roth](https://github.com/danroth27)</span></span>
+<span data-ttu-id="f2bf6-104">작성자: [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com) 및 [Daniel Roth](https://github.com/danroth27)</span><span class="sxs-lookup"><span data-stu-id="f2bf6-104">By [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com), and [Daniel Roth](https://github.com/danroth27)</span></span>
 
-## <a name="host-configuration-values"></a><span data-ttu-id="c9616-105">호스트 구성 값</span><span class="sxs-lookup"><span data-stu-id="c9616-105">Host configuration values</span></span>
+## <a name="host-configuration-values"></a><span data-ttu-id="f2bf6-105">호스트 구성 값</span><span class="sxs-lookup"><span data-stu-id="f2bf6-105">Host configuration values</span></span>
 
-<span data-ttu-id="c9616-106">[Blazor 서버 앱](xref:blazor/hosting-models#blazor-server)은 [일반 호스트 구성 값](xref:fundamentals/host/generic-host#host-configuration)을 허용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-106">[Blazor Server apps](xref:blazor/hosting-models#blazor-server) can accept [Generic Host configuration values](xref:fundamentals/host/generic-host#host-configuration).</span></span>
+<span data-ttu-id="f2bf6-106">[Blazor 서버 앱](xref:blazor/hosting-models#blazor-server)은 [일반 호스트 구성 값](xref:fundamentals/host/generic-host#host-configuration)을 허용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-106">[Blazor Server apps](xref:blazor/hosting-models#blazor-server) can accept [Generic Host configuration values](xref:fundamentals/host/generic-host#host-configuration).</span></span>
 
-## <a name="deployment"></a><span data-ttu-id="c9616-107">배포</span><span class="sxs-lookup"><span data-stu-id="c9616-107">Deployment</span></span>
+## <a name="deployment"></a><span data-ttu-id="f2bf6-107">배포</span><span class="sxs-lookup"><span data-stu-id="f2bf6-107">Deployment</span></span>
 
-<span data-ttu-id="c9616-108">[Blazor 서버 호스팅 모델](xref:blazor/hosting-models#blazor-server)을 사용하면 Blazor가 서버의 ASP.NET Core 앱 내에서 실행됩니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-108">Using the [Blazor Server hosting model](xref:blazor/hosting-models#blazor-server), Blazor is executed on the server from within an ASP.NET Core app.</span></span> <span data-ttu-id="c9616-109">UI 업데이트, 이벤트 처리 및 JavaScript 호출은 [SignalR](xref:signalr/introduction) 연결을 통해 처리됩니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-109">UI updates, event handling, and JavaScript calls are handled over a [SignalR](xref:signalr/introduction) connection.</span></span>
+<span data-ttu-id="f2bf6-108">[Blazor 서버 호스팅 모델](xref:blazor/hosting-models#blazor-server)을 사용하면 Blazor가 서버의 ASP.NET Core 앱 내에서 실행됩니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-108">Using the [Blazor Server hosting model](xref:blazor/hosting-models#blazor-server), Blazor is executed on the server from within an ASP.NET Core app.</span></span> <span data-ttu-id="f2bf6-109">UI 업데이트, 이벤트 처리 및 JavaScript 호출은 [SignalR](xref:signalr/introduction) 연결을 통해 처리됩니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-109">UI updates, event handling, and JavaScript calls are handled over a [SignalR](xref:signalr/introduction) connection.</span></span>
 
-<span data-ttu-id="c9616-110">ASP.NET Core 앱을 호스팅할 수 있는 웹 서버가 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-110">A web server capable of hosting an ASP.NET Core app is required.</span></span> <span data-ttu-id="c9616-111">Visual Studio에는 **Blazor 서버 앱** 프로젝트 템플릿([dotnet new](/dotnet/core/tools/dotnet-new) 명령을 사용하는 경우 `blazorserverside` 템플릿)이 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-111">Visual Studio includes the **Blazor Server App** project template (`blazorserverside` template when using the [dotnet new](/dotnet/core/tools/dotnet-new) command).</span></span>
+<span data-ttu-id="f2bf6-110">ASP.NET Core 앱을 호스팅할 수 있는 웹 서버가 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-110">A web server capable of hosting an ASP.NET Core app is required.</span></span> <span data-ttu-id="f2bf6-111">Visual Studio에는 **Blazor 서버 앱** 프로젝트 템플릿([dotnet new](/dotnet/core/tools/dotnet-new) 명령을 사용하는 경우 `blazorserverside` 템플릿)이 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-111">Visual Studio includes the **Blazor Server App** project template (`blazorserverside` template when using the [dotnet new](/dotnet/core/tools/dotnet-new) command).</span></span>
 
-## <a name="scalability"></a><span data-ttu-id="c9616-112">확장성</span><span class="sxs-lookup"><span data-stu-id="c9616-112">Scalability</span></span>
+## <a name="scalability"></a><span data-ttu-id="f2bf6-112">확장성</span><span class="sxs-lookup"><span data-stu-id="f2bf6-112">Scalability</span></span>
 
-<span data-ttu-id="c9616-113">Blazor 서버 앱에 사용 가능한 인프라를 최대한 활용하도록 배포를 계획합니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-113">Plan a deployment to make the best use of the available infrastructure for a Blazor Server app.</span></span> <span data-ttu-id="c9616-114">Blazor 서버 앱 확장성에 대해서는 다음 리소스를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="c9616-114">See the following resources to address Blazor Server app scalability:</span></span>
+<span data-ttu-id="f2bf6-113">Blazor 서버 앱에 사용 가능한 인프라를 최대한 활용하도록 배포를 계획합니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-113">Plan a deployment to make the best use of the available infrastructure for a Blazor Server app.</span></span> <span data-ttu-id="f2bf6-114">Blazor 서버 앱 확장성에 대해서는 다음 리소스를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-114">See the following resources to address Blazor Server app scalability:</span></span>
 
-* <span data-ttu-id="c9616-115">[Blazor 서버 앱의 기본 사항](xref:blazor/hosting-models#blazor-server)</span><span class="sxs-lookup"><span data-stu-id="c9616-115">[Fundamentals of Blazor Server apps](xref:blazor/hosting-models#blazor-server)</span></span>
+* <span data-ttu-id="f2bf6-115">[Blazor 서버 앱의 기본 사항](xref:blazor/hosting-models#blazor-server)</span><span class="sxs-lookup"><span data-stu-id="f2bf6-115">[Fundamentals of Blazor Server apps](xref:blazor/hosting-models#blazor-server)</span></span>
 * <xref:security/blazor/server>
 
-### <a name="deployment-server"></a><span data-ttu-id="c9616-116">배포 서버</span><span class="sxs-lookup"><span data-stu-id="c9616-116">Deployment server</span></span>
+### <a name="deployment-server"></a><span data-ttu-id="f2bf6-116">배포 서버</span><span class="sxs-lookup"><span data-stu-id="f2bf6-116">Deployment server</span></span>
 
-<span data-ttu-id="c9616-117">단일 서버의 확장성(규모 확대)을 고려할 때 앱에 사용할 수 있는 메모리는 사용자 요구가 늘어남에 따라 앱이 소진하는 첫 번째 리소스일 가능성이 높습니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-117">When considering the scalability of a single server (scale up), the memory available to an app is likely the first resource that the app will exhaust as user demands increase.</span></span> <span data-ttu-id="c9616-118">서버에서 사용 가능한 메모리는 다음 사항에 영향을 줍니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-118">The available memory on the server affects the:</span></span>
+<span data-ttu-id="f2bf6-117">단일 서버의 확장성(규모 확대)을 고려할 때 앱에 사용할 수 있는 메모리는 사용자 요구가 늘어남에 따라 앱이 소진하는 첫 번째 리소스일 가능성이 높습니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-117">When considering the scalability of a single server (scale up), the memory available to an app is likely the first resource that the app will exhaust as user demands increase.</span></span> <span data-ttu-id="f2bf6-118">서버에서 사용 가능한 메모리는 다음 사항에 영향을 줍니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-118">The available memory on the server affects the:</span></span>
 
-* <span data-ttu-id="c9616-119">서버가 지원할 수 있는 활성 회로 수</span><span class="sxs-lookup"><span data-stu-id="c9616-119">Number of active circuits that a server can support.</span></span>
-* <span data-ttu-id="c9616-120">클라이언트의 UI 대기 시간</span><span class="sxs-lookup"><span data-stu-id="c9616-120">UI latency on the client.</span></span>
+* <span data-ttu-id="f2bf6-119">서버가 지원할 수 있는 활성 회로 수</span><span class="sxs-lookup"><span data-stu-id="f2bf6-119">Number of active circuits that a server can support.</span></span>
+* <span data-ttu-id="f2bf6-120">클라이언트의 UI 대기 시간</span><span class="sxs-lookup"><span data-stu-id="f2bf6-120">UI latency on the client.</span></span>
 
-<span data-ttu-id="c9616-121">안전하고 확장 가능한 Blazor 서버 앱을 빌드하는 방법에 대한 지침은 <xref:security/blazor/server>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="c9616-121">For guidance on building secure and scalable Blazor server apps, see <xref:security/blazor/server>.</span></span>
+<span data-ttu-id="f2bf6-121">안전하고 확장 가능한 Blazor 서버 앱을 빌드하는 방법에 대한 지침은 <xref:security/blazor/server>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-121">For guidance on building secure and scalable Blazor server apps, see <xref:security/blazor/server>.</span></span>
 
-<span data-ttu-id="c9616-122">각 회로는 최소 *Hello World*와 같은 앱에 약 250KB의 메모리를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-122">Each circuit uses approximately 250 KB of memory for a minimal *Hello World*-style app.</span></span> <span data-ttu-id="c9616-123">회로의 크기는 앱의 코드 및 각 구성 요소와 연결된 상태 유지 관리 요구 사항에 따라 달라집니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-123">The size of a circuit depends on the app's code and the state maintenance requirements associated with each component.</span></span> <span data-ttu-id="c9616-124">애플리케이션 및 인프라를 개발하는 도중에 리소스 요구를 측정하는 것이 좋지만, 다음 기준은 배포 대상을 계획할 때 출발점으로 삼을 수 있습니다. 앱에서 5,000명의 동시 사용자를 지원할 것으로 예상되는 경우 앱에 최소 1.3GB(또는 사용자당 273KB)의 서버 메모리를 예산하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-124">We recommend that you measure resource demands during development for your app and infrastructure, but the following baseline can be a starting point in planning your deployment target: If you expect your app to support 5,000 concurrent users, consider budgeting at least 1.3 GB of server memory to the app (or ~273 KB per user).</span></span>
+<span data-ttu-id="f2bf6-122">각 회로는 최소 *Hello World*와 같은 앱에 약 250KB의 메모리를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-122">Each circuit uses approximately 250 KB of memory for a minimal *Hello World*-style app.</span></span> <span data-ttu-id="f2bf6-123">회로의 크기는 앱의 코드 및 각 구성 요소와 연결된 상태 유지 관리 요구 사항에 따라 달라집니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-123">The size of a circuit depends on the app's code and the state maintenance requirements associated with each component.</span></span> <span data-ttu-id="f2bf6-124">애플리케이션 및 인프라를 개발하는 도중에 리소스 요구를 측정하는 것이 좋지만, 다음 기준은 배포 대상을 계획할 때 출발점으로 삼을 수 있습니다. 앱에서 5,000명의 동시 사용자를 지원할 것으로 예상되는 경우 앱에 최소 1.3GB(또는 사용자당 273KB)의 서버 메모리를 예산하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-124">We recommend that you measure resource demands during development for your app and infrastructure, but the following baseline can be a starting point in planning your deployment target: If you expect your app to support 5,000 concurrent users, consider budgeting at least 1.3 GB of server memory to the app (or ~273 KB per user).</span></span>
 
-### <a name="opno-locsignalr-configuration"></a>SignalR<span data-ttu-id="c9616-125"> 구성</span><span class="sxs-lookup"><span data-stu-id="c9616-125"> configuration</span></span>
+### <a name="opno-locsignalr-configuration"></a>SignalR<span data-ttu-id="f2bf6-125"> 구성</span><span class="sxs-lookup"><span data-stu-id="f2bf6-125"> configuration</span></span>
 
-Blazor<span data-ttu-id="c9616-126"> 서버 앱은 ASP.NET Core SignalR을 사용하여 브라우저와 통신합니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-126"> Server apps use ASP.NET Core SignalR to communicate with the browser.</span></span> <span data-ttu-id="c9616-127">[SignalR의 호스팅 및 크기 조정 조건](xref:signalr/publish-to-azure-web-app)이 Blazor 서버 앱에 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-127">[SignalR's hosting and scaling conditions](xref:signalr/publish-to-azure-web-app) apply to Blazor Server apps.</span></span>
+Blazor<span data-ttu-id="f2bf6-126"> 서버 앱은 ASP.NET Core SignalR을 사용하여 브라우저와 통신합니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-126"> Server apps use ASP.NET Core SignalR to communicate with the browser.</span></span> <span data-ttu-id="f2bf6-127">[SignalR의 호스팅 및 크기 조정 조건](xref:signalr/publish-to-azure-web-app)이 Blazor 서버 앱에 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-127">[SignalR's hosting and scaling conditions](xref:signalr/publish-to-azure-web-app) apply to Blazor Server apps.</span></span>
 
-Blazor<span data-ttu-id="c9616-128">는 짧은 대기 시간, 안정성 및 [보안](xref:signalr/security) 덕분에 WebSocket을 SignalR 전송으로 사용하는 경우에 가장 효과적입니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-128"> works best when using WebSockets as the SignalR transport due to lower latency, reliability, and [security](xref:signalr/security).</span></span> <span data-ttu-id="c9616-129">WebSocket을 사용할 수 없거나 앱이 긴 폴링을 사용하도록 명시적으로 구성된 경우 SignalR에서 긴 폴링을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-129">Long Polling is used by SignalR when WebSockets isn't available or when the app is explicitly configured to use Long Polling.</span></span> <span data-ttu-id="c9616-130">Azure App Service에 배포하는 경우 서비스에 대한 Azure Portal 설정에서 WebSocket을 사용하도록 앱을 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-130">When deploying to Azure App Service, configure the app to use WebSockets in the Azure portal settings for the service.</span></span> <span data-ttu-id="c9616-131">Azure App Service에 대해 앱을 구성하는 방법에 대한 자세한 내용은 [SignalR 게시 지침](xref:signalr/publish-to-azure-web-app)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="c9616-131">For details on configuring the app for Azure App Service, see the [SignalR publishing guidelines](xref:signalr/publish-to-azure-web-app).</span></span>
+Blazor<span data-ttu-id="f2bf6-128">는 짧은 대기 시간, 안정성 및 [보안](xref:signalr/security) 덕분에 WebSocket을 SignalR 전송으로 사용하는 경우에 가장 효과적입니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-128"> works best when using WebSockets as the SignalR transport due to lower latency, reliability, and [security](xref:signalr/security).</span></span> <span data-ttu-id="f2bf6-129">WebSocket을 사용할 수 없거나 앱이 긴 폴링을 사용하도록 명시적으로 구성된 경우 SignalR에서 긴 폴링을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-129">Long Polling is used by SignalR when WebSockets isn't available or when the app is explicitly configured to use Long Polling.</span></span> <span data-ttu-id="f2bf6-130">Azure App Service에 배포하는 경우 서비스에 대한 Azure Portal 설정에서 WebSocket을 사용하도록 앱을 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-130">When deploying to Azure App Service, configure the app to use WebSockets in the Azure portal settings for the service.</span></span> <span data-ttu-id="f2bf6-131">Azure App Service에 대해 앱을 구성하는 방법에 대한 자세한 내용은 [SignalR 게시 지침](xref:signalr/publish-to-azure-web-app)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-131">For details on configuring the app for Azure App Service, see the [SignalR publishing guidelines](xref:signalr/publish-to-azure-web-app).</span></span>
 
-#### <a name="azure-opno-locsignalr-service"></a><span data-ttu-id="c9616-132">Azure SignalR 서비스</span><span class="sxs-lookup"><span data-stu-id="c9616-132">Azure SignalR Service</span></span>
+#### <a name="azure-opno-locsignalr-service"></a><span data-ttu-id="f2bf6-132">Azure SignalR 서비스</span><span class="sxs-lookup"><span data-stu-id="f2bf6-132">Azure SignalR Service</span></span>
 
-<span data-ttu-id="c9616-133">Blazor 서버 앱에 [Azure SignalR Service](/azure/azure-signalr)를 사용하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-133">We recommend using the [Azure SignalR Service](/azure/azure-signalr) for Blazor Server apps.</span></span> <span data-ttu-id="c9616-134">이 서비스를 사용하면 Blazor 서버 앱을 다수의 동시 SignalR 연결로 확장할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-134">The service allows for scaling up a Blazor Server app to a large number of concurrent SignalR connections.</span></span> <span data-ttu-id="c9616-135">또한 SignalR 서비스의 글로벌 및 고성능 데이터 센터는 지리적 위치로 인한 대기 시간을 줄이는 데 큰 도움이 됩니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-135">In addition, the SignalR service's global reach and high-performance data centers significantly aid in reducing latency due to geography.</span></span> <span data-ttu-id="c9616-136">앱을 구성하고 원하는 경우 Azure SignalR Service를 프로비전하려면 다음 단계를 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-136">To configure an app (and optionally provision) the Azure SignalR Service:</span></span>
+<span data-ttu-id="f2bf6-133">Blazor 서버 앱에 [Azure SignalR Service](/azure/azure-signalr)를 사용하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-133">We recommend using the [Azure SignalR Service](/azure/azure-signalr) for Blazor Server apps.</span></span> <span data-ttu-id="f2bf6-134">이 서비스를 사용하면 Blazor 서버 앱을 다수의 동시 SignalR 연결로 확장할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-134">The service allows for scaling up a Blazor Server app to a large number of concurrent SignalR connections.</span></span> <span data-ttu-id="f2bf6-135">또한 SignalR 서비스의 글로벌 및 고성능 데이터 센터는 지리적 위치로 인한 대기 시간을 줄이는 데 큰 도움이 됩니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-135">In addition, the SignalR service's global reach and high-performance data centers significantly aid in reducing latency due to geography.</span></span> <span data-ttu-id="f2bf6-136">앱을 구성하고 원하는 경우 Azure SignalR Service를 프로비전하려면 다음 단계를 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-136">To configure an app (and optionally provision) the Azure SignalR Service:</span></span>
 
-1. <span data-ttu-id="c9616-137">[사전 렌더링하는 경우 클라이언트를 동일한 서버로 다시 리디렉션하는](xref:blazor/hosting-models#reconnection-to-the-same-server) *고정 세션*을 지원하려면 해당 서비스를 사용하도록 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-137">Enable the service to support *sticky sessions*, where clients are [redirected back to the same server when prerendering](xref:blazor/hosting-models#reconnection-to-the-same-server).</span></span> <span data-ttu-id="c9616-138">`ServerStickyMode` 옵션 또는 구성 값을 `Required`(으)로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-138">Set the `ServerStickyMode` option or configuration value to `Required`.</span></span> <span data-ttu-id="c9616-139">일반적으로 앱은 다음 방법 중 **하나**를 사용하여 구성을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-139">Typically, an app creates the configuration using **one** of the following approaches:</span></span>
+1. <span data-ttu-id="f2bf6-137">[사전 렌더링하는 경우 클라이언트를 동일한 서버로 다시 리디렉션하는](xref:blazor/hosting-models#reconnection-to-the-same-server) *고정 세션*을 지원하려면 해당 서비스를 사용하도록 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-137">Enable the service to support *sticky sessions*, where clients are [redirected back to the same server when prerendering](xref:blazor/hosting-models#reconnection-to-the-same-server).</span></span> <span data-ttu-id="f2bf6-138">`ServerStickyMode` 옵션 또는 구성 값을 `Required`(으)로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-138">Set the `ServerStickyMode` option or configuration value to `Required`.</span></span> <span data-ttu-id="f2bf6-139">일반적으로 앱은 다음 방법 중 **하나**를 사용하여 구성을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-139">Typically, an app creates the configuration using **one** of the following approaches:</span></span>
 
-   * <span data-ttu-id="c9616-140">`Startup.ConfigureServices`:</span><span class="sxs-lookup"><span data-stu-id="c9616-140">`Startup.ConfigureServices`:</span></span>
+   * <span data-ttu-id="f2bf6-140">`Startup.ConfigureServices`:</span><span class="sxs-lookup"><span data-stu-id="f2bf6-140">`Startup.ConfigureServices`:</span></span>
   
      ```csharp
      services.AddSignalR().AddAzureSignalR(options =>
@@ -71,27 +71,27 @@ Blazor<span data-ttu-id="c9616-128">는 짧은 대기 시간, 안정성 및 [보
      });
      ```
 
-   * <span data-ttu-id="c9616-141">구성(다음 방법 중 **하나**를 사용):</span><span class="sxs-lookup"><span data-stu-id="c9616-141">Configuration (use **one** of the following approaches):</span></span>
+   * <span data-ttu-id="f2bf6-141">구성(다음 방법 중 **하나**를 사용):</span><span class="sxs-lookup"><span data-stu-id="f2bf6-141">Configuration (use **one** of the following approaches):</span></span>
   
-     * <span data-ttu-id="c9616-142">*appsettings.json*:</span><span class="sxs-lookup"><span data-stu-id="c9616-142">*appsettings.json*:</span></span>
+     * <span data-ttu-id="f2bf6-142">*appsettings.json*:</span><span class="sxs-lookup"><span data-stu-id="f2bf6-142">*appsettings.json*:</span></span>
 
        ```json
        "Azure:SignalR:ServerStickyMode": "Required"
        ```
 
-     * <span data-ttu-id="c9616-143">Azure Portal에서 앱 서비스의 **구성** > **애플리케이션 설정**(**이름**: `Azure:SignalR:ServerStickyMode`, **값**: `Required`).</span><span class="sxs-lookup"><span data-stu-id="c9616-143">The app service's **Configuration** > **Application settings** in the Azure portal (**Name**: `Azure:SignalR:ServerStickyMode`, **Value**: `Required`).</span></span>
+     * <span data-ttu-id="f2bf6-143">Azure Portal에서 앱 서비스의 **구성** > **애플리케이션 설정**(**이름**: `Azure:SignalR:ServerStickyMode`, **값**: `Required`).</span><span class="sxs-lookup"><span data-stu-id="f2bf6-143">The app service's **Configuration** > **Application settings** in the Azure portal (**Name**: `Azure:SignalR:ServerStickyMode`, **Value**: `Required`).</span></span>
 
-1. <span data-ttu-id="c9616-144">Visual Studio에 Blazor 서버 앱을 위한 Azure 앱 게시 프로필을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-144">Create an Azure Apps publish profile in Visual Studio for the Blazor Server app.</span></span>
-1. <span data-ttu-id="c9616-145">**Azure SignalR Service** 종속성을 프로필에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-145">Add the **Azure SignalR Service** dependency to the profile.</span></span> <span data-ttu-id="c9616-146">앱에 할당할 기존 Azure SignalR Service 인스턴스가 Azure 구독에 없는 경우 **새 Azure SignalR Service 인스턴스 만들기**를 선택하여 새 서비스 인스턴스를 프로비전합니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-146">If the Azure subscription doesn't have a pre-existing Azure SignalR Service instance to assign to the app, select **Create a new Azure SignalR Service instance** to provision a new service instance.</span></span>
-1. <span data-ttu-id="c9616-147">Azure에 앱 게시</span><span class="sxs-lookup"><span data-stu-id="c9616-147">Publish the app to Azure.</span></span>
+1. <span data-ttu-id="f2bf6-144">Visual Studio에 Blazor 서버 앱을 위한 Azure 앱 게시 프로필을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-144">Create an Azure Apps publish profile in Visual Studio for the Blazor Server app.</span></span>
+1. <span data-ttu-id="f2bf6-145">**Azure SignalR Service** 종속성을 프로필에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-145">Add the **Azure SignalR Service** dependency to the profile.</span></span> <span data-ttu-id="f2bf6-146">앱에 할당할 기존 Azure SignalR Service 인스턴스가 Azure 구독에 없는 경우 **새 Azure SignalR Service 인스턴스 만들기**를 선택하여 새 서비스 인스턴스를 프로비전합니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-146">If the Azure subscription doesn't have a pre-existing Azure SignalR Service instance to assign to the app, select **Create a new Azure SignalR Service instance** to provision a new service instance.</span></span>
+1. <span data-ttu-id="f2bf6-147">Azure에 앱 게시</span><span class="sxs-lookup"><span data-stu-id="f2bf6-147">Publish the app to Azure.</span></span>
 
-#### <a name="iis"></a><span data-ttu-id="c9616-148">IIS</span><span class="sxs-lookup"><span data-stu-id="c9616-148">IIS</span></span>
+#### <a name="iis"></a><span data-ttu-id="f2bf6-148">IIS</span><span class="sxs-lookup"><span data-stu-id="f2bf6-148">IIS</span></span>
 
-<span data-ttu-id="c9616-149">IIS를 사용하는 경우 애플리케이션 요청 라우팅을 사용하여 고정 세션을 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-149">When using IIS, sticky sessions are enabled with Application Request Routing.</span></span> <span data-ttu-id="c9616-150">자세한 내용은 [애플리케이션 요청 라우팅을 사용하여 HTTP 부하 분산](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="c9616-150">For more information, see [HTTP Load Balancing using Application Request Routing](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing).</span></span>
+<span data-ttu-id="f2bf6-149">IIS를 사용하는 경우 애플리케이션 요청 라우팅을 사용하여 고정 세션을 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-149">When using IIS, sticky sessions are enabled with Application Request Routing.</span></span> <span data-ttu-id="f2bf6-150">자세한 내용은 [애플리케이션 요청 라우팅을 사용하여 HTTP 부하 분산](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-150">For more information, see [HTTP Load Balancing using Application Request Routing](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing).</span></span>
 
-#### <a name="kubernetes"></a><span data-ttu-id="c9616-151">Kubernetes</span><span class="sxs-lookup"><span data-stu-id="c9616-151">Kubernetes</span></span>
+#### <a name="kubernetes"></a><span data-ttu-id="f2bf6-151">Kubernetes</span><span class="sxs-lookup"><span data-stu-id="f2bf6-151">Kubernetes</span></span>
 
-<span data-ttu-id="c9616-152">[Kubernetes annotations for sticky sessions](https://kubernetes.github.io/ingress-nginx/examples/affinity/cookie/)(고정 세션용 Kubernetes 주석)을 사용하여 다음과 같은 수신 정의를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-152">Create an ingress definition with the following [Kubernetes annotations for sticky sessions](https://kubernetes.github.io/ingress-nginx/examples/affinity/cookie/):</span></span>
+<span data-ttu-id="f2bf6-152">[Kubernetes annotations for sticky sessions](https://kubernetes.github.io/ingress-nginx/examples/affinity/cookie/)(고정 세션용 Kubernetes 주석)을 사용하여 다음과 같은 수신 정의를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-152">Create an ingress definition with the following [Kubernetes annotations for sticky sessions](https://kubernetes.github.io/ingress-nginx/examples/affinity/cookie/):</span></span>
 
 ```yaml
 apiVersion: extensions/v1beta1
@@ -105,11 +105,11 @@ metadata:
     nginx.ingress.kubernetes.io/session-cookie-max-age: "14400"
 ```
 
-### <a name="measure-network-latency"></a><span data-ttu-id="c9616-153">네트워크 대기 시간 측정</span><span class="sxs-lookup"><span data-stu-id="c9616-153">Measure network latency</span></span>
+### <a name="measure-network-latency"></a><span data-ttu-id="f2bf6-153">네트워크 대기 시간 측정</span><span class="sxs-lookup"><span data-stu-id="f2bf6-153">Measure network latency</span></span>
 
-<span data-ttu-id="c9616-154">[JS interop](xref:blazor/javascript-interop)은 다음 예제와 같이 네트워크 대기 시간을 측정하는 데 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-154">[JS interop](xref:blazor/javascript-interop) can be used to measure network latency, as the following example demonstrates:</span></span>
+<span data-ttu-id="f2bf6-154">[JS interop](xref:blazor/javascript-interop)은 다음 예제와 같이 네트워크 대기 시간을 측정하는 데 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-154">[JS interop](xref:blazor/javascript-interop) can be used to measure network latency, as the following example demonstrates:</span></span>
 
-```cshtml
+```razor
 @inject IJSRuntime JS
 
 @if (latency is null)
@@ -135,4 +135,4 @@ else
 }
 ```
 
-<span data-ttu-id="c9616-155">적절한 UI 환경을 위해 UI 대기 시간을 250ms 이하로 유지하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="c9616-155">For a reasonable UI experience, we recommend a sustained UI latency of 250ms or less.</span></span>
+<span data-ttu-id="f2bf6-155">적절한 UI 환경을 위해 UI 대기 시간을 250ms 이하로 유지하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="f2bf6-155">For a reasonable UI experience, we recommend a sustained UI latency of 250ms or less.</span></span>
