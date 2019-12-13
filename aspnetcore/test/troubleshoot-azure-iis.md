@@ -5,14 +5,14 @@ description: ASP.NET Core 앱의 Azure App Service 및 인터넷 정보 서비�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/18/2019
+ms.date: 11/20/2019
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 384ae6645ce083fba76a430dfc3bec3a59d3870e
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 49a0f59fb6930235de10c726f3695f2a5352efb2
+ms.sourcegitcommit: 8157e5a351f49aeef3769f7d38b787b4386aad5f
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081533"
+ms.lasthandoff: 11/20/2019
+ms.locfileid: "74251973"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Azure App Service 및 IIS에 대 한 ASP.NET Core 문제 해결
 
@@ -72,7 +72,7 @@ The Web server is configured to not list the contents of this directory.
    * IIS에서 응용 프로그램을 호스트 하는 경우 iis **관리자**의 **기본 설정**에 표시 된 iis **실제 경로** 에 앱이 배포 되었는지 확인 합니다.
 1. 호스팅 시스템의 배포를 프로젝트의 *게시* 폴더의 콘텐츠와 비교 하 여 모든 앱의 파일 및 폴더가 배포 되었는지 확인 합니다.
 
-게시 된 ASP.NET Core 앱의 레이아웃에 대 한 자세한 내용은을 참조 <xref:host-and-deploy/directory-structure>하십시오. *Web.config 파일에* 대 한 자세한 내용은을 참조 <xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig>하십시오.
+게시 된 ASP.NET Core 앱의 레이아웃에 대 한 자세한 내용은 <xref:host-and-deploy/directory-structure>을 참조 하세요. *Web.config 파일에* 대 한 자세한 내용은 <xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig>를 참조 하세요.
 
 ### <a name="500-internal-server-error"></a>500 내부 서버 오류
 
@@ -86,7 +86,7 @@ The Web server is configured to not list the contents of this directory.
 
 작업자 프로세스가 실패합니다. 앱이 시작되지 않습니다.
 
-[ASP.NET Core 모듈이](xref:host-and-deploy/aspnet-core-module) .NET Core CLR을 찾지 못하고 in-process 요청 처리기 (*aspnetcorev2_inprocess*)를 찾습니다. 다음을 확인합니다.
+[ASP.NET Core 모듈이](xref:host-and-deploy/aspnet-core-module) .NET Core CLR을 찾지 못하며 in-process 요청 처리기 (*aspnetcorev2_inprocess*)를 찾을 수 없습니다. 다음을 확인합니다.
 
 * 앱은 [Microsoft.AspNetCore.Server.IIS](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.IIS) NuGet 패키지 또는 [Microsoft.AspNetCore.App 메타패키지](xref:fundamentals/metapackage-app) 중 하나를 대상으로 합니다.
 * 앱이 대상으로 하는 ASP.NET Core 공유 프레임워크의 버전이 대상 머신에 설치됩니다.
@@ -158,7 +158,7 @@ The specified framework 'Microsoft.NETCore.App', version '3.0.0' was not found.
 
 작업자 프로세스가 실패합니다. 앱이 시작되지 않습니다.
 
-앱이 `Microsoft.AspNetCore.App` 프레임워크를 참조하지 않습니다. 프레임 워크를 대상 `Microsoft.AspNetCore.App` 으로 하는 앱만 [ASP.NET Core 모듈](xref:host-and-deploy/aspnet-core-module)에서 호스팅될 수 있습니다.
+앱이 `Microsoft.AspNetCore.App` 프레임워크를 참조하지 않습니다. `Microsoft.AspNetCore.App` 프레임 워크를 대상으로 하는 앱만 [ASP.NET Core 모듈](xref:host-and-deploy/aspnet-core-module)에서 호스팅될 수 있습니다.
 
 이 오류를 해결하려면 앱이 `Microsoft.AspNetCore.App` 프레임워크를 대상으로 하는지 확인합니다. `.runtimeconfig.json`을 확인하여 앱이 대상으로 하는 프레임워크를 확인합니다.
 
@@ -170,7 +170,7 @@ The specified framework 'Microsoft.NETCore.App', version '3.0.0' was not found.
 
 ### <a name="50035-ancm-multiple-in-process-applications-in-same-process"></a>500.35 ANCM 동일한 프로세스의 여러 In-Process 애플리케이션
 
-작업자 프로세스는 동일한 프로세스에서 In Process 앱과 out-of-process 앱을 모두 실행할 수 없습니다.
+작업자 프로세스는 동일한 프로세스에서 여러 in-process 앱을 실행할 수 없습니다.
 
 이 오류를 해결하려면 별도의 IIS 애플리케이션 풀에서 앱을 실행합니다.
 
@@ -218,7 +218,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
    * 32비트(x86) 앱을 배포하는 경우 값을 `True`로 설정합니다.
    * 64비트(x64) 앱을 배포하는 경우 값을 `False`로 설정합니다.
 
-프로젝트 파일의 `<Platform>` MSBuild 속성과 응용 프로그램의 게시 된 비트 간에 충돌이 없는지 확인 합니다.
+프로젝트 파일의 `<Platform>` MSBuild 속성과 앱의 게시 된 비트 간에 충돌이 없는지 확인 합니다.
 
 ### <a name="connection-reset"></a>연결 다시 설정
 
@@ -600,9 +600,9 @@ stdout 로그를 사용하고 보려면:
 경우에 따라 개발 컴퓨터에서 .NET Core SDK를 업그레이드 하거나 앱 내에서 패키지 버전을 변경 하는 즉시 작동 하는 앱이 실패 합니다. 경우에 따라 중요한 업그레이드를 수행할 때 일관되지 않은 패키지로 인해 응용 프로그램이 중단될 수 있습니다. 이러한 대부분의 문제는 다음 지침에 따라 수정할 수 있습니다.
 
 1. *bin* 및 *obj* 폴더를 삭제합니다.
-1. 명령 셸에서를 실행 `dotnet nuget locals all --clear` 하 여 패키지 캐시를 지웁니다.
+1. 명령 셸에서 `dotnet nuget locals all --clear`를 실행 하 여 패키지 캐시를 지웁니다.
 
-   패키지 캐시를 지우면 [nuget.exe](https://www.nuget.org/downloads) 도구를 사용 하 여 명령을 `nuget locals all -clear`실행할 수도 있습니다. *nuget.exe*는 Windows 데스크톱 운영 체제와 함께 제공되는 설치가 아니므로 [NuGet 웹 사이트](https://www.nuget.org/downloads)에서 별도로 다운로드해야 합니다.
+   [Nuget](https://www.nuget.org/downloads) 도구를 사용 하 여 패키지 캐시를 지우면 서 `nuget locals all -clear`명령을 실행할 수도 있습니다. *nuget.exe*는 Windows 데스크톱 운영 체제와 함께 제공되는 설치가 아니므로 [NuGet 웹 사이트](https://www.nuget.org/downloads)에서 별도로 다운로드해야 합니다.
 
 1. 프로젝트를 복원하고 다시 빌드합니다.
 1. 앱을 다시 배포 하기 전에 서버의 배포 폴더에 있는 모든 파일을 삭제 합니다.
