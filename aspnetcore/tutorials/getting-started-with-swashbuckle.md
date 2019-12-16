@@ -4,14 +4,14 @@ author: zuckerthoben
 description: ASP.NET Core Web API 프로젝트에 Swashbuckle을 추가하여 Swagger UI를 통합하는 방법을 알아봅니다.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 08/21/2019
+ms.date: 12/05/2019
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: d3cef72de22e54f7e65ddf9f1446eb32256d0c71
-ms.sourcegitcommit: 73e255e846e414821b8cc20ffa3aec946735cd4e
+ms.openlocfilehash: dea8564a1ee94d6ff1d96e9aab68205292765178
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/03/2019
-ms.locfileid: "71924977"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74881261"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Swashbuckle 및 ASP.NET Core 시작
 
@@ -49,7 +49,7 @@ Swashbuckle에 대한 세 가지 주 구성 요소는 다음과 같습니다.
   * 검색 상자에 “Swashbuckle.AspNetCore” 입력
   * **찾아보기** 탭에서 최신 “Swashbuckle.AspNetCore” 패키지를 선택하고 **설치** 클릭
 
-### <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+### <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * **Solution Pad**에서 *Packages* 폴더를 마우스 오른쪽 단추로 클릭 > **패키지 추가...** 선택
 * **패키지 추가** 창의 **소스** 드롭다운을 “nuget.org”로 설정
@@ -172,7 +172,7 @@ XML 주석은 다음 방법으로 사용하도록 설정할 수 있습니다.
 
 ::: moniker-end
 
-#### <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+#### <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -355,7 +355,7 @@ UI는 생성된 JSON 스키마에 의해 구동됩니다.
 
 ### <a name="data-annotations"></a>데이터 주석
 
-[System.ComponentModel.DataAnnotations](/dotnet/api/system.componentmodel.dataannotations) 네임스페이스에 있는 특성으로 모델을 데코레이트하여 Swagger UI 구성 요소를 구동합니다.
+[System.ComponentModel.DataAnnotations](/dotnet/api/system.componentmodel.dataannotations) 네임스페이스에 있는 특성으로 모델을 표시하여 Swagger UI 구성 요소를 구동합니다.
 
 `[Required]` 특성을 `TodoItem` 클래스의 `Name` 속성에 추가합니다.
 

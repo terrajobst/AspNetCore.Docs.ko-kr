@@ -4,14 +4,14 @@ author: rick-anderson
 description: 형식과 함께 사용되는 기본 제공 태그 도우미를 설명합니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/06/2019
+ms.date: 12/05/2019
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: 43a1c408ff1a03468989e5bb0839ca2cd245082b
-ms.sourcegitcommit: b5e63714afc26e94be49a92619586df5189ed93a
+ms.openlocfilehash: 61b50a63bd026f917035f64785d8d3b1956958a6
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/02/2019
-ms.locfileid: "68739488"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880961"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>ASP.NET Core 형식의 태그 도우미
 
@@ -81,7 +81,7 @@ MVC 런타임은 형식 태그 도우미 특성 `asp-controller` 및 `asp-action
 |[asp-page](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page)|Razor 페이지의 이름입니다.|
 |[asp-page-handler](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page-handler)|Razor 페이지 처리기의 이름입니다.|
 |[asp-route](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route)|경로의 이름입니다.|
-|[asp-route-{value}](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route-value)|단일 URL 경로 값입니다. 예를 들어, `asp-route-id="1234"`을 입력합니다.|
+|[asp-route-{value}](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route-value)|단일 URL 경로 값입니다. 예: `asp-route-id="1234"`.|
 |[asp-all-route-data](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-all-route-data)|모든 경로 값입니다.|
 |[asp-fragment](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-fragment)|URL 조각입니다.|
 
@@ -455,9 +455,9 @@ public IActionResult Edit(int id, int colorIndex)
 |ValidationSummary.ModelOnly|모델|
 |ValidationSummary.None|없음|
 
-### <a name="sample"></a>샘플
+### <a name="sample"></a>예제
 
-다음 예제에서 데이터 모델은 `DataAnnotation` 특성으로 데코레이팅됩니다. 그러면 `<input>` 요소에 대한 유효성 검사 오류 메시지를 생성합니다.  유효성 검사 오류가 발생하는 경우 유효성 검사 태그 도우미는 다음 오류 메시지를 표시합니다.
+다음 예제에서 데이터 모델에는 `DataAnnotation` 특성이 있습니다. 이 특성은 `<input>` 요소에 대한 유효성 검사 오류 메시지를 생성합니다.  유효성 검사 오류가 발생하는 경우 유효성 검사 태그 도우미는 다음 오류 메시지를 표시합니다.
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/RegisterViewModel.cs)]
 
@@ -545,7 +545,7 @@ HTTP POST `Index` 메서드는 선택 항목을 표시합니다.
 
 [!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Home/IndexEnum.cshtml?highlight=5)]
 
-`Display` 특성으로 열거자 목록을 데코레이트하여 보다 풍부한 UI를 사용할 수 있습니다.
+`Display` 특성으로 열거자 목록을 표시하여 보다 풍부한 UI를 사용할 수 있습니다.
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/CountryEnum.cs?highlight=5,7)]
 

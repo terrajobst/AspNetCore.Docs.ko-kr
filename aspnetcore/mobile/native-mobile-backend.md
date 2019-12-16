@@ -3,14 +3,14 @@ title: ASP.NET Core를 사용하여 네이티브 모바일 앱용 백 엔드 서
 author: ardalis
 description: ASP.NET Core MVC를 사용하여 네이티브 모바일 앱을 지원하는 백 엔드 서비스를 만드는 방법을 배웁니다.
 ms.author: riande
-ms.date: 10/14/2016
+ms.date: 12/05/2019
 uid: mobile/native-mobile-backend
-ms.openlocfilehash: b50d2593d7dc4b89472033898373e3a22fc9a7a3
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 38ac69bfe9d99d6d61f96fde92d86fd752ebbb6b
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64883958"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74881157"
 ---
 # <a name="create-backend-services-for-native-mobile-apps-with-aspnet-core"></a>ASP.NET Core를 사용하여 네이티브 모바일 앱용 백 엔드 서비스 만들기
 
@@ -63,7 +63,7 @@ Visual Studio에서 새 ASP.NET Core 웹 애플리케이션을 만듭니다. 웹
 > [!NOTE]
 > 기본적으로 로컬이 아닌 요청을 무시하는 IIS Express 뒤에서보다 애플리케이션을 직접 실행해야 합니다. 명령 프롬프트에서 [dotnet run](/dotnet/core/tools/dotnet-run)을 실행하거나 Visual Studio 도구 모음의 디버그 대상 드롭다운에서 애플리케이션 이름 프로필을 선택합니다.
 
-할 일 항목을 나타내도록 모델 클래스를 추가합니다. `[Required]` 특성을 사용하여 필수 필드를 표시합니다.
+할 일 항목을 나타내도록 모델 클래스를 추가합니다. `[Required]` 특성으로 필수 필드를 표시합니다.
 
 [!code-csharp[](native-mobile-backend/sample/ToDoApi/src/ToDoApi/Models/ToDoItem.cs)]
 
@@ -108,7 +108,7 @@ API 메서드에는 데이터를 사용하는 방법이 필요합니다. 원래 
 
 ### <a name="creating-items"></a>항목 만들기
 
-일반적으로 새 데이터 항목 만들기는 HTTP POST 동사로 매핑됩니다. `Create` 메서드에는 적용된 `[HttpPost]` 특성이 있으며 `ToDoItem` 인스턴스를 허용합니다. `item` 인수는 POST의 본문에 전달되므로 이 매개 변수는 `[FromBody]` 특성으로 데코레이팅됩니다.
+일반적으로 새 데이터 항목 만들기는 HTTP POST 동사로 매핑됩니다. `Create` 메서드는 `[HttpPost]` 특성이 적용되어 있으며 `ToDoItem` 인스턴스를 허용합니다. `item` 인수는 POST 본문에 전달되기 때문에 이 매개 변수는 `[FromBody]` 특성을 지정합니다.
 
 메서드 내부에서 유효성 및 데이터 저장소의 이전 존재에 대해 항목이 선택되며 문제가 발생하지 않는 경우 리포지토리를 사용하여 추가됩니다. `ModelState.IsValid`를 확인하면 [모델 유효성 검사](../mvc/models/validation.md)를 수행하고, 사용자 입력을 허용하는 모든 API 메서드에서 수행되어야 합니다.
 

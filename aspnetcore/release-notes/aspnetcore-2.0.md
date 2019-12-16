@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core 2.0의 새로운 기능에 대해 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/28/2019
+ms.date: 12/05/2019
 uid: aspnetcore-2.0
-ms.openlocfilehash: dac5a48042a71774cb884e30a166be68bee69691
-ms.sourcegitcommit: f5762967df3be8b8c868229e679301f2f7954679
+ms.openlocfilehash: 452ccd76eece55cb5cf38fe39781f2f64dd5d466
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/13/2019
-ms.locfileid: "67048116"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880871"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>ASP.NET Core 2.0의 새로운 기능
 
@@ -104,7 +104,7 @@ var entityTag = new EntityTagHeaderValue("\"MyCalculatedEtagValue\"");
 return File(data, "text/plain", "downloadName.txt", lastModified: DateTime.UtcNow.AddSeconds(-5), entityTag: entityTag);
 ```
 
-방문자에게 반환된 파일이 `ETag` 및 `LastModified` 값에 해당하는 HTTP 헤더로 데코레이트됩니다.
+방문자에게 반환된 파일이 `ETag` 및 `LastModified` 값에 해당하는 HTTP 헤더를 갖습니다.
 
 애플리케이션 방문자가 범위 요청 헤더가 포함된 콘텐츠를 요청하면 ASP.NET Core는 요청을 인식하고 헤더를 처리합니다. 요청된 콘텐츠가 부분적으로 전달될 수 있으면 ASP.NET Core는 적절히 건너뛰고 요청된 바이트 집합만 반환합니다. 이 기능에 맞게 조정하거나 이 기능을 처리하기 위해 메서드에 특수 처리기를 작성할 필요가 없습니다. 기능이 자동으로 처리됩니다.
 

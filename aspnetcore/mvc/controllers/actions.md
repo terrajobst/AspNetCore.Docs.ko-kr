@@ -3,14 +3,14 @@ title: ASP.NET Core MVC에서 컨트롤러를 사용한 요청 처리
 author: ardalis
 description: ''
 ms.author: riande
-ms.date: 07/03/2017
+ms.date: 12/05/2019
 uid: mvc/controllers/actions
-ms.openlocfilehash: 952e4dbb2c4343ca87ace1535e4a5968faf088cf
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 715a73863513870d1cbd522e75013d41830da1e7
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64890258"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74881100"
 ---
 # <a name="handle-requests-with-controllers-in-aspnet-core-mvc"></a>ASP.NET Core MVC에서 컨트롤러를 사용한 요청 처리
 
@@ -23,13 +23,15 @@ ms.locfileid: "64890258"
 컨트롤러는 일련의 작업을 정의하고 그룹화하는 데 사용됩니다. 작업(또는 *작업 메서드*)은 요청을 처리하는 컨트롤러의 메서드입니다. 컨트롤러는 논리적으로 유사한 작업을 함께 그룹화합니다. 이 작업의 집합체를 통해 라우팅, 캐싱 및 권한 부여와 같은 일반적인 규칙 모음을 일괄적으로 적용할 수 있습니다. 요청은 [라우팅](xref:mvc/controllers/routing)을 통해 작업에 매핑됩니다.
 
 규칙에 따라 컨트롤러 클래스는:
+
 * 프로젝트의 루트 수준 *Controllers* 폴더에 위치합니다.
-* `Microsoft.AspNetCore.Mvc.Controller`에서 상속됩니다.
+* `Microsoft.AspNetCore.Mvc.Controller`에서 상속합니다.
 
 컨트롤러는 다음 조건 중 하나 이상이 참인 인스턴스화할 수 있는 클래스입니다.
-* 클래스 이름에 접미사 “Controller”가 붙습니다.
-* 클래스가 이름에 접미사 “Controller”가 붙는 클래스를 상속합니다.
-* 클래스가 `[Controller]` 특성으로 데코레이트됩니다.
+
+* 클래스 이름에 접미사 `Controller`가 붙습니다.
+* 클래스가 이름에 접미사 `Controller`가 붙는 클래스를 상속합니다.
+* `[Controller]` 특성이 클래스에 적용됩니다.
 
 컨트롤러 클래스에는 연결된 `[NonController]` 특성이 없어야만 합니다.
 
@@ -43,7 +45,7 @@ ms.locfileid: "64890258"
 
 ## <a name="defining-actions"></a>작업 정의하기
 
-컨트롤러의 공용 메서드는 `[NonAction]` 특성으로 데코레이트된 경우 이외에는 작업입니다. 작업의 매개 변수는 요청 데이터에 바인딩되며 [모델 바인딩](xref:mvc/models/model-binding)을 사용하여 유효성 검사가 수행됩니다. 모델 유효성 검사는 모델 바인딩되는 모든 작업에 대해 발생합니다. `ModelState.IsValid` 속성 값은 모델 바인딩 및 유효성 검사의 성공 여부를 나타냅니다.
+컨트롤러의 공용 메서드는 `[NonAction]` 특성이 있는 경우 이외에는 작업입니다. 작업의 매개 변수는 요청 데이터에 바인딩되며 [모델 바인딩](xref:mvc/models/model-binding)을 사용하여 유효성 검사가 수행됩니다. 모델 유효성 검사는 모델 바인딩되는 모든 작업에 대해 발생합니다. `ModelState.IsValid` 속성 값은 모델 바인딩 및 유효성 검사의 성공 여부를 나타냅니다.
 
 작업 메서드는 비즈니스 문제에 요청을 매핑하기 위한 논리를 포함해야 합니다. 비즈니스 문제는 일반적으로 컨트롤러가 [종속성 주입](xref:mvc/controllers/dependency-injection)을 통해 액세스하는 서비스로 표현되어야 합니다. 그런 다음 작업은 비즈니스 작업의 결과를 응용 프로그램 상태에 매핑합니다.
 

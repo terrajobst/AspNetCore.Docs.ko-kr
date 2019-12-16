@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core에서 태그 도우미를 작성하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/29/2019
+ms.date: 12/05/2019
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: f0c7e114583b2ca2e681c507bef3487c863d8cd0
-ms.sourcegitcommit: a166291c6708f5949c417874108332856b53b6a9
+ms.openlocfilehash: e8b62d795f6444e6dd79e27ace687d5db4db86de
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/18/2019
-ms.locfileid: "72589866"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880995"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>ASP.NET Core의 작성자 태그 도우미
 
@@ -117,7 +117,7 @@ FQN을 사용하여 뷰에 태그 도우미를 추가하려면 먼저 FQN(`Autho
 <a name="self-closing"></a>
 
    > [!NOTE]
-   > 이메일 태그 자체 닫음(`<email mail-to="Rick" />`)을 작성하려는 경우 최종 출력도 자체로 닫힙니다. 시작 태그(`<email mail-to="Rick">`)만 사용하여 태그를 작성하는 기능을 사용하려면 클래스를 다음과 같이 데코레이트해야 합니다.
+   > 이메일 태그 자체 닫음(`<email mail-to="Rick" />`)을 작성하려는 경우 최종 출력도 자체로 닫힙니다. 시작 태그(`<email mail-to="Rick">`)만 사용하여 태그를 작성하는 기능을 사용하려면 다음을 사용하여 클래스를 표시해야 합니다.
    >
    > [!code-csharp[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/EmailTagHelperMailVoid.cs?highlight=1&range=6-10)]
 

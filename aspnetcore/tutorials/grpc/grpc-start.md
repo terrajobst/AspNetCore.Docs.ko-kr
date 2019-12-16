@@ -3,14 +3,14 @@ title: ASP.NET Core에서 .NET Core gRPC 클라이언트 및 서버 만들기
 author: juntaoluo
 description: 이 자습서는 ASP.NET Core에서 gRPC 서비스 및 gRPC 클라이언트를 만드는 방법을 보여줍니다. gRPC 서비스 프로젝트를 만들고, proto 파일을 편집하고, 이중 스트리밍 호출을 추가하는 방법을 알아봅니다.
 ms.author: johluo
-ms.date: 11/12/2019
+ms.date: 12/05/2019
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: e5373d9abb9a770132e756843dbd15534dbe3356
-ms.sourcegitcommit: 231780c8d7848943e5e9fd55e93f437f7e5a371d
+ms.openlocfilehash: c179dd31e6484246498c857aad797eb752f00bf5
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/15/2019
-ms.locfileid: "74116107"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74879643"
 ---
 # <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>자습서: ASP.NET Core에서 gRPC 클라이언트 및 서버 만들기
 
@@ -52,7 +52,7 @@ ms.locfileid: "74116107"
 * Visual Studio를 시작하고 **새 프로젝트 만들기**를 선택합니다. 또는 Visual Studio **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.
 * **새 프로젝트 만들기** 대화 상자에서 **gRPC 서비스**를 선택한 후 **다음**을 선택합니다.
 
-  ![**새 프로젝트 만들기** 대화 상자](~/tutorials/grpc/grpc-start/static/cnp.png)
+  ![새 프로젝트 만들기 대화 상자](~/tutorials/grpc/grpc-start/static/cnp.png)
 
 * 프로젝트 이름을 **GrpcGreeter**로 지정합니다. 코드를 복사하여 붙여넣을 때 네임스페이스가 일치하도록 프로젝트 이름을 *GrpcGreeter*로 지정해야 합니다.
 * **만들기**를 선택합니다.

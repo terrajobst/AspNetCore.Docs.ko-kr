@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: scaddie
 ms.date: 06/12/2019
 uid: mvc/views/tag-helpers/th-components
-ms.openlocfilehash: de053dd0138224a9bece218010eaaedcf7e084cb
-ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
+ms.openlocfilehash: 070cc3aae08664c13d8eb793a066766d0a5569ee
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/19/2019
-ms.locfileid: "69583531"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880969"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>ASP.NET Core의 태그 도우미 구성 요소
 
@@ -111,8 +111,8 @@ HTML `<head>` 요소 내에서 CSS 파일은 일반적으로 HTML `<link>` 요�
 사용자 지정 태그 도우미 구성 요소를 만들려면 다음을 수행합니다.
 
 * <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperComponentTagHelper>에서 파생된 공용 클래스를 만듭니다.
-* 클래스에 [[HtmlTargetElement]](xref:Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute) 특성을 적용합니다. 대상 HTML 요소의 이름을 지정합니다.
-* *선택 사항*: IntelliSense에서 유형을 표시하지 않으려면 [[EditorBrowsable(EditorBrowsableState.Never)]](xref:System.ComponentModel.EditorBrowsableAttribute) 특성을 클래스에 적용합니다.
+* 클래스에 [`[HtmlTargetElement]`](xref:Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute) 특성을 적용합니다. 대상 HTML 요소의 이름을 지정합니다.
+* *선택 사항*: 클래스에 [`[EditorBrowsable(EditorBrowsableState.Never)]`](xref:System.ComponentModel.EditorBrowsableAttribute) 특성을 적용하여 IntelliSense에서 형식을 표시하지 않습니다.
 
 다음 코드는 `<address>` HTML 요소를 대상으로 하는 사용자 지정 태그 도우미 구성 요소를 만듭니다.
 

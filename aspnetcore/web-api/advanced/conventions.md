@@ -5,20 +5,20 @@ description: ASP.NET Core에서 웹 API 규칙에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-2.2'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 12/13/2018
+ms.date: 12/05/2019
 uid: web-api/advanced/conventions
-ms.openlocfilehash: ae409158defe15ffaa7454039b302cf3c6437e54
-ms.sourcegitcommit: 6d9cf728465cdb0de1037633a8b7df9a8989cccb
+ms.openlocfilehash: 2c7e33da24322504fc5e1be83c0b814710186687
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/28/2019
-ms.locfileid: "67463289"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74881314"
 ---
 # <a name="use-web-api-conventions"></a>웹 API 규칙 사용
 
 작성자: [Pranav Krishnamoorthy](https://github.com/pranavkm) 및 [Scott Addie](https://github.com/scottaddie)
 
-ASP.NET Core 2.2 이상에는 일반적인 [API 설명서](xref:tutorials/web-api-help-pages-using-swagger)를 추출하여 여러 작업, 컨트롤러 또는 어셈블리 내 모든 컨트롤러에 적용하는 방법이 포함되어 있습니다. 웹 API 규칙은 개별 작업을 [[ProducesResponseType]](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute)으로 데코레이팅하는 대체자입니다.
+ASP.NET Core 2.2 이상에는 일반적인 [API 설명서](xref:tutorials/web-api-help-pages-using-swagger)를 추출하여 여러 작업, 컨트롤러 또는 어셈블리 내 모든 컨트롤러에 적용하는 방법이 포함되어 있습니다. 웹 API 규칙은 개별 작업을 [`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute)으로 데코레이팅하는 대체자입니다.
 
 규칙을 통해 다음을 사용할 수 있습니다.
 
@@ -52,7 +52,7 @@ ASP.NET Core MVC 2.2 이상에는 <xref:Microsoft.AspNetCore.Mvc.DefaultApiConve
 
     `[ProducesDefaultResponseType]`에 대한 자세한 내용은 [Default Response](https://swagger.io/docs/specification/describing-responses/#default)(기본 응답)를 참조하세요.
 
-1. &mdash; 컨트롤러에 `Microsoft.AspNetCore.Mvc.ApiConventionTypeAttribute`를 적용하면 컨트롤러에서 모든 작업에 지정된 규칙 유형을 적용합니다. 규칙 메서드는 규칙 메서드가 적용되는 작업을 결정하는 힌트로 데코레이팅됩니다. 힌트에 대한 자세한 내용은 [웹 API 규칙 만들기](#create-web-api-conventions)를 참조하세요).
+1. &mdash; 컨트롤러에 `Microsoft.AspNetCore.Mvc.ApiConventionTypeAttribute`를 적용하면 컨트롤러에서 모든 작업에 지정된 규칙 유형을 적용합니다. 규칙 메서드는 규칙 메서드가 적용되는 작업을 결정하는 힌트로 표시됩니다. 힌트에 대한 자세한 내용은 [웹 API 규칙 만들기](#create-web-api-conventions)를 참조하세요).
 
     다음 예제에서는 *ContactsConventionController*의 모든 작업에 기본 규칙 집합이 적용됩니다.
 

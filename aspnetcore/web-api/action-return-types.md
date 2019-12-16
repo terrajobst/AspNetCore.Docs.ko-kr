@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/09/2019
 uid: web-api/action-return-types
-ms.openlocfilehash: c409170a24225e160c1c53e7294590589e114f7f
-ms.sourcegitcommit: 231780c8d7848943e5e9fd55e93f437f7e5a371d
+ms.openlocfilehash: fe665026fdced22ccf4b4f1ba655e858a7acf016
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/15/2019
-ms.locfileid: "74116090"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74879736"
 ---
 # <a name="controller-action-return-types-in-aspnet-core-web-api"></a>ASP.NET Core 웹 API에서 컨트롤러 작업 반환 형식
 
@@ -92,7 +92,7 @@ public IEnumerable<Product> GetOnSaleProducts() =>
 
 한 작업에 여러 `ActionResult` 반환 형식을 사용할 수 있는 경우 <xref:Microsoft.AspNetCore.Mvc.IActionResult> 반환 형식이 적절합니다. `ActionResult` 형식은 다양한 HTTP 상태 코드를 나타냅니다. `ActionResult`에서 파생되는 비추상 클래스는 유효한 반환 형식입니다. 이 범주에서 일반적인 반환 형식은 <xref:Microsoft.AspNetCore.Mvc.BadRequestResult>(400), <xref:Microsoft.AspNetCore.Mvc.NotFoundResult>(404) 및 <xref:Microsoft.AspNetCore.Mvc.OkObjectResult>(200)입니다. 또는 <xref:Microsoft.AspNetCore.Mvc.ControllerBase> 클래스의 편의 메서드를 사용하여 작업에서 `ActionResult` 형식을 반환할 수 있습니다. 예를 들어 `return BadRequest();`는 `return new BadRequestResult();`의 약식 형태입니다.
 
-이 작업 유형에는 여러 반환 형식 및 경로가 있기 때문에 [[ProducesResponseType]](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute) 특성을 자유롭게 사용할 필요가 있습니다. 이 특성은 [Swagger](xref:tutorials/web-api-help-pages-using-swagger)와 같은 도구에서 생성한 웹 API 도움말 페이지에 대한 설명이 포함된 응답 세부 정보를 생성합니다. `[ProducesResponseType]`은 작업에서 반환한 알려진 형식 및 HTTP 상태 코드을 나타냅니다.
+이 작업 유형에는 여러 반환 형식 및 경로가 있기 때문에 [`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute) 특성을 자유롭게 사용할 필요가 있습니다. 이 특성은 [Swagger](xref:tutorials/web-api-help-pages-using-swagger)와 같은 도구에서 생성한 웹 API 도움말 페이지에 대한 설명이 포함된 응답 세부 정보를 생성합니다. `[ProducesResponseType]`은 작업에서 반환한 알려진 형식 및 HTTP 상태 코드을 나타냅니다.
 
 ### <a name="synchronous-action"></a>동기화 작업
 
@@ -142,13 +142,13 @@ public IEnumerable<Product> GetOnSaleProducts() =>
 
 ::: moniker range=">= aspnetcore-2.1"
 
-ASP.NET Core 2.1 이상의 [[ApiController]](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) 특성이 적용되면 모델 유효성 검사 오류로 인해 400 상태 코드가 생성됩니다. 자세한 정보는 [자동 HTTP 400 응답](xref:web-api/index#automatic-http-400-responses)을 참조하세요.
+ASP.NET Core 2.1 이상의 [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) 특성이 적용되면 모델 유효성 검사 오류로 인해 400 상태 코드가 생성됩니다. 자세한 정보는 [자동 HTTP 400 응답](xref:web-api/index#automatic-http-400-responses)을 참조하세요.
 
 ## <a name="actionresultt-type"></a>ActionResult\<T> 형식
 
 ASP.NET Core 2.1에는 웹 API 컨트롤러 작업에 대해 [ActionResult\<T>](xref:Microsoft.AspNetCore.Mvc.ActionResult`1) 반환 형식이 도입되었습니다. 이를 통해 <xref:Microsoft.AspNetCore.Mvc.ActionResult>에서 파생된 형식을 반환하거나 [특정 형식](#specific-type)을 반환할 수 있습니다. `ActionResult<T>`는 [IActionResult 형식](#iactionresult-type)을 통해 다음과 같은 혜택을 제공합니다.
 
-* [[ProducesResponseType]](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute) 특성의 `Type` 속성을 제외할 수 있습니다. 예를 들어 `[ProducesResponseType(200, Type = typeof(Product))]`은 `[ProducesResponseType(200)]`으로 단순화됩니다. 작업의 예상 반환 형식은 대신 `ActionResult<T>`의 `T`에서 유추됩니다.
+* [`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute) 특성의 `Type` 속성을 제외할 수 있습니다. 예를 들어 `[ProducesResponseType(200, Type = typeof(Product))]`은 `[ProducesResponseType(200)]`으로 단순화됩니다. 작업의 예상 반환 형식은 대신 `ActionResult<T>`의 `T`에서 유추됩니다.
 * [암시적 캐스트 연산자](/dotnet/csharp/language-reference/keywords/implicit)는 `T` 및 `ActionResult` 모두를 `ActionResult<T>`로 변환하도록 지원합니다. `T`는 <xref:Microsoft.AspNetCore.Mvc.ObjectResult>로 변환합니다. 즉, `return new ObjectResult(T);`는 `return T;`로 간소화됩니다.
 
 C#은 인터페이스에서 암시적 캐스트 연산자를 지원하지 않습니다. 따라서 인터페이스를 구체적인 형식으로 전환하려면 `ActionResult<T>`를 사용해야 합니다. 예를 들어 다음 예제에서 `IEnumerable`을 사용하면 작동하지 않습니다.
@@ -183,7 +183,7 @@ public ActionResult<IEnumerable<Product>> Get() =>
 위 작업에서:
 
 * 다음과 같은 경우 ASP.NET Core 런타임에서 400 상태 코드(<xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*>)가 반환됩니다.
-  * [[ApiController]](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) 특성이 적용되었고 모델 유효성 검사에 실패합니다.
+  * [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) 특성이 적용되었고 모델 유효성 검사에 실패합니다.
   * 제품 설명에 “XYZ 위젯”이 포함됩니다.
 * 제품이 만들어지면 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> 메서드가 201 상태 코드를 생성합니다. 이 코드 경로에서는 `Product` 개체가 응답 본문에 제공됩니다. 새로 만든 제품의 URL을 포함하는 `Location` 응답 헤더가 제공됩니다.
 

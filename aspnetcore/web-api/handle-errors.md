@@ -5,14 +5,14 @@ description: ASP.NET Core 웹 API를 사용한 오류 처리에 대해 알아봅
 monikerRange: '>= aspnetcore-2.1'
 ms.author: prkrishn
 ms.custom: mvc
-ms.date: 09/27/2019
+ms.date: 12/10/2019
 uid: web-api/handle-errors
-ms.openlocfilehash: 457ad7449c608c3b1b0acd729626e07808f55897
-ms.sourcegitcommit: ddc813f0f1fb293861a01597532919945b0e7fe5
+ms.openlocfilehash: c2dbc47b4495b7187aefbc62eb6d2f0c9683c2da
+ms.sourcegitcommit: 29ace642ca0e1f0b48a18d66de266d8811df2b83
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/23/2019
-ms.locfileid: "74412096"
+ms.lasthandoff: 12/10/2019
+ms.locfileid: "74987825"
 ---
 # <a name="handle-errors-in-aspnet-core-web-apis"></a>ASP.NET Core 웹 API에서 오류 처리
 
@@ -149,7 +149,7 @@ HTML 형식 응답은 Postman과 같은 도구를 사용하여 테스트하는 �
 
     ::: moniker-end
 
-위의 `Error` 작업은 [RFC7807](https://tools.ietf.org/html/rfc7807) 호환 페이로드를 클라이언트에 보냅니다.
+위의 `Error` 작업은 [RFC 7807](https://tools.ietf.org/html/rfc7807) 호환 페이로드를 클라이언트에 보냅니다.
 
 예외 처리 미들웨어는 로컬 개발 환경에서 보다 자세한 콘텐츠 협상 출력을 제공할 수도 있습니다. 다음 단계를 사용하여 개발 및 프로덕션 환경에서 일관된 페이로드 형식을 생성합니다.
 
@@ -267,6 +267,13 @@ Web API 컨트롤러의 경우, 모델 유효성 검사에 실패하면 MVC는 <
 ## <a name="client-error-response"></a>클라이언트 오류 응답
 
 *오류 결과*는 400 이상의 HTTP 상태 코드를 가진 결과로 정의됩니다. Web API 컨트롤러의 경우, MVC는 <xref:Microsoft.AspNetCore.Mvc.ProblemDetails>의 결과로 오류 결과를 변환합니다.
+
+::: moniker range="= aspnetcore-2.1"
+
+> [!IMPORTANT]
+> ASP.NET Core 2.1은 RFC 7807을 거의 준수하는 문제 세부 정보 응답을 생성합니다. 100% 준수가 중요한 경우 프로젝트를 ASP.NET Core 2.2 이상으로 업그레이드하세요.
+
+::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.0"
 

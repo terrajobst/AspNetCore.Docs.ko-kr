@@ -3,14 +3,14 @@ title: ASP.NET Core Razor 페이지에 검색 추가
 author: rick-anderson
 description: ASP.NET Core Razor 페이지에 검색을 추가하는 방법을 보여 줍니다.
 ms.author: riande
-ms.date: 7/23/2019
+ms.date: 12/05/2019
 uid: tutorials/razor-pages/search
-ms.openlocfilehash: 1eeb3aa86f2a6928b6d0b368c90e4760a66a6c6e
-ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
+ms.openlocfilehash: 8228207b0f37a6923b29891ac3115dd0be115501
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/15/2019
-ms.locfileid: "72334057"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74881327"
 ---
 # <a name="add-search-to-aspnet-core-razor-pages"></a>ASP.NET Core Razor 페이지에 검색 추가
 
@@ -26,7 +26,7 @@ ms.locfileid: "72334057"
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_newProps&highlight=11-999)]
 
-* `SearchString`: 사용자가 검색 텍스트 상자에 입력하는 텍스트를 포함합니다. `SearchString`은 [`[BindProperty]`](/dotnet/api/microsoft.aspnetcore.mvc.bindpropertyattribute) 특성으로 데코레이트됩니다. `[BindProperty]`는 양식 값 및 쿼리 문자열을 속성과 동일한 이름으로 바인딩합니다. `(SupportsGet = true)`는 GET 요청을 바인딩하는 데 필요합니다.
+* `SearchString`: 사용자가 검색 텍스트 상자에 입력하는 텍스트를 포함합니다. `SearchString`에는 [`[BindProperty]`](/dotnet/api/microsoft.aspnetcore.mvc.bindpropertyattribute) 특성이 있습니다. `[BindProperty]`는 양식 값 및 쿼리 문자열을 속성과 동일한 이름으로 바인딩합니다. `(SupportsGet = true)`는 GET 요청을 바인딩하는 데 필요합니다.
 * `Genres`: 장르 목록을 포함합니다. `Genres`를 통해 사용자는 목록에서 장르를 선택할 수 있습니다. `SelectList`는 `using Microsoft.AspNetCore.Mvc.Rendering;`이 필요합니다.
 * `MovieGenre`: 사용자가 선택하는 특정 장르를 포함합니다(예: "서부 영화").
 * `Genres` 및 `MovieGenre`는 이 자습서의 뒷부분에서 사용됩니다.
@@ -45,7 +45,7 @@ var movies = from m in _context.Movie
              select m;
 ```
 
-쿼리는 이 시점에서*만* 정의되며 데이터베이스에 대해 실행되지 **않았습니다**.
+이 시점에 쿼리는 정의*만* 되었으며 데이터베이스에 대해서 실행되지는 **않았습니다**.
 
 `SearchString` 속성이 Null 또는 비어 있는 경우 영화 쿼리는 검색 문자열에 대해 필터링하도록 수정됩니다.
 
@@ -68,7 +68,7 @@ Movies 페이지로 이동하고 `?searchString=Ghost`와 같은 쿼리 문자�
 
 이전 경로 제약 조건을 통해 쿼리 문자열 값 대신 경로 데이터(URL 세그먼트)로 제목을 검색할 수 있습니다.  `"{searchString?}"`에서 `?`는 선택적 경로 매개 변수임을 의미합니다.
 
-![Url에 추가된 단어 ghost와 두 개의 동영상, Ghostbusters 및 Ghostbusters 2의 반환된 동영상 목록이 있는 인덱스 보기](search/_static/g2.png)
+![URL에 ghost라는 단어가 추가되고 Ghostbusters 및 Ghostbusters 2라는 두 개의 반환된 영화 목록이 있는 Index 보기](search/_static/g2.png)
 
 ASP.NET Core 런타임은 [모델 바인딩](xref:mvc/models/model-binding)을 사용하여 쿼리 문자열(`?searchString=Ghost`) 또는 경로 데이터(`https://localhost:5001/Movies/Ghost`)에서 `SearchString` 속성의 값을 설정합니다. 모델 바인딩은 대/소문자를 구분하지 않습니다.
 
@@ -81,7 +81,7 @@ ASP.NET Core 런타임은 [모델 바인딩](xref:mvc/models/model-binding)을 �
 HTML `<form>` 태그는 다음과 같은 [태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용합니다.
 
 * [형식 태그 도우미](xref:mvc/views/working-with-forms#the-form-tag-helper). 양식이 제출되면 쿼리 문자열을 통해 필터 문자열이 *Pages/Movies/Index* 페이지로 전송됩니다.
-* [Input 태그 도우미](xref:mvc/views/working-with-forms#the-input-tag-helper)
+* [입력 태그 도우미](xref:mvc/views/working-with-forms#the-input-tag-helper)
 
 변경 내용을 저장하고 필터를 테스트합니다.
 
@@ -129,7 +129,7 @@ HTML `<form>` 태그는 다음과 같은 [태그 도우미](xref:mvc/views/tag-h
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_newProps&highlight=11-999)]
 
-* `SearchString`: 사용자가 검색 텍스트 상자에 입력하는 텍스트를 포함합니다. `SearchString`은 [`[BindProperty]`](/dotnet/api/microsoft.aspnetcore.mvc.bindpropertyattribute) 특성으로 데코레이트됩니다. `[BindProperty]`는 양식 값 및 쿼리 문자열을 속성과 동일한 이름으로 바인딩합니다. `(SupportsGet = true)`는 GET 요청을 바인딩하는 데 필요합니다.
+* `SearchString`: 사용자가 검색 텍스트 상자에 입력하는 텍스트를 포함합니다. `SearchString`에는 [`[BindProperty]`](/dotnet/api/microsoft.aspnetcore.mvc.bindpropertyattribute) 특성이 있습니다. `[BindProperty]`는 양식 값 및 쿼리 문자열을 속성과 동일한 이름으로 바인딩합니다. `(SupportsGet = true)`는 GET 요청을 바인딩하는 데 필요합니다.
 * `Genres`: 장르 목록을 포함합니다. `Genres`를 통해 사용자는 목록에서 장르를 선택할 수 있습니다. `SelectList`는 `using Microsoft.AspNetCore.Mvc.Rendering;`이 필요합니다.
 * `MovieGenre`: 사용자가 선택하는 특정 장르를 포함합니다(예: "서부 영화").
 * `Genres` 및 `MovieGenre`는 이 자습서의 뒷부분에서 사용됩니다.
@@ -148,7 +148,7 @@ var movies = from m in _context.Movie
              select m;
 ```
 
-쿼리는 이 시점에서*만* 정의되며 데이터베이스에 대해 실행되지 **않았습니다**.
+이 시점에 쿼리는 정의*만* 되었으며 데이터베이스에 대해서 실행되지는 **않았습니다**.
 
 `SearchString` 속성이 Null 또는 비어 있는 경우 영화 쿼리는 검색 문자열에 대해 필터링하도록 수정됩니다.
 
@@ -170,7 +170,7 @@ Movies 페이지로 이동하고 `?searchString=Ghost`와 같은 쿼리 문자�
 
 이전 경로 제약 조건을 통해 쿼리 문자열 값 대신 경로 데이터(URL 세그먼트)로 제목을 검색할 수 있습니다.  `"{searchString?}"`에서 `?`는 선택적 경로 매개 변수임을 의미합니다.
 
-![Url에 추가된 단어 ghost와 두 개의 동영상, Ghostbusters 및 Ghostbusters 2의 반환된 동영상 목록이 있는 인덱스 보기](search/_static/g2.png)
+![URL에 ghost라는 단어가 추가되고 Ghostbusters 및 Ghostbusters 2라는 두 개의 반환된 영화 목록이 있는 Index 보기](search/_static/g2.png)
 
 ASP.NET Core 런타임은 [모델 바인딩](xref:mvc/models/model-binding)을 사용하여 쿼리 문자열(`?searchString=Ghost`) 또는 경로 데이터(`https://localhost:5001/Movies/Ghost`)에서 `SearchString` 속성의 값을 설정합니다. 모델 바인딩은 대/소문자를 구분하지 않습니다.
 
@@ -183,7 +183,7 @@ ASP.NET Core 런타임은 [모델 바인딩](xref:mvc/models/model-binding)을 �
 HTML `<form>` 태그는 다음과 같은 [태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용합니다.
 
 * [형식 태그 도우미](xref:mvc/views/working-with-forms#the-form-tag-helper). 양식이 제출되면 쿼리 문자열을 통해 필터 문자열이 *Pages/Movies/Index* 페이지로 전송됩니다.
-* [Input 태그 도우미](xref:mvc/views/working-with-forms#the-input-tag-helper)
+* [입력 태그 도우미](xref:mvc/views/working-with-forms#the-input-tag-helper)
 
 변경 내용을 저장하고 필터를 테스트합니다.
 

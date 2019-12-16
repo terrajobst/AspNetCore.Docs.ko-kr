@@ -4,16 +4,16 @@ author: rick-anderson
 description: ASP.NET Core 2.2의 새로운 기능에 대해 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/12/2019
+ms.date: 12/05/2019
 no-loc:
 - SignalR
 uid: aspnetcore-2.2
-ms.openlocfilehash: fca653158c95e7c1a11f25f4076830fe3e7e93ae
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 8995a514ea2e5016da85952d0f0beaf396a5d639
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963130"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880841"
 ---
 # <a name="whats-new-in-aspnet-core-22"></a>ASP.NET Core 2.2의 새로운 기능
 
@@ -57,7 +57,12 @@ ASP.NET Core 2.2는 요청 디스패치를 향상시키기 위해 새로운 *엔
 
 ASP.NET Core 2.2는 HTTP/2 지원이 추가되었습니다.
 
-HTTP/2는 HTTP 프로토콜의 주요 수정 버전입니다. HTTP/2의 주목할 만한 기능 중 일부는 단일 연결을 통해 헤더 압축과 완전히 멀티플렉싱된 스트림을 지원합니다. HTTP/2는 HTTP의 의미 체계(HTTP 헤더, 메서드 등)를 유지하지만 이 데이터가 프레이밍되고 유선으로 전송되는 방식에서 HTTP/1.x와는 호환되지 않도록 변경되었습니다.
+HTTP/2는 HTTP 프로토콜의 주요 수정 버전입니다. HTTP/2의 중요한 기능은 다음과 같습니다.
+
+* 헤더 압축을 지원합니다.
+* 단일 연결을 통해 스트림을 완전히 멀티플렉싱합니다.
+
+HTTP/2는 HTTP의 의미 체계(예: HTTP 헤더 및 메서드)를 유지하지만 이 변경으로 클라이언트와 서버 간에 데이터가 프레이밍되고 전송되는 방법에서는 HTTP/1.x와의 호환성이 손상됩니다.
 
 이러한 프레이밍 변경으로 인해 서버와 클라이언트는 사용된 프로토콜 버전을 협상해야 합니다. ALPN(Application-Layer Protocol Negotiation)은 서버와 클라이언트가 TLS 핸드셰이크의 일부로 사용되는 프로토콜 버전을 협상할 수 있게 해주는 TLS 확장입니다. 프로토콜에서 서버와 클라이언트 사이에 사전 지식을 보유할 수는 있지만 모든 주요 브라우저는 HTTP/2 연결을 설정하는 유일한 방법으로 ALPN을 지원합니다
 

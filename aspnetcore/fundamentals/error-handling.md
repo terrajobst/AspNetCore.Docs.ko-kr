@@ -5,14 +5,14 @@ description: ASP.NET Core 앱에서 오류를 처리하는 방법을 알아봅�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/08/2019
+ms.date: 12/05/2019
 uid: fundamentals/error-handling
-ms.openlocfilehash: bff526e196ecc378d4687e1c38188977aeeccfd9
-ms.sourcegitcommit: a166291c6708f5949c417874108332856b53b6a9
+ms.openlocfilehash: 162972043a90fc8cc45aed52b5fa80ade3e11f39
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/18/2019
-ms.locfileid: "72589883"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880069"
 ---
 # <a name="handle-errors-in-aspnet-core"></a>ASP.NET Core에서 오류 처리
 
@@ -64,7 +64,7 @@ public IActionResult Error()
 }
 ```
 
-오류 처리기 작업 메서드를 `HttpGet`와 같은 HTTP 메서드 특성을 사용하여 데코레이팅 하지 마세요. 명시적 동사는 일부 요청이 메서드에 도달하지 못하게 방해합니다. 인증되지 않은 사용자가 오류 보기를 수신할 수 있도록 메서드에 대한 익명 액세스를 허용합니다.
+오류 처리기 작업 메서드를 `HttpGet`와 같은 HTTP 메서드 특성을 사용하여 표시하지 마세요. 명시적 동사는 일부 요청이 메서드에 도달하지 못하게 방해합니다. 인증되지 않은 사용자가 오류 보기를 수신할 수 있도록 메서드에 대한 익명 액세스를 허용합니다.
 
 ### <a name="access-the-exception"></a>예외에 액세스
 
@@ -166,7 +166,7 @@ URL 및 쿼리 문자열 템플릿에는 상태 코드에 대한 자리 표시�
 
 ## <a name="disable-status-code-pages"></a>상태 코드 페이지 사용 안 함
 
-MVC 컨트롤러 또는 작업 메서드에 대한 상태 코드 페이지를 비활성화하려면 [[SkipStatusCodePages]](xref:Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute) 특성을 사용합니다.
+MVC 컨트롤러 또는 작업 메서드에 대한 상태 코드 페이지를 비활성화하려면 [`[SkipStatusCodePages]`](xref:Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute) 특성을 사용합니다.
 
 Razor Pages 처리기 메서드 또는 MVC 컨트롤러에서 특정 요청에 대한 상태 코드 페이지를 비활성화하려면 <xref:Microsoft.AspNetCore.Diagnostics.IStatusCodePagesFeature>를 사용합니다.
 

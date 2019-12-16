@@ -3,14 +3,14 @@ title: ASP.NET Core MVC에서 보기
 author: ardalis
 description: ASP.NET Core MVC에서 보기가 앱의 데이터 프레젠테이션과 사용자 상호 작용을 처리하는 방식에 대해 알아봅니다.
 ms.author: riande
-ms.date: 04/03/2019
+ms.date: 12/05/2019
 uid: mvc/views/overview
-ms.openlocfilehash: 5e56c6bb18cb5d2389c11eb3e4aa9869228da47d
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: f636908ee36d0af6e92875876240cb8712dd2ccc
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64891348"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74881028"
 ---
 # <a name="views-in-aspnet-core-mvc"></a>ASP.NET Core MVC에서 보기
 
@@ -196,7 +196,7 @@ Viewmodel 형식 및 비즈니스 모델 형식 모두에 같은 클래스를 �
 
 강력한 형식의 보기 외에도, 보기는 *약한 형식*(*느슨한 형식*이라고도 함) 데이터 컬렉션에 액세스할 수 있습니다. 강력한 형식과 달리, *약한 형식*(또는 *느슨한 형식*)은 사용 중인 데이터 형식을 명시적으로 선언하지 않음을 의미합니다. 컨트롤러 및 보기 간에 적은 양의 데이터를 전달하기 위해 약한 형식의 데이터 컬렉션을 사용할 수 있습니다.
 
-| 다음 사이에 데이터 전달 ...                        | 예제                                                                        |
+| 다음 사이에 데이터 전달 ...                        | 예                                                                        |
 | ------------------------------------------------- | ------------------------------------------------------------------------------ |
 | 컨트롤러 및 보기                             | 드롭다운 목록을 데이터로 채웁니다.                                          |
 | 보기 및 [레이아웃 보기](xref:mvc/views/layout)   | 보기 파일에서 레이아웃 보기의 **\<title>** 요소 콘텐츠를 설정합니다.  |
@@ -252,9 +252,9 @@ public IActionResult SomeAction()
 
 **ViewData 특성**
 
-[ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary)를 사용하는 또 다른 방법은 [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute)입니다. `[ViewData]`로 데코레이팅된 컨트롤러 또는 Razor 페이지 모델의 속성은 값을 사전에서 저장하고 로드됩니다.
+[ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary)를 사용하는 또 다른 방법은 [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute)입니다. `[ViewData]` 특성으로 표시된 컨트롤러 또는 Razor 페이지 모델의 속성은 사전에서 값이 저장되고 로드됩니다.
 
-다음 예제에서 홈 컨트롤러에는 `[ViewData]`로 데코레이팅된 `Title` 속성이 있습니다. `About` 메서드는 정보 보기에 대한 제목을 설정합니다.
+다음 예제에서 홈 컨트롤러에는 `[ViewData]`로 표시된 `Title` 속성이 있습니다. `About` 메서드는 정보 보기에 대한 제목을 설정합니다.
 
 ```csharp
 public class HomeController : Controller

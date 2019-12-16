@@ -3,14 +3,14 @@ title: ASP.NET Core에서 응용 프로그램 모델 작업
 author: ardalis
 description: MVC 요소가 ASP.NET Core에서 작동하는 방법을 수정하려면 응용 프로그램 모델을 읽고 조작하는 방법을 알아봅니다.
 ms.author: riande
-ms.date: 10/14/2016
+ms.date: 12/05/2019
 uid: mvc/controllers/application-model
-ms.openlocfilehash: 4e264dc7cc63955df42df0b9eeeb7b82ae286241
-ms.sourcegitcommit: 169ea5116de729c803685725d96450a270bc55b7
+ms.openlocfilehash: 4b6c978e5752eb320412a1c204df8e3d288fe4a1
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/03/2019
-ms.locfileid: "74733962"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74881088"
 ---
 # <a name="work-with-the-application-model-in-aspnet-core"></a>ASP.NET Core에서 응용 프로그램 모델 작업
 
@@ -196,7 +196,7 @@ shim에서 제공하는 규칙은 특정 특성이 적용된 앱의 일부에만
 
 `UseWebApiRoutesAttribute`는 `WebApiApplicationModelConvention` 컨트롤러 규칙을 적용할지 여부를 제어합니다. 이 규칙을 사용하면 경로에 [영역](xref:mvc/controllers/areas)에 대한 지원을 추가하는 데 사용됩니다.
 
-호환성 패키지에는 규칙 집합 외에도 Web API에서 제공하는 클래스를 대신하는 `System.Web.Http.ApiController` 기본 클래스가 포함되어 있습니다. 이를 사용하면 Web API용으로 작성되고 Web API의 `ApiController`에서 상속된 컨트롤러를 ASP.NET Core MVC에서 실행하더라도 설계한 바대로 작동시킬 수 있습니다. 이 기본 컨트롤러 클래스는 위에 나열된 모든 `UseWebApi*` 특성으로 데코레이팅됩니다. `ApiController`는 Web API에서 찾을 수 있는 것과 호환되는 속성, 메서드 및 결과 형식을 노출합니다.
+호환성 패키지에는 규칙 집합 외에도 Web API에서 제공하는 클래스를 대신하는 `System.Web.Http.ApiController` 기본 클래스가 포함되어 있습니다. 이를 사용하면 Web API용으로 작성되고 Web API의 `ApiController`에서 상속된 컨트롤러를 ASP.NET Core MVC에서 실행하더라도 설계한 바대로 작동시킬 수 있습니다. 앞서 나열된 모든 `UseWebApi*` 특성은 기본 컨트롤러 클래스에 적용됩니다. `ApiController`는 Web API에서 찾을 수 있는 것과 호환되는 속성, 메서드 및 결과 형식을 노출합니다.
 
 ## <a name="using-apiexplorer-to-document-your-app"></a>ApiExplorer를 사용하여 앱 문서화
 

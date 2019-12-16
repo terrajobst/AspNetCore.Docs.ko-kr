@@ -4,17 +4,17 @@ author: rick-anderson
 description: ASP.NET Core 3.1의 새로운 기능에 대해 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/12/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 - SignalR
 uid: aspnetcore-3.1
-ms.openlocfilehash: 634c6937089a0a0fe1f862a83771aff65a1f8418
-ms.sourcegitcommit: 5974e3e66dab3398ecf2324fbb82a9c5636f70de
+ms.openlocfilehash: 89c676b96ef66f648544a8a884593bdafa3876de
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/03/2019
-ms.locfileid: "74778845"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74944228"
 ---
 # <a name="whats-new-in-aspnet-core-31"></a>ASP.NET Core 3.1의 새로운 기능
 
@@ -28,7 +28,7 @@ ms.locfileid: "74778845"
 
 ASP.NET Core 3.0을 사용하는 Blazor에서, 구성 요소가 HTML 도우미(`Html.RenderComponentAsync`)를 사용하여 페이지와 보기로 렌더링되었습니다. ASP.NET Core 3.1에서, 새 구성 요소 태그 도우미를 사용하여 페이지 또는 보기에서 구성 요소를 렌더링합니다.
 
-```razor
+```cshtml
 <component type="typeof(Counter)" render-mode="ServerPrerendered" />
 ```
 
@@ -47,7 +47,7 @@ Blazor 서버 앱에서 이제 초기 렌더링 중에 최상위 수준 구성 �
 
 ## <a name="support-for-shared-queues-in-httpsys"></a>HTTP.sys에서 공유 큐에 대한 지원
 
-[HTTP.sys](xref:fundamentals/servers/httpsys)에서 익명 요청 큐를 만들 수 있습니다. ASP.NET Core 3.1에서는 명명된 기존 HTTP.sys 요청 큐를 만들거나 이 큐에 연결하는 기능을 추가했습니다. 명명된 기존 HTTP.sys 요청 큐를 만들거나 이 큐에 연결하면 해당 큐가 있는 HTTP.Sys 컨트롤러 프로세스가 수신기 프로세스와 독립적인 시나리오를 활성화합니다. 이와 같이 독립되어 있으므로 수신기 프로세스가 다시 시작하는 사이에 기존 연결 및 큐에 대기 중인 요청을 유지할 수 있습니다.
+[HTTP.sys](xref:fundamentals/servers/httpsys)에서 익명 요청 큐를 만들 수 있습니다. ASP.NET Core 3.1에서는 명명된 기존 HTTP.sys 요청 큐를 만들거나 이 큐에 연결하는 기능을 추가했습니다. 명명된 기존 HTTP.sys 요청 큐를 만들거나 이 큐에 연결하면 해당 큐가 있는 HTTP.sys 컨트롤러 프로세스가 수신기 프로세스와 독립적인 시나리오를 활성화합니다. 이와 같이 독립되어 있으므로 수신기 프로세스가 다시 시작하는 사이에 기존 연결 및 큐에 대기 중인 요청을 유지할 수 있습니다.
 
 [!code-csharp[](sample/Program.cs?name=snippet)]
 

@@ -4,17 +4,17 @@ author: rick-anderson
 description: ASP.NET Core 3.0의 새로운 기능에 대해 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/12/2019
+ms.date: 12/05/2019
 no-loc:
 - Blazor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: c3dde383507ec919f82b5268ddbf23911c3d24f8
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 4ade13c38880c9915ec590297f2a43548ca400a8
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963117"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74880837"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3.0의 새로운 기능
 
@@ -182,7 +182,7 @@ public class DomainRestrictedRequirement :
 * 허브가 호출되는 컨텍스트를 검사할 수 있습니다.
 * 사용자가 개별 허브 메서드를 실행할 수 있도록 하는 결정을 내립니다.
 
-개별 허브 메서드는 런타임에 코드가 확인하는 정책의 이름으로 데코레이팅할 수 있습니다. 클라이언트에서 개별 허브 메서드를 호출하려고 하면 `DomainRestrictedRequirement` 처리기가 실행되고 메서드에 대한 액세스를 컨트롤합니다. `DomainRestrictedRequirement`가 액세스를 컨트롤하는 방식에 따라 다음이 가능합니다.
+개별 허브 메서드는 런타임에 코드가 확인하는 정책의 이름을 사용하여 표시할 수 있습니다. 클라이언트에서 개별 허브 메서드를 호출하려고 하면 `DomainRestrictedRequirement` 처리기가 실행되고 메서드에 대한 액세스를 컨트롤합니다. `DomainRestrictedRequirement`가 액세스를 컨트롤하는 방식에 따라 다음이 가능합니다.
 
 * 로그인된 모든 사용자는 `SendMessage` 메서드를 호출할 수 있습니다.
 * `@jabbr.net` 이메일 주소로 로그인한 사용자들만 사용자의 기록을 볼 수 있습니다.
@@ -319,8 +319,8 @@ Json.NET을 ASP.NET Core 3.0에 추가하려면 [Newtonsoft.Json 기반 JSON 형
 
 다음 목록에는 새 Razor 지시문이 포함되어 있습니다.
 
-* [@attribute](xref:mvc/views/razor#attribute) &ndash; `@attribute` 지시문은 지정된 특성을 생성된 페이지 또는 보기의 클래스에 추가합니다. 예: `@attribute [Authorize]`.
-* [@implements](xref:mvc/views/razor#implements) &ndash; `@implements` 지시문은 생성된 클래스의 인터페이스를 구현합니다. 예: `@implements IDisposable`.
+* [`@attribute`](xref:mvc/views/razor#attribute) &ndash; `@attribute` 지시문은 지정된 특성을 생성된 페이지 또는 보기의 클래스에 추가합니다. 예: `@attribute [Authorize]`.
+* [`@implements`](xref:mvc/views/razor#implements) &ndash; `@implements` 지시문은 생성된 클래스의 인터페이스를 구현합니다. 예: `@implements IDisposable`.
 
 ## <a name="identityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>IdentityServer4는 웹 API 및 SPA에 대한 인증 및 권한 부여를 지원합니다.
 

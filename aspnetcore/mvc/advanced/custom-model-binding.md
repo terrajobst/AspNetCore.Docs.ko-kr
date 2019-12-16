@@ -3,14 +3,14 @@ title: ASP.NET Core의 사용자 지정 모델 바인딩
 author: ardalis
 description: 모델 바인딩을 통해 컨트롤러 작업이 ASP.NET Core의 모델 형식과 함께 직접 작동할 수 있게 하는 방법을 알아봅니다.
 ms.author: riande
-ms.date: 11/13/2018
+ms.date: 12/05/2019
 uid: mvc/advanced/custom-model-binding
-ms.openlocfilehash: b2fbe6a9f11315d1fb8863fbf62e8929c7ff3fc2
-ms.sourcegitcommit: d34b2627a69bc8940b76a949de830335db9701d3
+ms.openlocfilehash: 625cc6c9ca5a2c22d028ea25f8fc0d942b71f12d
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/23/2019
-ms.locfileid: "71186876"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74881125"
 ---
 # <a name="custom-model-binding-in-aspnet-core"></a>ASP.NET Core의 사용자 지정 모델 바인딩
 
@@ -38,7 +38,7 @@ Base64로 인코딩된 문자열은 이진 데이터를 나타내는 데 사용�
 
 인코딩된 문자열의 일부가 다음 그림에 표시되어 있습니다.
 
-![인코딩된 dotnet bot](custom-model-binding/images/encoded-bot.png "인코딩된 dotnet bot")
+![dotnet bot encoded](custom-model-binding/images/encoded-bot.png "dotnet bot encoded")
 
 [샘플의 추가 정보](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/advanced/custom-model-binding/sample/CustomModelBindingSample/README.md)에 제공된 지침에 따라 base64로 인코딩된 문자열을 파일로 변환합니다.
 
@@ -124,7 +124,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 
 다음 이미지는 디버거의 기본 모델 바인더를 보여줍니다.
 
-![기본 모델 바인더](custom-model-binding/images/default-model-binders.png "기본 모델 바인더")
+![default model binders](custom-model-binding/images/default-model-binders.png "default model binders")
 
 컬렉션 끝에 공급자를 추가하면 사용자 지정 바인더가 기회를 얻기도 전에 기본 제공 모델 바인더가 호출될 수 있습니다. 이 예제에서는 `Author` 작업 인수에 사용되도록 사용자 지정 공급자를 컬렉션의 시작 부분에 추가합니다.
 
@@ -147,4 +147,4 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 
 - 상태 코드를 설정하거나 결과를 반환하려고 시도하면 안 됩니다(예를 들어 404 찾을 수 없음). 모델 바인딩이 실패하면 [작업 필터](xref:mvc/controllers/filters) 또는 작업 메서드 자체의 논리에서 오류를 처리해야 합니다.
 - 작업 메서드에서 반복 코드와 교차 편집 문제를 제거하는 데 가장 유용합니다.
-- 일반적으로 문자열을 사용자 지정 형식으로 변환하는 데 사용되지 않습니다. [`TypeConverter`](/dotnet/api/system.componentmodel.typeconverter)가 더 좋은 옵션입니다.
+- 일반적으로 문자열을 사용자 지정 형식으로 변환하는 데 사용되지 않습니다. [TypeConverter](/dotnet/api/system.componentmodel.typeconverter)가 더 좋은 옵션입니다.

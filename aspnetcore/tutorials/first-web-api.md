@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core를 사용하여 웹 API를 빌드하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/29/2019
+ms.date: 12/05/2019
 uid: tutorials/first-web-api
-ms.openlocfilehash: abb55ea12583374639f28945037cb6aa41a5a32d
-ms.sourcegitcommit: 77c8be22d5e88dd710f42c739748869f198865dd
+ms.openlocfilehash: 4377d7d1895b80b3c98a5b480c0f42820f11fbb8
+ms.sourcegitcommit: 4e3edff24ba6e43a103fee1b126c9826241bb37b
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/01/2019
-ms.locfileid: "73427042"
+ms.lasthandoff: 12/10/2019
+ms.locfileid: "74959114"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>자습서: ASP.NET Core를 사용하여 웹 API 만들기
 
@@ -52,15 +52,15 @@ ms.locfileid: "73427042"
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!INCLUDE[](~/includes/net-core-prereqs-vs-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-[!INCLUDE[](~/includes/net-core-prereqs-vsc-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-vsc-3.1.md)]
 
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
-[!INCLUDE[](~/includes/net-core-prereqs-mac-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-mac-3.1.md)]
 
 ---
 
@@ -71,7 +71,7 @@ ms.locfileid: "73427042"
 * **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.
 * **ASP.NET Core 웹 애플리케이션** 템플릿을 선택하고 **다음**을 클릭합니다.
 * 프로젝트 이름을 *TodoApi*로 지정하고 **만들기**를 클릭합니다.
-* **새 ASP.NET Core 웹 애플리케이션 만들기** 대화 상자에서 **.NET Core** 및 **ASP.NET Core 3.0**이 선택되었는지 확인합니다. **API** 템플릿을 선택하고 **만들기**를 클릭합니다.
+* **새 ASP.NET Core 웹 애플리케이션 만들기** 대화 상자에서 **.NET Core** 및 **ASP.NET Core 3.1**이 선택되었는지 확인합니다. **API** 템플릿을 선택하고 **만들기**를 클릭합니다.
 
 ![VS 새 프로젝트 대화 상자](first-web-api/_static/vs3.png)
 
@@ -106,7 +106,7 @@ ms.locfileid: "73427042"
 
   ![macOS 새 프로젝트 대화 상자](first-web-api-mac/_static/1.png)
   
-* **새 ASP.NET Core Web API 구성** 대화 상자에서 * *.NET Core 3.0*의 **대상 프레임워크**를 선택합니다.
+* **새 ASP.NET Core Web API 구성** 대화 상자에서 * *.NET Core 3.1*의 **대상 프레임워크**를 선택합니다.
 
 * **프로젝트 이름**으로 *TodoApi*를 입력한 다음, **만들기**를 선택합니다.
 
@@ -297,7 +297,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 생성된 코드는:
 
 * 메서드 없이 API 컨트롤러 클래스를 정의합니다.
-* [[ApiController]](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) 특성을 사용하여 클래스를 데코레이팅합니다. 이 특성은 컨트롤러가 웹 API 요청에 응답함을 나타냅니다. 특성을 사용하도록 설정하는 특정 동작에 대한 정보는 <xref:web-api/index>를 참조하세요.
+* [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) 특성으로 클래스를 표시합니다. 이 특성은 컨트롤러가 웹 API 요청에 응답함을 나타냅니다. 특성을 사용하도록 설정하는 특정 동작에 대한 정보는 <xref:web-api/index>를 참조하세요.
 * DI를 사용하여 데이터베이스 컨텍스트(`TodoContext`)를 컨트롤러에 삽입합니다. 컨트롤러의 각 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 메서드에서 해당 데이터베이스 컨텍스트를 사용합니다.
 
 ## <a name="examine-the-posttodoitem-create-method"></a>PostTodoItem 만들기 메서드 검사
@@ -306,7 +306,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Create)]
 
-이전 코드는 [[HttpPost]](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) 특성으로 표시되는 HTTP POST 메서드입니다. 이 메서드는 HTTP 요청 본문에서 할 일 항목 값을 가져옵니다.
+위의 코드는 [`[HttpPost]`](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) 특성으로 표시되는 HTTP POST 메서드입니다. 이 메서드는 HTTP 요청 본문에서 할 일 항목 값을 가져옵니다.
 
 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> 메서드는 다음 작업을 수행합니다.
 
@@ -679,7 +679,7 @@ ASP.NET Core에서는 DB 컨텍스트와 같은 서비스를 [DI(종속성 주�
 위의 코드는
 
 * 메서드 없이 API 컨트롤러 클래스를 정의합니다.
-* [[ApiController]](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) 특성을 사용하여 클래스를 데코레이팅합니다. 이 특성은 컨트롤러가 웹 API 요청에 응답함을 나타냅니다. 특성을 사용하도록 설정하는 특정 동작에 대한 정보는 <xref:web-api/index>를 참조하세요.
+* [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) 특성으로 클래스를 표시합니다. 이 특성은 컨트롤러가 웹 API 요청에 응답함을 나타냅니다. 특성을 사용하도록 설정하는 특정 동작에 대한 정보는 <xref:web-api/index>를 참조하세요.
 * DI를 사용하여 데이터베이스 컨텍스트(`TodoContext`)를 컨트롤러에 삽입합니다. 컨트롤러의 각 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 메서드에서 해당 데이터베이스 컨텍스트를 사용합니다.
 * 데이터베이스가 비어 있는 경우 데이터베이스에 `Item1`이라는 항목을 추가합니다. 이 코드는 생성자에 위치하므로 새 HTTP 요청이 발생할 때마다 실행됩니다. 모든 항목을 삭제하면 생성자는 다음에 API가 호출될 경우 `Item1`을 다시 만듭니다. 따라서 실제로 작동되는 경우 삭제가 작동하지 않는 것처럼 보일 수 있습니다.
 
@@ -773,7 +773,7 @@ ASP.NET Core에서는 DB 컨텍스트와 같은 서비스를 [DI(종속성 주�
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_Create)]
 
-이전 코드는 [[HttpPost]](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) 특성으로 표시되는 HTTP POST 메서드입니다. 이 메서드는 HTTP 요청 본문에서 할 일 항목 값을 가져옵니다.
+위의 코드는 [`[HttpPost]`](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) 특성으로 표시되는 HTTP POST 메서드입니다. 이 메서드는 HTTP 요청 본문에서 할 일 항목 값을 가져옵니다.
 
 `CreatedAtAction` 메서드는 다음 작업을 수행합니다.
 

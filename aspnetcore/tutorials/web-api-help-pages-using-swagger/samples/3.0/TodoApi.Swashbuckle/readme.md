@@ -10,12 +10,12 @@ products:
 - vs-code
 - vs-mac
 urlFragment: getstarted-swashbuckle-aspnetcore
-ms.openlocfilehash: d48288de90626ada83f5da1759f0057f0be46f19
-ms.sourcegitcommit: f91d322f790123d41ec3271fa084ae20ed9f89a6
+ms.openlocfilehash: e02247325f430b0ce23dbb3f5bc344a60a1a164a
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/18/2019
-ms.locfileid: "74155153"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74879725"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Swashbuckle 및 ASP.NET Core 시작
 
@@ -334,7 +334,7 @@ public ActionResult<TodoItem> Create(TodoItem item)
 
 ### <a name="data-annotations"></a>데이터 주석
 
-[System.ComponentModel.DataAnnotations](/dotnet/api/system.componentmodel.dataannotations) 네임스페이스에 있는 특성으로 모델을 데코레이트하여 Swagger UI 구성 요소를 구동합니다.
+[System.ComponentModel.DataAnnotations](/dotnet/api/system.componentmodel.dataannotations) 네임스페이스에 있는 특성으로 모델을 표시하여 Swagger UI 구성 요소를 구동합니다.
 
 `[Required]` 특성을 `TodoItem` 클래스의 `Name` 속성에 추가합니다.
 

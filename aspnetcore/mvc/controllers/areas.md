@@ -3,14 +3,14 @@ title: ASP.NET Core의 영역
 author: rick-anderson
 description: 관련 기능을 별도의 네임스페이스(라우팅용) 및 폴더 구조(보기용)로 그룹화하는 데 사용되는 ASP.NET MVC 기능인 영역에 대해 알아봅니다.
 ms.author: riande
-ms.date: 08/16/2019
+ms.date: 12/05/2019
 uid: mvc/controllers/areas
-ms.openlocfilehash: 9065aa23a537add5a9376472e4f4478e9d4149bd
-ms.sourcegitcommit: 776598f71da0d1e4c9e923b3b395d3c3b5825796
+ms.openlocfilehash: 7e02a21361e0e2148b29a3ae0f1ba25e68239e13
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/26/2019
-ms.locfileid: "70024739"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74881120"
 ---
 # <a name="areas-in-aspnet-core"></a>ASP.NET Core의 영역
 
@@ -25,7 +25,7 @@ ms.locfileid: "70024739"
 * 앱이 논리적으로 분리할 수 있는 여러 개의 높은 수준의 기능 구성 요소로 이루어져 있습니다.
 * 각 기능 영역을 독립적으로 작업할 수 있도록 앱을 나누고자 합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples) ([다운로드 방법](xref:index#how-to-download-a-sample)). 다운로드 예제는 영역을 테스트하기 위한 기초적인 앱을 제공합니다.
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples) ([다운로드 방법](xref:index#how-to-download-a-sample)). 다운로드 예제는 영역을 테스트하기 위한 기초적인 앱을 제공합니다. 다운로드 샘플은 테스트 영역에 대한 기본 앱을 제공합니다.
 
 Razor Pages를 사용하는 경우 이 문서의 [Razor Pages를 사용한 영역](#areas-with-razor-pages)을 참조하세요.
 
@@ -34,7 +34,7 @@ Razor Pages를 사용하는 경우 이 문서의 [Razor Pages를 사용한 영�
 영역, 컨트롤러 및 보기를 사용하는 일반적인 ASP.NET Core 웹앱은 다음을 포함합니다.
 
 * [영역 폴더 구조](#area-folder-structure).
-* 영역과 연결하기 위해 [&lbrack;Area&rbrack;](#attribute) 특성으로 데코레이팅 된 컨트롤러:
+* 컨트롤러를 영역과 연결하는 [`[Area]`](#attribute) 특성이 있는 컨트롤러:
 
   [!code-csharp[](areas/samples/MVCareas/Areas/Products/Controllers/ManageController.cs?name=snippet2)]
 
@@ -173,7 +173,7 @@ Razor Pages를 사용한 영역은 앱 루트에 *Areas/<area name>/Pages* 폴�
 
 각 영역의 *Pages* 폴더에 *_ViewImports.cshtml* 파일을 추가하여 네임스페이스 및 태그 도우미를 폴더의 각 Razor Page로 가져올 수 있습니다.
 
-*_ViewImports.cshtml* 파일이 없는 예제 코드의 *Services* 영역을 살펴보겠습니다. 다음 태그는 */Services/Manage/About* Razor Page를 보여줍니다.
+*_ViewImports.cshtml* 파일이 없는 샘플 코드의 *Services* 영역을 살펴보겠습니다. 다음 태그는 */Services/Manage/About* Razor 페이지를 보여 줍니다.
 
 [!code-cshtml[](areas/samples/RPareas/Areas/Services/Pages/Manage/About.cshtml)]
 
@@ -200,6 +200,4 @@ Razor Pages를 사용한 영역은 앱 루트에 *Areas/<area name>/Pages* 폴�
 
 ### <a name="publishing-areas"></a>영역 게시
 
-
-*.csproj 파일에 `<Project Sdk="Microsoft.NET.Sdk.Web">`이 포함되면 *.cshtml 파일 및 *wwwroot* 디렉터리 내의 모든 파일이 출력에 게시됩니다.
-
+*.csproj 파일에 `<Project Sdk="Microsoft.NET.Sdk.Web">``이 포함되면 *.cshtml 파일 및 *wwwroot* 디렉터리 내의 모든 파일이 출력에 게시됩니다.

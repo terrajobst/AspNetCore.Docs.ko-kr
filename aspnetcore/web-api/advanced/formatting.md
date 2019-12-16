@@ -4,14 +4,14 @@ author: ardalis
 description: ASP.NET Core Web API에서 응답 데이터의 서식을 지정하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: H1Hack27Feb2017
-ms.date: 8/22/2019
+ms.date: 12/05/2019
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 78fe620ea8fdd681a276253f77939bcb2a56ebb9
-ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
+ms.openlocfilehash: cab383053751598b882f3716943d3d9392c56f4a
+ms.sourcegitcommit: 29ace642ca0e1f0b48a18d66de266d8811df2b83
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72391286"
+ms.lasthandoff: 12/10/2019
+ms.locfileid: "74987963"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>ASP.NET Core Web API에서 응답 데이터 서식 지정
 
@@ -118,7 +118,7 @@ Accept 헤더에 `*/*`가 포함되는 경우, `RespectBrowserAcceptHeader`가 <
 
 위의 코드는 `XmlSerializer`를 사용하여 결과를 직렬화합니다.
 
-위의 코드를 사용할 때 컨트롤러 메서드는 요청의 `Accept` 헤더에 따라 적절한 형식을 반환해야 합니다.
+위의 코드를 사용할 때 컨트롤러 메서드는 요청의 `Accept` 헤더에 따라 적절한 형식을 반환합니다.
 
 ### <a name="configure-systemtextjson-based-formatters"></a>System.Text.Json 기반 포맷터 구성
 

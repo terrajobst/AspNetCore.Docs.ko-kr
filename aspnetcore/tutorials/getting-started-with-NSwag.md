@@ -4,14 +4,14 @@ author: zuckerthoben
 description: NSwag를 사용하여 ASP.NET Core Web API의 설명서 및 도움말 페이지를 생성하는 방법을 알아봅니다.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 06/21/2019
+ms.date: 12/05/2019
 uid: tutorials/get-started-with-nswag
-ms.openlocfilehash: 23927e6ce0a7b29ce3f32d4e7f7d3f234257ca9b
-ms.sourcegitcommit: eb2fe5ad2e82fab86ca952463af8d017ba659b25
+ms.openlocfilehash: bd68e134fb71fd396a30ec9c674111bc8536860d
+ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/01/2019
-ms.locfileid: "73416166"
+ms.lasthandoff: 12/09/2019
+ms.locfileid: "74944176"
 ---
 # <a name="get-started-with-nswag-and-aspnet-core"></a>NSwag 및 ASP.NET Core 시작
 
@@ -109,7 +109,7 @@ dotnet add TodoApi.csproj package NSwag.AspNetCore
 
 ### <a name="generate-code-with-nswagstudio"></a>NSwagStudio로 코드 생성
 
-* [NSwagStudio GitHub 리포지토리](https://github.com/RicoSuter/NSwag/wiki/NSwagStudio)의 지침에 따라 NSwagStudio를 설치합니다.
+* [NSwagStudio GitHub 리포지토리](https://github.com/RicoSuter/NSwag/wiki/NSwagStudio)의 지침에 따라 NSwagStudio를 설치합니다. NSwag 릴리스 페이지에서 설치 및 관리자 권한 없이 시작할 수 있는 xcopy 버전을 다운로드할 수 있습니다.
 * NSwagStudio를 시작하고 **Swagger 사양 URL** 텍스트 상자에 *swagger.json* 파일 URL을 입력합니다. 예를 들어 *http://localhost:44354/swagger/v1/swagger.json* 와 같습니다.
 * **로컬 복사본 만들기** 단추를 클릭하여 Swagger 사양의 JSON 표시를 생성합니다.
 
@@ -257,7 +257,7 @@ NSwag는 [리플렉션](/dotnet/csharp/programming-guide/concepts/reflection)을
 
 [!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.NSwag/Controllers/TodoController.cs?name=snippet_CreateAction)]
 
-이전 작업은 `IActionResult`를 반환하지만 작업 내에서는 [CreatedAtRoute](xref:System.Web.Http.ApiController.CreatedAtRoute*) 또는 [BadRequest](xref:System.Web.Http.ApiController.BadRequest*)를 반환합니다. 데이터 주석을 사용하여 이 작업이 반환하는 것으로 알려진 HTTP 상태 코드를 클라이언트에 알립니다. 다음 특성으로 작업을 데코레이트하세요.
+이전 작업은 `IActionResult`를 반환하지만 작업 내에서는 [CreatedAtRoute](xref:System.Web.Http.ApiController.CreatedAtRoute*) 또는 [BadRequest](xref:System.Web.Http.ApiController.BadRequest*)를 반환합니다. 데이터 주석을 사용하여 이 작업이 반환하는 것으로 알려진 HTTP 상태 코드를 클라이언트에 알립니다. 다음 특성을 사용하여 작업을 표시합니다.
 
 [!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.NSwag/Controllers/TodoController.cs?name=snippet_CreateActionAttributes)]
 
@@ -271,7 +271,7 @@ NSwag는 [리플렉션](/dotnet/csharp/programming-guide/concepts/reflection)을
 
 [!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.NSwag/Controllers/TodoController.cs?name=snippet_CreateAction)]
 
-이전 작업이 `ActionResult<T>`를 반환합니다. 작업 내에서 [CreatedAtRoute](xref:System.Web.Http.ApiController.CreatedAtRoute*)를 반환합니다. 컨트롤러가 [[ApiController]](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) 특성을 사용하여 데코레이트되므로 [BadRequest](xref:System.Web.Http.ApiController.BadRequest*) 응답도 가능합니다. 자세한 정보는 [자동 HTTP 400 응답](xref:web-api/index#automatic-http-400-responses)을 참조하세요. 데이터 주석을 사용하여 이 작업이 반환하는 것으로 알려진 HTTP 상태 코드를 클라이언트에 알립니다. 다음 특성으로 작업을 데코레이트하세요.
+이전 작업이 `ActionResult<T>`를 반환합니다. 작업 내에서 [CreatedAtRoute](xref:System.Web.Http.ApiController.CreatedAtRoute*)를 반환합니다. 컨트롤러에는 [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) 특성이 있으므로 [BadRequest](xref:System.Web.Http.ApiController.BadRequest*) 응답도 가능합니다. 자세한 정보는 [자동 HTTP 400 응답](xref:web-api/index#automatic-http-400-responses)을 참조하세요. 데이터 주석을 사용하여 이 작업이 반환하는 것으로 알려진 HTTP 상태 코드를 클라이언트에 알립니다. 다음 특성을 사용하여 작업을 표시합니다.
 
 [!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.NSwag/Controllers/TodoController.cs?name=snippet_CreateActionAttributes)]
 
@@ -279,6 +279,6 @@ ASP.NET Core 2.2 이상에서는 `[ProducesResponseType]`을 사용하여 명시
 
 ::: moniker-end
 
-이제 Swagger 생성기는 이 작업을 정확하게 설명할 수 있으며, 생성된 클라이언트가 엔드포인트를 호출할 때 수신한 내용을 알 수 있습니다. 이러한 특성으로 모든 작업을 데코레이트하는 것이 좋습니다.
+이제 Swagger 생성기는 이 작업을 정확하게 설명할 수 있으며, 생성된 클라이언트가 엔드포인트를 호출할 때 수신한 내용을 알 수 있습니다. 모든 작업을 이러한 특성으로 표시하는 것이 좋습니다.
 
 API 작업에서 반환해야 하는 HTTP 응답에 대한 지침은 [RFC 7231 사양](https://tools.ietf.org/html/rfc7231#section-4.3)을 참조하세요.
