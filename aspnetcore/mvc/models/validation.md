@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core MVC 및 Razor Pages의 모델 유효성 검사에 대해 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/21/2019
+ms.date: 12/05/2019
 uid: mvc/models/validation
-ms.openlocfilehash: 19f71799e958e2761832c91cec6762a6d391d2b5
-ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
+ms.openlocfilehash: 7a6017141eb1016128c4a135c187479717580bb5
+ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/22/2019
-ms.locfileid: "74317434"
+ms.lasthandoff: 12/06/2019
+ms.locfileid: "74881038"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>ASP.NET Core MVC 및 Razor Pages의 모델 유효성 검사
 
@@ -55,10 +55,10 @@ ms.locfileid: "74317434"
 * `[Phone]`: 속성에 전화 번호 형식이 있는지 유효성을 검사합니다.
 * `[Range]`: 속성 값이 지정된 범위 내에 포함되는지 유효성을 검사합니다.
 * `[RegularExpression]`: 속성 값이 지정된 정규 식과 일치하는지 유효성을 검사합니다.
-* `[Required]`: 필드가 Null이 아닌지 유효성을 검사합니다. 이 특성 동작에 대한 자세한 내용은 [[Required] 특성](#required-attribute)을 참조하세요.
+* `[Required]`: 필드가 Null이 아닌지 유효성을 검사합니다. 이 특성의 동작에 대한 자세한 내용은 [`[Required]` 특성](#required-attribute)을 참조하세요.
 * `[StringLength]`: 문자열 속성 값이 지정된 길이 한계를 초과하지 않는지 유효성을 검사합니다.
 * `[Url]`: 속성에 URL 형식이 있는지 유효성을 검사합니다.
-* `[Remote]`: 서버에 대한 작업 명령을 호출하여 클라이언트에 대한 입력의 유효성을 검사합니다. 이 특성의 동작에 대한 자세한 내용은 [[Remote] 특성](#remote-attribute)을 참조하세요.
+* `[Remote]`: 서버에 대한 작업 명령을 호출하여 클라이언트에 대한 입력의 유효성을 검사합니다. 이 특성의 동작에 대한 자세한 내용은 `[`[Remote]` 특성](#remote-attribute)을 참조하세요.
 
 유효성 검사 특성의 전체 목록은 [System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnotations) 네임스페이스에서 확인할 수 있습니다.
 
@@ -134,7 +134,7 @@ ms.locfileid: "74317434"
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Models/User.cs?name=snippet_Name&highlight=1,5)]
 
-`AdditionalFields`를 명시적으로 문자열 `"FirstName"` 및 `"LastName"`으로 설정할 수 있지만 [`nameof`](/dotnet/csharp/language-reference/keywords/nameof) 연산자를 사용하면 이후 리팩터링이 단순해집니다. 이 유효성 검사의 작업 메서드는 `firstName`과 `lastName` 인수를 모두 허용해야 합니다.
+`AdditionalFields`는 명시적으로 믄자열 "FirstName" 및 "LastName"으로 설정할 수 있지만 [nameof](/dotnet/csharp/language-reference/keywords/nameof) 연산자를 사용하면 나중에 리팩터링이 간단해집니다. 이 유효성 검사의 작업 메서드는 `firstName`과 `lastName` 인수를 모두 허용해야 합니다.
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Controllers/UsersController.cs?name=snippet_VerifyName)]
 
@@ -255,9 +255,13 @@ public string MiddleName { get; set; }
 </div>
 ```
 
-HTML의 `data-` 특성 출력은 `Movie.ReleaseDate` 속성에 대한 유효성 검사 특성에 해당합니다. `data-val-required` 특성은 사용자가 릴리스 날짜 필드를 입력하지 않았음을 표시하는 오류 메시지를 포함합니다. jQuery 비간섭 유효성 검사는 jQuery 유효성 검사 [`required()`](https://jqueryvalidation.org/required-method/) 메서드에 이 값을 전달합니다. 그러면 **\<span>** 요소와 함께 해당 메시지를 표시합니다.
+HTML의 `data-` 특성 출력은 `Movie.ReleaseDate` 속성에 대한 유효성 검사 특성에 해당합니다. `data-val-required` 특성은 사용자가 릴리스 날짜 필드를 입력하지 않았음을 표시하는 오류 메시지를 포함합니다. jQuery 비간섭 유효성 검사는 jQuery 유효성 검사 [required()](https://jqueryvalidation.org/required-method/) 메서드에 이 값을 전달합니다. 그러면 **\<span>** 요소와 함께 해당 메시지를 표시합니다.
 
 데이터 형식 유효성 검사는 `[DataType]` 특성에 의해 재정의되지 않은 한, 속성의 .NET 형식을 기반으로 합니다. 브라우저는 고유한 기본 오류 메시지를 가지고 있지만 jQuery유효성 검사의 비간섭 유효성 검사 패키지는 해당 메시지를 재정의할 수 있습니다. `[DataType]` 특성 및 `[EmailAddress]`와 같은 서브클래스를 사용하여 오류 메시지를 지정할 수 있습니다.
+
+## <a name="unobtrusive-validation"></a>비간섭 유효성 검사
+
+비간섭 유효성 검사에 대한 자세한 내용은 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/1111)를 참조하세요.
 
 ### <a name="add-validation-to-dynamic-forms"></a>동적 형식에 유효성 검사 추가
 
@@ -415,10 +419,10 @@ $.get({
 * `[Phone]`: 속성에 전화 번호 형식이 있는지 유효성을 검사합니다.
 * `[Range]`: 속성 값이 지정된 범위 내에 포함되는지 유효성을 검사합니다.
 * `[RegularExpression]`: 속성 값이 지정된 정규 식과 일치하는지 유효성을 검사합니다.
-* `[Required]`: 필드가 Null이 아닌지 유효성을 검사합니다. 이 특성 동작에 대한 자세한 내용은 [[Required] 특성](#required-attribute)을 참조하세요.
+* `[Required]`: 필드가 Null이 아닌지 유효성을 검사합니다. 이 특성의 동작에 대한 자세한 내용은 [`[Required]` 특성](#required-attribute)을 참조하세요.
 * `[StringLength]`: 문자열 속성 값이 지정된 길이 한계를 초과하지 않는지 유효성을 검사합니다.
 * `[Url]`: 속성에 URL 형식이 있는지 유효성을 검사합니다.
-* `[Remote]`: 서버에 대한 작업 명령을 호출하여 클라이언트에 대한 입력의 유효성을 검사합니다. 이 특성의 동작에 대한 자세한 내용은 [[Remote] 특성](#remote-attribute)을 참조하세요.
+* `[Remote]`: 서버에 대한 작업 명령을 호출하여 클라이언트에 대한 입력의 유효성을 검사합니다. 이 특성의 동작에 대한 자세한 내용은 [`[Remote]` 특성](#remote-attribute)을 참조하세요.
 
 유효성 검사 특성의 전체 목록은 [System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnotations) 네임스페이스에서 확인할 수 있습니다.
 
@@ -494,7 +498,7 @@ $.get({
 
 [!code-csharp[](validation/samples/2.x/ValidationSample/Models/User.cs?name=snippet_UserNameProperties)]
 
-`AdditionalFields`를 명시적으로 문자열 `"FirstName"` 및 `"LastName"`으로 설정할 수 있지만 [`nameof`](/dotnet/csharp/language-reference/keywords/nameof) 연산자를 사용하면 이후 리팩터링이 단순해집니다. 이 유효성 검사에 대한 작업 메서드에 대해서는 이름과 성 인수를 모두 지정할 수 있습니다.
+`AdditionalFields`는 명시적으로 문자열 `"FirstName"` 및 `"LastName"`으로 설정할 수 있지만 [nameof](/dotnet/csharp/language-reference/keywords/nameof) 연산자를 사용하면 이후 리팩터링이 간단해집니다. 이 유효성 검사에 대한 작업 메서드에 대해서는 이름과 성 인수를 모두 지정할 수 있습니다.
 
 [!code-csharp[](validation/samples/2.x/ValidationSample/Controllers/UsersController.cs?name=snippet_VerifyName)]
 
@@ -624,7 +628,7 @@ public string MiddleName { get; set; }
 </form>
 ```
 
-HTML의 `data-` 특성 출력은 `ReleaseDate` 속성에 대한 유효성 검사 특성에 해당합니다. `data-val-required` 특성은 사용자가 릴리스 날짜 필드를 입력하지 않았음을 표시하는 오류 메시지를 포함합니다. jQuery 비간섭 유효성 검사는 jQuery 유효성 검사 [`required()`](https://jqueryvalidation.org/required-method/) 메서드에 이 값을 전달합니다. 그러면 **\<span>** 요소와 함께 해당 메시지를 표시합니다.
+HTML의 `data-` 특성 출력은 `ReleaseDate` 속성에 대한 유효성 검사 특성에 해당합니다. `data-val-required` 특성은 사용자가 릴리스 날짜 필드를 입력하지 않았음을 표시하는 오류 메시지를 포함합니다. jQuery 비간섭 유효성 검사는 jQuery 유효성 검사 [required()](https://jqueryvalidation.org/required-method/) 메서드에 이 값을 전달합니다. 그러면 **\<span>** 요소와 함께 해당 메시지를 표시합니다.
 
 데이터 형식 유효성 검사는 `[DataType]` 특성에 의해 재정의되지 않은 한, 속성의 .NET 형식을 기반으로 합니다. 브라우저는 고유한 기본 오류 메시지를 가지고 있지만 jQuery유효성 검사의 비간섭 유효성 검사 패키지는 해당 메시지를 재정의할 수 있습니다. `[DataType]` 특성 및 `[EmailAddress]`와 같은 서브클래스를 사용하여 오류 메시지를 지정할 수 있습니다.
 
