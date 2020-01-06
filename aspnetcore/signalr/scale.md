@@ -9,12 +9,12 @@ ms.date: 11/28/2018
 no-loc:
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: 7fc767939996a489174be949742637030924616d
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 6506430202870ba9de2f8eb6f33d79c7c1fbbbd4
+ms.sourcegitcommit: e7d4fe6727d423f905faaeaa312f6c25ef844047
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963742"
+ms.lasthandoff: 01/02/2020
+ms.locfileid: "75608069"
 ---
 # <a name="aspnet-core-opno-locsignalr-hosting-and-scaling"></a>ASP.NET Core SignalR 호스팅 및 크기 조정
 
@@ -42,7 +42,7 @@ SignalR에 대 한 Azure App Service를 구성 하는 방법에 대 한 지침�
 
 SignalR에의 한 연결 관련 리소스의 과도 한 사용은 동일한 서버에서 호스트 되는 다른 웹 앱에 영향을 줄 수 있습니다. SignalR 열려 있고 마지막으로 사용 가능한 TCP 연결을 보유 하 고 있는 경우 같은 서버의 다른 웹 앱에도 더 이상 사용할 수 있는 연결이 없습니다.
 
-서버에 연결 되지 않은 경우 임의의 소켓 오류 및 연결 다시 설정 오류가 표시 됩니다. 예를 들어 다음과 같은 가치를 제공해야 합니다.
+서버에 연결 되지 않은 경우 임의의 소켓 오류 및 연결 다시 설정 오류가 표시 됩니다. 예를 들면 다음과 같습니다.:
 
 ```
 An attempt was made to access a socket in a way forbidden by its access permissions...
@@ -90,13 +90,28 @@ Redis 후면판은 사용자의 인프라에서 호스트 되는 앱에 대해 �
 
 앞에서 설명한 Azure SignalR 서비스 이점은 Redis 후면판의 단점입니다.
 
-* [클라이언트 선호도](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing#step-3---configure-client-affinity)라고도 하는 고정 세션이 필요 합니다. 서버에서 연결을 시작한 후에는 해당 서버에서 연결을 유지 해야 합니다.
+* 다음 두 가지 조건에 **모두** 해당 하는 경우를 제외 하 고, [클라이언트 선호도](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing#step-3---configure-client-affinity)라고도 하는 고정 세션이 필요 합니다.
+  * 모든 클라이언트는 Websocket **만** 사용 하도록 구성 됩니다.
+  * [Skipnegotiation 설정은](xref:signalr/configuration#configure-additional-options) 클라이언트 구성에서 사용 하도록 설정 됩니다. 
+   서버에서 연결을 시작한 후에는 해당 서버에서 연결을 유지 해야 합니다.
 * SignalR 앱은 전송 되는 메시지가 적은 경우에도 클라이언트 수에 따라 규모를 확장 해야 합니다.
 * SignalR 앱은 SignalR없이 웹 앱 보다 훨씬 더 많은 연결 리소스를 사용 합니다.
 
+## <a name="iis-limitations-on-windows-client-os"></a>Windows 클라이언트 OS에 대 한 IIS 제한 사항
+
+Windows 10 및 Windows 8.x은 클라이언트 운영 체제입니다. 클라이언트 운영 체제의 IIS는 동시 연결 수가 10 개로 제한 됩니다. SignalR의 연결은 다음과 같습니다.
+
+* 일시적 이며 자주 다시 설정 됩니다.
+* 더 이상 사용 되지 않는 경우 즉시 삭제 **되지 않습니다** .
+
+위의 조건은 클라이언트 OS에서 10 개의 연결 제한에 도달할 가능성이 높습니다. 개발에 클라이언트 OS를 사용 하는 경우 다음을 수행 하는 것이 좋습니다.
+
+* IIS를 사용 하지 않습니다.
+* Kestrel 또는 IIS Express을 배포 대상으로 사용 합니다.
+
 ## <a name="next-steps"></a>다음 단계
 
-자세한 내용은 다음 자료를 참조하세요.
+자세한 내용은 다음 참고 자료를 참조하십시오.
 
 * [Azure SignalR 서비스 설명서](/azure/azure-signalr/signalr-overview)
 * [Redis 후면판 설정](xref:signalr/redis-backplane)

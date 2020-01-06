@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/25/2019
 uid: grpc/migration
-ms.openlocfilehash: c4c07808540c9af370bfa253e8154a8a19f0f3de
-ms.sourcegitcommit: 897d4abff58505dae86b2947c5fe3d1b80d927f3
+ms.openlocfilehash: 451171a041f7bbb3711babd73d2fa2e245aadd28
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73634066"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75355133"
 ---
 # <a name="migrating-grpc-services-from-c-core-to-aspnet-core"></a>C 코어에서 ASP.NET Core로 gRPC 서비스 마이그레이션
 
@@ -82,7 +82,7 @@ C 코어 기반 앱은 [Server. Ports 속성](https://grpc.io/grpc/csharp/api/Gr
 
 ## <a name="grpc-interceptors-vs-middleware"></a>gRPC 인터셉터 vs 미들웨어
 
-ASP.NET Core [미들웨어](xref:fundamentals/middleware/index) 는 C 코어 기반 grpc 앱의 인터셉터와 비교할 때 비슷한 기능을 제공 합니다. ASP.NET Core 미들웨어 및 인터셉터는 개념적으로 유사 합니다. 양방향
+ASP.NET Core [미들웨어](xref:fundamentals/middleware/index) 는 C 코어 기반 grpc 앱의 인터셉터와 비교할 때 비슷한 기능을 제공 합니다. ASP.NET Core 미들웨어 및 인터셉터는 개념적으로 유사 합니다. 모두:
 
 * 는 gRPC 요청을 처리 하는 파이프라인을 생성 하는 데 사용 됩니다.
 * 파이프라인의 다음 구성 요소 전이나 후에 작업을 수행할 수 있습니다.
@@ -97,6 +97,7 @@ ASP.NET Core 미들웨어와의 gRPC 인터셉터 차이점:
   * 다음에 대 한 액세스를 제공 합니다.
     * 호출에 전송 된 deserialize 된 메시지입니다.
     * 메시지를 serialize 하기 전에 호출에서 반환 되는 메시지입니다.
+  * GRPC 서비스에서 throw 된 예외를 catch 하 고 처리할 수 있습니다.
 * 미들웨어
   * GRPC 인터셉터 이전에 실행 됩니다.
   * 기본 HTTP/2 메시지에서 작동 합니다.

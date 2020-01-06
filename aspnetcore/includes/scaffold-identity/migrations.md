@@ -5,6 +5,7 @@
 Visual studio에서 **패키지 관리자 콘솔**:
 
 ```powershell
+Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
 Add-Migration CreateIdentitySchema
 Update-Database
 ```
@@ -18,4 +19,4 @@ dotnet ef database update
 
 ---
 
-`Add-Migration` 명령에 대 한 "CreateIdentitySchema" name 매개 변수는 임의입니다. `"CreateIdentitySchema"`마이그레이션에 대해 설명 합니다.
+`Add-Migration` 명령에 대 한 "CreateIdentitySchema" name 매개 변수는 임의입니다. `"CreateIdentitySchema"` 마이그레이션에 대해 설명 합니다.
