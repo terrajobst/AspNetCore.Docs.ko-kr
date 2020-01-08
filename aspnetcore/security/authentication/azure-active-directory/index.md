@@ -3,22 +3,22 @@ title: ASP.NET Core와 Azure Active Directory
 author: rick-anderson
 description: ASP.NET Core에서 Azure Active Directory를 사용하여 인증과 관련된 토픽을 검색합니다.
 ms.author: riande
-ms.date: 10/16/2017
+ms.date: 12/18/2019
 ms.custom: mvc, seodec18
 uid: security/authentication/azure-active-directory/index
-ms.openlocfilehash: e16821154320566f8461b33ccbfc217551a007dc
-ms.sourcegitcommit: ce2bfb01f2cc7dd83f8a97da0689d232c71bcdc4
+ms.openlocfilehash: 10a174bdb5f9eeed7606d4f0ebb17badc3bc4182
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/17/2019
-ms.locfileid: "72531070"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75359188"
 ---
 # <a name="azure-active-directory-with-aspnet-core"></a>ASP.NET Core와 Azure Active Directory
 
 ## <a name="azure-ad-v1-samples"></a>Azure AD V1 샘플
 
 다음 샘플에서는 Azure AD V1을 통합하는 방법, 사용자가 회사 및 학교 계정으로 로그인하는 방법을 보여줍니다.
-* [ASP.NET Core 웹앱에 Azure AD 통합](https://github.com/Azure-Samples/active-directory-dotnet-webapp-openidconnect-aspnetcore)
+* [ASP.NET Core 웹앱에 Azure AD 통합](https://github.com/Azure-Samples/ms-identity-aspnetcore-webapp-tutorial)
 * [Azure AD를 사용하여 WPF 애플리케이션에서 ASP.NET Core Web API 호출](https://github.com/Azure-Samples/active-directory-dotnet-native-aspnetcore)
 * [Azure AD를 사용하여 ASP.NET Core 웹 애플리케이션에서 Web API 호출](https://azure.microsoft.com/documentation/samples/active-directory-dotnet-webapp-webapi-openidconnect-aspnetcore/)
 

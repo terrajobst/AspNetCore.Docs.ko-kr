@@ -4,14 +4,14 @@ author: blowdart
 description: IIS 및 HTTP.SYS 용 ASP.NET Core에서 인증서 인증을 구성 하는 방법에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
-ms.date: 12/09/2019
+ms.date: 01/02/2020
 uid: security/authentication/certauth
-ms.openlocfilehash: 38ee8a6767191bb3eee4286e49b96162b14d9889
-ms.sourcegitcommit: 4e3edff24ba6e43a103fee1b126c9826241bb37b
+ms.openlocfilehash: 9c175439c0313d62c75898f1af097774b06f353a
+ms.sourcegitcommit: e7d4fe6727d423f905faaeaa312f6c25ef844047
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/10/2019
-ms.locfileid: "74959062"
+ms.lasthandoff: 01/02/2020
+ms.locfileid: "75608147"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core에서 인증서 인증 구성
 
@@ -63,23 +63,33 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 ### <a name="allowedcertificatetypes--chained-selfsigned-or-all-chained--selfsigned"></a>AllowedCertificateTypes = 체인, SelfSigned 또는 모두 (연결 된 | SelfSigned)
 
-이 검사는 적절 한 인증서 유형만 허용 되는지 확인 합니다.
+기본값: `CertificateTypes.Chained`
+
+이 검사는 적절 한 인증서 유형만 허용 되는지 확인 합니다. 앱에서 자체 서명 된 인증서를 사용 하는 경우이 옵션을 `CertificateTypes.All` 또는 `CertificateTypes.SelfSigned`으로 설정 해야 합니다.
 
 ### <a name="validatecertificateuse"></a>ValidateCertificateUse
+
+기본값: `true`
 
 이 검사는 클라이언트에서 제공 하는 인증서에 클라이언트 인증 EKU (확장 키 사용)가 있거나 Eku가 없는지 확인 합니다. 지정 된 것 처럼 EKU가 지정 되지 않은 경우 모든 Eku가 유효한 것으로 간주 됩니다.
 
 ### <a name="validatevalidityperiod"></a>ValidateValidityPeriod
 
+기본값: `true`
+
 이 검사는 인증서가 유효 기간 내에 있는지 확인 합니다. 각 요청에서 처리기는 제공 된 유효한 인증서가 현재 세션 중에 만료 되지 않도록 합니다.
 
 ### <a name="revocationflag"></a>RevocationFlag
+
+기본값: `X509RevocationFlag.ExcludeRoot`
 
 체인에서 해지를 확인할 인증서를 지정 하는 플래그입니다.
 
 해지 검사는 인증서가 루트 인증서에 연결 된 경우에만 수행 됩니다.
 
 ### <a name="revocationmode"></a>RevocationMode
+
+기본값: `X509RevocationMode.Online`
 
 해지 검사를 수행 하는 방법을 지정 하는 플래그입니다.
 
@@ -208,7 +218,7 @@ public static IHostBuilder CreateHostBuilder(string[] args)
 ```
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*>를 호출하기 **전에** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*>을 호출하여 생성된 엔드포인트는 기본값이 적용되지 않습니다.
+> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*>를 호출 **하기 전에** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*>를 호출 하 여 만든 끝점에는 기본값이 적용 되지 않습니다.
 
 ### <a name="iis"></a>IIS
 
@@ -376,6 +386,9 @@ Get-ChildItem -Path cert:\localMachine\my\"The thumbprint..." | Export-PfxCertif
 
 Export-Certificate -Cert cert:\localMachine\my\"The thumbprint..." -FilePath root_ca_dev_damienbod.crt
 ```
+
+> [!NOTE]
+> `-DnsName` 매개 변수 값은 앱의 배포 대상과 일치 해야 합니다. 예를 들어 개발용 "localhost"입니다.
 
 #### <a name="install-in-the-trusted-root"></a>신뢰할 수 있는 루트에 설치
 

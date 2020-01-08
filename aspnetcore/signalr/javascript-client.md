@@ -9,12 +9,12 @@ ms.date: 11/12/2019
 no-loc:
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: 926160a41c82853d83890f0d52b14d7d5561a990
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: eaf737642cdbd7ab2b1b5c16538b47a70cddd332
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963779"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75354692"
 ---
 # <a name="aspnet-core-opno-locsignalr-javascript-client"></a>JavaScript 클라이언트 ASP.NET Core SignalR
 
@@ -22,11 +22,11 @@ ms.locfileid: "73963779"
 
 ASP.NET Core SignalR JavaScript 클라이언트 라이브러리를 사용 하면 개발자가 서버 쪽 허브 코드를 호출할 수 있습니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/javascript-client/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/javascript-client/sample)([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="install-the-opno-locsignalr-client-package"></a>SignalR 클라이언트 패키지를 설치 합니다.
 
-SignalR JavaScript 클라이언트 라이브러리는 [npm](https://www.npmjs.com/) 패키지로 제공 됩니다. Visual Studio를 사용 하는 경우 루트 폴더에 있는 동안 **패키지 관리자 콘솔** 에서 `npm install`를 실행 합니다. Visual Studio Code의 경우 **통합 터미널**에서 명령을 실행 합니다.
+SignalR JavaScript 클라이언트 라이브러리는 [npm](https://www.npmjs.com/) 패키지로 제공 됩니다. Visual Studio를 사용하고 있다면 **패키지 관리자 콘솔** 에서 루트 폴더에 있을 때 `npm install` 을 실행합니다. Visual Studio Code에서는 **통합 터미널** 에서 명령을 실행합니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -35,7 +35,7 @@ SignalR JavaScript 클라이언트 라이브러리는 [npm](https://www.npmjs.co
   npm install @microsoft/signalr
   ```
 
-npm *node_modules\\@microsoft\signalr\dist\browser* 폴더에 패키지 콘텐츠를 설치 합니다. *Wwwroot\\lib* 폴더 아래에 *signalr* 라는 새 폴더를 만듭니다. *Signalr* 파일을 *wwwroot\lib\signalr* 폴더에 복사 합니다.
+그러면 npm이 *node_modules\\@microsoft\signalr\dist\browser* 폴더에 패키지 콘텐츠를 설치합니다. *wwwroot\\lib* 폴더 하위에 *signalr* 이라는 새 폴더를 만듭니다 *signalr.js* 파일을 *wwwroot\lib\signalr* 폴더로 복사합니다.
 
 ::: moniker-end
 
@@ -46,7 +46,7 @@ npm *node_modules\\@microsoft\signalr\dist\browser* 폴더에 패키지 콘텐�
   npm install @aspnet/signalr
   ```
 
-npm *node_modules\\@aspnet\signalr\dist\browser* 폴더에 패키지 콘텐츠를 설치 합니다. *Wwwroot\\lib* 폴더 아래에 *signalr* 라는 새 폴더를 만듭니다. *Signalr* 파일을 *wwwroot\lib\signalr* 폴더에 복사 합니다.
+그러면 npm이 *node_modules\\@aspnet\signalr\dist\browser* 폴더에 패키지 콘텐츠를 설치합니다. *wwwroot\\lib* 폴더 하위에 *signalr* 이라는 새 폴더를 만듭니다 *signalr.js* 파일을 *wwwroot\lib\signalr* 폴더로 복사합니다.
 
 ::: moniker-end
 
@@ -58,26 +58,26 @@ npm *node_modules\\@aspnet\signalr\dist\browser* 폴더에 패키지 콘텐츠�
 <script src="~/lib/signalr/signalr.js"></script>
 ```
 
-## <a name="connect-to-a-hub"></a>허브에 연결
+## <a name="connect-to-a-hub"></a>허브에 연결하기
 
-다음 코드에서는 연결을 만들고 시작 합니다. 허브 이름은 대/소문자를 구분 하지 않습니다.
+다음 코드는 연결을 만들고 시작합니다. 허브의 이름은 대소문자를 구분하지 않습니다.
 
 [!code-javascript[Call hub methods](javascript-client/sample/wwwroot/js/chat.js?range=9-13,43-45)]
 
-### <a name="cross-origin-connections"></a>크로스-원본 연결
+### <a name="cross-origin-connections"></a>원본 간 연결
 
-일반적으로 브라우저는 요청 된 페이지와 동일한 도메인의 연결을 로드 합니다. 그러나 다른 도메인에 연결 해야 하는 경우도 있습니다.
+일반적으로 브라우저는 요청된 페이지와 동일한 도메인에서 연결을 로드합니다. 그러나 다른 도메인에 연결해야 하는 경우도 있습니다.
 
-악의적인 사이트에서 다른 사이트의 중요 한 데이터를 읽지 못하도록 하기 위해 [교차 원본 연결은](xref:security/cors) 기본적으로 사용 하지 않도록 설정 됩니다. 원본 간 요청을 허용 하려면 `Startup` 클래스에서 사용 하도록 설정 합니다.
+악의적인 사이트가 다른 사이트의 민감한 데이터를 읽지 못하게 막기 위해서, 기본적으로 [원본 간 연결](xref:security/cors) 은 비활성화되어 있습니다. 원본 간 요청을 허용하려면 `Startup` 클래스에서 이를 활성화하십시오.
 
 [!code-csharp[Cross-origin connections](javascript-client/sample/Startup.cs?highlight=29-35,56)]
 
-## <a name="call-hub-methods-from-client"></a>클라이언트에서 허브 메서드 호출
+## <a name="call-hub-methods-from-client"></a>클라이언트에서 허브 메서드 호출하기
 
-JavaScript 클라이언트는 [HubConnection](/javascript/api/%40aspnet/signalr/hubconnection)의 [invoke](/javascript/api/%40aspnet/signalr/hubconnection#invoke) 메서드를 통해 허브에서 공용 메서드를 호출 합니다. `invoke` 메서드는 두 개의 인수를 허용 합니다.
+JavaScript 클라이언트는 [HubConnection](/javascript/api/%40aspnet/signalr/hubconnection)의 [invoke](/javascript/api/%40aspnet/signalr/hubconnection#invoke) 메서드를 통해서 허브의 public 메서드를 호출합니다. 이 `invoke` 메서드는 두 가지 인수를 전달받습니다.
 
-* 허브 메서드의 이름입니다. 다음 예제에서는 허브의 메서드 이름이 `SendMessage`됩니다.
-* 허브 메서드에 정의 된 모든 인수입니다. 다음 예에서는 인수 이름을 `message`합니다. 예제 코드는 Internet Explorer를 제외한 모든 주요 브라우저의 현재 버전에서 지원 되는 화살표 함수 구문을 사용 합니다.
+* 허브 메서드의 이름. 다음 예제에서 허브 메서드의 이름은 `SendMessage`입니다.
+* 허브 메서드에 정의된 모든 인수. 다음 예제에서 인수의 이름은 `message`입니다. 예제 코드는 Internet Explorer를 제외한 모든 주요 브라우저의 현재 버전에서 지원 되는 화살표 함수 구문을 사용 합니다.
 
   [!code-javascript[Call hub methods](javascript-client/sample/wwwroot/js/chat.js?range=24)]
 
@@ -91,42 +91,42 @@ JavaScript 클라이언트는 [HubConnection](/javascript/api/%40aspnet/signalr/
 > [!NOTE]
 > `send` 사용 하면 서버에서 메시지를 받을 때까지 기다리지 않습니다. 따라서 서버에서 데이터 또는 오류를 반환할 수 없습니다.
 
-## <a name="call-client-methods-from-hub"></a>허브에서 클라이언트 메서드 호출
+## <a name="call-client-methods-from-hub"></a>허브에서 클라이언트 메서드 호출하기
 
-허브에서 메시지를 수신 하려면 `HubConnection`의 [on](/javascript/api/%40aspnet/signalr/hubconnection#on) 메서드를 사용 하 여 메서드를 정의 합니다.
+허브에서 메시지를 수신하려면 `HubConnection`의 [on](/javascript/api/%40aspnet/signalr/hubconnection#on) 메서드를 이용해서 메서드를 정의합니다.
 
-* JavaScript 클라이언트 메서드의 이름입니다. 다음 예제에서는 메서드 이름이 `ReceiveMessage`입니다.
-* 허브가 메서드에 전달 하는 인수입니다. 다음 예에서는 인수 값이 `message`됩니다.
+* JavaScript 클라이언트 메서드의 이름. 다음 예제에서 메서드 이름은 `ReceiveMessage`입니다.
+* 허브에서 메서드로 전달될 인수. 다음 예제에서 인수의 이름은 `message` 입니다.
 
 [!code-javascript[Receive calls from hub](javascript-client/sample/wwwroot/js/chat.js?range=14-19)]
 
-`connection.on`에서 위의 코드는 서버 쪽 코드가 [SendAsync](/dotnet/api/microsoft.aspnetcore.signalr.clientproxyextensions.sendasync) 메서드를 사용 하 여이를 호출할 때 실행 됩니다.
+위의 `connection.on` 내부의 코드는 서버 쪽 코드에서 [SendAsync](/dotnet/api/microsoft.aspnetcore.signalr.clientproxyextensions.sendasync) 메서드를 사용하여 이 코드를 호출할 때 실행됩니다.
 
 [!code-csharp[Call client-side](javascript-client/sample/hubs/chathub.cs?range=8-11)]
 
 SignalR은 `SendAsync` 및 `connection.on`에 정의 된 메서드 이름과 인수를 일치 시켜 호출할 클라이언트 메서드를 결정 합니다.
 
 > [!NOTE]
-> 모범 사례로, `on`후 `HubConnection`에서 [start](/javascript/api/%40aspnet/signalr/hubconnection#start) 메서드를 호출 합니다. 이렇게 하면 메시지를 받기 전에 처리기가 등록 됩니다.
+> 권장되는 방식은 `on` 메서드를 호출한 뒤에 `HubConnection`의 [start](/javascript/api/%40aspnet/signalr/hubconnection#start) 메서드를 호출하는 것입니다. 이렇게 하면 모든 메시지를 수신하기 전에 처리기가 먼저 등록됩니다.
 
 ## <a name="error-handling-and-logging"></a>오류 처리 및 로깅
 
-`catch` 메서드를 `start` 메서드의 끝에 연결 하 여 클라이언트 쪽 오류를 처리 합니다. `console.error`를 사용 하 여 브라우저의 콘솔에 오류를 출력 합니다.
+클라이언트 쪽 오류를 처리하려면 `start` 메서드의 끝에 `catch` 메서드를 연결합니다. 브라우저의 콘솔에 오류를 출력하려면 `console.error`를 사용합니다.
 
 [!code-javascript[Error handling](javascript-client/sample/wwwroot/js/chat.js?range=49-51)]
 
-연결이 설정 될 때 기록할 이벤트의 형식 및 형식을 전달 하 여 클라이언트 쪽 로그 추적을 설정 합니다. 메시지는 지정 된 로그 수준 이상으로 기록 됩니다. 사용 가능한 로그 수준은 다음과 같습니다.
+연결이 만들어지면 로거와 기록할 이벤트 유형을 전달하여 클라이언트 쪽 로그 추적을 설정합니다. 지정한 로그 수준 이상의 메시지가 기록됩니다. 사용 가능한 로그 수준은 다음과 같습니다.
 
-* &ndash; 오류 메시지를 `signalR.LogLevel.Error` 합니다. `Error` 메시지만 로깅합니다.
-* 잠재적 오류에 대 한 경고 메시지를 &ndash; `signalR.LogLevel.Warning` 합니다. `Warning`및 `Error` 메시지를 로깅합니다.
-* 오류 없이 &ndash; 상태 메시지를 `signalR.LogLevel.Information` 합니다. `Information`, `Warning`및 `Error` 메시지를 기록 합니다.
-* 추적 메시지를 &ndash; `signalR.LogLevel.Trace`. 허브와 클라이언트 간에 전송 되는 데이터를 포함 하 여 모든 것을 기록 합니다.
+* `signalR.LogLevel.Error` &ndash; 오류 메시지. `Error` 메시지만 기록합니다.
+* `signalR.LogLevel.Warning` &ndash; 잠재적 오류에 대한 경고 메시지. `Warning` 및 `Error` 메시지를 기록합니다.
+* `signalR.LogLevel.Information` &ndash; 오류가 아닌 상태 메시지. `Information`, `Warning` 및 `Error` 메시지를 기록합니다.
+* `signalR.LogLevel.Trace` &ndash; 추적 메시지. 허브와 클라이언트 간에 전송되는 데이터를 포함한 모든 것을 기록합니다.
 
-[HubConnectionBuilder](/javascript/api/%40aspnet/signalr/hubconnectionbuilder) 에서 [configureLogging](/javascript/api/%40aspnet/signalr/hubconnectionbuilder#configurelogging) 메서드를 사용 하 여 로그 수준을 구성 합니다. 메시지는 브라우저 콘솔에 기록 됩니다.
+로그 수준을 구성하려면 [HubConnectionBuilder](/javascript/api/%40aspnet/signalr/hubconnectionbuilder#configurelogging)의 [configureLogging](/javascript/api/%40aspnet/signalr/hubconnectionbuilder) 메서드를 사용합니다. 메시지는 브라우저 콘솔에 기록됩니다.
 
 [!code-javascript[Logging levels](javascript-client/sample/wwwroot/js/chat.js?range=9-12)]
 
-## <a name="reconnect-clients"></a>클라이언트 다시 연결
+## <a name="reconnect-clients"></a>클라이언트를 다시 연결
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -236,15 +236,16 @@ const connection = new signalR.HubConnectionBuilder()
     .withUrl("/chatHub")
     .withAutomaticReconnect({
         nextRetryDelayInMilliseconds: retryContext => {
-          if (retryContext.elapsedMilliseconds < 60000) {
-            // If we've been reconnecting for less than 60 seconds so far,
-            // wait between 0 and 10 seconds before the next reconnect attempt.
-            return Math.random() * 10000;
-          } else {
-            // If we've been reconnecting for more than 60 seconds so far, stop reconnecting.
-            return null;
-          }
-        })
+            if (retryContext.elapsedMilliseconds < 60000) {
+                // If we've been reconnecting for less than 60 seconds so far,
+                // wait between 0 and 10 seconds before the next reconnect attempt.
+                return Math.random() * 10000;
+            } else {
+                // If we've been reconnecting for more than 60 seconds so far, stop reconnecting.
+                return null;
+            }
+        }
+    })
     .build();
 ```
 
@@ -257,18 +258,18 @@ const connection = new signalR.HubConnectionBuilder()
 ::: moniker range="< aspnetcore-3.0"
 
 > [!WARNING]
-> 3\.0 이전 버전의 SignalR에 대 한 JavaScript 클라이언트는 자동으로 다시 연결 되지 않습니다. 클라이언트를 수동으로 다시 연결 하는 코드를 작성 해야 합니다.
+> 3\.0 이전 버전의 SignalR에 대 한 JavaScript 클라이언트는 자동으로 다시 연결 되지 않습니다. 클라이언트에 수동으로 다시 연결 하는 코드를 작성 해야 합니다.
 
 ::: moniker-end
 
 다음 코드에서는 일반적인 수동 다시 연결 방식을 보여 줍니다.
 
-1. 연결을 시작 하기 위해 함수 (이 경우 `start` 함수)가 만들어집니다.
-1. 연결의 `onclose` 이벤트 처리기에서 `start` 함수를 호출 합니다.
+1. 함수 (이 경우에 `start` 함수) 연결을 시작 하기 위해 만들어집니다.
+1. 호출 된 `start` 함수에서 연결의 `onclose` 이벤트 처리기입니다.
 
 [!code-javascript[Reconnect the JavaScript client](javascript-client/sample/wwwroot/js/chat.js?range=28-40)]
 
-실제 구현에서는 지 수 백오프를 사용 하거나 지정 된 횟수 만큼 다시 시도 하 여 포기 합니다.
+실제 구현을는 지 수 백오프를 사용 하거나 포기 하기 전에 지정 된 횟수를 다시 시도 하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 

@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: performance/memory
-ms.openlocfilehash: 85e34c9faa31a1020a4200eb99003455ca435ec3
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: dfc789d080beec09a4f0eb34c3809b9f2df0d4b5
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880942"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75357280"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core의 메모리 관리 및 GC (가비지 수집)
 
@@ -171,7 +171,7 @@ public ActionResult<string> GetStaticString()
 }
 ```
 
-위의 코드는
+위의 코드:
 
 * 는 일반적인 메모리 누수의 한 예입니다.
 * 를 자주 호출 하면 프로세스가 `OutOfMemory` 예외로 인해 충돌 될 때까지 응용 프로그램 메모리가 늘어납니다.
@@ -203,7 +203,7 @@ public void GetFileProvider()
 }
 ```
 
-[PhysicaFileProvider](/dotnet/api/microsoft.extensions.fileproviders.physicalfileprovider?view=dotnet-plat-ext-3.0) 는 관리 되는 클래스 이므로 인스턴스가 요청 끝에서 수집 됩니다.
+실제 [Fileprovider](/dotnet/api/microsoft.extensions.fileproviders.physicalfileprovider?view=dotnet-plat-ext-3.0) 는 관리 되는 클래스 이므로 인스턴스가 요청 끝에서 수집 됩니다.
 
 다음 이미지는 `fileprovider` API를 계속 호출 하는 동안 메모리 프로필을 보여 줍니다.
 

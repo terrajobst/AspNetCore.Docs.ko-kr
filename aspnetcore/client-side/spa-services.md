@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: H1Hack27Feb2017
 ms.date: 09/06/2019
 uid: client-side/spa-services
-ms.openlocfilehash: 7aff46f739239246191763e0590046b2d9995922
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 52285999d7710cc3198836b9246596980cfc1666
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71080503"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75355782"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>JavaScript 서비스를 사용 하 여 ASP.NET Core에서 단일 페이지 응용 프로그램 만들기
 
@@ -69,7 +69,7 @@ SpaServices를 사용하려면 다음을 설치합니다.
     node -v && npm -v
     ```
 
-  * Azure 웹 사이트에 배포 하는 경우에는 어떤 조치도&mdash;필요 하지 않습니다. node.js가 설치 되 고 서버 환경에서 사용할 수 있습니다.
+  * Azure 웹 사이트에 배포 하는 경우 서버 환경에서 node.js를 설치 하 고 사용할 수&mdash;아무런 조치가 필요 하지 않습니다.
 
 * [!INCLUDE [](~/includes/net-core-sdk-download-link.md)]
 
@@ -195,7 +195,7 @@ app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
 
 대부분의 ASP.NET Core 기반 SPAs에서 클라이언트 쪽 라우팅은 서버 쪽 라우팅 외에도 필요한 경우가 많습니다. SPA 및 MVC 라우팅 시스템은 서로 간섭 없이 독립적으로 동작할 수 있습니다. 그러나 404 HTTP 응답 식별이라는 한 가지 까다로운 문제가 존재합니다.
 
-확장자가 존재하지 않는 `/some/page`라는 경로가 사용되는 시나리오를 생각해보겠습니다. 요청이 서버 측 경로와는 패턴이 일치하지 않지만 클라이언트 측 경로와는 패턴이 일치한다고 가정합니다. 이제 일반적으로 서버에서 이미지 파일을 찾는 것으로 예상되는 `/images/user-512.png`에 대한 들어오는 요청을 생각해보겠습니다. 요청 된 리소스 경로가 서버 쪽 경로 또는 정적 파일과 일치 하지 않는 경우 클라이언트 쪽 응용 프로그램에서 일반적으로 404 HTTP 상태 코드를 반환 하&mdash;는 것으로 처리 하는 것은 바람직하지 않습니다.
+확장자가 존재하지 않는 `/some/page`라는 경로가 사용되는 시나리오를 생각해보겠습니다. 요청이 서버 측 경로와는 패턴이 일치하지 않지만 클라이언트 측 경로와는 패턴이 일치한다고 가정합니다. 이제 일반적으로 서버에서 이미지 파일을 찾는 것으로 예상되는 `/images/user-512.png`에 대한 들어오는 요청을 생각해보겠습니다. 요청 된 리소스 경로가 서버 쪽 경로 또는 정적 파일과 일치 하지 않을 경우 일반적으로 404 HTTP 상태 코드를 반환 하&mdash;클라이언트 쪽 응용 프로그램에서이를 처리할 가능성이 거의 없습니다.
 
 ### <a name="routing-helpers-prerequisites"></a>라우팅 도우미 필수 조건
 
@@ -225,7 +225,7 @@ dotnet new --install Microsoft.AspNetCore.SpaTemplates::*
 
 사용 가능한 SPA 템플릿 목록은 다음과 같습니다.
 
-| 템플릿                                 | 약식 이름 | 언어 | 태그        |
+| 템플릿                                 | 짧은 이름 | Language | Tags        |
 | ------------------------------------------| :--------: | :------: | :---------: |
 | MVC ASP.NET Core with Angular             | angular    | [C#]     | Web/MVC/SPA |
 | MVC ASP.NET Core with React.js            | react      | [C#]     | Web/MVC/SPA |
@@ -241,10 +241,10 @@ dotnet new angular
 
 다음과 같은 두 가지 기본 런타임 구성 모드가 존재합니다.
 
-* **Development**:
+* **개발**:
   * 손쉬운 디버깅을 위해 소스 맵이 포함되어 있습니다.
   * 성능을 위한 클라이언트 측 코드를 최적화하지 않습니다.
-* **Production**:
+* **프로덕션**:
   * 소스 맵을 제외합니다.
   * 묶음 및 축소를 통해 클라이언트 쪽 코드를 최적화 합니다.
 
@@ -270,7 +270,7 @@ dotnet run
 
 [dotnet new](/dotnet/core/tools/dotnet-new) 명령으로 생성한 *.csproj* 파일을 엽니다. 필요한 NuGet 및 npm 패키지는 프로젝트가 열릴 때 자동으로 복원됩니다. 이 복원 프로세스는 최대 몇 분 정도 걸릴 수 있으며 완료되면 응용 프로그램을 실행할 준비가 완료됩니다. 녹색 실행 버튼을 클릭하거나 `Ctrl + F5` 키를 누르면 브라우저가 응용 프로그램의 방문 페이지를 엽니다. 응용 프로그램은 [런타임 구성 모드](#set-the-runtime-configuration-mode)에 따라 localhost에서 실행됩니다.
 
-## <a name="test-the-app"></a>앱 테스트
+## <a name="test-the-app"></a>앱을 테스트합니다.
 
 SpaServices 템플릿은 [Karma](https://karma-runner.github.io/1.0/index.html)와 [Jasmine](https://jasmine.github.io/)을 사용하여 클라이언트 측 테스트를 실행하도록 미리 구성되어 있습니다. Jasmine은 인기 있는 JavaScript 용 단위 테스트 프레임워크인 반면, Karma는 해당 테스트에 대한 테스트 러너입니다. Karma는 [Webpack Dev 미들웨어](#webpack-dev-middleware)와 함께 동작하도록 구성되어 있으므로 개발자는 변경 사항이 있을 때마다 매번 중단하고 테스트를 실행할 필요가 없습니다. 테스트 케이스에 대해 실행 중인 코드든 테스트 케이스 자체든 상관없이 테스트가 자동으로 실행됩니다.
 
@@ -278,7 +278,7 @@ Angular 응용 프로그램을 예로 들면, *counter.component.spec.ts* 파일
 
 [!code-typescript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/app/components/counter/counter.component.spec.ts?range=15-28)]
 
-*ClientApp* 디렉터리에서 명령 프롬프트를 엽니다. 다음 명령을 실행합니다.
+*ClientApp* 디렉터리에서 명령 프롬프트를 엽니다. 명령을 실행합니다.
 
 ```console
 npm test
@@ -289,6 +289,8 @@ npm test
 [!code-javascript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/test/karma.conf.js?range=4-5,8-11)]
 
 ## <a name="publish-the-app"></a>앱 게시
+
+Azure에 게시 하는 방법에 대 한 자세한 내용은 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/12474) 를 참조 하세요.
 
 생성된 클라이언트 측 자산과 게시된 ASP.NET Core의 결과물을 배포 준비 패키지로 결합하는 일은 번거로운 작업일 수도 있습니다. 다행스럽게도 SpaServices는 `RunWebpack`이라는 이름의 사용자 지정 MSBuild 대상으로 전체 게시 프로세스를 조정합니다.
 

@@ -6,13 +6,15 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/05/2019
+no-loc:
+- Let's Encrypt
 uid: security/docker-https
-ms.openlocfilehash: c13ba02845eef5c53a939feec2be8a01bc4ca128
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 47027033c0b7130f2d38d22c02a54945b2cc31b3
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71082538"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75358915"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-over-https"></a>HTTPS를 통해 Docker를 사용 하 여 ASP.NET Core 이미지 호스팅
 
@@ -32,16 +34,16 @@ ASP.NET Core는 [기본적으로 HTTPS를](/aspnet/core/security/enforcing-ssl)�
 
 ## <a name="certificates"></a>인증서
 
-도메인에 대 한 [프로덕션 호스팅을](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/) 위해서는 [인증 기관의](https://en.wikipedia.org/wiki/Certificate_authority) 인증서가 필요 합니다.  [암호화](https://letsencrypt.org/) 는 무료 인증서를 제공 하는 인증 기관입니다.
+도메인에 대 한 [프로덕션 호스팅을](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/) 위해서는 [인증 기관의](https://wikipedia.org/wiki/Certificate_authority) 인증서가 필요 합니다. [Let's Encrypt](https://letsencrypt.org/) 은 무료 인증서를 제공 하는 인증 기관입니다.
 
-이 문서에서는 미리 빌드된 이미지 `localhost`를 호스트 하기 위해 [자체 서명 된 개발 인증서](https://en.wikipedia.org/wiki/Self-signed_certificate) 를 사용 합니다. 지침은 프로덕션 인증서를 사용 하는 것과 유사 합니다.
+이 문서에서는 `localhost`에 대해 미리 작성 된 이미지를 호스팅하기 위해 [자체 서명 된 개발 인증서](https://en.wikipedia.org/wiki/Self-signed_certificate) 를 사용 합니다. 지침은 프로덕션 인증서를 사용 하는 것과 유사 합니다.
 
 프로덕션 인증서의 경우:
 
-* 도구 `dotnet dev-certs` 는 필요 하지 않습니다.
+* `dotnet dev-certs` 도구는 필요 하지 않습니다.
 * 지침에 사용 되는 위치에 인증서를 저장할 필요가 없습니다. 사이트 디렉터리 내에 인증서를 저장 하지 않는 것이 좋지만 모든 위치는 작동 해야 합니다.
 
-명령 볼륨은 컨테이너에 인증서를 탑재 합니다. Dockerfile의 `COPY` 명령을 사용 하 여 컨테이너 이미지에 인증서를 추가할 수 있습니다. 인증서를 이미지로 복사 하지 않는 것이 좋습니다.
+명령 볼륨은 컨테이너에 인증서를 탑재 합니다. *Dockerfile*에서 `COPY` 명령을 사용 하 여 컨테이너 이미지에 인증서를 추가할 수 있습니다. 다음과 같은 이유로 인증서를 이미지로 복사 하는 것은 권장 되지 않습니다.
 
 * 개발자 인증서를 사용 하 여 테스트 하는 데 동일한 이미지를 사용 하는 것은 어렵습니다.
 * 프로덕션 인증서를 사용 하 여 호스트 하는 데 동일한 이미지를 사용 하는 것은 어렵습니다.
@@ -60,7 +62,7 @@ dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { passwo
 dotnet dev-certs https --trust
 ```
 
-위의 명령에서을 암호로 바꿉니다 `{ password here }` .
+위의 명령에서 `{ password here }`을 암호로 바꿉니다.
 
 HTTPS에 대해 구성 된 ASP.NET Core를 사용 하 여 컨테이너 이미지를 실행 합니다.
 
@@ -80,9 +82,9 @@ dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p { password her
 dotnet dev-certs https --trust
 ```
 
-`dotnet dev-certs https --trust`는 macOS 및 Windows 에서만 지원 됩니다. 배포판에서 지 원하는 방식으로 Linux에서 인증서를 신뢰 해야 합니다. 브라우저에서 인증서를 신뢰 해야 할 수도 있습니다.
+`dotnet dev-certs https --trust`은 macOS 및 Windows 에서만 지원 됩니다. 배포판에서 지 원하는 방식으로 Linux에서 인증서를 신뢰 해야 합니다. 브라우저에서 인증서를 신뢰 해야 할 수도 있습니다.
 
-위의 명령에서을 암호로 바꿉니다 `{ password here }` .
+위의 명령에서 `{ password here }`을 암호로 바꿉니다.
 
 HTTPS에 대해 구성 된 ASP.NET Core를 사용 하 여 컨테이너 이미지를 실행 합니다.
 
@@ -102,7 +104,7 @@ dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { passwo
 dotnet dev-certs https --trust
 ```
 
-위의 명령에서을 암호로 바꿉니다 `{ password here }` .
+위의 명령에서 `{ password here }`을 암호로 바꿉니다.
 
 HTTPS에 대해 구성 된 ASP.NET Core를 사용 하 여 컨테이너 이미지를 실행 합니다.
 

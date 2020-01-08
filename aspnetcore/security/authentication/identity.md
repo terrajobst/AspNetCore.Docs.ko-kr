@@ -5,12 +5,12 @@ description: ASP.NET Core 앱에서 Id를 사용 합니다. 암호 요구 사항
 ms.author: riande
 ms.date: 12/05/2019
 uid: security/authentication/identity
-ms.openlocfilehash: c867b73a96fd081f6e2ca17fef561ac539c0a129
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 787d39dd7824f912128e6af849fa268c3e8eb908
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880726"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75359201"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>ASP.NET Core Identity 소개
 
@@ -48,7 +48,7 @@ Id는 일반적으로 사용자 이름, 암호 및 프로필 데이터를 저장
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **File** > **New** > **Project**를 선택합니다.
+* **파일** > **새** > **프로젝트**를 선택 합니다.
 * **새 ASP.NET Core 웹 애플리케이션**을 선택합니다. 프로젝트의 이름을 **WebApp1** 프로젝트 다운로드와 동일한 네임 스페이스를 포함 합니다. **확인**을 클릭합니다.
 * ASP.NET Core **웹 응용 프로그램**을 선택한 다음 **인증 변경**을 선택 합니다.
 * **개별 사용자 계정을** 선택 하 고 **확인**을 클릭 합니다.
@@ -216,6 +216,7 @@ Id에 대 한 기본 패키지는 [AspNetCore](https://www.nuget.org/packages/Mi
 
 ## <a name="next-steps"></a>다음 단계
 
+* SQLite를 사용 하 여 Id를 구성 하는 방법에 대해서는 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/5131) 를 참조 하세요.
 * [ID 구성](xref:security/authentication/identity-configuration)
 * <xref:security/authorization/secure-data>
 * <xref:security/authentication/add-user-data>
@@ -257,7 +258,7 @@ SQL Server 데이터베이스를 사용 하 여 id를 구성 하 여 사용자 �
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **File** > **New** > **Project**를 선택합니다.
+* **파일** > **새** > **프로젝트**를 선택 합니다.
 * **새 ASP.NET Core 웹 애플리케이션**을 선택합니다. 프로젝트의 이름을 **WebApp1** 프로젝트 다운로드와 동일한 네임 스페이스를 포함 합니다. **확인**을 클릭합니다.
 * ASP.NET Core **웹 응용 프로그램**을 선택한 다음 **인증 변경**을 선택 합니다.
 * **개별 사용자 계정을** 선택 하 고 **확인**을 클릭 합니다.
@@ -403,6 +404,7 @@ Id에 대 한 기본 패키지는 [AspNetCore](https://www.nuget.org/packages/Mi
 
 ## <a name="next-steps"></a>다음 단계
 
+* SQLite를 사용 하 여 Id를 구성 하는 방법에 대해서는 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/5131) 를 참조 하세요.
 * [ID 구성](xref:security/authentication/identity-configuration)
 * <xref:security/authorization/secure-data>
 * <xref:security/authentication/add-user-data>

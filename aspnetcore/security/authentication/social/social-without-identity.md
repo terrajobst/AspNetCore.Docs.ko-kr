@@ -3,14 +3,14 @@ title: ASP.NET Core Id가 없는 Facebook, Google 및 외부 공급자 인증
 author: rick-anderson
 description: ASP.NET Core Id 없이 Facebook, Google, Twitter 등의 계정 사용자 인증을 사용 하는 방법에 대 한 설명입니다.
 ms.author: riande
-ms.date: 11/19/2019
+ms.date: 12/10/2019
 uid: security/authentication/social/social-without-identity
-ms.openlocfilehash: 680ea091dcc5ed7f94879b5d277e8be7e5abeb7b
-ms.sourcegitcommit: f40c9311058c9b1add4ec043ddc5629384af6c56
+ms.openlocfilehash: 612964ec9ed4975cdc81780dda3bac6cce96037f
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/21/2019
-ms.locfileid: "74289110"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75359060"
 ---
 # <a name="use-social-sign-in-provider-authentication-without-aspnet-core-identity"></a>ASP.NET Core Id 없이 소셜 로그인 공급자 인증 사용
 
@@ -27,7 +27,7 @@ ms.locfileid: "74289110"
 * [Twitter 인증](xref:security/authentication/twitter-logins)
 * [기타 공급자](xref:security/authentication/otherlogins)
 
-## <a name="configuration"></a>Configuration
+## <a name="configuration"></a>구성
 
 `ConfigureServices` 메서드에서 <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*>, <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*>및 <xref:Microsoft.Extensions.DependencyInjection.GoogleExtensions.AddGoogle*> 메서드를 사용 하 여 앱의 인증 체계를 구성 합니다.
 
@@ -41,13 +41,13 @@ ms.locfileid: "74289110"
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*>
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*>
 
-앱의 `DefaultScheme`을 [CookieAuthenticationDefaults](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) ("쿠키")로 설정 하면 해당 확장 메서드에 대 한 기본 스키마로 쿠키를 사용 하도록 앱을 구성 합니다. 앱의 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme>을 [GoogleDefaults](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ("Google")로 설정 하면 Google을 `ChallengeAsync`호출에 대 한 기본 체계로 사용 하도록 앱이 구성 됩니다. `DefaultChallengeScheme` `DefaultScheme`를 재정의 합니다. 설정 시 `DefaultScheme`를 재정의 하는 추가 속성은 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions>를 참조 하세요.
+앱의 `DefaultScheme`을 [CookieAuthenticationDefaults](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) ("쿠키")로 설정 하면 해당 확장 메서드에 대 한 기본 스키마로 쿠키를 사용 하도록 앱을 구성 합니다. 앱의 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme>을 [GoogleDefaults](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ("Google")로 설정 하면 Google을 `ChallengeAsync`호출에 대 한 기본 체계로 사용 하도록 앱이 구성 됩니다. `DefaultChallengeScheme`는 `DefaultScheme`를 재정의합니다. 설정 시 `DefaultScheme`를 재정의 하는 추가 속성은 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions>를 참조 하세요.
 
 `Startup.Configure`에서 `UseAuthentication`를 호출 하 고 `UseRouting` 및 `UseEndpoints`호출 사이에 `UseAuthorization` 합니다. 이는 `HttpContext.User` 속성을 설정 하 고 요청에 대 한 권한 부여 미들웨어를 실행 합니다.
 
 [!code-csharp[](social-without-identity/samples_snapshot/3.x/Startup.cs?name=snippet2&highlight=3-4)]
 
-인증 체계 및 쿠키 인증에 대 한 자세한 내용은 <xref:security/authentication/cookie>를 참조 하세요.
+인증 체계에 대 한 자세한 내용은 [인증 개념](xref:security/authentication/index#authentication-concepts)을 참조 하세요. 쿠키 인증에 대 한 자세한 내용은 <xref:security/authentication/cookie>를 참조 하세요.
 
 ## <a name="apply-authorization"></a>권한 부여 적용
 
@@ -82,7 +82,7 @@ ms.locfileid: "74289110"
 * [Twitter 인증](xref:security/authentication/twitter-logins)
 * [기타 공급자](xref:security/authentication/otherlogins)
 
-## <a name="configuration"></a>Configuration
+## <a name="configuration"></a>구성
 
 `ConfigureServices` 메서드에서 `AddAuthentication`, `AddCookie`및 `AddGoogle` 메서드를 사용 하 여 앱의 인증 체계를 구성 합니다.
 
@@ -96,13 +96,13 @@ ms.locfileid: "74289110"
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*>
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*>
 
-앱의 `DefaultScheme`을 [CookieAuthenticationDefaults](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) ("쿠키")로 설정 하면 해당 확장 메서드에 대 한 기본 스키마로 쿠키를 사용 하도록 앱을 구성 합니다. 앱의 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme>을 [GoogleDefaults](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ("Google")로 설정 하면 Google을 `ChallengeAsync`호출에 대 한 기본 체계로 사용 하도록 앱이 구성 됩니다. `DefaultChallengeScheme` `DefaultScheme`를 재정의 합니다. 설정 시 `DefaultScheme`를 재정의 하는 추가 속성은 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions>를 참조 하세요.
+앱의 `DefaultScheme`을 [CookieAuthenticationDefaults](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) ("쿠키")로 설정 하면 해당 확장 메서드에 대 한 기본 스키마로 쿠키를 사용 하도록 앱을 구성 합니다. 앱의 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme>을 [GoogleDefaults](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ("Google")로 설정 하면 Google을 `ChallengeAsync`호출에 대 한 기본 체계로 사용 하도록 앱이 구성 됩니다. `DefaultChallengeScheme`는 `DefaultScheme`를 재정의합니다. 설정 시 `DefaultScheme`를 재정의 하는 추가 속성은 <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions>를 참조 하세요.
 
 `Configure` 메서드에서 `UseAuthentication` 메서드를 호출 하 여 `HttpContext.User` 속성을 설정 하는 인증 미들웨어를 호출 합니다. `UseMvcWithDefaultRoute` 또는 `UseMvc`를 호출 하기 전에 `UseAuthentication` 메서드를 호출 합니다.
 
 [!code-csharp[](social-without-identity/samples_snapshot/2.x/Startup.cs?name=snippet2)]
 
-인증 체계 및 쿠키 인증에 대 한 자세한 내용은 <xref:security/authentication/cookie>를 참조 하세요.
+인증 체계에 대 한 자세한 내용은 [인증 개념](xref:security/authentication/index#authentication-concepts)을 참조 하세요. 쿠키 인증에 대 한 자세한 내용은 <xref:security/authentication/cookie>를 참조 하세요.
 
 ## <a name="apply-authorization"></a>권한 부여 적용
 

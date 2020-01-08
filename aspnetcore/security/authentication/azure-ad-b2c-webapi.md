@@ -6,16 +6,18 @@ ms.author: casoper
 ms.date: 12/05/2019
 ms.custom: mvc, seodec18
 uid: security/authentication/azure-ad-b2c-webapi
-ms.openlocfilehash: 0c7e8a1db924bdedf29468bf6b8cc17f03962c6d
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 9b18b19838a2d25944a2498b6eec1677e56b12cc
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880735"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75358263"
 ---
 # <a name="authentication-in-web-apis-with-azure-active-directory-b2c-in-aspnet-core"></a>Web Api ASP.NET Core에서 Azure Active Directory B2C를 사용 하 여 인증
 
 작성자: [Cam Soper](https://twitter.com/camsoper)
+
+<!-- Next update remove screenshots. They become obsolete too soon and are more work to update -->
 
 [Azure Active Directory B2C](/azure/active-directory-b2c/active-directory-b2c-overview) (Azure AD B2C)는 웹 및 모바일 앱에 대 한 클라우드 id 관리 솔루션입니다. 서비스는 클라우드 및 온-프레미스에서 호스트 되는 앱에 대 한 인증을 제공 합니다. 인증 유형 포함할 개별 계정, 소셜 네트워크 계정 및 enterprise 계정 페더레이션 합니다. Azure AD B2C는 또한 최소 구성으로 multi-factor authentication 인증을 제공합니다.
 
@@ -32,7 +34,7 @@ Azure Active Directory (Azure AD) 및 Azure AD B2C는 별개 제품입니다. Az
 > * Azure AD B2C 테 넌 트의 동작을 제어 하는 정책을 구성 합니다.
 > * 토큰을 검색 하 고 웹 API에 대 한 요청을 수행 하는 데 사용 하는 로그인 대화 상자를 표시 하는 웹 앱을 시뮬레이션 하기 위해 Postman 사용.
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>전제 조건
 
 다음은이 연습에 필요한:
 
@@ -56,7 +58,7 @@ Azure AD B2C 설명서에서 절차 [등록 또는 로그인 정책 만들기](/
 
 | 설정                       | 값               | 참고                                                                                  |
 |-------------------------------|---------------------|----------------------------------------------------------------------------------------|
-| **이름**                      | *{0} API 이름}*        | 입력 한 **이름을** 소비자에 게 앱을 설명 하는 앱에 대 한 합니다.                     |
+| **Name**                      | *{0} API 이름}*        | 입력 한 **이름을** 소비자에 게 앱을 설명 하는 앱에 대 한 합니다.                     |
 | **웹 앱/웹 API 포함** | 예                 |                                                                                        |
 | **암시적 흐름 허용**       | 예                 |                                                                                        |
 | **회신 URL**                 | `https://localhost` | 회신 Url은 Azure AD B2C 앱이 요청한 토큰을 반환 하는 위치 끝점입니다. |
@@ -112,7 +114,7 @@ Azure AD B2C 테 넌 트에서 토큰을 가져옵니다는 웹 앱을 시뮬레
 
 | 설정                       | 값                            | 참고                           |
 |-------------------------------|----------------------------------|---------------------------------|
-| **이름**                      | Postman                          |                                 |
+| **Name**                      | Postman                          |                                 |
 | **웹 앱/웹 API 포함** | 예                              |                                 |
 | **암시적 흐름 허용**       | 예                              |                                 |
 | **회신 URL**                 | `https://getpostman.com/postman` |                                 |
@@ -150,7 +152,7 @@ Postman을 시작 합니다. Postman 기본적으로 표시 합니다 **새로 �
 
 된 web API에 인증이 필요한 경우를 확인 하려면 먼저 인증 없이 요청을 확인 합니다.
 
-1. 에 **요청 URL 입력** 상자에 대 한 URL을 입력 `ValuesController`합니다. URL이 사용 하 여 브라우저에 표시 된 것과 동일 **api/값** 추가 합니다. 예를 들어 `https://localhost:44375/api/values`과 같은 형식입니다.
+1. 에 **요청 URL 입력** 상자에 대 한 URL을 입력 `ValuesController`합니다. URL이 사용 하 여 브라우저에 표시 된 것과 동일 **api/값** 추가 합니다. 예: `https://localhost:44375/api/values`.
 2. 선택 된 **보낼** 단추입니다.
 3. 응답의 상태가 *401 권한 없음*합니다.
 
@@ -199,7 +201,7 @@ Web API에 요청을 인증된 하는 전달자 토큰을 필요 합니다. Post
 
 ## <a name="next-steps"></a>다음 단계
 
-본 자습서에서는 다음 작업에 관한 방법을 학습했습니다.
+이 자습서에서는 다음 방법을 학습했습니다.
 
 > [!div class="checklist"]
 > * Azure Active Directory B2C 테 넌 트를 만듭니다.

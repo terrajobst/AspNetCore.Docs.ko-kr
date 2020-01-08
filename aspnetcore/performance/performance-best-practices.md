@@ -8,16 +8,16 @@ ms.date: 12/05/2019
 no-loc:
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: bd30776d527b4ac9f44005e9f5d03fec7cfda2e6
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: c74adf7479d176c41dc26c7e77acfc3dc9cdcb88
+ms.sourcegitcommit: 79850db9e79b1705b89f466c6f2c961ff15485de
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880926"
+ms.lasthandoff: 01/07/2020
+ms.locfileid: "75693962"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core 성능 모범 사례
 
-[Mike Rousos](https://github.com/mjrousos)
+[Mike Rousos](https://github.com/mjrousos) 작성
 
 이 문서에서는 ASP.NET Core의 성능 모범 사례에 대 한 지침을 제공 합니다.
 
@@ -44,7 +44,7 @@ ASP.NET Core 앱의 일반적인 성능 문제는 비동기 일 수 있는 호�
 **Do**:
 
 * [핫 코드 경로](#understand-hot-code-paths) 를 비동기식으로 만듭니다.
-* 비동기 API를 사용할 수 있는 경우 데이터 액세스 및 장기 실행 작업 Api를 비동기적으로 호출 합니다. 다시 한 번, [작업](/dotnet/api/system.threading.tasks.task.run) 을 사용 하 여 synchronus API를 비동기식으로 만듭니다.
+* 비동기 API를 사용할 수 있는 경우 데이터 액세스, i/o 및 장기 실행 작업 Api를 비동기적으로 호출 합니다. [작업을 실행](/dotnet/api/system.threading.tasks.task.run) **하 여 synchronus** API를 비동기로 만듭니다.
 * 컨트롤러/Razor 페이지 작업을 비동기식으로 만듭니다. 비동기 [/](/dotnet/csharp/programming-guide/concepts/async/) 대기 패턴을 활용 하기 위해 전체 호출 스택은 비동기입니다.
 
 [Perfview](https://github.com/Microsoft/perfview)와 같은 프로파일러를 사용 하 여 [스레드 풀](/windows/desktop/procthread/thread-pools)에 자주 추가 되는 스레드를 찾을 수 있습니다. `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start` 이벤트는 스레드 풀에 추가 된 스레드를 나타냅니다. <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
@@ -67,7 +67,7 @@ ASP.NET Core 앱의 일반적인 성능 문제는 비동기 일 수 있는 호�
 
 자세한 내용은 [가비지 수집 및 성능](/dotnet/standard/garbage-collection/performance)을 참조 하세요.
 
-## <a name="optimize-data-access"></a>데이터 액세스 최적화
+## <a name="optimize-data-access-and-io"></a>데이터 액세스 및 i/o 최적화
 
 데이터 저장소 및 다른 원격 서비스와의 상호 작용은 종종 ASP.NET Core 앱의 가장 느린 부분입니다. 데이터를 효율적으로 읽고 쓰는 것이 좋은 성능을 위해 중요 합니다.
 

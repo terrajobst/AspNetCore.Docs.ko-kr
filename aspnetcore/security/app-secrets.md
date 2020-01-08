@@ -6,20 +6,20 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: security/app-secrets
-ms.openlocfilehash: ef5cb120c15d349be744c401bd518e026ddf11e9
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 9b36ae64fbe277cd81ed22ba7b21b0a035082dbd
+ms.sourcegitcommit: c815a9465e7b1bab44ce1643ec345b33e6cf1598
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880778"
+ms.lasthandoff: 01/02/2020
+ms.locfileid: "75606794"
 ---
 # <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>ASP.NET Core 개발 시 앱 비밀의 안전한 저장
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT), [김 Roth](https://github.com/danroth27), 및 [Scott Addie](https://github.com/scottaddie)
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/app-secrets/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/app-secrets/samples)([다운로드 방법](xref:index#how-to-download-a-sample))
 
-이 문서는 ASP.NET Core 앱을 개발할 때 민감한 데이터를 저장하거나 검색하는 기술들을 설명합니다. 소스 코드에 패스워드나 다른 민감한 데이터를 저장하지 마세요. 프로덕션용 비밀들은 개발 또는 테스트에서 사용하면 안됩니다. 암호는 앱과 함께 배포 해서는 안 됩니다. 대신 환경 변수, Azure Key Vault 등의 제어 된 방법을 통해 프로덕션 환경에서 암호를 사용할 수 있습니다. [Azure Key Vault 구성 공급자](xref:security/key-vault-configuration)를 사용 하 여 Azure 테스트 및 프로덕션 암호를 저장 하 고 보호할 수 있습니다.
+이 문서에서는 개발 컴퓨터에서 ASP.NET Core 앱을 개발 하는 동안 중요 한 데이터를 저장 하 고 검색 하는 기술을 설명 합니다. 소스 코드에 패스워드나 다른 민감한 데이터를 저장하지 마세요. 프로덕션용 비밀들은 개발 또는 테스트에서 사용하면 안됩니다. 암호는 앱과 함께 배포 해서는 안 됩니다. 대신 환경 변수, Azure Key Vault 등의 제어 된 방법을 통해 프로덕션 환경에서 암호를 사용할 수 있습니다. [Azure Key Vault 구성 공급자](xref:security/key-vault-configuration)를 사용 하 여 Azure 테스트 및 프로덕션 암호를 저장 하 고 보호할 수 있습니다.
 
 ## <a name="environment-variables"></a>환경 변수
 
@@ -410,5 +410,6 @@ No secrets configured for this application.
 
 ## <a name="additional-resources"></a>추가 자료
 
+* IIS에서 암호 관리자에 액세스 하는 방법에 대 한 자세한 내용은 [이 문제](https://github.com/aspnet/AspNetCore.Docs/issues/16328) 를 참조 하세요.
 * <xref:fundamentals/configuration/index>
 * <xref:security/key-vault-configuration>

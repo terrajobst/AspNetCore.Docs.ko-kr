@@ -326,8 +326,6 @@
               uid: host-and-deploy/blazor/server
             - name: 링커 구성
               uid: host-and-deploy/blazor/configure-linker
-        - name: 샘플
-          href: 'https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor'
     - name: 클라이언트 쪽 개발
       items:
         - name: 단일 페이지 앱
@@ -612,7 +610,7 @@
       uid: test/integration-tests
     - name: 로드 및 스트레스 테스트
       uid: test/loadtests
-    - name: 문제 해결
+    - name: 문제 해결 및 디버그
       uid: test/troubleshoot
     - name: 로깅
       uid: fundamentals/logging/index
@@ -885,15 +883,15 @@
             - name: 개요
               uid: security/authentication/azure-active-directory/index
             - name: 웹앱에 Azure AD 통합
-              href: 'https://azure.microsoft.com/documentation/samples/active-directory-dotnet-webapp-openidconnect-aspnetcore/'
+              href: 'https://github.com/Azure-Samples/ms-identity-aspnetcore-webapp-tutorial'
             - name: 웹앱에 Azure AD B2C 통합
               uid: security/authentication/azure-ad-b2c
             - name: 웹 API에 Azure AD B2C 통합
               uid: security/authentication/azure-ad-b2c-webapi
             - name: WPF에서 웹 API 호출
-              href: 'https://azure.microsoft.com/documentation/samples/active-directory-dotnet-native-aspnetcore/'
+              href: 'https://github.com/Azure-Samples/active-directory-dotnet-native-aspnetcore'
             - name: Azure AD를 사용하여 웹앱에서 웹 API 호출
-              href: 'https://azure.microsoft.com/documentation/samples/active-directory-dotnet-webapp-webapi-openidconnect-aspnetcore/'
+              href: 'https://github.com/Azure-Samples/active-directory-dotnet-webapp-webapi-openidconnect-aspnetcore'
         - name: IdentityServer4를 사용하여 ASP.NET Core 앱 보호
           href: 'https://identityserver4.readthedocs.io/'
         - name: Azure App Service 인증(간편 인증)을 사용하여 ASP.NET Core 앱 보호
@@ -1101,6 +1099,9 @@
       uid: fundamentals/host/hosted-services
     - name: 호스팅 시작 어셈블리
       uid: fundamentals/configuration/platform-specific-configuration
+    - name: 클래스 라이브러리의 ASP.NET Core
+      displayName: shared framework
+      uid: fundamentals/target-aspnetcore
     - name: Microsoft.AspNetCore.App 메타패키지
       uid: fundamentals/metapackage-app
     - name: Microsoft.AspNetCore.All 메타패키지
