@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/04/2019
 uid: fundamentals/logging/index
-ms.openlocfilehash: 49d598330948c5f4a137c534094e14ed5e01e27c
-ms.sourcegitcommit: f4cd3828e26e6d549ba8d0c36a17be35ad9e5a51
+ms.openlocfilehash: e1c50c4592b21d56ed813dac43204d63f1bfe46c
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74825485"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75359350"
 ---
 # <a name="logging-in-net-core-and-aspnet-core"></a>.NET Core 및 ASP.NET Core의 로깅
 
@@ -421,7 +421,7 @@ Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker:Information: Executed 
 Microsoft.AspNetCore.Hosting.Internal.WebHost:Information: Request finished in 316.3195ms 404
 ```
 
-이전 섹션에 표시된 `ILogger` 호출을 통해 생성된 로그는 "TodoApi"로 시작합니다. "Microsoft" 범주로 시작하는 로그는 ASP.NET Core 프레임워크 코드에서 온 것입니다. ASP.NET Core 및 응용 프로그램 코드는 동일한 로깅 API와 공급자를 사용합니다.
+이전 섹션에 표시된 `ILogger` 호출을 통해 생성된 로그는 "TodoApi"로 시작합니다. "Microsoft" 범주로 시작하는 로그는 ASP.NET Core 프레임워크 코드에서 온 것입니다. ASP.NET Core 및 애플리케이션 코드는 동일한 로깅 API와 공급자를 사용합니다.
 
 ::: moniker-end
 
@@ -491,7 +491,7 @@ ASP.NET Core는 다음과 같은 로그 수준을 정의하며, 여기에는 가
 
 * Trace = 0
 
-  일반적으로 디버깅에만 유용한 정보입니다. 이러한 메시지는 중요한 응용 프로그램 데이터를 포함할 수 있으므로 프로덕션 환경에서 사용하면 안 됩니다. *기본적으로 사용하지 않도록 설정됩니다.*
+  일반적으로 디버깅에만 유용한 정보입니다. 이러한 메시지는 중요한 애플리케이션 데이터를 포함할 수 있으므로 프로덕션 환경에서 사용하면 안 됩니다. *기본적으로 사용하지 않도록 설정됩니다.*
 
 * Debug = 1
 
@@ -517,7 +517,7 @@ ASP.NET Core는 다음과 같은 로그 수준을 정의하며, 여기에는 가
 
 * 프로덕션:
   * `Trace`~`Information` 수준 로깅은 자세한 로그 메시지를 대량으로 생성합니다. 비용을 관리하고 데이터 저장소 제한을 초과하지 않으려면 `Trace`~`Information` 수준 메시지를 대용량, 저비용 데이터 저장소에 기록합니다.
-  * `Warning`~`Critical` 수준 로깅에서 생성되는 로그 메시지는 일반적으로 수량 및 용량이 더 적습니다. 따라서 비용 및 저장소 제한은 대개의 경우 문제가 되지 않으므로 데이터 저장소를 유연하게 선택할 수 있습니다.
+  * `Warning`~`Critical` 수준 로깅에서 생성되는 로그 메시지는 일반적으로 수량 및 용량이 더 적습니다. 따라서 비용 및 스토리지 제한은 대개의 경우 문제가 되지 않으므로 데이터 스토리지를 유연하게 선택할 수 있습니다.
 * 개발 중:
   * `Warning`~`Critical` 메시지를 콘솔에 기록합니다.
   * 문제 해결 시 `Trace`~`Information` 메시지를 추가합니다.
@@ -750,7 +750,7 @@ System.Exception: Item not found exception.
 | 2      | Console       | Microsoft.AspNetCore.Mvc.Razor.Internal | Warning           |
 | 3      | Console       | Microsoft.AspNetCore.Mvc.Razor.Razor    | Debug             |
 | 4      | Console       | Microsoft.AspNetCore.Mvc.Razor          | Error             |
-| 5      | Console       | 모든 범주                          | Information       |
+| 5      | Console       | 모든 범주                          | 정보       |
 | 6      | 모든 공급자 | 모든 범주                          | Debug             |
 | 7      | 모든 공급자 | 시스템                                  | Debug             |
 | 8      | Debug         | Microsoft                               | Trace             |
@@ -804,7 +804,7 @@ System.Exception: Item not found exception.
 
 ### <a name="filter-functions"></a>필터 함수
 
-필터 함수는 구성 또는 코드를 통해 규칙이 할당되지 않은 모든 공급자와 범주에 대해 호출됩니다. 함수의 코드는 공급자 형식, 범주 및 로그 수준에 액세스할 수 있습니다. 예를 들어:
+필터 함수는 구성 또는 코드를 통해 규칙이 할당되지 않은 모든 공급자와 범주에 대해 호출됩니다. 함수의 코드는 공급자 형식, 범주 및 로그 수준에 액세스할 수 있습니다. 예:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -1005,7 +1005,7 @@ Dotnet 추적 도구를 사용하여 앱에서 추적을 수집합니다.
    | 4           | `Informational` |
    | 5           | `Verbose`       |
 
-   `FilterSpecs` `{Logger Category}` 및 `{Event Level}`에 대한 항목은 추가 로그 필터링 조건을 나타냅니다. `FilterSpecs` 항목을 세미콜론(`;`)으로 구분합니다.
+   `FilterSpecs``{Logger Category}` 및 `{Event Level}`에 대한 항목은 추가 로그 필터링 조건을 나타냅니다. `FilterSpecs` 항목을 세미콜론(`;`)으로 구분합니다.
 
    Windows 명령 셸을 사용하는 예(`--providers` 값에 작은따옴표를 사용하지 **않음**):
 
@@ -1030,8 +1030,8 @@ Dotnet 추적 도구를 사용하여 앱에서 추적을 수집합니다.
 * [성능 분석 유틸리티 추적(dotnet 추적)](https://github.com/dotnet/diagnostics/blob/master/documentation/dotnet-trace-instructions.md)(dotnet/진단 GitHub 리포지토리 설명서)
 * [LoggingEventSource 클래스](xref:Microsoft.Extensions.Logging.EventSource.LoggingEventSource)(.NET API 브라우저)
 * <xref:System.Diagnostics.Tracing.EventLevel>
-* [LoggingEventSource reference source(3.0)](https://github.com/aspnet/Extensions/blob/release/3.0/src/Logging/Logging.EventSource/src/LoggingEventSource.cs) &ndash; 다른 버전에 대한 참조 소스를 가져오려면 분기를 `release/{Version}`으로 변경합니다. 여기서 `{Version}`은 원하는 ASP.NET Core 버전입니다.
-* [Perfview](#perfview) &ndash; 이벤트 원본 추적을 보는 데 유용합니다.
+* [LoggingEventSource 참조 소스(3.0)](https://github.com/aspnet/Extensions/blob/release/3.0/src/Logging/Logging.EventSource/src/LoggingEventSource.cs) - 다른 버전의 참조 소스를 가져오려면 분기를 `release/{Version}`으로 변경합니다. 여기서 `{Version}`은 원하는 ASP.NET Core 버전입니다.
+* [Perfview](#perfview) - 이벤트 원본 추적을 보는 데 유용합니다.
 
 #### <a name="perfview"></a>Perfview
 
@@ -1053,9 +1053,19 @@ logging.AddEventLog();
 
 [AddEventLog 오버로드](xref:Microsoft.Extensions.Logging.EventLoggerFactoryExtensions)를 사용하여 <xref:Microsoft.Extensions.Logging.EventLog.EventLogSettings>를 전달할 수 있습니다. `null`이거나 지정하지 않으면 다음 기본 설정이 사용됩니다.
 
-* `LogName` &ndash; “애플리케이션”
-* `SourceName` &ndash; “.NET 런타임”
-* `MachineName` &ndash; 로컬 컴퓨터
+* `LogName` - “애플리케이션”
+* `SourceName` - “.NET 런타임”
+* `MachineName` - 로컬 머신
+
+[경고 수준 이상](#log-level)의 이벤트가 기록됩니다. `Warning` 수준보다 낮은 이벤트를 기록하려면 로그 수준을 명시적으로 설정합니다. 예를 들어 *appsettings.json* 파일에 다음 내용을 추가합니다.
+
+```json
+"EventLog": {
+  "LogLevel": {
+    "Default": "Information"
+  }
+}
+```
 
 ### <a name="tracesource-provider"></a>TraceSource 공급자
 

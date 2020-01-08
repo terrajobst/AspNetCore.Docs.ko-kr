@@ -5,12 +5,12 @@ description: 기존 ASP.NET MVC 또는 Web API 앱을 ASP.NET Core.web으로 마
 ms.author: scaddie
 ms.date: 10/18/2019
 uid: migration/proper-to-2x/index
-ms.openlocfilehash: 1564b644b774939c3c242a41812851917e96d2b2
-ms.sourcegitcommit: a166291c6708f5949c417874108332856b53b6a9
+ms.openlocfilehash: 19be7191792c44fb5414eb0a7b24772c45391253
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/18/2019
-ms.locfileid: "74803346"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75359414"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>ASP.NET에서 ASP.NET Core로 마이그레이션
 
@@ -18,7 +18,7 @@ ms.locfileid: "74803346"
 
 이 문서는 ASP.NET 앱을 ASP.NET Core로 마이그레이션하기 위한 참조 가이드로 사용됩니다.
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 [.NET Core SDK 2.2 이상](https://www.microsoft.com/net/download)
 
@@ -60,7 +60,7 @@ ASP.NET Core에는 앱을 부트스트랩하기 위한 새로운 메커니즘이
 
 이렇게 하면 기본 경로가 구성되고 기본적으로 JSON을 통한 XmlSerialization으로 설정됩니다. 필요에 따라 이 파이프라인에 다른 미들웨어를 추가합니다(로딩 서비스, 구성 설정, 정적 파일 등).
 
-ASP.NET Core는 비슷한 방법을 사용하지만 항목을 처리하는 데 OWIN을 사용하지 않습니다. 대신에 이 작업에는 *Program.cs*`Main` 메서드(콘솔 애플리케이션과 비슷함)가 사용되고 `Startup`도 이 작업을 통해 로드됩니다.
+ASP.NET Core는 비슷한 방법을 사용하지만 항목을 처리하는 데 OWIN을 사용하지 않습니다. 대신, 이 작업에는 *Program.cs* `Main` 메서드(콘솔 애플리케이션과 비슷함)가 사용되고 `Startup`도 이 메서드를 통해 로드됩니다.
 
 [!code-csharp[](samples/program.cs)]
 
@@ -158,6 +158,40 @@ ASP.NET Core에서 정적 파일은 별도로 구성되지 않는 한 “웹 루
 ## <a name="multi-value-cookies"></a>다중 값 쿠키
 
 [다중 값 쿠키](xref:System.Web.HttpCookie.Values)는 ASP.NET Core에서 지원되지 않습니다. 값마다 하나의 쿠키를 만듭니다.
+
+## <a name="partial-app-migration"></a>부분 앱 마이그레이션
+
+부분 앱 마이그레이션의 한 가지 방법은 IIS 하위 애플리케이션을 만들고 앱의 URL 구조를 유지하면서 특정 경로만 ASP.NET 4.x에서 ASP.NET Core로 이동하는 것입니다. 예를 들어 *applicationHost.config* 파일의 앱 URL 구조를 살펴보세요.
+
+```xml
+<sites>
+    <site name="Default Web Site" id="1" serverAutoStart="true">
+        <application path="/">
+            <virtualDirectory path="/" physicalPath="D:\sites\MainSite\" />
+        </application>
+        <application path="/api" applicationPool="DefaultAppPool">
+            <virtualDirectory path="/" physicalPath="D:\sites\netcoreapi" />
+        </application>
+        <bindings>
+            <binding protocol="http" bindingInformation="*:80:" />
+            <binding protocol="https" bindingInformation="*:443:" sslFlags="0" />
+        </bindings>
+    </site>
+    ...
+</sites>
+```
+
+디렉터리 구조:
+
+```
+.
+├── MainSite
+│   ├── ...
+│   └── Web.config
+└── NetCoreApi
+    ├── ...
+    └── web.config
+```
 
 ## <a name="additional-resources"></a>추가 자료
 
