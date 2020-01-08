@@ -5,14 +5,14 @@ description: 통합 테스트를 사용하여 앱의 구성 요소가 데이터�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/28/2019
+ms.date: 01/06/2019
 uid: test/integration-tests
-ms.openlocfilehash: 33f3e29bc649fa65efdff0c47e54a83662005577
-ms.sourcegitcommit: de0fc77487a4d342bcc30965ec5c142d10d22c03
+ms.openlocfilehash: ccee8957a72da0eb5d870b1bd184ee1ea146a0e6
+ms.sourcegitcommit: 79850db9e79b1705b89f466c6f2c961ff15485de
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/30/2019
-ms.locfileid: "73143371"
+ms.lasthandoff: 01/07/2020
+ms.locfileid: "75693793"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>ASP.NET Core의 통합 테스트
 
@@ -24,7 +24,7 @@ By [Luke Latham](https://github.com/guardrex), [Javier Calvarro e](https://githu
 
 이 항목에서는 단위 테스트에 대해 기본적으로 이해 하 고 있다고 가정 합니다. 테스트 개념을 잘 모르는 경우 [.Net Core의 단위 테스트 및 .NET Standard](/dotnet/core/testing/) 항목 및 연결 된 콘텐츠를 참조 하세요.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples)([다운로드 방법](xref:index#how-to-download-a-sample))
 
 샘플 앱은 Razor Pages 앱 이며 Razor Pages를 기본적으로 이해 하 고 있다고 가정 합니다. Razor Pages에 익숙하지 않은 경우 다음 항목을 참조 하세요.
 
@@ -90,14 +90,14 @@ ASP.NET Core의 통합 테스트에는 다음이 필요 합니다.
 
 * SUT의 종속성 파일 ( *. deps*)을 테스트 프로젝트의 *bin* 디렉터리에 복사 합니다.
 * 테스트를 실행할 때 정적 파일 및 페이지/뷰가 검색 되도록 [콘텐츠 루트](xref:fundamentals/index#content-root) 를 sut의 프로젝트 루트로 설정 합니다.
-* `TestServer`를 사용 하 여 SUT를 간소화 하는 [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) 클래스를 제공 합니다.
+* `TestServer`를 사용하여 Sut를 간소화하는 [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) 클래스를 제공합니다.
 
 [단위 테스트](/dotnet/articles/core/testing/unit-testing-with-dotnet-test) 설명서에서는 테스트를 실행 하는 방법에 대 한 자세한 지침과 테스트 및 테스트 클래스의 이름을 설정 하는 방법에 대 한 자세한 지침과 함께 테스트 프로젝트 및 test runner를 설정 하는 방법을 설명 합니다.
 
 > [!NOTE]
 > 앱에 대 한 테스트 프로젝트를 만들 때 통합 테스트에서 여러 프로젝트로 단위 테스트를 분리 합니다. 이를 통해 인프라 테스트 구성 요소가 실수로 단위 테스트에 포함 되지 않도록 할 수 있습니다. 단위 및 통합 테스트를 분리 하 여 실행 되는 테스트 집합을 제어할 수도 있습니다.
 
-Razor Pages 앱과 MVC 앱의 테스트에 대 한 구성의 차이는 거의 없습니다. 유일한 차이점은 테스트의 이름을 지정 하는 방법 뿐입니다. Razor Pages 앱에서 페이지 끝점의 테스트는 일반적으로 페이지 모델 클래스 (예: 인덱스 페이지에 대 한 구성 요소 통합을 테스트 하기 위해 `IndexPageTests`) 뒤에 이름이 지정 됩니다. MVC 앱에서 테스트는 일반적으로 컨트롤러 클래스로 구성 되며 테스트 하는 컨트롤러 뒤에 이름이 지정 됩니다 (예: `HomeControllerTests`은 Home 컨트롤러에 대 한 구성 요소 통합 테스트).
+Razor Pages 앱과 MVC 앱의 테스트에 대 한 구성의 차이는 거의 없습니다. 유일한 차이점은 테스트의 이름을 지정 하는 방법 뿐입니다. Razor Pages 앱에서 페이지 끝점의 테스트는 일반적으로 페이지 모델 클래스 (예: 인덱스 페이지에 대 한 구성 요소 통합을 테스트 하기 위해 `IndexPageTests`) 뒤에 이름이 지정 됩니다. MVC 앱에서 테스트는 일반적으로 컨트롤러 클래스로 구성 되며 테스트 하는 컨트롤러 뒤에 이름이 지정 됩니다 (예: 홈 컨트롤러에 대 한 구성 요소 통합을 테스트 하는 `HomeControllerTests`).
 
 ## <a name="test-app-prerequisites"></a>응용 프로그램 테스트 필수 조건
 
@@ -109,7 +109,7 @@ Razor Pages 앱과 MVC 앱의 테스트에 대 한 구성의 차이는 거의 �
 이러한 필수 구성 요소는 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/)에서 볼 수 있습니다. *테스트/RazorPagesProject. 테스트/razor*  프로젝트. .csproj 파일을 검사 합니다. 샘플 앱은 [Xunit](https://xunit.github.io/) 테스트 프레임 워크 및 [AngleSharp](https://anglesharp.github.io/) 파서 라이브러리를 사용 하므로 샘플 앱은 다음을 참조 합니다.
 
 * [xunit](https://www.nuget.org/packages/xunit)
-* [xunit. visualstudio](https://www.nuget.org/packages/xunit.runner.visualstudio)
+* [xunit.runner.visualstudio](https://www.nuget.org/packages/xunit.runner.visualstudio)
 * [AngleSharp](https://www.nuget.org/packages/AngleSharp)
 
 Entity Framework Core는 테스트에도 사용 됩니다. 앱 참조:
@@ -130,7 +130,7 @@ SUT의 [환경이](xref:fundamentals/environments) 설정 되지 않은 경우 �
 
 테스트 클래스는 클래스에 테스트를 포함 하 고 클래스의 테스트에서 공유 개체 인스턴스를 제공 하는 클래스 *fixture* 인터페이스 ([IClassFixture](https://xunit.github.io/docs/shared-context#class-fixture))를 구현 합니다.
 
-다음 테스트 클래스 `BasicTests`에서는 `WebApplicationFactory`를 사용 하 여 SUT를 부트스트랩 하 고 `Get_EndpointsReturnSuccessAndCorrectContentType`테스트 메서드에 [Httpclient](/dotnet/api/system.net.http.httpclient) 를 제공 합니다. 메서드는 응답 상태 코드가 성공 (200-299 범위의 상태 코드) 되었는지 확인 하 고 `Content-Type` 헤더는 여러 앱 페이지에 대해 `text/html; charset=utf-8`입니다.
+다음 테스트 클래스 `BasicTests`에서는 `WebApplicationFactory`를 사용 하 여 SUT를 부트스트랩 하 고 `Get_EndpointsReturnSuccessAndCorrectContentType`테스트 메서드에 [Httpclient](/dotnet/api/system.net.http.httpclient) 를 제공 합니다. 메서드는 응답 상태 코드가 성공 (200-299 범위의 상태 코드) 되었는지 확인 하 고 `Content-Type` 헤더가 여러 앱 페이지에 대해 `text/html; charset=utf-8` 되었는지 확인 합니다.
 
 [CreateClient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) 는 리디렉션을 자동으로 따르며 쿠키를 처리 하는 `HttpClient`의 인스턴스를 만듭니다.
 
@@ -146,16 +146,16 @@ SUT의 [환경이](xref:fundamentals/environments) 설정 되지 않은 경우 �
 
    [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/CustomWebApplicationFactory.cs?name=snippet1)]
 
-   [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) 에서의 데이터베이스 시드는 `InitializeDbForTests` 메서드로 수행 됩니다. 메서드는 [통합 테스트 샘플: 테스트 앱 구성](#test-app-organization) 섹션에 설명 되어 있습니다.
+   [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) 에서 데이터베이스 시드는 `InitializeDbForTests` 메서드를 통해 수행 됩니다. 메서드는 [통합 테스트 샘플: 테스트 앱 구성](#test-app-organization) 섹션에 설명 되어 있습니다.
 
-   SUT의 데이터베이스 컨텍스트가 `Startup.ConfigureServices` 메서드에 등록 되어 있습니다. 응용 프로그램의 `builder.ConfigureServices` 콜백은 응용 프로그램의 `Startup.ConfigureServices` 코드가 실행 된 *후* 에 실행 됩니다. 앱 데이터베이스와 다른 테스트에 다른 데이터베이스를 사용 하려면 앱의 데이터베이스 컨텍스트를 `builder.ConfigureServices`으로 바꾸어야 합니다.
+   SUT의 데이터베이스 컨텍스트가 `Startup.ConfigureServices` 메서드에 등록 되어 있습니다. 응용 프로그램의 `builder.ConfigureServices` 콜백은 응용 프로그램의 `Startup.ConfigureServices` 코드가 실행 된 *후* 에 실행 됩니다. 실행 순서는 ASP.NET Core 3.0의 릴리스와 [일반 호스트](xref:fundamentals/host/generic-host) 에 대 한 주요 변경 내용입니다. 응용 프로그램의 데이터베이스 보다 테스트에 다른 데이터베이스를 사용 하려면 앱의 데이터베이스 컨텍스트를 `builder.ConfigureServices`으로 바꾸어야 합니다.
 
-   샘플 앱은 데이터베이스 컨텍스트에 대 한 서비스 설명자를 찾고 설명자를 사용 하 여 서비스 등록을 제거 합니다. 그런 다음, 팩터리는 테스트를 위해 메모리 내 데이터베이스를 사용 하는 새 `ApplicationDbContext`을 추가 합니다.
+   샘플 앱은 데이터베이스 컨텍스트에 대 한 서비스 설명자를 찾고 설명자를 사용 하 여 서비스 등록을 제거 합니다. 그런 다음 팩터리는 테스트를 위해 메모리 내 데이터베이스를 사용 하는 새 `ApplicationDbContext`를 추가 합니다.
 
    메모리 내 데이터베이스가 아닌 다른 데이터베이스에 연결 하려면 `UseInMemoryDatabase` 호출을 변경 하 여 컨텍스트를 다른 데이터베이스에 연결 합니다. SQL Server 테스트 데이터베이스를 사용 하려면 다음을 수행 합니다.
 
    * 프로젝트 파일에서 [Microsoft.entityframeworkcore.tools.dotnet](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/) NuGet 패키지를 참조 합니다.
-   * 데이터베이스에 대 한 연결 문자열을 사용 하 여 `UseSqlServer`을 호출 합니다.
+   * 데이터베이스에 대 한 연결 문자열을 사용 하 여 `UseSqlServer`를 호출 합니다.
 
    ```csharp
    services.AddDbContext<ApplicationDbContext>((options, context) => 
@@ -165,7 +165,7 @@ SUT의 [환경이](xref:fundamentals/environments) 설정 되지 않은 경우 �
    });
    ```
 
-2. 테스트 클래스에서 사용자 지정 `CustomWebApplicationFactory`을 사용 합니다. 다음 예제에서는 `IndexPageTests` 클래스에서 팩터리를 사용 합니다.
+2. 테스트 클래스에서 사용자 지정 `CustomWebApplicationFactory`를 사용 합니다. 다음 예제에서는 `IndexPageTests` 클래스에서 팩터리를 사용 합니다.
 
    [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/IndexPageTests.cs?name=snippet1)]
 
@@ -181,9 +181,9 @@ SUT에 대 한 POST 요청은 앱의 [데이터 보호 방지 시스템이](xref
 1. 위조 방지 쿠키를 구문 분석 하 고 응답에서 유효성 검사 토큰을 요청 합니다.
 1. 위조 방지 쿠키 및 요청 유효성 검사 토큰을 사용 하 여 POST 요청을 수행 합니다.
 
-`SendAsync` 도우미 확장 메서드 (*도우미/HttpClientExtensions*) 및 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/) 의 `GetDocumentAsync` 도우미 메서드 (*도우미/htmlhelpers*)는 [AngleSharp](https://anglesharp.github.io/) 파서를 사용 하 여 위조 방지 검사를 메서드는 다음과 같습니다.
+`SendAsync`도우미 확장 메서드 (*도우미/httpclientextensions .cs*)와 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/)의 `GetDocumentAsync`도우미 메서드 (*도우미/htmlhelpers.cs*)는 [AngleSharp](https://anglesharp.github.io/) 파서를 사용 하 여 위조 방지를 처리 합니다. 다음 방법으로 확인 합니다.
 
-* `GetDocumentAsync` &ndash; [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) 수신 하 고 `IHtmlDocument`를 반환 합니다. `GetDocumentAsync`은 원래 `HttpResponseMessage`에 따라 *가상 응답* 을 준비 하는 팩터리를 사용 합니다. 자세한 내용은 [AngleSharp 설명서](https://github.com/AngleSharp/AngleSharp#documentation)를 참조 하세요.
+* `GetDocumentAsync` &ndash; [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage)를 수신하고 `IHtmlDocument`를 반환합니다. `GetDocumentAsync`는 원래 `HttpResponseMessage`를 기반으로 *가상 응답* 을 준비 하는 팩터리를 사용 합니다. 자세한 내용은 [AngleSharp 설명서](https://github.com/AngleSharp/AngleSharp#documentation)를 참조 하세요.
 * [HttpRequestMessage](/dotnet/api/system.net.http.httprequestmessage) 및 [SendAsync (HttpRequestMessage)](/dotnet/api/system.net.http.httpclient.sendasync#System_Net_Http_HttpClient_SendAsync_System_Net_Http_HttpRequestMessage_) 를 작성 하는 `SendAsync` 확장 `HttpClient` 메서드를 작성 하 여 sut에 요청을 제출 합니다. `SendAsync`에 대 한 오버 로드는 HTML 폼 (`IHtmlFormElement`) 및 다음을 허용 합니다.
   * 양식의 제출 단추 (`IHtmlElement`)
   * 양식 값 컬렉션 (`IEnumerable<KeyValuePair<string, string>>`)
@@ -204,16 +204,16 @@ SUT에 대 한 POST 요청은 앱의 [데이터 보호 방지 시스템이](xref
 
 ## <a name="client-options"></a>클라이언트 옵션
 
-다음 표에서는 `HttpClient` 인스턴스를 만들 때 사용할 수 있는 기본 [WebApplicationFactoryClientOptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions) 을 보여 줍니다.
+다음 표에서는 `HttpClient` 인스턴스를 만들 때 사용할 수 있는 기본 [WebApplicationFactoryClientOptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions)을 보여 줍니다.
 
 | 옵션 | 설명 | 기본 |
 | ------ | ----------- | ------- |
 | [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | `HttpClient` 인스턴스가 자동으로 리디렉션 응답을 따르는지 여부를 가져오거나 설정 합니다. | `true` |
 | [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | `HttpClient` 인스턴스의 기본 주소를 가져오거나 설정 합니다. | `http://localhost` |
 | [HandleCookies](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.handlecookies) | `HttpClient` 인스턴스에서 쿠키를 처리할지 여부를 가져오거나 설정 합니다. | `true` |
-| [Max자동 리디렉션](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.maxautomaticredirections) | `HttpClient` 인스턴스에서 따라야 하는 리디렉션 응답의 최대 수를 가져오거나 설정 합니다. | 7 |
+| [MaxAutomaticRedirections](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.maxautomaticredirections) | `HttpClient` 인스턴스에서 따라야 하는 리디렉션 응답의 최대 수를 가져오거나 설정 합니다. | 7 |
 
-`WebApplicationFactoryClientOptions` 클래스를 만들어 [CreateClient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) 메서드에 전달 합니다 (기본값은 코드 예제에 표시 됨).
+`WebApplicationFactoryClientOptions` 클래스를 만들고 [CreateClient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) 메서드에 전달 합니다 (기본값은 코드 예제에 표시 됨).
 
 ```csharp
 // Default client option values are shown
@@ -232,11 +232,11 @@ _client = _factory.CreateClient(clientOptions);
 
 샘플 SUT에는 견적을 반환 하는 범위 지정 서비스가 포함 되어 있습니다. 인덱스 페이지를 요청 하면 따옴표가 인덱스 페이지의 숨겨진 필드에 포함 됩니다.
 
-*Services/IQuoteService*:
+*Services/IQuoteService.cs*:
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Services/IQuoteService.cs?name=snippet1)]
 
-*Services/QuoteService*:
+*Services/QuoteService.cs*:
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Services/QuoteService.cs?name=snippet1)]
 
@@ -259,17 +259,17 @@ _client = _factory.CreateClient(clientOptions);
     London, and we&#x27;re already 30,000 years late.">
 ```
 
-통합 테스트에서 서비스 및 견적 주입을 테스트 하기 위해 테스트를 통해 모의 서비스를 SUT에 삽입 합니다. 모의 서비스는 앱의 `QuoteService`을 테스트 앱에서 제공 하는 서비스 (`TestQuoteService` 이라고 함)로 바꿉니다.
+통합 테스트에서 서비스 및 견적 주입을 테스트 하기 위해 테스트를 통해 모의 서비스를 SUT에 삽입 합니다. 모의 서비스는 `TestQuoteService`이라는 테스트 앱에서 제공 하는 서비스로 앱의 `QuoteService`를 대체 합니다.
 
 *IntegrationTests.IndexPageTests.cs*:
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/IndexPageTests.cs?name=snippet4)]
 
-`ConfigureTestServices`이 호출 되 고 범위가 지정 된 서비스가 등록 됩니다.
+가 호출 되 고 범위가 지정 된 서비스가 등록 `ConfigureTestServices`.
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/IndexPageTests.cs?name=snippet5&highlight=7-10,17,20-21)]
 
-테스트 실행 중에 생성 된 태그는 `TestQuoteService`에서 제공 된 따옴표 텍스트를 반영 하므로 어설션이 통과 합니다.
+테스트 실행 중에 생성 된 태그는 `TestQuoteService`에서 제공 하는 따옴표 텍스트를 반영 하므로 어설션이 통과 합니다.
 
 ```html
 <input id="quote" type="hidden" value="Something&#x27;s interfering with time, 
@@ -294,7 +294,7 @@ SUT에서 `/SecurePage` 페이지는 [AuthorizePage](/dotnet/api/microsoft.exten
 클라이언트에서 리디렉션을 따르도록 허용 하지 않으면 다음 검사를 수행할 수 있습니다.
 
 * SUT에서 반환 된 상태 코드는 HttpStatusCode 결과에 대해 확인할 수 있습니다 [.](/dotnet/api/system.net.httpstatuscode) 이는 로그인 페이지에 대 한 리디렉션 이후의 최종 상태 코드는 [HttpStatusCode](/dotnet/api/system.net.httpstatuscode)입니다.
-* 응답 헤더의 `Location` 헤더 값은 마지막 로그인 페이지 응답이 아닌 `http://localhost/Identity/Account/Login`로 시작 하는 것을 확인 하기 위해 확인 됩니다 .이 값은 `Location` 헤더가 존재 하지 않습니다.
+* 응답 헤더의 `Location` 헤더 값은 마지막 로그인 페이지 응답이 아니라 `http://localhost/Identity/Account/Login`로 시작 하는지 확인 하 고 `Location` 헤더가 표시 되지 않습니다.
 
 테스트 앱은 인증 및 권한 부여의 측면을 테스트 하기 위해 [ConfigureTestServices](/dotnet/api/microsoft.aspnetcore.testhost.webhostbuilderextensions.configuretestservices) 에서 <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1>를 mock 할 수 있습니다. 최소한의 시나리오는 AuthenticateResult을 반환 [합니다.](xref:Microsoft.AspNetCore.Authentication.AuthenticateResult.Success*)
 
@@ -306,7 +306,7 @@ SUT에서 `/SecurePage` 페이지는 [AuthorizePage](/dotnet/api/microsoft.exten
 
 `WebApplicationFactoryClientOptions`에 대 한 자세한 내용은 [클라이언트 옵션](#client-options) 섹션을 참조 하세요.
 
-## <a name="set-the-environment"></a>환경 설정
+## <a name="set-the-environment"></a>환경 변수를 설정합니다.
 
 기본적으로 SUT의 호스트 및 앱 환경은 개발 환경을 사용 하도록 구성 됩니다. SUT의 환경을 재정의 하려면:
 
@@ -322,7 +322,7 @@ protected override IHostBuilder CreateHostBuilder() =>
 
 ## <a name="how-the-test-infrastructure-infers-the-app-content-root-path"></a>테스트 인프라가 앱 콘텐츠 루트 경로를 유추 하는 방법
 
-`WebApplicationFactory` 생성자는 `TEntryPoint` 어셈블리 `System.Reflection.Assembly.FullName`와 같은 키를 사용 하 여 통합 테스트가 포함 된 어셈블리에서 [WebApplicationFactoryContentRootAttribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) 를 검색 하 여 앱 [콘텐츠 루트](xref:fundamentals/index#content-root) 경로를 유추 합니다. 올바른 키를 가진 특성을 찾을 수 없는 경우 `WebApplicationFactory`은 솔루션 파일 ( *.sln*)을 검색 하는 것으로 대체 되 고 `TEntryPoint` 어셈블리 이름을 솔루션 디렉터리에 추가 합니다. 응용 프로그램 루트 디렉터리 (콘텐츠 루트 경로)는 뷰와 콘텐츠 파일을 검색 하는 데 사용 됩니다.
+`WebApplicationFactory` 생성자는 `TEntryPoint` 어셈블리 `System.Reflection.Assembly.FullName`와 같은 키를 사용 하 여 통합 테스트가 포함 된 어셈블리에서 [WebApplicationFactoryContentRootAttribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) 를 검색 하 여 앱 [콘텐츠 루트](xref:fundamentals/index#content-root) 경로를 유추 합니다. 올바른 키를 가진 특성을 찾을 수 없는 경우 `WebApplicationFactory`는 솔루션 파일 ( *.sln*)을 검색 하는 것으로 대체 되 고 `TEntryPoint` 어셈블리 이름을 솔루션 디렉터리에 추가 합니다. 응용 프로그램 루트 디렉터리 (콘텐츠 루트 경로)는 뷰와 콘텐츠 파일을 검색 하는 데 사용 됩니다.
 
 ## <a name="disable-shadow-copying"></a>섀도 복사 사용 안 함
 
@@ -338,7 +338,7 @@ protected override IHostBuilder CreateHostBuilder() =>
 
 ## <a name="disposal-of-objects"></a>개체 삭제
 
-`IClassFixture` 구현에 대 한 테스트를 실행 한 후 xUnit에서 [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1)을 삭제 하면 [Testserver](/dotnet/api/microsoft.aspnetcore.testhost.testserver) 및 [httpclient](/dotnet/api/system.net.http.httpclient) 가 삭제 됩니다. 개발자가 인스턴스화한 개체를 삭제 해야 하는 경우 `IClassFixture` 구현에서 삭제 합니다. 자세한 내용은 [Dispose 메서드 구현](/dotnet/standard/garbage-collection/implementing-dispose)을 참조 하세요.
+`IClassFixture` 구현에 대 한 테스트를 실행 한 후 xUnit에서 [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1)을 삭제 하면 [Testserver](/dotnet/api/microsoft.aspnetcore.testhost.testserver) 및 [httpclient](/dotnet/api/system.net.http.httpclient) 가 삭제 됩니다. 개발자가 인스턴스화한 개체를 삭제 해야 하는 경우 `IClassFixture` 구현에서 삭제 합니다. 자세한 내용은 [Dispose 메서드 구현](/dotnet/standard/garbage-collection/implementing-dispose)합니다.
 
 ## <a name="integration-tests-sample"></a>통합 테스트 샘플
 
@@ -346,8 +346,8 @@ protected override IHostBuilder CreateHostBuilder() =>
 
 | App | 프로젝트 디렉터리 | 설명 |
 | --- | ----------------- | ----------- |
-| 메시지 앱 (SUT) | *src/Razorororproject* | 사용자가 메시지를 추가, 삭제, 삭제 및 분석할 수 있도록 허용 합니다. |
-| 응용 프로그램 테스트 | *테스트/RazorPagesProject. 테스트* | SUT 테스트를 통합 하는 데 사용 됩니다. |
+| 메시지 앱 (SUT) | *src/RazorPagesProject* | 사용자가 메시지를 추가, 삭제, 삭제 및 분석할 수 있도록 허용 합니다. |
+| 앱 테스트 | *tests/RazorPagesProject.Tests* | SUT 테스트를 통합 하는 데 사용 됩니다. |
 
 [Visual Studio](https://visualstudio.microsoft.com)와 같은 IDE의 기본 제공 테스트 기능을 사용 하 여 테스트를 실행할 수 있습니다. [Visual Studio Code](https://code.visualstudio.com/) 또는 명령줄을 사용 하는 경우 *테스트/RazorPagesProject. 테스트* 디렉터리의 명령 프롬프트에서 다음 명령을 실행 합니다.
 
@@ -362,9 +362,9 @@ SUT는 다음과 같은 특징을 가진 Razor Pages 메시지 시스템입니�
 * 응용 프로그램의 인덱스 페이지 (*Pages/index. cshtml* 및 *pages/인덱스인*)는 메시지의 추가, 삭제 및 분석 (메시지당 평균 단어)을 제어 하는 UI 및 페이지 모델 메서드를 제공 합니다.
 * 메시지는 `Id` (키) 및 `Text` (메시지) 라는 두 가지 속성을 사용 하 여 `Message` 클래스 (*데이터/메시지 .cs*)에서 설명 합니다. `Text` 속성은 필수 이며 200 자로 제한 됩니다.
 * 메시지는 [Entity Framework의 메모리 내 데이터베이스](/ef/core/providers/in-memory/)&#8224;를 사용 하 여 저장 됩니다.
-* 앱에는 데이터베이스 컨텍스트 클래스의 DAL (데이터 액세스 계층)이 포함 되 고 `AppDbContext` (*data/AppDbContext*)이 포함 됩니다.
+* 앱에는 데이터베이스 컨텍스트 클래스 `AppDbContext` (*data/AppDbContext*)에 DAL (데이터 액세스 계층)이 포함 되어 있습니다.
 * 응용 프로그램이 시작 될 때 데이터베이스가 비어 있는 경우 메시지 저장소는 세 개의 메시지로 초기화 됩니다.
-* 앱에는 인증 된 사용자만 액세스할 수 있는 `/SecurePage`이 포함 되어 있습니다.
+* 앱에는 인증 된 사용자만 액세스할 수 있는 `/SecurePage` 포함 되어 있습니다.
 
 &#8224;EF 항목인 [InMemory 테스트](/ef/core/miscellaneous/testing/in-memory)는 MSTest를 사용 하 여 테스트에 메모리 내 데이터베이스를 사용 하는 방법을 설명 합니다. 이 항목에서는 [Xunit](https://xunit.github.io/) 테스트 프레임 워크를 사용 합니다. 여러 테스트 프레임 워크에서 테스트 개념 및 테스트 구현은 비슷하지만 동일 하지는 않습니다.
 
@@ -381,7 +381,7 @@ SUT는 다음과 같은 특징을 가진 Razor Pages 메시지 시스템입니�
 | *IntegrationTests* | 사용자 지정 `WebApplicationFactory` 클래스를 사용 하 여 인덱스 페이지에 대 한 통합 테스트를 포함 합니다. |
 | *도우미/유틸리티* | <ul><li>*Utilities.cs* 에는 테스트 데이터로 데이터베이스를 시드 하는 데 사용 되는 `InitializeDbForTests` 메서드가 포함 되어 있습니다.</li><li>*HtmlHelpers.cs* 는 테스트 메서드에서 사용할 AngleSharp `IHtmlDocument`을 반환 하는 메서드를 제공 합니다.</li><li>*HttpClientExtensions.cs* 는 `SendAsync`에 대 한 오버 로드를 제공 하 여 sut에 요청을 제출 합니다.</li></ul> |
 
-테스트 프레임 워크는 [Xunit](https://xunit.github.io/)입니다. [AspNetCore. TestHost](/dotnet/api/microsoft.aspnetcore.testhost)( [testserver](/dotnet/api/microsoft.aspnetcore.testhost.testserver)포함)를 사용 하 여 통합 테스트를 수행 합니다. [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing) 패키지는 테스트 호스트와 테스트 서버를 구성 하는 데 사용 되기 때문에 `TestHost` 및 `TestServer` 패키지는 테스트 응용 프로그램의 프로젝트 파일 또는 테스트의 개발자 구성에서 직접 패키지 참조를 요구 하지 않습니다. 다운로드.
+테스트 프레임 워크는 [Xunit](https://xunit.github.io/)입니다. [AspNetCore. TestHost](/dotnet/api/microsoft.aspnetcore.testhost)( [testserver](/dotnet/api/microsoft.aspnetcore.testhost.testserver)포함)를 사용 하 여 통합 테스트를 수행 합니다. [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing) 패키지는 테스트 호스트와 테스트 서버를 구성 하는 데 사용 되므로 `TestHost` 및 `TestServer` 패키지는 테스트 앱의 프로젝트 파일 또는 테스트 앱의 개발자 구성에서 직접 패키지 참조를 요구 하지 않습니다.
 
 **테스트를 위해 데이터베이스 시드**
 
@@ -401,7 +401,7 @@ SUT의 데이터베이스 컨텍스트가 `Startup.ConfigureServices` 메서드�
 
 이 항목에서는 단위 테스트에 대해 기본적으로 이해 하 고 있다고 가정 합니다. 테스트 개념을 잘 모르는 경우 [.Net Core의 단위 테스트 및 .NET Standard](/dotnet/core/testing/) 항목 및 연결 된 콘텐츠를 참조 하세요.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples)([다운로드 방법](xref:index#how-to-download-a-sample))
 
 샘플 앱은 Razor Pages 앱 이며 Razor Pages를 기본적으로 이해 하 고 있다고 가정 합니다. Razor Pages에 익숙하지 않은 경우 다음 항목을 참조 하세요.
 
@@ -467,14 +467,14 @@ ASP.NET Core의 통합 테스트에는 다음이 필요 합니다.
 
 * SUT의 종속성 파일 ( *. deps*)을 테스트 프로젝트의 *bin* 디렉터리에 복사 합니다.
 * 테스트를 실행할 때 정적 파일 및 페이지/뷰가 검색 되도록 [콘텐츠 루트](xref:fundamentals/index#content-root) 를 sut의 프로젝트 루트로 설정 합니다.
-* `TestServer`를 사용 하 여 SUT를 간소화 하는 [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) 클래스를 제공 합니다.
+* `TestServer`를 사용하여 Sut를 간소화하는 [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) 클래스를 제공합니다.
 
 [단위 테스트](/dotnet/articles/core/testing/unit-testing-with-dotnet-test) 설명서에서는 테스트를 실행 하는 방법에 대 한 자세한 지침과 테스트 및 테스트 클래스의 이름을 설정 하는 방법에 대 한 자세한 지침과 함께 테스트 프로젝트 및 test runner를 설정 하는 방법을 설명 합니다.
 
 > [!NOTE]
 > 앱에 대 한 테스트 프로젝트를 만들 때 통합 테스트에서 여러 프로젝트로 단위 테스트를 분리 합니다. 이를 통해 인프라 테스트 구성 요소가 실수로 단위 테스트에 포함 되지 않도록 할 수 있습니다. 단위 및 통합 테스트를 분리 하 여 실행 되는 테스트 집합을 제어할 수도 있습니다.
 
-Razor Pages 앱과 MVC 앱의 테스트에 대 한 구성의 차이는 거의 없습니다. 유일한 차이점은 테스트의 이름을 지정 하는 방법 뿐입니다. Razor Pages 앱에서 페이지 끝점의 테스트는 일반적으로 페이지 모델 클래스 (예: 인덱스 페이지에 대 한 구성 요소 통합을 테스트 하기 위해 `IndexPageTests`) 뒤에 이름이 지정 됩니다. MVC 앱에서 테스트는 일반적으로 컨트롤러 클래스로 구성 되며 테스트 하는 컨트롤러 뒤에 이름이 지정 됩니다 (예: `HomeControllerTests`은 Home 컨트롤러에 대 한 구성 요소 통합 테스트).
+Razor Pages 앱과 MVC 앱의 테스트에 대 한 구성의 차이는 거의 없습니다. 유일한 차이점은 테스트의 이름을 지정 하는 방법 뿐입니다. Razor Pages 앱에서 페이지 끝점의 테스트는 일반적으로 페이지 모델 클래스 (예: 인덱스 페이지에 대 한 구성 요소 통합을 테스트 하기 위해 `IndexPageTests`) 뒤에 이름이 지정 됩니다. MVC 앱에서 테스트는 일반적으로 컨트롤러 클래스로 구성 되며 테스트 하는 컨트롤러 뒤에 이름이 지정 됩니다 (예: 홈 컨트롤러에 대 한 구성 요소 통합을 테스트 하는 `HomeControllerTests`).
 
 ## <a name="test-app-prerequisites"></a>응용 프로그램 테스트 필수 조건
 
@@ -482,13 +482,13 @@ Razor Pages 앱과 MVC 앱의 테스트에 대 한 구성의 차이는 거의 �
 
 * 다음 패키지를 참조 합니다.
   * [Microsoft.AspNetCore.App](https://www.nuget.org/packages/Microsoft.AspNetCore.App/)
-  * [AspNetCore.](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/)
+  * [Microsoft.AspNetCore.Mvc.Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/)
 * 프로젝트 파일 (`<Project Sdk="Microsoft.NET.Sdk.Web">`)에서 웹 SDK를 지정 합니다. 웹 SDK는 [AspNetCore 메타 패키지](xref:fundamentals/metapackage-app)를 참조할 때 필요 합니다.
 
 이러한 필수 구성 요소는 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/)에서 볼 수 있습니다. *테스트/RazorPagesProject. 테스트/razor*  프로젝트. .csproj 파일을 검사 합니다. 샘플 앱은 [Xunit](https://xunit.github.io/) 테스트 프레임 워크 및 [AngleSharp](https://anglesharp.github.io/) 파서 라이브러리를 사용 하므로 샘플 앱은 다음을 참조 합니다.
 
 * [xunit](https://www.nuget.org/packages/xunit/)
-* [xunit. visualstudio](https://www.nuget.org/packages/xunit.runner.visualstudio/)
+* [xunit.runner.visualstudio](https://www.nuget.org/packages/xunit.runner.visualstudio/)
 * [AngleSharp](https://www.nuget.org/packages/AngleSharp/)
 
 ## <a name="sut-environment"></a>SUT 환경
@@ -501,7 +501,7 @@ SUT의 [환경이](xref:fundamentals/environments) 설정 되지 않은 경우 �
 
 테스트 클래스는 클래스에 테스트를 포함 하 고 클래스의 테스트에서 공유 개체 인스턴스를 제공 하는 클래스 *fixture* 인터페이스 ([IClassFixture](https://xunit.github.io/docs/shared-context#class-fixture))를 구현 합니다.
 
-다음 테스트 클래스 `BasicTests`에서는 `WebApplicationFactory`를 사용 하 여 SUT를 부트스트랩 하 고 `Get_EndpointsReturnSuccessAndCorrectContentType`테스트 메서드에 [Httpclient](/dotnet/api/system.net.http.httpclient) 를 제공 합니다. 메서드는 응답 상태 코드가 성공 (200-299 범위의 상태 코드) 되었는지 확인 하 고 `Content-Type` 헤더는 여러 앱 페이지에 대해 `text/html; charset=utf-8`입니다.
+다음 테스트 클래스 `BasicTests`에서는 `WebApplicationFactory`를 사용 하 여 SUT를 부트스트랩 하 고 `Get_EndpointsReturnSuccessAndCorrectContentType`테스트 메서드에 [Httpclient](/dotnet/api/system.net.http.httpclient) 를 제공 합니다. 메서드는 응답 상태 코드가 성공 (200-299 범위의 상태 코드) 되었는지 확인 하 고 `Content-Type` 헤더가 여러 앱 페이지에 대해 `text/html; charset=utf-8` 되었는지 확인 합니다.
 
 [CreateClient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) 는 리디렉션을 자동으로 따르며 쿠키를 처리 하는 `HttpClient`의 인스턴스를 만듭니다.
 
@@ -517,9 +517,9 @@ SUT의 [환경이](xref:fundamentals/environments) 설정 되지 않은 경우 �
 
    [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/CustomWebApplicationFactory.cs?name=snippet1)]
 
-   [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) 에서의 데이터베이스 시드는 `InitializeDbForTests` 메서드로 수행 됩니다. 메서드는 [통합 테스트 샘플: 테스트 앱 구성](#test-app-organization) 섹션에 설명 되어 있습니다.
+   [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) 에서 데이터베이스 시드는 `InitializeDbForTests` 메서드를 통해 수행 됩니다. 메서드는 [통합 테스트 샘플: 테스트 앱 구성](#test-app-organization) 섹션에 설명 되어 있습니다.
 
-2. 테스트 클래스에서 사용자 지정 `CustomWebApplicationFactory`을 사용 합니다. 다음 예제에서는 `IndexPageTests` 클래스에서 팩터리를 사용 합니다.
+2. 테스트 클래스에서 사용자 지정 `CustomWebApplicationFactory`를 사용 합니다. 다음 예제에서는 `IndexPageTests` 클래스에서 팩터리를 사용 합니다.
 
    [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/IndexPageTests.cs?name=snippet1)]
 
@@ -535,9 +535,9 @@ SUT에 대 한 POST 요청은 앱의 [데이터 보호 방지 시스템이](xref
 1. 위조 방지 쿠키를 구문 분석 하 고 응답에서 유효성 검사 토큰을 요청 합니다.
 1. 위조 방지 쿠키 및 요청 유효성 검사 토큰을 사용 하 여 POST 요청을 수행 합니다.
 
-`SendAsync` 도우미 확장 메서드 (*도우미/HttpClientExtensions*) 및 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/) 의 `GetDocumentAsync` 도우미 메서드 (*도우미/htmlhelpers*)는 [AngleSharp](https://anglesharp.github.io/) 파서를 사용 하 여 위조 방지 검사를 메서드는 다음과 같습니다.
+`SendAsync`도우미 확장 메서드 (*도우미/httpclientextensions .cs*)와 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/)의 `GetDocumentAsync`도우미 메서드 (*도우미/htmlhelpers.cs*)는 [AngleSharp](https://anglesharp.github.io/) 파서를 사용 하 여 위조 방지를 처리 합니다. 다음 방법으로 확인 합니다.
 
-* `GetDocumentAsync` &ndash; [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) 수신 하 고 `IHtmlDocument`를 반환 합니다. `GetDocumentAsync`은 원래 `HttpResponseMessage`에 따라 *가상 응답* 을 준비 하는 팩터리를 사용 합니다. 자세한 내용은 [AngleSharp 설명서](https://github.com/AngleSharp/AngleSharp#documentation)를 참조 하세요.
+* `GetDocumentAsync` &ndash; [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage)를 수신하고 `IHtmlDocument`를 반환합니다. `GetDocumentAsync`는 원래 `HttpResponseMessage`를 기반으로 *가상 응답* 을 준비 하는 팩터리를 사용 합니다. 자세한 내용은 [AngleSharp 설명서](https://github.com/AngleSharp/AngleSharp#documentation)를 참조 하세요.
 * [HttpRequestMessage](/dotnet/api/system.net.http.httprequestmessage) 및 [SendAsync (HttpRequestMessage)](/dotnet/api/system.net.http.httpclient.sendasync#System_Net_Http_HttpClient_SendAsync_System_Net_Http_HttpRequestMessage_) 를 작성 하는 `SendAsync` 확장 `HttpClient` 메서드를 작성 하 여 sut에 요청을 제출 합니다. `SendAsync`에 대 한 오버 로드는 HTML 폼 (`IHtmlFormElement`) 및 다음을 허용 합니다.
   * 양식의 제출 단추 (`IHtmlElement`)
   * 양식 값 컬렉션 (`IEnumerable<KeyValuePair<string, string>>`)
@@ -558,16 +558,16 @@ SUT에 대 한 POST 요청은 앱의 [데이터 보호 방지 시스템이](xref
 
 ## <a name="client-options"></a>클라이언트 옵션
 
-다음 표에서는 `HttpClient` 인스턴스를 만들 때 사용할 수 있는 기본 [WebApplicationFactoryClientOptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions) 을 보여 줍니다.
+다음 표에서는 `HttpClient` 인스턴스를 만들 때 사용할 수 있는 기본 [WebApplicationFactoryClientOptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions)을 보여 줍니다.
 
 | 옵션 | 설명 | 기본 |
 | ------ | ----------- | ------- |
 | [AllowAutoRedirect](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | `HttpClient` 인스턴스가 자동으로 리디렉션 응답을 따르는지 여부를 가져오거나 설정 합니다. | `true` |
 | [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | `HttpClient` 인스턴스의 기본 주소를 가져오거나 설정 합니다. | `http://localhost` |
 | [HandleCookies](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.handlecookies) | `HttpClient` 인스턴스에서 쿠키를 처리할지 여부를 가져오거나 설정 합니다. | `true` |
-| [Max자동 리디렉션](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.maxautomaticredirections) | `HttpClient` 인스턴스에서 따라야 하는 리디렉션 응답의 최대 수를 가져오거나 설정 합니다. | 7 |
+| [MaxAutomaticRedirections](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.maxautomaticredirections) | `HttpClient` 인스턴스에서 따라야 하는 리디렉션 응답의 최대 수를 가져오거나 설정 합니다. | 7 |
 
-`WebApplicationFactoryClientOptions` 클래스를 만들어 [CreateClient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) 메서드에 전달 합니다 (기본값은 코드 예제에 표시 됨).
+`WebApplicationFactoryClientOptions` 클래스를 만들고 [CreateClient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) 메서드에 전달 합니다 (기본값은 코드 예제에 표시 됨).
 
 ```csharp
 // Default client option values are shown
@@ -586,11 +586,11 @@ _client = _factory.CreateClient(clientOptions);
 
 샘플 SUT에는 견적을 반환 하는 범위 지정 서비스가 포함 되어 있습니다. 인덱스 페이지를 요청 하면 따옴표가 인덱스 페이지의 숨겨진 필드에 포함 됩니다.
 
-*Services/IQuoteService*:
+*Services/IQuoteService.cs*:
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Services/IQuoteService.cs?name=snippet1)]
 
-*Services/QuoteService*:
+*Services/QuoteService.cs*:
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Services/QuoteService.cs?name=snippet1)]
 
@@ -613,17 +613,17 @@ _client = _factory.CreateClient(clientOptions);
     London, and we&#x27;re already 30,000 years late.">
 ```
 
-통합 테스트에서 서비스 및 견적 주입을 테스트 하기 위해 테스트를 통해 모의 서비스를 SUT에 삽입 합니다. 모의 서비스는 앱의 `QuoteService`을 테스트 앱에서 제공 하는 서비스 (`TestQuoteService` 이라고 함)로 바꿉니다.
+통합 테스트에서 서비스 및 견적 주입을 테스트 하기 위해 테스트를 통해 모의 서비스를 SUT에 삽입 합니다. 모의 서비스는 `TestQuoteService`이라는 테스트 앱에서 제공 하는 서비스로 앱의 `QuoteService`를 대체 합니다.
 
 *IntegrationTests.IndexPageTests.cs*:
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/IndexPageTests.cs?name=snippet4)]
 
-`ConfigureTestServices`이 호출 되 고 범위가 지정 된 서비스가 등록 됩니다.
+가 호출 되 고 범위가 지정 된 서비스가 등록 `ConfigureTestServices`.
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/IndexPageTests.cs?name=snippet5&highlight=7-10,17,20-21)]
 
-테스트 실행 중에 생성 된 태그는 `TestQuoteService`에서 제공 된 따옴표 텍스트를 반영 하므로 어설션이 통과 합니다.
+테스트 실행 중에 생성 된 태그는 `TestQuoteService`에서 제공 하는 따옴표 텍스트를 반영 하므로 어설션이 통과 합니다.
 
 ```html
 <input id="quote" type="hidden" value="Something&#x27;s interfering with time, 
@@ -648,7 +648,7 @@ SUT에서 `/SecurePage` 페이지는 [AuthorizePage](/dotnet/api/microsoft.exten
 클라이언트에서 리디렉션을 따르도록 허용 하지 않으면 다음 검사를 수행할 수 있습니다.
 
 * SUT에서 반환 된 상태 코드는 HttpStatusCode 결과에 대해 확인할 수 있습니다 [.](/dotnet/api/system.net.httpstatuscode) 이는 로그인 페이지에 대 한 리디렉션 이후의 최종 상태 코드는 [HttpStatusCode](/dotnet/api/system.net.httpstatuscode)입니다.
-* 응답 헤더의 `Location` 헤더 값은 마지막 로그인 페이지 응답이 아닌 `http://localhost/Identity/Account/Login`로 시작 하는 것을 확인 하기 위해 확인 됩니다 .이 값은 `Location` 헤더가 존재 하지 않습니다.
+* 응답 헤더의 `Location` 헤더 값은 마지막 로그인 페이지 응답이 아니라 `http://localhost/Identity/Account/Login`로 시작 하는지 확인 하 고 `Location` 헤더가 표시 되지 않습니다.
 
 테스트 앱은 인증 및 권한 부여의 측면을 테스트 하기 위해 [ConfigureTestServices](/dotnet/api/microsoft.aspnetcore.testhost.webhostbuilderextensions.configuretestservices) 에서 <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1>를 mock 할 수 있습니다. 최소한의 시나리오는 AuthenticateResult을 반환 [합니다.](xref:Microsoft.AspNetCore.Authentication.AuthenticateResult.Success*)
 
@@ -660,7 +660,7 @@ SUT에서 `/SecurePage` 페이지는 [AuthorizePage](/dotnet/api/microsoft.exten
 
 `WebApplicationFactoryClientOptions`에 대 한 자세한 내용은 [클라이언트 옵션](#client-options) 섹션을 참조 하세요.
 
-## <a name="set-the-environment"></a>환경 설정
+## <a name="set-the-environment"></a>환경 변수를 설정합니다.
 
 기본적으로 SUT의 호스트 및 앱 환경은 개발 환경을 사용 하도록 구성 됩니다. SUT의 환경을 재정의 하려면:
 
@@ -676,7 +676,7 @@ protected override IHostBuilder CreateHostBuilder() =>
 
 ## <a name="how-the-test-infrastructure-infers-the-app-content-root-path"></a>테스트 인프라가 앱 콘텐츠 루트 경로를 유추 하는 방법
 
-`WebApplicationFactory` 생성자는 `TEntryPoint` 어셈블리 `System.Reflection.Assembly.FullName`와 같은 키를 사용 하 여 통합 테스트가 포함 된 어셈블리에서 [WebApplicationFactoryContentRootAttribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) 를 검색 하 여 앱 [콘텐츠 루트](xref:fundamentals/index#content-root) 경로를 유추 합니다. 올바른 키를 가진 특성을 찾을 수 없는 경우 `WebApplicationFactory`은 솔루션 파일 ( *.sln*)을 검색 하는 것으로 대체 되 고 `TEntryPoint` 어셈블리 이름을 솔루션 디렉터리에 추가 합니다. 응용 프로그램 루트 디렉터리 (콘텐츠 루트 경로)는 뷰와 콘텐츠 파일을 검색 하는 데 사용 됩니다.
+`WebApplicationFactory` 생성자는 `TEntryPoint` 어셈블리 `System.Reflection.Assembly.FullName`와 같은 키를 사용 하 여 통합 테스트가 포함 된 어셈블리에서 [WebApplicationFactoryContentRootAttribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) 를 검색 하 여 앱 [콘텐츠 루트](xref:fundamentals/index#content-root) 경로를 유추 합니다. 올바른 키를 가진 특성을 찾을 수 없는 경우 `WebApplicationFactory`는 솔루션 파일 ( *.sln*)을 검색 하는 것으로 대체 되 고 `TEntryPoint` 어셈블리 이름을 솔루션 디렉터리에 추가 합니다. 응용 프로그램 루트 디렉터리 (콘텐츠 루트 경로)는 뷰와 콘텐츠 파일을 검색 하는 데 사용 됩니다.
 
 ## <a name="disable-shadow-copying"></a>섀도 복사 사용 안 함
 
@@ -702,7 +702,7 @@ Visual Studio를 사용 하는 경우 파일의 **출력 디렉터리로 복사*
 
 ## <a name="disposal-of-objects"></a>개체 삭제
 
-`IClassFixture` 구현에 대 한 테스트를 실행 한 후 xUnit에서 [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1)을 삭제 하면 [Testserver](/dotnet/api/microsoft.aspnetcore.testhost.testserver) 및 [httpclient](/dotnet/api/system.net.http.httpclient) 가 삭제 됩니다. 개발자가 인스턴스화한 개체를 삭제 해야 하는 경우 `IClassFixture` 구현에서 삭제 합니다. 자세한 내용은 [Dispose 메서드 구현](/dotnet/standard/garbage-collection/implementing-dispose)을 참조 하세요.
+`IClassFixture` 구현에 대 한 테스트를 실행 한 후 xUnit에서 [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1)을 삭제 하면 [Testserver](/dotnet/api/microsoft.aspnetcore.testhost.testserver) 및 [httpclient](/dotnet/api/system.net.http.httpclient) 가 삭제 됩니다. 개발자가 인스턴스화한 개체를 삭제 해야 하는 경우 `IClassFixture` 구현에서 삭제 합니다. 자세한 내용은 [Dispose 메서드 구현](/dotnet/standard/garbage-collection/implementing-dispose)합니다.
 
 ## <a name="integration-tests-sample"></a>통합 테스트 샘플
 
@@ -710,8 +710,8 @@ Visual Studio를 사용 하는 경우 파일의 **출력 디렉터리로 복사*
 
 | App | 프로젝트 디렉터리 | 설명 |
 | --- | ----------------- | ----------- |
-| 메시지 앱 (SUT) | *src/Razorororproject* | 사용자가 메시지를 추가, 삭제, 삭제 및 분석할 수 있도록 허용 합니다. |
-| 응용 프로그램 테스트 | *테스트/RazorPagesProject. 테스트* | SUT 테스트를 통합 하는 데 사용 됩니다. |
+| 메시지 앱 (SUT) | *src/RazorPagesProject* | 사용자가 메시지를 추가, 삭제, 삭제 및 분석할 수 있도록 허용 합니다. |
+| 앱 테스트 | *tests/RazorPagesProject.Tests* | SUT 테스트를 통합 하는 데 사용 됩니다. |
 
 [Visual Studio](https://visualstudio.microsoft.com)와 같은 IDE의 기본 제공 테스트 기능을 사용 하 여 테스트를 실행할 수 있습니다. [Visual Studio Code](https://code.visualstudio.com/) 또는 명령줄을 사용 하는 경우 *테스트/RazorPagesProject. 테스트* 디렉터리의 명령 프롬프트에서 다음 명령을 실행 합니다.
 
@@ -726,9 +726,9 @@ SUT는 다음과 같은 특징을 가진 Razor Pages 메시지 시스템입니�
 * 응용 프로그램의 인덱스 페이지 (*Pages/index. cshtml* 및 *pages/인덱스인*)는 메시지의 추가, 삭제 및 분석 (메시지당 평균 단어)을 제어 하는 UI 및 페이지 모델 메서드를 제공 합니다.
 * 메시지는 `Id` (키) 및 `Text` (메시지) 라는 두 가지 속성을 사용 하 여 `Message` 클래스 (*데이터/메시지 .cs*)에서 설명 합니다. `Text` 속성은 필수 이며 200 자로 제한 됩니다.
 * 메시지는 [Entity Framework의 메모리 내 데이터베이스](/ef/core/providers/in-memory/)&#8224;를 사용 하 여 저장 됩니다.
-* 앱에는 데이터베이스 컨텍스트 클래스의 DAL (데이터 액세스 계층)이 포함 되 고 `AppDbContext` (*data/AppDbContext*)이 포함 됩니다.
+* 앱에는 데이터베이스 컨텍스트 클래스 `AppDbContext` (*data/AppDbContext*)에 DAL (데이터 액세스 계층)이 포함 되어 있습니다.
 * 응용 프로그램이 시작 될 때 데이터베이스가 비어 있는 경우 메시지 저장소는 세 개의 메시지로 초기화 됩니다.
-* 앱에는 인증 된 사용자만 액세스할 수 있는 `/SecurePage`이 포함 되어 있습니다.
+* 앱에는 인증 된 사용자만 액세스할 수 있는 `/SecurePage` 포함 되어 있습니다.
 
 &#8224;EF 항목인 [InMemory 테스트](/ef/core/miscellaneous/testing/in-memory)는 MSTest를 사용 하 여 테스트에 메모리 내 데이터베이스를 사용 하는 방법을 설명 합니다. 이 항목에서는 [Xunit](https://xunit.github.io/) 테스트 프레임 워크를 사용 합니다. 여러 테스트 프레임 워크에서 테스트 개념 및 테스트 구현은 비슷하지만 동일 하지는 않습니다.
 
@@ -745,7 +745,7 @@ SUT는 다음과 같은 특징을 가진 Razor Pages 메시지 시스템입니�
 | *IntegrationTests* | 사용자 지정 `WebApplicationFactory` 클래스를 사용 하 여 인덱스 페이지에 대 한 통합 테스트를 포함 합니다. |
 | *도우미/유틸리티* | <ul><li>*Utilities.cs* 에는 테스트 데이터로 데이터베이스를 시드 하는 데 사용 되는 `InitializeDbForTests` 메서드가 포함 되어 있습니다.</li><li>*HtmlHelpers.cs* 는 테스트 메서드에서 사용할 AngleSharp `IHtmlDocument`을 반환 하는 메서드를 제공 합니다.</li><li>*HttpClientExtensions.cs* 는 `SendAsync`에 대 한 오버 로드를 제공 하 여 sut에 요청을 제출 합니다.</li></ul> |
 
-테스트 프레임 워크는 [Xunit](https://xunit.github.io/)입니다. [AspNetCore. TestHost](/dotnet/api/microsoft.aspnetcore.testhost)( [testserver](/dotnet/api/microsoft.aspnetcore.testhost.testserver)포함)를 사용 하 여 통합 테스트를 수행 합니다. [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing) 패키지는 테스트 호스트와 테스트 서버를 구성 하는 데 사용 되기 때문에 `TestHost` 및 `TestServer` 패키지는 테스트 응용 프로그램의 프로젝트 파일 또는 테스트의 개발자 구성에서 직접 패키지 참조를 요구 하지 않습니다. 다운로드.
+테스트 프레임 워크는 [Xunit](https://xunit.github.io/)입니다. [AspNetCore. TestHost](/dotnet/api/microsoft.aspnetcore.testhost)( [testserver](/dotnet/api/microsoft.aspnetcore.testhost.testserver)포함)를 사용 하 여 통합 테스트를 수행 합니다. [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing) 패키지는 테스트 호스트와 테스트 서버를 구성 하는 데 사용 되므로 `TestHost` 및 `TestServer` 패키지는 테스트 앱의 프로젝트 파일 또는 테스트 앱의 개발자 구성에서 직접 패키지 참조를 요구 하지 않습니다.
 
 **테스트를 위해 데이터베이스 시드**
 

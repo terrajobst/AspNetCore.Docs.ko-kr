@@ -56,9 +56,9 @@ dotnet aspnet-codegenerator [-h|--help]
 | ----------------- | ------------ | 
 | area      | [영역 스캐폴딩](/aspnet/core/mvc/controllers/areas) |
   Controller| [컨트롤러 스캐폴딩](/aspnet/core/tutorials/first-mvc-app/adding-model) |
-  ID  | [ID 스캐폴딩](/aspnet/core/security/authentication/scaffold-identity) |
+  identity  | [Identity 스캐폴딩](/aspnet/core/security/authentication/scaffold-identity) |
   razorpage | [Razor 페이지 스캐폴딩](/aspnet/core/tutorials/razor-pages/model) |
-  View      | [보기 스캐폴딩](/aspnet/core/mvc/views/overview) |
+  view      | [보기 스캐폴딩](/aspnet/core/mvc/views/overview) |
 
 ## <a name="options"></a>옵션
 
