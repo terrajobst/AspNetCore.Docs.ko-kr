@@ -5,12 +5,12 @@ description: ASP.NET Core에서 컨트롤러 메서드, 보기 및 DataAnnotatio
 ms.author: riande
 ms.date: 12/13/2018
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: 6d960da5acecbb95893bd339b4391560bedffb3d
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: 2c442060872ab1d2d79a2e355ae257fdf1005914
+ms.sourcegitcommit: 991442dfb16ef08a0aae05bc79f9e9a2d819c587
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815411"
+ms.lasthandoff: 12/26/2019
+ms.locfileid: "75492650"
 ---
 # <a name="controller-methods-and-views-in-aspnet-core"></a>ASP.NET Core의 컨트롤러 메서드 및 보기
 
@@ -48,7 +48,7 @@ Entity Framework Core가 `Price`를 데이터베이스의 통화에 올바르게
 
 *Startup.cs* 파일에 설정된 [라우팅](xref:mvc/controllers/routing) 형식을 다시 기억해보세요.
 
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Startup.cs?name=snippet_1&highlight=5)]
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_1&highlight=5)]
 
 ASP.NET Core는 `https://localhost:5001/Movies/Edit/4`를 매개 변수 `Id`가 4인 `Movies` 컨트롤러의 `Edit` 작업 메서드에 대한 요청으로 해석합니다. 컨트롤러 메서드는 작업 메서드라고도 합니다.
 

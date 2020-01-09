@@ -5,12 +5,12 @@ description: ASP.NET Core MVC 앱에서 SQL Server LocalDB 또는 SQLite를 사�
 ms.author: riande
 ms.date: 8/16/2019
 uid: tutorials/first-mvc-app/working-with-sql
-ms.openlocfilehash: de392f4220cf0182d02a20f387164d2f4b184b58
-ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
+ms.openlocfilehash: d556f07111fb2022a1c2f1a066459566e302835d
+ms.sourcegitcommit: da2fb2d78ce70accdba903ccbfdcfffdd0112123
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/12/2019
-ms.locfileid: "72289085"
+ms.lasthandoff: 01/07/2020
+ms.locfileid: "75722775"
 ---
 # <a name="work-with-sql-in-aspnet-core"></a>ASP.NET Core에서 SQL 작업
 
@@ -28,7 +28,7 @@ ASP.NET Core [구성](xref:fundamentals/configuration/index) 시스템은 `Conne
 
 [!code-json[](start-mvc/sample/MvcMovie/appsettings.json?highlight=2&range=8-10)]
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_UseSqlite&highlight=5-6)]
 
@@ -64,7 +64,7 @@ LocalDB는 프로그램 개발을 위한 SQL Server Express 데이터베이스 �
 
   ![테이블 데이터를 보여 주는 열린 Movie 테이블](working-with-sql/_static/vd22.png)
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 [!INCLUDE[](~/includes/rp/sqlite.md)]
 [!INCLUDE[](~/includes/RP-mvc-shared/sqlite-warn.md)]
@@ -111,7 +111,7 @@ if (context.Movie.Any())
     * 비 디버그 모드에서 VS를 실행했다면 F5 키를 눌러 디버그 모드에서 실행합니다.
     * 디버그 모드에서 VS를 실행했다면 디버거를 중지하고 F5 키를 누릅니다.
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 DB의 모든 레코드를 삭제합니다(시드 메서드가 실행되도록). 앱을 중지 및 시작하여 데이터베이스를 시드합니다.
 
@@ -119,7 +119,7 @@ DB의 모든 레코드를 삭제합니다(시드 메서드가 실행되도록). 
 
 앱이 시드된 데이터를 보여줍니다.
 
-![영화 데이터를 표시하는 Microsoft Edge에서 열린 MVC 영화 응용 프로그램](working-with-sql/_static/m55.png)
+![영화 데이터를 표시하는 Microsoft Edge에서 열린 MVC 영화 애플리케이션](working-with-sql/_static/m55.png)
 
 > [!div class="step-by-step"]
 > [이전](adding-model.md)
@@ -140,7 +140,7 @@ ASP.NET Core [구성](xref:fundamentals/configuration/index) 시스템은 `Conne
 
 [!code-json[](start-mvc/sample/MvcMovie/appsettings.json?highlight=2&range=8-10)]
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
 
@@ -176,7 +176,7 @@ LocalDB는 프로그램 개발을 위한 SQL Server Express 데이터베이스 �
 
   ![테이블 데이터를 보여 주는 열린 Movie 테이블](working-with-sql/_static/vd22.png)
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 [!INCLUDE[](~/includes/rp/sqlite.md)]
 [!INCLUDE[](~/includes/RP-mvc-shared/sqlite-warn.md)]
@@ -223,7 +223,7 @@ if (context.Movie.Any())
     * 비 디버그 모드에서 VS를 실행했다면 F5 키를 눌러 디버그 모드에서 실행합니다.
     * 디버그 모드에서 VS를 실행했다면 디버거를 중지하고 F5 키를 누릅니다.
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 DB의 모든 레코드를 삭제합니다(시드 메서드가 실행되도록). 앱을 중지 및 시작하여 데이터베이스를 시드합니다.
 
@@ -231,7 +231,7 @@ DB의 모든 레코드를 삭제합니다(시드 메서드가 실행되도록). 
 
 앱이 시드된 데이터를 보여줍니다.
 
-![영화 데이터를 표시하는 Microsoft Edge에서 열린 MVC 영화 응용 프로그램](working-with-sql/_static/m55.png)
+![영화 데이터를 표시하는 Microsoft Edge에서 열린 MVC 영화 애플리케이션](working-with-sql/_static/m55_mac.png)
 
 > [!div class="step-by-step"]
 > [이전](adding-model.md)

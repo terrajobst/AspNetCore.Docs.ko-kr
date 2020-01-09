@@ -9,12 +9,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: aspnetcore-3.1
-ms.openlocfilehash: 89c676b96ef66f648544a8a884593bdafa3876de
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: 06c1d2596bff34bbfe3b55e782ea2d24321dd839
+ms.sourcegitcommit: da2fb2d78ce70accdba903ccbfdcfffdd0112123
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74944228"
+ms.lasthandoff: 01/07/2020
+ms.locfileid: "75722754"
 ---
 # <a name="whats-new-in-aspnet-core-31"></a>ASP.NET Core 3.1의 새로운 기능
 
@@ -38,7 +38,7 @@ Blazor 서버 앱에서 이제 초기 렌더링 중에 최상위 수준 구성 �
 
 예를 들어, 증분 크기(`IncrementAmount`)를 사용하여 `Counter` 구성 요소를 미리 렌더링합니다.
 
-```razor
+```cshtml
 <component type="typeof(Counter)" render-mode="ServerPrerendered" 
     param-IncrementAmount="10" />
 ```
@@ -53,7 +53,7 @@ Blazor 서버 앱에서 이제 초기 렌더링 중에 최상위 수준 구성 �
 
 ## <a name="breaking-changes-for-samesite-cookies"></a>SameSite 쿠키의 호환성이 손상되는 변경
 
-SameSite 쿠키의 동작이 예정된 브라우저 변경 내용을 반영하도록 변경되었습니다. 이는 AzureAd, OpenIdConnect 또는 WsFederation 등의 인증 시나리오에 영향을 줄 수 있습니다. 자세한 내용은 <xref:security/samesite>을 참조하세요.
+SameSite 쿠키의 동작이 예정된 브라우저 변경 내용을 반영하도록 변경되었습니다. 이는 AzureAd, OpenIdConnect 또는 WsFederation 등의 인증 시나리오에 영향을 줄 수 있습니다. 자세한 내용은 <xref:security/samesite>를 참조하세요.
 
 ## <a name="prevent-default-actions-for-events-in-opno-locblazor-apps"></a>Blazor 앱에서 이벤트의 기본 동작 방지
 

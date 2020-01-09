@@ -17,3 +17,5 @@ dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 * 스캐폴딩에 필요한 패키지: `Microsoft.VisualStudio.Web.CodeGeneration.Design` 및 `Microsoft.EntityFrameworkCore.SqlServer`.
 
 앱이 환경별로 데이터베이스 컨텍스트를 구성하도록 허용하는 여러 환경 구성에 대한 지침은 <xref:fundamentals/environments#environment-based-startup-class-and-methods>를 참조하세요.
+
+[!INCLUDE[](~/includes/scaffoldTFM.md)]
