@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: 1242ec9f71f4a26b07f9a56a2a960bf315b56ccf
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: c46f50a418cf630980ac2ba94407e4370d36e7d5
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880010"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75828934"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>ASP.NET Core 1.x에서 2.0으로 마이그레이션
 
@@ -23,7 +23,7 @@ ms.locfileid: "74880010"
 
 <a name="prerequisites"></a>
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 [ASP.NET Core 시작](xref:getting-started)을 참조하세요.
 
@@ -42,7 +42,7 @@ ms.locfileid: "74880010"
 > [!NOTE]
 > .NET Core 2.0은 .NET Core 1.x보다 훨씬 더 큰 노출 영역을 제공합니다. .NET Core 1.x에 API가 없기 때문에 전적으로 .NET Framework를 대상으로 하는 경우 .NET Core 2.0을 대상으로 하는 것은 작동할 가능성이 있습니다.
 
-프로젝트 파일에 `<RuntimeFrameworkVersion>1.{sub-version}</RuntimeFrameworkVersion>`이 포함된 경우에는 [이 GitHub 문제](https://github.com/aspnet/AspNetCore/issues/3221#issuecomment-413094268)를 참조하세요.
+프로젝트 파일에 `<RuntimeFrameworkVersion>1.{sub-version}</RuntimeFrameworkVersion>`이 포함된 경우에는 [이 GitHub 문제](https://github.com/dotnet/AspNetCore/issues/3221#issuecomment-413094268)를 참조하세요.
 
 <a name="global-json"></a>
 
@@ -152,7 +152,7 @@ EF Core 2.0을 사용하는 2.0 프로젝트에서는 애플리케이션 서비�
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Program2.cs?name=snippet_Main2Code&highlight=10)]
 
-2\.0부터 `BuildWebHost`에서 웹 호스트를 빌드하고 구성하는 작업 외에 다른 작업을 수행하는 것은 바람직하지 않습니다. 애플리케이션 실행과 관련된 모든 작업은 `BuildWebHost`&mdash; 외부(보통 *Program.cs*의 `Main` 메서드)에서 처리해야 합니다.
+2\.0부터 `BuildWebHost`에서 웹 호스트를 빌드하고 구성하는 작업 외에 다른 작업을 수행하는 것은 바람직하지 않습니다. 애플리케이션 실행과 관련된 모든 작업은 `BuildWebHost` &mdash; 외부(보통 *Program.cs*의 `Main` 메서드)에서 처리해야 합니다.
 
 <a name="view-compilation"></a>
 

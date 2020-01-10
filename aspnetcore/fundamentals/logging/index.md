@@ -5,14 +5,14 @@ description: Microsoft.Extensions.Logging NuGet 패키지에서 제공하는 로
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/04/2019
+ms.date: 01/08/2020
 uid: fundamentals/logging/index
-ms.openlocfilehash: e1c50c4592b21d56ed813dac43204d63f1bfe46c
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: d9ef6694b6c0b0a88b13d60915be6e04ebdffb28
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75359350"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829051"
 ---
 # <a name="logging-in-net-core-and-aspnet-core"></a>.NET Core 및 ASP.NET Core의 로깅
 
@@ -22,7 +22,7 @@ ms.locfileid: "75359350"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-이 문서에 사용된 대부분의 코드 예제는 ASP.NET Core 앱에서 가져온 것입니다. 해당 코드 조각의 로깅 관련 부분은 [제네릭 호스트](xref:fundamentals/host/generic-host)를 사용하는 모든 .NET Core 앱에 적용됩니다. 비 웹 콘솔 앱에서 제네릭 호스트를 사용하는 방법에 대한 자세한 내용은 [호스트된 서비스](xref:fundamentals/host/hosted-services)를 참조하세요.
+이 문서에 사용된 대부분의 코드 예제는 ASP.NET Core 앱에서 가져온 것입니다. 해당 코드 조각의 로깅 관련 부분은 [제네릭 호스트](xref:fundamentals/host/generic-host)를 사용하는 모든 .NET Core 앱에 적용됩니다. 비 웹 콘솔 앱에서 일반 호스트를 사용하는 방법에 대한 사례는 [백그라운드 작업 샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/hosted-services/samples)(<xref:fundamentals/host/hosted-services>)의 *Program.cs* 파일을 참조하세요.
 
 제네릭 호스트를 사용하지 않는 앱의 로깅 코드는 [공급자 추가](#add-providers) 및 [로거 생성](#create-logs) 방식에 따라 달라집니다. 비 호스트 코드 예제는 문서의 해당 섹션에 나와 있습니다.
 
