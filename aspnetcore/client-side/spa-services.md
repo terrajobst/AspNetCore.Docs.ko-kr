@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: H1Hack27Feb2017
 ms.date: 09/06/2019
 uid: client-side/spa-services
-ms.openlocfilehash: 52285999d7710cc3198836b9246596980cfc1666
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: caff1a735de3274b371f67e6e485dc42e579452c
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75355782"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75828219"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>JavaScript 서비스를 사용 하 여 ASP.NET Core에서 단일 페이지 응용 프로그램 만들기
 
@@ -23,7 +23,7 @@ ms.locfileid: "75355782"
 ::: moniker range=">= aspnetcore-3.0"
 
 > [!WARNING]
-> 이 문서에서 설명 하는 기능은 ASP.NET Core 3.0에서 사용 되지 않습니다. 더 간단한 SPA 프레임 워크 통합 메커니즘은 [AspNetCore. SpaServices](https://www.nuget.org/packages/Microsoft.AspNetCore.SpaServices.Extensions) NuGet 패키지에서 사용할 수 있습니다. 자세한 내용은 [[알림] Obsoleting 및 AspNetCore 서비스](https://github.com/aspnet/AspNetCore/issues/12890)를 참조 하세요.
+> 이 문서에서 설명 하는 기능은 ASP.NET Core 3.0에서 사용 되지 않습니다. 더 간단한 SPA 프레임 워크 통합 메커니즘은 [AspNetCore. SpaServices](https://www.nuget.org/packages/Microsoft.AspNetCore.SpaServices.Extensions) NuGet 패키지에서 사용할 수 있습니다. 자세한 내용은 [[알림] Obsoleting 및 AspNetCore 서비스](https://github.com/dotnet/AspNetCore/issues/12890)를 참조 하세요.
 
 ::: moniker-end
 

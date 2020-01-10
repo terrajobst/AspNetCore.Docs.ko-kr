@@ -3,14 +3,14 @@ title: 개별 사용자 계정을 사용 하 여 만든 ASP.NET Core 프로젝�
 author: rick-anderson
 description: 개별 사용자 계정을 사용 하 여 만든 ASP.NET Core 프로젝트를 기반으로 하는 문서를 검색 합니다.
 ms.author: riande
-ms.date: 11/30/2017
+ms.date: 12/11/2019
 uid: security/authentication/individual
-ms.openlocfilehash: 91c5665dc50124b3ba09bdcfbf3ba501f684c604
-ms.sourcegitcommit: 9e85c2562df5e108d7933635c830297f484bb775
+ms.openlocfilehash: 7ef0d5eabded61d04fb9fe7be384a663ad7ea5f4
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/04/2019
-ms.locfileid: "73463039"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75828713"
 ---
 # <a name="articles-based-on-aspnet-core-projects-created-with-individual-user-accounts"></a>개별 사용자 계정을 사용 하 여 만든 ASP.NET Core 프로젝트를 기반으로 하는 문서
 
@@ -36,11 +36,11 @@ dotnet new razor -au Individual
 
 ::: moniker-end
 
-Web API 인증에 대 한 [이 GitHub 문제](https://github.com/aspnet/AspNetCore/issues/5833) 를 참조 하세요.
+Web API 인증에 대 한 [이 GitHub 문제](https://github.com/dotnet/AspNetCore/issues/5833) 를 참조 하세요.
 
 <a name="no"></a>
 
-## <a name="no-authentication"></a>인증 안 함
+## <a name="no-authentication"></a>인증 없음
 
 인증은 `-au` 옵션을 사용 하 여 .NET Core CLI에 지정 됩니다. Visual Studio에서 새 웹 응용 프로그램에 대해 **인증 변경** 대화 상자를 사용할 수 있습니다. Visual Studio의 새 웹 앱에 대 한 기본값은 **인증 안 함**입니다.
 
@@ -56,6 +56,32 @@ Web API 인증에 대 한 [이 GitHub 문제](https://github.com/aspnet/AspNetCo
 `-au Windows` 옵션을 사용 하 여 .NET Core CLI의 새 웹 앱에 대해 Windows 인증을 지정 합니다. Visual Studio에서 **인증 변경** 대화 상자는 **Windows 인증** 옵션을 제공 합니다.
 
 Windows 인증을 선택 하면 앱이 [Windows 인증 IIS 모듈](xref:host-and-deploy/iis/modules)을 사용 하도록 구성 됩니다. Windows 인증은 인트라넷 웹 사이트를 위한 것입니다.
+
+## <a name="dotnet-new-webapp-authentication-options"></a>dotnet new webapp 인증 옵션
+
+다음 표에서는 새 웹 앱에 사용할 수 있는 인증 옵션을 보여 줍니다.
+
+| 옵션 | 인증 유형 | 자세한 정보에 대한 링크 |
+ | ----------------- | ------------ | ---------- |
+| None            |  인증 없음 | | 
+| 개인      |  개별 인증 | <xref:security/authentication/identity>
+| IndividualB2C   |  Azure AD B2C를 사용 하 여 클라우드 호스팅 개별 인증 | [Azure AD B2C](/azure/active-directory-b2c/) |
+| SingleOrg       |  단일 테 넌 트에 대 한 조직 인증 | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
+| MultiOrg        |  여러 테 넌 트에 대 한 조직 인증 | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
+| Windows         |  Windows 인증 | [Windows 인증](xref:security/authentication/windowsauth)
+
+## <a name="visual-studio-new-webapp-authentication-options"></a>Visual Studio new webapp 인증 옵션
+
+다음 표에서는 Visual Studio를 사용 하 여 새 웹 앱을 만들 때 사용할 수 있는 인증 옵션을 보여 줍니다.
+
+| 옵션 | 인증 유형 | 자세한 정보에 대한 링크 |
+ | ----------------- | ------------ | ---------- |
+| None            |  인증 없음 | | 
+| 개별 사용자 계정/앱 내 사용자 계정 저장 |  개별 인증 | <xref:security/authentication/identity> |
+| 개별 사용자 계정/클라우드의 기존 사용자 저장소에 연결 |  Azure AD B2C를 사용 하 여 클라우드 호스팅 개별 인증 | [Azure AD B2C](/azure/active-directory-b2c/) |
+| 회사 또는 학교 클라우드/단일 조직  |  단일 테 넌 트에 대 한 조직 인증 | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
+| 회사 또는 학교 클라우드/여러 조직 |  여러 테 넌 트에 대 한 조직 인증 | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
+| Windows         |  Windows 인증 | [Windows 인증](xref:security/authentication/windowsauth)
 
 ## <a name="additional-resources"></a>추가 자료
 

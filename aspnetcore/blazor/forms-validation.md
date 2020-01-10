@@ -9,12 +9,12 @@ ms.date: 12/05/2019
 no-loc:
 - Blazor
 uid: blazor/forms-validation
-ms.openlocfilehash: f4c1845ee4b6ff9274b7117167367ccdd9f36c12
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: a94a433f26e451bbadc73615e502e46d273f05c2
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74943695"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75828141"
 ---
 # <a name="aspnet-core-opno-locblazor-forms-and-validation"></a>ASP.NET Core Blazor 폼 및 유효성 검사
 
@@ -193,7 +193,7 @@ public class Starship
 
 ## <a name="validation-support"></a>유효성 검사 지원
 
-`DataAnnotationsValidator` 구성 요소는 데이터 주석을 사용 하 여 종속 된 `EditContext`에 대 한 유효성 검사 지원을 연결 합니다. 데이터 주석을 사용 하 여 유효성 검사 지원을 활성화 하려면이 명시적인 제스처가 필요 합니다. 데이터 주석과 다른 유효성 검사 시스템을 사용 하려면 `DataAnnotationsValidator`를 사용자 지정 구현으로 바꿉니다. ASP.NET Core 구현은 참조 소스: [DataAnnotationsValidator](https://github.com/aspnet/AspNetCore/blob/master/src/Components/Forms/src/DataAnnotationsValidator.cs)/[AddDataAnnotationsValidation](https://github.com/aspnet/AspNetCore/blob/master/src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs)에서 검사할 수 있습니다.
+`DataAnnotationsValidator` 구성 요소는 데이터 주석을 사용 하 여 종속 된 `EditContext`에 대 한 유효성 검사 지원을 연결 합니다. 데이터 주석을 사용 하 여 유효성 검사 지원을 활성화 하려면이 명시적인 제스처가 필요 합니다. 데이터 주석과 다른 유효성 검사 시스템을 사용 하려면 `DataAnnotationsValidator`를 사용자 지정 구현으로 바꿉니다. ASP.NET Core 구현은 참조 소스: [DataAnnotationsValidator](https://github.com/dotnet/AspNetCore/blob/master/src/Components/Forms/src/DataAnnotationsValidator.cs)/[AddDataAnnotationsValidation](https://github.com/dotnet/AspNetCore/blob/master/src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs)에서 검사할 수 있습니다.
 
 Blazor는 두 가지 유형의 유효성 검사를 수행 합니다.
 
@@ -251,7 +251,7 @@ private class MyCustomValidator : ValidationAttribute
 
 ### <a name="compareproperty-attribute"></a>[CompareProperty] 특성
 
-<xref:System.ComponentModel.DataAnnotations.CompareAttribute> `DataAnnotationsValidator` 구성 요소에서 제대로 작동 하지 않습니다. [AspNetCoreBlazor입니다. DataAnnotations. 유효성 검사](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.DataAnnotations.Validation) *실험적* 패키지는 이러한 제한을 해결 하는 추가 유효성 검사 특성 `ComparePropertyAttribute`을 제공 합니다. Blazor 앱에서 `[CompareProperty]`는 `[Compare]` 특성을 직접 대체 합니다. 자세한 내용은 [Onvalidsubmit EditForm (aspnet/AspNetCore #10643)에서 Compareattribute를 무시](https://github.com/aspnet/AspNetCore/issues/10643#issuecomment-543909748)하는 방법을 참조 하세요.
+<xref:System.ComponentModel.DataAnnotations.CompareAttribute> `DataAnnotationsValidator` 구성 요소에서 제대로 작동 하지 않습니다. [AspNetCoreBlazor입니다. DataAnnotations. 유효성 검사](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.DataAnnotations.Validation) *실험적* 패키지는 이러한 제한을 해결 하는 추가 유효성 검사 특성 `ComparePropertyAttribute`을 제공 합니다. Blazor 앱에서 `[CompareProperty]`는 `[Compare]` 특성을 직접 대체 합니다. 자세한 내용은 [On유효 제출 EditForm (dotnet/AspNetCore #10643)에서 Compareattribute를 무시](https://github.com/dotnet/AspNetCore/issues/10643#issuecomment-543909748)하는 방법을 참조 하세요.
 
 ### <a name="nested-models-collection-types-and-complex-types"></a>중첩 된 모델, 컬렉션 형식 및 복합 형식
 

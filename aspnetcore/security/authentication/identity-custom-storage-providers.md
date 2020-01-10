@@ -6,24 +6,24 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/23/2019
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: 6d0d9b5467d9d27b936a17fa86f73e7d8123b75b
-ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
+ms.openlocfilehash: 70951085474d88fd57f1b1496a41adcda520b91f
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73760975"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829156"
 ---
 # <a name="custom-storage-providers-for-aspnet-core-identity"></a>ASP.NET Core Id에 대 한 사용자 지정 저장소 공급자
 
-작성자 [Steve Smith](https://ardalis.com/)
+작성자: [Steve Smith](https://ardalis.com/)
 
 Id ASP.NET Core은 사용자 지정 저장소 공급자를 만들어 앱에 연결할 수 있는 확장 가능한 시스템입니다. 이 항목에서는 ASP.NET Core Id에 대 한 사용자 지정 저장소 공급자를 만드는 방법에 대해 설명 합니다. 사용자 고유의 저장소 공급자를 만드는 데 중요 한 개념을 설명 하지만 단계별 연습은 아닙니다.
 
-[GitHub에서 샘플을 보거나 다운로드합니다](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample).
+[GitHub에서 샘플 보기 또는 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample)
 
 ## <a name="introduction"></a>소개
 
-기본적으로 ASP.NET Core Id 시스템은 Entity Framework Core을 사용 하 여 SQL Server 데이터베이스에 사용자 정보를 저장 합니다. 이 접근 방식은 많은 앱에서 잘 작동 합니다. 그러나 다른 지 속성 메커니즘 또는 데이터 스키마를 사용 하는 것이 좋습니다. 예를 들면,
+기본적으로 ASP.NET Core Id 시스템은 Entity Framework Core을 사용 하 여 SQL Server 데이터베이스에 사용자 정보를 저장 합니다. 이 접근 방식은 많은 앱에서 잘 작동 합니다. 그러나 다른 지 속성 메커니즘 또는 데이터 스키마를 사용 하는 것이 좋습니다. 예를 들면 다음과 같습니다.:
 
 * [Azure Table Storage](/azure/storage/) 또는 다른 데이터 저장소를 사용 합니다.
 * 데이터베이스 테이블의 구조가 다릅니다. 
@@ -83,7 +83,7 @@ ASP.NET Core Id는 관리자 및 저장소 라는 클래스로 구성 됩니다.
 
 ### <a name="context-class"></a>Context 클래스
 
-정보를 캡슐화 하 여 지 속성 메커니즘에 연결 하 고 쿼리를 실행 합니다. 여러 데이터 클래스에는이 클래스의 인스턴스가 필요 합니다. 일반적으로 종속성 주입을 통해 제공 됩니다. [예:](/dotnet/api/microsoft.aspnet.identity.corecompat.identitydbcontext-1)
+정보를 캡슐화 하 여 지 속성 메커니즘에 연결 하 고 쿼리를 실행 합니다. 여러 데이터 클래스에는이 클래스의 인스턴스가 필요 합니다. 일반적으로 종속성 주입을 통해 제공 됩니다. [예제](/dotnet/api/microsoft.aspnet.identity.corecompat.identitydbcontext-1).
 
 ### <a name="user-storage"></a>사용자 저장소
 
@@ -169,7 +169,7 @@ ASP.NET Core Id는 관리자 및 저장소 라는 클래스로 구성 됩니다.
 * **IQueryableUserStore**  
  [Iqueryableuserstore&lt;TUser&gt;](/dotnet/api/microsoft.aspnetcore.identity.iqueryableuserstore-1) 인터페이스는 쿼리 가능한 사용자 저장소를 제공 하기 위해 구현 하는 멤버를 정의 합니다.
 
-앱에 필요한 인터페이스만 구현 합니다. 예를 들면,
+앱에 필요한 인터페이스만 구현 합니다. 예를 들면 다음과 같습니다.:
 
 ```csharp
 public class UserStore : IUserStore<IdentityUser>,
@@ -215,7 +215,7 @@ public class UserStore : IUserStore<IdentityUser>,
 1. 역할을 사용 하는 경우 `RoleStore` 클래스를 사용 하도록 `RoleManager`를 업데이트 합니다.
 1. 응용 프로그램의 구성에 대 한 연결 문자열 및 자격 증명을 업데이트 합니다.
 
-예제:
+예:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -235,7 +235,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-## <a name="references"></a>참조 항목
+## <a name="references"></a>참조
 
 * [ASP.NET 4.x Id의 사용자 지정 저장소 공급자](/aspnet/identity/overview/extensibility/overview-of-custom-storage-providers-for-aspnet-identity)
-* [ASP.NET Core id](https://github.com/aspnet/AspNetCore/tree/master/src/Identity) &ndash;이 리포지토리에는 커뮤니티에서 유지 관리 하는 저장소 공급자에 대 한 링크가 포함 되어 있습니다.
+* [ASP.NET Core id](https://github.com/dotnet/AspNetCore/tree/master/src/Identity) &ndash;이 리포지토리에는 커뮤니티에서 유지 관리 하는 저장소 공급자에 대 한 링크가 포함 되어 있습니다.

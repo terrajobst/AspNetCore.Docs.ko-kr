@@ -5,14 +5,14 @@ description: 이 문서에는 Azure 호스트 및 배포 리소스의 링크가 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 11/07/2019
+ms.date: 12/16/2019
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: f9fc6e706046165c142e19ca38d97ac21914dc9b
-ms.sourcegitcommit: a104ba258ae7c0b3ee7c6fa7eaea1ddeb8b6eb73
+ms.openlocfilehash: 51d82d1deadb3d2adbdccd39c8d949e3f9f812fd
+ms.sourcegitcommit: 79850db9e79b1705b89f466c6f2c961ff15485de
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/25/2019
-ms.locfileid: "74478763"
+ms.lasthandoff: 01/07/2020
+ms.locfileid: "75693845"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Azure App Service에 ASP.NET Core 앱 배포
 
@@ -87,13 +87,13 @@ Azure Portal에서 앱 설정을 만들거나 수정하고**저장** 단추를 �
 
 ::: moniker range=">= aspnetcore-3.0"
 
-앱이 [일반 호스트](xref:fundamentals/host/generic-host)를 사용하는 경우에는 기본적으로 환경 변수가 앱 구성으로 로드되지 않으며 개발자가 구성 공급자를 추가해야 합니다. 개발자가 구성 공급자를 추가할 때 환경 변수 접두사를 결정합니다. 자세한 내용은 <xref:fundamentals/host/generic-host> 및 [환경 변수 구성 공급자](xref:fundamentals/configuration/index#environment-variables-configuration-provider)를 참조하세요.
+앱이 [일반 호스트](xref:fundamentals/host/generic-host)를 사용하는 경우 호스트를 빌드하기 위해 <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*>가 호출될 때 환경 변수가 앱의 구성에 로드됩니다. 자세한 내용은 <xref:fundamentals/host/generic-host> 및 [환경 변수 구성 공급자](xref:fundamentals/configuration/index#environment-variables-configuration-provider)를 참조하세요.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-앱이 [WebHost.CreateDefaultBuilder](/dotnet/api/microsoft.aspnetcore.webhost.createdefaultbuilder)를 사용하여 호스트를 빌드하는 경우 호스트를 구성하는 환경 변수는 `ASPNETCORE_` 접두사를 사용합니다. 자세한 내용은 <xref:fundamentals/host/web-host> 및 [환경 변수 구성 공급자](xref:fundamentals/configuration/index#environment-variables-configuration-provider)를 참조하세요.
+앱이 [웹 호스트](xref:fundamentals/host/web-host)를 사용하는 경우 호스트를 빌드하기 위해 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>가 호출될 때 환경 변수가 앱의 구성에 로드됩니다. 자세한 내용은 <xref:fundamentals/host/web-host> 및 [환경 변수 구성 공급자](xref:fundamentals/configuration/index#environment-variables-configuration-provider)를 참조하세요.
 
 ::: moniker-end
 
@@ -143,17 +143,19 @@ Azure App Service/IIS에서 호스트하는 앱의 일반적인 배포 구성 �
 * SQL 저장소
 * Redis Cache
 
-자세한 내용은 <xref:security/data-protection/implementation/key-storage-providers>을 참조하세요.
+자세한 내용은 <xref:security/data-protection/implementation/key-storage-providers>를 참조하세요.
 <a name="deploy-aspnet-core-preview-release-to-azure-app-service"></a>
 
-## <a name="deploy-aspnet-core-30-to-azure-app-service"></a>Azure App Service에 ASP.NET Core 3.0 배포
+## <a name="deploy-an-aspnet-core-app-that-uses-a-net-core-preview"></a>.NET Core 미리 보기를 사용하는 ASP.NET Core 앱 배포
 
-ASP.NET Core 3.0은 Azure App Service에서 지원됩니다. .NET Core 3.0 이후의 .NET Core 버전 미리 보기 릴리스를 배포하려면 다음 방법 중 하나를 사용합니다. 이러한 접근 방식은 런타임을 사용할 수 있지만, SDK가 Azure App Service에 설치되지 않은 경우에도 사용됩니다.
+.NET Core의 미리 보기 릴리스를 사용하는 앱을 배포하려면 다음 리소스를 참조하세요. 이러한 접근 방식은 런타임을 사용할 수 있지만, SDK가 Azure App Service에 설치되지 않은 경우에도 사용됩니다.
 
 * [Azure Pipelines를 사용하여 .NET Core SDK 버전 지정](#specify-the-net-core-sdk-version-using-azure-pipelines)
-* [자체 포함 미리 보기 앱을 배포합니다](#deploy-a-self-contained-preview-app).
-* [Web Apps for Containers에서 Docker를 사용](#use-docker-with-web-apps-for-containers)합니다.
-* [미리 보기 사이트 확장을 설치](#install-the-preview-site-extension)합니다.
+* [자체 포함 미리 보기 앱 배포](#deploy-a-self-contained-preview-app)
+* [Web Apps for Containers에서 Docker 사용](#use-docker-with-web-apps-for-containers)
+* [미리 보기 사이트 확장 설치](#install-the-preview-site-extension)
+
+Azure 앱 서비스에서 사용할 수 있는 ASP.NET Core 버전은 [ASP.NET Core on App Service Dashboard](https://aspnetcoreon.azurewebsites.net/)를 참조하세요.
 
 ### <a name="specify-the-net-core-sdk-version-using-azure-pipelines"></a>Azure Pipelines를 사용하여 .NET Core SDK 버전 지정
 

@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2019
 uid: security/enforcing-ssl
-ms.openlocfilehash: 032105c67e15ab94635ae6fadea103450c7eb0fb
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: d7d4eece935bd83b69a6a5d81898012b99d73193
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74944241"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75828908"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>ASP.NET Core에서 HTTPS 적용
 
@@ -415,7 +415,7 @@ dotnet dev-certs https --trust
 
 열려 있는 모든 브라우저 인스턴스를 닫습니다. 앱에 대 한 새 브라우저 창을 엽니다.
 
-Visual Studio의 인증서 문제를 해결 하려면 [IIS Express (aspnet/AspNetCore #16892)를 사용 하는 HTTPS 오류](https://github.com/aspnet/AspNetCore/issues/16892) 를 참조 하세요.
+Visual Studio에서 인증서 문제를 해결 하려면 [IIS Express (dotnet/AspNetCore #16892)를 사용 하는 HTTPS 오류](https://github.com/dotnet/AspNetCore/issues/16892) 를 참조 하세요.
 
 ### <a name="iis-express-ssl-certificate-used-with-visual-studio"></a>Visual Studio에서 사용 되는 SSL 인증서 IIS Express
 

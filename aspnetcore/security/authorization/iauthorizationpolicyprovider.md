@@ -6,16 +6,16 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/14/2019
 uid: security/authorization/iauthorizationpolicyprovider
-ms.openlocfilehash: fe07a113a29ed3e14679e3f3f2249b0810c17593
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 9f0a0cd5337f7f8d2fc8a4b6902a63b98f6bd702
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880701"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75828986"
 ---
 # <a name="custom-authorization-policy-providers-using-iauthorizationpolicyprovider-in-aspnet-core"></a>ASP.NET Core에서 IAuthorizationPolicyProvider를 사용 하는 사용자 지정 권한 부여 정책 공급자 
 
-[Mike Rousos](https://github.com/mjrousos)
+[Mike Rousos](https://github.com/mjrousos) 작성
 
 일반적으로 [정책 기반 권한 부여](xref:security/authorization/policies)를 사용 하는 경우 인증 서비스 구성의 일부로 `AuthorizationOptions.AddPolicy`를 호출 하 여 정책을 등록 합니다. 일부 시나리오에서는 이러한 방식으로 모든 권한 부여 정책을 등록 하는 것이 가능 하지 않을 수 있습니다. 이러한 경우 사용자 지정 `IAuthorizationPolicyProvider`를 사용 하 여 권한 부여 정책이 제공 되는 방식을 제어할 수 있습니다.
 
@@ -25,7 +25,7 @@ ms.locfileid: "74880701"
 * 다 수의 정책을 사용 하 여 (예를 들어 다른 방 번호 또는 연령에 대해) `AuthorizationOptions.AddPolicy` 호출을 통해 각 개별 권한 부여 정책을 추가 하는 것은 적합 하지 않습니다.
 * 외부 데이터 원본 (예: 데이터베이스)의 정보를 기반으로 런타임에 정책을 만들거나 다른 메커니즘을 통해 권한 부여 요구 사항을 동적으로 결정 합니다.
 
-[AspNetCore GitHub 리포지토리에서](https://github.com/aspnet/AspNetCore) [샘플 코드를 보거나 다운로드](https://github.com/aspnet/AspNetCore/tree/release/2.2/src/Security/samples/CustomPolicyProvider) 합니다. Aspnet/AspNetCore 리포지토리 ZIP 파일을 다운로드 합니다. 파일의 압축을 풉니다. *Src/Security/samples/CustomPolicyProvider* 프로젝트 폴더로 이동 합니다.
+[AspNetCore GitHub 리포지토리에서](https://github.com/dotnet/AspNetCore) [샘플 코드를 보거나 다운로드](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/CustomPolicyProvider) 합니다. Dotnet/AspNetCore 리포지토리 ZIP 파일을 다운로드 합니다. 파일의 압축을 풉니다. *Src/Security/samples/CustomPolicyProvider* 프로젝트 폴더로 이동 합니다.
 
 ## <a name="customize-policy-retrieval"></a>정책 검색 사용자 지정
 
@@ -183,4 +183,4 @@ public Task<AuthorizationPolicy> GetFallbackPolicyAsync() =>
 services.AddSingleton<IAuthorizationPolicyProvider, MinimumAgePolicyProvider>();
 ```
 
-전체 사용자 지정 `IAuthorizationPolicyProvider` 샘플은 [aspnet/AuthSamples GitHub 리포지토리에서](https://github.com/aspnet/AspNetCore/tree/release/2.2/src/Security/samples/CustomPolicyProvider)사용할 수 있습니다.
+전체 사용자 지정 `IAuthorizationPolicyProvider` 샘플은 [aspnet/AuthSamples GitHub 리포지토리에서](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/CustomPolicyProvider)사용할 수 있습니다.

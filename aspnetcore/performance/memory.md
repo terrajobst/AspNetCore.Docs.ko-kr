@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: performance/memory
-ms.openlocfilehash: dfc789d080beec09a4f0eb34c3809b9f2df0d4b5
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: 0ae367e954e21e2f696a3b292fa64f1d2dba98ec
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75357280"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829025"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core의 메모리 관리 및 GC (가비지 수집)
 
@@ -209,7 +209,7 @@ public void GetFileProvider()
 
 ![이전 차트](memory/_static/fileprovider.png)
 
-위의 차트는 메모리 사용이 늘어나는 것을 유지 하므로이 클래스의 구현과 관련 된 명확한 문제를 보여 줍니다. 이 문제는 [이 문제](https://github.com/aspnet/Home/issues/3110)에서 추적 되는 알려진 문제입니다.
+위의 차트는 메모리 사용이 늘어나는 것을 유지 하므로이 클래스의 구현과 관련 된 명확한 문제를 보여 줍니다. 이 문제는 [이 문제](https://github.com/dotnet/aspnetcore/issues/3110)에서 추적 되는 알려진 문제입니다.
 
 사용자 코드에서 다음 중 하나를 사용 하 여 동일한 누수를 발생 시킬 수 있습니다.
 
@@ -271,8 +271,9 @@ public int GetLOH1(int size)
 성능을 최대화 하려면 많은 개체 사용을 최소화 해야 합니다. 가능 하면 크게 개체를 분할 합니다. 예를 들어 ASP.NET Core의 [응답 캐싱](xref:performance/caching/response) 미들웨어는 캐시 항목을 85000 바이트 미만 블록으로 분할 합니다.
 
 다음 링크에서는 개체를 LOH 제한으로 유지 하는 ASP.NET Core 방법을 보여 줍니다.
-- [ResponseCaching/스트림/StreamUtilities .cs](https://github.com/aspnet/AspNetCore/blob/v3.0.0/src/Middleware/ResponseCaching/src/Streams/StreamUtilities.cs#L16)
-- [ResponseCaching/MemoryResponseCache](https://github.com/aspnet/ResponseCaching/blob/c1cb7576a0b86e32aec990c22df29c780af29ca5/src/Microsoft.AspNetCore.ResponseCaching/Internal/MemoryResponseCache.cs#L55)
+
+* [ResponseCaching/스트림/StreamUtilities .cs](https://github.com/dotnet/AspNetCore/blob/v3.0.0/src/Middleware/ResponseCaching/src/Streams/StreamUtilities.cs#L16)
+* [ResponseCaching/MemoryResponseCache](https://github.com/aspnet/ResponseCaching/blob/c1cb7576a0b86e32aec990c22df29c780af29ca5/src/Microsoft.AspNetCore.ResponseCaching/Internal/MemoryResponseCache.cs#L55)
 
 자세한 내용은  항목을 참조하세요.
 

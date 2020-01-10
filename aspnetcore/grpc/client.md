@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 08/21/2019
 uid: grpc/client
-ms.openlocfilehash: 56f79b303a8d53699e8eb6156d328c0da1259416
-ms.sourcegitcommit: dc5b293e08336dc236de66ed1834f7ef78359531
+ms.openlocfilehash: 1e7887388a752fb35d00e65db210c3924c6ab192
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/16/2019
-ms.locfileid: "71011140"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829103"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>.NET 클라이언트를 사용 하 여 gRPC 서비스 호출
 
@@ -22,18 +22,16 @@ ms.locfileid: "71011140"
 
 ## <a name="configure-grpc-client"></a>GRPC 클라이언트 구성
 
-grpc 클라이언트는 [.pfiles에서  *\** 생성](xref:grpc/basics#generated-c-assets)되는 구체적인 클라이언트 유형입니다. 구체적 grpc 클라이언트에는  *\*.pfile에서* grpc 서비스로 변환 하는 메서드가 있습니다.
+gRPC 클라이언트는 [ *\*.proto* 파일에서 생성](xref:grpc/basics#generated-c-assets)되는 구체적인 클라이언트 형식입니다. 구체적인 gRPC 클라이언트에는 *\*.proto* 파일에서 gRPC 서비스로 변환되는 메서드가 있습니다.
 
-채널에서 gRPC 클라이언트를 만듭니다. 먼저를 사용 `GrpcChannel.ForAddress` 하 여 채널을 만든 다음 채널을 사용 하 여 grpc 클라이언트를 만듭니다.
+채널에서 gRPC 클라이언트를 만듭니다. 먼저 `GrpcChannel.ForAddress`를 사용 하 여 채널을 만든 다음 채널을 사용 하 여 gRPC 클라이언트를 만듭니다.
 
 ```csharp
 var channel = GrpcChannel.ForAddress("https://localhost:5001");
 var client = new Greet.GreeterClient(channel);
 ```
 
-채널은 gRPC 서비스에 대 한 수명이 긴 연결을 나타냅니다. 채널을 만들면 서비스 호출과 관련 된 옵션으로 구성 됩니다. 예 `HttpClient` 를 들어 호출을 수행 하는 데 사용 되는, 최대 송신 및 수신 메시지 크기 및 로깅을 지정 하 `GrpcChannelOptions` 고에서 사용할 `GrpcChannel.ForAddress`수 있습니다. 전체 옵션 목록은 [클라이언트 구성 옵션](xref:grpc/configuration#configure-client-options)을 참조 하세요.
-
-채널을 만드는 작업은 비용이 많이 들고, gRPC 호출에 채널을 다시 사용 하면 성능상의 이점이 있습니다. 여러 가지 유형의 클라이언트를 포함 하 여 채널에서 여러 개의 구체적 gRPC 클라이언트를 만들 수 있습니다. 구체적 gRPC 클라이언트 형식은 경량 개체 이며 필요할 때 만들 수 있습니다.
+채널은 gRPC 서비스에 대 한 수명이 긴 연결을 나타냅니다. 채널을 만들면 서비스 호출과 관련 된 옵션으로 구성 됩니다. 예를 들어 호출을 수행 하는 데 사용 되는 `HttpClient` 최대 전송 및 수신 메시지 크기 및 로깅을 `GrpcChannelOptions`에 지정 하 고 `GrpcChannel.ForAddress`와 함께 사용할 수 있습니다. 전체 옵션 목록은 [클라이언트 구성 옵션](xref:grpc/configuration#configure-client-options)을 참조 하세요.
 
 ```csharp
 var channel = GrpcChannel.ForAddress("https://localhost:5001");
@@ -44,7 +42,15 @@ var counterClient = new Count.CounterClient(channel);
 // Use clients to call gRPC services
 ```
 
-`GrpcChannel.ForAddress`는 gRPC 클라이언트를 만들기 위한 유일한 옵션은 아닙니다. ASP.NET Core 앱에서 gRPC 서비스를 호출 하는 경우 [grpc 클라이언트 팩터리 통합](xref:grpc/clientfactory)을 고려 합니다. grpc 통합 `HttpClientFactory` 은 grpc 클라이언트를 만드는 중앙의 대안을 제공 합니다.
+채널 및 클라이언트 성능 및 사용:
+
+* 채널을 만드는 작업은 비용이 많이 들 수 있습니다. GRPC 호출에 채널을 재사용 하면 성능상의 이점이 있습니다.
+* gRPC 클라이언트는 채널을 사용 하 여 생성 됩니다. gRPC 클라이언트는 경량 개체 이며 캐시 하거나 다시 사용할 필요가 없습니다.
+* 여러 gRPC 클라이언트를 다양 한 유형의 클라이언트를 포함 하는 채널에서 만들 수 있습니다.
+* 채널 및 채널에서 만든 클라이언트는 여러 스레드에서 안전 하 게 사용할 수 있습니다.
+* 채널에서 만든 클라이언트는 여러 동시 호출을 수행할 수 있습니다.
+
+`GrpcChannel.ForAddress`는 gRPC 클라이언트를 만들기 위한 유일한 옵션은 아닙니다. ASP.NET Core 앱에서 gRPC 서비스를 호출 하는 경우 [grpc 클라이언트 팩터리 통합](xref:grpc/clientfactory)을 고려 하세요. `HttpClientFactory`와 gRPC 통합은 gRPC 클라이언트를 만드는 중앙의 대안을 제공 합니다.
 
 > [!NOTE]
 > [.Net 클라이언트를 사용 하 여 안전 하지 않은 gRPC 서비스를 호출](xref:grpc/troubleshoot#call-insecure-grpc-services-with-net-core-client)하려면 추가 구성이 필요 합니다.
@@ -72,14 +78,14 @@ Console.WriteLine("Greeting: " + response.Message);
 // Greeting: Hello World
 ```
 
-*\*Proto* 파일의 각 단항 서비스 메서드는 메서드를 호출 하기 위한 구체적인 grpc 클라이언트 형식에 대 한 두 가지 .net 메서드인 비동기 메서드와 차단 메서드를 생성 합니다. 예를 들어에서 `GreeterClient` 를 호출 `SayHello`하는 방법에는 다음 두 가지가 있습니다.
+*\*proto* 파일의 각 단항 서비스 메서드는 메서드를 호출 하기 위한 구체적인 grpc 클라이언트 형식에 대 한 두 가지 .net 메서드인 비동기 메서드와 블로킹 메서드를 발생 합니다. 예를 들어 `GreeterClient`에서 `SayHello`를 호출 하는 방법에는 두 가지가 있습니다.
 
-* `GreeterClient.SayHelloAsync`-비동기적 `Greeter.SayHello` 으로 서비스를 호출 합니다. 대기 수 있습니다.
-* `GreeterClient.SayHello`-서비스 `Greeter.SayHello` 를 호출 하 고 완료 될 때까지 차단 합니다. 비동기 코드에서는를 사용 하지 마세요.
+* `GreeterClient.SayHelloAsync` `Greeter.SayHello` 서비스를 비동기적으로 호출 합니다. 대기 수 있습니다.
+* `GreeterClient.SayHello` `Greeter.SayHello` 서비스를 호출 하 고 완료 될 때까지 차단 합니다. 비동기 코드에서는를 사용 하지 마세요.
 
 ### <a name="server-streaming-call"></a>서버 스트리밍 호출
 
-서버 스트리밍 호출은 요청 메시지를 보내는 클라이언트에서 시작 됩니다. `ResponseStream.MoveNext()`서비스에서 스트리밍된 메시지를 읽습니다. 서버 스트리밍 호출은를 반환할 `ResponseStream.MoveNext()` `false`때 완료 됩니다.
+서버 스트리밍 호출은 요청 메시지를 보내는 클라이언트에서 시작 됩니다. `ResponseStream.MoveNext()` 서비스에서 스트리밍된 메시지를 읽습니다. `ResponseStream.MoveNext()`에서 `false`를 반환할 때 서버 스트리밍 호출이 완료 됩니다.
 
 ```csharp
 var client = new Greet.GreeterClient(channel);
@@ -93,7 +99,7 @@ using (var call = client.SayHellos(new HelloRequest { Name = "World" }))
 }
 ```
 
-8`await foreach` 이상을 사용 하 C# 는 경우에는 구문을 사용 하 여 메시지를 읽을 수 있습니다. 확장 `IAsyncStreamReader<T>.ReadAllAsync()` 메서드는 응답 스트림에서 모든 메시지를 읽습니다.
+8 이상을 사용 하 C# 는 경우 `await foreach` 구문을 사용 하 여 메시지를 읽을 수 있습니다. `IAsyncStreamReader<T>.ReadAllAsync()` 확장 메서드는 응답 스트림에서 모든 메시지를 읽습니다.
 
 ```csharp
 var client = new Greet.GreeterClient(channel);
@@ -109,7 +115,7 @@ using (var call = client.SayHellos(new HelloRequest { Name = "World" }))
 
 ### <a name="client-streaming-call"></a>클라이언트 스트리밍 호출
 
-클라이언트에서 메시지를 보내지 *않고* 클라이언트 스트리밍 호출이 시작 됩니다. 클라이언트는를 사용 `RequestStream.WriteAsync`하 여 전송 메시지를 보내도록 선택할 수 있습니다. 클라이언트를 완료 한 후에는 `RequestStream.CompleteAsync` 서비스에 알리기 위해 메시지 보내기를 호출 해야 합니다. 서비스에서 응답 메시지를 반환 하면 호출이 완료 됩니다.
+클라이언트에서 메시지를 보내지 *않고* 클라이언트 스트리밍 호출이 시작 됩니다. 클라이언트는 `RequestStream.WriteAsync`로 메시지를 보내도록 선택할 수 있습니다. 클라이언트가 메시지 전송을 완료 하면 서비스에 알리기 위해 `RequestStream.CompleteAsync`를 호출 해야 합니다. 서비스에서 응답 메시지를 반환 하면 호출이 완료 됩니다.
 
 ```csharp
 var client = new Counter.CounterClient(channel);
@@ -129,7 +135,7 @@ using (var call = client.AccumulateCount())
 
 ### <a name="bi-directional-streaming-call"></a>양방향 스트리밍 호출
 
-클라이언트에서 메시지를 보내지 *않고* 양방향 스트리밍 호출이 시작 됩니다. 클라이언트는를 사용 `RequestStream.WriteAsync`하 여 메시지를 보내도록 선택할 수 있습니다. 서비스에서 스트리밍된 메시지는 또는 `ResponseStream.MoveNext()` `ResponseStream.ReadAllAsync()`를 통해 액세스할 수 있습니다. 에 `ResponseStream` 더 이상 메시지가 없으면 양방향 스트리밍 호출이 완료 됩니다.
+클라이언트에서 메시지를 보내지 *않고* 양방향 스트리밍 호출이 시작 됩니다. 클라이언트는 `RequestStream.WriteAsync`로 메시지를 보내도록 선택할 수 있습니다. 서비스에서 스트리밍된 메시지는 `ResponseStream.MoveNext()` 또는 `ResponseStream.ReadAllAsync()`를 사용 하 여 액세스할 수 있습니다. `ResponseStream`에 더 이상 메시지가 없으면 양방향 스트리밍 호출이 완료 됩니다.
 
 ```csharp
 using (var call = client.Echo())

@@ -7,18 +7,18 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/08/2019
 uid: security/authentication/identity/spa
-ms.openlocfilehash: f58d92634ce1ef6110533d56c40b7520dda90514
-ms.sourcegitcommit: 4818385c3cfe0805e15138a2c1785b62deeaab90
+ms.openlocfilehash: 31a5e47d772e7416646c4d83c3209d7d2b254199
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/09/2019
-ms.locfileid: "73897045"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829168"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>SPAs에 대 한 인증 및 권한 부여
 
 ASP.NET Core 3.0 이상에서는 API 권한 부여에 대 한 지원을 사용 하 여 SPAs (단일 페이지 앱)의 인증을 제공 합니다. 사용자를 인증 하 고 저장 하는 ASP.NET Core Id는 Open ID Connect 구현에 대 한 [IdentityServer](https://identityserver.io/) 와 결합 됩니다.
 
-**웹 응용 프로그램 (모델-뷰-컨트롤러)** (MVC) 및 **웹 응용 프로그램** (Razor Pages)의 인증 매개 변수와 비슷한 **각도** 및 **반응** 프로젝트 템플릿에 인증 매개 변수가 추가 되었습니다. 프로젝트 템플릿. 허용 되는 매개 변수 값은 **None** 및 **개인용**입니다. 현재 지점 **및 Redux** 프로젝트 템플릿은 인증 매개 변수를 지원 하지 않습니다.
+인증 매개 변수는 **웹 응용 프로그램 (모델-뷰-컨트롤러)** (MVC) 및 **웹 응용 프로그램** (Razor Pages) 프로젝트 템플릿의 인증 매개 변수와 비슷한 **각도** 및 **반응** 프로젝트 템플릿에 추가 되었습니다. 허용 되는 매개 변수 값은 **None** 및 **개인용**입니다. 현재 지점 **및 Redux** 프로젝트 템플릿은 인증 매개 변수를 지원 하지 않습니다.
 
 ## <a name="create-an-app-with-api-authorization-support"></a>API 권한 부여를 지 원하는 앱 만들기
 
@@ -42,7 +42,7 @@ dotnet new react -o <output_directory_name> -au Individual
 
 다음 섹션에서는 인증 지원을 포함 하는 경우 프로젝트에 대 한 추가 설명입니다.
 
-### <a name="startup-class"></a>Startup 클래스
+### <a name="startup-class"></a>시작 클래스
 
 `Startup` 클래스에는 다음과 같은 추가 기능이 있습니다.
 
@@ -95,7 +95,7 @@ dotnet new react -o <output_directory_name> -au Individual
 
 ### <a name="weatherforecastcontroller"></a>WeatherForecastController
 
-*Controllers\WeatherForecastController.cs* 파일에서 리소스에 액세스 하기 위한 기본 정책에 따라 사용자에 게 권한을 부여 해야 함을 나타내는 클래스에 적용 되는 `[Authorize]` 특성을 확인 합니다. 기본 권한 부여 정책은 위에서 언급 한 정책 체계에 `AddIdentityServerJwt` 하 여 설정 된 기본 인증 체계를 사용 하도록 구성 되며, 해당 도우미 메서드에서 구성 된 `JwtBearerHandler`를 요청에 대 한 기본 처리기로 설정 합니다. 앱입니다.
+*Controllers\WeatherForecastController.cs* 파일에서 리소스에 액세스 하기 위한 기본 정책에 따라 사용자에 게 권한을 부여 해야 함을 나타내는 클래스에 적용 되는 `[Authorize]` 특성을 확인 합니다. 기본 권한 부여 정책은 위에서 언급 한 정책 체계에 `AddIdentityServerJwt` 하 여 설정 된 기본 인증 체계를 사용 하도록 구성 되며, 이러한 도우미 메서드에서 앱에 대 한 요청의 기본 처리기로 구성 된 `JwtBearerHandler` 합니다.
 
 ### <a name="applicationdbcontext"></a>ApplicationDbContext
 
@@ -121,7 +121,7 @@ dotnet new react -o <output_directory_name> -au Individual
 }
 ```
 
-### <a name="appsettingsdevelopmentjson"></a>appsettings. 개발. json
+### <a name="appsettingsdevelopmentjson"></a>appsettings.Development.json
 
 Appsettings에 *있습니다.* 프로젝트 루트의 Development json 파일에는 토큰에 서명 하는 데 사용 되는 키를 설명 하는 `IdentityServer` 섹션이 있습니다. 프로덕션에 배포 하는 경우 [프로덕션에 배포](#deploy-to-production) 섹션에 설명 된 대로 키를 프로 비전 하 고 앱과 함께 배포 해야 합니다.
 
@@ -185,7 +185,7 @@ services.Configure<JwtBearerOptions>(
 
 API의 JWT 처리기는 `JwtBearerEvents`을 사용 하 여 인증 프로세스를 제어할 수 있는 이벤트를 발생 시킵니다. API 권한 부여에 대 한 지원을 제공 하기 위해 `AddIdentityServerJwt`는 자체 이벤트 처리기를 등록 합니다.
 
-이벤트 처리를 사용자 지정 하려면 필요한 만큼 추가 논리를 사용 하 여 기존 이벤트 처리기를 래핑합니다. 예를 들어 다음과 같은 가치를 제공해야 합니다.
+이벤트 처리를 사용자 지정 하려면 필요한 만큼 추가 논리를 사용 하 여 기존 이벤트 처리기를 래핑합니다. 예를 들면 다음과 같습니다.:
 
 ```csharp
 services.Configure<JwtBearerOptions>(
@@ -301,7 +301,7 @@ Azure Websites에 배포 하려면 [azure에 앱 배포](xref:tutorials/publish-
 
 API 권한 부여에 대 한 지원은 규칙, 기본값 및 향상 된 기능 집합을 사용 하 여 IdentityServer를 기반으로 빌드됩니다. 물론 ASP.NET Core 통합이 시나리오에 포함 되지 않는 경우 IdentityServer의 전체 기능을 내부적으로 사용할 수 있습니다. ASP.NET Core 지원은 조직에서 모든 앱을 만들고 배포 하는 "자사" 앱에 중점을 두었습니다. 따라서 동의 또는 페더레이션과 같은 항목에 대 한 지원이 제공 되지 않습니다. 이러한 시나리오의 경우 IdentityServer를 사용 하 고 해당 설명서를 따릅니다.
 
-### <a name="application-profiles"></a>응용 프로그램 프로필
+### <a name="application-profiles"></a>애플리케이션 프로필
 
 응용 프로그램 프로필은 매개 변수를 추가로 정의 하는 앱에 대 한 미리 정의 된 구성입니다. 이번에는 다음 프로필이 지원 됩니다.
 
