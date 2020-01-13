@@ -7,12 +7,12 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 12/16/2019
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: 51d82d1deadb3d2adbdccd39c8d949e3f9f812fd
-ms.sourcegitcommit: 79850db9e79b1705b89f466c6f2c961ff15485de
+ms.openlocfilehash: 286d73d732b146fef15bbfc309caeb214cdbbe0d
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/07/2020
-ms.locfileid: "75693845"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829181"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Azure App Service에 ASP.NET Core 앱 배포
 
@@ -192,7 +192,7 @@ App Service 배포 센터를 사용하여 Azure DevOps 빌드를 만들 때 기�
 
 ### <a name="install-the-preview-site-extension"></a>미리 보기 사이트 확장 설치
 
-미리 보기 사이트 확장을 사용하는 데 문제가 발생하는 경우 [aspnet/AspNetCore 문제](https://github.com/aspnet/AspNetCore/issues)를 엽니다.
+미리 보기 사이트 확장을 사용하는 데 문제가 발생하는 경우 [dotnet/AspNetCore 문제](https://github.com/dotnet/AspNetCore/issues)를 엽니다.
 
 1. Azure Portal에서 App Service로 이동합니다.
 1. 웹앱을 선택합니다.
