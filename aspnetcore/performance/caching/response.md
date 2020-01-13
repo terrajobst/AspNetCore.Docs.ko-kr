@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/04/2019
 uid: performance/caching/response
-ms.openlocfilehash: 9246305e6979a6a7e006f567ee6bf9569029aef1
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: e20c197c7ce3334d4f4f0b917d1fc94174e6c615
+ms.sourcegitcommit: 57b85708f4cded99b8f008a69830cb104cd8e879
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828310"
+ms.lasthandoff: 01/13/2020
+ms.locfileid: "75914196"
 ---
 # <a name="response-caching-in-aspnet-core"></a>ASP.NET Core의 응답 캐싱
 
@@ -66,7 +66,7 @@ HTTP 캐싱의 목적을 고려했을 때 항상 클라이언트의 `Cache-Contr
 
 ### <a name="distributed-cache"></a>분산 캐시
 
-응용 프로그램이 클라우드나 서버 팜에서 호스팅될 때 메모리에 데이터를 저장하려면 분산 캐시를 사용합니다. 이 캐시는 요청을 처리하는 서버들 간에 서로 공유됩니다. 클라이언트에 대한 캐시 데이터를 사용할 수 있는 경우 클라이언트는 그룹의 어떤 서버에서나 처리할 수 있는 요청을 제출할 수 있습니다. ASP.NET Core는 SQL Server 및 Redis 분산 캐시를 제공합니다.
+응용 프로그램이 클라우드나 서버 팜에서 호스팅될 때 메모리에 데이터를 저장하려면 분산 캐시를 사용합니다. 이 캐시는 요청을 처리하는 서버들 간에 서로 공유됩니다. 클라이언트에 대한 캐시 데이터를 사용할 수 있는 경우 클라이언트는 그룹의 어떤 서버에서나 처리할 수 있는 요청을 제출할 수 있습니다. ASP.NET Core는 SQL Server, [Redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis)및 [NCache](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/) 분산 캐시와 함께 작동 합니다.
 
 자세한 내용은 <xref:performance/caching/distributed>를 참조하세요.
 
@@ -78,7 +78,7 @@ HTTP 캐싱의 목적을 고려했을 때 항상 클라이언트의 `Cache-Contr
 
 ### <a name="distributed-cache-tag-helper"></a>분산 캐시 태그 도우미
 
-분산 된 캐시 태그 도우미를 사용 하 여 분산 클라우드 또는 웹 팜 시나리오의 MVC 보기 또는 Razor 페이지에서 콘텐츠를 캐시 합니다. 분산 캐시 태그 도우미는 SQL Server 또는 Redis에 데이터를 저장합니다.
+분산 된 캐시 태그 도우미를 사용 하 여 분산 클라우드 또는 웹 팜 시나리오의 MVC 보기 또는 Razor 페이지에서 콘텐츠를 캐시 합니다. 분산 캐시 태그 도우미는 SQL Server, [Redis](https://www.nuget.org/packages/Microsoft.Extensions.Caching.StackExchangeRedis)또는 [NCache](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/) 를 사용 하 여 데이터를 저장 합니다.
 
 자세한 내용은 <xref:mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper>를 참조하세요.
 
