@@ -1,4 +1,4 @@
-ASP.NET Core ID는 ASP.NET Core 웹앱에 UI(사용자 인터페이스) 로그인 기능을 추가합니다. 웹 API 및 SPA를 보호하려면 다음 중 하나를 사용합니다.
+ASP.NET Core Identity는 ASP.NET Core 웹앱에 UI(사용자 인터페이스) 로그인 기능을 추가합니다. 웹 API 및 SPA를 보호하려면 다음 중 하나를 사용합니다.
 
 * [Azure Active Directory](/azure/api-management/api-management-howto-protect-backend-with-aad)
 * [Azure Active Directory B2C](/azure/active-directory-b2c/active-directory-b2c-custom-rest-api-netfw)(Azure AD B2C)
