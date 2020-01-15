@@ -5,176 +5,197 @@ description: 간단한 ASP.NET Core 앱에 모델을 추가합니다.
 ms.author: riande
 ms.date: 8/15/2019
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: 2fac37e7069fb2a464d4de1da8912197f7adf8a8
-ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
+ms.openlocfilehash: 5d4251a2577111324aa2cfb715c41e3ecad5a9d1
+ms.sourcegitcommit: da2fb2d78ce70accdba903ccbfdcfffdd0112123
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73761093"
+ms.lasthandoff: 01/07/2020
+ms.locfileid: "75722801"
 ---
-# <a name="add-a-model-to-an-aspnet-core-mvc-app"></a><span data-ttu-id="cf0b9-103">ASP.NET Core MVC 앱에 모델 추가</span><span class="sxs-lookup"><span data-stu-id="cf0b9-103">Add a model to an ASP.NET Core MVC app</span></span>
+# <a name="add-a-model-to-an-aspnet-core-mvc-app"></a><span data-ttu-id="917aa-103">ASP.NET Core MVC 앱에 모델 추가</span><span class="sxs-lookup"><span data-stu-id="917aa-103">Add a model to an ASP.NET Core MVC app</span></span>
 
-<span data-ttu-id="cf0b9-104">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT) 및 [Tom Dykstra](https://github.com/tdykstra)</span><span class="sxs-lookup"><span data-stu-id="cf0b9-104">By [Rick Anderson](https://twitter.com/RickAndMSFT) and [Tom Dykstra](https://github.com/tdykstra)</span></span>
+<span data-ttu-id="917aa-104">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT) 및 [Tom Dykstra](https://github.com/tdykstra)</span><span class="sxs-lookup"><span data-stu-id="917aa-104">By [Rick Anderson](https://twitter.com/RickAndMSFT) and [Tom Dykstra](https://github.com/tdykstra)</span></span>
 
-<span data-ttu-id="cf0b9-105">이 섹션에서는 데이터베이스에서 영화를 관리하기 위한 클래스를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-105">In this section, you add classes for managing movies in a database.</span></span> <span data-ttu-id="cf0b9-106">이러한 클래스는 **M**VC 앱의 "**M**odel" 부분이 됩니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-106">These classes will be the "**M**odel" part of the **M**VC app.</span></span>
+<span data-ttu-id="917aa-105">이 섹션에서는 데이터베이스에서 영화를 관리하기 위한 클래스를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-105">In this section, you add classes for managing movies in a database.</span></span> <span data-ttu-id="917aa-106">이러한 클래스는 **M**VC 앱의 "**M**odel" 부분이 됩니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-106">These classes will be the "**M**odel" part of the **M**VC app.</span></span>
 
-<span data-ttu-id="cf0b9-107">이러한 클래스를 EF Core([Entity Framework Core](/ef/core))와 함께 사용하여 데이터베이스 작업을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-107">You use these classes with [Entity Framework Core](/ef/core) (EF Core) to work with a database.</span></span> <span data-ttu-id="cf0b9-108">EF Core는 작성해야 할 데이터 액세스 코드를 간소화하는 ORM(개체-관계형 매핑) 프레임워크입니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-108">EF Core is an object-relational mapping (ORM) framework that simplifies the data access code that you have to write.</span></span>
+<span data-ttu-id="917aa-107">이러한 클래스를 EF Core([Entity Framework Core](/ef/core))와 함께 사용하여 데이터베이스 작업을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-107">You use these classes with [Entity Framework Core](/ef/core) (EF Core) to work with a database.</span></span> <span data-ttu-id="917aa-108">EF Core는 작성해야 할 데이터 액세스 코드를 간소화하는 ORM(개체-관계형 매핑) 프레임워크입니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-108">EF Core is an object-relational mapping (ORM) framework that simplifies the data access code that you have to write.</span></span>
 
-<span data-ttu-id="cf0b9-109">직접 만들게 될 모델 클래스는 EF Core에 대한 어떠한 종속성도 없으므로 POCO(**P**lain **O**ld **C**LR **O**bject) 클래스로 알려져 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-109">The model classes you create are known as POCO classes (from **P**lain **O**ld **C**LR **O**bjects) because they don't have any dependency on EF Core.</span></span> <span data-ttu-id="cf0b9-110">이 클래스는 데이터베이스에 저장될 데이터의 속성만 정의합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-110">They just define the properties of the data that will be stored in the database.</span></span>
+<span data-ttu-id="917aa-109">직접 만들게 될 모델 클래스는 EF Core에 대한 어떠한 종속성도 없으므로 POCO(**P**lain **O**ld **C**LR **O**bject) 클래스로 알려져 있습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-109">The model classes you create are known as POCO classes (from **P**lain **O**ld **C**LR **O**bjects) because they don't have any dependency on EF Core.</span></span> <span data-ttu-id="917aa-110">이 클래스는 데이터베이스에 저장될 데이터의 속성만 정의합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-110">They just define the properties of the data that will be stored in the database.</span></span>
 
-<span data-ttu-id="cf0b9-111">이 자습서에서는 먼저 모델 클래스를 작성하고 EF Core가 데이터베이스를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-111">In this tutorial, you write the model classes first, and EF Core creates the database.</span></span> <span data-ttu-id="cf0b9-112">이 문서에서 설명하지 않는 대체 방법은 기존 데이터베이스로부터 모델 클래스를 생성하는 것입니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-112">An alternate approach not covered here is to generate model classes from an existing database.</span></span> <span data-ttu-id="cf0b9-113">이 방법에 대한 정보는 [ASP.NET Core - 기존 데이터베이스](/ef/core/get-started/aspnetcore/existing-db)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-113">For information about that approach, see [ASP.NET Core - Existing Database](/ef/core/get-started/aspnetcore/existing-db).</span></span>
+<span data-ttu-id="917aa-111">이 자습서에서는 먼저 모델 클래스를 작성하고 EF Core가 데이터베이스를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-111">In this tutorial, you write the model classes first, and EF Core creates the database.</span></span> <span data-ttu-id="917aa-112">이 문서에서 설명하지 않는 대체 방법은 기존 데이터베이스로부터 모델 클래스를 생성하는 것입니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-112">An alternate approach not covered here is to generate model classes from an existing database.</span></span> <span data-ttu-id="917aa-113">이 방법에 대한 정보는 [ASP.NET Core - 기존 데이터베이스](/ef/core/get-started/aspnetcore/existing-db)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="917aa-113">For information about that approach, see [ASP.NET Core - Existing Database](/ef/core/get-started/aspnetcore/existing-db).</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="add-a-data-model-class"></a><span data-ttu-id="cf0b9-114">데이터 모델 클래스 추가</span><span class="sxs-lookup"><span data-stu-id="cf0b9-114">Add a data model class</span></span>
+## <a name="add-a-data-model-class"></a><span data-ttu-id="917aa-114">데이터 모델 클래스 추가</span><span class="sxs-lookup"><span data-stu-id="917aa-114">Add a data model class</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="cf0b9-115">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-115">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="917aa-115">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-115">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="cf0b9-116">*Models* 폴더> **추가** > **클래스**를 마우스 오른쪽 단추로 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-116">Right-click the *Models* folder > **Add** > **Class**.</span></span> <span data-ttu-id="cf0b9-117">파일 이름을 *Movie.cs*로 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-117">Name the file *Movie.cs*.</span></span>
+<span data-ttu-id="917aa-116">*Models* 폴더> **추가** > **클래스**를 마우스 오른쪽 단추로 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-116">Right-click the *Models* folder > **Add** > **Class**.</span></span> <span data-ttu-id="917aa-117">파일 이름을 *Movie.cs*로 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-117">Name the file *Movie.cs*.</span></span>
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="cf0b9-118">Visual Studio Code / Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-118">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="917aa-118">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="917aa-118">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-<span data-ttu-id="cf0b9-119">*Movie.cs* 파일을 *Models* 폴더에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-119">Add a file named *Movie.cs* to the *Models* folder.</span></span>
+<span data-ttu-id="917aa-119">*Movie.cs* 파일을 *Models* 폴더에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-119">Add a file named *Movie.cs* to the *Models* folder.</span></span>
+
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="917aa-120">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-120">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+
+<span data-ttu-id="917aa-121">*Models* 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **새 클래스** > **빈 클래스**를 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-121">Right-click the *Models* folder > **Add** > **New Class** > **Empty Class**.</span></span> <span data-ttu-id="917aa-122">파일 이름을 *Movie.cs*로 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-122">Name the file *Movie.cs*.</span></span>
 
 ---
 
-<span data-ttu-id="cf0b9-120">다음 코드로 *Movie.cs* 파일을 수정합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-120">Update the *Movie.cs* file with the following code:</span></span>
+<span data-ttu-id="917aa-123">다음 코드로 *Movie.cs* 파일을 수정합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-123">Update the *Movie.cs* file with the following code:</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Models/Movie.cs)]
 
-<span data-ttu-id="cf0b9-121">`Movie` 클래스에는 데이터베이스에서 기본 키에 필요한 `Id` 필드가 포함되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-121">The `Movie` class contains an `Id` field, which is required by the database for the primary key.</span></span>
+<span data-ttu-id="917aa-124">`Movie` 클래스에는 데이터베이스에서 기본 키에 필요한 `Id` 필드가 포함되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-124">The `Movie` class contains an `Id` field, which is required by the database for the primary key.</span></span>
 
-<span data-ttu-id="cf0b9-122">`ReleaseDate`에 대한 [DataType](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.internal.datatypeattributeadapter) 특성은 데이터 형식(`Date`)을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-122">The [DataType](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.internal.datatypeattributeadapter) attribute on `ReleaseDate` specifies the type of the data (`Date`).</span></span> <span data-ttu-id="cf0b9-123">이 특성을 사용하면:</span><span class="sxs-lookup"><span data-stu-id="cf0b9-123">With this attribute:</span></span>
+<span data-ttu-id="917aa-125">`ReleaseDate`에 대한 [DataType](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.internal.datatypeattributeadapter) 특성은 데이터 형식(`Date`)을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-125">The [DataType](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.internal.datatypeattributeadapter) attribute on `ReleaseDate` specifies the type of the data (`Date`).</span></span> <span data-ttu-id="917aa-126">이 특성을 사용하면:</span><span class="sxs-lookup"><span data-stu-id="917aa-126">With this attribute:</span></span>
 
-  * <span data-ttu-id="cf0b9-124">사용자가 날짜 필드에 시간 정보를 입력할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-124">The user is not required to enter time information in the date field.</span></span>
-  * <span data-ttu-id="cf0b9-125">시간 정보 없이 날짜만 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-125">Only the date is displayed, not time information.</span></span>
+  * <span data-ttu-id="917aa-127">사용자가 날짜 필드에 시간 정보를 입력할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-127">The user is not required to enter time information in the date field.</span></span>
+  * <span data-ttu-id="917aa-128">시간 정보 없이 날짜만 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-128">Only the date is displayed, not time information.</span></span>
 
-<span data-ttu-id="cf0b9-126">[DataAnnotations](/dotnet/api/system.componentmodel.dataannotations)는 이후 자습서에서 다룹니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-126">[DataAnnotations](/dotnet/api/system.componentmodel.dataannotations) are covered in a later tutorial.</span></span>
+<span data-ttu-id="917aa-129">[DataAnnotations](/dotnet/api/system.componentmodel.dataannotations)는 이후 자습서에서 다룹니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-129">[DataAnnotations](/dotnet/api/system.componentmodel.dataannotations) are covered in a later tutorial.</span></span>
 
-## <a name="add-nuget-packages"></a><span data-ttu-id="cf0b9-127">NuGet 패키지 추가</span><span class="sxs-lookup"><span data-stu-id="cf0b9-127">Add NuGet packages</span></span>
+## <a name="add-nuget-packages"></a><span data-ttu-id="917aa-130">NuGet 패키지 추가</span><span class="sxs-lookup"><span data-stu-id="917aa-130">Add NuGet packages</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="cf0b9-128">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-128">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="917aa-131">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-131">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="cf0b9-129">**도구** 메뉴에서 **NuGet 패키지 관리자** > PMC(**패키지 관리자 콘솔**)를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-129">From the **Tools** menu, select **NuGet Package Manager** > **Package Manager Console** (PMC).</span></span>
+<span data-ttu-id="917aa-132">**도구** 메뉴에서 **NuGet 패키지 관리자** > **PMC(패키지 관리자 콘솔)** 을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-132">From the **Tools** menu, select **NuGet Package Manager** > **Package Manager Console** (PMC).</span></span>
 
 ![PMC 메뉴](~/tutorials/first-mvc-app/adding-model/_static/pmc.png)
 
-<span data-ttu-id="cf0b9-131">PMC에서 다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-131">In the PMC, run the following command:</span></span>
+<span data-ttu-id="917aa-134">PMC에서 다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-134">In the PMC, run the following command:</span></span>
 
 ```powershell
 Install-Package Microsoft.EntityFrameworkCore.SqlServer
 ```
 
-<span data-ttu-id="cf0b9-132">앞의 명령은 EF Core SQL Server 공급자를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-132">The preceding command adds the EF Core SQL Server provider.</span></span> <span data-ttu-id="cf0b9-133">이 공급자 패키지는 EF Core 패키지를 종속성으로 설치합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-133">The provider package installs the EF Core package as a dependency.</span></span> <span data-ttu-id="cf0b9-134">추가적인 패키지는 자습서 뒷부분의 스캐폴딩 단계에서 자동으로 설치됩니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-134">Additional packages are installed automatically in the scaffolding step later in the tutorial.</span></span>
+<span data-ttu-id="917aa-135">앞의 명령은 EF Core SQL Server 공급자를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-135">The preceding command adds the EF Core SQL Server provider.</span></span> <span data-ttu-id="917aa-136">이 공급자 패키지는 EF Core 패키지를 종속성으로 설치합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-136">The provider package installs the EF Core package as a dependency.</span></span> <span data-ttu-id="917aa-137">추가적인 패키지는 자습서 뒷부분의 스캐폴딩 단계에서 자동으로 설치됩니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-137">Additional packages are installed automatically in the scaffolding step later in the tutorial.</span></span>
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="cf0b9-135">Visual Studio Code / Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-135">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="917aa-138">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="917aa-138">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/add-EF-NuGet-SQLite-CLI.md)]
+
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="917aa-139">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-139">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+
+<span data-ttu-id="917aa-140">**프로젝트** 메뉴에서 **NuGet 패키지 관리**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-140">From the **Project** menu, select **Manage Nuget Packages**.</span></span>
+
+<span data-ttu-id="917aa-141">오른쪽 위의 **검색** 필드에 `Microsoft.EntityFrameworkCore.SQLite`를 입력하고 **반환** 키를 눌러 검색합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-141">In the **Search** field in the upper right, enter `Microsoft.EntityFrameworkCore.SQLite` and press the **Return** key to search.</span></span> <span data-ttu-id="917aa-142">일치하는 NuGet 패키지를 선택하고 **패키지 추가** 단추를 누릅니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-142">Select the matching NuGet package and press the **Add Package** button.</span></span>
+
+![Entity Framework Core NuGet 패키지 추가](~/tutorials/first-mvc-app-mac/adding-model/_static/add-nuget-packages.png)
+
+<span data-ttu-id="917aa-144">`MvcMovie` 프로젝트가 선택된 **프로젝트 선택** 대화 상자가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-144">The **Select Projects** dialog will be displayed, with the `MvcMovie` project selected.</span></span> <span data-ttu-id="917aa-145">**확인** 단추를 누릅니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-145">Press the **Ok** button.</span></span>
+
+<span data-ttu-id="917aa-146">**라이선스 승인** 대화 상자가 나타납니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-146">A **License Acceptance** dialog will be displayed.</span></span> <span data-ttu-id="917aa-147">필요에 따라 라이선스를 검토한 다음 **수락** 단추를 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-147">Review the licenses as desired, then click the **Accept** button.</span></span>
+
+<span data-ttu-id="917aa-148">위의 단계를 반복하여 다음 NuGet 패키지를 설치합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-148">Repeat the above steps to install the following NuGet packages:</span></span>
+ * `Microsoft.VisualStudio.Web.CodeGeneration.Design`
+ * `Microsoft.EntityFrameworkCore.SqlServer`
+ * `Microsoft.EntityFrameworkCore.Design`
 
 ---
 
 <a name="dc"></a>
 
-## <a name="create-a-database-context-class"></a><span data-ttu-id="cf0b9-136">데이터베이스 컨텍스트 클래스 만들기</span><span class="sxs-lookup"><span data-stu-id="cf0b9-136">Create a database context class</span></span>
+## <a name="create-a-database-context-class"></a><span data-ttu-id="917aa-149">데이터베이스 컨텍스트 클래스 만들기</span><span class="sxs-lookup"><span data-stu-id="917aa-149">Create a database context class</span></span>
 
-<span data-ttu-id="cf0b9-137">`Movie` 모델에 대한 EF Core 기능(생성, 읽기, 수정, 삭제)을 조정하려면 데이터베이스 컨텍스트 클래스가 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-137">A database context class is needed to coordinate EF Core functionality (Create, Read, Update, Delete) for the `Movie` model.</span></span> <span data-ttu-id="cf0b9-138">데이터베이스 컨텍스트는 [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)에서 파생되며 데이터 모델에 포함할 엔터티를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-138">The database context is derived from [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) and specifies the entities to include in the data model.</span></span>
+<span data-ttu-id="917aa-150">`Movie` 모델에 대한 EF Core 기능(생성, 읽기, 수정, 삭제)을 조정하려면 데이터베이스 컨텍스트 클래스가 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-150">A database context class is needed to coordinate EF Core functionality (Create, Read, Update, Delete) for the `Movie` model.</span></span> <span data-ttu-id="917aa-151">데이터베이스 컨텍스트는 [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)에서 파생되며 데이터 모델에 포함할 엔터티를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-151">The database context is derived from [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) and specifies the entities to include in the data model.</span></span>
 
-<span data-ttu-id="cf0b9-139">*Data* 폴더를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-139">Create a *Data* folder.</span></span>
+<span data-ttu-id="917aa-152">*Data* 폴더를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-152">Create a *Data* folder.</span></span>
 
-<span data-ttu-id="cf0b9-140">다음 코드로 *Data/MvcMovieContext.cs* 파일을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-140">Add a *Data/MvcMovieContext.cs* file with the following code:</span></span> 
+<span data-ttu-id="917aa-153">다음 코드로 *Data/MvcMovieContext.cs* 파일을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-153">Add a *Data/MvcMovieContext.cs* file with the following code:</span></span> 
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/zDocOnly/MvcMovieContext.cs?name=snippet)]
 
-<span data-ttu-id="cf0b9-141">이전 코드에서는 엔터티 집합에 대한 [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) 속성을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-141">The preceding code creates a [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) property for the entity set.</span></span> <span data-ttu-id="cf0b9-142">Entity Framework 용어에서 엔터티 집합은 일반적으로 데이터베이스 테이블에 해당합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-142">In Entity Framework terminology, an entity set typically corresponds to a database table.</span></span> <span data-ttu-id="cf0b9-143">엔터티는 테이블의 행에 해당합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-143">An entity corresponds to a row in the table.</span></span>
+<span data-ttu-id="917aa-154">이전 코드에서는 엔터티 집합에 대한 [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) 속성을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-154">The preceding code creates a [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) property for the entity set.</span></span> <span data-ttu-id="917aa-155">Entity Framework 용어에서 엔터티 집합은 일반적으로 데이터베이스 테이블에 해당합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-155">In Entity Framework terminology, an entity set typically corresponds to a database table.</span></span> <span data-ttu-id="917aa-156">엔터티는 테이블의 행에 해당합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-156">An entity corresponds to a row in the table.</span></span>
 
 <a name="reg"></a>
 
-## <a name="register-the-database-context"></a><span data-ttu-id="cf0b9-144">데이터베이스 컨텍스트 등록</span><span class="sxs-lookup"><span data-stu-id="cf0b9-144">Register the database context</span></span>
+## <a name="register-the-database-context"></a><span data-ttu-id="917aa-157">데이터베이스 컨텍스트 등록</span><span class="sxs-lookup"><span data-stu-id="917aa-157">Register the database context</span></span>
 
-<span data-ttu-id="cf0b9-145">ASP.NET Core는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)를 사용하여 만들어집니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-145">ASP.NET Core is built with [dependency injection (DI)](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="cf0b9-146">서비스(예: EF Core DB 컨텍스트)는 응용 프로그램 시작 중에 DI에 등록되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-146">Services (such as the EF Core DB context) must be registered with DI during application startup.</span></span> <span data-ttu-id="cf0b9-147">이러한 서비스(예: Razor 페이지)가 필요한 구성 요소는 생성자 매개 변수를 통해 해당 서비스를 제공받습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-147">Components that require these services (such as Razor Pages) are provided these services via constructor parameters.</span></span> <span data-ttu-id="cf0b9-148">DB 컨텍스트 인스턴스를 가져오는 생성자 코드는 자습서 뒷부분에 나옵니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-148">The constructor code that gets a DB context instance is shown later in the tutorial.</span></span> <span data-ttu-id="cf0b9-149">이 섹션에서는 DI 컨테이너에 데이터베이스 컨텍스트를 등록합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-149">In this section, you register the database context with the DI container.</span></span>
+<span data-ttu-id="917aa-158">ASP.NET Core는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)를 사용하여 만들어집니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-158">ASP.NET Core is built with [dependency injection (DI)](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="917aa-159">서비스(예: EF Core DB 컨텍스트)는 애플리케이션 시작 중에 DI에 등록되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-159">Services (such as the EF Core DB context) must be registered with DI during application startup.</span></span> <span data-ttu-id="917aa-160">이러한 서비스(예: Razor 페이지)가 필요한 구성 요소는 생성자 매개 변수를 통해 해당 서비스를 제공받습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-160">Components that require these services (such as Razor Pages) are provided these services via constructor parameters.</span></span> <span data-ttu-id="917aa-161">DB 컨텍스트 인스턴스를 가져오는 생성자 코드는 자습서 뒷부분에 나옵니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-161">The constructor code that gets a DB context instance is shown later in the tutorial.</span></span> <span data-ttu-id="917aa-162">이 섹션에서는 DI 컨테이너에 데이터베이스 컨텍스트를 등록합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-162">In this section, you register the database context with the DI container.</span></span>
 
-<span data-ttu-id="cf0b9-150">*Startup.cs* 맨 위에 다음 `using` 문을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-150">Add the following `using` statements at the top of *Startup.cs*:</span></span>
+<span data-ttu-id="917aa-163">*Startup.cs* 맨 위에 다음 `using` 문을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-163">Add the following `using` statements at the top of *Startup.cs*:</span></span>
 
 ```csharp
 using MvcMovie.Data;
 using Microsoft.EntityFrameworkCore;
 ```
 
-<span data-ttu-id="cf0b9-151">`Startup.ConfigureServices`에 다음 강조 표시된 코드를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-151">Add the following highlighted code in `Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="917aa-164">`Startup.ConfigureServices`에 다음 강조 표시된 코드를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-164">Add the following highlighted code in `Startup.ConfigureServices`:</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="cf0b9-152">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-152">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="917aa-165">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-165">Visual Studio</span></span>](#tab/visual-studio)
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_ConfigureServices&highlight=6-7)]
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="cf0b9-153">Visual Studio Code / Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-153">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="917aa-166">Visual Studio Code / Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-166">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_UseSqlite&highlight=6-7)]
 
 ---
 
-<span data-ttu-id="cf0b9-154">연결 문자열 이름은 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 개체의 메서드를 호출하여 컨텍스트에 전달됩니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-154">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="cf0b9-155">로컬 개발의 경우 [ASP.NET Core 구성 시스템](xref:fundamentals/configuration/index)은 *appsettings.json* 파일에서 연결 문자열을 읽습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-155">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *appsettings.json* file.</span></span>
+<span data-ttu-id="917aa-167">연결 문자열 이름은 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 개체의 메서드를 호출하여 컨텍스트에 전달됩니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-167">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="917aa-168">로컬 개발의 경우 [ASP.NET Core 구성 시스템](xref:fundamentals/configuration/index)은 *appsettings.json* 파일에서 연결 문자열을 읽습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-168">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *appsettings.json* file.</span></span>
 
 <a name="cs"></a>
 
-## <a name="add-a-database-connection-string"></a><span data-ttu-id="cf0b9-156">데이터베이스 연결 문자열 추가</span><span class="sxs-lookup"><span data-stu-id="cf0b9-156">Add a database connection string</span></span>
+## <a name="add-a-database-connection-string"></a><span data-ttu-id="917aa-169">데이터베이스 연결 문자열 추가</span><span class="sxs-lookup"><span data-stu-id="917aa-169">Add a database connection string</span></span>
 
-<span data-ttu-id="cf0b9-157">*appsettings.json* 파일에 연결 문자열을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-157">Add a connection string to the *appsettings.json* file:</span></span>
+<span data-ttu-id="917aa-170">*appsettings.json* 파일에 연결 문자열을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-170">Add a connection string to the *appsettings.json* file:</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="cf0b9-158">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-158">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="917aa-171">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-171">Visual Studio</span></span>](#tab/visual-studio)
 
 [!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings.json?highlight=10-12)]
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="cf0b9-159">Visual Studio Code / Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-159">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="917aa-172">Visual Studio Code / Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-172">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
 [!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings_SQLite.json?highlight=10-12)]
 
 ---
 
-<span data-ttu-id="cf0b9-160">컴파일러 오류에 대한 검사로 프로젝트를 빌드합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-160">Build the project as a check for compiler errors.</span></span>
+<span data-ttu-id="917aa-173">컴파일러 오류에 대한 검사로 프로젝트를 빌드합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-173">Build the project as a check for compiler errors.</span></span>
 
-## <a name="scaffold-movie-pages"></a><span data-ttu-id="cf0b9-161">영화 페이지 스캐폴드</span><span class="sxs-lookup"><span data-stu-id="cf0b9-161">Scaffold movie pages</span></span>
+## <a name="scaffold-movie-pages"></a><span data-ttu-id="917aa-174">영화 페이지 스캐폴드</span><span class="sxs-lookup"><span data-stu-id="917aa-174">Scaffold movie pages</span></span>
 
-<span data-ttu-id="cf0b9-162">스캐폴딩 도구를 사용하여 영화 모델에 대한 CRUD(생성, 읽기, 수정 및 삭제) 페이지를 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-162">Use the scaffolding tool to produce Create, Read, Update, and Delete (CRUD) pages for the movie model.</span></span>
+<span data-ttu-id="917aa-175">스캐폴딩 도구를 사용하여 영화 모델에 대한 CRUD(생성, 읽기, 수정 및 삭제) 페이지를 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-175">Use the scaffolding tool to produce Create, Read, Update, and Delete (CRUD) pages for the movie model.</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="cf0b9-163">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-163">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="917aa-176">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-176">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="cf0b9-164">**솔루션 탐색기**에서 *Controllers* 폴더를 마우스 오른쪽 단추로 클릭하고 **> 추가 > 스캐폴드 항목 새로 만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-164">In **Solution Explorer**, right-click the *Controllers* folder **> Add > New Scaffolded Item**.</span></span>
+<span data-ttu-id="917aa-177">**솔루션 탐색기**에서 *Controllers* 폴더를 마우스 오른쪽 단추로 클릭하고 **> 추가 > 스캐폴드 항목 새로 만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-177">In **Solution Explorer**, right-click the *Controllers* folder **> Add > New Scaffolded Item**.</span></span>
 
 ![위 단계의 보기](adding-model/_static/add_controller21.png)
 
-<span data-ttu-id="cf0b9-166">**스캐폴드 추가** 대화 상자에서 **보기 포함 MVC 컨트롤러, Entity Framework > 추가 사용**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-166">In the **Add Scaffold** dialog, select **MVC Controller with views, using Entity Framework > Add**.</span></span>
+<span data-ttu-id="917aa-179">**스캐폴드 추가** 대화 상자에서 **보기 포함 MVC 컨트롤러, Entity Framework > 추가 사용**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-179">In the **Add Scaffold** dialog, select **MVC Controller with views, using Entity Framework > Add**.</span></span>
 
 ![스캐폴드 추가 대화 상자](adding-model/_static/add_scaffold21.png)
 
-<span data-ttu-id="cf0b9-168">**컨트롤러 추가** 대화 상자를 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-168">Complete the **Add Controller** dialog:</span></span>
+<span data-ttu-id="917aa-181">**컨트롤러 추가** 대화 상자를 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-181">Complete the **Add Controller** dialog:</span></span>
 
-* <span data-ttu-id="cf0b9-169">**모델 클래스:** *Movie(MvcMovie.Models)*</span><span class="sxs-lookup"><span data-stu-id="cf0b9-169">**Model class:** *Movie (MvcMovie.Models)*</span></span>
-* <span data-ttu-id="cf0b9-170">**데이터 컨텍스트 클래스:** *MvcMovieContext(MvcMovie.Data)*</span><span class="sxs-lookup"><span data-stu-id="cf0b9-170">**Data context class:** *MvcMovieContext (MvcMovie.Data)*</span></span>
+* <span data-ttu-id="917aa-182">**모델 클래스:** *Movie(MvcMovie.Models)*</span><span class="sxs-lookup"><span data-stu-id="917aa-182">**Model class:** *Movie (MvcMovie.Models)*</span></span>
+* <span data-ttu-id="917aa-183">**데이터 컨텍스트 클래스:** *MvcMovieContext(MvcMovie.Data)*</span><span class="sxs-lookup"><span data-stu-id="917aa-183">**Data context class:** *MvcMovieContext (MvcMovie.Data)*</span></span>
 
 ![데이터 컨텍스트 추가](adding-model/_static/dc3.png)
 
-* <span data-ttu-id="cf0b9-172">**보기:** 확인된 각 옵션의 기본값 선택 유지</span><span class="sxs-lookup"><span data-stu-id="cf0b9-172">**Views:** Keep the default of each option checked</span></span>
-* <span data-ttu-id="cf0b9-173">**컨트롤러 이름:** 기본값 *MoviesController* 유지</span><span class="sxs-lookup"><span data-stu-id="cf0b9-173">**Controller name:** Keep the default *MoviesController*</span></span>
-* <span data-ttu-id="cf0b9-174">**추가**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-174">Select **Add**</span></span>
+* <span data-ttu-id="917aa-185">**보기:** 확인된 각 옵션의 기본값 선택 유지</span><span class="sxs-lookup"><span data-stu-id="917aa-185">**Views:** Keep the default of each option checked</span></span>
+* <span data-ttu-id="917aa-186">**컨트롤러 이름:** 기본값 *MoviesController* 유지</span><span class="sxs-lookup"><span data-stu-id="917aa-186">**Controller name:** Keep the default *MoviesController*</span></span>
+* <span data-ttu-id="917aa-187">**추가**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-187">Select **Add**</span></span>
 
-<span data-ttu-id="cf0b9-175">Visual Studio가 다음을 만듭니다</span><span class="sxs-lookup"><span data-stu-id="cf0b9-175">Visual Studio creates:</span></span>
+<span data-ttu-id="917aa-188">Visual Studio가 다음을 만듭니다</span><span class="sxs-lookup"><span data-stu-id="917aa-188">Visual Studio creates:</span></span>
 
-* <span data-ttu-id="cf0b9-176">영화 컨트롤러(*Controllers/MoviesController.cs*)</span><span class="sxs-lookup"><span data-stu-id="cf0b9-176">A movies controller (*Controllers/MoviesController.cs*)</span></span>
-* <span data-ttu-id="cf0b9-177">Create, Delete, Details, Edit, 및 Index 페이지에 대한 Razor 보기 파일(*Views/Movies/\*.cshtml*)</span><span class="sxs-lookup"><span data-stu-id="cf0b9-177">Razor view files for Create, Delete, Details, Edit, and Index pages (*Views/Movies/\*.cshtml*)</span></span>
+* <span data-ttu-id="917aa-189">영화 컨트롤러(*Controllers/MoviesController.cs*)</span><span class="sxs-lookup"><span data-stu-id="917aa-189">A movies controller (*Controllers/MoviesController.cs*)</span></span>
+* <span data-ttu-id="917aa-190">Create, Delete, Details, Edit, 및 Index 페이지에 대한 Razor 보기 파일(*Views/Movies/\*.cshtml*)</span><span class="sxs-lookup"><span data-stu-id="917aa-190">Razor view files for Create, Delete, Details, Edit, and Index pages (*Views/Movies/\*.cshtml*)</span></span>
 
-<span data-ttu-id="cf0b9-178">이러한 파일의 자동 생성을 *스캐폴딩*이라고 합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-178">The automatic creation of these files is known as *scaffolding*.</span></span>
+<span data-ttu-id="917aa-191">이러한 파일의 자동 생성을 *스캐폴딩*이라고 합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-191">The automatic creation of these files is known as *scaffolding*.</span></span>
 
-### <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="cf0b9-179">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="cf0b9-179">Visual Studio Code</span></span>](#tab/visual-studio-code) 
+### <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="917aa-192">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="917aa-192">Visual Studio Code</span></span>](#tab/visual-studio-code) 
 
-* <span data-ttu-id="cf0b9-180">프로젝트 디렉터리(*Program.cs*, *Startup.cs* 및 *.csproj* 파일이 포함된 디렉터리)에서 명령 창을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-180">Open a command window in the project directory (The directory that contains the *Program.cs*, *Startup.cs*, and *.csproj* files).</span></span>
+* <span data-ttu-id="917aa-193">프로젝트 디렉터리(*Program.cs*, *Startup.cs* 및 *.csproj* 파일이 포함된 디렉터리)에서 명령 창을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-193">Open a command window in the project directory (The directory that contains the *Program.cs*, *Startup.cs*, and *.csproj* files).</span></span>
 
-* <span data-ttu-id="cf0b9-181">Linux에서는 스캐폴드 도구 경로를 내보냅니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-181">On Linux, export the scaffold tool path:</span></span>
+* <span data-ttu-id="917aa-194">Linux에서는 스캐폴드 도구 경로를 내보냅니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-194">On Linux, export the scaffold tool path:</span></span>
 
   ```console
     export PATH=$HOME/.dotnet/tools:$PATH
   ```
 
-* <span data-ttu-id="cf0b9-182">다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-182">Run the following command:</span></span>
+* <span data-ttu-id="917aa-195">다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-195">Run the following command:</span></span>
 
   ```dotnetcli
    dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -182,11 +203,11 @@ using Microsoft.EntityFrameworkCore;
 
   [!INCLUDE [explains scaffold generated params](~/includes/mvc-intro/model4.md)]
 
-### <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="cf0b9-183">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-183">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+### <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="917aa-196">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-196">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="cf0b9-184">프로젝트 디렉터리(*Program.cs*, *Startup.cs* 및 *.csproj* 파일이 포함된 디렉터리)에서 명령 창을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-184">Open a command window in the project directory (The directory that contains the *Program.cs*, *Startup.cs*, and *.csproj* files).</span></span>
+* <span data-ttu-id="917aa-197">프로젝트 디렉터리(*Program.cs*, *Startup.cs* 및 *.csproj* 파일이 포함된 디렉터리)에서 명령 창을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-197">Open a command window in the project directory (The directory that contains the *Program.cs*, *Startup.cs*, and *.csproj* files).</span></span>
 
-* <span data-ttu-id="cf0b9-185">다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-185">Run the following command:</span></span>
+* <span data-ttu-id="917aa-198">다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-198">Run the following command:</span></span>
 
   ```dotnetcli
    dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -198,109 +219,109 @@ using Microsoft.EntityFrameworkCore;
 
 <!-- End of tabs                  -->
 
-<span data-ttu-id="cf0b9-186">데이터베이스가 없으므로 아직 스캐폴드된 페이지를 사용할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-186">You can't use the scaffolded pages yet because the database doesn't exist.</span></span> <span data-ttu-id="cf0b9-187">앱을 실행하고 **Movie App** 링크를 클릭하면 *Cannot open database* 또는 *no such table: Movie 오류 메시지가 표시됩니다.* Movie’ 오류 메시지가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-187">If you run the app and click on the **Movie App** link, you get a *Cannot open database* or *no such table: Movie* error message.</span></span>
+<span data-ttu-id="917aa-199">데이터베이스가 없으므로 아직 스캐폴드된 페이지를 사용할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-199">You can't use the scaffolded pages yet because the database doesn't exist.</span></span> <span data-ttu-id="917aa-200">앱을 실행하고 **Movie App** 링크를 클릭하면 *Cannot open database* 또는 *no such table: Movie 오류 메시지가 표시됩니다.* Movie’ 오류 메시지가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-200">If you run the app and click on the **Movie App** link, you get a *Cannot open database* or *no such table: Movie* error message.</span></span>
 
 <a name="migration"></a>
 
-## <a name="initial-migration"></a><span data-ttu-id="cf0b9-188">초기 마이그레이션</span><span class="sxs-lookup"><span data-stu-id="cf0b9-188">Initial migration</span></span>
+## <a name="initial-migration"></a><span data-ttu-id="917aa-201">초기 마이그레이션</span><span class="sxs-lookup"><span data-stu-id="917aa-201">Initial migration</span></span>
 
-<span data-ttu-id="cf0b9-189">EF Core [마이그레이션](xref:data/ef-mvc/migrations) 기능을 사용하여 데이터베이스를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-189">Use the EF Core [Migrations](xref:data/ef-mvc/migrations) feature to create the database.</span></span> <span data-ttu-id="cf0b9-190">마이그레이션은 데이터 모델과 일치하도록 데이터베이스를 만들고 수정할 수 있는 도구 모음입니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-190">Migrations is a set of tools that let you create and update a database to match your data model.</span></span>
+<span data-ttu-id="917aa-202">EF Core [마이그레이션](xref:data/ef-mvc/migrations) 기능을 사용하여 데이터베이스를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-202">Use the EF Core [Migrations](xref:data/ef-mvc/migrations) feature to create the database.</span></span> <span data-ttu-id="917aa-203">마이그레이션은 데이터 모델과 일치하도록 데이터베이스를 만들고 수정할 수 있는 도구 모음입니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-203">Migrations is a set of tools that let you create and update a database to match your data model.</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="cf0b9-191">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-191">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="917aa-204">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-204">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="cf0b9-192">**도구** 메뉴에서 **NuGet 패키지 관리자** > PMC(**패키지 관리자 콘솔**)를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-192">From the **Tools** menu, select **NuGet Package Manager** > **Package Manager Console** (PMC).</span></span>
+<span data-ttu-id="917aa-205">**도구** 메뉴에서 **NuGet 패키지 관리자** > **PMC(패키지 관리자 콘솔)** 을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-205">From the **Tools** menu, select **NuGet Package Manager** > **Package Manager Console** (PMC).</span></span>
 
-<span data-ttu-id="cf0b9-193">PMC에서 다음 명령을 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-193">In the PMC, enter the following commands:</span></span>
+<span data-ttu-id="917aa-206">PMC에서 다음 명령을 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-206">In the PMC, enter the following commands:</span></span>
 
 ```PMC
 Add-Migration InitialCreate
 Update-Database
 ```
 
-* <span data-ttu-id="cf0b9-194">`Add-Migration InitialCreate`: *Migrations/{timestamp}_InitialCreate.cs* 마이그레이션 파일을 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-194">`Add-Migration InitialCreate`: Generates an *Migrations/{timestamp}_InitialCreate.cs* migration file.</span></span> <span data-ttu-id="cf0b9-195">`InitialCreate` 인수는 마이그레이션 이름입니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-195">The `InitialCreate` argument is the migration name.</span></span> <span data-ttu-id="cf0b9-196">모든 이름을 사용할 수 있지만 규칙에 따라 마이그레이션을 설명하는 이름을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-196">Any name can be used, but by convention, a name is selected that describes the migration.</span></span> <span data-ttu-id="cf0b9-197">이는 첫 번째 마이그레이션이므로 생성된 클래스에는 데이터베이스 스키마를 만드는 코드가 포함되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-197">Because this is the first migration, the generated class contains code to create the database schema.</span></span> <span data-ttu-id="cf0b9-198">데이터베이스 스키마는 `MvcMovieContext` 클래스에 지정된 모델을 기반으로 합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-198">The database schema is based on the model specified in the `MvcMovieContext` class.</span></span>
+* <span data-ttu-id="917aa-207">`Add-Migration InitialCreate`: *Migrations/{timestamp}_InitialCreate.cs* 마이그레이션 파일을 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-207">`Add-Migration InitialCreate`: Generates an *Migrations/{timestamp}_InitialCreate.cs* migration file.</span></span> <span data-ttu-id="917aa-208">`InitialCreate` 인수는 마이그레이션 이름입니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-208">The `InitialCreate` argument is the migration name.</span></span> <span data-ttu-id="917aa-209">모든 이름을 사용할 수 있지만 규칙에 따라 마이그레이션을 설명하는 이름을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-209">Any name can be used, but by convention, a name is selected that describes the migration.</span></span> <span data-ttu-id="917aa-210">이는 첫 번째 마이그레이션이므로 생성된 클래스에는 데이터베이스 스키마를 만드는 코드가 포함되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-210">Because this is the first migration, the generated class contains code to create the database schema.</span></span> <span data-ttu-id="917aa-211">데이터베이스 스키마는 `MvcMovieContext` 클래스에 지정된 모델을 기반으로 합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-211">The database schema is based on the model specified in the `MvcMovieContext` class.</span></span>
 
-* <span data-ttu-id="cf0b9-199">`Update-Database`: 이전 명령이 만든 최신 마이그레이션으로 데이터베이스를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-199">`Update-Database`: Updates the database to the latest migration, which the previous command created.</span></span> <span data-ttu-id="cf0b9-200">이 명령은 데이터베이스를 만드는 `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* 파일을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-200">This command runs the `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* file, which creates the database.</span></span>
+* <span data-ttu-id="917aa-212">`Update-Database`: 이전 명령이 만든 최신 마이그레이션으로 데이터베이스를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-212">`Update-Database`: Updates the database to the latest migration, which the previous command created.</span></span> <span data-ttu-id="917aa-213">이 명령은 데이터베이스를 만드는 `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* 파일을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-213">This command runs the `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* file, which creates the database.</span></span>
 
-  <span data-ttu-id="cf0b9-201">데이터베이스 수정 명령은 다음 경고를 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-201">The database update command generates the following warning:</span></span> 
+  <span data-ttu-id="917aa-214">데이터베이스 수정 명령은 다음 경고를 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-214">The database update command generates the following warning:</span></span> 
 
-  > <span data-ttu-id="cf0b9-202">No type was specified for the decimal column ‘Price’ on entity type ‘Movie’.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-202">No type was specified for the decimal column 'Price' on entity type 'Movie'.</span></span> <span data-ttu-id="cf0b9-203">This will cause values to be silently truncated if they do not fit in the default precision and scale.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-203">This will cause values to be silently truncated if they do not fit in the default precision and scale.</span></span> <span data-ttu-id="cf0b9-204">Explicitly specify the SQL server column type that can accommodate all the values using ‘HasColumnType()’.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-204">Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.</span></span>
+  > <span data-ttu-id="917aa-215">No type was specified for the decimal column ‘Price’ on entity type ‘Movie’.</span><span class="sxs-lookup"><span data-stu-id="917aa-215">No type was specified for the decimal column 'Price' on entity type 'Movie'.</span></span> <span data-ttu-id="917aa-216">This will cause values to be silently truncated if they do not fit in the default precision and scale.</span><span class="sxs-lookup"><span data-stu-id="917aa-216">This will cause values to be silently truncated if they do not fit in the default precision and scale.</span></span> <span data-ttu-id="917aa-217">Explicitly specify the SQL server column type that can accommodate all the values using ‘HasColumnType()’.</span><span class="sxs-lookup"><span data-stu-id="917aa-217">Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.</span></span>
 
-  <span data-ttu-id="cf0b9-205">이 경고는 무시할 수 있으며 자습서의 뒷부분에서 수정될 예정입니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-205">You can ignore that warning, it will be fixed in a later tutorial.</span></span>
+  <span data-ttu-id="917aa-218">이 경고는 무시할 수 있으며 자습서의 뒷부분에서 수정될 예정입니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-218">You can ignore that warning, it will be fixed in a later tutorial.</span></span>
 
 [!INCLUDE [more information on the PMC tools for EF Core](~/includes/ef-pmc.md)]
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="cf0b9-206">Visual Studio Code / Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-206">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="917aa-219">Visual Studio Code / Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-219">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-<span data-ttu-id="cf0b9-207">다음 .NET Core CLI 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-207">Run the following .NET Core CLI commands:</span></span>
+<span data-ttu-id="917aa-220">다음 .NET Core CLI 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-220">Run the following .NET Core CLI commands:</span></span>
 
 ```dotnetcli
 dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
 
-* <span data-ttu-id="cf0b9-208">`ef migrations add InitialCreate`: *Migrations/{timestamp}_InitialCreate.cs* 마이그레이션 파일을 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-208">`ef migrations add InitialCreate`: Generates an *Migrations/{timestamp}_InitialCreate.cs* migration file.</span></span> <span data-ttu-id="cf0b9-209">`InitialCreate` 인수는 마이그레이션 이름입니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-209">The `InitialCreate` argument is the migration name.</span></span> <span data-ttu-id="cf0b9-210">모든 이름을 사용할 수 있지만 규칙에 따라 마이그레이션을 설명하는 이름을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-210">Any name can be used, but by convention, a name is selected that describes the migration.</span></span> <span data-ttu-id="cf0b9-211">이는 첫 번째 마이그레이션이므로 생성된 클래스에는 데이터베이스 스키마를 만드는 코드가 포함되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-211">Because this is the first migration, the generated class contains code to create the database schema.</span></span> <span data-ttu-id="cf0b9-212">데이터베이스 스키마는 *Data/MvcMovieContext.cs* 파일의 `MvcMovieContext` 클래스에 지정된 모델을 기반으로 합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-212">The database schema is based on the model specified in the `MvcMovieContext` class (in the *Data/MvcMovieContext.cs* file).</span></span>
+* <span data-ttu-id="917aa-221">`ef migrations add InitialCreate`: *Migrations/{timestamp}_InitialCreate.cs* 마이그레이션 파일을 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-221">`ef migrations add InitialCreate`: Generates an *Migrations/{timestamp}_InitialCreate.cs* migration file.</span></span> <span data-ttu-id="917aa-222">`InitialCreate` 인수는 마이그레이션 이름입니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-222">The `InitialCreate` argument is the migration name.</span></span> <span data-ttu-id="917aa-223">모든 이름을 사용할 수 있지만 규칙에 따라 마이그레이션을 설명하는 이름을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-223">Any name can be used, but by convention, a name is selected that describes the migration.</span></span> <span data-ttu-id="917aa-224">이는 첫 번째 마이그레이션이므로 생성된 클래스에는 데이터베이스 스키마를 만드는 코드가 포함되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-224">Because this is the first migration, the generated class contains code to create the database schema.</span></span> <span data-ttu-id="917aa-225">데이터베이스 스키마는 *Data/MvcMovieContext.cs* 파일의 `MvcMovieContext` 클래스에 지정된 모델을 기반으로 합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-225">The database schema is based on the model specified in the `MvcMovieContext` class (in the *Data/MvcMovieContext.cs* file).</span></span>
 
-* <span data-ttu-id="cf0b9-213">`ef database update`: 이전 명령이 만든 최신 마이그레이션으로 데이터베이스를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-213">`ef database update`: Updates the database to the latest migration, which the previous command created.</span></span> <span data-ttu-id="cf0b9-214">이 명령은 데이터베이스를 만드는 `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* 파일을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-214">This command runs the `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* file, which creates the database.</span></span>
+* <span data-ttu-id="917aa-226">`ef database update`: 이전 명령이 만든 최신 마이그레이션으로 데이터베이스를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-226">`ef database update`: Updates the database to the latest migration, which the previous command created.</span></span> <span data-ttu-id="917aa-227">이 명령은 데이터베이스를 만드는 `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* 파일을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-227">This command runs the `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* file, which creates the database.</span></span>
 
 [!INCLUDE [ more information on the CLI tools for EF Core](~/includes/ef-cli.md)]
 
 ---
 
-### <a name="the-initialcreate-class"></a><span data-ttu-id="cf0b9-215">InitialCreate 클래스</span><span class="sxs-lookup"><span data-stu-id="cf0b9-215">The InitialCreate class</span></span>
+### <a name="the-initialcreate-class"></a><span data-ttu-id="917aa-228">InitialCreate 클래스</span><span class="sxs-lookup"><span data-stu-id="917aa-228">The InitialCreate class</span></span>
 
-<span data-ttu-id="cf0b9-216">*Migrations/{timestamp}_InitialCreate.cs* 마이그레이션 파일을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-216">Examine the *Migrations/{timestamp}_InitialCreate.cs* migration file:</span></span>
+<span data-ttu-id="917aa-229">*Migrations/{timestamp}_InitialCreate.cs* 마이그레이션 파일을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-229">Examine the *Migrations/{timestamp}_InitialCreate.cs* migration file:</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Migrations/20190805165915_InitialCreate.cs?name=snippet)]
 
- <span data-ttu-id="cf0b9-217">`Up` 메서드는 Movie 테이블을 만들고 `Id`를 기본 키로 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-217">The `Up` method creates the Movie table and configures `Id` as the primary key.</span></span> <span data-ttu-id="cf0b9-218">`Down` 메서드는 `Up` 마이그레이션에 의해 변경된 스키마를 되돌립니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-218">The `Down` method reverts the schema changes made by the `Up` migration.</span></span>
+ <span data-ttu-id="917aa-230">`Up` 메서드는 Movie 테이블을 만들고 `Id`를 기본 키로 구성합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-230">The `Up` method creates the Movie table and configures `Id` as the primary key.</span></span> <span data-ttu-id="917aa-231">`Down` 메서드는 `Up` 마이그레이션에 의해 변경된 스키마를 되돌립니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-231">The `Down` method reverts the schema changes made by the `Up` migration.</span></span>
 
 <a name="test"></a>
 
-## <a name="test-the-app"></a><span data-ttu-id="cf0b9-219">앱을 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-219">Test the app</span></span>
+## <a name="test-the-app"></a><span data-ttu-id="917aa-232">앱을 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-232">Test the app</span></span>
 
-* <span data-ttu-id="cf0b9-220">앱을 실행하고 **Movie App** 링크를 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-220">Run the app and click the **Movie App** link.</span></span>
+* <span data-ttu-id="917aa-233">앱을 실행하고 **Movie App** 링크를 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-233">Run the app and click the **Movie App** link.</span></span>
 
-  <span data-ttu-id="cf0b9-221">다음 중 하나와 비슷한 예외가 발생할 경우:</span><span class="sxs-lookup"><span data-stu-id="cf0b9-221">If you get an exception similar to one of the following:</span></span>
+  <span data-ttu-id="917aa-234">다음 중 하나와 비슷한 예외가 발생할 경우:</span><span class="sxs-lookup"><span data-stu-id="917aa-234">If you get an exception similar to one of the following:</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="cf0b9-222">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-222">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="917aa-235">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-235">Visual Studio</span></span>](#tab/visual-studio)
 
   ```console
   SqlException: Cannot open database "MvcMovieContext-1" requested by the login. The login failed.
   ```
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="cf0b9-223">Visual Studio Code / Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-223">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="917aa-236">Visual Studio Code / Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-236">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
   ```console
   SqliteException: SQLite Error 1: 'no such table: Movie'.
   ```
 
 ---
-  <span data-ttu-id="cf0b9-224">[마이그레이션 단계](#migration)를 누락했을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-224">You probably missed the [migrations step](#migration).</span></span>
+  <span data-ttu-id="917aa-237">[마이그레이션 단계](#migration)를 누락했을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-237">You probably missed the [migrations step](#migration).</span></span>
 
-* <span data-ttu-id="cf0b9-225">**Create** 페이지를 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-225">Test the **Create** page.</span></span> <span data-ttu-id="cf0b9-226">데이터를 입력하고 제출합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-226">Enter and submit data.</span></span>
+* <span data-ttu-id="917aa-238">**Create** 페이지를 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-238">Test the **Create** page.</span></span> <span data-ttu-id="917aa-239">데이터를 입력하고 제출합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-239">Enter and submit data.</span></span>
 
   > [!NOTE]
-  > <span data-ttu-id="cf0b9-227">`Price` 필드에 소수점을 입력하지 못할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-227">You may not be able to enter decimal commas in the `Price` field.</span></span> <span data-ttu-id="cf0b9-228">소수점으로 쉼표(",")를 사용하는 비 영어 로캘 및 비 US-English 날짜 형식에 대해[jQuery 유효성 검사](https://jqueryvalidation.org/)를 지원하려면 앱을 세계화해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-228">To support [jQuery validation](https://jqueryvalidation.org/) for non-English locales that use a comma (",") for a decimal point and for non US-English date formats, the app must be globalized.</span></span> <span data-ttu-id="cf0b9-229">세계화 지침은 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-229">For globalization instructions, see [this GitHub issue](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420).</span></span>
+  > <span data-ttu-id="917aa-240">`Price` 필드에 소수점을 입력하지 못할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-240">You may not be able to enter decimal commas in the `Price` field.</span></span> <span data-ttu-id="917aa-241">소수점으로 쉼표(",")를 사용하는 비 영어 로캘 및 비 US-English 날짜 형식에 대해[jQuery 유효성 검사](https://jqueryvalidation.org/)를 지원하려면 앱을 세계화해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-241">To support [jQuery validation](https://jqueryvalidation.org/) for non-English locales that use a comma (",") for a decimal point and for non US-English date formats, the app must be globalized.</span></span> <span data-ttu-id="917aa-242">세계화 지침은 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="917aa-242">For globalization instructions, see [this GitHub issue](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420).</span></span>
 
-* <span data-ttu-id="cf0b9-230">**Edit**, **Details** 및 **Delete** 링크를 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-230">Test the **Edit**, **Details**, and **Delete** pages.</span></span>
+* <span data-ttu-id="917aa-243">**Edit**, **Details** 및 **Delete** 링크를 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-243">Test the **Edit**, **Details**, and **Delete** pages.</span></span>
 
-## <a name="dependency-injection-in-the-controller"></a><span data-ttu-id="cf0b9-231">컨트롤러에서 종속성 주입</span><span class="sxs-lookup"><span data-stu-id="cf0b9-231">Dependency injection in the controller</span></span>
+## <a name="dependency-injection-in-the-controller"></a><span data-ttu-id="917aa-244">컨트롤러에서 종속성 주입</span><span class="sxs-lookup"><span data-stu-id="917aa-244">Dependency injection in the controller</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="cf0b9-232">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-232">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="917aa-245">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-245">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="cf0b9-233">*Controllers/MoviesController.cs* 파일을 열고 생성자를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-233">Open the *Controllers/MoviesController.cs* file and examine the constructor:</span></span>
+<span data-ttu-id="917aa-246">*Controllers/MoviesController.cs* 파일을 열고 생성자를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-246">Open the *Controllers/MoviesController.cs* file and examine the constructor:</span></span>
 
 <!-- l.. Make copy of Movies controller (or use the old one as I did in the 3.0 upgrade) because we comment out the initial index method and update it later  -->
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_1)]
 
-<span data-ttu-id="cf0b9-234">생성자는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 컨트롤러에 데이터베이스 컨텍스트(`MvcMovieContext`)를 주입합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-234">The constructor uses [Dependency Injection](xref:fundamentals/dependency-injection) to inject the database context (`MvcMovieContext`) into the controller.</span></span> <span data-ttu-id="cf0b9-235">컨트롤러의 각 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 메서드에서 해당 데이터베이스 컨텍스트를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-235">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
+<span data-ttu-id="917aa-247">생성자는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 컨트롤러에 데이터베이스 컨텍스트(`MvcMovieContext`)를 주입합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-247">The constructor uses [Dependency Injection](xref:fundamentals/dependency-injection) to inject the database context (`MvcMovieContext`) into the controller.</span></span> <span data-ttu-id="917aa-248">컨트롤러의 각 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 메서드에서 해당 데이터베이스 컨텍스트를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-248">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="cf0b9-236">Visual Studio Code / Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-236">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="917aa-249">Visual Studio Code / Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-249">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_1)]
 
-<span data-ttu-id="cf0b9-237">생성자는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 컨트롤러에 데이터베이스 컨텍스트(`MvcMovieContext`)를 주입합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-237">The constructor uses [Dependency Injection](xref:fundamentals/dependency-injection) to inject the database context (`MvcMovieContext`) into the controller.</span></span> <span data-ttu-id="cf0b9-238">컨트롤러의 각 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 메서드에서 해당 데이터베이스 컨텍스트를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-238">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
+<span data-ttu-id="917aa-250">생성자는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 컨트롤러에 데이터베이스 컨텍스트(`MvcMovieContext`)를 주입합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-250">The constructor uses [Dependency Injection](xref:fundamentals/dependency-injection) to inject the database context (`MvcMovieContext`) into the controller.</span></span> <span data-ttu-id="917aa-251">컨트롤러의 각 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 메서드에서 해당 데이터베이스 컨텍스트를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-251">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
 
 [!INCLUDE [use SQL Server in production](~/includes/RP/sqlitedev.md)]
 
@@ -310,154 +331,154 @@ dotnet ef database update
 <a name="strongly-typed-models-keyword-label"></a>
 <a name="strongly-typed-models-and-the--keyword"></a>
 
-## <a name="strongly-typed-models-and-the-model-keyword"></a><span data-ttu-id="cf0b9-239">강력한 형식의 모델 및 @model 키워드</span><span class="sxs-lookup"><span data-stu-id="cf0b9-239">Strongly typed models and the @model keyword</span></span>
+## <a name="strongly-typed-models-and-the-model-keyword"></a><span data-ttu-id="917aa-252">강력한 형식의 모델 및 @model 키워드</span><span class="sxs-lookup"><span data-stu-id="917aa-252">Strongly typed models and the @model keyword</span></span>
 
-<span data-ttu-id="cf0b9-240">이 자습서의 앞부분에서는 컨트롤러가 `ViewData` 사전을 사용하여 데이터 또는 개체를 보기에 전달하는 방법을 살펴봤습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-240">Earlier in this tutorial, you saw how a controller can pass data or objects to a view using the `ViewData` dictionary.</span></span> <span data-ttu-id="cf0b9-241">`ViewData` 사전은 정보를 보기에 전달하기 위한 편리한 런타임 바인딩 방법을 제공하는 동적 개체입니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-241">The `ViewData` dictionary is a dynamic object that provides a convenient late-bound way to pass information to a view.</span></span>
+<span data-ttu-id="917aa-253">이 자습서의 앞부분에서는 컨트롤러가 `ViewData` 사전을 사용하여 데이터 또는 개체를 보기에 전달하는 방법을 살펴봤습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-253">Earlier in this tutorial, you saw how a controller can pass data or objects to a view using the `ViewData` dictionary.</span></span> <span data-ttu-id="917aa-254">`ViewData` 사전은 정보를 보기에 전달하기 위한 편리한 런타임 바인딩 방법을 제공하는 동적 개체입니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-254">The `ViewData` dictionary is a dynamic object that provides a convenient late-bound way to pass information to a view.</span></span>
 
-<span data-ttu-id="cf0b9-242">또한 MVC는 보기에 강력한 형식의 모델 개체를 전달하는 기능도 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-242">MVC also provides the ability to pass strongly typed model objects to a view.</span></span> <span data-ttu-id="cf0b9-243">강력한 형식의 방법을 사용하면 컴파일 시에 코드 검사를 수행할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-243">This strongly typed approach enables compile time code checking.</span></span> <span data-ttu-id="cf0b9-244">스캐폴딩 메커니즘은 `MoviesController` 클래스 및 보기에서 이 방법(즉, 강력한 형식의 모델 전달)을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-244">The scaffolding mechanism used this approach (that is, passing a strongly typed model) with the `MoviesController` class and views.</span></span>
+<span data-ttu-id="917aa-255">또한 MVC는 보기에 강력한 형식의 모델 개체를 전달하는 기능도 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-255">MVC also provides the ability to pass strongly typed model objects to a view.</span></span> <span data-ttu-id="917aa-256">강력한 형식의 방법을 사용하면 컴파일 시에 코드 검사를 수행할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-256">This strongly typed approach enables compile time code checking.</span></span> <span data-ttu-id="917aa-257">스캐폴딩 메커니즘은 `MoviesController` 클래스 및 보기에서 이 방법(즉, 강력한 형식의 모델 전달)을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-257">The scaffolding mechanism used this approach (that is, passing a strongly typed model) with the `MoviesController` class and views.</span></span>
 
-<span data-ttu-id="cf0b9-245">*Controllers/MoviesController.cs* 파일에서 생성된 `Details` 메서드를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-245">Examine the generated `Details` method in the *Controllers/MoviesController.cs* file:</span></span>
+<span data-ttu-id="917aa-258">*Controllers/MoviesController.cs* 파일에서 생성된 `Details` 메서드를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-258">Examine the generated `Details` method in the *Controllers/MoviesController.cs* file:</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_details)]
 
-<span data-ttu-id="cf0b9-246">일반적으로 `id` 매개 변수는 경로 데이터 변수로 전달됩니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-246">The `id` parameter is generally passed as route data.</span></span> <span data-ttu-id="cf0b9-247">예를 들어 `https://localhost:5001/movies/details/1`은 다음을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-247">For example `https://localhost:5001/movies/details/1` sets:</span></span>
+<span data-ttu-id="917aa-259">일반적으로 `id` 매개 변수는 경로 데이터 변수로 전달됩니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-259">The `id` parameter is generally passed as route data.</span></span> <span data-ttu-id="917aa-260">예를 들어 `https://localhost:5001/movies/details/1`은 다음을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-260">For example `https://localhost:5001/movies/details/1` sets:</span></span>
 
-* <span data-ttu-id="cf0b9-248">컨트롤러를 `movies` 컨트롤러로 설정(첫 번째 URL 세그먼트)</span><span class="sxs-lookup"><span data-stu-id="cf0b9-248">The controller to the `movies` controller (the first URL segment).</span></span>
-* <span data-ttu-id="cf0b9-249">작업을 `details`로 설정(두 번째 URL 세그먼트)</span><span class="sxs-lookup"><span data-stu-id="cf0b9-249">The action to `details` (the second URL segment).</span></span>
-* <span data-ttu-id="cf0b9-250">ID를 1로 설정(마지막 URL 세그먼트)</span><span class="sxs-lookup"><span data-stu-id="cf0b9-250">The id to 1 (the last URL segment).</span></span>
+* <span data-ttu-id="917aa-261">컨트롤러를 `movies` 컨트롤러로 설정(첫 번째 URL 세그먼트)</span><span class="sxs-lookup"><span data-stu-id="917aa-261">The controller to the `movies` controller (the first URL segment).</span></span>
+* <span data-ttu-id="917aa-262">작업을 `details`로 설정(두 번째 URL 세그먼트)</span><span class="sxs-lookup"><span data-stu-id="917aa-262">The action to `details` (the second URL segment).</span></span>
+* <span data-ttu-id="917aa-263">ID를 1로 설정(마지막 URL 세그먼트)</span><span class="sxs-lookup"><span data-stu-id="917aa-263">The id to 1 (the last URL segment).</span></span>
 
-<span data-ttu-id="cf0b9-251">다음과 같이 쿼리 문자열을 사용하여 `id`에 전달할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-251">You can also pass in the `id` with a query string as follows:</span></span>
+<span data-ttu-id="917aa-264">다음과 같이 쿼리 문자열을 사용하여 `id`에 전달할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-264">You can also pass in the `id` with a query string as follows:</span></span>
 
 `https://localhost:5001/movies/details?id=1`
 
-<span data-ttu-id="cf0b9-252">ID 값이 제공되지 않는 경우에 `id` 매개 변수가 [nullable 형식](/dotnet/csharp/programming-guide/nullable-types/index)(`int?`)으로 정의됩니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-252">The `id` parameter is defined as a [nullable type](/dotnet/csharp/programming-guide/nullable-types/index) (`int?`) in case an ID value isn't provided.</span></span>
+<span data-ttu-id="917aa-265">ID 값이 제공되지 않는 경우에 `id` 매개 변수가 [nullable 형식](/dotnet/csharp/programming-guide/nullable-types/index)(`int?`)으로 정의됩니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-265">The `id` parameter is defined as a [nullable type](/dotnet/csharp/programming-guide/nullable-types/index) (`int?`) in case an ID value isn't provided.</span></span>
 
-<span data-ttu-id="cf0b9-253">[람다 식](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions)을 `FirstOrDefaultAsync`에 전달하여 경로 데이터 또는 쿼리 문자열 값과 일치하는 영화 엔터티를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-253">A [lambda expression](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions) is passed in to `FirstOrDefaultAsync` to select movie entities that match the route data or query string value.</span></span>
+<span data-ttu-id="917aa-266">[람다 식](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions)을 `FirstOrDefaultAsync`에 전달하여 경로 데이터 또는 쿼리 문자열 값과 일치하는 영화 엔터티를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-266">A [lambda expression](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions) is passed in to `FirstOrDefaultAsync` to select movie entities that match the route data or query string value.</span></span>
 
 ```csharp
 var movie = await _context.Movie
     .FirstOrDefaultAsync(m => m.Id == id);
 ```
 
-<span data-ttu-id="cf0b9-254">영화를 찾으면 `Movie` 모델의 인스턴스를 `Details` 보기에 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-254">If a movie is found, an instance of the `Movie` model is passed to the `Details` view:</span></span>
+<span data-ttu-id="917aa-267">영화를 찾으면 `Movie` 모델의 인스턴스를 `Details` 보기에 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-267">If a movie is found, an instance of the `Movie` model is passed to the `Details` view:</span></span>
 
 ```csharp
 return View(movie);
    ```
 
-<span data-ttu-id="cf0b9-255">*Views/Movies/Details.cshtml* 파일의 내용을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-255">Examine the contents of the *Views/Movies/Details.cshtml* file:</span></span>
+<span data-ttu-id="917aa-268">*Views/Movies/Details.cshtml* 파일의 내용을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-268">Examine the contents of the *Views/Movies/Details.cshtml* file:</span></span>
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/DetailsOriginal.cshtml)]
 
-<span data-ttu-id="cf0b9-256">보기 파일 맨 위에 있는 `@model` 문은 보기에 필요한 개체 형식을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-256">The `@model` statement at the top of the view file specifies the type of object that the view expects.</span></span> <span data-ttu-id="cf0b9-257">영화 컨트롤러가 만들어질 때 다음 `@model` 문이 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-257">When the movie controller was created, the following `@model` statement was included:</span></span>
+<span data-ttu-id="917aa-269">보기 파일 맨 위에 있는 `@model` 문은 보기에 필요한 개체 형식을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-269">The `@model` statement at the top of the view file specifies the type of object that the view expects.</span></span> <span data-ttu-id="917aa-270">영화 컨트롤러가 만들어질 때 다음 `@model` 문이 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-270">When the movie controller was created, the following `@model` statement was included:</span></span>
 
 ```HTML
 @model MvcMovie.Models.Movie
    ```
 
-<span data-ttu-id="cf0b9-258">`@model` 지시문을 사용하면 컨트롤러가 보기에 전달한 영화에 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-258">This `@model` directive allows access to the movie that the controller passed to the view.</span></span> <span data-ttu-id="cf0b9-259">`Model` 개체는 강력한 형식입니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-259">The `Model` object is strongly typed.</span></span> <span data-ttu-id="cf0b9-260">예를 들어 *Details.cshtml* 보기의 코드는 각 영화 필드를 강력한 형식의 `Model` 개체를 사용하여 `DisplayNameFor` 및 `DisplayFor` HTML 도우미에 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-260">For example, in the *Details.cshtml* view, the code passes each movie field to the `DisplayNameFor` and `DisplayFor` HTML Helpers with the strongly typed `Model` object.</span></span> <span data-ttu-id="cf0b9-261">또한 `Create` 및 `Edit` 메서드와 보기도 `Movie` 모델 개체를 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-261">The `Create` and `Edit` methods and views also pass a `Movie` model object.</span></span>
+<span data-ttu-id="917aa-271">`@model` 지시문을 사용하면 컨트롤러가 보기에 전달한 영화에 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-271">This `@model` directive allows access to the movie that the controller passed to the view.</span></span> <span data-ttu-id="917aa-272">`Model` 개체는 강력한 형식입니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-272">The `Model` object is strongly typed.</span></span> <span data-ttu-id="917aa-273">예를 들어 *Details.cshtml* 보기의 코드는 각 영화 필드를 강력한 형식의 `Model` 개체를 사용하여 `DisplayNameFor` 및 `DisplayFor` HTML 도우미에 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-273">For example, in the *Details.cshtml* view, the code passes each movie field to the `DisplayNameFor` and `DisplayFor` HTML Helpers with the strongly typed `Model` object.</span></span> <span data-ttu-id="917aa-274">또한 `Create` 및 `Edit` 메서드와 보기도 `Movie` 모델 개체를 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-274">The `Create` and `Edit` methods and views also pass a `Movie` model object.</span></span>
 
-<span data-ttu-id="cf0b9-262">*Index.cshtml* 보기 및 영화 컨트롤러의 `Index` 메서드를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-262">Examine the *Index.cshtml* view and the `Index` method in the Movies controller.</span></span> <span data-ttu-id="cf0b9-263">코드가 `View` 메서드를 호출할 때 `List` 개체를 생성하는 방법에 유의하세요.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-263">Notice how the code creates a `List` object when it calls the `View` method.</span></span> <span data-ttu-id="cf0b9-264">이 코드는 `Index` 작업 메서드에서 보기로 `Movies` 목록을 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-264">The code passes this `Movies` list from the `Index` action method to the view:</span></span>
+<span data-ttu-id="917aa-275">*Index.cshtml* 보기 및 영화 컨트롤러의 `Index` 메서드를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-275">Examine the *Index.cshtml* view and the `Index` method in the Movies controller.</span></span> <span data-ttu-id="917aa-276">코드가 `View` 메서드를 호출할 때 `List` 개체를 생성하는 방법에 유의하세요.</span><span class="sxs-lookup"><span data-stu-id="917aa-276">Notice how the code creates a `List` object when it calls the `View` method.</span></span> <span data-ttu-id="917aa-277">이 코드는 `Index` 작업 메서드에서 보기로 `Movies` 목록을 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-277">The code passes this `Movies` list from the `Index` action method to the view:</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_index)]
 
-<span data-ttu-id="cf0b9-265">영화 컨트롤러가 만들어질 때 스캐폴딩은 다음 `@model` 문을 *Index.cshtml* 파일의 맨 위에 포함시킵니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-265">When the movies controller was created, scaffolding included the following `@model` statement at the top of the *Index.cshtml* file:</span></span>
+<span data-ttu-id="917aa-278">영화 컨트롤러가 만들어질 때 스캐폴딩은 다음 `@model` 문을 *Index.cshtml* 파일의 맨 위에 포함시킵니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-278">When the movies controller was created, scaffolding included the following `@model` statement at the top of the *Index.cshtml* file:</span></span>
 
 <!-- Copy Index.cshtml to IndexOriginal.cshtml -->
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?range=1)]
 
-<span data-ttu-id="cf0b9-266">`@model` 지시문을 사용하면 강력한 형식인 `Model` 개체를 사용하여 컨트롤러가 보기에 전달한 영화 목록에 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-266">The `@model` directive allows you to access the list of movies that the controller passed to the view by using a `Model` object that's strongly typed.</span></span> <span data-ttu-id="cf0b9-267">예를 들어 *Index.cshtml* 보기에서 코드는 강력한 형식의 `Model` 개체에 대해 `foreach` 문을 사용하여 영화를 반복합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-267">For example, in the *Index.cshtml* view, the code loops through the movies with a `foreach` statement over the strongly typed `Model` object:</span></span>
+<span data-ttu-id="917aa-279">`@model` 지시문을 사용하면 강력한 형식인 `Model` 개체를 사용하여 컨트롤러가 보기에 전달한 영화 목록에 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-279">The `@model` directive allows you to access the list of movies that the controller passed to the view by using a `Model` object that's strongly typed.</span></span> <span data-ttu-id="917aa-280">예를 들어 *Index.cshtml* 보기에서 코드는 강력한 형식의 `Model` 개체에 대해 `foreach` 문을 사용하여 영화를 반복합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-280">For example, in the *Index.cshtml* view, the code loops through the movies with a `foreach` statement over the strongly typed `Model` object:</span></span>
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?highlight=1,31,34,37,40,43,46-48)]
 
-<span data-ttu-id="cf0b9-268">`Model` 개체가 강력한 형식이기 때문에(`IEnumerable<Movie>` 개체처럼) 루프의 각 항목은 `Movie` 형식입니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-268">Because the `Model` object is strongly typed (as an `IEnumerable<Movie>` object), each item in the loop is typed as `Movie`.</span></span> <span data-ttu-id="cf0b9-269">즉, 여러 가지 이점 중에서도 코드의 컴파일 시 검사를 수행할 수 있다는 뜻입니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-269">Among other benefits, this means that you get compile time checking of the code.</span></span>
+<span data-ttu-id="917aa-281">`Model` 개체가 강력한 형식이기 때문에(`IEnumerable<Movie>` 개체처럼) 루프의 각 항목은 `Movie` 형식입니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-281">Because the `Model` object is strongly typed (as an `IEnumerable<Movie>` object), each item in the loop is typed as `Movie`.</span></span> <span data-ttu-id="917aa-282">즉, 여러 가지 이점 중에서도 코드의 컴파일 시 검사를 수행할 수 있다는 뜻입니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-282">Among other benefits, this means that you get compile time checking of the code.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="cf0b9-270">추가 자료</span><span class="sxs-lookup"><span data-stu-id="cf0b9-270">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="917aa-283">추가 자료</span><span class="sxs-lookup"><span data-stu-id="917aa-283">Additional resources</span></span>
 
-* [<span data-ttu-id="cf0b9-271">태그 도우미</span><span class="sxs-lookup"><span data-stu-id="cf0b9-271">Tag Helpers</span></span>](xref:mvc/views/tag-helpers/intro)
-* [<span data-ttu-id="cf0b9-272">세계화 및 지역화</span><span class="sxs-lookup"><span data-stu-id="cf0b9-272">Globalization and localization</span></span>](xref:fundamentals/localization)
+* [<span data-ttu-id="917aa-284">태그 도우미</span><span class="sxs-lookup"><span data-stu-id="917aa-284">Tag Helpers</span></span>](xref:mvc/views/tag-helpers/intro)
+* [<span data-ttu-id="917aa-285">세계화 및 지역화</span><span class="sxs-lookup"><span data-stu-id="917aa-285">Globalization and localization</span></span>](xref:fundamentals/localization)
 
 > [!div class="step-by-step"]
-> <span data-ttu-id="cf0b9-273">[이전 보기 추가](adding-view.md)
-> [다음 SQL 사용](working-with-sql.md)</span><span class="sxs-lookup"><span data-stu-id="cf0b9-273">[Previous Adding a View](adding-view.md)
+> <span data-ttu-id="917aa-286">[이전 보기 추가](adding-view.md)
+> [다음 SQL 사용](working-with-sql.md)</span><span class="sxs-lookup"><span data-stu-id="917aa-286">[Previous Adding a View](adding-view.md)
 [Next Working with SQL](working-with-sql.md)</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-## <a name="add-a-data-model-class"></a><span data-ttu-id="cf0b9-274">데이터 모델 클래스 추가</span><span class="sxs-lookup"><span data-stu-id="cf0b9-274">Add a data model class</span></span>
+## <a name="add-a-data-model-class"></a><span data-ttu-id="917aa-287">데이터 모델 클래스 추가</span><span class="sxs-lookup"><span data-stu-id="917aa-287">Add a data model class</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="cf0b9-275">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-275">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="917aa-288">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-288">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="cf0b9-276">*Models* 폴더> **추가** > **클래스**를 마우스 오른쪽 단추로 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-276">Right-click the *Models* folder > **Add** > **Class**.</span></span> <span data-ttu-id="cf0b9-277">클래스의 이름을 **Movie**로 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-277">Name the class **Movie**.</span></span>
+<span data-ttu-id="917aa-289">*Models* 폴더> **추가** > **클래스**를 마우스 오른쪽 단추로 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-289">Right-click the *Models* folder > **Add** > **Class**.</span></span> <span data-ttu-id="917aa-290">클래스의 이름을 **Movie**로 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-290">Name the class **Movie**.</span></span>
 
 [!INCLUDE [model 1b](~/includes/mvc-intro/model1b.md)]
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="cf0b9-278">Visual Studio Code / Visual Studio for Mac</span><span class="sxs-lookup"><span data-stu-id="cf0b9-278">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="917aa-291">Visual Studio Code / Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-291">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-* <span data-ttu-id="cf0b9-279">*Models* 폴더에 *Movie.cs* 클래스를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-279">Add a class to the *Models* folder named *Movie.cs*.</span></span>
+* <span data-ttu-id="917aa-292">*Models* 폴더에 *Movie.cs* 클래스를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-292">Add a class to the *Models* folder named *Movie.cs*.</span></span>
 
 [!INCLUDE [model 1b](~/includes/mvc-intro/model1b.md)]
 [!INCLUDE [model 2](~/includes/mvc-intro/model2.md)]
 
 ---
 
-## <a name="scaffold-the-movie-model"></a><span data-ttu-id="cf0b9-280">영화 모델 스캐폴드</span><span class="sxs-lookup"><span data-stu-id="cf0b9-280">Scaffold the movie model</span></span>
+## <a name="scaffold-the-movie-model"></a><span data-ttu-id="917aa-293">영화 모델 스캐폴드</span><span class="sxs-lookup"><span data-stu-id="917aa-293">Scaffold the movie model</span></span>
 
-<span data-ttu-id="cf0b9-281">이 섹션에서는 영화 모델을 스캐폴드 합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-281">In this section, the movie model is scaffolded.</span></span> <span data-ttu-id="cf0b9-282">즉, 스캐폴드 도구로 영화 모델에 대한 CRUD(생성, 읽기, 수정 및 삭제) 작업을 위한 페이지를 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-282">That is, the scaffolding tool produces pages for Create, Read, Update, and Delete (CRUD) operations for the movie model.</span></span>
+<span data-ttu-id="917aa-294">이 섹션에서는 영화 모델을 스캐폴드 합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-294">In this section, the movie model is scaffolded.</span></span> <span data-ttu-id="917aa-295">즉, 스캐폴드 도구로 영화 모델에 대한 CRUD(생성, 읽기, 수정 및 삭제) 작업을 위한 페이지를 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-295">That is, the scaffolding tool produces pages for Create, Read, Update, and Delete (CRUD) operations for the movie model.</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="cf0b9-283">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-283">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="917aa-296">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-296">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="cf0b9-284">**솔루션 탐색기**에서 *Controllers* 폴더를 마우스 오른쪽 단추로 클릭하고 **> 추가 > 스캐폴드 항목 새로 만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-284">In **Solution Explorer**, right-click the *Controllers* folder **> Add > New Scaffolded Item**.</span></span>
+<span data-ttu-id="917aa-297">**솔루션 탐색기**에서 *Controllers* 폴더를 마우스 오른쪽 단추로 클릭하고 **> 추가 > 스캐폴드 항목 새로 만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-297">In **Solution Explorer**, right-click the *Controllers* folder **> Add > New Scaffolded Item**.</span></span>
 
 ![위 단계의 보기](adding-model/_static/add_controller21.png)
 
-<span data-ttu-id="cf0b9-286">**스캐폴드 추가** 대화 상자에서 **보기 포함 MVC 컨트롤러, Entity Framework > 추가 사용**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-286">In the **Add Scaffold** dialog, select **MVC Controller with views, using Entity Framework > Add**.</span></span>
+<span data-ttu-id="917aa-299">**스캐폴드 추가** 대화 상자에서 **보기 포함 MVC 컨트롤러, Entity Framework > 추가 사용**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-299">In the **Add Scaffold** dialog, select **MVC Controller with views, using Entity Framework > Add**.</span></span>
 
 ![스캐폴드 추가 대화 상자](adding-model/_static/add_scaffold21.png)
 
-<span data-ttu-id="cf0b9-288">**컨트롤러 추가** 대화 상자를 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-288">Complete the **Add Controller** dialog:</span></span>
+<span data-ttu-id="917aa-301">**컨트롤러 추가** 대화 상자를 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-301">Complete the **Add Controller** dialog:</span></span>
 
-* <span data-ttu-id="cf0b9-289">**모델 클래스:** *Movie(MvcMovie.Models)*</span><span class="sxs-lookup"><span data-stu-id="cf0b9-289">**Model class:** *Movie (MvcMovie.Models)*</span></span>
-* <span data-ttu-id="cf0b9-290">**데이터 컨텍스트 클래스:** **+** 아이콘을 선택하고 기본값 **MvcMovie.Models.MvcMovieContext**를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-290">**Data context class:** Select the **+** icon and add the default **MvcMovie.Models.MvcMovieContext**</span></span>
+* <span data-ttu-id="917aa-302">**모델 클래스:** *Movie(MvcMovie.Models)*</span><span class="sxs-lookup"><span data-stu-id="917aa-302">**Model class:** *Movie (MvcMovie.Models)*</span></span>
+* <span data-ttu-id="917aa-303">**데이터 컨텍스트 클래스:** **+** 아이콘을 선택하고 기본값 **MvcMovie.Models.MvcMovieContext**를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-303">**Data context class:** Select the **+** icon and add the default **MvcMovie.Models.MvcMovieContext**</span></span>
 
 ![데이터 컨텍스트 추가](adding-model/_static/dc.png)
 
-* <span data-ttu-id="cf0b9-292">**보기:** 확인된 각 옵션의 기본값 선택 유지</span><span class="sxs-lookup"><span data-stu-id="cf0b9-292">**Views:** Keep the default of each option checked</span></span>
-* <span data-ttu-id="cf0b9-293">**컨트롤러 이름:** 기본값 *MoviesController* 유지</span><span class="sxs-lookup"><span data-stu-id="cf0b9-293">**Controller name:** Keep the default *MoviesController*</span></span>
-* <span data-ttu-id="cf0b9-294">**추가**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-294">Select **Add**</span></span>
+* <span data-ttu-id="917aa-305">**보기:** 확인된 각 옵션의 기본값 선택 유지</span><span class="sxs-lookup"><span data-stu-id="917aa-305">**Views:** Keep the default of each option checked</span></span>
+* <span data-ttu-id="917aa-306">**컨트롤러 이름:** 기본값 *MoviesController* 유지</span><span class="sxs-lookup"><span data-stu-id="917aa-306">**Controller name:** Keep the default *MoviesController*</span></span>
+* <span data-ttu-id="917aa-307">**추가**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-307">Select **Add**</span></span>
 
 ![컨트롤러 추가 대화 상자](adding-model/_static/add_controller2.png)
 
-<span data-ttu-id="cf0b9-296">Visual Studio가 다음을 만듭니다</span><span class="sxs-lookup"><span data-stu-id="cf0b9-296">Visual Studio creates:</span></span>
+<span data-ttu-id="917aa-309">Visual Studio가 다음을 만듭니다</span><span class="sxs-lookup"><span data-stu-id="917aa-309">Visual Studio creates:</span></span>
 
-* <span data-ttu-id="cf0b9-297">Entity Framework Core [데이터베이스 컨텍스트 클래스](xref:data/ef-mvc/intro#create-the-database-context)(*Data/MvcMovieContext.cs*)</span><span class="sxs-lookup"><span data-stu-id="cf0b9-297">An Entity Framework Core [database context class](xref:data/ef-mvc/intro#create-the-database-context) (*Data/MvcMovieContext.cs*)</span></span>
-* <span data-ttu-id="cf0b9-298">영화 컨트롤러(*Controllers/MoviesController.cs*)</span><span class="sxs-lookup"><span data-stu-id="cf0b9-298">A movies controller (*Controllers/MoviesController.cs*)</span></span>
-* <span data-ttu-id="cf0b9-299">Create, Delete, Details, Edit, 및 Index 페이지에 대한 Razor 보기 파일(*Views/Movies/\*.cshtml*)</span><span class="sxs-lookup"><span data-stu-id="cf0b9-299">Razor view files for Create, Delete, Details, Edit, and Index pages (*Views/Movies/\*.cshtml*)</span></span>
+* <span data-ttu-id="917aa-310">Entity Framework Core [데이터베이스 컨텍스트 클래스](xref:data/ef-mvc/intro#create-the-database-context)(*Data/MvcMovieContext.cs*)</span><span class="sxs-lookup"><span data-stu-id="917aa-310">An Entity Framework Core [database context class](xref:data/ef-mvc/intro#create-the-database-context) (*Data/MvcMovieContext.cs*)</span></span>
+* <span data-ttu-id="917aa-311">영화 컨트롤러(*Controllers/MoviesController.cs*)</span><span class="sxs-lookup"><span data-stu-id="917aa-311">A movies controller (*Controllers/MoviesController.cs*)</span></span>
+* <span data-ttu-id="917aa-312">Create, Delete, Details, Edit, 및 Index 페이지에 대한 Razor 보기 파일(*Views/Movies/\*.cshtml*)</span><span class="sxs-lookup"><span data-stu-id="917aa-312">Razor view files for Create, Delete, Details, Edit, and Index pages (*Views/Movies/\*.cshtml*)</span></span>
 
-<span data-ttu-id="cf0b9-300">[CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete)(생성, 읽기, 수정 및 삭제) 작업 메서드와 보기 및 데이터베이스 컨텍스트의 자동 생성을 *스캐폴딩*이라고 합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-300">The automatic creation of the database context and [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) (create, read, update, and delete) action methods and views is known as *scaffolding*.</span></span>
+<span data-ttu-id="917aa-313">[CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete)(생성, 읽기, 수정 및 삭제) 작업 메서드와 보기 및 데이터베이스 컨텍스트의 자동 생성을 *스캐폴딩*이라고 합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-313">The automatic creation of the database context and [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) (create, read, update, and delete) action methods and views is known as *scaffolding*.</span></span>
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="cf0b9-301">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="cf0b9-301">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="917aa-314">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="917aa-314">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
 <!--  Until https://github.com/aspnet/Scaffolding/issues/582 is fixed windows needs backslash or the namespace is namespace RazorPagesMovie.Pages_Movies rather than namespace RazorPagesMovie.Pages.Movies
 -->
 
-* <span data-ttu-id="cf0b9-302">프로젝트 디렉터리(*Program.cs*, *Startup.cs* 및 *.csproj* 파일이 포함된 디렉터리)에서 명령 창을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-302">Open a command window in the project directory (The directory that contains the *Program.cs*, *Startup.cs*, and *.csproj* files).</span></span>
-* <span data-ttu-id="cf0b9-303">스캐폴딩 도구를 설치합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-303">Install the scaffolding tool:</span></span>
+* <span data-ttu-id="917aa-315">프로젝트 디렉터리(*Program.cs*, *Startup.cs* 및 *.csproj* 파일이 포함된 디렉터리)에서 명령 창을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-315">Open a command window in the project directory (The directory that contains the *Program.cs*, *Startup.cs*, and *.csproj* files).</span></span>
+* <span data-ttu-id="917aa-316">스캐폴딩 도구를 설치합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-316">Install the scaffolding tool:</span></span>
 
   ```dotnetcli
    dotnet tool install --global dotnet-aspnet-codegenerator
    ```
 
-* <span data-ttu-id="cf0b9-304">Linux에서는 스캐폴드 도구 경로를 내보냅니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-304">On Linux, export the scaffold tool path:</span></span>
+* <span data-ttu-id="917aa-317">Linux에서는 스캐폴드 도구 경로를 내보냅니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-317">On Linux, export the scaffold tool path:</span></span>
 
   ```console
     export PATH=$HOME/.dotnet/tools:$PATH
   ```
 
-* <span data-ttu-id="cf0b9-305">다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-305">Run the following command:</span></span>
+* <span data-ttu-id="917aa-318">다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-318">Run the following command:</span></span>
 
   ```dotnetcli
    dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -467,16 +488,16 @@ return View(movie);
 
 <!-- Mac -------------------------->
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="cf0b9-306">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-306">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="917aa-319">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-319">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="cf0b9-307">프로젝트 디렉터리(*Program.cs*, *Startup.cs* 및 *.csproj* 파일이 포함된 디렉터리)에서 명령 창을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-307">Open a command window in the project directory (The directory that contains the *Program.cs*, *Startup.cs*, and *.csproj* files).</span></span>
-* <span data-ttu-id="cf0b9-308">스캐폴딩 도구를 설치합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-308">Install the scaffolding tool:</span></span>
+* <span data-ttu-id="917aa-320">프로젝트 디렉터리(*Program.cs*, *Startup.cs* 및 *.csproj* 파일이 포함된 디렉터리)에서 명령 창을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-320">Open a command window in the project directory (The directory that contains the *Program.cs*, *Startup.cs*, and *.csproj* files).</span></span>
+* <span data-ttu-id="917aa-321">스캐폴딩 도구를 설치합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-321">Install the scaffolding tool:</span></span>
 
   ```dotnetcli
    dotnet tool install --global dotnet-aspnet-codegenerator
    ```
 
-* <span data-ttu-id="cf0b9-309">다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-309">Run the following command:</span></span>
+* <span data-ttu-id="917aa-322">다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-322">Run the following command:</span></span>
 
   ```dotnetcli
    dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -488,9 +509,9 @@ return View(movie);
 
 <!-- End of VS tabs                  -->
 
-<span data-ttu-id="cf0b9-310">응용 프로그램을 실행하고 **Mvc Movie** 링크를 클릭하면 다음과 유사한 오류가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-310">If you run the app and click on the **Mvc Movie** link, you get an error similar to the following:</span></span>
+<span data-ttu-id="917aa-323">응용 프로그램을 실행하고 **Mvc Movie** 링크를 클릭하면 다음과 유사한 오류가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-323">If you run the app and click on the **Mvc Movie** link, you get an error similar to the following:</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="cf0b9-311">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-311">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="917aa-324">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-324">Visual Studio</span></span>](#tab/visual-studio)
 
 ``` error
 An unhandled exception occurred while processing the request.
@@ -501,7 +522,7 @@ Login failed for user 'Rick'.
 System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString
 ```
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="cf0b9-312">Visual Studio Code / Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-312">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="917aa-325">Visual Studio Code / Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-325">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
 ``` error
 An unhandled exception occurred while processing the request.
@@ -512,185 +533,185 @@ Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(int rc, sqlite3 db)
 
 ---
 
-<span data-ttu-id="cf0b9-313">데이터베이스를 만들어야 하는데 이를 수행하기 위해 EF Core [마이그레이션](xref:data/ef-mvc/migrations) 기능을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-313">You need to create the database, and you use the EF Core [Migrations](xref:data/ef-mvc/migrations) feature to do that.</span></span> <span data-ttu-id="cf0b9-314">마이그레이션을 통해 데이터 모델과 일치하는 데이터베이스를 만들고 데이터 모델 변경 시 데이터베이스 스키마를 수정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-314">Migrations lets you create a database that matches your data model and update the database schema when your data model changes.</span></span>
+<span data-ttu-id="917aa-326">데이터베이스를 만들어야 하는데 이를 수행하기 위해 EF Core [마이그레이션](xref:data/ef-mvc/migrations) 기능을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-326">You need to create the database, and you use the EF Core [Migrations](xref:data/ef-mvc/migrations) feature to do that.</span></span> <span data-ttu-id="917aa-327">마이그레이션을 통해 데이터 모델과 일치하는 데이터베이스를 만들고 데이터 모델 변경 시 데이터베이스 스키마를 수정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-327">Migrations lets you create a database that matches your data model and update the database schema when your data model changes.</span></span>
 
 <a name="pmc"></a>
 
-## <a name="initial-migration"></a><span data-ttu-id="cf0b9-315">초기 마이그레이션</span><span class="sxs-lookup"><span data-stu-id="cf0b9-315">Initial migration</span></span>
+## <a name="initial-migration"></a><span data-ttu-id="917aa-328">초기 마이그레이션</span><span class="sxs-lookup"><span data-stu-id="917aa-328">Initial migration</span></span>
 
-<span data-ttu-id="cf0b9-316">이 섹션에서는 다음 작업을 완료합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-316">In this section, the following tasks are completed:</span></span>
+<span data-ttu-id="917aa-329">이 섹션에서는 다음 작업을 완료합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-329">In this section, the following tasks are completed:</span></span>
 
-* <span data-ttu-id="cf0b9-317">초기 마이그레이션을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-317">Add an initial migration.</span></span>
-* <span data-ttu-id="cf0b9-318">초기 마이그레이션을 사용하여 데이터베이스를 수정합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-318">Update the database with the initial migration.</span></span>
+* <span data-ttu-id="917aa-330">초기 마이그레이션을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-330">Add an initial migration.</span></span>
+* <span data-ttu-id="917aa-331">초기 마이그레이션을 사용하여 데이터베이스를 수정합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-331">Update the database with the initial migration.</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="cf0b9-319">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-319">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="917aa-332">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-332">Visual Studio</span></span>](#tab/visual-studio)
 
-1. <span data-ttu-id="cf0b9-320">**도구** 메뉴에서 **NuGet 패키지 관리자** > PMC(**패키지 관리자 콘솔**)를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-320">From the **Tools** menu, select **NuGet Package Manager** > **Package Manager Console** (PMC).</span></span>
+1. <span data-ttu-id="917aa-333">**도구** 메뉴에서 **NuGet 패키지 관리자** > **PMC(패키지 관리자 콘솔)** 을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-333">From the **Tools** menu, select **NuGet Package Manager** > **Package Manager Console** (PMC).</span></span>
 
    ![PMC 메뉴](~/tutorials/first-mvc-app/adding-model/_static/pmc.png)
 
-1. <span data-ttu-id="cf0b9-322">PMC에서 다음 명령을 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-322">In the PMC, enter the following commands:</span></span>
+1. <span data-ttu-id="917aa-335">PMC에서 다음 명령을 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-335">In the PMC, enter the following commands:</span></span>
 
    ```PMC
    Add-Migration Initial
    Update-Database
    ```
 
-   <span data-ttu-id="cf0b9-323">`Add-Migration` 명령은 초기 데이터베이스 스키마를 만드는 코드를 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-323">The `Add-Migration` command generates code to create the initial database schema.</span></span>
+   <span data-ttu-id="917aa-336">`Add-Migration` 명령은 초기 데이터베이스 스키마를 만드는 코드를 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-336">The `Add-Migration` command generates code to create the initial database schema.</span></span>
 
-   <span data-ttu-id="cf0b9-324">데이터베이스 스키마는 `MvcMovieContext` 클래스에 지정된 모델을 기반으로 합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-324">The database schema is based on the model specified in the `MvcMovieContext` class.</span></span> <span data-ttu-id="cf0b9-325">`Initial` 인수는 마이그레이션 이름입니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-325">The `Initial` argument is the migration name.</span></span> <span data-ttu-id="cf0b9-326">모든 이름을 사용할 수 있지만 규칙에 따라 마이그레이션을 설명하는 이름을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-326">Any name can be used, but by convention, a name that describes the migration is used.</span></span> <span data-ttu-id="cf0b9-327">자세한 내용은 <xref:data/ef-mvc/migrations>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-327">For more information, see <xref:data/ef-mvc/migrations>.</span></span>
+   <span data-ttu-id="917aa-337">데이터베이스 스키마는 `MvcMovieContext` 클래스에 지정된 모델을 기반으로 합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-337">The database schema is based on the model specified in the `MvcMovieContext` class.</span></span> <span data-ttu-id="917aa-338">`Initial` 인수는 마이그레이션 이름입니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-338">The `Initial` argument is the migration name.</span></span> <span data-ttu-id="917aa-339">모든 이름을 사용할 수 있지만 규칙에 따라 마이그레이션을 설명하는 이름을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-339">Any name can be used, but by convention, a name that describes the migration is used.</span></span> <span data-ttu-id="917aa-340">자세한 내용은 <xref:data/ef-mvc/migrations>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="917aa-340">For more information, see <xref:data/ef-mvc/migrations>.</span></span>
 
-   <span data-ttu-id="cf0b9-328">`Update-Database` 명령은 데이터베이스를 만드는 *Migrations/{time-stamp}_InitialCreate.cs* 파일에서 `Up` 메서드를 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-328">The `Update-Database` command runs the `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* file, which creates the database.</span></span>
+   <span data-ttu-id="917aa-341">`Update-Database` 명령은 데이터베이스를 만드는 *Migrations/{time-stamp}_InitialCreate.cs* 파일에서 `Up` 메서드를 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-341">The `Update-Database` command runs the `Up` method in the *Migrations/{time-stamp}_InitialCreate.cs* file, which creates the database.</span></span>
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="cf0b9-329">Visual Studio Code / Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-329">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="917aa-342">Visual Studio Code / Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-342">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
 [!INCLUDE [initial migration](~/includes/RP/model3.md)]
 
-<span data-ttu-id="cf0b9-330">`ef migrations add InitialCreate` 명령은 초기 데이터베이스 스키마를 만드는 코드를 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-330">The `ef migrations add InitialCreate` command generates code to create the initial database schema.</span></span>
+<span data-ttu-id="917aa-343">`ef migrations add InitialCreate` 명령은 초기 데이터베이스 스키마를 만드는 코드를 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-343">The `ef migrations add InitialCreate` command generates code to create the initial database schema.</span></span>
 
-<span data-ttu-id="cf0b9-331">데이터베이스 스키마는 *Data/MvcMovieContext.cs* 파일의 `MvcMovieContext` 클래스에 지정된 모델을 기반으로 합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-331">The database schema is based on the model specified in the `MvcMovieContext` class (in the *Data/MvcMovieContext.cs* file).</span></span> <span data-ttu-id="cf0b9-332">`InitialCreate` 인수는 마이그레이션 이름입니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-332">The `InitialCreate` argument is the migration name.</span></span> <span data-ttu-id="cf0b9-333">모든 이름을 사용할 수 있지만 규칙에 따라 마이그레이션을 설명하는 이름을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-333">Any name can be used, but by convention, a name is selected that describes the migration.</span></span>
+<span data-ttu-id="917aa-344">데이터베이스 스키마는 *Data/MvcMovieContext.cs* 파일의 `MvcMovieContext` 클래스에 지정된 모델을 기반으로 합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-344">The database schema is based on the model specified in the `MvcMovieContext` class (in the *Data/MvcMovieContext.cs* file).</span></span> <span data-ttu-id="917aa-345">`InitialCreate` 인수는 마이그레이션 이름입니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-345">The `InitialCreate` argument is the migration name.</span></span> <span data-ttu-id="917aa-346">모든 이름을 사용할 수 있지만 규칙에 따라 마이그레이션을 설명하는 이름을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-346">Any name can be used, but by convention, a name is selected that describes the migration.</span></span>
 
 ---
 
-## <a name="examine-the-context-registered-with-dependency-injection"></a><span data-ttu-id="cf0b9-334">종속성 주입을 사용하여 등록된 컨텍스트 확인</span><span class="sxs-lookup"><span data-stu-id="cf0b9-334">Examine the context registered with dependency injection</span></span>
+## <a name="examine-the-context-registered-with-dependency-injection"></a><span data-ttu-id="917aa-347">종속성 주입을 사용하여 등록된 컨텍스트 확인</span><span class="sxs-lookup"><span data-stu-id="917aa-347">Examine the context registered with dependency injection</span></span>
 
-<span data-ttu-id="cf0b9-335">ASP.NET Core는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)를 사용하여 만들어집니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-335">ASP.NET Core is built with [dependency injection (DI)](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="cf0b9-336">서비스(예: EF Core DB 컨텍스트)는 애플리케이션 시작 중에 DI에 등록됩니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-336">Services (such as the EF Core DB context) are registered with DI during application startup.</span></span> <span data-ttu-id="cf0b9-337">이러한 서비스(예: Razor 페이지)가 필요한 구성 요소는 생성자 매개 변수를 통해 해당 서비스를 제공받습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-337">Components that require these services (such as Razor Pages) are provided these services via constructor parameters.</span></span> <span data-ttu-id="cf0b9-338">DB 컨텍스트 인스턴스를 가져오는 생성자 코드는 자습서 뒷부분에 나옵니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-338">The constructor code that gets a DB context instance is shown later in the tutorial.</span></span>
+<span data-ttu-id="917aa-348">ASP.NET Core는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)를 사용하여 만들어집니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-348">ASP.NET Core is built with [dependency injection (DI)](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="917aa-349">서비스(예: EF Core DB 컨텍스트)는 애플리케이션 시작 중에 DI에 등록됩니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-349">Services (such as the EF Core DB context) are registered with DI during application startup.</span></span> <span data-ttu-id="917aa-350">이러한 서비스(예: Razor 페이지)가 필요한 구성 요소는 생성자 매개 변수를 통해 해당 서비스를 제공받습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-350">Components that require these services (such as Razor Pages) are provided these services via constructor parameters.</span></span> <span data-ttu-id="917aa-351">DB 컨텍스트 인스턴스를 가져오는 생성자 코드는 자습서 뒷부분에 나옵니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-351">The constructor code that gets a DB context instance is shown later in the tutorial.</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="cf0b9-339">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-339">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="917aa-352">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-352">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="cf0b9-340">스캐폴딩 도구는 자동으로 DB 컨텍스트를 만들고 DI 컨테이너에 등록합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-340">The scaffolding tool automatically created a DB context and registered it with the DI container.</span></span>
+<span data-ttu-id="917aa-353">스캐폴딩 도구는 자동으로 DB 컨텍스트를 만들고 DI 컨테이너에 등록합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-353">The scaffolding tool automatically created a DB context and registered it with the DI container.</span></span>
 
-<span data-ttu-id="cf0b9-341">다음 `Startup.ConfigureServices` 메서드를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-341">Examine the following `Startup.ConfigureServices` method.</span></span> <span data-ttu-id="cf0b9-342">강조 표시된 줄은 스캐폴더에서 추가된 것입니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-342">The highlighted line was added by the scaffolder:</span></span>
+<span data-ttu-id="917aa-354">다음 `Startup.ConfigureServices` 메서드를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-354">Examine the following `Startup.ConfigureServices` method.</span></span> <span data-ttu-id="917aa-355">강조 표시된 줄은 스캐폴더에서 추가된 것입니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-355">The highlighted line was added by the scaffolder:</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Startup.cs?name=snippet_ConfigureServices&highlight=14-15)]
 
-<span data-ttu-id="cf0b9-343">`MvcMovieContext`는 `Movie` 모델에 대한 EF Core 기능(생성, 읽기, 수정, 삭제 등)을 조정합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-343">The `MvcMovieContext` coordinates EF Core functionality (Create, Read, Update, Delete, etc.) for the `Movie` model.</span></span> <span data-ttu-id="cf0b9-344">데이터 컨텍스트(`MvcMovieContext`)는 [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)에서 파생됩니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-344">The data context (`MvcMovieContext`) is derived from [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext).</span></span> <span data-ttu-id="cf0b9-345">데이터 컨텍스트는 데이터 모델에 포함되는 엔터티를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-345">The data context specifies which entities are included in the data model:</span></span>
+<span data-ttu-id="917aa-356">`MvcMovieContext`는 `Movie` 모델에 대한 EF Core 기능(생성, 읽기, 수정, 삭제 등)을 조정합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-356">The `MvcMovieContext` coordinates EF Core functionality (Create, Read, Update, Delete, etc.) for the `Movie` model.</span></span> <span data-ttu-id="917aa-357">데이터 컨텍스트(`MvcMovieContext`)는 [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)에서 파생됩니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-357">The data context (`MvcMovieContext`) is derived from [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext).</span></span> <span data-ttu-id="917aa-358">데이터 컨텍스트는 데이터 모델에 포함되는 엔터티를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-358">The data context specifies which entities are included in the data model:</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Data/MvcMovieContext.cs)]
 
-<span data-ttu-id="cf0b9-346">이전 코드에서는 엔터티 집합에 대한 [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) 속성을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-346">The preceding code creates a [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) property for the entity set.</span></span> <span data-ttu-id="cf0b9-347">Entity Framework 용어에서 엔터티 집합은 일반적으로 데이터베이스 테이블에 해당합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-347">In Entity Framework terminology, an entity set typically corresponds to a database table.</span></span> <span data-ttu-id="cf0b9-348">엔터티는 테이블의 행에 해당합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-348">An entity corresponds to a row in the table.</span></span>
+<span data-ttu-id="917aa-359">이전 코드에서는 엔터티 집합에 대한 [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) 속성을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-359">The preceding code creates a [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) property for the entity set.</span></span> <span data-ttu-id="917aa-360">Entity Framework 용어에서 엔터티 집합은 일반적으로 데이터베이스 테이블에 해당합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-360">In Entity Framework terminology, an entity set typically corresponds to a database table.</span></span> <span data-ttu-id="917aa-361">엔터티는 테이블의 행에 해당합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-361">An entity corresponds to a row in the table.</span></span>
 
-<span data-ttu-id="cf0b9-349">연결 문자열 이름은 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 개체의 메서드를 호출하여 컨텍스트에 전달됩니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-349">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="cf0b9-350">로컬 개발의 경우 [ASP.NET Core 구성 시스템](xref:fundamentals/configuration/index)은 *appsettings.json* 파일에서 연결 문자열을 읽습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-350">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *appsettings.json* file.</span></span>
+<span data-ttu-id="917aa-362">연결 문자열 이름은 [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) 개체의 메서드를 호출하여 컨텍스트에 전달됩니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-362">The name of the connection string is passed in to the context by calling a method on a [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) object.</span></span> <span data-ttu-id="917aa-363">로컬 개발의 경우 [ASP.NET Core 구성 시스템](xref:fundamentals/configuration/index)은 *appsettings.json* 파일에서 연결 문자열을 읽습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-363">For local development, the [ASP.NET Core configuration system](xref:fundamentals/configuration/index) reads the connection string from the *appsettings.json* file.</span></span>
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="cf0b9-351">Visual Studio Code / Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="cf0b9-351">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="917aa-364">Visual Studio Code / Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="917aa-364">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
-<span data-ttu-id="cf0b9-352">DB 컨텍스트를 만들고 DI 컨테이너에 등록했습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-352">You created a DB context and registered it with the DI container.</span></span>
+<span data-ttu-id="917aa-365">DB 컨텍스트를 만들고 DI 컨테이너에 등록했습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-365">You created a DB context and registered it with the DI container.</span></span>
 
 ---
 
 <a name="test"></a>
 
-### <a name="test-the-app"></a><span data-ttu-id="cf0b9-353">앱을 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-353">Test the app</span></span>
+### <a name="test-the-app"></a><span data-ttu-id="917aa-366">앱을 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-366">Test the app</span></span>
 
-* <span data-ttu-id="cf0b9-354">앱을 실행하고 브라우저에서 URL에 `/Movies`를 추가합니다(`http://localhost:port/movies`).</span><span class="sxs-lookup"><span data-stu-id="cf0b9-354">Run the app and append `/Movies` to the URL in the browser (`http://localhost:port/movies`).</span></span>
+* <span data-ttu-id="917aa-367">앱을 실행하고 브라우저에서 URL에 `/Movies`를 추가합니다(`http://localhost:port/movies`).</span><span class="sxs-lookup"><span data-stu-id="917aa-367">Run the app and append `/Movies` to the URL in the browser (`http://localhost:port/movies`).</span></span>
 
-<span data-ttu-id="cf0b9-355">다음과 비슷한 데이터베이스 예외가 발생할 경우:</span><span class="sxs-lookup"><span data-stu-id="cf0b9-355">If you get a database exception similar to the following:</span></span>
+<span data-ttu-id="917aa-368">다음과 비슷한 데이터베이스 예외가 발생할 경우:</span><span class="sxs-lookup"><span data-stu-id="917aa-368">If you get a database exception similar to the following:</span></span>
 
 ```console
 SqlException: Cannot open database "MvcMovieContext-GUID" requested by the login. The login failed.
 Login failed for user 'User-name'.
 ```
 
-<span data-ttu-id="cf0b9-356">[마이그레이션 단계](#pmc)를 누락했을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-356">You missed the [migrations step](#pmc).</span></span>
+<span data-ttu-id="917aa-369">[마이그레이션 단계](#pmc)를 누락했을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-369">You missed the [migrations step](#pmc).</span></span>
 
-* <span data-ttu-id="cf0b9-357">**Create** 링크를 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-357">Test the **Create** link.</span></span> <span data-ttu-id="cf0b9-358">데이터를 입력하고 제출합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-358">Enter and submit data.</span></span>
+* <span data-ttu-id="917aa-370">**Create** 링크를 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-370">Test the **Create** link.</span></span> <span data-ttu-id="917aa-371">데이터를 입력하고 제출합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-371">Enter and submit data.</span></span>
 
   > [!NOTE]
-  > <span data-ttu-id="cf0b9-359">`Price` 필드에 소수점을 입력하지 못할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-359">You may not be able to enter decimal commas in the `Price` field.</span></span> <span data-ttu-id="cf0b9-360">소수점으로 쉼표(",")를 사용하는 비 영어 로캘 및 비 US-English 날짜 형식에 대해[jQuery 유효성 검사](https://jqueryvalidation.org/)를 지원하려면 앱을 세계화해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-360">To support [jQuery validation](https://jqueryvalidation.org/) for non-English locales that use a comma (",") for a decimal point and for non US-English date formats, the app must be globalized.</span></span> <span data-ttu-id="cf0b9-361">세계화 지침은 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-361">For globalization instructions, see [this GitHub issue](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420).</span></span>
+  > <span data-ttu-id="917aa-372">`Price` 필드에 소수점을 입력하지 못할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-372">You may not be able to enter decimal commas in the `Price` field.</span></span> <span data-ttu-id="917aa-373">소수점으로 쉼표(",")를 사용하는 비 영어 로캘 및 비 US-English 날짜 형식에 대해[jQuery 유효성 검사](https://jqueryvalidation.org/)를 지원하려면 앱을 세계화해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-373">To support [jQuery validation](https://jqueryvalidation.org/) for non-English locales that use a comma (",") for a decimal point and for non US-English date formats, the app must be globalized.</span></span> <span data-ttu-id="917aa-374">세계화 지침은 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="917aa-374">For globalization instructions, see [this GitHub issue](https://github.com/aspnet/AspNetCore.Docs/issues/4076#issuecomment-326590420).</span></span>
 
-* <span data-ttu-id="cf0b9-362">**Edit**, **Details** 및 **Delete** 링크를 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-362">Test the **Edit**, **Details**, and **Delete** links.</span></span>
+* <span data-ttu-id="917aa-375">**Edit**, **Details** 및 **Delete** 링크를 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-375">Test the **Edit**, **Details**, and **Delete** links.</span></span>
 
-<span data-ttu-id="cf0b9-363">`Startup` 클래스를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-363">Examine the `Startup` class:</span></span>
+<span data-ttu-id="917aa-376">`Startup` 클래스를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-376">Examine the `Startup` class:</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Startup.cs?name=snippet_ConfigureServices&highlight=13-99)]
 
-<span data-ttu-id="cf0b9-364">앞에서 강조 표시된 코드는 [종속성 주입](xref:fundamentals/dependency-injection) 컨테이너에 추가된 영화 데이터베이스 컨텍스트를 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-364">The preceding highlighted code shows the movie database context being added to the [Dependency Injection](xref:fundamentals/dependency-injection) container:</span></span>
+<span data-ttu-id="917aa-377">앞에서 강조 표시된 코드는 [종속성 주입](xref:fundamentals/dependency-injection) 컨테이너에 추가된 영화 데이터베이스 컨텍스트를 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-377">The preceding highlighted code shows the movie database context being added to the [Dependency Injection](xref:fundamentals/dependency-injection) container:</span></span>
 
-* <span data-ttu-id="cf0b9-365">`services.AddDbContext<MvcMovieContext>(options =>`는 사용할 데이터베이스 및 연결 문자열을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-365">`services.AddDbContext<MvcMovieContext>(options =>` specifies the database to use and the connection string.</span></span>
-* <span data-ttu-id="cf0b9-366">`=>`는 [람다 연산자](/dotnet/articles/csharp/language-reference/operators/lambda-operator)입니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-366">`=>` is a [lambda operator](/dotnet/articles/csharp/language-reference/operators/lambda-operator)</span></span>
+* <span data-ttu-id="917aa-378">`services.AddDbContext<MvcMovieContext>(options =>`는 사용할 데이터베이스 및 연결 문자열을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-378">`services.AddDbContext<MvcMovieContext>(options =>` specifies the database to use and the connection string.</span></span>
+* <span data-ttu-id="917aa-379">`=>`는 [람다 연산자](/dotnet/articles/csharp/language-reference/operators/lambda-operator)입니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-379">`=>` is a [lambda operator](/dotnet/articles/csharp/language-reference/operators/lambda-operator)</span></span>
 
-<span data-ttu-id="cf0b9-367">*Controllers/MoviesController.cs* 파일을 열고 생성자를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-367">Open the *Controllers/MoviesController.cs* file and examine the constructor:</span></span>
+<span data-ttu-id="917aa-380">*Controllers/MoviesController.cs* 파일을 열고 생성자를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-380">Open the *Controllers/MoviesController.cs* file and examine the constructor:</span></span>
 
 <!-- l.. Make copy of Movies controller because we comment out the initial index method and update it later  -->
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_1)]
 
-<span data-ttu-id="cf0b9-368">생성자는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 컨트롤러에 데이터베이스 컨텍스트(`MvcMovieContext`)를 주입합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-368">The constructor uses [Dependency Injection](xref:fundamentals/dependency-injection) to inject the database context (`MvcMovieContext`) into the controller.</span></span> <span data-ttu-id="cf0b9-369">컨트롤러의 각 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 메서드에서 해당 데이터베이스 컨텍스트를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-369">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
+<span data-ttu-id="917aa-381">생성자는 [종속성 주입](xref:fundamentals/dependency-injection)을 사용하여 컨트롤러에 데이터베이스 컨텍스트(`MvcMovieContext`)를 주입합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-381">The constructor uses [Dependency Injection](xref:fundamentals/dependency-injection) to inject the database context (`MvcMovieContext`) into the controller.</span></span> <span data-ttu-id="917aa-382">컨트롤러의 각 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 메서드에서 해당 데이터베이스 컨텍스트를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-382">The database context is used in each of the [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) methods in the controller.</span></span>
 
 <a name="strongly-typed-models-keyword-label"></a>
 <a name="strongly-typed-models-and-the--keyword"></a>
 
-## <a name="strongly-typed-models-and-the-model-keyword"></a><span data-ttu-id="cf0b9-370">강력한 형식의 모델 및 @model 키워드</span><span class="sxs-lookup"><span data-stu-id="cf0b9-370">Strongly typed models and the @model keyword</span></span>
+## <a name="strongly-typed-models-and-the-model-keyword"></a><span data-ttu-id="917aa-383">강력한 형식의 모델 및 @model 키워드</span><span class="sxs-lookup"><span data-stu-id="917aa-383">Strongly typed models and the @model keyword</span></span>
 
-<span data-ttu-id="cf0b9-371">이 자습서의 앞부분에서는 컨트롤러가 `ViewData` 사전을 사용하여 데이터 또는 개체를 보기에 전달하는 방법을 살펴봤습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-371">Earlier in this tutorial, you saw how a controller can pass data or objects to a view using the `ViewData` dictionary.</span></span> <span data-ttu-id="cf0b9-372">`ViewData` 사전은 정보를 보기에 전달하기 위한 편리한 런타임 바인딩 방법을 제공하는 동적 개체입니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-372">The `ViewData` dictionary is a dynamic object that provides a convenient late-bound way to pass information to a view.</span></span>
+<span data-ttu-id="917aa-384">이 자습서의 앞부분에서는 컨트롤러가 `ViewData` 사전을 사용하여 데이터 또는 개체를 보기에 전달하는 방법을 살펴봤습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-384">Earlier in this tutorial, you saw how a controller can pass data or objects to a view using the `ViewData` dictionary.</span></span> <span data-ttu-id="917aa-385">`ViewData` 사전은 정보를 보기에 전달하기 위한 편리한 런타임 바인딩 방법을 제공하는 동적 개체입니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-385">The `ViewData` dictionary is a dynamic object that provides a convenient late-bound way to pass information to a view.</span></span>
 
-<span data-ttu-id="cf0b9-373">또한 MVC는 보기에 강력한 형식의 모델 개체를 전달하는 기능도 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-373">MVC also provides the ability to pass strongly typed model objects to a view.</span></span> <span data-ttu-id="cf0b9-374">이렇게 강력하게 형식화된 방법을 사용하면 코드를 검사하는 컴파일 시간을 개선할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-374">This strongly typed approach enables better compile time checking of your code.</span></span> <span data-ttu-id="cf0b9-375">스캐폴딩 메커니즘은 메서드 및 뷰를 만든 경우 `MoviesController` 클래스 및 뷰에서 이 방법(즉, 강력한 형식의 모델 전달)을 사용했습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-375">The scaffolding mechanism used this approach (that is, passing a strongly typed model) with the `MoviesController` class and views when it created the methods and views.</span></span>
+<span data-ttu-id="917aa-386">또한 MVC는 보기에 강력한 형식의 모델 개체를 전달하는 기능도 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-386">MVC also provides the ability to pass strongly typed model objects to a view.</span></span> <span data-ttu-id="917aa-387">이렇게 강력하게 형식화된 방법을 사용하면 코드를 검사하는 컴파일 시간을 개선할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-387">This strongly typed approach enables better compile time checking of your code.</span></span> <span data-ttu-id="917aa-388">스캐폴딩 메커니즘은 메서드 및 뷰를 만든 경우 `MoviesController` 클래스 및 뷰에서 이 방법(즉, 강력한 형식의 모델 전달)을 사용했습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-388">The scaffolding mechanism used this approach (that is, passing a strongly typed model) with the `MoviesController` class and views when it created the methods and views.</span></span>
 
-<span data-ttu-id="cf0b9-376">*Controllers/MoviesController.cs* 파일에서 생성된 `Details` 메서드를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-376">Examine the generated `Details` method in the *Controllers/MoviesController.cs* file:</span></span>
+<span data-ttu-id="917aa-389">*Controllers/MoviesController.cs* 파일에서 생성된 `Details` 메서드를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-389">Examine the generated `Details` method in the *Controllers/MoviesController.cs* file:</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_details)]
 
-<span data-ttu-id="cf0b9-377">일반적으로 `id` 매개 변수는 경로 데이터 변수로 전달됩니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-377">The `id` parameter is generally passed as route data.</span></span> <span data-ttu-id="cf0b9-378">예를 들어 `https://localhost:5001/movies/details/1`은 다음을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-378">For example `https://localhost:5001/movies/details/1` sets:</span></span>
+<span data-ttu-id="917aa-390">일반적으로 `id` 매개 변수는 경로 데이터 변수로 전달됩니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-390">The `id` parameter is generally passed as route data.</span></span> <span data-ttu-id="917aa-391">예를 들어 `https://localhost:5001/movies/details/1`은 다음을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-391">For example `https://localhost:5001/movies/details/1` sets:</span></span>
 
-* <span data-ttu-id="cf0b9-379">컨트롤러를 `movies` 컨트롤러로 설정(첫 번째 URL 세그먼트)</span><span class="sxs-lookup"><span data-stu-id="cf0b9-379">The controller to the `movies` controller (the first URL segment).</span></span>
-* <span data-ttu-id="cf0b9-380">작업을 `details`로 설정(두 번째 URL 세그먼트)</span><span class="sxs-lookup"><span data-stu-id="cf0b9-380">The action to `details` (the second URL segment).</span></span>
-* <span data-ttu-id="cf0b9-381">ID를 1로 설정(마지막 URL 세그먼트)</span><span class="sxs-lookup"><span data-stu-id="cf0b9-381">The id to 1 (the last URL segment).</span></span>
+* <span data-ttu-id="917aa-392">컨트롤러를 `movies` 컨트롤러로 설정(첫 번째 URL 세그먼트)</span><span class="sxs-lookup"><span data-stu-id="917aa-392">The controller to the `movies` controller (the first URL segment).</span></span>
+* <span data-ttu-id="917aa-393">작업을 `details`로 설정(두 번째 URL 세그먼트)</span><span class="sxs-lookup"><span data-stu-id="917aa-393">The action to `details` (the second URL segment).</span></span>
+* <span data-ttu-id="917aa-394">ID를 1로 설정(마지막 URL 세그먼트)</span><span class="sxs-lookup"><span data-stu-id="917aa-394">The id to 1 (the last URL segment).</span></span>
 
-<span data-ttu-id="cf0b9-382">다음과 같이 쿼리 문자열을 사용하여 `id`에 전달할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-382">You can also pass in the `id` with a query string as follows:</span></span>
+<span data-ttu-id="917aa-395">다음과 같이 쿼리 문자열을 사용하여 `id`에 전달할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-395">You can also pass in the `id` with a query string as follows:</span></span>
 
 `https://localhost:5001/movies/details?id=1`
 
-<span data-ttu-id="cf0b9-383">ID 값이 제공되지 않는 경우에 `id` 매개 변수가 [nullable 형식](/dotnet/csharp/programming-guide/nullable-types/index)(`int?`)으로 정의됩니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-383">The `id` parameter is defined as a [nullable type](/dotnet/csharp/programming-guide/nullable-types/index) (`int?`) in case an ID value isn't provided.</span></span>
+<span data-ttu-id="917aa-396">ID 값이 제공되지 않는 경우에 `id` 매개 변수가 [nullable 형식](/dotnet/csharp/programming-guide/nullable-types/index)(`int?`)으로 정의됩니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-396">The `id` parameter is defined as a [nullable type](/dotnet/csharp/programming-guide/nullable-types/index) (`int?`) in case an ID value isn't provided.</span></span>
 
-<span data-ttu-id="cf0b9-384">[람다 식](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions)을 `FirstOrDefaultAsync`에 전달하여 경로 데이터 또는 쿼리 문자열 값과 일치하는 영화 엔터티를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-384">A [lambda expression](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions) is passed in to `FirstOrDefaultAsync` to select movie entities that match the route data or query string value.</span></span>
+<span data-ttu-id="917aa-397">[람다 식](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions)을 `FirstOrDefaultAsync`에 전달하여 경로 데이터 또는 쿼리 문자열 값과 일치하는 영화 엔터티를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-397">A [lambda expression](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions) is passed in to `FirstOrDefaultAsync` to select movie entities that match the route data or query string value.</span></span>
 
 ```csharp
 var movie = await _context.Movie
     .FirstOrDefaultAsync(m => m.Id == id);
 ```
 
-<span data-ttu-id="cf0b9-385">영화를 찾으면 `Movie` 모델의 인스턴스를 `Details` 보기에 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-385">If a movie is found, an instance of the `Movie` model is passed to the `Details` view:</span></span>
+<span data-ttu-id="917aa-398">영화를 찾으면 `Movie` 모델의 인스턴스를 `Details` 보기에 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-398">If a movie is found, an instance of the `Movie` model is passed to the `Details` view:</span></span>
 
 ```csharp
 return View(movie);
    ```
 
-<span data-ttu-id="cf0b9-386">*Views/Movies/Details.cshtml* 파일의 내용을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-386">Examine the contents of the *Views/Movies/Details.cshtml* file:</span></span>
+<span data-ttu-id="917aa-399">*Views/Movies/Details.cshtml* 파일의 내용을 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-399">Examine the contents of the *Views/Movies/Details.cshtml* file:</span></span>
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/DetailsOriginal.cshtml)]
 
-<span data-ttu-id="cf0b9-387">보기 파일 맨 위에 있는 `@model` 문을 포함하여 보기에서 필요로 하는 개체 형식을 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-387">By including a `@model` statement at the top of the view file, you can specify the type of object that the view expects.</span></span> <span data-ttu-id="cf0b9-388">영화 컨트롤러를 만들 때 *Details.cshtml* 파일의 맨 위에 다음 `@model` 문이 자동으로 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-388">When you created the movie controller, the following `@model` statement was automatically included at the top of the *Details.cshtml* file:</span></span>
+<span data-ttu-id="917aa-400">보기 파일 맨 위에 있는 `@model` 문을 포함하여 보기에서 필요로 하는 개체 형식을 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-400">By including a `@model` statement at the top of the view file, you can specify the type of object that the view expects.</span></span> <span data-ttu-id="917aa-401">영화 컨트롤러를 만들 때 *Details.cshtml* 파일의 맨 위에 다음 `@model` 문이 자동으로 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-401">When you created the movie controller, the following `@model` statement was automatically included at the top of the *Details.cshtml* file:</span></span>
 
 ```HTML
 @model MvcMovie.Models.Movie
    ```
 
-<span data-ttu-id="cf0b9-389">이 `@model` 지시문을 사용하면 강력한 형식인 `Model` 개체를 사용하여 컨트롤러가 뷰에 전달된 영화에 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-389">This `@model` directive allows you to access the movie that the controller passed to the view by using a `Model` object that's strongly typed.</span></span> <span data-ttu-id="cf0b9-390">예를 들어 *Details.cshtml* 뷰에서 코드는 각 영화 필드를 강력한 형식의 `Model` 개체를 사용하여 `DisplayNameFor` 및 `DisplayFor` HTML 도우미에 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-390">For example, in the *Details.cshtml* view, the code passes each movie field to the `DisplayNameFor` and `DisplayFor` HTML Helpers with the strongly typed `Model` object.</span></span> <span data-ttu-id="cf0b9-391">또한 `Create` 및 `Edit` 메서드와 보기도 `Movie` 모델 개체를 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-391">The `Create` and `Edit` methods and views also pass a `Movie` model object.</span></span>
+<span data-ttu-id="917aa-402">이 `@model` 지시문을 사용하면 강력한 형식인 `Model` 개체를 사용하여 컨트롤러가 뷰에 전달된 영화에 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-402">This `@model` directive allows you to access the movie that the controller passed to the view by using a `Model` object that's strongly typed.</span></span> <span data-ttu-id="917aa-403">예를 들어 *Details.cshtml* 뷰에서 코드는 각 영화 필드를 강력한 형식의 `Model` 개체를 사용하여 `DisplayNameFor` 및 `DisplayFor` HTML 도우미에 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-403">For example, in the *Details.cshtml* view, the code passes each movie field to the `DisplayNameFor` and `DisplayFor` HTML Helpers with the strongly typed `Model` object.</span></span> <span data-ttu-id="917aa-404">또한 `Create` 및 `Edit` 메서드와 보기도 `Movie` 모델 개체를 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-404">The `Create` and `Edit` methods and views also pass a `Movie` model object.</span></span>
 
-<span data-ttu-id="cf0b9-392">*Index.cshtml* 보기 및 영화 컨트롤러의 `Index` 메서드를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-392">Examine the *Index.cshtml* view and the `Index` method in the Movies controller.</span></span> <span data-ttu-id="cf0b9-393">코드가 `View` 메서드를 호출할 때 `List` 개체를 생성하는 방법에 유의하세요.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-393">Notice how the code creates a `List` object when it calls the `View` method.</span></span> <span data-ttu-id="cf0b9-394">이 코드는 `Index` 작업 메서드의 `Movies` 목록을 뷰에 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-394">The code passes this `Movies` list from the `Index` action method to the view:</span></span>
+<span data-ttu-id="917aa-405">*Index.cshtml* 보기 및 영화 컨트롤러의 `Index` 메서드를 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-405">Examine the *Index.cshtml* view and the `Index` method in the Movies controller.</span></span> <span data-ttu-id="917aa-406">코드가 `View` 메서드를 호출할 때 `List` 개체를 생성하는 방법에 유의하세요.</span><span class="sxs-lookup"><span data-stu-id="917aa-406">Notice how the code creates a `List` object when it calls the `View` method.</span></span> <span data-ttu-id="917aa-407">이 코드는 `Index` 작업 메서드의 `Movies` 목록을 뷰에 전달합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-407">The code passes this `Movies` list from the `Index` action method to the view:</span></span>
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MC1.cs?name=snippet_index)]
 
-<span data-ttu-id="cf0b9-395">영화 컨트롤러를 만들 때 스캐폴딩에서는 *Index.cshtml* 파일의 맨 위에 다음 `@model` 문을 자동으로 포함시킵니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-395">When you created the movies controller, scaffolding automatically included the following `@model` statement at the top of the *Index.cshtml* file:</span></span>
+<span data-ttu-id="917aa-408">영화 컨트롤러를 만들 때 스캐폴딩에서는 *Index.cshtml* 파일의 맨 위에 다음 `@model` 문을 자동으로 포함시킵니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-408">When you created the movies controller, scaffolding automatically included the following `@model` statement at the top of the *Index.cshtml* file:</span></span>
 
 <!-- Copy Index.cshtml to IndexOriginal.cshtml -->
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?range=1)]
 
-<span data-ttu-id="cf0b9-396">`@model` 지시문을 사용하면 강력한 형식인 `Model` 개체를 사용하여 컨트롤러가 보기에 전달한 영화 목록에 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-396">The `@model` directive allows you to access the list of movies that the controller passed to the view by using a `Model` object that's strongly typed.</span></span> <span data-ttu-id="cf0b9-397">예를 들어 *Index.cshtml* 보기에서 코드는 강력한 형식의 `Model` 개체에 대해 `foreach` 문을 사용하여 영화를 반복합니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-397">For example, in the *Index.cshtml* view, the code loops through the movies with a `foreach` statement over the strongly typed `Model` object:</span></span>
+<span data-ttu-id="917aa-409">`@model` 지시문을 사용하면 강력한 형식인 `Model` 개체를 사용하여 컨트롤러가 보기에 전달한 영화 목록에 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-409">The `@model` directive allows you to access the list of movies that the controller passed to the view by using a `Model` object that's strongly typed.</span></span> <span data-ttu-id="917aa-410">예를 들어 *Index.cshtml* 보기에서 코드는 강력한 형식의 `Model` 개체에 대해 `foreach` 문을 사용하여 영화를 반복합니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-410">For example, in the *Index.cshtml* view, the code loops through the movies with a `foreach` statement over the strongly typed `Model` object:</span></span>
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?highlight=1,31,34,37,40,43,46-48)]
 
-<span data-ttu-id="cf0b9-398">`Model` 개체가 강력한 형식이기 때문에(`IEnumerable<Movie>` 개체처럼) 루프의 각 항목은 `Movie` 형식입니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-398">Because the `Model` object is strongly typed (as an `IEnumerable<Movie>` object), each item in the loop is typed as `Movie`.</span></span> <span data-ttu-id="cf0b9-399">즉, 여러 가지 이점 중에서 코드를 검사하는 컴파일 시간을 가져올 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="cf0b9-399">Among other benefits, this means that you get compile time checking of the code:</span></span>
+<span data-ttu-id="917aa-411">`Model` 개체가 강력한 형식이기 때문에(`IEnumerable<Movie>` 개체처럼) 루프의 각 항목은 `Movie` 형식입니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-411">Because the `Model` object is strongly typed (as an `IEnumerable<Movie>` object), each item in the loop is typed as `Movie`.</span></span> <span data-ttu-id="917aa-412">즉, 여러 가지 이점 중에서 코드를 검사하는 컴파일 시간을 가져올 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="917aa-412">Among other benefits, this means that you get compile time checking of the code:</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="cf0b9-400">추가 자료</span><span class="sxs-lookup"><span data-stu-id="cf0b9-400">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="917aa-413">추가 자료</span><span class="sxs-lookup"><span data-stu-id="917aa-413">Additional resources</span></span>
 
-* [<span data-ttu-id="cf0b9-401">태그 도우미</span><span class="sxs-lookup"><span data-stu-id="cf0b9-401">Tag Helpers</span></span>](xref:mvc/views/tag-helpers/intro)
-* [<span data-ttu-id="cf0b9-402">세계화 및 지역화</span><span class="sxs-lookup"><span data-stu-id="cf0b9-402">Globalization and localization</span></span>](xref:fundamentals/localization)
+* [<span data-ttu-id="917aa-414">태그 도우미</span><span class="sxs-lookup"><span data-stu-id="917aa-414">Tag Helpers</span></span>](xref:mvc/views/tag-helpers/intro)
+* [<span data-ttu-id="917aa-415">세계화 및 지역화</span><span class="sxs-lookup"><span data-stu-id="917aa-415">Globalization and localization</span></span>](xref:fundamentals/localization)
 
 > [!div class="step-by-step"]
-> <span data-ttu-id="cf0b9-403">[이전 보기 추가](adding-view.md)
-> [다음 SQL 사용](working-with-sql.md)</span><span class="sxs-lookup"><span data-stu-id="cf0b9-403">[Previous Adding a View](adding-view.md)
-[Next Working with SQL](working-with-sql.md)</span></span>
+> <span data-ttu-id="917aa-416">[이전 보기 추가](adding-view.md)
+> [다음 데이터베이스 사용](working-with-sql.md)</span><span class="sxs-lookup"><span data-stu-id="917aa-416">[Previous Adding a View](adding-view.md)
+[Next Working with a database](working-with-sql.md)</span></span>
 
 ::: moniker-end

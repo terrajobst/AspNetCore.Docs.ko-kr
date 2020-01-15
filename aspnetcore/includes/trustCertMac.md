@@ -1,21 +1,15 @@
-* <span data-ttu-id="90ee4-101">다음 명령을 실행하여 HTTPS 개발 인증서를 신뢰합니다.</span><span class="sxs-lookup"><span data-stu-id="90ee4-101">Trust the HTTPS development certificate by running the following command:</span></span>
+<span data-ttu-id="0dd79-101">Mac용 Visual Studio에 다음 팝업이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="0dd79-101">Visual Studio for Mac displays the following popup:</span></span>
 
-    ```dotnetcli
-    dotnet dev-certs https --trust
-    ```
+![HTTPS 개발 인증서를 찾을 수 없습니다.](~/getting-started/_static/trustCertMac.png)
 
-* <span data-ttu-id="90ee4-102">이전 명령으로 인해 다음 출력이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="90ee4-102">The preceding command displays the following output:</span></span>
+<span data-ttu-id="0dd79-104">개발 인증서를 신뢰하는 경우 **예**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0dd79-104">Select **Yes** if you trust the development certificate.</span></span>
 
-    ```console
-    Trusting the HTTPS development certificate was requested. If the certificate 
-    is not already trusted we will run the following command:
-    'sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain 
-    <<certificate>>'
-    This command might prompt you for your password to install the certificate on the 
-    system keychain.
-    The HTTPS developer certificate was generated successfully.
-    ```
+<span data-ttu-id="0dd79-105">다음 대화 상자가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="0dd79-105">The following dialog is displayed:</span></span>
 
-* <span data-ttu-id="90ee4-103">메시지가 표시되면 관리 사용자 이름과 암호를 입력합니다.</span><span class="sxs-lookup"><span data-stu-id="90ee4-103">Enter the admin username and password if prompted.</span></span>  <span data-ttu-id="90ee4-104">이제 인증서가 설치되고 신뢰할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="90ee4-104">The certificate will now be installed and trusted.</span></span>
+![보안 경고 대화 상자](~/getting-started/_static/certMac.png)
 
-    <span data-ttu-id="90ee4-105">자세한 내용은 [ASP.NET Core HTTPS 개발 인증서 신뢰](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="90ee4-105">See [Trust the ASP.NET Core HTTPS development certificate](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos) for more information.</span></span>
+<span data-ttu-id="0dd79-107">암호를 입력한 다음 **확인**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0dd79-107">Enter your password and select **OK**</span></span>
+
+<span data-ttu-id="0dd79-108">개발 인증서를 신뢰하는 데 동의하는 경우 **예**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="0dd79-108">Select **Yes** if you agree to trust the development certificate.</span></span>
+
+<span data-ttu-id="0dd79-109">자세한 내용은 [ASP.NET Core HTTPS 개발 인증서 신뢰](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="0dd79-109">See [Trust the ASP.NET Core HTTPS development certificate](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos) for more information</span></span>

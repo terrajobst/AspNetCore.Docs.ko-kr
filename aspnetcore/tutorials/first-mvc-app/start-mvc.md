@@ -5,153 +5,151 @@ description: ASP.NET Core MVC를 시작하는 방법을 알아봅니다.
 ms.author: riande
 ms.date: 10/16/2019
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 0c8c59a5c59c8a70985dc8463c80f9569a00621f
-ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
+ms.openlocfilehash: 901257efdfbc7b36249233745175f5ed253da2c7
+ms.sourcegitcommit: da2fb2d78ce70accdba903ccbfdcfffdd0112123
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73761244"
+ms.lasthandoff: 01/07/2020
+ms.locfileid: "75722886"
 ---
-# <a name="get-started-with-aspnet-core-mvc"></a><span data-ttu-id="5fb19-103">ASP.NET Core MVC 시작</span><span class="sxs-lookup"><span data-stu-id="5fb19-103">Get started with ASP.NET Core MVC</span></span>
+# <a name="get-started-with-aspnet-core-mvc"></a><span data-ttu-id="c8efe-103">ASP.NET Core MVC 시작</span><span class="sxs-lookup"><span data-stu-id="c8efe-103">Get started with ASP.NET Core MVC</span></span>
 
-<span data-ttu-id="5fb19-104">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="5fb19-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+<span data-ttu-id="c8efe-104">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="c8efe-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
 [!INCLUDE [consider RP](~/includes/razor.md)]
 
-<span data-ttu-id="5fb19-105">이 자습서에서는 ASP.NET Core MVC 웹앱을 만들기 위한 기본 사항을 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-105">This tutorial teaches the basics of building an ASP.NET Core MVC web app.</span></span>
+<span data-ttu-id="c8efe-105">이 자습서에서는 ASP.NET Core MVC 웹앱을 만들기 위한 기본 사항을 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-105">This tutorial teaches the basics of building an ASP.NET Core MVC web app.</span></span>
 
-<span data-ttu-id="5fb19-106">앱은 동영상 제목의 데이터베이스를 관리합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-106">The app manages a database of movie titles.</span></span> <span data-ttu-id="5fb19-107">다음과 같은 작업을 수행하는 방법을 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-107">You learn how to:</span></span>
+<span data-ttu-id="c8efe-106">앱은 동영상 제목의 데이터베이스를 관리합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-106">The app manages a database of movie titles.</span></span> <span data-ttu-id="c8efe-107">다음과 같은 작업을 수행하는 방법을 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-107">You learn how to:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="5fb19-108">웹앱 만들기</span><span class="sxs-lookup"><span data-stu-id="5fb19-108">Create a web app.</span></span>
-> * <span data-ttu-id="5fb19-109">모델 추가 및 스캐폴드</span><span class="sxs-lookup"><span data-stu-id="5fb19-109">Add and scaffold a model.</span></span>
-> * <span data-ttu-id="5fb19-110">데이터베이스 작업</span><span class="sxs-lookup"><span data-stu-id="5fb19-110">Work with a database.</span></span>
-> * <span data-ttu-id="5fb19-111">검색 및 유효성 검사 추가</span><span class="sxs-lookup"><span data-stu-id="5fb19-111">Add search and validation.</span></span>
+> * <span data-ttu-id="c8efe-108">웹앱 만들기</span><span class="sxs-lookup"><span data-stu-id="c8efe-108">Create a web app.</span></span>
+> * <span data-ttu-id="c8efe-109">모델 추가 및 스캐폴드</span><span class="sxs-lookup"><span data-stu-id="c8efe-109">Add and scaffold a model.</span></span>
+> * <span data-ttu-id="c8efe-110">데이터베이스 작업</span><span class="sxs-lookup"><span data-stu-id="c8efe-110">Work with a database.</span></span>
+> * <span data-ttu-id="c8efe-111">검색 및 유효성 검사 추가</span><span class="sxs-lookup"><span data-stu-id="c8efe-111">Add search and validation.</span></span>
 
-<span data-ttu-id="5fb19-112">자습서를 마치고 나면 동영상 데이터를 관리하고 표시할 수 있는 앱을 만들게 됩니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-112">At the end, you have an app that can manage and display movie data.</span></span>
+<span data-ttu-id="c8efe-112">자습서를 마치고 나면 동영상 데이터를 관리하고 표시할 수 있는 앱을 만들게 됩니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-112">At the end, you have an app that can manage and display movie data.</span></span>
 
 [!INCLUDE[](~/includes/mvc-intro/download.md)]
 
-## <a name="prerequisites"></a><span data-ttu-id="5fb19-113">전제 조건</span><span class="sxs-lookup"><span data-stu-id="5fb19-113">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="c8efe-113">사전 요구 사항</span><span class="sxs-lookup"><span data-stu-id="c8efe-113">Prerequisites</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="5fb19-114">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="5fb19-114">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="c8efe-114">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="c8efe-114">Visual Studio</span></span>](#tab/visual-studio)
 
-[!INCLUDE[](~/includes/net-core-prereqs-vs-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="5fb19-115">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="5fb19-115">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="c8efe-115">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="c8efe-115">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-[!INCLUDE[](~/includes/net-core-prereqs-vsc-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-vsc-3.1.md)]
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="5fb19-116">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="5fb19-116">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="c8efe-116">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="c8efe-116">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-[!INCLUDE[](~/includes/net-core-prereqs-mac-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-mac-3.1.md)]
 
 ---
 
-## <a name="create-a-web-app"></a><span data-ttu-id="5fb19-117">웹앱 만들기</span><span class="sxs-lookup"><span data-stu-id="5fb19-117">Create a web app</span></span>
+## <a name="create-a-web-app"></a><span data-ttu-id="c8efe-117">웹앱 만들기</span><span class="sxs-lookup"><span data-stu-id="c8efe-117">Create a web app</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="5fb19-118">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="5fb19-118">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="c8efe-118">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="c8efe-118">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="5fb19-119">Visual Studio에서 **새 프로젝트 만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-119">From the Visual Studio select **Create a new project**.</span></span>
+* <span data-ttu-id="c8efe-119">Visual Studio에서 **새 프로젝트 만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-119">From the Visual Studio select **Create a new project**.</span></span>
 
-* <span data-ttu-id="5fb19-120">**ASP.NET Core 웹 응용 프로그램**을 선택한 후, **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-120">Select **ASP.NET Core Web Application** and then select **Next**.</span></span>
+* <span data-ttu-id="c8efe-120">**ASP.NET Core 웹 응용 프로그램**을 선택한 후, **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-120">Select **ASP.NET Core Web Application** and then select **Next**.</span></span>
 
 ![새 ASP.NET Core 웹 응용 프로그램](start-mvc/_static/np_2.1.png)
 
-* <span data-ttu-id="5fb19-122">프로젝트 이름을 **MvcMovie**로 지정하고 **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-122">Name the project **MvcMovie** and select **Create**.</span></span> <span data-ttu-id="5fb19-123">코드를 복사할 때 네임스페이스가 일치하도록 프로젝트 이름을 **MvcMovie**로 지정하는 것이 중요합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-123">It's important to name the project **MvcMovie** so when you copy code, the namespace will match.</span></span>
+* <span data-ttu-id="c8efe-122">프로젝트 이름을 **MvcMovie**로 지정하고 **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-122">Name the project **MvcMovie** and select **Create**.</span></span> <span data-ttu-id="c8efe-123">코드를 복사할 때 네임스페이스가 일치하도록 프로젝트 이름을 **MvcMovie**로 지정하는 것이 중요합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-123">It's important to name the project **MvcMovie** so when you copy code, the namespace will match.</span></span>
 
   ![새 ASP.NET Core 웹 응용 프로그램](start-mvc/_static/config.png)
 
-* <span data-ttu-id="5fb19-125">**웹 애플리케이션(Model-View-Controller)** 을 선택한 다음, **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-125">Select **Web Application(Model-View-Controller)**, and then select **Create**.</span></span>
+* <span data-ttu-id="c8efe-125">**웹 애플리케이션(Model-View-Controller)** 을 선택한 다음, **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-125">Select **Web Application(Model-View-Controller)**, and then select **Create**.</span></span>
 
-![<span data-ttu-id="5fb19-126">새 프로젝트 대화 상자, 왼쪽 창의 .NET Core, ASP.NET Core 웹</span><span class="sxs-lookup"><span data-stu-id="5fb19-126">New project dialog, .NET Core in left pane, ASP.NET Core web</span></span> ](start-mvc/_static/new_project30.png)
+![<span data-ttu-id="c8efe-126">새 프로젝트 대화 상자, 왼쪽 창의 .NET Core, ASP.NET Core 웹</span><span class="sxs-lookup"><span data-stu-id="c8efe-126">New project dialog, .NET Core in left pane, ASP.NET Core web</span></span> ](start-mvc/_static/new_project30.png)
 
-<span data-ttu-id="5fb19-127">Visual Studio는 방금 만든 MVC 프로젝트에 대해 기본 템플릿을 사용했습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-127">Visual Studio used the default template for the MVC project you just created.</span></span> <span data-ttu-id="5fb19-128">프로젝트 이름을 입력하고 몇 가지 옵션을 선택하여 바로 작동하는 앱을 만들었습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-128">You have a working app right now by entering a project name and selecting a few options.</span></span> <span data-ttu-id="5fb19-129">이 프로젝트가 기본 시작 프로젝트입니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-129">This is a basic starter project.</span></span>
+<span data-ttu-id="c8efe-127">Visual Studio는 방금 만든 MVC 프로젝트에 대해 기본 템플릿을 사용했습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-127">Visual Studio used the default template for the MVC project you just created.</span></span> <span data-ttu-id="c8efe-128">프로젝트 이름을 입력하고 몇 가지 옵션을 선택하여 바로 작동하는 앱을 만들었습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-128">You have a working app right now by entering a project name and selecting a few options.</span></span> <span data-ttu-id="c8efe-129">이 프로젝트가 기본 시작 프로젝트입니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-129">This is a basic starter project.</span></span>
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="5fb19-130">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="5fb19-130">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="c8efe-130">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="c8efe-130">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-<span data-ttu-id="5fb19-131">이 자습서에서는 VS Code를 잘 알고 있다고 가정합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-131">The tutorial assumes familarity with VS Code.</span></span> <span data-ttu-id="5fb19-132">자세한 내용은 [VS Code 시작](https://code.visualstudio.com/docs) 및 [Visual Studio Code 도움말](#visual-studio-code-help)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="5fb19-132">See [Getting started with VS Code](https://code.visualstudio.com/docs) and [Visual Studio Code help](#visual-studio-code-help) for more information.</span></span>
+<span data-ttu-id="c8efe-131">이 자습서에서는 VS Code를 잘 알고 있다고 가정합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-131">The tutorial assumes familarity with VS Code.</span></span> <span data-ttu-id="c8efe-132">자세한 내용은 [VS Code 시작](https://code.visualstudio.com/docs) 및 [Visual Studio Code 도움말](#visual-studio-code-help)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="c8efe-132">See [Getting started with VS Code](https://code.visualstudio.com/docs) and [Visual Studio Code help](#visual-studio-code-help) for more information.</span></span>
 
-* <span data-ttu-id="5fb19-133">[통합 터미널](https://code.visualstudio.com/docs/editor/integrated-terminal)을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-133">Open the [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).</span></span>
-* <span data-ttu-id="5fb19-134">프로젝트를 포함할 폴더로 디렉터리를 변경(`cd`)합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-134">Change directories (`cd`) to a folder which will contain the project.</span></span>
-* <span data-ttu-id="5fb19-135">다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-135">Run the following command:</span></span>
+* <span data-ttu-id="c8efe-133">[통합 터미널](https://code.visualstudio.com/docs/editor/integrated-terminal)을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-133">Open the [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).</span></span>
+* <span data-ttu-id="c8efe-134">프로젝트를 포함할 폴더로 디렉터리를 변경(`cd`)합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-134">Change directories (`cd`) to a folder which will contain the project.</span></span>
+* <span data-ttu-id="c8efe-135">다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-135">Run the following command:</span></span>
 
    ```dotnetcli
    dotnet new mvc -o MvcMovie
    code -r MvcMovie
    ```
 
-  * <span data-ttu-id="5fb19-136">**Required assets to build and debug are missing from 'MvcMovie'.  Add them?** 라는 대화 상자가 나타납니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-136">A dialog box appears with **Required assets to build and debug are missing from 'MvcMovie'. Add them?**</span></span>  <span data-ttu-id="5fb19-137">**Yes**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-137">Select **Yes**</span></span>
+  * <span data-ttu-id="c8efe-136">**Required assets to build and debug are missing from 'MvcMovie'.  Add them?** 라는 대화 상자가 나타납니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-136">A dialog box appears with **Required assets to build and debug are missing from 'MvcMovie'. Add them?**</span></span>  <span data-ttu-id="c8efe-137">**Yes**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-137">Select **Yes**</span></span>
 
-  * <span data-ttu-id="5fb19-138">`dotnet new mvc -o MvcMovie`: *MvcMovie* 폴더에 새 ASP.NET Core MVC 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-138">`dotnet new mvc -o MvcMovie`: creates a new ASP.NET Core MVC project in the *MvcMovie* folder.</span></span>
-  * <span data-ttu-id="5fb19-139">`code -r MvcMovie`: Visual Studio Code에서 *MvcMovie.csproj* 프로젝트 파일을 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-139">`code -r MvcMovie`: Loads the *MvcMovie.csproj* project file in Visual Studio Code.</span></span>
+  * <span data-ttu-id="c8efe-138">`dotnet new mvc -o MvcMovie`: *MvcMovie* 폴더에 새 ASP.NET Core MVC 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-138">`dotnet new mvc -o MvcMovie`: creates a new ASP.NET Core MVC project in the *MvcMovie* folder.</span></span>
+  * <span data-ttu-id="c8efe-139">`code -r MvcMovie`: Visual Studio Code에서 *MvcMovie.csproj* 프로젝트 파일을 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-139">`code -r MvcMovie`: Loads the *MvcMovie.csproj* project file in Visual Studio Code.</span></span>
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="5fb19-140">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="5fb19-140">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="c8efe-140">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="c8efe-140">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="5fb19-141">**파일** > **새 솔루션**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-141">Select **File** > **New Solution**.</span></span>
+* <span data-ttu-id="c8efe-141">**파일** > **새 솔루션**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-141">Select **File** > **New Solution**.</span></span>
 
   ![macOS 새 솔루션](./start-mvc/_static/new_project_vsmac.png)
 
-* <span data-ttu-id="5fb19-143">**.NET Core** > **앱** > **웹 애플리케이션(Model-View-Controller)** > **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-143">Select **.NET Core** > **App** > **Web Application (Model-View-Controller)** > **Next**.</span></span>
+* <span data-ttu-id="c8efe-143">**.NET Core** > **앱** > **웹 애플리케이션(Model-View-Controller)** > **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-143">Select **.NET Core** > **App** > **Web Application (Model-View-Controller)** > **Next**.</span></span>
 
   ![macOS 새 프로젝트 대화 상자](./start-mvc/_static/new_project_mvc_vsmac.png)
 
-* <span data-ttu-id="5fb19-145">**새 ASP.NET Core Web API 구성** 대화 상자에서 **.NET Core 3.0**의 **대상 프레임워크**를 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-145">In the **Configure your new ASP.NET Core Web API** dialog, set the  **Target Framework** of **.NET Core 3.0**.</span></span>
+* <span data-ttu-id="c8efe-145">**새 ASP.NET Core Web API 구성** 대화 상자에서 **.NET Core 3.1**의 **대상 프레임워크**를 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-145">In the **Configure your new ASP.NET Core Web API** dialog, set the  **Target Framework** of **.NET Core 3.1**.</span></span>
 
-<!-- 
-  ![macOS .NET Core 2.2 selection](./start-mvc/_static/new_project_22_vsmac.png)
--->
+  ![macOS .NET Core 3.1 선택](./start-mvc/_static/new_project_31_vsmac.png)
 
-* <span data-ttu-id="5fb19-146">프로젝트 이름을 **MvcMovie**로 지정하고 **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-146">Name the project **MvcMovie**, and then select **Create**.</span></span>
+* <span data-ttu-id="c8efe-147">프로젝트 이름을 **MvcMovie**로 지정하고 **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-147">Name the project **MvcMovie**, and then select **Create**.</span></span>
 
 ---
 
-### <a name="run-the-app"></a><span data-ttu-id="5fb19-147">앱 실행</span><span class="sxs-lookup"><span data-stu-id="5fb19-147">Run the app</span></span>
+### <a name="run-the-app"></a><span data-ttu-id="c8efe-148">앱 실행</span><span class="sxs-lookup"><span data-stu-id="c8efe-148">Run the app</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="5fb19-148">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="5fb19-148">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="c8efe-149">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="c8efe-149">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="5fb19-149">**Ctrl-F5**를 선택하여 비 디버그 모드에서 앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-149">Select **Ctrl-F5** to run the app in non-debug mode.</span></span>
+<span data-ttu-id="c8efe-150">**Ctrl-F5**를 선택하여 비 디버그 모드에서 앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-150">Select **Ctrl-F5** to run the app in non-debug mode.</span></span>
 
 [!INCLUDE[](~/includes/trustCertVS.md)]
 
-* <span data-ttu-id="5fb19-150">Visual Studio가 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)를 시작하고 앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-150">Visual Studio starts [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) and runs the app.</span></span> <span data-ttu-id="5fb19-151">주소 표시줄에 `localhost:port#` 같은 주소 대신 `example.com`가 표시되는 점에 유의하세요.</span><span class="sxs-lookup"><span data-stu-id="5fb19-151">Notice that the address bar shows `localhost:port#` and not something like `example.com`.</span></span> <span data-ttu-id="5fb19-152">그 이유는 `localhost`가 로컬 컴퓨터의 표준 이름이기 때문입니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-152">That's because `localhost` is the standard hostname for your local computer.</span></span> <span data-ttu-id="5fb19-153">Visual Studio에서 웹 프로젝트를 만들 경우 웹 서버에 임의 포트가 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-153">When Visual Studio creates a web project, a random port is used for the web server.</span></span>
-* <span data-ttu-id="5fb19-154">Ctrl+F5(비 디버그 모드)를 사용하여 앱을 시작하면 코드를 변경하고, 파일을 저장하고, 브라우저를 새로 고치고, 코드 변경 내용을 확인할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-154">Launching the app with Ctrl+F5 (non-debug mode) allows you to make code changes, save the file, refresh the browser, and see the code changes.</span></span> <span data-ttu-id="5fb19-155">대부분의 개발자는 앱을 빠르게 시작하고 변경 내용을 확인하기 위해 비 디버그 모드를 선호합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-155">Many developers prefer to use non-debug mode to quickly launch the app and view changes.</span></span>
-* <span data-ttu-id="5fb19-156">**디버그** 메뉴 항목에서 앱을 디버그 또는 비 디버그 모드로 시작할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-156">You can launch the app in debug or non-debug mode from the **Debug** menu item:</span></span>
+* <span data-ttu-id="c8efe-151">Visual Studio가 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)를 시작하고 앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-151">Visual Studio starts [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) and runs the app.</span></span> <span data-ttu-id="c8efe-152">주소 표시줄에 `localhost:port#` 같은 주소 대신 `example.com`가 표시되는 점에 유의하세요.</span><span class="sxs-lookup"><span data-stu-id="c8efe-152">Notice that the address bar shows `localhost:port#` and not something like `example.com`.</span></span> <span data-ttu-id="c8efe-153">그 이유는 `localhost`가 로컬 컴퓨터의 표준 이름이기 때문입니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-153">That's because `localhost` is the standard hostname for your local computer.</span></span> <span data-ttu-id="c8efe-154">Visual Studio에서 웹 프로젝트를 만들 경우 웹 서버에 임의 포트가 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-154">When Visual Studio creates a web project, a random port is used for the web server.</span></span>
+* <span data-ttu-id="c8efe-155">Ctrl+F5(비 디버그 모드)를 사용하여 앱을 시작하면 코드를 변경하고, 파일을 저장하고, 브라우저를 새로 고치고, 코드 변경 내용을 확인할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-155">Launching the app with Ctrl+F5 (non-debug mode) allows you to make code changes, save the file, refresh the browser, and see the code changes.</span></span> <span data-ttu-id="c8efe-156">대부분의 개발자는 앱을 빠르게 시작하고 변경 내용을 확인하기 위해 비 디버그 모드를 선호합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-156">Many developers prefer to use non-debug mode to quickly launch the app and view changes.</span></span>
+* <span data-ttu-id="c8efe-157">**디버그** 메뉴 항목에서 앱을 디버그 또는 비 디버그 모드로 시작할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-157">You can launch the app in debug or non-debug mode from the **Debug** menu item:</span></span>
 
   ![디버그 메뉴](start-mvc/_static/debug_menu.png)
 
-* <span data-ttu-id="5fb19-158">**IIS Express** 단추를 선택하여 앱을 디버그할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-158">You can debug the app by selecting the **IIS Express** button</span></span>
+* <span data-ttu-id="c8efe-159">**IIS Express** 단추를 선택하여 앱을 디버그할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-159">You can debug the app by selecting the **IIS Express** button</span></span>
 
   ![IIS Express](start-mvc/_static/iis_express.png)
 
-  <span data-ttu-id="5fb19-160">다음 이미지는 앱을 보여줍니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-160">The following image shows the app:</span></span>
+  <span data-ttu-id="c8efe-161">다음 이미지는 앱을 보여줍니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-161">The following image shows the app:</span></span>
 
   ![홈 또는 인덱스 페이지](start-mvc/_static/home2.2.png)
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="5fb19-162">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="5fb19-162">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="c8efe-163">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="c8efe-163">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-<span data-ttu-id="5fb19-163">Ctrl+F5를 눌러 디버거 없이 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-163">Press Ctrl+F5 to run without the debugger.</span></span>
+<span data-ttu-id="c8efe-164">Ctrl+F5를 눌러 디버거 없이 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-164">Press Ctrl+F5 to run without the debugger.</span></span>
 
 [!INCLUDE[](~/includes/trustCertVSC.md)]
 
-  <span data-ttu-id="5fb19-164">Visual Studio Code가 [Kestrel](xref:fundamentals/servers/kestrel)을 시작하고, 브라우저를 시작하고, `https://localhost:5001`로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-164">Visual Studio Code starts [Kestrel](xref:fundamentals/servers/kestrel), launches a browser, and navigates to `https://localhost:5001`.</span></span> <span data-ttu-id="5fb19-165">주소 표시줄에는 `localhost:port:5001`이 표시되고 `example.com` 같은 주소는 표시되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-165">The address bar shows `localhost:port:5001` and not something like `example.com`.</span></span> <span data-ttu-id="5fb19-166">그 이유는 `localhost`가 로컬 컴퓨터의 표준 이름이기 때문입니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-166">That's because `localhost` is the standard hostname for  local computer.</span></span> <span data-ttu-id="5fb19-167">Localhost는 로컬 컴퓨터의 웹 요청만 지원합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-167">Localhost only serves web requests from the local computer.</span></span>
+  <span data-ttu-id="c8efe-165">Visual Studio Code가 [Kestrel](xref:fundamentals/servers/kestrel)을 시작하고, 브라우저를 시작하고, `https://localhost:5001`로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-165">Visual Studio Code starts [Kestrel](xref:fundamentals/servers/kestrel), launches a browser, and navigates to `https://localhost:5001`.</span></span> <span data-ttu-id="c8efe-166">주소 표시줄에는 `localhost:port:5001`이 표시되고 `example.com` 같은 주소는 표시되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-166">The address bar shows `localhost:port:5001` and not something like `example.com`.</span></span> <span data-ttu-id="c8efe-167">그 이유는 `localhost`가 로컬 컴퓨터의 표준 이름이기 때문입니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-167">That's because `localhost` is the standard hostname for  local computer.</span></span> <span data-ttu-id="c8efe-168">Localhost는 로컬 컴퓨터의 웹 요청만 지원합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-168">Localhost only serves web requests from the local computer.</span></span>
 
-  <span data-ttu-id="5fb19-168">Ctrl+F5(비 디버그 모드)를 사용하여 앱을 시작하면 코드를 변경하고, 파일을 저장하고, 브라우저를 새로 고치고, 코드 변경 내용을 확인할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-168">Launching the app with Ctrl+F5 (non-debug mode) allows you to make code changes, save the file, refresh the browser, and see the code changes.</span></span> <span data-ttu-id="5fb19-169">대부분의 개발자는 페이지 및 보기 변경 내용을 새로 고치기 위해 디버그 이외 모드를 사용하려고 합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-169">Many developers prefer to use non-debug mode to refresh the page and view changes.</span></span>
+  <span data-ttu-id="c8efe-169">Ctrl+F5(비 디버그 모드)를 사용하여 앱을 시작하면 코드를 변경하고, 파일을 저장하고, 브라우저를 새로 고치고, 코드 변경 내용을 확인할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-169">Launching the app with Ctrl+F5 (non-debug mode) allows you to make code changes, save the file, refresh the browser, and see the code changes.</span></span> <span data-ttu-id="c8efe-170">대부분의 개발자는 페이지 및 보기 변경 내용을 새로 고치기 위해 디버그 이외 모드를 사용하려고 합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-170">Many developers prefer to use non-debug mode to refresh the page and view changes.</span></span>
 
   ![홈 또는 인덱스 페이지](start-mvc/_static/home2.2.png)
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="5fb19-171">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="5fb19-171">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="c8efe-172">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="c8efe-172">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="5fb19-172">**실행** > **디버깅하지 않고 시작**을 선택하여 앱을 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-172">Select **Run** > **Start Without Debugging** to launch the app.</span></span> <span data-ttu-id="5fb19-173">Mac용 Visual Studio에서 [Kestrel](xref:fundamentals/servers/index#kestrel) 서버를 시작하고, 브라우저를 실행하며, `http://localhost:port`로 이동합니다. 여기서 *port*는 임의로 선택된 포트 번호입니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-173">Visual Studio for Mac starts [Kestrel](xref:fundamentals/servers/index#kestrel) server, launches a browser, and navigates to `http://localhost:port`, where *port* is a randomly chosen port number.</span></span>
+<span data-ttu-id="c8efe-173">**실행** > **디버깅하지 않고 시작**을 선택하여 앱을 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-173">Select **Run** > **Start Without Debugging** to launch the app.</span></span> <span data-ttu-id="c8efe-174">Mac용 Visual Studio에서 [Kestrel](xref:fundamentals/servers/index#kestrel) 서버를 시작하고, 브라우저를 실행하며, `http://localhost:port`로 이동합니다. 여기서 *port*는 임의로 선택된 포트 번호입니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-174">Visual Studio for Mac starts [Kestrel](xref:fundamentals/servers/index#kestrel) server, launches a browser, and navigates to `http://localhost:port`, where *port* is a randomly chosen port number.</span></span>
 
 [!INCLUDE[](~/includes/trustCertMac.md)]
 
-* <span data-ttu-id="5fb19-174">주소 표시줄에는 `localhost:port#`이 표시되고 `example.com` 같은 주소는 표시되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-174">The address bar shows `localhost:port#` and not something like `example.com`.</span></span> <span data-ttu-id="5fb19-175">그 이유는 `localhost`가 로컬 컴퓨터의 표준 이름이기 때문입니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-175">That's because `localhost` is the standard hostname for your local computer.</span></span> <span data-ttu-id="5fb19-176">Visual Studio에서 웹 프로젝트를 만들 경우 웹 서버에 임의 포트가 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-176">When Visual Studio creates a web project, a random port is used for the web server.</span></span> <span data-ttu-id="5fb19-177">앱을 실행할 경우 다른 포트 번호가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-177">When you run the app, you'll see a different port number.</span></span>
-* <span data-ttu-id="5fb19-178">**실행** 메뉴 항목에서 앱을 디버그 또는 비 디버그 모드로 시작할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-178">You can launch the app in debug or non-debug mode from the **Run** menu.</span></span>
+* <span data-ttu-id="c8efe-175">주소 표시줄에는 `localhost:port#`이 표시되고 `example.com` 같은 주소는 표시되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-175">The address bar shows `localhost:port#` and not something like `example.com`.</span></span> <span data-ttu-id="c8efe-176">그 이유는 `localhost`가 로컬 컴퓨터의 표준 이름이기 때문입니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-176">That's because `localhost` is the standard hostname for your local computer.</span></span> <span data-ttu-id="c8efe-177">Visual Studio에서 웹 프로젝트를 만들 경우 웹 서버에 임의 포트가 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-177">When Visual Studio creates a web project, a random port is used for the web server.</span></span> <span data-ttu-id="c8efe-178">앱을 실행할 경우 다른 포트 번호가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-178">When you run the app, you'll see a different port number.</span></span>
+* <span data-ttu-id="c8efe-179">**실행** 메뉴 항목에서 앱을 디버그 또는 비 디버그 모드로 시작할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-179">You can launch the app in debug or non-debug mode from the **Run** menu.</span></span>
 
-  <span data-ttu-id="5fb19-179">다음 이미지는 앱을 보여줍니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-179">The following image shows the app:</span></span>
+  <span data-ttu-id="c8efe-180">다음 이미지는 앱을 보여줍니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-180">The following image shows the app:</span></span>
 
   ![홈 또는 인덱스 페이지](./start-mvc/_static/output_macos.png)
 
@@ -159,10 +157,10 @@ ms.locfileid: "73761244"
 
 [!INCLUDE[](~/includes/vs-vsc-vsmac-help.md)]
 
-<span data-ttu-id="5fb19-181">이 자습서의 다음 부분에서는 MVC에 대해 알아보고 코드 작성을 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-181">In the next part of this tutorial, you learn about MVC and start writing some code.</span></span>
+<span data-ttu-id="c8efe-182">이 자습서의 다음 부분에서는 MVC에 대해 알아보고 코드 작성을 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-182">In the next part of this tutorial, you learn about MVC and start writing some code.</span></span>
 
 > [!div class="step-by-step"]
-> [<span data-ttu-id="5fb19-182">다음</span><span class="sxs-lookup"><span data-stu-id="5fb19-182">Next</span></span>](adding-controller.md)
+> [<span data-ttu-id="c8efe-183">다음</span><span class="sxs-lookup"><span data-stu-id="c8efe-183">Next</span></span>](adding-controller.md)
 
 ::: moniker-end
 
@@ -170,150 +168,150 @@ ms.locfileid: "73761244"
 
 [!INCLUDE [consider RP](~/includes/razor.md)]
 
-<span data-ttu-id="5fb19-183">이 자습서에서는 ASP.NET Core MVC 웹앱을 만들기 위한 기본 사항을 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-183">This tutorial teaches the basics of building an ASP.NET Core MVC web app.</span></span>
+<span data-ttu-id="c8efe-184">이 자습서에서는 ASP.NET Core MVC 웹앱을 만들기 위한 기본 사항을 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-184">This tutorial teaches the basics of building an ASP.NET Core MVC web app.</span></span>
 
-<span data-ttu-id="5fb19-184">앱은 동영상 제목의 데이터베이스를 관리합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-184">The app manages a database of movie titles.</span></span> <span data-ttu-id="5fb19-185">다음과 같은 작업을 수행하는 방법을 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-185">You learn how to:</span></span>
+<span data-ttu-id="c8efe-185">앱은 동영상 제목의 데이터베이스를 관리합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-185">The app manages a database of movie titles.</span></span> <span data-ttu-id="c8efe-186">다음과 같은 작업을 수행하는 방법을 살펴봅니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-186">You learn how to:</span></span>
 
 > [!div class="checklist"]
-> * <span data-ttu-id="5fb19-186">웹앱 만들기</span><span class="sxs-lookup"><span data-stu-id="5fb19-186">Create a web app.</span></span>
-> * <span data-ttu-id="5fb19-187">모델 추가 및 스캐폴드</span><span class="sxs-lookup"><span data-stu-id="5fb19-187">Add and scaffold a model.</span></span>
-> * <span data-ttu-id="5fb19-188">데이터베이스 작업</span><span class="sxs-lookup"><span data-stu-id="5fb19-188">Work with a database.</span></span>
-> * <span data-ttu-id="5fb19-189">검색 및 유효성 검사 추가</span><span class="sxs-lookup"><span data-stu-id="5fb19-189">Add search and validation.</span></span>
+> * <span data-ttu-id="c8efe-187">웹앱 만들기</span><span class="sxs-lookup"><span data-stu-id="c8efe-187">Create a web app.</span></span>
+> * <span data-ttu-id="c8efe-188">모델 추가 및 스캐폴드</span><span class="sxs-lookup"><span data-stu-id="c8efe-188">Add and scaffold a model.</span></span>
+> * <span data-ttu-id="c8efe-189">데이터베이스 작업</span><span class="sxs-lookup"><span data-stu-id="c8efe-189">Work with a database.</span></span>
+> * <span data-ttu-id="c8efe-190">검색 및 유효성 검사 추가</span><span class="sxs-lookup"><span data-stu-id="c8efe-190">Add search and validation.</span></span>
 
-<span data-ttu-id="5fb19-190">자습서를 마치고 나면 동영상 데이터를 관리하고 표시할 수 있는 앱을 만들게 됩니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-190">At the end, you have an app that can manage and display movie data.</span></span>
+<span data-ttu-id="c8efe-191">자습서를 마치고 나면 동영상 데이터를 관리하고 표시할 수 있는 앱을 만들게 됩니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-191">At the end, you have an app that can manage and display movie data.</span></span>
 
 [!INCLUDE[](~/includes/mvc-intro/download.md)]
 
-## <a name="prerequisites"></a><span data-ttu-id="5fb19-191">전제 조건</span><span class="sxs-lookup"><span data-stu-id="5fb19-191">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="c8efe-192">사전 요구 사항</span><span class="sxs-lookup"><span data-stu-id="c8efe-192">Prerequisites</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="5fb19-192">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="5fb19-192">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="c8efe-193">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="c8efe-193">Visual Studio</span></span>](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="5fb19-193">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="5fb19-193">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="c8efe-194">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="c8efe-194">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-2.2.md)]
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="5fb19-194">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="5fb19-194">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="c8efe-195">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="c8efe-195">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-2.2.md)]
 
 ---
-## <a name="create-a-web-app"></a><span data-ttu-id="5fb19-195">웹앱 만들기</span><span class="sxs-lookup"><span data-stu-id="5fb19-195">Create a web app</span></span>
+## <a name="create-a-web-app"></a><span data-ttu-id="c8efe-196">웹앱 만들기</span><span class="sxs-lookup"><span data-stu-id="c8efe-196">Create a web app</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="5fb19-196">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="5fb19-196">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="c8efe-197">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="c8efe-197">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="5fb19-197">Visual Studio에서 **새 프로젝트 만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-197">From the Visual Studio select **Create a new project**.</span></span>
+* <span data-ttu-id="c8efe-198">Visual Studio에서 **새 프로젝트 만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-198">From the Visual Studio select **Create a new project**.</span></span>
 
-* <span data-ttu-id="5fb19-198">**ASP.NET Core 웹 응용 프로그램**을 선택한 후, **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-198">Select **ASP.NET Core Web Application** and then select **Next**.</span></span>
+* <span data-ttu-id="c8efe-199">**ASP.NET Core 웹 응용 프로그램**을 선택한 후, **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-199">Select **ASP.NET Core Web Application** and then select **Next**.</span></span>
 
 ![새 ASP.NET Core 웹 응용 프로그램](start-mvc/_static/np_2.1.png)
 
-* <span data-ttu-id="5fb19-200">프로젝트 이름을 **MvcMovie**로 지정하고 **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-200">Name the project **MvcMovie** and select **Create**.</span></span> <span data-ttu-id="5fb19-201">코드를 복사할 때 네임스페이스가 일치하도록 프로젝트 이름을 **MvcMovie**로 지정하는 것이 중요합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-201">It's important to name the project **MvcMovie** so when you copy code, the namespace will match.</span></span>
+* <span data-ttu-id="c8efe-201">프로젝트 이름을 **MvcMovie**로 지정하고 **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-201">Name the project **MvcMovie** and select **Create**.</span></span> <span data-ttu-id="c8efe-202">코드를 복사할 때 네임스페이스가 일치하도록 프로젝트 이름을 **MvcMovie**로 지정하는 것이 중요합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-202">It's important to name the project **MvcMovie** so when you copy code, the namespace will match.</span></span>
 
   ![새 ASP.NET Core 웹 응용 프로그램](start-mvc/_static/config.png)
 
 
-* <span data-ttu-id="5fb19-203">**웹 애플리케이션(Model-View-Controller)** 을 선택한 다음, **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-203">Select **Web Application(Model-View-Controller)**, and then select **Create**.</span></span>
+* <span data-ttu-id="c8efe-204">**웹 애플리케이션(Model-View-Controller)** 을 선택한 다음, **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-204">Select **Web Application(Model-View-Controller)**, and then select **Create**.</span></span>
 
-![<span data-ttu-id="5fb19-204">새 프로젝트 대화 상자, 왼쪽 창의 .NET Core, ASP.NET Core 웹</span><span class="sxs-lookup"><span data-stu-id="5fb19-204">New project dialog, .NET Core in left pane, ASP.NET Core web</span></span> ](start-mvc/_static/new_project22-21.png)
+![<span data-ttu-id="c8efe-205">새 프로젝트 대화 상자, 왼쪽 창의 .NET Core, ASP.NET Core 웹</span><span class="sxs-lookup"><span data-stu-id="c8efe-205">New project dialog, .NET Core in left pane, ASP.NET Core web</span></span> ](start-mvc/_static/new_project22-21.png)
 
-<span data-ttu-id="5fb19-205">Visual Studio는 방금 만든 MVC 프로젝트에 대해 기본 템플릿을 사용했습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-205">Visual Studio used the default template for the MVC project you just created.</span></span> <span data-ttu-id="5fb19-206">프로젝트 이름을 입력하고 몇 가지 옵션을 선택하여 바로 작동하는 앱을 만들었습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-206">You have a working app right now by entering a project name and selecting a few options.</span></span> <span data-ttu-id="5fb19-207">다음은 기본 시작 프로젝트이며 여기서 시작하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-207">This is a basic starter project, and it's a good place to start.</span></span>
+<span data-ttu-id="c8efe-206">Visual Studio는 방금 만든 MVC 프로젝트에 대해 기본 템플릿을 사용했습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-206">Visual Studio used the default template for the MVC project you just created.</span></span> <span data-ttu-id="c8efe-207">프로젝트 이름을 입력하고 몇 가지 옵션을 선택하여 바로 작동하는 앱을 만들었습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-207">You have a working app right now by entering a project name and selecting a few options.</span></span> <span data-ttu-id="c8efe-208">다음은 기본 시작 프로젝트이며 여기서 시작하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-208">This is a basic starter project, and it's a good place to start.</span></span>
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="5fb19-208">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="5fb19-208">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="c8efe-209">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="c8efe-209">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-<span data-ttu-id="5fb19-209">이 자습서에서는 VS Code를 잘 알고 있다고 가정합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-209">The tutorial assumes familarity with VS Code.</span></span> <span data-ttu-id="5fb19-210">자세한 내용은 [VS Code 시작](https://code.visualstudio.com/docs) 및 [Visual Studio Code 도움말](#visual-studio-code-help)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="5fb19-210">See [Getting started with VS Code](https://code.visualstudio.com/docs) and [Visual Studio Code help](#visual-studio-code-help) for more information.</span></span>
+<span data-ttu-id="c8efe-210">이 자습서에서는 VS Code를 잘 알고 있다고 가정합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-210">The tutorial assumes familarity with VS Code.</span></span> <span data-ttu-id="c8efe-211">자세한 내용은 [VS Code 시작](https://code.visualstudio.com/docs) 및 [Visual Studio Code 도움말](#visual-studio-code-help)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="c8efe-211">See [Getting started with VS Code](https://code.visualstudio.com/docs) and [Visual Studio Code help](#visual-studio-code-help) for more information.</span></span>
 
-* <span data-ttu-id="5fb19-211">[통합 터미널](https://code.visualstudio.com/docs/editor/integrated-terminal)을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-211">Open the [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).</span></span>
-* <span data-ttu-id="5fb19-212">프로젝트를 포함할 폴더로 디렉터리를 변경(`cd`)합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-212">Change directories (`cd`) to a folder which will contain the project.</span></span>
-* <span data-ttu-id="5fb19-213">다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-213">Run the following command:</span></span>
+* <span data-ttu-id="c8efe-212">[통합 터미널](https://code.visualstudio.com/docs/editor/integrated-terminal)을 엽니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-212">Open the [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).</span></span>
+* <span data-ttu-id="c8efe-213">프로젝트를 포함할 폴더로 디렉터리를 변경(`cd`)합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-213">Change directories (`cd`) to a folder which will contain the project.</span></span>
+* <span data-ttu-id="c8efe-214">다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-214">Run the following command:</span></span>
 
    ```dotnetcli
    dotnet new mvc -o MvcMovie
    code -r MvcMovie
    ```
 
-  * <span data-ttu-id="5fb19-214">**Required assets to build and debug are missing from 'MvcMovie'.  Add them?** 라는 대화 상자가 나타납니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-214">A dialog box appears with **Required assets to build and debug are missing from 'MvcMovie'. Add them?**</span></span>  <span data-ttu-id="5fb19-215">**Yes**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-215">Select **Yes**</span></span>
+  * <span data-ttu-id="c8efe-215">**Required assets to build and debug are missing from 'MvcMovie'.  Add them?** 라는 대화 상자가 나타납니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-215">A dialog box appears with **Required assets to build and debug are missing from 'MvcMovie'. Add them?**</span></span>  <span data-ttu-id="c8efe-216">**Yes**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-216">Select **Yes**</span></span>
 
-  * <span data-ttu-id="5fb19-216">`dotnet new mvc -o MvcMovie`: *MvcMovie* 폴더에 새 ASP.NET Core MVC 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-216">`dotnet new mvc -o MvcMovie`: creates a new ASP.NET Core MVC project in the *MvcMovie* folder.</span></span>
-  * <span data-ttu-id="5fb19-217">`code -r MvcMovie`: Visual Studio Code에서 *MvcMovie.csproj* 프로젝트 파일을 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-217">`code -r MvcMovie`: Loads the *MvcMovie.csproj* project file in Visual Studio Code.</span></span>
+  * <span data-ttu-id="c8efe-217">`dotnet new mvc -o MvcMovie`: *MvcMovie* 폴더에 새 ASP.NET Core MVC 프로젝트를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-217">`dotnet new mvc -o MvcMovie`: creates a new ASP.NET Core MVC project in the *MvcMovie* folder.</span></span>
+  * <span data-ttu-id="c8efe-218">`code -r MvcMovie`: Visual Studio Code에서 *MvcMovie.csproj* 프로젝트 파일을 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-218">`code -r MvcMovie`: Loads the *MvcMovie.csproj* project file in Visual Studio Code.</span></span>
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="5fb19-218">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="5fb19-218">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="c8efe-219">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="c8efe-219">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-* <span data-ttu-id="5fb19-219">**파일** > **새 솔루션**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-219">Select **File** > **New Solution**.</span></span>
+* <span data-ttu-id="c8efe-220">**파일** > **새 솔루션**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-220">Select **File** > **New Solution**.</span></span>
 
   ![macOS 새 솔루션](./start-mvc/_static/new_project_vsmac.png)
 
-* <span data-ttu-id="5fb19-221">**.NET Core** > **앱** > **웹 애플리케이션(Model-View-Controller)** > **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-221">Select **.NET Core** > **App** > **Web Application (Model-View-Controller)** > **Next**.</span></span>
+* <span data-ttu-id="c8efe-222">**.NET Core** > **앱** > **웹 애플리케이션(Model-View-Controller)** > **다음**을 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-222">Select **.NET Core** > **App** > **Web Application (Model-View-Controller)** > **Next**.</span></span>
 
   ![macOS 새 프로젝트 대화 상자](./start-mvc/_static/new_project_mvc_vsmac.png)
 
-* <span data-ttu-id="5fb19-223">**새 ASP.NET Core Web API 구성** 대화 상자에서 **.NET Core 2.2**라는 기본 **대상 프레임워크**를 수락합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-223">In the **Configure your new ASP.NET Core Web API** dialog, accept the default **Target Framework** of **.NET Core 2.2**.</span></span>
+* <span data-ttu-id="c8efe-224">**새 ASP.NET Core Web API 구성** 대화 상자에서 **.NET Core 2.2**라는 기본 **대상 프레임워크**를 수락합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-224">In the **Configure your new ASP.NET Core Web API** dialog, accept the default **Target Framework** of **.NET Core 2.2**.</span></span>
 
   ![macOS .NET Core 2.2 선택](./start-mvc/_static/new_project_22_vsmac.png)
 
-* <span data-ttu-id="5fb19-225">프로젝트 이름을 **MvcMovie**로 지정하고 **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-225">Name the project **MvcMovie**, and then select **Create**.</span></span>
+* <span data-ttu-id="c8efe-226">프로젝트 이름을 **MvcMovie**로 지정하고 **만들기**를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-226">Name the project **MvcMovie**, and then select **Create**.</span></span>
 
 ---
 
-### <a name="run-the-app"></a><span data-ttu-id="5fb19-226">앱 실행</span><span class="sxs-lookup"><span data-stu-id="5fb19-226">Run the app</span></span>
+### <a name="run-the-app"></a><span data-ttu-id="c8efe-227">앱 실행</span><span class="sxs-lookup"><span data-stu-id="c8efe-227">Run the app</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="5fb19-227">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="5fb19-227">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="c8efe-228">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="c8efe-228">Visual Studio</span></span>](#tab/visual-studio)
 
-<span data-ttu-id="5fb19-228">**Ctrl-F5**를 선택하여 비 디버그 모드에서 앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-228">Select **Ctrl-F5** to run the app in non-debug mode.</span></span>
+<span data-ttu-id="c8efe-229">**Ctrl-F5**를 선택하여 비 디버그 모드에서 앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-229">Select **Ctrl-F5** to run the app in non-debug mode.</span></span>
 
 [!INCLUDE[](~/includes/trustCertVS.md)]
 
-* <span data-ttu-id="5fb19-229">Visual Studio가 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)를 시작하고 앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-229">Visual Studio starts [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) and runs the app.</span></span> <span data-ttu-id="5fb19-230">주소 표시줄에 `localhost:port#` 같은 주소 대신 `example.com`가 표시되는 점에 유의하세요.</span><span class="sxs-lookup"><span data-stu-id="5fb19-230">Notice that the address bar shows `localhost:port#` and not something like `example.com`.</span></span> <span data-ttu-id="5fb19-231">그 이유는 `localhost`가 로컬 컴퓨터의 표준 이름이기 때문입니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-231">That's because `localhost` is the standard hostname for your local computer.</span></span> <span data-ttu-id="5fb19-232">Visual Studio에서 웹 프로젝트를 만들 경우 웹 서버에 임의 포트가 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-232">When Visual Studio creates a web project, a random port is used for the web server.</span></span>
-* <span data-ttu-id="5fb19-233">Ctrl+F5(비 디버그 모드)를 사용하여 앱을 시작하면 코드를 변경하고, 파일을 저장하고, 브라우저를 새로 고치고, 코드 변경 내용을 확인할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-233">Launching the app with Ctrl+F5 (non-debug mode) allows you to make code changes, save the file, refresh the browser, and see the code changes.</span></span> <span data-ttu-id="5fb19-234">대부분의 개발자는 앱을 빠르게 시작하고 변경 내용을 확인하기 위해 비 디버그 모드를 선호합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-234">Many developers prefer to use non-debug mode to quickly launch the app and view changes.</span></span>
-* <span data-ttu-id="5fb19-235">**디버그** 메뉴 항목에서 앱을 디버그 또는 비 디버그 모드로 시작할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-235">You can launch the app in debug or non-debug mode from the **Debug** menu item:</span></span>
+* <span data-ttu-id="c8efe-230">Visual Studio가 [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)를 시작하고 앱을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-230">Visual Studio starts [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) and runs the app.</span></span> <span data-ttu-id="c8efe-231">주소 표시줄에 `localhost:port#` 같은 주소 대신 `example.com`가 표시되는 점에 유의하세요.</span><span class="sxs-lookup"><span data-stu-id="c8efe-231">Notice that the address bar shows `localhost:port#` and not something like `example.com`.</span></span> <span data-ttu-id="c8efe-232">그 이유는 `localhost`가 로컬 컴퓨터의 표준 이름이기 때문입니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-232">That's because `localhost` is the standard hostname for your local computer.</span></span> <span data-ttu-id="c8efe-233">Visual Studio에서 웹 프로젝트를 만들 경우 웹 서버에 임의 포트가 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-233">When Visual Studio creates a web project, a random port is used for the web server.</span></span>
+* <span data-ttu-id="c8efe-234">Ctrl+F5(비 디버그 모드)를 사용하여 앱을 시작하면 코드를 변경하고, 파일을 저장하고, 브라우저를 새로 고치고, 코드 변경 내용을 확인할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-234">Launching the app with Ctrl+F5 (non-debug mode) allows you to make code changes, save the file, refresh the browser, and see the code changes.</span></span> <span data-ttu-id="c8efe-235">대부분의 개발자는 앱을 빠르게 시작하고 변경 내용을 확인하기 위해 비 디버그 모드를 선호합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-235">Many developers prefer to use non-debug mode to quickly launch the app and view changes.</span></span>
+* <span data-ttu-id="c8efe-236">**디버그** 메뉴 항목에서 앱을 디버그 또는 비 디버그 모드로 시작할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-236">You can launch the app in debug or non-debug mode from the **Debug** menu item:</span></span>
 
   ![디버그 메뉴](start-mvc/_static/debug_menu.png)
 
-* <span data-ttu-id="5fb19-237">**IIS Express** 단추를 선택하여 앱을 디버그할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-237">You can debug the app by selecting the **IIS Express** button</span></span>
+* <span data-ttu-id="c8efe-238">**IIS Express** 단추를 선택하여 앱을 디버그할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-238">You can debug the app by selecting the **IIS Express** button</span></span>
 
   ![IIS Express](start-mvc/_static/iis_express.png)
 
-* <span data-ttu-id="5fb19-239">**Accept**를 선택하여 추적에 동의합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-239">Select **Accept** to consent to tracking.</span></span> <span data-ttu-id="5fb19-240">이 앱은 개인 정보를 추적하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-240">This app doesn't track personal information.</span></span> <span data-ttu-id="5fb19-241">템플릿 생성 코드는 [GDPR(일반 데이터 보호 규정)](xref:security/gdpr)을 준수하는 데 도움이 되는 자산을 포함하고 있습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-241">The template generated code includes assets to help meet [General Data Protection Regulation (GDPR)](xref:security/gdpr).</span></span>
+* <span data-ttu-id="c8efe-240">**Accept**를 선택하여 추적에 동의합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-240">Select **Accept** to consent to tracking.</span></span> <span data-ttu-id="c8efe-241">이 앱은 개인 정보를 추적하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-241">This app doesn't track personal information.</span></span> <span data-ttu-id="c8efe-242">템플릿 생성 코드는 [GDPR(일반 데이터 보호 규정)](xref:security/gdpr)을 준수하는 데 도움이 되는 자산을 포함하고 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-242">The template generated code includes assets to help meet [General Data Protection Regulation (GDPR)](xref:security/gdpr).</span></span>
 
   ![홈 또는 인덱스 페이지](start-mvc/_static/privacy.png)
 
-  <span data-ttu-id="5fb19-243">다음 이미지는 추적을 승인한 후의 앱을 보여줍니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-243">The following image shows the app after accepting tracking:</span></span>
+  <span data-ttu-id="c8efe-244">다음 이미지는 추적을 승인한 후의 앱을 보여줍니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-244">The following image shows the app after accepting tracking:</span></span>
 
   ![홈 또는 인덱스 페이지](start-mvc/_static/home2.2.png)
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="5fb19-245">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="5fb19-245">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[<span data-ttu-id="c8efe-246">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="c8efe-246">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-<span data-ttu-id="5fb19-246">Ctrl+F5를 눌러 디버거 없이 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-246">Press Ctrl+F5 to run without the debugger.</span></span>
+<span data-ttu-id="c8efe-247">Ctrl+F5를 눌러 디버거 없이 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-247">Press Ctrl+F5 to run without the debugger.</span></span>
 
 [!INCLUDE[](~/includes/trustCertVSC.md)]
 
-  <span data-ttu-id="5fb19-247">Visual Studio Code가 [Kestrel](xref:fundamentals/servers/kestrel)을 시작하고, 브라우저를 시작하고, `https://localhost:5001`로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-247">Visual Studio Code starts [Kestrel](xref:fundamentals/servers/kestrel), launches a browser, and navigates to `https://localhost:5001`.</span></span> <span data-ttu-id="5fb19-248">주소 표시줄에는 `localhost:port:5001`이 표시되고 `example.com` 같은 주소는 표시되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-248">The address bar shows `localhost:port:5001` and not something like `example.com`.</span></span> <span data-ttu-id="5fb19-249">그 이유는 `localhost`가 로컬 컴퓨터의 표준 이름이기 때문입니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-249">That's because `localhost` is the standard hostname for  local computer.</span></span> <span data-ttu-id="5fb19-250">Localhost는 로컬 컴퓨터의 웹 요청만 지원합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-250">Localhost only serves web requests from the local computer.</span></span>
+  <span data-ttu-id="c8efe-248">Visual Studio Code가 [Kestrel](xref:fundamentals/servers/kestrel)을 시작하고, 브라우저를 시작하고, `https://localhost:5001`로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-248">Visual Studio Code starts [Kestrel](xref:fundamentals/servers/kestrel), launches a browser, and navigates to `https://localhost:5001`.</span></span> <span data-ttu-id="c8efe-249">주소 표시줄에는 `localhost:port:5001`이 표시되고 `example.com` 같은 주소는 표시되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-249">The address bar shows `localhost:port:5001` and not something like `example.com`.</span></span> <span data-ttu-id="c8efe-250">그 이유는 `localhost`가 로컬 컴퓨터의 표준 이름이기 때문입니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-250">That's because `localhost` is the standard hostname for  local computer.</span></span> <span data-ttu-id="c8efe-251">Localhost는 로컬 컴퓨터의 웹 요청만 지원합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-251">Localhost only serves web requests from the local computer.</span></span>
 
-  <span data-ttu-id="5fb19-251">Ctrl+F5(비 디버그 모드)를 사용하여 앱을 시작하면 코드를 변경하고, 파일을 저장하고, 브라우저를 새로 고치고, 코드 변경 내용을 확인할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-251">Launching the app with Ctrl+F5 (non-debug mode) allows you to make code changes, save the file, refresh the browser, and see the code changes.</span></span> <span data-ttu-id="5fb19-252">대부분의 개발자는 페이지 및 보기 변경 내용을 새로 고치기 위해 디버그 이외 모드를 사용하려고 합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-252">Many developers prefer to use non-debug mode to refresh the page and view changes.</span></span>
+  <span data-ttu-id="c8efe-252">Ctrl+F5(비 디버그 모드)를 사용하여 앱을 시작하면 코드를 변경하고, 파일을 저장하고, 브라우저를 새로 고치고, 코드 변경 내용을 확인할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-252">Launching the app with Ctrl+F5 (non-debug mode) allows you to make code changes, save the file, refresh the browser, and see the code changes.</span></span> <span data-ttu-id="c8efe-253">대부분의 개발자는 페이지 및 보기 변경 내용을 새로 고치기 위해 디버그 이외 모드를 사용하려고 합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-253">Many developers prefer to use non-debug mode to refresh the page and view changes.</span></span>
 
-* <span data-ttu-id="5fb19-253">**Accept**를 선택하여 추적에 동의합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-253">Select **Accept** to consent to tracking.</span></span> <span data-ttu-id="5fb19-254">이 앱은 개인 정보를 추적하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-254">This app doesn't track personal information.</span></span> <span data-ttu-id="5fb19-255">템플릿 생성 코드는 [GDPR(일반 데이터 보호 규정)](xref:security/gdpr)을 준수하는 데 도움이 되는 자산을 포함하고 있습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-255">The template generated code includes assets to help meet [General Data Protection Regulation (GDPR)](xref:security/gdpr).</span></span>
+* <span data-ttu-id="c8efe-254">**Accept**를 선택하여 추적에 동의합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-254">Select **Accept** to consent to tracking.</span></span> <span data-ttu-id="c8efe-255">이 앱은 개인 정보를 추적하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-255">This app doesn't track personal information.</span></span> <span data-ttu-id="c8efe-256">템플릿 생성 코드는 [GDPR(일반 데이터 보호 규정)](xref:security/gdpr)을 준수하는 데 도움이 되는 자산을 포함하고 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-256">The template generated code includes assets to help meet [General Data Protection Regulation (GDPR)](xref:security/gdpr).</span></span>
 
   ![홈 또는 인덱스 페이지](start-mvc/_static/privacy.png)
 
-  <span data-ttu-id="5fb19-257">다음 이미지는 추적을 승인한 후의 앱을 보여줍니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-257">The following image shows the app after accepting tracking:</span></span>
+  <span data-ttu-id="c8efe-258">다음 이미지는 추적을 승인한 후의 앱을 보여줍니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-258">The following image shows the app after accepting tracking:</span></span>
 
   ![홈 또는 인덱스 페이지](start-mvc/_static/home2.2.png)
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="5fb19-259">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="5fb19-259">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[<span data-ttu-id="c8efe-260">Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="c8efe-260">Visual Studio for Mac</span></span>](#tab/visual-studio-mac)
 
-<span data-ttu-id="5fb19-260">**실행** > **디버깅하지 않고 시작**을 선택하여 앱을 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-260">Select **Run** > **Start Without Debugging** to launch the app.</span></span> <span data-ttu-id="5fb19-261">Mac용 Visual Studio에서 [Kestrel](xref:fundamentals/servers/index#kestrel) 서버를 시작하고, 브라우저를 실행하며, `http://localhost:port`로 이동합니다. 여기서 *port*는 임의로 선택된 포트 번호입니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-261">Visual Studio for Mac starts [Kestrel](xref:fundamentals/servers/index#kestrel) server, launches a browser, and navigates to `http://localhost:port`, where *port* is a randomly chosen port number.</span></span>
+<span data-ttu-id="c8efe-261">**실행** > **디버깅하지 않고 시작**을 선택하여 앱을 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-261">Select **Run** > **Start Without Debugging** to launch the app.</span></span> <span data-ttu-id="c8efe-262">Mac용 Visual Studio에서 [Kestrel](xref:fundamentals/servers/index#kestrel) 서버를 시작하고, 브라우저를 실행하며, `http://localhost:port`로 이동합니다. 여기서 *port*는 임의로 선택된 포트 번호입니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-262">Visual Studio for Mac starts [Kestrel](xref:fundamentals/servers/index#kestrel) server, launches a browser, and navigates to `http://localhost:port`, where *port* is a randomly chosen port number.</span></span>
 
 [!INCLUDE[](~/includes/trustCertMac.md)]
 
-* <span data-ttu-id="5fb19-262">주소 표시줄에는 `localhost:port#`이 표시되고 `example.com` 같은 주소는 표시되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-262">The address bar shows `localhost:port#` and not something like `example.com`.</span></span> <span data-ttu-id="5fb19-263">그 이유는 `localhost`가 로컬 컴퓨터의 표준 이름이기 때문입니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-263">That's because `localhost` is the standard hostname for your local computer.</span></span> <span data-ttu-id="5fb19-264">Visual Studio에서 웹 프로젝트를 만들 경우 웹 서버에 임의 포트가 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-264">When Visual Studio creates a web project, a random port is used for the web server.</span></span> <span data-ttu-id="5fb19-265">앱을 실행할 경우 다른 포트 번호가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-265">When you run the app, you'll see a different port number.</span></span>
-* <span data-ttu-id="5fb19-266">**실행** 메뉴 항목에서 앱을 디버그 또는 비 디버그 모드로 시작할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-266">You can launch the app in debug or non-debug mode from the **Run** menu.</span></span>
+* <span data-ttu-id="c8efe-263">주소 표시줄에는 `localhost:port#`이 표시되고 `example.com` 같은 주소는 표시되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-263">The address bar shows `localhost:port#` and not something like `example.com`.</span></span> <span data-ttu-id="c8efe-264">그 이유는 `localhost`가 로컬 컴퓨터의 표준 이름이기 때문입니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-264">That's because `localhost` is the standard hostname for your local computer.</span></span> <span data-ttu-id="c8efe-265">Visual Studio에서 웹 프로젝트를 만들 경우 웹 서버에 임의 포트가 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-265">When Visual Studio creates a web project, a random port is used for the web server.</span></span> <span data-ttu-id="c8efe-266">앱을 실행할 경우 다른 포트 번호가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-266">When you run the app, you'll see a different port number.</span></span>
+* <span data-ttu-id="c8efe-267">**실행** 메뉴 항목에서 앱을 디버그 또는 비 디버그 모드로 시작할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-267">You can launch the app in debug or non-debug mode from the **Run** menu.</span></span>
 
-* <span data-ttu-id="5fb19-267">**Accept**를 선택하여 추적에 동의합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-267">Select **Accept** to consent to tracking.</span></span> <span data-ttu-id="5fb19-268">이 앱은 개인 정보를 추적하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-268">This app doesn't track personal information.</span></span> <span data-ttu-id="5fb19-269">템플릿 생성 코드는 [GDPR(일반 데이터 보호 규정)](xref:security/gdpr)을 준수하는 데 도움이 되는 자산을 포함하고 있습니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-269">The template generated code includes assets to help meet [General Data Protection Regulation (GDPR)](xref:security/gdpr).</span></span>
+* <span data-ttu-id="c8efe-268">**Accept**를 선택하여 추적에 동의합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-268">Select **Accept** to consent to tracking.</span></span> <span data-ttu-id="c8efe-269">이 앱은 개인 정보를 추적하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-269">This app doesn't track personal information.</span></span> <span data-ttu-id="c8efe-270">템플릿 생성 코드는 [GDPR(일반 데이터 보호 규정)](xref:security/gdpr)을 준수하는 데 도움이 되는 자산을 포함하고 있습니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-270">The template generated code includes assets to help meet [General Data Protection Regulation (GDPR)](xref:security/gdpr).</span></span>
 
   ![홈 또는 인덱스 페이지](./start-mvc/_static/output_privacy_macos.png)
 
-  <span data-ttu-id="5fb19-271">다음 이미지는 추적을 승인한 후의 앱을 보여줍니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-271">The following image shows the app after accepting tracking:</span></span>
+  <span data-ttu-id="c8efe-272">다음 이미지는 추적을 승인한 후의 앱을 보여줍니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-272">The following image shows the app after accepting tracking:</span></span>
 
   ![홈 또는 인덱스 페이지](./start-mvc/_static/output_macos.png)
 
@@ -321,9 +319,9 @@ ms.locfileid: "73761244"
 
 [!INCLUDE[](~/includes/vs-vsc-vsmac-help.md)]
 
-<span data-ttu-id="5fb19-273">이 자습서의 다음 부분에서는 MVC에 대해 알아보고 코드 작성을 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="5fb19-273">In the next part of this tutorial, you learn about MVC and start writing some code.</span></span>
+<span data-ttu-id="c8efe-274">이 자습서의 다음 부분에서는 MVC에 대해 알아보고 코드 작성을 시작합니다.</span><span class="sxs-lookup"><span data-stu-id="c8efe-274">In the next part of this tutorial, you learn about MVC and start writing some code.</span></span>
 
 > [!div class="step-by-step"]
-> [<span data-ttu-id="5fb19-274">다음</span><span class="sxs-lookup"><span data-stu-id="5fb19-274">Next</span></span>](adding-controller.md)
+> [<span data-ttu-id="c8efe-275">다음</span><span class="sxs-lookup"><span data-stu-id="c8efe-275">Next</span></span>](adding-controller.md)
 
 ::: moniker-end
