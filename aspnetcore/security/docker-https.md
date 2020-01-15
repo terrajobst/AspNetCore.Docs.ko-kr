@@ -9,108 +9,108 @@ ms.date: 07/05/2019
 no-loc:
 - Let's Encrypt
 uid: security/docker-https
-ms.openlocfilehash: 47027033c0b7130f2d38d22c02a54945b2cc31b3
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: 07e2791e5b26975c71323f8cb41a4b0fbe0cdf11
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75358915"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75952135"
 ---
-# <a name="hosting-aspnet-core-images-with-docker-over-https"></a><span data-ttu-id="4caa9-103">HTTPS를 통해 Docker를 사용 하 여 ASP.NET Core 이미지 호스팅</span><span class="sxs-lookup"><span data-stu-id="4caa9-103">Hosting ASP.NET Core images with Docker over HTTPS</span></span>
+# <a name="hosting-aspnet-core-images-with-docker-over-https"></a><span data-ttu-id="99f39-103">HTTPS를 통해 Docker를 사용 하 여 ASP.NET Core 이미지 호스팅</span><span class="sxs-lookup"><span data-stu-id="99f39-103">Hosting ASP.NET Core images with Docker over HTTPS</span></span>
 
-<span data-ttu-id="4caa9-104">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="4caa9-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+<span data-ttu-id="99f39-104">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="99f39-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
-<span data-ttu-id="4caa9-105">ASP.NET Core는 [기본적으로 HTTPS를](/aspnet/core/security/enforcing-ssl)사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-105">ASP.NET Core uses [HTTPS by default](/aspnet/core/security/enforcing-ssl).</span></span> <span data-ttu-id="4caa9-106">[HTTPS](https://en.wikipedia.org/wiki/HTTPS) 는 [인증서](https://en.wikipedia.org/wiki/Public_key_certificate) 를 신뢰, id 및 암호화에 의존 합니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-106">[HTTPS](https://en.wikipedia.org/wiki/HTTPS) relies on [certificates](https://en.wikipedia.org/wiki/Public_key_certificate) for trust, identity, and encryption.</span></span>
+<span data-ttu-id="99f39-105">ASP.NET Core는 [기본적으로 HTTPS를](/aspnet/core/security/enforcing-ssl)사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-105">ASP.NET Core uses [HTTPS by default](/aspnet/core/security/enforcing-ssl).</span></span> <span data-ttu-id="99f39-106">[HTTPS](https://en.wikipedia.org/wiki/HTTPS) 는 [인증서](https://en.wikipedia.org/wiki/Public_key_certificate) 를 신뢰, id 및 암호화에 의존 합니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-106">[HTTPS](https://en.wikipedia.org/wiki/HTTPS) relies on [certificates](https://en.wikipedia.org/wiki/Public_key_certificate) for trust, identity, and encryption.</span></span>
 
-<span data-ttu-id="4caa9-107">이 문서에서는 HTTPS를 사용 하 여 미리 작성 된 컨테이너 이미지를 실행 하는 방법을 설명 합니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-107">This document explains how to run pre-built container images with HTTPS.</span></span>
+<span data-ttu-id="99f39-107">이 문서에서는 HTTPS를 사용 하 여 미리 작성 된 컨테이너 이미지를 실행 하는 방법을 설명 합니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-107">This document explains how to run pre-built container images with HTTPS.</span></span>
 
-<span data-ttu-id="4caa9-108">개발 시나리오는 [HTTPS를 통해 Docker를 사용 하 여 ASP.NET Core 응용 프로그램 개발](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/aspnetcore-docker-https-development.md) 을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="4caa9-108">See [Developing ASP.NET Core Applications with Docker over HTTPS](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/aspnetcore-docker-https-development.md) for development scenarios.</span></span>
+<span data-ttu-id="99f39-108">개발 시나리오는 [HTTPS를 통해 Docker를 사용 하 여 ASP.NET Core 응용 프로그램 개발](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/aspnetcore-docker-https-development.md) 을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="99f39-108">See [Developing ASP.NET Core Applications with Docker over HTTPS](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/aspnetcore-docker-https-development.md) for development scenarios.</span></span>
 
-<span data-ttu-id="4caa9-109">이 샘플에는 docker [클라이언트](https://www.docker.com/products/docker)의 [docker 17.06](https://docs.docker.com/release-notes/docker-ce) 이상이 필요 합니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-109">This sample requires [Docker 17.06](https://docs.docker.com/release-notes/docker-ce) or later of the [Docker client](https://www.docker.com/products/docker).</span></span>
+<span data-ttu-id="99f39-109">이 샘플에는 docker [클라이언트](https://www.docker.com/products/docker)의 [docker 17.06](https://docs.docker.com/release-notes/docker-ce) 이상이 필요 합니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-109">This sample requires [Docker 17.06](https://docs.docker.com/release-notes/docker-ce) or later of the [Docker client](https://www.docker.com/products/docker).</span></span>
 
-## <a name="prerequisites"></a><span data-ttu-id="4caa9-110">전제 조건</span><span class="sxs-lookup"><span data-stu-id="4caa9-110">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="99f39-110">전제 조건</span><span class="sxs-lookup"><span data-stu-id="99f39-110">Prerequisites</span></span>
 
-<span data-ttu-id="4caa9-111">이 문서의 지침 중 일부에는 [.Net Core 2.2 SDK](https://www.microsoft.com/net/download) 이상이 필요 합니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-111">The [.NET Core 2.2 SDK](https://www.microsoft.com/net/download) or later is required for some of the instructions in this document.</span></span>
+<span data-ttu-id="99f39-111">이 문서의 지침 중 일부에는 [.Net Core 2.2 SDK](https://www.microsoft.com/net/download) 이상이 필요 합니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-111">The [.NET Core 2.2 SDK](https://www.microsoft.com/net/download) or later is required for some of the instructions in this document.</span></span>
 
-## <a name="certificates"></a><span data-ttu-id="4caa9-112">인증서</span><span class="sxs-lookup"><span data-stu-id="4caa9-112">Certificates</span></span>
+## <a name="certificates"></a><span data-ttu-id="99f39-112">인증서</span><span class="sxs-lookup"><span data-stu-id="99f39-112">Certificates</span></span>
 
-<span data-ttu-id="4caa9-113">도메인에 대 한 [프로덕션 호스팅을](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/) 위해서는 [인증 기관의](https://wikipedia.org/wiki/Certificate_authority) 인증서가 필요 합니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-113">A certificate from a [certificate authority](https://wikipedia.org/wiki/Certificate_authority) is required for [production hosting](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/) for a domain.</span></span> <span data-ttu-id="4caa9-114">[Let's Encrypt](https://letsencrypt.org/) 은 무료 인증서를 제공 하는 인증 기관입니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-114">[Let's Encrypt](https://letsencrypt.org/) is a certificate authority that offers free certificates.</span></span>
+<span data-ttu-id="99f39-113">도메인에 대 한 [프로덕션 호스팅을](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/) 위해서는 [인증 기관의](https://wikipedia.org/wiki/Certificate_authority) 인증서가 필요 합니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-113">A certificate from a [certificate authority](https://wikipedia.org/wiki/Certificate_authority) is required for [production hosting](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/) for a domain.</span></span> <span data-ttu-id="99f39-114">[Let's Encrypt](https://letsencrypt.org/) 은 무료 인증서를 제공 하는 인증 기관입니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-114">[Let's Encrypt](https://letsencrypt.org/) is a certificate authority that offers free certificates.</span></span>
 
-<span data-ttu-id="4caa9-115">이 문서에서는 `localhost`에 대해 미리 작성 된 이미지를 호스팅하기 위해 [자체 서명 된 개발 인증서](https://en.wikipedia.org/wiki/Self-signed_certificate) 를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-115">This document uses [self-signed development certificates](https://en.wikipedia.org/wiki/Self-signed_certificate) for hosting pre-built images over `localhost`.</span></span> <span data-ttu-id="4caa9-116">지침은 프로덕션 인증서를 사용 하는 것과 유사 합니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-116">The instructions are similar to using production certificates.</span></span>
+<span data-ttu-id="99f39-115">이 문서에서는 `localhost`에 대해 미리 작성 된 이미지를 호스팅하기 위해 [자체 서명 된 개발 인증서](https://en.wikipedia.org/wiki/Self-signed_certificate) 를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-115">This document uses [self-signed development certificates](https://en.wikipedia.org/wiki/Self-signed_certificate) for hosting pre-built images over `localhost`.</span></span> <span data-ttu-id="99f39-116">지침은 프로덕션 인증서를 사용 하는 것과 유사 합니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-116">The instructions are similar to using production certificates.</span></span>
 
-<span data-ttu-id="4caa9-117">프로덕션 인증서의 경우:</span><span class="sxs-lookup"><span data-stu-id="4caa9-117">For production certs:</span></span>
+<span data-ttu-id="99f39-117">프로덕션 인증서의 경우:</span><span class="sxs-lookup"><span data-stu-id="99f39-117">For production certs:</span></span>
 
-* <span data-ttu-id="4caa9-118">`dotnet dev-certs` 도구는 필요 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-118">The `dotnet dev-certs` tool is not required.</span></span>
-* <span data-ttu-id="4caa9-119">지침에 사용 되는 위치에 인증서를 저장할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-119">Certificates do not need to be stored in the location used in the instructions.</span></span> <span data-ttu-id="4caa9-120">사이트 디렉터리 내에 인증서를 저장 하지 않는 것이 좋지만 모든 위치는 작동 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-120">Any location should work, although storing certs within your site directory is not recommended.</span></span>
+* <span data-ttu-id="99f39-118">`dotnet dev-certs` 도구는 필요 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-118">The `dotnet dev-certs` tool is not required.</span></span>
+* <span data-ttu-id="99f39-119">지침에 사용 되는 위치에 인증서를 저장할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-119">Certificates do not need to be stored in the location used in the instructions.</span></span> <span data-ttu-id="99f39-120">사이트 디렉터리 내에 인증서를 저장 하지 않는 것이 좋지만 모든 위치는 작동 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-120">Any location should work, although storing certs within your site directory is not recommended.</span></span>
 
-<span data-ttu-id="4caa9-121">명령 볼륨은 컨테이너에 인증서를 탑재 합니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-121">The instructions volume mount certificates into containers.</span></span> <span data-ttu-id="4caa9-122">*Dockerfile*에서 `COPY` 명령을 사용 하 여 컨테이너 이미지에 인증서를 추가할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-122">You can add certificates into container images with a `COPY` command in a *Dockerfile*.</span></span> <span data-ttu-id="4caa9-123">다음과 같은 이유로 인증서를 이미지로 복사 하는 것은 권장 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-123">Copying certificates into an image isn't recommended for the following reasons:</span></span>
+<span data-ttu-id="99f39-121">다음 섹션에 포함 된 지침은 Docker의 `-v` 명령줄 옵션을 사용 하 여 컨테이너에 인증서를 탑재 합니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-121">The instructions contained in the following section volume mount certificates into containers using Docker's `-v` command-line option.</span></span> <span data-ttu-id="99f39-122">*Dockerfile*에서 `COPY` 명령을 사용 하 여 컨테이너 이미지에 인증서를 추가할 수 있지만 권장 되지는 않습니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-122">You could add certificates into container images with a `COPY` command in a *Dockerfile*, but it's not recommended.</span></span> <span data-ttu-id="99f39-123">다음과 같은 이유로 인증서를 이미지로 복사 하는 것은 권장 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-123">Copying certificates into an image isn't recommended for the following reasons:</span></span>
 
-* <span data-ttu-id="4caa9-124">개발자 인증서를 사용 하 여 테스트 하는 데 동일한 이미지를 사용 하는 것은 어렵습니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-124">It makes difficult to use the same image for testing with developer certificates.</span></span>
-* <span data-ttu-id="4caa9-125">프로덕션 인증서를 사용 하 여 호스트 하는 데 동일한 이미지를 사용 하는 것은 어렵습니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-125">It makes difficult to use the same image for Hosting with production certificates.</span></span>
-* <span data-ttu-id="4caa9-126">인증서 공개에는 상당한 위험이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-126">There is significant risk of certificate disclosure.</span></span>
+* <span data-ttu-id="99f39-124">개발자 인증서를 사용 하 여 테스트 하는 데 동일한 이미지를 사용 하는 것은 어렵습니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-124">It makes difficult to use the same image for testing with developer certificates.</span></span>
+* <span data-ttu-id="99f39-125">프로덕션 인증서를 사용 하 여 호스트 하는 데 동일한 이미지를 사용 하는 것은 어렵습니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-125">It makes difficult to use the same image for Hosting with production certificates.</span></span>
+* <span data-ttu-id="99f39-126">인증서 공개에는 상당한 위험이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-126">There is significant risk of certificate disclosure.</span></span>
 
-## <a name="running-pre-built-container-images-with-https"></a><span data-ttu-id="4caa9-127">HTTPS를 사용 하 여 미리 작성 된 컨테이너 이미지 실행</span><span class="sxs-lookup"><span data-stu-id="4caa9-127">Running pre-built container images with HTTPS</span></span>
+## <a name="running-pre-built-container-images-with-https"></a><span data-ttu-id="99f39-127">HTTPS를 사용 하 여 미리 작성 된 컨테이너 이미지 실행</span><span class="sxs-lookup"><span data-stu-id="99f39-127">Running pre-built container images with HTTPS</span></span>
 
-<span data-ttu-id="4caa9-128">운영 체제 구성에 대해 다음 지침을 따르십시오.</span><span class="sxs-lookup"><span data-stu-id="4caa9-128">Use the following instructions for your operating system configuration.</span></span>
+<span data-ttu-id="99f39-128">운영 체제 구성에 대해 다음 지침을 따르십시오.</span><span class="sxs-lookup"><span data-stu-id="99f39-128">Use the following instructions for your operating system configuration.</span></span>
 
-### <a name="windows-using-linux-containers"></a><span data-ttu-id="4caa9-129">Linux 컨테이너를 사용 하는 Windows</span><span class="sxs-lookup"><span data-stu-id="4caa9-129">Windows using Linux containers</span></span>
+### <a name="windows-using-linux-containers"></a><span data-ttu-id="99f39-129">Linux 컨테이너를 사용 하는 Windows</span><span class="sxs-lookup"><span data-stu-id="99f39-129">Windows using Linux containers</span></span>
 
-<span data-ttu-id="4caa9-130">인증서 생성 및 로컬 컴퓨터 구성:</span><span class="sxs-lookup"><span data-stu-id="4caa9-130">Generate certificate and configure local machine:</span></span>
+<span data-ttu-id="99f39-130">인증서 생성 및 로컬 컴퓨터 구성:</span><span class="sxs-lookup"><span data-stu-id="99f39-130">Generate certificate and configure local machine:</span></span>
 
 ```dotnetcli
 dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { password here }
 dotnet dev-certs https --trust
 ```
 
-<span data-ttu-id="4caa9-131">위의 명령에서 `{ password here }`을 암호로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-131">In the preceding commands, replace `{ password here }` with a password.</span></span>
+<span data-ttu-id="99f39-131">위의 명령에서 `{ password here }`을 암호로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-131">In the preceding commands, replace `{ password here }` with a password.</span></span>
 
-<span data-ttu-id="4caa9-132">HTTPS에 대해 구성 된 ASP.NET Core를 사용 하 여 컨테이너 이미지를 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-132">Run the container image with ASP.NET Core configured for HTTPS:</span></span>
+<span data-ttu-id="99f39-132">HTTPS에 대해 구성 된 ASP.NET Core를 사용 하 여 컨테이너 이미지를 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-132">Run the container image with ASP.NET Core configured for HTTPS:</span></span>
 
 ```console
 docker pull mcr.microsoft.com/dotnet/core/samples:aspnetapp
 docker run --rm -it -p 8000:80 -p 8001:443 -e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Password="password" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx -v %USERPROFILE%\.aspnet\https:/https/ mcr.microsoft.com/dotnet/core/samples:aspnetapp
 ```
 
-<span data-ttu-id="4caa9-133">암호는 인증서에 사용 된 암호와 일치 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-133">The password must match the password used for the certificate.</span></span>
+<span data-ttu-id="99f39-133">암호는 인증서에 사용 된 암호와 일치 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-133">The password must match the password used for the certificate.</span></span>
 
-### <a name="macos-or-linux"></a><span data-ttu-id="4caa9-134">macOS 또는 Linux</span><span class="sxs-lookup"><span data-stu-id="4caa9-134">macOS or Linux</span></span>
+### <a name="macos-or-linux"></a><span data-ttu-id="99f39-134">macOS 또는 Linux</span><span class="sxs-lookup"><span data-stu-id="99f39-134">macOS or Linux</span></span>
 
-<span data-ttu-id="4caa9-135">인증서 생성 및 로컬 컴퓨터 구성:</span><span class="sxs-lookup"><span data-stu-id="4caa9-135">Generate certificate and configure local machine:</span></span>
+<span data-ttu-id="99f39-135">인증서 생성 및 로컬 컴퓨터 구성:</span><span class="sxs-lookup"><span data-stu-id="99f39-135">Generate certificate and configure local machine:</span></span>
 
 ```dotnetcli
 dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p { password here }
 dotnet dev-certs https --trust
 ```
 
-<span data-ttu-id="4caa9-136">`dotnet dev-certs https --trust`은 macOS 및 Windows 에서만 지원 됩니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-136">`dotnet dev-certs https --trust` is only supported on macOS and Windows.</span></span> <span data-ttu-id="4caa9-137">배포판에서 지 원하는 방식으로 Linux에서 인증서를 신뢰 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-137">You need to trust certs on Linux in the way that is supported by your distro.</span></span> <span data-ttu-id="4caa9-138">브라우저에서 인증서를 신뢰 해야 할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-138">It is likely that you need to trust the certificate in your browser.</span></span>
+<span data-ttu-id="99f39-136">`dotnet dev-certs https --trust`은 macOS 및 Windows 에서만 지원 됩니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-136">`dotnet dev-certs https --trust` is only supported on macOS and Windows.</span></span> <span data-ttu-id="99f39-137">배포판에서 지 원하는 방식으로 Linux에서 인증서를 신뢰 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-137">You need to trust certs on Linux in the way that is supported by your distro.</span></span> <span data-ttu-id="99f39-138">브라우저에서 인증서를 신뢰 해야 할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-138">It is likely that you need to trust the certificate in your browser.</span></span>
 
-<span data-ttu-id="4caa9-139">위의 명령에서 `{ password here }`을 암호로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-139">In the preceding commands, replace `{ password here }` with a password.</span></span>
+<span data-ttu-id="99f39-139">위의 명령에서 `{ password here }`을 암호로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-139">In the preceding commands, replace `{ password here }` with a password.</span></span>
 
-<span data-ttu-id="4caa9-140">HTTPS에 대해 구성 된 ASP.NET Core를 사용 하 여 컨테이너 이미지를 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-140">Run the container image with ASP.NET Core configured for HTTPS:</span></span>
+<span data-ttu-id="99f39-140">HTTPS에 대해 구성 된 ASP.NET Core를 사용 하 여 컨테이너 이미지를 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-140">Run the container image with ASP.NET Core configured for HTTPS:</span></span>
 
 ```console
 docker pull mcr.microsoft.com/dotnet/core/samples:aspnetapp
 docker run --rm -it -p 8000:80 -p 8001:443 -e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Password="password" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx -v ${HOME}/.aspnet/https:/https/ mcr.microsoft.com/dotnet/core/samples:aspnetapp
 ```
 
-<span data-ttu-id="4caa9-141">암호는 인증서에 사용 된 암호와 일치 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-141">The password must match the password used for the certificate.</span></span>
+<span data-ttu-id="99f39-141">암호는 인증서에 사용 된 암호와 일치 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-141">The password must match the password used for the certificate.</span></span>
 
-### <a name="windows-using-windows-containers"></a><span data-ttu-id="4caa9-142">Windows 컨테이너를 사용 하는 windows</span><span class="sxs-lookup"><span data-stu-id="4caa9-142">Windows using Windows containers</span></span>
+### <a name="windows-using-windows-containers"></a><span data-ttu-id="99f39-142">Windows 컨테이너를 사용 하는 windows</span><span class="sxs-lookup"><span data-stu-id="99f39-142">Windows using Windows containers</span></span>
 
-<span data-ttu-id="4caa9-143">인증서 생성 및 로컬 컴퓨터 구성:</span><span class="sxs-lookup"><span data-stu-id="4caa9-143">Generate certificate and configure local machine:</span></span>
+<span data-ttu-id="99f39-143">인증서 생성 및 로컬 컴퓨터 구성:</span><span class="sxs-lookup"><span data-stu-id="99f39-143">Generate certificate and configure local machine:</span></span>
 
 ```dotnetcli
 dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { password here }
 dotnet dev-certs https --trust
 ```
 
-<span data-ttu-id="4caa9-144">위의 명령에서 `{ password here }`을 암호로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-144">In the preceding commands, replace `{ password here }` with a password.</span></span>
+<span data-ttu-id="99f39-144">위의 명령에서 `{ password here }`을 암호로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-144">In the preceding commands, replace `{ password here }` with a password.</span></span>
 
-<span data-ttu-id="4caa9-145">HTTPS에 대해 구성 된 ASP.NET Core를 사용 하 여 컨테이너 이미지를 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-145">Run the container image with ASP.NET Core configured for HTTPS:</span></span>
+<span data-ttu-id="99f39-145">HTTPS에 대해 구성 된 ASP.NET Core를 사용 하 여 컨테이너 이미지를 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-145">Run the container image with ASP.NET Core configured for HTTPS:</span></span>
 
 ```console
 docker pull mcr.microsoft.com/dotnet/core/samples:aspnetapp
 docker run --rm -it -p 8000:80 -p 8001:443 -e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Password="password" -e ASPNETCORE_Kestrel__Certificates__Default__Path=\https\aspnetapp.pfx -v %USERPROFILE%\.aspnet\https:C:\https\ mcr.microsoft.com/dotnet/core/samples:aspnetapp
 ```
 
-<span data-ttu-id="4caa9-146">암호는 인증서에 사용 된 암호와 일치 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="4caa9-146">The password must match the password used for the certificate.</span></span>
+<span data-ttu-id="99f39-146">암호는 인증서에 사용 된 암호와 일치 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="99f39-146">The password must match the password used for the certificate.</span></span>
