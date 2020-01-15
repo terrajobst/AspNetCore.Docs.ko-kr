@@ -9,12 +9,12 @@ ms.date: 11/28/2018
 no-loc:
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: 6506430202870ba9de2f8eb6f33d79c7c1fbbbd4
-ms.sourcegitcommit: e7d4fe6727d423f905faaeaa312f6c25ef844047
+ms.openlocfilehash: 8e7b7596fcfe2d6b7150fe1ab09a7ab1dc4a2e47
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/02/2020
-ms.locfileid: "75608069"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75952117"
 ---
 # <a name="aspnet-core-opno-locsignalr-hosting-and-scaling"></a>ASP.NET Core SignalR 호스팅 및 크기 조정
 
@@ -86,7 +86,7 @@ Azure SignalR 서비스는 후면판이 아닌 프록시입니다. 클라이언�
 
 ![Redis 백플레인, 한 서버에서 모든 클라이언트로 전송 되는 메시지](scale/_static/redis-backplane.png)
 
-Redis 후면판은 사용자의 인프라에서 호스트 되는 앱에 대해 권장 되는 스케일 아웃 방법입니다. Azure SignalR 서비스는 데이터 센터와 Azure 데이터 센터 간의 연결 대기 시간으로 인해 온-프레미스 앱에서 프로덕션 사용을 위한 실용적인 옵션이 아닙니다.
+Redis 후면판은 사용자의 인프라에서 호스트 되는 앱에 대해 권장 되는 스케일 아웃 방법입니다. 데이터 센터와 Azure 데이터 센터 간에 상당한 연결 대기 시간이 있는 경우 Azure SignalR 서비스는 대기 시간이 짧고 처리량이 많은 요구 사항이 있는 온-프레미스 앱에 대 한 실용적인 옵션이 아닐 수 있습니다.
 
 앞에서 설명한 Azure SignalR 서비스 이점은 Redis 후면판의 단점입니다.
 
