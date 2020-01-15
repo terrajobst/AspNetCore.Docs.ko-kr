@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/12/2018
 uid: host-and-deploy/docker/visual-studio-tools-for-docker
-ms.openlocfilehash: 5faf0be19448d8272901bf018357da63bbe22d4b
-ms.sourcegitcommit: b40613c603d6f0cc71f3232c16df61550907f550
+ms.openlocfilehash: cecec09d3d58a84a7c15630e41d23facdb9b236e
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/18/2019
-ms.locfileid: "68308068"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75356160"
 ---
 # <a name="visual-studio-container-tools-with-aspnet-core"></a>ASP.NET Core를 포함한 Visual Studio 컨테이너 도구
 
@@ -19,7 +19,7 @@ Visual Studio 2017 이상 버전은 .NET Core를 대상으로 하는 컨테이�
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/docker/visual-studio-tools-for-docker/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 * [Windows용 Docker](https://docs.docker.com/docker-for-windows/install/)
 * **.NET Core 플랫폼 간 개발** 워크로드가 있는 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
@@ -92,7 +92,7 @@ Visual Studio 컨테이너 도구는 다음 파일을 통해 솔루션에 *docke
 
 * *docker-compose.dcproj* &ndash; 프로젝트를 나타내는 파일입니다. 사용할 OS를 지정하는 `<DockerTargetOS>` 요소를 포함합니다.
 * *.dockerignore* &ndash; 빌드 컨텍스트를 생성할 때 제외할 파일 및 디렉터리 패턴을 나열합니다.
-* *docker-compose.yml* &ndash; `docker-compose build` 및 `docker-compose run`을 각각 사용하여 빌드하고 실행할 이미지 컬렉션을 정의하는 데 사용되는 기본 [Docker Compose](https://docs.docker.com/compose/overview/) 파일입니다.
+* *docker-compose.yml* &ndash;`docker-compose build` 및 `docker-compose run`을 각각 사용하여 빌드하고 실행할 이미지 컬렉션을 정의하는 데 사용되는 기본 [Docker Compose](https://docs.docker.com/compose/overview/) 파일입니다.
 * *docker-compose.override.yml* &ndash; 서비스에 대한 구성 재정의를 포함하는 Docker Compose에서 읽는 옵션 파일입니다. Visual Studio는 `docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"`을 실행하여 이러한 파일을 병합합니다.
 
 *docker-compose.yml* 파일에는 프로젝트를 실행할 때 생성되는 이미지의 이름을 참조합니다.
@@ -106,6 +106,8 @@ Visual Studio 컨테이너 도구는 다음 파일을 통해 솔루션에 *docke
 빌드 구성(예: 디버그 또는 릴리스)에 따라 다른 동작을 원하는 경우 구성별 *docker-compose* 파일을 추가합니다. 파일은 빌드 구성에 따라 이름이 지정되어야(예: *docker-compose.vs.debug.yml* 및 *docker-compose.vs.release.yml*) 하며 *docker-compose-override.yml* 파일과 동일한 위치에 배치됩니다. 
 
 구성별 재정의 파일을 사용하여 디버그 및 릴리스 빌드 구성에 대해 서로 다른 구성 설정(예: 환경 변수 또는 진입점)을 지정할 수 있습니다.
+
+Docker Compose가 Visual Studio에서 실행하는 옵션을 표시하려면 Docker 프로젝트가 시작 프로젝트여야 합니다.
 
 ### <a name="service-fabric"></a>Service Fabric
 
@@ -131,7 +133,7 @@ Visual Studio 컨테이너 도구는 다음 작업을 수행합니다.
 
 자세한 내용은 [Azure Service Fabric에 Windows 컨테이너의 .NET 앱 배포](/azure/service-fabric/service-fabric-host-app-in-a-container)를 참조하세요.
 
-## <a name="debug"></a>디버그
+## <a name="debug"></a>Debug
 
 도구 모음의 디버그 드롭다운에서 **Docker**를 선택하고 앱에서 디버깅을 시작합니다. **출력** 창의 **Docker** 뷰는 진행 중인 다음 작업을 표시합니다.
 

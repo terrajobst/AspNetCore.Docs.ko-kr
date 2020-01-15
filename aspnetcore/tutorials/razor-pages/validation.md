@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: c2397a535fa2c128f18d65323d0f4920af914205
-ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
+ms.openlocfilehash: 34157a63e43372876a02a858741dfd3a83a063b1
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/15/2019
-ms.locfileid: "72334213"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75354804"
 ---
 # <a name="add-validation-to-an-aspnet-core-razor-page"></a>ASP.NET Core Razor 페이지에 유효성 검사 추가
 
@@ -21,39 +21,39 @@ ms.locfileid: "72334213"
 
 ## <a name="validation"></a>유효성 검사
 
-소프트웨어 개발의 주요 개념은 [반복 금지](https://wikipedia.org/wiki/Don%27t_repeat_yourself)라고 합니다. Razor 페이지는 기능이 한번 정의된 곳의 개발을 원활하게 하고 앱 전체에서 반영됩니다. DRY는 다음 작업에 도움이 됩니다.
+소프트웨어 개발의 주요 개념은 [반복 금지](https://wikipedia.org/wiki/Don%27t_repeat_yourself)**라고** **합**니**다**. Razor 페이지는 기능이 한번 정의된 곳의 개발을 원활하게 하고 앱 전체에서 반영됩니다. DRY는 다음 작업에 도움이 됩니다.
 
 * 앱에서 코드의 양 감소
 * 코드에 오류 감소 및 쉽게 테스트 및 유지 관리
 
 Razor 페이지에서 제공하는 유효성 검사 지원 및 Entity Framework는 반복 금지 원칙의 좋은 예제입니다. 유효성 검사 규칙은 한 위치(모델 클래스에서)에서 선언적으로 지정되고 규칙은 앱의 모든 위치에 적용됩니다.
 
-## <a name="add-validation-rules-to-the-movie-model"></a>동영상 모델에 유효성 검사 규칙 추가
+## <a name="add-validation-rules-to-the-movie-model"></a>영화 모델에 유효성 검사 규칙 추가
 
-DataAnnotations 네임스페이스는 클래스 또는 속성에 선언적으로 적용되는 유효성 검사 특성의 기본 제공 세트를 제공합니다. DataAnnotations는 또한 서식 지정을 돕는 `DataType`과 같은 서식 지정 특성을 포함하며 유효성 검사를 제공하지 않습니다.
+DataAnnotations 네임스페이스는 클래스 또는 속성에 선언적으로 적용되는 유효성 검사 특성의 기본 제공 모음을 제공합니다. 또한 DataAnnotations는 서식 지정을 돕고 아무런 유효성 검사도 제공하지 않는 `DataType` 같은 서식 지정 특성도 포함하고 있습니다.
 
-기본 제공되는 `Required`, `StringLength`, `RegularExpression` 및 `Range` 유효성 검사 특성을 활용하도록 `Movie` 클래스를 업데이트합니다.
+기본 제공되는 `Required`, `StringLength`, `RegularExpression` 및 `Range` 유효성 검사 특성을 활용하도록 `Movie` 클래스를 수정합니다.
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDA.cs?name=snippet1)]
 
-이 유효성 검사 특성은 적용되는 모델 속성에 시행하려는 동작을 지정합니다.
+유효성 검사 특성은 해당 특성이 적용되는 모델 속성에 시행하려는 동작을 지정합니다
 
-* `Required` 및 `MinimumLength` 특성은 속성에 값이 있어야 하지만 사용자가 이 유효성 검사를 만족하기 위해 공백을 입력하는 것을 예방할 수 없다는 것을 나타냅니다.
-* `RegularExpression` 특성은 입력될 수 있는 문자를 제한하는 데 사용됩니다. 앞의 코드에서 “Genre”는 다음 조건을 충족해야 합니다.
+* `Required` 및 `MinimumLength` 특성은 속성에 값이 있어야 함을 지정합니다. 그러나 사용자가 이 유효성 검사를 만족시키기 위해 공백을 입력하는 것까지 막을 수는 없습니다.
+* `RegularExpression` 특성은 입력할 수 있는 문자를 제한하는 데 사용됩니다. 이전 코드에서 “Genre”는 다음 조건을 충족해야 합니다.
 
   * 문자만 사용해야 합니다.
-  * 첫 글자는 대문자로 입력해야 합니다. 공백, 숫자 및 특수 문자는 허용되지 않습니다.
+  * 첫 번째 문자는 대문자여야 합니다 공백, 숫자 및 특수 문자는 허용되지 않습니다.
 
 * `RegularExpression` “Rating”은 다음 조건을 충족해야 합니다.
 
   * 첫 번째 문자는 대문자여야 합니다.
-  * 이어진 공백에서는 특수 문자와 숫자가 허용됩니다. “PG-13”은 등급인 경우 유효하지만 “Genre”에는 허용되지 않습니다.
+  * 이어지는 자리에서는 특수 문자와 숫자가 허용됩니다. “PG-13”은 등급에서는 유효하지만 “Genre”에서는 허용되지 않습니다.
 
-* `Range` 특성은 지정된 범위 내의 값을 제한합니다.
-* `StringLength` 특성을 사용하면 문자열 속성의 최대 길이와, 필요에 따라 최소 길이를 설정할 수 있습니다.
-* 값 형식(예: `decimal`, `int`, `float`, `DateTime`)은 기본적으로 필요하며 `[Required]` 특성은 필요하지 않습니다.
+* `Range` 특성은 지정한 범위 내로 값을 제한합니다.
+* `StringLength` 특성을 사용하면 문자열 속성의 최대 길이와, 그리고 필요에 따라 최소 길이를 설정할 수 있습니다.
+* 값 형식(예: `decimal`, `int`, `float`, `DateTime`)은 기본적으로 필수적이며 `[Required]` 특성이 필요하지 않습니다.
 
-ASP.NET Core에 의해 자동으로 적용되는 유효성 검사 규칙을 사용하면 앱을 더욱 강력하게 합니다. 또한 유효성 검사를 잊거나, 데이터베이스에 불량 데이터가 실수로 들어가지 않게 할 수 있습니다.
+ASP.NET Core가 자동으로 적용하는 유효성 검사 규칙을 사용하면 앱을 더욱 강력하게 만들 수 있습니다. 또한 무언가의 유효성 검사를 잊거나, 실수로 데이터베이스에 불량 데이터가 들어가지 않도록 할 수 있습니다.
 
 ### <a name="validation-error-ui-in-razor-pages"></a>Razor 페이지에서 유효성 검사 오류 UI
 
@@ -92,6 +92,8 @@ ASP.NET Core에 의해 자동으로 적용되는 유효성 검사 규칙을 사�
       return Page();
    }
   ```
+  
+또는 [서버에서 클라이언트 쪽 유효성 검사를 사용하지 않도록 설정](xref:mvc/models/validation#disable-client-side-validation)할 수 있습니다.
 
 다음 코드는 자습서의 앞부분에서 스캐폴드한 *Create.cshtml* 페이지의 일부를 보여 줍니다. 만들기 및 편집 페이지에서 초기 양식을 표시하고 오류가 발생한 경우 양식을 다시 표시하기 위해 사용됩니다.
 
@@ -105,17 +107,17 @@ ASP.NET Core에 의해 자동으로 적용되는 유효성 검사 규칙을 사�
 
 ## <a name="using-datatype-attributes"></a>데이터 형식 특성 사용
 
-`Movie` 클래스를 검사합니다. `System.ComponentModel.DataAnnotations` 네임스페이스는 기본 제공 유효성 검사 특성의 집합 외에 서식 지정 특성을 제공합니다. `DataType` 특성은 `ReleaseDate` 및 `Price` 속성에 적용됩니다.
+`Movie` 클래스를 검사합니다. `System.ComponentModel.DataAnnotations` 네임스페이스는 기본 제공 유효성 검사 특성 모음 외에도 서식 특성을 제공합니다. `DataType` 특성은 `ReleaseDate` 및 `Price` 속성에 적용됩니다.
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie/Models/MovieDateRatingDA.cs?highlight=2,6&name=snippet2)]
 
 `DataType` 특성은 데이터의 서식을 지정하도록 뷰 엔진에 대한 힌트만을 제공합니다(그리고 URL에 대한 `<a>` 및 전자 메일에 대한 `<a href="mailto:EmailAddress.com">`과 같은 특성 제공). `RegularExpression` 특성을 사용하여 데이터 형식의 유효성을 검사합니다. `DataType` 특성은 데이터베이스 내장 형식보다 구체적인 데이터 형식을 지정하는 데 사용됩니다. `DataType` 특성은 유효성 검사 특성이 아닙니다. 샘플 애플리케이션에서 날짜는 시간 없이 표시됩니다.
 
-`DataType` 열거형은 날짜, 시간, 전화 번호, 통화, 전자 메일 주소 등과 같은 많은 데이터 형식을 제공합니다. `DataType` 특성을 통해 애플리케이션에서 자동으로 유형별 기능을 제공하도록 설정할 수도 있습니다. 예를 들어 `DataType.EmailAddress`에 대해 `mailto:` 링크를 만들 수 있습니다. HTML5를 지원하는 브라우저에서 `DataType.Date`에 대해 날짜 선택기가 제공될 수 있습니다. `DataType` 특성은 HTML 5 브라우저에서 사용하는 HTML 5 `data-`(데이터 대시로 발음) 특성을 내보냅니다. `DataType` 특성은 유효성 검사를 제공하지 **않습니다**.
+`DataType` 열거형은 날짜, 시간, 전화 번호, 통화, 전자 메일 주소 등과 같은 많은 데이터 형식을 제공합니다. `DataType` 특성을 통해 애플리케이션에서 자동으로 유형별 기능을 제공하도록 설정할 수도 있습니다. 예를 들어 `DataType.EmailAddress`에 대해 `mailto:` 링크를 만들 수 있습니다. HTML5를 지원하는 브라우저에서 `DataType.Date`에 대해 날짜 선택기가 제공될 수 있습니다. `DataType` 특성은 HTML 5 브라우저에서 사용하는 HTML 5 `data-`(데이터 대시로 발음) 특성을 내보냅니다. `DataType` 특성은 유효성 검사를 전혀 제공하지 **않습니다**
 
 `DataType.Date`는 표시되는 날짜의 서식을 지정하지 않습니다. 기본적으로 데이터 필드는 서버 `CultureInfo`의 기본 형식에 따라 표시됩니다.
 
-Entity Framework Core가 `Price`를 데이터베이스의 통화에 올바르게 매핑할 수 있도록 `[Column(TypeName = "decimal(18, 2)")]` 데이터 주석이 필요합니다. 자세한 내용은 [데이터 형식](/ef/core/modeling/relational/data-types)을 참조하세요.
+Entity Framework Core가 `Price`를 데이터베이스의 통화에 올바르게 매핑하기 위해서는 `[Column(TypeName = "decimal(18, 2)")]` 데이터 주석이 필요합니다. 자세한 내용은 [데이터 형식](/ef/core/modeling/relational/data-types)을 참조하세요.
 
 `DisplayFormat` 특성은 날짜 형식을 명시적으로 지정하는 데 사용됩니다.
 
@@ -126,9 +128,9 @@ public DateTime ReleaseDate { get; set; }
 
 `ApplyFormatInEditMode` 설정은 값이 편집을 위해 표시될 때 서식 지정이 적용되어야 함을 지정합니다. 일부 필드에 대해 해당 동작을 원하지 않을 수도 있습니다. 예를 들어 통화 값의 편집 UI에서 통화 기호를 원하지 않을 수 있습니다.
 
-`DisplayFormat` 특성은 단독으로 사용될 수 있지만 일반적으로 `DataType` 특성을 사용하는 것이 좋습니다. `DataType` 특성은 데이터를 화면에 렌더링하는 방법과 반대로 데이터의 의미 체계를 전달하고 DisplayFormat으로 가져올 수 없는 다음과 같은 이점을 제공합니다.
+`DisplayFormat` 특성은 단독으로 사용될 수 있지만 일반적으로 `DataType` 특성을 사용하는 것이 좋습니다. `DataType` 특성은 데이터를 화면에 렌더링하는 방법이 아닌 데이터의 의미 체계를 전달하고 DisplayFormat으로는 얻을 수 없는 다음과 같은 이점을 제공합니다.
 
-* 브라우저는 HTML5 기능을 활성화할 수 있습니다(예: 달력 컨트롤, 로캘에 적합한 통화 기호, 전자 메일 링크 등을 표시하기 위해).
+* 브라우저는 HTML5 기능을 활성화할 수 있습니다(예: 달력 컨트롤, 로캘에 적합한 통화 기호, 이메일 링크 등을 표시합니다).
 * 기본적으로 브라우저는 사용자의 로캘에 따른 올바른 형식을 사용하여 데이터를 렌더링합니다.
 * `DataType` 특성은 ASP.NET Core 프레임워크를 활성화하여 데이터를 렌더링할 올바른 필드 템플릿을 선택할 수 있습니다. 자체적으로 사용되는 경우 `DisplayFormat`은 문자열 템플릿을 사용합니다.
 
@@ -138,9 +140,9 @@ public DateTime ReleaseDate { get; set; }
 [Range(typeof(DateTime), "1/1/1966", "1/1/2020")]
    ```
 
-일반적으로 모델에서 하드 날짜를 컴파일하는 것은 좋지 않으므로 `Range` 특성 및 `DateTime`을 사용하지 않는 것이 좋습니다.
+일반적으로 모델에서 고정된 날짜를 컴파일하는 방식은 좋지 않으므로 `Range` 특성 및 `DateTime`을 사용하지 않는 것이 좋습니다.
 
-다음 코드는 한 줄에 결합 특성을 보여 줍니다.
+다음 코드는 특성을 한 줄로 결합하는 방법을 보여줍니다.
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDAmult.cs?name=snippet1)]
 
@@ -199,7 +201,7 @@ CREATE TABLE [dbo].[Movie] (
 );
 ```
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 SQLite에는 마이그레이션이 필요하지 않습니다.
 

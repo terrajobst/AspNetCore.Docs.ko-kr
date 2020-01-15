@@ -5,18 +5,20 @@ description: Entity Framework Core(EF Core)를 사용하여 데이터베이스�
 ms.author: riande
 ms.date: 12/05/2019
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: 95b6d3e016edcd2e13207c8e658cf0d2fb21f945
-ms.sourcegitcommit: 4e3edff24ba6e43a103fee1b126c9826241bb37b
+ms.openlocfilehash: 0934c94236b507f2f57200ded4344a71c483d356
+ms.sourcegitcommit: 5fe17e54f7e4267a2fdecc6f9aa1d41166cecc34
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/10/2019
-ms.locfileid: "74959084"
+ms.lasthandoff: 01/08/2020
+ms.locfileid: "75737860"
 ---
 # <a name="add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>ASP.NET Core에서 Razor 페이지 앱에 모델 추가
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
+
+<!-- In the next update on the CLI version, let the scaffolder do the same work the VS driven scaffolder does. That is, create the DB context, etc -->
 
 이 섹션에서는 플랫폼 간 [SQLite 데이터베이스](https://www.sqlite.org/index.html)에서 동영상을 관리하기 위한 클래스를 추가합니다. ASP.NET Core 템플릿으로 만든 앱이 SQLite 데이터베이스를 사용합니다. 앱의 모델 클래스를 [EF Core(Entity Framework Core)](/ef/core)([SQLite EF Core 데이터베이스 공급자](/ef/core/providers/sqlite))와 함께 사용하여 데이터베이스를 작업합니다. EF Core는 데이터 액세스를 간소화하는 ORM(개체-관계형 매핑) 프레임워크입니다.
 
@@ -45,8 +47,8 @@ ms.locfileid: "74959084"
 
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
-* 솔루션 탐색기에서 **RazorPagesMovie** 프로젝트를 마우스 오른쪽 단추로 클릭하고 **추가** > **새 폴더**를 선택합니다. 폴더 이름을 *Models*로 지정합니다.
-* *Models* 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **새 파일**을 선택합니다.
+* Solution Pad에서 **RazorPagesMovie** 프로젝트를 마우스 오른쪽 단추로 클릭하고 **추가** > **새 폴더...** 를 선택합니다. 폴더 이름을 *Models*로 지정합니다.
+* *Models* 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **새 파일...** 을 선택합니다.
 * **새 파일** 대화 상자에서:
 
   * 왼쪽 창에서 **일반**을 선택합니다.
@@ -54,8 +56,6 @@ ms.locfileid: "74959084"
   * 클래스 이름을 **Movie**로 지정하고 **새로 만들기**를 선택합니다.
 
 [!INCLUDE [model 1b](~/includes/RP/model1b.md)]
-
-[!INCLUDE [model 2](~/includes/RP/model2.md)]
 
 ---
 
@@ -69,14 +69,14 @@ ms.locfileid: "74959084"
 
 *Pages/Movies* 폴더를 만듭니다.
 
-* *페이지* 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **새 폴더**를 선택합니다.
+* *Pages* 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **새 폴더**를 선택합니다.
 * 폴더 이름을 *Movies*로 지정합니다.
 
-*페이지/동영상* 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **스캐폴드된 새 항목**을 선택합니다.
+*Pages/Movies* 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **스캐폴드된 새 항목**을 선택합니다.
 
 ![이전 지침의 이미지입니다.](model/_static/sca.png)
 
-**스캐폴드 추가** 대화 상자에서 **Entity Framework(CRUD)를 사용한 Razor Pages** > **추가**를 선택합니다.
+**스캐폴드 추가** 대화 상자에서 **Entity Framework(CRUD)를 사용하여 Razor Pages** > **추가**를 선택합니다.
 
 ![이전 지침의 이미지입니다.](model/_static/add_scaffold.png)
 
@@ -120,22 +120,28 @@ ms.locfileid: "74959084"
 
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
-* 프로젝트 디렉터리(*Program.cs*, *Startup.cs* 및 *.csproj* 파일이 포함된 디렉터리)에서 명령 창을 엽니다.
-* 스캐폴딩 도구를 설치합니다.
+*Pages/Movies* 폴더를 만듭니다.
 
-  ```dotnetcli
-   dotnet tool install --global dotnet-aspnet-codegenerator
-   ```
+* *Pages* 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **새 폴더**를 선택합니다.
+* 폴더 이름을 *Movies*로 지정합니다.
 
-* 다음 명령을 실행합니다.
+*Pages/Movies* 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **새 스캐폴딩...** 을 선택합니다.
 
-  ```dotnetcli
-  dotnet aspnet-codegenerator razorpage -m Movie -dc RazorPagesMovieContext -udl -outDir Pages/Movies --referenceScriptLibraries
-  ```
+![이전 지침의 이미지입니다.](model/_static/scaMac.png)
 
-[!INCLUDE [explains scaffold gen params](~/includes/RP/model4.md)]
+**새 스캐폴딩** 대화 상자에서 **Entity Framework(CRUD)를 사용하여 Razor Pages** > **다음**을 선택합니다.
 
-[!INCLUDE [use SQL Server in production](~/includes/RP/sqlitedev.md)]
+![이전 지침의 이미지입니다.](model/_static/add_scaffoldMac.png)
+
+**Entity Framework(CRUD)를 사용하여 Razor Pages 추가** 대화 상자를 완료합니다.
+
+* **모델 클래스** 드롭다운에서 **동영상(RazorPagesMovie.Models)** 을 선택하거나 입력합니다.
+* **데이터 컨텍스트 클래스** 행에 새 클래스의 이름 RazorPagesMovie.**Data**.RazorPagesMovieContext를 입력합니다. [이 변경은](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) 필수는 아닙니다. 올바른 네임스페이스를 사용하여 데이터베이스 컨텍스트 클래스를 만듭니다.
+* **추가**를 선택합니다.
+
+![이전 지침의 이미지입니다.](model/_static/arpMac.png)
+
+*appsettings.json* 파일을 로컬 데이터베이스에 연결하는 데 사용된 연결 문자열로 업데이트합니다.
 
 ---
 
@@ -154,7 +160,20 @@ ms.locfileid: "74959084"
 
 생성되고 업데이트된 파일은 다음 섹션에서 설명합니다.
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+
+스캐폴드 프로세스는 다음 파일을 생성하고 업데이트합니다.
+
+* *Pages/Movies*: 만들기, 삭제, 세부 정보, 편집 및 인덱스입니다.
+* *Data/RazorPagesMovieContext.cs*
+
+### <a name="updated"></a>업데이트됨
+
+* *Startup.cs*
+
+생성되고 업데이트된 파일은 다음 섹션에서 설명합니다.
+
+# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 스캐폴드 프로세스는 다음 파일을 만듭니다.
 
@@ -308,8 +327,6 @@ Login failed for user 'User-name'.
 
 [!INCLUDE [model 1b](~/includes/RP/model1b.md)]
 
-[!INCLUDE [model 2](~/includes/RP/model2.md)]
-
 ---
 
 프로젝트를 빌드하여 컴파일 오류가 없는지 확인합니다.
@@ -322,14 +339,14 @@ Login failed for user 'User-name'.
 
 *Pages/Movies* 폴더를 만듭니다.
 
-* *페이지* 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **새 폴더**를 선택합니다.
+* *Pages* 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **새 폴더**를 선택합니다.
 * 폴더 이름을 *Movies*로 지정합니다.
 
-*페이지/동영상* 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **스캐폴드된 새 항목**을 선택합니다.
+*Pages/Movies* 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **스캐폴드된 새 항목**을 선택합니다.
 
 ![이전 지침의 이미지입니다.](model/_static/sca.png)
 
-**스캐폴드 추가** 대화 상자에서 **Entity Framework(CRUD)를 사용한 Razor Pages** > **추가**를 선택합니다.
+**스캐폴드 추가** 대화 상자에서 **Entity Framework(CRUD)를 사용하여 Razor Pages** > **추가**를 선택합니다.
 
 ![이전 지침의 이미지입니다.](model/_static/add_scaffold.png)
 
@@ -370,14 +387,28 @@ to use Data, it should not use models. That will make the namespace the same for
 
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
-* 프로젝트 디렉터리(*Program.cs*, *Startup.cs* 및 *.csproj* 파일이 포함된 디렉터리)에서 명령 창을 엽니다.
-* 다음 명령을 실행합니다.
+*Pages/Movies* 폴더를 만듭니다.
 
-  ```dotnetcli
-  dotnet aspnet-codegenerator razorpage -m Movie -dc RazorPagesMovieContext -udl -outDir Pages/Movies --referenceScriptLibraries
-  ```
+* *Pages* 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **새 폴더**를 선택합니다.
+* 폴더 이름을 *Movies*로 지정합니다.
 
-[!INCLUDE [explains scaffold gen params](~/includes/RP/model4.md)]
+*Pages/Movies* 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **스캐폴드된 새 항목**을 선택합니다.
+
+![이전 지침의 이미지입니다.](model/_static/scaMac.png)
+
+**새 스캐폴딩 추가** 대화 상자에서 **Entity Framework(CRUD)를 사용하여 Razor Pages** > **추가**를 선택합니다.
+
+![이전 지침의 이미지입니다.](model/_static/add_scaffoldMac.png)
+
+**Entity Framework(CRUD)를 사용하여 Razor Pages 추가** 대화 상자를 완료합니다.
+
+* **모델 클래스** 드롭다운에서 **동영상**을 선택하거나 입력합니다.
+* **데이터 컨텍스트 클래스** 행에 **RazorPagesMovieContext**를 입력하거나 선택합니다. 그러면 올바른 네임스페이스의 새 db 컨텍스트 클래스가 만들어집니다. 이 경우 클래스는 **RazorPagesMovie.Models.RazorPagesMovieContext**입니다.
+* **추가**를 선택합니다.
+
+![이전 지침의 이미지입니다.](model/_static/arpMac.png)
+
+*appsettings.json* 파일을 로컬 데이터베이스에 연결하는 데 사용된 연결 문자열로 업데이트합니다.
 
 ---
 
@@ -416,7 +447,7 @@ Add-Migration Initial
 Update-Database
 ```
 
-`Add-Migration` 명령은 초기 데이터베이스 스키마를 만드는 코드를 생성합니다. 스키마는 `DbContext`에 지정된 모델을 기반으로 합니다(*RazorPagesMovieContext.cs* 파일). `InitialCreate` 인수는 마이그레이션 이름을 지정하는 데 사용됩니다. 모든 이름을 사용할 수 있지만 규칙에 따라 마이그레이션을 설명하는 이름을 사용합니다. 자세한 내용은 <xref:data/ef-mvc/migrations>을 참조하세요.
+`Add-Migration` 명령은 초기 데이터베이스 스키마를 만드는 코드를 생성합니다. 스키마는 `DbContext`에 지정된 모델을 기반으로 합니다(*RazorPagesMovieContext.cs* 파일). `InitialCreate` 인수는 마이그레이션 이름을 지정하는 데 사용됩니다. 모든 이름을 사용할 수 있지만 규칙에 따라 마이그레이션을 설명하는 이름을 사용합니다. 자세한 내용은 <xref:data/ef-mvc/migrations>를 참조하세요.
 
 `Update-Database` 명령은 *Migrations/\<time-stamp>_InitialCreate.cs* 파일에서 `Up` 메서드를 실행합니다. `Up` 메서드는 데이터베이스를 만듭니다.
 
@@ -430,7 +461,7 @@ Update-Database
 
 ---
 > [!NOTE]
-> 이전 명령은 다음 경고를 생성합니다. "*엔터티 형식 'Movie'에서 10진수 열 'Price'의 형식이 지정되지 않았습니다. This will cause values to be silently truncated if they do not fit in the default precision and scale. 'HasColumnType()'을 사용하여 모든 값을 수용할 수 있는 SQL Server 열 형식을 명시적으로 지정합니다.*" 이 경고는 무시할 수 있으며 이후 자습서에서 수정될 예정입니다.
+> 이전 명령은 다음 경고를 생성합니다. "*엔터티 형식 'Movie'에서 10진수 열 'Price'의 형식이 지정되지 않았습니다. This will cause values to be silently truncated if they do not fit in the default precision and scale. 'HasColumnType()'을 사용하여 모든 값을 수용할 수 있는 SQL Server 열 형식을 명시적으로 지정합니다.* " 이 경고는 무시할 수 있으며 이후 자습서에서 수정될 예정입니다.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 

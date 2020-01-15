@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core에서 보기 구성 요소가 사용되는 방법 및 이를 앱에 추가하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/14/2019
+ms.date: 12/18/2019
 uid: mvc/views/view-components
-ms.openlocfilehash: e6990368519857a27b291d7d565c09072f23f1b0
-ms.sourcegitcommit: 7001657c00358b082734ba4273693b9b3ed35d2a
+ms.openlocfilehash: a4583d49eb0b42f1fa6e3d8c444d263cba34da79
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/31/2019
-ms.locfileid: "68670089"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75356840"
 ---
 # <a name="view-components-in-aspnet-core"></a>ASP.NET Core의 보기 구성 요소
 
@@ -42,7 +42,7 @@ ms.locfileid: "68670089"
 
 보기 구성 요소는 클래스(일반적으로 [ViewComponent](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponent)에서 파생됨)와 보기 구성 요소가 반환하는 결과(일반적으로 보기)의 두 부분으로 구성됩니다. 컨트롤러와 마찬가지로 보기 구성 요소는 POCO일 수 있지만 대부분의 개발자는 `ViewComponent`에서 파생하여 사용 가능한 메서드와 속성을 활용하려고 합니다.
 
-보기 구성 요소가 앱의 사양을 충족하는지 고려할 때 Razor 구성 요소를 대신 사용하는 방안도 고려해보세요. Razor 구성 요소 역시 태그와 C# 코드를 결합하여 다시 사용할 수 있는 UI 단위를 생성합니다. Razor 구성 요소는 클라이언트 쪽 UI 논리 및 컴퍼지션을 제공할 때 개발자 생산성을 위해 설계되었습니다. 자세한 내용은 <xref:blazor/components>을 참조하세요.
+보기 구성 요소가 앱의 사양을 충족하는지 고려할 때 Razor 구성 요소를 대신 사용하는 방안도 고려해보세요. Razor 구성 요소 역시 태그와 C# 코드를 결합하여 다시 사용할 수 있는 UI 단위를 생성합니다. Razor 구성 요소는 클라이언트 쪽 UI 논리 및 컴퍼지션을 제공할 때 개발자 생산성을 위해 설계되었습니다. 자세한 내용은 <xref:blazor/components>를 참조하세요.
 
 ## <a name="creating-a-view-component"></a>보기 구성 요소 만들기
 
@@ -62,7 +62,7 @@ ms.locfileid: "68670089"
 
 * 생성자 [종속성 주입](../../fundamentals/dependency-injection.md)을 완벽하게 지원합니다.
 
-* 컨트롤러 수명 주기에 참여하지 않으므로 보기 구성 요소에서는 [필터](../controllers/filters.md)를 사용할 수 없습니다.
+* 컨트롤러 수명 주기를 따르지 않습니다. 즉, 뷰 구성 요소에 [필터](../controllers/filters.md)를 사용할 수 없습니다.
 
 ### <a name="view-component-methods"></a>보기 구성 요소 메서드
 
@@ -87,6 +87,14 @@ ms.locfileid: "68670089"
 보기 구성 요소에 대한 기본 보기 이름은 *Default*로 이는 일반적으로 보기 파일의 이름이 *Default.cshtml*로 지정됨을 의미합니다. 보기 구성 요소 결과를 만들거나 `View` 메서드를 호출할 때 다른 보기 이름을 지정할 수 있습니다.
 
 보기 파일 이름을 *Default.cshtml*로 지정하고 *Views/Shared/Components/{View Component Name}/{View Name}* 경로를 사용하는 것이 좋습니다. 예제에 사용된 `PriorityList` 보기 구성 요소는 보기 구성 요소 보기로 *Views/Shared/Components/PriorityList/Default.cshtml*을 사용합니다.
+
+### <a name="customize-the-view-search-path"></a>보기 검색 경로 사용자 지정
+
+보기 검색 경로를 사용자 지정하려면 Razor의 <xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions.ViewLocationFormats> 컬렉션을 수정합니다. 예를 들어 "/Components/{View Component Name}/{View Name}" 경로 내에서 보기를 검색하려면 컬렉션에 새 항목을 추가합니다.
+
+[!code-cs[](view-components/samples_snapshot/2.x/Startup.cs?name=snippet_ViewLocationFormats&highlight=4)]
+
+이전 코드에서 "{0}" 자리 표시자는 "Components/{View Component Name}/{View Name}" 경로를 나타냅니다.
 
 ## <a name="invoking-a-view-component"></a>보기 구성 요소 호출
 
@@ -145,7 +153,7 @@ ASP.NET Core 1.1 이상에서는 [태그 도우미](xref:mvc/views/tag-helpers/i
 
 [!code-csharp[](view-components/sample/ViewCompFinal/Controllers/ToDoController.cs?name=snippet_IndexVC)]
 
-## <a name="walkthrough-creating-a-simple-view-component"></a>연습: 간단한 보기 구성 요소 만들기
+## <a name="walkthrough-creating-a-simple-view-component"></a>연습: 간단한 뷰 구성 요소 만들기
 
 시작 코드를 [다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/view-components/sample), 빌드 및 테스트합니다. *ToDo* 항목의 목록을 표시하는 `ToDo` 컨트롤러가 포함된 간단한 프로젝트입니다.
 
@@ -165,8 +173,8 @@ ASP.NET Core 1.1 이상에서는 [태그 도우미](xref:mvc/views/tag-helpers/i
 
   ```csharp
   [ViewComponent(Name = "PriorityList")]
-  public class XYZ : ViewComponent
-  ```
+     public class XYZ : ViewComponent
+     ```
 
 * 위의 `[ViewComponent]` 특성은 구성 요소와 연관된 보기를 찾을 때 `PriorityList` 이름을 사용하고, 보기에서 클래스 구성 요소를 참조할 때 "PriorityList" 문자열을 사용하도록 보기 구성 요소 선택기에게 지시합니다. 나중에 보다 자세히 설명합니다.
 * 이 구성 요소에서는 [종속성 주입](../../fundamentals/dependency-injection.md)을 사용하여 데이터 컨텍스트를 사용할 수 있도록 합니다.
@@ -184,7 +192,7 @@ ASP.NET Core 1.1 이상에서는 [태그 도우미](xref:mvc/views/tag-helpers/i
 
   [!code-cshtml[](view-components/sample/ViewCompFinal/Views/Shared/Components/PriorityList/Default1.cshtml)]
 
-   Razor 보기는 `TodoItem` 목록을 가져와서 표시합니다. 보기 구성 요소의 `InvokeAsync` 메서드가 보기의 이름을 전달하지 않은 경우(예제에서처럼) 규칙에 따라 보기 이름으로 *Default*가 사용됩니다. 자습서의 뒷부분에서 보기 이름을 전달하는 방법을 살펴봅니다. 특정 컨트롤러에 대한 기본 스타일 지정을 재정의하려면 컨트롤러 관련 보기 폴더에 보기를 추가합니다(예: *Views/ToDo/Components/PriorityList/Default.cshtml)*.
+   Razor 뷰는 `TodoItem` 목록을 가져와 표시합니다. 뷰 구성 요소 `InvokeAsync` 메서드가 뷰의 이름을 전달하지 않은 경우(샘플에서처럼) 규칙에 따라 뷰 이름으로 *Default*가 사용됩니다. 자습서의 뒷부분에서 뷰 이름을 전달하는 방법을 보여 줍니다. 특정 컨트롤러에 대한 기본 스타일 지정을 재정의하려면 컨트롤러 관련 뷰 폴더에 뷰를 추가합니다(예: *Views/ToDo/Components/PriorityList/Default.cshtml)* .
 
     보기 구성 요소가 컨트롤러에 관한 것이면 컨트롤러 관련 폴더에 추가할 수 있습니다(*Views/ToDo/Components/PriorityList/Default.cshtml*).
 
@@ -327,13 +335,13 @@ Razor 태그 파일에서 보기 구성 요소 태그 도우미를 사용합니�
 
 `PriorityList.Invoke`의 메서드 시그니처는 동기식이지만, Razor는 태그 파일에서 `Component.InvokeAsync`를 사용하여 메서드를 찾고 호출합니다.
 
-## <a name="all-view-component-parameters-are-required"></a>모든 보기 구성 요소 매개 변수는 필수
+## <a name="all-view-component-parameters-are-required"></a>모든 뷰 구성 요소 매개 변수 필요
 
-보기 구성 요소의 각 매개 변수는 필수 특성입니다. 이 [GitHub 이슈](https://github.com/aspnet/AspNetCore/issues/5011)를 참조하세요. 매개 변수가 하나라도 생략되면:
+뷰 구성 요소의 각 매개 변수는 필수 특성입니다. 이 [GitHub 문제](https://github.com/aspnet/AspNetCore/issues/5011)를 참조하세요. 매개 변수가 하나라도 생략되면
 
 * `InvokeAsync` 메서드 시그니처가 일치하지 않게 되므로 메서드가 실행되지 않습니다.
 * ViewComponent가 마크업을 렌더링하지 않습니다.
-* 오류가 던져지지 않습니다.
+* 오류가 throw되지 않습니다.
 
 ## <a name="additional-resources"></a>추가 자료
 

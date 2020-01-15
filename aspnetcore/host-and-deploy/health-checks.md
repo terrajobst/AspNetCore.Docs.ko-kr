@@ -5,14 +5,14 @@ description: 앱 및 데이터베이스와 같은 ASP.NET Core 인프라의 상�
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/13/2019
+ms.date: 12/15/2019
 uid: host-and-deploy/health-checks
-ms.openlocfilehash: 4a4606a58178018f0d71d467d4c8b6c9982c09dc
-ms.sourcegitcommit: 231780c8d7848943e5e9fd55e93f437f7e5a371d
+ms.openlocfilehash: dfd26b775b6c6a1af0108d34981d7ec3737980dd
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/15/2019
-ms.locfileid: "74116001"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75356123"
 ---
 # <a name="health-checks-in-aspnet-core"></a>ASP.NET Core의 상태 검사
 
@@ -32,7 +32,7 @@ ASP.NET Core는 앱 인프라 구성 요소의 상태를 보고하기 위해 상
 
 샘플 앱에는 이 항목에 설명된 시나리오의 예가 있습니다. 지정된 시나리오에 대해 샘플 앱을 실행하려면 명령 셸의 프로젝트 폴더에서 [dotnet run](/dotnet/core/tools/dotnet-run) 명령을 사용합니다. 샘플 앱의 사용 방법에 대한 자세한 내용은 샘플 앱의 *README.md* 파일과 이 항목의 시나리오 설명을 참조하세요.
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 상태 검사는 일반적으로 외부 모니터링 서비스 또는 컨테이너 오케스트레이터와 함께 사용되어 앱 상태를 검사합니다. 앱에 상태 검사를 추가하기 전에 사용할 모니터링 시스템을 결정합니다. 모니터링 시스템은 어떤 유형의 상태 검사를 만들고 그 엔드포인트를 구성하는 방법을 지정합니다.
 
@@ -221,7 +221,7 @@ app.UseEndpoints(endpoints =>
 
 ### <a name="enable-cross-origin-requests-cors"></a>원본 간 요청(CORS) 사용
 
-브라우저에서 수동으로 상태 검사를 수행하는 것이 일반적이지는 않지만, 상태 검사 엔드포인트에 `RequireCors`를 호출하여 CORS 미들웨어를 사용하도록 설정할 수 있습니다. `RequireCors` 오버로드는 CORS 정책 작성기 대리자(`CorsPolicyBuilder`) 또는 정책 이름을 허용합니다. 정책을 제공하지 않으면 기본 CORS 정책이 사용됩니다. 자세한 내용은 <xref:security/cors>을 참조하세요.
+브라우저에서 수동으로 상태 검사를 수행하는 것이 일반적이지는 않지만, 상태 검사 엔드포인트에 `RequireCors`를 호출하여 CORS 미들웨어를 사용하도록 설정할 수 있습니다. `RequireCors` 오버로드는 CORS 정책 작성기 대리자(`CorsPolicyBuilder`) 또는 정책 이름을 허용합니다. 정책을 제공하지 않으면 기본 CORS 정책이 사용됩니다. 자세한 내용은 <xref:security/cors>를 참조하세요.
 
 ## <a name="health-check-options"></a>상태 검사 옵션
 
@@ -300,9 +300,7 @@ app.UseEndpoints(endpoints =>
 
 ### <a name="customize-output"></a>출력 사용자 지정
 
-<xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.ResponseWriter> 옵션은 응답을 기록하는 데 사용되는 대리자를 가져오거나 설정합니다.
-
-`Startup.Configure`의 경우
+`Startup.Configure`에서 [HealthCheckOptions.ResponseWriter](xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.ResponseWriter) 옵션을 응답을 쓰기 위한 대리자로 설정합니다.
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -314,27 +312,19 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-기본 대리자는 [HealthReport.Status](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport.Status)의 문자열 값을 사용하여 최소 일반 텍스트 응답을 기록합니다. 다음 사용자 지정 대리자 `WriteResponse`는 사용자 지정 JSON 응답을 출력합니다.
+기본 대리자는 [HealthReport.Status](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport.Status)의 문자열 값을 사용하여 최소 일반 텍스트 응답을 기록합니다. 다음 사용자 지정 대리자는 사용자 지정 JSON 응답을 출력합니다.
 
-```csharp
-private static Task WriteResponse(HttpContext httpContext, HealthReport result)
-{
-    httpContext.Response.ContentType = "application/json";
+샘플 앱의 첫 번째 예제에서는 <xref:System.Text.Json?displayProperty=fullName>를 사용하는 방법을 보여 줍니다.
 
-    var json = new JObject(
-        new JProperty("status", result.Status.ToString()),
-        new JProperty("results", new JObject(result.Entries.Select(pair =>
-            new JProperty(pair.Key, new JObject(
-                new JProperty("status", pair.Value.Status.ToString()),
-                new JProperty("description", pair.Value.Description),
-                new JProperty("data", new JObject(pair.Value.Data.Select(
-                    p => new JProperty(p.Key, p.Value))))))))));
-    return httpContext.Response.WriteAsync(
-        json.ToString(Formatting.Indented));
-}
-```
+[!code-csharp[](health-checks/samples/3.x/HealthChecksSample/CustomWriterStartup.cs?name=snippet_WriteResponse_SystemTextJson)]
 
-상태 검사 시스템은 사용자가 선택한 모니터링 시스템에만 적용되는 형식이므로 복합 JSON 반환 형식에 대한 기본 제공 지원을 제공하지 않습니다. 필요에 따라 앞의 예제에서 `JObject`를 자유롭게 사용자 지정할 수 있습니다.
+두 번째 예제에서는 [Newtonsoft.json](https://www.nuget.org/packages/Newtonsoft.Json/)을 사용하는 방법을 보여 줍니다.
+
+[!code-csharp[](health-checks/samples/3.x/HealthChecksSample/CustomWriterStartup.cs?name=snippet_WriteResponse_NewtonSoftJson)]
+
+샘플 앱에서 `WriteResponse` 버전의 `Newtonsoft.Json`을 사용할 수 있도록 *CustomWriterStartup.cs*의 `SYSTEM_TEXT_JSON` [전처리기 지시문](xref:index#preprocessor-directives-in-sample-code)을 주석 처리합니다.
+
+상태 검사 API는 사용자가 선택한 모니터링 시스템에만 적용되는 형식이므로 복합 JSON 반환 형식에 대한 기본 제공 지원을 제공하지 않습니다. 앞의 예제에서 응답을 필요에 따라 사용자 지정합니다. `System.Text.Json`을 사용한 역직렬화에 대한 자세한 내용은 [.NET에서 JSON을 직렬화 및 역직렬화하는 방법](/dotnet/standard/serialization/system-text-json-how-to)을 참조하세요.
 
 ## <a name="database-probe"></a>데이터베이스 프로브
 
@@ -531,11 +521,11 @@ spec:
 
 `Startup.ConfigureServices`의 <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*>에 상태 검사 서비스를 등록합니다. <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck*>에 전달하여 상태 검사를 사용하는 대신 `MemoryHealthCheck`는 서비스로 등록됩니다. 모든 <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck> 등록된 서비스는 상태 검사 서비스 및 미들웨어에 사용할 수 있습니다. 상태 확인 서비스를 Singleton 서비스로 등록하는 것이 좋습니다.
 
-샘플 앱(*CustomWriterStartup.cs*)에서:
+샘플 앱의 *CustomWriterStartup.cs*에서:
 
 [!code-csharp[](health-checks/samples/3.x/HealthChecksSample/CustomWriterStartup.cs?name=snippet_ConfigureServices&highlight=4)]
 
-상태 검사 엔드포인트는 `Startup.Configure`에서 `MapHealthChecks`를 호출하여 만듭니다. 상태 검사가 실행될 때 사용자 정의 JSON 응답을 출력하기 위해 `ResponseWriter` 속성에 `WriteResponse` 대리자가 제공됩니다.
+상태 검사 엔드포인트는 `Startup.Configure`에서 `MapHealthChecks`를 호출하여 만듭니다. 상태 검사를 실행하는 경우 `WriteResponse` 대리자가 사용자 지정 JSON 응답을 출력하는 출력에 대한 <Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.ResponseWriter> 속성에 제공됩니다.
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -547,9 +537,7 @@ app.UseEndpoints(endpoints =>
 }
 ```
 
-`WriteResponse` 메서드는 `CompositeHealthCheckResult`를 JSON 객체로 형식 지정하고 상태 검사 응답을 위해 JSON 출력을 생성합니다.
-
-[!code-csharp[](health-checks/samples/3.x/HealthChecksSample/CustomWriterStartup.cs?name=snippet_WriteResponse)]
+`WriteResponse` 대리자는 `CompositeHealthCheckResult`를 JSON 객체로 형식 지정하고 상태 검사 응답을 위해 JSON 출력을 생성합니다. 자세한 내용은 [출력 사용자 지정](#customize-output) 섹션을 참조하세요.
 
 샘플 앱을 사용하여 사용자 지정 응답 기록기 출력으로 메트릭 기반 프로브를 실행하려면 명령 셸의 프로젝트 폴더에서 다음 명령을 실행합니다.
 
@@ -795,7 +783,7 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-자세한 내용은 <xref:fundamentals/middleware/index#use-run-and-map>을 참조하세요.
+자세한 내용은 <xref:fundamentals/middleware/index#use-run-and-map>를 참조하세요.
 
 ::: moniker-end
 
@@ -813,7 +801,7 @@ ASP.NET Core는 앱 인프라 구성 요소의 상태를 보고하기 위해 상
 
 샘플 앱에는 이 항목에 설명된 시나리오의 예가 있습니다. 지정된 시나리오에 대해 샘플 앱을 실행하려면 명령 셸의 프로젝트 폴더에서 [dotnet run](/dotnet/core/tools/dotnet-run) 명령을 사용합니다. 샘플 앱의 사용 방법에 대한 자세한 내용은 샘플 앱의 *README.md* 파일과 이 항목의 시나리오 설명을 참조하세요.
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 상태 검사는 일반적으로 외부 모니터링 서비스 또는 컨테이너 오케스트레이터와 함께 사용되어 앱 상태를 검사합니다. 앱에 상태 검사를 추가하기 전에 사용할 모니터링 시스템을 결정합니다. 모니터링 시스템은 어떤 유형의 상태 검사를 만들고 그 엔드포인트를 구성하는 방법을 지정합니다.
 
@@ -1483,6 +1471,6 @@ app.MapWhen(
 app.UseMvc();
 ```
 
-자세한 내용은 <xref:fundamentals/middleware/index#use-run-and-map>을 참조하세요.
+자세한 내용은 <xref:fundamentals/middleware/index#use-run-and-map>를 참조하세요.
 
 ::: moniker-end

@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: tutorials/first-web-api
-ms.openlocfilehash: 4377d7d1895b80b3c98a5b480c0f42820f11fbb8
-ms.sourcegitcommit: 4e3edff24ba6e43a103fee1b126c9826241bb37b
+ms.openlocfilehash: 3bf930d19684e84365f0ff0255fccd2939fb3f39
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/10/2019
-ms.locfileid: "74959114"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75354916"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>자습서: ASP.NET Core를 사용하여 웹 API 만들기
 
@@ -48,7 +48,7 @@ ms.locfileid: "74959114"
 
 ![클라이언트는 왼쪽에 상자로 표시됩니다. 클라이언트는 요청을 제출하고 오른쪽에 그려진 상자인 애플리케이션에서 응답을 받습니다. 애플리케이션 상자 내에서 3개의 상자는 컨트롤러, 모델 및 데이터 액세스 계층을 나타냅니다. 요청은 애플리케이션의 컨트롤러로 들어오고 읽기/쓰기 작업은 컨트롤러와 데이터 액세스 계층 간에 발생합니다. 모델은 직렬화되며 응답에서 클라이언트에 반환됩니다.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -68,7 +68,7 @@ ms.locfileid: "74959114"
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.
+* **파일 메뉴**에서 **새로 만들기** > **프로젝트**를 선택합니다.
 * **ASP.NET Core 웹 애플리케이션** 템플릿을 선택하고 **다음**을 클릭합니다.
 * 프로젝트 이름을 *TodoApi*로 지정하고 **만들기**를 클릭합니다.
 * **새 ASP.NET Core 웹 애플리케이션 만들기** 대화 상자에서 **.NET Core** 및 **ASP.NET Core 3.1**이 선택되었는지 확인합니다. **API** 템플릿을 선택하고 **만들기**를 클릭합니다.
@@ -322,7 +322,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 * 웹앱을 시작합니다.
 * Postman을 시작합니다.
 * **SSL 인증서 확인**을 사용하지 않도록 설정합니다.
-* **파일** > **설정**(**일반** 탭)에서 **SSL 인증서 확인**을 사용하지 않게 설정합니다.
+* **파일** > **설정**(**일반** 탭)에서 **SSL 인증서 확인**을 사용하지 않도록 설정합니다.
     > [!WARNING]
     > 컨트롤러를 테스트한 후에 SSL 인증서 확인을 다시 사용하도록 설정합니다.
 
@@ -451,8 +451,6 @@ ID = 1인 할 일 항목을 업데이트하고 해당 이름을 “feed fish”�
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Delete)]
 
-`DeleteTodoItem` 응답은 [204(콘텐츠 없음)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html)입니다.
-
 ### <a name="test-the-deletetodoitem-method"></a>DeleteTodoItem 메서드 테스트
 
 Postman을 사용하여 할 일 항목을 삭제합니다.
@@ -463,7 +461,7 @@ Postman을 사용하여 할 일 항목을 삭제합니다.
 
 ## <a name="call-the-web-api-with-javascript"></a>JavaScript를 사용하여 웹 API 호출
 
-단계별 지침은 [자습서: JavaScript로 ASP.NET Core 웹 API 호출하기](xref:tutorials/web-api-javascript)를 참조하세요.
+[자습서: JavaScript로 ASP.NET Core 웹 API 호출하기](xref:tutorials/web-api-javascript)를 참조하세요.
 
 ::: moniker-end
 
@@ -499,7 +497,7 @@ Postman을 사용하여 할 일 항목을 삭제합니다.
 
 ![클라이언트는 왼쪽에 상자로 표시됩니다. 클라이언트는 요청을 제출하고 오른쪽에 그려진 상자인 애플리케이션에서 응답을 받습니다. 애플리케이션 상자 내에서 3개의 상자는 컨트롤러, 모델 및 데이터 액세스 계층을 나타냅니다. 요청은 애플리케이션의 컨트롤러로 들어오고 읽기/쓰기 작업은 컨트롤러와 데이터 액세스 계층 간에 발생합니다. 모델은 직렬화되며 응답에서 클라이언트에 반환됩니다.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -519,7 +517,7 @@ Postman을 사용하여 할 일 항목을 삭제합니다.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.
+* **파일 메뉴**에서 **새로 만들기** > **프로젝트**를 선택합니다.
 * **ASP.NET Core 웹 애플리케이션** 템플릿을 선택하고 **다음**을 클릭합니다.
 * 프로젝트 이름을 *TodoApi*로 지정하고 **만들기**를 클릭합니다.
 * **새 ASP.NET Core 웹 애플리케이션 만들기** 대화 상자에서 **.NET Core** 및 **ASP.NET Core 2.2**가 선택되었는지 확인합니다. **API** 템플릿을 선택하고 **만들기**를 클릭합니다. **Docker 지원 사용**을 선택하지 **마세요**.
@@ -748,7 +746,7 @@ ASP.NET Core에서는 DB 컨텍스트와 같은 서비스를 [DI(종속성 주�
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **파일** > **설정**(**일반** 탭)에서 **SSL 인증서 확인**을 사용하지 않게 설정합니다.
+* **파일** > **설정**(**일반** 탭)에서 **SSL 인증서 확인**을 사용하지 않도록 설정합니다.
 
 # <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 

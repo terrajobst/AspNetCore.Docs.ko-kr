@@ -5,14 +5,14 @@ description: ASP.NET Core 앱의 Azure App Service 및 인터넷 정보 서비�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/20/2019
+ms.date: 01/10/2020
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: b0f5d44f153a095a6108a12ee91f4cc46fe0a0de
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
-ms.translationtype: HT
+ms.openlocfilehash: 23c90c33d197d26d1c4ad758449e318e20ef3760
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75829012"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75952145"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Azure App Service 및 IIS에 대 한 ASP.NET Core 문제 해결
 
@@ -433,7 +433,7 @@ stdout 로깅을 사용할 수 없는 경우 다음 단계를 따릅니다.
 
 애플리케이션 이벤트 로그에 액세스합니다.
 
-1. [시작] 메뉴를 열고 **이벤트 뷰어**를 검색한 다음, **이벤트 뷰어** 앱을 선택합니다.
+1. 시작 메뉴를 열고 *이벤트 뷰어*를 검색 한 다음 **이벤트 뷰어** 앱을 선택 합니다.
 1. **이벤트 뷰어**에서 **Windows 로그** 노드를 엽니다.
 1. **애플리케이션**을 선택하여 애플리케이션 이벤트 로그를 엽니다.
 1. 실패한 앱과 연결된 오류를 검색합니다. 오류는 ‘소스’ 열에서 ‘IIS AspNetCore 모듈’ 또는 ‘IIS Express AspNetCore 모듈’의 값을 포함합니다.
@@ -597,10 +597,10 @@ stdout 로그를 사용하고 보려면:
 
 ## <a name="clear-package-caches"></a>패키지 캐시 지우기
 
-경우에 따라 개발 컴퓨터에서 .NET Core SDK를 업그레이드 하거나 앱 내에서 패키지 버전을 변경 하는 즉시 작동 하는 앱이 실패 합니다. 경우에 따라 중요한 업그레이드를 수행할 때 일관되지 않은 패키지로 인해 응용 프로그램이 중단될 수 있습니다. 이러한 대부분의 문제는 다음 지침에 따라 수정할 수 있습니다.
+작동 하는 앱은 개발 컴퓨터에서 .NET Core SDK를 업그레이드 하거나 앱 내에서 패키지 버전을 변경 하는 즉시 실패할 수 있습니다. 경우에 따라 중요한 업그레이드를 수행할 때 일관되지 않은 패키지로 인해 응용 프로그램이 중단될 수 있습니다. 이러한 대부분의 문제는 다음 지침에 따라 수정할 수 있습니다.
 
 1. *bin* 및 *obj* 폴더를 삭제합니다.
-1. 명령 셸에서 `dotnet nuget locals all --clear`를 실행 하 여 패키지 캐시를 지웁니다.
+1. 명령 셸에서 [dotnet nuget 로컬 모두](/dotnet/core/tools/dotnet-nuget-locals) 를 실행 하 여 패키지 캐시를 지웁니다.
 
    [Nuget](https://www.nuget.org/downloads) 도구를 사용 하 여 패키지 캐시를 지우면 서 `nuget locals all -clear`명령을 실행할 수도 있습니다. *nuget.exe*는 Windows 데스크톱 운영 체제와 함께 제공되는 설치가 아니므로 [NuGet 웹 사이트](https://www.nuget.org/downloads)에서 별도로 다운로드해야 합니다.
 
