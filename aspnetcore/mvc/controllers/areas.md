@@ -5,12 +5,12 @@ description: 관련 기능을 별도의 네임스페이스(라우팅용) 및 폴
 ms.author: riande
 ms.date: 12/05/2019
 uid: mvc/controllers/areas
-ms.openlocfilehash: 7e02a21361e0e2148b29a3ae0f1ba25e68239e13
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 1066f4ce104e507abe63302fd3523a3a7a8dfde9
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74881120"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75828245"
 ---
 # <a name="areas-in-aspnet-core"></a>ASP.NET Core의 영역
 
@@ -61,7 +61,7 @@ Razor Pages를 사용하는 경우 이 문서의 [Razor Pages를 사용한 영�
     * Services
       * Controllers
         * HomeController.cs
-      * Views
+      * 뷰
         * Home
           * Index.cshtml
 
@@ -96,7 +96,7 @@ Razor Pages를 사용하는 경우 이 문서의 [Razor Pages를 사용한 영�
 
 [!code-csharp[](areas/samples/MVCareas/StartupMapAreaRoute.cs?name=snippet&highlight=18-27)]
 
-ASP.NET Core 2.2에서 `MapAreaRoute`를 사용하는 경우에는 [이 GitHub 이슈](https://github.com/aspnet/AspNetCore/issues/7772)를 참조하세요.
+ASP.NET Core 2.2에서 `MapAreaRoute`를 사용하는 경우에는 [이 GitHub 이슈](https://github.com/dotnet/AspNetCore/issues/7772)를 참조하세요.
 
 자세한 내용은 [영역 라우팅](xref:mvc/controllers/routing#areas)을 참조하세요.
 

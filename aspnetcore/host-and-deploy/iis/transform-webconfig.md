@@ -5,14 +5,14 @@ description: ASP.NET Core 앱을 게시할 때 web.config 파일을 변환하는
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/07/2019
+ms.date: 01/13/2020
 uid: host-and-deploy/iis/transform-webconfig
-ms.openlocfilehash: d28c362a200ad433e316bc1af710231a169a30a4
-ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
+ms.openlocfilehash: ef627de70c6aea44962d2187c4d401baab6557ae
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/07/2019
-ms.locfileid: "72007307"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75952040"
 ---
 # <a name="transform-webconfig"></a>web.config 변환
 
@@ -182,5 +182,5 @@ dotnet publish /p:IsWebConfigTransformDisabled=true
 
 ## <a name="additional-resources"></a>추가 자료
 
-* [웹 애플리케이션 프로젝트 배포를 위한 Web.config 변환 구문](https://go.microsoft.com/fwlink/?LinkId=301874)
-* [Visual Studio를 사용하여 웹 프로젝트 배포를 위한 Web.config 변환 구문](https://docs.microsoft.com/previous-versions/aspnet/dd465326(v=vs.110))
+* [웹 애플리케이션 프로젝트 배포를 위한 Web.config 변환 구문](/previous-versions/dd465326(v=vs.100))
+* [Visual Studio를 사용하여 웹 프로젝트 배포를 위한 Web.config 변환 구문](/previous-versions/aspnet/dd465326(v=vs.110))

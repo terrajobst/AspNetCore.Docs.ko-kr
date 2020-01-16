@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/18/2019
 uid: mvc/views/view-components
-ms.openlocfilehash: a4583d49eb0b42f1fa6e3d8c444d263cba34da79
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: 8df070b580b6125db6616b33a81f3ffebad69f3a
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75356840"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75828921"
 ---
 # <a name="view-components-in-aspnet-core"></a>ASP.NET Core의 보기 구성 요소
 
@@ -337,7 +337,7 @@ Razor 태그 파일에서 보기 구성 요소 태그 도우미를 사용합니�
 
 ## <a name="all-view-component-parameters-are-required"></a>모든 뷰 구성 요소 매개 변수 필요
 
-뷰 구성 요소의 각 매개 변수는 필수 특성입니다. 이 [GitHub 문제](https://github.com/aspnet/AspNetCore/issues/5011)를 참조하세요. 매개 변수가 하나라도 생략되면
+뷰 구성 요소의 각 매개 변수는 필수 특성입니다. 이 [GitHub 문제](https://github.com/dotnet/AspNetCore/issues/5011)를 참조하세요. 매개 변수가 하나라도 생략되면
 
 * `InvokeAsync` 메서드 시그니처가 일치하지 않게 되므로 메서드가 실행되지 않습니다.
 * ViewComponent가 마크업을 렌더링하지 않습니다.

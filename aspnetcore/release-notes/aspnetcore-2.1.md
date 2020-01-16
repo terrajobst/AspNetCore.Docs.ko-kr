@@ -8,12 +8,12 @@ ms.date: 12/05/2019
 no-loc:
 - SignalR
 uid: aspnetcore-2.1
-ms.openlocfilehash: d969b4caab44e3e50b3a0202b25864921d6d01dc
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 57fe6c4e32ad666987c782fac75ddb19e3d3b5c7
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880853"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829142"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>ASP.NET Core 2.1의 새로운 기능
 
@@ -169,7 +169,7 @@ Angular 템플릿은 Angular CLI에 기반하고 React 템플릿은 create-react
 
 <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> 메서드를 사용하면 ASP.NET Core MVC 2.1 이상에서 도입된 주요 동작 변경 내용을 앱이 옵트인(opt-in) 또는 옵트아웃(opt-out)할 수 있습니다.
 
-자세한 내용은 <xref:mvc/compatibility-version>을 참조하세요.
+자세한 내용은 <xref:mvc/compatibility-version>를 참조하세요.
 
 ## <a name="migrate-from-20-to-21"></a>2\.0에서 2.1로 마이그레이션
 
@@ -177,4 +177,4 @@ Angular 템플릿은 Angular CLI에 기반하고 React 템플릿은 create-react
 
 ## <a name="additional-information"></a>추가 정보
 
-전체 변경 내용 목록을 보려면 [ASP.NET Core 2.1 릴리스 정보](https://github.com/aspnet/Home/releases/tag/2.1.0)를 참조하세요.
+전체 변경 내용 목록을 보려면 [ASP.NET Core 2.1 릴리스 정보](https://github.com/dotnet/aspnetcore/releases/tag/2.1.0)를 참조하세요.
