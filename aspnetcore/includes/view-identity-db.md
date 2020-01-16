@@ -2,7 +2,7 @@
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio) 
 
-* **뷰** 메뉴에서 **SQL Server 개체 탐색기** (SSOX).
+* **보기** 메뉴에서 **SQL Server 개체 탐색기**(SSOX)를 선택합니다.
 * 이동할 **(localdb) (SQL Server 13) MSSQLLocalDB**합니다. 마우스 오른쪽 단추로 클릭 **dbo입니다. AspNetUsers** > **데이터를 볼**:
 
 ![SQL Server 개체 탐색기에서 AspNetUsers 테이블의 상황에 맞는 메뉴](~/security/authentication/accconfirm/_static/ssox.png)
