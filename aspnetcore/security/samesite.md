@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/03/2019
 uid: security/samesite
-ms.openlocfilehash: 988069a66cc4772583444303948bff2e47ff4310
-ms.sourcegitcommit: 169ea5116de729c803685725d96450a270bc55b7
+ms.openlocfilehash: b344ed8f539979210980b3421659207edd513f32
+ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/03/2019
-ms.locfileid: "74733988"
+ms.lasthandoff: 01/16/2020
+ms.locfileid: "76146435"
 ---
 # <a name="work-with-samesite-cookies-in-aspnet-core"></a>ASP.NET Core에서 SameSite 쿠키 작업
 
@@ -36,7 +36,7 @@ SameSite. 기본값을 [추가](xref:Microsoft.AspNetCore.Http.IResponseCookies.
 
 쿠키를 내보내는 모든 ASP.NET Core 구성 요소는 해당 시나리오에 적합 한 설정을 사용 하 여 이전 기본값을 재정의 합니다. 재정의 된 이전 기본값은 변경 되지 않았습니다.
 
-| 구성 요소 | 쿠키가 | 기본 |
+| 구성 요소 | 쿠키 | 기본 |
 | ------------- | ------------- |
 | <xref:Microsoft.AspNetCore.Http.CookieBuilder> | <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite> | `Unspecified` |
 | <xref:Microsoft.AspNetCore.Http.HttpContext.Session>  | [SessionOptions](xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie) |`Lax` |
@@ -72,7 +72,7 @@ ASP.NET Core 3.0 이상에서 SameSite 기본값은 일관 되지 않은 클라�
 
 SameSite 지원은 [2016 초안 표준을](https://tools.ietf.org/html/draft-west-first-party-cookies-07#section-4.1)사용 하 여 2.0의 ASP.NET Core에서 처음 구현 되었습니다. 2016 표준은 옵트인 (opt in) 되었습니다. 기본적으로 여러 쿠키를 `Lax`로 설정 하 여 옵트인 (opt in)을 ASP.NET Core 합니다. 인증에 몇 가지 [문제가 발생](https://github.com/aspnet/Announcements/issues/318) 한 후에는 대부분의 SameSite 사용이 [사용 되지 않도록 설정](https://github.com/aspnet/Announcements/issues/348)되었습니다.
 
-11 월 2019에 패치를 실행 하 여 2016 표준에서 2019 standard로 업데이트 했습니다. [SameSite 사양의 2019 초안](https://github.com/aspnet/Announcements/issues/390):
+11 월 2019에 [패치](https://devblogs.microsoft.com/dotnet/net-core-November-2019/) 를 실행 하 여 2016 표준에서 2019 standard로 업데이트 했습니다. [SameSite 사양의 2019 초안](https://github.com/aspnet/Announcements/issues/390):
 
 * 는 이전 버전과 호환 **되지 않습니다** . 2016 초안. 자세한 내용은이 문서의 [이전 브라우저 지원](#sob) 을 참조 하세요.
 * 기본적으로 `SameSite=Lax`로 처리 되는 쿠키를 지정 합니다.
@@ -146,7 +146,7 @@ Google은 이전 chrome 버전을 사용할 수 없도록 설정 하지 않습�
 
 ### <a name="test-with-safari"></a>Safari를 사용 하 여 테스트
 
-Safari 12는 이전 초안을 엄격 하 게 구현 했으며 새 `None` 값이 쿠키에 있는 경우 실패 합니다. 이 문서에서 [이전 브라우저를 지 원하는](#sob) 브라우저 검색 코드를 통해 `None`를 방지할 수 있습니다. MSAL, ADAL 또는 사용 중인 라이브러리를 사용 하 여 Safari 12, Safari 13 및 WebKit 기반 OS 스타일 로그인을 테스트 합니다. 문제는 기본 OS 버전에 따라 달라 집니다. OSX Mojave (10.14) 및 iOS 12는 새로운 SameSite 동작의 호환성 문제를 해결 하는 것으로 알려져 있습니다. OS를 OSX Catalina.properties (10.15) 또는 iOS 13로 업그레이드 하면 문제가 해결 됩니다. Safari에는 현재 새 사양 동작 테스트를 위한 옵트인 플래그가 없습니다.
+Safari 12는 이전 초안을 엄격 하 게 구현 했으며 새 `None` 값이 쿠키에 있는 경우 실패 합니다. 이 문서에서 [이전 브라우저를 지 원하는](#sob) 브라우저 검색 코드를 통해 `None`를 방지할 수 있습니다. MSAL, ADAL 또는 사용 중인 라이브러리를 사용 하 여 Safari 12, Safari 13 및 WebKit 기반 OS 스타일 로그인을 테스트 합니다. 문제는 기본 OS 버전에 따라 달라집니다. OSX Mojave (10.14) 및 iOS 12는 새로운 SameSite 동작의 호환성 문제를 해결 하는 것으로 알려져 있습니다. OS를 OSX Catalina.properties (10.15) 또는 iOS 13로 업그레이드 하면 문제가 해결 됩니다. Safari에는 현재 새 사양 동작 테스트를 위한 옵트인 플래그가 없습니다.
 
 ### <a name="test-with-firefox"></a>Firefox로 테스트
 
@@ -162,9 +162,10 @@ SameSite 플래그는 `edge://flags/#same-site-by-default-cookies` 페이지에 
 
 ### <a name="test-with-electron"></a>전자로 테스트
 
-전자의 버전에는 이전 버전의 Chromium가 포함 되어 있습니다. 예를 들어 팀에서 사용 하는 전자의 버전은 Chromium 66 이며,이는 이전 동작을 보여 주는 것입니다. 제품에서 사용 하는 전자 제품 버전으로 고유한 호환성 테스트를 수행 해야 합니다. 다음 섹션에서 [이전 브라우저 지원](#sob) 을 참조 하세요.
+Electron 버전에는 이전 버전의 Chromium이 포함되어 있습니다. 예를 들어 팀에서 사용 하는 전자의 버전은 Chromium 66 이며,이는 이전 동작을 보여 주는 것입니다. 제품에서 사용 하는 전자 제품 버전으로 고유한 호환성 테스트를 수행 해야 합니다. 다음 섹션에서 [이전 브라우저 지원](#sob) 을 참조 하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 
 * [Chromium 블로그: 개발자: 새 SameSite를 사용할 준비가 되었습니다. 보안 쿠키 설정](https://blog.chromium.org/2019/10/developers-get-ready-for-new.html)
 * [SameSite 쿠키 설명](https://web.dev/samesite-cookies-explained/)
+* [11 월 2019 패치](https://devblogs.microsoft.com/dotnet/net-core-November-2019/)

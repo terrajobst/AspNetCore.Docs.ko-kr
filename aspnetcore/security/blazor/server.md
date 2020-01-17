@@ -2,20 +2,20 @@
 title: Blazor Server 앱 보안 ASP.NET Core
 author: guardrex
 description: Blazor Server 앱에 대 한 보안 위협을 완화 하는 방법에 대해 알아봅니다.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 12/18/2019
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/server
-ms.openlocfilehash: 2d644b84b304a31ad0debc16164ad155c7f7da65
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: d87aac02137681e62cf8f5cbd4dc8b0be6f8431e
+ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74944284"
+ms.lasthandoff: 01/16/2020
+ms.locfileid: "76146305"
 ---
 # <a name="secure-aspnet-core-opno-locblazor-server-apps"></a>Blazor Server 앱 보안 ASP.NET Core
 
@@ -206,7 +206,7 @@ Blazor 서버 이벤트는 비동기적 이므로 새 렌더링을 생성 하 �
 
 ### <a name="guard-against-multiple-dispatches"></a>여러 디스패치 방지
 
-이벤트 콜백에서 외부 서비스 또는 데이터베이스에서 데이터를 가져오는 것과 같이 장기 실행 작업을 호출 하는 경우 가드를 사용 하는 것이 좋습니다. 가드는 작업이 진행 중인 동안 시각적 피드백을 사용 하 여 사용자가 여러 작업을 큐에 대기 시킬 수 없도록 합니다. 다음 구성 요소 코드는 서버에서 데이터를 가져오는 `GetForecastAsync` 동안 `true` `isLoading` 설정 합니다. `isLoading` `true`되는 동안에는 UI에서 단추가 사용 하지 않도록 설정 됩니다.
+이벤트 콜백에서 외부 서비스 또는 데이터베이스에서 데이터를 가져오는 것과 같이 장기 실행 작업을 비동기적으로 호출 하는 경우 가드를 사용 하는 것이 좋습니다. 가드는 작업이 진행 중인 동안 시각적 피드백을 사용 하 여 사용자가 여러 작업을 큐에 대기 시킬 수 없도록 합니다. 다음 구성 요소 코드는 서버에서 데이터를 가져오는 `GetForecastAsync` 동안 `true` `isLoading` 설정 합니다. `isLoading` `true`되는 동안에는 UI에서 단추가 사용 하지 않도록 설정 됩니다.
 
 ```razor
 @page "/fetchdata"
@@ -230,6 +230,8 @@ Blazor 서버 이벤트는 비동기적 이므로 새 렌더링을 생성 하 �
     }
 }
 ```
+
+이전 예제에서 보여 주는 가드 패턴은 백그라운드 작업이 `async`-`await` 패턴으로 비동기적으로 실행 되는 경우 작동 합니다.
 
 ### <a name="cancel-early-and-avoid-use-after-dispose"></a>조기에 취소 하 고 사용 방지-삭제 후
 
@@ -292,7 +294,7 @@ ASP.NET Core apps를 보호 하기 위한 지침은 Blazor Server 앱에 적용 
 다음을 사용 하 여 자세한 오류 사용:
 
 * `CircuitOptions.DetailedErrors`.
-* `DetailedErrors` 구성 키입니다. 예를 들어 `ASPNETCORE_DETAILEDERRORS` 환경 변수를 `true`값으로 설정 합니다.
+* 구성 키를 `DetailedErrors` 합니다. 예를 들어 `ASPNETCORE_DETAILEDERRORS` 환경 변수를 `true`값으로 설정 합니다.
 
 > [!WARNING]
 > 인터넷의 클라이언트에 오류 정보를 노출 하는 것은 항상 피해 야 하는 보안 위험입니다.
