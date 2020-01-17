@@ -3,9 +3,9 @@ Identity 스캐폴더를 실행합니다.
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * **솔루션 탐색기**에서 프로젝트 > **추가** > **스캐폴드 항목 새로 만들기**를 마우스 오른쪽 단추로 클릭합니다.
-* **새 스캐폴드 항목 추가** 대화 상자의 왼쪽된 창에서 **ID** > **추가**를 선택합니다.
+* **새 스캐폴드 항목 추가** 대화 상자의 왼쪽 창에서 **ID** > **추가**를 선택합니다.
 * **ID 추가** 대화 상자에서 원하는 옵션을 선택합니다.
-  * 기존 레이아웃 페이지를 선택하세요. 그렇지 않으면 잘못된 태그로 사용하여 레이아웃 파일을 덮어쓰게 됩니다. 예를 들어 Razor Pages에 대한 `~/Views/Shared/_Layout.cshtml`이나 MVC 프로젝트에 대한 `~/Pages/Shared/_Layout.cshtml`을 선택합니다.
+  * 기존 레이아웃 페이지를 선택하세요. 그렇지 않으면 잘못된 태그로 레이아웃 파일을 덮어쓰게 됩니다. 예를 들어 Razor Pages에 대한 `~/Views/Shared/_Layout.cshtml`이나 MVC 프로젝트에 대한 `~/Pages/Shared/_Layout.cshtml`을 선택합니다.
   * **+** 단추를 선택해서 새로운 **데이터 컨텍스트 클래스**를 생성합니다.
 * **추가**를 선택합니다.
 
