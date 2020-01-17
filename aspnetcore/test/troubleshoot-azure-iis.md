@@ -5,14 +5,14 @@ description: ASP.NET Core 앱의 Azure App Service 및 인터넷 정보 서비�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/20/2019
+ms.date: 01/10/2020
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 49a0f59fb6930235de10c726f3695f2a5352efb2
-ms.sourcegitcommit: 8157e5a351f49aeef3769f7d38b787b4386aad5f
+ms.openlocfilehash: 23c90c33d197d26d1c4ad758449e318e20ef3760
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/20/2019
-ms.locfileid: "74251973"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75952145"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Azure App Service 및 IIS에 대 한 ASP.NET Core 문제 해결
 
@@ -63,7 +63,7 @@ The Web server is configured to not list the contents of this directory.
 * 배포 프로세스에서 앱의 모든 파일 및 폴더를 호스팅 시스템의 배포 폴더로 이동 하지 못했습니다.
 * Web.config *파일이 배포* 에 없거나 *web.config 파일 내용의* 형식이 잘못 되었습니다.
 
-다음 단계를 수행 합니다.
+다음 단계를 수행합니다.
 
 1. 호스팅 시스템의 배포 폴더에서 모든 파일과 폴더를 삭제 합니다.
 1. Visual Studio, PowerShell 또는 수동 배포와 같은 일반적인 배포 방법을 사용 하 여 앱의 *게시* 폴더 내용을 호스팅 시스템에 다시 배포 합니다.
@@ -109,7 +109,7 @@ The Web server is configured to not list the contents of this directory.
 
 * [Microsoft 지원](https://support.microsoft.com/oas/default.aspx?prid=15832)에 문의하세요(**개발자 도구**를 선택한 다음, **ASP.NET Core** 선택).
 * Stack Overflow에 대해 질문하세요.
-* [GitHub 리포지토리](https://github.com/aspnet/AspNetCore)에 문제를 제기하세요.
+* [GitHub 리포지토리](https://github.com/dotnet/AspNetCore)에 문제를 제기하세요.
 
 ### <a name="50030-in-process-startup-failure"></a>500.30 In-Process 시작 실패
 
@@ -194,7 +194,7 @@ ANCM은 제공된 시작 시간 제한 내에 시작하지 못했습니다. 기�
 
 [ASP.NET Core 모듈](xref:host-and-deploy/aspnet-core-module)이 작업자 프로세스를 시작하려고 하지만 시작할 수 없습니다. 프로세스 시작 오류의 원인은 일반적으로 응용 프로그램 이벤트 로그의 항목 및 ASP.NET Core 모듈 stdout 로그에서 확인할 수 있습니다.
 
-일반적인 실패 조건은 존재하지 않는 ASP.NET Core 공유 프레임워크의 버전을 대상으로 하여 앱이 잘못 구성되었다는 것입니다. 대상 머신에 설치된 ASP.NET Core 공유 프레임워크의 버전을 확인합니다. 공유 프레임워크는 머신에 설치되고 메타패키지(예: `Microsoft.AspNetCore.App`)에서 참조되는 어셈블리( *.dll* 파일) 세트입니다. 메타패키지 참조는 필요한 최소 버전을 지정할 수 있습니다. 자세한 내용은 [공유 프레임워크](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/)를 참조하세요.
+일반적인 실패 조건은 존재하지 않는 ASP.NET Core 공유 프레임워크의 버전을 대상으로 하여 앱이 잘못 구성되었다는 것입니다. 대상 머신에 설치된 ASP.NET Core 공유 프레임워크의 버전을 확인합니다. *공유 프레임워크*는 머신에 설치되고 메타패키지(예: `Microsoft.AspNetCore.App`)에서 참조되는 어셈블리( *.dll* 파일) 세트입니다. 메타패키지 참조는 필요한 최소 버전을 지정할 수 있습니다. 자세한 내용은 [공유 프레임워크](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/)를 참조하세요.
 
 호스팅 또는 앱의 잘못된 구성으로 인해 작업자 프로세스가 실패하면 ‘502.5 프로세스 실패’ 오류 페이지가 반환됩니다.
 
@@ -279,7 +279,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 
 **미리 보기 릴리스에서 실행 되는 프레임 워크 종속 배포**
 
-ASP.NET Core {VERSION}(x86) 런타임 사이트 확장을 설치해야 합니다.
+*ASP.NET Core {VERSION}(x86) 런타임 사이트 확장을 설치해야 합니다.*
 
 1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x32`(`{X.Y}`는 런타임 버전임)
 1. 앱 실행: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
@@ -301,7 +301,7 @@ ASP.NET Core {VERSION}(x86) 런타임 사이트 확장을 설치해야 합니다
 
 **미리 보기 릴리스에서 실행 되는 프레임 워크 종속 배포**
 
-ASP.NET Core {VERSION}(x64) 런타임 사이트 확장을 설치해야 합니다.
+*ASP.NET Core {VERSION}(x64) 런타임 사이트 확장을 설치해야 합니다.*
 
 1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x64`(`{X.Y}`는 런타임 버전임)
 1. 앱 실행: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
@@ -332,7 +332,7 @@ ASP.NET Core 모듈 stdout 로그는 종종 애플리케이션 이벤트 로그�
 1. **stdoutLogEnabled**를 `false`로 설정합니다.
 1. **저장**을 선택하여 파일을 저장합니다.
 
-자세한 내용은 <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>을 참조하세요.
+자세한 내용은 <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>를 참조하세요.
 
 > [!WARNING]
 > stdout 로그를 사용하지 않도록 설정하지 않으면 앱 또는 서버 오류가 발생할 수 있습니다. 로그 파일 크기 또는 생성되는 로그 파일 수에 대한 제한은 없습니다. 앱 시작 문제를 해결하려면 stdout 로깅만 사용합니다.
@@ -350,10 +350,10 @@ ASP.NET Core 모듈 디버그 로그는 ASP.NET Core 모듈에서 추가로 심�
    * Kudu 콘솔을 사용하여 [개선된 진단 로그](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)에 표시되는 `<handlerSettings>`를 라이브 앱의 *web.config* 파일에 추가합니다.
      1. **개발 도구** 영역에서 **고급 도구**를 엽니다. **이동&rarr;** 단추를 선택합니다. 새 브라우저 탭 또는 창에서 Kudu 콘솔이 열립니다.
      1. 페이지 위쪽의 탐색 모음을 사용하여 **디버그 콘솔**을 열고 **CMD**를 선택합니다.
-     1. 폴더를 **site** >  **wwwroot** 경로로 엽니다. 연필 단추를 선택하여 *web.config* 파일을 편집합니다. [개선된 진단 로그](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)에 표시된 대로 `<handlerSettings>` 섹션을 추가합니다. **저장** 단추를 선택합니다.
+     1. 폴더를 **site** > **wwwroot** 경로로 엽니다. 연필 단추를 선택하여 *web.config* 파일을 편집합니다. [개선된 진단 로그](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)에 표시된 대로 `<handlerSettings>` 섹션을 추가합니다. **저장** 단추를 선택합니다.
 1. **개발 도구** 영역에서 **고급 도구**를 엽니다. **이동&rarr;** 단추를 선택합니다. 새 브라우저 탭 또는 창에서 Kudu 콘솔이 열립니다.
 1. 페이지 위쪽의 탐색 모음을 사용하여 **디버그 콘솔**을 열고 **CMD**를 선택합니다.
-1. 폴더를 **site** >  **wwwroot** 경로로 엽니다. *aspnetcore debug.log* 파일에 대한 경로를 제공하지 않는 경우 파일이 목록에 나타납니다. 경로를 제공한 경우 로그 파일의 위치로 이동합니다.
+1. 폴더를 **site** > **wwwroot** 경로로 엽니다. *aspnetcore debug.log* 파일에 대한 경로를 제공하지 않는 경우 파일이 목록에 나타납니다. 경로를 제공한 경우 로그 파일의 위치로 이동합니다.
 1. 파일 이름 옆의 연필 단추를 사용하여 로그 파일을 엽니다.
 
 문제 해결이 완료되면 디버그 로깅을 사용하지 않도록 설정합니다.
@@ -363,7 +363,7 @@ ASP.NET Core 모듈 디버그 로그는 ASP.NET Core 모듈에서 추가로 심�
 * *web.config* 파일에서 `<handlerSettings>`를 로컬에서 제거하고 앱을 다시 배포합니다.
 * Kudu 콘솔을 사용하여 *web.config* 파일을 편집하고 `<handlerSettings>` 섹션을 제거합니다. 파일을 저장합니다.
 
-자세한 내용은 <xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs>을 참조하세요.
+자세한 내용은 <xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs>를 참조하세요.
 
 > [!WARNING]
 > 디버그 로그를 사용하지 않도록 설정하지 않으면 앱 또는 서버 오류가 발생할 수 있습니다. 로그 파일 크기에는 제한이 없습니다. 앱 시작 문제를 해결하려면 디버그 로깅만 사용합니다.
@@ -418,7 +418,7 @@ stdout 로깅을 사용할 수 없는 경우 다음 단계를 따릅니다.
 1. Azure Portal에서 **문제 진단 및 해결** 블레이드로 이동합니다.
 1. 사이드바의 **지원 도구** 영역에서 **실패한 요청 추적 로그**를 선택합니다.
 
-자세한 내용은 [Azure App Service 에서 웹앱에 대한 진단 로깅 사용 항목의 실패한 요청 추적 섹션](/azure/app-service/web-sites-enable-diagnostic-log#failed-request-traces) 및 [Azure의 웹앱에 대한 애플리케이션 성능 FAQ를 참조하세요. 실패한 요청 추적을 켜려면 어떻게 해야 하나요?](/azure/app-service/app-service-web-availability-performance-application-issues-faq#how-do-i-turn-on-failed-request-tracing)를 참조하세요.
+[Azure App Service에서 웹앱에 대한 진단 로깅 사용 항목의 실패한 요청 추적 섹션](/azure/app-service/web-sites-enable-diagnostic-log#failed-request-traces) 및 [Azure의 웹앱에 대한 애플리케이션 성능 FAQ: 실패한 요청 추적을 켜려면 어떻게 해야 하나요?](/azure/app-service/app-service-web-availability-performance-application-issues-faq#how-do-i-turn-on-failed-request-tracing)를 참조하세요.
 
 자세한 내용은 [Azure App Service에서 웹앱에 대한 진단 로깅 사용](/azure/app-service/web-sites-enable-diagnostic-log)을 참조하세요.
 
@@ -433,7 +433,7 @@ stdout 로깅을 사용할 수 없는 경우 다음 단계를 따릅니다.
 
 애플리케이션 이벤트 로그에 액세스합니다.
 
-1. [시작] 메뉴를 열고 **이벤트 뷰어**를 검색한 다음, **이벤트 뷰어** 앱을 선택합니다.
+1. 시작 메뉴를 열고 *이벤트 뷰어*를 검색 한 다음 **이벤트 뷰어** 앱을 선택 합니다.
 1. **이벤트 뷰어**에서 **Windows 로그** 노드를 엽니다.
 1. **애플리케이션**을 선택하여 애플리케이션 이벤트 로그를 엽니다.
 1. 실패한 앱과 연결된 오류를 검색합니다. 오류는 ‘소스’ 열에서 ‘IIS AspNetCore 모듈’ 또는 ‘IIS Express AspNetCore 모듈’의 값을 포함합니다.
@@ -477,7 +477,7 @@ stdout 로그를 사용하고 보려면:
 1. **stdoutLogEnabled**를 `false`로 설정합니다.
 1. 파일을 저장합니다.
 
-자세한 내용은 <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>을 참조하세요.
+자세한 내용은 <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>를 참조하세요.
 
 > [!WARNING]
 > stdout 로그를 사용하지 않도록 설정하지 않으면 앱 또는 서버 오류가 발생할 수 있습니다. 로그 파일 크기 또는 생성되는 로그 파일 수에 대한 제한은 없습니다.
@@ -501,13 +501,13 @@ stdout 로그를 사용하고 보려면:
 
 로그에 대해 지정된 경로가 있는지 및 앱 풀의 ID에 해당 위치에 대한 쓰기 권한이 있는지 확인합니다.
 
-자세한 내용은 <xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs>을 참조하세요.
+자세한 내용은 <xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs>를 참조하세요.
 
 ::: moniker-end
 
 ### <a name="enable-the-developer-exception-page"></a>개발자 예외 페이지 사용
 
-`ASPNETCORE_ENVIRONMENT` [환경 변수를 web.config에 추가](xref:host-and-deploy/aspnet-core-module#setting-environment-variables)하여 개발 환경에서 앱을 실행할 수 있습니다. 앱 시작 시 호스트 작성기의 `UseEnvironment`에 의해 환경이 재정의되지 않는 한, 환경 변수를 설정하면 앱이 실행될 때 [개발자 예외 페이지](xref:fundamentals/error-handling)가 표시될 수 있습니다.
+`ASPNETCORE_ENVIRONMENT` [환경 변수를 web.config에 추가](xref:host-and-deploy/aspnet-core-module#setting-environment-variables) 하 여 개발 환경에서 앱을 실행할 수 있습니다. 앱 시작 시 호스트 작성기의 `UseEnvironment`에 의해 환경이 재정의되지 않는 한, 환경 변수를 설정하면 앱이 실행될 때 [개발자 예외 페이지](xref:fundamentals/error-handling)가 표시될 수 있습니다.
 
 ::: moniker range=">= aspnetcore-2.2"
 
@@ -589,7 +589,7 @@ stdout 로그를 사용하고 보려면:
 
 #### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>앱 중단 시작 중에 실패 또는 정상적으로 실행
 
-앱이 *중단*(응답하지 않거나 충돌하지 않음), 시작 중에 실패 또는 정상적으로 실행되면 [사용자 모드 덤프 파일: 가장 적합한 도구 선택](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)을 참조하여 덤프를 생성할 적절한 도구를 선택합니다.
+*앱이 중지 되* 는 경우 (응답을 중지 하지만 충돌 하지 않음), 시작 중에 실패 하거나 정상적으로 실행 되는 경우 [사용자 모드 덤프 파일: 가장](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool) 적합 한 도구를 선택 하 여 덤프를 생성 하는 데 적합 한 도구 선택을 참조 하세요.
 
 #### <a name="analyze-the-dump"></a>덤프 분석
 
@@ -597,10 +597,10 @@ stdout 로그를 사용하고 보려면:
 
 ## <a name="clear-package-caches"></a>패키지 캐시 지우기
 
-경우에 따라 개발 컴퓨터에서 .NET Core SDK를 업그레이드 하거나 앱 내에서 패키지 버전을 변경 하는 즉시 작동 하는 앱이 실패 합니다. 경우에 따라 중요한 업그레이드를 수행할 때 일관되지 않은 패키지로 인해 응용 프로그램이 중단될 수 있습니다. 이러한 대부분의 문제는 다음 지침에 따라 수정할 수 있습니다.
+작동 하는 앱은 개발 컴퓨터에서 .NET Core SDK를 업그레이드 하거나 앱 내에서 패키지 버전을 변경 하는 즉시 실패할 수 있습니다. 경우에 따라 중요한 업그레이드를 수행할 때 일관되지 않은 패키지로 인해 응용 프로그램이 중단될 수 있습니다. 이러한 대부분의 문제는 다음 지침에 따라 수정할 수 있습니다.
 
 1. *bin* 및 *obj* 폴더를 삭제합니다.
-1. 명령 셸에서 `dotnet nuget locals all --clear`를 실행 하 여 패키지 캐시를 지웁니다.
+1. 명령 셸에서 [dotnet nuget 로컬 모두](/dotnet/core/tools/dotnet-nuget-locals) 를 실행 하 여 패키지 캐시를 지웁니다.
 
    [Nuget](https://www.nuget.org/downloads) 도구를 사용 하 여 패키지 캐시를 지우면 서 `nuget locals all -clear`명령을 실행할 수도 있습니다. *nuget.exe*는 Windows 데스크톱 운영 체제와 함께 제공되는 설치가 아니므로 [NuGet 웹 사이트](https://www.nuget.org/downloads)에서 별도로 다운로드해야 합니다.
 
@@ -625,7 +625,7 @@ stdout 로그를 사용하고 보려면:
 * [Azure App Service에서 느린 웹앱 성능 문제 해결](/azure/app-service/app-service-web-troubleshoot-performance-degradation)
 * [Azure의 웹앱에 대한 애플리케이션 성능 FAQ](/azure/app-service/app-service-web-availability-performance-application-issues-faq)
 * [Azure Web App sandbox (App Service runtime execution limitations)](https://github.com/projectkudu/kudu/wiki/Azure-Web-App-sandbox)(Azure 웹앱 샌드박스(App Service 런타임 실행 제한))
-* [Azure Friday: Azure App Service 진단 및 문제 해결 환경(12분 동영상)](https://channel9.msdn.com/Shows/Azure-Friday/Azure-App-Service-Diagnostic-and-Troubleshooting-Experience)
+* [Azure Friday: Azure App Service 진단 및 문제 해결 환경(12분 비디오)](https://channel9.msdn.com/Shows/Azure-Friday/Azure-App-Service-Diagnostic-and-Troubleshooting-Experience)
 
 ### <a name="visual-studio-documentation"></a>Visual Studio 설명서
 

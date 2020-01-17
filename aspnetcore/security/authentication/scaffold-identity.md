@@ -5,14 +5,14 @@ description: ASP.NET Core 프로젝트에서 Id를 스 캐 폴드 하는 방법�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/24/2018
+ms.date: 01/15/2020
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: 2432d346d9678157848a38fa01d9057cdd7503ff
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: a0e9603cbca8c7f5771b0acf1a60839dffc89d4e
+ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75356295"
+ms.lasthandoff: 01/16/2020
+ms.locfileid: "76146487"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>ASP.NET Core 프로젝트의 스 캐 폴드 Id
 
@@ -256,6 +256,10 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 [!code-csharp[](scaffold-identity/consoleAddUser/Data/SeedData.cs?name=snippet)]
 
 프로덕션 시나리오의 경우 유사한 접근 방식을 사용할 수 있습니다.
+
+## <a name="prevent-publish-of-static-identity-assets"></a>정적 Id 자산 게시 방지
+
+정적 Id 자산을 웹 루트에 게시 하지 않으려면 <xref:security/authentication/identity#prevent-publish-of-static-identity-assets>를 참조 하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 

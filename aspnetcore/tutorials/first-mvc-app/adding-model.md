@@ -5,12 +5,12 @@ description: 간단한 ASP.NET Core 앱에 모델을 추가합니다.
 ms.author: riande
 ms.date: 8/15/2019
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: 2fac37e7069fb2a464d4de1da8912197f7adf8a8
-ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
+ms.openlocfilehash: 5d4251a2577111324aa2cfb715c41e3ecad5a9d1
+ms.sourcegitcommit: da2fb2d78ce70accdba903ccbfdcfffdd0112123
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73761093"
+ms.lasthandoff: 01/07/2020
+ms.locfileid: "75722801"
 ---
 # <a name="add-a-model-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 모델 추가
 
@@ -32,9 +32,13 @@ ms.locfileid: "73761093"
 
 *Models* 폴더> **추가** > **클래스**를 마우스 오른쪽 단추로 클릭합니다. 파일 이름을 *Movie.cs*로 지정합니다.
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 *Movie.cs* 파일을 *Models* 폴더에 추가합니다.
+
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+
+*Models* 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **새 클래스** > **빈 클래스**를 클릭합니다. 파일 이름을 *Movie.cs*로 지정합니다.
 
 ---
 
@@ -55,7 +59,7 @@ ms.locfileid: "73761093"
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-**도구** 메뉴에서 **NuGet 패키지 관리자** > PMC(**패키지 관리자 콘솔**)를 선택합니다.
+**도구** 메뉴에서 **NuGet 패키지 관리자** > **PMC(패키지 관리자 콘솔)** 을 선택합니다.
 
 ![PMC 메뉴](~/tutorials/first-mvc-app/adding-model/_static/pmc.png)
 
@@ -67,9 +71,26 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 
 앞의 명령은 EF Core SQL Server 공급자를 추가합니다. 이 공급자 패키지는 EF Core 패키지를 종속성으로 설치합니다. 추가적인 패키지는 자습서 뒷부분의 스캐폴딩 단계에서 자동으로 설치됩니다.
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/add-EF-NuGet-SQLite-CLI.md)]
+
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+
+**프로젝트** 메뉴에서 **NuGet 패키지 관리**를 선택합니다.
+
+오른쪽 위의 **검색** 필드에 `Microsoft.EntityFrameworkCore.SQLite`를 입력하고 **반환** 키를 눌러 검색합니다. 일치하는 NuGet 패키지를 선택하고 **패키지 추가** 단추를 누릅니다.
+
+![Entity Framework Core NuGet 패키지 추가](~/tutorials/first-mvc-app-mac/adding-model/_static/add-nuget-packages.png)
+
+`MvcMovie` 프로젝트가 선택된 **프로젝트 선택** 대화 상자가 표시됩니다. **확인** 단추를 누릅니다.
+
+**라이선스 승인** 대화 상자가 나타납니다. 필요에 따라 라이선스를 검토한 다음 **수락** 단추를 클릭합니다.
+
+위의 단계를 반복하여 다음 NuGet 패키지를 설치합니다.
+ * `Microsoft.VisualStudio.Web.CodeGeneration.Design`
+ * `Microsoft.EntityFrameworkCore.SqlServer`
+ * `Microsoft.EntityFrameworkCore.Design`
 
 ---
 
@@ -91,7 +112,7 @@ Install-Package Microsoft.EntityFrameworkCore.SqlServer
 
 ## <a name="register-the-database-context"></a>데이터베이스 컨텍스트 등록
 
-ASP.NET Core는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)를 사용하여 만들어집니다. 서비스(예: EF Core DB 컨텍스트)는 응용 프로그램 시작 중에 DI에 등록되어야 합니다. 이러한 서비스(예: Razor 페이지)가 필요한 구성 요소는 생성자 매개 변수를 통해 해당 서비스를 제공받습니다. DB 컨텍스트 인스턴스를 가져오는 생성자 코드는 자습서 뒷부분에 나옵니다. 이 섹션에서는 DI 컨테이너에 데이터베이스 컨텍스트를 등록합니다.
+ASP.NET Core는 [DI(종속성 주입)](xref:fundamentals/dependency-injection)를 사용하여 만들어집니다. 서비스(예: EF Core DB 컨텍스트)는 애플리케이션 시작 중에 DI에 등록되어야 합니다. 이러한 서비스(예: Razor 페이지)가 필요한 구성 요소는 생성자 매개 변수를 통해 해당 서비스를 제공받습니다. DB 컨텍스트 인스턴스를 가져오는 생성자 코드는 자습서 뒷부분에 나옵니다. 이 섹션에서는 DI 컨테이너에 데이터베이스 컨텍스트를 등록합니다.
 
 *Startup.cs* 맨 위에 다음 `using` 문을 추가합니다.
 
@@ -208,7 +229,7 @@ EF Core [마이그레이션](xref:data/ef-mvc/migrations) 기능을 사용하여
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-**도구** 메뉴에서 **NuGet 패키지 관리자** > PMC(**패키지 관리자 콘솔**)를 선택합니다.
+**도구** 메뉴에서 **NuGet 패키지 관리자** > **PMC(패키지 관리자 콘솔)** 을 선택합니다.
 
 PMC에서 다음 명령을 입력합니다.
 
@@ -394,7 +415,7 @@ return View(movie);
 
 [!INCLUDE [model 1b](~/includes/mvc-intro/model1b.md)]
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 * *Models* 폴더에 *Movie.cs* 클래스를 추가합니다.
 
@@ -524,7 +545,7 @@ Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(int rc, sqlite3 db)
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. **도구** 메뉴에서 **NuGet 패키지 관리자** > PMC(**패키지 관리자 콘솔**)를 선택합니다.
+1. **도구** 메뉴에서 **NuGet 패키지 관리자** > **PMC(패키지 관리자 콘솔)** 을 선택합니다.
 
    ![PMC 메뉴](~/tutorials/first-mvc-app/adding-model/_static/pmc.png)
 
@@ -537,7 +558,7 @@ Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(int rc, sqlite3 db)
 
    `Add-Migration` 명령은 초기 데이터베이스 스키마를 만드는 코드를 생성합니다.
 
-   데이터베이스 스키마는 `MvcMovieContext` 클래스에 지정된 모델을 기반으로 합니다. `Initial` 인수는 마이그레이션 이름입니다. 모든 이름을 사용할 수 있지만 규칙에 따라 마이그레이션을 설명하는 이름을 사용합니다. 자세한 내용은 <xref:data/ef-mvc/migrations>을 참조하세요.
+   데이터베이스 스키마는 `MvcMovieContext` 클래스에 지정된 모델을 기반으로 합니다. `Initial` 인수는 마이그레이션 이름입니다. 모든 이름을 사용할 수 있지만 규칙에 따라 마이그레이션을 설명하는 이름을 사용합니다. 자세한 내용은 <xref:data/ef-mvc/migrations>를 참조하세요.
 
    `Update-Database` 명령은 데이터베이스를 만드는 *Migrations/{time-stamp}_InitialCreate.cs* 파일에서 `Up` 메서드를 실행합니다.
 
@@ -689,6 +710,6 @@ return View(movie);
 
 > [!div class="step-by-step"]
 > [이전 보기 추가](adding-view.md)
-> [다음 SQL 사용](working-with-sql.md)
+> [다음 데이터베이스 사용](working-with-sql.md)
 
 ::: moniker-end

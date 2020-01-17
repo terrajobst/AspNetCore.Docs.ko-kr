@@ -3,14 +3,14 @@ title: ASP.NET Core Identity 소개
 author: rick-anderson
 description: ASP.NET Core 앱에서 Id를 사용 합니다. 암호 요구 사항 (RequireDigit, RequiredLength, RequiredUniqueChars 등)을 설정 하는 방법에 대해 알아봅니다.
 ms.author: riande
-ms.date: 12/05/2019
+ms.date: 01/15/2020
 uid: security/authentication/identity
-ms.openlocfilehash: d4cda43c417a0d8e1b78f8b59b7050debf017269
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: 98fee261a741a20eed181ca5b9a4ebb693deeb63
+ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828232"
+ms.lasthandoff: 01/16/2020
+ms.locfileid: "76146513"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>ASP.NET Core Identity 소개
 
@@ -213,6 +213,22 @@ Id에 대 한 기본 패키지는 [AspNetCore](https://www.nuget.org/packages/Mi
 * <xref:Microsoft.AspNetCore.Identity.IdentityBuilderExtensions.AddDefaultTokenProviders*>
 
 자세한 내용은 [AddDefaultIdentity source](https://github.com/dotnet/AspNetCore/blob/release/3.0/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) 를 참조 하세요.
+
+## <a name="prevent-publish-of-static-identity-assets"></a>정적 Id 자산 게시 방지
+
+정적 Id 자산 (Id UI에 대 한 스타일 시트 및 JavaScript 파일)을 웹 루트에 게시 하지 않으려면 다음 `ResolveStaticWebAssetsInputsDependsOn` 속성을 추가 하 고 `RemoveIdentityAssets` 대상을 앱의 프로젝트 파일에 추가 합니다.
+
+```xml
+<PropertyGroup>
+  <ResolveStaticWebAssetsInputsDependsOn>RemoveIdentityAssets</ResolveStaticWebAssetsInputsDependsOn>
+</PropertyGroup>
+
+<Target Name="RemoveIdentityAssets">
+  <ItemGroup>
+    <StaticWebAsset Remove="@(StaticWebAsset)" Condition="%(SourceId) == 'Microsoft.AspNetCore.Identity.UI'" />
+  </ItemGroup>
+</Target>
+```
 
 ## <a name="next-steps"></a>다음 단계
 

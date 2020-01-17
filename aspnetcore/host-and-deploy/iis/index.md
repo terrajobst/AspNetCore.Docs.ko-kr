@@ -5,14 +5,14 @@ description: Windows Server IIS(인터넷 정보 서비스)에서 ASP.NET Core �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/06/2020
+ms.date: 01/13/2020
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 8e0475e3e18688c7d4344661826290d15a2443c0
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: bf035bc65f0f120f52e55effe4d413bfecdf735d
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75829194"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75952078"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS가 있는 Windows에서 ASP.NET Core 호스팅
 
@@ -771,31 +771,19 @@ Windows Server 2008 R2 이상
 
 ## <a name="deployment-resources-for-iis-administrators"></a>IIS 관리자를 위한 배포 리소스
 
-IIS 설명서에서 IIS에 대해 자세히 알아보세요.  
-[IIS 설명서](/iis)
-
-.NET Core 앱 배포 모델에 자세히 알아보세요.  
-[.NET Core 애플리케이션 배포](/dotnet/core/deploying/)
-
-구성 지침을 포함하여 ASP.NET Core 모듈에 대해 알아봅니다.  
-<xref:host-and-deploy/aspnet-core-module>
-
-게시된 ASP.NET Core 앱의 디렉터리 구조에 대해 알아봅니다.  
-[디렉터리 구조](xref:host-and-deploy/directory-structure)
-
-ASP.NET Core 앱용 활성 및 비활성 IIS 모듈과 IIS 모듈을 관리하는 방법을 살펴봅니다.  
-[IIS 모듈](xref:host-and-deploy/iis/modules)
-
-ASP.NET Core 앱의 IIS 배포에 대한 문제 진단 방법을 알아봅니다.  
-[문제 해결](xref:test/troubleshoot-azure-iis)
-
-IIS에서 ASP.NET Core 앱을 호스팅할 때 일반적인 오류를 구분합니다.  
-[Azure App Service 및 IIS에 대한 일반적인 오류 참조](xref:host-and-deploy/azure-iis-errors-reference)
+* [IIS 설명서](/iis)
+* [IIS에서 IIS 관리자 시작](/iis/get-started/getting-started-with-iis/getting-started-with-the-iis-manager-in-iis-7-and-iis-8)
+* [.NET Core 애플리케이션 배포](/dotnet/core/deploying/)
+* <xref:host-and-deploy/aspnet-core-module>
+* <xref:host-and-deploy/directory-structure>
+* <xref:host-and-deploy/iis/modules>
+* <xref:test/troubleshoot-azure-iis>
+* <xref:host-and-deploy/azure-iis-errors-reference>
 
 ## <a name="additional-resources"></a>추가 자료
 
 * <xref:test/troubleshoot>
-* [ASP.NET Core 소개](xref:index)
+* <xref:index>
 * [공식 Microsoft IIS 사이트](https://www.iis.net/)
 * [Windows Server 기술 콘텐츠 라이브러리](/windows-server/windows-server)
 * [IIS의 HTTP/2](/iis/get-started/whats-new-in-iis-10/http2-on-iis)

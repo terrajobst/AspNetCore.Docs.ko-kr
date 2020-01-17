@@ -5,12 +5,12 @@ description: 이 자습서 시리즈는 ASP.NET Core에서 Razor Pages를 사용
 ms.author: riande
 ms.date: 11/12/2019
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: b651437b698d01310f90c5f14832616c1896e6c0
-ms.sourcegitcommit: 4e3edff24ba6e43a103fee1b126c9826241bb37b
+ms.openlocfilehash: 6e1d58ccd83f7d7c1083dc2bf9ce7476650812a1
+ms.sourcegitcommit: da2fb2d78ce70accdba903ccbfdcfffdd0112123
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/10/2019
-ms.locfileid: "74959101"
+ms.lasthandoff: 01/07/2020
+ms.locfileid: "75723021"
 ---
 # <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>자습서: ASP.NET Core에서 Razor 페이지 시작
 
@@ -36,7 +36,7 @@ ms.locfileid: "74959101"
 
 ![홈 또는 인덱스 페이지](razor-pages-start/_static/home2.2.png)
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -56,7 +56,7 @@ ms.locfileid: "74959101"
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Visual Studio **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.
+* Visual Studio **파일** 메뉴에서 **새로 만들기** >**프로젝트**를 선택합니다.
 * 새 ASP.NET Core 웹 애플리케이션을 만들고 **다음**을 선택합니다.
   ![새 ASP.NET Core 웹 애플리케이션](razor-pages-start/_static/np_2.1.png)
 * 프로젝트 이름을 **RazorPagesMovie**로 지정합니다. 코드를 복사하여 붙여넣을 때 네임스페이스가 일치하도록 프로젝트 이름을 *RazorPagesMovie*로 지정해야 합니다.
@@ -100,18 +100,13 @@ ms.locfileid: "74959101"
 
   ![macOS 새 프로젝트 대화 상자](razor-pages-start/_static/webapp.png)
 
-* **새 ASP.NET Core 웹 API 구성** 대화 상자에서 **대상 프레임워크**를 **.NET Core 3.1**로 설정합니다.
+* **새 웹 애플리케이션 구성** 대화 상자에서 **대상 프레임워크**를 **.NET Core 3.1**로 설정합니다.
 
-  ![macOS .NET Core 3.0 선택](razor-pages-start/_static/targetframework3.png)
+  ![macOS .NET Core 3.1 선택](razor-pages-start/_static/targetframework3.png)
 
 * 프로젝트 이름을 **RazorPagesMovie**로 지정하고 **만들기**를 선택합니다.
 
   ![nameproj](razor-pages-start/_static/RazorPagesMovie.png)
-
-
-## <a name="open-the-project"></a>프로젝트 열기
-
-Visual Studio에서 **파일 > 열기**를 선택하고 *RazorPagesMovie.csproj* 파일을 선택합니다.
 
 <!-- End of VS tabs -->
 
@@ -132,23 +127,23 @@ Razor 페이지 및 지원 파일이 들어 있습니다. 각 Razor 페이지는
 * Razor 구문을 사용하는 C# 코드로 HTML 태그를 포함하는 *.cshtml* 파일.
 * 페이지 이벤트를 처리하는 C# 코드가 포함된 *.cshtml.cs* 파일.
 
-지원 파일에는 밑줄로 시작하는 이름이 있습니다. 예를 들어 *_Layout.cshtml* 파일은 모든 페이지에 공통되는 UI 요소를 구성합니다. 이 파일은 페이지 맨 위에 있는 탐색 메뉴를 설정하고 페이지 맨 아래에 저작권 표시를 설정합니다. 자세한 내용은 <xref:mvc/views/layout>을 참조하세요.
+지원 파일에는 밑줄로 시작하는 이름이 있습니다. 예를 들어 *_Layout.cshtml* 파일은 모든 페이지에 공통되는 UI 요소를 구성합니다. 이 파일은 페이지 맨 위에 있는 탐색 메뉴를 설정하고 페이지 맨 아래에 저작권 표시를 설정합니다. 자세한 내용은 <xref:mvc/views/layout>를 참조하세요.
 
 ### <a name="wwwroot-folder"></a>wwwroot 폴더
 
-HTML 파일, JavaScript 파일 및 CSS 파일과 같은 정적 파일을 포함합니다. 자세한 내용은 <xref:fundamentals/static-files>을 참조하세요.
+HTML 파일, JavaScript 파일 및 CSS 파일과 같은 정적 파일을 포함합니다. 자세한 내용은 <xref:fundamentals/static-files>를 참조하세요.
 
 ### <a name="appsettingsjson"></a>appSettings.json
 
-연결 문자열과 같은 구성 데이터를 포함합니다. 자세한 내용은 <xref:fundamentals/configuration/index>을 참조하세요.
+연결 문자열과 같은 구성 데이터를 포함합니다. 자세한 내용은 <xref:fundamentals/configuration/index>를 참조하세요.
 
 ### <a name="programcs"></a>Program.cs
 
-프로그램의 진입점을 포함합니다. 자세한 내용은 <xref:fundamentals/host/generic-host>을 참조하세요.
+프로그램의 진입점을 포함합니다. 자세한 내용은 <xref:fundamentals/host/generic-host>를 참조하세요.
 
 ### <a name="startupcs"></a>Startup.cs
 
-앱 동작을 구성하는 코드를 포함합니다. 자세한 내용은 <xref:fundamentals/startup>을 참조하세요.
+앱 동작을 구성하는 코드를 포함합니다. 자세한 내용은 <xref:fundamentals/startup>를 참조하세요.
 
 ## <a name="next-steps"></a>다음 단계
 
@@ -182,7 +177,7 @@ HTML 파일, JavaScript 파일 및 CSS 파일과 같은 정적 파일을 포함�
 
 ![홈 또는 인덱스 페이지](razor-pages-start/_static/home2.2.png)
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -202,7 +197,7 @@ HTML 파일, JavaScript 파일 및 CSS 파일과 같은 정적 파일을 포함�
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Visual Studio **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.
+* Visual Studio **파일** 메뉴에서 **새로 만들기** >**프로젝트**를 선택합니다.
 
 * 새 ASP.NET Core 웹 애플리케이션을 만들고 **다음**을 선택합니다.
 
@@ -242,19 +237,21 @@ HTML 파일, JavaScript 파일 및 CSS 파일과 같은 정적 파일을 포함�
 
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
-터미널에서 다음 명령을 실행합니다.
+* **파일** > **새 솔루션**을 선택합니다.
 
-<!-- TODO: update these instruction once mac support 2.2 projects -->
+![macOS 새 솔루션](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-```dotnetcli
-dotnet new webapp -o RazorPagesMovie
-```
+* **.NET Core** > **앱** > **웹 애플리케이션** > **다음**을 선택합니다.
 
-이전 명령은 [.NET Core CLI](/dotnet/core/tools/dotnet)를 사용하여 Razor Pages 프로젝트를 만듭니다.
+  ![macOS 새 프로젝트 대화 상자](razor-pages-start/_static/webapp.png)
 
-## <a name="open-the-project"></a>프로젝트 열기
+* **새 ASP.NET Core 웹 API 구성** 대화 상자에서 **대상 프레임워크**를 **.NET Core 3.1**로 설정합니다.
 
-Visual Studio에서 **파일 > 열기**를 선택하고 *RazorPagesMovie.csproj* 파일을 선택합니다.
+  ![macOS .NET Core 3.0 선택](razor-pages-start/_static/targetframework3.png)
+
+* 프로젝트 이름을 **RazorPagesMovie**로 지정하고 **만들기**를 선택합니다.
+
+  ![nameproj](razor-pages-start/_static/RazorPagesMovie.png)
 
 <!-- End of VS tabs -->
 
@@ -331,23 +328,23 @@ Razor 페이지 및 지원 파일이 들어 있습니다. 각 Razor 페이지는
 * Razor 구문을 사용하는 C# 코드로 HTML 태그를 포함하는 *.cshtml* 파일.
 * 페이지 이벤트를 처리하는 C# 코드가 포함된 *.cshtml.cs* 파일.
 
-지원 파일에는 밑줄로 시작하는 이름이 있습니다. 예를 들어 *_Layout.cshtml* 파일은 모든 페이지에 공통되는 UI 요소를 구성합니다. 이 파일은 페이지 맨 위에 있는 탐색 메뉴를 설정하고 페이지 맨 아래에 저작권 표시를 설정합니다. 자세한 내용은 <xref:mvc/views/layout>을 참조하세요.
+지원 파일에는 밑줄로 시작하는 이름이 있습니다. 예를 들어 *_Layout.cshtml* 파일은 모든 페이지에 공통되는 UI 요소를 구성합니다. 이 파일은 페이지 맨 위에 있는 탐색 메뉴를 설정하고 페이지 맨 아래에 저작권 표시를 설정합니다. 자세한 내용은 <xref:mvc/views/layout>를 참조하세요.
 
 ### <a name="wwwroot-folder"></a>wwwroot 폴더
 
-HTML 파일, JavaScript 파일 및 CSS 파일과 같은 정적 파일을 포함합니다. 자세한 내용은 <xref:fundamentals/static-files>을 참조하세요.
+HTML 파일, JavaScript 파일 및 CSS 파일과 같은 정적 파일을 포함합니다. 자세한 내용은 <xref:fundamentals/static-files>를 참조하세요.
 
 ### <a name="appsettingsjson"></a>appSettings.json
 
-연결 문자열과 같은 구성 데이터를 포함합니다. 자세한 내용은 <xref:fundamentals/configuration/index>을 참조하세요.
+연결 문자열과 같은 구성 데이터를 포함합니다. 자세한 내용은 <xref:fundamentals/configuration/index>를 참조하세요.
 
 ### <a name="programcs"></a>Program.cs
 
-프로그램의 진입점을 포함합니다. 자세한 내용은 <xref:fundamentals/host/generic-host>을 참조하세요.
+프로그램의 진입점을 포함합니다. 자세한 내용은 <xref:fundamentals/host/generic-host>를 참조하세요.
 
 ### <a name="startupcs"></a>Startup.cs
 
-쿠키에 대한 동의 필요 여부 등 앱 동작을 구성하는 코드를 포함합니다. 자세한 내용은 <xref:fundamentals/startup>을 참조하세요.
+쿠키에 대한 동의 필요 여부 등 앱 동작을 구성하는 코드를 포함합니다. 자세한 내용은 <xref:fundamentals/startup>를 참조하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 

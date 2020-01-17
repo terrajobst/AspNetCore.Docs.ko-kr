@@ -5,14 +5,14 @@ description: 호스팅 환경을 설정하고 ASP.NET Core 앱을 배포하는 �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/07/2019
+ms.date: 01/13/2020
 uid: host-and-deploy/index
-ms.openlocfilehash: 8c7c131ca328f3118c45e822d6d5c86f0d44001f
-ms.sourcegitcommit: b3e1e31e5d8bdd94096cf27444594d4a7b065525
+ms.openlocfilehash: ffc1f0b649e24e5e4a0bca2fc36a0b0c25460238
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74803268"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75951790"
 ---
 # <a name="host-and-deploy-aspnet-core"></a>ASP.NET Core 호스트 및 배포
 
@@ -32,7 +32,7 @@ ms.locfileid: "74803268"
 
 .NET Core 앱은 *자체 포함된 배포* 또는 *프레임워크 종속 배포*로 게시할 수 있습니다. 앱이 자체 포함된 배포인 경우, .NET 런타임이 포함된 어셈블리 파일은 *publish* 폴더에 들어 있습니다. 앱이 프레임워크 종속인 경우 서버에 설치된 .NET 버전에 대한 참조가 앱에 포함되므로 .NET 런타임 파일이 포함되지 않습니다. 기본 배포 모델은 프레임워크 종속입니다. 자세한 내용은 [.NET Core 애플리케이션 배포](/dotnet/core/deploying/)를 참조하세요.
 
-*.exe* 및 *.dll* 파일 이외에 ASP.NET Core 앱에 대한 *publish* 폴더에는 일반적으로 구성 파일, 정적 자산 및 MVC 뷰가 포함됩니다. 자세한 내용은 <xref:host-and-deploy/directory-structure>을 참조하세요.
+*.exe* 및 *.dll* 파일 이외에 ASP.NET Core 앱에 대한 *publish* 폴더에는 일반적으로 구성 파일, 정적 자산 및 MVC 뷰가 포함됩니다. 자세한 내용은 <xref:host-and-deploy/directory-structure>를 참조하세요.
 
 ## <a name="set-up-a-process-manager"></a>프로세스 관리자 설정
 
@@ -77,17 +77,19 @@ Visual Studio를 사용하여 Azure에 앱을 게시하는 방법은 <xref:tutor
 
 웹 팜 환경에서 ASP.NET Core 앱을 호스팅하는 구성에 대한 자세한 내용(예: 확장성을 위해 앱의 여러 인스턴스 배포)은 <xref:host-and-deploy/web-farm>을 참조하세요.
 
+## <a name="host-on-docker"></a>Docker에서 호스트
+
+자세한 내용은 <xref:host-and-deploy/docker/index>를 참조하세요.
+
 ::: moniker range=">= aspnetcore-2.2"
 
 ## <a name="perform-health-checks"></a>상태 검사 수행
 
-상태 검사 미들웨어를 사용하여 앱 및 그 종속성에 대해 상태 검사를 수행합니다. 자세한 내용은 <xref:host-and-deploy/health-checks>을 참조하세요.
+상태 검사 미들웨어를 사용하여 앱 및 그 종속성에 대해 상태 검사를 수행합니다. 자세한 내용은 <xref:host-and-deploy/health-checks>를 참조하세요.
 
 ::: moniker-end
 
 ## <a name="additional-resources"></a>추가 자료
 
-* <xref:host-and-deploy/docker/index>
 * <xref:test/troubleshoot>
 * [ASP.NET 호스팅](https://dotnet.microsoft.com/apps/aspnet/hosting)
-

@@ -7,18 +7,18 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/advanced
-ms.openlocfilehash: d4a2aad6d93cc9a53c730323620de59fead6d5ab
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: abea9b189861954533b24cb73650af41952d1a86
+ms.sourcegitcommit: 57b85708f4cded99b8f008a69830cb104cd8e879
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259593"
+ms.lasthandoff: 01/13/2020
+ms.locfileid: "75914109"
 ---
 # <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>자습서: 고급 시나리오에 대해 알아보기 - ASP.NET MVC 및 EF Core 사용
 
 이전 자습서에서는 계층당 하나의 테이블 상속을 구현했습니다. 이 자습서에서는 Entity Framework Core를 사용하는 ASP.NET Core 웹 애플리케이션을 개발하는 기본 개념을 넘어 알아 두면 유용한 여러 가지 항목을 소개합니다.
 
-이 자습서에서는 다음을 수행했습니다.
+이 자습서에서는 다음과 같은 작업을 수행합니다.
 
 > [!div class="checklist"]
 > * 원시 SQL 쿼리 수행
@@ -31,7 +31,7 @@ ms.locfileid: "72259593"
 > * EF Core 소스 코드 및 개발 계획에 대해 알아보기
 > * 동적 LINQ를 사용하여 코드를 단순화하는 방법 알아보기
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 * [상속 구현](inheritance.md)
 
@@ -73,7 +73,7 @@ using 문을 추가합니다.
 
 앱을 실행하고 [정보] 페이지로 이동합니다. 이전과 동일한 데이터가 표시됩니다.
 
-![[정보] 페이지](advanced/_static/about.png)
+![정보 페이지](advanced/_static/about.png)
 
 ## <a name="call-an-update-query"></a>업데이트 쿼리 호출
 
@@ -181,7 +181,7 @@ _context.ChangeTracker.AutoDetectChangesEnabled = false;
 
 ## <a name="ef-core-source-code-and-development-plans"></a>EF Core 소스 코드 및 개발 계획
 
-Entity Framework Core 소스는 [https://github.com/aspnet/EntityFrameworkCore](https://github.com/aspnet/EntityFrameworkCore)에 있습니다. EF Core 리포지토리에는 야간 빌드, 문제 추적, 기능 사양, 디자인 회의 노트 및 [향후 개발을 위한 로드맵](https://github.com/aspnet/EntityFrameworkCore/wiki/Roadmap)이 포함됩니다. 버그를 보고하거나 찾고 참가할 수 있습니다.
+Entity Framework Core 소스는 [https://github.com/dotnet/efcore](https://github.com/dotnet/efcore)에 있습니다. EF Core 리포지토리에는 야간 빌드, 문제 추적, 기능 사양, 디자인 회의 노트 및 [향후 개발을 위한 로드맵](https://github.com/dotnet/efcore/wiki/Roadmap)이 포함됩니다. 버그를 보고하거나 찾고 참가할 수 있습니다.
 
 소스 코드가 오픈 소스이기는 하지만 Entity Framework Core는 완전히 Microsoft 제품으로 지원됩니다. Microsoft Entity Framework 팀이 어떤 참가자를 수락할지 관리하고 각 릴리스의 품질을 보장하기 위해 모든 코드 변경 내용을 테스트합니다.
 
@@ -263,7 +263,7 @@ EF Core에 대한 자세한 내용은 [Entity Framework Core 설명서](/ef/core
 
 ## <a name="next-steps"></a>다음 단계
 
-이 자습서에서는 다음을 수행했습니다.
+이 자습서에서는 다음과 같은 작업을 수행합니다.
 
 > [!div class="checklist"]
 > * 원시 SQL 쿼리 수행

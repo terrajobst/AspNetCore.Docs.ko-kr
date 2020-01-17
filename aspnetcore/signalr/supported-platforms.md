@@ -5,16 +5,16 @@ description: ASP.NET Core SignalR에 대해 지원 되는 플랫폼에 대해 �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 11/21/2019
+ms.date: 01/16/2020
 no-loc:
 - SignalR
 uid: signalr/supported-platforms
-ms.openlocfilehash: 9b9cf1d57d61c333c485f23b7ab952c66814d2aa
-ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
+ms.openlocfilehash: 054965921c87c1a9be27e5ddaa8a87b0fa1f4113
+ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/22/2019
-ms.locfileid: "74317472"
+ms.lasthandoff: 01/16/2020
+ms.locfileid: "76146500"
 ---
 # <a name="aspnet-core-opno-locsignalr-supported-platforms"></a>지원 되는 플랫폼 ASP.NET Core SignalR
 
@@ -24,9 +24,9 @@ ASP.NET Core SignalR은 ASP.NET Core에서 지 원하는 모든 서버 플랫폼
 
 ## <a name="javascript-client"></a>JavaScript 클라이언트
 
-[JavaScript 클라이언트](xref:signalr/javascript-client) 는 nodejs 8 이상 버전과 다음 브라우저에서 실행 됩니다.
+[JavaScript 클라이언트](xref:signalr/javascript-client)는 NodeJS 8 이상의 버전과 다음 브라우저에서 실행됩니다.
 
-| 브라우저                         | 버전         |
+| 브라우저                         | Version         |
 | ------------------------------- | --------------- |
 | Microsoft Edge                  | 현재&dagger; |
 | Mozilla Firefox                 | 현재&dagger; |
@@ -44,12 +44,12 @@ ASP.NET Core SignalR은 ASP.NET Core에서 지 원하는 모든 서버 플랫폼
 
 ## <a name="java-client"></a>Java 클라이언트
 
-[Java 클라이언트](xref:signalr/java-client) 는 java 8 이상 버전을 지원 합니다.
+[Java 클라이언트](xref:signalr/java-client)는 Java 8 이상의 버전을 지원합니다.
 
 ## <a name="unsupported-clients"></a>지원되지 않는 클라이언트
 
 다음 클라이언트는 사용할 수는 있지만 실험적이거나 비공식적입니다. 현재 지원 되지 않으며 그렇지 않을 수도 있습니다.
 
-* [C++클라이언트로](https://github.com/aspnet/SignalR/tree/master/clients/cpp)
+* [C++ 클라이언트](https://github.com/aspnet/SignalR-Client-Cpp)
 
 * [Swift 클라이언트](https://github.com/moozzyk/SignalR-Client-Swift)

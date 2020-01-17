@@ -8,12 +8,12 @@ ms.date: 12/05/2019
 no-loc:
 - SignalR
 uid: aspnetcore-2.2
-ms.openlocfilehash: 8995a514ea2e5016da85952d0f0beaf396a5d639
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 97deafd520926476f7653fc3de40d577b394734b
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880841"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829129"
 ---
 # <a name="whats-new-in-aspnet-core-22"></a>ASP.NET Core 2.2의 새로운 기능
 
@@ -119,4 +119,4 @@ ASP.NET Core 2.2에서는 연결 풀 잠금 경합을 줄임으로써 `SocketsHt
 
 ## <a name="additional-information"></a>추가 정보
 
-전체 변경 내용 목록을 보려면 [ASP.NET Core 2.2 릴리스 정보](https://github.com/aspnet/Home/releases/tag/2.2.0)를 참조하세요.
+전체 변경 내용 목록을 보려면 [ASP.NET Core 2.2 릴리스 정보](https://github.com/dotnet/aspnetcore/releases/tag/2.2.0)를 참조하세요.

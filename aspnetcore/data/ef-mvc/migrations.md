@@ -7,18 +7,18 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/migrations
-ms.openlocfilehash: 4c96815461898ce9273f953f083143d8b50d406e
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: bcd36509fe42da0a79b9243d17701f40e066a212
+ms.sourcegitcommit: 077b45eceae044475f04c1d7ef2d153d7c0515a8
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259411"
+ms.lasthandoff: 12/29/2019
+ms.locfileid: "75542692"
 ---
 # <a name="tutorial-using-the-migrations-feature---aspnet-mvc-with-ef-core"></a>자습서: 마이그레이션 기능 사용 - ASP.NET MVC 및 EF Core 사용
 
 이 자습서에서는 데이터 모델 변경을 관리하기 위해 EF Core 마이그레이션 기능을 사용하기 시작합니다. 이후의 자습서에서는 데이터 모델을 변경하면서 더 많은 마이그레이션을 추가하게 됩니다.
 
-이 자습서에서는 다음을 수행했습니다.
+이 자습서에서는 다음과 같은 작업을 수행합니다.
 
 > [!div class="checklist"]
 > * 마이그레이션에 대해 알아보기
@@ -28,7 +28,7 @@ ms.locfileid: "72259411"
 > * 데이터 모델 스냅샷에 대해 알아보기
 > * 마이그레이션 적용
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 * [정렬, 필터링 및 페이징](sort-filter-page.md)
 
@@ -104,7 +104,7 @@ Done. To undo this action, use 'ef migrations remove'
 
 마이그레이션은 현재 데이터베이스 스키마의 *스냅숏*을 *Migrations/SchoolContextModelSnapshot.cs*에 만듭니다. 마이그레이션을 추가하면 EF가 데이터 모델을 스냅샷 파일과 비교하여 변경 내용을 확인합니다.
 
-마이그레이션을 삭제할 때는 [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove) 명령을 사용합니다. `dotnet ef migrations remove`는 마이그레이션을 삭제하고 스냅샷이 올바르게 다시 설정되도록 합니다.
+마이그레이션을 삭제하려면 [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove) 명령을 사용합니다. `dotnet ef migrations remove`는 마이그레이션을 삭제하고 스냅샷이 올바르게 다시 설정되도록 합니다. `dotnet ef migrations remove`가 실패하는 경우 `dotnet ef migrations remove -v`를 사용하여 자세한 오류 정보를 확인하세요.
 
 스냅샷 파일을 사용하는 방법에 대한 자세한 내용은 [팀 환경의 EF Core 마이그레이션](/ef/core/managing-schemas/migrations/teams)을 참조하세요.
 
@@ -116,7 +116,7 @@ Done. To undo this action, use 'ef migrations remove'
 dotnet ef database update
 ```
 
-명령의 출력은 데이터베이스를 설정하는 SQL 명령에 대한 로그가 표시되는 것 외에 `migrations add` 명령과 유사합니다. 대부분의 로그는 다음 예제 출력에서 생략됩니다. 로그 메시지의 세부 수준을 줄이는 것을 선호하는 경우 *appsettings.Development.json* 파일에서 로그 수준을 변경할 수 있습니다. 자세한 내용은 <xref:fundamentals/logging/index>을 참조하세요.
+명령의 출력은 데이터베이스를 설정하는 SQL 명령에 대한 로그가 표시되는 것 외에 `migrations add` 명령과 유사합니다. 대부분의 로그는 다음 예제 출력에서 생략됩니다. 로그 메시지의 세부 수준을 줄이는 것을 선호하는 경우 *appsettings.Development.json* 파일에서 로그 수준을 변경할 수 있습니다. 자세한 내용은 <xref:fundamentals/logging/index>를 참조하세요.
 
 ```text
 info: Microsoft.EntityFrameworkCore.Infrastructure[10403]
@@ -173,7 +173,7 @@ PMC 명령에 대한 자세한 내용은 [패키지 관리자 콘솔(Visual Stud
 
 ## <a name="next-step"></a>다음 단계
 
-이 자습서에서는 다음을 수행했습니다.
+이 자습서에서는 다음과 같은 작업을 수행합니다.
 
 > [!div class="checklist"]
 > * 마이그레이션에 대해 알아보기

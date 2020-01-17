@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: aspnetcore-2.0
-ms.openlocfilehash: 452ccd76eece55cb5cf38fe39781f2f64dd5d466
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 9d1e1b1154113b8825f4d0faf0f4552b8bd22287
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880871"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75828427"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>ASP.NET Core 2.0의 새로운 기능
 
@@ -156,6 +156,6 @@ ASP.NET Core 1.x 애플리케이션을 ASP.NET Core 2.0으로 마이그레이션
 
 ## <a name="additional-information"></a>추가 정보
 
-전체 변경 내용 목록을 보려면 [ASP.NET Core 2.0 Release Notes](https://github.com/aspnet/Home/releases/tag/2.0.0)(ASP.NET Core 2.0 릴리스 정보)를 참조하세요.
+전체 변경 내용 목록을 보려면 [ASP.NET Core 2.0 Release Notes](https://github.com/dotnet/aspnetcore/releases/tag/2.0.0)(ASP.NET Core 2.0 릴리스 정보)를 참조하세요.
 
 ASP.NET Core 개발팀의 진행 상황 및 계획과 연결하려면 [ASP.NET 커뮤니티 스탠드업](https://live.asp.net/)을 시청하세요.

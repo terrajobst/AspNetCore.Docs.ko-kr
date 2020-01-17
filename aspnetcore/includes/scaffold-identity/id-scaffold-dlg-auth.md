@@ -10,6 +10,7 @@ Identity 스캐폴더를 실행합니다.
   * 기존 레이아웃 페이지를 선택하세요. 그렇지 않으면 잘못된 태그로 레이아웃 파일을 덮어쓰게 됩니다. 기존 *\_Layout* 파일을 선택한 경우에는 덮어쓰지 **않습니다**.
 
  예: Razor Pages에 대한 `~/Views/Shared/_Layout.cshtml`이나 MVC 프로젝트에 대한 `~/Pages/Shared/_Layout.cshtml`.
+
 * 기존 데이터 컨텍스트를 사용하려면 재정의할 파일을 하나 이상 선택합니다. 데이터 컨텍스트를 추가하려면 파일을 하나 이상 선택해야 합니다.
   * 데이터 컨텍스트 클래스를 선택합니다.
   * **추가**를 선택합니다.
@@ -28,6 +29,7 @@ dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
 프로젝트(\*.csproj) 파일에 필요한 NuGet 패키지 참조를 추가합니다. 프로젝트 디렉터리에서 다음 명령을 실행합니다.
+
 
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
@@ -75,6 +77,7 @@ Identity 스캐폴더를 실행합니다.
 * **ID 추가** 대화 상자에서 원하는 옵션을 선택합니다.
   * 기존 레이아웃 페이지를 선택하세요. 그렇지 않으면 잘못된 태그로 레이아웃 파일을 덮어쓰게 됩니다. 기존 *\_Layout* 파일을 선택한 경우에는 덮어쓰지 **않습니다**.
  예: Razor Pages에 대한 `~/Views/Shared/_Layout.cshtml`이나 MVC 프로젝트에 대한 `~/Pages/Shared/_Layout.cshtml`.
+
 * 기존 데이터 컨텍스트를 사용하려면 재정의할 파일을 하나 이상 선택합니다. 데이터 컨텍스트를 추가하려면 파일을 하나 이상 선택해야 합니다.
   * 데이터 컨텍스트 클래스를 선택합니다.
   * **추가**를 선택합니다.

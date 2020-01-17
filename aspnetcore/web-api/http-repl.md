@@ -5,14 +5,14 @@ description: HTTP REPL .NET Core 전역 도구를 사용하여 ASP.NET Core 웹 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 12/02/2019
+ms.date: 12/11/2019
 uid: web-api/http-repl
-ms.openlocfilehash: c6e3ab5685b5bd0b154d20585fb0d187f81da641
-ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
+ms.openlocfilehash: 34ec2b2eb511f33e1263cdad4a338183a3e4b83a
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/03/2019
-ms.locfileid: "74717167"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75356184"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>HTTP REPL을 사용하여 웹 API 테스트
 
@@ -36,7 +36,7 @@ HTTP REPL(Read-Eval-Print Loop):
 
 본 내용을 따라가려면 [샘플 ASP.NET Core 웹 API를 보거나 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/http-repl/samples)([다운로드 방법](xref:index#how-to-download-a-sample))하세요.
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 * [!INCLUDE [2.1-SDK](~/includes/2.1-SDK.md)]
 
@@ -396,7 +396,7 @@ get <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:body
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
-### <a name="example"></a>예
+### <a name="example"></a>예제
 
 HTTP GET 요청을 실행하려면:
 
@@ -480,7 +480,7 @@ post <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-f
 
 [!INCLUDE [HTTP request body CLI options](~/includes/http-repl/requires-body-options.md)]
 
-### <a name="example"></a>예
+### <a name="example"></a>예제
 
 HTTP POST 요청을 실행하려면:
 
@@ -550,7 +550,7 @@ put <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-fo
 
 [!INCLUDE [HTTP request body CLI options](~/includes/http-repl/requires-body-options.md)]
 
-### <a name="example"></a>예
+### <a name="example"></a>예제
 
 HTTP PUT 요청을 실행하려면:
 
@@ -662,7 +662,7 @@ delete <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:b
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
-### <a name="example"></a>예
+### <a name="example"></a>예제
 
 HTTP DELETE 요청을 실행하려면:
 
@@ -690,8 +690,9 @@ HTTP DELETE 요청을 실행하려면:
         "data": "Strawberry"
       }
     ]
+    ```
 
-1. Run the `delete` command on an endpoint that supports it:
+1. 이를 지원하는 엔드포인트에서 `delete` 명령을 실행합니다.
 
     ```console
     https://localhost:5001/fruits~ delete 2
@@ -820,7 +821,7 @@ set header Authorization "bearer <TOKEN VALUE>"
 
 Azure에서 호스트되는 엔드포인트에 액세스하거나 [Azure REST API](/rest/api/azure/)를 사용하려면 전달자 토큰이 필요합니다. [Azure CLI](/cli/azure/)를 통해 Azure 구독에 대한 전달자 토큰을 가져오려면 다음 단계를 사용합니다. HTTP REPL은 HTTP 요청 헤더에서 전달자 토큰을 설정하고 Azure App Service Web Apps의 목록을 검색합니다.
 
-1. Azure에 로그인합니다.
+1. Azure에 로그인:
 
     ```azcli
     az login
