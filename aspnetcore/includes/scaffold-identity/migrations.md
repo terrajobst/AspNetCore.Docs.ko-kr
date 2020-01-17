@@ -1,4 +1,4 @@
-생성된 Identity 데이터베이스 코드는 [Entity Framework Core 마이그레이션](/ef/core/managing-schemas/migrations/)을 필요로 합니다. 마이그레이션을 만들고 데이터베이스를 업데이트 합니다. 예를 들어 다음 명령을 실행합니다.
+생성된 Identity 데이터베이스 코드는 [Entity Framework Core 마이그레이션](/ef/core/managing-schemas/migrations/)을 필요로 합니다. 마이그레이션을 만들고 데이터베이스를 업데이트합니다. 예를 들어 다음 명령을 실행합니다.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
