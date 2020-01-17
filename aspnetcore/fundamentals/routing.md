@@ -5,14 +5,14 @@ description: ASP.NET Core 라우팅에서 요청 URI를 엔드포인트 선택�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/24/2019
+ms.date: 12/13/2019
 uid: fundamentals/routing
-ms.openlocfilehash: be4493cc927bd5437a2c9dab00b6a555756195bb
-ms.sourcegitcommit: eb2fe5ad2e82fab86ca952463af8d017ba659b25
+ms.openlocfilehash: 462f34664540b92ba6758224a722c7ca8f9c8de0
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/01/2019
-ms.locfileid: "73416128"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829064"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core에서 라우팅
 
@@ -20,7 +20,7 @@ ms.locfileid: "73416128"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-라우팅은 요청 URI를 엔드포인트에 매핑하고 들어오는 요청을 이러한 엔드포인트로 디스패치합니다. 경로는 앱에서 정의되고 앱 시작 시 구성됩니다. 경로는 요청에 포함된 URL에서 필요에 따라 값을 추출할 수 있으며 이러한 값은 요청 처리를 위해 사용될 수 있습니다. 또한 라우팅은 앱의 경로 정보를 사용하여 엔드포인트에 매핑되는 URL을 생성할 수도 있습니다.
+라우팅은 요청 URI를 엔드포인트에 매핑하고 들어오는 요청을 이러한 엔드포인트로 디스패치합니다. 경로는 앱에서 정의되고 앱 시작 시 구성됩니다. 경로는 요청에 포함된 URL에서 필요에 따라 값을 추출할 수 있으며 이러한 값은 요청 처리를 위해 사용될 수 있습니다. 또한 라우팅은 앱의 경로 정보를 사용하여 엔드포인트에 매핑되는 URL을 생성할 수도 있습니다. 많은 앱은 템플릿에서 제공하는 것 이상의 경로를 추가할 필요가 없습니다. 컨트롤러 및 Razor Pages의 ASP.NET Core 템플릿은 경로 엔드포인트를 구성합니다. 사용자 지정 경로 엔드포인트를 추가해야 하는 경우 템플릿 생성 경로 엔드포인트와 함께 사용자 지정 엔드포인트를 구성할 수 있습니다.
 
 > [!IMPORTANT]
 > 이 문서에서는 낮은 수준의 ASP.NET Core 라우팅을 설명합니다. ASP.NET Core MVC 라우팅에 대한 내용은 <xref:mvc/controllers/routing>을 참조하세요. Razor Pages의 라우팅 규칙에 대한 내용은 <xref:razor-pages/razor-pages-conventions>을 참조하세요.
@@ -77,7 +77,7 @@ URL 일치는 라우팅이 들어오는 요청을 *엔드포인트*로 디스패
 
 라우팅 미들웨어 뒤에 실행되는 미들웨어는 엔드포인트를 보고, 작업을 수행할 수 있습니다. 예를 들어 권한 부여 미들웨어는 엔드포인트의 메타데이터 컬렉션에서 권한 부여 정책을 조사할 수 있습니다. 요청 처리 파이프라인의 미들웨어가 모두 실행된 후에 선택한 엔드포인트의 대리자가 호출됩니다.
 
-엔드포인트 라우팅의 라우팅 시스템은 모든 디스패치를 결정합니다. 미들웨어가 선택된 엔드포인트를 기반으로 정책을 적용하므로 디스패치 또는 응용 프로그램의 보안 정책에 영향을 미칠 수 있는 모든 결정은 라우팅 시스템 내에서 이루어져야 합니다.
+엔드포인트 라우팅의 라우팅 시스템은 모든 디스패치를 결정합니다. 미들웨어가 선택된 엔드포인트를 기반으로 정책을 적용하므로 디스패치 또는 애플리케이션의 보안 정책에 영향을 미칠 수 있는 모든 결정은 라우팅 시스템 내에서 이루어져야 합니다.
 
 엔드포인트 대리자가 실행되면 [RouteContext.RouteData](xref:Microsoft.AspNetCore.Routing.RouteContext.RouteData)의 속성이 지금까지 수행된 요청 처리에 따라 적절한 값으로 설정됩니다.
 
@@ -126,6 +126,22 @@ URL 생성은 라우팅이 경로 값의 집합을 기반으로 하는 URL 경�
 > * 들어오는 요청의 `GetUri*` 헤더의 유효성을 검사하지 않는 앱 구성에서는 `Host` 확장 메서드를 신중하게 사용하세요. 들어오는 요청의 `Host` 헤더의 유효성을 검사하지 않으면 신뢰할 수 없는 요청 입력이 보기/페이지에 포함된 URI로 클라이언트에 다시 보내질 수 있습니다. 모든 프로덕션 앱은 알려진 유효한 값에 대해 `Host` 헤더의 유효성을 검사하도록 서버를 구성하는 것이 좋습니다.
 >
 > * 미들웨어에서 `MapWhen` 또는 <xref:Microsoft.AspNetCore.Routing.LinkGenerator>과 함께 `Map`를 사용할 때는 신중하게 사용하세요. `Map*`는 실행 중인 요청의 기본 경로를 변경하여 링크 생성의 출력에 영향을 줍니다. 모든 <xref:Microsoft.AspNetCore.Routing.LinkGenerator> API는 기본 경로를 지정할 수 있습니다. 링크 생성에 대한 `Map*`의 영향을 취소하려면 항상 빈 기본 경로를 지정합니다.
+
+## <a name="endpoint-routing"></a>엔드포인트 라우팅
+
+* 경로 엔드포인트에는 템플릿, 메타데이터 및 엔드포인트의 응답을 제공하는 요청 대리자가 있습니다. 메타데이터는 각 엔드포인트에 연결된 정책과 구성에 따라 횡단 관심사(Cross-Cutting Concerns)를 구현하는 데 사용됩니다. 예를 들어 권한 부여 미들웨어는 엔드포인트의 메타데이터 컬렉션에서 [권한 부여 정책](xref:security/authorization/policies#applying-policies-to-mvc-controllers)을 조사할 수 있습니다.
+* 엔드포인트 라우팅은 다음과 같은 두 가지 확장 메서드를 사용하여 미들웨어와 통합됩니다.
+  * [UseRouting](xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*)은 경로 일치를 미들웨어 파이프라인에 추가합니다. 이것은 권한 부여, 엔드포인트 실행 등의 경로 인식 미들웨어 앞에 와야 합니다.
+  * [UseEndpoints](xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*)는 미들웨어 파이프라인에 엔드포인트 실행을 추가합니다. 엔드포인트의 응답을 제공하는 요청 대리자를 실행합니다.
+  `UseEndpoints`는 앱에서 일치시키고 실행할 수 있는 경로 엔드포인트를 구성하는 위치이기도 합니다. 예를 들어 <xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages*>, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*>, <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet*> 및 <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapPost*> 메서드를 제공합니다.
+* 앱은 ASP.NET Core의 도우미 메서드를 사용하여 해당 경로를 구성합니다. ASP.NET Core 프레임워크는 <xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages*>, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*>, `MapHub<THub>` 같은 도우미 메서드를 제공합니다. 사용자 고유의 사용자 지정 경로 엔드포인트를 구성하는 도우미 메서드도 있습니다. <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet*>, <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapPost*> 및 [MapVerb](xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions). 
+* 또한 엔드포인트 라우팅은 애플리케이션이 시작된 이후 엔드포인트 변경을 지원합니다. 앱 또는 ASP.NET Core 프레임워크에서 이를 지원하려면 사용자 지정 <xref:Microsoft.AspNetCore.Routing.EndpointDataSource>를 만들고 등록해야 합니다. 이는 고급 기능이며 일반적으로 필요하지 않습니다. 엔드포인트는 일반적으로 시작 시 구성되며 애플리케이션의 수명 동안 정적입니다. 시작할 때 파일 또는 데이터베이스에서 경로 구성을 로드하는 것은 동적이지 않습니다.
+
+다음 코드에서는 엔드포인트 라우팅의 기본 예제를 보여 줍니다.
+
+[!code-csharp[](routing/samples/3.x/Startup.cs?name=snippet)]
+
+엔드포인트 라우팅에 대한 자세한 내용은 이 문서에서 [URL 일치](#url-matching)를 참조하세요.
 
 ## <a name="endpoint-routing-differences-from-earlier-versions-of-routing"></a>이전 버전의 라우팅과의 끝점 라우팅 차이점
 
@@ -441,7 +457,7 @@ catch-all 매개 변수는 경로 구분 기호(`/`) 문자를 포함하여 URL�
 
 다음 표에서는 경로 제약 조건 예제 및 예상되는 해당 동작을 보여 줍니다.
 
-| 제약 조건 | 예 | 일치하는 예제 | 참고 |
+| 제약 조건 | 예제 | 일치하는 예제 | 참고 |
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | 임의의 정수와 일치 |
 | `bool` | `{active:bool}` | `true`, `FALSE` | `true` 또는 `false` 일치(대/소문자 구분하지 않음) |
@@ -588,8 +604,8 @@ routes.MapRoute("blog_route", "blog/{*slug}",
 
 ## <a name="complex-segments"></a>복잡한 세그먼트
 
-복잡한 세그먼트(예: `[Route("/x{token}y")]`)는 non-greedy 방식으로 오른쪽에서 왼쪽으로 리터럴을 매칭하여 처리됩니다. 복잡한 세그먼트 일치 방법에 대한 자세한 설명은 [이 코드](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)를 참조하세요. [코드 샘플](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)은 ASP.NET Core에서 사용되지 않지만 복잡한 세그먼트에 대한 적절한 설명을 제공합니다.
-<!-- While that code is no longer used by ASP.NET Core for complex segment matching, it provides a good match to the current algorithm. The [current code](https://github.com/aspnet/AspNetCore/blob/91514c9af7e0f4c44029b51f05a01c6fe4c96e4c/src/Http/Routing/src/Matching/DfaMatcherBuilder.cs#L227-L244) is too abstracted from matching to be useful for understanding complex segment matching.
+복잡한 세그먼트(예: `[Route("/x{token}y")]`)는 non-greedy 방식으로 오른쪽에서 왼쪽으로 리터럴을 매칭하여 처리됩니다. 복잡한 세그먼트 일치 방법에 대한 자세한 설명은 [이 코드](https://github.com/dotnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)를 참조하세요. [코드 샘플](https://github.com/dotnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)은 ASP.NET Core에서 사용되지 않지만 복잡한 세그먼트에 대한 적절한 설명을 제공합니다.
+<!-- While that code is no longer used by ASP.NET Core for complex segment matching, it provides a good match to the current algorithm. The [current code](https://github.com/dotnet/AspNetCore/blob/91514c9af7e0f4c44029b51f05a01c6fe4c96e4c/src/Http/Routing/src/Matching/DfaMatcherBuilder.cs#L227-L244) is too abstracted from matching to be useful for understanding complex segment matching.
 -->
 
 ## <a name="configuring-endpoint-metadata"></a>엔드포인트 메타데이터 구성
@@ -597,7 +613,7 @@ routes.MapRoute("blog_route", "blog/{*slug}",
 다음 링크는 엔드포인트 메타데이터를 구성하는 방법에 대한 정보를 제공합니다.
 
 * [엔드포인트 라우팅을 사용하여 Cors 사용](xref:security/cors#enable-cors-with-endpoint-routing)
-* 사용자 지정 `[MinimumAgeAuthorize]` 특성을 사용하는 [IAuthorizationPolicyProvider 샘플](https://github.com/aspnet/AspNetCore/tree/release/3.0/src/Security/samples/CustomPolicyProvider)
+* 사용자 지정 `[MinimumAgeAuthorize]` 특성을 사용하는 [IAuthorizationPolicyProvider 샘플](https://github.com/dotnet/AspNetCore/tree/release/3.0/src/Security/samples/CustomPolicyProvider)
 * [[권한 부여] 특성으로 인증 테스트](xref:security/authentication/identity#test-identity)
 * <xref:Microsoft.AspNetCore.Builder.AuthorizationEndpointConventionBuilderExtensions.RequireAuthorization*>
 * [[권한 부여] 특성을 갖는 체계 선택](xref:security/authorization/limitingidentitybyscheme#selecting-the-scheme-with-the-authorize-attribute)
@@ -738,7 +754,7 @@ URL 생성 지원을 사용하면 URL을 하드 코딩하지 않고 앱을 개�
 
 URL 일치는 라우팅이 들어오는 요청을 *엔드포인트*로 디스패치하는 프로세스입니다. 이 프로세스는 URL 경로의 데이터를 기반으로 하지만 요청에 있는 모든 데이터를 고려하도록 확장될 수 있습니다. 요청을 별도의 처리기로 디스패치하는 기능은 앱의 크기와 복잡성을 확장하는 핵심입니다.
 
-엔드포인트 라우팅의 라우팅 시스템은 모든 디스패치를 결정합니다. 미들웨어가 선택된 엔드포인트를 기반으로 정책을 적용하므로 디스패치 또는 응용 프로그램의 보안 정책에 영향을 미칠 수 있는 모든 결정은 라우팅 시스템 내에서 이루어져야 합니다.
+엔드포인트 라우팅의 라우팅 시스템은 모든 디스패치를 결정합니다. 미들웨어가 선택된 엔드포인트를 기반으로 정책을 적용하므로 디스패치 또는 애플리케이션의 보안 정책에 영향을 미칠 수 있는 모든 결정은 라우팅 시스템 내에서 이루어져야 합니다.
 
 엔드포인트 대리자가 실행되면 [RouteContext.RouteData](xref:Microsoft.AspNetCore.Routing.RouteContext.RouteData)의 속성이 지금까지 수행된 요청 처리에 따라 적절한 값으로 설정됩니다.
 
@@ -1102,7 +1118,7 @@ catch-all 매개 변수는 경로 구분 기호(`/`) 문자를 포함하여 URL�
 
 다음 표에서는 경로 제약 조건 예제 및 예상되는 해당 동작을 보여 줍니다.
 
-| 제약 조건 | 예 | 일치하는 예제 | 참고 |
+| 제약 조건 | 예제 | 일치하는 예제 | 참고 |
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | 임의의 정수와 일치 |
 | `bool` | `{active:bool}` | `true`, `FALSE` | `true` 또는 `false` 일치(대/소문자 구분하지 않음) |
@@ -1249,8 +1265,8 @@ routes.MapRoute("blog_route", "blog/{*slug}",
 
 ## <a name="complex-segments"></a>복잡한 세그먼트
 
-복잡한 세그먼트(예: `[Route("/x{token}y")]`)는 non-greedy 방식으로 오른쪽에서 왼쪽으로 리터럴을 매칭하여 처리됩니다. 복잡한 세그먼트 일치 방법에 대한 자세한 설명은 [이 코드](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)를 참조하세요. [코드 샘플](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)은 ASP.NET Core에서 사용되지 않지만 복잡한 세그먼트에 대한 적절한 설명을 제공합니다.
-<!-- While that code is no longer used by ASP.NET Core for complex segment matching, it provides a good match to the current algorithm. The [current code](https://github.com/aspnet/AspNetCore/blob/91514c9af7e0f4c44029b51f05a01c6fe4c96e4c/src/Http/Routing/src/Matching/DfaMatcherBuilder.cs#L227-L244) is too abstracted from matching to be useful for understanding complex segment matching.
+복잡한 세그먼트(예: `[Route("/x{token}y")]`)는 non-greedy 방식으로 오른쪽에서 왼쪽으로 리터럴을 매칭하여 처리됩니다. 복잡한 세그먼트 일치 방법에 대한 자세한 설명은 [이 코드](https://github.com/dotnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)를 참조하세요. [코드 샘플](https://github.com/dotnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)은 ASP.NET Core에서 사용되지 않지만 복잡한 세그먼트에 대한 적절한 설명을 제공합니다.
+<!-- While that code is no longer used by ASP.NET Core for complex segment matching, it provides a good match to the current algorithm. The [current code](https://github.com/dotnet/AspNetCore/blob/91514c9af7e0f4c44029b51f05a01c6fe4c96e4c/src/Http/Routing/src/Matching/DfaMatcherBuilder.cs#L227-L244) is too abstracted from matching to be useful for understanding complex segment matching.
 -->
 
 ::: moniker-end
@@ -1556,7 +1572,7 @@ catch-all 매개 변수는 경로 구분 기호(`/`) 문자를 포함하여 URL�
 
 다음 표에서는 경로 제약 조건 예제 및 예상되는 해당 동작을 보여 줍니다.
 
-| 제약 조건 | 예 | 일치하는 예제 | 참고 |
+| 제약 조건 | 예제 | 일치하는 예제 | 참고 |
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | 임의의 정수와 일치 |
 | `bool` | `{active:bool}` | `true`, `FALSE` | `true` 또는 `false` 일치(대/소문자 구분하지 않음) |
@@ -1665,8 +1681,8 @@ routes.MapRoute("blog_route", "blog/{*slug}",
 
 ## <a name="complex-segments"></a>복잡한 세그먼트
 
-복잡한 세그먼트(예: `[Route("/x{token}y")]`)는 non-greedy 방식으로 오른쪽에서 왼쪽으로 리터럴을 매칭하여 처리됩니다. 복잡한 세그먼트 일치 방법에 대한 자세한 설명은 [이 코드](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)를 참조하세요. [코드 샘플](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)은 ASP.NET Core에서 사용되지 않지만 복잡한 세그먼트에 대한 적절한 설명을 제공합니다.
-<!-- While that code is no longer used by ASP.NET Core for complex segment matching, it provides a good match to the current algorithm. The [current code](https://github.com/aspnet/AspNetCore/blob/91514c9af7e0f4c44029b51f05a01c6fe4c96e4c/src/Http/Routing/src/Matching/DfaMatcherBuilder.cs#L227-L244) is too abstracted from matching to be useful for understanding complex segment matching.
+복잡한 세그먼트(예: `[Route("/x{token}y")]`)는 non-greedy 방식으로 오른쪽에서 왼쪽으로 리터럴을 매칭하여 처리됩니다. 복잡한 세그먼트 일치 방법에 대한 자세한 설명은 [이 코드](https://github.com/dotnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)를 참조하세요. [코드 샘플](https://github.com/dotnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293)은 ASP.NET Core에서 사용되지 않지만 복잡한 세그먼트에 대한 적절한 설명을 제공합니다.
+<!-- While that code is no longer used by ASP.NET Core for complex segment matching, it provides a good match to the current algorithm. The [current code](https://github.com/dotnet/AspNetCore/blob/91514c9af7e0f4c44029b51f05a01c6fe4c96e4c/src/Http/Routing/src/Matching/DfaMatcherBuilder.cs#L227-L244) is too abstracted from matching to be useful for understanding complex segment matching.
 -->
 
 ::: moniker-end

@@ -9,12 +9,12 @@ ms.date: 12/09/2019
 no-loc:
 - Blazor
 uid: blazor/get-started
-ms.openlocfilehash: e368ecaf931d392de7e52ec2d5a2dfd171c2c86f
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: 2135c2a090d60ec7a46fa4f899f0f14987b6b4e0
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74943768"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75951717"
 ---
 # <a name="get-started-with-aspnet-core-opno-locblazor"></a>ASP.NET Core Blazor 시작하기
 
@@ -85,7 +85,7 @@ Blazor시작:
 
    # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
-   1 \. [Mac용 Visual Studio](https://visualstudio.microsoft.com/vs/mac/)를 설치 합니다. [업데이트 채널을 미리 보기로](/visualstudio/mac/install-preview)전환 합니다.
+   1 \. [Mac용 Visual Studio](https://visualstudio.microsoft.com/vs/mac/)를 설치 합니다.
 
    2 \. **파일** > **새 솔루션** 을 선택 하거나 **새 프로젝트**를 만듭니다.
 
@@ -101,7 +101,7 @@ Blazor시작:
 
    7 \. **디버깅 하지 않고** 실행 > 실행을 선택 하 여 *디버거 없이*앱 **을 실행 합니다** . **디버깅 시작** 을 사용 하 여 앱을 실행 하 고 *디버거를 사용*하 여 앱을 실행 합니다.
 
-       If a prompt appears to trust the development certificate, trust the certificate and continue.
+   개발 인증서를 신뢰 하 라는 메시지가 표시 되 면 인증서를 신뢰 하 고 계속 합니다.
 
    # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
@@ -242,7 +242,7 @@ Blazor시작:
 * 카운터
 * 데이터 페치
 
-Counter 페이지에서 **Click me** 단추를 선택하여 페이지 새로 고침 없이 카운터를 증가시킵니다. 웹 페이지에서 카운터를 증가 시키려면 JavaScript를 작성 해야 하지만를 사용할 C#수 Blazor.
+카운터 페이지에서 **Click me** 단추를 선택하여 페이지 새로 고침 없이 카운터를 증분합니다. 웹 페이지에서 카운터를 증가 시키려면 JavaScript를 작성 해야 하지만를 사용할 C#수 Blazor.
 
 *Pages/Counter.razor*:
 
@@ -270,7 +270,7 @@ HTML 구문을 사용 하 여 구성 요소를 다른 구성 요소에 추가 �
 구성 요소 매개 변수는 자식 구성 요소에 대 한 속성을 설정할 수 있도록 하는 특성 또는 [자식 콘텐츠](xref:blazor/components#child-content)를 사용 하 여 지정 됩니다. `Counter` 구성 요소에 매개 변수를 추가 하려면 구성 요소의 `@code` 블록을 업데이트 합니다.
 
 * `[Parameter]` 특성을 사용 하 여 `IncrementAmount`에 대 한 public 속성을 추가 합니다.
-* `currentCount` 값을 증가시킬 때 `IncrementAmount`를 사용하도록 `IncrementCount` 메서드를 변경합니다.
+* `currentCount` 값을 늘릴 때 `IncrementAmount`를 사용하도록 `IncrementCount` 메서드를 변경합니다.
 
 *Pages/Counter.razor*:
 

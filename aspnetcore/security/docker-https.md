@@ -9,12 +9,12 @@ ms.date: 07/05/2019
 no-loc:
 - Let's Encrypt
 uid: security/docker-https
-ms.openlocfilehash: 47027033c0b7130f2d38d22c02a54945b2cc31b3
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: 07e2791e5b26975c71323f8cb41a4b0fbe0cdf11
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75358915"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75952135"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-over-https"></a>HTTPS를 통해 Docker를 사용 하 여 ASP.NET Core 이미지 호스팅
 
@@ -43,7 +43,7 @@ ASP.NET Core는 [기본적으로 HTTPS를](/aspnet/core/security/enforcing-ssl)�
 * `dotnet dev-certs` 도구는 필요 하지 않습니다.
 * 지침에 사용 되는 위치에 인증서를 저장할 필요가 없습니다. 사이트 디렉터리 내에 인증서를 저장 하지 않는 것이 좋지만 모든 위치는 작동 해야 합니다.
 
-명령 볼륨은 컨테이너에 인증서를 탑재 합니다. *Dockerfile*에서 `COPY` 명령을 사용 하 여 컨테이너 이미지에 인증서를 추가할 수 있습니다. 다음과 같은 이유로 인증서를 이미지로 복사 하는 것은 권장 되지 않습니다.
+다음 섹션에 포함 된 지침은 Docker의 `-v` 명령줄 옵션을 사용 하 여 컨테이너에 인증서를 탑재 합니다. *Dockerfile*에서 `COPY` 명령을 사용 하 여 컨테이너 이미지에 인증서를 추가할 수 있지만 권장 되지는 않습니다. 다음과 같은 이유로 인증서를 이미지로 복사 하는 것은 권장 되지 않습니다.
 
 * 개발자 인증서를 사용 하 여 테스트 하는 데 동일한 이미지를 사용 하는 것은 어렵습니다.
 * 프로덕션 인증서를 사용 하 여 호스트 하는 데 동일한 이미지를 사용 하는 것은 어렵습니다.

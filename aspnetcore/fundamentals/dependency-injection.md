@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/05/2019
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: c46e7322e86c2836a15bd0720995a8634bb185be
-ms.sourcegitcommit: 897d4abff58505dae86b2947c5fe3d1b80d927f3
+ms.openlocfilehash: fabc6df07d2d7beaa546b189bb7527f626fc669d
+ms.sourcegitcommit: 47d453f34b6fd0179119c572cb8be64c5365cbb6
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73634018"
+ms.lasthandoff: 01/02/2020
+ms.locfileid: "75597943"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>ASP.NET Core에서 종속성 주입
 
@@ -107,7 +107,7 @@ public class IndexModel : PageModel
 컨테이너는 [개방형 형식(제네릭)](/dotnet/csharp/language-reference/language-specification/types#open-and-closed-types)을 활용하여 `ILogger<TCategoryName>`을 해결하므로 모든 [생성된 형식(제네릭)](/dotnet/csharp/language-reference/language-specification/types#constructed-types)을 등록하지 않아도 됩니다.
 
 ```csharp
-services.AddSingleton(typeof(ILogger<T>), typeof(Logger<T>));
+services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
 ```
 
 샘플 앱에서 `IMyDependency` 서비스는 구체적인 형식 `MyDependency`로 등록됩니다. 이 등록은 서비스 수명을 단일 요청의 수명으로 지정합니다. [서비스 수명](#service-lifetimes)에 대해서는 이 항목의 뒷부분에서 설명합니다.
@@ -176,7 +176,7 @@ public void Configure(IApplicationBuilder app, IOptions<MyOptions> options)
 }
 ```
 
-자세한 내용은 <xref:fundamentals/startup>을 참조하세요.
+자세한 내용은 <xref:fundamentals/startup>를 참조하세요.
 
 ## <a name="framework-provided-services"></a>프레임워크에서 제공하는 서비스
 
@@ -259,7 +259,7 @@ Transient 수명 서비스(<xref:Microsoft.Extensions.DependencyInjection.Servic
 Scoped 수명 서비스(<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped*>)는 클라이언트 요청(연결)당 한 번 생성됩니다.
 
 > [!WARNING]
-> 미들웨어에서 범위가 지정된 서비스를 사용하는 경우 `Invoke` 또는 `InvokeAsync` 메서드에 서비스를 삽입합니다. 생성자 삽입은 서비스가 싱글톤처럼 작동하게 하므로 이러한 방법으로 삽입하지 마세요. 자세한 내용은 <xref:fundamentals/middleware/write#per-request-middleware-dependencies>을 참조하세요.
+> 미들웨어에서 범위가 지정된 서비스를 사용하는 경우 `Invoke` 또는 `InvokeAsync` 메서드에 서비스를 삽입합니다. 생성자 삽입은 서비스가 싱글톤처럼 작동하게 하므로 이러한 방법으로 삽입하지 마세요. 자세한 내용은 <xref:fundamentals/middleware/write#per-request-middleware-dependencies>를 참조하세요.
 
 ### <a name="singleton"></a>Singleton
 
@@ -553,7 +553,7 @@ public class Program
 
 범위가 지정된 서비스는 서비스를 만든 컨테이너에 의해 삭제됩니다. 범위가 지정된 서비스가 루트 컨테이너에서 만들어지는 경우 서비스의 수명은 사실상 싱글톤으로 승격됩니다. 해당 서비스는 앱/서버가 종료될 때 루트 컨테이너에 의해서만 삭제되기 때문입니다. 서비스 범위의 유효성 검사는 `BuildServiceProvider`가 호출될 경우 이러한 상황을 감지합니다.
 
-자세한 내용은 <xref:fundamentals/host/web-host#scope-validation>을 참조하세요.
+자세한 내용은 <xref:fundamentals/host/web-host#scope-validation>를 참조하세요.
 
 ## <a name="request-services"></a>요청 서비스
 

@@ -5,14 +5,14 @@ description: ASP.NET Core 앱의 여러 환경에서 앱 동작을 제어하는 
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/07/2019
+ms.date: 12/17/2019
 uid: fundamentals/environments
-ms.openlocfilehash: affbb95273c91fe5bf452e0e1ebefa669297304c
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: 30e2771c0a24fcbf6490d08c7028566314b6c011
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74944323"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75358723"
 ---
 # <a name="use-multiple-environments-in-aspnet-core"></a>ASP.NET Core에서 여러 환경 사용
 
@@ -188,11 +188,12 @@ Visual Studio 프로젝트 속성 **Debug** 탭은 *launchSettings.json* 파일�
 [Azure App Service](https://azure.microsoft.com/services/app-service/)에서 환경을 설정하려면 다음 단계를 수행합니다.
 
 1. **App Services** 블레이드에서 앱을 선택합니다.
-1. **SETTINGS** 그룹에서 **애플리케이션 설정** 블레이드를 선택합니다.
-1. **애플리케이션 설정** 영역에서 **새 설정 추가**를 선택합니다.
-1. **이름**에 `ASPNETCORE_ENVIRONMENT`를 입력합니다. **값**에는 환경을 입력합니다(예: `Staging`).
-1. 배포 슬롯을 교환할 때 환경 설정을 현재 슬롯으로 유지하려면 **슬롯 설정** 확인란을 선택합니다. 자세한 내용은 [Azure 설명서: 교환된 설정은? ](/azure/app-service/web-sites-staged-publishing)를 참조하세요.
-1. 블레이드 상단에서 **저장**을 선택합니다.
+1. **설정** 그룹에서 **구성** 블레이드를 선택합니다.
+1. **애플리케이션 설정** 탭에서 **새 애플리케이션 설정**를 선택합니다.
+1. **애플리케이션 설정 추가/편집** 창에서 **이름**에 대한 `ASPNETCORE_ENVIRONMENT`를 제공합니다. **값**에는 환경을 입력합니다(예: `Staging`).
+1. 배포 슬롯을 교환할 때 환경 설정을 현재 슬롯으로 유지하려면 **배포 슬롯 설정** 확인란을 선택합니다. 자세한 내용은 Azure 설명서의 [Azure App Service에서 스테이징 환경 설정](/azure/app-service/web-sites-staged-publishing)을 참조하세요.
+1. **확인**을 선택하여 **애플리케이션 설정 추가/편집** 창을 닫습니다.
+1. **구성** 블레이드의 맨 위에 있는 **저장**을 선택합니다.
 
 Azure App Service는 Azure 포털에서 앱 설정(환경 변수)이 추가, 변경 또는 삭제된 후 앱을 자동으로 다시 시작합니다.
 
@@ -617,11 +618,12 @@ Visual Studio 프로젝트 속성 **Debug** 탭은 *launchSettings.json* 파일�
 [Azure App Service](https://azure.microsoft.com/services/app-service/)에서 환경을 설정하려면 다음 단계를 수행합니다.
 
 1. **App Services** 블레이드에서 앱을 선택합니다.
-1. **SETTINGS** 그룹에서 **애플리케이션 설정** 블레이드를 선택합니다.
-1. **애플리케이션 설정** 영역에서 **새 설정 추가**를 선택합니다.
-1. **이름**에 `ASPNETCORE_ENVIRONMENT`를 입력합니다. **값**에는 환경을 입력합니다(예: `Staging`).
-1. 배포 슬롯을 교환할 때 환경 설정을 현재 슬롯으로 유지하려면 **슬롯 설정** 확인란을 선택합니다. 자세한 내용은 [Azure 설명서: 교환된 설정은? ](/azure/app-service/web-sites-staged-publishing)를 참조하세요.
-1. 블레이드 상단에서 **저장**을 선택합니다.
+1. **설정** 그룹에서 **구성** 블레이드를 선택합니다.
+1. **애플리케이션 설정** 탭에서 **새 애플리케이션 설정**를 선택합니다.
+1. **애플리케이션 설정 추가/편집** 창에서 **이름**에 대한 `ASPNETCORE_ENVIRONMENT`를 제공합니다. **값**에는 환경을 입력합니다(예: `Staging`).
+1. 배포 슬롯을 교환할 때 환경 설정을 현재 슬롯으로 유지하려면 **배포 슬롯 설정** 확인란을 선택합니다. 자세한 내용은 Azure 설명서의 [Azure App Service에서 스테이징 환경 설정](/azure/app-service/web-sites-staged-publishing)을 참조하세요.
+1. **확인**을 선택하여 **애플리케이션 설정 추가/편집** 창을 닫습니다.
+1. **구성** 블레이드의 맨 위에 있는 **저장**을 선택합니다.
 
 Azure App Service는 Azure 포털에서 앱 설정(환경 변수)이 추가, 변경 또는 삭제된 후 앱을 자동으로 다시 시작합니다.
 

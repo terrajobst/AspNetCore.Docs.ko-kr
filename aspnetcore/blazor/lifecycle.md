@@ -2,19 +2,20 @@
 title: ASP.NET Core Blazor 수명 주기
 author: guardrex
 description: ASP.NET Core Blazor 앱에서 Razor 구성 요소 수명 주기 메서드를 사용 하는 방법에 대해 알아봅니다.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 12/18/2019
 no-loc:
 - Blazor
+- SignalR
 uid: blazor/lifecycle
-ms.openlocfilehash: e600e7c7a6a8c646a655520bd5c127f2cd662753
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: df5bb676df59b538179a69978040521c4ee78ed1
+ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74944033"
+ms.lasthandoff: 01/16/2020
+ms.locfileid: "76146370"
 ---
 # <a name="aspnet-core-opno-locblazor-lifecycle"></a>ASP.NET Core Blazor 수명 주기
 
@@ -26,26 +27,23 @@ Blazor 프레임 워크는 동기 및 비동기 수명 주기 메서드를 포�
 
 ### <a name="component-initialization-methods"></a>구성 요소 초기화 메서드
 
-구성 요소를 초기화 하는 코드를 실행 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized*> <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync*> 합니다. 이러한 메서드는 구성 요소가 처음 인스턴스화될 때 한 번만 호출 됩니다.
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync*> 및 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized*>는 부모 구성 요소에서 초기 매개 변수를 받은 후 구성 요소가 초기화 될 때 호출 됩니다. 구성 요소가 비동기 작업을 수행할 때 `OnInitializedAsync`를 사용 하 고 작업이 완료 되 면 새로 고쳐야 합니다. 이러한 메서드는 구성 요소가 처음 인스턴스화될 때 한 번만 호출 됩니다.
 
-비동기 작업을 수행 하려면 작업에서 `OnInitializedAsync` 및 `await` 키워드를 사용 합니다.
-
-```csharp
-protected override async Task OnInitializedAsync()
-{
-    await ...
-}
-```
-
-> [!NOTE]
-> 구성 요소 초기화 중 비동기 작업은 `OnInitializedAsync` 수명 주기 이벤트 중에 발생 해야 합니다.
-
-동기 작업의 경우 `OnInitialized`를 사용 합니다.
+동기 작업의 경우 `OnInitialized`를 재정의 합니다.
 
 ```csharp
 protected override void OnInitialized()
 {
     ...
+}
+```
+
+비동기 작업을 수행 하려면 `OnInitializedAsync`를 재정의 하 고 작업에 대해 `await` 키워드를 사용 합니다.
+
+```csharp
+protected override async Task OnInitializedAsync()
+{
+    await ...
 }
 ```
 
@@ -70,7 +68,12 @@ public override async Task SetParametersAsync(ParameterView parameters)
 
 ### <a name="after-parameters-are-set"></a>매개 변수가 설정 된 후
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync*> 및 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet*>는 구성 요소가 부모 로부터 매개 변수를 수신 하 고 값이 속성에 할당 될 때 호출 됩니다. 이러한 메서드는 구성 요소 초기화 후와 새 매개 변수 값이 지정 될 때마다 실행 됩니다.
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync*> 및 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet*> 호출 됩니다.
+
+* 구성 요소가 초기화 되 고 부모 구성 요소에서 첫 번째 매개 변수 집합을 받은 경우
+* 부모 구성 요소가 다시 렌더링 되 고 다음을 제공 하는 경우:
+  * 하나 이상의 매개 변수를 변경할 수 없는 알려진 기본 형식만 변경할 수 있습니다.
+  * 복합 형식 매개 변수입니다. 프레임 워크는 복합 형식의 매개 변수 값이 내부적으로 변경 되는지 여부를 알 수 없으므로 매개 변수 집합을 변경 된 것으로 처리 합니다.
 
 ```csharp
 protected override async Task OnParametersSetAsync()
@@ -160,7 +163,7 @@ Blazor 서버 템플릿의 *Pages/FetchData. razor* :
 
 구성 요소가 <xref:System.IDisposable>를 구현 하는 경우 UI에서 구성 요소가 제거 되 면 [Dispose 메서드가](/dotnet/standard/garbage-collection/implementing-dispose) 호출 됩니다. 다음 구성 요소는 `@implements IDisposable` 및 `Dispose` 메서드를 사용 합니다.
 
-```csharp
+```razor
 @using System
 @implements IDisposable
 

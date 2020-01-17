@@ -1,33 +1,33 @@
 ::: moniker range=">= aspnetcore-3.0"
 
-Id 스 캐 폴더를 실행 합니다.
+Identity 스캐폴더를 실행합니다.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **솔루션 탐색기**에서 프로젝트를 마우스 오른쪽 단추로 클릭 하 > **새 스 캐 폴드 항목**> **추가** 를 클릭 합니다.
-* **스 캐 폴드 추가** 대화 상자의 왼쪽 창에서 **id** > **추가**를 선택 합니다.
+* **솔루션 탐색기**에서 프로젝트 > **추가** > **스캐폴드 항목 새로 만들기**를 마우스 오른쪽 단추로 클릭합니다.
+* **새 스캐폴드 항목 추가** 대화 상자의 왼쪽 창에서 **ID** > **추가**를 선택합니다.
 * **Id 추가** 대화 상자에서 원하는 옵션을 선택 합니다.
-  * 기존 레이아웃 페이지를 선택 하거나 잘못 된 태그를 사용 하 여 레이아웃 파일을 덮어씁니다. 기존 *\_레이아웃* 을 선택한 경우에는이 파일을 덮어쓰지 **않습니다** .
+  * 기존 레이아웃 페이지를 선택하세요. 그렇지 않으면 잘못된 태그로 레이아웃 파일을 덮어쓰게 됩니다. 기존 *\_Layout* 파일을 선택한 경우에는 덮어쓰지 **않습니다**.
 
- 예: MVC 프로젝트에 대 한 Razor Pages `~/Views/Shared/_Layout.cshtml`에 대 한 `~/Pages/Shared/_Layout.cshtml`
-* 기존 데이터 컨텍스트를 사용 하려면 재정의할 파일을 하나 이상 선택 합니다. 데이터 컨텍스트를 추가 하려면 파일을 하나 이상 선택 해야 합니다.
-  * 데이터 컨텍스트 클래스를 선택 합니다.
+ 예: Razor Pages에 대한 `~/Pages/Shared/_Layout.cshtml`이나 MVC 프로젝트에 대한 `~/Views/Shared/_Layout.cshtml`.
+* 기존 데이터 컨텍스트를 사용하려면 재정의할 파일을 하나 이상 선택합니다. 데이터 컨텍스트를 추가하려면 파일을 하나 이상 선택해야 합니다.
+  * 데이터 컨텍스트 클래스를 선택합니다.
   * **추가**를 선택합니다.
-* 새 사용자 컨텍스트를 만들고 Id에 대 한 사용자 지정 사용자 클래스를 만들 수 있습니다.
-  * 선택 된 **+** 새 단추 **데이터 컨텍스트 클래스**합니다.
+* 새 사용자 컨텍스트를 만들고 Identity에 대한 사용자 지정 사용자 클래스를 만들 수 있습니다.
+  * **+** 단추를 선택해서 새로운 **데이터 컨텍스트 클래스**를 생성합니다.
   * **추가**를 선택합니다.
 
 참고: 새 사용자 컨텍스트를 만드는 경우 재정의할 파일을 선택할 필요가 없습니다.
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-ASP.NET Core 스 캐 폴더를 이전에 설치 하지 않은 경우 지금 설치 합니다.
+ASP.NET Core 스캐폴더를 이전에 설치하지 않은 경우 지금 설치합니다.
 
 ```dotnetcli
 dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
-프로젝트 (\*.csproj) 파일에 필요한 NuGet 패키지 참조를 추가 합니다. 프로젝트 디렉터리에서 다음 명령을 실행 합니다.
+프로젝트 (\*.csproj) 파일에 필요한 NuGet 패키지 참조를 추가 합니다. 프로젝트 디렉터리에서 다음 명령을 실행합니다.
 
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
@@ -38,7 +38,7 @@ dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 dotnet add package Microsoft.EntityFrameworkCore.Tools
 ```
 
-Identity 스 캐 폴더 옵션을 나열 하려면 다음 명령을 실행 합니다.
+Identity 스캐폴더 옵션을 나열하려면 다음 명령을 실행합니다.
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -h
@@ -46,7 +46,7 @@ dotnet aspnet-codegenerator identity -h
 
 [!INCLUDE[](~/includes/scaffoldTFM.md)]
 
-프로젝트 폴더에서 원하는 옵션을 사용 하 여 Id 스 캐 폴더를 실행 합니다. 예를 들어 기본 UI를 사용 하 여 id를 설정 하 고 최소 파일 수를 설정 하려면 다음 명령을 실행 합니다. DB 컨텍스트에 대 한 올바른 정규화 된 이름을 사용 합니다.
+프로젝트 폴더에서 원하는 옵션을 사용하여 Identity 스캐폴더를 실행합니다. 예를 들어 기본 UI와 최소 파일 수를 사용하여 Identity를 설정하려면 다음 명령을 실행합니다. DB 컨텍스트에 대한 올바른 정규화된 이름을 사용합니다.
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -dc MyWeb.Data.ApplicationDbContext --files "Account.Register;Account.Login"
@@ -58,7 +58,7 @@ PowerShell은 세미콜론을 명령 구분 기호로 사용 합니다. PowerShe
 dotnet aspnet-codegenerator identity -dc MyWeb.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"
 ```
 
-`--files` 플래그 또는 `--useDefaultUI` 플래그를 지정 하지 않고 Id 스 캐 폴더를 실행 하면 사용 가능한 모든 Id UI 페이지가 프로젝트에 생성 됩니다.
+`--files` 플래그 또는 `--useDefaultUI` 플래그를 지정하지 않고 Identity 스캐폴더를 실행하면 사용 가능한 모든 Identity UI 페이지가 프로젝트에 생성됩니다.
 
 ---
 
@@ -66,47 +66,47 @@ dotnet aspnet-codegenerator identity -dc MyWeb.Data.ApplicationDbContext --files
 
 ::: moniker range="< aspnetcore-3.0"
 
-Id 스 캐 폴더를 실행 합니다.
+Identity 스캐폴더를 실행합니다.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **솔루션 탐색기**에서 프로젝트를 마우스 오른쪽 단추로 클릭 하 > **새 스 캐 폴드 항목**> **추가** 를 클릭 합니다.
-* **스 캐 폴드 추가** 대화 상자의 왼쪽 창에서 **id** > **추가**를 선택 합니다.
+* **솔루션 탐색기**에서 프로젝트 > **추가** > **스캐폴드 항목 새로 만들기**를 마우스 오른쪽 단추로 클릭합니다.
+* **새 스캐폴드 항목 추가** 대화 상자의 왼쪽 창에서 **ID** > **추가**를 선택합니다.
 * **Id 추가** 대화 상자에서 원하는 옵션을 선택 합니다.
-  * 기존 레이아웃 페이지를 선택 하거나 잘못 된 태그를 사용 하 여 레이아웃 파일을 덮어씁니다. 기존 *\_레이아웃* 을 선택한 경우에는이 파일을 덮어쓰지 **않습니다** .
+  * 기존 레이아웃 페이지를 선택하세요. 그렇지 않으면 잘못된 태그로 레이아웃 파일을 덮어쓰게 됩니다. 기존 *\_Layout* 파일을 선택한 경우에는 덮어쓰지 **않습니다**.
 
- 예: MVC 프로젝트에 대 한 Razor Pages `~/Views/Shared/_Layout.cshtml`에 대 한 `~/Pages/Shared/_Layout.cshtml`
-* 기존 데이터 컨텍스트를 사용 하려면 재정의할 파일을 하나 이상 선택 합니다. 데이터 컨텍스트를 추가 하려면 파일을 하나 이상 선택 해야 합니다.
-  * 데이터 컨텍스트 클래스를 선택 합니다.
+ 예: Razor Pages에 대한 `~/Pages/Shared/_Layout.cshtml`이나 MVC 프로젝트에 대한 `~/Views/Shared/_Layout.cshtml`.
+* 기존 데이터 컨텍스트를 사용하려면 재정의할 파일을 하나 이상 선택합니다. 데이터 컨텍스트를 추가하려면 파일을 하나 이상 선택해야 합니다.
+  * 데이터 컨텍스트 클래스를 선택합니다.
   * **추가**를 선택합니다.
-* 새 사용자 컨텍스트를 만들고 Id에 대 한 사용자 지정 사용자 클래스를 만들 수 있습니다.
-  * 선택 된 **+** 새 단추 **데이터 컨텍스트 클래스**합니다.
+* 새 사용자 컨텍스트를 만들고 Identity에 대한 사용자 지정 사용자 클래스를 만들 수 있습니다.
+  * **+** 단추를 선택해서 새로운 **데이터 컨텍스트 클래스**를 생성합니다.
   * **추가**를 선택합니다.
 
 참고: 새 사용자 컨텍스트를 만드는 경우 재정의할 파일을 선택할 필요가 없습니다.
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-ASP.NET Core 스 캐 폴더를 이전에 설치 하지 않은 경우 지금 설치 합니다.
+ASP.NET Core 스캐폴더를 이전에 설치하지 않은 경우 지금 설치합니다.
 
 ```dotnetcli
 dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
-[VisualStudio](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.CodeGeneration.Design/) 에 대 한 패키지 참조를 프로젝트 (\*.csproj) 파일에 추가 합니다. 프로젝트 디렉터리에서 다음 명령을 실행 합니다.
+프로젝트(\*.csproj) 파일에 [VisualStudio](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.CodeGeneration.Design/)에 대한 패키지 참조를 추가합니다. 프로젝트 디렉터리에서 다음 명령을 실행합니다.
 
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet restore
 ```
 
-Identity 스 캐 폴더 옵션을 나열 하려면 다음 명령을 실행 합니다.
+Identity 스캐폴더 옵션을 나열하려면 다음 명령을 실행합니다.
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -h
 ```
 
-프로젝트 폴더에서 원하는 옵션을 사용 하 여 Id 스 캐 폴더를 실행 합니다. 예를 들어 기본 UI를 사용 하 여 id를 설정 하 고 최소 파일 수를 설정 하려면 다음 명령을 실행 합니다. DB 컨텍스트에 대 한 올바른 정규화 된 이름을 사용 합니다.
+프로젝트 폴더에서 원하는 옵션을 사용하여 Identity 스캐폴더를 실행합니다. 예를 들어 기본 UI와 최소 파일 수를 사용하여 Identity를 설정하려면 다음 명령을 실행합니다. DB 컨텍스트에 대한 올바른 정규화된 이름을 사용합니다.
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -dc MyWeb.Data.ApplicationDbContext --files "Account.Register;Account.Login"
@@ -118,7 +118,7 @@ PowerShell은 세미콜론을 명령 구분 기호로 사용 합니다. PowerShe
 dotnet aspnet-codegenerator identity -dc MyWeb.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"
 ```
 
-`--files` 플래그 또는 `--useDefaultUI` 플래그를 지정 하지 않고 Id 스 캐 폴더를 실행 하면 사용 가능한 모든 Id UI 페이지가 프로젝트에 생성 됩니다.
+`--files` 플래그 또는 `--useDefaultUI` 플래그를 지정하지 않고 Identity 스캐폴더를 실행하면 사용 가능한 모든 Identity UI 페이지가 프로젝트에 생성됩니다.
 
 ---
 

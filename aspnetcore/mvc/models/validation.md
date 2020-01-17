@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core MVC 및 Razor Pages의 모델 유효성 검사에 대해 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 12/15/2019
 uid: mvc/models/validation
-ms.openlocfilehash: 7a6017141eb1016128c4a135c187479717580bb5
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 042a9933e561de4957f6332bdff3c4f09d2e119b
+ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74881038"
+ms.lasthandoff: 12/25/2019
+ms.locfileid: "75355272"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>ASP.NET Core MVC 및 Razor Pages의 모델 유효성 검사
 
@@ -58,7 +58,7 @@ ms.locfileid: "74881038"
 * `[Required]`: 필드가 Null이 아닌지 유효성을 검사합니다. 이 특성의 동작에 대한 자세한 내용은 [`[Required]` 특성](#required-attribute)을 참조하세요.
 * `[StringLength]`: 문자열 속성 값이 지정된 길이 한계를 초과하지 않는지 유효성을 검사합니다.
 * `[Url]`: 속성에 URL 형식이 있는지 유효성을 검사합니다.
-* `[Remote]`: 서버에 대한 작업 명령을 호출하여 클라이언트에 대한 입력의 유효성을 검사합니다. 이 특성의 동작에 대한 자세한 내용은 `[`[Remote]` 특성](#remote-attribute)을 참조하세요.
+* `[Remote]`: 서버에 대한 작업 명령을 호출하여 클라이언트에 대한 입력의 유효성을 검사합니다. 이 특성의 동작에 대한 자세한 내용은 [`[Remote]` 특성](#remote-attribute)을 참조하세요.
 
 유효성 검사 특성의 전체 목록은 [System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnotations) 네임스페이스에서 확인할 수 있습니다.
 
@@ -372,7 +372,7 @@ $.get({
 * 모든 *.cshtml* 파일의 `_ValidationScriptsPartial`에 대한 참조를 주석으로 처리합니다.
 * *Pages\Shared\_ValidationScriptsPartial* 파일의 콘텐츠를 제거합니다.
 
-위의 방법으로는 ASP.NET Core ID Razor 클래스 라이브러리의 클라이언트 쪽 유효성 검사를 방지할 수 없습니다. 자세한 내용은 <xref:security/authentication/scaffold-identity>을 참조하세요.
+위의 방법으로는 ASP.NET Core ID Razor 클래스 라이브러리의 클라이언트 쪽 유효성 검사를 방지할 수 없습니다. 자세한 내용은 <xref:security/authentication/scaffold-identity>를 참조하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 
@@ -423,6 +423,8 @@ $.get({
 * `[StringLength]`: 문자열 속성 값이 지정된 길이 한계를 초과하지 않는지 유효성을 검사합니다.
 * `[Url]`: 속성에 URL 형식이 있는지 유효성을 검사합니다.
 * `[Remote]`: 서버에 대한 작업 명령을 호출하여 클라이언트에 대한 입력의 유효성을 검사합니다. 이 특성의 동작에 대한 자세한 내용은 [`[Remote]` 특성](#remote-attribute)을 참조하세요.
+
+클라이언트 쪽 유효성 검사에 `[RegularExpression]` 특성을 사용하면 클라이언트의 JavaScript에서 regex가 실행됩니다. 이는 [ECMAScript](/dotnet/standard/base-types/regular-expression-options#ecmascript-matching-behavior) 일치 동작이 사용됨을 의미합니다. 자세한 내용은 [이 GitHub 이슈](https://github.com/dotnet/corefx/issues/42487)를 참조하세요.
 
 유효성 검사 특성의 전체 목록은 [System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnotations) 네임스페이스에서 확인할 수 있습니다.
 

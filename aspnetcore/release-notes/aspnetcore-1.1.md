@@ -5,12 +5,12 @@ description: ASP.NET Core 1.1의 새로운 기능에 대해 알아봅니다.
 ms.author: riande
 ms.date: 12/18/2018
 uid: aspnetcore-1.1
-ms.openlocfilehash: 167842a7376a6bb0a88e6f41159730f076bb2bdb
-ms.sourcegitcommit: 335a88c1b6e7f0caa8a3a27db57c56664d676d34
+ms.openlocfilehash: df9fd6bda00ac5f5516f40507001463fd7d0b92e
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/12/2019
-ms.locfileid: "67034724"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75828505"
 ---
 # <a name="whats-new-in-aspnet-core-11"></a>ASP.NET Core 1.1의 새로운 기능
 
@@ -29,9 +29,9 @@ ASP.NET Core 1.1에는 다음과 같은 새로운 기능이 포함됩니다.
 
 ## <a name="choosing-between-versions-10-and-11-of-aspnet-core"></a>ASP.NET Core 버전 1.0과 1.1 중에서 선택
 
-ASP.NET Core 1.1에는 1.0보다 더 많은 기능이 있습니다. 일반적으로 최신 버전을 사용하는 것이 좋습니다.
+ASP.NET Core 1.1에는 ASP.NET Core 1.0보다 더 많은 기능이 있습니다. 일반적으로 최신 버전을 사용하는 것이 좋습니다.
 
 ## <a name="additional-information"></a>추가 정보
 
-- [ASP.NET Core 1.1.0 릴리스 정보](https://github.com/aspnet/Home/releases/tag/1.1.0)
+- [ASP.NET Core 1.1.0 릴리스 정보](https://github.com/dotnet/aspnetcore/releases/tag/1.1.0)
 - ASP.NET Core 개발팀의 진행 상황 및 계획과 연결하려면 [ASP.NET 커뮤니티 스탠드업](https://live.asp.net/)을 시청하세요.

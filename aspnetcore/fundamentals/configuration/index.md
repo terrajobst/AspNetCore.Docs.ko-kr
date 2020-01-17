@@ -5,14 +5,14 @@ description: 구성 API를 사용하여 ASP.NET Core 앱을 구성하는 방법�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/04/2019
+ms.date: 01/13/2020
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 9f0ad2791e504a0ff46daad07054b6bf909a546a
-ms.sourcegitcommit: 897d4abff58505dae86b2947c5fe3d1b80d927f3
+ms.openlocfilehash: 09ef06f179e34cd7f4f04ac30c3b5dd95d058244
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73634085"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75951864"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core의 구성
 
@@ -47,7 +47,7 @@ ASP.NET Core의 앱 구성은 ‘구성 공급자’가 설정한 키-값 쌍을
 using Microsoft.Extensions.Configuration;
 ```
 
-‘옵션 패턴’은 이 항목에 설명된 구성 개념의 확장입니다.  옵션은 클래스를 사용하여 관련 설정 그룹을 나타냅니다. 자세한 내용은 <xref:fundamentals/configuration/options>을 참조하세요.
+‘옵션 패턴’은 이 항목에 설명된 구성 개념의 확장입니다.  옵션은 클래스를 사용하여 관련 설정 그룹을 나타냅니다. 자세한 내용은 <xref:fundamentals/configuration/options>를 참조하세요.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
@@ -111,7 +111,7 @@ using Microsoft.Extensions.Configuration;
 * <xref:fundamentals/environments>
 * <xref:security/app-secrets> &ndash; 환경 변수를 사용하여 중요한 데이터를 저장하는 방법에 대한 조언을 포함합니다. 비밀 관리자는 파일 구성 공급자를 사용하여 사용자 비밀을 로컬 시스템의 JSON 파일에 저장합니다. 파일 구성 공급자에 대해서는 이 항목의 뒷부분에서 설명합니다.
 
-[Azure Key Vault](https://azure.microsoft.com/services/key-vault/)가 ASP.NET Core 앱에 대한 앱 비밀을 안전하게 저장합니다. 자세한 내용은 <xref:security/key-vault-configuration>을 참조하세요.
+[Azure Key Vault](https://azure.microsoft.com/services/key-vault/)가 ASP.NET Core 앱에 대한 앱 비밀을 안전하게 저장합니다. 자세한 내용은 <xref:security/key-vault-configuration>를 참조하세요.
 
 ## <a name="hierarchical-configuration-data"></a>계층적 구성 데이터
 
@@ -149,7 +149,9 @@ using Microsoft.Extensions.Configuration;
 
 변경 검색을 구현하는 구성 공급자는 기본 설정 파일이 변경되면 구성을 다시 로드할 수 있습니다. 예를 들어 파일 구성 공급자(이 항목의 뒷부분에서 설명됨) 및 [Azure Key Vault 구성 공급자](xref:security/key-vault-configuration)는 변경 검색을 구현합니다.
 
-<xref:Microsoft.Extensions.Configuration.IConfiguration>은 앱의 [DI(종속성 주입)](xref:fundamentals/dependency-injection) 컨테이너에서 사용할 수 있습니다. <xref:Microsoft.Extensions.Configuration.IConfiguration>을 Razor Pages <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel>에 삽입하여 클래스에 대한 구성을 가져올 수 있습니다.
+<xref:Microsoft.Extensions.Configuration.IConfiguration>은 앱의 [DI(종속성 주입)](xref:fundamentals/dependency-injection) 컨테이너에서 사용할 수 있습니다. <xref:Microsoft.Extensions.Configuration.IConfiguration>을 Razor Pages <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> 또는 MVC <xref:Microsoft.AspNetCore.Mvc.Controller>에 삽입하여 클래스에 대한 구성을 가져올 수 있습니다.
+
+다음 예제에서는 `_config` 필드가 구성 값에 액세스하는 데 사용됩니다.
 
 ```csharp
 public class IndexModel : PageModel
@@ -160,9 +162,18 @@ public class IndexModel : PageModel
     {
         _config = config;
     }
+}
+```
 
-    // The _config local variable is used to obtain configuration 
-    // throughout the class.
+```csharp
+public class HomeController : Controller
+{
+    private readonly IConfiguration _config;
+
+    public HomeController(IConfiguration config)
+    {
+        _config = config;
+    }
 }
 ```
 
@@ -177,7 +188,7 @@ public class IndexModel : PageModel
 * 계층적 키
   * 구성 API 내에서는 콜론 구분 기호(`:`)가 모든 플랫폼에 적용됩니다.
   * 환경 변수에서는 콜론 구분 기호가 일부 플랫폼에 적용되지 않을 수 있습니다. 두 개의 밑줄(`__`)은 모든 플랫폼에서 지원되며 콜론으로 자동 변환됩니다.
-  * Azure Key Vault에서 계층적 키는 `--`(두 개의 대시)를 구분 기호로 사용합니다. 비밀을 앱의 구성으로 로드할 때 대시를 콜론으로 바꾸는 코드를 제공해야 합니다.
+  * Azure Key Vault에서 계층적 키는 `--`(두 개의 대시)를 구분 기호로 사용합니다. 비밀을 앱의 구성으로 로드할 때 대시를 콜론으로 바꾸는 코드를 작성하세요.
 * <xref:Microsoft.Extensions.Configuration.ConfigurationBinder>는 구성 키에 배열 인덱스를 사용하여 배열을 개체에 바인딩하는 것을 지원합니다. 배열 바인딩에 대해서는 [클래스에 배열 바인딩](#bind-an-array-to-a-class) 섹션에서 설명합니다.
 
 ### <a name="values"></a>값
@@ -203,7 +214,7 @@ public class IndexModel : PageModel
 | [메모리 구성 공급자](#memory-configuration-provider) | 메모리 내 컬렉션 |
 | [사용자 비밀(비밀 관리자)](xref:security/app-secrets)(‘보안’ 항목)  | 사용자 프로필 디렉터리의 파일 |
 
-시작 시 구성 공급자에서 지정한 순서로 구성 소스를 읽습니다. 이 항목의 구성 공급자는 코드에서 정렬할 수 있는 순서가 아니라 사전순으로 설명되어 있습니다. 코드에서는 기본 구성 소스에 대한 우선 순위에 맞게 구성 공급자를 정렬하세요.
+시작 시 구성 공급자에서 지정한 순서로 구성 소스를 읽습니다. 이 항목의 구성 공급자는 코드에서 정렬하는 순서가 아니라 사전 순으로 설명되어 있습니다. 앱에 필요한 기본 구성 소스에 대한 우선 순위에 맞게 구성 공급자를 코드에 정렬하세요.
 
 구성 공급자의 일반적인 순서는 다음과 같습니다.
 
@@ -215,7 +226,7 @@ public class IndexModel : PageModel
 
 일반적인 방식은 명령줄 구성 공급자를 일련의 공급자에서 마지막에 배치하는 것이므로, 다른 공급자에서 설정한 구성을 명령줄 인수로 재정의할 수 있습니다.
 
-`CreateDefaultBuilder`로 새 호스트 작성기를 초기화할 때 이전 공급자 시퀀스가 사용됩니다. 자세한 내용은 [기본 구성](#default-configuration) 섹션을 참조하세요.
+`CreateDefaultBuilder`로 새 호스트 작성기가 초기화될 때 이전 공급자 시퀀스가 사용됩니다. 자세한 내용은 [기본 구성](#default-configuration) 섹션을 참조하세요.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -356,7 +367,7 @@ ASP.NET Core 템플릿을 기반으로 하는 앱의 경우 `AddCommandLine`은 
 
 값은 등호(`=`) 다음에 와야 합니다. 또는 값이 공백 다음에 오는 경우 키에 접두사(`--` 또는 `/`)가 있어야 합니다. 등호를 사용하는 경우 값이 필요하지 않습니다(예: `CommandLineKey=`).
 
-| 키 접두사               | 예                                                |
+| 키 접두사               | 예제                                                |
 | ------------------------ | ------------------------------------------------------ |
 | 접두사 없음                | `CommandLineKey1=value1`                               |
 | 대시 2개(`--`)        | `--CommandLineKey2=value2`, `--CommandLineKey2 value2` |
@@ -374,7 +385,7 @@ dotnet run CommandLineKey1= CommandLineKey2=value2
 
 ### <a name="switch-mappings"></a>스위치 매핑
 
-스위치 매핑은 키 이름 교체 논리를 지원합니다. <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>를 사용하여 구성을 수동으로 빌드하는 경우에는 <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> 메서드에 대체 스위치를 포함하는 사전을 제공할 수 있습니다.
+스위치 매핑은 키 이름 교체 논리를 지원합니다. <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>를 사용하여 구성을 수동으로 빌드하는 경우에는 <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> 메서드에 대체 스위치를 포함하는 사전을 제공하세요.
 
 스위치 매핑 사전을 사용하면 명령줄 인수를 통해 제공된 키와 일치하는 키에 대해 사전을 검사합니다. 사전에서 명령줄 키가 발견되면 사전 값(대체 키)이 다시 전달되어 앱 구성의 키-값 쌍이 설정됩니다. 단일 대시(`-`) 접두사가 붙은 명령줄 키에는 스위치 매핑이 필수입니다.
 
@@ -456,19 +467,16 @@ dotnet run -CLKey1=value1 -CLKey2=value2
 
 사용자 비밀 및 *appsettings* 파일을 통해 구성을 설정한 후 환경 변수 구성 공급자를 호출합니다. 이 위치에서 공급자를 호출하면 런타임에 환경 변수를 읽어 들여 사용자 비밀 및 *appsettings* 파일로 설정한 구성을 재정의할 수 있습니다.
 
-추가 환경 변수에서 앱 구성을 제공해야 하는 경우에는 `ConfigureAppConfiguration`에서 앱의 추가 공급자를 호출하고 접두사가 있는 `AddEnvironmentVariables`를 호출합니다.
+추가 환경 변수에서 앱 구성을 제공하려면 `ConfigureAppConfiguration`에서 앱의 추가 공급자를 호출하고 접두사가 있는 `AddEnvironmentVariables`를 호출합니다.
 
 ```csharp
 .ConfigureAppConfiguration((hostingContext, config) =>
 {
-    // Call additional providers here as needed.
-    // Call AddEnvironmentVariables last if you need to allow
-    // environment variables to override values from other 
-    // providers.
     config.AddEnvironmentVariables(prefix: "PREFIX_");
 })
-}
 ```
+
+지정된 접두사를 포함하는 환경 변수에서 다른 공급자의 값을 재정의할 수 있도록 하려면 `AddEnvironmentVariables`를 마지막으로 호출합니다.
 
 **예제**
 
@@ -618,17 +626,47 @@ JSON 구성 공급자를 먼저 설정합니다. 따라서 사용자 비밀, 환
 
 **예제**
 
-샘플 앱은 정적 편의 메서드 `CreateDefaultBuilder`를 활용하여 호스트를 빌드하며, `AddJsonFile` 두 번 호출도 포함합니다. 구성은 *appsettings.json* 및 *appsettings.{Environment}.json*에서 로드됩니다.
+샘플 앱은 정적 편의 메서드 `CreateDefaultBuilder`를 활용하여 호스트를 빌드하며, `AddJsonFile` 두 번 호출도 포함합니다.
+
+::: moniker range=">= aspnetcore-3.0"
+
+* `AddJsonFile`에 대한 첫 번째 호출은 *appsettings.json*에서 구성을 로드합니다.
+
+  [!code-json[](index/samples/3.x/ConfigurationSample/appsettings.json)]
+
+* `AddJsonFile`에 대한 두 번째 호출은 *appsettings.{Environment}.json*에서 구성을 로드합니다. 샘플 앱의 *appsettings.Development.json*의 경우 다음 파일이 로드됩니다.
+
+  [!code-json[](index/samples/3.x/ConfigurationSample/appsettings.Development.json)]
 
 1. 샘플 앱을 실행합니다. 브라우저를 열어 `http://localhost:5000`의 앱으로 이동합니다.
-1. 표에 표시된 대로 환경에 따라 다른 구성에 대한 키-값 쌍이 출력에 포함되어 있는지 확인합니다. 로깅 구성 키는 콜론(`:`)을 계층 구분 기호로 사용합니다.
+1. 출력에는 앱 환경을 기반으로 하는 구성에 대한 키 값 쌍이 포함되어 있습니다. 개발 환경에서 앱을 실행할 때 `Logging:LogLevel:Default` 키의 로그 수준은 `Debug`입니다.
+1. 프로덕션 환경에서 샘플 앱을 다시 실행합니다.
+   1. *Properties/launchSettings.json* 파일을 엽니다.
+   1. `ConfigurationSample` 프로필에서 `ASPNETCORE_ENVIRONMENT` 환경 변수의 값을 `Production`으로 변경합니다.
+   1. 파일을 저장하고 명령 셸에서 `dotnet run`를 사용하여 앱을 실행합니다.
+1. *appsettings.Development.json*의 설정에서 더 이상 *appsettings.json*의 설정을 재정의하지 않습니다. `Logging:LogLevel:Default` 키의 로그 수준은 `Information`입니다.
 
-| Key                        | 개발 값 | 프로덕션 값 |
-| -------------------------- | :---------------: | :--------------: |
-| Logging:LogLevel:System    | 정보       | 정보      |
-| Logging:LogLevel:Microsoft | 정보       | 정보      |
-| Logging:LogLevel:Default   | Debug             | Error            |
-| AllowedHosts               | *                 | *                |
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+* `AddJsonFile`에 대한 첫 번째 호출은 *appsettings.json*에서 구성을 로드합니다.
+
+  [!code-json[](index/samples/2.x/ConfigurationSample/appsettings.json)]
+
+* `AddJsonFile`에 대한 두 번째 호출은 *appsettings.{Environment}.json*에서 구성을 로드합니다. 샘플 앱의 *appsettings.Development.json*의 경우 다음 파일이 로드됩니다.
+
+  [!code-json[](index/samples/2.x/ConfigurationSample/appsettings.Development.json)]
+
+1. 샘플 앱을 실행합니다. 브라우저를 열어 `http://localhost:5000`의 앱으로 이동합니다.
+1. 출력에는 앱 환경을 기반으로 하는 구성에 대한 키 값 쌍이 포함되어 있습니다. 개발 환경에서 앱을 실행할 때 `Logging:LogLevel:Default` 키의 로그 수준은 `Debug`입니다.
+1. 프로덕션 환경에서 샘플 앱을 다시 실행합니다.
+   1. *Properties/launchSettings.json* 파일을 엽니다.
+   1. `ConfigurationSample` 프로필에서 `ASPNETCORE_ENVIRONMENT` 환경 변수의 값을 `Production`으로 변경합니다.
+   1. 파일을 저장하고 명령 셸에서 `dotnet run`를 사용하여 앱을 실행합니다.
+1. *appsettings.Development.json*의 설정에서 더 이상 *appsettings.json*의 설정을 재정의하지 않습니다. `Logging:LogLevel:Default` 키의 로그 수준은 `Warning`입니다.
+
+::: moniker-end
 
 ### <a name="xml-configuration-provider"></a>XML 구성 공급자
 
@@ -883,7 +921,7 @@ var sectionExists = _config.GetSection("section2:subsection2").Exists();
 
 ## <a name="bind-to-a-class"></a>클래스에 바인딩
 
-‘옵션 패턴’을 사용하여 관련 설정 그룹을 나타내는 클래스에 구성을 바인딩할 수 있습니다.  자세한 내용은 <xref:fundamentals/configuration/options>을 참조하세요.
+‘옵션 패턴’을 사용하여 관련 설정 그룹을 나타내는 클래스에 구성을 바인딩할 수 있습니다.  자세한 내용은 <xref:fundamentals/configuration/options>를 참조하세요.
 
 구성 값이 문자열로 반환되지만, <xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*>를 호출하면 [POCO](https://wikipedia.org/wiki/Plain_Old_CLR_Object) 개체를 생성할 수 있습니다.
 
@@ -1315,7 +1353,7 @@ MVC 뷰에서:
 
 ## <a name="add-configuration-from-an-external-assembly"></a>외부 어셈블리의 구성 추가
 
-<xref:Microsoft.AspNetCore.Hosting.IHostingStartup> 구현은 시작 시 앱의 `Startup` 클래스 외부에 있는 외부 어셈블리에서 앱에 향상된 기능을 추가할 수 있습니다. 자세한 내용은 <xref:fundamentals/configuration/platform-specific-configuration>을 참조하세요.
+<xref:Microsoft.AspNetCore.Hosting.IHostingStartup> 구현은 시작 시 앱의 `Startup` 클래스 외부에 있는 외부 어셈블리에서 앱에 향상된 기능을 추가할 수 있습니다. 자세한 내용은 <xref:fundamentals/configuration/platform-specific-configuration>를 참조하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 

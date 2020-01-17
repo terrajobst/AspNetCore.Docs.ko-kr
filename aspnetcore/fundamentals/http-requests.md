@@ -2,16 +2,17 @@
 title: ASP.NET Core에서 IHttpClientFactory를 사용하여 HTTP 요청 만들기
 author: stevejgordon
 description: IHttpClientFactory 인터페이스를 사용하여 ASP.NET Core에서 논리적 HttpClient 인스턴스를 관리하는 방법에 대해 알아봅니다.
+monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 11/27/2019
+ms.date: 12/16/2019
 uid: fundamentals/http-requests
-ms.openlocfilehash: f33444b8fc08dc022da7700af53a218600290162
-ms.sourcegitcommit: 169ea5116de729c803685725d96450a270bc55b7
+ms.openlocfilehash: 482f8e28c23c621cecaf9ce111d89e9166ea6d85
+ms.sourcegitcommit: da2fb2d78ce70accdba903ccbfdcfffdd0112123
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/03/2019
-ms.locfileid: "74733923"
+ms.lasthandoff: 01/07/2020
+ms.locfileid: "75722728"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>ASP.NET Core에서 IHttpClientFactory를 사용하여 HTTP 요청 만들기
 
@@ -190,7 +191,7 @@ public class ValuesController : ControllerBase
     * 캐싱
     * 오류 처리
     * 직렬화
-    * logging
+    * 로깅
 
 위임 처리기를 만들려면 다음을 수행합니다.
 
@@ -299,7 +300,7 @@ DI 지원 앱에서 `IHttpClientFactory`을(를) 사용하면 다음이 방지�
 
 - 앱 시작 시 `SocketsHttpHandler`의 인스턴스를 만들고 앱 수명 동안 사용합니다.
 - DNS 새로 고침 시간에 따라 적절한 값으로 <xref:System.Net.Http.SocketsHttpHandler.PooledConnectionLifetime>을(를) 구성합니다.
-- 필요에 따라 `new HttpClient(handler, dispostHandler: false)`을(를) 사용하여 `HttpClient` 인스턴스를 만듭니다.
+- 필요에 따라 `new HttpClient(handler, disposeHandler: false)`을(를) 사용하여 `HttpClient` 인스턴스를 만듭니다.
 
 위의 방법은 비슷한 방식으로 `IHttpClientFactory`에서 해결하는 리소스 관리 문제를 해결합니다.
 
@@ -357,6 +358,7 @@ DI 지원 앱에서 `IHttpClientFactory`을(를) 사용하면 다음이 방지�
 * [HttpClientFactory를 사용하여 복원력 있는 HTTP 요청 구현](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests)
 * [HttpClientFactory 및 Polly 정책을 통해 지수 백오프를 사용하여 HTTP 호출 다시 시도 구현](/dotnet/standard/microservices-architecture/implement-resilient-applications/implement-http-call-retries-exponential-backoff-polly)
 * [회로 차단기 패턴 구현](/dotnet/standard/microservices-architecture/implement-resilient-applications/implement-circuit-breaker-pattern)
+* [.NET에서 JSON을 직렬화 및 역직렬화하는 방법](/dotnet/standard/serialization/system-text-json-how-to)
 
 ::: moniker-end
 
@@ -600,7 +602,7 @@ DI 지원 앱에서 `IHttpClientFactory`을(를) 사용하면 다음이 방지�
 
 - 앱 시작 시 `SocketsHttpHandler`의 인스턴스를 만들고 앱 수명 동안 사용합니다.
 - DNS 새로 고침 시간에 따라 적절한 값으로 <xref:System.Net.Http.SocketsHttpHandler.PooledConnectionLifetime>을(를) 구성합니다.
-- 필요에 따라 `new HttpClient(handler, dispostHandler: false)`을(를) 사용하여 `HttpClient` 인스턴스를 만듭니다.
+- 필요에 따라 `new HttpClient(handler, disposeHandler: false)`을(를) 사용하여 `HttpClient` 인스턴스를 만듭니다.
 
 위의 방법은 비슷한 방식으로 `IHttpClientFactory`에서 해결하는 리소스 관리 문제를 해결합니다.
 
@@ -661,7 +663,7 @@ DI 지원 앱에서 `IHttpClientFactory`을(를) 사용하면 다음이 방지�
 
 ::: moniker-end
 
-::: moniker range="<= aspnetcore-2.1"
+::: moniker range="= aspnetcore-2.1"
 
 작성자: [Glenn Condron](https://github.com/glennc), [Ryan Nowak](https://github.com/rynowak) 및 [Steve Gordon](https://github.com/stevejgordon)
 
@@ -674,7 +676,7 @@ DI 지원 앱에서 `IHttpClientFactory`을(를) 사용하면 다음이 방지�
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 .NET Framework를 대상으로 하는 프로젝트는 [Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) NuGet 패키지를 설치해야 합니다. .NET Core를 대상으로 하고 [Microsoft.AspNetCore.App 메타패키지](xref:fundamentals/metapackage-app)를 참조하는 프로젝트는 이미 `Microsoft.Extensions.Http` 패키지를 포함하고 있습니다.
 
@@ -908,7 +910,7 @@ DI 지원 앱에서 `IHttpClientFactory`을(를) 사용하면 다음이 방지�
 
 - 앱 시작 시 `SocketsHttpHandler`의 인스턴스를 만들고 앱 수명 동안 사용합니다.
 - DNS 새로 고침 시간에 따라 적절한 값으로 <xref:System.Net.Http.SocketsHttpHandler.PooledConnectionLifetime>을(를) 구성합니다.
-- 필요에 따라 `new HttpClient(handler, dispostHandler: false)`을(를) 사용하여 `HttpClient` 인스턴스를 만듭니다.
+- 필요에 따라 `new HttpClient(handler, disposeHandler: false)`을(를) 사용하여 `HttpClient` 인스턴스를 만듭니다.
 
 위의 방법은 비슷한 방식으로 `IHttpClientFactory`에서 해결하는 리소스 관리 문제를 해결합니다.
 

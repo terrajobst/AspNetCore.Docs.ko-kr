@@ -5,12 +5,12 @@ description: ASP.NET Core MVC를 시작하는 방법을 알아봅니다.
 ms.author: riande
 ms.date: 10/16/2019
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 0c8c59a5c59c8a70985dc8463c80f9569a00621f
-ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
+ms.openlocfilehash: 901257efdfbc7b36249233745175f5ed253da2c7
+ms.sourcegitcommit: da2fb2d78ce70accdba903ccbfdcfffdd0112123
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73761244"
+ms.lasthandoff: 01/07/2020
+ms.locfileid: "75722886"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>ASP.NET Core MVC 시작
 
@@ -34,19 +34,19 @@ ms.locfileid: "73761244"
 
 [!INCLUDE[](~/includes/mvc-intro/download.md)]
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!INCLUDE[](~/includes/net-core-prereqs-vs-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
 # <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-[!INCLUDE[](~/includes/net-core-prereqs-vsc-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-vsc-3.1.md)]
 
 # <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
-[!INCLUDE[](~/includes/net-core-prereqs-mac-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-mac-3.1.md)]
 
 ---
 
@@ -98,11 +98,9 @@ Visual Studio는 방금 만든 MVC 프로젝트에 대해 기본 템플릿을 �
 
   ![macOS 새 프로젝트 대화 상자](./start-mvc/_static/new_project_mvc_vsmac.png)
 
-* **새 ASP.NET Core Web API 구성** 대화 상자에서 **.NET Core 3.0**의 **대상 프레임워크**를 설정합니다.
+* **새 ASP.NET Core Web API 구성** 대화 상자에서 **.NET Core 3.1**의 **대상 프레임워크**를 설정합니다.
 
-<!-- 
-  ![macOS .NET Core 2.2 selection](./start-mvc/_static/new_project_22_vsmac.png)
--->
+  ![macOS .NET Core 3.1 선택](./start-mvc/_static/new_project_31_vsmac.png)
 
 * 프로젝트 이름을 **MvcMovie**로 지정하고 **만들기**를 선택합니다.
 
@@ -184,7 +182,7 @@ Ctrl+F5를 눌러 디버거 없이 실행합니다.
 
 [!INCLUDE[](~/includes/mvc-intro/download.md)]
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
