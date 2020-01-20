@@ -2,19 +2,20 @@
 title: ASP.NET Core Blazor에서 web API를 호출 합니다.
 author: guardrex
 description: CORS (크로스-원본 자원 공유) 요청 만들기를 포함 하 여 JSON 도우미를 사용 하 여 Blazor 앱에서 web API를 호출 하는 방법을 알아봅니다.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 12/18/2019
 no-loc:
 - Blazor
+- SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: f1929b48275a36552f061a64823267df0f3acabc
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: 66605f38a6fcaedebc92b0946dca1e5f28b593c6
+ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74943916"
+ms.lasthandoff: 01/17/2020
+ms.locfileid: "76160069"
 ---
 # <a name="call-a-web-api-from-aspnet-core-opno-locblazor"></a>ASP.NET Core Blazor에서 web API를 호출 합니다.
 

@@ -2,19 +2,20 @@
 title: ASP.NET Core Blazor 폼 및 유효성 검사
 author: guardrex
 description: Blazor에서 양식 및 필드 유효성 검사 시나리오를 사용 하는 방법에 대해 알아봅니다.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 12/18/2019
 no-loc:
 - Blazor
+- SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: a94a433f26e451bbadc73615e502e46d273f05c2
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: 6f6fdc13dbb754ecfe06025d496017d3c16951fe
+ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828141"
+ms.lasthandoff: 01/17/2020
+ms.locfileid: "76159965"
 ---
 # <a name="aspnet-core-opno-locblazor-forms-and-validation"></a>ASP.NET Core Blazor 폼 및 유효성 검사
 
@@ -37,8 +38,8 @@ public class ExampleModel
 
 폼은 `EditForm` 구성 요소를 사용 하 여 정의 됩니다. 다음 폼은 일반적인 요소, 구성 요소 및 Razor 코드를 보여 줍니다.
 
-```csharp
-<EditForm Model="@exampleModel" OnValidSubmit="@HandleValidSubmit">
+```razor
+<EditForm Model="@exampleModel" OnValidSubmit="HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -57,7 +58,12 @@ public class ExampleModel
 }
 ```
 
+앞의 예제에서:
+
 * 양식은 `ExampleModel` 유형에 정의 된 유효성 검사를 사용 하 여 `name` 필드에서 사용자 입력의 유효성을 검사 합니다. 모델은 구성 요소의 `@code` 블록에 만들어지고 전용 필드 (`exampleModel`)에 저장 됩니다. 필드는 `<EditForm>` 요소의 `Model` 특성에 할당 됩니다.
+* `InputText` 구성 요소의 `@bind-Value` 바인딩합니다.
+  * `InputText` 구성 요소의 `Value` 속성에 대 한 모델 속성 (`exampleModel.Name`)입니다.
+  * `InputText` 구성 요소의 `ValueChanged` 속성에 대 한 변경 이벤트 대리자입니다.
 * `DataAnnotationsValidator` 구성 요소는 데이터 주석을 사용 하 여 유효성 검사 지원을 연결 합니다.
 * `ValidationSummary` 구성 요소는 유효성 검사 메시지를 요약 합니다.
 * 양식이 성공적으로 제출 되 면 (유효성 검사 통과) `HandleValidSubmit` 트리거됩니다.
@@ -118,39 +124,50 @@ public class Starship
 
 <h2>New Ship Entry Form</h2>
 
-<EditForm Model="@starship" OnValidSubmit="@HandleValidSubmit">
+<EditForm Model="@starship" OnValidSubmit="HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
     <p>
-        <label for="identifier">Identifier: </label>
-        <InputText id="identifier" @bind-Value="starship.Identifier" />
+        <label>
+            Identifier:
+            <InputText @bind-Value="starship.Identifier" />
+        </label>
     </p>
     <p>
-        <label for="description">Description (optional): </label>
-        <InputTextArea id="description" @bind-Value="starship.Description" />
+        <label>
+            Description (optional):
+            <InputTextArea @bind-Value="starship.Description" />
+        </label>
     </p>
     <p>
-        <label for="classification">Primary Classification: </label>
-        <InputSelect id="classification" @bind-Value="starship.Classification">
-            <option value="">Select classification ...</option>
-            <option value="Exploration">Exploration</option>
-            <option value="Diplomacy">Diplomacy</option>
-            <option value="Defense">Defense</option>
-        </InputSelect>
+        <label>
+            Primary Classification:
+            <InputSelect @bind-Value="starship.Classification">
+                <option value="">Select classification ...</option>
+                <option value="Exploration">Exploration</option>
+                <option value="Diplomacy">Diplomacy</option>
+                <option value="Defense">Defense</option>
+            </InputSelect>
+        </label>
     </p>
     <p>
-        <label for="accommodation">Maximum Accommodation: </label>
-        <InputNumber id="accommodation" 
-            @bind-Value="starship.MaximumAccommodation" />
+        <label>
+            Maximum Accommodation:
+            <InputNumber @bind-Value="starship.MaximumAccommodation" />
+        </label>
     </p>
     <p>
-        <label for="valid">Engineering Approval: </label>
-        <InputCheckbox id="valid" @bind-Value="starship.IsValidatedDesign" />
+        <label>
+            Engineering Approval:
+            <InputCheckbox @bind-Value="starship.IsValidatedDesign" />
+        </label>
     </p>
     <p>
-        <label for="productionDate">Production Date: </label>
-        <InputDate id="productionDate" @bind-Value="starship.ProductionDate" />
+        <label>
+            Production Date:
+            <InputDate @bind-Value="starship.ProductionDate" />
+        </label>
     </p>
 
     <button type="submit">Submit</button>
@@ -174,6 +191,54 @@ public class Starship
 
 `EditForm`은 수정 된 필드 및 현재 유효성 검사 메시지를 포함 하 여 편집 프로세스에 대 한 메타 데이터를 추적 하는 [연계 값](xref:blazor/components#cascading-values-and-parameters) 으로 `EditContext`를 만듭니다. `EditForm`는 유효한 전송 (`OnValidSubmit`, `OnInvalidSubmit`)에도 편리한 이벤트를 제공 합니다. 또는 `OnSubmit`를 사용 하 여 유효성 검사를 트리거하고 사용자 지정 유효성 검사 코드를 사용 하 여 필드 값을 확인 합니다.
 
+다음 예제에서는
+
+* **전송** 단추를 선택 하면 `HandleSubmit` 메서드가 실행 됩니다.
+* 양식의 `EditContext`를 사용 하 여 폼의 유효성을 검사 합니다.
+* 서버에서 web API 끝점을 호출 하는 `ServerValidate` 메서드에 `EditContext`를 전달 하 여 폼의 유효성을 검사 합니다 (*표시 되지 않음*).
+* `isValid`를 확인 하 여 클라이언트 및 서버 쪽 유효성 검사의 결과에 따라 추가 코드를 실행 합니다.
+
+```razor
+<EditForm EditContext="@editContext" OnSubmit="@HandleSubmit">
+
+    ...
+
+    <button type="submit">Submit</button>
+</EditForm>
+
+@code {
+    private Starship starship = new Starship();
+    private EditContext editContext;
+
+    protected override void OnInitialized()
+    {
+        editContext = new EditContext(starship);
+    }
+
+    private async Task HandleSubmit()
+    {
+        var isValid = editContext.Validate() && 
+            await ServerValidate(editContext);
+
+        if (isValid)
+        {
+            ...
+        }
+        else
+        {
+            ...
+        }
+    }
+
+    private async Task<bool> ServerValidate(EditContext editContext)
+    {
+        var serverChecksValid = ...
+
+        return serverChecksValid;
+    }
+}
+```
+
 ## <a name="inputtext-based-on-the-input-event"></a>입력 이벤트를 기반으로 하는 InputText
 
 `InputText` 구성 요소를 사용 하 여 `change` 이벤트 대신 `input` 이벤트를 사용 하는 사용자 지정 구성 요소를 만듭니다.
@@ -189,6 +254,94 @@ public class Starship
     value="@CurrentValue" 
     @oninput="EventCallback.Factory.CreateBinder<string>(
         this, __value => CurrentValueAsString = __value, CurrentValueAsString)" />
+```
+
+## <a name="work-with-radio-buttons"></a>라디오 단추 작업
+
+폼에서 라디오 단추를 사용할 때 라디오 단추가 그룹으로 평가 되기 때문에 데이터 바인딩은 다른 요소와 다르게 처리 됩니다. 각 라디오 단추의 값은 고정 되어 있지만 라디오 단추 그룹의 값은 선택 된 라디오 단추의 값입니다. 아래 예제는 다음과 같은 작업의 방법을 보여 줍니다.
+
+* 라디오 단추 그룹에 대 한 데이터 바인딩을 처리 합니다.
+* 사용자 지정 `InputRadio` 구성 요소를 사용 하 여 유효성 검사를 지원 합니다.
+
+```razor
+@using System.Globalization
+@typeparam TValue
+@inherits InputBase<TValue>
+
+<input @attributes="AdditionalAttributes" type="radio" value="@SelectedValue" 
+       checked="@(SelectedValue.Equals(Value))" @onchange="OnChange" />
+
+@code {
+    [Parameter]
+    public TValue SelectedValue { get; set; }
+
+    private void OnChange(ChangeEventArgs args)
+    {
+        CurrentValueAsString = args.Value.ToString();
+    }
+
+    protected override bool TryParseValueFromString(string value, 
+        out TValue result, out string errorMessage)
+    {
+        var success = BindConverter.TryConvertTo<TValue>(
+            value, CultureInfo.CurrentCulture, out var parsedValue);
+        if (success)
+        {
+            result = parsedValue;
+            errorMessage = null;
+
+            return true;
+        }
+        else
+        {
+            result = default;
+            errorMessage = $"{FieldIdentifier.FieldName} field isn't valid.";
+
+            return false;
+        }
+    }
+}
+```
+
+다음 `EditForm`에서는 위의 `InputRadio` 구성 요소를 사용 하 여 사용자의 등급을 가져오고 유효성을 검사 합니다.
+
+```razor
+@page "/RadioButtonExample"
+@using System.ComponentModel.DataAnnotations
+
+<h1>Radio Button Group Test</h1>
+
+<EditForm Model="model" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    @for (int i = 1; i <= 5; i++)
+    {
+        <label>
+            <InputRadio name="rate" SelectedValue="i" @bind-Value="model.Rating" />
+            @i
+        </label>
+    }
+
+    <button type="submit">Submit</button>
+</EditForm>
+
+<p>You chose: @model.Rating</p>
+
+@code {
+    private Model model = new Model();
+
+    private void HandleValidSubmit()
+    {
+        Console.WriteLine("valid");
+    }
+
+    public class Model
+    {
+        [Range(1, 5)]
+        public int Rating { get; set; }
+    }
+}
 ```
 
 ## <a name="validation-support"></a>유효성 검사 지원
@@ -243,15 +396,13 @@ private class MyCustomValidator : ValidationAttribute
 }
 ```
 
-::: moniker range=">= aspnetcore-3.1"
-
 ### <a name="opno-locblazor-data-annotations-validation-package"></a>데이터 주석 유효성 검사 패키지 Blazor
 
 [AspNetCoreBlazor입니다. DataAnnotations. 유효성 검사](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.DataAnnotations.Validation) 는 `DataAnnotationsValidator` 구성 요소를 사용 하 여 유효성 검사 환경 간격을 채우는 패키지입니다. 패키지가 현재 *실험적*입니다.
 
 ### <a name="compareproperty-attribute"></a>[CompareProperty] 특성
 
-<xref:System.ComponentModel.DataAnnotations.CompareAttribute> `DataAnnotationsValidator` 구성 요소에서 제대로 작동 하지 않습니다. [AspNetCoreBlazor입니다. DataAnnotations. 유효성 검사](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.DataAnnotations.Validation) *실험적* 패키지는 이러한 제한을 해결 하는 추가 유효성 검사 특성 `ComparePropertyAttribute`을 제공 합니다. Blazor 앱에서 `[CompareProperty]`는 `[Compare]` 특성을 직접 대체 합니다. 자세한 내용은 [On유효 제출 EditForm (dotnet/AspNetCore #10643)에서 Compareattribute를 무시](https://github.com/dotnet/AspNetCore/issues/10643#issuecomment-543909748)하는 방법을 참조 하세요.
+<xref:System.ComponentModel.DataAnnotations.CompareAttribute>는 유효성 검사 결과를 특정 멤버와 연결 하지 않기 때문에 `DataAnnotationsValidator` 구성 요소에서 제대로 작동 하지 않습니다. 이 경우 필드 수준 유효성 검사와 전송에서 전체 모델의 유효성을 검사할 때 일관 되지 않은 동작이 발생할 수 있습니다. [AspNetCoreBlazor입니다. DataAnnotations. 유효성 검사](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.DataAnnotations.Validation) *실험적* 패키지는 이러한 제한을 해결 하는 추가 유효성 검사 특성 `ComparePropertyAttribute`을 제공 합니다. Blazor 앱에서 `[CompareProperty]`는 `[Compare]` 특성을 직접 대체 합니다.
 
 ### <a name="nested-models-collection-types-and-complex-types"></a>중첩 된 모델, 컬렉션 형식 및 복합 형식
 
@@ -260,7 +411,7 @@ Blazor은 기본 제공 `DataAnnotationsValidator`에서 데이터 주석을 사
 컬렉션 및 복합 형식 속성을 포함 하 여 바인딩된 모델의 전체 개체 그래프의 유효성을 검사 하려면BlazorAspNetCore에서 *제공 하는* `ObjectGraphDataAnnotationsValidator`을 사용 합니다. [ DataAnnotations. 유효성 검사](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.DataAnnotations.Validation) 패키지:
 
 ```razor
-<EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
+<EditForm Model="@model" OnValidSubmit="HandleValidSubmit">
     <ObjectGraphDataAnnotationsValidator />
     ...
 </EditForm>
@@ -303,12 +454,69 @@ public class ShipDescription
 }
 ```
 
-::: moniker-end
+### <a name="enable-the-submit-button-based-on-form-validation"></a>양식 유효성 검사에 따라 제출 단추를 사용 하도록 설정
 
-::: moniker range="< aspnetcore-3.1"
+양식 유효성 검사에 따라 제출 단추를 사용 하거나 사용 하지 않도록 설정 하려면:
 
-### <a name="validation-of-complex-or-collection-type-properties"></a>복합 형식 또는 컬렉션 형식 속성의 유효성 검사
+* 구성 요소가 초기화 될 때 폼의 `EditContext`를 사용 하 여 모델을 할당 합니다.
+* 컨텍스트의 `OnFieldChanged` 콜백에서 폼의 유효성을 검사 하 여 제출 단추를 사용 하거나 사용 하지 않도록 설정 합니다.
 
-모델의 속성에 적용 되는 유효성 검사 특성은 폼이 제출 될 때 유효성을 검사 합니다. 그러나 모델의 복합 데이터 형식 또는 컬렉션의 속성은 `DataAnnotationsValidator` 구성 요소에의 한 폼 전송에서 유효성이 검사 되지 않습니다. 이 시나리오에서 중첩 된 유효성 검사 특성을 적용 하려면 사용자 지정 유효성 검사 구성 요소를 사용 합니다. 예제는 [Blazor 유효성 검사 샘플 (aspnet/샘플)](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/Validation)을 참조 하세요.
+```razor
+<EditForm EditContext="@editContext">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
 
-::: moniker-end
+    ...
+
+    <button type="submit" disabled="@formInvalid">Submit</button>
+</EditForm>
+
+@code {
+    private Starship starship = new Starship();
+    private bool formInvalid = true;
+    private EditContext editContext;
+
+    protected override void OnInitialized()
+    {
+        editContext = new EditContext(starship);
+
+        editContext.OnFieldChanged += (_, __) =>
+        {
+            formInvalid = !editContext.Validate();
+            StateHasChanged();
+        };
+    }
+}
+```
+
+앞의 예제에서 다음과 같은 경우 `formInvalid`를 `false`로 설정 합니다.
+
+* 올바른 기본값이 포함 된 양식이 미리 로드 됩니다.
+* 양식이 로드 될 때 제출 단추를 사용 하도록 설정 하려고 합니다.
+
+이전 방법의 부작용은 사용자가 한 필드와 상호 작용 하 고 나면 `ValidationSummary` 구성 요소가 잘못 된 필드로 채워지는 것입니다. 이 시나리오는 다음 중 한 가지 방법으로 해결할 수 있습니다.
+
+* 폼에 `ValidationSummary` 구성 요소를 사용 하지 마십시오.
+* 전송 단추가 선택 된 경우 (예: `HandleValidSubmit` 메서드에서) `ValidationSummary` 구성 요소를 표시 하도록 설정 합니다.
+
+```razor
+<EditForm EditContext="@editContext" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary style="@displaySummary" />
+
+    ...
+
+    <button type="submit" disabled="@formInvalid">Submit</button>
+</EditForm>
+
+@code {
+    private string displaySummary = "display:none";
+
+    ...
+
+    private void HandleValidSubmit()
+    {
+        displaySummary = "display:block";
+    }
+}
+```

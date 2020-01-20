@@ -2,20 +2,21 @@
 title: ASP.NET Core Blazor 호스팅 모델
 author: guardrex
 description: Blazor Weasembmbsemboma 및 Blazor Server 호스팅 모델을 이해 합니다.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 12/18/2019
 no-loc:
 - Blazor
 - SignalR
+- blazor.webassembly.js
 uid: blazor/hosting-models
-ms.openlocfilehash: 7676d16bddf146ea38619ed35c5e32c5bce731de
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: c9521acf40317c90d1197660bfa516710263cfc9
+ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74943769"
+ms.lasthandoff: 01/17/2020
+ms.locfileid: "76160043"
 ---
 # <a name="aspnet-core-opno-locblazor-hosting-models"></a>ASP.NET Core Blazor 호스팅 모델
 
@@ -37,7 +38,7 @@ Blazor에 대 한 주 호스팅 모델이 브라우저에서 클라이언트 쪽
 
 **Blazor Weasembomapp** 템플릿을 선택한 후에는 **ASP.NET Core hosted** 확인란 ([dotnet new blazorwasm--hosted](/dotnet/core/tools/dotnet-new))을 선택 하 여 ASP.NET Core 백 엔드를 사용 하도록 앱을 구성할 수 있습니다. ASP.NET Core 앱은 Blazor 앱을 클라이언트에 제공 합니다. Blazor Weasembomapp는 web API 호출 또는 [SignalR](xref:signalr/introduction)를 사용 하 여 네트워크를 통해 서버와 상호 작용할 수 있습니다.
 
-템플릿에는를 처리 하는 *blazor* 스크립트가 포함 됩니다.
+템플릿에는를 처리 하는 `blazor.webassembly.js` 스크립트가 포함 되어 있습니다.
 
 * .NET 런타임, 앱 및 앱의 종속성 다운로드
 * 앱을 실행 하기 위한 런타임 초기화
@@ -69,7 +70,7 @@ ASP.NET Core 앱은 추가할 앱의 `Startup` 클래스를 참조 합니다.
 * 서버 쪽 서비스.
 * 요청 처리 파이프라인에 대 한 앱입니다.
 
-*Blazor* 스크립트&dagger; 클라이언트 연결을 설정 합니다. 필요에 따라 앱 상태를 유지 하 고 복원 하는 것은 앱의 책임입니다 (예: 네트워크 연결이 끊어진 경우).
+`blazor.server.js` 스크립트&dagger; 클라이언트 연결을 설정 합니다. 필요에 따라 앱 상태를 유지 하 고 복원 하는 것은 앱의 책임입니다 (예: 네트워크 연결이 끊어진 경우).
 
 Blazor 서버 호스팅 모델은 몇 가지 이점을 제공 합니다.
 
@@ -86,7 +87,7 @@ Blazor 서버 호스팅을 위한 단점이 있습니다.
 * 여러 사용자가 있는 앱의 경우에는 확장성이 어렵습니다. 서버는 여러 클라이언트 연결을 관리 하 고 클라이언트 상태를 처리 해야 합니다.
 * 앱을 제공 하려면 ASP.NET Core 서버가 필요 합니다. 서버를 사용 하지 않는 배포 시나리오 (예: CDN에서 앱 제공)를 사용할 수 없습니다.
 
-&dagger;*blazor* 스크립트는 ASP.NET Core 공유 프레임 워크의 포함 리소스에서 제공 됩니다.
+&dagger;`blazor.server.js` 스크립트는 ASP.NET Core 공유 프레임 워크의 포함 리소스에서 제공 됩니다.
 
 ### <a name="comparison-to-server-rendered-ui"></a>서버에서 렌더링 된 UI 비교
 
@@ -110,6 +111,187 @@ Blazor의 UI 업데이트는 다음에 의해 트리거됩니다.
 그래프가 계산 되며 UI *diff* (차이)가 계산 됩니다. 이러한 차이는 클라이언트에서 UI를 업데이트 하는 데 필요한 최소한의 DOM 편집 집합입니다. Diff는 클라이언트에 이진 형식으로 전송 되 고 브라우저에서 적용 됩니다.
 
 사용자가 클라이언트에서 다른 구성 요소를 탐색 한 후에 구성 요소가 삭제 됩니다. 사용자가 구성 요소와 상호 작용 하는 동안에는 구성 요소의 상태 (서비스, 리소스)가 서버 메모리에 보관 되어야 합니다. 서버에서 많은 구성 요소의 상태를 동시에 유지 관리할 수 있기 때문에 메모리 소모는 해결 해야 하는 문제입니다. 서버 메모리를 최적으로 사용 하기 위해 Blazor Server 앱을 제작 하는 방법에 대 한 지침은 <xref:security/blazor/server>을 참조 하세요.
+
+### <a name="integrate-razor-components-into-razor-pages-and-mvc-apps"></a>Razor Pages 및 MVC 앱에 Razor 구성 요소 통합
+
+#### <a name="use-components-in-pages-and-views"></a>페이지 및 뷰에서 구성 요소 사용
+
+기존 Razor Pages 또는 MVC 앱은 Razor 구성 요소를 페이지 및 뷰에 통합할 수 있습니다.
+
+1. 앱의 레이아웃 파일 ( *_Layout cshtml*)에서:
+
+   * `<head>` 요소에 다음 `<base>` 태그를 추가 합니다.
+
+     ```html
+     <base href="~/" />
+     ```
+
+     앞의 예제에서 `href` 값 ( *앱 기본 경로*)은 앱이 루트 URL 경로 (`/`)에 있는 것으로 가정 합니다. 앱이 하위 응용 프로그램 인 경우 <xref:host-and-deploy/blazor/index#app-base-path> 문서의 *앱 기준 경로* 섹션에 있는 지침을 따르세요.
+
+     *_Layout cshtml* 파일은 Razor Pages 앱의 *Pages/SHARED* 폴더 또는 MVC 앱의 *Views/shared* 폴더에 있습니다.
+
+   * 닫는 `</body>` 태그 내에 *blazor* 스크립트에 대 한 `<script>` 태그를 추가 합니다.
+
+     ```html
+     <script src="_framework/blazor.server.js"></script>
+     ```
+
+     프레임 워크는 *blazor* 스크립트를 앱에 추가 합니다. 앱에 스크립트를 수동으로 추가할 필요는 없습니다.
+
+1. 다음 콘텐츠를 사용 하 여 프로젝트의 루트 폴더에 *_Imports razor* 파일을 추가 합니다 (마지막 네임 스페이스 `MyAppNamespace`를 앱의 네임 스페이스로 변경).
+
+   ```csharp
+   @using System.Net.Http
+   @using Microsoft.AspNetCore.Authorization
+   @using Microsoft.AspNetCore.Components.Authorization
+   @using Microsoft.AspNetCore.Components.Forms
+   @using Microsoft.AspNetCore.Components.Routing
+   @using Microsoft.AspNetCore.Components.Web
+   @using Microsoft.JSInterop
+   @using MyAppNamespace
+   ```
+
+1. `Startup.ConfigureServices`에서 Blazor Server 서비스를 추가 합니다.
+
+   ```csharp
+   services.AddServerSideBlazor();
+   ```
+
+1. `Startup.Configure`에서 `app.UseEndpoints`에 Blazor 허브 끝점을 추가 합니다.
+
+   ```csharp
+   endpoints.MapBlazorHub();
+   ```
+
+1. 모든 페이지 또는 보기에 구성 요소를 통합 합니다. 자세한 내용은 <xref:blazor/components#integrate-components-into-razor-pages-and-mvc-apps> 문서의 *Razor Pages 및 MVC 앱에 구성 요소 통합* 섹션을 참조 하세요.
+
+#### <a name="use-routable-components-in-a-razor-pages-app"></a>Razor Pages 앱에서 라우팅 가능한 구성 요소 사용
+
+Razor Pages 앱에서 라우팅할 수 있는 Razor 구성 요소를 지원 하려면 다음을 수행 합니다.
+
+1. [페이지 및 뷰에서 구성 요소 사용](#use-components-in-pages-and-views) 섹션의 지침을 따릅니다.
+
+1. 다음 콘텐츠를 사용 하 여 프로젝트의 루트에 *응용 프로그램 razor* 파일을 추가 합니다.
+
+   ```razor
+   @using Microsoft.AspNetCore.Components.Routing
+
+   <Router AppAssembly="typeof(Program).Assembly">
+       <Found Context="routeData">
+           <RouteView RouteData="routeData" />
+       </Found>
+       <NotFound>
+           <h1>Page not found</h1>
+           <p>Sorry, but there's nothing here!</p>
+       </NotFound>
+   </Router>
+   ```
+
+1. 다음 내용을 사용 하 여 *Pages* 폴더에 *_Host cshtml* 파일을 추가 합니다.
+
+   ```cshtml
+   @page "/blazor"
+   @{
+       Layout = "_Layout";
+   }
+
+   <app>
+       <component type="typeof(App)" render-mode="ServerPrerendered" />
+   </app>
+   ```
+
+   구성 요소는 해당 레이아웃에 대해 공유 *_Layout cshtml* 파일을 사용 합니다.
+
+1. _Host에 대 한 우선 순위가 낮은 경로를 `Startup.Configure`의 끝점 구성에 추가 *합니다* .
+
+   ```csharp
+   app.UseEndpoints(endpoints =>
+   {
+       ...
+
+       endpoints.MapFallbackToPage("/_Host");
+   });
+   ```
+
+1. 라우팅할 수 있는 구성 요소를 앱에 추가 합니다. 예를 들면 다음과 같습니다.:
+
+   ```razor
+   @page "/counter"
+
+   <h1>Counter</h1>
+
+   ...
+   ```
+
+   사용자 지정 폴더를 사용 하 여 앱의 구성 요소를 저장 하는 경우 폴더를 나타내는 네임 스페이스를 *Pages/_ViewImports cshtml* 파일에 추가 합니다. 자세한 내용은 <xref:blazor/components#integrate-components-into-razor-pages-and-mvc-apps>를 참조하세요.
+
+#### <a name="use-routable-components-in-an-mvc-app"></a>MVC 앱에서 라우팅 가능한 구성 요소 사용
+
+MVC 앱에서 라우팅할 수 있는 Razor 구성 요소를 지원 하려면 다음을 수행 합니다.
+
+1. [페이지 및 뷰에서 구성 요소 사용](#use-components-in-pages-and-views) 섹션의 지침을 따릅니다.
+
+1. 다음 콘텐츠를 사용 하 여 프로젝트의 루트에 *응용 프로그램 razor* 파일을 추가 합니다.
+
+   ```razor
+   @using Microsoft.AspNetCore.Components.Routing
+
+   <Router AppAssembly="typeof(Program).Assembly">
+       <Found Context="routeData">
+           <RouteView RouteData="routeData" />
+       </Found>
+       <NotFound>
+           <h1>Page not found</h1>
+           <p>Sorry, but there's nothing here!</p>
+       </NotFound>
+   </Router>
+   ```
+
+1. 다음 내용을 사용 하 여 *Views/Home* 폴더에 _Host을 추가 *합니다* .
+
+   ```cshtml
+   @{
+       Layout = "_Layout";
+   }
+
+   <app>
+       <component type="typeof(App)" render-mode="ServerPrerendered" />
+   </app>
+   ```
+
+   구성 요소는 해당 레이아웃에 대해 공유 *_Layout cshtml* 파일을 사용 합니다.
+
+1. 홈 컨트롤러에 작업을 추가 합니다.
+
+   ```csharp
+   public IActionResult Blazor()
+   {
+      return View("_Host");
+   }
+   ```
+
+1. `Startup.Configure`의 끝점 구성에 *_Host. cshtml* 뷰를 반환 하는 컨트롤러 작업에 우선 순위가 낮은 경로를 추가 합니다.
+
+   ```csharp
+   app.UseEndpoints(endpoints =>
+   {
+       ...
+
+       endpoints.MapFallbackToController("Blazor", "Home");
+   });
+   ```
+
+1. *페이지* 폴더를 만들고 라우팅할 수 있는 구성 요소를 앱에 추가 합니다. 예를 들면 다음과 같습니다.:
+
+   ```razor
+   @page "/counter"
+
+   <h1>Counter</h1>
+
+   ...
+   ```
+
+   사용자 지정 폴더를 사용 하 여 앱의 구성 요소를 저장 하는 경우 폴더를 나타내는 네임 스페이스를 *Views/_ViewImports cshtml* 파일에 추가 합니다. 자세한 내용은 <xref:blazor/components#integrate-components-into-razor-pages-and-mvc-apps>를 참조하세요.
 
 ### <a name="circuits"></a>배선
 
@@ -142,7 +324,7 @@ Blazor Server 앱은 서버에서 UI 상태를 설정 하는 첫 번째 클라�
 
 Blazor 서버 앱에 [Azure SignalR Service](/azure/azure-signalr)를 사용하는 것이 좋습니다. 이 서비스를 사용하면 Blazor 서버 앱을 다수의 동시 SignalR 연결로 확장할 수 있습니다. 고정 세션은 서비스의 `ServerStickyMode` 옵션 또는 구성 값을 `Required`로 설정 하 여 Azure SignalR 서비스에 대해 사용 하도록 설정 됩니다. 자세한 내용은 <xref:host-and-deploy/blazor/server#signalr-configuration>를 참조하세요.
 
-IIS를 사용 하는 경우 응용 프로그램 요청 라우팅을 사용 하 여 고정 세션을 사용할 수 있습니다. 자세한 내용은 [응용 프로그램 요청 라우팅을 사용 하는 HTTP 부하 분산](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing)을 참조 하세요.
+IIS를 사용하는 경우 애플리케이션 요청 라우팅을 사용하여 고정 세션을 사용할 수 있습니다. 자세한 내용은 [애플리케이션 요청 라우팅을 사용하여 HTTP 부하 분산](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing)을 참조하세요.
 
 #### <a name="reflect-the-connection-state-in-the-ui"></a>UI의 연결 상태를 반영 합니다.
 
@@ -169,8 +351,6 @@ UI를 사용자 지정 하려면 _Host의 `<body>`에 `components-reconnect-moda
 
 서버에 대 한 클라이언트 연결이 설정 되기 전에 서버에서 UI를 미리 렌더링 하도록 Blazor 서버 앱이 기본적으로 설정 되어 있습니다. 이는 _Host에 설정 되어 *있습니다. cshtml* Razor 페이지:
 
-::: moniker range=">= aspnetcore-3.1"
-
 ```cshtml
 <body>
     <app>
@@ -181,44 +361,16 @@ UI를 사용자 지정 하려면 _Host의 `<body>`에 `components-reconnect-moda
 </body>
 ```
 
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.1"
-
-```cshtml
-<body>
-    <app>@(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))</app>
-
-    <script src="_framework/blazor.server.js"></script>
-</body>
-```
-
-::: moniker-end
-
 구성 요소가 있는지 여부를 구성 하 `RenderMode` 다음을 수행 합니다.
 
 * 는 페이지에 미리 렌더링 된 됩니다.
 * 는 페이지에서 정적 HTML로 렌더링 되거나 사용자 에이전트에서 Blazor 앱을 부트스트랩 하는 데 필요한 정보가 포함 되어 있습니다.
-
-::: moniker range=">= aspnetcore-3.1"
 
 | `RenderMode`        | 설명 |
 | ------------------- | ----------- |
 | `ServerPrerendered` | 구성 요소를 정적 HTML로 렌더링 하 고 Blazor Server 앱에 대 한 마커를 포함 합니다. 사용자 에이전트가 시작 되 면이 마커는 Blazor 앱을 부트스트랩 하는 데 사용 됩니다. |
 | `Server`            | Blazor Server 앱에 대 한 마커를 렌더링 합니다. 구성 요소의 출력은 포함 되지 않습니다. 사용자 에이전트가 시작 되 면이 마커는 Blazor 앱을 부트스트랩 하는 데 사용 됩니다. |
 | `Static`            | 구성 요소를 정적 HTML로 렌더링 합니다. |
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.1"
-
-| `RenderMode`        | 설명 |
-| ------------------- | ----------- |
-| `ServerPrerendered` | 구성 요소를 정적 HTML로 렌더링 하 고 Blazor Server 앱에 대 한 마커를 포함 합니다. 사용자 에이전트가 시작 되 면이 마커는 Blazor 앱을 부트스트랩 하는 데 사용 됩니다. 매개 변수는 지원 되지 않습니다. |
-| `Server`            | Blazor Server 앱에 대 한 마커를 렌더링 합니다. 구성 요소의 출력은 포함 되지 않습니다. 사용자 에이전트가 시작 되 면이 마커는 Blazor 앱을 부트스트랩 하는 데 사용 됩니다. 매개 변수는 지원 되지 않습니다. |
-| `Static`            | 구성 요소를 정적 HTML로 렌더링 합니다. 매개 변수가 지원 됩니다. |
-
-::: moniker-end
 
 정적 HTML 페이지에서 서버 구성 요소를 렌더링 하는 것은 지원 되지 않습니다.
 
@@ -290,8 +442,6 @@ public class WeatherForecastService
 
 다음 Razor 페이지는 `Counter` 구성 요소를 렌더링 합니다.
 
-::: moniker range=">= aspnetcore-3.1"
-
 ```cshtml
 <h1>My Razor Page</h1>
 
@@ -304,28 +454,9 @@ public class WeatherForecastService
 }
 ```
 
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.1"
-
-```cshtml
-<h1>My Razor Page</h1>
-
-@(await Html.RenderComponentAsync<Counter>(RenderMode.ServerPrerendered))
-
-@code {
-    [BindProperty(SupportsGet=true)]
-    public int InitialValue { get; set; }
-}
-```
-
-::: moniker-end
-
 ### <a name="render-noninteractive-components-from-razor-pages-and-views"></a>Razor 페이지 및 뷰에서 비 대화형 구성 요소 렌더링
 
 다음 Razor 페이지에서 `Counter` 구성 요소는 폼을 사용 하 여 지정 된 초기 값을 사용 하 여 정적으로 렌더링 됩니다.
-
-::: moniker range=">= aspnetcore-3.1"
 
 ```cshtml
 <h1>My Razor Page</h1>
@@ -344,29 +475,6 @@ public class WeatherForecastService
 }
 ```
 
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.1"
-
-```cshtml
-<h1>My Razor Page</h1>
-
-<form>
-    <input type="number" asp-for="InitialValue" />
-    <button type="submit">Set initial value</button>
-</form>
-
-@(await Html.RenderComponentAsync<Counter>(RenderMode.Static, 
-    new { InitialValue = InitialValue }))
-
-@code {
-    [BindProperty(SupportsGet=true)]
-    public int InitialValue { get; set; }
-}
-```
-
-::: moniker-end
-
 `MyComponent` 정적으로 렌더링 되므로 구성 요소는 대화형이 될 수 없습니다.
 
 ### <a name="detect-when-the-app-is-prerendering"></a>앱이 사전 렌더링 되는 경우 검색
@@ -379,7 +487,7 @@ public class WeatherForecastService
 
 *Pages/_Host* 파일에서 SignalR 클라이언트를 구성 하려면 다음을 수행 합니다.
 
-* *Blazor* 스크립트에 대 한 `<script>` 태그에 `autostart="false"` 특성을 추가 합니다.
+* `blazor.server.js` 스크립트의 `<script>` 태그에 `autostart="false"` 특성을 추가 합니다.
 * `Blazor.start`를 호출 하 고 SignalR 빌더를 지정 하는 구성 개체를 전달 합니다.
 
 ```html

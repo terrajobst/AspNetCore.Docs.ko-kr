@@ -2,19 +2,20 @@
 title: JavaScript interop Blazor ASP.NET Core
 author: guardrex
 description: Blazor apps에서 JavaScript의 .NET 및 .NET 메서드에서 JavaScript 함수를 호출 하는 방법에 대해 알아봅니다.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 12/18/2019
 no-loc:
 - Blazor
+- SignalR
 uid: blazor/javascript-interop
-ms.openlocfilehash: 7135e44278632ee53bdf899b95da9ad70d329045
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: e1b9c84dace193768c6f3fbb5636ef675d65a20d
+ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828128"
+ms.lasthandoff: 01/17/2020
+ms.locfileid: "76159905"
 ---
 # <a name="aspnet-core-opno-locblazor-javascript-interop"></a>JavaScript interop Blazor ASP.NET Core
 
@@ -24,7 +25,7 @@ ms.locfileid: "75828128"
 
 Blazor 앱은 JavaScript 코드에서 .NET 및 .NET 메서드의 JavaScript 함수를 호출할 수 있습니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="invoke-javascript-functions-from-net-methods"></a>.NET 메서드에서 JavaScript 함수 호출
 
@@ -363,4 +364,4 @@ JS interop는 네트워킹 오류로 인해 실패할 수 있으며 신뢰할 �
 
 ## <a name="additional-resources"></a>추가 자료
 
-* [InteropComponent 예 (dotnet/AspNetCore GitHub 리포지토리, 3.0 릴리스 분기)](https://github.com/dotnet/AspNetCore/blob/release/3.0/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
+* [InteropComponent 예 (dotnet/AspNetCore GitHub 리포지토리, 3.1 릴리스 분기)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)

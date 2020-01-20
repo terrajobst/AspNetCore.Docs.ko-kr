@@ -2,20 +2,20 @@
 title: ASP.NET Core Blazor 앱의 오류 처리
 author: guardrex
 description: Blazor 처리 되지 않은 예외를 관리 하는 방법 및 오류를 검색 하 고 처리 하는 앱을 개발 하는 방법을 Blazor ASP.NET Core 방법을 알아봅니다.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 12/18/2019
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/handle-errors
-ms.openlocfilehash: d73eb9a0dd0ec7a4bec4b7b9aeaaa4a9ee888bce
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: fe4cc13b1efb8c70c9632f032626aa938fb65ea3
+ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74943708"
+ms.lasthandoff: 01/17/2020
+ms.locfileid: "76159952"
 ---
 # <a name="handle-errors-in-aspnet-core-opno-locblazor-apps"></a>ASP.NET Core Blazor 앱의 오류 처리
 
@@ -23,14 +23,12 @@ ms.locfileid: "74943708"
 
 이 문서에서는 Blazor 처리 되지 않은 예외를 관리 하는 방법과 오류를 검색 하 고 처리 하는 앱을 개발 하는 방법을 설명 합니다
 
-::: moniker range=">= aspnetcore-3.1"
-
 ## <a name="detailed-errors-during-development"></a>개발 중의 자세한 오류
 
-Blazor 앱이 개발 중 제대로 작동 하지 않는 경우 앱에서 자세한 오류 정보를 수신 하면 문제를 해결 하 고 문제를 해결 하는 데 도움이 됩니다. 오류가 발생 하면 Blazor 앱은 화면 아래쪽에 금색 막대를 표시 합니다.
+Blazor 앱이 개발 중에 올바르게 작동하지 않는 경우 앱에서 자세한 오류 정보를 수신하면 문제를 해결하고 수정하는 데 도움이 됩니다. 오류가 발생하면 Blazor 앱의 화면 아래쪽에 금색 막대가 표시됩니다.
 
-* 개발 하는 동안 골드 막대는 예외를 볼 수 있는 브라우저 콘솔로 안내 합니다.
-* 프로덕션에서 골드 막대는 오류가 발생 했음을 사용자에 게 알리고 브라우저를 새로 고치는 것을 권장 합니다.
+* 개발 중에 금색 막대를 누르면 예외를 볼 수 있는 브라우저 콘솔로 연결됩니다.
+* 프로덕션에서, 금색 막대는 오류가 발생했음을 알려주고 브라우저를 새로 고치도록 권장합니다.
 
 이 오류 처리 환경의 UI는 Blazor 프로젝트 템플릿의 일부입니다. Blazor Weasembomapp에서 *wwwroot/index.html* 파일의 환경을 사용자 지정 합니다.
 
@@ -58,8 +56,6 @@ Blazor Server 앱에서 *Pages/_Host* 파일의 환경을 사용자 지정 합�
 ```
 
 `blazor-error-ui` 요소는 Blazor 템플릿에 포함 된 스타일에 의해 숨겨지고 오류가 발생할 때 표시 됩니다.
-
-::: moniker-end
 
 ## <a name="how-the-opno-locblazor-framework-reacts-to-unhandled-exceptions"></a>Blazor 프레임 워크가 처리 되지 않은 예외에 반응 하는 방법
 
@@ -213,8 +209,6 @@ Blazor를 사용 하 여 코드에서 사용자 회로의 상태가 변경 될 �
 
 ### <a name="prerendering"></a>사전
 
-::: moniker range=">= aspnetcore-3.1"
-
 Blazor 구성 요소는 `Component` 태그 도우미를 사용 하 여 미리 렌더링 된 수 있습니다. 이렇게 하면 렌더링 된 HTML 태그가 사용자의 초기 HTTP 요청 일부로 반환 됩니다. 다음 작업을 수행 합니다.
 
 * 동일한 페이지의 일부인 모든 미리 렌더링 된 구성 요소에 대 한 새 회로를 만듭니다.
@@ -229,27 +223,6 @@ Blazor 구성 요소는 `Component` 태그 도우미를 사용 하 여 미리 �
 일반적인 경우에는 사전 렌더링에 실패 하는 경우 작업 구성 요소를 렌더링할 수 없기 때문에 구성 요소를 계속 빌드 및 렌더링 하는 것은 적합 하지 않습니다.
 
 렌더링 중에 발생할 수 있는 오류를 허용 하려면 예외를 throw 할 수 있는 구성 요소 내부에 오류 처리 논리를 배치 해야 합니다. 오류 처리 및 로깅과 함께 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문을 사용 합니다. `try-catch` 문에서 `Component` 태그 도우미를 래핑하는 대신 `Component` 태그 도우미에 의해 렌더링 되는 구성 요소에 오류 처리 논리를 배치 합니다.
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.1"
-
-Blazor 구성 요소는 `Html.RenderComponentAsync`를 사용 하 여 미리 렌더링 된 수 있으므로 렌더링 된 HTML 태그가 사용자의 초기 HTTP 요청 일부로 반환 됩니다. 다음 작업을 수행 합니다.
-
-* 동일한 페이지의 일부인 모든 미리 렌더링 된 구성 요소에 대 한 새 회로를 만듭니다.
-* 초기 HTML을 생성 합니다.
-* 사용자의 브라우저가 동일한 서버에 SignalR 연결을 설정할 때까지 회로를 `disconnected`으로 처리 합니다. 연결이 설정 되 면 회로에서 상호 작용이 다시 시작 되 고 구성 요소의 HTML 태그가 업데이트 됩니다.
-
-예를 들어, 수명 주기 방법이 나 렌더링 논리에서 렌더링 하는 동안 구성 요소가 처리 되지 않은 예외를 throw 하는 경우:
-
-* 회로에 대 한 심각한 예외입니다.
-* 예외는 `Html.RenderComponentAsync` 호출에서 호출 스택을 throw 합니다. 따라서 개발자 코드에서 예외를 명시적으로 catch 하지 않으면 전체 HTTP 요청이 실패 합니다.
-
-일반적인 경우에는 사전 렌더링에 실패 하는 경우 작업 구성 요소를 렌더링할 수 없기 때문에 구성 요소를 계속 빌드 및 렌더링 하는 것은 적합 하지 않습니다.
-
-렌더링 중에 발생할 수 있는 오류를 허용 하려면 예외를 throw 할 수 있는 구성 요소 내부에 오류 처리 논리를 배치 해야 합니다. 오류 처리 및 로깅과 함께 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문을 사용 합니다. `try-catch` 문에서 `RenderComponentAsync`에 대 한 호출을 래핑하는 대신 `RenderComponentAsync`에서 렌더링 되는 구성 요소에 오류 처리 논리를 배치 합니다.
-
-::: moniker-end
 
 ## <a name="advanced-scenarios"></a>고급 시나리오
 

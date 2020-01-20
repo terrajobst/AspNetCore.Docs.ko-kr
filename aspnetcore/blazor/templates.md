@@ -2,20 +2,20 @@
 title: Blazor 템플릿 ASP.NET Core
 author: guardrex
 description: ASP.NET Core Blazor 앱 템플릿 및 Blazor 프로젝트 구조에 대해 알아봅니다.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/25/2019
+ms.date: 12/18/2019
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: bc0ea4a777e8684a7b0925377b8a19a45c2b531c
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 2a95b986450471b474d93ead252255f2bd9d4918
+ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74879662"
+ms.lasthandoff: 01/17/2020
+ms.locfileid: "76160121"
 ---
 # <a name="aspnet-core-opno-locblazor-templates"></a>Blazor 템플릿 ASP.NET Core
 
@@ -50,13 +50,13 @@ Blazor 템플릿에서 생성 된 Blazor 앱을 구성 하는 파일 및 폴더�
 * *wwwroot/index.html* (Blazor Weasembmbomembamboma)는 html 페이지로 구현 된 앱의 루트 페이지를 &ndash; 합니다.
   * 앱의 페이지를 처음 요청 하면이 페이지가 렌더링 되어 응답으로 반환 됩니다.
   * 페이지는 루트 `App` 구성 요소가 렌더링 되는 위치를 지정 합니다. `App` 구성 요소 (*응용 프로그램 razor*)는 `Startup.Configure`의 `AddComponent` 메서드에 `app` DOM 요소로 지정 됩니다.
-  * *_Framework/Blazor.webassembly.js* JavaScript 파일이 로드 됩니다.
+  * `_framework/blazor.webassembly.js` JavaScript 파일이 로드 되며, 다음을 수행 합니다.
     * .NET 런타임, 앱 및 앱의 종속성을 다운로드 합니다.
     * 응용 프로그램을 실행 하도록 런타임을 초기화 합니다.
 
 * *Pages/_Host* (Blazor Server)는 Razor 페이지로 구현 된 앱의 루트 페이지를 &ndash; 합니다.
   * 앱의 페이지를 처음 요청 하면이 페이지가 렌더링 되어 응답으로 반환 됩니다.
-  * *_Framework/Blazor.server.js* JavaScript 파일이 로드 되며, 브라우저와 서버 간에 실시간 SignalR 연결을 설정 합니다.
+  * 브라우저와 서버 간에 실시간 SignalR 연결을 설정 하는 `_framework/blazor.server.js` JavaScript 파일이 로드 됩니다.
   * 호스트 페이지는 루트 `App` 구성 요소 (*응용 프로그램 razor*)가 렌더링 되는 위치를 지정 합니다.
 
 * *응용 프로그램 razor* 는 <xref:Microsoft.AspNetCore.Components.Routing.Router> 구성 요소를 사용 하 여 클라이언트 쪽 라우팅을 설정 하는 앱의 루트 구성 요소를 &ndash; 합니다. `Router` 구성 요소는 브라우저 탐색을 가로채서 요청 된 주소와 일치 하는 페이지를 렌더링 합니다.

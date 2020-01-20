@@ -2,19 +2,20 @@
 title: ASP.NET Core Blazor 상태 관리
 author: guardrex
 description: Blazor Server 앱에서 상태를 유지 하는 방법에 대해 알아봅니다.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 12/18/2019
 no-loc:
 - Blazor
+- SignalR
 uid: blazor/state-management
-ms.openlocfilehash: 7351ee2438c6adf675b8aa5e8ecdb1b2da7b4f23
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: ffb32a4f274a30f2a5ceed9cbf193285e85bab4c
+ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74943929"
+ms.lasthandoff: 01/17/2020
+ms.locfileid: "76160147"
 ---
 # <a name="aspnet-core-opno-locblazor-state-management"></a>ASP.NET Core Blazor 상태 관리
 
@@ -241,17 +242,7 @@ else
 
 오류를 해결 하는 한 가지 방법은 사전 렌더링을 사용 하지 않도록 설정 하는 것입니다. 일반적으로 앱이 브라우저 기반 저장소를 많이 사용 하는 경우이 옵션을 선택 하는 것이 좋습니다. 응용 프로그램은 `localStorage` 또는 `sessionStorage`를 사용할 수 있을 때까지 유용한 콘텐츠를 다시 만들 수 없기 때문에, 응용 프로그램에서 복잡성을 추가 하 고 앱을 사용 하면
 
-::: moniker range=">= aspnetcore-3.1"
-
 렌더링을 사용 하지 않도록 설정 하려면 *Pages/_Host cshtml* 파일을 열고 `Component` 태그 도우미의 `render-mode`에 대 한 호출을 `Server`로 변경 합니다.
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.1"
-
-렌더링을 사용 하지 않도록 설정 하려면 *Pages/_Host cshtml* 파일을 열고 `Html.RenderComponentAsync<App>(RenderMode.Server)`호출을 변경 합니다.
-
-::: moniker-end
 
 `localStorage` 또는 `sessionStorage`사용 하지 않는 다른 페이지에는 렌더링에 유용할 수 있습니다. 렌더링을 사용 하도록 설정 된 상태로 유지 하려면 브라우저가 회로에 연결 될 때까지 로드 작업을 지연 시킵니다. 카운터 값을 저장 하는 예제는 다음과 같습니다.
 
