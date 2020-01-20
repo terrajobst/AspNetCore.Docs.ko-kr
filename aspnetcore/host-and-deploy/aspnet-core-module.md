@@ -5,14 +5,14 @@ description: ASP.NET Core 앱을 호스팅하기 위해 ASP.NET Core 모듈을 �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/07/2019
+ms.date: 01/13/2020
 uid: host-and-deploy/aspnet-core-module
-ms.openlocfilehash: c9bbd36b8a55b837f6d78abf99215c5496895a39
-ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
+ms.openlocfilehash: 75f4a158253dd3276ed37011d9aa73d82cad5b79
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73799409"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75952013"
 ---
 # <a name="aspnet-core-module"></a>ASP.NET Core 모듈
 
@@ -307,7 +307,7 @@ ASP.NET Core 모듈은 개선된 진단 로그를 제공하도록 구성할 수 
 처리기 설정은 환경 변수를 통해서도 제공할 수 있습니다.
 
 * `ASPNETCORE_MODULE_DEBUG_FILE` &ndash; 디버그 로그 파일의 경로입니다. (기본값: *aspnetcore-debug.log*)
-* `ASPNETCORE_MODULE_DEBUG` &ndash; 디버그 수준 설정.
+* `ASPNETCORE_MODULE_DEBUG` &ndash; 디버그 수준 설정입니다.
 
 > [!WARNING]
 > 배포에서 문제를 해결하는 데 필요한 시간보다 오래 디버그 로깅을 사용하도록 설정하지 **마세요**. 로그의 크기는 제한되지 않습니다. 디버그 로그를 사용하도록 설정한 대로 두면 사용 가능한 디스크 공간이 소진되어 서버 또는 앱 서비스가 크래시될 수 있습니다.
@@ -720,7 +720,7 @@ ASP.NET Core 모듈은 개선된 진단 로그를 제공하도록 구성할 수 
 처리기 설정은 환경 변수를 통해서도 제공할 수 있습니다.
 
 * `ASPNETCORE_MODULE_DEBUG_FILE` &ndash; 디버그 로그 파일의 경로입니다. (기본값: *aspnetcore-debug.log*)
-* `ASPNETCORE_MODULE_DEBUG` &ndash; 디버그 수준 설정.
+* `ASPNETCORE_MODULE_DEBUG` &ndash; 디버그 수준 설정입니다.
 
 > [!WARNING]
 > 배포에서 문제를 해결하는 데 필요한 시간보다 오래 디버그 로깅을 사용하도록 설정하지 **마세요**. 로그의 크기는 제한되지 않습니다. 디버그 로그를 사용하도록 설정한 대로 두면 사용 가능한 디스크 공간이 소진되어 서버 또는 앱 서비스가 크래시될 수 있습니다.
@@ -1046,5 +1046,6 @@ IIS 공유 구성을 사용할 경우 다음 단계를 수행합니다.
 ## <a name="additional-resources"></a>추가 자료
 
 * <xref:host-and-deploy/iis/index>
-* [ASP.NET Core 모듈 GitHub 리포지토리(참조 소스)](https://github.com/aspnet/AspNetCoreModule)
+* <xref:host-and-deploy/azure-apps/index>
+* [ASP.NET Core 모듈 참조 소스(마스터 분기)](https://github.com/dotnet/aspnetcore/tree/master/src/Servers/IIS/AspNetCoreModuleV2) &ndash; **분기** 드롭다운 목록을 사용하여 특정 릴리스(예: `release/3.1`)를 선택할 수 있습니다.
 * <xref:host-and-deploy/iis/modules>

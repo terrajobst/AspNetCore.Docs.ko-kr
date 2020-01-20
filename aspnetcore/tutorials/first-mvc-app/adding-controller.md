@@ -5,12 +5,12 @@ description: 간단한 ASP.NET Core MVC 앱에 컨트롤러를 추가하는 방�
 ms.author: riande
 ms.date: 08/05/2017
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: fe0c1d3c066d6ab20387391e15c3a7cfe684c61e
-ms.sourcegitcommit: 077b45eceae044475f04c1d7ef2d153d7c0515a8
+ms.openlocfilehash: fb670902b0dafa7dce2b3372e550095387844936
+ms.sourcegitcommit: 57b85708f4cded99b8f008a69830cb104cd8e879
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/29/2019
-ms.locfileid: "75542697"
+ms.lasthandoff: 01/13/2020
+ms.locfileid: "75914243"
 ---
 # <a name="add-a-controller-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 컨트롤러 추가
 
@@ -110,7 +110,7 @@ URL에서 컨트롤러에 일부 매개 변수 정보를 전달하도록 코드�
 
 ![Hello Rick, NumTimes의 애플리케이션 응답을 보여주는 브라우저 창\: 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
 
-위의 이미지에서는 URL 세그먼트(`Parameters`)를 사용하지 않고 `name` 및 `numTimes` 매개 변수가 [쿼리 문자열](https://wikipedia.org/wiki/Query_string)로 전달됩니다. 위 URL에서 `?`(물음표)는 구분 기호로 쿼리 문자열이 이어집니다. `&` 문자는 쿼리 문자열을 구분합니다.
+위의 이미지에서는 URL 세그먼트(`Parameters`)를 사용하지 않고 `name` 및 `numTimes` 매개 변수가 [쿼리 문자열](https://wikipedia.org/wiki/Query_string)로 전달됩니다. 위 URL에서 `?`(물음표)는 구분 기호이며, 다음에 쿼리 문자열이 옵니다. `&` 문자는 필드-값 쌍을 구분합니다.
 
 `Welcome` 메서드를 다음 코드로 바꿉니다.
 
@@ -229,7 +229,7 @@ URL에서 컨트롤러에 일부 매개 변수 정보를 전달하도록 코드�
 
 ![Hello Rick, NumTimes의 애플리케이션 응답을 보여주는 브라우저 창\: 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
 
-위의 이미지에서는 URL 세그먼트(`Parameters`)를 사용하지 않고 `name` 및 `numTimes` 매개 변수가 [쿼리 문자열](https://wikipedia.org/wiki/Query_string)로 전달됩니다. 위 URL에서 `?`(물음표)는 구분 기호로 쿼리 문자열이 이어집니다. `&` 문자는 쿼리 문자열을 구분합니다.
+위의 이미지에서는 URL 세그먼트(`Parameters`)를 사용하지 않고 `name` 및 `numTimes` 매개 변수가 [쿼리 문자열](https://wikipedia.org/wiki/Query_string)로 전달됩니다. 위 URL에서 `?`(물음표)는 구분 기호이며, 다음에 쿼리 문자열이 옵니다. `&` 문자는 필드-값 쌍을 구분합니다.
 
 `Welcome` 메서드를 다음 코드로 바꿉니다.
 

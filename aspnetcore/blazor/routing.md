@@ -2,19 +2,20 @@
 title: ASP.NET Core Blazor 라우팅
 author: guardrex
 description: 앱에서 요청을 라우팅하는 방법 및 NavLink 구성 요소에 대해 알아봅니다.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 12/18/2019
 no-loc:
 - Blazor
+- SignalR
 uid: blazor/routing
-ms.openlocfilehash: 1690434f48141bc83e7bc02e22cb763430eaa10d
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: 0cd15f25ff7975cae3f63a739212aa23062ece23
+ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74944020"
+ms.lasthandoff: 01/17/2020
+ms.locfileid: "76160160"
 ---
 # <a name="aspnet-core-opno-locblazor-routing"></a>ASP.NET Core Blazor 라우팅
 
@@ -121,7 +122,7 @@ Blazor Server는 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)에 �
 }
 ```
 
-선택적 매개 변수는 3.0 ASP.NET Core에서 Blazor 앱에 대해 지원 되지 않습니다. 이전 예제에서는 두 개의 `@page` 지시문이 적용 됩니다. 첫 번째는 매개 변수 없이 구성 요소에 대 한 탐색을 허용 합니다. 두 번째 `@page` 지시어는 `{text}` route 매개 변수를 사용 하 여 `Text` 속성에 값을 할당 합니다.
+선택적 매개 변수는 지원 되지 않습니다. 이전 예제에서는 두 개의 `@page` 지시문이 적용 됩니다. 첫 번째는 매개 변수 없이 구성 요소에 대 한 탐색을 허용 합니다. 두 번째 `@page` 지시어는 `{text}` route 매개 변수를 사용 하 여 `Text` 속성에 값을 할당 합니다.
 
 ## <a name="route-constraints"></a>경로 제약 조건
 
@@ -136,7 +137,7 @@ Blazor Server는 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)에 �
 
 다음 표에 표시 된 경로 제약 조건을 사용할 수 있습니다. 고정 문화권과 일치 하는 경로 제약 조건에 대 한 자세한 내용은 테이블 아래 경고를 참조 하세요.
 
-| 제약 조건 | 예제           | 일치하는 예제                                                                  | 고정<br>Culture<br>일치 |
+| 제약 조건 | 예           | 일치하는 예제                                                                  | 고정<br>Culture<br>일치 |
 | ---------- | ----------------- | -------------------------------------------------------------------------------- | :------------------------------: |
 | `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | 아니요                               |
 | `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | 예                              |

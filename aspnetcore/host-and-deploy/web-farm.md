@@ -5,14 +5,14 @@ description: 웹 팜 환경에서 공유 리소스가 있는 ASP.NET Core 앱의
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/07/2019
+ms.date: 01/13/2020
 uid: host-and-deploy/web-farm
-ms.openlocfilehash: 16ec2162be8199857d0f2d0ff989ec4cdc6c3277
-ms.sourcegitcommit: 68d804d60e104c81fe77a87a9af70b5df2726f60
+ms.openlocfilehash: 5c13e9bc4c514f9b42871d55a430265c8ec2da23
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/08/2019
-ms.locfileid: "73830698"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75951828"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>웹 팜에 ASP.NET Core 호스트
 
@@ -52,7 +52,7 @@ ms.locfileid: "73830698"
 
 ### <a name="caching"></a>캐싱
 
-웹 팜 환경에서 캐싱 메커니즘은 웹 팜의 노드에서 캐시된 항목을 공유해야 합니다. 캐싱은 일반적인 Redis 캐시, 공유 SQL Server 데이터베이스 또는 웹 팜에서 캐시된 항목을 공유하는 사용자 지정 캐싱 구현을 사용해야 합니다. 자세한 내용은 <xref:performance/caching/distributed>을 참조하세요.
+웹 팜 환경에서 캐싱 메커니즘은 웹 팜의 노드에서 캐시된 항목을 공유해야 합니다. 캐싱은 일반적인 Redis 캐시, 공유 SQL Server 데이터베이스 또는 웹 팜에서 캐시된 항목을 공유하는 사용자 지정 캐싱 구현을 사용해야 합니다. 자세한 내용은 <xref:performance/caching/distributed>를 참조하세요.
 
 ## <a name="dependent-components"></a>종속 구성 요소
 
@@ -61,10 +61,10 @@ ms.locfileid: "73830698"
 | 시나리오 | &hellip; 사용 |
 | -------- | ------------------- |
 | 인증 | 데이터 보호(<xref:security/data-protection/configuration/overview> 참조).<br><br>자세한 내용은 <xref:security/authentication/cookie> 및 <xref:security/cookie-sharing>를 참조하세요. |
-| 클레임 | 인증 및 데이터베이스 구성.<br><br>자세한 내용은 <xref:security/authentication/identity>을 참조하세요. |
+| Identity | 인증 및 데이터베이스 구성.<br><br>자세한 내용은 <xref:security/authentication/identity>를 참조하세요. |
 | 세션 | 데이터 보호(암호화된 쿠키)(<xref:security/data-protection/configuration/overview> 참조) 및 캐싱(<xref:performance/caching/distributed> 참조).<br><br>자세한 내용은 [세션 및 앱 상태: 세션 상태](xref:fundamentals/app-state#session-state)를 참조하세요. |
 | TempData | 데이터 보호(암호화된 쿠키)(<xref:security/data-protection/configuration/overview> 참조) 또는 세션([세션 및 앱 상태: 세션 상태](xref:fundamentals/app-state#session-state) 참조).<br><br>자세한 내용은 [세션 및 앱 상태: TempData](xref:fundamentals/app-state#tempdata)를 참조하세요. |
-| 위조 방지 | 데이터 보호(<xref:security/data-protection/configuration/overview> 참조).<br><br>자세한 내용은 <xref:security/anti-request-forgery>을 참조하세요. |
+| 위조 방지 | 데이터 보호(<xref:security/data-protection/configuration/overview> 참조).<br><br>자세한 내용은 <xref:security/anti-request-forgery>를 참조하세요. |
 
 ## <a name="troubleshoot"></a>문제 해결
 
@@ -92,3 +92,4 @@ ms.locfileid: "73830698"
 ## <a name="additional-resources"></a>추가 자료
 
 * [Windows용 사용자 지정 스크립트 확장](/azure/virtual-machines/extensions/custom-script-windows) &ndash; Azure 가상 머신에서 스크립트를 다운로드하여 실행합니다. 이는 배포 후 구성 및 소프트웨어 설치에 유용합니다.
+* <xref:host-and-deploy/proxy-load-balancer>

@@ -5,14 +5,14 @@ description: ASP.NET Core 앱용 활성 및 비활성 IIS 모듈과 IIS 모듈�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/12/2019
+ms.date: 01/13/2020
 uid: host-and-deploy/iis/modules
-ms.openlocfilehash: eb6cedfc572b4ffea969b3583ea6ec44cae1f575
-ms.sourcegitcommit: b4ef2b00f3e1eb287138f8b43c811cb35a100d3e
+ms.openlocfilehash: ca6cf349aa05db97e145f1cd0cae97a107761fd8
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/21/2019
-ms.locfileid: "65970053"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75951808"
 ---
 # <a name="iis-modules-with-aspnet-core"></a>IIS 모듈 및 ASP.NET Core
 
@@ -63,7 +63,7 @@ ms.locfileid: "65970053"
 
 ## <a name="managed-modules"></a>관리 모듈
 
-앱 풀의 .NET CLR 버전이 **관리 코드 없음**으로 설정된 경우 관리 모듈은 호스트된 ASP.NET Core 앱에서 작동하지 ‘않습니다’. ASP.NET Core는 여러 경우에 미들웨어 대체 방법을 제공합니다.
+앱 풀의 .NET CLR 버전이 **관리 코드 없음**으로 설정된 경우 관리 모듈은 호스트된 ASP.NET Core 앱에서 작동하지 ‘않습니다’.  ASP.NET Core는 여러 경우에 미들웨어 대체 방법을 제공합니다.
 
 | Module                  | ASP.NET Core 옵션 |
 | ----------------------- | ------------------- |
@@ -101,7 +101,7 @@ IIS 모듈이 앱에 대해 사용되지 않아야 하는 서버 수준에서 �
 </configuration>
 ```
 
-구성 설정을 사용하여 모듈을 사용하지 않도록 설정하는 방법에 대한 자세한 내용은 [IIS \<system.webServer>](/iis/configuration/system.webServer/)의 ‘자식 요소’ 섹션에 있는 링크를 참조하세요.
+구성 설정을 사용하여 모듈을 사용하지 않도록 설정하는 방법에 대한 자세한 내용은 [IIS \<system.webServer>](/iis/configuration/system.webServer/)의 ‘자식 요소’ 섹션에 있는 링크를 참조하세요. 
 
 ### <a name="module-removal"></a>모듈 제거
 
@@ -161,14 +161,13 @@ Appcmd.exe delete module MODULE_NAME /app.name:APPLICATION_NAME
 
 ASP.NET Core 앱을 실행하는 데 필요한 유일한 모듈은 익명 인증 모듈 및 ASP.NET Core 모듈입니다.
 
-URI 캐싱 모듈(`UriCacheModule`)을 통해 IIS가 URL 수준에서 웹 사이트 구성을 캐시할 수 있습니다. 이 모듈이 없으면 동일한 URL이 반복적으로 요청되더라도 IIS는 요청될 때마다 구성을 읽고 구문 분석해야 합니다. 요청될 때마다 구성을 구문 분석하면 성능이 크게 저하됩니다. ‘URI 캐싱 모듈은 호스트된 ASP.NET Core 앱을 실행하는 데 꼭 필요하지는 않지만, 모든 ASP.NET Core 배포에 대해 URI 캐싱 모듈을 사용하도록 설정하는 것이 좋습니다.’
+URI 캐싱 모듈(`UriCacheModule`)을 통해 IIS가 URL 수준에서 웹 사이트 구성을 캐시할 수 있습니다. 이 모듈이 없으면 동일한 URL이 반복적으로 요청되더라도 IIS는 요청될 때마다 구성을 읽고 구문 분석해야 합니다. 요청될 때마다 구성을 구문 분석하면 성능이 크게 저하됩니다. ‘URI 캐싱 모듈은 호스트된 ASP.NET Core 앱을 실행하는 데 꼭 필요하지는 않지만, 모든 ASP.NET Core 배포에 대해 URI 캐싱 모듈을 사용하도록 설정하는 것이 좋습니다.’ 
 
-HTTP 캐싱 모듈(`HttpCacheModule`)은 IIS 출력 캐시 및 HTTP.sys 캐시에 있는 항목을 캐시하기 위한 논리를 구현합니다. 이 모듈이 없으면 콘텐츠가 커널 모드에서 더 이상 캐시되지 않으며 캐시 프로필이 무시됩니다. 일반적으로 HTTP 캐싱 모듈을 제거하면 성능 및 리소스 사용에 부정적인 영향을 줍니다. ‘HTTP 캐싱 모듈은 호스트된 ASP.NET Core 앱을 실행하는 데 꼭 필요하지는 않지만, 모든 ASP.NET Core 배포에 대해 HTTP 캐싱 모듈을 사용하도록 설정하는 것이 좋습니다.’
+HTTP 캐싱 모듈(`HttpCacheModule`)은 IIS 출력 캐시 및 HTTP.sys 캐시에 있는 항목을 캐시하기 위한 논리를 구현합니다. 이 모듈이 없으면 콘텐츠가 커널 모드에서 더 이상 캐시되지 않으며 캐시 프로필이 무시됩니다. 일반적으로 HTTP 캐싱 모듈을 제거하면 성능 및 리소스 사용에 부정적인 영향을 줍니다. ‘HTTP 캐싱 모듈은 호스트된 ASP.NET Core 앱을 실행하는 데 꼭 필요하지는 않지만, 모든 ASP.NET Core 배포에 대해 HTTP 캐싱 모듈을 사용하도록 설정하는 것이 좋습니다.’ 
 
 ## <a name="additional-resources"></a>추가 자료
 
-* <xref:host-and-deploy/iis/index>
 * [IIS 아키텍처 소개: IIS의 모듈](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture#modules-in-iis)
 * [IIS 모듈 개요](/iis/get-started/introduction-to-iis/iis-modules-overview)
 * [IIS 7.0 역할 및 모듈 사용자 지정](https://technet.microsoft.com/library/cc627313.aspx)
-* [IIS `<system.webServer>`](/iis/configuration/system.webServer/)
+* [IIS \<system.webServer>](/iis/configuration/system.webServer/)

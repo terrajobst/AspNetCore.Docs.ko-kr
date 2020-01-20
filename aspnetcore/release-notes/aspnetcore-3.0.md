@@ -9,12 +9,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: 4ade13c38880c9915ec590297f2a43548ca400a8
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 1dee9a7e1cc381547e7ece71f302f407223dc838
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880837"
+ms.lasthandoff: 01/09/2020
+ms.locfileid: "75829116"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3.0의 새로운 기능
 
@@ -38,7 +38,7 @@ Blazor 프레임워크 지원 시나리오:
 * Razor 클래스 라이브러리를 사용하여 구성 요소 라이브러리 빌드
 * JavaScript interop
 
-자세한 내용은 <xref:blazor/index>을 참조하세요.
+자세한 내용은 <xref:blazor/index>를 참조하세요.
 
 ### <a name="opno-locblazor-server"></a>Blazor 서버
 
@@ -73,11 +73,11 @@ Blazor의 구성 요소는 일반적으로 HTML과 C#의 자연 혼합인 Razor 
 
 ASP.NET Core 3.0의 gRPC 기능에는 다음이 포함됩니다.
 
-* [Grpc.AspNetCore](https://www.nuget.org/packages/Grpc.AspNetCore) &ndash; gRPC 서비스 호스팅을 위한 ASP.NET Core 프레임워크 ASP.NET의 gRPC는 로깅, DI(종속성 주입), 인증 및 권한 부여와 같은 표준 ASP.NET Core 기능과 통합됩니다.
+* [Grpc.AspNetCore](https://www.nuget.org/packages/Grpc.AspNetCore) &ndash; gRPC 서비스 호스팅을 위한 ASP.NET Core 프레임워크입니다. ASP.NET의 gRPC는 로깅, DI(종속성 주입), 인증 및 권한 부여와 같은 표준 ASP.NET Core 기능과 통합됩니다.
 * [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client) &ndash; 친숙한 `HttpClient`를 기반으로 하는 .NET Core용 gRPC 클라이언트입니다.
 * [Grpc.Net.ClientFactory](https://www.nuget.org/packages/Grpc.Net.ClientFactory) &ndash; gRPC 클라이언트와 `HttpClientFactory`를 통합합니다.
 
-자세한 내용은 <xref:grpc/index>을 참조하세요.
+자세한 내용은 <xref:grpc/index>를 참조하세요.
 
 ## SignalR
 
@@ -365,7 +365,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 * 인증서 해지 확인
 * 제공된 인증서에 올바른 사용량 플래그가 있는지 확인
 
-본 사용자 계정은 인증서 속성으로부터 생성됩니다. 사용자 계정에는 해당 계정을 보완하거나 대체할 수 있게 해주는 이벤트가 포함되어 있습니다. 자세한 내용은 <xref:security/authentication/certauth>을 참조하세요.
+본 사용자 계정은 인증서 속성으로부터 생성됩니다. 사용자 계정에는 해당 계정을 보완하거나 대체할 수 있게 해주는 이벤트가 포함되어 있습니다. 자세한 내용은 <xref:security/authentication/certauth>를 참조하세요.
 
 [Windows 인증](/windows-server/security/windows-authentication/windows-authentication-overview)이 Linux 및 macOS로 확장되었습니다. 이전 버전에서 Windows 인증은 [IIS](xref:host-and-deploy/iis/index) 및 [HttpSys](xref:fundamentals/servers/httpsys)로 제한되었습니다. ASP.NET Core 3.0에서 [Kestrel](xref:fundamentals/servers/kestrel)은 Windows 도메인 가입 호스트로 Negotiate, [Kerberos](/windows-server/security/kerberos/kerberos-authentication-overview), [NTLM on Windows](/windows-server/security/kerberos/ntlm-overview), Linux 및 macOS를 사용할 수 있습니다. 이러한 인증 체계의 Kestrel 지원은 [Microsoft.AspNetCore.Authentication.Negotiate NuGet](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) 패키지에서 제공합니다. 다른 인증 서비스와 마찬가지로 인증 앱 전체를 구성한 다음 해당 서비스를 구성합니다.
 
@@ -391,7 +391,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
   * 해당 웹 프로세스에 대한 SPN을 만들어야 합니다.
   * 호스트 컴퓨터에서 [Keytab 파일](https://blogs.technet.microsoft.com/pie/2018/01/03/all-you-need-to-know-about-keytab-files/)을 생성하고 구성해야 합니다.
 
-자세한 내용은 <xref:security/authentication/windowsauth>을 참조하세요.
+자세한 내용은 <xref:security/authentication/windowsauth>를 참조하세요.
 
 ## <a name="template-changes"></a>템플릿 변경 사항
 
@@ -430,7 +430,7 @@ ASP.NET Core 3.0 릴리스 전에는 웹 호스트의 호스트 구성에 대해
 * 후행 헤더를 새 컬렉션으로 이동하여 헤더와 트레일러 사이의 모호성을 해결했습니다.
 * `HttpRequest.Body.Read`와 같은 동기 IO API는 앱 크래시로 이어지는 일반적인 스레드 굶주림 현상(starvation)의 원인입니다. 3\.0에서 `AllowSynchronousIO`는 기본적으로 사용하지 않도록 설정됩니다.
 
-자세한 내용은 <xref:migration/22-to-30#kestrel>을 참조하세요.
+자세한 내용은 <xref:migration/22-to-30#kestrel>를 참조하세요.
 
 ## <a name="http2-enabled-by-default"></a>HTTP/2는 기본적으로 사용하도록 설정됨
 
@@ -454,7 +454,7 @@ HTTP/2는 HTTPS 엔드포인트에 대해 Kestrel에서 기본적으로 사용�
 * 엔드포인트는 CORS 또는 권한 부여와 같은 정책을 미들웨어와 MVC에서 모두 구현할 수 있습니다.
 * 컨트롤러의 메서드에 필터 및 특성을 배치할 수 있습니다.
 
-자세한 내용은 <xref:fundamentals/routing#routing-basics>을 참조하세요.
+자세한 내용은 <xref:fundamentals/routing#routing-basics>를 참조하세요.
 
 ## <a name="health-checks"></a>상태 검사
 
@@ -536,7 +536,7 @@ ASP.NET Core 3.0 공유 프레임워크에서 제거된 가장 주목할 만한 
 * [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)(Json.NET). Json.NET을 ASP.NET Core 3.0에 추가하려면 [Newtonsoft.Json 기반 JSON 형식 지원](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support)을 참조하세요. ASP.NET Core 3.0에서는 JSON을 읽고 쓰는 `System.Text.Json`을 제공합니다. 자세한 내용은 이 문서에서 [새 JSON 직렬화](#new-json-serialization)를 참조하세요.
 * [Entity Framework Core](/ef/core/)
 
-공유 프레임워크에서 제거되는 어셈블리의 전체 목록은 [Microsoft.AspNetCore.App 3.0에서 제거되는 어셈블리](https://github.com/aspnet/AspNetCore/issues/3755)를 참조하세요. 이러한 변경을 하는 동기에 관한 자세한 내용은 [Microsoft.AspNetCore.App 3.0에서 호환성이 손상되는 변경](https://github.com/aspnet/Announcements/issues/325) 및 [ASP.NET Core 3.0의 변경 내용 처음 보기](https://devblogs.microsoft.com/aspnet/a-first-look-at-changes-coming-in-asp-net-core-3-0/)를 참조하세요.
+공유 프레임워크에서 제거되는 어셈블리의 전체 목록은 [Microsoft.AspNetCore.App 3.0에서 제거되는 어셈블리](https://github.com/dotnet/AspNetCore/issues/3755)를 참조하세요. 이러한 변경을 하는 동기에 관한 자세한 내용은 [Microsoft.AspNetCore.App 3.0에서 호환성이 손상되는 변경](https://github.com/aspnet/Announcements/issues/325) 및 [ASP.NET Core 3.0의 변경 내용 처음 보기](https://devblogs.microsoft.com/aspnet/a-first-look-at-changes-coming-in-asp-net-core-3-0/)를 참조하세요.
 
 <!-- 
 ## Additional information

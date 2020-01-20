@@ -2,25 +2,26 @@
 title: ASP.NET Core Razor 구성 요소 만들기 및 사용
 author: guardrex
 description: 데이터에 바인딩하고, 이벤트를 처리 하 고, 구성 요소 수명 주기를 관리 하는 방법을 비롯 하 여 Razor 구성 요소를 만들고 사용 하는 방법에 대해 알아봅니다.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/28/2019
 no-loc:
 - Blazor
+- SignalR
 uid: blazor/components
-ms.openlocfilehash: 9e796a23a0b24a9fee314051644703ef12bd7607
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: e73667925c04dd1b2360138343c4a2dcef0ee310
+ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828206"
+ms.lasthandoff: 01/17/2020
+ms.locfileid: "76160017"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
 By [Luke Latham](https://github.com/guardrex) 및 [Daniel Roth](https://github.com/danroth27)
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 Blazor 앱은 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소는 페이지, 대화 상자 또는 양식과 같은 UI (사용자 인터페이스)의 자체 포함 청크입니다. 구성 요소는 데이터를 삽입 하거나 UI 이벤트에 응답 하는 데 필요한 HTML 태그와 처리 논리를 포함 합니다. 구성 요소는 유연 하 고 간단 합니다. 프로젝트 간에 중첩, 재사용 및 공유 될 수 있습니다.
 
@@ -33,9 +34,6 @@ Blazor 앱은 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 구성 요소에 대 한 UI는 HTML을 사용 하 여 정의 됩니다. 동적 렌더링 논리(예: 루프, 조건, 식)는 [Razor](xref:mvc/views/razor)라는 포함된 C# 구문을 사용하여 추가됩니다. 앱이 컴파일되면 HTML 태그 및 C# 렌더링 논리가 구성 요소 클래스로 변환 됩니다. 생성 된 클래스의 이름은 파일 이름과 일치 합니다.
 
 구성 요소 클래스의 멤버는 `@code` 블록에서 정의됩니다. `@code` 블록에서 구성 요소 상태 (속성, 필드)는 이벤트 처리를 위한 메서드나 다른 구성 요소 논리를 정의 하는 데 지정 됩니다. 두 개 이상의 `@code` 블록이 허용됩니다.
-
-> [!NOTE]
-> ASP.NET Core 3.0의 이전 미리 보기에서 `@functions` 블록은 Razor 구성 요소의 `@code` 블록과 동일한 용도에 사용 되었습니다. `@functions` 블록은 Razor 구성 요소에서 계속 작동 하지만 ASP.NET Core 3.0 Preview 6 이상에서 `@code` 블록을 사용 하는 것이 좋습니다.
 
 구성 요소 멤버는 `@`로 시작 하는 식을 사용 하 여 C# 구성 요소의 렌더링 논리의 일부로 사용할 수 있습니다. 예를 들어 필드 C# 는 필드 이름에 `@`을 접두사로 하 여 렌더링 됩니다. 다음 예에서는를 평가 하 고 렌더링 합니다.
 
@@ -53,17 +51,37 @@ Blazor 앱은 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 구성 요소가 처음 렌더링 되 면 구성 요소는 이벤트에 대 한 응답으로 렌더링 트리를 다시 생성 합니다. 그런 다음 Blazor 새 렌더링 트리를 이전 렌더링 트리와 비교 하 여 브라우저의 문서 개체 모델 (DOM)에 수정 사항을 적용 합니다.
 
-구성 요소는 C# 일반 클래스 이며 프로젝트 내의 어느 위치에 나 배치할 수 있습니다. 웹 페이지를 생성 하는 구성 요소는 일반적으로 *Pages* 폴더에 있습니다. 페이지를 지정 하지 않는 구성 요소는 일반적으로 *공유* 폴더 또는 프로젝트에 추가 된 사용자 지정 폴더에 배치 됩니다. 사용자 지정 폴더를 사용 하려면 부모 구성 요소나 앱의 *_Imports razor* 파일에 사용자 지정 폴더의 네임 스페이스를 추가 합니다. 예를 들어 다음 네임 스페이스는 응용 프로그램의 루트 네임 스페이스가 `WebApplication`때 *구성 요소* 폴더의 구성 요소를 사용할 수 있도록 합니다.
+구성 요소는 C# 일반 클래스 이며 프로젝트 내의 어느 위치에 나 배치할 수 있습니다. 웹 페이지를 생성 하는 구성 요소는 일반적으로 *Pages* 폴더에 있습니다. 페이지를 지정 하지 않는 구성 요소는 일반적으로 *공유* 폴더 또는 프로젝트에 추가 된 사용자 지정 폴더에 배치 됩니다.
+
+일반적으로 구성 요소의 네임 스페이스는 앱의 루트 네임 스페이스와 앱 내의 구성 요소 위치 (폴더)에서 파생 됩니다. 응용 프로그램의 루트 네임 스페이스가 `BlazorApp` 고 `Counter` 구성 요소가 *Pages* 폴더에 있는 경우:
+
+* `Counter` 구성 요소의 네임 스페이스가 `BlazorApp.Pages`되었습니다.
+* 구성 요소의 정규화 된 형식 이름이 `BlazorApp.Pages.Counter`입니다.
+
+자세한 내용은 [구성 요소 가져오기](#import-components) 섹션을 참조 하세요.
+
+사용자 지정 폴더를 사용 하려면 부모 구성 요소나 앱의 *_Imports razor* 파일에 사용자 지정 폴더의 네임 스페이스를 추가 합니다. 예를 들어 다음 네임 스페이스는 응용 프로그램의 루트 네임 스페이스가 `BlazorApp`때 *구성 요소* 폴더의 구성 요소를 사용할 수 있도록 합니다.
 
 ```razor
-@using WebApplication.Components
+@using BlazorApp.Components
 ```
 
 ## <a name="integrate-components-into-razor-pages-and-mvc-apps"></a>Razor Pages 및 MVC 앱에 구성 요소 통합
 
-기존 Razor Pages 및 MVC 앱과 함께 구성 요소를 사용 합니다. Razor 구성 요소를 사용 하기 위해 기존 페이지나 뷰를 다시 작성할 필요는 없습니다. 페이지 또는 뷰가 렌더링 될 때 구성 요소는 동시에 미리 렌더링 된 됩니다.
+Razor 구성 요소를 Razor Pages 및 MVC 앱에 통합할 수 있습니다. 페이지나 보기가 렌더링 되 면 구성 요소를 동시에 미리 렌더링 된 수 있습니다.
 
-::: moniker range=">= aspnetcore-3.1"
+Razor 구성 요소를 호스팅하도록 Razor Pages 또는 MVC 앱을 준비 하려면 <xref:blazor/hosting-models#integrate-razor-components-into-razor-pages-and-mvc-apps> 문서의 *Razor Pages 및 mvc 앱에 razor 구성 요소 통합* 섹션의 지침을 따르세요.
+
+사용자 지정 폴더를 사용 하 여 앱의 구성 요소를 저장 하는 경우 폴더를 나타내는 네임 스페이스를 페이지/보기 또는 _ViewImports로 추가 합니다. *cshtml* 파일. 다음 예제에서는
+
+* `MyAppNamespace`를 앱의 네임 스페이스로 변경 합니다.
+* 구성 요소 라는 폴더를 사용 하 여 구성 요소를 저장 *하지 않은 경우* 에는 구성 요소가 상주 하는 폴더로 `Components`를 변경 합니다.
+
+```csharp
+@using MyAppNamespace.Components
+```
+
+*_ViewImports cshtml* 파일은 Razor Pages 앱의 *PAGES* 폴더 또는 MVC 앱의 *Views* 폴더에 있습니다.
 
 페이지 또는 뷰에서 구성 요소를 렌더링 하려면 `Component` 태그 도우미를 사용 합니다.
 
@@ -90,35 +108,6 @@ Blazor 앱은 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 정적 HTML 페이지에서 서버 구성 요소를 렌더링 하는 것은 지원 되지 않습니다.
 
 구성 요소를 렌더링 하는 방법, 구성 요소 상태 및 `Component` 태그 도우미에 대 한 자세한 내용은 <xref:blazor/hosting-models>을 참조 하세요.
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.1"
-
-페이지 또는 뷰에서 구성 요소를 렌더링 하려면 `RenderComponentAsync<TComponent>` HTML 도우미 메서드를 사용 합니다.
-
-```cshtml
-@(await Html.RenderComponentAsync<MyComponent>(RenderMode.ServerPrerendered))
-```
-
-구성 요소가 있는지 여부를 구성 하 `RenderMode` 다음을 수행 합니다.
-
-* 는 페이지에 미리 렌더링 된 됩니다.
-* 는 페이지에서 정적 HTML로 렌더링 되거나 사용자 에이전트에서 Blazor 앱을 부트스트랩 하는 데 필요한 정보가 포함 되어 있습니다.
-
-| `RenderMode`        | 설명 |
-| ------------------- | ----------- |
-| `ServerPrerendered` | 구성 요소를 정적 HTML로 렌더링 하 고 Blazor Server 앱에 대 한 마커를 포함 합니다. 사용자 에이전트가 시작 되 면이 마커는 Blazor 앱을 부트스트랩 하는 데 사용 됩니다. 매개 변수는 지원 되지 않습니다. |
-| `Server`            | Blazor Server 앱에 대 한 마커를 렌더링 합니다. 구성 요소의 출력은 포함 되지 않습니다. 사용자 에이전트가 시작 되 면이 마커는 Blazor 앱을 부트스트랩 하는 데 사용 됩니다. 매개 변수는 지원 되지 않습니다. |
-| `Static`            | 구성 요소를 정적 HTML로 렌더링 합니다. 매개 변수가 지원 됩니다. |
-
-페이지 및 뷰에서 구성 요소를 사용할 수 있지만 반대의 경우는 그렇지 않습니다. 구성 요소는 부분 보기 및 섹션과 같은 보기 및 페이지 관련 시나리오를 사용할 수 없습니다. 구성 요소의 부분 뷰에서 논리를 사용 하려면 부분 뷰 논리를 구성 요소에 대 한 요소로 처리 합니다.
-
-정적 HTML 페이지에서 서버 구성 요소를 렌더링 하는 것은 지원 되지 않습니다.
-
-구성 요소를 렌더링 하는 방법, 구성 요소 상태 및 `RenderComponentAsync` HTML 도우미에 대 한 자세한 내용은 <xref:blazor/hosting-models>을 참조 하세요.
-
-::: moniker-end
 
 ## <a name="use-components"></a>구성 요소 사용
 
@@ -353,6 +342,11 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 
 요소가 포커스를 잃을 때 발생 하는 `onchange`와는 달리 텍스트 상자의 값이 변경 될 때 발생 `oninput`.
 
+이전 예제 바인딩의 `@bind-value`:
+
+* 요소의 `value` 특성에 대 한 지정 된 식 (`CurrentValue`)입니다.
+* `@bind-value:event`으로 지정 된 이벤트에 대 한 변경 이벤트 대리자입니다.
+
 **구문 분석할 값**
 
 사용자가 데이터 바인딩된 요소에 구문 분석할 수 없는 값을 제공 하면 bind 이벤트가 트리거될 때 구문 분석할 수 없는 값이 자동으로 이전 값으로 되돌아갑니다.
@@ -522,6 +516,10 @@ Blazor에서 날짜 형식을 기본적으로 지원 하기 때문에 `date` 필
 <MyComponent @bind-MyProp="MyValue" @bind-MyProp:event="MyEventHandler" />
 ```
 
+**라디오 단추**
+
+폼의 라디오 단추에 바인딩하는 방법에 대 한 자세한 내용은 <xref:blazor/forms-validation#work-with-radio-buttons>를 참조 하세요.
+
 ## <a name="event-handling"></a>이벤트 처리
 
 Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 형식 값을 사용 하는 `on{EVENT}` (예: `onclick` 및 `onsubmit`) 이라는 HTML 요소 특성의 경우 Razor 구성 요소는 특성의 값을 이벤트 처리기로 처리 합니다. 특성의 이름은 항상 [`@on{EVENT}`](xref:mvc/views/razor#onevent)서식 지정 됩니다.
@@ -592,7 +590,7 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 | 진행 중         | `ProgressEventArgs`  | `onabort`, `onload`, `onloadend`, `onloadstart`, `onprogress`, `ontimeout` |
 | 터치            | `TouchEventArgs`     | `ontouchstart`, `ontouchend`, `ontouchmove`, `ontouchenter`, `ontouchleave`, `ontouchcancel`<br><br>`TouchPoint` 터치를 구분 하는 장치에서 단일 접촉 지점을 나타냅니다. |
 
-위의 표에서 이벤트의 속성 및 이벤트 처리 동작에 대 한 자세한 내용은 [참조 소스 (dotnet/AspNetCore release/3.0 분기)의 EventArgs 클래스](https://github.com/dotnet/AspNetCore/tree/release/3.0/src/Components/Web/src/Web)를 참조 하세요.
+위의 표에서 이벤트의 속성 및 이벤트 처리 동작에 대 한 자세한 내용은 [참조 소스 (dotnet/aspnetcore release/3.1 분기)의 EventArgs 클래스](https://github.com/dotnet/aspnetcore/tree/release/3.1/src/Components/Web/src/Web)를 참조 하세요.
 
 ### <a name="lambda-expressions"></a>람다 식
 
@@ -696,8 +694,6 @@ await callback.InvokeAsync(arg);
 
 `EventCallback`보다 강력한 형식의 `EventCallback<T>`를 사용 하는 것이 좋습니다. `EventCallback<T>` 구성 요소의 사용자에 게 더 나은 오류 피드백을 제공 합니다. 다른 UI 이벤트 처리기와 마찬가지로 이벤트 매개 변수를 지정 하는 것은 선택 사항입니다. 콜백에 전달 된 값이 없는 경우 `EventCallback`를 사용 합니다.
 
-::: moniker range=">= aspnetcore-3.1"
-
 ### <a name="prevent-default-actions"></a>기본 동작 방지
 
 이벤트에 대 한 기본 동작을 방지 하려면 [`@on{EVENT}:preventDefault`](xref:mvc/views/razor#oneventpreventdefault) 지시어 특성을 사용 합니다.
@@ -763,8 +759,6 @@ await callback.InvokeAsync(arg);
         Console.WriteLine($"A child div was selected. {DateTime.Now}");
 }
 ```
-
-::: moniker-end
 
 ## <a name="chained-bind"></a>연결 된 바인딩
 
@@ -1091,8 +1085,6 @@ Blazor 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로 �
 
 *Catch-* 여러 폴더 경계에서 경로를 캡처하는 모든 매개 변수 구문 (`*`/`**`)은 razor 구성 요소 (*razor*)에서 지원 **되지 않습니다** .
 
-::: moniker range=">= aspnetcore-3.1"
-
 ## <a name="partial-class-support"></a>Partial 클래스 지원
 
 Razor 구성 요소는 부분 클래스로 생성 됩니다. Razor 구성 요소는 다음 방법 중 하나를 사용 하 여 작성 됩니다.
@@ -1154,43 +1146,16 @@ namespace BlazorApp.Pages
 }
 ```
 
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.1"
-
-## <a name="specify-a-component-base-class"></a>구성 요소 기본 클래스 지정
-
-`@inherits` 지시어를 사용 하 여 구성 요소에 대 한 기본 클래스를 지정할 수 있습니다.
-
-[샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) 은 구성 요소가 기본 클래스 `BlazorRocksBase`를 상속 하 여 구성 요소의 속성과 메서드를 제공 하는 방법을 보여 줍니다.
-
-*Pages/BlazorRocks*:
-
-```razor
-@page "/BlazorRocks"
-@inherits BlazorRocksBase
-
-<h1>@BlazorRocksText</h1>
-```
-
-*BlazorRocksBase.cs*:
+필요한 경우 partial 클래스 파일에 필요한 네임 스페이스를 추가 합니다. Razor 구성 요소에 사용 되는 일반적인 네임 스페이스는 다음과 같습니다.
 
 ```csharp
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
-
-namespace BlazorSample
-{
-    public class BlazorRocksBase : ComponentBase
-    {
-        public string BlazorRocksText { get; set; } = 
-            "Blazor rocks the browser!";
-    }
-}
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Routing;
+using Microsoft.AspNetCore.Components.Web;
 ```
-
-기본 클래스는 `ComponentBase`에서 파생 되어야 합니다.
-
-::: moniker-end
 
 ## <a name="import-components"></a>구성 요소 가져오기
 

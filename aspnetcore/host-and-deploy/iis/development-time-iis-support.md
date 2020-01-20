@@ -5,14 +5,14 @@ description: Windows Server에서 IIS를 통해 실행될 경우 ASP.NET Core �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/26/2019
+ms.date: 01/13/2020
 uid: host-and-deploy/iis/development-time-iis-support
-ms.openlocfilehash: 2d2c8d8e4b39d18a3a727e2a2bdef3be566897c1
-ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
+ms.openlocfilehash: 704a8dae9da904e4bbdfae0754a6fcdabee6dc82
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/29/2019
-ms.locfileid: "73034152"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75952028"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>ASP.NET Core용 Visual Studio의 개발 시간 IIS 지원
 
@@ -20,7 +20,7 @@ ms.locfileid: "73034152"
 
 이 문서에서는 Windows Server에서 IIS를 통해 실행되는 ASP.NET Core 앱을 디버그하기 위한 [Visual Studio](https://visualstudio.microsoft.com) 지원에 대해 설명합니다. 이 항목에서는 이 시나리오를 사용하도록 설정하고 프로젝트를 설정하는 방법을 안내합니다.
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 * [Windows용 Visual Studio](https://visualstudio.microsoft.com/downloads/)
 * **ASP.NET 및 웹 개발** 워크로드
@@ -38,7 +38,7 @@ IIS를 설치하려면 시스템을 다시 시작해야 할 수 있습니다.
 
 IIS에서 웹 사이트는 다음과 같이 구성되어야 합니다.
 
-* **호스트 이름** &ndash; 일반적으로 **기본 웹 사이트**는 **호스트 이름** `localhost`와 함께 사용됩니다. 그러나 고유한 호스트 이름이 있는 모든 유효한 IIS 웹 사이트가 작동합니다.
+* **호스트 이름** &ndash; 일반적으로 **기본 웹 사이트**는 **호스트 이름**`localhost`와 함께 사용됩니다. 그러나 고유한 호스트 이름이 있는 모든 유효한 IIS 웹 사이트가 작동합니다.
 * **사이트 바인딩**
   * HTTPS가 필요한 앱의 경우 인증서를 사용하여 포트 443에 대한 바인딩을 만듭니다. 일반적으로 **IIS Express 개발 인증서**가 사용되지만 모든 유효한 인증서가 작동합니다.
   * HTTP를 사용하는 앱의 경우 포트 80에 대한 바인딩이 있는지 확인하거나 새 사이트에 대해 포트 80에 대한 바인딩을 만듭니다.
@@ -58,7 +58,7 @@ IIS에서 웹 사이트는 다음과 같이 구성되어야 합니다.
 
 HTTPS가 필요한 새 프로젝트의 경우 **새 ASP.NET Core 웹 애플리케이션 만들기** 창에서 **HTTPS에 대한 구성** 확인란을 선택합니다. 확인란을 선택하면 [HTTPS 리디렉션 및 HSTS 미들웨어](xref:security/enforcing-ssl)가 생성될 때 앱에 추가됩니다.
 
-HTTPS가 필요한 기존 프로젝트의 경우 `Startup.Configure`에서 HTTPS 리디렉션 및 HSTS Middleware를 사용합니다. 자세한 내용은 <xref:security/enforcing-ssl>을 참조하세요.
+HTTPS가 필요한 기존 프로젝트의 경우 `Startup.Configure`에서 HTTPS 리디렉션 및 HSTS Middleware를 사용합니다. 자세한 내용은 <xref:security/enforcing-ssl>를 참조하세요.
 
 HTTP를 사용하는 프로젝트의 경우 [HTTPS 리디렉션 및 HSTS 미들웨어](xref:security/enforcing-ssl)가 앱에 추가되지 않습니다. 앱 구성이 필요하지 않습니다.
 
@@ -80,7 +80,7 @@ HTTP를 사용하는 프로젝트의 경우 [HTTPS 리디렉션 및 HSTS 미들�
    URL의 끝에 있는 앱 이름을 제공합니다.
 
    예를 들어 `https://localhost/WebApplication1`(HTTPS) 또는 `http://localhost/WebApplication1`(HTTP)은 유효한 엔드포인트 URL입니다.
-1. **환경 변수** 섹션에서 **추가** 단추를 선택합니다. **이름** `ASPNETCORE_ENVIRONMENT` 및 **값** `Development`를 사용하여 환경 변수를 제공합니다.
+1. **환경 변수** 섹션에서 **추가** 단추를 선택합니다. **이름**`ASPNETCORE_ENVIRONMENT` 및 **값**`Development`를 사용하여 환경 변수를 제공합니다.
 1. **웹 서버 설정** 영역에서 **앱 URL**을 **브라우저 시작** 엔드포인트 URL에 사용된 동일한 값으로 설정합니다.
 1. Visual Studio 2019 이상에 있는 **호스팅 모델** 설정의 경우 **기본값**을 선택하여 프로젝트에서 사용되는 호스팅 모델을 사용합니다. 프로젝트가 프로젝트 파일에서 `<AspNetCoreHostingModel>` 속성을 설정하면 해당 속성 값(`InProcess` 또는 `OutOfProcess`)이 사용됩니다. 속성이 없으면 앱의 기본 호스팅 모델인 in-process가 사용됩니다. 앱의 일반 호스팅 모델과 다른 명시적 호스팅 모델 설정이 앱에 필요한 경우에는 필요에 따라 **호스팅 모델**을 `In Process` 또는 `Out Of Process`로 설정합니다.
 1. 프로필을 저장합니다.
@@ -101,7 +101,7 @@ HTTP를 사용하는 프로젝트의 경우 [HTTPS 리디렉션 및 HSTS 미들�
    URL의 끝에 있는 앱 이름을 제공합니다.
 
    예를 들어 `https://localhost/WebApplication1`(HTTPS) 또는 `http://localhost/WebApplication1`(HTTP)은 유효한 엔드포인트 URL입니다.
-1. **환경 변수** 섹션에서 **추가** 단추를 선택합니다. **이름** `ASPNETCORE_ENVIRONMENT` 및 **값** `Development`를 사용하여 환경 변수를 제공합니다.
+1. **환경 변수** 섹션에서 **추가** 단추를 선택합니다. **이름**`ASPNETCORE_ENVIRONMENT` 및 **값**`Development`를 사용하여 환경 변수를 제공합니다.
 1. **웹 서버 설정** 영역에서 **앱 URL**을 **브라우저 시작** 엔드포인트 URL에 사용된 동일한 값으로 설정합니다.
 1. Visual Studio 2019 이상에 있는 **호스팅 모델** 설정의 경우 **기본값**을 선택하여 프로젝트에서 사용되는 호스팅 모델을 사용합니다. 프로젝트가 프로젝트 파일에서 `<AspNetCoreHostingModel>` 속성을 설정하면 해당 속성 값(`InProcess` 또는 `OutOfProcess`)이 사용됩니다. 속성이 없으면 앱의 기본 호스팅 모델인 out-of-process가 사용됩니다. 앱의 일반 호스팅 모델과 다른 명시적 호스팅 모델 설정이 앱에 필요한 경우에는 필요에 따라 **호스팅 모델**을 `In Process` 또는 `Out Of Process`로 설정합니다.
 1. 프로필을 저장합니다.
@@ -152,6 +152,4 @@ Visual Studio를 사용하지 않는 경우에는 *속성* 폴더의 [launchSett
 ## <a name="additional-resources"></a>추가 자료
 
 * [IIS에서 IIS 관리자 시작](/iis/get-started/getting-started-with-iis/getting-started-with-the-iis-manager-in-iis-7-and-iis-8)
-* <xref:host-and-deploy/iis/index>
-* <xref:host-and-deploy/aspnet-core-module>
 * <xref:security/enforcing-ssl>

@@ -5,16 +5,16 @@ description: Blazor 앱을 단계별로 빌드합니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 01/13/2020
 no-loc:
 - Blazor
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 11ff540a70ebdb8baa0c7adb98cb1dfe27d91e50
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: 8830dcf26b58b5f5fdd36b60298e7b365f99bdd9
+ms.sourcegitcommit: 925cdbd94613243f33bc7613a62ea34006219931
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74944189"
+ms.lasthandoff: 01/13/2020
+ms.locfileid: "75921284"
 ---
 # <a name="build-your-first-opno-locblazor-app"></a>첫 번째 Blazor 앱 빌드
 
@@ -73,19 +73,19 @@ HTML 구문을 사용하여 구성 요소를 다른 구성 요소에 포함합�
 
 구성 요소는 매개 변수를 포함할 수도 있습니다. 구성 요소 매개 변수는 `[Parameter]` 특성이 지정된 구성 요소 클래스의 공용 속성을 사용하여 정의됩니다. 특성을 사용하여 태그에서 구성 요소의 인수를 지정합니다.
 
-1. 구성 요소의 `@code` C# 코드를 수정합니다.
+1. 구성 요소의 `@code` C# 코드를 다음과 같이 업데이트합니다.
 
    * `[Parameter]` 특성이 지정된 공용 `IncrementAmount` 속성을 추가합니다.
-   * `currentCount` 값을 증가시킬 때 `IncrementAmount`를 사용하도록 `IncrementCount` 메서드를 변경합니다.
+   * `currentCount` 값을 증가시킬 때 `IncrementAmount` 속성을 사용하도록 `IncrementCount` 메서드를 변경합니다.
 
    *Pages/Counter.razor*:
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Counter.razor?highlight=13,17)]
 
-<!-- Add back when supported.
-   > [!NOTE]
-   > From Visual Studio, you can quickly add a component parameter by using the `para` snippet. Type `para` and press the `Tab` key twice.
--->
+   <!-- Add back when supported.
+       > [!NOTE]
+       > From Visual Studio, you can quickly add a component parameter by using the `para` snippet. Type `para` and press the `Tab` key twice.
+   -->
 
 1. 특성을 사용하여 `Index` 구성 요소의 `<Counter>` 요소에 `IncrementAmount` 매개 변수를 지정합니다. 카운터가 10씩 증분하도록 값을 설정합니다.
 

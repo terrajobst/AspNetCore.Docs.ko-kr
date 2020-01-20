@@ -2,20 +2,20 @@
 title: ASP.NET Core Blazor 인증 및 권한 부여
 author: guardrex
 description: Blazor 인증 및 권한 부여 시나리오에 대해 알아봅니다.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 12/18/2019
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/index
-ms.openlocfilehash: d3860a5e7f6ae5a3193d657b77fc593c9bd39131
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: 2ce2cff8d3ab77f21181070b6f1e48c50561036c
+ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74944202"
+ms.lasthandoff: 01/17/2020
+ms.locfileid: "76160290"
 ---
 # <a name="aspnet-core-opno-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor 인증 및 권한 부여
 
@@ -130,7 +130,7 @@ Blazor 서버 앱에는 ASP.NET Core의 `HttpContext.User`에서 인증 상태 �
 
 `AuthenticationStateProvider`는 `AuthorizeView` 구성 요소와 `CascadingAuthenticationState` 구성 요소가 인증 상태를 가져오는 데 사용하는 기본 서비스입니다.
 
-일반적으로 `AuthenticationStateProvider`를 직접 사용하지는 않습니다. [AuthorizeView 구성 요소](#authorizeview-component) 또는 이 문서의 뒷부분에서 설명하는 [Task<AuthenticationState> ](#expose-the-authentication-state-as-a-cascading-parameter) 접근 방식을 사용합니다. `AuthenticationStateProvider`를 직접 사용하는 경우의 주요 단점은 기본 인증 상태 데이터가 변경될 때 구성 요소가 자동으로 알림을 받지 못하는 것입니다.
+일반적으로 `AuthenticationStateProvider`를 직접 사용하지는 않습니다. [AuthorizeView 구성 요소](#authorizeview-component) 또는 이 문서의 뒷부분에서 설명하는 [Task<AuthenticationState>](#expose-the-authentication-state-as-a-cascading-parameter) 접근 방식을 사용합니다. `AuthenticationStateProvider`를 직접 사용하는 경우의 주요 단점은 기본 인증 상태 데이터가 변경될 때 구성 요소가 자동으로 알림을 받지 못하는 것입니다.
 
 `AuthenticationStateProvider` 서비스는 다음 예제와 같이 현재 사용자의 <xref:System.Security.Claims.ClaimsPrincipal> 데이터를 제공할 수 있습니다.
 
@@ -316,7 +316,7 @@ UI 옵션이나 액세스를 제어하는 역할 또는 정책과 같은 권한 
 </AuthorizeView>
 ```
 
-자세한 내용은 <xref:security/authorization/roles>을 참조하세요.
+자세한 내용은 <xref:security/authorization/roles>를 참조하세요.
 
 정책 기반 권한 부여의 경우 `Policy` 매개 변수를 사용합니다.
 
@@ -326,7 +326,7 @@ UI 옵션이나 액세스를 제어하는 역할 또는 정책과 같은 권한 
 </AuthorizeView>
 ```
 
-클레임 기반 권한 부여는 정책 기반 권한 부여의 특별한 경우입니다. 예를 들어 사용자에게 특정 클레임이 있어야 하는 정책을 정의할 수 있습니다. 자세한 내용은 <xref:security/authorization/policies>을 참조하세요.
+클레임 기반 권한 부여는 정책 기반 권한 부여의 특별한 경우입니다. 예를 들어 사용자에게 특정 클레임이 있어야 하는 정책을 정의할 수 있습니다. 자세한 내용은 <xref:security/authorization/policies>를 참조하세요.
 
 이러한 API는 Blazor 서버나 Blazor WebAssembly 앱에서 사용할 수 있습니다.
 

@@ -5,14 +5,14 @@ description: Windows 서비스에서 ASP.NET Core 앱을 호스트하는 방법�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/30/2019
+ms.date: 01/13/2020
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: 014585cd1e170fc94f7f577e11ec19824e54572f
-ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
+ms.openlocfilehash: 37fc0b7862db3280f9ade8d563feba28153ab79b
+ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73659865"
+ms.lasthandoff: 01/14/2020
+ms.locfileid: "75951835"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>Windows 서비스에서 ASP.NET Core 호스트
 
@@ -22,7 +22,7 @@ IIS를 사용하지 않고 Windows에서 ASP.NET Core 앱을 [Windows 서비스]
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 * [ASP.NET Core SDK 2.1 이상](https://dotnet.microsoft.com/download)
 * [PowerShell 6.2 이상](https://github.com/PowerShell/PowerShell)
@@ -49,7 +49,7 @@ ASP.NET Core Worker Service 템플릿은 장기간 실행되는 서비스 앱을
 `IHostBuilder.UseWindowsService`는 호스트를 빌드할 때 호출됩니다. 앱이 Windows 서비스로 실행되는 경우 이 메서드는 다음과 같이 합니다.
 
 * 호스트 수명을 `WindowsServiceLifetime`으로 설정합니다.
-* [콘텐츠 루트](xref:fundamentals/index#content-root)를 설정합니다.
+* [콘텐츠 루트](xref:fundamentals/index#content-root)를 [AppContext.BaseDirectory](xref:System.AppContext.BaseDirectory)로 설정합니다. 자세한 내용은 [현재 디렉터리 및 콘텐츠 루트](#current-directory-and-content-root) 섹션을 참조하세요.
 * 애플리케이션 이름을 기본 소스 이름으로 사용하여 이벤트 로그에 대한 로깅을 사용하도록 설정합니다.
   * *appsettings.Production.json* 파일에서 `Logging:LogLevel:Default` 키를 사용하여 로그 수준을 구성할 수 있습니다.
   * 관리자만 새 이벤트 소스를 만들 수 있습니다. 애플리케이션 이름을 사용하여 이벤트 소스를 만들 수 없는 경우 *Application* 소스에 경고가 기록되고 이벤트 로그가 사용하지 않도록 설정됩니다.
@@ -196,13 +196,13 @@ Windows [RID(런타임 식별자)](/dotnet/core/rid-catalog)는 대상 프레임
 Windows 10 2018년 10월 업데이트(버전 1809/빌드 10.0.17763) 이상의 경우:
 
 ```PowerShell
-New-LocalUser -Name {NAME}
+New-LocalUser -Name {SERVICE NAME}
 ```
 
 Windows 10 2018년 10월 업데이트(버전 1809/빌드 10.0.17763) 이전 버전 Windows OS의 경우:
 
 ```console
-powershell -Command "New-LocalUser -Name {NAME}"
+powershell -Command "New-LocalUser -Name {SERVICE NAME}"
 ```
 
 메시지가 표시되면 [강력한 암호](/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements)를 제공합니다.
@@ -239,12 +239,12 @@ $accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule($acl
 $acl.SetAccessRule($accessRule)
 $acl | Set-Acl "{EXE PATH}"
 
-New-Service -Name {NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR COMPUTER NAME\USER} -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
+New-Service -Name {SERVICE NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR COMPUTER NAME\USER} -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
 ```
 
 * `{EXE PATH}` &ndash; 호스트의 앱 폴더 경로(예: `d:\myservice`). 경로에 앱의 실행 파일은 포함하지 마세요. 후행 슬래시는 필요하지 않습니다.
 * `{DOMAIN OR COMPUTER NAME\USER}` &ndash; 서비스 사용자 계정(예: `Contoso\ServiceUser`).
-* `{NAME}` &ndash; 서비스 이름(예: `MyService`).
+* `{SERVICE NAME}` &ndash; 서비스 이름(예: `MyService`).
 * `{EXE FILE PATH}` &ndash; 앱의 실행 파일 경로(예: `d:\myservice\myservice.exe`). 실행 파일 이름에 확장명을 포함하세요.
 * `{DESCRIPTION}` &ndash; 서비스 설명(예: `My sample service`).
 * `{DISPLAY NAME}` &ndash; 서비스 표시 이름(예: `My Service`).
@@ -254,7 +254,7 @@ New-Service -Name {NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR 
 다음 PowerShell 6 명령을 사용하여 서비스를 시작합니다.
 
 ```powershell
-Start-Service -Name {NAME}
+Start-Service -Name {SERVICE NAME}
 ```
 
 명령은 서비스를 시작하는 데 몇 초 정도 걸립니다.
@@ -264,7 +264,7 @@ Start-Service -Name {NAME}
 서비스의 상태를 확인하려면 다음 PowerShell 6 명령을 사용합니다.
 
 ```powershell
-Get-Service -Name {NAME}
+Get-Service -Name {SERVICE NAME}
 ```
 
 상태는 다음 값 중 하나로 보고됩니다.
@@ -279,7 +279,7 @@ Get-Service -Name {NAME}
 다음 PowerShell 6 명령을 사용하여 서비스를 중지합니다.
 
 ```powershell
-Stop-Service -Name {NAME}
+Stop-Service -Name {SERVICE NAME}
 ```
 
 ### <a name="remove-a-service"></a>서비스 제거
@@ -287,7 +287,7 @@ Stop-Service -Name {NAME}
 서비스를 중지하는 짧은 지연 후에 다음 PowerShell 6 명령을 사용하여 서비스를 제거합니다.
 
 ```powershell
-Remove-Service -Name {NAME}
+Remove-Service -Name {SERVICE NAME}
 ```
 
 ::: moniker range="< aspnetcore-3.0"
@@ -316,7 +316,7 @@ Remove-Service -Name {NAME}
 
 ## <a name="proxy-server-and-load-balancer-scenarios"></a>프록시 서버 및 부하 분산 장치 시나리오
 
-인터넷 또는 회사 네트워크의 요청과 상호 작용하고 프록시 또는 부하 분산 장치 뒤에 있는 서비스에는 추가 구성이 필요합니다. 자세한 내용은 <xref:host-and-deploy/proxy-load-balancer>을 참조하세요.
+인터넷 또는 회사 네트워크의 요청과 상호 작용하고 프록시 또는 부하 분산 장치 뒤에 있는 서비스에는 추가 구성이 필요합니다. 자세한 내용은 <xref:host-and-deploy/proxy-load-balancer>를 참조하세요.
 
 ## <a name="configure-endpoints"></a>엔드포인트 구성
 
@@ -341,6 +341,16 @@ Windows 서비스에 대해 <xref:System.IO.Directory.GetCurrentDirectory*>를 �
 ### <a name="use-contentrootpath-or-contentrootfileprovider"></a>ContentRootPath 또는 ContentRootFileProvider 사용
 
 [IHostEnvironment.ContentRootPath](xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath) 또는 <xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootFileProvider>를 사용하여 앱의 리소스를 찾습니다.
+
+앱이 서비스로 실행되면 <xref:Microsoft.Extensions.Hosting.WindowsServiceLifetimeHostBuilderExtensions.UseWindowsService*>가 <xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath>를 [AppContext.BaseDirectory](xref:System.AppContext.BaseDirectory)로 설정합니다.
+
+앱의 기본 설정 파일 *appsettings.json* 및 *appsettings.{Environment}.json*은 호스트 생성 도중 [CreateDefaultBuilder](xref:fundamentals/host/generic-host#set-up-a-host)를 호출하여 앱의 콘텐츠 루트에서 로드됩니다.
+
+<xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*>에서 개발자 코드로 로드되는 다른 설정 파일의 경우 <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*>를 호출할 필요가 없습니다. 다음 예제에서 *custom_settings.json* 파일은 앱의 콘텐츠 루트에 있으며 기본 경로를 명시적으로 설정하지 않고 로드됩니다.
+
+[!code-csharp[](windows-service/samples_snapshot/CustomSettingsExample.cs?highlight=13)]
+
+Windows Service 앱은 *C:\\WINDOWS\\system32* 폴더를 현재 디렉터리로 반환하기 때문에 <xref:System.IO.Directory.GetCurrentDirectory*>를 사용하여 리소스 경로를 가져오지 마세요.
 
 ::: moniker-end
 
@@ -367,6 +377,83 @@ CreateWebHostBuilder(args)
 ### <a name="store-a-services-files-in-a-suitable-location-on-disk"></a>디스크의 적합한 위치에 서비스 파일 저장
 
 파일이 포함된 폴더로 <xref:Microsoft.Extensions.Configuration.IConfigurationBuilder>를 사용하는 경우 <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*>를 통해 절대 경로를 지정합니다.
+
+## <a name="troubleshoot"></a>문제 해결
+
+Windows Service 앱 문제를 해결하려면 <xref:test/troubleshoot>을 참조하세요.
+
+### <a name="common-errors"></a>일반적인 오류
+
+* 이전 또는 시험판 버전의 PowerShell을 사용 중입니다.
+* 등록된 서비스가 [dotnet publish](/dotnet/core/tools/dotnet-publish) 명령에서 앱의 **게시된** 출력을 사용하지 않습니다. [dotnet build](/dotnet/core/tools/dotnet-build) 명령의 출력은 앱 배포에 지원되지 않습니다. 게시된 자산은 배포 유형에 따라 다음 폴더 중 하나에 있습니다.
+  * *bin/Release/{TARGET FRAMEWORK}/publish*(FDD)
+  * *bin/Release/{TARGET FRAMEWORK}/{RUNTIME IDENTIFIER}/publish*(SCD)
+* 서비스가 실행 중 상태가 아닙니다.
+* 앱에서 사용하는 리소스(예: 인증서)의 경로가 올바르지 않습니다. Windows Service의 기본 경로는 *c:\\Windows\\System32*입니다.
+* 사용자에게 *서비스로 로그온* 권한이 없습니다.
+* `New-Service` PowerShell 명령을 실행할 때 사용자 암호가 만료되었거나 잘못 전달되었습니다.
+* 앱에 ASP.NET Core 인증이 필요하지만 보안 연결(HTTPS)에 대해 구성되어 있지 않습니다.
+* 요청 URL 포트가 잘못되었거나 앱에서 올바르게 구성되지 않았습니다.
+
+### <a name="system-and-application-event-logs"></a>시스템 및 애플리케이션 이벤트 로그
+
+시스템 및 애플리케이션 이벤트 로그 액세스:
+
+1. 시작 메뉴를 열고 *이벤트 뷰어*를 검색한 다음, **이벤트 뷰어** 앱을 선택합니다.
+1. **이벤트 뷰어**에서 **Windows 로그** 노드를 엽니다.
+1. **시스템**을 선택하여 시스템 이벤트 로그를 엽니다. **애플리케이션**을 선택하여 애플리케이션 이벤트 로그를 엽니다.
+1. 실패한 앱과 연결된 오류를 검색합니다.
+
+### <a name="run-the-app-at-a-command-prompt"></a>명령 프롬프트에서 앱 실행
+
+이벤트 로그에서 대부분의 시작 오류는 유용한 정보를 생성하지 않습니다. 호스팅 시스템의 명령 프롬프트에서 앱을 실행하여 일부 오류의 원인을 찾을 수 있습니다. 앱에서 추가 세부 정보를 기록하려면 [로그 수준](xref:fundamentals/logging/index#log-level)을 낮추거나 [개발 환경](xref:fundamentals/environments)에서 앱을 실행합니다.
+
+### <a name="clear-package-caches"></a>패키지 캐시 지우기
+
+개발 컴퓨터의 .NET Core SDK 또는 앱 내의 패키지 버전을 업그레이드하거나 앱 내 패키지 버전을 변경한 후 즉시 작동 중인 앱에서 오류가 발생할 수 있습니다. 경우에 따라 중요한 업그레이드를 수행할 때 일관되지 않은 패키지로 인해 응용 프로그램이 중단될 수 있습니다. 이러한 대부분의 문제는 다음 지침에 따라 수정할 수 있습니다.
+
+1. *bin* 및 *obj* 폴더를 삭제합니다.
+1. 명령 셸에서 [dotnet nuget locals all --clear](/dotnet/core/tools/dotnet-nuget-locals)를 실행하여 패키지 캐시를 지웁니다.
+
+   [nuget.exe](https://www.nuget.org/downloads) 도구에서 `nuget locals all -clear` 명령을 실행하여 패키지 캐시를 지울 수도 있습니다. *nuget.exe*는 Windows 데스크톱 운영 체제와 함께 제공되는 설치가 아니므로 [NuGet 웹 사이트](https://www.nuget.org/downloads)에서 별도로 다운로드해야 합니다.
+
+1. 프로젝트를 복원하고 다시 빌드합니다.
+1. 앱을 다시 배포하기 전에 서버의 배포 폴더에 있는 모든 파일을 삭제합니다.
+
+### <a name="slow-or-hanging-app"></a>앱이 느리거나 중단됨
+
+*크래시 덤프*는 시스템 메모리의 스냅샷이며 앱 충돌, 시작 실패 또는 느린 앱의 원인을 확인하는 데 도움이 됩니다.
+
+#### <a name="app-crashes-or-encounters-an-exception"></a>앱 충돌 또는 예외 발생
+
+[WER(Windows 오류 보고)](/windows/desktop/wer/windows-error-reporting)에서 덤프를 얻고 분석합니다.
+
+1. `c:\dumps`에 크래시 덤프 파일을 저장할 폴더를 만듭니다.
+1. 애플리케이션 실행 파일 이름으로 [EnableDumps PowerShell 스크립트](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/EnableDumps.ps1)를 실행합니다.
+
+   ```console
+   .\EnableDumps {APPLICATION EXE} c:\dumps
+   ```
+
+1. 충돌이 발생하는 조건에서 앱을 실행합니다.
+1. 충돌이 발생한 후 [DisableDumps PowerShell 스크립트](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/DisableDumps.ps1) 실행:
+
+   ```console
+   .\DisableDumps {APPLICATION EXE}
+   ```
+
+앱이 충돌하고 덤프 수집이 완료되면 앱이 정상적으로 종료될 수 있습니다. PowerShell 스크립트는 앱당 최대 5개의 덤프를 수집하도록 WER을 구성합니다.
+
+> [!WARNING]
+> 크래시 덤프는 많은 양의 디스크 공간(각각 여러 기가바이트까지)을 차지할 수 있습니다.
+
+#### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>앱 중단 시작 중에 실패 또는 정상적으로 실행
+
+앱이 *중단*(응답하지 않거나 충돌하지 않음), 시작 중에 실패 또는 정상적으로 실행되면 [사용자 모드 덤프 파일: 가장 적합한 도구 선택](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)을 참조하여 덤프를 생성할 적절한 도구를 선택합니다.
+
+#### <a name="analyze-the-dump"></a>덤프 분석
+
+덤프는 여러 방법을 사용하여 분석할 수 있습니다. 자세한 내용은 [사용자 모드 덤프 파일 분석](/windows-hardware/drivers/debugger/analyzing-a-user-mode-dump-file)을 참조하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 

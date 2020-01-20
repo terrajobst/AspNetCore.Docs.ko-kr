@@ -2,19 +2,20 @@
 title: ASP.NET Core Blazor 종속성 주입
 author: guardrex
 description: Blazor 앱이 서비스를 구성 요소에 삽입할 수 있는 방법을 참조 하세요.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 01/08/2020
 no-loc:
 - Blazor
+- SignalR
 uid: blazor/dependency-injection
-ms.openlocfilehash: aad6cfee500b5cb502470f6a4a7cb5756df09dc4
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: 6930d721f04fd5f7cad2ba472724497a157fda0f
+ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74943786"
+ms.lasthandoff: 01/17/2020
+ms.locfileid: "76159978"
 ---
 # <a name="aspnet-core-opno-locblazor-dependency-injection"></a>ASP.NET Core Blazor 종속성 주입
 
@@ -36,8 +37,8 @@ DI는 중앙 위치에 구성 된 서비스에 액세스 하기 위한 기술입
 | 서비스 | 수명 | 설명 |
 | ------- | -------- | ----------- |
 | <xref:System.Net.Http.HttpClient> | Singleton | URI로 식별 되는 리소스에서 http 요청을 보내고 HTTP 응답을 받기 위한 메서드를 제공 합니다.<br><br>Blazor Weasembomapp의 `HttpClient` 인스턴스는 브라우저를 사용 하 여 백그라운드에서 HTTP 트래픽을 처리 합니다.<br><br>Blazor Server 앱에는 기본적으로 서비스로 구성 된 `HttpClient` 포함 되지 않습니다. Blazor Server 앱에 대 한 `HttpClient`를 제공 합니다.<br><br>자세한 내용은 <xref:blazor/call-web-api>를 참조하세요. |
-| `IJSRuntime` | Singleton | JavaScript 호출이 디스패치되는 JavaScript 런타임의 인스턴스를 나타냅니다. 자세한 내용은 <xref:blazor/javascript-interop>를 참조하세요. |
-| `NavigationManager` | Singleton | Uri 및 탐색 상태를 사용 하기 위한 도우미를 포함 합니다. 자세한 내용은 [URI 및 탐색 상태 도우미](xref:blazor/routing#uri-and-navigation-state-helpers)를 참조 하세요. |
+| `IJSRuntime` | Singleton (Blazor Weasembmbsembambmbse)<br>범위가 지정 된 (Blazor Server) | JavaScript 호출이 디스패치되는 JavaScript 런타임의 인스턴스를 나타냅니다. 자세한 내용은 <xref:blazor/javascript-interop>를 참조하세요. |
+| `NavigationManager` | Singleton (Blazor Weasembmbsembambmbse)<br>범위가 지정 된 (Blazor Server) | Uri 및 탐색 상태를 사용 하기 위한 도우미를 포함 합니다. 자세한 내용은 [URI 및 탐색 상태 도우미](xref:blazor/routing#uri-and-navigation-state-helpers)를 참조 하세요. |
 
 사용자 지정 서비스 공급자는 테이블에 나열 된 기본 서비스를 자동으로 제공 하지 않습니다. 사용자 지정 서비스 공급자를 사용 하 고 표에 표시 된 서비스가 필요한 경우 새 서비스 공급자에 필요한 서비스를 추가 합니다.
 

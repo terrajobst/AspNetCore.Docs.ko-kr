@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: dea8564a1ee94d6ff1d96e9aab68205292765178
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: f3c20eb085fa5277dd37b7323b5a7d7d286bcd99
+ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74881261"
+ms.lasthandoff: 01/10/2020
+ms.locfileid: "75866074"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Swashbuckle 및 ASP.NET Core 시작
 
@@ -39,7 +39,7 @@ Swashbuckle에 대한 세 가지 주 구성 요소는 다음과 같습니다.
   * 다음 명령을 실행합니다.
 
     ```powershell
-    Install-Package Swashbuckle.AspNetCore -Version 5.0.0-rc4
+    Install-Package Swashbuckle.AspNetCore -Version 5.0.0-rc5
     ```
 
 * **NuGet 패키지 관리** 대화 상자에서:
@@ -443,7 +443,7 @@ API 컨트롤러에 `[Produces("application/json")]` 특성을 추가합니다. 
 
 ::: moniker range=">= aspnetcore-2.2"
 
-ASP.NET Core 2.2 이상에서는 `[ProducesResponseType]`을 사용하여 명시적으로 개별 작업을 데코레이팅하는 대신 규칙을 사용할 수 있습니다. 자세한 내용은 <xref:web-api/advanced/conventions>을 참조하세요.
+ASP.NET Core 2.2 이상에서는 `[ProducesResponseType]`을 사용하여 명시적으로 개별 작업을 데코레이팅하는 대신 규칙을 사용할 수 있습니다. 자세한 내용은 <xref:web-api/advanced/conventions>를 참조하세요.
 
 ::: moniker-end
 
