@@ -5,16 +5,16 @@ description: ASP.NET Core SignalR에서 인증 및 권한 부여를 사용 하�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 01/16/2020
 no-loc:
 - SignalR
 uid: signalr/security
-ms.openlocfilehash: 1bdb8b10a24c65735f49f04285e4129cb77eb3fb
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: 4b27d9abb36938ed8161ff0d3535204e3fa68765
+ms.sourcegitcommit: f259889044d1fc0f0c7e3882df0008157ced4915
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828947"
+ms.lasthandoff: 01/21/2020
+ms.locfileid: "76294714"
 ---
 # <a name="security-considerations-in-aspnet-core-opno-locsignalr"></a>ASP.NET Core SignalR의 보안 고려 사항
 
@@ -112,16 +112,20 @@ ASP.NET Core 2.1 이상에서는 `Configure`에서 **`UseSignalR` 및 인증 미
 
 ::: moniker-end
 
+## <a name="connectionid"></a>ConnectionId
+
+SignalR 서버 또는 클라이언트 버전이 2.2 이전 버전인 경우 `ConnectionId`를 노출 하면 악의적인 가장 ASP.NET Core이 발생할 수 있습니다. SignalR 서버와 클라이언트 버전이 ASP.NET Core 3.0 이상인 경우에는 `ConnectionId` 아닌 `ConnectionToken` 비밀로 유지 되어야 합니다. `ConnectionToken`는 모든 API에서 의도적으로 노출 되지 않습니다.  이전 SignalR 클라이언트가 서버에 연결 되지 않도록 하는 것이 어려울 수 있으므로 SignalR 서버 버전이 3.0 이상 ASP.NET Core 경우에도 `ConnectionId` 노출 되지 않아야 합니다.
+
 ## <a name="access-token-logging"></a>액세스 토큰 로깅
 
-WebSocket 또는 서버-전송 이벤트를 사용할 경우 브라우저 클라이언트는 쿼리 문자열을 통해서 액세스 토큰을 전송합니다. 쿼리 문자열을 통해서 액세스 토큰을 수신하는 방식은 일반적으로 표준 `Authorization` 헤더를 사용하는 방식만큼 안전합니다. 클라이언트와 서버 간의 안전한 종단 간 연결을 보장 하려면 항상 HTTPS를 사용 해야 합니다. 많은 웹 서버는 쿼리 문자열을 포함 하 여 각 요청에 대 한 URL을 기록 합니다. 따라서 URL 로깅이 액세스 토큰까지 기록할 수도 있습니다. ASP.NET Core은 기본적으로 쿼리 문자열을 포함 하는 각 요청에 대 한 URL을 기록 합니다. 예를 들면 다음과 같습니다.:
+WebSocket 또는 서버-전송 이벤트를 사용할 경우 브라우저 클라이언트는 쿼리 문자열을 통해서 액세스 토큰을 전송합니다. 쿼리 문자열을 통해 액세스 토큰을 받는 것은 일반적으로 표준 `Authorization` 헤더를 사용 하는 것 만큼 안전 합니다. 항상 HTTPS를 사용 하 여 클라이언트와 서버 간의 안전한 종단 간 연결을 보장 합니다. 많은 웹 서버는 쿼리 문자열을 포함 하 여 각 요청에 대 한 URL을 기록 합니다. 따라서 URL 로깅이 액세스 토큰까지 기록할 수도 있습니다. ASP.NET Core은 기본적으로 쿼리 문자열을 포함 하는 각 요청에 대 한 URL을 기록 합니다. 예를 들면 다음과 같습니다.:
 
 ```
 info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]
       Request starting HTTP/1.1 GET http://localhost:5000/myhub?access_token=1234
 ```
 
-서버 로그를 사용 하 여이 데이터를 로깅하는 경우에는 `Microsoft.AspNetCore.Hosting`로 거를 `Warning` 수준 이상으로 구성 하 여이 로깅을 완전히 사용 하지 않도록 설정할 수 있습니다. 이러한 메시지는 `Info` 수준에서 기록 됩니다. 자세한 내용은 [로그 필터링](xref:fundamentals/logging/index#log-filtering) 에 대 한 설명서를 참조 하세요. 여전히 특정 요청 정보를 기록 하려는 경우 [미들웨어를 작성](xref:fundamentals/middleware/write) 하 여 필요한 데이터를 기록 하 고 `access_token` 쿼리 문자열 값 (있는 경우)을 필터링 할 수 있습니다.
+서버 로그를 사용 하 여이 데이터를 로깅하는 경우에는 `Microsoft.AspNetCore.Hosting`로 거를 `Warning` 수준 이상으로 구성 하 여이 로깅을 완전히 사용 하지 않도록 설정할 수 있습니다. 이러한 메시지는 `Info` 수준에서 기록 됩니다. 자세한 내용은 [로그 필터링](xref:fundamentals/logging/index#log-filtering) 을 참조 하세요. 여전히 특정 요청 정보를 기록 하려는 경우 [미들웨어를 작성](xref:fundamentals/middleware/write) 하 여 필요한 데이터를 기록 하 고 `access_token` 쿼리 문자열 값 (있는 경우)을 필터링 할 수 있습니다.
 
 ## <a name="exceptions"></a>예외
 

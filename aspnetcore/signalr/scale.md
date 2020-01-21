@@ -5,16 +5,16 @@ description: ASP.NET Core SignalR를 사용 하는 앱에서 성능 및 크기 �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 11/28/2018
+ms.date: 01/17/2020
 no-loc:
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: 8e7b7596fcfe2d6b7150fe1ab09a7ab1dc4a2e47
-ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
+ms.openlocfilehash: 2ffafd452af46b635f4ebbdf74561ad043158808
+ms.sourcegitcommit: f259889044d1fc0f0c7e3882df0008157ced4915
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/14/2020
-ms.locfileid: "75952117"
+ms.lasthandoff: 01/21/2020
+ms.locfileid: "76294728"
 ---
 # <a name="aspnet-core-opno-locsignalr-hosting-and-scaling"></a>ASP.NET Core SignalR 호스팅 및 크기 조정
 
@@ -108,6 +108,17 @@ Windows 10 및 Windows 8.x은 클라이언트 운영 체제입니다. 클라이�
 
 * IIS를 사용 하지 않습니다.
 * Kestrel 또는 IIS Express을 배포 대상으로 사용 합니다.
+
+## <a name="linux-with-nginx"></a>Nginx를 사용하는 Linux
+
+SignalR Websocket에 대해 프록시의 `Connection` 및 `Upgrade` 헤더를 다음으로 설정 합니다.
+
+```
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection $connection_upgrade;
+```
+
+자세한 내용은 [NGINX as a WebSocket Proxy](https://www.nginx.com/blog/websocket-nginx/)항목을 참조 하세요.
 
 ## <a name="next-steps"></a>다음 단계
 
