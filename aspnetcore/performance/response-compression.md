@@ -5,20 +5,20 @@ description: ASP.NET Core 앱에서 응답 압축 미들웨어를 사용하는 �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 01/22/2020
 uid: performance/response-compression
-ms.openlocfilehash: 04b2ffd7047e8b127968adb5d40e0141365fb5fe
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: b8a84418a3258e9ac43b4eadd8564c0708590bce
+ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880905"
+ms.lasthandoff: 01/24/2020
+ms.locfileid: "76726968"
 ---
 # <a name="response-compression-in-aspnet-core"></a>ASP.NET Core 응답 압축
 
 작성자: [Luke Latham](https://github.com/guardrex)
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples)([다운로드 방법](xref:index#how-to-download-a-sample))
 
 네트워크 대역폭은 제한 된 리소스입니다. 응답 크기를 줄이면 일반적으로 앱의 응답성이 크게 향상 됩니다. 페이로드 크기를 줄이는 한 가지 방법은 앱의 응답을 압축 하는 것입니다.
 
@@ -46,7 +46,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 
 | `Accept-Encoding` 헤더 값 | 미들웨어 지원 | 설명 |
 | ------------------------------- | :------------------: | ----------- |
-| `br`                            | 예(기본값)        | [Brotli 압축 된 데이터 형식](https://tools.ietf.org/html/rfc7932) |
+| `br`                            | 예 (기본값)        | [Brotli 압축 된 데이터 형식](https://tools.ietf.org/html/rfc7932) |
 | `deflate`                       | 아니요                   | [DEFLATE 압축 데이터 형식](https://tools.ietf.org/html/rfc1951) |
 | `exi`                           | 아니요                   | [W3C 효율적인 XML 교환](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
 | `gzip`                          | 예                  | [Gzip 파일 형식](https://tools.ietf.org/html/rfc1952) |
@@ -63,7 +63,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 | `br`                            | 아니요                   | [Brotli 압축 된 데이터 형식](https://tools.ietf.org/html/rfc7932) |
 | `deflate`                       | 아니요                   | [DEFLATE 압축 데이터 형식](https://tools.ietf.org/html/rfc1951) |
 | `exi`                           | 아니요                   | [W3C 효율적인 XML 교환](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
-| `gzip`                          | 예(기본값)        | [Gzip 파일 형식](https://tools.ietf.org/html/rfc1952) |
+| `gzip`                          | 예 (기본값)        | [Gzip 파일 형식](https://tools.ietf.org/html/rfc1952) |
 | `identity`                      | 예                  | "인코딩 안 함" 식별자: 응답은 인코딩되지 않아야 합니다. |
 | `pack200-gzip`                  | 아니요                   | [Java 보관을 위한 네트워크 전송 형식](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
 | `*`                             | 예                  | 명시적으로 요청 되지 않은 모든 사용 가능한 콘텐츠 인코딩입니다. |
@@ -139,7 +139,7 @@ public class Startup
 
 참고:
 
-* `app.UseResponseCompression` `app.UseMvc`전에 호출 해야 합니다.
+* `app.UseResponseCompression`는 응답을 압축 하는 미들웨어 보다 먼저 호출 해야 합니다. 자세한 내용은 <xref:fundamentals/middleware/index#middleware-order>를 참조하세요.
 * [Fiddler](https://www.telerik.com/fiddler), [Firebug](https://getfirebug.com/)또는 [postman](https://www.getpostman.com/) 과 같은 도구를 사용 하 여 `Accept-Encoding` 요청 헤더를 설정 하 고 응답 헤더, 크기 및 본문을 연구 합니다.
 
 `Accept-Encoding` 헤더를 제외 하 고 샘플 앱에 요청을 제출 하 고 응답이 압축 되지 않은 상태 인지 확인 합니다. `Content-Encoding` 및 `Vary` 헤더가 응답에 없습니다.

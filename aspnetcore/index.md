@@ -47,7 +47,7 @@ ASP.NET Core MVC는 [Web API](xref:tutorials/first-web-api) 및 [웹앱](xref:tu
 
 ## <a name="client-side-development"></a>클라이언트 쪽 개발
 
-ASP.NET Core는 [Blazor](xref:blazor/index), [Angular](xref:spa/angular), [React](xref:spa/react) 및 [부트스트랩](https://getbootstrap.com/) 등 유명한 클라이언트 쪽 프레임워크 및 라이브러리와 원활하게 통합됩니다. 자세한 내용은 <xref:blazor/index> 및 ‘클라이언트 쪽 개발’의 관련 항목을 참조하세요.
+ASP.NET Core는 [Blazor](xref:blazor/index), [Angular](xref:spa/angular), [React](xref:spa/react) 및 [부트스트랩](https://getbootstrap.com/) 등 유명한 클라이언트 쪽 프레임워크 및 라이브러리와 원활하게 통합됩니다. 자세한 내용은 <xref:blazor/index> 및 ‘클라이언트 쪽 개발’의 관련 항목을 참조하세요. 
 
 <a name="target-framework"></a>
 
@@ -100,7 +100,7 @@ ASP.NET Core 앱 개발을 소개하는 자습서 및 문서는 다음의 순서
 
 1. 관심 있는 다른 항목은 목차를 찾아보세요.
 
-\* 로컬 IDE를 설치할 필요 없이, [브라우저에서 모든 과정을 따라해볼 수 있는 새로운 웹 API 자습서](https://docs.microsoft.com/learn/modules/build-web-api-net-core)가 제공됩니다. 해당 코드는 [Azure Cloud Shell](https://azure.microsoft.com/features/cloud-shell/)에서 실행되고, 테스트에는 [curl](https://curl.haxx.se/)이 사용됩니다.
+\*로컬 IDE를 설치할 필요 없이, [브라우저에서 모든 과정을 따라해볼 수 있는 새로운 웹 API 자습서](https://docs.microsoft.com/learn/modules/build-web-api-net-core)가 제공됩니다.  해당 코드는 [Azure Cloud Shell](https://azure.microsoft.com/features/cloud-shell/)에서 실행되고, 테스트에는 [curl](https://curl.haxx.se/)이 사용됩니다.
 
 ## <a name="migration-from-the-net-framework"></a>.NET Framework에서 마이그레이션
 
@@ -134,7 +134,7 @@ ASP.NET 앱을 ASP.NET Core로 마이그레이션하기 위한 참조 가이드�
 
 ### <a name="regions-in-sample-code"></a>예제 코드의 지역
 
-일부 예제 앱에는 [#region](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-region) 및 [#endregion](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-endregion) C# 지시문으로 둘러싸인 코드 섹션이 포함되어 있습니다. 설명서 빌드 시스템은 렌더링된 설명서 토픽에 이러한 지역을 삽입합니다. 
+일부 예제 앱에는 [#region](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-region) 및 [#endregion](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-endregion) C# 지시문으로 둘러싸인 코드 섹션이 포함되어 있습니다. 설명서 빌드 시스템은 렌더링된 설명서 토픽에 이러한 지역을 삽입합니다.  
 
 일반적으로 지역 이름에는 "snippet"이라는 단어가 포함됩니다. 다음 예제는 `snippet_WebHostDefaults`라는 지역을 보여줍니다.
 
