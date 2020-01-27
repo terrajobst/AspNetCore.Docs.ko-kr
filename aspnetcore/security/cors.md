@@ -4,81 +4,81 @@ author: rick-anderson
 description: ASP.NET Core 앱에서 원본 간 요청을 허용 하거나 거부 하기 위한 표준으로 CORS를 학습 하는 방법에 대해 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/13/2019
+ms.date: 01/23/2020
 uid: security/cors
-ms.openlocfilehash: 3a51d365626c858ad48298a1108e37eba9050fe7
-ms.sourcegitcommit: 35a86ce48041caaf6396b1e88b0472578ba24483
+ms.openlocfilehash: 57098be73164c71d1b0d1fe2f3aee7ec41a32346
+ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/16/2019
-ms.locfileid: "72391303"
+ms.lasthandoff: 01/24/2020
+ms.locfileid: "76727316"
 ---
-# <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a><span data-ttu-id="37486-103">ASP.NET Core에서 CORS (원본 간 요청) 사용</span><span class="sxs-lookup"><span data-stu-id="37486-103">Enable Cross-Origin Requests (CORS) in ASP.NET Core</span></span>
+# <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a><span data-ttu-id="ca04b-103">ASP.NET Core에서 CORS (원본 간 요청) 사용</span><span class="sxs-lookup"><span data-stu-id="ca04b-103">Enable Cross-Origin Requests (CORS) in ASP.NET Core</span></span>
 
-<span data-ttu-id="37486-104">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="37486-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+<span data-ttu-id="ca04b-104">작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="ca04b-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
-<span data-ttu-id="37486-105">이 문서에서는 ASP.NET Core 앱에서 CORS를 사용 하도록 설정 하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="37486-105">This article shows how to enable CORS in an ASP.NET Core app.</span></span>
+<span data-ttu-id="ca04b-105">이 문서에서는 ASP.NET Core 앱에서 CORS를 사용 하도록 설정 하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-105">This article shows how to enable CORS in an ASP.NET Core app.</span></span>
 
-<span data-ttu-id="37486-106">브라우저 보안은 웹 페이지에서 웹 페이지를 제공 하는 도메인과 다른 도메인에 대 한 요청을 수행 하지 못하도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-106">Browser security prevents a web page from making requests to a different domain than the one that served the web page.</span></span> <span data-ttu-id="37486-107">이러한 제한을 *동일한 원본 정책*이라고 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-107">This restriction is called the *same-origin policy*.</span></span> <span data-ttu-id="37486-108">동일한 원본 정책은 악의적인 사이트에서 다른 사이트의 중요 한 데이터를 읽지 못하도록 방지 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-108">The same-origin policy prevents a malicious site from reading sensitive data from another site.</span></span> <span data-ttu-id="37486-109">경우에 따라 다른 사이트에서 앱에 대 한 원본 간 요청을 허용 하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-109">Sometimes, you might want to allow other sites make cross-origin requests to your app.</span></span> <span data-ttu-id="37486-110">자세한 내용은 [MOZILLA CORS 문서](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="37486-110">For more information, see the [Mozilla CORS article](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).</span></span>
+<span data-ttu-id="ca04b-106">브라우저 보안은 웹 페이지에서 웹 페이지를 제공 하는 도메인과 다른 도메인에 대 한 요청을 수행 하지 못하도록 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-106">Browser security prevents a web page from making requests to a different domain than the one that served the web page.</span></span> <span data-ttu-id="ca04b-107">이러한 제한을 *동일한 원본 정책*이라고 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-107">This restriction is called the *same-origin policy*.</span></span> <span data-ttu-id="ca04b-108">동일한 원본 정책은 악의적인 사이트에서 다른 사이트의 중요 한 데이터를 읽지 못하도록 방지 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-108">The same-origin policy prevents a malicious site from reading sensitive data from another site.</span></span> <span data-ttu-id="ca04b-109">경우에 따라 다른 사이트에서 앱에 대 한 원본 간 요청을 허용 하는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-109">Sometimes, you might want to allow other sites make cross-origin requests to your app.</span></span> <span data-ttu-id="ca04b-110">자세한 내용은 [MOZILLA CORS 문서](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ca04b-110">For more information, see the [Mozilla CORS article](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).</span></span>
 
-<span data-ttu-id="37486-111">CORS ( [원본 간 리소스 공유](https://www.w3.org/TR/cors/) ):</span><span class="sxs-lookup"><span data-stu-id="37486-111">[Cross Origin Resource Sharing](https://www.w3.org/TR/cors/) (CORS):</span></span>
+<span data-ttu-id="ca04b-111">CORS ( [원본 간 리소스 공유](https://www.w3.org/TR/cors/) ):</span><span class="sxs-lookup"><span data-stu-id="ca04b-111">[Cross Origin Resource Sharing](https://www.w3.org/TR/cors/) (CORS):</span></span>
 
-* <span data-ttu-id="37486-112">는 서버에서 동일한 원본 정책을 완화할 수 있게 해 주는 W3C 표준입니다.</span><span class="sxs-lookup"><span data-stu-id="37486-112">Is a W3C standard that allows a server to relax the same-origin policy.</span></span>
-* <span data-ttu-id="37486-113">는 CORS 완화 security의 보안 기능이 **아닙니다** .</span><span class="sxs-lookup"><span data-stu-id="37486-113">Is **not** a security feature, CORS relaxes security.</span></span> <span data-ttu-id="37486-114">API는 CORS를 허용 하 여 안전 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-114">An API is not safer by allowing CORS.</span></span> <span data-ttu-id="37486-115">자세한 내용은 [CORS 작동 방식](#how-cors)을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="37486-115">For more information, see [How CORS works](#how-cors).</span></span>
-* <span data-ttu-id="37486-116">다른 서버를 거부 하는 동안 서버에서 일부 교차 원본 요청을 명시적으로 허용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-116">Allows a server to explicitly allow some cross-origin requests while rejecting others.</span></span>
-* <span data-ttu-id="37486-117">[JSONP](/dotnet/framework/wcf/samples/jsonp)와 같은 이전 기술 보다 안전 하 고 유연 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-117">Is safer and more flexible than earlier techniques, such as [JSONP](/dotnet/framework/wcf/samples/jsonp).</span></span>
+* <span data-ttu-id="ca04b-112">는 서버에서 동일한 원본 정책을 완화할 수 있게 해 주는 W3C 표준입니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-112">Is a W3C standard that allows a server to relax the same-origin policy.</span></span>
+* <span data-ttu-id="ca04b-113">는 CORS 완화 security의 보안 기능이 **아닙니다** .</span><span class="sxs-lookup"><span data-stu-id="ca04b-113">Is **not** a security feature, CORS relaxes security.</span></span> <span data-ttu-id="ca04b-114">API는 CORS를 허용 하 여 안전 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-114">An API is not safer by allowing CORS.</span></span> <span data-ttu-id="ca04b-115">자세한 내용은 [CORS 작동 방식](#how-cors)을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ca04b-115">For more information, see [How CORS works](#how-cors).</span></span>
+* <span data-ttu-id="ca04b-116">다른 서버를 거부 하는 동안 서버에서 일부 교차 원본 요청을 명시적으로 허용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-116">Allows a server to explicitly allow some cross-origin requests while rejecting others.</span></span>
+* <span data-ttu-id="ca04b-117">[JSONP](/dotnet/framework/wcf/samples/jsonp)와 같은 이전 기술 보다 안전 하 고 유연 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-117">Is safer and more flexible than earlier techniques, such as [JSONP](/dotnet/framework/wcf/samples/jsonp).</span></span>
 
-<span data-ttu-id="37486-118">[샘플 코드 보기 또는 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample)([다운로드 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="37486-118">[View or download sample code](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="ca04b-118">[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample)([다운로드 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="ca04b-118">[View or download sample code](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-## <a name="same-origin"></a><span data-ttu-id="37486-119">동일한 원점</span><span class="sxs-lookup"><span data-stu-id="37486-119">Same origin</span></span>
+## <a name="same-origin"></a><span data-ttu-id="ca04b-119">동일한 원점</span><span class="sxs-lookup"><span data-stu-id="ca04b-119">Same origin</span></span>
 
-<span data-ttu-id="37486-120">동일한 스키마, 호스트 및 포트 ([RFC 6454](https://tools.ietf.org/html/rfc6454))가 있는 경우 두 url의 원본이 동일 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-120">Two URLs have the same origin if they have identical schemes, hosts, and ports ([RFC 6454](https://tools.ietf.org/html/rfc6454)).</span></span>
+<span data-ttu-id="ca04b-120">동일한 스키마, 호스트 및 포트 ([RFC 6454](https://tools.ietf.org/html/rfc6454))가 있는 경우 두 url의 원본이 동일 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-120">Two URLs have the same origin if they have identical schemes, hosts, and ports ([RFC 6454](https://tools.ietf.org/html/rfc6454)).</span></span>
 
-<span data-ttu-id="37486-121">다음 두 URL은 동일한 원본입니다.</span><span class="sxs-lookup"><span data-stu-id="37486-121">These two URLs have the same origin:</span></span>
+<span data-ttu-id="ca04b-121">다음 두 URL은 동일한 원본입니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-121">These two URLs have the same origin:</span></span>
 
 * `https://example.com/foo.html`
 * `https://example.com/bar.html`
 
-<span data-ttu-id="37486-122">이러한 Url의 원본은 이전 두 Url과 다릅니다.</span><span class="sxs-lookup"><span data-stu-id="37486-122">These URLs have different origins than the previous two URLs:</span></span>
+<span data-ttu-id="ca04b-122">이러한 Url의 원본은 이전 두 Url과 다릅니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-122">These URLs have different origins than the previous two URLs:</span></span>
 
-* <span data-ttu-id="37486-123">`https://example.net` &ndash; 다른 도메인</span><span class="sxs-lookup"><span data-stu-id="37486-123">`https://example.net` &ndash; Different domain</span></span>
-* <span data-ttu-id="37486-124">`https://www.example.com/foo.html` &ndash; 다른 하위 도메인</span><span class="sxs-lookup"><span data-stu-id="37486-124">`https://www.example.com/foo.html` &ndash; Different subdomain</span></span>
-* <span data-ttu-id="37486-125">`http://example.com/foo.html` &ndash; 다른 체계</span><span class="sxs-lookup"><span data-stu-id="37486-125">`http://example.com/foo.html` &ndash; Different scheme</span></span>
-* <span data-ttu-id="37486-126">다른 포트 `https://example.com:9000/foo.html` &ndash;</span><span class="sxs-lookup"><span data-stu-id="37486-126">`https://example.com:9000/foo.html` &ndash; Different port</span></span>
+* <span data-ttu-id="ca04b-123">`https://example.net` &ndash; 다른 도메인</span><span class="sxs-lookup"><span data-stu-id="ca04b-123">`https://example.net` &ndash; Different domain</span></span>
+* <span data-ttu-id="ca04b-124">`https://www.example.com/foo.html` &ndash; 다른 하위 도메인</span><span class="sxs-lookup"><span data-stu-id="ca04b-124">`https://www.example.com/foo.html` &ndash; Different subdomain</span></span>
+* <span data-ttu-id="ca04b-125">`http://example.com/foo.html` &ndash; 다른 체계</span><span class="sxs-lookup"><span data-stu-id="ca04b-125">`http://example.com/foo.html` &ndash; Different scheme</span></span>
+* <span data-ttu-id="ca04b-126">다른 포트 `https://example.com:9000/foo.html` &ndash;</span><span class="sxs-lookup"><span data-stu-id="ca04b-126">`https://example.com:9000/foo.html` &ndash; Different port</span></span>
 
-<span data-ttu-id="37486-127">Internet Explorer는 원본을 비교할 때 포트를 고려하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-127">Internet Explorer doesn't consider the port when comparing origins.</span></span>
+<span data-ttu-id="ca04b-127">Internet Explorer는 원본을 비교할 때 포트를 고려하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-127">Internet Explorer doesn't consider the port when comparing origins.</span></span>
 
-## <a name="cors-with-named-policy-and-middleware"></a><span data-ttu-id="37486-128">명명 된 정책 및 미들웨어를 사용 하는 CORS</span><span class="sxs-lookup"><span data-stu-id="37486-128">CORS with named policy and middleware</span></span>
+## <a name="cors-with-named-policy-and-middleware"></a><span data-ttu-id="ca04b-128">명명 된 정책 및 미들웨어를 사용 하는 CORS</span><span class="sxs-lookup"><span data-stu-id="ca04b-128">CORS with named policy and middleware</span></span>
 
-<span data-ttu-id="37486-129">CORS 미들웨어는 크로스-원본 요청을 처리 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-129">CORS Middleware handles cross-origin requests.</span></span> <span data-ttu-id="37486-130">다음 코드는 지정 된 원본으로 전체 앱에 대해 CORS를 사용 하도록 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-130">The following code enables CORS for the entire app with the specified origin:</span></span>
+<span data-ttu-id="ca04b-129">CORS 미들웨어는 크로스-원본 요청을 처리 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-129">CORS Middleware handles cross-origin requests.</span></span> <span data-ttu-id="ca04b-130">다음 코드는 지정 된 원본으로 전체 앱에 대해 CORS를 사용 하도록 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-130">The following code enables CORS for the entire app with the specified origin:</span></span>
 
 [!code-csharp[](cors/sample/Cors/WebAPI/Startup.cs?name=snippet&highlight=8,14-23,38)]
 
-<span data-ttu-id="37486-131">위의 코드는:</span><span class="sxs-lookup"><span data-stu-id="37486-131">The preceding code:</span></span>
+<span data-ttu-id="ca04b-131">위의 코드:</span><span class="sxs-lookup"><span data-stu-id="ca04b-131">The preceding code:</span></span>
 
-* <span data-ttu-id="37486-132">정책 이름을 "\_myAllowSpecificOrigins"로 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-132">Sets the policy name to "\_myAllowSpecificOrigins".</span></span> <span data-ttu-id="37486-133">정책 이름은 임의로입니다.</span><span class="sxs-lookup"><span data-stu-id="37486-133">The policy name is arbitrary.</span></span>
-* <span data-ttu-id="37486-134">CORS를 사용 하도록 설정 하는 <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*> 확장 메서드를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-134">Calls the <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*> extension method, which enables CORS.</span></span>
-* <span data-ttu-id="37486-135">[람다 식](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions)으로 <xref:Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions.AddCors*>를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-135">Calls <xref:Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions.AddCors*> with a [lambda expression](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions).</span></span> <span data-ttu-id="37486-136">람다는 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> 개체를 전달받습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-136">The lambda takes a <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> object.</span></span> <span data-ttu-id="37486-137">`WithOrigins`등의 [구성 옵션](#cors-policy-options)에 대해서는이 문서의 뒷부분에서 설명 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-137">[Configuration options](#cors-policy-options), such as `WithOrigins`, are described later in this article.</span></span>
+* <span data-ttu-id="ca04b-132">정책 이름을 "\_myAllowSpecificOrigins"로 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-132">Sets the policy name to "\_myAllowSpecificOrigins".</span></span> <span data-ttu-id="ca04b-133">정책 이름은 임의로입니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-133">The policy name is arbitrary.</span></span>
+* <span data-ttu-id="ca04b-134">CORS를 사용 하도록 설정 하는 <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*> 확장 메서드를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-134">Calls the <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*> extension method, which enables CORS.</span></span>
+* <span data-ttu-id="ca04b-135">[람다 식](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions)으로 <xref:Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions.AddCors*>를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-135">Calls <xref:Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions.AddCors*> with a [lambda expression](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions).</span></span> <span data-ttu-id="ca04b-136">람다는 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> 개체를 전달받습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-136">The lambda takes a <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> object.</span></span> <span data-ttu-id="ca04b-137">`WithOrigins`등의 [구성 옵션](#cors-policy-options)에 대해서는이 문서의 뒷부분에서 설명 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-137">[Configuration options](#cors-policy-options), such as `WithOrigins`, are described later in this article.</span></span>
 
-<span data-ttu-id="37486-138"><xref:Microsoft.Extensions.DependencyInjection.MvcCorsMvcCoreBuilderExtensions.AddCors*> 메서드 호출은 CORS 서비스를 앱의 서비스 컨테이너에 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-138">The <xref:Microsoft.Extensions.DependencyInjection.MvcCorsMvcCoreBuilderExtensions.AddCors*> method call adds CORS services to the app's service container:</span></span>
+<span data-ttu-id="ca04b-138"><xref:Microsoft.Extensions.DependencyInjection.MvcCorsMvcCoreBuilderExtensions.AddCors*> 메서드 호출은 CORS 서비스를 앱의 서비스 컨테이너에 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-138">The <xref:Microsoft.Extensions.DependencyInjection.MvcCorsMvcCoreBuilderExtensions.AddCors*> method call adds CORS services to the app's service container:</span></span>
 
 [!code-csharp[](cors/sample/Cors/WebAPI/Startup.cs?name=snippet2)]
 
-<span data-ttu-id="37486-139">자세한 내용은이 문서의 [CORS 정책 옵션](#cpo) (영문)을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="37486-139">For more information, see [CORS policy options](#cpo) in this document .</span></span>
+<span data-ttu-id="ca04b-139">자세한 내용은이 문서의 [CORS 정책 옵션](#cpo) (영문)을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ca04b-139">For more information, see [CORS policy options](#cpo) in this document .</span></span>
 
-<span data-ttu-id="37486-140"><xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> 메서드는 다음 코드와 같이 메서드를 연결할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-140">The <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> method can chain methods, as shown in the following code:</span></span>
+<span data-ttu-id="ca04b-140"><xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> 메서드는 다음 코드와 같이 메서드를 연결할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-140">The <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> method can chain methods, as shown in the following code:</span></span>
 
 [!code-csharp[](cors/sample/Cors/WebAPI/Startup2.cs?name=snippet2)]
 
-<span data-ttu-id="37486-141">참고: URL은 후행 슬래시 (`/`)를 포함 **하지** 않아야 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-141">Note: The URL must **not** contain a trailing slash (`/`).</span></span> <span data-ttu-id="37486-142">URL이 `/`로 종료 되는 경우 비교 시 `false` 반환 되 고 헤더가 반환 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-142">If the URL terminates with `/`, the comparison returns `false` and no header is returned.</span></span>
+<span data-ttu-id="ca04b-141">참고: URL은 후행 슬래시 (`/`)를 포함 **하지** 않아야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-141">Note: The URL must **not** contain a trailing slash (`/`).</span></span> <span data-ttu-id="ca04b-142">URL이 `/`로 종료 되는 경우 비교 시 `false` 반환 되 고 헤더가 반환 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-142">If the URL terminates with `/`, the comparison returns `false` and no header is returned.</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
 <a name="acpall"></a>
 
-### <a name="apply-cors-policies-to-all-endpoints"></a><span data-ttu-id="37486-143">모든 끝점에 CORS 정책 적용</span><span class="sxs-lookup"><span data-stu-id="37486-143">Apply CORS policies to all endpoints</span></span>
+### <a name="apply-cors-policies-to-all-endpoints"></a><span data-ttu-id="ca04b-143">모든 끝점에 CORS 정책 적용</span><span class="sxs-lookup"><span data-stu-id="ca04b-143">Apply CORS policies to all endpoints</span></span>
 
-<span data-ttu-id="37486-144">다음 코드에서는 CORS 미들웨어를 통해 모든 앱 끝점에 CORS 정책을 적용 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-144">The following code applies CORS policies to all the apps endpoints via CORS Middleware:</span></span>
+<span data-ttu-id="ca04b-144">다음 코드에서는 CORS 미들웨어를 통해 모든 앱 끝점에 CORS 정책을 적용 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-144">The following code applies CORS policies to all the apps endpoints via CORS Middleware:</span></span>
 ```csharp
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
@@ -97,12 +97,12 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 ```
 
 > [!WARNING]
-> <span data-ttu-id="37486-145">끝점 라우팅을 사용 하 여 `UseRouting`에 대 한 호출과 `UseEndpoints`사이에서 실행 되도록 CORS 미들웨어를 구성 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-145">With endpoint routing, the CORS middleware must be configured to execute between the calls to `UseRouting` and `UseEndpoints`.</span></span> <span data-ttu-id="37486-146">잘못 된 구성으로 인해 미들웨어가 제대로 작동 하지 않을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-146">Incorrect configuration will cause the middleware to stop functioning correctly.</span></span>
+> <span data-ttu-id="ca04b-145">끝점 라우팅을 사용 하 여 `UseRouting`에 대 한 호출과 `UseEndpoints`사이에서 실행 되도록 CORS 미들웨어를 구성 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-145">With endpoint routing, the CORS middleware must be configured to execute between the calls to `UseRouting` and `UseEndpoints`.</span></span> <span data-ttu-id="ca04b-146">잘못 된 구성으로 인해 미들웨어가 제대로 작동 하지 않을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-146">Incorrect configuration will cause the middleware to stop functioning correctly.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-2.2"
-<span data-ttu-id="37486-147">다음 코드에서는 CORS 미들웨어를 통해 모든 앱 끝점에 CORS 정책을 적용 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-147">The following code applies CORS policies to all the apps endpoints via CORS Middleware:</span></span>
+<span data-ttu-id="ca04b-147">다음 코드에서는 CORS 미들웨어를 통해 모든 앱 끝점에 CORS 정책을 적용 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-147">The following code applies CORS policies to all the apps endpoints via CORS Middleware:</span></span>
 ```csharp
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
@@ -121,21 +121,21 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     app.UseMvc();
 }
 ```
-<span data-ttu-id="37486-148">참고: `UseCors` `UseMvc`전에 호출 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-148">Note: `UseCors` must be called before `UseMvc`.</span></span>
+<span data-ttu-id="ca04b-148">참고: `UseCors` `UseMvc`전에 호출 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-148">Note: `UseCors` must be called before `UseMvc`.</span></span>
 
 ::: moniker-end
 
-<span data-ttu-id="37486-149">페이지/컨트롤러/동작 수준에서 cors 정책을 적용 하려면 [Razor Pages, 컨트롤러 및 작업 메서드에서 Cors 사용](#ecors) 을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="37486-149">See [Enable CORS in Razor Pages, controllers, and action methods](#ecors) to apply CORS policy at the page/controller/action level.</span></span>
+<span data-ttu-id="ca04b-149">페이지/컨트롤러/동작 수준에서 cors 정책을 적용 하려면 [Razor Pages, 컨트롤러 및 작업 메서드에서 Cors 사용](#ecors) 을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ca04b-149">See [Enable CORS in Razor Pages, controllers, and action methods](#ecors) to apply CORS policy at the page/controller/action level.</span></span>
 
-<span data-ttu-id="37486-150">위의 코드를 테스트 하는 방법에 대 한 지침은 [CORS 테스트](#test) 를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="37486-150">See [Test CORS](#test) for instructions on testing the preceding code.</span></span>
+<span data-ttu-id="ca04b-150">위의 코드를 테스트 하는 방법에 대 한 지침은 [CORS 테스트](#test) 를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ca04b-150">See [Test CORS](#test) for instructions on testing the preceding code.</span></span>
 
 <a name="ecors"></a>
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="enable-cors-with-endpoint-routing"></a><span data-ttu-id="37486-151">끝점 라우팅을 사용 하 여 Cors 사용</span><span class="sxs-lookup"><span data-stu-id="37486-151">Enable Cors with endpoint routing</span></span>
+## <a name="enable-cors-with-endpoint-routing"></a><span data-ttu-id="ca04b-151">끝점 라우팅을 사용 하 여 Cors 사용</span><span class="sxs-lookup"><span data-stu-id="ca04b-151">Enable Cors with endpoint routing</span></span>
 
-<span data-ttu-id="37486-152">끝점 라우팅을 사용 하면 `RequireCors` 확장 메서드 집합을 사용 하 여 끝점 별로 CORS를 사용 하도록 설정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-152">With endpoint routing, CORS can be enabled on a per-endpoint basis using the `RequireCors` set of extension methods.</span></span>
+<span data-ttu-id="ca04b-152">끝점 라우팅을 사용 하면 `RequireCors` 확장 메서드 집합을 사용 하 여 끝점 별로 CORS를 사용 하도록 설정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-152">With endpoint routing, CORS can be enabled on a per-endpoint basis using the `RequireCors` set of extension methods.</span></span>
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -146,7 +146,7 @@ app.UseEndpoints(endpoints =>
 
 ```
 
-<span data-ttu-id="37486-153">마찬가지로 모든 컨트롤러에 대해 CORS를 사용 하도록 설정할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-153">Similarly, CORS can also be enabled for all controllers:</span></span>
+<span data-ttu-id="ca04b-153">마찬가지로 모든 컨트롤러에 대해 CORS를 사용 하도록 설정할 수도 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-153">Similarly, CORS can also be enabled for all controllers:</span></span>
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -156,130 +156,130 @@ app.UseEndpoints(endpoints =>
 ```
 ::: moniker-end
 
-## <a name="enable-cors-with-attributes"></a><span data-ttu-id="37486-154">특성과 함께 CORS 사용</span><span class="sxs-lookup"><span data-stu-id="37486-154">Enable CORS with attributes</span></span>
+## <a name="enable-cors-with-attributes"></a><span data-ttu-id="ca04b-154">특성과 함께 CORS 사용</span><span class="sxs-lookup"><span data-stu-id="ca04b-154">Enable CORS with attributes</span></span>
 
-<span data-ttu-id="37486-155">[&lbrack;EnableCors&rbrack;](xref:Microsoft.AspNetCore.Cors.EnableCorsAttribute) 특성은 CORS를 전역적으로 적용 하는 대안을 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-155">The [&lbrack;EnableCors&rbrack;](xref:Microsoft.AspNetCore.Cors.EnableCorsAttribute) attribute provides an alternative to applying CORS globally.</span></span> <span data-ttu-id="37486-156">`[EnableCors]` 특성은 모든 끝점이 아니라 선택한 끝점에 대해 CORS를 사용 하도록 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-156">The `[EnableCors]` attribute enables CORS for selected end points, rather than all end points.</span></span>
+<span data-ttu-id="ca04b-155">[&lbrack;EnableCors&rbrack;](xref:Microsoft.AspNetCore.Cors.EnableCorsAttribute) 특성은 CORS를 전역적으로 적용 하는 대안을 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-155">The [&lbrack;EnableCors&rbrack;](xref:Microsoft.AspNetCore.Cors.EnableCorsAttribute) attribute provides an alternative to applying CORS globally.</span></span> <span data-ttu-id="ca04b-156">`[EnableCors]` 특성은 모든 끝점이 아니라 선택한 끝점에 대해 CORS를 사용 하도록 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-156">The `[EnableCors]` attribute enables CORS for selected end points, rather than all end points.</span></span>
 
-<span data-ttu-id="37486-157">`[EnableCors]`를 사용 하 여 기본 정책을 지정 하 고 정책을 지정 하 `[EnableCors("{Policy String}")]` 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-157">Use `[EnableCors]` to specify the default policy and `[EnableCors("{Policy String}")]` to specify a policy.</span></span>
+<span data-ttu-id="ca04b-157">`[EnableCors]`를 사용 하 여 기본 정책을 지정 하 고 정책을 지정 하 `[EnableCors("{Policy String}")]` 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-157">Use `[EnableCors]` to specify the default policy and `[EnableCors("{Policy String}")]` to specify a policy.</span></span>
 
-<span data-ttu-id="37486-158">`[EnableCors]` 특성을 적용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-158">The `[EnableCors]` attribute can be applied to:</span></span>
+<span data-ttu-id="ca04b-158">`[EnableCors]` 특성을 적용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-158">The `[EnableCors]` attribute can be applied to:</span></span>
 
-* <span data-ttu-id="37486-159">Razor 페이지 `PageModel`</span><span class="sxs-lookup"><span data-stu-id="37486-159">Razor Page `PageModel`</span></span>
-* <span data-ttu-id="37486-160">컨트롤러</span><span class="sxs-lookup"><span data-stu-id="37486-160">Controller</span></span>
-* <span data-ttu-id="37486-161">컨트롤러 동작 방법</span><span class="sxs-lookup"><span data-stu-id="37486-161">Controller action method</span></span>
+* <span data-ttu-id="ca04b-159">Razor 페이지 `PageModel`</span><span class="sxs-lookup"><span data-stu-id="ca04b-159">Razor Page `PageModel`</span></span>
+* <span data-ttu-id="ca04b-160">Controller</span><span class="sxs-lookup"><span data-stu-id="ca04b-160">Controller</span></span>
+* <span data-ttu-id="ca04b-161">컨트롤러 동작 방법</span><span class="sxs-lookup"><span data-stu-id="ca04b-161">Controller action method</span></span>
 
-<span data-ttu-id="37486-162">`[EnableCors]` 특성을 사용 하 여 컨트롤러/페이지-모델/작업에 다른 정책을 적용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-162">You can apply different policies to controller/page-model/action with the  `[EnableCors]` attribute.</span></span> <span data-ttu-id="37486-163">`[EnableCors]` 특성이 컨트롤러/페이지 모델/동작 메서드에 적용 되 고 CORS가 미들웨어에서 사용 되는 경우 두 정책이 모두 적용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="37486-163">When the `[EnableCors]` attribute is applied to a controllers/page-model/action method, and CORS is enabled in middleware, both policies are applied.</span></span> <span data-ttu-id="37486-164">정책을 결합 하지 않는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-164">We recommend against combining policies.</span></span> <span data-ttu-id="37486-165">동일한 앱에서 `[EnableCors]` 특성 또는 미들웨어를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-165">Use the `[EnableCors]` attribute or middleware, not both in the same app.</span></span>
+<span data-ttu-id="ca04b-162">`[EnableCors]` 특성을 사용 하 여 컨트롤러/페이지-모델/작업에 다른 정책을 적용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-162">You can apply different policies to controller/page-model/action with the  `[EnableCors]` attribute.</span></span> <span data-ttu-id="ca04b-163">`[EnableCors]` 특성이 컨트롤러/페이지 모델/동작 메서드에 적용 되 고 CORS가 미들웨어에서 사용 되는 경우 두 정책이 모두 적용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-163">When the `[EnableCors]` attribute is applied to a controllers/page-model/action method, and CORS is enabled in middleware, both policies are applied.</span></span> <span data-ttu-id="ca04b-164">정책을 결합 하지 않는 것이 좋습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-164">We recommend against combining policies.</span></span> <span data-ttu-id="ca04b-165">동일한 앱에서 `[EnableCors]` 특성 또는 미들웨어를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-165">Use the `[EnableCors]` attribute or middleware, not both in the same app.</span></span>
 
-<span data-ttu-id="37486-166">다음 코드는 각 메서드에 다른 정책을 적용 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-166">The following code applies a different policy to each method:</span></span>
+<span data-ttu-id="ca04b-166">다음 코드는 각 메서드에 다른 정책을 적용 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-166">The following code applies a different policy to each method:</span></span>
 
 [!code-csharp[](cors/sample/Cors/WebAPI/Controllers/WidgetController.cs?name=snippet&highlight=6,14)]
 
-<span data-ttu-id="37486-167">다음 코드에서는 CORS 기본 정책과 `"AnotherPolicy"`이라는 정책을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="37486-167">The following code creates a CORS default policy and a policy named `"AnotherPolicy"`:</span></span>
+<span data-ttu-id="ca04b-167">다음 코드에서는 CORS 기본 정책과 `"AnotherPolicy"`이라는 정책을 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-167">The following code creates a CORS default policy and a policy named `"AnotherPolicy"`:</span></span>
 
 [!code-csharp[](cors/sample/Cors/WebAPI/StartupMultiPolicy.cs?name=snippet&highlight=12-28)]
 
-### <a name="disable-cors"></a><span data-ttu-id="37486-168">CORS 비활성시키기</span><span class="sxs-lookup"><span data-stu-id="37486-168">Disable CORS</span></span>
+### <a name="disable-cors"></a><span data-ttu-id="ca04b-168">CORS 비활성시키기</span><span class="sxs-lookup"><span data-stu-id="ca04b-168">Disable CORS</span></span>
 
-<span data-ttu-id="37486-169">[&lbrack;DisableCors&rbrack;](xref:Microsoft.AspNetCore.Cors.DisableCorsAttribute) 특성은 컨트롤러/페이지-모델/작업에 대해 CORS를 사용 하지 않도록 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-169">The [&lbrack;DisableCors&rbrack;](xref:Microsoft.AspNetCore.Cors.DisableCorsAttribute) attribute disables CORS for the controller/page-model/action.</span></span>
+<span data-ttu-id="ca04b-169">[&lbrack;DisableCors&rbrack;](xref:Microsoft.AspNetCore.Cors.DisableCorsAttribute) 특성은 컨트롤러/페이지-모델/작업에 대해 CORS를 사용 하지 않도록 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-169">The [&lbrack;DisableCors&rbrack;](xref:Microsoft.AspNetCore.Cors.DisableCorsAttribute) attribute disables CORS for the controller/page-model/action.</span></span>
 
 <a name="cpo"></a>
 
-## <a name="cors-policy-options"></a><span data-ttu-id="37486-170">CORS 정책 옵션</span><span class="sxs-lookup"><span data-stu-id="37486-170">CORS policy options</span></span>
+## <a name="cors-policy-options"></a><span data-ttu-id="ca04b-170">CORS 정책 옵션</span><span class="sxs-lookup"><span data-stu-id="ca04b-170">CORS policy options</span></span>
 
-<span data-ttu-id="37486-171">이 섹션에서는 CORS 정책에서 설정할 수 있는 다양 한 옵션에 대해 설명 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-171">This section describes the various options that can be set in a CORS policy:</span></span>
+<span data-ttu-id="ca04b-171">이 섹션에서는 CORS 정책에서 설정할 수 있는 다양 한 옵션에 대해 설명 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-171">This section describes the various options that can be set in a CORS policy:</span></span>
 
-* [<span data-ttu-id="37486-172">허용되는 원본 설정하기</span><span class="sxs-lookup"><span data-stu-id="37486-172">Set the allowed origins</span></span>](#set-the-allowed-origins)
-* [<span data-ttu-id="37486-173">허용되는 HTTP 메서드 설정하기</span><span class="sxs-lookup"><span data-stu-id="37486-173">Set the allowed HTTP methods</span></span>](#set-the-allowed-http-methods)
-* [<span data-ttu-id="37486-174">허용되는 요청 헤더 설정하기</span><span class="sxs-lookup"><span data-stu-id="37486-174">Set the allowed request headers</span></span>](#set-the-allowed-request-headers)
-* [<span data-ttu-id="37486-175">노출되는 응답 헤더 설정하기</span><span class="sxs-lookup"><span data-stu-id="37486-175">Set the exposed response headers</span></span>](#set-the-exposed-response-headers)
-* [<span data-ttu-id="37486-176">교차 원본 요청의 자격 증명</span><span class="sxs-lookup"><span data-stu-id="37486-176">Credentials in cross-origin requests</span></span>](#credentials-in-cross-origin-requests)
-* [<span data-ttu-id="37486-177">예비 요청 만료 시간 설정하기</span><span class="sxs-lookup"><span data-stu-id="37486-177">Set the preflight expiration time</span></span>](#set-the-preflight-expiration-time)
+* [<span data-ttu-id="ca04b-172">허용되는 원본 설정하기</span><span class="sxs-lookup"><span data-stu-id="ca04b-172">Set the allowed origins</span></span>](#set-the-allowed-origins)
+* [<span data-ttu-id="ca04b-173">허용되는 HTTP 메서드 설정하기</span><span class="sxs-lookup"><span data-stu-id="ca04b-173">Set the allowed HTTP methods</span></span>](#set-the-allowed-http-methods)
+* [<span data-ttu-id="ca04b-174">허용되는 요청 헤더 설정하기</span><span class="sxs-lookup"><span data-stu-id="ca04b-174">Set the allowed request headers</span></span>](#set-the-allowed-request-headers)
+* [<span data-ttu-id="ca04b-175">노출되는 응답 헤더 설정하기</span><span class="sxs-lookup"><span data-stu-id="ca04b-175">Set the exposed response headers</span></span>](#set-the-exposed-response-headers)
+* [<span data-ttu-id="ca04b-176">교차 원본 요청의 자격 증명</span><span class="sxs-lookup"><span data-stu-id="ca04b-176">Credentials in cross-origin requests</span></span>](#credentials-in-cross-origin-requests)
+* [<span data-ttu-id="ca04b-177">예비 요청 만료 시간 설정하기</span><span class="sxs-lookup"><span data-stu-id="ca04b-177">Set the preflight expiration time</span></span>](#set-the-preflight-expiration-time)
 
-<span data-ttu-id="37486-178"><xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions.AddPolicy*>은 `Startup.ConfigureServices`에서 호출 됩니다.</span><span class="sxs-lookup"><span data-stu-id="37486-178"><xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions.AddPolicy*> is called in `Startup.ConfigureServices`.</span></span> <span data-ttu-id="37486-179">일부 옵션의 경우 [CORS 작동 방법](#how-cors) 섹션을 먼저 읽는 것이 도움이 될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-179">For some options, it may be helpful to read the [How CORS works](#how-cors) section first.</span></span>
+<span data-ttu-id="ca04b-178"><xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions.AddPolicy*>은 `Startup.ConfigureServices`에서 호출 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-178"><xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions.AddPolicy*> is called in `Startup.ConfigureServices`.</span></span> <span data-ttu-id="ca04b-179">일부 옵션의 경우 [CORS 작동 방법](#how-cors) 섹션을 먼저 읽는 것이 도움이 될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-179">For some options, it may be helpful to read the [How CORS works](#how-cors) section first.</span></span>
 
-## <a name="set-the-allowed-origins"></a><span data-ttu-id="37486-180">허용되는 원본 설정하기</span><span class="sxs-lookup"><span data-stu-id="37486-180">Set the allowed origins</span></span>
+## <a name="set-the-allowed-origins"></a><span data-ttu-id="ca04b-180">허용되는 원본 설정하기</span><span class="sxs-lookup"><span data-stu-id="ca04b-180">Set the allowed origins</span></span>
 
-<span data-ttu-id="37486-181"><xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyOrigin*> &ndash;는 모든 원본의 CORS 요청 (`http` 또는 `https`)을 허용 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-181"><xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyOrigin*> &ndash; Allows CORS requests from all origins with any scheme (`http` or `https`).</span></span> <span data-ttu-id="37486-182">*모든 웹 사이트* 에서 앱에 대 한 원본 간 요청을 수행할 수 있기 때문에 `AllowAnyOrigin`은 안전 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-182">`AllowAnyOrigin` is insecure because *any website* can make cross-origin requests to the app.</span></span>
+<span data-ttu-id="ca04b-181"><xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyOrigin*> &ndash;는 모든 원본의 CORS 요청 (`http` 또는 `https`)을 허용 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-181"><xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyOrigin*> &ndash; Allows CORS requests from all origins with any scheme (`http` or `https`).</span></span> <span data-ttu-id="ca04b-182">*모든 웹 사이트* 에서 앱에 대 한 원본 간 요청을 수행할 수 있기 때문에 `AllowAnyOrigin`은 안전 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-182">`AllowAnyOrigin` is insecure because *any website* can make cross-origin requests to the app.</span></span>
 
 ::: moniker range=">= aspnetcore-2.2"
 
 > [!NOTE]
-> <span data-ttu-id="37486-183">`AllowAnyOrigin` 및 `AllowCredentials` 지정은 안전 하지 않은 구성으로, 사이트 간 요청 위조를 발생 시킬 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-183">Specifying `AllowAnyOrigin` and `AllowCredentials` is an insecure configuration and can result in cross-site request forgery.</span></span> <span data-ttu-id="37486-184">앱이 두 가지 방법으로 구성 된 경우 CORS 서비스는 잘못 된 CORS 응답을 반환 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-184">The CORS service returns an invalid CORS response when an app is configured with both methods.</span></span>
+> <span data-ttu-id="ca04b-183">`AllowAnyOrigin` 및 `AllowCredentials` 지정은 안전 하지 않은 구성으로, 사이트 간 요청 위조를 발생 시킬 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-183">Specifying `AllowAnyOrigin` and `AllowCredentials` is an insecure configuration and can result in cross-site request forgery.</span></span> <span data-ttu-id="ca04b-184">앱이 두 가지 방법으로 구성 된 경우 CORS 서비스는 잘못 된 CORS 응답을 반환 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-184">The CORS service returns an invalid CORS response when an app is configured with both methods.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.2"
 
 > [!NOTE]
-> <span data-ttu-id="37486-185">`AllowAnyOrigin` 및 `AllowCredentials` 지정은 안전 하지 않은 구성으로, 사이트 간 요청 위조를 발생 시킬 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-185">Specifying `AllowAnyOrigin` and `AllowCredentials` is an insecure configuration and can result in cross-site request forgery.</span></span> <span data-ttu-id="37486-186">보안 응용 프로그램의 경우 클라이언트에서 서버 리소스에 액세스할 수 있는 권한을 부여 해야 하는 경우 정확한 원본 목록을 지정 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-186">For a secure app, specify an exact list of origins if the client must authorize itself to access server resources.</span></span>
+> <span data-ttu-id="ca04b-185">`AllowAnyOrigin` 및 `AllowCredentials` 지정은 안전 하지 않은 구성으로, 사이트 간 요청 위조를 발생 시킬 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-185">Specifying `AllowAnyOrigin` and `AllowCredentials` is an insecure configuration and can result in cross-site request forgery.</span></span> <span data-ttu-id="ca04b-186">보안 응용 프로그램의 경우 클라이언트에서 서버 리소스에 액세스할 수 있는 권한을 부여 해야 하는 경우 정확한 원본 목록을 지정 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-186">For a secure app, specify an exact list of origins if the client must authorize itself to access server resources.</span></span>
 
 ::: moniker-end
 
-<span data-ttu-id="37486-187">`AllowAnyOrigin`는 실행 전 요청 및 `Access-Control-Allow-Origin` 헤더에 영향을 줍니다.</span><span class="sxs-lookup"><span data-stu-id="37486-187">`AllowAnyOrigin` affects preflight requests and the `Access-Control-Allow-Origin` header.</span></span> <span data-ttu-id="37486-188">자세한 내용은 실행 [전 요청](#preflight-requests) 섹션을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="37486-188">For more information, see the [Preflight requests](#preflight-requests) section.</span></span>
+<span data-ttu-id="ca04b-187">`AllowAnyOrigin`는 실행 전 요청 및 `Access-Control-Allow-Origin` 헤더에 영향을 줍니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-187">`AllowAnyOrigin` affects preflight requests and the `Access-Control-Allow-Origin` header.</span></span> <span data-ttu-id="ca04b-188">자세한 내용은 실행 [전 요청](#preflight-requests) 섹션을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ca04b-188">For more information, see the [Preflight requests](#preflight-requests) section.</span></span>
 
 ::: moniker range=">= aspnetcore-2.0"
 
-<span data-ttu-id="37486-189"><xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.SetIsOriginAllowedToAllowWildcardSubdomains*> &ndash;는 원본이 허용 되는지 평가할 때 구성 된 와일드 카드 도메인과 일치 하는 원본을 허용 하는 함수로 정책의 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy.IsOriginAllowed*> 속성을 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-189"><xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.SetIsOriginAllowedToAllowWildcardSubdomains*> &ndash; Sets the <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy.IsOriginAllowed*> property of the policy to be a function that allows origins to match a configured wildcard domain when evaluating if the origin is allowed.</span></span>
+<span data-ttu-id="ca04b-189"><xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.SetIsOriginAllowedToAllowWildcardSubdomains*> &ndash;는 원본이 허용 되는지 평가할 때 구성 된 와일드 카드 도메인과 일치 하는 원본을 허용 하는 함수로 정책의 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy.IsOriginAllowed*> 속성을 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-189"><xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.SetIsOriginAllowedToAllowWildcardSubdomains*> &ndash; Sets the <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy.IsOriginAllowed*> property of the policy to be a function that allows origins to match a configured wildcard domain when evaluating if the origin is allowed.</span></span>
 
 [!code-csharp[](cors/sample/CorsExample4/Startup.cs?range=100-105&highlight=4-5)]
 
 ::: moniker-end
 
-### <a name="set-the-allowed-http-methods"></a><span data-ttu-id="37486-190">허용되는 HTTP 메서드 설정하기</span><span class="sxs-lookup"><span data-stu-id="37486-190">Set the allowed HTTP methods</span></span>
+### <a name="set-the-allowed-http-methods"></a><span data-ttu-id="ca04b-190">허용되는 HTTP 메서드 설정하기</span><span class="sxs-lookup"><span data-stu-id="ca04b-190">Set the allowed HTTP methods</span></span>
 
-<span data-ttu-id="37486-191"><xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyMethod*>:</span><span class="sxs-lookup"><span data-stu-id="37486-191"><xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyMethod*>:</span></span>
+<span data-ttu-id="ca04b-191"><xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyMethod*>:</span><span class="sxs-lookup"><span data-stu-id="ca04b-191"><xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyMethod*>:</span></span>
 
-* <span data-ttu-id="37486-192">모든 HTTP 메서드를 허용 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-192">Allows any HTTP method:</span></span>
-* <span data-ttu-id="37486-193">실행 전 요청 및 `Access-Control-Allow-Methods` 헤더에 영향을 줍니다.</span><span class="sxs-lookup"><span data-stu-id="37486-193">Affects preflight requests and the `Access-Control-Allow-Methods` header.</span></span> <span data-ttu-id="37486-194">자세한 내용은 실행 [전 요청](#preflight-requests) 섹션을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="37486-194">For more information, see the [Preflight requests](#preflight-requests) section.</span></span>
+* <span data-ttu-id="ca04b-192">모든 HTTP 메서드를 허용 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-192">Allows any HTTP method:</span></span>
+* <span data-ttu-id="ca04b-193">실행 전 요청 및 `Access-Control-Allow-Methods` 헤더에 영향을 줍니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-193">Affects preflight requests and the `Access-Control-Allow-Methods` header.</span></span> <span data-ttu-id="ca04b-194">자세한 내용은 실행 [전 요청](#preflight-requests) 섹션을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ca04b-194">For more information, see the [Preflight requests](#preflight-requests) section.</span></span>
 
-### <a name="set-the-allowed-request-headers"></a><span data-ttu-id="37486-195">허용되는 요청 헤더 설정하기</span><span class="sxs-lookup"><span data-stu-id="37486-195">Set the allowed request headers</span></span>
+### <a name="set-the-allowed-request-headers"></a><span data-ttu-id="ca04b-195">허용되는 요청 헤더 설정하기</span><span class="sxs-lookup"><span data-stu-id="ca04b-195">Set the allowed request headers</span></span>
 
-<span data-ttu-id="37486-196">*작성자 요청 헤더*라는 CORS 요청에서 특정 헤더를 전송 하도록 허용 하려면 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>를 호출 하 고 허용 되는 헤더를 지정 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-196">To allow specific headers to be sent in a CORS request, called *author request headers*, call <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> and specify the allowed headers:</span></span>
+<span data-ttu-id="ca04b-196">*작성자 요청 헤더*라는 CORS 요청에서 특정 헤더를 전송 하도록 허용 하려면 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>를 호출 하 고 허용 되는 헤더를 지정 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-196">To allow specific headers to be sent in a CORS request, called *author request headers*, call <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> and specify the allowed headers:</span></span>
 
 [!code-csharp[](cors/sample/CorsExample4/Startup.cs?range=55-60&highlight=5)]
 
-<span data-ttu-id="37486-197">모든 작성자 요청 헤더를 허용 하려면 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyHeader*>를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-197">To allow all author request headers, call <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyHeader*>:</span></span>
+<span data-ttu-id="ca04b-197">모든 작성자 요청 헤더를 허용 하려면 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyHeader*>를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-197">To allow all author request headers, call <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyHeader*>:</span></span>
 
 [!code-csharp[](cors/sample/CorsExample4/Startup.cs?range=64-69&highlight=5)]
 
-<span data-ttu-id="37486-198">이 설정은 실행 전 요청 및 `Access-Control-Request-Headers` 헤더에 영향을 줍니다.</span><span class="sxs-lookup"><span data-stu-id="37486-198">This setting affects preflight requests and the `Access-Control-Request-Headers` header.</span></span> <span data-ttu-id="37486-199">자세한 내용은 실행 [전 요청](#preflight-requests) 섹션을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="37486-199">For more information, see the [Preflight requests](#preflight-requests) section.</span></span>
+<span data-ttu-id="ca04b-198">이 설정은 실행 전 요청 및 `Access-Control-Request-Headers` 헤더에 영향을 줍니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-198">This setting affects preflight requests and the `Access-Control-Request-Headers` header.</span></span> <span data-ttu-id="ca04b-199">자세한 내용은 실행 [전 요청](#preflight-requests) 섹션을 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ca04b-199">For more information, see the [Preflight requests](#preflight-requests) section.</span></span>
 
 ::: moniker range=">= aspnetcore-2.2"
 
-<span data-ttu-id="37486-200">`WithHeaders`로 지정 된 특정 헤더와 일치 하는 CORS 미들웨어 정책은 `Access-Control-Request-Headers` 전송 된 헤더가 `WithHeaders`에 명시 된 헤더와 정확히 일치 하는 경우에만 가능 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-200">A CORS Middleware policy match to specific headers specified by `WithHeaders` is only possible when the headers sent in `Access-Control-Request-Headers` exactly match the headers stated in `WithHeaders`.</span></span>
+<span data-ttu-id="ca04b-200">`WithHeaders`로 지정 된 특정 헤더와 일치 하는 CORS 미들웨어 정책은 `Access-Control-Request-Headers` 전송 된 헤더가 `WithHeaders`에 명시 된 헤더와 정확히 일치 하는 경우에만 가능 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-200">A CORS Middleware policy match to specific headers specified by `WithHeaders` is only possible when the headers sent in `Access-Control-Request-Headers` exactly match the headers stated in `WithHeaders`.</span></span>
 
-<span data-ttu-id="37486-201">예를 들어 다음과 같이 구성 된 앱을 살펴보겠습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-201">For instance, consider an app configured as follows:</span></span>
+<span data-ttu-id="ca04b-201">예를 들어 다음과 같이 구성 된 앱을 살펴보겠습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-201">For instance, consider an app configured as follows:</span></span>
 
 ```csharp
 app.UseCors(policy => policy.WithHeaders(HeaderNames.CacheControl));
 ```
 
-<span data-ttu-id="37486-202">CORS 미들웨어는 `Content-Language` ([Headernames](xref:Microsoft.Net.Http.Headers.HeaderNames.ContentLanguage))가 `WithHeaders`에 나열 되지 않으므로 다음 요청 헤더를 사용 하 여 실행 전 요청을 거부 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-202">CORS Middleware declines a preflight request with the following request header because `Content-Language` ([HeaderNames.ContentLanguage](xref:Microsoft.Net.Http.Headers.HeaderNames.ContentLanguage)) isn't listed in `WithHeaders`:</span></span>
+<span data-ttu-id="ca04b-202">CORS 미들웨어는 `Content-Language` ([Headernames](xref:Microsoft.Net.Http.Headers.HeaderNames.ContentLanguage))가 `WithHeaders`에 나열 되지 않으므로 다음 요청 헤더를 사용 하 여 실행 전 요청을 거부 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-202">CORS Middleware declines a preflight request with the following request header because `Content-Language` ([HeaderNames.ContentLanguage](xref:Microsoft.Net.Http.Headers.HeaderNames.ContentLanguage)) isn't listed in `WithHeaders`:</span></span>
 
 ```
 Access-Control-Request-Headers: Cache-Control, Content-Language
 ```
 
-<span data-ttu-id="37486-203">앱은 *200 OK* 응답을 반환 하지만 CORS 헤더는 다시 전송 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-203">The app returns a *200 OK* response but doesn't send the CORS headers back.</span></span> <span data-ttu-id="37486-204">따라서 브라우저에서 원본 간 요청을 시도 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-204">Therefore, the browser doesn't attempt the cross-origin request.</span></span>
+<span data-ttu-id="ca04b-203">앱은 *200 OK* 응답을 반환 하지만 CORS 헤더는 다시 전송 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-203">The app returns a *200 OK* response but doesn't send the CORS headers back.</span></span> <span data-ttu-id="ca04b-204">따라서 브라우저에서 원본 간 요청을 시도 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-204">Therefore, the browser doesn't attempt the cross-origin request.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.2"
 
-<span data-ttu-id="37486-205">CORS 미들웨어는 항상 `Access-Control-Request-Headers`에서 4 개의 헤더를 사용 하 여 CorsPolicy 헤더에 구성 된 값에 관계 없이 보낼 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-205">CORS Middleware always allows four headers in the `Access-Control-Request-Headers` to be sent regardless of the values configured in CorsPolicy.Headers.</span></span> <span data-ttu-id="37486-206">이 헤더 목록에는 다음이 포함 됩니다.</span><span class="sxs-lookup"><span data-stu-id="37486-206">This list of headers includes:</span></span>
+<span data-ttu-id="ca04b-205">CORS 미들웨어는 항상 `Access-Control-Request-Headers`에서 4 개의 헤더를 사용 하 여 CorsPolicy 헤더에 구성 된 값에 관계 없이 보낼 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-205">CORS Middleware always allows four headers in the `Access-Control-Request-Headers` to be sent regardless of the values configured in CorsPolicy.Headers.</span></span> <span data-ttu-id="ca04b-206">이 헤더 목록에는 다음이 포함 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-206">This list of headers includes:</span></span>
 
 * `Accept`
 * `Accept-Language`
 * `Content-Language`
 * `Origin`
 
-<span data-ttu-id="37486-207">예를 들어 다음과 같이 구성 된 앱을 살펴보겠습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-207">For instance, consider an app configured as follows:</span></span>
+<span data-ttu-id="ca04b-207">예를 들어 다음과 같이 구성 된 앱을 살펴보겠습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-207">For instance, consider an app configured as follows:</span></span>
 
 ```csharp
 app.UseCors(policy => policy.WithHeaders(HeaderNames.CacheControl));
 ```
 
-<span data-ttu-id="37486-208">`Content-Language`는 항상 허용 목록 이므로 CORS 미들웨어는 다음 요청 헤더를 사용 하 여 실행 전 요청에 응답 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-208">CORS Middleware responds successfully to a preflight request with the following request header because `Content-Language` is always whitelisted:</span></span>
+<span data-ttu-id="ca04b-208">`Content-Language`는 항상 허용 목록 이므로 CORS 미들웨어는 다음 요청 헤더를 사용 하 여 실행 전 요청에 응답 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-208">CORS Middleware responds successfully to a preflight request with the following request header because `Content-Language` is always whitelisted:</span></span>
 
 ```
 Access-Control-Request-Headers: Cache-Control, Content-Language
@@ -287,11 +287,11 @@ Access-Control-Request-Headers: Cache-Control, Content-Language
 
 ::: moniker-end
 
-### <a name="set-the-exposed-response-headers"></a><span data-ttu-id="37486-209">노출되는 응답 헤더 설정하기</span><span class="sxs-lookup"><span data-stu-id="37486-209">Set the exposed response headers</span></span>
+### <a name="set-the-exposed-response-headers"></a><span data-ttu-id="ca04b-209">노출되는 응답 헤더 설정하기</span><span class="sxs-lookup"><span data-stu-id="ca04b-209">Set the exposed response headers</span></span>
 
-<span data-ttu-id="37486-210">기본적으로 브라우저는 모든 응답 헤더를 앱에 노출 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-210">By default, the browser doesn't expose all of the response headers to the app.</span></span> <span data-ttu-id="37486-211">자세한 내용은 [W3C 원본 간 리소스 공유 (용어): 단순 응답 헤더](https://www.w3.org/TR/cors/#simple-response-header)를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="37486-211">For more information, see [W3C Cross-Origin Resource Sharing (Terminology): Simple Response Header](https://www.w3.org/TR/cors/#simple-response-header).</span></span>
+<span data-ttu-id="ca04b-210">기본적으로 브라우저는 모든 응답 헤더를 앱에 노출 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-210">By default, the browser doesn't expose all of the response headers to the app.</span></span> <span data-ttu-id="ca04b-211">자세한 내용은 [W3C 원본 간 리소스 공유 (용어): 단순 응답 헤더](https://www.w3.org/TR/cors/#simple-response-header)를 참조 하세요.</span><span class="sxs-lookup"><span data-stu-id="ca04b-211">For more information, see [W3C Cross-Origin Resource Sharing (Terminology): Simple Response Header](https://www.w3.org/TR/cors/#simple-response-header).</span></span>
 
-<span data-ttu-id="37486-212">기본적으로 사용 가능한 응답 헤더들은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-212">The response headers that are available by default are:</span></span>
+<span data-ttu-id="ca04b-212">기본적으로 사용 가능한 응답 헤더들은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-212">The response headers that are available by default are:</span></span>
 
 * `Cache-Control`
 * `Content-Language`
@@ -300,15 +300,15 @@ Access-Control-Request-Headers: Cache-Control, Content-Language
 * `Last-Modified`
 * `Pragma`
 
-<span data-ttu-id="37486-213">CORS 사양은 이러한 헤더 *단순 응답 헤더*를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-213">The CORS specification calls these headers *simple response headers*.</span></span> <span data-ttu-id="37486-214">앱에서 다른 헤더를 사용할 수 있도록 하려면 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithExposedHeaders*>를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-214">To make other headers available to the app, call <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithExposedHeaders*>:</span></span>
+<span data-ttu-id="ca04b-213">CORS 사양은 이러한 헤더 *단순 응답 헤더*를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-213">The CORS specification calls these headers *simple response headers*.</span></span> <span data-ttu-id="ca04b-214">앱에서 다른 헤더를 사용할 수 있도록 하려면 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithExposedHeaders*>를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-214">To make other headers available to the app, call <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithExposedHeaders*>:</span></span>
 
 [!code-csharp[](cors/sample/CorsExample4/Startup.cs?range=73-78&highlight=5)]
 
-### <a name="credentials-in-cross-origin-requests"></a><span data-ttu-id="37486-215">교차 원본 요청의 자격 증명</span><span class="sxs-lookup"><span data-stu-id="37486-215">Credentials in cross-origin requests</span></span>
+### <a name="credentials-in-cross-origin-requests"></a><span data-ttu-id="ca04b-215">교차 원본 요청의 자격 증명</span><span class="sxs-lookup"><span data-stu-id="ca04b-215">Credentials in cross-origin requests</span></span>
 
-<span data-ttu-id="37486-216">CORS 요청에서 자격 증명(Credentials)은 특별한 처리를 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-216">Credentials require special handling in a CORS request.</span></span> <span data-ttu-id="37486-217">기본적으로 브라우저는 원본 간 요청과 함께 자격 증명을 보내지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-217">By default, the browser doesn't send credentials with a cross-origin request.</span></span> <span data-ttu-id="37486-218">자격 증명에는 쿠키 및 HTTP 인증 스키마가 포함 됩니다.</span><span class="sxs-lookup"><span data-stu-id="37486-218">Credentials include cookies and HTTP authentication schemes.</span></span> <span data-ttu-id="37486-219">원본 간 요청을 사용 하 여 자격 증명을 보내려면 클라이언트는 `XMLHttpRequest.withCredentials`를 `true`으로 설정 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-219">To send credentials with a cross-origin request, the client must set `XMLHttpRequest.withCredentials` to `true`.</span></span>
+<span data-ttu-id="ca04b-216">CORS 요청에서 자격 증명(Credentials)은 특별한 처리를 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-216">Credentials require special handling in a CORS request.</span></span> <span data-ttu-id="ca04b-217">기본적으로 브라우저는 원본 간 요청과 함께 자격 증명을 보내지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-217">By default, the browser doesn't send credentials with a cross-origin request.</span></span> <span data-ttu-id="ca04b-218">자격 증명에는 쿠키 및 HTTP 인증 스키마가 포함 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-218">Credentials include cookies and HTTP authentication schemes.</span></span> <span data-ttu-id="ca04b-219">원본 간 요청을 사용 하 여 자격 증명을 보내려면 클라이언트는 `XMLHttpRequest.withCredentials`를 `true`으로 설정 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-219">To send credentials with a cross-origin request, the client must set `XMLHttpRequest.withCredentials` to `true`.</span></span>
 
-<span data-ttu-id="37486-220">`XMLHttpRequest` 직접 사용:</span><span class="sxs-lookup"><span data-stu-id="37486-220">Using `XMLHttpRequest` directly:</span></span>
+<span data-ttu-id="ca04b-220">`XMLHttpRequest` 직접 사용:</span><span class="sxs-lookup"><span data-stu-id="ca04b-220">Using `XMLHttpRequest` directly:</span></span>
 
 ```javascript
 var xhr = new XMLHttpRequest();
@@ -316,7 +316,7 @@ xhr.open('get', 'https://www.example.com/api/test');
 xhr.withCredentials = true;
 ```
 
-<span data-ttu-id="37486-221">JQuery 사용:</span><span class="sxs-lookup"><span data-stu-id="37486-221">Using jQuery:</span></span>
+<span data-ttu-id="ca04b-221">JQuery 사용:</span><span class="sxs-lookup"><span data-stu-id="ca04b-221">Using jQuery:</span></span>
 
 ```javascript
 $.ajax({
@@ -328,7 +328,7 @@ $.ajax({
 });
 ```
 
-<span data-ttu-id="37486-222">[FETCH API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)사용:</span><span class="sxs-lookup"><span data-stu-id="37486-222">Using the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API):</span></span>
+<span data-ttu-id="ca04b-222">[FETCH API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)사용:</span><span class="sxs-lookup"><span data-stu-id="ca04b-222">Using the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API):</span></span>
 
 ```javascript
 fetch('https://www.example.com/api/test', {
@@ -336,33 +336,33 @@ fetch('https://www.example.com/api/test', {
 });
 ```
 
-<span data-ttu-id="37486-223">서버에서 자격 증명을 허용 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-223">The server must allow the credentials.</span></span> <span data-ttu-id="37486-224">원본 간 자격 증명을 허용 하려면 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowCredentials*>를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-224">To allow cross-origin credentials, call <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowCredentials*>:</span></span>
+<span data-ttu-id="ca04b-223">서버에서 자격 증명을 허용 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-223">The server must allow the credentials.</span></span> <span data-ttu-id="ca04b-224">원본 간 자격 증명을 허용 하려면 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowCredentials*>를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-224">To allow cross-origin credentials, call <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowCredentials*>:</span></span>
 
 [!code-csharp[](cors/sample/CorsExample4/Startup.cs?range=82-87&highlight=5)]
 
-<span data-ttu-id="37486-225">HTTP 응답에는 서버에서 원본 간 요청에 대 한 자격 증명을 허용 하도록 브라우저에 지시 하는 `Access-Control-Allow-Credentials` 헤더가 포함 되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-225">The HTTP response includes an `Access-Control-Allow-Credentials` header, which tells the browser that the server allows credentials for a cross-origin request.</span></span>
+<span data-ttu-id="ca04b-225">HTTP 응답에는 서버에서 원본 간 요청에 대 한 자격 증명을 허용 하도록 브라우저에 지시 하는 `Access-Control-Allow-Credentials` 헤더가 포함 되어 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-225">The HTTP response includes an `Access-Control-Allow-Credentials` header, which tells the browser that the server allows credentials for a cross-origin request.</span></span>
 
-<span data-ttu-id="37486-226">브라우저에서 자격 증명을 전송 하지만 응답에 유효한 `Access-Control-Allow-Credentials` 헤더가 포함 되어 있지 않으면 브라우저에서 앱에 응답을 노출 하지 않으며 크로스-원본 요청이 실패 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-226">If the browser sends credentials but the response doesn't include a valid `Access-Control-Allow-Credentials` header, the browser doesn't expose the response to the app, and the cross-origin request fails.</span></span>
+<span data-ttu-id="ca04b-226">브라우저에서 자격 증명을 전송 하지만 응답에 유효한 `Access-Control-Allow-Credentials` 헤더가 포함 되어 있지 않으면 브라우저에서 앱에 응답을 노출 하지 않으며 크로스-원본 요청이 실패 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-226">If the browser sends credentials but the response doesn't include a valid `Access-Control-Allow-Credentials` header, the browser doesn't expose the response to the app, and the cross-origin request fails.</span></span>
 
-<span data-ttu-id="37486-227">크로스-원본 자격 증명을 허용 하는 것은 보안상 위험 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-227">Allowing cross-origin credentials is a security risk.</span></span> <span data-ttu-id="37486-228">다른 도메인의 웹 사이트는 사용자의 지식 없이 사용자를 대신 하 여 사용자의 앱에 로그인 한 사용자의 자격 증명을 보낼 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-228">A website at another domain can send a signed-in user's credentials to the app on the user's behalf without the user's knowledge.</span></span> <!-- TODO Review: When using `AllowCredentials`, all CORS enabled domains must be trusted.
+<span data-ttu-id="ca04b-227">크로스-원본 자격 증명을 허용 하는 것은 보안상 위험 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-227">Allowing cross-origin credentials is a security risk.</span></span> <span data-ttu-id="ca04b-228">다른 도메인의 웹 사이트는 사용자의 지식 없이 사용자를 대신 하 여 사용자의 앱에 로그인 한 사용자의 자격 증명을 보낼 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-228">A website at another domain can send a signed-in user's credentials to the app on the user's behalf without the user's knowledge.</span></span> <!-- TODO Review: When using `AllowCredentials`, all CORS enabled domains must be trusted.
 I don't like "all CORS enabled domains must be trusted", because it implies that if you're not using  `AllowCredentials`, domains don't need to be trusted. -->
 
-<span data-ttu-id="37486-229">CORS 사양은 `Access-Control-Allow-Credentials` 헤더가 있는 경우 원본 설정 `"*"` (모든 원본)가 잘못 되었음을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="37486-229">The CORS specification also states that setting origins to `"*"` (all origins) is invalid if the `Access-Control-Allow-Credentials` header is present.</span></span>
+<span data-ttu-id="ca04b-229">CORS 사양은 `Access-Control-Allow-Credentials` 헤더가 있는 경우 원본 설정 `"*"` (모든 원본)가 잘못 되었음을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-229">The CORS specification also states that setting origins to `"*"` (all origins) is invalid if the `Access-Control-Allow-Credentials` header is present.</span></span>
 
-### <a name="preflight-requests"></a><span data-ttu-id="37486-230">실행 전 요청</span><span class="sxs-lookup"><span data-stu-id="37486-230">Preflight requests</span></span>
+### <a name="preflight-requests"></a><span data-ttu-id="ca04b-230">실행 전 요청</span><span class="sxs-lookup"><span data-stu-id="ca04b-230">Preflight requests</span></span>
 
-<span data-ttu-id="37486-231">일부 CORS 요청의 경우 브라우저는 실제 요청을 만들기 전에 추가 요청을 보냅니다.</span><span class="sxs-lookup"><span data-stu-id="37486-231">For some CORS requests, the browser sends an additional request before making the actual request.</span></span> <span data-ttu-id="37486-232">이 요청을 실행 *전 요청*이라고 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-232">This request is called a *preflight request*.</span></span> <span data-ttu-id="37486-233">다음 조건에 해당 하는 경우 브라우저에서 실행 전 요청을 건너뛸 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-233">The browser can skip the preflight request if the following conditions are true:</span></span>
+<span data-ttu-id="ca04b-231">일부 CORS 요청의 경우 브라우저는 실제 요청을 만들기 전에 추가 요청을 보냅니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-231">For some CORS requests, the browser sends an additional request before making the actual request.</span></span> <span data-ttu-id="ca04b-232">이 요청을 실행 *전 요청*이라고 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-232">This request is called a *preflight request*.</span></span> <span data-ttu-id="ca04b-233">다음 조건에 해당 하는 경우 브라우저에서 실행 전 요청을 건너뛸 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-233">The browser can skip the preflight request if the following conditions are true:</span></span>
 
-* <span data-ttu-id="37486-234">요청 메서드는 GET, HEAD 또는 POST입니다.</span><span class="sxs-lookup"><span data-stu-id="37486-234">The request method is GET, HEAD, or POST.</span></span>
-* <span data-ttu-id="37486-235">앱은 `Accept`, `Accept-Language`, `Content-Language`, `Content-Type`또는 `Last-Event-ID`이외의 요청 헤더를 설정 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-235">The app doesn't set request headers other than `Accept`, `Accept-Language`, `Content-Language`, `Content-Type`, or `Last-Event-ID`.</span></span>
-* <span data-ttu-id="37486-236">`Content-Type` 헤더 (설정 된 경우)에는 다음 값 중 하나가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-236">The `Content-Type` header, if set, has one of the following values:</span></span>
+* <span data-ttu-id="ca04b-234">요청 메서드는 GET, HEAD 또는 POST입니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-234">The request method is GET, HEAD, or POST.</span></span>
+* <span data-ttu-id="ca04b-235">앱은 `Accept`, `Accept-Language`, `Content-Language`, `Content-Type`또는 `Last-Event-ID`이외의 요청 헤더를 설정 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-235">The app doesn't set request headers other than `Accept`, `Accept-Language`, `Content-Language`, `Content-Type`, or `Last-Event-ID`.</span></span>
+* <span data-ttu-id="ca04b-236">`Content-Type` 헤더 (설정 된 경우)에는 다음 값 중 하나가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-236">The `Content-Type` header, if set, has one of the following values:</span></span>
   * `application/x-www-form-urlencoded`
   * `multipart/form-data`
   * `text/plain`
 
-<span data-ttu-id="37486-237">클라이언트 요청에 대해 설정 된 요청 헤더에 대 한 규칙은 앱이 `XMLHttpRequest` 개체에서 `setRequestHeader`를 호출 하 여 설정 하는 헤더에 적용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="37486-237">The rule on request headers set for the client request applies to headers that the app sets by calling `setRequestHeader` on the `XMLHttpRequest` object.</span></span> <span data-ttu-id="37486-238">CORS 사양은 이러한 헤더 *작성자 요청 헤더*를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-238">The CORS specification calls these headers *author request headers*.</span></span> <span data-ttu-id="37486-239">이 규칙은 브라우저에서 설정할 수 있는 헤더 (예: `User-Agent`, `Host`, `Content-Length`)에는 적용 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-239">The rule doesn't apply to headers the browser can set, such as `User-Agent`, `Host`, or `Content-Length`.</span></span>
+<span data-ttu-id="ca04b-237">클라이언트 요청에 대해 설정 된 요청 헤더에 대 한 규칙은 앱이 `XMLHttpRequest` 개체에서 `setRequestHeader`를 호출 하 여 설정 하는 헤더에 적용 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-237">The rule on request headers set for the client request applies to headers that the app sets by calling `setRequestHeader` on the `XMLHttpRequest` object.</span></span> <span data-ttu-id="ca04b-238">CORS 사양은 이러한 헤더 *작성자 요청 헤더*를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-238">The CORS specification calls these headers *author request headers*.</span></span> <span data-ttu-id="ca04b-239">이 규칙은 브라우저에서 설정할 수 있는 헤더 (예: `User-Agent`, `Host`, `Content-Length`)에는 적용 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-239">The rule doesn't apply to headers the browser can set, such as `User-Agent`, `Host`, or `Content-Length`.</span></span>
 
-<span data-ttu-id="37486-240">다음은 실행 전 요청의 예입니다.</span><span class="sxs-lookup"><span data-stu-id="37486-240">The following is an example of a preflight request:</span></span>
+<span data-ttu-id="ca04b-240">다음은 실행 전 요청의 예입니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-240">The following is an example of a preflight request:</span></span>
 
 ```
 OPTIONS https://myservice.azurewebsites.net/api/test HTTP/1.1
@@ -376,24 +376,24 @@ Host: myservice.azurewebsites.net
 Content-Length: 0
 ```
 
-<span data-ttu-id="37486-241">사전 비행 요청은 HTTP OPTIONS 메서드를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-241">The pre-flight request uses the HTTP OPTIONS method.</span></span> <span data-ttu-id="37486-242">여기에는 두 가지 특수 헤더가 포함 됩니다.</span><span class="sxs-lookup"><span data-stu-id="37486-242">It includes two special headers:</span></span>
+<span data-ttu-id="ca04b-241">사전 비행 요청은 HTTP OPTIONS 메서드를 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-241">The pre-flight request uses the HTTP OPTIONS method.</span></span> <span data-ttu-id="ca04b-242">여기에는 두 가지 특수 헤더가 포함 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-242">It includes two special headers:</span></span>
 
-* <span data-ttu-id="37486-243">`Access-Control-Request-Method`: 실제 요청에 사용 되는 HTTP 메서드입니다.</span><span class="sxs-lookup"><span data-stu-id="37486-243">`Access-Control-Request-Method`: The HTTP method that will be used for the actual request.</span></span>
-* <span data-ttu-id="37486-244">`Access-Control-Request-Headers`: 앱이 실제 요청에 대해 설정 하는 요청 헤더 목록입니다.</span><span class="sxs-lookup"><span data-stu-id="37486-244">`Access-Control-Request-Headers`: A list of request headers that the app sets on the actual request.</span></span> <span data-ttu-id="37486-245">앞에서 설명한 대로 브라우저에서 설정 하는 헤더 (예: `User-Agent`)는 여기에 포함 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-245">As stated earlier, this doesn't include headers that the browser sets, such as `User-Agent`.</span></span>
+* <span data-ttu-id="ca04b-243">`Access-Control-Request-Method`: 실제 요청에 사용 되는 HTTP 메서드입니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-243">`Access-Control-Request-Method`: The HTTP method that will be used for the actual request.</span></span>
+* <span data-ttu-id="ca04b-244">`Access-Control-Request-Headers`: 앱이 실제 요청에 대해 설정 하는 요청 헤더 목록입니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-244">`Access-Control-Request-Headers`: A list of request headers that the app sets on the actual request.</span></span> <span data-ttu-id="ca04b-245">앞에서 설명한 대로 브라우저에서 설정 하는 헤더 (예: `User-Agent`)는 여기에 포함 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-245">As stated earlier, this doesn't include headers that the browser sets, such as `User-Agent`.</span></span>
 
-<span data-ttu-id="37486-246">CORS 실행 전 요청에는 실제 요청과 함께 전송 되는 헤더를 서버에 나타내는 `Access-Control-Request-Headers` 헤더가 포함 될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-246">A CORS preflight request might include an `Access-Control-Request-Headers` header, which indicates to the server the headers that are sent with the actual request.</span></span>
+<span data-ttu-id="ca04b-246">CORS 실행 전 요청에는 실제 요청과 함께 전송 되는 헤더를 서버에 나타내는 `Access-Control-Request-Headers` 헤더가 포함 될 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-246">A CORS preflight request might include an `Access-Control-Request-Headers` header, which indicates to the server the headers that are sent with the actual request.</span></span>
 
-<span data-ttu-id="37486-247">특정 헤더를 허용 하려면 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-247">To allow specific headers, call <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>:</span></span>
+<span data-ttu-id="ca04b-247">특정 헤더를 허용 하려면 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-247">To allow specific headers, call <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>:</span></span>
 
 [!code-csharp[](cors/sample/CorsExample4/Startup.cs?range=55-60&highlight=5)]
 
-<span data-ttu-id="37486-248">모든 작성자 요청 헤더를 허용 하려면 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyHeader*>를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-248">To allow all author request headers, call <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyHeader*>:</span></span>
+<span data-ttu-id="ca04b-248">모든 작성자 요청 헤더를 허용 하려면 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyHeader*>를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-248">To allow all author request headers, call <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyHeader*>:</span></span>
 
 [!code-csharp[](cors/sample/CorsExample4/Startup.cs?range=64-69&highlight=5)]
 
-<span data-ttu-id="37486-249">브라우저는 `Access-Control-Request-Headers`설정 하는 방법에 완전히 일치 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-249">Browsers aren't entirely consistent in how they set `Access-Control-Request-Headers`.</span></span> <span data-ttu-id="37486-250">헤더를 `"*"` 이외의 값으로 설정 하거나 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy.AllowAnyHeader*>를 사용 하는 경우 `Accept`, `Content-Type`, `Origin`, 지원 하려는 모든 사용자 지정 헤더를 포함 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-250">If you set headers to anything other than `"*"` (or use <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy.AllowAnyHeader*>), you should include at least `Accept`, `Content-Type`, and `Origin`, plus any custom headers that you want to support.</span></span>
+<span data-ttu-id="ca04b-249">브라우저는 `Access-Control-Request-Headers`설정 하는 방법에 완전히 일치 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-249">Browsers aren't entirely consistent in how they set `Access-Control-Request-Headers`.</span></span> <span data-ttu-id="ca04b-250">헤더를 `"*"` 이외의 값으로 설정 하거나 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy.AllowAnyHeader*>를 사용 하는 경우 `Accept`, `Content-Type`, `Origin`, 지원 하려는 모든 사용자 지정 헤더를 포함 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-250">If you set headers to anything other than `"*"` (or use <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy.AllowAnyHeader*>), you should include at least `Accept`, `Content-Type`, and `Origin`, plus any custom headers that you want to support.</span></span>
 
-<span data-ttu-id="37486-251">다음은 실행 전 요청에 대 한 응답 예제입니다 (서버에서 요청을 허용 한다고 가정).</span><span class="sxs-lookup"><span data-stu-id="37486-251">The following is an example response to the preflight request (assuming that the server allows the request):</span></span>
+<span data-ttu-id="ca04b-251">다음은 실행 전 요청에 대 한 응답 예제입니다 (서버에서 요청을 허용 한다고 가정).</span><span class="sxs-lookup"><span data-stu-id="ca04b-251">The following is an example response to the preflight request (assuming that the server allows the request):</span></span>
 
 ```
 HTTP/1.1 200 OK
@@ -406,36 +406,36 @@ Access-Control-Allow-Methods: PUT
 Date: Wed, 20 May 2015 06:33:22 GMT
 ```
 
-<span data-ttu-id="37486-252">응답에는 허용 된 메서드를 나열 하는 `Access-Control-Allow-Methods` 헤더와 허용 되는 헤더를 나열 하는 `Access-Control-Allow-Headers` 헤더가 포함 됩니다.</span><span class="sxs-lookup"><span data-stu-id="37486-252">The response includes an `Access-Control-Allow-Methods` header that lists the allowed methods and optionally an `Access-Control-Allow-Headers` header, which lists the allowed headers.</span></span> <span data-ttu-id="37486-253">실행 전 요청이 성공 하면 브라우저에서 실제 요청을 보냅니다.</span><span class="sxs-lookup"><span data-stu-id="37486-253">If the preflight request succeeds, the browser sends the actual request.</span></span>
+<span data-ttu-id="ca04b-252">응답에는 허용 된 메서드를 나열 하는 `Access-Control-Allow-Methods` 헤더와 허용 되는 헤더를 나열 하는 `Access-Control-Allow-Headers` 헤더가 포함 됩니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-252">The response includes an `Access-Control-Allow-Methods` header that lists the allowed methods and optionally an `Access-Control-Allow-Headers` header, which lists the allowed headers.</span></span> <span data-ttu-id="ca04b-253">실행 전 요청이 성공 하면 브라우저에서 실제 요청을 보냅니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-253">If the preflight request succeeds, the browser sends the actual request.</span></span>
 
-<span data-ttu-id="37486-254">실행 전 요청이 거부 되 면 앱은 *200 OK* 응답을 반환 하지만 CORS 헤더는 다시 전송 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-254">If the preflight request is denied, the app returns a *200 OK* response but doesn't send the CORS headers back.</span></span> <span data-ttu-id="37486-255">따라서 브라우저에서 원본 간 요청을 시도 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-255">Therefore, the browser doesn't attempt the cross-origin request.</span></span>
+<span data-ttu-id="ca04b-254">실행 전 요청이 거부 되 면 앱은 *200 OK* 응답을 반환 하지만 CORS 헤더는 다시 전송 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-254">If the preflight request is denied, the app returns a *200 OK* response but doesn't send the CORS headers back.</span></span> <span data-ttu-id="ca04b-255">따라서 브라우저에서 원본 간 요청을 시도 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-255">Therefore, the browser doesn't attempt the cross-origin request.</span></span>
 
-### <a name="set-the-preflight-expiration-time"></a><span data-ttu-id="37486-256">예비 요청 만료 시간 설정하기</span><span class="sxs-lookup"><span data-stu-id="37486-256">Set the preflight expiration time</span></span>
+### <a name="set-the-preflight-expiration-time"></a><span data-ttu-id="ca04b-256">예비 요청 만료 시간 설정하기</span><span class="sxs-lookup"><span data-stu-id="ca04b-256">Set the preflight expiration time</span></span>
 
-<span data-ttu-id="37486-257">`Access-Control-Max-Age` 헤더는 실행 전 요청에 대 한 응답을 캐시할 수 있는 기간을 지정 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-257">The `Access-Control-Max-Age` header specifies how long the response to the preflight request can be cached.</span></span> <span data-ttu-id="37486-258">이 헤더를 설정 하려면 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.SetPreflightMaxAge*>를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-258">To set this header, call <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.SetPreflightMaxAge*>:</span></span>
+<span data-ttu-id="ca04b-257">`Access-Control-Max-Age` 헤더는 실행 전 요청에 대 한 응답을 캐시할 수 있는 기간을 지정 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-257">The `Access-Control-Max-Age` header specifies how long the response to the preflight request can be cached.</span></span> <span data-ttu-id="ca04b-258">이 헤더를 설정 하려면 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.SetPreflightMaxAge*>를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-258">To set this header, call <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.SetPreflightMaxAge*>:</span></span>
 
 [!code-csharp[](cors/sample/CorsExample4/Startup.cs?range=91-96&highlight=5)]
 
 <a name="how-cors"></a>
 
-## <a name="how-cors-works"></a><span data-ttu-id="37486-259">CORS의 동작 방식</span><span class="sxs-lookup"><span data-stu-id="37486-259">How CORS works</span></span>
+## <a name="how-cors-works"></a><span data-ttu-id="ca04b-259">CORS의 동작 방식</span><span class="sxs-lookup"><span data-stu-id="ca04b-259">How CORS works</span></span>
 
-<span data-ttu-id="37486-260">이 섹션에서는 HTTP 메시지 수준에서 [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) 요청에 발생 하는 작업에 대해 설명 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-260">This section describes what happens in a [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) request at the level of the HTTP messages.</span></span>
+<span data-ttu-id="ca04b-260">이 섹션에서는 HTTP 메시지 수준에서 [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) 요청에 발생 하는 작업에 대해 설명 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-260">This section describes what happens in a [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) request at the level of the HTTP messages.</span></span>
 
-* <span data-ttu-id="37486-261">CORS는 보안 기능이 **아닙니다** .</span><span class="sxs-lookup"><span data-stu-id="37486-261">CORS is **not** a security feature.</span></span> <span data-ttu-id="37486-262">CORS는 서버에서 동일한 원본 정책을 완화할 수 있게 해 주는 W3C 표준입니다.</span><span class="sxs-lookup"><span data-stu-id="37486-262">CORS is a W3C standard that allows a server to relax the same-origin policy.</span></span>
-  * <span data-ttu-id="37486-263">예를 들어 악의적인 행위자는 사이트에 대 한 [XSS (교차 사이트 스크립팅) 방지](xref:security/cross-site-scripting) 를 사용 하 여 정보를 도용 하기 위해 CORS 지원 사이트에 대 한 교차 사이트 요청을 실행할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-263">For example, a malicious actor could use [Prevent Cross-Site Scripting (XSS)](xref:security/cross-site-scripting) against your site and execute a cross-site request to their CORS enabled site to steal information.</span></span>
-* <span data-ttu-id="37486-264">API는 CORS를 허용 하 여 안전 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-264">Your API is not safer by allowing CORS.</span></span>
-  * <span data-ttu-id="37486-265">CORS를 적용 하는 것은 클라이언트 (브라우저)에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-265">It's up to the client (browser) to enforce CORS.</span></span> <span data-ttu-id="37486-266">서버는 요청을 실행 하 고 응답을 반환 합니다. 클라이언트는 오류를 반환 하 고 응답을 차단 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-266">The server executes the request and returns the response, it's the client that returns an error and blocks the response.</span></span> <span data-ttu-id="37486-267">예를 들어 다음 도구 중 하나는 서버 응답을 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-267">For example, any of the following tools will display the server response:</span></span>
-    * [<span data-ttu-id="37486-268">Fiddler</span><span class="sxs-lookup"><span data-stu-id="37486-268">Fiddler</span></span>](https://www.telerik.com/fiddler)
-    * [<span data-ttu-id="37486-269">Postman</span><span class="sxs-lookup"><span data-stu-id="37486-269">Postman</span></span>](https://www.getpostman.com/)
-    * [<span data-ttu-id="37486-270">.NET HttpClient</span><span class="sxs-lookup"><span data-stu-id="37486-270">.NET HttpClient</span></span>](/dotnet/csharp/tutorials/console-webapiclient)
-    * <span data-ttu-id="37486-271">주소 표시줄에 URL을 입력 하는 웹 브라우저입니다.</span><span class="sxs-lookup"><span data-stu-id="37486-271">A web browser by entering the URL in the address bar.</span></span>
-* <span data-ttu-id="37486-272">서버에서 브라우저가 원본 간 [Xhr](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) 또는 [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) 요청을 실행 하도록 허용 하는 방법입니다. 그렇지 않으면이를 사용할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-272">It's a way for a server to allow browsers to execute a cross-origin [XHR](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) or [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request that otherwise would be forbidden.</span></span>
-  * <span data-ttu-id="37486-273">브라우저 (CORS 불포함)는 크로스-원본 요청을 수행할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-273">Browsers (without CORS) can't do cross-origin requests.</span></span> <span data-ttu-id="37486-274">CORS 이전에는 [JSONP](https://www.w3schools.com/js/js_json_jsonp.asp) 을 사용 하 여이 제한을 회피 했습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-274">Before CORS, [JSONP](https://www.w3schools.com/js/js_json_jsonp.asp) was used to circumvent this restriction.</span></span> <span data-ttu-id="37486-275">JSONP는 XHR을 사용 하지 않으며 `<script>` 태그를 사용 하 여 응답을 수신 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-275">JSONP doesn't use XHR, it uses the `<script>` tag to receive the response.</span></span> <span data-ttu-id="37486-276">스크립트를 크로스-원본으로 로드할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-276">Scripts are allowed to be loaded cross-origin.</span></span>
+* <span data-ttu-id="ca04b-261">CORS는 보안 기능이 **아닙니다** .</span><span class="sxs-lookup"><span data-stu-id="ca04b-261">CORS is **not** a security feature.</span></span> <span data-ttu-id="ca04b-262">CORS는 서버에서 동일한 원본 정책을 완화할 수 있게 해 주는 W3C 표준입니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-262">CORS is a W3C standard that allows a server to relax the same-origin policy.</span></span>
+  * <span data-ttu-id="ca04b-263">예를 들어 악의적인 행위자는 사이트에 대 한 [XSS (교차 사이트 스크립팅) 방지](xref:security/cross-site-scripting) 를 사용 하 여 정보를 도용 하기 위해 CORS 지원 사이트에 대 한 교차 사이트 요청을 실행할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-263">For example, a malicious actor could use [Prevent Cross-Site Scripting (XSS)](xref:security/cross-site-scripting) against your site and execute a cross-site request to their CORS enabled site to steal information.</span></span>
+* <span data-ttu-id="ca04b-264">API는 CORS를 허용 하 여 안전 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-264">Your API is not safer by allowing CORS.</span></span>
+  * <span data-ttu-id="ca04b-265">CORS를 적용 하는 것은 클라이언트 (브라우저)에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-265">It's up to the client (browser) to enforce CORS.</span></span> <span data-ttu-id="ca04b-266">서버는 요청을 실행 하 고 응답을 반환 합니다. 클라이언트는 오류를 반환 하 고 응답을 차단 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-266">The server executes the request and returns the response, it's the client that returns an error and blocks the response.</span></span> <span data-ttu-id="ca04b-267">예를 들어 다음 도구 중 하나는 서버 응답을 표시 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-267">For example, any of the following tools will display the server response:</span></span>
+    * [<span data-ttu-id="ca04b-268">Fiddler</span><span class="sxs-lookup"><span data-stu-id="ca04b-268">Fiddler</span></span>](https://www.telerik.com/fiddler)
+    * [<span data-ttu-id="ca04b-269">Postman</span><span class="sxs-lookup"><span data-stu-id="ca04b-269">Postman</span></span>](https://www.getpostman.com/)
+    * [<span data-ttu-id="ca04b-270">.NET HttpClient</span><span class="sxs-lookup"><span data-stu-id="ca04b-270">.NET HttpClient</span></span>](/dotnet/csharp/tutorials/console-webapiclient)
+    * <span data-ttu-id="ca04b-271">주소 표시줄에 URL을 입력 하는 웹 브라우저입니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-271">A web browser by entering the URL in the address bar.</span></span>
+* <span data-ttu-id="ca04b-272">서버에서 브라우저가 원본 간 [Xhr](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) 또는 [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) 요청을 실행 하도록 허용 하는 방법입니다. 그렇지 않으면이를 사용할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-272">It's a way for a server to allow browsers to execute a cross-origin [XHR](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) or [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request that otherwise would be forbidden.</span></span>
+  * <span data-ttu-id="ca04b-273">브라우저 (CORS 불포함)는 크로스-원본 요청을 수행할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-273">Browsers (without CORS) can't do cross-origin requests.</span></span> <span data-ttu-id="ca04b-274">CORS 이전에는 [JSONP](https://www.w3schools.com/js/js_json_jsonp.asp) 을 사용 하 여이 제한을 회피 했습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-274">Before CORS, [JSONP](https://www.w3schools.com/js/js_json_jsonp.asp) was used to circumvent this restriction.</span></span> <span data-ttu-id="ca04b-275">JSONP는 XHR을 사용 하지 않으며 `<script>` 태그를 사용 하 여 응답을 수신 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-275">JSONP doesn't use XHR, it uses the `<script>` tag to receive the response.</span></span> <span data-ttu-id="ca04b-276">스크립트를 크로스-원본으로 로드할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-276">Scripts are allowed to be loaded cross-origin.</span></span>
 
-<span data-ttu-id="37486-277">[CORS 사양](https://www.w3.org/TR/cors/) 에는 크로스-원본 요청을 가능 하 게 하는 몇 가지 새로운 HTTP 헤더가 도입 되었습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-277">The [CORS specification](https://www.w3.org/TR/cors/) introduced several new HTTP headers that enable cross-origin requests.</span></span> <span data-ttu-id="37486-278">브라우저에서 CORS를 지 원하는 경우 원본 간 요청에 대해 이러한 헤더를 자동으로 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-278">If a browser supports CORS, it sets these headers automatically for cross-origin requests.</span></span> <span data-ttu-id="37486-279">CORS를 사용 하도록 설정 하는 데 사용자 지정 JavaScript 코드가 필요 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-279">Custom JavaScript code isn't required to enable CORS.</span></span>
+<span data-ttu-id="ca04b-277">[CORS 사양](https://www.w3.org/TR/cors/) 에는 크로스-원본 요청을 가능 하 게 하는 몇 가지 새로운 HTTP 헤더가 도입 되었습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-277">The [CORS specification](https://www.w3.org/TR/cors/) introduced several new HTTP headers that enable cross-origin requests.</span></span> <span data-ttu-id="ca04b-278">브라우저에서 CORS를 지 원하는 경우 원본 간 요청에 대해 이러한 헤더를 자동으로 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-278">If a browser supports CORS, it sets these headers automatically for cross-origin requests.</span></span> <span data-ttu-id="ca04b-279">CORS를 사용 하도록 설정 하는 데 사용자 지정 JavaScript 코드가 필요 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-279">Custom JavaScript code isn't required to enable CORS.</span></span>
 
-<span data-ttu-id="37486-280">다음은 원본 간 요청의 예입니다.</span><span class="sxs-lookup"><span data-stu-id="37486-280">The following is an example of a cross-origin request.</span></span> <span data-ttu-id="37486-281">`Origin` 헤더는 요청을 수행 하는 사이트의 도메인을 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-281">The `Origin` header provides the domain of the site that's making the request.</span></span> <span data-ttu-id="37486-282">`Origin` 헤더는 필수 이며 호스트와 달라 야 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-282">The `Origin` header is required and must be different from the host.</span></span>
+<span data-ttu-id="ca04b-280">다음은 원본 간 요청의 예입니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-280">The following is an example of a cross-origin request.</span></span> <span data-ttu-id="ca04b-281">`Origin` 헤더는 요청을 수행 하는 사이트의 도메인을 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-281">The `Origin` header provides the domain of the site that's making the request.</span></span> <span data-ttu-id="ca04b-282">`Origin` 헤더는 필수 이며 호스트와 달라 야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-282">The `Origin` header is required and must be different from the host.</span></span>
 
 ```
 GET https://myservice.azurewebsites.net/api/test HTTP/1.1
@@ -448,7 +448,7 @@ User-Agent: Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6
 Host: myservice.azurewebsites.net
 ```
 
-<span data-ttu-id="37486-283">서버에서 요청을 허용 하는 경우 응답에 `Access-Control-Allow-Origin` 헤더를 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-283">If the server allows the request, it sets the `Access-Control-Allow-Origin` header in the response.</span></span> <span data-ttu-id="37486-284">이 헤더의 값은 요청의 `Origin` 헤더와 일치 하거나 `"*"`와일드 카드 값입니다. 즉, 모든 원본을 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-284">The value of this header either matches the `Origin` header from the request or is the wildcard value `"*"`, meaning that any origin is allowed:</span></span>
+<span data-ttu-id="ca04b-283">서버에서 요청을 허용 하는 경우 응답에 `Access-Control-Allow-Origin` 헤더를 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-283">If the server allows the request, it sets the `Access-Control-Allow-Origin` header in the response.</span></span> <span data-ttu-id="ca04b-284">이 헤더의 값은 요청의 `Origin` 헤더와 일치 하거나 `"*"`와일드 카드 값입니다. 즉, 모든 원본을 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-284">The value of this header either matches the `Origin` header from the request or is the wildcard value `"*"`, meaning that any origin is allowed:</span></span>
 
 ```
 HTTP/1.1 200 OK
@@ -462,46 +462,51 @@ Content-Length: 12
 Test message
 ```
 
-<span data-ttu-id="37486-285">응답에 `Access-Control-Allow-Origin` 헤더가 포함 되어 있지 않으면 크로스-원본 요청이 실패 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-285">If the response doesn't include the `Access-Control-Allow-Origin` header, the cross-origin request fails.</span></span> <span data-ttu-id="37486-286">특히 브라우저에서 요청을 허용 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-286">Specifically, the browser disallows the request.</span></span> <span data-ttu-id="37486-287">서버에서 성공적인 응답을 반환 하는 경우에도 브라우저에서 응답을 클라이언트 앱에 사용할 수 있도록 설정 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-287">Even if the server returns a successful response, the browser doesn't make the response available to the client app.</span></span>
+<span data-ttu-id="ca04b-285">응답에 `Access-Control-Allow-Origin` 헤더가 포함 되어 있지 않으면 크로스-원본 요청이 실패 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-285">If the response doesn't include the `Access-Control-Allow-Origin` header, the cross-origin request fails.</span></span> <span data-ttu-id="ca04b-286">특히 브라우저에서 요청을 허용 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-286">Specifically, the browser disallows the request.</span></span> <span data-ttu-id="ca04b-287">서버에서 성공적인 응답을 반환 하는 경우에도 브라우저에서 응답을 클라이언트 앱에 사용할 수 있도록 설정 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-287">Even if the server returns a successful response, the browser doesn't make the response available to the client app.</span></span>
 
 <a name="test"></a>
 
-## <a name="test-cors"></a><span data-ttu-id="37486-288">CORS 테스트</span><span class="sxs-lookup"><span data-stu-id="37486-288">Test CORS</span></span>
+## <a name="test-cors"></a><span data-ttu-id="ca04b-288">CORS 테스트</span><span class="sxs-lookup"><span data-stu-id="ca04b-288">Test CORS</span></span>
 
-<span data-ttu-id="37486-289">CORS를 테스트 하려면:</span><span class="sxs-lookup"><span data-stu-id="37486-289">To test CORS:</span></span>
+<span data-ttu-id="ca04b-289">CORS를 테스트 하려면:</span><span class="sxs-lookup"><span data-stu-id="ca04b-289">To test CORS:</span></span>
 
-1. <span data-ttu-id="37486-290">[API 프로젝트를 만듭니다](xref:tutorials/first-web-api).</span><span class="sxs-lookup"><span data-stu-id="37486-290">[Create an API project](xref:tutorials/first-web-api).</span></span> <span data-ttu-id="37486-291">또는 [샘플을 다운로드할](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample/Cors)수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-291">Alternatively, you can [download the sample](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample/Cors).</span></span>
-1. <span data-ttu-id="37486-292">이 문서의 방법 중 하나를 사용 하 여 CORS를 사용 하도록 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-292">Enable CORS using one of the approaches in this document.</span></span> <span data-ttu-id="37486-293">예를 들면 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-293">For example:</span></span>
+1. <span data-ttu-id="ca04b-290">[API 프로젝트를 만듭니다](xref:tutorials/first-web-api).</span><span class="sxs-lookup"><span data-stu-id="ca04b-290">[Create an API project](xref:tutorials/first-web-api).</span></span> <span data-ttu-id="ca04b-291">또는 [샘플을 다운로드할](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample/Cors)수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-291">Alternatively, you can [download the sample](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample/Cors).</span></span>
+1. <span data-ttu-id="ca04b-292">이 문서의 방법 중 하나를 사용 하 여 CORS를 사용 하도록 설정 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-292">Enable CORS using one of the approaches in this document.</span></span> <span data-ttu-id="ca04b-293">예를 들면 다음과 같습니다.:</span><span class="sxs-lookup"><span data-stu-id="ca04b-293">For example:</span></span>
 
   [!code-csharp[](cors/sample/Cors/WebAPI/StartupTest.cs?name=snippet2&highlight=13-18)]
 
   > [!WARNING]
-  > <span data-ttu-id="37486-294">`WithOrigins("https://localhost:<port>");`은 [다운로드 샘플 코드](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/security/cors/sample/Cors)와 유사한 샘플 앱을 테스트 하는 데만 사용 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-294">`WithOrigins("https://localhost:<port>");` should only be used for testing a sample app similar to the [download sample code](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/security/cors/sample/Cors).</span></span>
+  > <span data-ttu-id="ca04b-294">`WithOrigins("https://localhost:<port>");`은 [다운로드 샘플 코드](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/security/cors/sample/Cors)와 유사한 샘플 앱을 테스트 하는 데만 사용 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-294">`WithOrigins("https://localhost:<port>");` should only be used for testing a sample app similar to the [download sample code](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/security/cors/sample/Cors).</span></span>
 
-1. <span data-ttu-id="37486-295">웹 앱 프로젝트 (Razor Pages 또는 MVC)를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="37486-295">Create a web app project (Razor Pages or MVC).</span></span> <span data-ttu-id="37486-296">이 샘플에서는 Razor Pages을 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-296">The sample uses Razor Pages.</span></span> <span data-ttu-id="37486-297">API 프로젝트와 동일한 솔루션에서 웹 앱을 만들 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-297">You can create the web app in the same solution as the API project.</span></span>
-1. <span data-ttu-id="37486-298">다음 강조 표시 된 코드를 *Index. cshtml* 파일에 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-298">Add the following highlighted code to the *Index.cshtml* file:</span></span>
+1. <span data-ttu-id="ca04b-295">웹 앱 프로젝트 (Razor Pages 또는 MVC)를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-295">Create a web app project (Razor Pages or MVC).</span></span> <span data-ttu-id="ca04b-296">이 샘플에서는 Razor Pages을 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-296">The sample uses Razor Pages.</span></span> <span data-ttu-id="ca04b-297">API 프로젝트와 동일한 솔루션에서 웹 앱을 만들 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-297">You can create the web app in the same solution as the API project.</span></span>
+1. <span data-ttu-id="ca04b-298">다음 강조 표시 된 코드를 *Index. cshtml* 파일에 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-298">Add the following highlighted code to the *Index.cshtml* file:</span></span>
 
   [!code-csharp[](cors/sample/Cors/ClientApp/Pages/Index2.cshtml?highlight=7-99)]
 
-1. <span data-ttu-id="37486-299">위의 코드에서 `url: 'https://<web app>.azurewebsites.net/api/values/1',`을 배포 된 앱의 URL로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="37486-299">In the preceding code, replace `url: 'https://<web app>.azurewebsites.net/api/values/1',` with the URL to the deployed app.</span></span>
-1. <span data-ttu-id="37486-300">API 프로젝트를 배포 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-300">Deploy the API project.</span></span> <span data-ttu-id="37486-301">예를 들어 [Azure에 배포할 수](xref:host-and-deploy/azure-apps/index)있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-301">For example, [deploy to Azure](xref:host-and-deploy/azure-apps/index).</span></span>
-1. <span data-ttu-id="37486-302">바탕 화면에서 Razor Pages 또는 MVC 앱을 실행 하 고 **테스트** 단추를 클릭 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-302">Run the Razor Pages or MVC app from the desktop and click on the **Test** button.</span></span> <span data-ttu-id="37486-303">F12 도구를 사용 하 여 오류 메시지를 검토 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-303">Use the F12 tools to review error messages.</span></span>
-1. <span data-ttu-id="37486-304">`WithOrigins`에서 localhost 원본을 제거 하 고 앱을 배포 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-304">Remove the localhost origin from `WithOrigins` and deploy the app.</span></span> <span data-ttu-id="37486-305">또는 다른 포트를 사용 하 여 클라이언트 앱을 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-305">Alternatively, run the client app with a different port.</span></span> <span data-ttu-id="37486-306">예를 들어 Visual Studio에서를 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-306">For example, run from Visual Studio.</span></span>
-1. <span data-ttu-id="37486-307">클라이언트 앱을 사용 하 여 테스트 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-307">Test with the client app.</span></span> <span data-ttu-id="37486-308">CORS 오류는 오류를 반환 하지만 JavaScript에는 오류 메시지를 사용할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-308">CORS failures return an error, but the error message isn't available to JavaScript.</span></span> <span data-ttu-id="37486-309">F12 도구에서 콘솔 탭을 사용 하 여 오류를 확인 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-309">Use the console tab in the F12 tools to see the error.</span></span> <span data-ttu-id="37486-310">브라우저에 따라 다음과 비슷한 오류가 표시 됩니다 (F12 도구 콘솔).</span><span class="sxs-lookup"><span data-stu-id="37486-310">Depending on the browser, you get an error (in the F12 tools console) similar to the following:</span></span>
+1. <span data-ttu-id="ca04b-299">위의 코드에서 `url: 'https://<web app>.azurewebsites.net/api/values/1',`을 배포 된 앱의 URL로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-299">In the preceding code, replace `url: 'https://<web app>.azurewebsites.net/api/values/1',` with the URL to the deployed app.</span></span>
+1. <span data-ttu-id="ca04b-300">API 프로젝트를 배포 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-300">Deploy the API project.</span></span> <span data-ttu-id="ca04b-301">예를 들어 [Azure에 배포할 수](xref:host-and-deploy/azure-apps/index)있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-301">For example, [deploy to Azure](xref:host-and-deploy/azure-apps/index).</span></span>
+1. <span data-ttu-id="ca04b-302">바탕 화면에서 Razor Pages 또는 MVC 앱을 실행 하 고 **테스트** 단추를 클릭 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-302">Run the Razor Pages or MVC app from the desktop and click on the **Test** button.</span></span> <span data-ttu-id="ca04b-303">F12 도구를 사용 하 여 오류 메시지를 검토 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-303">Use the F12 tools to review error messages.</span></span>
+1. <span data-ttu-id="ca04b-304">`WithOrigins`에서 localhost 원본을 제거 하 고 앱을 배포 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-304">Remove the localhost origin from `WithOrigins` and deploy the app.</span></span> <span data-ttu-id="ca04b-305">또는 다른 포트를 사용 하 여 클라이언트 앱을 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-305">Alternatively, run the client app with a different port.</span></span> <span data-ttu-id="ca04b-306">예를 들어 Visual Studio에서를 실행 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-306">For example, run from Visual Studio.</span></span>
+1. <span data-ttu-id="ca04b-307">클라이언트 앱을 사용 하 여 테스트 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-307">Test with the client app.</span></span> <span data-ttu-id="ca04b-308">CORS 오류는 오류를 반환 하지만 JavaScript에는 오류 메시지를 사용할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-308">CORS failures return an error, but the error message isn't available to JavaScript.</span></span> <span data-ttu-id="ca04b-309">F12 도구에서 콘솔 탭을 사용 하 여 오류를 확인 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-309">Use the console tab in the F12 tools to see the error.</span></span> <span data-ttu-id="ca04b-310">브라우저에 따라 다음과 비슷한 오류가 표시 됩니다 (F12 도구 콘솔).</span><span class="sxs-lookup"><span data-stu-id="ca04b-310">Depending on the browser, you get an error (in the F12 tools console) similar to the following:</span></span>
 
-   * <span data-ttu-id="37486-311">Microsoft Edge 사용:</span><span class="sxs-lookup"><span data-stu-id="37486-311">Using Microsoft Edge:</span></span>
+   * <span data-ttu-id="ca04b-311">Microsoft Edge 사용:</span><span class="sxs-lookup"><span data-stu-id="ca04b-311">Using Microsoft Edge:</span></span>
 
-     <span data-ttu-id="37486-312">**SEC7120: [CORS] 원본 `https://localhost:44375`에서 원본 간 리소스에 대 한 액세스 제어-원본 응답 헤더의 `https://localhost:44375`를 찾을 수 없습니다 `https://webapi.azurewebsites.net/api/values/1`**</span><span class="sxs-lookup"><span data-stu-id="37486-312">**SEC7120: [CORS] The origin `https://localhost:44375` did not find `https://localhost:44375` in the Access-Control-Allow-Origin response header for cross-origin  resource at `https://webapi.azurewebsites.net/api/values/1`**</span></span>
+     <span data-ttu-id="ca04b-312">**SEC7120: [CORS] 원본 `https://localhost:44375`에서 원본 간 리소스에 대 한 액세스 제어-원본 응답 헤더의 `https://localhost:44375`를 찾을 수 없습니다 `https://webapi.azurewebsites.net/api/values/1`**</span><span class="sxs-lookup"><span data-stu-id="ca04b-312">**SEC7120: [CORS] The origin `https://localhost:44375` did not find `https://localhost:44375` in the Access-Control-Allow-Origin response header for cross-origin  resource at `https://webapi.azurewebsites.net/api/values/1`**</span></span>
 
-   * <span data-ttu-id="37486-313">Chrome 사용:</span><span class="sxs-lookup"><span data-stu-id="37486-313">Using Chrome:</span></span>
+   * <span data-ttu-id="ca04b-313">Chrome 사용:</span><span class="sxs-lookup"><span data-stu-id="ca04b-313">Using Chrome:</span></span>
 
-     <span data-ttu-id="37486-314">**원본 `https://localhost:44375`에서 `https://webapi.azurewebsites.net/api/values/1`의 XMLHttpRequest 액세스가 CORS 정책에 의해 차단 되었습니다. 요청 된 리소스에 ' 액세스 제어-원본 ' 헤더가 없습니다.**</span><span class="sxs-lookup"><span data-stu-id="37486-314">**Access to XMLHttpRequest at `https://webapi.azurewebsites.net/api/values/1` from origin `https://localhost:44375` has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.**</span></span>
+     <span data-ttu-id="ca04b-314">**원본 `https://localhost:44375`에서 `https://webapi.azurewebsites.net/api/values/1`의 XMLHttpRequest 액세스가 CORS 정책에 의해 차단 되었습니다. 요청 된 리소스에 ' 액세스 제어-원본 ' 헤더가 없습니다.**</span><span class="sxs-lookup"><span data-stu-id="ca04b-314">**Access to XMLHttpRequest at `https://webapi.azurewebsites.net/api/values/1` from origin `https://localhost:44375` has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.**</span></span>
      
-<span data-ttu-id="37486-315">CORS 사용 끝점은 [Fiddler](https://www.telerik.com/fiddler) 또는 [postman](https://www.getpostman.com/)과 같은 도구를 사용 하 여 테스트할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-315">CORS-enabled endpoints can be tested with a tool, such as [Fiddler](https://www.telerik.com/fiddler) or [Postman](https://www.getpostman.com/).</span></span> <span data-ttu-id="37486-316">도구를 사용 하는 경우 `Origin` 헤더에 지정 된 요청의 원점은 요청을 받는 호스트와 달라 야 합니다.</span><span class="sxs-lookup"><span data-stu-id="37486-316">When using a tool, the origin of the request specified by the `Origin` header must differ from the host receiving the request.</span></span> <span data-ttu-id="37486-317">요청이 `Origin` 헤더의 값을 기반으로 하는 *교차 원점이* 아닌 경우:</span><span class="sxs-lookup"><span data-stu-id="37486-317">If the request isn't *cross-origin* based on the value of the `Origin` header:</span></span>
+<span data-ttu-id="ca04b-315">CORS 사용 끝점은 [Fiddler](https://www.telerik.com/fiddler) 또는 [postman](https://www.getpostman.com/)과 같은 도구를 사용 하 여 테스트할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-315">CORS-enabled endpoints can be tested with a tool, such as [Fiddler](https://www.telerik.com/fiddler) or [Postman](https://www.getpostman.com/).</span></span> <span data-ttu-id="ca04b-316">도구를 사용 하는 경우 `Origin` 헤더에 지정 된 요청의 원점은 요청을 받는 호스트와 달라 야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-316">When using a tool, the origin of the request specified by the `Origin` header must differ from the host receiving the request.</span></span> <span data-ttu-id="ca04b-317">요청이 `Origin` 헤더의 값을 기반으로 하는 *교차 원점이* 아닌 경우:</span><span class="sxs-lookup"><span data-stu-id="ca04b-317">If the request isn't *cross-origin* based on the value of the `Origin` header:</span></span>
 
-* <span data-ttu-id="37486-318">CORS 미들웨어가 요청을 처리할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-318">There's no need for CORS Middleware to process the request.</span></span>
-* <span data-ttu-id="37486-319">CORS 헤더는 응답에서 반환 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="37486-319">CORS headers aren't returned in the response.</span></span>
+* <span data-ttu-id="ca04b-318">CORS 미들웨어가 요청을 처리할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-318">There's no need for CORS Middleware to process the request.</span></span>
+* <span data-ttu-id="ca04b-319">CORS 헤더는 응답에서 반환 되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-319">CORS headers aren't returned in the response.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="37486-320">추가 리소스</span><span class="sxs-lookup"><span data-stu-id="37486-320">Additional resources</span></span>
+## <a name="cors-in-iis"></a><span data-ttu-id="ca04b-320">IIS의 CORS</span><span class="sxs-lookup"><span data-stu-id="ca04b-320">CORS in IIS</span></span>
 
-* [<span data-ttu-id="37486-321">CORS (원본 간 리소스 공유)</span><span class="sxs-lookup"><span data-stu-id="37486-321">Cross-Origin Resource Sharing (CORS)</span></span>](https://developer.mozilla.org/docs/Web/HTTP/CORS)
+<span data-ttu-id="ca04b-321">IIS에 배포할 때 서버에서 익명 액세스를 허용 하도록 구성 되지 않은 경우 CORS를 Windows 인증 전에 실행 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-321">When deploying to IIS, CORS has to run before Windows Authentication if the server isn't configured to allow anonymous access.</span></span> <span data-ttu-id="ca04b-322">이 시나리오를 지원 하려면 앱에 대해 [IIS CORS 모듈](https://www.iis.net/downloads/microsoft/iis-cors-module) 을 설치 하 고 구성 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ca04b-322">To support this scenario, the [IIS CORS module](https://www.iis.net/downloads/microsoft/iis-cors-module) needs to be installed and configured for the app.</span></span>
+
+## <a name="additional-resources"></a><span data-ttu-id="ca04b-323">추가 자료</span><span class="sxs-lookup"><span data-stu-id="ca04b-323">Additional resources</span></span>
+
+* [<span data-ttu-id="ca04b-324">CORS (원본 간 리소스 공유)</span><span class="sxs-lookup"><span data-stu-id="ca04b-324">Cross-Origin Resource Sharing (CORS)</span></span>](https://developer.mozilla.org/docs/Web/HTTP/CORS)
+* [<span data-ttu-id="ca04b-325">IIS CORS 모듈 시작</span><span class="sxs-lookup"><span data-stu-id="ca04b-325">Getting started with the IIS CORS module</span></span>](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)
