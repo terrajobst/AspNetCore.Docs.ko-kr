@@ -29,7 +29,7 @@ ASP.NET Core는 최신 클라우드 기반 인터넷 연결 응용 프로그램�
 
 ## <a name="why-choose-aspnet-core"></a>ASP.NET Core를 선택해야 하는 이유
 
-수백만 명의 개발자가 [ASP.NET 4.x](/aspnet/overview)를 사용하여 웹앱을 만들었고 계속 만들고 있습니다. ASP.NET Core는 간결하고 보다 모듈화된 프레임워크를 만드는 아키텍처 변경 내용이 담긴 ASP.NET 4.x의 재설계입니다.
+수백만 명의 개발자가 [ASP.NET 4.x](/aspnet/overview)를 사용하여 웹앱을 만들었고 계속 만들고 있습니다. ASP.NET Core는 보다 간결하고 모듈화된 프레임워크를 만드는 아키텍처 변경 내용이 담긴 ASP.NET 4.x의 재설계입니다.
 
 [!INCLUDE[](~/includes/benefits.md)]
 
@@ -134,7 +134,7 @@ ASP.NET 앱을 ASP.NET Core로 마이그레이션하기 위한 참조 가이드�
 
 ### <a name="regions-in-sample-code"></a>예제 코드의 지역
 
-일부 예제 앱에는 [#region](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-region) 및 [#endregion](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-endregion) C# 지시문으로 둘러싸인 코드 섹션이 포함되어 있습니다. 설명서 빌드 시스템은 렌더링 된 설명서 토픽에 이러한 지역을 삽입합니다.  
+일부 예제 앱에는 [#region](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-region) 및 [#endregion](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-endregion) C# 지시문으로 둘러싸인 코드 섹션이 포함되어 있습니다. 설명서 빌드 시스템은 렌더링된 설명서 토픽에 이러한 지역을 삽입합니다. 
 
 일반적으로 지역 이름에는 "snippet"이라는 단어가 포함됩니다. 다음 예제는 `snippet_WebHostDefaults`라는 지역을 보여줍니다.
 
@@ -156,7 +156,7 @@ Host.CreateDefaultBuilder(args)
 
 코드를 둘러싸고 있는 `#region` 및 `#endregion` 지시문은 안전하게 무시(또는 제거)할 수 있습니다. 항목에 설명된 예제 시나리오를 실행하려는 경우 이러한 지시문 내에서 코드를 변경하지 마세요. 다른 시나리오를 실험하는 경우 자유롭게 코드를 변경할 수 있습니다.
 
-자세한 내용은 [ASP.NET 설명서에 참여: 코드 조각](https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md#code-snippets)을 다음을 참조하세요.
+자세한 내용은 [ASP.NET 설명서에 참여: 코드 조각](https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md#code-snippets)을 참조하세요.
 
 ## <a name="next-steps"></a>다음 단계
 
