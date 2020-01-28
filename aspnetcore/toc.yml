@@ -1,5 +1,7 @@
 - name: ASP.NET Core 설명서
   href: '/aspnet/#pivot=core'
+- name: ASP.NET Core 문서의 새로운 기능
+  href: whats-new/index.yml
 - name: 개요
   items:
     - name: ASP.NET Core 정보
@@ -10,7 +12,7 @@
       href: /dotnet/standard/choosing-core-framework-server?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
 - name: 시작
   uid: getting-started
-- name: 새로운 기능
+- name: 릴리스 정보
   items:
     - name: 3.1의 새로운 기능
       uid: aspnetcore-3.1
@@ -885,15 +887,27 @@
             - name: 개요
               uid: security/authentication/azure-active-directory/index
             - name: 웹앱에 Azure AD 통합
-              href: 'https://github.com/Azure-Samples/ms-identity-aspnetcore-webapp-tutorial'
-            - name: 웹앱에 Azure AD B2C 통합
-              uid: security/authentication/azure-ad-b2c
-            - name: 웹 API에 Azure AD B2C 통합
-              uid: security/authentication/azure-ad-b2c-webapi
-            - name: WPF에서 웹 API 호출
-              href: 'https://github.com/Azure-Samples/active-directory-dotnet-native-aspnetcore'
-            - name: Azure AD를 사용하여 웹앱에서 웹 API 호출
-              href: 'https://github.com/Azure-Samples/active-directory-dotnet-webapp-webapi-openidconnect-aspnetcore'
+              href: /azure/active-directory/develop/quickstart-v2-aspnet-core-webapp
+            - name: 시나리오
+              items:
+                - name: 사용자를 로그인하는 웹앱
+                  href: /azure/active-directory/develop/scenario-web-app-sign-user-overview?tabs=aspnetcore
+                - name: 웹 API를 호출하는 웹앱
+                  href: /azure/active-directory/develop/scenario-web-app-call-api-overview
+                - name: 보호된 웹 API
+                  href: /azure/active-directory/develop/scenario-protected-web-api-overview
+                - name: 다른 웹 API를 호출하는 웹 API
+                  href: /azure/active-directory/develop/scenario-web-api-call-api-overview
+                - name: 웹앱에 Azure AD B2C 통합
+                  uid: security/authentication/azure-ad-b2c
+            - name: 샘플
+              items:
+                - name: Azure AD V2를 사용하여 사용자를 로그인하고 웹 API를 호출
+                  href: /samples/azure-samples/active-directory-aspnetcore-webapp-openidconnect-v2/enable-webapp-signin/
+                - name: Azure AD V2를 사용하여 WPF 애플리케이션에서 ASP.NET Core 2.0 웹 API 호출
+                  href: /samples/azure-samples/active-directory-dotnet-native-aspnetcore-v2/calling-an-aspnet-core-web-api-from-a-wpf-application-using-azure-ad-v2/
+                - name: Azure AD B2C 웹 API
+                  href: 'https://azure.microsoft.com/resources/samples/active-directory-b2c-dotnetcore-webapi/'
         - name: IdentityServer4를 사용하여 ASP.NET Core 앱 보호
           href: 'https://identityserver4.readthedocs.io/'
         - name: Azure App Service 인증(간편 인증)을 사용하여 ASP.NET Core 앱 보호
