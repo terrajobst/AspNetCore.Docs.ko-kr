@@ -4,14 +4,14 @@ author: rick-anderson
 description: 이 자습서에는 외부 인증 공급자에 OAuth 2.0을 사용하여 ASP.NET Core 앱을 빌드하는 방법을 보여줍니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/21/2019
+ms.date: 01/23/2020
 uid: security/authentication/social/index
-ms.openlocfilehash: 06ce9c72f43955345efb61afed2538158810005f
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: 7d0f6647a6f5a4d41067b13acd3d294144027bb7
+ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75358071"
+ms.lasthandoff: 01/24/2020
+ms.locfileid: "76727323"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>ASP.NET Core에서 Facebook, Google 및 외부 공급자 인증
 
@@ -35,7 +35,7 @@ ms.locfileid: "75358071"
 * 새 프로젝트를 만듭니다.
 * **ASP.NET Core 웹 애플리케이션** 및 **다음**을 선택합니다.
 * **프로젝트 이름**을 제공하고 **위치**를 확인하거나 변경합니다. **만들기**를 선택합니다.
-* 드롭다운에서 **ASP.NET Core 3.0**을 선택한 다음, **웹 애플리케이션**을 선택합니다.
+* 드롭다운(**ASP.NET Core {x.y}** )에서 최신 버전의 ASP.NET Core를 선택한 다음 **웹 애플리케이션**을 선택하세요.
 * **인증**에서 **변경**을 선택하고 인증을 **개별 사용자 계정**으로 설정합니다. **확인**을 선택합니다.
 * **새 ASP.NET Core 웹 애플리케이션 만들기** 창에서 **만들기**를 선택합니다.
 

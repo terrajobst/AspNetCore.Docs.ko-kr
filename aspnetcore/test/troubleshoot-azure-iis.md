@@ -5,14 +5,14 @@ description: ASP.NET Core 앱의 Azure App Service 및 인터넷 정보 서비�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/10/2020
+ms.date: 01/18/2020
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 23c90c33d197d26d1c4ad758449e318e20ef3760
-ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
+ms.openlocfilehash: 071dba9e936351e201b7582b3d0667cd6fac54bb
+ms.sourcegitcommit: f259889044d1fc0f0c7e3882df0008157ced4915
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/14/2020
-ms.locfileid: "75952145"
+ms.lasthandoff: 01/21/2020
+ms.locfileid: "76294613"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Azure App Service 및 IIS에 대 한 ASP.NET Core 문제 해결
 
@@ -117,7 +117,10 @@ The Web server is configured to not list the contents of this directory.
 
 [ASP.NET Core 모듈이](xref:host-and-deploy/aspnet-core-module) .NET Core CLR in process를 시작 하려고 하지만 시작 하지 못했습니다. 프로세스 시작 오류의 원인은 일반적으로 응용 프로그램 이벤트 로그의 항목 및 ASP.NET Core 모듈 stdout 로그에서 확인할 수 있습니다.
 
-일반적인 실패 조건은 존재하지 않는 ASP.NET Core 공유 프레임워크의 버전을 대상으로 하여 앱이 잘못 구성되었다는 것입니다. 대상 머신에 설치된 ASP.NET Core 공유 프레임워크의 버전을 확인합니다.
+일반적인 오류 조건:
+
+* 존재 하지 않는 ASP.NET Core 공유 프레임 워크의 버전을 대상으로 지정 했기 때문에 앱이 잘못 구성 되었습니다. 대상 머신에 설치된 ASP.NET Core 공유 프레임워크의 버전을 확인합니다.
+* Azure Key Vault를 사용 하 여 Key Vault에 대 한 사용 권한이 부족 합니다. 대상 Key Vault의 액세스 정책을 확인 하 여 올바른 사용 권한이 부여 되었는지 확인 합니다.
 
 ### <a name="50031-ancm-failed-to-find-native-dependencies"></a>500.31 ANCM 네이티브 종속성을 찾지 못함
 
@@ -279,7 +282,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 
 **미리 보기 릴리스에서 실행 되는 프레임 워크 종속 배포**
 
-*ASP.NET Core {VERSION}(x86) 런타임 사이트 확장을 설치해야 합니다.*
+ASP.NET Core {VERSION}(x86) 런타임 사이트 확장을 설치해야 합니다.
 
 1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x32`(`{X.Y}`는 런타임 버전임)
 1. 앱 실행: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
@@ -301,7 +304,7 @@ Failed to start application '/LM/W3SVC/6/ROOT/', ErrorCode '0x800700c1'.
 
 **미리 보기 릴리스에서 실행 되는 프레임 워크 종속 배포**
 
-*ASP.NET Core {VERSION}(x64) 런타임 사이트 확장을 설치해야 합니다.*
+ASP.NET Core {VERSION}(x64) 런타임 사이트 확장을 설치해야 합니다.
 
 1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x64`(`{X.Y}`는 런타임 버전임)
 1. 앱 실행: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`

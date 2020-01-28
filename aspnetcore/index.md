@@ -47,7 +47,7 @@ ASP.NET Core MVC는 [Web API](xref:tutorials/first-web-api) 및 [웹앱](xref:tu
 
 ## <a name="client-side-development"></a>클라이언트 쪽 개발
 
-ASP.NET Core는 [Blazor](xref:blazor/index), [Angular](xref:spa/angular), [React](xref:spa/react) 및 [부트스트랩](https://getbootstrap.com/) 등 유명한 클라이언트 쪽 프레임워크 및 라이브러리와 원활하게 통합됩니다. 자세한 내용은 <xref:blazor/index> 및 ‘클라이언트 쪽 개발’의 관련 항목을 참조하세요. 
+ASP.NET Core는 [[!OP.NO-LOC(Blazor)]](xref:blazor/index), [Angular](xref:spa/angular), [React](xref:spa/react) 및 [부트스트랩](https://getbootstrap.com/) 등 유명한 클라이언트 쪽 프레임워크 및 라이브러리와 원활하게 통합됩니다. 자세한 내용은 <xref:blazor/index> 및 ‘클라이언트 쪽 개발’의 관련 항목을 참조하세요. 
 
 <a name="target-framework"></a>
 
@@ -83,8 +83,8 @@ ASP.NET Core 앱 개발을 소개하는 자습서 및 문서는 다음의 순서
    |웹앱                   | 새로운 개발의 경우        |[Razor 페이지 시작](xref:tutorials/razor-pages/razor-pages-start) |
    |웹앱                   | MVC 앱을 유지 관리하는 경우 |[MVC 시작](xref:tutorials/first-mvc-app/start-mvc)|
    |Web API                   |                            |[웹 API 만들기](xref:tutorials/first-web-api)\*  |
-   |실시간 앱             |                            |[SignalR 시작하기](xref:tutorials/signalr) |
-   |Blazor 앱                |                            |[Blazor 시작하기](xref:blazor/get-started) |
+   |실시간 앱             |                            |[[!OP.NO-LOC(SignalR)] 시작하기](xref:tutorials/signalr) |
+   |[!OP.NO-LOC(Blazor)] 앱                |                            |[[!OP.NO-LOC(Blazor)] 시작하기](xref:blazor/get-started) |
    |원격 프로시저 호출 앱 |                            |[gRPC 서비스 시작](xref:tutorials/grpc/grpc-start) |
 
 1. 기본 데이터 액세스를 수행하는 방법을 보여주는 자습서를 살펴보세요.
