@@ -3,15 +3,15 @@ title: ASP.NET Core를 사용하여 클래스 라이브러리에서 재사용 �
 author: Rick-Anderson
 description: 부분 뷰를 사용 하 여 ASP.NET Core에서 클래스 라이브러리에 다시 사용할 수 있는 Razor UI를 만드는 방법에 설명 합니다.
 ms.author: riande
-ms.date: 10/26/2019
+ms.date: 01/25/2020
 ms.custom: mvc, seodec18
 uid: razor-pages/ui-class
-ms.openlocfilehash: b5235f4e31f6edd21fb410824fb215ab2d4a41b6
-ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
+ms.openlocfilehash: 420cc54701394673e2b442b1fdf999e421820fd5
+ms.sourcegitcommit: b5ceb0a46d0254cc3425578116e2290142eec0f0
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/24/2020
-ms.locfileid: "76727294"
+ms.lasthandoff: 01/28/2020
+ms.locfileid: "76809122"
 ---
 # <a name="create-reusable-ui-using-the-razor-class-library-project-in-aspnet-core"></a>ASP.NET Core에서 Razor 클래스 라이브러리 프로젝트를 사용 하 여 다시 사용할 수 있는 UI 만들기
 
@@ -86,7 +86,7 @@ RCL 콘텐츠 웹 앱의 일부인 것 처럼 참조 *페이지* 폴더를 다�
 
 ## <a name="create-an-rcl-with-static-assets"></a>정적 자산을 사용 하 여 RCL 만들기
 
-RCL에는 RCL을 소비 하는 앱에서 참조할 수 있는 도우미 정적 자산이 필요할 수 있습니다. ASP.NET Core를 사용 하면 소비 하는 앱에서 사용할 수 있는 정적 자산이 포함 된 RCLs를 만들 수 있습니다.
+Rcl에는 rcl 또는 RCL의 소비 앱에서 참조할 수 있는 도우미 정적 자산이 필요할 수 있습니다. ASP.NET Core를 사용 하면 소비 하는 앱에서 사용할 수 있는 정적 자산이 포함 된 RCLs를 만들 수 있습니다.
 
 RCL의 일부로 동반 자산을 포함 하려면 클래스 라이브러리에 *wwwroot* 폴더를 만들고 해당 폴더에 필요한 파일을 포함 합니다.
 
@@ -127,7 +127,7 @@ RCL에 TypeScript 파일을 포함 하려면 다음을 수행 합니다.
 
 ### <a name="consume-content-from-a-referenced-rcl"></a>참조 된 RCL에서 콘텐츠 사용
 
-RCL의 *wwwroot* 폴더에 포함 된 파일은 `_content/{LIBRARY NAME}/`접두사에서 사용 하는 앱에 노출 됩니다. 예를 들어, *Razor.* t c m. c a t. c a t. c a t. `_content/Razor.Class.Lib/`c a t. NuGet 패키지를 생성할 때 어셈블리 이름이 패키지 ID와 다른 경우 `{LIBRARY NAME}`의 패키지 ID를 사용 합니다.
+RCL의 *wwwroot* 폴더에 포함 된 파일은 `_content/{LIBRARY NAME}/`접두사의 rcl 또는 소비 앱에 노출 됩니다. 예를 들어, *Razor.* t c m. c a t. c a t. c a t. `_content/Razor.Class.Lib/`c a t. NuGet 패키지를 생성할 때 어셈블리 이름이 패키지 ID와 다른 경우 `{LIBRARY NAME}`의 패키지 ID를 사용 합니다.
 
 소비 앱은 `<script>`, `<style>`, `<img>`및 기타 HTML 태그를 사용 하 여 라이브러리에서 제공 하는 정적 자산을 참조 합니다. 소비 하는 앱은 `Startup.Configure`에서 [정적 파일 지원을](xref:fundamentals/static-files) 사용 하도록 설정 해야 합니다.
 

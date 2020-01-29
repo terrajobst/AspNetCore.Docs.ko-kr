@@ -5,17 +5,17 @@ description: Blazor 처리 되지 않은 예외를 관리 하는 방법 및 오�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2019
+ms.date: 01/22/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/handle-errors
-ms.openlocfilehash: fe4cc13b1efb8c70c9632f032626aa938fb65ea3
-ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
+ms.openlocfilehash: 7b5602d5ae5e58d1678762fe1cd2adec1f31c969
+ms.sourcegitcommit: b5ceb0a46d0254cc3425578116e2290142eec0f0
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/17/2020
-ms.locfileid: "76159952"
+ms.lasthandoff: 01/28/2020
+ms.locfileid: "76809005"
 ---
 # <a name="handle-errors-in-aspnet-core-opno-locblazor-apps"></a>ASP.NET Core Blazor 앱의 오류 처리
 
@@ -112,7 +112,7 @@ Blazor는 발생 하는 대부분의 처리 되지 않은 예외를 심각 하 �
 Blazor 구성 요소의 인스턴스를 만들 때:
 
 * 구성 요소의 생성자가 호출 됩니다.
-* [`@inject`](xref:blazor/dependency-injection#request-a-service-in-a-component) 지시문 또는 [`[Inject]`](xref:blazor/dependency-injection#request-a-service-in-a-component) 특성을 통해 구성 요소 생성자에 제공 된 단일 항목이 아닌 DI 서비스의 생성자가 호출 됩니다. 
+* [`@inject`](xref:blazor/dependency-injection#request-a-service-in-a-component) 지시문 또는 [`[Inject]`](xref:blazor/dependency-injection#request-a-service-in-a-component) 특성을 통해 구성 요소 생성자에 제공 된 단일 항목이 아닌 DI 서비스의 생성자가 호출 됩니다.
 
 모든 `[Inject]` 속성에 대해 실행 된 생성자 또는 setter가 처리 되지 않은 예외를 throw 하는 경우 회로가 실패 합니다. 이 예외는 프레임 워크에서 구성 요소를 인스턴스화할 수 없기 때문에 치명적입니다. 생성자 논리에서 예외를 throw 할 수 있는 경우 앱은 오류 처리 및 로깅이 포함 된 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문을 사용 하 여 예외를 트래핑 해야 합니다.
 
@@ -165,7 +165,7 @@ Blazor 구성 요소의 인스턴스를 만들 때:
 
 ### <a name="component-disposal"></a>구성 요소 삭제
 
-예를 들어 사용자가 다른 페이지로 이동 했으므로 UI에서 구성 요소를 제거할 수 있습니다. <xref:System.IDisposable?displayProperty=fullName>를 구현 하는 구성 요소가 UI에서 제거 되 면 프레임 워크는 구성 요소의 <xref:System.IDisposable.Dispose*> 메서드를 호출 합니다. 
+예를 들어 사용자가 다른 페이지로 이동 했으므로 UI에서 구성 요소를 제거할 수 있습니다. <xref:System.IDisposable?displayProperty=fullName>를 구현 하는 구성 요소가 UI에서 제거 되 면 프레임 워크는 구성 요소의 <xref:System.IDisposable.Dispose*> 메서드를 호출 합니다.
 
 구성 요소의 `Dispose` 메서드가 처리 되지 않은 예외를 throw 하는 경우 해당 예외는 회로에 치명적입니다. 삭제 논리에서 예외를 throw 할 수 있는 경우 앱은 오류 처리 및 로깅이 포함 된 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문을 사용 하 여 예외를 트래핑 해야 합니다.
 
@@ -192,16 +192,49 @@ Blazor 구성 요소의 인스턴스를 만들 때:
 
 ### <a name="circuit-handlers"></a>회로 처리기
 
-Blazor를 사용 하 여 코드에서 사용자 회로의 상태가 변경 될 때 알림을 수신 하는 *회로 처리기*를 정의할 수 있습니다. 사용 되는 상태는 다음과 같습니다.
+Blazor Server를 사용 하면 코드에서 사용자 회로의 상태를 변경 하는 코드를 실행할 수 있도록 하는 *회로 처리기*를 정의할 수 있습니다. 회로 처리기는 `CircuitHandler`에서 파생 하 고 앱의 서비스 컨테이너에 클래스를 등록 하 여 구현 됩니다. 다음 회로 처리기 예제에서는 열린 SignalR 연결을 추적 합니다.
 
-* `initialized`
-* `connected`
-* `disconnected`
-* `disposed`
+```csharp
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.Server.Circuits;
 
-알림은 `CircuitHandler` 추상 기본 클래스에서 상속 되는 DI 서비스를 등록 하 여 관리 됩니다.
+public class TrackingCircuitHandler : CircuitHandler
+{
+    private HashSet<Circuit> _circuits = new HashSet<Circuit>();
 
-사용자 지정 회로 처리기의 메서드에서 처리 되지 않은 예외를 throw 하는 경우 해당 예외는 회로에 치명적입니다. 처리기의 코드 또는 호출 된 메서드에서 예외를 허용 하려면 오류 처리 및 로깅을 사용 하 여 하나 이상의 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문에 코드를 래핑합니다.
+    public override Task OnConnectionUpAsync(Circuit circuit, 
+        CancellationToken cancellationToken)
+    {
+        _circuits.Add(circuit);
+
+        return Task.CompletedTask;
+    }
+
+    public override Task OnConnectionDownAsync(Circuit circuit, 
+        CancellationToken cancellationToken)
+    {
+        _circuits.Remove(circuit);
+
+        return Task.CompletedTask;
+    }
+
+    public int ConnectedCircuits => _circuits.Count;
+}
+```
+
+회로 처리기는 DI를 사용 하 여 등록 됩니다. 범위 인스턴스는 회로 인스턴스당 생성 됩니다. 위의 예제에서 `TrackingCircuitHandler` 사용 하면 모든 회로의 상태를 추적 해야 하기 때문에 단일 서비스를 만들 수 있습니다.
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    ...
+    services.AddSingleton<CircuitHandler, TrackingCircuitHandler>();
+}
+```
+
+사용자 지정 회로 처리기의 메서드에서 처리 되지 않은 예외를 throw 하는 경우 예외는 Blazor 서버 회로에 치명적입니다. 처리기의 코드 또는 호출 된 메서드에서 예외를 허용 하려면 오류 처리 및 로깅을 사용 하 여 하나 이상의 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문에 코드를 래핑합니다.
 
 ### <a name="circuit-disposal"></a>회로 삭제
 
