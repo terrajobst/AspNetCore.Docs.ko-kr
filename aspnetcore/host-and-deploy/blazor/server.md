@@ -2,20 +2,20 @@
 title: ASP.NET Core Blazor 호스트 및 배포
 author: guardrex
 description: ASP.NET Core를 사용하여 Blazor 서버 앱을 호스트 및 배포하는 방법을 알아봅니다.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 12/18/2019
 no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/server
-ms.openlocfilehash: d45d355eabc53fc90bcda4cb7be22fb6a9f04541
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: c07cd05dd8e1c4384c6f8f019173b9b7a9a06fd0
+ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74944336"
+ms.lasthandoff: 01/17/2020
+ms.locfileid: "76160225"
 ---
 # <a name="host-and-deploy-opno-locblazor-server"></a>Blazor 서버 호스트 및 배포
 
@@ -59,7 +59,7 @@ Blazor는 짧은 대기 시간, 안정성 및 [보안](xref:signalr/security) �
 
 Blazor 서버 앱에 [Azure SignalR Service](/azure/azure-signalr)를 사용하는 것이 좋습니다. 이 서비스를 사용하면 Blazor 서버 앱을 다수의 동시 SignalR 연결로 확장할 수 있습니다. 또한 SignalR 서비스의 글로벌 및 고성능 데이터 센터는 지리적 위치로 인한 대기 시간을 줄이는 데 큰 도움이 됩니다. 앱을 구성하고 원하는 경우 Azure SignalR Service를 프로비전하려면 다음 단계를 따릅니다.
 
-1. [사전 렌더링하는 경우 클라이언트를 동일한 서버로 다시 리디렉션하는](xref:blazor/hosting-models#reconnection-to-the-same-server) *고정 세션*을 지원하려면 해당 서비스를 사용하도록 설정합니다. `ServerStickyMode` 옵션 또는 구성 값을 `Required`(으)로 설정합니다. 일반적으로 앱은 다음 방법 중 **하나**를 사용하여 구성을 만듭니다.
+1. [사전 렌더링하는 경우 클라이언트를 동일한 서버로 다시 리디렉션하는](xref:blazor/hosting-models#reconnection-to-the-same-server)*고정 세션*을 지원하려면 해당 서비스를 사용하도록 설정합니다. `ServerStickyMode` 옵션 또는 구성 값을 `Required`(으)로 설정합니다. 일반적으로 앱은 다음 방법 중 **하나**를 사용하여 구성을 만듭니다.
 
    * `Startup.ConfigureServices`:
   
@@ -83,7 +83,7 @@ Blazor 서버 앱에 [Azure SignalR Service](/azure/azure-signalr)를 사용하�
 
 1. Visual Studio에 Blazor 서버 앱을 위한 Azure 앱 게시 프로필을 만듭니다.
 1. **Azure SignalR Service** 종속성을 프로필에 추가합니다. 앱에 할당할 기존 Azure SignalR Service 인스턴스가 Azure 구독에 없는 경우 **새 Azure SignalR Service 인스턴스 만들기**를 선택하여 새 서비스 인스턴스를 프로비전합니다.
-1. Azure에 앱 게시
+1. Azure에 앱을 게시합니다.
 
 #### <a name="iis"></a>IIS
 

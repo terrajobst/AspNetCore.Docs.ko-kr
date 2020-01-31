@@ -5,14 +5,14 @@ description: CentOS에서 Apache를 역방향 프록시 서버로 설정하여 K
 monikerRange: '>= aspnetcore-2.1'
 ms.author: shboyer
 ms.custom: mvc
-ms.date: 12/02/2019
+ms.date: 01/13/2020
 uid: host-and-deploy/linux-apache
-ms.openlocfilehash: 730ed1847ec5728657d56db3ccf0f1f5fab6b5dd
-ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
+ms.openlocfilehash: 028f5112188e2b74f4f01409e25268aecdc761c0
+ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/03/2019
-ms.locfileid: "74717366"
+ms.lasthandoff: 01/16/2020
+ms.locfileid: "76146292"
 ---
 # <a name="host-aspnet-core-on-linux-with-apache"></a>Apache를 사용하여 Linux에서 ASP.NET Core 호스트
 
@@ -20,7 +20,7 @@ ms.locfileid: "74717366"
 
 이 가이드를 사용하여 [CentOS 7](https://www.centos.org/)에서 [Apache](https://httpd.apache.org/)를 역방향 프록시 서버로 설정하여 [Kestrel](xref:fundamentals/servers/kestrel) 서버에서 실행되는 ASP.NET Core 웹앱에 HTTP 트래픽을 리디렉션하는 방법을 알아봅니다. [mod_proxy 확장](https://httpd.apache.org/docs/2.4/mod/mod_proxy.html) 및 관련 모듈은 서버의 역방향 프록시를 만듭니다.
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 * sudo 권한을 가진 표준 사용자 계정으로 CentOS 7을 실행하는 서버가 필요합니다.
 * 서버에서 .NET Core 런타임을 설치합니다.
@@ -86,7 +86,7 @@ services.Configure<ForwardedHeadersOptions>(options =>
 });
 ```
 
-자세한 내용은 <xref:host-and-deploy/proxy-load-balancer>을 참조하세요.
+자세한 내용은 <xref:host-and-deploy/proxy-load-balancer>를 참조하세요.
 
 ### <a name="install-apache"></a>Apache 설치
 
@@ -198,7 +198,7 @@ Environment=ASPNETCORE_ENVIRONMENT=Production
 WantedBy=multi-user.target
 ```
 
-사용자 *apache*가 구성에서 사용되지 않을 경우 사용자를 먼저 만들고 적절한 파일 소유권을 부여해야 합니다.
+앞의 예제에서 서비스를 관리하는 사용자는 `User` 옵션으로 지정됩니다. 사용자(`apache`)가 존재해야 하며 앱 파일에 대한 적절한 소유권이 있어야 합니다.
 
 `TimeoutStopSec`를 사용하여 초기 인터럽트 신호를 받은 후 앱이 종료되기를 기다리는 기간을 구성합니다. 이 기간 내에 앱이 종료되지 않으면 앱을 종료하기 위해 SIGKILL이 실행됩니다. 단위 없는 초로 된 값(예: `150`) 또는 시간 범위 값(예: `2min 30s`)으로 값을 입력하거나, 시간 제한을 사용하지 않으려면 `infinity`를 입력합니다. `TimeoutStopSec`의 기본값은 관리자 구성 파일(*systemd-system.conf*, *system.conf.d*, *systemd-user.conf*, *user.conf.d*)의 `DefaultTimeoutStopSec` 값입니다. 대부분의 배포에서 기본 시간 제한은 90초입니다.
 

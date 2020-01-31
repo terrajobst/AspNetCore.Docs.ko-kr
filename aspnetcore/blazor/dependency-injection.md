@@ -5,17 +5,17 @@ description: Blazor 앱이 서비스를 구성 요소에 삽입할 수 있는 �
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/08/2020
+ms.date: 01/29/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/dependency-injection
-ms.openlocfilehash: fa6762522c831c7fbe2742dbfe4e25a377988e1e
-ms.sourcegitcommit: fe41cff0b99f3920b727286944e5b652ca301640
-ms.translationtype: HT
+ms.openlocfilehash: 859fd484fc00104575f176fa7d3bf752895475a0
+ms.sourcegitcommit: c81ef12a1b6e6ac838e5e07042717cf492e6635b
+ms.translationtype: MT
 ms.contentlocale: ko-KR
 ms.lasthandoff: 01/29/2020
-ms.locfileid: "76869566"
+ms.locfileid: "76885492"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core Blazor 종속성 주입
 
@@ -44,6 +44,69 @@ DI는 중앙 위치에 구성 된 서비스에 액세스 하기 위한 기술입
 
 ## <a name="add-services-to-an-app"></a>앱에 서비스 추가
 
+### <a name="blazor-webassembly"></a>Blazor WebAssembly
+
+*Program.cs*의 `Main` 메서드에서 앱의 서비스 컬렉션에 대 한 서비스를 구성 합니다. 다음 예제에서는 `MyDependency` 구현이 `IMyDependency`에 대해 등록 됩니다.
+
+```csharp
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        var builder = WebAssemblyHostBuilder.CreateDefault(args);
+        builder.Services.AddSingleton<IMyDependency, MyDependency>();
+        builder.RootComponents.Add<App>("app");
+
+        await builder.Build().RunAsync();
+    }
+}
+```
+
+호스트를 빌드한 후에는 구성 요소를 렌더링 하기 전에 루트 DI 범위에서 서비스에 액세스할 수 있습니다. 이는 콘텐츠를 렌더링 하기 전에 초기화 논리를 실행 하는 데 유용할 수 있습니다.
+
+```csharp
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        var builder = WebAssemblyHostBuilder.CreateDefault(args);
+        builder.Services.AddSingleton<WeatherService>();
+        builder.RootComponents.Add<App>("app");
+
+        var host = builder.Build();
+
+        var weatherService = host.Services.GetRequiredService<WeatherService>();
+        await weatherService.InitializeWeatherAsync();
+
+        await host.RunAsync();
+    }
+}
+```
+
+또한 호스트는 앱에 대 한 중앙 구성 인스턴스도 제공 합니다. 이전 예제를 기반으로 하는 날씨 서비스의 URL은 기본 구성 원본 (예: *appsettings*)에서 `InitializeWeatherAsync`으로 전달 됩니다.
+
+```csharp
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        var builder = WebAssemblyHostBuilder.CreateDefault(args);
+        builder.Services.AddSingleton<WeatherService>();
+        builder.RootComponents.Add<App>("app");
+
+        var host = builder.Build();
+
+        var weatherService = host.Services.GetRequiredService<WeatherService>();
+        await weatherService.InitializeWeatherAsync(
+            host.Configuration["WeatherServiceUrl"]);
+
+        await host.RunAsync();
+    }
+}
+```
+
+### <a name="blazor-server"></a>Blazor 서버
+
 새 앱을 만든 후 `Startup.ConfigureServices` 메서드를 검사 합니다.
 
 ```csharp
@@ -61,6 +124,8 @@ public void ConfigureServices(IServiceCollection services)
     services.AddSingleton<IDataAccess, DataAccess>();
 }
 ```
+
+### <a name="service-lifetime"></a>서비스 수명
 
 다음 표에 표시 된 수명을 사용 하 여 서비스를 구성할 수 있습니다.
 

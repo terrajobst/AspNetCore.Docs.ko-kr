@@ -181,13 +181,13 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 
 * **{Project name}**
   * **wwwroot**
-  * **영역**
-    * **세션**
-      * **페이지**
+  * **Areas**
+    * **Sessions**
+      * **Pages**
         * *\_ViewStart.cshtml*
         * *Index.cshtml*
         * *Index.cshtml.cs*
-  * **페이지**
+  * **Pages**
 
 *세션* 영역 *인덱스* Razor Page를 참조하는 태그는 다음과 같습니다.
 
@@ -213,7 +213,7 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 
 * **{Project name}**
   * **wwwroot**
-  * **영역**
+  * **Areas**
     * **Blogs**
       * **Controllers**
         * *HomeController.cs*

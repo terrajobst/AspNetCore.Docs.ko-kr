@@ -5,14 +5,14 @@ description: 구성 API를 사용하여 ASP.NET Core 앱을 구성하는 방법�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/23/2020
+ms.date: 01/29/2020
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 141ae5cda7672159032013cbda1ef4bfa7c142dd
-ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
+ms.openlocfilehash: df49286c3f050b8e90cb5427cf03e2b896a39294
+ms.sourcegitcommit: c81ef12a1b6e6ac838e5e07042717cf492e6635b
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/24/2020
-ms.locfileid: "76726972"
+ms.lasthandoff: 01/29/2020
+ms.locfileid: "76885567"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core의 구성
 
@@ -54,6 +54,19 @@ using Microsoft.Extensions.Configuration;
 ## <a name="host-versus-app-configuration"></a>호스트 대 앱 구성
 
 앱을 구성하고 시작하기 전에 *호스트*를 구성하고 시작합니다. 호스트는 앱 시작 및 수명 관리를 담당합니다. 앱과 호스트 모두 이 항목에서 설명하는 구성 관리자를 사용하여 구성합니다. 호스트 구성 키-값 쌍은 앱의 구성에도 포함됩니다. 호스트를 빌드할 때 구성 공급자를 사용하는 방법과 구성 소스가 호스트 구성에 미치는 영향에 대한 자세한 내용은 <xref:fundamentals/index#host>를 참조하세요.
+
+## <a name="other-configuration"></a>기타 구성
+
+이 항목에서는 *앱 구성*에 관련된 내용만 다룹니다. ASP.NET Core 앱을 실행하고 호스팅하는 다른 요소는 이 항목에서 다루지 않는 구성 파일을 사용하여 구성됩니다.
+
+* *launch.json*/*launchSettings.json*은 다음에 설명된 개발 환경에 대한 도구 구성 파일입니다.
+  * <xref:fundamentals/environments#development> 문서 내
+  * 개발 시나리오에서 ASP.NET Core 앱을 구성하는 데 해당 파일이 사용되는 설명서 집합 전체
+* *web.config*는 다음 항목에 설명된 서버 구성 파일입니다.
+  * <xref:host-and-deploy/iis/index>
+  * <xref:host-and-deploy/aspnet-core-module>
+
+이전 버전의 ASP.NET에서 앱 구성을 마이그레이션하는 방법에 대한 자세한 정보는 <xref:migration/proper-to-2x/index#store-configurations>를 참조하세요.
 
 ## <a name="default-configuration"></a>기본 구성
 
