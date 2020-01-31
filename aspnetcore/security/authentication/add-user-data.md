@@ -3,15 +3,15 @@ title: 추가, 다운로드 및 ASP.NET Core 프로젝트의 Id로 사용자 데
 author: rick-anderson
 description: ASP.NET Core 프로젝트에서 Id에 사용자 지정 사용자 데이터를 추가 하는 방법에 알아봅니다. GDPR에 따라 데이터를 삭제 합니다.
 ms.author: riande
-ms.date: 12/05/2019
+ms.date: 01/28/2020
 ms.custom: mvc, seodec18
 uid: security/authentication/add-user-data
-ms.openlocfilehash: f54df68834cd3e2493e558aaab9851f036f3f01b
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: e08c02e2e5d4a429aae10c59e7ae3ea48c975067
+ms.sourcegitcommit: c81ef12a1b6e6ac838e5e07042717cf492e6635b
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880749"
+ms.lasthandoff: 01/29/2020
+ms.locfileid: "76885551"
 ---
 # <a name="add-download-and-delete-custom-user-data-to-identity-in-an-aspnet-core-project"></a>추가, 다운로드 및 ASP.NET Core 프로젝트에서 Id에 사용자 지정 사용자 데이터를 삭제 합니다.
 
@@ -24,9 +24,9 @@ ms.locfileid: "74880749"
 
 프로젝트 샘플에는 Razor 페이지 웹 앱에서 만들어지지만 지침은 ASP.NET Core MVC 웹 앱에 대해 유사 합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/add-user-data) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/add-user-data)([다운로드 방법](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>전제 조건
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -77,33 +77,33 @@ dotnet new webapp -o WebApp1
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **솔루션 탐색기**에서 프로젝트를 마우스 오른쪽 단추로 클릭 > **추가** > **스 캐 폴드 된 새 항목**합니다.
-* 왼쪽된 창에서 합니다 **스 캐 폴드 추가** 대화 상자에서 **Identity** > **추가**합니다.
-* 에 **ADD Id** 대화 상자에서 다음 옵션:
+* **솔루션 탐색기**에서 프로젝트 > **추가** >  > 스캐폴드 항목 새로 만들기**를 마우스 오른쪽 단추로 클릭합니다.
+* **스 캐 폴드 추가** 대화 상자의 왼쪽 창에서 **id** > **추가**를 선택 합니다.
+* **Id 추가** 대화 상자에서 다음 옵션을 선택 합니다.
   * 기존 레이아웃 파일 선택 *~/Pages/Shared/_Layout.cshtml*
   * 재정의 하려면 다음 파일을 선택 합니다.
     * **계정/등록**
     * **계정 / / 인덱스 관리**
-  * 선택 된 **+** 새 단추 **데이터 컨텍스트 클래스**합니다. 형식을 수락 (**WebApp1.Models.WebApp1Context** 프로젝트의 이름이 **WebApp1**).
+  * **+** 단추를 선택해서 새로운 **데이터 컨텍스트 클래스**를 생성합니다. 형식을 수락 (**WebApp1.Models.WebApp1Context** 프로젝트의 이름이 **WebApp1**).
   * 선택 된 **+** 새 단추 **사용자 클래스**합니다. 형식을 수락 (**WebApp1User** 프로젝트의 이름이 **WebApp1**) > **추가**합니다.
-* 선택 **추가**합니다.
+* **추가**를 선택합니다.
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-ASP.NET Core 스 캐 폴더를 이전에 설치 하지 않은 경우 지금 설치 합니다.
+ASP.NET Core 스캐폴더를 이전에 설치하지 않은 경우 지금 설치합니다.
 
 ```dotnetcli
 dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
-에 대 한 패키지 참조 추가 [Microsoft.VisualStudio.Web.CodeGeneration.Design](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.CodeGeneration.Design/) 프로젝트 (.csproj) 파일에 있습니다. 프로젝트 디렉터리에서 다음 명령을 실행 합니다.
+에 대 한 패키지 참조 추가 [Microsoft.VisualStudio.Web.CodeGeneration.Design](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.CodeGeneration.Design/) 프로젝트 (.csproj) 파일에 있습니다. 프로젝트 디렉터리에서 다음 명령을 실행합니다.
 
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet restore
 ```
 
-Identity 스 캐 폴더 옵션을 나열 하려면 다음 명령을 실행 합니다.
+Identity 스캐폴더 옵션을 나열하려면 다음 명령을 실행합니다.
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -h
@@ -119,7 +119,7 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 지침에 따라 [마이그레이션과 UseAuthentication, 레이아웃](xref:security/authentication/scaffold-identity#efm) 다음 단계를 수행 합니다.
 
-* 마이그레이션을 만들고 데이터베이스를 업데이트 합니다.
+* 마이그레이션을 만들고 데이터베이스를 업데이트합니다.
 * `UseAuthentication`를 `Startup.Configure`에 추가합니다.
 * 추가 `<partial name="_LoginPartial" />` 레이아웃 파일입니다.
 * 앱을 테스트합니다.
@@ -205,7 +205,7 @@ dotnet aspnet-codegenerator identity -u WebApp1User -fi Account.Register;Account
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Visual studio에서 **패키지 관리자 콘솔**:
+Visual studio **패키지 관리자 콘솔**에서:
 
 ```powershell
 Add-Migration CustomUserData

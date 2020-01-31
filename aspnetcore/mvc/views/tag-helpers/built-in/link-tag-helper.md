@@ -6,12 +6,12 @@ description: ASP.NET Core Link 태그 도우미 특성 및 HTML 링크 태그의
 ms.custom: mvc
 ms.date: 09/24/2019
 uid: mvc/views/tag-helpers/builtin-th/link-tag-helper
-ms.openlocfilehash: e1e2e58b4ab9087e1f9de5b5c03b587feb88f1b9
-ms.sourcegitcommit: fae6f0e253f9d62d8f39de5884d2ba2b4b2a6050
+ms.openlocfilehash: d7514433bee8a138cd7d75bfd15c9798d4fd31a3
+ms.sourcegitcommit: b5ceb0a46d0254cc3425578116e2290142eec0f0
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/25/2019
-ms.locfileid: "71256485"
+ms.lasthandoff: 01/28/2020
+ms.locfileid: "76809109"
 ---
 # <a name="link-tag-helper-in-aspnet-core"></a>ASP.NET Core의 Link 태그 도우미
 
@@ -47,21 +47,17 @@ Link 태그 도우미를 사용하면 CSS 파일에 CDN을 지정하고 CDN을 �
 
 ### <a name="asp-fallback-test-class"></a>asp-fallback-test-class
 
-대체(fallback) 테스트에 사용할 스타일시트에 정의된 클래스 이름입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestClass>을 참조하세요.
+대체(fallback) 테스트에 사용할 스타일시트에 정의된 클래스 이름입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestClass>를 참조하세요.
 
 ### <a name="asp-fallback-test-property"></a>asp-fallback-test-property
 
-대체(fallback) 테스트에 사용할 CSS 속성 이름입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestProperty>을 참조하세요.
-
-### <a name="asp-fallback-test-value"></a>asp-fallback-test-value
-
-대체(fallback) 테스트에 사용할 CSS 속성 값입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestValue>을 참조하세요.
+대체(fallback) 테스트에 사용할 CSS 속성 이름입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestProperty>를 참조하세요.
 
 ### <a name="asp-fallback-test-value"></a>asp-fallback-test-value
 
 대체(fallback) 테스트에 사용할 CSS 속성 값입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestValue>를 참조하세요.
 
-## <a name="additional-resources"></a>추가 리소스
+## <a name="additional-resources"></a>추가 자료
 
 * <xref:mvc/views/tag-helpers/intro>
 * <xref:mvc/controllers/areas>
