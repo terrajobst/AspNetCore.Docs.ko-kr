@@ -5,26 +5,26 @@ description: ASP.NET Core에서 Web API 만들기에 대한 기본 사항을 알
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 11/22/2019
+ms.date: 01/27/2020
 uid: web-api/index
-ms.openlocfilehash: 5ef8b4d012f4ed90339ffea191612e4dc365d958
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 8609e2095c202643cdc905cc610298195b654215
+ms.sourcegitcommit: fe41cff0b99f3920b727286944e5b652ca301640
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880537"
+ms.lasthandoff: 01/29/2020
+ms.locfileid: "76870019"
 ---
-# <a name="create-web-apis-with-aspnet-core"></a><span data-ttu-id="2fb86-103">ASP.NET Core로 Web API 만들기</span><span class="sxs-lookup"><span data-stu-id="2fb86-103">Create web APIs with ASP.NET Core</span></span>
+# <a name="create-web-apis-with-aspnet-core"></a><span data-ttu-id="b0625-103">ASP.NET Core로 Web API 만들기</span><span class="sxs-lookup"><span data-stu-id="b0625-103">Create web APIs with ASP.NET Core</span></span>
 
-<span data-ttu-id="2fb86-104">작성자: [Scott Addie](https://github.com/scottaddie), [Tom Dykstra](https://github.com/tdykstra)</span><span class="sxs-lookup"><span data-stu-id="2fb86-104">By [Scott Addie](https://github.com/scottaddie) and [Tom Dykstra](https://github.com/tdykstra)</span></span>
+<span data-ttu-id="b0625-104">작성자: [Scott Addie](https://github.com/scottaddie), [Tom Dykstra](https://github.com/tdykstra)</span><span class="sxs-lookup"><span data-stu-id="b0625-104">By [Scott Addie](https://github.com/scottaddie) and [Tom Dykstra](https://github.com/tdykstra)</span></span>
 
-<span data-ttu-id="2fb86-105">ASP.NET Core는 C#를 사용하여 Web API라고도 하는 RESTful 서비스 만들기를 지원합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-105">ASP.NET Core supports creating RESTful services, also known as web APIs, using C#.</span></span> <span data-ttu-id="2fb86-106">요청을 처리하기 위해 Web API는 컨트롤러를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-106">To handle requests, a web API uses controllers.</span></span> <span data-ttu-id="2fb86-107">Web API의 *컨트롤러*는 `ControllerBase`에서 파생되는 클래스입니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-107">*Controllers* in a web API are classes that derive from `ControllerBase`.</span></span> <span data-ttu-id="2fb86-108">이 문서에서는 웹 API 요청을 처리하기 위해 컨트롤러를 사용하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-108">This article shows how to use controllers for handling web API requests.</span></span>
+<span data-ttu-id="b0625-105">ASP.NET Core는 C#를 사용하여 Web API라고도 하는 RESTful 서비스 만들기를 지원합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-105">ASP.NET Core supports creating RESTful services, also known as web APIs, using C#.</span></span> <span data-ttu-id="b0625-106">요청을 처리하기 위해 Web API는 컨트롤러를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-106">To handle requests, a web API uses controllers.</span></span> <span data-ttu-id="b0625-107">Web API의 *컨트롤러*는 `ControllerBase`에서 파생되는 클래스입니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-107">*Controllers* in a web API are classes that derive from `ControllerBase`.</span></span> <span data-ttu-id="b0625-108">이 문서에서는 웹 API 요청을 처리하기 위해 컨트롤러를 사용하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-108">This article shows how to use controllers for handling web API requests.</span></span>
 
-<span data-ttu-id="2fb86-109">[샘플 코드 보기 또는 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/index/samples)</span><span class="sxs-lookup"><span data-stu-id="2fb86-109">[View or download sample code](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/index/samples).</span></span> <span data-ttu-id="2fb86-110">([다운로드하는 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="2fb86-110">([How to download](xref:index#how-to-download-a-sample)).</span></span>
+<span data-ttu-id="b0625-109">[샘플 코드 보기 또는 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/index/samples)</span><span class="sxs-lookup"><span data-stu-id="b0625-109">[View or download sample code](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/index/samples).</span></span> <span data-ttu-id="b0625-110">([다운로드하는 방법](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="b0625-110">([How to download](xref:index#how-to-download-a-sample)).</span></span>
 
-## <a name="controllerbase-class"></a><span data-ttu-id="2fb86-111">ControllerBase 클래스</span><span class="sxs-lookup"><span data-stu-id="2fb86-111">ControllerBase class</span></span>
+## <a name="controllerbase-class"></a><span data-ttu-id="b0625-111">ControllerBase 클래스</span><span class="sxs-lookup"><span data-stu-id="b0625-111">ControllerBase class</span></span>
 
-<span data-ttu-id="2fb86-112">Web API는 <xref:Microsoft.AspNetCore.Mvc.ControllerBase>에서 파생되는 하나 이상의 컨트롤러 클래스로 구성됩니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-112">A web API consists of one or more controller classes that derive from <xref:Microsoft.AspNetCore.Mvc.ControllerBase>.</span></span> <span data-ttu-id="2fb86-113">웹 API 프로젝트 템플릿은 시작 컨트롤러를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-113">The web API project template provides a starter controller:</span></span>
+<span data-ttu-id="b0625-112">Web API는 <xref:Microsoft.AspNetCore.Mvc.ControllerBase>에서 파생되는 하나 이상의 컨트롤러 클래스로 구성됩니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-112">A web API consists of one or more controller classes that derive from <xref:Microsoft.AspNetCore.Mvc.ControllerBase>.</span></span> <span data-ttu-id="b0625-113">웹 API 프로젝트 템플릿은 시작 컨트롤러를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-113">The web API project template provides a starter controller:</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -38,57 +38,72 @@ ms.locfileid: "74880537"
 
 ::: moniker-end
 
-<span data-ttu-id="2fb86-114"><xref:Microsoft.AspNetCore.Mvc.Controller> 클래스에서 파생된 Web API 컨트롤러를 만들지 마세요.</span><span class="sxs-lookup"><span data-stu-id="2fb86-114">Don't create a web API controller by deriving from the <xref:Microsoft.AspNetCore.Mvc.Controller> class.</span></span> <span data-ttu-id="2fb86-115">`Controller`는 `ControllerBase`에서 파생되며 뷰에 대한 지원을 추가하므로 Web API 요청이 아닌 웹 페이지를 처리할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-115">`Controller` derives from `ControllerBase` and adds support for views, so it's for handling web pages, not web API requests.</span></span> <span data-ttu-id="2fb86-116">이 규칙에 대한 예외가 있습니다. 뷰와 웹 API 모두에 동일한 컨트롤러를 사용하려는 경우 `Controller`에서 파생합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-116">There's an exception to this rule: if you plan to use the same controller for both views and web APIs, derive it from `Controller`.</span></span>
+<span data-ttu-id="b0625-114"><xref:Microsoft.AspNetCore.Mvc.Controller> 클래스에서 파생된 Web API 컨트롤러를 만들지 마세요.</span><span class="sxs-lookup"><span data-stu-id="b0625-114">Don't create a web API controller by deriving from the <xref:Microsoft.AspNetCore.Mvc.Controller> class.</span></span> <span data-ttu-id="b0625-115">`Controller`는 `ControllerBase`에서 파생되며 뷰에 대한 지원을 추가하므로 Web API 요청이 아닌 웹 페이지를 처리할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-115">`Controller` derives from `ControllerBase` and adds support for views, so it's for handling web pages, not web API requests.</span></span> <span data-ttu-id="b0625-116">이 규칙에 대한 예외가 있습니다. 뷰와 웹 API 모두에 동일한 컨트롤러를 사용하려는 경우 `Controller`에서 파생합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-116">There's an exception to this rule: if you plan to use the same controller for both views and web APIs, derive it from `Controller`.</span></span>
 
-<span data-ttu-id="2fb86-117">`ControllerBase` 클래스는 HTTP 요청을 처리하는 데 유용한 많은 속성 및 메서드를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-117">The `ControllerBase` class provides many properties and methods that are useful for handling HTTP requests.</span></span> <span data-ttu-id="2fb86-118">예를 들어, `ControllerBase.CreatedAtAction`은 201 상태 코드를 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-118">For example, `ControllerBase.CreatedAtAction` returns a 201 status code:</span></span>
+<span data-ttu-id="b0625-117">`ControllerBase` 클래스는 HTTP 요청을 처리하는 데 유용한 많은 속성 및 메서드를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-117">The `ControllerBase` class provides many properties and methods that are useful for handling HTTP requests.</span></span> <span data-ttu-id="b0625-118">예를 들어, `ControllerBase.CreatedAtAction`은 201 상태 코드를 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-118">For example, `ControllerBase.CreatedAtAction` returns a 201 status code:</span></span>
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/PetsController.cs?name=snippet_400And201&highlight=10)]
 
-<span data-ttu-id="2fb86-119">다음은 `ControllerBase`가 제공하는 메서드의 몇 가지 예입니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-119">Here are some more examples of methods that `ControllerBase` provides.</span></span>
+<span data-ttu-id="b0625-119">다음은 `ControllerBase`가 제공하는 메서드의 몇 가지 예입니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-119">Here are some more examples of methods that `ControllerBase` provides.</span></span>
 
-|<span data-ttu-id="2fb86-120">메서드</span><span class="sxs-lookup"><span data-stu-id="2fb86-120">Method</span></span>   |<span data-ttu-id="2fb86-121">참고</span><span class="sxs-lookup"><span data-stu-id="2fb86-121">Notes</span></span>    |
+|<span data-ttu-id="b0625-120">메서드</span><span class="sxs-lookup"><span data-stu-id="b0625-120">Method</span></span>   |<span data-ttu-id="b0625-121">참고</span><span class="sxs-lookup"><span data-stu-id="b0625-121">Notes</span></span>    |
 |---------|---------|
-|<xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest%2A>| <span data-ttu-id="2fb86-122">400 상태 코드를 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-122">Returns 400 status code.</span></span>|
-|<xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A>|<span data-ttu-id="2fb86-123">404 상태 코드를 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-123">Returns 404 status code.</span></span>|
-|<xref:Microsoft.AspNetCore.Mvc.ControllerBase.PhysicalFile%2A>|<span data-ttu-id="2fb86-124">파일을 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-124">Returns a file.</span></span>|
-|<xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync%2A>|<span data-ttu-id="2fb86-125">[모델 바인딩](xref:mvc/models/model-binding)을 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-125">Invokes [model binding](xref:mvc/models/model-binding).</span></span>|
-|<xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryValidateModel%2A>|<span data-ttu-id="2fb86-126">[모델 유효성 검사](xref:mvc/models/validation)를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-126">Invokes [model validation](xref:mvc/models/validation).</span></span>|
+|<xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest%2A>| <span data-ttu-id="b0625-122">400 상태 코드를 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-122">Returns 400 status code.</span></span>|
+|<xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A>|<span data-ttu-id="b0625-123">404 상태 코드를 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-123">Returns 404 status code.</span></span>|
+|<xref:Microsoft.AspNetCore.Mvc.ControllerBase.PhysicalFile%2A>|<span data-ttu-id="b0625-124">파일을 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-124">Returns a file.</span></span>|
+|<xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync%2A>|<span data-ttu-id="b0625-125">[모델 바인딩](xref:mvc/models/model-binding)을 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-125">Invokes [model binding](xref:mvc/models/model-binding).</span></span>|
+|<xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryValidateModel%2A>|<span data-ttu-id="b0625-126">[모델 유효성 검사](xref:mvc/models/validation)를 호출합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-126">Invokes [model validation](xref:mvc/models/validation).</span></span>|
 
-<span data-ttu-id="2fb86-127">사용 가능한 모든 메서드 및 속성 목록을 보려면 <xref:Microsoft.AspNetCore.Mvc.ControllerBase>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="2fb86-127">For a list of all available methods and properties, see <xref:Microsoft.AspNetCore.Mvc.ControllerBase>.</span></span>
+<span data-ttu-id="b0625-127">사용 가능한 모든 메서드 및 속성 목록을 보려면 <xref:Microsoft.AspNetCore.Mvc.ControllerBase>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="b0625-127">For a list of all available methods and properties, see <xref:Microsoft.AspNetCore.Mvc.ControllerBase>.</span></span>
 
-## <a name="attributes"></a><span data-ttu-id="2fb86-128">특성</span><span class="sxs-lookup"><span data-stu-id="2fb86-128">Attributes</span></span>
+## <a name="attributes"></a><span data-ttu-id="b0625-128">특성</span><span class="sxs-lookup"><span data-stu-id="b0625-128">Attributes</span></span>
 
-<span data-ttu-id="2fb86-129"><xref:Microsoft.AspNetCore.Mvc> 네임스페이스는 Web API 컨트롤러 및 작업 메서드의 동작을 구성하는 데 사용할 수 있는 특성을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-129">The <xref:Microsoft.AspNetCore.Mvc> namespace provides attributes that can be used to configure the behavior of web API controllers and action methods.</span></span> <span data-ttu-id="2fb86-130">다음 예제에서는 특성을 사용하여 지원되는 HTTP 작업 동사와 반환될 수 있는 알려진 HTTP 상태 코드를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-130">The following example uses attributes to specify the supported HTTP action verb and any known HTTP status codes that could be returned:</span></span>
+<span data-ttu-id="b0625-129"><xref:Microsoft.AspNetCore.Mvc> 네임스페이스는 Web API 컨트롤러 및 작업 메서드의 동작을 구성하는 데 사용할 수 있는 특성을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-129">The <xref:Microsoft.AspNetCore.Mvc> namespace provides attributes that can be used to configure the behavior of web API controllers and action methods.</span></span> <span data-ttu-id="b0625-130">다음 예제에서는 특성을 사용하여 지원되는 HTTP 작업 동사와 반환될 수 있는 알려진 HTTP 상태 코드를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-130">The following example uses attributes to specify the supported HTTP action verb and any known HTTP status codes that could be returned:</span></span>
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/PetsController.cs?name=snippet_400And201&highlight=1-3)]
 
-<span data-ttu-id="2fb86-131">다음은 사용 가능한 특성의 몇 가지 예입니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-131">Here are some more examples of attributes that are available.</span></span>
+<span data-ttu-id="b0625-131">다음은 사용 가능한 특성의 몇 가지 예입니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-131">Here are some more examples of attributes that are available.</span></span>
 
-|<span data-ttu-id="2fb86-132">특성</span><span class="sxs-lookup"><span data-stu-id="2fb86-132">Attribute</span></span>|<span data-ttu-id="2fb86-133">참고</span><span class="sxs-lookup"><span data-stu-id="2fb86-133">Notes</span></span>|
+|<span data-ttu-id="b0625-132">특성</span><span class="sxs-lookup"><span data-stu-id="b0625-132">Attribute</span></span>|<span data-ttu-id="b0625-133">참고</span><span class="sxs-lookup"><span data-stu-id="b0625-133">Notes</span></span>|
 |---------|-----|
-|[`[Route]`](<xref:Microsoft.AspNetCore.Mvc.RouteAttribute>)      |<span data-ttu-id="2fb86-134">컨트롤러 또는 작업의 URL 패턴을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-134">Specifies URL pattern for a controller or action.</span></span>|
-|[`[Bind]`](<xref:Microsoft.AspNetCore.Mvc.BindAttribute>)        |<span data-ttu-id="2fb86-135">모델 바인딩에 포함할 접두사 및 속성을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-135">Specifies prefix and properties to include for model binding.</span></span>|
-|[`[HttpGet]`](<xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute>)  |<span data-ttu-id="2fb86-136">HTTP GET 작업 동사를 지원하는 작업을 식별합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-136">Identifies an action that supports the HTTP GET action verb.</span></span>|
-|[`[Consumes]`](<xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute>)|<span data-ttu-id="2fb86-137">작업에서 허용하는 데이터 형식을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-137">Specifies data types that an action accepts.</span></span>|
-|[`[Produces]`](<xref:Microsoft.AspNetCore.Mvc.ProducesAttribute>)|<span data-ttu-id="2fb86-138">작업에서 반환하는 데이터 형식을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-138">Specifies data types that an action returns.</span></span>|
+|[`[Route]`](<xref:Microsoft.AspNetCore.Mvc.RouteAttribute>)      |<span data-ttu-id="b0625-134">컨트롤러 또는 작업의 URL 패턴을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-134">Specifies URL pattern for a controller or action.</span></span>|
+|[`[Bind]`](<xref:Microsoft.AspNetCore.Mvc.BindAttribute>)        |<span data-ttu-id="b0625-135">모델 바인딩에 포함할 접두사 및 속성을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-135">Specifies prefix and properties to include for model binding.</span></span>|
+|[`[HttpGet]`](<xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute>)  |<span data-ttu-id="b0625-136">HTTP GET 작업 동사를 지원하는 작업을 식별합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-136">Identifies an action that supports the HTTP GET action verb.</span></span>|
+|[`[Consumes]`](<xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute>)|<span data-ttu-id="b0625-137">작업에서 허용하는 데이터 형식을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-137">Specifies data types that an action accepts.</span></span>|
+|[`[Produces]`](<xref:Microsoft.AspNetCore.Mvc.ProducesAttribute>)|<span data-ttu-id="b0625-138">작업에서 반환하는 데이터 형식을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-138">Specifies data types that an action returns.</span></span>|
 
-<span data-ttu-id="2fb86-139">사용 가능한 특성이 포함된 목록은 <xref:Microsoft.AspNetCore.Mvc> 네임스페이스를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="2fb86-139">For a list that includes the available attributes, see the <xref:Microsoft.AspNetCore.Mvc> namespace.</span></span>
+<span data-ttu-id="b0625-139">사용 가능한 특성이 포함된 목록은 <xref:Microsoft.AspNetCore.Mvc> 네임스페이스를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="b0625-139">For a list that includes the available attributes, see the <xref:Microsoft.AspNetCore.Mvc> namespace.</span></span>
 
-## <a name="apicontroller-attribute"></a><span data-ttu-id="2fb86-140">ApiController 특성</span><span class="sxs-lookup"><span data-stu-id="2fb86-140">ApiController attribute</span></span>
+## <a name="apicontroller-attribute"></a><span data-ttu-id="b0625-140">ApiController 특성</span><span class="sxs-lookup"><span data-stu-id="b0625-140">ApiController attribute</span></span>
 
-<span data-ttu-id="2fb86-141">[`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) 특성을 컨트롤러 클래스에 적용하여 다음과 같이 독자적인 API 관련 동작을 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-141">The [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) attribute can be applied to a controller class to enable the following opinionated, API-specific behaviors:</span></span>
+<span data-ttu-id="b0625-141">[`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) 특성을 컨트롤러 클래스에 적용하여 다음과 같이 독자적인 API 관련 동작을 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-141">The [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) attribute can be applied to a controller class to enable the following opinionated, API-specific behaviors:</span></span>
 
-* [<span data-ttu-id="2fb86-142">특성 라우팅 요구 사항</span><span class="sxs-lookup"><span data-stu-id="2fb86-142">Attribute routing requirement</span></span>](#attribute-routing-requirement)
-* [<span data-ttu-id="2fb86-143">자동 HTTP 400 응답</span><span class="sxs-lookup"><span data-stu-id="2fb86-143">Automatic HTTP 400 responses</span></span>](#automatic-http-400-responses)
-* [<span data-ttu-id="2fb86-144">바인딩 소스 매개 변수 유추</span><span class="sxs-lookup"><span data-stu-id="2fb86-144">Binding source parameter inference</span></span>](#binding-source-parameter-inference)
-* [<span data-ttu-id="2fb86-145">다중 파트/폼 데이터 요청 유추</span><span class="sxs-lookup"><span data-stu-id="2fb86-145">Multipart/form-data request inference</span></span>](#multipartform-data-request-inference)
-* [<span data-ttu-id="2fb86-146">오류 상태 코드에 대한 문제 세부 정보</span><span class="sxs-lookup"><span data-stu-id="2fb86-146">Problem details for error status codes</span></span>](#problem-details-for-error-status-codes)
+::: moniker range=">= aspnetcore-2.2"
 
-<span data-ttu-id="2fb86-147">이러한 기능을 사용하려면 [호환성 버전](xref:mvc/compatibility-version) 2.1 이상이 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-147">These features require a [compatibility version](xref:mvc/compatibility-version) of 2.1 or later.</span></span>
+* [<span data-ttu-id="b0625-142">특성 라우팅 요구 사항</span><span class="sxs-lookup"><span data-stu-id="b0625-142">Attribute routing requirement</span></span>](#attribute-routing-requirement)
+* [<span data-ttu-id="b0625-143">자동 HTTP 400 응답</span><span class="sxs-lookup"><span data-stu-id="b0625-143">Automatic HTTP 400 responses</span></span>](#automatic-http-400-responses)
+* [<span data-ttu-id="b0625-144">바인딩 소스 매개 변수 유추</span><span class="sxs-lookup"><span data-stu-id="b0625-144">Binding source parameter inference</span></span>](#binding-source-parameter-inference)
+* [<span data-ttu-id="b0625-145">다중 파트/폼 데이터 요청 유추</span><span class="sxs-lookup"><span data-stu-id="b0625-145">Multipart/form-data request inference</span></span>](#multipartform-data-request-inference)
+* [<span data-ttu-id="b0625-146">오류 상태 코드에 대한 문제 세부 정보</span><span class="sxs-lookup"><span data-stu-id="b0625-146">Problem details for error status codes</span></span>](#problem-details-for-error-status-codes)
 
-### <a name="attribute-on-specific-controllers"></a><span data-ttu-id="2fb86-148">특정 컨트롤러의 특성</span><span class="sxs-lookup"><span data-stu-id="2fb86-148">Attribute on specific controllers</span></span>
+<span data-ttu-id="b0625-147">*오류 상태 코드에 대한 문제 세부 정보* 기능을 사용하려면 2.2 이상의 [호환성 버전](xref:mvc/compatibility-version)이 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-147">The *Problem details for error status codes* feature requires a [compatibility version](xref:mvc/compatibility-version) of 2.2 or later.</span></span> <span data-ttu-id="b0625-148">기타 기능을 사용하려면 2.1 이상의 호환성 버전이 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-148">The other features require a compatibility version of 2.1 or later.</span></span>
 
-<span data-ttu-id="2fb86-149">프로젝트 템플릿의 다음 예제에서처럼 `[ApiController]` 특성을 특정 컨트롤러에 적용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-149">The `[ApiController]` attribute can be applied to specific controllers, as in the following example from the project template:</span></span>
+::: moniker-end
+
+::: moniker range="= aspnetcore-2.1"
+
+* [<span data-ttu-id="b0625-149">특성 라우팅 요구 사항</span><span class="sxs-lookup"><span data-stu-id="b0625-149">Attribute routing requirement</span></span>](#attribute-routing-requirement)
+* [<span data-ttu-id="b0625-150">자동 HTTP 400 응답</span><span class="sxs-lookup"><span data-stu-id="b0625-150">Automatic HTTP 400 responses</span></span>](#automatic-http-400-responses)
+* [<span data-ttu-id="b0625-151">바인딩 소스 매개 변수 유추</span><span class="sxs-lookup"><span data-stu-id="b0625-151">Binding source parameter inference</span></span>](#binding-source-parameter-inference)
+* [<span data-ttu-id="b0625-152">다중 파트/폼 데이터 요청 유추</span><span class="sxs-lookup"><span data-stu-id="b0625-152">Multipart/form-data request inference</span></span>](#multipartform-data-request-inference)
+
+<span data-ttu-id="b0625-153">이러한 기능을 사용하려면 [호환성 버전](xref:mvc/compatibility-version) 2.1 이상이 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-153">These features require a [compatibility version](xref:mvc/compatibility-version) of 2.1 or later.</span></span>
+
+::: moniker-end
+
+### <a name="attribute-on-specific-controllers"></a><span data-ttu-id="b0625-154">특정 컨트롤러의 특성</span><span class="sxs-lookup"><span data-stu-id="b0625-154">Attribute on specific controllers</span></span>
+
+<span data-ttu-id="b0625-155">프로젝트 템플릿의 다음 예제에서처럼 `[ApiController]` 특성을 특정 컨트롤러에 적용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-155">The `[ApiController]` attribute can be applied to specific controllers, as in the following example from the project template:</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -102,9 +117,9 @@ ms.locfileid: "74880537"
 
 ::: moniker-end
 
-### <a name="attribute-on-multiple-controllers"></a><span data-ttu-id="2fb86-150">여러 컨트롤러의 특성</span><span class="sxs-lookup"><span data-stu-id="2fb86-150">Attribute on multiple controllers</span></span>
+### <a name="attribute-on-multiple-controllers"></a><span data-ttu-id="b0625-156">여러 컨트롤러의 특성</span><span class="sxs-lookup"><span data-stu-id="b0625-156">Attribute on multiple controllers</span></span>
 
-<span data-ttu-id="2fb86-151">둘 이상의 컨트롤러에서 특성을 사용하는 방법으로 `[ApiController]` 특성으로 주석이 추가된 사용자 지정 기본 컨트롤러 클래스를 만드는 방법이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-151">One approach to using the attribute on more than one controller is to create a custom base controller class annotated with the `[ApiController]` attribute.</span></span> <span data-ttu-id="2fb86-152">다음 예제는 사용자 지정 기본 클래스와 여기에서 파생되는 컨트롤러를 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-152">The following example shows a custom base class and a controller that derives from it:</span></span>
+<span data-ttu-id="b0625-157">둘 이상의 컨트롤러에서 특성을 사용하는 방법으로 `[ApiController]` 특성으로 주석이 추가된 사용자 지정 기본 컨트롤러 클래스를 만드는 방법이 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-157">One approach to using the attribute on more than one controller is to create a custom base controller class annotated with the `[ApiController]` attribute.</span></span> <span data-ttu-id="b0625-158">다음 예제는 사용자 지정 기본 클래스와 여기에서 파생되는 컨트롤러를 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-158">The following example shows a custom base class and a controller that derives from it:</span></span>
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/MyControllerBase.cs?name=snippet_MyControllerBase)]
 
@@ -122,9 +137,9 @@ ms.locfileid: "74880537"
 
 ::: moniker range=">= aspnetcore-2.2"
 
-### <a name="attribute-on-an-assembly"></a><span data-ttu-id="2fb86-153">어셈블리의 특성</span><span class="sxs-lookup"><span data-stu-id="2fb86-153">Attribute on an assembly</span></span>
+### <a name="attribute-on-an-assembly"></a><span data-ttu-id="b0625-159">어셈블리의 특성</span><span class="sxs-lookup"><span data-stu-id="b0625-159">Attribute on an assembly</span></span>
 
-<span data-ttu-id="2fb86-154">[호환성 버전](xref:mvc/compatibility-version)이 2.2 이상으로 설정된 경우 `[ApiController]` 특성을 어셈블리에 적용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-154">If [compatibility version](xref:mvc/compatibility-version) is set to 2.2 or later, the `[ApiController]` attribute can be applied to an assembly.</span></span> <span data-ttu-id="2fb86-155">이 방식의 주석은 웹 API 동작을 어셈블리의 모든 컨트롤러에 적용합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-155">Annotation in this manner applies web API behavior to all controllers in the assembly.</span></span> <span data-ttu-id="2fb86-156">개별 컨트롤러를 대상으로 옵트아웃하는 방법은 없습니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-156">There's no way to opt out for individual controllers.</span></span> <span data-ttu-id="2fb86-157">어셈블리 수준 특성을 `Startup` 클래스 주위의 네임스페이스 선언에 적용합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-157">Apply the assembly-level attribute to the namespace declaration surrounding the `Startup` class:</span></span>
+<span data-ttu-id="b0625-160">[호환성 버전](xref:mvc/compatibility-version)이 2.2 이상으로 설정된 경우 `[ApiController]` 특성을 어셈블리에 적용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-160">If [compatibility version](xref:mvc/compatibility-version) is set to 2.2 or later, the `[ApiController]` attribute can be applied to an assembly.</span></span> <span data-ttu-id="b0625-161">이 방식의 주석은 웹 API 동작을 어셈블리의 모든 컨트롤러에 적용합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-161">Annotation in this manner applies web API behavior to all controllers in the assembly.</span></span> <span data-ttu-id="b0625-162">개별 컨트롤러를 대상으로 옵트아웃하는 방법은 없습니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-162">There's no way to opt out for individual controllers.</span></span> <span data-ttu-id="b0625-163">어셈블리 수준 특성을 `Startup` 클래스 주위의 네임스페이스 선언에 적용합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-163">Apply the assembly-level attribute to the namespace declaration surrounding the `Startup` class:</span></span>
 
 ```csharp
 [assembly: ApiController]
@@ -139,15 +154,15 @@ namespace WebApiSample
 
 ::: moniker-end
 
-## <a name="attribute-routing-requirement"></a><span data-ttu-id="2fb86-158">특성 라우팅 요구 사항</span><span class="sxs-lookup"><span data-stu-id="2fb86-158">Attribute routing requirement</span></span>
+## <a name="attribute-routing-requirement"></a><span data-ttu-id="b0625-164">특성 라우팅 요구 사항</span><span class="sxs-lookup"><span data-stu-id="b0625-164">Attribute routing requirement</span></span>
 
-<span data-ttu-id="2fb86-159">`[ApiController]` 특성은 특성 라우팅을 요구합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-159">The `[ApiController]` attribute makes attribute routing a requirement.</span></span> <span data-ttu-id="2fb86-160">예:</span><span class="sxs-lookup"><span data-stu-id="2fb86-160">For example:</span></span>
+<span data-ttu-id="b0625-165">`[ApiController]` 특성은 특성 라우팅을 요구합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-165">The `[ApiController]` attribute makes attribute routing a requirement.</span></span> <span data-ttu-id="b0625-166">예:</span><span class="sxs-lookup"><span data-stu-id="b0625-166">For example:</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
 [!code-csharp[](index/samples/3.x/Controllers/WeatherForecastController.cs?name=snippet_ControllerSignature&highlight=2)]
 
-<span data-ttu-id="2fb86-161">작업은 `Startup.Configure`의 `UseEndpoints`, <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A> 또는 <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A>에 의해 정의된 [규칙 기반 경로](xref:mvc/controllers/routing#conventional-routing)를 통해 액세스할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-161">Actions are inaccessible via [conventional routes](xref:mvc/controllers/routing#conventional-routing) defined by `UseEndpoints`, <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A>, or <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A> in `Startup.Configure`.</span></span>
+<span data-ttu-id="b0625-167">작업은 `Startup.Configure`의 `UseEndpoints`, <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A> 또는 <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A>에 의해 정의된 [규칙 기반 경로](xref:mvc/controllers/routing#conventional-routing)를 통해 액세스할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-167">Actions are inaccessible via [conventional routes](xref:mvc/controllers/routing#conventional-routing) defined by `UseEndpoints`, <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A>, or <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A> in `Startup.Configure`.</span></span>
 
 ::: moniker-end
 
@@ -155,13 +170,13 @@ namespace WebApiSample
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/ValuesController.cs?name=snippet_ControllerSignature&highlight=1)]
 
-<span data-ttu-id="2fb86-162">작업은 <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A>에 의해 정의된 [규칙 기반 경로](xref:mvc/controllers/routing#conventional-routing)를 통해 또는 `Startup.Configure`의 <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A>에서 액세스할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-162">Actions are inaccessible via [conventional routes](xref:mvc/controllers/routing#conventional-routing) defined by <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A> or <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A> in `Startup.Configure`.</span></span>
+<span data-ttu-id="b0625-168">작업은 <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A>에 의해 정의된 [규칙 기반 경로](xref:mvc/controllers/routing#conventional-routing)를 통해 또는 `Startup.Configure`의 <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A>에서 액세스할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-168">Actions are inaccessible via [conventional routes](xref:mvc/controllers/routing#conventional-routing) defined by <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A> or <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A> in `Startup.Configure`.</span></span>
 
 ::: moniker-end
 
-## <a name="automatic-http-400-responses"></a><span data-ttu-id="2fb86-163">자동 HTTP 400 응답</span><span class="sxs-lookup"><span data-stu-id="2fb86-163">Automatic HTTP 400 responses</span></span>
+## <a name="automatic-http-400-responses"></a><span data-ttu-id="b0625-169">자동 HTTP 400 응답</span><span class="sxs-lookup"><span data-stu-id="b0625-169">Automatic HTTP 400 responses</span></span>
 
-<span data-ttu-id="2fb86-164">`[ApiController]` 특성은 HTTP 400 응답을 자동으로 트리거하는 모델 유효성 검사 오류를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-164">The `[ApiController]` attribute makes model validation errors automatically trigger an HTTP 400 response.</span></span> <span data-ttu-id="2fb86-165">따라서 다음 코드는 작업 메서드에서 불필요합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-165">Consequently, the following code is unnecessary in an action method:</span></span>
+<span data-ttu-id="b0625-170">`[ApiController]` 특성은 HTTP 400 응답을 자동으로 트리거하는 모델 유효성 검사 오류를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-170">The `[ApiController]` attribute makes model validation errors automatically trigger an HTTP 400 response.</span></span> <span data-ttu-id="b0625-171">따라서 다음 코드는 작업 메서드에서 불필요합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-171">Consequently, the following code is unnecessary in an action method:</span></span>
 
 ```csharp
 if (!ModelState.IsValid)
@@ -170,11 +185,11 @@ if (!ModelState.IsValid)
 }
 ```
 
-<span data-ttu-id="2fb86-166">ASP.NET Core MVC는 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter> 작업 필터를 사용하여 위의 검사를 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-166">ASP.NET Core MVC uses the <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter> action filter to do the preceding check.</span></span>
+<span data-ttu-id="b0625-172">ASP.NET Core MVC는 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter> 작업 필터를 사용하여 위의 검사를 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-172">ASP.NET Core MVC uses the <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter> action filter to do the preceding check.</span></span>
 
-### <a name="default-badrequest-response"></a><span data-ttu-id="2fb86-167">기본 BadRequest 응답</span><span class="sxs-lookup"><span data-stu-id="2fb86-167">Default BadRequest response</span></span>
+### <a name="default-badrequest-response"></a><span data-ttu-id="b0625-173">기본 BadRequest 응답</span><span class="sxs-lookup"><span data-stu-id="b0625-173">Default BadRequest response</span></span>
 
-<span data-ttu-id="2fb86-168">호환성 버전이 2.1이면 HTTP 400 응답에 대한 기본 응답 형식은 <xref:Microsoft.AspNetCore.Mvc.SerializableError>입니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-168">With a compatibility version of 2.1, the default response type for an HTTP 400 response is <xref:Microsoft.AspNetCore.Mvc.SerializableError>.</span></span> <span data-ttu-id="2fb86-169">다음 요청 본문은 직렬화된 형식의 예제입니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-169">The following request body is an example of the serialized type:</span></span>
+<span data-ttu-id="b0625-174">호환성 버전이 2.1이면 HTTP 400 응답에 대한 기본 응답 형식은 <xref:Microsoft.AspNetCore.Mvc.SerializableError>입니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-174">With a compatibility version of 2.1, the default response type for an HTTP 400 response is <xref:Microsoft.AspNetCore.Mvc.SerializableError>.</span></span> <span data-ttu-id="b0625-175">다음 요청 본문은 직렬화된 형식의 예제입니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-175">The following request body is an example of the serialized type:</span></span>
 
 ```json
 {
@@ -186,7 +201,7 @@ if (!ModelState.IsValid)
 
 ::: moniker range=">= aspnetcore-2.2"
 
-<span data-ttu-id="2fb86-170">호환성 버전이 2.2 이상이면 HTTP 400 응답에 대한 기본 응답 형식은 <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails>입니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-170">With a compatibility version of 2.2 or later, the default response type for an HTTP 400 response is <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails>.</span></span> <span data-ttu-id="2fb86-171">다음 요청 본문은 직렬화된 형식의 예제입니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-171">The following request body is an example of the serialized type:</span></span>
+<span data-ttu-id="b0625-176">호환성 버전이 2.2 이상이면 HTTP 400 응답에 대한 기본 응답 형식은 <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails>입니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-176">With a compatibility version of 2.2 or later, the default response type for an HTTP 400 response is <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails>.</span></span> <span data-ttu-id="b0625-177">다음 요청 본문은 직렬화된 형식의 예제입니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-177">The following request body is an example of the serialized type:</span></span>
 
 ```json
 {
@@ -202,20 +217,20 @@ if (!ModelState.IsValid)
 }
 ```
 
-<span data-ttu-id="2fb86-172">`ValidationProblemDetails` 형식:</span><span class="sxs-lookup"><span data-stu-id="2fb86-172">The `ValidationProblemDetails` type:</span></span>
+<span data-ttu-id="b0625-178">`ValidationProblemDetails` 형식:</span><span class="sxs-lookup"><span data-stu-id="b0625-178">The `ValidationProblemDetails` type:</span></span>
 
-* <span data-ttu-id="2fb86-173">웹 API 응답에서 오류를 지정하기 위해 머신이 읽을 수 있는 형식을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-173">Provides a machine-readable format for specifying errors in web API responses.</span></span>
-* <span data-ttu-id="2fb86-174">[RFC 7807 사양](https://tools.ietf.org/html/rfc7807)을 준수합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-174">Complies with the [RFC 7807 specification](https://tools.ietf.org/html/rfc7807).</span></span>
+* <span data-ttu-id="b0625-179">웹 API 응답에서 오류를 지정하기 위해 머신이 읽을 수 있는 형식을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-179">Provides a machine-readable format for specifying errors in web API responses.</span></span>
+* <span data-ttu-id="b0625-180">[RFC 7807 사양](https://tools.ietf.org/html/rfc7807)을 준수합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-180">Complies with the [RFC 7807 specification](https://tools.ietf.org/html/rfc7807).</span></span>
 
 ::: moniker-end
 
-### <a name="log-automatic-400-responses"></a><span data-ttu-id="2fb86-175">자동 400 응답 기록</span><span class="sxs-lookup"><span data-stu-id="2fb86-175">Log automatic 400 responses</span></span>
+### <a name="log-automatic-400-responses"></a><span data-ttu-id="b0625-181">자동 400 응답 기록</span><span class="sxs-lookup"><span data-stu-id="b0625-181">Log automatic 400 responses</span></span>
 
-<span data-ttu-id="2fb86-176">[How to log automatic 400 responses on model validation errors (aspnet/AspNetCore.Docs #12157)](https://github.com/aspnet/AspNetCore.Docs/issues/12157)(모델 유효성 검사 오류에서 자동 400 응답을 기록하는 방법(aspnet/AspNetCore.Docs #12157))를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="2fb86-176">See [How to log automatic 400 responses on model validation errors (aspnet/AspNetCore.Docs #12157)](https://github.com/aspnet/AspNetCore.Docs/issues/12157).</span></span>
+<span data-ttu-id="b0625-182">[How to log automatic 400 responses on model validation errors (aspnet/AspNetCore.Docs #12157)](https://github.com/aspnet/AspNetCore.Docs/issues/12157)(모델 유효성 검사 오류에서 자동 400 응답을 기록하는 방법(aspnet/AspNetCore.Docs #12157))를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="b0625-182">See [How to log automatic 400 responses on model validation errors (aspnet/AspNetCore.Docs #12157)](https://github.com/aspnet/AspNetCore.Docs/issues/12157).</span></span>
 
-### <a name="disable-automatic-400-response"></a><span data-ttu-id="2fb86-177">자동 400 응답 사용 안 함</span><span class="sxs-lookup"><span data-stu-id="2fb86-177">Disable automatic 400 response</span></span>
+### <a name="disable-automatic-400-response"></a><span data-ttu-id="b0625-183">자동 400 응답 사용 안 함</span><span class="sxs-lookup"><span data-stu-id="b0625-183">Disable automatic 400 response</span></span>
 
-<span data-ttu-id="2fb86-178">자동 400 동작을 사용하지 않으려면 <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressModelStateInvalidFilter> 속성을 `true`로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-178">To disable the automatic 400 behavior, set the <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressModelStateInvalidFilter> property to `true`.</span></span> <span data-ttu-id="2fb86-179">`Startup.ConfigureServices`에 다음 강조 표시된 코드를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-179">Add the following highlighted code in `Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="b0625-184">자동 400 동작을 사용하지 않으려면 <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressModelStateInvalidFilter> 속성을 `true`로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-184">To disable the automatic 400 behavior, set the <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressModelStateInvalidFilter> property to `true`.</span></span> <span data-ttu-id="b0625-185">`Startup.ConfigureServices`에 다음 강조 표시된 코드를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-185">Add the following highlighted code in `Startup.ConfigureServices`:</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -235,56 +250,56 @@ if (!ModelState.IsValid)
 
 ::: moniker-end
 
-## <a name="binding-source-parameter-inference"></a><span data-ttu-id="2fb86-180">바인딩 소스 매개 변수 유추</span><span class="sxs-lookup"><span data-stu-id="2fb86-180">Binding source parameter inference</span></span>
+## <a name="binding-source-parameter-inference"></a><span data-ttu-id="b0625-186">바인딩 소스 매개 변수 유추</span><span class="sxs-lookup"><span data-stu-id="b0625-186">Binding source parameter inference</span></span>
 
-<span data-ttu-id="2fb86-181">바인딩 소스 특성은 작업 매개 변수 값이 발견되는 위치를 정의합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-181">A binding source attribute defines the location at which an action parameter's value is found.</span></span> <span data-ttu-id="2fb86-182">다음 바인딩 소스 특성이 존재합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-182">The following binding source attributes exist:</span></span>
+<span data-ttu-id="b0625-187">바인딩 소스 특성은 작업 매개 변수 값이 발견되는 위치를 정의합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-187">A binding source attribute defines the location at which an action parameter's value is found.</span></span> <span data-ttu-id="b0625-188">다음 바인딩 소스 특성이 존재합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-188">The following binding source attributes exist:</span></span>
 
-|<span data-ttu-id="2fb86-183">특성</span><span class="sxs-lookup"><span data-stu-id="2fb86-183">Attribute</span></span>|<span data-ttu-id="2fb86-184">바인딩 원본</span><span class="sxs-lookup"><span data-stu-id="2fb86-184">Binding source</span></span> |
+|<span data-ttu-id="b0625-189">특성</span><span class="sxs-lookup"><span data-stu-id="b0625-189">Attribute</span></span>|<span data-ttu-id="b0625-190">바인딩 원본</span><span class="sxs-lookup"><span data-stu-id="b0625-190">Binding source</span></span> |
 |---------|---------|
-|[`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute)     | <span data-ttu-id="2fb86-185">요청 본문</span><span class="sxs-lookup"><span data-stu-id="2fb86-185">Request body</span></span> |
-|[`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute)     | <span data-ttu-id="2fb86-186">요청 본문에서 양식 데이터</span><span class="sxs-lookup"><span data-stu-id="2fb86-186">Form data in the request body</span></span> |
-|[`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute) | <span data-ttu-id="2fb86-187">요청 헤더</span><span class="sxs-lookup"><span data-stu-id="2fb86-187">Request header</span></span> |
-|[`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute)   | <span data-ttu-id="2fb86-188">요청 쿼리 문자열 매개 변수</span><span class="sxs-lookup"><span data-stu-id="2fb86-188">Request query string parameter</span></span> |
-|[`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute)   | <span data-ttu-id="2fb86-189">현재 요청의 경로 데이터</span><span class="sxs-lookup"><span data-stu-id="2fb86-189">Route data from the current request</span></span> |
-|[`[FromServices]`](xref:mvc/controllers/dependency-injection#action-injection-with-fromservices) | <span data-ttu-id="2fb86-190">작업 매개 변수로 삽입된 요청 서비스</span><span class="sxs-lookup"><span data-stu-id="2fb86-190">The request service injected as an action parameter</span></span> |
+|[`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute)     | <span data-ttu-id="b0625-191">요청 본문</span><span class="sxs-lookup"><span data-stu-id="b0625-191">Request body</span></span> |
+|[`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute)     | <span data-ttu-id="b0625-192">요청 본문에서 양식 데이터</span><span class="sxs-lookup"><span data-stu-id="b0625-192">Form data in the request body</span></span> |
+|[`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute) | <span data-ttu-id="b0625-193">요청 헤더</span><span class="sxs-lookup"><span data-stu-id="b0625-193">Request header</span></span> |
+|[`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute)   | <span data-ttu-id="b0625-194">요청 쿼리 문자열 매개 변수</span><span class="sxs-lookup"><span data-stu-id="b0625-194">Request query string parameter</span></span> |
+|[`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute)   | <span data-ttu-id="b0625-195">현재 요청의 경로 데이터</span><span class="sxs-lookup"><span data-stu-id="b0625-195">Route data from the current request</span></span> |
+|[`[FromServices]`](xref:mvc/controllers/dependency-injection#action-injection-with-fromservices) | <span data-ttu-id="b0625-196">작업 매개 변수로 삽입된 요청 서비스</span><span class="sxs-lookup"><span data-stu-id="b0625-196">The request service injected as an action parameter</span></span> |
 
 > [!WARNING]
-> <span data-ttu-id="2fb86-191">값에 `%2f`(즉, `/`)이 포함될 수 있는 경우 `[FromRoute]`를 사용하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-191">Don't use `[FromRoute]` when values might contain `%2f` (that is `/`).</span></span> <span data-ttu-id="2fb86-192">`%2f`는 `/`로 이스케이프가 해제되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-192">`%2f` won't be unescaped to `/`.</span></span> <span data-ttu-id="2fb86-193">값에 `%2f`가 포함될 수 있으면 `[FromQuery]`를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-193">Use `[FromQuery]` if the value might contain `%2f`.</span></span>
+> <span data-ttu-id="b0625-197">값에 `%2f`(즉, `/`)이 포함될 수 있는 경우 `[FromRoute]`를 사용하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-197">Don't use `[FromRoute]` when values might contain `%2f` (that is `/`).</span></span> <span data-ttu-id="b0625-198">`%2f`는 `/`로 이스케이프가 해제되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-198">`%2f` won't be unescaped to `/`.</span></span> <span data-ttu-id="b0625-199">값에 `%2f`가 포함될 수 있으면 `[FromQuery]`를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-199">Use `[FromQuery]` if the value might contain `%2f`.</span></span>
 
-<span data-ttu-id="2fb86-194">`[ApiController]` 특성 또는 `[FromQuery]` 같은 다른 바인딩 소스 특성 없이, ASP.NET Core 런타임에서 복합 개체 모델 바인더 사용을 시도합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-194">Without the `[ApiController]` attribute or binding source attributes like `[FromQuery]`, the ASP.NET Core runtime attempts to use the complex object model binder.</span></span> <span data-ttu-id="2fb86-195">복합 개체 모델 바인더는 정의된 순서로 값 공급자로부터 데이터를 풀합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-195">The complex object model binder pulls data from value providers in a defined order.</span></span>
+<span data-ttu-id="b0625-200">`[ApiController]` 특성 또는 `[FromQuery]` 같은 다른 바인딩 소스 특성 없이, ASP.NET Core 런타임에서 복합 개체 모델 바인더 사용을 시도합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-200">Without the `[ApiController]` attribute or binding source attributes like `[FromQuery]`, the ASP.NET Core runtime attempts to use the complex object model binder.</span></span> <span data-ttu-id="b0625-201">복합 개체 모델 바인더는 정의된 순서로 값 공급자로부터 데이터를 풀합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-201">The complex object model binder pulls data from value providers in a defined order.</span></span>
 
-<span data-ttu-id="2fb86-196">다음 예제에서 `[FromQuery]` 특성은 `discontinuedOnly` 매개 변수 값이 요청 URL의 쿼리 문자열에 제공됨을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-196">In the following example, the `[FromQuery]` attribute indicates that the `discontinuedOnly` parameter value is provided in the request URL's query string:</span></span>
+<span data-ttu-id="b0625-202">다음 예제에서 `[FromQuery]` 특성은 `discontinuedOnly` 매개 변수 값이 요청 URL의 쿼리 문자열에 제공됨을 나타냅니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-202">In the following example, the `[FromQuery]` attribute indicates that the `discontinuedOnly` parameter value is provided in the request URL's query string:</span></span>
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/ProductsController.cs?name=snippet_BindingSourceAttributes&highlight=3)]
 
-<span data-ttu-id="2fb86-197">`[ApiController]` 특성은 작업 매개 변수의 기본 데이터 원본에 유추 규칙을 적용합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-197">The `[ApiController]` attribute applies inference rules for the default data sources of action parameters.</span></span> <span data-ttu-id="2fb86-198">이러한 규칙을 통해 작업 매개 변수에 특성을 적용하여 바인딩 소스를 수동으로 식별할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-198">These rules save you from having to identify binding sources manually by applying attributes to the action parameters.</span></span> <span data-ttu-id="2fb86-199">바인딩 소스 유추 규칙은 다음과 같이 동작합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-199">The binding source inference rules behave as follows:</span></span>
+<span data-ttu-id="b0625-203">`[ApiController]` 특성은 작업 매개 변수의 기본 데이터 원본에 유추 규칙을 적용합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-203">The `[ApiController]` attribute applies inference rules for the default data sources of action parameters.</span></span> <span data-ttu-id="b0625-204">이러한 규칙을 통해 작업 매개 변수에 특성을 적용하여 바인딩 소스를 수동으로 식별할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-204">These rules save you from having to identify binding sources manually by applying attributes to the action parameters.</span></span> <span data-ttu-id="b0625-205">바인딩 소스 유추 규칙은 다음과 같이 동작합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-205">The binding source inference rules behave as follows:</span></span>
 
-* <span data-ttu-id="2fb86-200">`[FromBody]`는 복합 형식 매개 변수에 대해 유추됩니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-200">`[FromBody]` is inferred for complex type parameters.</span></span> <span data-ttu-id="2fb86-201">`[FromBody]` 유추 규칙은 <xref:Microsoft.AspNetCore.Http.IFormCollection> 및 <xref:System.Threading.CancellationToken> 같이 특별한 의미를 지닌 복합 기본 제공 형식에는 적용되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-201">An exception to the `[FromBody]` inference rule is any complex, built-in type with a special meaning, such as <xref:Microsoft.AspNetCore.Http.IFormCollection> and <xref:System.Threading.CancellationToken>.</span></span> <span data-ttu-id="2fb86-202">바인딩 소스 유추 코드는 이러한 특별한 형식을 무시합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-202">The binding source inference code ignores those special types.</span></span>
-* <span data-ttu-id="2fb86-203">`[FromForm]`은 <xref:Microsoft.AspNetCore.Http.IFormFile> 및 <xref:Microsoft.AspNetCore.Http.IFormFileCollection> 형식의 작업 매개 변수에 대해 유추됩니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-203">`[FromForm]` is inferred for action parameters of type <xref:Microsoft.AspNetCore.Http.IFormFile> and <xref:Microsoft.AspNetCore.Http.IFormFileCollection>.</span></span> <span data-ttu-id="2fb86-204">단순 또는 사용자 정의 형식에 대해서는 유추되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-204">It's not inferred for any simple or user-defined types.</span></span>
-* <span data-ttu-id="2fb86-205">`[FromRoute]`는 경로 템플릿에서 매개 변수와 일치하는 작업 매개 변수 이름에 대해 유추됩니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-205">`[FromRoute]` is inferred for any action parameter name matching a parameter in the route template.</span></span> <span data-ttu-id="2fb86-206">둘 이상의 경로가 작업 매개 변수와 일치하는 경우 모든 경로 값은 `[FromRoute]`로 간주됩니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-206">When more than one route matches an action parameter, any route value is considered `[FromRoute]`.</span></span>
-* <span data-ttu-id="2fb86-207">`[FromQuery]`는 다른 작업 매개 변수에 대해 유추됩니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-207">`[FromQuery]` is inferred for any other action parameters.</span></span>
+* <span data-ttu-id="b0625-206">`[FromBody]`는 복합 형식 매개 변수에 대해 유추됩니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-206">`[FromBody]` is inferred for complex type parameters.</span></span> <span data-ttu-id="b0625-207">`[FromBody]` 유추 규칙은 <xref:Microsoft.AspNetCore.Http.IFormCollection> 및 <xref:System.Threading.CancellationToken> 같이 특별한 의미를 지닌 복합 기본 제공 형식에는 적용되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-207">An exception to the `[FromBody]` inference rule is any complex, built-in type with a special meaning, such as <xref:Microsoft.AspNetCore.Http.IFormCollection> and <xref:System.Threading.CancellationToken>.</span></span> <span data-ttu-id="b0625-208">바인딩 소스 유추 코드는 이러한 특별한 형식을 무시합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-208">The binding source inference code ignores those special types.</span></span>
+* <span data-ttu-id="b0625-209">`[FromForm]`은 <xref:Microsoft.AspNetCore.Http.IFormFile> 및 <xref:Microsoft.AspNetCore.Http.IFormFileCollection> 형식의 작업 매개 변수에 대해 유추됩니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-209">`[FromForm]` is inferred for action parameters of type <xref:Microsoft.AspNetCore.Http.IFormFile> and <xref:Microsoft.AspNetCore.Http.IFormFileCollection>.</span></span> <span data-ttu-id="b0625-210">단순 또는 사용자 정의 형식에 대해서는 유추되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-210">It's not inferred for any simple or user-defined types.</span></span>
+* <span data-ttu-id="b0625-211">`[FromRoute]`는 경로 템플릿에서 매개 변수와 일치하는 작업 매개 변수 이름에 대해 유추됩니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-211">`[FromRoute]` is inferred for any action parameter name matching a parameter in the route template.</span></span> <span data-ttu-id="b0625-212">둘 이상의 경로가 작업 매개 변수와 일치하는 경우 모든 경로 값은 `[FromRoute]`로 간주됩니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-212">When more than one route matches an action parameter, any route value is considered `[FromRoute]`.</span></span>
+* <span data-ttu-id="b0625-213">`[FromQuery]`는 다른 작업 매개 변수에 대해 유추됩니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-213">`[FromQuery]` is inferred for any other action parameters.</span></span>
 
-### <a name="frombody-inference-notes"></a><span data-ttu-id="2fb86-208">FromBody 유추 메모</span><span class="sxs-lookup"><span data-stu-id="2fb86-208">FromBody inference notes</span></span>
+### <a name="frombody-inference-notes"></a><span data-ttu-id="b0625-214">FromBody 유추 메모</span><span class="sxs-lookup"><span data-stu-id="b0625-214">FromBody inference notes</span></span>
 
-<span data-ttu-id="2fb86-209">`[FromBody]`는 `string` 또는 `int` 같은 단순 형식에 대해 유추되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-209">`[FromBody]` isn't inferred for simple types such as `string` or `int`.</span></span> <span data-ttu-id="2fb86-210">따라서 해당 기능이 필요한 경우 단순 형식에 `[FromBody]` 특성을 사용해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-210">Therefore, the `[FromBody]` attribute should be used for simple types when that functionality is needed.</span></span>
+<span data-ttu-id="b0625-215">`[FromBody]`는 `string` 또는 `int` 같은 단순 형식에 대해 유추되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-215">`[FromBody]` isn't inferred for simple types such as `string` or `int`.</span></span> <span data-ttu-id="b0625-216">따라서 해당 기능이 필요한 경우 단순 형식에 `[FromBody]` 특성을 사용해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-216">Therefore, the `[FromBody]` attribute should be used for simple types when that functionality is needed.</span></span>
 
-<span data-ttu-id="2fb86-211">작업에 요청 본문에서 바인딩된 매개 변수가 두 개 이상 있는 경우 예외가 throw됩니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-211">When an action has more than one parameter bound from the request body, an exception is thrown.</span></span> <span data-ttu-id="2fb86-212">예를 들어 다음 모든 작업 메서드 시그니처로 예외가 발생합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-212">For example, all of the following action method signatures cause an exception:</span></span>
+<span data-ttu-id="b0625-217">작업에 요청 본문에서 바인딩된 매개 변수가 두 개 이상 있는 경우 예외가 throw됩니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-217">When an action has more than one parameter bound from the request body, an exception is thrown.</span></span> <span data-ttu-id="b0625-218">예를 들어 다음 모든 작업 메서드 시그니처로 예외가 발생합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-218">For example, all of the following action method signatures cause an exception:</span></span>
 
-* <span data-ttu-id="2fb86-213">복합 형식이므로 둘 다에서 유추된 `[FromBody]`</span><span class="sxs-lookup"><span data-stu-id="2fb86-213">`[FromBody]` inferred on both because they're complex types.</span></span>
+* <span data-ttu-id="b0625-219">복합 형식이므로 둘 다에서 유추된 `[FromBody]`</span><span class="sxs-lookup"><span data-stu-id="b0625-219">`[FromBody]` inferred on both because they're complex types.</span></span>
 
   ```csharp
   [HttpPost]
   public IActionResult Action1(Product product, Order order)
   ```
 
-* <span data-ttu-id="2fb86-214">하나의 `[FromBody]` 특성, 복합 형식이므로 다른 하나에서 유추됨</span><span class="sxs-lookup"><span data-stu-id="2fb86-214">`[FromBody]` attribute on one, inferred on the other because it's a complex type.</span></span>
+* <span data-ttu-id="b0625-220">하나의 `[FromBody]` 특성, 복합 형식이므로 다른 하나에서 유추됨</span><span class="sxs-lookup"><span data-stu-id="b0625-220">`[FromBody]` attribute on one, inferred on the other because it's a complex type.</span></span>
 
   ```csharp
   [HttpPost]
   public IActionResult Action2(Product product, [FromBody] Order order)
   ```
 
-* <span data-ttu-id="2fb86-215">둘 다의 `[FromBody]` 특성</span><span class="sxs-lookup"><span data-stu-id="2fb86-215">`[FromBody]` attribute on both.</span></span>
+* <span data-ttu-id="b0625-221">둘 다의 `[FromBody]` 특성</span><span class="sxs-lookup"><span data-stu-id="b0625-221">`[FromBody]` attribute on both.</span></span>
 
   ```csharp
   [HttpPost]
@@ -294,13 +309,13 @@ if (!ModelState.IsValid)
 ::: moniker range="= aspnetcore-2.1"
 
 > [!NOTE]
-> <span data-ttu-id="2fb86-216">ASP.NET Core 2.1에서 목록, 배열 등의 컬렉션 형식 매개 변수를 `[FromQuery]`로 잘못 유추합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-216">In ASP.NET Core 2.1, collection type parameters such as lists and arrays are incorrectly inferred as `[FromQuery]`.</span></span> <span data-ttu-id="2fb86-217">이러한 매개 변수가 요청 본문에서 바인딩되는 경우 해당 매개 변수에 `[FromBody]` 특성을 사용해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-217">The `[FromBody]` attribute should be used for these parameters if they are to be bound from the request body.</span></span> <span data-ttu-id="2fb86-218">이 문제는 ASP.NET Core 2.2 이상에서 수정됩니다. 즉, 기본적으로 컬렉션 형식 매개 변수를 본문에서 바인딩되도록 유추합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-218">This behavior is corrected in ASP.NET Core 2.2 or later, where collection type parameters are inferred to be bound from the body by default.</span></span>
+> <span data-ttu-id="b0625-222">ASP.NET Core 2.1에서 목록, 배열 등의 컬렉션 형식 매개 변수를 `[FromQuery]`로 잘못 유추합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-222">In ASP.NET Core 2.1, collection type parameters such as lists and arrays are incorrectly inferred as `[FromQuery]`.</span></span> <span data-ttu-id="b0625-223">이러한 매개 변수가 요청 본문에서 바인딩되는 경우 해당 매개 변수에 `[FromBody]` 특성을 사용해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-223">The `[FromBody]` attribute should be used for these parameters if they are to be bound from the request body.</span></span> <span data-ttu-id="b0625-224">이 문제는 ASP.NET Core 2.2 이상에서 수정됩니다. 즉, 기본적으로 컬렉션 형식 매개 변수를 본문에서 바인딩되도록 유추합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-224">This behavior is corrected in ASP.NET Core 2.2 or later, where collection type parameters are inferred to be bound from the body by default.</span></span>
 
 ::: moniker-end
 
-### <a name="disable-inference-rules"></a><span data-ttu-id="2fb86-219">유추 규칙 사용 안 함</span><span class="sxs-lookup"><span data-stu-id="2fb86-219">Disable inference rules</span></span>
+### <a name="disable-inference-rules"></a><span data-ttu-id="b0625-225">유추 규칙 사용 안 함</span><span class="sxs-lookup"><span data-stu-id="b0625-225">Disable inference rules</span></span>
 
-<span data-ttu-id="2fb86-220">바인딩 소스 유추를 사용하지 않으려면 <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressInferBindingSourcesForParameters>를 `true`로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-220">To disable binding source inference, set <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressInferBindingSourcesForParameters> to `true`.</span></span> <span data-ttu-id="2fb86-221">다음 코드를 `Startup.ConfigureServices`에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-221">Add the following code in `Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="b0625-226">바인딩 소스 유추를 사용하지 않으려면 <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressInferBindingSourcesForParameters>를 `true`로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-226">To disable binding source inference, set <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressInferBindingSourcesForParameters> to `true`.</span></span> <span data-ttu-id="b0625-227">다음 코드를 `Startup.ConfigureServices`에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-227">Add the following code in `Startup.ConfigureServices`:</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -320,11 +335,11 @@ if (!ModelState.IsValid)
 
 ::: moniker-end
 
-## <a name="multipartform-data-request-inference"></a><span data-ttu-id="2fb86-222">다중 파트/폼 데이터 요청 유추</span><span class="sxs-lookup"><span data-stu-id="2fb86-222">Multipart/form-data request inference</span></span>
+## <a name="multipartform-data-request-inference"></a><span data-ttu-id="b0625-228">다중 파트/폼 데이터 요청 유추</span><span class="sxs-lookup"><span data-stu-id="b0625-228">Multipart/form-data request inference</span></span>
 
-<span data-ttu-id="2fb86-223">작업 매개 변수를 [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) 특성으로 주석 처리하는 경우 `[ApiController]` 특성이 유추 규칙에 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-223">The `[ApiController]` attribute applies an inference rule when an action parameter is annotated with the [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) attribute.</span></span> <span data-ttu-id="2fb86-224">`multipart/form-data` 요청 콘텐츠 형식이 유추됩니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-224">The `multipart/form-data` request content type is inferred.</span></span>
+<span data-ttu-id="b0625-229">작업 매개 변수를 [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) 특성으로 주석 처리하는 경우 `[ApiController]` 특성이 유추 규칙에 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-229">The `[ApiController]` attribute applies an inference rule when an action parameter is annotated with the [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) attribute.</span></span> <span data-ttu-id="b0625-230">`multipart/form-data` 요청 콘텐츠 형식이 유추됩니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-230">The `multipart/form-data` request content type is inferred.</span></span>
 
-<span data-ttu-id="2fb86-225">기본 동작을 사용하지 않으려면 `Startup.ConfigureServices`에서 <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressConsumesConstraintForFormFileParameters> 속성을 `true`로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-225">To disable the default behavior, set the <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressConsumesConstraintForFormFileParameters> property to `true` in `Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="b0625-231">기본 동작을 사용하지 않으려면 `Startup.ConfigureServices`에서 <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressConsumesConstraintForFormFileParameters> 속성을 `true`로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-231">To disable the default behavior, set the <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressConsumesConstraintForFormFileParameters> property to `true` in `Startup.ConfigureServices`:</span></span>
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -346,15 +361,15 @@ if (!ModelState.IsValid)
 
 ::: moniker range=">= aspnetcore-2.2"
 
-## <a name="problem-details-for-error-status-codes"></a><span data-ttu-id="2fb86-226">오류 상태 코드에 대한 문제 세부 정보</span><span class="sxs-lookup"><span data-stu-id="2fb86-226">Problem details for error status codes</span></span>
+## <a name="problem-details-for-error-status-codes"></a><span data-ttu-id="b0625-232">오류 상태 코드에 대한 문제 세부 정보</span><span class="sxs-lookup"><span data-stu-id="b0625-232">Problem details for error status codes</span></span>
 
-<span data-ttu-id="2fb86-227">호환성 버전이 2.2 이상인 경우 MVC는 오류 결과(상태 코드 400 이상의 결과)를 <xref:Microsoft.AspNetCore.Mvc.ProblemDetails>가 있는 결과로 변환합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-227">When the compatibility version is 2.2 or later, MVC transforms an error result (a result with status code 400 or higher) to a result with <xref:Microsoft.AspNetCore.Mvc.ProblemDetails>.</span></span> <span data-ttu-id="2fb86-228">`ProblemDetails` 형식은 HTTP 응답에 머신에서 읽을 수 있는 오류 세부 정보를 제공하기 위해 [RFC 7807 사양](https://tools.ietf.org/html/rfc7807)을 기반으로 합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-228">The `ProblemDetails` type is based on the [RFC 7807 specification](https://tools.ietf.org/html/rfc7807) for providing machine-readable error details in an HTTP response.</span></span>
+<span data-ttu-id="b0625-233">호환성 버전이 2.2 이상인 경우 MVC는 오류 결과(상태 코드 400 이상의 결과)를 <xref:Microsoft.AspNetCore.Mvc.ProblemDetails>가 있는 결과로 변환합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-233">When the compatibility version is 2.2 or later, MVC transforms an error result (a result with status code 400 or higher) to a result with <xref:Microsoft.AspNetCore.Mvc.ProblemDetails>.</span></span> <span data-ttu-id="b0625-234">`ProblemDetails` 형식은 HTTP 응답에 머신에서 읽을 수 있는 오류 세부 정보를 제공하기 위해 [RFC 7807 사양](https://tools.ietf.org/html/rfc7807)을 기반으로 합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-234">The `ProblemDetails` type is based on the [RFC 7807 specification](https://tools.ietf.org/html/rfc7807) for providing machine-readable error details in an HTTP response.</span></span>
 
-<span data-ttu-id="2fb86-229">다음 컨트롤러 작업에서 다음 코드를 고려하세요.</span><span class="sxs-lookup"><span data-stu-id="2fb86-229">Consider the following code in a controller action:</span></span>
+<span data-ttu-id="b0625-235">다음 컨트롤러 작업에서 다음 코드를 고려하세요.</span><span class="sxs-lookup"><span data-stu-id="b0625-235">Consider the following code in a controller action:</span></span>
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/PetsController.cs?name=snippet_ProblemDetailsStatusCode)]
 
-<span data-ttu-id="2fb86-230">`NotFound` 메서드는 `ProblemDetails` 본문이 포함된 HTTP 404 상태 코드를 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-230">The `NotFound` method produces an HTTP 404 status code with a `ProblemDetails` body.</span></span> <span data-ttu-id="2fb86-231">예:</span><span class="sxs-lookup"><span data-stu-id="2fb86-231">For example:</span></span>
+<span data-ttu-id="b0625-236">`NotFound` 메서드는 `ProblemDetails` 본문이 포함된 HTTP 404 상태 코드를 생성합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-236">The `NotFound` method produces an HTTP 404 status code with a `ProblemDetails` body.</span></span> <span data-ttu-id="b0625-237">예:</span><span class="sxs-lookup"><span data-stu-id="b0625-237">For example:</span></span>
 
 ```json
 {
@@ -365,9 +380,9 @@ if (!ModelState.IsValid)
 }
 ```
 
-### <a name="disable-problemdetails-response"></a><span data-ttu-id="2fb86-232">ProblemDetails 응답 사용 안 함</span><span class="sxs-lookup"><span data-stu-id="2fb86-232">Disable ProblemDetails response</span></span>
+### <a name="disable-problemdetails-response"></a><span data-ttu-id="b0625-238">ProblemDetails 응답 사용 안 함</span><span class="sxs-lookup"><span data-stu-id="b0625-238">Disable ProblemDetails response</span></span>
 
-<span data-ttu-id="2fb86-233"><xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressMapClientErrors%2A> 속성이 `true`로 설정된 경우 `ProblemDetails` 인스턴스의 자동 생성이 사용되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-233">The automatic creation of a `ProblemDetails` instance is disabled when the <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressMapClientErrors%2A> property is set to `true`.</span></span> <span data-ttu-id="2fb86-234">다음 코드를 `Startup.ConfigureServices`에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="2fb86-234">Add the following code in `Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="b0625-239"><xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressMapClientErrors%2A> 속성이 `true`로 설정된 경우 `ProblemDetails` 인스턴스의 자동 생성이 사용되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-239">The automatic creation of a `ProblemDetails` instance is disabled when the <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressMapClientErrors%2A> property is set to `true`.</span></span> <span data-ttu-id="b0625-240">다음 코드를 `Startup.ConfigureServices`에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="b0625-240">Add the following code in `Startup.ConfigureServices`:</span></span>
 
 ::: moniker-end
 
@@ -383,7 +398,7 @@ if (!ModelState.IsValid)
 
 ::: moniker-end
 
-## <a name="additional-resources"></a><span data-ttu-id="2fb86-235">추가 자료</span><span class="sxs-lookup"><span data-stu-id="2fb86-235">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="b0625-241">추가 자료</span><span class="sxs-lookup"><span data-stu-id="b0625-241">Additional resources</span></span>
 
 * <xref:web-api/action-return-types>
 * <xref:web-api/handle-errors>
