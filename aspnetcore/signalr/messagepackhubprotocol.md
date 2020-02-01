@@ -9,12 +9,12 @@ ms.date: 11/12/2019
 no-loc:
 - SignalR
 uid: signalr/messagepackhubprotocol
-ms.openlocfilehash: 1b01357233a9b95a5da052d92e30232c94e78a78
-ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
+ms.openlocfilehash: 3c2a4285945d3fdc6bba195e3160da8b9dcbba44
+ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/24/2020
-ms.locfileid: "76727226"
+ms.lasthandoff: 02/01/2020
+ms.locfileid: "76928183"
 ---
 # <a name="use-messagepack-hub-protocol-in-opno-locsignalr-for-aspnet-core"></a>ASP.NET Core SignalR에서 MessagePack Hub 프로토콜 사용
 
@@ -49,6 +49,18 @@ services.AddSignalR()
             MessagePack.Resolvers.StandardResolver.Instance
         };
     });
+```
+
+> [!WARNING]
+> [CVE-2020-5234](https://github.com/neuecc/MessagePack-CSharp/security/advisories/GHSA-7q36-4xx7-xcxf) 을 검토 하 고 권장 되는 패치를 적용 하는 것이 좋습니다. 예를 들어 `MessagePackSecurity.Active` 정적 속성을 `MessagePackSecurity.UntrustedData`로 설정 합니다. `MessagePackSecurity.Active` 설정 하려면 [MessagePack의 1.9 버전](https://www.nuget.org/packages/MessagePack/1.9.3)을 수동으로 설치 해야 합니다. `MessagePack` 1.9. x를 설치 하면 SignalR 버전이 업그레이드 됩니다. `MessagePackSecurity.Active`을 `MessagePackSecurity.UntrustedData`로 설정 하지 않으면 악의적인 클라이언트에서 서비스 거부가 발생할 수 있습니다. 다음 코드와 같이 `Program.Main``MessagePackSecurity.Active`을 설정 합니다.
+
+```csharp
+public static void Main(string[] args)
+{
+  MessagePackSecurity.Active = MessagePackSecurity.UntrustedData;
+
+  CreateHostBuilder(args).Build().Run();
+}
 ```
 
 ## <a name="configure-messagepack-on-the-client"></a>클라이언트에서 MessagePack 구성

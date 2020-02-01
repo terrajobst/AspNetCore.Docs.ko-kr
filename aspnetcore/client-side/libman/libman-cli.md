@@ -1,27 +1,27 @@
 ---
-title: ASP.NET Core에서 기능을 사용 하 여 CLI (명령줄 인터페이스)를 사용 합니다.
+title: ASP.NET Core와 함께를 사용 합니다.
 author: scottaddie
-description: ASP.NET Core 프로젝트에서 기능 CLI (명령줄 인터페이스)를 사용 하는 방법에 대해 알아봅니다.
+description: ASP.NET Core 프로젝트에서를 사용 하는 방법에 대해 알아봅니다.
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
 - SignalR
 uid: client-side/libman/libman-cli
-ms.openlocfilehash: 8b2b1e45ab4685482554ac439b0276e0cf381609
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 02d88d09805bd23a86ef924766373245fec7ff52
+ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73962796"
+ms.lasthandoff: 02/01/2020
+ms.locfileid: "76928357"
 ---
-# <a name="use-the-libman-command-line-interface-cli-with-aspnet-core"></a>ASP.NET Core에서 기능을 사용 하 여 CLI (명령줄 인터페이스)를 사용 합니다.
+# <a name="use-the-libman-cli-with-aspnet-core"></a>ASP.NET Core와 함께를 사용 합니다.
 
 작성자: [Scott Addie](https://twitter.com/Scott_Addie)
 
 이 기능을 지 원하는 플랫폼 간 도구는 .NET [Core에서 지원](xref:client-side/libman/index) 되는 모든 플랫폼에서 지원 됩니다.
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>전제 조건
 
 * [!INCLUDE [2.1-SDK](../../includes/2.1-SDK.md)]
 
@@ -43,7 +43,7 @@ dotnet tool install -g Microsoft.Web.LibraryManager.Cli --version 1.0.94-g606058
 
 위의 예제에서 .NET Core 글로벌 도구는 로컬 Windows 컴퓨터의 *C:\Temp\Microsoft.Web.LibraryManager.Cli.1.0.94-g606058a278.nupkg* 파일에서 설치 됩니다.
 
-## <a name="usage"></a>사용 현황
+## <a name="usage"></a>용도
 
 CLI를 성공적으로 설치한 후에는 다음 명령을 사용할 수 있습니다.
 
@@ -103,7 +103,7 @@ libman init [-d|--default-destination] [-p|--default-provider] [--verbosity]
 libman init [-h|--help]
 ```
 
-### <a name="options"></a>옵션
+### <a name="options"></a>Options
 
 다음 옵션은 `libman init` 명령에 사용할 수 있습니다.
 
@@ -113,18 +113,18 @@ libman init [-h|--help]
 
 * `-p|--default-provider <PROVIDER>`
 
-  지정 된 라이브러리에 대해 정의 된 공급자가 없는 경우 사용할 공급자입니다. `<PROVIDER>` 값은 해당 `defaultProvider` 속성에 기록 *됩니다.* `<PROVIDER>`을 다음 값 중 하나로 바꿉니다.
+  지정 된 라이브러리에 대해 정의 된 공급자가 없는 경우 사용할 공급자입니다. `<PROVIDER>` 값은 해당 `defaultProvider` 속성에 기록 *됩니다.* `<PROVIDER>`을 다음 값 중 하나로 대체하세요.
 
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
-### <a name="examples"></a>예제
+### <a name="examples"></a>예
 
 ASP.NET Core 프로젝트에서이 파일을 만들려면 다음을 수행 *합니다* .
 
 * 프로젝트 루트로 이동 합니다.
-* 다음 명령을 실행합니다.
+* 명령을 실행합니다.
 
   ```console
   libman init
@@ -146,7 +146,7 @@ ASP.NET Core 프로젝트에서이 파일을 만들려면 다음을 수행 *합�
 }
 ```
 
-## <a name="add-library-files"></a>라이브러리 파일 추가
+## <a name="add-library-files"></a>라이브러리 파일 추가하기
 
 `libman install` 명령은 라이브러리 파일을 다운로드 하 여 프로젝트에 설치 합니다. 파일이 없는 경우 추가 됩니다 *.* 라이브러리 파일에 대 한 구성 세부 정보를 저장 하도록 *라이브러리 파일을* 수정 합니다.
 
@@ -163,7 +163,7 @@ libman install [-h|--help]
 
 설치할 라이브러리의 이름입니다. 이 이름에는 버전 번호 표기법 (예: `@1.2.0`)이 포함 될 수 있습니다.
 
-### <a name="options"></a>옵션
+### <a name="options"></a>Options
 
 다음 옵션은 `libman install` 명령에 사용할 수 있습니다.
 
@@ -177,7 +177,7 @@ libman install [-h|--help]
 
 * `-p|--provider <PROVIDER>`
 
-  라이브러리 획득에 사용할 공급자의 이름입니다. `<PROVIDER>`을 다음 값 중 하나로 바꿉니다.
+  라이브러리 획득에 사용할 공급자의 이름입니다. `<PROVIDER>`을 다음 값 중 하나로 대체하세요.
   
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
@@ -185,7 +185,7 @@ libman install [-h|--help]
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
-### <a name="examples"></a>예제
+### <a name="examples"></a>예
 
 다음을 고려 하십시오 *. json* 파일:
 
@@ -261,7 +261,7 @@ libman install jquery@3.2.1 --provider cdnjs --destination wwwroot/scripts/jquer
 }
 ```
 
-## <a name="restore-library-files"></a>라이브러리 파일 복원
+## <a name="restore-library-files"></a>라이브러리 파일 복원하기
 
 `libman restore` 명령은 라이브러리 파일을 설치 *합니다.* 이 때 적용되는 규칙은 다음과 같습니다.
 
@@ -276,13 +276,13 @@ libman restore [--verbosity]
 libman restore [-h|--help]
 ```
 
-### <a name="options"></a>옵션
+### <a name="options"></a>Options
 
 다음 옵션은 `libman restore` 명령에 사용할 수 있습니다.
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
-### <a name="examples"></a>예제
+### <a name="examples"></a>예
 
 라이브러리 파일을 복원 하려면 다음을 수행 합니다. *json*:
 
@@ -290,7 +290,7 @@ libman restore [-h|--help]
 libman restore
 ```
 
-## <a name="delete-library-files"></a>라이브러리 파일 삭제
+## <a name="delete-library-files"></a>라이브러리 파일 삭제하기
 
 `libman clean` 명령은 해당 라이브러리 파일을 제거 합니다. 이 작업이 삭제 된 후 비어 있게 되는 폴더입니다. 라이브러리 파일의 연결 된 구성은 라이브러리 파일의 `libraries` 속성에 있습니다. *json* 은 제거 되지 않습니다.
 
@@ -301,13 +301,13 @@ libman clean [--verbosity]
 libman clean [-h|--help]
 ```
 
-### <a name="options"></a>옵션
+### <a name="options"></a>Options
 
 다음 옵션은 `libman clean` 명령에 사용할 수 있습니다.
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
-### <a name="examples"></a>예제
+### <a name="examples"></a>예
 
 라이브러리 파일을 삭제 하려면 다음을 수행 합니다.
 
@@ -315,7 +315,7 @@ libman clean [-h|--help]
 libman clean
 ```
 
-## <a name="uninstall-library-files"></a>라이브러리 파일 제거
+## <a name="uninstall-library-files"></a>라이브러리 파일 제거하기
 
 `libman uninstall` 명령은 다음과 같습니다.
 
@@ -342,13 +342,13 @@ libman uninstall [-h|--help]
 
 제거할 라이브러리의 이름입니다. 이 이름에는 버전 번호 표기법 (예: `@1.2.0`)이 포함 될 수 있습니다.
 
-### <a name="options"></a>옵션
+### <a name="options"></a>Options
 
 다음 옵션은 `libman uninstall` 명령에 사용할 수 있습니다.
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
-### <a name="examples"></a>예제
+### <a name="examples"></a>예
 
 다음을 고려 하십시오 *. json* 파일:
 
@@ -394,7 +394,7 @@ libman update [-h|--help]
 
 업데이트할 라이브러리의 이름입니다.
 
-### <a name="options"></a>옵션
+### <a name="options"></a>Options
 
 다음 옵션은 `libman update` 명령에 사용할 수 있습니다.
 
@@ -408,7 +408,7 @@ libman update [-h|--help]
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
-### <a name="examples"></a>예제
+### <a name="examples"></a>예
 
 * JQuery를 최신 버전으로 업데이트 하려면 다음을 수행 합니다.
 
@@ -448,7 +448,7 @@ libman cache [-h|--help]
 
 [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
-### <a name="options"></a>옵션
+### <a name="options"></a>Options
 
 다음 옵션은 `libman cache` 명령에 사용할 수 있습니다.
 
@@ -462,7 +462,7 @@ libman cache [-h|--help]
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
-### <a name="examples"></a>예제
+### <a name="examples"></a>예
 
 * 공급자 당 캐시 된 라이브러리의 이름을 보려면 다음 명령 중 하나를 사용 합니다.
 

@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/16/2019
 uid: security/key-vault-configuration
-ms.openlocfilehash: 37ba756cc4170c145d2ab1f9f0a465057cc826c1
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: cd31094884f53f34d55c0bceabae41ca2bacba4c
+ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75358710"
+ms.lasthandoff: 02/01/2020
+ms.locfileid: "76928538"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>ASP.NET Core의 Azure Key Vault 구성 공급자
 
@@ -23,7 +23,7 @@ By [Luke Latham](https://github.com/guardrex) 및 [Andrew Stanton-간호사](htt
 * 중요 한 구성 데이터에 대 한 액세스 제어
 * 구성 데이터를 저장할 때 FIPS 140-2 수준 2 유효성 검사 된 하드웨어 보안 모듈 (HSM)에 대 한 요구 사항을 충족 합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/key-vault-configuration/samples)([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/key-vault-configuration/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="packages"></a>패키지
 
@@ -73,11 +73,11 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 
 1. [Azure Portal](https://portal.azure.com/)에서 다음 방법 중 하나를 사용 하 여 Azure Cloud shell을 엽니다.
 
-   * 코드 블록의 오른쪽 위 모서리에서 **사용**을 선택합니다. 텍스트 상자에 "Azure CLI" 검색 문자열을 사용 합니다.
+   * 코드 블록의 오른쪽 위 모퉁이에서 **시도** 를 선택 합니다. 텍스트 상자에 "Azure CLI" 검색 문자열을 사용 합니다.
    * **Cloud Shell 시작** 단추를 사용 하 여 브라우저에서 Cloud Shell를 엽니다.
-   * Azure Portal의 오른쪽 위 모서리에 있는 메뉴에서 **Cloud Shell** 단추를 선택합니다.
+   * Azure Portal의 오른쪽 위 모퉁이에 있는 메뉴에서 **Cloud Shell** 단추를 선택 합니다.
 
-   자세한 내용은 [Azure 명령줄 인터페이스 (CLI)](/cli/azure/) 및 [Azure Cloud Shell 개요](/azure/cloud-shell/overview)를 참조 하세요.
+   자세한 내용은 [Azure CLI](/cli/azure/) 및 [Azure Cloud Shell 개요](/azure/cloud-shell/overview)를 참조 하세요.
 
 1. 아직 인증 하지 않은 경우 `az login` 명령을 사용 하 여 로그인 합니다.
 
@@ -106,7 +106,7 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 
 ## <a name="use-application-id-and-x509-certificate-for-non-azure-hosted-apps"></a>Azure에서 호스트 되지 않는 앱에 응용 프로그램 ID 및 x.509 인증서 사용
 
-**앱이 azure 외부에서 호스팅될 때**Azure Active Directory 응용 프로그램 ID 및 x.509 인증서를 사용 하 여 Key Vault에 인증 하도록 azure AD, Azure Key Vault 및 앱을 구성 합니다. 자세한 내용은 [키, 암호 및 인증서 정보](/azure/key-vault/about-keys-secrets-and-certificates)를 참조하세요.
+**앱이 azure 외부에서 호스팅될 때**Azure Active Directory 응용 프로그램 ID 및 x.509 인증서를 사용 하 여 Key Vault에 인증 하도록 azure AD, Azure Key Vault 및 앱을 구성 합니다. 자세한 내용은 [키, 암호 및 인증서 정보](/azure/key-vault/about-keys-secrets-and-certificates)를 참조 하세요.
 
 > [!NOTE]
 > Azure에서 호스트 되는 앱에는 응용 프로그램 ID 및 x.509 인증서를 사용할 수 있지만 azure에서 앱을 호스팅할 때 [azure 리소스에 관리 되는 id](#use-managed-identities-for-azure-resources) 를 사용 하는 것이 좋습니다. 관리 되는 id는 응용 프로그램 또는 개발 환경에서 인증서를 저장할 필요가 없습니다.
@@ -124,13 +124,13 @@ dotnet user-secrets set "Section:SecretName" "secret_value_2_dev"
 1. 앱의 *appsettings* 파일에 키 자격 증명 모음 이름, 응용 프로그램 ID 및 인증서 지문을 저장 합니다.
 1. Azure Portal에서 **키 자격 증명 모음** 으로 이동 합니다.
 1. [Azure Key Vault를 사용 하 여 프로덕션 환경에서 암호 저장소](#secret-storage-in-the-production-environment-with-azure-key-vault) 에 만든 key vault를 선택 합니다.
-1. **액세스 정책**을 선택합니다.
+1. **액세스 정책**을 선택 합니다.
 1. **액세스 정책 추가**를 선택 합니다.
 1. **비밀 권한을** 열고 **Get** 및 **List** 권한을 사용 하 여 앱을 제공 합니다.
-1. **보안 주체 선택** 을 선택 하 고 이름으로 등록 된 앱을 선택 합니다. **선택** 단추를 누릅니다.
+1. **보안 주체 선택** 을 선택 하 고 이름으로 등록 된 앱을 선택 합니다. **선택** 단추를 선택 합니다.
 1. **확인**을 선택합니다.
 1. **저장**을 선택합니다.
-1. 앱을 배포합니다.
+1. 앱을 배포 합니다.
 
 `Certificate` 샘플 앱은 암호 이름과 같은 이름으로 `IConfigurationRoot`에서 구성 값을 가져옵니다.
 

@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/08/2019
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 31a5e47d772e7416646c4d83c3209d7d2b254199
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: 623f739b17c0bed3ce929f562c9581ab26ecf5bc
+ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75829168"
+ms.lasthandoff: 02/01/2020
+ms.locfileid: "76928554"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>SPAs에 대 한 인증 및 권한 부여
 
@@ -42,7 +42,7 @@ dotnet new react -o <output_directory_name> -au Individual
 
 다음 섹션에서는 인증 지원을 포함 하는 경우 프로젝트에 대 한 추가 설명입니다.
 
-### <a name="startup-class"></a>시작 클래스
+### <a name="startup-class"></a>Startup 클래스
 
 `Startup` 클래스에는 다음과 같은 추가 기능이 있습니다.
 
@@ -285,9 +285,9 @@ async populateWeatherData() {
 }
 ```
 
-* 인증서의 이름 속성은 인증서의 고유 주체에 해당 합니다.
-* 저장소 위치는 인증서를 로드할 위치 (`CurrentUser` 또는 `LocalMachine`)를 나타냅니다.
 * 저장소 이름은 인증서가 저장 되는 인증서 저장소의 이름을 나타냅니다. 이 경우 개인 사용자 저장소를 가리킵니다.
+* 저장소 위치는 인증서를 로드할 위치 (`CurrentUser` 또는 `LocalMachine`)를 나타냅니다.
+* 인증서의 이름 속성은 인증서의 고유 주체에 해당 합니다.
 
 Azure Websites에 배포 하려면 [azure에 앱 배포](xref:tutorials/publish-to-azure-webapp-using-vs#deploy-the-app-to-azure) 의 단계에 따라 앱을 배포 하 여 필요한 azure 리소스를 만들고 앱을 프로덕션에 배포 합니다.
 
@@ -301,7 +301,7 @@ Azure Websites에 배포 하려면 [azure에 앱 배포](xref:tutorials/publish-
 
 API 권한 부여에 대 한 지원은 규칙, 기본값 및 향상 된 기능 집합을 사용 하 여 IdentityServer를 기반으로 빌드됩니다. 물론 ASP.NET Core 통합이 시나리오에 포함 되지 않는 경우 IdentityServer의 전체 기능을 내부적으로 사용할 수 있습니다. ASP.NET Core 지원은 조직에서 모든 앱을 만들고 배포 하는 "자사" 앱에 중점을 두었습니다. 따라서 동의 또는 페더레이션과 같은 항목에 대 한 지원이 제공 되지 않습니다. 이러한 시나리오의 경우 IdentityServer를 사용 하 고 해당 설명서를 따릅니다.
 
-### <a name="application-profiles"></a>애플리케이션 프로필
+### <a name="application-profiles"></a>응용 프로그램 프로필
 
 응용 프로그램 프로필은 매개 변수를 추가로 정의 하는 앱에 대 한 미리 정의 된 구성입니다. 이번에는 다음 프로필이 지원 됩니다.
 

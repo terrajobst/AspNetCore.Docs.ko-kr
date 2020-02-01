@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/handle-errors
-ms.openlocfilehash: 7b5602d5ae5e58d1678762fe1cd2adec1f31c969
-ms.sourcegitcommit: b5ceb0a46d0254cc3425578116e2290142eec0f0
+ms.openlocfilehash: b987513e5410e95ab632b9935d858b648838d94f
+ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/28/2020
-ms.locfileid: "76809005"
+ms.lasthandoff: 02/01/2020
+ms.locfileid: "76928267"
 ---
 # <a name="handle-errors-in-aspnet-core-opno-locblazor-apps"></a>ASP.NET Core Blazor 앱의 오류 처리
 
@@ -30,7 +30,9 @@ Blazor 앱이 개발 중에 올바르게 작동하지 않는 경우 앱에서 �
 * 개발 중에 금색 막대를 누르면 예외를 볼 수 있는 브라우저 콘솔로 연결됩니다.
 * 프로덕션에서, 금색 막대는 오류가 발생했음을 알려주고 브라우저를 새로 고치도록 권장합니다.
 
-이 오류 처리 환경의 UI는 Blazor 프로젝트 템플릿의 일부입니다. Blazor Weasembomapp에서 *wwwroot/index.html* 파일의 환경을 사용자 지정 합니다.
+이 오류 처리 환경의 UI는 Blazor 프로젝트 템플릿의 일부입니다.
+
+Blazor Weasembomapp에서 *wwwroot/index.html* 파일의 환경을 사용자 지정 합니다.
 
 ```html
 <div id="blazor-error-ui">
@@ -57,7 +59,7 @@ Blazor Server 앱에서 *Pages/_Host* 파일의 환경을 사용자 지정 합�
 
 `blazor-error-ui` 요소는 Blazor 템플릿에 포함 된 스타일에 의해 숨겨지고 오류가 발생할 때 표시 됩니다.
 
-## <a name="how-the-opno-locblazor-framework-reacts-to-unhandled-exceptions"></a>Blazor 프레임 워크가 처리 되지 않은 예외에 반응 하는 방법
+## <a name="how-a-opno-locblazor-server-app-reacts-to-unhandled-exceptions"></a>Blazor Server 앱이 처리 되지 않은 예외에 반응 하는 방법
 
 Blazor Server는 상태 저장 프레임 워크입니다. 사용자가 앱과 상호 작용 하는 동안 *회로*라는 서버에 대 한 연결을 유지 합니다. 회로는 활성 구성 요소 인스턴스를 비롯 하 여 상태에 대 한 다른 많은 측면을 포함 합니다.
 
@@ -101,9 +103,9 @@ Blazor는 발생 하는 대부분의 처리 되지 않은 예외를 심각 하 �
 * [이벤트 처리기](#event-handlers)
 * [구성 요소 삭제](#component-disposal)
 * [JavaScript interop](#javascript-interop)
-* [회로 처리기](#circuit-handlers)
-* [회로 삭제](#circuit-disposal)
-* [사전](#prerendering)
+* [Blazor 서버 회로 처리기](#blazor-server-circuit-handlers)
+* [Blazor 서버 회로 삭제](#blazor-server-circuit-disposal)
+* [Blazor Server rerendering](#blazor-server-prerendering)
 
 위의 처리 되지 않은 예외는이 문서의 다음 섹션에 설명 되어 있습니다.
 
@@ -114,7 +116,7 @@ Blazor 구성 요소의 인스턴스를 만들 때:
 * 구성 요소의 생성자가 호출 됩니다.
 * [`@inject`](xref:blazor/dependency-injection#request-a-service-in-a-component) 지시문 또는 [`[Inject]`](xref:blazor/dependency-injection#request-a-service-in-a-component) 특성을 통해 구성 요소 생성자에 제공 된 단일 항목이 아닌 DI 서비스의 생성자가 호출 됩니다.
 
-모든 `[Inject]` 속성에 대해 실행 된 생성자 또는 setter가 처리 되지 않은 예외를 throw 하는 경우 회로가 실패 합니다. 이 예외는 프레임 워크에서 구성 요소를 인스턴스화할 수 없기 때문에 치명적입니다. 생성자 논리에서 예외를 throw 할 수 있는 경우 앱은 오류 처리 및 로깅이 포함 된 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문을 사용 하 여 예외를 트래핑 해야 합니다.
+모든 `[Inject]` 속성에 대해 실행 된 생성자 또는 setter가 처리 되지 않은 예외를 throw 하는 경우 Blazor 서버 회로가 실패 합니다. 이 예외는 프레임 워크에서 구성 요소를 인스턴스화할 수 없기 때문에 치명적입니다. 생성자 논리에서 예외를 throw 할 수 있는 경우 앱은 오류 처리 및 로깅이 포함 된 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문을 사용 하 여 예외를 트래핑 해야 합니다.
 
 ### <a name="lifecycle-methods"></a>수명 주기 메서드
 
@@ -125,7 +127,7 @@ Blazor 구성 요소의 인스턴스를 만들 때:
 * `ShouldRender` / `ShouldRenderAsync`
 * `OnAfterRender` / `OnAfterRenderAsync`
 
-수명 주기 메서드가 동기적 또는 비동기적으로 예외를 throw 하는 경우이는 회로에 치명적입니다. 구성 요소가 수명 주기 메서드에서 오류를 처리 하려면 오류 처리 논리를 추가 합니다.
+수명 주기 메서드가 동기적 또는 비동기적으로 예외를 throw 하는 경우이 예외는 Blazor 서버 회로에 치명적입니다. 구성 요소가 수명 주기 메서드에서 오류를 처리 하려면 오류 처리 논리를 추가 합니다.
 
 다음 예제에서 `OnParametersSetAsync`는 메서드를 호출 하 여 제품을 가져옵니다.
 
@@ -140,7 +142,7 @@ Blazor 구성 요소의 인스턴스를 만들 때:
 
 `.razor` 구성 요소 파일의 선언 태그는 `BuildRenderTree`라는 C# 메서드로 컴파일됩니다. 구성 요소가 렌더링 되 면 `BuildRenderTree` 실행 되 고 렌더링 된 구성 요소의 요소, 텍스트 및 자식 구성 요소를 설명 하는 데이터 구조를 작성 합니다.
 
-렌더링 논리는 예외를 throw 할 수 있습니다. 이 시나리오의 예는 `@someObject.PropertyName`을 평가할 때 `@someObject` `null`되는 경우에 발생 합니다. 렌더링 논리에서 throw 된 처리 되지 않은 예외는 회로에 치명적입니다.
+렌더링 논리는 예외를 throw 할 수 있습니다. 이 시나리오의 예는 `@someObject.PropertyName`을 평가할 때 `@someObject` `null`되는 경우에 발생 합니다. 렌더링 논리에서 throw 된 처리 되지 않은 예외는 Blazor 서버 회로에 치명적입니다.
 
 렌더링 논리에서 null 참조 예외가 발생 하지 않도록 하려면 해당 멤버에 액세스 하기 전에 `null` 개체를 확인 합니다. 다음 예에서는 `person.Address` `null`경우 `person.Address` 속성이 액세스 되지 않습니다.
 
@@ -159,7 +161,7 @@ Blazor 구성 요소의 인스턴스를 만들 때:
 
 이벤트 처리기 코드는 이러한 시나리오에서 처리 되지 않은 예외를 throw 할 수 있습니다.
 
-이벤트 처리기가 처리 되지 않은 예외를 throw 하는 경우 (예: 데이터베이스 쿼리가 실패 하는 경우) 회로에 대 한 예외입니다. 앱에서 외부 이유로 실패할 수 있는 코드를 호출 하는 경우 오류 처리 및 로깅이 포함 된 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문을 사용 하 여 예외를 트래핑 합니다.
+이벤트 처리기가 처리 되지 않은 예외를 throw 하는 경우 (예: 데이터베이스 쿼리가 실패 하는 경우) Blazor 서버 회로에 대 한 예외입니다. 앱에서 외부 이유로 실패할 수 있는 코드를 호출 하는 경우 오류 처리 및 로깅이 포함 된 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문을 사용 하 여 예외를 트래핑 합니다.
 
 사용자 코드에서 예외를 트래핑 및 처리 하지 않는 경우 프레임 워크는 예외를 기록 하 고 회로를 종료 합니다.
 
@@ -167,7 +169,7 @@ Blazor 구성 요소의 인스턴스를 만들 때:
 
 예를 들어 사용자가 다른 페이지로 이동 했으므로 UI에서 구성 요소를 제거할 수 있습니다. <xref:System.IDisposable?displayProperty=fullName>를 구현 하는 구성 요소가 UI에서 제거 되 면 프레임 워크는 구성 요소의 <xref:System.IDisposable.Dispose*> 메서드를 호출 합니다.
 
-구성 요소의 `Dispose` 메서드가 처리 되지 않은 예외를 throw 하는 경우 해당 예외는 회로에 치명적입니다. 삭제 논리에서 예외를 throw 할 수 있는 경우 앱은 오류 처리 및 로깅이 포함 된 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문을 사용 하 여 예외를 트래핑 해야 합니다.
+구성 요소의 `Dispose` 메서드가 처리 되지 않은 예외를 throw 하는 경우 예외는 Blazor 서버 회로에 치명적입니다. 삭제 논리에서 예외를 throw 할 수 있는 경우 앱은 오류 처리 및 로깅이 포함 된 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문을 사용 하 여 예외를 트래핑 해야 합니다.
 
 구성 요소 삭제에 대 한 자세한 내용은 <xref:blazor/lifecycle#component-disposal-with-idisposable>를 참조 하세요.
 
@@ -177,20 +179,20 @@ Blazor 구성 요소의 인스턴스를 만들 때:
 
 다음 조건은 `InvokeAsync<T>`의 오류 처리에 적용 됩니다.
 
-* `InvokeAsync<T>`에 대 한 호출이 동기적으로 실패 하면 .NET 예외가 발생 합니다. 예를 들어 제공 된 인수를 직렬화 할 수 없기 때문에 `InvokeAsync<T>`에 대 한 호출이 실패할 수 있습니다. 개발자 코드는 예외를 catch 해야 합니다. 이벤트 처리기 또는 구성 요소 수명 주기 메서드의 앱 코드에서 예외를 처리 하지 않으면 결과로 생성 되는 예외는 회로에 치명적입니다.
-* `InvokeAsync<T>`에 대 한 호출이 비동기적으로 실패 하면 .NET <xref:System.Threading.Tasks.Task> 실패 합니다. 예를 들어 JavaScript 쪽 코드에서 예외를 throw 하거나 `rejected`으로 완료 된 `Promise`을 반환 하기 때문에 `InvokeAsync<T>`에 대 한 호출이 실패할 수 있습니다. 개발자 코드는 예외를 catch 해야 합니다. [await](/dotnet/csharp/language-reference/keywords/await) 연산자를 사용 하는 경우 오류 처리 및 로깅이 포함 된 [ try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문에 메서드 호출을 래핑하는 것이 좋습니다. 그렇지 않으면 실패 한 코드는 회로에 치명적이 지 않은 처리 되지 않은 예외를 발생 합니다.
+* `InvokeAsync<T>`에 대 한 호출이 동기적으로 실패 하면 .NET 예외가 발생 합니다. 예를 들어 제공 된 인수를 직렬화 할 수 없기 때문에 `InvokeAsync<T>`에 대 한 호출이 실패할 수 있습니다. 개발자 코드는 예외를 catch 해야 합니다. 이벤트 처리기 또는 구성 요소 수명 주기 메서드에서 앱 코드가 예외를 처리 하지 않는 경우 결과 예외는 Blazor 서버 회로에 치명적입니다.
+* `InvokeAsync<T>`에 대 한 호출이 비동기적으로 실패 하면 .NET <xref:System.Threading.Tasks.Task> 실패 합니다. 예를 들어 JavaScript 쪽 코드에서 예외를 throw 하거나 `rejected`으로 완료 된 `Promise`을 반환 하기 때문에 `InvokeAsync<T>`에 대 한 호출이 실패할 수 있습니다. 개발자 코드는 예외를 catch 해야 합니다. [await](/dotnet/csharp/language-reference/keywords/await) 연산자를 사용 하는 경우 오류 처리 및 로깅이 포함 된 [ try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문에 메서드 호출을 래핑하는 것이 좋습니다. 그렇지 않으면 오류가 발생 한 코드는 Blazor 서버 회로에 치명적이 지 않은 처리 되지 않은 예외를 발생 합니다.
 * 기본적으로 `InvokeAsync<T>` 호출은 특정 기간 내에 완료 되어야 합니다. 그렇지 않으면 호출 시간이 초과 됩니다. 기본 제한 시간은 1 분입니다. 제한 시간은 완료 메시지를 다시 전송 하지 않는 네트워크 연결 또는 JavaScript 코드의 손실에 대해 코드를 보호 합니다. 호출 시간이 초과 되 면 결과 `Task` <xref:System.OperationCanceledException>와 함께 실패 합니다. 로깅을 사용 하 여 예외를 트래핑 하 고 처리 합니다.
 
 마찬가지로 JavaScript 코드는 [`[JSInvokable]`](xref:blazor/javascript-interop#invoke-net-methods-from-javascript-functions) 특성으로 표시 되는 .net 메서드에 대 한 호출을 시작할 수 있습니다. 이러한 .NET 메서드에서 처리 되지 않은 예외를 throw 하는 경우:
 
-* 이 예외는 회로에 대 한 치명적으로 처리 되지 않습니다.
+* 이 예외는 Blazor 서버 회로에 대 한 치명적으로 처리 되지 않습니다.
 * JavaScript 쪽 `Promise` 거부 됩니다.
 
 .NET 쪽 또는 메서드 호출의 JavaScript 쪽에서 오류 처리 코드를 사용 하는 옵션이 있습니다.
 
 자세한 내용은 <xref:blazor/javascript-interop>를 참조하세요.
 
-### <a name="circuit-handlers"></a>회로 처리기
+### <a name="opno-locblazor-server-circuit-handlers"></a>Blazor 서버 회로 처리기
 
 Blazor Server를 사용 하면 코드에서 사용자 회로의 상태를 변경 하는 코드를 실행할 수 있도록 하는 *회로 처리기*를 정의할 수 있습니다. 회로 처리기는 `CircuitHandler`에서 파생 하 고 앱의 서비스 컨테이너에 클래스를 등록 하 여 구현 됩니다. 다음 회로 처리기 예제에서는 열린 SignalR 연결을 추적 합니다.
 
@@ -236,11 +238,11 @@ public void ConfigureServices(IServiceCollection services)
 
 사용자 지정 회로 처리기의 메서드에서 처리 되지 않은 예외를 throw 하는 경우 예외는 Blazor 서버 회로에 치명적입니다. 처리기의 코드 또는 호출 된 메서드에서 예외를 허용 하려면 오류 처리 및 로깅을 사용 하 여 하나 이상의 [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) 문에 코드를 래핑합니다.
 
-### <a name="circuit-disposal"></a>회로 삭제
+### <a name="opno-locblazor-server-circuit-disposal"></a>Blazor 서버 회로 삭제
 
 사용자가 연결을 끊고 프레임 워크가 회로 상태를 정리 하기 때문에 회로가 종료 되 면 프레임 워크는 회로의 DI 범위를 삭제 합니다. 범위를 삭제 하면 <xref:System.IDisposable?displayProperty=fullName>를 구현 하는 모든 회로 범위 DI 서비스가 삭제 됩니다. 삭제 하는 동안 DI 서비스에서 처리 되지 않은 예외를 throw 하는 경우 프레임 워크는 예외를 기록 합니다.
 
-### <a name="prerendering"></a>사전
+### <a name="opno-locblazor-server-prerendering"></a>Blazor 서버 렌더링
 
 Blazor 구성 요소는 `Component` 태그 도우미를 사용 하 여 미리 렌더링 된 수 있습니다. 이렇게 하면 렌더링 된 HTML 태그가 사용자의 초기 HTTP 요청 일부로 반환 됩니다. 다음 작업을 수행 합니다.
 
@@ -274,7 +276,7 @@ Blazor 구성 요소는 `Component` 태그 도우미를 사용 하 여 미리 �
 * 렌더링 프로세스가 계속 지속 되도록 합니다.
 * 은 종결 되지 않은 루프를 만드는 것과 같습니다.
 
-이러한 시나리오에서 영향을 받는 회로는 중단 되 고, 스레드는 일반적으로 다음을 시도 합니다.
+이러한 시나리오에서 영향을 받는 Blazor 서버 회로는 실패 하 고 스레드는 일반적으로 다음을 시도 합니다.
 
 * 운영 체제에서 허용 하는 만큼의 CPU 시간을 무기한으로 사용 합니다.
 * 서버 메모리를 무제한으로 사용 합니다. 무제한 메모리를 사용 하는 것은 종결 되지 않은 루프가 반복 될 때마다 컬렉션에 항목을 추가 하는 시나리오와 동일 합니다.
