@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core의 앵커 태그 도우미
 author: pkellner
-description: ASP.NET Core 앵커 태그 도우미 특성 및 HTML 앵커 태그의 동작을 확장할 때 각 특성이 담당하는 역할을 확인합니다.
+description: ASP.NET Core 앵커 태그 도우미 특성 및 HTML 앵커 태그의 작업을 확장할 때 각 특성이 담당하는 역할을 확인합니다.
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/13/2019
@@ -17,7 +17,7 @@ ms.locfileid: "72333944"
 
 작성자: [Peter Kellner](https://peterkellner.net) 및 [Scott Addie](https://github.com/scottaddie)
 
-[앵커 태그 도우미](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper)는 새 특성을 추가하여 표준 HTML 앵커(`<a ... ></a>`) 태그를 향상시킵니다. 규칙에 따라 해당 특성들의 이름은 `asp-` 접두사로 시작됩니다. 렌더링 된 앵커 요소의 `href` 특성값은 `asp-` 특성값에 따라 결정됩니다.
+[앵커 태그 도우미](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper)는 표준 HTML 앵커(`<a ... ></a>`) 태그에 새로운 특성을 추가하여 향상시킵니다. 규칙에 따라 해당 특성들의 이름은 `asp-` 접두사로 시작합니다. 렌더링 되는 앵커 요소의 `href` 특성 값은 `asp-` 특성들의 값에 따라 결정됩니다.
 
 태그 도우미에 대한 개요는 <xref:mvc/views/tag-helpers/intro>를 참조하세요.
 
@@ -31,11 +31,11 @@ ms.locfileid: "72333944"
 
 ### <a name="asp-controller"></a>asp-controller
 
-[asp-controller](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Controller*) 특성은 URL 생성에 사용되는 컨트롤러를 지정합니다. 다음 태그는 모든 스피커를 나열합니다.
+[asp-controller](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Controller*) 특성은 URL 생성에 사용되는 컨트롤러를 할당합니다. 다음 태그는 모든 스피커를 나열합니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspController)]
 
-생성된 HTML:
+생성되는 HTML은 다음과 같습니다.
 
 ```html
 <a href="/Speaker">All Speakers</a>
@@ -53,7 +53,7 @@ ms.locfileid: "72333944"
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAction)]
 
-생성된 HTML:
+생성되는 HTML은 다음과 같습니다.
 
 ```html
 <a href="/Speaker/Evaluations">Speaker Evaluations</a>
@@ -89,7 +89,7 @@ ms.locfileid: "72333944"
 </html>
 ```
 
-이 경우 기본 경로의 `{id?}` 자리 표시자가 일치합니다. 생성된 HTML:
+이 경우 기본 경로의 `{id?}` 자리 표시자가 일치합니다. 생성되는 HTML은 다음과 같습니다.
 
 ```html
 <a href="/Speaker/Detail/12">SpeakerId: 12</a>
@@ -127,7 +127,7 @@ ms.locfileid: "72333944"
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspRoute)]
 
-앵커 태그 도우미는 */Speaker/Evaluations* URL을 사용하여 해당 컨트롤러 액션을 직접 가리키는 경로를 생성합니다. 생성된 HTML:
+앵커 태그 도우미는 */Speaker/Evaluations* URL을 사용하여 해당 컨트롤러 액션을 직접 가리키는 경로를 생성합니다. 생성되는 HTML은 다음과 같습니다.
 
 ```html
 <a href="/Speaker/Evaluations">Speaker Evaluations</a>
@@ -161,7 +161,7 @@ ms.locfileid: "72333944"
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspFragment)]
 
-생성된 HTML:
+생성되는 HTML은 다음과 같습니다.
 
 ```html
 <a href="/Speaker/Evaluations#SpeakerEvaluations">Speaker Evaluations</a>
@@ -193,7 +193,7 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAreaRazorPages)]
 
-생성된 HTML:
+생성되는 HTML은 다음과 같습니다.
 
 ```html
 <a href="/Sessions">View Sessions</a>
@@ -228,7 +228,7 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspArea)]
 
-생성된 HTML:
+생성되는 HTML은 다음과 같습니다.
 
 ```html
 <a href="/Blogs/Home/AboutBlog">About Blog</a>
@@ -245,7 +245,7 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspProtocol)]
 
-생성된 HTML:
+생성되는 HTML은 다음과 같습니다.
 
 ```html
 <a href="https://localhost/Home/About">About</a>
@@ -259,7 +259,7 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspHost)]
 
-생성된 HTML:
+생성되는 HTML은 다음과 같습니다.
 
 ```html
 <a href="https://microsoft.com/Home/About">About</a>
@@ -273,7 +273,7 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspPage)]
 
-생성된 HTML:
+생성되는 HTML은 다음과 같습니다.
 
 ```html
 <a href="/Attendee">All Attendees</a>
@@ -283,7 +283,7 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspPageAspRouteId)]
 
-생성된 HTML:
+생성되는 HTML은 다음과 같습니다.
 
 ```html
 <a href="/Attendee?attendeeid=10">View Attendee</a>
@@ -301,7 +301,7 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspPageHandler)]
 
-생성된 HTML:
+생성되는 HTML은 다음과 같습니다.
 
 ```html
 <a href="/Attendee?attendeeid=12&handler=Profile">Attendee Profile</a>
