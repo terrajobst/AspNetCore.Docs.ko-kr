@@ -5,17 +5,17 @@ description: ASP.NET Core Blazor 앱 템플릿 및 Blazor 프로젝트 구조에
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2019
+ms.date: 01/29/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: 2a95b986450471b474d93ead252255f2bd9d4918
-ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
+ms.openlocfilehash: acfa4b8a42cbd310c6fc6dc973573578e94ef999
+ms.sourcegitcommit: c81ef12a1b6e6ac838e5e07042717cf492e6635b
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/17/2020
-ms.locfileid: "76160121"
+ms.lasthandoff: 01/29/2020
+ms.locfileid: "76885513"
 ---
 # <a name="aspnet-core-opno-locblazor-templates"></a>Blazor 템플릿 ASP.NET Core
 
@@ -36,16 +36,20 @@ Blazor의 호스팅 모델에 대 한 자세한 내용은 <xref:blazor/hosting-m
 
 Blazor 템플릿에서 생성 된 Blazor 앱을 구성 하는 파일 및 폴더는 다음과 같습니다.
 
-* *Program.cs* &ndash; ASP.NET Core [호스트](xref:fundamentals/host/generic-host)를 설정 하는 앱의 진입점입니다. 이 파일의 코드는 ASP.NET Core 템플릿에서 생성 된 모든 ASP.NET Core 앱에 공통적입니다.
+* *Program.cs* &ndash;를 설정 하는 앱의 진입점입니다.
 
-* *Startup.cs* &ndash;는 앱의 시작 논리를 포함 합니다. `Startup` 클래스는 두 가지 메서드를 정의 합니다.
+  * ASP.NET Core [호스트](xref:fundamentals/host/generic-host) (Blazor 서버)
+  * Weasembomomhost (Blazor Weasembomomomomomomoma) &ndash;이 파일의 코드는 Blazor weasembomtemplate (`blazorwasm`)에서 만든 앱에 대해 고유 합니다.
+    * 앱의 루트 구성 요소인 `App` 구성 요소는 `Add` 메서드에 `app` DOM 요소로 지정 됩니다.
+    * 호스트 작성기의 `ConfigureServices` 메서드 (예: `builder.Services.AddSingleton<IMyDependency, MyDependency>();`)를 사용 하 여 서비스를 구성할 수 있습니다.
+    * 호스트 빌더 (`builder.Configuration`)를 통해 구성을 제공할 수 있습니다.
+
+* *Startup.cs* (Blazor Server) &ndash;에는 앱의 시작 논리가 포함 됩니다. `Startup` 클래스는 두 가지 메서드를 정의 합니다.
 
   * `ConfigureServices` &ndash;는 응용 프로그램의 [DI (종속성 주입)](xref:fundamentals/dependency-injection) 서비스를 구성 합니다. Blazor Server 앱에서 <xref:Microsoft.Extensions.DependencyInjection.ComponentServiceCollectionExtensions.AddServerSideBlazor*>를 호출 하 여 서비스를 추가 하 고 `WeatherForecastService` 예제 `FetchData` 구성 요소에서 사용할 수 있도록 서비스 컨테이너에 추가 합니다.
   * `Configure` &ndash;는 앱의 요청 처리 파이프라인을 구성 합니다.
-    * Blazor Weasembom&ndash;는 앱의 루트 구성 요소인 `App` 구성 요소 (`app` DOM 요소로 지정 됨)를 `AddComponent` 메서드에 추가 합니다.
-    * Blazor 서버
-      * 브라우저를 사용 하 여 실시간 연결에 대 한 끝점을 설정 하기 위해 <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub*>가 호출 됩니다. 연결은 응용 프로그램에 실시간 웹 기능을 추가 하기 위한 프레임 워크인 [SignalR](xref:signalr/introduction)를 사용 하 여 만들어집니다.
-      * [MapFallbackToPage ("/_Host")](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage*) 는 앱의 루트 페이지 (*Pages/_Host*)를 설정 하 고 탐색을 활성화 하기 위해 호출 됩니다.
+    * 브라우저를 사용 하 여 실시간 연결에 대 한 끝점을 설정 하기 위해 <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub*>가 호출 됩니다. 연결은 응용 프로그램에 실시간 웹 기능을 추가 하기 위한 프레임 워크인 [SignalR](xref:signalr/introduction)를 사용 하 여 만들어집니다.
+    * [MapFallbackToPage ("/_Host")](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage*) 는 앱의 루트 페이지 (*Pages/_Host*)를 설정 하 고 탐색을 활성화 하기 위해 호출 됩니다.
 
 * *wwwroot/index.html* (Blazor Weasembmbomembamboma)는 html 페이지로 구현 된 앱의 루트 페이지를 &ndash; 합니다.
   * 앱의 페이지를 처음 요청 하면이 페이지가 렌더링 되어 응답으로 반환 됩니다.

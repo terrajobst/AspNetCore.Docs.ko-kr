@@ -5,14 +5,14 @@ description: ASP.NET Core에서 Web API 만들기에 대한 기본 사항을 알
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 11/22/2019
+ms.date: 01/27/2020
 uid: web-api/index
-ms.openlocfilehash: 5ef8b4d012f4ed90339ffea191612e4dc365d958
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 8609e2095c202643cdc905cc610298195b654215
+ms.sourcegitcommit: fe41cff0b99f3920b727286944e5b652ca301640
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880537"
+ms.lasthandoff: 01/29/2020
+ms.locfileid: "76870019"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>ASP.NET Core로 Web API 만들기
 
@@ -78,13 +78,28 @@ Web API는 <xref:Microsoft.AspNetCore.Mvc.ControllerBase>에서 파생되는 하
 
 [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) 특성을 컨트롤러 클래스에 적용하여 다음과 같이 독자적인 API 관련 동작을 사용할 수 있습니다.
 
+::: moniker range=">= aspnetcore-2.2"
+
 * [특성 라우팅 요구 사항](#attribute-routing-requirement)
 * [자동 HTTP 400 응답](#automatic-http-400-responses)
 * [바인딩 소스 매개 변수 유추](#binding-source-parameter-inference)
 * [다중 파트/폼 데이터 요청 유추](#multipartform-data-request-inference)
 * [오류 상태 코드에 대한 문제 세부 정보](#problem-details-for-error-status-codes)
 
+*오류 상태 코드에 대한 문제 세부 정보* 기능을 사용하려면 2.2 이상의 [호환성 버전](xref:mvc/compatibility-version)이 필요합니다. 기타 기능을 사용하려면 2.1 이상의 호환성 버전이 필요합니다.
+
+::: moniker-end
+
+::: moniker range="= aspnetcore-2.1"
+
+* [특성 라우팅 요구 사항](#attribute-routing-requirement)
+* [자동 HTTP 400 응답](#automatic-http-400-responses)
+* [바인딩 소스 매개 변수 유추](#binding-source-parameter-inference)
+* [다중 파트/폼 데이터 요청 유추](#multipartform-data-request-inference)
+
 이러한 기능을 사용하려면 [호환성 버전](xref:mvc/compatibility-version) 2.1 이상이 필요합니다.
+
+::: moniker-end
 
 ### <a name="attribute-on-specific-controllers"></a>특정 컨트롤러의 특성
 

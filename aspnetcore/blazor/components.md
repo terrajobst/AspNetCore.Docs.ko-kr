@@ -5,29 +5,29 @@ description: 데이터에 바인딩하고, 이벤트를 처리 하 고, 구성 �
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/28/2019
+ms.date: 01/24/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/components
-ms.openlocfilehash: 6643ccd0fdb62243427bb0972d8deb3f7b57079d
-ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
+ms.openlocfilehash: d6ba60b20d21636c7f780a80d8fbdb152505a3a3
+ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/24/2020
-ms.locfileid: "76726924"
+ms.lasthandoff: 02/01/2020
+ms.locfileid: "76928255"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
 By [Luke Latham](https://github.com/guardrex) 및 [Daniel Roth](https://github.com/danroth27)
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-Blazor 앱은 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소는 페이지, 대화 상자 또는 양식과 같은 UI (사용자 인터페이스)의 자체 포함 청크입니다. 구성 요소는 데이터를 삽입 하거나 UI 이벤트에 응답 하는 데 필요한 HTML 태그와 처리 논리를 포함 합니다. 구성 요소는 유연 하 고 간단 합니다. 프로젝트 간에 중첩, 재사용 및 공유 될 수 있습니다.
+Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소는 페이지, 대화 상자 또는 양식과 같은 UI (사용자 인터페이스)의 자체 포함 청크입니다. 구성 요소는 데이터를 삽입 하거나 UI 이벤트에 응답 하는 데 필요한 HTML 태그와 처리 논리를 포함 합니다. 구성 요소는 유연 하 고 간단 합니다. 프로젝트 간에 중첩, 재사용 및 공유 될 수 있습니다.
 
 ## <a name="component-classes"></a>구성 요소 클래스
 
-구성 요소는 및 HTML 태그의 C# 조합을 사용 하 여 [razor](xref:mvc/views/razor) 구성 요소 파일 (*razor*)에서 구현 됩니다. Blazor의 구성 요소는 *Razor 구성 요소*라고 합니다.
+구성 요소는 및 HTML 태그의 C# 조합을 사용 하 여 [razor](xref:mvc/views/razor) 구성 요소 파일 (*razor*)에서 구현 됩니다. Blazor의 구성 요소는 공식적으로 *Razor 구성 요소*라고 합니다.
 
 구성 요소의 이름은 대문자로 시작 해야 합니다. 예를 들어 *MyCoolComponent* 는 유효 하며 *MyCoolComponent* 은 유효 하지 않습니다.
 
@@ -49,7 +49,7 @@ Blazor 앱은 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 }
 ```
 
-구성 요소가 처음 렌더링 되 면 구성 요소는 이벤트에 대 한 응답으로 렌더링 트리를 다시 생성 합니다. 그런 다음 Blazor 새 렌더링 트리를 이전 렌더링 트리와 비교 하 여 브라우저의 문서 개체 모델 (DOM)에 수정 사항을 적용 합니다.
+구성 요소가 처음 렌더링 되 면 구성 요소는 이벤트에 대 한 응답으로 렌더링 트리를 다시 생성 합니다. 그런 다음 Blazor는 새 렌더링 트리를 이전 렌더링 트리와 비교 하 여 브라우저의 DOM (문서 개체 모델)에 적용 합니다.
 
 구성 요소는 C# 일반 클래스 이며 프로젝트 내의 어느 위치에 나 배치할 수 있습니다. 웹 페이지를 생성 하는 구성 요소는 일반적으로 *Pages* 폴더에 있습니다. 페이지를 지정 하지 않는 구성 요소는 일반적으로 *공유* 폴더 또는 프로젝트에 추가 된 사용자 지정 폴더에 배치 됩니다.
 
@@ -90,7 +90,7 @@ Razor 구성 요소를 호스팅하도록 Razor Pages 또는 MVC 앱을 준비 �
     param-IncrementAmount="10" />
 ```
 
-매개 변수 전달 (예: 앞의 예제에서 `IncrementAmount`)은 지원 됩니다.
+매개 변수 형식은 JSON serializable 이어야 합니다 .이는 일반적으로 형식에 기본 생성자와 설정 가능한 속성이 있어야 함을 의미 합니다. 예를 들어 `IncrementAmount` 형식이 JSON serializer에서 지 원하는 기본 형식인 `int`이기 때문에 `IncrementAmount` 값을 지정할 수 있습니다.
 
 구성 요소가 있는지 여부를 구성 하 `RenderMode` 다음을 수행 합니다.
 
@@ -99,8 +99,8 @@ Razor 구성 요소를 호스팅하도록 Razor Pages 또는 MVC 앱을 준비 �
 
 | `RenderMode`        | 설명 |
 | ------------------- | ----------- |
-| `ServerPrerendered` | 구성 요소를 정적 HTML로 렌더링 하 고 Blazor Server 앱에 대 한 마커를 포함 합니다. 사용자 에이전트가 시작 되 면이 마커는 Blazor 앱을 부트스트랩 하는 데 사용 됩니다. |
-| `Server`            | Blazor Server 앱에 대 한 마커를 렌더링 합니다. 구성 요소의 출력은 포함 되지 않습니다. 사용자 에이전트가 시작 되 면이 마커는 Blazor 앱을 부트스트랩 하는 데 사용 됩니다. |
+| `ServerPrerendered` | 구성 요소를 정적 HTML로 렌더링 하 고 Blazor 서버 앱에 대 한 마커를 포함 합니다. 사용자 에이전트가 시작 되 면이 표식은 Blazor 앱을 부트스트랩 하는 데 사용 됩니다. |
+| `Server`            | Blazor 서버 앱에 대 한 마커를 렌더링 합니다. 구성 요소의 출력은 포함 되지 않습니다. 사용자 에이전트가 시작 되 면이 표식은 Blazor 앱을 부트스트랩 하는 데 사용 됩니다. |
 | `Static`            | 구성 요소를 정적 HTML로 렌더링 합니다. |
 
 페이지 및 뷰에서 구성 요소를 사용할 수 있지만 반대의 경우는 그렇지 않습니다. 구성 요소는 부분 보기 및 섹션과 같은 보기 및 페이지 관련 시나리오를 사용할 수 없습니다. 구성 요소의 부분 뷰에서 논리를 사용 하려면 부분 뷰 논리를 구성 요소에 대 한 요소로 처리 합니다.
@@ -108,6 +108,10 @@ Razor 구성 요소를 호스팅하도록 Razor Pages 또는 MVC 앱을 준비 �
 정적 HTML 페이지에서 서버 구성 요소를 렌더링 하는 것은 지원 되지 않습니다.
 
 구성 요소를 렌더링 하는 방법, 구성 요소 상태 및 `Component` 태그 도우미에 대 한 자세한 내용은 <xref:blazor/hosting-models>을 참조 하세요.
+
+## <a name="tag-helpers-arent-used-in-components"></a>태그 도우미는 구성 요소에서 사용 되지 않습니다.
+
+[태그 도우미](xref:mvc/views/tag-helpers/intro) 는 razor 구성 요소 (*razor* 파일)에서 지원 되지 않습니다. Blazor에서 태그 도우미와 유사한 기능을 제공 하려면 태그 도우미와 동일한 기능을 포함 하는 구성 요소를 만들고 구성 요소를 대신 사용 합니다.
 
 ## <a name="use-components"></a>구성 요소 사용
 
@@ -392,13 +396,13 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 * 자유 형식 텍스트를 포함할 수 없습니다.
 * 브라우저의 구현에 따라 사용자 상호 작용 특성을 제공 합니다.
 
-다음 필드 형식은 특정 형식 지정 요구 사항을 가지 며, 모든 주요 브라우저에서 지원 되지 않기 때문에 현재 Blazor에서 지원 되지 않습니다.
+다음 필드 형식은 특정 형식 지정 요구 사항을 가지 며 현재 Blazor에서 지원 되지 않습니다. 모든 주요 브라우저에서 지원 되지 않기 때문입니다.
 
 * `datetime-local`
 * `month`
 * `week`
 
-`@bind`는 `@bind:culture` 매개 변수를 지원 하 여 값을 구문 분석 하 고 서식을 지정 하는 <xref:System.Globalization.CultureInfo?displayProperty=fullName>을 제공 합니다. `date` 및 `number` 필드 형식을 사용할 때는 문화권을 지정 하지 않는 것이 좋습니다. `date` 및 `number`에는 필수 문화권을 제공 하는 Blazor 지원이 기본적으로 제공 됩니다.
+`@bind`는 `@bind:culture` 매개 변수를 지원 하 여 값을 구문 분석 하 고 서식을 지정 하는 <xref:System.Globalization.CultureInfo?displayProperty=fullName>을 제공 합니다. `date` 및 `number` 필드 형식을 사용할 때는 문화권을 지정 하지 않는 것이 좋습니다. `date` 및 `number`에는 필수 문화권을 제공 하는 기본 제공 Blazor 지원이 있습니다.
 
 사용자의 문화권을 설정 하는 방법에 대 한 자세한 내용은 [지역화](#localization) 섹션을 참조 하십시오.
 
@@ -904,7 +908,7 @@ Password:
 
 ## <a name="invoke-component-methods-externally-to-update-state"></a>외부에서 구성 요소 메서드를 호출 하 여 상태 업데이트
 
-Blazor는 `SynchronizationContext`를 사용 하 여 단일 논리적 실행 스레드를 적용 합니다. 구성 요소의 [수명 주기 메서드](xref:blazor/lifecycle) 및 Blazor에 의해 발생 하는 모든 이벤트 콜백이이 `SynchronizationContext`실행 됩니다. 외부 이벤트 (예: 타이머 또는 다른 알림)를 기반으로 구성 요소를 업데이트 해야 하는 경우 Blazor의 `SynchronizationContext`에 디스패치할 `InvokeAsync` 메서드를 사용 합니다.
+Blazor는 `SynchronizationContext`을 사용 하 여 단일 논리적 실행 스레드를 적용 합니다. 구성 요소의 [수명 주기 메서드](xref:blazor/lifecycle) 및 Blazor에 의해 발생 하는 모든 이벤트 콜백이이 `SynchronizationContext`실행 됩니다. 외부 이벤트 (예: 타이머 또는 다른 알림)를 기반으로 구성 요소를 업데이트 해야 하는 경우 Blazor의 `SynchronizationContext`에 디스패치할 `InvokeAsync` 메서드를 사용 합니다.
 
 예를 들어 업데이트 된 상태의 수신 구성 요소를 알릴 수 있는 알림 *서비스* 를 살펴보겠습니다.
 
@@ -961,7 +965,7 @@ public class NotifierService
 
 ## <a name="use-key-to-control-the-preservation-of-elements-and-components"></a>\@키를 사용 하 여 요소 및 구성 요소 유지 관리
 
-요소 또는 구성 요소 목록을 렌더링할 때 이후에 요소 또는 구성 요소가 변경 되는 경우 Blazor의 diff 알고리즘은 유지할 수 있는 이전 요소 또는 구성 요소와 모델 개체가 이러한 요소에 매핑되는 방법을 결정 해야 합니다. 일반적으로이 프로세스는 자동 이며 무시 해도 되지만 프로세스를 제어 하는 경우가 있습니다.
+요소 또는 구성 요소 목록을 렌더링할 때 이후에 요소나 구성 요소가 변경 되는 경우 Blazor의 diff 알고리즘은 유지할 수 있는 이전 요소 또는 구성 요소와 모델 개체가 이러한 요소에 매핑되는 방법을 결정 해야 합니다. 일반적으로이 프로세스는 자동 이며 무시 해도 되지만 프로세스를 제어 하는 경우가 있습니다.
 
 다음 예제를 참조하세요.
 
@@ -1008,7 +1012,7 @@ public class NotifierService
 
 일반적으로 목록이 렌더링 될 때마다 (예: `@foreach` 블록에서) `@key`를 사용 하 고 `@key`을 정의 하는 데 적합 한 값을 사용 하는 것이 좋습니다.
 
-`@key`를 사용 하 여 개체가 변경 될 때 요소가 요소 또는 구성 요소 하위 트리를 유지 Blazor 하지 않도록 할 수도 있습니다.
+또한 `@key`를 사용 하 여 개체가 변경 될 때 Blazor가 요소 또는 구성 요소 하위 트리를 유지 하지 못하게 할 수 있습니다.
 
 ```razor
 <div @key="currentPerson">
@@ -1016,7 +1020,7 @@ public class NotifierService
 </div>
 ```
 
-`@currentPerson` 변경 하는 경우 `@key` 특성 지시문은 Blazor 강제로 전체 `<div>` 및 해당 하위 항목을 삭제 하 고 새 요소와 구성 요소를 사용 하 여 UI 내에서 하위 트리를 다시 빌드합니다. 이는 `@currentPerson` 변경 될 때 UI 상태가 유지 되지 않도록 해야 하는 경우에 유용할 수 있습니다.
+`@currentPerson` 변경 하는 경우 `@key` 특성 지시어는 강제로 전체 `<div>` 및 해당 하위 항목을 삭제 하 고 새 요소 및 구성 요소를 사용 하 여 UI 내에서 하위 트리를 다시 Blazor 합니다. 이는 `@currentPerson` 변경 될 때 UI 상태가 유지 되지 않도록 해야 하는 경우에 유용할 수 있습니다.
 
 ### <a name="when-not-to-use-key"></a>\@키를 사용 하지 않는 경우
 
@@ -1031,11 +1035,11 @@ public class NotifierService
 * 모델 개체 인스턴스 (예: 이전 예제와 같은 `Person` 인스턴스) 이렇게 하면 개체 참조 일치를 기반으로 유지 됩니다.
 * 고유 식별자 (예: `int`, `string`, `Guid`)의 기본 키 값입니다.
 
-`@key`에 사용 되는 값이 충돌 하지 않는지 확인 합니다. 동일한 부모 요소 내에서 충돌 방지 값이 검색 되는 경우 기존 요소나 구성 요소를 새 요소나 구성 요소에 명확 하 게 매핑할 수 없기 때문에 Blazor 예외를 throw 합니다. 개체 인스턴스 또는 기본 키 값과 같은 고유 값만 사용 합니다.
+`@key`에 사용 되는 값이 충돌 하지 않는지 확인 합니다. 동일한 부모 요소 내에서 충돌 방지 값이 검색 되는 경우 Blazor는 기존 요소나 구성 요소를 새 요소나 구성 요소에 명확 하 게 매핑할 수 없기 때문에 예외를 throw 합니다. 개체 인스턴스 또는 기본 키 값과 같은 고유 값만 사용 합니다.
 
 ## <a name="routing"></a>라우팅
 
-Blazor 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로 템플릿을 제공 하 여 수행 됩니다.
+Blazor의 라우팅은 앱에서 액세스 가능한 각 구성 요소에 경로 템플릿을 제공 하 여 수행 됩니다.
 
 `@page` 지시어를 사용 하 여 Razor 파일이 컴파일되면 생성 된 클래스에 경로 템플릿을 지정 하는 <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> 제공 됩니다. 런타임에 라우터는 `RouteAttribute`를 사용 하 여 구성 요소 클래스를 검색 하 고 요청 된 URL과 일치 하는 경로 템플릿을 포함 하는 구성 요소를 렌더링 합니다.
 
@@ -1147,6 +1151,43 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Components.Web;
+```
+
+## <a name="specify-a-base-class"></a>기본 클래스 지정
+
+[`@inherits`](xref:mvc/views/razor#inherits) 지시어를 사용 하 여 구성 요소에 대 한 기본 클래스를 지정할 수 있습니다. 다음 예제에서는 구성 요소가 기본 클래스 `BlazorRocksBase`를 상속 하 여 구성 요소의 속성과 메서드를 제공 하는 방법을 보여 줍니다. 기본 클래스는 `ComponentBase`에서 파생 되어야 합니다.
+
+*Pages/BlazorRocks*:
+
+```razor
+@page "/BlazorRocks"
+@inherits BlazorRocksBase
+
+<h1>@BlazorRocksText</h1>
+```
+
+*BlazorRocksBase.cs*:
+
+```csharp
+using Microsoft.AspNetCore.Components;
+
+namespace BlazorSample
+{
+    public class BlazorRocksBase : ComponentBase
+    {
+        public string BlazorRocksText { get; set; } = 
+            "Blazor rocks the browser!";
+    }
+}
+```
+
+## <a name="specify-an-attribute"></a>특성 지정
+
+특성은 [`@attribute`](xref:mvc/views/razor#attribute) 지시어를 사용 하 여 Razor 구성 요소에 지정할 수 있습니다. 다음 예제에서는 `[Authorize]` 특성을 component 클래스에 적용 합니다.
+
+```razor
+@page "/"
+@attribute [Authorize]
 ```
 
 ## <a name="import-components"></a>구성 요소 가져오기
@@ -1545,7 +1586,7 @@ public class ThemeInfo
 }
 ```
 
-다음 예제에서 `CreateComponent` 메서드의 루프는 세 개의 `PetDetails` 구성 요소를 생성 합니다. `RenderTreeBuilder` 메서드를 호출 하 여 구성 요소를 만드는 경우 (`OpenComponent` 및 `AddAttribute`) 시퀀스 번호는 소스 코드 줄 번호입니다. Blazor 차이 알고리즘은 고유한 호출 호출을 제외 하 고 고유한 코드 줄에 해당 하는 시퀀스 번호를 사용 합니다. `RenderTreeBuilder` 메서드를 사용 하 여 구성 요소를 만드는 경우 시퀀스 번호에 대 한 인수를 하드 코딩 합니다. **계산 또는 카운터를 사용 하 여 시퀀스 번호를 생성 하면 성능이 저하 될 수 있습니다.** 자세한 내용은 [시퀀스 번호를 코드 줄 번호와 관련 되 고 실행 순서와는 관련이 없습니다](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) . 섹션을 참조 하세요.
+다음 예제에서 `CreateComponent` 메서드의 루프는 세 개의 `PetDetails` 구성 요소를 생성 합니다. `RenderTreeBuilder` 메서드를 호출 하 여 구성 요소를 만드는 경우 (`OpenComponent` 및 `AddAttribute`) 시퀀스 번호는 소스 코드 줄 번호입니다. Blazor 차이점 알고리즘은 고유 호출 호출이 아닌 개별 코드 줄에 해당 하는 시퀀스 번호를 사용 합니다. `RenderTreeBuilder` 메서드를 사용 하 여 구성 요소를 만드는 경우 시퀀스 번호에 대 한 인수를 하드 코딩 합니다. **계산 또는 카운터를 사용 하 여 시퀀스 번호를 생성 하면 성능이 저하 될 수 있습니다.** 자세한 내용은 [시퀀스 번호를 코드 줄 번호와 관련 되 고 실행 순서와는 관련이 없습니다](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) . 섹션을 참조 하세요.
 
 `BuiltContent` 구성 요소:
 
@@ -1581,7 +1622,7 @@ public class ThemeInfo
 ```
 
 > [!WARNING]
-> `Microsoft.AspNetCore.Components.RenderTree` 형식을 사용 하면 렌더링 작업의 *결과* 를 처리할 수 있습니다. Blazor 프레임 워크 구현의 내부 세부 정보입니다. 이러한 형식은 *불안정* 한 것으로 간주 되며 이후 릴리스에서 변경 될 수 있습니다.
+> `Microsoft.AspNetCore.Components.RenderTree` 형식을 사용 하면 렌더링 작업의 *결과* 를 처리할 수 있습니다. Blazor framework 구현의 내부 세부 정보입니다. 이러한 형식은 *불안정* 한 것으로 간주 되며 이후 릴리스에서 변경 될 수 있습니다.
 
 ### <a name="sequence-numbers-relate-to-code-line-numbers-and-not-execution-order"></a>시퀀스 번호는 코드 줄 번호와 관련 되 고 실행 순서와는 관련이 없습니다.
 

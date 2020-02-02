@@ -5,19 +5,19 @@ description: Blazor 앱이 서비스를 구성 요소에 삽입할 수 있는 �
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/08/2020
+ms.date: 01/29/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/dependency-injection
-ms.openlocfilehash: 6930d721f04fd5f7cad2ba472724497a157fda0f
-ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
+ms.openlocfilehash: 859fd484fc00104575f176fa7d3bf752895475a0
+ms.sourcegitcommit: c81ef12a1b6e6ac838e5e07042717cf492e6635b
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/17/2020
-ms.locfileid: "76159978"
+ms.lasthandoff: 01/29/2020
+ms.locfileid: "76885492"
 ---
-# <a name="aspnet-core-opno-locblazor-dependency-injection"></a>ASP.NET Core Blazor 종속성 주입
+# <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core Blazor 종속성 주입
 
 [Rainer Stropek](https://www.timecockpit.com)
 
@@ -25,7 +25,7 @@ ms.locfileid: "76159978"
 
 Blazor는 [DI (종속성 주입)](xref:fundamentals/dependency-injection)를 지원 합니다. 앱은 기본 제공 서비스를 구성 요소에 삽입 하 여 사용할 수 있습니다. 앱은 사용자 지정 서비스를 정의 및 등록 하 고 DI를 통해 앱 전체에서 사용할 수 있게 할 수도 있습니다.
 
-DI는 중앙 위치에 구성 된 서비스에 액세스 하기 위한 기술입니다. 이는 Blazor 앱에서 다음과 같은 경우에 유용할 수 있습니다.
+DI는 중앙 위치에 구성 된 서비스에 액세스 하기 위한 기술입니다. Blazor 앱에서 다음과 같은 작업을 수행할 수 있습니다.
 
 * 단일 *서비스 라고 하는 여러* 구성 요소에서 서비스 클래스의 단일 인스턴스를 공유 합니다.
 * 참조 추상화를 사용 하 여 구체적인 서비스 클래스의 구성 요소를 분리 합니다. 예를 들어 응용 프로그램의 데이터에 액세스 하는 `IDataAccess` 인터페이스를 살펴보겠습니다. 인터페이스는 구체적 `DataAccess` 클래스에 의해 구현 되 고 앱의 서비스 컨테이너에 서비스로 등록 됩니다. 구성 요소가 DI를 사용 하 여 `IDataAccess` 구현을 수신 하는 경우 구성 요소가 구체적인 형식에 연결 되지 않습니다. 단위 테스트에서 모의 구현을 위해 구현을 바꿀 수 있습니다.
@@ -36,13 +36,76 @@ DI는 중앙 위치에 구성 된 서비스에 액세스 하기 위한 기술입
 
 | 서비스 | 수명 | 설명 |
 | ------- | -------- | ----------- |
-| <xref:System.Net.Http.HttpClient> | Singleton | URI로 식별 되는 리소스에서 http 요청을 보내고 HTTP 응답을 받기 위한 메서드를 제공 합니다.<br><br>Blazor Weasembomapp의 `HttpClient` 인스턴스는 브라우저를 사용 하 여 백그라운드에서 HTTP 트래픽을 처리 합니다.<br><br>Blazor Server 앱에는 기본적으로 서비스로 구성 된 `HttpClient` 포함 되지 않습니다. Blazor Server 앱에 대 한 `HttpClient`를 제공 합니다.<br><br>자세한 내용은 <xref:blazor/call-web-api>를 참조하세요. |
-| `IJSRuntime` | Singleton (Blazor Weasembmbsembambmbse)<br>범위가 지정 된 (Blazor Server) | JavaScript 호출이 디스패치되는 JavaScript 런타임의 인스턴스를 나타냅니다. 자세한 내용은 <xref:blazor/javascript-interop>를 참조하세요. |
-| `NavigationManager` | Singleton (Blazor Weasembmbsembambmbse)<br>범위가 지정 된 (Blazor Server) | Uri 및 탐색 상태를 사용 하기 위한 도우미를 포함 합니다. 자세한 내용은 [URI 및 탐색 상태 도우미](xref:blazor/routing#uri-and-navigation-state-helpers)를 참조 하세요. |
+| <xref:System.Net.Http.HttpClient> | Singleton | URI로 식별 되는 리소스에서 http 요청을 보내고 HTTP 응답을 받기 위한 메서드를 제공 합니다.<br><br>Blazor Weasembomapp의 `HttpClient` 인스턴스는 브라우저를 사용 하 여 백그라운드에서 HTTP 트래픽을 처리 합니다.<br><br>Blazor 서버 앱에는 기본적으로 서비스로 구성 된 `HttpClient` 포함 되지 않습니다. Blazor 서버 앱에 대 한 `HttpClient`를 제공 합니다.<br><br>자세한 내용은 <xref:blazor/call-web-api>를 참조하세요. |
+| `IJSRuntime` | Singleton (Blazor weasembmbambome<br>범위가 지정 된 (Blazor Server) | JavaScript 호출이 디스패치되는 JavaScript 런타임의 인스턴스를 나타냅니다. 자세한 내용은 <xref:blazor/javascript-interop>를 참조하세요. |
+| `NavigationManager` | Singleton (Blazor weasembmbambome<br>범위가 지정 된 (Blazor Server) | Uri 및 탐색 상태를 사용 하기 위한 도우미를 포함 합니다. 자세한 내용은 [URI 및 탐색 상태 도우미](xref:blazor/routing#uri-and-navigation-state-helpers)를 참조 하세요. |
 
 사용자 지정 서비스 공급자는 테이블에 나열 된 기본 서비스를 자동으로 제공 하지 않습니다. 사용자 지정 서비스 공급자를 사용 하 고 표에 표시 된 서비스가 필요한 경우 새 서비스 공급자에 필요한 서비스를 추가 합니다.
 
 ## <a name="add-services-to-an-app"></a>앱에 서비스 추가
+
+### <a name="blazor-webassembly"></a>Blazor WebAssembly
+
+*Program.cs*의 `Main` 메서드에서 앱의 서비스 컬렉션에 대 한 서비스를 구성 합니다. 다음 예제에서는 `MyDependency` 구현이 `IMyDependency`에 대해 등록 됩니다.
+
+```csharp
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        var builder = WebAssemblyHostBuilder.CreateDefault(args);
+        builder.Services.AddSingleton<IMyDependency, MyDependency>();
+        builder.RootComponents.Add<App>("app");
+
+        await builder.Build().RunAsync();
+    }
+}
+```
+
+호스트를 빌드한 후에는 구성 요소를 렌더링 하기 전에 루트 DI 범위에서 서비스에 액세스할 수 있습니다. 이는 콘텐츠를 렌더링 하기 전에 초기화 논리를 실행 하는 데 유용할 수 있습니다.
+
+```csharp
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        var builder = WebAssemblyHostBuilder.CreateDefault(args);
+        builder.Services.AddSingleton<WeatherService>();
+        builder.RootComponents.Add<App>("app");
+
+        var host = builder.Build();
+
+        var weatherService = host.Services.GetRequiredService<WeatherService>();
+        await weatherService.InitializeWeatherAsync();
+
+        await host.RunAsync();
+    }
+}
+```
+
+또한 호스트는 앱에 대 한 중앙 구성 인스턴스도 제공 합니다. 이전 예제를 기반으로 하는 날씨 서비스의 URL은 기본 구성 원본 (예: *appsettings*)에서 `InitializeWeatherAsync`으로 전달 됩니다.
+
+```csharp
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        var builder = WebAssemblyHostBuilder.CreateDefault(args);
+        builder.Services.AddSingleton<WeatherService>();
+        builder.RootComponents.Add<App>("app");
+
+        var host = builder.Build();
+
+        var weatherService = host.Services.GetRequiredService<WeatherService>();
+        await weatherService.InitializeWeatherAsync(
+            host.Configuration["WeatherServiceUrl"]);
+
+        await host.RunAsync();
+    }
+}
+```
+
+### <a name="blazor-server"></a>Blazor 서버
 
 새 앱을 만든 후 `Startup.ConfigureServices` 메서드를 검사 합니다.
 
@@ -61,6 +124,8 @@ public void ConfigureServices(IServiceCollection services)
     services.AddSingleton<IDataAccess, DataAccess>();
 }
 ```
+
+### <a name="service-lifetime"></a>서비스 수명
 
 다음 표에 표시 된 수명을 사용 하 여 서비스를 구성할 수 있습니다.
 
@@ -134,7 +199,7 @@ public class DataAccess : IDataAccess
 
 ASP.NET Core 앱에서 범위가 지정 된 서비스는 일반적으로 현재 요청으로 범위가 지정 됩니다. 요청이 완료 된 후에는 모든 범위 지정 또는 임시 서비스가 DI 시스템에 의해 삭제 됩니다. Blazor Server 앱에서 요청 범위는 클라이언트 연결 기간 동안 지속 되므로 임시 및 범위가 지정 된 서비스가 예상 보다 훨씬 오래 지속 될 수 있습니다.
 
-서비스의 범위를 구성 요소의 수명으로 범위를 지정할 수 있도록에서는 `OwningComponentBase` 및 `OwningComponentBase<TService>` 기본 클래스를 사용할 수 있습니다. 이러한 기본 클래스는 구성 요소의 수명으로 범위가 지정 된 서비스를 확인 하는 `IServiceProvider` 형식의 `ScopedServices` 속성을 노출 합니다. Razor의 기본 클래스에서 상속 되는 구성 요소를 작성 하려면 `@inherits` 지시문을 사용 합니다.
+구성 요소의 수명으로 서비스 범위를 표시 하려면 `OwningComponentBase` 및 `OwningComponentBase<TService>` 기본 클래스를 사용할 수 있습니다. 이러한 기본 클래스는 구성 요소의 수명으로 범위가 지정 된 서비스를 확인 하는 `IServiceProvider` 형식의 `ScopedServices` 속성을 노출 합니다. Razor의 기본 클래스에서 상속 되는 구성 요소를 작성 하려면 `@inherits` 지시문을 사용 합니다.
 
 ```razor
 @page "/users"

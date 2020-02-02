@@ -10,28 +10,28 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/routing
-ms.openlocfilehash: 0cd15f25ff7975cae3f63a739212aa23062ece23
-ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
+ms.openlocfilehash: 32459f9f42220b01ce04e6444a9bb4a9592ee2da
+ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/17/2020
-ms.locfileid: "76160160"
+ms.lasthandoff: 02/01/2020
+ms.locfileid: "76928279"
 ---
-# <a name="aspnet-core-opno-locblazor-routing"></a>ASP.NET Core Blazor 라우팅
+# <a name="aspnet-core-blazor-routing"></a>ASP.NET Core Blazor 라우팅
 
 작성자: [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-요청을 라우팅하는 방법 및 `NavLink` 구성 요소를 사용 하 여 Blazor 앱에서 탐색 링크를 만드는 방법에 대해 알아봅니다.
+Blazor apps에서 요청을 라우팅하는 방법 및 `NavLink` 구성 요소를 사용 하 여 탐색 링크를 만드는 방법에 대해 알아봅니다.
 
 ## <a name="aspnet-core-endpoint-routing-integration"></a>ASP.NET Core 끝점 라우팅 통합
 
-Blazor Server는 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)에 통합 됩니다. ASP.NET Core 앱은 `Startup.Configure`에서 `MapBlazorHub`를 사용 하 여 대화형 구성 요소에 대 한 들어오는 연결을 허용 하도록 구성 됩니다.
+Blazor 서버는 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)에 통합 됩니다. ASP.NET Core 앱은 `Startup.Configure`에서 `MapBlazorHub`를 사용 하 여 대화형 구성 요소에 대 한 들어오는 연결을 허용 하도록 구성 됩니다.
 
 [!code-csharp[](routing/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
-가장 일반적인 구성은 모든 요청을 Razor 페이지로 라우팅하는 것입니다 .이 페이지는 Blazor Server 앱의 서버 쪽 파트에 대 한 호스트 역할을 합니다. 규칙에 따라 *호스트* 페이지의 이름은 일반적으로 *_Host. cshtml*입니다. 호스트 파일에 지정 된 경로는 경로 일치에서 낮은 우선 순위로 작동 하므로 *대체 경로* 라고 합니다. 다른 경로가 일치 하지 않는 경우 대체 (fallback) 경로를 고려 합니다. 이를 통해 앱은 Blazor Server 앱을 방해 하지 않고 다른 컨트롤러 및 페이지를 사용할 수 있습니다.
+가장 일반적인 구성은 모든 요청을 Blazor Server 앱의 서버 쪽에 대 한 호스트 역할을 하는 Razor 페이지로 라우팅하는 것입니다. 규칙에 따라 *호스트* 페이지의 이름은 일반적으로 *_Host. cshtml*입니다. 호스트 파일에 지정 된 경로는 경로 일치에서 낮은 우선 순위로 작동 하므로 *대체 경로* 라고 합니다. 다른 경로가 일치 하지 않는 경우 대체 (fallback) 경로를 고려 합니다. 이렇게 하면 앱이 Blazor 서버 앱을 방해 하지 않고 다른 컨트롤러 및 페이지를 사용할 수 있습니다.
 
 ## <a name="route-templates"></a>경로 템플릿
 
@@ -48,7 +48,7 @@ Blazor Server는 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)에 �
 </Router>
 ```
 
-`@page` 지시문이 있는 *razor* 파일이 컴파일되면 생성 된 클래스에 경로 템플릿을 지정 하는 <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> 제공 됩니다.
+`@page` 지시문이 있는 *razor* 파일이 컴파일되면 생성 된 클래스에 경로 템플릿을 지정 하는 <xref:Microsoft.AspNetCore.Components.RouteAttribute> 제공 됩니다.
 
 런타임에 `RouteView` 구성 요소는 다음과 같습니다.
 
@@ -67,7 +67,7 @@ Blazor Server는 [ASP.NET Core 끝점 라우팅](xref:fundamentals/routing)에 �
 ```
 
 > [!IMPORTANT]
-> Url이 올바르게 확인 될 수 있도록 앱은 *wwwroot/index.html* 파일에 `<base>` 태그를 포함 해야 합니다 (Blazor Weasembomeembsembse). 또는 *Pages/_Host. cshtml* 파일 (Blazor Server)에 `href` 특성에 지정 된 앱 기본 경로 (`<base href="/">`)를 포함 해야 합니다. 자세한 내용은 <xref:host-and-deploy/blazor/index#app-base-path>를 참조하세요.
+> Url이 올바르게 확인 될 수 있도록 앱은 *wwwroot/index.html* 파일 (Blazor Weasembome) 또는 *Pages/_Host. Cshtml* 파일 (Blazor Server)에 `href` 특성에 지정 된 앱 기본 경로 (`<base href="/">`)를 `<base>` 포함 해야 합니다. 자세한 내용은 <xref:host-and-deploy/blazor/index#app-base-path>를 참조하세요.
 
 ## <a name="provide-custom-content-when-content-isnt-found"></a>콘텐츠를 찾을 수 없는 경우 사용자 지정 콘텐츠 제공
 

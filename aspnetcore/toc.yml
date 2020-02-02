@@ -230,8 +230,6 @@
           uid: razor-pages/filter
         - name: 경로 및 앱 규칙
           uid: razor-pages/razor-pages-conventions
-        - name: Razor SDK
-          uid: razor-pages/sdk
     - name: MVC
       items:
         - name: 개요
@@ -409,21 +407,25 @@
               href: 'mvc/views/working-with-forms.md#the-validation-summary-tag-helper'
     - name: 고급
       items:
+        - name: 애플리케이션 파트
+          uid: mvc/extensibility/app-parts
+        - name: 애플리케이션 모델
+          uid: mvc/controllers/application-model
+        - name: Areas
+          uid: mvc/controllers/areas
+        - name: 필터
+          uid: mvc/controllers/filters
+        - name: Razor SDK
+          uid: razor-pages/sdk
         - name: 보기 구성 요소
           uid: mvc/views/view-components
         - name: 뷰 컴파일
           uid: mvc/views/view-compilation
-        - name: 앱 모델
-          uid: mvc/controllers/application-model
-        - name: 필터
-          uid: mvc/controllers/filters
-        - name: Areas
-          uid: mvc/controllers/areas
         - name: 파일 업로드
           uid: mvc/models/file-uploads
-        - name: 앱 파트
-          uid: mvc/extensibility/app-parts
-        - name: aspnet-codegenerator
+        - name: 웹 SDK
+          uid: razor-pages/web-sdk
+        - name: aspnet-codegenerator(스캐폴딩)
           uid: fundamentals/tools/dotnet-aspnet-codegenerator
 - name: Web API 앱
   items:
@@ -578,6 +580,8 @@
       uid: grpc/client
     - name: gRPC 클라이언트 팩터리 통합
       uid: grpc/clientfactory
+    - name: 브라우저 앱에서 gRPC 사용
+      uid: grpc/browser
     - name: Configuration
       uid: grpc/configuration
     - name: 인증 및 권한 부여

@@ -7,22 +7,21 @@ ms.custom: mvc
 ms.date: 02/06/2019
 ms.topic: tutorial
 uid: data/ef-mvc/intro
-ms.openlocfilehash: a8909d391ae1a35e9c8155df767ab157701c8a51
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: 04694f20c7142cc2917df25458e8e335ee933900
+ms.sourcegitcommit: f259889044d1fc0f0c7e3882df0008157ced4915
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259452"
+ms.lasthandoff: 01/18/2020
+ms.locfileid: "76268778"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>자습서: ASP.NET MVC 웹앱에서 EF Core 시작
 
-::: moniker range=">= aspnetcore-3.0"
+이 자습서는 ASP.NET Core 3.0에 맞게 업데이트되지 **않았습니다**. [Razor Pages 버전](xref:data/ef-rp/intro)이 업데이트되었습니다. 이 자습서의 ASP.NET Core 3.0 이상 버전의 코드는 대부분 다음과 같이 변경됩니다.
 
-이 자습서는 ASP.NET Core 3.0에 맞게 업데이트되지 **않았습니다**. [Razor Pages 버전](xref:data/ef-rp/intro)이 업데이트되었습니다. 업데이트 가능 시기에 대해서는 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/13920)를 참조하세요.
+* *Startup.cs* 및 *Program.cs* 파일에 있습니다.
+* [Razor Pages 버전](xref:data/ef-rp/intro)에서 찾을 수 있습니다. 
 
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.0"
+업데이트 가능 시기에 대해서는 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/13920)를 참조하세요.
 
 [!INCLUDE [RP better than MVC](~/includes/RP-EF/rp-over-mvc.md)]
 
@@ -30,7 +29,7 @@ Contoso University 샘플 웹 애플리케이션은 EF(Entity Framework) Core 2.
 
 샘플 애플리케이션은 가상 Contoso University의 웹 사이트입니다. 학생 입학, 강좌 개설 및 강사 할당과 같은 기능이 있습니다. 이는 Contoso University 샘플 애플리케이션을 처음부터 빌드하는 방법을 설명하는 일련의 자습서 중 첫 번째입니다.
 
-이 자습서에서는 다음을 수행했습니다.
+이 자습서에서는 다음과 같은 작업을 수행합니다.
 
 > [!div class="checklist"]
 > * ASP.NET Core MVC 웹앱 만들기
@@ -43,7 +42,7 @@ Contoso University 샘플 웹 애플리케이션은 EF(Entity Framework) Core 2.
 > * 컨트롤러 및 보기 만들기
 > * 데이터베이스 보기
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 * [.NET Core SDK 2.2](https://www.microsoft.com/net/download)
 * 다른 워크로드를 포함한 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019):
@@ -367,7 +366,7 @@ Entity Framework를 사용하는 비동기 코드를 작성할 때 고려해야 
 
 ## <a name="next-steps"></a>다음 단계
 
-이 자습서에서는 다음을 수행했습니다.
+이 자습서에서는 다음과 같은 작업을 수행합니다.
 
 > [!div class="checklist"]
 > * ASP.NET Core MVC 웹앱 만들기
@@ -387,4 +386,3 @@ Entity Framework를 사용하는 비동기 코드를 작성할 때 고려해야 
 > [!div class="nextstepaction"]
 > [기본 CRUD 기능 구현](crud.md)
 
-::: moniker-end

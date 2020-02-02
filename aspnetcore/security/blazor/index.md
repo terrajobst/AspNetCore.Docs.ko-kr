@@ -5,19 +5,19 @@ description: Blazor 인증 및 권한 부여 시나리오에 대해 알아봅니
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2019
+ms.date: 01/29/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/index
-ms.openlocfilehash: 2ce2cff8d3ab77f21181070b6f1e48c50561036c
-ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
+ms.openlocfilehash: e9087c246f4805e5931180fa0869fc8a8d23a6c1
+ms.sourcegitcommit: c81ef12a1b6e6ac838e5e07042717cf492e6635b
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/17/2020
-ms.locfileid: "76160290"
+ms.lasthandoff: 01/29/2020
+ms.locfileid: "76885590"
 ---
-# <a name="aspnet-core-opno-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor 인증 및 권한 부여
+# <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor 인증 및 권한 부여
 
 작성자: [Steve Sanderson](https://github.com/SteveSandersonMS)
 
@@ -25,20 +25,20 @@ ms.locfileid: "76160290"
 
 ASP.NET Core는 Blazor 앱의 보안 구성 및 관리를 지원합니다.
 
-Blazor Server 및 Blazor WebAssembly 앱 간의 보안 시나리오는 서로 다릅니다. Blazor 서버 앱은 서버에서 실행되기 때문에 권한 부여 확인을 통해 다음을 결정할 수 있습니다.
+Blazor 서버와 Blazor WebAssembly 앱의 보안 시나리오는 서로 다릅니다. Blazor 서버 앱은 서버에서 실행되기 때문에 권한 부여 확인을 통해 다음을 결정할 수 있습니다.
 
 * 사용자에게 표시되는 UI 옵션(예: 사용자가 사용할 수 있는 메뉴 항목)
 * 앱 영역과 구성 요소의 액세스 규칙
 
-Blazor WebAssembly 앱은 클라이언트에서 실행됩니다. 권한 부여는 표시할 UI 옵션을 결정하는 ‘용도로만’ 사용됩니다.  사용자가 클라이언트 쪽 확인을 수정하거나 무시할 수 있기 때문에 Blazor WebAssembly 앱은 권한 부여 액세스 규칙을 적용할 수 없습니다.
+Blazor WebAssembly 앱은 클라이언트에서 실행됩니다. 권한 부여는 표시할 UI 옵션을 결정하는 ‘용도로만’ 사용됩니다.  사용자가 클라이언트 쪽 확인을 수정하거나 무시할 수 있기 때문에, Blazor WebAssembly 앱은 권한 부여 액세스 규칙을 적용할 수 없습니다.
 
 ## <a name="authentication"></a>인증
 
 Blazor는 기존 ASP.NET Core 인증 메커니즘을 사용하여 사용자 ID를 설정합니다. 정확한 메커니즘은 Blazor 앱을 호스트하는 방법, 즉 Blazor 서버인지 또는 Blazor WebAssembly인지에 따라 다릅니다.
 
-### <a name="opno-locblazor-server-authentication"></a>Blazor 서버 인증
+### <a name="blazor-server-authentication"></a>Blazor 서버 인증
 
-Blazor 서버 앱은 SignalR를 사용하여 생성된 실시간 연결을 통해 작동합니다. [SignalR 기반 앱](xref:signalr/authn-and-authz)의 인증은 연결 시 처리됩니다. 인증은 쿠키 또는 다른 전달자 토큰을 기반으로 할 수 있습니다.
+Blazor 서버 앱은 SignalR을 사용하여 생성된 실시간 연결을 통해 작동합니다. [SignalR 기반 앱의 인증](xref:signalr/authn-and-authz)은 연결 시 처리됩니다. 인증은 쿠키 또는 다른 전달자 토큰을 기반으로 할 수 있습니다.
 
 프로젝트를 만들 때 Blazor 서버 프로젝트 템플릿에서 자동으로 인증을 설정할 수 있습니다.
 
@@ -191,13 +191,26 @@ namespace BlazorSample.Services
 }
 ```
 
-`CustomAuthStateProvider` 서비스는 `Startup.ConfigureServices`에 등록됩니다.
+Blazor WebAssembly 앱에서 `CustomAuthStateProvider` 서비스는 *Program.cs*의 `Main`에 등록됩니다.
 
 ```csharp
-// using Microsoft.AspNetCore.Components.Authorization;
-// using BlazorSample.Services;
+using Microsoft.AspNetCore.Blazor.Hosting;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.Extensions.DependencyInjection;
+using BlazorSample.Services;
 
-services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        var builder = WebAssemblyHostBuilder.CreateDefault(args);
+        builder.Services.AddScoped<AuthenticationStateProvider, 
+            CustomAuthStateProvider>();
+        builder.RootComponents.Add<App>("app");
+
+        await builder.Build().RunAsync();
+    }
+}
 ```
 
 `CustomAuthStateProvider`를 사용하면 모든 사용자가 사용자 이름 `mrfibuli`로 인증됩니다.
