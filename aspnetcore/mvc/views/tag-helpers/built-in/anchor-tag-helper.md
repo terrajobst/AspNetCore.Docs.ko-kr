@@ -49,7 +49,7 @@ ms.locfileid: "72333944"
 
 ### <a name="asp-action"></a>asp-action
 
-[asp-action](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Action*) 특성값은 생성되는 `href` 특성에 포함될 컨트롤러 액션의 이름을 나타냅니다. 다음 태그는 생성된 `href` 특성값을 스피커 평가 페이지로 설정합니다.
+[asp-action](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Action*) 특성 값은 생성되는 `href` 특성에 포함되는 컨트롤러 작업의 이름을 나타냅니다. 다음 태그는 생성되는 `href` 특성 값을 스피커 평가 페이지로 설정합니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAction)]
 
@@ -59,7 +59,7 @@ ms.locfileid: "72333944"
 <a href="/Speaker/Evaluations">Speaker Evaluations</a>
 ```
 
-`asp-controller` 특성을 지정하지 않으면 현재 뷰를 실행 중인 뷰를 호출하는 기본 컨트롤러가 사용됩니다.
+`asp-controller` 특성이 지정되지 않으면 현재 보기를 실행하는 보기를 호출하는 기본 컨트롤러가 사용됩니다.
 
 `asp-action` 특성값이 `Index`면 URL에 아무런 액션도 추가되지 않으며 기본 `Index` 액션이 호출됩니다. 지정된 (또는 기본값으로 설정된) 액션은 `asp-controller`에서 참조되는 컨트롤러에 존재해야 합니다.
 
@@ -67,7 +67,7 @@ ms.locfileid: "72333944"
 
 [asp-route-{value}](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) 특성을 사용하면 와일드카드 경로 접두사를 사용할 수 있습니다. `{value}` 자리 표시자에 위치하는 모든 값은 잠재적인 경로 매개 변수로 해석됩니다. 기본 경로가 발견되지 않으면 이 경로 접두사는 생성되는 `href` 특성에 요청 매개 변수 및 값으로 추가됩니다. 그렇지 않으면 경로 템플릿에서 이 경로 접두사가 대체됩니다.
 
-다음 컨트롤러 액션을 살펴보시기 바랍니다.
+다음 컨트롤러 작업을 고려해보세요.
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Controllers/BuiltInTagController.cs?name=snippet_AnchorTagHelperAction)]
 
@@ -75,7 +75,7 @@ ms.locfileid: "72333944"
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_UseMvc&highlight=8-10)]
 
-다음 MVC 뷰는 액션을 통해서 제공되는 모델을 사용합니다.
+다음과 같이 MVC 보기가 작업을 통해서 제공되는 모델을 사용하면:
 
 ```cshtml
 @model Speaker
@@ -95,7 +95,7 @@ ms.locfileid: "72333944"
 <a href="/Speaker/Detail/12">SpeakerId: 12</a>
 ```
 
-이번에는 다음 MVC 뷰와 같이 경로 접두사가 라우팅 템플릿의 일부와 일치하지 않는다고 가정해보겠습니다.
+다음 MVC 보기와 같이 경로 접두사가 라우팅 템플릿의 일부와 일치하지 않는다고 가정해보세요.
 
 ```cshtml
 @model Speaker
@@ -109,17 +109,17 @@ ms.locfileid: "72333944"
 </html>
 ```
 
-일치하는 경로에서 `speakerid`를 찾을 수 없기 때문에 생성된 HTML은 다음과 같습니다.
+일치하는 경로에서 `speakerid`를 찾을 수 없기 때문에 생성되는 HTML은 다음과 같습니다.
 
 ```html
 <a href="/Speaker/Detail?speakerid=12">SpeakerId: 12</a>
 ```
 
-`asp-controller` 또는 `asp-action`이 지정되지 않으면 `asp-route` 특성과 동일한 기본 처리가 그대로 수행됩니다.
+`asp-controller` 또는 `asp-action`이 지정되지 않으면 `asp-route` 특성과 동일한 기본 처리가 수행됩니다.
 
 ### <a name="asp-route"></a>asp-route
 
-[asp-route](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Route*) 특성은 명명된 경로에 직접 연결되는 URL을 생성하기 위해서 사용됩니다. [라우팅 특성](xref:mvc/controllers/routing#attribute-routing)을 사용하면 경로가 `SpeakerController`에 표시된 이름으로 지정되고 해당 `Evaluations` 메서드에서 사용할 수 있습니다.
+[asp-route](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Route*) 특성은 명명된 경로에 직접 연결되는 URL을 생성하기 위해서 사용됩니다. [라우팅 특성](xref:mvc/controllers/routing#attribute-routing)을 사용하면 경로에 `SpeakerController`에서 볼 수 있는 것과 같이 이름을 지정할 수 있고 `Evaluations` 작업에서처럼 사용할 수 있습니다.
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Controllers/SpeakerController.cs?range=22-24)]
 
