@@ -31,7 +31,7 @@ ms.locfileid: "67856208"
 
 ## <a name="cache-tag-helper-attributes"></a>캐시 태그 도우미 특성
 
-### <a name="enabled"></a>사용
+### <a name="enabled"></a>enabled
 
 | 특성 유형  | 예제        | 기본값 |
 | --------------- | --------------- | ------- |

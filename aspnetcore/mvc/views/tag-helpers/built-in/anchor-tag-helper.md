@@ -23,7 +23,7 @@ ms.locfileid: "72333944"
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-이 문서의 예제 전반에서는 다음의 *SpeakerController*가 사용됩니다.
+이 문서의 예제 전반에서는 다음의 *SpeakerController*가 사용됩니다. 
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Controllers/SpeakerController.cs?name=snippet_SpeakerController)]
 
@@ -41,7 +41,7 @@ ms.locfileid: "72333944"
 <a href="/Speaker">All Speakers</a>
 ```
 
-`asp-controller` 특성이 지정되고 `asp-action`이 지정되지 않았을 경우, 기본 `asp-action` 값은 현재 실행 중인 뷰와 연결된 컨트롤러 액션입니다. *HomeController*의 *Index* 뷰( */Home*)에서 위의 태그에서 `asp-action`을 생략한 앵커 태그 도우미를 사용할 경우, 생성되는 HTML은 다음과 같습니다.
+`asp-controller` 특성이 지정되고 `asp-action`이 지정되지 않았을 경우, 기본 `asp-action` 값은 현재 실행 중인 뷰와 연결된 컨트롤러 액션입니다. *HomeController*의 *Index* 뷰(*/Home*)에서 위의 태그에서 `asp-action`을 생략한 앵커 태그 도우미를 사용할 경우, 생성되는 HTML은 다음과 같습니다.
 
 ```html
 <a href="/Home">All Speakers</a>
@@ -61,17 +61,17 @@ ms.locfileid: "72333944"
 
 `asp-controller` 특성이 지정되지 않으면 현재 보기를 실행하는 보기를 호출하는 기본 컨트롤러가 사용됩니다.
 
-`asp-action` 특성값이 `Index`면 URL에 아무런 액션도 추가되지 않으며 기본 `Index` 액션이 호출됩니다. 지정된 (또는 기본값으로 설정된) 액션은 `asp-controller`에서 참조되는 컨트롤러에 존재해야 합니다.
+`asp-action` 특성값이 `Index`면 URL에 아무런 액션도 추가되지 않으며 기본 `Index` 액션이 호출됩니다. 지정된 (또는 기본값으로 설정된) 액션은 `asp-controller`에서 참조되는 컨트롤러에 존재해야 합니다. 
 
 ### <a name="asp-route-value"></a>asp-route-{value}
 
-[asp-route-{value}](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) 특성을 사용하면 와일드카드 경로 접두사를 사용할 수 있습니다. `{value}` 자리 표시자에 위치하는 모든 값은 잠재적인 경로 매개 변수로 해석됩니다. 기본 경로가 발견되지 않으면 이 경로 접두사는 생성되는 `href` 특성에 요청 매개 변수 및 값으로 추가됩니다. 그렇지 않으면 경로 템플릿에서 이 경로 접두사가 대체됩니다.
+[asp-route-{value}](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) 특성을 사용하면 와일드카드 경로 접두사를 사용할 수 있습니다. `{value}` 자리 표시자에 위치하는 모든 값은 잠재적인 경로 매개 변수로 해석됩니다.  기본 경로가 발견되지 않으면 이 경로 접두사는 생성되는 `href` 특성에 요청 매개 변수 및 값으로 추가됩니다. 그렇지 않으면 경로 템플릿에서 이 경로 접두사가 대체됩니다.
 
 다음 컨트롤러 작업을 고려해보세요.
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Controllers/BuiltInTagController.cs?name=snippet_AnchorTagHelperAction)]
 
-*Startup.Configure*에 정의된 기본 경로 템플릿을 사용할 경우:
+*Startup.Configure*에 정의된 기본 경로 템플릿을 사용할 경우: 
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_UseMvc&highlight=8-10)]
 
@@ -127,33 +127,33 @@ ms.locfileid: "72333944"
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspRoute)]
 
-앵커 태그 도우미는 */Speaker/Evaluations* URL을 사용하여 해당 컨트롤러 액션을 직접 가리키는 경로를 생성합니다. 생성되는 HTML은 다음과 같습니다.
+앵커 태그 도우미는 */Speaker/Evaluations* URL을 사용하여 해당 컨트롤러 작업을 직접 가리키는 경로를 생성합니다. 생성되는 HTML은 다음과 같습니다.
 
 ```html
 <a href="/Speaker/Evaluations">Speaker Evaluations</a>
 ```
 
-`asp-route` 와 `asp-controller` 또는 `asp-action` 을 동시에 지정하면 기대하는 것과 다른 경로가 생성될 수 있습니다. 경로 충돌을 방지하려면 `asp-route`를 `asp-controller` 및 `asp-action` 특성과 함께 사용하지 않아야 합니다.
+`asp-route`에 더해 `asp-controller` 또는 `asp-action`을 함께 지정하면 기대하는 것과 다른 경로가 생성될 수 있습니다. 경로 충돌을 방지하려면 `asp-route`를 `asp-controller` 및 `asp-action` 특성과 함께 사용하면 안됩니다.
 
 ### <a name="asp-all-route-data"></a>asp-all-route-data
 
-[asp-all-route-data](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) 특성은 키-값 쌍 사전을 만들 수 있도록 지원해줍니다. 키는 매개 변수 이름이고, 값은 매개 변수값입니다.
+[asp-all-route-data](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) 특성은 키-값 쌍 사전을 만들 수 있도록 지원합니다. 키는 매개 변수 이름이고, 값은 매개 변수 값입니다.
 
-다음 예제에서는 사전이 초기화되어 Razor 뷰로 전달됩니다. 또는 모델을 사용하여 데이터를 전달할 수도 있습니다.
+다음 예제에서는 사전이 초기화되어 Razor 보기로 전달됩니다. 또는 모델을 사용하여 데이터를 전달할 수도 있습니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAllRouteData)]
 
-위의 코드로 생성되는 HTML은 다음과 같습니다.
+이전 코드로 생성되는 HTML은 다음과 같습니다.
 
 ```html
 <a href="/Speaker/EvaluationsCurrent?speakerId=11&currentYear=true">Speaker Evaluations</a>
 ```
 
-`asp-all-route-data` 사전은 투영되어 오버로드된 `Evaluations` 액션의 요구 사항을 충족하는 쿼리 문자열을 생성합니다.
+`asp-all-route-data` 사전은 병합되어 오버로드된 `Evaluations` 작업의 요구 사항을 충족하는 쿼리 문자열을 생성합니다.
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Controllers/SpeakerController.cs?range=26-30)]
 
-사전에 존재하는 키가 경로 매개 변수와 일치하면 경로에서 해당 값이 적절하게 대체됩니다. 반면 일치하지 않는 다른 값은 요청 매개 변수로 생성됩니다.
+사전에 존재하는 키가 경로 매개 변수와 일치하면 경로에서 해당 값이 적절하게 대체됩니다. 나머지 일치하지 않는 다른 값들은 요청 매개 변수로 생성됩니다.
 
 ### <a name="asp-fragment"></a>asp-fragment
 
@@ -167,19 +167,19 @@ ms.locfileid: "72333944"
 <a href="/Speaker/Evaluations#SpeakerEvaluations">Speaker Evaluations</a>
 ```
 
-해시 태그는 클라이언트 측 앱을 만들 때 유용합니다. 예를 들어 JavaScript에서 손쉽게 표시하고 검색하는 데 사용할 수 있습니다.
+해시 태그는 클라이언트 쪽 앱을 만들 때 유용합니다. 예를 들어 JavaScript에서 손쉽게 표시하고 검색하는 데 사용할 수 있습니다.
 
 ### <a name="asp-area"></a>asp-area
 
-[asp-area](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Area*) 특성은 적절한 경로를 설정하기 위해 사용되는 영역 이름을 설정합니다. 다음 예제에서는 `asp-area` 특성으로 인해 경로가 다시 매핑되는 방식을 보여 줍니다.
+[asp-area](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Area*) 특성은 적절한 경로를 설정하는 데 사용되는 영역 이름을 설정합니다. 이어지는 예제는 `asp-area` 특성이 경로를 다시 매핑하는 방법을 보여줍니다.
 
-#### <a name="usage-in-razor-pages"></a>Razor Pages에서 사용
+#### <a name="usage-in-razor-pages"></a>Razor Pages에서 사용하는 방법
 
 Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 
 다음 디렉터리 계층 구조를 고려해보세요.
 
-* **{Project name}**
+* **{프로젝트 명}**
   * **wwwroot**
   * **Areas**
     * **Sessions**
@@ -189,7 +189,7 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
         * *Index.cshtml.cs*
   * **Pages**
 
-*세션* 영역 *인덱스* Razor Page를 참조하는 태그는 다음과 같습니다.
+*Sessions* 영역의 *Index* Razor Page를 참조하는 태그는 다음과 같습니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAreaRazorPages)]
 
@@ -211,7 +211,7 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 
 다음 디렉터리 계층 구조를 고려해보세요.
 
-* **{Project name}**
+* **{프로젝트 명}**
   * **wwwroot**
   * **Areas**
     * **Blogs**
