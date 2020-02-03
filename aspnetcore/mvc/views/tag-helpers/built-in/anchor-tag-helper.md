@@ -71,7 +71,7 @@ ms.locfileid: "72333944"
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Controllers/BuiltInTagController.cs?name=snippet_AnchorTagHelperAction)]
 
-*Startup.Configure*에 정의된 기본 경로 템플릿을 사용할 경우:
+*Startup.Configure*에 정의된 기본 경로 템플릿을 사용할 경우: 
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_UseMvc&highlight=8-10)]
 
@@ -119,7 +119,7 @@ ms.locfileid: "72333944"
 
 ### <a name="asp-route"></a>asp-route
 
-[asp-route](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Route*) 특성은 명명된 경로에 직접 연결되는 URL을 생성하기 위해서 사용됩니다. [라우팅 특성](xref:mvc/controllers/routing#attribute-routing)을 사용하면 경로에 `SpeakerController`에서 볼 수 있는 것과 같이 이름을 지정할 수 있고 `Evaluations` 작업에서 처럼 사용할 수 있습니다.
+[asp-route](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Route*) 특성은 명명된 경로에 직접 연결되는 URL을 생성하기 위해서 사용됩니다. [라우팅 특성](xref:mvc/controllers/routing#attribute-routing)을 사용하면 경로에 `SpeakerController`에서 볼 수 있는 것과 같이 이름을 지정할 수 있고 `Evaluations` 작업에서처럼 사용할 수 있습니다.
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Controllers/SpeakerController.cs?range=22-24)]
 
