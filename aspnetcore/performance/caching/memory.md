@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core에서 데이터를 메모리에 캐시하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/2/2019
+ms.date: 02/02/2020
 uid: performance/caching/memory
-ms.openlocfilehash: eb40026bc9686357cc7cfb8a99f127a3b433cb70
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: 23acc17c861c203a87b1c113940e7bf42b51e810
+ms.sourcegitcommit: 990a4c2e623c202a27f60bdf3902f250359c13be
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/10/2020
-ms.locfileid: "75866035"
+ms.lasthandoff: 02/03/2020
+ms.locfileid: "76972012"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>ASP.NET Core의 메모리 내 캐시
 
@@ -37,7 +37,7 @@ ASP.NET Core는 몇 가지 다른 종류의 캐시를 지원합니다. 가장 �
 
 * 2\.0 이상 .NET Standard 합니다.
 * .NET Standard 2.0 이상을 대상으로 하는 [.net 구현](/dotnet/standard/net-standard#net-implementation-support) 예를 들어 ASP.NET Core 2.0 이상입니다.
-* .NET Framework 4.5 이상
+* 4\.5 이상 .NET Framework 합니다.
 
 이 문서에서 설명 하는/`IMemoryCache` (이 문서에 설명 [되어 있습니다)](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/) 는 `MemoryCache`에 더 잘 통합 되기 때문에 `System.Runtime.Caching`/ASP.NET Core에 대해 권장 됩니다. 예를 들어 `IMemoryCache`은 ASP.NET Core [종속성 주입](xref:fundamentals/dependency-injection)을 기본적으로 사용 합니다.
 
@@ -115,7 +115,7 @@ ASP.NET 4.x에서 ASP.NET Core로 코드를 이식할 때 `System.Runtime.Cachin
 * 웹 앱이 주로 문자열을 캐싱하는 경우 각 캐시 엔트리 크기는 문자열 길이가 될 수 있습니다.
 * 앱은 모든 항목의 크기를 1로 지정 하 고, 크기 제한은 항목 수를 지정 합니다.
 
-<xref:Microsoft.Extensions.Caching.Memory.MemoryCacheOptions.SizeLimit>를 설정 하지 않으면 캐시가 바인딩되지 않고 증가 합니다. 시스템 메모리가 부족할 때 ASP.NET Core 런타임은 캐시를 자르지 않습니다. 앱은 다음에 맞게 설계 되었습니다.
+<xref:Microsoft.Extensions.Caching.Memory.MemoryCacheOptions.SizeLimit> 설정 되지 않은 경우 캐시는 바인딩되지 않고 증가 합니다. 시스템 메모리가 부족할 때 ASP.NET Core 런타임은 캐시를 자르지 않습니다. 앱은 다음을 위해 설계 되어야 합니다.
 
 * 캐시 증가를 제한 합니다.
 * 사용 가능한 메모리가 제한 된 경우 <xref:Microsoft.Extensions.Caching.Memory.MemoryCache.Compact*> 또는 <xref:Microsoft.Extensions.Caching.Memory.MemoryCache.Remove*>를 호출 합니다.
@@ -214,7 +214,7 @@ ASP.NET Core는 몇 가지 다른 종류의 캐시를 지원합니다. 가장 �
 
 * 2\.0 이상 .NET Standard 합니다.
 * .NET Standard 2.0 이상을 대상으로 하는 [.net 구현](/dotnet/standard/net-standard#net-implementation-support) 예를 들어 ASP.NET Core 2.0 이상입니다.
-* .NET Framework 4.5 이상
+* 4\.5 이상 .NET Framework 합니다.
 
 이 문서에서 설명 하는/`IMemoryCache` (이 문서에 설명 [되어 있습니다)](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/) 는 `MemoryCache`에 더 잘 통합 되기 때문에 `System.Runtime.Caching`/ASP.NET Core에 대해 권장 됩니다. 예를 들어 `IMemoryCache`은 ASP.NET Core [종속성 주입](xref:fundamentals/dependency-injection)을 기본적으로 사용 합니다.
 

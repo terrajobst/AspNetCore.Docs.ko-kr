@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/15/2020
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: a0e9603cbca8c7f5771b0acf1a60839dffc89d4e
-ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
+ms.openlocfilehash: b3e077aeac11e62d9e992884100476f7be35b59a
+ms.sourcegitcommit: 990a4c2e623c202a27f60bdf3902f250359c13be
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76146487"
+ms.lasthandoff: 02/03/2020
+ms.locfileid: "76972039"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>ASP.NET Core 프로젝트의 스 캐 폴드 Id
 
@@ -259,7 +259,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 ## <a name="prevent-publish-of-static-identity-assets"></a>정적 Id 자산 게시 방지
 
-정적 Id 자산을 웹 루트에 게시 하지 않으려면 <xref:security/authentication/identity#prevent-publish-of-static-identity-assets>를 참조 하세요.
+정적 ID 자산을 웹 루트에 게시하지 않으려면 <xref:security/authentication/identity#prevent-publish-of-static-identity-assets>를 참조하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 
