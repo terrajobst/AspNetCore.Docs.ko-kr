@@ -21,7 +21,7 @@ ms.locfileid: "67856127"
 
 태그 도우미에 대한 개요는 <xref:mvc/views/tag-helpers/intro>를 참조하세요.
 
-## <a name="environment-tag-helper-attributes"></a>환경 태그 도우미의 특성
+## <a name="environment-tag-helper-attributes"></a>환경 태그 도우미 특성
 
 ### <a name="names"></a>names
 
