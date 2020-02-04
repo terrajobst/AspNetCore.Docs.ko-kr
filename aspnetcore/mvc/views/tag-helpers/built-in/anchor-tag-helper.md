@@ -224,7 +224,7 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
         * *\_ViewStart.cshtml*
   * **Controllers**
 
-`asp-area`를 "Blogs"로 설정하면 이 앵커 태그에 연결된 컨트롤러 및 뷰의 경로에 *Areas/Blogs* 디렉터리가 접두사로 추가됩니다. *AboutBlog* 보기를 참조하는 태그는 다음과 같습니다.
+`asp-area`를 "Blogs"로 설정하면 해당 앵커 태그에 연결된 컨트롤러 및 보기의 경로에 *Areas/Blogs* 디렉터리가 접두사로 추가됩니다. *AboutBlog* 보기를 참조하는 태그는 다음과 같습니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspArea)]
 
@@ -267,9 +267,9 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 
 ### <a name="asp-page"></a>asp-page
 
-[asp-page](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*) 특성은 Razor 페이지와 함께 사용됩니다. 이 특성은 앵커 태그의 `href` 특성값을 특정 페이지로 설정하기 위해서 사용됩니다. 페이지 이름 앞에 슬래시("/")를 접두사로 사용해서 URL을 생성합니다.
+[asp-page](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*) 특성은 Razor Pages와 함께 사용됩니다. 이 특성은 앵커 태그의 `href` 특성 값을 특정 페이지로 설정하는 데 사용됩니다. 페이지 이름 앞에 슬래시("/")를 접두사로 사용해서 URL을 생성합니다.
 
-다음 예제는 참석자 Razor 페이지를 가리킵니다.
+다음 예제는 참석자 Razor Page를 가리킵니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspPage)]
 
@@ -279,7 +279,7 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 <a href="/Attendee">All Attendees</a>
 ```
 
-`asp-page` 특성은 `asp-route`, `asp-controller` 및 `asp-action` 특성과 함께 사용할 수 없습니다. 그러나 다음 태그에서 볼 수 있는 것처럼 `asp-page`는 `asp-route-{value}`와 함께 사용해서 라우팅을 제어할 수 있습니다.
+`asp-page` 특성은 `asp-route`, `asp-controller` 및 `asp-action` 특성과 상호 배타적입니다. 그러나 다음 태그에서 볼 수 있는 것처럼 `asp-page`는 `asp-route-{value}`와 함께 사용해서 라우팅을 제어할 수 있습니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspPageAspRouteId)]
 
@@ -291,13 +291,13 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 
 ### <a name="asp-page-handler"></a>asp-page-handler
 
-[asp-page-handler](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.PageHandler*) 특성은 Razor 페이지와 함께 사용됩니다. 이 특성을 특정 페이지 처리기에 연결하기 위한 것입니다.
+[asp-page-handler](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.PageHandler*) 특성은 Razor Pages와 함께 사용됩니다. 이 특성은 특정 페이지 처리기에 연결하기 위한 것입니다.
 
-다음 페이지 처리기를 살펴보시기 바랍니다.
+다음 페이지 처리기를 고려해보세요.
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Pages/Attendee.cshtml.cs?name=snippet_OnGetProfileHandler)]
 
-페이지 모델의 관련 태그는 `OnGetProfile` 페이지 처리기에 연결됩니다. 페이지 처리기 메서드 이름의 `On<Verb>` 접두사는 `asp-page-handler` 특성값에서 생략됩니다. 메서드가 비동기화되면 `Async` 접미사도 생략됩니다.
+페이지 모델의 관련 태그는 `OnGetProfile` 페이지 처리기에 연결됩니다. 페이지 처리기 메서드 이름의 `On<Verb>` 접두사는 `asp-page-handler` 특성 값에서 생략됩니다. 비동기 메서드인 경우 `Async` 접미사도 생략됩니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspPageHandler)]
 
