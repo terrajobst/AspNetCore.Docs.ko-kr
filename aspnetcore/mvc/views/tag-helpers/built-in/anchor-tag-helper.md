@@ -67,7 +67,7 @@ ms.locfileid: "72333944"
 
 [asp-route-{value}](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) 특성을 사용하면 와일드카드 경로 접두사를 사용할 수 있습니다. `{value}` 자리 표시자에 위치하는 모든 값은 잠재적 경로 매개 변수로 해석됩니다. 기본 경로를 찾지 못할 경우, 해당 경로 접두사는 생성되는 `href` 특성에 요청 매개 변수 및 값으로 추가됩니다. 그렇지 않으면, 경로 템플릿에서 대체됩니다.
 
-다음 컨트롤러 작업을 고려하세요.
+다음 컨트롤러 작업을 고려해보세요.
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Controllers/BuiltInTagController.cs?name=snippet_AnchorTagHelperAction)]
 
