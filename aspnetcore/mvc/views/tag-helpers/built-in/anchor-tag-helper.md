@@ -23,7 +23,7 @@ ms.locfileid: "72333944"
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-이 문서의 예제 전반에서는 다음의 *SpeakerController*가 사용됩니다. 
+이 문서의 예제 전반에서는 다음의 *SpeakerController*가 사용됩니다.
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Controllers/SpeakerController.cs?name=snippet_SpeakerController)]
 
@@ -41,7 +41,7 @@ ms.locfileid: "72333944"
 <a href="/Speaker">All Speakers</a>
 ```
 
-`asp-controller` 특성이 지정되고 `asp-action`이 지정되지 않았을 경우, 기본 `asp-action` 값은 현재 실행 중인 뷰와 연결된 컨트롤러 액션입니다. *HomeController*의 *Index* 뷰(*/Home*)에서 위의 태그에서 `asp-action`을 생략한 앵커 태그 도우미를 사용할 경우, 생성되는 HTML은 다음과 같습니다.
+`asp-controller` 특성이 지정되고 `asp-action`이 지정되지 않았을 경우, 기본 `asp-action` 값은 현재 실행 중인 뷰와 연결된 컨트롤러 액션입니다. *HomeController*의 *Index* 뷰( */Home*)에서 위의 태그에서 `asp-action`을 생략한 앵커 태그 도우미를 사용할 경우, 생성되는 HTML은 다음과 같습니다.
 
 ```html
 <a href="/Home">All Speakers</a>
@@ -61,17 +61,17 @@ ms.locfileid: "72333944"
 
 `asp-controller` 특성이 지정되지 않으면 현재 보기를 실행하는 보기를 호출하는 기본 컨트롤러가 사용됩니다.
 
-`asp-action` 특성값이 `Index`면 URL에 아무런 액션도 추가되지 않으며 기본 `Index` 액션이 호출됩니다. 지정된 (또는 기본값으로 설정된) 액션은 `asp-controller`에서 참조되는 컨트롤러에 존재해야 합니다. 
+`asp-action` 특성값이 `Index`면 URL에 아무런 액션도 추가되지 않으며 기본 `Index` 액션이 호출됩니다. 지정된 (또는 기본값으로 설정된) 액션은 `asp-controller`에서 참조되는 컨트롤러에 존재해야 합니다.
 
 ### <a name="asp-route-value"></a>asp-route-{value}
 
-[asp-route-{value}](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) 특성을 사용하면 와일드카드 경로 접두사를 사용할 수 있습니다. `{value}` 자리 표시자에 위치하는 모든 값은 잠재적인 경로 매개 변수로 해석됩니다.  기본 경로가 발견되지 않으면 이 경로 접두사는 생성되는 `href` 특성에 요청 매개 변수 및 값으로 추가됩니다. 그렇지 않으면 경로 템플릿에서 이 경로 접두사가 대체됩니다.
+[asp-route-{value}](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) 특성을 사용하면 와일드카드 경로 접두사를 사용할 수 있습니다. `{value}` 자리 표시자에 위치하는 모든 값은 잠재적인 경로 매개 변수로 해석됩니다. 기본 경로가 발견되지 않으면 이 경로 접두사는 생성되는 `href` 특성에 요청 매개 변수 및 값으로 추가됩니다. 그렇지 않으면 경로 템플릿에서 이 경로 접두사가 대체됩니다.
 
 다음 컨트롤러 작업을 고려해보세요.
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Controllers/BuiltInTagController.cs?name=snippet_AnchorTagHelperAction)]
 
-*Startup.Configure*에 정의된 기본 경로 템플릿을 사용할 경우: 
+*Startup.Configure*에 정의된 기본 경로 템플릿을 사용할 경우:
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_UseMvc&highlight=8-10)]
 
@@ -200,14 +200,14 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 ```
 
 > [!TIP]
-> Razor Pages 앱의 영역을 지원하려면 `Startup.ConfigureServices`에서 다음 중 하나를 수행합니다.
+> Razor Pages 앱에서 영역을 지원하려면 `Startup.ConfigureServices`에서 다음 중 하나를 수행합니다.
 >
 > * [호환성 버전](xref:mvc/compatibility-version)을 2.1 이상으로 설정합니다.
 > * [RazorPagesOptions.AllowAreas](xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.AllowAreas*) 속성을 `true`로 설정합니다.
 >
 >   [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_AllowAreas)]
 
-#### <a name="usage-in-mvc"></a>MVC에서의 사용법
+#### <a name="usage-in-mvc"></a>MVC에서 사용하는 방법
 
 다음 디렉터리 계층 구조를 고려해보세요.
 
@@ -235,13 +235,13 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 ```
 
 > [!TIP]
-> MVC 앱의 영역을 지원하려면 경로 템플릿에 해당 영역에 대한 참조가 포함되어야 합니다(존재할 경우). 해당 템플릿은 *Startup.Configure*에서 `routes.MapRoute` 메서드 호출의 두 번째 매개 변수로 표시됩니다.
+> MVC 앱에서 영역을 지원하려면 경로 템플릿에 해당 영역에 대한 참조가 포함되어야 합니다(존재할 경우). 해당 템플릿은 *Startup.Configure*에서 `routes.MapRoute` 메서드 호출의 두 번째 매개 변수에 표시됩니다.
 >
 > [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_UseMvc&highlight=5)]
 
 ### <a name="asp-protocol"></a>asp-protocol
 
-[asp-protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) 특성은 URL의 프로토콜(예: `https`)을 지정하는 데 사용됩니다. 예:
+[asp-protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) 특성은 URL의 프로토콜(예: `https`)을 지정하는 데 사용됩니다. 예를 들어:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspProtocol)]
 
@@ -251,11 +251,11 @@ Razor Pages 영역은 ASP.NET Core 2.1 이상에서 지원됩니다.
 <a href="https://localhost/Home/About">About</a>
 ```
 
-예제의 호스트 이름은 localhost입니다. 앵커 태그 도우미는 URL을 생성할 때 웹 사이트의 공용 도메인을 사용합니다.
+이 예제의 호스트 이름은 localhost입니다. 앵커 태그 도우미는 URL을 생성할 때 웹 사이트의 공용 도메인을 사용합니다.
 
 ### <a name="asp-host"></a>asp-host
 
-[asp-host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) 특성은 URL의 호스트 이름을 지정하는 데 사용됩니다. 예:
+[asp-host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) 특성은 URL의 호스트 이름을 지정하는 데 사용됩니다. 예를 들어:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspHost)]
 

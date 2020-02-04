@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/13/2019
 uid: fundamentals/routing
-ms.openlocfilehash: 462f34664540b92ba6758224a722c7ca8f9c8de0
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: 5e3ff65420b3c6769d52f8b96c216043cb1fdc1a
+ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75829064"
+ms.lasthandoff: 01/24/2020
+ms.locfileid: "76726999"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core에서 라우팅
 
@@ -134,7 +134,7 @@ URL 생성은 라우팅이 경로 값의 집합을 기반으로 하는 URL 경�
   * [UseRouting](xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*)은 경로 일치를 미들웨어 파이프라인에 추가합니다. 이것은 권한 부여, 엔드포인트 실행 등의 경로 인식 미들웨어 앞에 와야 합니다.
   * [UseEndpoints](xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*)는 미들웨어 파이프라인에 엔드포인트 실행을 추가합니다. 엔드포인트의 응답을 제공하는 요청 대리자를 실행합니다.
   `UseEndpoints`는 앱에서 일치시키고 실행할 수 있는 경로 엔드포인트를 구성하는 위치이기도 합니다. 예를 들어 <xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages*>, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*>, <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet*> 및 <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapPost*> 메서드를 제공합니다.
-* 앱은 ASP.NET Core의 도우미 메서드를 사용하여 해당 경로를 구성합니다. ASP.NET Core 프레임워크는 <xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages*>, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*>, `MapHub<THub>` 같은 도우미 메서드를 제공합니다. 사용자 고유의 사용자 지정 경로 엔드포인트를 구성하는 도우미 메서드도 있습니다. <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet*>, <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapPost*> 및 [MapVerb](xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions). 
+* 앱은 ASP.NET Core의 도우미 메서드를 사용하여 해당 경로를 구성합니다. ASP.NET Core 프레임워크는 <xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages*>, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> 및 `MapHub<THub>` 같은 도우미 메서드를 제공합니다. 사용자 고유의 사용자 지정 경로 엔드포인트를 구성하는 도우미 메서드도 있습니다. <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet*>, <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapPost*> 및 [MapVerb](xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions). 
 * 또한 엔드포인트 라우팅은 애플리케이션이 시작된 이후 엔드포인트 변경을 지원합니다. 앱 또는 ASP.NET Core 프레임워크에서 이를 지원하려면 사용자 지정 <xref:Microsoft.AspNetCore.Routing.EndpointDataSource>를 만들고 등록해야 합니다. 이는 고급 기능이며 일반적으로 필요하지 않습니다. 엔드포인트는 일반적으로 시작 시 구성되며 애플리케이션의 수명 동안 정적입니다. 시작할 때 파일 또는 데이터베이스에서 경로 구성을 로드하는 것은 동적이지 않습니다.
 
 다음 코드에서는 엔드포인트 라우팅의 기본 예제를 보여 줍니다.

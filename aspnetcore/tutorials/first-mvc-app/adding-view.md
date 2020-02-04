@@ -5,12 +5,12 @@ description: 간단한 ASP.NET Core MVC 앱에 보기 추가
 ms.author: riande
 ms.date: 8/04/2019
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: de75c3b0651c0cda6629af786d7db9dc83bc4fef
-ms.sourcegitcommit: 020c3760492efed71b19e476f25392dda5dd7388
+ms.openlocfilehash: a25233968f115c6e3a214d97cf2ca5ab81df8d83
+ms.sourcegitcommit: fe41cff0b99f3920b727286944e5b652ca301640
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/12/2019
-ms.locfileid: "72288827"
+ms.lasthandoff: 01/29/2020
+ms.locfileid: "76870430"
 ---
 # <a name="add-a-view-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 보기 추가
 
@@ -55,15 +55,15 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 * *Views/HelloWorld*라는 새 폴더를 추가합니다.
 * *Views/HelloWorld* 폴더에 *Index.cshtml*이라는 이름으로 새 파일을 추가합니다.
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * 마우스 오른쪽 단추로 *Views* 폴더, **추가 > 새 폴더**를 차례로 클릭하고 폴더의 이름을 *HelloWorld*로 지정합니다.
 * 마우스 오른쪽 단추로 *Views/HelloWorld* 폴더, **추가 > 새 파일**을 차례로 클릭합니다.
 * **새 파일** 대화 상자에서:
 
-  * 왼쪽 창에서 **웹**을 선택합니다.
-  * 가운데 창에서 **빈 HTML 파일**을 선택합니다.
-  * **이름** 상자에 *Index.cshtml*을 입력합니다.
+  * 왼쪽 창에서 **ASP.NET Core**를 선택합니다.
+  * 가운데 창에서 **MVC 뷰 페이지**를 선택합니다.
+  * **이름** 상자에 *Index*를 입력합니다.
   * **새로 만들기**를 선택합니다.
 
 ![새 항목 추가 대화 상자](adding-view/_static/add_view_mac.png)
@@ -133,7 +133,7 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
 ![영화 목록 보기](~/tutorials/first-mvc-app/adding-view/_static/hell3.png)
 
-그렇지만 일부 “데이터”(이 경우 “Hello from our View Template!” 메시지)는 하드 코딩되었습니다. 이 MVC 응용 프로그램에는 "V"(보기)가 있고 "C"(컨트롤러)가 있지만 아직 "M"(모델)은 없습니다.
+그렇지만 일부 “데이터”(이 경우 “Hello from our View Template!” 메시지)는 하드 코딩되었습니다. 이 MVC 애플리케이션에는 "V"(보기)가 있고 "C"(컨트롤러)가 있지만 아직 "M"(모델)은 없습니다.
 
 ## <a name="passing-data-from-the-controller-to-the-view"></a>컨트롤러에서 보기로 데이터 전달
 
@@ -212,7 +212,7 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 * *Views/HelloWorld*라는 새 폴더를 추가합니다.
 * *Views/HelloWorld* 폴더에 *Index.cshtml*이라는 이름으로 새 파일을 추가합니다.
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * 마우스 오른쪽 단추로 *Views* 폴더, **추가 > 새 폴더**를 차례로 클릭하고 폴더의 이름을 *HelloWorld*로 지정합니다.
 * 마우스 오른쪽 단추로 *Views/HelloWorld* 폴더, **추가 > 새 파일**을 차례로 클릭합니다.
@@ -289,11 +289,11 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
 변경 내용을 저장하고 `https://localhost:{PORT}/HelloWorld`로 이동합니다. 브라우저 제목, 기본 제목 및 작은 제목이 변경된 것을 확인합니다. (브라우저에서 변경 내용을 확인할 수 없는 경우 캐시된 콘텐츠를 보고 있을 수도 있습니다. 브라우저에서 Ctrl+F5 키를 눌러서 로드될 응답을 강제로 서버에서 가져옵니다.) 브라우저 제목은 *Index.cshtml* 보기 템플릿에서 설정한 `ViewData["Title"]` 및 레이아웃 파일에 추가된 추가적인 "- Movie App"으로 만들어집니다.
 
-또한 *Index.cshtml* 보기 템플릿에서 콘텐츠가 *Views/Shared/_Layout.cshtml* 보기 템플릿으로 병합되고 단일 HTML 응답이 브라우저로 전송된 방식을 확인합니다. 레이아웃 템플릿을 사용하면 응용 프로그램의 모든 페이지에 걸쳐 적용되는 변경 내용을 쉽게 만들 수 있습니다. 자세한 내용은 [레이아웃](xref:mvc/views/layout)을 참조하세요.
+또한 *Index.cshtml* 보기 템플릿에서 콘텐츠가 *Views/Shared/_Layout.cshtml* 보기 템플릿으로 병합되고 단일 HTML 응답이 브라우저로 전송된 방식을 확인합니다. 레이아웃 템플릿을 사용하면 애플리케이션의 모든 페이지에 걸쳐 적용되는 변경 내용을 쉽게 만들 수 있습니다. 자세한 내용은 [레이아웃](xref:mvc/views/layout)을 참조하세요.
 
 ![영화 목록 보기](~/tutorials/first-mvc-app/adding-view/_static/hell3.png)
 
-그렇지만 일부 “데이터”(이 경우 “Hello from our View Template!” 메시지)는 하드 코딩되었습니다. 이 MVC 응용 프로그램에는 "V"(보기)가 있고 "C"(컨트롤러)가 있지만 아직 "M"(모델)은 없습니다.
+그렇지만 일부 “데이터”(이 경우 “Hello from our View Template!” 메시지)는 하드 코딩되었습니다. 이 MVC 애플리케이션에는 "V"(보기)가 있고 "C"(컨트롤러)가 있지만 아직 "M"(모델)은 없습니다.
 
 ## <a name="passing-data-from-the-controller-to-the-view"></a>컨트롤러에서 보기로 데이터 전달
 

@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/16/2019
 uid: fundamentals/http-requests
-ms.openlocfilehash: 482f8e28c23c621cecaf9ce111d89e9166ea6d85
-ms.sourcegitcommit: da2fb2d78ce70accdba903ccbfdcfffdd0112123
+ms.openlocfilehash: 9b9da82191a587be0603ee114562e9a964f05250
+ms.sourcegitcommit: fe41cff0b99f3920b727286944e5b652ca301640
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/07/2020
-ms.locfileid: "75722728"
+ms.lasthandoff: 01/29/2020
+ms.locfileid: "76870400"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>ASP.NET Core에서 IHttpClientFactory를 사용하여 HTTP 요청 만들기
 
@@ -352,6 +352,22 @@ DI 지원 앱에서 `IHttpClientFactory`을(를) 사용하면 다음이 방지�
 * `Main`을 통해서는 서비스의 `GetPage` 메서드를 실행하고 웹 페이지 콘텐츠의 처음 500자를 콘솔에 씁니다.
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactoryConsoleSample/Program.cs?highlight=14-15,20,26-27,59-62)]
+
+## <a name="header-propagation-middleware"></a>헤더 전파 미들웨어
+
+헤더 전파는 들어오는 요청에서 나가는 HTTP 클라이언트 요청으로 HTTP 헤더를 전파하는 ASP.NET Core 미들웨어입니다. 헤더 전파를 사용하려면 다음을 수행합니다.
+
+* [Microsoft.AspNetCore.HeaderPropagation](https://www.nuget.org/packages/Microsoft.AspNetCore.HeaderPropagation) 패키지를 참조합니다.
+* `Startup`에서 미들웨어 및 `HttpClient`를 구성합니다.
+
+  [!code-csharp[](http-requests/samples/3.x/Startup.cs?highlight=5-9,21&name=snippet)]
+
+* 클라이언트는 아웃바운드 요청에 구성된 헤더를 포함합니다.
+
+  ```C#
+  var client = clientFactory.CreateClient("MyForwardingClient");
+  var response = client.GetAsync(...);
+  ```
 
 ## <a name="additional-resources"></a>추가 자료
 
@@ -962,6 +978,23 @@ DI 지원 앱에서 `IHttpClientFactory`을(를) 사용하면 다음이 방지�
 * `Main`을 통해서는 서비스의 `GetPage` 메서드를 실행하고 웹 페이지 콘텐츠의 처음 500자를 콘솔에 씁니다.
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactoryConsoleSample/Program.cs?highlight=14-15,20,26-27,59-62)]
+
+## <a name="header-propagation-middleware"></a>헤더 전파 미들웨어
+
+헤더 전파는 들어오는 요청에서 나가는 HTTP 클라이언트 요청으로 HTTP 헤더를 전파하는 커뮤니티 지원 미들웨어입니다. 헤더 전파를 사용하려면 다음을 수행합니다.
+
+* [HeaderPropagation](https://www.nuget.org/packages/HeaderPropagation) 패키지의 커뮤니티 지원 포트를 참조합니다. ASP.NET Core 3.1 이상은 [Microsoft.AspNetCore.HeaderPropagation](https://www.nuget.org/packages/Microsoft.AspNetCore.HeaderPropagation)을 지원합니다.
+
+* `Startup`에서 미들웨어 및 `HttpClient`를 구성합니다.
+
+  [!code-csharp[](http-requests/samples/2.x/Startup21.cs?highlight=5-9,25&name=snippet)]
+
+* 클라이언트는 아웃바운드 요청에 구성된 헤더를 포함합니다.
+
+  ```C#
+  var client = clientFactory.CreateClient("MyForwardingClient");
+  var response = client.GetAsync(...);
+  ```
 
 ## <a name="additional-resources"></a>추가 자료
 

@@ -3,14 +3,14 @@ title: ASP.NET Core MVC 개요
 author: ardalis
 description: 모델-보기-컨트롤러 디자인 패턴을 사용하여 웹앱 및 API를 빌드할 수 있는 풍부한 프레임워크인 ASP.NET Core MVC에 대해 알아봅니다.
 ms.author: riande
-ms.date: 11/07/2019
+ms.date: 01/28/2020
 uid: mvc/overview
-ms.openlocfilehash: 4f4ea3da8563cabaaa6183c6835c2f1eb8c387b4
-ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
+ms.openlocfilehash: a147c2aa01f1440f8ac59f73eb7be734193f802a
+ms.sourcegitcommit: fe41cff0b99f3920b727286944e5b652ca301640
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73799490"
+ms.lasthandoff: 01/29/2020
+ms.locfileid: "76869973"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>ASP.NET Core MVC 개요
 
@@ -26,14 +26,14 @@ MVC(Model-View-Controller) 아키텍처 패턴은 애플리케이션을 모델, 
 
 ![MVC 패턴](overview/_static/mvc.png)
 
-이와 같은 명확한 책임의 규정은 복잡성의 측면에서 응용 프로그램의 크기를 조정하는 데 도움을 주는데, 작업이 하나만 있는 항목(모델, 보기 또는 컨트롤러)을 좀 더 쉽게 코딩, 디버그 및 테스트할 수 있기 때문입니다. 이러한 세 영역 중 둘 이상에 종속된 코드는 업데이트, 테스트 및 디버깅이 더 어렵습니다. 예를 들어 사용자 인터페이스 논리는 비즈니스 논리보다 자주 변하는 경향이 있습니다. 프레젠테이션 코드와 비즈니스 논리가 단일 개체에 결합되면 사용자 인터페이스가 변경될 때마다 비즈니스 논리를 포함하고 있는 개체를 수정해야 합니다. 이 때문에 자주 오류가 발생하며 모든 사소한 사용자 인터페이스 변경 시마다 비즈니스 논리를 다시 테스트해야 합니다.
+이와 같은 명확한 책임의 규정은 복잡성의 측면에서 애플리케이션의 크기를 조정하는 데 도움을 주는데, 작업이 하나만 있는 항목(모델, 보기 또는 컨트롤러)을 좀 더 쉽게 코딩, 디버그 및 테스트할 수 있기 때문입니다. 이러한 세 영역 중 둘 이상에 종속된 코드는 업데이트, 테스트 및 디버깅이 더 어렵습니다. 예를 들어 사용자 인터페이스 논리는 비즈니스 논리보다 자주 변하는 경향이 있습니다. 프레젠테이션 코드와 비즈니스 논리가 단일 개체에 결합되면 사용자 인터페이스가 변경될 때마다 비즈니스 논리를 포함하고 있는 개체를 수정해야 합니다. 이 때문에 자주 오류가 발생하며 모든 사소한 사용자 인터페이스 변경 시마다 비즈니스 논리를 다시 테스트해야 합니다.
 
 > [!NOTE]
 > 보기와 컨트롤러는 모두 모델에 의존합니다. 그러나 모델은 보기 및 컨트롤러에 의존하지 않습니다. 이것이 바로 분리의 주요 이점 중 하나입니다. 이와 같은 분리 덕분에 시각적 표시에 관계없이 모델을 만들고 테스트할 수 있습니다.
 
 ### <a name="model-responsibilities"></a>모델의 책임
 
-MVC 응용 프로그램의 모델은 응용 프로그램 및 비즈니스 논리 또는 이를 통해 수행해야 하는 작업의 상태를 나타냅니다. 비즈니스 논리는 응용 프로그램의 상태를 유지하기 위한 구현 논리와 함께 모델에 캡슐화해야 합니다. 강력한 형식의 보기는 일반적으로 해당 보기에 표시할 데이터를 포함하도록 디자인된 ViewModel 형식을 사용합니다. 컨트롤러는 모델에서 이러한 ViewModel 인스턴스를 만들고 채웁니다.
+MVC 애플리케이션의 모델은 애플리케이션 및 비즈니스 논리 또는 이를 통해 수행해야 하는 작업의 상태를 나타냅니다. 비즈니스 논리는 애플리케이션의 상태를 유지하기 위한 구현 논리와 함께 모델에 캡슐화해야 합니다. 강력한 형식의 보기는 일반적으로 해당 보기에 표시할 데이터를 포함하도록 디자인된 ViewModel 형식을 사용합니다. 컨트롤러는 모델에서 이러한 ViewModel 인스턴스를 만들고 채웁니다.
 
 ### <a name="view-responsibilities"></a>보기의 책임
 
@@ -74,7 +74,7 @@ ASP.NET Core MVC는 다음과 같은 기능을 포함하고 있습니다.
 
 ### <a name="routing"></a>라우팅
 
-ASP.NET Core MVC는 [ASP.NET Core 라우팅](../fundamentals/routing.md)을 기반으로 하며, 알기 쉽고 검색 가능한 URL이 있는 응용 프로그램을 만들 수 있는 강력한 URL 매핑 구성 요소입니다. 웹 서버에 있는 파일의 구성 방식에 관계없이 SEO(검색 엔진 최적화) 및 링크 생성에 적합한 응용 프로그램 URL 이름 지정 패턴을 정의할 수 있습니다. 경로 값 제약 조건, 기본값 및 선택적 값을 지원하는 편리한 경로 템플릿 구문을 사용하여 경로를 정의할 수 있습니다.
+ASP.NET Core MVC는 [ASP.NET Core 라우팅](../fundamentals/routing.md)을 기반으로 하며, 알기 쉽고 검색 가능한 URL이 있는 응용 프로그램을 만들 수 있는 강력한 URL 매핑 구성 요소입니다. 웹 서버에 있는 파일의 구성 방식에 관계없이 SEO(검색 엔진 최적화) 및 링크 생성에 적합한 애플리케이션 URL 이름 지정 패턴을 정의할 수 있습니다. 경로 값 제약 조건, 기본값 및 선택적 값을 지원하는 편리한 경로 템플릿 구문을 사용하여 경로를 정의할 수 있습니다.
 
 *규칙 기반 라우팅*을 사용하면 응용 프로그램이 허용하는 URL 형식과 이러한 각 형식이 특정 컨트롤러의 특정 작업 메서드에 매핑되는 방식을 전체적으로 정의할 수 있습니다. 들어오는 요청이 수신되면 라우팅 엔진이 URL을 구문 분석하여 정의된 URL 형식 중 하나와 매칭한 후 관련 컨트롤러의 작업 메서드를 호출합니다.
 
@@ -172,7 +172,7 @@ public class AccountController : Controller
 
 ### <a name="areas"></a>Areas
 
-[영역](controllers/areas.md)은 대규모 ASP.NET Core MVC 웹앱을 더 작은 기능 그룹으로 분할하는 방법을 제공합니다. 영역은 응용 프로그램 내부의 MVC 구조입니다. MVC 프로젝트에서 모델, 컨트롤러, 보기와 같은 논리적 구성 요소는 서로 다른 폴더에 보관되며 MVC는 명명 규칙을 사용하여 이러한 구성 요소 간의 관계를 만듭니다. 대형 앱의 경우 앱을 별도의 고급 기능 영역으로 나누는 것이 좋습니다. 결제, 청구 및 검색 등과 같은 여러 비즈니스 단위가 있는 전자상거래 앱을 예로 들 수 있습니다. 이러한 각 단위는 자체적인 논리 구성 요소 보기, 컨트롤러 및 모델을 갖습니다.
+[영역](controllers/areas.md)은 대규모 ASP.NET Core MVC 웹앱을 더 작은 기능 그룹으로 분할하는 방법을 제공합니다. 영역은 애플리케이션 내부의 MVC 구조입니다. MVC 프로젝트에서 모델, 컨트롤러, 보기와 같은 논리적 구성 요소는 서로 다른 폴더에 보관되며 MVC는 명명 규칙을 사용하여 이러한 구성 요소 간의 관계를 만듭니다. 대형 앱의 경우 앱을 별도의 고급 기능 영역으로 나누는 것이 좋습니다. 결제, 청구 및 검색 등과 같은 여러 비즈니스 단위가 있는 전자상거래 앱을 예로 들 수 있습니다. 이러한 각 단위는 자체적인 논리 구성 요소 보기, 컨트롤러 및 모델을 갖습니다.
 
 ### <a name="web-apis"></a>Web API
 
@@ -253,9 +253,10 @@ MVC의 Razor 보기는 모델을 기반으로 하는 강력한 형식의 보기�
 
 <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> 메서드를 사용하면 ASP.NET Core MVC 2.1 이상에서 도입된 주요 동작 변경 내용을 앱이 옵트인(opt-in) 또는 옵트아웃(opt-out)할 수 있습니다.
 
-자세한 내용은 <xref:mvc/compatibility-version>을 참조하세요.
+자세한 내용은 <xref:mvc/compatibility-version>를 참조하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 
 * [MyTested.AspNetCore.Mvc - ASP.NET Core MVC용 흐름 테스트 라이브러리](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc) &ndash; 강력한 형식의 단위 테스트 라이브러리로, MVC 및 웹 API 앱 테스트를 위한 흐름 인터페이스를 제공합니다. (*Microsoft에서 유지 관리하거나 지원하지 않습니다.* )
+* [Razor 구성 요소를 Razor Pages 및 MVC 앱에 통합](xref:blazor/hosting-models#integrate-razor-components-into-razor-pages-and-mvc-apps)
 

@@ -5,14 +5,14 @@ description: 게시된 ASP.NET Core 앱의 디렉터리 구조에 대해 알아�
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/17/2019
+ms.date: 01/28/2020
 uid: host-and-deploy/directory-structure
-ms.openlocfilehash: f1df047decc7a0a6b7dcee57a690c55eea428b05
-ms.sourcegitcommit: 28a2874765cefe9eaa068dceb989a978ba2096aa
+ms.openlocfilehash: ba5cb96dfdcdca10034299e3bbe662ce056af791
+ms.sourcegitcommit: fe41cff0b99f3920b727286944e5b652ca301640
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 06/17/2019
-ms.locfileid: "67166973"
+ms.lasthandoff: 01/29/2020
+ms.locfileid: "76870268"
 ---
 # <a name="aspnet-core-directory-structure"></a>ASP.NET Core 디렉터리 구조
 
@@ -28,8 +28,8 @@ ms.locfileid: "67166973"
 
 | 앱 형식 | 디렉터리 구조 |
 | -------- | ------------------- |
-| [프레임워크 종속 배포](/dotnet/core/deploying/#framework-dependent-deployments-fdd) | <ul><li>publish&dagger;<ul><li>Views&dagger;(MVC 앱, 뷰가 미리 컴파일되지 않은 경우)</li><li>Pages&dagger;(MVC 또는 Razor 페이지 앱, 페이지가 미리 컴파일되지 않은 경우)</li><li>wwwroot&dagger;</li><li>*\.dll 파일</li><li>{ASSEMBLY NAME}.deps.json</li><li>{ASSEMBLY NAME}.dll</li><li>{ASSEMBLY NAME}.pdb</li><li>{ASSEMBLY NAME}.Views.dll</li><li>{ASSEMBLY NAME}.Views.pdb</li><li>{ASSEMBLY NAME}.runtimeconfig.json</li><li>web.config(IIS 배포)</li></ul></li></ul> |
-| [자체 포함 배포](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>publish&dagger;<ul><li>Views&dagger;(MVC 앱, 뷰가 미리 컴파일되지 않은 경우)</li><li>Pages&dagger;(MVC 또는 Razor 페이지 앱, 페이지가 미리 컴파일되지 않은 경우)</li><li>wwwroot&dagger;</li><li>\*.dll 파일</li><li>{ASSEMBLY NAME}.deps.json</li><li>{ASSEMBLY NAME}.dll</li><li>{ASSEMBLY NAME}.exe</li><li>{ASSEMBLY NAME}.pdb</li><li>{ASSEMBLY NAME}.Views.dll</li><li>{ASSEMBLY NAME}.Views.pdb</li><li>{ASSEMBLY NAME}.runtimeconfig.json</li><li>web.config(IIS 배포)</li></ul></li></ul> |
+| [프레임워크 종속 실행 파일](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>publish&dagger;<ul><li>Views&dagger; MVC 앱, 뷰가 미리 컴파일되지 않은 경우</li><li>Pages&dagger; MVC 또는 Razor 페이지 앱, 페이지가 미리 컴파일되지 않은 경우</li><li>wwwroot&dagger;</li><li>Windows용 ‘.dll 파일</li><li>{ASSEMBLY NAME}.deps.json</li><li>{ASSEMBLY NAME}.dll</li><li>{ASSEMBLY NAME}{.EXTENSION} *.exe* 확장, macOS 또는 Linux용 확장 없음</li><li>{ASSEMBLY NAME}.pdb</li><li>{ASSEMBLY NAME}.Views.dll</li><li>{ASSEMBLY NAME}.Views.pdb</li><li>{ASSEMBLY NAME}.runtimeconfig.json</li><li>web.config(IIS 배포)</li><li>createdump([Linux createdump 유틸리티](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy))</li><li>’.so(Linux 공유 개체 라이브러리) </li><li>‘.a(macOS 보관)</li><li>’.dylib(macOS 동적 라이브러리) </li></ul></li></ul> |
+| [SCD(자체 포함 배포)](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>publish&dagger;<ul><li>Views&dagger; MVC 앱, 뷰가 미리 컴파일되지 않은 경우</li><li>Pages&dagger; MVC 또는 Razor 페이지 앱, 페이지가 미리 컴파일되지 않은 경우</li><li>wwwroot&dagger;</li><li>*.dll 파일</li><li>{ASSEMBLY NAME}.deps.json</li><li>{ASSEMBLY NAME}.dll</li><li>{ASSEMBLY NAME}.exe</li><li>{ASSEMBLY NAME}.pdb</li><li>{ASSEMBLY NAME}.Views.dll</li><li>{ASSEMBLY NAME}.Views.pdb</li><li>{ASSEMBLY NAME}.runtimeconfig.json</li><li>web.config(IIS 배포)</li></ul></li></ul> |
 
 &dagger;디렉터리를 나타냄
 

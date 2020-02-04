@@ -6,16 +6,16 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/07/2020
 uid: getting-started
-ms.openlocfilehash: c806bd1e79dea9119f1c9e99d0a2b9742a10987a
-ms.sourcegitcommit: ef1720cb733908f36a54825d84c3461c5280bdbe
+ms.openlocfilehash: 4f7e67e1e422afe3f7e2970e0c40380f065390ac
+ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/08/2020
-ms.locfileid: "75737479"
+ms.lasthandoff: 02/01/2020
+ms.locfileid: "76928325"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>자습서: ASP.NET Core 시작
 
-이 자습서에서는 .NET Core 명령줄 인터페이스를 사용하여 ASP.NET Core 웹앱을 만들고 실행하는 방법을 보여 줍니다.
+이 자습서에서는 .NET Core CLI를 사용하여 ASP.NET Core 웹앱을 만들고 실행하는 방법을 보여 줍니다.
 
 다음을 수행하는 방법을 알아봅니다.
 
