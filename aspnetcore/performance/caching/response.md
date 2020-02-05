@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/04/2019
 uid: performance/caching/response
-ms.openlocfilehash: e20c197c7ce3334d4f4f0b917d1fc94174e6c615
-ms.sourcegitcommit: 57b85708f4cded99b8f008a69830cb104cd8e879
+ms.openlocfilehash: ab5d1414ae72edade81ab55aef6b0fa5af30f0f4
+ms.sourcegitcommit: 990a4c2e623c202a27f60bdf3902f250359c13be
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/13/2020
-ms.locfileid: "75914196"
+ms.lasthandoff: 02/03/2020
+ms.locfileid: "76971972"
 ---
 # <a name="response-caching-in-aspnet-core"></a>ASP.NET Core의 응답 캐싱
 

@@ -17,11 +17,11 @@ ms.contentlocale: ko-KR
 ms.lasthandoff: 01/24/2020
 ms.locfileid: "76726888"
 ---
-# <a name="aspnet-core-opno-locblazor-forms-and-validation"></a>ASP.NET Core Blazor 폼 및 유효성 검사
+# <a name="aspnet-core-opno-locblazor-forms-and-validation"></a>ASP.NET Core [!OP.NO-LOC(Blazor)] 폼 및 유효성 검사
 
 작성자: [Daniel Roth](https://github.com/danroth27) 및 [Luke Latham](https://github.com/guardrex)
 
-폼 및 유효성 검사는 [데이터 주석을](xref:mvc/models/validation)사용 하 여 Blazor에서 지원 됩니다.
+폼 및 유효성 검사는 [데이터 주석을](xref:mvc/models/validation)사용 하 여 [!OP.NO-LOC(Blazor)]에서 지원 됩니다.
 
 다음 `ExampleModel` 형식은 데이터 주석을 사용 하 여 유효성 검사 논리를 정의 합니다.
 
@@ -258,7 +258,7 @@ public class Starship
 
 ## <a name="work-with-radio-buttons"></a>라디오 단추 작업
 
-폼에서 라디오 단추를 사용할 때 라디오 단추가 그룹으로 평가 되기 때문에 데이터 바인딩은 다른 요소와 다르게 처리 됩니다. 각 라디오 단추의 값은 고정 되어 있지만 라디오 단추 그룹의 값은 선택 된 라디오 단추의 값입니다. 다음 예제에서는 다음을 수행 하는 방법을 보여 줍니다.
+폼에서 라디오 단추를 사용할 때 라디오 단추가 그룹으로 평가 되기 때문에 데이터 바인딩은 다른 요소와 다르게 처리 됩니다. 각 라디오 단추의 값은 고정 되어 있지만 라디오 단추 그룹의 값은 선택 된 라디오 단추의 값입니다. 아래 예제는 다음과 같은 작업의 방법을 보여 줍니다.
 
 * 라디오 단추 그룹에 대 한 데이터 바인딩을 처리 합니다.
 * 사용자 지정 `InputRadio` 구성 요소를 사용 하 여 유효성 검사를 지원 합니다.

@@ -28,7 +28,7 @@ CORS ( [원본 간 리소스 공유](https://www.w3.org/TR/cors/) ):
 * 다른 서버를 거부 하는 동안 서버에서 일부 교차 원본 요청을 명시적으로 허용할 수 있습니다.
 * [JSONP](/dotnet/framework/wcf/samples/jsonp)와 같은 이전 기술 보다 안전 하 고 유연 합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample)([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="same-origin"></a>동일한 원점
 
@@ -54,11 +54,11 @@ CORS 미들웨어는 크로스-원본 요청을 처리 합니다. 다음 코드�
 
 [!code-csharp[](cors/sample/Cors/WebAPI/Startup.cs?name=snippet&highlight=8,14-23,38)]
 
-위의 코드:
+위의 코드는:
 
 * 정책 이름을 "\_myAllowSpecificOrigins"로 설정 합니다. 정책 이름은 임의로입니다.
 * CORS를 사용 하도록 설정 하는 <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*> 확장 메서드를 호출 합니다.
-* [람다 식](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions)으로 <xref:Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions.AddCors*>를 호출 합니다. 람다는 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> 개체를 전달받습니다. `WithOrigins`등의 [구성 옵션](#cors-policy-options)에 대해서는이 문서의 뒷부분에서 설명 합니다.
+* [람다 식](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions)으로 <xref:Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions.AddCors*>를 호출 합니다. 람다는 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> 개체를 사용 합니다. `WithOrigins`등의 [구성 옵션](#cors-policy-options)에 대해서는이 문서의 뒷부분에서 설명 합니다.
 
 <xref:Microsoft.Extensions.DependencyInjection.MvcCorsMvcCoreBuilderExtensions.AddCors*> 메서드 호출은 CORS 서비스를 앱의 서비스 컨테이너에 추가 합니다.
 
@@ -165,7 +165,7 @@ app.UseEndpoints(endpoints =>
 `[EnableCors]` 특성을 적용할 수 있습니다.
 
 * Razor 페이지 `PageModel`
-* Controller
+* 컨트롤러
 * 컨트롤러 동작 방법
 
 `[EnableCors]` 특성을 사용 하 여 컨트롤러/페이지-모델/작업에 다른 정책을 적용할 수 있습니다. `[EnableCors]` 특성이 컨트롤러/페이지 모델/동작 메서드에 적용 되 고 CORS가 미들웨어에서 사용 되는 경우 두 정책이 모두 적용 됩니다. 정책을 결합 하지 않는 것이 좋습니다. 동일한 앱에서 `[EnableCors]` 특성 또는 미들웨어를 사용 합니다.
@@ -188,12 +188,12 @@ app.UseEndpoints(endpoints =>
 
 이 섹션에서는 CORS 정책에서 설정할 수 있는 다양 한 옵션에 대해 설명 합니다.
 
-* [허용되는 원본 설정하기](#set-the-allowed-origins)
-* [허용되는 HTTP 메서드 설정하기](#set-the-allowed-http-methods)
-* [허용되는 요청 헤더 설정하기](#set-the-allowed-request-headers)
-* [노출되는 응답 헤더 설정하기](#set-the-exposed-response-headers)
-* [교차 원본 요청의 자격 증명](#credentials-in-cross-origin-requests)
-* [예비 요청 만료 시간 설정하기](#set-the-preflight-expiration-time)
+* [허용 되는 원본 설정](#set-the-allowed-origins)
+* [허용 되는 HTTP 메서드 설정](#set-the-allowed-http-methods)
+* [허용 되는 요청 헤더 설정](#set-the-allowed-request-headers)
+* [노출 된 응답 헤더 설정](#set-the-exposed-response-headers)
+* [원본 간 요청에 대 한 자격 증명](#credentials-in-cross-origin-requests)
+* [실행 전 만료 시간 설정](#set-the-preflight-expiration-time)
 
 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions.AddPolicy*>은 `Startup.ConfigureServices`에서 호출 됩니다. 일부 옵션의 경우 [CORS 작동 방법](#how-cors) 섹션을 먼저 읽는 것이 도움이 될 수 있습니다.
 
@@ -471,7 +471,7 @@ Test message
 CORS를 테스트 하려면:
 
 1. [API 프로젝트를 만듭니다](xref:tutorials/first-web-api). 또는 [샘플을 다운로드할](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample/Cors)수 있습니다.
-1. 이 문서의 방법 중 하나를 사용 하 여 CORS를 사용 하도록 설정 합니다. 예를 들면 다음과 같습니다.:
+1. 이 문서의 방법 중 하나를 사용 하 여 CORS를 사용 하도록 설정 합니다. 예들 들어 다음과 같습니다.
 
   [!code-csharp[](cors/sample/Cors/WebAPI/StartupTest.cs?name=snippet2&highlight=13-18)]
 

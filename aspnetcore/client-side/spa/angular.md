@@ -7,12 +7,12 @@ ms.author: stevesa
 ms.custom: mvc
 ms.date: 03/07/2019
 uid: spa/angular
-ms.openlocfilehash: 62654ca040be99de8063a63c7e4ac09cbb8564eb
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: 150b2176eac2e68c1ef9ec6deabb087836ff84ce
+ms.sourcegitcommit: cb6015f737b6a93127016ab0f21b58e34b624ff3
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71080398"
+ms.lasthandoff: 02/04/2020
+ms.locfileid: "77004268"
 ---
 # <a name="use-the-angular-project-template-with-aspnet-core"></a>ASP.NET Core에서 Angular 프로젝트 템플릿 사용
 
@@ -53,7 +53,7 @@ Now listening on: http://localhost:<port>
 
 브라우저에서 이 URL로 이동합니다.
 
-앱이 백그라운드에서 Angular CLI 서버의 인스턴스를 시작합니다. 다음과 유사한 메시지가 기록됩니다. *로컬 호스트&lt;:/otherport&gt;에서 수신 대기 하 고 있는 개발 서버, otherport http://localhost:&lt&gt; 에서 브라우저를 엽니다*. 이 메시지 무시&mdash;결합된 ASP.NET Core 및 Angular CLI 앱의 URL이 **아닙니다**.
+앱이 백그라운드에서 Angular CLI 서버의 인스턴스를 시작합니다. 다음과 유사한 메시지가 기록됩니다. *NG Live Development Server는 localhost:&lt;otherport&gt;에서 수신 대기 중이고, http://localhost:&lt ;otherport&gt;/ 에서 브라우저를 엽니다*. 이 메시지 무시&mdash;결합된 ASP.NET Core 및 Angular CLI 앱의 URL이 **아닙니다**.
 
 ---
 
@@ -61,7 +61,7 @@ Now listening on: http://localhost:<port>
 
 ## <a name="add-pages-images-styles-modules-etc"></a>페이지, 이미지, 스타일, 모듈 등을 추가합니다.
 
-*ClientApp* 디렉터리에는 표준 Angular CLI 앱이 포함됩니다. 자세한 내용은 공식 [Angular 설명서](https://github.com/angular/angular-cli/wiki)를 참조하세요.
+*ClientApp* 디렉터리에는 표준 Angular CLI 앱이 포함됩니다. 자세한 내용은 공식 [Angular 설명서](https://https://angular.io)를 참조하세요.
 
 이 템플릿에서 만들어진 Angular 앱과 Angular CLI 자체에서(`ng new`을 통해) 만들어진 앱 간에는 약간 차이가 있지만 앱의 기능은 변경되지 않습니다. 템플릿에서 만들어진 앱에는 [부트스트랩](https://getbootstrap.com/) 기반 레이아웃 및 기본 라우팅 예제가 포함됩니다.
 
@@ -73,13 +73,13 @@ Now listening on: http://localhost:<port>
 cd ClientApp
 ```
 
-`ng` 도구가 전역으로 설치된 경우 해당 명령을 실행할 수 있습니다. 예를 들어 `ng lint`, `ng test` 또는 기타 모든 [Angular CLI 명령](https://github.com/angular/angular-cli/wiki#additional-commands)을 실행할 수 있습니다. ASP.NET Core 앱은 앱의 서버 쪽 및 클라이언트 쪽 파트를 둘 다 처리하기 때문에 `ng serve`를 실행할 필요가 없습니다. 내부적으로는 개발 시 `ng serve`를 사용합니다.
+`ng` 도구가 전역으로 설치된 경우 해당 명령을 실행할 수 있습니다. 예를 들어 `ng lint`, `ng test` 또는 기타 모든 [Angular CLI 명령](https://angular.io/cli)을 실행할 수 있습니다. ASP.NET Core 앱은 앱의 서버 쪽 및 클라이언트 쪽 파트를 둘 다 처리하기 때문에 `ng serve`를 실행할 필요가 없습니다. 내부적으로는 개발 시 `ng serve`를 사용합니다.
 
 `ng` 도구가 설치되지 않은 경우에는 대신에 `npm run ng`를 실행합니다. 예를 들어 `npm run ng lint` 또는 `npm run ng test`를 실행할 수 있습니다.
 
 ## <a name="install-npm-packages"></a>npm 패키지 설치
 
-타사 npm 패키지를 설치하려면 *ClientApp* 하위 디렉터리에서 명령 프롬프트를 사용합니다. 예를 들어:
+타사 npm 패키지를 설치하려면 *ClientApp* 하위 디렉터리에서 명령 프롬프트를 사용합니다. 예를 들면 다음과 같습니다.:
 
 ```console
 cd ClientApp

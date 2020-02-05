@@ -7,12 +7,12 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 12/16/2019
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: 286d73d732b146fef15bbfc309caeb214cdbbe0d
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: ba9671f68a0faf99ff5232a6d5dd132d0a1d5ac5
+ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75829181"
+ms.lasthandoff: 02/01/2020
+ms.locfileid: "76928423"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Azure App Service에 ASP.NET Core 앱 배포
 
@@ -280,7 +280,7 @@ ARM 템플릿을 사용하여 앱을 만들고 배포하는 경우 `siteextensio
 
 ### <a name="deploy-the-app-self-contained"></a>자체 포함된 앱 배포
 
-[자체 포함 배포(SCD)](/dotnet/core/deploying/#self-contained-deployments-scd)에는 Visual Studio 또는 CLI(명령줄 인터페이스)를 사용합니다.
+[SCD(자체 포함 배포)](/dotnet/core/deploying/#self-contained-deployments-scd)에는 Visual Studio 또는 .NET Core CLI를 사용합니다.
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 

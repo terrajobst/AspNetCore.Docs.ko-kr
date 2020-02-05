@@ -4,14 +4,14 @@ author: pkellner
 description: 분산 캐시 태그 도우미를 사용하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/10/2018
+ms.date: 01/24/2020
 uid: mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper
-ms.openlocfilehash: 4e4d383bac67c73bad8b0a31b9ceb9452251761b
-ms.sourcegitcommit: 7a40c56bf6a6aaa63a7ee83a2cac9b3a1d77555e
+ms.openlocfilehash: e5100d7244600358186b653073990985f48434a7
+ms.sourcegitcommit: b5ceb0a46d0254cc3425578116e2290142eec0f0
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/12/2019
-ms.locfileid: "67856195"
+ms.lasthandoff: 01/28/2020
+ms.locfileid: "76809057"
 ---
 # <a name="distributed-cache-tag-helper-in-aspnet-core"></a>ASP.NET Core의 분산 캐시 태그 도우미
 
@@ -44,13 +44,13 @@ ms.locfileid: "67856195"
 
 ### <a name="name"></a>name
 
-| 특성 유형 | 예                               |
+| 특성 유형 | 예제                               |
 | -------------- | ------------------------------------- |
 | 문자열         | `my-distributed-cache-unique-key-101` |
 
 `name`은 필수입니다. `name` 특성은 저장된 각 캐시 인스턴스의 키로 사용됩니다. Razor 페이지의 Razor 페이지 이름 및 위치를 기준으로 각 인스턴스에 캐시 키를 할당하는 캐시 태그 도우미와는 달리, 분산 캐시 태그 도우미는 `name` 특성의 키만을 기준으로 합니다.
 
-예제:
+예:
 
 ```cshtml
 <distributed-cache name="my-distributed-cache-unique-key-101">
@@ -60,7 +60,7 @@ ms.locfileid: "67856195"
 
 ## <a name="distributed-cache-tag-helper-idistributedcache-implementations"></a>분산 캐시 태그 도우미 IDistributedCache 구현
 
-ASP.NET Core에 두 가지 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 구현이 기본적으로 제공됩니다. 하나는 SQL Server 기반이고 다른 하나는 Redis 기반입니다. 이러한 구현의 세부 정보는 <xref:performance/caching/distributed>에서 찾을 수 있습니다. 두 구현 모두 `Startup`에 `IDistributedCache` 인스턴스를 설정해야 합니다.
+ASP.NET Core에 두 가지 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 구현이 기본적으로 제공됩니다. 하나는 SQL Server 기반이고 다른 하나는 Redis 기반입니다. [NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html)와 같은 타사 구현도 사용할 수 있습니다. 이러한 구현의 세부 정보는 <xref:performance/caching/distributed>에서 찾을 수 있습니다. 두 구현 모두 `Startup`에 `IDistributedCache` 인스턴스를 설정해야 합니다.
 
 특정 `IDistributedCache` 구현 사용과 특별히 관련된 태그 특성은 없습니다.
 

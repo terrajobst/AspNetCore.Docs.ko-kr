@@ -16,9 +16,9 @@ ms.locfileid: "76726968"
 ---
 # <a name="response-compression-in-aspnet-core"></a>ASP.NET Core 응답 압축
 
-작성자: [Luke Latham](https://github.com/guardrex)
+[Luke Latham](https://github.com/guardrex)으로
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples)([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 네트워크 대역폭은 제한 된 리소스입니다. 응답 크기를 줄이면 일반적으로 앱의 응답성이 크게 향상 됩니다. 페이로드 크기를 줄이는 한 가지 방법은 앱의 응답을 압축 하는 것입니다.
 
@@ -80,7 +80,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 
 다음 표에서는 압축 된 콘텐츠 요청, 송신, 캐싱 및 수신에 관련 된 헤더에 대해 설명 합니다.
 
-| Header             | Role |
+| 헤더             | 역할 |
 | ------------------ | ---- |
 | `Accept-Encoding`  | 클라이언트에서 서버로 전송 되어 클라이언트에 허용 되는 콘텐츠 인코딩 스키마를 표시 합니다. |
 | `Content-Encoding` | 페이로드에 있는 콘텐츠의 인코딩을 나타내기 위해 서버에서 클라이언트로 전송 됩니다. |
@@ -94,7 +94,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 * Gzip 및 사용자 지정 압축 공급자를 사용 하 여 앱 응답을 압축 합니다.
 * Mime 형식을 압축을 위한 MIME 형식의 기본 목록에 추가 하는 방법입니다.
 
-## <a name="package"></a>Package
+## <a name="package"></a>패키지
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -108,7 +108,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 
 ::: moniker-end
 
-## <a name="configuration"></a>구성
+## <a name="configuration"></a>Configuration
 
 ::: moniker range=">= aspnetcore-2.2"
 
@@ -137,9 +137,9 @@ public class Startup
 }
 ```
 
-참고:
+메모:
 
-* `app.UseResponseCompression`는 응답을 압축 하는 미들웨어 보다 먼저 호출 해야 합니다. 자세한 내용은 <xref:fundamentals/middleware/index#middleware-order>를 참조하세요.
+* `app.UseResponseCompression`는 응답을 압축 하는 미들웨어 보다 먼저 호출 해야 합니다. 자세한 내용은 <xref:fundamentals/middleware/index#middleware-order>을 참조하세요.
 * [Fiddler](https://www.telerik.com/fiddler), [Firebug](https://getfirebug.com/)또는 [postman](https://www.getpostman.com/) 과 같은 도구를 사용 하 여 `Accept-Encoding` 요청 헤더를 설정 하 고 응답 헤더, 크기 및 본문을 연구 합니다.
 
 `Accept-Encoding` 헤더를 제외 하 고 샘플 앱에 요청을 제출 하 고 응답이 압축 되지 않은 상태 인지 확인 합니다. `Content-Encoding` 및 `Vary` 헤더가 응답에 없습니다.
@@ -204,9 +204,9 @@ public void ConfigureServices(IServiceCollection services)
 
 | 압축 수준 | 설명 |
 | ----------------- | ----------- |
-| [CompressionLevel.Fastest](xref:System.IO.Compression.CompressionLevel) | 결과 출력이 최적으로 압축 되지 않은 경우에도 압축이 최대한 빨리 완료 되어야 합니다. |
-| [CompressionLevel.NoCompression](xref:System.IO.Compression.CompressionLevel) | 압축을 수행할 수 없습니다. |
-| [CompressionLevel.Optimal](xref:System.IO.Compression.CompressionLevel) | 압축을 완료 하는 데 더 많은 시간이 소요 되는 경우에도 응답은 최적으로 압축 되어야 합니다. |
+| [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 결과 출력이 최적으로 압축 되지 않은 경우에도 압축이 최대한 빨리 완료 되어야 합니다. |
+| [CompressionLevel 압축](xref:System.IO.Compression.CompressionLevel) | 압축을 수행할 수 없습니다. |
+| [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 압축을 완료 하는 데 더 많은 시간이 소요 되는 경우에도 응답은 최적으로 압축 되어야 합니다. |
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -267,9 +267,9 @@ public void ConfigureServices(IServiceCollection services)
 
 | 압축 수준 | 설명 |
 | ----------------- | ----------- |
-| [CompressionLevel.Fastest](xref:System.IO.Compression.CompressionLevel) | 결과 출력이 최적으로 압축 되지 않은 경우에도 압축이 최대한 빨리 완료 되어야 합니다. |
-| [CompressionLevel.NoCompression](xref:System.IO.Compression.CompressionLevel) | 압축을 수행할 수 없습니다. |
-| [CompressionLevel.Optimal](xref:System.IO.Compression.CompressionLevel) | 압축을 완료 하는 데 더 많은 시간이 소요 되는 경우에도 응답은 최적으로 압축 되어야 합니다. |
+| [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 결과 출력이 최적으로 압축 되지 않은 경우에도 압축이 최대한 빨리 완료 되어야 합니다. |
+| [CompressionLevel 압축](xref:System.IO.Compression.CompressionLevel) | 압축을 수행할 수 없습니다. |
+| [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 압축을 완료 하는 데 더 많은 시간이 소요 되는 경우에도 응답은 최적으로 압축 되어야 합니다. |
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

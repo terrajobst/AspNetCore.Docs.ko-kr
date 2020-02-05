@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: e718592127115e46df3154364957943a457b0b1b
-ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
+ms.openlocfilehash: 880d1762ebbea641c0b9c5a9f8bbca0b68a463c5
+ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76146331"
+ms.lasthandoff: 01/24/2020
+ms.locfileid: "76726668"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>Nginx를 사용하여 Linux에서 ASP.NET Core 호스트
 
@@ -144,6 +144,8 @@ server {
     }
 }
 ```
+
+앱이 SignalR Websocket을 사용하는 Blazor Server 앱인 경우 `Connection` 헤더를 설정하는 방법에 대한 자세한 내용은 <xref:host-and-deploy/blazor/server#linux-with-nginx>를 참조하세요.
 
 `server_name`이 일치하지 않으면 Nginx는 기본 서버를 사용합니다. 기본 서버가 정의되지 않은 경우 구성 파일의 첫 번째 서버는 기본 서버입니다. 구성 파일에 있는 444 상태 코드를 반환하는 특정 기본 서버를 추가하는 것이 좋습니다. 기본 서버 구성 예제는 다음과 같습니다.
 

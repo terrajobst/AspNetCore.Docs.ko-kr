@@ -30,9 +30,9 @@ By [Luke Latham](https://github.com/guardrex), [Mohsin Nasir](https://github.com
 
 분산 캐시 구성은 구현 별로 다릅니다. 이 문서에서는 SQL Server 및 Redis 분산 캐시를 구성 하는 방법을 설명 합니다. [NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) ([GitHub의 NCache](https://github.com/Alachisoft/NCache))와 같은 타사 구현도 사용할 수 있습니다. 어떤 구현이 선택 되는지에 관계 없이 앱은 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 인터페이스를 사용 하 여 캐시와 상호 작용 합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/)([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>필수 구성 요소
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -147,7 +147,7 @@ Table and index were created successfully.
 
 ### <a name="distributed-redis-cache"></a>분산 Redis Cache
 
-[Redis](https://redis.io/)는 분산 캐시로 흔히 사용되는 오픈 소스 메모리 내 데이터 저장소입니다. Redis를 로컬로 사용할 수 있으며, Azure에서 호스트 되는 ASP.NET Core 앱에 대 한 [Azure Redis Cache](https://azure.microsoft.com/services/cache/) 를 구성할 수 있습니다.
+[Redis](https://redis.io/) 는 분산 캐시로 자주 사용 되는 오픈 소스 메모리 내 데이터 저장소입니다. Redis를 로컬로 사용할 수 있으며, Azure에서 호스트 되는 ASP.NET Core 앱에 대 한 [Azure Redis Cache](https://azure.microsoft.com/services/cache/) 를 구성할 수 있습니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -244,7 +244,7 @@ NCache를 구성 하려면:
 ::: moniker-end
 
 > [!NOTE]
-> <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 인스턴스를 Singleton이나 Scoped 수명으로 사용할 필요는 없습니다(적어도 기본 구현일 경우).
+> <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 인스턴스에 대해 Singleton 또는 범위가 지정 된 수명을 사용할 필요는 없습니다 (최소한 기본 제공 구현의 경우).
 >
 > DI를 사용 하는 대신 필요한 경우에도 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 인스턴스를 만들 수 있지만, 코드에서 인스턴스를 만들면 코드를 테스트 하는 것이 어렵고 [명시적 종속성 원칙](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)을 위반 하 게 될 수 있습니다.
 
@@ -254,7 +254,7 @@ NCache를 구성 하려면:
 
 * 기존 인프라
 * 성능 요구 사항
-* Cost
+* 비용
 * 팀 환경
 
 캐싱 솔루션은 일반적으로 메모리 내 저장소를 사용 하 여 캐시 된 데이터를 신속 하 게 검색 하지만 메모리는 제한 된 리소스 이며 확장 하는 데 비용이 많이 듭니다. 일반적으로 사용 되는 데이터를 캐시에만 저장 합니다.
@@ -265,8 +265,8 @@ SQL Server를 분산 캐시 백업 저장소로 사용 하는 경우 캐시에 �
 
 ## <a name="additional-resources"></a>추가 자료
 
-* [Azure Redis Cache](/azure/azure-cache-for-redis/)
-* [Azure SQL Database](/azure/sql-database/)
+* [Azure의 Redis Cache](/azure/azure-cache-for-redis/)
+* [Azure의 SQL Database](/azure/sql-database/)
 * [웹 팜의 ASP.NET Core IDistributedCache Provider For NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) ([GitHub의 NCache](https://github.com/Alachisoft/NCache))
 * <xref:performance/caching/memory>
 * <xref:fundamentals/change-tokens>

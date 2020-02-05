@@ -75,7 +75,7 @@ Blazor Server 앱에서 상태를 유지 하기 위한 세 가지 공통 위치�
 
 ### <a name="server-side-in-a-database"></a>데이터베이스의 서버 쪽
 
-영구 데이터 지 속성 또는 여러 사용자 또는 장치에 걸쳐 있어야 하는 모든 데이터의 경우에는 독립 된 서버 쪽 데이터베이스를 선택 하는 것이 가장 좋습니다. 사용 가능한 옵션은 다음과 같습니다.
+영구 데이터 지 속성 또는 여러 사용자 또는 장치에 걸쳐 있어야 하는 모든 데이터의 경우에는 독립 된 서버 쪽 데이터베이스를 선택 하는 것이 가장 좋습니다. 다음 옵션을 사용할 수 있습니다.
 
 * 관계형 SQL 데이터베이스
 * 키-값 저장소
@@ -134,7 +134,7 @@ ASP.NET Core의 [데이터 보호](xref:security/data-protection/introduction)�
 
 ## <a name="protected-browser-storage-experimental-package"></a>보호 된 브라우저 저장소 실험적 패키지
 
-`localStorage` 및 `sessionStorage`에 대한 [데이터 보호](xref:security/data-protection/introduction)를 제공 하는 NuGet 패키지의 예는 [AspNetCore. ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)입니다.
+`localStorage` 및 `sessionStorage`에 대 한 [데이터 보호](xref:security/data-protection/introduction) 를 제공 하는 NuGet 패키지의 예는 [ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)입니다.
 
 > [!WARNING]
 > 현재는 지원 되지 않는 실험적 패키지를 프로덕션 환경에 적합 하 게 사용할 수 없습니다. `Microsoft.AspNetCore.ProtectedBrowserStorage`
@@ -195,7 +195,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-구성 요소의 매개 변수에 탐색 상태가 포함 된 경우 `ProtectedSessionStore.GetAsync`를 호출 하 고 `OnInitializedAsync`아닌 `OnParametersSetAsync`에 결과를 할당 합니다. `OnInitializedAsync`는 구성 요소가 처음 인스턴스화될 때 한 번만 호출 됩니다. 사용자가 동일한 페이지에 남아 있는 동안 다른 URL로 이동 하는 경우 나중에 `OnInitializedAsync`을 다시 호출 하지 않습니다. 자세한 내용은 <xref:blazor/lifecycle>를 참조하세요.
+구성 요소의 매개 변수에 탐색 상태가 포함 된 경우 `ProtectedSessionStore.GetAsync`를 호출 하 고 `OnInitializedAsync`아닌 `OnParametersSetAsync`에 결과를 할당 합니다. `OnInitializedAsync`는 구성 요소가 처음 인스턴스화될 때 한 번만 호출 됩니다. 사용자가 동일한 페이지에 남아 있는 동안 다른 URL로 이동 하는 경우 나중에 `OnInitializedAsync`을 다시 호출 하지 않습니다. 자세한 내용은 <xref:blazor/lifecycle>을 참조하세요.
 
 > [!WARNING]
 > 이 섹션의 예제는 서버에서 렌더링을 사용 하도록 설정 하지 않은 경우에만 작동 합니다. 렌더링을 사용 하는 경우 다음과 유사한 오류가 생성 됩니다.
