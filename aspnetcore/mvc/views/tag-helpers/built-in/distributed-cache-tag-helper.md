@@ -17,13 +17,13 @@ ms.locfileid: "76809057"
 
 작성자: [Peter Kellner](https://peterkellner.net) 및 [Luke Latham](https://github.com/guardrex)
 
-분산 캐시 태그 도우미는 콘텐츠를 분산 캐시 원본에 캐싱하여 ASP.NET Core 앱 성능을 획기적으로 개선하는 기능을 제공합니다.
+분산 캐시 태그 도우미는 ASP.NET Core 앱의 콘텐츠를 분산 캐시 원본에 캐싱하여 성능을 획기적으로 개선하는 기능을 제공합니다.
 
 태그 도우미에 대한 개요는 <xref:mvc/views/tag-helpers/intro>를 참조하세요.
 
-분산 캐시 태그 도우미는 캐시 태그 도우미와 동일한 기본 클래스에서 상속합니다. 모든 [캐시 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper) 특성이 분산 태그 도우미에 제공됩니다.
+분산 캐시 태그 도우미는 캐시 태그 도우미와 동일한 기본 클래스를 상속받습니다. 모든 [캐시 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper) 특성을 분산 태그 도우미에서 사용할 수 있습니다.
 
-분산 캐시 태그 도우미는 [생성자 주입](xref:fundamentals/dependency-injection#constructor-injection-behavior)을 사용합니다. <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 인터페이스는 분산 캐시 태그 도우미의 생성자에 전달됩니다. `IDistributedCache`의 구체적인 구현이 `Startup.ConfigureServices`(*Startup.cs*)에 생성되지 않은 경우 분산 캐시 태그 도우미는 동일한 메모리 내 공급자를 사용하여 캐시된 데이터를 [캐시 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper)로 저장합니다.
+분산 캐시 태그 도우미는 [생성자 주입](xref:fundamentals/dependency-injection#constructor-injection-behavior)을 사용합니다. 분산 캐시 태그 도우미의 생성자에는 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 인터페이스가 전달됩니다. `Startup.ConfigureServices`(*Startup.cs*)에서 `IDistributedCache`의 구체적 구현이 생성되지 않으면, 분산 캐시 태그 도우미는 [캐시 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper)와 동일한 메모리 내 공급자를 사용하여 캐시된 데이터를 저장합니다.
 
 ## <a name="distributed-cache-tag-helper-attributes"></a>분산 캐시 태그 도우미 특성
 
@@ -40,11 +40,11 @@ ms.locfileid: "76809057"
 * `vary-by-user`
 * `vary-by priority`
 
-분산 캐시 태그 도우미는 캐시 태그 도우미와 동일한 클래스에서 상속합니다. 이러한 특성에 대한 설명은 [캐시 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper)를 참조하세요.
+분산 캐시 태그 도우미는 캐시 태그 도우미와 동일한 클래스를 상속받습니다. 이러한 특성에 대한 설명은 [캐시 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper)를 참조하세요.
 
 ### <a name="name"></a>name
 
-| 특성 유형 | 예제                               |
+| 특성 형식 | 예제                               |
 | -------------- | ------------------------------------- |
 | 문자열         | `my-distributed-cache-unique-key-101` |
 

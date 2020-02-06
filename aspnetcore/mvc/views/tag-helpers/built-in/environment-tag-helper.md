@@ -41,7 +41,7 @@ ms.locfileid: "67856127"
 
 ## <a name="include-and-exclude-attributes"></a>include 및 exclude 특성
 
-`include` 및 `exclude` 특성은 포함되거나 제외될 호스팅 환경 이름을 기반으로 포함된 콘텐츠의 렌더링을 제어합니다.
+`include` & `exclude` 특성은 포함되거나 제외된 호스팅 환경 이름을 기반으로 포함된 콘텐츠의 렌더링 작업을 제어합니다.
 
 ### <a name="include"></a>include
 
