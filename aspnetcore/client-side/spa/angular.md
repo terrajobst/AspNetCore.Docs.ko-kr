@@ -5,14 +5,14 @@ description: Angular 및 Angular CLI에 대한 ASP.NET Core SPA(단일 페이지
 monikerRange: '>= aspnetcore-2.1'
 ms.author: stevesa
 ms.custom: mvc
-ms.date: 03/07/2019
+ms.date: 02/06/2020
 uid: spa/angular
-ms.openlocfilehash: 150b2176eac2e68c1ef9ec6deabb087836ff84ce
-ms.sourcegitcommit: cb6015f737b6a93127016ab0f21b58e34b624ff3
+ms.openlocfilehash: 11ad5d4c7cadcc582b3e288a331569f62f0b98ac
+ms.sourcegitcommit: bd896935e91236e03241f75e6534ad6debcecbbf
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/04/2020
-ms.locfileid: "77004268"
+ms.lasthandoff: 02/06/2020
+ms.locfileid: "77044852"
 ---
 # <a name="use-the-angular-project-template-with-aspnet-core"></a>ASP.NET Core에서 Angular 프로젝트 템플릿 사용
 
@@ -41,7 +41,7 @@ Visual Studio 또는 .NET Core CLI에서 앱을 실행합니다.
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
-`Development` 값을 가진 `ASPNETCORE_Environment` 환경 변수가 있는지 확인합니다. Windows(PowerShell 이외의 프롬프트)에서 `SET ASPNETCORE_Environment=Development`를 실행합니다. Linux 또는 macOS에서 `export ASPNETCORE_Environment=Development`를 실행합니다.
+`ASPNETCORE_Environment` 값을 가진 `Development` 환경 변수가 있는지 확인합니다. Windows(PowerShell 이외의 프롬프트)에서 `SET ASPNETCORE_Environment=Development`를 실행합니다. Linux 또는 macOS에서 `export ASPNETCORE_Environment=Development`를 실행합니다.
 
 [dotnet build](/dotnet/core/tools/dotnet-build)를 실행하여 앱이 제대로 빌드되는지 확인합니다. 첫 번째 실행에서 빌드 프로세스는 npm 종속성을 복원하고 이 작업에는 몇 분 정도 소요될 수 있습니다. 후속 빌드는 훨씬 더 빠릅니다.
 
@@ -53,7 +53,7 @@ Now listening on: http://localhost:<port>
 
 브라우저에서 이 URL로 이동합니다.
 
-앱이 백그라운드에서 Angular CLI 서버의 인스턴스를 시작합니다. 다음과 유사한 메시지가 기록됩니다. *NG Live Development Server는 localhost:&lt;otherport&gt;에서 수신 대기 중이고, http://localhost:&lt ;otherport&gt;/ 에서 브라우저를 엽니다*. 이 메시지 무시&mdash;결합된 ASP.NET Core 및 Angular CLI 앱의 URL이 **아닙니다**.
+앱이 백그라운드에서 Angular CLI 서버의 인스턴스를 시작합니다. 다음과 유사한 메시지가 기록됩니다. *NG Live Development Server는 localhost:&lt;otherport&gt;에서 수신 대기 중이고, http://localhost:&lt;otherport&gt;/에서 브라우저를 엽니다*. 이 메시지 무시&mdash;결합된 ASP.NET Core 및 Angular CLI 앱의 URL이 **아닙니다**.
 
 ---
 
@@ -61,7 +61,7 @@ Now listening on: http://localhost:<port>
 
 ## <a name="add-pages-images-styles-modules-etc"></a>페이지, 이미지, 스타일, 모듈 등을 추가합니다.
 
-*ClientApp* 디렉터리에는 표준 Angular CLI 앱이 포함됩니다. 자세한 내용은 공식 [Angular 설명서](https://https://angular.io)를 참조하세요.
+*ClientApp* 디렉터리에는 표준 Angular CLI 앱이 포함됩니다. 자세한 내용은 공식 [Angular 설명서](https://angular.io)를 참조하세요.
 
 이 템플릿에서 만들어진 Angular 앱과 Angular CLI 자체에서(`ng new`을 통해) 만들어진 앱 간에는 약간 차이가 있지만 앱의 기능은 변경되지 않습니다. 템플릿에서 만들어진 앱에는 [부트스트랩](https://getbootstrap.com/) 기반 레이아웃 및 기본 라우팅 예제가 포함됩니다.
 
@@ -79,7 +79,7 @@ cd ClientApp
 
 ## <a name="install-npm-packages"></a>npm 패키지 설치
 
-타사 npm 패키지를 설치하려면 *ClientApp* 하위 디렉터리에서 명령 프롬프트를 사용합니다. 예를 들면 다음과 같습니다.:
+타사 npm 패키지를 설치하려면 *ClientApp* 하위 디렉터리에서 명령 프롬프트를 사용합니다. 다음은 그 예입니다.
 
 ```console
 cd ClientApp
@@ -98,7 +98,7 @@ npm install --save <package_name>
 
 프로젝트는 ASP.NET Core 앱이 개발 모드에서 시작될 때 백그라운드에서 Angular CLI 서버의 자체 인스턴스를 시작하도록 구성됩니다. 이 방법은 별도의 서버를 수동으로 실행할 필요가 없기 때문에 편리합니다.
 
-이 기본 설정에는 단점이 있습니다. C# 코드를 수정하고 ASP.NET Core 앱을 다시 시작해야 할 때마다 Angular CLI 서버가 다시 시작됩니다. 백업을 시작하려면 10초 정도가 필요합니다. C# 코드를 자주 편집하고 있고 Angular CLI가 다시 시작될 때까지 기다리지 않으려면 ASP.NET Core 프로세스와는 별도로 Angular CLI 서버를 외부에서 실행합니다. 이를 수행하려면:
+이 기본 설정에는 단점이 있습니다. C# 코드를 수정하고 ASP.NET Core 앱을 다시 시작해야 할 때마다 Angular CLI 서버가 다시 시작됩니다. 백업을 시작하려면 10초 정도가 필요합니다. C# 코드를 자주 편집하고 있고 Angular CLI가 다시 시작될 때까지 기다리지 않으려면 ASP.NET Core 프로세스와는 별도로 Angular CLI 서버를 외부에서 실행합니다. 이렇게 하려면 다음을 수행합니다.
 
 1. 명령 프롬프트에서 *ClientApp* 하위 디렉터리로 전환하고 Angular CLI 개발 서버를 시작합니다.
 
@@ -108,7 +108,7 @@ npm install --save <package_name>
     ```
 
     > [!IMPORTANT]
-    > `ng serve`가 아니라 `npm start`를 사용하여 Angular CLI 개발 서버를 시작하면 *package.json*의 구성이 적용됩니다. 추가 매개 변수를 Angular CLI 서버에 전달하려면 *package.json* 파일의 관련 `scripts` 줄에 매개 변수를 추가합니다.
+    > `npm start`가 아니라 `ng serve`를 사용하여 Angular CLI 개발 서버를 시작하면 *package.json*의 구성이 적용됩니다. 추가 매개 변수를 Angular CLI 서버에 전달하려면 `scripts`package.json*파일의 관련* 줄에 매개 변수를 추가합니다.
 
 2. 자체 인스턴스 중 하나를 시작하지 않고 외부 Angular CLI 인스턴스를 사용하도록 ASP.NET Core 앱을 수정합니다. *Startup* 클래스에서 `spa.UseAngularCliServer` 호출을 다음으로 바꿉니다.
 
@@ -148,6 +148,6 @@ options.SupplyData = (context, data) =>
     }
     ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:security/authentication/identity/spa>
