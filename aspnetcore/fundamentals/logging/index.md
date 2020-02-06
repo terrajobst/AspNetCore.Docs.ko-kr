@@ -5,14 +5,14 @@ description: Microsoft.Extensions.Logging NuGet 패키지에서 제공하는 로
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/08/2020
+ms.date: 02/05/2020
 uid: fundamentals/logging/index
-ms.openlocfilehash: f21559e43ae004c81abc18fe8a768d4145ffb184
-ms.sourcegitcommit: 57b85708f4cded99b8f008a69830cb104cd8e879
+ms.openlocfilehash: 3c75fdc940701b8f4d367990b5073861467079b2
+ms.sourcegitcommit: bd896935e91236e03241f75e6534ad6debcecbbf
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/13/2020
-ms.locfileid: "75914236"
+ms.lasthandoff: 02/06/2020
+ms.locfileid: "77044907"
 ---
 # <a name="logging-in-net-core-and-aspnet-core"></a>.NET Core 및 ASP.NET Core의 로깅
 
@@ -70,7 +70,7 @@ ms.locfileid: "75914236"
 기본 프로젝트 템플릿은 다음과 같은 로깅 공급자를 추가하는 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A>를 호출합니다.
 
 * Console
-* Debug
+* 디버그
 * EventSource(ASP.NET Core 2.2부터 시작)
 
 [!code-csharp[](index/samples/2.x/TodoApiSample/Program.cs?name=snippet_TemplateCode&highlight=7)]
@@ -513,7 +513,7 @@ ASP.NET Core는 다음과 같은 로그 수준을 정의하며, 여기에는 가
 
   즉각적인 대응이 필요한 오류를 위한 수준입니다. 예: 데이터 손실 시나리오, 디스크 공간 부족.
 
-로그 수준을 사용하여 특정 스토리지 매체 또는 디스플레이 창에 기록되는 로그 출력의 양을 제어합니다. 예:
+로그 수준을 사용하여 특정 스토리지 매체 또는 디스플레이 창에 기록되는 로그 출력의 양을 제어합니다. 예를 들어:
 
 * 프로덕션:
   * `Trace`~`Information` 수준 로깅은 자세한 로그 메시지를 대량으로 생성합니다. 비용을 관리하고 데이터 저장소 제한을 초과하지 않으려면 `Trace`~`Information` 수준 메시지를 대용량, 저비용 데이터 저장소에 기록합니다.
@@ -728,7 +728,7 @@ System.Exception: Item not found exception.
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[!code-csharp[](index/samples/3.x/TodoApiSample/Program.cs?name=snippet_FilterInCode&highlight=4-5)]
+[!code-csharp[](index/samples/3.x/TodoApiSample/Program.cs?name=snippet_FilterInCode&highlight=2-3)]
 
 ::: moniker-end
 
@@ -746,14 +746,14 @@ System.Exception: Item not found exception.
 
 | 번호 | 공급자      | 다음으로 시작하는 범주...          | 최소 로그 수준 |
 | :----: | ------------- | --------------------------------------- | ----------------- |
-| 1      | Debug         | 모든 범주                          | Information       |
+| 1      | 디버그         | 모든 범주                          | Information       |
 | 2      | Console       | Microsoft.AspNetCore.Mvc.Razor.Internal | Warning           |
-| 3      | Console       | Microsoft.AspNetCore.Mvc.Razor.Razor    | Debug             |
+| 3      | Console       | Microsoft.AspNetCore.Mvc.Razor.Razor    | 디버그             |
 | 4      | Console       | Microsoft.AspNetCore.Mvc.Razor          | Error             |
 | 5      | Console       | 모든 범주                          | 정보       |
-| 6      | 모든 공급자 | 모든 범주                          | Debug             |
-| 7      | 모든 공급자 | 시스템                                  | Debug             |
-| 8      | Debug         | Microsoft                               | Trace             |
+| 6      | 모든 공급자 | 모든 범주                          | 디버그             |
+| 7      | 모든 공급자 | 시스템                                  | 디버그             |
+| 8      | 디버그         | Microsoft                               | Trace             |
 
 `ILogger` 개체를 만들 때 `ILoggerFactory` 개체는 공급자마다 해당 로거에 적용할 단일 규칙을 선택합니다. `ILogger` 인스턴스에서 작성된 모든 메시지는 선택한 규칙에 따라 필터링됩니다. 사용 가능한 규칙 중에서 각 공급자 및 범주 쌍에 적용 가능한 가장 구체적인 규칙이 선택됩니다.
 
@@ -804,7 +804,7 @@ System.Exception: Item not found exception.
 
 ### <a name="filter-functions"></a>필터 함수
 
-필터 함수는 구성 또는 코드를 통해 규칙이 할당되지 않은 모든 공급자와 범주에 대해 호출됩니다. 함수의 코드는 공급자 형식, 범주 및 로그 수준에 액세스할 수 있습니다. 예:
+필터 함수는 구성 또는 코드를 통해 규칙이 할당되지 않은 모든 공급자와 범주에 대해 호출됩니다. 함수의 코드는 공급자 형식, 범주 및 로그 수준에 액세스할 수 있습니다. 예를 들어:
 
 ::: moniker range=">= aspnetcore-3.0"
 

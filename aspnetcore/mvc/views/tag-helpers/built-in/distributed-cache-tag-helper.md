@@ -62,6 +62,7 @@ ms.locfileid: "76809057"
 
 ASP.NET Core에는 두 가지 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 구현이 기본으로 제공됩니다. 하나는 SQL Server 기반이고 다른 하나는 Redis 기반입니다. 이러한 구현의 세부 정보는 <xref:performance/caching/distributed>에서 찾을 수 있습니다. 두 가지 구현 모두 `Startup`에서 `IDistributedCache` 인스턴스를 설정해야 합니다.
 
+
 특정 `IDistributedCache` 구현의 사용과 특별히 관련된 태그 특성은 없습니다.
 
 ## <a name="additional-resources"></a>추가 자료

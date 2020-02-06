@@ -5,17 +5,17 @@ description: Blazor Weasembmbsemboma 및 Blazor Server 호스팅 모델을 이�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2019
+ms.date: 01/31/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 145f385fd6c5d04510a4ac15a41b879591ab5caa
-ms.sourcegitcommit: c81ef12a1b6e6ac838e5e07042717cf492e6635b
+ms.openlocfilehash: 7b4d4aca0bc4650c31bc8e5c4a84ecbad6a49b09
+ms.sourcegitcommit: 0e21d4f8111743bcb205a2ae0f8e57910c3e8c25
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/29/2020
-ms.locfileid: "76885519"
+ms.lasthandoff: 02/05/2020
+ms.locfileid: "77034090"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>ASP.NET Core Blazor 호스팅 모델
 
@@ -35,7 +35,7 @@ Blazor에 대 한 주 호스팅 모델이 브라우저에서 클라이언트 쪽
 
 클라이언트 쪽 호스팅 모델을 사용 하 여 Blazor 앱을 만들려면 **Blazor Weasembomapp** 템플릿 ([dotnet new blazorwasm](/dotnet/core/tools/dotnet-new))을 사용 합니다.
 
-**Blazor WebAssembly 앱** 템플릿을 선택한 후에는 **ASP.NET Core hosted** 확인란을 선택 하 여 ASP.NET Core 백 엔드를 사용 하도록 앱을 구성 하는 옵션이 있습니다 ([dotnet new blazorwasm--호스팅](/dotnet/core/tools/dotnet-new)). ASP.NET Core 앱은 Blazor 앱을 클라이언트에 제공 합니다. Blazor Weasembomapps는 web API 호출 또는 [SignalR](xref:signalr/introduction)를 사용 하 여 네트워크를 통해 서버와 상호 작용할 수 있습니다.
+**Blazor WebAssembly 앱** 템플릿을 선택한 후에는 **ASP.NET Core hosted** 확인란을 선택 하 여 ASP.NET Core 백 엔드를 사용 하도록 앱을 구성 하는 옵션이 있습니다 ([dotnet new blazorwasm--호스팅](/dotnet/core/tools/dotnet-new)). ASP.NET Core 앱은 Blazor 앱을 클라이언트에 제공 합니다. Blazor Weasembomapps는 web API 호출 또는 [SignalR](xref:signalr/introduction) (<xref:tutorials/signalr-blazor-webassembly>)를 사용 하 여 네트워크를 통해 서버와 상호 작용할 수 있습니다.
 
 템플릿에는를 처리 하는 `blazor.webassembly.js` 스크립트가 포함 되어 있습니다.
 
@@ -212,7 +212,7 @@ Razor Pages 앱에서 라우팅할 수 있는 Razor 구성 요소를 지원 하�
    });
    ```
 
-1. 라우팅할 수 있는 구성 요소를 앱에 추가 합니다. 예를 들면 다음과 같습니다.:
+1. 라우팅할 수 있는 구성 요소를 앱에 추가 합니다. 다음은 그 예입니다.
 
    ```razor
    @page "/counter"
@@ -222,7 +222,7 @@ Razor Pages 앱에서 라우팅할 수 있는 Razor 구성 요소를 지원 하�
    ...
    ```
 
-   사용자 지정 폴더를 사용 하 여 앱의 구성 요소를 저장 하는 경우 폴더를 나타내는 네임 스페이스를 *Pages/_ViewImports cshtml* 파일에 추가 합니다. 자세한 내용은 <xref:blazor/components#integrate-components-into-razor-pages-and-mvc-apps>를 참조하세요.
+   사용자 지정 폴더를 사용 하 여 앱의 구성 요소를 저장 하는 경우 폴더를 나타내는 네임 스페이스를 *Pages/_ViewImports cshtml* 파일에 추가 합니다. 자세한 내용은 <xref:blazor/components#integrate-components-into-razor-pages-and-mvc-apps>을 참조하세요.
 
 #### <a name="use-routable-components-in-an-mvc-app"></a>MVC 앱에서 라우팅 가능한 구성 요소 사용
 
@@ -280,7 +280,7 @@ MVC 앱에서 라우팅할 수 있는 Razor 구성 요소를 지원 하려면 �
    });
    ```
 
-1. *페이지* 폴더를 만들고 라우팅할 수 있는 구성 요소를 앱에 추가 합니다. 예를 들면 다음과 같습니다.:
+1. *페이지* 폴더를 만들고 라우팅할 수 있는 구성 요소를 앱에 추가 합니다. 다음은 그 예입니다.
 
    ```razor
    @page "/counter"
@@ -290,7 +290,7 @@ MVC 앱에서 라우팅할 수 있는 Razor 구성 요소를 지원 하려면 �
    ...
    ```
 
-   사용자 지정 폴더를 사용 하 여 앱의 구성 요소를 저장 하는 경우 폴더를 나타내는 네임 스페이스를 *Views/_ViewImports cshtml* 파일에 추가 합니다. 자세한 내용은 <xref:blazor/components#integrate-components-into-razor-pages-and-mvc-apps>를 참조하세요.
+   사용자 지정 폴더를 사용 하 여 앱의 구성 요소를 저장 하는 경우 폴더를 나타내는 네임 스페이스를 *Views/_ViewImports cshtml* 파일에 추가 합니다. 자세한 내용은 <xref:blazor/components#integrate-components-into-razor-pages-and-mvc-apps>을 참조하세요.
 
 ### <a name="circuits"></a>배선
 
@@ -306,7 +306,7 @@ UI 대기 시간은 시작 된 작업에서 UI를 업데이트 하는 데 걸리
 
 개인 회사 네트워크로 제한 된 lob (기간 업무) 앱의 경우 네트워크 대기 시간으로 인 한 대기 시간에 대 한 사용자의 영향은 일반적으로 imperceptible입니다. 인터넷을 통해 배포 된 앱의 경우 특히 사용자가 지리적으로 광범위 하 게 분산 된 경우 대기 시간이 달라질 수 있습니다.
 
-메모리 사용은 앱 대기 시간에도 영향을 주지 않습니다. 메모리 사용이 증가 하면 가비지 수집 또는 페이징 메모리가 디스크에 자주 발생 하므로 앱 성능이 저하 되 고 결과적으로 UI 대기 시간이 증가 합니다. 자세한 내용은 <xref:security/blazor/server>를 참조하세요.
+메모리 사용은 앱 대기 시간에도 영향을 주지 않습니다. 메모리 사용이 증가 하면 가비지 수집 또는 페이징 메모리가 디스크에 자주 발생 하므로 앱 성능이 저하 되 고 결과적으로 UI 대기 시간이 증가 합니다. 자세한 내용은 <xref:security/blazor/server>을 참조하세요.
 
 Blazor 서버 앱은 네트워크 대기 시간 및 메모리 사용을 줄여 UI 대기 시간을 최소화 하도록 최적화 되어야 합니다. 네트워크 대기 시간을 측정 하는 방법에 대 한 자세한 내용은 <xref:host-and-deploy/blazor/server#measure-network-latency>를 참조 하세요. SignalR 및 Blazor에 대 한 자세한 내용은 다음을 참조 하세요.
 
@@ -321,7 +321,7 @@ Blazor 서버 앱은 서버에 대 한 활성 SignalR 연결이 필요 합니다
 
 Blazor 서버 앱은 서버에서 UI 상태를 설정 하는 첫 번째 클라이언트 요청에 대 한 응답으로 prerenders. 클라이언트에서 SignalR 연결을 만들려고 하면 클라이언트는 동일한 서버에 다시 연결 해야 합니다. 두 개 이상의 백 엔드 서버를 사용 하는 Blazor Server 앱은 SignalR 연결에 대 한 *고정 세션* 을 구현 해야 합니다.
 
-Blazor 서버 앱에 [Azure SignalR Service](/azure/azure-signalr)를 사용하는 것이 좋습니다. 이 서비스를 사용하면 Blazor 서버 앱을 다수의 동시 SignalR 연결로 확장할 수 있습니다. 고정 세션은 서비스의 `ServerStickyMode` 옵션 또는 구성 값을 `Required`로 설정 하 여 Azure SignalR 서비스에 대해 사용 하도록 설정 됩니다. 자세한 내용은 <xref:host-and-deploy/blazor/server#signalr-configuration>를 참조하세요.
+Blazor 서버 앱에 [Azure SignalR Service](/azure/azure-signalr)를 사용하는 것이 좋습니다. 이 서비스를 사용하면 Blazor 서버 앱을 다수의 동시 SignalR 연결로 확장할 수 있습니다. 고정 세션은 서비스의 `ServerStickyMode` 옵션 또는 구성 값을 `Required`로 설정 하 여 Azure SignalR 서비스에 대해 사용 하도록 설정 됩니다. 자세한 내용은 <xref:host-and-deploy/blazor/server#signalr-configuration>을 참조하세요.
 
 IIS를 사용하는 경우 애플리케이션 요청 라우팅을 사용하여 고정 세션을 사용할 수 있습니다. 자세한 내용은 [애플리케이션 요청 라우팅을 사용하여 HTTP 부하 분산](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing)을 참조하세요.
 
@@ -365,7 +365,7 @@ UI를 사용자 지정 하려면 _Host의 `<body>`에 `components-reconnect-moda
 * 는 페이지에 미리 렌더링 된 됩니다.
 * 는 페이지에서 정적 HTML로 렌더링 되거나 사용자 에이전트에서 Blazor 앱을 부트스트랩 하는 데 필요한 정보가 포함 되어 있습니다.
 
-| `RenderMode`        | 설명 |
+| `RenderMode`        | Description |
 | ------------------- | ----------- |
 | `ServerPrerendered` | 구성 요소를 정적 HTML로 렌더링 하 고 Blazor Server 앱에 대 한 마커를 포함 합니다. 사용자 에이전트가 시작 되 면이 마커는 Blazor 앱을 부트스트랩 하는 데 사용 됩니다. |
 | `Server`            | Blazor Server 앱에 대 한 마커를 렌더링 합니다. 구성 요소의 출력은 포함 되지 않습니다. 사용자 에이전트가 시작 되 면이 마커는 Blazor 앱을 부트스트랩 하는 데 사용 됩니다. |
@@ -500,7 +500,8 @@ public class WeatherForecastService
 </script>
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:blazor/get-started>
 * <xref:signalr/introduction>
+* <xref:tutorials/signalr-blazor-webassembly>
