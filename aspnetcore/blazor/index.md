@@ -5,17 +5,17 @@ description: ASP.NET Core 앱에서 .NET을 사용하여 대화형 클라이언�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc, seoapril2019
-ms.date: 12/18/2019
+ms.date: 01/31/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: 9f43735fc02ba9f8da4ba27c8b5763d587b5429a
-ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
+ms.openlocfilehash: 02c95c19ebfb5ea6ad722f9d49f4cddc7471f8e1
+ms.sourcegitcommit: 0e21d4f8111743bcb205a2ae0f8e57910c3e8c25
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/17/2020
-ms.locfileid: "76159926"
+ms.lasthandoff: 02/05/2020
+ms.locfileid: "77034086"
 ---
 # <a name="introduction-to-aspnet-core-opno-locblazor"></a>ASP.NET Core Blazor 소개
 
@@ -152,6 +152,7 @@ Blazor는 [.NET Standard 2.0](/dotnet/standard/net-standard)을 구현합니다.
 
 * [WebAssembly](https://webassembly.org/)
 * <xref:blazor/hosting-models>
+* <xref:tutorials/signalr-blazor-webassembly>
 * [C# 가이드](/dotnet/csharp/)
 * <xref:mvc/views/razor>
 * [HTML](https://www.w3.org/html/)
