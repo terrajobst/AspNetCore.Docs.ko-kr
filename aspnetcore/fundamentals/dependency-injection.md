@@ -5,14 +5,14 @@ description: ASP.NET Core에서 종속성 주입을 구현하는 방법 및 사�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/05/2019
+ms.date: 01/30/2020
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: fabc6df07d2d7beaa546b189bb7527f626fc669d
-ms.sourcegitcommit: 47d453f34b6fd0179119c572cb8be64c5365cbb6
+ms.openlocfilehash: a9d268489ebcef69d64c6fd65087bc38a3581821
+ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/02/2020
-ms.locfileid: "75597943"
+ms.lasthandoff: 02/01/2020
+ms.locfileid: "76928415"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>ASP.NET Core에서 종속성 주입
 
@@ -613,6 +613,7 @@ public void ConfigureServices(IServiceCollection services)
 * 자식 컨테이너
 * 사용자 지정 수명 관리
 * 초기화 지연에 대한 `Func<T>` 지원
+* 규칙 기반 등록
 
 다음 타사 컨테이너는 ASP.NET Core 앱에서 사용할 수 있습니다.
 

@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2019
 uid: security/enforcing-ssl
-ms.openlocfilehash: d7d4eece935bd83b69a6a5d81898012b99d73193
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: 59883a8165040fa58edb2f6cf22d4d6b3abf6f3e
+ms.sourcegitcommit: 80286715afb93c4d13c931b008016d6086c0312b
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828908"
+ms.lasthandoff: 02/07/2020
+ms.locfileid: "77074551"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>ASP.NET Core에서 HTTPS 적용
 
@@ -150,7 +150,7 @@ Kestrel 또는 HTTP.SYS를 공용에 지 서버로 사용 하는 경우 Kestrel 
 
 Azure App Service에 배포할 때 [자습서: Azure Web Apps에 기존 사용자 지정 SSL 인증서 바인딩](/azure/app-service/app-service-web-tutorial-custom-ssl)의 지침을 따릅니다.
 
-### <a name="options"></a>Options
+### <a name="options"></a>옵션
 
 다음 강조 표시 된 코드는 [AddHttpsRedirection](/dotnet/api/microsoft.aspnetcore.builder.httpsredirectionservicesextensions.addhttpsredirection) 을 호출 하 여 미들웨어 옵션을 구성 합니다.
 
@@ -261,7 +261,7 @@ ASP.NET Core 2.1 이상에서는 `UseHsts` 확장 메서드를 사용 하 여 HS
 
 처음으로 HTTPS를 구현 하는 프로덕션 환경의 경우 <xref:System.TimeSpan> 방법 중 하나를 사용 하 여 초기 [HstsOptions MaxAge](xref:Microsoft.AspNetCore.HttpsPolicy.HstsOptions.MaxAge*) 을 작은 값으로 설정 합니다. HTTPS 인프라를 HTTP로 되돌려야 하는 경우에는 값을 하루에 한 번 이상으로 설정 해야 합니다. HTTPS 구성의 유지 가능성을 확신 하는 경우 HSTS 최대 기간 값을 늘립니다. 일반적으로 사용 되는 값은 1 년입니다.
 
-다음 예를 참조하십시오.
+코드는 다음과 같습니다.
 
 
 ::: moniker range=">= aspnetcore-3.0"
@@ -313,7 +313,7 @@ HTTPS/HSTS를 옵트아웃 (opt out) 하려면:
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli) 
 
-`--no-https` 옵션을 사용합니다. 예
+`--no-https` 옵션을 사용합니다. 예를 들면 다음과 같습니다.
 
 ```dotnetcli
 dotnet new webapp --no-https
@@ -419,7 +419,7 @@ Visual Studio에서 인증서 문제를 해결 하려면 [IIS Express (dotnet/As
 
 ### <a name="iis-express-ssl-certificate-used-with-visual-studio"></a>Visual Studio에서 사용 되는 SSL 인증서 IIS Express
 
-IIS Express 인증서의 문제를 해결 하려면 Visual Studio 설치 관리자에서 **복구** 를 선택 합니다.
+IIS Express 인증서의 문제를 해결 하려면 Visual Studio 설치 관리자에서 **복구** 를 선택 합니다. 자세한 내용은 [이 GitHub 문제](https://github.com/dotnet/aspnetcore/issues/16892)를 참조하세요.
 
 ## <a name="additional-information"></a>추가 정보
 

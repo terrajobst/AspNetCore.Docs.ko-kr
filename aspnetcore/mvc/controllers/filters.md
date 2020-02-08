@@ -4,14 +4,14 @@ author: Rick-Anderson
 description: 필터 작동 방법 및 ASP.NET Core에서 사용하는 방법을 자세히 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 1/1/2020
+ms.date: 02/04/2020
 uid: mvc/controllers/filters
-ms.openlocfilehash: 759c150e7f35f3f6a52947edc5ef41448dc227fe
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: c4bb9d5746e494106ead6ad5bbf972bbcc5a39f1
+ms.sourcegitcommit: 0e21d4f8111743bcb205a2ae0f8e57910c3e8c25
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828973"
+ms.lasthandoff: 02/05/2020
+ms.locfileid: "77034067"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core에서 필터링
 
@@ -28,13 +28,16 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
 
 사용자 지정 필터를 만들어 횡단 관심사를 처리할 수 있습니다. 횡단 관심사의 사례로는 오류 처리, 캐싱, 구성, 권한 부여 및 로깅을 들 수 있습니다.  필터는 코드 중복을 방지합니다. 예를 들어 오류 처리 예외 필터는 오류 처리를 통합할 수 있습니다.
 
-이 문서는 Razor Pages, API 컨트롤러 및 보기를 사용하는 컨트롤러에 적용됩니다.
+이 문서는 Razor Pages, API 컨트롤러 및 보기를 사용하는 컨트롤러에 적용됩니다. 필터는 작동 시 [Razor 구성 요소](xref:blazor/components)에 직접적인 영향을 주지 않습니다. 필터는 다음과 같은 경우에만 간접적으로 구성 요소에 영향을 줄 수 있습니다.
+
+* 구성 요소가 페이지 또는 보기에 포함되어 있는 경우
+* 페이지 또는 컨트롤러/보기에서 필터를 사용하는 경우
 
 [예제 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/3.1sample)([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="how-filters-work"></a>필터 작동 방법
 
-필터는 ‘필터 파이프라인’이라고도 하는 ‘ASP.NET Core 동작 호출 파이프라인’내에서 실행됩니다.    필터 파이프라인은 ASP.NET Core가 실행할 작업을 선택한 후에 실행됩니다.
+필터는 ‘필터 파이프라인’이라고도 하는 ‘ASP.NET Core 동작 호출 파이프라인’내에서 실행됩니다.   필터 파이프라인은 ASP.NET Core가 실행할 작업을 선택한 후에 실행됩니다.
 
 ![다른 미들웨어, 라우팅 미들웨어, 작업 선택 영역 및 작업 호출 파이프라인을 통해 요청이 처리됩니다. 요청 처리는 응답이 클라이언트에 전송되기 전에 다시 반대로 작업 선택, 라우팅 미들웨어 및 기타 다양한 미들웨어를 통해서 계속됩니다.](filters/_static/filter-pipeline-1.png)
 

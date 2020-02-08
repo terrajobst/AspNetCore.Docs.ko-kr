@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/02/2020
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 5c8e9e58ab222e482ef029f5099d0a8acd07d8a6
-ms.sourcegitcommit: 990a4c2e623c202a27f60bdf3902f250359c13be
+ms.openlocfilehash: 47f465c00138acf434c6ec59f757e37361ad97db
+ms.sourcegitcommit: 0e21d4f8111743bcb205a2ae0f8e57910c3e8c25
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/03/2020
-ms.locfileid: "76972030"
+ms.lasthandoff: 02/05/2020
+ms.locfileid: "77034106"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core 미들웨어
 
@@ -162,6 +162,13 @@ public void Configure(IApplicationBuilder app)
 }
 ```
 
+단일 페이지 애플리케이션의 경우 SPA 미들웨어 <xref:Microsoft.Extensions.DependencyInjection.SpaStaticFilesExtensions.UseSpaStaticFiles*>는 일반적으로 미들웨어 파이프라인에서 마지막으로 나옵니다. SPA 미들웨어가 마지막으로 나오는 이유는 다음과 같습니다.
+
+* 다른 모든 미들웨어가 일치하는 요청에 먼저 응답하도록 합니다.
+* 클라이언트 쪽 라우팅이 있는 SPA가 서버 앱에서 인식할 수 없는 모든 경로에 대해 실행되도록 합니다.
+
+단일 페이지 애플리케이션에 대한 자세한 내용은 [React](xref:spa/react) 및 [Angular](xref: client-side/spa/angular) 프로젝트 템플릿 관련 가이드를 참조하세요.
+
 ## <a name="branch-the-middleware-pipeline"></a>미들웨어 파이프라인 분기
 
 <xref:Microsoft.AspNetCore.Builder.MapExtensions.Map*> 확장은 파이프라인 분기에 규칙으로 사용됩니다. `Map`은 지정된 요청 경로의 일치를 기반으로 요청 파이프라인을 분기합니다. 요청 경로가 지정된 경로로 시작하는 경우 분기가 실행됩니다.
@@ -236,7 +243,8 @@ ASP.NET Core는 다음과 같은 미들웨어 구성 요소와 함께 제공됩�
 | [응답 압축](xref:performance/response-compression) | 응답 압축에 대한 지원을 제공합니다. | 압축이 필요한 구성 요소 이전. |
 | [요청 지역화](xref:fundamentals/localization) | 지역화 지원을 제공합니다. | 지역화 구분 구성 요소 이전. |
 | [엔드포인트 라우팅](xref:fundamentals/routing) | 요청 경로를 정의하고 제한합니다. | 경로 일치에 대한 터미널. |
-| [세션](xref:fundamentals/app-state) | 사용자 세션 관리에 대한 지원을 제공합니다. | 세션이 필요한 구성 요소 이전. |
+| [SPA](xref:Microsoft.AspNetCore.Builder.SpaApplicationBuilderExtensions.UseSpa*) | SPA(단일 페이지 애플리케이션)의 기반 페이지를 반환하여 이 시점부터 미들웨어 체인의 모든 요청을 처리합니다. | 정적 파일, MVC 작업 등을 처리하는 다른 미들웨어가 우선할 수 있도록 이 미들웨어는 체인에서 늦게 배치되어야 합니다.|
+| [세션](xref:fundamentals/app-state) | 사용자 세션 관리에 대한 지원을 제공합니다. | 세션이 필요한 구성 요소 이전. | 
 | [정적 파일](xref:fundamentals/static-files) | 정적 파일 및 디렉터리 검색 처리에 대한 지원을 제공합니다. | 요청이 파일과 일치하는 경우 터미널입니다. |
 | [URL 재작성](xref:fundamentals/url-rewriting) | URL 재작성 및 요청 리디렉션에 대한 지원을 제공합니다. | URL을 사용하는 구성 요소 이전. |
 | [WebSockets](xref:fundamentals/websockets) | WebSocket 프로토콜을 활성화합니다. | WebSocket 요청을 수락하는 데 필요한 구성 요소 이전. |
