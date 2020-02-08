@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/02/2020
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 47f465c00138acf434c6ec59f757e37361ad97db
-ms.sourcegitcommit: 0e21d4f8111743bcb205a2ae0f8e57910c3e8c25
+ms.openlocfilehash: 6698e269e0a6480cd5a03c59f9a19da31e23bf69
+ms.sourcegitcommit: 235623b6e5a5d1841139c82a11ac2b4b3f31a7a9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/05/2020
-ms.locfileid: "77034106"
+ms.lasthandoff: 02/08/2020
+ms.locfileid: "77089151"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core 미들웨어
 
@@ -167,7 +167,7 @@ public void Configure(IApplicationBuilder app)
 * 다른 모든 미들웨어가 일치하는 요청에 먼저 응답하도록 합니다.
 * 클라이언트 쪽 라우팅이 있는 SPA가 서버 앱에서 인식할 수 없는 모든 경로에 대해 실행되도록 합니다.
 
-단일 페이지 애플리케이션에 대한 자세한 내용은 [React](xref:spa/react) 및 [Angular](xref: client-side/spa/angular) 프로젝트 템플릿 관련 가이드를 참조하세요.
+단일 페이지 애플리케이션에 대한 자세한 내용은 [React](xref:spa/react) 및 [Angular](xref:spa/angular) 프로젝트 템플릿 관련 가이드를 참조하세요.
 
 ## <a name="branch-the-middleware-pipeline"></a>미들웨어 파이프라인 분기
 
