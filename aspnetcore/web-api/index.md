@@ -5,14 +5,14 @@ description: ASP.NET Core에서 Web API 만들기에 대한 기본 사항을 알
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 01/27/2020
+ms.date: 02/02/2020
 uid: web-api/index
-ms.openlocfilehash: 8609e2095c202643cdc905cc610298195b654215
-ms.sourcegitcommit: fe41cff0b99f3920b727286944e5b652ca301640
+ms.openlocfilehash: 420fe89fe969c6df5c949f643fe018fff2bc77a5
+ms.sourcegitcommit: bd896935e91236e03241f75e6534ad6debcecbbf
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/29/2020
-ms.locfileid: "76870019"
+ms.lasthandoff: 02/06/2020
+ms.locfileid: "77051461"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>ASP.NET Core로 Web API 만들기
 
@@ -156,7 +156,7 @@ namespace WebApiSample
 
 ## <a name="attribute-routing-requirement"></a>특성 라우팅 요구 사항
 
-`[ApiController]` 특성은 특성 라우팅을 요구합니다. 예:
+`[ApiController]` 특성은 특성 라우팅을 요구합니다. 예를 들어:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -369,7 +369,7 @@ ASP.NET Core MVC는 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInva
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/PetsController.cs?name=snippet_ProblemDetailsStatusCode)]
 
-`NotFound` 메서드는 `ProblemDetails` 본문이 포함된 HTTP 404 상태 코드를 생성합니다. 예:
+`NotFound` 메서드는 `ProblemDetails` 본문이 포함된 HTTP 404 상태 코드를 생성합니다. 예를 들어:
 
 ```json
 {
@@ -397,6 +397,28 @@ ASP.NET Core MVC는 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInva
 [!code-csharp[](index/samples/2.x/2.2/Startup.cs?name=snippet_ConfigureApiBehaviorOptions&highlight=3,8)]
 
 ::: moniker-end
+
+## <a name="define-supported-request-content-types-with-the-consumes-attribute"></a>[사용] 특성을 사용하여 지원되는 요청 콘텐츠 형식 정의
+
+기본적으로 작업은 사용 가능한 모든 요청 콘텐츠 형식을 지원합니다. 예를 들어 앱이 JSON 및 XML [입력 포맷터](xref:mvc/models/model-binding#input-formatters)를 모두 지원하도록 구성된 경우 작업은 `application/json`과 `application/xml`을 비롯한 여러 콘텐츠 형식을 지원합니다.
+
+[[사용]](<xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute>) 특성을 사용하면 작업에서 지원되는 요청 콘텐츠 형식을 제한할 수 있습니다. 하나 이상의 콘텐츠 형식을 지정하여 작업 또는 컨트롤러에 `[Consumes]` 특성을 적용합니다.
+
+```csharp
+[HttpPost]
+[Consumes("application/xml")]
+public IActionResult CreateProduct(Product product)
+```
+
+위의 코드에서 `CreateProduct` 동작은 콘텐츠 형식을 `application/xml`로 지정합니다. 이 작업으로 라우팅되는 요청은 `application/xml`의 `Content-Type` 헤더를 지정해야 합니다. `application/xml`의 `Content-Type` 헤더를 지정하지 않는 요청은 [415 지원되지 않는 미디어 유형](https://developer.mozilla.org/docs/Web/HTTP/Status/415) 응답을 반환합니다.
+
+또한 `[Consumes]` 특성을 사용하면 형식 제약 조건을 적용함으로써 들어오는 요청의 콘텐츠 형식에 따라 작업의 선택에 영향을 줄 수 있습니다. 다음 예제를 참조하세요.
+
+[!code-csharp[](index/samples/3.x/Controllers/ConsumesController.cs?name=snippet_Class)]
+
+위의 코드에서 `ConsumesController`는 `https://localhost:5001/api/Consumes` URL에 전송된 요청을 처리하도록 구성되어 있습니다. 컨트롤러의 작업 `PostJson` 및 `PostForm` 모두 동일한 URL을 사용하여 POST 요청을 처리합니다. 형식 제약 조건을 적용하는 `[Consumes]` 특성이 없으면 모호한 일치 예외가 throw됩니다.
+
+`[Consumes]` 특성이 두 작업 모두에 적용됩니다. `PostJson` 작업은 `application/json`의 `Content-Type` 헤더와 함께 전송된 요청을 처리합니다. `PostForm` 작업은 `application/x-www-form-urlencoded`의 `Content-Type` 헤더와 함께 전송된 요청을 처리합니다. 
 
 ## <a name="additional-resources"></a>추가 자료
 

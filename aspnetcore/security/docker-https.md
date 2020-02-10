@@ -9,12 +9,12 @@ ms.date: 07/05/2019
 no-loc:
 - Let's Encrypt
 uid: security/docker-https
-ms.openlocfilehash: 07e2791e5b26975c71323f8cb41a4b0fbe0cdf11
-ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
+ms.openlocfilehash: 2f338e8883ca926c0f9a7ab339f58b088151cc87
+ms.sourcegitcommit: 235623b6e5a5d1841139c82a11ac2b4b3f31a7a9
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/14/2020
-ms.locfileid: "75952135"
+ms.lasthandoff: 02/08/2020
+ms.locfileid: "77089203"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-over-https"></a>HTTPS를 통해 Docker를 사용 하 여 ASP.NET Core 이미지 호스팅
 
@@ -24,11 +24,11 @@ ASP.NET Core는 [기본적으로 HTTPS를](/aspnet/core/security/enforcing-ssl)�
 
 이 문서에서는 HTTPS를 사용 하 여 미리 작성 된 컨테이너 이미지를 실행 하는 방법을 설명 합니다.
 
-개발 시나리오는 [HTTPS를 통해 Docker를 사용 하 여 ASP.NET Core 응용 프로그램 개발](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/aspnetcore-docker-https-development.md) 을 참조 하세요.
+개발 시나리오는 [HTTPS를 통해 Docker를 사용 하 여 ASP.NET Core 응용 프로그램 개발](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md) 을 참조 하세요.
 
 이 샘플에는 docker [클라이언트](https://www.docker.com/products/docker)의 [docker 17.06](https://docs.docker.com/release-notes/docker-ce) 이상이 필요 합니다.
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 이 문서의 지침 중 일부에는 [.Net Core 2.2 SDK](https://www.microsoft.com/net/download) 이상이 필요 합니다.
 

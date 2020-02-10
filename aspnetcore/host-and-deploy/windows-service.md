@@ -5,14 +5,14 @@ description: Windows 서비스에서 ASP.NET Core 앱을 호스트하는 방법�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/13/2020
+ms.date: 02/06/2020
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: d4b540de50f4153f517f871f037521347fb5eb84
-ms.sourcegitcommit: 990a4c2e623c202a27f60bdf3902f250359c13be
+ms.openlocfilehash: 71f7bf3f5dcf8068d0ada03675ef7948267b79f4
+ms.sourcegitcommit: bd896935e91236e03241f75e6534ad6debcecbbf
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/03/2020
-ms.locfileid: "76972000"
+ms.lasthandoff: 02/06/2020
+ms.locfileid: "77044889"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>Windows 서비스에서 ASP.NET Core 호스트
 
@@ -50,8 +50,10 @@ ASP.NET Core Worker Service 템플릿은 장기간 실행되는 서비스 앱을
 
 * 호스트 수명을 `WindowsServiceLifetime`으로 설정합니다.
 * [콘텐츠 루트](xref:fundamentals/index#content-root)를 [AppContext.BaseDirectory](xref:System.AppContext.BaseDirectory)로 설정합니다. 자세한 내용은 [현재 디렉터리 및 콘텐츠 루트](#current-directory-and-content-root) 섹션을 참조하세요.
-* 애플리케이션 이름을 기본 소스 이름으로 사용하여 이벤트 로그에 대한 로깅을 사용하도록 설정합니다.
-  * *appsettings.Production.json* 파일에서 `Logging:LogLevel:Default` 키를 사용하여 로그 수준을 구성할 수 있습니다.
+* 이벤트 로그에 대한 로깅을 사용하도록 설정합니다.
+  * 애플리케이션 이름이 기본 소스 이름으로 사용됩니다.
+  * 호스트를 빌드하기 위해 `CreateDefaultBuilder`를 호출하는 ASP.NET Core 템플릿 기반 앱에 대한 기본 로그 수준은 *경고* 이상입니다.
+  * *appsettings.json*/*appsettings.{Environment}.json*의 `Logging:EventLog:LogLevel:Default` 키 또는 다른 구성 공급자로 기본 로그 수준을 재정의합니다.
   * 관리자만 새 이벤트 소스를 만들 수 있습니다. 애플리케이션 이름을 사용하여 이벤트 소스를 만들 수 없는 경우 *Application* 소스에 경고가 기록되고 이벤트 로그가 사용하지 않도록 설정됩니다.
 
 *Program.cs*의 `CreateHostBuilder`에서:

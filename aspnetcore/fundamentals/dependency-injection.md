@@ -5,14 +5,14 @@ description: ASP.NET Core에서 종속성 주입을 구현하는 방법 및 사�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/30/2020
+ms.date: 02/05/2020
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: a9d268489ebcef69d64c6fd65087bc38a3581821
-ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
+ms.openlocfilehash: 7c0789dafcb7dfacd15ac448a39bad94649963c8
+ms.sourcegitcommit: bd896935e91236e03241f75e6534ad6debcecbbf
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/01/2020
-ms.locfileid: "76928415"
+ms.lasthandoff: 02/06/2020
+ms.locfileid: "77044921"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>ASP.NET Core에서 종속성 주입
 
@@ -544,7 +544,17 @@ public class Program
 
 ## <a name="scope-validation"></a>범위 유효성 검사
 
-앱이 개발 환경에서 실행 중인 경우 기본 서비스 공급자가 다음을 확인하는 검사를 수행합니다.
+::: moniker range=">= aspnetcore-3.0"
+
+앱이 개발 환경에서 실행 중이고 호스트를 빌드하기 위해 [CreateDefaultBuilder](xref:fundamentals/host/generic-host#default-builder-settings)를 호출하는 경우 기본 서비스 공급자가 다음을 확인하는 검사를 수행합니다.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+앱이 개발 환경에서 실행 중이고 호스트를 빌드하기 위해 [CreateDefaultBuilder](xref:fundamentals/host/web-host#set-up-a-host)를 호출하는 경우 기본 서비스 공급자가 다음을 확인하는 검사를 수행합니다.
+
+::: moniker-end
 
 * '직접으로' in current translation is awkward/inappropriate in terms of grammar.
 * 범위가 지정된 서비스는 직접 또는 간접적으로 싱글톤에 삽입되지 않습니다.

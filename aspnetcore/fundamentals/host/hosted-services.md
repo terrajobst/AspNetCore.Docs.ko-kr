@@ -5,14 +5,14 @@ description: ASP.NET Core에서 호스팅되는 서비스를 사용하는 백그
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/08/2020
+ms.date: 02/05/2020
 uid: fundamentals/host/hosted-services
-ms.openlocfilehash: 49229b5db4d58f25f86425f8622d12c9107262bd
-ms.sourcegitcommit: 57b85708f4cded99b8f008a69830cb104cd8e879
+ms.openlocfilehash: 6a88e56afc4fb1b4f673c362f83d948eda84b930
+ms.sourcegitcommit: bd896935e91236e03241f75e6534ad6debcecbbf
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/13/2020
-ms.locfileid: "75914206"
+ms.lasthandoff: 02/06/2020
+ms.locfileid: "77044880"
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>ASP.NET Core에서 호스팅되는 서비스를 사용하는 백그라운드 작업
 
@@ -265,4 +265,5 @@ ASP.NET Core에서 백그라운드 작업은 *호스팅되는 서비스*로 구�
 ## <a name="additional-resources"></a>추가 자료
 
 * [IHostedService 및 BackgroundService 클래스를 사용하여 마이크로 서비스에서 백그라운드 작업 구현](/dotnet/standard/microservices-architecture/multi-container-microservice-net-applications/background-tasks-with-ihostedservice)
+* [Azure App Service에서 WebJobs로 백그라운드 작업 실행](/azure/app-service/webjobs-create)
 * <xref:System.Threading.Timer>
