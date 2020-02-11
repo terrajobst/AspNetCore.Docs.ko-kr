@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 02/02/2020
 uid: web-api/index
-ms.openlocfilehash: 420fe89fe969c6df5c949f643fe018fff2bc77a5
-ms.sourcegitcommit: bd896935e91236e03241f75e6534ad6debcecbbf
+ms.openlocfilehash: 3dca07db3d6be4ab219a2e05e3adcf1b24ee5c40
+ms.sourcegitcommit: 80286715afb93c4d13c931b008016d6086c0312b
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/06/2020
-ms.locfileid: "77051461"
+ms.lasthandoff: 02/07/2020
+ms.locfileid: "77074512"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>ASP.NET Core로 Web API 만들기
 
@@ -397,6 +397,8 @@ ASP.NET Core MVC는 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInva
 [!code-csharp[](index/samples/2.x/2.2/Startup.cs?name=snippet_ConfigureApiBehaviorOptions&highlight=3,8)]
 
 ::: moniker-end
+
+<a name="consumes"></a>
 
 ## <a name="define-supported-request-content-types-with-the-consumes-attribute"></a>[사용] 특성을 사용하여 지원되는 요청 콘텐츠 형식 정의
 
