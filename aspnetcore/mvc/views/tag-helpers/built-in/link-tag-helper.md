@@ -2,7 +2,7 @@
 title: ASP.NET Core의 링크 태그 도우미
 author: rick-anderson
 ms.author: riande
-description: ASP.NET Core Link 태그 도우미 특성 및 HTML 링크 태그의 동작을 확장할 때 각 특성이 담당하는 역할을 확인합니다.
+description: ASP.NET Core 링크 태그 도우미 특성 및 HTML 링크 태그의 동작을 확장할 때 각 특성이 담당하는 역할을 확인합니다.
 ms.custom: mvc
 ms.date: 09/24/2019
 uid: mvc/views/tag-helpers/builtin-th/link-tag-helper
@@ -17,17 +17,17 @@ ms.locfileid: "76809109"
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[Link 태그 도우미](xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper)는 기본 또는 대체(fallback) CSS 파일에 대한 링크를 생성합니다. 일반적으로 기본 CSS 파일은 [콘텐츠 배달 네트워크](/office365/enterprise/content-delivery-networks#what-exactly-is-a-cdn)(CDN)에 있습니다.
+[링크 태그 도우미](xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper)는 기본 또는 대체 CSS 파일에 대한 링크를 생성합니다. 일반적으로 기본 CSS 파일은 [콘텐츠 배달 네트워크](/office365/enterprise/content-delivery-networks#what-exactly-is-a-cdn)(CDN)에 위치합니다.
 
 [!INCLUDE[](~/includes/cdn.md)]
 
-Link 태그 도우미를 사용하면 CSS 파일에 CDN을 지정하고 CDN을 사용할 수 없는 경우 대체(fallback) 항목을 지정할 수 있습니다. Link 태그 도우미는 로컬 호스팅의 견고성을 사용하여 CDN의 성능 이점을 제공합니다.
+링크 태그 도우미를 사용하면 CSS 파일에 CDN 및 CDN을 사용할 수 없는 경우를 대비한 대체를 지정할 수 있습니다. 링크 태그 도우미는 로컬 호스팅의 견고성과 함께 CDN의 성능 이점을 제공합니다.
 
-다음 Razor 표시는 ASP.NET Core 웹앱 템플릿을 사용하여 만든 레이아웃 파일의 `head` 요소를 보여줍니다.
+다음 Razor 태그는 ASP.NET Core 웹앱 템플릿을 사용하여 만든 레이아웃 파일의 `head` 요소를 보여줍니다.
 
 [!code-html[](link-tag-helper/sample/_Layout.cshtml?name=snippet)]
 
-다음은 위의 코드에서 렌더링된 HTML입니다(비개발 환경에서).
+다음은 이전 코드로부터 렌더링된 HTML입니다(개발 이외의 환경에서).
 
 [!code-csharp[](link-tag-helper/sample/HtmlPage1.html)]
 
