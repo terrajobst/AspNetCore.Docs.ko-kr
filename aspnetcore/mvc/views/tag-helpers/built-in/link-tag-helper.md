@@ -31,7 +31,7 @@ ms.locfileid: "76809109"
 
 [!code-csharp[](link-tag-helper/sample/HtmlPage1.html)]
 
-위의 코드에서 Link 태그 도우미는 `<meta name="x-stylesheet-fallback-test" content="" class="sr-only" />` 요소를 생성하고 요청된 *bootstrap.min.css* 파일을 확인하는 데 사용되는 다음 JavaScript를 CDN에서 사용할 수 있습니다. 이 경우, 태그 도우미가 CDN CSS 파일을 사용하여 `<link />` 요소를 생성하도록 CSS 파일을 사용할 수 있었습니다.
+이전 코드에서 링크 태그 도우미는 `<meta name="x-stylesheet-fallback-test" content="" class="sr-only" />` 요소와 *bootstrap.min.css* 파일을 CDN에서 사용할 수 있는지 확인하는 데 사용되는 이어지는 JavaScript를 생성합니다. 이 경우에는 CSS 파일을 사용할 수 있었기 때문에 태그 도우미가 CDN CSS 파일을 사용하여 `<link />` 요소를 생성했습니다.
 
 ## <a name="commonly-used-link-tag-helper-attributes"></a>일반적으로 사용되는 Link 태그 도우미 특성
 
