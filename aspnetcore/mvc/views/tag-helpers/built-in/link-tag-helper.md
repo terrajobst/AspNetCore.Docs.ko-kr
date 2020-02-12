@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core의 Link 태그 도우미
+title: ASP.NET Core의 링크 태그 도우미
 author: rick-anderson
 ms.author: riande
 description: ASP.NET Core Link 태그 도우미 특성 및 HTML 링크 태그의 동작을 확장할 때 각 특성이 담당하는 역할을 확인합니다.
@@ -13,7 +13,7 @@ ms.contentlocale: ko-KR
 ms.lasthandoff: 01/28/2020
 ms.locfileid: "76809109"
 ---
-# <a name="link-tag-helper-in-aspnet-core"></a>ASP.NET Core의 Link 태그 도우미
+# <a name="link-tag-helper-in-aspnet-core"></a>ASP.NET Core의 링크 태그 도우미
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
