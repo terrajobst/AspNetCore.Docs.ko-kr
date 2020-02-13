@@ -1,8 +1,8 @@
 ---
-title: ASP.NET Core의 Script 태그 도우미
+title: ASP.NET Core의 스크립트 태그 도우미
 author: rick-anderson
 ms.author: riande
-description: ASP.NET Core Script 태그 도우미 특성 및 HTML 스크립트 태그의 동작을 확장할 때 각 특성이 담당하는 역할을 확인합니다.
+description: ASP.NET Core 스크립트 태그 도우미 특성 및 HTML 스크립트 태그의 동작을 확장할 때 각 특성이 담당하는 역할을 확인합니다.
 ms.custom: mvc
 ms.date: 12/02/2019
 uid: mvc/views/tag-helpers/builtin-th/script-tag-helper
@@ -13,7 +13,7 @@ ms.contentlocale: ko-KR
 ms.lasthandoff: 12/03/2019
 ms.locfileid: "74717379"
 ---
-# <a name="script-tag-helper-in-aspnet-core"></a>ASP.NET Core의 Script 태그 도우미
+# <a name="script-tag-helper-in-aspnet-core"></a>ASP.NET Core의 스크립트 태그 도우미
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
