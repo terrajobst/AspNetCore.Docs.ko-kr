@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: 34157a63e43372876a02a858741dfd3a83a063b1
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: f283234ed8a32dc9b7904bc6fee1cc9c04741029
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75354804"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172592"
 ---
 # <a name="add-validation-to-an-aspnet-core-razor-page"></a>ASP.NET Core Razor 페이지에 유효성 검사 추가
 
@@ -21,7 +21,7 @@ ms.locfileid: "75354804"
 
 ## <a name="validation"></a>유효성 검사
 
-소프트웨어 개발의 주요 개념은 [반복 금지](https://wikipedia.org/wiki/Don%27t_repeat_yourself)**라고** **합**니**다**. Razor 페이지는 기능이 한번 정의된 곳의 개발을 원활하게 하고 앱 전체에서 반영됩니다. DRY는 다음 작업에 도움이 됩니다.
+소프트웨어 개발의 주요 개념은 [반복 금지](https://wikipedia.org/wiki/Don%27t_repeat_yourself)라고 합니다. Razor 페이지는 기능이 한번 정의된 곳의 개발을 원활하게 하고 앱 전체에서 반영됩니다. DRY는 다음 작업에 도움이 됩니다.
 
 * 앱에서 코드의 양 감소
 * 코드에 오류 감소 및 쉽게 테스트 및 유지 관리
@@ -161,7 +161,7 @@ public DateTime ReleaseDate { get; set; }
 
 `Movie` 테이블에는 현재 다음과 같은 스키마가 있습니다.
 
-``` sql
+```sql
 CREATE TABLE [dbo].[Movie] (
     [ID]          INT             IDENTITY (1, 1) NOT NULL,
     [Title]       NVARCHAR (MAX)  NULL,
@@ -189,7 +189,7 @@ Update-Database
 
 업데이트된 `Movie` 테이블에는 다음 스키마가 있습니다.
 
-``` sql
+```sql
 CREATE TABLE [dbo].[Movie] (
     [ID]          INT             IDENTITY (1, 1) NOT NULL,
     [Title]       NVARCHAR (60)   NOT NULL,

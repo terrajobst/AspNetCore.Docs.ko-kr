@@ -5,12 +5,12 @@ description: ASP.NET Core 앱에서 Id를 사용 합니다. 암호 요구 사항
 ms.author: riande
 ms.date: 01/15/2020
 uid: security/authentication/identity
-ms.openlocfilehash: 98fee261a741a20eed181ca5b9a4ebb693deeb63
-ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
+ms.openlocfilehash: 164ba10c1d1e2a73ebeb8240293a58f158055699
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76146513"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172537"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>ASP.NET Core Identity 소개
 
@@ -67,7 +67,7 @@ dotnet new webapp --auth Individual -uld -o WebApp1
 
 ---
 
-생성 된 프로젝트는 [Razor 클래스 라이브러리로](xref:razor-pages/ui-class) [ASP.NET Core id](xref:security/authentication/identity) 를 제공 합니다. Id Razor 클래스 라이브러리는 `Identity` 영역이 있는 끝점을 노출 합니다. 예를 들면 다음과 같습니다.:
+생성 된 프로젝트는 [Razor 클래스 라이브러리로](xref:razor-pages/ui-class) [ASP.NET Core id](xref:security/authentication/identity) 를 제공 합니다. Id Razor 클래스 라이브러리는 `Identity` 영역이 있는 끝점을 노출 합니다. 예들 들어 다음과 같습니다.
 
 * /Identity/Account/Login
 * /Identity/Account/Logout
@@ -109,7 +109,7 @@ dotnet ef database update
 
 위의 강조 표시 된 코드는 기본 옵션 값을 사용 하 여 Id를 구성 합니다. 서비스는 [종속성 주입](xref:fundamentals/dependency-injection)을 통해 앱에서 사용할 수 있게 됩니다.
 
-<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*>를 호출 하 여 id를 사용 하도록 설정 합니다. `UseAuthentication`은 요청 파이프라인에 인증 [미들웨어](xref:fundamentals/middleware/index)를 추가합니다.
+<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*>를 호출 하 여 id를 사용 하도록 설정 합니다. `UseAuthentication`는 인증 [미들웨어](xref:fundamentals/middleware/index) 를 요청 파이프라인에 추가 합니다.
 
 [!code-csharp[](identity/sample/WebApp3/Startup.cs?name=snippet_configure&highlight=19)]
 
@@ -132,7 +132,7 @@ dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet aspnet-codegenerator identity -dc WebApp1.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"
 ```
 
-PowerShell은 세미콜론을 명령 구분 기호로 사용 합니다. PowerShell을 사용 하는 경우 파일 목록에서 세미콜론을 이스케이프 하거나 앞의 예제와 같이 큰따옴표 안에 파일 목록을 넣습니다.
+PowerShell은 세미콜론을 명령 구분 기호로 사용합니다. PowerShell을 사용 하는 경우 파일 목록에서 세미콜론을 이스케이프 하거나 앞의 예제와 같이 큰따옴표 안에 파일 목록을 넣습니다.
 
 스 캐 폴딩 Id에 대 한 자세한 내용은 [스 캐 폴드 identity to a Razor project to authorization](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-razor-project-with-authorization)항목을 참조 하세요.
 
@@ -144,7 +144,7 @@ PowerShell은 세미콜론을 명령 구분 기호로 사용 합니다. PowerShe
 
 [!code-csharp[](identity/sample/WebApp3/Areas/Identity/Pages/Account/Register.cshtml.cs?name=snippet&highlight=9)]
 
-사용자가 정상적으로 생성되면 `_signInManager.SignInAsync` 가 호출되어 사용자가 즉시 로그인됩니다.
+사용자가 성공적으로 만들어진 경우 `_signInManager.SignInAsync`에 대 한 호출을 통해 사용자가 로그인 됩니다.
 
 등록 시 즉각적인 로그인을 방지 하는 단계는 [계정 확인](xref:security/authentication/accconfirm#prevent-login-at-registration) 을 참조 하세요.
 
@@ -159,7 +159,7 @@ PowerShell은 세미콜론을 명령 구분 기호로 사용 합니다. PowerShe
 
 [!code-csharp[](identity/sample/WebApp3/Areas/Identity/Pages/Account/Login.cshtml.cs?name=snippet&highlight=10-11)]
 
-기본 `Controller` 클래스는 컨트롤러 메서드에서 액세스할 수 있는 `User` 속성을 노출 합니다. 예를 들어 `User.Claims`를 열거 하 고 권한 부여 결정을 내릴 수 있습니다. 자세한 내용은 <xref:security/authorization/introduction>를 참조하세요.
+기본 `Controller` 클래스는 컨트롤러 메서드에서 액세스할 수 있는 `User` 속성을 노출 합니다. 예를 들어 `User.Claims`를 열거 하 고 권한 부여 결정을 내릴 수 있습니다. 자세한 내용은 <xref:security/authorization/introduction>을 참조하세요.
 
 ### <a name="log-out"></a>로그아웃
 
@@ -194,7 +194,7 @@ Id를 자세히 살펴보려면:
 
 모든 Id 종속 NuGet 패키지는 [ASP.NET Core 공유 프레임 워크](xref:aspnetcore-3.0#use-the-aspnet-core-shared-framework)에 포함 되어 있습니다.
 
-Id에 대 한 기본 패키지는 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/)입니다. ASP.NET Core Identity에 대한 주요 인터페이스 모음을 포함하고 있는 이 패키지는 `Microsoft.AspNetCore.Identity.EntityFrameworkCore`에 포함되어 있습니다.
+Id에 대 한 기본 패키지는 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/)입니다. 이 패키지에는 ASP.NET Core Id의 핵심 인터페이스 집합이 포함 되어 있으며 `Microsoft.AspNetCore.Identity.EntityFrameworkCore`에 포함 되어 있습니다.
 
 ## <a name="migrating-to-aspnet-core-identity"></a>ASP.NET Identity로 마이그레이션하기
 
@@ -287,7 +287,7 @@ dotnet new webapp --auth Individual -o WebApp1
 
 ---
 
-생성 된 프로젝트는 [Razor 클래스 라이브러리로](xref:razor-pages/ui-class) [ASP.NET Core id](xref:security/authentication/identity) 를 제공 합니다. Id Razor 클래스 라이브러리는 `Identity` 영역이 있는 끝점을 노출 합니다. 예를 들면 다음과 같습니다.:
+생성 된 프로젝트는 [Razor 클래스 라이브러리로](xref:razor-pages/ui-class) [ASP.NET Core id](xref:security/authentication/identity) 를 제공 합니다. Id Razor 클래스 라이브러리는 `Identity` 영역이 있는 끝점을 노출 합니다. 예들 들어 다음과 같습니다.
 
 * /Identity/Account/Login
 * /Identity/Account/Logout
@@ -301,7 +301,9 @@ dotnet new webapp --auth Individual -o WebApp1
 
 패키지 관리자 콘솔 (PMC)에서 다음 명령을 실행 합니다.
 
-```PM> Update-Database```
+```powershell
+Update-Database
+```
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -327,7 +329,7 @@ dotnet ef database update
 
 위의 코드는 기본 옵션 값을 사용 하 여 Id를 구성 합니다. 서비스는 [종속성 주입](xref:fundamentals/dependency-injection)을 통해 앱에서 사용할 수 있게 됩니다.
 
-[Useauthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_)을 호출 하 여 id를 사용 하도록 설정 합니다. `UseAuthentication`은 요청 파이프라인에 인증 [미들웨어](xref:fundamentals/middleware/index)를 추가합니다.
+[Useauthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_)을 호출 하 여 id를 사용 하도록 설정 합니다. `UseAuthentication`는 인증 [미들웨어](xref:fundamentals/middleware/index) 를 요청 파이프라인에 추가 합니다.
 
 [!code-csharp[](identity/sample/WebApp1/Startup.cs?name=snippet_configure&highlight=18)]
 
@@ -350,7 +352,7 @@ dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet aspnet-codegenerator identity -dc WebApp1.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"
 ```
 
-PowerShell은 세미콜론을 명령 구분 기호로 사용 합니다. PowerShell을 사용 하는 경우 파일 목록에서 세미콜론을 이스케이프 하거나 앞의 예제와 같이 큰따옴표 안에 파일 목록을 넣습니다.
+PowerShell은 세미콜론을 명령 구분 기호로 사용합니다. PowerShell을 사용 하는 경우 파일 목록에서 세미콜론을 이스케이프 하거나 앞의 예제와 같이 큰따옴표 안에 파일 목록을 넣습니다.
 
 ---
 
@@ -360,9 +362,9 @@ PowerShell은 세미콜론을 명령 구분 기호로 사용 합니다. PowerShe
 
 [!code-csharp[](identity/sample/WebApp1/Areas/Identity/Pages/Account/Register.cshtml.cs?name=snippet&highlight=7)]
 
-사용자가 정상적으로 생성되면 `_signInManager.SignInAsync` 가 호출되어 사용자가 즉시 로그인됩니다.
+사용자가 성공적으로 만들어진 경우 `_signInManager.SignInAsync`에 대 한 호출을 통해 사용자가 로그인 됩니다.
 
-**참고:** 사용자 등록 즉시 로그인을 방지하는 방법은 [계정 확인](xref:security/authentication/accconfirm#prevent-login-at-registration) 을 참고하시기 바랍니다.
+**참고:** 등록 시 즉각적인 로그인을 방지 하는 단계는 [계정 확인](xref:security/authentication/accconfirm#prevent-login-at-registration) 을 참조 하세요.
 
 ### <a name="log-in"></a>로그인
 
@@ -375,7 +377,7 @@ PowerShell은 세미콜론을 명령 구분 기호로 사용 합니다. PowerShe
 
 [!code-csharp[](identity/sample/WebApp1/Areas/Identity/Pages/Account/Login.cshtml.cs?name=snippet&highlight=10-11)]
 
-기본 `Controller` 클래스는 컨트롤러의 메서드에서 접근할 수 있는 `User` 속성을 제공합니다. 예를 들어 `User.Claims`를 열거 하 고 권한 부여 결정을 내릴 수 있습니다. 자세한 내용은 <xref:security/authorization/introduction>를 참조하세요.
+기본 `Controller` 클래스는 컨트롤러 메서드에서 액세스할 수 있는 `User` 속성을 노출 합니다. 예를 들어 `User.Claims`를 열거 하 고 권한 부여 결정을 내릴 수 있습니다. 자세한 내용은 <xref:security/authorization/introduction>을 참조하세요.
 
 ### <a name="log-out"></a>로그아웃
 
@@ -408,7 +410,7 @@ Id를 자세히 살펴보려면:
 
 모든 Id 종속 NuGet 패키지는 [AspNetCore 메타 패키지](xref:fundamentals/metapackage-app)에 포함 되어 있습니다.
 
-Id에 대 한 기본 패키지는 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/)입니다. ASP.NET Core Identity에 대한 주요 인터페이스 모음을 포함하고 있는 이 패키지는 `Microsoft.AspNetCore.Identity.EntityFrameworkCore`에 포함되어 있습니다.
+Id에 대 한 기본 패키지는 [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/)입니다. 이 패키지에는 ASP.NET Core Id의 핵심 인터페이스 집합이 포함 되어 있으며 `Microsoft.AspNetCore.Identity.EntityFrameworkCore`에 포함 되어 있습니다.
 
 ## <a name="migrating-to-aspnet-core-identity"></a>ASP.NET Identity로 마이그레이션하기
 

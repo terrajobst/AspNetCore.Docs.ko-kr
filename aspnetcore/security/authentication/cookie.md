@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core Id 없이 쿠키 인증을 사용 하는 방법에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-ms.date: 08/20/2019
+ms.date: 02/11/2020
 uid: security/authentication/cookie
-ms.openlocfilehash: 288fa4317801544bf0d689280c56836431017c89
-ms.sourcegitcommit: 9e85c2562df5e108d7933635c830297f484bb775
+ms.openlocfilehash: 62a3d247dade6c83156a8378407d5e3891713fd1
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/04/2019
-ms.locfileid: "73462926"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172112"
 ---
 # <a name="use-cookie-authentication-without-aspnet-core-identity"></a>ASP.NET Core Id 없이 쿠키 인증 사용
 
@@ -19,7 +19,7 @@ ms.locfileid: "73462926"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core Id는 로그인을 만들고 유지 관리 하기 위한 완전 한 기능을 갖춘 완전 한 인증 공급자입니다. 그러나 ASP.NET Core Id가 없는 쿠키 기반 인증 공급자를 사용할 수 있습니다. 자세한 내용은 <xref:security/authentication/identity>을 참조하십시오.
+ASP.NET Core Id는 로그인을 만들고 유지 관리 하기 위한 완전 한 기능을 갖춘 완전 한 인증 공급자입니다. 그러나 ASP.NET Core Id가 없는 쿠키 기반 인증 공급자를 사용할 수 있습니다. 자세한 내용은 <xref:security/authentication/identity>을 참조하세요.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/cookie/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
@@ -37,7 +37,7 @@ ASP.NET Core Id는 로그인을 만들고 유지 관리 하기 위한 완전 한
 
 앱의 인증 체계가 앱의 쿠키 인증 체계와 다릅니다. <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*>에 대 한 쿠키 인증 스키마를 제공 하지 않으면 `CookieAuthenticationDefaults.AuthenticationScheme` ("쿠키")를 사용 합니다.
 
-인증 쿠키의 <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> 속성은 기본적으로 `true`로 설정 됩니다. 인증 쿠키는 사이트 방문자가 데이터 수집에 동의한 하지 않은 경우에 허용 됩니다. 자세한 내용은 <xref:security/gdpr#essential-cookies>을 참조하십시오.
+인증 쿠키의 <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> 속성은 기본적으로 `true`로 설정 됩니다. 인증 쿠키는 사이트 방문자가 데이터 수집에 동의한 하지 않은 경우에 허용 됩니다. 자세한 내용은 <xref:security/gdpr#essential-cookies>을 참조하세요.
 
 `Startup.Configure`에서 `UseAuthentication` 및 `UseAuthorization`를 호출 하 여 `HttpContext.User` 속성을 설정 하 고 요청에 대 한 권한 부여 미들웨어를 실행 합니다. `UseEndpoints`를 호출 하기 전에 `UseAuthentication` 및 `UseAuthorization` 메서드를 호출 합니다.
 
@@ -215,7 +215,7 @@ await HttpContext.SignInAsync(
 
 ## <a name="absolute-cookie-expiration"></a>절대 쿠키 만료
 
-<xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties.ExpiresUtc>를 사용 하 여 절대 만료 시간을 설정할 수 있습니다. 영구 쿠키를 만들려면 `IsPersistent`도 설정 해야 합니다. 그렇지 않으면 쿠키는 세션 기반 수명으로 만들어지고이 쿠키는 보유 하 고 있는 인증 티켓 전후에 만료 될 수 있습니다. `ExpiresUtc` 설정 된 경우 <xref:Microsoft.AspNetCore.Builder.CookieAuthenticationOptions>의 <xref:Microsoft.AspNetCore.Builder.CookieAuthenticationOptions.ExpireTimeSpan> 옵션 값 (설정 된 경우)을 재정의 합니다.
+<xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties.ExpiresUtc>를 사용 하 여 절대 만료 시간을 설정할 수 있습니다. 영구 쿠키를 만들려면 `IsPersistent`도 설정 해야 합니다. 그렇지 않으면 쿠키는 세션 기반 수명으로 만들어지고이 쿠키는 보유 하 고 있는 인증 티켓 전후에 만료 될 수 있습니다. `ExpiresUtc` 설정 된 경우 <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions>의 <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions.ExpireTimeSpan> 옵션 값 (설정 된 경우)을 재정의 합니다.
 
 다음 코드 조각에서는 20 분 동안 지속 되는 id 및 해당 쿠키를 만듭니다. 이렇게 하면 이전에 구성 된 슬라이딩 만료 설정이 무시 됩니다.
 
@@ -236,7 +236,7 @@ await HttpContext.SignInAsync(
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core Id는 로그인을 만들고 유지 관리 하기 위한 완전 한 기능을 갖춘 완전 한 인증 공급자입니다. 그러나 ASP.NET Core Id가 없는 쿠키 기반 인증 인증 공급자를 사용할 수 있습니다. 자세한 내용은 <xref:security/authentication/identity>을 참조하십시오.
+ASP.NET Core Id는 로그인을 만들고 유지 관리 하기 위한 완전 한 기능을 갖춘 완전 한 인증 공급자입니다. 그러나 ASP.NET Core Id가 없는 쿠키 기반 인증 인증 공급자를 사용할 수 있습니다. 자세한 내용은 <xref:security/authentication/identity>을 참조하세요.
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/cookie/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
@@ -254,7 +254,7 @@ ASP.NET Core Id는 로그인을 만들고 유지 관리 하기 위한 완전 한
 
 앱의 인증 체계가 앱의 쿠키 인증 체계와 다릅니다. <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*>에 대 한 쿠키 인증 스키마를 제공 하지 않으면 `CookieAuthenticationDefaults.AuthenticationScheme` ("쿠키")를 사용 합니다.
 
-인증 쿠키의 <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> 속성은 기본적으로 `true`로 설정 됩니다. 인증 쿠키는 사이트 방문자가 데이터 수집에 동의한 하지 않은 경우에 허용 됩니다. 자세한 내용은 <xref:security/gdpr#essential-cookies>을 참조하십시오.
+인증 쿠키의 <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> 속성은 기본적으로 `true`로 설정 됩니다. 인증 쿠키는 사이트 방문자가 데이터 수집에 동의한 하지 않은 경우에 허용 됩니다. 자세한 내용은 <xref:security/gdpr#essential-cookies>을 참조하세요.
 
 `Startup.Configure` 메서드에서 `UseAuthentication` 메서드를 호출 하 여 `HttpContext.User` 속성을 설정 하는 인증 미들웨어를 호출 합니다. `UseMvcWithDefaultRoute` 또는 `UseMvc`를 호출 하기 전에 `UseAuthentication` 메서드를 호출 합니다.
 

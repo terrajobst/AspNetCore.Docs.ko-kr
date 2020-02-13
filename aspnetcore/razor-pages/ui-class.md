@@ -6,12 +6,12 @@ ms.author: riande
 ms.date: 01/25/2020
 ms.custom: mvc, seodec18
 uid: razor-pages/ui-class
-ms.openlocfilehash: 1a20b136203921e6a147058eb34da6dcbb7863e7
-ms.sourcegitcommit: 990a4c2e623c202a27f60bdf3902f250359c13be
+ms.openlocfilehash: 8813244ea6d00b170d9f95d12743e9fee38bf810
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/03/2020
-ms.locfileid: "76971990"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172655"
 ---
 # <a name="create-reusable-ui-using-the-razor-class-library-project-in-aspnet-core"></a>ASP.NET Core에서 Razor 클래스 라이브러리 프로젝트를 사용 하 여 다시 사용할 수 있는 UI 만들기
 
@@ -21,7 +21,7 @@ ms.locfileid: "76971990"
 
 Razor 뷰, 페이지, 컨트롤러, 페이지 모델, [razor 구성 요소](xref:blazor/class-libraries), [뷰 구성 요소](xref:mvc/views/view-components)및 데이터 모델을 rcl (razor 클래스 라이브러리)로 빌드할 수 있습니다. RCL은 패키지되고 재사용될 수 있습니다. 애플리케이션은 RCL 포함할 수 있고 RCL이 포함하는 보기 및 페이지를 재정의할 수 있습니다. 보기, 부분 보기 또는 Razor 페이지가 웹앱 및 RCL 모두에 있는 경우 웹앱에서 Razor 태그( *.cshtml* 파일)가 우선적으로 적용됩니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples)([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="create-a-class-library-containing-razor-ui"></a>Razor UI를 포함하는 클래스 라이브러리 만들기
 
@@ -36,7 +36,7 @@ RCL(Razor 클래스 라이브러리) 템플릿은 기본적으로 Razor 구성 �
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-명령줄에서 `dotnet new razorclasslib`을 실행합니다. 예를 들면 다음과 같습니다.:
+명령줄에서 `dotnet new razorclasslib`을 실행합니다. 예들 들어 다음과 같습니다.
 
 ```dotnetcli
 dotnet new razorclasslib -o RazorUIClassLib
@@ -50,7 +50,7 @@ RCL(Razor 클래스 라이브러리) 템플릿은 기본적으로 Razor 구성 �
 
 RCL에 Razor 파일을 추가합니다.
 
-ASP.NET Core 템플릿은 가정 RCL 콘텐츠를 *영역* 폴더입니다. `~/Areas/Pages`대신 `~/Pages`에서 콘텐츠를 노출 하는 RCL을 만들려면 [Rcl 페이지 레이아웃](#rcl-pages-layout) 을 참조 하세요.
+ASP.NET Core 템플릿은 RCL 콘텐츠가 *영역* 폴더에 있다고 가정 합니다. `~/Areas/Pages`대신 `~/Pages`에서 콘텐츠를 노출 하는 RCL을 만들려면 [Rcl 페이지 레이아웃](#rcl-pages-layout) 을 참조 하세요.
 
 ## <a name="reference-rcl-content"></a>RCL 콘텐츠 참조
 
@@ -69,12 +69,12 @@ RCL은 다음에서 참조할 수 있습니다.
 
 ### <a name="rcl-pages-layout"></a>RCL 페이지 레이아웃
 
-RCL 콘텐츠 웹 앱의 일부인 것 처럼 참조 *페이지* 폴더를 다음 파일 구조로 RCL 프로젝트를 만듭니다.
+RCL 콘텐츠를 웹 앱의 *Pages* 폴더에 포함 된 것 처럼 참조 하려면 다음 파일 구조를 사용 하 여 rcl 프로젝트를 만듭니다.
 
 * *RazorUIClassLib/페이지*
-* *RazorUIClassLib/페이지/공유*
+* *RazorUIClassLib/Pages/Shared*
 
-가정 *RazorUIClassLib/페이지/Shared* 부분 파일이 두: *_Header.cshtml* 하 고 *_Footer.cshtml*합니다. 합니다 `<partial>` 태그를 추가할 수 없습니다 *_Layout.cshtml* 파일:
+*RazorUIClassLib/Pages/Shared* 에 두 개의 부분 파일이 포함 되어 있다고 가정 합니다. *_Header. cshtml* 및 *_Footer*. `<partial>` 태그를 *_Layout. cshtml* 파일에 추가할 수 있습니다.
 
 ```cshtml
 <body>
@@ -186,7 +186,7 @@ RCL을 빌드할 때 정적 웹 자산 위치를 설명 하는 매니페스트�
 
 Razor 뷰, 페이지, 컨트롤러, 페이지 모델, [razor 구성 요소](xref:blazor/class-libraries), [뷰 구성 요소](xref:mvc/views/view-components)및 데이터 모델을 rcl (razor 클래스 라이브러리)로 빌드할 수 있습니다. RCL은 패키지되고 재사용될 수 있습니다. 애플리케이션은 RCL 포함할 수 있고 RCL이 포함하는 보기 및 페이지를 재정의할 수 있습니다. 보기, 부분 보기 또는 Razor 페이지가 웹앱 및 RCL 모두에 있는 경우 웹앱에서 Razor 태그( *.cshtml* 파일)가 우선적으로 적용됩니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples)([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="create-a-class-library-containing-razor-ui"></a>Razor UI를 포함하는 클래스 라이브러리 만들기
 
@@ -204,7 +204,7 @@ RCL에는 다음과 같은 프로젝트 파일이 있습니다.
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-명령줄에서 `dotnet new razorclasslib`을 실행합니다. 예를 들면 다음과 같습니다.:
+명령줄에서 `dotnet new razorclasslib`을 실행합니다. 예들 들어 다음과 같습니다.
 
 ```dotnetcli
 dotnet new razorclasslib -o RazorUIClassLib
@@ -216,7 +216,7 @@ dotnet new razorclasslib -o RazorUIClassLib
 
 RCL에 Razor 파일을 추가합니다.
 
-ASP.NET Core 템플릿은 가정 RCL 콘텐츠를 *영역* 폴더입니다. `~/Areas/Pages`대신 `~/Pages`에서 콘텐츠를 노출 하는 RCL을 만들려면 [Rcl 페이지 레이아웃](#rcl-pages-layout) 을 참조 하세요.
+ASP.NET Core 템플릿은 RCL 콘텐츠가 *영역* 폴더에 있다고 가정 합니다. `~/Areas/Pages`대신 `~/Pages`에서 콘텐츠를 노출 하는 RCL을 만들려면 [Rcl 페이지 레이아웃](#rcl-pages-layout) 을 참조 하세요.
 
 ## <a name="reference-rcl-content"></a>RCL 콘텐츠 참조
 
@@ -280,13 +280,13 @@ dotnet new page -n _Message -np -o RazorUIClassLib/Areas/MyFeature/Pages/Shared
 dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
 ```
 
-이전 명령은:
+이전 명령은
 
 * `RazorUIClassLib` RCL을 만듭니다.
 * Razor _Message 페이지를 만들어 RCL에 추가합니다. `-np` 매개 변수는 `PageModel`가 없는 페이지를 만듭니다.
-* 만듭니다는 [_ViewStart.cshtml](xref:mvc/views/layout#running-code-before-each-view) 파일과 RCL에 추가 합니다.
+* [_ViewStart cshtml](xref:mvc/views/layout#running-code-before-each-view) 파일을 만들어 rcl에 추가 합니다.
 
-합니다 *_ViewStart.cshtml* 파일 (다음 섹션에 추가 됩니다)이 표시 되는 Razor 페이지 프로젝트의 레이아웃을 사용 해야 합니다.
+*_ViewStart* 파일은 Razor Pages 프로젝트의 레이아웃 (다음 섹션에 추가 됨)을 사용 하는 데 필요 합니다.
 
 ---
 
@@ -300,13 +300,13 @@ dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
 
   [!code-cshtml[](ui-class/samples/cli/RazorUIClassLib/Areas/MyFeature/Pages/Page1.cshtml)]
 
-  `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`은 부분 보기(`<partial name="_Message" />`)를 사용해야 합니다. `@addTagHelper` 지시문을 포함하지 않고 *_ViewImports.cshtml* 파일을 추가할 수 있습니다. 예를 들면 다음과 같습니다.:
+  `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`은 부분 보기(`<partial name="_Message" />`)를 사용해야 합니다. `@addTagHelper` 지시문을 포함하지 않고 *_ViewImports.cshtml* 파일을 추가할 수 있습니다. 예들 들어 다음과 같습니다.
 
   ```dotnetcli
   dotnet new viewimports -o RazorUIClassLib/Areas/MyFeature/Pages
   ```
 
-  에 대 한 자세한 *_ViewImports.cshtml*를 참조 하세요 [공유 된 지시문 가져오기](xref:mvc/views/layout#importing-shared-directives)
+  _ViewImports에 대 한 자세한 내용은 [공유 지시문 가져오기](xref:mvc/views/layout#importing-shared-directives) 를 참조 하세요 *.*
 
 * 컴파일러 오류가 없는지 확인하려면 클래스 라이브러리를 빌드하십시오.
 
@@ -371,12 +371,12 @@ dotnet run
 
 ### <a name="rcl-pages-layout"></a>RCL 페이지 레이아웃
 
-RCL 콘텐츠 웹 앱의 일부인 것 처럼 참조 *페이지* 폴더를 다음 파일 구조로 RCL 프로젝트를 만듭니다.
+RCL 콘텐츠를 웹 앱의 *Pages* 폴더에 포함 된 것 처럼 참조 하려면 다음 파일 구조를 사용 하 여 rcl 프로젝트를 만듭니다.
 
 * *RazorUIClassLib/페이지*
-* *RazorUIClassLib/페이지/공유*
+* *RazorUIClassLib/Pages/Shared*
 
-가정 *RazorUIClassLib/페이지/Shared* 부분 파일이 두: *_Header.cshtml* 하 고 *_Footer.cshtml*합니다. 합니다 `<partial>` 태그를 추가할 수 없습니다 *_Layout.cshtml* 파일:
+*RazorUIClassLib/Pages/Shared* 에 두 개의 부분 파일이 포함 되어 있다고 가정 합니다. *_Header. cshtml* 및 *_Footer*. `<partial>` 태그를 *_Layout. cshtml* 파일에 추가할 수 있습니다.
 
 ```cshtml
 <body>
@@ -387,3 +387,7 @@ RCL 콘텐츠 웹 앱의 일부인 것 처럼 참조 *페이지* 폴더를 다�
 ```
 
 ::: moniker-end
+
+## <a name="additional-resources"></a>추가 자료
+
+* <xref:blazor/class-libraries>

@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2019
 uid: security/enforcing-ssl
-ms.openlocfilehash: 59883a8165040fa58edb2f6cf22d4d6b3abf6f3e
-ms.sourcegitcommit: 80286715afb93c4d13c931b008016d6086c0312b
+ms.openlocfilehash: 9efd49bb246a10c4eb49fb1bb0374ae9442d55a1
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/07/2020
-ms.locfileid: "77074551"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172621"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>ASP.NET Core에서 HTTPS 적용
 
@@ -313,7 +313,7 @@ HTTPS/HSTS를 옵트아웃 (opt out) 하려면:
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli) 
 
-`--no-https` 옵션을 사용합니다. 예를 들면 다음과 같습니다.
+`--no-https` 옵션을 사용합니다. 예
 
 ```dotnetcli
 dotnet new webapp --no-https
@@ -327,7 +327,7 @@ dotnet new webapp --no-https
 
 .NET Core SDK에는 HTTPS 개발 인증서가 포함 되어 있습니다. 인증서는 첫 실행 환경의 일부로 설치 됩니다. 예를 들어 `dotnet --info`는 다음과 유사한 출력을 생성 합니다.
 
-```text
+```
 ASP.NET Core
 ------------
 Successfully installed the ASP.NET Core HTTPS Development Certificate.
@@ -419,7 +419,7 @@ Visual Studio에서 인증서 문제를 해결 하려면 [IIS Express (dotnet/As
 
 ### <a name="iis-express-ssl-certificate-used-with-visual-studio"></a>Visual Studio에서 사용 되는 SSL 인증서 IIS Express
 
-IIS Express 인증서의 문제를 해결 하려면 Visual Studio 설치 관리자에서 **복구** 를 선택 합니다. 자세한 내용은 [이 GitHub 문제](https://github.com/dotnet/aspnetcore/issues/16892)를 참조하세요.
+IIS Express 인증서의 문제를 해결 하려면 Visual Studio 설치 관리자에서 **복구** 를 선택 합니다. 자세한 내용은 [이 GitHub 이슈](https://github.com/dotnet/aspnetcore/issues/16892)를 참조하세요.
 
 ## <a name="additional-information"></a>추가 정보
 

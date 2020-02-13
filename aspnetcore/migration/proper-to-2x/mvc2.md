@@ -1,17 +1,17 @@
 ---
 title: ASP.NET에서 ASP.NET Core 2.0으로 마이그레이션
 author: isaac2004
-description: 마이그레이션 기존 ASP.NET MVC 또는 Web API 응용 프로그램을 ASP.NET Core 2.0에 대 한 지침을 받습니다.
+description: 기존 ASP.NET MVC 또는 Web API 응용 프로그램을 ASP.NET Core 2.0으로 마이그레이션하기 위한 지침을 받습니다.
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: migration/mvc2
-ms.openlocfilehash: e9dffe8bce502e48a09af04ea0be9952a68aa46f
-ms.sourcegitcommit: 8516b586541e6ba402e57228e356639b85dfb2b9
+ms.openlocfilehash: 11bd3b948afaedc675ac4249099969382683f653
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/11/2019
-ms.locfileid: "67815450"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172446"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core-20"></a>ASP.NET에서 ASP.NET Core 2.0으로 마이그레이션
 
@@ -21,7 +21,7 @@ ms.locfileid: "67815450"
 
 ## <a name="prerequisites"></a>필수 구성 요소
 
-설치할 **하나** 에서 다음의 [.NET 다운로드: Windows](https://www.microsoft.com/net/download/windows):
+[.Net 다운로드: Windows](https://www.microsoft.com/net/download/windows)에서 다음 중 **하나** 를 설치 합니다.
 
 * .NET Core SDK
 * Visual Studio for Windows
@@ -42,7 +42,7 @@ ASP.NET Core 2.0 프로젝트를 사용하면 개발자가 유연하게 .NET Cor
 </ItemGroup>
 ```
 
-메타패키지를 사용하면 메타패키지에서 참조되는 패키지가 앱과 함께 배포되지 않습니다. .NET Core 런타임 저장소에는 이러한 자산이 포함되고 해당 자산은 성능을 개선하도록 미리 컴파일되어 있습니다. 참조 <xref:fundamentals/metapackage> 자세한 세부 정보에 대 한 합니다.
+메타패키지를 사용하면 메타패키지에서 참조되는 패키지가 앱과 함께 배포되지 않습니다. .NET Core 런타임 저장소에는 이러한 자산이 포함되고 해당 자산은 성능을 개선하도록 미리 컴파일되어 있습니다. 자세한 내용은 <xref:fundamentals/metapackage>를 참조 하세요.
 
 ## <a name="project-structure-differences"></a>프로젝트 구조 차이점
 
@@ -60,13 +60,13 @@ ASP.NET Core에는 앱을 부트스트랩하기 위한 새로운 메커니즘이
 
 [!code-csharp[](samples/globalasax-sample.cs)]
 
-이 방법은 구현을 방해하는 방식으로 애플리케이션 및 애플리케이션이 배포되는 서버를 결합합니다. 분리 작업 시 여러 프레임워크를 함께 사용할 수 있는 더 분명한 방식을 제공하도록 [OWIN](https://owin.org/)이 도입되었습니다. OWIN은 필요한 모듈만 추가하기 위한 파이프라인을 제공합니다. 호스팅 환경에서는 [Startup](xref:fundamentals/startup) 함수를 사용하여 서비스 및 앱 요청 파이프라인을 구성합니다. `Startup`은 미들웨어 집합을 응용 프로그램에 등록합니다. 각 요청에 대해 애플리케이션은 기존 처리기 집합에 대한 연결된 목록의 head 포인터를 사용하여 각 미들웨어 구성 요소를 호출합니다. 각 미들웨어 구성 요소는 요청 처리 파이프라인에 하나 이상의 처리기를 추가할 수 있습니다. 이 작업을 수행하려면 목록의 새 헤드인 처리기에 참조를 반환합니다. 각 처리기는 목록의 다음 처리기를 기억하고 호출해야 합니다. ASP.NET Core에서는 애플리케이션에 대한 진입점이 `Startup`이고 더 이상 *Global.asax*에 대한 종속성을 포함하지 않습니다. .NET Framework에서 OWIN을 사용할 경우 다음과 같은 항목을 파이프라인으로 사용합니다.
+이 방법은 구현을 방해하는 방식으로 애플리케이션 및 애플리케이션이 배포되는 서버를 결합합니다. 분리 작업 시 여러 프레임워크를 함께 사용할 수 있는 더 분명한 방식을 제공하도록 [OWIN](https://owin.org/)이 도입되었습니다. OWIN은 필요한 모듈만 추가하기 위한 파이프라인을 제공합니다. 호스팅 환경에서는 [Startup](xref:fundamentals/startup) 함수를 사용하여 서비스 및 앱 요청 파이프라인을 구성합니다. `Startup`은 미들웨어 집합을 애플리케이션에 등록합니다. 각 요청에 대해 애플리케이션은 기존 처리기 집합에 대한 연결된 목록의 head 포인터를 사용하여 각 미들웨어 구성 요소를 호출합니다. 각 미들웨어 구성 요소는 요청 처리 파이프라인에 하나 이상의 처리기를 추가할 수 있습니다. 이 작업을 수행하려면 목록의 새 헤드인 처리기에 참조를 반환합니다. 각 처리기는 목록의 다음 처리기를 기억하고 호출해야 합니다. ASP.NET Core에서는 애플리케이션에 대한 진입점이 `Startup`이고 더 이상 *Global.asax*에 대한 종속성을 포함하지 않습니다. .NET Framework에서 OWIN을 사용할 경우 다음과 같은 항목을 파이프라인으로 사용합니다.
 
 [!code-csharp[](samples/webapi-owin.cs)]
 
 이렇게 하면 기본 경로가 구성되고 기본적으로 JSON을 통한 XmlSerialization으로 설정됩니다. 필요에 따라 이 파이프라인에 다른 미들웨어를 추가합니다(로딩 서비스, 구성 설정, 정적 파일 등).
 
-ASP.NET Core는 비슷한 방법을 사용하지만 항목을 처리하는 데 OWIN을 사용하지 않습니다. 대신에 이 작업에는 *Program.cs* `Main` 메서드(콘솔 응용 프로그램과 비슷함)가 사용되고 `Startup`도 이 작업을 통해 로드됩니다.
+ASP.NET Core는 비슷한 방법을 사용하지만 항목을 처리하는 데 OWIN을 사용하지 않습니다. 대신, 이 작업에는 *Program.cs* `Main` 메서드(콘솔 애플리케이션과 비슷함)가 사용되고 `Startup`도 이 메서드를 통해 로드됩니다.
 
 [!code-csharp[](samples/program.cs)]
 
@@ -76,21 +76,21 @@ ASP.NET Core는 비슷한 방법을 사용하지만 항목을 처리하는 데 O
 * 오류 페이지
 * 정적 파일
 * ASP.NET Core MVC
-* 클레임
+* ID
 
 [!code-csharp[](../../common/samples/WebApplication1/Startup.cs?highlight=8,9,10,14,17,19,21&start=58&end=84)]
 
 호스트와 애플리케이션이 분리되었으므로 나중에 유연하게 다른 플랫폼으로 이동할 수 있습니다.
 
-ASP.NET Core 시작 및 미들웨어에 대 한 자세한 참조를 참조 하세요. <xref:fundamentals/startup>합니다.
+시작 및 미들웨어 ASP.NET Core에 대 한 자세한 내용은 <xref:fundamentals/startup>을 참조 하세요.
 
 ## <a name="storing-configurations"></a>구성 저장
 
-ASP.NET은 정렬 설정을 지원합니다. 예를 들어 이러한 설정은 애플리케이션이 배포된 환경을 지원하는 데 사용됩니다. 일반적으로 모든 사용자 지정 키 값 쌍은 *Web.config* 파일의 `<appSettings>` 섹션에 저장됩니다.
+ASP.NET은 정렬 설정을 지원합니다. 예를 들어 이러한 설정은 애플리케이션이 배포된 환경을 지원하는 데 사용됩니다. 일반적으로 모든 사용자 지정 키 값 쌍은 `<appSettings>`Web.config*파일의* 섹션에 저장됩니다.
 
 [!code-xml[](samples/webconfig-sample.xml)]
 
-애플리케이션은 `System.Configuration` 네임스페이스의 `ConfigurationManager.AppSettings` 컬렉션을 사용하여 이러한 설정을 읽습니다.
+애플리케이션은 `ConfigurationManager.AppSettings` 네임스페이스의 `System.Configuration` 컬렉션을 사용하여 이러한 설정을 읽습니다.
 
 [!code-csharp[](samples/read-webconfig.cs)]
 
@@ -108,20 +108,20 @@ ASP.NET Core는 애플리케이션에 대한 구성 데이터를 파일에 저�
 
 DI([종속성 주입](xref:fundamentals/dependency-injection))를 사용하여 이러한 값으로 서비스를 로드하는 것과 같이 이 방법을 확장하여 프로세스를 더 강력하게 만들 수 있습니다. DI 방법은 강력한 형식의 구성 개체 집합을 제공합니다.
 
-````csharp
+```csharp
 // Assume AppConfiguration is a class representing a strongly-typed version of AppConfiguration section
 services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"));
-````
+```
 
-**참고:** ASP.NET Core 구성에 대 한 자세한 참조를 참조 하세요. <xref:fundamentals/configuration/index>합니다.
+**참고:** ASP.NET Core 구성에 대 한 자세한 참조는 <xref:fundamentals/configuration/index>를 참조 하세요.
 
 ## <a name="native-dependency-injection"></a>네이티브 종속성 주입
 
-크고 확장 가능한 애플리케이션을 빌드할 때 중요한 목표는 구성 요소와 서비스를 느슨하게 결합하는 것입니다. [종속성 주입](xref:fundamentals/dependency-injection) 은이 목표를 위해 널리 사용 되는 기술이 고 ASP.NET Core의 네이티브 구성 요소는 것입니다.
+크고 확장 가능한 애플리케이션을 빌드할 때 중요한 목표는 구성 요소와 서비스를 느슨하게 결합하는 것입니다. [종속성 주입](xref:fundamentals/dependency-injection) 은이를 달성 하는 데 널리 사용 되는 기술 이며 ASP.NET Core의 네이티브 구성 요소입니다.
 
-개발자는 ASP.NET 응용 프로그램에서 종속성 주입을 구현 하는 타사 라이브러리에 의존 합니다. 이러한 라이브러리 중 하나는 Microsoft Patterns & Practices에서 제공하는 [Unity](https://github.com/unitycontainer/unity)입니다.
+ASP.NET 응용 프로그램에서 개발자는 타사 라이브러리를 사용 하 여 종속성 주입을 구현 합니다. 이러한 라이브러리 중 하나는 Microsoft Patterns & Practices에서 제공하는 [Unity](https://github.com/unitycontainer/unity)입니다.
 
-Unity 사용한 종속성 주입 설정의 예로 구현 `IDependencyResolver` 래핑하는 `UnityContainer`:
+Unity를 사용 하 여 종속성 주입을 설정 하는 예는 `UnityContainer`를 래핑하는 `IDependencyResolver`을 구현 하는 것입니다.
 
 [!code-csharp[](samples/sample8.cs)]
 
@@ -133,13 +133,13 @@ Unity 사용한 종속성 주입 설정의 예로 구현 `IDependencyResolver` �
 
 [!code-csharp[](samples/sample5.cs)]
 
-종속성 주입은 ASP.NET Core의 일부를 서비스에 추가할 수 있습니다는 `Startup.ConfigureServices`:
+종속성 주입은 ASP.NET Core의 일부 이므로 `Startup.ConfigureServices`에서 서비스를 추가할 수 있습니다.
 
 [!code-csharp[](samples/configure-services.cs)]
 
 Unity에서 삽입한 것처럼 리포지토리는 어디든지 삽입될 수 있습니다.
 
-ASP.NET Core에서 종속성 주입에 대 한 자세한 내용은 참조 하세요. <xref:fundamentals/dependency-injection>합니다.
+ASP.NET Core의 종속성 주입에 대 한 자세한 내용은 <xref:fundamentals/dependency-injection>을 참조 하세요.
 
 ## <a name="serving-static-files"></a>정적 파일 지원
 
@@ -147,7 +147,7 @@ ASP.NET Core에서 종속성 주입에 대 한 자세한 내용은 참조 하세
 
 ASP.NET에서 정적 파일은 다양한 디렉터리에 저장되고 뷰에서 참조됩니다.
 
-ASP.NET Core에서 정적 파일은 별도로 구성되지 않는 한 “웹 루트”( *&lt;content root&gt;/wwwroot*)에 저장됩니다. 파일은 `Startup.Configure`에서 `UseStaticFiles` 확장 메서드를 호출하는 방식으로 요청 파이프라인에 로드됩니다.
+ASP.NET Core에서 정적 파일은 별도로 구성되지 않는 한 “웹 루트”( *&lt;content root&gt;/wwwroot*)에 저장됩니다. 파일은 `UseStaticFiles`에서 `Startup.Configure` 확장 메서드를 호출하는 방식으로 요청 파이프라인에 로드됩니다.
 
 [!code-csharp[](../../fundamentals/static-files/samples/1x/StartupStaticFiles.cs?highlight=3&name=snippet_ConfigureMethod)]
 
@@ -155,7 +155,7 @@ ASP.NET Core에서 정적 파일은 별도로 구성되지 않는 한 “웹 루
 
 예를 들어 *wwwroot/images* 폴더의 이미지 자산은 `http://<app>/images/<imageFileName>`과 같은 위치의 브라우저에 액세스할 수 있습니다.
 
-**참고:** ASP.NET Core에서 정적 파일 지원에 대 한 자세한 참조를 참조 하세요. <xref:fundamentals/static-files>합니다.
+**참고:** ASP.NET Core에서 정적 파일을 제공 하는 방법에 대 한 자세한 참조는 <xref:fundamentals/static-files>를 참조 하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 
