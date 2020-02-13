@@ -5,12 +5,12 @@ description: 간단한 ASP.NET Core 앱에 모델을 추가합니다.
 ms.author: riande
 ms.date: 01/13/2020
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: 2b656f316a25759456a1d00a9176ea160b2fe5bf
-ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
+ms.openlocfilehash: 3fe22511b4d887177d86013d080f307e16361d5b
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/01/2020
-ms.locfileid: "76928585"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172163"
 ---
 # <a name="add-a-model-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 모델 추가
 
@@ -517,7 +517,7 @@ Visual Studio가 다음을 만듭니다
 
 # <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-``` error
+```
 An unhandled exception occurred while processing the request.
 
 SqlException: Cannot open database "MvcMovieContext-<GUID removed>" requested by the login. The login failed.
@@ -528,7 +528,7 @@ System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity id
 
 # <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
-``` error
+```
 An unhandled exception occurred while processing the request.
 SqliteException: SQLite Error 1: 'no such table: Movie'.
 Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(int rc, sqlite3 db)
@@ -556,7 +556,7 @@ Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(int rc, sqlite3 db)
 
 1. PMC에서 다음 명령을 입력합니다.
 
-   ```PMC
+   ```powershell
    Add-Migration Initial
    Update-Database
    ```
@@ -686,9 +686,9 @@ return View(movie);
 
 보기 파일 맨 위에 있는 `@model` 문을 포함하여 보기에서 필요로 하는 개체 형식을 지정할 수 있습니다. 영화 컨트롤러를 만들 때 *Details.cshtml* 파일의 맨 위에 다음 `@model` 문이 자동으로 포함됩니다.
 
-```HTML
+```cshtml
 @model MvcMovie.Models.Movie
-   ```
+```
 
 이 `@model` 지시문을 사용하면 강력한 형식인 `Model` 개체를 사용하여 컨트롤러가 뷰에 전달된 영화에 액세스할 수 있습니다. 예를 들어 *Details.cshtml* 뷰에서 코드는 각 영화 필드를 강력한 형식의 `Model` 개체를 사용하여 `DisplayNameFor` 및 `DisplayFor` HTML 도우미에 전달합니다. 또한 `Create` 및 `Edit` 메서드와 보기도 `Movie` 모델 개체를 전달합니다.
 

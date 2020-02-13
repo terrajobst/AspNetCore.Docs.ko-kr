@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/15/2019
 uid: mvc/models/validation
-ms.openlocfilehash: b697f02183c76b9a96471a748a86c144fde47bb0
-ms.sourcegitcommit: f259889044d1fc0f0c7e3882df0008157ced4915
+ms.openlocfilehash: a39eeead10849d11349688c42fe814ede9e8a847
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/18/2020
-ms.locfileid: "76268751"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172497"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>ASP.NET Core MVC 및 Razor Pages의 모델 유효성 검사
 
@@ -64,13 +64,13 @@ ms.locfileid: "76268751"
 
 ### <a name="error-messages"></a>오류 메시지
 
-유효성 검사 특성을 사용하여 잘못된 입력에 대해 표시할 오류 메시지를 지정할 수 있습니다. 예:
+유효성 검사 특성을 사용하여 잘못된 입력에 대해 표시할 오류 메시지를 지정할 수 있습니다. 예를 들어:
 
 ```csharp
 [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
 ```
 
-내부적으로 이 특성은 필드 이름에 대한 자리 표시자 및 경우에 따라 추가 자리 표시자를 사용하여 `String.Format`을 호출합니다. 예:
+내부적으로 이 특성은 필드 이름에 대한 자리 표시자 및 경우에 따라 추가 자리 표시자를 사용하여 `String.Format`을 호출합니다. 예를 들어:
 
 ```csharp
 [StringLength(8, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
@@ -84,7 +84,9 @@ ms.locfileid: "76268751"
 
 .NET Core 3.0 이상의 유효성 검사 시스템은 Null을 허용하지 않는 매개 변수 또는 바인딩된 속성을 `[Required]` 특성을 포함한 것처럼 처리합니다. `decimal` 및 `int`와 같은 [값 형식](/dotnet/csharp/language-reference/keywords/value-types)은 Null을 허용하지 않습니다. `Startup.ConfigureServices`에서 <xref:Microsoft.AspNetCore.Mvc.MvcOptions.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes>를 구성하여 이 동작을 사용하지 않도록 설정할 수 있습니다.
 
-``csharp services.AddControllers(옵션 => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true); ...
+```csharp
+services.AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
+```
 
 ### <a name="required-validation-on-the-server"></a>서버에 대한 [Required] 유효성 검사
 
@@ -144,7 +146,7 @@ ms.locfileid: "76268751"
 
 두 개 이상의 추가 필드에 대한 유효성을 검사하려면 해당 필드를 쉼표로 구분된 목록으로 제공합니다. 예를 들어 `MiddleName` 속성을 모델에 추가하려면 `[Remote]` 특성을 다음 예제와 같이 설정합니다.
 
-```cs
+```csharp
 [Remote(action: "VerifyName", controller: "Users", AdditionalFields = nameof(FirstName) + "," + nameof(LastName))]
 public string MiddleName { get; set; }
 ```
@@ -269,7 +271,7 @@ HTML의 `data-` 특성 출력은 `Movie.ReleaseDate` 속성에 대한 유효성 
 
 jQuery 비간섭 유효성 검사는 페이지가 먼저 로드되는 경우 유효성 검사 논리 및 매개 변수를 jQuery 유효성 검사에 전달합니다. 따라서 동적으로 생성된 양식에 대해서는 유효성 검사가 자동으로 작동하지 않습니다. 유효성 검사를 사용하도록 설정하려면 jQuery 비간섭 유효성 검사에서 동적 폼을 만든 후에 즉시 구문 분석하도록 지시합니다. 예를 들어 다음 코드에서는 AJAX를 통해 추가된 양식에 대해 클라이언트 쪽 유효성 검사를 설정합니다.
 
-```js
+```javascript
 $.get({
     url: "https://url/that/returns/a/form",
     dataType: "html",
@@ -292,7 +294,7 @@ $.get({
 
 `$.validator.unobtrusive.parse()` 메서드는 `<input>` 및 `<select/>`와 같은 동적으로 생성된 개별 컨트롤이 아닌 전체 양식에 대해 작용합니다. 양식을 다시 구문 분석하려면 다음 예제와 같이 이전에 양식을 구문 분석했을 때 추가된 유효성 검사 데이터를 제거합니다.
 
-```js
+```javascript
 $.get({
     url: "https://url/that/returns/a/control",
     dataType: "html",
@@ -432,13 +434,13 @@ $.get({
 
 ### <a name="error-messages"></a>오류 메시지
 
-유효성 검사 특성을 사용하여 잘못된 입력에 대해 표시할 오류 메시지를 지정할 수 있습니다. 예:
+유효성 검사 특성을 사용하여 잘못된 입력에 대해 표시할 오류 메시지를 지정할 수 있습니다. 예를 들어:
 
 ```csharp
 [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
 ```
 
-내부적으로 이 특성은 필드 이름에 대한 자리 표시자 및 경우에 따라 추가 자리 표시자를 사용하여 `String.Format`을 호출합니다. 예:
+내부적으로 이 특성은 필드 이름에 대한 자리 표시자 및 경우에 따라 추가 자리 표시자를 사용하여 `String.Format`을 호출합니다. 예를 들어:
 
 ```csharp
 [StringLength(8, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
@@ -510,7 +512,7 @@ $.get({
 
 두 개 이상의 추가 필드에 대한 유효성을 검사하려면 해당 필드를 쉼표로 구분된 목록으로 제공합니다. 예를 들어 `MiddleName` 속성을 모델에 추가하려면 `[Remote]` 특성을 다음 예제와 같이 설정합니다.
 
-```cs
+```csharp
 [Remote(action: "VerifyName", controller: "Users", AdditionalFields = nameof(FirstName) + "," + nameof(LastName))]
 public string MiddleName { get; set; }
 ```
@@ -640,7 +642,7 @@ HTML의 `data-` 특성 출력은 `ReleaseDate` 속성에 대한 유효성 검사
 
 jQuery 비간섭 유효성 검사는 페이지가 먼저 로드되는 경우 유효성 검사 논리 및 매개 변수를 jQuery 유효성 검사에 전달합니다. 따라서 동적으로 생성된 양식에 대해서는 유효성 검사가 자동으로 작동하지 않습니다. 유효성 검사를 사용하도록 설정하려면 jQuery 비간섭 유효성 검사에서 동적 폼을 만든 후에 즉시 구문 분석하도록 지시합니다. 예를 들어 다음 코드에서는 AJAX를 통해 추가된 양식에 대해 클라이언트 쪽 유효성 검사를 설정합니다.
 
-```js
+```javascript
 $.get({
     url: "https://url/that/returns/a/form",
     dataType: "html",
@@ -663,7 +665,7 @@ $.get({
 
 `$.validator.unobtrusive.parse()` 메서드는 `<input>` 및 `<select/>`와 같은 동적으로 생성된 개별 컨트롤이 아닌 전체 양식에 대해 작용합니다. 양식을 다시 구문 분석하려면 다음 예제와 같이 이전에 양식을 구문 분석했을 때 추가된 유효성 검사 데이터를 제거합니다.
 
-```js
+```javascript
 $.get({
     url: "https://url/that/returns/a/control",
     dataType: "html",

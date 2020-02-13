@@ -6,12 +6,12 @@ description: ASP.NET Core 스크립트 태그 도우미 특성 및 HTML 스크�
 ms.custom: mvc
 ms.date: 12/02/2019
 uid: mvc/views/tag-helpers/builtin-th/script-tag-helper
-ms.openlocfilehash: 8a90eb5a74ff3f8178a47c59ad7ba1b6a389ab87
-ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
+ms.openlocfilehash: a037abb6a454e6d06305e7d7f6ecad0c2a0ca717
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/03/2019
-ms.locfileid: "74717379"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77171848"
 ---
 # <a name="script-tag-helper-in-aspnet-core"></a>ASP.NET Core의 스크립트 태그 도우미
 
@@ -25,7 +25,7 @@ Script 태그 도우미를 사용하면 스크립트 파일에 대한 CDN과 CDN
 
 다음 Razor 태그는 대체가 포함된 `script` 요소를 보여 줍니다.
 
-```HTML
+```html
 <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
         asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
         asp-fallback-test="window.jQuery"
@@ -42,11 +42,11 @@ CDN 스크립트 로드를 지연시키기 위해 `<script>` 요소의 [defer](h
 
 ### <a name="asp-fallback-test"></a>asp-fallback-test
 
-대체 테스트에 사용할 기본 스크립트에 정의된 스크립트 메서드입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackTestExpression>을 참조하세요.
+대체 테스트에 사용할 기본 스크립트에 정의된 스크립트 메서드입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackTestExpression>를 참조하세요.
 
 ### <a name="asp-fallback-src"></a>asp-fallback-src
 
-기본 항목에서 오류가 발생하는 경우 대체할 스크립트 태그의 URL입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrc>을 참조하세요.
+기본 항목에서 오류가 발생하는 경우 대체할 스크립트 태그의 URL입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrc>를 참조하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 

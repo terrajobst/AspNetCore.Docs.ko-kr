@@ -5,18 +5,18 @@ description: 웹 페이지에 서버 기반 코드를 포함하는 Razor 태그 
 ms.author: riande
 ms.date: 12/05/2019
 uid: mvc/views/razor
-ms.openlocfilehash: baac0ac38a0781cb9c16689cf3e29526b602d8da
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.openlocfilehash: 2d47fbc33328ab454616bcabab796df089686d79
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74944254"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77171855"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>ASP.NET Core에 대한 Razor 구문 참조
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT), [Luke Latham](https://github.com/guardrex), [Taylor Mullen](https://twitter.com/ntaylormullen) 및 [Dan Vicarel](https://github.com/Rabadash8820)
 
-Razor는 웹 페이지에 서버 기반 코드를 포함하는 태그 구문입니다. Razor 구문은 Razor 태그, C# 및 HTML로 구성됩니다. Razor를 포함하는 파일의 확장명은 일반적으로 *.cshtml*입니다. Razor는 [Razor 구성 요소](xref:blazor/components) 파일(*.razor*)에도 있습니다.
+Razor는 웹 페이지에 서버 기반 코드를 포함하는 태그 구문입니다. Razor 구문은 Razor 태그, C# 및 HTML로 구성됩니다. Razor를 포함하는 파일의 확장명은 일반적으로 *.cshtml*입니다. Razor는 [Razor 구성 요소](xref:blazor/components) 파일( *.razor*)에도 있습니다.
 
 ## <a name="rendering-html"></a>HTML 렌더링
 
@@ -128,7 +128,7 @@ C# `await` 키워드를 제외하고, 암시적 식에 공백이 있으면 안 �
 
 다음과 같은 이유로 HTML은 브라우저에 표시됩니다.
 
-```
+```html
 <span>Hello World</span>
 ```
 
@@ -389,7 +389,7 @@ Razor는 lock 문을 사용하여 중요한 섹션을 보호하는 기능이 있
 }
 ```
 
-### <a name="comments"></a>설명
+### <a name="comments"></a>주석
 
 Razor는 C# 및 HTML 주석을 지원합니다.
 
@@ -487,7 +487,7 @@ Razor 구성 요소의 경우 `@code`는 [`@functions`](#functions)의 별칭이
 
 ::: moniker-end
 
-예:
+예를 들어:
 
 [!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 
@@ -601,7 +601,7 @@ Razor 구성 요소의 경우 `@code`는 [`@functions`](#functions)의 별칭이
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-`@layout` 지시문에서는 Razor 구성 요소의 레이아웃을 지정합니다. 레이아웃 구성 요소는 코드 중복 및 불일치를 방지하는 데 사용됩니다. 자세한 내용은 <xref:blazor/layouts>을 참조하세요.
+`@layout` 지시문에서는 Razor 구성 요소의 레이아웃을 지정합니다. 레이아웃 구성 요소는 코드 중복 및 불일치를 방지하는 데 사용됩니다. 자세한 내용은 <xref:blazor/layouts>를 참조하세요.
 
 ::: moniker-end
 
@@ -677,13 +677,13 @@ Razor Pages 예제는 다음 표에 나와 있습니다.
 `@page` 지시문은 표시되는 파일 형식에 따라 서로 다른 효과를 냅니다. 지시문:
 
 * *.cshtml* 파일에서 파일은 Razor 페이지를 나타냅니다. 자세한 내용은 [사용자 지정 경로](xref:razor-pages/index#custom-routes) 및 <xref:razor-pages/index>를 참조하세요.
-* Razor 구성 요소가 요청을 직접 처리하도록 지정합니다. 자세한 내용은 <xref:blazor/routing>을 참조하세요.
+* Razor 구성 요소가 요청을 직접 처리하도록 지정합니다. 자세한 내용은 <xref:blazor/routing>를 참조하세요.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-*.cshtml* 파일의 첫 번째 줄에 있는 `@page` 지시문은 파일이 Razor 페이지임을 나타냅니다. 자세한 내용은 <xref:razor-pages/index>을 참조하세요.
+*.cshtml* 파일의 첫 번째 줄에 있는 `@page` 지시문은 파일이 Razor 페이지임을 나타냅니다. 자세한 내용은 <xref:razor-pages/index>를 참조하세요.
 
 ::: moniker-end
 
@@ -691,7 +691,7 @@ Razor Pages 예제는 다음 표에 나와 있습니다.
 
 *이 시나리오는 MVC 보기와 Razor Pages(cshtml)에만 적용됩니다.*
 
-`@section` 지시문은 [MVC 및 Razor Pages 레이아웃](xref:mvc/views/layout)과 함께 사용되어 보기나 페이지에서 HTML 페이지의 여러 부분에 있는 콘텐츠를 렌더링할 수 있게 해줍니다. 자세한 내용은 <xref:mvc/views/layout>을 참조하세요.
+`@section` 지시문은 [MVC 및 Razor Pages 레이아웃](xref:mvc/views/layout)과 함께 사용되어 보기나 페이지에서 HTML 페이지의 여러 부분에 있는 콘텐츠를 렌더링할 수 있게 해줍니다. 자세한 내용은 <xref:mvc/views/layout>를 참조하세요.
 
 ### <a name="using"></a>\@using
 
@@ -713,19 +713,19 @@ Razor Pages 예제는 다음 표에 나와 있습니다.
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-`@attributes`를 사용하면 구성 요소가 선언되지 않은 특성을 렌더링할 수 있습니다. 자세한 내용은 <xref:blazor/components#attribute-splatting-and-arbitrary-parameters>을 참조하세요.
+`@attributes`를 사용하면 구성 요소가 선언되지 않은 특성을 렌더링할 수 있습니다. 자세한 내용은 <xref:blazor/components#attribute-splatting-and-arbitrary-parameters>를 참조하세요.
 
 ### <a name="bind"></a>\@bind
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-구성 요소의 데이터 바인딩은 `@bind` 특성을 사용하여 수행됩니다. 자세한 내용은 <xref:blazor/components#data-binding>을 참조하세요.
+구성 요소의 데이터 바인딩은 `@bind` 특성을 사용하여 수행됩니다. 자세한 내용은 <xref:blazor/components#data-binding>를 참조하세요.
 
 ### <a name="onevent"></a>\@on{EVENT}
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-Razor에서는 구성 요소에 대한 이벤트 처리 기능을 제공합니다. 자세한 내용은 <xref:blazor/components#event-handling>을 참조하세요.
+Razor에서는 구성 요소에 대한 이벤트 처리 기능을 제공합니다. 자세한 내용은 <xref:blazor/components#event-handling>를 참조하세요.
 
 ::: moniker-end
 
@@ -751,19 +751,19 @@ Razor에서는 구성 요소에 대한 이벤트 처리 기능을 제공합니�
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-`@key` 지시어 특성을 사용하면 구성 요소 diff 알고리즘이 키의 값에 따라 요소 또는 구성 요소를 유지할 수 있습니다. 자세한 내용은 <xref:blazor/components#use-key-to-control-the-preservation-of-elements-and-components>을 참조하세요.
+`@key` 지시어 특성을 사용하면 구성 요소 diff 알고리즘이 키의 값에 따라 요소 또는 구성 요소를 유지할 수 있습니다. 자세한 내용은 <xref:blazor/components#use-key-to-control-the-preservation-of-elements-and-components>를 참조하세요.
 
 ### <a name="ref"></a>\@ref
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-구성 요소 참조(`@ref`)에서는 해당 인스턴스에 대해 명령을 실행할 수 있도록 구성 요소 인스턴스를 참조하는 방법을 제공합니다. 자세한 내용은 <xref:blazor/components#capture-references-to-components>을 참조하세요.
+구성 요소 참조(`@ref`)에서는 해당 인스턴스에 대해 명령을 실행할 수 있도록 구성 요소 인스턴스를 참조하는 방법을 제공합니다. 자세한 내용은 <xref:blazor/components#capture-references-to-components>를 참조하세요.
 
 ### <a name="typeparam"></a>\@typeparam
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-`@typeparam` 지시문은 생성된 구성 요소 클래스에 대한 제네릭 형식 매개 변수를 선언합니다. 자세한 내용은 <xref:blazor/components#generic-typed-components>을 참조하세요.
+`@typeparam` 지시문은 생성된 구성 요소 클래스에 대한 제네릭 형식 매개 변수를 선언합니다. 자세한 내용은 <xref:blazor/components#generic-typed-components>를 참조하세요.
 
 ::: moniker-end
 
@@ -883,7 +883,7 @@ public class Pet
 ### <a name="razor-keywords"></a>Razor 키워드
 
 * 페이지(ASP.NET Core 2.1 이상 필요)
-* 네임스페이스(namespace)
+* namespace
 * 함수
 * 상속
 * model

@@ -5,14 +5,14 @@ description: 모델 바인딩 및 스트리밍을 사용하여 ASP.NET Core MVC�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/04/2019
+ms.date: 02/11/2020
 uid: mvc/models/file-uploads
-ms.openlocfilehash: b5433576ff3e997e6d80201236be2d8463a52d07
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: 56fd26c1864089558f5cd89f693dc86ea30c3331
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75829233"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172467"
 ---
 # <a name="upload-files-in-aspnet-core"></a>ASP.NET Core에서 파일 업로드
 
@@ -83,7 +83,7 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
   * 서비스는 일반적으로 단일 실패 지점에 노출되는 온-프레미스 솔루션에 비해 향상된 확장성 및 복원력을 제공합니다.
   * 서비스는 대용량 스토리지 인프라 시나리오에서 비용이 더 저렴할 수 있습니다.
 
-  자세한 내용은 [빠른 시작: .NET을 사용하여 개체 저장소에서 BLOB 만들기](/azure/storage/blobs/storage-quickstart-blobs-dotnet)를 참조하세요. 이 항목에서는 <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromFileAsync*>를 보여 주지만, <xref:System.IO.Stream>에서 작업할 때 <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromStreamAsync*>를 사용하여 <xref:System.IO.FileStream>을 Blob Storage에 저장할 수 있습니다.
+  자세한 내용은 [빠른 시작: .NET을 사용하여 개체 저장소에서 BLOB 만들기](/azure/storage/blobs/storage-quickstart-blobs-dotnet)를 참조하세요.
 
 ## <a name="file-upload-scenarios"></a>파일 업로드 시나리오
 
@@ -183,7 +183,7 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
 [Fetch API](https://caniuse.com/#feat=fetch)를 지원하지 않는 클라이언트에 대해 JavaScript로 양식 POST를 수행하려면 다음 방법 중 하나를 사용합니다.
 
 * Fetch Polyfill(예: [window.fetch polyfill (github/fetch)](https://github.com/github/fetch))을 사용합니다.
-* `XMLHttpRequest`을 사용하십시오. 예:
+* `XMLHttpRequest`을 사용하십시오. 예를 들어:
 
   ```javascript
   <script>
@@ -456,7 +456,7 @@ EF Core를 사용하여 데이터베이스에 스트리밍하기 위한 전체 `
 
 ### <a name="file-extension-validation"></a>파일 확장명 유효성 검사
 
-업로드된 파일의 확장명을 허용된 확장명 목록에 따라 확인해야 합니다. 예:
+업로드된 파일의 확장명을 허용된 확장명 목록에 따라 확인해야 합니다. 예를 들어:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -912,7 +912,7 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
 [Fetch API](https://caniuse.com/#feat=fetch)를 지원하지 않는 클라이언트에 대해 JavaScript로 양식 POST를 수행하려면 다음 방법 중 하나를 사용합니다.
 
 * Fetch Polyfill(예: [window.fetch polyfill (github/fetch)](https://github.com/github/fetch))을 사용합니다.
-* `XMLHttpRequest`을 사용하십시오. 예:
+* `XMLHttpRequest`을 사용하십시오. 예를 들어:
 
   ```javascript
   <script>
@@ -1185,7 +1185,7 @@ EF Core를 사용하여 데이터베이스에 스트리밍하기 위한 전체 `
 
 ### <a name="file-extension-validation"></a>파일 확장명 유효성 검사
 
-업로드된 파일의 확장명을 허용된 확장명 목록에 따라 확인해야 합니다. 예:
+업로드된 파일의 확장명을 허용된 확장명 목록에 따라 확인해야 합니다. 예를 들어:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };

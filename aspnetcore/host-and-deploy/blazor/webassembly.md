@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/webassembly
-ms.openlocfilehash: 8ed95cdb96804e08c3f1273bbea8f64a8e4f173c
-ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
+ms.openlocfilehash: 861935ff31652f923399a8aa5ae52baa6b77fa91
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/17/2020
-ms.locfileid: "76160251"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172403"
 ---
 # <a name="host-and-deploy-aspnet-core-opno-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 호스트 및 배포
 
@@ -184,7 +184,7 @@ Docker에서 Nginx를 사용하여 Blazor를 호스트하려면 Dockerfile을 Al
 
 다음 예제와 같이 Dockerfile에 한 줄을 추가합니다.
 
-```Dockerfile
+```dockerfile
 FROM nginx:alpine
 COPY ./bin/Release/netstandard2.0/publish /usr/share/nginx/html/
 COPY nginx.conf /etc/nginx/nginx.conf

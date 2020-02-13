@@ -5,12 +5,12 @@ description: 간단한 ASP.NET Core MVC 앱에 보기 추가
 ms.author: riande
 ms.date: 8/04/2019
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: a25233968f115c6e3a214d97cf2ca5ab81df8d83
-ms.sourcegitcommit: fe41cff0b99f3920b727286944e5b652ca301640
+ms.openlocfilehash: 5510fb6844452571ca764e21640f0bd16444c782
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/29/2020
-ms.locfileid: "76870430"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77171978"
 ---
 # <a name="add-a-view-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 보기 추가
 
@@ -107,7 +107,7 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
 *Views/_ViewStart.cshtml* 파일을 살펴보세요.
 
-```HTML
+```cshtml
 @{
     Layout = "_Layout";
 }
@@ -123,9 +123,9 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
 위의 코드에서 `ViewData["Title"] = "Movie List";`는 `ViewData` 사전의 `Title` 속성을 "Movie List"로 설정합니다. `Title` 속성은 레이아웃 페이지의 `<title>` HTML 요소에서 사용됩니다.
 
-```HTML
+```cshtml
 <title>@ViewData["Title"] - Movie App</title>
-   ```
+```
 
 변경 내용을 저장하고 `https://localhost:{PORT}/HelloWorld`로 이동합니다. 브라우저 제목, 기본 제목 및 작은 제목이 변경된 것을 확인합니다. (브라우저에서 변경 내용을 확인할 수 없는 경우 캐시된 콘텐츠를 보고 있을 수도 있습니다. 브라우저에서 Ctrl+F5 키를 눌러서 로드될 응답을 강제로 서버에서 가져옵니다.) 브라우저 제목은 *Index.cshtml* 보기 템플릿에서 설정한 `ViewData["Title"]` 및 레이아웃 파일에 추가된 추가적인 "- Movie App"으로 만들어집니다.
 
@@ -267,7 +267,7 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
 *Views/_ViewStart.cshtml* 파일을 살펴보세요.
 
-```HTML
+```cshtml
 @{
     Layout = "_Layout";
 }
@@ -283,9 +283,9 @@ Razor를 사용하여 보기 템플릿 파일을 만듭니다. Razor 기반 보�
 
 위의 코드에서 `ViewData["Title"] = "Movie List";`는 `ViewData` 사전의 `Title` 속성을 "Movie List"로 설정합니다. `Title` 속성은 레이아웃 페이지의 `<title>` HTML 요소에서 사용됩니다.
 
-```HTML
+```cshtml
 <title>@ViewData["Title"] - Movie App</title>
-   ```
+```
 
 변경 내용을 저장하고 `https://localhost:{PORT}/HelloWorld`로 이동합니다. 브라우저 제목, 기본 제목 및 작은 제목이 변경된 것을 확인합니다. (브라우저에서 변경 내용을 확인할 수 없는 경우 캐시된 콘텐츠를 보고 있을 수도 있습니다. 브라우저에서 Ctrl+F5 키를 눌러서 로드될 응답을 강제로 서버에서 가져옵니다.) 브라우저 제목은 *Index.cshtml* 보기 템플릿에서 설정한 `ViewData["Title"]` 및 레이아웃 파일에 추가된 추가적인 "- Movie App"으로 만들어집니다.
 

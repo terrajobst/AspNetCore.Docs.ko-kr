@@ -5,18 +5,20 @@ description: 게시된 ASP.NET Core 앱의 디렉터리 구조에 대해 알아�
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/28/2020
+ms.date: 02/07/2020
 uid: host-and-deploy/directory-structure
-ms.openlocfilehash: ba5cb96dfdcdca10034299e3bbe662ce056af791
-ms.sourcegitcommit: fe41cff0b99f3920b727286944e5b652ca301640
+ms.openlocfilehash: c3c05e6bc461ea4a3bfefa2c7a49d524562f7e5b
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/29/2020
-ms.locfileid: "76870268"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172263"
 ---
 # <a name="aspnet-core-directory-structure"></a>ASP.NET Core 디렉터리 구조
 
 [Luke Latham](https://github.com/guardrex)으로
+
+::: moniker range=">= aspnetcore-3.0"
 
 *게시* 디렉터리에는 [dotnet 게시](/dotnet/core/tools/dotnet-publish) 명령에 의해 생성된 앱의 배포 가능한 자산이 포함되어 있습니다. 디렉터리에는 다음이 포함됩니다.
 
@@ -37,7 +39,35 @@ ms.locfileid: "76870268"
 
 *wwwroot* 디렉터리(있는 경우)에는 정적 자산만 포함됩니다.
 
+## <a name="additional-resources"></a>추가 자료
+
+* [dotnet publish](/dotnet/core/tools/dotnet-publish)
+* [.NET Core 애플리케이션 배포](/dotnet/core/deploying/)
+* [대상 프레임워크](/dotnet/standard/frameworks)
+* [.NET Core RID 카탈로그](/dotnet/core/rid-catalog)
+
+::: moniker-end
+
 ::: moniker range="< aspnetcore-3.0"
+
+*게시* 디렉터리에는 [dotnet 게시](/dotnet/core/tools/dotnet-publish) 명령에 의해 생성된 앱의 배포 가능한 자산이 포함되어 있습니다. 디렉터리에는 다음이 포함됩니다.
+
+* 애플리케이션 파일
+* 구성 파일
+* 정적 자산
+* 패키지
+* 런타임([자체 포함 배포](/dotnet/core/deploying/#self-contained-deployments-scd)만 해당)
+
+| 앱 형식 | 디렉터리 구조 |
+| -------- | ------------------- |
+| [프레임워크 종속 실행 파일](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>publish&dagger;<ul><li>Views&dagger; MVC 앱, 뷰가 미리 컴파일되지 않은 경우</li><li>Pages&dagger; MVC 또는 Razor 페이지 앱, 페이지가 미리 컴파일되지 않은 경우</li><li>wwwroot&dagger;</li><li>Windows용 ‘.dll 파일</li><li>{ASSEMBLY NAME}.deps.json</li><li>{ASSEMBLY NAME}.dll</li><li>{ASSEMBLY NAME}{.EXTENSION} *.exe* 확장, macOS 또는 Linux용 확장 없음</li><li>{ASSEMBLY NAME}.pdb</li><li>{ASSEMBLY NAME}.Views.dll</li><li>{ASSEMBLY NAME}.Views.pdb</li><li>{ASSEMBLY NAME}.runtimeconfig.json</li><li>web.config(IIS 배포)</li><li>createdump([Linux createdump 유틸리티](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy))</li><li>’.so(Linux 공유 개체 라이브러리) </li><li>‘.a(macOS 보관)</li><li>’.dylib(macOS 동적 라이브러리) </li></ul></li></ul> |
+| [SCD(자체 포함 배포)](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>publish&dagger;<ul><li>Views&dagger; MVC 앱, 뷰가 미리 컴파일되지 않은 경우</li><li>Pages&dagger; MVC 또는 Razor 페이지 앱, 페이지가 미리 컴파일되지 않은 경우</li><li>wwwroot&dagger;</li><li>*.dll 파일</li><li>{ASSEMBLY NAME}.deps.json</li><li>{ASSEMBLY NAME}.dll</li><li>{ASSEMBLY NAME}.exe</li><li>{ASSEMBLY NAME}.pdb</li><li>{ASSEMBLY NAME}.Views.dll</li><li>{ASSEMBLY NAME}.Views.pdb</li><li>{ASSEMBLY NAME}.runtimeconfig.json</li><li>web.config(IIS 배포)</li></ul></li></ul> |
+
+&dagger;디렉터리를 나타냄
+
+*publish* 디렉터리는 배포의 *애플리케이션 기본 경로*라고도 하는 *콘텐츠 루트 경로*를 나타냅니다. 서버에 배포된 앱의 *publish* 디렉터리에 어떤 이름을 지정하더라도 해당 위치는 호스트된 앱에 대한 서버의 실제 경로로 사용됩니다.
+
+*wwwroot* 디렉터리(있는 경우)에는 정적 자산만 포함됩니다.
 
 *로그* 폴더를 만드는 것은 [ASP.NET Core 모듈 향상된 디버그 로깅](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs)에 유용합니다. `<handlerSetting>` 값에 제공된 경로에 있는 폴더는 모듈에서 자동으로 생성되지 않으며 모듈이 디버그 로그를 작성할 수 있도록 배포에 미리 존재해야 합니다.
 
@@ -62,11 +92,11 @@ ms.locfileid: "76870268"
 
 배포 디렉터리에는 읽기/실행 권한이 필요합니다. *Logs* 디렉터리에는 읽기/쓰기 권한이 필요합니다. 파일이 작성되는 추가 디렉터리에는 읽기/쓰기 권한이 필요합니다.
 
-::: moniker-end
-
 ## <a name="additional-resources"></a>추가 자료
 
 * [dotnet publish](/dotnet/core/tools/dotnet-publish)
 * [.NET Core 애플리케이션 배포](/dotnet/core/deploying/)
 * [대상 프레임워크](/dotnet/standard/frameworks)
 * [.NET Core RID 카탈로그](/dotnet/core/rid-catalog)
+
+::: moniker-end

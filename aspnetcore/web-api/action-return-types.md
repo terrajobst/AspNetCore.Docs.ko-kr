@@ -4,14 +4,14 @@ author: scottaddie
 description: ASP.NET Core 웹 API에서 다양한 컨트롤러 작업 메서드 반환 형식을 사용하는 방법을 알아봅니다.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 09/09/2019
+ms.date: 02/03/2020
 uid: web-api/action-return-types
-ms.openlocfilehash: fe665026fdced22ccf4b4f1ba655e858a7acf016
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: aeea005abfcfd45a6fc94dfddfd65e60ffb15df8
+ms.sourcegitcommit: 235623b6e5a5d1841139c82a11ac2b4b3f31a7a9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74879736"
+ms.lasthandoff: 02/08/2020
+ms.locfileid: "77089190"
 ---
 # <a name="controller-action-return-types-in-aspnet-core-web-api"></a>ASP.NET Core 웹 API에서 컨트롤러 작업 반환 형식
 
@@ -60,8 +60,8 @@ public IEnumerable<Product> GetOnSaleProducts() =>
 ASP.NET Core 2.2 이하 버전에서 데이터베이스에 대한 동기 열거 및 차단 대기를 방지하려면 `ToListAsync`를 호출합니다.
 
 ```csharp
-public IEnumerable<Product> GetOnSaleProducts() =>
-    _context.Products.Where(p => p.IsOnSale).ToListAsync();
+public async Task<IEnumerable<Product>> GetOnSaleProducts() =>
+    await _context.Products.Where(p => p.IsOnSale).ToListAsync();
 ```
 
 ASP.NET Core 3.0 이상에서 작업이 `IAsyncEnumerable<T>`를 반환할 경우:

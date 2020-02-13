@@ -5,12 +5,12 @@ description: 모델-보기-컨트롤러 디자인 패턴을 사용하여 웹앱 
 ms.author: riande
 ms.date: 01/28/2020
 uid: mvc/overview
-ms.openlocfilehash: a147c2aa01f1440f8ac59f73eb7be734193f802a
-ms.sourcegitcommit: fe41cff0b99f3920b727286944e5b652ca301640
+ms.openlocfilehash: a0d1e364bf4cda4ad30c5070c9e61e6972759bb0
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/29/2020
-ms.locfileid: "76869973"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77171818"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>ASP.NET Core MVC 개요
 
@@ -258,5 +258,5 @@ MVC의 Razor 보기는 모델을 기반으로 하는 강력한 형식의 보기�
 ## <a name="additional-resources"></a>추가 자료
 
 * [MyTested.AspNetCore.Mvc - ASP.NET Core MVC용 흐름 테스트 라이브러리](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc) &ndash; 강력한 형식의 단위 테스트 라이브러리로, MVC 및 웹 API 앱 테스트를 위한 흐름 인터페이스를 제공합니다. (*Microsoft에서 유지 관리하거나 지원하지 않습니다.* )
-* [Razor 구성 요소를 Razor Pages 및 MVC 앱에 통합](xref:blazor/hosting-models#integrate-razor-components-into-razor-pages-and-mvc-apps)
+* [Razor 구성 요소를 Razor Pages 및 MVC 앱에 통합](xref:blazor/hosting-model-configuration#integrate-razor-components-into-razor-pages-and-mvc-apps)
 
