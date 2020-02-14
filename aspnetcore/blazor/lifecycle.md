@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/lifecycle
-ms.openlocfilehash: df5bb676df59b538179a69978040521c4ee78ed1
-ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
+ms.openlocfilehash: ecacd0a9728cbefd716e9dc7cd8a8c62f3df6e0d
+ms.sourcegitcommit: d2ba66023884f0dca115ff010bd98d5ed6459283
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76146370"
+ms.lasthandoff: 02/14/2020
+ms.locfileid: "77213391"
 ---
 # <a name="aspnet-core-opno-locblazor-lifecycle"></a>ASP.NET Core Blazor 수명 주기
 
@@ -27,7 +27,7 @@ Blazor 프레임 워크는 동기 및 비동기 수명 주기 메서드를 포�
 
 ### <a name="component-initialization-methods"></a>구성 요소 초기화 메서드
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync*> 및 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized*>는 부모 구성 요소에서 초기 매개 변수를 받은 후 구성 요소가 초기화 될 때 호출 됩니다. 구성 요소가 비동기 작업을 수행할 때 `OnInitializedAsync`를 사용 하 고 작업이 완료 되 면 새로 고쳐야 합니다. 이러한 메서드는 구성 요소가 처음 인스턴스화될 때 한 번만 호출 됩니다.
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync*> 및 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized*>는 부모 구성 요소에서 초기 매개 변수를 받은 후 구성 요소가 초기화 될 때 호출 됩니다. 구성 요소가 비동기 작업을 수행할 때 `OnInitializedAsync`를 사용 하 고 작업이 완료 되 면 새로 고쳐야 합니다.
 
 동기 작업의 경우 `OnInitialized`를 재정의 합니다.
 
@@ -46,6 +46,15 @@ protected override async Task OnInitializedAsync()
     await ...
 }
 ```
+
+콘텐츠 호출을 미리 [렌더링](xref:blazor/hosting-model-configuration#render-mode) 하는 Blazor Server 앱 `OnInitializedAsync` **_두 번_** 입니다.
+
+* 구성 요소가 처음에 페이지의 일부로 정적으로 렌더링 되 면이 고,
+* 브라우저에서 서버에 다시 연결을 설정 하는 두 번째 시간입니다.
+
+`OnInitializedAsync`의 개발자 코드가 두 번 실행 되는 것을 방지 하려면 사전 [렌더링 후 상태 저장](#stateful-reconnection-after-prerendering) 다시 연결 섹션을 참조 하세요.
+
+Blazor Server 앱은 렌더링 되지 않지만 브라우저와의 연결이 설정 되지 않았기 때문에 JavaScript를 호출 하는 등의 특정 작업을 수행할 수 없습니다. 미리 렌더링 된 때 구성 요소를 다르게 렌더링 해야 할 수 있습니다. 자세한 내용은 [앱이 사전 렌더링 되는 경우 검색](#detect-when-the-app-is-prerendering) 섹션을 참조 하세요.
 
 ### <a name="before-parameters-are-set"></a>매개 변수가 설정 되기 전에
 
@@ -183,3 +192,67 @@ Blazor 서버 템플릿의 *Pages/FetchData. razor* :
 ## <a name="handle-errors"></a>오류 처리
 
 수명 주기 메서드 실행 중 오류를 처리 하는 방법에 대 한 자세한 내용은 <xref:blazor/handle-errors#lifecycle-methods>를 참조 하세요.
+
+## <a name="stateful-reconnection-after-prerendering"></a>렌더링 후 상태 저장 다시 연결
+
+Blazor Server 앱에서 `RenderMode` `ServerPrerendered`될 때 구성 요소는 초기에 페이지의 일부로 정적으로 렌더링 됩니다. 브라우저에서 서버로 다시 연결 하면 구성 요소가 *다시*렌더링 되 고 구성 요소가 대화형으로 설정 됩니다. 구성 요소를 초기화 하는 [Oninitialized {Async}](xref:blazor/lifecycle#component-initialization-methods) 주기 방법이 있는 경우 메서드는 *두 번*실행 됩니다.
+
+* 구성 요소가 정적으로 미리 렌더링 된 된 경우
+* 서버 연결이 설정 된 후
+
+이로 인해 구성 요소가 최종적으로 렌더링 될 때 UI에 표시 되는 데이터가 크게 변경 될 수 있습니다.
+
+Blazor Server 앱에서 이중 렌더링 시나리오를 방지 하려면 다음을 수행 합니다.
+
+* 렌더링 중에 상태를 캐시 하 고 앱이 다시 시작 된 후 상태를 검색 하는 데 사용할 수 있는 식별자를 전달 합니다.
+* 렌더링 중에 식별자를 사용 하 여 구성 요소 상태를 저장 합니다.
+* 렌더링 후 식별자를 사용 하 여 캐시 된 상태를 검색 합니다.
+
+다음 코드는 이중 렌더링을 방지 하는 템플릿 기반 Blazor 서버 앱에서 업데이트 된 `WeatherForecastService`를 보여 줍니다.
+
+```csharp
+public class WeatherForecastService
+{
+    private static readonly string[] _summaries = new[]
+    {
+        "Freezing", "Bracing", "Chilly", "Cool", "Mild",
+        "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+    };
+    
+    public WeatherForecastService(IMemoryCache memoryCache)
+    {
+        MemoryCache = memoryCache;
+    }
+    
+    public IMemoryCache MemoryCache { get; }
+
+    public Task<WeatherForecast[]> GetForecastAsync(DateTime startDate)
+    {
+        return MemoryCache.GetOrCreateAsync(startDate, async e =>
+        {
+            e.SetOptions(new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = 
+                    TimeSpan.FromSeconds(30)
+            });
+
+            var rng = new Random();
+
+            await Task.Delay(TimeSpan.FromSeconds(10));
+
+            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            {
+                Date = startDate.AddDays(index),
+                TemperatureC = rng.Next(-20, 55),
+                Summary = _summaries[rng.Next(_summaries.Length)]
+            }).ToArray();
+        });
+    }
+}
+```
+
+`RenderMode`에 대 한 자세한 내용은 <xref:blazor/hosting-model-configuration#render-mode>을 참조 하세요.
+
+## <a name="detect-when-the-app-is-prerendering"></a>앱이 사전 렌더링 되는 경우 검색
+
+[!INCLUDE[](~/includes/blazor-prerendering.md)]

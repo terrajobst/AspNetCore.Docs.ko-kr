@@ -5,17 +5,17 @@ description: Blazor apps에서 JavaScript의 .NET 및 .NET 메서드에서 JavaS
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2019
+ms.date: 01/23/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/javascript-interop
-ms.openlocfilehash: 4edef123bc1fe41845b8060b9c3b8e77ffd2969d
-ms.sourcegitcommit: c81ef12a1b6e6ac838e5e07042717cf492e6635b
+ms.openlocfilehash: c4f2444b60fc2d3a8af893df379cf62636a7bdd5
+ms.sourcegitcommit: d2ba66023884f0dca115ff010bd98d5ed6459283
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/29/2020
-ms.locfileid: "76885474"
+ms.lasthandoff: 02/14/2020
+ms.locfileid: "77213365"
 ---
 # <a name="aspnet-core-opno-locblazor-javascript-interop"></a>JavaScript interop Blazor ASP.NET Core
 
@@ -25,7 +25,7 @@ ms.locfileid: "76885474"
 
 Blazor 앱은 JavaScript 코드에서 .NET 및 .NET 메서드의 JavaScript 함수를 호출할 수 있습니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="invoke-javascript-functions-from-net-methods"></a>.NET 메서드에서 JavaScript 함수 호출
 
@@ -86,7 +86,7 @@ Blazor 앱은 JavaScript 코드에서 .NET 및 .NET 메서드의 JavaScript 함�
 * `showPrompt` &ndash;에서 사용자 입력을 수락 하는 프롬프트 (사용자 이름)를 생성 하 고 이름을 호출자에 게 반환 합니다.
 * `displayWelcome` &ndash;는 `welcome``id`를 사용 하 여 호출자의 시작 메시지를 DOM 개체에 할당 합니다.
 
-*wwwroot/exampleJsInterop.js*:
+*wwwroot/exampleJsInterop*:
 
 [!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=2-7)]
 
@@ -195,7 +195,7 @@ JavaScript 파일을 참조 하는 `<script>` 태그를 *wwwroot/index.html* 파
 
 예를 들어 다음 코드는 요소에 포커스를 설정할 수 있도록 하는 .NET 확장 메서드를 정의 합니다.
 
-*exampleJsInterop.js*:
+*exampleJsInterop*:
 
 ```javascript
 window.exampleJsFunctions = {
@@ -241,11 +241,213 @@ public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef,
 
 [!code-razor[](javascript-interop/samples_snapshot/component3.razor?highlight=17)]
 
+## <a name="reference-elements-across-components"></a>구성 요소 간 참조 요소
+
+`ElementReference`는 구성 요소의 `OnAfterRender` 메서드에서 유효 하 게 보장 되며 요소 참조는 `struct`이므로 요소 참조는 구성 요소 간에 전달 될 수 없습니다.
+
+부모 구성 요소가 다른 구성 요소에서 요소 참조를 사용할 수 있도록 하기 위해 부모 구성 요소는 다음을 수행할 수 있습니다.
+
+* 자식 구성 요소가 콜백을 등록할 수 있도록 허용 합니다.
+* 전달 된 요소 참조를 사용 하 여 `OnAfterRender` 이벤트 중에 등록 된 콜백을 호출 합니다. 간접적으로이 방법을 사용 하면 자식 구성 요소가 부모의 요소 참조와 상호 작용할 수 있습니다.
+
+다음 Blazor Weasembomamboma 예제는 접근 방법을 보여 줍니다.
+
+*Wwwroot/index.html*의 `<head>`에서 다음을 수행 합니다.
+
+```html
+<style>
+    .red { color: red }
+</style>
+```
+
+*Wwwroot/index.html*의 `<body>`에서 다음을 수행 합니다.
+
+```html
+<script>
+    function setElementClass(element, className) {
+        /** @type {HTMLElement} **/
+        var myElement = element;
+        myElement.classList.add(className);
+    }
+</script>
+```
+
+*Pages/Index. razor* (부모 구성 요소):
+
+```razor
+@page "/"
+
+<h1 @ref="_title">Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Parent="this" Title="How is Blazor working for you?" />
+```
+
+*페이지/인덱스. razor .cs*:
+
+```csharp
+using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Components;
+
+namespace BlazorSample.Pages
+{
+    public partial class Index : 
+        ComponentBase, IObservable<ElementReference>, IDisposable
+    {
+        private bool _disposing;
+        private IList<IObserver<ElementReference>> _subscriptions = 
+            new List<IObserver<ElementReference>>();
+        private ElementReference _title;
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            base.OnAfterRender(firstRender);
+
+            foreach (var subscription in _subscriptions)
+            {
+                try
+                {
+                    subscription.OnNext(_title);
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
+
+        public void Dispose()
+        {
+            _disposing = true;
+
+            foreach (var subscription in _subscriptions)
+            {
+                try
+                {
+                    subscription.OnCompleted();
+                }
+                catch (Exception)
+                {
+                }
+            }
+
+            _subscriptions.Clear();
+        }
+
+        public IDisposable Subscribe(IObserver<ElementReference> observer)
+        {
+            if (_disposing)
+            {
+                throw new InvalidOperationException("Parent being disposed");
+            }
+
+            _subscriptions.Add(observer);
+
+            return new Subscription(observer, this);
+        }
+
+        private class Subscription : IDisposable
+        {
+            public Subscription(IObserver<ElementReference> observer, Index self)
+            {
+                Observer = observer;
+                Self = self;
+            }
+
+            public IObserver<ElementReference> Observer { get; }
+            public Index Self { get; }
+
+            public void Dispose()
+            {
+                Self._subscriptions.Remove(Observer);
+            }
+        }
+    }
+}
+```
+
+*Shared/SurveyPrompt* (자식 구성 요소):
+
+```razor
+@inject IJSRuntime JS
+
+<div class="alert alert-secondary mt-4" role="alert">
+    <span class="oi oi-pencil mr-2" aria-hidden="true"></span>
+    <strong>@Title</strong>
+
+    <span class="text-nowrap">
+        Please take our
+        <a target="_blank" class="font-weight-bold" 
+            href="https://go.microsoft.com/fwlink/?linkid=2109206">brief survey</a>
+    </span>
+    and tell us what you think.
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+}
+```
+
+*Shared/SurveyPrompt*:
+
+```csharp
+using System;
+using Microsoft.AspNetCore.Components;
+
+namespace BlazorSample.Shared
+{
+    public partial class SurveyPrompt : 
+        ComponentBase, IObserver<ElementReference>, IDisposable
+    {
+        private IDisposable _subscription = null;
+
+        [Parameter]
+        public IObservable<ElementReference> Parent { get; set; }
+
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+
+            if (_subscription != null)
+            {
+                _subscription.Dispose();
+            }
+
+            _subscription = Parent.Subscribe(this);
+        }
+
+        public void OnCompleted()
+        {
+            _subscription = null;
+        }
+
+        public void OnError(Exception error)
+        {
+            _subscription = null;
+        }
+
+        public void OnNext(ElementReference value)
+        {
+            JS.InvokeAsync<object>(
+                "setElementClass", new object[] { value, "red" });
+        }
+
+        public void Dispose()
+        {
+            _subscription?.Dispose();
+        }
+    }
+}
+```
+
 ## <a name="invoke-net-methods-from-javascript-functions"></a>JavaScript 함수에서 .NET 메서드 호출
 
 ### <a name="static-net-method-call"></a>정적 .NET 메서드 호출
 
-JavaScript에서 정적 .NET 메서드를 호출 하려면 `DotNet.invokeMethod` 또는 `DotNet.invokeMethodAsync` 함수를 사용 합니다. 호출할 정적 메서드의 식별자, 함수를 포함 하는 어셈블리의 이름 및 인수를 전달 합니다. 비동기 버전은 Blazor 서버 시나리오를 지원 하기 위해 선호 됩니다. JavaScript에서 .NET 메서드를 호출 하려면 .NET 메서드가 public, static 및 `[JSInvokable]` 특성을 가져야 합니다. 기본적으로 메서드 식별자는 메서드 이름 이지만 `JSInvokableAttribute` 생성자를 사용 하 여 다른 식별자를 지정할 수 있습니다. Open 제네릭 메서드를 호출 하는 것은 현재 지원 되지 않습니다.
+JavaScript에서 정적 .NET 메서드를 호출 하려면 `DotNet.invokeMethod` 또는 `DotNet.invokeMethodAsync` 함수를 사용 합니다. 호출할 정적 메서드의 식별자, 함수를 포함 하는 어셈블리의 이름 및 인수를 전달 합니다. 비동기 버전은 Blazor 서버 시나리오를 지원 하기 위해 선호 됩니다. .NET 메서드는 public, static 및 `[JSInvokable]` 특성을 가져야 합니다. Open 제네릭 메서드를 호출 하는 것은 현재 지원 되지 않습니다.
 
 샘플 앱에는 `int`C# s의 배열을 반환 하는 메서드가 포함 되어 있습니다. `JSInvokable` 특성이 메서드에 적용 됩니다.
 
@@ -268,7 +470,7 @@ JavaScript에서 정적 .NET 메서드를 호출 하려면 `DotNet.invokeMethod`
 
 클라이언트에 제공 된 JavaScript는 .Net C# 메서드를 호출 합니다.
 
-*wwwroot/exampleJsInterop.js*:
+*wwwroot/exampleJsInterop*:
 
 [!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=8-14)]
 
@@ -281,6 +483,30 @@ Array(4) [ 1, 2, 3, 4 ]
 ```
 
 네 번째 배열 값은 `ReturnArrayAsync`에서 반환 된 배열 (`data.push(4);`)으로 푸시됩니다.
+
+기본적으로 메서드 식별자는 메서드 이름 이지만 `JSInvokableAttribute` 생성자를 사용 하 여 다른 식별자를 지정할 수 있습니다.
+
+```csharp
+@code {
+    [JSInvokable("DifferentMethodName")]
+    public static Task<int[]> ReturnArrayAsync()
+    {
+        return Task.FromResult(new int[] { 1, 2, 3 });
+    }
+}
+```
+
+클라이언트 쪽 JavaScript 파일에서 다음을 수행 합니다.
+
+```javascript
+returnArrayAsyncJs: function () {
+  DotNet.invokeMethodAsync('BlazorSample', 'DifferentMethodName')
+    .then(data => {
+      data.push(4);
+      console.log(data);
+    });
+}
+```
 
 ### <a name="instance-method-call"></a>인스턴스 메서드 호출
 
@@ -312,17 +538,17 @@ JavaScript에서 .NET 인스턴스 메서드를 호출할 수도 있습니다. J
 
 `CallHelloHelperSayHello`는 `HelloHelper`의 새 인스턴스와 `sayHello` JavaScript 함수를 호출 합니다.
 
-*JsInteropClasses/ExampleJsInterop.cs*:
+*JsInteropClasses/ExampleJsInterop*:
 
 [!code-csharp[](./common/samples/3.x/BlazorWebAssemblySample/JsInteropClasses/ExampleJsInterop.cs?name=snippet1&highlight=10-16)]
 
-*wwwroot/exampleJsInterop.js*:
+*wwwroot/exampleJsInterop*:
 
 [!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=15-18)]
 
 이 이름은 `HelloHelper.Name` 속성을 설정 하는 `HelloHelper`의 생성자에 전달 됩니다. JavaScript 함수 `sayHello` 실행 되 면 `HelloHelper.SayHello` JavaScript 함수를 통해 콘솔에 기록 되는 `Hello, {Name}!` 메시지를 반환 합니다.
 
-*JsInteropClasses/HelloHelper.cs*:
+*JsInteropClasses/HelloHelper*:
 
 [!code-csharp[](./common/samples/3.x/BlazorWebAssemblySample/JsInteropClasses/HelloHelper.cs?name=snippet1&highlight=5,10-11)]
 
@@ -340,7 +566,7 @@ JS interop 코드를 클래스 라이브러리에 포함 하 여 NuGet 패키지
 
 빌드된 NuGet 패키지는 NuGet 패키지를 참조 하는 것과 동일한 방식으로 앱의 프로젝트 파일에서 참조 됩니다. 패키지가 복원 된 후에는 앱 코드가 JavaScript를로 호출할 수 있습니다 C#.
 
-자세한 내용은 <xref:blazor/class-libraries>를 참조하세요.
+자세한 내용은 <xref:blazor/class-libraries>을 참조하세요.
 
 ## <a name="harden-js-interop-calls"></a>JS interop 호출 강화
 
@@ -361,6 +587,284 @@ JS interop는 네트워킹 오류로 인해 실패할 수 있으며 신뢰할 �
   ```
 
 리소스 소모에 대 한 자세한 내용은 <xref:security/blazor/server>를 참조 하세요.
+
+## <a name="perform-large-data-transfers-in-opno-locblazor-server-apps"></a>Blazor Server 앱에서 대량 데이터 전송 수행
+
+일부 시나리오에서는 JavaScript와 Blazor간에 많은 양의 데이터를 전송 해야 합니다. 일반적으로 다음과 같은 경우 대량 데이터 전송이 발생 합니다.
+
+* 브라우저 파일 시스템 Api는 파일을 업로드 하거나 다운로드 하는 데 사용 됩니다.
+* 타사 라이브러리와의 상호 운용성이 필요 합니다.
+
+Blazor 서버에서 성능 문제를 일으킬 수 있는 단일 큰 메시지를 전달 하는 것을 방지 하기 위해 제한이 적용 됩니다.
+
+JavaScript와 Blazor간에 데이터를 전송 하는 코드를 개발 하는 경우 다음 지침을 고려 하세요.
+
+* 데이터를 더 작은 부분으로 분할 하 고 서버에서 모든 데이터를 받을 때까지 데이터 세그먼트를 순차적으로 보냅니다.
+* JavaScript 및 C# 코드에는 많은 개체를 할당 하지 않습니다.
+* 데이터를 보내거나 받을 때 긴 기간 동안 주 UI 스레드를 차단 하지 않습니다.
+* 프로세스가 완료 되거나 취소 될 때 사용 되는 메모리를 확보 합니다.
+* 보안을 위해 다음과 같은 추가 요구 사항을 적용 합니다.
+  * 전달할 수 있는 최대 파일 또는 데이터 크기를 선언 합니다.
+  * 클라이언트에서 서버로의 최소 업로드 율을 선언 합니다.
+* 서버에서 데이터를 받은 후에는 다음과 같은 데이터를 사용할 수 있습니다.
+  * 모든 세그먼트가 수집 될 때까지 메모리 버퍼에 임시로 저장 됩니다.
+  * 즉시 사용 됩니다. 예를 들어 데이터를 데이터베이스에 즉시 저장 하거나 각 세그먼트를 수신 하면 디스크에 쓸 수 있습니다.
+
+다음 파일 업 로더 클래스는 클라이언트에서 JS interop를 처리 합니다. 업 로더 클래스는 JS interop를 사용 하 여 다음을 수행 합니다.
+
+* 클라이언트를 폴링하여 데이터 세그먼트를 보냅니다.
+* 폴링 시간이 초과 되 면 트랜잭션을 중단 합니다.
+
+```csharp
+using System;
+using System.Buffers;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+using Microsoft.JSInterop;
+
+public class FileUploader : IDisposable
+{
+    private readonly IJSRuntime _jsRuntime;
+    private readonly int _segmentSize = 6144;
+    private readonly int _maxBase64SegmentSize = 8192;
+    private readonly DotNetObjectReference<FileUploader> _thisReference;
+    private List<IMemoryOwner<byte>> _uploadedSegments = 
+        new List<IMemoryOwner<byte>>();
+
+    public FileUploader(IJSRuntime jsRuntime)
+    {
+        _jsRuntime = jsRuntime;
+    }
+
+    public async Task<Stream> ReceiveFile(string selector, int maxSize)
+    {
+        var fileSize = 
+            await _jsRuntime.InvokeAsync<int>("getFileSize", selector);
+
+        if (fileSize > maxSize)
+        {
+            return null;
+        }
+
+        var numberOfSegments = Math.Floor(fileSize / (double)_segmentSize) + 1;
+        var lastSegmentBytes = 0;
+        string base64EncodedSegment;
+
+        for (var i = 0; i < numberOfSegments; i++)
+        {
+            try
+            {
+                base64EncodedSegment = 
+                    await _jsRuntime.InvokeAsync<string>(
+                        "receiveSegment", i, selector);
+
+                if (base64EncodedSegment.Length < _maxBase64SegmentSize && 
+                    i < numberOfSegments - 1)
+                {
+                    return null;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+
+          var current = MemoryPool<byte>.Shared.Rent(_segmentSize);
+
+          if (!Convert.TryFromBase64String(base64EncodedSegment, 
+              current.Memory.Slice(0, _segmentSize).Span, out lastSegmentBytes))
+          {
+              return null;
+          }
+
+          _uploadedSegments.Add(current);
+        }
+
+        var segments = _uploadedSegments;
+        _uploadedSegments = null;
+
+        return new SegmentedStream(segments, _segmentSize, lastSegmentBytes);
+    }
+
+    public void Dispose()
+    {
+        if (_uploadedSegments != null)
+        {
+            foreach (var segment in _uploadedSegments)
+            {
+                segment.Dispose();
+            }
+        }
+    }
+}
+```
+
+앞의 예제에서:
+
+* `_maxBase64SegmentSize`은 `_maxBase64SegmentSize = _segmentSize * 4 / 3`에서 계산 되는 `8192`로 설정 됩니다.
+* 낮은 수준 .NET Core 메모리 관리 Api를 사용 하 여 서버의 메모리 세그먼트를 `_uploadedSegments`에 저장 합니다.
+* `ReceiveFile` 메서드는 JS interop를 통해 업로드를 처리 하는 데 사용 됩니다.
+  * 파일 크기는 `_jsRuntime.InvokeAsync<FileInfo>('getFileSize', selector)`를 사용 하 여 JS interop에서 바이트 단위로 결정 됩니다.
+  * 수신할 세그먼트 수가 계산 되 고 `numberOfSegments`저장 됩니다.
+  * 세그먼트는 `_jsRuntime.InvokeAsync<string>('receiveSegment', i, selector)`를 사용 하 여 JS interop를 통해 `for` 루프에서 요청 됩니다. 디코딩을 수행 하기 전에 모든 세그먼트가 8192 바이트 여야 합니다. 클라이언트는 효율적인 방식으로 데이터를 전송 하도록 강제 합니다.
+  * 수신 된 각 세그먼트에 대해 <xref:System.Convert.TryFromBase64String*>를 사용 하 여 디코딩을 수행 하기 전에 검사를 수행 합니다.
+  * 업로드가 완료 되 면 데이터가 있는 스트림이 새 <xref:System.IO.Stream> (`SegmentedStream`)로 반환 됩니다.
+
+분할 된 스트림 클래스는 세그먼트 목록을 검색할 수가 없는 읽기 전용 <xref:System.IO.Stream>으로 노출 합니다.
+
+```csharp
+using System;
+using System.Buffers;
+using System.Collections.Generic;
+using System.IO;
+
+public class SegmentedStream : Stream
+{
+    private readonly ReadOnlySequence<byte> _sequence;
+    private long _currentPosition = 0;
+
+    public SegmentedStream(IList<IMemoryOwner<byte>> segments, int segmentSize, 
+        int lastSegmentSize)
+    {
+        if (segments.Count == 1)
+        {
+            _sequence = new ReadOnlySequence<byte>(
+                segments[0].Memory.Slice(0, lastSegmentSize));
+            return;
+        }
+
+        var sequenceSegment = new BufferSegment<byte>(
+            segments[0].Memory.Slice(0, segmentSize));
+        var lastSegment = sequenceSegment;
+
+        for (int i = 1; i < segments.Count; i++)
+        {
+            var isLastSegment = i + 1 == segments.Count;
+            lastSegment = lastSegment.Append(segments[i].Memory.Slice(
+                0, isLastSegment ? lastSegmentSize : segmentSize));
+        }
+
+        _sequence = new ReadOnlySequence<byte>(
+            sequenceSegment, 0, lastSegment, lastSegmentSize);
+    }
+
+    public override long Position
+    {
+        get => throw new NotImplementedException();
+        set => throw new NotImplementedException();
+    }
+
+    public override int Read(byte[] buffer, int offset, int count)
+    {
+        var bytesToWrite = (int)(_currentPosition + count < _sequence.Length ? 
+            count : _sequence.Length - _currentPosition);
+        var data = _sequence.Slice(_currentPosition, bytesToWrite);
+        data.CopyTo(buffer.AsSpan(offset, bytesToWrite));
+        _currentPosition += bytesToWrite;
+
+        return bytesToWrite;
+    }
+
+    private class BufferSegment<T> : ReadOnlySequenceSegment<T>
+    {
+        public BufferSegment(ReadOnlyMemory<T> memory)
+        {
+            Memory = memory;
+        }
+
+        public BufferSegment<T> Append(ReadOnlyMemory<T> memory)
+        {
+            var segment = new BufferSegment<T>(memory)
+            {
+                RunningIndex = RunningIndex + Memory.Length
+            };
+
+            Next = segment;
+
+            return segment;
+        }
+    }
+
+    public override bool CanRead => true;
+
+    public override bool CanSeek => false;
+
+    public override bool CanWrite => false;
+
+    public override long Length => throw new NotImplementedException();
+
+    public override void Flush() => throw new NotImplementedException();
+
+    public override long Seek(long offset, SeekOrigin origin) => 
+        throw new NotImplementedException();
+
+    public override void SetLength(long value) => 
+        throw new NotImplementedException();
+
+    public override void Write(byte[] buffer, int offset, int count) => 
+        throw new NotImplementedException();
+}
+```
+
+다음 코드는 데이터를 수신 하는 JavaScript 함수를 구현 합니다.
+
+```javascript
+function getFileSize(selector) {
+  const file = getFile(selector);
+  return file.size;
+}
+
+async function receiveSegment(segmentNumber, selector) {
+  const file = getFile(selector);
+  var segments = getFileSegments(file);
+  var index = segmentNumber * 6144;
+  return await getNextChunk(file, index);
+}
+
+function getFile(selector) {
+  const element = document.querySelector(selector);
+  if (!element) {
+    throw new Error('Invalid selector');
+  }
+  const files = element.files;
+  if (!files || files.length === 0) {
+    throw new Error(`Element ${elementId} doesn't contain any files.`);
+  }
+  const file = files[0];
+  return file;
+}
+
+function getFileSegments(file) {
+  const segments = Math.floor(size % 6144 === 0 ? size / 6144 : 1 + size / 6144);
+  return segments;
+}
+
+async function getNextChunk(file, index) {
+  const length = file.size - index <= 6144 ? file.size - index : 6144;
+  const chunk = file.slice(index, index + length);
+  index += length;
+  const base64Chunk = await this.base64EncodeAsync(chunk);
+  return { base64Chunk, index };
+}
+
+async function base64EncodeAsync(chunk) {
+  const reader = new FileReader();
+  const result = new Promise((resolve, reject) => {
+    reader.addEventListener('load',
+      () => {
+        const base64Chunk = reader.result;
+        const cleanChunk = 
+          base64Chunk.replace('data:application/octet-stream;base64,', '');
+        resolve(cleanChunk);
+      },
+      false);
+    reader.addEventListener('error', reject);
+  });
+  reader.readAsDataURL(chunk);
+  return result;
+}
+```
 
 ## <a name="additional-resources"></a>추가 자료
 

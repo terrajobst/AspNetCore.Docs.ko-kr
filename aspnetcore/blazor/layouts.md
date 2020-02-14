@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: 51720af8fec5b4427fc66660eb8ac9c54ba2e99e
-ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
+ms.openlocfilehash: 8e7294f6b66d34781473522a71f929ed5f9c33f2
+ms.sourcegitcommit: d2ba66023884f0dca115ff010bd98d5ed6459283
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/17/2020
-ms.locfileid: "76159861"
+ms.lasthandoff: 02/14/2020
+ms.locfileid: "77213378"
 ---
 # <a name="aspnet-core-opno-locblazor-layouts"></a>ASP.NET Core Blazor 레이아웃
 
@@ -94,7 +94,7 @@ _Imports 레이아웃을 지정 하면 라우터의 *기본 레이아웃*으로 
 
 ## <a name="share-a-razor-pages-layout-with-integrated-components"></a>통합 구성 요소를 사용 하 여 Razor Pages 레이아웃 공유
 
-라우팅할 수 있는 구성 요소가 Razor Pages 앱에 통합 되 면 구성 요소와 함께 앱의 공유 레이아웃을 사용할 수 있습니다. 자세한 내용은 <xref:blazor/hosting-models#integrate-razor-components-into-razor-pages-and-mvc-apps>를 참조하세요.
+라우팅할 수 있는 구성 요소가 Razor Pages 앱에 통합 되 면 구성 요소와 함께 앱의 공유 레이아웃을 사용할 수 있습니다. 자세한 내용은 <xref:blazor/hosting-model-configuration#integrate-razor-components-into-razor-pages-and-mvc-apps>을 참조하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 

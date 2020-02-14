@@ -5,17 +5,17 @@ description: CORS (크로스-원본 자원 공유) 요청 만들기를 포함 �
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2019
+ms.date: 01/22/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: 66605f38a6fcaedebc92b0946dca1e5f28b593c6
-ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
+ms.openlocfilehash: 345fb6962e3376c22551eb7914c70c89cb7100d5
+ms.sourcegitcommit: d2ba66023884f0dca115ff010bd98d5ed6459283
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/17/2020
-ms.locfileid: "76160069"
+ms.lasthandoff: 02/14/2020
+ms.locfileid: "77213277"
 ---
 # <a name="call-a-web-api-from-aspnet-core-opno-locblazor"></a>ASP.NET Core Blazor에서 web API를 호출 합니다.
 
@@ -23,9 +23,9 @@ By [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-[Blazor Weasembomapps](xref:blazor/hosting-models#blazor-webassembly) 는 미리 구성 된 `HttpClient` 서비스를 사용 하 여 web api를 호출 합니다. Blazor JSON 도우미 또는 <xref:System.Net.Http.HttpRequestMessage>를 사용 하 여 JavaScript [FETCH API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 옵션을 포함할 수 있는 요청을 작성 합니다.
+[Blazor Weasembomapps](xref:blazor/hosting-models#blazor-webassembly) 는 미리 구성 된 `HttpClient` 서비스를 사용 하 여 web api를 호출 합니다. Blazor JSON 도우미 또는 <xref:System.Net.Http.HttpRequestMessage>를 사용 하 여 JavaScript [FETCH API](https://developer.mozilla.org/docs/Web/API/Fetch_API) 옵션을 포함할 수 있는 요청을 작성 합니다. Blazor Weasembomapps의 `HttpClient` 서비스는 원본 서버에 대 한 요청을 다시 수행 하는 데 중점을 두었습니다. 이 항목의 지침은 Blazor Weasembomapps와 관련이 있습니다.
 
-[Blazor Server](xref:blazor/hosting-models#blazor-server) apps는 일반적으로 <xref:System.Net.Http.IHttpClientFactory>를 사용 하 여 만든 <xref:System.Net.Http.HttpClient> 인스턴스를 사용 하 여 web api를 호출 합니다 자세한 내용은 <xref:fundamentals/http-requests>를 참조하세요.
+[Blazor Server](xref:blazor/hosting-models#blazor-server) 앱은 일반적으로 <xref:System.Net.Http.IHttpClientFactory>를 사용 하 여 만든 <xref:System.Net.Http.HttpClient> 인스턴스를 사용 하 여 web api를 호출 합니다. 이 항목의 지침은 Blazor Server 앱과 관련이 없습니다. Blazor Server 앱을 개발 하는 경우 <xref:fundamentals/http-requests>의 지침을 따르세요.
 
 [샘플 코드 보기 또는 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample)) &ndash; *BlazorWebAssemblySample* 앱을 선택 합니다.
 
@@ -202,7 +202,7 @@ Weasembmbomapp에서 Blazor 하 여 실행 하는 경우 [Httpclient](xref:funda
 }
 ```
 
-Fetch API 옵션에 대 한 자세한 내용은 [MDN 웹 문서: WindowOrWorkerGlobalScope ():P arameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)를 참조 하세요.
+Fetch API 옵션에 대 한 자세한 내용은 [MDN 웹 문서를 참조 하세요. WindowOrWorkerGlobalScope ():P arameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)입니다.
 
 CORS 요청에 대 한 자격 증명 (권한 부여 쿠키/헤더)을 보낼 때 CORS 정책에서 `Authorization` 헤더를 허용 해야 합니다.
 

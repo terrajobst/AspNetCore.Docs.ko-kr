@@ -5,17 +5,17 @@ description: 데이터에 바인딩하고, 이벤트를 처리 하 고, 구성 �
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/24/2020
+ms.date: 02/04/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/components
-ms.openlocfilehash: d6ba60b20d21636c7f780a80d8fbdb152505a3a3
-ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
+ms.openlocfilehash: 0da0d83a4fde7b753a84bf05d3a9284776f2881f
+ms.sourcegitcommit: d2ba66023884f0dca115ff010bd98d5ed6459283
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/01/2020
-ms.locfileid: "76928255"
+ms.lasthandoff: 02/14/2020
+ms.locfileid: "77213352"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor 구성 요소 만들기 및 사용
 
@@ -70,7 +70,7 @@ Blazor apps는 *구성 요소*를 사용 하 여 빌드됩니다. 구성 요소�
 
 Razor 구성 요소를 Razor Pages 및 MVC 앱에 통합할 수 있습니다. 페이지나 보기가 렌더링 되 면 구성 요소를 동시에 미리 렌더링 된 수 있습니다.
 
-Razor 구성 요소를 호스팅하도록 Razor Pages 또는 MVC 앱을 준비 하려면 <xref:blazor/hosting-models#integrate-razor-components-into-razor-pages-and-mvc-apps> 문서의 *Razor Pages 및 mvc 앱에 razor 구성 요소 통합* 섹션의 지침을 따르세요.
+Razor 구성 요소를 호스팅하도록 Razor Pages 또는 MVC 앱을 준비 하려면 <xref:blazor/hosting-model-configuration#integrate-razor-components-into-razor-pages-and-mvc-apps> 문서의 *Razor Pages 및 mvc 앱에 razor 구성 요소 통합* 섹션의 지침을 따르세요.
 
 사용자 지정 폴더를 사용 하 여 앱의 구성 요소를 저장 하는 경우 폴더를 나타내는 네임 스페이스를 페이지/보기 또는 _ViewImports로 추가 합니다. *cshtml* 파일. 다음 예제에서는
 
@@ -107,7 +107,10 @@ Razor 구성 요소를 호스팅하도록 Razor Pages 또는 MVC 앱을 준비 �
 
 정적 HTML 페이지에서 서버 구성 요소를 렌더링 하는 것은 지원 되지 않습니다.
 
-구성 요소를 렌더링 하는 방법, 구성 요소 상태 및 `Component` 태그 도우미에 대 한 자세한 내용은 <xref:blazor/hosting-models>을 참조 하세요.
+구성 요소를 렌더링 하는 방법, 구성 요소 상태 및 `Component` 태그 도우미에 대 한 자세한 내용은 다음 문서를 참조 하세요.
+
+* <xref:blazor/hosting-models>
+* <xref:blazor/hosting-model-configuration>
 
 ## <a name="tag-helpers-arent-used-in-components"></a>태그 도우미는 구성 요소에서 사용 되지 않습니다.
 
@@ -149,7 +152,7 @@ Razor 구성 요소를 호스팅하도록 Razor Pages 또는 MVC 앱을 준비 �
 <h1>Parent-child example</h1>
 
 <ChildComponent Title="Panel Title from Parent"
-                OnClick="@ShowMessage">
+                OnClickCallback="@ShowMessage">
     Content of the child component is supplied
     by the parent component.
 </ChildComponent>
@@ -180,7 +183,7 @@ Razor 구성 요소를 호스팅하도록 Razor Pages 또는 MVC 앱을 준비 �
 <h1>Parent-child example</h1>
 
 <ChildComponent Title="Panel Title from Parent"
-                OnClick="@ShowMessage">
+                OnClickCallback="@ShowMessage">
     Content of the child component is supplied
     by the parent component.
 </ChildComponent>
@@ -351,11 +354,11 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 * 요소의 `value` 특성에 대 한 지정 된 식 (`CurrentValue`)입니다.
 * `@bind-value:event`으로 지정 된 이벤트에 대 한 변경 이벤트 대리자입니다.
 
-**구문 분석할 값**
+### <a name="unparsable-values"></a>구문 분석할 값
 
 사용자가 데이터 바인딩된 요소에 구문 분석할 수 없는 값을 제공 하면 bind 이벤트가 트리거될 때 구문 분석할 수 없는 값이 자동으로 이전 값으로 되돌아갑니다.
 
-다음 시나리오를 고려하세요.
+다음과 같은 시나리오를 고려해 보세요.
 
 * `<input>` 요소는 `123`초기 값을 사용 하 여 `int` 형식에 바인딩됩니다.
 
@@ -379,7 +382,7 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
   * 사용자가 연결 된 `EditContext`에서 잘못 된 입력 및 수신 유효성 검사 오류를 제공할 수 있도록 허용 합니다.
   * 사용자가 추가 webform 데이터를 입력 하는 것을 방해 하지 않고 UI에서 유효성 검사 오류를 표시 합니다.
 
-**전역화**
+### <a name="globalization"></a>전역화
 
 `@bind` 값은 현재 문화권의 규칙을 사용 하 여 표시 및 구문 분석을 위해 형식이 지정 됩니다.
 
@@ -406,7 +409,7 @@ public IDictionary<string, object> AdditionalAttributes { get; set; }
 
 사용자의 문화권을 설정 하는 방법에 대 한 자세한 내용은 [지역화](#localization) 섹션을 참조 하십시오.
 
-**서식 문자열**
+### <a name="format-strings"></a>서식 문자열
 
 데이터 바인딩은 [`@bind:format`](xref:mvc/views/razor#bind)를 사용 하 여 <xref:System.DateTime> 형식 문자열과 함께 작동 합니다. 통화 또는 숫자 형식과 같은 다른 형식 식은 현재 사용할 수 없습니다.
 
@@ -434,9 +437,9 @@ Blazor에서 날짜 형식을 기본적으로 지원 하기 때문에 `date` 필
 <input type="date" @bind="StartDate" @bind:format="yyyy-MM-dd">
 ```
 
-**구성 요소 매개 변수**
+### <a name="parent-to-child-binding-with-component-parameters"></a>구성 요소 매개 변수를 사용 하 여 부모-자식 바인딩
 
-바인딩은 구성 요소 매개 변수를 인식 하며, 여기서 `@bind-{property}`는 구성 요소에서 속성 값을 바인딩할 수 있습니다.
+바인딩은 구성 요소 매개 변수를 인식 합니다. 여기서 `@bind-{property}`는 부모 구성 요소의 속성 값을 자식 구성 요소에 바인딩할 수 있습니다. 자식에서 부모로의 바인딩은 연결 된 bind 섹션을 [사용 하는 자식-부모 바인딩에](#child-to-parent-binding-with-chained-bind) 포함 됩니다.
 
 다음 자식 구성 요소 (`ChildComponent`)에는 `Year` 구성 요소 매개 변수와 `YearChanged` 콜백이 있습니다.
 
@@ -456,7 +459,10 @@ Blazor에서 날짜 형식을 기본적으로 지원 하기 때문에 `date` 필
 
 `EventCallback<T>`는 [Eventcallback](#eventcallback) 섹션에 설명 되어 있습니다.
 
-다음 부모 구성 요소는 `ChildComponent`을 사용 하 고 부모의 `ParentYear` 매개 변수를 자식 구성 요소의 `Year` 매개 변수에 바인딩합니다.
+다음 부모 구성 요소는을 사용 합니다.
+
+* 부모의 `ParentYear` 매개 변수를 `ChildComponent` 하 고 자식 구성 요소의 `Year` 매개 변수에 바인딩합니다.
+* `onclick` 이벤트는 `ChangeTheYear` 메서드를 트리거하는 데 사용 됩니다. 자세한 내용은 [이벤트 처리](#event-handling) 섹션을 참조 하십시오.
 
 ```razor
 @page "/ParentComponent"
@@ -520,7 +526,138 @@ Blazor에서 날짜 형식을 기본적으로 지원 하기 때문에 `date` 필
 <MyComponent @bind-MyProp="MyValue" @bind-MyProp:event="MyEventHandler" />
 ```
 
-**라디오 단추**
+### <a name="child-to-parent-binding-with-chained-bind"></a>연결 된 바인딩을 사용 하는 자식-부모 바인딩
+
+일반적인 시나리오는 데이터 바인딩된 매개 변수를 구성 요소 출력의 페이지 요소에 연결 하는 것입니다. 이 시나리오를 여러 수준의 바인딩이 동시에 발생 하기 때문에 연결 된 *바인딩* 이라고 합니다.
+
+페이지의 요소에 `@bind` 구문을 사용 하 여 연결 된 바인딩을 구현할 수 없습니다. 이벤트 처리기 및 값은 별도로 지정 해야 합니다. 그러나 부모 구성 요소는 구성 요소의 매개 변수와 함께 `@bind` 구문을 사용할 수 있습니다.
+
+다음 `PasswordField` 구성 요소 (*Passwordfield. razor*):
+
+* `<input>` 요소의 값을 `Password` 속성으로 설정 합니다.
+* [Eventcallback](#eventcallback)을 사용 하 여 `Password` 속성의 변경 내용을 부모 구성 요소에 노출 합니다.
+* `ToggleShowPassword` 메서드를 트리거하는 데 사용 되는 `onclick` 이벤트를 사용 합니다. 자세한 내용은 [이벤트 처리](#event-handling) 섹션을 참조 하십시오.
+
+```razor
+<h1>Child Component</h2>
+
+Password: 
+
+<input @oninput="OnPasswordChanged" 
+       required 
+       type="@(_showPassword ? "text" : "password")" 
+       value="@Password" />
+
+<button class="btn btn-primary" @onclick="ToggleShowPassword">
+    Show password
+</button>
+
+@code {
+    private bool _showPassword;
+
+    [Parameter]
+    public string Password { get; set; }
+
+    [Parameter]
+    public EventCallback<string> PasswordChanged { get; set; }
+
+    private Task OnPasswordChanged(ChangeEventArgs e)
+    {
+        Password = e.Value.ToString();
+
+        return PasswordChanged.InvokeAsync(Password);
+    }
+
+    private void ToggleShowPassword()
+    {
+        _showPassword = !_showPassword;
+    }
+}
+```
+
+`PasswordField` 구성 요소는 다른 구성 요소에서 사용 됩니다.
+
+```razor
+@page "/ParentComponent"
+
+<h1>Parent Component</h1>
+
+<PasswordField @bind-Password="_password" />
+
+@code {
+    private string _password;
+}
+```
+
+위의 예에서 암호에 대 한 검사 또는 트랩 오류를 수행 하려면 다음을 수행 합니다.
+
+* `Password`에 대 한 지원 필드를 만듭니다 (다음 예제 코드에서`_password`).
+* `Password` setter에서 확인 또는 트랩 오류를 수행 합니다.
+
+다음 예에서는 암호 값에 공백을 사용 하는 경우 사용자에 게 즉각적인 피드백을 제공 합니다.
+
+```razor
+@page "/ParentComponent"
+
+<h1>Parent Component</h1>
+
+Password: 
+
+<input @oninput="OnPasswordChanged" 
+       required 
+       type="@(_showPassword ? "text" : "password")" 
+       value="@Password" />
+
+<button class="btn btn-primary" @onclick="ToggleShowPassword">
+    Show password
+</button>
+
+<span class="text-danger">@_validationMessage</span>
+
+@code {
+    private bool _showPassword;
+    private string _password;
+    private string _validationMessage;
+
+    [Parameter]
+    public string Password
+    {
+        get { return _password ?? string.Empty; }
+        set
+        {
+            if (_password != value)
+            {
+                if (value.Contains(' '))
+                {
+                    _validationMessage = "Spaces not allowed!";
+                }
+                else
+                {
+                    _password = value;
+                    _validationMessage = string.Empty;
+                }
+            }
+        }
+    }
+
+    [Parameter]
+    public EventCallback<string> PasswordChanged { get; set; }
+
+    private Task OnPasswordChanged(ChangeEventArgs e)
+    {
+        Password = e.Value.ToString();
+
+        return PasswordChanged.InvokeAsync(Password);
+    }
+
+    private void ToggleShowPassword()
+    {
+        _showPassword = !_showPassword;
+    }
+}
+```
+
+### <a name="radio-buttons"></a>라디오 단추
 
 폼의 라디오 단추에 바인딩하는 방법에 대 한 자세한 내용은 <xref:blazor/forms-validation#work-with-radio-buttons>를 참조 하세요.
 
@@ -579,22 +716,25 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 
 지원 되는 `EventArgs` 다음 표에 나와 있습니다.
 
-| Event            | 클래스                | DOM 이벤트 및 참고 사항 |
+| 이벤트            | 클래스                | DOM 이벤트 및 참고 사항 |
 | ---------------- | -------------------- | -------------------- |
 | 클립보드        | `ClipboardEventArgs` | `oncut`에서 `oncopy`에서 `onpaste` |
 | 옵니다             | `DragEventArgs`      | `ondrag`, `ondragstart`, `ondragenter`, `ondragleave`, `ondragover`, `ondrop`, `ondragend`<br><br>끌어온 항목 데이터를 포함 하는 `DataTransfer` 및 `DataTransferItem`. |
-| 오류            | `ErrorEventArgs`     | `onerror` |
-| Event            | `EventArgs`          | *일반*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onended`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*클립보드*<br>`onbeforecut`에서 `onbeforecopy`에서 `onbeforepaste`<br><br>*입력*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, `onsubmit`<br><br>*미디어*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting` |
+| Error            | `ErrorEventArgs`     | `onerror` |
+| 이벤트            | `EventArgs`          | *일반*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onended`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*클립보드*<br>`onbeforecut`에서 `onbeforecopy`에서 `onbeforepaste`<br><br>*입력*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, `onsubmit`<br><br>*미디어*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting` |
 | 포커스            | `FocusEventArgs`     | `onfocus`, `onblur`, `onfocusin`, `onfocusout`<br><br>`relatedTarget`에 대 한 지원을 포함 하지 않습니다. |
 | 입력            | `ChangeEventArgs`    | `onchange`, `oninput` |
 | 키보드         | `KeyboardEventArgs`  | `onkeydown`에서 `onkeypress`에서 `onkeyup` |
-| 마우스            | `MouseEventArgs`     | `onclick`, `oncontextmenu`, `ondblclick`, `onmousedown`, `onmouseup`, `onmouseover`, `onmousemove`, `onmouseout`입니다. |
+| 마우스            | `MouseEventArgs`     | `onclick`, `oncontextmenu`, `ondblclick`, `onmousedown`, `onmouseup`, `onmouseover`, `onmousemove`, `onmouseout` |
 | 마우스 포인터    | `PointerEventArgs`   | `onpointerdown`, `onpointerup`, `onpointercancel`, `onpointermove`, `onpointerover`, `onpointerout`, `onpointerenter`, `onpointerleave`, `ongotpointercapture`, `onlostpointercapture` |
 | 마우스 휠      | `WheelEventArgs`     | `onwheel`, `onmousewheel` |
-| 진행 중         | `ProgressEventArgs`  | `onabort`, `onload`, `onloadend`, `onloadstart`, `onprogress`, `ontimeout` |
+| 진행률         | `ProgressEventArgs`  | `onabort`, `onload`, `onloadend`, `onloadstart`, `onprogress`, `ontimeout` |
 | 터치            | `TouchEventArgs`     | `ontouchstart`, `ontouchend`, `ontouchmove`, `ontouchenter`, `ontouchleave`, `ontouchcancel`<br><br>`TouchPoint` 터치를 구분 하는 장치에서 단일 접촉 지점을 나타냅니다. |
 
-위의 표에서 이벤트의 속성 및 이벤트 처리 동작에 대 한 자세한 내용은 [참조 소스 (dotnet/aspnetcore release/3.1 분기)의 EventArgs 클래스](https://github.com/dotnet/aspnetcore/tree/release/3.1/src/Components/Web/src/Web)를 참조 하세요.
+자세한 내용은 다음 리소스를 참조하십시오.
+
+* [ASP.NET Core 참조 원본의 EventArgs 클래스 (dotnet/aspnetcore release/3.1 분기)](https://github.com/dotnet/aspnetcore/tree/release/3.1/src/Components/Web/src/Web)
+* [MDN 웹 문서: GlobalEventHandlers](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers) &ndash; 각 DOM 이벤트를 지 원하는 HTML 요소에 대 한 정보를 포함 합니다.
 
 ### <a name="lambda-expressions"></a>람다 식
 
@@ -641,7 +781,7 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=5-7,17-18)]
 
-`ParentComponent`은 자식의 `EventCallback<T>` (`OnClick`)를 `ShowMessage` 메서드로 설정 합니다.
+`ParentComponent`은 자식의 `EventCallback<T>` (`OnClickCallback`)를 `ShowMessage` 메서드로 설정 합니다.
 
 *Pages/ParentComponent. razor*:
 
@@ -651,7 +791,7 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 <h1>Parent-child example</h1>
 
 <ChildComponent Title="Panel Title from Parent"
-                OnClick="@ShowMessage">
+                OnClickCallback="@ShowMessage">
     Content of the child component is supplied
     by the parent component.
 </ChildComponent>
@@ -677,7 +817,7 @@ Razor 구성 요소는 이벤트 처리 기능을 제공 합니다. 대리자 �
 
 ```razor
 <ChildComponent 
-    OnClick="@(async () => { await Task.Yield(); _messageText = "Blaze It!"; })" />
+    OnClickCallback="@(async () => { await Task.Yield(); _messageText = "Blaze It!"; })" />
 ```
 
 `InvokeAsync`를 사용 하 여 `EventCallback` 또는 `EventCallback<T>`를 호출 하 고 <xref:System.Threading.Tasks.Task>를 기다립니다.
@@ -756,126 +896,6 @@ await callback.InvokeAsync(arg);
 }
 ```
 
-## <a name="chained-bind"></a>연결 된 바인딩
-
-일반적인 시나리오는 데이터 바인딩된 매개 변수를 구성 요소 출력의 페이지 요소에 연결 하는 것입니다. 이 시나리오를 여러 수준의 바인딩이 동시에 발생 하기 때문에 연결 된 *바인딩* 이라고 합니다.
-
-페이지의 요소에 `@bind` 구문을 사용 하 여 연결 된 바인딩을 구현할 수 없습니다. 이벤트 처리기 및 값은 별도로 지정 해야 합니다. 그러나 부모 구성 요소는 구성 요소의 매개 변수와 함께 `@bind` 구문을 사용할 수 있습니다.
-
-다음 `PasswordField` 구성 요소 (*Passwordfield. razor*):
-
-* `<input>` 요소의 값을 `Password` 속성으로 설정 합니다.
-* [Eventcallback](#eventcallback)을 사용 하 여 `Password` 속성의 변경 내용을 부모 구성 요소에 노출 합니다.
-
-```razor
-Password: 
-
-<input @oninput="OnPasswordChanged" 
-       required 
-       type="@(_showPassword ? "text" : "password")" 
-       value="@Password" />
-
-<button class="btn btn-primary" @onclick="ToggleShowPassword">
-    Show password
-</button>
-
-@code {
-    private bool _showPassword;
-
-    [Parameter]
-    public string Password { get; set; }
-
-    [Parameter]
-    public EventCallback<string> PasswordChanged { get; set; }
-
-    private Task OnPasswordChanged(ChangeEventArgs e)
-    {
-        Password = e.Value.ToString();
-
-        return PasswordChanged.InvokeAsync(Password);
-    }
-
-    private void ToggleShowPassword()
-    {
-        _showPassword = !_showPassword;
-    }
-}
-```
-
-`PasswordField` 구성 요소는 다른 구성 요소에서 사용 됩니다.
-
-```razor
-<PasswordField @bind-Password="_password" />
-
-@code {
-    private string _password;
-}
-```
-
-위의 예에서 암호에 대 한 검사 또는 트랩 오류를 수행 하려면 다음을 수행 합니다.
-
-* `Password`에 대 한 지원 필드를 만듭니다 (다음 예제 코드에서`_password`).
-* `Password` setter에서 확인 또는 트랩 오류를 수행 합니다.
-
-다음 예에서는 암호 값에 공백을 사용 하는 경우 사용자에 게 즉각적인 피드백을 제공 합니다.
-
-```razor
-Password: 
-
-<input @oninput="OnPasswordChanged" 
-       required 
-       type="@(_showPassword ? "text" : "password")" 
-       value="@Password" />
-
-<button class="btn btn-primary" @onclick="ToggleShowPassword">
-    Show password
-</button>
-
-<span class="text-danger">@_validationMessage</span>
-
-@code {
-    private bool _showPassword;
-    private string _password;
-    private string _validationMessage;
-
-    [Parameter]
-    public string Password
-    {
-        get { return _password ?? string.Empty; }
-        set
-        {
-            if (_password != value)
-            {
-                if (value.Contains(' '))
-                {
-                    _validationMessage = "Spaces not allowed!";
-                }
-                else
-                {
-                    _password = value;
-                    _validationMessage = string.Empty;
-                }
-            }
-        }
-    }
-
-    [Parameter]
-    public EventCallback<string> PasswordChanged { get; set; }
-
-    private Task OnPasswordChanged(ChangeEventArgs e)
-    {
-        Password = e.Value.ToString();
-
-        return PasswordChanged.InvokeAsync(Password);
-    }
-
-    private void ToggleShowPassword()
-    {
-        _showPassword = !_showPassword;
-    }
-}
-```
-
 ## <a name="capture-references-to-components"></a>구성 요소에 대 한 참조 캡처
 
 구성 요소 참조는 `Show` 또는 `Reset`와 같이 해당 인스턴스에 대 한 명령을 실행할 수 있도록 구성 요소 인스턴스를 참조 하는 방법을 제공 합니다. 구성 요소 참조를 캡처하려면:
@@ -928,7 +948,21 @@ public class NotifierService
 }
 ```
 
-`NotifierService` 사용 하 여 구성 요소를 업데이트 합니다.
+`NotifierService`를 singletion으로 등록 합니다.
+
+* Blazor WebAssembly에서 서비스를 `Program.Main`에 등록 합니다.
+
+  ```csharp
+  builder.Services.AddSingleton<NotifierService>();
+  ```
+
+* Blazor 서버에서 `Startup.ConfigureServices`에 서비스를 등록 합니다.
+
+  ```csharp
+  services.AddSingleton<NotifierService>();
+  ```
+
+`NotifierService`를 사용 하 여 구성 요소를 업데이트 합니다.
 
 ```razor
 @page "/"
@@ -967,7 +1001,7 @@ public class NotifierService
 
 요소 또는 구성 요소 목록을 렌더링할 때 이후에 요소나 구성 요소가 변경 되는 경우 Blazor의 diff 알고리즘은 유지할 수 있는 이전 요소 또는 구성 요소와 모델 개체가 이러한 요소에 매핑되는 방법을 결정 해야 합니다. 일반적으로이 프로세스는 자동 이며 무시 해도 되지만 프로세스를 제어 하는 경우가 있습니다.
 
-다음 예제를 참조하세요.
+다음 예를 살펴 보십시오.
 
 ```csharp
 @foreach (var person in People)
@@ -1254,7 +1288,7 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값�
 <input type="checkbox" />
 ```
 
-자세한 내용은 <xref:mvc/views/razor>를 참조하세요.
+자세한 내용은 <xref:mvc/views/razor>을 참조하세요.
 
 > [!WARNING]
 > ASP.NET 형식이 `bool`경우에는 [aria를 누르는](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons)등의 일부 HTML 특성이 제대로 작동 하지 않습니다. 이러한 경우 `bool`대신 `string` 유형을 사용 합니다.
@@ -1373,7 +1407,7 @@ HTML 요소 특성은 .NET 값에 따라 조건부로 렌더링 됩니다. 값�
 
 샘플 앱의 다음 예제에서 `ThemeInfo` 클래스는 응용 프로그램의 지정 된 부분에 있는 모든 단추가 동일한 스타일을 공유할 수 있도록 구성 요소 계층 구조의 아래로 이동 하는 테마 정보를 지정 합니다.
 
-*UIThemeClasses/ThemeInfo.cs*:
+*UIThemeClasses/ThemeInfo*:
 
 ```csharp
 public class ThemeInfo
@@ -1654,14 +1688,14 @@ builder.AddContent(1, "Second");
 
 코드가 처음 실행 될 때 `someFlag` `true`경우 작성기는 다음을 수신 합니다.
 
-| Sequence | 형식      | 데이터   |
+| Sequence | 형식      | data   |
 | :------: | --------- | :----: |
-| 0        | 텍스트 노드 | First  |
+| 0        | 텍스트 노드 | 첫째  |
 | 1        | 텍스트 노드 | Second |
 
 `someFlag` `false`되 고 태그가 다시 렌더링 된다고 가정 합니다. 이번에는 작성기가 다음을 받습니다.
 
-| Sequence | 형식       | 데이터   |
+| Sequence | 형식       | data   |
 | :------: | ---------- | :----: |
 | 1        | 텍스트 노드  | Second |
 
@@ -1686,14 +1720,14 @@ builder.AddContent(seq++, "Second");
 
 이제 첫 번째 출력은 다음과 같습니다.
 
-| Sequence | 형식      | 데이터   |
+| Sequence | 형식      | data   |
 | :------: | --------- | :----: |
-| 0        | 텍스트 노드 | First  |
+| 0        | 텍스트 노드 | 첫째  |
 | 1        | 텍스트 노드 | Second |
 
 이 결과는 이전 사례와 동일 하므로 부정적인 문제가 없습니다. `someFlag`은 두 번째 렌더링에서 `false` 되며 출력은 다음과 같습니다.
 
-| Sequence | 형식      | 데이터   |
+| Sequence | 형식      | data   |
 | :------: | --------- | ------ |
 | 0        | 텍스트 노드 | Second |
 
@@ -1791,7 +1825,7 @@ public class CultureController : Controller
 ```
 
 > [!WARNING]
-> `LocalRedirect` 작업 결과를 사용 하 여 열린 리디렉션 공격을 방지 합니다. 자세한 내용은 <xref:security/preventing-open-redirects>를 참조하세요.
+> `LocalRedirect` 작업 결과를 사용 하 여 열린 리디렉션 공격을 방지 합니다. 자세한 내용은 <xref:security/preventing-open-redirects>을 참조하세요.
 
 다음 구성 요소는 사용자가 문화권을 선택할 때 초기 리디렉션을 수행 하는 방법의 예를 보여 줍니다.
 
@@ -1834,7 +1868,7 @@ Blazor의 `@bind` 기능은 사용자의 현재 문화권에 따라 세계화를
 * `IStringLocalizer<>`은 Blazor 앱에서 *지원 됩니다* .
 * `IHtmlLocalizer<>`, `IViewLocalizer<>`및 데이터 주석 지역화는 MVC 시나리오 ASP.NET Core Blazor 앱에서 **지원 되지 않습니다** .
 
-자세한 내용은 <xref:fundamentals/localization>를 참조하세요.
+자세한 내용은 <xref:fundamentals/localization>을 참조하세요.
 
 ## <a name="scalable-vector-graphics-svg-images"></a>SVG (스케일러블 벡터 그래픽) 이미지
 
