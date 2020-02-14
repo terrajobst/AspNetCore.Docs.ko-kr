@@ -5,14 +5,14 @@ description: IHttpClientFactory 인터페이스를 사용하여 ASP.NET Core에�
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 12/16/2019
+ms.date: 02/09/2020
 uid: fundamentals/http-requests
-ms.openlocfilehash: 9b9da82191a587be0603ee114562e9a964f05250
-ms.sourcegitcommit: fe41cff0b99f3920b727286944e5b652ca301640
+ms.openlocfilehash: 93b75525e8a3f10c4e0b655baaff83c0f6e8131b
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/29/2020
-ms.locfileid: "76870400"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77171800"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>ASP.NET Core에서 IHttpClientFactory를 사용하여 HTTP 요청 만들기
 
@@ -109,7 +109,12 @@ ms.locfileid: "76870400"
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet3)]
 
-형식화된 클라이언트는 DI를 사용하여 일시적으로 등록됩니다. 형식화된 클라이언트는 직접 주입되고 사용될 수 있습니다.
+형식화된 클라이언트는 DI를 사용하여 일시적으로 등록됩니다. 위의 코드에서 `AddHttpClient`는 `GitHubService`를 임시 서비스로 등록합니다. 이 등록에서는 팩터리 메서드를 사용하여 다음을 수행합니다.
+
+1. `HttpClient`의 인스턴스를 만듭니다.
+1. `HttpClient`의 인스턴스를 생성자에 전달하여 `GitHubService`의 인스턴스를 만듭니다.
+
+형식화된 클라이언트는 직접 주입되고 사용될 수 있습니다.
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Pages/TypedClient.cshtml.cs?name=snippet1&highlight=11-14,20)]
 
@@ -364,7 +369,7 @@ DI 지원 앱에서 `IHttpClientFactory`을(를) 사용하면 다음이 방지�
 
 * 클라이언트는 아웃바운드 요청에 구성된 헤더를 포함합니다.
 
-  ```C#
+  ```csharp
   var client = clientFactory.CreateClient("MyForwardingClient");
   var response = client.GetAsync(...);
   ```
@@ -991,7 +996,7 @@ DI 지원 앱에서 `IHttpClientFactory`을(를) 사용하면 다음이 방지�
 
 * 클라이언트는 아웃바운드 요청에 구성된 헤더를 포함합니다.
 
-  ```C#
+  ```csharp
   var client = clientFactory.CreateClient("MyForwardingClient");
   var response = client.GetAsync(...);
   ```

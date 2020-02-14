@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/26/2019
 uid: tutorials/web-api-javascript
-ms.openlocfilehash: 5a31aa2974eb41938db89f97c070c352a26290fd
-ms.sourcegitcommit: 0dd224b2b7efca1fda0041b5c3f45080327033f6
+ms.openlocfilehash: 2a19a7d16ca8b8f5d6ac8eb99ad919b89f1e368b
+ms.sourcegitcommit: 235623b6e5a5d1841139c82a11ac2b4b3f31a7a9
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/02/2019
-ms.locfileid: "74681177"
+ms.lasthandoff: 02/10/2020
+ms.locfileid: "77114655"
 ---
 # <a name="tutorial-call-an-aspnet-core-web-api-with-javascript"></a>자습서: JavaScript로 ASP.NET Core 웹 API 호출하기
 
@@ -27,7 +27,7 @@ ASP.NET Core 2.2의 경우에는 [JavaScript를 사용하여 웹 API 호출하�
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 * [자습서: 웹 API 만들기](xref:tutorials/first-web-api) 완료
 * CSS, HTML, JavaScript에 대한 지식
@@ -36,7 +36,7 @@ ASP.NET Core 2.2의 경우에는 [JavaScript를 사용하여 웹 API 호출하�
 
 이 섹션에서는 할 일 항목의 생성과 관리를 위한 양식이 포함된 HTML 페이지를 추가하게 됩니다. 이벤트 처리기는 페이지의 요소에 연결됩니다. 이벤트 처리기에 의해 웹 API의 작업 메서드에 대한 HTTP 요청이 발생합니다. Fetch API의 `fetch` 함수는 각 HTTP 요청을 시작합니다.
 
-`fetch` 함수는 `Promise` 개체를 반환하는데, 해당 개체에는 `Response` 개체로 나타나는 HTTP 응답이 포함됩니다. 일반적인 패턴은 `Response` 개체에 대해 `json` 함수를 호출하여 JSON 응답 본문을 추출하는 것입니다. JavaScript는 웹 API 응답의 세부 정보를 토대로 페이지를 업데이트합니다.
+`fetch` 함수는 [Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise) 개체를 반환하는데, 해당 개체에는 `Response` 개체로 나타나는 HTTP 응답이 포함됩니다. 일반적인 패턴은 `Response` 개체에 대해 `json` 함수를 호출하여 JSON 응답 본문을 추출하는 것입니다. JavaScript는 웹 API 응답의 세부 정보를 토대로 페이지를 업데이트합니다.
 
 가장 간단한 `fetch` 호출에서는 경로를 나타내는 단일 매개 변수가 허용됩니다. `init` 개체라고 하는 두 번째 매개 변수는 선택 사항입니다. `init`은 HTTP 요청 구성에 사용됩니다.
 

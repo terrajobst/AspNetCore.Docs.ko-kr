@@ -5,14 +5,14 @@ description: ASP.NET Core에서 호스팅되는 서비스를 사용하는 백그
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/05/2020
+ms.date: 02/10/2020
 uid: fundamentals/host/hosted-services
-ms.openlocfilehash: 6a88e56afc4fb1b4f673c362f83d948eda84b930
-ms.sourcegitcommit: bd896935e91236e03241f75e6534ad6debcecbbf
+ms.openlocfilehash: 9b7224c07df027c9466db34dcc23505410893f1f
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/06/2020
-ms.locfileid: "77044880"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77171791"
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>ASP.NET Core에서 호스팅되는 서비스를 사용하는 백그라운드 작업
 
@@ -166,6 +166,10 @@ Worker Service 템플릿을 기반으로 하는 앱은 `Microsoft.NET.Sdk.Worker
 서비스는 `IHostBuilder.ConfigureServices`(*Program.cs*)에 등록됩니다. 호스팅된 서비스는 `AddHostedService` 확장 메서드를 사용하여 등록됩니다.
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet3)]
+
+`MontiorLoop`는 `Program.Main`에서 시작됩니다.
+
+[!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet4)]
 
 ::: moniker-end
 

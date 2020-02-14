@@ -7,8 +7,8 @@ npm run release
 Webpack은 다음 작업을 완료했습니다.
 
 * *wwwroot* 디렉터리의 콘텐츠를 제거했습니다.
-* TypeScript를 JavaScript로 변환했습니다(*트랜스파일*&mdash;이라는 프로세스).
-* 파일 크기를 줄이기 위해 생성된 JavaScript를 변환했습니다(*축소*&mdash;라는 프로세스).
+* 트랜스파일이라는 프로세스에서 TypeScript를 JavaScript로 변환했습니다. 
+* 축소라는 프로세스에서 파일 크기를 줄이기 위해 생성된 JavaScript를 변환했습니다. 
 * *src*에서 *wwwroot* 디렉터리로 처리된 JavaScript, CSS 및 HTML 파일을 복사했습니다.
 * 다음 요소를 *wwwroot/index.html* 파일에 삽입했습니다.
   * *wwwroot/main.\<hash\>.css* 파일을 참조하는 `<link>` 태그입니다. 이 태그는 `</head>` 태그를 닫기 전에 즉시 배치합니다.

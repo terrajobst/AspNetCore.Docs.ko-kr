@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: 61b50a63bd026f917035f64785d8d3b1956958a6
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 1c7652c909432b25ae373873cd593afd879cfa00
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880961"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172558"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>ASP.NET Core 형식의 태그 도우미
 
@@ -41,7 +41,7 @@ ms.locfileid: "74880961"
 
 위의 형식 태그 도우미에서는 다음 HTML을 생성합니다.
 
-```HTML
+```html
 <form method="post" action="/Demo/Register">
     <!-- Input and Submit elements -->
     <input name="__RequestVerificationToken" type="hidden" value="<removed for brevity>">
@@ -165,7 +165,7 @@ public class HomeController : Controller
 
 구문:
 
-```HTML
+```cshtml
 <input asp-for="<Expression Name>">
 ```
 
@@ -183,7 +183,7 @@ public class HomeController : Controller
 
 * 강력한 형식 지정을 제공합니다. 속성의 이름이 변경되고 태그 도우미를 업데이트하지 않은 경우 다음과 비슷한 오류가 표시됩니다.
 
-```HTML
+```
 An error occurred during the compilation of a resource required to process
 this request. Please review the following specific error details and modify
 your source code appropriately.
@@ -225,7 +225,7 @@ Type expected
 
 위의 코드는 다음과 같은 HTML을 생성합니다.
 
-```HTML
+```html
   <form method="post" action="/Demo/RegisterInput">
       Email:
       <input type="email" data-val="true"
@@ -251,7 +251,7 @@ Type expected
 
 `@Html.Editor()` 및 `@Html.EditorFor()`는 해당 기본 템플릿을 실행할 때 `htmlAttributes`라는 특수한 `ViewDataDictionary` 항목을 사용합니다. 이 동작은 필요에 따라 `additionalViewData` 매개 변수를 사용하여 확대됩니다. "htmlAttributes" 키는 대/소문자를 구분합니다. "htmlAttributes" 키는 `@Html.TextBox()`와 같은 입력 도우미에 전달된 `htmlAttributes` 개체와 유사하게 처리됩니다.
 
-```HTML
+```cshtml
 @Html.EditorFor(model => model.YourProperty, 
   new { htmlAttributes = new { @class="myCssClass", style="Width:100px" } })
 ```
@@ -260,16 +260,17 @@ Type expected
 
 `asp-for` 특성 값은 `ModelExpression`이며 람다 식의 오른쪽입니다. 따라서 `asp-for="Property1"`은 생성된 코드에서 `m => m.Property1`이 됩니다. 따라서 `Model`과 함께 접두사로 사용할 필요가 없습니다. “\@” 문자를 사용하여 인라인 식을 시작하고 `m.` 앞으로 이동할 수 있습니다.
 
-```HTML
+```cshtml
 @{
-       var joe = "Joe";
-   }
-   <input asp-for="@joe">
+  var joe = "Joe";
+}
+
+<input asp-for="@joe">
 ```
 
 다음 항목을 생성합니다.
 
-```HTML
+```html
 <input type="text" id="joe" name="joe" value="Joe">
 ```
 
@@ -294,7 +295,7 @@ ASP.NET Core MVC가 `ModelExpression`의 값을 계산하는 경우 `ModelState`
 
 다음 HTML이 `Address.AddressLine1`에 생성됩니다.
 
-```HTML
+```html
 <input type="text" id="Address_AddressLine1" name="Address.AddressLine1" value="">
 ```
 
@@ -308,10 +309,10 @@ ASP.NET Core MVC가 `ModelExpression`의 값을 계산하는 경우 `ModelState`
 
 ```csharp
 public IActionResult Edit(int id, int colorIndex)
-   {
-       ViewData["Index"] = colorIndex;
-       return View(GetPerson(id));
-   }
+{
+    ViewData["Index"] = colorIndex;
+    return View(GetPerson(id));
+}
 ```
 
 다음 Razor에서는 특정 `Color` 요소에 액세스하는 방법을 보여줍니다.
@@ -359,7 +360,7 @@ public IActionResult Edit(int id, int colorIndex)
 
 다음 HTML이 생성됩니다.
 
-```HTML
+```html
 <form method="post" action="/Demo/RegisterTextArea">
   <textarea data-val="true"
    data-val-maxlength="The field Description must be a string or array type with a maximum length of &#x27;1024&#x27;."
@@ -395,7 +396,7 @@ public IActionResult Edit(int id, int colorIndex)
 
 다음 HTML이 `<label>` 요소에 생성됩니다.
 
-```HTML
+```html
 <label for="Email">Email Address</label>
 ```
 
@@ -415,13 +416,13 @@ public IActionResult Edit(int id, int colorIndex)
 
 `Validation Message Tag Helper`는 HTML [범위](https://developer.mozilla.org/docs/Web/HTML/Element/span) 요소에서 `asp-validation-for` 특성과 함께 사용됩니다.
 
-```HTML
+```cshtml
 <span asp-validation-for="Email"></span>
 ```
 
 유효성 검사 메시지 태그 도우미는 다음 HTML을 생성합니다.
 
-```HTML
+```html
 <span class="field-validation-valid"
   data-valmsg-for="Email"
   data-valmsg-replace="true"></span>
@@ -434,7 +435,7 @@ public IActionResult Edit(int id, int colorIndex)
 
 서버 쪽 유효성 검사 오류가 발생하는 경우(예: 사용자 지정 서버 쪽 유효성 검사 또는 클라이언트 쪽 유효성 검사를 사용하지 않는 경우) MVC는 해당 오류 메시지를 `<span>` 요소의 본문으로 배치합니다.
 
-```HTML
+```html
 <span class="field-validation-error" data-valmsg-for="Email"
             data-valmsg-replace="true">
    The Email Address field is required.
@@ -465,7 +466,7 @@ public IActionResult Edit(int id, int colorIndex)
 
 생성된 HTML(모델은 유효한 경우):
 
-```HTML
+```html
 <form action="/DemoReg/Register" method="post">
   <div class="validation-summary-valid" data-valmsg-summary="true">
   <ul><li style="display:none"></li></ul></div>
@@ -490,7 +491,7 @@ public IActionResult Edit(int id, int colorIndex)
 
 * HTML 도우미 대안 `Html.DropDownListFor` 및 `Html.ListBoxFor`가 있습니다.
 
-`Select Tag Helper` `asp-for`는 [선택](https://www.w3.org/wiki/HTML/Elements/select) 요소에 대한 모델 속성 이름을 지정하고 `asp-items`는 [옵션](https://www.w3.org/wiki/HTML/Elements/option) 요소를 지정합니다.  예:
+`Select Tag Helper``asp-for`는 [선택](https://www.w3.org/wiki/HTML/Elements/select) 요소에 대한 모델 속성 이름을 지정하고 `asp-items`는 [옵션](https://www.w3.org/wiki/HTML/Elements/option) 요소를 지정합니다.  예를 들어:
 
 [!code-HTML[](working-with-forms/sample/final/Views/Home/Index.cshtml?range=4)]
 
@@ -551,7 +552,7 @@ HTTP POST `Index` 메서드는 선택 항목을 표시합니다.
 
 다음 HTML이 생성됩니다.
 
-```HTML
+```html
   <form method="post" action="/Home/IndexEnum">
          <select data-val="true" data-val-required="The EnumCountry field is required."
                  id="EnumCountry" name="EnumCountry">
@@ -581,7 +582,7 @@ HTTP POST `Index` 메서드는 선택 항목을 표시합니다.
 
 생성된 코드:
 
-```HTML
+```html
  <form method="post" action="/Home/IndexGroup">
       <select id="Country" name="Country">
           <optgroup label="North America">
@@ -612,7 +613,7 @@ HTTP POST `Index` 메서드는 선택 항목을 표시합니다.
 
 다음과 같은 HTML을 생성합니다.
 
-```HTML
+```html
 <form method="post" action="/Home/IndexMultiSelect">
     <select id="CountryCodes"
     multiple="multiple"
@@ -648,7 +649,7 @@ HTML [\<option>](https://www.w3.org/wiki/HTML/Elements/option) 요소를 추가�
 
 [!code-csharp[](working-with-forms/sample/final/Controllers/HomeController.cs?range=114-119)]
 
-```HTML
+```html
  <form method="post" action="/Home/IndexEmpty">
       <select id="Country" name="Country">
           <option value="">&lt;none&gt;</option>
