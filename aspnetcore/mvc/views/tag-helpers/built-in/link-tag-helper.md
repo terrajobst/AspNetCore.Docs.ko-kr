@@ -39,7 +39,7 @@ ms.locfileid: "76809109"
 
 ### <a name="href"></a>href
 
-링크된 리소스의 기본 설정 주소입니다. 주소는 모든 경우에 생성된 HTML로 간주되어 전달됩니다.
+링크된 리소스의 기본 주소입니다. 이 주소는 모든 경우에 생성된 HTML로 전달됩니다.
 
 ### <a name="asp-fallback-href"></a>asp-fallback-href
 
