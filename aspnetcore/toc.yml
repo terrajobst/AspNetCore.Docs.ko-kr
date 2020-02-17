@@ -297,18 +297,20 @@
           uid: blazor/components
         - name: 수명 주기
           uid: blazor/lifecycle
-        - name: 양식 및 유효성 검사
-          uid: blazor/forms-validation
-        - name: 구성 요소 라이브러리
-          uid: blazor/class-libraries
         - name: 레이아웃
           uid: blazor/layouts
+        - name: 양식 및 유효성 검사
+          uid: blazor/forms-validation
         - name: 종속성 주입
           uid: blazor/dependency-injection
         - name: 라우팅
           uid: blazor/routing
         - name: JavaScript interop
           uid: blazor/javascript-interop
+        - name: 호스팅 모델 구성
+          uid: blazor/hosting-model-configuration
+        - name: 구성 요소 라이브러리
+          uid: blazor/class-libraries
         - name: 보안 및 ID
           items:
             - name: 개요
