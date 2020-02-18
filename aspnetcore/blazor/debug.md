@@ -17,13 +17,13 @@ ms.contentlocale: ko-KR
 ms.lasthandoff: 01/17/2020
 ms.locfileid: "76159991"
 ---
-# <a name="debug-aspnet-core-opno-locblazor"></a>디버그 ASP.NET Core Blazor
+# <a name="debug-aspnet-core-opno-locblazor"></a>디버그 ASP.NET Core [!OP.NO-LOC(Blazor)]
 
 [Daniel Roth](https://github.com/danroth27)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Chromium 기반 브라우저의 브라우저 개발 도구 (Chrome/Edge)를 사용 하 여 Blazor Weasembmbs 디버깅을 위한 *초기* 지원이 있습니다. 작업이 진행 중입니다.
+Chromium 기반 브라우저의 브라우저 개발 도구 (Chrome/Microsoft Edge)를 사용 하 여 [!OP.NO-LOC(Blazor)] Weasembmbs 디버깅을 위한 *초기* 지원이 있습니다. 작업이 진행 중입니다.
 
 * Visual Studio에서 디버깅을 완전히 사용 하도록 설정 합니다.
 * Visual Studio Code에서 디버깅을 사용 하도록 설정 합니다.
@@ -60,10 +60,10 @@ Chromium 기반 브라우저의 브라우저 개발 도구 (Chrome/Edge)를 사�
 > [!WARNING]
 > Visual Studio의 디버깅은 초기 개발 단계에서 지원 됩니다. **F5** 디버깅은 현재 지원 되지 않습니다.
 
-1. 디버깅 하지 않고 `Debug` 구성에서 Blazor Weasembomambomsembomapp**를 실행 합니다 (** **f5**대신 **f5+f5** ).
-1. 응용 프로그램의 디버그 속성 ( **디버그** 메뉴의 마지막 항목)을 열고 HTTP **앱 URL**을 복사 합니다. Chromium 기반 브라우저 (Edge 베타 또는 Chrome)를 사용 하 여 앱의 HTTP 주소 (HTTPS 주소가 아님)로 이동 합니다.
+1. 디버깅 하지 않고 `Debug` 구성에서 [!OP.NO-LOC(Blazor)] Weasembomambomsembomapp**를 실행 합니다 (** **f5**대신 **f5+f5** ).
+1. 응용 프로그램의 디버그 속성 ( **디버그** 메뉴의 마지막 항목)을 열고 HTTP **앱 URL**을 복사 합니다. Chromium 기반 브라우저 (Microsoft Edge 베타 또는 Chrome)를 사용 하 여 앱의 HTTP 주소 (HTTPS 주소가 아님)로 이동 합니다.
 1. 브라우저 창에서 앱에 키보드 포커스를 둡니다. 개발자 도구 패널은 포함 하지 않습니다. 이 절차에 대해서는 개발자 도구 패널을 닫은 상태로 유지 하는 것이 가장 좋습니다. 디버깅이 시작 된 후 개발자 도구 패널을 다시 열 수 있습니다.
-1. 다음 Blazor관련 바로 가기 키를 선택 합니다.
+1. 다음 [!OP.NO-LOC(Blazor)]관련 바로 가기 키를 선택 합니다.
 
    * Windows의 `Shift+Alt+D`
    * macOS에서 `Shift+Cmd+D`
@@ -76,7 +76,7 @@ Chromium 기반 브라우저의 브라우저 개발 도구 (Chrome/Edge)를 사�
 
    2 \. 브라우저 창에서 앱에 키보드 포커스를 놓습니다.
 
-   3\. 새 브라우저 창에서 Blazor관련 바로 가기 키를 선택 합니다. Windows에서 `Shift+Alt+D` 또는 macOS에서 `Shift+Cmd+D` 합니다.
+   3\. 새 브라우저 창에서 [!OP.NO-LOC(Blazor)]관련 바로 가기 키를 선택 합니다. Windows에서 `Shift+Alt+D` 또는 macOS에서 `Shift+Cmd+D` 합니다.
 
    4 \. **Devtools** 탭이 브라우저에서 열립니다. **브라우저 창에서 앱의 탭을 다시 선택 합니다.**
 
@@ -84,10 +84,10 @@ Chromium 기반 브라우저의 브라우저 개발 도구 (Chrome/Edge)를 사�
 
 # <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
-1. `--configuration Debug` 옵션을 [dotnet run](/dotnet/core/tools/dotnet-run) 명령에 전달 하 여 `Debug` 구성에서 Blazor Weasembomsembomsembomsemboma 앱을 실행 합니다. `dotnet run --configuration Debug`.
+1. `--configuration Debug` 옵션을 [dotnet run](/dotnet/core/tools/dotnet-run) 명령에 전달 하 여 `Debug` 구성에서 [!OP.NO-LOC(Blazor)] Weasembomsembomsembomsemboma 앱을 실행 합니다. `dotnet run --configuration Debug`.
 1. 셸의 창에 표시 된 HTTP URL에서 앱으로 이동 합니다.
 1. 개발자 도구 패널이 아닌 앱에 키보드 포커스를 둡니다. 이 절차에 대해서는 개발자 도구 패널을 닫은 상태로 유지 하는 것이 가장 좋습니다. 디버깅이 시작 된 후 개발자 도구 패널을 다시 열 수 있습니다.
-1. 다음 Blazor관련 바로 가기 키를 선택 합니다.
+1. 다음 [!OP.NO-LOC(Blazor)]관련 바로 가기 키를 선택 합니다.
 
    * Windows의 `Shift+Alt+D`
    * macOS에서 `Shift+Cmd+D`
@@ -100,7 +100,7 @@ Chromium 기반 브라우저의 브라우저 개발 도구 (Chrome/Edge)를 사�
 
    2 \. 브라우저 창에서 앱에 키보드 포커스를 둡니다. 개발자 도구 패널은 포함 하지 않습니다.
 
-   3\. 새 브라우저 창에서 Blazor관련 바로 가기 키를 선택 합니다. Windows에서 `Shift+Alt+D` 또는 macOS에서 `Shift+Cmd+D` 합니다.
+   3\. 새 브라우저 창에서 [!OP.NO-LOC(Blazor)]관련 바로 가기 키를 선택 합니다. Windows에서 `Shift+Alt+D` 또는 macOS에서 `Shift+Cmd+D` 합니다.
 
 ---
 
