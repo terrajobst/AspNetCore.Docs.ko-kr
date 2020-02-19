@@ -4,14 +4,14 @@ author: Rick-Anderson
 description: ASP.NET Core에서 Razor 페이지를 위한 필터 메서드를 만드는 방법을 배웁니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
-ms.date: 12/28/2019
+ms.date: 2/18/2020
 uid: razor-pages/filter
-ms.openlocfilehash: 02771219454556b236080c2668243f788693b2c1
-ms.sourcegitcommit: 077b45eceae044475f04c1d7ef2d153d7c0515a8
+ms.openlocfilehash: a60b17685c6f836de7c0afcc5b89a9894fb8b28f
+ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/29/2019
-ms.locfileid: "75542711"
+ms.lasthandoff: 02/19/2020
+ms.locfileid: "77447233"
 ---
 # <a name="filter-methods-for-razor-pages-in-aspnet-core"></a>ASP.NET Core에서 Razor 페이지를 위한 필터 메서드
 
@@ -30,9 +30,9 @@ Razor 페이지 필터:
 * 특정 페이지 처리기 메서드에는 적용할 수 없습니다.
 * 에는 DI ( [종속성 주입](xref:fundamentals/dependency-injection) )로 채워진 생성자 종속성이 있을 수 있습니다. 자세한 내용은 [servicefilterattribute](/aspnet/core/mvc/controllers/filters#servicefilterattribute) 및 [typefilterattribute](/aspnet/core/mvc/controllers/filters#typefilterattribute)를 참조 하십시오.
 
-처리기 메서드가 페이지 생성자 또는 미들웨어를 사용 하 여 실행 되기 전에 코드를 실행할 수 있지만 Razor 페이지 필터만 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext>에 액세스할 수 있습니다. 필터에는 `HttpContext`에 대 한 액세스를 제공 하는 <xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> 파생 매개 변수가 있습니다. 예를 들어 [필터 특성 구현](#ifa) 샘플은 생성자 또는 미들웨어로 수행할 수 없는 응답에 헤더를 추가합니다.
+페이지 생성자 및 미들웨어는 처리기 메서드가 실행 되기 전에 사용자 지정 코드를 실행할 수 있지만 Razor 페이지 필터를 사용 하 여 <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> 및 페이지에 액세스할 수 있습니다. 미들웨어는 `HttpContext`에 액세스할 수 있지만 "페이지 컨텍스트"에는 액세스할 수 없습니다. 필터에는 `HttpContext`에 대 한 액세스를 제공 하는 <xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> 파생 매개 변수가 있습니다. 예를 들어 [필터 특성 구현](#ifa) 샘플은 생성자 또는 미들웨어로 수행할 수 없는 응답에 헤더를 추가합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/3.1sample)([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/3.1sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 Razor 페이지 필터는 전역 또는 페이지 수준에서 적용할 수 있는 다음과 같은 메서드를 제공합니다.
 
@@ -57,7 +57,7 @@ Razor 페이지 필터는 전역 또는 페이지 수준에서 적용할 수 있
 
 위의 코드에서 `ProcessUserAgent.Write` 사용자 에이전트 문자열로 작동 하는 사용자 제공 코드입니다.
 
-다음 코드는 `Startup` 클래스의 `SampleAsyncPageFilter`를 활성화합니다.
+다음 코드는 `SampleAsyncPageFilter` 클래스의 `Startup`를 활성화합니다.
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Startup.cs?name=snippet2)]
 
@@ -91,7 +91,7 @@ Razor 페이지 필터는 전역 또는 페이지 수준에서 적용할 수 있
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Pages/Movies/Test.cshtml.cs)]
 
-브라우저 개발자 도구와 같은 도구를 사용 하 여 헤더를 검사 합니다. **응답 헤더**아래에 `author: Rick` 표시 됩니다.
+브라우저 개발자 도구와 같은 도구를 사용 하 여 헤더를 검사 합니다. **응답 헤더**에 `author: Rick`이 표시됩니다.
 
 순서 재정의에 대한 지침은 [기본 순서 재정의](xref:mvc/controllers/filters#overriding-the-default-order)를 참조하세요.
 
@@ -121,9 +121,9 @@ Razor 페이지 필터:
 * 한 페이지에 또는 전역으로 구현할 수 있습니다.
 * 특정 페이지 처리기 메서드에는 적용할 수 없습니다.
 
-페이지 생성자 또는 미들웨어를 사용하여 처리기 메서드를 실행하기 전에 코드를 실행할 수 있지만, Razor 페이지 필터만 [HttpContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.httpcontext?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_HttpContext)에 액세스할 수 있습니다. 필터에는 `HttpContext`에 대한 액세스를 제공하는 [FilterContext](/dotnet/api/microsoft.aspnetcore.mvc.filters.filtercontext?view=aspnetcore-2.0) 파생 매개 변수가 있습니다. 예를 들어 [필터 특성 구현](#ifa) 샘플은 생성자 또는 미들웨어로 수행할 수 없는 응답에 헤더를 추가합니다.
+페이지 생성자 또는 미들웨어를 사용하여 처리기 메서드를 실행하기 전에 코드를 실행할 수 있지만, Razor 페이지 필터만 [HttpContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.httpcontext?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_HttpContext)에 액세스할 수 있습니다. 필터에는 [에 대한 액세스를 제공하는 ](/dotnet/api/microsoft.aspnetcore.mvc.filters.filtercontext?view=aspnetcore-2.0)FilterContext`HttpContext` 파생 매개 변수가 있습니다. 예를 들어 [필터 특성 구현](#ifa) 샘플은 생성자 또는 미들웨어로 수행할 수 없는 응답에 헤더를 추가합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/sample/PageFilter)([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/sample/PageFilter) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 Razor 페이지 필터는 전역 또는 페이지 수준에서 적용할 수 있는 다음과 같은 메서드를 제공합니다.
 
@@ -149,7 +149,7 @@ Razor 페이지 필터는 전역 또는 페이지 수준에서 적용할 수 있
 
 위의 코드에서 [ILogger](/dotnet/api/microsoft.extensions.logging.ilogger?view=aspnetcore-2.0)는 필요하지 않습니다. 이는 샘플에서 애플리케이션에 대한 추적 정보를 제공하는 데 사용됩니다.
 
-다음 코드는 `Startup` 클래스의 `SampleAsyncPageFilter`를 활성화합니다.
+다음 코드는 `SampleAsyncPageFilter` 클래스의 `Startup`를 활성화합니다.
 
 [!code-csharp[Main](filter/sample/PageFilter/Startup.cs?name=snippet2&highlight=11)]
 

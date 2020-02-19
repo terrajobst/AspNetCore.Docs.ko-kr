@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/20/2019
 uid: grpc/index
-ms.openlocfilehash: 2f32bf6e8df2c5b3574c337682cdc2845991630c
-ms.sourcegitcommit: 73e255e846e414821b8cc20ffa3aec946735cd4e
+ms.openlocfilehash: d97eea1da28424680a3cfa38102637b1e20ff661
+ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/03/2019
-ms.locfileid: "71925165"
+ms.lasthandoff: 02/19/2020
+ms.locfileid: "77446959"
 ---
 # <a name="introduction-to-grpc-on-net-core"></a>.NET Core에서 gRPC 소개
 
@@ -20,7 +20,7 @@ ms.locfileid: "71925165"
 [gRPC](https://grpc.io/docs/guides/)는 언어에 제약 받지 않는 고성능 RPC(원격 프로시저 호출) 프레임워크입니다.
 
 gRPC의 주요 이점은 다음과 같습니다.
-* 최신 고성능 경량 RPC 프레임워크입니다.
+* 최신 고성능 경량 RPC 프레임워크.
 * 기본적으로 프로토콜 버퍼를 사용하는 계약 중심 API 개발로 언어에 구애받지 않는 구현이 가능합니다.
 * 여러 언어에서 강력한 형식의 서버 및 클라이언트를 생성할 수 있는 도구입니다.
 * 클라이언트, 서버 및 양방향 스트리밍 호출을 지원합니다.
@@ -111,7 +111,7 @@ gRPC 클라이언트는 [ *\*.proto* 파일에서 생성](xref:grpc/basics#gener
 var channel = GrpcChannel.ForAddress("https://localhost:5001");
 var client = new Greeter.GreeterClient(channel);
 
-var response = await client.SayHello(
+var response = await client.SayHelloAsync(
     new HelloRequest { Name = "World" });
 
 Console.WriteLine(response.Message);

@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
 ms.date: 01/02/2020
 uid: security/authentication/certauth
-ms.openlocfilehash: 9c175439c0313d62c75898f1af097774b06f353a
-ms.sourcegitcommit: e7d4fe6727d423f905faaeaa312f6c25ef844047
+ms.openlocfilehash: 280daa86510d4445c791b6952653122961f13aeb
+ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/02/2020
-ms.locfileid: "75608147"
+ms.lasthandoff: 02/19/2020
+ms.locfileid: "77447284"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core에서 인증서 인증 구성
 
@@ -28,7 +28,7 @@ ms.locfileid: "75608147"
 
 프록시 및 부하 분산 장치를 사용 하는 환경에서 인증서 인증에 대 한 대안은 OIDC (Openid connect Connect)를 사용 하는 페더레이션 서비스 (ADFS) Active Directory입니다.
 
-## <a name="get-started"></a>시작
+## <a name="get-started"></a>시작하기
 
 HTTPS 인증서를 획득 하 고 적용 하며 인증서를 요구 하도록 [호스트를 구성](#configure-your-host-to-require-certificates) 합니다.
 
@@ -36,7 +36,7 @@ HTTPS 인증서를 획득 하 고 적용 하며 인증서를 요구 하도록 [�
 
 인증이 실패 하는 경우이 처리기는 `401 (Unauthorized)``403 (Forbidden)` 응답을 반환 합니다. 초기 TLS 연결 중에 인증이 수행 되어야 한다는 것을 의미 합니다. 처리기에 도달할 때까지 너무 늦습니다. 익명 연결에서 인증서를 사용 하는 연결로의 연결을 업그레이드할 수 있는 방법은 없습니다.
 
-또한 `Startup.Configure` 메서드에 `app.UseAuthentication();`를 추가 합니다. 그렇지 않으면 `HttpContext.User` 인증서에서 만든 `ClaimsPrincipal`로 설정 되지 않습니다. 예를 들면 다음과 같습니다.:
+또한 `Startup.Configure` 메서드에 `app.UseAuthentication();`를 추가 합니다. 그렇지 않으면 `HttpContext.User` 인증서에서 만든 `ClaimsPrincipal`로 설정 되지 않습니다. 다음은 그 예입니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -218,7 +218,7 @@ public static IHostBuilder CreateHostBuilder(string[] args)
 ```
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*>를 호출 **하기 전에** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*>를 호출 하 여 만든 끝점에는 기본값이 적용 되지 않습니다.
+> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*>를 호출하기 **전에** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*>을 호출하여 생성된 엔드포인트는 기본값이 적용되지 않습니다.
 
 ### <a name="iis"></a>IIS
 
@@ -236,19 +236,26 @@ IIS 관리자에서 다음 단계를 완료 합니다.
 
 ### <a name="use-certificate-authentication-in-azure-web-apps"></a>Azure Web Apps에서 인증서 인증 사용
 
+Azure에는 전달 구성이 필요 하지 않습니다. 인증서 전달 미들웨어에 이미 설치 되어 있습니다.
+
+> [!NOTE]
+> 이렇게 하려면 CertificateForwardingMiddleware이 있어야 합니다.
+
+### <a name="use-certificate-authentication-in-custom-web-proxies"></a>사용자 지정 웹 프록시에서 인증서 인증 사용
+
 `AddCertificateForwarding` 메서드는 다음을 지정 하는 데 사용 됩니다.
 
 * 클라이언트 헤더 이름입니다.
 * `HeaderConverter` 속성을 사용 하 여 인증서를 로드 하는 방법입니다.
 
-Azure Web Apps에서 인증서는 `X-ARR-ClientCert`라는 사용자 지정 요청 헤더로 전달 됩니다. 이를 사용 하려면 `Startup.ConfigureServices`에서 인증서 전달을 구성 합니다.
+사용자 지정 웹 프록시에서 인증서는 사용자 지정 요청 헤더로 전달 됩니다 (예: `X-SSL-CERT`). 이를 사용 하려면 `Startup.ConfigureServices`에서 인증서 전달을 구성 합니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddCertificateForwarding(options =>
     {
-        options.CertificateHeader = "X-ARR-ClientCert";
+        options.CertificateHeader = "X-SSL-CERT";
         options.HeaderConverter = (headerValue) =>
         {
             X509Certificate2 clientCertificate = null;
@@ -326,46 +333,80 @@ namespace AspNetCoreCertificateAuthApi
 }
 ```
 
-#### <a name="implement-an-httpclient-using-a-certificate"></a>인증서를 사용 하 여 HttpClient 구현
+#### <a name="implement-an-httpclient-using-a-certificate-and-the-httpclienthandler"></a>Certificate 및 HttpClientHandler를 사용 하 여 HttpClient 구현
 
-웹 API 클라이언트는 `IHttpClientFactory` 인스턴스를 사용 하 여 만든 `HttpClient`를 사용 합니다. 이는 `HttpClient`에 대 한 처리기를 정의 하는 방법을 제공 하지 않으므로 `HttpRequestMessage`를 사용 하 여 `X-ARR-ClientCert` 요청 헤더에 인증서를 추가 합니다. 인증서는 `GetRawCertDataString` 메서드를 사용 하 여 문자열로 추가 됩니다. 
+HttpClientHandler는 HttpClient 클래스의 생성자에 직접 추가할 수 있습니다. HttpClient의 인스턴스를 만들 때 주의 해야 합니다. 그런 다음 HttpClient는 각 요청과 함께 인증서를 보냅니다.
 
 ```csharp
-private async Task<JsonDocument> GetApiDataAsync()
+private async Task<JsonDocument> GetApiDataUsingHttpClientHandler()
 {
-    try
+    var cert = new X509Certificate2(Path.Combine(_environment.ContentRootPath, "sts_dev_cert.pfx"), "1234");
+    var handler = new HttpClientHandler();
+    handler.ClientCertificates.Add(cert);
+    var client = new HttpClient(handler);
+     
+    var request = new HttpRequestMessage()
     {
-        // Do not hardcode passwords in production code
-        // Use thumbprint or key vault
-        var cert = new X509Certificate2(
-            Path.Combine(_environment.ContentRootPath, 
-                "sts_dev_cert.pfx"), "1234");
-        var client = _clientFactory.CreateClient();
-        var request = new HttpRequestMessage()
-        {
-            RequestUri = new Uri("https://localhost:44379/api/values"),
-            Method = HttpMethod.Get,
-        };
-
-        request.Headers.Add("X-ARR-ClientCert", cert.GetRawCertDataString());
-        var response = await client.SendAsync(request);
-
-        if (response.IsSuccessStatusCode)
-        {
-            var responseContent = await response.Content.ReadAsStringAsync();
-            var data = JsonDocument.Parse(responseContent);
-
-            return data;
-        }
-
-        throw new ApplicationException(
-            $"Status code: {response.StatusCode}, " +
-            $"Error: {response.ReasonPhrase}");
-    }
-    catch (Exception e)
+        RequestUri = new Uri("https://localhost:44379/api/values"),
+        Method = HttpMethod.Get,
+    };
+    var response = await client.SendAsync(request);
+    if (response.IsSuccessStatusCode)
     {
-        throw new ApplicationException($"Exception {e}");
+        var responseContent = await response.Content.ReadAsStringAsync();
+        var data = JsonDocument.Parse(responseContent);
+        return data;
     }
+ 
+    throw new ApplicationException($"Status code: {response.StatusCode}, Error: {response.ReasonPhrase}");
+}
+```
+
+#### <a name="implement-an-httpclient-using-a-certificate-and-a-named-httpclient-from-ihttpclientfactory"></a>IHttpClientFactory에서 인증서 및 명명 된 HttpClient를 사용 하 여 HttpClient 구현 
+
+다음 예제에서는 처리기의 ClientCertificates 속성을 사용 하 여 클라이언트 인증서가 HttpClientHandler에 추가 됩니다. 그런 다음 ConfigurePrimaryHttpMessageHandler 메서드를 사용 하 여이 처리기를 HttpClient의 명명 된 인스턴스에서 사용할 수 있습니다. 이는 ConfigureServices 메서드의 Startup 클래스에서 설정 됩니다.
+
+```csharp
+var clientCertificate = 
+    new X509Certificate2(
+      Path.Combine(_environment.ContentRootPath, "sts_dev_cert.pfx"), "1234");
+ 
+var handler = new HttpClientHandler();
+handler.ClientCertificates.Add(clientCertificate);
+ 
+services.AddHttpClient("namedClient", c =>
+{
+}).ConfigurePrimaryHttpMessageHandler(() => handler);
+```
+
+그런 다음 IHttpClientFactory를 사용 하 여 처리기와 인증서를 사용 하 여 명명 된 인스턴스를 가져올 수 있습니다. Startup 클래스에 정의 된 클라이언트 이름을 가진 CreateClient 메서드는 인스턴스를 가져오는 데 사용 됩니다. 필요에 따라 클라이언트를 사용 하 여 HTTP 요청을 보낼 수 있습니다.
+
+```csharp
+private readonly IHttpClientFactory _clientFactory;
+ 
+public ApiService(IHttpClientFactory clientFactory)
+{
+    _clientFactory = clientFactory;
+}
+ 
+private async Task<JsonDocument> GetApiDataWithNamedClient()
+{
+    var client = _clientFactory.CreateClient("namedClient");
+ 
+    var request = new HttpRequestMessage()
+    {
+        RequestUri = new Uri("https://localhost:44379/api/values"),
+        Method = HttpMethod.Get,
+    };
+    var response = await client.SendAsync(request);
+    if (response.IsSuccessStatusCode)
+    {
+        var responseContent = await response.Content.ReadAsStringAsync();
+        var data = JsonDocument.Parse(responseContent);
+        return data;
+    }
+ 
+    throw new ApplicationException($"Status code: {response.StatusCode}, Error: {response.ReasonPhrase}");
 }
 ```
 

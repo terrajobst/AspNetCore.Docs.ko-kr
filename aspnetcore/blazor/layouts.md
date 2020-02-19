@@ -5,17 +5,17 @@ description: Blazor apps를 위한 재사용 가능한 레이아웃 구성 요�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2019
+ms.date: 02/12/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: 8e7294f6b66d34781473522a71f929ed5f9c33f2
-ms.sourcegitcommit: d2ba66023884f0dca115ff010bd98d5ed6459283
+ms.openlocfilehash: 5b6e1c7ceb4a6e41230e31bbe379bde1bb0a8286
+ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/14/2020
-ms.locfileid: "77213378"
+ms.lasthandoff: 02/19/2020
+ms.locfileid: "77447141"
 ---
 # <a name="aspnet-core-opno-locblazor-layouts"></a>ASP.NET Core Blazor 레이아웃
 
@@ -23,7 +23,7 @@ ms.locfileid: "77213378"
 
 메뉴, 저작권 메시지 및 회사 로고와 같은 일부 앱 요소는 일반적으로 앱의 전체 레이아웃에 포함 되며 앱의 모든 구성 요소에서 사용 됩니다. 응용 프로그램의 모든 구성 요소에 이러한 요소의 코드를 복사 하는 것은 요소 중 하나에 업데이트가 필요할 때마다 모든 구성 요소를 업데이트 해야 하기 때문에&mdash;효율적인 방법이 아닙니다. 이러한 중복은 유지 관리 하기 어렵고 시간이 지남에 따라 일관 되지 않은 콘텐츠가 발생할 수 있습니다. *레이아웃* 은이 문제를 해결 합니다.
 
-기술적으로 레이아웃은 또 다른 구성 요소입니다. 레이아웃은 Razor 템플릿 또는 C# 코드에서 정의 되며 [데이터 바인딩](xref:blazor/components#data-binding), [종속성 주입](xref:blazor/dependency-injection)및 기타 구성 요소 시나리오를 사용할 수 있습니다.
+기술적으로 레이아웃은 또 다른 구성 요소입니다. 레이아웃은 Razor 템플릿 또는 C# 코드에서 정의 되며 [데이터 바인딩](xref:blazor/data-binding), [종속성 주입](xref:blazor/dependency-injection)및 기타 구성 요소 시나리오를 사용할 수 있습니다.
 
 *구성* 요소를 *레이아웃*으로 전환 하려면 다음을 수행 합니다.
 
@@ -66,9 +66,9 @@ Razor 지시문 `@layout`를 사용 하 여 레이아웃을 구성 요소에 적
 
 다음 *_Imports razor* 파일 가져오기:
 
-* `MyCoolLayout`.
+* `MyCoolLayout`입니다.
 * 동일한 폴더와 하위 폴더에 있는 모든 Razor 구성 요소입니다.
-* `BlazorApp1.Data` 네임스페이스.
+* `BlazorApp1.Data` 네임스페이스입니다.
  
 [!code-razor[](layouts/sample_snapshot/3.x/_Imports.razor)]
 
@@ -94,8 +94,8 @@ _Imports 레이아웃을 지정 하면 라우터의 *기본 레이아웃*으로 
 
 ## <a name="share-a-razor-pages-layout-with-integrated-components"></a>통합 구성 요소를 사용 하 여 Razor Pages 레이아웃 공유
 
-라우팅할 수 있는 구성 요소가 Razor Pages 앱에 통합 되 면 구성 요소와 함께 앱의 공유 레이아웃을 사용할 수 있습니다. 자세한 내용은 <xref:blazor/hosting-model-configuration#integrate-razor-components-into-razor-pages-and-mvc-apps>을 참조하세요.
+라우팅할 수 있는 구성 요소가 Razor Pages 앱에 통합 되 면 구성 요소와 함께 앱의 공유 레이아웃을 사용할 수 있습니다. 자세한 내용은 <xref:blazor/integrate-components>을 참조하세요.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:mvc/views/layout>

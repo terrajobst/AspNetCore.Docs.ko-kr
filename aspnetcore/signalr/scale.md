@@ -9,12 +9,12 @@ ms.date: 01/17/2020
 no-loc:
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: bb32bb8617f8a3e4170eeb7e38696ee2bbcafe03
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
+ms.openlocfilehash: 260e2f0c16288fec2e0a694d070f357529782d8d
+ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77172548"
+ms.lasthandoff: 02/19/2020
+ms.locfileid: "77447336"
 ---
 # <a name="aspnet-core-signalr-hosting-and-scaling"></a>ASP.NET Core SignalR 호스팅 및 크기 조정
 
@@ -42,7 +42,7 @@ SignalR에 대 한 Azure App Service를 구성 하는 방법에 대 한 지침�
 
 SignalR에서 연결 관련 리소스를 많이 사용 하는 것은 동일한 서버에서 호스트 되는 다른 웹 앱에 영향을 줄 수 있습니다. SignalR가 열려 있고 마지막으로 사용 가능한 TCP 연결을 보유 하 고 있는 경우 같은 서버의 다른 웹 앱에도 더 이상 사용할 수 있는 연결이 없습니다.
 
-서버에 연결 되지 않은 경우 임의의 소켓 오류 및 연결 다시 설정 오류가 표시 됩니다. 예들 들어 다음과 같습니다.
+서버에 연결 되지 않은 경우 임의의 소켓 오류 및 연결 다시 설정 오류가 표시 됩니다. 다음은 그 예입니다.
 
 ```
 An attempt was made to access a socket in a way forbidden by its access permissions...
@@ -120,9 +120,14 @@ proxy_set_header Connection $connection_upgrade;
 
 자세한 내용은 [NGINX as a WebSocket Proxy](https://www.nginx.com/blog/websocket-nginx/)(NGINX를 WebSocket 프록시로 사용)를 참조하세요.
 
+## <a name="third-party-opno-locsignalr-backplane-providers"></a>타사 SignalR 백플레인 공급자
+
+* [NCache](https://www.alachisoft.com/ncache/asp-net-core-signalr.html)
+* [Orleans](https://github.com/OrleansContrib/SignalR.Orleans)
+
 ## <a name="next-steps"></a>다음 단계
 
-자세한 내용은 다음 리소스를 참조하십시오.
+자세한 내용은 다음 리소스를 참조하세요.
 
 * [Azure SignalR 서비스 설명서](/azure/azure-signalr/signalr-overview)
 * [Redis 후면판 설정](xref:signalr/redis-backplane)
