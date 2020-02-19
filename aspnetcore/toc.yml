@@ -295,6 +295,16 @@
           uid: blazor/templates
         - name: 구성 요소
           uid: blazor/components
+        - name: 데이터 바인딩
+          uid: blazor/data-binding
+        - name: 이벤트 처리
+          uid: blazor/event-handling
+        - name: 템플릿 기반 구성 요소
+          uid: blazor/templated-components
+        - name: 구성 요소 통합
+          uid: blazor/integrate-components
+        - name: 전역화 및 지역화
+          uid: blazor/globalization-localization
         - name: 수명 주기
           uid: blazor/lifecycle
         - name: 레이아웃
@@ -335,6 +345,8 @@
               uid: host-and-deploy/blazor/server
             - name: 링커 구성
               uid: host-and-deploy/blazor/configure-linker
+        - name: 고급 시나리오
+          uid: blazor/advanced-scenarios
     - name: 클라이언트 쪽 개발
       items:
         - name: 단일 페이지 앱
