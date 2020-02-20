@@ -24,13 +24,13 @@ ms.locfileid: "74880982"
 
 ## <a name="overview"></a>개요
 
-부분 태그 도우미는 Razor 페이지 및 MVC 앱에서 [부분 보기](xref:mvc/views/partial)를 렌더링하는 데 사용됩니다. 고려 사항:
+부분 태그 도우미는 Razor Pages 및 MVC 앱에서 [부분 보기](xref:mvc/views/partial)를 렌더링하는 데 사용됩니다. 고려 사항은 다음과 같습니다.
 
 * ASP.NET Core 2.1 이상이 필요합니다.
 * [HTML 도우미 구문](xref:mvc/views/partial#reference-a-partial-view) 대신 사용할 수 있습니다.
 * 부분 보기를 비동기적으로 렌더링합니다.
 
-부분 뷰를 렌더링하기 위한 HTML 도우미의 옵션은 다음과 같습니다.
+부분 보기를 렌더링하기 위해 선택할 수 있는 HTML 도우미로는 다음과 같은 것들이 있습니다.
 
 * [`@await Html.PartialAsync`](/dotnet/api/microsoft.aspnetcore.mvc.rendering.htmlhelperpartialextensions.partialasync)
 * [`@await Html.RenderPartialAsync`](/dotnet/api/microsoft.aspnetcore.mvc.rendering.htmlhelperpartialextensions.renderpartialasync)
@@ -45,9 +45,9 @@ ms.locfileid: "74880982"
 
 ## <a name="name"></a>name
 
-`name` 특성은 필수입니다. 이 특성은 렌더링할 부분 뷰의 이름 또는 경로를 나타냅니다. 부분 뷰의 이름을 지정할 경우 [뷰 탐색](xref:mvc/views/overview#view-discovery) 과정이 시작됩니다. 명시적인 경로가 지정될 경우에는 이 과정이 생략됩니다. 허용되는 모든 `name` 값은 [부분 보기 검색](xref:mvc/views/partial#partial-view-discovery)을 참조하세요.
+`name` 특성은 필수입니다. 이 특성은 렌더링할 부분 보기의 이름 또는 경로를 나타냅니다. 부분 보기의 이름을 지정할 경우 [보기 검색](xref:mvc/views/overview#view-discovery) 과정이 시작됩니다. 명시적인 경로가 지정되면 이 과정이 생략됩니다. 허용되는 모든 `name` 값은 [부분 보기 검색](xref:mvc/views/partial#partial-view-discovery)을 참조하세요.
 
-다음 태그는 명시적인 경로를 사용해서 *Shared* 폴더의 *_ProductPartial.cshtml*을 로드하도록 지시합니다. [for](#for) 특성을 사용하면 바인딩을 위한 모델이 부분 뷰에 전달됩니다.
+다음 태그는 명시적인 경로를 사용해서 *Shared* 폴더의 *_ProductPartial.cshtml*을 로드하도록 지시합니다. [for](#for) 특성을 사용하면 바인딩을 위한 모델이 부분 보기에 전달됩니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Product.cshtml?name=snippet_Name)]
 
@@ -59,21 +59,21 @@ ms.locfileid: "74880982"
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Product.cshtml?name=snippet_For)]
 
-부분 뷰는 연결된 페이지 모델의 `Product` 속성과 바인딩됩니다.
+이 부분 보기는 연결된 페이지 모델의 `Product` 속성에 바인딩됩니다.
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Pages/Product.cshtml.cs?highlight=8)]
 
 ## <a name="model"></a>model
 
-`model` 특성은 부분 뷰에 전달할 모델의 인스턴스를 할당합니다. `model` 특성은 [for](#for) 특성과 함께 사용할 수 없습니다.
+`model` 특성은 부분 보기에 전달할 모델 인스턴스를 할당합니다. `model` 특성은 [for](#for) 특성과 함께 사용할 수 없습니다.
 
-다음 표시에서는 새 `Product` 개체가 인스턴스화되고 바인딩을 위해 `model` 특성에 전달됩니다.
+다음 태그에서는 새 `Product` 개체가 인스턴스화되고 바인딩을 위해 `model` 특성에 전달됩니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Product.cshtml?name=snippet_Model)]
 
 ## <a name="view-data"></a>view-data
 
-`view-data` 특성은 부분 보기에 전달할 [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary)를 할당합니다. 다음 표시를 사용하면 부분 보기에서 전체 ViewData 컬렉션에 액세스할 수 있습니다.
+`view-data` 특성은 부분 보기에 전달할 [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary)를 할당합니다. 다음 태그는 부분 보기에서 전체 ViewData 컬렉션에 액세스할 수 있게 합니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Product.cshtml?name=snippet_ViewData&highlight=5-)]
 
