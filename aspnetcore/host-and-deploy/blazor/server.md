@@ -5,17 +5,17 @@ description: ASP.NET Core를 사용하여 Blazor 서버 앱을 호스트 및 배
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/17/2020
+ms.date: 02/12/2020
 no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/server
-ms.openlocfilehash: e8b3a7faaf1dc88059a79abbc7e74657ebb2068c
-ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
+ms.openlocfilehash: a051d51e734fec4315da73d3c4df57706df7f363
+ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/24/2020
-ms.locfileid: "76726734"
+ms.lasthandoff: 02/19/2020
+ms.locfileid: "77465825"
 ---
 # <a name="host-and-deploy-opno-locblazor-server"></a>Blazor 서버 호스트 및 배포
 
@@ -59,7 +59,7 @@ Blazor는 짧은 대기 시간, 안정성 및 [보안](xref:signalr/security) �
 
 Blazor 서버 앱에 [Azure SignalR Service](/azure/azure-signalr)를 사용하는 것이 좋습니다. 이 서비스를 사용하면 Blazor 서버 앱을 다수의 동시 SignalR 연결로 확장할 수 있습니다. 또한 SignalR 서비스의 글로벌 및 고성능 데이터 센터는 지리적 위치로 인한 대기 시간을 줄이는 데 큰 도움이 됩니다. 앱을 구성하고 원하는 경우 Azure SignalR Service를 프로비전하려면 다음 단계를 따릅니다.
 
-1. [사전 렌더링하는 경우 클라이언트를 동일한 서버로 다시 리디렉션하는](xref:blazor/hosting-models#reconnection-to-the-same-server)*고정 세션*을 지원하려면 해당 서비스를 사용하도록 설정합니다. `ServerStickyMode` 옵션 또는 구성 값을 `Required`(으)로 설정합니다. 일반적으로 앱은 다음 방법 중 **하나**를 사용하여 구성을 만듭니다.
+1. [사전 렌더링하는 경우 클라이언트를 동일한 서버로 다시 리디렉션하는](xref:blazor/hosting-models#connection-to-the-server)*고정 세션*을 지원하려면 해당 서비스를 사용하도록 설정합니다. `ServerStickyMode` 옵션 또는 구성 값을 `Required`(으)로 설정합니다. 일반적으로 앱은 다음 방법 중 **하나**를 사용하여 구성을 만듭니다.
 
    * `Startup.ConfigureServices`:
   

@@ -3,14 +3,14 @@ title: ASP.NET Core에 대한 Razor 구문 참조
 author: rick-anderson
 description: 웹 페이지에 서버 기반 코드를 포함하는 Razor 태그 구문에 대해 알아봅니다.
 ms.author: riande
-ms.date: 12/05/2019
+ms.date: 02/12/2020
 uid: mvc/views/razor
-ms.openlocfilehash: 2d47fbc33328ab454616bcabab796df089686d79
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
+ms.openlocfilehash: 0b1eed2816329d62fca4bdb5719825a4197af353
+ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77171855"
+ms.lasthandoff: 02/19/2020
+ms.locfileid: "77447180"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>ASP.NET Core에 대한 Razor 구문 참조
 
@@ -719,13 +719,13 @@ Razor Pages 예제는 다음 표에 나와 있습니다.
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-구성 요소의 데이터 바인딩은 `@bind` 특성을 사용하여 수행됩니다. 자세한 내용은 <xref:blazor/components#data-binding>를 참조하세요.
+구성 요소의 데이터 바인딩은 `@bind` 특성을 사용하여 수행됩니다. 자세한 내용은 <xref:blazor/data-binding>를 참조하세요.
 
 ### <a name="onevent"></a>\@on{EVENT}
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-Razor에서는 구성 요소에 대한 이벤트 처리 기능을 제공합니다. 자세한 내용은 <xref:blazor/components#event-handling>를 참조하세요.
+Razor에서는 구성 요소에 대한 이벤트 처리 기능을 제공합니다. 자세한 내용은 <xref:blazor/event-handling>를 참조하세요.
 
 ::: moniker-end
 
@@ -763,7 +763,7 @@ Razor에서는 구성 요소에 대한 이벤트 처리 기능을 제공합니�
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-`@typeparam` 지시문은 생성된 구성 요소 클래스에 대한 제네릭 형식 매개 변수를 선언합니다. 자세한 내용은 <xref:blazor/components#generic-typed-components>를 참조하세요.
+`@typeparam` 지시문은 생성된 구성 요소 클래스에 대한 제네릭 형식 매개 변수를 선언합니다. 자세한 내용은 <xref:blazor/templated-components#generic-typed-components>를 참조하세요.
 
 ::: moniker-end
 

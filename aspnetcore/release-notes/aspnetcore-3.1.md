@@ -4,17 +4,17 @@ author: rick-anderson
 description: ASP.NET Core 3.1의 새로운 기능에 대해 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 02/12/2020
 no-loc:
 - Blazor
 - SignalR
 uid: aspnetcore-3.1
-ms.openlocfilehash: 06c1d2596bff34bbfe3b55e782ea2d24321dd839
-ms.sourcegitcommit: da2fb2d78ce70accdba903ccbfdcfffdd0112123
+ms.openlocfilehash: f375022ad3ebdea2990f626320ef295926f88c22
+ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/07/2020
-ms.locfileid: "75722754"
+ms.lasthandoff: 02/19/2020
+ms.locfileid: "77447440"
 ---
 # <a name="whats-new-in-aspnet-core-31"></a>ASP.NET Core 3.1의 새로운 기능
 
@@ -43,7 +43,7 @@ Blazor 서버 앱에서 이제 초기 렌더링 중에 최상위 수준 구성 �
     param-IncrementAmount="10" />
 ```
 
-자세한 내용은 [구성 요소를 Razor Pages 및 MVC 앱에 통합](xref:blazor/components#integrate-components-into-razor-pages-and-mvc-apps)을 참조하세요.
+자세한 내용은 [구성 요소를 Razor Pages 및 MVC 앱에 통합](xref:blazor/integrate-components)을 참조하세요.
 
 ## <a name="support-for-shared-queues-in-httpsys"></a>HTTP.sys에서 공유 큐에 대한 지원
 
@@ -63,7 +63,7 @@ SameSite 쿠키의 동작이 예정된 브라우저 변경 내용을 반영하�
 <input value="@_count" @onkeypress="KeyHandler" @onkeypress:preventDefault />
 ```
 
-자세한 내용은 [기본 작업 방지](xref:blazor/components#prevent-default-actions)를 참조하세요.
+자세한 내용은 [기본 작업 방지](xref:blazor/event-handling#prevent-default-actions)를 참조하세요.
 
 ## <a name="stop-event-propagation-in-opno-locblazor-apps"></a>Blazor 앱에서 이벤트 전파 중지
 
@@ -83,7 +83,7 @@ SameSite 쿠키의 동작이 예정된 브라우저 변경 내용을 반영하�
 }
 ```
 
-자세한 내용은 [이벤트 전파 중지](xref:blazor/components#stop-event-propagation)를 참조하세요.
+자세한 내용은 [이벤트 전파 중지](xref:blazor/event-handling#stop-event-propagation)를 참조하세요.
 
 ## <a name="detailed-errors-during-opno-locblazor-app-development"></a>Blazor 앱을 개발 중에 발생한 자세한 오류 정보
 
