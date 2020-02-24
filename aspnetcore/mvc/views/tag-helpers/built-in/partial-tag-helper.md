@@ -53,7 +53,7 @@ ms.locfileid: "74880982"
 
 ## <a name="for"></a>for
 
-`for` 특성은 현재 모델을 대상으로 평가할 [ModelExpression](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.modelexpression)을 할당합니다. `ModelExpression`은 `@Model.` 구문을 추론합니다. 예를 들어 `for="@Model.Product"` 대신 `for="Product"`를 사용할 수 있습니다. 이 기본 추론 동작은 인라인 식을 정의하는 `@` 기호를 사용하여 재정의 할 수 있습니다.
+`for` 특성은 현재 모델을 대상으로 평가할 [ModelExpression](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.modelexpression)을 할당합니다. `ModelExpression`은 `@Model.` 구문을 추론합니다. 예를 들어 `for="@Model.Product"` 대신 `for="Product"`를 사용할 수 있습니다. 이 기본 추론 동작은 인라인 식을 정의하는 `@` 기호를 사용하여 재정의할 수 있습니다.
 
 다음 태그는 *_ProductPartial.cshtml*을 로드합니다.
 
