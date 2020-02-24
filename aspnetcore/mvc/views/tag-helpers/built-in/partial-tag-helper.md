@@ -53,7 +53,7 @@ ms.locfileid: "74880982"
 
 ## <a name="for"></a>for
 
-`for` 특성은 현재 모델과 비교 평가할 [ModelExpression](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.modelexpression)을 할당합니다. `ModelExpression`은 `@Model.` 구문을 추론합니다. 예를 들어 `for="@Model.Product"` 대신 `for="Product"`를 사용할 수 있습니다. 이 기본 추론 동작은 인라인 식을 정의하는 `@` 기호를 사용하여 재정의됩니다.
+`for` 특성은 현재 모델을 대상으로 평가할 [ModelExpression](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.modelexpression)을 할당합니다. `ModelExpression`은 `@Model.` 구문을 추론합니다. 예를 들어 `for="@Model.Product"` 대신 `for="Product"`를 사용할 수 있습니다. 이 기본 추론 동작은 인라인 식을 정의하는 `@` 기호를 사용하여 재정의할 수 있습니다.
 
 다음 태그는 *_ProductPartial.cshtml*을 로드합니다.
 
@@ -77,19 +77,19 @@ ms.locfileid: "74880982"
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Product.cshtml?name=snippet_ViewData&highlight=5-)]
 
-위의 코드에서 `IsNumberReadOnly` 키 값은 `true`로 설정되고 ViewData 컬렉션에 추가됩니다. 따라서 다음 부분 뷰 내에서 `ViewData["IsNumberReadOnly"]`에 접근할 수 있습니다.
+이전 코드에서 `IsNumberReadOnly` 키 값이 `true`로 설정되고 ViewData 컬렉션에 추가됩니다. 따라서 다음 부분 보기 내에서 `ViewData["IsNumberReadOnly"]`에 액세스할 수 있습니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Shared/_ProductViewDataPartial.cshtml?highlight=5)]
 
 이 예제에서 `ViewData["IsNumberReadOnly"]` 값은 *Number* 필드가 읽기 전용으로 표시될지 여부를 결정합니다.
 
-## <a name="migrate-from-an-html-helper"></a>HTML 도우미에서 마이그레이션
+## <a name="migrate-from-an-html-helper"></a>HTML 도우미로부터 마이그레이션
 
-다음 비동기 HTML 도우미 예제를 살펴보세요. 제품 컬렉션이 반복되어 표시됩니다. `PartialAsync` 메서드의 첫 번째 매개 변수에 따라, *_ProductPartial.cshtml* 부분 보기를 로드합니다. `Product` 모델의 인스턴스가 바인딩을 위한 모델이 부분 보기에 전달됩니다.
+다음 비동기 HTML 도우미 예제를 살펴보세요. 제품 컬렉션이 반복되어 표시됩니다. `PartialAsync` 메서드의 첫 번째 매개 변수에 따라 *_ProductPartial.cshtml* 부분 보기가 로드됩니다. `Product` 모델의 인스턴스가 바인딩을 위해 부분 보기에 전달됩니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Products.cshtml?name=snippet_HtmlHelper&highlight=3)]
 
-다음 부분 태그 도우미는 `PartialAsync` HTML 도우미와 동일한 비동기 렌더링 동작을 합니다. 부분 보기에 바인딩하기 위해 `Product` 모델 인스턴스가 `model` 특성에 할당됩니다.
+다음 부분 태그 도우미는 `PartialAsync` HTML 도우미와 동일한 비동기 렌더링 동작을 합니다. 부분 보기에 바인딩하기 위해 `Product` 모델의 인스턴스가 `model` 특성에 할당됩니다.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Products.cshtml?name=snippet_TagHelper&highlight=3)]
 
