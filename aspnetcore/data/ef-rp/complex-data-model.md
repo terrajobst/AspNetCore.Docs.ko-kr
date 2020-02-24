@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: 1244b2e23a842538ff2fca01a513317a690afe7c
-ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
+ms.openlocfilehash: 411c0874d2b2c6ecadd1da9aff7a093f1e8e525a
+ms.sourcegitcommit: d2ba66023884f0dca115ff010bd98d5ed6459283
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/29/2019
-ms.locfileid: "73034025"
+ms.lasthandoff: 02/14/2020
+ms.locfileid: "77213430"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---data-model---5-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 데이터 모델 - 5/8
 
@@ -59,7 +59,7 @@ ms.locfileid: "73034025"
 
 학생 등록 날짜의 경우 해당 날짜만 관련이 있지만 모든 페이지에는 현재 해당 날짜와 함께 하루의 시간이 표시됩니다. 데이터 주석 특성을 사용하면 데이터를 표시하는 모든 페이지에서 표시 형식을 해결하는 하나의 코드 변경을 만들 수 있습니다. 
 
-[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) 특성은 데이터베이스 내장 형식보다 구체적인 데이터 형식을 지정합니다. 이 경우 날짜 및 시간이 아닌 날짜만 표시되어야 합니다. [DataType 열거형](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1)은 날짜, 시간, 전화 번호, 통화, 이메일 주소 등과 같은 많은 데이터 형식을 제공합니다. `DataType` 특성을 통해 앱에서 자동으로 유형별 기능을 제공하도록 설정할 수도 있습니다. 예:
+[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) 특성은 데이터베이스 내장 형식보다 구체적인 데이터 형식을 지정합니다. 이 경우 날짜 및 시간이 아닌 날짜만 표시되어야 합니다. [DataType 열거형](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1)은 날짜, 시간, 전화 번호, 통화, 이메일 주소 등과 같은 많은 데이터 형식을 제공합니다. `DataType` 특성을 통해 앱에서 자동으로 유형별 기능을 제공하도록 설정할 수도 있습니다. 예를 들어:
 
 * `mailto:` 링크는 `DataType.EmailAddress`에 대해 자동으로 만들어집니다.
 * 날짜 선택기는 대부분의 브라우저에서 `DataType.Date`에 대해 제공됩니다.
@@ -99,7 +99,7 @@ ms.locfileid: "73034025"
 [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
 ```
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 **SQL Server 개체 탐색기**(SSOX)에서 **학생** 테이블을 두 번 클릭하여 학생 테이블 디자이너를 엽니다.
 
@@ -107,7 +107,7 @@ ms.locfileid: "73034025"
 
 위의 이미지는 `Student` 테이블에 대한 스키마를 보여 줍니다. 이름 필드의 형식은 `nvarchar(MAX)`입니다. 이 자습서의 뒷부분에서 마이그레이션을 만들고 적용하면 문자열 길이 특성의 결과로 이름 필드가 `nvarchar(50)`이 됩니다.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 SQLite 도구에서 `Student` 테이블에 대한 열 정의를 검토합니다. 이름 필드의 형식은 `Text`입니다. 이름 필드를 `FirstMidName`이라고 하는 것을 확인할 수 있습니다. 다음 섹션에서는 해당 열의 이름을 `FirstName`으로 변경합니다.
 
@@ -157,7 +157,7 @@ public string LastName { get; set; }
 
 앱을 실행하고 [학생] 페이지로 이동합니다. 예외가 throw됩니다. `[Column]` 특성을 사용하면 EF가 `FirstName` 열을 찾아야 하지만 데이터베이스의 열 이름은 `FirstMidName`입니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 다음 예제와 유사한 오류 메시지가 표시됩니다.
 
@@ -187,7 +187,7 @@ SqlException: Invalid column name 'FirstName'.
 
   마이그레이션이 적용되기 전에 이름 열의 형식은 [nvarchar(MAX)](/sql/t-sql/data-types/nchar-and-nvarchar-transact-sql)이었습니다. 이름 열은 이제 `nvarchar(50)`입니다. 열 이름은 `FirstMidName`에서 `FirstName`으로 변경되었습니다.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 다음 예제와 유사한 오류 메시지가 표시됩니다.
 
@@ -536,7 +536,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 프로젝트를 빌드합니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 PMC에서 다음 명령을 실행합니다.
 
@@ -561,7 +561,7 @@ database "ContosoUniversity", table "dbo.Department", column 'DepartmentID'.
 
 다음 섹션에서는 이 오류에 대해 수행할 작업을 확인합니다.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 마이그레이션을 추가하고 `database update` 명령을 실행하는 경우 다음 오류가 생성됩니다.
 
@@ -591,7 +591,7 @@ SQL Server를 사용하고 다음 섹션의 마이그레이션 적용 방법을 
 
 EF Core가 새로운 데이터베이스를 만들도록 강제하려면 데이터베이스를 삭제하고 업데이트합니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * PMC(**패키지 관리자 콘솔**)에서 다음 명령을 입력합니다.
 
@@ -606,7 +606,7 @@ EF Core가 새로운 데이터베이스를 만들도록 강제하려면 데이�
   Update-Database
   ```
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * 명령 창을 열고 프로젝트 폴더로 이동합니다. 프로젝트 폴더에는 *ContosoUniversity.csproj* 파일이 포함되어 있습니다.
 
@@ -627,7 +627,7 @@ EF Core가 새로운 데이터베이스를 만들도록 강제하려면 데이�
 
 앱을 실행합니다. 앱을 실행하면 `DbInitializer.Initialize` 메서드를 실행합니다. `DbInitializer.Initialize`는 새 데이터베이스를 채웁니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 SSOX에서 데이터베이스를 선택합니다.
 
@@ -643,7 +643,7 @@ SSOX에서 데이터베이스를 선택합니다.
 
   ![SSOX의 CourseAssignment 데이터](complex-data-model/_static/ssox-ci-data.png)
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 SQLite 도구를 사용하여 데이터베이스를 검사합니다.
 
@@ -691,7 +691,7 @@ SQLite 도구를 사용하여 데이터베이스를 검사합니다.
 * `Department` 행 및 관련 `Course` 행을 새 `Department` 행에 추가하는 코드 또는 스크립트를 포함합니다.
 * `Course.DepartmentID`에 대해 "Temp" 부서 또는 기본값을 사용하지 않습니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * PMC(**패키지 관리자 콘솔**)에서 다음 명령을 입력합니다.
 
@@ -701,7 +701,7 @@ SQLite 도구를 사용하여 데이터베이스를 검사합니다.
 
 `DbInitializer.Initialize` 메서드는 빈 데이터베이스에서만 작동하도록 디자인되었으므로 SSOX를 사용하여 Student 및 Course 테이블의 모든 행을 삭제합니다. (계단식 삭제는 Enrollment 테이블을 처리합니다.)
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Visual Studio Code와 함께 SQL Server LocalDB를 사용하는 경우 다음 명령을 실행합니다.
 
@@ -749,7 +749,7 @@ https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intr
 
 [!code-csharp[](intro/samples/cu21/Models/Student.cs?name=snippet_DataType&highlight=3,12-13)]
 
-[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) 특성은 데이터베이스 내장 형식보다 구체적인 데이터 형식을 지정합니다. 이 경우 날짜 및 시간이 아닌 날짜만 표시되어야 합니다. [DataType 열거형](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1)은 날짜, 시간, 전화 번호, 통화, 이메일 주소 등과 같은 많은 데이터 형식을 제공합니다. `DataType` 특성을 통해 앱에서 자동으로 유형별 기능을 제공하도록 설정할 수도 있습니다. 예:
+[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) 특성은 데이터베이스 내장 형식보다 구체적인 데이터 형식을 지정합니다. 이 경우 날짜 및 시간이 아닌 날짜만 표시되어야 합니다. [DataType 열거형](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1)은 날짜, 시간, 전화 번호, 통화, 이메일 주소 등과 같은 많은 데이터 형식을 제공합니다. `DataType` 특성을 통해 앱에서 자동으로 유형별 기능을 제공하도록 설정할 수도 있습니다. 예를 들어:
 
 * `mailto:` 링크는 `DataType.EmailAddress`에 대해 자동으로 만들어집니다.
 * 날짜 선택기는 대부분의 브라우저에서 `DataType.Date`에 대해 제공됩니다.
@@ -821,7 +821,7 @@ DB가 만들어질 때 모델의 속성 이름은 열 이름에 사용됩니다(
 
 `Column` 특성을 추가하면 `SchoolContext`를 지원하는 모델이 변경됩니다. `SchoolContext`를 지원하는 모델은 데이터베이스와 더 이상 일치하지 않습니다. 마이그레이션을 적용하기 전에 앱이 실행되는 경우 다음과 같은 예외가 생성됩니다.
 
-```SQL
+```
 SqlException: Invalid column name 'FirstName'.
 ```
 
@@ -830,14 +830,14 @@ DB를 업데이트하려면:
 * 프로젝트를 빌드합니다.
 * 프로젝트 폴더의 명령 창을 엽니다. 다음 명령을 입력하여 새 마이그레이션을 만들고 DB를 업데이트합니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-```PMC
+```powershell
 Add-Migration ColumnFirstName
 Update-Database
 ```
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 ```dotnetcli
 dotnet ef migrations add ColumnFirstName
@@ -1244,13 +1244,13 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 프로젝트를 빌드합니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ```powershell
 Add-Migration ComplexDataModel
 ```
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 ```dotnetcli
 dotnet ef migrations add ComplexDataModel
@@ -1286,18 +1286,18 @@ database "ContosoUniversity", table "dbo.Department", column 'DepartmentID'.
 
 업데이트된 `DbInitializer`의 코드는 새 엔터티에 대한 시드 데이터를 추가합니다. EF Core가 새로운 DB를 만들도록 강제하려면 DB를 삭제하고 업데이트합니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 PMC(**패키지 관리자 콘솔**)에서 다음 명령을 입력합니다.
 
-```PMC
+```powershell
 Drop-Database
 Update-Database
 ```
 
 PMC에서 `Get-Help about_EntityFrameworkCore`를 실행하여 도움말 정보를 가져옵니다.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 명령 창을 열고 프로젝트 폴더로 이동합니다. 프로젝트 폴더에는 *Startup.cs* 파일이 포함되어 있습니다.
 
@@ -1358,7 +1358,7 @@ SSOX에서 DB를 엽니다.
 
 [!code-csharp[](intro/samples/cu/Migrations/20171027005808_ComplexDataModel.cs?name=snippet_CreateDefaultValue&highlight=22-32)]
 
-위의 변경 내용으로 `ComplexDataModel` `Up` 메서드를 실행한 후에 기존 `Course` 행은 “Temp” 부서에 연결됩니다.
+앞의 변경 내용으로 `ComplexDataModel` `Up` 메서드를 실행한 후에 기존 `Course` 행은 “Temp” 부서에 연결됩니다.
 
 프로덕션 앱은:
 
