@@ -157,7 +157,7 @@ public DateTime ReleaseDate { get; set; }
 * <span data-ttu-id="9e05a-212">문자를 60자로 제한합니다.</span><span class="sxs-lookup"><span data-stu-id="9e05a-212">Limits the characters to 60.</span></span>
 * <span data-ttu-id="9e05a-213">`null` 값은 허용하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="9e05a-213">Doesn't allow a `null` value.</span></span>
 
-# <a name="visual-studiotabvisual-studio"></a>[<span data-ttu-id="9e05a-214">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9e05a-214">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="9e05a-214">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9e05a-214">Visual Studio</span></span>](#tab/visual-studio)
 
 <span data-ttu-id="9e05a-215">`Movie` 테이블에는 현재 다음과 같은 스키마가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="9e05a-215">The `Movie` table currently has the following schema:</span></span>
 
@@ -201,7 +201,7 @@ CREATE TABLE [dbo].[Movie] (
 );
 ```
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[<span data-ttu-id="9e05a-223">Visual Studio Code / Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9e05a-223">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[<span data-ttu-id="9e05a-223">Visual Studio Code / Mac용 Visual Studio</span><span class="sxs-lookup"><span data-stu-id="9e05a-223">Visual Studio Code / Visual Studio for Mac</span></span>](#tab/visual-studio-code+visual-studio-mac)
 
 <span data-ttu-id="9e05a-224">SQLite에는 마이그레이션이 필요하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="9e05a-224">Migrations are not required for SQLite.</span></span>
 
