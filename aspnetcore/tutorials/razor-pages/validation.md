@@ -157,7 +157,7 @@ public DateTime ReleaseDate { get; set; }
 * 문자를 60자로 제한합니다.
 * `null` 값은 허용하지 않습니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 `Movie` 테이블에는 현재 다음과 같은 스키마가 있습니다.
 
@@ -201,7 +201,7 @@ CREATE TABLE [dbo].[Movie] (
 );
 ```
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 SQLite에는 마이그레이션이 필요하지 않습니다.
 
