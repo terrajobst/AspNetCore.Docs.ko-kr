@@ -25,13 +25,13 @@ ms.locfileid: "77172558"
 
 ## <a name="the-form-tag-helper"></a>양식 태그 도우미
 
-[형식](https://www.w3.org/TR/html401/interact/forms.html) 태그 도우미:
+[양식](https://www.w3.org/TR/html401/interact/forms.html) 태그 도우미는:
 
-* MVC 컨트롤러 동작 또는 명명된 경로에 대한 HTML [\<FORM>](https://www.w3.org/TR/html401/interact/forms.html) `action` 특성 값을 생성합니다.
+* MVC 컨트롤러 작업 또는 명명된 경로에 대한 HTML [\<FORM>](https://www.w3.org/TR/html401/interact/forms.html) `action` 특성 값을 생성합니다.
 
-* 사이트 간 요청 위조를 방지하기 위해 숨겨진 [요청 확인 토큰](/aspnet/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages)을 만듭니다(HTTP Post 작업 메서드에서 `[ValidateAntiForgeryToken]` 특성과 함께 사용할 경우).
+* 사이트 간 요청 위조를 방지하기 위해 숨겨진 [요청 확인 토큰](/aspnet/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages)을 생성합니다(HTTP Post 작업 메서드에서 `[ValidateAntiForgeryToken]` 특성을 함께 사용할 경우).
 
-* `asp-route-<Parameter Name>` 특성을 제공합니다. 여기서 `<Parameter Name>`을 경로 값에 추가합니다. `Html.BeginForm` 및 `Html.BeginRouteForm`에 대한 `routeValues` 매개 변수는 유사한 기능을 제공합니다.
+* `asp-route-<Parameter Name>` 특성을 제공하며, 여기서 `<Parameter Name>`은 경로 값에 추가됩니다. `Html.BeginForm` 및 `Html.BeginRouteForm`에 대한 `routeValues` 매개 변수가 유사한 기능을 제공합니다.
 
 * HTML 도우미 대안 `Html.BeginForm` 및 `Html.BeginRouteForm`가 있습니다.
 
@@ -39,7 +39,7 @@ ms.locfileid: "77172558"
 
 [!code-HTML[](working-with-forms/sample/final/Views/Demo/RegisterFormOnly.cshtml)]
 
-위의 형식 태그 도우미에서는 다음 HTML을 생성합니다.
+위의 양식 태그 도우미는 다음 HTML을 생성합니다.
 
 ```html
 <form method="post" action="/Demo/Register">
@@ -48,15 +48,15 @@ ms.locfileid: "77172558"
 </form>
 ```
 
-MVC 런타임은 형식 태그 도우미 특성 `asp-controller` 및 `asp-action`에서 `action` 특성 값을 만듭니다. 형식 태그 도우미도 사이트 간 요청 위조를 방지하기 위해 숨겨진 [요청 확인 토큰](/aspnet/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages)을 만듭니다(HTTP Post 작업 메서드에서 `[ValidateAntiForgeryToken]` 특성과 함께 사용할 경우). 사이트 간 요청 위조로부터 순수한 HTML 형식을 보호하기는 어렵습니다. 형식 태그 도우미는 이러한 서비스를 제공합니다.
+MVC 런타임은 양식 태그 도우미의 특성 `asp-controller` 및 `asp-action`으로부터 `action` 특성 값을 생성합니다. 또한 양식 태그 도우미는 사이트 간 요청 위조를 방지하기 위해 숨겨진 [요청 확인 토큰](/aspnet/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages)을 생성합니다(HTTP Post 작업 메서드에서 `[ValidateAntiForgeryToken]` 특성을 함께 사용할 경우). 사이트 간 요청 위조로부터 순수한 HTML 양식을 보호하기는 어렵습니다. 양식 태그 도우미는 이러한 서비스를 제공합니다.
 
 ### <a name="using-a-named-route"></a>명명된 경로 사용
 
-`asp-route` 태그 도우미 특성은 HTML `action` 특성에 대한 태그를 만들 수도 있습니다. `register`라는 [경로](../../fundamentals/routing.md)를 사용하는 앱은 등록 페이지에 다음 태그를 사용할 수 있습니다.
+`asp-route` 태그 도우미 특성도 HTML `action` 특성에 대한 태그를 생성할 수 있습니다. `register`라는 이름의 [경로](../../fundamentals/routing.md)를 사용하는 앱은 등록 페이지에 다음 태그를 사용할 수 있습니다.
 
 [!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterRoute.cshtml)]
 
-*보기/계정* 폴더의 보기 중 다수(*개별 사용자 계정*을 사용하여 새로운 웹앱을 만들 때 생성됨)에는 [asp-route-returnurl](xref:mvc/views/working-with-forms) 특성이 포함됩니다.
+*Views/Account* 폴더의 많은 보기는(*개별 사용자 계정*을 사용하여 새로운 웹앱을 만들 때 생성됨) [asp-route-returnurl](xref:mvc/views/working-with-forms) 특성을 포함하고 있습니다.
 
 ```cshtml
 <form asp-controller="Account" asp-action="Login"
@@ -65,11 +65,11 @@ MVC 런타임은 형식 태그 도우미 특성 `asp-controller` 및 `asp-action
 ```
 
 >[!NOTE]
->기본 제공된 템플릿을 사용하면 권한이 부여된 리소스에 액세스하려고 하지만 인증되거나 권한이 없는 경우에만 `returnUrl`이 자동으로 채워집니다. 권한이 없는 액세스를 시도하는 경우 보안 미들웨어는 사용자를 `returnUrl` 설정이 포함된 로그인 페이지에 리디렉션합니다.
+>기본 제공 템플릿에서는 권한이 부여된 리소스에 액세스하려고 하지만 인증되지 읺거나 권한이 없는 경우에만 `returnUrl`이 자동으로 채워집니다. 권한 없는 액세스를 시도하는 경우 보안 미들웨어가 사용자를 `returnUrl` 설정과 함께 로그인 페이지로 리디렉션합니다.
 
 ## <a name="the-form-action-tag-helper"></a>양식 작업 태그 도우미
 
-양식 작업 태그 도우미는 생성된 `<button ...>` 또는 `<input type="image" ...>` 태그의 `formaction` 특성을 생성합니다. `formaction` 특성은 양식이 해당 데이터를 제출하는 위치를 제어합니다. `image` 형식의 [\<input>](https://www.w3.org/wiki/HTML/Elements/input) 요소 및 [\<button>](https://www.w3.org/wiki/HTML/Elements/button) 에 바인딩됩니다. 양식 작업 태그 도우미를 통해 여러 개의 [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) `asp-` 특성을 사용하여 해당 요소에 대해 생성되는 `formaction` 링크를 제어할 수 있습니다.
+양식 작업 태그 도우미는 생성되는 `<button ...>` 또는 `<input type="image" ...>` 태그의 `formaction` 특성을 생성합니다. `formaction` 특성은 양식이 해당 데이터를 제출하는 위치를 제어합니다. `image` 형식의 [\<input>](https://www.w3.org/wiki/HTML/Elements/input) 요소 및 [\<button>](https://www.w3.org/wiki/HTML/Elements/button) 에 바인딩됩니다. 양식 작업 태그 도우미를 사용하면 여러 가지 [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) `asp-` 특성을 사용하여 해당 요소에 대해 생성되는 `formaction` 링크를 제어할 수 있습니다.
 
 `formaction`의 값을 제어하기 위해 지원되는 [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) 특성:
 
@@ -169,7 +169,7 @@ public class HomeController : Controller
 <input asp-for="<Expression Name>">
 ```
 
-입력 태그 도우미:
+입력 태그 도우미는:
 
 * `asp-for` 특성에 지정된 식 이름에 대해 `id` 및 `name` HTML 특성을 만듭니다. `asp-for="Property1.Property2"`는 `m => m.Property1.Property2`와 같습니다. 식의 이름은 `asp-for` 특성 값에 사용됩니다. 추가 정보는 [식 이름](#expression-names) 섹션을 참조하세요.
 
@@ -241,7 +241,7 @@ Type expected
    </form>
 ```
 
-`Email` 및 `Password` 속성에 적용할 데이터 주석은 모델에서 메타데이터를 생성합니다. 입력 태그 도우미는 모델 메타데이터를 사용하고 [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5) `data-val-*` 특성을 생성합니다([모델 유효성 검사](../models/validation.md) 참조). 이러한 특성에서는 입력 필드에 연결할 유효성 검사기를 설명합니다. 이 기능은 비간섭 HTML5 및 [jQuery](https://jquery.com/) 유효성 검사를 제공합니다. 비간섭 특성은 `data-val-rule="Error Message"` 형식을 사용합니다. 여기서 규칙은 유효성 검사 규칙의 이름(예: `data-val-required`, `data-val-email`, `data-val-maxlength` 등)입니다. 오류 메시지가 특성에서 제공되는 경우 `data-val-rule` 특성에 대한 값으로 표시됩니다. 또한 규칙에 대한 추가 세부 정보를 제공하는 `data-val-ruleName-argumentName="argumentValue"` 형식의 특성이 있습니다(예: `data-val-maxlength-max="1024"`).
+`Email` 및 `Password` 속성에 적용된 데이터 주석은 모델에서 메타데이터를 생성합니다. 입력 태그 도우미는 모델 메타데이터를 사용하여 [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5) `data-val-*` 특성을 생성합니다([모델 유효성 검사](../models/validation.md) 참조). 이러한 특성은 입력 필드에 연결할 유효성 검사기를 설명합니다. 이 기능은 비간섭 HTML5 및 [jQuery](https://jquery.com/) 유효성 검사를 제공합니다. 비간섭 특성은 `data-val-rule="Error Message"` 형식을 사용합니다. 여기서 rule은 유효성 검사 규칙의 이름(예: `data-val-required`, `data-val-email`, `data-val-maxlength` 등)입니다. 오류 메시지가 특성에서 제공되는 경우 `data-val-rule` 특성에 대한 값으로 표시됩니다. 또한 규칙에 대한 추가 세부 정보를 제공하는 `data-val-ruleName-argumentName="argumentValue"` 형식의 특성이 있습니다(예: `data-val-maxlength-max="1024"`).
 
 ### <a name="html-helper-alternatives-to-input-tag-helper"></a>입력 태그 도우미에 대한 HTML 도우미 대안
 
@@ -276,7 +276,7 @@ Type expected
 
 컬렉션 속성을 가진 `asp-for="CollectionProperty[23].Member"`은 `i`에 `23` 값이 포함될 경우 `asp-for="CollectionProperty[i].Member"`와 동일한 이름을 생성합니다.
 
-ASP.NET Core MVC가 `ModelExpression`의 값을 계산하는 경우 `ModelState`를 비롯한 여러 원본을 검사합니다. `<input type="text" asp-for="@Name">`을 고려합니다. 계산된 `value` 특성은 첫 번째 null이 아닌 값입니다.
+ASP.NET Core MVC는 `ModelExpression`의 값을 계산할 때 `ModelState`를 비롯한 여러 원본을 검사합니다. `<input type="text" asp-for="@Name">`을 가정해보세요. 계산되는 `value` 특성은 다음 중 null이 아닌 첫 번째 값입니다.
 
 * "Name" 키를 가진 `ModelState` 항목입니다.
 * 식 `Model.Name`의 결과입니다.
@@ -293,7 +293,7 @@ ASP.NET Core MVC가 `ModelExpression`의 값을 계산하는 경우 `ModelState`
 
 [!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterAddress.cshtml?highlight=6)]
 
-다음 HTML이 `Address.AddressLine1`에 생성됩니다.
+`Address.AddressLine1`에 대해 다음 HTML이 생성됩니다.
 
 ```html
 <input type="text" id="Address_AddressLine1" name="Address.AddressLine1" value="">
@@ -335,12 +335,12 @@ public IActionResult Edit(int id, int colorIndex)
 
 [!code-HTML[](working-with-forms/sample/final/Views/Shared/EditorTemplates/ToDoItem.cshtml)]
 
-값이 `asp-for` 또는 `Html.DisplayFor` 해당 컨텍스트에서 사용될 때 가능한 경우 `foreach`를 사용해야 합니다. 일반적으로, `for`는 열거자를 할당할 필요가 없으므로 `foreach`보다 좋습니다(시나리오에서 허용하는 경우). 그러나 LINQ 식에서 인덱서를 평가하는 작업은 비용이 많이 들기 때문에 최소화해야 합니다.
+값이 `asp-for` 또는 `Html.DisplayFor` 해당 컨텍스트에서 사용될 때 가능한 경우 `foreach`를 사용해야 합니다. 일반적으로 `for`는 열거자를 할당할 필요가 없으므로 `foreach`보다 좋습니다(시나리오에서 허용하는 경우). 그러나 LINQ 식에서 인덱서를 평가하는 작업은 비용이 많이 들기 때문에 최소화해야 합니다.
 
 &nbsp;
 
 >[!NOTE]
->위의 주석 처리된 코드 샘플은 람다 식을 `@` 연산자와 바꿔서 목록에 있는 각 `ToDoItem`에 액세스하는 방법을 보여줍니다.
+>위의 주석 처리된 코드 예제는 람다 식을 `@` 연산자로 바꿔서 목록에 있는 각 `ToDoItem`에 액세스하는 방법을 보여줍니다.
 
 ## <a name="the-textarea-tag-helper"></a>텍스트 영역 태그 도우미
 
@@ -376,17 +376,17 @@ public IActionResult Edit(int id, int colorIndex)
 
 ## <a name="the-label-tag-helper"></a>레이블 태그 도우미
 
-* 식 이름의 [\<label>](https://www.w3.org/wiki/HTML/Elements/label) 요소에서 레이블 캡션 및 `for` 특성을 생성합니다.
+* [\<label>](https://www.w3.org/wiki/HTML/Elements/label) 요소에서 식 이름에 대한 레이블 캡션 및 `for` 특성을 생성합니다.
 
 * HTML 도우미 대안: `Html.LabelFor`
 
-`Label Tag Helper`는 HTML 레이블 요소를 통해 다음과 같은 이점을 제공합니다.
+`Label Tag Helper`는 HTML 레이블 요소에 비해 다음과 같은 이점을 제공합니다.
 
-* `Display` 특성에서 설명 레이블을 값을 자동으로 가져옵니다. 의도한 표시 이름은 시간에 따라 변경될 수 있고, `Display` 특성 및 레이블 태그 도우미의 조합은 사용되는 모든 곳에서 `Display`을 적용합니다.
+* `Display` 특성으로부터 설명 레이블 값을 자동으로 가져옵니다. 의도한 표시 이름은 시간이 지나면 변경될 수 있고, `Display` 특성 및 레이블 태그 도우미의 조합은 사용되는 모든 곳에 `Display`를 적용합니다.
 
 * 소스 코드의 간단한 태그
 
-* 모델 속성을 사용하는 강력한 형식화입니다.
+* 모델 속성을 사용하는 강력한 형식화.
 
 예제:
 
@@ -394,21 +394,21 @@ public IActionResult Edit(int id, int colorIndex)
 
 [!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterLabel.cshtml?highlight=4)]
 
-다음 HTML이 `<label>` 요소에 생성됩니다.
+`<label>` 요소에 대해 다음 HTML이 생성됩니다.
 
 ```html
 <label for="Email">Email Address</label>
 ```
 
-레이블 태그 도우미는 "이메일"의 `for` 특성 값을 생성했습니다. 이 값은 `<input>` 요소와 연결된 ID입니다. 태그 도우미는 일관된 `id` 및 `for` 요소를 제대로 연결할 수 있도록 생성합니다. 이 샘플의 캡션은 `Display` 특성에서 제공됩니다. 모델에 `Display` 특성이 포함되지 않는 경우 캡션은 식의 속성 이름입니다.
+레이블 태그 도우미는 "Email"이라는 `for` 특성 값을 생성했습니다. 이 값은 `<input>` 요소와 연결된 ID입니다. 태그 도우미는 일관된 `id` 및 `for` 요소를 제대로 연결할 수 있도록 생성합니다. 이 예제의 캡션은 `Display` 특성으로부터 제공됩니다. 모델에 `Display` 특성이 포함되지 않는 경우 캡션은 식의 속성 이름입니다.
 
 ## <a name="the-validation-tag-helpers"></a>유효성 검사 태그 도우미
 
-두 개의 유효성 검사 태그 도우미가 있습니다. `Validation Message Tag Helper`(모델의 단일 속성에 대한 유효성 검사 메시지 표시) 및 `Validation Summary Tag Helper`(유효성 검사 오류의 요약 표시)입니다. `Input Tag Helper`는 모델 클래스의 데이터 주석 특성에 따라 입력 요소에 HTML5 클라이언트 쪽 유효성 검사 특성을 추가합니다. 유효성 검사도 서버에서 수행됩니다. 유효성 검사 태그 도우미는 유효성 검사 오류가 발생하는 경우 이러한 오류 메시지를 표시합니다.
+두 개의 유효성 검사 태그 도우미가 있습니다. `Validation Message Tag Helper`(모델의 단일 속성에 대한 유효성 검사 메시지 표시) 및 `Validation Summary Tag Helper`(유효성 검사 오류의 요약 표시)입니다. `Input Tag Helper`는 모델 클래스의 데이터 주석 특성에 따라 입력 요소에 HTML5 클라이언트 쪽 유효성 검사 특성을 추가합니다. 유효성 검사는 서버에서도 수행됩니다. 유효성 검사 태그 도우미는 유효성 검사 오류가 발생하는 경우 이러한 오류 메시지를 표시합니다.
 
 ### <a name="the-validation-message-tag-helper"></a>유효성 검사 메시지 태그 도우미
 
-* [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5) `data-valmsg-for="property"` 특성을 [범위](https://developer.mozilla.org/docs/Web/HTML/Element/span) 요소에 추가합니다. 그러면 지정된 모델 속성의 입력 필드에서 유효성 검사 오류 메시지를 표시합니다. 클라이언트 쪽 유효성 검사 오류가 발생할 때 [jQuery](https://jquery.com/)는 `<span>` 요소에서 오류 메시지를 표시합니다.
+* 지정된 모델 속성의 입력 필드에서 유효성 검사 오류 메시지를 표시하는 [span](https://developer.mozilla.org/docs/Web/HTML/Element/span) 요소에 [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5) `data-valmsg-for="property"` 특성을 추가합니다. 클라이언트 쪽 유효성 검사 오류가 발생하면 [jQuery](https://jquery.com/)가 `<span>` 요소에서 오류 메시지를 표시합니다.
 
 * 유효성 검사도 서버에서 수행됩니다. 클라이언트는 JavaScript를 사용하지 않도록 설정할 수 있고 일부 유효성 검사는 서버 쪽에서만 수행될 수 있습니다.
 
