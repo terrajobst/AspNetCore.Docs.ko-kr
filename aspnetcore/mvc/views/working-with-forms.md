@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core 형식의 태그 도우미
+title: ASP.NET Core의 양식 및 관련 태그 도우미
 author: rick-anderson
-description: 형식과 함께 사용되는 기본 제공 태그 도우미를 설명합니다.
+description: 양식과 함께 사용되는 기본 제공 태그 도우미를 설명합니다.
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
@@ -13,17 +13,17 @@ ms.contentlocale: ko-KR
 ms.lasthandoff: 02/12/2020
 ms.locfileid: "77172558"
 ---
-# <a name="tag-helpers-in-forms-in-aspnet-core"></a>ASP.NET Core 형식의 태그 도우미
+# <a name="tag-helpers-in-forms-in-aspnet-core"></a>ASP.NET Core의 양식 및 관련 태그 도우미
 
-작성자 [Rick Anderson](https://twitter.com/RickAndMSFT), [N. Taylor Mullen](https://github.com/NTaylorMullen), [Dave Paquette](https://twitter.com/Dave_Paquette) 및 [Jerrie Pelser](https://github.com/jerriep)
+작성자: [Rick Anderson](https://twitter.com/RickAndMSFT), [N. Taylor Mullen](https://github.com/NTaylorMullen), [Dave Paquette](https://twitter.com/Dave_Paquette) 및 [Jerrie Pelser](https://github.com/jerriep)
 
-이 문서에서는 형식 및 형식에서 일반적으로 사용되는 HTML 요소 작업을 보여줍니다. HTML [형식](https://www.w3.org/TR/html401/interact/forms.html) 요소는 서버에 데이터를 다시 게시하는 기본 메커니즘 웹앱을 사용하도록 제공합니다. 이 문서에서는 대부분 [태그 도우미](tag-helpers/intro.md) 및 강력한 HTML 형식을 생산적으로 만들 수 있는 방법을 설명합니다. 이 문서를 읽기 전에 [태그 도우미 소개](tag-helpers/intro.md)를 참조하세요.
+이 문서는 양식 및 양식에서 흔히 사용되는 HTML 요소를 사용하여 작업하는 방법을 보여줍니다. HTML [양식](https://www.w3.org/TR/html401/interact/forms.html) 요소는 웹앱이 서버에 데이터를 다시 게시하는 데 사용되는 기본 메커니즘을 제공합니다. 이 문서의 대부분은 [태그 도우미](tag-helpers/intro.md) 및 태그 도우미를 사용하여 강력한 HTML 양식을 생산적으로 만들 수 있는 방법을 설명합니다. 이 문서를 읽기 전에 [태그 도우미 소개](tag-helpers/intro.md)를 읽어보는 것을 권장합니다.
 
-많은 경우 HTML 도우미는 특정 태그 도우미에 대한 대체 방법을 제공하지만, 태그 도우미는 HTML 도우미를 대체하지 않으며 각 HTML 도우미에 대한 태그 도우미가 없다는 사실을 인지하는 것이 중요합니다. HTML 도우미 대안이 있다면 그 내용도 다룹니다.
+많은 경우 HTML 도우미는 특정 태그 도우미에 대한 대체 방법을 제공하지만, 태그 도우미는 HTML 도우미를 대체하지 않으며 각각의 HTML 도우미에 대한 태그 도우미가 존재하는 것은 아니라는 점을 인지하는 것이 중요합니다. HTML 도우미 대안이 있을 경우 그 내용도 언급합니다.
 
 <a name="my-asp-route-param-ref-label"></a>
 
-## <a name="the-form-tag-helper"></a>형식 태그 도우미
+## <a name="the-form-tag-helper"></a>양식 태그 도우미
 
 [형식](https://www.w3.org/TR/html401/interact/forms.html) 태그 도우미:
 
