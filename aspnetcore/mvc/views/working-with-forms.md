@@ -301,7 +301,7 @@ ASP.NET Core MVC는 `ModelExpression`의 값을 계산할 때 `ModelState`를 �
 
 ### <a name="expression-names-and-collections"></a>식 이름 및 컬렉션
 
-샘플, `Colors`의 배열을 포함하는 모델은 다음과 같습니다.
+이번 예제에서 모델은 `Colors`의 목록을 담고 있습니다.
 
 [!code-csharp[](../../mvc/views/working-with-forms/sample/final/ViewModels/Person.cs?highlight=3&range=5-10)]
 
@@ -526,7 +526,7 @@ HTTP POST `Index` 메서드는 선택 항목을 표시합니다.
 ```
 
 > [!NOTE]
-> 선택 태그 도우미와 함께 `ViewBag` 또는 `ViewData`를 사용하는 것이 좋습니다. 보기 모델은 일반적으로 더 강력하고 문제가 적은 방식으로 MVC 메타데이터를 제공합니다.
+> 선택 태그 도우미와 `ViewBag` 또는 `ViewData`를 함께 사용하지 않는 것이 좋습니다. 보기 모델은 일반적으로 더 강력하고 문제가 적은 방식으로 MVC 메타데이터를 제공합니다.
 
 `asp-for` 특성 값은 특별한 경우이며 다른 태그 도우미 특성(예: `asp-items`)과 달리 `Model` 접두사를 필요로 하지 않습니다.
 
@@ -576,11 +576,11 @@ HTTP POST `Index` 메서드는 선택 항목을 표시합니다.
 
 [!code-csharp[](../../mvc/views/working-with-forms/sample/final/ViewModels/CountryViewModelGroup.cs?highlight=5,6,14,20,26,32,38,44&range=6-56)]
 
-두 개의 그룹은 다음과 같습니다.
+두 그룹은 다음과 같이 보여집니다.
 
 ![옵션 그룹 예제](working-with-forms/_static/grp.png)
 
-생성된 코드:
+생성된 HTML은 다음과 같습니다.
 
 ```html
  <form method="post" action="/Home/IndexGroup">
@@ -607,7 +607,7 @@ HTTP POST `Index` 메서드는 선택 항목을 표시합니다.
 
 [!code-csharp[](../../mvc/views/working-with-forms/sample/final/ViewModels/CountryViewModelIEnumerable.cs?highlight=6)]
 
-다음 보기에서:
+다음 보기를 사용할 경우:
 
 [!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Home/IndexMultiSelect.cshtml?highlight=4)]
 
@@ -665,7 +665,7 @@ HTML [\<option>](https://www.w3.org/wiki/HTML/Elements/option) 요소를 추가�
 ## <a name="additional-resources"></a>추가 자료
 
 * <xref:mvc/views/tag-helpers/intro>
-* [HTML 형식 요소](https://www.w3.org/TR/html401/interact/forms.html)
+* [HTML 양식 요소](https://www.w3.org/TR/html401/interact/forms.html)
 * [요청 확인 토큰](/aspnet/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages)
 * <xref:mvc/models/model-binding>
 * <xref:mvc/models/validation>
