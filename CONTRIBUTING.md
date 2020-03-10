@@ -10,8 +10,8 @@
 
 [Git 및 GitHub.com](https://guides.github.com/activities/hello-world/)의 기본적인 내용을 이해하고 있어야 합니다.
 
-* 기존 문서 변경 또는 새 문서 생성처럼 원하는 작업을 설명하는 [문제](https://github.com/aspnet/Docs/issues/new)를 엽니다. Microsoft에서는 새 항목 제안의 개요를 요청하는 경우가 많습니다. 많은 시간을 투자하기 전에 팀의 승인을 기다리세요.
-* [aspnet/Docs](https://github.com/aspnet/Docs/) 리포지토리를 포크하고 변경 내용에 대한 분기를 만듭니다.
+* 기존 문서 변경 또는 새 문서 생성처럼 원하는 작업을 설명하는 [문제](https://github.com/dotnet/AspNetCore.Docs/issues/new)를 엽니다. Microsoft에서는 새 항목 제안의 개요를 요청하는 경우가 많습니다. 많은 시간을 투자하기 전에 팀의 승인을 기다리세요.
+* [aspnet/Docs](https://github.com/dotnet/AspNetCore.Docs/) 리포지토리를 포크하고 변경 내용에 대한 분기를 만듭니다.
 * 마스터에게 변경 내용이 포함된 PR을 제출합니다.
 * PR에 'cla-required' 레이블이 할당되어 있으면 [CLA(기여 사용권 계약)를 작성](https://cla.dotnetfoundation.org/)하세요.
 * PR 피드백에 응답합니다.
@@ -28,7 +28,7 @@ Visual Studio Code를 사용하여 ASP.NET 문서에 참여하는 경우 [Docs A
 
 ## <a name="folder-structure-conventions"></a>폴더 구조 규칙
 
-각 Markdown 파일에는 이미지 폴더와 샘플 코드 폴더가 있을 수 있습니다. 문서가 [fundamentals/configuration/index.md](https://github.com/aspnet/Docs/blob/master/aspnetcore/fundamentals/configuration/index.md)일 경우 이미지는 [fundamentals/configuration/index/\_static](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/configuration/index/_static)에 있으며, 샘플 앱 프로젝트 파일은 [fundamentals/configuration/index/sample](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/configuration/index/sample)에 있습니다. *fundamentals/configuration/index.md* 파일의 이미지는 다음과 같은 Markdown으로 렌더링됩니다.
+각 Markdown 파일에는 이미지 폴더와 샘플 코드 폴더가 있을 수 있습니다. 문서가 [fundamentals/configuration/index.md](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/fundamentals/configuration/index.md)일 경우 이미지는 [fundamentals/configuration/index/\_static](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/_static)에 있으며, 샘플 앱 프로젝트 파일은 [fundamentals/configuration/index/sample](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/sample)에 있습니다. *fundamentals/configuration/index.md* 파일의 이미지는 다음과 같은 Markdown으로 렌더링됩니다.
 
 ```md
 ![description of image for alt attribute](configuration/index/_static/imagename.png)
@@ -157,4 +157,4 @@ DocFX 요구 사항:
 
 ## <a name="redirects"></a>리디렉션
 
-문서를 삭제하거나, 파일 이름을 변경하거나, 다른 폴더로 이동할 경우 해당 문서를 책갈피에 추가한 사람이 *404 찾을 수 없음* 오류를 받지 않도록 리디렉션을 만드세요. [마스터 리디렉션 파일](https://github.com/aspnet/Docs/blob/master/.openpublishing.redirection.json)에 리디렉션을 추가합니다.
+문서를 삭제하거나, 파일 이름을 변경하거나, 다른 폴더로 이동할 경우 해당 문서를 책갈피에 추가한 사람이 *404 찾을 수 없음* 오류를 받지 않도록 리디렉션을 만드세요. [마스터 리디렉션 파일](https://github.com/dotnet/AspNetCore.Docs/blob/master/.openpublishing.redirection.json)에 리디렉션을 추가합니다.

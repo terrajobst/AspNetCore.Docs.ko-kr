@@ -1,0 +1,1 @@
+영어 이외의 언어로 번역된 코드 주석을 보려면 [이 GitHub 토론 이슈](https://github.com/MicrosoftDocs/feedback/issues/2515)에서 알려주세요.

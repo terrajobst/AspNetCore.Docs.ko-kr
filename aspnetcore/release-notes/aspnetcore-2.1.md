@@ -8,12 +8,12 @@ ms.date: 12/05/2019
 no-loc:
 - SignalR
 uid: aspnetcore-2.1
-ms.openlocfilehash: 57fe6c4e32ad666987c782fac75ddb19e3d3b5c7
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: af5807b782d4acec8c7d40111dc508dfa6127057
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75829142"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78650973"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>ASP.NET Core 2.1의 새로운 기능
 
@@ -55,7 +55,7 @@ ASP.NET Core 2.1에서는 [ASP.NET Core ID](xref:security/authentication/identit
 
 ### <a name="on-by-default"></a>기본적으로 설정
 
-보안 웹 사이트 개발을 위해 HTTPS는 이제 기본적으로 사용됩니다. 2\.1부터는 Kestrel이 로컬 개발 인증서가 제공되는 경우 `https://localhost:5001`을 수신 대기합니다. 개발 인증서를 만듭니다.
+보안 웹 사이트 개발을 위해 HTTPS는 이제 기본적으로 사용됩니다. 2.1부터는 Kestrel이 로컬 개발 인증서가 제공되는 경우 `https://localhost:5001`을 수신 대기합니다. 개발 인증서를 만듭니다.
 
 * 처음에 SDK를 사용하면 .NET Core SDK 첫 실행 환경의 일부입니다.
 * 수동으로 새 `dev-certs` 도구를 사용합니다.
@@ -64,26 +64,26 @@ ASP.NET Core 2.1에서는 [ASP.NET Core ID](xref:security/authentication/identit
 
 ### <a name="https-redirection-and-enforcement"></a>HTTPS 리디렉션 및 적용
 
-웹앱은 일반적으로 HTTP 및 HTTPS를 모두 수신 대기해야 하지만 그런 다음, 모든 HTTP 트래픽을 HTTPS로 리디렉션합니다. 2\.1에서는 구성 또는 바인딩된 서버 포트의 유무에 따라 지능적으로 리디렉션되는 특수한 HTTPS 리디렉션 미들웨어가 도입되었습니다.
+웹앱은 일반적으로 HTTP 및 HTTPS를 모두 수신 대기해야 하지만 그런 다음, 모든 HTTP 트래픽을 HTTPS로 리디렉션합니다. 2.1에서는 구성 또는 바인딩된 서버 포트의 유무에 따라 지능적으로 리디렉션되는 특수한 HTTPS 리디렉션 미들웨어가 도입되었습니다.
 
 HTTPS는 [HSTS(HTTP 엄격한 전송 보안 프로토콜)](xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts)를 사용하여 더 적용될 수 있습니다. HSTS는 항상 HTTPS를 통해 사이트에 액세스하도록 브라우저에 지시합니다. ASP.NET Core 2.1은 최대 기간, 하위 도메인 및 HSTS 미리 로드 목록에 대한 몇 가지 옵션을 지원하는 HSTS 미들웨어를 추가합니다.
 
 ### <a name="configuration-for-production"></a>프로덕션에 대한 구성
 
-프로덕션 내에 HTTPS가 명시적으로 구성되어야 합니다. 2\.1에서는 Kestrel에 HTTPS를 구성하는 기본 구성 스키마가 추가되었습니다. 다음을 사용하도록 앱을 구성할 수 있습니다.
+프로덕션 내에 HTTPS가 명시적으로 구성되어야 합니다. 2.1에서는 Kestrel에 HTTPS를 구성하는 기본 구성 스키마가 추가되었습니다. 다음을 사용하도록 앱을 구성할 수 있습니다.
 
 * URL을 포함하는 여러 엔드포인트. 자세한 내용은 [Kestrel 웹 서버 구현: 엔드포인트 구성](xref:fundamentals/servers/kestrel#endpoint-configuration)을 참조하세요.
 * 디스크의 파일 또는 인증서 저장소에서 HTTPS에 사용할 인증서입니다.
 
 ## <a name="gdpr"></a>GDPR
 
-ASP.NET Core에서는 [EU GDPR(일반 데이터 보호 규정)](https://www.eugdpr.org/) 요구 사항의 일부를 충족하는 API 및 템플릿을 제공합니다. 자세한 내용은 [ASP.NET Core에서 GDPR 지원](xref:security/gdpr)을 참조하세요. [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/security/gdpr/sample)에서는 ASP.NET Core 2.1 템플릿에 추가된 대부분의 GDPR 확장점 및 API를 사용하고 테스트하는 방법을 보여줍니다.
+ASP.NET Core에서는 [EU GDPR(일반 데이터 보호 규정)](https://www.eugdpr.org/) 요구 사항의 일부를 충족하는 API 및 템플릿을 제공합니다. 자세한 내용은 [ASP.NET Core에서 GDPR 지원](xref:security/gdpr)을 참조하세요. [샘플 앱](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/gdpr/sample)에서는 ASP.NET Core 2.1 템플릿에 추가된 대부분의 GDPR 확장점 및 API를 사용하고 테스트하는 방법을 보여줍니다.
 
 ## <a name="integration-tests"></a>통합 테스트
 
 테스트 생성 및 실행을 간소화하는 새 패키지가 도입되었습니다. [Microsoft.AspNetCore.Mvc.Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/) 패키지는 다음과 같은 작업을 처리합니다.
 
-* 종속성 파일( *\*.deps*)을 테스트된 앱에서 테스트 프로젝트의 *bin* 폴더로 복사합니다.
+* 종속성 파일(*\*.deps*)을 테스트된 앱에서 테스트 프로젝트의 *bin* 폴더로 복사합니다.
 * 테스트를 실행하면 고정 파일 및 페이지/보기를 찾을 수 있도록 루트 콘텐츠를 테스트된 앱의 프로젝트 루트로 설정합니다.
 * [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver)를 사용하여 테스트된 앱의 부트스트랩을 간소화하기 위해 [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) 클래스를 제공합니다.
 
@@ -155,7 +155,7 @@ Angular 템플릿은 Angular CLI에 기반하고 React 템플릿은 create-react
 
 ## <a name="razor-pages-search-for-razor-assets"></a>Razor 자산에 대한 Razor Pages 검색
 
-2\.1에서는 나열된 순서로 다음 디렉터리에 있는 Razor 자산(예: 레이아웃 및 부분)에 대한 Razor Pages 검색은 다음과 같습니다.
+2.1에서는 나열된 순서로 다음 디렉터리에 있는 Razor 자산(예: 레이아웃 및 부분)에 대한 Razor Pages 검색은 다음과 같습니다.
 
 1. 현재 Pages 폴더
 1. */Pages/Shared/*
@@ -171,7 +171,7 @@ Angular 템플릿은 Angular CLI에 기반하고 React 템플릿은 create-react
 
 자세한 내용은 <xref:mvc/compatibility-version>를 참조하세요.
 
-## <a name="migrate-from-20-to-21"></a>2\.0에서 2.1로 마이그레이션
+## <a name="migrate-from-20-to-21"></a>2.0에서 2.1로 마이그레이션
 
 [ASP.NET Core 2.0에서 2.1로 마이그레이션](xref:migration/20_21)을 참조하세요.
 

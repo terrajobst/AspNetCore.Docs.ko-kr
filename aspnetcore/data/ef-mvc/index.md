@@ -5,18 +5,18 @@ description: ''
 ms.author: riande
 ms.date: 03/27/2017
 uid: data/ef-mvc/index
-ms.openlocfilehash: 469b16cfe3cdd41abd133df59036baf92ff04e42
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 9ff070022260aae597d71b2da8d342f41f0c976b
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73962640"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78644133"
 ---
 # <a name="aspnet-core-mvc-with-ef-core---tutorial-series"></a>ASP.NET Core MVC 및 EF Core - 자습서 시리즈
 
 ::: moniker range=">= aspnetcore-3.0"
 
-이 자습서는 ASP.NET Core 3.0에 맞게 업데이트되지 **않았습니다**. [Razor Pages 버전](xref:data/ef-rp/intro)이 업데이트되었습니다. 업데이트 가능 시기에 대해서는 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/13920)를 참조하세요.
+이 자습서는 ASP.NET Core 3.0에 맞게 업데이트되지 **않았습니다**. [Razor Pages 버전](xref:data/ef-rp/intro)이 업데이트되었습니다. 업데이트 가능 시기에 대해서는 [이 GitHub 문제](https://github.com/dotnet/AspNetCore.Docs/issues/13920)를 참조하세요.
 
 ::: moniker-end
 

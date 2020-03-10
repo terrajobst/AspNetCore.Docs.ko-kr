@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/advanced
-ms.openlocfilehash: abea9b189861954533b24cb73650af41952d1a86
-ms.sourcegitcommit: 57b85708f4cded99b8f008a69830cb104cd8e879
+ms.openlocfilehash: fc6f8d8c4ab09848cf316be2e522bf5ce3b9ac76
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/13/2020
-ms.locfileid: "75914109"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78645969"
 ---
 # <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>자습서: 고급 시나리오에 대해 알아보기 - ASP.NET MVC 및 EF Core 사용
 
@@ -173,7 +173,7 @@ Entity Framework는 엔터티의 현재 값을 원래 값과 비교하여 엔터
 
 * ChangeTracker.Entries
 
-대량의 엔터티를 추적하고 루프에서 이러한 메서드 중 하나를 여러 번 호출하는 경우 `ChangeTracker.AutoDetectChangesEnabled` 속성을 사용하여 자동 변경 내용 검색을 일시적으로 해제하면 성능이 크게 향상될 수 있습니다. 예:
+대량의 엔터티를 추적하고 루프에서 이러한 메서드 중 하나를 여러 번 호출하는 경우 `ChangeTracker.AutoDetectChangesEnabled` 속성을 사용하여 자동 변경 내용 검색을 일시적으로 해제하면 성능이 크게 향상될 수 있습니다. 예를 들어:
 
 ```csharp
 _context.ChangeTracker.AutoDetectChangesEnabled = false;
@@ -251,7 +251,7 @@ dotnet ef database drop
 
 ## <a name="get-the-code"></a>코드 가져오기
 
-[완성된 애플리케이션을 다운로드하거나 확인합니다.](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[완성된 애플리케이션을 다운로드하거나 확인합니다.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="additional-resources"></a>추가 자료
 

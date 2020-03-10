@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: 944e746624bf5fe7c586a521059fa4eb34b0f1e7
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: c4d43f26ba80e7922c3cbd37d9a5f8e1561b11ad
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259388"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78645879"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---concurrency---8-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 동시성 - 8/8
 
@@ -98,7 +98,7 @@ modelBuilder.Entity<Department>()
   .IsRowVersion();
 ```
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 SQL Server 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 바이트 배열로 정의됩니다.
 
@@ -123,7 +123,7 @@ SQL Server 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성
 
 [@@ROWCOUNT](/sql/t-sql/functions/rowcount-transact-sql)는 마지막 명령문의 영향을 받는 행 수를 반환합니다. 행이 업데이트되지 않으면 EF Core는 `DbUpdateConcurrencyException`을 throw합니다.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 바이트 배열로 정의됩니다.
 
@@ -144,7 +144,7 @@ SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 
 
 프로젝트를 빌드합니다. 
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * PMC에서 다음 명령을 실행합니다.
 
@@ -152,7 +152,7 @@ SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 
   Add-Migration RowVersion
   ```
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * 터미널에서 다음 명령을 실행합니다.
 
@@ -169,7 +169,7 @@ SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 
 
   [!code-csharp[](intro/samples/cu30/Migrations/SchoolContextModelSnapshot.cs?name=snippet_Department&highlight=15-17)]
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * PMC에서 다음 명령을 실행합니다.
 
@@ -177,13 +177,13 @@ SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 
   Update-Database
   ```
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * `Migrations/<timestamp>_RowVersion.cs` 파일을 열고 강조 표시된 코드를 추가합니다.
 
   [!code-csharp[](intro/samples/cu30/MigrationsSQLite/20190722151951_RowVersion.cs?highlight=16-42)]
 
-  위의 코드는:
+  위의 코드는
 
   * 임의의 BLOB 값을 사용하여 기존 행을 업데이트합니다.
   * 행이 업데이트될 때마다 RowVersion 열을 임의 BLOB 값으로 설정하는 데이터베이스 트리거를 추가합니다.
@@ -200,7 +200,7 @@ SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 
 
 ## <a name="scaffold-department-pages"></a>부서 페이지 스캐폴드
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 다음 예외가 포함된 [학생 페이지 스캐폴드](xref:data/ef-rp/intro#scaffold-student-pages)의 지침을 따릅니다.
 
@@ -208,7 +208,7 @@ SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 
 * 모델 클래스에 `Department`를 사용합니다.
   * 새 컨텍스트 클래스를 만드는 대신 기존 컨텍스트 클래스를 사용합니다.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * *Pages/Departments* 폴더를 만듭니다.
 
@@ -280,7 +280,7 @@ SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 
 
 [!code-html[](intro/samples/cu30/Pages/Departments/Edit.cshtml?highlight=1,14,16-17,37-39)]
 
-위의 코드는:
+위의 코드는
 
 * `page` 지시어를 `@page`에서 `@page "{id:int}"`로 업데이트합니다.
 * 숨겨진 행 버전을 추가합니다. 포스트백은 값을 바인딩하므로 `RowVersion`을 추가해야 합니다.
@@ -363,7 +363,7 @@ SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 
 
 * [EF Core의 동시성 토큰](/ef/core/modeling/concurrency)
 * [EF Core의 동시성 처리](/ef/core/saving/concurrency)
-* [ASP.NET Core 2.x 소스 디버깅](https://github.com/aspnet/AspNetCore.Docs/issues/4155)
+* [ASP.NET Core 2.x 소스 디버깅](https://github.com/dotnet/AspNetCore.Docs/issues/4155)
 
 ## <a name="next-steps"></a>다음 단계
 
@@ -376,7 +376,7 @@ SQLite 데이터베이스의 경우 엔터티 속성의 `[Timestamp]` 특성은 
 
 ::: moniker range="< aspnetcore-3.0"
 
-이 자습서에는 여러 사용자가 동시에(같은 시간에) 엔터티를 업데이트하는 경우 충돌을 처리하는 방법을 보여 줍니다. 해결할 수 없는 문제가 발생할 경우 [완성된 앱을 다운로드하거나 봅니다](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples). [지침을 다운로드하세요](xref:index#how-to-download-a-sample).
+이 자습서에는 여러 사용자가 동시에(같은 시간에) 엔터티를 업데이트하는 경우 충돌을 처리하는 방법을 보여 줍니다. 해결할 수 없는 문제가 발생할 경우 [완성된 앱을 다운로드하거나 봅니다](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples). [지침을 다운로드하세요](xref:index#how-to-download-a-sample).
 
 ## <a name="concurrency-conflicts"></a>동시성 충돌
 
@@ -512,11 +512,11 @@ dotnet ef database update
 
 ## <a name="scaffold-the-departments-model"></a>부서 모델 스캐폴드
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio) 
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio) 
 
 [학생 모델 스캐폴드](xref:data/ef-rp/intro#scaffold-student-pages)의 지침을 따르고 `Department`를 모델 클래스로 사용합니다.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
  다음 명령을 실행합니다.
 

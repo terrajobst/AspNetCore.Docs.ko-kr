@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/25/2018
 uid: fundamentals/metapackage
-ms.openlocfilehash: 91f39fc59e5682fb19f8cbc6e9ebe5b30e5dcf3c
-ms.sourcegitcommit: 8a36be1bfee02eba3b07b7a86085ec25c38bae6b
+ms.openlocfilehash: e47f583d0fa75bdeb26b669303747a70619117c1
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/24/2019
-ms.locfileid: "71219140"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78648963"
 ---
 # <a name="microsoftaspnetcoreall-metapackage-for-aspnet-core-20"></a>ASP.NET Core 2.0용 Microsoft.AspNetCore.All 메타패키지
 
@@ -27,7 +27,7 @@ ms.locfileid: "71219140"
 
 이 기능을 사용하려면 .NET Core 2.x를 대상으로 하는 ASP.NET Core 2.x가 필요합니다.
 
-[Microsoft.AspNetCore.All](https://www.nuget.org/packages/Microsoft.AspNetCore.All)은 공유 프레임워크를 참조하는 메타패키지입니다. 공유 프레임워크는 앱 폴더에 없는 어셈블리( *.dll* 파일) 세트입니다.  공유 프레임워크는 앱을 실행할 머신에 설치해야 합니다. 자세한 내용은 [공유 프레임워크](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/)를 참조하세요.
+[Microsoft.AspNetCore.All](https://www.nuget.org/packages/Microsoft.AspNetCore.All)은 공유 프레임워크를 참조하는 메타패키지입니다. 공유 프레임워크는 앱 폴더에 없는 어셈블리(*.dll* 파일) 세트입니다.** 공유 프레임워크는 앱을 실행할 머신에 설치해야 합니다. 자세한 내용은 [공유 프레임워크](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/)를 참조하세요.
 
 `Microsoft.AspNetCore.All`이 참조하는 공유 프레임워크에는 다음이 포함됩니다.
 
@@ -47,7 +47,7 @@ ASP.NET Core 2.x 및 Entity Framework Core 2.x의 모든 기능은 `Microsoft.As
 
 ## <a name="implicit-versioning"></a>암시적 버전 관리
 
-ASP.NET Core 2.1 이상에서는 버전 없이 `Microsoft.AspNetCore.All` 패키지 참조를 지정할 수 있습니다. 버전이 지정되지 않은 경우 SDK(`Microsoft.NET.Sdk.Web`)에 의해 암시적 버전이 지정됩니다. SDK에서 지정하는 암시적 버전을 사용하고, 패키지 참조에 버전 번호를 명시적으로 설정하지 않는 것이 좋습니다. 이 방법에 대한 질문이 있는 경우 GitHub의 [Microsoft.AspNetCore.App 암시적 버전에 대한 토론](https://github.com/aspnet/AspNetCore.Docs/issues/6430)에 의견을 남겨 주세요.
+ASP.NET Core 2.1 이상에서는 버전 없이 `Microsoft.AspNetCore.All` 패키지 참조를 지정할 수 있습니다. 버전이 지정되지 않은 경우 SDK(`Microsoft.NET.Sdk.Web`)에 의해 암시적 버전이 지정됩니다. SDK에서 지정하는 암시적 버전을 사용하고, 패키지 참조에 버전 번호를 명시적으로 설정하지 않는 것이 좋습니다. 이 방법에 대한 질문이 있는 경우 GitHub의 [Microsoft.AspNetCore.App 암시적 버전에 대한 토론](https://github.com/dotnet/AspNetCore.Docs/issues/6430)에 의견을 남겨 주세요.
 
 휴대용 앱의 암시적 버전은 `major.minor.0`으로 설정됩니다. 공유 프레임워크 롤포워드 메커니즘은 설치된 공유 프레임워크 중 최신 호환 버전에서 앱을 실행합니다. 개발, 테스트 및 프로덕션에서 동일한 버전이 사용되도록 하려면 모든 환경에 동일한 버전의 공유 프레임워크를 설치하도록 하세요. 자체 포함 앱의 경우 암시적 버전 번호가 설치된 SDK에 포함된 공유 프레임워크의 `major.minor.patch`로 설정됩니다.
 
@@ -85,14 +85,14 @@ ASP.NET Core 2.1 이상에서는 버전 없이 `Microsoft.AspNetCore.All` 패키
 
 앱이 이전 패키지 또는 이러한 패키지에서 가져온 패키지의 API를 사용하는 경우 `Microsoft.AspNetCore.All`에서 `Microsoft.AspNetCore.App`으로 전환하려면 프로젝트에 이러한 패키지에 대한 참조를 추가합니다.
 
-`Microsoft.AspNetCore.App`의 종속성이 아닌 이전 패키지의 종속성은 암시적으로 포함되지 않습니다. 예:
+`Microsoft.AspNetCore.App`의 종속성이 아닌 이전 패키지의 종속성은 암시적으로 포함되지 않습니다. 예를 들어:
 
 * `Microsoft.Extensions.Caching.Redis`의 종속성 `StackExchange.Redis`
 * `Microsoft.AspNetCore.ApplicationInsights.HostingStartup`의 종속성 `Microsoft.ApplicationInsights`
 
 ## <a name="update-aspnet-core-21"></a>ASP.NET Core 2.1 업데이트
 
-2\.1 이상의 경우 `Microsoft.AspNetCore.App` 메타패키지로 마이그레이션하는 것이 좋습니다. `Microsoft.AspNetCore.All` 메타패키지를 계속 사용하고 최신 패치 버전이 배포되었는지 확인하려면:
+2.1 이상의 경우 `Microsoft.AspNetCore.App` 메타패키지로 마이그레이션하는 것이 좋습니다. `Microsoft.AspNetCore.All` 메타패키지를 계속 사용하고 최신 패치 버전이 배포되었는지 확인하려면:
 
 * 개발 머신 및 빌드 서버: 최신 [.NET Core SDK](https://www.microsoft.com/net/download)를 설치합니다.
 * 배포 서버: 최신 [.NET Core 런타임](https://www.microsoft.com/net/download)을 설치합니다.

@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 04/13/2017
 uid: tutorials/first-mvc-app/validation
 ms.openlocfilehash: 2bb4ed173d154e3b7457ce3f8009f0f9406e36c4
-ms.sourcegitcommit: 07d98ada57f2a5f6d809d44bdad7a15013109549
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/15/2019
-ms.locfileid: "72334069"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78648357"
 ---
 # <a name="add-validation-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 유효성 검사 추가
 
@@ -77,7 +77,7 @@ JavaScript를 사용하지 않도록 설정한 뒤에 잘못된 데이터를 게
 
 이 방식의 가장 멋진 장점은 컨트롤러나 `Create` 보기 템플릿이 실제 적용되는 유효성 검사 규칙이나 표시되는 특정 오류 메시지에 대해 전혀 알지 못한다는 것입니다. 유효성 검사 규칙 및 오류 문자열은 `Movie` 클래스에서만 지정됩니다. 동일한 유효성 검사 규칙이 `Edit` 보기 및 모델을 편집하는 만들 수 있는 모든 다른 보기 템플릿에 자동으로 적용됩니다.
 
-유효성 검사 논리를 변경해야 할 경우 모델에 유효성 검사 특성을 추가하여(이 예제에서는 `Movie` 클래스) 정확히 한 곳에서 변경할 수 있습니다. 모든 유효성 검사 논리가 한 곳에서 정의되어 모든 곳에서 사용되므로 응용 프로그램의 서로 다른 부분이 규칙 적용 방법에 부합하는지 우려하지 않아도 됩니다. 이렇게 하면 코드가 매우 깔끔해지고 유지 관리 및 확장이 간편합니다. 또한 반복 금지 원칙에 완전히 부합하게 됩니다.
+유효성 검사 논리를 변경해야 할 경우 모델에 유효성 검사 특성을 추가하여(이 예제에서는 `Movie` 클래스) 정확히 한 곳에서 변경할 수 있습니다. 모든 유효성 검사 논리가 한 곳에서 정의되어 모든 곳에서 사용되므로 애플리케이션의 서로 다른 부분이 규칙 적용 방법에 부합하는지 우려하지 않아도 됩니다. 이렇게 하면 코드가 매우 깔끔해지고 유지 관리 및 확장이 간편합니다. 또한 반복 금지 원칙에 완전히 부합하게 됩니다.
 
 ## <a name="using-datatype-attributes"></a>DataType 특성 사용
 

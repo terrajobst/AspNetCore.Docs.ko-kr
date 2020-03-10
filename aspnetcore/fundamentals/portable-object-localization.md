@@ -5,12 +5,12 @@ description: 이 문서는 이식 가능 개체 파일을 소개하고 ASP.NET C
 ms.author: scaddie
 ms.date: 09/26/2017
 uid: fundamentals/portable-object-localization
-ms.openlocfilehash: 6ec7afc59d6dfd2629a3d6d83ae619575397a9df
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 08002564eb68bc04eebaeafed560202d0d69958a
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64884378"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78645333"
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>ASP.NET Core에서 이식 가능 개체 지역화 구성
 
@@ -20,7 +20,7 @@ ms.locfileid: "64884378"
 
 **참고:** Orchard Core는 Microsoft 제품이 아닙니다. 따라서 Microsoft는 이 기능에 대한 지원을 제공하지 않습니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/POLocalization) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/POLocalization) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="what-is-a-po-file"></a>PO 파일이란?
 

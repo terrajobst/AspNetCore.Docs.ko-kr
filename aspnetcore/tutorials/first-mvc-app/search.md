@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 12/13/2018
 uid: tutorials/first-mvc-app/search
 ms.openlocfilehash: 89f1fa84783430f160ca0b840bf7ae9699520cb7
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77171631"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78648831"
 ---
 # <a name="add-search-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 검색 추가
 
@@ -144,7 +144,7 @@ var movies = from m in _context.Movie
 
 장르로, 영화 제목으로, 그리고 두 가지 모두로 검색하여 앱을 테스트합니다.
 
-![https://localhost:5001/Movies?MovieGenre=Comedy&SearchString=2 의 결과를 보여주는 브라우저 창](~/tutorials/first-mvc-app/search/_static/s2.png)
+![https://localhost:5001/Movies?MovieGenre=Comedy&SearchString=2의 결과를 보여주는 브라우저 창](~/tutorials/first-mvc-app/search/_static/s2.png)
 
 > [!div class="step-by-step"]
 > [이전](controller-methods-views.md)

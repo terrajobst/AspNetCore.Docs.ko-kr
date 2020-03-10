@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: aspnetcore-2.0
-ms.openlocfilehash: 9d1e1b1154113b8825f4d0faf0f4552b8bd22287
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: 5ca43bab1496aa9fda65282cbb0b1177ad8689eb
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828427"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78650859"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>ASP.NET Core 2.0의 새로운 기능
 
@@ -48,7 +48,7 @@ ASP.NET Core 2.0 패키지는 .NET Standard 2.0을 대상으로 합니다. 패�
 
 `IConfiguration` 인스턴스는 기본적으로 ASP.NET Core 2.0의 서비스 컨테이너에 추가됩니다. 서비스 컨테이너의 `IConfiguration`을 사용하면 애플리케이션이 컨테이너에서 구성 값을 더 쉽게 검색할 수 있습니다.
 
-계획된 문서의 상태에 대한 자세한 내용은 [GitHub issue](https://github.com/aspnet/AspNetCore.Docs/issues/3387)(GitHub 문제)를 참조하세요.
+계획된 문서의 상태에 대한 자세한 내용은 [GitHub issue](https://github.com/dotnet/AspNetCore.Docs/issues/3387)(GitHub 문제)를 참조하세요.
 
 ## <a name="logging-update"></a>로깅 업데이트
 
@@ -62,13 +62,13 @@ ASP.NET Core 2.0에서 로깅은 기본적으로 DI(종속성 주입) 시스템�
 
 새 템플릿을 사용하여 [Azure AD B2C](https://azure.microsoft.com/services/active-directory-b2c/)를 통해 웹앱과 웹 API에 대한 인증을 구성할 수 있습니다.
 
-계획된 문서의 상태에 대한 자세한 내용은 [GitHub issue](https://github.com/aspnet/AspNetCore.Docs/issues/3054)(GitHub 문제)를 참조하세요.
+계획된 문서의 상태에 대한 자세한 내용은 [GitHub issue](https://github.com/dotnet/AspNetCore.Docs/issues/3054)(GitHub 문제)를 참조하세요.
 
 ## <a name="identity-update"></a>ID 업데이트
 
 ASP.NET Core 2.0에서는 ID를 사용하여 보안 Web API를 더 쉽게 빌드할 수 있습니다. [MSAL(Microsoft Authentication Library)](https://www.nuget.org/packages/Microsoft.Identity.Client)을 사용하여 Web API에 액세스하기 위해 액세스 토큰을 얻을 수 있습니다.
 
-2\.0의 인증 변경에 대한 자세한 내용은 다음 리소스를 참조하세요.
+2.0의 인증 변경에 대한 자세한 내용은 다음 리소스를 참조하세요.
 
 * [ASP.NET Core의 계정 확인 및 암호 복구](xref:security/authentication/accconfirm)
 * [ASP.NET Core에서 인증자 앱에 QR 코드 생성 사용](xref:security/authentication/identity-enable-qrcodes)
@@ -114,7 +114,7 @@ return File(data, "text/plain", "downloadName.txt", lastModified: DateTime.UtcNo
 
 ASP.NET Core 2.0에서 이 기능은 Visual Studio에서 디버그할 경우 및 Azure App Services에서 실행될 경우(옵트인(opt in) 후) 자동으로 Application Insights 진단을 사용하도록 설정하는 데 사용됩니다. 따라서 프로젝트 템플릿은 더 이상 기본적으로 Application Insights 패키지와 코드를 추가하지 않습니다.
 
-계획된 문서의 상태에 대한 자세한 내용은 [GitHub issue](https://github.com/aspnet/AspNetCore.Docs/issues/3389)(GitHub 문제)를 참조하세요.
+계획된 문서의 상태에 대한 자세한 내용은 [GitHub issue](https://github.com/dotnet/AspNetCore.Docs/issues/3389)(GitHub 문제)를 참조하세요.
 
 ## <a name="automatic-use-of-anti-forgery-tokens"></a>위조 방지 토큰 자동 사용
 
@@ -138,7 +138,7 @@ Razor 뷰 엔진이 새 Roslyn 컴파일러를 사용하도록 업데이트되�
 
 C# 7.1 기능 상태에 대한 자세한 내용은 [the Roslyn GitHub repository](https://github.com/dotnet/roslyn/blob/master/docs/Language%20Feature%20Status.md)(Roslyn GitHub 리포지토리)를 참조하세요.
 
-## <a name="other-documentation-updates-for-20"></a>2\.0에 대한 기타 문서 업데이트
+## <a name="other-documentation-updates-for-20"></a>2.0에 대한 기타 문서 업데이트
 
 * [ASP.NET Core 앱 배포용 Visual Studio 게시 프로필](xref:host-and-deploy/visual-studio-publish-profiles)
 * [키 관리](xref:security/data-protection/implementation/key-management)

@@ -8,12 +8,12 @@ ms.date: 02/10/2020
 no-loc:
 - SignalR
 uid: tutorials/signalr-typescript-webpack
-ms.openlocfilehash: f8bbd9ed2e9c792197eb29be459f7e5ee499bfd1
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
+ms.openlocfilehash: e1ab02077abc8f8b3315a52eb29a3d571af43fa0
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77172003"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78647643"
 ---
 # <a name="use-aspnet-core-signalr-with-typescript-and-webpack"></a>TypeScript 및 WebPack과 함께 ASP.NET Core SignalR 사용
 
@@ -30,19 +30,19 @@ ms.locfileid: "77172003"
 > * SignalR 서버 구성
 > * 클라이언트 및 서버 간 통신 활성화
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/signalr-typescript-webpack/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/signalr-typescript-webpack/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ::: moniker range=">= aspnetcore-3.0"
 
 ## <a name="prerequisites"></a>사전 요구 사항
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * **ASP.NET 및 웹 개발** 워크로드가 설치된 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 * [.NET Core SDK 3.0 이상](https://www.microsoft.com/net/download/all)
 * [Node.js](https://www.npmjs.com/) ([npm](https://nodejs.org/) 포함)
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * [Visual Studio Code](https://code.visualstudio.com/download)
 * [.NET Core SDK 3.0 이상](https://www.microsoft.com/net/download/all)
@@ -53,7 +53,7 @@ ms.locfileid: "77172003"
 
 ## <a name="create-the-aspnet-core-web-app"></a>ASP.NET Core 웹앱 만들기
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 *PATH* 환경 변수에서 npm을 찾도록 Visual Studio를 구성합니다. 기본적으로 Visual Studio는 설치 디렉터리에 있는 npm의 버전을 사용합니다. Visual Studio에서 다음 지침을 따릅니다.
 
@@ -75,7 +75,7 @@ Visual Studio의 구성이 완료되었습니다.
 
 Visual Studio가 **솔루션 탐색기**의 **종속성** 노드에 NuGet 패키지를 추가하여 프로젝트의 TypeScript 컴파일을 사용 설정합니다.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 **통합 터미널**에서 다음 명령을 실행합니다.
 
@@ -93,7 +93,7 @@ code -r SignalRWebPack
 dotnet add package Microsoft.TypeScript.MSBuild
 ```
 
-위의 명령은 (Microsoft.TypeScript.MSBuild)[https://www.nuget.org/packages/Microsoft.TypeScript.MSBuild/ ] 패키지를 추가하여 프로젝트의 TypeScript 컴파일을 사용 설정합니다.
+위의 명령은 (Microsoft.TypeScript.MSBuild)[https://www.nuget.org/packages/Microsoft.TypeScript.MSBuild/] 패키지를 추가하여 프로젝트의 TypeScript 컴파일을 사용 설정합니다.
 
 ---
 
@@ -249,7 +249,7 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
 다음 단계를 사용하여 앱이 작동하는지 확인합니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. WebPack을 *release* 모드로 실행합니다. **패키지 관리자 콘솔** 창을 사용하여 프로젝트 루트에서 다음 명령을 실행합니다. 프로젝트 루트가 아닌 경우 명령을 입력하기 전에 `cd SignalRWebPack`을 입력합니다.
 
@@ -263,7 +263,7 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
 1. 브라우저를 선택하고 **메시지** 텍스트 상자에 내용을 입력하고 **보내기** 단추를 클릭합니다. 고유한 사용자 이름과 메시지는 두 페이지 모두에 즉시 표시됩니다.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 1. 프로젝트 루트에서 다음 명령을 실행하여 WebPack을 *release* 모드로 실행합니다.
 
@@ -293,13 +293,13 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
 ## <a name="prerequisites"></a>사전 요구 사항
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * **ASP.NET 및 웹 개발** 워크로드가 있는 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 * [.NET Core SDK 2.2 이상](https://www.microsoft.com/net/download/all)
 * [Node.js](https://www.npmjs.com/) ([npm](https://nodejs.org/) 포함)
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * [Visual Studio Code](https://code.visualstudio.com/download)
 * [.NET Core SDK 2.2 이상](https://www.microsoft.com/net/download/all)
@@ -310,7 +310,7 @@ dotnet add package Microsoft.TypeScript.MSBuild
 
 ## <a name="create-the-aspnet-core-web-app"></a>ASP.NET Core 웹앱 만들기
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 *PATH* 환경 변수에서 npm을 찾도록 Visual Studio를 구성합니다. 기본적으로 Visual Studio는 설치 디렉터리에 있는 npm의 버전을 사용합니다. Visual Studio에서 다음 지침을 따릅니다.
 
@@ -325,7 +325,7 @@ Visual Studio 구성이 완료되었습니다. 이제 프로젝트를 만들어�
 1. 프로젝트 이름을 *SignalRWebPack*으로 지정하고 **만들기**를 선택합니다.
 1. 대상 프레임워크 드롭다운에서 *.NET Core*를 선택하고, 프레임워크 선택기 드롭다운에서 *ASP.NET Core 2.2*를 선택합니다. **빈** 템플릿을 선택하고 **만들기**를 선택합니다.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 **통합 터미널**에서 다음 명령을 실행합니다.
 
@@ -486,7 +486,7 @@ dotnet new web -o SignalRWebPack
 
 다음 단계를 사용하여 앱이 작동하는지 확인합니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. WebPack을 *release* 모드로 실행합니다. **패키지 관리자 콘솔** 창을 사용하여 프로젝트 루트에서 다음 명령을 실행합니다. 프로젝트 루트가 아닌 경우 명령을 입력하기 전에 `cd SignalRWebPack`을 입력합니다.
 
@@ -498,7 +498,7 @@ dotnet new web -o SignalRWebPack
 
 1. 브라우저를 선택하고 **메시지** 텍스트 상자에 내용을 입력하고 **보내기** 단추를 클릭합니다. 고유한 사용자 이름과 메시지는 두 페이지 모두에 즉시 표시됩니다.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 1. 프로젝트 루트에서 다음 명령을 실행하여 WebPack을 *release* 모드로 실행합니다.
 

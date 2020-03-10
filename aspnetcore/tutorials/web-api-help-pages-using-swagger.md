@@ -7,11 +7,11 @@ ms.custom: mvc
 ms.date: 12/07/2019
 uid: tutorials/web-api-help-pages-using-swagger
 ms.openlocfilehash: 4408e02996b958bf009903aa1e4eeda9ad4f457c
-ms.sourcegitcommit: 851b921080fe8d719f54871770ccf6f78052584e
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/09/2019
-ms.locfileid: "74944085"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78646857"
 ---
 # <a name="aspnet-core-web-api-help-pages-with-swagger--openapi"></a>Swagger/OpenAPI를 사용한 ASP.NET Core 웹 API 도움말 페이지
 

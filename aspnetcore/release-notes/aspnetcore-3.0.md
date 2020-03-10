@@ -9,12 +9,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: 1dee9a7e1cc381547e7ece71f302f407223dc838
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.openlocfilehash: 35accdd2f65ac5430525be88cc621094e37d3e40
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75829116"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78650853"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3.0의 새로운 기능
 
@@ -329,7 +329,7 @@ ASP.NET Core 3.0에서는 웹 API 권한 부여에 대한 지원을 사용하여
 IdentityServer4는 ASP.NET Core 3.0용 OpenID Connect 및 OAuth 2.0 프레임워크입니다. 다음과 같은 보안 기능을 제공합니다.
 
 * AaaS(Authentication as a Service)
-* 여러 애플리케이션 유형에 대한 SSO(Single Sign-On/Off)
+* 여러 응용 프로그램 유형에 대한 SSO(Single Sign-On/Off)
 * API에 대한 액세스 제어
 * 페더레이션 게이트웨이
 
@@ -398,7 +398,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 웹 UI 템플릿(컨트롤러 및 보기를 사용하는 Razor Pages, MVC)에서 다음이 제거되었습니다.
 
 * 쿠키 동의 UI가 더 이상 포함되지 않습니다. ASP.NET Core 3.0 템플릿에서 생성한 앱에서 쿠키 동의 기능을 사용하려면 <xref:security/gdpr>을 참조하세요.
-* 스크립트 및 관련 정적 자산은 이제 CDN을 사용하는 대신 로컬 파일로 참조됩니다. 자세한 내용은 [스크립트 및 관련 정적 자산은 현재 환경을 기반으로 CDN을 사용하는 대신 로컬 파일로 참조됩니다(aspnet/AspNetCore.Docs #14350)](https://github.com/aspnet/AspNetCore.Docs/issues/14350)를 참조하세요.
+* 스크립트 및 관련 정적 자산은 이제 CDN을 사용하는 대신 로컬 파일로 참조됩니다. 자세한 내용은 [스크립트 및 관련 정적 자산은 현재 환경을 기반으로 CDN을 사용하는 대신 로컬 파일로 참조됩니다(aspnet/AspNetCore.Docs #14350)](https://github.com/dotnet/AspNetCore.Docs/issues/14350)를 참조하세요.
 
 Angular 템플릿은 Angular 8을 사용하는 것으로 업데이트되었습니다.
 
@@ -410,7 +410,7 @@ ASP.NET Core 3.0 템플릿은 <xref:fundamentals/host/generic-host>를 사용합
 
 ### <a name="host-configuration"></a>호스트 구성
 
-ASP.NET Core 3.0 릴리스 전에는 웹 호스트의 호스트 구성에 대해 `ASPNETCORE_`가 접두사로 추가된 환경 변수가 로드되었습니다. 3\.0에서 `AddEnvironmentVariables`는 `CreateDefaultBuilder`와의 호스트 구성을 위해 `DOTNET_`가 접두사로 추가된 환경 변수를 로드하는 데 사용됩니다.
+ASP.NET Core 3.0 릴리스 전에는 웹 호스트의 호스트 구성에 대해 `ASPNETCORE_`가 접두사로 추가된 환경 변수가 로드되었습니다. 3.0에서 `AddEnvironmentVariables`는 `CreateDefaultBuilder`와의 호스트 구성을 위해 `DOTNET_`가 접두사로 추가된 환경 변수를 로드하는 데 사용됩니다.
 
 ### <a name="changes-to-startup-constructor-injection"></a>Startup 생성자 주입의 변경 내용
 
@@ -424,11 +424,11 @@ ASP.NET Core 3.0 릴리스 전에는 웹 호스트의 호스트 구성에 대해
 
 ## <a name="kestrel"></a>Kestrel
 
-* 제네릭 호스트로 마이그레이션하기 위해 Kestrel 구성이 업데이트되었습니다. 3\.0에서 Kestrel은 `ConfigureWebHostDefaults`가 제공하는 웹 호스트 작성기에서 구성됩니다.
+* 제네릭 호스트로 마이그레이션하기 위해 Kestrel 구성이 업데이트되었습니다. 3.0에서 Kestrel은 `ConfigureWebHostDefaults`가 제공하는 웹 호스트 작성기에서 구성됩니다.
 * 연결 어댑터는 Kestrel에서 제거되었고 연결 미들웨어로 대체되었습니다. 이는 ASP.NET Core 파이프라인의 HTTP 미들웨어와 비슷하며, 하위 수준 연결을 위한 것입니다.
 * Kestrel 전송 계층이 `Connections.Abstractions`에서 공용 인터페이스로 공개되었습니다.
 * 후행 헤더를 새 컬렉션으로 이동하여 헤더와 트레일러 사이의 모호성을 해결했습니다.
-* `HttpRequest.Body.Read`와 같은 동기 IO API는 앱 크래시로 이어지는 일반적인 스레드 굶주림 현상(starvation)의 원인입니다. 3\.0에서 `AllowSynchronousIO`는 기본적으로 사용하지 않도록 설정됩니다.
+* `HttpRequest.Body.Read`와 같은 동기 IO API는 앱 크래시로 이어지는 일반적인 스레드 굶주림 현상(starvation)의 원인입니다. 3.0에서 `AllowSynchronousIO`는 기본적으로 사용하지 않도록 설정됩니다.
 
 자세한 내용은 <xref:migration/22-to-30#kestrel>를 참조하세요.
 

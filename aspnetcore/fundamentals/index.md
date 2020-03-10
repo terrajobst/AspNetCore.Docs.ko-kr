@@ -8,11 +8,11 @@ ms.custom: mvc
 ms.date: 01/15/2020
 uid: fundamentals/index
 ms.openlocfilehash: 3fbfc7c4c0d5e568339bc00a7cbe84a3932acf1f
-ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76146357"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78644553"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core 기본 사항
 
@@ -119,7 +119,7 @@ ASP.NET Core 앱은 HTTP 요청을 수신하기 위해 HTTP 서버 구현을 사
 
 ::: moniker range=">= aspnetcore-2.2"
 
-# <a name="windowstabwindows"></a>[Windows](#tab/windows)
+# <a name="windows"></a>[Windows](#tab/windows)
 
 ASP.NET Core는 다음과 같은 서버 구현을 제공합니다.
 
@@ -127,11 +127,11 @@ ASP.NET Core는 다음과 같은 서버 구현을 제공합니다.
 * *IIS HTTP 서버*는 IIS를 사용하는 Windows용 서버입니다. 이 서버를 사용하면 ASP.NET Core 앱 및 IIS는 동일한 프로세스에서 실행됩니다.
 * *HTTP.sys*는 IIS에서 사용되지 않는 Windows용 서버입니다.
 
-# <a name="macostabmacos"></a>[macOS](#tab/macos)
+# <a name="macos"></a>[macOS](#tab/macos)
 
 ASP.NET Core는 *Kestrel* 플랫폼 간 서버 구현을 제공합니다. Kestrel은 ASP.NET Core 2.0 이상에서 인터넷에 직접 공개되는 공용 연결 에지 서버로 실행할 수도 있습니다. Kestrel은 보통 [Nginx](https://nginx.org) 또는 [Apache](https://httpd.apache.org/)를 사용하여 역방향 프록시 구성에서 실행됩니다.
 
-# <a name="linuxtablinux"></a>[Linux](#tab/linux)
+# <a name="linux"></a>[Linux](#tab/linux)
 
 ASP.NET Core는 *Kestrel* 플랫폼 간 서버 구현을 제공합니다. Kestrel은 ASP.NET Core 2.0 이상에서 인터넷에 직접 공개되는 공용 연결 에지 서버로 실행할 수도 있습니다. Kestrel은 보통 [Nginx](https://nginx.org) 또는 [Apache](https://httpd.apache.org/)를 사용하여 역방향 프록시 구성에서 실행됩니다.
 
@@ -141,18 +141,18 @@ ASP.NET Core는 *Kestrel* 플랫폼 간 서버 구현을 제공합니다. Kestre
 
 ::: moniker range="< aspnetcore-2.2"
 
-# <a name="windowstabwindows"></a>[Windows](#tab/windows)
+# <a name="windows"></a>[Windows](#tab/windows)
 
 ASP.NET Core는 다음과 같은 서버 구현을 제공합니다.
 
 * *Kestrel*은 플랫폼 간 웹 서버입니다. Kestrel은 보통 [IIS](https://www.iis.net/)를 사용하여 역방향 프록시 구성에서 실행됩니다. Kestrel은 ASP.NET Core 2.0 이상에서 인터넷에 직접 공개되는 공용 연결 에지 서버로 실행할 수도 있습니다.
 * *HTTP.sys*는 IIS에서 사용되지 않는 Windows용 서버입니다.
 
-# <a name="macostabmacos"></a>[macOS](#tab/macos)
+# <a name="macos"></a>[macOS](#tab/macos)
 
 ASP.NET Core는 *Kestrel* 플랫폼 간 서버 구현을 제공합니다. Kestrel은 ASP.NET Core 2.0 이상에서 인터넷에 직접 공개되는 공용 연결 에지 서버로 실행할 수도 있습니다. Kestrel은 보통 [Nginx](https://nginx.org) 또는 [Apache](https://httpd.apache.org/)를 사용하여 역방향 프록시 구성에서 실행됩니다.
 
-# <a name="linuxtablinux"></a>[Linux](#tab/linux)
+# <a name="linux"></a>[Linux](#tab/linux)
 
 ASP.NET Core는 *Kestrel* 플랫폼 간 서버 구현을 제공합니다. Kestrel은 ASP.NET Core 2.0 이상에서 인터넷에 직접 공개되는 공용 연결 에지 서버로 실행할 수도 있습니다. Kestrel은 보통 [Nginx](https://nginx.org) 또는 [Apache](https://httpd.apache.org/)를 사용하여 역방향 프록시 구성에서 실행됩니다.
 
@@ -204,7 +204,7 @@ app.UseWebSockets(options);
 ASP.NET Core는 다양한 기본 제공 및 타사 로깅 공급자와 함께 작동하는 로깅 API를 지원합니다. 지원되는 공급 기업에는 다음이 포함됩니다.
 
 * Console
-* Debug
+* 디버그
 * Windows 이벤트 추적
 * Windows 이벤트 로그
 * TraceSource
@@ -254,12 +254,12 @@ ASP.NET Core에는 다음과 같은 오류를 처리하기 위한 기본 제공 
 
 콘텐츠 루트는 다음의 기본 경로입니다.
 
-* 앱을 호스트하는 실행 파일( *.exe*)
-* 앱을 구성하는 컴파일된 어셈블리( *.dll*)
+* 앱을 호스트하는 실행 파일(*.exe*)
+* 앱을 구성하는 컴파일된 어셈블리(*.dll*)
 * 다음과 같은 앱에서 사용하는 비코드 콘텐츠 파일:
-  * Razor 파일( *.cshtml*, *.razor*)
-  * 구성 파일( *.json*, *.xml*)
-  * 데이터 파일( *.db*)
+  * Razor 파일(*.cshtml*, *.razor*)
+  * 구성 파일(*.json*, *.xml*)
+  * 데이터 파일(*.db*)
 * [웹 루트](#web-root)(일반적으로 *wwwroot* 폴더에 게시됨)
 
 개발 중:
@@ -285,9 +285,9 @@ ASP.NET Core에는 다음과 같은 오류를 처리하기 위한 기본 제공 
 
 웹 루트는 다음과 같은 공용, 비코드, 정적 리소스 파일의 기본 경로입니다.
 
-* 스타일시트( *.css*)
-* JavaScript( *.js*)
-* 이미지( *.png*, *.jpg*)
+* 스타일시트(*.css*)
+* JavaScript(*.js*)
+* 이미지(*.png*, *.jpg*)
 
 정적 파일은 기본적으로 웹 루트 디렉터리 및 하위 디렉터리에서만 제공됩니다.
 
@@ -317,6 +317,6 @@ ASP.NET Core에는 다음과 같은 오류를 처리하기 위한 기본 제공 
 
 ::: moniker-end
 
-Razor( *.cshtml*) 파일에서는 물결표 슬래시(`~/`)가 웹 루트를 가리킵니다. `~/`(으)로 시작하는 경로를 *가상 경로*라고 합니다.
+Razor(*.cshtml*) 파일에서는 물결표 슬래시(`~/`)가 웹 루트를 가리킵니다. `~/`(으)로 시작하는 경로를 *가상 경로*라고 합니다.
 
 자세한 내용은 <xref:fundamentals/static-files>를 참조하세요.

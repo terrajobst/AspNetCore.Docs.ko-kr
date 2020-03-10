@@ -6,12 +6,12 @@ ms.author: riande
 ms.date: 09/28/2019
 ms.topic: tutorial
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: 1a16f905669d0192d713cbba9bfc6e3e75008b5d
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: a6e63723101ab09219db81ee9796c3938a612226
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259427"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78646029"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>자습서: 관련 데이터 읽기 - ASP.NET MVC 및 EF Core 사용
 
@@ -23,7 +23,7 @@ ms.locfileid: "72259427"
 
 ![강사 인덱스 페이지](read-related-data/_static/instructors-index.png)
 
-이 자습서에서는 다음을 수행했습니다.
+이 자습서에서는 다음과 같은 작업을 수행합니다.
 
 > [!div class="checklist"]
 > * 관련 데이터를 로드하는 방법 알아보기
@@ -31,7 +31,7 @@ ms.locfileid: "72259427"
 > * 강사 페이지 만들기
 > * 명시적 로드에 대해 알아보기
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 * [복합 데이터 모델 만들기](complex-data-model.md)
 
@@ -47,7 +47,7 @@ Entity Framework와 같은 ORM(개체-관계형 매핑) 소프트웨어에서 �
 
   ![별도 쿼리 예제](read-related-data/_static/separate-queries.png)
 
-* 명시적 로드 엔터티를 처음 읽을 때 관련된 데이터가 검색되지 않습니다. 필요한 경우 관련된 데이터를 검색하는 코드를 작성합니다. 별도 쿼리가 있는 즉시 로드의 경우처럼 명시적 로드로 인해 여러 쿼리가 데이터베이스로 전송됩니다. 명시적 로드와의 차이점은 코드는 로드될 탐색 속성을 지정한다는 점입니다. Entity Framework Core 1.1에서 `Load` 메서드를 사용하여 명시적 로드를 수행할 수 있습니다. 예:
+* 명시적 로드 엔터티를 처음 읽을 때 관련된 데이터가 검색되지 않습니다. 필요한 경우 관련된 데이터를 검색하는 코드를 작성합니다. 별도 쿼리가 있는 즉시 로드의 경우처럼 명시적 로드로 인해 여러 쿼리가 데이터베이스로 전송됩니다. 명시적 로드와의 차이점은 코드는 로드될 탐색 속성을 지정한다는 점입니다. Entity Framework Core 1.1에서 `Load` 메서드를 사용하여 명시적 로드를 수행할 수 있습니다. 예를 들어:
 
   ![명시적 로드 예제](read-related-data/_static/explicit-loading.png)
 
@@ -73,7 +73,7 @@ Entity Framework와 같은 ORM(개체-관계형 매핑) 소프트웨어에서 �
 
 [!code-csharp[](intro/samples/cu/Controllers/CoursesController.cs?name=snippet_RevisedIndexMethod)]
 
-*Views/Courses/Index.cshtml*을 열고 템플릿 코드를 다음 코드로 바꿉니다. 변경 내용은 강조 표시되어 있습니다.
+*Views/Courses/Index.cshtml*을 열고 템플릿 코드를 다음 코드로 바꿉니다. 변경 내용이 강조 표시되어 있습니다.
 
 [!code-html[](intro/samples/cu/Views/Courses/Index.cshtml?highlight=4,7,15-17,34-36,44)]
 
@@ -245,11 +245,11 @@ Entity Framework와 같은 ORM(개체-관계형 매핑) 소프트웨어에서 �
 
 ## <a name="get-the-code"></a>코드 가져오기
 
-[완성된 애플리케이션을 다운로드하거나 확인합니다.](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[완성된 애플리케이션을 다운로드하거나 확인합니다.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="next-steps"></a>다음 단계
 
-이 자습서에서는 다음을 수행했습니다.
+이 자습서에서는 다음과 같은 작업을 수행합니다.
 
 > [!div class="checklist"]
 > * 관련 데이터를 로드하는 방법 알아보기

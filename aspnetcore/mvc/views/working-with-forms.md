@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: 1c7652c909432b25ae373873cd593afd879cfa00
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
+ms.openlocfilehash: 5af532db35b858d157f61a6aca30f55d15e9ff1e
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77172558"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78646377"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>ASP.NET Core의 양식 및 관련 태그 도우미
 
@@ -65,7 +65,7 @@ MVC 런타임은 양식 태그 도우미의 특성 `asp-controller` 및 `asp-act
 ```
 
 >[!NOTE]
->기본 제공 템플릿에서는 권한이 부여된 리소스에 액세스하려고 하지만 인증되지 읺거나 권한이 없는 경우에만 `returnUrl`이 자동으로 채워집니다. 권한 없는 액세스를 시도하는 경우 보안 미들웨어가 사용자를 `returnUrl` 설정과 함께 로그인 페이지로 리디렉션합니다.
+>기본 제공 템플릿에서는 권한이 부여된 리소스에 액세스하려고 하지만 인증되지 읺거나 권한이 없는 경우에만 `returnUrl`이 자동으로 채워집니다.  권한 없는 액세스를 시도하는 경우 보안 미들웨어가 사용자를 `returnUrl` 설정과 함께 로그인 페이지로 리디렉션합니다.
 
 ## <a name="the-form-action-tag-helper"></a>양식 작업 태그 도우미
 
@@ -670,4 +670,4 @@ HTML [\<option>](https://www.w3.org/wiki/HTML/Elements/option) 요소를 추가�
 * <xref:mvc/models/model-binding>
 * <xref:mvc/models/validation>
 * [IAttributeAdapter 인터페이스](/dotnet/api/Microsoft.AspNetCore.Mvc.DataAnnotations.IAttributeAdapter)
-* [이 문서의 코드 조각](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/working-with-forms/sample/final)
+* [이 문서의 코드 조각](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/working-with-forms/sample/final)

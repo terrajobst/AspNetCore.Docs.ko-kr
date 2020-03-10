@@ -1,16 +1,16 @@
 ---
 title: ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - CRUD - 2/8
-author: tdykstra
+author: rick-anderson
 description: EF Core를 사용한 만들기, 읽기, 업데이트, 삭제 방법을 보여 줍니다.
 ms.author: riande
 ms.date: 07/22/2019
 uid: data/ef-rp/crud
-ms.openlocfilehash: 57c4a1789d54c29a28ba7e67a1d15815415a461c
-ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
+ms.openlocfilehash: 05519852fab22bd3ad5b77e3494b49191448286f
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/19/2019
-ms.locfileid: "69583121"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78650151"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---crud---2-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - CRUD - 2/8
 
@@ -79,7 +79,7 @@ ms.locfileid: "69583121"
 
 * [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel)에서 [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) 속성의 게시된 양식 값을 사용합니다.
 * 나열된 속성만 업데이트합니다(`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`).
-* “Student” 접두사가 있는 양식 필드를 찾습니다. 예를 들어, `Student.FirstMidName`을 입력합니다. 대/소문자를 구분하지 않습니다.
+* “Student” 접두사가 있는 양식 필드를 찾습니다. 예: `Student.FirstMidName`. 대/소문자를 구분하지 않습니다.
 * [모델 바인딩](xref:mvc/models/model-binding) 시스템을 사용하여 양식 값을 문자열에서 `Student` 모델의 형식으로 변환합니다. 예를 들어 `EnrollmentDate`는 DateTime으로 변환해야 합니다.
 
 앱을 실행하고 학생 엔터티를 만들어 만들기 페이지를 테스트합니다.
@@ -116,7 +116,7 @@ ms.locfileid: "69583121"
 
 [SetValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues.setvalues#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyValues_SetValues_System_Object_) 메서드는 다른 [PropertyValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues) 개체의 값을 읽어서 이 개체의 값을 설정합니다. `SetValues`는 속성 이름 일치를 사용합니다. 뷰 모델 형식은 모델 형식과 연결될 필요는 없으며 일치하는 속성만 있으면 됩니다.
 
-`StudentVM`을 사용하려면 `Student` 대신 `StudentVM`을 사용하도록 [Create.cshtml](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/2-crud/Pages/Students/CreateVM.cshtml)을 업데이트해야 합니다.
+`StudentVM`을 사용하려면 `Student` 대신 `StudentVM`을 사용하도록 [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/2-crud/Pages/Students/CreateVM.cshtml)을 업데이트해야 합니다.
 
 ## <a name="update-the-edit-page"></a>편집 페이지 업데이트
 
@@ -322,7 +322,7 @@ ms.locfileid: "69583121"
 
 [SetValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues.setvalues#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyValues_SetValues_System_Object_) 메서드는 다른 [PropertyValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues) 개체의 값을 읽어서 이 개체의 값을 설정합니다. `SetValues`는 속성 이름 일치를 사용합니다. 뷰 모델 형식은 모델 형식과 연결될 필요는 없으며 일치하는 속성만 있으면 됩니다.
 
-`StudentVM`을 사용하려면 `Student` 대신 `StudentVM`을 사용하도록 [CreateVM.cshtml](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21/Pages/Students/CreateVM.cshtml)을 업데이트해야 합니다.
+`StudentVM`을 사용하려면 `Student` 대신 `StudentVM`을 사용하도록 [CreateVM.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21/Pages/Students/CreateVM.cshtml)을 업데이트해야 합니다.
 
 Razor 페이지에서 `PageModel` 파생 클래스는 뷰 모델입니다.
 

@@ -7,11 +7,11 @@ ms.date: 08/07/2018
 ms.custom: mvc, seodec18
 uid: azure/devops/index
 ms.openlocfilehash: f45bb2a5dd4b3d1a820085ede7ce3219045ed80b
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64881958"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78644247"
 ---
 # <a name="devops-with-aspnet-core-and-azure"></a>ASP.NET Core 및 Azure에서 DevOps
 
@@ -37,23 +37,23 @@ ASP.NET Core에 익숙한 개발자여야 합니다(200~300레벨). 이 소개�
 
 ## <a name="whats-in-this-guide"></a>설명서의 내용
 
-### <a name="tools-and-downloadsxrefazuredevopstools-and-downloads"></a>[도구 및 다운로드](xref:azure/devops/tools-and-downloads)
+### <a name="tools-and-downloads"></a>[도구 및 다운로드](xref:azure/devops/tools-and-downloads)
 
 이 가이드에 사용되는 도구를 얻을 수 있는 위치에 대해 알아봅니다.
 
-### <a name="deploy-to-app-servicexrefazuredevopsdeploy-to-app-service"></a>[App Service에 배포](xref:azure/devops/deploy-to-app-service)
+### <a name="deploy-to-app-service"></a>[App Service에 배포](xref:azure/devops/deploy-to-app-service)
 
 Azure App Service에 ASP.NET Core 앱을 배포하는 다양한 방법을 알아봅니다.
 
-### <a name="continuous-integration-and-deploymentxrefazuredevopscicd"></a>[연속 통합 및 배포](xref:azure/devops/cicd)
+### <a name="continuous-integration-and-deployment"></a>[연속 통합 및 배포](xref:azure/devops/cicd)
 
 GitHub, Azure DevOps Services, Azure를 사용하여 엔드투엔드 연속 통합 및 ASP.NET Core 앱에 대한 배포 솔루션을 빌드합니다.
 
-### <a name="monitor-and-debugxrefazuredevopsmonitor"></a>[모니터링 및 디버그](xref:azure/devops/monitor)
+### <a name="monitor-and-debug"></a>[모니터링 및 디버그](xref:azure/devops/monitor)
 
 Azure 도구를 사용하여 애플리케이션을 모니터링하고, 문제를 해결하고, 조정합니다.
 
-### <a name="next-stepsxrefazuredevopsnext-steps"></a>[다음 단계](xref:azure/devops/next-steps)
+### <a name="next-steps"></a>[다음 단계](xref:azure/devops/next-steps)
 
 Azure를 학습하는 ASP.NET Core 개발자를 위한 다른 학습 경로입니다.
 

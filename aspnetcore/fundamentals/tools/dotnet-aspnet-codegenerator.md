@@ -7,11 +7,11 @@ ms.author: riande
 ms.date: 07/04/2019
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
 ms.openlocfilehash: 1043a578f66d5bb57f4a81e9fe21afa5e3c37cb8
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081504"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78649857"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet aspnet-codegenerator
 
@@ -52,11 +52,10 @@ dotnet aspnet-codegenerator [-h|--help]
 
 실행할 코드 생성기입니다. 다음 생성기를 사용할 수 있습니다.
 
-| 생성기 | 작업 |
+| 생성기 | 연산 |
 | ----------------- | ------------ | 
 | area      | [영역 스캐폴딩](/aspnet/core/mvc/controllers/areas) |
-  controller| [컨트롤러 스캐폴딩](/aspnet/core/tutorials/first-mvc-app/adding-model) |
-
+  Controller| [컨트롤러 스캐폴딩](/aspnet/core/tutorials/first-mvc-app/adding-model) |
   identity  | [Identity 스캐폴딩](/aspnet/core/security/authentication/scaffold-identity) |
   razorpage | [Razor 페이지 스캐폴딩](/aspnet/core/tutorials/razor-pages/model) |
   view      | [보기 스캐폴딩](/aspnet/core/mvc/views/overview) |
@@ -105,7 +104,7 @@ NuGet 패키지 디렉터리를 지정합니다.
 
 ### <a name="area-options"></a>Area 옵션
 
-이 도구는 컨트롤러와 보기가 포함된 ASP.NET Core 웹 프로젝트에 사용할 수 있습니다. Razor 페이지 앱에는 사용할 수 없습니다.
+이 도구는 컨트롤러와 보기가 포함된 ASP.NET Core 웹 프로젝트에 사용할 수 있습니다. Razor Pages 앱에는 사용할 수 없습니다.
 
 사용법: `dotnet aspnet-codegenerator area AreaNameToGenerate`
 
@@ -113,7 +112,7 @@ NuGet 패키지 디렉터리를 지정합니다.
 
 * *Areas*
   * *AreaNameToGenerate*
-    * *Controllers*
+    * *컨트롤러*
     * *Data*
     * *Models*
     * *Views*
@@ -148,7 +147,7 @@ dotnet aspnet-codegenerator controller -h
 
 <a name="rp"></a>
 
-Razor 페이지는 새 페이지 이름 및 사용할 템플릿을 지정하여 개별적으로 스캐폴딩할 수 있습니다. 지원되는 템플릿은 다음과 같습니다.
+Razor Pages는 새 페이지 이름 및 사용할 템플릿을 지정하여 개별적으로 스캐폴딩할 수 있습니다. 지원되는 템플릿은 다음과 같습니다.
 
 * `Empty`
 * `Create`
@@ -179,7 +178,7 @@ dotnet aspnet-codegenerator razorpage MyEdit Edit -m Movie -dc RazorPagesMovieCo
 
 | 옵션               | 설명|
 | ----------------- | ------------ |
-| --namespaceName 또는 -namespace | 생성된 PageModel에 사용할 네임스페이스의 이름입니다. |
+|   --namespaceName 또는 -namespace | 생성된 PageModel에 사용할 네임스페이스의 이름입니다. |
 | --partialView 또는 -partial | 부분 보기를 생성합니다. 이 옵션이 지정되면 레이아웃 옵션 -l 및 -udl은 무시됩니다. |
 | --noPageModel 또는 -npm | 빈 템플릿에 대한 PageModel 클래스를 생성하지 않도록 전환합니다. |
 

@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: 227128607460f9b5821bd0697fde3f393cf6daa9
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: 6839e383093b993ff55095f26cf88cd68708f001
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259431"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78646263"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>자습서: 동시성 처리 - ASP.NET MVC 및 EF Core 사용
 
@@ -24,7 +24,7 @@ ms.locfileid: "72259431"
 
 ![부서 삭제 페이지](concurrency/_static/delete-error.png)
 
-이 자습서에서는 다음을 수행했습니다.
+이 자습서에서는 다음과 같은 작업을 수행합니다.
 
 > [!div class="checklist"]
 > * 동시성 충돌에 대해 알아보기
@@ -37,7 +37,7 @@ ms.locfileid: "72259431"
 > * 삭제 페이지 업데이트
 > * 세부 정보 및 만들기 보기 업데이트
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 * [관련 데이터 업데이트](update-related-data.md)
 
@@ -288,7 +288,7 @@ public async Task<IActionResult> Delete(Department department)
 
 ## <a name="get-the-code"></a>코드 가져오기
 
-[완성된 애플리케이션을 다운로드하거나 확인합니다.](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[완성된 애플리케이션을 다운로드하거나 확인합니다.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="additional-resources"></a>추가 자료
 
@@ -296,7 +296,7 @@ public async Task<IActionResult> Delete(Department department)
 
 ## <a name="next-steps"></a>다음 단계
 
-이 자습서에서는 다음을 수행했습니다.
+이 자습서에서는 다음과 같은 작업을 수행합니다.
 
 > [!div class="checklist"]
 > * 동시성 충돌에 대해 알아보기

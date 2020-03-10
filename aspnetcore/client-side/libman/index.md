@@ -7,11 +7,11 @@ ms.custom: mvc
 ms.date: 08/14/2018
 uid: client-side/libman/index
 ms.openlocfilehash: 87987446b7f2c625da90951510e697e06569ba36
-ms.sourcegitcommit: e7c56e8da5419bbc20b437c2dd531dedf9b0dc6b
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/10/2019
-ms.locfileid: "70878335"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78644577"
 ---
 # <a name="client-side-library-acquisition-in-aspnet-core-with-libman"></a>LibMan을 사용하여 ASP.NET Core에서 클라이언트 쪽 라이브러리 획득
 

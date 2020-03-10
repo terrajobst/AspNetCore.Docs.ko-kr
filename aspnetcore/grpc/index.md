@@ -7,11 +7,11 @@ ms.author: johluo
 ms.date: 09/20/2019
 uid: grpc/index
 ms.openlocfilehash: d97eea1da28424680a3cfa38102637b1e20ff661
-ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/19/2020
-ms.locfileid: "77446959"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78644721"
 ---
 # <a name="introduction-to-grpc-on-net-core"></a>.NET Core에서 gRPC 소개
 
@@ -105,7 +105,7 @@ ASP.NET Core의 gRPC 서비스에 대한 자세한 내용은 <xref:grpc/aspnetco
 
 ## <a name="call-grpc-services-with-a-net-client"></a>.NET 클라이언트로 gRPC 서비스 호출
 
-gRPC 클라이언트는 [ *\*.proto* 파일에서 생성](xref:grpc/basics#generated-c-assets)되는 구체적인 클라이언트 형식입니다. 구체적인 gRPC 클라이언트에는 *\*.proto* 파일에서 gRPC 서비스로 변환되는 메서드가 있습니다.
+gRPC 클라이언트는 [*\*.proto* 파일에서 생성](xref:grpc/basics#generated-c-assets)되는 구체적인 클라이언트 형식입니다. 구체적인 gRPC 클라이언트에는 *\*.proto* 파일에서 gRPC 서비스로 변환되는 메서드가 있습니다.
 
 ```csharp
 var channel = GrpcChannel.ForAddress("https://localhost:5001");

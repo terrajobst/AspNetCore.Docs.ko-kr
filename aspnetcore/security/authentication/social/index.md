@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/23/2020
 uid: security/authentication/social/index
-ms.openlocfilehash: 7d0f6647a6f5a4d41067b13acd3d294144027bb7
-ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
+ms.openlocfilehash: c698edbd85d665509366287b1dcad08e276e71cc
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/24/2020
-ms.locfileid: "76727323"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78644817"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>ASP.NET Core에서 Facebook, Google 및 외부 공급자 인증
 
@@ -30,16 +30,16 @@ ms.locfileid: "76727323"
 
 ## <a name="create-a-new-aspnet-core-project"></a>새 ASP.NET Core 프로젝트 만들기
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 새 프로젝트를 만듭니다.
 * **ASP.NET Core 웹 애플리케이션** 및 **다음**을 선택합니다.
 * **프로젝트 이름**을 제공하고 **위치**를 확인하거나 변경합니다. **만들기**를 선택합니다.
-* 드롭다운(**ASP.NET Core {x.y}** )에서 최신 버전의 ASP.NET Core를 선택한 다음 **웹 애플리케이션**을 선택하세요.
+* 드롭다운(**ASP.NET Core {x.y}**)에서 최신 버전의 ASP.NET Core를 선택한 다음 **웹 애플리케이션**을 선택하세요.
 * **인증**에서 **변경**을 선택하고 인증을 **개별 사용자 계정**으로 설정합니다. **확인**을 선택합니다.
 * **새 ASP.NET Core 웹 애플리케이션 만들기** 창에서 **만들기**를 선택합니다.
 
-# <a name="visual-studio-code--visual-studio-for-mactabvisual-studio-codevisual-studio-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 * 터미널을 엽니다.  Visual Studio Code에서 [통합 터미널](https://code.visualstudio.com/docs/editor/integrated-terminal)을 열 수 있습니다.
 
@@ -111,7 +111,7 @@ ms.locfileid: "76727323"
 
 ## <a name="next-steps"></a>다음 단계
 
-* 로그인 단추를 사용자 지정하는 방법에 대한 자세한 내용은 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/10563)를 참조하세요.
+* 로그인 단추를 사용자 지정하는 방법에 대한 자세한 내용은 [이 GitHub 문제](https://github.com/dotnet/AspNetCore.Docs/issues/10563)를 참조하세요.
 * 이 문서는 외부 인증을 고새하고 ASP.NET Core 앱에 외부 로그인을 추가하는 데 필요한 필수 구성 요소를 설명합니다.
 * 앱에 필요한 공급자에 대한 로그인을 구성하기 위해 공급자 관련 페이지를 참조합니다.
 * 사용자와 해당 액세스 및 새로 고침 토큰에 대한 추가 데이터를 유지할 수 있습니다. 자세한 내용은 <xref:security/authentication/social/additional-claims>를 참조하세요.

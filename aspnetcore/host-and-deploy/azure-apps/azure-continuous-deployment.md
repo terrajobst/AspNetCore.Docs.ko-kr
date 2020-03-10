@@ -7,11 +7,11 @@ ms.custom: mvc
 ms.date: 12/06/2018
 uid: host-and-deploy/azure-apps/azure-continuous-deployment
 ms.openlocfilehash: 3b344505739bb4292ed1683c73ff314b6e4e01e9
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64890098"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78648111"
 ---
 # <a name="continuous-deployment-to-azure-with-visual-studio-and-git-with-aspnet-core"></a>ASP.NET Core와 함께 Visual Studio 및 Git을 사용하여 Azure에 지속적인 배포
 
@@ -26,7 +26,7 @@ Azure DevOps Services를 사용하여 [Azure App Service](/azure/app-service/app
 > [!NOTE]
 > 이 자습서를 완료하려면 Microsoft Azure 계정이 필요합니다. 계정을 얻으려면 [MSDN 구독자 혜택을 활성화](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/?WT.mc_id=A261C142F)하거나 [평가판에 등록](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)합니다.
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 이 자습서에서는 다음 소프트웨어가 설치되어 있다고 가정합니다.
 
@@ -40,7 +40,7 @@ Azure DevOps Services를 사용하여 [Azure App Service](/azure/app-service/app
 
 1. **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.
 
-1. **ASP.NET Core 웹 애플리케이션** 프로젝트 템플릿을 선택합니다. **설치됨** > **템플릿** > **Visual C#**  >  **.NET Core** 아래에 표시됩니다. 프로젝트 이름을 `SampleWebAppDemo`로 지정합니다. **새 Git 리포지토리 만들기** 옵션을 선택하고 **확인**을 클릭합니다.
+1. **ASP.NET Core 웹 애플리케이션** 프로젝트 템플릿을 선택합니다. **설치됨** > **템플릿** > **Visual C#** > **.NET Core** 아래에 표시됩니다. 프로젝트 이름을 `SampleWebAppDemo`로 지정합니다. **새 Git 리포지토리 만들기** 옵션을 선택하고 **확인**을 클릭합니다.
 
    ![새 프로젝트 대화 상자](azure-continuous-deployment/_static/01-new-project.png)
 
@@ -137,7 +137,7 @@ Git은 Azure App Service 웹앱을 배포하는 데 사용할 수 있는 분산 
    ![원격 대화 상자 편집](azure-continuous-deployment/_static/11-add-remote.png)
 
    > [!NOTE]
-   > 대안으로 **명령 창**을 열고, 프로젝트 디렉터리로 변경하고, 명령을 입력하여 **명령 창**에서 원격 리포지토리를 지정합니다. 예제:
+   > 대안으로 **명령 창**을 열고, 프로젝트 디렉터리로 변경하고, 명령을 입력하여 **명령 창**에서 원격 리포지토리를 지정합니다. 예:
    >
    > `git remote add Azure-SampleApp https://me@sampleapp.scm.azurewebsites.net:443/SampleApp.git`
 
@@ -145,12 +145,12 @@ Git은 Azure App Service 웹앱을 배포하는 데 사용할 수 있는 분산 
 
 1. **홈** > **변경 내용**을 선택하여 **변경 내용** 보기로 돌아갑니다.
 
-1. **Initial Push #1**과 같은 커밋 메시지를 입력하고 **커밋**을 선택합니다. 이렇게 하면 로컬에서 ‘커밋’이 생성됩니다. 
+1. **Initial Push #1**과 같은 커밋 메시지를 입력하고 **커밋**을 선택합니다. 이렇게 하면 로컬에서 ‘커밋’이 생성됩니다.
 
    ![팀 탐색기 연결 탭](azure-continuous-deployment/_static/12-initial-commit.png)
 
    > [!NOTE]
-   > 대안으로 **명령 창**을 열고, 프로젝트 디렉터리로 변경하고, git 명령을 입력하여 **명령 창**에서 변경 내용을 커밋합니다. 예제:
+   > 대안으로 **명령 창**을 열고, 프로젝트 디렉터리로 변경하고, git 명령을 입력하여 **명령 창**에서 변경 내용을 커밋합니다. 예:
    >
    > `git add .`
    >
@@ -218,7 +218,7 @@ Git은 Azure App Service 웹앱을 배포하는 데 사용할 수 있는 분산 
 1. **홈** > **동기화** > **작업** > **푸시**를 선택합니다.
 
 > [!NOTE]
-> 대안으로 **명령 창**을 열고, 프로젝트 디렉터리를 변경하고, git 명령을 입력하여 **명령 창**의 변경 내용을 푸시합니다. 예제:
+> 대안으로 **명령 창**을 열고, 프로젝트 디렉터리를 변경하고, git 명령을 입력하여 **명령 창**의 변경 내용을 푸시합니다. 예:
 > 
 > `git push -u Azure-SampleApp master`
 

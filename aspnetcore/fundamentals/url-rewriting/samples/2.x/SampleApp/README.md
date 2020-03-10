@@ -40,7 +40,7 @@ PhysicalFileProvider fileProvider = new PhysicalFileProvider(Directory.GetCurren
 
 ## <a name="secure-redirection-extensions"></a>보안 리디렉션 확장
 
-이 샘플은 URL(`https://localhost:5001`, `https://localhost`)을 사용하는 데 필요한 앱에 대한 `WebHostBuilder`구성 및 보안 리디렉션 메서드를 살펴보는 데 도움이 되는 테스트 인증서(*testCert.pfx*)를 포함하고 있습니다. 서버가 이미 포트 443을 할당하거나 사용중인 경우, `https://localhost`예제는 작동하지 않습니다. &mdash; *Program.cs* 파일의 `CreateWebHostBuilder`메서드에서 포트 443용 `ListenOptions`를 제거하거나 서버에서 포트 443을 바인딩 해제하여 Kestrel이 포트를 사용할 수 있도록 합니다.
+이 샘플은 URL(`https://localhost:5001`, `https://localhost`)을 사용하는 데 필요한 앱에 대한 `WebHostBuilder`구성 및 보안 리디렉션 메서드를 살펴보는 데 도움이 되는 테스트 인증서(*testCert.pfx*)를 포함하고 있습니다. 서버가 이미 포트 443을 할당하거나 사용중인 경우, `https://localhost`예제는 작동하지 않습니다. &mdash;*Program.cs* 파일의 `CreateWebHostBuilder`메서드에서 포트 443용 `ListenOptions`를 제거하거나 서버에서 포트 443을 바인딩 해제하여 Kestrel이 포트를 사용할 수 있도록 합니다.
 
 | 메서드                           | 상태 코드 |    포트    |
 | -------------------------------- | :---------: | :--------: |

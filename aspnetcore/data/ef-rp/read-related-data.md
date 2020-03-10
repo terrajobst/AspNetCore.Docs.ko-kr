@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/28/2019
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: 5feed175999bf021cadc7e18f14e00066b50db5b
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: d244ce1527486466bcbc6557ec35869aa206bc4f
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259688"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78645591"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---read-related-data---6-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 관련 데이터 읽기 - 6/8
 
@@ -48,7 +48,7 @@ ms.locfileid: "72259688"
 
   참고: EF Core는 이전에 컨텍스트 인스턴스에 로드된 다른 엔터티로 탐색 속성을 자동으로 수정합니다. 탐색 속성에 대한 데이터가 명시적으로 포함되지 *않더라도* 관련 엔터티의 일부 또는 전부가 이전에 로드된 경우에도 속성이 채워질 수 있습니다.
 
-* [명시적 로드](/ef/core/querying/related-data#explicit-loading). 엔터티를 처음 읽을 때 관련된 데이터가 검색되지 않습니다. 필요할 때 관련된 데이터를 검색하기 위한 코드를 작성해야 합니다. 별도 쿼리가 있는 명시적 로드의 경우 여러 쿼리가 데이터베이스로 전송됩니다. 명시적 로드에서 코드는 로드될 탐색 속성을 지정합니다. `Load` 메서드를 사용하여 명시적 로드를 수행합니다. 예:
+* [명시적 로드](/ef/core/querying/related-data#explicit-loading). 엔터티를 처음 읽을 때 관련된 데이터가 검색되지 않습니다. 필요할 때 관련된 데이터를 검색하기 위한 코드를 작성해야 합니다. 별도 쿼리가 있는 명시적 로드의 경우 여러 쿼리가 데이터베이스로 전송됩니다. 명시적 로드에서 코드는 로드될 탐색 속성을 지정합니다. `Load` 메서드를 사용하여 명시적 로드를 수행합니다. 예를 들어:
 
   ![명시적 로드 예제](read-related-data/_static/explicit-loading.png)
 
@@ -69,7 +69,7 @@ ms.locfileid: "72259688"
 
 ### <a name="scaffold-course-pages"></a>과정 페이지 스캐폴드
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 다음 예외가 포함된 [학생 페이지 스캐폴드](xref:data/ef-rp/intro#scaffold-student-pages)의 지침을 따릅니다.
 
@@ -77,7 +77,7 @@ ms.locfileid: "72259688"
   * 모델 클래스에 `Course`를 사용합니다.
   * 새 컨텍스트 클래스를 만드는 대신 기존 컨텍스트 클래스를 사용합니다.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * *Pages/Courses* 폴더를 만듭니다.
 
@@ -141,7 +141,7 @@ ms.locfileid: "72259688"
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Models/SchoolViewModels/CourseViewModel.cs?name=snippet)]
 
-전체 예제는 [IndexSelect.cshtml](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml) 및 [IndexSelect.cshtml.cs](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml.cs)를 참조하세요.
+전체 예제는 [IndexSelect.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml) 및 [IndexSelect.cshtml.cs](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml.cs)를 참조하세요.
 
 ## <a name="create-instructor-pages"></a>강사 페이지 만들기
 
@@ -166,7 +166,7 @@ ms.locfileid: "72259688"
 
 ### <a name="scaffold-instructor-pages"></a>강사 페이지 스캐폴드
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * 다음 예외가 포함된 [학생 페이지 스캐폴드](xref:data/ef-rp/intro#scaffold-student-pages)의 지침을 따릅니다.
 
@@ -174,7 +174,7 @@ ms.locfileid: "72259688"
   * 모델 클래스에 `Instructor`를 사용합니다.
   * 새 컨텍스트 클래스를 만드는 대신 기존 컨텍스트 클래스를 사용합니다.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * *Pages/Instructors* 폴더를 만듭니다.
 
@@ -332,7 +332,7 @@ Where 조건과 함께 `Single`을 사용하는 것은 개인적으로 선호하
 
 이 자습서에서는 관련된 데이터를 읽고 표시합니다. 관련된 데이터는 EF Core에서 탐색 속성에 로드하는 데이터입니다.
 
-해결할 수 없는 문제가 발생할 경우 [완성된 앱을 다운로드하거나 봅니다](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples). [지침을 다운로드하세요](xref:index#how-to-download-a-sample).
+해결할 수 없는 문제가 발생할 경우 [완성된 앱을 다운로드하거나 봅니다](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples). [지침을 다운로드하세요](xref:index#how-to-download-a-sample).
 
 다음 그림은 이 자습서에 대해 완료된 페이지를 보여 줍니다.
 
@@ -359,7 +359,7 @@ Where 조건과 함께 `Single`을 사용하는 것은 개인적으로 선호하
 
   참고: EF Core는 이전에 컨텍스트 인스턴스에 로드된 다른 엔터티로 탐색 속성을 자동으로 수정합니다. 탐색 속성에 대한 데이터가 명시적으로 포함되지 *않더라도* 관련 엔터티의 일부 또는 전부가 이전에 로드된 경우에도 속성이 채워질 수 있습니다.
 
-* [명시적 로드](/ef/core/querying/related-data#explicit-loading). 엔터티를 처음 읽을 때 관련된 데이터가 검색되지 않습니다. 필요할 때 관련된 데이터를 검색하기 위한 코드를 작성해야 합니다. 별도 쿼리가 있는 명시적 로드의 경우 여러 쿼리가 DB로 전송됩니다. 명시적 로드에서 코드는 로드될 탐색 속성을 지정합니다. `Load` 메서드를 사용하여 명시적 로드를 수행합니다. 예:
+* [명시적 로드](/ef/core/querying/related-data#explicit-loading). 엔터티를 처음 읽을 때 관련된 데이터가 검색되지 않습니다. 필요할 때 관련된 데이터를 검색하기 위한 코드를 작성해야 합니다. 별도 쿼리가 있는 명시적 로드의 경우 여러 쿼리가 DB로 전송됩니다. 명시적 로드에서 코드는 로드될 탐색 속성을 지정합니다. `Load` 메서드를 사용하여 명시적 로드를 수행합니다. 예를 들어:
 
   ![명시적 로드 예제](read-related-data/_static/explicit-loading.png)
 
@@ -382,11 +382,11 @@ Where 조건과 함께 `Single`을 사용하는 것은 개인적으로 선호하
 
 ### <a name="scaffold-the-course-model"></a>과정 모델 스캐폴드
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio) 
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio) 
 
 [학생 모델 스캐폴드](xref:data/ef-rp/intro#scaffold-the-student-model)의 지침을 따르고 `Course`를 모델 클래스로 사용합니다.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
  다음 명령을 실행합니다.
 
@@ -444,7 +444,7 @@ Where 조건과 함께 `Single`을 사용하는 것은 개인적으로 선호하
 
 [!code-csharp[](intro/samples/cu/Models/SchoolViewModels/CourseViewModel.cs?name=snippet)]
 
-전체 예제는 [IndexSelect.cshtml](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu/Pages/Courses/IndexSelect.cshtml) 및 [IndexSelect.cshtml.cs](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu/Pages/Courses/IndexSelect.cshtml.cs)를 참조하세요.
+전체 예제는 [IndexSelect.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu/Pages/Courses/IndexSelect.cshtml) 및 [IndexSelect.cshtml.cs](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu/Pages/Courses/IndexSelect.cshtml.cs)를 참조하세요.
 
 ## <a name="create-an-instructors-page-that-shows-courses-and-enrollments"></a>과정 및 등록을 보여 주는 강사 페이지 만들기
 
@@ -469,11 +469,11 @@ Where 조건과 함께 `Single`을 사용하는 것은 개인적으로 선호하
 
 ### <a name="scaffold-the-instructor-model"></a>강사 모델 스캐폴드
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio) 
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio) 
 
 [학생 모델 스캐폴드](xref:data/ef-rp/intro#scaffold-the-student-model)의 지침을 따르고 `Instructor`를 모델 클래스로 사용합니다.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
  다음 명령을 실행합니다.
 

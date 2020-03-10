@@ -1,22 +1,22 @@
 ---
 title: ASP.NET Core에서 HTTP.sys 웹 서버 구현
-author: guardrex
+author: rick-anderson
 description: Windows의 ASP.NET Core에 대한 웹 서버인 HTTP.sys에 대해 알아봅니다. HTTP.sys 커널 모드 드라이버를 기반으로 한 HTTP.sys는 IIS 없이 인터넷에 대한 직접 연결에 사용될 수 있는 Kestrel에 대한 대안입니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: 8a315d859fa70d97501156ff3cf97d4c3a5c5bd4
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
+ms.openlocfilehash: 3e858a974d6a5c008969c3c51a507880cc25a7ff
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77171764"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78650715"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>ASP.NET Core에서 HTTP.sys 웹 서버 구현
 
-작성자: [Tom Dykstra](https://github.com/tdykstra), [Chris Ross](https://github.com/Tratcher), [Luke Latham](https://github.com/guardrex)
+작성자: [Tom Dykstra](https://github.com/tdykstra) 및 [Chris Ross](https://github.com/Tratcher)
 
 ::: moniker range=">= aspnetcore-3.1"
 
@@ -40,7 +40,7 @@ HTTP.sys는 다음과 같은 기능을 지원합니다.
 * Windows 7 이상
 * Windows Server 2008 R2 이상
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/httpsys/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/httpsys/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-httpsys"></a>HTTP.sys를 사용하는 경우
 
@@ -133,7 +133,7 @@ Visual Studio에서 기본 실행 프로필은 IIS Express용입니다. 프로�
 
 1. 필요한 경우 X.509 인증서를 구하여 설치합니다.
 
-   Windows에서 [New-SelfSignedCertificate PowerShell cmdlet](/powershell/module/pkiclient/new-selfsignedcertificate)을 사용하여 자체 서명된 인증서를 만듭니다. 지원되지 않는 예는 [UpdateIISExpressSSLForChrome.ps1](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/includes/make-x509-cert/UpdateIISExpressSSLForChrome.ps1)을 참조하세요.
+   Windows에서 [New-SelfSignedCertificate PowerShell cmdlet](/powershell/module/pkiclient/new-selfsignedcertificate)을 사용하여 자체 서명된 인증서를 만듭니다. 지원되지 않는 예는 [UpdateIISExpressSSLForChrome.ps1](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/includes/make-x509-cert/UpdateIISExpressSSLForChrome.ps1)을 참조하세요.
 
    서버의 **로컬 머신** > **개인** 저장소에 자체 서명 또는 CA 서명 인증서를 설치합니다.
 
@@ -176,7 +176,7 @@ Visual Studio에서 기본 실행 프로필은 IIS Express용입니다. 프로�
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>` &ndash; 정규화된 URL(Uniform Resource Locator)입니다. 와일드카드 바인딩을 사용하지 마세요. 유효한 호스트 이름 또는 로컬 IP 주소를 사용합니다. ‘URL에는 후행 슬래시가 포함되어야 합니다.’ 
+   * `<URL>` &ndash; 정규화된 URL(Uniform Resource Locator)입니다. 와일드카드 바인딩을 사용하지 마세요. 유효한 호스트 이름 또는 로컬 IP 주소를 사용합니다. ‘URL에는 후행 슬래시가 포함되어야 합니다.’
    * `<USER>` &ndash; 사용자 또는 사용자-그룹 이름을 지정합니다.
 
    다음 예제에서 서버의 로컬 IP 주소는 `10.0.0.4`입니다.
@@ -293,7 +293,7 @@ HTTP.sys는 다음과 같은 기능을 지원합니다.
 * Windows 7 이상
 * Windows Server 2008 R2 이상
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/httpsys/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/httpsys/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-httpsys"></a>HTTP.sys를 사용하는 경우
 
@@ -384,7 +384,7 @@ Visual Studio에서 기본 실행 프로필은 IIS Express용입니다. 프로�
 
 1. 필요한 경우 X.509 인증서를 구하여 설치합니다.
 
-   Windows에서 [New-SelfSignedCertificate PowerShell cmdlet](/powershell/module/pkiclient/new-selfsignedcertificate)을 사용하여 자체 서명된 인증서를 만듭니다. 지원되지 않는 예는 [UpdateIISExpressSSLForChrome.ps1](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/includes/make-x509-cert/UpdateIISExpressSSLForChrome.ps1)을 참조하세요.
+   Windows에서 [New-SelfSignedCertificate PowerShell cmdlet](/powershell/module/pkiclient/new-selfsignedcertificate)을 사용하여 자체 서명된 인증서를 만듭니다. 지원되지 않는 예는 [UpdateIISExpressSSLForChrome.ps1](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/includes/make-x509-cert/UpdateIISExpressSSLForChrome.ps1)을 참조하세요.
 
    서버의 **로컬 머신** > **개인** 저장소에 자체 서명 또는 CA 서명 인증서를 설치합니다.
 
@@ -427,7 +427,7 @@ Visual Studio에서 기본 실행 프로필은 IIS Express용입니다. 프로�
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>` &ndash; 정규화된 URL(Uniform Resource Locator)입니다. 와일드카드 바인딩을 사용하지 마세요. 유효한 호스트 이름 또는 로컬 IP 주소를 사용합니다. ‘URL에는 후행 슬래시가 포함되어야 합니다.’ 
+   * `<URL>` &ndash; 정규화된 URL(Uniform Resource Locator)입니다. 와일드카드 바인딩을 사용하지 마세요. 유효한 호스트 이름 또는 로컬 IP 주소를 사용합니다. ‘URL에는 후행 슬래시가 포함되어야 합니다.’
    * `<USER>` &ndash; 사용자 또는 사용자-그룹 이름을 지정합니다.
 
    다음 예제에서 서버의 로컬 IP 주소는 `10.0.0.4`입니다.
@@ -544,7 +544,7 @@ HTTP.sys는 다음과 같은 기능을 지원합니다.
 * Windows 7 이상
 * Windows Server 2008 R2 이상
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/httpsys/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/httpsys/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-httpsys"></a>HTTP.sys를 사용하는 경우
 
@@ -637,7 +637,7 @@ Visual Studio에서 기본 실행 프로필은 IIS Express용입니다. 프로�
 
 1. 필요한 경우 X.509 인증서를 구하여 설치합니다.
 
-   Windows에서 [New-SelfSignedCertificate PowerShell cmdlet](/powershell/module/pkiclient/new-selfsignedcertificate)을 사용하여 자체 서명된 인증서를 만듭니다. 지원되지 않는 예는 [UpdateIISExpressSSLForChrome.ps1](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/includes/make-x509-cert/UpdateIISExpressSSLForChrome.ps1)을 참조하세요.
+   Windows에서 [New-SelfSignedCertificate PowerShell cmdlet](/powershell/module/pkiclient/new-selfsignedcertificate)을 사용하여 자체 서명된 인증서를 만듭니다. 지원되지 않는 예는 [UpdateIISExpressSSLForChrome.ps1](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/includes/make-x509-cert/UpdateIISExpressSSLForChrome.ps1)을 참조하세요.
 
    서버의 **로컬 머신** > **개인** 저장소에 자체 서명 또는 CA 서명 인증서를 설치합니다.
 
@@ -680,7 +680,7 @@ Visual Studio에서 기본 실행 프로필은 IIS Express용입니다. 프로�
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>` &ndash; 정규화된 URL(Uniform Resource Locator)입니다. 와일드카드 바인딩을 사용하지 마세요. 유효한 호스트 이름 또는 로컬 IP 주소를 사용합니다. ‘URL에는 후행 슬래시가 포함되어야 합니다.’ 
+   * `<URL>` &ndash; 정규화된 URL(Uniform Resource Locator)입니다. 와일드카드 바인딩을 사용하지 마세요. 유효한 호스트 이름 또는 로컬 IP 주소를 사용합니다. ‘URL에는 후행 슬래시가 포함되어야 합니다.’
    * `<USER>` &ndash; 사용자 또는 사용자-그룹 이름을 지정합니다.
 
    다음 예제에서 서버의 로컬 IP 주소는 `10.0.0.4`입니다.
@@ -797,7 +797,7 @@ HTTP.sys는 다음과 같은 기능을 지원합니다.
 * Windows 7 이상
 * Windows Server 2008 R2 이상
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/httpsys/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/httpsys/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-httpsys"></a>HTTP.sys를 사용하는 경우
 
@@ -890,7 +890,7 @@ Visual Studio에서 기본 실행 프로필은 IIS Express용입니다. 프로�
 
 1. 필요한 경우 X.509 인증서를 구하여 설치합니다.
 
-   Windows에서 [New-SelfSignedCertificate PowerShell cmdlet](/powershell/module/pkiclient/new-selfsignedcertificate)을 사용하여 자체 서명된 인증서를 만듭니다. 지원되지 않는 예는 [UpdateIISExpressSSLForChrome.ps1](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/includes/make-x509-cert/UpdateIISExpressSSLForChrome.ps1)을 참조하세요.
+   Windows에서 [New-SelfSignedCertificate PowerShell cmdlet](/powershell/module/pkiclient/new-selfsignedcertificate)을 사용하여 자체 서명된 인증서를 만듭니다. 지원되지 않는 예는 [UpdateIISExpressSSLForChrome.ps1](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/includes/make-x509-cert/UpdateIISExpressSSLForChrome.ps1)을 참조하세요.
 
    서버의 **로컬 머신** > **개인** 저장소에 자체 서명 또는 CA 서명 인증서를 설치합니다.
 
@@ -933,7 +933,7 @@ Visual Studio에서 기본 실행 프로필은 IIS Express용입니다. 프로�
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>` &ndash; 정규화된 URL(Uniform Resource Locator)입니다. 와일드카드 바인딩을 사용하지 마세요. 유효한 호스트 이름 또는 로컬 IP 주소를 사용합니다. ‘URL에는 후행 슬래시가 포함되어야 합니다.’ 
+   * `<URL>` &ndash; 정규화된 URL(Uniform Resource Locator)입니다. 와일드카드 바인딩을 사용하지 마세요. 유효한 호스트 이름 또는 로컬 IP 주소를 사용합니다. ‘URL에는 후행 슬래시가 포함되어야 합니다.’
    * `<USER>` &ndash; 사용자 또는 사용자-그룹 이름을 지정합니다.
 
    다음 예제에서 서버의 로컬 IP 주소는 `10.0.0.4`입니다.

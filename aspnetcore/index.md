@@ -9,12 +9,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: index
-ms.openlocfilehash: 3e41b329feb359c006258b8ed558496dfcbbf3b0
-ms.sourcegitcommit: 57b85708f4cded99b8f008a69830cb104cd8e879
+ms.openlocfilehash: f6e4a624186ccf0d7f6475819df7da9ef99f9bcc
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/13/2020
-ms.locfileid: "75914219"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78644373"
 ---
 # <a name="introduction-to-aspnet-core"></a>ASP.NET Core 소개
 
@@ -47,7 +47,7 @@ ASP.NET Core MVC는 [Web API](xref:tutorials/first-web-api) 및 [웹앱](xref:tu
 
 ## <a name="client-side-development"></a>클라이언트 쪽 개발
 
-ASP.NET Core는 [[!OP.NO-LOC(Blazor)]](xref:blazor/index), [Angular](xref:spa/angular), [React](xref:spa/react) 및 [부트스트랩](https://getbootstrap.com/) 등 유명한 클라이언트 쪽 프레임워크 및 라이브러리와 원활하게 통합됩니다. 자세한 내용은 <xref:blazor/index> 및 ‘클라이언트 쪽 개발’의 관련 항목을 참조하세요. 
+ASP.NET Core는 [Blazor](xref:blazor/index), [Angular](xref:spa/angular), [React](xref:spa/react), [부트스트랩](https://getbootstrap.com/) 등 유명한 클라이언트 쪽 프레임워크 및 라이브러리와 원활하게 통합됩니다. 자세한 내용은 <xref:blazor/index> 및 ‘클라이언트 쪽 개발’의 관련 항목을 참조하세요.**
 
 <a name="target-framework"></a>
 
@@ -83,8 +83,8 @@ ASP.NET Core 앱 개발을 소개하는 자습서 및 문서는 다음의 순서
    |웹앱                   | 새로운 개발의 경우        |[Razor 페이지 시작](xref:tutorials/razor-pages/razor-pages-start) |
    |웹앱                   | MVC 앱을 유지 관리하는 경우 |[MVC 시작](xref:tutorials/first-mvc-app/start-mvc)|
    |Web API                   |                            |[웹 API 만들기](xref:tutorials/first-web-api)\*  |
-   |실시간 앱             |                            |[[!OP.NO-LOC(SignalR)] 시작하기](xref:tutorials/signalr) |
-   |[!OP.NO-LOC(Blazor)] 앱                |                            |[[!OP.NO-LOC(Blazor)] 시작하기](xref:blazor/get-started) |
+   |실시간 앱             |                            |[SignalR 시작](xref:tutorials/signalr) |
+   |Blazor 앱                |                            |[Blazor 시작](xref:blazor/get-started) |
    |원격 프로시저 호출 앱 |                            |[gRPC 서비스 시작](xref:tutorials/grpc/grpc-start) |
 
 1. 기본 데이터 액세스를 수행하는 방법을 보여주는 자습서를 살펴보세요.
@@ -110,7 +110,7 @@ ASP.NET 앱을 ASP.NET Core로 마이그레이션하기 위한 참조 가이드�
 
 대부분의 문서 및 자습서에는 예제 코드에 대한 링크가 포함되어 있습니다.
 
-1. [ASP.NET 리포지토리 zip 파일을 다운로드합니다](https://codeload.github.com/aspnet/AspNetCore.Docs/zip/master).
+1. [ASP.NET 리포지토리 zip 파일을 다운로드합니다](https://codeload.github.com/dotnet/AspNetCore.Docs/zip/master).
 1. *Docs-master.zip* 파일의 압축을 풉니다.
 1. 예제 링크의 URL을 참고하여 예제 디렉터리로 이동할 수 있습니다.
 
@@ -156,7 +156,7 @@ Host.CreateDefaultBuilder(args)
 
 코드를 둘러싸고 있는 `#region` 및 `#endregion` 지시문은 안전하게 무시(또는 제거)할 수 있습니다. 항목에 설명된 예제 시나리오를 실행하려는 경우 이러한 지시문 내에서 코드를 변경하지 마세요. 다른 시나리오를 실험하는 경우 자유롭게 코드를 변경할 수 있습니다.
 
-자세한 내용은 [ASP.NET 설명서에 참여: 코드 조각](https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md#code-snippets)을 참조하세요.
+자세한 내용은 [ASP.NET 설명서에 참여: 코드 조각](https://github.com/dotnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md#code-snippets)을 참조하세요.
 
 ## <a name="next-steps"></a>다음 단계
 

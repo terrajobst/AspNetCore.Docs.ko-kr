@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/10/2020
 uid: fundamentals/configuration/index
-ms.openlocfilehash: d0ef670aa0ac4960318f86ea7888b9eab71f17fd
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
+ms.openlocfilehash: 3dcabae3f76d81e641057c346dbb9097c2da42c7
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77171892"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78644103"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core의 구성
 
@@ -20,7 +20,7 @@ ms.locfileid: "77171892"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core의 앱 구성은 ‘구성 공급자’가 설정한 키-값 쌍을 기반으로 합니다.  구성 공급자는 다양한 구성 소스에서 구성 데이터를 키-값 쌍으로 읽어 들입니다.
+ASP.NET Core의 앱 구성은 ‘구성 공급자’가 설정한 키-값 쌍을 기반으로 합니다. 구성 공급자는 다양한 구성 소스에서 구성 데이터를 키-값 쌍으로 읽어 들입니다.
 
 * Azure Key Vault
 * Azure App Configuration
@@ -39,9 +39,9 @@ ASP.NET Core의 앱 구성은 ‘구성 공급자’가 설정한 키-값 쌍을
 using Microsoft.Extensions.Configuration;
 ```
 
-‘옵션 패턴’은 이 항목에 설명된 구성 개념의 확장입니다.  옵션은 클래스를 사용하여 관련 설정 그룹을 나타냅니다. 자세한 내용은 <xref:fundamentals/configuration/options>를 참조하세요.
+‘옵션 패턴’은 이 항목에 설명된 구성 개념의 확장입니다. 옵션은 클래스를 사용하여 관련 설정 그룹을 나타냅니다. 자세한 내용은 <xref:fundamentals/configuration/options>를 참조하세요.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="host-versus-app-configuration"></a>호스트 대 앱 구성
 
@@ -187,7 +187,7 @@ public class HomeController : Controller
 
 | 공급자 | 다음에서 구성 제공&hellip; |
 | -------- | ----------------------------------- |
-| [Azure Key Vault 구성 공급자](xref:security/key-vault-configuration)(‘보안’ 항목)  | Azure Key Vault |
+| [Azure Key Vault 구성 공급자](xref:security/key-vault-configuration)(‘보안’ 항목) | Azure Key Vault |
 | [Azure App Configuration 공급자](/azure/azure-app-configuration/quickstart-aspnet-core-app)(Azure 설명서) | Azure App Configuration |
 | [명령줄 구성 공급자](#command-line-configuration-provider) | 명령줄 매개 변수 |
 | [사용자 지정 구성 공급자](#custom-configuration-provider) | 사용자 지정 소스 |
@@ -195,7 +195,7 @@ public class HomeController : Controller
 | [파일 구성 공급자](#file-configuration-provider) | 파일(INI, JSON, XML) |
 | [파일별 키 구성 공급자](#key-per-file-configuration-provider) | 디렉터리 파일 |
 | [메모리 구성 공급자](#memory-configuration-provider) | 메모리 내 컬렉션 |
-| [사용자 비밀(비밀 관리자)](xref:security/app-secrets)(‘보안’ 항목)  | 사용자 프로필 디렉터리의 파일 |
+| [사용자 비밀(비밀 관리자)](xref:security/app-secrets)(‘보안’ 항목) | 사용자 프로필 디렉터리의 파일 |
 
 시작 시 구성 공급자에서 지정한 순서로 구성 소스를 읽습니다. 이 항목의 구성 공급자는 코드에서 정렬하는 순서가 아니라 사전 순으로 설명되어 있습니다. 앱에 필요한 기본 구성 소스에 대한 우선 순위에 맞게 구성 공급자를 코드에 정렬하세요.
 
@@ -842,7 +842,7 @@ var sectionExists = _config.GetSection("section2:subsection2").Exists();
 
 ## <a name="bind-to-a-class"></a>클래스에 바인딩
 
-‘옵션 패턴’을 사용하여 관련 설정 그룹을 나타내는 클래스에 구성을 바인딩할 수 있습니다.  자세한 내용은 <xref:fundamentals/configuration/options>를 참조하세요.
+‘옵션 패턴’을 사용하여 관련 설정 그룹을 나타내는 클래스에 구성을 바인딩할 수 있습니다. 자세한 내용은 <xref:fundamentals/configuration/options>를 참조하세요.
 
 구성 값이 문자열로 반환되지만, <xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*>를 호출하면 [POCO](https://wikipedia.org/wiki/Plain_Old_CLR_Object) 개체를 생성할 수 있습니다. 바인더는 제공된 형식의 모든 공용 읽기/쓰기 속성에 값을 바인딩합니다. 필드가 바인딩되지 **않았습니다**.
 
@@ -895,7 +895,7 @@ TvShow = tvShow;
 
 ## <a name="bind-an-array-to-a-class"></a>클래스에 배열 바인딩
 
-다음 샘플 앱은 이 섹션에서 설명하는 개념을 보여 줍니다. 
+다음 샘플 앱은 이 섹션에서 설명하는 개념을 보여 줍니다.
 
 <xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*>는 구성 키에 배열 인덱스를 사용하여 배열을 개체에 바인딩하는 것을 지원합니다. 숫자 키 세그먼트(`:0:`, `:1:`, &hellip; `:{n}:`)를 노출하는 모든 배열 형식은 POCO 클래스 배열에 배열 바인딩할 수 있습니다.
 
@@ -1134,7 +1134,7 @@ MVC 뷰에서:
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core의 앱 구성은 ‘구성 공급자’가 설정한 키-값 쌍을 기반으로 합니다.  구성 공급자는 다양한 구성 소스에서 구성 데이터를 키-값 쌍으로 읽어 들입니다.
+ASP.NET Core의 앱 구성은 ‘구성 공급자’가 설정한 키-값 쌍을 기반으로 합니다. 구성 공급자는 다양한 구성 소스에서 구성 데이터를 키-값 쌍으로 읽어 들입니다.
 
 * Azure Key Vault
 * Azure App Configuration
@@ -1153,9 +1153,9 @@ ASP.NET Core의 앱 구성은 ‘구성 공급자’가 설정한 키-값 쌍을
 using Microsoft.Extensions.Configuration;
 ```
 
-‘옵션 패턴’은 이 항목에 설명된 구성 개념의 확장입니다.  옵션은 클래스를 사용하여 관련 설정 그룹을 나타냅니다. 자세한 내용은 <xref:fundamentals/configuration/options>를 참조하세요.
+‘옵션 패턴’은 이 항목에 설명된 구성 개념의 확장입니다. 옵션은 클래스를 사용하여 관련 설정 그룹을 나타냅니다. 자세한 내용은 <xref:fundamentals/configuration/options>를 참조하세요.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="host-versus-app-configuration"></a>호스트 대 앱 구성
 
@@ -1296,7 +1296,7 @@ public class HomeController : Controller
 
 | 공급자 | 다음에서 구성 제공&hellip; |
 | -------- | ----------------------------------- |
-| [Azure Key Vault 구성 공급자](xref:security/key-vault-configuration)(‘보안’ 항목)  | Azure Key Vault |
+| [Azure Key Vault 구성 공급자](xref:security/key-vault-configuration)(‘보안’ 항목) | Azure Key Vault |
 | [Azure App Configuration 공급자](/azure/azure-app-configuration/quickstart-aspnet-core-app)(Azure 설명서) | Azure App Configuration |
 | [명령줄 구성 공급자](#command-line-configuration-provider) | 명령줄 매개 변수 |
 | [사용자 지정 구성 공급자](#custom-configuration-provider) | 사용자 지정 소스 |
@@ -1304,7 +1304,7 @@ public class HomeController : Controller
 | [파일 구성 공급자](#file-configuration-provider) | 파일(INI, JSON, XML) |
 | [파일별 키 구성 공급자](#key-per-file-configuration-provider) | 디렉터리 파일 |
 | [메모리 구성 공급자](#memory-configuration-provider) | 메모리 내 컬렉션 |
-| [사용자 비밀(비밀 관리자)](xref:security/app-secrets)(‘보안’ 항목)  | 사용자 프로필 디렉터리의 파일 |
+| [사용자 비밀(비밀 관리자)](xref:security/app-secrets)(‘보안’ 항목) | 사용자 프로필 디렉터리의 파일 |
 
 시작 시 구성 공급자에서 지정한 순서로 구성 소스를 읽습니다. 이 항목의 구성 공급자는 코드에서 정렬하는 순서가 아니라 사전 순으로 설명되어 있습니다. 앱에 필요한 기본 구성 소스에 대한 우선 순위에 맞게 구성 공급자를 코드에 정렬하세요.
 
@@ -1951,7 +1951,7 @@ var sectionExists = _config.GetSection("section2:subsection2").Exists();
 
 ## <a name="bind-to-a-class"></a>클래스에 바인딩
 
-‘옵션 패턴’을 사용하여 관련 설정 그룹을 나타내는 클래스에 구성을 바인딩할 수 있습니다.  자세한 내용은 <xref:fundamentals/configuration/options>를 참조하세요.
+‘옵션 패턴’을 사용하여 관련 설정 그룹을 나타내는 클래스에 구성을 바인딩할 수 있습니다. 자세한 내용은 <xref:fundamentals/configuration/options>를 참조하세요.
 
 구성 값이 문자열로 반환되지만, <xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*>를 호출하면 [POCO](https://wikipedia.org/wiki/Plain_Old_CLR_Object) 개체를 생성할 수 있습니다. 바인더는 제공된 형식의 모든 공용 읽기/쓰기 속성에 값을 바인딩합니다. 필드가 바인딩되지 **않았습니다**.
 
@@ -2004,7 +2004,7 @@ TvShow = tvShow;
 
 ## <a name="bind-an-array-to-a-class"></a>클래스에 배열 바인딩
 
-다음 샘플 앱은 이 섹션에서 설명하는 개념을 보여 줍니다. 
+다음 샘플 앱은 이 섹션에서 설명하는 개념을 보여 줍니다.
 
 <xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*>는 구성 키에 배열 인덱스를 사용하여 배열을 개체에 바인딩하는 것을 지원합니다. 숫자 키 세그먼트(`:0:`, `:1:`, &hellip; `:{n}:`)를 노출하는 모든 배열 형식은 POCO 클래스 배열에 배열 바인딩할 수 있습니다.
 

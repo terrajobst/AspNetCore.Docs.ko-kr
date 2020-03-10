@@ -1,16 +1,16 @@
 ---
 title: ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 관련 데이터 업데이트 - 7/8
-author: tdykstra
+author: rick-anderson
 description: 이 자습서에서는 외래 키 필드 및 탐색 속성을 업데이트하여 관련된 데이터를 업데이트합니다.
 ms.author: riande
 ms.date: 07/22/2019
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: bc237cf928d852b92c5c1984527129404f88018d
-ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
+ms.openlocfilehash: fdfdb14ff8414b8bf30f9b95be7ba0a6bcbd2995
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/19/2019
-ms.locfileid: "69583502"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78645459"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---update-related-data---7-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 관련 데이터 업데이트 - 7/8
 
@@ -49,7 +49,9 @@ ms.locfileid: "69583502"
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Create.cshtml.cs?highlight=7,18,27-41)]
 
-위의 코드는:
+[!INCLUDE[about the series](~/includes/code-comments-loc.md)]
+
+위의 코드는
 
 * `DepartmentNamePageModel`에서 파생됩니다.
 * [초과 게시](xref:data/ef-rp/crud#overposting)를 방지하도록 `TryUpdateModelAsync`를 사용합니다.
@@ -178,7 +180,7 @@ Razor 페이지에는 강좌 엔터티의 컬렉션이 없으므로 모델 바�
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/Edit.cshtml.cs?name=snippet_All&highlight=9,28-32,38,42-77)]
 
-위의 코드는:
+위의 코드는
 
 * `OfficeAssignment`, `CourseAssignment` 및 `CourseAssignment.Course` 탐색 속성에 대한 즉시 로드를 사용하여 데이터베이스에서 현재 `Instructor` 엔터티를 가져옵니다.
 * 모델 바인더의 값으로 검색된 `Instructor` 엔터티를 업데이트합니다. `TryUpdateModel`은 [초과 게시](xref:data/ef-rp/crud#overposting)를 방지합니다.
@@ -235,7 +237,7 @@ Razor 페이지에는 강좌 엔터티의 컬렉션이 없으므로 모델 바�
 
 ::: moniker range="< aspnetcore-3.0"
 
-이 자습서에서는 관련된 데이터 업데이트를 보여 줍니다. 해결할 수 없는 문제가 발생할 경우 [완성된 앱을 다운로드하거나 봅니다](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples). [지침을 다운로드하세요](xref:index#how-to-download-a-sample).
+이 자습서에서는 관련된 데이터 업데이트를 보여 줍니다. 해결할 수 없는 문제가 발생할 경우 [완성된 앱을 다운로드하거나 봅니다](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples). [지침을 다운로드하세요](xref:index#how-to-download-a-sample).
 
 다음 그림은 완료된 페이지의 일부를 보여 줍니다.
 
@@ -264,7 +266,7 @@ Razor 페이지에는 강좌 엔터티의 컬렉션이 없으므로 모델 바�
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Create.cshtml.cs?highlight=7,18,32-999)]
 
-위의 코드는:
+위의 코드는
 
 * `DepartmentNamePageModel`에서 파생됩니다.
 * [초과 게시](xref:data/ef-rp/crud#overposting)를 방지하도록 `TryUpdateModelAsync`를 사용합니다.
@@ -303,7 +305,7 @@ Razor 페이지는 [Select 태그 도우미](xref:mvc/views/working-with-forms#t
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Edit.cshtml?highlight=17-20,32-35)]
 
-위의 표시로 다음이 변경됩니다.
+위의 표시는 다음과 같이 변경합니다.
 
 * 강좌 ID를 표시합니다. 일반적으로 엔터티의 PK(기본 키)는 표시되지 않습니다. PK는 일반적으로 사용자에게 아무런 의미가 없습니다. 이 경우 PK는 강좌 번호입니다.
 * 캡션을 **DepartmentID**에서 **Department**로 변경합니다.
@@ -351,7 +353,7 @@ Razor 페이지는 [Select 태그 도우미](xref:mvc/views/working-with-forms#t
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Edit1.cshtml.cs?name=snippet&highlight=20-23,32,39-999)]
 
-위의 코드는:
+위의 코드는
 
 * `OfficeAssignment` 탐색 속성에 대한 즉시 로드를 사용하여 데이터베이스에서 현재 `Instructor` 엔터티를 가져옵니다.
 * 모델 바인더의 값으로 검색된 `Instructor` 엔터티를 업데이트합니다. `TryUpdateModel`은 [초과 게시](xref:data/ef-rp/crud#overposting)를 방지합니다.

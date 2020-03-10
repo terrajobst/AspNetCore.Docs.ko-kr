@@ -11,13 +11,13 @@ no-loc:
 - SignalR
 uid: host-and-deploy/blazor/index
 ms.openlocfilehash: 238e7fc8f8d64c7847dc8847fb66e22442a3c8e0
-ms.sourcegitcommit: 9ee99300a48c810ca6fd4f7700cd95c3ccb85972
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/17/2020
-ms.locfileid: "76160264"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78644709"
 ---
-# <a name="host-and-deploy-aspnet-core-opno-locblazor"></a>ASP.NET Core 호스트 및 배포 Blazor
+# <a name="host-and-deploy-aspnet-core-blazor"></a>ASP.NET Core Blazor 호스트 및 배포
 
 작성자: [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com) 및 [Daniel Roth](https://github.com/danroth27)
 
@@ -27,13 +27,13 @@ ms.locfileid: "76160264"
 
 앱은 릴리스 구성으로 배포하기 위해 게시됩니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. 탐색 모음에서 **빌드** >  **{APPLICATION} 게시**를 선택합니다.
+1. 탐색 모음에서 **빌드** > **{APPLICATION} 게시**를 선택합니다.
 1. *publish target*을 선택합니다. 로컬로 게시하려면 **폴더**를 선택합니다.
 1. **폴더 선택** 필드에서 기본 위치를 그대로 사용하거나 다른 위치를 지정합니다. **게시** 단추를 선택합니다.
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 [dotnet publish](/dotnet/core/tools/dotnet-publish) 명령을 사용하여 릴리스 구성으로 앱을 게시합니다.
 
