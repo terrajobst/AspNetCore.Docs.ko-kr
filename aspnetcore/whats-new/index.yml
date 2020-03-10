@@ -5,18 +5,20 @@ metadata:
   title: ASP.NET Core 설명서 - 새로운 기능
   description: ASP.NET Core 문서의 새로운 내용과 업데이트된 내용에 대해 알아보세요.
   ms.topic: landing-page
-  ms.date: 01/17/2020
-  ms.openlocfilehash: c7656fc51e8e8724c1505aecb5b583abbd216928
-  ms.sourcegitcommit: cb6015f737b6a93127016ab0f21b58e34b624ff3
+  ms.date: 03/02/2020
+  ms.openlocfilehash: dd10c004215718e372a43afacdef117aab7ef05a
+  ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
   ms.translationtype: HT
   ms.contentlocale: ko-KR
-  ms.lasthandoff: 02/04/2020
-  ms.locfileid: "77004333"
+  ms.lasthandoff: 03/06/2020
+  ms.locfileid: "78644523"
 landingContent:
 - title: ASP.NET Core 문서 업데이트 찾기
   linkLists:
   - linkListType: whats-new
     links:
+    - text: 2020년 2월
+      url: 2020-02.md
     - text: 2020년 1월
       url: 2020-01.md
     - text: 2019년 12월
@@ -32,7 +34,7 @@ landingContent:
   - linkListType: overview
     links:
     - text: ASP.NET Core 문서 리포지토리
-      url: https://github.com/aspnet/AspNetCore.Docs/blob/master/README.md
+      url: https://github.com/dotnet/AspNetCore.Docs/blob/master/README.md
     - text: 문제 및 끌어오기 요청에 대한 프로젝트 구조 레이블
       url: https://github.com/dotnet/docs/blob/master/styleguide/labels-projects.md
   - linkListType: concept
@@ -40,9 +42,9 @@ landingContent:
     - text: Microsoft 문서 기여자 가이드
       url: https://docs.microsoft.com/contribute
     - text: ASP.NET Core 문서 기여자 가이드
-      url: https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md
+      url: https://github.com/dotnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md
     - text: ASP.NET Core API 참조 문서 기여자 가이드
-      url: https://github.com/aspnet/ApiDocs/blob/master/CONTRIBUTING.md
+      url: https://github.com/dotnet/AspNetApiDocs/blob/master/CONTRIBUTING.md
 - title: 관련된 새로운 기능 페이지
   linkLists:
   - linkListType: whats-new

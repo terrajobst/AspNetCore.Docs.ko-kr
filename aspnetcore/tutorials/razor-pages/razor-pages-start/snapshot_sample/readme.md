@@ -1,1 +1,1 @@
-<span data-ttu-id="c2562-101">이 폴더의 코드는 Razor 페이지 계열의 시간에서 스냅샷입니다.</span><span class="sxs-lookup"><span data-stu-id="c2562-101">The code in this folder is snapshots in time from the Razor Pages series.</span></span>
+<span data-ttu-id="4182d-101">이 폴더의 코드는 Razor 페이지 계열의 시간에서 스냅샷입니다.</span><span class="sxs-lookup"><span data-stu-id="4182d-101">The code in this folder is snapshots in time from the Razor Pages series.</span></span>
