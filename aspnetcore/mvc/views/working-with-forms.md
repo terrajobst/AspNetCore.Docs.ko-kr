@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: 5af532db35b858d157f61a6aca30f55d15e9ff1e
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 1c7652c909432b25ae373873cd593afd879cfa00
+ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78646377"
+ms.lasthandoff: 02/12/2020
+ms.locfileid: "77172558"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>ASP.NET Core의 양식 및 관련 태그 도우미
 
@@ -65,7 +65,7 @@ MVC 런타임은 양식 태그 도우미의 특성 `asp-controller` 및 `asp-act
 ```
 
 >[!NOTE]
->기본 제공 템플릿에서는 권한이 부여된 리소스에 액세스하려고 하지만 인증되지 읺거나 권한이 없는 경우에만 `returnUrl`이 자동으로 채워집니다.  권한 없는 액세스를 시도하는 경우 보안 미들웨어가 사용자를 `returnUrl` 설정과 함께 로그인 페이지로 리디렉션합니다.
+>기본 제공 템플릿에서는 권한이 부여된 리소스에 액세스하려고 하지만 인증되지 읺거나 권한이 없는 경우에만 `returnUrl`이 자동으로 채워집니다. 권한 없는 액세스를 시도하는 경우 보안 미들웨어가 사용자를 `returnUrl` 설정과 함께 로그인 페이지로 리디렉션합니다.
 
 ## <a name="the-form-action-tag-helper"></a>양식 작업 태그 도우미
 
@@ -177,7 +177,7 @@ public class HomeController : Controller
 
 * HTML `type` 특성 값이 지정된 경우 덮어쓰지 않습니다.
 
-* 모델 속성에 적용되는 [데이터 주석](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) 특성에서 [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5) 유효성 검사 특성을 만듭니다.
+* 모델 속성에 적용된 [데이터 주석](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) 특성으로부터 [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5) 유효성 검사 특성을 생성합니다.
 
 * `Html.TextBoxFor` 및 `Html.EditorFor`와 HTML 도우미 기능이 겹칩니다. 자세한 내용은 **입력 태그 도우미에 대한 HTML 도우미 대안** 섹션을 참조하세요.
 
@@ -194,18 +194,18 @@ Type expected
  could be found (are you missing a using directive or an assembly reference?)
 ```
 
-`Input` 태그 도우미는 .NET 형식을 기반으로 HTML `type` 특성을 설정합니다. 다음 표에서는 몇 가지 일반적인 .NET 형식 및 생성된 HTML 형식을 나열합니다(.NET 형식의 일부만 나열됨).
+`Input` 태그 도우미는 .NET 형식을 기반으로 HTML `type` 특성을 설정합니다. 다음 표는 몇 가지 일반적인 .NET 형식 및 생성되는 HTML 형식을 나열합니다(.NET 형식의 일부만 나열됨).
 
 |.NET 형식|입력 형식|
 |---|---|
 |Bool|type="checkbox"|
-|문자열|type="text"|
+|String|type="text"|
 |DateTime|type=["datetime-local"](https://developer.mozilla.org/docs/Web/HTML/Element/input/datetime-local)|
 |Byte|type="number"|
 |Int|type="number"|
 |Single, Double|type="number"|
 
-다음 표에서는 입력 태그 도우미가 특정 입력 형식에 매핑되는 몇 가지 일반적인 [데이터 주석](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) 특성을 보여줍니다(유효성 검사 특성의 일부만 나열됨).
+다음 표는 입력 태그 도우미가 특정 입력 형식에 매핑하는 몇 가지 일반적인 [데이터 주석](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) 특성을 보여줍니다(유효성 검사 특성의 일부만 나열됨).
 
 |특성|입력 형식|
 |---|---|
@@ -245,11 +245,11 @@ Type expected
 
 ### <a name="html-helper-alternatives-to-input-tag-helper"></a>입력 태그 도우미에 대한 HTML 도우미 대안
 
-`Html.TextBox`, `Html.TextBoxFor`, `Html.Editor` 및 `Html.EditorFor`에는 입력 태그 도우미와 겹치는 기능이 있습니다. 입력 태그 도우미는 `type` 특성을 자동으로 설정하는 반면 `Html.TextBox` 및 `Html.TextBoxFor`는 설정하지 않습니다. `Html.Editor` 및 `Html.EditorFor`는 컬렉션, 복잡한 개체 및 템플릿을 처리하는 반면 입력 태그 도우미는 처리하지 않습니다. 입력 태그 도우미인 `Html.EditorFor` 및 `Html.TextBoxFor`은 강력한 형식이 지정(람다 식 사용)되는 반면 `Html.TextBox` 및 `Html.Editor`는 지정되지 않습니다(식 이름 사용).
+`Html.TextBox`, `Html.TextBoxFor`, `Html.Editor` 및 `Html.EditorFor`는 입력 태그 도우미와 겹치는 기능을 갖고 있습니다. 입력 태그 도우미는 `type` 특성을 자동으로 설정하는 반면 `Html.TextBox` 및 `Html.TextBoxFor`는 설정하지 않습니다. `Html.Editor` 및 `Html.EditorFor`는 컬렉션, 복잡한 개체 및 템플릿을 처리하는 반면 입력 태그 도우미는 처리하지 않습니다. 입력 태그 도우미, `Html.EditorFor` 및 `Html.TextBoxFor`는 강력한 형식이 지정(람다 식 사용)되는 반면 `Html.TextBox` 및 `Html.Editor`는 지정되지 않습니다(식 이름 사용).
 
 ### <a name="htmlattributes"></a>HtmlAttributes
 
-`@Html.Editor()` 및 `@Html.EditorFor()`는 해당 기본 템플릿을 실행할 때 `htmlAttributes`라는 특수한 `ViewDataDictionary` 항목을 사용합니다. 이 동작은 필요에 따라 `additionalViewData` 매개 변수를 사용하여 확대됩니다. "htmlAttributes" 키는 대/소문자를 구분합니다. "htmlAttributes" 키는 `@Html.TextBox()`와 같은 입력 도우미에 전달된 `htmlAttributes` 개체와 유사하게 처리됩니다.
+`@Html.Editor()` 및 `@Html.EditorFor()`는 기본 템플릿을 실행할 때 `htmlAttributes`라는 특수한 `ViewDataDictionary` 항목을 사용합니다. 이 동작은 필요에 따라 `additionalViewData` 매개 변수를 사용하여 확대됩니다. "htmlAttributes" 키는 대/소문자를 구분합니다. "htmlAttributes" 키는 `@Html.TextBox()`와 같은 입력 도우미에 전달된 `htmlAttributes` 개체와 유사하게 처리됩니다.
 
 ```cshtml
 @Html.EditorFor(model => model.YourProperty, 
@@ -258,7 +258,7 @@ Type expected
 
 ### <a name="expression-names"></a>식 이름
 
-`asp-for` 특성 값은 `ModelExpression`이며 람다 식의 오른쪽입니다. 따라서 `asp-for="Property1"`은 생성된 코드에서 `m => m.Property1`이 됩니다. 따라서 `Model`과 함께 접두사로 사용할 필요가 없습니다. “\@” 문자를 사용하여 인라인 식을 시작하고 `m.` 앞으로 이동할 수 있습니다.
+`asp-for` 특성 값은 `ModelExpression`이며 람다 식의 우변입니다. 따라서 `asp-for="Property1"`은 생성된 코드에서 `m => m.Property1`이 되며, 이것이 `Model`을 접두사로 사용할 필요가 없는 이유입니다. "\@" 문자를 사용하여 인라인 식을 시작하고 `m.` 앞으로 이동할 수 있습니다.
 
 ```cshtml
 @{
@@ -268,22 +268,22 @@ Type expected
 <input asp-for="@joe">
 ```
 
-다음 항목을 생성합니다.
+다음을 생성합니다.
 
 ```html
 <input type="text" id="joe" name="joe" value="Joe">
 ```
 
-컬렉션 속성을 가진 `asp-for="CollectionProperty[23].Member"`은 `i`에 `23` 값이 포함될 경우 `asp-for="CollectionProperty[i].Member"`와 동일한 이름을 생성합니다.
+컬렉션 속성을 사용할 경우, `asp-for="CollectionProperty[23].Member"`은 `i`가 `23` 값을 가졌을 때의 `asp-for="CollectionProperty[i].Member"`와 동일한 이름을 생성합니다.
 
 ASP.NET Core MVC는 `ModelExpression`의 값을 계산할 때 `ModelState`를 비롯한 여러 원본을 검사합니다. `<input type="text" asp-for="@Name">`을 가정해보세요. 계산되는 `value` 특성은 다음 중 null이 아닌 첫 번째 값입니다.
 
-* "Name" 키를 가진 `ModelState` 항목입니다.
-* 식 `Model.Name`의 결과입니다.
+* "Name" 키를 가진 `ModelState` 항목
+* `Model.Name` 식의 결과
 
 ### <a name="navigating-child-properties"></a>자식 속성 탐색
 
-보기 모델의 속성 경로를 사용하여 자식 속성을 탐색할 수 있습니다. 자식 `Address` 속성을 포함하는 보다 복잡한 모델 클래스를 사용해보세요.
+보기 모델의 속성 경로를 사용하여 자식 속성을 탐색할 수 있습니다. 자식 `Address` 속성을 포함하는 보다 복잡한 모델 클래스를 고려해보세요.
 
 [!code-csharp[](../../mvc/views/working-with-forms/sample/final/ViewModels/AddressViewModel.cs?highlight=1,2,3,4&range=5-8)]
 
@@ -305,7 +305,7 @@ ASP.NET Core MVC는 `ModelExpression`의 값을 계산할 때 `ModelState`를 �
 
 [!code-csharp[](../../mvc/views/working-with-forms/sample/final/ViewModels/Person.cs?highlight=3&range=5-10)]
 
-작업 방법:
+작업 메서드:
 
 ```csharp
 public IActionResult Edit(int id, int colorIndex)
@@ -315,7 +315,7 @@ public IActionResult Edit(int id, int colorIndex)
 }
 ```
 
-다음 Razor에서는 특정 `Color` 요소에 액세스하는 방법을 보여줍니다.
+다음 Razor는 특정 `Color` 요소에 액세스하는 방법을 보여줍니다.
 
 [!code-HTML[](working-with-forms/sample/final/Views/Demo/EditColor.cshtml)]
 
@@ -323,11 +323,11 @@ public IActionResult Edit(int id, int colorIndex)
 
 [!code-HTML[](working-with-forms/sample/final/Views/Shared/EditorTemplates/String.cshtml)]
 
-`List<T>`를 사용하는 샘플:
+`List<T>`를 사용하는 예제:
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/ToDoItem.cs?range=3-8)]
 
-다음 Razor에서는 컬렉션을 반복하는 방법을 보여줍니다.
+다음 Razor는 컬렉션을 반복하는 방법을 보여줍니다.
 
 [!code-HTML[](working-with-forms/sample/final/Views/Demo/Edit.cshtml)]
 
@@ -670,4 +670,4 @@ HTML [\<option>](https://www.w3.org/wiki/HTML/Elements/option) 요소를 추가�
 * <xref:mvc/models/model-binding>
 * <xref:mvc/models/validation>
 * [IAttributeAdapter 인터페이스](/dotnet/api/Microsoft.AspNetCore.Mvc.DataAnnotations.IAttributeAdapter)
-* [이 문서의 코드 조각](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/working-with-forms/sample/final)
+* [이 문서의 코드 조각](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/working-with-forms/sample/final)
