@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 08/05/2017
 uid: tutorials/first-mvc-app/adding-controller
 ms.openlocfilehash: fb670902b0dafa7dce2b3372e550095387844936
-ms.sourcegitcommit: 57b85708f4cded99b8f008a69830cb104cd8e879
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/13/2020
-ms.locfileid: "75914243"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78650775"
 ---
 # <a name="add-a-controller-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 컨트롤러 추가
 
@@ -32,7 +32,7 @@ MVC 패턴을 사용하면 앱의 다양한 측면(입력 논리, 비즈니스 �
 
 ## <a name="add-a-controller"></a>컨트롤러 추가
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * **솔루션 탐색기** 에서 **컨트롤러 > 추가 > 컨트롤러**
   ![바로 가기 메뉴](adding-controller/_static/add_controller.png)를 오른쪽 단추로 클릭
@@ -43,13 +43,13 @@ MVC 패턴을 사용하면 앱의 다양한 측면(입력 논리, 비즈니스 �
 
 * **빈 MVC 컨트롤러 추가 대화 상자**에 **HelloWorldController**를 입력하고 **추가**를 선택합니다.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 **탐색기** 아이콘을 선택한 다음, **컨트롤러 > 새 파일**을 컨트롤 클릭(마우스 오른쪽 단추로 클릭)하고 새 파일의 이름을 *HelloWorldController.cs*로 지정합니다.
 
   ![상황에 맞는 메뉴](~/tutorials/first-mvc-app-xplat/adding-controller/_static/new_file.png)
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 **솔루션 탐색기** 에서 **컨트롤러 > 추가 > 새 파일** 을 마우스 오른쪽 단추로 클릭합니다.
 ![상황에 맞는 메뉴](~/tutorials/first-mvc-app-mac/adding-controller/_static/add_controller.png)
@@ -146,7 +146,7 @@ MVC 패턴을 사용하면 앱의 다양한 측면(입력 논리, 비즈니스 �
 
 ## <a name="add-a-controller"></a>컨트롤러 추가
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * **솔루션 탐색기** 에서 **컨트롤러 > 추가 > 컨트롤러**
   ![바로 가기 메뉴](adding-controller/_static/add_controller.png)를 오른쪽 단추로 클릭
@@ -157,13 +157,13 @@ MVC 패턴을 사용하면 앱의 다양한 측면(입력 논리, 비즈니스 �
 
 * **빈 MVC 컨트롤러 추가 대화 상자**에 **HelloWorldController**를 입력하고 **추가**를 선택합니다.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 **탐색기** 아이콘을 선택한 다음, **컨트롤러 > 새 파일**을 컨트롤 클릭(마우스 오른쪽 단추로 클릭)하고 새 파일의 이름을 *HelloWorldController.cs*로 지정합니다.
 
   ![상황에 맞는 메뉴](~/tutorials/first-mvc-app-xplat/adding-controller/_static/new_file.png)
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 **솔루션 탐색기** 에서 **컨트롤러 > 추가 > 새 파일** 을 마우스 오른쪽 단추로 클릭합니다.
 ![상황에 맞는 메뉴](~/tutorials/first-mvc-app-mac/adding-controller/_static/add_controller.png)
