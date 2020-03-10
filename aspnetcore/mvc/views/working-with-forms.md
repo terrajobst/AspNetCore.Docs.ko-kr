@@ -301,7 +301,7 @@ ASP.NET Core MVC는 `ModelExpression`의 값을 계산할 때 `ModelState`를 �
 
 ### <a name="expression-names-and-collections"></a>식 이름 및 컬렉션
 
-이번 예제에서 모델은 `Color`의 목록을 담고 있습니다.
+이번 예제에서 모델은 `Colors`의 목록을 담고 있습니다.
 
 [!code-csharp[](../../mvc/views/working-with-forms/sample/final/ViewModels/Person.cs?highlight=3&range=5-10)]
 
@@ -400,7 +400,7 @@ public IActionResult Edit(int id, int colorIndex)
 <label for="Email">Email Address</label>
 ```
 
-레이블 태그 도우미는 "Email"이라는 `for` 특성 값을 생성했습니다. 이 값은 `<input>` 요소와 연결된 ID입니다. 태그 도우미는올바르게 연결할 수 있도록  일관된 `id` 및 `for` 요소를 생성합니다. 이 예제의 캡션은 `Display` 특성으로부터 제공됩니다. 모델에 `Display` 특성이 포함되지 않는 경우 캡션은 식의 속성 이름입니다.
+레이블 태그 도우미는 "Email"이라는 `for` 특성 값을 생성했습니다. 이 값은 `<input>` 요소와 연결된 ID입니다. 태그 도우미는 올바르게 연결할 수 있도록 일관된 `id` 및 `for` 요소를 생성합니다. 이 예제의 캡션은 `Display` 특성으로부터 제공됩니다. 모델에 `Display` 특성이 포함되지 않는 경우 캡션은 식의 속성 이름입니다.
 
 ## <a name="the-validation-tag-helpers"></a>유효성 검사 태그 도우미
 
