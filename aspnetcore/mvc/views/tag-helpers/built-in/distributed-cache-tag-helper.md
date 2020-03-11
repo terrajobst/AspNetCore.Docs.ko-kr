@@ -6,28 +6,28 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/24/2020
 uid: mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper
-ms.openlocfilehash: e5100d7244600358186b653073990985f48434a7
-ms.sourcegitcommit: b5ceb0a46d0254cc3425578116e2290142eec0f0
-ms.translationtype: HT
+ms.openlocfilehash: f5957adf3cef8966812a1bf0cbc6b2627d19d026
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/28/2020
-ms.locfileid: "76809057"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653793"
 ---
-# <a name="distributed-cache-tag-helper-in-aspnet-core"></a><span data-ttu-id="ede45-103">ASP.NET Core의 분산 캐시 태그 도우미</span><span class="sxs-lookup"><span data-stu-id="ede45-103">Distributed Cache Tag Helper in ASP.NET Core</span></span>
+# <a name="distributed-cache-tag-helper-in-aspnet-core"></a><span data-ttu-id="dc5cf-103">ASP.NET Core의 분산 캐시 태그 도우미</span><span class="sxs-lookup"><span data-stu-id="dc5cf-103">Distributed Cache Tag Helper in ASP.NET Core</span></span>
 
-<span data-ttu-id="ede45-104">작성자: [Peter Kellner](https://peterkellner.net) 및 [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="ede45-104">By [Peter Kellner](https://peterkellner.net) and [Luke Latham](https://github.com/guardrex)</span></span>
+<span data-ttu-id="dc5cf-104">작성자: [Peter Kellner](https://peterkellner.net)</span><span class="sxs-lookup"><span data-stu-id="dc5cf-104">By [Peter Kellner](https://peterkellner.net)</span></span>
 
-<span data-ttu-id="ede45-105">분산 캐시 태그 도우미는 ASP.NET Core 앱의 콘텐츠를 분산 캐시 원본에 캐싱하여 성능을 획기적으로 개선하는 기능을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="ede45-105">The Distributed Cache Tag Helper provides the ability to dramatically improve the performance of your ASP.NET Core app by caching its content to a distributed cache source.</span></span>
+<span data-ttu-id="dc5cf-105">분산 캐시 태그 도우미는 콘텐츠를 분산 캐시 원본에 캐싱하여 ASP.NET Core 앱 성능을 획기적으로 개선하는 기능을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="dc5cf-105">The Distributed Cache Tag Helper provides the ability to dramatically improve the performance of your ASP.NET Core app by caching its content to a distributed cache source.</span></span>
 
-<span data-ttu-id="ede45-106">태그 도우미에 대한 개요는 <xref:mvc/views/tag-helpers/intro>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="ede45-106">For an overview of Tag Helpers, see <xref:mvc/views/tag-helpers/intro>.</span></span>
+<span data-ttu-id="dc5cf-106">태그 도우미에 대한 개요는 <xref:mvc/views/tag-helpers/intro>를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="dc5cf-106">For an overview of Tag Helpers, see <xref:mvc/views/tag-helpers/intro>.</span></span>
 
-<span data-ttu-id="ede45-107">분산 캐시 태그 도우미는 캐시 태그 도우미와 동일한 기본 클래스를 상속받습니다.</span><span class="sxs-lookup"><span data-stu-id="ede45-107">The Distributed Cache Tag Helper inherits from the same base class as the Cache Tag Helper.</span></span> <span data-ttu-id="ede45-108">모든 [캐시 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper) 특성을 분산 태그 도우미에서 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ede45-108">All of the [Cache Tag Helper](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper) attributes are available to the Distributed Tag Helper.</span></span>
+<span data-ttu-id="dc5cf-107">분산 캐시 태그 도우미는 캐시 태그 도우미와 동일한 기본 클래스에서 상속합니다.</span><span class="sxs-lookup"><span data-stu-id="dc5cf-107">The Distributed Cache Tag Helper inherits from the same base class as the Cache Tag Helper.</span></span> <span data-ttu-id="dc5cf-108">모든 [캐시 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper) 특성이 분산 태그 도우미에 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="dc5cf-108">All of the [Cache Tag Helper](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper) attributes are available to the Distributed Tag Helper.</span></span>
 
-<span data-ttu-id="ede45-109">분산 캐시 태그 도우미는 [생성자 주입](xref:fundamentals/dependency-injection#constructor-injection-behavior)을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="ede45-109">The Distributed Cache Tag Helper uses [constructor injection](xref:fundamentals/dependency-injection#constructor-injection-behavior).</span></span> <span data-ttu-id="ede45-110">분산 캐시 태그 도우미의 생성자에는 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 인터페이스가 전달됩니다.</span><span class="sxs-lookup"><span data-stu-id="ede45-110">The <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> interface is passed into the Distributed Cache Tag Helper's constructor.</span></span> <span data-ttu-id="ede45-111">`Startup.ConfigureServices`(*Startup.cs*)에서 `IDistributedCache`의 구체적 구현이 생성되지 않으면, 분산 캐시 태그 도우미는 [캐시 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper)와 동일한 메모리 내 공급자를 사용하여 캐시된 데이터를 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="ede45-111">If no concrete implementation of `IDistributedCache` is created in `Startup.ConfigureServices` (*Startup.cs*), the Distributed Cache Tag Helper uses the same in-memory provider for storing cached data as the [Cache Tag Helper](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper).</span></span>
+<span data-ttu-id="dc5cf-109">분산 캐시 태그 도우미는 [생성자 주입](xref:fundamentals/dependency-injection#constructor-injection-behavior)을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="dc5cf-109">The Distributed Cache Tag Helper uses [constructor injection](xref:fundamentals/dependency-injection#constructor-injection-behavior).</span></span> <span data-ttu-id="dc5cf-110">분산 캐시 태그 도우미의 생성자에는 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 인터페이스가 전달됩니다.</span><span class="sxs-lookup"><span data-stu-id="dc5cf-110">The <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> interface is passed into the Distributed Cache Tag Helper's constructor.</span></span> <span data-ttu-id="dc5cf-111">`IDistributedCache`의 구체적인 구현이 `Startup.ConfigureServices`(*Startup.cs*)에 생성되지 않은 경우 분산 캐시 태그 도우미는 동일한 메모리 내 공급자를 사용하여 캐시된 데이터를 [캐시 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper)로 저장합니다.</span><span class="sxs-lookup"><span data-stu-id="dc5cf-111">If no concrete implementation of `IDistributedCache` is created in `Startup.ConfigureServices` (*Startup.cs*), the Distributed Cache Tag Helper uses the same in-memory provider for storing cached data as the [Cache Tag Helper](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper).</span></span>
 
-## <a name="distributed-cache-tag-helper-attributes"></a><span data-ttu-id="ede45-112">분산 캐시 태그 도우미 특성</span><span class="sxs-lookup"><span data-stu-id="ede45-112">Distributed Cache Tag Helper Attributes</span></span>
+## <a name="distributed-cache-tag-helper-attributes"></a><span data-ttu-id="dc5cf-112">분산 캐시 태그 도우미 특성</span><span class="sxs-lookup"><span data-stu-id="dc5cf-112">Distributed Cache Tag Helper Attributes</span></span>
 
-### <a name="attributes-shared-with-the-cache-tag-helper"></a><span data-ttu-id="ede45-113">캐시 태그 도우미와 공유되는 특성</span><span class="sxs-lookup"><span data-stu-id="ede45-113">Attributes shared with the Cache Tag Helper</span></span>
+### <a name="attributes-shared-with-the-cache-tag-helper"></a><span data-ttu-id="dc5cf-113">캐시 태그 도우미와 공유되는 특성</span><span class="sxs-lookup"><span data-stu-id="dc5cf-113">Attributes shared with the Cache Tag Helper</span></span>
 
 * `enabled`
 * `expires-on`
@@ -40,17 +40,17 @@ ms.locfileid: "76809057"
 * `vary-by-user`
 * `vary-by priority`
 
-<span data-ttu-id="ede45-114">분산 캐시 태그 도우미는 캐시 태그 도우미와 동일한 클래스를 상속받습니다.</span><span class="sxs-lookup"><span data-stu-id="ede45-114">The Distributed Cache Tag Helper inherits from the same class as Cache Tag Helper.</span></span> <span data-ttu-id="ede45-115">이러한 특성에 대한 설명은 [캐시 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="ede45-115">For descriptions of these attributes, see the [Cache Tag Helper](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper).</span></span>
+<span data-ttu-id="dc5cf-114">분산 캐시 태그 도우미는 캐시 태그 도우미와 동일한 클래스를 상속받습니다.</span><span class="sxs-lookup"><span data-stu-id="dc5cf-114">The Distributed Cache Tag Helper inherits from the same class as Cache Tag Helper.</span></span> <span data-ttu-id="dc5cf-115">이러한 특성에 대한 설명은 [캐시 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="dc5cf-115">For descriptions of these attributes, see the [Cache Tag Helper](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper).</span></span>
 
-### <a name="name"></a><span data-ttu-id="ede45-116">name</span><span class="sxs-lookup"><span data-stu-id="ede45-116">name</span></span>
+### <a name="name"></a><span data-ttu-id="dc5cf-116">name</span><span class="sxs-lookup"><span data-stu-id="dc5cf-116">name</span></span>
 
-| <span data-ttu-id="ede45-117">특성 형식</span><span class="sxs-lookup"><span data-stu-id="ede45-117">Attribute Type</span></span> | <span data-ttu-id="ede45-118">예제</span><span class="sxs-lookup"><span data-stu-id="ede45-118">Example</span></span>                               |
+| <span data-ttu-id="dc5cf-117">특성 유형</span><span class="sxs-lookup"><span data-stu-id="dc5cf-117">Attribute Type</span></span> | <span data-ttu-id="dc5cf-118">예제</span><span class="sxs-lookup"><span data-stu-id="dc5cf-118">Example</span></span>                               |
 | -------------- | ------------------------------------- |
-| <span data-ttu-id="ede45-119">문자열</span><span class="sxs-lookup"><span data-stu-id="ede45-119">String</span></span>         | `my-distributed-cache-unique-key-101` |
+| <span data-ttu-id="dc5cf-119">String</span><span class="sxs-lookup"><span data-stu-id="dc5cf-119">String</span></span>         | `my-distributed-cache-unique-key-101` |
 
-<span data-ttu-id="ede45-120">`name`은 필수입니다.</span><span class="sxs-lookup"><span data-stu-id="ede45-120">`name` is required.</span></span> <span data-ttu-id="ede45-121">`name` 특성은 저장된 각 캐시 인스턴스의 키로 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="ede45-121">The `name` attribute is used as a key for each stored cache instance.</span></span> <span data-ttu-id="ede45-122">Razor 페이지의 Razor 페이지 이름 및 위치를 기준으로 각 인스턴스에 캐시 키를 할당하는 캐시 태그 도우미와는 달리, 분산 캐시 태그 도우미는 `name` 특성의 키만을 기준으로 합니다.</span><span class="sxs-lookup"><span data-stu-id="ede45-122">Unlike the Cache Tag Helper that assigns a cache key to each instance based on the Razor page name and location in the Razor page, the Distributed Cache Tag Helper only bases its key on the attribute `name`.</span></span>
+<span data-ttu-id="dc5cf-120">`name`은 필수입니다.</span><span class="sxs-lookup"><span data-stu-id="dc5cf-120">`name` is required.</span></span> <span data-ttu-id="dc5cf-121">`name` 특성은 저장된 각 캐시 인스턴스의 키로 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="dc5cf-121">The `name` attribute is used as a key for each stored cache instance.</span></span> <span data-ttu-id="dc5cf-122">Razor 페이지의 Razor 페이지 이름 및 위치를 기준으로 각 인스턴스에 캐시 키를 할당하는 캐시 태그 도우미와는 달리, 분산 캐시 태그 도우미는 `name` 특성의 키만을 기준으로 합니다.</span><span class="sxs-lookup"><span data-stu-id="dc5cf-122">Unlike the Cache Tag Helper that assigns a cache key to each instance based on the Razor page name and location in the Razor page, the Distributed Cache Tag Helper only bases its key on the attribute `name`.</span></span>
 
-<span data-ttu-id="ede45-123">예:</span><span class="sxs-lookup"><span data-stu-id="ede45-123">Example:</span></span>
+<span data-ttu-id="dc5cf-123">예제:</span><span class="sxs-lookup"><span data-stu-id="dc5cf-123">Example:</span></span>
 
 ```cshtml
 <distributed-cache name="my-distributed-cache-unique-key-101">
@@ -58,13 +58,13 @@ ms.locfileid: "76809057"
 </distributed-cache>
 ```
 
-## <a name="distributed-cache-tag-helper-idistributedcache-implementations"></a><span data-ttu-id="ede45-124">분산 캐시 태그 도우미 IDistributedCache 구현</span><span class="sxs-lookup"><span data-stu-id="ede45-124">Distributed Cache Tag Helper IDistributedCache implementations</span></span>
+## <a name="distributed-cache-tag-helper-idistributedcache-implementations"></a><span data-ttu-id="dc5cf-124">분산 캐시 태그 도우미 IDistributedCache 구현</span><span class="sxs-lookup"><span data-stu-id="dc5cf-124">Distributed Cache Tag Helper IDistributedCache implementations</span></span>
 
-<span data-ttu-id="ede45-125">ASP.NET Core에는 두 가지 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 구현이 기본으로 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="ede45-125">There are two implementations of <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> built in to ASP.NET Core.</span></span> <span data-ttu-id="ede45-126">하나는 SQL Server 기반이고 다른 하나는 Redis 기반입니다.</span><span class="sxs-lookup"><span data-stu-id="ede45-126">One is based on SQL Server, and the other is based on Redis.</span></span> <span data-ttu-id="ede45-127">[NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html)와 같은 타사 구현도 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ede45-127">Third-party implementations are also available, such as [NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html).</span></span> <span data-ttu-id="ede45-128">이러한 구현의 세부 정보는 <xref:performance/caching/distributed>에서 찾을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ede45-128">Details of these implementations can be found at <xref:performance/caching/distributed>.</span></span> <span data-ttu-id="ede45-129">두 가지 구현 모두 `Startup`에서 `IDistributedCache` 인스턴스를 설정해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ede45-129">Both implementations involve setting an instance of `IDistributedCache` in `Startup`.</span></span>
+<span data-ttu-id="dc5cf-125">ASP.NET Core에 두 가지 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 구현이 기본적으로 제공됩니다.</span><span class="sxs-lookup"><span data-stu-id="dc5cf-125">There are two implementations of <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> built in to ASP.NET Core.</span></span> <span data-ttu-id="dc5cf-126">하나는 SQL Server 기반이고 다른 하나는 Redis 기반입니다.</span><span class="sxs-lookup"><span data-stu-id="dc5cf-126">One is based on SQL Server, and the other is based on Redis.</span></span> <span data-ttu-id="dc5cf-127">[NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html)와 같은 타사 구현도 사용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="dc5cf-127">Third-party implementations are also available, such as [NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html).</span></span> <span data-ttu-id="dc5cf-128">이러한 구현의 세부 정보는 <xref:performance/caching/distributed>에서 찾을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="dc5cf-128">Details of these implementations can be found at <xref:performance/caching/distributed>.</span></span> <span data-ttu-id="dc5cf-129">두 구현 모두 `IDistributedCache`에 `Startup` 인스턴스를 설정해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="dc5cf-129">Both implementations involve setting an instance of `IDistributedCache` in `Startup`.</span></span>
 
-<span data-ttu-id="ede45-130">특정 `IDistributedCache` 구현의 사용과 특별히 관련된 태그 특성은 없습니다.</span><span class="sxs-lookup"><span data-stu-id="ede45-130">There are no tag attributes specifically associated with using any specific implementation of `IDistributedCache`.</span></span>
+<span data-ttu-id="dc5cf-130">특정 `IDistributedCache` 구현 사용과 특별히 관련된 태그 특성은 없습니다.</span><span class="sxs-lookup"><span data-stu-id="dc5cf-130">There are no tag attributes specifically associated with using any specific implementation of `IDistributedCache`.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="ede45-131">추가 자료</span><span class="sxs-lookup"><span data-stu-id="ede45-131">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="dc5cf-131">추가 리소스</span><span class="sxs-lookup"><span data-stu-id="dc5cf-131">Additional resources</span></span>
 
 * <xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper>
 * <xref:fundamentals/dependency-injection>

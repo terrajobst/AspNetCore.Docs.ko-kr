@@ -7,24 +7,24 @@ ms.author: riande
 ms.date: 11/08/2019
 uid: security/authorization/views
 ms.openlocfilehash: fc03da9eb98d36ffdda932ee5b16f327c2be9f83
-ms.sourcegitcommit: 4818385c3cfe0805e15138a2c1785b62deeaab90
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/09/2019
-ms.locfileid: "73896974"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653565"
 ---
-# <a name="view-based-authorization-in-aspnet-core-mvc"></a><span data-ttu-id="33a6e-103">ASP.NET Core MVC에서 보기 기반 권한 부여</span><span class="sxs-lookup"><span data-stu-id="33a6e-103">View-based authorization in ASP.NET Core MVC</span></span>
+# <a name="view-based-authorization-in-aspnet-core-mvc"></a><span data-ttu-id="5b1ee-103">ASP.NET Core MVC에서 보기 기반 권한 부여</span><span class="sxs-lookup"><span data-stu-id="5b1ee-103">View-based authorization in ASP.NET Core MVC</span></span>
 
-<span data-ttu-id="33a6e-104">개발자는 종종 현재 사용자 id를 기준으로 UI를 표시 하거나 숨기 거 나 수정 하려고 합니다.</span><span class="sxs-lookup"><span data-stu-id="33a6e-104">A developer often wants to show, hide, or otherwise modify a UI based on the current user identity.</span></span> <span data-ttu-id="33a6e-105">[종속성 주입](xref:fundamentals/dependency-injection)을 통해 MVC 뷰 내에서 권한 부여 서비스에 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="33a6e-105">You can access the authorization service within MVC views via [dependency injection](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="33a6e-106">권한 부여 서비스를 Razor 뷰에 삽입 하려면 `@inject` 지시문을 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="33a6e-106">To inject the authorization service into a Razor view, use the `@inject` directive:</span></span>
+<span data-ttu-id="5b1ee-104">개발자는 종종 현재 사용자 id를 기준으로 UI를 표시 하거나 숨기 거 나 수정 하려고 합니다.</span><span class="sxs-lookup"><span data-stu-id="5b1ee-104">A developer often wants to show, hide, or otherwise modify a UI based on the current user identity.</span></span> <span data-ttu-id="5b1ee-105">[종속성 주입](xref:fundamentals/dependency-injection)을 통해 MVC 뷰 내에서 권한 부여 서비스에 액세스할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="5b1ee-105">You can access the authorization service within MVC views via [dependency injection](xref:fundamentals/dependency-injection).</span></span> <span data-ttu-id="5b1ee-106">권한 부여 서비스를 Razor 뷰에 삽입 하려면 `@inject` 지시문을 사용 합니다.</span><span class="sxs-lookup"><span data-stu-id="5b1ee-106">To inject the authorization service into a Razor view, use the `@inject` directive:</span></span>
 
 ```cshtml
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 ```
 
-<span data-ttu-id="33a6e-107">모든 보기에서 권한 부여 서비스를 원하는 경우 `@inject` 지시어를 *Views* 디렉터리의 *_ViewImports의 cshtml* 파일에 저장 합니다.</span><span class="sxs-lookup"><span data-stu-id="33a6e-107">If you want the authorization service in every view, place the `@inject` directive into the *_ViewImports.cshtml* file of the *Views* directory.</span></span> <span data-ttu-id="33a6e-108">자세한 내용은 [보기에 종속성 주입](xref:mvc/views/dependency-injection)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="33a6e-108">For more information, see [Dependency injection into views](xref:mvc/views/dependency-injection).</span></span>
+<span data-ttu-id="5b1ee-107">모든 보기에서 권한 부여 서비스를 원하는 경우 `@inject` 지시어를 *Views* 디렉터리의 *_ViewImports의 cshtml* 파일에 저장 합니다.</span><span class="sxs-lookup"><span data-stu-id="5b1ee-107">If you want the authorization service in every view, place the `@inject` directive into the *_ViewImports.cshtml* file of the *Views* directory.</span></span> <span data-ttu-id="5b1ee-108">자세한 내용은 [보기에 종속성 주입](xref:mvc/views/dependency-injection)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="5b1ee-108">For more information, see [Dependency injection into views](xref:mvc/views/dependency-injection).</span></span>
 
-<span data-ttu-id="33a6e-109">삽입 된 권한 부여 서비스를 사용 하 여 [리소스 기반 권한 부여](xref:security/authorization/resourcebased#security-authorization-resource-based-imperative)중에 확인 하는 것과 정확히 동일한 방법으로 `AuthorizeAsync`를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="33a6e-109">Use the injected authorization service to invoke `AuthorizeAsync` in exactly the same way you would check during [resource-based authorization](xref:security/authorization/resourcebased#security-authorization-resource-based-imperative):</span></span>
+<span data-ttu-id="5b1ee-109">삽입 된 권한 부여 서비스를 사용 하 여 [리소스 기반 권한 부여](xref:security/authorization/resourcebased#security-authorization-resource-based-imperative)중에 확인 하는 것과 정확히 동일한 방법으로 `AuthorizeAsync`를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="5b1ee-109">Use the injected authorization service to invoke `AuthorizeAsync` in exactly the same way you would check during [resource-based authorization](xref:security/authorization/resourcebased#security-authorization-resource-based-imperative):</span></span>
 
 ```cshtml
 @if ((await AuthorizationService.AuthorizeAsync(User, "PolicyName")).Succeeded)
@@ -33,7 +33,7 @@ ms.locfileid: "73896974"
 }
 ```
 
-<span data-ttu-id="33a6e-110">경우에 따라 리소스가 보기 모델이 됩니다.</span><span class="sxs-lookup"><span data-stu-id="33a6e-110">In some cases, the resource will be your view model.</span></span> <span data-ttu-id="33a6e-111">[리소스 기반 권한 부여](xref:security/authorization/resourcebased#security-authorization-resource-based-imperative)중에 확인 하는 것과 정확히 동일한 방법으로 `AuthorizeAsync`를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="33a6e-111">Invoke `AuthorizeAsync` in exactly the same way you would check during [resource-based authorization](xref:security/authorization/resourcebased#security-authorization-resource-based-imperative):</span></span>
+<span data-ttu-id="5b1ee-110">경우에 따라 리소스가 보기 모델이 됩니다.</span><span class="sxs-lookup"><span data-stu-id="5b1ee-110">In some cases, the resource will be your view model.</span></span> <span data-ttu-id="5b1ee-111">[리소스 기반 권한 부여](xref:security/authorization/resourcebased#security-authorization-resource-based-imperative)중에 확인 하는 것과 정확히 동일한 방법으로 `AuthorizeAsync`를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="5b1ee-111">Invoke `AuthorizeAsync` in exactly the same way you would check during [resource-based authorization](xref:security/authorization/resourcebased#security-authorization-resource-based-imperative):</span></span>
 
 ```cshtml
 @if ((await AuthorizationService.AuthorizeAsync(User, Model, Operations.Edit)).Succeeded)
@@ -43,7 +43,7 @@ ms.locfileid: "73896974"
 }
 ```
 
-<span data-ttu-id="33a6e-112">위의 코드에서 모델은 정책 평가를 고려해 야 하는 리소스로 전달 됩니다.</span><span class="sxs-lookup"><span data-stu-id="33a6e-112">In the preceding code, the model is passed as a resource the policy evaluation should take into consideration.</span></span>
+<span data-ttu-id="5b1ee-112">위의 코드에서 모델은 정책 평가를 고려해 야 하는 리소스로 전달 됩니다.</span><span class="sxs-lookup"><span data-stu-id="5b1ee-112">In the preceding code, the model is passed as a resource the policy evaluation should take into consideration.</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="33a6e-113">앱의 UI 요소에 대 한 표시 여부를 단독 권한 부여 확인으로 전환 하는 것을 사용 하지 마세요.</span><span class="sxs-lookup"><span data-stu-id="33a6e-113">Don't rely on toggling visibility of your app's UI elements as the sole authorization check.</span></span> <span data-ttu-id="33a6e-114">UI 요소를 숨기면 연결 된 컨트롤러 작업에 대 한 액세스를 완전히 방지할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="33a6e-114">Hiding a UI element may not completely prevent access to its associated controller action.</span></span> <span data-ttu-id="33a6e-115">예를 들어 위의 코드 조각에서 단추를 살펴보겠습니다.</span><span class="sxs-lookup"><span data-stu-id="33a6e-115">For example, consider the button in the preceding code snippet.</span></span> <span data-ttu-id="33a6e-116">사용자는 상대 리소스 URL이 */Document/Edit/1*인 것으로 알고 있는 경우 `Edit` 작업 메서드를 호출할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="33a6e-116">A user can invoke the `Edit` action method if he or she knows the relative resource URL is */Document/Edit/1*.</span></span> <span data-ttu-id="33a6e-117">따라서 `Edit` 작업 메서드는 자체 권한 부여 검사를 수행 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="33a6e-117">For this reason, the `Edit` action method should perform its own authorization check.</span></span>
+> <span data-ttu-id="5b1ee-113">앱의 UI 요소에 대 한 표시 여부를 단독 권한 부여 확인으로 전환 하는 것을 사용 하지 마세요.</span><span class="sxs-lookup"><span data-stu-id="5b1ee-113">Don't rely on toggling visibility of your app's UI elements as the sole authorization check.</span></span> <span data-ttu-id="5b1ee-114">UI 요소를 숨기면 연결 된 컨트롤러 작업에 대 한 액세스를 완전히 방지할 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="5b1ee-114">Hiding a UI element may not completely prevent access to its associated controller action.</span></span> <span data-ttu-id="5b1ee-115">예를 들어 위의 코드 조각에서 단추를 살펴보겠습니다.</span><span class="sxs-lookup"><span data-stu-id="5b1ee-115">For example, consider the button in the preceding code snippet.</span></span> <span data-ttu-id="5b1ee-116">사용자는 상대 리소스 URL이 */Document/Edit/1*인 것으로 알고 있는 경우 `Edit` 작업 메서드를 호출할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="5b1ee-116">A user can invoke the `Edit` action method if he or she knows the relative resource URL is */Document/Edit/1*.</span></span> <span data-ttu-id="5b1ee-117">따라서 `Edit` 작업 메서드는 자체 권한 부여 검사를 수행 해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="5b1ee-117">For this reason, the `Edit` action method should perform its own authorization check.</span></span>
