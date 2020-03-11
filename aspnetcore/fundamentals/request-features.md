@@ -6,15 +6,15 @@ ms.author: riande
 ms.date: 10/14/2016
 uid: fundamentals/request-features
 ms.openlocfilehash: d0f3ae521d1f314dd04cb581d9a921da4719273d
-ms.sourcegitcommit: dd9c73db7853d87b566eef136d2162f648a43b85
-ms.translationtype: HT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 05/06/2019
-ms.locfileid: "65087029"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78651993"
 ---
 # <a name="request-features-in-aspnet-core"></a>ASP.NET Core의 요청 기능
 
-작성자: [Steve Smith](https://ardalis.com/)
+작성자 [Steve Smith](https://ardalis.com/)
 
 HTTP 요청 및 응답과 관련된 웹 서버 구현의 세부 사항은 인터페이스를 통해서 정의됩니다. 이러한 인터페이스는 서버 구현 및 미들웨어에서 애플리케이션의 호스팅 파이프라인을 만들고 수정하는 데 사용됩니다.
 
@@ -28,7 +28,7 @@ ASP.NET Core는 `Microsoft.AspNetCore.Http.Features`에서 서버가 지원하�
 
 `IHttpAuthenticationFeature`는 `ClaimsPrincipal`을 기반으로 사용자를 식별하고 인증 처리기를 지정하기 위한 지원을 정의합니다.
 
-`IHttpUpgradeFeature`는 서버가 프로토콜을 전환하려는 경우 사용할 추가 프로토콜을 지정하는 클라이언트를 허용하는 [HTTP 업그레이드](https://tools.ietf.org/html/rfc2616.html#section-14.42)에 대한 지원을 정의합니다. 
+`IHttpUpgradeFeature`는 서버가 프로토콜을 전환하려는 경우 사용할 추가 프로토콜을 지정하는 클라이언트를 허용하는 [HTTP 업그레이드](https://tools.ietf.org/html/rfc2616.html#section-14.42)에 대한 지원을 정의합니다.
 
 `IHttpBufferingFeature`는 요청 및/또는 응답의 버퍼링을 사용하지 않도록 메서드를 정의합니다.
 
@@ -53,11 +53,11 @@ ASP.NET Core는 `Microsoft.AspNetCore.Http.Features`에서 서버가 지원하�
 
 ## <a name="feature-collections"></a>기능 컬렉션
 
-`HttpContext`의 `Features` 속성은 현재 요청에 사용 가능한 HTTP 기능을 가져오고 설정하기 위한 인터페이스를 제공합니다. 기능 컬렉션은 요청 컨텍스트 내에서도 변경할 수 있기 때문에, 미들웨어를 사용하여 콜렉션을 수정하고 추가 기능에 대한 지원을 추가할 수 있습니다.
+`Features`의 `HttpContext` 속성은 현재 요청에 사용 가능한 HTTP 기능을 가져오고 설정하기 위한 인터페이스를 제공합니다. 기능 컬렉션은 요청 컨텍스트 내에서도 변경할 수 있기 때문에, 미들웨어를 사용하여 콜렉션을 수정하고 추가 기능에 대한 지원을 추가할 수 있습니다.
 
 ## <a name="middleware-and-request-features"></a>미들웨어 및 요청 기능
 
-서버가 기능 컬렉션을 만드는 동안 미들웨어는 이 컬렉션에 추가할 수 있고 컬렉션의 기능을 사용할 수 있습니다. 예를 들어 `StaticFileMiddleware`는 `IHttpSendFileFeature` 기능에 액세스합니다.  이는 해당 기능이 존재하는 경우 실제 경로에서 요청된 고정 파일을 보내는 데 사용됩니다. 그렇지 않으면 느린 대체 메서드를 사용하여 파일을 보냅니다. 사용 가능한 경우 `IHttpSendFileFeature`는 운영 체제가 파일을 열고 네트워크 카드로 직접 커널 모드 복사를 수행할 수 있게 해줍니다.
+서버가 기능 컬렉션을 만드는 동안 미들웨어는 이 컬렉션에 추가할 수 있고 컬렉션의 기능을 사용할 수 있습니다. 예를 들어 `StaticFileMiddleware`는 `IHttpSendFileFeature` 기능에 액세스합니다. 이는 해당 기능이 존재하는 경우 실제 경로에서 요청된 고정 파일을 보내는 데 사용됩니다. 그렇지 않으면 느린 대체 메서드를 사용하여 파일을 보냅니다. 사용 가능한 경우 `IHttpSendFileFeature`는 운영 체제가 파일을 열고 네트워크 카드로 직접 커널 모드 복사를 수행할 수 있게 해줍니다.
 
 또한 미들웨어는 서버에 의해 설정된 기능 컬렉션에 추가할 수 있습니다. 기존 기능을 미들웨어로 대체할 수 있으므로, 미들웨어가 서버의 기능을 향상할 수 있습니다. 컬렉션에 추가된 기능은 다른 미들웨어에서 즉시 사용하거나 나중에 요청 파이프라인의 기본 애플리케이션 자체에서 사용할 수 있습니다.
 
@@ -67,7 +67,7 @@ ASP.NET Core는 `Microsoft.AspNetCore.Http.Features`에서 서버가 지원하�
 
 기능 인터페이스는 특정 요청이 지원할 수 있는 특정 HTTP 기능을 정의합니다. 서버는 기능 컬렉션 및 해당 서버에서 지원하는 초기 기능 집합을 정의하지만, 미들웨어를 사용하여 이러한 기능을 향상할 수 있습니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [서버](xref:fundamentals/servers/index)
 * [미들웨어](xref:fundamentals/middleware/index)
