@@ -69,7 +69,7 @@ MVC 런타임은 양식 태그 도우미의 특성 `asp-controller` 및 `asp-act
 
 ## <a name="the-form-action-tag-helper"></a>양식 작업 태그 도우미
 
-양식 작업 태그 도우미는 생성되는 `<button ...>` 또는 `<input type="image" ...>` 태그의 `formaction` 특성을 생성합니다. `formaction` 특성은 양식이 해당 데이터를 제출하는 위치를 제어합니다. `image` 형식의 [\<input>](https://www.w3.org/wiki/HTML/Elements/input) 요소 및 [\<button>](https://www.w3.org/wiki/HTML/Elements/button) 에 바인딩됩니다. 양식 작업 태그 도우미를 사용하면 여러 가지 [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) `asp-` 특성을 사용하여 해당 요소에 대해 생성되는 `formaction` 링크를 제어할 수 있습니다.
+양식 작업 태그 도우미는 생성되는 `<button ...>` 또는 `<input type="image" ...>` 태그의 `formaction` 특성을 생성합니다. `formaction` 특성은 양식이 해당 데이터를 제출하는 위치를 제어합니다. `image` 형식의 [\<input>](https://www.w3.org/wiki/HTML/Elements/input) 요소 및 [\<button>](https://www.w3.org/wiki/HTML/Elements/button)에 바인딩됩니다. 양식 작업 태그 도우미를 사용하면 여러 가지 [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) `asp-` 특성을 사용하여 해당 요소에 대해 생성되는 `formaction` 링크를 제어할 수 있습니다.
 
 `formaction`의 값을 제어하기 위해 지원되는 [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) 특성:
 
@@ -181,7 +181,7 @@ public class HomeController : Controller
 
 * `Html.TextBoxFor` 및 `Html.EditorFor`와 HTML 도우미 기능이 겹칩니다. 자세한 내용은 **입력 태그 도우미에 대한 HTML 도우미 대안** 섹션을 참조하세요.
 
-* 강력한 형식 지정을 제공합니다. 속성의 이름이 변경되고 태그 도우미를 업데이트하지 않은 경우 다음과 비슷한 오류가 표시됩니다.
+* 강력한 형식 지정을 제공합니다. 속성 이름은 변경됐으나 태그 도우미를 업데이트하지 않은 경우 다음과 비슷한 오류가 표시됩니다.
 
 ```
 An error occurred during the compilation of a resource required to process
@@ -400,7 +400,7 @@ public IActionResult Edit(int id, int colorIndex)
 <label for="Email">Email Address</label>
 ```
 
-레이블 태그 도우미는 "Email"이라는 `for` 특성 값을 생성했습니다. 이 값은 `<input>` 요소와 연결된 ID입니다. 태그 도우미는 일관된 `id` 및 `for` 요소를 제대로 연결할 수 있도록 생성합니다. 이 예제의 캡션은 `Display` 특성으로부터 제공됩니다. 모델에 `Display` 특성이 포함되지 않는 경우 캡션은 식의 속성 이름입니다.
+레이블 태그 도우미는 "Email"이라는 `for` 특성 값을 생성했습니다. 이 값은 `<input>` 요소와 연결된 ID입니다. 태그 도우미는 올바르게 연결할 수 있도록 일관된 `id` 및 `for` 요소를 생성합니다. 이 예제의 캡션은 `Display` 특성으로부터 제공됩니다. 모델에 `Display` 특성이 포함되지 않는 경우 캡션은 식의 속성 이름입니다.
 
 ## <a name="the-validation-tag-helpers"></a>유효성 검사 태그 도우미
 
@@ -410,11 +410,11 @@ public IActionResult Edit(int id, int colorIndex)
 
 * 지정된 모델 속성의 입력 필드에서 유효성 검사 오류 메시지를 표시하는 [span](https://developer.mozilla.org/docs/Web/HTML/Element/span) 요소에 [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5) `data-valmsg-for="property"` 특성을 추가합니다. 클라이언트 쪽 유효성 검사 오류가 발생하면 [jQuery](https://jquery.com/)가 `<span>` 요소에서 오류 메시지를 표시합니다.
 
-* 유효성 검사도 서버에서 수행됩니다. 클라이언트는 JavaScript를 사용하지 않도록 설정할 수 있고 일부 유효성 검사는 서버 쪽에서만 수행될 수 있습니다.
+* 서버에서도 유효성 검사가 수행됩니다. 클라이언트가 JavaScript를 사용하지 않도록 설정할 수 있고 일부 유효성 검사는 서버 쪽에서만 수행될 수 있습니다.
 
 * HTML 도우미 대안: `Html.ValidationMessageFor`
 
-`Validation Message Tag Helper`는 HTML [범위](https://developer.mozilla.org/docs/Web/HTML/Element/span) 요소에서 `asp-validation-for` 특성과 함께 사용됩니다.
+`Validation Message Tag Helper`는 HTML [span](https://developer.mozilla.org/docs/Web/HTML/Element/span) 요소에서 `asp-validation-for` 특성을 이용하여 사용됩니다.
 
 ```cshtml
 <span asp-validation-for="Email"></span>
@@ -428,12 +428,12 @@ public IActionResult Edit(int id, int colorIndex)
   data-valmsg-replace="true"></span>
 ```
 
-일반적으로 동일한 속성에서 `Input` 태그 도우미 이후에 `Validation Message Tag Helper`를 사용합니다. 이렇게 하면 오류가 발생하는 입력 주변에서 유효성 검사 오류 메시지가 표시됩니다.
+일반적으로 동일한 속성에 대한 `Input` 태그 도우미 다음에 `Validation Message Tag Helper`를 사용합니다. 이렇게 하면 오류가 발생하는 입력 주변에 유효성 검사 오류 메시지가 표시됩니다.
 
 > [!NOTE]
-> 클라이언트 쪽 유효성 검사 대신 올바른 JavaScript 및 [jQuery](https://jquery.com/) 스크립트 참조를 사용하는 보기가 있어야 합니다. 자세한 내용은 [모델 유효성 검사](../models/validation.md)를 참조하세요.
+> 클라이언트 쪽 유효성 검사를 위해 올바른 JavaScript 및 [jQuery](https://jquery.com/) 스크립트 참조를 사용하는 보기가 있어야 합니다. 자세한 내용은 [모델 유효성 검사](../models/validation.md)를 참조하세요.
 
-서버 쪽 유효성 검사 오류가 발생하는 경우(예: 사용자 지정 서버 쪽 유효성 검사 또는 클라이언트 쪽 유효성 검사를 사용하지 않는 경우) MVC는 해당 오류 메시지를 `<span>` 요소의 본문으로 배치합니다.
+서버 쪽 유효성 검사 오류가 발생하는 경우(예: 사용자 지정 서버 쪽 유효성 검사가 존재하거나 클라이언트 쪽 유효성 검사를 사용하지 않는 경우) MVC는 해당 오류 메시지를 `<span>` 요소의 본문으로 배치합니다.
 
 ```html
 <span class="field-validation-error" data-valmsg-for="Email"
@@ -444,7 +444,7 @@ public IActionResult Edit(int id, int colorIndex)
 
 ### <a name="the-validation-summary-tag-helper"></a>유효성 검사 요약 태그 도우미
 
-* `asp-validation-summary` 특성이 있는 `<div>` 요소를 대상으로 지정합니다.
+* `asp-validation-summary` 특성을 사용하여 `<div>` 요소를 대상으로 지정합니다.
 
 * HTML 도우미 대안: `@Html.ValidationSummary`
 
@@ -458,13 +458,13 @@ public IActionResult Edit(int id, int colorIndex)
 
 ### <a name="sample"></a>예제
 
-다음 예제에서 데이터 모델에는 `DataAnnotation` 특성이 있습니다. 이 특성은 `<input>` 요소에 대한 유효성 검사 오류 메시지를 생성합니다.  유효성 검사 오류가 발생하는 경우 유효성 검사 태그 도우미는 다음 오류 메시지를 표시합니다.
+다음 예제에서 데이터 모델에는 `DataAnnotation` 특성이 있습니다. 이 특성은 `<input>` 요소에 대한 유효성 검사 오류 메시지를 생성합니다.  유효성 검사 오류가 발생하는 경우 유효성 검사 태그 도우미는 해당 오류 메시지를 표시합니다.
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/RegisterViewModel.cs)]
 
 [!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterValidation.cshtml?highlight=4,6,8&range=1-10)]
 
-생성된 HTML(모델은 유효한 경우):
+생성된 HTML은 다음과 같습니다(모델은 유효한 경우).
 
 ```html
 <form action="/DemoReg/Register" method="post">
@@ -487,11 +487,11 @@ public IActionResult Edit(int id, int colorIndex)
 
 ## <a name="the-select-tag-helper"></a>선택 태그 도우미
 
-* 모델의 속성에 대한 [선택](https://www.w3.org/wiki/HTML/Elements/select) 및 관련된 [옵션](https://www.w3.org/wiki/HTML/Elements/option) 요소를 생성합니다.
+* 모델의 속성에 대한 [select](https://www.w3.org/wiki/HTML/Elements/select) 및 관련된 [option](https://www.w3.org/wiki/HTML/Elements/option) 요소를 생성합니다.
 
-* HTML 도우미 대안 `Html.DropDownListFor` 및 `Html.ListBoxFor`가 있습니다.
+* HTML 도우미 대안으로 `Html.DropDownListFor` 및 `Html.ListBoxFor`가 있습니다.
 
-`Select Tag Helper``asp-for`는 [선택](https://www.w3.org/wiki/HTML/Elements/select) 요소에 대한 모델 속성 이름을 지정하고 `asp-items`는 [옵션](https://www.w3.org/wiki/HTML/Elements/option) 요소를 지정합니다.  예를 들어:
+`Select Tag Helper`의 `asp-for`는 [select](https://www.w3.org/wiki/HTML/Elements/select) 요소에 대한 모델 속성 이름을 지정하고 `asp-items`는 [option](https://www.w3.org/wiki/HTML/Elements/option) 요소를 지정합니다.  예를 들어:
 
 [!code-HTML[](working-with-forms/sample/final/Views/Home/Index.cshtml?range=4)]
 
@@ -603,7 +603,7 @@ HTTP POST `Index` 메서드는 선택 항목을 표시합니다.
 
 ### <a name="multiple-select"></a>다중 선택
 
-`asp-for` 특성에 지정된 속성이 `IEnumerable`인 경우 태그 선택 도우미는 [multiple = "multiple"](https://w3c.github.io/html-reference/select.html) 특성을 자동으로 생성합니다. 예를 들어, 다음과 같은 모델을 가정합니다.
+`asp-for` 특성에 지정된 속성이 `IEnumerable`인 경우 태그 선택 도우미는 [multiple = "multiple"](https://w3c.github.io/html-reference/select.html) 특성을 자동으로 생성합니다. 예를 들어, 다음과 같은 모델을 고려해보세요.
 
 [!code-csharp[](../../mvc/views/working-with-forms/sample/final/ViewModels/CountryViewModelIEnumerable.cs?highlight=6)]
 
@@ -631,7 +631,7 @@ HTTP POST `Index` 메서드는 선택 항목을 표시합니다.
 
 ### <a name="no-selection"></a>선택 영역 없음
 
-여러 페이지에서 "지정 안 됨" 옵션을 사용하는 경우 HTML의 반복을 제거하는 템플릿을 만들 수 있습니다.
+여러 페이지에서 "지정 안 됨" 옵션을 사용하는 경우 템플릿을 만들어서 HTML의 반복을 제거할 수 있습니다.
 
 [!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Home/IndexEmptyTemplate.cshtml?highlight=5)]
 
@@ -639,7 +639,7 @@ HTTP POST `Index` 메서드는 선택 항목을 표시합니다.
 
 [!code-HTML[](working-with-forms/sample/final/Views/Shared/EditorTemplates/CountryViewModel.cshtml)]
 
-HTML [\<option>](https://www.w3.org/wiki/HTML/Elements/option) 요소를 추가하는 작업은 *선택 영역 없음* 사례로 제한되지 않습니다. 예를 들어 다음과 같은 보기 및 작업 메서드는 위의 코드와 유사한 HTML을 생성합니다.
+*선택 영역 없음* 사례와 같은 방법으로만 HTML [\<option>](https://www.w3.org/wiki/HTML/Elements/option) 요소를 추가하는 작업을 수행할 수 있는 것은 아닙니다. 예를 들어 다음과 같은 보기 및 작업 메서드는 위의 코드와 유사한 HTML을 생성합니다.
 
 [!code-csharp[](working-with-forms/sample/final/Controllers/HomeController.cs?name=snippetNone)]
 
