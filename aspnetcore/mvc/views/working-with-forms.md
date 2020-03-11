@@ -69,7 +69,7 @@ MVC 런타임은 양식 태그 도우미의 특성 `asp-controller` 및 `asp-act
 
 ## <a name="the-form-action-tag-helper"></a>양식 작업 태그 도우미
 
-양식 작업 태그 도우미는 생성되는 `<button ...>` 또는 `<input type="image" ...>` 태그의 `formaction` 특성을 생성합니다. `formaction` 특성은 양식이 해당 데이터를 제출하는 위치를 제어합니다. `image` 형식의 [\<input>](https://www.w3.org/wiki/HTML/Elements/input) 요소 및 [\<button>](https://www.w3.org/wiki/HTML/Elements/button) 에 바인딩됩니다. 양식 작업 태그 도우미를 사용하면 여러 가지 [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) `asp-` 특성을 사용하여 해당 요소에 대해 생성되는 `formaction` 링크를 제어할 수 있습니다.
+양식 작업 태그 도우미는 생성되는 `<button ...>` 또는 `<input type="image" ...>` 태그의 `formaction` 특성을 생성합니다. `formaction` 특성은 양식이 해당 데이터를 제출하는 위치를 제어합니다. `image` 형식의 [\<input>](https://www.w3.org/wiki/HTML/Elements/input) 요소 및 [\<button>](https://www.w3.org/wiki/HTML/Elements/button)에 바인딩됩니다. 양식 작업 태그 도우미를 사용하면 여러 가지 [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) `asp-` 특성을 사용하여 해당 요소에 대해 생성되는 `formaction` 링크를 제어할 수 있습니다.
 
 `formaction`의 값을 제어하기 위해 지원되는 [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) 특성:
 
@@ -78,8 +78,8 @@ MVC 런타임은 양식 태그 도우미의 특성 `asp-controller` 및 `asp-act
 |[asp-controller](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-controller)|컨트롤러의 이름입니다.|
 |[asp-action](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-action)|작업 메서드의 이름입니다.|
 |[asp-area](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-area)|영역의 이름입니다.|
-|[asp-page](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page)|Razor Page의 이름입니다.|
-|[asp-page-handler](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page-handler)|Razor Page 처리기의 이름입니다.|
+|[asp-page](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page)|Razor 페이지의 이름입니다.|
+|[asp-page-handler](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page-handler)|Razor 페이지 처리기의 이름입니다.|
 |[asp-route](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route)|경로의 이름입니다.|
 |[asp-route-{value}](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route-value)|단일 URL 경로 값입니다. 예: `asp-route-id="1234"`.|
 |[asp-all-route-data](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-all-route-data)|모든 경로 값입니다.|
@@ -108,7 +108,7 @@ MVC 런타임은 양식 태그 도우미의 특성 `asp-controller` 및 `asp-act
 
 ### <a name="submit-to-page-example"></a>페이지에 제출 예제
 
-다음 태그는 `About` Razor Page에 양식을 제출합니다.
+다음 태그는 `About` Razor 페이지에 양식을 제출합니다.
 
 ```cshtml
 <form method="post">
@@ -128,7 +128,7 @@ MVC 런타임은 양식 태그 도우미의 특성 `asp-controller` 및 `asp-act
 
 ### <a name="submit-to-route-example"></a>경로에 제출 예제
 
-`/Home/Test` 엔드포인트를 고려하세요.
+`/Home/Test` 엔드포인트를 살펴보겠습니다.
 
 ```csharp
 public class HomeController : Controller
@@ -344,7 +344,7 @@ public IActionResult Edit(int id, int colorIndex)
 
 ## <a name="the-textarea-tag-helper"></a>텍스트 영역 태그 도우미
 
-`Textarea Tag Helper`는 입력 태그 도우미와 비슷합니다.
+`Textarea Tag Helper` 태그 도우미는 입력 태그 도우미와 비슷합니다.
 
 * [\<textarea>](https://www.w3.org/wiki/HTML/Elements/textarea) 요소의 모델에서 `id` 및 `name` 특성과 데이터 유효성 검사 특성을 생성합니다.
 
@@ -603,7 +603,7 @@ HTTP POST `Index` 메서드는 선택 항목을 표시합니다.
 
 ### <a name="multiple-select"></a>다중 선택
 
-`asp-for` 특성에 지정된 속성이 `IEnumerable`인 경우 태그 선택 도우미는 [multiple = "multiple"](https://w3c.github.io/html-reference/select.html) 특성을 자동으로 생성합니다. 예를 들어, 다음과 같은 모델을 고려하세요.
+`asp-for` 특성에 지정된 속성이 `IEnumerable`인 경우 태그 선택 도우미는 [multiple = "multiple"](https://w3c.github.io/html-reference/select.html) 특성을 자동으로 생성합니다. 예를 들어, 다음과 같은 모델을 고려해보세요.
 
 [!code-csharp[](../../mvc/views/working-with-forms/sample/final/ViewModels/CountryViewModelIEnumerable.cs?highlight=6)]
 
