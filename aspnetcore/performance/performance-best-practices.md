@@ -9,11 +9,11 @@ no-loc:
 - SignalR
 uid: performance/performance-best-practices
 ms.openlocfilehash: c74adf7479d176c41dc26c7e77acfc3dc9cdcb88
-ms.sourcegitcommit: 79850db9e79b1705b89f466c6f2c961ff15485de
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/07/2020
-ms.locfileid: "75693962"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654531"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core 성능 모범 사례
 
@@ -23,7 +23,7 @@ ms.locfileid: "75693962"
 
 ## <a name="cache-aggressively"></a>적극적으로 캐시
 
-캐싱은이 문서의 여러 부분에서 설명 합니다. 자세한 내용은 <xref:performance/caching/response>를 참조하세요.
+캐싱은이 문서의 여러 부분에서 설명 합니다. 자세한 내용은 <xref:performance/caching/response>을 참조하세요.
 
 ## <a name="understand-hot-code-paths"></a>핫 코드 경로 이해
 
@@ -41,7 +41,7 @@ ASP.NET Core 앱의 일반적인 성능 문제는 비동기 일 수 있는 호�
 * 공용 코드 경로에서 잠금을 가져옵니다. ASP.NET Core 앱은 코드를 병렬로 실행 하도록 설계 될 때 가장 효율적입니다.
 * 작업을 호출 [합니다 .를 실행](/dotnet/api/system.threading.tasks.task.run) 하 고 즉시 기다립니다. ASP.NET Core는 정상적인 스레드 풀 스레드에서 이미 앱 코드를 실행 하 고 있으므로 작업을 호출 하면 추가 불필요 한 스레드 풀 예약이 발생 합니다. 예약 된 코드에서 스레드를 차단 하는 경우에도 작업. 실행은이를 방지 하지 않습니다.
 
-**Do**:
+**해야 할 일**:
 
 * [핫 코드 경로](#understand-hot-code-paths) 를 비동기식으로 만듭니다.
 * 비동기 API를 사용할 수 있는 경우 데이터 액세스, i/o 및 장기 실행 작업 Api를 비동기적으로 호출 합니다. [작업을 실행](/dotnet/api/system.threading.tasks.task.run) **하 여 synchronus** API를 비동기로 만듭니다.
@@ -75,7 +75,7 @@ ASP.NET Core 앱의 일반적인 성능 문제는 비동기 일 수 있는 호�
 
 * 모든 데이터 액세스 Api를 비동기적 **으로 호출 합니다** .
 * 필요한 것 보다 더 많은 데이터를 검색 **하지** 않습니다. 현재 HTTP 요청에 필요한 데이터만 반환 하는 쿼리를 작성 합니다.
-* 약간 오래 된 데이터를 사용할 수 있는 경우 데이터베이스 또는 원격 서비스에서 검색 되는 자주 액세스 하는 데이터를 캐시 하 **는 것이 좋습니다.** 시나리오에 따라 [Memorycache](xref:performance/caching/memory) 또는 [microsoft.web.distributedcache](xref:performance/caching/distributed)를 사용 합니다. 자세한 내용은 <xref:performance/caching/response>를 참조하세요.
+* 약간 오래 된 데이터를 사용할 수 있는 경우 데이터베이스 또는 원격 서비스에서 검색 되는 자주 액세스 하는 데이터를 캐시 하 **는 것이 좋습니다.** 시나리오에 따라 [Memorycache](xref:performance/caching/memory) 또는 [microsoft.web.distributedcache](xref:performance/caching/distributed)를 사용 합니다. 자세한 내용은 <xref:performance/caching/response>을 참조하세요.
 * 네트워크 왕복 **을 최소화 합니다** . 목표는 여러 호출이 아닌 단일 호출에서 필요한 데이터를 검색 하는 것입니다.
 * 읽기 전용 용도로 데이터에 액세스할 때 Entity Framework Core에서 [추적 안 함 쿼리](/ef/core/querying/tracking#no-tracking-queries) **를 사용 합니다** . EF Core 추적 되지 않는 쿼리 결과를 보다 효율적으로 반환할 수 있습니다.
 * LINQ 쿼리 **를 필터링 하** 고 집계 (예: `.Where`, `.Select`또는 `.Sum` 문 포함) 하 여 데이터베이스에서 필터링을 수행 하도록 합니다.

@@ -31,7 +31,7 @@
 > 사용자의 파일을 수락할 때 공격 노출 영역을 줄이는 방법에 대한 자세한 내용은 다음 리소스를 참조하세요.
 >
 > * [무제한 파일 업로드](https://www.owasp.org/index.php/Unrestricted_File_Upload)
-> * [Azure Security: 사용자의 파일을 허용할 때 적절한 제어가 수행되는지 확인](/azure/security/azure-security-threat-modeling-tool-input-validation#controls-users)
+> * [Azure 보안: 사용자의 파일을 수락할 때 적절한 제어 장치가 있는지 확인](/azure/security/azure-security-threat-modeling-tool-input-validation#controls-users)
 
 자세한 내용은 [ASP.NET Core에서 파일 업로드](https://docs.microsoft.com/aspnet/core/mvc/models/file-uploads)를 참조하세요.
 

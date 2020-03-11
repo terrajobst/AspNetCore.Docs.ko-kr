@@ -5,24 +5,24 @@ description: ASP.NET Core 앱에서 뷰를 렌더링하기 전에 일반적인 �
 ms.author: riande
 ms.date: 07/30/2019
 uid: mvc/views/layout
-ms.openlocfilehash: 3ba2f459ca2b04a3001e261acab26880b6582500
-ms.sourcegitcommit: f40c9311058c9b1add4ec043ddc5629384af6c56
-ms.translationtype: HT
+ms.openlocfilehash: db8c6c30397593c1a8375ebc800c1c0e34d241cb
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/21/2019
-ms.locfileid: "74288991"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78655047"
 ---
 # <a name="layout-in-aspnet-core"></a>ASP.NET Core의 레이아웃
 
 작성자: [Steve Smith](https://ardalis.com/) 및 [Dave Brock](https://twitter.com/daveabrock)
 
-페이지 및 보기는 시각적 개체 및 프로그래밍 요소를 자주 공유합니다. 이 문서에서는 다음을 수행하는 방법을 보여줍니다.
+페이지 및 보기는 시각적 개체 및 프로그래밍 요소를 자주 공유합니다. 이 문서에서는 다음과 같은 방법을 시현합니다.
 
 * 일반적인 레이아웃 사용.
 * 지시문 공유.
 * 페이지 또는 보기를 렌더링하기 전에 일반적인 코드 실행.
 
-이 문서에서는 ASP.NET Core MVC: Razor Pages 및 보기를 사용하는 컨트롤러에 대한 두 가지 방식의 레이아웃을 설명합니다. 이 항목에서는 차이점이 최소화되어 있습니다.
+이 문서에서는 ASP.NET Core MVC: Razor Pages 및 보기가 있는 컨트롤러에 대한 두 가지 방식의 레이아웃을 설명합니다. 이 항목에서는 차이점이 최소화되어 있습니다.
 
 * Razor Pages는 *Pages* 폴더에 있습니다.
 * 보기를 사용하는 컨트롤러는 *Views* 폴더의 보기를 사용합니다.
@@ -65,7 +65,7 @@ Razor 뷰는 `Layout` 속성을 포함합니다. 이 속성을 설정하여 레�
 <!-- https://stackoverflow.com/questions/23327578 -->
 ### <a name="sections"></a>섹션
 
-레이아웃은 `RenderSection`을 호출하여 필요에 따라 하나 이상의 *섹션*을 참조합니다. 섹션에서는 특정 페이지 요소를 배치할 위치를 구성하는 방법을 제공합니다. `RenderSection` 호출 때마다 섹션이 필수 또는 옵션인지 여부를 지정할 수 있습니다.
+레이아웃은 *을 호출하여 필요에 따라 하나 이상의* 섹션`RenderSection`을 참조합니다. 섹션에서는 특정 페이지 요소를 배치할 위치를 구성하는 방법을 제공합니다. `RenderSection` 호출 때마다 섹션이 필수 또는 옵션인지 여부를 지정할 수 있습니다.
 
 ```html
 <script type="text/javascript" src="~/scripts/global.js"></script>
@@ -109,7 +109,7 @@ Razor 페이지의 본문 및 모든 섹션은 렌더링되거나 무시되어�
 
 ## <a name="importing-shared-directives"></a>공유 지시문 가져오기
 
-보기 및 페이지는 Razor 지시문을 사용하여 네임스페이스를 가져오고 [종속성 주입](dependency-injection.md)을 사용합니다. 여러 보기에서 공유하는 지시문을 공용 *_ViewImports.cshtml* 파일에 지정할 수 있습니다. `_ViewImports` 파일은 다음 지시문을 지원합니다.
+뷰 및 페이지는 Razor 지시문을 사용 하 여 네임 스페이스를 가져오고 [종속성 주입](dependency-injection.md)을 사용할 수 있습니다. 여러 보기에서 공유하는 지시문을 공용 *_ViewImports.cshtml* 파일에 지정할 수 있습니다. `_ViewImports` 파일은 다음 지시문을 지원합니다.
 
 * `@addTagHelper`
 * `@removeTagHelper`
@@ -155,4 +155,4 @@ ASP.NET Core MVC 앱에 대한 *_ViewImports.cshtml* 파일은 일반적으로 *
 
 위의 파일은 모든 뷰가 *_Layout.cshtml* 레이아웃을 사용하도록 지정합니다.
 
-*_ViewStart.cshtml* 및 *_ViewImports.cshtml*은 일반적으로 */Pages/Shared*(또는 */Views/Shared*) 폴더에 배치되지 **않습니다**. 이러한 파일의 앱 수준 버전은 */Pages*(또는 */Views*) 폴더에 직접 배치해야 합니다.
+*_ViewStart.cshtml* 및 *_ViewImports.cshtml*은 일반적으로 **/Pages/Shared**(또는 */Views/Shared*) 폴더에 배치되지 *않습니다*. 이러한 파일의 앱 수준 버전은 */Pages*(또는 */Views*) 폴더에 직접 배치해야 합니다.

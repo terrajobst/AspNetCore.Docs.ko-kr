@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2019
 uid: security/enforcing-ssl
-ms.openlocfilehash: 43f3abfa4bc311ed246f6f2585d522661e492039
-ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
+ms.openlocfilehash: 2a7b4152004cb65ee12487eb4793d42d0b7165d0
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/19/2020
-ms.locfileid: "77447154"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653241"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>ASP.NET Core에서 HTTPS 적용
 
@@ -350,7 +350,7 @@ dotnet dev-certs https --help
 
 ## <a name="how-to-set-up-a-developer-certificate-for-docker"></a>Docker 용 개발자 인증서를 설정 하는 방법
 
-이 [GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/6199)를 참조하세요.
+이 [GitHub 문제](https://github.com/dotnet/AspNetCore.Docs/issues/6199)를 참조하세요.
 
 <a name="wsl"></a>
 

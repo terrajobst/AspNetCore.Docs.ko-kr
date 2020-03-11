@@ -5,12 +5,12 @@ description: ASP.NET Core 앱에서 Id를 사용 합니다. 암호 요구 사항
 ms.author: riande
 ms.date: 01/15/2020
 uid: security/authentication/identity
-ms.openlocfilehash: 164ba10c1d1e2a73ebeb8240293a58f158055699
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
+ms.openlocfilehash: 2e0723d34a09109a034f3375c4e94aedab2a5427
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77172537"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653157"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>ASP.NET Core Identity 소개
 
@@ -38,7 +38,7 @@ Id는 일반적으로 사용자 이름, 암호 및 프로필 데이터를 저장
 
 [!INCLUDE[](~/includes/IdentityServer4.md)]
 
-[샘플 코드 보기 또는 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample) ([다운로드 방법)](xref:index#how-to-download-a-sample)
+[샘플 코드 보기 또는 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample) ([다운로드 방법)](xref:index#how-to-download-a-sample)
 
 <a name="adi"></a>
 
@@ -46,14 +46,14 @@ Id는 일반적으로 사용자 이름, 암호 및 프로필 데이터를 저장
 
 개별 사용자 계정으로 새로운 ASP.NET Core 웹 응용 프로그램 생성하기.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * **파일** > **새** > **프로젝트**를 선택 합니다.
-* **새 ASP.NET Core 웹 애플리케이션**을 선택합니다. 프로젝트의 이름을 **WebApp1** 프로젝트 다운로드와 동일한 네임 스페이스를 포함 합니다. **확인**을 클릭합니다.
+* **ASP.NET Core 웹 애플리케이션**을 선택합니다. 프로젝트의 이름을 **WebApp1** 프로젝트 다운로드와 동일한 네임 스페이스를 포함 합니다. **확인**을 클릭합니다.
 * ASP.NET Core **웹 응용 프로그램**을 선택한 다음 **인증 변경**을 선택 합니다.
 * **개별 사용자 계정을** 선택 하 고 **확인**을 클릭 합니다.
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 ```dotnetcli
 dotnet new webapp --auth Individual -o WebApp1
@@ -67,7 +67,7 @@ dotnet new webapp --auth Individual -uld -o WebApp1
 
 ---
 
-생성 된 프로젝트는 [Razor 클래스 라이브러리로](xref:razor-pages/ui-class) [ASP.NET Core id](xref:security/authentication/identity) 를 제공 합니다. Id Razor 클래스 라이브러리는 `Identity` 영역이 있는 끝점을 노출 합니다. 예들 들어 다음과 같습니다.
+생성 된 프로젝트는 [Razor 클래스 라이브러리로](xref:razor-pages/ui-class) [ASP.NET Core id](xref:security/authentication/identity) 를 제공 합니다. Id Razor 클래스 라이브러리는 `Identity` 영역이 있는 끝점을 노출 합니다. 다음은 그 예입니다.
 
 * /Identity/Account/Login
 * /Identity/Account/Logout
@@ -77,13 +77,13 @@ dotnet new webapp --auth Individual -uld -o WebApp1
 
 마이그레이션을 적용 하 여 데이터베이스를 초기화 합니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 패키지 관리자 콘솔 (PMC)에서 다음 명령을 실행 합니다.
 
 `PM> Update-Database`
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 SQLite를 사용 하는 경우이 단계에서는 마이그레이션이 필요 하지 않습니다. LocalDB의 경우 다음 명령을 실행 합니다.
 
@@ -119,11 +119,11 @@ dotnet ef database update
 
 ## <a name="scaffold-register-login-and-logout"></a>스 캐 폴드 Register, Login 및 LogOut
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Register, Login 및 LogOut 파일을 추가 합니다. 이 섹션에 표시 된 코드를 생성 하려면 [권한 부여 지침을 사용 하 여 스 캐 폴드 id를 Razor 프로젝트로](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-razor-project-with-authorization) 이동 합니다.
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 **WebApp1**이름으로 프로젝트를 만든 경우 다음 명령을 실행 합니다. 그렇지 않으면 `ApplicationDbContext`에 대해 올바른 네임 스페이스를 사용 합니다.
 
@@ -232,7 +232,7 @@ Id에 대 한 기본 패키지는 [AspNetCore](https://www.nuget.org/packages/Mi
 
 ## <a name="next-steps"></a>다음 단계
 
-* SQLite를 사용 하 여 Id를 구성 하는 방법에 대해서는 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/5131) 를 참조 하세요.
+* SQLite를 사용 하 여 Id를 구성 하는 방법에 대해서는 [이 GitHub 문제](https://github.com/dotnet/AspNetCore.Docs/issues/5131) 를 참조 하세요.
 * [ID 구성](xref:security/authentication/identity-configuration)
 * <xref:security/authorization/secure-data>
 * <xref:security/authentication/add-user-data>
@@ -252,7 +252,7 @@ ASP.NET Core Id는 ASP.NET Core 앱에 로그인 기능을 추가 하는 멤버 
 
 SQL Server 데이터베이스를 사용 하 여 id를 구성 하 여 사용자 이름, 암호 및 프로필 데이터를 저장할 수 있습니다. 또는 Azure Table Storage와 같은 또 다른 영구 저장소를 사용할 수 있습니다.
 
-[샘플 코드 보기 또는 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample/src/ASPNETCore-IdentityDemoComplete/) ([다운로드 방법)](xref:index#how-to-download-a-sample)
+[샘플 코드 보기 또는 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample/src/ASPNETCore-IdentityDemoComplete/) ([다운로드 방법)](xref:index#how-to-download-a-sample)
 
 이 항목에서는 Id를 사용 하 여 사용자를 등록 하 고 로그인 하 고 로그 아웃 하는 방법에 대해 알아봅니다. Id를 사용 하는 앱을 만드는 방법에 대 한 자세한 내용은이 문서의 끝에 있는 다음 단계 섹션을 참조 하세요.
 
@@ -272,14 +272,14 @@ SQL Server 데이터베이스를 사용 하 여 id를 구성 하 여 사용자 �
 
 개별 사용자 계정으로 새로운 ASP.NET Core 웹 응용 프로그램 생성하기.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * **파일** > **새** > **프로젝트**를 선택 합니다.
-* **새 ASP.NET Core 웹 애플리케이션**을 선택합니다. 프로젝트의 이름을 **WebApp1** 프로젝트 다운로드와 동일한 네임 스페이스를 포함 합니다. **확인**을 클릭합니다.
+* **ASP.NET Core 웹 애플리케이션**을 선택합니다. 프로젝트의 이름을 **WebApp1** 프로젝트 다운로드와 동일한 네임 스페이스를 포함 합니다. **확인**을 클릭합니다.
 * ASP.NET Core **웹 응용 프로그램**을 선택한 다음 **인증 변경**을 선택 합니다.
 * **개별 사용자 계정을** 선택 하 고 **확인**을 클릭 합니다.
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 ```dotnetcli
 dotnet new webapp --auth Individual -o WebApp1
@@ -287,7 +287,7 @@ dotnet new webapp --auth Individual -o WebApp1
 
 ---
 
-생성 된 프로젝트는 [Razor 클래스 라이브러리로](xref:razor-pages/ui-class) [ASP.NET Core id](xref:security/authentication/identity) 를 제공 합니다. Id Razor 클래스 라이브러리는 `Identity` 영역이 있는 끝점을 노출 합니다. 예들 들어 다음과 같습니다.
+생성 된 프로젝트는 [Razor 클래스 라이브러리로](xref:razor-pages/ui-class) [ASP.NET Core id](xref:security/authentication/identity) 를 제공 합니다. Id Razor 클래스 라이브러리는 `Identity` 영역이 있는 끝점을 노출 합니다. 다음은 그 예입니다.
 
 * /Identity/Account/Login
 * /Identity/Account/Logout
@@ -297,7 +297,7 @@ dotnet new webapp --auth Individual -o WebApp1
 
 마이그레이션을 적용 하 여 데이터베이스를 초기화 합니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 패키지 관리자 콘솔 (PMC)에서 다음 명령을 실행 합니다.
 
@@ -305,7 +305,7 @@ dotnet new webapp --auth Individual -o WebApp1
 Update-Database
 ```
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 ```dotnetcli
 dotnet ef database update
@@ -339,11 +339,11 @@ dotnet ef database update
 
 이 섹션에 표시 된 코드를 생성 하려면 [권한 부여 지침을 사용 하 여 스 캐 폴드 id를 Razor 프로젝트로](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-razor-project-with-authorization) 이동 합니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Register, Login 및 LogOut 파일을 추가 합니다.
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 **WebApp1**이름으로 프로젝트를 만든 경우 다음 명령을 실행 합니다. 그렇지 않으면 `ApplicationDbContext`에 대해 올바른 네임 스페이스를 사용 합니다.
 
@@ -422,7 +422,7 @@ Id에 대 한 기본 패키지는 [AspNetCore](https://www.nuget.org/packages/Mi
 
 ## <a name="next-steps"></a>다음 단계
 
-* SQLite를 사용 하 여 Id를 구성 하는 방법에 대해서는 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/5131) 를 참조 하세요.
+* SQLite를 사용 하 여 Id를 구성 하는 방법에 대해서는 [이 GitHub 문제](https://github.com/dotnet/AspNetCore.Docs/issues/5131) 를 참조 하세요.
 * [ID 구성](xref:security/authentication/identity-configuration)
 * <xref:security/authorization/secure-data>
 * <xref:security/authentication/add-user-data>

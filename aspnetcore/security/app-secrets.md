@@ -6,18 +6,18 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: security/app-secrets
-ms.openlocfilehash: 9b36ae64fbe277cd81ed22ba7b21b0a035082dbd
-ms.sourcegitcommit: c815a9465e7b1bab44ce1643ec345b33e6cf1598
+ms.openlocfilehash: c3f165164f3c95e8c0aab773f3731429ae224bd9
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/02/2020
-ms.locfileid: "75606794"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654693"
 ---
 # <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>ASP.NET Core 개발 시 앱 비밀의 안전한 저장
 
-작성자: [Rick Anderson](https://twitter.com/RickAndMSFT), [김 Roth](https://github.com/danroth27), 및 [Scott Addie](https://github.com/scottaddie)
+[Rick Anderson](https://twitter.com/RickAndMSFT), [Daniel Roth](https://github.com/danroth27)및 [Scott addie](https://github.com/scottaddie)
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/app-secrets/samples)([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/app-secrets/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 이 문서에서는 개발 컴퓨터에서 ASP.NET Core 앱을 개발 하는 동안 중요 한 데이터를 저장 하 고 검색 하는 기술을 설명 합니다. 소스 코드에 패스워드나 다른 민감한 데이터를 저장하지 마세요. 프로덕션용 비밀들은 개발 또는 테스트에서 사용하면 안됩니다. 암호는 앱과 함께 배포 해서는 안 됩니다. 대신 환경 변수, Azure Key Vault 등의 제어 된 방법을 통해 프로덕션 환경에서 암호를 사용할 수 있습니다. [Azure Key Vault 구성 공급자](xref:security/key-vault-configuration)를 사용 하 여 Azure 테스트 및 프로덕션 암호를 저장 하 고 보호할 수 있습니다.
 
@@ -33,7 +33,7 @@ ms.locfileid: "75606794"
 
 ::: moniker-end
 
-**개별 사용자 계정** 보안이 활성화된 ASP.NET Core 웹 앱을 고려해보세요. 기본 데이터베이스 연결 문자열이 프로젝트의 *appsettings.json* 파일의 `DefaultConnection` 키에 포함되어 있습니다. 기본 연결 문자열은 사용자 모드에서 실행되고 암호가 필요없는 LocalDB용입니다. 앱을 배포하는 동안 `DefaultConnection` 키 값은 환경 변수의 값으로 재정의할 수 있습니다. 환경 변수는 민감한 자격 증명을 사용하여 전체 연결 문자열을 저장할 수 있습니다.
+**개별 사용자 계정** 보안이 사용 되는 ASP.NET Core 웹 앱을 고려 합니다. 기본 데이터베이스 연결 문자열은 키 `DefaultConnection`를 사용 하 여 프로젝트의 *appsettings* 파일에 포함 됩니다. 기본 연결 문자열은 사용자 모드에서 실행되고 암호가 필요없는 LocalDB용입니다. 앱을 배포 하는 동안 `DefaultConnection` 키 값을 환경 변수의 값으로 재정의할 수 있습니다. 환경 변수는 민감한 자격 증명을 사용하여 전체 연결 문자열을 저장할 수 있습니다.
 
 > [!WARNING]
 > 환경 변수는 일반적으로 암호화되지 않은 일반 텍스트로 저장됩니다. 컴퓨터 또는 프로세스가 손상된 경우 환경 변수는 신뢰할 수 없는 당사자가 액세스할 수 있습니다. 사용자의 비밀 정보가 유출되지 않도록 추가 조치가 필요할 수 있습니다.
@@ -51,13 +51,13 @@ ms.locfileid: "75606794"
 
 비밀 관리자 도구는 값이 저장 되는 위치 및 방법과 같은 구현 세부 정보를 추출 합니다. 이러한 구현 세부 정보를 몰라도 도구를 사용할 수 있습니다. 값은 로컬 컴퓨터의 시스템 보호 사용자 프로필 폴더에 있는 JSON 구성 파일에 저장 됩니다.
 
-# <a name="windowstabwindows"></a>[Windows](#tab/windows)
+# <a name="windows"></a>[Windows](#tab/windows)
 
 파일 시스템 경로:
 
 `%APPDATA%\Microsoft\UserSecrets\<user_secrets_id>\secrets.json`
 
-# <a name="linux--macostablinuxmacos"></a>[Linux/macOS](#tab/linux+macos)
+# <a name="linux--macos"></a>[Linux/macOS](#tab/linux+macos)
 
 파일 시스템 경로:
 
@@ -84,7 +84,7 @@ ms.locfileid: "75606794"
 The tool 'Microsoft.Extensions.SecretManager.Tools' is now included in the .NET Core SDK. Information on resolving this warning is available at (https://aka.ms/dotnetclitools-in-box).
 ```
 
-ASP.NET Core 프로젝트에 [Microsoft.extensions.secretmanager.tools](https://www.nuget.org/packages/Microsoft.Extensions.SecretManager.Tools/) NuGet 패키지를 설치 합니다. 예를 들면 다음과 같습니다.:
+ASP.NET Core 프로젝트에 [Microsoft.extensions.secretmanager.tools](https://www.nuget.org/packages/Microsoft.Extensions.SecretManager.Tools/) NuGet 패키지를 설치 합니다. 다음은 그 예입니다.
 
 [!code-xml[](app-secrets/samples/1.x/UserSecrets/UserSecrets.csproj?name=snippet_CsprojFile&highlight=15-16)]
 
@@ -168,7 +168,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345"
 
 앞의 예제에서 콜론은 `Movies`이 `ServiceApiKey` 속성을 가진 개체 리터럴이어야 함을 나타냅니다.
 
-암호 관리자 도구는 다른 디렉터리 에서도 사용할 수 있습니다. `--project` 옵션을 사용 하 여 *.csproj* 파일이 있는 파일 시스템 경로를 제공 합니다. 예를 들면 다음과 같습니다.:
+암호 관리자 도구는 다른 디렉터리 에서도 사용할 수 있습니다. `--project` 옵션을 사용 하 여 *.csproj* 파일이 있는 파일 시스템 경로를 제공 합니다. 다음은 그 예입니다.
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp1\src\WebApp1"
@@ -176,7 +176,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ### <a name="json-structure-flattening-in-visual-studio"></a>Visual Studio의 JSON 구조 평면화
 
-Visual Studio의 **사용자 비밀 관리** 제스처는 텍스트 편집기에서 *비밀. json* 파일을 엽니다. *비밀. json* 의 내용을 저장할 키-값 쌍으로 바꿉니다. 예를 들면 다음과 같습니다.:
+Visual Studio의 **사용자 비밀 관리** 제스처는 텍스트 편집기에서 *비밀. json* 파일을 엽니다. *비밀. json* 의 내용을 저장할 키-값 쌍으로 바꿉니다. 다음은 그 예입니다.
 
 ```json
 {
@@ -199,7 +199,7 @@ JSON 구조는 `dotnet user-secrets remove` 또는 `dotnet user-secrets set`를 
 
 암호 일괄 처리는 `set` 명령으로 JSON을 파이프 하 여 설정할 수 있습니다. 다음 예제에서는 *입력. json* 파일의 내용이 `set` 명령으로 파이프 됩니다.
 
-# <a name="windowstabwindows"></a>[Windows](#tab/windows)
+# <a name="windows"></a>[Windows](#tab/windows)
 
 명령 셸을 열고 다음 명령을 실행 합니다.
 
@@ -207,7 +207,7 @@ JSON 구조는 `dotnet user-secrets remove` 또는 `dotnet user-secrets set`를 
   type .\input.json | dotnet user-secrets set
   ```
 
-# <a name="linux--macostablinuxmacos"></a>[Linux/macOS](#tab/linux+macos)
+# <a name="linux--macos"></a>[Linux/macOS](#tab/linux+macos)
 
 명령 셸을 열고 다음 명령을 실행 합니다.
 
@@ -317,13 +317,13 @@ ASP.NET Core 2.0 이상에서는 프로젝트가 <xref:Microsoft.AspNetCore.WebH
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
-보다 안전한 방법은 암호를 비밀로 저장 하는 것입니다. 예를 들면 다음과 같습니다.:
+보다 안전한 방법은 암호를 비밀로 저장 하는 것입니다. 다음은 그 예입니다.
 
 ```dotnetcli
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-*Appsettings*의 연결 문자열에서 `Password` 키-값 쌍을 제거 합니다. 예를 들면 다음과 같습니다.:
+*Appsettings*의 연결 문자열에서 `Password` 키-값 쌍을 제거 합니다. 다음은 그 예입니다.
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings.json?highlight=3)]
 
@@ -408,8 +408,8 @@ dotnet user-secrets clear
 No secrets configured for this application.
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
-* IIS에서 암호 관리자에 액세스 하는 방법에 대 한 자세한 내용은 [이 문제](https://github.com/aspnet/AspNetCore.Docs/issues/16328) 를 참조 하세요.
+* IIS에서 암호 관리자에 액세스 하는 방법에 대 한 자세한 내용은 [이 문제](https://github.com/dotnet/AspNetCore.Docs/issues/16328) 를 참조 하세요.
 * <xref:fundamentals/configuration/index>
 * <xref:security/key-vault-configuration>

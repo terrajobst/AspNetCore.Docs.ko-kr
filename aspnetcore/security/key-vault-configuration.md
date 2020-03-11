@@ -1,22 +1,22 @@
 ---
 title: ASP.NET Core의 Azure Key Vault 구성 공급자
-author: guardrex
+author: rick-anderson
 description: Azure Key Vault 구성 공급자를 사용 하 여 런타임에 로드 된 이름-값 쌍을 사용 하 여 앱을 구성 하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 uid: security/key-vault-configuration
-ms.openlocfilehash: 7eb8cf5dcd6b9f112a2ef30e694b6223a7d1f2fe
-ms.sourcegitcommit: 235623b6e5a5d1841139c82a11ac2b4b3f31a7a9
+ms.openlocfilehash: d617627154e3125a6a59d082fd401fc69c25fcb3
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/10/2020
-ms.locfileid: "77114876"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652179"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>ASP.NET Core의 Azure Key Vault 구성 공급자
 
-By [Luke Latham](https://github.com/guardrex) 및 [Andrew Stanton-간호사](https://github.com/anurse)
+[Andrew Stanton-간호사](https://github.com/anurse)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -25,7 +25,7 @@ By [Luke Latham](https://github.com/guardrex) 및 [Andrew Stanton-간호사](htt
 * 중요 한 구성 데이터에 대 한 액세스 제어
 * 구성 데이터를 저장할 때 FIPS 140-2 수준 2 유효성 검사 된 하드웨어 보안 모듈 (HSM)에 대 한 요구 사항을 충족 합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/key-vault-configuration/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/key-vault-configuration/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="packages"></a>패키지
 
@@ -213,7 +213,7 @@ config.AddAzureKeyVault(
     });
 ```
 
-| 속성         | 설명 |
+| 속성         | Description |
 | ---------------- | ----------- |
 | `Client`         | 값을 검색 하는 데 사용할 <xref:Microsoft.Azure.KeyVault.KeyVaultClient>입니다. |
 | `Manager`        | 비밀 로드를 제어 하는 데 사용 되는 <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager> 인스턴스입니다. |
@@ -289,7 +289,7 @@ config.AddAzureKeyVault(
 
 공급자는 POCO 배열에 바인딩하기 위해 구성 값을 배열로 읽을 수 있습니다.
 
-키에 콜론 (`:`) 구분 기호가 포함 될 수 있도록 하는 구성 소스에서 읽을 때 숫자 키 세그먼트를 사용 하 여 배열을 구성 하는 키를 구분 합니다 (`:0:`, `:1:`, ... `:{n}:`). 자세한 내용은 [구성: 클래스에 배열 바인딩](xref:fundamentals/configuration/index#bind-an-array-to-a-class)을 참조 하세요.
+키에 콜론 (`:`) 구분 기호가 포함 될 수 있도록 하는 구성 소스에서 읽을 때 숫자 키 세그먼트는 배열 (`:0:`, `:1:`, &hellip; `:{n}:`)을 구성 하는 키를 구분 하는 데 사용 됩니다. 자세한 내용은 [구성: 클래스에 배열 바인딩](xref:fundamentals/configuration/index#bind-an-array-to-a-class)을 참조 하세요.
 
 Azure Key Vault 키는 콜론을 구분 기호로 사용할 수 없습니다. 이 항목에서 설명 하는 접근 방식에서는 이중 대시 (`--`)를 계층적 값 (섹션) 구분 기호로 사용 합니다. 배열 키는 이중 대시 및 숫자 키 세그먼트 (`--0--`, `--1--`, &hellip; `--{n}--`)를 사용 하 여 Azure Key Vault에 저장 됩니다.
 
@@ -318,7 +318,7 @@ JSON 파일에서 제공 하는 다음과 같은 [Serilog](https://serilog.net/)
 
 위의 JSON 파일에 표시 된 구성은 이중 대시 (`--`) 표기법 및 숫자 세그먼트를 사용 하 Azure Key Vault에 저장 됩니다.
 
-| Key | 값 |
+| 키 | 값 |
 | --- | ----- |
 | `Serilog--WriteTo--0--Name` | `AzureTableStorage` |
 | `Serilog--WriteTo--0--Args--storageTableName` | `logs` |
@@ -371,7 +371,7 @@ Configuration.Reload();
 * 중요 한 구성 데이터에 대 한 액세스 제어
 * 구성 데이터를 저장할 때 FIPS 140-2 수준 2 유효성 검사 된 하드웨어 보안 모듈 (HSM)에 대 한 요구 사항을 충족 합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/key-vault-configuration/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/key-vault-configuration/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="packages"></a>패키지
 
@@ -616,7 +616,7 @@ Azure CLI, PowerShell 또는 Azure Portal를 사용 하 여 **앱을 다시 시�
 
 공급자는 POCO 배열에 바인딩하기 위해 구성 값을 배열로 읽을 수 있습니다.
 
-키에 콜론 (`:`) 구분 기호가 포함 될 수 있도록 하는 구성 소스에서 읽을 때 숫자 키 세그먼트를 사용 하 여 배열을 구성 하는 키를 구분 합니다 (`:0:`, `:1:`, ... `:{n}:`). 자세한 내용은 [구성: 클래스에 배열 바인딩](xref:fundamentals/configuration/index#bind-an-array-to-a-class)을 참조 하세요.
+키에 콜론 (`:`) 구분 기호가 포함 될 수 있도록 하는 구성 소스에서 읽을 때 숫자 키 세그먼트는 배열 (`:0:`, `:1:`, &hellip; `:{n}:`)을 구성 하는 키를 구분 하는 데 사용 됩니다. 자세한 내용은 [구성: 클래스에 배열 바인딩](xref:fundamentals/configuration/index#bind-an-array-to-a-class)을 참조 하세요.
 
 Azure Key Vault 키는 콜론을 구분 기호로 사용할 수 없습니다. 이 항목에서 설명 하는 접근 방식에서는 이중 대시 (`--`)를 계층적 값 (섹션) 구분 기호로 사용 합니다. 배열 키는 이중 대시 및 숫자 키 세그먼트 (`--0--`, `--1--`, &hellip; `--{n}--`)를 사용 하 여 Azure Key Vault에 저장 됩니다.
 
@@ -645,7 +645,7 @@ JSON 파일에서 제공 하는 다음과 같은 [Serilog](https://serilog.net/)
 
 위의 JSON 파일에 표시 된 구성은 이중 대시 (`--`) 표기법 및 숫자 세그먼트를 사용 하 Azure Key Vault에 저장 됩니다.
 
-| Key | 값 |
+| 키 | 값 |
 | --- | ----- |
 | `Serilog--WriteTo--0--Name` | `AzureTableStorage` |
 | `Serilog--WriteTo--0--Args--storageTableName` | `logs` |

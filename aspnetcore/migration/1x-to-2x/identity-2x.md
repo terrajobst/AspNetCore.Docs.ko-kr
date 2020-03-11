@@ -5,12 +5,12 @@ description: 이 문서에서는 ASP.NET Core 1.x 인증 및 Id를 ASP.NET Core 
 ms.author: scaddie
 ms.date: 06/21/2019
 uid: migration/1x-to-2x/identity-2x
-ms.openlocfilehash: f3817fa1808c331f7e167618e3bb00d68ad08571
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: af905f1127d504839f66d9e0e1ca1dfc27e32772
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75355174"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654945"
 ---
 # <a name="migrate-authentication-and-identity-to-aspnet-core-20"></a>ASP.NET Core 2.0으로 인증 및 Id 마이그레이션
 
@@ -219,7 +219,7 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 
 ### <a name="microsoft-account-authentication"></a>Microsoft 계정 인증
 
-Microsoft 계정 인증에 대 한 자세한 내용은 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/14455)를 참조 하세요.
+Microsoft 계정 인증에 대 한 자세한 내용은 [이 GitHub 문제](https://github.com/dotnet/AspNetCore.Docs/issues/14455)를 참조 하세요.
 
 *Startup.cs*에서 다음과 같이 변경 합니다.
 - `Configure` 메서드의 `UseMicrosoftAccountAuthentication` 메서드 호출을 `UseAuthentication`으로 바꿉니다.
@@ -330,7 +330,7 @@ Windows 인증에는 두 가지 변형이 있습니다.
 
   > `System.InvalidOperationException`: authenticationScheme가 지정 되지 않았으므로 DefaultChallengeScheme을 찾을 수 없습니다.
 
-자세한 내용은 <xref:security/authentication/windowsauth>를 참조하세요.
+자세한 내용은 <xref:security/authentication/windowsauth>을 참조하세요.
 
 <a name="identity-cookie-options"></a>
 
@@ -448,6 +448,6 @@ protected override void OnModelCreating(ModelBuilder builder)
 
 <a name="additional-resources"></a>
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 자세한 내용은 GitHub의 [Auth 2.0 문제에 대 한 설명을](https://github.com/aspnet/Security/issues/1338) 참조 하세요.

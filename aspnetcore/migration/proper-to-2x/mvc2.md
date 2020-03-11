@@ -7,11 +7,11 @@ ms.custom: mvc
 ms.date: 10/24/2018
 uid: migration/mvc2
 ms.openlocfilehash: 11bd3b948afaedc675ac4249099969382683f653
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77172446"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653973"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core-20"></a>ASP.NET에서 ASP.NET Core 2.0으로 마이그레이션
 
@@ -19,7 +19,7 @@ ms.locfileid: "77172446"
 
 이 문서는 ASP.NET 애플리케이션을 ASP.NET Core 2.0으로 마이그레이션하기 위한 참조 가이드로 사용됩니다.
 
-## <a name="prerequisites"></a>필수 구성 요소
+## <a name="prerequisites"></a>사전 요구 사항
 
 [.Net 다운로드: Windows](https://www.microsoft.com/net/download/windows)에서 다음 중 **하나** 를 설치 합니다.
 
@@ -157,6 +157,6 @@ ASP.NET Core에서 정적 파일은 별도로 구성되지 않는 한 “웹 루
 
 **참고:** ASP.NET Core에서 정적 파일을 제공 하는 방법에 대 한 자세한 참조는 <xref:fundamentals/static-files>를 참조 하세요.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [.NET Core로 라이브러리 이식](/dotnet/core/porting/libraries)

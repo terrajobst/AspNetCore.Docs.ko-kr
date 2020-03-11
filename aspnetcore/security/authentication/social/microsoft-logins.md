@@ -8,11 +8,11 @@ ms.date: 12/4/2019
 monikerRange: '>= aspnetcore-3.0'
 uid: security/authentication/microsoft-logins
 ms.openlocfilehash: ddaae1a25a1dcf167ffae0f24b480e2cde6aca5b
-ms.sourcegitcommit: f4cd3828e26e6d549ba8d0c36a17be35ad9e5a51
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74825459"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652071"
 ---
 # <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>ASP.NET Core를 사용 하 여 Microsoft 계정 외부 로그인 설정
 
@@ -30,7 +30,7 @@ Microsoft 계정 없는 경우 **만들기**를 선택 합니다. 로그인 하�
 * **새 등록** 선택
 * **이름**을 입력합니다.
 * **지원 되는 계정 유형에**대 한 옵션을 선택 합니다.  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts -->
-* **URI 리디렉션**에서 `/signin-microsoft` 추가 된 개발 URL을 입력 합니다. 예를 들어 `https://localhost:5001/signin-microsoft`과 같은 형식입니다. 이 샘플의 뒷부분에서 구성 된 Microsoft 인증 체계는 OAuth 흐름을 구현 하는 `/signin-microsoft` 경로에서 요청을 자동으로 처리 합니다.
+* **URI 리디렉션**에서 `/signin-microsoft` 추가 된 개발 URL을 입력 합니다. `https://localhost:5001/signin-microsoft`)을 입력합니다. 이 샘플의 뒷부분에서 구성 된 Microsoft 인증 체계는 OAuth 흐름을 구현 하는 `/signin-microsoft` 경로에서 요청을 자동으로 처리 합니다.
 * **등록** 선택
 
 ### <a name="create-client-secret"></a>클라이언트 암호 만들기
@@ -87,12 +87,12 @@ Microsoft 계정 인증에서 지 원하는 구성 옵션에 대 한 자세한 �
 
   오류 메시지가 Microsoft 인증 문제를 나타내는 것 처럼 보이지만 가장 일반적인 원인은 **웹** 플랫폼에 지정 된 **리디렉션 uri** 와 일치 하지 않는 응용 프로그램 uri입니다.
 * `ConfigureServices`에서 `services.AddIdentity`를 호출 하 여 Id가 구성 되지 않은 경우 인증을 시도 하면 ArgumentException이 발생 합니다. *' SignInScheme ' 옵션을 제공 해야*합니다. 이 샘플에서 사용 되는 프로젝트 템플릿은이 작업이 수행 되도록 합니다.
-* 사이트 데이터베이스를 초기 마이그레이션을 적용 하 여 만들어지지 않은, 경우 받습니다 *요청을 처리 하는 동안 데이터베이스 작업이 실패 했습니다.* 오류입니다. 탭 **마이그레이션 적용** 데이터베이스를 만들고 오류 지 나 새로 고침 합니다.
+* 초기 마이그레이션을 적용 하 여 사이트 데이터베이스를 만들지 않은 경우 요청 오류를 *처리 하는 동안 데이터베이스 작업이 실패* 하 게 됩니다. **마이그레이션 적용** 을 탭 하 여 데이터베이스를 만들고 새로 고쳐 오류를 계속 합니다.
 
 ## <a name="next-steps"></a>다음 단계
 
-* 이 문서에서는 Microsoft를 사용 하 여 인증할 수 있는 방법을 살펴보았습니다. 에 나열 된 다른 공급자를 사용 하 여 인증 하는 유사한 방법을 따를 수 있습니다 합니다 [이전 페이지](xref:security/authentication/social/index)합니다.
+* 이 문서에서는 Microsoft를 사용 하 여 인증할 수 있는 방법을 살펴보았습니다. [위의 페이지](xref:security/authentication/social/index)에 나열 된 다른 공급자를 사용 하 여 인증 하는 유사한 방법을 따를 수 있습니다.
 
 * Azure 웹 앱에 웹 사이트를 게시 한 후에는 Microsoft 개발자 포털에서 새 클라이언트 암호를 만듭니다.
 
-* 설정 된 `Authentication:Microsoft:ClientId` 및 `Authentication:Microsoft:ClientSecret` Azure portal에서 응용 프로그램 설정 합니다. 구성 시스템 환경 변수에서 키를 읽을 수 설정 됩니다.
+* Azure Portal에서 `Authentication:Microsoft:ClientId` 및 `Authentication:Microsoft:ClientSecret`를 응용 프로그램 설정으로 설정 합니다. 구성 시스템 환경 변수에서 키를 읽을 수 설정 됩니다.

@@ -10,11 +10,11 @@ no-loc:
 - SignalR
 uid: signalr/redis-backplane
 ms.openlocfilehash: 0461fc6a212ba78111bc2054cca74951721c5820
-ms.sourcegitcommit: f40c9311058c9b1add4ec043ddc5629384af6c56
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/21/2019
-ms.locfileid: "74289034"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652665"
 ---
 # <a name="set-up-a-redis-backplane-for-aspnet-core-opno-locsignalr-scale-out"></a>ASP.NET Core SignalR 스케일 아웃에 대 한 Redis 후면판 설정
 
@@ -29,7 +29,7 @@ ms.locfileid: "74289034"
   > [!IMPORTANT] 
   > Redis 후면판은 프로덕션 사용을 위해 SignalR 앱과 동일한 데이터 센터에서 실행 되는 경우에만 권장 됩니다. 그렇지 않으면 네트워크 대기 시간이 성능을 저하 시킵니다. SignalR 앱이 Azure 클라우드에서 실행 되는 경우 Redis 후면판 대신 Azure SignalR 서비스를 권장 합니다. 개발 및 테스트 환경에 Azure Redis Cache 서비스를 사용할 수 있습니다.
 
-  자세한 내용은 다음 리소스를 참조하십시오.
+  자세한 내용은 다음 리소스를 참조하세요.
 
   * <xref:signalr/scale>
   * [Redis 설명서](https://redis.io/)
@@ -226,7 +226,7 @@ services.AddSignalR()
 
 ## <a name="next-steps"></a>다음 단계
 
-자세한 내용은 다음 리소스를 참조하십시오.
+자세한 내용은 다음 리소스를 참조하세요.
 
 * <xref:signalr/scale>
 * [Redis 설명서](https://redis.io/documentation)

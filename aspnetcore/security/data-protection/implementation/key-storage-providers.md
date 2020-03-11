@@ -5,12 +5,12 @@ description: ASP.NET Core 및 키 저장소 위치를 구성 하는 방법에 �
 ms.author: riande
 ms.date: 12/05/2019
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: 219ebc471de32d15e4a43c938eef156c52e5f11e
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
+ms.openlocfilehash: 19f64e816d88d2fc156915e31dc147645c5a630a
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77172587"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653385"
 ---
 # <a name="key-storage-providers-in-aspnet-core"></a>ASP.NET Core에서 키 저장소 공급자
 
@@ -110,7 +110,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker-end
 
-자세한 내용은 다음 항목을 참조하세요.
+자세한 내용은 아래 항목을 참조하세요.
 
 * [StackExchange. Redis ConnectionMultiplexer](https://github.com/StackExchange/StackExchange.Redis/blob/master/docs/Basics.md)
 * [Azure Redis 캐시(영문)](/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache#connect-to-the-cache)
@@ -145,13 +145,15 @@ EF Core 공급자를 구성 하려면 [PersistKeysToDbContext\<TContext >](/dotn
 
 [!code-csharp[Main](key-storage-providers/sample/Startup.cs?name=snippet&highlight=13-20)]
 
+[!INCLUDE[about the series](~/includes/code-comments-loc.md)]
+
 제네릭 매개 변수 `TContext`는 [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 에서 상속 하 고 [IDataProtectionKeyContext](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcore.idataprotectionkeycontext)를 구현 해야 합니다.
 
 [!code-csharp[Main](key-storage-providers/sample/MyKeysContext.cs)]
 
 `DataProtectionKeys` 테이블을 만듭니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 **패키지 관리자 콘솔** (PMC) 창에서 다음 명령을 실행 합니다.
 
@@ -160,7 +162,7 @@ Add-Migration AddDataProtectionKeys -Context MyKeysContext
 Update-Database -Context MyKeysContext
 ```
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 명령 셸에서 다음 명령을 실행 합니다.
 

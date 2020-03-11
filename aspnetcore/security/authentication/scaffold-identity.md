@@ -8,11 +8,11 @@ ms.custom: mvc
 ms.date: 01/15/2020
 uid: security/authentication/scaffold-identity
 ms.openlocfilehash: b3e077aeac11e62d9e992884100476f7be35b59a
-ms.sourcegitcommit: 990a4c2e623c202a27f60bdf3902f250359c13be
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/03/2020
-ms.locfileid: "76972039"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653715"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>ASP.NET Core 프로젝트의 스 캐 폴드 Id
 
@@ -195,7 +195,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 사용자 등록을 사용 하지 않도록 설정 하려면:
 
-* 스 캐 폴드 Id입니다. Account. Register, Account. Login 및 Account. RegisterConfirmation 같이 포함 됩니다. 예를 들면 다음과 같습니다.:
+* 스 캐 폴드 Id입니다. Account. Register, Account. Login 및 Account. RegisterConfirmation 같이 포함 됩니다. 다음은 그 예입니다.
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -261,7 +261,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 정적 ID 자산을 웹 루트에 게시하지 않으려면 <xref:security/authentication/identity#prevent-publish-of-static-identity-assets>를 참조하세요.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [ASP.NET Core 2.1 이상으로 인증 코드 변경](xref:migration/20_21#changes-to-authentication-code)
 
@@ -439,7 +439,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 사용자 등록을 사용 하지 않도록 설정 하려면:
 
-* 스 캐 폴드 Id입니다. Account. Register, Account. Login 및 Account. RegisterConfirmation 같이 포함 됩니다. 예를 들면 다음과 같습니다.:
+* 스 캐 폴드 Id입니다. Account. Register, Account. Login 및 Account. RegisterConfirmation 같이 포함 됩니다. 다음은 그 예입니다.
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -501,7 +501,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 프로덕션 시나리오의 경우 유사한 접근 방식을 사용할 수 있습니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [ASP.NET Core 2.1 이상으로 인증 코드 변경](xref:migration/20_21#changes-to-authentication-code)
 

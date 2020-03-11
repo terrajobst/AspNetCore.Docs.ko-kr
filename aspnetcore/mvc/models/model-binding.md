@@ -6,12 +6,12 @@ ms.assetid: 0be164aa-1d72-4192-bd6b-192c9c301164
 ms.author: riande
 ms.date: 12/18/2019
 uid: mvc/models/model-binding
-ms.openlocfilehash: a389afe46636155e4703677d362d879a18ea5864
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
-ms.translationtype: HT
+ms.openlocfilehash: 19580768679f30131683717792252c03aade68f9
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75829207"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654471"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core의 모델 바인딩
 
@@ -19,7 +19,7 @@ ms.locfileid: "75829207"
 
 이 문서는 모델 바인딩이 무엇인지, 작동 방법 및 해당 동작을 사용자 지정하는 방법을 설명합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/model-binding/samples) ([다운로드 방법](xref:index#how-to-download-a-sample)). 다운로드 예제는 영역을 테스트하기 위한 기초적인 앱을 제공합니다.
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/model-binding/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="what-is-model-binding"></a>모델 바인딩이란
 
@@ -51,7 +51,7 @@ http://contoso.com/api/pets/2?DogsOnly=true
 * 원본을 찾고 쿼리 문자열에서 "DogsOnly=true"를 찾습니다. 이름 일치는 대/소문자를 구분하지 않습니다.
 * 문자열 "true"를 부울 `true`로 변환합니다.
 
-그런 다음, 프레임워크는 `id` 매개 변수에 대해 2를 `dogsOnly` 매개 변수에 대해 `true`를 전달하는 `GetById` 메서드를 호출합니다.
+그런 다음, 프레임워크는 `GetById` 매개 변수에 대해 2를 `id` 매개 변수에 대해 `true`를 전달하는 `dogsOnly` 메서드를 호출합니다.
 
 앞의 예제에서 모델 바인딩 대상은 단순 형식인 메서드 매개 변수입니다. 대상은 복합 형식의 속성일 수도 있습니다. 각 속성이 성공적으로 바인딩된 후 [모델 유효성 검사](xref:mvc/models/validation)가 해당 속성에 대해 발생합니다. 모델에 바인딩되는 데이터의 레코드 및 모든 바인딩 또는 유효성 검사 오류는 [ControllerBase.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) 또는 [PageModel.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState)에 저장됩니다. 이 프로세스가 성공되었는지 확인하기 위해 앱은 [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) 플래그를 확인합니다.
 
@@ -87,7 +87,7 @@ ASP.NET Core 2.1 이상에서 사용할 수 있습니다.  모델 바인딩이 �
 
 1. 양식 필드
 1. 요청 본문([[ApiController] 특성이 있는 컨트롤러](xref:web-api/index#binding-source-parameter-inference)의 경우)
-1. 경로 데이터
+1. 데이터 라우팅
 1. 쿼리 문자열 매개 변수
 1. 업로드된 파일
 
@@ -153,11 +153,11 @@ public class Pet
 * `IValueProviderFactory`를 구현하는 클래스를 만듭니다.
 * `Startup.ConfigureServices`에서 팩터리 클래스를 등록합니다.
 
-샘플 앱은 쿠키에서 값을 가져오는 [값 공급 기업](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProvider.cs) 및 [팩터리](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProviderFactory.cs) 예제를 포함합니다. 다음은 `Startup.ConfigureServices`의 등록 코드입니다.
+샘플 앱은 쿠키에서 값을 가져오는 [값 공급 기업](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProvider.cs) 및 [팩터리](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProviderFactory.cs) 예제를 포함합니다. 다음은 `Startup.ConfigureServices`의 등록 코드입니다.
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=4)]
 
-표시된 코드는 사용자 지정 값 공급 기업을 모든 기본 제공 값 공급 기업 다음에 배치합니다.  목록에서 첫 번째로 지정하려면 `Add` 대신에 `Insert(0, new CookieValueProviderFactory())`를 호출합니다.
+표시된 코드는 사용자 지정 값 공급 기업을 모든 기본 제공 값 공급 기업 다음에 배치합니다.  목록에서 첫 번째로 지정하려면 `Insert(0, new CookieValueProviderFactory())` 대신에 `Add`를 호출합니다.
 
 ## <a name="no-source-for-a-model-property"></a>모델 속성에 대한 원본 없음
 
@@ -166,7 +166,7 @@ public class Pet
 * Nullable 단순 형식은 `null`로 설정됩니다.
 * Null을 허용하지 않는 값 형식은 `default(T)`로 설정됩니다. 예를 들어 매개 변수 `int id`는 0으로 설정됩니다.
 * 복합 형식의 경우 모델 바인딩은 속성을 설정하지 않고 기본 생성자를 사용하여 인스턴스를 만듭니다.
-* 배열은 `byte[]` 배열이 `null`로 설정되는 점을 제외하고 `Array.Empty<T>()`로 설정됩니다.
+* 배열은 `Array.Empty<T>()` 배열이 `byte[]`로 설정되는 점을 제외하고 `null`로 설정됩니다.
 
 모델 속성에 대한 양식 필드에 아무것도 없을 때 모델 상태가 무효화되어야 하는 경우 [`[BindRequired]`](#bindrequired-attribute) 속성을 사용합니다.
 
@@ -198,15 +198,15 @@ Razor 페이지에서 페이지를 오류 메시지와 함께 다시 표시합�
 * [DateTime](xref:System.ComponentModel.DateTimeConverter)
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
 * [Decimal](xref:System.ComponentModel.DecimalConverter)
-* [double](xref:System.ComponentModel.DoubleConverter)
+* [Double](xref:System.ComponentModel.DoubleConverter)
 * [Enum](xref:System.ComponentModel.EnumConverter)
 * [Guid](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter), [Int32](xref:System.ComponentModel.Int32Converter), [Int64](xref:System.ComponentModel.Int64Converter)
-* [Single](xref:System.ComponentModel.SingleConverter)
+* [단일](xref:System.ComponentModel.SingleConverter)
 * [TimeSpan](xref:System.ComponentModel.TimeSpanConverter)
 * [UInt16](xref:System.ComponentModel.UInt16Converter), [UInt32](xref:System.ComponentModel.UInt32Converter), [UInt64](xref:System.ComponentModel.UInt64Converter)
 * [Uri](xref:System.UriTypeConverter)
-* [Version](xref:System.ComponentModel.VersionConverter)
+* [버전](xref:System.ComponentModel.VersionConverter)
 
 ## <a name="complex-types"></a>복합 형식
 
@@ -239,7 +239,7 @@ public IActionResult OnPost(int? id, Instructor instructorToUpdate)
 
 ### <a name="prefix--property-name"></a>접두사 = 속성 이름
 
-바인딩될 모델이 컨트롤러 또는 `PageModel` 클래스의 `Instructor`라는 속성인 경우:
+바인딩될 모델이 컨트롤러 또는 `Instructor` 클래스의 `PageModel`라는 속성인 경우:
 
 ```csharp
 [BindProperty]
@@ -270,7 +270,7 @@ public IActionResult OnPost(
 > [!NOTE]
 > 이러한 특성은 게시된 양식 데이터가 값의 원본일 때 모델 바인딩에 영향을 줍니다. 게시된 JSON 및 XML 요청 본문을 처리하는 입력 포맷터에는 영향을 주지 않습니다. 입력 포맷터는 [이 문서의 뒷부분](#input-formatters)에 설명되어 있습니다.
 >
-> [모델 유효성 검사](xref:mvc/models/validation#required-attribute)에서 `[Required]` 특성의 설명을 참조하세요.
+> `[Required]`모델 유효성 검사[에서 ](xref:mvc/models/validation#required-attribute) 특성의 설명을 참조하세요.
 
 ### <a name="bindrequired-attribute"></a>[BindRequired] 특성
 
@@ -295,7 +295,7 @@ public IActionResult OnPost(
 public class Instructor
 ```
 
-다음 예제에서 `OnPost` 메서드가 호출될 때 지정된 속성의 `Instructor` 모델만 바인딩됩니다.
+다음 예제에서 `Instructor` 메서드가 호출될 때 지정된 속성의 `OnPost` 모델만 바인딩됩니다.
 
 ```csharp
 [HttpPost]
@@ -306,7 +306,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="collections"></a>컬렉션
 
-단순 형식의 컬렉션인 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예:
+단순 형식의 컬렉션인 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 다음은 그 예입니다.
 
 * 바인딩되는 매개 변수가 `selectedCourses`라는 배열이라고 가정합니다.
 
@@ -351,9 +351,9 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="dictionaries"></a>사전
 
-`Dictionary` 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예:
+`Dictionary` 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 다음은 그 예입니다.
 
-* 대상 매개 변수가 `selectedCourses`라는 `Dictionary<int, string>`라고 가정합니다.
+* 대상 매개 변수가 `Dictionary<int, string>`라는 `selectedCourses`라고 가정합니다.
 
   ```csharp
   public IActionResult OnPost(int? id, Dictionary<int, string> selectedCourses)
@@ -446,9 +446,9 @@ ASP.NET Core는 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute) 특�
 
 ### <a name="customize-model-binding-with-input-formatters"></a>입력 포맷터를 사용하여 모델 바인딩 사용자 지정
 
-입력 포맷터는 요청 본문에서 데이터를 읽기 위한 모든 작업을 수행합니다. 이 프로세스를 사용자 지정하려면 입력 포맷터에서 사용하는 API를 구성합니다. 이 섹션에서는 `ObjectId`라는 사용자 지정 형식을 이해하기 위해 `System.Text.Json` 기반 입력 포맷터를 사용자 지정하는 방법을 설명합니다. 
+입력 포맷터는 요청 본문에서 데이터를 읽기 위한 모든 작업을 수행합니다. 이 프로세스를 사용자 지정하려면 입력 포맷터에서 사용하는 API를 구성합니다. 이 섹션에서는 `System.Text.Json`라는 사용자 지정 형식을 이해하기 위해 `ObjectId` 기반 입력 포맷터를 사용자 지정하는 방법을 설명합니다. 
 
-`Id`라는 사용자 지정 `ObjectId` 속성을 포함하는 다음 모델을 고려합니다.
+`ObjectId`라는 사용자 지정 `Id` 속성을 포함하는 다음 모델을 고려합니다.
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/ModelWithObjectId.cs?name=snippet_Class&highlight=3)]
 
@@ -464,13 +464,13 @@ ASP.NET Core는 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute) 특�
 
 ## <a name="exclude-specified-types-from-model-binding"></a>모델 바인딩에서 지정된 형식 제외
 
-모델 바인딩 및 시스템 동작의 유효성 검사는 [ModelMetadata](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.modelmetadata)를 기반으로 합니다. [MvcOptions.ModelMetadataDetailsProviders](xref:Microsoft.AspNetCore.Mvc.MvcOptions.ModelMetadataDetailsProviders)에 세부 정보 공급 기업을 추가하여 `ModelMetadata`를 사용자 지정할 수 있습니다. 기본 제공 세부 정보 공급 기업을 지정된 형식에 대한 모델 바인딩 또는 유효성 검사를 비활성화하기 위해 사용할 수 있습니다.
+모델 바인딩 및 시스템 동작의 유효성 검사는 [ModelMetadata](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.modelmetadata)를 기반으로 합니다. `ModelMetadata`MvcOptions.ModelMetadataDetailsProviders[에 세부 정보 공급 기업을 추가하여 ](xref:Microsoft.AspNetCore.Mvc.MvcOptions.ModelMetadataDetailsProviders)를 사용자 지정할 수 있습니다. 기본 제공 세부 정보 공급 기업을 지정된 형식에 대한 모델 바인딩 또는 유효성 검사를 비활성화하기 위해 사용할 수 있습니다.
 
-지정된 형식의 모든 모델에 대한 모델 바인딩을 비활성화하려면 `Startup.ConfigureServices`에서 <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ExcludeBindingMetadataProvider>를 추가합니다. 예를 들어 `System.Version` 형식의 모든 모델에 대한 모델 바인딩을 비활성화하려면:
+지정된 형식의 모든 모델에 대한 모델 바인딩을 비활성화하려면 <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ExcludeBindingMetadataProvider>에서 `Startup.ConfigureServices`를 추가합니다. 예를 들어 `System.Version` 형식의 모든 모델에 대한 모델 바인딩을 비활성화하려면:
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=5-6)]
 
-지정된 형식의 속성에 대한 유효성 검사를 비활성화하려면 `Startup.ConfigureServices`에서 <xref:Microsoft.AspNetCore.Mvc.ModelBinding.SuppressChildValidationMetadataProvider>를 추가합니다. 예를 들어 `System.Guid` 형식의 속성에 대한 유효성 검사를 비활성화하려면:
+지정된 형식의 속성에 대한 유효성 검사를 비활성화하려면 <xref:Microsoft.AspNetCore.Mvc.ModelBinding.SuppressChildValidationMetadataProvider>에서 `Startup.ConfigureServices`를 추가합니다. 예를 들어 `System.Guid` 형식의 속성에 대한 유효성 검사를 비활성화하려면:
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=7-8)]
 
@@ -495,7 +495,7 @@ ASP.NET Core는 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute) 특�
 
 이 특성의 이름은 데이터 원본을 지정하는 모델 바인딩 특성의 패턴을 따릅니다. 그러나 값 공급 기업의 바인딩 데이터에 대한 것은 아닙니다. [종속성 주입](xref:fundamentals/dependency-injection) 컨테이너에서 형식의 인스턴스를 가져옵니다. 특정 메서드가 호출되는 경우에만 서비스가 필요할 때 생성자 주입에 대안을 제공하는 것이 목적입니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:mvc/models/validation>
 * <xref:mvc/advanced/custom-model-binding>
@@ -505,7 +505,7 @@ ASP.NET Core는 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute) 특�
 
 이 문서는 모델 바인딩이 무엇인지, 작동 방법 및 해당 동작을 사용자 지정하는 방법을 설명합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/model-binding/samples) ([다운로드 방법](xref:index#how-to-download-a-sample)). 다운로드 예제는 영역을 테스트하기 위한 기초적인 앱을 제공합니다.
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/model-binding/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="what-is-model-binding"></a>모델 바인딩이란
 
@@ -537,7 +537,7 @@ http://contoso.com/api/pets/2?DogsOnly=true
 * 원본을 찾고 쿼리 문자열에서 "DogsOnly=true"를 찾습니다. 이름 일치는 대/소문자를 구분하지 않습니다.
 * 문자열 "true"를 부울 `true`로 변환합니다.
 
-그런 다음, 프레임워크는 `id` 매개 변수에 대해 2를 `dogsOnly` 매개 변수에 대해 `true`를 전달하는 `GetById` 메서드를 호출합니다.
+그런 다음, 프레임워크는 `GetById` 매개 변수에 대해 2를 `id` 매개 변수에 대해 `true`를 전달하는 `dogsOnly` 메서드를 호출합니다.
 
 앞의 예제에서 모델 바인딩 대상은 단순 형식인 메서드 매개 변수입니다. 대상은 복합 형식의 속성일 수도 있습니다. 각 속성이 성공적으로 바인딩된 후 [모델 유효성 검사](xref:mvc/models/validation)가 해당 속성에 대해 발생합니다. 모델에 바인딩되는 데이터의 레코드 및 모든 바인딩 또는 유효성 검사 오류는 [ControllerBase.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) 또는 [PageModel.ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState)에 저장됩니다. 이 프로세스가 성공되었는지 확인하기 위해 앱은 [ModelState.IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) 플래그를 확인합니다.
 
@@ -573,7 +573,7 @@ ASP.NET Core 2.1 이상에서 사용할 수 있습니다.  모델 바인딩이 �
 
 1. 양식 필드
 1. 요청 본문([[ApiController] 특성이 있는 컨트롤러](xref:web-api/index#binding-source-parameter-inference)의 경우)
-1. 경로 데이터
+1. 데이터 라우팅
 1. 쿼리 문자열 매개 변수
 1. 업로드된 파일
 
@@ -639,11 +639,11 @@ public class Pet
 * `IValueProviderFactory`를 구현하는 클래스를 만듭니다.
 * `Startup.ConfigureServices`에서 팩터리 클래스를 등록합니다.
 
-샘플 앱은 쿠키에서 값을 가져오는 [값 공급 기업](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProvider.cs) 및 [팩터리](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProviderFactory.cs) 예제를 포함합니다. 다음은 `Startup.ConfigureServices`의 등록 코드입니다.
+샘플 앱은 쿠키에서 값을 가져오는 [값 공급 기업](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProvider.cs) 및 [팩터리](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProviderFactory.cs) 예제를 포함합니다. 다음은 `Startup.ConfigureServices`의 등록 코드입니다.
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=3)]
 
-표시된 코드는 사용자 지정 값 공급 기업을 모든 기본 제공 값 공급 기업 다음에 배치합니다.  목록에서 첫 번째로 지정하려면 `Add` 대신에 `Insert(0, new CookieValueProviderFactory())`를 호출합니다.
+표시된 코드는 사용자 지정 값 공급 기업을 모든 기본 제공 값 공급 기업 다음에 배치합니다.  목록에서 첫 번째로 지정하려면 `Insert(0, new CookieValueProviderFactory())` 대신에 `Add`를 호출합니다.
 
 ## <a name="no-source-for-a-model-property"></a>모델 속성에 대한 원본 없음
 
@@ -652,7 +652,7 @@ public class Pet
 * Nullable 단순 형식은 `null`로 설정됩니다.
 * Null을 허용하지 않는 값 형식은 `default(T)`로 설정됩니다. 예를 들어 매개 변수 `int id`는 0으로 설정됩니다.
 * 복합 형식의 경우 모델 바인딩은 속성을 설정하지 않고 기본 생성자를 사용하여 인스턴스를 만듭니다.
-* 배열은 `byte[]` 배열이 `null`로 설정되는 점을 제외하고 `Array.Empty<T>()`로 설정됩니다.
+* 배열은 `Array.Empty<T>()` 배열이 `byte[]`로 설정되는 점을 제외하고 `null`로 설정됩니다.
 
 모델 속성에 대한 양식 필드에 아무것도 없을 때 모델 상태가 무효화되어야 하는 경우 [`[BindRequired]`](#bindrequired-attribute) 속성을 사용합니다.
 
@@ -684,15 +684,15 @@ Razor 페이지에서 페이지를 오류 메시지와 함께 다시 표시합�
 * [DateTime](xref:System.ComponentModel.DateTimeConverter)
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
 * [Decimal](xref:System.ComponentModel.DecimalConverter)
-* [double](xref:System.ComponentModel.DoubleConverter)
+* [Double](xref:System.ComponentModel.DoubleConverter)
 * [Enum](xref:System.ComponentModel.EnumConverter)
 * [Guid](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter), [Int32](xref:System.ComponentModel.Int32Converter), [Int64](xref:System.ComponentModel.Int64Converter)
-* [Single](xref:System.ComponentModel.SingleConverter)
+* [단일](xref:System.ComponentModel.SingleConverter)
 * [TimeSpan](xref:System.ComponentModel.TimeSpanConverter)
 * [UInt16](xref:System.ComponentModel.UInt16Converter), [UInt32](xref:System.ComponentModel.UInt32Converter), [UInt64](xref:System.ComponentModel.UInt64Converter)
 * [Uri](xref:System.UriTypeConverter)
-* [Version](xref:System.ComponentModel.VersionConverter)
+* [버전](xref:System.ComponentModel.VersionConverter)
 
 ## <a name="complex-types"></a>복합 형식
 
@@ -725,7 +725,7 @@ public IActionResult OnPost(int? id, Instructor instructorToUpdate)
 
 ### <a name="prefix--property-name"></a>접두사 = 속성 이름
 
-바인딩될 모델이 컨트롤러 또는 `PageModel` 클래스의 `Instructor`라는 속성인 경우:
+바인딩될 모델이 컨트롤러 또는 `Instructor` 클래스의 `PageModel`라는 속성인 경우:
 
 ```csharp
 [BindProperty]
@@ -756,7 +756,7 @@ public IActionResult OnPost(
 > [!NOTE]
 > 이러한 특성은 게시된 양식 데이터가 값의 원본일 때 모델 바인딩에 영향을 줍니다. 게시된 JSON 및 XML 요청 본문을 처리하는 입력 포맷터에는 영향을 주지 않습니다. 입력 포맷터는 [이 문서의 뒷부분](#input-formatters)에 설명되어 있습니다.
 >
-> [모델 유효성 검사](xref:mvc/models/validation#required-attribute)에서 `[Required]` 특성의 설명을 참조하세요.
+> `[Required]`모델 유효성 검사[에서 ](xref:mvc/models/validation#required-attribute) 특성의 설명을 참조하세요.
 
 ### <a name="bindrequired-attribute"></a>[BindRequired] 특성
 
@@ -781,7 +781,7 @@ public IActionResult OnPost(
 public class Instructor
 ```
 
-다음 예제에서 `OnPost` 메서드가 호출될 때 지정된 속성의 `Instructor` 모델만 바인딩됩니다.
+다음 예제에서 `Instructor` 메서드가 호출될 때 지정된 속성의 `OnPost` 모델만 바인딩됩니다.
 
 ```csharp
 [HttpPost]
@@ -792,7 +792,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="collections"></a>컬렉션
 
-단순 형식의 컬렉션인 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예:
+단순 형식의 컬렉션인 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 다음은 그 예입니다.
 
 * 바인딩되는 매개 변수가 `selectedCourses`라는 배열이라고 가정합니다.
 
@@ -837,9 +837,9 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="dictionaries"></a>사전
 
-`Dictionary` 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 예:
+`Dictionary` 대상의 경우 모델 바인딩은 *parameter_name* 또는 *property_name*에 대한 일치 항목을 찾습니다. 일치하는 항목이 없는 경우 접두사 없이 지원되는 양식 중 하나를 찾습니다. 다음은 그 예입니다.
 
-* 대상 매개 변수가 `selectedCourses`라는 `Dictionary<int, string>`라고 가정합니다.
+* 대상 매개 변수가 `Dictionary<int, string>`라는 `selectedCourses`라고 가정합니다.
 
   ```csharp
   public IActionResult OnPost(int? id, Dictionary<int, string> selectedCourses)
@@ -932,13 +932,13 @@ ASP.NET Core는 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute) 특�
 
 ## <a name="exclude-specified-types-from-model-binding"></a>모델 바인딩에서 지정된 형식 제외
 
-모델 바인딩 및 시스템 동작의 유효성 검사는 [ModelMetadata](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.modelmetadata)를 기반으로 합니다. [MvcOptions.ModelMetadataDetailsProviders](xref:Microsoft.AspNetCore.Mvc.MvcOptions.ModelMetadataDetailsProviders)에 세부 정보 공급 기업을 추가하여 `ModelMetadata`를 사용자 지정할 수 있습니다. 기본 제공 세부 정보 공급 기업을 지정된 형식에 대한 모델 바인딩 또는 유효성 검사를 비활성화하기 위해 사용할 수 있습니다.
+모델 바인딩 및 시스템 동작의 유효성 검사는 [ModelMetadata](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.modelmetadata)를 기반으로 합니다. `ModelMetadata`MvcOptions.ModelMetadataDetailsProviders[에 세부 정보 공급 기업을 추가하여 ](xref:Microsoft.AspNetCore.Mvc.MvcOptions.ModelMetadataDetailsProviders)를 사용자 지정할 수 있습니다. 기본 제공 세부 정보 공급 기업을 지정된 형식에 대한 모델 바인딩 또는 유효성 검사를 비활성화하기 위해 사용할 수 있습니다.
 
-지정된 형식의 모든 모델에 대한 모델 바인딩을 비활성화하려면 `Startup.ConfigureServices`에서 <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ExcludeBindingMetadataProvider>를 추가합니다. 예를 들어 `System.Version` 형식의 모든 모델에 대한 모델 바인딩을 비활성화하려면:
+지정된 형식의 모든 모델에 대한 모델 바인딩을 비활성화하려면 <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ExcludeBindingMetadataProvider>에서 `Startup.ConfigureServices`를 추가합니다. 예를 들어 `System.Version` 형식의 모든 모델에 대한 모델 바인딩을 비활성화하려면:
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=4-5)]
 
-지정된 형식의 속성에 대한 유효성 검사를 비활성화하려면 `Startup.ConfigureServices`에서 <xref:Microsoft.AspNetCore.Mvc.ModelBinding.SuppressChildValidationMetadataProvider>를 추가합니다. 예를 들어 `System.Guid` 형식의 속성에 대한 유효성 검사를 비활성화하려면:
+지정된 형식의 속성에 대한 유효성 검사를 비활성화하려면 <xref:Microsoft.AspNetCore.Mvc.ModelBinding.SuppressChildValidationMetadataProvider>에서 `Startup.ConfigureServices`를 추가합니다. 예를 들어 `System.Guid` 형식의 속성에 대한 유효성 검사를 비활성화하려면:
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=6-7)]
 
@@ -956,7 +956,7 @@ ASP.NET Core는 [Consumes](xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute) 특�
 
 이 특성의 이름은 데이터 원본을 지정하는 모델 바인딩 특성의 패턴을 따릅니다. 그러나 값 공급 기업의 바인딩 데이터에 대한 것은 아닙니다. [종속성 주입](xref:fundamentals/dependency-injection) 컨테이너에서 형식의 인스턴스를 가져옵니다. 특정 메서드가 호출되는 경우에만 서비스가 필요할 때 생성자 주입에 대안을 제공하는 것이 목적입니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:mvc/models/validation>
 * <xref:mvc/advanced/custom-model-binding>

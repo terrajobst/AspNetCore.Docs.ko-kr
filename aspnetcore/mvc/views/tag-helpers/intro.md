@@ -7,11 +7,11 @@ ms.custom: H1Hack27Feb2017
 ms.date: 03/18/2019
 uid: mvc/views/tag-helpers/intro
 ms.openlocfilehash: 15f94fd1c619e9f69c5783f664eafc9ca28f86f9
-ms.sourcegitcommit: 8157e5a351f49aeef3769f7d38b787b4386aad5f
-ms.translationtype: HT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/20/2019
-ms.locfileid: "74239854"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652857"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>ASP.NET Core의 태그 도우미
 
@@ -19,7 +19,7 @@ ms.locfileid: "74239854"
 
 ## <a name="what-are-tag-helpers"></a>태그 도우미란?
 
-태그 도우미를 사용하면 서버 쪽 코드를 Razor 파일에서 HTML 요소를 만들고 렌더링하는 데 사용할 수 있습니다. 예를 들어 기본 제공 `ImageTagHelper`는 이미지 이름에 버전 번호를 추가할 수 있습니다. 이미지가 변경될 때마다 서버에서 이미지에 대한 고유 버전을 새로 생성하므로 클라이언트는 항상 최신 이미지를 가져옵니다(오래된 캐시된 이미지 대신). 양식 작성, 링크, 자산 로드 등의 일반적인 작업을 위한 여러 가지 기본 제공 태그 도우미가 있으며, 공용 GitHub 리포지토리 및 NuGet 패키지로도 사용할 수 있습니다. 태그 도우미는 C#에서 작성되며 요소 이름, 특성 이름 또는 부모 태그 기반의 HTML 요소를 대상으로 합니다. 예를 들어 기본 제공 `LabelTagHelper`는 `LabelTagHelper` 특성이 적용될 때 HTML `<label>` 요소를 대상으로 할 수 있습니다. [HTML 도우미](https://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers)에 익숙한 경우 태그 도우미를 사용하면 Razor 보기에서 HTML과 C# 간의 명시적 전환이 줄어듭니다. 많은 경우 HTML 도우미는 특정 태그 도우미에 대한 대체 방법을 제공하지만, 태그 도우미는 HTML 도우미를 대체하지 않으며 각 HTML 도우미에 대한 태그 도우미가 없다는 사실을 인지하는 것이 중요합니다. [HTML 도우미와 비교한 태그 도우미](#tag-helpers-compared-to-html-helpers)를 보시면 차이점이 자세히 설명되어 있습니다.
+태그 도우미를 사용하면 서버 쪽 코드를 Razor 파일에서 HTML 요소를 만들고 렌더링하는 데 사용할 수 있습니다. 예를 들어 기본 제공 `ImageTagHelper`는 이미지 이름에 버전 번호를 추가할 수 있습니다. 이미지가 변경될 때마다 서버에서 이미지에 대한 고유 버전을 새로 생성하므로 클라이언트는 항상 최신 이미지를 가져옵니다(오래된 캐시된 이미지 대신). 양식 작성, 링크, 자산 로드 등의 일반적인 작업을 위한 여러 가지 기본 제공 태그 도우미가 있으며, 공용 GitHub 리포지토리 및 NuGet 패키지를 통해서 더 많은 태그 도우미를 사용할 수 있습니다. 태그 도우미는 C#으로 작성되며 요소 이름, 특성 이름 또는 부모 태그 기반의 HTML 요소를 대상으로 합니다. 예를 들어 기본 제공 `LabelTagHelper`는 `<label>` 특성이 적용될 때 HTML `LabelTagHelper` 요소를 대상으로 할 수 있습니다. [HTML 도우미](https://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers)에 익숙한 경우 태그 도우미를 사용하면 Razor 보기에서 HTML과 C# 간의 명시적 전환이 줄어듭니다. 많은 경우 HTML 도우미는 특정 태그 도우미에 대한 대체 방법을 제공하지만, 태그 도우미는 HTML 도우미를 대체하지 않으며 각 HTML 도우미에 대한 태그 도우미가 없다는 사실을 인지하는 것이 중요합니다. [HTML 도우미와 비교한 태그 도우미](#tag-helpers-compared-to-html-helpers)를 보시면 차이점이 자세히 설명되어 있습니다.
 
 ## <a name="what-tag-helpers-provide"></a>태그 도우미가 제공하는 기능
 
@@ -27,9 +27,9 @@ ms.locfileid: "74239854"
 
 **HTML 및 Razor 태그를 만드는 다양한 IntelliSense 환경** 이것이 바로 Razor 보기에서 서버 쪽 태그 생성에 대한 이전 접근 방식을 사용하는 HTML 도우미와 명확하게 다른 점입니다. [HTML 도우미와 비교한 태그 도우미](#tag-helpers-compared-to-html-helpers)를 보시면 차이점이 자세히 설명되어 있습니다. [태그 도우미에 IntelliSense 지원](#intellisense-support-for-tag-helpers)을 보시면 IntelliSense 환경에 대해 설명되어 있습니다. 심지어 Razor C# 구문에 익숙한 개발자는 태그 도우미를 사용하면 C# Razor 태그를 작성하는 것보다 생산성이 향상됩니다.
 
-**생산성을 높이고 서버에만 제공되는 정보를 사용하여 보다 강력하고 안정적이고 유지 가능한 코드를 작성하는 방법** 예를 들어 지금까지는 이미지를 변경하면 이미지 이름도 변경하는 것이 이미지 업데이트의 원칙이었습니다. 성능상의 이유로 이미지를 적극적으로 캐시해야 하며, 이미지 이름을 변경하지 않는 한 클라이언트가 오래된 복사본으로 전락할 위험이 있습니다. 지금까지는 이미지가 편집되면 이름을 변경하고 웹앱의 이미지에 대한 각 참조를 업데이트해야 했습니다. 이 작업은 매우 많은 인력이 필요할 뿐 아니라 오류 가능성이 높습니다(참조를 누락하거나 실수로 잘못된 문자열을 입력하는 등). 기본 제공 `ImageTagHelper`는 이 작업을 자동으로 수행할 수 있습니다. `ImageTagHelper`는 이미지 이름에 버전 번호를 추가할 수 있으며, 따라서 이미지가 변경될 때마다 서버에서 자동으로 이미지의 새 고유 버전을 생성합니다. 클라이언트는 항상 최신 이미지를 가져오게 됩니다. `ImageTagHelper`를 사용하면 이와 같은 견고함과 노동력 절감 효과를 근본적으로 무료로 얻을 수 있습니다.
+**생산성을 높이고 서버에만 제공되는 정보를 사용하여 보다 강력하고 안정적이고 유지 가능한 코드를 작성하는 방법** 예를 들어 지금까지는 이미지를 변경하면 이미지 이름도 변경하는 것이 이미지 업데이트의 원칙이었습니다. 성능상의 이유로 이미지를 적극적으로 캐시해야 하며, 이미지 이름을 변경하지 않는 한 클라이언트가 오래된 복사본으로 전락할 위험이 있습니다. 지금까지는 이미지가 편집되면 이름을 변경하고 웹앱의 이미지에 대한 각 참조를 업데이트해야 했습니다. 이는 매우 많은 노력을 발생 시킬 뿐만 아니라 오류가 발생 하기 쉽습니다 (참조를 누락 했거나 실수로 잘못 된 문자열을 입력 하는 등). 기본 제공 `ImageTagHelper` 자동으로이 작업을 수행할 수 있습니다. `ImageTagHelper`는 이미지 이름에 버전 번호를 추가할 수 있으며, 따라서 이미지가 변경될 때마다 서버에서 자동으로 이미지의 새 고유 버전을 생성합니다. 클라이언트는 항상 최신 이미지를 가져오게 됩니다. `ImageTagHelper`를 사용하면 이와 같은 견고함과 노동력 절감 효과를 근본적으로 무료로 얻을 수 있습니다.
 
-대부분의 기본 제공 태그 도우미는 표준 HTML 요소를 대상으로 하며 요소에 대한 서버 쪽 특성을 제공합니다. 예를 들어 *보기/계정* 폴더의 여러 보기에서 사용되는 `<input>` 요소에는 `asp-for` 특성이 있습니다. 이 특성은 지정된 모델 속성의 이름을 렌더링된 HTML로 추출합니다. 다음 모델과 함께 Razor 보기를 고려합니다.
+대부분의 기본 제공 태그 도우미는 표준 HTML 요소를 대상으로 하며 요소에 대한 서버 쪽 특성을 제공합니다. 예를 들어 `<input>`보기/계정*폴더의 여러 보기에서 사용되는* 요소에는 `asp-for` 특성이 있습니다. 이 특성은 지정된 모델 속성의 이름을 렌더링된 HTML로 추출합니다. 다음 모델과 함께 Razor 보기를 고려합니다.
 
 ```csharp
 public class Movie
@@ -54,7 +54,7 @@ public class Movie
 <label for="Movie_Title">Title</label>
 ```
 
-`asp-for` 특성은 [LabelTagHelper](/dotnet/api/microsoft.aspnetcore.mvc.taghelpers.labeltaghelper?view=aspnetcore-2.0)의 `For` 속성에서 사용할 수 있습니다. 자세한 내용은 [태그 도우미 작성](xref:mvc/views/tag-helpers/authoring)을 참조하세요.
+`asp-for` 특성은 `For`LabelTagHelper[의 ](/dotnet/api/microsoft.aspnetcore.mvc.taghelpers.labeltaghelper?view=aspnetcore-2.0) 속성에서 사용할 수 있습니다. 자세한 내용은 [태그 도우미 작성](xref:mvc/views/tag-helpers/authoring)을 참조하세요.
 
 ## <a name="managing-tag-helper-scope"></a>태그 도우미 범위 관리
 
@@ -74,7 +74,7 @@ public class Movie
 
 [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopy.cshtml?highlight=3)]
 
-기본 네임스페이스(`AuthoringTagHelpers.TagHelpers.EmailTagHelper`)가 있는 `EmailTagHelper`가 프로젝트에 포함된 경우 태그 도우미의 FQN(정규화된 이름)을 제공할 수 있습니다.
+기본 네임스페이스(`EmailTagHelper`)가 있는 `AuthoringTagHelpers.TagHelpers.EmailTagHelper`가 프로젝트에 포함된 경우 태그 도우미의 FQN(정규화된 이름)을 제공할 수 있습니다.
 
 ```cshtml
 @using AuthoringTagHelpers
@@ -89,23 +89,23 @@ FQN을 사용하여 보기에 태그 도우미를 추가하려면 먼저 FQN(`Au
 @addTagHelper AuthoringTagHelpers.TagHelpers.Email*, AuthoringTagHelpers
 ```
 
-앞서 언급했듯이, *Views/_ViewImports.cshtml* 파일에 `@addTagHelper` 지시문을 추가하면 *보기* 디렉터리 및 하위 디렉터리에 있는 모든 보기 파일에서 태그 도우미를 사용할 수 있습니다. 특정 보기에만 태그 도우미를 노출하도록 옵트인하려면 특정 보기 파일에서 `@addTagHelper` 지시문을 사용하면 됩니다.
+앞서 언급했듯이, `@addTagHelper`Views/_ViewImports.cshtml*파일에* 지시문을 추가하면 *보기* 디렉터리 및 하위 디렉터리에 있는 모든 보기 파일에서 태그 도우미를 사용할 수 있습니다. 특정 보기에만 태그 도우미를 노출하도록 옵트인하려면 특정 보기 파일에서 `@addTagHelper` 지시문을 사용하면 됩니다.
 
 <a name="remove-razor-directives-label"></a>
 
 ### <a name="removetaghelper-removes-tag-helpers"></a>`@removeTagHelper`로 태그 도우미 제거
 
-`@removeTagHelper`는 `@addTagHelper`와 동일한 두 개의 매개 변수를 갖고 있으며, 이전에 추가된 태그 도우미를 제거합니다. 예를 들어 특정 보기에 적용된 `@removeTagHelper`는 보기에서 지정된 태그 도우미를 제거합니다. *Views/Folder/_ViewImports.cshtml* 파일에 `@removeTagHelper`를 사용하면 *폴더*에 있는 모든 보기에서 지정된 태그 도우미가 제거됩니다.
+`@removeTagHelper`는 `@addTagHelper`와 동일한 두 개의 매개 변수를 갖고 있으며, 이전에 추가된 태그 도우미를 제거합니다. 예를 들어 특정 보기에 적용된 `@removeTagHelper`는 보기에서 지정된 태그 도우미를 제거합니다. `@removeTagHelper`Views/Folder/_ViewImports.cshtml*파일에*를 사용하면 *폴더*에 있는 모든 보기에서 지정된 태그 도우미가 제거됩니다.
 
 ### <a name="controlling-tag-helper-scope-with-the-_viewimportscshtml-file"></a>*_ViewImports.cshtml* 파일을 사용하여 태그 도우미 범위 제어
 
-보기 폴더에 *_ViewImports.cshtml*을 추가할 수 있습니다. 그러면 보기 엔진이 해당 파일과 *Views/_ViewImports.cshtml* 파일의 지시문을 적용합니다. *홈* 보기에 대한 비어 있는 *Views/Home/_ViewImports.cshtml* 파일을 추가한 경우 변경되는 내용이 없습니다. *_ViewImports.cshtml* 파일은 추가 파일이기 때문입니다. *Views/Home/_ViewImports.cshtml* 파일(기본 *Views/_ViewImports.cshtml* 파일에 없음)에 추가되는 `@addTagHelper` 지시문은 *홈* 폴더에 있는 보기에만 태그 도우미를 노출합니다.
+보기 폴더에 *_ViewImports.cshtml*을 추가할 수 있습니다. 그러면 보기 엔진이 해당 파일과 *Views/_ViewImports.cshtml* 파일의 지시문을 적용합니다. *홈* 보기에 대한 비어 있는 *Views/Home/_ViewImports.cshtml* 파일을 추가한 경우 변경되는 내용이 없습니다. *_ViewImports.cshtml* 파일은 추가 파일이기 때문입니다. `@addTagHelper`Views/Home/_ViewImports.cshtml*파일(기본*Views/_ViewImports.cshtml*파일에 없음)에 추가되는* 지시문은 *홈* 폴더에 있는 보기에만 태그 도우미를 노출합니다.
 
 <a name="opt-out"></a>
 
 ### <a name="opting-out-of-individual-elements"></a>개별 요소 옵트아웃
 
-태그 도우미 옵트아웃 문자("!")를 사용하여 요소 수준에서 태그 도우미를 사용하지 않도록 설정할 수 있습니다. 예를 들어 다음과 같은 태그 도우미 옵트아웃 문자를 사용하여 `<span>`에서 `Email` 유효성 검사가 해제됩니다.
+태그 도우미 옵트아웃 문자("!")를 사용하여 요소 수준에서 태그 도우미를 사용하지 않도록 설정할 수 있습니다. 예를 들어 다음과 같은 태그 도우미 옵트아웃 문자를 사용하여 `Email`에서 `<span>` 유효성 검사가 해제됩니다.
 
 ```cshtml
 <!span asp-validation-for="Email" class="text-danger"></!span>
@@ -131,7 +131,7 @@ FQN을 사용하여 보기에 태그 도우미를 추가하려면 먼저 FQN(`Au
 
 ## <a name="self-closing-tag-helpers"></a>자체 닫는 태그 도우미
 
-여러 태그 도우미를 자체 닫는 태그로 사용할 수 없습니다. 일부 태그 도우미는 자체 닫는 태그로 설계되었습니다. 자체 닫는 태그로 설계되지 않은 태그 도우미를 사용하면 렌더링된 출력이 표시되지 않습니다. 태그 도우미를 자체적으로 닫으면 렌더링된 출력에 자체 닫는 태그가 생성됩니다. 자세한 내용은 [태그 도우미 작성](xref:mvc/views/tag-helpers/authoring)에서 [이 메모](xref:mvc/views/tag-helpers/authoring#self-closing)를 참조하세요.
+여러 태그 도우미를 자체 닫는 태그로 사용할 수 없습니다. 일부 태그 도우미는 자체 닫는 태그로 설계되었습니다. 자체 닫는 태그로 설계되지 않은 태그 도우미를 사용하면 렌더링된 출력이 표시되지 않습니다. 태그 도우미를 자체적으로 닫으면 렌더링된 출력에 자체 닫는 태그가 생성됩니다. 자세한 내용은 [태그 도우미 작성](xref:mvc/views/tag-helpers/authoring#self-closing)에서 [이 메모](xref:mvc/views/tag-helpers/authoring)를 참조하세요.
 
 ## <a name="c-in-tag-helpers-attributedeclaration"></a>태그 도우미 특성/선언의 C# 
 
@@ -179,7 +179,7 @@ IntelliSense 문을 완성하면 탭 키를 입력하여 선택한 값으로 문
 
 ![이미지](intro/_static/labelaspfor2.png)
 
-Visual Studio *CompleteWord* 바로 가기를 입력할 수 있으며(큰따옴표 안에서는 Ctrl + 스페이스가 [기본](/visualstudio/ide/default-keyboard-shortcuts-in-visual-studio)), 이제 C# 클래스와 마찬가지로 C#에 있습니다. IntelliSense는 페이지 모델에 모든 메서드 및 속성을 표시합니다. 속성 형식이 `ModelExpression`이므로 메서드 및 속성을 사용할 수 있습니다. 아래 이미지에서는 `RegisterViewModel`을 사용할 수 있도록 `Register` 보기를 편집하겠습니다.
+Visual Studio *CompleteWord* 바로 가기를 입력할 수 있으며(큰따옴표 안에서는 Ctrl + 스페이스가 [기본](/visualstudio/ide/default-keyboard-shortcuts-in-visual-studio)), 이제 C# 클래스와 마찬가지로 C#에 있습니다. IntelliSense는 페이지 모델에 모든 메서드 및 속성을 표시합니다. 속성 형식이 `ModelExpression`이므로 메서드 및 속성을 사용할 수 있습니다. 아래 이미지에서는 `Register`을 사용할 수 있도록 `RegisterViewModel` 보기를 편집하겠습니다.
 
 ![이미지](intro/_static/intellemail.png)
 
@@ -267,8 +267,8 @@ Visual Studio 편집기를 사용하면 레지스터 양식의 태그 도우미 
 
 [!INCLUDE[](~/includes/built-in-TH.md)]
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
-* [태그 도우미 작성](xref:mvc/views/tag-helpers/authoring)
+* [작성자 태그 도우미](xref:mvc/views/tag-helpers/authoring)
 * [양식 사용](xref:mvc/views/working-with-forms)
 * [GitHub의 TagHelperSamples](https://github.com/dpaquette/TagHelperSamples)에는 [부트스트랩](https://getbootstrap.com/)을 사용하기 위한 태그 도우미 샘플이 포함되어 있습니다.

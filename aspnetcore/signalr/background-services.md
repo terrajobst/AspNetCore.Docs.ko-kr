@@ -9,12 +9,12 @@ ms.date: 11/12/2019
 no-loc:
 - SignalR
 uid: signalr/background-services
-ms.openlocfilehash: 324592759af79d1229eb147fb4551e97c678ef64
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: 86319cc93febab18c29e2fb6366cef0d025943ba
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75358680"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78651585"
 ---
 # <a name="host-aspnet-core-opno-locsignalr-in-background-services"></a>백그라운드 서비스의 호스트 ASP.NET Core SignalR
 
@@ -25,7 +25,7 @@ ms.locfileid: "75358680"
 * ASP.NET Core에서 호스트 되는 백그라운드 작업자 프로세스를 사용 하 여 SignalR 허브를 호스팅합니다.
 * .NET Core [BackgroundService](xref:Microsoft.Extensions.Hosting.BackgroundService)내에서 연결 된 클라이언트에 메시지를 보냅니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/sample/) [(다운로드 방법)](xref:index#how-to-download-a-sample)
+[샘플 코드 보기 또는 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/background-service/sample/) [(다운로드 방법)](xref:index#how-to-download-a-sample)
 
 ## <a name="enable-opno-locsignalr-in-startup"></a>시작할 때 SignalR 사용
 
@@ -119,7 +119,7 @@ public partial class ClockHubClient : IClock, IHostedService
 
 [!code-csharp[StopAsync method](background-service/sample/Clients.ConsoleTwo/ClockHubClient.cs?name=StopAsync)]
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [시작](xref:tutorials/signalr)
 * [허브](xref:signalr/hubs)

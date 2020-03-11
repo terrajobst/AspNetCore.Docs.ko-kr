@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 04/06/2019
 uid: migration/mvc
 ms.openlocfilehash: 6c9449fb43960d05db8aa6dcba64d3d830834cdb
-ms.sourcegitcommit: 849af69ee3c94cdb9fd8fa1f1bb8f5a5dda7b9eb
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/22/2019
-ms.locfileid: "68371879"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652551"
 ---
 # <a name="migrate-from-aspnet-mvc-to-aspnet-core-mvc"></a>ASP.NET MVC에서 ASP.NET Core MVC로 마이그레이션
 
@@ -27,9 +27,9 @@ ms.locfileid: "68371879"
 
 ![Visual Studio 새 프로젝트 대화 상자](mvc/_static/new-project.png)
 
-![새 웹 응용 프로그램 대화 상자: ASP.NET 템플릿 패널에서 선택한 MVC 프로젝트 템플릿](mvc/_static/new-project-select-mvc-template.png)
+![새 웹 응용 프로그램 대화 상자: ASP.NET 템플릿 패널에서 선택 된 MVC 프로젝트 템플릿](mvc/_static/new-project-select-mvc-template.png)
 
-*필드* 솔루션 이름을 *WebApp1* 에서 *Mvc5*로 변경 합니다. Visual Studio에서 새 솔루션 이름 (*Mvc5*)을 표시 합니다 .이를 통해 다음 프로젝트에서이 프로젝트를 더 쉽게 알 수 있습니다.
+*선택 사항:* 솔루션 이름을 *WebApp1* 에서 *Mvc5*로 변경 합니다. Visual Studio에서 새 솔루션 이름 (*Mvc5*)을 표시 합니다 .이를 통해 다음 프로젝트에서이 프로젝트를 더 쉽게 알 수 있습니다.
 
 ## <a name="create-the-aspnet-core-project"></a>ASP.NET Core 프로젝트 만들기
 
@@ -37,9 +37,9 @@ ms.locfileid: "68371879"
 
 ![새 프로젝트 대화 상자](mvc/_static/new_core.png)
 
-![New ASP.NET 웹 응용 프로그램 대화 상자: ASP.NET Core 템플릿 패널에서 빈 프로젝트 템플릿을 선택 합니다.](mvc/_static/new-project-select-empty-aspnet5-template.png)
+![New ASP.NET 웹 응용 프로그램 대화 상자: ASP.NET Core 템플릿 패널에서 빈 프로젝트 템플릿을 선택 했습니다.](mvc/_static/new-project-select-empty-aspnet5-template.png)
 
-* *필드* *웹 응용 프로그램* 프로젝트 템플릿을 사용 하 여 새 ASP.NET Core 앱을 만듭니다. 프로젝트 이름을 *WebApp1*로 하 고 **개별 사용자 계정**에 대 한 인증 옵션을 선택 합니다. 이 앱의 이름을 *FullAspNetCore*로 바꿉니다. 이 프로젝트를 만들면 변환 시 시간이 절약 됩니다. 템플릿 생성 코드를 살펴보면 최종 결과를 보거나 변환 프로젝트에 코드를 복사할 수 있습니다. 템플릿 생성 프로젝트와 비교할 변환 단계에서 중단 되는 경우에도 유용 합니다.
+* *선택 사항:* *웹 응용 프로그램* 프로젝트 템플릿을 사용 하 여 새 ASP.NET Core 앱을 만듭니다. 프로젝트 이름을 *WebApp1*로 하 고 **개별 사용자 계정**에 대 한 인증 옵션을 선택 합니다. 이 앱의 이름을 *FullAspNetCore*로 바꿉니다. 이 프로젝트를 만들면 변환 시 시간이 절약 됩니다. 템플릿 생성 코드를 살펴보면 최종 결과를 보거나 변환 프로젝트에 코드를 복사할 수 있습니다. 템플릿 생성 프로젝트와 비교할 변환 단계에서 중단 되는 경우에도 유용 합니다.
 
 ## <a name="configure-the-site-to-use-mvc"></a>MVC를 사용 하도록 사이트 구성
 
@@ -61,13 +61,13 @@ ms.locfileid: "68371879"
 
 ::: moniker-end
 
-`Microsoft.AspNetCore.Mvc`는 ASP.NET Core MVC 프레임 워크입니다. `Microsoft.AspNetCore.StaticFiles`는 정적 파일 처리기입니다. ASP.NET Core 런타임은 모듈식 이며 정적 파일을 제공 하기 위해 명시적으로 옵트인 해야 합니다 ( [정적 파일](xref:fundamentals/static-files)참조).
+`Microsoft.AspNetCore.Mvc`은 ASP.NET Core MVC 프레임 워크입니다. `Microsoft.AspNetCore.StaticFiles`은 정적 파일 처리기입니다. ASP.NET Core 런타임은 모듈식 이며 정적 파일을 제공 하기 위해 명시적으로 옵트인 해야 합니다 ( [정적 파일](xref:fundamentals/static-files)참조).
 
 * *Startup.cs* 파일을 열고 다음 코드와 일치 하도록 코드를 변경 합니다.
 
   [!code-csharp[](mvc/sample/Startup.cs?highlight=13,26-31)]
 
-확장 `UseStaticFiles` 메서드는 정적 파일 처리기를 추가 합니다. 앞서 언급 했 듯이 ASP.NET 런타임은 모듈식 이며 정적 파일을 제공 하기 위해 명시적으로 옵트인 해야 합니다. 확장 `UseMvc` 메서드는 라우팅을 추가 합니다. 자세한 내용은 [응용 프로그램 시작](xref:fundamentals/startup) 및 [라우팅](xref:fundamentals/routing)을 참조 하세요.
+`UseStaticFiles` 확장 메서드는 정적 파일 처리기를 추가 합니다. 앞서 언급 했 듯이 ASP.NET 런타임은 모듈식 이며 정적 파일을 제공 하기 위해 명시적으로 옵트인 해야 합니다. `UseMvc` 확장 메서드는 라우팅을 추가 합니다. 자세한 내용은 [응용 프로그램 시작](xref:fundamentals/startup) 및 [라우팅](xref:fundamentals/routing)을 참조 하세요.
 
 ## <a name="add-a-controller-and-view"></a>컨트롤러 및 뷰 추가
 
@@ -107,7 +107,7 @@ ms.locfileid: "68371879"
 
 * 클라이언트 쪽 콘텐츠 (CSS, 글꼴 및 스크립트)
 
-* 컨트롤러
+* controllers
 
 * 뷰
 
@@ -115,17 +115,17 @@ ms.locfileid: "68371879"
 
 * 묶음
 
-* 필터
+* filters
 
 * 로그인/로그 아웃, Id (다음 자습서에서 수행 됨)
 
 ## <a name="controllers-and-views"></a>컨트롤러 및 뷰
 
-* ASP.NET MVC `HomeController` 의 각 메서드를 새 `HomeController`로 복사 합니다. ASP.NET MVC에서 기본 제공 템플릿의 컨트롤러 동작 메서드 반환 형식은 [Actionresult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx);입니다. ASP.NET Core MVC에서 작업 메서드는 대신을 `IActionResult` 반환 합니다. `ActionResult`는 `IActionResult`를 구현 하므로 작업 메서드의 반환 형식을 변경할 필요가 없습니다.
+* ASP.NET MVC `HomeController`의 각 메서드를 새 `HomeController`에 복사 합니다. ASP.NET MVC에서 기본 제공 템플릿의 컨트롤러 동작 메서드 반환 형식은 [Actionresult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx);입니다. ASP.NET Core MVC에서 작업 메서드는 대신 `IActionResult`을 반환 합니다. `ActionResult`에서 `IActionResult`를 구현 하므로 작업 메서드의 반환 형식을 변경할 필요가 없습니다.
 
-* ASP.NET MVC 프로젝트에서 MVC  ASP.NET Core 프로젝트에 *대 한*파일을 복사 합니다. 
+* ASP.NET MVC 프로젝트에서 MVC ASP.NET Core 프로젝트에 *대 한* *파일을* *복사 합니다.*
 
-* ASP.NET Core 앱을 실행 하 고 각 메서드를 테스트 합니다. 레이아웃 파일이 나 스타일을 아직 마이그레이션하지 않았으므로 렌더링 된 뷰에는 뷰 파일의 내용만 포함 됩니다. `About` 및`Contact` 뷰에 대 한 레이아웃 파일 생성 링크가 없으므로 브라우저에서 호출 해야 합니다 ( **4492** 을 프로젝트에서 사용 되는 포트 번호로 대체).
+* ASP.NET Core 앱을 실행 하 고 각 메서드를 테스트 합니다. 레이아웃 파일이 나 스타일을 아직 마이그레이션하지 않았으므로 렌더링 된 뷰에는 뷰 파일의 내용만 포함 됩니다. `About` 및 `Contact` 뷰에 대 한 레이아웃 파일 생성 링크가 없으므로 브라우저에서 호출 해야 합니다. **4492** 은 프로젝트에서 사용 되는 포트 번호로 바꿉니다.
 
   * `http://localhost:4492/home/about`
 
@@ -141,29 +141,29 @@ ms.locfileid: "68371879"
 
 * 이전 MVC 프로젝트의 *favicon* 파일을 ASP.NET Core 프로젝트의 *wwwroot* 폴더로 복사 합니다.
 
-이전 ASP.NET MVC 프로젝트는 해당 스타일에 대해 [부트스트랩](https://getbootstrap.com/) 을 사용 하 고 *Content* 및 *Scripts* 폴더에 부트스트랩 파일을 저장 합니다. 이전 ASP.NET MVC 프로젝트를 생성 한 템플릿이 레이아웃 파일의 부트스트랩을 참조 합니다 (*Views/Shared/_Layout. cshtml*). ASP.NET MVC 프로젝트에서 새 프로젝트의 *wwwroot* 폴더로 *부트스트랩 .js* 및 *부트스트랩 .css* 파일을 복사할 수 있습니다. 대신, 다음 섹션에서 CDNs를 사용 하 여 부트스트랩 (및 기타 클라이언트 쪽 라이브러리)에 대 한 지원을 추가 합니다.
+이전 ASP.NET MVC 프로젝트는 해당 스타일에 대해 [부트스트랩](https://getbootstrap.com/) 을 사용 하 고 *Content* 및 *Scripts* 폴더에 부트스트랩 파일을 저장 합니다. 이전 ASP.NET MVC 프로젝트를 생성 한 템플릿이 레이아웃 파일 (*Views/Shared/_Layout cshtml*)의 부트스트랩을 참조 합니다. ASP.NET MVC 프로젝트에서 새 프로젝트의 *wwwroot* 폴더로 *부트스트랩 .js* 및 *부트스트랩 .css* 파일을 복사할 수 있습니다. 대신, 다음 섹션에서 CDNs를 사용 하 여 부트스트랩 (및 기타 클라이언트 쪽 라이브러리)에 대 한 지원을 추가 합니다.
 
 ## <a name="migrate-the-layout-file"></a>레이아웃 파일 마이그레이션
 
-* 이전 ASP.NET MVC 프로젝트의 *views* 폴더에서 *파일을* ASP.NET Core 프로젝트의 *views* 폴더에 복사 합니다. *_Viewstart. cshtml* 파일은 ASP.NET Core MVC에서 변경 되지 않았습니다.
+* 이전 ASP.NET MVC 프로젝트의 *views* 폴더에 있는 *_ViewStart cshtml* 파일을 ASP.NET Core 프로젝트의 *views* 폴더에 복사 합니다. *_ViewStart cshtml* 파일은 ASP.NET Core MVC에서 변경 되지 않았습니다.
 
 * *Views/Shared* 폴더를 만듭니다.
 
-* *필드* *FullAspNetCore* MVC 프로젝트의 *views* 폴더에 있는 *_ViewImports* 를 ASP.NET Core 프로젝트의 *views* 폴더에 복사 합니다. *_ViewImports* 파일에서 네임 스페이스 선언을 제거 합니다. *_ViewImports* 파일은 모든 뷰 파일의 네임 스페이스를 제공 하 고 [태그 도우미](xref:mvc/views/tag-helpers/intro)에 가져옵니다. 태그 도우미는 새 레이아웃 파일에 사용 됩니다. *_ViewImports* 파일은 ASP.NET Core의 새로운 파일입니다.
+* *선택 사항:* *FullAspNetCore* MVC 프로젝트의 *views* 폴더에 있는 *_ViewImports* 를 ASP.NET Core 프로젝트의 *views* 폴더에 복사 합니다. *_ViewImports cshtml* 파일에서 네임 스페이스 선언을 제거 합니다. *_ViewImports cshtml* 파일은 모든 뷰 파일의 네임 스페이스를 제공 하 고 [태그 도우미](xref:mvc/views/tag-helpers/intro)에 가져옵니다. 태그 도우미는 새 레이아웃 파일에 사용 됩니다. *_ViewImports* 파일은 ASP.NET Core의 새로운 파일입니다.
 
-* 이전 ASP.NET MVC 프로젝트의 *views/shared* 폴더에 있는 *Layout. cshtml* 파일을 ASP.NET Core 프로젝트의 *views/shared* 폴더에 복사 합니다.
+* 이전 ASP.NET MVC 프로젝트의 *views/shared* 폴더에 있는 *_Layout cshtml* 파일을 ASP.NET Core 프로젝트의 *views/shared* 폴더에 복사 합니다.
 
-*Layout. cshtml* 파일을 열고 다음과 같이 변경 합니다 (완성 된 코드는 아래에 표시 됨).
+*_Layout cshtml* 파일을 열고 다음과 같이 변경 합니다 (완성 된 코드는 아래에 표시 됨).
 
-* 부트스트랩을 로드할 `@Styles.Render("~/Content/css")`요소로대체 합니다 (아래 참조).  `<link>`
+* `@Styles.Render("~/Content/css")`을 `<link>` 요소로 대체 하 여 *부트스트랩* 을 로드 합니다 (아래 참조).
 
 * `@Scripts.Render("~/bundles/modernizr")`를 제거합니다.
 
-* `@Html.Partial("_LoginPartial")` 줄을 주석으로 `@*...*@`처리 합니다. 자세한 내용은 [ASP.NET Core 인증 및 Id 마이그레이션을](xref:migration/identity) 참조 하세요.
+* `@Html.Partial("_LoginPartial")` 줄을 주석으로 처리 합니다 (`@*...*@`로 줄 포함). 자세한 내용은 [ASP.NET Core 인증 및 Id 마이그레이션을](xref:migration/identity) 참조 하세요.
 
-* 요소로 대체 `@Scripts.Render("~/bundles/jquery")` 합니다 (아래 참조). `<script>`
+* `@Scripts.Render("~/bundles/jquery")`를 `<script>` 요소로 바꿉니다 (아래 참조).
 
-* 요소로 대체 `@Scripts.Render("~/bundles/bootstrap")` 합니다 (아래 참조). `<script>`
+* `@Scripts.Render("~/bundles/bootstrap")`를 `<script>` 요소로 바꿉니다 (아래 참조).
 
 부트스트랩 CSS 포함에 대 한 대체 태그는 다음과 같습니다.
 
@@ -182,13 +182,13 @@ JQuery 및 부트스트랩 JavaScript 포함에 대 한 대체 태그는 다음�
     integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 ```
 
-업데이트 된 *레이아웃 cshtml* 파일은 다음과 같습니다.
+업데이트 된 *_Layout cshtml* 파일은 다음과 같습니다.
 
 [!code-cshtml[](mvc/sample/Views/Shared/_Layout.cshtml?highlight=7-10,29,41-44)]
 
 브라우저에서 사이트를 봅니다. 이제 올바른 스타일을 적절히 로드 해야 합니다.
 
-* *필드* 새 레이아웃 파일을 사용해 볼 수 있습니다. 이 프로젝트의 경우 *FullAspNetCore* 프로젝트에서 레이아웃 파일을 복사할 수 있습니다. 새 레이아웃 파일은 [태그 도우미](xref:mvc/views/tag-helpers/intro) 를 사용 하 고 다른 향상 된 기능을 포함 합니다.
+* *선택 사항:* 새 레이아웃 파일을 사용해 볼 수 있습니다. 이 프로젝트의 경우 *FullAspNetCore* 프로젝트에서 레이아웃 파일을 복사할 수 있습니다. 새 레이아웃 파일은 [태그 도우미](xref:mvc/views/tag-helpers/intro) 를 사용 하 고 다른 향상 된 기능을 포함 합니다.
 
 ## <a name="configure-bundling-and-minification"></a>번들링 및 축소 구성하기
 
@@ -196,13 +196,13 @@ JQuery 및 부트스트랩 JavaScript 포함에 대 한 대체 태그는 다음�
 
 ## <a name="solve-http-500-errors"></a>HTTP 500 오류 해결
 
-문제의 원인에 대 한 정보를 포함 하지 않는 HTTP 500 오류 메시지를 발생 시킬 수 있는 많은 문제가 있습니다. 예를 들어 *Views/_ViewImports* 파일에 프로젝트에 없는 네임 스페이스가 포함 된 경우 HTTP 500 오류가 발생 합니다. 기본적으로 ASP.NET Core 앱 `UseDeveloperExceptionPage` 에서는 확장이에 추가 `IApplicationBuilder` 되 고 구성이 *개발*될 때 실행 됩니다. 다음 코드에 자세히 설명 되어 있습니다.
+문제의 원인에 대 한 정보를 포함 하지 않는 HTTP 500 오류 메시지를 발생 시킬 수 있는 많은 문제가 있습니다. 예를 들어 *Views/_ViewImports cshtml* 파일에 프로젝트에 없는 네임 스페이스가 포함 된 경우 HTTP 500 오류가 발생 합니다. 기본적으로 ASP.NET Core apps에서는 `UseDeveloperExceptionPage` 확장이 `IApplicationBuilder`에 추가 되 고 구성이 *개발*될 때 실행 됩니다. 다음 코드에 자세히 설명 되어 있습니다.
 
 [!code-csharp[](mvc/sample/Startup.cs?highlight=19-22)]
 
 ASP.NET Core 웹 앱에서 처리 되지 않은 예외를 HTTP 500 오류 응답으로 변환 합니다. 일반적으로 서버에 대 한 잠재적으로 중요 한 정보를 노출 하지 않도록 하기 위해 오류 정보는 이러한 응답에 포함 되지 않습니다. 자세한 내용은 [오류 처리](../fundamentals/error-handling.md) 에서 **개발자 예외 페이지 사용** 을 참조 하세요.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:blazor/index>
 * <xref:mvc/views/tag-helpers/intro>

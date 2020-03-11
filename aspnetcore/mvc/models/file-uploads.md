@@ -1,28 +1,28 @@
 ---
 title: ASP.NET Core에서 파일 업로드
-author: guardrex
+author: rick-anderson
 description: 모델 바인딩 및 스트리밍을 사용하여 ASP.NET Core MVC에서 파일을 업로드하는 방법입니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/11/2020
+ms.date: 02/25/2020
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 56fd26c1864089558f5cd89f693dc86ea30c3331
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
-ms.translationtype: HT
+ms.openlocfilehash: fc71c39dd1aa70e6b092799fec00bd7bf66703e8
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77172467"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654087"
 ---
 # <a name="upload-files-in-aspnet-core"></a>ASP.NET Core에서 파일 업로드
 
-작성자: [Luke Latham](https://github.com/guardrex), [Steve Smith](https://ardalis.com/) 및 [Rutger Storm](https://github.com/rutix)
+작성자, [Steve Smith](https://ardalis.com/) 및 [Rutger 스톰](https://github.com/rutix)
 
 ::: moniker range=">= aspnetcore-3.0"
 
 ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩을 사용하여 하나 이상의 파일을 업로드하고, 대용량 파일의 경우에는 버퍼링되지 않은 스트리밍을 지원합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="security-considerations"></a>보안 고려 사항
 
@@ -36,9 +36,9 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
 
 * 전용 파일 업로드 영역(바람직하게는 시스템 드라이브가 아닌 위치)에 파일을 업로드합니다. 전용 위치를 사용하면 업로드된 파일에 대한 보안 제한을 더 쉽게 적용할 수 있습니다. 파일 업로드 위치에 대한 실행 권한을 사용하지 않도록 설정합니다.&dagger;
 * 업로드된 파일을 앱과 동일한 디렉터리 트리에 보관하지 **마세요**.&dagger;
-* 앱에 의해 결정된 안전한 파일 이름을 사용합니다. 사용자가 제공한 파일 이름이나 업로드된 파일의 신뢰할 수 없는 파일 이름을 사용하지 마세요.&dagger; 신뢰할 수 없는 파일 이름을 표시하려면 HTML로 인코딩합니다. 파일 이름을 로깅하거나 UI에 표시하는 경우를 예로 들 수 있습니다(Razor에서 자동으로 출력을 HTML로 인코딩).
+* 앱에 의해 결정된 안전한 파일 이름을 사용합니다. 사용자가 제공한 파일 이름 또는 업로드 된 파일의 신뢰할 수 없는 파일 이름을 사용 하지 마세요.&dagger; HTML을 표시 하는 경우 신뢰할 수 없는 파일 이름을 인코딩합니다. 파일 이름을 로깅하거나 UI에 표시하는 경우를 예로 들 수 있습니다(Razor에서 자동으로 출력을 HTML로 인코딩).
 * 앱의 디자인 사양으로 승인된 파일 확장명만 허용합니다.&dagger; <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
-* 서버에서 클라이언트 쪽 검사가 수행되는지 확인합니다.&dagger; 클라이언트 쪽 검사는 피하기 쉽습니다.
+* 서버에서 클라이언트 쪽 검사가 수행 되는지 확인 합니다.&dagger; 클라이언트 쪽 검사는 쉽게 피할 수 있습니다.
 * 업로드된 파일의 크기를 확인합니다. 대규모로 업로드되지 않도록 최대 크기 제한을 설정합니다.&dagger;
 * 업로드된 파일이 같은 이름의 파일을 덮어쓰면 안 되는 경우 파일을 업로드하기 전에 데이터베이스 또는 실제 스토리지에서 파일 이름을 확인합니다.
 * **파일이 저장되기 전에 업로드된 콘텐츠에 대해 바이러스/맬웨어 스캐너를 실행합니다.**
@@ -56,7 +56,7 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
 > 사용자의 파일을 수락할 때 공격 노출 영역을 줄이는 방법에 대한 자세한 내용은 다음 리소스를 참조하세요.
 >
 > * [무제한 파일 업로드](https://www.owasp.org/index.php/Unrestricted_File_Upload)
-> * [Azure Security: 사용자의 파일을 허용할 때 적절한 제어가 수행되는지 확인](/azure/security/azure-security-threat-modeling-tool-input-validation#controls-users)
+> * [Azure 보안: 사용자의 파일을 수락할 때 적절한 제어 장치가 있는지 확인](/azure/security/azure-security-threat-modeling-tool-input-validation#controls-users)
 
 샘플 앱의 예제를 포함하여 보안 조치를 구현하는 방법에 대한 자세한 내용은 [유효성 검사](#validation) 섹션을 참조하세요.
 
@@ -83,7 +83,7 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
   * 서비스는 일반적으로 단일 실패 지점에 노출되는 온-프레미스 솔루션에 비해 향상된 확장성 및 복원력을 제공합니다.
   * 서비스는 대용량 스토리지 인프라 시나리오에서 비용이 더 저렴할 수 있습니다.
 
-  자세한 내용은 [빠른 시작: .NET을 사용하여 개체 저장소에서 BLOB 만들기](/azure/storage/blobs/storage-quickstart-blobs-dotnet)를 참조하세요.
+  자세한 내용은 [빠른 시작: .net을 사용 하 여 개체 저장소에 blob 만들기](/azure/storage/blobs/storage-quickstart-blobs-dotnet)를 참조 하세요.
 
 ## <a name="file-upload-scenarios"></a>파일 업로드 시나리오
 
@@ -101,7 +101,7 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
 소용량 파일 버퍼링은 이 항목의 다음 섹션에서 설명합니다.
 
 * [실제 스토리지](#upload-small-files-with-buffered-model-binding-to-physical-storage)
-* [데이터베이스](#upload-small-files-with-buffered-model-binding-to-a-database)
+* [Database](#upload-small-files-with-buffered-model-binding-to-a-database)
 
 **스트리밍**
 
@@ -183,7 +183,7 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
 [Fetch API](https://caniuse.com/#feat=fetch)를 지원하지 않는 클라이언트에 대해 JavaScript로 양식 POST를 수행하려면 다음 방법 중 하나를 사용합니다.
 
 * Fetch Polyfill(예: [window.fetch polyfill (github/fetch)](https://github.com/github/fetch))을 사용합니다.
-* `XMLHttpRequest`을 사용하십시오. 예를 들어:
+* 대신 `XMLHttpRequest`를 다음은 그 예입니다.
 
   ```javascript
   <script>
@@ -201,20 +201,20 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
   </script>
   ```
 
-파일 업로드를 지원하려면 HTML 양식에서 `multipart/form-data`의 인코딩 유형(`enctype`)을 지정해야 합니다.
+파일 업로드를 지원하려면 HTML 양식에서 `enctype`의 인코딩 유형(`multipart/form-data`)을 지정해야 합니다.
 
-`files` 입력 요소가 다중 파일 업로드를 지원하려면 `<input>` 요소에 `multiple` 특성을 제공합니다.
+`files` 입력 요소가 다중 파일 업로드를 지원하려면 `multiple` 요소에 `<input>` 특성을 제공합니다.
 
 ```cshtml
 <input asp-for="FileUpload.FormFiles" type="file" multiple>
 ```
 
-서버에 업로드된 개별 파일은 <xref:Microsoft.AspNetCore.Http.IFormFile>을 사용하여 [모델 바인딩](xref:mvc/models/model-binding)을 통해 액세스할 수 있습니다. 샘플 앱은 데이터베이스 및 실제 스토리지 시나리오에 대한 다중 버퍼링된 파일 업로드를 보여 줍니다.
+서버에 업로드된 개별 파일은 [을 사용하여 ](xref:mvc/models/model-binding)모델 바인딩<xref:Microsoft.AspNetCore.Http.IFormFile>을 통해 액세스할 수 있습니다. 샘플 앱은 데이터베이스 및 실제 스토리지 시나리오에 대한 다중 버퍼링된 파일 업로드를 보여 줍니다.
 
 <a name="filename"></a>
 
 > [!WARNING]
-> 표시 및 로깅 이외에는 <xref:Microsoft.AspNetCore.Http.IFormFile>의 `FileName` 속성을 사용하지 **마세요**. 표시하거나 로깅할 경우 파일 이름을 HTML로 인코딩합니다. 공격자는 전체 경로나 상대 경로를 포함하여 악의적인 파일 이름을 제공할 수 있습니다. 애플리케이션에서 다음을 수행해야 합니다.
+> 표시 및 로깅 이외에는 **의**  속성을 사용하지 `FileName`마세요<xref:Microsoft.AspNetCore.Http.IFormFile>. 표시하거나 로깅할 경우 파일 이름을 HTML로 인코딩합니다. 공격자는 전체 경로나 상대 경로를 포함하여 악의적인 파일 이름을 제공할 수 있습니다. 애플리케이션에서 다음을 수행해야 합니다.
 >
 > * 사용자가 제공한 파일 이름에서 경로를 제거합니다.
 > * UI 또는 로깅을 위해 HTML로 인코딩되고 경로가 제거된 파일 이름을 저장합니다.
@@ -226,7 +226,7 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
 > string untrustedFileName = Path.GetFileName(pathName);
 > ```
 >
-> 지금까지 제시한 예제에서는 보안 고려 사항을 감안하지 않습니다. 추가 정보는 다음 섹션과 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)에서 제공합니다.
+> 지금까지 제시한 예제에서는 보안 고려 사항을 감안하지 않습니다. 추가 정보는 다음 섹션과 [샘플 앱](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)에서 제공합니다.
 >
 > * [보안 고려 사항](#security-considerations)
 > * [유효성 검사](#validation)
@@ -240,9 +240,9 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
   * [List](xref:System.Collections.Generic.List`1)\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
 
 > [!NOTE]
-> 바인딩은 이름을 기준으로 양식 파일을 일치시킵니다. 예를 들어 `<input type="file" name="formFile">`의 HTML `name` 값은 바인딩된 C# 매개 변수/속성(`FormFile`)과 일치해야 합니다. 자세한 내용은 [이름 특성 값을 POST 메서드의 매개 변수 이름과 일치](#match-name-attribute-value-to-parameter-name-of-post-method) 섹션을 참조하세요.
+> 바인딩은 이름을 기준으로 양식 파일을 일치시킵니다. 예를 들어 `name`의 HTML `<input type="file" name="formFile">` 값은 바인딩된 C# 매개 변수/속성(`FormFile`)과 일치해야 합니다. 자세한 내용은 [이름 특성 값을 POST 메서드의 매개 변수 이름과 일치](#match-name-attribute-value-to-parameter-name-of-post-method) 섹션을 참조하세요.
 
-다음 예제가 하는 일:
+다음 예제를 참조하세요.
 
 * 하나 이상의 업로드된 파일을 반복합니다.
 * [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*)을 사용하여 파일 이름을 포함하는 파일 전체 경로를 반환합니다. 
@@ -270,7 +270,7 @@ public async Task<IActionResult> OnPostUploadAsync(List<IFormFile> files)
     // Process uploaded files
     // Don't rely on or trust the FileName property without validation.
 
-    return Ok(new { count = files.Count, size, filePath });
+    return Ok(new { count = files.Count, size });
 }
 ```
 
@@ -393,18 +393,18 @@ public async Task<IActionResult> OnPostUploadAsync()
 * *Pages/BufferedSingleFileUploadDb.cshtml.cs*
 
 > [!WARNING]
-> 관계형 데이터베이스에 이진 데이터를 저장할 경우 성능에 나쁜 영향을 줄 수 있으므로 주의하세요.
+> 관계형 데이터베이스에 이진 데이터를 저장하는 경우 성능에 나쁜 영향을 줄 수 있으므로 주의하세요.
 >
-> 유효성 검사 없이 <xref:Microsoft.AspNetCore.Http.IFormFile>의 `FileName` 속성을 의존하거나 신뢰하지 마세요. `FileName` 속성은 반드시 HTML 인코딩 후 표시 목적으로만 사용해야 합니다.
+> 유효성 검사 없이 `FileName`의 <xref:Microsoft.AspNetCore.Http.IFormFile> 속성을 의존하거나 신뢰하지 마세요. `FileName` 속성은 반드시 HTML 인코딩 후 표시 목적으로만 사용해야 합니다.
 >
-> 제시한 예제에서는 보안 고려 사항을 감안하지 않습니다. 추가 정보는 다음 섹션과 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)에서 제공합니다.
+> 제시한 예제에서는 보안 고려 사항을 감안하지 않습니다. 추가 정보는 다음 섹션과 [샘플 앱](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)에서 제공합니다.
 >
 > * [보안 고려 사항](#security-considerations)
 > * [유효성 검사](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>스트리밍을 사용하여 대용량 파일 업로드
 
-다음 예제에서는 JavaScript를 사용하여 컨트롤러 작업에 파일을 스트리밍하는 방법을 보여 줍니다. 사용자 지정 필터 특성을 사용하여 파일의 위조 방지 토큰이 생성되고 요청 본문 대신 클라이언트 HTTP 헤더에 전달됩니다. 작업 메서드에서 업로드된 데이터를 직접 처리하므로 다른 사용자 지정 필터에서 형식 모델 바인딩을 사용할 수 없습니다. 작업 내에서 양식의 콘텐츠는 각 개별 `MultipartSection`을 읽고 적절하게 파일을 처리하거나 콘텐츠를 저장하는 `MultipartReader`를 사용하여 읽습니다. 다중 파트 섹션을 읽은 후 작업에서 자체 모델 바인딩을 수행합니다.
+다음 예제에서는 JavaScript를 사용하여 컨트롤러 작업에 파일을 스트리밍하는 방법을 보여 줍니다. 사용자 지정 필터 특성을 사용하여 파일의 위조 방지 토큰이 생성되고 요청 본문 대신 클라이언트 HTTP 헤더에 전달됩니다. 작업 메서드에서 업로드된 데이터를 직접 처리하므로 다른 사용자 지정 필터에서 형식 모델 바인딩을 사용할 수 없습니다. 작업 내에서 양식의 콘텐츠는 각 개별 `MultipartReader`을 읽고 적절하게 파일을 처리하거나 콘텐츠를 저장하는 `MultipartSection`를 사용하여 읽습니다. 다중 파트 섹션을 읽은 후 작업에서 자체 모델 바인딩을 수행합니다.
 
 초기 페이지 응답에서는 양식을 로드하고 위조 방지 토큰을 쿠키에 저장합니다(`GenerateAntiforgeryTokenCookieAttribute` 특성을 통해). 이 특성은 ASP.NET Core의 기본 제공 [위조 방지 지원](xref:security/anti-request-forgery)을 사용하여 요청 토큰으로 쿠키를 설정합니다.
 
@@ -414,7 +414,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Filters/ModelBinding.cs?name=snippet_DisableFormValueModelBindingAttribute)]
 
-샘플 앱에서 `GenerateAntiforgeryTokenCookieAttribute` 및 `DisableFormValueModelBindingAttribute`는 [Razor Pages 규칙](xref:razor-pages/razor-pages-conventions)을 사용하여 `Startup.ConfigureServices` 내 `/StreamedSingleFileUploadDb` 및 `/StreamedSingleFileUploadPhysical` 페이지의 애플리케이션 모델에 필터로 적용됩니다.
+샘플 앱에서 `GenerateAntiforgeryTokenCookieAttribute` 및 `DisableFormValueModelBindingAttribute`는 `/StreamedSingleFileUploadDb`Razor Pages 규칙`/StreamedSingleFileUploadPhysical`을 사용하여 `Startup.ConfigureServices` 내 [ 및 ](xref:razor-pages/razor-pages-conventions) 페이지의 애플리케이션 모델에 필터로 적용됩니다.
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Startup.cs?name=snippet_AddRazorPages&highlight=8-11,17-20)]
 
@@ -436,7 +436,7 @@ EF Core를 사용하여 데이터베이스에 스트리밍하기 위한 전체 `
 
 ## <a name="validation"></a>유효성 검사
 
-샘플 앱의 `FileHelpers` 클래스는 버퍼링된 <xref:Microsoft.AspNetCore.Http.IFormFile> 및 스트리밍된 파일 업로드에 대한 여러 검사를 보여 줍니다. 샘플 앱에서 <xref:Microsoft.AspNetCore.Http.IFormFile> 버퍼링된 파일 업로드를 처리하려면 *Utilities/FileHelpers.cs* 파일에서 `ProcessFormFile` 메서드를 참조하세요. 스트리밍된 파일의 처리는 동일한 파일의 `ProcessStreamedFile` 메서드를 참조하세요.
+샘플 앱의 `FileHelpers` 클래스는 버퍼링된 <xref:Microsoft.AspNetCore.Http.IFormFile> 및 스트리밍된 파일 업로드에 대한 여러 검사를 보여 줍니다. 샘플 앱에서 <xref:Microsoft.AspNetCore.Http.IFormFile> 버퍼링된 파일 업로드를 처리하려면 `ProcessFormFile`Utilities/FileHelpers.cs*파일에서* 메서드를 참조하세요. 스트리밍된 파일의 처리는 동일한 파일의 `ProcessStreamedFile` 메서드를 참조하세요.
 
 > [!WARNING]
 > 샘플 앱에서 보여 주는 유효성 검사 처리 메서드는 업로드된 파일의 내용을 검사하지 않습니다. 대부분의 프로덕션 시나리오에서는 사용자 또는 다른 시스템에서 파일을 사용할 수 있도록 하기 전에 파일에 바이러스/맬웨어 스캐너 API를 사용합니다.
@@ -456,7 +456,7 @@ EF Core를 사용하여 데이터베이스에 스트리밍하기 위한 전체 `
 
 ### <a name="file-extension-validation"></a>파일 확장명 유효성 검사
 
-업로드된 파일의 확장명을 허용된 확장명 목록에 따라 확인해야 합니다. 예를 들어:
+업로드된 파일의 확장명을 허용된 확장명 목록에 따라 확인해야 합니다. 다음은 그 예입니다.
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -522,7 +522,7 @@ Razor 외부에서는 항상 사용자 요청의 파일 이름 콘텐츠를 <xre
 
 업로드된 파일의 크기를 제한합니다.
 
-샘플 앱에서 파일 크기는 2MB(바이트 단위로 표시)로 제한됩니다. 이 제한은 *appsettings.json* 파일의 [구성](xref:fundamentals/configuration/index)을 통해 제공됩니다.
+샘플 앱에서 파일 크기는 2MB(바이트 단위로 표시)로 제한됩니다. 이 제한은 [appsettings.json](xref:fundamentals/configuration/index) 파일의 *구성*을 통해 제공됩니다.
 
 ```json
 {
@@ -559,7 +559,7 @@ if (formFile.Length > _fileSizeLimit)
 
 양식 데이터를 POST하거나 JavaScript의 `FormData`를 직접 사용하는 비 Razor 양식에서 양식의 요소 또는 `FormData`에 지정된 이름은 컨트롤러의 작업에서 매개 변수 이름과 일치해야 합니다.
 
-다음 예제에서는
+다음 예제에서,
 
 * `<input>` 요소를 사용하는 경우 `name` 특성은 값 `battlePlans`로 설정됩니다.
 
@@ -595,7 +595,7 @@ C# 메서드(`battlePlans`)의 매개 변수와 일치하는 이름을 사용합
 
 ### <a name="multipart-body-length-limit"></a>다중 파트 본문 길이 제한
 
-<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>에서 각 다중 파트 본문의 길이에 대한 제한을 설정합니다. 양식 섹션이 이 제한을 초과하면 구문 분석할 때 <xref:System.IO.InvalidDataException>이 throw됩니다. 기본값은 134,217,728(128MB)입니다. `Startup.ConfigureServices`에서 <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> 설정을 사용하여 제한을 사용자 지정합니다.
+<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>에서 각 다중 파트 본문의 길이에 대한 제한을 설정합니다. 양식 섹션이 이 제한을 초과하면 구문 분석할 때 <xref:System.IO.InvalidDataException>이 throw됩니다. 기본값은 134,217,728(128MB)입니다. <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>에서 `Startup.ConfigureServices` 설정을 사용하여 제한을 사용자 지정합니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -610,7 +610,7 @@ public void ConfigureServices(IServiceCollection services)
 
 <xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute>는 단일 페이지 또는 작업에 대해 <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>을 설정하는 데 사용됩니다.
 
-Razor Pages 앱에서 `Startup.ConfigureServices`의 [규칙](xref:razor-pages/razor-pages-conventions)을 사용하여 필터를 적용합니다.
+Razor Pages 앱에서 [의 ](xref:razor-pages/razor-pages-conventions)규칙`Startup.ConfigureServices`을 사용하여 필터를 적용합니다.
 
 ```csharp
 services.AddRazorPages()
@@ -658,7 +658,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute>는 단일 페이지 또는 작업에 대해 [ MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size)를 설정하는 데 사용됩니다.
 
-Razor Pages 앱에서 `Startup.ConfigureServices`의 [규칙](xref:razor-pages/razor-pages-conventions)을 사용하여 필터를 적용합니다.
+Razor Pages 앱에서 [의 ](xref:razor-pages/razor-pages-conventions)규칙`Startup.ConfigureServices`을 사용하여 필터를 적용합니다.
 
 ```csharp
 services.AddRazorPages()
@@ -714,7 +714,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 </system.webServer>
 ```
 
-이 설정은 IIS에만 적용됩니다. Kestrel에서 호스팅하는 경우 기본적으로 이 동작은 발생하지 않습니다. 자세한 내용은 [요청 제한 \<requestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/)을 참조하세요.
+이 설정은 IIS에만 적용됩니다. Kestrel에서 호스팅하는 경우 기본적으로 동작이 발생하지 않습니다. 자세한 내용은 [요청 제한 \<requestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/)을 참조하세요.
 
 ASP.NET Core 모듈의 제한 사항 또는 IIS 요청 필터링 모듈의 존재로 인해 업로드가 2GB 또는 4GB로 제한될 수 있습니다. 자세한 내용은 [크기가 2GB 이상인 파일을 업로드할 수 없음(dotnet/AspNetCore #2711)](https://github.com/dotnet/AspNetCore/issues/2711)을 참조하세요.
 
@@ -737,9 +737,9 @@ The request filtering module is configured to deny a request that exceeds the re
 
 연결 오류 및 서버 연결 다시 설정은 업로드된 파일이 Kestrel의 최대 요청 본문 크기를 초과함을 나타낼 수 있습니다. 자세한 내용은 [Kestrel 최대 요청 본문 크기](#kestrel-maximum-request-body-size) 섹션을 참조하세요. Kestrel 클라이언트 연결 제한을 조정해야 할 수도 있습니다.
 
-### <a name="null-reference-exception-with-iformfile"></a>IFormFile 사용 시 Null 참조 예외
+### <a name="null-reference-exception-with-iformfile"></a>IFormFile을 사용한 Null 참조 예외
 
-컨트롤러에서 <xref:Microsoft.AspNetCore.Http.IFormFile>을 사용하여 업로드된 파일을 수락하지만 값이 `null`이면 HTML 양식에서 `multipart/form-data`의 `enctype` 값을 지정하는지 확인합니다. `<form>` 요소에서 이 특성이 설정되지 않으면 파일 업로드가 실행되지 않고 바인딩된 <xref:Microsoft.AspNetCore.Http.IFormFile> 인수는 모두 `null`이 됩니다. 또한 [양식 데이터의 업로드 이름 지정이 앱의 이름 지정과 일치](#match-name-attribute-value-to-parameter-name-of-post-method)하는지 확인합니다.
+컨트롤러에서 <xref:Microsoft.AspNetCore.Http.IFormFile>을 사용하여 업로드된 파일을 수락하지만 값이 `null`이면 HTML 양식에서 `enctype`의 `multipart/form-data` 값을 지정하는지 확인합니다. `<form>` 요소에서 이 특성이 설정되지 않으면 파일 업로드가 실행되지 않고 바인딩된 <xref:Microsoft.AspNetCore.Http.IFormFile> 인수는 모두 `null`이 됩니다. 또한 [양식 데이터의 업로드 이름 지정이 앱의 이름 지정과 일치](#match-name-attribute-value-to-parameter-name-of-post-method)하는지 확인합니다.
 
 ### <a name="stream-was-too-long"></a>스트림이 너무 깁니다.
 
@@ -751,7 +751,7 @@ The request filtering module is configured to deny a request that exceeds the re
 
 ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩을 사용하여 하나 이상의 파일을 업로드하고, 대용량 파일의 경우에는 버퍼링되지 않은 스트리밍을 지원합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="security-considerations"></a>보안 고려 사항
 
@@ -765,9 +765,9 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
 
 * 전용 파일 업로드 영역(바람직하게는 시스템 드라이브가 아닌 위치)에 파일을 업로드합니다. 전용 위치를 사용하면 업로드된 파일에 대한 보안 제한을 더 쉽게 적용할 수 있습니다. 파일 업로드 위치에 대한 실행 권한을 사용하지 않도록 설정합니다.&dagger;
 * 업로드된 파일을 앱과 동일한 디렉터리 트리에 보관하지 **마세요**.&dagger;
-* 앱에 의해 결정된 안전한 파일 이름을 사용합니다. 사용자가 제공한 파일 이름이나 업로드된 파일의 신뢰할 수 없는 파일 이름을 사용하지 마세요.&dagger; 신뢰할 수 없는 파일 이름을 표시하려면 HTML로 인코딩합니다. 파일 이름을 로깅하거나 UI에 표시하는 경우를 예로 들 수 있습니다(Razor에서 자동으로 출력을 HTML로 인코딩).
+* 앱에 의해 결정된 안전한 파일 이름을 사용합니다. 사용자가 제공한 파일 이름 또는 업로드 된 파일의 신뢰할 수 없는 파일 이름을 사용 하지 마세요.&dagger; HTML을 표시 하는 경우 신뢰할 수 없는 파일 이름을 인코딩합니다. 파일 이름을 로깅하거나 UI에 표시하는 경우를 예로 들 수 있습니다(Razor에서 자동으로 출력을 HTML로 인코딩).
 * 앱의 디자인 사양으로 승인된 파일 확장명만 허용합니다.&dagger; <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
-* 서버에서 클라이언트 쪽 검사가 수행되는지 확인합니다.&dagger; 클라이언트 쪽 검사는 피하기 쉽습니다.
+* 서버에서 클라이언트 쪽 검사가 수행 되는지 확인 합니다.&dagger; 클라이언트 쪽 검사는 쉽게 피할 수 있습니다.
 * 업로드된 파일의 크기를 확인합니다. 대규모로 업로드되지 않도록 최대 크기 제한을 설정합니다.&dagger;
 * 업로드된 파일이 같은 이름의 파일을 덮어쓰면 안 되는 경우 파일을 업로드하기 전에 데이터베이스 또는 실제 스토리지에서 파일 이름을 확인합니다.
 * **파일이 저장되기 전에 업로드된 콘텐츠에 대해 바이러스/맬웨어 스캐너를 실행합니다.**
@@ -785,7 +785,7 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
 > 사용자의 파일을 수락할 때 공격 노출 영역을 줄이는 방법에 대한 자세한 내용은 다음 리소스를 참조하세요.
 >
 > * [무제한 파일 업로드](https://www.owasp.org/index.php/Unrestricted_File_Upload)
-> * [Azure Security: 사용자의 파일을 허용할 때 적절한 제어가 수행되는지 확인](/azure/security/azure-security-threat-modeling-tool-input-validation#controls-users)
+> * [Azure 보안: 사용자의 파일을 수락할 때 적절한 제어 장치가 있는지 확인](/azure/security/azure-security-threat-modeling-tool-input-validation#controls-users)
 
 샘플 앱의 예제를 포함하여 보안 조치를 구현하는 방법에 대한 자세한 내용은 [유효성 검사](#validation) 섹션을 참조하세요.
 
@@ -812,7 +812,7 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
   * 서비스는 일반적으로 단일 실패 지점에 노출되는 온-프레미스 솔루션에 비해 향상된 확장성 및 복원력을 제공합니다.
   * 서비스는 대용량 스토리지 인프라 시나리오에서 비용이 더 저렴할 수 있습니다.
 
-  자세한 내용은 [빠른 시작: .NET을 사용하여 개체 저장소에서 BLOB 만들기](/azure/storage/blobs/storage-quickstart-blobs-dotnet)를 참조하세요. 이 항목에서는 <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromFileAsync*>를 보여 주지만, <xref:System.IO.Stream>에서 작업할 때 <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromStreamAsync*>를 사용하여 <xref:System.IO.FileStream>을 Blob Storage에 저장할 수 있습니다.
+  자세한 내용은 [빠른 시작: .net을 사용 하 여 개체 저장소에 blob 만들기](/azure/storage/blobs/storage-quickstart-blobs-dotnet)를 참조 하세요. 이 항목에서는 <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromFileAsync*>를 보여 주지만, <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromStreamAsync*>에서 작업할 때 <xref:System.IO.FileStream>를 사용하여 <xref:System.IO.Stream>을 Blob Storage에 저장할 수 있습니다.
 
 ## <a name="file-upload-scenarios"></a>파일 업로드 시나리오
 
@@ -830,7 +830,7 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
 소용량 파일 버퍼링은 이 항목의 다음 섹션에서 설명합니다.
 
 * [실제 스토리지](#upload-small-files-with-buffered-model-binding-to-physical-storage)
-* [데이터베이스](#upload-small-files-with-buffered-model-binding-to-a-database)
+* [Database](#upload-small-files-with-buffered-model-binding-to-a-database)
 
 **스트리밍**
 
@@ -912,7 +912,7 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
 [Fetch API](https://caniuse.com/#feat=fetch)를 지원하지 않는 클라이언트에 대해 JavaScript로 양식 POST를 수행하려면 다음 방법 중 하나를 사용합니다.
 
 * Fetch Polyfill(예: [window.fetch polyfill (github/fetch)](https://github.com/github/fetch))을 사용합니다.
-* `XMLHttpRequest`을 사용하십시오. 예를 들어:
+* 대신 `XMLHttpRequest`를 다음은 그 예입니다.
 
   ```javascript
   <script>
@@ -930,20 +930,20 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
   </script>
   ```
 
-파일 업로드를 지원하려면 HTML 양식에서 `multipart/form-data`의 인코딩 유형(`enctype`)을 지정해야 합니다.
+파일 업로드를 지원하려면 HTML 양식에서 `enctype`의 인코딩 유형(`multipart/form-data`)을 지정해야 합니다.
 
-`files` 입력 요소가 다중 파일 업로드를 지원하려면 `<input>` 요소에 `multiple` 특성을 제공합니다.
+`files` 입력 요소가 다중 파일 업로드를 지원하려면 `multiple` 요소에 `<input>` 특성을 제공합니다.
 
 ```cshtml
 <input asp-for="FileUpload.FormFiles" type="file" multiple>
 ```
 
-서버에 업로드된 개별 파일은 <xref:Microsoft.AspNetCore.Http.IFormFile>을 사용하여 [모델 바인딩](xref:mvc/models/model-binding)을 통해 액세스할 수 있습니다. 샘플 앱은 데이터베이스 및 실제 스토리지 시나리오에 대한 다중 버퍼링된 파일 업로드를 보여 줍니다.
+서버에 업로드된 개별 파일은 [을 사용하여 ](xref:mvc/models/model-binding)모델 바인딩<xref:Microsoft.AspNetCore.Http.IFormFile>을 통해 액세스할 수 있습니다. 샘플 앱은 데이터베이스 및 실제 스토리지 시나리오에 대한 다중 버퍼링된 파일 업로드를 보여 줍니다.
 
 <a name="filename2"></a>
 
 > [!WARNING]
-> 표시 및 로깅 이외에는 <xref:Microsoft.AspNetCore.Http.IFormFile>의 `FileName` 속성을 사용하지 **마세요**. 표시하거나 로깅할 경우 파일 이름을 HTML로 인코딩합니다. 공격자는 전체 경로나 상대 경로를 포함하여 악의적인 파일 이름을 제공할 수 있습니다. 애플리케이션에서 다음을 수행해야 합니다.
+> 표시 및 로깅 이외에는 **의**  속성을 사용하지 `FileName`마세요<xref:Microsoft.AspNetCore.Http.IFormFile>. 표시하거나 로깅할 경우 파일 이름을 HTML로 인코딩합니다. 공격자는 전체 경로나 상대 경로를 포함하여 악의적인 파일 이름을 제공할 수 있습니다. 애플리케이션에서 다음을 수행해야 합니다.
 >
 > * 사용자가 제공한 파일 이름에서 경로를 제거합니다.
 > * UI 또는 로깅을 위해 HTML로 인코딩되고 경로가 제거된 파일 이름을 저장합니다.
@@ -955,7 +955,7 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
 > string untrustedFileName = Path.GetFileName(pathName);
 > ```
 >
-> 지금까지 제시한 예제에서는 보안 고려 사항을 감안하지 않습니다. 추가 정보는 다음 섹션과 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)에서 제공합니다.
+> 지금까지 제시한 예제에서는 보안 고려 사항을 감안하지 않습니다. 추가 정보는 다음 섹션과 [샘플 앱](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)에서 제공합니다.
 >
 > * [보안 고려 사항](#security-considerations)
 > * [유효성 검사](#validation)
@@ -969,9 +969,9 @@ ASP.NET Core는 소용량 파일의 경우에는 버퍼링된 모델 바인딩�
   * [List](xref:System.Collections.Generic.List`1)\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
 
 > [!NOTE]
-> 바인딩은 이름을 기준으로 양식 파일을 일치시킵니다. 예를 들어 `<input type="file" name="formFile">`의 HTML `name` 값은 바인딩된 C# 매개 변수/속성(`FormFile`)과 일치해야 합니다. 자세한 내용은 [이름 특성 값을 POST 메서드의 매개 변수 이름과 일치](#match-name-attribute-value-to-parameter-name-of-post-method) 섹션을 참조하세요.
+> 바인딩은 이름을 기준으로 양식 파일을 일치시킵니다. 예를 들어 `name`의 HTML `<input type="file" name="formFile">` 값은 바인딩된 C# 매개 변수/속성(`FormFile`)과 일치해야 합니다. 자세한 내용은 [이름 특성 값을 POST 메서드의 매개 변수 이름과 일치](#match-name-attribute-value-to-parameter-name-of-post-method) 섹션을 참조하세요.
 
-다음 예제가 하는 일:
+다음 예제를 참조하세요.
 
 * 하나 이상의 업로드된 파일을 반복합니다.
 * [Path.GetTempFileName](xref:System.IO.Path.GetTempFileName*)을 사용하여 파일 이름을 포함하는 파일 전체 경로를 반환합니다. 
@@ -999,7 +999,7 @@ public async Task<IActionResult> OnPostUploadAsync(List<IFormFile> files)
     // Process uploaded files
     // Don't rely on or trust the FileName property without validation.
 
-    return Ok(new { count = files.Count, size, filePath });
+    return Ok(new { count = files.Count, size });
 }
 ```
 
@@ -1122,18 +1122,18 @@ public async Task<IActionResult> OnPostUploadAsync()
 * *Pages/BufferedSingleFileUploadDb.cshtml.cs*
 
 > [!WARNING]
-> 관계형 데이터베이스에 이진 데이터를 저장할 경우 성능에 나쁜 영향을 줄 수 있으므로 주의하세요.
+> 관계형 데이터베이스에 이진 데이터를 저장하는 경우 성능에 나쁜 영향을 줄 수 있으므로 주의하세요.
 >
-> 유효성 검사 없이 <xref:Microsoft.AspNetCore.Http.IFormFile>의 `FileName` 속성을 의존하거나 신뢰하지 마세요. `FileName` 속성은 반드시 HTML 인코딩 후 표시 목적으로만 사용해야 합니다.
+> 유효성 검사 없이 `FileName`의 <xref:Microsoft.AspNetCore.Http.IFormFile> 속성을 의존하거나 신뢰하지 마세요. `FileName` 속성은 반드시 HTML 인코딩 후 표시 목적으로만 사용해야 합니다.
 >
-> 제시한 예제에서는 보안 고려 사항을 감안하지 않습니다. 추가 정보는 다음 섹션과 [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)에서 제공합니다.
+> 제시한 예제에서는 보안 고려 사항을 감안하지 않습니다. 추가 정보는 다음 섹션과 [샘플 앱](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)에서 제공합니다.
 >
 > * [보안 고려 사항](#security-considerations)
 > * [유효성 검사](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>스트리밍을 사용하여 대용량 파일 업로드
 
-다음 예제에서는 JavaScript를 사용하여 컨트롤러 작업에 파일을 스트리밍하는 방법을 보여 줍니다. 사용자 지정 필터 특성을 사용하여 파일의 위조 방지 토큰이 생성되고 요청 본문 대신 클라이언트 HTTP 헤더에 전달됩니다. 작업 메서드에서 업로드된 데이터를 직접 처리하므로 다른 사용자 지정 필터에서 형식 모델 바인딩을 사용할 수 없습니다. 작업 내에서 양식의 콘텐츠는 각 개별 `MultipartSection`을 읽고 적절하게 파일을 처리하거나 콘텐츠를 저장하는 `MultipartReader`를 사용하여 읽습니다. 다중 파트 섹션을 읽은 후 작업에서 자체 모델 바인딩을 수행합니다.
+다음 예제에서는 JavaScript를 사용하여 컨트롤러 작업에 파일을 스트리밍하는 방법을 보여 줍니다. 사용자 지정 필터 특성을 사용하여 파일의 위조 방지 토큰이 생성되고 요청 본문 대신 클라이언트 HTTP 헤더에 전달됩니다. 작업 메서드에서 업로드된 데이터를 직접 처리하므로 다른 사용자 지정 필터에서 형식 모델 바인딩을 사용할 수 없습니다. 작업 내에서 양식의 콘텐츠는 각 개별 `MultipartReader`을 읽고 적절하게 파일을 처리하거나 콘텐츠를 저장하는 `MultipartSection`를 사용하여 읽습니다. 다중 파트 섹션을 읽은 후 작업에서 자체 모델 바인딩을 수행합니다.
 
 초기 페이지 응답에서는 양식을 로드하고 위조 방지 토큰을 쿠키에 저장합니다(`GenerateAntiforgeryTokenCookieAttribute` 특성을 통해). 이 특성은 ASP.NET Core의 기본 제공 [위조 방지 지원](xref:security/anti-request-forgery)을 사용하여 요청 토큰으로 쿠키를 설정합니다.
 
@@ -1143,7 +1143,7 @@ public async Task<IActionResult> OnPostUploadAsync()
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Filters/ModelBinding.cs?name=snippet_DisableFormValueModelBindingAttribute)]
 
-샘플 앱에서 `GenerateAntiforgeryTokenCookieAttribute` 및 `DisableFormValueModelBindingAttribute`는 [Razor Pages 규칙](xref:razor-pages/razor-pages-conventions)을 사용하여 `Startup.ConfigureServices` 내 `/StreamedSingleFileUploadDb` 및 `/StreamedSingleFileUploadPhysical` 페이지의 애플리케이션 모델에 필터로 적용됩니다.
+샘플 앱에서 `GenerateAntiforgeryTokenCookieAttribute` 및 `DisableFormValueModelBindingAttribute`는 `/StreamedSingleFileUploadDb`Razor Pages 규칙`/StreamedSingleFileUploadPhysical`을 사용하여 `Startup.ConfigureServices` 내 [ 및 ](xref:razor-pages/razor-pages-conventions) 페이지의 애플리케이션 모델에 필터로 적용됩니다.
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Startup.cs?name=snippet_AddMvc&highlight=8-11,17-20)]
 
@@ -1165,7 +1165,7 @@ EF Core를 사용하여 데이터베이스에 스트리밍하기 위한 전체 `
 
 ## <a name="validation"></a>유효성 검사
 
-샘플 앱의 `FileHelpers` 클래스는 버퍼링된 <xref:Microsoft.AspNetCore.Http.IFormFile> 및 스트리밍된 파일 업로드에 대한 여러 검사를 보여 줍니다. 샘플 앱에서 <xref:Microsoft.AspNetCore.Http.IFormFile> 버퍼링된 파일 업로드를 처리하려면 *Utilities/FileHelpers.cs* 파일에서 `ProcessFormFile` 메서드를 참조하세요. 스트리밍된 파일의 처리는 동일한 파일의 `ProcessStreamedFile` 메서드를 참조하세요.
+샘플 앱의 `FileHelpers` 클래스는 버퍼링된 <xref:Microsoft.AspNetCore.Http.IFormFile> 및 스트리밍된 파일 업로드에 대한 여러 검사를 보여 줍니다. 샘플 앱에서 <xref:Microsoft.AspNetCore.Http.IFormFile> 버퍼링된 파일 업로드를 처리하려면 `ProcessFormFile`Utilities/FileHelpers.cs*파일에서* 메서드를 참조하세요. 스트리밍된 파일의 처리는 동일한 파일의 `ProcessStreamedFile` 메서드를 참조하세요.
 
 > [!WARNING]
 > 샘플 앱에서 보여 주는 유효성 검사 처리 메서드는 업로드된 파일의 내용을 검사하지 않습니다. 대부분의 프로덕션 시나리오에서는 사용자 또는 다른 시스템에서 파일을 사용할 수 있도록 하기 전에 파일에 바이러스/맬웨어 스캐너 API를 사용합니다.
@@ -1185,7 +1185,7 @@ EF Core를 사용하여 데이터베이스에 스트리밍하기 위한 전체 `
 
 ### <a name="file-extension-validation"></a>파일 확장명 유효성 검사
 
-업로드된 파일의 확장명을 허용된 확장명 목록에 따라 확인해야 합니다. 예를 들어:
+업로드된 파일의 확장명을 허용된 확장명 목록에 따라 확인해야 합니다. 다음은 그 예입니다.
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -1251,7 +1251,7 @@ Razor 외부에서는 항상 사용자 요청의 파일 이름 콘텐츠를 <xre
 
 업로드된 파일의 크기를 제한합니다.
 
-샘플 앱에서 파일 크기는 2MB(바이트 단위로 표시)로 제한됩니다. 이 제한은 *appsettings.json* 파일의 [구성](xref:fundamentals/configuration/index)을 통해 제공됩니다.
+샘플 앱에서 파일 크기는 2MB(바이트 단위로 표시)로 제한됩니다. 이 제한은 [appsettings.json](xref:fundamentals/configuration/index) 파일의 *구성*을 통해 제공됩니다.
 
 ```json
 {
@@ -1288,7 +1288,7 @@ if (formFile.Length > _fileSizeLimit)
 
 양식 데이터를 POST하거나 JavaScript의 `FormData`를 직접 사용하는 비 Razor 양식에서 양식의 요소 또는 `FormData`에 지정된 이름은 컨트롤러의 작업에서 매개 변수 이름과 일치해야 합니다.
 
-다음 예제에서는
+다음 예제에서,
 
 * `<input>` 요소를 사용하는 경우 `name` 특성은 값 `battlePlans`로 설정됩니다.
 
@@ -1324,7 +1324,7 @@ C# 메서드(`battlePlans`)의 매개 변수와 일치하는 이름을 사용합
 
 ### <a name="multipart-body-length-limit"></a>다중 파트 본문 길이 제한
 
-<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>에서 각 다중 파트 본문의 길이에 대한 제한을 설정합니다. 양식 섹션이 이 제한을 초과하면 구문 분석할 때 <xref:System.IO.InvalidDataException>이 throw됩니다. 기본값은 134,217,728(128MB)입니다. `Startup.ConfigureServices`에서 <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> 설정을 사용하여 제한을 사용자 지정합니다.
+<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>에서 각 다중 파트 본문의 길이에 대한 제한을 설정합니다. 양식 섹션이 이 제한을 초과하면 구문 분석할 때 <xref:System.IO.InvalidDataException>이 throw됩니다. 기본값은 134,217,728(128MB)입니다. <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>에서 `Startup.ConfigureServices` 설정을 사용하여 제한을 사용자 지정합니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -1339,7 +1339,7 @@ public void ConfigureServices(IServiceCollection services)
 
 <xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute>는 단일 페이지 또는 작업에 대해 <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>을 설정하는 데 사용됩니다.
 
-Razor Pages 앱에서 `Startup.ConfigureServices`의 [규칙](xref:razor-pages/razor-pages-conventions)을 사용하여 필터를 적용합니다.
+Razor Pages 앱에서 [의 ](xref:razor-pages/razor-pages-conventions)규칙`Startup.ConfigureServices`을 사용하여 필터를 적용합니다.
 
 ```csharp
 services.AddMvc()
@@ -1385,7 +1385,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 
 <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute>는 단일 페이지 또는 작업에 대해 [ MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size)를 설정하는 데 사용됩니다.
 
-Razor Pages 앱에서 `Startup.ConfigureServices`의 [규칙](xref:razor-pages/razor-pages-conventions)을 사용하여 필터를 적용합니다.
+Razor Pages 앱에서 [의 ](xref:razor-pages/razor-pages-conventions)규칙`Startup.ConfigureServices`을 사용하여 필터를 적용합니다.
 
 ```csharp
 services.AddMvc()
@@ -1436,7 +1436,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 </system.webServer>
 ```
 
-이 설정은 IIS에만 적용됩니다. Kestrel에서 호스팅하는 경우 기본적으로 이 동작은 발생하지 않습니다. 자세한 내용은 [요청 제한 \<requestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/)을 참조하세요.
+이 설정은 IIS에만 적용됩니다. Kestrel에서 호스팅하는 경우 기본적으로 동작이 발생하지 않습니다. 자세한 내용은 [요청 제한 \<requestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/)을 참조하세요.
 
 ASP.NET Core 모듈의 제한 사항 또는 IIS 요청 필터링 모듈의 존재로 인해 업로드가 2GB 또는 4GB로 제한될 수 있습니다. 자세한 내용은 [크기가 2GB 이상인 파일을 업로드할 수 없음(dotnet/AspNetCore #2711)](https://github.com/dotnet/AspNetCore/issues/2711)을 참조하세요.
 
@@ -1459,9 +1459,9 @@ The request filtering module is configured to deny a request that exceeds the re
 
 연결 오류 및 서버 연결 다시 설정은 업로드된 파일이 Kestrel의 최대 요청 본문 크기를 초과함을 나타낼 수 있습니다. 자세한 내용은 [Kestrel 최대 요청 본문 크기](#kestrel-maximum-request-body-size) 섹션을 참조하세요. Kestrel 클라이언트 연결 제한을 조정해야 할 수도 있습니다.
 
-### <a name="null-reference-exception-with-iformfile"></a>IFormFile 사용 시 Null 참조 예외
+### <a name="null-reference-exception-with-iformfile"></a>IFormFile을 사용한 Null 참조 예외
 
-컨트롤러에서 <xref:Microsoft.AspNetCore.Http.IFormFile>을 사용하여 업로드된 파일을 수락하지만 값이 `null`이면 HTML 양식에서 `multipart/form-data`의 `enctype` 값을 지정하는지 확인합니다. `<form>` 요소에서 이 특성이 설정되지 않으면 파일 업로드가 실행되지 않고 바인딩된 <xref:Microsoft.AspNetCore.Http.IFormFile> 인수는 모두 `null`이 됩니다. 또한 [양식 데이터의 업로드 이름 지정이 앱의 이름 지정과 일치](#match-name-attribute-value-to-parameter-name-of-post-method)하는지 확인합니다.
+컨트롤러에서 <xref:Microsoft.AspNetCore.Http.IFormFile>을 사용하여 업로드된 파일을 수락하지만 값이 `null`이면 HTML 양식에서 `enctype`의 `multipart/form-data` 값을 지정하는지 확인합니다. `<form>` 요소에서 이 특성이 설정되지 않으면 파일 업로드가 실행되지 않고 바인딩된 <xref:Microsoft.AspNetCore.Http.IFormFile> 인수는 모두 `null`이 됩니다. 또한 [양식 데이터의 업로드 이름 지정이 앱의 이름 지정과 일치](#match-name-attribute-value-to-parameter-name-of-post-method)하는지 확인합니다.
 
 ### <a name="stream-was-too-long"></a>스트림이 너무 깁니다.
 
@@ -1470,8 +1470,8 @@ The request filtering module is configured to deny a request that exceeds the re
 ::: moniker-end
 
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [무제한 파일 업로드](https://www.owasp.org/index.php/Unrestricted_File_Upload)
-* [Azure Security: 보안 프레임: 입력 유효성 검사 | 완화](/azure/security/azure-security-threat-modeling-tool-input-validation)
-* [Azure Cloud 디자인 패턴: 발레 키 패턴](/azure/architecture/patterns/valet-key)
+* [Azure 보안: 보안 프레임: 입력 유효성 검사 | 조치](/azure/security/azure-security-threat-modeling-tool-input-validation)
+* [Azure 클라우드 디자인 패턴: Valet 키 패턴](/azure/architecture/patterns/valet-key)

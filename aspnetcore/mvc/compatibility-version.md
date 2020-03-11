@@ -8,11 +8,11 @@ ms.custom: mvc
 ms.date: 9/25/2019
 uid: mvc/compatibility-version
 ms.openlocfilehash: b29e2ee49aaf0f557f1acd0cf03e9e82d5ea0105
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
-ms.translationtype: HT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75357733"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654807"
 ---
 # <a name="compatibility-version-for-aspnet-core-mvc"></a>ASP.NET Core MVC에 대한 호환성 버전
 
@@ -20,7 +20,7 @@ ms.locfileid: "75357733"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> 메서드는 ASP.NET Core 3.0 앱에 대해 작동하지 않습니다. 즉, <xref:Microsoft.AspNetCore.Mvc.CompatibilityVersion>의 아무 값으로나 `SetCompatibilityVersion`을 호출해도 해당 애플리케이션에는 영향이 없습니다.
+<xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> 메서드는 ASP.NET Core 3.0 앱에 대해 작동하지 않습니다. 즉, `SetCompatibilityVersion`의 아무 값으로나 <xref:Microsoft.AspNetCore.Mvc.CompatibilityVersion>을 호출해도 해당 애플리케이션에는 영향이 없습니다.
 
 * ASP.NET Core의 다음 부 버전은 새 `CompatibilityVersion` 값을 제공할 수 있습니다.
 * `CompatibilityVersion` 값 `Version_2_0`~`Version_2_2`은 `[Obsolete(...)]`로 표시됩니다.
@@ -45,7 +45,7 @@ ms.locfileid: "75357733"
 * 2\.1 이상의 모든 변경 내용에 적용되지는 않으며, MVC 하위 시스템의 주요 ASP.NET Core 런타임 동작 변경을 대상으로 합니다.
 * ASP.NET Core 3.0으로 확장되지 않습니다.
 
-`SetCompatibilityVersion`을 호출하지 **않는** ASP.NET Core 2.1 및 2.2 앱의 기본 호환성은 2.0 호환성입니다. 즉, `SetCompatibilityVersion`을 호출하지 않는 것은 `SetCompatibilityVersion(CompatibilityVersion.Version_2_0)`을 호출하는 것과 같습니다.
+**을 호출하지** 않는`SetCompatibilityVersion` ASP.NET Core 2.1 및 2.2 앱의 기본 호환성은 2.0 호환성입니다. 즉, `SetCompatibilityVersion`을 호출하지 않는 것은 `SetCompatibilityVersion(CompatibilityVersion.Version_2_0)`을 호출하는 것과 같습니다.
 
 다음 코드는 다음 동작을 제외하고, 호환성 모드를 ASP.NET Core 2.2로 설정합니다.
 

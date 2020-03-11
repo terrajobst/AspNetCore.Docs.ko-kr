@@ -6,18 +6,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/12/2019
 uid: mvc/views/partial
-ms.openlocfilehash: 50c4f41d5d3099184aa3992ed7e176b74c488d2a
-ms.sourcegitcommit: 805f625d16d74e77f02f5f37326e5aceafcb78e3
-ms.translationtype: HT
+ms.openlocfilehash: 04b6d6e620f34ac7154728b1b3048195e87c5860
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/13/2019
-ms.locfileid: "70985566"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653463"
 ---
 # <a name="partial-views-in-aspnet-core"></a>ASP.NET Core의 부분 보기
 
-작성자: [Steve Smith](https://ardalis.com/), [Luke Latham](https://github.com/guardrex), [Maher JENDOUBI](https://twitter.com/maherjend), [Rick Anderson](https://twitter.com/RickAndMSFT) 및 [Scott Sauber](https://twitter.com/scottsauber)
+작성자: [Steve Smith](https://ardalis.com/), [Maher JENDOUBI](https://twitter.com/maherjend), [Rick Anderson](https://twitter.com/RickAndMSFT) 및 [Scott Sauber](https://twitter.com/scottsauber)
 
-부분 보기는 다른 태그 파일의 렌더링된 출력  *내에서* HTML 출력을 렌더링하는 [Razor](xref:mvc/views/razor) 태그 파일( *.cshtml*)입니다.
+부분 보기는 다른 태그 파일의 렌더링된 출력 [ 내에서](xref:mvc/views/razor) HTML 출력을 렌더링하는 *Razor* 태그 파일( *.cshtml*)입니다.
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -25,7 +25,7 @@ ms.locfileid: "70985566"
 
 ::: moniker-end
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/partial/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/partial/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-partial-views"></a>부분 보기를 사용하는 경우
 
@@ -163,7 +163,7 @@ ASP.NET Core 2.2 이상에서 처리기 메서드는 <xref:Microsoft.AspNetCore.
 
 ### <a name="asynchronous-html-helper"></a>비동기 HTML 도우미
 
-HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.PartialAsync*>를 사용하는 것입니다. `PartialAsync`는 <xref:System.Threading.Tasks.Task%601>에 래핑된 <xref:Microsoft.AspNetCore.Html.IHtmlContent> 형식을 반환합니다. 이 메서드는 대기된 호출에 접두사로 `@` 문자를 사용하여 참조합니다.
+HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.PartialAsync*>를 사용하는 것입니다. `PartialAsync`는 <xref:Microsoft.AspNetCore.Html.IHtmlContent>에 래핑된 <xref:System.Threading.Tasks.Task%601> 형식을 반환합니다. 이 메서드는 대기된 호출에 접두사로 `@` 문자를 사용하여 참조합니다.
 
 ```cshtml
 @await Html.PartialAsync("_PartialName")
@@ -263,14 +263,14 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 
 * 부분 보기가 다른 폴더에 존재할 경우 파일 이름이 같은 다른 부분 보기가 허용됩니다.
 * 파일 확장명 없이 이름으로 부분 보기를 참조하면서 부분 보기가 호출자의 폴더와 *Shared* 폴더 모두에 존재할 경우 호출자 폴더에 위치해 있는 부분 보기가 부분 보기를 제공합니다. 호출자의 폴더에 부분 보기가 존재하지 않으면 부분 보기는 *Shared* 폴더에서 제공됩니다. *Shared* 폴더의 부분 보기를 *공유 부분 보기* 또는 *기본 부분 보기*라고 합니다.
-* 부분 보기는 ‘연결’ 가능하며, 순환 참조가 호출에 의해 형성되지 않는 경우 다른 부분 보기를 호출할 수 있습니다.  상대 경로는 항상, 파일의 루트 또는 부모가 아닌 현재 파일에 상대적입니다.
+* 부분 보기는 ‘연결’ 가능하며, 순환 참조가 호출에 의해 형성되지 않는 경우 다른 부분 보기를 호출할 수 있습니다. 상대 경로는 항상, 파일의 루트 또는 부모가 아닌 현재 파일에 상대적입니다.
 
 > [!NOTE]
-> 부분 보기에 정의된 [Razor](xref:mvc/views/razor) `section`은 부모 태그 파일에는 표시되지 않습니다. `section`은 정의되어 있는 부분 보기에만 표시됩니다.
+> 부분 보기에 정의 된 [Razor](xref:mvc/views/razor) `section` 부모 태그 파일에 표시 되지 않습니다. `section`은 정의되어 있는 부분 보기에만 표시됩니다.
 
 ## <a name="access-data-from-partial-views"></a>부분 보기에서 데이터 액세스
 
-부분 보기가 인스턴스화되면 부모의 `ViewData` 사전의 ‘사본’을 수신합니다.  부분 보기 내에서 데이터에 대한 업데이트는 부모 보기에 유지되지 않습니다. 부분 보기에서 변경된 `ViewData`는 부분 보기가 반환될 때 손실됩니다.
+부분 보기가 인스턴스화되면 부모의  *사전의 ‘사본’을 수신합니다.* `ViewData` 부분 보기 내에서 데이터에 대한 업데이트는 부모 보기에 유지되지 않습니다. 부분 보기에서 변경된 `ViewData`는 부분 보기가 반환될 때 손실됩니다.
 
 다음 예는 [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) 인스턴스를 부분 보기에 전달하는 방법을 보여 줍니다.
 
@@ -337,7 +337,7 @@ HTML 도우미를 사용할 때 가장 좋은 방법은 <xref:Microsoft.AspNetCo
 >
 > But, in a larger sense, we can not dedicate ...
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 ::: moniker range=">= aspnetcore-2.1"
 

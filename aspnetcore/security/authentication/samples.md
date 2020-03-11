@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 01/31/2019
 uid: security/authentication/samples
 ms.openlocfilehash: 3d7e28f6e501bd8bd3908ca4b314a63cee52ebe3
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828674"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78651657"
 ---
 # <a name="authentication-samples-for-aspnet-core"></a>ASP.NET Core에 대 한 인증 샘플
 
@@ -30,7 +30,7 @@ ms.locfileid: "75828674"
 
 ## <a name="run-the-samples"></a>샘플 실행
 
-* [분기](https://github.com/dotnet/AspNetCore)를 선택 합니다. 예를 들면 `Tag:v3.0.0`과 같습니다.
+* [분기](https://github.com/dotnet/AspNetCore)를 선택 합니다. 예를 들어 `Tag:v3.0.0`
 * [ASP.NET Core 리포지토리](https://github.com/dotnet/AspNetCore)를 복제 하거나 다운로드 합니다.
 * ASP.NET Core 리포지토리의 복제본과 일치 하는 [.NET Core SDK](https://www.microsoft.com/net/download/all) 버전을 설치 했는지 확인 합니다.
 * *AspNetCore/src/Security/samples* 에서 샘플로 이동 하 여 `dotnet run`으로 샘플을 실행 합니다.
@@ -51,7 +51,7 @@ ms.locfileid: "75828674"
 
 ## <a name="run-the-samples"></a>샘플 실행
 
-* [분기](https://github.com/dotnet/AspNetCore)를 선택 합니다. 예를 들면 `release/2.2`과 같습니다.
+* [분기](https://github.com/dotnet/AspNetCore)를 선택 합니다. 예를 들어 `release/2.2`
 * [ASP.NET Core 리포지토리](https://github.com/dotnet/AspNetCore)를 복제 하거나 다운로드 합니다.
 * ASP.NET Core 리포지토리의 복제본과 일치 하는 [.NET Core SDK](https://www.microsoft.com/net/download/all) 버전을 설치 했는지 확인 합니다.
 * *AspNetCore/src/Security/samples* 에서 샘플로 이동 하 여 `dotnet run`으로 샘플을 실행 합니다.

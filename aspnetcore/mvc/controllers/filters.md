@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2020
 uid: mvc/controllers/filters
-ms.openlocfilehash: c4bb9d5746e494106ead6ad5bbf972bbcc5a39f1
-ms.sourcegitcommit: 0e21d4f8111743bcb205a2ae0f8e57910c3e8c25
-ms.translationtype: HT
+ms.openlocfilehash: 03335811766ea3a1455901199863c6da0e35f7e4
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/05/2020
-ms.locfileid: "77034067"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653343"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core에서 필터링
 
@@ -33,11 +33,11 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
 * 구성 요소가 페이지 또는 보기에 포함되어 있는 경우
 * 페이지 또는 컨트롤러/보기에서 필터를 사용하는 경우
 
-[예제 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/3.1sample)([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/3.1sample)([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="how-filters-work"></a>필터 작동 방법
 
-필터는 ‘필터 파이프라인’이라고도 하는 ‘ASP.NET Core 동작 호출 파이프라인’내에서 실행됩니다.   필터 파이프라인은 ASP.NET Core가 실행할 작업을 선택한 후에 실행됩니다.
+필터는 ‘필터 파이프라인’이라고도 하는 ‘ASP.NET Core 동작 호출 파이프라인’내에서 실행됩니다. 필터 파이프라인은 ASP.NET Core가 실행할 작업을 선택한 후에 실행됩니다.
 
 ![다른 미들웨어, 라우팅 미들웨어, 작업 선택 영역 및 작업 호출 파이프라인을 통해 요청이 처리됩니다. 요청 처리는 응답이 클라이언트에 전송되기 전에 다시 반대로 작업 선택, 라우팅 미들웨어 및 기타 다양한 미들웨어를 통해서 계속됩니다.](filters/_static/filter-pipeline-1.png)
 
@@ -76,7 +76,7 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MySampleActionFilter.cs?name=snippet_ActionFilter)]
 
-비동기 필터는 `On-Stage-ExecutionAsync` 메서드를 정의합니다. 예: <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*>
+비동기 필터는 `On-Stage-ExecutionAsync` 메서드를 정의합니다. 예 <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*>:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/SampleAsyncActionFilter.cs?name=snippet)]
 
@@ -113,11 +113,11 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MyActionFilterAttribute.cs?name=snippet)]
 
-구성 옵션은 [옵션 패턴](xref:fundamentals/configuration/options)을 사용하여 [구성 시스템](xref:fundamentals/configuration/index)에서 제공됩니다. 예를 들어 *appsettings.json* 파일에서 다음을 수행합니다.
+구성 옵션은 [옵션 패턴](xref:fundamentals/configuration/index)을 사용하여 [구성 시스템](xref:fundamentals/configuration/options)에서 제공됩니다. 예를 들어 *appsettings.json* 파일에서 다음을 수행합니다.
 
 [!code-csharp[](filters/3.1sample/FiltersSample/appsettings.json)]
 
-`StartUp.ConfigureServices`에서
+`StartUp.ConfigureServices`에서 다음 단계를 수행합니다.
 
 * `PositionOptions` 클래스는 `"Position"` 구성 영역을 사용하여 서비스 컨테이너에 추가됩니다.
 * `MyActionFilterAttribute`는 서비스 컨테이너에 추가됩니다.
@@ -132,7 +132,7 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet2&highlight=9)]
 
-`Sample/Index2` 엔드포인트가 호출될 때 **응답 헤더**에 `author: Rick Anderson` 및 `Editor: Joe Smith`가 표시됩니다.
+**엔드포인트가 호출될 때**응답 헤더`author: Rick Anderson`에 `Editor: Joe Smith` 및 `Sample/Index2`가 표시됩니다.
 
 다음 코드는 `MyActionFilterAttribute` 및 `AddHeaderAttribute`를 Razor 페이지에 적용합니다.
 
@@ -176,14 +176,14 @@ Razor 페이지 처리기 메서드에는 필터를 적용할 수 없습니다. 
   
 다음 예제는 필터 메서드가 동기 작업 필터에 대해 호출되는 순서를 보여줍니다.
 
-| 순서 | 필터 범위 | 필터 메서드 |
+| 시퀀스 | 필터 범위 | Filter 메서드 |
 |:--------:|:------------:|:-------------:|
-| 1 | 전역 | `OnActionExecuting` |
+| 1 | Global | `OnActionExecuting` |
 | 2 | 컨트롤러 또는 Razor 페이지| `OnActionExecuting` |
-| 3 | 메서드 | `OnActionExecuting` |
-| 4 | 메서드 | `OnActionExecuted` |
+| 3 | 방법 | `OnActionExecuting` |
+| 4 | 방법 | `OnActionExecuted` |
 | 5 | 컨트롤러 또는 Razor 페이지 | `OnActionExecuted` |
-| 6 | 전역 | `OnActionExecuted` |
+| 6 | Global | `OnActionExecuted` |
 
 ### <a name="controller-level-filters"></a>컨트롤러 수준 필터
 
@@ -197,7 +197,7 @@ Razor 페이지 처리기 메서드에는 필터를 적용할 수 없습니다. 
 
 예를 들어 다운로드 예제에서 `MySampleActionFilter`은 시작할 때 전역적으로 적용됩니다.
 
-`TestController`는:
+`TestController`:
 
 * `SampleActionFilterAttribute`(`[SampleActionFilter]`)를 `FilterTest2` 작업에 적용합니다.
 * `OnActionExecuting` 및 `OnActionExecuted`를 재정의합니다.
@@ -224,8 +224,8 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 
 <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter>를 구현하여 실행의 기본 순서를 재정의할 수 있습니다. `IOrderedFilter`은 실행 순서를 결정하는 데 범위보다 우선 순위가 높은 <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order> 속성을 노출합니다. 낮은 `Order` 값을 가진 필터는:
 
-* 더 높은 `Order` 값을 가진 필터 이전에 *before* 코드를 실행합니다.
-* 더 높은 `Order` 값을 가진 필터 이후에 *after* 코드를 실행합니다.
+* 더 높은 *값을 가진 필터 이전에*before`Order` 코드를 실행합니다.
+* 더 높은 *값을 가진 필터 이후에*after`Order` 코드를 실행합니다.
 
 `Order` 속성은 생성자 매개 변수를 사용하여 설정됩니다.
 
@@ -261,18 +261,18 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 
 ## <a name="cancellation-and-short-circuiting"></a>취소 및 단락
 
-필터 메서드에 제공되는 <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext> 매개 변수의 <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext.Result> 속성을 설정하여 필터 파이프라인을 단락시킬 수 있습니다. 예를 들어 다음 리소스 필터는 파이프라인의 나머지 부분이 실행되지 않도록 막습니다.
+필터 메서드에 제공되는 <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext.Result> 매개 변수의 <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext> 속성을 설정하여 필터 파이프라인을 단락시킬 수 있습니다. 예를 들어 다음 리소스 필터는 파이프라인의 나머지 부분이 실행되지 않도록 막습니다.
 
 <a name="short-circuiting-resource-filter"></a>
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/ShortCircuitingResourceFilterAttribute.cs?name=snippet)]
 
-다음 코드에서 `ShortCircuitingResourceFilter` 및 `AddHeader` 필터는 `SomeResource` 작업 메서드를 대상으로 합니다. `ShortCircuitingResourceFilter`는:
+다음 코드에서 `ShortCircuitingResourceFilter` 및 `AddHeader` 필터는 `SomeResource` 작업 메서드를 대상으로 합니다. `ShortCircuitingResourceFilter`:
 
 * 리소스 필터이고 `AddHeader`는 작업 필터이기 때문에 먼저 실행됩니다.
 * 나머지 파이프라인을 단락시킵니다.
 
-따라서 `AddHeader` 필터는 `SomeResource` 작업에 대해 절대 실행되지 않습니다. 이 동작은 `ShortCircuitingResourceFilter`가 먼저 실행되기 때문에 작업 메서드 수준에서 두 필터를 적용하더라도 동일합니다. 해당 필터 형식 또는 `Order` 속성의 명시적 사용으로 인해 `ShortCircuitingResourceFilter`가 먼저 실행됩니다.
+따라서 `AddHeader` 필터는 `SomeResource` 작업에 대해 절대 실행되지 않습니다. 이 동작은 `ShortCircuitingResourceFilter`가 먼저 실행되기 때문에 작업 메서드 수준에서 두 필터를 적용하더라도 동일합니다. 해당 필터 형식 또는 `ShortCircuitingResourceFilter` 속성의 명시적 사용으로 인해 `Order`가 먼저 실행됩니다.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1)]
 
@@ -326,7 +326,7 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 
 * 싱글톤 이외의 수명이 지정된 서비스에 의존하는 필터와 함께 사용하지 마세요.
 
- <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>를 구현합니다. `IFilterFactory`는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> 인스턴스를 만들기 위해 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 메서드를 노출합니다. `CreateInstance`는 DI에서 지정된 형식을 로드합니다.
+ <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>를 구현합니다. `IFilterFactory`는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 인스턴스를 만들기 위해 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> 메서드를 노출합니다. `CreateInstance`는 DI에서 지정된 형식을 로드합니다.
 
 ### <a name="typefilterattribute"></a>TypeFilterAttribute
 
@@ -480,7 +480,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * 작업 내에서 발생하는 예외를 잡는 데 좋습니다.
 * 오류 처리 미들웨어만큼 유연하지 않습니다.
 
-예외 처리의 경우 미들웨어를 선호합니다. 어떤 작업 메서드가 호출되는지에 따라 오류 처리 방식이 ‘다른’ 경우에만 예외 필터를 사용합니다.  예를 들어 앱에는 API 엔드포인트 및 보기/HTML 모두에 대한 작업 메서드가 있을 수 있습니다. API 엔드포인트는 JSON으로 오류 정보를 반환할 수 있습니다. 반면 보기 기반 작업은 HTML로 오류 페이지를 반환할 수 있습니다.
+예외 처리의 경우 미들웨어를 선호합니다. 어떤 작업 메서드가 호출되는지에 따라 오류 처리 방식이 ‘다른’ 경우에만 예외 필터를 사용합니다. 예를 들어 앱에는 API 엔드포인트 및 보기/HTML 모두에 대한 작업 메서드가 있을 수 있습니다. API 엔드포인트는 JSON으로 오류 정보를 반환할 수 있습니다. 반면 보기 기반 작업은 HTML로 오류 페이지를 반환할 수 있습니다.
 
 ## <a name="result-filters"></a>결과 필터
 
@@ -515,7 +515,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 `ResultExecutedContext.Exception`은 작업 결과 또는 후속 결과 필터에서 예외가 던져진 경우 null이 아닌 값으로 설정됩니다. `Exception`을 효과적으로 null로 설정하면 예외를 '처리'하고 예외가 파이프라인의 뒷부분에서 다시 throw되지 않습니다. 결과 필터에서 예외를 처리하는 경우 데이터를 응답에 쓸 수 있는 신뢰할 수 있는 방법이 없습니다. 작업 결과가 예외를 던질 때 헤더가 클라이언트에 플러시된 경우 오류 코드를 전송하기 위한 신뢰할 수 있는 메커니즘이 없습니다.
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>의 경우 <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate>의 `await next` 호출은 후속 결과 필터 및 작업 결과를 실행합니다. 단락시키려면 [ResultExecutingContext.Cancel](xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel)을 `true`로 설정하고 `ResultExecutionDelegate`를 호출하지 마세요.
+<xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>의 경우 `await next`의 <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate> 호출은 후속 결과 필터 및 작업 결과를 실행합니다. 단락시키려면 [ResultExecutingContext.Cancel](xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel)을 `true`로 설정하고 `ResultExecutionDelegate`를 호출하지 마세요.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MyAsyncResponseFilter.cs?name=snippet)]
 
@@ -526,7 +526,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 <xref:Microsoft.AspNetCore.Mvc.Filters.IAlwaysRunResultFilter> 및 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncAlwaysRunResultFilter> 인터페이스는 모든 작업 결과에 대해 실행되는 <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter> 구현을 선언합니다. 여기에는 다음에 의해 생성되는 작업 결과가 포함됩니다.
 
 * 단락하는 권한 부여 필터 및 리소스 필터
-* 예외 필터
+* 예외 필터.
 
 예를 들어 다음 필터는 항상 실행되어 콘텐츠 협상이 실패할 경우 작업 결과(<xref:Microsoft.AspNetCore.Mvc.ObjectResult>)를 *422 Unprocessable Entity* 상태 코드로 설정합니다.
 
@@ -544,7 +544,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet3&highlight=21)]
 
-[샘플 다운로드 샘플](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/3.1sample)를 실행하여 이전 코드를 테스트할 수 있습니다.
+[샘플 다운로드 샘플](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/3.1sample)를 실행하여 이전 코드를 테스트할 수 있습니다.
 
 * F12 개발자 도구를 호출합니다.
 * `https://localhost:5001/Sample/HeaderWithFactory`로 이동합니다.
@@ -569,7 +569,7 @@ What's a non-named attribute?
 * 매개 변수 전달을 필요로 하지 않는 필터.
 * DI에 의해 채워져야 할 생성자 종속성이 있는 필터.
 
-<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>를 구현합니다. `IFilterFactory`는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> 인스턴스를 만들기 위해 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 메서드를 노출합니다. `CreateInstance`는 서비스 컨테이너(DI)에서 지정된 형식을 로드합니다.
+<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>를 구현합니다. `IFilterFactory`는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 인스턴스를 만들기 위해 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> 메서드를 노출합니다. `CreateInstance`는 서비스 컨테이너(DI)에서 지정된 형식을 로드합니다.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/SampleActionFilterAttribute.cs?name=snippet_TypeFilterAttribute&highlight=1,3,7)]
 
@@ -596,7 +596,7 @@ What's a non-named attribute?
 ## <a name="next-actions"></a>다음 작업
 
 * [Razor Pages에 대한 필터 메서드](xref:razor-pages/filter)를 참조하세요.
-* 필터를 실험하려면 [GitHub 예제를 다운로드하고, 테스트하고, 수정](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/3.1sample)합니다.
+* 필터를 실험하려면 [GitHub 예제를 다운로드하고, 테스트하고, 수정](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/3.1sample)합니다.
 
 ::: moniker-end
 
@@ -615,11 +615,11 @@ ASP.NET Core에서 *필터*를 사용하면 요청 처리 파이프라인의 특
 
 이 문서는 Razor Pages, API 컨트롤러 및 보기를 사용하는 컨트롤러에 적용됩니다.
 
-[예제 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample)([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample)([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="how-filters-work"></a>필터 작동 방법
 
-필터는 ‘필터 파이프라인’이라고도 하는 ‘ASP.NET Core 동작 호출 파이프라인’내에서 실행됩니다.    필터 파이프라인은 ASP.NET Core가 실행할 작업을 선택한 후에 실행됩니다.
+필터는 ‘필터 파이프라인’이라고도 하는 ‘ASP.NET Core 동작 호출 파이프라인’내에서 실행됩니다.  필터 파이프라인은 ASP.NET Core가 실행할 작업을 선택한 후에 실행됩니다.
 
 ![요청은 기타 미들웨어, 라우팅 미들웨어, 작업 선택 및 ASP.NET Core 작업 호출 파이프라인을 통해서 처리됩니다. 요청 처리는 응답이 클라이언트에 전송되기 전에 다시 반대로 작업 선택, 라우팅 미들웨어 및 기타 다양한 미들웨어를 통해서 계속됩니다.](filters/_static/filter-pipeline-1.png)
 
@@ -717,14 +717,14 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
   
 다음 예제는 필터 메서드가 동기 작업 필터에 대해 호출되는 순서를 보여줍니다.
 
-| 순서 | 필터 범위 | 필터 메서드 |
+| 시퀀스 | 필터 범위 | Filter 메서드 |
 |:--------:|:------------:|:-------------:|
-| 1 | 전역 | `OnActionExecuting` |
-| 2 | Controller | `OnActionExecuting` |
-| 3 | 메서드 | `OnActionExecuting` |
-| 4 | 메서드 | `OnActionExecuted` |
-| 5 | Controller | `OnActionExecuted` |
-| 6 | 전역 | `OnActionExecuted` |
+| 1 | Global | `OnActionExecuting` |
+| 2 | 컨트롤러 | `OnActionExecuting` |
+| 3 | 방법 | `OnActionExecuting` |
+| 4 | 방법 | `OnActionExecuted` |
+| 5 | 컨트롤러 | `OnActionExecuted` |
+| 6 | Global | `OnActionExecuted` |
 
 이 순서는 다음을 보여 줍니다.
 
@@ -743,7 +743,7 @@ ASP.NET Core에는 서브클래싱 및 사용자 지정할 수 있는 기본 제
 
 예를 들어 다운로드 예제에서 `MySampleActionFilter`은 시작할 때 전역적으로 적용됩니다.
 
-`TestController`는:
+`TestController`:
 
 * `SampleActionFilterAttribute`(`[SampleActionFilter]`)를 `FilterTest2` 작업에 적용합니다.
 * `OnActionExecuting` 및 `OnActionExecuted`를 재정의합니다.
@@ -766,8 +766,8 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 
 <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter>를 구현하여 실행의 기본 순서를 재정의할 수 있습니다. `IOrderedFilter`은 실행 순서를 결정하는 데 범위보다 우선 순위가 높은 <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order> 속성을 노출합니다. 낮은 `Order` 값을 가진 필터는:
 
-* 더 높은 `Order` 값을 가진 필터 이전에 *before* 코드를 실행합니다.
-* 더 높은 `Order` 값을 가진 필터 이후에 *after* 코드를 실행합니다.
+* 더 높은 *값을 가진 필터 이전에*before`Order` 코드를 실행합니다.
+* 더 높은 *값을 가진 필터 이후에*after`Order` 코드를 실행합니다.
 
 생성자 매개 변수로 `Order` 속성을 설정할 수 있습니다.
 
@@ -777,31 +777,31 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 
 이전 예제와 동일한 3개의 작업 필터를 가정해보세요. 컨트롤러와 전역 필터의 `Order` 속성을 각각 1과 2로 설정하면 실행 순서가 반대가 됩니다.
 
-| 순서 | 필터 범위 | `Order` 속성 | 필터 메서드 |
+| 시퀀스 | 필터 범위 | `Order` 속성 | Filter 메서드 |
 |:--------:|:------------:|:-----------------:|:-------------:|
-| 1 | 메서드 | 0 | `OnActionExecuting` |
-| 2 | Controller | 1  | `OnActionExecuting` |
-| 3 | 전역 | 2  | `OnActionExecuting` |
-| 4 | 전역 | 2  | `OnActionExecuted` |
-| 5 | Controller | 1  | `OnActionExecuted` |
-| 6 | 메서드 | 0  | `OnActionExecuted` |
+| 1 | 방법 | 0 | `OnActionExecuting` |
+| 2 | 컨트롤러 | 1  | `OnActionExecuting` |
+| 3 | Global | 2  | `OnActionExecuting` |
+| 4 | Global | 2  | `OnActionExecuted` |
+| 5 | 컨트롤러 | 1  | `OnActionExecuted` |
+| 6 | 방법 | 0  | `OnActionExecuted` |
 
 `Order` 속성은 필터가 실행되는 순서를 결정할 때 범위를 무시합니다. 필터는 먼저 순서에 따라 정렬된 다음, 순서가 동일할 경우 범위가 사용됩니다. 모든 기본 제공 필터는 `IOrderedFilter`을 구현하고 기본 `Order` 값을 0으로 설정합니다. 기본 제공 필터의 경우 `Order`를 0이 아닌 값으로 설정하지 않는 한 범위가 순서를 결정합니다.
 
 ## <a name="cancellation-and-short-circuiting"></a>취소 및 단락
 
-필터 메서드에 제공되는 <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext> 매개 변수의 <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext.Result> 속성을 설정하여 필터 파이프라인을 단락시킬 수 있습니다. 예를 들어 다음 리소스 필터는 파이프라인의 나머지 부분이 실행되지 않도록 막습니다.
+필터 메서드에 제공되는 <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext.Result> 매개 변수의 <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext> 속성을 설정하여 필터 파이프라인을 단락시킬 수 있습니다. 예를 들어 다음 리소스 필터는 파이프라인의 나머지 부분이 실행되지 않도록 막습니다.
 
 <a name="short-circuiting-resource-filter"></a>
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/ShortCircuitingResourceFilterAttribute.cs?name=snippet)]
 
-다음 코드에서 `ShortCircuitingResourceFilter` 및 `AddHeader` 필터는 `SomeResource` 작업 메서드를 대상으로 합니다. `ShortCircuitingResourceFilter`는:
+다음 코드에서 `ShortCircuitingResourceFilter` 및 `AddHeader` 필터는 `SomeResource` 작업 메서드를 대상으로 합니다. `ShortCircuitingResourceFilter`:
 
 * 리소스 필터이고 `AddHeader`는 작업 필터이기 때문에 먼저 실행됩니다.
 * 나머지 파이프라인을 단락시킵니다.
 
-따라서 `AddHeader` 필터는 `SomeResource` 작업에 대해 절대 실행되지 않습니다. 이 동작은 `ShortCircuitingResourceFilter`가 먼저 실행되기 때문에 작업 메서드 수준에서 두 필터를 적용하더라도 동일합니다. 해당 필터 형식 또는 `Order` 속성의 명시적 사용으로 인해 `ShortCircuitingResourceFilter`가 먼저 실행됩니다.
+따라서 `AddHeader` 필터는 `SomeResource` 작업에 대해 절대 실행되지 않습니다. 이 동작은 `ShortCircuitingResourceFilter`가 먼저 실행되기 때문에 작업 메서드 수준에서 두 필터를 적용하더라도 동일합니다. 해당 필터 형식 또는 `ShortCircuitingResourceFilter` 속성의 명시적 사용으로 인해 `Order`가 먼저 실행됩니다.
 
 [!code-csharp[](./filters/sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1,9)]
 
@@ -855,7 +855,7 @@ Razor Pages에 대해서는 [필터 메서드를 재정의하여 Razor 페이지
 
 * 싱글톤 이외의 수명이 지정된 서비스에 의존하는 필터와 함께 사용하지 마세요.
 
- <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>를 구현합니다. `IFilterFactory`는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> 인스턴스를 만들기 위해 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 메서드를 노출합니다. `CreateInstance`는 DI에서 지정된 형식을 로드합니다.
+ <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>를 구현합니다. `IFilterFactory`는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 인스턴스를 만들기 위해 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> 메서드를 노출합니다. `CreateInstance`는 DI에서 지정된 형식을 로드합니다.
 
 ### <a name="typefilterattribute"></a>TypeFilterAttribute
 
@@ -1007,7 +1007,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 * 작업 내에서 발생하는 예외를 잡는 데 좋습니다.
 * 오류 처리 미들웨어만큼 유연하지 않습니다.
 
-예외 처리의 경우 미들웨어를 선호합니다. 어떤 작업 메서드가 호출되는지에 따라 오류 처리 방식이 ‘다른’ 경우에만 예외 필터를 사용합니다.  예를 들어 앱에는 API 엔드포인트 및 보기/HTML 모두에 대한 작업 메서드가 있을 수 있습니다. API 엔드포인트는 JSON으로 오류 정보를 반환할 수 있습니다. 반면 보기 기반 작업은 HTML로 오류 페이지를 반환할 수 있습니다.
+예외 처리의 경우 미들웨어를 선호합니다. 어떤 작업 메서드가 호출되는지에 따라 오류 처리 방식이 ‘다른’ 경우에만 예외 필터를 사용합니다. 예를 들어 앱에는 API 엔드포인트 및 보기/HTML 모두에 대한 작업 메서드가 있을 수 있습니다. API 엔드포인트는 JSON으로 오류 정보를 반환할 수 있습니다. 반면 보기 기반 작업은 HTML로 오류 페이지를 반환할 수 있습니다.
 
 ## <a name="result-filters"></a>결과 필터
 
@@ -1042,7 +1042,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 `ResultExecutedContext.Exception`은 작업 결과 또는 후속 결과 필터에서 예외가 던져진 경우 null이 아닌 값으로 설정됩니다. `Exception`을 null로 설정하면 효과적으로 예외를 처리하고 이후의 파이프라인에서 ASP.NET Core에 의해 예외가 다시 던져지지 않습니다. 결과 필터에서 예외를 처리하는 경우 데이터를 응답에 쓸 수 있는 신뢰할 수 있는 방법이 없습니다. 작업 결과가 예외를 던질 때 헤더가 클라이언트에 플러시된 경우 오류 코드를 전송하기 위한 신뢰할 수 있는 메커니즘이 없습니다.
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>의 경우 <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate>의 `await next` 호출은 후속 결과 필터 및 작업 결과를 실행합니다. 단락시키려면 [ResultExecutingContext.Cancel](xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel)을 `true`로 설정하고 `ResultExecutionDelegate`를 호출하지 마세요.
+<xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>의 경우 `await next`의 <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate> 호출은 후속 결과 필터 및 작업 결과를 실행합니다. 단락시키려면 [ResultExecutingContext.Cancel](xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel)을 `true`로 설정하고 `ResultExecutionDelegate`를 호출하지 마세요.
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/MyAsyncResponseFilter.cs?name=snippet)]
 
@@ -1053,7 +1053,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 <xref:Microsoft.AspNetCore.Mvc.Filters.IAlwaysRunResultFilter> 및 <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncAlwaysRunResultFilter> 인터페이스는 모든 작업 결과에 대해 실행되는 <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter> 구현을 선언합니다. 여기에는 다음에 의해 생성되는 작업 결과가 포함됩니다.
 
 * 단락하는 권한 부여 필터 및 리소스 필터
-* 예외 필터
+* 예외 필터.
 
 예를 들어 다음 필터는 항상 실행되어 콘텐츠 협상이 실패할 경우 작업 결과(<xref:Microsoft.AspNetCore.Mvc.ObjectResult>)를 *422 Unprocessable Entity* 상태 코드로 설정합니다.
 
@@ -1067,7 +1067,7 @@ FiltersSample.Filters.LogConstantFilter:Information: Method 'Hi' called
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/AddHeaderWithFactoryAttribute.cs?name=snippet_IFilterFactory&highlight=1,4,5,6,7)]
 
-[다운로드 예제](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample)를 실행하여 이전 코드를 테스트할 수 있습니다.
+[다운로드 예제](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample)를 실행하여 이전 코드를 테스트할 수 있습니다.
 
 * F12 개발자 도구를 호출합니다.
 * `https://localhost:5001/Sample/HeaderWithFactory`로 이동합니다.
@@ -1092,7 +1092,7 @@ What's a non-named attribute?
 * 매개 변수 전달을 필요로 하지 않는 필터.
 * DI에 의해 채워져야 할 생성자 종속성이 있는 필터.
 
-<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>를 구현합니다. `IFilterFactory`는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> 인스턴스를 만들기 위해 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 메서드를 노출합니다. `CreateInstance`는 서비스 컨테이너(DI)에서 지정된 형식을 로드합니다.
+<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute>는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>를 구현합니다. `IFilterFactory`는 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> 인스턴스를 만들기 위해 <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> 메서드를 노출합니다. `CreateInstance`는 서비스 컨테이너(DI)에서 지정된 형식을 로드합니다.
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/SampleActionFilterAttribute.cs?name=snippet_TypeFilterAttribute&highlight=1,3,7)]
 
@@ -1119,6 +1119,6 @@ What's a non-named attribute?
 ## <a name="next-actions"></a>다음 작업
 
 * [Razor Pages에 대한 필터 메서드](xref:razor-pages/filter)를 참조하세요.
-* 필터를 실험하려면 [GitHub 예제를 다운로드하고, 테스트하고, 수정](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample)합니다.
+* 필터를 실험하려면 [GitHub 예제를 다운로드하고, 테스트하고, 수정](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample)합니다.
 
 ::: moniker-end

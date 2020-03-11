@@ -5,16 +5,16 @@ description: 웹 페이지에 서버 기반 코드를 포함하는 Razor 태그 
 ms.author: riande
 ms.date: 02/12/2020
 uid: mvc/views/razor
-ms.openlocfilehash: 0b1eed2816329d62fca4bdb5719825a4197af353
-ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
-ms.translationtype: HT
+ms.openlocfilehash: e9d2e42ba3c36bc1661739f3b105ec8efe03de48
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/19/2020
-ms.locfileid: "77447180"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78651729"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>ASP.NET Core에 대한 Razor 구문 참조
 
-작성자: [Rick Anderson](https://twitter.com/RickAndMSFT), [Luke Latham](https://github.com/guardrex), [Taylor Mullen](https://twitter.com/ntaylormullen) 및 [Dan Vicarel](https://github.com/Rabadash8820)
+[Rick Anderson](https://twitter.com/RickAndMSFT), [Mullen](https://twitter.com/ntaylormullen)및 [Dan Vicarel](https://github.com/Rabadash8820)
 
 Razor는 웹 페이지에 서버 기반 코드를 포함하는 태그 구문입니다. Razor 구문은 Razor 태그, C# 및 HTML로 구성됩니다. Razor를 포함하는 파일의 확장명은 일반적으로 *.cshtml*입니다. Razor는 [Razor 구성 요소](xref:blazor/components) 파일( *.razor*)에도 있습니다.
 
@@ -360,7 +360,7 @@ else
 
 ### <a name="compound-using"></a>복합 \@using
 
-C#에서 `using` 문은 개체가 삭제되도록 보장하는 데 사용됩니다. Razor에서는 동일한 메커니즘을 사용하여 추가 콘텐츠를 포함하는 HTML 도우미를 만듭니다. 다음 코드에서 HTML 도우미는 `@using` 문을 사용하여 `<form>` 태그를 렌더링합니다.
+C#에서 `using` 문은 개체가 삭제되도록 보장하는 데 사용됩니다. Razor에서는 동일한 메커니즘을 사용하여 추가 콘텐츠를 포함하는 HTML 도우미를 만듭니다. 다음 코드에서 HTML 도우미는 `<form>` 문을 사용하여 `@using` 태그를 렌더링합니다.
 
 ```cshtml
 @using (Html.BeginForm())
@@ -483,11 +483,11 @@ Razor 구성 요소의 경우 `@code`는 [`@functions`](#functions)의 별칭이
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[Razor 구성 요소](xref:blazor/components)에서 `@functions` 대신 `@code`를 사용하여 C# 멤버를 추가합니다.
+[Razor 구성 요소](xref:blazor/components)에서 `@code` 대신 `@functions`를 사용하여 C# 멤버를 추가합니다.
 
 ::: moniker-end
 
-예를 들어:
+다음은 그 예입니다.
 
 [!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 
@@ -530,7 +530,7 @@ Razor 구성 요소의 경우 `@code`는 [`@functions`](#functions)의 별칭이
 
 `@implements` 지시문은 생성된 클래스의 인터페이스를 구현합니다.
 
-다음 예제에서는 <xref:System.IDisposable.Dispose*> 메서드를 호출할 수 있도록 <xref:System.IDisposable?displayProperty=fullName>을 구현합니다.
+다음 예제에서는 <xref:System.IDisposable?displayProperty=fullName> 메서드를 호출할 수 있도록 <xref:System.IDisposable.Dispose*>을 구현합니다.
 
 ```cshtml
 @implements IDisposable
@@ -601,7 +601,7 @@ Razor 구성 요소의 경우 `@code`는 [`@functions`](#functions)의 별칭이
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-`@layout` 지시문에서는 Razor 구성 요소의 레이아웃을 지정합니다. 레이아웃 구성 요소는 코드 중복 및 불일치를 방지하는 데 사용됩니다. 자세한 내용은 <xref:blazor/layouts>를 참조하세요.
+`@layout` 지시문에서는 Razor 구성 요소의 레이아웃을 지정합니다. 레이아웃 구성 요소는 코드 중복 및 불일치를 방지하는 데 사용됩니다. 자세한 내용은 <xref:blazor/layouts>을 참조하세요.
 
 ::: moniker-end
 
@@ -633,7 +633,7 @@ Razor는 보기에 전달된 모델에 액세스할 수 있는 `Model` 속성을
 <div>The Login Email: @Model.Email</div>
 ```
 
-`@model` 지시문은 `Model` 속성의 형식을 지정합니다. 이 지시문은 보기가 파생되는 클래스를 생성한 `RazorPage<T>`의 `T`를 지정합니다. `@model` 지시문이 지정되지 않을 경우 `Model` 속성은 `dynamic` 형식입니다. 자세한 내용은 [강력한 형식의 모델 및 @model 키워드](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword)를 참조하세요.
+`@model` 지시문은 `Model` 속성의 형식을 지정합니다. 이 지시문은 보기가 파생되는 클래스를 생성한 `T`의 `RazorPage<T>`를 지정합니다. `@model` 지시문이 지정되지 않을 경우 `Model` 속성은 `dynamic` 형식입니다. 자세한 내용은 [강력한 형식의 모델 및 @model 키워드](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword)를 참조하세요.
 
 ### <a name="namespace"></a>\@namespace
 
@@ -652,7 +652,7 @@ Razor Pages 예제는 다음 표에 나와 있습니다.
 * *Pages/_ViewImports.cshtml*에는 `@namespace Hello.World`가 포함되어 있습니다.
 * 각 페이지에는 `Hello.World`가 네임스페이스의 루트로 포함되어 있습니다.
 
-| 페이지                                        | 네임스페이스                             |
+| 호출                                        | 네임스페이스                             |
 | ------------------------------------------- | ------------------------------------- |
 | *Pages/Index.cshtml*                        | `Hello.World`                         |
 | *Pages/MorePages/Page.cshtml*               | `Hello.World.MorePages`               |
@@ -664,7 +664,7 @@ Razor Pages 예제는 다음 표에 나와 있습니다.
 
 이전 예제의 *EvenMorePages* 폴더에 `@namespace Another.Planet`이 포함된 가져오기 파일이 있으면(또는 *Pages/MorePages/EvenMorePages/Page.cshtml* 파일에 `@namespace Another.Planet` 포함), 다음 표에 결과가 표시됩니다.
 
-| 페이지                                        | 네임스페이스               |
+| 호출                                        | 네임스페이스               |
 | ------------------------------------------- | ----------------------- |
 | *Pages/Index.cshtml*                        | `Hello.World`           |
 | *Pages/MorePages/Page.cshtml*               | `Hello.World.MorePages` |
@@ -677,13 +677,13 @@ Razor Pages 예제는 다음 표에 나와 있습니다.
 `@page` 지시문은 표시되는 파일 형식에 따라 서로 다른 효과를 냅니다. 지시문:
 
 * *.cshtml* 파일에서 파일은 Razor 페이지를 나타냅니다. 자세한 내용은 [사용자 지정 경로](xref:razor-pages/index#custom-routes) 및 <xref:razor-pages/index>를 참조하세요.
-* Razor 구성 요소가 요청을 직접 처리하도록 지정합니다. 자세한 내용은 <xref:blazor/routing>를 참조하세요.
+* Razor 구성 요소가 요청을 직접 처리하도록 지정합니다. 자세한 내용은 <xref:blazor/routing>을 참조하세요.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-*.cshtml* 파일의 첫 번째 줄에 있는 `@page` 지시문은 파일이 Razor 페이지임을 나타냅니다. 자세한 내용은 <xref:razor-pages/index>를 참조하세요.
+`@page`.cshtml*파일의 첫 번째 줄에 있는* 지시문은 파일이 Razor 페이지임을 나타냅니다. 자세한 내용은 <xref:razor-pages/index>을 참조하세요.
 
 ::: moniker-end
 
@@ -691,7 +691,7 @@ Razor Pages 예제는 다음 표에 나와 있습니다.
 
 *이 시나리오는 MVC 보기와 Razor Pages(cshtml)에만 적용됩니다.*
 
-`@section` 지시문은 [MVC 및 Razor Pages 레이아웃](xref:mvc/views/layout)과 함께 사용되어 보기나 페이지에서 HTML 페이지의 여러 부분에 있는 콘텐츠를 렌더링할 수 있게 해줍니다. 자세한 내용은 <xref:mvc/views/layout>를 참조하세요.
+`@section` 지시문은 [MVC 및 Razor Pages 레이아웃](xref:mvc/views/layout)과 함께 사용되어 보기나 페이지에서 HTML 페이지의 여러 부분에 있는 콘텐츠를 렌더링할 수 있게 해줍니다. 자세한 내용은 <xref:mvc/views/layout>을 참조하세요.
 
 ### <a name="using"></a>\@using
 
@@ -713,19 +713,19 @@ Razor Pages 예제는 다음 표에 나와 있습니다.
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-`@attributes`를 사용하면 구성 요소가 선언되지 않은 특성을 렌더링할 수 있습니다. 자세한 내용은 <xref:blazor/components#attribute-splatting-and-arbitrary-parameters>를 참조하세요.
+`@attributes`를 사용하면 구성 요소가 선언되지 않은 특성을 렌더링할 수 있습니다. 자세한 내용은 <xref:blazor/components#attribute-splatting-and-arbitrary-parameters>을 참조하세요.
 
 ### <a name="bind"></a>\@bind
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-구성 요소의 데이터 바인딩은 `@bind` 특성을 사용하여 수행됩니다. 자세한 내용은 <xref:blazor/data-binding>를 참조하세요.
+구성 요소의 데이터 바인딩은 `@bind` 특성을 사용하여 수행됩니다. 자세한 내용은 <xref:blazor/data-binding>을 참조하세요.
 
 ### <a name="onevent"></a>\@on{EVENT}
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-Razor에서는 구성 요소에 대한 이벤트 처리 기능을 제공합니다. 자세한 내용은 <xref:blazor/event-handling>를 참조하세요.
+Razor에서는 구성 요소에 대한 이벤트 처리 기능을 제공합니다. 자세한 내용은 <xref:blazor/event-handling>을 참조하세요.
 
 ::: moniker-end
 
@@ -751,19 +751,19 @@ Razor에서는 구성 요소에 대한 이벤트 처리 기능을 제공합니�
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-`@key` 지시어 특성을 사용하면 구성 요소 diff 알고리즘이 키의 값에 따라 요소 또는 구성 요소를 유지할 수 있습니다. 자세한 내용은 <xref:blazor/components#use-key-to-control-the-preservation-of-elements-and-components>를 참조하세요.
+`@key` 지시어 특성을 사용하면 구성 요소 diff 알고리즘이 키의 값에 따라 요소 또는 구성 요소를 유지할 수 있습니다. 자세한 내용은 <xref:blazor/components#use-key-to-control-the-preservation-of-elements-and-components>을 참조하세요.
 
 ### <a name="ref"></a>\@ref
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-구성 요소 참조(`@ref`)에서는 해당 인스턴스에 대해 명령을 실행할 수 있도록 구성 요소 인스턴스를 참조하는 방법을 제공합니다. 자세한 내용은 <xref:blazor/components#capture-references-to-components>를 참조하세요.
+구성 요소 참조(`@ref`)에서는 해당 인스턴스에 대해 명령을 실행할 수 있도록 구성 요소 인스턴스를 참조하는 방법을 제공합니다. 자세한 내용은 <xref:blazor/components#capture-references-to-components>을 참조하세요.
 
 ### <a name="typeparam"></a>\@typeparam
 
 *이 시나리오는 Razor 구성 요소(.razor)에만 적용됩니다.*
 
-`@typeparam` 지시문은 생성된 구성 요소 클래스에 대한 제네릭 형식 매개 변수를 선언합니다. 자세한 내용은 <xref:blazor/templated-components#generic-typed-components>를 참조하세요.
+`@typeparam` 지시문은 생성된 구성 요소 클래스에 대한 제네릭 형식 매개 변수를 선언합니다. 자세한 내용은 <xref:blazor/templated-components#generic-typed-components>을 참조하세요.
 
 ::: moniker-end
 
@@ -775,7 +775,7 @@ Razor 템플릿을 사용하면 UI 코드 조각을 다음 형식으로 정의�
 @<tag>...</tag>
 ```
 
-다음 예제에서는 템플릿에 작성된 Razor 대리자를 <xref:System.Func%602>로 지정하는 방법을 보여 줍니다. [dynamic 형식](/dotnet/csharp/programming-guide/types/using-type-dynamic)은 대리자에서 캡슐화하는 메서드의 매개 변수로 지정됩니다. [object 형식](/dotnet/csharp/language-reference/keywords/object)은 대리자의 반환 값으로 지정됩니다. 템플릿은 `Name` 속성이 있는 `Pet`의 <xref:System.Collections.Generic.List%601>에서 사용됩니다.
+다음 예제에서는 템플릿에 작성된 Razor 대리자를 <xref:System.Func%602>로 지정하는 방법을 보여 줍니다. [dynamic 형식](/dotnet/csharp/programming-guide/types/using-type-dynamic)은 대리자에서 캡슐화하는 메서드의 매개 변수로 지정됩니다. [object 형식](/dotnet/csharp/language-reference/keywords/object)은 대리자의 반환 값으로 지정됩니다. 템플릿은 <xref:System.Collections.Generic.List%601> 속성이 있는 `Pet`의 `Name`에서 사용됩니다.
 
 ```csharp
 public class Pet
@@ -797,7 +797,7 @@ public class Pet
 }
 ```
 
-템플릿은 `foreach` 문에서 제공하는 `pets`에서 렌더링됩니다.
+템플릿은 `pets` 문에서 제공하는 `foreach`에서 렌더링됩니다.
 
 ```cshtml
 @foreach (var pet in pets)
@@ -872,7 +872,7 @@ public class Pet
 
 [태그 도우미](xref:mvc/views/tag-helpers/intro)와 관련된 세 가지 지시문이 있습니다.
 
-| 지시문 | 기능 |
+| 지시문 | 함수 |
 | --------- | -------- |
 | [`@addTagHelper`](xref:mvc/views/tag-helpers/intro#add-helper-label) | 보기에 태그 도우미를 제공합니다. |
 | [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | 보기에서 이전에 추가된 태그 도우미를 제거합니다. |
@@ -883,8 +883,8 @@ public class Pet
 ### <a name="razor-keywords"></a>Razor 키워드
 
 * 페이지(ASP.NET Core 2.1 이상 필요)
-* namespace
-* 함수
+* 네임스페이스
+* functions
 * 상속
 * model
 * section
@@ -896,24 +896,24 @@ Razor 키워드는 `@(Razor Keyword)`으로 이스케이프됩니다(예: `@(fun
 
 * case
 * do
-* default
+* 기본값
 * for
 * foreach
 * if
 * else
 * lock
-* switch
-* try
+* 스위치
+* 다음을 시도해 보세요.
 * catch
 * finally
-* using
+* 사용
 * while
 
 C# Razor 키워드는 `@(@C# Razor Keyword)`으로 이중 이스케이프되어야 합니다(예: `@(@case)`). 첫 번째 `@`은 Razor 파서를 이스케이프합니다. 두 번째 `@`은 C# 파서를 이스케이프합니다.
 
 ### <a name="reserved-keywords-not-used-by-razor"></a>Razor에서 사용하지 않는 예약된 키워드
 
-* 클래스
+* class
 
 ## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>보기용으로 생성된 Razor C# 클래스 검사
 
@@ -967,7 +967,7 @@ ASP.NET Core MVC 프로젝트에 다음 클래스를 추가합니다.
 
 [!code-csharp[](razor/sample/Startup.cs?highlight=4&range=10-14)]
 
-`CustomTemplateEngine`의 `return csharpDocument;` 문에서 중단점을 설정합니다. 중단점에서 프로그램 실행이 중지되면 `generatedCode`의 값을 확인합니다.
+`return csharpDocument;`의 `CustomTemplateEngine` 문에서 중단점을 설정합니다. 중단점에서 프로그램 실행이 중지되면 `generatedCode`의 값을 확인합니다.
 
 ![generatedCode의 텍스트 시각화 도우미 보기](razor/_static/tvr.png)
 

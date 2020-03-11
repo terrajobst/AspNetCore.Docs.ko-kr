@@ -1,78 +1,78 @@
 ---
-title: ASP.NET core에서 identity 모델 사용자 지정 합니다.
+title: ASP.NET Core에서 id 모델 사용자 지정
 author: ajcvickers
 description: 이 문서에서는 ASP.NET Core Id에 대 한 기본 Entity Framework Core 데이터 모델을 사용자 지정 하는 방법을 설명 합니다.
 ms.author: avickers
 ms.date: 07/01/2019
 uid: security/authentication/customize_identity_model
 ms.openlocfilehash: f549fdff4a416b5fadcb2b1078b051bbab8e402e
-ms.sourcegitcommit: eb3e51d58dd713eefc242148f45bd9486be3a78a
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67500484"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78651459"
 ---
-# <a name="identity-model-customization-in-aspnet-core"></a>ASP.NET core에서 identity 모델 사용자 지정 합니다.
+# <a name="identity-model-customization-in-aspnet-core"></a>ASP.NET Core에서 id 모델 사용자 지정
 
 [Arthur Vickers](https://github.com/ajcvickers)
 
-ASP.NET Core Id 관리 및 ASP.NET Core 앱에서 사용자를 저장 하기 위한 프레임 워크를 제공 합니다. Id가 프로젝트에 추가 하면 **개별 사용자 계정** 인증 메커니즘으로 선택 됩니다. 기본적으로 Id를 사용 하므로 Entity Framework (EF)를 사용 하 여 핵심 데이터 모델입니다. 이 문서에서는 Id 모델을 사용자 지정 하는 방법을 설명 합니다.
+ASP.NET Core Id는 ASP.NET Core 앱에서 사용자 계정을 관리 하 고 저장 하기 위한 프레임 워크를 제공 합니다. 인증 메커니즘으로 **개별 사용자 계정이** 선택 되 면 프로젝트에 id가 추가 됩니다. 기본적으로 Id는 EF (Entity Framework) 핵심 데이터 모델을 사용 합니다. 이 문서에서는 Id 모델을 사용자 지정 하는 방법을 설명 합니다.
 
 ## <a name="identity-and-ef-core-migrations"></a>Id 및 EF Core 마이그레이션
 
-모델을 검사 하기 전에 Id를 사용 하 여 작동 하는 방법을 이해 하는 데 유용 것 [EF Core 마이그레이션](/ef/core/managing-schemas/migrations/) 를 만들고 데이터베이스를 업데이트 합니다. 최상위 수준에 프로세스는.
+모델을 검사 하기 전에 Id가 [EF Core 마이그레이션과](/ef/core/managing-schemas/migrations/) 함께 작동 하 여 데이터베이스를 만들고 업데이트 하는 방법을 이해 하는 것이 유용 합니다. 최상위 수준에서 프로세스는 다음과 같습니다.
 
-1. 정의 또는 업데이트를 [코드에서 데이터 모델](/ef/core/modeling/)합니다.
-1. 이 모델 데이터베이스에 적용할 수 있는 변경 내용을 변환할 마이그레이션을 추가 합니다.
-1. 마이그레이션이 올바르게 나타내는 의도 확인 합니다.
-1. 모델을 사용 하 여 동기화 할 데이터베이스를 업데이트 하려면 마이그레이션을 적용 합니다.
-1. 추가 모델을 구체화 하 고 데이터베이스 동기화 상태를 유지 하는 1-4 단계를 반복 합니다.
+1. [코드에서 데이터 모델](/ef/core/modeling/)을 정의 하거나 업데이트 합니다.
+1. 마이그레이션을 추가 하 여이 모델을 데이터베이스에 적용할 수 있는 변경 내용으로 변환 합니다.
+1. 마이그레이션이 제대로 진행 되는지 확인 합니다.
+1. 마이그레이션을 적용 하 여 데이터베이스를 모델과 동기화 되도록 업데이트 합니다.
+1. 1 ~ 4 단계를 반복 하 여 모델을 구체화 하 고 데이터베이스를 동기화 된 상태로 유지 합니다.
 
-다음 방법 중 하나를 사용 하 여 추가 하 고 마이그레이션을 적용 합니다.
+다음 방법 중 하나를 사용 하 여 마이그레이션을 추가 하 고 적용 합니다.
 
-* 합니다 **패키지 관리자 콘솔** Visual Studio를 사용 하는 경우 (PMC) 창. 자세한 내용은 [EF Core PMC 도구](/ef/core/miscellaneous/cli/powershell)합니다.
-* .NET Core CLI 명령줄을 사용 하는 경우. 자세한 내용은 [EF Core.NET 명령줄 도구](/ef/core/miscellaneous/cli/dotnet)합니다.
-* 클릭 하는 **마이그레이션 적용** 앱이 실행 되 면 오류 페이지에는 단추입니다.
+* Visual Studio를 사용 하는 경우 PMC ( **패키지 관리자 콘솔** ) 창 자세한 내용은 [EF CORE PMC tools](/ef/core/miscellaneous/cli/powershell)를 참조 하세요.
+* 명령줄을 사용 하는 경우 .NET Core CLI입니다. 자세한 내용은 [EF Core .net 명령줄 도구](/ef/core/miscellaneous/cli/dotnet)를 참조 하세요.
+* 앱이 실행 될 때 오류 페이지에서 **마이그레이션 적용** 단추를 클릭 합니다.
 
-ASP.NET Core 개발 시 오류 페이지 처리기를 있습니다. 처리기는 앱이 실행 되는 경우 마이그레이션을 적용할 수 있습니다. 일반적으로 프로덕션 앱 마이그레이션이에서 SQL 스크립트를 생성 하 고 제어 된 앱 및 데이터베이스 배포의 일환으로 데이터베이스 변경 내용을 배포 합니다.
+ASP.NET Core에는 개발 시간 오류 페이지 처리기가 있습니다. 처리기는 앱이 실행 될 때 마이그레이션을 적용할 수 있습니다. 프로덕션 앱은 일반적으로 마이그레이션에서 SQL 스크립트를 생성 하 고 데이터베이스 변경 내용을 제어 된 앱 및 데이터베이스 배포의 일부로 배포 합니다.
 
-Id를 사용 하는 새 앱을 만든 경우 위의 1-2 단계 이미 완료 되었습니다. 즉, 초기 데이터 모델이 이미 있는 및 초기 마이그레이션 프로젝트에 추가 되었습니다. 여전히 초기 마이그레이션을 데이터베이스에 적용 해야 합니다. 다음 방법 중 하나를 통해 초기 마이그레이션을 적용할 수 있습니다.
+Id를 사용 하는 새 앱을 만드는 경우 위의 1 단계와 2 단계는 이미 완료 된 것입니다. 즉, 초기 데이터 모델이 이미 존재 하 고 초기 마이그레이션이 프로젝트에 추가 되었습니다. 초기 마이그레이션은 여전히 데이터베이스에 적용 해야 합니다. 초기 마이그레이션은 다음 방법 중 하나를 통해 적용할 수 있습니다.
 
-* 실행 `Update-Database` PMC에서.
-* 실행 `dotnet ef database update` 명령 셸에서 합니다.
-* 클릭 합니다 **마이그레이션 적용** 앱이 실행 되 면 오류 페이지에는 단추입니다.
+* PMC에서 `Update-Database`를 실행 합니다.
+* 명령 셸에서 `dotnet ef database update`를 실행 합니다.
+* 앱이 실행 될 때 오류 페이지에서 **마이그레이션 적용** 단추를 클릭 합니다.
 
-모델에 변경 내용이 이전 단계를 반복 합니다.
+모델이 변경 되 면 위의 단계를 반복 합니다.
 
 ## <a name="the-identity-model"></a>Id 모델
 
 ### <a name="entity-types"></a>엔터티 형식
 
-Id 모델 엔터티 형식은 이루어져 있습니다.
+Id 모델은 다음 엔터티 형식으로 구성 됩니다.
 
-|엔터티 형식|설명                                                  |
+|엔터티 유형|Description                                                  |
 |-----------|-------------------------------------------------------------|
 |`User`     |사용자를 나타냅니다.                                         |
 |`Role`     |역할을 나타냅니다.                                           |
 |`UserClaim`|사용자가 소유 하는 클레임을 나타냅니다.                    |
 |`UserToken`|사용자에 대 한 인증 토큰을 나타냅니다.               |
-|`UserLogin`|로그인을 사용 하 여 사용자를 연결합니다.                              |
-|`RoleClaim`|역할 내에서 모든 사용자에 게 부여 되는 클레임을 나타냅니다.|
-|`UserRole` |사용자 및 역할을 연결 하는 조인 엔터티를 반환 합니다.               |
+|`UserLogin`|사용자를 로그인에 연결 합니다.                              |
+|`RoleClaim`|역할 내의 모든 사용자에 게 부여 되는 클레임을 나타냅니다.|
+|`UserRole` |사용자와 역할을 연결 하는 조인 엔터티입니다.               |
 
 ### <a name="entity-type-relationships"></a>엔터티 형식 관계
 
-[엔터티 형식](#entity-types) 다음과 같은 방법으로 서로 관련이 있습니다.
+[엔터티 형식은](#entity-types) 다음과 같은 방법으로 서로 관련 됩니다.
 
-* 각 `User` 많을 수 `UserClaims`입니다.
-* 각 `User` 많을 수 `UserLogins`입니다.
-* 각 `User` 많을 수 `UserTokens`입니다.
-* 각 `Role` 연결 된 여러 있습니다 `RoleClaims`합니다.
-* 각 `User` 관련 된 많은 가질 수 있습니다 `Roles`, 및 각 `Role` 다를 사용 하 여 연결할 수 있습니다 `Users`합니다. 이 데이터베이스의 조인 테이블이 필요는 다 대 다 관계입니다. 조인 테이블은 표현 된 `UserRole` 엔터티.
+* 각 `User`에는 여러 `UserClaims`있을 수 있습니다.
+* 각 `User`에는 여러 `UserLogins`있을 수 있습니다.
+* 각 `User`에는 여러 `UserTokens`있을 수 있습니다.
+* 각 `Role`에는 연결 된 `RoleClaims`여러 개 있을 수 있습니다.
+* 각 `User`에는 연결 된 `Roles`여러 개 있을 수 있으며, 각 `Role`는 여러 `Users`연결할 수 있습니다. 이는 데이터베이스에서 조인 테이블이 필요한 다대다 관계입니다. 조인 테이블은 `UserRole` 엔터티로 표시 됩니다.
 
 ### <a name="default-model-configuration"></a>기본 모델 구성
 
-대부분 identity 정의 *컨텍스트 클래스* 에서 상속 되는 [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 구성 하 고 모델을 사용 합니다. 이 구성을 수행 해야를 사용 하는 [EF Core Code First Fluent API](/ef/core/modeling/) 에 [OnModelCreating](/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating) 컨텍스트 클래스의 메서드. 기본 구성은 다음과 같습니다.
+Id는 모델을 구성 하 고 사용 하기 위해 [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 에서 상속 되는 여러 *컨텍스트 클래스* 를 정의 합니다. 이 구성은 컨텍스트 클래스의 [Onmodelcreating](/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating) 메서드에서 [EF CORE Code First 흐름 API](/ef/core/modeling/) 를 사용 하 여 수행 됩니다. 기본 구성은 다음과 같습니다.
 
 ```csharp
 builder.Entity<TUser>(b =>
@@ -197,7 +197,7 @@ builder.Entity<TUserRole>(b =>
 
 ### <a name="model-generic-types"></a>모델 제네릭 형식
 
-기본값을 정의 하는 identity [공용 언어 런타임](/dotnet/standard/glossary#clr) 위에 나열 된 각 엔터티 형식에 대 한 (CLR) 형식입니다. 이러한 형식은 모두 사용 하 여 접두사가 *Identity*:
+Id는 위에 나열 된 각 엔터티 형식에 대 한 기본 CLR ( [공용 언어 런타임](/dotnet/standard/glossary#clr) ) 형식을 정의 합니다. 이러한 형식에는 모두 *id*접두사가 붙습니다.
 
 * `IdentityUser`
 * `IdentityRole`
@@ -207,9 +207,9 @@ builder.Entity<TUserRole>(b =>
 * `IdentityRoleClaim`
 * `IdentityUserRole`
 
-직접 이러한 형식을 사용 하는 대신 앱 자체의 형식에 대 한 형식은 기본 클래스로 사용 수 있습니다. `DbContext` Id로 정의 된 클래스는 일반, 같은 다른 CLR 형식은 하나 이상의 모델의 엔터티 형식에 사용할 수 있습니다. 이러한 제네릭 형식을 허용할는 `User` 기본 키 (PK) 데이터 형식을 변경할 수 있습니다.
+이러한 형식을 직접 사용 하는 대신 형식을 앱 자체 형식에 대 한 기본 클래스로 사용할 수 있습니다. Identity로 정의 된 `DbContext` 클래스는 일반적으로 모델에 있는 하나 이상의 엔터티 형식에 대해 서로 다른 CLR 형식을 사용할 수 있도록 하기 위한 것입니다. 이러한 제네릭 형식을 사용 하 여 PK (`User` 기본 키) 데이터 형식을 변경할 수도 있습니다.
 
-Id를 사용 하 여 역할에 대 한 지원을 사용 하는 경우는 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> 클래스를 사용 해야 합니다. 예를 들어:
+역할에 대 한 지원을 사용 하 여 Id를 사용 하는 경우 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> 클래스를 사용 해야 합니다. 다음은 그 예입니다.
 
 ```csharp
 // Uses all the built-in Identity types
@@ -253,7 +253,7 @@ public abstract class IdentityDbContext<
          where TUserToken : IdentityUserToken<TKey>
 ```
 
-것도 가능 역할 (클레임만),이 경우 Id를 사용 하는 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserContext%601> 클래스를 사용 해야 합니다.
+역할 (클레임만) 없이 Id를 사용할 수도 있습니다 .이 경우 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserContext%601> 클래스를 사용 해야 합니다.
 
 ```csharp
 // Uses the built-in non-role Identity types except with a custom User type
@@ -287,16 +287,16 @@ public abstract class IdentityUserContext<
 }
 ```
 
-## <a name="customize-the-model"></a>모델을 사용자 지정
+## <a name="customize-the-model"></a>모델 사용자 지정
 
-모델 사용자 지정에 대 한 시작 지점을 적절 한 상황에 맞는 형식에서 파생 시키는 경우 참조 된 [제네릭 형식을 모델링](#model-generic-types) 섹션입니다. 이 컨텍스트 형식 이라고 관례적으로 `ApplicationDbContext` ASP.NET Core 템플릿에 의해 생성 됩니다.
+모델 사용자 지정의 시작점은 적절 한 컨텍스트 형식에서 파생 하는 것입니다. [모델 제네릭 형식](#model-generic-types) 섹션을 참조 하세요. 이 컨텍스트 형식은 `ApplicationDbContext` 일반적으로 ASP.NET Core 템플릿에 의해 생성 됩니다.
 
-컨텍스트는 두 가지 방법으로 모델을 구성 하려면 사용 됩니다.
+컨텍스트는 다음과 같은 두 가지 방법으로 모델을 구성 하는 데 사용 됩니다.
 
-* 엔터티 및 제네릭 형식 매개 변수를 형식 키를 제공 합니다.
-* 재정의 `OnModelCreating` 이러한 형식의 매핑을 수정 합니다.
+* 제네릭 형식 매개 변수에 대 한 엔터티 및 키 형식 제공
+* `OnModelCreating`를 재정의 하 여 이러한 형식의 매핑을 수정 합니다.
 
-재정의 하는 경우 `OnModelCreating`, `base.OnModelCreating` 먼저 호출 되어야; 재정의 구성은 다음 호출 해야 합니다. EF Core에는 일반적으로 마지막으로 한 업데이트 정책 구성에 대 한에 있습니다. 예를 들어 경우는 `ToTable` 엔터티 형식에 대 한 메서드는 먼저 하나의 테이블 이름 및 다시 나중에 다른 테이블 이름으로 테이블 이름이 두 번째 호출에서 사용 됩니다.
+`OnModelCreating`를 재정의할 때 `base.OnModelCreating`를 먼저 호출 해야 합니다. 재정의 구성은 다음에 호출 해야 합니다. 일반적으로 EF Core는 구성에 대 한 최신 wins 정책을 포함 합니다. 예를 들어 엔터티 형식에 대 한 `ToTable` 메서드를 한 테이블 이름으로 먼저 호출한 다음 나중에 다른 테이블 이름으로 다시 호출 하는 경우 두 번째 호출의 테이블 이름이 사용 됩니다.
 
 ### <a name="custom-user-data"></a>사용자 지정 사용자 데이터
 
@@ -310,7 +310,7 @@ dotnet ef migrations add CreateIdentitySchema
 dotnet ef database update
  -->
 
-[사용자 지정 사용자 데이터](xref:security/authentication/add-user-data) 에서 상속 하 여 사용할 `IdentityUser`합니다. 이 형식의 이름에 `ApplicationUser`:
+[사용자 지정 사용자 데이터](xref:security/authentication/add-user-data) 는 `IdentityUser`에서 상속 하 여 지원 됩니다. 이 형식의 이름을 `ApplicationUser`하는 것이 일반적인 방법입니다.
 
 ```csharp
 public class ApplicationUser : IdentityUser
@@ -319,7 +319,7 @@ public class ApplicationUser : IdentityUser
 }
 ```
 
-사용 된 `ApplicationUser` 컨텍스트에 대 한 제네릭 인수 형식:
+`ApplicationUser` 형식을 컨텍스트의 제네릭 인수로 사용 합니다.
 
 ```csharp
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -336,9 +336,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 }
 ```
 
-재정의 하지 않아도 됩니다 `OnModelCreating` 에 `ApplicationDbContext` 클래스입니다. EF Core 매핑하는 `CustomTag` 규칙에 따라 속성입니다. 데이터베이스를 새 업데이트 해야 하는 반면 `CustomTag` 열입니다. 열을 만들려면 마이그레이션을 추가 하 고 다음에 설명 된 대로 데이터베이스를 업데이트할 [Id 및 EF Core 마이그레이션](#identity-and-ef-core-migrations)합니다.
+`ApplicationDbContext` 클래스에서 `OnModelCreating`를 재정의할 필요가 없습니다. EF Core는 규칙에 따라 `CustomTag` 속성을 매핑합니다. 그러나 새 `CustomTag` 열을 만들려면 데이터베이스를 업데이트 해야 합니다. 열을 만들려면 마이그레이션을 추가 하 고 [id 및 EF Core 마이그레이션](#identity-and-ef-core-migrations)에 설명 된 대로 데이터베이스를 업데이트 합니다.
 
-업데이트 *Pages/Shared/_LoginPartial.cshtml* 바꾸고 `IdentityUser` 사용 하 여 `ApplicationUser`:
+*Pages/Shared/_LoginPartial* 를 업데이트 하 고 `IdentityUser`을 `ApplicationUser`으로 바꿉니다.
 
 ```cshtml
 @using Microsoft.AspNetCore.Identity
@@ -347,7 +347,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 @inject UserManager<ApplicationUser> UserManager
 ```
 
-업데이트 *Areas/Identity/IdentityHostingStartup.cs* 하거나 `Startup.ConfigureServices` 바꾸고 `IdentityUser` 사용 하 여 `ApplicationUser`입니다.
+*Areas/Identity/IdentityHostingStartup* 또는 `Startup.ConfigureServices`을 업데이트 하 고 `IdentityUser`을 `ApplicationUser`으로 바꿉니다.
 
 ```csharp
 services.AddDefaultIdentity<ApplicationUser>()
@@ -355,20 +355,20 @@ services.AddDefaultIdentity<ApplicationUser>()
         .AddDefaultUI();
 ```
 
-ASP.NET Core 2.1 이상 버전에서는 Identity Razor 클래스 라이브러리로 제공 됩니다. 자세한 내용은 <xref:security/authentication/scaffold-identity>을 참조하세요. 앞의 코드 호출을 해야 하는 결과적으로 <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>입니다. Identity 스 캐 폴더는 프로젝트에 파일을 식별을 추가 하려면 사용 된 경우 호출을 제거 `AddDefaultUI`합니다. 자세한 내용은 다음을 참조하세요.
+ASP.NET Core 2.1 이상에서 Id는 Razor 클래스 라이브러리로 제공 됩니다. 자세한 내용은 <xref:security/authentication/scaffold-identity>을 참조하세요. 따라서 위의 코드는 <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>를 호출 해야 합니다. Id 스 캐 폴더를 사용 하 여 프로젝트에 Id 파일을 추가한 경우 `AddDefaultUI`에 대 한 호출을 제거 합니다. 자세한 내용은 다음을 참조하세요.
 
 * [스캐폴드 ID](xref:security/authentication/scaffold-identity)
-* [추가, 다운로드 및 Id에 사용자 지정 사용자 데이터를 삭제 합니다.](xref:security/authentication/add-user-data)
+* [사용자 지정 사용자 데이터를 Id에 추가, 다운로드 및 삭제](xref:security/authentication/add-user-data)
 
-### <a name="change-the-primary-key-type"></a>기본 키 형식 변경
+### <a name="change-the-primary-key-type"></a>기본 키 유형 변경
 
-데이터베이스가 만들어진 후 PK 열의 데이터 형식에 대 한 변경 많은 데이터베이스 시스템에서 문제가 됩니다. PK를 일반적으로 변경 삭제 하 고 테이블을 다시 작성 해야 합니다. 따라서, 키 유형 데이터베이스를 만들 때 초기 마이그레이션에 지정 해야 합니다.
+데이터베이스를 만든 후 PK 열의 데이터 형식이 변경 되 면 많은 데이터베이스 시스템에 문제가 있을 수 있습니다. PK를 변경 하는 작업은 일반적으로 테이블을 삭제 하 고 다시 만드는 작업을 포함 합니다. 따라서 데이터베이스를 만들 때 초기 마이그레이션에서 키 유형을 지정 해야 합니다.
 
-PK 유형을 변경 하려면 다음이 단계를 수행 합니다.
+PK 종류를 변경 하려면 다음 단계를 수행 합니다.
 
-1. 데이터베이스를 만든 경우 PK 변경 하기 전에 실행 `Drop-Database` (PMC) 또는 `dotnet ef database drop` (.NET Core CLI)를 삭제 합니다.
-2. 데이터베이스의 삭제를 확인 한 후 제거 된 초기 마이그레이션을 `Remove-Migration` (PMC) 또는 `dotnet ef migrations remove` (.NET Core CLI).
-3. 업데이트를 `ApplicationDbContext` 에서 파생 된 클래스 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext%603>합니다. 새 키 유형을 지정 `TKey`합니다. 예를 들어 사용 하는 `Guid` 키 유형:
+1. PK 변경 전에 데이터베이스를 만든 경우 `Drop-Database` (PMC) 또는 `dotnet ef database drop` (.NET Core CLI)를 실행 하 여 삭제 합니다.
+2. 데이터베이스 삭제를 확인 한 후 `Remove-Migration` (PMC) 또는 `dotnet ef migrations remove` (.NET Core CLI)를 사용 하 여 초기 마이그레이션을 제거 합니다.
+3. <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext%603>에서 파생 되도록 `ApplicationDbContext` 클래스를 업데이트 합니다. `TKey`에 대 한 새 키 유형을 지정 합니다. 예를 들어 `Guid` 키 형식을 사용 하려면 다음을 수행 합니다.
 
     ```csharp
     public class ApplicationDbContext
@@ -383,17 +383,17 @@ PK 유형을 변경 하려면 다음이 단계를 수행 합니다.
 
     ::: moniker range=">= aspnetcore-2.0"
 
-    위의 코드에서 제네릭 클래스 <xref:Microsoft.AspNetCore.Identity.IdentityUser%601> 고 <xref:Microsoft.AspNetCore.Identity.IdentityRole%601> 새 키 유형을 사용 하려면 반드시 지정 해야 합니다.
+    위의 코드에서 제네릭 클래스 <xref:Microsoft.AspNetCore.Identity.IdentityUser%601> 및 <xref:Microsoft.AspNetCore.Identity.IdentityRole%601>를 지정 하 여 새 키 형식을 사용 해야 합니다.
 
     ::: moniker-end
 
     ::: moniker range="<= aspnetcore-1.1"
 
-    위의 코드에서 제네릭 클래스 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUser%601> 고 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole%601> 새 키 유형을 사용 하려면 반드시 지정 해야 합니다.
+    위의 코드에서 제네릭 클래스 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUser%601> 및 <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole%601>를 지정 하 여 새 키 형식을 사용 해야 합니다.
 
     ::: moniker-end
 
-    `Startup.ConfigureServices` 일반 사용자를 사용 하도록 업데이트 되어야 합니다.
+    일반 사용자를 사용 하도록 `Startup.ConfigureServices` 업데이트 해야 합니다.
 
     ::: moniker range=">= aspnetcore-2.1"
 
@@ -425,7 +425,7 @@ PK 유형을 변경 하려면 다음이 단계를 수행 합니다.
 
     ::: moniker-end
 
-4. 사용자 지정 하는 경우 `ApplicationUser` 클래스를 사용 하는, 클래스에서 상속 하도록 업데이트 `IdentityUser`합니다. 예를 들어:
+4. 사용자 지정 `ApplicationUser` 클래스를 사용 하는 경우 `IdentityUser`에서 상속 하도록 클래스를 업데이트 합니다. 다음은 그 예입니다.
 
     ::: moniker range="<= aspnetcore-1.1"
 
@@ -439,7 +439,7 @@ PK 유형을 변경 하려면 다음이 단계를 수행 합니다.
 
     ::: moniker-end
 
-    업데이트 `ApplicationDbContext` 사용자 지정을 참조 하려면 `ApplicationUser` 클래스:
+    사용자 지정 `ApplicationUser` 클래스를 참조 하도록 `ApplicationDbContext`를 업데이트 합니다.
 
     ```csharp
     public class ApplicationDbContext
@@ -452,7 +452,7 @@ PK 유형을 변경 하려면 다음이 단계를 수행 합니다.
     }
     ```
 
-    사용자 지정 데이터베이스 컨텍스트 클래스의 Id 서비스를 추가 하는 경우 등록 `Startup.ConfigureServices`:
+    `Startup.ConfigureServices`에서 Id 서비스를 추가할 때 사용자 지정 데이터베이스 컨텍스트 클래스를 등록 합니다.
 
     ::: moniker range=">= aspnetcore-2.1"
 
@@ -463,9 +463,9 @@ PK 유형을 변경 하려면 다음이 단계를 수행 합니다.
             .AddDefaultTokenProviders();
     ```
 
-    기본 키의 데이터 형식을 분석에서 유추 되는 [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 개체입니다.
+    [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 개체를 분석 하 여 기본 키의 데이터 형식을 유추 합니다.
 
-    ASP.NET Core 2.1 이상 버전에서는 Identity Razor 클래스 라이브러리로 제공 됩니다. 자세한 내용은 <xref:security/authentication/scaffold-identity>을 참조하세요. 앞의 코드 호출을 해야 하는 결과적으로 <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>입니다. Identity 스 캐 폴더는 프로젝트에 파일을 식별을 추가 하려면 사용 된 경우 호출을 제거 `AddDefaultUI`합니다.
+    ASP.NET Core 2.1 이상에서 Id는 Razor 클래스 라이브러리로 제공 됩니다. 자세한 내용은 <xref:security/authentication/scaffold-identity>을 참조하세요. 따라서 위의 코드는 <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>를 호출 해야 합니다. Id 스 캐 폴더를 사용 하 여 프로젝트에 Id 파일을 추가한 경우 `AddDefaultUI`에 대 한 호출을 제거 합니다.
 
     ::: moniker-end
 
@@ -477,7 +477,7 @@ PK 유형을 변경 하려면 다음이 단계를 수행 합니다.
             .AddDefaultTokenProviders();
     ```
 
-    기본 키의 데이터 형식을 분석에서 유추 되는 [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 개체입니다.
+    [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 개체를 분석 하 여 기본 키의 데이터 형식을 유추 합니다.
 
     ::: moniker-end
 
@@ -489,27 +489,27 @@ PK 유형을 변경 하려면 다음이 단계를 수행 합니다.
             .AddDefaultTokenProviders();
     ```
 
-    합니다 <xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*> 메서드에서 `TKey` 기본 키의 데이터 형식을 나타내는 형식입니다.
+    <xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*> 메서드는 기본 키의 데이터 형식을 나타내는 `TKey` 형식을 허용 합니다.
 
     ::: moniker-end
 
-5. 사용자 지정 하는 경우 `ApplicationRole` 클래스를 사용 하는, 클래스에서 상속 하도록 업데이트 `IdentityRole<TKey>`합니다. 예를 들어:
+5. 사용자 지정 `ApplicationRole` 클래스를 사용 하는 경우 `IdentityRole<TKey>`에서 상속 하도록 클래스를 업데이트 합니다. 다음은 그 예입니다.
 
     [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Data/ApplicationRole.cs?name=snippet_ApplicationRole&highlight=4)]
 
-    업데이트 `ApplicationDbContext` 사용자 지정을 참조 하려면 `ApplicationRole` 클래스입니다. 다음 클래스는 사용자 지정을 참조 하는 예를 들어 `ApplicationUser` 및 사용자 지정 `ApplicationRole`:
+    사용자 지정 `ApplicationRole` 클래스를 참조 하도록 `ApplicationDbContext`를 업데이트 합니다. 예를 들어, 다음 클래스는 사용자 지정 `ApplicationUser`와 사용자 지정 `ApplicationRole`를 참조 합니다.
 
     ::: moniker range=">= aspnetcore-2.1"
 
     [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Data/ApplicationDbContext.cs?name=snippet_ApplicationDbContext&highlight=5-6)]
 
-    사용자 지정 데이터베이스 컨텍스트 클래스의 Id 서비스를 추가 하는 경우 등록 `Startup.ConfigureServices`:
+    `Startup.ConfigureServices`에서 Id 서비스를 추가할 때 사용자 지정 데이터베이스 컨텍스트 클래스를 등록 합니다.
 
     [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=13-16)]
 
-    기본 키의 데이터 형식을 분석에서 유추 되는 [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 개체입니다.
+    [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 개체를 분석 하 여 기본 키의 데이터 형식을 유추 합니다.
 
-    ASP.NET Core 2.1 이상 버전에서는 Identity Razor 클래스 라이브러리로 제공 됩니다. 자세한 내용은 <xref:security/authentication/scaffold-identity>을 참조하세요. 앞의 코드 호출을 해야 하는 결과적으로 <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>입니다. Identity 스 캐 폴더는 프로젝트에 파일을 식별을 추가 하려면 사용 된 경우 호출을 제거 `AddDefaultUI`합니다.
+    ASP.NET Core 2.1 이상에서 Id는 Razor 클래스 라이브러리로 제공 됩니다. 자세한 내용은 <xref:security/authentication/scaffold-identity>을 참조하세요. 따라서 위의 코드는 <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>를 호출 해야 합니다. Id 스 캐 폴더를 사용 하 여 프로젝트에 Id 파일을 추가한 경우 `AddDefaultUI`에 대 한 호출을 제거 합니다.
 
     ::: moniker-end
 
@@ -517,11 +517,11 @@ PK 유형을 변경 하려면 다음이 단계를 수행 합니다.
 
     [!code-csharp[](customize-identity-model/samples/2.0/RazorPagesSampleApp/Data/ApplicationDbContext.cs?name=snippet_ApplicationDbContext&highlight=5-6)]
 
-    사용자 지정 데이터베이스 컨텍스트 클래스의 Id 서비스를 추가 하는 경우 등록 `Startup.ConfigureServices`:
+    `Startup.ConfigureServices`에서 Id 서비스를 추가할 때 사용자 지정 데이터베이스 컨텍스트 클래스를 등록 합니다.
 
     [!code-csharp[](customize-identity-model/samples/2.0/RazorPagesSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=7-9)]
 
-    기본 키의 데이터 형식을 분석에서 유추 되는 [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 개체입니다.
+    [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 개체를 분석 하 여 기본 키의 데이터 형식을 유추 합니다.
 
     ::: moniker-end
 
@@ -529,17 +529,17 @@ PK 유형을 변경 하려면 다음이 단계를 수행 합니다.
 
     [!code-csharp[](customize-identity-model/samples/1.1/MvcSampleApp/Data/ApplicationDbContext.cs?name=snippet_ApplicationDbContext&highlight=5-6)]
 
-    사용자 지정 데이터베이스 컨텍스트 클래스의 Id 서비스를 추가 하는 경우 등록 `Startup.ConfigureServices`:
+    `Startup.ConfigureServices`에서 Id 서비스를 추가할 때 사용자 지정 데이터베이스 컨텍스트 클래스를 등록 합니다.
 
     [!code-csharp[](customize-identity-model/samples/1.1/MvcSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=7-9)]
 
-    합니다 <xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*> 메서드에서 `TKey` 기본 키의 데이터 형식을 나타내는 형식입니다.
+    <xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*> 메서드는 기본 키의 데이터 형식을 나타내는 `TKey` 형식을 허용 합니다.
 
     ::: moniker-end
 
 ### <a name="add-navigation-properties"></a>탐색 속성 추가
 
-관계에 대 한 모델 구성을 변경 하는 것은 기타 변경을 보다 더 어려울 수 있습니다. 새로 추가 관계를 만드는 대신 기존 관계를 대체 주의 해야 합니다. 특히 변경 된 관계는 기존 관계와 같은 외래 키 (FK) 속성을 지정 해야 합니다. 예를 들어, 간의 관계 `Users` 및 `UserClaims` 기본적으로 다음과 같이 지정 됩니다.
+관계에 대 한 모델 구성을 변경 하면 다른 변경을 수행 하는 것 보다 더 어려울 수 있습니다. 새 추가 관계를 만드는 대신 기존 관계를 바꾸려면 주의 해야 합니다. 특히 변경 된 관계는 동일한 FK (외래 키) 속성을 기존 관계로 지정 해야 합니다. 예를 들어 `Users`와 `UserClaims` 간의 관계는 기본적으로 다음과 같이 지정 됩니다.
 
 ```csharp
 builder.Entity<TUser>(b =>
@@ -552,9 +552,9 @@ builder.Entity<TUser>(b =>
 });
 ```
 
-이 관계에 대 한 외래 키로 지정 된 된 `UserClaim.UserId` 속성입니다. `HasMany` 및 `WithOne` 탐색 속성이 없는 관계를 인수 없이 호출 됩니다.
+이 관계의 FK는 `UserClaim.UserId` 속성으로 지정 됩니다. `HasMany` 및 `WithOne`은 인수 없이 호출 되어 탐색 속성 없이 관계를 만듭니다.
 
-탐색 속성을 추가 `ApplicationUser` 연결 된 있도록 `UserClaims` 사용자에서 참조할 수:
+사용자가 연결 된 `UserClaims` 참조 하도록 허용 하는 `ApplicationUser`에 탐색 속성을 추가 합니다.
 
 ```csharp
 public class ApplicationUser : IdentityUser
@@ -563,9 +563,9 @@ public class ApplicationUser : IdentityUser
 }
 ```
 
-합니다 `TKey` 에 대 한 `IdentityUserClaim<TKey>` 사용자의 PK에 대 한 지정 된 형식입니다. 이 예에서 `TKey` 는 `string` 기본값을 사용 중 이므로 합니다. 있기 **되지** PK 형식에 대 한는 `UserClaim` 엔터티 형식입니다.
+`IdentityUserClaim<TKey>`에 대 한 `TKey`는 PK 사용자에 대해 지정 된 유형입니다. 이 경우 기본값이 사용 되 고 있으므로 `TKey` `string` 됩니다. `UserClaim` 엔터티 형식에 대 한 PK 형식이 **아닙니다** .
 
-구성 되어야 합니다는 탐색 속성에 있으면 이제 `OnModelCreating`:
+이제 탐색 속성이 있으므로 `OnModelCreating`에서 구성 해야 합니다.
 
 ```csharp
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -591,13 +591,13 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 }
 ```
 
-관계와 똑같은 이전 호출에서 지정 된 탐색 속성을 사용 하 여만 구성 되어 있는지 확인 `HasMany`합니다.
+관계는 `HasMany`에 대 한 호출에 지정 된 탐색 속성을 사용 하는 것과 정확히 동일 하 게 구성 됩니다.
 
-탐색 속성은 데이터베이스가 아니라 EF 모델에만 존재합니다. 관계에 대 한 FK 변경 되지 않으므로 이러한 종류의 모델 변경에는 데이터베이스를 업데이트할 필요 하지 않습니다. 이 변경을 수행한 후 마이그레이션을 추가 하 여 확인할 수 있습니다. 합니다 `Up` 고 `Down` 메서드는 비어 있습니다.
+탐색 속성은 데이터베이스가 아니라 EF 모델에만 존재 합니다. 관계에 대 한 FK가 변경 되지 않았기 때문에 이러한 종류의 모델 변경에는 데이터베이스를 업데이트할 필요가 없습니다. 변경을 수행한 후 마이그레이션을 추가 하 여이를 확인할 수 있습니다. `Up` 및 `Down` 메서드는 비어 있습니다.
 
 ### <a name="add-all-user-navigation-properties"></a>모든 사용자 탐색 속성 추가
 
-위의 섹션을 사용 하 여 지침으로, 다음 예제에서는 사용자의 모든 관계에 대 한 단방향 탐색 속성을 구성 합니다.
+위의 섹션을 지침으로 사용 하 여 다음 예제에서는 사용자의 모든 관계에 대 한 단방향 탐색 속성을 구성 합니다.
 
 ```csharp
 public class ApplicationUser : IdentityUser
@@ -653,7 +653,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
 ### <a name="add-user-and-role-navigation-properties"></a>사용자 및 역할 탐색 속성 추가
 
-위의 섹션을 사용 하 여 지침으로, 다음 예제에서는 사용자 및 역할에서 모든 관계에 대 한 탐색 속성을 구성 합니다.
+위의 섹션을 지침으로 사용 하 여 다음 예제에서는 사용자 및 역할에 대 한 모든 관계에 대 한 탐색 속성을 구성 합니다.
 
 ```csharp
 public class ApplicationUser : IdentityUser
@@ -732,15 +732,15 @@ public class ApplicationDbContext
 }
 ```
 
-메모:
+참고:
 
-* 이 예제에서는 또한는 `UserRole` 역할에 사용자의 다 대 다 관계를 탐색 하는 데 필요한 엔터티를 조인 합니다.
-* 반영 하도록 탐색 속성의 형식을 변경 해야 `ApplicationXxx` 형식 대신 지금 사용 중인 `IdentityXxx` 형식입니다.
-* 사용 해야 합니다 `ApplicationXxx` 제네릭에서 `ApplicationContext` 정의 합니다.
+* 이 예제에는 사용자에서 역할로 다 대 다 관계를 탐색 하는 데 필요한 `UserRole` join 엔터티도 포함 되어 있습니다.
+* 이제 `IdentityXxx` 형식 대신 `ApplicationXxx` 형식이 사용 되는 것을 반영 하도록 탐색 속성의 형식을 변경 해야 합니다.
+* 제네릭 `ApplicationContext` 정의에서 `ApplicationXxx`를 사용 해야 합니다.
 
 ### <a name="add-all-navigation-properties"></a>모든 탐색 속성 추가
 
-위의 섹션을 사용 하 여 지침으로, 다음 예제에서는 모든 엔터티 형식에서 모든 관계에 대 한 탐색 속성을 구성 합니다.
+위의 섹션을 지침으로 사용 하 여 다음 예제에서는 모든 엔터티 형식의 모든 관계에 대 한 탐색 속성을 구성 합니다.
 
 ```csharp
 public class ApplicationUser : IdentityUser
@@ -845,13 +845,13 @@ public class ApplicationDbContext
 }
 ```
 
-### <a name="use-composite-keys"></a>복합 키를 사용 합니다.
+### <a name="use-composite-keys"></a>복합 키 사용
 
-이전 섹션에서는 Id 모델에 사용 된 키의 형식을 변경 보여 줍니다. 복합 키를 사용 하도록 Id 키 모델 변경 지원 또는 권장 되지 않습니다. Identity를 사용 하 여 복합 키를 사용 하 여 Identity manager 코드 모델과 상호 작용 하는 방법을 변경 하는 방식입니다. 이 사용자 지정이 문서의 범위를 벗어납니다.
+이전 섹션에서는 Id 모델에 사용 되는 키의 유형을 변경 하는 방법을 보여 주었습니다. 복합 키를 사용 하도록 Id 키 모델을 변경 하는 것은 지원 되지 않거나 권장 되지 않습니다. Id가 포함 된 복합 키를 사용 하는 경우 Identity manager 코드가 모델과 상호 작용 하는 방식이 변경 됩니다. 이 사용자 지정은이 문서의 범위를 벗어났습니다.
 
-### <a name="change-tablecolumn-names-and-facets"></a>테이블/열 이름 바꾸기 및 패싯
+### <a name="change-tablecolumn-names-and-facets"></a>테이블/열 이름 및 패싯 변경
 
-테이블 및 열 이름을 변경 하려면 호출 `base.OnModelCreating`합니다. 기본값을 재정의 하는 구성에 추가 합니다. 예를 들어, 모든 Identity 테이블의 이름을 변경 하려면:
+테이블과 열의 이름을 변경 하려면 `base.OnModelCreating`를 호출 합니다. 그런 다음 구성을 추가 하 여 기본값을 재정의 합니다. 예를 들어 모든 Id 테이블의 이름을 변경 하려면 다음을 수행 합니다.
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -895,9 +895,9 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-이러한 예제에는 기본 Id 유형을 사용합니다. 와 같은 앱 유형을 사용 하는 경우 `ApplicationUser`, 기본 형식 대신 해당 형식을 구성 합니다.
+이러한 예제에서는 기본 Id 유형을 사용 합니다. `ApplicationUser`와 같은 앱 유형을 사용 하는 경우 기본 유형 대신 해당 유형을 구성 합니다.
 
-다음 예제에서는 일부 열 이름을 변경합니다.
+다음 예에서는 일부 열 이름을 변경 합니다.
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -917,7 +917,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-특정를 사용 하 여 일부 유형의 데이터베이스 열을 구성할 수 있습니다 *패싯* (예를 들어 최대 `string` 허용 되는 길이). 여러 열의 최대 길이 설정 하는 다음 예제에서는 `string` 모델의 속성:
+일부 유형의 데이터베이스 열은 특정 *패싯을* 사용 하 여 구성할 수 있습니다 (예: 허용 되는 최대 `string` 길이). 다음 예에서는 모델의 여러 `string` 속성에 대해 열 최대 길이를 설정 합니다.
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -942,7 +942,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ### <a name="map-to-a-different-schema"></a>다른 스키마에 매핑
 
-스키마는 데이터베이스 공급자에서 다르게 동작할 수 있습니다. SQL Server에 대 한 기본값의 모든 테이블을 만들 때 합니다 *dbo* 스키마입니다. 다른 스키마에서 테이블을 만들 수 있습니다. 예를 들어:
+스키마는 데이터베이스 공급자에서 다르게 동작할 수 있습니다. SQL Server의 경우 기본값은 *dbo* 스키마에 모든 테이블을 만드는 것입니다. 다른 스키마에서 테이블을 만들 수 있습니다. 다음은 그 예입니다.
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -957,15 +957,15 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ### <a name="lazy-loading"></a>지연 로드
 
-이 섹션에서는 지연 로드 프록시 Id 모델에 대 한 지원이 추가 되었습니다. 지연 로드는 탐색 속성을 로드 하는 첫 번째 확인 하지 않고 사용할 수 있으므로 유용 합니다.
+이 섹션에서는 Id 모델의 지연 로드 프록시에 대 한 지원이 추가 되었습니다. 지연 로드는 탐색 속성을 먼저 로드 하지 않고 사용할 수 있기 때문에 유용 합니다.
 
-엔터티 형식 수에 대 한 적합 한 여러 가지 방법으로 지연 로드에 설명 된 대로 합니다 [EF Core 설명서](/ef/core/querying/related-data#lazy-loading)합니다. 간단히 하기 위해 요구 하는 지연 로드 프록시를 사용 합니다.
+엔터티 형식은 [EF Core 설명서](/ef/core/querying/related-data#lazy-loading)에 설명 된 대로 여러 가지 방법으로 지연 로드에 적합 하 게 만들 수 있습니다. 간단한 설명을 위해 다음이 필요한 지연 로드 프록시를 사용 합니다.
 
-* 설치 합니다 [Microsoft.EntityFrameworkCore.Proxies](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) 패키지 있습니다.
-* 에 대 한 호출 <xref:Microsoft.EntityFrameworkCore.ProxiesExtensions.UseLazyLoadingProxies*> 안쪽 [AddDbContext\<TContext >](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext)합니다.
-* 공용 엔터티 형식을 사용 하 여 `public virtual` 탐색 속성입니다.
+* [Microsoft.entityframeworkcore.tools.dotnet](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) 패키지를 설치 합니다.
+* [Services.adddbcontext\<TContext >](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext)내의 <xref:Microsoft.EntityFrameworkCore.ProxiesExtensions.UseLazyLoadingProxies*>에 대 한 호출입니다.
+* `public virtual` 탐색 속성이 있는 공용 엔터티 형식입니다.
 
-다음 예제에서는 호출 `UseLazyLoadingProxies` 에서 `Startup.ConfigureServices`:
+다음 예제에서는 `Startup.ConfigureServices`에서 `UseLazyLoadingProxies`를 호출 하는 방법을 보여 줍니다.
 
 ```csharp
 services
@@ -976,9 +976,9 @@ services
     .AddEntityFrameworkStores<ApplicationDbContext>();
 ```
 
-엔터티 형식에 탐색 속성을 추가 하는 지침은 앞의 예제를 참조 하십시오.
+엔터티 형식에 탐색 속성을 추가 하는 방법에 대 한 지침은 앞의 예제를 참조 하세요.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:security/authentication/scaffold-identity>
 

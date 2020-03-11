@@ -5,12 +5,12 @@ description: 모델 바인딩을 통해 컨트롤러 작업이 ASP.NET Core의 �
 ms.author: riande
 ms.date: 01/06/2020
 uid: mvc/advanced/custom-model-binding
-ms.openlocfilehash: 92e7abbb9d9b4c29af429557a31e3ef403211976
-ms.sourcegitcommit: 79850db9e79b1705b89f466c6f2c961ff15485de
-ms.translationtype: HT
+ms.openlocfilehash: 511cf39bfedfc55d2f75842daf4445d2aaf4872d
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/07/2020
-ms.locfileid: "75693949"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652119"
 ---
 # <a name="custom-model-binding-in-aspnet-core"></a>ASP.NET Core의 사용자 지정 모델 바인딩
 
@@ -20,7 +20,7 @@ ms.locfileid: "75693949"
 
 모델 바인딩을 통해 컨트롤러 작업에서 HTTP 요청이 아닌 모델 형식(메서드 인수로 전달된)을 직접 작업할 수 있습니다. 들어오는 요청 데이터와 애플리케이션 모델 간의 매핑은 모델 바인더를 통해 처리됩니다. 개발자는 사용자 지정 모델 바인더를 구현하여 기본 모델 바인딩 기능을 확장할 수 있습니다(일반적으로 개발자가 고유의 공급자를 작성할 필요는 없음).
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/custom-model-binding/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/custom-model-binding/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="default-model-binder-limitations"></a>기본 모델 바인더 제한 사항
 
@@ -34,7 +34,7 @@ ms.locfileid: "75693949"
 
 ### <a name="working-with-the-bytearraymodelbinder"></a>ByteArrayModelBinder 사용
 
-Base64로 인코딩된 문자열은 이진 데이터를 나타내는 데 사용할 수 있습니다. 예를 들어 이미지를 문자열로 인코딩할 수 있습니다. 이 샘플에는 [Base64String.txt](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/advanced/custom-model-binding/samples/3.x/CustomModelBindingSample/Base64String.txt)에 base64로 인코딩된 문자열로 이미지가 포함되어 있습니다.
+Base64로 인코딩된 문자열은 이진 데이터를 나타내는 데 사용할 수 있습니다. 예를 들어 이미지를 문자열로 인코딩할 수 있습니다. 이 샘플에는 [Base64String.txt](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/advanced/custom-model-binding/samples/3.x/CustomModelBindingSample/Base64String.txt)에 base64로 인코딩된 문자열로 이미지가 포함되어 있습니다.
 
 ASP.NET Core MVC는 base64로 인코드된 문자열을 가져온 후 `ByteArrayModelBinder`를 사용하여 바이트 배열로 변환할 수 있습니다. <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider>는 `byte[]` 인수를 `ByteArrayModelBinder`에 매핑합니다.
 
@@ -61,6 +61,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 다음 예제에서는 `ByteArrayModelBinder`를 사용하여 base64로 인코딩된 문자열을 `byte[]`로 변환하고 그 결과를 파일에 저장하는 방법을 보여줍니다.
 
 [!code-csharp[](custom-model-binding/samples/3.x/CustomModelBindingSample/Controllers/ImageController.cs?name=snippet_Post)]
+[!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
 [Postman](https://www.getpostman.com/) 같은 도구를 사용하여 base64로 인코딩된 문자열을 이 api 메서드에 게시할 수 있습니다.
 
@@ -78,13 +79,13 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 - Entity Framework Core를 사용하여 연결된 엔터티를 가져옵니다.
 - 연결된 엔터티를 작업 메서드에 인수로 전달합니다.
 
-다음 샘플은 `Author` 모델에서 `ModelBinder` 특성을 사용합니다.
+다음 샘플은 `ModelBinder` 모델에서 `Author` 특성을 사용합니다.
 
 [!code-csharp[](custom-model-binding/samples/3.x/CustomModelBindingSample/Data/Author.cs?highlight=6)]
 
-이전 코드에서 `ModelBinder` 특성은 `Author` 작업 매개 변수를 바인딩하는 데 사용할 `IModelBinder` 형식을 지정합니다.
+이전 코드에서 `ModelBinder` 특성은 `IModelBinder` 작업 매개 변수를 바인딩하는 데 사용할 `Author` 형식을 지정합니다.
 
-다음 `AuthorEntityBinder` 클래스는 Entity Framework Core 및 `authorId`를 사용하여 데이터 원본에서 엔터티를 가져와 `Author` 매개 변수를 바인딩합니다.
+다음 `AuthorEntityBinder` 클래스는 Entity Framework Core 및 `Author`를 사용하여 데이터 원본에서 엔터티를 가져와 `authorId` 매개 변수를 바인딩합니다.
 
 [!code-csharp[](custom-model-binding/samples/3.x/CustomModelBindingSample/Binders/AuthorEntityBinder.cs?name=snippet_Class)]
 
@@ -105,7 +106,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 
 ### <a name="implementing-a-modelbinderprovider"></a>ModelBinderProvider 구현
 
-특성을 적용하는 대신, `IModelBinderProvider`를 구현할 수도 있습니다. 기본 제공 프레임워크 바인더는 이 방식으로 구현됩니다. 바인더가 작동하는 형식을 지정할 때 바인더가 허용하는 입력이 **아니라** 바인더가 생성하는 인수 형식을 지정합니다. 다음 바인더 공급자는 `AuthorEntityBinder`를 작업합니다. 공급자의 MVC 컬렉션에 추가할 때 `Author` 또는 `Author`-형식 매개 변수에서 `ModelBinder` 특성을 사용할 필요가 없습니다.
+특성을 적용하는 대신, `IModelBinderProvider`를 구현할 수도 있습니다. 기본 제공 프레임워크 바인더는 이 방식으로 구현됩니다. 바인더가 작동하는 형식을 지정할 때 바인더가 허용하는 입력이 **아니라** 바인더가 생성하는 인수 형식을 지정합니다. 다음 바인더 공급자는 `AuthorEntityBinder`를 작업합니다. 공급자의 MVC 컬렉션에 추가할 때 `ModelBinder` 또는 `Author`-형식 매개 변수에서 `Author` 특성을 사용할 필요가 없습니다.
 
 [!code-csharp[](custom-model-binding/samples/3.x/CustomModelBindingSample/Binders/AuthorEntityBinderProvider.cs?highlight=17-20)]
 
@@ -139,11 +140,11 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 ::: moniker-end
 ::: moniker range="< aspnetcore-3.0"
 
-작성자: [Steve Smith](https://ardalis.com/)
+작성자 [Steve Smith](https://ardalis.com/)
 
 모델 바인딩을 통해 컨트롤러 작업에서 HTTP 요청이 아닌 모델 형식(메서드 인수로 전달된)을 직접 작업할 수 있습니다. 들어오는 요청 데이터와 애플리케이션 모델 간의 매핑은 모델 바인더를 통해 처리됩니다. 개발자는 사용자 지정 모델 바인더를 구현하여 기본 모델 바인딩 기능을 확장할 수 있습니다(일반적으로 개발자가 고유의 공급자를 작성할 필요는 없음).
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/custom-model-binding/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/custom-model-binding/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="default-model-binder-limitations"></a>기본 모델 바인더 제한 사항
 
@@ -157,7 +158,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 
 ### <a name="working-with-the-bytearraymodelbinder"></a>ByteArrayModelBinder 사용
 
-Base64로 인코딩된 문자열은 이진 데이터를 나타내는 데 사용할 수 있습니다. 예를 들어 이미지를 문자열로 인코딩할 수 있습니다. 이 샘플에는 [Base64String.txt](https://github.com/aspnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/advanced/custom-model-binding/samples/2.x/CustomModelBindingSample/Base64String.txt)에 base64로 인코딩된 문자열로 이미지가 포함되어 있습니다.
+Base64로 인코딩된 문자열은 이진 데이터를 나타내는 데 사용할 수 있습니다. 예를 들어 이미지를 문자열로 인코딩할 수 있습니다. 이 샘플에는 [Base64String.txt](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/advanced/custom-model-binding/samples/2.x/CustomModelBindingSample/Base64String.txt)에 base64로 인코딩된 문자열로 이미지가 포함되어 있습니다.
 
 ASP.NET Core MVC는 base64로 인코드된 문자열을 가져온 후 `ByteArrayModelBinder`를 사용하여 바이트 배열로 변환할 수 있습니다. <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider>는 `byte[]` 인수를 `ByteArrayModelBinder`에 매핑합니다.
 
@@ -200,13 +201,13 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 - Entity Framework Core를 사용하여 연결된 엔터티를 가져옵니다.
 - 연결된 엔터티를 작업 메서드에 인수로 전달합니다.
 
-다음 샘플은 `Author` 모델에서 `ModelBinder` 특성을 사용합니다.
+다음 샘플은 `ModelBinder` 모델에서 `Author` 특성을 사용합니다.
 
 [!code-csharp[](custom-model-binding/samples/2.x/CustomModelBindingSample/Data/Author.cs?highlight=6)]
 
-이전 코드에서 `ModelBinder` 특성은 `Author` 작업 매개 변수를 바인딩하는 데 사용할 `IModelBinder` 형식을 지정합니다.
+이전 코드에서 `ModelBinder` 특성은 `IModelBinder` 작업 매개 변수를 바인딩하는 데 사용할 `Author` 형식을 지정합니다.
 
-다음 `AuthorEntityBinder` 클래스는 Entity Framework Core 및 `authorId`를 사용하여 데이터 원본에서 엔터티를 가져와 `Author` 매개 변수를 바인딩합니다.
+다음 `AuthorEntityBinder` 클래스는 Entity Framework Core 및 `Author`를 사용하여 데이터 원본에서 엔터티를 가져와 `authorId` 매개 변수를 바인딩합니다.
 
 [!code-csharp[](custom-model-binding/samples/2.x/CustomModelBindingSample/Binders/AuthorEntityBinder.cs?name=demo)]
 
@@ -227,7 +228,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 
 ### <a name="implementing-a-modelbinderprovider"></a>ModelBinderProvider 구현
 
-특성을 적용하는 대신, `IModelBinderProvider`를 구현할 수도 있습니다. 기본 제공 프레임워크 바인더는 이 방식으로 구현됩니다. 바인더가 작동하는 형식을 지정할 때 바인더가 허용하는 입력이 **아니라** 바인더가 생성하는 인수 형식을 지정합니다. 다음 바인더 공급자는 `AuthorEntityBinder`를 작업합니다. 공급자의 MVC 컬렉션에 추가할 때 `Author` 또는 `Author`-형식 매개 변수에서 `ModelBinder` 특성을 사용할 필요가 없습니다.
+특성을 적용하는 대신, `IModelBinderProvider`를 구현할 수도 있습니다. 기본 제공 프레임워크 바인더는 이 방식으로 구현됩니다. 바인더가 작동하는 형식을 지정할 때 바인더가 허용하는 입력이 **아니라** 바인더가 생성하는 인수 형식을 지정합니다. 다음 바인더 공급자는 `AuthorEntityBinder`를 작업합니다. 공급자의 MVC 컬렉션에 추가할 때 `ModelBinder` 또는 `Author`-형식 매개 변수에서 `Author` 특성을 사용할 필요가 없습니다.
 
 [!code-csharp[](custom-model-binding/samples/2.x/CustomModelBindingSample/Binders/AuthorEntityBinderProvider.cs?highlight=17-20)]
 

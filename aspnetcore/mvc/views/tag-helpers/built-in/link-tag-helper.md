@@ -7,11 +7,11 @@ ms.custom: mvc
 ms.date: 09/24/2019
 uid: mvc/views/tag-helpers/builtin-th/link-tag-helper
 ms.openlocfilehash: d7514433bee8a138cd7d75bfd15c9798d4fd31a3
-ms.sourcegitcommit: b5ceb0a46d0254cc3425578116e2290142eec0f0
-ms.translationtype: HT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/28/2020
-ms.locfileid: "76809109"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653301"
 ---
 # <a name="link-tag-helper-in-aspnet-core"></a>ASP.NET Core의 링크 태그 도우미
 
@@ -23,7 +23,7 @@ ms.locfileid: "76809109"
 
 링크 태그 도우미를 사용하면 CSS 파일에 CDN 및 CDN을 사용할 수 없는 경우를 대비한 대체를 지정할 수 있습니다. 링크 태그 도우미는 로컬 호스팅의 견고성과 함께 CDN의 성능 이점을 제공합니다.
 
-다음 Razor 태그는 ASP.NET Core 웹앱 템플릿을 사용하여 만든 레이아웃 파일의 `head` 요소를 보여줍니다.
+다음 Razor 표시는 ASP.NET Core 웹앱 템플릿을 사용하여 만든 레이아웃 파일의 `head` 요소를 보여줍니다.
 
 [!code-html[](link-tag-helper/sample/_Layout.cshtml?name=snippet)]
 
@@ -47,17 +47,17 @@ ms.locfileid: "76809109"
 
 ### <a name="asp-fallback-test-class"></a>asp-fallback-test-class
 
-대체 테스트에 사용할 스타일시트에 정의된 클래스 이름입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestClass>를 참조하세요.
+대체 테스트에 사용할 스타일시트에 정의된 클래스 이름입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestClass>을 참조하세요.
 
 ### <a name="asp-fallback-test-property"></a>asp-fallback-test-property
 
-대체 테스트에 사용할 CSS 속성 이름입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestProperty>를 참조하세요.
+대체 테스트에 사용할 CSS 속성 이름입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestProperty>을 참조하세요.
 
 ### <a name="asp-fallback-test-value"></a>asp-fallback-test-value
 
-대체 테스트에 사용할 CSS 속성 값입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestValue>를 참조하세요.
+대체 테스트에 사용할 CSS 속성 값입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestValue>을 참조하세요.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:mvc/views/tag-helpers/intro>
 * <xref:mvc/controllers/areas>

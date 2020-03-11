@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: migration/webapi
-ms.openlocfilehash: c68cf83f427f53b110075168c6d5e4d021808782
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 7f61b78c589fc9d01061b50554e5a639e372c3d8
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74881139"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653007"
 ---
 # <a name="migrate-from-aspnet-web-api-to-aspnet-core"></a>ASP.NET Web API에서 ASP.NET Core로 마이그레이션
 
@@ -19,9 +19,9 @@ ms.locfileid: "74881139"
 
 ASP.NET 4.x Web API는 브라우저 및 모바일 장치를 비롯 한 광범위 한 클라이언트에 도달 하는 HTTP 서비스입니다. ASP.NET Core ASP.NET 4.x의 MVC 및 Web API 앱 모델을 ASP.NET Core MVC 라고 하는 간단한 프로그래밍 모델로 통합 합니다. 이 문서에서는 ASP.NET 4.x Web API에서 ASP.NET Core MVC로 마이그레이션하는 데 필요한 단계를 보여 줍니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/migration/webapi/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/migration/webapi/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>사전 요구 사항
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -61,7 +61,7 @@ Visual Studio에서 다음 단계를 완료 합니다.
 
 ## <a name="migrate-configuration"></a>구성 마이그레이션
 
-ASP.NET Core은 *App_Start* 폴더나 *global.asax* 파일을 사용 하지 않으며 web.config 파일은 게시 시간에 추가 *됩니다.* *Startup.cs* 는 *global.asax* 의 대체 항목으로, 프로젝트 루트에 있습니다. `Startup` 클래스는 모든 응용 프로그램 시작 작업을 처리 합니다. 자세한 내용은 <xref:fundamentals/startup>를 참조하세요.
+ASP.NET Core은 *App_Start* 폴더나 *global.asax* 파일을 사용 하지 않으며 web.config 파일은 게시 시간에 추가 *됩니다.* *Startup.cs* 는 *global.asax* 의 대체 항목으로, 프로젝트 루트에 있습니다. `Startup` 클래스는 모든 응용 프로그램 시작 작업을 처리 합니다. 자세한 내용은 <xref:fundamentals/startup>을 참조하세요.
 
 ASP.NET Core MVC에서 특성 라우팅은 `Startup.Configure`에서 <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc*>를 호출할 때 기본적으로 포함 됩니다. 다음 `UseMvc` 호출은 *ProductsApp* 프로젝트의 *App_Start/Webapicon.cs* 파일을 대체 합니다.
 
@@ -69,7 +69,7 @@ ASP.NET Core MVC에서 특성 라우팅은 `Startup.Configure`에서 <xref:Micro
 
 ## <a name="migrate-models-and-controllers"></a>모델 및 컨트롤러 마이그레이션
 
-*제품 앱* 프로젝트의 컨트롤러 및이 컨트롤러에서 사용 하는 모델을 복사 합니다. 다음 단계를 수행하십시오.
+*제품 앱* 프로젝트의 컨트롤러 및이 컨트롤러에서 사용 하는 모델을 복사 합니다. 다음 단계를 수행하세요.
 
 1. 원본 프로젝트의 *Controllers/ProductsController* 를 새 프로젝트에 복사 합니다.
 1. 원본 프로젝트의 전체 *모델* 폴더를 새 프로젝트에 복사 합니다.
@@ -83,7 +83,7 @@ ASP.NET Core MVC에서 특성 라우팅은 `Startup.Configure`에서 <xref:Micro
 
 오류를 다음과 같이 수정 합니다.
 
-1. 변경 `ApiController` 에 <xref:Microsoft.AspNetCore.Mvc.ControllerBase>입니다. `using Microsoft.AspNetCore.Mvc;`를 추가 하 여 `ControllerBase` 참조를 확인 합니다.
+1. `ApiController`을 <xref:Microsoft.AspNetCore.Mvc.ControllerBase>으로 변경합니다. `using Microsoft.AspNetCore.Mvc;`를 추가 하 여 `ControllerBase` 참조를 확인 합니다.
 1. `using System.Web.Http;`를 삭제합니다.
 1. `GetProduct` 작업의 반환 형식을 `IHttpActionResult`에서 `ActionResult<Product>`로 변경 합니다.
 
@@ -123,7 +123,7 @@ return product;
 
 [!code-csharp[](webapi/sample/ProductsCore/Controllers/ProductsController.cs)]
 
-마이그레이션된 프로젝트를 실행 하 고 `/api/products`로 이동 합니다. 세 제품의 전체 목록이 표시 됩니다. `/api/products/1`으로 이동합니다. 첫 번째 제품이 표시 됩니다.
+마이그레이션된 프로젝트를 실행 하 고 `/api/products`로 이동 합니다. 세 제품의 전체 목록이 표시 됩니다. [https://www.microsoft.com]\(`/api/products/1`) 로 이동합니다. 첫 번째 제품이 표시 됩니다.
 
 ## <a name="compatibility-shim"></a>호환성 shim
 
@@ -156,7 +156,7 @@ Web API 호환성 shim은 ASP.NET Core로의 large ASP.NET 4.x 웹 API 프로젝
 1. `Startup.ConfigureServices`에서 `services.AddMvc().AddWebApiConventions()`를 호출 하 여 앱의 DI 컨테이너에 호환성 shim의 서비스를 등록 합니다.
 1. 앱의 `IApplicationBuilder.UseMvc` 호출에서 `IRouteBuilder` `MapWebApiRoute`를 사용 하 여 웹 API 관련 경로를 정의 합니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:web-api/index>
 * <xref:web-api/action-return-types>

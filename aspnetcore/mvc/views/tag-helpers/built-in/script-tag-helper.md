@@ -7,11 +7,11 @@ ms.custom: mvc
 ms.date: 12/02/2019
 uid: mvc/views/tag-helpers/builtin-th/script-tag-helper
 ms.openlocfilehash: a037abb6a454e6d06305e7d7f6ecad0c2a0ca717
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
-ms.translationtype: HT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77171848"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652095"
 ---
 # <a name="script-tag-helper-in-aspnet-core"></a>ASP.NET Core의 스크립트 태그 도우미
 
@@ -21,7 +21,7 @@ ms.locfileid: "77171848"
 
 [!INCLUDE[](~/includes/cdn.md)]
 
-스크립트 태그 도우미를 사용하면 스크립트 파일에 CDN 및 CDN을 사용할 수 없는 경우를 대비한 대체를 지정할 수 있습니다. 스크립트 태그 도우미는 로컬 호스팅의 견고성과 함께 CDN의 성능 이점을 제공합니다.
+스크립트 태그 도우미를 사용하면 스크립트 파일에 CDN 및 CDN을 사용할 수 없는 경우를 대비한 대체를 지정할 수 있습니다. Script 태그 도우미는 로컬 호스팅의 견고성을 사용하여 CDN의 성능 이점을 제공합니다.
 
 다음 Razor 태그는 대체가 포함된 `script` 요소를 보여줍니다.
 
@@ -36,19 +36,19 @@ ms.locfileid: "77171848"
 
 `<script>` 요소의 [defer](https://developer.mozilla.org/docs/Web/HTML/Element/script) 특성을 사용하여 CDN 스크립트 로드를 지연시키지 마세요. 스크립트 태그 도우미는 [asp-fallback-test](#asp-fallback-test) 식을 즉시 실행하는 JavaScript를 렌더링합니다. CDN 스크립트 로딩이 지연되면 해당 식이 실패합니다.
 
-## <a name="commonly-used-script-tag-helper-attributes"></a>일반적으로 사용되는 스크립트 태그 도우미 특성
+## <a name="commonly-used-script-tag-helper-attributes"></a>일반적으로 사용되는 Script 태그 도우미 특성
 
-스크립트 태그 도우미의 모든 특성, 속성 및 메서드는 [스크립트 태그 도우미](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper)를 참조하세요.
+모든 Script 태그 도우미 특성, 속성 및 메서드는 [Script 태그 도우미](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper)를 참조하세요.
 
 ### <a name="asp-fallback-test"></a>asp-fallback-test
 
-대체 테스트에 사용할 기본 스크립트에 정의된 스크립트 메서드입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackTestExpression>를 참조하세요.
+대체 테스트에 사용할 기본 스크립트에 정의된 스크립트 메서드입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackTestExpression>을 참조하세요.
 
 ### <a name="asp-fallback-src"></a>asp-fallback-src
 
-기본 스크립트가 실패할 경우 대체할 Script 태그의 URL입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrc>를 참조하세요.
+기본 스크립트가 실패할 경우 대체할 Script 태그의 URL입니다. 자세한 내용은 <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrc>을 참조하세요.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:mvc/views/tag-helpers/intro>
 * <xref:mvc/controllers/areas>

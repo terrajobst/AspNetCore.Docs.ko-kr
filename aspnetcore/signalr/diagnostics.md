@@ -10,24 +10,24 @@ no-loc:
 - SignalR
 uid: signalr/diagnostics
 ms.openlocfilehash: c5bd2ac27f8ca486b0d75aed8439747f72448625
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963851"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652413"
 ---
-# <a name="logging-and-diagnostics-in-aspnet-core-opno-locsignalr"></a>ASP.NET Core SignalR의 로깅 및 진단
+# <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>ASP.NET Core SignalR의 로깅 및 진단
 
 [Andrew Stanton-간호사](https://twitter.com/anurse)
 
-이 문서에서는 문제 해결을 위해 ASP.NET Core SignalR 앱에서 진단 정보를 수집 하기 위한 지침을 제공 합니다.
+이 문서에서는 ASP.NET Core SignalR 앱에서 진단 정보를 수집 하 여 문제를 해결 하는 데 도움이 되는 지침을 제공 합니다.
 
 ## <a name="server-side-logging"></a>서버 쪽 로깅
 
 > [!WARNING]
 > 서버 쪽 로그에는 앱의 중요 한 정보가 포함 될 수 있습니다. 프로덕션 앱의 원시 로그를 GitHub와 같은 공용 포럼에 게시 **하지 마세요** .
 
-SignalR은 ASP.NET Core의 일부 이므로 ASP.NET Core 로깅 시스템을 사용 합니다. 기본 구성에서 SignalR는 매우 적은 정보를 기록 하지만이를 구성할 수 있습니다. ASP.NET Core 로깅 구성에 대 한 자세한 내용은 [ASP.NET Core 로깅](xref:fundamentals/logging/index#configuration) 에 대 한 설명서를 참조 하세요.
+SignalR는 ASP.NET Core의 일부 이므로 ASP.NET Core 로깅 시스템을 사용 합니다. 기본 구성에서 SignalR는 매우 적은 정보를 기록 하지만이를 구성할 수 있습니다. ASP.NET Core 로깅 구성에 대 한 자세한 내용은 [ASP.NET Core 로깅](xref:fundamentals/logging/index#configuration) 에 대 한 설명서를 참조 하세요.
 
 SignalR는 두 개의로 거 범주를 사용 합니다.
 
@@ -84,19 +84,19 @@ JavaScript 클라이언트를 사용 하는 경우 `HubConnectionBuilder`에서 
 
 다음 표에서는 JavaScript 클라이언트에서 사용할 수 있는 로그 수준을 보여 줍니다. 로그 수준을 이러한 값 중 하나로 설정 하면 해당 수준 및 테이블 위의 모든 수준에서 로깅을 사용할 수 있습니다.
 
-| Level | 설명 |
+| Level | Description |
 | ----- | ----------- |
-| `None` | 메시지가 기록 되지 않습니다. |
-| `Critical` | 전체 앱에서 오류를 나타내는 메시지입니다. |
-| `Error` | 현재 작업의 실패를 나타내는 메시지입니다. |
-| `Warning` | 심각 하지 않은 문제를 나타내는 메시지입니다. |
+| `None` | 메시지가 기록되지 않습니다. |
+| `Critical` | 전체 앱에서 발생한 오류를 나타내는 메시지입니다. |
+| `Error` | 현재 작업에서 발생한 오류를 나타내는 메시지입니다. |
+| `Warning` | 치명적이지 않은 문제를 나타내는 메시지입니다. |
 | `Information` | 정보 메시지. |
 | `Debug` | 디버깅에 유용한 진단 메시지입니다. |
-| `Trace` | 특정 문제를 진단 하기 위해 설계 된 매우 자세한 진단 메시지입니다. |
+| `Trace` | 특정 문제를 진단하기 위해 의도된 매우 자세한 진단 메시지입니다. |
 
 자세한 정도를 구성 하면 로그가 브라우저 콘솔에 기록 되거나 NodeJS 앱의 표준 출력에 기록 됩니다.
 
-로그를 사용자 지정 로깅 시스템으로 전송 하려는 경우 `ILogger` 인터페이스를 구현 하는 JavaScript 개체를 제공할 수 있습니다. 구현 해야 하는 유일한 방법은 이벤트의 수준 및 이벤트와 연결 된 메시지를 사용 하는 `log`입니다. 예를 들어 다음과 같은 가치를 제공해야 합니다.
+로그를 사용자 지정 로깅 시스템으로 전송 하려는 경우 `ILogger` 인터페이스를 구현 하는 JavaScript 개체를 제공할 수 있습니다. 구현 해야 하는 유일한 방법은 이벤트의 수준 및 이벤트와 연결 된 메시지를 사용 하는 `log`입니다. 다음은 그 예입니다.
 
 [!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
 
@@ -206,7 +206,7 @@ tcpdump -i [interface] -w trace.pcap
 
 ![GitHub 문제로 로그 파일 끌기](diagnostics/attaching-diagnostics-files.png)
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:signalr/configuration>
 * <xref:signalr/javascript-client>

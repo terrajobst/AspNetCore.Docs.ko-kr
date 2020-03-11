@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/11/2019
 uid: web-api/http-repl
-ms.openlocfilehash: 15899917826fb6559244998766d99d00f56e0521
-ms.sourcegitcommit: f259889044d1fc0f0c7e3882df0008157ced4915
-ms.translationtype: HT
+ms.openlocfilehash: d9beae68cc869b665ff5d2b6cf34f120406098dc
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/21/2020
-ms.locfileid: "76294726"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653031"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>HTTP REPL을 사용하여 웹 API 테스트
 
@@ -34,7 +34,7 @@ HTTP REPL(Read-Eval-Print Loop):
 * [POST](#test-http-post-requests)
 * [PUT](#test-http-put-requests)
 
-본 내용을 따라가려면 [샘플 ASP.NET Core 웹 API를 보거나 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/http-repl/samples)([다운로드 방법](xref:index#how-to-download-a-sample))하세요.
+본 내용을 따라가려면 [샘플 ASP.NET Core 웹 API를 보거나 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/http-repl/samples)([다운로드 방법](xref:index#how-to-download-a-sample))하세요.
 
 ## <a name="prerequisites"></a>사전 요구 사항
 
@@ -50,7 +50,7 @@ dotnet tool install -g Microsoft.dotnet-httprepl
 
 [.NET Core 글로벌 도구](/dotnet/core/tools/global-tools#install-a-global-tool)가 [Microsoft.dotnet-httprepl](https://www.nuget.org/packages/Microsoft.dotnet-httprepl) NuGet 패키지에서 설치됩니다.
 
-## <a name="usage"></a>사용법
+## <a name="usage"></a>사용
 
 도구를 성공적으로 설치한 후 다음 명령을 실행하여 HTTP REPL을 시작합니다.
 
@@ -134,7 +134,7 @@ HTTP REPL은 명령 완성을 제안합니다. <kbd>Tab</kbd> 키를 누르면 �
 httprepl <ROOT URI>
 ```
 
-`<ROOT URI>`는 웹 API의 기본 URI입니다. 예:
+`<ROOT URI>`는 웹 API의 기본 URI입니다. 다음은 그 예입니다.
 
 ```console
 httprepl https://localhost:5001
@@ -146,7 +146,7 @@ httprepl https://localhost:5001
 connect <ROOT URI>
 ```
 
-예:
+다음은 그 예입니다.
 
 ```console
 (Disconnected)~ connect https://localhost:5001
@@ -160,7 +160,7 @@ connect <ROOT URI>
 connect <ROOT URI> --swagger <SWAGGER URI>
 ```
 
-예:
+다음은 그 예입니다.
 
 ```console
 (Disconnected)~ connect https://localhost:5001 --swagger /swagger/v1/swagger.json
@@ -199,7 +199,7 @@ https://localhost:5001/fruits~ ls
 https://localhost:5001/fruits~
 ```
 
-아니면 `ui` 명령을 실행하여 브라우저에서 웹 API의 Swagger UI 페이지를 엽니다. 예:
+아니면 `ui` 명령을 실행하여 브라우저에서 웹 API의 Swagger UI 페이지를 엽니다. 다음은 그 예입니다.
 
 ```console
 https://localhost:5001/~ ui
@@ -225,15 +225,15 @@ https://localhost:5001/people~
 
 HTTP REPL의 기본 [색](#set-color-preferences)을 사용자 지정할 수 있습니다. 또한 [기본 텍스트 편집기](#set-the-default-text-editor)를 정의할 수 있습니다. HTTP REPL 기본 설정은 현재 세션에서 유지되고 이후 세션에 적용됩니다. 기본 설정을 수정하는 경우 다음 파일에 저장됩니다.
 
-# <a name="linuxtablinux"></a>[Linux](#tab/linux)
+# <a name="linux"></a>[Linux](#tab/linux)
 
 *%HOME%/.httpreplprefs*
 
-# <a name="macostabmacos"></a>[macOS](#tab/macos)
+# <a name="macos"></a>[macOS](#tab/macos)
 
 *%HOME%/.httpreplprefs*
 
-# <a name="windowstabwindows"></a>[Windows](#tab/windows)
+# <a name="windows"></a>[Windows](#tab/windows)
 
 *%USERPROFILE%\\.httpreplprefs*
 
@@ -243,7 +243,7 @@ HTTP REPL의 기본 [색](#set-color-preferences)을 사용자 지정할 수 있
 
 ### <a name="view-the-settings"></a>설정 보기
 
-사용 가능한 설정을 보려면 `pref get` 명령을 실행합니다. 예:
+사용 가능한 설정을 보려면 `pref get` 명령을 실행합니다. 다음은 그 예입니다.
 
 ```console
 https://localhost:5001/~ pref get
@@ -281,7 +281,7 @@ https://localhost:5001/people~ pref set colors.json White
 
 ### <a name="set-indentation-size"></a>들여쓰기 크기 설정
 
-응답 들여쓰기 크기 사용자 지정은 현재 JSON에 대해서만 지원됩니다. 기본 크기는 두 개의 공백입니다. 예:
+응답 들여쓰기 크기 사용자 지정은 현재 JSON에 대해서만 지원됩니다. 기본 크기는 두 개의 공백입니다. 다음은 그 예입니다.
 
 ```json
 [
@@ -335,19 +335,19 @@ pref set editor.command.default "<EXECUTABLE>"
 
 앞의 명령에서는 `<EXECUTABLE>`이 텍스트 편집기 실행 파일의 전체 경로입니다. 예를 들어 다음 명령을 실행하여 Visual Studio Code를 기본 텍스트 편집기로 설정합니다.
 
-# <a name="linuxtablinux"></a>[Linux](#tab/linux)
+# <a name="linux"></a>[Linux](#tab/linux)
 
 ```console
 pref set editor.command.default "/usr/bin/code"
 ```
 
-# <a name="macostabmacos"></a>[macOS](#tab/macos)
+# <a name="macos"></a>[macOS](#tab/macos)
 
 ```console
 pref set editor.command.default "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
 ```
 
-# <a name="windowstabwindows"></a>[Windows](#tab/windows)
+# <a name="windows"></a>[Windows](#tab/windows)
 
 ```console
 pref set editor.command.default "C:\Program Files\Microsoft VS Code\Code.exe"
@@ -355,7 +355,7 @@ pref set editor.command.default "C:\Program Files\Microsoft VS Code\Code.exe"
 
 ---
 
-특정 CLI 인수를 사용하여 기본 텍스트 편집기를 시작하려면 `editor.command.default.arguments` 키를 설정합니다. 예를 들어 Visual Studio Code가 기본 텍스트 편집기이며 항상 HTTP REPL이 확장을 사용하지 않도록 설정한 새 세션에서 Visual Studio Code를 열도록 하는 경우를 가정합니다. 다음 명령을 실행합니다.
+특정 CLI 인수를 사용하여 기본 텍스트 편집기를 시작하려면 `editor.command.default.arguments` 키를 설정합니다. 예를 들어 Visual Studio Code가 기본 텍스트 편집기이며 항상 HTTP REPL이 확장을 사용하지 않도록 설정한 새 세션에서 Visual Studio Code를 열도록 하는 경우를 가정합니다. 다음 명령 실행:
 
 ```console
 pref set editor.command.default.arguments "--disable-extensions --new-window"
@@ -363,14 +363,14 @@ pref set editor.command.default.arguments "--disable-extensions --new-window"
 
 ### <a name="set-the-swagger-search-paths"></a>Swagger 검색 경로 설정
 
-기본적으로 HTTP REPL에는 `--swagger` 옵션 없이 `connect` 명령을 실행할 때 Swagger 문서 검색에 사용하는 상대 경로 집합이 있습니다. 이러한 상대 경로는 `connect` 명령에서 지정된 루트 및 기본 경로와 결합됩니다. 기본 상대 경로는 다음과 같습니다.
+기본적으로 HTTP REPL에는 `connect` 옵션 없이 `--swagger` 명령을 실행할 때 Swagger 문서 검색에 사용하는 상대 경로 집합이 있습니다. 이러한 상대 경로는 `connect` 명령에서 지정된 루트 및 기본 경로와 결합됩니다. 기본 상대 경로는 다음과 같습니다.
 
 - *swagger.json*
 - *swagger/v1/swagger.json*
 - */swagger.json*
 - */swagger/v1/swagger.json*
 
-사용자의 환경에서 서로 다른 검색 경로 집합을 사용하려면 `swagger.searchPaths` 기본 설정을 지정합니다. 값은 파이프로 구분된 상대 경로 목록이어야 합니다. 예:
+사용자의 환경에서 서로 다른 검색 경로 집합을 사용하려면 `swagger.searchPaths` 기본 설정을 지정합니다. 값은 파이프로 구분된 상대 경로 목록이어야 합니다. 다음은 그 예입니다.
 
 ```console
 pref set swagger.searchPaths "swagger/v2/swagger.json|swagger/v3/swagger.json"
@@ -490,7 +490,7 @@ HTTP POST 요청을 실행하려면:
     https://localhost:5001/people~ post -h Content-Type=application/json
     ```
 
-    앞의 명령에서 `Content-Type` HTTP 요청 헤더는 JSON의 요청 본문 미디어 유형을 나타내도록 설정됩니다. 기본 텍스트 편집기는 HTTP 요청 본문을 나타내는 JSON 템플릿을 사용하여 *.tmp* 파일을 엽니다. 예:
+    앞의 명령에서 `Content-Type` HTTP 요청 헤더는 JSON의 요청 본문 미디어 유형을 나타내도록 설정됩니다. 기본 텍스트 편집기는 HTTP 요청 본문을 나타내는 JSON 템플릿을 사용하여 *.tmp* 파일을 엽니다. 다음은 그 예입니다.
 
     ```json
     {
@@ -554,7 +554,7 @@ put <PARAMETER> [-c|--content] [-f|--file] [-h|--header] [--no-body] [-F|--no-fo
 
 HTTP PUT 요청을 실행하려면:
 
-1. *선택 사항*: `get` 명령을 실행하여 데이터를 수정하기 전에 확인합니다.
+1. *선택 사항*: 데이터를 수정 하기 전에 보려면 `get` 명령을 실행 합니다.
 
     ```console
     https://localhost:5001/fruits~ get
@@ -586,7 +586,7 @@ HTTP PUT 요청을 실행하려면:
     https://localhost:5001/fruits~ put 2 -h Content-Type=application/json
     ```
 
-    앞의 명령에서 `Content-Type` HTTP 요청 헤더는 JSON의 요청 본문 미디어 유형을 나타내도록 설정됩니다. 기본 텍스트 편집기는 HTTP 요청 본문을 나타내는 JSON 템플릿을 사용하여 *.tmp* 파일을 엽니다. 예:
+    앞의 명령에서 `Content-Type` HTTP 요청 헤더는 JSON의 요청 본문 미디어 유형을 나타내도록 설정됩니다. 기본 텍스트 편집기는 HTTP 요청 본문을 나타내는 JSON 템플릿을 사용하여 *.tmp* 파일을 엽니다. 다음은 그 예입니다.
 
     ```json
     {
@@ -616,7 +616,7 @@ HTTP PUT 요청을 실행하려면:
     Server: Kestrel
     ```
 
-1. *선택 사항*: `get` 명령을 실행하여 수정 내용을 확인합니다. 예를 들어 텍스트 편집기에서 “Cherry”를 입력한 경우 `get`은 다음을 반환합니다.
+1. *선택 사항*: `get` 명령을 실행 하 여 수정 내용을 확인 합니다. 예를 들어 텍스트 편집기에서 “Cherry”를 입력한 경우 `get`은 다음을 반환합니다.
 
     ```console
     https://localhost:5001/fruits~ get
@@ -667,7 +667,7 @@ delete <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:b
 
 HTTP DELETE 요청을 실행하려면:
 
-1. *선택 사항*: `get` 명령을 실행하여 데이터를 수정하기 전에 확인합니다.
+1. *선택 사항*: 데이터를 수정 하기 전에 보려면 `get` 명령을 실행 합니다.
 
     ```console
     https://localhost:5001/fruits~ get
@@ -707,7 +707,7 @@ HTTP DELETE 요청을 실행하려면:
     Server: Kestrel
     ```
 
-1. *선택 사항*: `get` 명령을 실행하여 수정 내용을 확인합니다. 이 예제에서 `get`은 다음을 반환합니다.
+1. *선택 사항*: `get` 명령을 실행 하 여 수정 내용을 확인 합니다. 이 예제에서 `get`은 다음을 반환합니다.
 
     ```console
     https://localhost:5001/fruits~ get
@@ -792,7 +792,7 @@ options <PARAMETER> [-F|--no-formatting] [-h|--header] [--response] [--response:
 
 HTTP 요청 헤더를 설정하려면 다음 방법 중 하나를 사용합니다.
 
-* HTTP 요청을 사용하여 인라인으로 설정합니다. 예:
+* HTTP 요청을 사용하여 인라인으로 설정합니다. 다음은 그 예입니다.
 
     ```console
     https://localhost:5001/people~ post -h Content-Type=application/json
@@ -800,13 +800,13 @@ HTTP 요청 헤더를 설정하려면 다음 방법 중 하나를 사용합니�
     
     앞의 방법을 사용하는 경우 개별 HTTP 요청 헤더에는 자체 `-h` 옵션이 필요합니다.
 
-* HTTP 요청을 보내기 전에 설정합니다. 예:
+* HTTP 요청을 보내기 전에 설정합니다. 다음은 그 예입니다.
 
     ```console
     https://localhost:5001/people~ set header Content-Type application/json
     ```
     
-    요청을 보내기 전에 헤더를 설정하는 경우 헤더는 명령 셸 세션 기간에 설정된 상태로 유지됩니다. 헤더를 지우려면 빈 값을 제공합니다. 예:
+    요청을 보내기 전에 헤더를 설정하는 경우 헤더는 명령 셸 세션 기간에 설정된 상태로 유지됩니다. 헤더를 지우려면 빈 값을 제공합니다. 다음은 그 예입니다.
     
     ```console
     https://localhost:5001/people~ set header Content-Type
@@ -822,7 +822,7 @@ set header Authorization "bearer <TOKEN VALUE>"
 
 Azure에서 호스트되는 엔드포인트에 액세스하거나 [Azure REST API](/rest/api/azure/)를 사용하려면 전달자 토큰이 필요합니다. [Azure CLI](/cli/azure/)를 통해 Azure 구독에 대한 전달자 토큰을 가져오려면 다음 단계를 사용합니다. HTTP REPL은 HTTP 요청 헤더에서 전달자 토큰을 설정하고 Azure App Service Web Apps의 목록을 검색합니다.
 
-1. Azure에 로그인:
+1. Azure에 로그인합니다.
 
     ```azcli
     az login
@@ -900,14 +900,14 @@ Azure에서 호스트되는 엔드포인트에 액세스하거나 [Azure REST AP
 
 ### <a name="enable-request-display"></a>요청 표시 사용
 
-`echo on` 명령을 실행하여 보내는 HTTP 요청을 표시합니다. 예:
+`echo on` 명령을 실행하여 보내는 HTTP 요청을 표시합니다. 다음은 그 예입니다.
 
 ```console
 https://localhost:5001/people~ echo on
 Request echoing is on
 ```
 
-현재 세션의 후속 HTTP 요청은 요청 헤더를 표시합니다. 예:
+현재 세션의 후속 HTTP 요청은 요청 헤더를 표시합니다. 다음은 그 예입니다.
 
 ```console
 https://localhost:5001/people~ post
@@ -945,7 +945,7 @@ https://localhost:5001/people~
 
 ### <a name="disable-request-display"></a>요청 표시 사용 안 함
 
-`echo off` 명령을 실행하여 보내는 HTTP 요청을 표시하지 않습니다. 예:
+`echo off` 명령을 실행하여 보내는 HTTP 요청을 표시하지 않습니다. 다음은 그 예입니다.
 
 ```console
 https://localhost:5001/people~ echo off
@@ -954,7 +954,7 @@ Request echoing is off
 
 ## <a name="run-a-script"></a>스크립트 실행
 
-동일한 HTTP REPL 명령 세트를 자주 실행하는 경우에는 텍스트 파일에 저장하는 것이 좋습니다. 파일의 명령은 명령줄에서 수동으로 실행할 때와 동일한 형식을 사용합니다. `run` 명령을 사용하여 일괄적으로 명령을 실행할 수 있습니다. 예:
+동일한 HTTP REPL 명령 세트를 자주 실행하는 경우에는 텍스트 파일에 저장하는 것이 좋습니다. 파일의 명령은 명령줄에서 수동으로 실행할 때와 동일한 형식을 사용합니다. `run` 명령을 사용하여 일괄적으로 명령을 실행할 수 있습니다. 다음은 그 예입니다.
 
 1. 줄 바꿈 기호로 분리된 명령 세트를 포함하는 텍스트 파일을 만듭니다. 다음 명령을 포함하는 *people-script.txt* 파일을 설명합니다.
 
@@ -966,7 +966,7 @@ Request echoing is off
     get 1
     ```
 
-1. 텍스트 파일의 경로를 전달하여 `run` 명령을 실행합니다. 예:
+1. 텍스트 파일의 경로를 전달하여 `run` 명령을 실행합니다. 다음은 그 예입니다.
 
     ```console
     https://localhost:5001/~ run C:\http-repl-scripts\people-script.txt
@@ -1036,7 +1036,7 @@ https://localhost:5001/~ clear
 https://localhost:5001/~
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [REST API 요청](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods)
 * [HTTP REPL GitHub 리포지토리](https://github.com/dotnet/HttpRepl)

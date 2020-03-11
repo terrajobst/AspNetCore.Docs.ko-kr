@@ -5,12 +5,12 @@ description: ASP.NET Core의 애플리케이션 파트를 사용하여 컨트롤
 ms.author: riande
 ms.date: 11/11/2019
 uid: mvc/extensibility/app-parts
-ms.openlocfilehash: a95c344410db0651b9f8f1c1eb7551029f084c25
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
-ms.translationtype: HT
+ms.openlocfilehash: 0156c94bc6d0b83d0e14b8ef49468cfdf106d7e6
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75829077"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654813"
 ---
 # <a name="share-controllers-views-razor-pages-and-more-with-application-parts"></a>애플리케이션 파트를 사용하여 컨트롤러, 보기, Razor Pages 등을 공유
 
@@ -18,7 +18,7 @@ ms.locfileid: "75829077"
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 *애플리케이션 파트*는 앱의 리소스에 대한 추상화입니다. 애플리케이션 파트를 사용하면 ASP.NET Core 컨트롤러, 보기 구성 요소, 태그 도우미, Razor Pages, Razor 컴파일 소스 등을 검색할 수 있습니다. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart>는 애플리케이션 파트입니다. `AssemblyPart`는 어셈블리 참조를 캡슐화하고 형식 및 컴파일 참조를 공개합니다.
 
@@ -32,11 +32,11 @@ ASP.NET Core 앱은 <xref:System.Web.WebPages.ApplicationPart>로부터 기능�
 
 [!code-csharp[](./app-parts/3.0sample1/WebAppParts/Startup.cs?name=snippet)]
 
-다음 코드는 `AssemblyPart`를 사용하여 `ApplicationPartManager` 구성에 대한 대체 방법을 제공합니다.
+다음 코드는 `ApplicationPartManager`를 사용하여 `AssemblyPart` 구성에 대한 대체 방법을 제공합니다.
 
 [!code-csharp[](./app-parts/3.0sample1/WebAppParts/Startup2.cs?name=snippet)]
 
-위의 두 코드 샘플은 어셈블리로부터 `SharedController`를 로드합니다. `SharedController`는 앱의 프로젝트에 없습니다. [WebAppParts 솔루션](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/3.0sample1/WebAppParts) 샘플 다운로드를 참조하세요.
+위의 두 코드 샘플은 어셈블리로부터 `SharedController`를 로드합니다. `SharedController`는 앱의 프로젝트에 없습니다. [WebAppParts 솔루션](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/3.0sample1/WebAppParts) 샘플 다운로드를 참조하세요.
 
 ### <a name="include-views"></a>보기 포함
 
@@ -44,15 +44,15 @@ ASP.NET Core 앱은 <xref:System.Web.WebPages.ApplicationPart>로부터 기능�
 
 ### <a name="prevent-loading-resources"></a>리소스 로드 방지
 
-애플리케이션 파트를 사용하여 리소스가 특정 어셈블리나 위치에서 로드되는 것을 *방지*할 수 있습니다. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> 컬렉션의 멤버를 추가 또는 제거하여 리소스를 숨기거나 사용 가능하게 만듭니다. `ApplicationParts` 컬렉션의 항목 순서는 중요하지 않습니다. 컨테이너에서 서비스를 구성하는 데 사용하기 전에 `ApplicationPartManager`를 구성합니다. 예를 들어 `AddControllersAsServices`를 호출하기 전에 `ApplicationPartManager`를 구성합니다. `ApplicationParts` 컬렉션에서 `Remove`를 호출하여 리소스를 제거합니다.
+애플리케이션 파트를 사용하여 리소스가 특정 어셈블리나 위치에서 로드되는 것을 *방지*할 수 있습니다. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> 컬렉션의 멤버를 추가 또는 제거하여 리소스를 숨기거나 사용 가능하게 만듭니다. `ApplicationParts` 컬렉션의 항목 순서는 중요하지 않습니다. 컨테이너에서 서비스를 구성하는 데 사용하기 전에 `ApplicationPartManager`를 구성합니다. 예를 들어 `ApplicationPartManager`를 호출하기 전에 `AddControllersAsServices`를 구성합니다. `Remove` 컬렉션에서 `ApplicationParts`를 호출하여 리소스를 제거합니다.
 
 `ApplicationPartManager`에는 다음을 위한 파트가 포함됩니다.
 
 * 앱의 어셈블리 및 종속 어셈블리.
 * `Microsoft.AspNetCore.Mvc.ApplicationParts.CompiledRazorAssemblyPart`
 * `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation`
-* `Microsoft.AspNetCore.Mvc.TagHelpers`.
-* `Microsoft.AspNetCore.Mvc.Razor`.
+* `Microsoft.AspNetCore.Mvc.TagHelpers`입니다.
+* `Microsoft.AspNetCore.Mvc.Razor`입니다.
 
 <a name="fp"></a>
 
@@ -70,11 +70,11 @@ ASP.NET Core 앱은 <xref:System.Web.WebPages.ApplicationPart>로부터 기능�
 
 ### <a name="display-available-features"></a>사용 가능한 기능 표시
 
-앱에 사용 가능한 기능은 [종속성 주입](../../fundamentals/dependency-injection.md)을 통해 `ApplicationPartManager`를 요청하여 열거할 수 있습니다.
+앱에 사용 가능한 기능은 `ApplicationPartManager`종속성 주입[을 통해 ](../../fundamentals/dependency-injection.md)를 요청하여 열거할 수 있습니다.
 
 [!code-csharp[](./app-parts/sample2/AppPartsSample/Controllers/FeaturesController.cs?highlight=16,25-27)]
 
-[샘플 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample2)는 위의 코드를 사용하여 앱 기능을 표시합니다.
+[샘플 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample2)는 위의 코드를 사용하여 앱 기능을 표시합니다.
 
 ```text
 Controllers:
@@ -108,7 +108,7 @@ HTTP 404 오류는 애플리케이션 파트를 사용하여 개발할 때 일�
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 *애플리케이션 파트*는 앱의 리소스에 대한 추상화입니다. 애플리케이션 파트를 사용하면 ASP.NET Core 컨트롤러, 보기 구성 요소, 태그 도우미, Razor Pages, Razor 컴파일 소스 등을 검색할 수 있습니다. [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart)는 애플리케이션 파트입니다. `AssemblyPart`는 어셈블리 참조를 캡슐화하고 형식 및 컴파일 참조를 공개합니다.
 
@@ -122,11 +122,11 @@ ASP.NET Core 앱은 <xref:System.Web.WebPages.ApplicationPart>로부터 기능�
 
 [!code-csharp[](./app-parts/sample1/WebAppParts/Startup.cs?name=snippet)]
 
-다음 코드는 `AssemblyPart`를 사용하여 `ApplicationPartManager` 구성에 대한 대체 방법을 제공합니다.
+다음 코드는 `ApplicationPartManager`를 사용하여 `AssemblyPart` 구성에 대한 대체 방법을 제공합니다.
 
 [!code-csharp[](./app-parts/sample1/WebAppParts/Startup2.cs?name=snippet)]
 
-위의 두 코드 샘플은 어셈블리로부터 `SharedController`를 로드합니다. `SharedController`는 애플리케이션의 프로젝트에 포함되지 않습니다. [WebAppParts 솔루션](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample1/WebAppParts) 샘플 다운로드를 참조하세요.
+위의 두 코드 샘플은 어셈블리로부터 `SharedController`를 로드합니다. `SharedController`는 애플리케이션의 프로젝트에 포함되지 않습니다. [WebAppParts 솔루션](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample1/WebAppParts) 샘플 다운로드를 참조하세요.
 
 ### <a name="include-views"></a>보기 포함
 
@@ -134,15 +134,15 @@ ASP.NET Core 앱은 <xref:System.Web.WebPages.ApplicationPart>로부터 기능�
 
 ### <a name="prevent-loading-resources"></a>리소스 로드 방지
 
-애플리케이션 파트를 사용하여 리소스가 특정 어셈블리나 위치에서 로드되는 것을 *방지*할 수 있습니다. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> 컬렉션의 멤버를 추가 또는 제거하여 리소스를 숨기거나 사용 가능하게 만듭니다. `ApplicationParts` 컬렉션의 항목 순서는 중요하지 않습니다. 컨테이너에서 서비스를 구성하는 데 사용하기 전에 `ApplicationPartManager`를 구성합니다. 예를 들어 `AddControllersAsServices`를 호출하기 전에 `ApplicationPartManager`를 구성합니다. `ApplicationParts` 컬렉션에서 `Remove`를 호출하여 리소스를 제거합니다.
+애플리케이션 파트를 사용하여 리소스가 특정 어셈블리나 위치에서 로드되는 것을 *방지*할 수 있습니다. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> 컬렉션의 멤버를 추가 또는 제거하여 리소스를 숨기거나 사용 가능하게 만듭니다. `ApplicationParts` 컬렉션의 항목 순서는 중요하지 않습니다. 컨테이너에서 서비스를 구성하는 데 사용하기 전에 `ApplicationPartManager`를 구성합니다. 예를 들어 `ApplicationPartManager`를 호출하기 전에 `AddControllersAsServices`를 구성합니다. `Remove` 컬렉션에서 `ApplicationParts`를 호출하여 리소스를 제거합니다.
 
 다음 코드는 <xref:Microsoft.AspNetCore.Mvc.ApplicationParts>를 사용하여 앱에서 `MyDependentLibrary`를 제거합니다.[!code-csharp[](./app-parts/sample1/WebAppParts/StartupRm.cs?name=snippet)]
 
 `ApplicationPartManager`에는 다음을 위한 파트가 포함됩니다.
 
 * 앱의 어셈블리 및 종속 어셈블리.
-* `Microsoft.AspNetCore.Mvc.TagHelpers`.
-* `Microsoft.AspNetCore.Mvc.Razor`.
+* `Microsoft.AspNetCore.Mvc.TagHelpers`입니다.
+* `Microsoft.AspNetCore.Mvc.Razor`입니다.
 
 ## <a name="application-feature-providers"></a>애플리케이션 기능 공급자
 
@@ -156,11 +156,11 @@ ASP.NET Core 앱은 <xref:System.Web.WebPages.ApplicationPart>로부터 기능�
 
 ### <a name="display-available-features"></a>사용 가능한 기능 표시
 
-앱에 사용 가능한 기능은 [종속성 주입](../../fundamentals/dependency-injection.md)을 통해 `ApplicationPartManager`를 요청하여 열거할 수 있습니다.
+앱에 사용 가능한 기능은 `ApplicationPartManager`종속성 주입[을 통해 ](../../fundamentals/dependency-injection.md)를 요청하여 열거할 수 있습니다.
 
 [!code-csharp[](./app-parts/sample2/AppPartsSample/Controllers/FeaturesController.cs?highlight=16,25-27)]
 
-[샘플 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample2)는 위의 코드를 사용하여 앱 기능을 표시합니다.
+[샘플 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample2)는 위의 코드를 사용하여 앱 기능을 표시합니다.
 
 ```text
 Controllers:

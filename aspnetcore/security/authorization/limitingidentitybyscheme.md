@@ -6,18 +6,18 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/08/2019
 uid: security/authorization/limitingidentitybyscheme
-ms.openlocfilehash: 9c173a4589279b03bc12b4b7dea594fae88cf471
-ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
+ms.openlocfilehash: a3be2b8171c146beef7e62c8f7e55883ca5dc687
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/01/2020
-ms.locfileid: "76928392"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652983"
 ---
 # <a name="authorize-with-a-specific-scheme-in-aspnet-core"></a>ASP.NET Core에서 특정 체계를 사용 하 여 권한 부여
 
-SPAs (단일 페이지 응용 프로그램)와 같은 일부 시나리오에서는 여러 인증 방법을 사용 하는 것이 일반적입니다. 예를 들어 앱은 쿠키 기반 인증을 사용 하 여 JavaScript 요청에 대해 로그인 및 JWT 전달자 인증을 사용할 수 있습니다. 경우에 따라 앱에 인증 처리기의 인스턴스가 여러 개 있을 수 있습니다. 예를 들어, 하나는 기본 id를 포함 하 고 다른 하나는 MFA (multi-factor authentication)가 트리거될 때 생성 되는 두 개의 쿠키 처리기입니다. 사용자가 추가 보안이 필요한 작업을 요청 하 여 MFA를 트리거할 수 있습니다. 사용자가 MFA를 요구 하는 리소스를 요청할 때 MFA를 적용 하는 방법에 대 한 자세한 내용은 MFA를 사용 하 여 GitHub 문제 [보호 섹션](https://github.com/aspnet/AspNetCore.Docs/issues/15791#issuecomment-580464195)을 참조 하세요.
+SPAs (단일 페이지 응용 프로그램)와 같은 일부 시나리오에서는 여러 인증 방법을 사용 하는 것이 일반적입니다. 예를 들어 앱은 쿠키 기반 인증을 사용 하 여 JavaScript 요청에 대해 로그인 및 JWT 전달자 인증을 사용할 수 있습니다. 경우에 따라 앱에 인증 처리기의 인스턴스가 여러 개 있을 수 있습니다. 예를 들어, 하나는 기본 id를 포함 하 고 다른 하나는 MFA (multi-factor authentication)가 트리거될 때 생성 되는 두 개의 쿠키 처리기입니다. 사용자가 추가 보안이 필요한 작업을 요청 하 여 MFA를 트리거할 수 있습니다. 사용자가 MFA를 요구 하는 리소스를 요청할 때 MFA를 적용 하는 방법에 대 한 자세한 내용은 MFA를 사용 하 여 GitHub 문제 [보호 섹션](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195)을 참조 하세요.
 
-인증 체계는 인증 중에 인증 서비스가 구성 될 때 이름이 지정 됩니다. 예를 들면 다음과 같습니다.:
+인증 체계는 인증 중에 인증 서비스가 구성 될 때 이름이 지정 됩니다. 다음은 그 예입니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -42,7 +42,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="selecting-the-scheme-with-the-authorize-attribute"></a>권한 부여 특성이 있는 체계 선택
 
-권한 부여 시점에서 앱은 사용할 처리기를 나타냅니다. 쉼표로 구분 된 인증 스키마 목록을 `[Authorize]`에 전달 하 여 앱에 권한을 부여 하는 처리기를 선택 합니다. `[Authorize]` 특성은 기본적으로 구성 되어 있는지 여부에 관계 없이 사용할 인증 체계 또는 체계를 지정 합니다. 예를 들면 다음과 같습니다.:
+권한 부여 시점에서 앱은 사용할 처리기를 나타냅니다. 쉼표로 구분 된 인증 스키마 목록을 `[Authorize]`에 전달 하 여 앱에 권한을 부여 하는 처리기를 선택 합니다. `[Authorize]` 특성은 기본적으로 구성 되어 있는지 여부에 관계 없이 사용할 인증 체계 또는 체계를 지정 합니다. 다음은 그 예입니다.
 
 ```csharp
 [Authorize(AuthenticationSchemes = AuthSchemes)]
@@ -118,7 +118,7 @@ public void ConfigureServices(IServiceCollection services)
 > [!NOTE]
 > `JwtBearerDefaults.AuthenticationScheme`기본 인증 체계를 사용 하 여 JWT 전달자 인증을 하나만 등록 합니다. 추가 인증은 고유한 인증 체계를 사용 하 여 등록 해야 합니다.
 
-다음 단계는 두 인증 체계를 모두 허용 하도록 기본 권한 부여 정책을 업데이트 하는 것입니다. 예를 들면 다음과 같습니다.:
+다음 단계는 두 인증 체계를 모두 허용 하도록 기본 권한 부여 정책을 업데이트 하는 것입니다. 다음은 그 예입니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

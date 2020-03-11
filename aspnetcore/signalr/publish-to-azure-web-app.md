@@ -10,24 +10,24 @@ no-loc:
 - SignalR
 uid: signalr/publish-to-azure-web-app
 ms.openlocfilehash: d03a007ca883b3d0391b848e3e92c90469ee640a
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963926"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652653"
 ---
-# <a name="publish-an-aspnet-core-opno-locsignalr-app-to-azure-app-service"></a>Azure App Service에 ASP.NET Core SignalR 앱 게시
+# <a name="publish-an-aspnet-core-signalr-app-to-azure-app-service"></a>Azure App Service에 ASP.NET Core SignalR 앱 게시
 
 [Brady Gaster](https://twitter.com/bradygaster)
 
 [Azure App Service](/azure/app-service/app-service-web-overview) 은 ASP.NET Core를 포함 하 여 웹 앱을 호스팅하기 위한 [Microsoft 클라우드 컴퓨팅](https://azure.microsoft.com/) 플랫폼 서비스입니다.
 
 > [!NOTE]
-> 이 문서는 Visual Studio에서 ASP.NET Core SignalR 앱 게시를 나타냅니다. 자세한 내용은 [Azure에 대 한SignalR 서비스](https://azure.microsoft.com/services/signalr-service)를 참조 하세요.
+> 본문에서는 Visual Studio에서 ASP.NET Core SignalR 앱을 게시하는 방법을 설명합니다. 자세한 내용은 [SignalR service For Azure](https://azure.microsoft.com/services/signalr-service)를 참조 하세요.
 
 ## <a name="publish-the-app"></a>앱 게시
 
-이 문서에서는 Visual Studio의 도구를 사용 하 여 게시 하는 방법을 설명 합니다. 사용자 Visual Studio Code [Azure CLI](/cli/azure) 명령을 사용 하 여 Azure에 앱을 게시할 수 있습니다. 자세한 내용은 [명령줄 도구를 사용 하 여 Azure에 ASP.NET Core 앱 게시](/azure/app-service/app-service-web-get-started-dotnet)를 참조 하세요.
+본문에서는 Visual Studio의 도구를 이용해서 게시하는 방법을 알아봅니다. 사용자 Visual Studio Code [Azure CLI](/cli/azure) 명령을 사용 하 여 Azure에 앱을 게시할 수 있습니다. 자세한 내용은 [명령줄 도구를 사용 하 여 Azure에 ASP.NET Core 앱 게시](/azure/app-service/app-service-web-get-started-dotnet)를 참조 하세요.
 
 1. **솔루션 탐색기**에서 프로젝트를 마우스 오른쪽 단추로 클릭하고 **게시**를 선택합니다.
 
@@ -37,7 +37,7 @@ ms.locfileid: "73963926"
 
    **App Service 만들기** 대화 상자에서 다음 표에 설명 된 정보를 입력 하 고 **만들기**를 선택 합니다.
 
-   | 항목               | 설명 |
+   | 항목               | Description |
    | ------------------ | ----------- |
    | **이름**           | 앱의 고유한 이름입니다. |
    | **구독**   | 앱에서 사용 하는 Azure 구독입니다. |
@@ -46,15 +46,15 @@ ms.locfileid: "73963926"
 
 1. **종속성** > **추가** 드롭다운 목록에서 **Azure SignalR 서비스** 를 선택 합니다.
 
-   ![Azure의 선택 항목을 표시 하는 종속성 영역 [! OP. NO-LOC (SignalR)] 서비스 추가 드롭다운 목록](publish-to-azure-web-app/_static/signalr-service-dependency.png)
+   추가 드롭다운 목록에서 Azure SignalR 서비스의 선택 항목을 보여 주는 종속성 영역을 ![](publish-to-azure-web-app/_static/signalr-service-dependency.png)
 
 1. **Azure SignalR 서비스** 대화 상자에서 **새 azure SignalR 서비스 인스턴스 만들기**를 선택 합니다.
 
 1. **이름**, **리소스 그룹**및 **위치**를 제공 합니다. **Azure SignalR 서비스** 대화 상자로 돌아가서 **추가**를 선택 합니다.
 
-Visual Studio에서는 다음 작업을 완료 합니다.
+그러면 Visual Studio가 다음 작업을 완료합니다.
 
-* 게시 설정을 포함 하는 게시 프로필을 만듭니다.
+* 게시 설정이 담긴 게시 프로필을 만듭니다.
 * 제공 된 세부 정보를 사용 하 여 *Azure 웹 앱* 을 만듭니다.
 * 앱을 게시 합니다.
 * 웹 앱을 로드 하는 브라우저를 시작 합니다.
@@ -84,7 +84,7 @@ Azure SignalR 서비스 없이 호스트 되는 앱의 경우 다음을 사용 �
 
 웹 소켓 및 기타 전송은 선택한 App Service 계획을 기준으로 제한 됩니다. 자세한 내용은 azure [구독 및 서비스 제한, 할당량 및 제약 조건](/azure/azure-subscription-service-limits#app-service-limits) 문서의 *azure Cloud Services 제한* 및 *App Service 제한* 섹션을 참조 하세요.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [Azure SignalR Service 란?](/azure/azure-signalr/signalr-overview)
 * <xref:signalr/introduction>

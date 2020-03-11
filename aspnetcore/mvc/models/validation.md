@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/15/2019
 uid: mvc/models/validation
-ms.openlocfilehash: a39eeead10849d11349688c42fe814ede9e8a847
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
-ms.translationtype: HT
+ms.openlocfilehash: cf6b77de78f2c5dda48ffcd8ac1f9ed2f8d28bd7
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77172497"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652515"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>ASP.NET Core MVC 및 Razor Pages의 모델 유효성 검사
 
@@ -21,7 +21,7 @@ ms.locfileid: "77172497"
 
 이 문서에서는 ASP.NET Core MVC 또는 Razor Pages 앱에서 사용자 입력의 유효성을 검사하는 방법에 대해 설명합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/samples) ([다운로드 방법](xref:index#how-to-download-a-sample)). 다운로드 예제는 영역을 테스트하기 위한 기초적인 앱을 제공합니다.
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="model-state"></a>모델 상태
 
@@ -31,7 +31,7 @@ ms.locfileid: "77172497"
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Pages/Movies/Create.cshtml.cs?name=snippet_OnPostAsync&highlight=3-6)]
 
-웹 API 컨트롤러는 `[ApiController]` 특성을 포함하는 경우 `ModelState.IsValid`를 확인할 필요가 없습니다. 이 경우 모델 상태가 잘못되면 오류 세부 정보를 포함하는 자동 HTTP 400 응답이 반환됩니다. 자세한 정보는 [자동 HTTP 400 응답](xref:web-api/index#automatic-http-400-responses)을 참조하세요.
+웹 API 컨트롤러는 `ModelState.IsValid` 특성을 포함하는 경우 `[ApiController]`를 확인할 필요가 없습니다. 이 경우 모델 상태가 잘못되면 오류 세부 정보를 포함하는 자동 HTTP 400 응답이 반환됩니다. 자세한 정보는 [자동 HTTP 400 응답](xref:web-api/index#automatic-http-400-responses)을 참조하세요.
 
 ## <a name="rerun-validation"></a>유효성 검사 다시 실행
 
@@ -49,28 +49,28 @@ ms.locfileid: "77172497"
 
 다음은 몇 가지 기본 제공 유효성 검사 특성입니다.
 
-* `[CreditCard]`: 속성에 신용 카드 형식이 있는지 유효성을 검사합니다.
-* `[Compare]`: 모델의 두 속성이 일치하는지 유효성을 검사합니다.
-* `[EmailAddress]`: 속성에 이메일 형식이 있는지 유효성을 검사합니다.
-* `[Phone]`: 속성에 전화 번호 형식이 있는지 유효성을 검사합니다.
-* `[Range]`: 속성 값이 지정된 범위 내에 포함되는지 유효성을 검사합니다.
-* `[RegularExpression]`: 속성 값이 지정된 정규 식과 일치하는지 유효성을 검사합니다.
-* `[Required]`: 필드가 Null이 아닌지 유효성을 검사합니다. 이 특성의 동작에 대한 자세한 내용은 [`[Required]` 특성](#required-attribute)을 참조하세요.
-* `[StringLength]`: 문자열 속성 값이 지정된 길이 한계를 초과하지 않는지 유효성을 검사합니다.
-* `[Url]`: 속성에 URL 형식이 있는지 유효성을 검사합니다.
-* `[Remote]`: 서버에 대한 작업 명령을 호출하여 클라이언트에 대한 입력의 유효성을 검사합니다. 이 특성의 동작에 대한 자세한 내용은 [`[Remote]` 특성](#remote-attribute)을 참조하세요.
+* `[CreditCard]`: 속성에 신용 카드 형식이 있는지 유효성을 검사 합니다.
+* `[Compare]`: 모델의 두 속성이 일치 하는지 확인 합니다.
+* `[EmailAddress]`: 속성에 전자 메일 형식이 있는지 확인 합니다.
+* `[Phone]`: 속성에 전화 번호 형식이 있는지 확인 합니다.
+* `[Range]`: 속성 값이 지정 된 범위 내에 속하는지 확인 합니다.
+* `[RegularExpression]`: 속성 값이 지정 된 정규식과 일치 하는지 확인 합니다.
+* `[Required]`: 필드가 null이 아닌지 확인 합니다. 이 특성의 동작에 대한 자세한 내용은 [`[Required]` 특성](#required-attribute)을 참조하세요.
+* `[StringLength]`: 문자열 속성 값이 지정 된 길이 제한을 초과 하지 않는지 확인 합니다.
+* `[Url]`: 속성에 URL 형식이 있는지 유효성을 검사 합니다.
+* `[Remote]`: 서버에서 동작 메서드를 호출 하 여 클라이언트에서 입력의 유효성을 검사 합니다. 이 특성의 동작에 대한 자세한 내용은 [`[Remote]` 특성](#remote-attribute)을 참조하세요.
 
 유효성 검사 특성의 전체 목록은 [System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnotations) 네임스페이스에서 확인할 수 있습니다.
 
 ### <a name="error-messages"></a>오류 메시지
 
-유효성 검사 특성을 사용하여 잘못된 입력에 대해 표시할 오류 메시지를 지정할 수 있습니다. 예를 들어:
+유효성 검사 특성을 사용하여 잘못된 입력에 대해 표시할 오류 메시지를 지정할 수 있습니다. 다음은 그 예입니다.
 
 ```csharp
 [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
 ```
 
-내부적으로 이 특성은 필드 이름에 대한 자리 표시자 및 경우에 따라 추가 자리 표시자를 사용하여 `String.Format`을 호출합니다. 예를 들어:
+내부적으로 이 특성은 필드 이름에 대한 자리 표시자 및 경우에 따라 추가 자리 표시자를 사용하여 `String.Format`을 호출합니다. 다음은 그 예입니다.
 
 ```csharp
 [StringLength(8, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
@@ -82,7 +82,7 @@ ms.locfileid: "77172497"
 
 ## <a name="required-attribute"></a>[Required] 특성
 
-.NET Core 3.0 이상의 유효성 검사 시스템은 Null을 허용하지 않는 매개 변수 또는 바인딩된 속성을 `[Required]` 특성을 포함한 것처럼 처리합니다. `decimal` 및 `int`와 같은 [값 형식](/dotnet/csharp/language-reference/keywords/value-types)은 Null을 허용하지 않습니다. `Startup.ConfigureServices`에서 <xref:Microsoft.AspNetCore.Mvc.MvcOptions.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes>를 구성하여 이 동작을 사용하지 않도록 설정할 수 있습니다.
+.NET Core 3.0 이상의 유효성 검사 시스템은 Null을 허용하지 않는 매개 변수 또는 바인딩된 속성을 `[Required]` 특성을 포함한 것처럼 처리합니다. [ 및 ](/dotnet/csharp/language-reference/keywords/value-types)와 같은 `decimal`값 형식`int`은 Null을 허용하지 않습니다. <xref:Microsoft.AspNetCore.Mvc.MvcOptions.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes>에서 `Startup.ConfigureServices`를 구성하여 이 동작을 사용하지 않도록 설정할 수 있습니다.
 
 ```csharp
 services.AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
@@ -94,7 +94,7 @@ services.AddControllers(options => options.SuppressImplicitRequiredAttributeForN
 
 그러나 Null을 허용하지 않는 속성에 대한 모델 바인딩이 실패하여 `The value '' is invalid`와 같은 오류 메시지가 표시될 수 있습니다. Null을 허용하지 않는 형식의 서버 쪽 유효성 검사에 대한 사용자 지정 오류 메시지를 지정하려는 경우 다음과 같은 방법이 있습니다.
 
-* 필드를 Null 허용으로 만듭니다(예: `decimal` 대신에 `decimal?`). [Null을 허용하는 \<T>](/dotnet/csharp/programming-guide/nullable-types/) 값 형식은 표준 Nul을 허용 형식처럼 처리됩니다.
+* 필드를 Null 허용으로 만듭니다(예: `decimal?` 대신에 `decimal`). [Null을 허용하는 \<T>](/dotnet/csharp/programming-guide/nullable-types/) 값 형식은 표준 Nul을 허용 형식처럼 처리됩니다.
 * 다음 예제에서와 같이 모델 바인딩에 의해 사용할 기본 오류 메시지를 지정합니다.
 
   [!code-csharp[](validation/samples/3.x/ValidationSample/Startup.cs?name=snippet_Configuration&highlight=5-6)]
@@ -134,7 +134,7 @@ services.AddControllers(options => options.SuppressImplicitRequiredAttributeForN
    
 ### <a name="additional-fields"></a>추가 필드
 
-`[Remote]` 특성의 `AdditionalFields` 속성을 사용하여 서버의 데이터를 기준으로 필드 조합의 유효성을 검사할 수 있습니다. 예를 들어 `User` 모델이 `FirstName` 및 `LastName` 속성을 포함한 경우 해당 이름 쌍을 이미 가진 기존 사용자가 없는지 확인하는 것이 좋습니다. 다음 예제에서는 `AdditionalFields`을 사용하는 방법을 보여 줍니다.
+`AdditionalFields` 특성의 `[Remote]` 속성을 사용하여 서버의 데이터를 기준으로 필드 조합의 유효성을 검사할 수 있습니다. 예를 들어 `User` 모델이 `FirstName` 및 `LastName` 속성을 포함한 경우 해당 이름 쌍을 이미 가진 기존 사용자가 없는지 확인하는 것이 좋습니다. 다음 예제에서는 `AdditionalFields`을 사용하는 방법을 보여 줍니다.
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Models/User.cs?name=snippet_Name&highlight=1,5)]
 
@@ -151,7 +151,7 @@ services.AddControllers(options => options.SuppressImplicitRequiredAttributeForN
 public string MiddleName { get; set; }
 ```
 
-모든 특성 인수와 같은 `AdditionalFields`은 상수 식이어야 합니다. 따라서 `AdditionalFields`를 초기화하기 위해 [보간된 문자열](/dotnet/csharp/language-reference/keywords/interpolated-strings)을 사용하거나 <xref:System.String.Join*>을 호출하지 마십시오.
+모든 특성 인수와 같은 `AdditionalFields`은 상수 식이어야 합니다. 따라서 [를 초기화하기 위해 ](/dotnet/csharp/language-reference/keywords/interpolated-strings)보간된 문자열<xref:System.String.Join*>을 사용하거나 `AdditionalFields`을 호출하지 마십시오.
 
 ## <a name="alternatives-to-built-in-attributes"></a>기본 제공 특성에 대한 대안
 
@@ -198,7 +198,7 @@ public string MiddleName { get; set; }
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Controllers/UsersController.cs?name=snippet_CheckAgeSignature)]
 
-기간 확인 페이지(*CheckAge.cshtml*)에는 두 가지 양식이 있습니다. 첫 번째 양식은 `99`의 `Age` 값을 쿼리 문자열 매개 변수(`https://localhost:5001/Users/CheckAge?Age=99`)로 제출합니다.
+기간 확인 페이지(*CheckAge.cshtml*)에는 두 가지 양식이 있습니다. 첫 번째 양식은 `Age`의 `99` 값을 쿼리 문자열 매개 변수(`https://localhost:5001/Users/CheckAge?Age=99`)로 제출합니다.
 
 쿼리 문자열에서 올바른 서식이 지정된 `age` 매개 변수를 제출하면 양식이 유효성을 검사합니다.
 
@@ -265,7 +265,7 @@ HTML의 `data-` 특성 출력은 `Movie.ReleaseDate` 속성에 대한 유효성 
 
 ## <a name="unobtrusive-validation"></a>비간섭 유효성 검사
 
-비간섭 유효성 검사에 대한 자세한 내용은 [이 GitHub 문제](https://github.com/aspnet/AspNetCore.Docs/issues/1111)를 참조하세요.
+비간섭 유효성 검사에 대한 자세한 내용은 [이 GitHub 문제](https://github.com/dotnet/AspNetCore.Docs/issues/1111)를 참조하세요.
 
 ### <a name="add-validation-to-dynamic-forms"></a>동적 형식에 유효성 검사 추가
 
@@ -325,7 +325,7 @@ $.get({
 * 유효성 검사 규칙 이름 및 오류 메시지 텍스트(예: `data-val-rulename="Error message."`)를 식별합니다.
 * 유효섬 검사기에 필요한 추가 매개 변수(예: `data-val-rulename-param1="value"`)를 제공합니다.
 
-다음 에제에서는 샘플 앱의 `ClassicMovie` 특성에 대한 `data-` 특성을 보여줍니다.
+다음 에제에서는 샘플 앱의 `data-` 특성에 대한 `ClassicMovie` 특성을 보여줍니다.
 
 ```html
 <input class="form-control" type="date"
@@ -339,13 +339,13 @@ $.get({
 앞에서 설명했듯이 [태그 도우미](xref:mvc/views/tag-helpers/intro) 및 [HTML 도우미](xref:mvc/views/overview)는 유효성 검사 특성의 정보를 사용하여 `data-` 특성을 렌더링합니다. 사용자 지정 `data-` HTML 특성을 생성하는 코드를 작성하는 두 가지 방법이 있습니다.
 
 * `AttributeAdapterBase<TAttribute>`에서 파생하는 클래스 및 `IValidationAttributeAdapterProvider`를 구현하는 클래스를 만들고 사용자의 특성 및 해당 어댑터를 DI에 등록합니다. 이 방법은 서버 관련 및 클라이언트 관련 유효성 검사 코드가 별도의 클래스에 있는 [단일 책임 보안 주체](https://wikipedia.org/wiki/Single_responsibility_principle)를 따릅니다. 또한 이 어댑터는 DI에 등록되었으므로 필요한 경우 DI의 다른 서비스를 사용할 수 있다는 이점이 있습니다.
-* 사용자의 `ValidationAttribute` 클래스에서 `IClientModelValidator`를 구현합니다. 이 방법은 특성이 서버 쪽 유효성 검사를 수행하지 않고 DI의 서비스가 필요하지 않은 경우 적절할 수 있습니다.
+* 사용자의 `IClientModelValidator` 클래스에서 `ValidationAttribute`를 구현합니다. 이 방법은 특성이 서버 쪽 유효성 검사를 수행하지 않고 DI의 서비스가 필요하지 않은 경우 적절할 수 있습니다.
 
 ### <a name="attributeadapter-for-client-side-validation"></a>클라이언트 쪽 유효성 검사에 대한 특성 어댑터
 
 이 HTML `data-` 특성 렌더링 방법은 샘플 앱의 `ClassicMovie` 특성에 사용됩니다. 이 방법을 사용하여 클라이언트 유효성 검사를 추가하려면:
 
-1. 사용자 지정 유효성 검사 특성에 대한 특성 어댑터 클래스를 생성합니다. [AttributeAdapterBase\<T>](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.attributeadapterbase-1?view=aspnetcore-2.2)에서 클래스를 파생합니다. 이 예제와 같이 렌더링된 출력에 `data-` 특성을 추가하는 `AddValidation` 메서드를 생성합니다.
+1. 사용자 지정 유효성 검사 특성에 대한 특성 어댑터 클래스를 생성합니다. [AttributeAdapterBase\<T>](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.attributeadapterbase-1?view=aspnetcore-2.2)에서 클래스를 파생합니다. 이 예제와 같이 렌더링된 출력에 `AddValidation` 특성을 추가하는 `data-` 메서드를 생성합니다.
 
    [!code-csharp[](validation/samples/3.x/ValidationSample/Validation/ClassicMovieAttributeAdapter.cs?name=snippet_Class)]
 
@@ -373,12 +373,12 @@ $.get({
 
 클라이언트 쪽 유효성 검사를 사용하지 않도록 설정하는 다른 옵션:
 
-* 모든 *.cshtml* 파일의 `_ValidationScriptsPartial`에 대한 참조를 주석으로 처리합니다.
+* 모든 `_ValidationScriptsPartial`.cshtml*파일의*에 대한 참조를 주석으로 처리합니다.
 * *Pages\Shared\_ValidationScriptsPartial* 파일의 콘텐츠를 제거합니다.
 
-위의 방법으로는 ASP.NET Core ID Razor 클래스 라이브러리의 클라이언트 쪽 유효성 검사를 방지할 수 없습니다. 자세한 내용은 <xref:security/authentication/scaffold-identity>를 참조하세요.
+위의 방법으로는 ASP.NET Core ID Razor 클래스 라이브러리의 클라이언트 쪽 유효성 검사를 방지할 수 없습니다. 자세한 내용은 <xref:security/authentication/scaffold-identity>을 참조하세요.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [System.ComponentModel.DataAnnotations 네임스페이스](xref:System.ComponentModel.DataAnnotations)
 * [모델 바인딩](model-binding.md)
@@ -389,7 +389,7 @@ $.get({
 
 이 문서에서는 ASP.NET Core MVC 또는 Razor Pages 앱에서 사용자 입력의 유효성을 검사하는 방법에 대해 설명합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/sample) ([다운로드 방법](xref:index#how-to-download-a-sample)). 다운로드 예제는 영역을 테스트하기 위한 기초적인 앱을 제공합니다.
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="model-state"></a>모델 상태
 
@@ -399,7 +399,7 @@ $.get({
 
 [!code-csharp[](validation/samples_snapshot/2.x/Create.cshtml.cs?name=snippet&highlight=3-6)]
 
-웹 API 컨트롤러는 `[ApiController]` 특성을 포함하는 경우 `ModelState.IsValid`를 확인할 필요가 없습니다. 이 경우 모델 상태가 잘못되면 오류 세부 정보를 포함하는 자동 HTTP 400 응답이 반환됩니다. 자세한 정보는 [자동 HTTP 400 응답](xref:web-api/index#automatic-http-400-responses)을 참조하세요.
+웹 API 컨트롤러는 `ModelState.IsValid` 특성을 포함하는 경우 `[ApiController]`를 확인할 필요가 없습니다. 이 경우 모델 상태가 잘못되면 오류 세부 정보를 포함하는 자동 HTTP 400 응답이 반환됩니다. 자세한 정보는 [자동 HTTP 400 응답](xref:web-api/index#automatic-http-400-responses)을 참조하세요.
 
 ## <a name="rerun-validation"></a>유효성 검사 다시 실행
 
@@ -409,7 +409,7 @@ $.get({
 
 ## <a name="validation-attributes"></a>유효성 검사 특성
 
-유효성 검사 특성을 사용하여 모델 속성에 대한 유효성 검사 규칙을 지정할 수 있습니다. [샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/sample)의 다음 예제는 유효성 검사 특성으로 주석을 단 모델 클래스를 나타냅니다. `[ClassicMovie]` 특성은 사용자 지정 유효성 검사 특성이며 다른 특성은 기본 제공 특성입니다. 사용자 지정 특성을 구현하는 다른 방법을 보여 주는 `[ClassicMovie2]`는 표시되지 않습니다.
+유효성 검사 특성을 사용하여 모델 속성에 대한 유효성 검사 규칙을 지정할 수 있습니다. [샘플 앱](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/validation/sample)의 다음 예제는 유효성 검사 특성으로 주석을 단 모델 클래스를 나타냅니다. `[ClassicMovie]` 특성은 사용자 지정 유효성 검사 특성이며 다른 특성은 기본 제공 특성입니다. 사용자 지정 특성을 구현하는 다른 방법을 보여 주는 `[ClassicMovie2]`는 표시되지 않습니다.
 
 [!code-csharp[](validation/samples/2.x/ValidationSample/Models/Movie.cs?name=snippet_ModelClass)]
 
@@ -417,30 +417,30 @@ $.get({
 
 기본 제공 유효성 검사 특성은 다음과 같습니다.
 
-* `[CreditCard]`: 속성에 신용 카드 형식이 있는지 유효성을 검사합니다.
-* `[Compare]`: 모델의 두 속성이 일치하는지 유효성을 검사합니다. 예를 들어 *Register.cshtml.cs* 파일은 `[Compare]`를 사용하여 입력된 두 암호가 일치하는지 유효성을 검사합니다. [스캐폴드 ID](xref:security/authentication/scaffold-identity)는 등록 코드를 확인합니다.
-* `[EmailAddress]`: 속성에 이메일 형식이 있는지 유효성을 검사합니다.
-* `[Phone]`: 속성에 전화 번호 형식이 있는지 유효성을 검사합니다.
-* `[Range]`: 속성 값이 지정된 범위 내에 포함되는지 유효성을 검사합니다.
-* `[RegularExpression]`: 속성 값이 지정된 정규 식과 일치하는지 유효성을 검사합니다.
-* `[Required]`: 필드가 Null이 아닌지 유효성을 검사합니다. 이 특성의 동작에 대한 자세한 내용은 [`[Required]` 특성](#required-attribute)을 참조하세요.
-* `[StringLength]`: 문자열 속성 값이 지정된 길이 한계를 초과하지 않는지 유효성을 검사합니다.
-* `[Url]`: 속성에 URL 형식이 있는지 유효성을 검사합니다.
-* `[Remote]`: 서버에 대한 작업 명령을 호출하여 클라이언트에 대한 입력의 유효성을 검사합니다. 이 특성의 동작에 대한 자세한 내용은 [`[Remote]` 특성](#remote-attribute)을 참조하세요.
+* `[CreditCard]`: 속성에 신용 카드 형식이 있는지 유효성을 검사 합니다.
+* `[Compare]`: 모델의 두 속성이 일치 하는지 확인 합니다. 예를 들어 *Register.cshtml.cs* 파일은 `[Compare]`를 사용하여 입력된 두 암호가 일치하는지 유효성을 검사합니다. [스캐폴드 ID](xref:security/authentication/scaffold-identity)는 등록 코드를 확인합니다.
+* `[EmailAddress]`: 속성에 전자 메일 형식이 있는지 확인 합니다.
+* `[Phone]`: 속성에 전화 번호 형식이 있는지 확인 합니다.
+* `[Range]`: 속성 값이 지정 된 범위 내에 속하는지 확인 합니다.
+* `[RegularExpression]`: 속성 값이 지정 된 정규식과 일치 하는지 확인 합니다.
+* `[Required]`: 필드가 null이 아닌지 확인 합니다. 이 특성의 동작에 대한 자세한 내용은 [`[Required]` 특성](#required-attribute)을 참조하세요.
+* `[StringLength]`: 문자열 속성 값이 지정 된 길이 제한을 초과 하지 않는지 확인 합니다.
+* `[Url]`: 속성에 URL 형식이 있는지 유효성을 검사 합니다.
+* `[Remote]`: 서버에서 동작 메서드를 호출 하 여 클라이언트에서 입력의 유효성을 검사 합니다. 이 특성의 동작에 대한 자세한 내용은 [`[Remote]` 특성](#remote-attribute)을 참조하세요.
 
-클라이언트 쪽 유효성 검사에 `[RegularExpression]` 특성을 사용하면 클라이언트의 JavaScript에서 regex가 실행됩니다. 이는 [ECMAScript](/dotnet/standard/base-types/regular-expression-options#ecmascript-matching-behavior) 일치 동작이 사용됨을 의미합니다. 자세한 내용은 [이 GitHub 이슈](https://github.com/dotnet/corefx/issues/42487)를 참조하세요.
+클라이언트 쪽 유효성 검사에 `[RegularExpression]` 특성을 사용하면 클라이언트의 JavaScript에서 regex가 실행됩니다. 이는 [ECMAScript](/dotnet/standard/base-types/regular-expression-options#ecmascript-matching-behavior) 일치 동작이 사용됨을 의미합니다. 자세한 내용은 [이 GitHub 문제](https://github.com/dotnet/corefx/issues/42487)를 참조하세요.
 
 유효성 검사 특성의 전체 목록은 [System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnotations) 네임스페이스에서 확인할 수 있습니다.
 
 ### <a name="error-messages"></a>오류 메시지
 
-유효성 검사 특성을 사용하여 잘못된 입력에 대해 표시할 오류 메시지를 지정할 수 있습니다. 예를 들어:
+유효성 검사 특성을 사용하여 잘못된 입력에 대해 표시할 오류 메시지를 지정할 수 있습니다. 다음은 그 예입니다.
 
 ```csharp
 [StringLength(8, ErrorMessage = "Name length can't be more than 8.")]
 ```
 
-내부적으로 이 특성은 필드 이름에 대한 자리 표시자 및 경우에 따라 추가 자리 표시자를 사용하여 `String.Format`을 호출합니다. 예를 들어:
+내부적으로 이 특성은 필드 이름에 대한 자리 표시자 및 경우에 따라 추가 자리 표시자를 사용하여 `String.Format`을 호출합니다. 다음은 그 예입니다.
 
 ```csharp
 [StringLength(8, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 6)]
@@ -452,7 +452,7 @@ $.get({
 
 ## <a name="required-attribute"></a>[Required] 특성
 
-기본적으로 유효성 검사 시스템은 Null을 허용하지 않는 매개 변수 또는 속성을 `[Required]` 특성을 포함한 것처럼 처리합니다. `decimal` 및 `int`와 같은 [값 형식](/dotnet/csharp/language-reference/keywords/value-types)은 Null을 허용하지 않습니다.
+기본적으로 유효성 검사 시스템은 Null을 허용하지 않는 매개 변수 또는 속성을 `[Required]` 특성을 포함한 것처럼 처리합니다. [ 및 ](/dotnet/csharp/language-reference/keywords/value-types)와 같은 `decimal`값 형식`int`은 Null을 허용하지 않습니다.
 
 ### <a name="required-validation-on-the-server"></a>서버에 대한 [Required] 유효성 검사
 
@@ -460,7 +460,7 @@ $.get({
 
 그러나 Null을 허용하지 않는 속성에 대한 모델 바인딩이 실패하여 `The value '' is invalid`와 같은 오류 메시지가 표시될 수 있습니다. Null을 허용하지 않는 형식의 서버 쪽 유효성 검사에 대한 사용자 지정 오류 메시지를 지정하려는 경우 다음과 같은 방법이 있습니다.
 
-* 필드를 Null 허용으로 만듭니다(예: `decimal` 대신에 `decimal?`). [Null을 허용하는 \<T>](/dotnet/csharp/programming-guide/nullable-types/) 값 형식은 표준 Nul을 허용 형식처럼 처리됩니다.
+* 필드를 Null 허용으로 만듭니다(예: `decimal?` 대신에 `decimal`). [Null을 허용하는 \<T>](/dotnet/csharp/programming-guide/nullable-types/) 값 형식은 표준 Nul을 허용 형식처럼 처리됩니다.
 * 다음 예제에서와 같이 모델 바인딩에 의해 사용할 기본 오류 메시지를 지정합니다.
 
   [!code-csharp[](validation/samples/2.x/ValidationSample/Startup.cs?name=snippet_MaxModelValidationErrors&highlight=4-5)]
@@ -496,11 +496,11 @@ $.get({
 
    [!code-csharp[](validation/samples/2.x/ValidationSample/Models/User.cs?name=snippet_UserEmailProperty)]
  
-   `Microsoft.AspNetCore.Mvc` 네임스페이스에 `[Remote]` 특성이 있습니다. `Microsoft.AspNetCore.App` 또는 `Microsoft.AspNetCore.All` 메타패키지를 사용하지 않는 경우 [Microsoft.AspNetCore.Mvc.ViewFeatures](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.ViewFeatures) NuGet 패키지를 설치합니다.
+   `[Remote]` 네임스페이스에 `Microsoft.AspNetCore.Mvc` 특성이 있습니다. [ 또는 ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.ViewFeatures) 메타패키지를 사용하지 않는 경우 `Microsoft.AspNetCore.App`Microsoft.AspNetCore.Mvc.ViewFeatures`Microsoft.AspNetCore.All` NuGet 패키지를 설치합니다.
    
 ### <a name="additional-fields"></a>추가 필드
 
-`[Remote]` 특성의 `AdditionalFields` 속성을 사용하여 서버의 데이터를 기준으로 필드 조합의 유효성을 검사할 수 있습니다. 예를 들어 `User` 모델이 `FirstName` 및 `LastName` 속성을 포함한 경우 해당 이름 쌍을 이미 가진 기존 사용자가 없는지 확인하는 것이 좋습니다. 다음 예제에서는 `AdditionalFields`을 사용하는 방법을 보여 줍니다.
+`AdditionalFields` 특성의 `[Remote]` 속성을 사용하여 서버의 데이터를 기준으로 필드 조합의 유효성을 검사할 수 있습니다. 예를 들어 `User` 모델이 `FirstName` 및 `LastName` 속성을 포함한 경우 해당 이름 쌍을 이미 가진 기존 사용자가 없는지 확인하는 것이 좋습니다. 다음 예제에서는 `AdditionalFields`을 사용하는 방법을 보여 줍니다.
 
 [!code-csharp[](validation/samples/2.x/ValidationSample/Models/User.cs?name=snippet_UserNameProperties)]
 
@@ -517,7 +517,7 @@ $.get({
 public string MiddleName { get; set; }
 ```
 
-모든 특성 인수와 같은 `AdditionalFields`은 상수 식이어야 합니다. 따라서 `AdditionalFields`를 초기화하기 위해 [보간된 문자열](/dotnet/csharp/language-reference/keywords/interpolated-strings)을 사용하거나 <xref:System.String.Join*>을 호출하지 마십시오.
+모든 특성 인수와 같은 `AdditionalFields`은 상수 식이어야 합니다. 따라서 [를 초기화하기 위해 ](/dotnet/csharp/language-reference/keywords/interpolated-strings)보간된 문자열<xref:System.String.Join*>을 사용하거나 `AdditionalFields`을 호출하지 마십시오.
 
 ## <a name="alternatives-to-built-in-attributes"></a>기본 제공 특성에 대한 대안
 
@@ -561,13 +561,13 @@ public string MiddleName { get; set; }
 
 [!code-csharp[](validation/samples/2.x/ValidationSample/Controllers/UsersController.cs?name=snippet_CheckAge)]
 
-기간 확인 페이지(*CheckAge.cshtml*)에는 두 가지 양식이 있습니다. 첫 번째 양식은 `99`의 `Age` 값을 쿼리 문자열(`https://localhost:5001/Users/CheckAge?Age=99`)로 제출합니다.
+기간 확인 페이지(*CheckAge.cshtml*)에는 두 가지 양식이 있습니다. 첫 번째 양식은 `Age`의 `99` 값을 쿼리 문자열(`https://localhost:5001/Users/CheckAge?Age=99`)로 제출합니다.
 
 쿼리 문자열에서 올바른 서식이 지정된 `age` 매개 변수를 제출하면 양식이 유효성을 검사합니다.
 
 기간 확인 페이지의 두 번째 양식은 요청 본문의 `Age` 값을 제출하고 유효성 검사가 실패합니다. `age` 매개 변수는 쿼리 문자열에서 가져와야 하므로 바인딩이 실패합니다.
 
-`CompatibilityVersion.Version_2_1` 이상을 사용하여 실행하는 경우 최상위 노드 유효성 검사가 기본적으로 활성화됩니다. 그렇지 않으면 최상위 노드 유효성 검사가 비활성화됩니다. 아래와 같이 (`Startup.ConfigureServices`)에서 <xref:Microsoft.AspNetCore.Mvc.MvcOptions.AllowValidatingTopLevelNodes*> 속성을 설정하여 기본 옵션을 재정의할 수 있습니다.
+`CompatibilityVersion.Version_2_1` 이상을 사용하여 실행하는 경우 최상위 노드 유효성 검사가 기본적으로 활성화됩니다. 그렇지 않으면 최상위 노드 유효성 검사가 비활성화됩니다. 아래와 같이 (<xref:Microsoft.AspNetCore.Mvc.MvcOptions.AllowValidatingTopLevelNodes*>)에서 `Startup.ConfigureServices` 속성을 설정하여 기본 옵션을 재정의할 수 있습니다.
 
 [!code-csharp[](validation/samples_snapshot/2.x/Startup.cs?name=snippet_AddMvc&highlight=4)]
 
@@ -579,7 +579,7 @@ public string MiddleName { get; set; }
 
 ## <a name="maximum-recursion"></a>최대 재귀
 
-<xref:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor>는 유효성 검사 중인 모델의 개체 그래프를 트래버스합니다. 매우 깊거나 무한히 재귀하는 모델의 경우 유효성 검사를 실행하면 스택 오버플로가 발생할 수 있습니다. [MvcOptions.MaxValidationDepth](xref:Microsoft.AspNetCore.Mvc.MvcOptions.MaxValidationDepth)는 방문자 재귀가 구성된 깊이를 초과하는 경우 유효성 검사를 조기에 중지하는 방법을 제공합니다. `CompatibilityVersion.Version_2_2` 이상에서 실행하는 경우 `MvcOptions.MaxValidationDepth`의 기본값은 32입니다. 그보다 이전 버전의 경우 이 값은 Null이며, 이는 깊이 제약 조건이 없음을 의미합니다.
+<xref:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor>는 유효성 검사 중인 모델의 개체 그래프를 트래버스합니다. 매우 깊거나 무한히 재귀하는 모델의 경우 유효성 검사를 실행하면 스택 오버플로가 발생할 수 있습니다. [MvcOptions.MaxValidationDepth](xref:Microsoft.AspNetCore.Mvc.MvcOptions.MaxValidationDepth)는 방문자 재귀가 구성된 깊이를 초과하는 경우 유효성 검사를 조기에 중지하는 방법을 제공합니다. `MvcOptions.MaxValidationDepth` 이상에서 실행하는 경우 `CompatibilityVersion.Version_2_2`의 기본값은 32입니다. 그보다 이전 버전의 경우 이 값은 Null이며, 이는 깊이 제약 조건이 없음을 의미합니다.
 
 ## <a name="automatic-short-circuit"></a>자동 단락
 
@@ -696,7 +696,7 @@ $.get({
 * 유효성 검사 규칙 이름 및 오류 메시지 텍스트(예: `data-val-rulename="Error message."`)를 식별합니다.
 * 유효섬 검사기에 필요한 추가 매개 변수(예: `data-val-rulename-parm1="value"`)를 제공합니다.
 
-다음 에제에서는 샘플 앱의 `ClassicMovie` 특성에 대한 `data-` 특성을 보여줍니다.
+다음 에제에서는 샘플 앱의 `data-` 특성에 대한 `ClassicMovie` 특성을 보여줍니다.
 
 ```html
 <input class="form-control" type="datetime"
@@ -710,13 +710,13 @@ $.get({
 앞에서 설명했듯이 [태그 도우미](xref:mvc/views/tag-helpers/intro) 및 [HTML 도우미](xref:mvc/views/overview)는 유효성 검사 특성의 정보를 사용하여 `data-` 특성을 렌더링합니다. 사용자 지정 `data-` HTML 특성을 생성하는 코드를 작성하는 두 가지 방법이 있습니다.
 
 * `AttributeAdapterBase<TAttribute>`에서 파생하는 클래스 및 `IValidationAttributeAdapterProvider`를 구현하는 클래스를 만들고 사용자의 특성 및 해당 어댑터를 DI에 등록합니다. 이 방법은 서버 관련 및 클라이언트 관련 유효성 검사 코드가 별도의 클래스에 있는 [단일 책임 보안 주체](https://wikipedia.org/wiki/Single_responsibility_principle)를 따릅니다. 또한 이 어댑터는 DI에 등록되었으므로 필요한 경우 DI의 다른 서비스를 사용할 수 있다는 이점이 있습니다.
-* 사용자의 `ValidationAttribute` 클래스에서 `IClientModelValidator`를 구현합니다. 이 방법은 특성이 서버 쪽 유효성 검사를 수행하지 않고 DI의 서비스가 필요하지 않은 경우 적절할 수 있습니다.
+* 사용자의 `IClientModelValidator` 클래스에서 `ValidationAttribute`를 구현합니다. 이 방법은 특성이 서버 쪽 유효성 검사를 수행하지 않고 DI의 서비스가 필요하지 않은 경우 적절할 수 있습니다.
 
 ### <a name="attributeadapter-for-client-side-validation"></a>클라이언트 쪽 유효성 검사에 대한 특성 어댑터
 
 이 HTML `data-` 특성 렌더링 방법은 샘플 앱의 `ClassicMovie` 특성에 사용됩니다. 이 방법을 사용하여 클라이언트 유효성 검사를 추가하려면:
 
-1. 사용자 지정 유효성 검사 특성에 대한 특성 어댑터 클래스를 생성합니다. [AttributeAdapterBase\<T>](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.attributeadapterbase-1?view=aspnetcore-2.2)에서 클래스를 파생합니다. 이 예제와 같이 렌더링된 출력에 `data-` 특성을 추가하는 `AddValidation` 메서드를 생성합니다.
+1. 사용자 지정 유효성 검사 특성에 대한 특성 어댑터 클래스를 생성합니다. [AttributeAdapterBase\<T>](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.attributeadapterbase-1?view=aspnetcore-2.2)에서 클래스를 파생합니다. 이 예제와 같이 렌더링된 출력에 `AddValidation` 특성을 추가하는 `data-` 메서드를 생성합니다.
 
    [!code-csharp[](validation/samples/2.x/ValidationSample/Attributes/ClassicMovieAttributeAdapter.cs?name=snippet_ClassicMovieAttributeAdapter)]
 
@@ -746,9 +746,9 @@ $.get({
 
 [!code-csharp[](validation/samples_snapshot/2.x/Startup3.cs?name=snippet_DisableClientValidation)]
 
-클라이언트 유효성 검사를 사용하지 않도록 설정하는 또 다른 방법은 사용자의 *.cshtml* 파일에서 `_ValidationScriptsPartial` 참조를 주석으로 처리하는 것입니다.
+클라이언트 유효성 검사를 사용하지 않도록 설정하는 또 다른 방법은 사용자의 `_ValidationScriptsPartial`.cshtml*파일에서* 참조를 주석으로 처리하는 것입니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [System.ComponentModel.DataAnnotations 네임스페이스](xref:System.ComponentModel.DataAnnotations)
 * [모델 바인딩](model-binding.md)

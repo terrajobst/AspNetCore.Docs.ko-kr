@@ -7,17 +7,17 @@ ms.date: 09/26/2019
 monikerRange: '>= aspnetcore-3.0'
 uid: web-api/Microsoft.dotnet-openapi
 ms.openlocfilehash: 079e36511b63c186ffa7726bdb1e3c3bcbda9d34
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
-ms.translationtype: HT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75829259"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78651249"
 ---
 # <a name="develop-aspnet-core-apps-using-openapi-tools"></a>OpenAPI 도구를 사용한 ASP.NET Core 앱 개발
 
 Ryan Brandenburg가 개발
 
-[Microsoft.dotnet-openapi](https://www.nuget.org/packages/Microsoft.dotnet-openapi)은 [OpenAPI](https://github.com/OAI/OpenAPI-Specification) 참조를 관리하기 위한 [.NET Core 전역 도구](/dotnet/core/tools/global-tools)입니다.
+[Microsoft.dotnet-openapi](https://www.nuget.org/packages/Microsoft.dotnet-openapi)은 [OpenAPI](/dotnet/core/tools/global-tools) 참조를 관리하기 위한 [.NET Core 전역 도구](https://github.com/OAI/OpenAPI-Specification)입니다.
 
 ## <a name="installation"></a>설치
 
@@ -56,15 +56,15 @@ dotnet tool install -g Microsoft.dotnet-openapi
 
 #### <a name="options"></a>옵션
 
-| 짧음 옵션| 긴 옵션| 설명 | 예제 |
+| 짧음 옵션| 긴 옵션| Description | 예제 |
 |-------|------|-------|---------|
 | -p|--updateProject | 작동할 프로젝트입니다. |dotnet openapi add file *--updateProject .\Ref.csproj* .\OpenAPI.json |
 | -c|--code-generator| 참조에 적용할 코드 생성기입니다. 옵션은 `NSwagCSharp` 및 `NSwagTypeScript`입니다. `--code-generator`가 지정되지 않으면 도구는 기본적으로 `NSwagCSharp`가 됩니다.|dotnet openapi add file .\OpenApi.json --code-generator
-| -h|--help|도움말 정보를 표시합니다.|dotnet openapi add file --help|
+| -H|--help|도움말 정보를 표시합니다.|dotnet openapi add file --help|
 
 #### <a name="arguments"></a>인수
 
-|  인수  | 설명 | 예제 |
+|  인수  | Description | 예제 |
 |-------------|-------------|---------|
 | source-file | 참조를 만들 원본입니다. OpenAPI 파일이어야 합니다. |dotnet openapi add file *.\OpenAPI.json* |
 
@@ -72,16 +72,16 @@ dotnet tool install -g Microsoft.dotnet-openapi
 
 #### <a name="options"></a>옵션
 
-| 짧음 옵션| 긴 옵션| 설명 | 예제 |
+| 짧음 옵션| 긴 옵션| Description | 예제 |
 |-------|------|-------------|---------|
 | -p|--updateProject | 작동할 프로젝트입니다. |dotnet openapi add url *--updateProject .\Ref.csproj* `https://contoso.com/openapi.json` |
 | -o|--output-file | OpenAPI 파일의 로컬 복사본을 저장할 위치입니다. |dotnet openapi add url `https://contoso.com/openapi.json` *--output-file myclient.json* |
 | -c|--code-generator| 참조에 적용할 코드 생성기입니다. 옵션은 `NSwagCSharp` 및 `NSwagTypeScript`입니다. |dotnet openapi add file .\OpenApi.json --code-generator
-| -h|--help|도움말 정보를 표시합니다.|dotnet openapi add url --help|
+| -H|--help|도움말 정보를 표시합니다.|dotnet openapi add url --help|
 
 #### <a name="arguments"></a>인수
 
-|  인수  | 설명 | 예제 |
+|  인수  | Description | 예제 |
 |-------------|-------------|---------|
 | 원본-URL | 참조를 만들 원본입니다. URL이어야 합니다. |dotnet openapi add url `https://contoso.com/openapi.json` |
 
@@ -91,14 +91,14 @@ dotnet tool install -g Microsoft.dotnet-openapi
 
 ### <a name="options"></a>옵션
 
-| 짧음 옵션| 긴 옵션| 설명| 예제 |
+| 짧음 옵션| 긴 옵션| Description| 예제 |
 |-------|------|------------|---------|
 | -p|--updateProject | 작동할 프로젝트입니다. |dotnet openapi remove *--updateProject .\Ref.csproj* .\OpenAPI.json |
-| -h|--help|도움말 정보를 표시합니다.|dotnet openapi remove --help|
+| -H|--help|도움말 정보를 표시합니다.|dotnet openapi remove --help|
 
 ### <a name="arguments"></a>인수
 
-|  인수  | 설명| 예제 |
+|  인수  | Description| 예제 |
 | ------------|------------|---------|
 | source-file | 참조를 제거할 속성입니다. |dotnet openapi remove *.\OpenAPI.json* |
 
@@ -108,13 +108,13 @@ dotnet tool install -g Microsoft.dotnet-openapi
 
 ### <a name="options"></a>옵션
 
-| 짧음 옵션| 긴 옵션| 설명 | 예제 |
+| 짧음 옵션| 긴 옵션| Description | 예제 |
 |-------|------|-------------|---------|
 | -p|--updateProject | 작동할 프로젝트입니다. | dotnet openapi refresh *--updateProject .\Ref.csproj* `https://contoso.com/openapi.json` |
-| -h|--help|도움말 정보를 표시합니다.|dotnet openapi refresh --help|
+| -H|--help|도움말 정보를 표시합니다.|dotnet openapi refresh --help|
 
 ### <a name="arguments"></a>인수
 
-|  인수  | 설명 | 예제 |
+|  인수  | Description | 예제 |
 | ------------|-------------|---------|
 | 원본-URL | 참조를 새로 고칠 URL입니다. | dotnet openapi refresh `https://contoso.com/openapi.json` |

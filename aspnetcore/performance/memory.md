@@ -7,17 +7,17 @@ ms.custom: mvc
 ms.date: 12/05/2019
 uid: performance/memory
 ms.openlocfilehash: 0ae367e954e21e2f696a3b292fa64f1d2dba98ec
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75829025"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654723"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core의 메모리 관리 및 GC (가비지 수집)
 
 [Sébastien Ros](https://github.com/sebastienros) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-.NET 등의 관리 되는 프레임 워크 에서도 메모리 관리가 복잡 합니다. 메모리 문제를 분석 하 고 이해 하는 것은 어려울 수 있습니다. 이 문서의 내용은 다음과 같습니다.
+.NET 등의 관리 되는 프레임 워크 에서도 메모리 관리가 복잡 합니다. 메모리 문제를 분석 하 고 이해 하는 것은 어려울 수 있습니다. 이 문서의 내용:
 
 * 는 많은 *메모리 누수로* 인해 발생 했으며 *GC가 작동 하지 않습니다* . 이러한 문제의 대부분은 .NET Core에서 메모리 소비가 어떻게 작동 하는지 이해 하거나 측정 방법을 이해 하지 못하는 경우에 발생 합니다.
 * 문제가 있는 메모리 사용을 보여 주고 대체 방법을 제안 합니다.
@@ -139,7 +139,7 @@ Json 모드는 프로젝트 파일이 나 게시 된 앱의 *runtimeconfig.templ
 
 프로젝트 파일에서 `ServerGarbageCollection`를 변경 하려면 앱을 다시 빌드해야 합니다.
 
-**참고:** 단일 코어가 있는 컴퓨터에서는 서버 가비지 수집을 사용할 수 **없습니다** . 자세한 내용은 <xref:System.Runtime.GCSettings.IsServerGC>를 참조하세요.
+**참고:** 단일 코어가 있는 컴퓨터에서는 서버 가비지 수집을 사용할 수 **없습니다** . 자세한 내용은 <xref:System.Runtime.GCSettings.IsServerGC>을 참조하세요.
 
 다음 이미지는 워크스테이션 GC를 사용 하는 5K RPS 아래의 메모리 프로필을 보여 줍니다.
 
@@ -171,7 +171,7 @@ public ActionResult<string> GetStaticString()
 }
 ```
 
-위의 코드:
+위의 코드는:
 
 * 는 일반적인 메모리 누수의 한 예입니다.
 * 를 자주 호출 하면 프로세스가 `OutOfMemory` 예외로 인해 충돌 될 때까지 응용 프로그램 메모리가 늘어납니다.
@@ -275,7 +275,7 @@ public int GetLOH1(int size)
 * [ResponseCaching/스트림/StreamUtilities .cs](https://github.com/dotnet/AspNetCore/blob/v3.0.0/src/Middleware/ResponseCaching/src/Streams/StreamUtilities.cs#L16)
 * [ResponseCaching/MemoryResponseCache](https://github.com/aspnet/ResponseCaching/blob/c1cb7576a0b86e32aec990c22df29c780af29ca5/src/Microsoft.AspNetCore.ResponseCaching/Internal/MemoryResponseCache.cs#L55)
 
-자세한 내용은  항목을 참조하세요.
+자세한 내용은 다음을 참조하세요.
 
 * [대량 개체 힙 검사](https://devblogs.microsoft.com/dotnet/large-object-heap-uncovered-from-an-old-msdn-article/)
 * [Large object 힙](/dotnet/standard/garbage-collection/large-object-heap)
@@ -426,7 +426,7 @@ public byte[] GetPooledArray(int size)
 
 주요 차이점은 바이트를 할당 하는 것이 고, 결과적으로 0 세대 수집이 훨씬 더 적기 때문입니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [가비지 수집](/dotnet/standard/garbage-collection/)
 * [동시성 시각화 도우미를 사용 하 여 다양 한 GC 모드 이해](https://blogs.msdn.microsoft.com/seteplia/2017/01/05/understanding-different-gc-modes-with-concurrency-visualizer/)

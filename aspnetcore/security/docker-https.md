@@ -10,11 +10,11 @@ no-loc:
 - Let's Encrypt
 uid: security/docker-https
 ms.openlocfilehash: 2f338e8883ca926c0f9a7ab339f58b088151cc87
-ms.sourcegitcommit: 235623b6e5a5d1841139c82a11ac2b4b3f31a7a9
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/08/2020
-ms.locfileid: "77089203"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653829"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-over-https"></a>HTTPS를 통해 Docker를 사용 하 여 ASP.NET Core 이미지 호스팅
 

@@ -1,19 +1,19 @@
 ---
-title: ASP.NET Core의 Google 외부 로그인 설정
+title: ASP.NET Core에서 Google 외부 로그인 설정
 author: rick-anderson
-description: 이 자습서에서는 Google 계정 사용자 인증을 기존 ASP.NET Core 앱에 통합 하는 방법을 보여 줍니다.
+description: 이 자습서에서는 기존 ASP.NET Core 앱에 Google 계정 사용자 인증의 통합을 보여 줍니다.
 ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 10/30/2019
 uid: security/authentication/google-logins
 ms.openlocfilehash: 83f45143eca1be43410880bfd875a3fce1d2e9c9
-ms.sourcegitcommit: de0fc77487a4d342bcc30965ec5c142d10d22c03
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/30/2019
-ms.locfileid: "73143458"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654921"
 ---
-# <a name="google-external-login-setup-in-aspnet-core"></a>ASP.NET Core의 Google 외부 로그인 설정
+# <a name="google-external-login-setup-in-aspnet-core"></a>ASP.NET Core에서 Google 외부 로그인 설정
 
 작성자: [Valeriy Novytskyy](https://github.com/01binary) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -24,11 +24,11 @@ ms.locfileid: "73143458"
 * [AspNetCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Google)를 설치 합니다.
 * [Google 로그인을 웹 앱에 통합](https://developers.google.com/identity/sign-in/web/devconsole-project) 으로 이동 하 여 **프로젝트 구성**을 선택 합니다.
 * **OAuth 클라이언트 구성** 대화 상자에서 **웹 서버**를 선택 합니다.
-* **권한 있는 리디렉션 uri** 텍스트 항목 상자에서 리디렉션 uri를 설정 합니다. 예를 들면 `https://localhost:44312/signin-google`과 같습니다.
+* **권한 있는 리디렉션 uri** 텍스트 항목 상자에서 리디렉션 uri를 설정 합니다. 예를 들어 `https://localhost:44312/signin-google`
 * **클라이언트 ID** 및 **클라이언트 암호**를 저장 합니다.
 * 사이트를 배포할 때 **Google 콘솔**에서 새 공용 url을 등록 합니다.
 
-## <a name="store-google-clientid-and-clientsecret"></a>Google ClientID 및 ClientSecret 저장
+## <a name="store-google-clientid-and-clientsecret"></a>저장소 Google ClientID 및 ClientSecret
 
 Google `Client ID`와 같은 중요 한 설정 및 [비밀 관리자](xref:security/app-secrets)와 `Client Secret`를 저장 합니다. 이 자습서에서는 토큰의 이름을 `Authentication:Google:ClientId` 하 고 `Authentication:Google:ClientSecret`합니다.
 
@@ -49,7 +49,7 @@ Api [콘솔](https://console.developers.google.com/apis/dashboard)에서 api 자
 
 [!INCLUDE [default settings configuration](includes/default-settings2-2.md)]
 
-## <a name="sign-in-with-google"></a>Google을 사용 하 여 로그인
+## <a name="sign-in-with-google"></a>Google로 로그인
 
 * 앱을 실행 하 고 **로그인**을 클릭 합니다. Google을 사용 하 여 로그인 할 수 있는 옵션이 나타납니다.
 * Google 단추를 **클릭 합니다 .이 단추는** 인증을 위해 google으로 리디렉션됩니다.
@@ -59,7 +59,7 @@ Api [콘솔](https://console.developers.google.com/apis/dashboard)에서 api 자
 
 [!INCLUDE[](includes/chain-auth-providers.md)]
 
-Google 인증에서 지 원하는 구성 옵션에 대 한 자세한 내용은 <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions> API 참조를 참조 하세요. 사용자에 대 한 다른 정보를 요청 하는 데 사용할 수 있습니다.
+Google 인증에서 지 원하는 구성 옵션에 대 한 자세한 내용은 <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions> API 참조를 참조 하세요. 이 사용 하 여 사용자에 대 한 다른 정보를 요청할 수 수 있습니다.
 
 ## <a name="change-the-default-callback-uri"></a>기본 콜백 URI 변경
 
@@ -68,11 +68,11 @@ Google 인증에서 지 원하는 구성 옵션에 대 한 자세한 내용은 <
 ## <a name="troubleshooting"></a>문제 해결
 
 * 로그인이 작동 하지 않고 오류가 발생 하지 않는 경우 개발 모드로 전환 하 여 문제를 더 쉽게 디버깅할 수 있도록 합니다.
-* `ConfigureServices`에서 `services.AddIdentity`를 호출 하 여 Id를 구성 하지 않은 경우 ArgumentException에서 결과를 인증 하려고 하면 *' SignInScheme ' 옵션을 제공 해야*합니다. 이 자습서에서 사용 되는 프로젝트 템플릿은이 작업이 수행 되도록 합니다.
+* `ConfigureServices`에서 `services.AddIdentity`를 호출 하 여 Id를 구성 하지 않은 경우 ArgumentException에서 결과를 인증 하려고 하면 *' SignInScheme ' 옵션을 제공 해야*합니다. 이 자습서에 사용 되는 프로젝트 템플릿이이 수행 되도록 보장 합니다.
 * 초기 마이그레이션을 적용 하 여 사이트 데이터베이스를 만들지 않은 경우 *요청 오류를 처리 하는 동안 데이터베이스 작업이 실패 했습니다* . **마이그레이션 적용** 을 선택 하 여 데이터베이스를 만들고 페이지를 새로 고쳐 오류를 계속 합니다.
 
 ## <a name="next-steps"></a>다음 단계
 
-* 이 문서에서는 Google을 사용 하 여 인증할 수 있는 방법을 살펴보았습니다. [위의 페이지](xref:security/authentication/social/index)에 나열 된 다른 공급자를 사용 하 여 인증 하는 유사한 방법을 따를 수 있습니다.
+* 이 문서에서는 Google을 사용 하 여 인증 하는 보여 주었습니다. [위의 페이지](xref:security/authentication/social/index)에 나열 된 다른 공급자를 사용 하 여 인증 하는 유사한 방법을 따를 수 있습니다.
 * Azure에 앱을 게시 한 후 Google API 콘솔에서 `ClientSecret`를 다시 설정 합니다.
-* Azure Portal에서 `Authentication:Google:ClientId` 및 `Authentication:Google:ClientSecret`를 응용 프로그램 설정으로 설정 합니다. 구성 시스템은 환경 변수에서 키를 읽도록 설정 되어 있습니다.
+* Azure Portal에서 `Authentication:Google:ClientId` 및 `Authentication:Google:ClientSecret`를 응용 프로그램 설정으로 설정 합니다. 구성 시스템 환경 변수에서 키를 읽을 수 설정 됩니다.

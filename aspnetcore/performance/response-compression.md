@@ -1,28 +1,26 @@
 ---
 title: ASP.NET Core 응답 압축
-author: guardrex
+author: rick-anderson
 description: ASP.NET Core 앱에서 응답 압축 미들웨어를 사용하는 방법 및 응답 압축에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 uid: performance/response-compression
-ms.openlocfilehash: d37b05edd55ac0d3910855563b819114cf815b43
-ms.sourcegitcommit: 235623b6e5a5d1841139c82a11ac2b4b3f31a7a9
+ms.openlocfilehash: aae0b8d74fc424cc81c046e9042279856865bf6a
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/10/2020
-ms.locfileid: "77114811"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654345"
 ---
 # <a name="response-compression-in-aspnet-core"></a>ASP.NET Core 응답 압축
-
-[Luke Latham](https://github.com/guardrex)으로
 
 ::: moniker range=">= aspnetcore-3.0"
 
 네트워크 대역폭은 제한 된 리소스입니다. 응답 크기를 줄이면 일반적으로 앱의 응답성이 크게 향상 됩니다. 페이로드 크기를 줄이는 한 가지 방법은 앱의 응답을 압축 하는 것입니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-response-compression-middleware"></a>응답 압축 미들웨어를 사용 하는 경우
 
@@ -44,15 +42,15 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 
 클라이언트가 압축 된 콘텐츠를 처리할 수 있는 경우 클라이언트는 요청과 함께 `Accept-Encoding` 헤더를 전송 하 여 해당 기능을 서버에 알려야 합니다. 서버는 압축 된 콘텐츠를 보낼 때 압축 된 응답을 인코딩하는 방법에 대 한 정보를 `Content-Encoding` 헤더에 포함 해야 합니다. 미들웨어에서 지 원하는 콘텐츠 인코딩 명칭은 다음 표에 나와 있습니다.
 
-| `Accept-Encoding` 헤더 값 | 미들웨어 지원 | 설명 |
+| `Accept-Encoding` 헤더 값 | 미들웨어 지원 | Description |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | 예 (기본값)        | [Brotli 압축 된 데이터 형식](https://tools.ietf.org/html/rfc7932) |
-| `deflate`                       | 아니요                   | [DEFLATE 압축 데이터 형식](https://tools.ietf.org/html/rfc1951) |
-| `exi`                           | 아니요                   | [W3C 효율적인 XML 교환](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
-| `gzip`                          | 예                  | [Gzip 파일 형식](https://tools.ietf.org/html/rfc1952) |
-| `identity`                      | 예                  | "인코딩 안 함" 식별자: 응답은 인코딩되지 않아야 합니다. |
-| `pack200-gzip`                  | 아니요                   | [Java 보관을 위한 네트워크 전송 형식](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
-| `*`                             | 예                  | 명시적으로 요청 되지 않은 모든 사용 가능한 콘텐츠 인코딩입니다. |
+| `deflate`                       | 예                   | [DEFLATE 압축 데이터 형식](https://tools.ietf.org/html/rfc1951) |
+| `exi`                           | 예                   | [W3C 효율적인 XML 교환](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
+| `gzip`                          | yes                  | [Gzip 파일 형식](https://tools.ietf.org/html/rfc1952) |
+| `identity`                      | yes                  | "인코딩 안 함" 식별자: 응답은 인코딩되지 않아야 합니다. |
+| `pack200-gzip`                  | 예                   | [Java 보관을 위한 네트워크 전송 형식](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
+| `*`                             | yes                  | 명시적으로 요청 되지 않은 모든 사용 가능한 콘텐츠 인코딩입니다. |
 
 자세한 내용은 [IANA 공식 콘텐츠 코딩 목록](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry)을 참조 하세요.
 
@@ -64,7 +62,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 
 다음 표에서는 압축 된 콘텐츠 요청, 송신, 캐싱 및 수신에 관련 된 헤더에 대해 설명 합니다.
 
-| 헤더             | Role |
+| 헤더             | 역할 |
 | ------------------ | ---- |
 | `Accept-Encoding`  | 클라이언트에서 서버로 전송 되어 클라이언트에 허용 되는 콘텐츠 인코딩 스키마를 표시 합니다. |
 | `Content-Encoding` | 페이로드에 있는 콘텐츠의 인코딩을 나타내기 위해 서버에서 클라이언트로 전송 됩니다. |
@@ -73,7 +71,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 | `Content-Type`     | 콘텐츠의 MIME 형식을 지정 합니다. 모든 응답은 해당 `Content-Type`을 지정 해야 합니다. 미들웨어는이 값을 확인 하 여 응답이 압축 되어야 하는지 확인 합니다. 미들웨어는 인코딩할 수 있는 [기본 MIME 형식의](#mime-types) 집합을 지정 하지만 mime 형식을 바꾸거나 추가할 수 있습니다. |
 | `Vary`             | 클라이언트 및 프록시에 `Accept-Encoding` 값을 사용 하 여 서버에서 보낸 경우 `Vary` 헤더는 요청의 `Accept-Encoding` 헤더 값을 기준으로 응답을 캐시 (vary) 해야 함을 클라이언트 또는 프록시에 나타냅니다. `Vary: Accept-Encoding` 헤더를 사용 하 여 콘텐츠를 반환한 결과는 압축 된 응답과 압축 되지 않은 응답이 모두 개별적으로 캐시 된다는 것입니다. |
 
-[샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples)을 사용 하 여 응답 압축 미들웨어의 기능을 탐색 합니다. 샘플은 다음을 보여 줍니다.
+[샘플 앱](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples)을 사용 하 여 응답 압축 미들웨어의 기능을 탐색 합니다. 샘플은 다음을 보여 줍니다.
 
 * Gzip 및 사용자 지정 압축 공급자를 사용 하 여 앱 응답을 압축 합니다.
 * Mime 형식을 압축을 위한 MIME 형식의 기본 목록에 추가 하는 방법입니다.
@@ -138,7 +136,7 @@ public void ConfigureServices(IServiceCollection services)
 
 <xref:Microsoft.AspNetCore.ResponseCompression.BrotliCompressionProviderOptions>압축 수준을 설정 합니다. Brotli 압축 공급자는 기본적으로 가장 빠른 압축 수준 ([CompressionLevel](xref:System.IO.Compression.CompressionLevel))으로 설정 되며,이는 가장 효율적인 압축을 생성 하지 않을 수 있습니다. 가장 효율적인 압축이 필요한 경우 최적의 압축을 위해 미들웨어를 구성 합니다.
 
-| 압축 수준 | 설명 |
+| 압축 수준 | Description |
 | ----------------- | ----------- |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 결과 출력이 최적으로 압축 되지 않은 경우에도 압축이 최대한 빨리 완료 되어야 합니다. |
 | [CompressionLevel 압축](xref:System.IO.Compression.CompressionLevel) | 압축을 수행할 수 없습니다. |
@@ -178,7 +176,7 @@ public void ConfigureServices(IServiceCollection services)
 
 <xref:Microsoft.AspNetCore.ResponseCompression.GzipCompressionProviderOptions>압축 수준을 설정 합니다. Gzip 압축 공급자는 기본적으로 가장 빠른 압축 수준 ([CompressionLevel](xref:System.IO.Compression.CompressionLevel))으로 설정 되며이는 가장 효율적인 압축을 생성 하지 않을 수 있습니다. 가장 효율적인 압축이 필요한 경우 최적의 압축을 위해 미들웨어를 구성 합니다.
 
-| 압축 수준 | 설명 |
+| 압축 수준 | Description |
 | ----------------- | ----------- |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 결과 출력이 최적으로 압축 되지 않은 경우에도 압축이 최대한 빨리 완료 되어야 합니다. |
 | [CompressionLevel 압축](xref:System.IO.Compression.CompressionLevel) | 압축을 수행할 수 없습니다. |
@@ -268,7 +266,7 @@ Nginx에서 요청을 프록시 하는 경우에는 `Accept-Encoding` 헤더가 
 
 네트워크 대역폭은 제한 된 리소스입니다. 응답 크기를 줄이면 일반적으로 앱의 응답성이 크게 향상 됩니다. 페이로드 크기를 줄이는 한 가지 방법은 앱의 응답을 압축 하는 것입니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-response-compression-middleware"></a>응답 압축 미들웨어를 사용 하는 경우
 
@@ -290,15 +288,15 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 
 클라이언트가 압축 된 콘텐츠를 처리할 수 있는 경우 클라이언트는 요청과 함께 `Accept-Encoding` 헤더를 전송 하 여 해당 기능을 서버에 알려야 합니다. 서버는 압축 된 콘텐츠를 보낼 때 압축 된 응답을 인코딩하는 방법에 대 한 정보를 `Content-Encoding` 헤더에 포함 해야 합니다. 미들웨어에서 지 원하는 콘텐츠 인코딩 명칭은 다음 표에 나와 있습니다.
 
-| `Accept-Encoding` 헤더 값 | 미들웨어 지원 | 설명 |
+| `Accept-Encoding` 헤더 값 | 미들웨어 지원 | Description |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | 예 (기본값)        | [Brotli 압축 된 데이터 형식](https://tools.ietf.org/html/rfc7932) |
-| `deflate`                       | 아니요                   | [DEFLATE 압축 데이터 형식](https://tools.ietf.org/html/rfc1951) |
-| `exi`                           | 아니요                   | [W3C 효율적인 XML 교환](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
-| `gzip`                          | 예                  | [Gzip 파일 형식](https://tools.ietf.org/html/rfc1952) |
-| `identity`                      | 예                  | "인코딩 안 함" 식별자: 응답은 인코딩되지 않아야 합니다. |
-| `pack200-gzip`                  | 아니요                   | [Java 보관을 위한 네트워크 전송 형식](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
-| `*`                             | 예                  | 명시적으로 요청 되지 않은 모든 사용 가능한 콘텐츠 인코딩입니다. |
+| `deflate`                       | 예                   | [DEFLATE 압축 데이터 형식](https://tools.ietf.org/html/rfc1951) |
+| `exi`                           | 예                   | [W3C 효율적인 XML 교환](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
+| `gzip`                          | yes                  | [Gzip 파일 형식](https://tools.ietf.org/html/rfc1952) |
+| `identity`                      | yes                  | "인코딩 안 함" 식별자: 응답은 인코딩되지 않아야 합니다. |
+| `pack200-gzip`                  | 예                   | [Java 보관을 위한 네트워크 전송 형식](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
+| `*`                             | yes                  | 명시적으로 요청 되지 않은 모든 사용 가능한 콘텐츠 인코딩입니다. |
 
 자세한 내용은 [IANA 공식 콘텐츠 코딩 목록](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry)을 참조 하세요.
 
@@ -310,7 +308,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 
 다음 표에서는 압축 된 콘텐츠 요청, 송신, 캐싱 및 수신에 관련 된 헤더에 대해 설명 합니다.
 
-| 헤더             | Role |
+| 헤더             | 역할 |
 | ------------------ | ---- |
 | `Accept-Encoding`  | 클라이언트에서 서버로 전송 되어 클라이언트에 허용 되는 콘텐츠 인코딩 스키마를 표시 합니다. |
 | `Content-Encoding` | 페이로드에 있는 콘텐츠의 인코딩을 나타내기 위해 서버에서 클라이언트로 전송 됩니다. |
@@ -319,7 +317,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 | `Content-Type`     | 콘텐츠의 MIME 형식을 지정 합니다. 모든 응답은 해당 `Content-Type`을 지정 해야 합니다. 미들웨어는이 값을 확인 하 여 응답이 압축 되어야 하는지 확인 합니다. 미들웨어는 인코딩할 수 있는 [기본 MIME 형식의](#mime-types) 집합을 지정 하지만 mime 형식을 바꾸거나 추가할 수 있습니다. |
 | `Vary`             | 클라이언트 및 프록시에 `Accept-Encoding` 값을 사용 하 여 서버에서 보낸 경우 `Vary` 헤더는 요청의 `Accept-Encoding` 헤더 값을 기준으로 응답을 캐시 (vary) 해야 함을 클라이언트 또는 프록시에 나타냅니다. `Vary: Accept-Encoding` 헤더를 사용 하 여 콘텐츠를 반환한 결과는 압축 된 응답과 압축 되지 않은 응답이 모두 개별적으로 캐시 된다는 것입니다. |
 
-[샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples)을 사용 하 여 응답 압축 미들웨어의 기능을 탐색 합니다. 샘플은 다음을 보여 줍니다.
+[샘플 앱](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples)을 사용 하 여 응답 압축 미들웨어의 기능을 탐색 합니다. 샘플은 다음을 보여 줍니다.
 
 * Gzip 및 사용자 지정 압축 공급자를 사용 하 여 앱 응답을 압축 합니다.
 * Mime 형식을 압축을 위한 MIME 형식의 기본 목록에 추가 하는 방법입니다.
@@ -384,7 +382,7 @@ public void ConfigureServices(IServiceCollection services)
 
 <xref:Microsoft.AspNetCore.ResponseCompression.BrotliCompressionProviderOptions>압축 수준을 설정 합니다. Brotli 압축 공급자는 기본적으로 가장 빠른 압축 수준 ([CompressionLevel](xref:System.IO.Compression.CompressionLevel))으로 설정 되며,이는 가장 효율적인 압축을 생성 하지 않을 수 있습니다. 가장 효율적인 압축이 필요한 경우 최적의 압축을 위해 미들웨어를 구성 합니다.
 
-| 압축 수준 | 설명 |
+| 압축 수준 | Description |
 | ----------------- | ----------- |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 결과 출력이 최적으로 압축 되지 않은 경우에도 압축이 최대한 빨리 완료 되어야 합니다. |
 | [CompressionLevel 압축](xref:System.IO.Compression.CompressionLevel) | 압축을 수행할 수 없습니다. |
@@ -424,7 +422,7 @@ public void ConfigureServices(IServiceCollection services)
 
 <xref:Microsoft.AspNetCore.ResponseCompression.GzipCompressionProviderOptions>압축 수준을 설정 합니다. Gzip 압축 공급자는 기본적으로 가장 빠른 압축 수준 ([CompressionLevel](xref:System.IO.Compression.CompressionLevel))으로 설정 되며이는 가장 효율적인 압축을 생성 하지 않을 수 있습니다. 가장 효율적인 압축이 필요한 경우 최적의 압축을 위해 미들웨어를 구성 합니다.
 
-| 압축 수준 | 설명 |
+| 압축 수준 | Description |
 | ----------------- | ----------- |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 결과 출력이 최적으로 압축 되지 않은 경우에도 압축이 최대한 빨리 완료 되어야 합니다. |
 | [CompressionLevel 압축](xref:System.IO.Compression.CompressionLevel) | 압축을 수행할 수 없습니다. |
@@ -513,7 +511,7 @@ Nginx에서 요청을 프록시 하는 경우에는 `Accept-Encoding` 헤더가 
 
 네트워크 대역폭은 제한 된 리소스입니다. 응답 크기를 줄이면 일반적으로 앱의 응답성이 크게 향상 됩니다. 페이로드 크기를 줄이는 한 가지 방법은 앱의 응답을 압축 하는 것입니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-response-compression-middleware"></a>응답 압축 미들웨어를 사용 하는 경우
 
@@ -535,15 +533,15 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 
 클라이언트가 압축 된 콘텐츠를 처리할 수 있는 경우 클라이언트는 요청과 함께 `Accept-Encoding` 헤더를 전송 하 여 해당 기능을 서버에 알려야 합니다. 서버는 압축 된 콘텐츠를 보낼 때 압축 된 응답을 인코딩하는 방법에 대 한 정보를 `Content-Encoding` 헤더에 포함 해야 합니다. 미들웨어에서 지 원하는 콘텐츠 인코딩 명칭은 다음 표에 나와 있습니다.
 
-| `Accept-Encoding` 헤더 값 | 미들웨어 지원 | 설명 |
+| `Accept-Encoding` 헤더 값 | 미들웨어 지원 | Description |
 | ------------------------------- | :------------------: | ----------- |
-| `br`                            | 아니요                   | [Brotli 압축 된 데이터 형식](https://tools.ietf.org/html/rfc7932) |
-| `deflate`                       | 아니요                   | [DEFLATE 압축 데이터 형식](https://tools.ietf.org/html/rfc1951) |
-| `exi`                           | 아니요                   | [W3C 효율적인 XML 교환](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
+| `br`                            | 예                   | [Brotli 압축 된 데이터 형식](https://tools.ietf.org/html/rfc7932) |
+| `deflate`                       | 예                   | [DEFLATE 압축 데이터 형식](https://tools.ietf.org/html/rfc1951) |
+| `exi`                           | 예                   | [W3C 효율적인 XML 교환](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
 | `gzip`                          | 예 (기본값)        | [Gzip 파일 형식](https://tools.ietf.org/html/rfc1952) |
-| `identity`                      | 예                  | "인코딩 안 함" 식별자: 응답은 인코딩되지 않아야 합니다. |
-| `pack200-gzip`                  | 아니요                   | [Java 보관을 위한 네트워크 전송 형식](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
-| `*`                             | 예                  | 명시적으로 요청 되지 않은 모든 사용 가능한 콘텐츠 인코딩입니다. |
+| `identity`                      | yes                  | "인코딩 안 함" 식별자: 응답은 인코딩되지 않아야 합니다. |
+| `pack200-gzip`                  | 예                   | [Java 보관을 위한 네트워크 전송 형식](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
+| `*`                             | yes                  | 명시적으로 요청 되지 않은 모든 사용 가능한 콘텐츠 인코딩입니다. |
 
 자세한 내용은 [IANA 공식 콘텐츠 코딩 목록](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry)을 참조 하세요.
 
@@ -555,7 +553,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 
 다음 표에서는 압축 된 콘텐츠 요청, 송신, 캐싱 및 수신에 관련 된 헤더에 대해 설명 합니다.
 
-| 헤더             | Role |
+| 헤더             | 역할 |
 | ------------------ | ---- |
 | `Accept-Encoding`  | 클라이언트에서 서버로 전송 되어 클라이언트에 허용 되는 콘텐츠 인코딩 스키마를 표시 합니다. |
 | `Content-Encoding` | 페이로드에 있는 콘텐츠의 인코딩을 나타내기 위해 서버에서 클라이언트로 전송 됩니다. |
@@ -564,7 +562,7 @@ IIS, Apache 또는 Nginx에서 서버 기반 응답 압축 기술을 사용 합�
 | `Content-Type`     | 콘텐츠의 MIME 형식을 지정 합니다. 모든 응답은 해당 `Content-Type`을 지정 해야 합니다. 미들웨어는이 값을 확인 하 여 응답이 압축 되어야 하는지 확인 합니다. 미들웨어는 인코딩할 수 있는 [기본 MIME 형식의](#mime-types) 집합을 지정 하지만 mime 형식을 바꾸거나 추가할 수 있습니다. |
 | `Vary`             | 클라이언트 및 프록시에 `Accept-Encoding` 값을 사용 하 여 서버에서 보낸 경우 `Vary` 헤더는 요청의 `Accept-Encoding` 헤더 값을 기준으로 응답을 캐시 (vary) 해야 함을 클라이언트 또는 프록시에 나타냅니다. `Vary: Accept-Encoding` 헤더를 사용 하 여 콘텐츠를 반환한 결과는 압축 된 응답과 압축 되지 않은 응답이 모두 개별적으로 캐시 된다는 것입니다. |
 
-[샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples)을 사용 하 여 응답 압축 미들웨어의 기능을 탐색 합니다. 샘플은 다음을 보여 줍니다.
+[샘플 앱](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/response-compression/samples)을 사용 하 여 응답 압축 미들웨어의 기능을 탐색 합니다. 샘플은 다음을 보여 줍니다.
 
 * Gzip 및 사용자 지정 압축 공급자를 사용 하 여 앱 응답을 압축 합니다.
 * Mime 형식을 압축을 위한 MIME 형식의 기본 목록에 추가 하는 방법입니다.
@@ -629,7 +627,7 @@ public void ConfigureServices(IServiceCollection services)
 
 <xref:Microsoft.AspNetCore.ResponseCompression.GzipCompressionProviderOptions>압축 수준을 설정 합니다. Gzip 압축 공급자는 기본적으로 가장 빠른 압축 수준 ([CompressionLevel](xref:System.IO.Compression.CompressionLevel))으로 설정 되며이는 가장 효율적인 압축을 생성 하지 않을 수 있습니다. 가장 효율적인 압축이 필요한 경우 최적의 압축을 위해 미들웨어를 구성 합니다.
 
-| 압축 수준 | 설명 |
+| 압축 수준 | Description |
 | ----------------- | ----------- |
 | [CompressionLevel](xref:System.IO.Compression.CompressionLevel) | 결과 출력이 최적으로 압축 되지 않은 경우에도 압축이 최대한 빨리 완료 되어야 합니다. |
 | [CompressionLevel 압축](xref:System.IO.Compression.CompressionLevel) | 압축을 수행할 수 없습니다. |

@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 10/02/2018
 uid: security/cross-site-scripting
 ms.openlocfilehash: 1d6f605dc336d8768b8a47e4995f119d198a61af
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77172641"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78655077"
 ---
 # <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a>ASP.NET Core에서 교차 사이트 스크립팅(XSS) 방지하기
 
@@ -57,7 +57,7 @@ MVC에서 사용되는 Razor 엔진은 변수를 통해 제공된 모든 출력�
 
 ## <a name="javascript-encoding-using-razor"></a>Razor를 사용하여 JavaScript로 인코딩하기
 
-간혹 뷰 처리 과정에서 JavaScript에 값을 삽입하고 싶을 수 있습니다. 이렇게 하는 데는 두 가지 방법이 있습니다. 값을 삽입하는 가장 안전한 방법으로는 태그의 데이터 특성에 값을 삽입하고 JavaScript에서 가져오는 것입니다. 예들 들어 다음과 같습니다.
+간혹 뷰 처리 과정에서 JavaScript에 값을 삽입하고 싶을 수 있습니다. 두 가지 방법으로 이 작업을 수행할 수 있습니다. 값을 삽입하는 가장 안전한 방법으로는 태그의 데이터 특성에 값을 삽입하고 JavaScript에서 가져오는 것입니다. 다음은 그 예입니다.
 
 ```cshtml
 @{
@@ -144,7 +144,7 @@ MVC에서 사용되는 Razor 엔진은 변수를 통해 제공된 모든 출력�
 
 HTML, JavaScript 및 URL 인코더를 두 가지 방법으로 사용할 수 있습니다. [종속성 주입](xref:fundamentals/dependency-injection) 을 통해 코드를 삽입 하거나 `System.Text.Encodings.Web` 네임 스페이스에 포함 된 기본 인코더를 사용할 수 있습니다. 기본 인코더를 사용하는 경우 가장 안전한 인코딩 규칙을 사용하므로 개발자가 직접 정의한 안전 문자 범위는 적용되지 않습니다.
 
-DI를 통해 구성 가능한 인코더를 사용 하려면 생성자는 *htmlencoder*, *JavaScriptEncoder* 및 *urlencoder* 매개 변수를 적절 하 게 사용 해야 합니다. 예를 들어,
+DI를 통해 구성 가능한 인코더를 사용 하려면 생성자는 *htmlencoder*, *JavaScriptEncoder* 및 *urlencoder* 매개 변수를 적절 하 게 사용 해야 합니다. 예를 들면 다음과 같습니다.
 
 ```csharp
 public class HomeController : Controller

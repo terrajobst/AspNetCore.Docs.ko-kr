@@ -1,22 +1,22 @@
 ---
 title: ASP.NET Core 분산 캐싱
-author: guardrex
+author: rick-anderson
 description: 특히 클라우드 또는 서버 팜 환경에서 ASP.NET Core 분산 캐시를 사용 하 여 앱 성능 및 확장성을 개선 하는 방법에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 uid: performance/caching/distributed
-ms.openlocfilehash: d39ac6c7496de7cf9dc8d40718bbaf611e744c19
-ms.sourcegitcommit: 235623b6e5a5d1841139c82a11ac2b4b3f31a7a9
+ms.openlocfilehash: a4d2a59c8f81ad3e3f020e73a6657864885aa39a
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/10/2020
-ms.locfileid: "77114746"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78651801"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>ASP.NET Core 분산 캐싱
 
-By [Luke Latham](https://github.com/guardrex), [Mohsin Nasir](https://github.com/mohsinnasir)및 [Steve Smith](https://ardalis.com/)
+작성자- [Mohsin Nasir](https://github.com/mohsinnasir) 및 [Steve Smith](https://ardalis.com/)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -32,9 +32,9 @@ By [Luke Latham](https://github.com/guardrex), [Mohsin Nasir](https://github.com
 
 분산 캐시 구성은 구현 별로 다릅니다. 이 문서에서는 SQL Server 및 Redis 분산 캐시를 구성 하는 방법을 설명 합니다. [NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) ([GitHub의 NCache](https://github.com/Alachisoft/NCache))와 같은 타사 구현도 사용할 수 있습니다. 어떤 구현이 선택 되는지에 관계 없이 앱은 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 인터페이스를 사용 하 여 캐시와 상호 작용 합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>필수 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 SQL Server 분산 캐시를 사용 하려면 패키지 참조를 [Microsoft 확장명이](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer) . i n t. i n t. i n t 패키지에 추가 합니다.
 
@@ -202,9 +202,9 @@ SQL Server를 분산 캐시 백업 저장소로 사용 하는 경우 캐시에 �
 
 분산 캐시 구성은 구현 별로 다릅니다. 이 문서에서는 SQL Server 및 Redis 분산 캐시를 구성 하는 방법을 설명 합니다. [NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) ([GitHub의 NCache](https://github.com/Alachisoft/NCache))와 같은 타사 구현도 사용할 수 있습니다. 어떤 구현이 선택 되는지에 관계 없이 앱은 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 인터페이스를 사용 하 여 캐시와 상호 작용 합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>필수 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 SQL Server 분산 캐시를 사용 하려면 [AspNetCore 메타 패키지](xref:fundamentals/metapackage-app) 를 참조 하거나 패키지 참조를 [패키지에 추가 합니다.](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer)
 
@@ -372,9 +372,9 @@ SQL Server를 분산 캐시 백업 저장소로 사용 하는 경우 캐시에 �
 
 분산 캐시 구성은 구현 별로 다릅니다. 이 문서에서는 SQL Server 및 Redis 분산 캐시를 구성 하는 방법을 설명 합니다. [NCache](http://www.alachisoft.com/ncache/aspnet-core-idistributedcache-ncache.html) ([GitHub의 NCache](https://github.com/Alachisoft/NCache))와 같은 타사 구현도 사용할 수 있습니다. 어떤 구현이 선택 되는지에 관계 없이 앱은 <xref:Microsoft.Extensions.Caching.Distributed.IDistributedCache> 인터페이스를 사용 하 여 캐시와 상호 작용 합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>필수 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 SQL Server 분산 캐시를 사용 하려면 [AspNetCore 메타 패키지](xref:fundamentals/metapackage-app) 를 참조 하거나 패키지 참조를 [패키지에 추가 합니다.](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer)
 
@@ -533,3 +533,4 @@ SQL Server를 분산 캐시 백업 저장소로 사용 하는 경우 캐시에 �
 * <xref:host-and-deploy/web-farm>
 
 ::: moniker-end
+ 

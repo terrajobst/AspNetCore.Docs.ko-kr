@@ -6,29 +6,29 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/15/2018
 uid: security/authorization/resourcebased
-ms.openlocfilehash: acc931da1be0940fac72b0aabe07ab17ca7e63bd
-ms.sourcegitcommit: 6628cd23793b66e4ce88788db641a5bbf470c3c1
+ms.openlocfilehash: 2be611c754583d996db7107f341b1be03cef73cf
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/06/2019
-ms.locfileid: "73659997"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654063"
 ---
 # <a name="resource-based-authorization-in-aspnet-core"></a>ASP.NET Core에서 리소스 기반 권한 부여
 
 권한 부여 전략은 액세스 하는 리소스에 따라 달라 집니다. Author 속성이 있는 문서를 생각해 보세요. 작성자만 문서를 업데이트할 수 있습니다. 따라서 권한 부여 평가를 수행 하기 전에 데이터 저장소에서 문서를 검색 해야 합니다.
 
-특성 평가는 페이지 처리기 또는 문서를 로드 하는 작업을 실행 하기 전에 데이터 바인딩 전에 발생 합니다. 이러한 이유로 `[Authorize]` 특성을 사용한 선언적 권한 부여는 충분 하지 않습니다. 대신, 사용자 지정 권한 부여 메서드를 호출할 수 있습니다. &mdash;a 스타일은 *명령적 권한 부여*라고 합니다.
+특성 평가는 페이지 처리기 또는 문서를 로드 하는 작업을 실행 하기 전에 데이터 바인딩 전에 발생 합니다. 이러한 이유로 `[Authorize]` 특성을 사용한 선언적 권한 부여는 충분 하지 않습니다. 대신 사용자 지정 권한 부여 메서드를 호출 하 여 *명령적 권한 부여*라는 스타일을&mdash;수 있습니다.
 
 ::: moniker range=">= aspnetcore-3.0"
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/3_0) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/3_0) ([다운로드 방법](xref:index#how-to-download-a-sample))
 ::: moniker-end
 
  ::: moniker range=">= aspnetcore-2.0 < aspnetcore-3.0"
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/2_2) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/2_2) ([다운로드 방법](xref:index#how-to-download-a-sample))
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-1.1"
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/1_1) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/1_1) ([다운로드 방법](xref:index#how-to-download-a-sample))
 ::: moniker-end
 
 [권한 부여로 보호 되는 사용자 데이터를 사용 하 여 ASP.NET Core 앱 만들기](xref:security/authorization/secure-data) 리소스 기반 권한 부여를 사용 하는 샘플 앱을 포함 합니다.

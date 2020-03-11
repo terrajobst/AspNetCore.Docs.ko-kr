@@ -5,12 +5,12 @@ description: ASP.NET MVC 프로젝트에서 ASP.NET Core MVC 프로젝트로 구
 ms.author: riande
 ms.date: 10/14/2016
 uid: migration/configuration
-ms.openlocfilehash: 455e66b94dd69ee6aab88768b64c525d56b8bbcf
-ms.sourcegitcommit: 16cf016035f0c9acf3ff0ad874c56f82e013d415
+ms.openlocfilehash: 2c50ea768a42aa38d14c55d8c403fea4176b3650
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/29/2019
-ms.locfileid: "73033901"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78651885"
 ---
 # <a name="migrate-configuration-to-aspnet-core"></a>구성을 ASP.NET Core로 마이그레이션
 
@@ -18,9 +18,9 @@ ms.locfileid: "73033901"
 
 이전 문서에서는 [ASP.NET mvc 프로젝트를 ASP.NET CORE mvc로 마이그레이션하기](xref:migration/mvc)시작 했습니다. 이 문서에서는 구성을 마이그레이션합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/migration/configuration/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/migration/configuration/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-## <a name="setup-configuration"></a>설치 구성
+## <a name="setup-configuration"></a>설정 구성
 
 ASP.NET Core는 더 이상 이전 버전의 ASP.NET에서 사용 하 던 global.asax 및 *web.config* *파일을 사용* 하지 않습니다. 이전 버전의 ASP.NET에서는 응용 프로그램 시작 논리가 *global.asax 내의 `Application_StartUp`* 메서드에 배치 되었습니다. 나중에 ASP.NET MVC에서 *Startup.cs* 파일은 프로젝트의 루트에 포함 되었습니다. 응용 프로그램이 시작 될 때이 메서드를 호출 했습니다. ASP.NET Core는 모든 시작 논리를 *Startup.cs* 파일에 배치 하 여이 방법을 완전히 채택 했습니다.
 
@@ -46,7 +46,7 @@ ASP.NET MVC 프로젝트에는 `<connectionStrings>` 요소에 *web.config*의 �
 
 [!code-json[](../migration/configuration/samples/WebApp1/src/WebApp1/appsettings.json?highlight=4)]
 
-위에서 설명한 강조 표시 된 줄에서 데이터베이스의 이름을 **_Change_me** 에서 데이터베이스 이름으로 변경 합니다.
+위에서 설명한 강조 표시 된 줄에서 데이터베이스의 이름을 **_CHANGE_ME** 에서 데이터베이스 이름으로 변경 합니다.
 
 ## <a name="summary"></a>요약
 

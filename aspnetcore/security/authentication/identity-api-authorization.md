@@ -8,11 +8,11 @@ ms.custom: mvc
 ms.date: 11/08/2019
 uid: security/authentication/identity/spa
 ms.openlocfilehash: 623f739b17c0bed3ce929f562c9581ab26ecf5bc
-ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/01/2020
-ms.locfileid: "76928554"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652701"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>SPAs에 대 한 인증 및 권한 부여
 
@@ -42,7 +42,7 @@ dotnet new react -o <output_directory_name> -au Individual
 
 다음 섹션에서는 인증 지원을 포함 하는 경우 프로젝트에 대 한 추가 설명입니다.
 
-### <a name="startup-class"></a>Startup 클래스
+### <a name="startup-class"></a>시작 클래스
 
 `Startup` 클래스에는 다음과 같은 추가 기능이 있습니다.
 
@@ -185,7 +185,7 @@ services.Configure<JwtBearerOptions>(
 
 API의 JWT 처리기는 `JwtBearerEvents`을 사용 하 여 인증 프로세스를 제어할 수 있는 이벤트를 발생 시킵니다. API 권한 부여에 대 한 지원을 제공 하기 위해 `AddIdentityServerJwt`는 자체 이벤트 처리기를 등록 합니다.
 
-이벤트 처리를 사용자 지정 하려면 필요한 만큼 추가 논리를 사용 하 여 기존 이벤트 처리기를 래핑합니다. 예를 들면 다음과 같습니다.:
+이벤트 처리를 사용자 지정 하려면 필요한 만큼 추가 논리를 사용 하 여 기존 이벤트 처리기를 래핑합니다. 다음은 그 예입니다.
 
 ```csharp
 services.Configure<JwtBearerOptions>(
@@ -260,7 +260,7 @@ async populateWeatherData() {
 }
 ```
 
-## <a name="deploy-to-production"></a>프로덕션 환경에 배포
+## <a name="deploy-to-production"></a>프로덕션에 배포
 
 프로덕션 환경에 앱을 배포 하려면 다음 리소스를 프로 비전 해야 합니다.
 
@@ -369,7 +369,7 @@ AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options =>
 });
 ```
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:spa/angular>
 * <xref:spa/react>

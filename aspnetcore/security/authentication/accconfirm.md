@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 03/11/2019
 uid: security/authentication/accconfirm
 ms.openlocfilehash: 49d3d214fd64edc5b17df2df929ddc3c2af47ede
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75829272"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654225"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>ASP.NET Core의 계정 확인 및 암호 복구
 
@@ -32,7 +32,7 @@ ASP.NET Core 1.1 버전은 [이 PDF 파일](https://webpifeed.blob.core.windows.
 
 ::: moniker range="> aspnetcore-2.2"
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 [.NET Core 3.0 SDK 이상](https://dotnet.microsoft.com/download/dotnet-core/3.0)
 
@@ -63,7 +63,7 @@ dotnet run
 
 #### <a name="configure-sendgrid-user-secrets"></a>SendGrid 사용자 비밀 구성
 
-`SendGridUser`를 설정 하 고 [암호 관리자 도구](xref:security/app-secrets)를 사용 하 여 `SendGridKey` 합니다. 예를 들면 다음과 같습니다.:
+`SendGridUser`를 설정 하 고 [암호 관리자 도구](xref:security/app-secrets)를 사용 하 여 `SendGridKey` 합니다. 다음은 그 예입니다.
 
 ```dotnetcli
 dotnet user-secrets set SendGridUser RickAndMSFT
@@ -91,7 +91,7 @@ Windows에서 Secret Manager는 `%APPDATA%/Microsoft/UserSecrets/<WebAppName-use
 
 `SendGrid` NuGet 패키지를 설치 합니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 패키지 관리자 콘솔에서 다음 명령을 입력 합니다.
 
@@ -99,7 +99,7 @@ Windows에서 Secret Manager는 `%APPDATA%/Microsoft/UserSecrets/<WebAppName-use
 Install-Package SendGrid
 ```
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 콘솔에서 다음 명령을 입력 합니다.
 
@@ -217,7 +217,7 @@ dotnet add package SendGrid
 
 ::: moniker range="> aspnetcore-2.0 < aspnetcore-3.0"
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 [.NET Core 2.2 SDK 이상](https://www.microsoft.com/net/download/all)
 
@@ -271,7 +271,7 @@ dotnet run
 
 #### <a name="configure-sendgrid-user-secrets"></a>SendGrid 사용자 비밀 구성
 
-`SendGridUser`를 설정 하 고 [암호 관리자 도구](xref:security/app-secrets)를 사용 하 여 `SendGridKey` 합니다. 예를 들면 다음과 같습니다.:
+`SendGridUser`를 설정 하 고 [암호 관리자 도구](xref:security/app-secrets)를 사용 하 여 `SendGridKey` 합니다. 다음은 그 예입니다.
 
 ```console
 C:/WebAppl>dotnet user-secrets set SendGridUser RickAndMSFT
@@ -297,7 +297,7 @@ Windows에서 Secret Manager는 `%APPDATA%/Microsoft/UserSecrets/<WebAppName-use
 
 `SendGrid` NuGet 패키지를 설치 합니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 패키지 관리자 콘솔에서 다음 명령을 입력 합니다.
 
@@ -305,7 +305,7 @@ Windows에서 Secret Manager는 `%APPDATA%/Microsoft/UserSecrets/<WebAppName-use
 Install-Package SendGrid
 ```
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 콘솔에서 다음 명령을 입력 합니다.
 

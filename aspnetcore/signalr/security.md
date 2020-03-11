@@ -9,32 +9,32 @@ ms.date: 01/16/2020
 no-loc:
 - SignalR
 uid: signalr/security
-ms.openlocfilehash: 4b27d9abb36938ed8161ff0d3535204e3fa68765
-ms.sourcegitcommit: f259889044d1fc0f0c7e3882df0008157ced4915
+ms.openlocfilehash: f92b56132d0fa55665568416d0760430cb698f8b
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/21/2020
-ms.locfileid: "76294714"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78655155"
 ---
 # <a name="security-considerations-in-aspnet-core-opno-locsignalr"></a>ASP.NET Core SignalR의 보안 고려 사항
 
-작성자: [Andrew Stanton-Nurse](https://twitter.com/anurse)
+[Andrew Stanton-간호사](https://twitter.com/anurse)
 
 이 문서에서는 SignalR보안 설정에 대 한 정보를 제공 합니다.
 
-## <a name="cross-origin-resource-sharing"></a>교차 원본 자원 공유
+## <a name="cross-origin-resource-sharing"></a>크로스-원본 자원 공유
 
-[CORS (크로스-원본 자원 공유)](https://www.w3.org/TR/cors/) 를 사용 하 여 브라우저에서 원본 간 SignalR 연결을 허용할 수 있습니다. JavaScript 코드가 SignalR 앱과 다른 도메인에서 호스트 되는 경우 JavaScript가 SignalR 앱에 연결할 수 있도록 [CORS 미들웨어](xref:security/cors) 를 사용 하도록 설정 해야 합니다. 신뢰하거나 제어할 수 있는 도메인의 교차 원본 요청만 허용해야 합니다. 예를 들면 다음과 같습니다.:
+[CORS (크로스-원본 자원 공유)](https://www.w3.org/TR/cors/) 를 사용 하 여 브라우저에서 원본 간 SignalR 연결을 허용할 수 있습니다. JavaScript 코드가 SignalR 앱과 다른 도메인에서 호스트 되는 경우 JavaScript가 SignalR 앱에 연결할 수 있도록 [CORS 미들웨어](xref:security/cors) 를 사용 하도록 설정 해야 합니다. 신뢰하거나 제어할 수 있는 도메인의 교차 원본 요청만 허용해야 합니다. 다음은 그 예입니다.
 
-* 사이트가 `http://www.example.com`에 호스팅된 경우
+* 사이트가 `http://www.example.com`에서 호스팅됩니다.
 * SignalR 앱이 `http://signalr.example.com`에서 호스팅됩니다.
 
 SignalR 앱에서 원본 `www.example.com`만 허용 하도록 CORS를 구성 해야 합니다.
 
-CORS를 구성하는 방법에 대한 자세한 내용은 [교차 원본 요청(CORS)](xref:security/cors)을 참고하시기 바랍니다. SignalR **하려면** 다음 CORS 정책이 필요 합니다.
+CORS를 구성 하는 방법에 대 한 자세한 내용은 [cors (원본 간 요청) 사용](xref:security/cors)을 참조 하세요. SignalR **하려면** 다음 CORS 정책이 필요 합니다.
 
-* 예상되는 특정 원본을 허용합니다. 모든 원본을 허용할 수는 있지만 안전하지 않거나 권장되지 **않습니다.**
-* HTTP 메서드 `GET`과 `POST`를 허용해야 합니다.
+* 예상되는 특정 원본을 허용합니다. 모든 원본을 허용 하는 것은 가능 하지만 안전 하거나 권장 **하지** 않습니다.
+* HTTP 메서드 `GET` 및 `POST` 허용 되어야 합니다.
 * 쿠키 기반 고정 세션이 제대로 작동 하려면 자격 증명을 허용 해야 합니다. 인증을 사용 하지 않는 경우에도 사용 하도록 설정 해야 합니다.
 
 <!--
@@ -42,7 +42,7 @@ CORS를 구성하는 방법에 대한 자세한 내용은 [교차 원본 요청(
 However, in 5.0 we have provided an option in the TypeScript client to not use credentials.
 The not to use credentials option should only be used when you know 100% that credentials like Cookies are not needed in your app (cookies are used by azure app service when using multiple servers)
 
-For more info, see https://github.com/aspnet/AspNetCore.Docs/issues/16003
+For more info, see https://github.com/dotnet/AspNetCore.Docs/issues/16003
 .-->
 
 예를 들어 다음 CORS 정책을 사용 하면 `https://example.com`에서 호스팅되는 SignalR browser 클라이언트를 `https://signalr.example.com`에서 호스트 되는 SignalR 앱에 액세스할 수 있습니다.
@@ -103,12 +103,12 @@ CORS에서 제공하는 보호 기능은 WebSocket에 적용되지 않습니다.
 
 그러나 브라우저는 WebSocket 요청을 발급할 때 `Origin` 헤더를 보냅니다. 애플리케이션은 예상된 원본에서 제공하는 WebSocket만 허용되도록 이러한 헤더의 유효성을 검사하도록 구성되어야 합니다.
 
-ASP.NET Core 2.1 이상에서는 `Configure`에서 **`UseSignalR` 및 인증 미들웨어를 호출하기 전에** 사용자 지정 미들웨어를 배치해서 헤더 유효성 검사를 수행할 수 있습니다.
+ASP.NET Core 2.1 이상에서 `UseSignalR`전에 배치 된 사용자 지정 미들웨어를 사용 하 여 헤더 유효성 검사를 수행 하 고 `Configure`에서 **인증 미들웨어** 를 수행할 수 있습니다.
 
 [!code-csharp[Main](security/sample/Startup.cs?name=snippet2)]
 
 > [!NOTE]
-> `Origin` 헤더는 클라이언트에 의해 제어되며 `Referer` 헤더와 마찬가지로 위조될 수 있습니다. 이런 헤더들을 인증 메커니즘으로 사용하면 **안 됩니다.**
+> `Origin` 헤더는 클라이언트에 의해 제어되며 `Referer` 헤더와 마찬가지로 위조될 수 있습니다. 이러한 헤더는 인증 메커니즘으로 **사용 하면 안 됩니다.**
 
 ::: moniker-end
 
@@ -118,7 +118,7 @@ SignalR 서버 또는 클라이언트 버전이 2.2 이전 버전인 경우 `Con
 
 ## <a name="access-token-logging"></a>액세스 토큰 로깅
 
-WebSocket 또는 서버-전송 이벤트를 사용할 경우 브라우저 클라이언트는 쿼리 문자열을 통해서 액세스 토큰을 전송합니다. 쿼리 문자열을 통해 액세스 토큰을 받는 것은 일반적으로 표준 `Authorization` 헤더를 사용 하는 것 만큼 안전 합니다. 항상 HTTPS를 사용 하 여 클라이언트와 서버 간의 안전한 종단 간 연결을 보장 합니다. 많은 웹 서버는 쿼리 문자열을 포함 하 여 각 요청에 대 한 URL을 기록 합니다. 따라서 URL 로깅이 액세스 토큰까지 기록할 수도 있습니다. ASP.NET Core은 기본적으로 쿼리 문자열을 포함 하는 각 요청에 대 한 URL을 기록 합니다. 예를 들면 다음과 같습니다.:
+WebSocket 또는 서버-전송 이벤트를 사용할 경우 브라우저 클라이언트는 쿼리 문자열을 통해서 액세스 토큰을 전송합니다. 쿼리 문자열을 통해 액세스 토큰을 받는 것은 일반적으로 표준 `Authorization` 헤더를 사용 하는 것 만큼 안전 합니다. 항상 HTTPS를 사용 하 여 클라이언트와 서버 간의 안전한 종단 간 연결을 보장 합니다. 많은 웹 서버는 쿼리 문자열을 포함 하 여 각 요청에 대 한 URL을 기록 합니다. 따라서 URL 로깅이 액세스 토큰까지 기록할 수도 있습니다. ASP.NET Core은 기본적으로 쿼리 문자열을 포함 하는 각 요청에 대 한 URL을 기록 합니다. 다음은 그 예입니다.
 
 ```
 info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]
@@ -145,7 +145,7 @@ SignalR는 연결당 버퍼를 사용 하 여 들어오고 나가는 메시지�
 
 들어오는 메시지와 보내는 메시지에 대 한 제한이 있습니다. 둘 다 `MapHub`에서 구성 된 [Httpconnectiondispatcheroptions](xref:signalr/configuration#configure-server-options) 개체에 구성할 수 있습니다.
 
-* `ApplicationMaxBufferSize`는 서버가 버퍼링하는 클라이언트의 최대 바이트 수를 나타냅니다. 클라이언트가 이 제한보다 큰 메시지를 전송하려고 시도하면 연결이 닫힐 수 있습니다.
-* `TransportMaxBufferSize`는 서버가 전송할 수 있는 최대 바이트 수를 나타냅니다. 서버가 이 제한보다 큰 메시지(허브 메서드의 반환 값을 포함)를 전송하려고 시도하면 예외가 발생합니다.
+* `ApplicationMaxBufferSize`는 서버에서 버퍼링 하는 클라이언트의 최대 바이트 수를 나타냅니다. 클라이언트가 이 제한보다 큰 메시지를 전송하려고 시도하면 연결이 닫힐 수 있습니다.
+* `TransportMaxBufferSize`는 서버에서 보낼 수 있는 최대 바이트 수를 나타냅니다. 서버가 이 제한보다 큰 메시지(허브 메서드의 반환 값을 포함)를 전송하려고 시도하면 예외가 발생합니다.
 
-제한을 `0`으로 설정하면 제한이 비활성화됩니다. 제한을 제거하면 클라이언트가 모든 크기의 메시지를 전송할 수 있습니다. 악의적인 클라이언트가 큰 메시지를 전송하여 과도한 메모리를 할당하게 만들 수 있습니다. 과도한 메모리의 사용은 동시 연결 수를 크게 감소시킬 수 있습니다.
+제한을 `0` 설정 하면 제한이 해제 됩니다. 제한을 제거하면 클라이언트가 모든 크기의 메시지를 전송할 수 있습니다. 악의적인 클라이언트가 큰 메시지를 전송하여 과도한 메모리를 할당하게 만들 수 있습니다. 과도한 메모리의 사용은 동시 연결 수를 크게 감소시킬 수 있습니다.

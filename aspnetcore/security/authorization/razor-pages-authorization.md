@@ -1,34 +1,32 @@
 ---
 title: ASP.NET Core에서 Razor Pages 권한 부여 규칙
-author: guardrex
+author: rick-anderson
 description: 사용자에 게 권한을 부여 하 고 익명 사용자가 페이지 또는 페이지의 폴더에 액세스 하도록 허용 하는 규칙으로 페이지에 대 한 액세스를 제어 하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 08/12/2019
 uid: security/authorization/razor-pages-authorization
-ms.openlocfilehash: e0102ff64921a83f0330acb6f5d9bfd90f64ca7a
-ms.sourcegitcommit: 89fcc6cb3e12790dca2b8b62f86609bed6335be9
+ms.openlocfilehash: 00fc487c6ac802f213bcf83994ecc2b1a1468589
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/13/2019
-ms.locfileid: "68994029"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653115"
 ---
 # <a name="razor-pages-authorization-conventions-in-aspnet-core"></a>ASP.NET Core에서 Razor Pages 권한 부여 규칙
-
-[Luke Latham](https://github.com/guardrex)으로
 
 ::: moniker range=">= aspnetcore-3.0"
 
 Razor Pages 앱에서 액세스를 제어 하는 한 가지 방법은 시작할 때 권한 부여 규칙을 사용 하는 것입니다. 이러한 규칙을 통해 사용자에 게 권한을 부여 하 고 익명 사용자가 페이지의 개별 페이지 또는 폴더에 액세스할 수 있습니다. 이 항목에서 설명 하는 규칙은 액세스를 제어 하는 [권한 부여 필터](xref:mvc/controllers/filters#authorization-filters) 를 자동으로 적용 합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/razor-pages-authorization/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/razor-pages-authorization/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-샘플 앱은 [ASP.NET Core id 없이 쿠키 인증](xref:security/authentication/cookie)을 사용 합니다. 이 항목에 나와 있는 개념 및 예제는 ASP.NET Core Id를 사용 하는 앱에 동일 하 게 적용 됩니다. ASP.NET Core Id를 사용 하려면의 <xref:security/authentication/identity>지침을 따르세요.
+샘플 앱은 [ASP.NET Core id 없이 쿠키 인증](xref:security/authentication/cookie)을 사용 합니다. 이 항목에 나와 있는 개념 및 예제는 ASP.NET Core Id를 사용 하는 앱에 동일 하 게 적용 됩니다. ASP.NET Core Id를 사용 하려면 <xref:security/authentication/identity>의 지침을 따르세요.
 
 ## <a name="require-authorization-to-access-a-page"></a>페이지에 액세스 하기 위한 권한 부여 필요
 
-를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizePage*> <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> 규칙을 사용 하 여 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> 지정 된 경로에 있는 페이지에를 추가 합니다.
+<xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*>를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizePage*> 규칙을 사용 하 여 지정 된 경로에 있는 페이지에 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter>를 추가 합니다.
 
 [!code-csharp[](razor-pages-authorization/samples/3.x/AuthorizationSample/Startup.cs?name=snippet1&highlight=2,4)]
 
@@ -41,11 +39,11 @@ options.Conventions.AuthorizePage("/Contact", "AtLeast21");
 ```
 
 > [!NOTE]
-> 는 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> `[Authorize]` 필터 특성을 사용 하 여 페이지 모델 클래스에 적용할 수 있습니다. 자세한 내용은 [권한 부여 필터 특성](xref:razor-pages/filter#authorize-filter-attribute)을 참조 하세요.
+> `[Authorize]` 필터 특성을 사용 하 여 페이지 모델 클래스에 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter>을 적용할 수 있습니다. 자세한 내용은 [권한 부여 필터 특성](xref:razor-pages/filter#authorize-filter-attribute)을 참조 하세요.
 
 ## <a name="require-authorization-to-access-a-folder-of-pages"></a>페이지의 폴더에 액세스 하기 위한 권한 부여 필요
 
-를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeFolder*> <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> 규칙을 사용 하 여 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> 지정 된 경로에 있는 폴더의 모든 페이지에를 추가 합니다.
+<xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*>를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeFolder*> 규칙을 사용 하 여 지정 된 경로에 있는 폴더의 모든 페이지에 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter>를 추가 합니다.
 
 [!code-csharp[](razor-pages-authorization/samples/3.x/AuthorizationSample/Startup.cs?name=snippet1&highlight=2,5)]
 
@@ -59,7 +57,7 @@ options.Conventions.AuthorizeFolder("/Private", "AtLeast21");
 
 ## <a name="require-authorization-to-access-an-area-page"></a>영역 페이지에 액세스 하기 위한 권한 부여 필요
 
-를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaPage*> <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> 규칙을 사용 하 여 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> 지정 된 경로의 영역 페이지에를 추가 합니다.
+<xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*>를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaPage*> 규칙을 사용 하 여 지정 된 경로의 영역 페이지에 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter>를 추가 합니다.
 
 ```csharp
 options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts");
@@ -75,7 +73,7 @@ options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts", "AtLeast21
 
 ## <a name="require-authorization-to-access-a-folder-of-areas"></a>영역 폴더에 액세스 하기 위한 권한 부여 필요
 
-를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaFolder*> <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> 규칙을 사용 하 여 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> 지정 된 경로에 있는 폴더의 모든 영역에를 추가 합니다.
+<xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*>를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaFolder*> 규칙을 사용 하 여 지정 된 경로에 있는 폴더의 모든 영역에 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter>를 추가 합니다.
 
 ```csharp
 options.Conventions.AuthorizeAreaFolder("Identity", "/Manage");
@@ -91,7 +89,7 @@ options.Conventions.AuthorizeAreaFolder("Identity", "/Manage", "AtLeast21");
 
 ## <a name="allow-anonymous-access-to-a-page"></a>페이지에 대 한 익명 액세스 허용
 
-를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AllowAnonymousToPage*> <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> 규칙을 사용 하 여 <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> 지정 된 경로에 있는 페이지에를 추가 합니다.
+<xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*>를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AllowAnonymousToPage*> 규칙을 사용 하 여 지정 된 경로에 있는 페이지에 <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter>를 추가 합니다.
 
 [!code-csharp[](razor-pages-authorization/samples/3.x/AuthorizationSample/Startup.cs?name=snippet1&highlight=2,6)]
 
@@ -99,7 +97,7 @@ options.Conventions.AuthorizeAreaFolder("Identity", "/Manage", "AtLeast21");
 
 ## <a name="allow-anonymous-access-to-a-folder-of-pages"></a>페이지의 폴더에 대 한 익명 액세스 허용
 
-를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AllowAnonymousToFolder*> <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> 규칙을 사용 하 여 <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> 지정 된 경로에 있는 폴더의 모든 페이지에를 추가 합니다.
+<xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*>를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AllowAnonymousToFolder*> 규칙을 사용 하 여 지정 된 경로에 있는 폴더의 모든 페이지에 <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter>를 추가 합니다.
 
 [!code-csharp[](razor-pages-authorization/samples/3.x/AuthorizationSample/Startup.cs?name=snippet1&highlight=2,7)]
 
@@ -107,7 +105,7 @@ options.Conventions.AuthorizeAreaFolder("Identity", "/Manage", "AtLeast21");
 
 ## <a name="note-on-combining-authorized-and-anonymous-access"></a>권한 있는 액세스 및 익명 액세스 결합에 대 한 참고 사항
 
-권한 부여가 필요한 페이지의 폴더를 지정 하 고 해당 폴더의 페이지에서 익명 액세스를 허용 하도록 지정 하는 것은 유효 합니다.
+페이지의 폴더에 권한 부여가 필요 하다 고 지정 하 고 해당 폴더의 페이지에서 익명 액세스를 허용 하도록 지정 하는 것은 유효 합니다.
 
 ```csharp
 // This works.
@@ -121,9 +119,9 @@ options.Conventions.AuthorizeAreaFolder("Identity", "/Manage", "AtLeast21");
 .AllowAnonymousToFolder("/Public").AuthorizePage("/Public/Private")
 ```
 
-개인 페이지에 대 한 권한 부여가 실패 합니다. <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> 및<xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> 가 모두 페이지<xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> 에 적용 되 면가 우선 하 고 액세스를 제어 합니다.
+개인 페이지에 대 한 권한 부여가 실패 합니다. <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter>와 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> 페이지에 모두 적용 되는 경우 <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter>가 우선적으로 적용 되 고 액세스를 제어 합니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:razor-pages/razor-pages-conventions>
 * <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection>
@@ -134,13 +132,13 @@ options.Conventions.AuthorizeAreaFolder("Identity", "/Manage", "AtLeast21");
 
 Razor Pages 앱에서 액세스를 제어 하는 한 가지 방법은 시작할 때 권한 부여 규칙을 사용 하는 것입니다. 이러한 규칙을 통해 사용자에 게 권한을 부여 하 고 익명 사용자가 페이지의 개별 페이지 또는 폴더에 액세스할 수 있습니다. 이 항목에서 설명 하는 규칙은 액세스를 제어 하는 [권한 부여 필터](xref:mvc/controllers/filters#authorization-filters) 를 자동으로 적용 합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/razor-pages-authorization/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/razor-pages-authorization/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-샘플 앱은 [ASP.NET Core id 없이 쿠키 인증](xref:security/authentication/cookie)을 사용 합니다. 이 항목에 나와 있는 개념 및 예제는 ASP.NET Core Id를 사용 하는 앱에 동일 하 게 적용 됩니다. ASP.NET Core Id를 사용 하려면의 <xref:security/authentication/identity>지침을 따르세요.
+샘플 앱은 [ASP.NET Core id 없이 쿠키 인증](xref:security/authentication/cookie)을 사용 합니다. 이 항목에 나와 있는 개념 및 예제는 ASP.NET Core Id를 사용 하는 앱에 동일 하 게 적용 됩니다. ASP.NET Core Id를 사용 하려면 <xref:security/authentication/identity>의 지침을 따르세요.
 
 ## <a name="require-authorization-to-access-a-page"></a>페이지에 액세스 하기 위한 권한 부여 필요
 
-를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizePage*> <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> 규칙을 사용 하 여 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> 지정 된 경로에 있는 페이지에를 추가 합니다.
+<xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*>를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizePage*> 규칙을 사용 하 여 지정 된 경로에 있는 페이지에 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter>를 추가 합니다.
 
 [!code-csharp[](razor-pages-authorization/samples/2.x/AuthorizationSample/Startup.cs?name=snippet1&highlight=2,4)]
 
@@ -153,11 +151,11 @@ options.Conventions.AuthorizePage("/Contact", "AtLeast21");
 ```
 
 > [!NOTE]
-> 는 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> `[Authorize]` 필터 특성을 사용 하 여 페이지 모델 클래스에 적용할 수 있습니다. 자세한 내용은 [권한 부여 필터 특성](xref:razor-pages/filter#authorize-filter-attribute)을 참조 하세요.
+> `[Authorize]` 필터 특성을 사용 하 여 페이지 모델 클래스에 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter>을 적용할 수 있습니다. 자세한 내용은 [권한 부여 필터 특성](xref:razor-pages/filter#authorize-filter-attribute)을 참조 하세요.
 
 ## <a name="require-authorization-to-access-a-folder-of-pages"></a>페이지의 폴더에 액세스 하기 위한 권한 부여 필요
 
-를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeFolder*> <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> 규칙을 사용 하 여 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> 지정 된 경로에 있는 폴더의 모든 페이지에를 추가 합니다.
+<xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*>를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeFolder*> 규칙을 사용 하 여 지정 된 경로에 있는 폴더의 모든 페이지에 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter>를 추가 합니다.
 
 [!code-csharp[](razor-pages-authorization/samples/2.x/AuthorizationSample/Startup.cs?name=snippet1&highlight=2,5)]
 
@@ -171,7 +169,7 @@ options.Conventions.AuthorizeFolder("/Private", "AtLeast21");
 
 ## <a name="require-authorization-to-access-an-area-page"></a>영역 페이지에 액세스 하기 위한 권한 부여 필요
 
-를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaPage*> <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> 규칙을 사용 하 여 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> 지정 된 경로의 영역 페이지에를 추가 합니다.
+<xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*>를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaPage*> 규칙을 사용 하 여 지정 된 경로의 영역 페이지에 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter>를 추가 합니다.
 
 ```csharp
 options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts");
@@ -187,7 +185,7 @@ options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts", "AtLeast21
 
 ## <a name="require-authorization-to-access-a-folder-of-areas"></a>영역 폴더에 액세스 하기 위한 권한 부여 필요
 
-를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaFolder*> <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> 규칙을 사용 하 여 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> 지정 된 경로에 있는 폴더의 모든 영역에를 추가 합니다.
+<xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*>를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaFolder*> 규칙을 사용 하 여 지정 된 경로에 있는 폴더의 모든 영역에 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter>를 추가 합니다.
 
 ```csharp
 options.Conventions.AuthorizeAreaFolder("Identity", "/Manage");
@@ -203,7 +201,7 @@ options.Conventions.AuthorizeAreaFolder("Identity", "/Manage", "AtLeast21");
 
 ## <a name="allow-anonymous-access-to-a-page"></a>페이지에 대 한 익명 액세스 허용
 
-를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AllowAnonymousToPage*> <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> 규칙을 사용 하 여 <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> 지정 된 경로에 있는 페이지에를 추가 합니다.
+<xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*>를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AllowAnonymousToPage*> 규칙을 사용 하 여 지정 된 경로에 있는 페이지에 <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter>를 추가 합니다.
 
 [!code-csharp[](razor-pages-authorization/samples/2.x/AuthorizationSample/Startup.cs?name=snippet1&highlight=2,6)]
 
@@ -211,7 +209,7 @@ options.Conventions.AuthorizeAreaFolder("Identity", "/Manage", "AtLeast21");
 
 ## <a name="allow-anonymous-access-to-a-folder-of-pages"></a>페이지의 폴더에 대 한 익명 액세스 허용
 
-를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AllowAnonymousToFolder*> <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> 규칙을 사용 하 여 <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> 지정 된 경로에 있는 폴더의 모든 페이지에를 추가 합니다.
+<xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*>를 통해 <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AllowAnonymousToFolder*> 규칙을 사용 하 여 지정 된 경로에 있는 폴더의 모든 페이지에 <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter>를 추가 합니다.
 
 [!code-csharp[](razor-pages-authorization/samples/2.x/AuthorizationSample/Startup.cs?name=snippet1&highlight=2,7)]
 
@@ -233,9 +231,9 @@ options.Conventions.AuthorizeAreaFolder("Identity", "/Manage", "AtLeast21");
 .AllowAnonymousToFolder("/Public").AuthorizePage("/Public/Private")
 ```
 
-개인 페이지에 대 한 권한 부여가 실패 합니다. <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> 및<xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> 가 모두 페이지<xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> 에 적용 되 면가 우선 하 고 액세스를 제어 합니다.
+개인 페이지에 대 한 권한 부여가 실패 합니다. <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter>와 <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> 페이지에 모두 적용 되는 경우 <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter>가 우선적으로 적용 되 고 액세스를 제어 합니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:razor-pages/razor-pages-conventions>
 * <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection>

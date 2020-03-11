@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 12/11/2019
 uid: security/authentication/individual
 ms.openlocfilehash: 7ef0d5eabded61d04fb9fe7be384a663ad7ea5f4
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828713"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78651957"
 ---
 # <a name="articles-based-on-aspnet-core-projects-created-with-individual-user-accounts"></a>개별 사용자 계정을 사용 하 여 만든 ASP.NET Core 프로젝트를 기반으로 하는 문서
 
@@ -61,7 +61,7 @@ Windows 인증을 선택 하면 앱이 [Windows 인증 IIS 모듈](xref:host-and
 
 다음 표에서는 새 웹 앱에 사용할 수 있는 인증 옵션을 보여 줍니다.
 
-| 옵션 | 인증 유형 | 자세한 정보에 대한 링크 |
+| 옵션 | 인증 유형 | 추가 정보 링크 |
  | ----------------- | ------------ | ---------- |
 | None            |  인증 없음 | | 
 | 개인      |  개별 인증 | <xref:security/authentication/identity>
@@ -74,7 +74,7 @@ Windows 인증을 선택 하면 앱이 [Windows 인증 IIS 모듈](xref:host-and
 
 다음 표에서는 Visual Studio를 사용 하 여 새 웹 앱을 만들 때 사용할 수 있는 인증 옵션을 보여 줍니다.
 
-| 옵션 | 인증 유형 | 자세한 정보에 대한 링크 |
+| 옵션 | 인증 유형 | 추가 정보 링크 |
  | ----------------- | ------------ | ---------- |
 | None            |  인증 없음 | | 
 | 개별 사용자 계정/앱 내 사용자 계정 저장 |  개별 인증 | <xref:security/authentication/identity> |
@@ -83,7 +83,7 @@ Windows 인증을 선택 하면 앱이 [Windows 인증 IIS 모듈](xref:host-and
 | 회사 또는 학교 클라우드/여러 조직 |  여러 테 넌 트에 대 한 조직 인증 | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
 | Windows         |  Windows 인증 | [Windows 인증](xref:security/authentication/windowsauth)
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 다음 문서에서는 개별 사용자 계정을 사용 하는 ASP.NET Core 템플릿에서 생성 된 코드를 사용 하는 방법을 보여 줍니다.
 

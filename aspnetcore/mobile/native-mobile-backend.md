@@ -5,20 +5,20 @@ description: ASP.NET Core MVC를 사용하여 네이티브 모바일 앱을 지�
 ms.author: riande
 ms.date: 12/05/2019
 uid: mobile/native-mobile-backend
-ms.openlocfilehash: 38ac69bfe9d99d6d61f96fde92d86fd752ebbb6b
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
-ms.translationtype: HT
+ms.openlocfilehash: dcd0a29af197ff0ca210c17bdff62b802219fb2d
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74881157"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653949"
 ---
 # <a name="create-backend-services-for-native-mobile-apps-with-aspnet-core"></a>ASP.NET Core를 사용하여 네이티브 모바일 앱용 백 엔드 서비스 만들기
 
-작성자: [Steve Smith](https://ardalis.com/)
+작성자 [Steve Smith](https://ardalis.com/)
 
 모바일 앱은 ASP.NET Core 백 엔드 서비스와 통신할 수 있습니다. iOS 시뮬레이터 및 Android 에뮬레이터에서 로컬 웹 서비스를 연결하는 방법에 대한 지침은 [iOS 시뮬레이터 및 Android 에뮬레이터에서 로컬 웹 서비스에 연결](/xamarin/cross-platform/deploy-test/connect-to-local-web-services)을 참조하세요.
 
-[샘플 백 엔드 서비스 코드 보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mobile/native-mobile-backend/sample)
+[샘플 백 엔드 서비스 코드 보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mobile/native-mobile-backend/sample)
 
 ## <a name="the-sample-native-mobile-app"></a>샘플 네이티브 모바일 앱
 
@@ -56,7 +56,7 @@ Visual Studio에서 새 ASP.NET Core 웹 애플리케이션을 만듭니다. 웹
 
 ![Web API 프로젝트 템플릿이 선택된 새 ASP.NET 웹 애플리케이션 대화 상자](native-mobile-backend/_static/web-api-template.png)
 
-애플리케이션은 포트 5000에 대한 모든 요청에 응답해야 합니다. 이를 수행하기 위해 `.UseUrls("http://*:5000")`를 포함하도록 *Program.cs*를 업데이트합니다.
+애플리케이션은 포트 5000에 대한 모든 요청에 응답해야 합니다. 이를 수행하기 위해 *를 포함하도록* Program.cs`.UseUrls("http://*:5000")`를 업데이트합니다.
 
 [!code-csharp[](native-mobile-backend/sample/ToDoApi/src/ToDoApi/Program.cs?range=10-16&highlight=3)]
 
@@ -96,7 +96,7 @@ API 메서드에는 데이터를 사용하는 방법이 필요합니다. 원래 
 
 ### <a name="reading-items"></a>항목 읽기
 
-항목의 목록 요청은 `List` 메서드에 대한 GET 요청으로 수행됩니다. `List` 메서드의 `[HttpGet]` 특성은 이 작업이 GET 요청만을 처리해야 함을 나타냅니다. 이 작업에 대한 경로는 컨트롤러에 지정된 경로입니다. 경로의 일부로 작업 이름을 사용할 필요가 없습니다. 각 작업에 고유하고 명확한 경로가 있도록 하기만 하면 됩니다. 라우팅 특성은 특정 경로를 작성하도록 컨트롤러와 메서드 수준 모두에 적용될 수 있습니다.
+항목의 목록 요청은 `List` 메서드에 대한 GET 요청으로 수행됩니다. `[HttpGet]` 메서드의 `List` 특성은 이 작업이 GET 요청만을 처리해야 함을 나타냅니다. 이 작업에 대한 경로는 컨트롤러에 지정된 경로입니다. 경로의 일부로 작업 이름을 사용할 필요가 없습니다. 각 작업에 고유하고 명확한 경로가 있도록 하기만 하면 됩니다. 라우팅 특성은 특정 경로를 작성하도록 컨트롤러와 메서드 수준 모두에 적용될 수 있습니다.
 
 [!code-csharp[](native-mobile-backend/sample/ToDoApi/src/ToDoApi/Controllers/ToDoItemsController.cs?range=19-23)]
 
@@ -118,7 +118,7 @@ API 메서드에는 데이터를 사용하는 방법이 필요합니다. 원래 
 
 [!code-csharp[](native-mobile-backend/sample/ToDoApi/src/ToDoApi/Controllers/ToDoItemsController.cs?range=91-99)]
 
-요청의 본문에 JSON 형식의 새 개체를 제공하는 POST 동사를 선택하여 Postman을 사용하는 새 항목 추가를 테스트합니다. 또한 `application/json`의 `Content-Type`을 지정하는 요청 헤더를 추가해야 합니다.
+요청의 본문에 JSON 형식의 새 개체를 제공하는 POST 동사를 선택하여 Postman을 사용하는 새 항목 추가를 테스트합니다. 또한 `Content-Type`의 `application/json`을 지정하는 요청 헤더를 추가해야 합니다.
 
 ![POST 및 응답을 보여 주는 Postman 콘솔](native-mobile-backend/_static/postman-post.png)
 
@@ -148,10 +148,10 @@ Postman으로 테스트하려면 동사를 PUT으로 변경합니다. 요청의 
 
 ## <a name="common-web-api-conventions"></a>공통 Web API 규칙
 
-앱에 대해 백 엔드 서비스를 개발하는 경우 교차 편집 문제 처리를 위해 일관적인 규칙의 집합 또는 정책을 찾을 수 있습니다. 예를 들어 위에 표시된 서비스에서 발견되지 않았던 특정 레코드에 대한 요청은 `BadRequest` 응답 대신 `NotFound` 응답을 받았습니다. 마찬가지로, 모델 바인딩 형식을 전달한 이 서비스에 대해 만든 명령은 항상 `ModelState.IsValid`를 확인했고 잘못된 모델 유형에 대해 `BadRequest`를 반환했습니다.
+앱에 대해 백 엔드 서비스를 개발하는 경우 교차 편집 문제 처리를 위해 일관적인 규칙의 집합 또는 정책을 찾을 수 있습니다. 예를 들어 위에 표시된 서비스에서 발견되지 않았던 특정 레코드에 대한 요청은 `NotFound` 응답 대신 `BadRequest` 응답을 받았습니다. 마찬가지로, 모델 바인딩 형식을 전달한 이 서비스에 대해 만든 명령은 항상 `ModelState.IsValid`를 확인했고 잘못된 모델 유형에 대해 `BadRequest`를 반환했습니다.
 
 API에 대한 일반적인 정책을 식별했으면 [필터](../mvc/controllers/filters.md)에서 캡슐화할 수 있습니다. [ASP.NET Core MVC 애플리케이션에서 일반적인 API 정책을 캡슐화하는 방법](https://msdn.microsoft.com/magazine/mt767699.aspx)에 대해 자세히 알아봅니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [인증 및 권한 부여](/xamarin/xamarin-forms/enterprise-application-patterns/authentication-and-authorization)

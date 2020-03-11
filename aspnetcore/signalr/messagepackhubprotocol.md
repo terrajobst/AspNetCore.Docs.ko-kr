@@ -10,25 +10,25 @@ no-loc:
 - SignalR
 uid: signalr/messagepackhubprotocol
 ms.openlocfilehash: 3c2a4285945d3fdc6bba195e3160da8b9dcbba44
-ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/01/2020
-ms.locfileid: "76928183"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654567"
 ---
 # <a name="use-messagepack-hub-protocol-in-opno-locsignalr-for-aspnet-core"></a>ASP.NET Core SignalR에서 MessagePack Hub 프로토콜 사용
 
-작성자: [Brennan Conroy](https://github.com/BrennanConroy)
+만든 사람 [Brennan Conroy](https://github.com/BrennanConroy)
 
-이 문서는 독자가 [시작하기](xref:tutorials/signalr)에서 설명하는 내용을 잘 알고 있다고 가정합니다.
+이 문서에서는 독자가 [시작](xref:tutorials/signalr)에 설명 된 항목에 대해 잘 알고 있다고 가정 합니다.
 
 ## <a name="what-is-messagepack"></a>MessagePack이란?
 
-[MessagePack](https://msgpack.org/index.html)은 빠르고 간결한 이진 직렬화 포맷입니다. [JSON](https://www.json.org/)에 비해 크기가 작은 메시지를 생성하기 때문에 성능 및 대역폭이 중요한 경우에 유용합니다. 이진 형식이므로 바이트가 MessagePack 파서를 거치지 않는 한 네트워크 추적 및 로그를 살펴보더라도 메시지를 읽을 수 없습니다. SignalR는 MessagePack 형식을 기본적으로 지원 하며 클라이언트 및 서버에서 사용할 수 있는 Api를 제공 합니다.
+[MessagePack](https://msgpack.org/index.html) 는 빠르고 압축 된 이진 직렬화 형식입니다. [JSON](https://www.json.org/)과 비교 하 여 더 작은 메시지를 만들기 때문에 성능 및 대역폭이 중요 한 경우에 유용 합니다. 이진 형식이므로 바이트가 MessagePack 파서를 거치지 않는 한 네트워크 추적 및 로그를 살펴보더라도 메시지를 읽을 수 없습니다. SignalR는 MessagePack 형식을 기본적으로 지원 하며 클라이언트 및 서버에서 사용할 수 있는 Api를 제공 합니다.
 
 ## <a name="configure-messagepack-on-the-server"></a>서버에서 MessagePack 구성
 
-서버에서 MessagePack 허브 프로토콜을 사용하려면 앱에 `Microsoft.AspNetCore.SignalR.Protocols.MessagePack` 패키지를 설치해야 합니다. Startup.cs 파일에서 `AddSignalR` 호출에 `AddMessagePackProtocol`을 추가하여 서버에서 MessagePack 지원을 활성화시킵니다.
+서버에서 MessagePack Hub 프로토콜을 사용 하도록 설정 하려면 `Microsoft.AspNetCore.SignalR.Protocols.MessagePack` 패키지를 앱에 설치 합니다. Startup.cs 파일에서 `AddSignalR` 호출에 `AddMessagePackProtocol`를 추가 하 여 서버에서 MessagePack 지원을 사용 하도록 설정 합니다.
 
 > [!NOTE]
 > JSON은 기본적으로 활성화됩니다. MessagePack을 추가하면 JSON 및 MessagePack 클라이언트에 대한 기능이 모두 활성화됩니다.
@@ -38,7 +38,7 @@ services.AddSignalR()
     .AddMessagePackProtocol();
 ```
 
-MessagePack이 데이터를 서식화하는 방법을 사용자 지정하려면 `AddMessagePackProtocol`에 구성 옵션을 위한 대리자를 전달합니다. 이 대리자에서 `FormatterResolvers` 속성을 이용하여 MessagePack 직렬화 옵션을 구성할 수 있습니다. 리졸버가 동작하는 방식에 대한 자세한 내용은 [MessagePack CSharp](https://github.com/neuecc/MessagePack-CSharp)의 MessagePack 라이브러리를 방문해보시기 바랍니다. 직렬화하고자 하는 개체에 특성을 적용하여 해당 개체를 처리하는 방식을 정의할 수 있습니다.
+MessagePack가 데이터의 서식을 지정 하는 방법을 사용자 지정 하기 위해 `AddMessagePackProtocol`는 옵션을 구성 하는 대리자를 사용 합니다. 이 대리자에서 `FormatterResolvers` 속성을 사용 하 여 MessagePack serialization 옵션을 구성할 수 있습니다. 해결 프로그램의 작동 방식에 대 한 자세한 내용은 [MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp)에서 MessagePack 라이브러리를 참조 하세요. 직렬화하고자 하는 개체에 특성을 적용하여 해당 개체를 처리하는 방식을 정의할 수 있습니다.
 
 ```csharp
 services.AddSignalR()
@@ -70,7 +70,7 @@ public static void Main(string[] args)
 
 ### <a name="net-client"></a>.NET 클라이언트
 
-.NET 클라이언트에서 MessagePack을 활성화시키려면 `Microsoft.AspNetCore.SignalR.Protocols.MessagePack` 패키지를 설치하고 `HubConnectionBuilder`에서 `AddMessagePackProtocol`을 호출합니다.
+.NET 클라이언트에서 MessagePack를 사용 하도록 설정 하려면 `Microsoft.AspNetCore.SignalR.Protocols.MessagePack` 패키지를 설치 하 고 `HubConnectionBuilder`에서 `AddMessagePackProtocol`를 호출 합니다.
 
 ```csharp
 var hubConnection = new HubConnectionBuilder()
@@ -80,7 +80,7 @@ var hubConnection = new HubConnectionBuilder()
 ```
 
 > [!NOTE]
-> 서버와 마찬가지로 이 `AddMessagePackProtocol` 호출은 옵션을 구성하기 위한 대리자를 전달받습니다.
+> 이 `AddMessagePackProtocol` 호출은 서버와 마찬가지로 옵션을 구성 하는 대리자를 사용 합니다.
 
 ### <a name="javascript-client"></a>JavaScript 클라이언트
 
@@ -118,10 +118,10 @@ Npm 패키지를 설치한 후 다음 파일을 참조 하 여 JavaScript 모듈
 
 ::: moniker-end
 
-브라우저에서 `msgpack5` 라이브러리도 참조해야 합니다. `<script>` 태그를 사용 하 여 참조를 만듭니다. 이 라이브러리는 *node_modules\msgpack5\dist\msgpack5.js*에서 찾을 수 있습니다.
+브라우저에서 `msgpack5` 라이브러리도 참조 해야 합니다. `<script>` 태그를 사용 하 여 참조를 만듭니다. 라이브러리는 *node_modules \msgpack5\dist\msgpack5.js*에서 찾을 수 있습니다.
 
 > [!NOTE]
-> `<script>` 요소를 사용할 때 순서가 중요합니다. *msgpack5.js*보다 *signalr-protocol-msgpack.js*를 먼저 참조하면 MessagePack을 이용해서 연결하려고 시도할 때 오류가 발생합니다. *signalr.js*도 *signalr-protocol-msgpack.js*보다 먼저 참조해야 합니다.
+> `<script>` 요소를 사용 하는 경우 순서가 중요 합니다. *Msgpack5*이전에 *signalr-protocol-msgpack* 를 참조 하는 경우 MessagePack에 연결 하려고 할 때 오류가 발생 합니다. *signalr-protocol-msgpack*전에 *signalr* 도 필요 합니다.
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -129,7 +129,7 @@ Npm 패키지를 설치한 후 다음 파일을 참조 하 여 JavaScript 모듈
 <script src="~/lib/signalr/signalr-protocol-msgpack.js"></script>
 ```
 
-`HubConnectionBuilder`에 `.withHubProtocol(new signalR.protocols.msgpack.MessagePackHubProtocol())`을 추가하면 클라이언트가 서버에 연결할 때 MessagePack 프로토콜을 사용하도록 구성됩니다.
+`HubConnectionBuilder`에 `.withHubProtocol(new signalR.protocols.msgpack.MessagePackHubProtocol())`를 추가 하면 클라이언트에서 서버에 연결할 때 MessagePack 프로토콜을 사용 하도록 구성 됩니다.
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
@@ -157,7 +157,7 @@ public class ChatMessage
 }
 ```
 
-JavaScript 클라이언트에서 전송 하는 경우 대/소문자가 C# 클래스와 정확 하 게 일치 해야 하므로 `PascalCased` 속성 이름을 사용 해야 합니다. 예를 들면 다음과 같습니다.:
+JavaScript 클라이언트에서 전송 하는 경우 대/소문자가 C# 클래스와 정확 하 게 일치 해야 하므로 `PascalCased` 속성 이름을 사용 해야 합니다. 다음은 그 예입니다.
 
 ```javascript
 connection.invoke("SomeMethod", { Sender: "Sally", Message: "Hello!" });
@@ -209,7 +209,7 @@ InvalidDataException: Error binding arguments. Make sure that the types of the p
 
 이 제한 사항에 대 한 자세한 내용은 GitHub 문제 [aspnet/SignalR#2937](https://github.com/aspnet/SignalR/issues/2937)를 참조 하세요.
 
-## <a name="related-resources"></a>관련 참고 자료
+## <a name="related-resources"></a>관련 리소스
 
 * [시작](xref:tutorials/signalr)
 * [.NET 클라이언트](xref:signalr/dotnet-client)

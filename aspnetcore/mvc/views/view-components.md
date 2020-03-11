@@ -6,18 +6,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/18/2019
 uid: mvc/views/view-components
-ms.openlocfilehash: 8df070b580b6125db6616b33a81f3ffebad69f3a
-ms.sourcegitcommit: 7dfe6cc8408ac6a4549c29ca57b0c67ec4baa8de
-ms.translationtype: HT
+ms.openlocfilehash: 910fffbf360ed0f62f7fe20bc8bfdf5be8198876
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/09/2020
-ms.locfileid: "75828921"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652317"
 ---
 # <a name="view-components-in-aspnet-core"></a>ASP.NET Core의 보기 구성 요소
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/view-components/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/view-components/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="view-components"></a>보기 구성 요소
 
@@ -42,7 +42,7 @@ ms.locfileid: "75828921"
 
 보기 구성 요소는 클래스(일반적으로 [ViewComponent](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponent)에서 파생됨)와 보기 구성 요소가 반환하는 결과(일반적으로 보기)의 두 부분으로 구성됩니다. 컨트롤러와 마찬가지로 보기 구성 요소는 POCO일 수 있지만 대부분의 개발자는 `ViewComponent`에서 파생하여 사용 가능한 메서드와 속성을 활용하려고 합니다.
 
-보기 구성 요소가 앱의 사양을 충족하는지 고려할 때 Razor 구성 요소를 대신 사용하는 방안도 고려해보세요. Razor 구성 요소 역시 태그와 C# 코드를 결합하여 다시 사용할 수 있는 UI 단위를 생성합니다. Razor 구성 요소는 클라이언트 쪽 UI 논리 및 컴퍼지션을 제공할 때 개발자 생산성을 위해 설계되었습니다. 자세한 내용은 <xref:blazor/components>를 참조하세요.
+보기 구성 요소가 앱의 사양을 충족하는지 고려할 때 Razor 구성 요소를 대신 사용하는 방안도 고려해보세요. Razor 구성 요소 역시 태그와 C# 코드를 결합하여 다시 사용할 수 있는 UI 단위를 생성합니다. Razor 구성 요소는 클라이언트 쪽 UI 논리 및 컴퍼지션을 제공할 때 개발자 생산성을 위해 설계되었습니다. 자세한 내용은 <xref:blazor/components>을 참조하세요.
 
 ## <a name="creating-a-view-component"></a>보기 구성 요소 만들기
 
@@ -66,9 +66,9 @@ ms.locfileid: "75828921"
 
 ### <a name="view-component-methods"></a>보기 구성 요소 메서드
 
-보기 구성 요소는 `Task<IViewComponentResult>`를 반환하는 `InvokeAsync` 메서드 또는 `IViewComponentResult`를 반환하는 동기 `Invoke` 메서드에서 해당 논리를 정의합니다. 매개 변수는 모델 바인딩이 아니라 보기 구성 요소 호출에서 직접 가져옵니다. 보기 구성 요소는 요청을 직접 처리하지 않습니다. 일반적으로 보기 구성 요소는 모델을 초기화하고 `View` 메서드를 호출하여 보기에 전달합니다. 요약해보면 보기 구성 요소 메서드는 다음과 같습니다.
+보기 구성 요소는 `InvokeAsync`를 반환하는 `Task<IViewComponentResult>` 메서드 또는 `Invoke`를 반환하는 동기 `IViewComponentResult` 메서드에서 해당 논리를 정의합니다. 매개 변수는 모델 바인딩이 아니라 보기 구성 요소 호출에서 직접 가져옵니다. 보기 구성 요소는 요청을 직접 처리하지 않습니다. 일반적으로 보기 구성 요소는 모델을 초기화하고 `View` 메서드를 호출하여 보기에 전달합니다. 요약해보면 보기 구성 요소 메서드는 다음과 같습니다.
 
-* `Task<IViewComponentResult>`를 반환하는 `InvokeAsync` 메서드 또는 `IViewComponentResult`를 반환하는 동기 `Invoke` 메서드를 정의합니다.
+* `InvokeAsync`를 반환하는 `Task<IViewComponentResult>` 메서드 또는 `Invoke`를 반환하는 동기 `IViewComponentResult` 메서드를 정의합니다.
 * 일반적으로 모델을 초기화하고 `ViewComponent` `View` 메서드를 호출하여 이를 보기에 전달합니다.
 * 매개 변수는 HTTP가 아닌 호출 메서드에서 가져옵니다. 모델 바인딩이 없습니다.
 * HTTP 엔드포인트로 직접 연결할 수 없습니다. (일반적으로 보기의) 코드에서 호출됩니다. 보기 구성 요소는 요청을 처리하지 않습니다.
@@ -155,7 +155,7 @@ ASP.NET Core 1.1 이상에서는 [태그 도우미](xref:mvc/views/tag-helpers/i
 
 ## <a name="walkthrough-creating-a-simple-view-component"></a>연습: 간단한 뷰 구성 요소 만들기
 
-시작 코드를 [다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/view-components/sample), 빌드 및 테스트합니다. *ToDo* 항목의 목록을 표시하는 `ToDo` 컨트롤러가 포함된 간단한 프로젝트입니다.
+시작 코드를 [다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/view-components/sample), 빌드 및 테스트합니다. `ToDo`ToDo*항목의 목록을 표시하는* 컨트롤러가 포함된 간단한 프로젝트입니다.
 
 ![ToDo 목록](view-components/_static/2dos.png)
 
@@ -179,11 +179,11 @@ ASP.NET Core 1.1 이상에서는 [태그 도우미](xref:mvc/views/tag-helpers/i
 * 위의 `[ViewComponent]` 특성은 구성 요소와 연관된 보기를 찾을 때 `PriorityList` 이름을 사용하고, 보기에서 클래스 구성 요소를 참조할 때 "PriorityList" 문자열을 사용하도록 보기 구성 요소 선택기에게 지시합니다. 나중에 보다 자세히 설명합니다.
 * 이 구성 요소에서는 [종속성 주입](../../fundamentals/dependency-injection.md)을 사용하여 데이터 컨텍스트를 사용할 수 있도록 합니다.
 * `InvokeAsync`는 보기에서 호출할 수 있는 메서드를 노출하며 임의의 개수의 인수를 사용할 수 있습니다.
-* `InvokeAsync` 메서드는 `isDone` 및 `maxPriority` 매개 변수를 만족하는 `ToDo` 항목 집합을 반환합니다.
+* `InvokeAsync` 메서드는 `ToDo` 및 `isDone` 매개 변수를 만족하는 `maxPriority` 항목 집합을 반환합니다.
 
 ### <a name="create-the-view-component-razor-view"></a>보기 구성 요소 Razor 보기 만들기
 
-* *Views/Shared/Components* 폴더를 만듭니다. 이 폴더의 이름은 *Components*로 **지정되어야만** 합니다.
+* *Views/Shared/Components* 폴더를 만듭니다. 이 폴더의 이름은 **Components**로 *지정되어야만* 합니다.
 
 * *Views/Shared/Components/PriorityList* 폴더를 만듭니다. 이 폴더 이름은 보기 구성 요소 클래스의 이름 또는 클래스 이름에서 접미사를 뺀 이름과 일치해야 합니다(규칙을 준수하고 클래스 이름에 *ViewComponent* 접미사를 사용한 경우). `ViewComponent` 특성을 사용한 경우 클래스 이름은 특성 지정과 일치해야 합니다.
 
@@ -214,7 +214,7 @@ ASP.NET Core 1.1 이상에서는 [태그 도우미](xref:mvc/views/tag-helpers/i
 
 ### <a name="specifying-a-view-name"></a>보기 이름 지정
 
-복잡한 보기 구성 요소에서는 조건에 따라 기본값이 아닌 보기를 지정해야 할 수도 있습니다. 다음 코드는 `InvokeAsync` 메서드에서 "PVC" 보기를 지정하는 방법을 보여 줍니다. `PriorityListViewComponent` 클래스에서 `InvokeAsync` 메서드를 수정합니다.
+복잡한 보기 구성 요소에서는 조건에 따라 기본값이 아닌 보기를 지정해야 할 수도 있습니다. 다음 코드는 `InvokeAsync` 메서드에서 "PVC" 보기를 지정하는 방법을 보여 줍니다. `InvokeAsync` 클래스에서 `PriorityListViewComponent` 메서드를 수정합니다.
 
 [!code-csharp[](../../mvc/views/view-components/sample/ViewCompFinal/ViewComponents/PriorityListViewComponentFinal.cs?highlight=4,5,6,7,8,9&range=28-39)]
 
@@ -306,7 +306,7 @@ public class PriorityList : ViewComponent
 
 ::: moniker range="< aspnetcore-1.1"
 
-보기 구성 요소는 <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper>를 사용하여 Razor 파일(예: *Views/Home/Index.cshtml*)에서 호출됩니다.
+보기 구성 요소는 *를 사용하여 Razor 파일(예:* Views/Home/Index.cshtml<xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper>)에서 호출됩니다.
 
 `Component.InvokeAsync`를 호출합니다.
 
@@ -343,6 +343,6 @@ Razor 태그 파일에서 보기 구성 요소 태그 도우미를 사용합니�
 * ViewComponent가 마크업을 렌더링하지 않습니다.
 * 오류가 throw되지 않습니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [보기에 종속성 주입](xref:mvc/views/dependency-injection)

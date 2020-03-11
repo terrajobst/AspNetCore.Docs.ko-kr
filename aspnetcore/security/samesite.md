@@ -5,28 +5,78 @@ description: 를 사용 하 여 ASP.NET Core 쿠키를 SameSite 하는 방법을
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/03/2019
+no-loc:
+- Electron
 uid: security/samesite
-ms.openlocfilehash: b344ed8f539979210980b3421659207edd513f32
-ms.sourcegitcommit: cbd30479f42cbb3385000ef834d9c7d021fd218d
+ms.openlocfilehash: eeba2c4403d33312692ed187021a125c22df5d08
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/16/2020
-ms.locfileid: "76146435"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654987"
 ---
 # <a name="work-with-samesite-cookies-in-aspnet-core"></a>ASP.NET Core에서 SameSite 쿠키 작업
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[SameSite](https://tools.ietf.org/html/draft-west-first-party-cookies-07) 은 csrf (교차 사이트 요청 위조) 공격에 대 한 보호를 제공 하도록 설계 된 [IETF](https://ietf.org/about/) 초안입니다. [SameSite 2019 초안](https://tools.ietf.org/html/draft-west-cookie-incrementalism-00):
+SameSite은 CSRF (교차 사이트 요청 위조) 공격에 대 한 보호를 제공 하도록 설계 된 [IETF](https://ietf.org/about/) 초안 표준입니다. 원래 [2016](https://tools.ietf.org/html/draft-west-first-party-cookies-07)에서는 초안 표준이 [2019](https://tools.ietf.org/html/draft-west-cookie-incrementalism-00)에서 업데이트 되었습니다. 업데이트 된 표준은 이전 표준과 호환 되지 않으며 다음과 같은 가장 눈에 띄는 차이점이 있습니다.
 
-* 에서는 기본적으로 쿠키를 `SameSite=Lax`로 처리 합니다.
-* 사이트 간 배달을 가능 하 게 하기 위해 `SameSite=None`를 명시적으로 어설션하는 쿠키는 `Secure`으로 표시 되어야 합니다.
+* SameSite 헤더가 없는 쿠키는 기본적으로 `SameSite=Lax`으로 처리 됩니다.
+* 사이트 간 쿠키 사용을 허용 하려면 `SameSite=None`를 사용 해야 합니다.
+* `SameSite=None` 어설션 하는 쿠키도 `Secure`로 표시 되어야 합니다.
+* [`<iframe>`](https://developer.mozilla.org/docs/Web/HTML/Element/iframe) 를 사용 하는 응용 프로그램은 `<iframe>` 사이트 간 시나리오로 처리 되기 때문에 `sameSite=Lax` 또는 `sameSite=Strict` 쿠키와 관련 된 문제가 발생할 수 있습니다.
+* `SameSite=None` 값은 [2016 표준](https://tools.ietf.org/html/draft-west-first-party-cookies-07) 에서 허용 되지 않으며 일부 구현에서는 이러한 쿠키를 `SameSite=Strict`로 처리 합니다. 이 문서의 [이전 브라우저 지원](#sob) 을 참조 하세요.
 
-`Lax` 대부분의 앱 쿠키에 대해 작동 합니다. Oidc ( [Openid connect Connect](https://openid.net/connect/) )와 같은 일부 형태의 인증 및 [ws-federation](https://auth0.com/docs/protocols/ws-fed) 은 게시 기반 리디렉션에 대해 기본적으로 사용 됩니다. 사후 기반 리디렉션은 SameSite 브라우저 보호를 트리거하고 이러한 구성 요소에 대해 SameSite을 사용할 수 없습니다. 대부분의 [OAuth](https://oauth.net/) 로그인은 요청 흐름의 차이로 인해 영향을 받지 않습니다.
-
-`None` 매개 변수를 사용 하면 이전 2016 초안 표준 (예: iOS 12)을 구현한 클라이언트에서 호환성 문제가 발생 합니다. 이 문서의 [이전 브라우저 지원](#sob) 을 참조 하세요.
+`SameSite=Lax` 설정은 대부분의 응용 프로그램 쿠키에 대해 작동 합니다. Oidc ( [Openid connect Connect](https://openid.net/connect/) )와 같은 일부 형태의 인증 및 [ws-federation](https://auth0.com/docs/protocols/ws-fed) 은 게시 기반 리디렉션에 대해 기본적으로 사용 됩니다. 사후 기반 리디렉션은 SameSite 브라우저 보호를 트리거하고 이러한 구성 요소에 대해 SameSite을 사용할 수 없습니다. 대부분의 [OAuth](https://oauth.net/) 로그인은 요청 흐름의 차이로 인해 영향을 받지 않습니다.
 
 쿠키를 내보내는 각 ASP.NET Core 구성 요소는 SameSite가 적절 한지 결정 해야 합니다.
+
+## <a name="samesite-test-sample-code"></a>SameSite 테스트 샘플 코드
+
+ ::: moniker range=">= aspnetcore-2.1 < aspnetcore-3.0"
+
+다음 샘플을 다운로드 하 고 테스트할 수 있습니다.
+
+| 샘플               | 문서 |
+| ----------------- | ------------ |
+| [.NET Core MVC](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21MVC)  | <xref:security/samesite/mvc21> |
+| [.NET Core Razor Pages](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21RazorPages)  | <xref:security/samesite/rp21> |
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
+
+다음 샘플을 다운로드 하 고 테스트할 수 있습니다.
+
+
+| 샘플               | 문서 |
+| ----------------- | ------------ |
+| [.NET Core Razor Pages](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore31RazorPages)  | <xref:security/samesite/rp31> |
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-2.2"
+
+## <a name="net-core-support-for-the-samesite-attribute"></a>SameSite 특성에 대 한 .NET Core 지원
+
+.NET Core 2.2는 12 월 2019의 업데이트 출시 이후 SameSite의 2019 초안 표준을 지원 합니다. 개발자는 `HttpCookie.SameSite` 속성을 사용 하 여 sameSite 특성의 값을 프로그래밍 방식으로 제어할 수 있습니다. `SameSite` 속성을 Strict, Strict 또는 None으로 설정 하면 해당 값이 쿠키를 사용 하 여 네트워크에 기록 됩니다. 이 값을 (SameSiteMode) (-1)로 설정 하면 쿠키를 사용 하 여 네트워크에 sameSite 특성이 포함 되지 않음을 나타냅니다.
+
+[!code-csharp[](samesite/snippets/Privacy.cshtml.cs?name=snippet)]
+
+.NET Core 3.0는 업데이트 된 SameSite 값을 지원 하 고 `SameSiteMode` 열거형에 `SameSiteMode.Unspecified` 추가 열거형 값을 추가 합니다.
+이 새 값은 쿠키와 함께 sameSite를 전송 하지 않음을 나타냅니다.
+
+::: moniker-end
+
+::: moniker range="= aspnetcore-2.1"
+
+## <a name="december-patch-behavior-changes"></a>12 월 패치 동작 변경 내용
+
+.NET Framework 및 .NET Core 2.1의 특정 동작 변경 내용은 `SameSite` 속성이 `None` 값을 해석 하는 방법입니다. 패치 후에는 `None`의 값이 "특성을 전혀 내보내지 않습니다." 라는 값을 사용 하기 전에 "`None`값으로 특성을 내보냅니다."를 의미 합니다. `(SameSiteMode)(-1)` `SameSite` 값을 패치 한 후에는 특성을 내보내지 않습니다.
+
+폼 인증 및 세션 상태 쿠키의 기본 SameSite 값이 `None`에서 `Lax`로 변경 되었습니다.
+
+::: moniker-end
 
 ## <a name="api-usage-with-samesite"></a>SameSite를 사용 하는 API 사용
 
@@ -36,7 +86,7 @@ SameSite. 기본값을 [추가](xref:Microsoft.AspNetCore.Http.IResponseCookies.
 
 쿠키를 내보내는 모든 ASP.NET Core 구성 요소는 해당 시나리오에 적합 한 설정을 사용 하 여 이전 기본값을 재정의 합니다. 재정의 된 이전 기본값은 변경 되지 않았습니다.
 
-| 구성 요소 | 쿠키 | 기본 |
+| 구성 요소 | 쿠키가 | 기본값 |
 | ------------- | ------------- |
 | <xref:Microsoft.AspNetCore.Http.CookieBuilder> | <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite> | `Unspecified` |
 | <xref:Microsoft.AspNetCore.Http.HttpContext.Session>  | [SessionOptions](xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie) |`Lax` |
@@ -144,6 +194,8 @@ Google은 이전 chrome 버전을 사용할 수 없도록 설정 하지 않습�
 * [Chromium 76 Win64](https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html?prefix=Win_x64/664998/)
 * [Chromium 74 Win64](https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html?prefix=Win_x64/638880/)
 
+카나리아 버전 `80.0.3975.0`부터 완화 + 사후 임시 완화는 새로운 `--enable-features=SameSiteDefaultChecksMethodRigorously` 플래그를 사용 하 여 테스트 목적으로 사용 하지 않도록 설정할 수 있습니다 .이는 완화가 제거 된 기능의 최종 종료 상태에서 사이트 및 서비스의 테스트를 허용 하는 것입니다. 자세한 내용은 Chromium Projects [SameSite Updates](https://www.chromium.org/updates/same-site) 를 참조 하세요.
+
 ### <a name="test-with-safari"></a>Safari를 사용 하 여 테스트
 
 Safari 12는 이전 초안을 엄격 하 게 구현 했으며 새 `None` 값이 쿠키에 있는 경우 실패 합니다. 이 문서에서 [이전 브라우저를 지 원하는](#sob) 브라우저 검색 코드를 통해 `None`를 방지할 수 있습니다. MSAL, ADAL 또는 사용 중인 라이브러리를 사용 하 여 Safari 12, Safari 13 및 WebKit 기반 OS 스타일 로그인을 테스트 합니다. 문제는 기본 OS 버전에 따라 달라집니다. OSX Mojave (10.14) 및 iOS 12는 새로운 SameSite 동작의 호환성 문제를 해결 하는 것으로 알려져 있습니다. OS를 OSX Catalina.properties (10.15) 또는 iOS 13로 업그레이드 하면 문제가 해결 됩니다. Safari에는 현재 새 사양 동작 테스트를 위한 옵트인 플래그가 없습니다.
@@ -164,8 +216,25 @@ SameSite 플래그는 `edge://flags/#same-site-by-default-cookies` 페이지에 
 
 Electron 버전에는 이전 버전의 Chromium이 포함되어 있습니다. 예를 들어 팀에서 사용 하는 전자의 버전은 Chromium 66 이며,이는 이전 동작을 보여 주는 것입니다. 제품에서 사용 하는 전자 제품 버전으로 고유한 호환성 테스트를 수행 해야 합니다. 다음 섹션에서 [이전 브라우저 지원](#sob) 을 참조 하세요.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [Chromium 블로그: 개발자: 새 SameSite를 사용할 준비가 되었습니다. 보안 쿠키 설정](https://blog.chromium.org/2019/10/developers-get-ready-for-new.html)
 * [SameSite 쿠키 설명](https://web.dev/samesite-cookies-explained/)
 * [11 월 2019 패치](https://devblogs.microsoft.com/dotnet/net-core-November-2019/)
+
+ ::: moniker range=">= aspnetcore-2.1 < aspnetcore-3.0"
+
+| 샘플               | 문서 |
+| ----------------- | ------------ |
+| [.NET Core MVC](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21MVC)  | <xref:security/samesite/mvc21> |
+| [.NET Core Razor Pages](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21RazorPages)  | <xref:security/samesite/rp21> |
+
+::: moniker-end
+
+ ::: moniker range=">= aspnetcore-3.0"
+
+| 샘플               | 문서 |
+| ----------------- | ------------ |
+| [.NET Core Razor Pages](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore31RazorPages)  | <xref:security/samesite/rp31> |
+
+::: moniker-end

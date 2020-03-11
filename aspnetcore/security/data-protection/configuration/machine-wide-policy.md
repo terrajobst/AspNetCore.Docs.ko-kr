@@ -6,11 +6,11 @@ ms.author: riande
 ms.date: 10/14/2016
 uid: security/data-protection/configuration/machine-wide-policy
 ms.openlocfilehash: 70aaca7afcd3df22cebb4466fbd9845a2277688c
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64897270"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78655065"
 ---
 # <a name="data-protection-machine-wide-policy-support-in-aspnet-core"></a>ASP.NET Core 데이터 보호의 시스템 수준 정책 지원
 
@@ -31,41 +31,41 @@ ms.locfileid: "64897270"
 
 지원되는 값은 다음과 같습니다.
 
-| 값              | 형식   | 설명 |
+| 값              | Type   | Description |
 | ------------------ | :----: | ----------- |
-| EncryptionType     | string | 데이터 보호에 사용할 알고리즘을 지정합니다. 값은 CNG-CBC, CNG-GCM 또는 Managed 중 하나여야 하고 아래에서 자세히 살펴봅니다. |
+| EncryptionType     | 문자열 | 데이터 보호에 사용할 알고리즘을 지정합니다. 값은 CNG-CBC, CNG-GCM 또는 Managed 중 하나여야 하고 아래에서 자세히 살펴봅니다. |
 | DefaultKeyLifetime | DWORD  | 새로 생성되는 키의 수명을 지정합니다. 이 값은 일 단위로 지정되며 7보다 크거나 같아야 합니다. |
-| KeyEscrowSinks     | string | 키 에스크로에 사용되는 형식들을 지정합니다. 값은 세미콜론(;)으로 연결된 키 에스트로 싱크의 목록으로, 목록의 각 요소들은 [IKeyEscrowSink](/dotnet/api/microsoft.aspnetcore.dataprotection.keymanagement.ikeyescrowsink) 를 구현하는 형식의 정규화된 어셈블리 이름입니다. |
+| KeyEscrowSinks     | 문자열 | 키 에스크로에 사용되는 형식들을 지정합니다. 값은 세미콜론으로 구분 된 주요 에스크로 목록으로, 목록의 각 요소는 [IKeyEscrowSink](/dotnet/api/microsoft.aspnetcore.dataprotection.keymanagement.ikeyescrowsink)를 구현 하는 형식의 어셈블리로 한정 된 이름입니다. |
 
 ## <a name="encryption-types"></a>암호화 형식
 
-EncryptionType 값이 CNG-CBC로 지정되면, 기밀성을 위해 CBC 모드 대칭형 블럭 암호화를 사용하고 신뢰성을 위해 Windows CNG에서 제공되는 서비스를 이용해서 HMAC를 사용하도록 구성됩니다 (보다 자세한 정보는 [사용자 지정 Windows CNG 알고리즘을 지정하기](xref:security/data-protection/configuration/overview#specifying-custom-windows-cng-algorithms) 를 참고하시기 바랍니다.) 추가적으로 다음과 같은 값들이 지원되며, 이 값들은 각각 CngCbcAuthenticatedEncryptionSettings 형식의 속성에 대응합니다.
+EncryptionType이 CNG 인 경우 시스템은 Windows CNG에서 제공 하는 서비스를 사용 하 여 기밀성 및 HMAC에 대해 CBC의 대칭 블록 암호를 사용 하도록 구성 됩니다 (자세한 내용은 [사용자 지정 WINDOWS CNG 알고리즘 지정](xref:security/data-protection/configuration/overview#specifying-custom-windows-cng-algorithms) 참조). 추가적으로 다음과 같은 값들이 지원되며, 이 값들은 각각 CngCbcAuthenticatedEncryptionSettings 형식의 속성에 대응합니다.
 
-| 값                       | 형식   | 설명 |
+| 값                       | Type   | Description |
 | --------------------------- | :----: | ----------- |
-| EncryptionAlgorithm         | string | CNG가 인식하는 대칭형 블럭 암호화 알고리즘의 이름입니다. 이 알고리즘은 CBC 모드로 열립니다. |
-| EncryptionAlgorithmProvider | string | EncryptionAlgorithm 알고리즘을 생성할 수 있는 CNG 공급자 구현의 이름입니다. |
+| EncryptionAlgorithm         | 문자열 | CNG가 인식하는 대칭형 블럭 암호화 알고리즘의 이름입니다. 이 알고리즘은 CBC 모드로 열립니다. |
+| EncryptionAlgorithmProvider | 문자열 | EncryptionAlgorithm 알고리즘을 생성할 수 있는 CNG 공급자 구현의 이름입니다. |
 | EncryptionAlgorithmKeySize  | DWORD  | 대칭형 블럭 암호화 알고리즘에 대해 파생되는 키의 길이(비트)입니다. |
-| HashAlgorithm               | string | CNG가 인식하는 해시 알고리즘의 이름입니다. 이 알고리즘은 HMAC 모드로 열립니다. |
-| HashAlgorithmProvider       | string | 알고리즘 HashAlgorithm을 생성할 수 있는 CNG 공급자 구현의 이름입니다. |
+| HashAlgorithm               | 문자열 | CNG가 인식하는 해시 알고리즘의 이름입니다. 이 알고리즘은 HMAC 모드로 열립니다. |
+| HashAlgorithmProvider       | 문자열 | 알고리즘 HashAlgorithm을 생성할 수 있는 CNG 공급자 구현의 이름입니다. |
 
-EncryptionType 값이 CNG-GCM로 지정되면, 기밀성을 위해 갈루아(Galois)/카운터 모드 대칭형 블럭 암호화를 사용하고 신뢰성을 위해 Windows CNG에서 제공되는 서비스를 사용하도록 구성됩니다 (보다 자세한 정보는 [사용자 지정 Windows CNG 알고리즘을 지정하기](xref:security/data-protection/configuration/overview#specifying-custom-windows-cng-algorithms) 를 참고하시기 바랍니다.) 추가적으로 다음과 같은 값들이 지원되며, 이 값들은 각각 CngGcmAuthenticatedEncryptionSettings 형식의 속성에 대응합니다.
+EncryptionType이 CNG 인 경우 시스템은 Windows CNG에서 제공 하는 서비스와의 기밀성 및 신뢰성을 위해 Galois/Counter 모드 대칭 블록 암호를 사용 하도록 구성 됩니다 (자세한 내용은 [사용자 지정 WINDOWS CNG 알고리즘 지정](xref:security/data-protection/configuration/overview#specifying-custom-windows-cng-algorithms) 참조). 추가적으로 다음과 같은 값들이 지원되며, 이 값들은 각각 CngGcmAuthenticatedEncryptionSettings 형식의 속성에 대응합니다.
 
-| 값                       | 형식   | 설명 |
+| 값                       | Type   | Description |
 | --------------------------- | :----: | ----------- |
-| EncryptionAlgorithm         | string | CNG가 인식하는 대칭형 블럭 암호화 알고리즘의 이름입니다. 이 알고리즘은 갈루아(Galois)/카운터 모드로 열립니다. |
-| EncryptionAlgorithmProvider | string | EncryptionAlgorithm 알고리즘을 생성할 수 있는 CNG 공급자 구현의 이름입니다. |
+| EncryptionAlgorithm         | 문자열 | CNG가 인식하는 대칭형 블럭 암호화 알고리즘의 이름입니다. 이 알고리즘은 갈루아(Galois)/카운터 모드로 열립니다. |
+| EncryptionAlgorithmProvider | 문자열 | EncryptionAlgorithm 알고리즘을 생성할 수 있는 CNG 공급자 구현의 이름입니다. |
 | EncryptionAlgorithmKeySize  | DWORD  | 대칭형 블럭 암호화 알고리즘에 대해 파생되는 키의 길이(비트)입니다. |
 
-EncryptionType 값이 Managed로 지정되면, 기밀성을 위해 관리되는 SymmetricAlgorithm을 사용하고 신뢰성을 위해 KeyedHashAlgorithm을 사용하도록 구성됩니다 (보다 자세한 정보는 [관리되는 사용자 지정 알고리즘 지정하기](xref:security/data-protection/configuration/overview#specifying-custom-managed-algorithms) 를 참고하시기 바랍니다.) 추가적으로 다음과 같은 값들이 지원되며, 이 값들은 각각 ManagedAuthenticatedEncryptionSettings 형식의 속성에 대응합니다.
+EncryptionType가 관리 되는 경우 시스템은 기밀성 및 KeyedHashAlgorithm에 대 한 관리 되는 System.security.cryptography.symmetricalgorithm를 사용 하도록 구성 됩니다 (자세한 내용은 [사용자 지정 관리 알고리즘 지정](xref:security/data-protection/configuration/overview#specifying-custom-managed-algorithms) 참조). 추가적으로 다음과 같은 값들이 지원되며, 이 값들은 각각 ManagedAuthenticatedEncryptionSettings 형식의 속성에 대응합니다.
 
-| 값                      | 형식   | 설명 |
+| 값                      | Type   | Description |
 | -------------------------- | :----: | ----------- |
-| EncryptionAlgorithmType    | string | SymmetricAlgorithm을 구현하는 형식의 정규화된 어셈블리 이름입니다. |
+| EncryptionAlgorithmType    | 문자열 | SymmetricAlgorithm을 구현하는 형식의 정규화된 어셈블리 이름입니다. |
 | EncryptionAlgorithmKeySize | DWORD  | 대칭형 암호화 알고리즘에 대해 파생되는 키의 길이(비트)입니다. |
-| ValidationAlgorithmType    | string | KeyedHashAlgorithm을 구현하는 형식의 정규화된 어셈블리 이름입니다. |
+| ValidationAlgorithmType    | 문자열 | KeyedHashAlgorithm을 구현하는 형식의 정규화된 어셈블리 이름입니다. |
 
 EncryptionType 값에 이 외에 다른 값이 지정되면 (null 값이나 빈 값 이외의), 데이터 보호 시스템이 구동 시 예외를 던집니다.
 
 > [!WARNING]
-> 형식 이름(EncryptionAlgorithmType, ValidationAlgorithmType, KeyEscrowSinks)에 관한 기본 정책 설정을 구성하는 경우, 반드시 응용 프로그램에서 해당 형식을 사용할 수 있어야 합니다. 결론적으로 이 말은 데스크탑 CLR 상에서 실행되는 응용 프로그램의 경우, 해당 형식을 포함한 어셈블리가 GAC에 설치되어 있어야 한다는 뜻입니다. .NET Core에서 실행 되는 ASP.NET Core 앱을 이러한 형식을 포함 하는 패키지를 설치 해야 합니다.
+> 형식 이름(EncryptionAlgorithmType, ValidationAlgorithmType, KeyEscrowSinks)에 관한 기본 정책 설정을 구성하는 경우, 반드시 응용 프로그램에서 해당 형식을 사용할 수 있어야 합니다. 결론적으로 이 말은 데스크탑 CLR 상에서 실행되는 응용 프로그램의 경우, 해당 형식을 포함한 어셈블리가 GAC에 설치되어 있어야 한다는 뜻입니다. .NET Core에서 실행 되는 ASP.NET Core 앱의 경우 이러한 형식을 포함 하는 패키지를 설치 해야 합니다.

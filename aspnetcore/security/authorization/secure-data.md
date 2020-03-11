@@ -6,12 +6,12 @@ ms.author: riande
 ms.date: 12/18/2018
 ms.custom: mvc, seodec18
 uid: security/authorization/secure-data
-ms.openlocfilehash: 65c72d4dd457f85451796c5713bedebafec7a7de
-ms.sourcegitcommit: 8157e5a351f49aeef3769f7d38b787b4386aad5f
+ms.openlocfilehash: 7710a8965771db02e601dafb7da752906bcd43e5
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/20/2019
-ms.locfileid: "74239830"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78651921"
 ---
 # <a name="create-an-aspnet-core-app-with-user-data-protected-by-authorization"></a>권한 부여로 보호 되는 사용자 데이터를 사용 하 여 ASP.NET Core 앱 만들기
 
@@ -19,7 +19,7 @@ ms.locfileid: "74239830"
 
 ::: moniker range="<= aspnetcore-1.1"
 
-ASP.NET Core MVC 버전은 [이 PDF](https://webpifeed.blob.core.windows.net/webpifeed/Partners/asp.net_repo_pdf_1-16-18.pdf) 를 참조 하세요. 이 자습서의 ASP.NET Core 1.1 버전은 [이](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data) 폴더에 있습니다. 1\.1 ASP.NET Core 샘플은 [샘플](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/final2)에 있습니다.
+ASP.NET Core MVC 버전은 [이 PDF](https://webpifeed.blob.core.windows.net/webpifeed/Partners/asp.net_repo_pdf_1-16-18.pdf) 를 참조 하세요. 이 자습서의 ASP.NET Core 1.1 버전은 [이](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data) 폴더에 있습니다. 1\.1 ASP.NET Core 샘플은 [샘플](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/final2)에 있습니다.
 
 ::: moniker-end
 
@@ -69,7 +69,7 @@ ASP.NET Core MVC 버전은 [이 PDF](https://webpifeed.blob.core.windows.net/web
 * `ContactManagerAuthorizationHandler`: 관리자가 연락처를 승인 하거나 거부할 수 있습니다.
 * `ContactAdministratorsAuthorizationHandler`: 관리자가 연락처를 승인 또는 거부 하 고 연락처를 편집/삭제할 수 있습니다.
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 이 자습서 고급 옵션입니다. 에 대해 잘 알고 있어야 합니다.
 
@@ -81,11 +81,11 @@ ASP.NET Core MVC 버전은 [이 PDF](https://webpifeed.blob.core.windows.net/web
 
 ## <a name="the-starter-and-completed-app"></a>시작 및 완료 된 앱
 
-[완성](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples) 된 앱을 [다운로드](xref:index#how-to-download-a-sample) 합니다. 보안 기능에 익숙해질 수 있도록 완성 된 앱을 [테스트](#test-the-completed-app) 합니다.
+[완성](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples) 된 앱을 [다운로드](xref:index#how-to-download-a-sample) 합니다. 보안 기능에 익숙해질 수 있도록 완성 된 앱을 [테스트](#test-the-completed-app) 합니다.
 
 ### <a name="the-starter-app"></a>시작 앱
 
-[시작](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/) 앱을 [다운로드](xref:index#how-to-download-a-sample) 합니다.
+[시작](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/) 앱을 [다운로드](xref:index#how-to-download-a-sample) 합니다.
 
 앱을 실행 하 고, 연락처 **관리자** 링크를 탭 하 고, 연락처를 만들고, 편집 하 고, 삭제할 수 있는지 확인 합니다.
 
@@ -267,7 +267,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="add-or-remove-a-user-to-a-role"></a>추가 하거나 역할에 사용자를 제거 합니다.
 
-에 대 한 자세한 내용은 다음 [문제](https://github.com/aspnet/AspNetCore.Docs/issues/8502) 를 참조 하세요.
+에 대 한 자세한 내용은 다음 [문제](https://github.com/dotnet/AspNetCore.Docs/issues/8502) 를 참조 하세요.
 
 * 사용자의 권한을 제거 합니다. 예를 들어 채팅 앱에서 사용자를 음소거 합니다.
 * 사용자에 권한을 추가 합니다.
@@ -310,9 +310,9 @@ dotnet user-secrets set SeedUserPW <PW>
 
 | 사용자                | 앱에서 시드 | 옵션                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
-| test@example.com    | 아니요                | 자체 데이터를 편집/삭제 합니다.                |
-| manager@contoso.com | 예               | 승인/거부 하 고 편집/삭제할 데이터를 소유 합니다. |
-| admin@contoso.com   | 예               | 승인/거부 하 고 모든 데이터를 편집/삭제 합니다. |
+| test@example.com    | 예                | 자체 데이터를 편집/삭제 합니다.                |
+| manager@contoso.com | yes               | 승인/거부 하 고 편집/삭제할 데이터를 소유 합니다. |
+| admin@contoso.com   | yes               | 승인/거부 하 고 모든 데이터를 편집/삭제 합니다. |
 
 관리자의 브라우저에서 연락처를 만듭니다. 삭제에 대 한 URL을 복사 하 고 관리자 연락처에서 편집 합니다. 테스트 사용자를 이러한 작업을 수행할 수 없습니다 확인 하려면 테스트 사용자의 브라우저에 이러한 링크를 붙여 넣습니다.
 
@@ -355,7 +355,7 @@ dotnet ef database update
 
 ### <a name="seed-the-database"></a>데이터베이스 시드
 
-*데이터* 폴더에 [SeedData](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/starter3/Data/SeedData.cs) 클래스를 추가 합니다.
+*데이터* 폴더에 [SeedData](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/starter3/Data/SeedData.cs) 클래스를 추가 합니다.
 
 [!code-csharp[](secure-data/samples/starter3/Data/SeedData.cs)]
 
@@ -405,7 +405,7 @@ dotnet ef database update
 * `ContactManagerAuthorizationHandler`: 관리자가 연락처를 승인 하거나 거부할 수 있습니다.
 * `ContactAdministratorsAuthorizationHandler`: 관리자가 연락처를 승인 또는 거부 하 고 연락처를 편집/삭제할 수 있습니다.
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 이 자습서 고급 옵션입니다. 에 대해 잘 알고 있어야 합니다.
 
@@ -417,11 +417,11 @@ dotnet ef database update
 
 ## <a name="the-starter-and-completed-app"></a>시작 및 완료 된 앱
 
-[완성](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples) 된 앱을 [다운로드](xref:index#how-to-download-a-sample) 합니다. 보안 기능에 익숙해질 수 있도록 완성 된 앱을 [테스트](#test-the-completed-app) 합니다.
+[완성](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples) 된 앱을 [다운로드](xref:index#how-to-download-a-sample) 합니다. 보안 기능에 익숙해질 수 있도록 완성 된 앱을 [테스트](#test-the-completed-app) 합니다.
 
 ### <a name="the-starter-app"></a>시작 앱
 
-[시작](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/) 앱을 [다운로드](xref:index#how-to-download-a-sample) 합니다.
+[시작](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/) 앱을 [다운로드](xref:index#how-to-download-a-sample) 합니다.
 
 앱을 실행 하 고, 연락처 **관리자** 링크를 탭 하 고, 연락처를 만들고, 편집 하 고, 삭제할 수 있는지 확인 합니다.
 
@@ -603,7 +603,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ## <a name="add-or-remove-a-user-to-a-role"></a>추가 하거나 역할에 사용자를 제거 합니다.
 
-에 대 한 자세한 내용은 다음 [문제](https://github.com/aspnet/AspNetCore.Docs/issues/8502) 를 참조 하세요.
+에 대 한 자세한 내용은 다음 [문제](https://github.com/dotnet/AspNetCore.Docs/issues/8502) 를 참조 하세요.
 
 * 사용자의 권한을 제거 합니다. 예를 들어 채팅 앱에서 사용자를 음소거 합니다.
 * 사용자에 권한을 추가 합니다.
@@ -637,9 +637,9 @@ dotnet user-secrets set SeedUserPW <PW>
 
 | 사용자                | 앱에서 시드 | 옵션                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
-| test@example.com    | 아니요                | 자체 데이터를 편집/삭제 합니다.                |
-| manager@contoso.com | 예               | 승인/거부 하 고 편집/삭제할 데이터를 소유 합니다. |
-| admin@contoso.com   | 예               | 승인/거부 하 고 모든 데이터를 편집/삭제 합니다. |
+| test@example.com    | 예                | 자체 데이터를 편집/삭제 합니다.                |
+| manager@contoso.com | yes               | 승인/거부 하 고 편집/삭제할 데이터를 소유 합니다. |
+| admin@contoso.com   | yes               | 승인/거부 하 고 모든 데이터를 편집/삭제 합니다. |
 
 관리자의 브라우저에서 연락처를 만듭니다. 삭제에 대 한 URL을 복사 하 고 관리자 연락처에서 편집 합니다. 테스트 사용자를 이러한 작업을 수행할 수 없습니다 확인 하려면 테스트 사용자의 브라우저에 이러한 링크를 붙여 넣습니다.
 
@@ -678,7 +678,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 ### <a name="seed-the-database"></a>데이터베이스 시드
 
-*데이터* 폴더에 [SeedData](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/starter2.1/Data/SeedData.cs) 클래스를 추가 합니다.
+*데이터* 폴더에 [SeedData](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/secure-data/samples/starter2.1/Data/SeedData.cs) 클래스를 추가 합니다.
 
 `Main`에서 `SeedData.Initialize`를 호출 합니다.
 
@@ -690,7 +690,7 @@ dotnet user-secrets set SeedUserPW <PW>
 
 <a name="secure-data-add-resources-label"></a>
 
-### <a name="additional-resources"></a>추가 자료
+### <a name="additional-resources"></a>추가 리소스
 
 * [Azure App Service에서 .NET Core 및 SQL Database 웹 앱 빌드](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)
 * [권한 부여 랩을 ASP.NET Core](https://github.com/blowdart/AspNetAuthorizationWorkshop)합니다. 이 랩에서이 자습서에 도입 된 보안 기능에 자세한 내용으로 이어집니다.

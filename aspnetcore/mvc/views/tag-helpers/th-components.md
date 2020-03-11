@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: scaddie
 ms.date: 06/12/2019
 uid: mvc/views/tag-helpers/th-components
-ms.openlocfilehash: 070cc3aae08664c13d8eb793a066766d0a5569ee
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
-ms.translationtype: HT
+ms.openlocfilehash: 5e2eb2d4322068c5864fbe49acaa6d0859bd319a
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880969"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652371"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>ASP.NET Core의 태그 도우미 구성 요소
 
@@ -21,7 +21,7 @@ ms.locfileid: "74880969"
 
 ASP.NET Core에는 두 개의 기본 제공 태그 도우미 구성 요소, 즉 `head` 및 `body`가 포함되어 있습니다. 이 구성 요소는 <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers> 네임스페이스에 있으며 MVC 및 Razor Pages에서 모두 사용할 수 있습니다. 태그 도우미 구성 요소는 *_ViewImports.cshtml*에서 앱을 등록할 필요가 없습니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/th-components/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/th-components/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="use-cases"></a>사용 사례
 
@@ -34,7 +34,7 @@ ASP.NET Core에는 두 개의 기본 제공 태그 도우미 구성 요소, 즉 
 
 ### <a name="inject-into-html-head-element"></a>HTML 헤드 요소에 주입
 
-HTML `<head>` 요소 내에서 CSS 파일은 일반적으로 HTML `<link>` 요소로 가져옵니다. 다음 코드는 `head` 태그 도우미 구성 요소를 사용하여 `<head>` 요소에 `<link>` 요소를 주입합니다.
+HTML `<head>` 요소 내에서 CSS 파일은 일반적으로 HTML `<link>` 요소로 가져옵니다. 다음 코드는 `<link>` 태그 도우미 구성 요소를 사용하여 `<head>` 요소에 `head` 요소를 주입합니다.
 
 [!code-csharp[](th-components/samples/RazorPagesSample/TagHelpers/AddressStyleTagHelperComponent.cs)]
 
@@ -48,7 +48,7 @@ HTML `<head>` 요소 내에서 CSS 파일은 일반적으로 HTML `<link>` 요�
 
 ### <a name="inject-into-html-body-element"></a>HTML 본문 요소에 주입
 
-`body` 태그 도우미 구성 요소는 `<body>` 요소에 `<script>` 요소를 주입할 수 있습니다. 다음 코드에서는 이 기술을 보여 줍니다.
+`body` 태그 도우미 구성 요소는 `<script>` 요소에 `<body>` 요소를 주입할 수 있습니다. 다음 코드에서는 이 기술을 보여 줍니다.
 
 [!code-csharp[](th-components/samples/RazorPagesSample/TagHelpers/AddressScriptTagHelperComponent.cs)]
 
@@ -56,7 +56,7 @@ HTML `<head>` 요소 내에서 CSS 파일은 일반적으로 HTML `<link>` 요�
 
 [!code-html[](th-components/samples/RazorPagesSample/TagHelpers/Templates/AddressToolTipScript.html)]
 
-위의 코드는 [부트스트랩 도구 설명 위젯](https://getbootstrap.com/docs/3.3/javascript/#tooltips)을 `printable` 특성을 포함하는 `<address>` 요소에 바인드합니다. 요소 위에 마우스 포인터를 놓으면 효과가 표시됩니다.
+위의 코드는 [부트스트랩 도구 설명 위젯](https://getbootstrap.com/docs/3.3/javascript/#tooltips)을 `<address>` 특성을 포함하는 `printable` 요소에 바인드합니다. 요소 위에 마우스 포인터를 놓으면 효과가 표시됩니다.
 
 ## <a name="register-a-component"></a>구성 요소 등록
 
@@ -68,7 +68,7 @@ HTML `<head>` 요소 내에서 CSS 파일은 일반적으로 HTML `<link>` 요�
 
 ### <a name="registration-via-services-container"></a>서비스 컨테이너를 통한 등록
 
-태그 도우미 구성 요소 클래스가 <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.ITagHelperComponentManager>로 관리되지 않는 경우 [DI(종속성 주입)](xref:fundamentals/dependency-injection) 시스템에 등록되어야 합니다. 다음 `Startup.ConfigureServices` 코드는 [임시 수명](xref:fundamentals/dependency-injection#lifetime-and-registration-options)이 있는 `AddressStyleTagHelperComponent` 및 `AddressScriptTagHelperComponent` 클래스를 등록합니다.
+태그 도우미 구성 요소 클래스가 <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.ITagHelperComponentManager>로 관리되지 않는 경우 [DI(종속성 주입)](xref:fundamentals/dependency-injection) 시스템에 등록되어야 합니다. 다음 `Startup.ConfigureServices` 코드는 `AddressStyleTagHelperComponent`임시 수명`AddressScriptTagHelperComponent`이 있는 [ 및 ](xref:fundamentals/dependency-injection#lifetime-and-registration-options) 클래스를 등록합니다.
 
 [!code-csharp[](th-components/samples/RazorPagesSample/Startup.cs?name=snippet_ConfigureServices&highlight=12-15)]
 
@@ -112,7 +112,7 @@ HTML `<head>` 요소 내에서 CSS 파일은 일반적으로 HTML `<link>` 요�
 
 * <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperComponentTagHelper>에서 파생된 공용 클래스를 만듭니다.
 * 클래스에 [`[HtmlTargetElement]`](xref:Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute) 특성을 적용합니다. 대상 HTML 요소의 이름을 지정합니다.
-* *선택 사항*: 클래스에 [`[EditorBrowsable(EditorBrowsableState.Never)]`](xref:System.ComponentModel.EditorBrowsableAttribute) 특성을 적용하여 IntelliSense에서 형식을 표시하지 않습니다.
+* *선택 사항*: IntelliSense에서 형식의 표시를 표시 하지 않으려면 [`[EditorBrowsable(EditorBrowsableState.Never)]`](xref:System.ComponentModel.EditorBrowsableAttribute) 특성을 클래스에 적용 합니다.
 
 다음 코드는 `<address>` HTML 요소를 대상으로 하는 사용자 지정 태그 도우미 구성 요소를 만듭니다.
 
@@ -155,7 +155,7 @@ public class AddressTagHelperComponent : TagHelperComponent
 
 [!code-cshtml[](th-components/samples/RazorPagesSample/Pages/Contact.cshtml?name=snippet_AddressPrintable)]
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:fundamentals/dependency-injection>
 * <xref:mvc/views/dependency-injection>

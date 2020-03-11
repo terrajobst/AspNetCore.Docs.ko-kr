@@ -6,18 +6,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: e8b62d795f6444e6dd79e27ace687d5db4db86de
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
-ms.translationtype: HT
+ms.openlocfilehash: 43bd4eccfc06d27ade5de0e3387247a753609336
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880995"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78653181"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>ASP.NET Core의 작성자 태그 도우미
 
 작성자: [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/authoring/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/authoring/sample) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="get-started-with-tag-helpers"></a>태그 도우미 시작
 
@@ -31,7 +31,7 @@ ms.locfileid: "74880995"
 
 ## <a name="a-minimal-tag-helper"></a>최소한의 태그 도우미
 
-이 섹션에서는 이메일 태그를 업데이트하는 태그 도우미를 작성합니다. 예:
+이 섹션에서는 이메일 태그를 업데이트하는 태그 도우미를 작성합니다. 다음은 그 예입니다.
 
 ```html
 <email>Support</email>
@@ -69,7 +69,7 @@ ms.locfileid: "74880995"
 
    [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopyEmail.cshtml?highlight=2,3)]
 
-   위의 코드에서는 와일드 카드 구문을 사용하여 사용할 수 있는 모든 태그 도우미를 어셈블리에서 지정합니다. `@addTagHelper` 뒤의 첫 번째 문자열은 로드할 태그 도우미(모든 태그 도우미에 "*" 사용)를 지정하고 두 번째 문자열 "AuthoringTagHelpers"는 태그 도우미가 있는 어셈블리를 지정합니다. 또한 두 번째 줄은 와일드 카드 구문을 사용하여 ASP.NET Core MVC 태그 도우미를 제공합니다(해당 도우미에 대해서는 [태그 도우미 소개](intro.md)에서 설명). 태그 도우미를 Razor 뷰에서 사용할 수 있도록 해주는 `@addTagHelper` 지시문입니다. 또는 아래 표시된 것처럼 태그 도우미의 FQN(정규화된 이름)을 제공할 수 있습니다.
+   위의 코드에서는 와일드 카드 구문을 사용하여 사용할 수 있는 모든 태그 도우미를 어셈블리에서 지정합니다. `@addTagHelper` 뒤의 첫 번째 문자열은 로드할 태그 도우미(모든 태그 도우미에 "*" 사용)를 지정하고 두 번째 문자열 "AuthoringTagHelpers"는 태그 도우미가 있는 어셈블리를 지정합니다. 또한 두 번째 줄은 와일드 카드 구문을 사용 하 여 ASP.NET Core MVC 태그 도우미에 표시 됩니다. 해당 도우미는 [태그 도우미 소개](intro.md)에 설명 되어 있습니다. 이 지시문은 Razor 뷰에서 태그 도우미를 사용할 수 있도록 하는 `@addTagHelper` 지시문입니다. 또는 아래 표시된 것처럼 태그 도우미의 FQN(정규화된 이름)을 제공할 수 있습니다.
 
 ```csharp
 @using AuthoringTagHelpers
@@ -133,7 +133,7 @@ FQN을 사용하여 뷰에 태그 도우미를 추가하려면 먼저 FQN(`Autho
 
    **참고:**
 
-   * 이 버전은 비동기 `ProcessAsync` 메서드를 사용합니다. 비동기 `GetChildContentAsync`는 `TagHelperContent`가 포함된 `Task`를 반환합니다.
+   * 이 버전은 비동기 `ProcessAsync` 메서드를 사용합니다. 비동기 `GetChildContentAsync`는 `Task`가 포함된 `TagHelperContent`를 반환합니다.
 
    * `output` 매개 변수를 사용하여 HTML 요소의 내용을 가져옵니다.
 
@@ -151,9 +151,9 @@ FQN을 사용하여 뷰에 태그 도우미를 추가하려면 먼저 FQN(`Autho
 
    * `[HtmlTargetElement]` 특성은 "bold"라는 HTML 특성이 포함된 HTML 요소가 일치하고 클래스에서 `Process` 재정의 메서드가 실행되도록 지정하는 특성 매개 변수를 전달합니다. 이 샘플에서 `Process` 메서드는 "bold" 특성을 제거하고 포함된 태그를 `<strong></strong>`으로 둘러쌉니다.
 
-   * 기존 태그 내용을 바꾸지 않기 때문에 `PreContent.SetHtmlContent` 메서드로 여는 `<strong>` 태그를 작성하고 `PostContent.SetHtmlContent` 메서드로 닫는 `</strong>` 태그를 작성해야 합니다.
+   * 기존 태그 내용을 바꾸지 않기 때문에 `<strong>` 메서드로 여는 `PreContent.SetHtmlContent` 태그를 작성하고 `</strong>` 메서드로 닫는 `PostContent.SetHtmlContent` 태그를 작성해야 합니다.
 
-1. `bold` 특성 값을 포함하도록 *About.cshtml* 뷰를 수정합니다. 완성된 코드는 다음과 같습니다.
+1. *특성 값을 포함하도록*About.cshtml`bold` 뷰를 수정합니다. 완성된 코드는 다음과 같습니다.
 
    [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/AboutBoldOnly.cshtml?highlight=7)]
 
@@ -245,7 +245,7 @@ FQN을 사용하여 뷰에 태그 도우미를 추가하려면 먼저 FQN(`Autho
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Index.cshtml)]
 
-1. `Home` 컨트롤러에서 `Index` 메서드를 다음 코드로 바꿉니다.
+1. `Index` 컨트롤러에서 `Home` 메서드를 다음 코드로 바꿉니다.
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Controllers/HomeController.cs?range=9-18)]
 
@@ -277,7 +277,7 @@ FQN을 사용하여 뷰에 태그 도우미를 추가하려면 먼저 FQN(`Autho
 
 1. 앱을 실행하고 태그 도우미가 앵커를 제대로 렌더링하는지 확인합니다.
 
-1. www 텍스트를 원본 www 텍스트를 포함하는 앵커 태그로 변환할 `AutoLinkerWwwTagHelper`를 포함하도록 `AutoLinker` 클래스를 업데이트합니다. 업데이트된 코드는 아래에 강조 표시됩니다.
+1. www 텍스트를 원본 www 텍스트를 포함하는 앵커 태그로 변환할 `AutoLinker`를 포함하도록 `AutoLinkerWwwTagHelper` 클래스를 업데이트합니다. 업데이트된 코드는 아래에 강조 표시됩니다.
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/z1AutoLinker.cs?highlight=15-34&range=7-34)]
 
@@ -290,7 +290,7 @@ FQN을 사용하여 뷰에 태그 도우미를 추가하려면 먼저 FQN(`Autho
    >
    > [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/z1AutoLinker.cs?range=12)]
    >
-   > 즉, `ProcessAsync` 메서드에 전달된 `TagHelperOutput`을 사용하여 `GetChildContentAsync`를 호출합니다. 이전에 언급한 것처럼, 출력이 캐시되므로 실행할 마지막 태그 도우미가 우선합니다. 다음 코드로 문제를 해결했습니다.
+   > 즉, `GetChildContentAsync` 메서드에 전달된 `TagHelperOutput`을 사용하여 `ProcessAsync`를 호출합니다. 이전에 언급한 것처럼, 출력이 캐시되므로 실행할 마지막 태그 도우미가 우선합니다. 다음 코드로 문제를 해결했습니다.
    >
    > [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/z2AutoLinkerCopy.cs?range=34-35)]
    >
@@ -307,7 +307,7 @@ FQN을 사용하여 뷰에 태그 도우미를 추가하려면 먼저 FQN(`Autho
 태그 도우미는 콘텐츠를 검색하기 위한 여러 가지 속성을 제공합니다.
 
 * `GetChildContentAsync`의 결과는 `output.Content`에 추가할 수 있습니다.
-* `GetContent`로 `GetChildContentAsync`의 결과를 검사할 수 있습니다.
+* `GetChildContentAsync`로 `GetContent`의 결과를 검사할 수 있습니다.
 * `output.Content`를 수정하고 `GetChildContentAsync`를 자동 링커 샘플에서처럼 호출하지 않는 경우, TagHelper 본문이 실행 또는 렌더링되지 않습니다.
 
 [!code-csharp[](../../views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/z1AutoLinkerCopy.cs?highlight=5,6,10&range=8-21)]

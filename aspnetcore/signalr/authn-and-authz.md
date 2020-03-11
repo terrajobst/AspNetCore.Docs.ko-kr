@@ -9,18 +9,18 @@ ms.date: 12/05/2019
 no-loc:
 - SignalR
 uid: signalr/authn-and-authz
-ms.openlocfilehash: 091cc9b2adc1f6a8fac79519884695d1c1725d2a
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.openlocfilehash: 3b7216bb064ba06a4c909016e1efd4242a64a7ad
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74880413"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78652017"
 ---
 # <a name="authentication-and-authorization-in-aspnet-core-opno-locsignalr"></a>ASP.NET Core SignalR의 인증 및 권한 부여
 
-작성자: [Andrew Stanton-Nurse](https://twitter.com/anurse)
+[Andrew Stanton-간호사](https://twitter.com/anurse)
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/authn-and-authz/sample/) [(다운로드 방법)](xref:index#how-to-download-a-sample)
+[샘플 코드 보기 또는 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/authn-and-authz/sample/) [(다운로드 방법)](xref:index#how-to-download-a-sample)
 
 ## <a name="authenticate-users-connecting-to-a-opno-locsignalr-hub"></a>SignalR 허브에 연결 하는 사용자 인증
 
@@ -90,9 +90,9 @@ public void Configure(IApplicationBuilder app)
 
 클라이언트는 쿠키를 사용하는 대신 액세스 토큰을 제공할 수도 있습니다. 서버는 토큰의 유효성을 검사하고 이를 이용해서 사용자를 식별합니다. 이 유효성 검사는 연결이 설정될 때만 수행됩니다. 서버는 연결이 유지되는 동안 토큰이 해지되었는지를 확인하기 위해 자동으로 유효성을 재검사하지 않습니다.
 
-서버에서 전달자 토큰 인증은 [JWT 전달자 미들웨어](/dotnet/api/microsoft.extensions.dependencyinjection.jwtbearerextensions.addjwtbearer)를 사용하여 구성합니다.
+서버에서 전달자 토큰 인증은 [JWT 전달자 미들웨어](/dotnet/api/microsoft.extensions.dependencyinjection.jwtbearerextensions.addjwtbearer)를 사용 하 여 구성 됩니다.
 
-JavaScript 클라이언트에서는 [accessTokenFactory](xref:signalr/configuration#configure-bearer-authentication) 옵션을 통해서 토큰을 제공할 수 있습니다.
+JavaScript 클라이언트에서 [accessTokenFactory](xref:signalr/configuration#configure-bearer-authentication) 옵션을 사용 하 여 토큰을 제공할 수 있습니다.
 
 [!code-typescript[Configure Access Token](authn-and-authz/sample/wwwroot/js/chat.ts?range=52-55)]
 
@@ -125,7 +125,7 @@ var connection = new HubConnectionBuilder()
 
 앱에서 [Windows 인증](xref:security/authentication/windowsauth) 을 구성 하는 경우 해당 id를 사용 하 여 허브를 보호할 수 SignalR. 그러나 메시지를 개별 사용자에 게 보내려면 사용자 지정 사용자 ID 공급자를 추가 해야 합니다. Windows 인증 시스템이 "이름 식별자" 클레임을 제공 하지 않습니다. SignalR는 클레임을 사용 하 여 사용자 이름을 결정 합니다.
 
-`IUserIdProvider`를 구현하는 새 클래스를 추가하고 사용자로부터 식별자로 사용할 클레임 중 하나를 가져옵니다. 예를 들어, "Name" 클레임(`[Domain]\[Username]` 형태의 Windows 사용자 이름)을 사용하려면 다음과 같은 클래스를 생성합니다.
+`IUserIdProvider`를 구현 하 고 사용자가 식별자로 사용할 클레임 중 하나를 검색 하는 새 클래스를 추가 합니다. 예를 들어 "이름" 클레임 (`[Domain]\[Username]`형식의 Windows 사용자 이름)을 사용 하려면 다음 클래스를 만듭니다.
 
 [!code-csharp[Name based provider](authn-and-authz/sample/nameuseridprovider.cs?name=NameUserIdProvider)]
 
@@ -146,7 +146,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-.NET 클라이언트에서는 [UseDefaultCredentials](/dotnet/api/microsoft.aspnetcore.http.connections.client.httpconnectionoptions.usedefaultcredentials) 속성을 설정해서 Windows 인증을 활성화시켜야 합니다.
+.NET 클라이언트에서는 [UseDefaultCredentials](/dotnet/api/microsoft.aspnetcore.http.connections.client.httpconnectionoptions.usedefaultcredentials) 속성을 설정 하 여 Windows 인증을 사용 하도록 설정 해야 합니다.
 
 ```csharp
 var connection = new HubConnectionBuilder()
@@ -186,7 +186,7 @@ services.AddSingleton<IUserIdProvider, EmailBasedUserIdProvider>();
 
 [!code-csharp[Restrict a hub to only authorized users](authn-and-authz/sample/Hubs/ChatHub.cs?range=8-10,32)]
 
-`[Authorize]` 특성의 생성자 인수 및 속성을 이용해서 특정 [권한 부여 정책](xref:security/authorization/policies)을 만족하는 사용자만 접근할 수 있도록 제한할 수 있습니다. 예를 들어 `MyAuthorizationPolicy`라는 사용자 지정 권한 부여 정책이 존재할 경우, 다음과 같은 코드를 사용해서 해당 정책을 만족하는 사용자만 허브에 접근할 수 있도록 만들 수 있습니다.
+`[Authorize]` 특성의 생성자 인수 및 속성을 사용 하 여 특정 [권한 부여 정책과](xref:security/authorization/policies)일치 하는 사용자만 액세스할 수 있도록 제한할 수 있습니다. 예를 들어 `MyAuthorizationPolicy` 이라는 사용자 지정 권한 부여 정책을 사용 하는 경우 해당 정책과 일치 하는 사용자만 다음 코드를 사용 하 여 허브에 액세스할 수 있도록 할 수 있습니다.
 
 ```csharp
 [Authorize("MyAuthorizationPolicy")]
@@ -195,7 +195,7 @@ public class ChatHub : Hub
 }
 ```
 
-각각의 허브 메서드에도 `[Authorize]` 특성을 적용할 수 있습니다. 현재 사용자가 메서드에 적용된 정책을 만족하지 않으면 호출자에게 오류가 반환됩니다.
+개별 허브 메서드는 `[Authorize]` 특성도 적용할 수 있습니다. 현재 사용자가 메서드에 적용된 정책을 만족하지 않으면 호출자에게 오류가 반환됩니다.
 
 ```csharp
 [Authorize]
@@ -288,7 +288,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [ASP.NET Core에서 전달자 토큰 인증](https://blogs.msdn.microsoft.com/webdev/2016/10/27/bearer-token-authentication-in-asp-net-core/)
 * [리소스 기반 권한 부여](xref:security/authorization/resourcebased)

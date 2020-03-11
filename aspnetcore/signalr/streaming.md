@@ -9,12 +9,12 @@ ms.date: 11/12/2019
 no-loc:
 - SignalR
 uid: signalr/streaming
-ms.openlocfilehash: 7825beba55cefb6236fd8d8e332d030a7e4fc6df
-ms.sourcegitcommit: 3fc3020961e1289ee5bf5f3c365ce8304d8ebf19
+ms.openlocfilehash: 21dd8180fe168f81ed68b01f02b81a6264d6e5a6
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/12/2019
-ms.locfileid: "73963894"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78654975"
 ---
 # <a name="use-streaming-in-aspnet-core-opno-locsignalr"></a>ASP.NET Core SignalR에서 스트리밍 사용
 
@@ -28,11 +28,11 @@ ASP.NET Core SignalR는 클라이언트에서 서버로 및 서버에서 클라�
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core SignalR는 서버 메서드의 스트리밍 반환 값을 지원 합니다. 이는 시간이 지남에 따라 데이터 조각이 도착 하는 시나리오에 유용 합니다. 반환 값이 클라이언트로 스트리밍되는 경우 모든 데이터를 사용할 수 있을 때까지 기다리지 않고 각 조각이 사용할 수 있게 되는 즉시 클라이언트에 전송 됩니다.
+ASP.NET Core SignalR는 서버 메서드의 스트리밍 반환 값을 지원 합니다. 이는 시간이 지남에 따라 데이터 조각이 도착 하는 시나리오에 유용 합니다. 클라이언트에 반환 값을 스트리밍할 때 모든 조각이 사용 가능할 때까지 기다리는 대신 사용 가능한 즉시 각 조각을 클라이언트로 전송합니다.
 
 ::: moniker-end
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/streaming/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/streaming/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="set-up-a-hub-for-streaming"></a>스트리밍을 위한 허브 설정
 
@@ -258,8 +258,8 @@ channel.Writer.Complete();
 
 JavaScript 클라이언트는 `connection.stream`을 사용 하 여 허브에서 서버-클라이언트 스트리밍 메서드를 호출 합니다. `stream` 메서드는 두 개의 인수를 허용 합니다.
 
-* 허브 메서드의 이름입니다. 다음 예제에서는 허브 메서드 이름이 `Counter`합니다.
-* 매개 변수가 허브 메서드에 정의 되어 있습니다. 다음 예제에서 인수는 받을 스트림 항목 수와 스트림 항목 간의 지연 개수입니다.
+* 허브 메서드의 이름. 다음 예제에서는 허브 메서드 이름이 `Counter`합니다.
+* 허브 메서드에 정의된 인수. 다음 예제에서 인수는 받을 스트림 항목 수와 스트림 항목 간의 지연 개수입니다.
 
 `connection.stream`은 `subscribe` 메서드를 포함 하는 `IStreamResult`을 반환 합니다. `subscribe`에 `IStreamSubscriber`를 전달 하 고 `complete` 호출에서 알림을 받도록 `next`, `error`및 `stream` 콜백을 설정 합니다.
 
@@ -298,8 +298,8 @@ JavaScript 클라이언트는 호출 된 허브 메서드에 따라 `Subject`를
 SignalR Java 클라이언트는 `stream` 메서드를 사용 하 여 스트리밍 메서드를 호출 합니다. `stream`는 세 개 이상의 인수를 허용 합니다.
 
 * 예상 되는 스트림 항목 유형입니다.
-* 허브 메서드의 이름입니다.
-* 매개 변수가 허브 메서드에 정의 되어 있습니다.
+* 허브 메서드의 이름.
+* 허브 메서드에 정의된 인수.
 
 ```java
 hubConnection.stream(String.class, "ExampleStreamingHubMethod", "Arg1")
@@ -313,7 +313,7 @@ hubConnection.stream(String.class, "ExampleStreamingHubMethod", "Arg1")
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * [허브](xref:signalr/hubs)
 * [.NET 클라이언트](xref:signalr/dotnet-client)
