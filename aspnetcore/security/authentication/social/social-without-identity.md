@@ -5,14 +5,16 @@ description: ASP.NET Core Id 없이 Facebook, Google, Twitter 등의 계정 사�
 ms.author: riande
 ms.date: 12/10/2019
 uid: security/authentication/social/social-without-identity
-ms.openlocfilehash: 612964ec9ed4975cdc81780dda3bac6cce96037f
-ms.sourcegitcommit: 2cb857f0de774df421e35289662ba92cfe56ffd1
+ms.openlocfilehash: b30ce7055b35b721c7fb83b61a328200d6a136b1
+ms.sourcegitcommit: 3ca4a2235a8129def9e480d0a6ad54cc856920ec
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/25/2019
-ms.locfileid: "75359060"
+ms.lasthandoff: 03/10/2020
+ms.locfileid: "79025403"
 ---
 # <a name="use-social-sign-in-provider-authentication-without-aspnet-core-identity"></a>ASP.NET Core Id 없이 소셜 로그인 공급자 인증 사용
+
+[Kirk Larkin](https://twitter.com/serpent5) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -63,7 +65,7 @@ ms.locfileid: "75359060"
 
 `SignOutAsync`에 대 한 호출은 인증 체계를 지정 하지 않습니다. 응용 프로그램의 `DefaultScheme` `CookieAuthenticationDefaults.AuthenticationScheme`는 대체로 사용 됩니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:security/authorization/simple>
 * <xref:security/authentication/social/additional-claims>
@@ -118,7 +120,7 @@ ms.locfileid: "75359060"
 
 `SignOutAsync`에 대 한 호출은 인증 체계를 지정 하지 않습니다. 응용 프로그램의 `DefaultScheme` `CookieAuthenticationDefaults.AuthenticationScheme`는 대체로 사용 됩니다.
 
-## <a name="additional-resources"></a>추가 자료
+## <a name="additional-resources"></a>추가 리소스
 
 * <xref:security/authorization/simple>
 * <xref:security/authentication/social/additional-claims>
