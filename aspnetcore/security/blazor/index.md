@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/index
-ms.openlocfilehash: c07ffdbd5df58d6b3d19a5d75ce224d830101eac
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: ba00c0370094df4e0ae0479aeb23eceea6ef04f0
+ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78644481"
+ms.lasthandoff: 03/11/2020
+ms.locfileid: "79083341"
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor 인증 및 권한 부여
 
@@ -30,7 +30,7 @@ Blazor 서버와 Blazor WebAssembly 앱의 보안 시나리오는 서로 다릅�
 * 사용자에게 표시되는 UI 옵션(예: 사용자가 사용할 수 있는 메뉴 항목)
 * 앱 영역과 구성 요소의 액세스 규칙
 
-Blazor WebAssembly 앱은 클라이언트에서 실행됩니다. 권한 부여는 표시할 UI 옵션을 결정하는 ‘용도로만’ 사용됩니다. 사용자가 클라이언트 쪽 확인을 수정하거나 무시할 수 있기 때문에, Blazor WebAssembly 앱은 권한 부여 액세스 규칙을 적용할 수 없습니다.
+Blazor WebAssembly 앱은 클라이언트에서 실행됩니다. 권한 부여는 표시할 UI 옵션을 결정하는 ‘용도로만’ 사용됩니다.  사용자가 클라이언트 쪽 확인을 수정하거나 무시할 수 있기 때문에, Blazor WebAssembly 앱은 권한 부여 액세스 규칙을 적용할 수 없습니다.
 
 ## <a name="authentication"></a>인증
 
@@ -194,7 +194,7 @@ namespace BlazorSample.Services
 Blazor WebAssembly 앱에서 `CustomAuthStateProvider` 서비스는 *Program.cs*의 `Main`에 등록됩니다.
 
 ```csharp
-using Microsoft.AspNetCore.Blazor.Hosting;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using BlazorSample.Services;
@@ -278,20 +278,20 @@ builder.Services.AddAuthorizationCore();
 
 ## <a name="authorization"></a>권한 부여
 
-사용자가 인증되면, 사용자가 수행할 수 있는 작업을 제어하기 위해 ‘권한 부여’ 규칙이 적용됩니다.
+사용자가 인증되면, 사용자가 수행할 수 있는 작업을 제어하기 위해 ‘권한 부여’ 규칙이 적용됩니다. 
 
 일반적으로 다음 여부에 따라 액세스가 허용 또는 거부됩니다.
 
 * 사용자가 인증(로그인)되었는지 여부
-* 사용자가 ‘역할’에 속하는지 여부
-* 사용자에게 ‘클레임’이 있는지 여부
-* ‘정책’이 충족되었는지 여부
+* 사용자가 ‘역할’에 속하는지 여부 
+* 사용자에게 ‘클레임’이 있는지 여부 
+* ‘정책’이 충족되었는지 여부 
 
 이러한 각 개념은 ASP.NET Core MVC 또는 Razor Pages 앱에서와 동일합니다. ASP.NET Core 보안에 대한 자세한 내용은 [ASP.NET Core 보안 및 ID](xref:security/index)의 문서를 참조하세요.
 
 ## <a name="authorizeview-component"></a>AuthorizeView 구성 요소
 
-`AuthorizeView` 구성 요소는 사용자에게 볼 수 있는 권한이 있는지 여부에 따라 선택적으로 UI를 표시합니다. 이 접근 방식은 사용자에게 데이터를 ‘표시’하기만 하면 되고 절차적 논리에 사용자 ID를 사용할 필요가 없는 경우에 유용합니다.
+`AuthorizeView` 구성 요소는 사용자에게 볼 수 있는 권한이 있는지 여부에 따라 선택적으로 UI를 표시합니다. 이 접근 방식은 사용자에게 데이터를 ‘표시’하기만 하면 되고 절차적 논리에 사용자 ID를 사용할 필요가 없는 경우에 유용합니다. 
 
 이 구성 요소는 로그인한 사용자 정보에 액세스하는 데 사용할 수 있는 `AuthenticationState` 형식의 `context` 변수를 공개합니다.
 
@@ -328,7 +328,7 @@ UI 옵션이나 액세스를 제어하는 역할 또는 정책과 같은 권한 
 
 ### <a name="role-based-and-policy-based-authorization"></a>역할 기반 및 정책 기반 권한 부여
 
-`AuthorizeView` 구성 요소는 ‘역할 기반’ 또는 ‘정책 기반’ 권한 부여를 지원합니다.
+`AuthorizeView` 구성 요소는 ‘역할 기반’ 또는 ‘정책 기반’ 권한 부여를 지원합니다.  
 
 역할 기반 권한 부여의 경우 `Roles` 매개 변수를 사용합니다.
 
@@ -390,7 +390,7 @@ You can only see this if you're signed in.
 > Blazor WebAssembly 앱 구성 요소에서 `Microsoft.AspNetCore.Authorization` 네임스페이스(`@using Microsoft.AspNetCore.Authorization`)를 이 섹션의 예제에 추가합니다.
 
 > [!IMPORTANT]
-> Blazor 라우터를 통해 연결된 `@page` 구성 요소에서만 `[Authorize]`를 사용합니다. 권한 부여는 라우팅의 일부로만 수행되고, 페이지에 렌더링된 자식 구성 요소에 대해서는 수행되지 ‘않습니다’. 페이지 내의 특정 파트 표시 권한을 부여하려면 `AuthorizeView`를 대신 사용합니다.
+> Blazor 라우터를 통해 연결된 `@page` 구성 요소에서만 `[Authorize]`를 사용합니다. 권한 부여는 라우팅의 일부로만 수행되고, 페이지에 렌더링된 자식 구성 요소에 대해서는 수행되지 ‘않습니다’.  페이지 내의 특정 파트 표시 권한을 부여하려면 `AuthorizeView`를 대신 사용합니다.
 
 `[Authorize]` 특성은 역할 기반 또는 정책 기반 권한 부여도 지원합니다. 역할 기반 권한 부여의 경우 `Roles` 매개 변수를 사용합니다.
 
@@ -513,6 +513,8 @@ Not authorized.
 Blazor WebAssembly 앱에서는 사용자가 클라이언트 쪽 코드를 모두 수정할 수 있기 때문에 권한 부여 확인을 무시할 수 있습니다. JavaScript SPA 프레임워크 또는 모든 운영 체제의 네이티브 앱을 포함하여 모든 클라이언트 쪽 앱 기술에는 동일하게 적용됩니다.
 
 **항상 클라이언트 쪽 앱을 통해 액세스한 API 엔드포인트 내에서 서버의 권한 부여 확인을 수행합니다.**
+
+자세한 내용은 <xref:security/blazor/webassembly/index>의 문서를 참조하세요.
 
 ## <a name="troubleshoot-errors"></a>오류 문제 해결
 
