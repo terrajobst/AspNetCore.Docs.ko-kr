@@ -6,12 +6,12 @@ ms.author: riserrad
 ms.custom: mvc
 ms.date: 07/10/2019
 uid: tutorials/publish-to-azure-webapp-using-vscode
-ms.openlocfilehash: 90ba130f13903cd45eca062c0eca8945eff2e0fa
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: eaf9cca61b21d04d127ff15a579f3d8da794f7d9
+ms.sourcegitcommit: 40dc9b00131985abcd99bd567647420d798e798a
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78647181"
+ms.lasthandoff: 03/09/2020
+ms.locfileid: "78935420"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio-code"></a>Visual Studio Code를 사용하여 Azure에 ASP.NET Core 앱 게시
 
@@ -30,7 +30,7 @@ App Service 배포 문제를 해결하려면 <xref:test/troubleshoot-azure-iis>�
 - 계정이 없는 경우 [체험 Azure 계정](https://azure.microsoft.com/free/dotnet/)을 엽니다.
 - [.NET Core SDK](https://dotnet.microsoft.com/download) 설치
 - [Visual Studio Code](https://code.visualstudio.com/Download) 설치
-  - Visual Studio Code에 [C# 확장](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp) 설치
+  - Visual Studio Code에 [C# 확장](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) 설치
   - 계속하기 전에 [Azure App Service 확장](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice)을 Visual Studio Code에 설치 및 구성
 
 ## <a name="create-an-aspnet-core-mvc-project"></a>ASP.Net Core MVC 프로젝트 만들기
