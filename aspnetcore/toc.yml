@@ -315,8 +315,10 @@
           uid: blazor/dependency-injection
         - name: 라우팅
           uid: blazor/routing
-        - name: JavaScript interop
-          uid: blazor/javascript-interop
+        - name: .NET에서 JavaScript 호출
+          uid: blazor/call-javascript-from-dotnet
+        - name: JavaScript에서 .NET 호출
+          uid: blazor/call-dotnet-from-javascript
         - name: 호스팅 모델 구성
           uid: blazor/hosting-model-configuration
         - name: 구성 요소 라이브러리
@@ -325,8 +327,30 @@
           items:
             - name: 개요
               uid: security/blazor/index
+            - name: Blazor WebAssembly
+              items:
+                - name: 개요
+                  uid: security/blazor/webassembly/index
+                - name: 인증 라이브러리를 사용하는 독립 실행형
+                  uid: security/blazor/webassembly/standalone-with-authentication-library
+                - name: Microsoft 계정을 사용하는 독립 실행형
+                  uid: security/blazor/webassembly/standalone-with-microsoft-accounts
+                - name: AAD를 사용하는 독립 실행형
+                  uid: security/blazor/webassembly/standalone-with-azure-active-directory
+                - name: AAD B2C를 사용하는 독립 실행형
+                  uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
+                - name: ID 서버를 사용하는 호스트형
+                  uid: security/blazor/webassembly/hosted-with-identity-server
+                - name: AAD를 사용하는 호스트형
+                  uid: security/blazor/webassembly/hosted-with-azure-active-directory
+                - name: AAD B2C를 사용하는 호스트형
+                  uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
+                - name: 추가 시나리오
+                  uid: security/blazor/webassembly/additional-scenarios
             - name: Blazor 서버
               uid: security/blazor/server
+            - name: 콘텐츠 보안 정책
+              uid: security/blazor/content-security-policy
         - name: 상태 관리
           uid: blazor/state-management
         - name: 오류 처리
@@ -335,6 +359,8 @@
           uid: blazor/debug
         - name: 웹 API 호출
           uid: blazor/call-web-api
+        - name: 프로그레시브 웹 애플리케이션
+          uid: blazor/progressive-web-app
         - name: 호스트 및 배포
           items:
             - name: 개요
@@ -373,7 +399,7 @@
           uid: client-side/bundling-and-minification
         - name: 브라우저 링크
           uid: client-side/using-browserlink
-    - name: 세션 및 앱 상태
+    - name: 세션 및 상태 관리
       uid: fundamentals/app-state
     - name: 레이아웃
       uid: mvc/views/layout
@@ -1066,6 +1092,14 @@
       uid: security/cookie-sharing
     - name: SameSite 쿠키
       uid: security/samesite
+    - name: SameSite 샘플
+      items:
+        - name: Razor Pages 2.1 SameSite 쿠키 샘플
+          uid: security/samesite/rp21
+        - name: Razor Pages 3.1 SameSite 쿠키 샘플
+          uid: security/samesite/rp31
+        - name: MVC SameSite 쿠키 샘플
+          uid: security/samesite/mvc21
     - name: IP 수신 허용 목록
       uid: security/ip-safelist
     - name: 애플리케이션 보안 - OWASP
@@ -1074,8 +1108,30 @@
       items:
         - name: 개요
           uid: security/blazor/index
+        - name: Blazor WebAssembly
+          items:
+            - name: 개요
+              uid: security/blazor/webassembly/index
+            - name: 인증 라이브러리를 사용하는 독립 실행형
+              uid: security/blazor/webassembly/standalone-with-authentication-library
+            - name: Microsoft 계정을 사용하는 독립 실행형
+              uid: security/blazor/webassembly/standalone-with-microsoft-accounts
+            - name: AAD를 사용하는 독립 실행형
+              uid: security/blazor/webassembly/standalone-with-azure-active-directory
+            - name: AAD B2C를 사용하는 독립 실행형
+              uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
+            - name: ID 서버를 사용하는 호스트형
+              uid: security/blazor/webassembly/hosted-with-identity-server
+            - name: AAD를 사용하는 호스트형
+              uid: security/blazor/webassembly/hosted-with-azure-active-directory
+            - name: AAD B2C를 사용하는 호스트형
+              uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
+            - name: 추가 시나리오
+              uid: security/blazor/webassembly/additional-scenarios
         - name: Blazor 서버
           uid: security/blazor/server
+        - name: 콘텐츠 보안 정책
+          uid: security/blazor/content-security-policy
 - name: 성능
   items:
     - name: 개요
@@ -1203,4 +1259,4 @@
 - name: API 참조
   href: /dotnet/api/?view=aspnetcore-2.2
 - name: 참가
-  href: 'https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md'
+  href: 'https://github.com/dotnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md'
