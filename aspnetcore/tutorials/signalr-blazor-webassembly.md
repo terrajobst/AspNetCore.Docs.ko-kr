@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 765595863cb18c889c36b756392bc8163e73c591
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 605cf8ebd3e85586f3e479c815f0b9902ce5a91a
+ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78649761"
+ms.lasthandoff: 03/11/2020
+ms.locfileid: "79083385"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Blazor WebAssembly를 활용해 ASP.NET Core SignalR 사용
 
@@ -58,10 +58,10 @@ ms.locfileid: "78649761"
 
 ## <a name="create-a-hosted-blazor-webassembly-app-project"></a>호스팅된 Blazor WebAssembly 앱 프로젝트 만들기
 
-[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) 템플릿을 설치합니다. [Microsoft.AspNetCore.Blazor.Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.Templates/) 패키지에는 미리 보기 버전이 포함되어 있으며 Blazor WebAssembly는 미리 보기로 제공됩니다. 명령 셸에서 다음 명령을 실행합니다.
+[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) 템플릿을 설치합니다. [Microsoft.AspNetCore.Components.WebAssembly.Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Templates/) 패키지에는 미리 보기 버전이 포함되어 있으며 Blazor WebAssembly는 미리 보기로 제공됩니다. 명령 셸에서 다음 명령을 실행합니다.
 
 ```dotnetcli
-dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.2.0-preview1.20073.1
+dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview2.20160.5
 ```
 
 선택한 도구의 지침을 따르세요.
@@ -103,7 +103,7 @@ dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.2.0-preview1.20073.1
    dotnet new blazorwasm --hosted --output BlazorSignalRApp
    ```
 
-1. Mac용 Visual Studio에서 프로젝트 폴더로 이동하고 프로젝트의 솔루션 파일(*.sln*)을 열어 프로젝트를 엽니다.
+1. Mac용 Visual Studio에서 프로젝트 폴더로 이동하고 프로젝트의 솔루션 파일( *.sln*)을 열어 프로젝트를 엽니다.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
