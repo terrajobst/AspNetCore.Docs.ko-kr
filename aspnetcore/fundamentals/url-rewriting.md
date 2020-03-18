@@ -1,22 +1,22 @@
 ---
 title: ASP.NET Core에서 URL 재작성 미들웨어
-author: guardrex
+author: rick-anderson
 description: ASP.NET Core 애플리케이션에서 URL 재작성 미들웨어로 URL 재작성 및 리디렉션 하는 방법에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 08/16/2019
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: e284d2172af723bb80a7be9f6e6f1a87ebe5208e
-ms.sourcegitcommit: 41f2c1a6b316e6e368a4fd27a8b18d157cef91e1
+ms.openlocfilehash: 7d63cf381f1d8a19ed4fb789348e36f94304ad63
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/21/2019
-ms.locfileid: "69886501"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78650475"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>ASP.NET Core에서 URL 재작성 미들웨어
 
-작성자: [Luke Latham](https://github.com/guardrex) 및 [Mikael Mengistu](https://github.com/mikaelm12)
+작성자: [Mikael Mengistu](https://github.com/mikaelm12)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -35,7 +35,7 @@ URL 재작성은 하나 이상의 미리 정의된 규칙을 기반으로 하는
 > [!NOTE]
 > URL 재작성은 응용 프로그램의 성능을 저하시킬 수 있습니다. 가능한 경우 규칙의 수와 복잡성을 제한합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="url-redirect-and-url-rewrite"></a>URL 리디렉션 및 URL 재작성
 
@@ -57,7 +57,7 @@ URL 재작성은 하나 이상의 미리 정의된 규칙을 기반으로 하는
 
 *URL 재작성*은 요청한 클라이언트와 다른 리소스 주소에서 리소스를 제공하는 서버 쪽 작업입니다. URL을 다시 작성하는 경우 서버를 왕복할 필요가 없습니다. 다시 작성된 URL은 클라이언트에 반환되지 않고 브라우저의 주소 표시줄에도 표시되지 않습니다.
 
-`/resource`가 `/different-resource`에 *다시 작성*되면 서버에서 *내부적으로* `/different-resource`에 있는 리소스를 가져와서 반환합니다.
+`/resource`가 `/different-resource`에 *다시 작성*되면 서버에서 *내부적으로*`/different-resource`에 있는 리소스를 가져와서 반환합니다.
 
 클라이언트는 다시 작성된 URL에서 리소스를 검색할 수 있지만, 요청을 만들고 응답을 받을 때 리소스가 다시 작성된 URL에 있음을 클라이언트에 알리지 않습니다.
 
@@ -65,7 +65,7 @@ URL 재작성은 하나 이상의 미리 정의된 규칙을 기반으로 하는
 
 ## <a name="url-rewriting-sample-app"></a>URL 재작성 예제 응용 프로그램
 
-[샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/)을 사용하면 URL 재작성 미들웨어의 기능을 살펴볼 수 있습니다. 이 앱은 리디렉션 및 재작성 규칙을 적용하고, 여러 시나리오에 대해 리디렉션되거나 다시 작성된 URL을 표시합니다.
+[샘플 앱](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/)을 사용하면 URL 재작성 미들웨어의 기능을 살펴볼 수 있습니다. 이 앱은 리디렉션 및 재작성 규칙을 적용하고, 여러 시나리오에 대해 리디렉션되거나 다시 작성된 URL을 표시합니다.
 
 ## <a name="when-to-use-url-rewriting-middleware"></a>URL 재작성 미들웨어를 사용해야 하는 경우
 
@@ -100,9 +100,9 @@ URL 다시 작성 미들웨어는 [Microsoft.AspNetCore.Rewrite](https://www.nug
 
 이러한 옵션은 앱이 `www` 이외 요청을 `www`로 리디렉션하도록 허용합니다.
 
-* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWwwPermanent*> &ndash; 요청이 `www`가 아닌 경우 `www` 하위 도메인으로 영구적으로 리디렉션합니다. [Status308PermanentRedirect](xref:Microsoft.AspNetCore.Http.StatusCodes.Status308PermanentRedirect) 상태 코드를 사용하여 리디렉션합니다.
+* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWwwPermanent*> - 요청이 `www`가 아닌 경우 영구적으로 요청을 `www` 하위 도메인으로 리디렉션합니다. [Status308PermanentRedirect](xref:Microsoft.AspNetCore.Http.StatusCodes.Status308PermanentRedirect) 상태 코드를 사용하여 리디렉션합니다.
 
-* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWww*> &ndash; 들어오는 요청이 `www`가 아닌 경우 요청을 `www` 하위 도메인으로 리디렉션합니다. [Status307TemporaryRedirect](xref:Microsoft.AspNetCore.Http.StatusCodes.Status307TemporaryRedirect) 상태 코드를 사용하여 리디렉션합니다. 오버로드를 사용하면 응답에 대한 상태 코드를 제공할 수 있습니다. 상태 코드 할당을 위해 <xref:Microsoft.AspNetCore.Http.StatusCodes> 클래스의 필드를 사용합니다.
+* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWww*> - 들어오는 요청이 `www`가 아닌 경우 요청을 `www` 하위 도메인으로 리디렉션합니다. [Status307TemporaryRedirect](xref:Microsoft.AspNetCore.Http.StatusCodes.Status307TemporaryRedirect) 상태 코드를 사용하여 리디렉션합니다. 오버로드를 사용하면 응답에 대한 상태 코드를 제공할 수 있습니다. 상태 코드 할당을 위해 <xref:Microsoft.AspNetCore.Http.StatusCodes> 클래스의 필드를 사용합니다.
 
 ### <a name="url-redirect"></a>URL 리디렉션
 
@@ -387,7 +387,7 @@ URL 재작성은 하나 이상의 미리 정의된 규칙을 기반으로 하는
 > [!NOTE]
 > URL 재작성은 응용 프로그램의 성능을 저하시킬 수 있습니다. 가능한 경우 규칙의 수와 복잡성을 제한합니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="url-redirect-and-url-rewrite"></a>URL 리디렉션 및 URL 재작성
 
@@ -409,7 +409,7 @@ URL 재작성은 하나 이상의 미리 정의된 규칙을 기반으로 하는
 
 *URL 재작성*은 요청한 클라이언트와 다른 리소스 주소에서 리소스를 제공하는 서버 쪽 작업입니다. URL을 다시 작성하는 경우 서버를 왕복할 필요가 없습니다. 다시 작성된 URL은 클라이언트에 반환되지 않고 브라우저의 주소 표시줄에도 표시되지 않습니다.
 
-`/resource`가 `/different-resource`에 *다시 작성*되면 서버에서 *내부적으로* `/different-resource`에 있는 리소스를 가져와서 반환합니다.
+`/resource`가 `/different-resource`에 *다시 작성*되면 서버에서 *내부적으로*`/different-resource`에 있는 리소스를 가져와서 반환합니다.
 
 클라이언트는 다시 작성된 URL에서 리소스를 검색할 수 있지만, 요청을 만들고 응답을 받을 때 리소스가 다시 작성된 URL에 있음을 클라이언트에 알리지 않습니다.
 
@@ -417,7 +417,7 @@ URL 재작성은 하나 이상의 미리 정의된 규칙을 기반으로 하는
 
 ## <a name="url-rewriting-sample-app"></a>URL 재작성 예제 응용 프로그램
 
-[샘플 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/)을 사용하면 URL 재작성 미들웨어의 기능을 살펴볼 수 있습니다. 이 앱은 리디렉션 및 재작성 규칙을 적용하고, 여러 시나리오에 대해 리디렉션되거나 다시 작성된 URL을 표시합니다.
+[샘플 앱](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/url-rewriting/samples/)을 사용하면 URL 재작성 미들웨어의 기능을 살펴볼 수 있습니다. 이 앱은 리디렉션 및 재작성 규칙을 적용하고, 여러 시나리오에 대해 리디렉션되거나 다시 작성된 URL을 표시합니다.
 
 ## <a name="when-to-use-url-rewriting-middleware"></a>URL 재작성 미들웨어를 사용해야 하는 경우
 
@@ -454,9 +454,9 @@ IIS, Apache 및 Nginx에서 서버 기반 URL 재작성 기술을 사용하는 �
 
 이러한 옵션은 앱이 `www` 이외 요청을 `www`로 리디렉션하도록 허용합니다.
 
-* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWwwPermanent*> &ndash; 요청이 `www`가 아닌 경우 `www` 하위 도메인으로 영구적으로 리디렉션합니다. [Status308PermanentRedirect](xref:Microsoft.AspNetCore.Http.StatusCodes.Status308PermanentRedirect) 상태 코드를 사용하여 리디렉션합니다.
+* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWwwPermanent*> - 요청이 `www`가 아닌 경우 영구적으로 요청을 `www` 하위 도메인으로 리디렉션합니다. [Status308PermanentRedirect](xref:Microsoft.AspNetCore.Http.StatusCodes.Status308PermanentRedirect) 상태 코드를 사용하여 리디렉션합니다.
 
-* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWww*> &ndash; 들어오는 요청이 `www`가 아닌 경우 요청을 `www` 하위 도메인으로 리디렉션합니다. [Status307TemporaryRedirect](xref:Microsoft.AspNetCore.Http.StatusCodes.Status307TemporaryRedirect) 상태 코드를 사용하여 리디렉션합니다. 오버로드를 사용하면 응답에 대한 상태 코드를 제공할 수 있습니다. 상태 코드 할당을 위해 <xref:Microsoft.AspNetCore.Http.StatusCodes> 클래스의 필드를 사용합니다.
+* <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToWww*> - 들어오는 요청이 `www`가 아닌 경우 요청을 `www` 하위 도메인으로 리디렉션합니다. [Status307TemporaryRedirect](xref:Microsoft.AspNetCore.Http.StatusCodes.Status307TemporaryRedirect) 상태 코드를 사용하여 리디렉션합니다. 오버로드를 사용하면 응답에 대한 상태 코드를 제공할 수 있습니다. 상태 코드 할당을 위해 <xref:Microsoft.AspNetCore.Http.StatusCodes> 클래스의 필드를 사용합니다.
 
 ### <a name="url-redirect"></a>URL 리디렉션
 
