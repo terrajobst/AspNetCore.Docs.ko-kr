@@ -1,17 +1,17 @@
 ---
 title: ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 정렬, 필터, 페이징 - 3/8
-author: tdykstra
+author: rick-anderson
 description: 이 자습서에서는 ASP.NET Core 및 Entity Framework Core를 사용하여 Razor 페이지에 정렬, 필터링 및 페이징 기능을 추가합니다.
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: b4cef98f3ad4973878c5fa65a47c0b86cdfc8686
-ms.sourcegitcommit: 257cc3fe8c1d61341aa3b07e5bc0fa3d1c1c1d1c
+ms.openlocfilehash: 9563f3ef52ce429eb0a58b468acb8e9cd7b276e2
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/19/2019
-ms.locfileid: "69583525"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78645495"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging---3-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 정렬, 필터, 페이징 - 3/8
 
@@ -33,7 +33,7 @@ ms.locfileid: "69583525"
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_All&highlight=21-24,26,28-52)]
 
-위의 코드는:
+위의 코드는
 
 * 정렬 매개 변수를 포함할 속성을 추가합니다.
 * `Student` 속성의 이름을 `Students`로 변경합니다.
@@ -76,7 +76,7 @@ ms.locfileid: "69583525"
 
 [!code-cshtml[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml?highlight=5,8,17-19,22,25-27,33)]
 
-위의 코드는:
+위의 코드는
 
 * 하이퍼링크를 `LastName` 및 `EnrollmentDate` 열 머리글에 추가합니다.
 * `NameSort` 및 `DateSort`의 정보를 사용하여 현재 정렬 순서 값으로 하이퍼링크를 설정합니다.
@@ -101,7 +101,7 @@ ms.locfileid: "69583525"
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index2.cshtml.cs?name=snippet_All&highlight=28,33,37-41)]
 
-위의 코드는:
+위의 코드는
 
 * `searchString` 매개 변수를 `OnGetAsync` 메서드에 추가하고 매개 변수 값을 `CurrentFilter` 속성에 저장합니다. 다음 섹션에서 추가되는 텍스트 상자에서 검색 문자열 값이 수신됩니다.
 * `Where` 절을 LINQ 문에 추가합니다. `Where` 절은 이름 또는 성에 검색 문자열이 포함된 학생만 선택합니다. LINQ 문은 검색할 값이 있는 경우에만 실행됩니다.
@@ -132,7 +132,7 @@ Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())`
 
 [!code-cshtml[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index2.cshtml?highlight=14-23)]
 
-이전 코드는 `<form>` [태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하여 검색 텍스트 상자 및 단추를 추가합니다. 기본적으로 `<form>` 태그 도우미는 POST로 양식 데이터를 전송합니다. POST를 사용하면 매개 변수가 URL에 없는 HTTP 메시지 본문에 전달됩니다. HTTP GET을 사용하는 경우 양식 데이터가 URL에 쿼리 문자열로 전달됩니다. 사용자는 쿼리 문자열로 데이터를 전달하여 URL을 책갈피로 표시할 수 있습니다. [W3C 지침](https://www.w3.org/2001/tag/doc/whenToUseGet.html)에 따라 작업이 업데이트되지 않을 때 GET을 사용해야 합니다.
+위의 코드는 `<form>` [태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하여 검색 텍스트 상자와 단추를 추가합니다. 기본적으로 `<form>` 태그 도우미는 POST로 양식 데이터를 전송합니다. POST를 사용하면 매개 변수가 URL에 없는 HTTP 메시지 본문에 전달됩니다. HTTP GET을 사용하는 경우 양식 데이터가 URL에 쿼리 문자열로 전달됩니다. 사용자는 쿼리 문자열로 데이터를 전달하여 URL을 책갈피로 표시할 수 있습니다. [W3C 지침](https://www.w3.org/2001/tag/doc/whenToUseGet.html)에 따라 작업이 업데이트되지 않을 때 GET을 사용해야 합니다.
 
 앱을 테스트합니다.
 
@@ -140,7 +140,7 @@ Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())`
 
 * **검색**을 선택합니다.
 
-URL에 검색 문자열이 포함되어 있음을 확인하세요. 예:
+URL에 검색 문자열이 포함되어 있음을 확인하세요. 예를 들어:
 
 ```
 https://localhost:<port>/Students?SearchString=an
@@ -172,7 +172,7 @@ https://localhost:<port>/Students?SearchString=an
 
 [!code-csharp[Main](intro/samples/cu30/Pages/Students/Index.cshtml.cs?name=snippet_All&highlight=26,28-29,31,34-41,68-70)]
 
-위의 코드는:
+위의 코드는
 
 * `Students` 속성의 형식을 `IList<Student>`에서 `PaginatedList<Student>`로 변경합니다.
 * 페이지 인덱스, 현재 `sortOrder` 및 `currentFilter`를 `OnGetAsync` 메서드 시그니처에 추가합니다.
@@ -205,7 +205,7 @@ https://localhost:<port>/Students?SearchString=an
 
 ### <a name="add-paging-links-to-the-razor-page"></a>Razor 페이지에 페이징 링크 추가
 
-*Students/Index.cshtml*의 코드를 다음 코드로 바꿉니다. 변경 내용은 강조 표시되어 있습니다.
+*Students/Index.cshtml*의 코드를 다음 코드로 바꿉니다. 변경 내용이 강조 표시되어 있습니다.
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Index.cshtml?highlight=29-32,38-41,69-87)]
 
@@ -275,15 +275,15 @@ LINQ 문은 등록 날짜별로 학생 엔터티를 그룹화하고 각 그룹�
 
 ![학생 인덱스 페이지](sort-filter-page/_static/paging.png)
 
-해결할 수 없는 문제가 발생한 경우 [완성된 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)을 다운로드합니다.
+해결할 수 없는 문제가 발생한 경우 [완성된 앱](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)을 다운로드합니다.
 
 ## <a name="add-sorting-to-the-index-page"></a>인덱스 페이지에 정렬 추가
 
-정렬 매개 변수를 포함하도록 문자열을 *Students/Index.cshtml.cs* `PageModel`에 추가합니다.
+정렬 매개 변수를 포함할 *Students/Index.cshtml.cs* `PageModel`에 문자열을 추가합니다.
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet1&highlight=10-13)]
 
-다음 코드로 *Students/Index.cshtml.cs* `OnGetAsync`를 업데이트합니다.
+다음 코드를 사용하여 *Students/Index.cshtml.cs* `OnGetAsync`를 업데이트합니다.
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortOnly)]
 
@@ -331,7 +331,7 @@ LINQ 문은 등록 날짜별로 학생 엔터티를 그룹화하고 각 그룹�
 
 [!code-html[](intro/samples/cu21/Pages/Students/Index2.cshtml?highlight=17-19,25-27)]
 
-위의 코드는:
+위의 코드는
 
 * 하이퍼링크를 `LastName` 및 `EnrollmentDate` 열 머리글에 추가합니다.
 * `NameSort` 및 `DateSort`의 정보를 사용하여 현재 정렬 순서 값으로 하이퍼링크를 설정합니다.
@@ -359,11 +359,11 @@ LINQ 문은 등록 날짜별로 학생 엔터티를 그룹화하고 각 그룹�
 
 ### <a name="add-filtering-functionality-to-the-index-method"></a>인덱스 메서드에 필터링 기능 추가
 
-다음 코드로 *Students/Index.cshtml.cs* `OnGetAsync`를 업데이트합니다.
+다음 코드를 사용하여 *Students/Index.cshtml.cs* `OnGetAsync`를 업데이트합니다.
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortFilter&highlight=1,5,9-13)]
 
-위의 코드는:
+위의 코드는
 
 * `searchString` 매개 변수를 `OnGetAsync` 메서드에 추가합니다. 다음 섹션에서 추가되는 텍스트 상자에서 검색 문자열 값이 수신됩니다.
 * LINQ 문 및 `Where` 절을 추가했습니다. `Where` 절은 이름 또는 성에 검색 문자열이 포함된 학생만 선택합니다. LINQ 문은 검색할 값이 있는 경우에만 실행됩니다.
@@ -387,7 +387,7 @@ LINQ 문은 등록 날짜별로 학생 엔터티를 그룹화하고 각 그룹�
 
 [!code-html[](intro/samples/cu21/Pages/Students/Index3.cshtml?highlight=14-23&range=1-25)]
 
-이전 코드는 `<form>` [태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하여 검색 텍스트 상자 및 단추를 추가합니다. 기본적으로 `<form>` 태그 도우미는 POST로 양식 데이터를 전송합니다. POST를 사용하면 매개 변수가 URL에 없는 HTTP 메시지 본문에 전달됩니다. HTTP GET을 사용하는 경우 양식 데이터가 URL에 쿼리 문자열로 전달됩니다. 사용자는 쿼리 문자열로 데이터를 전달하여 URL을 책갈피로 표시할 수 있습니다. [W3C 지침](https://www.w3.org/2001/tag/doc/whenToUseGet.html)에 따라 작업이 업데이트되지 않을 때 GET을 사용해야 합니다.
+위의 코드는 `<form>` [태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하여 검색 텍스트 상자와 단추를 추가합니다. 기본적으로 `<form>` 태그 도우미는 POST로 양식 데이터를 전송합니다. POST를 사용하면 매개 변수가 URL에 없는 HTTP 메시지 본문에 전달됩니다. HTTP GET을 사용하는 경우 양식 데이터가 URL에 쿼리 문자열로 전달됩니다. 사용자는 쿼리 문자열로 데이터를 전달하여 URL을 책갈피로 표시할 수 있습니다. [W3C 지침](https://www.w3.org/2001/tag/doc/whenToUseGet.html)에 따라 작업이 업데이트되지 않을 때 GET을 사용해야 합니다.
 
 앱을 테스트합니다.
 
@@ -424,7 +424,7 @@ http://localhost:5000/Students?SearchString=an
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortFilterPageType)]
 
-다음 코드로 *Students/Index.cshtml.cs* `OnGetAsync`를 업데이트합니다.
+다음 코드를 사용하여 *Students/Index.cshtml.cs* `OnGetAsync`를 업데이트합니다.
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortFilterPage&highlight=1-4,7-14,41-999)]
 
@@ -521,13 +521,13 @@ LINQ 문은 등록 날짜별로 학생 엔터티를 그룹화하고 각 그룹�
 
 앱을 실행하고 정보 페이지로 이동합니다. 각 등록 날짜에 대한 학생 수가 테이블에 표시됩니다.
 
-해결할 수 없는 문제가 발생한 경우 [이 단계에 완성된 앱](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/StageSnapShots/cu-part3-sorting)을 다운로드합니다.
+해결할 수 없는 문제가 발생한 경우 [이 단계에 완성된 앱](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/StageSnapShots/cu-part3-sorting)을 다운로드합니다.
 
 ![정보 페이지](sort-filter-page/_static/about.png)
 
 ## <a name="additional-resources"></a>추가 자료
 
-* [ASP.NET Core 2.x 소스 디버깅](https://github.com/aspnet/AspNetCore.Docs/issues/4155)
+* [ASP.NET Core 2.x 소스 디버깅](https://github.com/dotnet/AspNetCore.Docs/issues/4155)
 * [이 자습서의 YouTube 버전](https://www.youtube.com/watch?v=MDs7PFpoMqI)
 
 다음 자습서에서는 앱은 마이그레이션을 사용하여 데이터 모델을 업데이트합니다.

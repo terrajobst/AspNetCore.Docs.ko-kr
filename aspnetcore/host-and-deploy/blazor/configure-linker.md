@@ -11,19 +11,19 @@ no-loc:
 - SignalR
 uid: host-and-deploy/blazor/configure-linker
 ms.openlocfilehash: 263b85a3213c1da233e4c96095faaf39d0a8e13f
-ms.sourcegitcommit: eca76bd065eb94386165a0269f1e95092f23fa58
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/24/2020
-ms.locfileid: "76726770"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78648609"
 ---
-# <a name="configure-the-linker-for-aspnet-core-opno-locblazor"></a>ASP.NET Core [!OP.NO-LOC(Blazor)]용 링커 구성
+# <a name="configure-the-linker-for-aspnet-core-blazor"></a>ASP.NET Core Blazor용 링커 구성
 
 [Luke Latham](https://github.com/guardrex)으로
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-[!OP.NO-LOC(Blazor)]은(는) 빌드 중에 [IL(중간 언어)](/dotnet/standard/managed-code#intermediate-language--execution) 연결을 수행하여 앱의 출력 어셈블리에서 불필요한 IL을 제거합니다.
+Blazor는 빌드 중에 [IL](/dotnet/standard/managed-code#intermediate-language--execution)(중간 언어) 연결을 수행하여 앱의 출력 어셈블리에서 불필요한 IL을 제거합니다.
 
 다음 방법 중 하나를 사용하여 어셈블리 연결을 제어합니다.
 
@@ -55,7 +55,7 @@ XML 구성 파일을 제공하고 프로젝트 파일에서 해당 파일을 MSB
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
-  This file specifies which parts of the BCL or [!OP.NO-LOC(Blazor)] packages must not be
+  This file specifies which parts of the BCL or Blazor packages must not be
   stripped by the IL Linker even if they aren't referenced by user code.
 -->
 <linker>
@@ -86,7 +86,7 @@ XML 구성 파일을 제공하고 프로젝트 파일에서 해당 파일을 MSB
 
 ### <a name="configure-the-linker-for-internationalization"></a>국제화를 위한 링커 구성
 
-기본적으로 [!OP.NO-LOC(Blazor)] WebAssembly 앱에 대한 [!OP.NO-LOC(Blazor)]의 링커 구성은 명시적으로 요청된 로캘을 제외하고 국제화 정보를 제거합니다. 이 어셈블리를 제거하면 앱 크기를 최소화합니다.
+기본적으로 Blazor WebAssembly 앱에 대한 Blazor 링커 구성은 명시적으로 요청된 로캘을 제외하고 국제화 정보를 제거합니다. 이 어셈블리를 제거하면 앱 크기를 최소화합니다.
 
 유지되는 I18N 어셈블리 종류를 제어하려면 프로젝트 파일에서 `<MonoLinkerI18NAssemblies>` MSBuild 속성을 설정합니다.
 

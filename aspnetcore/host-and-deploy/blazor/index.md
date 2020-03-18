@@ -5,17 +5,17 @@ description: Blazor 앱을 호스트하고 배포하는 방법을 알아봅니�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2019
+ms.date: 03/11/2020
 no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/index
-ms.openlocfilehash: 238e7fc8f8d64c7847dc8847fb66e22442a3c8e0
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: ddf70da29a82d462422c1bdf74ff45b92bb10b56
+ms.sourcegitcommit: 5bdc54162d7dea8d9fa54ac3055678db23586af1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78644709"
+ms.lasthandoff: 03/17/2020
+ms.locfileid: "79434267"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor"></a>ASP.NET Core Blazor 호스트 및 배포
 
@@ -29,7 +29,7 @@ ms.locfileid: "78644709"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. 탐색 모음에서 **빌드** > **{APPLICATION} 게시**를 선택합니다.
+1. 탐색 모음에서 **빌드** >  **{APPLICATION} 게시**를 선택합니다.
 1. *publish target*을 선택합니다. 로컬로 게시하려면 **폴더**를 선택합니다.
 1. **폴더 선택** 필드에서 기본 위치를 그대로 사용하거나 다른 위치를 지정합니다. **게시** 단추를 선택합니다.
 
@@ -45,7 +45,12 @@ dotnet publish -c Release
 
 앱을 게시하면 배포할 자산을 만들기 전에 프로젝트 종속성의 [복원](/dotnet/core/tools/dotnet-restore)과 프로젝트의 [빌드](/dotnet/core/tools/dotnet-build)가 트리거됩니다. 빌드 프로세스의 일부로 앱 다운로드 크기와 로드 시간을 줄이기 위해 사용하지 않는 메서드와 어셈블리를 제거합니다.
 
-Blazor WebAssembly 앱은 */bin/Release/{TARGET FRAMEWORK}/publish/{ASSEMBLY NAME}/dist* 폴더에 게시됩니다. Blazor 서버 앱은 */bin/Release/{TARGET FRAMEWORK}/publish* 폴더에 게시됩니다.
+게시 위치:
+
+* Blazor WebAssembly
+  * 독립 실행형 &ndash; 앱은 */bin/Release/{TARGET FRAMEWORK}/publish/wwwroot* 폴더에 게시됩니다. 앱을 정적 사이트로 배포하려면 *wwwroot* 폴더의 내용을 정적 사이트 호스트에 복사합니다.
+  * 호스트됨 &ndash; 클라이언트 Blazor WebAssembly 앱이 서버 앱의 */bin/Release/{TARGET FRAMEWORK}/publish/wwwroot* 폴더에 서버 앱의 다른 정적 웹 자산과 함께 게시됩니다. 호스트에 *게시* 폴더의 콘텐츠를 배포합니다.
+* Blazor 서버 &ndash; 앱이 */bin/Release/{TARGET FRAMEWORK}/publish* 폴더에 게시됩니다. 호스트에 *게시* 폴더의 콘텐츠를 배포합니다.
 
 이 폴더의 자산은 웹 서버에 배포됩니다. 배포는 사용 중인 개발 도구에 따라 수동 프로세스일 수도 있고 자동 프로세스일 수도 있습니다.
 

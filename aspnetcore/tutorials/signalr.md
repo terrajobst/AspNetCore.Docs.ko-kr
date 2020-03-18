@@ -9,17 +9,17 @@ no-loc:
 - SignalR
 uid: tutorials/signalr
 ms.openlocfilehash: 55ebdbfa4556deca74a6cdf0638307425cd1a01a
-ms.sourcegitcommit: 3e503ef510008e77be6dd82ee79213c9f7b97607
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/22/2019
-ms.locfileid: "74317494"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78650613"
 ---
-# <a name="tutorial-get-started-with-aspnet-core-opno-locsignalr"></a>자습서: ASP.NET Core SignalR 시작하기
+# <a name="tutorial-get-started-with-aspnet-core-signalr"></a>자습서: ASP.NET Core SignalR 시작
 
 ::: moniker range=">= aspnetcore-3.0"
 
-이 자습서에서는 SignalR을 이용해서 실시간 앱을 구현하기 위한 기본 사항을 알려줍니다. 다음과 같은 작업을 수행하는 방법을 살펴봅니다.
+본 자습서에서는 SignalR을 이용해서 실시간 앱을 구현하기 위한 기본 사항을 알려줍니다. 다음과 같은 작업을 수행하는 방법을 살펴봅니다.
 
 > [!div class="checklist"]
 > * 웹 프로젝트를 만듭니다.
@@ -32,17 +32,17 @@ ms.locfileid: "74317494"
 
 ![SignalR 샘플 앱](signalr/_static/3.x/signalr-get-started-finished.png)
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.0.md)]
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-3.0.md)]
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-3.0.md)]
 
@@ -50,7 +50,7 @@ ms.locfileid: "74317494"
 
 ## <a name="create-a-web-app-project"></a>웹앱 프로젝트 만들기
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio/)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
 * 메뉴에서 **파일 > 새 프로젝트**를 선택합니다.
 
@@ -64,7 +64,7 @@ ms.locfileid: "74317494"
 
   ![Visual Studio의 새 프로젝트 대화 상자](signalr/_static/3.x/signalr-new-project-dialog.png)
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code/)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code/)
 
 * 새 프로젝트 폴더를 만들 폴더에 대한 [통합 터미널](https://code.visualstudio.com/docs/editor/integrated-terminal)을 엽니다.
 
@@ -75,7 +75,7 @@ ms.locfileid: "74317494"
    code -r SignalRChat
    ```
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * 메뉴에서 **파일 > 새 솔루션**을 선택합니다.
 
@@ -87,11 +87,11 @@ ms.locfileid: "74317494"
 
 ---
 
-## <a name="add-the-opno-locsignalr-client-library"></a>SignalR 클라이언트 라이브러리 추가
+## <a name="add-the-signalr-client-library"></a>SignalR 클라이언트 라이브러리 추가
 
 SignalR 서버 라이브러리는 ASP.NET Core 3.0 공유 프레임워크에 포함되어 있습니다. JavaScript 클라이언트 라이브러리는 프로젝트에 자동으로 포함되지 않습니다. 본 자습서에서는 라이브러리 관리자(LibMan)를 사용하여 *unpkg*에서 클라이언트 라이브러리를 가져옵니다. unpkg는 Node.js의 패키지 관리자인 npm에서 찾은 모든 내용을 전달할 수 있는 콘텐츠 배달 네트워크(CDN, Content Delivery Network)입니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio/)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
 * **솔루션 탐색기**에서 프로젝트를 마우스 오른쪽 단추로 클릭하고 **추가** > **클라이언트 쪽 라이브러리**를 선택합니다.
 
@@ -107,7 +107,7 @@ SignalR 서버 라이브러리는 ASP.NET Core 3.0 공유 프레임워크에 포
 
   그러면 LibMan이 *wwwroot/js/signalr* 폴더를 생성한 다음 여기에 선택한 파일을 복사합니다.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code/)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code/)
 
 * 통합 터미널에서 다음 명령을 실행하여 LibMan을 설치합니다.
 
@@ -134,7 +134,7 @@ SignalR 서버 라이브러리는 ASP.NET Core 3.0 공유 프레임워크에 포
   Installed library "@microsoft/signalr@latest" to "wwwroot/js/signalr"
   ```
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * **터미널**에서 다음 명령을 실행하여 LibMan을 설치합니다.
 
@@ -165,7 +165,7 @@ SignalR 서버 라이브러리는 ASP.NET Core 3.0 공유 프레임워크에 포
 
 ---
 
-## <a name="create-a-opno-locsignalr-hub"></a>SignalR 허브 만들기
+## <a name="create-a-signalr-hub"></a>SignalR 허브 만들기
 
 *허브*는 클라이언트-서버 통신을 처리하는 높은 수준의 파이프라인으로 제공되는 클래스입니다.
 
@@ -179,9 +179,9 @@ SignalR 서버 라이브러리는 ASP.NET Core 3.0 공유 프레임워크에 포
 
   연결된 클라이언트에서 `SendMessage` 메서드를 호출하여 모든 클라이언트에 메시지를 보낼 수 있습니다. 메서드를 호출하는 JavaScript 클라이언트 코드는 자습서 뒷부분에 나와 있습니다. SignalR 코드는 최대한의 확장성을 제공할 수 있도록 비동기적입니다.
 
-## <a name="configure-opno-locsignalr"></a>SignalR 구성
+## <a name="configure-signalr"></a>SignalR 구성
 
-SignalR에 SignalR 요청을 전달하도록 SignalR 서버를 구성해야 합니다.
+SignalR 서버는 SignalR에 SignalR 요청을 전달하도록 구성되어야 합니다.
 
 * 다음 강조 표시된 코드를 *Startup.cs* 파일에 추가합니다.
 
@@ -189,7 +189,7 @@ SignalR에 SignalR 요청을 전달하도록 SignalR 서버를 구성해야 합�
 
   이러한 변경 사항은 ASP.NET Core 종속성 주입 및 라우팅 시스템에 SignalR을 추가합니다.
 
-## <a name="add-opno-locsignalr-client-code"></a>SignalR 클라이언트 코드 추가
+## <a name="add-signalr-client-code"></a>SignalR 클라이언트 코드 추가
 
 * *Pages\Index.cshtml*의 콘텐츠를 다음 코드로 바꿉니다.
 
@@ -199,7 +199,7 @@ SignalR에 SignalR 요청을 전달하도록 SignalR 서버를 구성해야 합�
 
   * 이름 및 메시지 텍스트에 대한 텍스트 상자 및 전송 단추를 만듭니다.
   * SignalR 허브에서 받은 메시지를 표시하기 위해 `id="messagesList"`를 사용하여 목록을 만듭니다.
-  * SignalR 및 *chat.js* 애플리케이션 코드(다음 단계에서 만듦)에 대한 참조를 포함합니다.
+  * SignalR에 대한 스크립트 참조 및 다음 단계에서 만드는 *chat.js* 애플리케이션 코드를 포함합니다.
 
 * *wwwroot/js* 폴더에서 다음 코드를 사용하여 *chat.js* 파일을 만듭니다.
 
@@ -213,11 +213,11 @@ SignalR에 SignalR 요청을 전달하도록 SignalR 서버를 구성해야 합�
 
 ## <a name="run-the-app"></a>앱 실행
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * **CTRL+F5** 키를 눌러 디버깅 없이 앱을 실행합니다.
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * 통합 터미널에서 다음 명령을 실행합니다.
 
@@ -225,7 +225,7 @@ SignalR에 SignalR 요청을 전달하도록 SignalR 서버를 구성해야 합�
   dotnet watch run -p SignalRChat.csproj
   ```
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * 메뉴에서 **실행 > 디버깅하지 않고 시작**을 선택합니다.
 
@@ -253,27 +253,27 @@ SignalR에 SignalR 요청을 전달하도록 SignalR 서버를 구성해야 합�
 
 ::: moniker range="< aspnetcore-3.0"
 
-이 자습서에서는 SignalR을 이용해서 실시간 앱을 구현하기 위한 기본 사항을 알려줍니다. 다음과 같은 작업을 수행하는 방법을 살펴봅니다. 
+본 자습서에서는 SignalR을 이용해서 실시간 앱을 구현하기 위한 기본 사항을 알려줍니다. 다음과 같은 작업을 수행하는 방법을 살펴봅니다.   
 
 > [!div class="checklist"]  
 > * 웹 프로젝트를 만듭니다.   
-> * SignalR 클라이언트 라이브러리를 추가합니다.   
-> * SignalR 허브를 만듭니다. 
-> * SignalR을 사용하도록 프로젝트를 구성합니다. 
+> * SignalR 클라이언트 라이브러리를 추가합니다. 
+> * SignalR 허브를 만듭니다.   
+> * SignalR을 사용하도록 프로젝트를 구성합니다.   
 > * 모든 클라이언트에서 연결된 모든 클라이언트로 메시지를 보내는 코드를 추가합니다.  
-이제 작동하는 채팅 앱이 만들어졌습니다. ![SignalR 샘플 앱](signalr/_static/2.x/signalr-get-started-finished.png)   
+이 모든 과정을 마치면 동작하는 채팅 앱이 만들어집니다. ![SignalR 샘플 앱](signalr/_static/2.x/signalr-get-started-finished.png) 
 
-## <a name="prerequisites"></a>전제 조건    
+## <a name="prerequisites"></a>사전 요구 사항    
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)   
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)   
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2017-2.2.md)] 
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) 
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) 
 
 [!INCLUDE[](~/includes/net-core-prereqs-vsc-2.2.md)]    
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)   
+# <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)   
 
 [!INCLUDE[](~/includes/net-core-prereqs-mac-2.2.md)]    
 
@@ -281,7 +281,7 @@ SignalR에 SignalR 요청을 전달하도록 SignalR 서버를 구성해야 합�
 
 ## <a name="create-a-web-project"></a>웹 프로젝트 만들기 
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio/)  
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)  
 
 * 메뉴에서 **파일 > 새 프로젝트**를 선택합니다. 
 
@@ -295,7 +295,7 @@ SignalR에 SignalR 요청을 전달하도록 SignalR 서버를 구성해야 합�
 
   ![Visual Studio의 새 프로젝트 대화 상자](signalr/_static/2.x/signalr-new-project-choose-type.png)   
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code/)    
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code/)    
 
 * 새 프로젝트 폴더를 만들 폴더에 대한 [통합 터미널](https://code.visualstudio.com/docs/editor/integrated-terminal)을 엽니다.  
 
@@ -306,7 +306,7 @@ SignalR에 SignalR 요청을 전달하도록 SignalR 서버를 구성해야 합�
    code -r SignalRChat  
    ```  
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)   
+# <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)   
 
 * 메뉴에서 **파일 > 새 솔루션**을 선택합니다.    
 
@@ -318,11 +318,11 @@ SignalR에 SignalR 요청을 전달하도록 SignalR 서버를 구성해야 합�
 
 --- 
 
-## <a name="add-the-opno-locsignalr-client-library"></a>SignalR 클라이언트 라이브러리 추가 
+## <a name="add-the-signalr-client-library"></a>SignalR 클라이언트 라이브러리 추가   
 
-SignalR 서버 라이브러리는 `Microsoft.AspNetCore.App` 메타패키지에 포함되어 있습니다. JavaScript 클라이언트 라이브러리는 프로젝트에 자동으로 포함되지 않습니다. 본 자습서에서는 라이브러리 관리자(LibMan)를 사용하여 *unpkg*에서 클라이언트 라이브러리를 가져옵니다. unpkg는 Node.js의 패키지 관리자인 npm에서 찾은 모든 내용을 전달할 수 있는 콘텐츠 배달 네트워크(CDN, Content Delivery Network)입니다.  
+SignalR 서버 라이브러리는 `Microsoft.AspNetCore.App` 메타패키지에 포함되어 있습니다. JavaScript 클라이언트 라이브러리는 프로젝트에 자동으로 포함되지 않습니다. 본 자습서에서는 라이브러리 관리자(LibMan)를 사용하여 *unpkg*에서 클라이언트 라이브러리를 가져옵니다. unpkg는 Node.js의 패키지 관리자인 npm에서 찾은 모든 내용을 전달할 수 있는 콘텐츠 배달 네트워크(CDN, Content Delivery Network)입니다.    
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio/)  
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)  
 
 * **솔루션 탐색기**에서 프로젝트를 마우스 오른쪽 단추로 클릭하고 **추가** > **클라이언트 쪽 라이브러리**를 선택합니다.  
 
@@ -340,7 +340,7 @@ SignalR 서버 라이브러리는 `Microsoft.AspNetCore.App` 메타패키지에 
 
   그러면 LibMan이 *wwwroot/lib/signalr* 폴더를 생성한 다음 여기에 선택한 파일을 복사합니다.    
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code/)    
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code/)    
 
 * 통합 터미널에서 다음 명령을 실행하여 LibMan을 설치합니다.  
 
@@ -348,7 +348,7 @@ SignalR 서버 라이브러리는 `Microsoft.AspNetCore.App` 메타패키지에 
   dotnet tool install -g Microsoft.Web.LibraryManager.Cli   
   ```   
 
-* 다음 명령을 실행하고 LibMan을 사용하여 SignalR 클라이언트 라이브러리를 가져옵니다. 출력이 표시되기 전에 잠시 기다려야 할 수도 있습니다. 
+* 다음 명령을 실행하고 LibMan을 사용하여 SignalR 클라이언트 라이브러리를 가져옵니다. 출력이 표시되기 전에 잠시 기다려야 할 수도 있습니다.   
 
   ```console    
   libman install @microsoft/signalr -p unpkg -d wwwroot/lib/signalr --files dist/browser/signalr.js --files dist/browser/signalr.min.js 
@@ -367,7 +367,7 @@ SignalR 서버 라이브러리는 `Microsoft.AspNetCore.App` 메타패키지에 
   Installed library "@microsoft/signalr@3.0.1" to "wwwroot/lib/signalr" 
   ```   
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)   
+# <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)   
 
 * **터미널**에서 다음 명령을 실행하여 LibMan을 설치합니다. 
 
@@ -377,7 +377,7 @@ SignalR 서버 라이브러리는 `Microsoft.AspNetCore.App` 메타패키지에 
 
 * 프로젝트 폴더로 이동합니다(*SignalRChat.csproj* 파일을 포함하는 폴더). 
 
-* 다음 명령을 실행하고 LibMan을 사용하여 SignalR 클라이언트 라이브러리를 가져옵니다.    
+* 다음 명령을 실행하고 LibMan을 사용하여 SignalR 클라이언트 라이브러리를 가져옵니다.  
 
   ```console    
   libman install @microsoft/signalr -p unpkg -d wwwroot/lib/signalr --files dist/browser/signalr.js --files dist/browser/signalr.min.js 
@@ -398,7 +398,7 @@ SignalR 서버 라이브러리는 `Microsoft.AspNetCore.App` 메타패키지에 
 
 --- 
 
-## <a name="create-a-opno-locsignalr-hub"></a>SignalR 허브 만들기   
+## <a name="create-a-signalr-hub"></a>SignalR 허브 만들기 
 
 *허브*는 클라이언트-서버 통신을 처리하는 높은 수준의 파이프라인으로 제공되는 클래스입니다.   
 
@@ -408,21 +408,21 @@ SignalR 서버 라이브러리는 `Microsoft.AspNetCore.App` 메타패키지에 
 
   [!code-csharp[Startup](signalr/sample-snapshot/2.x/ChatHub.cs)]   
 
-  `ChatHub` 클래스는 SignalR `Hub` 클래스에서 상속합니다. `Hub` 클래스는 연결, 그룹 및 메시징을 관리합니다.  
+  `ChatHub` 클래스는 SignalR `Hub` 클래스에서 상속합니다. `Hub` 클래스는 연결, 그룹 및 메시징을 관리합니다.    
 
-  연결된 클라이언트에서 `SendMessage` 메서드를 호출하여 모든 클라이언트에 메시지를 보낼 수 있습니다. 메서드를 호출하는 JavaScript 클라이언트 코드는 자습서 뒷부분에 나와 있습니다. SignalR 코드는 최대한의 확장성을 제공할 수 있도록 비동기적입니다.    
+  연결된 클라이언트에서 `SendMessage` 메서드를 호출하여 모든 클라이언트에 메시지를 보낼 수 있습니다. 메서드를 호출하는 JavaScript 클라이언트 코드는 자습서 뒷부분에 나와 있습니다. SignalR 코드는 최대한의 확장성을 제공할 수 있도록 비동기적입니다.  
 
-## <a name="configure-opno-locsignalr"></a>SignalR 구성  
+## <a name="configure-signalr"></a>SignalR 구성    
 
-SignalR에 SignalR 요청을 전달하도록 SignalR 서버를 구성해야 합니다.    
+SignalR 서버는 SignalR에 SignalR 요청을 전달하도록 구성되어야 합니다.  
 
 * 다음 강조 표시된 코드를 *Startup.cs* 파일에 추가합니다.  
 
   [!code-csharp[Startup](signalr/sample-snapshot/2.x/Startup.cs?highlight=7,33,52-55)]  
 
-  이러한 변경 사항은 ASP.NET Core 종속성 주입 시스템 및 미들웨어 파이프라인에 SignalR을 추가합니다.  
+  이러한 변경 사항은 ASP.NET Core 종속성 주입 시스템 및 미들웨어 파이프라인에 SignalR을 추가합니다.    
 
-## <a name="add-opno-locsignalr-client-code"></a>SignalR 클라이언트 코드 추가    
+## <a name="add-signalr-client-code"></a>SignalR 클라이언트 코드 추가  
 
 * *Pages\Index.cshtml*의 콘텐츠를 다음 코드로 바꿉니다.  
 
@@ -431,8 +431,8 @@ SignalR에 SignalR 요청을 전달하도록 SignalR 서버를 구성해야 합�
   위의 코드는   
 
   * 이름 및 메시지 텍스트에 대한 텍스트 상자 및 전송 단추를 만듭니다.  
-  * SignalR 허브에서 받은 메시지를 표시하기 위해 `id="messagesList"`를 사용하여 목록을 만듭니다.   
-  * SignalR 및 *chat.js* 애플리케이션 코드(다음 단계에서 만듦)에 대한 참조를 포함합니다.    
+  * SignalR 허브에서 받은 메시지를 표시하기 위해 `id="messagesList"`를 사용하여 목록을 만듭니다. 
+  * SignalR에 대한 스크립트 참조 및 다음 단계에서 만드는 *chat.js* 애플리케이션 코드를 포함합니다.  
 
 * *wwwroot/js* 폴더에서 다음 코드를 사용하여 *chat.js* 파일을 만듭니다.  
 
@@ -446,11 +446,11 @@ SignalR에 SignalR 요청을 전달하도록 SignalR 서버를 구성해야 합�
 
 ## <a name="run-the-app"></a>앱 실행  
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)   
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)   
 
 * **CTRL+F5** 키를 눌러 디버깅 없이 앱을 실행합니다.   
 
-# <a name="visual-studio-codetabvisual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) 
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code) 
 
 * 통합 터미널에서 다음 명령을 실행합니다.    
 
@@ -458,7 +458,7 @@ SignalR에 SignalR 요청을 전달하도록 SignalR 서버를 구성해야 합�
   dotnet run -p SignalRChat.csproj
   ```
 
-# <a name="visual-studio-for-mactabvisual-studio-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
 * 메뉴에서 **실행 > 디버깅하지 않고 시작**을 선택합니다.
 

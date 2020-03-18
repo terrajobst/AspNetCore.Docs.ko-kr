@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 03/07/2019
 uid: spa/react
-ms.openlocfilehash: bbe5328bfa5b4187989a00c3c94e98dabc5d032a
-ms.sourcegitcommit: 032113208bb55ecfb2faeb6d3e9ea44eea827950
-ms.translationtype: MT
+ms.openlocfilehash: 9703a62eb7f779974382fe0fb01702d9fcd37d64
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/31/2019
-ms.locfileid: "73190522"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78649755"
 ---
 # <a name="use-the-react-project-template-with-aspnet-core"></a>ASP.NET Core에 React 프로젝트 템플릿 사용
 
@@ -20,7 +20,7 @@ ms.locfileid: "73190522"
 
 이 템플릿은 API 백 엔드로 사용되는 ASP.NET Core 프로젝트 및 UI로 사용되는 표준 CRA React 프로젝트를 둘 다 만드는 것과 동일하지만, 단일 단위로 빌드 및 게시할 수 있는 단일 앱 프로젝트에 두 프로젝트를 모두 편리하게 호스트할 수 있습니다.
 
-반응 프로젝트 템플릿은 SSR (서버 쪽 렌더링)를 위한 것이 아닙니다. 반응 및 node.js가 있는 SSR의 경우 [다음 .js](https://github.com/zeit/next.js/) 또는 [Razzle](https://github.com/jaredpalmer/razzle)을 고려 하세요.
+React 프로젝트 템플릿은 SSR(서버 쪽 렌더링)에 사용되지 않습니다. React 및 Node.js를 사용하는 SSR의 경우 [Next.js](https://github.com/zeit/next.js/) 또는 [Razzle](https://github.com/jaredpalmer/razzle)을 고려합니다.
 
 ## <a name="create-a-new-app"></a>새 앱 만들기
 
@@ -35,13 +35,13 @@ cd my-new-app
 
 Visual Studio 또는 .NET Core CLI에서 앱을 실행합니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 생성된 *.csproj* 파일을 열고 여기에서 정상적으로 앱을 실행합니다.
 
 빌드 프로세스는 첫 번째 실행에서 npm 종속성을 복원하고 이 작업에는 몇 분 정도 소요될 수 있습니다. 후속 빌드는 훨씬 더 빠릅니다.
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 `Development` 값을 가진 `ASPNETCORE_Environment` 환경 변수가 있는지 확인합니다. Windows(PowerShell 이외의 프롬프트)에서 `SET ASPNETCORE_Environment=Development`를 실행합니다. Linux 또는 macOS에서 `export ASPNETCORE_Environment=Development`를 실행합니다.
 
@@ -55,13 +55,13 @@ Visual Studio 또는 .NET Core CLI에서 앱을 실행합니다.
 
 ## <a name="add-pages-images-styles-modules-etc"></a>페이지, 이미지, 스타일, 모듈 등을 추가합니다.
 
-*ClientApp* 디렉터리는 표준 CRA React 앱입니다. 자세한 내용은 공식 [CRA 설명서](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md)를 참조하세요.
+*ClientApp* 디렉터리는 표준 CRA React 앱입니다. 자세한 내용은 공식 [CRA 설명서](https://create-react-app.dev/docs/getting-started/)를 참조하세요.
 
 이 템플릿에서 만들어진 React 앱과 CRA 자체에서 만들어진 앱 간에는 약간 차이가 있지만 앱의 기능은 변경되지 않습니다. 템플릿에서 만들어진 앱에는 [부트스트랩](https://getbootstrap.com/) 기반 레이아웃 및 기본 라우팅 예제가 포함됩니다.
 
 ## <a name="install-npm-packages"></a>npm 패키지 설치
 
-타사 npm 패키지를 설치하려면 *ClientApp* 하위 디렉터리에서 명령 프롬프트를 사용합니다. 예를 들면,
+타사 npm 패키지를 설치하려면 *ClientApp* 하위 디렉터리에서 명령 프롬프트를 사용합니다. 예를 들어:
 
 ```console
 cd ClientApp
@@ -82,7 +82,7 @@ npm install --save <package_name>
 
 이 기본 설정에는 단점이 있습니다. C# 코드를 수정하고 ASP.NET Core 앱을 다시 시작해야 할 때마다 CRA 서버가 다시 시작됩니다. 백업을 시작하려면 몇 초 정도가 필요합니다. C# 코드를 자주 편집하고 있고 CRA 서버가 다시 시작될 때까지 기다리지 않으려면 ASP.NET Core 프로세스와는 별도로 CRA 서버를 외부에서 실행합니다. 이를 수행하려면:
 
-1. 다음 설정을 사용 하 여 *ClientApp* 하위 디렉터리에 env 파일을 추가 *합니다* .
+1. 다음 설정을 사용하여 *ClientApp* 하위 디렉터리에 *.env* 파일을 추가합니다.
 
     ```
     BROWSER=none
@@ -106,7 +106,7 @@ npm install --save <package_name>
 ASP.NET Core 앱을 시작할 때 CRA 서버는 시작되지 않습니다. 수동으로 시작한 인스턴스가 대신 사용됩니다. 이를 통해 더 빠르게 시작하고 다시 시작할 수 있습니다. 더 이상 React 앱이 매번 다시 빌드할 때까지 기다리지 않습니다.
 
 > [!IMPORTANT]
-> "서버 쪽 렌더링"은이 템플릿에서 지원 되지 않는 기능입니다. 이 템플릿의 목표는 "-반응-앱"을 사용 하 여 패리티를 충족 하는 것입니다. 따라서 "SSR와 같은" 만들기-응답-앱 "프로젝트에 포함 되지 않은 시나리오와 기능은 지원 되지 않으며 사용자를 위한 연습으로 남아 있습니다.
+> “서버 쪽 렌더링”은 이 템플릿에서 지원되는 기능이 아닙니다. 이 템플릿의 목표는 “create-react-app”을 사용하여 패리티를 충족하는 것입니다. 따라서 “create-react-app” 프로젝트에 포함되지 않은 시나리오와 기능(예: SSR)은 지원되지 않으며, 사용자를 위한 연습으로 유지되었습니다.
 
 ## <a name="additional-resources"></a>추가 자료
 

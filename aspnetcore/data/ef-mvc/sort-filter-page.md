@@ -6,12 +6,12 @@ ms.author: riande
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/sort-filter-page
-ms.openlocfilehash: c4d50b72c5508d52b17c6754b6d8e77c1a3903b6
-ms.sourcegitcommit: 7d3c6565dda6241eb13f9a8e1e1fd89b1cfe4d18
+ms.openlocfilehash: 99bf9ed59b47e8fbba838b97c3e032b9808f6a94
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/11/2019
-ms.locfileid: "72259349"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78646053"
 ---
 # <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>자습서: 정렬, 필터링 및 페이징 추가 - ASP.NET MVC 및 EF Core 사용
 
@@ -21,7 +21,7 @@ ms.locfileid: "72259349"
 
 ![학생 인덱스 페이지](sort-filter-page/_static/paging.png)
 
-이 자습서에서는 다음을 수행했습니다.
+이 자습서에서는 다음과 같은 작업을 수행합니다.
 
 > [!div class="checklist"]
 > * 열 정렬 링크 추가
@@ -31,7 +31,7 @@ ms.locfileid: "72259349"
 > * 페이징 링크 추가
 > * 정보 페이지 만들기
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 * [CRUD 기능 구현](crud.md)
 
@@ -101,7 +101,7 @@ Student 인덱스 페이지에 정렬을 추가하려면 Students 컨트롤러�
 
 [!code-html[](intro/samples/cu/Views/Students/Index3.cshtml?range=9-23&highlight=5-13)]
 
-이 코드에서는 `<form>` [태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하여 검색 텍스트 상자 및 단추를 추가합니다. 기본적으로는 `<form>` 태그 도우미는 폼 데이터를 POST로 제출합니다. 즉, 매개 변수를 URL에 쿼리 문자열로 전달하지 않고 HTTP 메시지 본문으로 전달합니다. HTTP GET을 지정하면 폼 데이터가 URL에 쿼리 문자열로 전달되고 이를 통해 사용자는 URL을 책갈피로 지정할 수 있습니다. W3C 지침에 따라 작업이 업데이트되지 않을 때 GET을 사용해야 합니다.
+이 코드는 `<form>` [태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하여 검색 텍스트 상자 및 단추를 추가합니다. 기본적으로는 `<form>` 태그 도우미는 폼 데이터를 POST로 제출합니다. 즉, 매개 변수를 URL에 쿼리 문자열로 전달하지 않고 HTTP 메시지 본문으로 전달합니다. HTTP GET을 지정하면 폼 데이터가 URL에 쿼리 문자열로 전달되고 이를 통해 사용자는 URL을 책갈피로 지정할 수 있습니다. W3C 지침에 따라 작업이 업데이트되지 않을 때 GET을 사용해야 합니다.
 
 앱을 실행하고 **Students(학생)** 탭을 선택하며 검색 문자열을 입력한 후 [검색]을 클릭하여 필터링이 작동하는지 확인합니다.
 
@@ -248,11 +248,11 @@ LINQ 문은 등록 날짜별로 학생 엔터티를 그룹화하고 각 그룹�
 
 ## <a name="get-the-code"></a>코드 가져오기
 
-[완성된 애플리케이션을 다운로드하거나 확인합니다.](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[완성된 애플리케이션을 다운로드하거나 확인합니다.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="next-steps"></a>다음 단계
 
-이 자습서에서는 다음을 수행했습니다.
+이 자습서에서는 다음과 같은 작업을 수행합니다.
 
 > [!div class="checklist"]
 > * 열 정렬 링크 추가

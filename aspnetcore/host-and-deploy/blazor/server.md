@@ -5,17 +5,17 @@ description: ASP.NET Core를 사용하여 Blazor 서버 앱을 호스트 및 배
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/15/2020
+ms.date: 03/03/2020
 no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/server
-ms.openlocfilehash: 42321b8564524fec41104ccaf1ac47981d014c94
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 866bb348180c872d8ab20787283cfb7217183a8d
+ms.sourcegitcommit: 3ca4a2235a8129def9e480d0a6ad54cc856920ec
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78647361"
+ms.lasthandoff: 03/10/2020
+ms.locfileid: "79025421"
 ---
 # <a name="host-and-deploy-opno-locblazor-server"></a>Blazor 서버 호스트 및 배포
 
@@ -110,14 +110,40 @@ metadata:
 
 #### <a name="linux-with-nginx"></a>Nginx를 사용하는 Linux
 
-SignalR Websocket이 제대로 작동하려면 프록시의 `Upgrade` 및 `Connection` 헤더를 다음으로 설정합니다.
+SignalR WebSocket이 제대로 작동하려면 프록시의 `Upgrade` 및 `Connection` 헤더가 다음 값으로 설정되고 다음 중 하나에 `$connection_upgrade`가 매핑되었는지 확인합니다.
+
+* 기본적으로 업그레이드 헤더 값입니다.
+* `close` 업그레이드 헤더가 없거나 비어 있는 경우입니다.
 
 ```
-proxy_set_header Upgrade $http_upgrade;
-proxy_set_header Connection $connection_upgrade;
+http {
+    map $http_upgrade $connection_upgrade {
+        default Upgrade;
+        ''      close;
+    }
+
+    server {
+        listen      80;
+        server_name example.com *.example.com
+        location / {
+            proxy_pass         http://localhost:5000;
+            proxy_http_version 1.1;
+            proxy_set_header   Upgrade $http_upgrade;
+            proxy_set_header   Connection $connection_upgrade;
+            proxy_set_header   Host $host;
+            proxy_cache_bypass $http_upgrade;
+            proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Proto $scheme;
+        }
+    }
+}
 ```
 
-자세한 내용은 [NGINX as a WebSocket Proxy](https://www.nginx.com/blog/websocket-nginx/)(NGINX를 WebSocket 프록시로 사용)를 참조하세요.
+자세한 내용은 다음 항목을 참조하세요.
+
+* [WebSocket Proxy로 활용하는 NGINX](https://www.nginx.com/blog/websocket-nginx/)
+* [WebSocket 프록시](http://nginx.org/docs/http/websocket.html)
+* <xref:host-and-deploy/linux-nginx>
 
 ### <a name="measure-network-latency"></a>네트워크 대기 시간 측정
 

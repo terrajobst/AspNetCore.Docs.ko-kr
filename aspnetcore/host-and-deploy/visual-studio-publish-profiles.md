@@ -8,11 +8,11 @@ ms.custom: mvc
 ms.date: 11/07/2019
 uid: host-and-deploy/visual-studio-publish-profiles
 ms.openlocfilehash: 274dd2cd528d3766aa07f69aac3470a131c79ffe
-ms.sourcegitcommit: 67116718dc33a7a01696d41af38590fdbb58e014
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 11/07/2019
-ms.locfileid: "73799345"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78647349"
 ---
 # <a name="visual-studio-publish-profiles-pubxml-for-aspnet-core-app-deployment"></a>ASP.NET Core 앱 배포용 Visual Studio 게시 프로필(.pubxml)
 
@@ -70,7 +70,7 @@ ASP.NET Core 프로젝트가 프로젝트 파일의 `Microsoft.NET.Sdk.Web`을 �
 
 ## <a name="basic-command-line-publishing"></a>기본 명령줄 게시
 
-명령줄 게시는 모든 .NET Core 지원 플랫폼에 적용되며 Visual Studio가 필요하지 않습니다. 다음 예제에서 .NET COre CLI의 [dotnet publish](/dotnet/core/tools/dotnet-publish) 명령은 *.csproj* 파일이 포함된 프로젝트 디렉터리에서 실행됩니다. 프로젝트 폴더가 현재 작업 디렉터리가 아닌 경우 프로젝트 파일 경로에서 명시적으로 전달합니다. 예:
+명령줄 게시는 모든 .NET Core 지원 플랫폼에 적용되며 Visual Studio가 필요하지 않습니다. 다음 예제에서 .NET COre CLI의 [dotnet publish](/dotnet/core/tools/dotnet-publish) 명령은 *.csproj* 파일이 포함된 프로젝트 디렉터리에서 실행됩니다. 프로젝트 폴더가 현재 작업 디렉터리가 아닌 경우 프로젝트 파일 경로에서 명시적으로 전달합니다. 예를 들어:
 
 ```dotnetcli
 dotnet publish C:\Webs\Web1
@@ -465,7 +465,7 @@ Done Building Project "C:\Webs\Web1\Web1.csproj" (default targets).
 
 [!code-xml[](visual-studio-publish-profiles/samples/Web1.pubxml?highlight=18-23)]
 
-앞의 예제에서는 `Include` 특성에 제공된 파일을 항상 게시된 사이트로 복사하는 것이 기본 동작인 `ResolvedFileToPublish` 항목을 사용합니다. `Never` 또는 `PreserveNewest`의 내부 텍스트와 함께 `<CopyToPublishDirectory>` 자식 요소를 포함하여 기본 동작을 재정의합니다. 예:
+앞의 예제에서는 `Include` 특성에 제공된 파일을 항상 게시된 사이트로 복사하는 것이 기본 동작인 `ResolvedFileToPublish` 항목을 사용합니다. `Never` 또는 `PreserveNewest`의 내부 텍스트와 함께 `<CopyToPublishDirectory>` 자식 요소를 포함하여 기본 동작을 재정의합니다. 예를 들어:
 
 ```xml
 <ResolvedFileToPublish Include="..\ReadMe2.md">
@@ -501,7 +501,7 @@ Done Building Project "C:\Webs\Web1\Web1.csproj" (default targets).
 
 ## <a name="the-kudu-service"></a>Kudu 서비스
 
-Azure App Service 웹앱 배포에 있는 파일을 보려면 [Kudu 서비스](https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service)를 사용합니다. `scm` 토큰을 웹앱 이름에 추가합니다. 예:
+Azure App Service 웹앱 배포에 있는 파일을 보려면 [Kudu 서비스](https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service)를 사용합니다. `scm` 토큰을 웹앱 이름에 추가합니다. 예를 들어:
 
 | URL                                    | 결과       |
 | -------------------------------------- | ------------ |

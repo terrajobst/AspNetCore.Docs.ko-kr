@@ -7,12 +7,12 @@ ms.author: jukotali
 ms.custom: mvc
 ms.date: 08/29/2019
 uid: fundamentals/middleware/request-response
-ms.openlocfilehash: 5e531c0ce0ed48097054fd81ddc3655a66cc7c5f
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
+ms.openlocfilehash: b473fa02e1d23f02bc5d2e15fa54ab7b1dbbb17c
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71081682"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78650835"
 ---
 # <a name="request-and-response-operations-in-aspnet-core"></a>ASP.NET Core의 요청 및 응답 작업
 
@@ -22,7 +22,7 @@ ms.locfileid: "71081682"
 
 요청 및 응답 본문에 대한 두 가지 추상(<xref:System.IO.Stream> 및 <xref:System.IO.Pipelines.Pipe>)이 있습니다. 요청 읽기에서 [HttpRequest.Body](xref:Microsoft.AspNetCore.Http.HttpRequest.Body)는 <xref:System.IO.Stream>이고, `HttpRequest.BodyReader`는 <xref:System.IO.Pipelines.PipeReader>입니다. 응답 쓰기에서 [HttpResponse.Body](xref:Microsoft.AspNetCore.Http.HttpResponse.Body)는 <xref:System.IO.Stream>이고 `HttpResponse.BodyWriter`는 <xref:System.IO.Pipelines.PipeWriter>입니다.
 
-스트림보다 파이프라인이 권장됩니다. 일부 간단한 작업에서는 스트림이 더 편리할 수도 있지만, 파이프라인은 성능상의 장점이 있고 대부분의 시나리오에서 더 편리합니다. ASP.NET Core는 내부적으로 스트림 대신 파이프라인을 사용하기 시작했습니다. 다음과 같은 경우를 예로 들 수 있습니다.
+스트림보다 [Pipelines](/dotnet/standard/io/pipelines)를 사용하는 것이 좋습니다. 일부 간단한 작업에서는 스트림이 더 편리할 수도 있지만, 파이프라인은 성능상의 장점이 있고 대부분의 시나리오에서 더 편리합니다. ASP.NET Core는 내부적으로 스트림 대신 파이프라인을 사용하기 시작했습니다. 다음과 같은 경우를 예로 들 수 있습니다.
 
 * `FormReader`
 * `TextReader`
@@ -36,6 +36,7 @@ ms.locfileid: "71081682"
 새 줄에서 분할하여 전체 요청 본문을 문자열 목록으로 읽는 미들웨어를 만들려 한다고 가정해 보겠습니다. 단순 스트림 구현은 다음 예제와 같이 표시될 수 있습니다.
 
 [!code-csharp[](request-response/samples/3.x/RequestResponseSample/Startup.cs?name=GetListOfStringsFromStream)]
+[!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
 이 코드는 실행되지만 다음과 같은 몇 가지 문제가 있습니다.
 

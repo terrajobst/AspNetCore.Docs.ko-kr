@@ -1,46 +1,46 @@
 ---
-title: 도구 및 다운로드-ASP.NET Core 및 Azure를 사용 하 여 DevOps
+title: 도구 및 다운로드 - ASP.NET Core 및 Azure와 DevOps
 author: CamSoper
-description: ASP.NET Core 및 Azure를 사용 하 여 DevOps에 필요한 다운로드 및 도구입니다.
+description: ASP.NET Core 및 Azure를 사용하는 DevOps에 필요한 도구 및 다운로드입니다.
 ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 uid: azure/devops/tools-and-downloads
 ms.openlocfilehash: 25ce311373b0aaddfa3bc2728c39e503acbca69d
-ms.sourcegitcommit: 215954a638d24124f791024c66fd4fb9109fd380
-ms.translationtype: MT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 09/18/2019
-ms.locfileid: "71080632"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78647445"
 ---
 # <a name="tools-and-downloads"></a>도구 및 다운로드
 
-Azure에 프로 비전 및와 같은 리소스를 관리 하기 위한 몇 가지 인터페이스를 [Azure portal](https://portal.azure.com)를 [Azure CLI](/cli/azure/)를 [Azure PowerShell](/powershell/azure/overview), [Azure 클라우드 셸](https://shell.azure.com/bash), 및 Visual Studio입니다. 이 가이드는 최소 방식을 사용 하 고는 데 필요한 단계를 줄이기 위해 가능 하면 Azure Cloud Shell를 사용 합니다. 그러나 일부에 대 한 Azure portal은 사용 해야 합니다.
+Azure에는 [Azure Portal](https://portal.azure.com), [Azure CLI](/cli/azure/), [Azure PowerShell](/powershell/azure/overview), [Azure Cloud Shell](https://shell.azure.com/bash) 및 Visual Studio와 같이 리소스를 프로비저닝하고 관리하기 위한 몇 가지 인터페이스가 있습니다. 이 가이드에서는 미니멀리스트 방법을 사용하며, 필요한 단계를 줄이기 위해 가능한 경우 항상 Azure Cloud Shell을 사용합니다. 그러나 Azure Portal을 사용해야 하는 부분도 있습니다.
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
-다음 구독이 필요 합니다.
+다음 구독이 필요합니다.
 
-* Azure &mdash; 계정이 없다면 [무료 평가판 받기](https://azure.microsoft.com/free/)합니다.
-* Azure DevOps 서비스 &mdash; Azure DevOps 구독 및 조직 4 장의 만들어집니다.
-* GitHub &mdash; 계정이 없다면 [무료로 등록](https://github.com/join)합니다.
+* Azure - 계정이 없는 경우 [평가판을 다운로드](https://azure.microsoft.com/free/)합니다.
+* Azure DevOps Services - 4장에서 Azure DevOps 구독과 조직을 만듭니다.
+* GitHub - 계정이 없는 경우 [체험 등록](https://github.com/join)합니다.
 
-다음 도구가 필요 합니다.
+다음 도구가 필요합니다.
 
-* [Git](https://git-scm.com/downloads) &mdash; Git에 대 한 기본적인 이해는이 가이드에 권장 됩니다. 검토 합니다 [Git 설명서](https://git-scm.com/doc), 특히 [git 원격](https://git-scm.com/docs/git-remote) 하 고 [git 푸시](https://git-scm.com/docs/git-push)합니다.
-* [.NET core SDK](https://www.microsoft.com/net/download/) &mdash; 2.1.300 버전을 빌드하고 샘플 앱을 실행 하려면 나중에 필요 합니다. Visual Studio가 설치 된 경우는 **.NET Core 플랫폼 간 개발** 워크 로드를.NET Core SDK가 이미 설치 되어 있습니다.
+* [Git](https://git-scm.com/downloads) - 이 가이드를 수행하려면 Git의 기본 사항을 알아두는 것이 좋습니다. [Git 설명서](https://git-scm.com/doc), 특히 [git remote](https://git-scm.com/docs/git-remote) 및 [git push](https://git-scm.com/docs/git-push)를 검토합니다.
+* [.NET Core SDK](https://www.microsoft.com/net/download/) - 샘플 앱을 빌드하고 실행하려면 버전 2.1.300 이상이 필요합니다. **.NET Core 플랫폼 간 개발** 워크로드를 사용하여 Visual Studio를 설치한 경우에는 .NET Core SDK가 이미 설치되어 있습니다.
 
-    .NET Core SDK 설치를 확인 합니다. 명령 셸을 열고 다음 명령을 실행 합니다.
+    .NET Core SDK 설치를 확인합니다. 명령 셸을 열고 다음 명령을 실행합니다.
 
     ```dotnetcli
     dotnet --version
     ```
 
-## <a name="recommended-tools-windows-only"></a>권장된 도구 (Windows만 해당)
+## <a name="recommended-tools-windows-only"></a>권장 도구(Windows만 해당)
 
-* [Visual Studio](https://visualstudio.microsoft.com)의 강력한 Azure 도구 GUI에 대 한 제공 대부분의 기능에이 가이드에서 설명 합니다. 무료 Visual Studio Community Edition을 비롯 한 모든 버전의 Visual Studio 작동 합니다. 자습서를 사용 하 여와 Visual Studio 없이 개발, 배포 및 DevOps를 보여 주기 위해 기록 됩니다.
+* [Visual Studio](https://visualstudio.microsoft.com)의 강력한 Azure 도구는 이 가이드에서 설명하는 대부분의 기능에 대한 GUI를 제공합니다. 체험 Visual Studio Community Edition을 포함하여 모든 Visual Studio 버전이 작동합니다. 이 자습서는 Visual Studio를 사용하는 경우와 사용하지 않는 경우의 개발, 배포 및 DevOps를 보여 주기 위해 작성되었습니다.
 
-  Visual Studio에는 다음이 있는지 확인 [워크 로드](/visualstudio/install/modify-visual-studio) 설치:
+  Visual Studio에 다음 [워크로드](/visualstudio/install/modify-visual-studio)가 설치되어 있는지 확인합니다.
 
   * ASP.NET 및 웹 개발
   * Azure 개발

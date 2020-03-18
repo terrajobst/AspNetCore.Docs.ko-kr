@@ -8,11 +8,11 @@ ms.custom: mvc
 ms.date: 02/13/2019
 uid: spa/react-with-redux
 ms.openlocfilehash: ed2e9aea449ddb09fef049a391f40f57452786a8
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
-ms.translationtype: MT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64893690"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78646467"
 ---
 # <a name="use-the-react-with-redux-project-template-with-aspnet-core"></a>ASP.NET Core와 함께 React-with-Redux 프로젝트 템플릿 사용
 
@@ -20,4 +20,4 @@ ms.locfileid: "64893690"
 
 프로젝트 만들기 명령을 제외하고 React-with-Redux 템플릿에 대한 모든 정보는 React 템플릿과 동일합니다. 이 프로젝트 형식을 만들려면 `dotnet new react` 대신 `dotnet new reactredux`를 실행합니다. React 기반 템플릿에 공통적인 기능에 대한 자세한 내용은 [React 템플릿 설명서](xref:spa/react)를 참조하세요.
 
-React와 Redux 하위 응용 프로그램을 IIS의 구성에 대 한 자세한 내용은 [ReactRedux 템플릿 2.1: IIS에서 SPA를 사용할 수 없습니다. (aspnet/Templating &num;555)](https://github.com/aspnet/Templating/issues/555)합니다.
+IIS에서 React-with-Redux 하위 애플리케이션을 구성하는 방법에 대한 자세한 내용은 [ReactRedux 템플릿 2.1: IIS에서 SPA를 사용할 수 없음(aspnet/Templating &num;555)](https://github.com/aspnet/Templating/issues/555)을 참조하세요.

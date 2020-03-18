@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/03/2020
 uid: security/authentication/index
-ms.openlocfilehash: 24113fd4f090cf76746a7b077212fdab012f82c1
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 404904ecfa30d1fe7e47f0daaa423ddd6f1b06e8
+ms.sourcegitcommit: 5bdc54162d7dea8d9fa54ac3055678db23586af1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78644361"
+ms.lasthandoff: 03/17/2020
+ms.locfileid: "79434332"
 ---
 # <a name="overview-of-aspnet-core-authentication"></a>ASP.NET Core 인증 개요
 
@@ -110,6 +110,18 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 * [작업 리소스 처리기를 사용하는 챌린지 및 금지](xref:security/authorization/resourcebased#challenge-and-forbid-with-an-operational-resource-handler)
 * [챌린지와 금지 간의 차이](xref:security/authorization/secure-data#challenge).
+
+## <a name="authentication-providers-per-tenant"></a>테넌트당 인증 공급자
+
+ASP.NET Core 프레임워크에는 다중 테넌트 인증을 위한 기본 제공 솔루션이 없습니다.
+고객이 기본 제공 기능을 사용하여 쓸 수 있는 것은 분명하지만, 이러한 목적을 위해 [Orchard Core](https://www.orchardcore.net/)를 조사하는 것이 좋습니다.
+
+Orchard Core는 다음과 같습니다.
+
+* ASP.NET Core로 빌드된 오픈 소스 모듈형 및 다중 테넌트 앱 프레임워크입니다.
+* 해당 앱 프레임워크 위에 빌드된 콘텐츠 관리 시스템(CMS)입니다.
+
+테넌트당 인증 공급자의 예는 [Orchard Core](https://github.com/OrchardCMS/OrchardCore) 소스를 참조하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 
