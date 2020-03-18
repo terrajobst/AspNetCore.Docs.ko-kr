@@ -1,0 +1,215 @@
+---
+title: ASP.NET Core Blazor의 JavaScript 함수에서 .NET 메서드 호출
+author: guardrex
+description: Blazor 앱의 JavaScript 함수에서 .NET 메서드를 호출하는 방법을 알아봅니다.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 02/19/2020
+no-loc:
+- Blazor
+- SignalR
+uid: blazor/call-dotnet-from-javascript
+ms.openlocfilehash: f4964341e261c65269eedafbbd6e676c1054f427
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78647409"
+---
+# <a name="call-net-methods-from-javascript-functions-in-aspnet-core-opno-locblazor"></a>ASP.NET Core Blazor의 JavaScript 함수에서 .NET 메서드 호출
+
+작성자: [Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27) 및 [Luke Latham](https://github.com/guardrex)
+
+[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
+
+Blazor 앱은 .NET 메서드에서 JavaScript 함수를 호출하고 JavaScript 함수에서 .NET 메서드를 호출할 수 있습니다. 이러한 시나리오를 *JavaScript 상호 운용성*(*JS interop*)이라고 합니다.
+
+이 문서에서는 JavaScript에서 .NET 메서드를 호출하는 방법을 설명합니다. .NET에서 JavaScript 함수를 호출하는 방법에 대한 내용은 <xref:blazor/call-javascript-from-dotnet>을 참조하세요.
+
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
+
+## <a name="static-net-method-call"></a>정적 .NET 메서드 호출
+
+JavaScript에서 정적 .NET 메서드를 호출하려면 `DotNet.invokeMethod` 또는 `DotNet.invokeMethodAsync` 함수를 사용합니다. 호출할 정적 메서드의 식별자, 함수를 포함하는 어셈블리의 이름 및 인수를 전달합니다. 비동기 버전은 Blazor 서버 시나리오를 지원하기 위해 선호됩니다. .NET 메서드는 public, static이며 `[JSInvokable]` 특성이 있어야 합니다. 개방형 제네릭 메서드를 호출하는 것은 현재 지원되지 않습니다.
+
+샘플 앱에는 `int` 배열을 반환하기 위한 C# 메서드가 포함되어 있습니다. `JSInvokable` 특성이 메서드에 적용됩니다.
+
+*Pages/JsInterop.razor*:
+
+```razor
+<button type="button" class="btn btn-primary"
+        onclick="exampleJsFunctions.returnArrayAsyncJs()">
+    Trigger .NET static method ReturnArrayAsync
+</button>
+
+@code {
+    [JSInvokable]
+    public static Task<int[]> ReturnArrayAsync()
+    {
+        return Task.FromResult(new int[] { 1, 2, 3 });
+    }
+}
+```
+
+클라이언트에 제공된 JavaScript는 C# .Net 메서드를 호출합니다.
+
+*wwwroot/exampleJsInterop.js*:
+
+[!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=8-14)]
+
+**.NET 정적 메서드 ReturnArrayAsync 트리거** 단추를 선택한 경우 브라우저의 웹 개발자 도구에서 콘솔 출력을 검사합니다.
+
+콘솔 출력은 다음과 같습니다.
+
+```console
+Array(4) [ 1, 2, 3, 4 ]
+```
+
+네 번째 배열 값은 `ReturnArrayAsync`에서 반환된 배열(`data.push(4);`)로 푸시됩니다.
+
+기본적으로 메서드 식별자는 메서드 이름이지만 `JSInvokableAttribute` 생성자를 사용하여 다른 식별자를 지정할 수 있습니다.
+
+```csharp
+@code {
+    [JSInvokable("DifferentMethodName")]
+    public static Task<int[]> ReturnArrayAsync()
+    {
+        return Task.FromResult(new int[] { 1, 2, 3 });
+    }
+}
+```
+
+클라이언트 쪽 JavaScript 파일에서 다음을 실행합니다.
+
+```javascript
+returnArrayAsyncJs: function () {
+  DotNet.invokeMethodAsync('BlazorSample', 'DifferentMethodName')
+    .then(data => {
+      data.push(4);
+      console.log(data);
+    });
+}
+```
+
+## <a name="instance-method-call"></a>인스턴스 메서드 호출
+
+JavaScript에서 .NET 인스턴스 메서드를 호출할 수도 있습니다. JavaScript에서 .NET 인스턴스 메서드를 호출하려면 다음을 수행합니다.
+
+* JavaScript에 대한 참조로 .NET 인스턴스를 전달합니다.
+  * `DotNetObjectReference.Create`에 대한 정적 호출을 수행합니다.
+  * 인스턴스를 `DotNetObjectReference` 인스턴스로 래핑하고 `DotNetObjectReference` 인스턴스에서 `Create`를 호출합니다. `DotNetObjectReference` 개체를 삭제합니다. 이 섹션의 뒷부분을 참조하세요.
+* `invokeMethod` 또는 `invokeMethodAsync` 함수를 사용하여 인스턴스에서 .NET 인스턴스 메서드를 호출합니다. JavaScript에서 다른 .NET 메서드를 호출할 때 .NET 인스턴스를 인수로 전달할 수도 있습니다.
+
+> [!NOTE]
+> 샘플 앱은 클라이언트 쪽 콘솔에 메시지를 로깅합니다. 샘플 앱에서 보여 주는 다음 예제에서는 브라우저의 개발자 도구에서 브라우저의 콘솔 출력을 검사합니다.
+
+**.NET 인스턴스 메서드 HelloHelper.SayHello 트리거** 단추를 선택하면 `ExampleJsInterop.CallHelloHelperSayHello`가 호출되고 메서드에 이름 `Blazor`가 전달됩니다.
+
+*Pages/JsInterop.razor*:
+
+```razor
+<button type="button" class="btn btn-primary" @onclick="TriggerNetInstanceMethod">
+    Trigger .NET instance method HelloHelper.SayHello
+</button>
+
+@code {
+    public async Task TriggerNetInstanceMethod()
+    {
+        var exampleJsInterop = new ExampleJsInterop(JSRuntime);
+        await exampleJsInterop.CallHelloHelperSayHello("Blazor");
+    }
+}
+```
+
+`CallHelloHelperSayHello`는 `HelloHelper`의 새 인스턴스를 사용하여 JavaScript 함수 `sayHello`를 호출합니다.
+
+*JsInteropClasses/ExampleJsInterop.cs*:
+
+[!code-csharp[](./common/samples/3.x/BlazorWebAssemblySample/JsInteropClasses/ExampleJsInterop.cs?name=snippet1&highlight=10-16)]
+
+*wwwroot/exampleJsInterop.js*:
+
+[!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=15-18)]
+
+이 이름은 `HelloHelper.Name` 속성을 설정하는 `HelloHelper`의 생성자에 전달됩니다. JavaScript 함수 `sayHello`가 실행되면 `HelloHelper.SayHello`는 JavaScript 함수를 통해 콘솔에 기록되는 `Hello, {Name}!` 메시지를 반환합니다.
+
+*JsInteropClasses/HelloHelper.cs*:
+
+[!code-csharp[](./common/samples/3.x/BlazorWebAssemblySample/JsInteropClasses/HelloHelper.cs?name=snippet1&highlight=5,10-11)]
+
+브라우저의 웹 개발자 도구에 있는 콘솔 출력:
+
+```console
+Hello, Blazor!
+```
+
+`DotNetObjectReference`를 만드는 구성 요소에서 메모리 누수를 방지하고 가비지 수집을 허용하려면 `DotNetObjectReference` 인스턴스를 만든 클래스에서 개체를 삭제합니다.
+
+```csharp
+public class ExampleJsInterop : IDisposable
+{
+    private readonly IJSRuntime _jsRuntime;
+    private DotNetObjectReference<HelloHelper> _objRef;
+
+    public ExampleJsInterop(IJSRuntime jsRuntime)
+    {
+        _jsRuntime = jsRuntime;
+    }
+
+    public ValueTask<string> CallHelloHelperSayHello(string name)
+    {
+        _objRef = DotNetObjectReference.Create(new HelloHelper(name));
+
+        return _jsRuntime.InvokeAsync<string>(
+            "exampleJsFunctions.sayHello",
+            _objRef);
+    }
+
+    public void Dispose()
+    {
+        _objRef?.Dispose();
+    }
+}
+```
+  
+`ExampleJsInterop` 클래스에 표시된 이전 패턴은 구성 요소에서 구현될 수도 있습니다.
+  
+```razor
+@page "/JSInteropComponent"
+@using BlazorSample.JsInteropClasses
+@implements IDisposable
+@inject IJSRuntime JSRuntime
+
+<h1>JavaScript Interop</h1>
+
+<button type="button" class="btn btn-primary" @onclick="TriggerNetInstanceMethod">
+    Trigger .NET instance method HelloHelper.SayHello
+</button>
+
+@code {
+    private DotNetObjectReference<HelloHelper> _objRef;
+
+    public async Task TriggerNetInstanceMethod()
+    {
+        _objRef = DotNetObjectReference.Create(new HelloHelper("Blazor"));
+
+        await JSRuntime.InvokeAsync<string>(
+            "exampleJsFunctions.sayHello",
+            _objRef);
+    }
+
+    public void Dispose()
+    {
+        _objRef?.Dispose();
+    }
+}
+```
+
+[!INCLUDE[Share interop code in a class library](~/includes/blazor-share-interop-code.md)]
+
+## <a name="additional-resources"></a>추가 자료
+
+* <xref:blazor/call-javascript-from-dotnet>
+* [InteropComponent.razor 예제(dotnet/AspNetCore GitHub 리포지토리, 3.1 릴리스 분기)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
+* [Blazor 서버 앱에서 대용량 데이터 전송 수행](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)

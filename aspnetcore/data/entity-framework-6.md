@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: data/entity-framework-6
-ms.openlocfilehash: ace937e72efa2343e50b11d52ebc0a2530505758
-ms.sourcegitcommit: 8835b6777682da6fb3becf9f9121c03f89dc7614
+ms.openlocfilehash: 85cf86dcb22ef94cfc87975abaab176e4f1227d3
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 08/22/2019
-ms.locfileid: "69975592"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78645429"
 ---
 # <a name="get-started-with-aspnet-core-and-entity-framework-6"></a>ASP.NET Core 및 Entity Framework 6 시작
 
@@ -23,7 +23,7 @@ ms.locfileid: "69975592"
 
 Entity Framework 6을 사용하려면 Entity Framework 6에서 .NET Core를 지원하지 않으므로 .NET Framework에 대해 프로젝트를 컴파일해야 합니다. 플랫폼 간 기능이 필요한 경우 [Entity Framework Core](/ef/)로 업그레이드해야 합니다.
 
-ASP.NET Core 애플리케이션에서 Entity Framework 6을 사용하는 권장되는 방법은 EF6 컨텍스트 및 모델 클래스를 전체 프레임워크를 대상으로 하는 클래스 라이브러리 프로젝트에 넣는 것입니다. ASP.NET Core 프로젝트에서 클래스 라이브러리에 참조를 추가합니다. 샘플 [EF6 및 ASP.NET Core 프로젝트가 있는 Visual Studio 솔루션](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/entity-framework-6/sample/)을 참조하세요.
+ASP.NET Core 애플리케이션에서 Entity Framework 6을 사용하는 권장되는 방법은 EF6 컨텍스트 및 모델 클래스를 .NET Framework를 대상으로 하는 클래스 라이브러리 프로젝트에 넣는 것입니다. ASP.NET Core 프로젝트에서 클래스 라이브러리에 참조를 추가합니다. 샘플 [EF6 및 ASP.NET Core 프로젝트가 있는 Visual Studio 솔루션](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/entity-framework-6/sample/)을 참조하세요.
 
 .NET Core 프로젝트는 *Enable-Migrations*와 같은 EF6 명령이 요구하는 모든 기능을 지원하지 않으므로 ASP.NET Core 프로젝트에 EF6 컨텍스트를 배치할 수 없습니다.
 
@@ -31,7 +31,7 @@ EF6 컨텍스트를 찾는 프로젝트 형식에 관계없이 EF6 명령줄 도
 
 ## <a name="reference-full-framework-and-ef6-in-the-aspnet-core-project"></a>ASP.NET Core 프로젝트에서 전체 프레임워크 및 EF6 참조
 
-ASP.NET Core 프로젝트는 .NET Framework 및 EF6을 참조해야 합니다. 예를 들어 ASP.NET Core 프로젝트의 *.csproj* 파일은 다음 예제와 유사합니다(파일의 관련 부분만 표시됨).
+ASP.NET Core 프로젝트는 .NET Framework를 대상으로 하고 EF6을 참조해야 합니다. 예를 들어 ASP.NET Core 프로젝트의 *.csproj* 파일은 다음 예제와 유사합니다(파일의 관련 부분만 표시됨).
 
 [!code-xml[](entity-framework-6/sample/MVCCore/MVCCore.csproj?range=3-9&highlight=2)]
 
@@ -61,7 +61,7 @@ Core 프로젝트의 *Startup.cs* 파일에서 `ConfigureServices`에 종속성 
 
 ## <a name="sample-application"></a>애플리케이션 예제
 
-작업 중인 애플리케이션 예제는 이 문서와 함께 제공되는 [샘플 Visual Studio 솔루션](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/data/entity-framework-6/sample/)을 참조하세요.
+작업 중인 애플리케이션 예제는 이 문서와 함께 제공되는 [샘플 Visual Studio 솔루션](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/entity-framework-6/sample/)을 참조하세요.
 
 Visual Studio에서 다음 단계에 따라 이 샘플을 처음부터 만들 수 있습니다.
 

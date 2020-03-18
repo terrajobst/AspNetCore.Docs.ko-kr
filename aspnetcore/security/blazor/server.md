@@ -5,17 +5,17 @@ description: Blazor Server 앱에 대 한 보안 위협을 완화 하는 방법�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2019
+ms.date: 03/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/server
-ms.openlocfilehash: 61030f9b5beb849a7cf03571da425e49b144994c
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 128cd5e542153e07dc301032e1e73bf27e1236f3
+ms.sourcegitcommit: 5bdc54162d7dea8d9fa54ac3055678db23586af1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653481"
+ms.lasthandoff: 03/17/2020
+ms.locfileid: "79434424"
 ---
 # <a name="secure-aspnet-core-blazor-server-apps"></a>Blazor Server 앱 보안 ASP.NET Core
 
@@ -263,7 +263,7 @@ Blazor 서버 이벤트는 비동기적 이므로 새 렌더링을 생성 하 �
 
     public void Dispose()
     {
-        CancellationTokenSource.Cancel();
+        TokenSource.Cancel();
     }
 }
 ```

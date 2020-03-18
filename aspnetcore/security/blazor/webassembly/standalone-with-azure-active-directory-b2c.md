@@ -5,17 +5,17 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/09/2020
+ms.date: 03/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
-ms.openlocfilehash: 0ea42943c908d8cf9d083c1cfc568c1835588ce9
-ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
+ms.openlocfilehash: b4d32e91b4013cbea37baecb972a535d2874d3d1
+ms.sourcegitcommit: 5bdc54162d7dea8d9fa54ac3055678db23586af1
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/11/2020
-ms.locfileid: "79083658"
+ms.lasthandoff: 03/17/2020
+ms.locfileid: "79434462"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>Azure Active Directory B2C를 사용 하 여 ASP.NET Core Blazor Weasembomoma 독립 실행형 앱을 보호 합니다.
 
@@ -42,7 +42,9 @@ ms.locfileid: "79083658"
 
      응용 프로그램 ID (클라이언트 ID)를 기록 합니다 (예: `11111111-1111-1111-1111-111111111111`).
 
-   * H & [사용자 흐름 만들기](/azure/active-directory-b2c/tutorial-create-user-flows) 등록 및 로그인 사용자 흐름을 만듭니다.
+   * [사용자](/azure/active-directory-b2c/tutorial-create-user-flows) 흐름 &ndash; 만들어 등록 및 로그인 사용자 흐름을 만듭니다.
+
+     최소한 **응용 프로그램 클레임** > **표시 이름** 사용자 특성을 선택 하 여 `LoginDisplay` 구성 요소 (*Shared/LoginDisplay*)에 `context.User.Identity.Name`를 채웁니다.
 
      앱에 대해 만든 등록 및 로그인 사용자 흐름 이름을 기록 합니다 (예: `B2C_1_signupsignin`).
 

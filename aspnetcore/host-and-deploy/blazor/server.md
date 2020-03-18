@@ -5,17 +5,17 @@ description: ASP.NET Core를 사용하여 Blazor 서버 앱을 호스트 및 배
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/12/2020
+ms.date: 02/15/2020
 no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/server
-ms.openlocfilehash: a051d51e734fec4315da73d3c4df57706df7f363
-ms.sourcegitcommit: 6645435fc8f5092fc7e923742e85592b56e37ada
+ms.openlocfilehash: 42321b8564524fec41104ccaf1ac47981d014c94
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/19/2020
-ms.locfileid: "77465825"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78647361"
 ---
 # <a name="host-and-deploy-opno-locblazor-server"></a>Blazor 서버 호스트 및 배포
 
@@ -87,7 +87,10 @@ Blazor 서버 앱에 [Azure SignalR Service](/azure/azure-signalr)를 사용하�
 
 #### <a name="iis"></a>IIS
 
-IIS를 사용하는 경우 애플리케이션 요청 라우팅을 사용하여 고정 세션을 사용할 수 있습니다. 자세한 내용은 [애플리케이션 요청 라우팅을 사용하여 HTTP 부하 분산](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing)을 참조하세요.
+IIS를 사용하는 경우 다음을 사용하도록 설정합니다.
+
+* [IIS WebSocket](xref:fundamentals/websockets#enabling-websockets-on-iis)
+* [애플리케이션 요청 라우팅에 대한 고정 세션](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing)
 
 #### <a name="kubernetes"></a>Kubernetes
 
@@ -118,7 +121,7 @@ proxy_set_header Connection $connection_upgrade;
 
 ### <a name="measure-network-latency"></a>네트워크 대기 시간 측정
 
-[JS interop](xref:blazor/javascript-interop)은 다음 예제와 같이 네트워크 대기 시간을 측정하는 데 사용할 수 있습니다.
+[JS interop](xref:blazor/call-javascript-from-dotnet)은 다음 예제와 같이 네트워크 대기 시간을 측정하는 데 사용할 수 있습니다.
 
 ```razor
 @inject IJSRuntime JS

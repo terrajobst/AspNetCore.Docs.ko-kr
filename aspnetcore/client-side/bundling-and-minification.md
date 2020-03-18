@@ -1,17 +1,17 @@
 ---
 title: ASP.NET Core에서 정적 자산 번들링 및 축소하기
 author: scottaddie
-description: 번들링 및 축소 기술을 적용하여 ASP.NET Core 웹 응용 프로그램에서 정적 리소스를 최적화하는 방법을 알아봅니다.
+description: 번들링 및 축소 기술을 적용하여 ASP.NET Core 웹 애플리케이션에서 정적 리소스를 최적화하는 방법을 알아봅니다.
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 06/17/2019
 uid: client-side/bundling-and-minification
 ms.openlocfilehash: a7a5c40d6c31c4416212c02c1b491dd794f2a1d3
-ms.sourcegitcommit: b3e1e31e5d8bdd94096cf27444594d4a7b065525
-ms.translationtype: MT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/04/2019
-ms.locfileid: "74803281"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78646785"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>ASP.NET Core에서 정적 자산 번들링 및 축소하기
 
@@ -27,9 +27,9 @@ ms.locfileid: "74803281"
 
 ### <a name="bundling"></a>번들링
 
-번들링은 여러 개의 파일을 단일 파일로 결합합니다. 번들링은 웹 페이지 같은 웹 자산을 렌더링하는데 필요한 서버 요청의 수를 줄입니다. CSS, JavaScript 등에 대해 구체적으로 개별 번들을 원하는 수 만큼 만들 수 있습니다. 파일이 적을수록 브라우저에서 서버 또는 응용 프로그램을 제공 하는 서비스의 HTTP 요청 수를 줄일 수 있습니다. 따라서 첫 번째 페이지 로드 성능이 향상됩니다.
+번들링은 여러 개의 파일을 단일 파일로 결합합니다. 번들링은 웹 페이지 같은 웹 자산을 렌더링하는데 필요한 서버 요청의 수를 줄입니다. CSS, JavaScript 등에 대한 여러 개의 개별 번들을 만들 수 있습니다. 파일 수가 적다는 말은 브라우저에서 서버로 보내는 HTTP 요청 수 또는 애플리케이션을 제공하는 서비스의 HTTP 요청 수가 줄어든다는 뜻입니다. 따라서 첫 번째 페이지 로드 성능이 향상됩니다.
 
-### <a name="minification"></a>필터로
+### <a name="minification"></a>축소
 
 축소는 기능 변경 없이 코드에서 불필요한 문자를 제거합니다. 결과적으로 요청된 자산(CSS, 이미지 및 JavaScript 파일 같은)의 크기가 크게 감소합니다. 일반적인 축소의 부수적인 작용은 변수 이름을 한 문자로 줄이고 주석과 불필요한 공백을 제거하는 것입니다.
 
@@ -53,17 +53,17 @@ ms.locfileid: "74803281"
 
 다음 표는 자산을 개별적으로 로드하는 경우와 번들링 및 축소를 사용하는 경우의 차이를 간략히 보여줍니다.
 
-동작 | With B/M | B/M 없음 | 변화
+작업 | B/M 포함 | B/M 제외 | 변화
 --- | :---: | :---: | :---:
 파일 요청  | 7   | 18     | 157%
 전송(kb) | 156 | 264.68 | 70%
-로드 시간 (ms) | 885 | 2360   | 167%
+로드 시간(ms) | 885 | 2360   | 167%
 
 브라우저는 HTTP 요청 헤더에 관해 매우 장황합니다. 번들링 시 전송되는 총 바이트가 상당히 감소하는 것을 볼 수 있습니다. 로드 시간이 크게 개선되었지만 이 예제는 로컬에서 실행된 것입니다. 네트워크를 통해서 전송되는 자산에 대해 번들링 및 축소를 사용하면 큰 성능 향상을 얻을 수 있습니다.
 
 ## <a name="choose-a-bundling-and-minification-strategy"></a>번들링 및 축소 전략 선택하기
 
-MVC 및 Razor Pages 프로젝트 템플릿은 JSON 구성 파일로 구성 된 묶음 및 축소를 위한 기본 제공 솔루션을 제공 합니다. [Grunt](xref:client-side/using-grunt) task runner와 같은 타사 도구는 약간 더 복잡 한 작업을 수행 합니다. 타사 도구는 lint 및 이미지 최적화와 같이 묶음 및 축소&mdash;를 초과 하 여 개발 워크플로에 처리가 필요한 경우에 적합 합니다. 디자인 타임 묶음 및 축소를 사용 하 여 응용 프로그램 배포 전에 파일을 생성 합니다. 배포 전 번들 및 축소 서버 부하 감소의 이점을 제공 합니다. 그러나 디자인 타임 묶음 및 축소를 통해 빌드 복잡성이 증가 하 고 정적 파일 에서만 작동 한다는 것을 인식 하는 것이 중요 합니다.
+MVC 및 Razor Pages 프로젝트 템플릿은 JSON 구성 파일로 구성된 묶음 및 축소용 기본 제공 솔루션을 제공합니다. [Grunt](xref:client-side/using-grunt) 작업 실행기와 같은 타사 도구는 동일한 작업을 약간 더 복잡하게 수행합니다. 타사 도구는 개발 워크플로에 lint 및 이미지 최적화와 같은 묶음 및 축소 이외의 처리가 필요한 경우에 적합합니다. 디자인 타임 묶음 및 축소를 사용하여 앱 배포 전에 축소된 파일이 생성됩니다. 배포 전 묶음 및 축소는 서버 부하 감소라는 이점을 제공합니다. 그러나 디자인 타임 묶음 및 축소는 빌드 복잡성을 높이고 정적 파일에만 작동한다는 것을 인식하는 것이 중요합니다.
 
 ## <a name="configure-bundling-and-minification"></a>번들링 및 축소 구성하기
 
@@ -85,15 +85,15 @@ ASP.NET Core 2.1 이상에서는 MVC 또는 Razor 페이지 프로젝트 루트�
 
 구성 옵션은 다음과 같습니다.
 
-* `outputFileName`: 출력할 번들 파일의 이름입니다. *bundleconfig.json* 파일로부터의 상대 경로를 포함할 수 있습니다. **필수**
-* `inputFiles`: 함께 번들링 할 파일들의 배열입니다. 이 배열의 값은 구성 파일에 대한 상대 경로입니다. **선택적**, *값이 비어 있으면 빈 출력 파일이 만들어집니다. [와일드카드 사용](https://www.tldp.org/LDP/abs/html/globbingref.html) 패턴이 지원됩니다.
+* `outputFileName`: 출력할 묶음 파일의 이름입니다. *bundleconfig.json* 파일로부터의 상대 경로를 포함할 수 있습니다. **필수**
+* `inputFiles`: 묶을 파일의 배열입니다. 이 배열의 값은 구성 파일에 대한 상대 경로입니다. **선택적**, *값이 비어 있으면 빈 출력 파일이 만들어집니다. [와일드카드 사용](https://www.tldp.org/LDP/abs/html/globbingref.html) 패턴이 지원됩니다.
 * `minify`: 출력 형식에 대한 축소 옵션입니다. **선택적**, *기본값 - `minify: { enabled: true }`*
   * 이 구성 옵션은 출력 파일 형식마다 달라집니다.
     * [CSS Minifier](https://github.com/madskristensen/BundlerMinifier/wiki/cssminifier)
     * [JavaScript Minifier](https://github.com/madskristensen/BundlerMinifier/wiki/JavaScript-Minifier-settings)
     * [HTML Minifier](https://github.com/madskristensen/BundlerMinifier/wiki)
-* `includeInProject`: 생성된 파일을 프로젝트 파일로 추가할지 여부를 나타내는 플래그입니다. **선택적**, *기본값 - false*
-* `sourceMap`: 번들 파일의 소스 맵을 생성할지 여부를 나타내는 플래그입니다. **선택적**, *기본값 - false*
+* `includeInProject`: 생성된 파일을 프로젝트 파일에 추가할지 여부를 나타내는 플래그입니다. **선택적**, *기본값 - false*
+* `sourceMap`: 묶은 파일에 대해 소스 맵을 생성할지 여부를 나타내는 플래그입니다. **선택적**, *기본값 - false*
 * `sourceMapRootPath`: 생성된 소스 맵 파일을 저장하기 위한 루트 경로입니다.
 
 ## <a name="build-time-execution-of-bundling-and-minification"></a>빌드 시 번들링 및 축소 실행하기
@@ -101,9 +101,9 @@ ASP.NET Core 2.1 이상에서는 MVC 또는 Razor 페이지 프로젝트 루트�
 [BuildBundlerMinifier](https://www.nuget.org/packages/BuildBundlerMinifier/) NuGet 패키지를 사용하면 빌드 시 번들링 및 축소를 수행할 수 있습니다. 이 패키지는 빌드 및 정리 시에 실행되는 [MSBuild 대상](/visualstudio/msbuild/msbuild-targets)을 주입합니다. 빌드 프로세스는 *bundleconfig.json* 파일을 분석하여 정의된 구성을 기반으로 출력 파일을 생성합니다.
 
 > [!NOTE]
-> BuildBundlerMinifier는 Microsoft에서 지원 하지 않는 GitHub의 커뮤니티 기반 프로젝트에 속합니다. 문제점은 [여기](https://github.com/madskristensen/BundlerMinifier/issues)에 제출해야 합니다.
+> BuildBundlerMinifier는 Microsoft에서 지원을 제공하지 않는 GitHub의 커뮤니티 주도 프로젝트에 속해 있습니다. 문제점은 [여기](https://github.com/madskristensen/BundlerMinifier/issues)에 제출해야 합니다.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 프로젝트에 *BuildBundlerMinifier* 패키지를 추가합니다.
 
@@ -130,7 +130,7 @@ ASP.NET Core 2.1 이상에서는 MVC 또는 Razor 페이지 프로젝트 루트�
 ========== Clean: 1 succeeded, 0 failed, 0 skipped ==========
 ```
 
-# <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
 프로젝트에 *BuildBundlerMinifier* 패키지를 추가합니다.
 
@@ -138,7 +138,7 @@ ASP.NET Core 2.1 이상에서는 MVC 또는 Razor 페이지 프로젝트 루트�
 dotnet add package BuildBundlerMinifier
 ```
 
-ASP.NET Core 1.x를 사용 하는 경우 새로 추가 된 패키지를 복원 합니다.
+ASP.NET Core 1.x를 사용하는 경우 새로 추가된 패키지를 복원합니다.
 
 ```dotnetcli
 dotnet restore
@@ -150,7 +150,7 @@ dotnet restore
 dotnet build
 ```
 
-다음이 표시 됩니다.
+다음이 표시됩니다.
 
 ```console
 Microsoft (R) Build Engine version 15.4.8.50001 for .NET Core
@@ -258,14 +258,14 @@ dotnet bundle
 
 앱의 번들링 및 축소 워크플로에서 추가적인 처리를 필요로 하는 경우가 있습니다. 그 예로 이미지 최적화, 캐시 무효화 및 CDN 자산 처리를 들 수 있습니다. 이러한 요구 사항을 충족하려면 Gulp를 사용하도록 번들링 및 축소 워크플로를 변환할 수 있습니다.
 
-### <a name="use-the-bundler--minifier-extension"></a>번들러 & Minifier 확장 사용
+### <a name="use-the-bundler--minifier-extension"></a>Bundler & Minifier 확장 사용
 
-Visual Studio [번들러 & Minifier](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.BundlerMinifier) Extension은 Gulp로의 변환을 처리 합니다.
+Visual Studio [Bundler & Minifier](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.BundlerMinifier) 확장은 Gulp로의 변환을 처리합니다.
 
 > [!NOTE]
-> 번들러 & Minifier 확장은 Microsoft에서 지원 하지 않는 GitHub의 커뮤니티 기반 프로젝트에 속합니다. 문제점은 [여기](https://github.com/madskristensen/BundlerMinifier/issues)에 제출해야 합니다.
+> Bundler & Minifier 확장은 Microsoft에서 지원을 제공하지 않는 GitHub의 커뮤니티 주도 프로젝트에 속해 있습니다. 문제점은 [여기](https://github.com/madskristensen/BundlerMinifier/issues)에 제출해야 합니다.
 
-솔루션 탐색기에서 *bundleconfig.json* 파일을 마우스 오른쪽 버튼으로 클릭하고 **Bundler & Minifier**  >  **Convert To Gulp...** 를 선택합니다.
+솔루션 탐색기에서 *bundleconfig.json* 파일을 마우스 오른쪽 버튼으로 클릭하고 **Bundler & Minifier** > **Convert To Gulp...** 를 선택합니다.
 
 ![Convert To Gulp 컨텍스트 메뉴](../client-side/bundling-and-minification/_static/convert-to-gulp.png)
 
@@ -288,7 +288,7 @@ Visual Studio나 Bundler & Minifier 확장을 사용할 수 없는 경우 직접
 프로젝트 루트에 다음 `devDependencies`가 지정된 *package.json* 파일을 추가합니다.
 
 > [!WARNING]
-> `gulp-uglify` 모듈은 ECMAScript (ES) 2015/ES6 이상을 지원 하지 않습니다. ES2015 /ES6 이상을 사용하려면 `gulp-uglify` 대신 [gulp-terser](https://www.npmjs.com/package/gulp-terser)를 설치합니다.
+> `gulp-uglify` 모듈은 ES(ECMAScript) 2015/ES6 이상을 지원하지 않습니다. ES2015/ES6 이상을 사용하려면 [gulp-terser](https://www.npmjs.com/package/gulp-terser)를 `gulp-uglify` 대신 설치합니다.
 
 [!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/package.json?range=5-13)]
 
@@ -298,7 +298,7 @@ Visual Studio나 Bundler & Minifier 확장을 사용할 수 없는 경우 직접
 npm i
 ```
 
-Gulp CLI를 전역 종속성으로 설치 합니다.
+Gulp CLI를 전역 종속성으로 설치하려면 다음을 수행합니다.
 
 ```console
 npm i -g gulp-cli

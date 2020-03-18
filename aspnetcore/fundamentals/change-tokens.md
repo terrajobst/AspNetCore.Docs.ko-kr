@@ -1,27 +1,25 @@
 ---
 title: ASP.NET Core에서 변경 토큰을 사용하여 변경 내용 검색
-author: guardrex
+author: rick-anderson
 description: 변경 토큰을 사용하여 변경 내용을 추적하는 방법에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 10/07/2019
 uid: fundamentals/change-tokens
-ms.openlocfilehash: bb30d7a4c7dc82200821c60a49c314b246562111
-ms.sourcegitcommit: 3d082bd46e9e00a3297ea0314582b1ed2abfa830
+ms.openlocfilehash: 70451e219f1295b854e2f84aac55f0cfd1786b19
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 10/07/2019
-ms.locfileid: "72007203"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78645399"
 ---
 # <a name="detect-changes-with-change-tokens-in-aspnet-core"></a>ASP.NET Core에서 변경 토큰을 사용하여 변경 내용 검색
-
-[Luke Latham](https://github.com/guardrex)으로
 
 ::: moniker range=">= aspnetcore-3.0"
 
 *변경 토큰*은 상태 변경 내용을 추적하는 데 사용되는 범용의 하위 수준 구성 요소입니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/change-tokens/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/change-tokens/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="ichangetoken-interface"></a>IChangeToken 인터페이스
 
@@ -219,7 +217,7 @@ var compositeChangeToken =
 
 *변경 토큰*은 상태 변경 내용을 추적하는 데 사용되는 범용의 하위 수준 구성 요소입니다.
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/change-tokens/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/change-tokens/samples/) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="ichangetoken-interface"></a>IChangeToken 인터페이스
 

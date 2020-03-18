@@ -5,12 +5,12 @@ description: ASP.NET Core에서 다른 언어와 문화권으로의 콘텐츠 �
 ms.author: riande
 ms.date: 11/30/2019
 uid: fundamentals/localization
-ms.openlocfilehash: 645f680436336acbe1d5c2854a242527c9b4b9cb
-ms.sourcegitcommit: 3b6b0a54b20dc99b0c8c5978400c60adf431072f
+ms.openlocfilehash: b175354220a8a71c029e005f27443d5a72749a11
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/03/2019
-ms.locfileid: "74717405"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78648435"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Core에서 세계화 및 지역화
 
@@ -30,7 +30,7 @@ ASP.NET Core를 사용하여 다국어 웹 사이트를 만들면 더 광범위�
 
 3. 각 요청에 대한 언어/문화권을 선택하는 전략 구현
 
-[예제 코드 살펴보기 및 다운로드](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/Localization) ([다운로드 방법](xref:index#how-to-download-a-sample))
+[예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/Localization) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
 ## <a name="make-the-apps-content-localizable"></a>앱의 콘텐츠를 지역화 가능하도록 만들기
 
@@ -225,6 +225,7 @@ using Microsoft.Extensions.Localization;
 요청에서 현재 문화권은 지역화 [미들웨어](xref:fundamentals/middleware/index)에서 설정됩니다. 지역화 미들웨어는 `Startup.Configure` 메서드에서 활성화됩니다. 지역화 미들웨어는 요청 문화권을 확인할 수 있는 모든 미들웨어 전에 구성되어야 합니다(예: `app.UseMvcWithDefaultRoute()`).
 
 [!code-csharp[](localization/sample/Localization/Startup.cs?name=snippet2)]
+[!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
 `UseRequestLocalization`은 `RequestLocalizationOptions` 개체를 초기화합니다. 모든 요청의 `RequestLocalizationOptions`에서 `RequestCultureProvider`의 목록이 열거되고 요청 문화권을 성공적으로 결정할 수 있는 첫 번째 공급자가 사용됩니다. 기본 공급자는 `RequestLocalizationOptions` 클래스에서 제공됩니다.
 
@@ -276,7 +277,7 @@ using Microsoft.Extensions.Localization;
 
 6. 언어를 누른 다음, **위로 이동**을 누릅니다.
 
-::: moniker range=">= aspnetcore-3.1"
+::: moniker range="> aspnetcore-3.1"
 ### <a name="the-content-language-http-header"></a>콘텐츠-언어 HTTP 헤더
 
 [콘텐츠-언어](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Language) 엔터티 헤더:

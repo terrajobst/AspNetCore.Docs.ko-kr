@@ -1,22 +1,22 @@
 ---
 title: 웹 팜에 ASP.NET Core 호스트
-author: guardrex
+author: rick-anderson
 description: 웹 팜 환경에서 공유 리소스가 있는 ASP.NET Core 앱의 여러 인스턴스를 호스트하는 방법을 알아봅니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 uid: host-and-deploy/web-farm
-ms.openlocfilehash: 5c13e9bc4c514f9b42871d55a430265c8ec2da23
-ms.sourcegitcommit: 2388c2a7334ce66b6be3ffbab06dd7923df18f60
+ms.openlocfilehash: 316c87e5f49593c05991a94cbe5e55d175a49bb3
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 01/14/2020
-ms.locfileid: "75951828"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78647343"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>웹 팜에 ASP.NET Core 호스트
 
-작성자: [Luke Latham](https://github.com/guardrex) 및 [Chris Ross](https://github.com/Tratcher)
+작성자: [Chris Ross](https://github.com/Tratcher)
 
 ‘웹 팜’은 여러 앱 인스턴스를 호스트하는 둘 이상의 웹 서버(또는 ‘노드’)의 그룹입니다.   사용자의 요청이 웹 팜에 도착하면 ‘부하 분산 장치’가 요청을 웹 팜의 노드에 배포합니다.  웹 팜은 다음을 개선합니다.
 
@@ -93,3 +93,4 @@ ms.locfileid: "75951828"
 
 * [Windows용 사용자 지정 스크립트 확장](/azure/virtual-machines/extensions/custom-script-windows) &ndash; Azure 가상 머신에서 스크립트를 다운로드하여 실행합니다. 이는 배포 후 구성 및 소프트웨어 설치에 유용합니다.
 * <xref:host-and-deploy/proxy-load-balancer>
+ 

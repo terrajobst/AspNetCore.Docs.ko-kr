@@ -9,11 +9,11 @@ products:
 - vs
 urlFragment: aspnetcore-webapi-mongodb
 ms.openlocfilehash: 01f9cf237dcf2a9b95c181c2cb87ef9f59102244
-ms.sourcegitcommit: c0b72b344dadea835b0e7943c52463f13ab98dd1
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 12/06/2019
-ms.locfileid: "74881163"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78649143"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>ASP.NET Core 및 MongoDB를 사용하여 웹 API 만들기
 
@@ -27,7 +27,7 @@ ms.locfileid: "74881163"
 * 웹 API에서 MongoDB CRUD 작업 수행
 * JSON serialization 사용자 지정
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 * [.NET Core SDK 3.0 이상](https://www.microsoft.com/net/download/all)
 * **ASP.NET 및 웹 개발** 워크로드가 있는 [Visual Studio 2019 미리 보기](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=community&ch=pre&rel=16&utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019preview)

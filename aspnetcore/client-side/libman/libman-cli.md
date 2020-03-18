@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core와 함께를 사용 합니다.
+title: ASP.NET Core에서 LibMan CLI 사용
 author: scottaddie
-description: ASP.NET Core 프로젝트에서를 사용 하는 방법에 대해 알아봅니다.
+description: ASP.NET Core 프로젝트에서 LibMan CLI를 사용하는 방법을 알아봅니다.
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/12/2019
@@ -9,41 +9,41 @@ no-loc:
 - SignalR
 uid: client-side/libman/libman-cli
 ms.openlocfilehash: 02d88d09805bd23a86ef924766373245fec7ff52
-ms.sourcegitcommit: 0b0e485a8a6dfcc65a7a58b365622b3839f4d624
-ms.translationtype: MT
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/01/2020
-ms.locfileid: "76928357"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78649605"
 ---
-# <a name="use-the-libman-cli-with-aspnet-core"></a>ASP.NET Core와 함께를 사용 합니다.
+# <a name="use-the-libman-cli-with-aspnet-core"></a>ASP.NET Core에서 LibMan CLI 사용
 
 작성자: [Scott Addie](https://twitter.com/Scott_Addie)
 
-이 기능을 지 원하는 플랫폼 간 도구는 .NET [Core에서 지원](xref:client-side/libman/index) 되는 모든 플랫폼에서 지원 됩니다.
+[LibMan](xref:client-side/libman/index) CLI는 .NET Core가 지원되는 플랫폼 간 도구입니다.
 
-## <a name="prerequisites"></a>전제 조건
+## <a name="prerequisites"></a>사전 요구 사항
 
 * [!INCLUDE [2.1-SDK](../../includes/2.1-SDK.md)]
 
 ## <a name="installation"></a>설치
 
-을 설치 하려면 다음을 수행 합니다.
+LibMan CLI를 설치하려면 다음을 수행합니다.
 
 ```dotnetcli
 dotnet tool install -g Microsoft.Web.LibraryManager.Cli
 ```
 
-[.Net Core 전역 도구](/dotnet/core/tools/global-tools#install-a-global-tool) 는 [Microsoft web.config](https://www.nuget.org/packages/Microsoft.Web.LibraryManager.Cli/) 패키지에서 설치 됩니다.
+[.NET Core 전역 도구](/dotnet/core/tools/global-tools#install-a-global-tool)가 [Microsoft.Web.LibraryManager.Cli](https://www.nuget.org/packages/Microsoft.Web.LibraryManager.Cli/) NuGet 패키지에서 설치됩니다.
 
-특정 NuGet 패키지 원본에서 패키지를 설치 하려면 다음을 수행 합니다.
+특정 NuGet 패키지 원본에서 LibMan CLI를 설치하려면 다음을 수행합니다.
 
 ```dotnetcli
 dotnet tool install -g Microsoft.Web.LibraryManager.Cli --version 1.0.94-g606058a278 --add-source C:\Temp\
 ```
 
-위의 예제에서 .NET Core 글로벌 도구는 로컬 Windows 컴퓨터의 *C:\Temp\Microsoft.Web.LibraryManager.Cli.1.0.94-g606058a278.nupkg* 파일에서 설치 됩니다.
+위의 예제에서 .NET Core 전역 도구는 로컬 Windows 머신의 *C:\Temp\Microsoft.Web.LibraryManager.Cli.1.0.94-g606058a278.nupkg* 파일에서 설치됩니다.
 
-## <a name="usage"></a>용도
+## <a name="usage"></a>사용법
 
 CLI를 성공적으로 설치한 후에는 다음 명령을 사용할 수 있습니다.
 
@@ -51,19 +51,19 @@ CLI를 성공적으로 설치한 후에는 다음 명령을 사용할 수 있습
 libman
 ```
 
-설치 된 CLI 버전을 보려면 다음을 수행 합니다.
+설치된 CLI 버전을 보려면 다음을 수행합니다.
 
 ```console
 libman --version
 ```
 
-사용 가능한 CLI 명령을 보려면 다음을 수행 합니다.
+사용 가능한 CLI 명령을 보려면 다음을 수행합니다.
 
 ```console
 libman --help
 ```
 
-위의 명령은 다음과 유사한 출력을 표시 합니다.
+위의 명령은 다음과 유사한 출력을 표시합니다.
 
 ```console
  1.0.163+g45474d37ed
@@ -92,9 +92,9 @@ Use "libman [command] --help" for more information about a command.
 
 다음 섹션에서는 사용 가능한 CLI 명령에 대해 간략하게 설명합니다.
 
-## <a name="initialize-libman-in-the-project"></a>프로젝트에서이를 초기화 합니다.
+## <a name="initialize-libman-in-the-project"></a>프로젝트에서 LibMan 초기화
 
-`libman init` *명령은 파일 (* 없는 경우)을 만듭니다. 기본 항목 템플릿 콘텐츠를 사용 하 여 파일을 만듭니다.
+`libman init` 명령은 *libman.json* 파일이 없는 경우 새로 만듭니다. 이 파일은 기본 항목 템플릿 콘텐츠를 사용하여 만들어집니다.
 
 ### <a name="synopsis"></a>개요
 
@@ -103,17 +103,17 @@ libman init [-d|--default-destination] [-p|--default-provider] [--verbosity]
 libman init [-h|--help]
 ```
 
-### <a name="options"></a>Options
+### <a name="options"></a>옵션
 
 다음 옵션은 `libman init` 명령에 사용할 수 있습니다.
 
 * `-d|--default-destination <PATH>`
 
-  현재 폴더에 상대적인 경로입니다. 라이브러리 파일은 라이브러리에 대 한 `destination` 속성이 정의 되지 않은 *경우에는*이 위치에 설치 됩니다. `<PATH>` 값은 해당 `defaultDestination` 속성에 기록 *됩니다.*
+  현재 폴더에 상대적인 경로입니다. *libman.json*의 라이브러리에 대해 `destination` 속성이 정의되지 않으면 라이브러리 파일이 이 위치에 설치됩니다. `<PATH>` 값은 *libman.json*의 `defaultDestination` 속성에 기록됩니다.
 
 * `-p|--default-provider <PROVIDER>`
 
-  지정 된 라이브러리에 대해 정의 된 공급자가 없는 경우 사용할 공급자입니다. `<PROVIDER>` 값은 해당 `defaultProvider` 속성에 기록 *됩니다.* `<PROVIDER>`을 다음 값 중 하나로 대체하세요.
+  지정된 라이브러리에 대해 공급자를 지정하지 않은 경우 사용할 공급자입니다. `<PROVIDER>` 값은 *libman.json*의 `defaultProvider` 속성에 기록됩니다. `<PROVIDER>`을 다음 값 중 하나로 바꿉니다.
 
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
@@ -121,22 +121,22 @@ libman init [-h|--help]
 
 ### <a name="examples"></a>예
 
-ASP.NET Core 프로젝트에서이 파일을 만들려면 다음을 수행 *합니다* .
+ASP.NET Core 프로젝트에서 *libman.json* 파일을 만들려면 다음을 수행합니다.
 
-* 프로젝트 루트로 이동 합니다.
-* 명령을 실행합니다.
+* 프로젝트 루트로 이동합니다.
+* 다음 명령을 실행합니다.
 
   ```console
   libman init
   ```
 
-* 기본 공급자의 이름을 입력 하거나 `Enter`를 눌러 기본 CDNJS 공급자를 사용 합니다. 유효한 값은 다음과 같습니다.
+* 기본 공급자의 이름을 입력하거나 `Enter` 키를 눌러 기본 CDNJS 공급자를 사용합니다. 유효한 값은 다음과 같습니다.
 
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
-  ![liman init 명령-기본 공급자](_static/libman-init-provider.png)
+  ![libman init 명령 - 기본 공급자](_static/libman-init-provider.png)
 
-다음 콘텐츠를 사용 하 여 프로젝트 루트 *에 파일을 추가 합니다.*
+다음 콘텐츠를 사용하여 *libman.json* 파일이 프로젝트 루트에 추가됩니다.
 
 ```json
 {
@@ -146,9 +146,9 @@ ASP.NET Core 프로젝트에서이 파일을 만들려면 다음을 수행 *합�
 }
 ```
 
-## <a name="add-library-files"></a>라이브러리 파일 추가하기
+## <a name="add-library-files"></a>라이브러리 파일 추가
 
-`libman install` 명령은 라이브러리 파일을 다운로드 하 여 프로젝트에 설치 합니다. 파일이 없는 경우 추가 됩니다 *.* 라이브러리 파일에 대 한 구성 세부 정보를 저장 하도록 *라이브러리 파일을* 수정 합니다.
+`libman install` 명령은 라이브러리 파일을 다운로드하여 프로젝트에 설치합니다. *libman.json* 파일이 없는 경우 추가됩니다. 라이브러리 파일에 대한 구성 세부 정보를 저장하도록 *libman.json* 파일이 수정됩니다.
 
 ### <a name="synopsis"></a>개요
 
@@ -161,33 +161,33 @@ libman install [-h|--help]
 
 `LIBRARY`
 
-설치할 라이브러리의 이름입니다. 이 이름에는 버전 번호 표기법 (예: `@1.2.0`)이 포함 될 수 있습니다.
+설치할 라이브러리의 이름입니다. 이 이름에는 버전 번호 표기법(예: `@1.2.0`)이 포함될 수 있습니다.
 
-### <a name="options"></a>Options
+### <a name="options"></a>옵션
 
 다음 옵션은 `libman install` 명령에 사용할 수 있습니다.
 
 * `-d|--destination <PATH>`
 
-  라이브러리를 설치할 위치입니다. 지정 하지 않으면 기본 위치가 사용 됩니다. `defaultDestination` 속성이 지정 되지 않은 *경우에는*이 옵션이 필요 합니다.
+  라이브러리를 설치할 위치입니다. 이 값을 지정하지 않으면 기본 위치가 사용됩니다. *libman.json*에 `defaultDestination` 속성이 지정되지 않은 경우 이 옵션은 필수입니다.
 
 * `--files <FILE>`
 
-  라이브러리에서 설치할 파일의 이름을 지정 합니다. 지정 하지 않으면 라이브러리의 모든 파일이 설치 됩니다. 설치할 파일 마다 하나의 `--files` 옵션을 제공 합니다. 상대 경로도 지원 됩니다. 예를 들어 `--files dist/browser/signalr.js`을 참조하십시오.
+  라이브러리에서 설치할 파일의 이름을 지정합니다. 지정하지 않으면 라이브러리의 모든 파일이 설치됩니다. 설치할 파일마다 하나의 `--files` 옵션을 제공합니다. 상대 경로도 지원됩니다. 예를 들어 `--files dist/browser/signalr.js`을 참조하십시오.
 
 * `-p|--provider <PROVIDER>`
 
-  라이브러리 획득에 사용할 공급자의 이름입니다. `<PROVIDER>`을 다음 값 중 하나로 대체하세요.
+  라이브러리 획득에 사용할 공급자의 이름입니다. `<PROVIDER>`을 다음 값 중 하나로 바꿉니다.
   
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
-  `defaultProvider` 지정 하지 *않으면이 속성을 사용 합니다.* `defaultProvider` 속성이 지정 되지 않은 *경우에는*이 옵션이 필요 합니다.
+  지정하지 않으면 *libman.json*의 `defaultProvider` 속성이 사용됩니다. *libman.json*에 `defaultProvider` 속성이 지정되지 않은 경우 이 옵션은 필수입니다.
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
 ### <a name="examples"></a>예
 
-다음을 고려 하십시오 *. json* 파일:
+다음 *libman.json* 파일을 고려하세요.
 
 ```json
 {
@@ -197,13 +197,13 @@ libman install [-h|--help]
 }
 ```
 
-JQuery 버전 3.2.1 *jquery* 파일을 CDNJS 공급자를 사용 하는 *wwwroot/scripts/jQuery* 폴더에 설치 하려면 다음을 수행 합니다.
+CDNJS 공급자를 사용하여 jQuery 버전 3.2.1 *jquery.min.js* 파일을 *wwwroot/scripts/jquery* 폴더에 설치하려면 다음을 수행합니다.
 
 ```console
 libman install jquery@3.2.1 --provider cdnjs --destination wwwroot/scripts/jquery --files jquery.min.js
 ```
 
-이 *파일은* 다음과 유사 합니다.
+*libman.json* 파일은 다음과 비슷합니다.
 
 ```json
 {
@@ -221,20 +221,20 @@ libman install jquery@3.2.1 --provider cdnjs --destination wwwroot/scripts/jquer
 }
 ```
 
-파일 시스템 공급자를 사용 하 여 *C:\\temp\\contosoCalendar\\* 에서 *node.js* 및 *calendar .css* 파일을 설치 하려면 다음을 수행 합니다.
+파일 시스템 공급자를 사용하여 *C:\\temp\\contosoCalendar\\* 에서 *calendar.js* 및 *calendar.css* 파일을 설치하려면 다음을 수행합니다.
 
   ```console
   libman install C:\temp\contosoCalendar\ --provider filesystem --files calendar.js --files calendar.css
   ```
 
-다음은 두 가지 이유로 표시 되는 메시지입니다.
+다음과 같은 두 가지 이유로 다음 프롬프트가 표시됩니다.
 
-* 이 파일에는 `defaultDestination` 속성이 포함 되어 있지 않습니다 *.*
-* `libman install` 명령에는 `-d|--destination` 옵션이 포함 되어 있지 않습니다.
+* *libman.json* 파일에는 `defaultDestination` 속성이 포함되어 있지 않습니다.
+* `libman install` 명령에는 `-d|--destination` 옵션이 포함되어 있지 않습니다.
 
-![\man 설치 명령-대상](_static/libman-install-destination.png)
+![libman install 명령 - 대상](_static/libman-install-destination.png)
 
-기본 대상을 승인한 후 *에는 다음과* 같은 경우에 해당 합니다.
+기본 대상을 승인한 후에 *libman.json* 파일은 다음과 유사합니다.
 
 ```json
 {
@@ -261,13 +261,13 @@ libman install jquery@3.2.1 --provider cdnjs --destination wwwroot/scripts/jquer
 }
 ```
 
-## <a name="restore-library-files"></a>라이브러리 파일 복원하기
+## <a name="restore-library-files"></a>라이브러리 파일 복원
 
-`libman restore` 명령은 라이브러리 파일을 설치 *합니다.* 이 때 적용되는 규칙은 다음과 같습니다.
+`libman restore` 명령은 *libman.json*에 정의된 라이브러리 파일을 설치합니다. 이 때 적용되는 규칙은 다음과 같습니다.
 
-* 프로젝트 루트에 없습니다 *. json* 파일이 없으면 오류가 반환 됩니다.
-* 라이브러리에서 공급자를 지정 하는 *경우에는* 라이브러리의 `defaultProvider` 속성이 무시 됩니다.
-* 라이브러리에서 대상을 지정 하는 *경우에는* 라이브러리의 `defaultDestination` 속성이 무시 됩니다.
+* 프로젝트 루트에 *libman.json* 파일이 없으면 오류가 반환됩니다.
+* 라이브러리가 공급자를 지정하는 경우 *libman.json*의 `defaultProvider` 속성이 무시됩니다.
+* 라이브러리가 대상을 지정하는 경우 *libman.json*의 `defaultDestination` 속성이 무시됩니다.
 
 ### <a name="synopsis"></a>개요
 
@@ -276,7 +276,7 @@ libman restore [--verbosity]
 libman restore [-h|--help]
 ```
 
-### <a name="options"></a>Options
+### <a name="options"></a>옵션
 
 다음 옵션은 `libman restore` 명령에 사용할 수 있습니다.
 
@@ -284,15 +284,15 @@ libman restore [-h|--help]
 
 ### <a name="examples"></a>예
 
-라이브러리 파일을 복원 하려면 다음을 수행 합니다. *json*:
+*libman.json* 파일에 정의된 라이브러리 파일을 복원하려면 다음을 수행합니다.
 
 ```console
 libman restore
 ```
 
-## <a name="delete-library-files"></a>라이브러리 파일 삭제하기
+## <a name="delete-library-files"></a>라이브러리 폴더 삭제
 
-`libman clean` 명령은 해당 라이브러리 파일을 제거 합니다. 이 작업이 삭제 된 후 비어 있게 되는 폴더입니다. 라이브러리 파일의 연결 된 구성은 라이브러리 파일의 `libraries` 속성에 있습니다. *json* 은 제거 되지 않습니다.
+`libman clean` 명령은 LibMan을 통해 이전에 복원한 라이브러리 파일을 삭제합니다. 이 작업 후 삭제된 후에 비어 있게 되는 폴더입니다. *libman.json*의 `libraries` 속성에 있는 라이브러리 파일의 연결된 구성은 제거되지 않습니다.
 
 ### <a name="synopsis"></a>개요
 
@@ -301,7 +301,7 @@ libman clean [--verbosity]
 libman clean [-h|--help]
 ```
 
-### <a name="options"></a>Options
+### <a name="options"></a>옵션
 
 다음 옵션은 `libman clean` 명령에 사용할 수 있습니다.
 
@@ -309,25 +309,25 @@ libman clean [-h|--help]
 
 ### <a name="examples"></a>예
 
-라이브러리 파일을 삭제 하려면 다음을 수행 합니다.
+LibMan을 통해 설치된 라이브러리 파일을 삭제하려면 다음을 수행합니다.
 
 ```console
 libman clean
 ```
 
-## <a name="uninstall-library-files"></a>라이브러리 파일 제거하기
+## <a name="uninstall-library-files"></a>라이브러리 파일 제거
 
-`libman uninstall` 명령은 다음과 같습니다.
+`libman uninstall` 명령은 다음을 수행합니다.
 
-* 지정 된 라이브러리와 연결 된 모든 파일을 *라이브러리의 대상에서 삭제 합니다.*
-* 연결 된 라이브러리 구성을 제거 합니다 *.*
+* 지정된 라이브러리와 연결된 모든 파일을 *libman.json*의 대상에서 삭제합니다.
+* 연결된 라이브러리 구성을 *libman.json*에서 제거합니다.
 
-다음과 같은 경우 오류가 발생 합니다.
+다음 경우에 오류가 발생합니다.
 
-* 프로젝트 루트에 없습니다 *. json* 파일이 없습니다.
-* 지정 된 라이브러리가 없습니다.
+* 프로젝트 루트에는 *libman.json* 파일이 없습니다.
+* 지정된 라이브러리가 없습니다.
 
-이름이 같은 라이브러리가 둘 이상 설치 되어 있으면 하나를 선택 하 라는 메시지가 표시 됩니다.
+이름이 같은 라이브러리가 2개 이상 설치되어 있으면 하나를 선택하라는 메시지가 표시됩니다.
 
 ### <a name="synopsis"></a>개요
 
@@ -340,9 +340,9 @@ libman uninstall [-h|--help]
 
 `LIBRARY`
 
-제거할 라이브러리의 이름입니다. 이 이름에는 버전 번호 표기법 (예: `@1.2.0`)이 포함 될 수 있습니다.
+제거할 라이브러리의 이름입니다. 이 이름에는 버전 번호 표기법(예: `@1.2.0`)이 포함될 수 있습니다.
 
-### <a name="options"></a>Options
+### <a name="options"></a>옵션
 
 다음 옵션은 `libman uninstall` 명령에 사용할 수 있습니다.
 
@@ -350,11 +350,11 @@ libman uninstall [-h|--help]
 
 ### <a name="examples"></a>예
 
-다음을 고려 하십시오 *. json* 파일:
+다음 *libman.json* 파일을 고려하세요.
 
 [!code-json[](samples/LibManSample/libman.json)]
 
-* JQuery를 제거 하려면 다음 명령 중 하나를 수행 합니다.
+* jQuery를 제거하려면 다음 명령 중 하나를 수행합니다.
 
   ```console
   libman uninstall jquery
@@ -364,7 +364,7 @@ libman uninstall [-h|--help]
   libman uninstall jquery@3.3.1
   ```
 
-* `filesystem` 공급자를 통해 설치 된 Lodash 파일을 제거 하려면 다음을 수행 합니다.
+* `filesystem` 공급자를 통해 설치된 Lodash 파일을 제거하려면 다음을 수행합니다.
 
   ```console
   libman uninstall C:\temp\lodash\
@@ -372,14 +372,14 @@ libman uninstall [-h|--help]
 
 ## <a name="update-library-version"></a>라이브러리 버전 업데이트
 
-`libman update` 명령은 지정 된 버전에 라이브러리를 통해 설치 된 라이브러리를 업데이트 합니다.
+`libman update` 명령은 LibMan을 통해 설치된 라이브러리를 지정된 버전으로 업데이트합니다.
 
-다음과 같은 경우 오류가 발생 합니다.
+다음 경우에 오류가 발생합니다.
 
-* 프로젝트 루트에 없습니다 *. json* 파일이 없습니다.
-* 지정 된 라이브러리가 없습니다.
+* 프로젝트 루트에는 *libman.json* 파일이 없습니다.
+* 지정된 라이브러리가 없습니다.
 
-이름이 같은 라이브러리가 둘 이상 설치 되어 있으면 하나를 선택 하 라는 메시지가 표시 됩니다.
+이름이 같은 라이브러리가 2개 이상 설치되어 있으면 하나를 선택하라는 메시지가 표시됩니다.
 
 ### <a name="synopsis"></a>개요
 
@@ -394,7 +394,7 @@ libman update [-h|--help]
 
 업데이트할 라이브러리의 이름입니다.
 
-### <a name="options"></a>Options
+### <a name="options"></a>옵션
 
 다음 옵션은 `libman update` 명령에 사용할 수 있습니다.
 
@@ -410,19 +410,19 @@ libman update [-h|--help]
 
 ### <a name="examples"></a>예
 
-* JQuery를 최신 버전으로 업데이트 하려면 다음을 수행 합니다.
+* jQuery를 최신 버전으로 업데이트하려면 다음을 수행합니다.
 
   ```console
   libman update jquery
   ```
 
-* JQuery를 버전 3.3.1로 업데이트 하려면 다음을 수행 합니다.
+* jQuery를 버전 3.3.1로 업데이트하려면 다음을 수행합니다.
 
   ```console
   libman update jquery --to 3.3.1
   ```
 
-* JQuery를 최신 시험판 버전으로 업데이트 하려면 다음을 수행 합니다.
+* jQuery를 최신 시험판 버전으로 업데이트하려면 다음을 수행합니다.
 
   ```console
   libman update jquery -pre
@@ -430,7 +430,7 @@ libman update [-h|--help]
 
 ## <a name="manage-library-cache"></a>라이브러리 캐시 관리
 
-`libman cache` 명령은 라이브러리 캐시를 관리 합니다. `filesystem` 공급자는 라이브러리 캐시를 사용 하지 않습니다.
+`libman cache` 명령은 LibMan 라이브러리 캐시를 관리합니다. `filesystem` 공급자는 라이브러리 캐시를 사용하지 않습니다.
 
 ### <a name="synopsis"></a>개요
 
@@ -444,27 +444,27 @@ libman cache [-h|--help]
 
 `PROVIDER`
 
-`clean` 명령 에서만 사용 됩니다. 정리할 공급자 캐시를 지정 합니다. 유효한 값은 다음과 같습니다.
+`clean` 명령에서만 사용됩니다. 정리할 공급자 캐시를 지정합니다. 유효한 값은 다음과 같습니다.
 
 [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
-### <a name="options"></a>Options
+### <a name="options"></a>옵션
 
 다음 옵션은 `libman cache` 명령에 사용할 수 있습니다.
 
 * `--files`
 
-  캐시 된 파일의 이름을 나열 합니다.
+  캐시된 파일의 이름을 나열합니다.
 
 * `--libraries`
 
-  캐시 된 라이브러리의 이름을 나열 합니다.
+  캐시된 라이브러리의 이름을 나열합니다.
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
 ### <a name="examples"></a>예
 
-* 공급자 당 캐시 된 라이브러리의 이름을 보려면 다음 명령 중 하나를 사용 합니다.
+* 공급자당 캐시된 라이브러리의 이름을 보려면 다음 명령 중 하나를 사용합니다.
 
   ```console
   libman cache list
@@ -491,7 +491,7 @@ libman cache [-h|--help]
       react
   ```
 
-* 공급자 당 캐시 된 라이브러리 파일의 이름을 보려면 다음을 수행 합니다.
+* 공급자당 캐시된 라이브러리 파일의 이름을 보려면 다음을 수행합니다.
 
   ```console
   libman cache list --files
@@ -540,15 +540,15 @@ libman cache [-h|--help]
           metadata.json
   ```
 
-  위의 출력은 jQuery 버전 3.2.1 및 3.3.1가 CDNJS 공급자 아래에 캐시 됨을 보여 줍니다.
+  위의 출력은 jQuery 버전 3.2.1 및 3.3.1이 CDNJS 공급자 아래에 캐시됨을 보여 줍니다.
 
-* CDNJS 공급자에 대 한 라이브러리 캐시를 비우려면:
+* CDNJS 공급자에 대한 라이브러리 캐시를 비우려면 다음을 수행합니다.
 
   ```console
   libman cache clean cdnjs
   ```
 
-  CDNJS 공급자 캐시를 비운 후 `libman cache list` 명령은 다음을 표시 합니다.
+  CDNJS 공급자 캐시를 비우면 `libman cache list` 명령은 다음을 표시합니다.
 
   ```console
   Cache contents:
@@ -561,13 +561,13 @@ libman cache [-h|--help]
       (empty)
   ```
 
-* 지원 되는 모든 공급자에 대 한 캐시를 비우려면:
+* 지원되는 모든 공급자에 대한 캐시를 비우려면 다음을 수행합니다.
 
   ```console
   libman cache clean
   ```
 
-  모든 공급자 캐시를 비운 후 `libman cache list` 명령은 다음을 표시 합니다.
+  모든 공급자 캐시를 비우면 `libman cache list` 명령은 다음을 표시합니다.
 
   ```console
   Cache contents:
@@ -580,6 +580,6 @@ libman cache [-h|--help]
 
 ## <a name="additional-resources"></a>추가 자료
 
-* [글로벌 도구 설치](/dotnet/core/tools/global-tools#install-a-global-tool)
+* [전역 도구 설치](/dotnet/core/tools/global-tools#install-a-global-tool)
 * <xref:client-side/libman/libman-vs>
 * [LibMan GitHub 리포지토리](https://github.com/aspnet/LibraryManager)

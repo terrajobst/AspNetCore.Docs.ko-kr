@@ -1,22 +1,22 @@
 ---
 title: 프록시 서버 및 부하 분산 장치를 사용하도록 ASP.NET Core 구성
-author: guardrex
+author: rick-anderson
 description: 중요한 요청 정보를 종종 숨기는 프록시 서버 및 부하 분산 장치 뒤에 호스트되는 앱의 구성에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 uid: host-and-deploy/proxy-load-balancer
-ms.openlocfilehash: 9db9ef386b84907f10e0393aca125edc9f32424a
-ms.sourcegitcommit: 85564ee396c74c7651ac47dd45082f3f1803f7a2
+ms.openlocfilehash: b5c81e0cfa29cddeb1aeed1119a711fca4d91ae4
+ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 02/12/2020
-ms.locfileid: "77172455"
+ms.lasthandoff: 03/06/2020
+ms.locfileid: "78647355"
 ---
 # <a name="configure-aspnet-core-to-work-with-proxy-servers-and-load-balancers"></a>프록시 서버 및 부하 분산 장치를 사용하도록 ASP.NET Core 구성
 
-작성자: [Luke Latham](https://github.com/guardrex) 및 [Chris Ross](https://github.com/Tratcher)
+작성자: [Chris Ross](https://github.com/Tratcher)
 
 ::: moniker range=">= aspnetcore-3.0"
 
