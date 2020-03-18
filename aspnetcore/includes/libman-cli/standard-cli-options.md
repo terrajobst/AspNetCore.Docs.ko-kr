@@ -1,10 +1,10 @@
 * `-h|--help`
 
-  <span data-ttu-id="698f2-101">도움말 정보를 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="698f2-101">Show help information.</span></span>
+  <span data-ttu-id="e0de4-101">도움말 정보를 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="e0de4-101">Show help information.</span></span>
 
 * `--verbosity <LEVEL>`
 
-  <span data-ttu-id="698f2-102">출력의 상세한 정도를 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="698f2-102">Set the verbosity of the output.</span></span> <span data-ttu-id="698f2-103">`<LEVEL>`을 다음 값 중 하나로 대체하세요.</span><span class="sxs-lookup"><span data-stu-id="698f2-103">Replace `<LEVEL>` with one of the following values:</span></span>
+  <span data-ttu-id="e0de4-102">출력의 자세한 정도를 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="e0de4-102">Set the verbosity of the output.</span></span> <span data-ttu-id="e0de4-103">`<LEVEL>`을 다음 값 중 하나로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="e0de4-103">Replace `<LEVEL>` with one of the following values:</span></span>
   
   * `quiet`
   * `normal`
