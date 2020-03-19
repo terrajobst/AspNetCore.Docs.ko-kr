@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/24/2018
 uid: migration/mvc2
-ms.openlocfilehash: 11bd3b948afaedc675ac4249099969382683f653
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 5a2437f8dddee49d402bf7df67cb15aa895367b2
+ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653973"
+ms.lasthandoff: 03/18/2020
+ms.locfileid: "79511089"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core-20"></a>ASP.NET에서 ASP.NET Core 2.0으로 마이그레이션
 
@@ -21,7 +21,7 @@ ms.locfileid: "78653973"
 
 ## <a name="prerequisites"></a>사전 요구 사항
 
-[.Net 다운로드: Windows](https://www.microsoft.com/net/download/windows)에서 다음 중 **하나** 를 설치 합니다.
+[.Net 다운로드: Windows](https://dotnet.microsoft.com/download)에서 다음 중 **하나** 를 설치 합니다.
 
 * .NET Core SDK
 * Visual Studio for Windows
