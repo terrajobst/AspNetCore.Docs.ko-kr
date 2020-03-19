@@ -6,12 +6,12 @@ ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 uid: azure/devops/tools-and-downloads
-ms.openlocfilehash: 25ce311373b0aaddfa3bc2728c39e503acbca69d
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 9c1042dd48b9167209b46e97a09e011b80e2609c
+ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78647445"
+ms.lasthandoff: 03/18/2020
+ms.locfileid: "79511147"
 ---
 # <a name="tools-and-downloads"></a>도구 및 다운로드
 
@@ -28,7 +28,7 @@ Azure에는 [Azure Portal](https://portal.azure.com), [Azure CLI](/cli/azure/), 
 다음 도구가 필요합니다.
 
 * [Git](https://git-scm.com/downloads) - 이 가이드를 수행하려면 Git의 기본 사항을 알아두는 것이 좋습니다. [Git 설명서](https://git-scm.com/doc), 특히 [git remote](https://git-scm.com/docs/git-remote) 및 [git push](https://git-scm.com/docs/git-push)를 검토합니다.
-* [.NET Core SDK](https://www.microsoft.com/net/download/) - 샘플 앱을 빌드하고 실행하려면 버전 2.1.300 이상이 필요합니다. **.NET Core 플랫폼 간 개발** 워크로드를 사용하여 Visual Studio를 설치한 경우에는 .NET Core SDK가 이미 설치되어 있습니다.
+* [.NET Core SDK](https://dotnet.microsoft.com/download/) - 샘플 앱을 빌드하고 실행하려면 버전 2.1.300 이상이 필요합니다. **.NET Core 플랫폼 간 개발** 워크로드를 사용하여 Visual Studio를 설치한 경우에는 .NET Core SDK가 이미 설치되어 있습니다.
 
     .NET Core SDK 설치를 확인합니다. 명령 셸을 열고 다음 명령을 실행합니다.
 

@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 uid: host-and-deploy/azure-iis-errors-reference
-ms.openlocfilehash: dd74b451e396ae1dec61b6ccc9136218db39b949
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 635c4cf6f12e62ca7e795b3b3b47e9445b945551
+ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78648615"
+ms.lasthandoff: 03/18/2020
+ms.locfileid: "79511602"
 ---
 # <a name="common-errors-reference-for-azure-app-service-and-iis-with-aspnet-core"></a>ASP.NET Core를 사용하는 Azure App Service 및 IIS에 대한 일반적인 오류 참조
 
@@ -50,7 +50,7 @@ OS를 업그레이드하는 동안 **C:\Windows\SysWOW64\inetsrv** 디렉터리�
 
 ## <a name="missing-site-extension-32-bit-x86-and-64-bit-x64-site-extensions-installed-or-wrong-process-bitness-set"></a>사이트 확장 누락, 32비트(x86) 및 64비트(x64) 사이트 확장이 설치됨 또는 잘못된 프로세스 비트 수가 설정됨
 
-Azure App Services에서 호스트하는 앱에 적용됩니다.
+Azure App Services에서 호스트하는 앱에 적용됩니다. 
 
 * **브라우저:** HTTP 오류 500.0 - ANCM In-Process 처리기 로드 실패
 
@@ -71,7 +71,7 @@ Azure App Services에서 호스트하는 앱에 적용됩니다.
 
 * 미리 보기 런타임에서 앱을 실행 중이며 32비트(x86) 및 64비트(x64) [사이트 확장](xref:host-and-deploy/azure-apps/index#install-the-preview-site-extension)이 둘 다 설치된 경우 앱의 비트 수와 일치하지 않는 사이트 확장을 제거합니다. 사이트 확장을 제거한 후 앱을 다시 시작합니다. 앱이 다시 시작될 때까지 몇 초간 기다립니다.
 
-* 미리 보기 런타임에서 앱을 실행 중이며 사이트 확장의 비트 수가 앱의 비트 수와 일치하는 경우 미리 보기 사이트 확장의 ‘런타임 버전’이 앱의 런타임 버전과 일치하는지 확인합니다.
+* 미리 보기 런타임에서 앱을 실행 중이며 사이트 확장의 비트 수가 앱의 비트 수와 일치하는 경우 미리 보기 사이트 확장의 ‘런타임 버전’이 앱의 런타임 버전과 일치하는지 확인합니다. 
 
 * **애플리케이션 설정**에 있는 앱의 **플랫폼**이 앱의 비트 수와 일치하는지 확인합니다.
 
@@ -121,7 +121,7 @@ x86 프레임워크 종속 배포(`<PlatformTarget>x86</PlatformTarget>`)의 경
 
 * 사용 중인 앱에 대해 올바른 URI 엔드포인트를 확인합니다. 바인딩을 확인합니다.
 
-* IIS 웹 사이트가 ‘중지됨’ 상태가 아닌지 확인합니다.
+* IIS 웹 사이트가 ‘중지됨’ 상태가 아닌지 확인합니다. 
 
 ## <a name="corewebengine-or-w3svc-server-features-disabled"></a>CoreWebEngine 또는 W3SVC 서버 기능이 사용되지 않음
 
@@ -161,7 +161,7 @@ IIS 웹 사이트 **기본 설정**과 실제 앱 폴더를 확인합니다. 앱
 
 * **프로그램 및 기능** 또는 **앱 및 기능**을 열고 **Windows Server 호스팅**이 설치되어 있는지 확인합니다. **Windows Server 호스팅**이 설치된 프로그램 목록에 없는 경우 .NET Core 호스팅 번들을 다운로드하여 설치합니다.
 
-  [현재 .NET Core 호스팅 번들 설치 관리자(직접 다운로드)](https://www.microsoft.com/net/permalink/dotnetcore-current-windows-runtime-bundle-installer)
+  [현재 .NET Core 호스팅 번들 설치 관리자(직접 다운로드)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
 
   자세한 내용은 [.NET Core 호스팅 번들 설치](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle)를 참조하세요.
 
@@ -199,7 +199,7 @@ IIS 웹 사이트 **기본 설정**과 실제 앱 폴더를 확인합니다. 앱
 
 * 호스팅 시스템에 .NET Core 런타임을 설치하지 않고 FDD를 배포했을 수 있습니다. .NET Core 런타임이 설치되어 있지 않으면 시스템에서 **.NET Core 호스팅 번들 설치 관리자**를 실행합니다.
 
-  [현재 .NET Core 호스팅 번들 설치 관리자(직접 다운로드)](https://www.microsoft.com/net/permalink/dotnetcore-current-windows-runtime-bundle-installer)
+  [현재 .NET Core 호스팅 번들 설치 관리자(직접 다운로드)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
 
   자세한 내용은 [.NET Core 호스팅 번들 설치](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle)를 참조하세요.
 
@@ -211,7 +211,7 @@ IIS 웹 사이트 **기본 설정**과 실제 앱 폴더를 확인합니다. 앱
 
 * **애플리케이션 로그:** hostfxr를 호출하여 inprocess 요청 처리기를 찾는 데 실패했으며 네이티브 종속성을 찾지 못했습니다. 이는 앱이 잘못 구성되었음을 의미할 가능성이 높으며, 앱이 대상으로 하고 머신에 설치되어 있는 Microsoft.NetCore.App 및 Microsoft.AspNetCore.App 버전을 확인하세요. inprocess 요청 처리기를 찾을 수 없습니다. hostfxr 호출에서 캡처된 출력: dotnet SDK 명령을 실행하시겠습니까? 다음 위치에서 dotnet SDK를 설치하세요. https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409 애플리케이션 '/LM/W3SVC/3/ROOT'를 시작하지 못했습니다. 오류 코드 '0x8000ffff'.
 
-* **ASP.NET Core 모듈 stdout 로그:** dotnet SDK 명령을 실행하시겠습니까? [https://go.microsoft.com/fwlink/?LinkID=798306&amp;clcid=0x409](https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409) 에서 dotnet SDK를 설치하세요.
+* **ASP.NET Core 모듈 stdout 로그:** dotnet SDK 명령을 실행하시겠습니까? [https://go.microsoft.com/fwlink/?LinkID=798306&amp;clcid=0x409](https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409 ) 에서 dotnet SDK를 설치하세요.
 
 * **ASP.NET Core 모듈 디버그 로그:** hostfxr를 호출하여 inprocess 요청 처리기를 찾는 데 실패했으며 네이티브 종속성을 찾지 못했습니다. 이는 앱이 잘못 구성되었음을 의미할 가능성이 높으며, 앱이 대상으로 하고 머신에 설치되어 있는 Microsoft.NetCore.App 및 Microsoft.AspNetCore.App 버전을 확인하세요. 실패한 HRESULT가 반환되었습니다. 0x8000ffff inprocess 요청 처리기를 찾을 수 없습니다. hostfxr 호출에서 캡처된 출력: dotnet SDK 명령을 실행하시겠습니까? 다음 위치에서 dotnet SDK를 설치하세요. https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409 실패한 HRESULT가 반환되었습니다. 0x8000ffff
 
@@ -249,7 +249,7 @@ FDD(프레임워크 종속 배포)의 경우 시스템에 올바른 런타임이
 
 문제 해결:
 
-애플리케이션 풀이 ‘중지됨’ 상태가 아닌지 확인합니다.
+애플리케이션 풀이 ‘중지됨’ 상태가 아닌지 확인합니다. 
 
 ## <a name="sub-application-includes-a-handlers-section"></a>하위 애플리케이션에 \<handlers> 섹션이 포함되어 있음
 
@@ -338,7 +338,7 @@ OS를 업그레이드하는 동안 **C:\Windows\SysWOW64\inetsrv** 디렉터리�
 
 ## <a name="missing-site-extension-32-bit-x86-and-64-bit-x64-site-extensions-installed-or-wrong-process-bitness-set"></a>사이트 확장 누락, 32비트(x86) 및 64비트(x64) 사이트 확장이 설치됨 또는 잘못된 프로세스 비트 수가 설정됨
 
-Azure App Services에서 호스트하는 앱에 적용됩니다.
+Azure App Services에서 호스트하는 앱에 적용됩니다. 
 
 * **브라우저:** HTTP 오류 500.0 - ANCM In-Process 처리기 로드 실패
 
@@ -357,7 +357,7 @@ Azure App Services에서 호스트하는 앱에 적용됩니다.
 
 * 미리 보기 런타임에서 앱을 실행 중이며 32비트(x86) 및 64비트(x64) [사이트 확장](xref:host-and-deploy/azure-apps/index#install-the-preview-site-extension)이 둘 다 설치된 경우 앱의 비트 수와 일치하지 않는 사이트 확장을 제거합니다. 사이트 확장을 제거한 후 앱을 다시 시작합니다. 앱이 다시 시작될 때까지 몇 초간 기다립니다.
 
-* 미리 보기 런타임에서 앱을 실행 중이며 사이트 확장의 비트 수가 앱의 비트 수와 일치하는 경우 미리 보기 사이트 확장의 ‘런타임 버전’이 앱의 런타임 버전과 일치하는지 확인합니다.
+* 미리 보기 런타임에서 앱을 실행 중이며 사이트 확장의 비트 수가 앱의 비트 수와 일치하는 경우 미리 보기 사이트 확장의 ‘런타임 버전’이 앱의 런타임 버전과 일치하는지 확인합니다. 
 
 * **애플리케이션 설정**에 있는 앱의 **플랫폼**이 앱의 비트 수와 일치하는지 확인합니다.
 
@@ -403,7 +403,7 @@ x86 프레임워크 종속 배포(`<PlatformTarget>x86</PlatformTarget>`)의 경
 
 * 사용 중인 앱에 대해 올바른 URI 엔드포인트를 확인합니다. 바인딩을 확인합니다.
 
-* IIS 웹 사이트가 ‘중지됨’ 상태가 아닌지 확인합니다.
+* IIS 웹 사이트가 ‘중지됨’ 상태가 아닌지 확인합니다. 
 
 ## <a name="corewebengine-or-w3svc-server-features-disabled"></a>CoreWebEngine 또는 W3SVC 서버 기능이 사용되지 않음
 
@@ -439,7 +439,7 @@ IIS 웹 사이트 **기본 설정**과 실제 앱 폴더를 확인합니다. 앱
 
 * **프로그램 및 기능** 또는 **앱 및 기능**을 열고 **Windows Server 호스팅**이 설치되어 있는지 확인합니다. **Windows Server 호스팅**이 설치된 프로그램 목록에 없는 경우 .NET Core 호스팅 번들을 다운로드하여 설치합니다.
 
-  [현재 .NET Core 호스팅 번들 설치 관리자(직접 다운로드)](https://www.microsoft.com/net/permalink/dotnetcore-current-windows-runtime-bundle-installer)
+  [현재 .NET Core 호스팅 번들 설치 관리자(직접 다운로드)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
 
   자세한 내용은 [.NET Core 호스팅 번들 설치](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle)를 참조하세요.
 
@@ -475,7 +475,7 @@ IIS 웹 사이트 **기본 설정**과 실제 앱 폴더를 확인합니다. 앱
 
 * 호스팅 시스템에 .NET Core 런타임을 설치하지 않고 FDD를 배포했을 수 있습니다. .NET Core 런타임이 설치되어 있지 않으면 시스템에서 **.NET Core 호스팅 번들 설치 관리자**를 실행합니다.
 
-  [현재 .NET Core 호스팅 번들 설치 관리자(직접 다운로드)](https://www.microsoft.com/net/permalink/dotnetcore-current-windows-runtime-bundle-installer)
+  [현재 .NET Core 호스팅 번들 설치 관리자(직접 다운로드)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
 
   자세한 내용은 [.NET Core 호스팅 번들 설치](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle)를 참조하세요.
 
@@ -509,7 +509,7 @@ FDD(프레임워크 종속 배포)의 경우 시스템에 올바른 런타임이
 
 문제 해결:
 
-애플리케이션 풀이 ‘중지됨’ 상태가 아닌지 확인합니다.
+애플리케이션 풀이 ‘중지됨’ 상태가 아닌지 확인합니다. 
 
 ## <a name="sub-application-includes-a-handlers-section"></a>하위 애플리케이션에 \<handlers> 섹션이 포함되어 있음
 

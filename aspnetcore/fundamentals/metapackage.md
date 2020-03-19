@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/25/2018
 uid: fundamentals/metapackage
-ms.openlocfilehash: e47f583d0fa75bdeb26b669303747a70619117c1
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: cc00c075909da5c17a4aa2fd252c9e662e5a0fc9
+ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78648963"
+ms.lasthandoff: 03/18/2020
+ms.locfileid: "79511069"
 ---
 # <a name="microsoftaspnetcoreall-metapackage-for-aspnet-core-20"></a>ASP.NET Core 2.0용 Microsoft.AspNetCore.All 메타패키지
 
@@ -27,7 +27,7 @@ ms.locfileid: "78648963"
 
 이 기능을 사용하려면 .NET Core 2.x를 대상으로 하는 ASP.NET Core 2.x가 필요합니다.
 
-[Microsoft.AspNetCore.All](https://www.nuget.org/packages/Microsoft.AspNetCore.All)은 공유 프레임워크를 참조하는 메타패키지입니다. 공유 프레임워크는 앱 폴더에 없는 어셈블리(*.dll* 파일) 세트입니다.** 공유 프레임워크는 앱을 실행할 머신에 설치해야 합니다. 자세한 내용은 [공유 프레임워크](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/)를 참조하세요.
+[Microsoft.AspNetCore.All](https://www.nuget.org/packages/Microsoft.AspNetCore.All)은 공유 프레임워크를 참조하는 메타패키지입니다. 공유 프레임워크는 앱 폴더에 없는 어셈블리( *.dll* 파일) 세트입니다.  공유 프레임워크는 앱을 실행할 머신에 설치해야 합니다. 자세한 내용은 [공유 프레임워크](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/)를 참조하세요.
 
 `Microsoft.AspNetCore.All`이 참조하는 공유 프레임워크에는 다음이 포함됩니다.
 
@@ -92,8 +92,8 @@ ASP.NET Core 2.1 이상에서는 버전 없이 `Microsoft.AspNetCore.All` 패키
 
 ## <a name="update-aspnet-core-21"></a>ASP.NET Core 2.1 업데이트
 
-2.1 이상의 경우 `Microsoft.AspNetCore.App` 메타패키지로 마이그레이션하는 것이 좋습니다. `Microsoft.AspNetCore.All` 메타패키지를 계속 사용하고 최신 패치 버전이 배포되었는지 확인하려면:
+2\.1 이상의 경우 `Microsoft.AspNetCore.App` 메타패키지로 마이그레이션하는 것이 좋습니다. `Microsoft.AspNetCore.All` 메타패키지를 계속 사용하고 최신 패치 버전이 배포되었는지 확인하려면:
 
-* 개발 머신 및 빌드 서버: 최신 [.NET Core SDK](https://www.microsoft.com/net/download)를 설치합니다.
-* 배포 서버: 최신 [.NET Core 런타임](https://www.microsoft.com/net/download)을 설치합니다.
+* 개발 머신 및 빌드 서버: 최신 [.NET Core SDK](https://dotnet.microsoft.com/download)를 설치합니다.
+* 배포 서버: 최신 [.NET Core 런타임](https://dotnet.microsoft.com/download)을 설치합니다.
  애플리케이션을 다시 시작하면 앱이 최신 설치 버전으로 롤포워드됩니다.

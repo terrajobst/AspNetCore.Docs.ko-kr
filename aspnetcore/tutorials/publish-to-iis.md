@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/03/2019
 uid: tutorials/publish-to-iis
-ms.openlocfilehash: f3860ba6ca7b99e63000ba0066749751f80cdc23
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 47f78ba78741a8e0175ce801c0c0e51f091273a8
+ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78646623"
+ms.lasthandoff: 03/18/2020
+ms.locfileid: "79511394"
 ---
 # <a name="publish-an-aspnet-core-app-to-iis"></a>IIS에 ASP.NET Core 앱 게시
 
@@ -28,7 +28,7 @@ ms.locfileid: "78646623"
 ## <a name="prerequisites"></a>사전 요구 사항
 
 * [.NET Core SDK](/dotnet/core/sdk)가 개발 머신에 설치되어 있어야 합니다.
-* Windows Server가 **웹 서버(IIS)** 서버 역할로 구성되어 있어야 합니다. 서버가 IIS를 사용하여 웹 사이트를 호스트하도록 구성되지 않은 경우 <xref:host-and-deploy/iis/index#iis-configuration> 문서의 ‘IIS 구성’ 섹션에 있는 지침을 따르고 이 자습서로 돌아옵니다.
+* Windows Server가 **웹 서버(IIS)** 서버 역할로 구성되어 있어야 합니다. 서버가 IIS를 사용하여 웹 사이트를 호스트하도록 구성되지 않은 경우 <xref:host-and-deploy/iis/index#iis-configuration> 문서의 ‘IIS 구성’ 섹션에 있는 지침을 따르고 이 자습서로 돌아옵니다. 
 
 > [!WARNING]
 > **IIS 구성 및 웹 사이트 보안에는 이 자습서에서 다루지 않는 개념이 포함됩니다.** IIS에서 프로덕션 앱을 호스트하기 전에 [Microsoft IIS 설명서](https://www.iis.net/)의 IIS 지침 및 [IIS를 사용한 호스트에 대한 ASP.NET Core 문서](xref:host-and-deploy/iis/index)를 참조하세요.
@@ -45,7 +45,7 @@ IIS 서버에 *.NET Core 호스팅 번들*을 설치합니다. 번들은 .NET Co
 
 다음 링크를 사용하여 설치 관리자를 다운로드합니다.
 
-[현재 .NET Core 호스팅 번들 설치 관리자(직접 다운로드)](https://www.microsoft.com/net/permalink/dotnetcore-current-windows-runtime-bundle-installer)
+[현재 .NET Core 호스팅 번들 설치 관리자(직접 다운로드)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
 
 1. IIS 서버에서 설치 관리자를 실행합니다.
 
@@ -65,7 +65,7 @@ IIS 서버에 *.NET Core 호스팅 번들*을 설치합니다. 번들은 .NET Co
 
 ## <a name="publish-and-deploy-the-app"></a>앱 게시 및 배포
 
-‘앱 게시’는 서버에서 호스트할 수 있는 컴파일된 앱을 생성하는 것을 의미합니다. ‘앱 배포’는 게시된 앱을 호스팅 시스템으로 이동하는 것을 의미합니다. 게시 단계는 [.NET Core SDK](/dotnet/core/sdk)에서 처리되지만, 배포 단계는 다양한 방법으로 처리될 수 있습니다. 이 자습서에서는 다음과 같은 ‘폴더’ 배포 방법을 채택합니다.
+‘앱 게시’는 서버에서 호스트할 수 있는 컴파일된 앱을 생성하는 것을 의미합니다.  ‘앱 배포’는 게시된 앱을 호스팅 시스템으로 이동하는 것을 의미합니다.  게시 단계는 [.NET Core SDK](/dotnet/core/sdk)에서 처리되지만, 배포 단계는 다양한 방법으로 처리될 수 있습니다. 이 자습서에서는 다음과 같은 ‘폴더’ 배포 방법을 채택합니다. 
 
 * 앱은 폴더에 게시됩니다.
 * 폴더의 콘텐츠는 IIS 사이트의 폴더(IIS 관리자에 있는 사이트의 **실제 경로**)로 이동됩니다.

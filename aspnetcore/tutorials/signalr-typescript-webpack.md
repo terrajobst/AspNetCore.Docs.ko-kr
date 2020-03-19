@@ -8,12 +8,12 @@ ms.date: 02/10/2020
 no-loc:
 - SignalR
 uid: tutorials/signalr-typescript-webpack
-ms.openlocfilehash: e6dd200367278b1697ef232f5d79dfbd138bb82b
-ms.sourcegitcommit: 40dc9b00131985abcd99bd567647420d798e798a
+ms.openlocfilehash: ce5752743912a979a95fb5d504e4bcbb2b69ce1e
+ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/09/2020
-ms.locfileid: "78935487"
+ms.lasthandoff: 03/18/2020
+ms.locfileid: "79511342"
 ---
 # <a name="use-aspnet-core-signalr-with-typescript-and-webpack"></a>TypeScript 및 WebPack과 함께 ASP.NET Core SignalR 사용
 
@@ -39,13 +39,13 @@ ms.locfileid: "78935487"
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * **ASP.NET 및 웹 개발** 워크로드가 설치된 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
-* [.NET Core SDK 3.0 이상](https://www.microsoft.com/net/download/all)
+* [.NET Core SDK 3.0 이상](https://dotnet.microsoft.com/download/dotnet-core)
 * [Node.js](https://www.npmjs.com/) ([npm](https://nodejs.org/) 포함)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * [Visual Studio Code](https://code.visualstudio.com/download)
-* [.NET Core SDK 3.0 이상](https://www.microsoft.com/net/download/all)
+* [.NET Core SDK 3.0 이상](https://dotnet.microsoft.com/download/dotnet-core)
 * [Visual Studio Code용 C# 버전 1.17.1 이상](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
 * [Node.js](https://www.npmjs.com/) ([npm](https://nodejs.org/) 포함)
 
@@ -296,13 +296,13 @@ dotnet add package Microsoft.TypeScript.MSBuild
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * **ASP.NET 및 웹 개발** 워크로드가 있는 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
-* [.NET Core SDK 2.2 이상](https://www.microsoft.com/net/download/all)
+* [.NET Core SDK 2.2 이상](https://dotnet.microsoft.com/download/dotnet-core)
 * [Node.js](https://www.npmjs.com/) ([npm](https://nodejs.org/) 포함)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * [Visual Studio Code](https://code.visualstudio.com/download)
-* [.NET Core SDK 2.2 이상](https://www.microsoft.com/net/download/all)
+* [.NET Core SDK 2.2 이상](https://dotnet.microsoft.com/download/dotnet-core)
 * [Visual Studio Code용 C# 버전 1.17.1 이상](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
 * [Node.js](https://www.npmjs.com/) ([npm](https://nodejs.org/) 포함)
 

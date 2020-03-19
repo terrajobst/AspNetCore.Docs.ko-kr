@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/10/2019
 uid: test/troubleshoot
-ms.openlocfilehash: 042e1c84a7226cb4bf56bcc0ff4e576b67e68e1b
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 345967f08cf99ef5f18d0c9bcd59ab29c74454f1
+ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78644859"
+ms.lasthandoff: 03/18/2020
+ms.locfileid: "79511511"
 ---
 # <a name="troubleshoot-and-debug-aspnet-core-projects"></a>ASP.NET Core 프로젝트 문제 해결 및 디버깅
 
@@ -32,7 +32,7 @@ ASP.NET Core에 대한 **새 프로젝트** 대화 상자에서 다음과 같은
 
 > .NET Core SDK 32비트 및 64비트 버전이 모두 설치되어 있습니다. 'C:\\Program Files\\dotnet\\sdk\\'에 설치된 64비트 버전의 템플릿만 표시됩니다.
 
-이 경고는 [.NET Core SDK](https://www.microsoft.com/net/download/all) 32비트(x86) 및 64비트(x64) 버전이 모두 설치된 경우에 나타납니다. 두 버전이 모두 설치될 수 있는 일반적인 이유에는 다음이 포함됩니다.
+이 경고는 [.NET Core SDK](https://dotnet.microsoft.com/download/dotnet-core) 32비트(x86) 및 64비트(x64) 버전이 모두 설치된 경우에 나타납니다. 두 버전이 모두 설치될 수 있는 일반적인 이유에는 다음이 포함됩니다.
 
 * 처음에 32비트 컴퓨터를 사용하여 .NET Core SDK 설치 관리자를 다운로드한 다음, 복사하고 64비트 컴퓨터에 설치했습니다.
 * 32비트 .NET Core SDK가 다른 애플리케이션에 의해 설치되었습니다.

@@ -7,12 +7,12 @@ ms.author: scaddie
 ms.custom: mvc, seodec18
 ms.date: 08/17/2019
 uid: tutorials/first-mongo-app
-ms.openlocfilehash: 0e7881aa93953866c7a90eb62de64c4c000a866c
-ms.sourcegitcommit: 40dc9b00131985abcd99bd567647420d798e798a
+ms.openlocfilehash: d5ce4a1dc3c00b2b12edc12e26f482caa97df6b3
+ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/09/2020
-ms.locfileid: "78935447"
+ms.lasthandoff: 03/18/2020
+ms.locfileid: "79511420"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>ASP.NET Core 및 MongoDB를 사용하여 웹 API 만들기
 
@@ -37,20 +37,20 @@ ms.locfileid: "78935447"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* [.NET Core SDK 3.0 이상](https://www.microsoft.com/net/download/all)
+* [.NET Core SDK 3.0 이상](https://dotnet.microsoft.com/download/dotnet-core)
 * **ASP.NET 및 웹 개발** 워크로드가 설치된 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 * [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* [.NET Core SDK 3.0 이상](https://www.microsoft.com/net/download/all)
+* [.NET Core SDK 3.0 이상](https://dotnet.microsoft.com/download/dotnet-core)
 * [Visual Studio Code](https://code.visualstudio.com/download)
 * [Visual Studio Code용 C#](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
 * [MongoDB](https://docs.mongodb.com/manual/administration/install-community/)
 
 # <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
-* [.NET Core SDK 3.0 이상](https://www.microsoft.com/net/download/all)
+* [.NET Core SDK 3.0 이상](https://dotnet.microsoft.com/download/dotnet-core)
 * [Mac용 Visual Studio 버전 7.7 이상](https://visualstudio.microsoft.com/downloads/)
 * [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
 
@@ -387,20 +387,20 @@ Windows를 사용하는 경우 MongoDB는 기본적으로*C:\\Program Files\\Mon
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* [.NET Core SDK 2.2](https://www.microsoft.com/net/download/all)
+* [.NET Core SDK 2.2](https://dotnet.microsoft.com/download/dotnet-core)
 * **ASP.NET 및 웹 개발** 워크로드가 설치된 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 * [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* [.NET Core SDK 2.2](https://www.microsoft.com/net/download/all)
+* [.NET Core SDK 2.2](https://dotnet.microsoft.com/download/dotnet-core)
 * [Visual Studio Code](https://code.visualstudio.com/download)
 * [Visual Studio Code용 C#](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
 * [MongoDB](https://docs.mongodb.com/manual/administration/install-community/)
 
 # <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
 
-* [.NET Core SDK 2.2](https://www.microsoft.com/net/download/all)
+* [.NET Core SDK 2.2](https://dotnet.microsoft.com/download/dotnet-core)
 * [Mac용 Visual Studio 버전 7.7 이상](https://visualstudio.microsoft.com/downloads/)
 * [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
 

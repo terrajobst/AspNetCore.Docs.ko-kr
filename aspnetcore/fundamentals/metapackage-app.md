@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 09/24/2019
 uid: fundamentals/metapackage-app
-ms.openlocfilehash: 3ce74bc7329a88ffc6f77baf6b8a311c02951318
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: b30c90116f5a53ba487f88544514f36e388233d3
+ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78648957"
+ms.lasthandoff: 03/18/2020
+ms.locfileid: "79511381"
 ---
 # <a name="microsoftaspnetcoreapp-for-aspnet-core"></a>ASP.NET Core용 Microsoft.AspNetCore.App
 
@@ -107,8 +107,8 @@ ASP.NET Core 2.x 및 Entity Framework Core 2.x의 모든 기능은 `Microsoft.As
 
 ASP.NET Core를 업데이트하려면:
 
-* 개발 머신 및 빌드 서버: [.NET Core SDK](https://www.microsoft.com/net/download)를 다운로드하여 설치합니다.
-* 배포 서버: [.NET Core 런타임](https://www.microsoft.com/net/download)을 다운로드하여 설치합니다.
+* 개발 머신 및 빌드 서버: [.NET Core SDK](https://dotnet.microsoft.com/download)를 다운로드하여 설치합니다.
+* 배포 서버: [.NET Core 런타임](https://dotnet.microsoft.com/download)을 다운로드하여 설치합니다.
 
  애플리케이션을 다시 시작하면 애플리케이션이 최신 설치 버전으로 롤포워드됩니다. 프로젝트 파일에서 `Microsoft.AspNetCore.App` 버전 번호를 업데이트할 필요는 없습니다. 자세한 내용은 [Framework 종속 앱 롤포워드](/dotnet/core/versions/selection#framework-dependent-apps-roll-forward)를 참조하세요.
 

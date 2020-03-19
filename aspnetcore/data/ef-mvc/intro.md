@@ -7,12 +7,12 @@ ms.custom: mvc
 ms.date: 02/06/2019
 ms.topic: tutorial
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 8f6561616ccd0fde050276467920da8aa93677c6
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: fca9fdc425506ec8b4eec5c609237208f4c0d7b5
+ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78646149"
+ms.lasthandoff: 03/18/2020
+ms.locfileid: "79511303"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>자습서: ASP.NET MVC 웹앱에서 EF Core 시작
 
@@ -44,7 +44,7 @@ Contoso University 샘플 웹 애플리케이션은 EF(Entity Framework) Core 2.
 
 ## <a name="prerequisites"></a>사전 요구 사항
 
-* [.NET Core SDK 2.2](https://www.microsoft.com/net/download)
+* [.NET Core SDK 2.2](https://dotnet.microsoft.com/download)
 * 다른 워크로드를 포함한 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019):
   * **ASP.NET 및 웹 개발** 워크로드
   * **.NET Core 플랫폼 간 개발** 워크로드
