@@ -5,17 +5,17 @@ description: 선택한 도구로 Blazor 앱을 빌드하여 Blazor를 시작합�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/28/2019
+ms.date: 03/10/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: bd33d874b3d6122f2ab820e9b147b0e62ba03a58
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 89c7529d2b8ec97db731f7c7268e19937c398115
+ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78648633"
+ms.lasthandoff: 03/11/2020
+ms.locfileid: "79083247"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>ASP.NET Core Blazor 시작
 
@@ -28,12 +28,15 @@ Blazor를 시작합니다.
 1. [.NET Core 3.1 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1)를 설치합니다.
 
 1. 필요에 따라 [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) 템플릿을 설치합니다.
-   * [.NET Core 3.1 이상(미리 보기) SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1)를 설치합니다.
-   * 명령 셸에서 다음 명령을 실행합니다. [Microsoft.AspNetCore.Blazor.Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.Templates/) 패키지에는 미리 보기 버전이 포함되어 있으며 Blazor WebAssembly는 미리 보기로 제공됩니다.
+   * [.NET Core 3.1.102 이상(미리 보기) SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1)를 설치합니다.
+   * 명령 셸에서 다음 명령을 실행합니다. [Microsoft.AspNetCore.Components.WebAssembly.Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Templates/) 패키지에는 미리 보기 버전이 포함되어 있으며 Blazor WebAssembly는 미리 보기로 제공됩니다.
 
    ```dotnetcli
-   dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.2.0-preview1.20073.1
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview2.20160.5
    ```
+
+   > [!NOTE]
+   > 3\.2 미리 보기 2 Blazor WebAssembly 템플릿을 사용하려면 .NET Core SDK 버전 3.1.102 이상이 **필요**합니다. 명령 셸에서 `dotnet --version`을 실행하여 설치된 .NET Core SDK 버전을 확인합니다.
 
 1. 선택한 도구의 지침을 따르세요.
 
@@ -47,7 +50,7 @@ Blazor를 시작합니다.
 
    4\. **프로젝트 이름** 필드에 프로젝트 이름을 제공하거나 기본 프로젝트 이름을 수락합니다. **위치** 항목이 올바른지 확인하거나 프로젝트의 위치를 제공합니다. **만들기**를 선택합니다.
 
-   5\. Blazor WebAssembly 환경의 경우 **Blazor WebAssembly 앱** 템플릿을 선택합니다. Blazor 서버 환경의 경우 **Blazor 서버 앱** 템플릿을 선택합니다. **만들기**를 선택합니다. 두 가지 Blazor 호스팅 모델인 ‘Blazor 서버’와 *Blazor WebAssembly*에 대한 자세한 내용은 <xref:blazor/hosting-models>를 참조하세요. 
+   5\. Blazor WebAssembly 환경의 경우 **Blazor WebAssembly 앱** 템플릿을 선택합니다. Blazor 서버 환경의 경우 **Blazor 서버 앱** 템플릿을 선택합니다. **만들기**를 선택합니다. 두 가지 Blazor 호스팅 모델인 ‘Blazor 서버’와 *Blazor WebAssembly*에 대한 자세한 내용은 <xref:blazor/hosting-models>를 참조하세요.  Blazor WebAssembly 템플릿이 없으면 이전 단계로 돌아가서 템플릿을 다시 설치합니다.
 
    6\. **Ctrl**+**F5**를 눌러 앱을 실행합니다.
 
@@ -58,7 +61,7 @@ Blazor를 시작합니다.
 
    1\. [Visual Studio Code](https://code.visualstudio.com/)를 설치합니다.
 
-   2\. 최신 [Visual Studio Code용 C# 확장](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)을 설치합니다.
+   2\. 최신 [Visual Studio Code용 C# 확장](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)을 설치합니다.
 
    3\. Blazor WebAssembly 환경의 경우 명령 셸에서 다음 명령을 실행합니다.
 

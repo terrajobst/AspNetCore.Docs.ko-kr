@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: c2ca867e3eebdc3fcf512cc5d457ff3c1967f9b1
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: e4da57001ad369a8df87c7e0887772e3d75c032d
+ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78644199"
+ms.lasthandoff: 03/18/2020
+ms.locfileid: "79511225"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS가 있는 Windows에서 ASP.NET Core 호스팅
 
@@ -243,14 +243,14 @@ services.Configure<IISOptions>(options =>
 
 다음 링크를 사용하여 설치 관리자를 다운로드합니다.
 
-[현재 .NET Core 호스팅 번들 설치 관리자(직접 다운로드)](https://www.microsoft.com/net/permalink/dotnetcore-current-windows-runtime-bundle-installer)
+[현재 .NET Core 호스팅 번들 설치 관리자(직접 다운로드)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
 
 ### <a name="earlier-versions-of-the-installer"></a>이전 버전의 설치 관리자
 
 이전 버전의 설치 관리자를 가져오려면:
 
-1. [.NET 다운로드 보관](https://www.microsoft.com/net/download/archives)으로 이동합니다.
-1. **.NET Core**에서 .NET Core 버전을 선택합니다.
+1. [.NET Core 다운로드](https://dotnet.microsoft.com/download/dotnet-core) 페이지로 이동합니다.
+1. 원하는 .NET Core 버전을 클릭합니다.
 1. **앱 실행 - 런타임** 열에서 원하는 .NET Core 런타임 버전의 행을 찾습니다.
 1. **런타임 및 호스팅 번들** 링크를 사용하여 설치 관리자를 다운로드합니다.
 
@@ -425,7 +425,7 @@ ASP.NET Core 앱은 [IIS 하위 애플리케이션(하위 앱)](/iis/get-started
 
 하위 앱 내의 정적 자산 링크는 물결표-슬래시(`~/`) 표기법을 사용해야 합니다. 물결표-슬래시 표기법은 [태그 도우미](xref:mvc/views/tag-helpers/intro)를 트리거하여 하위 앱의 PathBase를 렌더링된 상대 링크 앞에 추가합니다. `/subapp_path`에서 하위 앱의 경우, `src="~/image.png"`와 연결된 이미지가 `src="/subapp_path/image.png"`으로 렌더링됩니다. 루트 앱의 정적 파일 미들웨어는 정적 파일 요청을 처리하지 않습니다. 요청은 하위 앱의 정적 파일 미들웨어에서 처리됩니다.
 
-정적 자산의 `src` 특성이 절대 경로(예: `src="/image.png"`)로 설정된 경우 링크는 하위 앱의 PathBase 없이 렌더링됩니다. 루트 앱의 정적 파일 미들웨어는 루트 앱의 [웹 루트](xref:fundamentals/index#web-root)에서 자산을 제공하려고 시도하며, 그 결과 루트 앱에서 정적 자산을 사용할 수 있지 않으면 ‘404 - 찾을 수 없음’이 발생합니다.
+정적 자산의 `src` 특성이 절대 경로(예: `src="/image.png"`)로 설정된 경우 링크는 하위 앱의 PathBase 없이 렌더링됩니다. 루트 앱의 정적 파일 미들웨어는 루트 앱의 [웹 루트](xref:fundamentals/index#web-root)에서 자산을 제공하려고 시도하며, 그 결과 루트 앱에서 정적 자산을 사용할 수 있지 않으면 ‘404 - 찾을 수 없음’이 발생합니다. 
 
 ASP.NET Core 앱을 다른 ASP.NET Core 앱에서 하위 앱으로 호스팅하려면 다음을 수행합니다.
 
@@ -529,7 +529,7 @@ HTTP/2는 기본적으로 사용됩니다. HTTP/2 연결이 설정되지 않은 
 
 ## <a name="cors-preflight-requests"></a>CORS 실행 전 요청
 
-이 섹션은 .NET Framework를 대상으로 하는 ASP.NET Core 앱에만 적용됩니다.
+이 섹션은 .NET Framework를 대상으로 하는 ASP.NET Core 앱에만 적용됩니다. 
 
 .NET Framework를 대상으로 하는 ASP.NET Core 앱의 경우 OPTIONS 요청은 IIS에서 기본적으로 앱에 전달되지 않습니다. OPTIONS 요청을 전달하도록 *web.config*에서 앱의 IIS 처리기를 구성하는 방법을 알아보려면 [ASP.NET Web API 2에서 원본 간 요청을 사용하도록 설정: CORS 작동 방식](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works)을 참조하세요.
 
@@ -542,7 +542,7 @@ ASP.NET Core 모듈 버전 2에서 IIS에 호스트된 경우
 
 ### <a name="application-initialization-module"></a>애플리케이션 초기화 모듈
 
-‘앱 호스팅 In Process 및 Out of Process에 적용됩니다.’
+‘앱 호스팅 In Process 및 Out of Process에 적용됩니다.’ 
 
 [IIS 애플리케이션 초기화](/iis/get-started/whats-new-in-iis-8/iis-80-application-initialization)는 앱 풀이 시작되거나 재활용될 때 HTTP 요청을 앱으로 보내는 IIS 기능입니다. 요청은 앱이 시작되도록 트리거합니다. 기본적으로 IIS는 앱의 루트 URL(`/`)에 요청을 실행하여 앱을 초기화합니다(구성에 대한 자세한 내용은 [추가 리소스](#application-initialization-module-and-idle-timeout-additional-resources) 참조).
 
@@ -586,7 +586,7 @@ Windows Server 2008 R2 이상
 
 ### <a name="idle-timeout"></a>유휴 시간 제한
 
-‘앱 호스팅 In Process 에만 적용됩니다.’
+‘앱 호스팅 In Process 에만 적용됩니다.’ 
 
 앱의 유휴 상태를 방지하려면 IIS 관리자를 사용하여 앱 풀의 유휴 시간 제한을 설정합니다.
 
@@ -850,14 +850,14 @@ services.Configure<IISOptions>(options =>
 
 다음 링크를 사용하여 설치 관리자를 다운로드합니다.
 
-[현재 .NET Core 호스팅 번들 설치 관리자(직접 다운로드)](https://www.microsoft.com/net/permalink/dotnetcore-current-windows-runtime-bundle-installer)
+[현재 .NET Core 호스팅 번들 설치 관리자(직접 다운로드)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
 
 ### <a name="earlier-versions-of-the-installer"></a>이전 버전의 설치 관리자
 
 이전 버전의 설치 관리자를 가져오려면:
 
-1. [.NET 다운로드 보관](https://www.microsoft.com/net/download/archives)으로 이동합니다.
-1. **.NET Core**에서 .NET Core 버전을 선택합니다.
+1. [.NET Core 다운로드](https://dotnet.microsoft.com/download/dotnet-core) 페이지로 이동합니다.
+1. 원하는 .NET Core 버전을 클릭합니다.
 1. **앱 실행 - 런타임** 열에서 원하는 .NET Core 런타임 버전의 행을 찾습니다.
 1. **런타임 및 호스팅 번들** 링크를 사용하여 설치 관리자를 다운로드합니다.
 
@@ -1029,7 +1029,7 @@ ASP.NET Core 앱은 [IIS 하위 애플리케이션(하위 앱)](/iis/get-started
 
 하위 앱 내의 정적 자산 링크는 물결표-슬래시(`~/`) 표기법을 사용해야 합니다. 물결표-슬래시 표기법은 [태그 도우미](xref:mvc/views/tag-helpers/intro)를 트리거하여 하위 앱의 PathBase를 렌더링된 상대 링크 앞에 추가합니다. `/subapp_path`에서 하위 앱의 경우, `src="~/image.png"`와 연결된 이미지가 `src="/subapp_path/image.png"`으로 렌더링됩니다. 루트 앱의 정적 파일 미들웨어는 정적 파일 요청을 처리하지 않습니다. 요청은 하위 앱의 정적 파일 미들웨어에서 처리됩니다.
 
-정적 자산의 `src` 특성이 절대 경로(예: `src="/image.png"`)로 설정된 경우 링크는 하위 앱의 PathBase 없이 렌더링됩니다. 루트 앱의 정적 파일 미들웨어는 루트 앱의 [웹 루트](xref:fundamentals/index#web-root)에서 자산을 제공하려고 시도하며, 그 결과 루트 앱에서 정적 자산을 사용할 수 있지 않으면 ‘404 - 찾을 수 없음’이 발생합니다.
+정적 자산의 `src` 특성이 절대 경로(예: `src="/image.png"`)로 설정된 경우 링크는 하위 앱의 PathBase 없이 렌더링됩니다. 루트 앱의 정적 파일 미들웨어는 루트 앱의 [웹 루트](xref:fundamentals/index#web-root)에서 자산을 제공하려고 시도하며, 그 결과 루트 앱에서 정적 자산을 사용할 수 있지 않으면 ‘404 - 찾을 수 없음’이 발생합니다. 
 
 ASP.NET Core 앱을 다른 ASP.NET Core 앱에서 하위 앱으로 호스팅하려면 다음을 수행합니다.
 
@@ -1133,7 +1133,7 @@ HTTP/2는 기본적으로 사용됩니다. HTTP/2 연결이 설정되지 않은 
 
 ## <a name="cors-preflight-requests"></a>CORS 실행 전 요청
 
-이 섹션은 .NET Framework를 대상으로 하는 ASP.NET Core 앱에만 적용됩니다.
+이 섹션은 .NET Framework를 대상으로 하는 ASP.NET Core 앱에만 적용됩니다. 
 
 .NET Framework를 대상으로 하는 ASP.NET Core 앱의 경우 OPTIONS 요청은 IIS에서 기본적으로 앱에 전달되지 않습니다. OPTIONS 요청을 전달하도록 *web.config*에서 앱의 IIS 처리기를 구성하는 방법을 알아보려면 [ASP.NET Web API 2에서 원본 간 요청을 사용하도록 설정: CORS 작동 방식](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works)을 참조하세요.
 
@@ -1146,7 +1146,7 @@ ASP.NET Core 모듈 버전 2에서 IIS에 호스트된 경우
 
 ### <a name="application-initialization-module"></a>애플리케이션 초기화 모듈
 
-‘앱 호스팅 In Process 및 Out of Process에 적용됩니다.’
+‘앱 호스팅 In Process 및 Out of Process에 적용됩니다.’ 
 
 [IIS 애플리케이션 초기화](/iis/get-started/whats-new-in-iis-8/iis-80-application-initialization)는 앱 풀이 시작되거나 재활용될 때 HTTP 요청을 앱으로 보내는 IIS 기능입니다. 요청은 앱이 시작되도록 트리거합니다. 기본적으로 IIS는 앱의 루트 URL(`/`)에 요청을 실행하여 앱을 초기화합니다(구성에 대한 자세한 내용은 [추가 리소스](#application-initialization-module-and-idle-timeout-additional-resources) 참조).
 
@@ -1190,7 +1190,7 @@ Windows Server 2008 R2 이상
 
 ### <a name="idle-timeout"></a>유휴 시간 제한
 
-‘앱 호스팅 In Process 에만 적용됩니다.’
+‘앱 호스팅 In Process 에만 적용됩니다.’ 
 
 앱의 유휴 상태를 방지하려면 IIS 관리자를 사용하여 앱 풀의 유휴 시간 제한을 설정합니다.
 
@@ -1426,14 +1426,14 @@ services.Configure<IISOptions>(options =>
 
 다음 링크를 사용하여 설치 관리자를 다운로드합니다.
 
-[현재 .NET Core 호스팅 번들 설치 관리자(직접 다운로드)](https://www.microsoft.com/net/permalink/dotnetcore-current-windows-runtime-bundle-installer)
+[현재 .NET Core 호스팅 번들 설치 관리자(직접 다운로드)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
 
 ### <a name="earlier-versions-of-the-installer"></a>이전 버전의 설치 관리자
 
 이전 버전의 설치 관리자를 가져오려면:
 
-1. [.NET 다운로드 보관](https://www.microsoft.com/net/download/archives)으로 이동합니다.
-1. **.NET Core**에서 .NET Core 버전을 선택합니다.
+1. [.NET Core 다운로드](https://dotnet.microsoft.com/download/dotnet-core) 페이지로 이동합니다.
+1. 원하는 .NET Core 버전을 클릭합니다.
 1. **앱 실행 - 런타임** 열에서 원하는 .NET Core 런타임 버전의 행을 찾습니다.
 1. **런타임 및 호스팅 번들** 링크를 사용하여 설치 관리자를 다운로드합니다.
 
@@ -1638,7 +1638,7 @@ ASP.NET Core 앱 아래에 비ASP .NET Core 하위 앱을 호스팅하는 경우
 
 하위 앱 내의 정적 자산 링크는 물결표-슬래시(`~/`) 표기법을 사용해야 합니다. 물결표-슬래시 표기법은 [태그 도우미](xref:mvc/views/tag-helpers/intro)를 트리거하여 하위 앱의 PathBase를 렌더링된 상대 링크 앞에 추가합니다. `/subapp_path`에서 하위 앱의 경우, `src="~/image.png"`와 연결된 이미지가 `src="/subapp_path/image.png"`으로 렌더링됩니다. 루트 앱의 정적 파일 미들웨어는 정적 파일 요청을 처리하지 않습니다. 요청은 하위 앱의 정적 파일 미들웨어에서 처리됩니다.
 
-정적 자산의 `src` 특성이 절대 경로(예: `src="/image.png"`)로 설정된 경우 링크는 하위 앱의 PathBase 없이 렌더링됩니다. 루트 앱의 정적 파일 미들웨어는 루트 앱의 [웹 루트](xref:fundamentals/index#web-root)에서 자산을 제공하려고 시도하며, 그 결과 루트 앱에서 정적 자산을 사용할 수 있지 않으면 ‘404 - 찾을 수 없음’이 발생합니다.
+정적 자산의 `src` 특성이 절대 경로(예: `src="/image.png"`)로 설정된 경우 링크는 하위 앱의 PathBase 없이 렌더링됩니다. 루트 앱의 정적 파일 미들웨어는 루트 앱의 [웹 루트](xref:fundamentals/index#web-root)에서 자산을 제공하려고 시도하며, 그 결과 루트 앱에서 정적 자산을 사용할 수 있지 않으면 ‘404 - 찾을 수 없음’이 발생합니다. 
 
 ASP.NET Core 앱을 다른 ASP.NET Core 앱에서 하위 앱으로 호스팅하려면 다음을 수행합니다.
 
@@ -1732,7 +1732,7 @@ HTTP/2는 기본적으로 사용됩니다. HTTP/2 연결이 설정되지 않은 
 
 ## <a name="cors-preflight-requests"></a>CORS 실행 전 요청
 
-이 섹션은 .NET Framework를 대상으로 하는 ASP.NET Core 앱에만 적용됩니다.
+이 섹션은 .NET Framework를 대상으로 하는 ASP.NET Core 앱에만 적용됩니다. 
 
 .NET Framework를 대상으로 하는 ASP.NET Core 앱의 경우 OPTIONS 요청은 IIS에서 기본적으로 앱에 전달되지 않습니다. OPTIONS 요청을 전달하도록 *web.config*에서 앱의 IIS 처리기를 구성하는 방법을 알아보려면 [ASP.NET Web API 2에서 원본 간 요청을 사용하도록 설정: CORS 작동 방식](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works)을 참조하세요.
 
