@@ -1,2 +1,2 @@
-* [<span data-ttu-id="f307e-101">Mac용 Visual Studio 버전 8.0 이상</span><span class="sxs-lookup"><span data-stu-id="f307e-101">Visual Studio for Mac version 8.0 or later</span></span>](https://visualstudio.microsoft.com/downloads/)
-* [<span data-ttu-id="f307e-102">.NET Core SDK 2.2 이상</span><span class="sxs-lookup"><span data-stu-id="f307e-102">.NET Core SDK 2.2 or later</span></span>](https://www.microsoft.com/net/download/all)
+* [<span data-ttu-id="f465b-101">Mac용 Visual Studio 버전 8.0 이상</span><span class="sxs-lookup"><span data-stu-id="f465b-101">Visual Studio for Mac version 8.0 or later</span></span>](https://visualstudio.microsoft.com/downloads/)
+* [<span data-ttu-id="f465b-102">.NET Core SDK 2.2 이상</span><span class="sxs-lookup"><span data-stu-id="f465b-102">.NET Core SDK 2.2 or later</span></span>](https://dotnet.microsoft.com/download/dotnet-core)
