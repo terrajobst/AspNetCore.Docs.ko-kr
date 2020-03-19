@@ -969,6 +969,8 @@
           uid: security/authentication/individual
         - name: 인증서 인증 구성
           uid: security/authentication/certauth
+        - name: Multi-Factor Authentication
+          uid: security/authentication/mfa
     - name: 권한 부여
       items:
         - name: 개요
