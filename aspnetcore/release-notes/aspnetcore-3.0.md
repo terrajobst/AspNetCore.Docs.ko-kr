@@ -9,12 +9,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: 35accdd2f65ac5430525be88cc621094e37d3e40
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 1a4efcd4e9e3296e9c208f1419bc86734951b0c1
+ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78650853"
+ms.lasthandoff: 03/18/2020
+ms.locfileid: "79511524"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3.0의 새로운 기능
 
@@ -185,7 +185,7 @@ public class DomainRestrictedRequirement :
 개별 허브 메서드는 런타임에 코드가 확인하는 정책의 이름을 사용하여 표시할 수 있습니다. 클라이언트에서 개별 허브 메서드를 호출하려고 하면 `DomainRestrictedRequirement` 처리기가 실행되고 메서드에 대한 액세스를 컨트롤합니다. `DomainRestrictedRequirement`가 액세스를 컨트롤하는 방식에 따라 다음이 가능합니다.
 
 * 로그인된 모든 사용자는 `SendMessage` 메서드를 호출할 수 있습니다.
-* `@jabbr.net` 이메일 주소로 로그인한 사용자들만 사용자의 기록을 볼 수 있습니다.
+* `@jabbr.net` 전자 메일 주소로 로그인한 사용자들만 사용자의 기록을 볼 수 있습니다.
 * `bob42@jabbr.net`만 사용자들을 대화방에서 차단할 수 있습니다.
 
 ```csharp
@@ -410,7 +410,7 @@ ASP.NET Core 3.0 템플릿은 <xref:fundamentals/host/generic-host>를 사용합
 
 ### <a name="host-configuration"></a>호스트 구성
 
-ASP.NET Core 3.0 릴리스 전에는 웹 호스트의 호스트 구성에 대해 `ASPNETCORE_`가 접두사로 추가된 환경 변수가 로드되었습니다. 3.0에서 `AddEnvironmentVariables`는 `CreateDefaultBuilder`와의 호스트 구성을 위해 `DOTNET_`가 접두사로 추가된 환경 변수를 로드하는 데 사용됩니다.
+ASP.NET Core 3.0 릴리스 전에는 웹 호스트의 호스트 구성에 대해 `ASPNETCORE_`가 접두사로 추가된 환경 변수가 로드되었습니다. 3\.0에서 `AddEnvironmentVariables`는 `CreateDefaultBuilder`와의 호스트 구성을 위해 `DOTNET_`가 접두사로 추가된 환경 변수를 로드하는 데 사용됩니다.
 
 ### <a name="changes-to-startup-constructor-injection"></a>Startup 생성자 주입의 변경 내용
 
@@ -424,11 +424,11 @@ ASP.NET Core 3.0 릴리스 전에는 웹 호스트의 호스트 구성에 대해
 
 ## <a name="kestrel"></a>Kestrel
 
-* 제네릭 호스트로 마이그레이션하기 위해 Kestrel 구성이 업데이트되었습니다. 3.0에서 Kestrel은 `ConfigureWebHostDefaults`가 제공하는 웹 호스트 작성기에서 구성됩니다.
+* 제네릭 호스트로 마이그레이션하기 위해 Kestrel 구성이 업데이트되었습니다. 3\.0에서 Kestrel은 `ConfigureWebHostDefaults`가 제공하는 웹 호스트 작성기에서 구성됩니다.
 * 연결 어댑터는 Kestrel에서 제거되었고 연결 미들웨어로 대체되었습니다. 이는 ASP.NET Core 파이프라인의 HTTP 미들웨어와 비슷하며, 하위 수준 연결을 위한 것입니다.
 * Kestrel 전송 계층이 `Connections.Abstractions`에서 공용 인터페이스로 공개되었습니다.
 * 후행 헤더를 새 컬렉션으로 이동하여 헤더와 트레일러 사이의 모호성을 해결했습니다.
-* `HttpRequest.Body.Read`와 같은 동기 IO API는 앱 크래시로 이어지는 일반적인 스레드 굶주림 현상(starvation)의 원인입니다. 3.0에서 `AllowSynchronousIO`는 기본적으로 사용하지 않도록 설정됩니다.
+* `HttpRequest.Body.Read`와 같은 동기 IO API는 앱 크래시로 이어지는 일반적인 스레드 굶주림 현상(starvation)의 원인입니다. 3\.0에서 `AllowSynchronousIO`는 기본적으로 사용하지 않도록 설정됩니다.
 
 자세한 내용은 <xref:migration/22-to-30#kestrel>를 참조하세요.
 
@@ -517,7 +517,7 @@ ASP.NET Core 3.0에는 메모리 사용을 줄이고 처리량을 향상시키�
 
 ## <a name="aspnet-core-30-only-runs-on-net-core-30"></a>ASP.NET Core 3.0은 .NET Core 3.0에서만 실행됩니다
 
-ASP.NET Core 3.0에서 .NET Framework는 더 이상 지원 되는 대상 프레임워크가 아닙니다. .NET Framework를 대상으로 하는 프로젝트는 [.NET Core 2.1 LTS 릴리스](https://www.microsoft.com/net/download/dotnet-core/2.1)를 사용하여 완전히 지원되는 방식으로 계속할 수 있습니다. 대부분의 ASP.NET Core 2.1.x 관련 패키지는 .NET Core 2.1의 3년 LTS 기간을 초과하여 무기한 지원됩니다.
+ASP.NET Core 3.0에서 .NET Framework는 더 이상 지원 되는 대상 프레임워크가 아닙니다. .NET Framework를 대상으로 하는 프로젝트는 [.NET Core 2.1 LTS 릴리스](https://dotnet.microsoft.com/download/dotnet-core/2.1)를 사용하여 완전히 지원되는 방식으로 계속할 수 있습니다. 대부분의 ASP.NET Core 2.1.x 관련 패키지는 .NET Core 2.1의 3년 LTS 기간을 초과하여 무기한 지원됩니다.
 
 마이그레이션 정보는 [.NET Framework에서 .NET Core로 코드 포팅](/dotnet/core/porting/)을 참조하세요.
 
@@ -542,3 +542,4 @@ ASP.NET Core 3.0 공유 프레임워크에서 제거된 가장 주목할 만한 
 ## Additional information
 For the complete list of changes, see the [ASP.NET Core 3.0 Release Notes](WHERE IS THIS????).
 -->
+ 

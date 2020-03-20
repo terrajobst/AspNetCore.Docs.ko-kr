@@ -5,16 +5,16 @@ description: Blazor 앱을 단계별로 빌드합니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/13/2020
+ms.date: 03/13/2020
 no-loc:
 - Blazor
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 8830dcf26b58b5f5fdd36b60298e7b365f99bdd9
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 8b3802a6ffe3613e5d4ca65c57fafc3f404c8329
+ms.sourcegitcommit: 5bdc54162d7dea8d9fa54ac3055678db23586af1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78644865"
+ms.lasthandoff: 03/17/2020
+ms.locfileid: "79434501"
 ---
 # <a name="build-your-first-opno-locblazor-app"></a>첫 번째 Blazor 앱 빌드
 
@@ -24,9 +24,9 @@ ms.locfileid: "78644865"
 
 이 자습서에서는 Blazor 앱을 만들고 수정하는 방법을 보여줍니다.
 
-<xref:blazor/get-started> 문서의 지침에 따라 이 자습서에 사용할 Blazor 프로젝트를 만듭니다. 프로젝트 이름을 *ToDoList*로 지정합니다.
-
 ## <a name="build-components"></a>구성 요소 빌드
+
+1. <xref:blazor/get-started> 문서의 지침에 따라 이 자습서에 사용할 Blazor 프로젝트를 만듭니다. 프로젝트 이름을 *ToDoList*로 지정합니다.
 
 1. *Pages* 폴더에 있는 앱의 3개 페이지로 각각 이동합니다. 홈, 카운터 및 Fetch 데이터. 이 페이지는 Razor 구성 요소 파일 *Index.razor*, *Counter.razor* 및 *FetchData.razor*로 구현됩니다.
 
@@ -133,14 +133,14 @@ Blazor WebAssembly 앱을 사용할 경우 *wwwroot/sample-data* 폴더의 *weat
 
 앱에 간단한 할 일 목록을 구현하는 새 구성 요소를 추가합니다.
 
-1. *Todo.razor*라는 빈 파일을 앱의 *Pages* 폴더에 추가합니다.
+1. *Pages* 폴더에서 새 `Todo` Razor 구성 요소를 앱에 추가합니다. Visual Studio에서 **Pages** 폴더를 마우스 오른쪽 단추로 클릭하고 **추가** > **새 항목** > **Razor 구성 요소**를 선택합니다. 구성 요소의 파일 이름을 *Todo.razor*로 지정합니다. 다른 개발 환경에서는 *Todo.razor*라는 **Pages** 폴더에 빈 파일을 추가합니다.
 
 1. 구성 요소에 대한 초기 태그를 제공합니다.
 
    ```razor
    @page "/todo"
 
-   <h1>Todo</h1>
+   <h3>Todo</h3>
    ```
 
 1. `Todo` 구성 요소를 탐색 모음에 추가합니다.

@@ -5,12 +5,12 @@ description: 간단한 ASP.NET Core 앱에 모델을 추가합니다.
 ms.author: riande
 ms.date: 01/13/2020
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: d044ae4416c4528791755506314fc81275474f79
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: e7fc0496438734e13cfafcecf432da4a94737897
+ms.sourcegitcommit: 5bdc54162d7dea8d9fa54ac3055678db23586af1
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78647811"
+ms.lasthandoff: 03/17/2020
+ms.locfileid: "79434514"
 ---
 # <a name="add-a-model-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 모델 추가
 
@@ -48,7 +48,7 @@ ms.locfileid: "78647811"
 
 `Movie` 클래스에는 데이터베이스에서 기본 키에 필요한 `Id` 필드가 포함되어 있습니다.
 
-`ReleaseDate`에 대한 [DataType](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.internal.datatypeattributeadapter) 특성은 데이터 형식(`Date`)을 지정합니다. 이 특성을 사용하면:
+`ReleaseDate`의 <xref:System.ComponentModel.DataAnnotations.DataType> 특성은 날짜 형식(`Date`)을 지정합니다. 이 특성을 사용하면:
 
 * 사용자가 날짜 필드에 시간 정보를 입력할 필요가 없습니다.
 * 시간 정보 없이 날짜만 표시됩니다.

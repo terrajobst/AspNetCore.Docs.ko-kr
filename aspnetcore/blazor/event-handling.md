@@ -1,27 +1,27 @@
 ---
 title: ASP.NET Core Blazor 이벤트 처리
 author: guardrex
-description: 이벤트 인수 형식, 이벤트 콜백, 기본 브라우저 이벤트 관리를 포함하여 Blazor의 이벤트 처리 시나리오에 대해 알아봅니다.
+description: 이벤트 인수 형식, 이벤트 콜백, 기본 브라우저 이벤트 관리를 비롯한 Blazor의 이벤트 처리 기능에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/12/2020
+ms.date: 03/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/event-handling
-ms.openlocfilehash: 25844ef39aee849072d16f3d73eda0a1c20ee788
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: c144841805e07a136f153c25a78c7f9af7c5801b
+ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78648333"
+ms.lasthandoff: 03/18/2020
+ms.locfileid: "79511368"
 ---
 # <a name="aspnet-core-blazor-event-handling"></a>ASP.NET Core Blazor 이벤트 처리
 
 작성자: [Luke Latham](https://github.com/guardrex) 및 [Daniel Roth](https://github.com/danroth27)
 
-Razor 구성 요소는 이벤트 처리 기능을 제공합니다. 대리자 형식 값을 사용하는 `on{EVENT}`(예: `onclick` 및 `onsubmit`)라는 HTML 요소 특성의 경우 Razor 구성 요소는 특성 값을 이벤트 처리기로 취급합니다. 특성 이름의 형식은 항상 [`@on{EVENT}`](xref:mvc/views/razor#onevent)입니다.
+Razor 구성 요소는 이벤트 처리 기능을 제공합니다. 대리자 형식 값을 사용하는 [`@on{EVENT}`](xref:mvc/views/razor#onevent)(예: `@onclick`)라는 HTML 요소 특성의 경우 Razor 구성 요소는 특성 값을 이벤트 처리기로 취급합니다.
 
 다음 코드는 UI에서 단추를 선택할 때 `UpdateHeading` 메서드를 호출합니다.
 

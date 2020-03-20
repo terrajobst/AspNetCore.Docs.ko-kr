@@ -5,17 +5,17 @@ description: ASP.NET Core, CDN(콘텐츠 배달 네트워크), 파일 서버 및
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/19/2020
+ms.date: 03/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/webassembly
-ms.openlocfilehash: eae12b266e91a30a47daf63ac77ba082c25225aa
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: ea2c625f424447209a362cdc58bdb18be061e47f
+ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78649347"
+ms.lasthandoff: 03/18/2020
+ms.locfileid: "79511355"
 ---
 # <a name="host-and-deploy-aspnet-core-opno-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 호스트 및 배포
 
@@ -59,7 +59,7 @@ IIS 서버에 배포하는 경우 앱의 게시된 *web.config* 파일과 함께
 
 *호스트된 배포*는 웹 서버에서 실행되는 [ASP.NET Core 앱](xref:index)에서 Blazor WebAssembly 앱을 브라우저에 제공하지 않습니다.
 
-Blazor 앱은 ASP.NET Core 앱과 함께 배포되도록 게시된 출력의 후자 앱과 함께 포함됩니다. ASP.NET Core 앱을 호스트할 수 있는 웹 서버가 필요합니다. 호스트된 배포의 경우 Visual Studio에는 **Hosted** 옵션이 선택된 **Blazor WebAssembly 앱** 프로젝트 템플릿([dotnet new](/dotnet/core/tools/dotnet-new) 명령을 사용하는 경우 `blazorwasm` 템플릿)이 포함됩니다.
+클라이언트 Blazor WebAssembly 앱이 서버 앱의 */bin/Release/{TARGET FRAMEWORK}/publish/wwwroot* 폴더에 서버 앱의 다른 정적 웹 자산과 함께 게시됩니다. 두 앱이 함께 배포됩니다. ASP.NET Core 앱을 호스트할 수 있는 웹 서버가 필요합니다. 호스트된 배포의 경우 Visual Studio에는 **Hosted**(`dotnet new` 명령을 사용하는 경우 `-ho|--hosted`) 옵션이 선택된 **Blazor WebAssembly 앱** 프로젝트 템플릿([dotnet new](/dotnet/core/tools/dotnet-new) 명령을 사용하는 경우 `blazorwasm` 템플릿)이 포함됩니다.
 
 ASP.NET Core 앱 호스팅 및 배포에 대한 자세한 내용은 <xref:host-and-deploy/index>를 참조하세요.
 
@@ -69,7 +69,7 @@ Azure App Service 배포에 대한 자세한 내용은 <xref:tutorials/publish-t
 
 *독립 실행형 배포*는 Blazor WebAssembly 앱을 클라이언트가 직접 요청하는 정적 파일 세트로 제공합니다. 모든 정적 파일 서버는 Blazor 앱을 사용할 수 있습니다.
 
-독립 실행형 배포 자산은 *bin/Release/{TARGET FRAMEWORK}/publish/{ASSEMBLY NAME}/dist* 폴더에 게시됩니다.
+독립 실행형 배포 자산은 */bin/Release/{TARGET FRAMEWORK}/publish/wwwroot* 폴더에 게시됩니다.
 
 ### <a name="iis"></a>IIS
 
@@ -91,8 +91,8 @@ Blazor 프로젝트가 게시되면 다음 IIS 구성을 사용하여 *web.confi
   * `application/octet-stream`
   * `application/wasm`
 * URL 재작성 모듈 규칙을 설정합니다.
-  * 앱의 정적 자산이 상주하는 하위 디렉터리(*{ASSEMBLY NAME}/dist/{PATH REQUESTED}*)를 제공합니다.
-  * 파일이 아닌 자산에 대한 요청이 정적 자산 폴더에 있는 앱의 기본 문서(*{ASSEMBLY NAME}/dist/index.html*)로 리디렉션되도록 SPA 폴백 라우팅을 만듭니다.
+  * 앱의 정적 자산이 상주하는 하위 디렉터리(*wwwroot/{PATH REQUESTED}* )를 제공합니다.
+  * 파일이 아닌 자산에 대한 요청이 정적 자산 폴더에 있는 앱의 기본 문서(*wwwroot/index.html*)로 리디렉션되도록 SPA 대체(fallback) 라우팅을 만듭니다.
 
 #### <a name="install-the-url-rewrite-module"></a>URL 재작성 모듈 설치
 
@@ -143,7 +143,7 @@ URL을 다시 생성하려면 [URL 다시 생성 모듈](https://www.iis.net/dow
 
 #### <a name="troubleshooting"></a>문제 해결
 
-500 - 내부 서버 오류가 수신되고 웹 사이트의 구성에 액세스를 시도할 때 IIS 관리자가 오류를 표시하면 URL 다시 생성 모듈이 설치되었는지 확인합니다. 모듈이 설치되지 않은 경우 IIS가 *web.config* 파일을 구문 분석할 수 없습니다. 그러면 IIS 관리자가 웹 사이트의 구성을 로드할 수 없으며 웹 사이트가 Blazor의 정적 파일을 제공할 수 없습니다.
+500 - 내부 서버 오류가 수신되고 웹 사이트의 구성에 액세스를 시도할 때 IIS 관리자가 오류를 표시하면 URL 다시 생성 모듈이 설치되었는지 확인합니다.  모듈이 설치되지 않은 경우 IIS가 *web.config* 파일을 구문 분석할 수 없습니다. 그러면 IIS 관리자가 웹 사이트의 구성을 로드할 수 없으며 웹 사이트가 Blazor의 정적 파일을 제공할 수 없습니다.
 
 IIS 배포 문제 해결에 대한 자세한 내용은 <xref:test/troubleshoot-azure-iis>를 참조하세요.
 
@@ -319,4 +319,4 @@ URL 다시 생성을 처리하려면 *index.html* 페이지로 요청 리디렉�
 
 ## <a name="configure-the-linker"></a>링커 구성
 
-Blazor는 각 빌드에 대해 IL(중간 언어) 연결을 수행하여 출력 어셈블리에서 불필요한 IL을 제거합니다. 어셈블리 연결은 빌드 시 제어할 수 있습니다. 자세한 내용은 <xref:host-and-deploy/blazor/configure-linker>를 참조하세요.
+Blazor는 각 릴리스 빌드에 대해 IL(중간 언어) 연결을 수행하여 출력 어셈블리에서 불필요한 IL을 제거합니다. 자세한 내용은 <xref:host-and-deploy/blazor/configure-linker>를 참조하세요.

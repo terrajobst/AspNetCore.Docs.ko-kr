@@ -1,27 +1,29 @@
 ---
 title: ASP.NET Core Blazor 데이터 바인딩
 author: guardrex
-description: Blazor 앱의 구성 요소 및 DOM 요소에 대한 데이터 바인딩 시나리오에 대해 알아봅니다.
+description: Blazor 앱의 구성 요소 및 DOM 요소에 대한 데이터 바인딩 기능에 대해 알아봅니다.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/24/2020
+ms.date: 03/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/data-binding
-ms.openlocfilehash: 92377730b9d353a507ffd384710fb979affe7265
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 5b49d2598a451ee607e034913bd1aeaa03f941c6
+ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78648225"
+ms.lasthandoff: 03/18/2020
+ms.locfileid: "79511199"
 ---
 # <a name="aspnet-core-opno-locblazor-data-binding"></a>ASP.NET Core Blazor 데이터 바인딩
 
 작성자: [Luke Latham](https://github.com/guardrex) 및 [Daniel Roth](https://github.com/danroth27)
 
-구성 요소와 DOM 요소 모두에 대한 데이터 바인딩은 [`@bind`](xref:mvc/views/razor#bind) 특성을 사용하여 수행됩니다. 다음 예제에서는 `CurrentValue` 속성을 텍스트 상자의 값에 바인딩합니다.
+Razor 구성 요소는 필드, 속성 또는 Razor 식 값을 사용하여 [`@bind`](xref:mvc/views/razor#bind)라는 HTML 요소를 통해 데이터 바인딩 기능을 제공합니다.
+
+다음 예제에서는 `CurrentValue` 속성을 텍스트 상자의 값에 바인딩합니다.
 
 ```razor
 <input @bind="CurrentValue" />
@@ -78,6 +80,8 @@ ms.locfileid: "78648225"
     private string _paragraphStyle = "color:red";
 }
 ```
+
+특성 바인딩은 대/소문자를 구분합니다. 예를 들어, `@bind`는 유효하고 `@Bind`는 유효하지 않습니다.
 
 ## <a name="unparsable-values"></a>구문 분석할 수 없는 값
 
