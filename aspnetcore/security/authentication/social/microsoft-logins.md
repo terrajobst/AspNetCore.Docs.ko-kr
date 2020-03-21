@@ -4,15 +4,15 @@ author: rick-anderson
 description: 이 샘플에서는 Microsoft 계정 사용자 인증을 기존 ASP.NET Core 앱에 통합 하는 방법을 보여 줍니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/4/2019
+ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: ddaae1a25a1dcf167ffae0f24b480e2cde6aca5b
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: bd75efb1d7ce08538d1a67be74d2f40f3964614f
+ms.sourcegitcommit: 9b6e7f421c243963d5e419bdcfc5c4bde71499aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78652071"
+ms.lasthandoff: 03/21/2020
+ms.locfileid: "79989755"
 ---
 # <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>ASP.NET Core를 사용 하 여 Microsoft 계정 외부 로그인 설정
 
@@ -46,16 +46,17 @@ Microsoft 계정 없는 경우 **만들기**를 선택 합니다. 로그인 하�
 > [!NOTE]
 > `/signin-microsoft` URI 세그먼트가 Microsoft 인증 공급자의 기본 콜백으로 설정 되어 있습니다. [MicrosoftAccountOptions](/dotnet/api/microsoft.aspnetcore.authentication.microsoftaccount.microsoftaccountoptions) 클래스의 상속 된 [Remoteauthenticationoptions. callbackpath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) 속성을 통해 Microsoft 인증 미들웨어를 구성 하는 동안 기본 콜백 URI를 변경할 수 있습니다.
 
-## <a name="store-the-microsoft-client-id-and-client-secret"></a>Microsoft 클라이언트 ID 및 클라이언트 암호 저장
+## <a name="store-the-microsoft-client-id-and-secret"></a>Microsoft 클라이언트 ID 및 암호 저장
 
-다음 명령을 실행 하 여 [비밀 Manager](xref:security/app-secrets)를 사용 하 `ClientId` 및 `ClientSecret`를 안전 하 게 저장 합니다.
+기밀 [관리자](xref:security/app-secrets)를 사용 하 여 MICROSOFT 클라이언트 ID 및 비밀 값과 같은 중요 한 설정을 저장 합니다. 이 샘플에서는 다음 단계를 사용 합니다.
 
-```dotnetcli
-dotnet user-secrets set Authentication:Microsoft:ClientId <Client-Id>
-dotnet user-secrets set Authentication:Microsoft:ClientSecret <Client-Secret>
-```
+1. [비밀 저장소 사용](xref:security/app-secrets#enable-secret-storage)의 지침에 따라 비밀 저장소에 대 한 프로젝트를 초기화 합니다.
+1. 비밀 키 `Authentication:Microsoft:ClientId` 및 `Authentication:Microsoft:ClientSecret`를 사용 하 여 로컬 암호 저장소에 중요 한 설정을 저장 합니다.
 
-[비밀 관리자](xref:security/app-secrets)를 사용 하 여 Microsoft `ClientId` 및 `ClientSecret`와 같은 중요 한 설정을 응용 프로그램 구성에 연결 합니다. 이 샘플의 목적에 맞게 토큰의 이름을 `Authentication:Microsoft:ClientId` 하 고 `Authentication:Microsoft:ClientSecret`합니다.
+    ```dotnetcli
+    dotnet user-secrets set "Authentication:Microsoft:ClientId" "<client-id>"
+    dotnet user-secrets set "Authentication:Microsoft:ClientSecret" "<client-secret>"
+    ```
 
 [!INCLUDE[](~/includes/environmentVarableColon.md)]
 

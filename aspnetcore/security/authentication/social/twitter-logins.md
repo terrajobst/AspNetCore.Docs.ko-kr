@@ -4,15 +4,15 @@ author: rick-anderson
 description: 이 자습서에서는 Twitter 계정 사용자 인증을 기존 ASP.NET Core 앱에 통합 하는 방법을 보여 줍니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/06/2019
+ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 uid: security/authentication/twitter-logins
-ms.openlocfilehash: 4710c033018710ce3620f8d7221ae2253b2c0b69
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: b848486415fd72ce6180b4cf8fc1ba00410d694a
+ms.sourcegitcommit: 9b6e7f421c243963d5e419bdcfc5c4bde71499aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654303"
+ms.lasthandoff: 03/21/2020
+ms.locfileid: "79989749"
 ---
 # <a name="twitter-external-sign-in-setup-with-aspnet-core"></a>ASP.NET Core로 Twitter 외부 로그인 설정
 
@@ -39,16 +39,19 @@ ms.locfileid: "78654303"
 
 * 양식의 나머지를 입력 하 고 **만들기**를 선택 합니다. 새 응용 프로그램 세부 정보가 표시 됩니다.
 
-## <a name="storing-twitter-consumer-api-key-and-secret"></a>Twitter 소비자 API 키 및 암호 저장
+## <a name="store-the-twitter-consumer-api-key-and-secret"></a>Twitter 소비자 API 키 및 암호 저장
 
-다음 명령을 실행 하 여 [비밀 Manager](xref:security/app-secrets)를 사용 하 `ClientId` 및 `ClientSecret`를 안전 하 게 저장 합니다.
+[암호 관리자](xref:security/app-secrets)를 사용 하 여 TWITTER 소비자 API 키 및 암호와 같은 중요 한 설정을 저장 합니다. 이 샘플에서는 다음 단계를 사용 합니다.
 
-```dotnetcli
-dotnet user-secrets set Authentication:Twitter:ConsumerAPIKey <Key>
-dotnet user-secrets set Authentication:Twitter:ConsumerSecret <Secret>
-```
+1. [비밀 저장소 사용](xref:security/app-secrets#enable-secret-storage)의 지침에 따라 비밀 저장소에 대 한 프로젝트를 초기화 합니다.
+1. 비밀 키 `Authentication:Twitter:ConsumerKey` 및 `Authentication:Twitter:ConsumerSecret`를 사용 하 여 로컬 암호 저장소에 중요 한 설정을 저장 합니다.
 
-[암호 관리자](xref:security/app-secrets)를 사용 하 여 Twitter `Consumer Key` 및 `Consumer Secret`와 같은 중요 한 설정을 응용 프로그램 구성에 연결 합니다. 이 샘플의 목적에 맞게 토큰의 이름을 `Authentication:Twitter:ConsumerKey` 하 고 `Authentication:Twitter:ConsumerSecret`합니다.
+    ```dotnetcli
+    dotnet user-secrets set "Authentication:Twitter:ConsumerAPIKey" "<consumer-api-key>"
+    dotnet user-secrets set "Authentication:Twitter:ConsumerSecret" "<consumer-secret>"
+    ```
+
+[!INCLUDE[](~/includes/environmentVarableColon.md)]
 
 이러한 토큰은 새 Twitter 응용 프로그램을 만든 후에 **키 및 액세스 토큰** 탭에서 찾을 수 있습니다.
 

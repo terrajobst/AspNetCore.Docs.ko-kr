@@ -4,15 +4,15 @@ author: rick-anderson
 description: 기존 ASP.NET Core 앱에 Facebook 계정 사용자 인증을 통합 하는 방법을 보여 주는 코드 예제를 보여 주는 자습서입니다.
 ms.author: riande
 ms.custom: seoapril2019, mvc, seodec18
-ms.date: 12/02/2019
+ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 uid: security/authentication/facebook-logins
-ms.openlocfilehash: 2e4cc04c6e7ff8e5f5701cc7f9ede73dbc1b4685
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: bb26a27f026e744c7d4925aa2281bf0625fff8a2
+ms.sourcegitcommit: 9b6e7f421c243963d5e419bdcfc5c4bde71499aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654885"
+ms.lasthandoff: 03/21/2020
+ms.locfileid: "79989788"
 ---
 # <a name="facebook-external-login-setup-in-aspnet-core"></a>ASP.NET Core에서 Facebook 외부 로그인 설정
 
@@ -59,18 +59,19 @@ ms.locfileid: "78654885"
 
 * 사이트를 배포할 때 **Facebook 로그인** 설정 페이지를 다시 방문 하 여 새 공용 URI를 등록 해야 합니다.
 
-## <a name="store-facebook-app-id-and-app-secret"></a>Facebook 앱 ID 및 앱 암호를 저장 합니다.
+## <a name="store-the-facebook-app-id-and-secret"></a>Facebook 앱 ID 및 암호 저장
 
-[비밀 관리자](xref:security/app-secrets)를 사용 하 여 Facebook `App ID` 및 `App Secret`와 같은 중요 한 설정을 응용 프로그램 구성에 연결 합니다. 이 자습서에서는 토큰의 이름을 `Authentication:Facebook:AppId` 하 고 `Authentication:Facebook:AppSecret`합니다.
+[비밀 관리자](xref:security/app-secrets)를 사용 하 여 FACEBOOK 앱 ID 및 비밀 값과 같은 중요 한 설정을 저장 합니다. 이 샘플에서는 다음 단계를 사용 합니다.
+
+1. [비밀 저장소 사용](xref:security/app-secrets#enable-secret-storage)의 지침에 따라 비밀 저장소에 대 한 프로젝트를 초기화 합니다.
+1. 비밀 키 `Authentication:Facebook:AppId` 및 `Authentication:Facebook:AppSecret`를 사용 하 여 로컬 암호 저장소에 중요 한 설정을 저장 합니다.
+
+    ```dotnetcli
+    dotnet user-secrets set "Authentication:Facebook:AppId" "<app-id>"
+    dotnet user-secrets set "Authentication:Facebook:AppSecret" "<app-secret>"
+    ```
 
 [!INCLUDE[](~/includes/environmentVarableColon.md)]
-
-다음 명령을 실행 하 여 비밀 Manager를 사용 하 `App ID` 및 `App Secret`를 안전 하 게 저장 합니다.
-
-```dotnetcli
-dotnet user-secrets set Authentication:Facebook:AppId <app-id>
-dotnet user-secrets set Authentication:Facebook:AppSecret <app-secret>
-```
 
 ## <a name="configure-facebook-authentication"></a>Facebook 인증 구성
 

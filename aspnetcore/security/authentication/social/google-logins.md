@@ -4,14 +4,14 @@ author: rick-anderson
 description: 이 자습서에서는 기존 ASP.NET Core 앱에 Google 계정 사용자 인증의 통합을 보여 줍니다.
 ms.author: riande
 ms.custom: mvc, seodec18
-ms.date: 10/30/2019
+ms.date: 03/19/2020
 uid: security/authentication/google-logins
-ms.openlocfilehash: 83f45143eca1be43410880bfd875a3fce1d2e9c9
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: a114d23c25201c9fe31ad0397efaf99fe98a312a
+ms.sourcegitcommit: 9b6e7f421c243963d5e419bdcfc5c4bde71499aa
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78654921"
+ms.lasthandoff: 03/21/2020
+ms.locfileid: "79989767"
 ---
 # <a name="google-external-login-setup-in-aspnet-core"></a>ASP.NET Core에서 Google 외부 로그인 설정
 
@@ -28,14 +28,17 @@ ms.locfileid: "78654921"
 * **클라이언트 ID** 및 **클라이언트 암호**를 저장 합니다.
 * 사이트를 배포할 때 **Google 콘솔**에서 새 공용 url을 등록 합니다.
 
-## <a name="store-google-clientid-and-clientsecret"></a>저장소 Google ClientID 및 ClientSecret
+## <a name="store-the-google-client-id-and-secret"></a>Google 클라이언트 ID 및 암호 저장
 
-Google `Client ID`와 같은 중요 한 설정 및 [비밀 관리자](xref:security/app-secrets)와 `Client Secret`를 저장 합니다. 이 자습서에서는 토큰의 이름을 `Authentication:Google:ClientId` 하 고 `Authentication:Google:ClientSecret`합니다.
+[암호 관리자](xref:security/app-secrets)를 사용 하 여 GOOGLE 클라이언트 ID 및 비밀 값과 같은 중요 한 설정을 저장 합니다. 이 샘플에서는 다음 단계를 사용 합니다.
 
-```dotnetcli
-dotnet user-secrets set "Authentication:Google:ClientId" "<client id>"
-dotnet user-secrets set "Authentication:Google:ClientSecret" "<client secret>"
-```
+1. [비밀 저장소 사용](xref:security/app-secrets#enable-secret-storage)의 지침에 따라 비밀 저장소에 대 한 프로젝트를 초기화 합니다.
+1. 비밀 키 `Authentication:Google:ClientId` 및 `Authentication:Google:ClientSecret`를 사용 하 여 로컬 암호 저장소에 중요 한 설정을 저장 합니다.
+
+    ```dotnetcli
+    dotnet user-secrets set "Authentication:Google:ClientId" "<client-id>"
+    dotnet user-secrets set "Authentication:Google:ClientSecret" "<client-secret>"
+    ```
 
 [!INCLUDE[](~/includes/environmentVarableColon.md)]
 
