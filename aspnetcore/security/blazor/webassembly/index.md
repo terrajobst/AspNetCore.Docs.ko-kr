@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/index
-ms.openlocfilehash: 48136d0717998df3311dd5177688e062d0009176
-ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
+ms.openlocfilehash: a65d47e55960d6e7bfeb672c0a1e6a7a305ad7ee
+ms.sourcegitcommit: 9b6e7f421c243963d5e419bdcfc5c4bde71499aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/11/2020
-ms.locfileid: "79083550"
+ms.lasthandoff: 03/21/2020
+ms.locfileid: "79989479"
 ---
 # <a name="secure-aspnet-core-opno-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 보안
 
@@ -39,7 +39,7 @@ SameSite 쿠키를 사용하는 것과 같이 SPA를 인증하기 위한 다른 
 * 토큰은 명시적으로 전송되므로 [CSRF(교차 사이트 요청 위조)](xref:security/anti-request-forgery)로부터 서버 엔드포인트를 보호할 필요가 없습니다. 따라서 Blazor WebAssembly 앱을 MVC 또는 Razor 페이지 앱과 함께 호스트할 수 있습니다.
 * 토큰은 쿠키보다 사용 권한이 더 좁습니다. 예를 들어 토큰을 사용하여 사용자 계정을 관리하거나 사용자 암호를 변경할 수 없습니다. 이러한 작업은 해당 기능이 명시적으로 구현된 경우에만 가능합니다.
 * 토큰은 수명이 짧아서 기본적으로 1시간이므로 공격 기간이 제한됩니다. 또한 토큰은 언제든지 해지할 수 있습니다.
-* 자체 포함 JWT는 클라이언트와 서버에 인증 프로세스를 보증합니다. 예를 들어 클라이언트는 수신한 토큰이 적합하고 주어진 인증 프로세스의 일부로 내보내졌는지 검색하고 확인할 수단이 있습니다. 타사가 인증 프로세스 중에 토큰을 바꾸려고 하는 경우 클라이언트는 바뀐 토큰을 감지하고 사용하지 않을 수 있습니다.
+* 자체 포함 JWT는 클라이언트와 서버에 인증 프로세스를 보증합니다. 예를 들어 클라이언트에게는 수신한 토큰이 적합하고 주어진 인증 프로세스의 일부로 내보내 졌는지 검색하고 확인할 수단이 있습니다. 타사가 인증 프로세스 중에 토큰을 바꾸려고 하는 경우 클라이언트는 바뀐 토큰을 감지하고 사용하지 않을 수 있습니다.
 * OAuth 및 OIDC를 사용하는 토큰은 사용자 에이전트가 제대로 동작하지 않아도 앱의 보안을 보장합니다.
 * OAuth 및 OIDC와 같은 토큰 기반 프로토콜을 사용하면 호스트형 앱과 독립 실행형 앱을 동일한 보안 특성 집합을 사용하여 인증하고 권한 부여할 수 있습니다.
 

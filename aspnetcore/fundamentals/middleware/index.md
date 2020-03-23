@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/02/2020
 uid: fundamentals/middleware/index
-ms.openlocfilehash: afa71b2c2b75be2c000fadd9545ac3fb4587825a
-ms.sourcegitcommit: 51c86c003ab5436598dbc42f26ea4a83a795fd6e
+ms.openlocfilehash: 9dcd061d2807fb90884327916d0348af4593df9d
+ms.sourcegitcommit: 9b6e7f421c243963d5e419bdcfc5c4bde71499aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/10/2020
-ms.locfileid: "78964460"
+ms.lasthandoff: 03/21/2020
+ms.locfileid: "79989715"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core 미들웨어
 
@@ -163,12 +163,12 @@ public void Configure(IApplicationBuilder app)
 }
 ```
 
-단일 페이지 애플리케이션의 경우 SPA 미들웨어 <xref:Microsoft.Extensions.DependencyInjection.SpaStaticFilesExtensions.UseSpaStaticFiles*>는 일반적으로 미들웨어 파이프라인에서 마지막으로 나옵니다. SPA 미들웨어가 마지막으로 나오는 이유는 다음과 같습니다.
+SPA(단일 페이지 애플리케이션)의 경우 SPA 미들웨어 <xref:Microsoft.Extensions.DependencyInjection.SpaStaticFilesExtensions.UseSpaStaticFiles*>는 일반적으로 미들웨어 파이프라인에서 마지막으로 나옵니다. SPA 미들웨어가 마지막으로 나오는 이유는 다음과 같습니다.
 
 * 다른 모든 미들웨어가 일치하는 요청에 먼저 응답하도록 합니다.
 * 클라이언트 쪽 라우팅이 있는 SPA가 서버 앱에서 인식할 수 없는 모든 경로에 대해 실행되도록 합니다.
 
-단일 페이지 애플리케이션에 대한 자세한 내용은 [React](xref:spa/react) 및 [Angular](xref:spa/angular) 프로젝트 템플릿 관련 가이드를 참조하세요.
+SPA에 대한 자세한 내용은 [React](xref:spa/react) 및 [Angular](xref:spa/angular) 프로젝트 템플릿 관련 가이드를 참조하세요.
 
 ## <a name="branch-the-middleware-pipeline"></a>미들웨어 파이프라인 분기
 

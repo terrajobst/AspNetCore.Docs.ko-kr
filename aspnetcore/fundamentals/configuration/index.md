@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/29/2020
 uid: fundamentals/configuration/index
-ms.openlocfilehash: e1237db2625a127bfa5c31ac29b4394be6941b2f
-ms.sourcegitcommit: 9e2b3aaccc9a41291eb23bf4561159e79cf6bc9d
+ms.openlocfilehash: b4fa082c5a53bc9ecb3c7b8ddcbf243ef0d94ba7
+ms.sourcegitcommit: 9b6e7f421c243963d5e419bdcfc5c4bde71499aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/19/2020
-ms.locfileid: "79546343"
+ms.lasthandoff: 03/21/2020
+ms.locfileid: "79989687"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core의 구성
 
@@ -152,7 +152,7 @@ ASP.NET Core에서 구성은 하나 이상의 [구성 공급자](#cp)를 사용�
 * Windows에서 [위의 예제](#appsettingsjson)에 나오는 환경 키 및 값을 설정합니다.
 * [샘플 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample)를 사용하는 경우 설정을 테스트합니다. `dotnet run` 명령은 프로젝트 디렉터리에서 실행해야 합니다.
 
-```cmd
+```dotnetcli
 set MyKey="My key from Environment"
 set Position__Title=Environment_Editor
 set Position__Name=Environment_Rick
@@ -190,7 +190,7 @@ setx Position__Name Environment_Rick /M
 
 다음 명령은 사용자 지정 접두사를 테스트합니다.
 
-```cmd
+```dotnetcli
 set MyCustomPrefix_MyKey="My key with MyCustomPrefix_ Environment"
 set MyCustomPrefix_Position__Title=Editor_with_customPrefix
 set MyCustomPrefix_Position__Name=Environment_Rick_cp
@@ -628,7 +628,7 @@ Index: 3  Value: value4
 Index: 4  Value: value5
 ```
 
-바인딩된 개체의 Index &num;3은 `array:4` 구성 키에 대한 구성 데이터와 `value4`의 값을 포함합니다. 배열이 포함된 구성 데이터를 바인딩할 때 구성 키의 배열 인덱스는 개체를 만들 때 구성 데이터를 반복하는 데 사용됩니다. 구성 데이터에 null 값을 유지할 수 없으며, 구성 키의 배열에서 하나 이상의 인덱스를 건너뛰더라도 바인딩된 개체에 null 값 항목이 생성되지 않습니다.
+바인딩된 개체의 인덱스 &num;3은 `array:4` 구성 키에 대한 구성 데이터와 `value4`의 값을 포함합니다. 배열이 포함된 구성 데이터를 바인딩할 때 구성 키의 배열 인덱스는 개체를 만들 때 구성 데이터를 반복하는 데 사용됩니다. 구성 데이터에 null 값을 유지할 수 없으며, 구성 키의 배열에서 하나 이상의 인덱스를 건너뛰더라도 바인딩된 개체에 null 값 항목이 생성되지 않습니다.
 
 Index &num;3에 대한 누락된 구성 항목은 Index &num;3 키/값 쌍을 읽는 모든 구성 공급자에서 `ArrayExample` 인스턴스에 바인딩하기 전에 제공할 수 있습니다. 샘플 다운로드의 다음 *Value3.json* 파일을 고려하세요.
 
@@ -1070,9 +1070,9 @@ dotnet run CommandLineKey1= CommandLineKey2=value2
 
 ### <a name="switch-mappings"></a>스위치 매핑
 
-스위치 매핑은 키 이름 교체 논리를 지원합니다. <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>를 사용하여 구성을 수동으로 빌드하는 경우에는 <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> 메서드에 스위치 교체를 포함하는 사전을 제공하세요.
+스위치 매핑은 키 이름 교체 논리를 지원합니다. <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>를 사용하여 구성을 수동으로 빌드하는 경우에는 <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> 메서드에 대체 스위치를 포함하는 사전을 제공하세요.
 
-스위치 매핑 사전을 사용하면 명령줄 인수를 통해 제공된 키와 일치하는 키에 대해 사전을 검사합니다. 사전에서 명령줄 키가 발견되면 사전 값(키 교체)이 다시 전달되어 앱 구성의 키-값 쌍이 설정됩니다. 단일 대시(`-`) 접두사가 붙은 명령줄 키에는 스위치 매핑이 필수입니다.
+스위치 매핑 사전을 사용하면 명령줄 인수를 통해 제공된 키와 일치하는 키에 대해 사전을 검사합니다. 사전에서 명령줄 키가 발견되면 사전 값(대체 키)이 다시 전달되어 앱 구성의 키-값 쌍이 설정됩니다. 단일 대시(`-`) 접두사가 붙은 명령줄 키에는 스위치 매핑이 필수입니다.
 
 스위치 매핑 사전 키 규칙:
 
@@ -1632,7 +1632,7 @@ TvShow = tvShow;
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Program.cs?name=snippet_Program&highlight=5-12,22)]
 
-배열은 Index &num;3에 대한 값을 건너뜁니다. 구성 바인더는 null 값을 바인딩하거나 바인딩된 개체에 null 항목을 만들 수 없으며, 이 점은 이 배열을 개체에 바인딩한 결과를 설명할 때 명확해집니다.
+배열은 인덱스 &num;3에 대한 값을 건너뜁니다. 구성 바인더는 null 값을 바인딩하거나 바인딩된 개체에 null 항목을 만들 수 없으며, 이 점은 이 배열을 개체에 바인딩한 결과를 설명할 때 명확해집니다.
 
 샘플 앱에서는 POCO 클래스를 사용하여 바인딩된 구성 데이터를 저장할 수 있습니다.
 
@@ -1651,7 +1651,7 @@ _config.GetSection("array").Bind(arrayExample);
 
 바인딩된 개체 즉, `ArrayExample`의 인스턴스는 구성에서 배열 데이터를 받습니다.
 
-| `ArrayExample.Entries` Index | `ArrayExample.Entries` 값 |
+| `ArrayExample.Entries` 인덱스 | `ArrayExample.Entries` 값 |
 | :--------------------------: | :--------------------------: |
 | 0                            | value0                       |
 | 1                            | value1                       |
@@ -1659,9 +1659,9 @@ _config.GetSection("array").Bind(arrayExample);
 | 3                            | value4                       |
 | 4                            | value5                       |
 
-바인딩된 개체의 Index &num;3은 `array:4` 구성 키에 대한 구성 데이터와 `value4`의 값을 포함합니다. 배열이 포함된 구성 데이터를 바인딩할 때 구성 키의 배열 인덱스는 개체를 만들 때 구성 데이터를 반복하는 데에만 사용됩니다. 구성 데이터에 null 값을 유지할 수 없으며, 구성 키의 배열에서 하나 이상의 인덱스를 건너뛰더라도 바인딩된 개체에 null 값 항목이 생성되지 않습니다.
+바인딩된 개체의 인덱스 &num;3은 `array:4` 구성 키에 대한 구성 데이터와 `value4`의 값을 포함합니다. 배열이 포함된 구성 데이터를 바인딩할 때 구성 키의 배열 인덱스는 개체를 만들 때 구성 데이터를 반복하는 데에만 사용됩니다. 구성 데이터에 null 값을 유지할 수 없으며, 구성 키의 배열에서 하나 이상의 인덱스를 건너뛰더라도 바인딩된 개체에 null 값 항목이 생성되지 않습니다.
 
-Index &num;3에 대한 누락된 구성 항목은 `ArrayExample` 인스턴스에 바인딩하기 전에 구성에서 올바른 키-값 쌍을 생성하는 모든 구성 공급자에서 제공할 수 있습니다. 샘플에 누락된 키-값 쌍이 있는 추가 JSON 구성 공급자가 포함된 경우 `ArrayExample.Entries`는 전체 구성 배열과 일치합니다.
+인덱스 &num;3에 대한 누락된 구성 항목은 `ArrayExample` 인스턴스에 바인딩하기 전에 구성에서 올바른 키-값 쌍을 생성하는 모든 구성 공급자에서 제공할 수 있습니다. 샘플에 누락된 키-값 쌍이 있는 추가 JSON 구성 공급자가 포함된 경우 `ArrayExample.Entries`는 전체 구성 배열과 일치합니다.
 
 *missing_value.json*:
 
@@ -1684,9 +1684,9 @@ config.AddJsonFile(
 | :-------------: | :----: |
 | array:entries:3 | value3 |
 
-JSON 구성 공급자에 Index &num;3에 대한 항목이 포함된 후 `ArrayExample` 클래스 인스턴스를 바인딩하는 경우 `ArrayExample.Entries` 배열에 이 값이 포함됩니다.
+JSON 구성 공급자에 인덱스 &num;3에 대한 항목이 포함된 후 `ArrayExample` 클래스 인스턴스를 바인딩하는 경우 `ArrayExample.Entries` 배열에 이 값이 포함됩니다.
 
-| `ArrayExample.Entries` Index | `ArrayExample.Entries` 값 |
+| `ArrayExample.Entries` 인덱스 | `ArrayExample.Entries` 값 |
 | :--------------------------: | :--------------------------: |
 | 0                            | value0                       |
 | 1                            | value1                       |
@@ -1716,7 +1716,7 @@ JSON 구성 공급자는 구성 데이터를 다음 키-값 쌍으로 읽습니�
 
 바인딩 후 `JsonArrayExample.Key`는 `valueA` 값을 포함합니다. 하위 섹션 값은 POCO 배열 속성 `Subsection`에 저장됩니다.
 
-| `JsonArrayExample.Subsection` Index | `JsonArrayExample.Subsection` 값 |
+| `JsonArrayExample.Subsection` 인덱스 | `JsonArrayExample.Subsection` 값 |
 | :---------------------------------: | :---------------------------------: |
 | 0                                   | valueB                              |
 | 1                                   | valueC                              |
