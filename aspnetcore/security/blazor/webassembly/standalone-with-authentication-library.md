@@ -5,17 +5,17 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/09/2020
+ms.date: 03/19/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-authentication-library
-ms.openlocfilehash: f9cc2884dcd94c729c45a056ae4327a2c75d34be
-ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
+ms.openlocfilehash: ea50d94835b044f9c3d6a0561868f081d32cb62a
+ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/11/2020
-ms.locfileid: "79083592"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80219009"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-the-authentication-library"></a>인증 라이브러리를 사용 하 여 ASP.NET Core Blazor Weasembomoma 독립 실행형 앱 보호
 
@@ -24,6 +24,8 @@ ms.locfileid: "79083592"
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
+
+*AAD (Azure Active Directory) 및 Azure Active Directory B2C (AAD B2C)의 경우이 항목의 지침을 따르세요. 이 목차 노드의 AAD 및 AAD B2C 항목을 참조 하세요.*
 
 `Microsoft.AspNetCore.Components.WebAssembly.Authentication` 라이브러리를 사용 하는 Blazor Weasembomom독립형 앱을 만들려면 명령 셸에서 다음 명령을 실행 합니다.
 
@@ -63,11 +65,11 @@ builder.Services.AddOidcAuthentication(options =>
 });
 ```
 
-독립형 앱에 대 한 인증 지원은 OIDC (Open ID Connect)를 사용 하 여 제공 됩니다. `AddOidcAuthentication` 메서드는 OIDC를 사용 하 여 앱을 인증 하는 데 필요한 매개 변수를 구성 하는 콜백을 허용 합니다. 앱을 구성 하는 데 필요한 값은 Google, Microsoft 또는 기타 OIDC 규격 공급자와 같은 IP에서 가져올 수 있습니다. 앱을 등록 하면 일반적으로 온라인 포털에서 발생 하는 값을 가져옵니다.
+독립형 앱에 대 한 인증 지원은 OIDC (Open ID Connect)를 사용 하 여 제공 됩니다. `AddOidcAuthentication` 메서드는 OIDC를 사용 하 여 앱을 인증 하는 데 필요한 매개 변수를 구성 하는 콜백을 허용 합니다. 앱을 구성 하는 데 필요한 값은 OIDC 규격 IP에서 가져올 수 있습니다. 앱을 등록 하면 일반적으로 온라인 포털에서 발생 하는 값을 가져옵니다.
 
 ## <a name="index-page"></a>인덱스 페이지
 
-[!INCLUDE[](~/includes/blazor-security/index-page.md)]
+[!INCLUDE[](~/includes/blazor-security/index-page-authentication.md)]
 
 ## <a name="app-component"></a>앱 구성 요소
 

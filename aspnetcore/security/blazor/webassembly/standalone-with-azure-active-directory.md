@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-azure-active-directory
-ms.openlocfilehash: 76bcac29d86a236e56c0eaea24a694c4845ecbcf
-ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
+ms.openlocfilehash: e12c38ed42a4e2714d785ef8f03097246c40d36e
+ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/11/2020
-ms.locfileid: "79083586"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80218983"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-azure-active-directory"></a>Azure Active Directory를 사용 하 여 ASP.NET Core Blazor Weasembomoma 독립 실행형 앱을 보호 합니다.
 
@@ -105,7 +105,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 ## <a name="index-page"></a>인덱스 페이지
 
-[!INCLUDE[](~/includes/blazor-security/index-page.md)]
+[!INCLUDE[](~/includes/blazor-security/index-page-msal.md)]
 
 ## <a name="app-component"></a>앱 구성 요소
 

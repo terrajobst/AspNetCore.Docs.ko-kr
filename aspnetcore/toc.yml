@@ -424,6 +424,8 @@
               uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
             - name: 캐시
               uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
+            - name: 구성 요소
+              uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
             - name: 분산 캐시
               uid: mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper
             - name: 환경

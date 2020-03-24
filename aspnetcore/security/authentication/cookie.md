@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 02/11/2020
 uid: security/authentication/cookie
-ms.openlocfilehash: 64f881441a7a7f9a5529cb6ee5ce81142ccd69e6
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: b7c8b2cccb27dd6818330b17439675e41bfef013
+ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653421"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80219209"
 ---
 # <a name="use-cookie-authentication-without-aspnet-core-identity"></a>ASP.NET Core Id 없이 쿠키 인증 사용
 
@@ -89,6 +89,8 @@ var cookiePolicyOptions = new CookiePolicyOptions
 필요한 <xref:System.Security.Claims.Claim>s를 사용 하 여 <xref:System.Security.Claims.ClaimsIdentity>를 만들고 <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*>를 호출 하 여 사용자를 로그인 합니다.
 
 [!code-csharp[](cookie/samples/3.x/CookieSample/Pages/Account/Login.cshtml.cs?name=snippet1)]
+
+[!INCLUDE[request localized comments](~/includes/code-comments-loc.md)]
 
 `SignInAsync`는 암호화 된 쿠키를 만들어 현재 응답에 추가 합니다. `AuthenticationScheme` 지정 하지 않으면 기본 체계가 사용 됩니다.
 

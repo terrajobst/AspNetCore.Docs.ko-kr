@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-microsoft-accounts
-ms.openlocfilehash: 6883af3486256e7c6905626d8da09e8ae0c4a896
-ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
+ms.openlocfilehash: be73bec971f96bd64afc735a1ea750d47c7bc383
+ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/11/2020
-ms.locfileid: "79083652"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80219261"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-microsoft-accounts"></a>Microsoft 계정을 사용 하 여 ASP.NET Core Blazor Weasembomamboma 독립 실행형 앱 보호
 
@@ -31,18 +31,18 @@ ms.locfileid: "79083652"
 
    Azure Portal의 **Azure Active Directory** > **앱 등록** 영역에서 AAD 앱을 등록 합니다.
 
-   1 \. 앱에 대 한 **이름** (예: **Blazor Client AAD**)을 제공 합니다.<br>
-   2 \. **지원 되는 계정 유형**에서 **조직 디렉터리의 계정**을 선택 합니다.<br>
+   1\. 앱에 대 한 **이름** (예: **Blazor Client AAD**)을 제공 합니다.<br>
+   2\. **지원 되는 계정 유형**에서 **조직 디렉터리의 계정**을 선택 합니다.<br>
    3\. **리디렉션 uri** 드롭다운을 **웹**으로 설정 된 상태로 두고 `https://localhost:5001/authentication/login-callback`의 리디렉션 uri를 제공 합니다.<br>
-   4 \. **권한을** 사용 하지 않도록 설정 > **관리자 동의 하도록 요구에 게 openid connect 및 offline_access 권한 부여 확인란을** 선택 합니다.<br>
+   4\. **권한을** 사용 하지 않도록 설정 > **관리자 동의 하도록 요구에 게 openid connect 및 offline_access 권한 부여 확인란을** 선택 합니다.<br>
    5\. **등록**을 선택합니다.
 
    **웹** > **인증** > **플랫폼 구성** 에서 다음을 수행 합니다.
 
-   1 \. `https://localhost:5001/authentication/login-callback`의 **리디렉션 URI** 가 있는지 확인 합니다.<br>
-   2 \. **암시적 권한 부여**의 경우 **액세스 토큰** 및 **ID 토큰**에 대 한 확인란을 선택 합니다.<br>
+   1\. `https://localhost:5001/authentication/login-callback`의 **리디렉션 URI** 가 있는지 확인 합니다.<br>
+   2\. **암시적 권한 부여**의 경우 **액세스 토큰** 및 **ID 토큰**에 대 한 확인란을 선택 합니다.<br>
    3\. 앱에 대 한 나머지 기본값은이 환경에 사용할 수 있습니다.<br>
-   4 \. **저장** 단추를 선택합니다.
+   4\. **저장** 단추를 선택합니다.
 
    응용 프로그램 ID (클라이언트 ID)를 기록 합니다 (예: `11111111-1111-1111-1111-111111111111`).
 
@@ -93,7 +93,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 ## <a name="index-page"></a>인덱스 페이지
 
-[!INCLUDE[](~/includes/blazor-security/index-page.md)]
+[!INCLUDE[](~/includes/blazor-security/index-page-msal.md)]
 
 ## <a name="app-component"></a>앱 구성 요소
 

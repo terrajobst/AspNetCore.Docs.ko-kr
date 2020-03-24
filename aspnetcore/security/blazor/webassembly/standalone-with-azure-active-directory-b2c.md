@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
-ms.openlocfilehash: b4d32e91b4013cbea37baecb972a535d2874d3d1
-ms.sourcegitcommit: 5bdc54162d7dea8d9fa54ac3055678db23586af1
+ms.openlocfilehash: bb03ef1e6d216cfc06e2b91919c64f92f2ef634e
+ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/17/2020
-ms.locfileid: "79434462"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80219274"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>Azure Active Directory B2C를 사용 하 여 ASP.NET Core Blazor Weasembomoma 독립 실행형 앱을 보호 합니다.
 
@@ -31,13 +31,13 @@ ms.locfileid: "79434462"
 
    * [AAD B2C 테 넌 트를 만들어](/azure/active-directory-b2c/tutorial-create-tenant) 다음 정보를 기록 &ndash; 합니다.
 
-     1 \. AAD B2C 인스턴스 (예: 후행 슬래시를 포함 하는 `https://contoso.b2clogin.com/`)<br>
-     2 \. AAD B2C 테 넌 트 도메인 (예: `contoso.onmicrosoft.com`)
+     1\. AAD B2C 인스턴스 (예: 후행 슬래시를 포함 하는 `https://contoso.b2clogin.com/`)<br>
+     2\. AAD B2C 테 넌 트 도메인 (예: `contoso.onmicrosoft.com`)
 
    * 앱을 등록 하는 동안 다음 항목을 선택 하 &ndash; [웹 응용 프로그램을 등록](/azure/active-directory-b2c/tutorial-register-applications) 합니다.
 
-     1 \. **웹 앱/웹 API** 를 **예**로 설정 합니다.<br>
-     2 \. **암시적 흐름 허용** 을 **예**로 설정 합니다.<br>
+     1\. **웹 앱/웹 API** 를 **예**로 설정 합니다.<br>
+     2\. **암시적 흐름 허용** 을 **예**로 설정 합니다.<br>
      3\. `https://localhost:5001/authentication/login-callback`**회신 URL** 을 추가 합니다.
 
      응용 프로그램 ID (클라이언트 ID)를 기록 합니다 (예: `11111111-1111-1111-1111-111111111111`).
@@ -103,7 +103,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 ## <a name="index-page"></a>인덱스 페이지
 
-[!INCLUDE[](~/includes/blazor-security/index-page.md)]
+[!INCLUDE[](~/includes/blazor-security/index-page-msal.md)]
 
 ## <a name="app-component"></a>앱 구성 요소
 
