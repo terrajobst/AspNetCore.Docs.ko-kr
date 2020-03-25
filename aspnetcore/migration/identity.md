@@ -3,14 +3,14 @@ title: ASP.NET Core 인증 및 Id 마이그레이션
 author: ardalis
 description: ASP.NET MVC 프로젝트에서 ASP.NET Core MVC 프로젝트로 인증 및 id를 마이그레이션하는 방법에 대해 알아봅니다.
 ms.author: riande
-ms.date: 10/14/2016
+ms.date: 3/22/2020
 uid: migration/identity
-ms.openlocfilehash: f821930dbd36de18db31104cddf34c563009a506
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: c5727c974e455144d04e66fe14ea591e160cb963
+ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78653013"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80219196"
 ---
 # <a name="migrate-authentication-and-identity-to-aspnet-core"></a>ASP.NET Core 인증 및 Id 마이그레이션
 
@@ -22,9 +22,13 @@ ms.locfileid: "78653013"
 
 ASP.NET MVC에서 인증 및 id 기능은 *App_Start* 폴더에 있는 *Startup.Auth.cs* 및 *IdentityConfig.cs*의 ASP.NET Identity를 사용 하 여 구성 됩니다. ASP.NET Core MVC에서 이러한 기능은 *Startup.cs*에서 구성 됩니다.
 
-`Microsoft.AspNetCore.Identity.EntityFrameworkCore`를 설치 하 고 NuGet 패키지를 `Microsoft.AspNetCore.Authentication.Cookies` 합니다.
+다음 NuGet 패키지를 설치 합니다.
 
-그런 다음 *Startup.cs* 를 열고 Entity Framework 및 id 서비스를 사용 하도록 `Startup.ConfigureServices` 메서드를 업데이트 합니다.
+* `Microsoft.AspNetCore.Identity.EntityFrameworkCore`
+* `Microsoft.AspNetCore.Authentication.Cookies`
+* `Microsoft.EntityFrameworkCore.SqlServer`
+
+*Startup.cs*에서 Entity Framework 및 id 서비스를 사용 하도록 `Startup.ConfigureServices` 메서드를 업데이트 합니다.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
