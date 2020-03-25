@@ -4,6 +4,8 @@
 
 **[캐시 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper)**
 
+**[구성 요소 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)**
+
 **[분산 캐시 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper)**
 
 **[환경 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/environment-tag-helper)**
