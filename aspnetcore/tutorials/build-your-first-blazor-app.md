@@ -5,16 +5,16 @@ description: Blazor 앱을 단계별로 빌드합니다.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/13/2020
+ms.date: 03/20/2020
 no-loc:
 - Blazor
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 8b3802a6ffe3613e5d4ca65c57fafc3f404c8329
-ms.sourcegitcommit: 5bdc54162d7dea8d9fa54ac3055678db23586af1
+ms.openlocfilehash: 138057c2ceb9ed01bdf958c01f5cf2275387df23
+ms.sourcegitcommit: 9b6e7f421c243963d5e419bdcfc5c4bde71499aa
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/17/2020
-ms.locfileid: "79434501"
+ms.lasthandoff: 03/21/2020
+ms.locfileid: "79989426"
 ---
 # <a name="build-your-first-opno-locblazor-app"></a>첫 번째 Blazor 앱 빌드
 
@@ -198,10 +198,10 @@ Blazor WebAssembly 앱을 사용할 경우 *wwwroot/sample-data* 폴더의 *weat
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/ToDo9.razor?highlight=5-6)]
 
-1. 해당 값이 바인딩되었는지 확인하기 위해 `<h1>` 헤더를 수정하여 완료되지 않은(`IsDone`이 `false`) 할 일 항목 수를 표시합니다.
+1. 해당 값이 바인딩되었는지 확인하기 위해 `<h3>` 헤더를 수정하여 완료되지 않은(`IsDone`이 `false`) 할 일 항목 수를 표시합니다.
 
    ```razor
-   <h1>Todo (@todos.Count(todo => !todo.IsDone))</h1>
+   <h3>Todo (@todos.Count(todo => !todo.IsDone))</h3>
    ```
 
 1. 완료된 `Todo` 구성 요소(*Pages/Todo.razor*)는 다음과 같습니다.
