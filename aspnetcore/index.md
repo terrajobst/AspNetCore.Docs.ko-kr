@@ -9,12 +9,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: index
-ms.openlocfilehash: f6e4a624186ccf0d7f6475819df7da9ef99f9bcc
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: fd7fa9dd70502f51222e457dd887ef668d377278
+ms.sourcegitcommit: 99e71ae03319ab386baf2ebde956fc2d511df8b8
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78644373"
+ms.lasthandoff: 03/25/2020
+ms.locfileid: "80242591"
 ---
 # <a name="introduction-to-aspnet-core"></a>ASP.NET Core 소개
 
@@ -29,7 +29,7 @@ ASP.NET Core는 최신 클라우드 기반 인터넷 연결 응용 프로그램�
 
 ## <a name="why-choose-aspnet-core"></a>ASP.NET Core를 선택해야 하는 이유
 
-수백만 명의 개발자가 [ASP.NET 4.x](/aspnet/overview)를 사용하여 웹앱을 만들었고 계속 만들고 있습니다. ASP.NET Core는 보다 간결하고 모듈화된 프레임워크를 만드는 아키텍처 변경 내용이 담긴 ASP.NET 4.x의 재설계입니다.
+수백만 명의 개발자가 [ASP.NET 4.x](/aspnet/overview)를 사용하여 웹앱을 만들었고 지금도 만들고 있습니다. ASP.NET Core는 보다 간결하고 모듈화된 프레임워크를 만드는 아키텍처 변경 내용이 담긴 ASP.NET 4.x의 재설계입니다.
 
 [!INCLUDE[](~/includes/benefits.md)]
 
@@ -47,7 +47,7 @@ ASP.NET Core MVC는 [Web API](xref:tutorials/first-web-api) 및 [웹앱](xref:tu
 
 ## <a name="client-side-development"></a>클라이언트 쪽 개발
 
-ASP.NET Core는 [Blazor](xref:blazor/index), [Angular](xref:spa/angular), [React](xref:spa/react), [부트스트랩](https://getbootstrap.com/) 등 유명한 클라이언트 쪽 프레임워크 및 라이브러리와 원활하게 통합됩니다. 자세한 내용은 <xref:blazor/index> 및 ‘클라이언트 쪽 개발’의 관련 항목을 참조하세요.**
+ASP.NET Core는 [Blazor](xref:blazor/index), [Angular](xref:spa/angular), [React](xref:spa/react), [부트스트랩](https://getbootstrap.com/) 등 유명한 클라이언트 쪽 프레임워크 및 라이브러리와 원활하게 통합됩니다. 자세한 내용은 <xref:blazor/index> 및 ‘클라이언트 쪽 개발’의 관련 항목을 참조하세요. 
 
 <a name="target-framework"></a>
 
