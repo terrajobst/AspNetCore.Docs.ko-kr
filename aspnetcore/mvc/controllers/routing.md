@@ -5,12 +5,12 @@ description: ASP.NET Core MVC가 라우팅 미들웨어를 사용하여 들어�
 ms.author: riande
 ms.date: 3/25/2020
 uid: mvc/controllers/routing
-ms.openlocfilehash: be7da9eeaf64c2f52c095b5179ccc22db43d57c3
-ms.sourcegitcommit: 99e71ae03319ab386baf2ebde956fc2d511df8b8
+ms.openlocfilehash: c1c0d978714718af1de0f627e50a54f66ed391ed
+ms.sourcegitcommit: 4b166b49ec557a03f99f872dd069ca5e56faa524
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/25/2020
-ms.locfileid: "80242579"
+ms.lasthandoff: 03/27/2020
+ms.locfileid: "80362652"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core의 컨트롤러 작업에 라우팅
 
@@ -206,7 +206,7 @@ ASP.NET Core 3.0 이상에서 끝점 라우팅:
 * 가장 적합 한 후보를 선택 합니다.
 * 예외를 throw합니다.
 
-다음은 그 예입니다.
+예를 들면 다음과 같습니다.
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet9)]
 
@@ -416,12 +416,12 @@ REST Api는 특성 라우팅을 사용 하 여 응용 프로그램의 기능을 
 
 다음 표에서는 이전 코드의 `[Route]` 특성에 대해 설명 합니다.
 
-| attribute               | `[Route("Home")]`와 결합 | 경로 템플릿을 정의 합니다. |
+| 특성               | `[Route("Home")]`와 결합 | 경로 템플릿을 정의 합니다. |
 | ----------------- | ------------ | --------- |
-| `[Route("")]` | yes | `"Home"` |
-| `[Route("Index")]` | yes | `"Home/Index"` |
+| `[Route("")]` | 예 | `"Home"` |
+| `[Route("Index")]` | 예 | `"Home/Index"` |
 | `[Route("/")]` | **아니요** | `""` |
-| `[Route("About")]` | yes | `"Home/About"` |
+| `[Route("About")]` | 예 | `"Home/About"` |
 
 <a name="routing-ordering-ref-label"></a>
 <a name="oar"></a>
@@ -847,6 +847,8 @@ TagHelper는 `form` TagHelper 및 `<a>` TagHelper를 통해 URL을 생성합니�
  * [MyDisplayRouteInfo](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x/main/Extensions/ControllerContextExtensions.cs) 메서드는 [샘플 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x) 에 포함 되어 있으며 라우팅 정보를 표시 하는 데 사용 됩니다.
 * [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
+[!INCLUDE[](~/includes/dbg-route.md)]
+
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
@@ -998,7 +1000,7 @@ app.UseMvc(routes =>
 
 ### <a name="disambiguating-actions"></a>명확한 작업 구분
 
-라우팅을 통해 두 작업이 일치하는 경우 MVC는 작업을 명확히 구분하여 '최적의' 후보를 선택해야 하며, 그렇지 못하면 예외를 던집니다. 다음은 그 예입니다.
+라우팅을 통해 두 작업이 일치하는 경우 MVC는 작업을 명확히 구분하여 '최적의' 후보를 선택해야 하며, 그렇지 못하면 예외를 던집니다. 예를 들면 다음과 같습니다.
 
 ```csharp
 public class ProductsController : Controller
