@@ -355,7 +355,7 @@
           uid: blazor/state-management
         - name: 오류 처리
           uid: blazor/handle-errors
-        - name: 디버그
+        - name: WebAssembly 디버그
           uid: blazor/debug
         - name: 웹 API 호출
           uid: blazor/call-web-api
