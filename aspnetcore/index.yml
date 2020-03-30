@@ -1,0 +1,359 @@
+### YamlMime:Hub
+title: ASP.NET 설명서
+summary: ASP.NET Core를 사용하여 빠르고 안전한 플랫폼 간 및 클라우드 기반 웹앱과 서비스를 만드는 방법을 알아봅니다. 자습서, 샘플 코드, 기본 사항, API 참조 등을 찾아보세요.
+brand: aspnet
+metadata:
+  title: ASP.NET 설명서
+  description: ASP.NET Core를 사용하여 빠르고 안전한 플랫폼 간 및 클라우드 기반 웹앱과 서비스를 만드는 방법을 알아봅니다. 자습서, 샘플 코드, 기본 사항, API 참조 등을 찾아보세요.
+  ms.product: aspnet
+  ms.topic: hub-page
+  author: WadePickett
+  ms.author: wpickett
+  ms.date: 03/27/2020
+  ms.openlocfilehash: fb6d03616560649a336df8a624e7fb59006a7ea8
+  ms.sourcegitcommit: 4b166b49ec557a03f99f872dd069ca5e56faa524
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 03/27/2020
+  ms.locfileid: "80366639"
+highlightedContent:
+  items:
+  - title: 아무 플랫폼에서 5분 만에 ASP.NET Core 앱 만들기
+    itemType: get-started
+    url: getting-started/index.md
+  - title: ASP.NET Core 개요
+    itemType: overview
+    url: introduction-to-aspnet-core.md
+  - title: ASP.NET Core 비디오 자습서
+    itemType: video
+    url: https://www.youtube.com/playlist?list=PLdo4fOcmZ0oW8nviYduHq7bmKode-p8Wy
+  - title: ASP.NET Core 문서의 새로운 기능
+    itemType: whats-new
+    url: whats-new/index.yml
+  - title: 첫 번째 웹 UI 만들기
+    itemType: get-started
+    url: tutorials/build-your-first-blazor-app.md
+  - title: 첫 번째 웹 API 만들기
+    itemType: get-started
+    url: tutorials/first-web-api.md
+  - title: 첫 번째 실시간 웹앱 만들기
+    itemType: get-started
+    url: tutorials/signalr.md
+  - title: 첫 번째 데이터 기반 MVC 웹앱 만들기
+    itemType: get-started
+    url: tutorials/first-mvc-app/index.md
+conceptualContent:
+  title: ASP.NET Core 앱 개발
+  summary: 대화형 웹앱, 웹 API, MVC 패턴화 앱, 실시간 앱 등 선택
+  items:
+  - title: 대화형 클라이언트 쪽 Blazor 앱
+    summary: 기본에 가까운 성능을 위해 WebAssembly를 활용할 수 있는 재사용 가능한 UI 구성 요소를 사용하여 개발
+    links:
+    - url: blazor/index.md
+      itemType: overview
+      text: 개요
+    - url: blazor/get-started.md
+      itemType: get-started
+      text: 첫 번째 Blazor 앱 만들기
+    - url: tutorials/build-your-first-blazor-app.md
+      itemType: get-started
+      text: 재사용 가능한 구성 요소를 사용하여 첫 번째 Blazor 앱 빌드
+    - url: blazor/hosting-models.md
+      itemType: concept
+      text: Blazor 호스팅 모델
+  - title: RESTful 웹 API 앱
+    summary: ASP.NET Core Web API를 사용하여 RESTful HTTP 서비스 개발
+    links:
+    - url: tutorials/first-web-api.md
+      itemType: get-started
+      text: ASP.NET Core를 사용하여 웹 API 만들기
+    - url: https://docs.microsoft.com/learn/modules/build-web-api-net-core/
+      itemType: learn
+      text: ASP.NET Core로 Web API 만들기
+    - url: tutorials/web-api-help-pages-using-swagger.md
+      itemType: tutorial
+      text: Swagger/OpenAPI를 사용하여 웹 API 도움말 페이지 생성
+    - url: web-api/action-return-types.md
+      itemType: concept
+      text: 컨트롤러 작업 반환 형식
+    - url: web-api/advanced/formatting.md
+      itemType: concept
+      text: 응답 데이터 서식 지정
+    - url: web-api/handle-errors.md
+      itemType: concept
+      text: 오류 처리
+    - url: tutorials/web-api-javascript.md
+      itemType: tutorial
+      text: JavaScript로 ASP.NET Core 웹 API 호출하기
+  - title: Razor Pages를 사용하는 페이지 중심 웹 UI
+    summary: 명확한 문제 분리로 페이지 중심 웹앱 개발
+    links:
+    - url: tutorials/razor-pages/razor-pages-start.md
+      itemType: get-started
+      text: 첫 번째 Razor Pages 웹앱 만들기
+    - url: https://docs.microsoft.com/learn/modules/create-razor-pages-aspnet-core/
+      itemType: tutorial
+      text: 웹 API를 사용하는 페이지 중심 웹 UI 만들기
+    - url: mvc/views/razor.md
+      itemType: concept
+      text: Razor 구문
+    - url: razor-pages/filter.md
+      itemType: concept
+      text: 필터
+    - url: razor-pages/razor-pages-conventions.md
+      itemType: concept
+      text: 라우팅
+  - title: MVC를 사용하는 페이지 중심 웹 UI
+    summary: Model-View-Controller 디자인 패턴을 사용하여 웹앱 개발
+    links:
+    - url: mvc/overview.md
+      itemType: overview
+      text: 개요
+    - url: tutorials/first-mvc-app/index.md
+      itemType: get-started
+      text: 첫 번째 ASP.NET Core MVC 앱 만들기
+    - url: mvc/views/overview.md
+      itemType: concept
+      text: 뷰
+    - url: mvc/views/partial.md
+      itemType: concept
+      text: 부분 뷰
+    - url: mvc/controllers/actions.md
+      itemType: concept
+      text: Controllers
+    - url: mvc/controllers/routing.md
+      itemType: concept
+      text: 컨트롤러 작업에 라우팅
+    - url: mvc/controllers/testing.md
+      itemType: concept
+      text: 단위 테스트
+  - title: SignalR을 사용하는 실시간 웹앱
+    summary: 실시간 기능을 웹앱에 추가하고 서버 쪽 코드를 사용하여 콘텐츠를 즉시 푸시
+    links:
+    - url: signalr/introduction.md
+      itemType: overview
+      text: 개요
+    - url: signalr/introduction.md
+      itemType: get-started
+      text: 첫 번째 SignalR 앱 만들기
+    - url: tutorials/signalr-blazor-webassembly.md
+      itemType: tutorial
+      text: Blazor WebAssembly를 사용한 SignalR
+    - url: tutorials/signalr-typescript-webpack.md
+      itemType: tutorial
+      text: TypeScript를 사용한 SignalR
+    - url: https://github.com/aspnet/SignalR-samples
+      itemType: sample
+      text: 샘플
+    - url: signalr/hubs.md
+      itemType: concept
+      text: 허브
+    - url: signalr/client-features.md
+      itemType: concept
+      text: SignalR 클라이언트 기능
+    - url: signalr/scale.md
+      itemType: concept
+      text: 호스트 및 규모
+  - title: RPC(원격 프로시저 호출) 앱 - gRPC 서비스
+    summary: ASP.NET Core에서 gRPC를 사용하여 계약 중심, 고성능 서비스 개발
+    links:
+    - url: grpc/index.md
+      itemType: overview
+      text: 개요
+    - url: tutorials/grpc/grpc-start.md
+      itemType: get-started
+      text: gRPC 클라이언트 및 서버 만들기
+    - url: grpc/basics.md
+      itemType: concept
+      text: C#의 gRPC 서비스 개념
+    - url: https://github.com/grpc/grpc-dotnet/tree/master/examples
+      itemType: sample
+      text: 샘플
+    - url: grpc/comparison.md
+      itemType: concept
+      text: gRPC 서비스와 HTTP API 비교
+    - url: grpc/aspnetcore.md
+      itemType: tutorial
+      text: ASP.NET Core 앱에 gRPC 서비스 추가
+    - url: grpc/client.md
+      itemType: tutorial
+      text: .NET 클라이언트를 사용하여 gRPC 서비스 호출
+    - url: grpc/browser.md
+      itemType: tutorial
+      text: 브라우저 앱에서 gRPC 사용
+  - title: 데이터 기반 웹앱
+    summary: ASP.NET Core에서 데이터 기반 웹앱 만들기
+    links:
+    - url: tutorials/first-mvc-app/working-with-sql.md
+      itemType: tutorial
+      text: ASP.NET Core를 사용한 SQL
+    - url: blazor/data-binding.md
+      itemType: concept
+      text: ASP.NET Core Blazor의 데이터 바인딩
+    - url: tutorials/razor-pages/sql.md
+      itemType: tutorial
+      text: SQL Server Express 및 Razor Pages
+    - url: data/ef-rp/intro.md
+      itemType: tutorial
+      text: Razor Pages를 사용한 Entity Framework Core
+    - url: data/ef-rp/intro.md
+      itemType: tutorial
+      text: ASP.NET Core MVC를 사용한 Entity Framework Core
+    - url: https://docs.microsoft.com/visualstudio/azure/vs-azure-tools-connected-services-storage?view=vs-2019&viewFallbackFrom=aspnetcore-3.1
+      itemType: tutorial
+      text: Azure Storage
+    - url: https://docs.microsoft.com/azure/visual-studio/vs-storage-aspnet5-getting-started-blobs?toc=%2Faspnet%2Fcore%2Ftoc.json&bc=%2Faspnet%2Fcore%2Fbreadcrumb%2Ftoc.json&view=aspnetcore-3.1
+      itemType: tutorial
+      text: Blob Storage
+    - url: https://docs.microsoft.com/azure/visual-studio/vs-storage-aspnet5-getting-started-tables?toc=%2Faspnet%2Fcore%2Ftoc.json&bc=%2Faspnet%2Fcore%2Fbreadcrumb%2Ftoc.json&view=aspnetcore-3.1
+      itemType: concept
+      text: Azure Table Storage
+  - title: 이전 ASP.NET Framework 버전
+    summary: 이전 ASP.NET Framework 버전의 개요, 자습서, 기본 개념, 아키텍처 및 API 참조 살펴보기
+    links:
+    - url: https://docs.microsoft.com/aspnet/overview
+      itemType: concept
+      text: ASP.NET 4.x
+additionalContent:
+  sections:
+  - title: 개념 및 기능
+    items:
+    - title: ASP.NET Core의 API 참조
+      links:
+      - url: https://docs.microsoft.com/dotnet/api/?view=aspnetcore-3.1
+        text: .NET API 브라우저
+    - title: 호스트 및 배포
+      links:
+      - url: host-and-deploy/index.md
+        text: 개요
+      - url: host-and-deploy/azure-apps/index.md
+        text: Azure App Service에 배포
+      - url: azure/devops/index.md
+        text: ASP.NET Core 및 Azure에서 DevOps
+      - url: host-and-deploy/linux-apache.md
+        text: Apache를 사용하는 Linux
+      - url: host-and-deploy/linux-nginx.md
+        text: Nginx를 사용하는 Linux
+      - url: fundamentals/servers/kestrel.md
+        text: Kestrel
+      - url: host-and-deploy/iis/index.md
+        text: IIS
+      - url: host-and-deploy/docker/index.md
+        text: Docker
+    - title: 보안 및 ID
+      links:
+      - url: security/index.md
+        text: 개요
+      - url: security/authentication/index.md
+        text: 인증
+      - url: security/authorization/introduction.md
+        text: 권한 부여
+      - url: https://docs.microsoft.com/learn/modules/secure-aspnet-core-identity/
+        text: '과정: ID 프레임워크를 사용하여 ASP.NET Core 웹앱 보호'
+      - url: security/data-protection/introduction.md
+        text: 데이터 보호
+      - url: security/app-secrets.md
+        text: 비밀 관리
+      - url: security/enforcing-ssl.md
+        text: HTTPS 적용
+      - url: security/docker-https.md
+        text: HTTPS를 사용하여 Docker 호스팅
+    - title: 전역화 및 지역화
+      links:
+      - url: fundamentals/localization.md
+        text: 개요
+      - url: fundamentals/portable-object-localization.md
+        text: 이식 가능 개체 지역화
+      - url: fundamentals/localization-extensibility.md
+        text: 지역화 확장성
+      - url: fundamentals/troubleshoot-aspnet-core-localization.md
+        text: 문제 해결
+    - title: 테스트, 디버깅 및 문제 해결
+      links:
+      - url: test/razor-pages-tests.md
+        text: Razor 페이지 단위 테스트
+      - url: https://docs.microsoft.com/visualstudio/debugger/remote-debugging-azure?view=vs-2019&viewFallbackFrom=aspnetcore-3.1
+        text: 원격 디버깅
+      - url: https://docs.microsoft.com/azure/azure-monitor/app/snapshot-debugger?toc=%2Faspnet%2Fcore%2Ftoc.json&bc=%2Faspnet%2Fcore%2Fbreadcrumb%2Ftoc.json&view=aspnetcore-3.1
+        text: 스냅샷 디버깅
+      - url: test/integration-tests.md
+        text: 통합 테스트
+      - url: test/load-tests.md
+        text: 로드 및 스트레스 테스트
+      - url: test/troubleshoot.md
+        text: 문제 해결 및 디버그
+      - url: fundamentals/logging/index.md
+        text: 로깅
+      - url: https://docs.microsoft.com/learn/modules/load-test-web-app-azure-devops/
+        text: Azure DevOps를 사용하여 Azure 웹앱 부하 테스트
+    - title: Azure 및 ASP.NET Core
+      links:
+      - url: https://docs.microsoft.com/azure/app-service/app-service-web-get-started-dotnet
+        text: ASP.NET 웹앱 배포
+      - url: https://docs.microsoft.com/visualstudio/containers/container-tools?view=vs-2019.md
+        text: ASP.NET Core 및 Docker
+      - url: https://docs.microsoft.com/learn/modules/host-a-web-app-with-azure-app-service/
+        text: Azure App Service를 사용하여 웹 애플리케이션 호스트
+      - url: https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-dotnet-sqldatabase
+        text: App Service 및 Azure SQL Database
+      - url: https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-connect-msi
+        text: ASP.NET 및 Azure SQL Database를 사용하는 관리 ID
+      - url: https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-rest-api
+        text: Azure App Service의 CORS를 사용하는 웹 API
+      - url: https://docs.microsoft.com/learn/modules/capture-application-logs-app-service/
+        text: App Service 진단 로깅을 사용하여 웹 애플리케이션 로그 캡처
+    - title: 성능
+      links:
+      - url: performance/performance-best-practices.md
+        text: 개요
+      - url: performance/memory.md
+        text: 메모리 및 가비지 수집
+      - url: performance/caching/response.md
+        text: 응답 캐싱
+      - url: performance/response-compression.md
+        text: 응답 압축
+      - url: performance/diagnostic-tools.md
+        text: 진단 도구
+      - url: test/load-tests.md
+        text: 로드 및 스트레스 테스트
+    - title: 고급 기능
+      links:
+      - url: mvc/models/model-binding.md
+        text: 모델 바인딩
+      - url: mvc/models/validation.md
+        text: 모델 유효성 검사
+      - url: fundamentals/middleware.md
+        text: 쓰기 미들웨어
+      - url: fundamentals/middleware/request-response.md
+        text: 요청 및 응답 작업
+      - url: fundamentals/url-rewriting.md
+        text: URL 재작성
+    - title: 마이그레이션
+      links:
+      - url: migration/31-to-50.md
+        text: ASP.NET Core 3.1에서 5.0으로
+      - url: migration/30-to-31.md
+        text: ASP.NET Core 3.0에서 3.1로
+      - url: migration/22-to-30.md
+        text: ASP.NET Core 2.2에서 3.0으로
+      - url: migration/21-to-22.md
+        text: ASP.NET Core 2.1에서 2.2로
+      - url: migration/20_21.md
+        text: ASP.NET Core 2.0 ~ 2.1
+      - url: migration/1x-to-2x/index.md
+        text: ASP.NET Core 1.x에서 2.0으로
+      - url: migration/proper-to-2x/index.md
+        text: ASP.NET에서 ASP.NET Core로
+    - title: 아키텍처
+      links:
+      - url: https://docs.microsoft.com/dotnet/architecture/modern-web-apps-azure/choose-between-traditional-web-and-single-page-apps
+        text: 기존 웹앱 및 SPA(단일 페이지 앱) 중에서 선택
+      - url: https://docs.microsoft.com/dotnet/architecture/modern-web-apps-azure/architectural-principles
+        text: 아키텍처 원칙
+      - url: https://docs.microsoft.com/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures
+        text: 일반 웹 애플리케이션 아키텍처
+      - url: https://docs.microsoft.com/dotnet/architecture/modern-web-apps-azure/common-client-side-web-technologies
+        text: 일반 클라이언트측 웹 기술
+      - url: https://docs.microsoft.com/dotnet/architecture/modern-web-apps-azure/development-process-for-azure
+        text: Azure 개발 프로세스
+  footer: ASP.NET 문서에 참여합니다. [기여자 가이드](https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md)를 참조하세요.
