@@ -5,17 +5,17 @@ description: Blazor 앱의 구성 요소 및 DOM 요소에 대한 데이터 바�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/12/2020
+ms.date: 03/17/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/integrate-components
-ms.openlocfilehash: de1a37ffd9456c956e3d84fcc69431ecb794513c
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: cf6056e0985d5433bddecac8dd183ca3f4c2af5b
+ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78649083"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80218936"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Razor Pages 및 MVC 앱에 ASP.NET Core Razor 구성 요소 통합
 
@@ -60,13 +60,13 @@ Razor Pages 및 MVC 앱에 Razor 구성 요소를 통합할 수 있습니다. �
    @using MyAppNamespace
    ```
 
-1. `Startup.ConfigureServices`에서 Blazor 서버 서비스를 등록합니다.
+1. `Startup.ConfigureServices`에서 Blazor Server 서비스를 등록합니다.
 
    ```csharp
    services.AddServerSideBlazor();
    ```
 
-1. `Startup.Configure`에서 Blazor 허브 엔드포인트를 `app.UseEndpoints`에 추가합니다.
+1. `Startup.Configure`에서 `app.UseEndpoints`에 Blazor 허브 엔드포인트를 추가합니다.
 
    ```csharp
    endpoints.MapBlazorHub();
@@ -225,31 +225,10 @@ MVC 앱에서 라우팅 가능한 Razor 구성 요소를 지원하려면 다음�
 
 ‘이 섹션에서는 사용자 요청에서 직접 구성 요소를 라우팅할 수 없는 페이지 또는 뷰에 구성 요소를 추가하는 방법을 설명합니다.’ 
 
-페이지 또는 뷰에서 구성 요소를 렌더링하려면 `Component` 태그 도우미를 사용합니다.
-
-```cshtml
-<component type="typeof(Counter)" render-mode="ServerPrerendered" 
-    param-IncrementAmount="10" />
-```
-
-매개 변수 형식은 JSON serializable이어야 하며, 일반적으로 형식에 기본 생성자와 설정 가능한 속성이 있어야 함을 의미합니다. 예를 들어 `IncrementAmount`의 형식은 JSON 직렬 변환기에서 지원하는 기본 형식인 `int`이기 때문에 `IncrementAmount`의 값을 지정할 수 있습니다.
-
-`RenderMode`는 구성 요소에 대해 다음을 구성합니다.
-
-* 페이지에 미리 렌더링할지 여부
-* 페이지에 정적 HTML로 렌더링할지 여부 또는 사용자 에이전트에서 Blazor 앱을 부트스트랩하는 데 필요한 정보를 포함할지 여부
-
-| `RenderMode`        | 설명 |
-| ------------------- | ----------- |
-| `ServerPrerendered` | 구성 요소를 정적 HTML에 렌더링하고 Blazor 서버 앱의 표식을 포함합니다. 사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다. |
-| `Server`            | Blazor 서버 앱의 표식을 렌더링합니다. 구성 요소의 출력은 포함되지 않습니다. 사용자 에이전트를 시작할 때 이 표식은 Blazor 앱을 부트스트랩하는 데 사용됩니다. |
-| `Static`            | 구성 요소를 정적 HTML에 렌더링합니다. |
-
-페이지와 뷰는 구성 요소를 사용할 수 있지만 반대의 경우는 지원되지 않습니다. 구성 요소는 부분 뷰, 섹션 등의 뷰 및 페이지 특정 시나리오를 사용할 수 없습니다. 구성 요소에서 부분 뷰의 논리를 사용하려면 부분 뷰 논리를 구성 요소로 추출합니다.
-
-정적 HTML 페이지에서 서버 구성 요소를 렌더링할 수는 없습니다.
+페이지 또는 뷰에서 구성 요소를 렌더링하려면 [구성 요소 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)를 사용합니다.
 
 구성 요소를 렌더링하는 방법, 구성 요소 상태 및 `Component` 태그 도우미에 대한 자세한 내용은 다음 문서를 참조하세요.
 
 * <xref:blazor/hosting-models>
 * <xref:blazor/hosting-model-configuration>
+* <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>

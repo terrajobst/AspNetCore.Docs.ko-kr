@@ -5,17 +5,17 @@ description: Blazor 서버 앱에서 상태를 유지하는 방법을 알아봅�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2019
+ms.date: 03/17/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/state-management
-ms.openlocfilehash: 990d392b0e1658774256626eb277701e40287b79
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: e8a1959a8fc05ea59362bb5824181a9d2e418811
+ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78646527"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80218871"
 ---
 # <a name="aspnet-core-opno-locblazor-state-management"></a>ASP.NET Core Blazor 상태 관리
 
@@ -242,7 +242,7 @@ else
 
 오류를 해결하는 한 가지 방법은 미리 렌더링을 사용하지 않도록 설정하는 것입니다. 앱에서 브라우저 기반 스토리지를 많이 사용하는 경우, 일반적으로 이 옵션을 선택하는 것이 가장 좋습니다. `localStorage` 또는 `sessionStorage`를 사용할 수 있어야 앱에서 유용한 콘텐츠를 미리 렌더링할 수 있기 때문에 미리 렌더링은 복잡성만 추가하고 앱에 도움이 되지 않습니다.
 
-미리 렌더링을 사용하지 않도록 설정하려면 *Pages/_Host.cshtml* 파일을 열고 `Component` 태그 도우미의 `render-mode` 호출을 `Server`로 변경합니다.
+미리 렌더링을 사용하지 않도록 설정하려면 *Pages/_Host.cshtml* 파일을 열고 [구성 요소 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)의 `render-mode`를 <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server>로 변경합니다.
 
 `localStorage` 또는 `sessionStorage`를 사용하지 않는 다른 페이지에는 미리 렌더링이 유용할 수 있습니다. 미리 렌더링을 사용 상태로 유지하려면 브라우저가 회로에 연결될 때까지 로드 작업을 연기합니다. 다음은 카운터 값을 저장하기 위한 예제입니다.
 

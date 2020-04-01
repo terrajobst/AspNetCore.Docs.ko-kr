@@ -5,17 +5,17 @@ description: Blazor 앱을 빌드할 때 IL(중간 언어) 링커를 제어하�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/10/2020
+ms.date: 03/23/2020
 no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/configure-linker
-ms.openlocfilehash: b08ec26fb8d139223c57774600bc3cb19a56ac49
-ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
+ms.openlocfilehash: 109da5ef400c3b9d64ccf3ceb33a5387ea6b5618
+ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/11/2020
-ms.locfileid: "79083295"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80218663"
 ---
 # <a name="configure-the-linker-for-aspnet-core-blazor"></a>ASP.NET Core Blazor용 링커 구성
 
@@ -50,11 +50,11 @@ XML 구성 파일을 제공하고 프로젝트 파일에서 해당 파일을 MSB
 
 ```xml
 <ItemGroup>
-  <BlazorLinkerDescriptor Include="Linker.xml" />
+  <BlazorLinkerDescriptor Include="LinkerConfig.xml" />
 </ItemGroup>
 ```
 
-*Linker.xml*:
+*LinkerConfig.xml*:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -86,7 +86,21 @@ XML 구성 파일을 제공하고 프로젝트 파일에서 해당 파일을 MSB
 </linker>
 ```
 
-자세한 내용은 [IL 링커: Xml 설명자 구문](https://github.com/mono/linker/blob/master/src/linker/README.md#syntax-of-xml-descriptor)을 참조하세요.
+자세한 내용은 [연결 xml 파일 예제(mono/링커 GitHub 리포지토리)](https://github.com/mono/linker#link-xml-file-examples)를 참조하세요.
+
+## <a name="add-an-xml-linker-configuration-file-to-a-library"></a>라이브러리에 XML 링커 구성 파일 추가
+
+특정 라이브러리의 링커를 구성하려면 XML 링커 구성 파일을 포함 리소스로 라이브러리에 추가합니다. 포함 리소스의 이름은 어셈블리와 동일해야 합니다.
+
+다음 예제에서 *LinkerConfig.xml* 파일은 라이브러리의 어셈블리와 이름이 동일한 포함 리소스로 지정됩니다.
+
+```xml
+<ItemGroup>
+  <EmbeddedResource Include="LinkerConfig.xml">
+    <LogicalName>$(MSBuildProjectName).xml</LogicalName>
+  </EmbeddedResource>
+</ItemGroup>
+```
 
 ### <a name="configure-the-linker-for-internationalization"></a>국제화를 위한 링커 구성
 

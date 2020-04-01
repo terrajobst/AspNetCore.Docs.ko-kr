@@ -5,17 +5,17 @@ description: 외부 구성 요소 라이브러리의 구성 요소를 Blazor 앱
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/23/2020
+ms.date: 03/23/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/class-libraries
-ms.openlocfilehash: 32088b43f91174596f6b9251d36782e806f966b9
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: f2cc57638922bd1f6ab036adb2ed37209d14c5b0
+ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78647991"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80218768"
 ---
 # <a name="aspnet-core-razor-components-class-libraries"></a>ASP.NET Core Razor 구성 요소 클래스 라이브러리
 
@@ -114,6 +114,10 @@ Welcome to your new app.
 
 최상위 *_Import.razor* 파일에 `@using MyComponentLib1` 지시문을 포함하여 전체 프로젝트에서 라이브러리 구성 요소를 사용할 수 있게 합니다. 임의 수준의 *_Import.razor* 파일에 지시문을 추가하여 폴더 내의 단일 페이지 또는 페이지 집합에 네임스페이스를 적용합니다.
 
+## <a name="create-a-razor-components-class-library-with-static-assets"></a>정적 자산을 사용하여 Razor 구성 요소 클래스 라이브러리 만들기
+
+RCL에는 정적 자산이 포함될 수 있습니다. 정적 자산은 라이브러리를 사용하는 모든 앱에서 제공됩니다. 자세한 내용은 <xref:razor-pages/ui-class#create-an-rcl-with-static-assets>를 참조하세요.
+
 ## <a name="build-pack-and-ship-to-nuget"></a>빌드, 패키지 및 NuGet에 제공
 
 구성 요소 라이브러리는 표준 .NET 라이브러리이기 때문에 패키지하여 NuGet에 제공하는 과정이 라이브러리를 패키지하여 NuGet에 제공하는 과정과 다르지 않습니다. 명령 셸에서 [dotnet pack](/dotnet/core/tools/dotnet-pack) 명령을 사용하여 패키지합니다.
@@ -124,10 +128,7 @@ dotnet pack
 
 명령 셸에서 [dotnet nuget push](/dotnet/core/tools/dotnet-nuget-push) 명령을 사용하여 패키지를 NuGet에 업로드합니다.
 
-## <a name="create-a-razor-components-class-library-with-static-assets"></a>정적 자산을 사용하여 Razor 구성 요소 클래스 라이브러리 만들기
-
-RCL에는 정적 자산이 포함될 수 있습니다. 정적 자산은 라이브러리를 사용하는 모든 앱에서 제공됩니다. 자세한 내용은 <xref:razor-pages/ui-class#create-an-rcl-with-static-assets>를 참조하세요.
-
 ## <a name="additional-resources"></a>추가 자료
 
 * <xref:razor-pages/ui-class>
+* [라이브러리에 XML 링커 구성 파일 추가](xref:host-and-deploy/blazor/configure-linker#add-an-xml-linker-configuration-file-to-a-library)

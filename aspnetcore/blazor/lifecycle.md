@@ -5,17 +5,17 @@ description: ASP.NET Core Blazor 앱에서 Razor 구성 요소 수명 주기 메
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2019
+ms.date: 03/17/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/lifecycle
-ms.openlocfilehash: ecacd0a9728cbefd716e9dc7cd8a8c62f3df6e0d
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 831f575afa6ce11d06c016d43ecd1bb59d09eab6
+ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78647583"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80218910"
 ---
 # <a name="aspnet-core-opno-locblazor-lifecycle"></a>ASP.NET Core Blazor 수명 주기
 
@@ -56,6 +56,8 @@ protected override async Task OnInitializedAsync()
 
 Blazor 서버 앱을 미리 렌더링 중이면 브라우저에 연결되어 있지 않으므로 JavaScript 호출 등의 특정 작업을 수행할 수 없습니다. 미리 렌더링된 경우, 구성 요소를 다르게 렌더링해야 할 수도 있습니다. 자세한 내용은 [앱을 미리 렌더링 중인 경우 검색](#detect-when-the-app-is-prerendering) 섹션을 참조하세요.
 
+이벤트 처리기가 설정된 경우 삭제 시 해당 처리기를 언후크합니다. 자세한 내용은 [IDisposable을 사용한 구성 요소 삭제](#component-disposal-with-idisposable) 단원을 참조하세요.
+
 ### <a name="before-parameters-are-set"></a>매개 변수를 설정하기 전
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync*>는 렌더링 트리에서 구성 요소의 부모가 제공하는 매개 변수를 설정합니다.
@@ -74,6 +76,8 @@ public override async Task SetParametersAsync(ParameterView parameters)
 `SetParametersAsync`의 기본 구현에서는 `ParameterView`에 해당 값이 있는 `[Parameter]` 또는 `[CascadingParameter]` 특성을 사용하여 각 속성의 값을 설정합니다. `ParameterView`에 해당 값이 없는 매개 변수는 변경되지 않고 그대로 유지됩니다.
 
 `base.SetParametersAync`를 호출하지 않은 경우, 사용자 지정 코드는 들어오는 매개 변수 값을 필요한 방식으로 해석할 수 있습니다. 예를 들어 들어오는 매개 변수를 클래스의 속성에 할당해야 하는 요구 사항이 없습니다.
+
+이벤트 처리기가 설정된 경우 삭제 시 해당 처리기를 언후크합니다. 자세한 내용은 [IDisposable을 사용한 구성 요소 삭제](#component-disposal-with-idisposable) 단원을 참조하세요.
 
 ### <a name="after-parameters-are-set"></a>매개 변수를 설정한 후
 
@@ -100,6 +104,8 @@ protected override void OnParametersSet()
     ...
 }
 ```
+
+이벤트 처리기가 설정된 경우 삭제 시 해당 처리기를 언후크합니다. 자세한 내용은 [IDisposable을 사용한 구성 요소 삭제](#component-disposal-with-idisposable) 단원을 참조하세요.
 
 ### <a name="after-component-render"></a>구성 요소 렌더링 후
 
@@ -136,6 +142,8 @@ protected override void OnAfterRender(bool firstRender)
 ```
 
 `OnAfterRender` 및 `OnAfterRenderAsync`‘는 서버에서 미리 렌더링되는 경우 호출되지 않습니다.’ 
+
+이벤트 처리기가 설정된 경우 삭제 시 해당 처리기를 언후크합니다. 자세한 내용은 [IDisposable을 사용한 구성 요소 삭제](#component-disposal-with-idisposable) 단원을 참조하세요.
 
 ### <a name="suppress-ui-refreshing"></a>UI 새로 고침 표시 안 함
 
@@ -188,6 +196,16 @@ Blazor 서버 템플릿의 *Pages/FetchData.razor*:
 
 > [!NOTE]
 > `Dispose`에서 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged*> 호출은 지원되지 않습니다. 렌더러를 삭제하는 과정에서 `StateHasChanged`가 호출될 수 있으므로, 해당 시점에 UI 업데이트를 요청할 수는 없습니다.
+
+.NET 이벤트에서 이벤트 처리기의 구독을 취소합니다. 다음 [Blazor 양식](xref:blazor/forms-validation) 예제에서는 `Dispose` 메서드에서 이벤트 처리기를 언후크하는 방법을 보여 줍니다.
+
+* 프라이빗 필드 및 람다 접근 방식
+
+  [!code-razor[](lifecycle/samples_snapshot/3.x/event-handler-disposal-1.razor?highlight=23,28)]
+
+* 프라이빗 메서드 접근 방식
+
+  [!code-razor[](lifecycle/samples_snapshot/3.x/event-handler-disposal-2.razor?highlight=16,26)]
 
 ## <a name="handle-errors"></a>오류 처리
 

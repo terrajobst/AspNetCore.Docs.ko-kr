@@ -5,17 +5,17 @@ description: Blazor에서 양식 및 필드 유효성 검사 시나리오를 사
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2019
+ms.date: 03/17/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: 5aad5a4d4303151ef5be82481dfae7367abeffbc
-ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
+ms.openlocfilehash: 0359a9337860d9b8ce0b81d8833a034a898b05a5
+ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/11/2020
-ms.locfileid: "79083231"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80218962"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET Core Blazor 양식 및 유효성 검사
 
@@ -460,8 +460,11 @@ public class ShipDescription
 
 * 양식의 `EditContext`를 사용하여 구성 요소가 초기화될 때 모델을 할당할 수 있습니다.
 * 컨텍스트의 `OnFieldChanged` 콜백에서 양식의 유효성을 검사하여 제출 단추를 사용하거나 사용하지 않도록 설정합니다.
+* `Dispose` 메서드에서 이벤트 처리기를 언후크합니다. 자세한 내용은 <xref:blazor/lifecycle#component-disposal-with-idisposable>를 참조하세요.
 
 ```razor
+@implements IDisposable
+
 <EditForm EditContext="@_editContext">
     <DataAnnotationsValidator />
     <ValidationSummary />
@@ -479,12 +482,18 @@ public class ShipDescription
     protected override void OnInitialized()
     {
         _editContext = new EditContext(_starship);
+        _editContext.OnFieldChanged += HandleFieldChanged;
+    }
 
-        _editContext.OnFieldChanged += (_, __) =>
-        {
-            _formInvalid = !_editContext.Validate();
-            StateHasChanged();
-        };
+    private void HandleFieldChanged(object sender, FieldChangedEventArgs e)
+    {
+        _formInvalid = !_editContext.Validate();
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        _editContext.OnFieldChanged -= HandleFieldChanged;
     }
 }
 ```

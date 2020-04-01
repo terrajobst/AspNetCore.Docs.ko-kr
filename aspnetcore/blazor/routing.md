@@ -5,17 +5,17 @@ description: 앱에서 요청을 라우팅하는 방법과 NavLink 구성 요소
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/18/2019
+ms.date: 03/17/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/routing
-ms.openlocfilehash: 32459f9f42220b01ce04e6444a9bb4a9592ee2da
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 87579c88a37e0258921e199db2b5d8c7627f5499
+ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78649239"
+ms.lasthandoff: 03/24/2020
+ms.locfileid: "80218897"
 ---
 # <a name="aspnet-core-blazor-routing"></a>ASP.NET Core Blazor 라우팅
 
@@ -198,16 +198,16 @@ Blazor 서버 앱에서 *_Host.cshtml*의 기본 경로는 `/`(`@page "/"`)입�
 
 ## <a name="uri-and-navigation-state-helpers"></a>URI 및 탐색 상태 도우미
 
-`Microsoft.AspNetCore.Components.NavigationManager`를 사용하여 C# 코드로 URI 및 탐색 작업을 수행할 수 있습니다. `NavigationManager`는 다음 표에 나와 있는 이벤트와 메서드를 제공합니다.
+<xref:Microsoft.AspNetCore.Components.NavigationManager>를 사용하여 C# 코드로 URI 및 탐색 작업을 수행할 수 있습니다. `NavigationManager`는 다음 표에 나와 있는 이벤트와 메서드를 제공합니다.
 
 | 멤버 | 설명 |
 | ------ | ----------- |
-| `Uri` | 현재 절대 URI를 가져옵니다. |
-| `BaseUri` | 절대 URI를 생성하기 위해 상대 URI 경로 앞에 추가할 수 있는 기본 URI(후행 슬래시 포함)를 가져옵니다. 일반적으로 `BaseUri`는 *wwwroot/index.html*(Blazor WebAssembly) 또는 *Pages/_Host.cshtml*(Blazor 서버)에 있는 문서 `<base>` 요소의 `href` 특성에 해당합니다. |
-| `NavigateTo` | 지정한 URI로 이동합니다. `forceLoad`가 `true`인 경우<ul><li>클라이언트 쪽 라우팅이 무시됩니다.</li><li>클라이언트 쪽 라우터에서 URI를 정상적으로 처리했는지와 상관없이 브라우저에서 서버의 새 페이지를 강제로 로드합니다.</li></ul> |
-| `LocationChanged` | 탐색 위치가 변경된 경우에 발생하는 이벤트입니다. |
-| `ToAbsoluteUri` | 상대 URI를 절대 URI로 변환합니다. |
-| `ToBaseRelativePath` | 기본 URI(예: 이전에 `GetBaseUri`에서 반환된 URI)가 제공된 경우, 절대 URI를 기본 URI 접두사의 상대 URI로 변환합니다. |
+| URI | 현재 절대 URI를 가져옵니다. |
+| BaseUri | 절대 URI를 생성하기 위해 상대 URI 경로 앞에 추가할 수 있는 기본 URI(후행 슬래시 포함)를 가져옵니다. 일반적으로 `BaseUri`는 *wwwroot/index.html*(Blazor WebAssembly) 또는 *Pages/_Host.cshtml*(Blazor 서버)에 있는 문서 `<base>` 요소의 `href` 특성에 해당합니다. |
+| NavigateTo | 지정한 URI로 이동합니다. `forceLoad`가 `true`인 경우<ul><li>클라이언트 쪽 라우팅이 무시됩니다.</li><li>클라이언트 쪽 라우터에서 URI를 정상적으로 처리했는지와 상관없이 브라우저에서 서버의 새 페이지를 강제로 로드합니다.</li></ul> |
+| LocationChanged | 탐색 위치가 변경된 경우에 발생하는 이벤트입니다. |
+| ToAbsoluteUri | 상대 URI를 절대 URI로 변환합니다. |
+| <span style="word-break:normal;word-wrap:normal">ToBaseRelativePath</span> | 기본 URI(예: 이전에 `GetBaseUri`에서 반환된 URI)가 제공된 경우, 절대 URI를 기본 URI 접두사의 상대 URI로 변환합니다. |
 
 단추를 선택하면 다음 구성 요소가 앱의 `Counter` 구성 요소로 이동합니다.
 
@@ -228,3 +228,34 @@ Blazor 서버 앱에서 *_Host.cshtml*의 기본 경로는 `/`(`@page "/"`)입�
     }
 }
 ```
+
+다음 구성 요소는 위치 변경 이벤트를 처리합니다. `HandleLocationChanged` 메서드는 프레임워크에서 `Dispose`를 호출할 때 언후크됩니다. 메서드를 언후크하면 구성 요소의 가비지 수집이 허용됩니다.
+
+```razor
+@implement IDisposable
+@inject NavigationManager NavigationManager
+
+...
+
+protected override void OnInitialized()
+{
+    NavigationManager.LocationChanged += HandleLocationChanged;
+}
+
+private void HandleLocationChanged(object sender, LocationChangedEventArgs e)
+{
+    ...
+}
+
+public void Dispose()
+{
+    NavigationManager.LocationChanged -= HandleLocationChanged;
+}
+```
+
+<xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs>는 이벤트에 대해 다음과 같은 정보를 제공합니다.
+
+* <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.Location> &ndash; 새 위치의 URL
+* <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.IsNavigationIntercepted> &ndash; `true`인 경우 Blazor는 브라우저에서 탐색을 가로챕니다. `false`인 경우 [NavigationManager.NavigateTo](xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A)에서 탐색을 수행합니다.
+
+구성 요소 삭제에 대한 자세한 내용은 <xref:blazor/lifecycle#component-disposal-with-idisposable>을 참조하세요.

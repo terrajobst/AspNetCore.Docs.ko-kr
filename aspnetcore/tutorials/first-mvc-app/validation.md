@@ -5,12 +5,12 @@ description: ASP.NET Core 앱에 유효성 검사를 추가하는 방법.
 ms.author: riande
 ms.date: 04/13/2017
 uid: tutorials/first-mvc-app/validation
-ms.openlocfilehash: 2bb4ed173d154e3b7457ce3f8009f0f9406e36c4
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: ecf3d011b38347eb32020df00e44d93ca789443a
+ms.sourcegitcommit: 99e71ae03319ab386baf2ebde956fc2d511df8b8
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78648357"
+ms.lasthandoff: 03/25/2020
+ms.locfileid: "80242538"
 ---
 # <a name="add-validation-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 유효성 검사 추가
 
@@ -55,7 +55,7 @@ MVC 및 Entity Framework Core Code First가 제공하는 유효성 검사 지원
 
 `[HttpPost] Create` 메서드에서 중단점을 설정하고 메서드가 호출되지 않았는지 확인할 수 있으며, 유효성 검사 오류가 감지되면 클라이언트 쪽 유효성 검사가 양식 데이터를 제출하지 않습니다. 브라우저에서 JavaScript를 사용하지 않고 오류가 있는 상태로 양식을 제출하면 중단점에 이르게 됩니다. JavaScript 없이도 여전히 완전한 유효성 검사가 가능합니다. 
 
-다음 이미지는 FireFox 브라우저에서 JavaScript를 사용하지 않도록 설정하는 방법을 보여줍니다.
+다음 이미지는 Firefox 브라우저에서 JavaScript를 사용하지 않도록 설정하는 방법을 보여 줍니다.
 
 ![Firefox: 옵션의 콘텐츠 탭에서 Javascript 사용 확인란의 선택을 취소합니다.](~/tutorials/first-mvc-app/validation/_static/ff.png)
 
