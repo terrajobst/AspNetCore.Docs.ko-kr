@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 02/02/2020
 uid: web-api/index
 ms.openlocfilehash: be88b8d58f1f660f3a815c395c210c05a7b4917c
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78644649"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>ASP.NET Core로 Web API 만들기
@@ -46,7 +46,7 @@ Web API는 <xref:Microsoft.AspNetCore.Mvc.ControllerBase>에서 파생되는 하
 
 다음은 `ControllerBase`가 제공하는 메서드의 몇 가지 예입니다.
 
-|메서드   |참고    |
+|메서드   |참고 사항    |
 |---------|---------|
 |<xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest%2A>| 400 상태 코드를 반환합니다.|
 |<xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A>|404 상태 코드를 반환합니다.|
@@ -64,7 +64,7 @@ Web API는 <xref:Microsoft.AspNetCore.Mvc.ControllerBase>에서 파생되는 하
 
 다음은 사용 가능한 특성의 몇 가지 예입니다.
 
-|특성|참고|
+|특성|참고 사항|
 |---------|-----|
 |[`[Route]`](<xref:Microsoft.AspNetCore.Mvc.RouteAttribute>)      |컨트롤러 또는 작업의 URL 패턴을 지정합니다.|
 |[`[Bind]`](<xref:Microsoft.AspNetCore.Mvc.BindAttribute>)        |모델 바인딩에 포함할 접두사 및 속성을 지정합니다.|
@@ -156,13 +156,13 @@ namespace WebApiSample
 
 ## <a name="attribute-routing-requirement"></a>특성 라우팅 요구 사항
 
-`[ApiController]` 특성은 특성 라우팅을 요구합니다. 예를 들어:
+`[ApiController]` 특성은 특성 라우팅을 요구합니다. 예들 들어 다음과 같습니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 
 [!code-csharp[](index/samples/3.x/Controllers/WeatherForecastController.cs?name=snippet_ControllerSignature&highlight=2)]
 
-작업은 `Startup.Configure`의 `UseEndpoints`, <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A> 또는 <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A>에 의해 정의된 [규칙 기반 경로](xref:mvc/controllers/routing#conventional-routing)를 통해 액세스할 수 없습니다.
+작업은 [의 ](xref:mvc/controllers/routing#conventional-routing), `UseEndpoints` 또는 <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A>에 의해 정의된 <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A>규칙 기반 경로`Startup.Configure`를 통해 액세스할 수 없습니다.
 
 ::: moniker-end
 
@@ -170,7 +170,7 @@ namespace WebApiSample
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/ValuesController.cs?name=snippet_ControllerSignature&highlight=1)]
 
-작업은 <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A>에 의해 정의된 [규칙 기반 경로](xref:mvc/controllers/routing#conventional-routing)를 통해 또는 `Startup.Configure`의 <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A>에서 액세스할 수 없습니다.
+작업은 [에 의해 정의된 ](xref:mvc/controllers/routing#conventional-routing)규칙 기반 경로<xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A>를 통해 또는 <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A>의 `Startup.Configure`에서 액세스할 수 없습니다.
 
 ::: moniker-end
 
@@ -264,7 +264,7 @@ ASP.NET Core MVC는 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInva
 |[`[FromServices]`](xref:mvc/controllers/dependency-injection#action-injection-with-fromservices) | 작업 매개 변수로 삽입된 요청 서비스 |
 
 > [!WARNING]
-> 값에 `%2f`(즉, `/`)이 포함될 수 있는 경우 `[FromRoute]`를 사용하지 않습니다. `%2f`는 `/`로 이스케이프가 해제되지 않습니다. 값에 `%2f`가 포함될 수 있으면 `[FromQuery]`를 사용합니다.
+> 값에 `[FromRoute]`(즉, `%2f`)이 포함될 수 있는 경우 `/`를 사용하지 않습니다. `%2f`는 `/`로 이스케이프가 해제되지 않습니다. 값에 `[FromQuery]`가 포함될 수 있으면 `%2f`를 사용합니다.
 
 `[ApiController]` 특성 또는 `[FromQuery]` 같은 다른 바인딩 소스 특성 없이, ASP.NET Core 런타임에서 복합 개체 모델 바인더 사용을 시도합니다. 복합 개체 모델 바인더는 정의된 순서로 값 공급자로부터 데이터를 풀합니다.
 
@@ -337,9 +337,9 @@ ASP.NET Core MVC는 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInva
 
 ## <a name="multipartform-data-request-inference"></a>다중 파트/폼 데이터 요청 유추
 
-작업 매개 변수를 [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) 특성으로 주석 처리하는 경우 `[ApiController]` 특성이 유추 규칙에 적용됩니다. `multipart/form-data` 요청 콘텐츠 형식이 유추됩니다.
+작업 매개 변수를 `[ApiController]`[`[FromForm]` 특성으로 주석 처리하는 경우 ](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) 특성이 유추 규칙에 적용됩니다. `multipart/form-data` 요청 콘텐츠 형식이 유추됩니다.
 
-기본 동작을 사용하지 않으려면 `Startup.ConfigureServices`에서 <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressConsumesConstraintForFormFileParameters> 속성을 `true`로 설정합니다.
+기본 동작을 사용하지 않으려면 <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressConsumesConstraintForFormFileParameters>에서 `true` 속성을 `Startup.ConfigureServices`로 설정합니다.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -369,7 +369,7 @@ ASP.NET Core MVC는 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInva
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/PetsController.cs?name=snippet_ProblemDetailsStatusCode)]
 
-`NotFound` 메서드는 `ProblemDetails` 본문이 포함된 HTTP 404 상태 코드를 생성합니다. 예를 들어:
+`NotFound` 메서드는 `ProblemDetails` 본문이 포함된 HTTP 404 상태 코드를 생성합니다. 예들 들어 다음과 같습니다.
 
 ```json
 {
@@ -382,7 +382,7 @@ ASP.NET Core MVC는 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInva
 
 ### <a name="disable-problemdetails-response"></a>ProblemDetails 응답 사용 안 함
 
-<xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressMapClientErrors%2A> 속성이 `true`로 설정된 경우 오류 상태 코드에 대한 `ProblemDetails` 자동 생성이 사용되지 않습니다. 다음 코드를 `Startup.ConfigureServices`에 추가합니다.
+`ProblemDetails` 속성이 <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressMapClientErrors%2A>로 설정된 경우 오류 상태 코드에 대한 `true` 자동 생성이 사용되지 않습니다. 다음 코드를 `Startup.ConfigureServices`에 추가합니다.
 
 ::: moniker-end
 
@@ -412,7 +412,7 @@ ASP.NET Core MVC는 <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInva
 public IActionResult CreateProduct(Product product)
 ```
 
-위의 코드에서 `CreateProduct` 동작은 콘텐츠 형식을 `application/xml`로 지정합니다. 이 작업으로 라우팅되는 요청은 `application/xml`의 `Content-Type` 헤더를 지정해야 합니다. `application/xml`의 `Content-Type` 헤더를 지정하지 않는 요청은 [415 지원되지 않는 미디어 유형](https://developer.mozilla.org/docs/Web/HTTP/Status/415) 응답을 반환합니다.
+위의 코드에서 `CreateProduct` 동작은 콘텐츠 형식을 `application/xml`로 지정합니다. 이 작업으로 라우팅되는 요청은 `Content-Type`의 `application/xml` 헤더를 지정해야 합니다. `Content-Type`의 `application/xml` 헤더를 지정하지 않는 요청은 [415 지원되지 않는 미디어 유형](https://developer.mozilla.org/docs/Web/HTTP/Status/415) 응답을 반환합니다.
 
 또한 `[Consumes]` 특성을 사용하면 형식 제약 조건을 적용함으로써 들어오는 요청의 콘텐츠 형식에 따라 작업의 선택에 영향을 줄 수 있습니다. 다음 예제를 참조하세요.
 
@@ -420,7 +420,7 @@ public IActionResult CreateProduct(Product product)
 
 위의 코드에서 `ConsumesController`는 `https://localhost:5001/api/Consumes` URL에 전송된 요청을 처리하도록 구성되어 있습니다. 컨트롤러의 작업 `PostJson` 및 `PostForm` 모두 동일한 URL을 사용하여 POST 요청을 처리합니다. 형식 제약 조건을 적용하는 `[Consumes]` 특성이 없으면 모호한 일치 예외가 throw됩니다.
 
-`[Consumes]` 특성이 두 작업 모두에 적용됩니다. `PostJson` 작업은 `application/json`의 `Content-Type` 헤더와 함께 전송된 요청을 처리합니다. `PostForm` 작업은 `application/x-www-form-urlencoded`의 `Content-Type` 헤더와 함께 전송된 요청을 처리합니다. 
+`[Consumes]` 특성이 두 작업 모두에 적용됩니다. `PostJson` 작업은 `Content-Type`의 `application/json` 헤더와 함께 전송된 요청을 처리합니다. `PostForm` 작업은 `Content-Type`의 `application/x-www-form-urlencoded` 헤더와 함께 전송된 요청을 처리합니다. 
 
 ## <a name="additional-resources"></a>추가 자료
 

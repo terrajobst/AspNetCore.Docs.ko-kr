@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 07/10/2019
 uid: tutorials/publish-to-azure-webapp-using-vscode
 ms.openlocfilehash: 5f117cb2867a6e7b54269ef39abe819256b429ec
-ms.sourcegitcommit: 99e71ae03319ab386baf2ebde956fc2d511df8b8
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/25/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "80242680"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio-code"></a>Visual Studio Code를 사용하여 Azure에 ASP.NET Core 앱 게시
@@ -105,7 +105,7 @@ Azure에 앱을 배포하기 전에 로컬 머신에서 제대로 실행되고 �
 ## <a name="generate-the-deployment-package-locally"></a>로컬로 배포 패키지 생성
 
 - Visual Studio Code 터미널 열기
-- `publish`라는 하위 폴더에 `Release` 패키지를 생성하려면 다음 명령을 사용합니다.
+- `Release`라는 하위 폴더에 `publish` 패키지를 생성하려면 다음 명령을 사용합니다.
   - `dotnet publish -c Release -o ./publish`
 - 프로젝트 구조 아래에 새 `publish` 폴더가 생성됩니다.
 
@@ -119,7 +119,7 @@ Visual Studio Code용 Azure App Service 확장을 활용하여 아래 단계에 
 
 - `publish` 폴더를 마우스 오른쪽 단추로 클릭하고 `Deploy to Web App...`을 선택합니다.
 - 웹앱을 만들 구독을 선택합니다.
-- `Create New Web App` 선택
+- `Create New Web App`를 선택합니다.
 - 웹앱의 이름 입력
 
 이 확장은 새 웹앱을 만들고 자동으로 패키지 배포를 시작합니다. 배포가 완료되면 `Browse Website`를 클릭하여 배포의 유효성 검사를 합니다.

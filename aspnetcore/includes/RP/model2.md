@@ -26,14 +26,14 @@ RazorPagesMovie 프로젝트에서 *Data*라는 새 폴더를 만듭니다. 다�
 
 ### <a name="register-the-database-context"></a>데이터베이스 컨텍스트 등록
 
-*Startup.cs* 맨 위에 다음 `using` 문을 추가합니다.
+`using`Startup.cs*맨 위에 다음* 문을 추가합니다.
 
 ```csharp
 using RazorPagesMovie.Data;
 using Microsoft.EntityFrameworkCore;
 ```
 
-데이터베이스 컨텍스트를 `Startup.ConfigureServices`의 [종속성 주입](xref:fundamentals/dependency-injection) 컨테이너에 등록합니다.
+데이터베이스 컨텍스트를 [의 ](xref:fundamentals/dependency-injection)종속성 주입`Startup.ConfigureServices` 컨테이너에 등록합니다.
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
 
@@ -59,14 +59,14 @@ dotnet add package Microsoft.EntityFrameworkCore.Design
 
 ### <a name="register-the-database-context"></a>데이터베이스 컨텍스트 등록
 
-*Startup.cs* 맨 위에 다음 `using` 문을 추가합니다.
+`using`Startup.cs*맨 위에 다음* 문을 추가합니다.
 
 ```csharp
 using RazorPagesMovie.Models;
 using Microsoft.EntityFrameworkCore;
 ```
 
-데이터베이스 컨텍스트를 `Startup.ConfigureServices`의 [종속성 주입](xref:fundamentals/dependency-injection) 컨테이너에 등록합니다.
+데이터베이스 컨텍스트를 [의 ](xref:fundamentals/dependency-injection)종속성 주입`Startup.ConfigureServices` 컨테이너에 등록합니다.
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
 

@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 02/10/2020
 uid: fundamentals/host/hosted-services
 ms.openlocfilehash: d3f409170eedd281fd7608c4b9835bf9443c49b0
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78650415"
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>ASP.NET Core에서 호스팅되는 서비스를 사용하는 백그라운드 작업
@@ -50,12 +50,12 @@ Worker Service 템플릿을 기반으로 하는 앱은 `Microsoft.NET.Sdk.Worker
 
 <xref:Microsoft.Extensions.Hosting.IHostedService> 인터페이스는 호스트에 의해 관리되는 개체에 대한 두 가지 메서드를 정의합니다.
 
-* [StartAsync(CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*) &ndash; `StartAsync`에는 백그라운드 작업을 시작하는 논리가 포함됩니다. 다음 상황 *이전*에 `StartAsync`가 호출됩니다.
+* [StartAsync(CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*) &ndash; `StartAsync`에는 백그라운드 작업을 시작하는 논리가 포함됩니다. 다음 상황 `StartAsync`이전*에* 가 호출됩니다.
 
   * 앱의 요청 처리 파이프라인이 구성됨(`Startup.Configure`)
   * 서버가 시작되고 [IApplicationLifetime.ApplicationStarted](xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime.ApplicationStarted*)가 트리거됨
 
-  앱의 파이프라인이 구성되고 `ApplicationStarted`가 호출된 후에 호스팅된 서비스의 `StartAsync`가 실행되도록 기본 동작을 변경할 수 있습니다. 기본 동작을 변경하려면 `ConfigureWebHostDefaults`를 호출한 후에 호스팅된 서비스(다음 예제에서 `VideosWatcher`)를 추가합니다.
+  앱의 파이프라인이 구성되고 `StartAsync`가 호출된 후에 호스팅된 서비스의 `ApplicationStarted`가 실행되도록 기본 동작을 변경할 수 있습니다. 기본 동작을 변경하려면 `VideosWatcher`를 호출한 후에 호스팅된 서비스(다음 예제에서 `ConfigureWebHostDefaults`)를 추가합니다.
 
   ```csharp
   using Microsoft.AspNetCore.Hosting;
@@ -95,34 +95,34 @@ Worker Service 템플릿을 기반으로 하는 앱은 `Microsoft.NET.Sdk.Worker
 
   기본 5초 시스템 종료 시간 제한을 연장하려면 다음을 설정합니다.
 
-  * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*> 일반 호스트를 사용하는 경우 자세한 내용은 <xref:fundamentals/host/generic-host#shutdown-timeout>를 참조하세요.
-  * 웹 호스트를 사용하는 경우 시스템 종료 시간 제한 호스트 구성 설정. 자세한 내용은 <xref:fundamentals/host/web-host#shutdown-timeout>를 참조하세요.
+  * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*> 일반 호스트를 사용하는 경우 자세한 내용은 <xref:fundamentals/host/generic-host#shutdown-timeout>을 참조하세요.
+  * 웹 호스트를 사용하는 경우 시스템 종료 시간 제한 호스트 구성 설정. 자세한 내용은 <xref:fundamentals/host/web-host#shutdown-timeout>을 참조하세요.
 
-호스팅되는 서비스는 앱 시작 시 한 번 활성화되고 앱 종료 시 정상적으로 종료됩니다. 백그라운드 작업을 실행하는 동안 오류가 발생하면 `StopAsync`가 호출되지 않아도 `Dispose`를 호출해야 합니다.
+호스팅되는 서비스는 앱 시작 시 한 번 활성화되고 앱 종료 시 정상적으로 종료됩니다. 백그라운드 작업을 실행하는 동안 오류가 발생하면 `Dispose`가 호출되지 않아도 `StopAsync`를 호출해야 합니다.
 
 ## <a name="backgroundservice-base-class"></a>BackgroundService 기본 클래스
 
 <xref:Microsoft.Extensions.Hosting.BackgroundService>는 장기 실행 <xref:Microsoft.Extensions.Hosting.IHostedService>를 구현하기 위한 기본 클래스입니다.
 
-[ExecuteAsync(CancellationToken)](xref:Microsoft.Extensions.Hosting.BackgroundService.ExecuteAsync*)은 백그라운드 서비스를 실행하기 위해 호출됩니다. 구현하면 백그라운드 서비스의 전체 수명을 나타내는 <xref:System.Threading.Tasks.Task>가 반환됩니다. `await`를 호출하는 것처럼 [ExecuteAsync가 비동기가 될 때까지](https://github.com/dotnet/extensions/issues/2149) 추가 서비스가 시작되지 않습니다. `ExecuteAsync`에서 긴 초기화 작업을 차단하는 것을 방지합니다. [StopAsync(CancellationToken)](xref:Microsoft.Extensions.Hosting.BackgroundService.StopAsync*)의 호스트 블록은 `ExecuteAsync`가 완료될 때까지 대기합니다.
+[ExecuteAsync(CancellationToken)](xref:Microsoft.Extensions.Hosting.BackgroundService.ExecuteAsync*)은 백그라운드 서비스를 실행하기 위해 호출됩니다. 구현하면 백그라운드 서비스의 전체 수명을 나타내는 <xref:System.Threading.Tasks.Task>가 반환됩니다. [를 호출하는 것처럼 ](https://github.com/dotnet/extensions/issues/2149)ExecuteAsync가 비동기가 될 때까지`await` 추가 서비스가 시작되지 않습니다. `ExecuteAsync`에서 긴 초기화 작업을 차단하는 것을 방지합니다. [StopAsync(CancellationToken)](xref:Microsoft.Extensions.Hosting.BackgroundService.StopAsync*)의 호스트 블록은 `ExecuteAsync`가 완료될 때까지 대기합니다.
 
 취소 토큰은 [IHostedService.StopAsync](xref:Microsoft.Extensions.Hosting.IHostedService.StopAsync*)가 호출되면 트리거됩니다. 서비스를 정상적으로 종료하기 위해 취소 토큰이 발생하면 `ExecuteAsync` 구현이 즉시 완료되어야 합니다. 그렇지 않으면 서비스가 종료 시간 제한에 종료됩니다. 자세한 내용은 [IHostedService 인터페이스](#ihostedservice-interface) 섹션을 참조하세요.
 
 ## <a name="timed-background-tasks"></a>시간이 지정된 백그라운드 작업
 
-시간이 지정된 백그라운드 작업은 [System.Threading.Timer](xref:System.Threading.Timer) 클래스를 사용합니다. 타이머가 작업의 `DoWork` 메서드를 트리거합니다. 서비스 컨테이너가 `Dispose`에서 삭제될 때 `StopAsync`에서 타이머가 비활성화되고 삭제됩니다.
+시간이 지정된 백그라운드 작업은 [System.Threading.Timer](xref:System.Threading.Timer) 클래스를 사용합니다. 타이머가 작업의 `DoWork` 메서드를 트리거합니다. 서비스 컨테이너가 `StopAsync`에서 삭제될 때 `Dispose`에서 타이머가 비활성화되고 삭제됩니다.
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/TimedHostedService.cs?name=snippet1&highlight=16-17,34,41)]
 
 <xref:System.Threading.Timer>는 이전에 실행된 `DoWork`를 마칠 때까지 기다리지 않으므로 제시된 방법이 모든 시나리오에 적합한 것은 아닐 수 있습니다. [Interlocked.Increment](xref:System.Threading.Interlocked.Increment*)는 여러 스레드가 동시에 `executionCount`를 업데이트하지 않도록 하는 원자성 작업으로 실행 카운터를 증가시키는 데 사용됩니다.
 
-서비스는 `AddHostedService` 확장 메서드를 사용하여 `IHostBuilder.ConfigureServices`(*Program.cs*)에 등록됩니다.
+서비스는 `IHostBuilder.ConfigureServices` 확장 메서드를 사용하여 *(* Program.cs`AddHostedService`)에 등록됩니다.
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet1)]
 
 ## <a name="consuming-a-scoped-service-in-a-background-task"></a>백그라운드 작업에서 범위가 지정된 서비스 사용
 
-[BackgroundService](#backgroundservice-base-class) 내에서 [범위가 지정된 서비스](xref:fundamentals/dependency-injection#service-lifetimes)를 사용하려면 범위를 만듭니다. 기본적으로 호스팅되는 서비스에 대한 범위는 생성되지 않습니다.
+[BackgroundService](xref:fundamentals/dependency-injection#service-lifetimes) 내에서 [범위가 지정된 서비스](#backgroundservice-base-class)를 사용하려면 범위를 만듭니다. 기본적으로 호스팅되는 서비스에 대한 범위는 생성되지 않습니다.
 
 범위가 지정된 백그라운드 작업 서비스에는 백그라운드 작업의 논리가 포함됩니다. 다음 예제에서는
 
@@ -131,7 +131,7 @@ Worker Service 템플릿을 기반으로 하는 앱은 `Microsoft.NET.Sdk.Worker
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/ScopedProcessingService.cs?name=snippet1)]
 
-호스팅되는 서비스는 범위가 지정된 백그라운드 작업 서비스를 해결하여 `DoWork` 메서드를 호출하는 범위를 만듭니다. `DoWork`는 `ExecuteAsync`에서 대기하고 있는 `Task`를 반환합니다.
+호스팅되는 서비스는 범위가 지정된 백그라운드 작업 서비스를 해결하여 `DoWork` 메서드를 호출하는 범위를 만듭니다. `DoWork`는 `Task`에서 대기하고 있는 `ExecuteAsync`를 반환합니다.
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/ConsumeScopedServiceHostedService.cs?name=snippet1&highlight=19,22-35)]
 
@@ -147,13 +147,13 @@ Worker Service 템플릿을 기반으로 하는 앱은 `Microsoft.NET.Sdk.Worker
 
 다음 `QueueHostedService` 예제에서는
 
-* `BackgroundProcessing` 메서드는 `ExecuteAsync`에서 대기하고 있는 `Task`를 반환합니다.
+* `BackgroundProcessing` 메서드는 `Task`에서 대기하고 있는 `ExecuteAsync`를 반환합니다.
 * `BackgroundProcessing`에서 큐의 백그라운드 작업이 큐에서 제거되고 실행됩니다.
 * 작업 항목은 `StopAsync`에서 서비스가 중지되기 전에 대기 상태입니다.
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/QueuedHostedService.cs?name=snippet1&highlight=28-29,33)]
 
-입력 장치에서 `w` 키가 선택될 때마다 `MonitorLoop` 서비스가 호스팅된 서비스에 대해 큐에 넣는 작업을 처리합니다.
+입력 장치에서 `MonitorLoop` 키가 선택될 때마다 `w` 서비스가 호스팅된 서비스에 대해 큐에 넣는 작업을 처리합니다.
 
 * `IBackgroundTaskQueue`가 `MonitorLoop` 서비스에 삽입됩니다.
 * `IBackgroundTaskQueue.QueueBackgroundWorkItem`이 호출되어 작업 항목을 큐에 넣습니다.
@@ -191,7 +191,7 @@ ASP.NET Core에서 백그라운드 작업은 *호스팅되는 서비스*로 구�
 
 호스팅되는 서비스는 <xref:Microsoft.Extensions.Hosting.IHostedService> 인터페이스를 구현합니다. 인터페이스는 호스트에 의해 관리되는 개체에 대한 두 가지 메서드를 정의합니다.
 
-* [StartAsync(CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*) &ndash; `StartAsync`에는 백그라운드 작업을 시작하는 논리가 포함됩니다. [웹 호스트](xref:fundamentals/host/web-host)를 사용하는 경우 `StartAsync`는 서버가 시작되고 [IApplicationLifetime.ApplicationStarted](xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime.ApplicationStarted*)가 트리거된 후에 호출됩니다. [제네릭 호스트](xref:fundamentals/host/generic-host)를 사용하는 경우 `ApplicationStarted`가 트리거되기 전에 `StartAsync`가 호출됩니다.
+* [StartAsync(CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*) &ndash; `StartAsync`에는 백그라운드 작업을 시작하는 논리가 포함됩니다. [웹 호스트](xref:fundamentals/host/web-host)를 사용하는 경우 `StartAsync`는 서버가 시작되고 [IApplicationLifetime.ApplicationStarted](xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime.ApplicationStarted*)가 트리거된 후에 호출됩니다. [제네릭 호스트](xref:fundamentals/host/generic-host)를 사용하는 경우 `StartAsync`가 트리거되기 전에 `ApplicationStarted`가 호출됩니다.
 
 * [StopAsync(CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StopAsync*) &ndash; 호스트가 정상적으로 종료될 때 트리거됩니다. `StopAsync`에는 백그라운드 작업을 종료하는 논리가 포함됩니다. 관리되지 않는 리소스를 삭제하려면 <xref:System.IDisposable> 및 [종료자(소멸자)](/dotnet/csharp/programming-guide/classes-and-structs/destructors)를 구현합니다.
 
@@ -206,26 +206,26 @@ ASP.NET Core에서 백그라운드 작업은 *호스팅되는 서비스*로 구�
 
   기본 5초 시스템 종료 시간 제한을 연장하려면 다음을 설정합니다.
 
-  * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*> 일반 호스트를 사용하는 경우 자세한 내용은 <xref:fundamentals/host/generic-host#shutdown-timeout>를 참조하세요.
-  * 웹 호스트를 사용하는 경우 시스템 종료 시간 제한 호스트 구성 설정. 자세한 내용은 <xref:fundamentals/host/web-host#shutdown-timeout>를 참조하세요.
+  * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*> 일반 호스트를 사용하는 경우 자세한 내용은 <xref:fundamentals/host/generic-host#shutdown-timeout>을 참조하세요.
+  * 웹 호스트를 사용하는 경우 시스템 종료 시간 제한 호스트 구성 설정. 자세한 내용은 <xref:fundamentals/host/web-host#shutdown-timeout>을 참조하세요.
 
-호스팅되는 서비스는 앱 시작 시 한 번 활성화되고 앱 종료 시 정상적으로 종료됩니다. 백그라운드 작업을 실행하는 동안 오류가 발생하면 `StopAsync`가 호출되지 않아도 `Dispose`를 호출해야 합니다.
+호스팅되는 서비스는 앱 시작 시 한 번 활성화되고 앱 종료 시 정상적으로 종료됩니다. 백그라운드 작업을 실행하는 동안 오류가 발생하면 `Dispose`가 호출되지 않아도 `StopAsync`를 호출해야 합니다.
 
 ## <a name="timed-background-tasks"></a>시간이 지정된 백그라운드 작업
 
-시간이 지정된 백그라운드 작업은 [System.Threading.Timer](xref:System.Threading.Timer) 클래스를 사용합니다. 타이머가 작업의 `DoWork` 메서드를 트리거합니다. 서비스 컨테이너가 `Dispose`에서 삭제될 때 `StopAsync`에서 타이머가 비활성화되고 삭제됩니다.
+시간이 지정된 백그라운드 작업은 [System.Threading.Timer](xref:System.Threading.Timer) 클래스를 사용합니다. 타이머가 작업의 `DoWork` 메서드를 트리거합니다. 서비스 컨테이너가 `StopAsync`에서 삭제될 때 `Dispose`에서 타이머가 비활성화되고 삭제됩니다.
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Services/TimedHostedService.cs?name=snippet1&highlight=15-16,30,37)]
 
 <xref:System.Threading.Timer>는 이전에 실행된 `DoWork`를 마칠 때까지 기다리지 않으므로 제시된 방법이 모든 시나리오에 적합한 것은 아닐 수 있습니다.
 
-서비스는 `AddHostedService` 확장 메서드를 사용하여 `Startup.ConfigureServices`에 등록됩니다.
+서비스는 `Startup.ConfigureServices` 확장 메서드를 사용하여 `AddHostedService`에 등록됩니다.
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Startup.cs?name=snippet1)]
 
 ## <a name="consuming-a-scoped-service-in-a-background-task"></a>백그라운드 작업에서 범위가 지정된 서비스 사용
 
-`IHostedService` 내에서 [범위가 지정된 서비스](xref:fundamentals/dependency-injection#service-lifetimes)를 사용하려면 범위를 만듭니다. 기본적으로 호스팅되는 서비스에 대한 범위는 생성되지 않습니다.
+[ 내에서 ](xref:fundamentals/dependency-injection#service-lifetimes)범위가 지정된 서비스`IHostedService`를 사용하려면 범위를 만듭니다. 기본적으로 호스팅되는 서비스에 대한 범위는 생성되지 않습니다.
 
 범위가 지정된 백그라운드 작업 서비스에는 백그라운드 작업의 논리가 포함됩니다. 다음 예제에서는 <xref:Microsoft.Extensions.Logging.ILogger>가 서비스에 삽입됩니다.
 
@@ -245,7 +245,7 @@ ASP.NET Core에서 백그라운드 작업은 *호스팅되는 서비스*로 구�
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Services/BackgroundTaskQueue.cs?name=snippet1)]
 
-`QueueHostedService`에서 큐의 백그라운드 작업은 큐에서 제거되고 장기 실행 `IHostedService`를 구현하기 위한 기본 클래스인 [BackgroundService](#backgroundservice-base-class)로 실행됩니다.
+`QueueHostedService`에서 큐의 백그라운드 작업은 큐에서 제거되고 장기 실행 [를 구현하기 위한 기본 클래스인 ](#backgroundservice-base-class)BackgroundService`IHostedService`로 실행됩니다.
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Services/QueuedHostedService.cs?name=snippet1&highlight=21,25)]
 

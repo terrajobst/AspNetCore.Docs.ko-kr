@@ -9,10 +9,10 @@ no-loc:
 - SignalR
 uid: client-side/libman/libman-cli
 ms.openlocfilehash: 02d88d09805bd23a86ef924766373245fec7ff52
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78649605"
 ---
 # <a name="use-the-libman-cli-with-aspnet-core"></a>ASP.NET Core에서 LibMan CLI 사용
@@ -21,7 +21,7 @@ ms.locfileid: "78649605"
 
 [LibMan](xref:client-side/libman/index) CLI는 .NET Core가 지원되는 플랫폼 간 도구입니다.
 
-## <a name="prerequisites"></a>사전 요구 사항
+## <a name="prerequisites"></a>필수 구성 요소
 
 * [!INCLUDE [2.1-SDK](../../includes/2.1-SDK.md)]
 
@@ -109,11 +109,11 @@ libman init [-h|--help]
 
 * `-d|--default-destination <PATH>`
 
-  현재 폴더에 상대적인 경로입니다. *libman.json*의 라이브러리에 대해 `destination` 속성이 정의되지 않으면 라이브러리 파일이 이 위치에 설치됩니다. `<PATH>` 값은 *libman.json*의 `defaultDestination` 속성에 기록됩니다.
+  현재 폴더에 상대적인 경로입니다. `destination`libman.json*의 라이브러리에 대해*  속성이 정의되지 않으면 라이브러리 파일이 이 위치에 설치됩니다. `<PATH>` 값은 `defaultDestination`libman.json*의*  속성에 기록됩니다.
 
 * `-p|--default-provider <PROVIDER>`
 
-  지정된 라이브러리에 대해 공급자를 지정하지 않은 경우 사용할 공급자입니다. `<PROVIDER>` 값은 *libman.json*의 `defaultProvider` 속성에 기록됩니다. `<PROVIDER>`을 다음 값 중 하나로 바꿉니다.
+  지정된 라이브러리에 대해 공급자를 지정하지 않은 경우 사용할 공급자입니다. `<PROVIDER>` 값은 `defaultProvider`libman.json*의*  속성에 기록됩니다. `<PROVIDER>`을 다음 값 중 하나로 바꿉니다.
 
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
@@ -169,11 +169,11 @@ libman install [-h|--help]
 
 * `-d|--destination <PATH>`
 
-  라이브러리를 설치할 위치입니다. 이 값을 지정하지 않으면 기본 위치가 사용됩니다. *libman.json*에 `defaultDestination` 속성이 지정되지 않은 경우 이 옵션은 필수입니다.
+  라이브러리를 설치할 위치입니다. 이 값을 지정하지 않으면 기본 위치가 사용됩니다. `defaultDestination`libman.json*에*  속성이 지정되지 않은 경우 이 옵션은 필수입니다.
 
 * `--files <FILE>`
 
-  라이브러리에서 설치할 파일의 이름을 지정합니다. 지정하지 않으면 라이브러리의 모든 파일이 설치됩니다. 설치할 파일마다 하나의 `--files` 옵션을 제공합니다. 상대 경로도 지원됩니다. 예를 들어 `--files dist/browser/signalr.js`을 참조하십시오.
+  라이브러리에서 설치할 파일의 이름을 지정합니다. 지정하지 않으면 라이브러리의 모든 파일이 설치됩니다. 설치할 파일마다 하나의 `--files` 옵션을 제공합니다. 상대 경로도 지원됩니다. 예: `--files dist/browser/signalr.js`
 
 * `-p|--provider <PROVIDER>`
 
@@ -181,7 +181,7 @@ libman install [-h|--help]
   
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
-  지정하지 않으면 *libman.json*의 `defaultProvider` 속성이 사용됩니다. *libman.json*에 `defaultProvider` 속성이 지정되지 않은 경우 이 옵션은 필수입니다.
+  지정하지 않으면 `defaultProvider`libman.json*의*  속성이 사용됩니다. `defaultProvider`libman.json*에*  속성이 지정되지 않은 경우 이 옵션은 필수입니다.
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
@@ -221,7 +221,7 @@ libman install jquery@3.2.1 --provider cdnjs --destination wwwroot/scripts/jquer
 }
 ```
 
-파일 시스템 공급자를 사용하여 *C:\\temp\\contosoCalendar\\* 에서 *calendar.js* 및 *calendar.css* 파일을 설치하려면 다음을 수행합니다.
+파일 시스템 공급자를 사용하여 *C:* temp*contosoCalendar* *에서 \\calendar.js\\ 및 \\calendar.css* 파일을 설치하려면 다음을 수행합니다.
 
   ```console
   libman install C:\temp\contosoCalendar\ --provider filesystem --files calendar.js --files calendar.css
@@ -266,8 +266,8 @@ libman install jquery@3.2.1 --provider cdnjs --destination wwwroot/scripts/jquer
 `libman restore` 명령은 *libman.json*에 정의된 라이브러리 파일을 설치합니다. 이 때 적용되는 규칙은 다음과 같습니다.
 
 * 프로젝트 루트에 *libman.json* 파일이 없으면 오류가 반환됩니다.
-* 라이브러리가 공급자를 지정하는 경우 *libman.json*의 `defaultProvider` 속성이 무시됩니다.
-* 라이브러리가 대상을 지정하는 경우 *libman.json*의 `defaultDestination` 속성이 무시됩니다.
+* 라이브러리가 공급자를 지정하는 경우 `defaultProvider`libman.json*의*  속성이 무시됩니다.
+* 라이브러리가 대상을 지정하는 경우 `defaultDestination`libman.json*의*  속성이 무시됩니다.
 
 ### <a name="synopsis"></a>개요
 
@@ -292,7 +292,7 @@ libman restore
 
 ## <a name="delete-library-files"></a>라이브러리 폴더 삭제
 
-`libman clean` 명령은 LibMan을 통해 이전에 복원한 라이브러리 파일을 삭제합니다. 이 작업 후 삭제된 후에 비어 있게 되는 폴더입니다. *libman.json*의 `libraries` 속성에 있는 라이브러리 파일의 연결된 구성은 제거되지 않습니다.
+`libman clean` 명령은 LibMan을 통해 이전에 복원한 라이브러리 파일을 삭제합니다. 이 작업 후 삭제된 후에 비어 있게 되는 폴더입니다. `libraries`libman.json*의*  속성에 있는 라이브러리 파일의 연결된 구성은 제거되지 않습니다.
 
 ### <a name="synopsis"></a>개요
 

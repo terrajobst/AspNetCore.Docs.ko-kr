@@ -6,10 +6,10 @@ ms.author: riande
 ms.date: 04/13/2017
 uid: tutorials/first-mvc-app/validation
 ms.openlocfilehash: ecf3d011b38347eb32020df00e44d93ca789443a
-ms.sourcegitcommit: 99e71ae03319ab386baf2ebde956fc2d511df8b8
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/25/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "80242538"
 ---
 # <a name="add-validation-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 앱에 유효성 검사 추가
@@ -43,7 +43,7 @@ MVC 및 Entity Framework Core Code First가 제공하는 유효성 검사 지원
 
 가장 큰 이점은 이 유효성 검사 UI를 사용하기 위해 `MoviesController` 클래스 또는 *Create.cshtml*의 코드를 한 줄도 변경할 필요가 없다는 점입니다. 이 자습서에서 이전에 만든 컨트롤러 및 보기는 `Movie` 모델 클래스의 속성에 유효성 검사 특성을 사용하여 지정한 유효성 검사 규칙을 자동으로 가져옵니다. `Edit` 작업 메서드로 유효성 검사를 테스트하여 동일한 유효성 검사가 적용되는지 확인해보세요.
 
-양식 데이터는 클라이언트 쪽 유효성 검사 오류가 없을 때까지 서버에 전송되지 않습니다. [Fiddler 도구](https://www.telerik.com/fiddler) 또는 [F12 개발자 도구](/microsoft-edge/devtools-guide)를 사용하여 `HTTP Post` 메서드에 중단점을 넣어 이를 확인할 수 있습니다.
+양식 데이터는 클라이언트 쪽 유효성 검사 오류가 없을 때까지 서버에 전송되지 않습니다. `HTTP Post`Fiddler 도구[ 또는 ](https://www.telerik.com/fiddler)F12 개발자 도구[를 사용하여 ](/microsoft-edge/devtools-guide) 메서드에 중단점을 넣어 이를 확인할 수 있습니다.
 
 ## <a name="how-validation-works"></a>유효성 검사 작동 방식
 
@@ -79,13 +79,13 @@ JavaScript를 사용하지 않도록 설정한 뒤에 잘못된 데이터를 게
 
 유효성 검사 논리를 변경해야 할 경우 모델에 유효성 검사 특성을 추가하여(이 예제에서는 `Movie` 클래스) 정확히 한 곳에서 변경할 수 있습니다. 모든 유효성 검사 논리가 한 곳에서 정의되어 모든 곳에서 사용되므로 애플리케이션의 서로 다른 부분이 규칙 적용 방법에 부합하는지 우려하지 않아도 됩니다. 이렇게 하면 코드가 매우 깔끔해지고 유지 관리 및 확장이 간편합니다. 또한 반복 금지 원칙에 완전히 부합하게 됩니다.
 
-## <a name="using-datatype-attributes"></a>DataType 특성 사용
+## <a name="using-datatype-attributes"></a>데이터 형식 특성 사용
 
-*Movie.cs* 파일을 열고 `Movie` 클래스를 검토합니다. `System.ComponentModel.DataAnnotations` 네임스페이스는 기본 제공 유효성 검사 특성 모음 외에도 서식 특성을 제공합니다. 이미 `DataType` 열거 값을 출시일 밑 가격 필드에 적용했습니다. 다음 코드는 적절한 `DataType` 특성이 적용된 `ReleaseDate` 및 `Price` 속성을 보여줍니다.
+*Movie.cs* 파일을 열고 `Movie` 클래스를 검토합니다. `System.ComponentModel.DataAnnotations` 네임스페이스는 기본 제공 유효성 검사 특성 모음 외에도 서식 특성을 제공합니다. 이미 `DataType` 열거 값을 출시일 밑 가격 필드에 적용했습니다. 다음 코드는 적절한 `ReleaseDate` 특성이 적용된 `Price` 및 `DataType` 속성을 보여줍니다.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc//sample/MvcMovie/Models/MovieDateRatingDA.cs?highlight=2,6&name=snippet2)]
 
-`DataType` 특성은 데이터에 서식을 지정하도록(그리고 URL에 대한 `<a>` 및 이메일에 대한 `<a href="mailto:EmailAddress.com">` 과 같은 요소/특성을 제공하도록) 보기 엔진에 대한 힌트만 제공합니다. `RegularExpression` 특성을 사용하여 데이터 형식의 유효성을 검사할 수 있습니다. `DataType` 특성은 데이터베이스 내장 형식보다 구체적인 데이터 형식을 지정하는 데 사용되며 유효성 검사 특성이 아닙니다. 이 예제에서는 시간을 제외한 날짜만 추적하고자 합니다. `DataType` 열거형은 Date, Time, PhoneNumber, Currency, EmailAddress를 비롯한 많은 데이터 형식을 제공합니다. `DataType` 특성을 통해 응용 프로그램에서 자동으로 형식별 기능을 제공하도록 설정할 수도 있습니다. 예를 들어, `DataType.EmailAddress`에 대해 `mailto:` 링크를 만들고 HTML5를 지원하는 브라우저에서 `DataType.Date`에 대해 날짜 선택기를 제공할 수 있습니다. `DataType` 특성은 HTML 5 브라우저가 인식할 수 있는 HTML 5 `data-`(데이터 대시라고 발음합니다) 특성을 내보냅니다. `DataType` 특성은 유효성 검사를 전혀 제공하지 **않습니다**
+`DataType` 특성은 데이터에 서식을 지정하도록(그리고 URL에 대한 `<a>` 및 이메일에 대한 `<a href="mailto:EmailAddress.com">` 과 같은 요소/특성을 제공하도록) 보기 엔진에 대한 힌트만 제공합니다. `RegularExpression` 특성을 사용하여 데이터 형식의 유효성을 검사할 수 있습니다. `DataType` 특성은 데이터베이스 내장 형식보다 구체적인 데이터 형식을 지정하는 데 사용되며 유효성 검사 특성이 아닙니다. 이 예제에서는 시간을 제외한 날짜만 추적하고자 합니다. `DataType` 열거형은 Date, Time, PhoneNumber, Currency, EmailAddress를 비롯한 많은 데이터 형식을 제공합니다. `DataType` 특성을 통해 응용 프로그램에서 자동으로 유형별 기능을 제공하도록 설정할 수도 있습니다. 예를 들어, `mailto:`에 대해 `DataType.EmailAddress` 링크를 만들고 HTML5를 지원하는 브라우저에서 `DataType.Date`에 대해 날짜 선택기를 제공할 수 있습니다. `DataType` 특성은 HTML 5 브라우저가 인식할 수 있는 HTML 5 `data-`(데이터 대시라고 발음합니다) 특성을 내보냅니다. `DataType` 특성은 유효성 검사를 전혀 제공하지 **않습니다**
 
 `DataType.Date`는 표시되는 날짜의 서식을 지정하지 않습니다. 기본적으로 데이터 필드는 서버 `CultureInfo`의 기본 형식에 따라 표시됩니다.
 
@@ -102,7 +102,7 @@ public DateTime ReleaseDate { get; set; }
 
 * 브라우저는 HTML5 기능을 활성화할 수 있습니다(예: 달력 컨트롤, 로캘에 적합한 통화 기호, 이메일 링크 등을 표시합니다).
 
-* 기본적으로 브라우저는 사용자의 로캘에 따른 올바른 서식을 사용하여 데이터를 렌더링합니다.
+* 기본적으로 브라우저는 사용자의 로캘에 따른 올바른 형식을 사용하여 데이터를 렌더링합니다.
 
 * `DataType` 특성을 사용하면 MVC가 데이터 렌더링에 적합한 필드 템플릿을 선택할 수 있습니다(`DisplayFormat`만 사용할 경우 문자열 템플릿을 사용합니다).
 
@@ -111,7 +111,7 @@ public DateTime ReleaseDate { get; set; }
 >
 > `[Range(typeof(DateTime), "1/1/1966", "1/1/2020")]`
 
-`DateTime`에 `Range` 특성을 사용하려면 jQuery 날짜 유효성 검사를 사용하지 않도록 설정해야 합니다. 일반적으로 모델에서 고정된 날짜를 컴파일하는 방식은 좋지 않으므로 `Range` 특성 및 `DateTime`을 사용하지 않는 것이 좋습니다.
+`Range`에 `DateTime` 특성을 사용하려면 jQuery 날짜 유효성 검사를 사용하지 않도록 설정해야 합니다. 일반적으로 모델에서 고정된 날짜를 컴파일하는 방식은 좋지 않으므로 `Range` 특성 및 `DateTime`을 사용하지 않는 것이 좋습니다.
 
 다음 코드는 특성을 한 줄로 결합하는 방법을 보여줍니다.
 
@@ -122,9 +122,9 @@ public DateTime ReleaseDate { get; set; }
 ## <a name="additional-resources"></a>추가 자료
 
 * [양식 사용](xref:mvc/views/working-with-forms)
-* [세계화 및 지역화](xref:fundamentals/localization)
+* [전역화 및 지역화](xref:fundamentals/localization)
 * [태그 도우미 소개](xref:mvc/views/tag-helpers/intro)
-* [태그 도우미 작성](xref:mvc/views/tag-helpers/authoring)
+* [작성자 태그 도우미](xref:mvc/views/tag-helpers/authoring)
 
 > [!div class="step-by-step"]
 > [이전](new-field.md)

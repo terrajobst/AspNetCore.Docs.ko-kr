@@ -7,10 +7,10 @@ ms.author: johluo
 ms.date: 10/17/2019
 uid: grpc/dotnet-grpc
 ms.openlocfilehash: 994597c854a95bb33de1686ab025cb3744cf6845
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78650901"
 ---
 # <a name="manage-protobuf-references-with-dotnet-grpc"></a>dotnet-grpc를 사용하여 Protobuf 참조를 관리하세요.
@@ -29,7 +29,7 @@ dotnet tool install -g dotnet-grpc
 
 ## <a name="add-references"></a>참조 추가
 
-`dotnet-grpc`를 사용하여 *.csproj* 파일에 Protobuf 참조를 `<Protobuf />` 항목으로 추가할 수 있습니다.
+`dotnet-grpc`를 사용하여 `<Protobuf />`.csproj*파일에 Protobuf 참조를* 항목으로 추가할 수 있습니다.
 
 ```xml
 <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
@@ -50,7 +50,7 @@ Protobuf 참조는 C# 클라이언트 및/또는 서버 자산을 생성하는 �
 * 현재 디렉터리 기준의 상대 경로이거나 절대 경로일 수 있습니다.
 * 패턴 기반 파일 [와일드카드 사용](https://wikipedia.org/wiki/Glob_(programming))을 위해 와일드카드를 포함할 수 있습니다.
 
-프로젝트 디렉터리 외부에 파일이 있는 경우, Visual Studio의 `Protos` 폴더 아래에 있는 파일을 표시하기 위해 `Link` 요소가 추가됩니다.
+프로젝트 디렉터리 외부에 파일이 있는 경우, Visual Studio의 `Link` 폴더 아래에 있는 파일을 표시하기 위해 `Protos` 요소가 추가됩니다.
 
 ### <a name="usage"></a>사용법
 
@@ -75,7 +75,7 @@ dotnet grpc add-file [options] <files>...
 
 ### <a name="add-url"></a>URL 추가
 
-`add-url` 명령은 소스 URL에 지정된 원격 파일을 Protobuf 참조로 추가하는 데 사용됩니다. 원격 파일을 다운로드할 위치를 지정하려면 파일 경로를 제공해야 합니다. 파일 경로는 현재 디렉터리 기준의 상대 경로이거나 절대 경로일 수 있습니다. 파일 경로가 프로젝트 디렉터리 외부에 있는 경우, Visual Studio의 `Protos` 가상 폴더 아래에 있는 파일을 표시하기 위해 `Link` 요소가 추가됩니다.
+`add-url` 명령은 소스 URL에 지정된 원격 파일을 Protobuf 참조로 추가하는 데 사용됩니다. 원격 파일을 다운로드할 위치를 지정하려면 파일 경로를 제공해야 합니다. 파일 경로는 현재 디렉터리 기준의 상대 경로이거나 절대 경로일 수 있습니다. 파일 경로가 프로젝트 디렉터리 외부에 있는 경우, Visual Studio의 `Link` 가상 폴더 아래에 있는 파일을 표시하기 위해 `Protos` 요소가 추가됩니다.
 
 ### <a name="usage"></a>사용법
 

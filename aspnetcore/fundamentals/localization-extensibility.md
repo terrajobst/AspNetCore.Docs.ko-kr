@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 08/03/2019
 uid: fundamentals/localization-extensibility
 ms.openlocfilehash: dfa2efe78b2e1e118e6b3f09bfc41f3330e1d721
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78648417"
 ---
 # <a name="localization-extensibility"></a>지역화 확장성
@@ -25,7 +25,7 @@ ms.locfileid: "78648417"
 
 ## <a name="extensible-points-in-localization-apis"></a>지역화 API의 확장점
 
-ASP.NET Core 지역화 API는 확장 가능하도록 빌드됩니다. 확장성을 통해 개발자는 필요에 따라 지역화를 사용자 지정할 수 있습니다. 예를 들어 [OrchardCore](https://github.com/orchardCMS/OrchardCore/)에는 `POStringLocalizer`가 있습니다. `POStringLocalizer`에서는 `PO` 파일을 사용하여 지역화 리소스를 저장하는 데 [이식 가능 개체 지역화](xref:fundamentals/portable-object-localization)를 사용하는 데 관한 자세한 내용을 설명합니다.
+ASP.NET Core 지역화 API는 확장 가능하도록 빌드됩니다. 확장성을 통해 개발자는 필요에 따라 지역화를 사용자 지정할 수 있습니다. 예를 들어 [OrchardCore](https://github.com/orchardCMS/OrchardCore/)에는 `POStringLocalizer`가 있습니다. `POStringLocalizer`에서는 [ 파일을 사용하여 지역화 리소스를 저장하는 데 ](xref:fundamentals/portable-object-localization)이식 가능 개체 지역화`PO`를 사용하는 데 관한 자세한 내용을 설명합니다.
 
 이 문서에는 지역화 API에서 제공하는 두 가지 주요 확장 지점이 나열되어 있습니다. 
 
@@ -93,7 +93,7 @@ options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async 
 
 사용자 지정 소스에서 요청 문화 정보를 판별하는 <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider>의 새 구현을 만들 수 있습니다. 예를 들어 사용자 지정 소스는 구성 파일 또는 데이터베이스일 수 있습니다.
 
-다음 예제에서는 <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider>를 확장하여 *appsettings.json*에서 요청 문화 정보를 판별하는 `AppSettingsRequestCultureProvider`를 보여줍니다.
+다음 예제에서는 `AppSettingsRequestCultureProvider`를 확장하여 <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider>appsettings.json*에서 요청 문화 정보를 판별하는* 를 보여줍니다.
 
 ```csharp
 public class AppSettingsRequestCultureProvider : RequestCultureProvider
@@ -137,7 +137,7 @@ public class AppSettingsRequestCultureProvider : RequestCultureProvider
 
 ## <a name="localization-resources"></a>지역화 리소스
 
-ASP.NET Core 지역화에서는 <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer>를 제공합니다. <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer>는 `resx`를 사용하여 지역화 리소스를 저장하는 <xref:Microsoft.Extensions.Localization.IStringLocalizer>의 구현입니다.
+ASP.NET Core 지역화에서는 <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer>를 제공합니다. <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer>는 <xref:Microsoft.Extensions.Localization.IStringLocalizer>를 사용하여 지역화 리소스를 저장하는 `resx`의 구현입니다.
 
 `resx` 파일만 사용하도록 제한되지 않습니다. `IStringLocalized`를 구현하여 모든 데이터 소스를 사용할 수 있습니다.
 

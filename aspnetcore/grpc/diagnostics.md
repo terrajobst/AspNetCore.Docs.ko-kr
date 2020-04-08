@@ -6,12 +6,12 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/23/2019
 uid: grpc/diagnostics
-ms.openlocfilehash: 17607b734e6d777de9516aa14e81c97f87b61023
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 131144bf7a2c637eb2c1a1d5c54990dd4d429502
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78650907"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80417514"
 ---
 # <a name="logging-and-diagnostics-in-grpc-on-net"></a>.NET의 gRPC에서 로깅 및 진단
 
@@ -34,11 +34,11 @@ gRPC 서비스와 gRPC 클라이언트는 [.NET Core 로깅](xref:fundamentals/l
 
 gRPC 서비스는 ASP.NET Core에서 호스트되므로 ASP.NET Core 로깅 시스템을 사용합니다. 기본 구성에서 gRPC는 매우 적은 정보를 기록하지만, 이 동작을 구성할 수 있습니다. ASP.NET Core 로깅을 구성하는 방법에 대한 자세한 내용은 [ASP.NET Core 로깅](xref:fundamentals/logging/index#configuration) 문서를 참조하세요.
 
-gRPC는 `Grpc` 범주에 로그를 추가합니다. gRPC의 자세한 로그를 사용하려면 `Logging`의 `LogLevel` 하위 섹션에 다음 항목을 추가하여 *appsettings.json* 파일의 `Debug` 수준에 `Grpc` 접두사를 구성합니다.
+gRPC는 `Grpc` 범주에 로그를 추가합니다. gRPC의 자세한 로그를 사용하려면 `Grpc`의 `Debug` 하위 섹션에 다음 항목을 추가하여 *appsettings.json* 파일의 `LogLevel` 수준에 `Logging` 접두사를 구성합니다.
 
 [!code-json[](diagnostics/sample/logging-config.json?highlight=7)]
 
-`ConfigureLogging`을 사용하여 *Startup.cs*에서 이 동작을 구성할 수도 있습니다.
+*을 사용하여* Startup.cs`ConfigureLogging`에서 이 동작을 구성할 수도 있습니다.
 
 [!code-csharp[](diagnostics/sample/logging-config-code.cs?highlight=5)]
 
@@ -46,7 +46,7 @@ JSON 기반 구성을 사용하지 않는 경우, 구성 시스템에서 다음 
 
 * `Logging:LogLevel:Grpc` = `Debug`
 
-구성 시스템 설명서에서 중첩된 구성 값을 지정하는 방법을 확인합니다. 예를 들어 환경 변수를 사용하는 경우, `:` 대신 두 개의 `_` 문자가 사용됩니다(예: `Logging__LogLevel__Grpc`).
+구성 시스템 설명서에서 중첩된 구성 값을 지정하는 방법을 확인합니다. 예를 들어 환경 변수를 사용하는 경우, `_` 대신 두 개의 `:` 문자가 사용됩니다(예: `Logging__LogLevel__Grpc`).
 
 앱에 대한 자세한 진단을 수집하는 경우 `Debug` 수준을 사용하는 것이 좋습니다. `Trace` 수준은 매우 낮은 수준의 진단을 생성하며, 앱의 문제를 진단하는 데 거의 필요하지 않습니다.
 
@@ -94,13 +94,13 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 
 클라이언트 로깅을 사용하도록 설정하는 대체 방법은 [gRPC 클라이언트 팩터리](xref:grpc/clientfactory)를 사용하여 클라이언트를 만드는 것입니다. 클라이언트 팩터리에 등록되고 DI에서 확인된 gRPC 클라이언트는 자동으로 앱의 구성된 로깅을 사용합니다.
 
-앱에서 DI를 사용하지 않는 경우, [LoggerFactory.Create](xref:Microsoft.Extensions.Logging.LoggerFactory.Create*)를 사용하여 새 `ILoggerFactory` 인스턴스를 만들 수 있습니다. 이 메서드에 액세스하려면 [Microsoft.Extensions.Logging](https://www.nuget.org/packages/microsoft.extensions.logging/) 패키지를 앱에 추가합니다.
+앱에서 DI를 사용하지 않는 경우, `ILoggerFactory`LoggerFactory.Create[를 사용하여 새 ](xref:Microsoft.Extensions.Logging.LoggerFactory.Create*) 인스턴스를 만들 수 있습니다. 이 메서드에 액세스하려면 [Microsoft.Extensions.Logging](https://www.nuget.org/packages/microsoft.extensions.logging/) 패키지를 앱에 추가합니다.
 
 [!code-csharp[](diagnostics/sample/net-client-loggerfactory-create.cs?highlight=1,8)]
 
 #### <a name="grpc-client-log-scopes"></a>gRPC 클라이언트 로그 범위
 
-gRPC 클라이언트는 gRPC 호출 중에 생성된 로그에 [로깅 범위](https://docs.microsoft.com/aspnet/core/fundamentals/logginglog-scopes)를 추가합니다. 범위에는 gRPC 호출과 관련된 메타데이터가 있습니다.
+gRPC 클라이언트는 gRPC 호출 중에 생성된 로그에 [로깅 범위](https://docs.microsoft.com/aspnet/core/fundamentals/logging#log-scopes)를 추가합니다. 범위에는 gRPC 호출과 관련된 메타데이터가 있습니다.
 
 * **GrpcMethodType** - gRPC 메서드 형식입니다. 가능한 값은 `Grpc.Core.MethodType` 열거형의 이름입니다(예: 단항).
 * **GrpcUri** - gRPC 메서드의 상대 URI입니다(예: /greet.Greeter/SayHellos).
@@ -165,7 +165,7 @@ Application Insights와 같은 관리형 서비스에서 추적을 볼 수 있�
 
 gRPC 서버 메트릭은 `Grpc.AspNetCore.Server` 이벤트 원본에 보고됩니다.
 
-| 이름                      | 설명                   |
+| name                      | 설명                   |
 | --------------------------|-------------------------------|
 | `total-calls`             | 총 호출                   |
 | `current-calls`           | 현재 호출 수                 |
@@ -181,7 +181,7 @@ ASP.NET Core는 `Microsoft.AspNetCore.Hosting` 이벤트 원본에 대한 고유
 
 gRPC 클라이언트 메트릭은 `Grpc.Net.Client` 이벤트 원본에 보고됩니다.
 
-| 이름                      | 설명                   |
+| name                      | 설명                   |
 | --------------------------|-------------------------------|
 | `total-calls`             | 총 호출                   |
 | `current-calls`           | 현재 호출 수                 |

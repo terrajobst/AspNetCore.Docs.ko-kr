@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 02/07/2020
 uid: host-and-deploy/iis/development-time-iis-support
 ms.openlocfilehash: f87a1d8cf41248f14932908c0633f98a7198853f
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78649305"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>ASP.NET Core용 Visual Studio의 개발 시간 IIS 지원
@@ -22,7 +22,7 @@ ms.locfileid: "78649305"
 
 이 문서에서는 Windows Server에서 IIS를 통해 실행되는 ASP.NET Core 앱을 디버그하기 위한 [Visual Studio](https://visualstudio.microsoft.com) 지원에 대해 설명합니다. 이 항목에서는 이 시나리오를 사용하도록 설정하고 프로젝트를 설정하는 방법을 안내합니다.
 
-## <a name="prerequisites"></a>사전 요구 사항
+## <a name="prerequisites"></a>필수 구성 요소
 
 * [Windows용 Visual Studio](https://visualstudio.microsoft.com/downloads/)
 * **ASP.NET 및 웹 개발** 워크로드
@@ -60,7 +60,7 @@ IIS에서 웹 사이트는 다음과 같이 구성되어야 합니다.
 
 HTTPS가 필요한 새 프로젝트의 경우 **새 ASP.NET Core 웹 애플리케이션 만들기** 창에서 **HTTPS에 대한 구성** 확인란을 선택합니다. 확인란을 선택하면 [HTTPS 리디렉션 및 HSTS 미들웨어](xref:security/enforcing-ssl)가 생성될 때 앱에 추가됩니다.
 
-HTTPS가 필요한 기존 프로젝트의 경우 `Startup.Configure`에서 HTTPS 리디렉션 및 HSTS Middleware를 사용합니다. 자세한 내용은 <xref:security/enforcing-ssl>를 참조하세요.
+HTTPS가 필요한 기존 프로젝트의 경우 `Startup.Configure`에서 HTTPS 리디렉션 및 HSTS Middleware를 사용합니다. 자세한 내용은 <xref:security/enforcing-ssl>을 참조하세요.
 
 HTTP를 사용하는 프로젝트의 경우 [HTTPS 리디렉션 및 HSTS 미들웨어](xref:security/enforcing-ssl)가 앱에 추가되지 않습니다. 앱 구성이 필요하지 않습니다.
 
@@ -85,7 +85,7 @@ HTTP를 사용하는 프로젝트의 경우 [HTTPS 리디렉션 및 HSTS 미들�
 1. Visual Studio 2019 이상에 있는 **호스팅 모델** 설정의 경우 **기본값**을 선택하여 프로젝트에서 사용되는 호스팅 모델을 사용합니다. 프로젝트가 프로젝트 파일에서 `<AspNetCoreHostingModel>` 속성을 설정하면 해당 속성 값(`InProcess` 또는 `OutOfProcess`)이 사용됩니다. 속성이 없으면 앱의 기본 호스팅 모델인 in-process가 사용됩니다. 앱의 일반 호스팅 모델과 다른 명시적 호스팅 모델 설정이 앱에 필요한 경우에는 필요에 따라 **호스팅 모델**을 `In Process` 또는 `Out Of Process`로 설정합니다.
 1. 프로필을 저장합니다.
 
-Visual Studio를 사용하지 않는 경우에는 *속성* 폴더의 [launchSettings.json](https://json.schemastore.org/launchsettings) 파일에 시작 프로필을 수동으로 추가합니다. 다음 예제에서는 HTTPS 프로토콜을 사용하도록 프로필을 구성합니다.
+Visual Studio를 사용하지 않는 경우에는 [속성](https://json.schemastore.org/launchsettings) 폴더의 *launchSettings.json* 파일에 시작 프로필을 수동으로 추가합니다. 다음 예제에서는 HTTPS 프로토콜을 사용하도록 프로필을 구성합니다.
 
 ```json
 {
@@ -137,7 +137,7 @@ Visual Studio를 사용하지 않는 경우에는 *속성* 폴더의 [launchSett
 
 이 문서에서는 Windows Server에서 IIS를 통해 실행되는 ASP.NET Core 앱을 디버그하기 위한 [Visual Studio](https://visualstudio.microsoft.com) 지원에 대해 설명합니다. 이 항목에서는 이 시나리오를 사용하도록 설정하고 프로젝트를 설정하는 방법을 안내합니다.
 
-## <a name="prerequisites"></a>사전 요구 사항
+## <a name="prerequisites"></a>필수 구성 요소
 
 * [Windows용 Visual Studio](https://visualstudio.microsoft.com/downloads/)
 * **ASP.NET 및 웹 개발** 워크로드
@@ -175,7 +175,7 @@ IIS에서 웹 사이트는 다음과 같이 구성되어야 합니다.
 
 HTTPS가 필요한 새 프로젝트의 경우 **새 ASP.NET Core 웹 애플리케이션 만들기** 창에서 **HTTPS에 대한 구성** 확인란을 선택합니다. 확인란을 선택하면 [HTTPS 리디렉션 및 HSTS 미들웨어](xref:security/enforcing-ssl)가 생성될 때 앱에 추가됩니다.
 
-HTTPS가 필요한 기존 프로젝트의 경우 `Startup.Configure`에서 HTTPS 리디렉션 및 HSTS Middleware를 사용합니다. 자세한 내용은 <xref:security/enforcing-ssl>를 참조하세요.
+HTTPS가 필요한 기존 프로젝트의 경우 `Startup.Configure`에서 HTTPS 리디렉션 및 HSTS Middleware를 사용합니다. 자세한 내용은 <xref:security/enforcing-ssl>을 참조하세요.
 
 HTTP를 사용하는 프로젝트의 경우 [HTTPS 리디렉션 및 HSTS 미들웨어](xref:security/enforcing-ssl)가 앱에 추가되지 않습니다. 앱 구성이 필요하지 않습니다.
 
@@ -200,7 +200,7 @@ HTTP를 사용하는 프로젝트의 경우 [HTTPS 리디렉션 및 HSTS 미들�
 1. Visual Studio 2019 이상에 있는 **호스팅 모델** 설정의 경우 **기본값**을 선택하여 프로젝트에서 사용되는 호스팅 모델을 사용합니다. 프로젝트가 프로젝트 파일에서 `<AspNetCoreHostingModel>` 속성을 설정하면 해당 속성 값(`InProcess` 또는 `OutOfProcess`)이 사용됩니다. 속성이 없으면 앱의 기본 호스팅 모델인 out-of-process가 사용됩니다. 앱의 일반 호스팅 모델과 다른 명시적 호스팅 모델 설정이 앱에 필요한 경우에는 필요에 따라 **호스팅 모델**을 `In Process` 또는 `Out Of Process`로 설정합니다.
 1. 프로필을 저장합니다.
 
-Visual Studio를 사용하지 않는 경우에는 *속성* 폴더의 [launchSettings.json](https://json.schemastore.org/launchsettings) 파일에 시작 프로필을 수동으로 추가합니다. 다음 예제에서는 HTTPS 프로토콜을 사용하도록 프로필을 구성합니다.
+Visual Studio를 사용하지 않는 경우에는 [속성](https://json.schemastore.org/launchsettings) 폴더의 *launchSettings.json* 파일에 시작 프로필을 수동으로 추가합니다. 다음 예제에서는 HTTPS 프로토콜을 사용하도록 프로필을 구성합니다.
 
 ```json
 {

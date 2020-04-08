@@ -11,10 +11,10 @@ no-loc:
 - SignalR
 uid: blazor/advanced-scenarios
 ms.openlocfilehash: 5edbbe36e8389bac0335594b1e4331aee1c02867
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78647415"
 ---
 # <a name="aspnet-core-blazor-advanced-scenarios"></a>ASP.NET Core Blazor 고급 시나리오
@@ -332,12 +332,12 @@ public class FileUploader : IDisposable
 
 앞의 예제에서:
 
-* `_maxBase64SegmentSize`를 `_maxBase64SegmentSize = _segmentSize * 4 / 3`에서 계산된 `8192`로 설정합니다.
+* `_maxBase64SegmentSize`를 `8192`에서 계산된 `_maxBase64SegmentSize = _segmentSize * 4 / 3`로 설정합니다.
 * 하위 수준 .NET Core 메모리 관리 API를 사용하여 서버의 메모리 세그먼트를 `_uploadedSegments`에 저장합니다.
 * `ReceiveFile` 메서드를 사용하여 JS interop을 통해 업로드를 처리합니다.
   * `_jsRuntime.InvokeAsync<FileInfo>('getFileSize', selector)`와의 JS interop을 통해 파일 크기를 바이트 단위로 결정합니다.
   * 수신할 세그먼트 수를 계산하여 `numberOfSegments`에 저장합니다.
-  * `_jsRuntime.InvokeAsync<string>('receiveSegment', i, selector)`와의 JS interop을 통해 `for` 루프에서 세그먼트를 요청합니다. 디코딩 전에 마지막 세그먼트를 제외한 모든 세그먼트는 8,192바이트여야 합니다. 클라이언트가 효율적인 방식으로 데이터를 보내도록 강제 적용합니다.
+  * `for`와의 JS interop을 통해 `_jsRuntime.InvokeAsync<string>('receiveSegment', i, selector)` 루프에서 세그먼트를 요청합니다. 디코딩 전에 마지막 세그먼트를 제외한 모든 세그먼트는 8,192바이트여야 합니다. 클라이언트가 효율적인 방식으로 데이터를 보내도록 강제 적용합니다.
   * 수신된 각 세그먼트에 대해 <xref:System.Convert.TryFromBase64String*>을 사용하여 디코딩 전에 검사를 수행합니다.
   * 업로드가 완료되면 데이터를 포함하는 스트림이 새 <xref:System.IO.Stream>(`SegmentedStream`)으로 반환됩니다.
 

@@ -6,15 +6,15 @@ ms.author: riande
 ms.date: 10/14/2016
 uid: fundamentals/request-features
 ms.openlocfilehash: d0f3ae521d1f314dd04cb581d9a921da4719273d
-ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/16/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "79416175"
 ---
 # <a name="request-features-in-aspnet-core"></a>ASP.NET Core의 요청 기능
 
-작성자: [Steve Smith](https://ardalis.com/)
+작성자 [Steve Smith](https://ardalis.com/)
 
 HTTP 요청 및 응답과 관련된 웹 서버 구현의 세부 사항은 인터페이스를 통해서 정의됩니다. 이러한 인터페이스는 서버 구현 및 미들웨어에서 애플리케이션의 호스팅 파이프라인을 만들고 수정하는 데 사용됩니다.
 
@@ -53,7 +53,7 @@ ASP.NET Core는 `Microsoft.AspNetCore.Http.Features`에서 서버가 지원하�
 
 ## <a name="feature-collections"></a>기능 컬렉션
 
-`HttpContext`의 `Features` 속성은 현재 요청에 사용 가능한 HTTP 기능을 가져오고 설정하기 위한 인터페이스를 제공합니다. 기능 컬렉션은 요청 컨텍스트 내에서도 변경할 수 있기 때문에, 미들웨어를 사용하여 콜렉션을 수정하고 추가 기능에 대한 지원을 추가할 수 있습니다.
+`Features`의 `HttpContext` 속성은 현재 요청에 사용 가능한 HTTP 기능을 가져오고 설정하기 위한 인터페이스를 제공합니다. 기능 컬렉션은 요청 컨텍스트 내에서도 변경할 수 있기 때문에, 미들웨어를 사용하여 콜렉션을 수정하고 추가 기능에 대한 지원을 추가할 수 있습니다.
 
 ## <a name="middleware-and-request-features"></a>미들웨어 및 요청 기능
 

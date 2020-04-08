@@ -2,7 +2,7 @@
 
 이 샘플에는 상태 검사 미들웨어 및 서비스의 사용을 보여줍니다. 이 샘플은 [ASP.NET Core의 상태 검사](https://docs.microsoft.com/aspnet/core/host-and-deploy/health-checks) 항목에 설명된 시나리오를 보여줍니다.
 
-항목에서 설명된 시나리오에 대해 샘플 앱을 실행하려면 명령 셸의 프로젝트 폴더에서 [dotnet run](https://docs.microsoft.com/dotnet/core/tools/dotnet-run) 명령을 사용합니다. 탐색 중인 시나리오에 대한 스위치를 전달합니다. `dotnet run`에 스위치가 제공되지 않은 경우 앱의 기본 설정은 `basic`입니다.
+항목에서 설명된 시나리오에 대해 샘플 앱을 실행하려면 명령 셸의 프로젝트 폴더에서 [dotnet run](https://docs.microsoft.com/dotnet/core/tools/dotnet-run) 명령을 사용합니다. 탐색 중인 시나리오에 대한 스위치를 전달합니다. `basic`에 스위치가 제공되지 않은 경우 앱의 기본 설정은 `dotnet run`입니다.
 
 | 시나리오                                               | 샘플 앱 명령               | 설명 |
 | ------------------------------------------------------ | -------------------------------- | ----------- |

@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 02/07/2020
 uid: host-and-deploy/index
 ms.openlocfilehash: 464d19bd63e1f0f06bd7d218e7644afde04a5672
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78644151"
 ---
 # <a name="host-and-deploy-aspnet-core"></a>ASP.NET Core 호스트 및 배포
@@ -34,7 +34,7 @@ ms.locfileid: "78644151"
 
 .NET Core 앱은 *자체 포함된 배포* 또는 *프레임워크 종속 배포*로 게시할 수 있습니다. 앱이 자체 포함된 배포인 경우, .NET 런타임이 포함된 어셈블리 파일은 *publish* 폴더에 들어 있습니다. 앱이 프레임워크 종속인 경우 서버에 설치된 .NET 버전에 대한 참조가 앱에 포함되므로 .NET 런타임 파일이 포함되지 않습니다. 기본 배포 모델은 프레임워크 종속입니다. 자세한 내용은 [.NET Core 애플리케이션 배포](/dotnet/core/deploying/)를 참조하세요.
 
-*.exe* 및 *.dll* 파일 이외에 ASP.NET Core 앱에 대한 *publish* 폴더에는 일반적으로 구성 파일, 정적 자산 및 MVC 뷰가 포함됩니다. 자세한 내용은 <xref:host-and-deploy/directory-structure>를 참조하세요.
+*.exe* 및 *.dll* 파일 이외에 ASP.NET Core 앱에 대한 *publish* 폴더에는 일반적으로 구성 파일, 정적 자산 및 MVC 뷰가 포함됩니다. 자세한 내용은 <xref:host-and-deploy/directory-structure>을 참조하세요.
 
 ## <a name="set-up-a-process-manager"></a>프로세스 관리자 설정
 
@@ -69,7 +69,7 @@ Visual Studio를 사용하여 Azure에 앱을 게시하는 방법은 <xref:tutor
 
 ## <a name="publish-with-msdeploy-on-windows"></a>Windows에서 MSDeploy를 사용하여 게시
 
-[dotnet msbuild](/dotnet/core/tools/dotnet-msbuild) 명령을 사용하여 Windows 명령 프롬프트에서 수행하는 방법을 비롯하여 Visual Studio 게시 프로필을 사용하여 앱을 게시하는 방법에 대한 지침은 <xref:host-and-deploy/visual-studio-publish-profiles>를 참조하세요.
+<xref:host-and-deploy/visual-studio-publish-profiles>dotnet msbuild[ 명령을 사용하여 Windows 명령 프롬프트에서 수행하는 방법을 비롯하여 Visual Studio 게시 프로필을 사용하여 앱을 게시하는 방법에 대한 지침은 ](/dotnet/core/tools/dotnet-msbuild)를 참조하세요.
 
 ## <a name="internet-information-services-iis"></a>IIS(인터넷 정보 서비스)
 
@@ -81,11 +81,11 @@ Visual Studio를 사용하여 Azure에 앱을 게시하는 방법은 <xref:tutor
 
 ## <a name="host-on-docker"></a>Docker에서 호스트
 
-자세한 내용은 <xref:host-and-deploy/docker/index>를 참조하세요.
+자세한 내용은 <xref:host-and-deploy/docker/index>을 참조하세요.
 
 ## <a name="perform-health-checks"></a>상태 검사 수행
 
-상태 검사 미들웨어를 사용하여 앱 및 그 종속성에 대해 상태 검사를 수행합니다. 자세한 내용은 <xref:host-and-deploy/health-checks>를 참조하세요.
+상태 검사 미들웨어를 사용하여 앱 및 그 종속성에 대해 상태 검사를 수행합니다. 자세한 내용은 <xref:host-and-deploy/health-checks>을 참조하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 
@@ -112,7 +112,7 @@ Visual Studio를 사용하여 Azure에 앱을 게시하는 방법은 <xref:tutor
 
 .NET Core 앱은 *자체 포함된 배포* 또는 *프레임워크 종속 배포*로 게시할 수 있습니다. 앱이 자체 포함된 배포인 경우, .NET 런타임이 포함된 어셈블리 파일은 *publish* 폴더에 들어 있습니다. 앱이 프레임워크 종속인 경우 서버에 설치된 .NET 버전에 대한 참조가 앱에 포함되므로 .NET 런타임 파일이 포함되지 않습니다. 기본 배포 모델은 프레임워크 종속입니다. 자세한 내용은 [.NET Core 애플리케이션 배포](/dotnet/core/deploying/)를 참조하세요.
 
-*.exe* 및 *.dll* 파일 이외에 ASP.NET Core 앱에 대한 *publish* 폴더에는 일반적으로 구성 파일, 정적 자산 및 MVC 뷰가 포함됩니다. 자세한 내용은 <xref:host-and-deploy/directory-structure>를 참조하세요.
+*.exe* 및 *.dll* 파일 이외에 ASP.NET Core 앱에 대한 *publish* 폴더에는 일반적으로 구성 파일, 정적 자산 및 MVC 뷰가 포함됩니다. 자세한 내용은 <xref:host-and-deploy/directory-structure>을 참조하세요.
 
 ## <a name="set-up-a-process-manager"></a>프로세스 관리자 설정
 
@@ -147,7 +147,7 @@ Visual Studio를 사용하여 Azure에 앱을 게시하는 방법은 <xref:tutor
 
 ## <a name="publish-with-msdeploy-on-windows"></a>Windows에서 MSDeploy를 사용하여 게시
 
-[dotnet msbuild](/dotnet/core/tools/dotnet-msbuild) 명령을 사용하여 Windows 명령 프롬프트에서 수행하는 방법을 비롯하여 Visual Studio 게시 프로필을 사용하여 앱을 게시하는 방법에 대한 지침은 <xref:host-and-deploy/visual-studio-publish-profiles>를 참조하세요.
+<xref:host-and-deploy/visual-studio-publish-profiles>dotnet msbuild[ 명령을 사용하여 Windows 명령 프롬프트에서 수행하는 방법을 비롯하여 Visual Studio 게시 프로필을 사용하여 앱을 게시하는 방법에 대한 지침은 ](/dotnet/core/tools/dotnet-msbuild)를 참조하세요.
 
 ## <a name="internet-information-services-iis"></a>IIS(인터넷 정보 서비스)
 
@@ -159,7 +159,7 @@ Visual Studio를 사용하여 Azure에 앱을 게시하는 방법은 <xref:tutor
 
 ## <a name="host-on-docker"></a>Docker에서 호스트
 
-자세한 내용은 <xref:host-and-deploy/docker/index>를 참조하세요.
+자세한 내용은 <xref:host-and-deploy/docker/index>을 참조하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 

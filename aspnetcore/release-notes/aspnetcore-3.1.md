@@ -10,10 +10,10 @@ no-loc:
 - SignalR
 uid: aspnetcore-3.1
 ms.openlocfilehash: f375022ad3ebdea2990f626320ef295926f88c22
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78648771"
 ---
 # <a name="whats-new-in-aspnet-core-31"></a>ASP.NET Core 3.1의 새로운 기능
@@ -36,7 +36,7 @@ HTML 도우미는 ASP.NET Core 3.1에서 계속 지원되지만, 구성 요소 �
 
 Blazor 서버 앱에서 이제 초기 렌더링 중에 최상위 수준 구성 요소에 매개 변수를 전달할 수 있습니다. 이전에는 [RenderMode.Static](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static)을 사용하여 최상위 구성 요소에만 매개 변수를 전달할 수 있었습니다. 이 릴리스에서는 [RenderMode.Server](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server) 및 [RenderModel.ServerPrerendered](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered)가 모두 지원됩니다. 지정된 모든 매개 변수 값은 JSON으로 직렬화되고 초기 응답에 포함됩니다.
 
-예를 들어, 증분 크기(`IncrementAmount`)를 사용하여 `Counter` 구성 요소를 미리 렌더링합니다.
+예를 들어, 증분 크기(`Counter`)를 사용하여 `IncrementAmount` 구성 요소를 미리 렌더링합니다.
 
 ```cshtml
 <component type="typeof(Counter)" render-mode="ServerPrerendered" 
@@ -53,7 +53,7 @@ Blazor 서버 앱에서 이제 초기 렌더링 중에 최상위 수준 구성 �
 
 ## <a name="breaking-changes-for-samesite-cookies"></a>SameSite 쿠키의 호환성이 손상되는 변경
 
-SameSite 쿠키의 동작이 예정된 브라우저 변경 내용을 반영하도록 변경되었습니다. 이는 AzureAd, OpenIdConnect 또는 WsFederation 등의 인증 시나리오에 영향을 줄 수 있습니다. 자세한 내용은 <xref:security/samesite>를 참조하세요.
+SameSite 쿠키의 동작이 예정된 브라우저 변경 내용을 반영하도록 변경되었습니다. 이는 AzureAd, OpenIdConnect 또는 WsFederation 등의 인증 시나리오에 영향을 줄 수 있습니다. 자세한 내용은 <xref:security/samesite>을 참조하세요.
 
 ## <a name="prevent-default-actions-for-events-in-opno-locblazor-apps"></a>Blazor 앱에서 이벤트의 기본 동작 방지
 

@@ -6,10 +6,10 @@ ms.author: riande
 ms.date: 12/20/2018
 uid: tutorials/razor-pages/da1
 ms.openlocfilehash: 0f6535462fe2d308825bf7289c10d2b0690cebd4
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78650427"
 ---
 # <a name="update-the-generated-pages-in-an-aspnet-core-app"></a>ASP.NET Core 앱에서 생성된 페이지 업데이트
@@ -34,13 +34,13 @@ ms.locfileid: "78650427"
 
 페이지/동영상으로 이동하고 **편집** 링크로 마우스를 가져가 대상 URL을 봅니다.
 
-![브라우저 창에서 편집 링크에 마우스를 가져가면 http://localhost:1234/Movies/Edit/5의 링크 Url이 표시됩니다.](~/tutorials/razor-pages/da1/edit7.png)
+![브라우저 창에서 편집 링크에 마우스를 가져가면 http://localhost:1234/Movies/Edit/5 의 링크 Url이 표시됩니다.](~/tutorials/razor-pages/da1/edit7.png)
 
-**편집**, **세부 정보** 및 **삭제** 링크는 *Pages/Movies/Index.cshtml* 파일에서 [앵커 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)에 의해 생성됩니다.
+**편집**, **세부 정보** 및 **삭제** 링크는 [Pages/Movies/Index.cshtml](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) 파일에서 *앵커 태그 도우미*에 의해 생성됩니다.
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
-[태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하면 Razor 파일에서 HTML 요소를 만들고 렌더링하는 데 서버 쪽 코드를 사용할 수 있습니다. 위의 코드에서 `AnchorTagHelper`는 Razor 페이지에서 HTML `href` 특성 값(경로는 상대적), `asp-page` 및 경로 ID(`asp-route-id`)를 동적으로 생성합니다. 자세한 내용은 [페이지에 대한 URL 생성](xref:razor-pages/index#url-generation-for-pages)을 참조하세요.
+[태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하면 서버 쪽 코드를 사용하여 Razor 파일에서 HTML 요소를 만들고 렌더링 할 수 있습니다. 위의 코드에서 `AnchorTagHelper`는 Razor 페이지에서 HTML `href` 특성 값(경로는 상대적), `asp-page` 및 경로 ID(`asp-route-id`)를 동적으로 생성합니다. 자세한 내용은 [페이지에 대한 URL 생성](xref:razor-pages/index#url-generation-for-pages)을 참조하세요.
 
 선호하는 브라우저에서 **소스 보기**를 사용하여 생성된 표시를 검사합니다. 생성된 HTML의 일부는 다음과 같습니다.
 
@@ -52,7 +52,7 @@ ms.locfileid: "78650427"
 </td>
 ```
 
-동적으로 생성된 링크는 쿼리 문자열이 포함된 동영상 ID를 전달합니다(예: `https://localhost:5001/Movies/Details?id=1`의 `?id=1`).
+동적으로 생성된 링크는 쿼리 문자열이 포함된 동영상 ID를 전달합니다(예: `?id=1`의 `https://localhost:5001/Movies/Details?id=1`).
 
 ### <a name="add-route-template"></a>경로 템플릿 추가
 
@@ -75,14 +75,14 @@ ms.locfileid: "78650427"
 `@page "{id:int?}"`의 동작을 테스트하려면:
 
 * *Pages/Movies/Details.cshtml*에서 페이지 지시문을 `@page "{id:int?}"`로 설정합니다.
-* *Pages/Movies/Details.cshtml.cs*의 `public async Task<IActionResult> OnGetAsync(int? id)`에서 중단점을 설정합니다.
+* `public async Task<IActionResult> OnGetAsync(int? id)`Pages/Movies/Details.cshtml.cs*의* 에서 중단점을 설정합니다.
 * `https://localhost:5001/Movies/Details/`로 이동합니다.
 
-`@page "{id:int}"` 지시문을 사용하면 중단점에 도달하지 않습니다. 라우팅 엔진은 HTTP 404를 반환합니다. `OnGetAsync` 메서드는 `@page "{id:int?}"`를 사용하여 `NotFound`(HTTP 404)를 반환합니다.
+`@page "{id:int}"` 지시문을 사용하면 중단점에 도달하지 않습니다. 라우팅 엔진은 HTTP 404를 반환합니다. `@page "{id:int?}"` 메서드는 `OnGetAsync`를 사용하여 `NotFound`(HTTP 404)를 반환합니다.
 
 ### <a name="review-concurrency-exception-handling"></a>동시성 예외 처리 검토
 
-*Pages/Movies/Edit.cshtml.cs* 파일에서 `OnPostAsync` 메서드를 검토합니다.
+`OnPostAsync`Pages/Movies/Edit.cshtml.cs*파일에서* 메서드를 검토합니다.
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Edit.cshtml.cs?name=snippet)]
 
@@ -149,13 +149,13 @@ ms.locfileid: "78650427"
 
 페이지/동영상으로 이동하고 **편집** 링크로 마우스를 가져가 대상 URL을 봅니다.
 
-![브라우저 창에서 편집 링크에 마우스를 가져가면 http://localhost:1234/Movies/Edit/5의 링크 Url이 표시됩니다.](~/tutorials/razor-pages/da1/edit7.png)
+![브라우저 창에서 편집 링크에 마우스를 가져가면 http://localhost:1234/Movies/Edit/5 의 링크 Url이 표시됩니다.](~/tutorials/razor-pages/da1/edit7.png)
 
-**편집**, **세부 정보** 및 **삭제** 링크는 *Pages/Movies/Index.cshtml* 파일에서 [앵커 태그 도우미](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)에 의해 생성됩니다.
+**편집**, **세부 정보** 및 **삭제** 링크는 [Pages/Movies/Index.cshtml](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) 파일에서 *앵커 태그 도우미*에 의해 생성됩니다.
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
-[태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하면 Razor 파일에서 HTML 요소를 만들고 렌더링하는 데 서버 쪽 코드를 사용할 수 있습니다. 위의 코드에서 `AnchorTagHelper`는 Razor 페이지에서 HTML `href` 특성 값(경로는 상대적), `asp-page` 및 경로 ID(`asp-route-id`)를 동적으로 생성합니다. 자세한 내용은 [페이지에 대한 URL 생성](xref:razor-pages/index#url-generation-for-pages)을 참조하세요.
+[태그 도우미](xref:mvc/views/tag-helpers/intro)를 사용하면 서버 쪽 코드를 사용하여 Razor 파일에서 HTML 요소를 만들고 렌더링 할 수 있습니다. 위의 코드에서 `AnchorTagHelper`는 Razor 페이지에서 HTML `href` 특성 값(경로는 상대적), `asp-page` 및 경로 ID(`asp-route-id`)를 동적으로 생성합니다. 자세한 내용은 [페이지에 대한 URL 생성](xref:razor-pages/index#url-generation-for-pages)을 참조하세요.
 
 선호하는 브라우저에서 **소스 보기**를 사용하여 생성된 표시를 검사합니다. 생성된 HTML의 일부는 다음과 같습니다.
 
@@ -167,7 +167,7 @@ ms.locfileid: "78650427"
 </td>
 ```
 
-동적으로 생성된 링크는 쿼리 문자열이 포함된 동영상 ID를 전달합니다(예: `https://localhost:5001/Movies/Details?id=1`의 `?id=1`).
+동적으로 생성된 링크는 쿼리 문자열이 포함된 동영상 ID를 전달합니다(예: `?id=1`의 `https://localhost:5001/Movies/Details?id=1`).
 
 편집, 세부 정보 및 삭제 Razor 페이지를 "{id:int}" 경로 템플릿을 사용하도록 업데이트합니다. 이러한 각 페이지에 대한 page 지시문을 `@page`에서 `@page "{id:int}"`로 변경합니다. 앱을 실행한 다음 소스를 봅니다. 생성된 HTML에서 URL의 경로 부분에 ID를 추가합니다.
 
@@ -188,14 +188,14 @@ ms.locfileid: "78650427"
 `@page "{id:int?}"`의 동작을 테스트하려면:
 
 * *Pages/Movies/Details.cshtml*에서 페이지 지시문을 `@page "{id:int?}"`로 설정합니다.
-* *Pages/Movies/Details.cshtml.cs*의 `public async Task<IActionResult> OnGetAsync(int? id)`에서 중단점을 설정합니다.
+* `public async Task<IActionResult> OnGetAsync(int? id)`Pages/Movies/Details.cshtml.cs*의* 에서 중단점을 설정합니다.
 * `https://localhost:5001/Movies/Details/`로 이동합니다.
 
-`@page "{id:int}"` 지시문을 사용하면 중단점에 도달하지 않습니다. 라우팅 엔진은 HTTP 404를 반환합니다. `OnGetAsync` 메서드는 `@page "{id:int?}"`를 사용하여 `NotFound`(HTTP 404)를 반환합니다.
+`@page "{id:int}"` 지시문을 사용하면 중단점에 도달하지 않습니다. 라우팅 엔진은 HTTP 404를 반환합니다. `@page "{id:int?}"` 메서드는 `OnGetAsync`를 사용하여 `NotFound`(HTTP 404)를 반환합니다.
 
 ### <a name="review-concurrency-exception-handling"></a>동시성 예외 처리 검토
 
-*Pages/Movies/Edit.cshtml.cs* 파일에서 `OnPostAsync` 메서드를 검토합니다.
+`OnPostAsync`Pages/Movies/Edit.cshtml.cs*파일에서* 메서드를 검토합니다.
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Edit.cshtml.cs?name=snippet)]
 

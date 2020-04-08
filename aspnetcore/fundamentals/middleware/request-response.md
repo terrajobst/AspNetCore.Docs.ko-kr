@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 08/29/2019
 uid: fundamentals/middleware/request-response
 ms.openlocfilehash: b473fa02e1d23f02bc5d2e15fa54ab7b1dbbb17c
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78650835"
 ---
 # <a name="request-and-response-operations-in-aspnet-core"></a>ASP.NET Core의 요청 및 응답 작업
@@ -73,11 +73,11 @@ ms.locfileid: "78650835"
 
 ## <a name="adapters"></a>어댑터
 
-`Body` 및 `BodyReader/BodyWriter` 속성을 `HttpRequest` 및 `HttpResponse`에 사용할 수 있습니다. `Body`를 다른 스트림에 설정하면 새 어댑터 세트가 각 형식을 다른 형식에 맞게 자동으로 조정합니다. `HttpRequest.Body`를 새 스트림으로 설정하는 경우 `HttpRequest.BodyReader`가 `HttpRequest.Body`를 래핑하는 새 `PipeReader`로 자동 설정됩니다.
+`Body` 및 `BodyReader/BodyWriter` 속성을 `HttpRequest` 및 `HttpResponse`에 사용할 수 있습니다. `Body`를 다른 스트림에 설정하면 새 어댑터 세트가 각 형식을 다른 형식에 맞게 자동으로 조정합니다. `HttpRequest.Body`를 새 스트림으로 설정하는 경우 `HttpRequest.BodyReader`가 `PipeReader`를 래핑하는 새 `HttpRequest.Body`로 자동 설정됩니다.
 
 ## <a name="startasync"></a>StartAsync
 
-`HttpResponse.StartAsync`는 헤더를 수정할 수 없음을 나타내며 `OnStarting` 콜백을 실행하는 데 사용됩니다. Kestrel을 서버로 사용하는 경우 `PipeReader`를 사용하기 전에`StartAsync`를 호출하면 `GetMemory`에서 반환된 메모리가 외부 버퍼가 아닌 Kestrel의 내부 <xref:System.IO.Pipelines.Pipe>에 속하게 됩니다.
+`HttpResponse.StartAsync`는 헤더를 수정할 수 없음을 나타내며 `OnStarting` 콜백을 실행하는 데 사용됩니다. Kestrel을 서버로 사용하는 경우 `StartAsync`를 사용하기 전에`PipeReader`를 호출하면 `GetMemory`에서 반환된 메모리가 외부 버퍼가 아닌 Kestrel의 내부 <xref:System.IO.Pipelines.Pipe>에 속하게 됩니다.
 
 ## <a name="additional-resources"></a>추가 자료
 

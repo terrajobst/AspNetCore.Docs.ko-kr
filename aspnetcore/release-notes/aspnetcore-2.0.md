@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 12/05/2019
 uid: aspnetcore-2.0
 ms.openlocfilehash: 5ca43bab1496aa9fda65282cbb0b1177ad8689eb
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78650859"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>ASP.NET Core 2.0의 새로운 기능
@@ -68,7 +68,7 @@ ASP.NET Core 2.0에서 로깅은 기본적으로 DI(종속성 주입) 시스템�
 
 ASP.NET Core 2.0에서는 ID를 사용하여 보안 Web API를 더 쉽게 빌드할 수 있습니다. [MSAL(Microsoft Authentication Library)](https://www.nuget.org/packages/Microsoft.Identity.Client)을 사용하여 Web API에 액세스하기 위해 액세스 토큰을 얻을 수 있습니다.
 
-2.0의 인증 변경에 대한 자세한 내용은 다음 리소스를 참조하세요.
+2\.0의 인증 변경에 대한 자세한 내용은 다음 리소스를 참조하세요.
 
 * [ASP.NET Core의 계정 확인 및 암호 복구](xref:security/authentication/accconfirm)
 * [ASP.NET Core에서 인증자 앱에 QR 코드 생성 사용](xref:security/authentication/identity-enable-qrcodes)
@@ -138,7 +138,7 @@ Razor 뷰 엔진이 새 Roslyn 컴파일러를 사용하도록 업데이트되�
 
 C# 7.1 기능 상태에 대한 자세한 내용은 [the Roslyn GitHub repository](https://github.com/dotnet/roslyn/blob/master/docs/Language%20Feature%20Status.md)(Roslyn GitHub 리포지토리)를 참조하세요.
 
-## <a name="other-documentation-updates-for-20"></a>2.0에 대한 기타 문서 업데이트
+## <a name="other-documentation-updates-for-20"></a>2\.0에 대한 기타 문서 업데이트
 
 * [ASP.NET Core 앱 배포용 Visual Studio 게시 프로필](xref:host-and-deploy/visual-studio-publish-profiles)
 * [키 관리](xref:security/data-protection/implementation/key-management)

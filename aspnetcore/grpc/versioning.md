@@ -7,10 +7,10 @@ ms.author: jamesnk
 ms.date: 01/09/2020
 uid: grpc/versioning
 ms.openlocfilehash: 9bd76009ba28a1abef25a98686afea6753d4a8f4
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78649359"
 ---
 # <a name="versioning-grpc-services"></a>gRPC 서비스 버전 관리
@@ -48,7 +48,7 @@ GRPC 프로토콜은 시간이 지남에 따라 변경되는 서비스를 지원
 
 * **필드 제거** - 제거된 필드의 값은 메시지의 [알 수 없는 필드](https://developers.google.com/protocol-buffers/docs/proto3#unknowns)로 deserialize됩니다. 이것은 gRPC 로토콜 관련 호환성이 손상되는 변경이 아니며 최신 계약으로 업그레이드하는 경우 클라이언트를 업데이트해야 합니다. 제거된 필드 번호를 나중에 실수로 다시 사용하지 않는 것이 중요합니다. 이 문제가 발생하지 않도록 하려면 Protobuf의 [reserved](https://developers.google.com/protocol-buffers/docs/proto3#reserved) 키워드를 사용하여 메시지에 삭제된 필드 번호 및 이름을 지정합니다.
 * **메시지 이름 바꾸기** - 메시지 이름은 일반적으로 네트워크에서 전송되지 않으므로 gRPC 프로토콜 관련 호환성이 손상되는 변경이 아닙니다. 최신 계약으로 업그레이드하는 경우에는 클라이언트를 업데이트해야 합니다. 메시지 이름이 메시지 유형을 식별하는 데 사용되는 경우 메시지 이름이 네트워크에서 전송**되는** 한 가지 경우는 [모든](https://developers.google.com/protocol-buffers/docs/proto3#any) 필드를 사용하는 경우입니다.
-* **csharp_namespace 변경** - `csharp_namespace`를 변경하면 생성된 .NET 형식의 네임스페이스가 변경됩니다. 이것은 gRPC 프로토콜 관련 호환성이 손상되는 변경이 아니며 최신 계약으로 업그레이드하는 경우 클라이언트를 업데이트해야 합니다.
+* **csharp_namespace 변경** - `csharp_namespace`를 변경하면 생성된 .NET 형식의 네임스페이스가 변경됩니다. 이것은 gRPC 로토콜 관련 호환성이 손상되는 변경이 아니며 최신 계약으로 업그레이드하는 경우 클라이언트를 업데이트해야 합니다.
 
 ### <a name="protocol-breaking-changes"></a>프로토콜 관련 호환성이 손상되는 변경
 
@@ -73,7 +73,7 @@ GRPC 프로토콜은 시간이 지남에 따라 변경되는 서비스를 지원
 
 서비스는 이전 클라이언트와의 호환성을 유지하려고 해야 합니다. 결국 앱을 변경하면 호환성이 손상되는 변경이 필요할 수 있습니다. 이전 클라이언트에 대해 호환성이 손상되는 변경을 수행하고 서비스와 함께 강제로 업데이트하는 것은 좋은 사용자 환경이 아닙니다. 호환성이 손상되는 변경을 수행하면서 이전 버전과의 호환성을 유지하는 방법은 여러 버전의 서비스를 게시하는 것입니다.
 
-gRPC는 .NET 네임스페이스와 유사하게 작동 하는 선택적 [package](https://developers.google.com/protocol-buffers/docs/proto3#packages) 지정자를 지원합니다. 실제로 *.proto* 파일에 `option csharp_namespace`가 설정되지 않은 경우 `package`는 생성된 .NET 형식에 대한 .NET 네임스페이스로 사용됩니다. 이 패키지를 사용하여 서비스의 버전 번호와 해당 메시지를 지정할 수 있습니다.
+gRPC는 .NET 네임스페이스와 유사하게 작동 하는 선택적 [package](https://developers.google.com/protocol-buffers/docs/proto3#packages) 지정자를 지원합니다. 실제로 `package`.proto`option csharp_namespace` 파일에 *가 설정되지 않은 경우* 는 생성된 .NET 형식에 대한 .NET 네임스페이스로 사용됩니다. 이 패키지를 사용하여 서비스의 버전 번호와 해당 메시지를 지정할 수 있습니다.
 
 [!code-protobuf[](versioning/sample/greet.v1.proto?highlight=3)]
 

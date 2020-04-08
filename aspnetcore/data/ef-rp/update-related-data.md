@@ -6,10 +6,10 @@ ms.author: riande
 ms.date: 07/22/2019
 uid: data/ef-rp/update-related-data
 ms.openlocfilehash: fdfdb14ff8414b8bf30f9b95be7ba0a6bcbd2995
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78645459"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---update-related-data---7-of-8"></a>ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 관련 데이터 업데이트 - 7/8
@@ -51,10 +51,10 @@ ms.locfileid: "78645459"
 
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
-위의 코드는
+위의 코드는:
 
 * `DepartmentNamePageModel`에서 파생됩니다.
-* [초과 게시](xref:data/ef-rp/crud#overposting)를 방지하도록 `TryUpdateModelAsync`를 사용합니다.
+* `TryUpdateModelAsync`초과 게시[를 방지하도록 ](xref:data/ef-rp/crud#overposting)를 사용합니다.
 * `ViewData["DepartmentID"]`을 제거합니다. 기본 클래스의 `DepartmentNameSL`은 강력한 형식의 모델이며 Razor 페이지에서 사용됩니다. 강력한 형식의 모델은 약한 형식보다 선호됩니다. 자세한 내용은 [약한 형식의 데이터(ViewData 및 ViewBag)](xref:mvc/views/overview#VD_VB)를 참조하세요.
 
 ### <a name="update-the-course-create-razor-page"></a>과정 만들기 Razor 페이지 업데이트
@@ -96,7 +96,7 @@ Razor 페이지는 [Select 태그 도우미](xref:mvc/views/working-with-forms#t
 * 부서 드롭다운의 캡션을 **DepartmentID**에서 **Department**로 변경합니다.
 * `"ViewBag.DepartmentID"`를 `DepartmentNameSL`로 바꿉니다(기본 클래스에서).
 
-페이지는 강좌 번호에 대한 숨겨진 필드(`<input type="hidden">`)를 포함합니다. `asp-for="Course.CourseID"`로 `<label>` 태그 도우미를 추가하는 것은 숨겨진 필드에 대한 필요성을 제거하지 않습니다. `<input type="hidden">`은 사용자가 **저장**을 클릭할 때 게시된 데이터에 포함되도록 강좌 번호에 필요합니다.
+페이지는 강좌 번호에 대한 숨겨진 필드(`<input type="hidden">`)를 포함합니다. `<label>`로 `asp-for="Course.CourseID"` 태그 도우미를 추가하는 것은 숨겨진 필드에 대한 필요성을 제거하지 않습니다. `<input type="hidden">`은 사용자가 **저장**을 클릭할 때 게시된 데이터에 포함되도록 강좌 번호에 필요합니다.
 
 ## <a name="update-the-course-details-and-delete-pages"></a>과정 세부 정보 및 삭제 페이지 업데이트
 
@@ -148,9 +148,9 @@ Razor 페이지는 [Select 태그 도우미](xref:mvc/views/working-with-forms#t
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/InstructorCoursesPageModel.cs?name=snippet_All)]
 
-`InstructorCoursesPageModel`은 편집 및 만들기 페이지 모델에 사용하는 기본 클래스입니다. `PopulateAssignedCourseData`는 `AssignedCourseDataList`를 채우도록 모든 `Course` 엔터티를 읽습니다. 각 강좌의 경우 코드는 `CourseID`, 제목 및 강사가 강좌에 할당되었는지 여부를 설정합니다. [HashSet](/dotnet/api/system.collections.generic.hashset-1)는 효율적인 조회를 위해 사용됩니다.
+`InstructorCoursesPageModel`은 편집 및 만들기 페이지 모델에 사용하는 기본 클래스입니다. `PopulateAssignedCourseData`는 `Course`를 채우도록 모든 `AssignedCourseDataList` 엔터티를 읽습니다. 각 강좌의 경우 코드는 `CourseID`, 제목 및 강사가 강좌에 할당되었는지 여부를 설정합니다. [HashSet](/dotnet/api/system.collections.generic.hashset-1)는 효율적인 조회를 위해 사용됩니다.
 
-Razor 페이지에는 강좌 엔터티의 컬렉션이 없으므로 모델 바인더는 `CourseAssignments` 탐색 속성을 자동으로 업데이트할 수 없습니다. `CourseAssignments` 탐색 속성을 업데이트하는 데 모델 바인더를 사용하는 대신 새 `UpdateInstructorCourses` 메서드에서 해당 작업을 수행합니다. 따라서 모델 바인딩에서 `CourseAssignments` 속성을 제외해야 합니다. 허용 목록 오버로드를 사용하고 있으며 `CourseAssignments`는 포함 목록에 있지 않으므로 `TryUpdateModel`을 호출하는 코드에 변경 내용을 만들 필요가 없습니다.
+Razor 페이지에는 강좌 엔터티의 컬렉션이 없으므로 모델 바인더는 `CourseAssignments` 탐색 속성을 자동으로 업데이트할 수 없습니다. `CourseAssignments` 탐색 속성을 업데이트하는 데 모델 바인더를 사용하는 대신 새 `UpdateInstructorCourses` 메서드에서 해당 작업을 수행합니다. 따라서 모델 바인딩에서 `CourseAssignments` 속성을 제외해야 합니다. 허용 목록 오버로드를 사용하고 있으며 `TryUpdateModel`는 포함 목록에 있지 않으므로 `CourseAssignments`을 호출하는 코드에 변경 내용을 만들 필요가 없습니다.
 
 확인란이 선택되지 않은 경우 `UpdateInstructorCourses`의 코드는 빈 컬렉션으로 `CourseAssignments` 탐색 속성을 초기화하고 다음을 반환합니다.
 
@@ -180,14 +180,14 @@ Razor 페이지에는 강좌 엔터티의 컬렉션이 없으므로 모델 바�
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/Edit.cshtml.cs?name=snippet_All&highlight=9,28-32,38,42-77)]
 
-위의 코드는
+위의 코드는:
 
-* `OfficeAssignment`, `CourseAssignment` 및 `CourseAssignment.Course` 탐색 속성에 대한 즉시 로드를 사용하여 데이터베이스에서 현재 `Instructor` 엔터티를 가져옵니다.
+* `Instructor`, `OfficeAssignment` 및 `CourseAssignment` 탐색 속성에 대한 즉시 로드를 사용하여 데이터베이스에서 현재 `CourseAssignment.Course` 엔터티를 가져옵니다.
 * 모델 바인더의 값으로 검색된 `Instructor` 엔터티를 업데이트합니다. `TryUpdateModel`은 [초과 게시](xref:data/ef-rp/crud#overposting)를 방지합니다.
 * 사무실 위치가 비어 있는 경우 `Instructor.OfficeAssignment`를 Null로 설정합니다. `Instructor.OfficeAssignment`가 Null인 경우 `OfficeAssignment` 테이블의 관련된 행이 삭제됩니다.
-* `OnGetAsync`에서 `PopulateAssignedCourseData`를 호출하여 `AssignedCourseData` 뷰 모델 클래스를 통해 확인란에 대한 정보를 제공합니다.
-* `OnPostAsync`에서 `UpdateInstructorCourses`를 호출하여 확인란의 정보를 편집 중인 Instructor 엔터티에 적용합니다.
-* `TryUpdateModel`이 실패하는 경우 `OnPostAsync`에서 `PopulateAssignedCourseData` 및 `UpdateInstructorCourses`를 호출합니다. 이 메서드 호출은 오류 메시지와 함께 다시 표시될 때 페이지에 입력된 할당된 과정 데이터를 복원합니다.
+* `PopulateAssignedCourseData`에서 `OnGetAsync`를 호출하여 `AssignedCourseData` 뷰 모델 클래스를 통해 확인란에 대한 정보를 제공합니다.
+* `UpdateInstructorCourses`에서 `OnPostAsync`를 호출하여 확인란의 정보를 편집 중인 Instructor 엔터티에 적용합니다.
+* `PopulateAssignedCourseData`이 실패하는 경우 `UpdateInstructorCourses`에서 `OnPostAsync` 및 `TryUpdateModel`를 호출합니다. 이 메서드 호출은 오류 메시지와 함께 다시 표시될 때 페이지에 입력된 할당된 과정 데이터를 복원합니다.
 
 ### <a name="update-the-instructor-edit-razor-page"></a>강사 편집 Razor 페이지 업데이트
 
@@ -266,10 +266,10 @@ Razor 페이지에는 강좌 엔터티의 컬렉션이 없으므로 모델 바�
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Create.cshtml.cs?highlight=7,18,32-999)]
 
-위의 코드는
+위의 코드는:
 
 * `DepartmentNamePageModel`에서 파생됩니다.
-* [초과 게시](xref:data/ef-rp/crud#overposting)를 방지하도록 `TryUpdateModelAsync`를 사용합니다.
+* `TryUpdateModelAsync`초과 게시[를 방지하도록 ](xref:data/ef-rp/crud#overposting)를 사용합니다.
 * `ViewData["DepartmentID"]`를 `DepartmentNameSL`로 바꿉니다(기본 클래스에서).
 
 `ViewData["DepartmentID"]`는 강력한 형식의 `DepartmentNameSL`로 대체됩니다. 강력한 형식의 모델은 약한 형식보다 선호됩니다. 자세한 내용은 [약한 형식의 데이터(ViewData 및 ViewBag)](xref:mvc/views/overview#VD_VB)를 참조하세요.
@@ -280,7 +280,7 @@ Razor 페이지에는 강좌 엔터티의 컬렉션이 없으므로 모델 바�
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Create.cshtml?highlight=29-34)]
 
-위의 표시는 다음과 같이 변경합니다.
+위의 표시로 다음이 변경됩니다.
 
 * 캡션을 **DepartmentID**에서 **Department**로 변경합니다.
 * `"ViewBag.DepartmentID"`를 `DepartmentNameSL`로 바꿉니다(기본 클래스에서).
@@ -305,13 +305,13 @@ Razor 페이지는 [Select 태그 도우미](xref:mvc/views/working-with-forms#t
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Edit.cshtml?highlight=17-20,32-35)]
 
-위의 표시는 다음과 같이 변경합니다.
+위의 표시로 다음이 변경됩니다.
 
 * 강좌 ID를 표시합니다. 일반적으로 엔터티의 PK(기본 키)는 표시되지 않습니다. PK는 일반적으로 사용자에게 아무런 의미가 없습니다. 이 경우 PK는 강좌 번호입니다.
 * 캡션을 **DepartmentID**에서 **Department**로 변경합니다.
 * `"ViewBag.DepartmentID"`를 `DepartmentNameSL`로 바꿉니다(기본 클래스에서).
 
-페이지는 강좌 번호에 대한 숨겨진 필드(`<input type="hidden">`)를 포함합니다. `asp-for="Course.CourseID"`로 `<label>` 태그 도우미를 추가하는 것은 숨겨진 필드에 대한 필요성을 제거하지 않습니다. `<input type="hidden">`은 사용자가 **저장**을 클릭할 때 게시된 데이터에 포함되도록 강좌 번호에 필요합니다.
+페이지는 강좌 번호에 대한 숨겨진 필드(`<input type="hidden">`)를 포함합니다. `<label>`로 `asp-for="Course.CourseID"` 태그 도우미를 추가하는 것은 숨겨진 필드에 대한 필요성을 제거하지 않습니다. `<input type="hidden">`은 사용자가 **저장**을 클릭할 때 게시된 데이터에 포함되도록 강좌 번호에 필요합니다.
 
 업데이트된 코드를 테스트합니다. 강좌를 만들고, 편집하고, 삭제합니다.
 
@@ -321,7 +321,7 @@ Razor 페이지는 [Select 태그 도우미](xref:mvc/views/working-with-forms#t
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Delete.cshtml.cs?name=snippet&highlight=21,23,40,41)]
 
-*Pages/Courses/Details.cshtml.cs* 파일에서 `OnGetAsync` 메서드를 업데이트합니다.
+`OnGetAsync`Pages/Courses/Details.cshtml.cs*파일에서* 메서드를 업데이트합니다.
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Details.cshtml.cs?name=snippet)]
 
@@ -353,9 +353,9 @@ Razor 페이지는 [Select 태그 도우미](xref:mvc/views/working-with-forms#t
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Edit1.cshtml.cs?name=snippet&highlight=20-23,32,39-999)]
 
-위의 코드는
+위의 코드는:
 
-* `OfficeAssignment` 탐색 속성에 대한 즉시 로드를 사용하여 데이터베이스에서 현재 `Instructor` 엔터티를 가져옵니다.
+* `Instructor` 탐색 속성에 대한 즉시 로드를 사용하여 데이터베이스에서 현재 `OfficeAssignment` 엔터티를 가져옵니다.
 * 모델 바인더의 값으로 검색된 `Instructor` 엔터티를 업데이트합니다. `TryUpdateModel`은 [초과 게시](xref:data/ef-rp/crud#overposting)를 방지합니다.
 * 사무실 위치가 비어 있는 경우 `Instructor.OfficeAssignment`를 Null로 설정합니다. `Instructor.OfficeAssignment`가 Null인 경우 `OfficeAssignment` 테이블의 관련된 행이 삭제됩니다.
 
@@ -392,7 +392,7 @@ Razor 페이지는 [Select 태그 도우미](xref:mvc/views/working-with-forms#t
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/InstructorCoursesPageModel.cshtml.cs)]
 
-`InstructorCoursesPageModel`은 편집 및 만들기 페이지 모델에 사용하는 기본 클래스입니다. `PopulateAssignedCourseData`는 `AssignedCourseDataList`를 채우도록 모든 `Course` 엔터티를 읽습니다. 각 강좌의 경우 코드는 `CourseID`, 제목 및 강사가 강좌에 할당되었는지 여부를 설정합니다. [HashSet](/dotnet/api/system.collections.generic.hashset-1)는 효율적인 조회를 만드는 데 사용됩니다.
+`InstructorCoursesPageModel`은 편집 및 만들기 페이지 모델에 사용하는 기본 클래스입니다. `PopulateAssignedCourseData`는 `Course`를 채우도록 모든 `AssignedCourseDataList` 엔터티를 읽습니다. 각 강좌의 경우 코드는 `CourseID`, 제목 및 강사가 강좌에 할당되었는지 여부를 설정합니다. [HashSet](/dotnet/api/system.collections.generic.hashset-1)는 효율적인 조회를 만드는 데 사용됩니다.
 
 ### <a name="instructors-edit-page-model"></a>강사 편집 페이지 모델
 

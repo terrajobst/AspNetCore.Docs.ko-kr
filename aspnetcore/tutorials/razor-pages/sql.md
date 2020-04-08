@@ -6,10 +6,10 @@ ms.author: riande
 ms.date: 7/22/2019
 uid: tutorials/razor-pages/sql
 ms.openlocfilehash: b5acb573f8fa39e5300ecdb359113d8697d78934
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78649515"
 ---
 # <a name="work-with-a-database-and-aspnet-core"></a>데이터베이스 및 ASP.NET Core 작업
@@ -20,13 +20,13 @@ ms.locfileid: "78649515"
 
 [!INCLUDE[](~/includes/rp/download.md)]
 
-`RazorPagesMovieContext` 개체는 데이터베이스에 연결하고 데이터베이스 레코드에 `Movie` 개체를 매핑하는 작업을 처리합니다. 데이터베이스 컨텍스트는 *Startup.cs*의 `ConfigureServices` 메서드에서 [종속성 주입](xref:fundamentals/dependency-injection) 컨테이너에 등록됩니다.
+`RazorPagesMovieContext` 개체는 데이터베이스에 연결하고 데이터베이스 레코드에 `Movie` 개체를 매핑하는 작업을 처리합니다. 데이터베이스 컨텍스트는 [Startup.cs](xref:fundamentals/dependency-injection)의 `ConfigureServices` 메서드에서 *종속성 주입* 컨테이너에 등록됩니다.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_ConfigureServices&highlight=15-18)]
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
 
@@ -40,7 +40,7 @@ ASP.NET Core [구성](xref:fundamentals/configuration/index) 시스템은 `Conne
 
 [!code-json[](razor-pages-start/sample/RazorPagesMovie30/appsettings.json?highlight=10-12)]
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
 [!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie/appsettings_SQLite.json?highlight=8-10)]
 
@@ -52,7 +52,7 @@ ASP.NET Core [구성](xref:fundamentals/configuration/index) 시스템은 `Conne
 
 ## <a name="sql-server-express-localdb"></a>SQL Server Express LocalDB
 
-LocalDB는 프로그램 개발용으로 대상이 지정된 간단한 버전의 SQL Server Express 데이터베이스 엔진입니다. LocalDB는 요청 시 시작하고 사용자 모드에서 실행되므로 복잡한 구성이 없습니다. 기본적으로 LocalDB 데이터베이스는 `C:\Users\<user>\` 디렉터리에서 `*.mdf` 파일을 만듭니다.
+LocalDB는 프로그램 개발용으로 대상이 지정된 간단한 버전의 SQL Server Express 데이터베이스 엔진입니다. LocalDB는 요청 시 시작하고 사용자 모드에서 실행되므로 복잡한 구성이 없습니다. 기본적으로 LocalDB 데이터베이스는 `*.mdf` 디렉터리에서 `C:\Users\<user>\` 파일을 만듭니다.
 
 <a name="ssox"></a>
 * **보기** 메뉴에서 SSOX(**SQL Server 개체 탐색기**)를 엽니다.
@@ -71,7 +71,7 @@ LocalDB는 프로그램 개발용으로 대상이 지정된 간단한 버전의 
 
   ![테이블 데이터를 보여 주는 열린 Movie 테이블](sql/_static/vd22.png)
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
 [!INCLUDE[](~/includes/rp/sqlite.md)]
 [!INCLUDE[](~/includes/RP-mvc-shared/sqlite-warn.md)]
@@ -80,7 +80,7 @@ LocalDB는 프로그램 개발용으로 대상이 지정된 간단한 버전의 
 
 ## <a name="seed-the-database"></a>데이터베이스 시드
 
-다음 코드를 사용하여 *Models* 폴더에 `SeedData`라는 새 클래스를 만듭니다.
+다음 코드를 사용하여 `SeedData`Models*폴더에*라는 새 클래스를 만듭니다.
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/SeedData.cs?name=snippet_1)]
 
@@ -128,7 +128,7 @@ if (context.Movie.Any())
     * 비디버그 모드에서 VS를 실행했던 경우 F5 키를 눌러 디버그 모드에서 실행되도록 합니다.
     * 디버그 모드에서 VS를 실행했던 경우 디버거를 중지하고 F5 키를 누릅니다.
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
 DB의 모든 레코드를 삭제합니다(시드 메서드가 실행되도록). 앱을 중지 및 시작하여 데이터베이스를 시드합니다.
 
@@ -141,7 +141,7 @@ DB의 모든 레코드를 삭제합니다(시드 메서드가 실행되도록). 
 ## <a name="additional-resources"></a>추가 자료
 
 > [!div class="step-by-step"]
-> [이전: 스캐폴드된 Razor Pages](xref:tutorials/razor-pages/page)
+> [이전: 스캐폴드된 Razor 페이지](xref:tutorials/razor-pages/page)
 > [다음: 페이지 업데이트](xref:tutorials/razor-pages/da1)
 
 ::: moniker-end
@@ -150,13 +150,13 @@ DB의 모든 레코드를 삭제합니다(시드 메서드가 실행되도록). 
 
 [!INCLUDE[](~/includes/rp/download.md)]
 
-`RazorPagesMovieContext` 개체는 데이터베이스에 연결하고 데이터베이스 레코드에 `Movie` 개체를 매핑하는 작업을 처리합니다. 데이터베이스 컨텍스트는 *Startup.cs*의 `ConfigureServices` 메서드에서 [종속성 주입](xref:fundamentals/dependency-injection) 컨테이너에 등록됩니다.
+`RazorPagesMovieContext` 개체는 데이터베이스에 연결하고 데이터베이스 레코드에 `Movie` 개체를 매핑하는 작업을 처리합니다. 데이터베이스 컨텍스트는 [Startup.cs](xref:fundamentals/dependency-injection)의 `ConfigureServices` 메서드에서 *종속성 주입* 컨테이너에 등록됩니다.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Startup.cs?name=snippet_ConfigureServices&highlight=15-18)]
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
 
@@ -164,7 +164,7 @@ DB의 모든 레코드를 삭제합니다(시드 메서드가 실행되도록). 
 
 `ConfigureServices`에서 사용되는 메서드에 대한 자세한 내용은 다음을 참조하세요.
 
-* `CookiePolicyOptions`에 대한 [EU GDPR(일반 데이터 보호 규정) 지원](xref:security/gdpr)
+* [에 대한 ](xref:security/gdpr)EU GDPR(일반 데이터 보호 규정) 지원`CookiePolicyOptions`
 * [SetCompatibilityVersion](xref:mvc/compatibility-version)
 
 ASP.NET Core [구성](xref:fundamentals/configuration/index) 시스템은 `ConnectionString`을 읽습니다. 로컬 개발의 경우 *appsettings.json* 파일에서 연결 문자열을 가져옵니다.
@@ -179,7 +179,7 @@ ASP.NET Core [구성](xref:fundamentals/configuration/index) 시스템은 `Conne
 
 [!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie/appsettings_SQLite.json?highlight=8-10)]
 
-# <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 [!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie/appsettings_SQLite.json?highlight=8-10)]
 
@@ -191,7 +191,7 @@ ASP.NET Core [구성](xref:fundamentals/configuration/index) 시스템은 `Conne
 
 ## <a name="sql-server-express-localdb"></a>SQL Server Express LocalDB
 
-LocalDB는 프로그램 개발용으로 대상이 지정된 간단한 버전의 SQL Server Express 데이터베이스 엔진입니다. LocalDB는 요청 시 시작하고 사용자 모드에서 실행되므로 복잡한 구성이 없습니다. 기본적으로 LocalDB 데이터베이스는 `C:/Users/<user/>` 디렉터리에서 `*.mdf` 파일을 만듭니다.
+LocalDB는 프로그램 개발용으로 대상이 지정된 간단한 버전의 SQL Server Express 데이터베이스 엔진입니다. LocalDB는 요청 시 시작하고 사용자 모드에서 실행되므로 복잡한 구성이 없습니다. 기본적으로 LocalDB 데이터베이스는 `*.mdf` 디렉터리에서 `C:/Users/<user/>` 파일을 만듭니다.
 
 <a name="ssox"></a>
 * **보기** 메뉴에서 SSOX(**SQL Server 개체 탐색기**)를 엽니다.
@@ -215,7 +215,7 @@ LocalDB는 프로그램 개발용으로 대상이 지정된 간단한 버전의 
 [!INCLUDE[](~/includes/rp/sqlite.md)]
 [!INCLUDE[](~/includes/RP-mvc-shared/sqlite-warn.md)]
 
-# <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 [!INCLUDE[](~/includes/rp/sqlite.md)]
 [!INCLUDE[](~/includes/RP-mvc-shared/sqlite-warn.md)]
@@ -224,7 +224,7 @@ LocalDB는 프로그램 개발용으로 대상이 지정된 간단한 버전의 
 
 ## <a name="seed-the-database"></a>데이터베이스 시드
 
-다음 코드를 사용하여 *Models* 폴더에 `SeedData`라는 새 클래스를 만듭니다.
+다음 코드를 사용하여 `SeedData`Models*폴더에*라는 새 클래스를 만듭니다.
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Models/SeedData.cs?name=snippet_1)]
 
@@ -253,7 +253,7 @@ if (context.Movie.Any())
 
 프로덕션 앱은 `Database.Migrate`를 호출하지 않습니다. `Update-Database`가 실행되지 않는 경우 다음 예외를 방지하기 위해 위의 코드에 추가됩니다.
 
-SqlException: 로그인에서 요청한 “RazorPagesMovieContext-21” 데이터베이스를 열 수 없습니다. 로그인에 실패했습니다.
+SqlException: 로그인에서 요청한 "RazorPagesMovieContext-21" 데이터베이스를 열 수 없습니다. 로그인에 실패했습니다.
 'user name' 사용자에 대한 로그인에 실패했습니다.
 
 ### <a name="test-the-app"></a>앱을 테스트합니다.
@@ -278,7 +278,7 @@ DB의 모든 레코드를 삭제합니다(시드 메서드가 실행되도록). 
 
 앱이 시드된 데이터를 보여줍니다.
 
-# <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 DB의 모든 레코드를 삭제합니다(시드 메서드가 실행되도록). 앱을 중지 및 시작하여 데이터베이스를 시드합니다.
 
@@ -297,7 +297,7 @@ DB의 모든 레코드를 삭제합니다(시드 메서드가 실행되도록). 
 * [이 자습서의 YouTube 버전](https://youtu.be/A_5ff11sDHY)
 
 > [!div class="step-by-step"]
-> [이전: 스캐폴드된 Razor Pages](xref:tutorials/razor-pages/page)
+> [이전: 스캐폴드된 Razor 페이지](xref:tutorials/razor-pages/page)
 > [다음: 페이지 업데이트](xref:tutorials/razor-pages/da1)
 
 ::: moniker-end

@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 7/23/2019
 uid: tutorials/razor-pages/new-field
 ms.openlocfilehash: d34b938dbd1b512ddb167cac0c035837889cd38f
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78646605"
 ---
 # <a name="add-a-new-field-to-a-razor-page-in-aspnet-core"></a>ASP.NET Core의 Razor 페이지에 새 필드 추가
@@ -33,7 +33,7 @@ EF Code First를 사용하여 자동으로 데이터베이스를 만들 경우 C
 
 동기화된 스키마/모델의 자동 확인을 통해 일관성이 없는 데이터베이스/코드 문제를 쉽게 찾을 수 있습니다.
 
-## <a name="adding-a-rating-property-to-the-movie-model"></a>영화 모델에 등급 속성 추가
+## <a name="adding-a-rating-property-to-the-movie-model"></a>동영상 모델에 등급 속성 추가
 
 *Models/Movie.cs* 파일을 열고 `Rating` 속성을 추가합니다.
 
@@ -65,7 +65,7 @@ EF Code First를 사용하여 자동으로 데이터베이스를 만들 경우 C
 
 2. 모델 클래스와 일치하도록 기존 데이터베이스의 스키마를 명시적으로 수정합니다. 이 방법의 장점은 데이터가 유지된다는 점입니다. 이러한 변경을 수동으로 수행하거나 데이터베이스 변경 스크립트를 만들어 수행할 수 있습니다.
 
-3. Code First 마이그레이션을 사용하여 데이터베이스 스키마를 업데이트합니다.
+3. Code First 마이그레이션을 사용하여 데이터베이스 스키마를 수정합니다.
 
 이 자습서의 경우 Code First 마이그레이션을 사용합니다.
 
@@ -116,7 +116,7 @@ DB의 모든 레코드를 삭제하는 경우 이니셜라이저에서 DB를 시
   Update-Database
   ```
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
 ### <a name="drop-and-re-create-the-database"></a>데이터베이스를 삭제하고 다시 만들기
 
@@ -160,7 +160,7 @@ EF Code First를 사용하여 자동으로 데이터베이스를 만들 경우 C
 
 동기화된 스키마/모델의 자동 확인을 통해 일관성이 없는 데이터베이스/코드 문제를 쉽게 찾을 수 있습니다.
 
-## <a name="adding-a-rating-property-to-the-movie-model"></a>영화 모델에 등급 속성 추가
+## <a name="adding-a-rating-property-to-the-movie-model"></a>동영상 모델에 등급 속성 추가
 
 *Models/Movie.cs* 파일을 열고 `Rating` 속성을 추가합니다.
 
@@ -178,7 +178,7 @@ EF Code First를 사용하여 자동으로 데이터베이스를 만들 경우 C
 * [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml)을 `Rating` 필드로 업데이트합니다.
 * 편집 페이지에 `Rating` 필드를 추가합니다.
 
-앱은 새 필드를 포함하도록 DB가 업데이트될 때까지 작동하지 않습니다. 지금 실행하면 앱은 `SqlException`을 throw합니다.
+새 필드를 포함하도록 DB가 수정될 때까지 앱은 작동하지 않습니다. 지금 실행하면 앱은 `SqlException`을 throw합니다.
 
 `SqlException: Invalid column name 'Rating'.`
 
@@ -190,7 +190,7 @@ EF Code First를 사용하여 자동으로 데이터베이스를 만들 경우 C
 
 2. 모델 클래스와 일치하도록 기존 데이터베이스의 스키마를 명시적으로 수정합니다. 이 방법의 장점은 데이터가 유지된다는 점입니다. 이러한 변경을 수동으로 수행하거나 데이터베이스 변경 스크립트를 만들어 수행할 수 있습니다.
 
-3. Code First 마이그레이션을 사용하여 데이터베이스 스키마를 업데이트합니다.
+3. Code First 마이그레이션을 사용하여 데이터베이스 스키마를 수정합니다.
 
 이 자습서의 경우 Code First 마이그레이션을 사용합니다.
 
@@ -241,7 +241,7 @@ DB의 모든 레코드를 삭제하는 경우 이니셜라이저에서 DB를 시
   Update-Database
   ```
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Mac용 Visual Studio](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio for Mac](#tab/visual-studio-code+visual-studio-mac)
 
 ### <a name="drop-and-re-create-the-database"></a>데이터베이스를 삭제하고 다시 만들기
 

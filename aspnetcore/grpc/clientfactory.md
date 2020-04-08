@@ -9,10 +9,10 @@ no-loc:
 - SignalR
 uid: grpc/clientfactory
 ms.openlocfilehash: 3042bb61367f8b9a9f3142217ad329270ab2cca5
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78650799"
 ---
 # <a name="grpc-client-factory-integration-in-net-core"></a>.NET Core의 gRPC 클라이언트 팩터리 통합
@@ -27,7 +27,7 @@ ms.locfileid: "78650799"
 
 ## <a name="register-grpc-clients"></a>gRPC 클라이언트 등록
 
-gRPC 클라이언트를 등록하기 위해서 `Startup.ConfigureServices`에서 gRPC 형식 클라이언트 클래스 및 서비스 주소를 지정하여 제네릭 `AddGrpcClient` 확장 메서드를 사용할 수 있습니다.
+gRPC 클라이언트를 등록하기 위해서 `AddGrpcClient`에서 gRPC 형식 클라이언트 클래스 및 서비스 주소를 지정하여 제네릭 `Startup.ConfigureServices` 확장 메서드를 사용할 수 있습니다.
 
 ```csharp
 services.AddGrpcClient<Greeter.GreeterClient>(o =>
@@ -65,7 +65,7 @@ public class AggregatorService : Aggregator.AggregatorBase
 
 ## <a name="configure-httpclient"></a>HttpClient 구성
 
-`HttpClientFactory`는 gRPC 클라이언트에서 사용하는 `HttpClient`를 만듭니다. 표준 `HttpClientFactory` 메서드는 나가는 요청 미들웨어를 추가하거나 `HttpClient`의 기본 `HttpClientHandler`를 구성하는 데 사용할 수 있습니다.
+`HttpClientFactory`는 gRPC 클라이언트에서 사용하는 `HttpClient`를 만듭니다. 표준 `HttpClientFactory` 메서드는 나가는 요청 미들웨어를 추가하거나 `HttpClientHandler`의 기본 `HttpClient`를 구성하는 데 사용할 수 있습니다.
 
 ```csharp
 services

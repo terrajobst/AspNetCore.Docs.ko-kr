@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 12/06/2018
 uid: host-and-deploy/azure-apps/azure-continuous-deployment
 ms.openlocfilehash: 3b344505739bb4292ed1683c73ff314b6e4e01e9
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78648111"
 ---
 # <a name="continuous-deployment-to-azure-with-visual-studio-and-git-with-aspnet-core"></a>ASP.NET Core와 함께 Visual Studio 및 Git을 사용하여 Azure에 지속적인 배포
@@ -21,12 +21,12 @@ ms.locfileid: "78648111"
 
 이 자습서에서는 Visual Studio를 사용하여 ASP.NET Core 웹앱을 만들고 지속적인 배포를 사용하여 Visual Studio에서 Azure App Service에 배포하는 방법을 알아봅니다.
 
-Azure DevOps Services를 사용하여 [Azure App Service](/azure/app-service/app-service-web-overview)에 대한 CD(지속적인 업데이트) 워크플로를 구성하는 방법을 보여 주는 [Azure Pipelines를 사용하여 첫 번째 파이프라인 만들기](/azure/devops/pipelines/get-started-yaml)를 참조하세요. Azure Pipelines는 Azure DevOps Services의 서비스 중 하나로, Azure App Service에서 호스트되는 앱의 업데이트를 게시하는 강력한 배포 파이프라인을 간단하게 설정합니다. 파이프라인을 빌드하고, 테스트를 실행하고, 스테이징 슬롯에 배포하고, 프로덕션에 배포하도록 Azure Portal에서 구성할 수 있습니다.
+Azure DevOps Services를 사용하여 [Azure App Service](/azure/devops/pipelines/get-started-yaml)에 대한 CD(지속적인 업데이트) 워크플로를 구성하는 방법을 보여 주는 [Azure Pipelines를 사용하여 첫 번째 파이프라인 만들기](/azure/app-service/app-service-web-overview)를 참조하세요. Azure Pipelines는 Azure DevOps Services의 서비스 중 하나로, Azure App Service에서 호스트되는 앱의 업데이트를 게시하는 강력한 배포 파이프라인을 간단하게 설정합니다. 파이프라인을 빌드하고, 테스트를 실행하고, 스테이징 슬롯에 배포하고, 프로덕션에 배포하도록 Azure Portal에서 구성할 수 있습니다.
 
 > [!NOTE]
 > 이 자습서를 완료하려면 Microsoft Azure 계정이 필요합니다. 계정을 얻으려면 [MSDN 구독자 혜택을 활성화](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/?WT.mc_id=A261C142F)하거나 [평가판에 등록](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)합니다.
 
-## <a name="prerequisites"></a>사전 요구 사항
+## <a name="prerequisites"></a>필수 구성 요소
 
 이 자습서에서는 다음 소프트웨어가 설치되어 있다고 가정합니다.
 
@@ -40,7 +40,7 @@ Azure DevOps Services를 사용하여 [Azure App Service](/azure/app-service/app
 
 1. **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 선택합니다.
 
-1. **ASP.NET Core 웹 애플리케이션** 프로젝트 템플릿을 선택합니다. **설치됨** > **템플릿** > **Visual C#** > **.NET Core** 아래에 표시됩니다. 프로젝트 이름을 `SampleWebAppDemo`로 지정합니다. **새 Git 리포지토리 만들기** 옵션을 선택하고 **확인**을 클릭합니다.
+1. **ASP.NET Core 웹 애플리케이션** 프로젝트 템플릿을 선택합니다. **설치됨** > **템플릿** > **Visual C#**  >  **.NET Core** 아래에 표시됩니다. 프로젝트 이름을 `SampleWebAppDemo`로 지정합니다. **새 Git 리포지토리 만들기** 옵션을 선택하고 **확인**을 클릭합니다.
 
    ![새 프로젝트 대화 상자](azure-continuous-deployment/_static/01-new-project.png)
 
@@ -71,7 +71,7 @@ Azure DevOps Services를 사용하여 [Azure App Service](/azure/app-service/app
 
 1. **웹 + 모바일** > **웹앱**을 선택합니다.
 
-   ![Microsoft Azure Portal: 새 단추: Marketplace 아래의 웹 + 모바일: 추천 앱 아래의 Web App 단추](azure-continuous-deployment/_static/05-azure-newwebapp.png)
+   ![Microsoft Azure Portal: 새 단추: Marketplace 아래에서 웹 + 모바일: 주요 앱 아래에서 Web App 단추](azure-continuous-deployment/_static/05-azure-newwebapp.png)
 
 1. **Web App** 블레이드에서 **App Service 이름**에 고유한 값을 입력합니다.
 
@@ -98,7 +98,7 @@ Git은 Azure App Service 웹앱을 배포하는 데 사용할 수 있는 분산 
 
 1. **배포** 블레이드에서 **배포 옵션** > **원본 선택** > **로컬 Git 리포지토리**를 선택합니다.
 
-   ![설정 블레이드: 배포 소스 블레이드: 소스 블레이드 선택](azure-continuous-deployment/_static/deployment-options.png)
+   ![설정 블레이드: 배포 원본 블레이드: 원본 블레이드 선택](azure-continuous-deployment/_static/deployment-options.png)
 
 1. **확인**을 선택합니다.
 
@@ -145,7 +145,7 @@ Git은 Azure App Service 웹앱을 배포하는 데 사용할 수 있는 분산 
 
 1. **홈** > **변경 내용**을 선택하여 **변경 내용** 보기로 돌아갑니다.
 
-1. **Initial Push #1**과 같은 커밋 메시지를 입력하고 **커밋**을 선택합니다. 이렇게 하면 로컬에서 ‘커밋’이 생성됩니다.
+1. **Initial Push #1**과 같은 커밋 메시지를 입력하고 **커밋**을 선택합니다. 이렇게 하면 로컬에서 ‘커밋’이 생성됩니다. 
 
    ![팀 탐색기 연결 탭](azure-continuous-deployment/_static/12-initial-commit.png)
 

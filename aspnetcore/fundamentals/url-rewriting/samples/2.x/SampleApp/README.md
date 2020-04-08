@@ -7,31 +7,31 @@
 ## <a name="examples-in-this-sample"></a>이 샘플의 예제
 
 * `AddRedirect("redirect-rule/(.*)", "redirected/$1")`
-  - 성공 상태 코드: 302(있음)
+  - 성공 상태 코드: 302(Found)
   - 예(리디렉션): **/redirect-rule/{capture_group}** 을 **/redirected/{capture_group}** 으로
 * `AddRewrite(@"^rewrite-rule/(\d+)/(\d+)", "rewritten?var1=$1&var2=$2", skipRemainingRules: true)`
-  - 성공 상태 코드: 200(확인)
+  - 성공 상태 코드: 200(OK)
   - 예(다시 작성): **/rewrite-rule/{capture_group_1}/{capture_group_2}** 를 **/rewrtten?var1={capture_group_1}&var2={capture_group_2}** 로
 * `AddApacheModRewrite(env.ContentRootFileProvider, "ApacheModRewrite.txt")`
-  - 성공 상태 코드: 302(있음)
+  - 성공 상태 코드: 302(Found)
   - 예(리디렉션): **/apache-mod-rules-redirect/{capture_group}** 을 **/redirected?id={capture_group}** 으로
 * `AddIISUrlRewrite(env.ContentRootFileProvider, "IISUrlRewrite.xml")`
-  - 성공 상태 코드: 200(확인)
+  - 성공 상태 코드: 200(OK)
   - 예(다시 작성): **/iis-rules-rewrite/{capture_group}** 을 **/rewritten?id={capture_group}** 으로
 * `Add(RedirectXmlFileRequests)`
-  - 성공 상태 코드: 301(영구적으로 이동됨)
+  - 성공 상태 코드: 301(영구적 이동)
   - 예(리디렉션): **/file.xml**을 **/xmlfiles/file.xml**로
 * `Add(RewriteTextFileRequests)`
-  - 성공 상태 코드: 200(확인)
+  - 성공 상태 코드: 200(OK)
   - 예(다시 작성): **/some_file.txt**를 **/file.txt**로
 * `Add(new RedirectImageRequests(".png", "/png-images")))`<br>`Add(new RedirectImageRequests(".jpg", "/jpg-images")))`
-  - 성공 상태 코드: 301(영구적으로 이동됨)
+  - 성공 상태 코드: 301(영구적 이동)
   - 예(리디렉션): **/image.png**를 **/png-images/image.png**로
   - 예(리디렉션): **/image.jpg**를 **/jpg-images/image.jpg**로
 
 ## <a name="use-a-physicalfileprovider"></a>PhysicalFileProvider 사용
 
-또한 `PhysicalFileProvider`를 만들어 `IFileProvider`를 얻은 후 `AddApacheModRewrite()` 및 `AddIISUrlRewrite()` 메서드로 전달할 수 있습니다.
+또한 `IFileProvider`를 만들어 `PhysicalFileProvider`를 얻은 후 `AddApacheModRewrite()` 및 `AddIISUrlRewrite()` 메서드로 전달할 수 있습니다.
 
 ```csharp
 using Microsoft.Extensions.FileProviders;
@@ -40,7 +40,7 @@ PhysicalFileProvider fileProvider = new PhysicalFileProvider(Directory.GetCurren
 
 ## <a name="secure-redirection-extensions"></a>보안 리디렉션 확장
 
-이 샘플은 URL(`https://localhost:5001`, `https://localhost`)을 사용하는 데 필요한 앱에 대한 `WebHostBuilder`구성 및 보안 리디렉션 메서드를 살펴보는 데 도움이 되는 테스트 인증서(*testCert.pfx*)를 포함하고 있습니다. 서버가 이미 포트 443을 할당하거나 사용중인 경우, `https://localhost`예제는 작동하지 않습니다. &mdash;*Program.cs* 파일의 `CreateWebHostBuilder`메서드에서 포트 443용 `ListenOptions`를 제거하거나 서버에서 포트 443을 바인딩 해제하여 Kestrel이 포트를 사용할 수 있도록 합니다.
+이 샘플은 URL(`WebHostBuilder`, `https://localhost:5001`)을 사용하는 데 필요한 앱에 대한 `https://localhost`구성 및 보안 리디렉션 메서드를 살펴보는 데 도움이 되는 테스트 인증서(*testCert.pfx*)를 포함하고 있습니다. 서버가 이미 포트 443을 할당하거나 사용중인 경우, `https://localhost`예제는 작동하지 않습니다. &mdash;`ListenOptions`Program.cs`CreateWebHostBuilder` 파일의 *메서드에서 포트 443용* 를 제거하거나 서버에서 포트 443을 바인딩 해제하여 Kestrel이 포트를 사용할 수 있도록 합니다.
 
 | 메서드                           | 상태 코드 |    포트    |
 | -------------------------------- | :---------: | :--------: |

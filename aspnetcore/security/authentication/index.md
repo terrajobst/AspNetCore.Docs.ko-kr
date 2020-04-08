@@ -7,17 +7,17 @@ ms.custom: mvc
 ms.date: 03/03/2020
 uid: security/authentication/index
 ms.openlocfilehash: 404904ecfa30d1fe7e47f0daaa423ddd6f1b06e8
-ms.sourcegitcommit: 5bdc54162d7dea8d9fa54ac3055678db23586af1
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/17/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "79434332"
 ---
 # <a name="overview-of-aspnet-core-authentication"></a>ASP.NET Core 인증 개요
 
 [Mike Rousos](https://github.com/mjrousos) 작성
 
-인증은 사용자 ID를 확인하는 프로세스입니다. [권한 부여](xref:security/authorization/introduction)는 사용자에게 리소스에 대한 액세스 권한이 있는지를 확인하는 프로세스입니다. ASP.NET Core에서는 인증이 인증 [미들웨어](xref:fundamentals/middleware/index)에서 사용되는 `IAuthenticationService`을(를) 사용하여 처리됩니다. 인증 서비스는 등록된 인증 처리기를 사용하여 인증 관련 작업을 완료합니다. 인증 관련 작업의 예는 다음과 같습니다.
+인증은 사용자 ID를 확인하는 프로세스입니다. [권한 부여](xref:security/authorization/introduction)는 사용자에게 리소스에 대한 액세스 권한이 있는지를 확인하는 프로세스입니다. ASP.NET Core에서는 인증이 인증 `IAuthenticationService`미들웨어[에서 사용되는 ](xref:fundamentals/middleware/index)을(를) 사용하여 처리됩니다. 인증 서비스는 등록된 인증 처리기를 사용하여 인증 관련 작업을 완료합니다. 인증 관련 작업의 예는 다음과 같습니다.
 
 * 사용자 인증.
 * 인증되지 않은 사용자가 제한된 리소스에 액세스하려고 할 때 응답합니다.
@@ -39,11 +39,11 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 `AddAuthentication` 매개 변수 `JwtBearerDefaults.AuthenticationScheme`는 특정 체계가 요청되지 않은 경우 기본적으로 사용할 체계의 이름입니다.
 
-여러 스키마를 사용하는 경우, 권한 부여 정책(또는 권한 부여 특성)은 사용자를 인증하기 위해 사용해야 하는 [인증 체계(또는 체계)를 지정](xref:security/authorization/limitingidentitybyscheme)할 수 있습니다. 위의 예제에서, 쿠키 인증 체계는 이름을 지정하여 사용할 수 있습니다(`AddCookie`를 호출할 때 다른 이름을 제공할 수 있지만 기본적으로 `CookieAuthenticationDefaults.AuthenticationScheme`).
+여러 스키마를 사용하는 경우, 권한 부여 정책(또는 권한 부여 특성)은 사용자를 인증하기 위해 사용해야 하는 [인증 체계(또는 체계)를 지정](xref:security/authorization/limitingidentitybyscheme)할 수 있습니다. 위의 예제에서, 쿠키 인증 체계는 이름을 지정하여 사용할 수 있습니다(`CookieAuthenticationDefaults.AuthenticationScheme`를 호출할 때 다른 이름을 제공할 수 있지만 기본적으로 `AddCookie`).
 
 경우에 따라, `AddAuthentication`에 대한 호출은 다른 확장 메서드에서 자동으로 수행됩니다. 예를 들어, [ASP.NET Core Identity](xref:security/authentication/identity)를 사용하는 경우 `AddAuthentication`이(가) 내부적으로 호출됩니다.
 
-인증 미들웨어는 앱의 `IApplicationBuilder`에서 <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> 확장 메서드를 호출하여 `Startup.Configure`에 추가됩니다. `UseAuthentication`을(를) 호출하면 이전에 등록된 인증 체계를 사용하는 미들웨어가 등록됩니다. 인증되는 사용자에 따라 달라지는 미들웨어 이전에 `UseAuthentication`을(를) 호출합니다. 엔드포인트 라우팅을 사용하는 경우 `UseAuthentication`에 대한 호출이 다음과 같이 이동해야 합니다.
+인증 미들웨어는 앱의 `Startup.Configure`에서 <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> 확장 메서드를 호출하여 `IApplicationBuilder`에 추가됩니다. `UseAuthentication`을(를) 호출하면 이전에 등록된 인증 체계를 사용하는 미들웨어가 등록됩니다. 인증되는 사용자에 따라 달라지는 미들웨어 이전에 `UseAuthentication`을(를) 호출합니다. 엔드포인트 라우팅을 사용하는 경우 `UseAuthentication`에 대한 호출이 다음과 같이 이동해야 합니다.
 
 * `UseRouting` 후에 이동하여 인증 결정에 경로 정보를 사용할 수 있습니다.
 * `UseEndpoints` 전에 이동하여 사용자가 엔드포인트에 액세스하기 전에 인증됩니다.

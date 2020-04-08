@@ -6,4 +6,4 @@ JS interop 코드는 클래스 라이브러리에 포함할 수 있습니다. �
 
 기본 제공되는 NuGet 패키지는 앱의 프로젝트 파일에서 다른 NuGet 패키지가 참조되는 것과 같은 방식으로 참조됩니다. 패키지가 복원된 후에는 앱 코드가 C#을 호출하는 것처럼 JavaScript를 호출할 수 있습니다.
 
-자세한 내용은 <xref:blazor/class-libraries>를 참조하세요.
+자세한 내용은 <xref:blazor/class-libraries>을 참조하세요.

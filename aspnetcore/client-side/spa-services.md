@@ -8,10 +8,10 @@ ms.custom: H1Hack27Feb2017
 ms.date: 09/06/2019
 uid: client-side/spa-services
 ms.openlocfilehash: c0c73882afd579510ad9cdf5b485c1d6fbeadd1c
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78649221"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>JavaScript Services를 사용하여 ASP.NET Core에서 단일 페이지 애플리케이션 만들기
@@ -107,7 +107,7 @@ npm i -S aspnet-prerendering
 
 [!code-javascript[](../client-side/spa-services/sample/SpaServicesSampleApp/webpack.config.js?range=53)]
 
-다음 Angular 예제에서 *ClientApp/boot-server.ts* 파일은 `createServerRenderer` 함수 및 `aspnet-prerendering` npm 패키지의 `RenderResult` 형식을 활용하여 Node.js를 통해 서버 렌더링을 구성합니다. 서버 쪽 렌더링을 대상으로 하는 HTML 태그는 강력한 형식의 JavaScript `Promise` 개체로 래핑된 resolve 함수 호출에 전달됩니다. `Promise` 개체의 중요성은 DOM의 자리 표시자 요소에 주입하기 위해 페이지에 HTML 태그를 비동기적으로 제공한다는 것입니다.
+다음 Angular 예제에서 *ClientApp/boot-server.ts* 파일은 `createServerRenderer` 함수 및 `RenderResult` npm 패키지의 `aspnet-prerendering` 형식을 활용하여 Node.js를 통해 서버 렌더링을 구성합니다. 서버 쪽 렌더링을 대상으로 하는 HTML 태그는 강력한 형식의 JavaScript `Promise` 개체로 래핑된 resolve 함수 호출에 전달됩니다. `Promise` 개체의 중요성은 DOM의 자리 표시자 요소에 주입하기 위해 페이지에 HTML 태그를 비동기적으로 제공한다는 것입니다.
 
 [!code-typescript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/boot-server.ts?range=6,10-34,79-)]
 
@@ -123,11 +123,11 @@ npm i -S aspnet-prerendering
 
 태그 도우미에 전달된 속성 이름은 **PascalCase** 표기법으로 표시됩니다. 동일한 속성 이름이 **camelCase**로 표시되는 JavaScript와는 다릅니다. 기본 JSON serialization 구성은 이러한 차이를 담당합니다.
 
-위의 코드 예제를 확장하기 위해 `resolve` 함수에 제공 된 `globals` 속성을 하이드레이션하여 서버에서 뷰로 데이터를 전달할 수 있습니다.
+위의 코드 예제를 확장하기 위해 `globals` 함수에 제공 된 `resolve` 속성을 하이드레이션하여 서버에서 뷰로 데이터를 전달할 수 있습니다.
 
 [!code-typescript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/boot-server.ts?range=6,10-21,57-77,79-)]
 
-`globals` 개체 내에 정의된 `postList` 배열은 브라우저의 전역 `window` 개체에 연결됩니다. 이와 같이 변수를 전역 범위로 올리면 불필요한 작업이 줄어듭니다. 특히 서버에서 동일한 데이터를 한 번 로드하고 클라이언트에서 다시 로드하는 것과 관련이 있는 경우에 이러한 효과가 더욱 두드러집니다.
+`postList` 개체 내에 정의된 `globals` 배열은 브라우저의 전역 `window` 개체에 연결됩니다. 이와 같이 변수를 전역 범위로 올리면 불필요한 작업이 줄어듭니다. 특히 서버에서 동일한 데이터를 한 번 로드하고 클라이언트에서 다시 로드하는 것과 관련이 있는 경우에 이러한 효과가 더욱 두드러집니다.
 
 ![window 개체에 연결된 전역 postList 변수](spa-services/_static/global_variable.png)
 
@@ -153,7 +153,7 @@ Webpack 개발 미들웨어는 *Startup.cs* 파일의 `Configure` 메서드에�
 
 [!code-csharp[](../client-side/spa-services/sample/SpaServicesSampleApp/Startup.cs?name=snippet_WebpackMiddlewareRegistration&highlight=4)]
 
-`UseStaticFiles` 확장 메서드를 통해 [정적 파일 호스팅을 등록](xref:fundamentals/static-files)하기 전에 `UseWebpackDevMiddleware` 확장 메서드를 호출해야 합니다. 보안상의 이유로 앱이 개발 모드에서 실행되는 경우에만 미들웨어를 등록합니다.
+`UseWebpackDevMiddleware` 확장 메서드를 통해 [정적 파일 호스팅을 등록](xref:fundamentals/static-files)하기 전에 `UseStaticFiles` 확장 메서드를 호출해야 합니다. 보안상의 이유로 앱이 개발 모드에서 실행되는 경우에만 미들웨어를 등록합니다.
 
 *webpack.config.js* 파일의 `output.publicPath` 속성은 미들웨어에 `dist` 폴더의 변경 내용을 감시하도록 지시합니다.
 
@@ -231,7 +231,7 @@ dotnet new --install Microsoft.AspNetCore.SpaTemplates::*
 | MVC ASP.NET Core(React.js 사용)            | react      | [C#]     | Web/MVC/SPA |
 | MVC ASP.NET Core(React.js 및 Redux 사용)  | reactredux | [C#]     | Web/MVC/SPA |
 
-SPA 템플릿 중 하나를 사용하여 새 프로젝트를 만들려면 [dotnet new](/dotnet/core/tools/dotnet-new) 명령에 템플릿의 **짧은 이름**을 포함합니다. 다음 명령은 서버 쪽에 대해 구성된 ASP.NET Core MVC를 사용하여 Angular 애플리케이션을 만듭니다.
+SPA 템플릿 중 하나를 사용하여 새 프로젝트를 만들려면 **dotnet new** 명령에 템플릿의 [짧은 이름](/dotnet/core/tools/dotnet-new)을 포함합니다. 다음 명령은 서버 쪽에 대해 구성된 ASP.NET Core MVC를 사용하여 Angular 애플리케이션을 만듭니다.
 
 ```dotnetcli
 dotnet new angular
@@ -268,13 +268,13 @@ dotnet run
 
 ### <a name="run-with-visual-studio-2017"></a>Visual Studio 2017로 열기
 
-[dotnet new](/dotnet/core/tools/dotnet-new) 명령으로 생성된 *.csproj* 파일을 엽니다. 필요한 NuGet 및 npm 패키지는 프로젝트를 열 때 자동으로 복원됩니다. 이 복원 프로세스는 몇 분 정도 걸릴 수 있으며 완료되면 애플리케이션을 실행할 준비가 된 것입니다. 녹색 실행 단추를 클릭하거나 `Ctrl + F5`를 누르면 브라우저가 열리고 애플리케이션의 방문 페이지가 열립니다. 애플리케이션은 [런타임 구성 모드](#set-the-runtime-configuration-mode)에 따라 localhost에서 실행됩니다.
+*dotnet new* 명령으로 생성된 [.csproj](/dotnet/core/tools/dotnet-new) 파일을 엽니다. 필요한 NuGet 및 npm 패키지는 프로젝트를 열 때 자동으로 복원됩니다. 이 복원 프로세스는 몇 분 정도 걸릴 수 있으며 완료되면 애플리케이션을 실행할 준비가 된 것입니다. 녹색 실행 단추를 클릭하거나 `Ctrl + F5`를 누르면 브라우저가 열리고 애플리케이션의 방문 페이지가 열립니다. 애플리케이션은 [런타임 구성 모드](#set-the-runtime-configuration-mode)에 따라 localhost에서 실행됩니다.
 
 ## <a name="test-the-app"></a>앱을 테스트합니다.
 
 SpaServices 템플릿은 [Karma](https://karma-runner.github.io/1.0/index.html) 및 [Jasmine](https://jasmine.github.io/)을 사용하여 클라이언트 쪽 테스트를 실행하도록 미리 구성되어 있습니다. Jasmine는 인기 있는 JavaScript용 단위 테스트 프레임워크이지만 Karma는 해당 테스트용 Test Runner입니다. Karma는 [Webpack 개발 미들웨어](#webpack-dev-middleware)와 함께 작동하도록 구성되므로 개발자는 변경이 수행될 때마다 테스트를 중지했다가 다시 실행할 필요가 없습니다. 코드가 테스트 사례 또는 테스트 사례 자체에 대해 실행되는지에 관계없이 테스트는 자동으로 실행됩니다.
 
-한 예로 Angular 애플리케이션을 사용할 경우 *counter.component.spec.ts* 파일의 `CounterComponent`에 대해 두 개의 테스트 사례가 이미 제공되어 있습니다.
+한 예로 Angular 애플리케이션을 사용할 경우 `CounterComponent`counter.component.spec.ts*파일의*에 대해 두 개의 테스트 사례가 이미 제공되어 있습니다.
 
 [!code-typescript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/app/components/counter/counter.component.spec.ts?range=15-28)]
 

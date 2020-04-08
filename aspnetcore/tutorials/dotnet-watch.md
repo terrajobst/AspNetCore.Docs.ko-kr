@@ -6,10 +6,10 @@ ms.author: riande
 ms.date: 05/31/2018
 uid: tutorials/dotnet-watch
 ms.openlocfilehash: bedb3e6a65839db915ca7bc821a267a14d34bf30
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78650961"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>파일 감시자를 사용하여 ASP.NET Core 앱 개발
@@ -20,7 +20,7 @@ ms.locfileid: "78650961"
 
 이 자습서에서는 합계를 반환하는 엔드포인트 및 제품을 반환하는 엔드포인트 등 두 개의 엔드포인트에서 기존 Web API를 사용합니다. 제품 메서드에는 버그가 있습니다. 이 문제가 이 자습서에서 해결되었습니다.
 
-[샘플 앱](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/dotnet-watch/sample)을 다운로드합니다. 다음 두 프로젝트로 구성되어 있습니다. *WebApp*(ASP.NET Core 웹 API) 및 *WebAppTests*(웹 API의 단위 테스트).
+[샘플 앱](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/dotnet-watch/sample)을 다운로드합니다. *WebApp*(ASP.NET Core Web API) 및 *WebAppTests*(Web API의 단위 테스트)라는 두 개의 프로젝트로 구성됩니다.
 
 명령 셸에서 *WebApp* 폴더로 이동합니다. 다음 명령을 실행합니다.
 
@@ -43,7 +43,7 @@ Application started. Press Ctrl+C to shut down.
 
 웹 브라우저에서 `http://localhost:<port number>/api/math/sum?a=4&b=5`로 이동합니다. `9`라는 결과가 표시됩니다.
 
-API 제품으로 이동합니다(`http://localhost:<port number>/api/math/product?a=4&b=5`). 예상한 대로 `20`이 아니라 `9`를 반환합니다. 이러한 문제는이 자습서의 뒷부분에서 해결되었습니다.
+API 제품으로 이동합니다(`http://localhost:<port number>/api/math/product?a=4&b=5`). 예상한 대로 `9`이 아니라 `20`를 반환합니다. 이러한 문제는이 자습서의 뒷부분에서 해결되었습니다.
 
 ::: moniker range="<= aspnetcore-2.0"
 
@@ -69,7 +69,7 @@ API 제품으로 이동합니다(`http://localhost:<port number>/api/math/produc
 
 ## <a name="run-net-core-cli-commands-using-dotnet-watch"></a>`dotnet watch`를 사용하여 .NET Core CLI 명령 실행
 
-모든 [.NET Core CLI 명령](/dotnet/core/tools#cli-commands)을 `dotnet watch`로 실행할 수 있습니다. 예를 들어:
+모든 [.NET Core CLI 명령](/dotnet/core/tools#cli-commands)을 `dotnet watch`로 실행할 수 있습니다. 예들 들어 다음과 같습니다.
 
 | 명령 | watch를 사용하는 명령 |
 | ---- | ----- |
@@ -78,7 +78,7 @@ API 제품으로 이동합니다(`http://localhost:<port number>/api/math/produc
 | dotnet run -f netcoreapp2.0 -- --arg1 | dotnet watch run -f netcoreapp2.0 -- --arg1 |
 | dotnet test | dotnet watch 테스트 |
 
-*WebApp* 폴더에서 `dotnet watch run`을 실행합니다. 콘솔 출력은 `watch`가 시작했음을 나타냅니다.
+`dotnet watch run`WebApp*폴더에서*을 실행합니다. 콘솔 출력은 `watch`가 시작했음을 나타냅니다.
 
 > [!NOTE]
 > `dotnet watch --project <PROJECT>`를 사용하여 감시할 프로젝트를 지정할 수 있습니다. 예를 들어 샘플 앱의 루트에서 `dotnet watch --project WebApp run`을 실행하면 *WebApp* 프로젝트도 실행 및 감시됩니다.
@@ -87,7 +87,7 @@ API 제품으로 이동합니다(`http://localhost:<port number>/api/math/produc
 
 `dotnet watch`가 실행되고 있는지 확인합니다.
 
-합계가 아닌 제품을 반환하도록 *MathController.cs*의 `Product` 메서드에서 버그를 수정합니다.
+합계가 아닌 제품을 반환하도록 `Product`MathController.cs*의*  메서드에서 버그를 수정합니다.
 
 ```csharp
 public static int Product(int a, int b)
@@ -102,7 +102,7 @@ public static int Product(int a, int b)
 
 ## <a name="run-tests-using-dotnet-watch"></a>`dotnet watch`를 사용하여 테스트 실행
 
-1. *MathController.cs*의 `Product` 메서드가 합계를 반환하도록 변경합니다. 파일을 저장합니다.
+1. `Product`MathController.cs*의*  메서드가 합계를 반환하도록 변경합니다. 파일을 저장합니다.
 1. 명령 셸에서 *WebAppTests* 폴더로 이동합니다.
 1. [dotnet restore](/dotnet/core/tools/dotnet-restore)를 실행합니다.
 1. `dotnet watch test`를 실행합니다. 이 출력은 테스트에 실패했으며 감시자가 파일 변경을 대기 중임을 나타냅니다.
@@ -135,7 +135,7 @@ public static int Product(int a, int b)
 
 ## <a name="opt-out-of-files-to-be-watched"></a>감시할 파일 옵트아웃
 
-기본 설정을 무시하도록 `dotnet-watch`를 구성할 수 있습니다. 특정 파일을 무시하려면 *.csproj* 파일에서 `Watch="false"` 특성을 항목의 정의로 추가합니다.
+기본 설정을 무시하도록 `dotnet-watch`를 구성할 수 있습니다. 특정 파일을 무시하려면 `Watch="false"`.csproj*파일에서* 특성을 항목의 정의로 추가합니다.
 
 ```xml
 <ItemGroup>

@@ -11,10 +11,10 @@ no-loc:
 - SignalR
 uid: blazor/layouts
 ms.openlocfilehash: 5b6e1c7ceb4a6e41230e31bbe379bde1bb0a8286
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78647925"
 ---
 # <a name="aspnet-core-opno-locblazor-layouts"></a>ASP.NET Core Blazor 레이아웃
@@ -27,7 +27,7 @@ ms.locfileid: "78647925"
 
 ‘구성 요소’를 ‘레이아웃’으로 전환하기 위해 구성 요소는 다음을 수행합니다.  
 
-* 레이아웃 내부에 렌더링된 콘텐츠의 `Body` 속성을 정의하는 `LayoutComponentBase`에서 상속합니다.
+* 레이아웃 내부에 렌더링된 콘텐츠의 `LayoutComponentBase` 속성을 정의하는 `Body`에서 상속합니다.
 * Razor 구문 `@Body`를 사용하여 콘텐츠가 렌더링되는 위치를 레이아웃 태그에 지정합니다.
 
 다음 코드 샘플은 레이아웃 구성 요소인 *MainLayout.razor*의 Razor 템플릿을 보여 줍니다. 레이아웃은 `LayoutComponentBase`를 상속하고 탐색 모음과 바닥글 사이에 `@Body`를 설정합니다.
@@ -38,11 +38,11 @@ Blazor 앱 템플릿 중 하나를 기반으로 하는 앱에서 `MainLayout` �
 
 ## <a name="default-layout"></a>기본 레이아웃
 
-앱의 *App.razor* 파일에 있는 `Router` 구성 요소에서 기본 앱 레이아웃을 지정합니다. 기본 Blazor 템플릿에서 제공하는 다음 `Router` 구성 요소는 `MainLayout` 구성 요소에 기본 레이아웃을 설정합니다.
+앱의 `Router`App.razor*파일에 있는* 구성 요소에서 기본 앱 레이아웃을 지정합니다. 기본 `Router` 템플릿에서 제공하는 다음 Blazor 구성 요소는 `MainLayout` 구성 요소에 기본 레이아웃을 설정합니다.
 
 [!code-razor[](layouts/sample_snapshot/3.x/App1.razor?highlight=3)]
 
-`NotFound` 콘텐츠의 기본 레이아웃을 제공하려면 `NotFound` 콘텐츠에 대해 `LayoutView`를 지정합니다.
+`NotFound` 콘텐츠의 기본 레이아웃을 제공하려면 `LayoutView` 콘텐츠에 대해 `NotFound`를 지정합니다.
 
 [!code-razor[](layouts/sample_snapshot/3.x/App2.razor?highlight=6-9)]
 
@@ -62,7 +62,7 @@ Razor 지시문 `@layout`을 사용하여 구성 요소에 레이아웃을 적�
 
 ## <a name="centralized-layout-selection"></a>중앙에서 레이아웃 선택
 
-앱의 모든 폴더에 이름이 *_Imports.razor*인 템플릿 파일을 선택적으로 포함할 수 있습니다. 컴파일러는 imports 파일에 지정된 지시문을 동일한 폴더와 모든 하위 폴더의 모든 Razor 템플릿에 포함합니다. 따라서 *_Imports.razor* 파일에 `@layout MyCoolLayout`을 포함하면 폴더의 모든 구성 요소가 `MyCoolLayout`을 사용하게 됩니다. 폴더와 하위 폴더에 있는 모든 *.razor* 파일에 `@layout MyCoolLayout`을 반복적으로 추가할 필요가 없습니다. `@using` 지시문은 구성 요소에도 동일한 방식으로 적용됩니다.
+앱의 모든 폴더에 이름이 *_Imports.razor*인 템플릿 파일을 선택적으로 포함할 수 있습니다. 컴파일러는 imports 파일에 지정된 지시문을 동일한 폴더와 모든 하위 폴더의 모든 Razor 템플릿에 포함합니다. 따라서 *_Imports.razor* 파일에 `@layout MyCoolLayout`을 포함하면 폴더의 모든 구성 요소가 `MyCoolLayout`을 사용하게 됩니다. 폴더와 하위 폴더에 있는 모든 `@layout MyCoolLayout`.razor*파일에*을 반복적으로 추가할 필요가 없습니다. `@using` 지시문은 구성 요소에도 동일한 방식으로 적용됩니다.
 
 다음 *_Imports.razor* 파일은 아래 항목을 가져옵니다.
 
@@ -88,13 +88,13 @@ Razor 지시문 `@layout`을 사용하여 구성 요소에 레이아웃을 적�
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterListLayout.razor?highlight=1,9)]
 
-최종적으로, *MasterLayout.razor*의 `MasterLayout`에는 헤더, 주 메뉴, 바닥글 등의 최상위 레이아웃 요소가 포함됩니다. `EpisodesComponent`를 포함하는 `MasterListLayout`은 `@Body`가 표시되는 위치에 렌더링됩니다.
+최종적으로, `MasterLayout`MasterLayout.razor*의* 에는 헤더, 주 메뉴, 바닥글 등의 최상위 레이아웃 요소가 포함됩니다. `MasterListLayout`를 포함하는 `EpisodesComponent`은 `@Body`가 표시되는 위치에 렌더링됩니다.
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterLayout.razor?highlight=6)]
 
 ## <a name="share-a-razor-pages-layout-with-integrated-components"></a>통합 구성 요소와 Razor Pages 레이아웃 공유
 
-라우팅 가능한 구성 요소가 Razor Pages 앱에 통합된 경우 구성 요소와 함께 앱의 공유 레이아웃을 사용할 수 있습니다. 자세한 내용은 <xref:blazor/integrate-components>를 참조하세요.
+라우팅 가능한 구성 요소가 Razor Pages 앱에 통합된 경우 구성 요소와 함께 앱의 공유 레이아웃을 사용할 수 있습니다. 자세한 내용은 <xref:blazor/integrate-components>을 참조하세요.
 
 ## <a name="additional-resources"></a>추가 자료
 

@@ -7,10 +7,10 @@ ms.author: riande
 ms.date: 10/07/2019
 uid: fundamentals/change-tokens
 ms.openlocfilehash: 70451e219f1295b854e2f84aac55f0cfd1786b19
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78645399"
 ---
 # <a name="detect-changes-with-change-tokens-in-aspnet-core"></a>ASP.NET Core에서 변경 토큰을 사용하여 변경 내용 검색
@@ -41,7 +41,7 @@ ms.locfileid: "78645399"
 * `Func<IChangeToken>`은 출력을 생성합니다.
 * 토큰이 변경될 때 `Action`이 호출됩니다.
 
-[ChangeToken.OnChange\<TState>(Func\<IChangeToken>, Action\<TState>, TState)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) 오버로드는 토큰 소비자 `Action`에게 전달된 추가 `TState` 매개 변수를 사용합니다.
+[ChangeToken.OnChange\<TState>(Func\<IChangeToken>, Action\<TState>, TState)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) 오버로드는 토큰 소비자 `TState`에게 전달된 추가 `Action` 매개 변수를 사용합니다.
 
 `OnChange`는 <xref:System.IDisposable>을 반환합니다. <xref:System.IDisposable.Dispose*>를 호출하면 토큰이 더 이상 변경 내용을 수신 대기하지 않고 토큰의 리소스가 해제됩니다.
 
@@ -51,13 +51,13 @@ ms.locfileid: "78645399"
 
 * 파일에 대한 변경을 모니터링하기 위해 <xref:Microsoft.Extensions.FileProviders.IFileProvider>의 <xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*> 메서드는 지정된 파일 또는 조사할 폴더에 대해 `IChangeToken`을 만듭니다.
 * `IChangeToken` 토큰을 캐시 항목에 추가하여 변경 시 캐시 제거를 트리거할 수 있습니다.
-* `TOptions` 변경의 경우, <xref:Microsoft.Extensions.Options.IOptionsMonitor`1>의 기본 <xref:Microsoft.Extensions.Options.OptionsMonitor`1> 구현은 둘 이상의 <xref:Microsoft.Extensions.Options.IOptionsChangeTokenSource`1> 인스턴스를 받아들이는 오버로드를 포함합니다. 각 인스턴스는 옵션 변경을 추적하기 위해 변경 알림 콜백을 등록하도록 `IChangeToken`을 반환합니다.
+* `TOptions` 변경의 경우, <xref:Microsoft.Extensions.Options.OptionsMonitor`1>의 기본 <xref:Microsoft.Extensions.Options.IOptionsMonitor`1> 구현은 둘 이상의 <xref:Microsoft.Extensions.Options.IOptionsChangeTokenSource`1> 인스턴스를 받아들이는 오버로드를 포함합니다. 각 인스턴스는 옵션 변경을 추적하기 위해 변경 알림 콜백을 등록하도록 `IChangeToken`을 반환합니다.
 
 ## <a name="monitor-for-configuration-changes"></a>구성 변경 모니터링
 
 기본적으로 ASP.NET Core 템플릿은 [JSON 구성 파일](xref:fundamentals/configuration/index#json-configuration-provider)(*appsettings.json*, *appsettings.Development.json*, and *appsettings.Production.json*)을 사용하여 앱 구성 설정을 로드합니다.
 
-이 파일은 `reloadOnChange` 매개 변수를 받아들이는 <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>에 대해 [AddJsonFile(IConfigurationBuilder, String, Boolean, Boolean)](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*) 확장 메서드를 사용하여 구성합니다. `reloadOnChange`는 파일 변경 시 구성을 다시 로드해야 하는지를 나타냅니다. 이 설정은 <xref:Microsoft.Extensions.Hosting.Host> 편의 메서드 <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*>에 표시됩니다.
+이 파일은 [ 매개 변수를 받아들이는 ](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*)에 대해 <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>AddJsonFile(IConfigurationBuilder, String, Boolean, Boolean)`reloadOnChange` 확장 메서드를 사용하여 구성합니다. `reloadOnChange`는 파일 변경 시 구성을 다시 로드해야 하는지를 나타냅니다. 이 설정은 <xref:Microsoft.Extensions.Hosting.Host> 편의 메서드 <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*>에 표시됩니다.
 
 ```csharp
 config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -67,7 +67,7 @@ config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
 
 파일 기반 구성은 <xref:Microsoft.Extensions.Configuration.FileConfigurationSource>로 표현됩니다. `FileConfigurationSource`는 <xref:Microsoft.Extensions.FileProviders.IFileProvider>를 사용하여 파일을 모니터링합니다.
 
-기본적으로 `IFileMonitor`는 <xref:System.IO.FileSystemWatcher>를 사용하여 구성 파일 변경을 모니터링하는 <xref:Microsoft.Extensions.FileProviders.PhysicalFileProvider>에서 제공합니다.
+기본적으로 `IFileMonitor`는 <xref:Microsoft.Extensions.FileProviders.PhysicalFileProvider>를 사용하여 구성 파일 변경을 모니터링하는 <xref:System.IO.FileSystemWatcher>에서 제공합니다.
 
 샘플 앱을 통해 구성 변경 모니터링을 위한 두 가지 구현을 설명합니다. *appsettings* 파일 중 하나라도 변경되어 두 파일 모니터링 구현 모두 사용자 지정 코드를 실행하면 &mdash;샘플 앱은 콘솔에 메시지를 작성합니다.
 
@@ -89,7 +89,7 @@ config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Startup.cs?name=snippet3)]
 
-콜백의 `state`는 모니터링할 정확한 *appsettings*의 구성 파일을 지정하는 데 유용한 `IWebHostEnvironment`를 전달하는 데 사용됩니다(예를 들어 개발 환경에서는 *appsettings.Development.json*). 파일 해시는 구성 파일이 한 번만 변경된 경우 여러 토큰 콜백으로 인해 `WriteConsole` 문이 여러 번 실행되지 않도록 하는 데 사용됩니다.
+콜백의 `state`는 모니터링할 정확한 `IWebHostEnvironment`appsettings*의 구성 파일을 지정하는 데 유용한* 를 전달하는 데 사용됩니다(예를 들어 개발 환경에서는 *appsettings.Development.json*). 파일 해시는 구성 파일이 한 번만 변경된 경우 여러 토큰 콜백으로 인해 `WriteConsole` 문이 여러 번 실행되지 않도록 하는 데 사용됩니다.
 
 이 시스템은 앱이 실행 중일 때 실행되며 사용자가 사용 중지할 수 없습니다.
 
@@ -119,7 +119,7 @@ config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
 `InvokeChanged` 메서드는 다음을 제외하고 이전 방법과 유사합니다.
 
 * `MonitoringEnabled`가 `true`가 아닌 경우 해당 코드를 실행하지 않습니다.
-* `WriteConsole` 출력의 현재 `state`를 출력합니다.
+* `state` 출력의 현재 `WriteConsole`를 출력합니다.
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Extensions/ConfigurationMonitor.cs?name=snippet3)]
 
@@ -170,7 +170,7 @@ UI의 단추로 모니터링을 사용 설정 및 해제합니다.
 1. [IFileProviders.Watch](xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*)를 통해 파일 공급자로부터 변경 토큰을 가져옵니다. 파일이 수정될 때 토큰의 콜백이 트리거됩니다.
 1. [상대(sliding) 만료](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.SlidingExpiration) 기간과 함께 파일 콘텐츠가 캐시됩니다. 변경 토큰은 [MemoryCacheEntryExtensions.AddExpirationToken](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken*)과 연결되어 파일이 캐시되는 동안 변경되면 캐시 항목을 제거합니다.
 
-다음 예제에서 파일은 앱의 [콘텐츠 루트](xref:fundamentals/index#content-root)에 저장됩니다. `IWebHostEnvironment.ContentRootFileProvider`는 앱의 `IWebHostEnvironment.ContentRootPath`를 가리키는 <xref:Microsoft.Extensions.FileProviders.IFileProvider>를 가져오는 데 사용됩니다. `filePath`는 [IFileInfo.PhysicalPath](xref:Microsoft.Extensions.FileProviders.IFileInfo.PhysicalPath)를 사용하여 가져옵니다.
+다음 예제에서 파일은 앱의 [콘텐츠 루트](xref:fundamentals/index#content-root)에 저장됩니다. `IWebHostEnvironment.ContentRootFileProvider`는 앱의 <xref:Microsoft.Extensions.FileProviders.IFileProvider>를 가리키는 `IWebHostEnvironment.ContentRootPath`를 가져오는 데 사용됩니다. `filePath`는 [IFileInfo.PhysicalPath](xref:Microsoft.Extensions.FileProviders.IFileInfo.PhysicalPath)를 사용하여 가져옵니다.
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Services/FileService.cs?name=snippet1)]
 
@@ -239,7 +239,7 @@ var compositeChangeToken =
 * `Func<IChangeToken>`은 출력을 생성합니다.
 * 토큰이 변경될 때 `Action`이 호출됩니다.
 
-[ChangeToken.OnChange\<TState>(Func\<IChangeToken>, Action\<TState>, TState)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) 오버로드는 토큰 소비자 `Action`에게 전달된 추가 `TState` 매개 변수를 사용합니다.
+[ChangeToken.OnChange\<TState>(Func\<IChangeToken>, Action\<TState>, TState)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) 오버로드는 토큰 소비자 `TState`에게 전달된 추가 `Action` 매개 변수를 사용합니다.
 
 `OnChange`는 <xref:System.IDisposable>을 반환합니다. <xref:System.IDisposable.Dispose*>를 호출하면 토큰이 더 이상 변경 내용을 수신 대기하지 않고 토큰의 리소스가 해제됩니다.
 
@@ -249,13 +249,13 @@ var compositeChangeToken =
 
 * 파일에 대한 변경을 모니터링하기 위해 <xref:Microsoft.Extensions.FileProviders.IFileProvider>의 <xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*> 메서드는 지정된 파일 또는 조사할 폴더에 대해 `IChangeToken`을 만듭니다.
 * `IChangeToken` 토큰을 캐시 항목에 추가하여 변경 시 캐시 제거를 트리거할 수 있습니다.
-* `TOptions` 변경의 경우, <xref:Microsoft.Extensions.Options.IOptionsMonitor`1>의 기본 <xref:Microsoft.Extensions.Options.OptionsMonitor`1> 구현은 둘 이상의 <xref:Microsoft.Extensions.Options.IOptionsChangeTokenSource`1> 인스턴스를 받아들이는 오버로드를 포함합니다. 각 인스턴스는 옵션 변경을 추적하기 위해 변경 알림 콜백을 등록하도록 `IChangeToken`을 반환합니다.
+* `TOptions` 변경의 경우, <xref:Microsoft.Extensions.Options.OptionsMonitor`1>의 기본 <xref:Microsoft.Extensions.Options.IOptionsMonitor`1> 구현은 둘 이상의 <xref:Microsoft.Extensions.Options.IOptionsChangeTokenSource`1> 인스턴스를 받아들이는 오버로드를 포함합니다. 각 인스턴스는 옵션 변경을 추적하기 위해 변경 알림 콜백을 등록하도록 `IChangeToken`을 반환합니다.
 
 ## <a name="monitor-for-configuration-changes"></a>구성 변경 모니터링
 
 기본적으로 ASP.NET Core 템플릿은 [JSON 구성 파일](xref:fundamentals/configuration/index#json-configuration-provider)(*appsettings.json*, *appsettings.Development.json*, and *appsettings.Production.json*)을 사용하여 앱 구성 설정을 로드합니다.
 
-이 파일은 `reloadOnChange` 매개 변수를 받아들이는 <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>에 대해 [AddJsonFile(IConfigurationBuilder, String, Boolean, Boolean)](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*) 확장 메서드를 사용하여 구성합니다. `reloadOnChange`는 파일 변경 시 구성을 다시 로드해야 하는지를 나타냅니다. 이 설정은 <xref:Microsoft.AspNetCore.WebHost> 편의 메서드 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>에 표시됩니다.
+이 파일은 [ 매개 변수를 받아들이는 ](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*)에 대해 <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder>AddJsonFile(IConfigurationBuilder, String, Boolean, Boolean)`reloadOnChange` 확장 메서드를 사용하여 구성합니다. `reloadOnChange`는 파일 변경 시 구성을 다시 로드해야 하는지를 나타냅니다. 이 설정은 <xref:Microsoft.AspNetCore.WebHost> 편의 메서드 <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*>에 표시됩니다.
 
 ```csharp
 config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -265,7 +265,7 @@ config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
 
 파일 기반 구성은 <xref:Microsoft.Extensions.Configuration.FileConfigurationSource>로 표현됩니다. `FileConfigurationSource`는 <xref:Microsoft.Extensions.FileProviders.IFileProvider>를 사용하여 파일을 모니터링합니다.
 
-기본적으로 `IFileMonitor`는 <xref:System.IO.FileSystemWatcher>를 사용하여 구성 파일 변경을 모니터링하는 <xref:Microsoft.Extensions.FileProviders.PhysicalFileProvider>에서 제공합니다.
+기본적으로 `IFileMonitor`는 <xref:Microsoft.Extensions.FileProviders.PhysicalFileProvider>를 사용하여 구성 파일 변경을 모니터링하는 <xref:System.IO.FileSystemWatcher>에서 제공합니다.
 
 샘플 앱을 통해 구성 변경 모니터링을 위한 두 가지 구현을 설명합니다. *appsettings* 파일 중 하나라도 변경되어 두 파일 모니터링 구현 모두 사용자 지정 코드를 실행하면 &mdash;샘플 앱은 콘솔에 메시지를 작성합니다.
 
@@ -287,7 +287,7 @@ config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Startup.cs?name=snippet3)]
 
-콜백의 `state`는 모니터링할 정확한 *appsettings*의 구성 파일을 지정하는 데 유용한 `IHostingEnvironment`를 전달하는 데 사용됩니다(예를 들어 개발 환경에서는 *appsettings.Development.json*). 파일 해시는 구성 파일이 한 번만 변경된 경우 여러 토큰 콜백으로 인해 `WriteConsole` 문이 여러 번 실행되지 않도록 하는 데 사용됩니다.
+콜백의 `state`는 모니터링할 정확한 `IHostingEnvironment`appsettings*의 구성 파일을 지정하는 데 유용한* 를 전달하는 데 사용됩니다(예를 들어 개발 환경에서는 *appsettings.Development.json*). 파일 해시는 구성 파일이 한 번만 변경된 경우 여러 토큰 콜백으로 인해 `WriteConsole` 문이 여러 번 실행되지 않도록 하는 데 사용됩니다.
 
 이 시스템은 앱이 실행 중일 때 실행되며 사용자가 사용 중지할 수 없습니다.
 
@@ -317,7 +317,7 @@ config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
 `InvokeChanged` 메서드는 다음을 제외하고 이전 방법과 유사합니다.
 
 * `MonitoringEnabled`가 `true`가 아닌 경우 해당 코드를 실행하지 않습니다.
-* `WriteConsole` 출력의 현재 `state`를 출력합니다.
+* `state` 출력의 현재 `WriteConsole`를 출력합니다.
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Extensions/ConfigurationMonitor.cs?name=snippet3)]
 
@@ -368,7 +368,7 @@ UI의 단추로 모니터링을 사용 설정 및 해제합니다.
 1. [IFileProviders.Watch](xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*)를 통해 파일 공급자로부터 변경 토큰을 가져옵니다. 파일이 수정될 때 토큰의 콜백이 트리거됩니다.
 1. [상대(sliding) 만료](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.SlidingExpiration) 기간과 함께 파일 콘텐츠가 캐시됩니다. 변경 토큰은 [MemoryCacheEntryExtensions.AddExpirationToken](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken*)과 연결되어 파일이 캐시되는 동안 변경되면 캐시 항목을 제거합니다.
 
-다음 예제에서 파일은 앱의 [콘텐츠 루트](xref:fundamentals/index#content-root)에 저장됩니다. [IHostingEnvironment.ContentRootFileProvider](xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootFileProvider)는 앱의 <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath>를 가리키는 <xref:Microsoft.Extensions.FileProviders.IFileProvider>를 가져오는 데 사용합니다. `filePath`는 [IFileInfo.PhysicalPath](xref:Microsoft.Extensions.FileProviders.IFileInfo.PhysicalPath)를 사용하여 가져옵니다.
+다음 예제에서 파일은 앱의 [콘텐츠 루트](xref:fundamentals/index#content-root)에 저장됩니다. [IHostingEnvironment.ContentRootFileProvider](xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootFileProvider)는 앱의 <xref:Microsoft.Extensions.FileProviders.IFileProvider>를 가리키는 <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath>를 가져오는 데 사용합니다. `filePath`는 [IFileInfo.PhysicalPath](xref:Microsoft.Extensions.FileProviders.IFileInfo.PhysicalPath)를 사용하여 가져옵니다.
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Services/FileService.cs?name=snippet1)]
 

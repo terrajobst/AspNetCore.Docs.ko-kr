@@ -26,14 +26,14 @@
 
 ### <a name="register-the-database-context"></a>데이터베이스 컨텍스트 등록
 
-*Startup.cs* 맨 위에 다음 `using` 문을 추가합니다.
+`using`Startup.cs*맨 위에 다음* 문을 추가합니다.
 
 ```csharp
 using MvcMovie.Data;
 using Microsoft.EntityFrameworkCore;
 ```
 
-데이터베이스 컨텍스트를 `Startup.ConfigureServices`의 [종속성 주입](xref:fundamentals/dependency-injection) 컨테이너에 등록합니다.
+데이터베이스 컨텍스트를 [의 ](xref:fundamentals/dependency-injection)종속성 주입`Startup.ConfigureServices` 컨테이너에 등록합니다.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_UseSqlite&highlight=6-7)]
 
@@ -72,14 +72,14 @@ dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 
 ### <a name="register-the-database-context"></a>데이터베이스 컨텍스트 등록
 
-*Startup.cs* 맨 위에 다음 `using` 문을 추가합니다.
+`using`Startup.cs*맨 위에 다음* 문을 추가합니다.
 
 ```csharp
 using MvcMovie.Models;
 using Microsoft.EntityFrameworkCore;
 ```
 
-데이터베이스 컨텍스트를 `Startup.ConfigureServices`의 [종속성 주입](xref:fundamentals/dependency-injection) 컨테이너에 등록합니다.
+데이터베이스 컨텍스트를 [의 ](xref:fundamentals/dependency-injection)종속성 주입`Startup.ConfigureServices` 컨테이너에 등록합니다.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
 

@@ -6,4 +6,4 @@
 
 전달된 헤더 미들웨어를 사용하여 요청 처리를 위한 원본 요청 정보를 앱에 제공합니다.
 
-자세한 내용은 <xref:host-and-deploy/proxy-load-balancer>를 참조하세요.
+자세한 내용은 <xref:host-and-deploy/proxy-load-balancer>을 참조하세요.

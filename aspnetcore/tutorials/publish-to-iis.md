@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 10/03/2019
 uid: tutorials/publish-to-iis
 ms.openlocfilehash: 47f78ba78741a8e0175ce801c0c0e51f091273a8
-ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/18/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "79511394"
 ---
 # <a name="publish-an-aspnet-core-app-to-iis"></a>IIS에 ASP.NET Core 앱 게시
@@ -25,10 +25,10 @@ ms.locfileid: "79511394"
 > * IIS 관리자에서 IIS 사이트를 만듭니다.
 > * ASP.NET Core 앱을 배포합니다.
 
-## <a name="prerequisites"></a>사전 요구 사항
+## <a name="prerequisites"></a>필수 구성 요소
 
 * [.NET Core SDK](/dotnet/core/sdk)가 개발 머신에 설치되어 있어야 합니다.
-* Windows Server가 **웹 서버(IIS)** 서버 역할로 구성되어 있어야 합니다. 서버가 IIS를 사용하여 웹 사이트를 호스트하도록 구성되지 않은 경우 <xref:host-and-deploy/iis/index#iis-configuration> 문서의 ‘IIS 구성’ 섹션에 있는 지침을 따르고 이 자습서로 돌아옵니다. 
+* Windows Server가 **웹 서버(IIS)** 서버 역할로 구성되어 있어야 합니다. 서버가 IIS를 사용하여 웹 사이트를 호스트하도록 구성되지 않은 경우  *문서의 ‘IIS 구성’ 섹션에 있는 지침을 따르고 이 자습서로 돌아옵니다.* <xref:host-and-deploy/iis/index#iis-configuration>
 
 > [!WARNING]
 > **IIS 구성 및 웹 사이트 보안에는 이 자습서에서 다루지 않는 개념이 포함됩니다.** IIS에서 프로덕션 앱을 호스트하기 전에 [Microsoft IIS 설명서](https://www.iis.net/)의 IIS 지침 및 [IIS를 사용한 호스트에 대한 ASP.NET Core 문서](xref:host-and-deploy/iis/index)를 참조하세요.
@@ -88,7 +88,7 @@ IIS 서버에 *.NET Core 호스팅 번들*을 설치합니다. 번들은 .NET Co
 
 1. *bin/Release/{TARGET FRAMEWORK}/publish* 폴더의 콘텐츠를 서버의 IIS 사이트 폴더(IIS 관리자에서 사이트의 **실제 경로**)로 이동합니다.
 
-# <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 1. **솔루션**에서 프로젝트를 마우스 오른쪽 단추로 클릭하고 **게시** > **폴더에 게시**를 선택합니다.
 1. **폴더 선택** 경로를 설정합니다.

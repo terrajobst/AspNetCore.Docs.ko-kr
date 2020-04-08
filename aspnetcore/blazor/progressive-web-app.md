@@ -11,10 +11,10 @@ no-loc:
 - SignalR
 uid: blazor/progressive-web-app
 ms.openlocfilehash: fe69e51aefae9c80e5bb4b78151d384ce25d41a7
-ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/24/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "80218949"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly를 사용하여 프로그레시브 웹 애플리케이션 빌드
@@ -119,7 +119,7 @@ Blazor의 PWA 템플릿은 다음 두 개의 서비스 작업자 파일을 생�
 * 공통 논리를 보관할 세 번째 JavaScript 파일을 추가합니다.
 * [self.importScripts](https://developer.mozilla.org/docs/Web/API/WorkerGlobalScope/importScripts)를 사용하여 두 서비스 작업자 파일에 공통 논리를 로드합니다.
 
-### <a name="cache-first-fetch-strategy"></a>캐시 우선 페치 전략
+### <a name="cache-first-fetch-strategy"></a>캐시 우선 인출 전략
 
 기본 제공 *service-worker* 서비스 작업자는 ‘캐시 우선’ 전략을 사용하여 요청을 확인합니다.  즉, 사용자가 네트워크에 액세스할 수 있는지 또는 서버에서 최신 콘텐츠를 사용할 수 있는지와 관계없이 캐시된 콘텐츠를 반환하는 것이 항상 선호됩니다.
 
@@ -204,7 +204,7 @@ const shouldServeIndexHtml = event.request.mode === 'navigate'
 </ItemGroup>
 ```
 
-`AssetUrl` 메타데이터는 브라우저가 캐시할 리소스를 페치할 때 사용해야 할 기본적인 상대 URL을 지정합니다. 이는 디스크의 원래 원본 파일 이름과 무관할 수 있습니다.
+`AssetUrl` 메타데이터는 브라우저가 캐시할 리소스를 인출할 때 사용해야 할 기본적인 상대 URL을 지정합니다. 이는 디스크의 원래 원본 파일 이름과 무관할 수 있습니다.
 
 > [!IMPORTANT]
 > `ServiceWorkerAssetsManifestItem`을 추가하면 파일이 앱의 *wwwroot* 디렉터리에 게시되지 않습니다. 게시 출력은 개별적으로 제어해야 합니다. `ServiceWorkerAssetsManifestItem`으로 인해서만 서비스 작업자 자산 매니페스트에 추가 항목이 표시됩니다.

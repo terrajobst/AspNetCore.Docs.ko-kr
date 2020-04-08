@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 09/12/2018
 uid: host-and-deploy/docker/visual-studio-tools-for-docker
 ms.openlocfilehash: 0e6747a3de220b97cc7a84f9cd42b0da54b57ee9
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78649323"
 ---
 # <a name="visual-studio-container-tools-with-aspnet-core"></a>ASP.NET Core를 포함한 Visual Studio 컨테이너 도구
@@ -19,14 +19,14 @@ Visual Studio 2017 이상 버전은 .NET Core를 대상으로 하는 컨테이�
 
 [예제 코드 살펴보기 및 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/docker/visual-studio-tools-for-docker/samples) ([다운로드 방법](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>사전 요구 사항
+## <a name="prerequisites"></a>필수 구성 요소
 
 * [Windows용 Docker](https://docs.docker.com/docker-for-windows/install/)
-* **.NET Core 플랫폼 간 개발** 워크로드가 있는 [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
+* [.NET Core 플랫폼 간 개발](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) 워크로드가 있는 **Visual Studio 2019**
 
 ## <a name="installation-and-setup"></a>설치 및 설정
 
-Docker를 설치하려면 우선 [Windows용 Docker 클라이언트에 있는 정보를 검토합니다. 설치하기 전에 알아야 할 사항](https://docs.docker.com/docker-for-windows/install/#what-to-know-before-you-install)의 정보를 검토하세요. 다음으로 [Windows용 Docker](https://docs.docker.com/docker-for-windows/install/)를 설치합니다.
+Docker를 설치하려면 우선 [Windows용 Docker: 설치하기 전에 알아야 할 사항](https://docs.docker.com/docker-for-windows/install/#what-to-know-before-you-install)의 정보를 검토하세요. 다음으로 [Windows용 Docker](https://docs.docker.com/docker-for-windows/install/)를 설치합니다.
 
 Windows용 Docker에서 **[공유 드라이브](https://docs.docker.com/docker-for-windows/#shared-drives)** 는 볼륨 매핑 및 디버깅을 지원하도록 구성되어야 합니다. 시스템 트레이의 Docker 아이콘을 마우스 오른쪽 단추로 클릭하고 **설정**을 선택한 다음, **공유 드라이브**를 선택합니다. Docker에서 파일을 저장하는 드라이브를 선택합니다. **적용**을 클릭합니다.
 
@@ -84,7 +84,7 @@ Visual Studio 컨테이너 도구는 .NET Framework를 대상으로 하는 기�
 
 Visual Studio 2017 버전 15.7 또는 이전 버전에서는 [Docker Compose](https://docs.docker.com/compose/overview/)를 단독 컨테이너 오케스트레이션 솔루션으로 지원합니다. Docker Compose 아티팩트는 **추가** > **Docker 지원**을 통해 추가됩니다.
 
-Visual Studio 2017 버전 15.8 또는 이후 버전에서는 지시하는 경우에만 오케스트레이션이 추가됩니다. **솔루션 탐색기**에서 프로젝트를 마우스 오른쪽 단추로 클릭하고 **추가** > **컨테이너 오케스트레이터 지원**을 선택합니다. 두 가지 다른 옵션인 [Docker Compose](#docker-compose) 및 [Service Fabric](#service-fabric)이 제공됩니다.
+Visual Studio 2017 버전 15.8 또는 이후 버전에서는 지시하는 경우에만 오케스트레이션이 추가됩니다. **솔루션 탐색기**에서 프로젝트를 마우스 오른쪽 단추로 클릭하고 **추가** > **컨테이너 오케스트레이터 지원**을 선택합니다. [Docker Compose](#docker-compose) 및 [Service Fabric](#service-fabric)라는 두 가지 다른 옵션이 제공됩니다.
 
 ### <a name="docker-compose"></a>Docker Compose
 
@@ -92,14 +92,14 @@ Visual Studio 컨테이너 도구는 다음 파일을 통해 솔루션에 *docke
 
 * *docker-compose.dcproj* &ndash; 프로젝트를 나타내는 파일입니다. 사용할 OS를 지정하는 `<DockerTargetOS>` 요소를 포함합니다.
 * *.dockerignore* &ndash; 빌드 컨텍스트를 생성할 때 제외할 파일 및 디렉터리 패턴을 나열합니다.
-* *docker-compose.yml* &ndash;`docker-compose build` 및 `docker-compose run`을 각각 사용하여 빌드하고 실행할 이미지 컬렉션을 정의하는 데 사용되는 기본 [Docker Compose](https://docs.docker.com/compose/overview/) 파일입니다.
+* *docker-compose.yml* &ndash;[ 및 ](https://docs.docker.com/compose/overview/)을 각각 사용하여 빌드하고 실행할 이미지 컬렉션을 정의하는 데 사용되는 기본 `docker-compose build`Docker Compose`docker-compose run` 파일입니다.
 * *docker-compose.override.yml* &ndash; 서비스에 대한 구성 재정의를 포함하는 Docker Compose에서 읽는 옵션 파일입니다. Visual Studio는 `docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"`을 실행하여 이러한 파일을 병합합니다.
 
 *docker-compose.yml* 파일에는 프로젝트를 실행할 때 생성되는 이미지의 이름을 참조합니다.
 
 [!code-yaml[](visual-studio-tools-for-docker/samples/2.0/docker-compose.yml?highlight=5)]
 
-앞의 예제에서 `image: hellodockertools`는 앱이 **디버그** 모드에서 실행될 때 `hellodockertools:dev` 이미지를 생성합니다. 앱이 **릴리스** 모드에서 실행될 때 `hellodockertools:latest` 이미지가 생성됩니다.
+앞의 예제에서 `image: hellodockertools`는 앱이 `hellodockertools:dev`디버그**모드에서 실행될 때** 이미지를 생성합니다. 앱이 `hellodockertools:latest`릴리스**모드에서 실행될 때** 이미지가 생성됩니다.
 
 이미지가 레지스트리로 푸시되는 경우 이미지 이름 앞에 [Docker 허브](https://hub.docker.com/) 사용자 이름을 추가합니다(예: `dockerhubusername/hellodockertools`). 또는 구성에 따라 개인 레지스트리 URL을 포함하도록 이미지 이름을 변경합니다(예: `privateregistry.domain.com/hellodockertools`).
 
@@ -133,7 +133,7 @@ Visual Studio 컨테이너 도구는 다음 작업을 수행합니다.
 
 자세한 내용은 [Azure Service Fabric에 Windows 컨테이너의 .NET 앱 배포](/azure/service-fabric/service-fabric-host-app-in-a-container)를 참조하세요.
 
-## <a name="debug"></a>디버그
+## <a name="debug"></a>Debug
 
 도구 모음의 디버그 드롭다운에서 **Docker**를 선택하고 앱에서 디버깅을 시작합니다. **출력** 창의 **Docker** 뷰는 진행 중인 다음 작업을 표시합니다.
 
@@ -145,7 +145,7 @@ Visual Studio 컨테이너 도구는 다음 작업을 수행합니다.
 * 앱이 컨테이너에 복사됩니다.
 * 컨테이너에 연결된 디버거와 함께 기본 브라우저가 시작되며 동적으로 할당된 포트를 사용합니다.
 
-앱의 최종 Docker 이미지는 *dev*로 태그가 지정됩니다. 이미지는 *microsoft/dotnet* 기본 이미지의 *2.1-aspnetcore-runtime* 태그를 기반으로 합니다. **패키지 관리자 콘솔**(PMC) 창에서 `docker images` 명령을 실행합니다. 컴퓨터의 이미지가 표시됩니다.
+앱의 최종 Docker 이미지는 *dev*로 태그가 지정됩니다. 이미지는 *microsoft/dotnet* 기본 이미지의 *2.1-aspnetcore-runtime* 태그를 기반으로 합니다. `docker images`패키지 관리자 콘솔 **(PMC) 창에서**  명령을 실행합니다. 컴퓨터의 이미지가 표시됩니다.
 
 ```console
 REPOSITORY        TAG                     IMAGE ID      CREATED         SIZE
@@ -163,7 +163,7 @@ microsoft/dotnet  2.1-aspnetcore-runtime  fcc3887985bb  6 days ago      255MB
 * 앱이 컨테이너에 복사됩니다.
 * 컨테이너에 연결된 디버거와 함께 기본 브라우저가 시작되며 동적으로 할당된 포트를 사용합니다.
 
-앱의 최종 Docker 이미지는 *dev*로 태그가 지정됩니다. 이미지는 *microsoft/aspnetcore* 기본 이미지를 기반으로 합니다. **패키지 관리자 콘솔**(PMC) 창에서 `docker images` 명령을 실행합니다. 컴퓨터의 이미지가 표시됩니다.
+앱의 최종 Docker 이미지는 *dev*로 태그가 지정됩니다. 이미지는 *microsoft/aspnetcore* 기본 이미지를 기반으로 합니다. `docker images`패키지 관리자 콘솔 **(PMC) 창에서**  명령을 실행합니다. 컴퓨터의 이미지가 표시됩니다.
 
 ```console
 REPOSITORY            TAG  IMAGE ID      CREATED        SIZE
@@ -174,7 +174,7 @@ microsoft/aspnetcore  2.0  c69d39472da9  13 days ago    347MB
 ::: moniker-end
 
 > [!NOTE]
-> **디버그** 구성은 볼륨 탑재를 사용하여 반복 환경을 제공하므로 *dev* 이미지에는 앱 콘텐츠가 없습니다. 이미지를 푸시하려면 **Release** 구성을 사용합니다.
+> *디버그* 구성은 볼륨 탑재를 사용하여 반복 환경을 제공하므로 **dev** 이미지에는 앱 콘텐츠가 없습니다. 이미지를 푸시하려면 **Release** 구성을 사용합니다.
 
 PMC에서 `docker ps` 명령을 실행합니다. 앱은 컨테이너를 사용하여 실행됩니다.
 

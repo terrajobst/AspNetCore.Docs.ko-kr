@@ -3,10 +3,10 @@ no-loc:
 - Blazor
 - SignalR
 ms.openlocfilehash: 5f3e22e04fe18149ec5a8acb42f42a8ef83a7664
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78647529"
 ---
 Blazor 서버 앱을 미리 렌더링 중인 경우, 브라우저와의 연결이 설정되어 있지 않으므로 JavaScript 호출과 같은 특정 작업을 수행할 수 없습니다. 미리 렌더링된 경우 구성 요소를 다르게 렌더링해야 할 수 있습니다.
@@ -33,7 +33,7 @@ Blazor 서버 앱을 미리 렌더링 중인 경우, 브라우저와의 연결�
 }
 ```
 
-앞에 나온 예제 코드에서, *wwwroot/index.html*(Blazor WebAssembly) 또는 *Pages/_Host.cshtml*(Blazor Server)의 `<head>` 요소 안에 `setElementText` JavaScript 함수를 제공합니다. 이 함수는 `IJSRuntime.InvokeVoidAsync`를 사용하여 호출되며 값을 반환하지 않습니다.
+앞에 나온 예제 코드에서, `setElementText`wwwroot/index.html`<head>`(*WebAssembly) 또는*Pages/_Host.cshtmlBlazor(*Server)의* 요소 안에 Blazor JavaScript 함수를 제공합니다. 이 함수는 `IJSRuntime.InvokeVoidAsync`를 사용하여 호출되며 값을 반환하지 않습니다.
 
 ```html
 <script>
@@ -81,7 +81,7 @@ Set value via JS interop call:
 }
 ```
 
-앞에 나온 예제 코드에서, *wwwroot/index.html*(Blazor WebAssembly) 또는 *Pages/_Host.cshtml*(Blazor Server)의 `<head>` 요소 안에 `setElementText` JavaScript 함수를 제공합니다. 이 함수는 `IJSRuntime.InvokeAsync`를 사용하여 호출되며 값을 반환합니다.
+앞에 나온 예제 코드에서, `setElementText`wwwroot/index.html`<head>`(*WebAssembly) 또는*Pages/_Host.cshtmlBlazor(*Server)의* 요소 안에 Blazor JavaScript 함수를 제공합니다. 이 함수는 `IJSRuntime.InvokeAsync`를 사용하여 호출되며 값을 반환합니다.
 
 ```html
 <script>

@@ -9,7 +9,7 @@
 >* 이전 테이블 삭제.
 >* 새 테이블 이름 바꾸기.
 >
->자세한 내용은 다음 자료를 참조하세요.
+>자세한 내용은 다음 리소스를 참조하십시오.
 >
 > * [SQLite EF Core 데이터베이스 공급자 제한 사항](/ef/core/providers/sqlite/limitations)
 > * [마이그레이션 코드 사용자 지정](/ef/core/managing-schemas/migrations/#customize-migration-code)

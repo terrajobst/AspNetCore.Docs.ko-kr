@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 02/07/2020
 uid: fundamentals/servers/httpsys
 ms.openlocfilehash: 3e858a974d6a5c008969c3c51a507880cc25a7ff
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78650715"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>ASP.NET Core에서 HTTP.sys 웹 서버 구현
@@ -176,7 +176,7 @@ Visual Studio에서 기본 실행 프로필은 IIS Express용입니다. 프로�
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>` &ndash; 정규화된 URL(Uniform Resource Locator)입니다. 와일드카드 바인딩을 사용하지 마세요. 유효한 호스트 이름 또는 로컬 IP 주소를 사용합니다. ‘URL에는 후행 슬래시가 포함되어야 합니다.’
+   * `<URL>` &ndash; 정규화된 URL(Uniform Resource Locator)입니다. 와일드카드 바인딩을 사용하지 마세요. 유효한 호스트 이름 또는 로컬 IP 주소를 사용합니다. ‘URL에는 후행 슬래시가 포함되어야 합니다.’ 
    * `<USER>` &ndash; 사용자 또는 사용자-그룹 이름을 지정합니다.
 
    다음 예제에서 서버의 로컬 IP 주소는 `10.0.0.4`입니다.
@@ -427,7 +427,7 @@ Visual Studio에서 기본 실행 프로필은 IIS Express용입니다. 프로�
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>` &ndash; 정규화된 URL(Uniform Resource Locator)입니다. 와일드카드 바인딩을 사용하지 마세요. 유효한 호스트 이름 또는 로컬 IP 주소를 사용합니다. ‘URL에는 후행 슬래시가 포함되어야 합니다.’
+   * `<URL>` &ndash; 정규화된 URL(Uniform Resource Locator)입니다. 와일드카드 바인딩을 사용하지 마세요. 유효한 호스트 이름 또는 로컬 IP 주소를 사용합니다. ‘URL에는 후행 슬래시가 포함되어야 합니다.’ 
    * `<USER>` &ndash; 사용자 또는 사용자-그룹 이름을 지정합니다.
 
    다음 예제에서 서버의 로컬 IP 주소는 `10.0.0.4`입니다.
@@ -680,7 +680,7 @@ Visual Studio에서 기본 실행 프로필은 IIS Express용입니다. 프로�
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>` &ndash; 정규화된 URL(Uniform Resource Locator)입니다. 와일드카드 바인딩을 사용하지 마세요. 유효한 호스트 이름 또는 로컬 IP 주소를 사용합니다. ‘URL에는 후행 슬래시가 포함되어야 합니다.’
+   * `<URL>` &ndash; 정규화된 URL(Uniform Resource Locator)입니다. 와일드카드 바인딩을 사용하지 마세요. 유효한 호스트 이름 또는 로컬 IP 주소를 사용합니다. ‘URL에는 후행 슬래시가 포함되어야 합니다.’ 
    * `<USER>` &ndash; 사용자 또는 사용자-그룹 이름을 지정합니다.
 
    다음 예제에서 서버의 로컬 IP 주소는 `10.0.0.4`입니다.
@@ -933,7 +933,7 @@ Visual Studio에서 기본 실행 프로필은 IIS Express용입니다. 프로�
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>` &ndash; 정규화된 URL(Uniform Resource Locator)입니다. 와일드카드 바인딩을 사용하지 마세요. 유효한 호스트 이름 또는 로컬 IP 주소를 사용합니다. ‘URL에는 후행 슬래시가 포함되어야 합니다.’
+   * `<URL>` &ndash; 정규화된 URL(Uniform Resource Locator)입니다. 와일드카드 바인딩을 사용하지 마세요. 유효한 호스트 이름 또는 로컬 IP 주소를 사용합니다. ‘URL에는 후행 슬래시가 포함되어야 합니다.’ 
    * `<USER>` &ndash; 사용자 또는 사용자-그룹 이름을 지정합니다.
 
    다음 예제에서 서버의 로컬 IP 주소는 `10.0.0.4`입니다.

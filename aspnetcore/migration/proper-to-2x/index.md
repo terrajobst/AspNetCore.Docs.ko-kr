@@ -6,10 +6,10 @@ ms.author: scaddie
 ms.date: 10/18/2019
 uid: migration/proper-to-2x/index
 ms.openlocfilehash: 68a45dc50e00bead564500a12509b62a4a193ec4
-ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/18/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "79511094"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>ASP.NET에서 ASP.NET Core로 마이그레이션
@@ -18,7 +18,7 @@ ms.locfileid: "79511094"
 
 이 문서는 ASP.NET 앱을 ASP.NET Core로 마이그레이션하기 위한 참조 가이드로 사용됩니다.
 
-## <a name="prerequisites"></a>사전 요구 사항
+## <a name="prerequisites"></a>필수 구성 요소
 
 [.NET Core SDK 2.2 이상](https://dotnet.microsoft.com/download)
 
@@ -80,11 +80,11 @@ ASP.NET Core는 비슷한 방법을 사용하지만 항목을 처리하는 데 O
 
 ## <a name="store-configurations"></a>구성 저장
 
-ASP.NET은 정렬 설정을 지원합니다. 예를 들어 이러한 설정은 애플리케이션이 배포된 환경을 지원하는 데 사용됩니다. 일반적으로 모든 사용자 지정 키 값 쌍은 *Web.config* 파일의 `<appSettings>` 섹션에 저장됩니다.
+ASP.NET은 정렬 설정을 지원합니다. 예를 들어 이러한 설정은 애플리케이션이 배포된 환경을 지원하는 데 사용됩니다. 일반적으로 모든 사용자 지정 키 값 쌍은 `<appSettings>`Web.config*파일의* 섹션에 저장됩니다.
 
 [!code-xml[](samples/webconfig-sample.xml)]
 
-애플리케이션은 `System.Configuration` 네임스페이스의 `ConfigurationManager.AppSettings` 컬렉션을 사용하여 이러한 설정을 읽습니다.
+애플리케이션은 `ConfigurationManager.AppSettings` 네임스페이스의 `System.Configuration` 컬렉션을 사용하여 이러한 설정을 읽습니다.
 
 [!code-csharp[](samples/read-webconfig.cs)]
 
@@ -116,7 +116,7 @@ services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"
 
 ASP.NET 앱에서 개발자는 타사 라이브러리를 사용하여 종속성 주입을 구현합니다. 이러한 라이브러리 중 하나는 Microsoft Patterns & Practices에서 제공하는 [Unity](https://github.com/unitycontainer/unity)입니다.
 
-Unity를 사용한 종속성 주입 설정의 예로는 `UnityContainer`를 래핑하는 `IDependencyResolver`를 구현하는 것입니다.
+Unity를 사용한 종속성 주입 설정의 예로는 `IDependencyResolver`를 래핑하는 `UnityContainer`를 구현하는 것입니다.
 
 [!code-csharp[](samples/sample8.cs)]
 
@@ -128,7 +128,7 @@ Unity를 사용한 종속성 주입 설정의 예로는 `UnityContainer`를 래�
 
 [!code-csharp[](samples/sample5.cs)]
 
-종속성 주입은 ASP.NET Core의 일부이므로 *Startup.cs*의 `ConfigureServices` 메서드에서 서비스를 추가할 수 있습니다.
+종속성 주입은 ASP.NET Core의 일부이므로 `ConfigureServices`Startup.cs*의*  메서드에서 서비스를 추가할 수 있습니다.
 
 [!code-csharp[](samples/configure-services.cs)]
 
@@ -143,7 +143,7 @@ Unity에서 삽입한 것처럼 리포지토리는 어디든지 삽입될 수 �
 
 ASP.NET에서 정적 파일은 다양한 디렉터리에 저장되고 뷰에서 참조됩니다.
 
-ASP.NET Core에서 정적 파일은 별도로 구성되지 않는 한 “웹 루트”( *&lt;content root&gt;/wwwroot*)에 저장됩니다. 파일은 `Startup.Configure`에서 `UseStaticFiles` 확장 메서드를 호출하는 방식으로 요청 파이프라인에 로드됩니다.
+ASP.NET Core에서 정적 파일은 별도로 구성되지 않는 한 “웹 루트”( *&lt;content root&gt;/wwwroot*)에 저장됩니다. 파일은 `UseStaticFiles`에서 `Startup.Configure` 확장 메서드를 호출하는 방식으로 요청 파이프라인에 로드됩니다.
 
 [!code-csharp[](../../fundamentals/static-files/samples/1x/StartupStaticFiles.cs?highlight=3&name=snippet_ConfigureMethod)]
 

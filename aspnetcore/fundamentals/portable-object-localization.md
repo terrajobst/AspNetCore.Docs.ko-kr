@@ -6,10 +6,10 @@ ms.author: scaddie
 ms.date: 09/26/2017
 uid: fundamentals/portable-object-localization
 ms.openlocfilehash: 08002564eb68bc04eebaeafed560202d0d69958a
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78645333"
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>ASP.NET Core에서 이식 가능 개체 지역화 구성
@@ -49,15 +49,15 @@ msgstr[1] "Les adresses email sont \"{0}\""
 
 이 예제에서는 다음 구문을 사용합니다.
 
-- `#:`: 변환되는 문자열의 컨텍스트를 나타내는 주석입니다. 동일한 문자열은 사용되는 위치에 따라 다르게 변환될 수 있습니다.
+- `#:`: 변환되는 문자열의 컨텍스트를 나타내는 설명입니다. 동일한 문자열은 사용되는 위치에 따라 다르게 변환될 수 있습니다.
 - `msgid`: 번역되지 않은 문자열입니다.
 - `msgstr`: 번역된 문자열입니다.
 
 복수화 지원의 경우 더 많은 항목을 정의할 수 있습니다.
 
 - `msgid_plural`: 번역되지 않은 복수형 문자열입니다.
-- `msgstr[0]`: 사례 0의 번역된 문자열입니다.
-- `msgstr[N]`: 사례 N의 번역된 문자열입니다.
+- `msgstr[0]`: 사례 0에 대한 번역된 문자열입니다.
+- `msgstr[N]`: 사례 N에 대한 번역된 문자열입니다.
 
 PO 파일 사양은 [여기](https://www.gnu.org/savannah-checkouts/gnu/gettext/manual/html_node/PO-Files.html)에서 찾을 수 있습니다.
 
@@ -67,7 +67,7 @@ PO 파일 사양은 [여기](https://www.gnu.org/savannah-checkouts/gnu/gettext/
 
 ### <a name="referencing-the-package"></a>패키지 참조
 
-`OrchardCore.Localization.Core` NuGet 패키지에 대한 참조를 추가합니다. 패키지 소스 https://www.myget.org/F/orchardcore-preview/api/v3/index.json의 [MyGet](https://www.myget.org/)에서 사용할 수 있습니다.
+`OrchardCore.Localization.Core` NuGet 패키지에 대한 참조를 추가합니다. 패키지 소스 [의 ](https://www.myget.org/)MyGet https://www.myget.org/F/orchardcore-preview/api/v3/index.json 에서 사용할 수 있습니다.
 
 이제 *.csproj* 파일은 다음과 비슷한 줄을 포함합니다(버전 번호가 달라질 수 있음).
 
@@ -75,11 +75,11 @@ PO 파일 사양은 [여기](https://www.gnu.org/savannah-checkouts/gnu/gettext/
 
 ### <a name="registering-the-service"></a>서비스 등록
 
-*Startup.cs*의 `ConfigureServices` 메서드에 필요한 서비스를 추가합니다.
+`ConfigureServices`Startup.cs*의*  메서드에 필요한 서비스를 추가합니다.
 
 [!code-csharp[](localization/sample/POLocalization/Startup.cs?name=snippet_ConfigureServices&highlight=4-21)]
 
-*Startup.cs*의 `Configure` 메서드에 필요한 미들웨어를 추가합니다.
+`Configure`Startup.cs*의*  메서드에 필요한 미들웨어를 추가합니다.
 
 [!code-csharp[](localization/sample/POLocalization/Startup.cs?name=snippet_Configure&highlight=15)]
 
@@ -95,7 +95,7 @@ PO 파일 사양은 [여기](https://www.gnu.org/savannah-checkouts/gnu/gettext/
 
 [!code-text[](localization/sample/POLocalization/fr.po)]
 
-이 파일은 번역할 문자열 및 프랑스어로 번역된 문자열 모두를 저장합니다. 필요한 경우 번역은 해당 부모 문화권으로 되돌립니다. 이 예제에서 요청된 문화권이 `fr-FR` 또는 `fr-CA`인 경우 *fr.po* 파일이 사용됩니다.
+이 파일은 번역할 문자열 및 프랑스어로 번역된 문자열 모두를 저장합니다. 필요한 경우 번역은 해당 부모 문화권으로 되돌립니다. 이 예제에서 요청된 문화권이 *또는*인 경우 `fr-FR`fr.po`fr-CA` 파일이 사용됩니다.
 
 ### <a name="testing-the-application"></a>애플리케이션 테스트
 
@@ -132,7 +132,7 @@ msgstr[1] "Il y a {0} éléments."
 
 [!code-text[](localization/sample/POLocalization/cs.po)]
 
-체코어 지역화를 허용하려면 `ConfigureServices` 메서드의 지원되는 문화권 목록에 `"cs"`를 추가합니다.
+체코어 지역화를 허용하려면 `"cs"` 메서드의 지원되는 문화권 목록에 `ConfigureServices`를 추가합니다.
 
 ```csharp
 var supportedCultures = new List<CultureInfo>

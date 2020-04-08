@@ -9,10 +9,10 @@ no-loc:
 - Blazor
 uid: fundamentals/target-aspnetcore
 ms.openlocfilehash: 72096fc2f03033dfe8325b5129e074913a2fbd1f
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78646689"
 ---
 # <a name="use-aspnet-core-apis-in-a-class-library"></a>클래스 라이브러리에서 ASP.NET Core API 사용
@@ -62,7 +62,7 @@ Blazor는 WASM(WebAssembly) 및 서버 [호스팅 모델](xref:blazor/hosting-mo
 dotnet new razorclasslib
 ```
 
-# <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 **Razor 클래스 라이브러리** 프로젝트 템플릿을 사용합니다.
 
@@ -76,7 +76,7 @@ dotnet new razorclasslib
   * [Microsoft.AspNetCore.Components](https://www.nuget.org/packages/Microsoft.AspNetCore.Components)
   * [Microsoft.AspNetCore.Components.Web](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.Web)
 
-예를 들어:
+예들 들어 다음과 같습니다.
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-razor-components-library.csproj)]
 
@@ -87,7 +87,7 @@ dotnet new razorclasslib
 * .NET Core 3.x를 대상으로 합니다.
 * 공유 프레임워크에 대한 `<FrameworkReference>` 요소를 추가합니다.
 
-예를 들어:
+예들 들어 다음과 같습니다.
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-razor-components-library.csproj)]
 
@@ -109,7 +109,7 @@ Razor 구성 요소가 포함된 라이브러리에 대한 자세한 내용은 [
 
 프로젝트가 .NET Core 3.x를 대상으로 하는 경우 다음이 필요합니다.
 
-* `true`로 설정된 `AddRazorSupportForMvc` MSBuild 속성.
+* `AddRazorSupportForMvc`로 설정된 `true` MSBuild 속성.
 * 공유 프레임워크에 대한 `<FrameworkReference>` 요소.
 
 **Razor 클래스 라이브러리** 프로젝트 템플릿은 .NET Core 3.x를 대상으로 하는 프로젝트에 대해 위 요구 사항을 충족합니다. 편집기에 대해 다음 지침을 사용합니다.
@@ -126,37 +126,37 @@ Razor 구성 요소가 포함된 라이브러리에 대한 자세한 내용은 [
 dotnet new razorclasslib -s
 ```
 
-# <a name="visual-studio-for-mac"></a>[Mac용 Visual Studio](#tab/visual-studio-mac)
+# <a name="visual-studio-for-mac"></a>[Visual Studio for Mac](#tab/visual-studio-mac)
 
 지금은 프로젝트 템플릿이 지원되지 않습니다.
 
 ---
 
-예를 들어:
+예들 들어 다음과 같습니다.
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-razor-views-pages-library.csproj)]
 
-프로젝트가 대신 .NET Standard를 대상으로 하는 경우 [Microsoft.AspNetCore.Mvc](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc) 패키지 참조가 필요합니다. `Microsoft.AspNetCore.Mvc` 패키지가 ASP.NET Core 3.0의 공유 프레임워크로 이동했으며, 따라서 더 이상 게시되지 않습니다. 예를 들어:
+프로젝트가 대신 .NET Standard를 대상으로 하는 경우 [Microsoft.AspNetCore.Mvc](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc) 패키지 참조가 필요합니다. `Microsoft.AspNetCore.Mvc` 패키지가 ASP.NET Core 3.0의 공유 프레임워크로 이동했으며, 따라서 더 이상 게시되지 않습니다. 예들 들어 다음과 같습니다.
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-razor-views-pages-library.csproj?highlight=8)]
 
 ### <a name="tag-helpers"></a>태그 도우미
 
-[태그 도우미](xref:mvc/views/tag-helpers/intro)를 포함하는 프로젝트는 `Microsoft.NET.Sdk` SDK를 사용해야 합니다. .NET Core 3.x를 대상으로 하는 경우 공유 프레임워크에 대한 `<FrameworkReference>` 요소를 추가합니다. 예를 들어:
+[태그 도우미](xref:mvc/views/tag-helpers/intro)를 포함하는 프로젝트는 `Microsoft.NET.Sdk` SDK를 사용해야 합니다. .NET Core 3.x를 대상으로 하는 경우 공유 프레임워크에 대한 `<FrameworkReference>` 요소를 추가합니다. 예들 들어 다음과 같습니다.
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-basic-library.csproj)]
 
-.NET Standard를 대상으로 하는 경우(ASP.NET Core 3.x보다 이전 버전을 지원하기 위해) [Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor)에 대한 패키지 참조를 추가합니다. `Microsoft.AspNetCore.Mvc.Razor` 패키지는 공유 프레임워크로 이동했으며, 따라서 더 이상 게시되지 않습니다. 예를 들어:
+.NET Standard를 대상으로 하는 경우(ASP.NET Core 3.x보다 이전 버전을 지원하기 위해) [Microsoft.AspNetCore.Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor)에 대한 패키지 참조를 추가합니다. `Microsoft.AspNetCore.Mvc.Razor` 패키지는 공유 프레임워크로 이동했으며, 따라서 더 이상 게시되지 않습니다. 예들 들어 다음과 같습니다.
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-tag-helpers-library.csproj)]
 
 ### <a name="view-components"></a>보기 구성 요소
 
-[구성 요소 보기](xref:mvc/views/view-components)를 포함하는 프로젝트는 `Microsoft.NET.Sdk` SDK를 사용해야 합니다. .NET Core 3.x를 대상으로 하는 경우 공유 프레임워크에 대한 `<FrameworkReference>` 요소를 추가합니다. 예를 들어:
+[구성 요소 보기](xref:mvc/views/view-components)를 포함하는 프로젝트는 `Microsoft.NET.Sdk` SDK를 사용해야 합니다. .NET Core 3.x를 대상으로 하는 경우 공유 프레임워크에 대한 `<FrameworkReference>` 요소를 추가합니다. 예들 들어 다음과 같습니다.
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-basic-library.csproj)]
 
-.NET Standard를 대상으로 하는 경우(ASP.NET Core 3.x보다 이전 버전을 지원하기 위해) [Microsoft.AspNetCore.Mvc.ViewFeatures](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.ViewFeatures)에 대한 패키지 참조를 추가합니다. `Microsoft.AspNetCore.Mvc.ViewFeatures` 패키지는 공유 프레임워크로 이동했으며, 따라서 더 이상 게시되지 않습니다. 예를 들어:
+.NET Standard를 대상으로 하는 경우(ASP.NET Core 3.x보다 이전 버전을 지원하기 위해) [Microsoft.AspNetCore.Mvc.ViewFeatures](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.ViewFeatures)에 대한 패키지 참조를 추가합니다. `Microsoft.AspNetCore.Mvc.ViewFeatures` 패키지는 공유 프레임워크로 이동했으며, 따라서 더 이상 게시되지 않습니다. 예들 들어 다음과 같습니다.
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-view-components-library.csproj)]
 
@@ -208,7 +208,7 @@ dotnet new razorclasslib -s
 * 공유 프레임워크에 대한 `<FrameworkReference>` 요소를 추가합니다.
 * 적절한 대상 프레임워크 기호와 함께 [#if 전처리기 지시문](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-if)을 사용하여 조건부로 코드를 컴파일합니다.
 
-예를 들어 HTTP 요청 및 응답 스트림에 대한 동기 읽기 및 쓰기는 ASP.NET Core 3.0부터 기본적으로 사용하지 않도록 설정됩니다. ASP.NET Core 2.2는 기본적으로 동기식 동작을 지원합니다. IO가 발생하는 경우 동기 읽기 및 쓰기를 사용하도록 설정해야 하는 미들웨어 라이브러리를 고려합니다. 라이브러리는 적절한 전처리기 지시문에서 동기 기능을 사용하도록 설정하는 코드를 포함해야 합니다. 예를 들어:
+예를 들어 HTTP 요청 및 응답 스트림에 대한 동기 읽기 및 쓰기는 ASP.NET Core 3.0부터 기본적으로 사용하지 않도록 설정됩니다. ASP.NET Core 2.2는 기본적으로 동기식 동작을 지원합니다. IO가 발생하는 경우 동기 읽기 및 쓰기를 사용하도록 설정해야 하는 미들웨어 라이브러리를 고려합니다. 라이브러리는 적절한 전처리기 지시문에서 동기 기능을 사용하도록 설정하는 코드를 포함해야 합니다. 예들 들어 다음과 같습니다.
 
 [!code-csharp[](target-aspnetcore/samples/middleware.cs?highlight=9-24)]
 
