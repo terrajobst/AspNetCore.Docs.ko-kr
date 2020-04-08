@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 08/16/2019
 uid: fundamentals/url-rewriting
 ms.openlocfilehash: 7d63cf381f1d8a19ed4fb789348e36f94304ad63
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78650475"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>ASP.NET Core에서 URL 재작성 미들웨어

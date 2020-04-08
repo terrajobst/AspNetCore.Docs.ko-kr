@@ -11,10 +11,10 @@ no-loc:
 - SignalR
 uid: blazor/call-javascript-from-dotnet
 ms.openlocfilehash: 7a27b6f1be2ef296d5b2b2a4f566e0cdedbe6480
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78647523"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-opno-locblazor"></a>ASP.NET Core Blazor의 .NET 메서드에서 JavaScript 함수 호출
@@ -35,7 +35,7 @@ Blazor 앱은 .NET 메서드에서 JavaScript 함수를 호출하고 JavaScript 
 
 다음 예제는 JavaScript 기반 디코더인 [TextDecoder](https://developer.mozilla.org/docs/Web/API/TextDecoder)를 기준으로 합니다. 이 예제에서는 C# 메서드에서 JavaScript 함수를 호출하는 방법을 보여 줍니다. JavaScript 함수는 C# 메서드에서 바이트 배열을 수신하고, 배열을 디코딩하고, 표시를 위해 구성 요소에 텍스트를 반환합니다.
 
-*wwwroot/index.html*(Blazor WebAssembly) 또는 *Pages/_Host.cshtml*(Blazor 서버)의 `<head>` 요소 내에 Blazor를 사용하여 전달된 배열을 디코딩하고 디코딩된 값을 반환하는 JavaScript 함수를 제공합니다.
+*wwwroot/index.html*(Blazor WebAssembly) 또는 *Pages/_Host.cshtml*(Blazor 서버)의 `<head>` 요소 내에 Blazor를 사용하여 전달된 배열을 디코딩하고 디코딩된 값을 반환하는 JavaScript 함수를 `TextDecoder` 제공합니다.
 
 [!code-html[](call-javascript-from-dotnet/samples_snapshot/index-script-convertarray.html)]
 
