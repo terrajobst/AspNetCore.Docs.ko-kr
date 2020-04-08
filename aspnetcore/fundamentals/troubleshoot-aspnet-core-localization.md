@@ -6,24 +6,24 @@ ms.author: riande
 ms.date: 01/24/2019
 uid: fundamentals/troubleshoot-aspnet-core-localization
 ms.openlocfilehash: 229e274a22e170d984a16d3b1ee64ebc38c4ef77
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78647895"
 ---
-# <a name="troubleshoot-aspnet-core-localization"></a><span data-ttu-id="ff6da-103">ASP.NET Core 지역화 문제 해결</span><span class="sxs-lookup"><span data-stu-id="ff6da-103">Troubleshoot ASP.NET Core Localization</span></span>
+# <a name="troubleshoot-aspnet-core-localization"></a><span data-ttu-id="5fde8-103">ASP.NET Core 지역화 문제 해결</span><span class="sxs-lookup"><span data-stu-id="5fde8-103">Troubleshoot ASP.NET Core Localization</span></span>
 
-<span data-ttu-id="ff6da-104">작성자: [Hisham Bin Ateya](https://github.com/hishamco)</span><span class="sxs-lookup"><span data-stu-id="ff6da-104">By [Hisham Bin Ateya](https://github.com/hishamco)</span></span>
+<span data-ttu-id="5fde8-104">작성자: [Hisham Bin Ateya](https://github.com/hishamco)</span><span class="sxs-lookup"><span data-stu-id="5fde8-104">By [Hisham Bin Ateya](https://github.com/hishamco)</span></span>
 
-<span data-ttu-id="ff6da-105">이 문서에서는 ASP.NET Core 앱 지역화 문제를 진단하는 방법에 대한 지침을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-105">This article provides instructions on how to diagnose ASP.NET Core app localization issues.</span></span>
+<span data-ttu-id="5fde8-105">이 문서에서는 ASP.NET Core 앱 지역화 문제를 진단하는 방법에 대한 지침을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-105">This article provides instructions on how to diagnose ASP.NET Core app localization issues.</span></span>
 
-## <a name="localization-configuration-issues"></a><span data-ttu-id="ff6da-106">지역화 구성 문제</span><span class="sxs-lookup"><span data-stu-id="ff6da-106">Localization configuration issues</span></span>
+## <a name="localization-configuration-issues"></a><span data-ttu-id="5fde8-106">지역화 구성 문제</span><span class="sxs-lookup"><span data-stu-id="5fde8-106">Localization configuration issues</span></span>
 
-<span data-ttu-id="ff6da-107">**지역화 미들웨어 순서**</span><span class="sxs-lookup"><span data-stu-id="ff6da-107">**Localization middleware order**</span></span>  
-<span data-ttu-id="ff6da-108">지역화 미들웨어가 예상대로 정렬되지 않으므로 앱이 지역화되지 않을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-108">The app may not localize because the localization middleware isn't ordered as expected.</span></span>
+<span data-ttu-id="5fde8-107">**지역화 미들웨어 순서**</span><span class="sxs-lookup"><span data-stu-id="5fde8-107">**Localization middleware order**</span></span>  
+<span data-ttu-id="5fde8-108">지역화 미들웨어가 예상대로 정렬되지 않으므로 앱이 지역화되지 않을 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-108">The app may not localize because the localization middleware isn't ordered as expected.</span></span>
 
-<span data-ttu-id="ff6da-109">이 문제를 해결하려면 해당 지역화 미들웨어가 MVC 미들웨어 전에 등록되었는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-109">To resolve this issue, ensure that localization middleware is registered before MVC middleware.</span></span> <span data-ttu-id="ff6da-110">그렇지 않으면 지역화 미들웨어는 적용되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-110">Otherwise, the localization middleware isn't applied.</span></span>
+<span data-ttu-id="5fde8-109">이 문제를 해결하려면 해당 지역화 미들웨어가 MVC 미들웨어 전에 등록되었는지 확인합니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-109">To resolve this issue, ensure that localization middleware is registered before MVC middleware.</span></span> <span data-ttu-id="5fde8-110">그렇지 않으면 지역화 미들웨어는 적용되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-110">Otherwise, the localization middleware isn't applied.</span></span>
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -34,46 +34,46 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-<span data-ttu-id="ff6da-111">**지역화 리소스 경로가 없음**</span><span class="sxs-lookup"><span data-stu-id="ff6da-111">**Localization resources path not found**</span></span>
+<span data-ttu-id="5fde8-111">**지역화 리소스 경로가 없음**</span><span class="sxs-lookup"><span data-stu-id="5fde8-111">**Localization resources path not found**</span></span>
 
-<span data-ttu-id="ff6da-112">**RequestCultureProvider에서 지원되는 문화권이 등록된 문화권과 한 번 일치하지 않음**</span><span class="sxs-lookup"><span data-stu-id="ff6da-112">**Supported Cultures in RequestCultureProvider don't match with registered once**</span></span>  
+<span data-ttu-id="5fde8-112">**RequestCultureProvider에서 지원되는 문화권이 등록된 문화권과 한 번 일치하지 않음**</span><span class="sxs-lookup"><span data-stu-id="5fde8-112">**Supported Cultures in RequestCultureProvider don't match with registered once**</span></span>  
 
-## <a name="resource-file-naming-issues"></a><span data-ttu-id="ff6da-113">리소스 파일 이름 지정 문제</span><span class="sxs-lookup"><span data-stu-id="ff6da-113">Resource file naming issues</span></span>
+## <a name="resource-file-naming-issues"></a><span data-ttu-id="5fde8-113">리소스 파일 이름 지정 문제</span><span class="sxs-lookup"><span data-stu-id="5fde8-113">Resource file naming issues</span></span>
 
-<span data-ttu-id="ff6da-114">ASP.NET Core에는 지역화 리소스 파일 이름 지정에 대해 미리 정의된 규칙 지침이 있고 [여기](xref:fundamentals/localization?view=aspnetcore-2.2#resource-file-naming)에서 자세히 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-114">ASP.NET Core has predefined rules and guidelines for localization resources file naming, which are described in detail [here](xref:fundamentals/localization?view=aspnetcore-2.2#resource-file-naming).</span></span>
+<span data-ttu-id="5fde8-114">ASP.NET Core에는 지역화 리소스 파일 이름 지정에 대해 미리 정의된 규칙 지침이 있고 [여기](xref:fundamentals/localization?view=aspnetcore-2.2#resource-file-naming)에서 자세히 설명합니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-114">ASP.NET Core has predefined rules and guidelines for localization resources file naming, which are described in detail [here](xref:fundamentals/localization?view=aspnetcore-2.2#resource-file-naming).</span></span>
 
-## <a name="missing-resources"></a><span data-ttu-id="ff6da-115">누락된 리소스</span><span class="sxs-lookup"><span data-stu-id="ff6da-115">Missing resources</span></span>
+## <a name="missing-resources"></a><span data-ttu-id="5fde8-115">누락된 리소스</span><span class="sxs-lookup"><span data-stu-id="5fde8-115">Missing resources</span></span>
 
-<span data-ttu-id="ff6da-116">리소스를 찾을 수 없는 일반적인 원인은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-116">Common causes of resources not being found include:</span></span>
+<span data-ttu-id="5fde8-116">리소스를 찾을 수 없는 일반적인 원인은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-116">Common causes of resources not being found include:</span></span>
 
-- <span data-ttu-id="ff6da-117">`resx` 파일 또는 로컬라이저 요청에서 리소스 이름의 철자가 잘못되었습니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-117">Resource names are misspelled in either the `resx` file or the localizer request.</span></span>
-- <span data-ttu-id="ff6da-118">리소스가 일부 언어의 경우 `resx`에서 누락되었지만 다른 언어에서 존재합니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-118">The resource is missing from the `resx` for some languages, but exists in others.</span></span>
-- <span data-ttu-id="ff6da-119">여전히 문제가 있는 경우 누락된 리소스에 대한 자세한 내용은 `Debug` 로그 수준의 지역화 로그 메시지를 확인하세요.</span><span class="sxs-lookup"><span data-stu-id="ff6da-119">If you're still having trouble, check the localization log messages (which are at `Debug` log level) for more details about the missing resources.</span></span>
+- <span data-ttu-id="5fde8-117">`resx` 파일 또는 로컬라이저 요청에서 리소스 이름의 철자가 잘못되었습니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-117">Resource names are misspelled in either the `resx` file or the localizer request.</span></span>
+- <span data-ttu-id="5fde8-118">리소스가 일부 언어의 경우 `resx`에서 누락되었지만 다른 언어에서 존재합니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-118">The resource is missing from the `resx` for some languages, but exists in others.</span></span>
+- <span data-ttu-id="5fde8-119">여전히 문제가 있는 경우 누락된 리소스에 대한 자세한 내용은 `Debug` 로그 수준의 지역화 로그 메시지를 확인하세요.</span><span class="sxs-lookup"><span data-stu-id="5fde8-119">If you're still having trouble, check the localization log messages (which are at `Debug` log level) for more details about the missing resources.</span></span>
 
-<span data-ttu-id="ff6da-120">_**힌트:** `CookieRequestCultureProvider`를 사용하는 경우 지역화 쿠키 값 안의 문화권에서 작은따옴표를 사용하지 않았는지 확인합니다. 예를 들어 `c='en-UK'|uic='en-US'`가 잘못된 쿠키 값인 반면, `c=en-UK|uic=en-US`는 유효합니다._</span><span class="sxs-lookup"><span data-stu-id="ff6da-120">_**Hint:** When using `CookieRequestCultureProvider`, verify single quotes are not used with the cultures inside the localization cookie value. For example, `c='en-UK'|uic='en-US'` is an invalid cookie value, while `c=en-UK|uic=en-US` is a valid._</span></span>
+<span data-ttu-id="5fde8-120">_**힌트:** `CookieRequestCultureProvider`를 사용하는 경우 지역화 쿠키 값 안의 문화권에서 작은따옴표를 사용하지 않았는지 확인합니다. 예를 들어 `c='en-UK'|uic='en-US'`가 잘못된 쿠키 값인 반면, `c=en-UK|uic=en-US`는 유효합니다._</span><span class="sxs-lookup"><span data-stu-id="5fde8-120">_**Hint:** When using `CookieRequestCultureProvider`, verify single quotes are not used with the cultures inside the localization cookie value. For example, `c='en-UK'|uic='en-US'` is an invalid cookie value, while `c=en-UK|uic=en-US` is a valid._</span></span>
 
-## <a name="resources--class-libraries-issues"></a><span data-ttu-id="ff6da-121">리소스 및 클래스 라이브러리 문제</span><span class="sxs-lookup"><span data-stu-id="ff6da-121">Resources & Class Libraries issues</span></span>
+## <a name="resources--class-libraries-issues"></a><span data-ttu-id="5fde8-121">리소스 및 클래스 라이브러리 문제</span><span class="sxs-lookup"><span data-stu-id="5fde8-121">Resources & Class Libraries issues</span></span>
 
-<span data-ttu-id="ff6da-122">기본적으로 ASP.NET Core는 클래스 라이브러리가 [ResourceLocationAttribute](/dotnet/api/microsoft.extensions.localization.resourcelocationattribute?view=aspnetcore-2.1)를 통해 해당 리소스 파일을 찾을 수 있는 방법을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-122">ASP.NET Core by default provides a way to allow the class libraries to find their resource files via [ResourceLocationAttribute](/dotnet/api/microsoft.extensions.localization.resourcelocationattribute?view=aspnetcore-2.1).</span></span>
+<span data-ttu-id="5fde8-122">기본적으로 ASP.NET Core는 클래스 라이브러리가 [ResourceLocationAttribute](/dotnet/api/microsoft.extensions.localization.resourcelocationattribute?view=aspnetcore-2.1)를 통해 해당 리소스 파일을 찾을 수 있는 방법을 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-122">ASP.NET Core by default provides a way to allow the class libraries to find their resource files via [ResourceLocationAttribute](/dotnet/api/microsoft.extensions.localization.resourcelocationattribute?view=aspnetcore-2.1).</span></span>
 
-<span data-ttu-id="ff6da-123">클래스 라이브러리와 관련된 일반적인 문제는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-123">Common issues with class libraries include:</span></span>
-- <span data-ttu-id="ff6da-124">라이브러리 클래스에서 `ResourceLocationAttribute`가 누락되면 `ResourceManagerStringLocalizerFactory`가 리소스를 검색하지 못합니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-124">Missing the `ResourceLocationAttribute` in a class library will prevent `ResourceManagerStringLocalizerFactory` from discovering the resources.</span></span>
-- <span data-ttu-id="ff6da-125">리소스 파일 이름 지정</span><span class="sxs-lookup"><span data-stu-id="ff6da-125">Resource file naming.</span></span> <span data-ttu-id="ff6da-126">자세한 내용은 [리소스 파일 이름 지정 문제](#resource-file-naming-issues) 섹션을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="ff6da-126">For more information, see [Resource file naming issues](#resource-file-naming-issues) section.</span></span>
-- <span data-ttu-id="ff6da-127">클래스 라이브러리의 루트 네임스페이스 변경</span><span class="sxs-lookup"><span data-stu-id="ff6da-127">Changing the root namespace of the class library.</span></span> <span data-ttu-id="ff6da-128">자세한 내용은 [루트 네임스페이스 문제](#root-namespace-issues) 섹션을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="ff6da-128">For more information, see [Root Namespace issues](#root-namespace-issues) section.</span></span>
+<span data-ttu-id="5fde8-123">클래스 라이브러리와 관련된 일반적인 문제는 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-123">Common issues with class libraries include:</span></span>
+- <span data-ttu-id="5fde8-124">라이브러리 클래스에서 `ResourceLocationAttribute`가 누락되면 `ResourceManagerStringLocalizerFactory`가 리소스를 검색하지 못합니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-124">Missing the `ResourceLocationAttribute` in a class library will prevent `ResourceManagerStringLocalizerFactory` from discovering the resources.</span></span>
+- <span data-ttu-id="5fde8-125">리소스 파일 이름 지정</span><span class="sxs-lookup"><span data-stu-id="5fde8-125">Resource file naming.</span></span> <span data-ttu-id="5fde8-126">자세한 내용은 [리소스 파일 이름 지정 문제](#resource-file-naming-issues) 섹션을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="5fde8-126">For more information, see [Resource file naming issues](#resource-file-naming-issues) section.</span></span>
+- <span data-ttu-id="5fde8-127">클래스 라이브러리의 루트 네임스페이스 변경</span><span class="sxs-lookup"><span data-stu-id="5fde8-127">Changing the root namespace of the class library.</span></span> <span data-ttu-id="5fde8-128">자세한 내용은 [루트 네임스페이스 문제](#root-namespace-issues) 섹션을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="5fde8-128">For more information, see [Root Namespace issues](#root-namespace-issues) section.</span></span>
 
-## <a name="customrequestcultureprovider-doesnt-work-as-expected"></a><span data-ttu-id="ff6da-129">CustomRequestCultureProvider가 예상대로 작동하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-129">CustomRequestCultureProvider doesn't work as expected</span></span>
+## <a name="customrequestcultureprovider-doesnt-work-as-expected"></a><span data-ttu-id="5fde8-129">CustomRequestCultureProvider가 예상대로 작동하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-129">CustomRequestCultureProvider doesn't work as expected</span></span>
 
-<span data-ttu-id="ff6da-130">`RequestLocalizationOptions` 클래스에는 세 가지 기본 공급 기업이 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-130">The `RequestLocalizationOptions` class has three default providers:</span></span>
+<span data-ttu-id="5fde8-130">`RequestLocalizationOptions` 클래스에는 세 가지 기본 공급 기업이 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-130">The `RequestLocalizationOptions` class has three default providers:</span></span>
 
 1. `QueryStringRequestCultureProvider`
 2. `CookieRequestCultureProvider`
 3. `AcceptLanguageHeaderRequestCultureProvider`
 
-<span data-ttu-id="ff6da-131">[CustomRequestCultureProvider](/dotnet/api/microsoft.aspnetcore.localization.customrequestcultureprovider?view=aspnetcore-2.1)를 통해 앱에서 지역화 문화권을 제공하는 방법을 사용자 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-131">The [CustomRequestCultureProvider](/dotnet/api/microsoft.aspnetcore.localization.customrequestcultureprovider?view=aspnetcore-2.1) allows you to customize how the localization culture is provided in your app.</span></span> <span data-ttu-id="ff6da-132">기본 공급 기업이 사용자 요구 사항을 충족하지 못할 때 `CustomRequestCultureProvider`를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-132">The `CustomRequestCultureProvider` is used when the default providers don't meet your requirements.</span></span>
+<span data-ttu-id="5fde8-131">[CustomRequestCultureProvider](/dotnet/api/microsoft.aspnetcore.localization.customrequestcultureprovider?view=aspnetcore-2.1)를 통해 앱에서 지역화 문화권을 제공하는 방법을 사용자 지정할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-131">The [CustomRequestCultureProvider](/dotnet/api/microsoft.aspnetcore.localization.customrequestcultureprovider?view=aspnetcore-2.1) allows you to customize how the localization culture is provided in your app.</span></span> <span data-ttu-id="5fde8-132">기본 공급 기업이 사용자 요구 사항을 충족하지 못할 때 `CustomRequestCultureProvider`를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-132">The `CustomRequestCultureProvider` is used when the default providers don't meet your requirements.</span></span>
 
-- <span data-ttu-id="ff6da-133">사용자 지정 공급 기업이 제대로 작동하지 않는 일반적인 원인은 `RequestCultureProviders` 목록의 첫 번째 공급 기업이 아니라는 점입니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-133">A common reason custom provider don't work properly is that it isn't the first provider in the `RequestCultureProviders` list.</span></span> <span data-ttu-id="ff6da-134">이 문제를 해결하려면:</span><span class="sxs-lookup"><span data-stu-id="ff6da-134">To resolve this issue:</span></span>
+- <span data-ttu-id="5fde8-133">사용자 지정 공급 기업이 제대로 작동하지 않는 일반적인 원인은 `RequestCultureProviders` 목록의 첫 번째 공급 기업이 아니라는 점입니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-133">A common reason custom provider don't work properly is that it isn't the first provider in the `RequestCultureProviders` list.</span></span> <span data-ttu-id="5fde8-134">이 문제를 해결하려면:</span><span class="sxs-lookup"><span data-stu-id="5fde8-134">To resolve this issue:</span></span>
 
-- <span data-ttu-id="ff6da-135">다음과 같이 `RequestCultureProviders` 목록에서 0의 위치에 있는 사용자 지정 공급 기업을 삽입합니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-135">Insert the custom provider at the position 0 in the `RequestCultureProviders` list as the following:</span></span>
+- <span data-ttu-id="5fde8-135">다음과 같이 `RequestCultureProviders` 목록에서 0의 위치에 있는 사용자 지정 공급 기업을 삽입합니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-135">Insert the custom provider at the position 0 in the `RequestCultureProviders` list as the following:</span></span>
 
 ::: moniker range="< aspnetcore-3.0"
 ```csharp
@@ -95,15 +95,15 @@ options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async 
 ```
 ::: moniker-end
 
-- <span data-ttu-id="ff6da-136">`AddInitialRequestCultureProvider` 확장 메서드를 사용하여 사용자 지정 공급 기업을 초기 공급 기업으로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-136">Use `AddInitialRequestCultureProvider` extension method to set the custom provider as initial provider.</span></span>
+- <span data-ttu-id="5fde8-136">`AddInitialRequestCultureProvider` 확장 메서드를 사용하여 사용자 지정 공급 기업을 초기 공급 기업으로 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-136">Use `AddInitialRequestCultureProvider` extension method to set the custom provider as initial provider.</span></span>
 
-## <a name="root-namespace-issues"></a><span data-ttu-id="ff6da-137">루트 네임스페이스 문제</span><span class="sxs-lookup"><span data-stu-id="ff6da-137">Root Namespace issues</span></span>
+## <a name="root-namespace-issues"></a><span data-ttu-id="5fde8-137">루트 네임스페이스 문제</span><span class="sxs-lookup"><span data-stu-id="5fde8-137">Root Namespace issues</span></span>
 
-<span data-ttu-id="ff6da-138">어셈블리의 루트 네임 스페이스가 어셈블리 이름과 다르면 지역화가 기본적으로 작동하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-138">When the root namespace of an assembly is different than the assembly name, localization doesn't work by default.</span></span> <span data-ttu-id="ff6da-139">이 문제를 방지하려면 [여기](xref:fundamentals/localization?view=aspnetcore-2.2#resource-file-naming)에 자세히 설명된 대로 [RootNamespace](/dotnet/api/microsoft.extensions.localization.rootnamespaceattribute?view=aspnetcore-2.1)를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-139">To avoid this issue use [RootNamespace](/dotnet/api/microsoft.extensions.localization.rootnamespaceattribute?view=aspnetcore-2.1), which is described in detail [here](xref:fundamentals/localization?view=aspnetcore-2.2#resource-file-naming)</span></span>
+<span data-ttu-id="5fde8-138">어셈블리의 루트 네임 스페이스가 어셈블리 이름과 다르면 지역화가 기본적으로 작동하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-138">When the root namespace of an assembly is different than the assembly name, localization doesn't work by default.</span></span> <span data-ttu-id="5fde8-139">이 문제를 방지하려면 [여기](xref:fundamentals/localization?view=aspnetcore-2.2#resource-file-naming)에 자세히 설명된 대로 [RootNamespace](/dotnet/api/microsoft.extensions.localization.rootnamespaceattribute?view=aspnetcore-2.1)를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-139">To avoid this issue use [RootNamespace](/dotnet/api/microsoft.extensions.localization.rootnamespaceattribute?view=aspnetcore-2.1), which is described in detail [here](xref:fundamentals/localization?view=aspnetcore-2.2#resource-file-naming)</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="ff6da-140">이 오류는 프로젝트 이름이 유효한 .NET 식별자가 아닌 경우 발생할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-140">This can occur when a project's name is not a valid .NET identifier.</span></span> <span data-ttu-id="ff6da-141">예를 들어 `my-project-name.csproj`가 루트 네임스페이스 `my_project_name`과 어셈블리 이름 `my-project-name`을 사용하면 이 오류가 발생합니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-141">For instance `my-project-name.csproj` will use the root namespace `my_project_name` and the assembly name `my-project-name` leading to this error.</span></span> 
+> <span data-ttu-id="5fde8-140">이 오류는 프로젝트 이름이 유효한 .NET 식별자가 아닌 경우 발생할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-140">This can occur when a project's name is not a valid .NET identifier.</span></span> <span data-ttu-id="5fde8-141">예를 들어 `my-project-name.csproj`가 루트 네임스페이스 `my_project_name`과 어셈블리 이름 `my-project-name`을 사용하면 이 오류가 발생합니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-141">For instance `my-project-name.csproj` will use the root namespace `my_project_name` and the assembly name `my-project-name` leading to this error.</span></span> 
 
-## <a name="resources--build-action"></a><span data-ttu-id="ff6da-142">리소스 및 빌드 작업</span><span class="sxs-lookup"><span data-stu-id="ff6da-142">Resources & Build Action</span></span>
+## <a name="resources--build-action"></a><span data-ttu-id="5fde8-142">리소스 및 빌드 작업</span><span class="sxs-lookup"><span data-stu-id="5fde8-142">Resources & Build Action</span></span>
 
-<span data-ttu-id="ff6da-143">지역화에 대해 리소스 파일을 사용하는 경우 적절한 빌드 작업이 포함되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-143">If you use resource files for localization, it's important that they have an appropriate build action.</span></span> <span data-ttu-id="ff6da-144">해당 리소스 파일이 **포함 리소스**여야 하며, 그렇지 않으면 `ResourceStringLocalizer`가 이러한 리소스를 찾을 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="ff6da-144">They should be **Embedded Resource**, otherwise the `ResourceStringLocalizer` is not able to find these resources.</span></span>
+<span data-ttu-id="5fde8-143">지역화에 대해 리소스 파일을 사용하는 경우 적절한 빌드 작업이 포함되어야 합니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-143">If you use resource files for localization, it's important that they have an appropriate build action.</span></span> <span data-ttu-id="5fde8-144">해당 리소스 파일이 **포함 리소스**여야 하며, 그렇지 않으면 `ResourceStringLocalizer`가 이러한 리소스를 찾을 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="5fde8-144">They should be **Embedded Resource**, otherwise the `ResourceStringLocalizer` is not able to find these resources.</span></span>

@@ -7,89 +7,89 @@ ms.custom: mvc
 ms.date: 09/28/2019
 uid: data/ef-rp/read-related-data
 ms.openlocfilehash: d244ce1527486466bcbc6557ec35869aa206bc4f
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78645591"
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---read-related-data---6-of-8"></a><span data-ttu-id="b135b-103">ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 관련 데이터 읽기 - 6/8</span><span class="sxs-lookup"><span data-stu-id="b135b-103">Razor Pages with EF Core in ASP.NET Core - Read Related Data - 6 of 8</span></span>
+# <a name="razor-pages-with-ef-core-in-aspnet-core---read-related-data---6-of-8"></a><span data-ttu-id="73611-103">ASP.NET Core에서 EF Core를 사용한 Razor 페이지 - 관련 데이터 읽기 - 6/8</span><span class="sxs-lookup"><span data-stu-id="73611-103">Razor Pages with EF Core in ASP.NET Core - Read Related Data - 6 of 8</span></span>
 
-<span data-ttu-id="b135b-104">작성자: [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="b135b-104">By [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog), and [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+<span data-ttu-id="73611-104">작성자: [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog) 및 [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="73611-104">By [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog), and [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
 [!INCLUDE [about the series](../../includes/RP-EF/intro.md)]
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="b135b-105">이 자습서에서는 관련 데이터를 읽고 표시하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-105">This tutorial shows how to read and display related data.</span></span> <span data-ttu-id="b135b-106">관련된 데이터는 EF Core에서 탐색 속성에 로드하는 데이터입니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-106">Related data is data that EF Core loads into navigation properties.</span></span>
+<span data-ttu-id="73611-105">이 자습서에서는 관련 데이터를 읽고 표시하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="73611-105">This tutorial shows how to read and display related data.</span></span> <span data-ttu-id="73611-106">관련된 데이터는 EF Core에서 탐색 속성에 로드하는 데이터입니다.</span><span class="sxs-lookup"><span data-stu-id="73611-106">Related data is data that EF Core loads into navigation properties.</span></span>
 
-<span data-ttu-id="b135b-107">다음 그림은 이 자습서에 대해 완료된 페이지를 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-107">The following illustrations show the completed pages for this tutorial:</span></span>
+<span data-ttu-id="73611-107">다음 그림은 이 자습서에 대해 완료된 페이지를 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="73611-107">The following illustrations show the completed pages for this tutorial:</span></span>
 
 ![과정 인덱스 페이지](read-related-data/_static/courses-index30.png)
 
 ![강사 인덱스 페이지](read-related-data/_static/instructors-index30.png)
 
-## <a name="eager-explicit-and-lazy-loading"></a><span data-ttu-id="b135b-110">즉시, 명시적 및 지연 로드</span><span class="sxs-lookup"><span data-stu-id="b135b-110">Eager, explicit, and lazy loading</span></span>
+## <a name="eager-explicit-and-lazy-loading"></a><span data-ttu-id="73611-110">즉시, 명시적 및 지연 로드</span><span class="sxs-lookup"><span data-stu-id="73611-110">Eager, explicit, and lazy loading</span></span>
 
-<span data-ttu-id="b135b-111">여러 가지 방법으로 EF Core가 관련 데이터를 엔터티의 탐색 속성에 로드할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-111">There are several ways that EF Core can load related data into the navigation properties of an entity:</span></span>
+<span data-ttu-id="73611-111">여러 가지 방법으로 EF Core가 관련 데이터를 엔터티의 탐색 속성에 로드할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-111">There are several ways that EF Core can load related data into the navigation properties of an entity:</span></span>
 
-* <span data-ttu-id="b135b-112">[즉시 로드](/ef/core/querying/related-data#eager-loading).</span><span class="sxs-lookup"><span data-stu-id="b135b-112">[Eager loading](/ef/core/querying/related-data#eager-loading).</span></span> <span data-ttu-id="b135b-113">즉시 로드는 한 형식의 엔터티에 대한 쿼리가 관련 엔터티도 로드하는 경우입니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-113">Eager loading is when a query for one type of entity also loads related entities.</span></span> <span data-ttu-id="b135b-114">엔터티를 읽을 때 관련된 데이터가 검색됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-114">When an entity is read, its related data is retrieved.</span></span> <span data-ttu-id="b135b-115">이는 일반적으로 필요한 데이터를 모두 검색하는 단일 조인 쿼리를 발생시킵니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-115">This typically results in a single join query that retrieves all of the data that's needed.</span></span> <span data-ttu-id="b135b-116">EF 코어는 일부 형식의 즉시 로드에 대해 여러 쿼리를 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-116">EF Core will issue multiple queries for some types of eager loading.</span></span> <span data-ttu-id="b135b-117">여러 쿼리를 실행하는 것이 큰 단일 쿼리보다 더 효율적일 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-117">Issuing multiple queries can be more efficient than a giant single query.</span></span> <span data-ttu-id="b135b-118">즉시 로드는 `Include` 및 `ThenInclude` 메서드로 지정됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-118">Eager loading is specified with the `Include` and `ThenInclude` methods.</span></span>
+* <span data-ttu-id="73611-112">[즉시 로드](/ef/core/querying/related-data#eager-loading).</span><span class="sxs-lookup"><span data-stu-id="73611-112">[Eager loading](/ef/core/querying/related-data#eager-loading).</span></span> <span data-ttu-id="73611-113">즉시 로드는 한 형식의 엔터티에 대한 쿼리가 관련 엔터티도 로드하는 경우입니다.</span><span class="sxs-lookup"><span data-stu-id="73611-113">Eager loading is when a query for one type of entity also loads related entities.</span></span> <span data-ttu-id="73611-114">엔터티를 읽을 때 관련된 데이터가 검색됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-114">When an entity is read, its related data is retrieved.</span></span> <span data-ttu-id="73611-115">이는 일반적으로 필요한 데이터를 모두 검색하는 단일 조인 쿼리를 발생시킵니다.</span><span class="sxs-lookup"><span data-stu-id="73611-115">This typically results in a single join query that retrieves all of the data that's needed.</span></span> <span data-ttu-id="73611-116">EF 코어는 일부 형식의 즉시 로드에 대해 여러 쿼리를 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-116">EF Core will issue multiple queries for some types of eager loading.</span></span> <span data-ttu-id="73611-117">여러 쿼리를 실행하는 것이 큰 단일 쿼리보다 더 효율적일 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-117">Issuing multiple queries can be more efficient than a giant single query.</span></span> <span data-ttu-id="73611-118">즉시 로드는 `Include` 및 `ThenInclude` 메서드로 지정됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-118">Eager loading is specified with the `Include` and `ThenInclude` methods.</span></span>
 
   ![즉시 로드 예제](read-related-data/_static/eager-loading.png)
  
-  <span data-ttu-id="b135b-120">즉시 로드는 컬렉션 탐색이 포함된 경우 여러 쿼리를 보냅니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-120">Eager loading sends multiple queries when a collection navigation is included:</span></span>
+  <span data-ttu-id="73611-120">즉시 로드는 컬렉션 탐색이 포함된 경우 여러 쿼리를 보냅니다.</span><span class="sxs-lookup"><span data-stu-id="73611-120">Eager loading sends multiple queries when a collection navigation is included:</span></span>
 
-  * <span data-ttu-id="b135b-121">주 쿼리에 대해 한 개 쿼리</span><span class="sxs-lookup"><span data-stu-id="b135b-121">One query for the main query</span></span> 
-  * <span data-ttu-id="b135b-122">로드 트리에서 각 컬렉션 "에지"에 대해 한 개 쿼리</span><span class="sxs-lookup"><span data-stu-id="b135b-122">One query for each collection "edge" in the load tree.</span></span>
+  * <span data-ttu-id="73611-121">주 쿼리에 대해 한 개 쿼리</span><span class="sxs-lookup"><span data-stu-id="73611-121">One query for the main query</span></span> 
+  * <span data-ttu-id="73611-122">로드 트리에서 각 컬렉션 "에지"에 대해 한 개 쿼리</span><span class="sxs-lookup"><span data-stu-id="73611-122">One query for each collection "edge" in the load tree.</span></span>
 
-* <span data-ttu-id="b135b-123">`Load`를 사용한 별도 쿼리: 별도 쿼리로 데이터를 검색할 수 있으며, EF Core에서 탐색 속성을 “수정”합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-123">Separate queries with `Load`: The data can be retrieved in separate queries, and EF Core "fixes up" the navigation properties.</span></span> <span data-ttu-id="b135b-124">“수정”한다는 것은 EF Core가 탐색 속성을 자동으로 채운다는 것을 의미합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-124">"Fixes up" means that EF Core automatically populates the navigation properties.</span></span> <span data-ttu-id="b135b-125">`Load`로 쿼리를 구분하는 것은 즉시 로드보다 더 명시적인 로드입니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-125">Separate queries with `Load` is more like explicit loading than eager loading.</span></span>
+* <span data-ttu-id="73611-123">`Load`를 사용한 별도 쿼리: 별도 쿼리로 데이터를 검색할 수 있으며, EF Core에서 탐색 속성을 “수정”합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-123">Separate queries with `Load`: The data can be retrieved in separate queries, and EF Core "fixes up" the navigation properties.</span></span> <span data-ttu-id="73611-124">“수정”한다는 것은 EF Core가 탐색 속성을 자동으로 채운다는 것을 의미합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-124">"Fixes up" means that EF Core automatically populates the navigation properties.</span></span> <span data-ttu-id="73611-125">`Load`로 쿼리를 구분하는 것은 즉시 로드보다 더 명시적인 로드입니다.</span><span class="sxs-lookup"><span data-stu-id="73611-125">Separate queries with `Load` is more like explicit loading than eager loading.</span></span>
 
   ![별도 쿼리 예제](read-related-data/_static/separate-queries.png)
 
-  <span data-ttu-id="b135b-127">참고: EF Core는 이전에 컨텍스트 인스턴스에 로드된 다른 엔터티로 탐색 속성을 자동으로 수정합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-127">Note: EF Core automatically fixes up navigation properties to any other entities that were previously loaded into the context instance.</span></span> <span data-ttu-id="b135b-128">탐색 속성에 대한 데이터가 명시적으로 포함되지 *않더라도* 관련 엔터티의 일부 또는 전부가 이전에 로드된 경우에도 속성이 채워질 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-128">Even if the data for a navigation property is *not* explicitly included, the property may still be populated if some or all of the related entities were previously loaded.</span></span>
+  <span data-ttu-id="73611-127">참고: EF Core는 이전에 컨텍스트 인스턴스에 로드된 다른 엔터티로 탐색 속성을 자동으로 수정합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-127">Note: EF Core automatically fixes up navigation properties to any other entities that were previously loaded into the context instance.</span></span> <span data-ttu-id="73611-128">탐색 속성에 대한 데이터가 명시적으로 포함되지 *않더라도* 관련 엔터티의 일부 또는 전부가 이전에 로드된 경우에도 속성이 채워질 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-128">Even if the data for a navigation property is *not* explicitly included, the property may still be populated if some or all of the related entities were previously loaded.</span></span>
 
-* <span data-ttu-id="b135b-129">[명시적 로드](/ef/core/querying/related-data#explicit-loading).</span><span class="sxs-lookup"><span data-stu-id="b135b-129">[Explicit loading](/ef/core/querying/related-data#explicit-loading).</span></span> <span data-ttu-id="b135b-130">엔터티를 처음 읽을 때 관련된 데이터가 검색되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-130">When the entity is first read, related data isn't retrieved.</span></span> <span data-ttu-id="b135b-131">필요할 때 관련된 데이터를 검색하기 위한 코드를 작성해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-131">Code must be written to retrieve the related data when it's needed.</span></span> <span data-ttu-id="b135b-132">별도 쿼리가 있는 명시적 로드의 경우 여러 쿼리가 데이터베이스로 전송됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-132">Explicit loading with separate queries results in multiple queries sent to the database.</span></span> <span data-ttu-id="b135b-133">명시적 로드에서 코드는 로드될 탐색 속성을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-133">With explicit loading, the code specifies the navigation properties to be loaded.</span></span> <span data-ttu-id="b135b-134">`Load` 메서드를 사용하여 명시적 로드를 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-134">Use the `Load` method to do explicit loading.</span></span> <span data-ttu-id="b135b-135">예를 들어:</span><span class="sxs-lookup"><span data-stu-id="b135b-135">For example:</span></span>
+* <span data-ttu-id="73611-129">[명시적 로드](/ef/core/querying/related-data#explicit-loading).</span><span class="sxs-lookup"><span data-stu-id="73611-129">[Explicit loading](/ef/core/querying/related-data#explicit-loading).</span></span> <span data-ttu-id="73611-130">엔터티를 처음 읽을 때 관련된 데이터가 검색되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-130">When the entity is first read, related data isn't retrieved.</span></span> <span data-ttu-id="73611-131">필요할 때 관련된 데이터를 검색하기 위한 코드를 작성해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-131">Code must be written to retrieve the related data when it's needed.</span></span> <span data-ttu-id="73611-132">별도 쿼리가 있는 명시적 로드의 경우 여러 쿼리가 데이터베이스로 전송됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-132">Explicit loading with separate queries results in multiple queries sent to the database.</span></span> <span data-ttu-id="73611-133">명시적 로드에서 코드는 로드될 탐색 속성을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-133">With explicit loading, the code specifies the navigation properties to be loaded.</span></span> <span data-ttu-id="73611-134">`Load` 메서드를 사용하여 명시적 로드를 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-134">Use the `Load` method to do explicit loading.</span></span> <span data-ttu-id="73611-135">예를 들어:</span><span class="sxs-lookup"><span data-stu-id="73611-135">For example:</span></span>
 
   ![명시적 로드 예제](read-related-data/_static/explicit-loading.png)
 
-* <span data-ttu-id="b135b-137">[지연 로드](/ef/core/querying/related-data#lazy-loading).</span><span class="sxs-lookup"><span data-stu-id="b135b-137">[Lazy loading](/ef/core/querying/related-data#lazy-loading).</span></span> <span data-ttu-id="b135b-138">[지연 로드가 버전 2.1의 EF Core에 추가되었습니다](/ef/core/querying/related-data#lazy-loading).</span><span class="sxs-lookup"><span data-stu-id="b135b-138">[Lazy loading was added to EF Core in version 2.1](/ef/core/querying/related-data#lazy-loading).</span></span> <span data-ttu-id="b135b-139">엔터티를 처음 읽을 때 관련된 데이터가 검색되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-139">When the entity is first read, related data isn't retrieved.</span></span> <span data-ttu-id="b135b-140">탐색 속성에 처음으로 액세스하려고 할 때 해당 탐색 속성에 필요한 데이터가 자동으로 검색됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-140">The first time a navigation property is accessed, the data required for that navigation property is automatically retrieved.</span></span> <span data-ttu-id="b135b-141">탐색 속성에 처음으로 액세스할 때마다 쿼리가 데이터베이스에 전송됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-141">A query is sent to the database each time a navigation property is accessed for the first time.</span></span>
+* <span data-ttu-id="73611-137">[지연 로드](/ef/core/querying/related-data#lazy-loading).</span><span class="sxs-lookup"><span data-stu-id="73611-137">[Lazy loading](/ef/core/querying/related-data#lazy-loading).</span></span> <span data-ttu-id="73611-138">[지연 로드가 버전 2.1의 EF Core에 추가되었습니다](/ef/core/querying/related-data#lazy-loading).</span><span class="sxs-lookup"><span data-stu-id="73611-138">[Lazy loading was added to EF Core in version 2.1](/ef/core/querying/related-data#lazy-loading).</span></span> <span data-ttu-id="73611-139">엔터티를 처음 읽을 때 관련된 데이터가 검색되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-139">When the entity is first read, related data isn't retrieved.</span></span> <span data-ttu-id="73611-140">탐색 속성에 처음으로 액세스하려고 할 때 해당 탐색 속성에 필요한 데이터가 자동으로 검색됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-140">The first time a navigation property is accessed, the data required for that navigation property is automatically retrieved.</span></span> <span data-ttu-id="73611-141">탐색 속성에 처음으로 액세스할 때마다 쿼리가 데이터베이스에 전송됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-141">A query is sent to the database each time a navigation property is accessed for the first time.</span></span>
 
-## <a name="create-course-pages"></a><span data-ttu-id="b135b-142">과정 페이지 만들기</span><span class="sxs-lookup"><span data-stu-id="b135b-142">Create Course pages</span></span>
+## <a name="create-course-pages"></a><span data-ttu-id="73611-142">과정 페이지 만들기</span><span class="sxs-lookup"><span data-stu-id="73611-142">Create Course pages</span></span>
 
-<span data-ttu-id="b135b-143">`Course` 엔터티는 `Department` 엔터티가 포함된 탐색 속성을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-143">The `Course` entity includes a navigation property that contains the related `Department` entity.</span></span>
+<span data-ttu-id="73611-143">`Course` 엔터티는 `Department` 엔터티가 포함된 탐색 속성을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-143">The `Course` entity includes a navigation property that contains the related `Department` entity.</span></span>
 
 ![Course.Department](read-related-data/_static/dep-crs.png)
 
-<span data-ttu-id="b135b-145">과정에 대해 할당된 부서의 이름을 표시하려면 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-145">To display the name of the assigned department for a course:</span></span>
+<span data-ttu-id="73611-145">과정에 대해 할당된 부서의 이름을 표시하려면 다음을 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-145">To display the name of the assigned department for a course:</span></span>
 
-* <span data-ttu-id="b135b-146">관련된 `Department` 엔터티를 `Course.Department` 탐색 속성에 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-146">Load the related `Department` entity into the `Course.Department` navigation property.</span></span>
-* <span data-ttu-id="b135b-147">`Department` 엔터티의 `Name` 속성에서 이름을 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-147">Get the name from the `Department` entity's `Name` property.</span></span>
+* <span data-ttu-id="73611-146">관련된 `Department` 엔터티를 `Course.Department` 탐색 속성에 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-146">Load the related `Department` entity into the `Course.Department` navigation property.</span></span>
+* <span data-ttu-id="73611-147">`Department` 엔터티의 `Name` 속성에서 이름을 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="73611-147">Get the name from the `Department` entity's `Name` property.</span></span>
 
 <a name="scaffold"></a>
 
-### <a name="scaffold-course-pages"></a><span data-ttu-id="b135b-148">과정 페이지 스캐폴드</span><span class="sxs-lookup"><span data-stu-id="b135b-148">Scaffold Course pages</span></span>
+### <a name="scaffold-course-pages"></a><span data-ttu-id="73611-148">과정 페이지 스캐폴드</span><span class="sxs-lookup"><span data-stu-id="73611-148">Scaffold Course pages</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="b135b-149">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="b135b-149">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="73611-149">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="73611-149">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="b135b-150">다음 예외가 포함된 [학생 페이지 스캐폴드](xref:data/ef-rp/intro#scaffold-student-pages)의 지침을 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-150">Follow the instructions in [Scaffold Student pages](xref:data/ef-rp/intro#scaffold-student-pages) with the following exceptions:</span></span>
+* <span data-ttu-id="73611-150">다음 예외가 포함된 [학생 페이지 스캐폴드](xref:data/ef-rp/intro#scaffold-student-pages)의 지침을 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="73611-150">Follow the instructions in [Scaffold Student pages](xref:data/ef-rp/intro#scaffold-student-pages) with the following exceptions:</span></span>
 
-  * <span data-ttu-id="b135b-151">*Pages/Courses* 폴더를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-151">Create a *Pages/Courses* folder.</span></span>
-  * <span data-ttu-id="b135b-152">모델 클래스에 `Course`를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-152">Use `Course` for the model class.</span></span>
-  * <span data-ttu-id="b135b-153">새 컨텍스트 클래스를 만드는 대신 기존 컨텍스트 클래스를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-153">Use the existing context class instead of creating a new one.</span></span>
+  * <span data-ttu-id="73611-151">*Pages/Courses* 폴더를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="73611-151">Create a *Pages/Courses* folder.</span></span>
+  * <span data-ttu-id="73611-152">모델 클래스에 `Course`를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-152">Use `Course` for the model class.</span></span>
+  * <span data-ttu-id="73611-153">새 컨텍스트 클래스를 만드는 대신 기존 컨텍스트 클래스를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-153">Use the existing context class instead of creating a new one.</span></span>
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="b135b-154">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="b135b-154">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="73611-154">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="73611-154">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-* <span data-ttu-id="b135b-155">*Pages/Courses* 폴더를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-155">Create a *Pages/Courses* folder.</span></span>
+* <span data-ttu-id="73611-155">*Pages/Courses* 폴더를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="73611-155">Create a *Pages/Courses* folder.</span></span>
 
-* <span data-ttu-id="b135b-156">다음 명령을 실행하여 과정 페이지를 스캐폴드합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-156">Run the following command to scaffold the Course pages.</span></span>
+* <span data-ttu-id="73611-156">다음 명령을 실행하여 과정 페이지를 스캐폴드합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-156">Run the following command to scaffold the Course pages.</span></span>
 
-  <span data-ttu-id="b135b-157">**Windows:**</span><span class="sxs-lookup"><span data-stu-id="b135b-157">**On Windows:**</span></span>
+  <span data-ttu-id="73611-157">**Windows:**</span><span class="sxs-lookup"><span data-stu-id="73611-157">**On Windows:**</span></span>
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Course -dc SchoolContext -udl -outDir Pages\Courses --referenceScriptLibraries
   ```
 
-  <span data-ttu-id="b135b-158">**Linux 또는 macOS:**</span><span class="sxs-lookup"><span data-stu-id="b135b-158">**On Linux or macOS:**</span></span>
+  <span data-ttu-id="73611-158">**Linux 또는 macOS:**</span><span class="sxs-lookup"><span data-stu-id="73611-158">**On Linux or macOS:**</span></span>
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Course -dc SchoolContext -udl -outDir Pages/Courses --referenceScriptLibraries
@@ -97,96 +97,96 @@ ms.locfileid: "78645591"
 
 ---
 
-* <span data-ttu-id="b135b-159">*Pages/Courses/Index.cshtml.cs*를 열고 `OnGetAsync` 메서드를 검사합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-159">Open *Pages/Courses/Index.cshtml.cs* and examine the `OnGetAsync` method.</span></span> <span data-ttu-id="b135b-160">스캐폴딩 엔진은 `Department` 탐색 속성에 대한 즉시 로드를 지정했습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-160">The scaffolding engine specified eager loading for the `Department` navigation property.</span></span> <span data-ttu-id="b135b-161">`Include` 메서드가 즉시 로드를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-161">The `Include` method specifies eager loading.</span></span>
+* <span data-ttu-id="73611-159">*Pages/Courses/Index.cshtml.cs*를 열고 `OnGetAsync` 메서드를 검사합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-159">Open *Pages/Courses/Index.cshtml.cs* and examine the `OnGetAsync` method.</span></span> <span data-ttu-id="73611-160">스캐폴딩 엔진은 `Department` 탐색 속성에 대한 즉시 로드를 지정했습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-160">The scaffolding engine specified eager loading for the `Department` navigation property.</span></span> <span data-ttu-id="73611-161">`Include` 메서드가 즉시 로드를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-161">The `Include` method specifies eager loading.</span></span>
 
-* <span data-ttu-id="b135b-162">앱을 실행하고 **과정** 링크를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-162">Run the app and select the **Courses** link.</span></span> <span data-ttu-id="b135b-163">Department 열에 도움이 되지 않는 `DepartmentID`가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-163">The department column displays the `DepartmentID`, which isn't useful.</span></span>
+* <span data-ttu-id="73611-162">앱을 실행하고 **과정** 링크를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-162">Run the app and select the **Courses** link.</span></span> <span data-ttu-id="73611-163">Department 열에 도움이 되지 않는 `DepartmentID`가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-163">The department column displays the `DepartmentID`, which isn't useful.</span></span>
 
-### <a name="display-the-department-name"></a><span data-ttu-id="b135b-164">부서 이름 표시</span><span class="sxs-lookup"><span data-stu-id="b135b-164">Display the department name</span></span>
+### <a name="display-the-department-name"></a><span data-ttu-id="73611-164">부서 이름 표시</span><span class="sxs-lookup"><span data-stu-id="73611-164">Display the department name</span></span>
 
-<span data-ttu-id="b135b-165">다음 코드로 Pages/Courses/Index.cshtml.cs를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-165">Update Pages/Courses/Index.cshtml.cs with the following code:</span></span>
+<span data-ttu-id="73611-165">다음 코드로 Pages/Courses/Index.cshtml.cs를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-165">Update Pages/Courses/Index.cshtml.cs with the following code:</span></span>
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Index.cshtml.cs?highlight=18,22,24)]
 
-<span data-ttu-id="b135b-166">앞의 코드는 `Course` 속성을 `Courses`로 변경하고 `AsNoTracking`을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-166">The preceding code changes the `Course` property to `Courses` and adds `AsNoTracking`.</span></span> <span data-ttu-id="b135b-167">반환된 엔터티는 추적되지 않으므로 `AsNoTracking`이 성능을 개선합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-167">`AsNoTracking` improves performance because the entities returned are not tracked.</span></span> <span data-ttu-id="b135b-168">현재 컨텍스트에서 업데이트되지 않으므로 엔터티를 추적할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-168">The entities don't need to be tracked because they're not updated in the current context.</span></span>
+<span data-ttu-id="73611-166">앞의 코드는 `Course` 속성을 `Courses`로 변경하고 `AsNoTracking`을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-166">The preceding code changes the `Course` property to `Courses` and adds `AsNoTracking`.</span></span> <span data-ttu-id="73611-167">반환된 엔터티는 추적되지 않으므로 `AsNoTracking`이 성능을 개선합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-167">`AsNoTracking` improves performance because the entities returned are not tracked.</span></span> <span data-ttu-id="73611-168">현재 컨텍스트에서 업데이트되지 않으므로 엔터티를 추적할 필요가 없습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-168">The entities don't need to be tracked because they're not updated in the current context.</span></span>
 
-<span data-ttu-id="b135b-169">다음 코드로 *Pages/Courses/Index.cshtml*을 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-169">Update *Pages/Courses/Index.cshtml* with the following code.</span></span>
+<span data-ttu-id="73611-169">다음 코드로 *Pages/Courses/Index.cshtml*을 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-169">Update *Pages/Courses/Index.cshtml* with the following code.</span></span>
 
 [!code-cshtml[](intro/samples/cu30/Pages/Courses/Index.cshtml?highlight=5,8,16-18,20,23,26,32,35-37,45)]
 
-<span data-ttu-id="b135b-170">스캐폴드 코드에 다음 변경 내용을 적용했습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-170">The following changes have been made to the scaffolded code:</span></span>
+<span data-ttu-id="73611-170">스캐폴드 코드에 다음 변경 내용을 적용했습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-170">The following changes have been made to the scaffolded code:</span></span>
 
-* <span data-ttu-id="b135b-171">`Course` 속성 이름을 `Courses`로 변경했습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-171">Changed the `Course` property name to `Courses`.</span></span>
-* <span data-ttu-id="b135b-172">`CourseID` 속성 값을 보여 주는 **Number** 열을 추가했습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-172">Added a **Number** column that shows the `CourseID` property value.</span></span> <span data-ttu-id="b135b-173">일반적으로 최종 사용자에게 의미가 없으므로 기본적으로 기본 키는 스캐폴드되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-173">By default, primary keys aren't scaffolded because normally they're meaningless to end users.</span></span> <span data-ttu-id="b135b-174">그러나 이 경우 기본 키는 의미가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-174">However, in this case the primary key is meaningful.</span></span>
-* <span data-ttu-id="b135b-175">부서 이름을 표시하도록 **Department** 열을 변경했습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-175">Changed the **Department** column to display the department name.</span></span> <span data-ttu-id="b135b-176">코드는 `Department` 탐색 속성으로 로드되는 `Department` 엔터티의 `Name` 속성을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-176">The code displays the `Name` property of the `Department` entity that's loaded into the `Department` navigation property:</span></span>
+* <span data-ttu-id="73611-171">`Course` 속성 이름을 `Courses`로 변경했습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-171">Changed the `Course` property name to `Courses`.</span></span>
+* <span data-ttu-id="73611-172">`CourseID` 속성 값을 보여 주는 **Number** 열을 추가했습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-172">Added a **Number** column that shows the `CourseID` property value.</span></span> <span data-ttu-id="73611-173">일반적으로 최종 사용자에게 의미가 없으므로 기본적으로 기본 키는 스캐폴드되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-173">By default, primary keys aren't scaffolded because normally they're meaningless to end users.</span></span> <span data-ttu-id="73611-174">그러나 이 경우 기본 키는 의미가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-174">However, in this case the primary key is meaningful.</span></span>
+* <span data-ttu-id="73611-175">부서 이름을 표시하도록 **Department** 열을 변경했습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-175">Changed the **Department** column to display the department name.</span></span> <span data-ttu-id="73611-176">코드는 `Department` 탐색 속성으로 로드되는 `Department` 엔터티의 `Name` 속성을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-176">The code displays the `Name` property of the `Department` entity that's loaded into the `Department` navigation property:</span></span>
 
   ```html
   @Html.DisplayFor(modelItem => item.Department.Name)
   ```
 
-<span data-ttu-id="b135b-177">앱을 실행하고 **Courses(과정)** 탭을 선택하여 부서 이름이 있는 목록을 봅니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-177">Run the app and select the **Courses** tab to see the list with department names.</span></span>
+<span data-ttu-id="73611-177">앱을 실행하고 **Courses(과정)** 탭을 선택하여 부서 이름이 있는 목록을 봅니다.</span><span class="sxs-lookup"><span data-stu-id="73611-177">Run the app and select the **Courses** tab to see the list with department names.</span></span>
 
 ![과정 인덱스 페이지](read-related-data/_static/courses-index30.png)
 
 <a name="select"></a>
 
-### <a name="loading-related-data-with-select"></a><span data-ttu-id="b135b-179">Select로 관련된 데이터 로드</span><span class="sxs-lookup"><span data-stu-id="b135b-179">Loading related data with Select</span></span>
+### <a name="loading-related-data-with-select"></a><span data-ttu-id="73611-179">Select로 관련된 데이터 로드</span><span class="sxs-lookup"><span data-stu-id="73611-179">Loading related data with Select</span></span>
 
-<span data-ttu-id="b135b-180">`OnGetAsync` 메서드는 `Include` 메서드로 관련된 데이터를 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-180">The `OnGetAsync` method loads related data with the `Include` method.</span></span> <span data-ttu-id="b135b-181">`Select` 메서드는 필요한 관련 데이터만 로드하는 대안입니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-181">The `Select` method is an alternative that loads only the related data needed.</span></span> <span data-ttu-id="b135b-182">`Department.Name`과 같은 단일 항목에서는 SQL INNER JOIN을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-182">For single items, like the `Department.Name` it uses a SQL INNER JOIN.</span></span> <span data-ttu-id="b135b-183">컬렉션의 경우 다른 데이터베이스 액세스를 사용하지만 컬렉션의 `Include` 연산자도 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-183">For collections, it uses another database access, but so does the `Include` operator on collections.</span></span>
+<span data-ttu-id="73611-180">`OnGetAsync` 메서드는 `Include` 메서드로 관련된 데이터를 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-180">The `OnGetAsync` method loads related data with the `Include` method.</span></span> <span data-ttu-id="73611-181">`Select` 메서드는 필요한 관련 데이터만 로드하는 대안입니다.</span><span class="sxs-lookup"><span data-stu-id="73611-181">The `Select` method is an alternative that loads only the related data needed.</span></span> <span data-ttu-id="73611-182">`Department.Name`과 같은 단일 항목에서는 SQL INNER JOIN을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-182">For single items, like the `Department.Name` it uses a SQL INNER JOIN.</span></span> <span data-ttu-id="73611-183">컬렉션의 경우 다른 데이터베이스 액세스를 사용하지만 컬렉션의 `Include` 연산자도 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-183">For collections, it uses another database access, but so does the `Include` operator on collections.</span></span>
 
-<span data-ttu-id="b135b-184">다음 코드는 `Select` 메서드로 관련된 데이터를 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-184">The following code loads related data with the `Select` method:</span></span>
+<span data-ttu-id="73611-184">다음 코드는 `Select` 메서드로 관련된 데이터를 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-184">The following code loads related data with the `Select` method:</span></span>
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml.cs?name=snippet_RevisedIndexMethod&highlight=6)]
 
-<span data-ttu-id="b135b-185">`CourseViewModel`:</span><span class="sxs-lookup"><span data-stu-id="b135b-185">The `CourseViewModel`:</span></span>
+<span data-ttu-id="73611-185">`CourseViewModel`:</span><span class="sxs-lookup"><span data-stu-id="73611-185">The `CourseViewModel`:</span></span>
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Models/SchoolViewModels/CourseViewModel.cs?name=snippet)]
 
-<span data-ttu-id="b135b-186">전체 예제는 [IndexSelect.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml) 및 [IndexSelect.cshtml.cs](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml.cs)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="b135b-186">See [IndexSelect.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml) and [IndexSelect.cshtml.cs](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml.cs) for a complete example.</span></span>
+<span data-ttu-id="73611-186">전체 예제는 [IndexSelect.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml) 및 [IndexSelect.cshtml.cs](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml.cs)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="73611-186">See [IndexSelect.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml) and [IndexSelect.cshtml.cs](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml.cs) for a complete example.</span></span>
 
-## <a name="create-instructor-pages"></a><span data-ttu-id="b135b-187">강사 페이지 만들기</span><span class="sxs-lookup"><span data-stu-id="b135b-187">Create Instructor pages</span></span>
+## <a name="create-instructor-pages"></a><span data-ttu-id="73611-187">강사 페이지 만들기</span><span class="sxs-lookup"><span data-stu-id="73611-187">Create Instructor pages</span></span>
 
-<span data-ttu-id="b135b-188">이 섹션에서는 강사 페이지를 스캐폴드하고 강사 인덱스 페이지에 관련된 과정 및 등록을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-188">This section scaffolds Instructor pages and adds related Courses and Enrollments to the Instructors Index page.</span></span>
+<span data-ttu-id="73611-188">이 섹션에서는 강사 페이지를 스캐폴드하고 강사 인덱스 페이지에 관련된 과정 및 등록을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-188">This section scaffolds Instructor pages and adds related Courses and Enrollments to the Instructors Index page.</span></span>
 
 <a name="IP"></a>
-<span data-ttu-id="b135b-189">![강사 인덱스 페이지](read-related-data/_static/instructors-index30.png)</span><span class="sxs-lookup"><span data-stu-id="b135b-189">![Instructors Index page](read-related-data/_static/instructors-index30.png)</span></span>
+<span data-ttu-id="73611-189">![강사 인덱스 페이지](read-related-data/_static/instructors-index30.png)</span><span class="sxs-lookup"><span data-stu-id="73611-189">![Instructors Index page](read-related-data/_static/instructors-index30.png)</span></span>
 
-<span data-ttu-id="b135b-190">이 페이지는 다음과 같은 방법으로 관련된 데이터를 읽고 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-190">This page reads and displays related data in the following ways:</span></span>
+<span data-ttu-id="73611-190">이 페이지는 다음과 같은 방법으로 관련된 데이터를 읽고 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-190">This page reads and displays related data in the following ways:</span></span>
 
-* <span data-ttu-id="b135b-191">강사 목록은 `OfficeAssignment` 엔터티에서 관련된 데이터를 표시합니다(이전 이미지에서 Office).</span><span class="sxs-lookup"><span data-stu-id="b135b-191">The list of instructors displays related data from the `OfficeAssignment` entity (Office in the preceding image).</span></span> <span data-ttu-id="b135b-192">`Instructor` 및 `OfficeAssignment` 엔터티는 일대영 또는 일 관계에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-192">The `Instructor` and `OfficeAssignment` entities are in a one-to-zero-or-one relationship.</span></span> <span data-ttu-id="b135b-193">즉시 로드는 `OfficeAssignment` 엔터티에 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-193">Eager loading is used for the `OfficeAssignment` entities.</span></span> <span data-ttu-id="b135b-194">즉시 로드는 일반적으로 관련된 데이터를 표시해야 할 때 더 효율적입니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-194">Eager loading is typically more efficient when the related data needs to be displayed.</span></span> <span data-ttu-id="b135b-195">이 경우 강사를 위한 사무실 할당이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-195">In this case, office assignments for the instructors are displayed.</span></span>
-* <span data-ttu-id="b135b-196">사용자가 강사를 선택하면 관련된 `Course` 엔터티가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-196">When the user selects an instructor, related `Course` entities are displayed.</span></span> <span data-ttu-id="b135b-197">`Instructor` 및 `Course` 엔터티는 다대다 관계에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-197">The `Instructor` and `Course` entities are in a many-to-many relationship.</span></span> <span data-ttu-id="b135b-198">`Course` 엔터티 및 관련 `Department` 엔터티에 대해 즉시 로드가 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-198">Eager loading is used for the `Course` entities and their related `Department` entities.</span></span> <span data-ttu-id="b135b-199">이 경우 선택한 강사에 대한 과정만 필요하므로 별도 쿼리가 더 효율적일 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-199">In this case, separate queries might be more efficient because only courses for the selected instructor are needed.</span></span> <span data-ttu-id="b135b-200">이 예제에서는 탐색 속성에 있는 엔터티에서 탐색 속성에 대한 즉시 로드를 사용하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-200">This example shows how to use eager loading for navigation properties in entities that are in navigation properties.</span></span>
-* <span data-ttu-id="b135b-201">사용자가 과정을 선택하면 `Enrollments` 엔터티의 관련 데이터가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-201">When the user selects a course, related data from the `Enrollments` entity is displayed.</span></span> <span data-ttu-id="b135b-202">이전 이미지에서는 학생 이름 및 학점이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-202">In the preceding image, student name and grade are displayed.</span></span> <span data-ttu-id="b135b-203">`Course` 및 `Enrollment` 엔터티는 일대다 관계에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-203">The `Course` and `Enrollment` entities are in a one-to-many relationship.</span></span>
+* <span data-ttu-id="73611-191">강사 목록은 `OfficeAssignment` 엔터티에서 관련된 데이터를 표시합니다(이전 이미지에서 Office).</span><span class="sxs-lookup"><span data-stu-id="73611-191">The list of instructors displays related data from the `OfficeAssignment` entity (Office in the preceding image).</span></span> <span data-ttu-id="73611-192">`Instructor` 및 `OfficeAssignment` 엔터티는 일대영 또는 일 관계에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-192">The `Instructor` and `OfficeAssignment` entities are in a one-to-zero-or-one relationship.</span></span> <span data-ttu-id="73611-193">즉시 로드는 `OfficeAssignment` 엔터티에 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-193">Eager loading is used for the `OfficeAssignment` entities.</span></span> <span data-ttu-id="73611-194">즉시 로드는 일반적으로 관련된 데이터를 표시해야 할 때 더 효율적입니다.</span><span class="sxs-lookup"><span data-stu-id="73611-194">Eager loading is typically more efficient when the related data needs to be displayed.</span></span> <span data-ttu-id="73611-195">이 경우 강사를 위한 사무실 할당이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-195">In this case, office assignments for the instructors are displayed.</span></span>
+* <span data-ttu-id="73611-196">사용자가 강사를 선택하면 관련된 `Course` 엔터티가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-196">When the user selects an instructor, related `Course` entities are displayed.</span></span> <span data-ttu-id="73611-197">`Instructor` 및 `Course` 엔터티는 다대다 관계에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-197">The `Instructor` and `Course` entities are in a many-to-many relationship.</span></span> <span data-ttu-id="73611-198">`Course` 엔터티 및 관련 `Department` 엔터티에 대해 즉시 로드가 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-198">Eager loading is used for the `Course` entities and their related `Department` entities.</span></span> <span data-ttu-id="73611-199">이 경우 선택한 강사에 대한 과정만 필요하므로 별도 쿼리가 더 효율적일 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-199">In this case, separate queries might be more efficient because only courses for the selected instructor are needed.</span></span> <span data-ttu-id="73611-200">이 예제에서는 탐색 속성에 있는 엔터티에서 탐색 속성에 대한 즉시 로드를 사용하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="73611-200">This example shows how to use eager loading for navigation properties in entities that are in navigation properties.</span></span>
+* <span data-ttu-id="73611-201">사용자가 과정을 선택하면 `Enrollments` 엔터티의 관련 데이터가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-201">When the user selects a course, related data from the `Enrollments` entity is displayed.</span></span> <span data-ttu-id="73611-202">이전 이미지에서는 학생 이름 및 학점이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-202">In the preceding image, student name and grade are displayed.</span></span> <span data-ttu-id="73611-203">`Course` 및 `Enrollment` 엔터티는 일대다 관계에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-203">The `Course` and `Enrollment` entities are in a one-to-many relationship.</span></span>
 
-### <a name="create-a-view-model"></a><span data-ttu-id="b135b-204">뷰 모델 만들기</span><span class="sxs-lookup"><span data-stu-id="b135b-204">Create a view model</span></span>
+### <a name="create-a-view-model"></a><span data-ttu-id="73611-204">뷰 모델 만들기</span><span class="sxs-lookup"><span data-stu-id="73611-204">Create a view model</span></span>
 
-<span data-ttu-id="b135b-205">강사 페이지는 서로 다른 세 테이블의 데이터를 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-205">The instructors page shows data from three different tables.</span></span> <span data-ttu-id="b135b-206">세 개의 테이블을 나타내는 세 개의 속성을 포함하는 뷰 모델이 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-206">A view model is needed that includes three properties representing the three tables.</span></span>
+<span data-ttu-id="73611-205">강사 페이지는 서로 다른 세 테이블의 데이터를 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-205">The instructors page shows data from three different tables.</span></span> <span data-ttu-id="73611-206">세 개의 테이블을 나타내는 세 개의 속성을 포함하는 뷰 모델이 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-206">A view model is needed that includes three properties representing the three tables.</span></span>
 
-<span data-ttu-id="b135b-207">다음 코드로 *SchoolViewModels/InstructorIndexData.cs*를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-207">Create *SchoolViewModels/InstructorIndexData.cs* with the following code:</span></span>
+<span data-ttu-id="73611-207">다음 코드로 *SchoolViewModels/InstructorIndexData.cs*를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="73611-207">Create *SchoolViewModels/InstructorIndexData.cs* with the following code:</span></span>
 
 [!code-csharp[](intro/samples/cu30/Models/SchoolViewModels/InstructorIndexData.cs)]
 
-### <a name="scaffold-instructor-pages"></a><span data-ttu-id="b135b-208">강사 페이지 스캐폴드</span><span class="sxs-lookup"><span data-stu-id="b135b-208">Scaffold Instructor pages</span></span>
+### <a name="scaffold-instructor-pages"></a><span data-ttu-id="73611-208">강사 페이지 스캐폴드</span><span class="sxs-lookup"><span data-stu-id="73611-208">Scaffold Instructor pages</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="b135b-209">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="b135b-209">Visual Studio</span></span>](#tab/visual-studio)
+# <a name="visual-studio"></a>[<span data-ttu-id="73611-209">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="73611-209">Visual Studio</span></span>](#tab/visual-studio)
 
-* <span data-ttu-id="b135b-210">다음 예외가 포함된 [학생 페이지 스캐폴드](xref:data/ef-rp/intro#scaffold-student-pages)의 지침을 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-210">Follow the instructions in [Scaffold the student pages](xref:data/ef-rp/intro#scaffold-student-pages) with the following exceptions:</span></span>
+* <span data-ttu-id="73611-210">다음 예외가 포함된 [학생 페이지 스캐폴드](xref:data/ef-rp/intro#scaffold-student-pages)의 지침을 따릅니다.</span><span class="sxs-lookup"><span data-stu-id="73611-210">Follow the instructions in [Scaffold the student pages](xref:data/ef-rp/intro#scaffold-student-pages) with the following exceptions:</span></span>
 
-  * <span data-ttu-id="b135b-211">*Pages/Instructors* 폴더를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-211">Create a *Pages/Instructors* folder.</span></span>
-  * <span data-ttu-id="b135b-212">모델 클래스에 `Instructor`를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-212">Use `Instructor` for the model class.</span></span>
-  * <span data-ttu-id="b135b-213">새 컨텍스트 클래스를 만드는 대신 기존 컨텍스트 클래스를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-213">Use the existing context class instead of creating a new one.</span></span>
+  * <span data-ttu-id="73611-211">*Pages/Instructors* 폴더를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="73611-211">Create a *Pages/Instructors* folder.</span></span>
+  * <span data-ttu-id="73611-212">모델 클래스에 `Instructor`를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-212">Use `Instructor` for the model class.</span></span>
+  * <span data-ttu-id="73611-213">새 컨텍스트 클래스를 만드는 대신 기존 컨텍스트 클래스를 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-213">Use the existing context class instead of creating a new one.</span></span>
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="b135b-214">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="b135b-214">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="73611-214">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="73611-214">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
-* <span data-ttu-id="b135b-215">*Pages/Instructors* 폴더를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-215">Create a *Pages/Instructors* folder.</span></span>
+* <span data-ttu-id="73611-215">*Pages/Instructors* 폴더를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="73611-215">Create a *Pages/Instructors* folder.</span></span>
 
-* <span data-ttu-id="b135b-216">다음 명령을 실행하여 강사 페이지를 스캐폴드합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-216">Run the following command to scaffold the Instructor pages.</span></span>
+* <span data-ttu-id="73611-216">다음 명령을 실행하여 강사 페이지를 스캐폴드합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-216">Run the following command to scaffold the Instructor pages.</span></span>
 
-  <span data-ttu-id="b135b-217">**Windows:**</span><span class="sxs-lookup"><span data-stu-id="b135b-217">**On Windows:**</span></span>
+  <span data-ttu-id="73611-217">**Windows:**</span><span class="sxs-lookup"><span data-stu-id="73611-217">**On Windows:**</span></span>
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Instructor -dc SchoolContext -udl -outDir Pages\Instructors --referenceScriptLibraries
   ```
 
-  <span data-ttu-id="b135b-218">**Linux 또는 macOS:**</span><span class="sxs-lookup"><span data-stu-id="b135b-218">**On Linux or macOS:**</span></span>
+  <span data-ttu-id="73611-218">**Linux 또는 macOS:**</span><span class="sxs-lookup"><span data-stu-id="73611-218">**On Linux or macOS:**</span></span>
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Instructor -dc SchoolContext -udl -outDir Pages/Instructors --referenceScriptLibraries
@@ -194,19 +194,19 @@ ms.locfileid: "78645591"
 
 ---
 
-<span data-ttu-id="b135b-219">업데이트하기 전에 스캐폴드된 페이지의 모양을 확인하려면 앱을 실행하고 강사 페이지로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-219">To see what the scaffolded page looks like before you update it, run the app and navigate to the Instructors page.</span></span>
+<span data-ttu-id="73611-219">업데이트하기 전에 스캐폴드된 페이지의 모양을 확인하려면 앱을 실행하고 강사 페이지로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-219">To see what the scaffolded page looks like before you update it, run the app and navigate to the Instructors page.</span></span>
 
-<span data-ttu-id="b135b-220">다음 코드로 *Pages/Instructors/Index.cshtml.cs*를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-220">Update *Pages/Instructors/Index.cshtml.cs* with the following code:</span></span>
+<span data-ttu-id="73611-220">다음 코드로 *Pages/Instructors/Index.cshtml.cs*를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-220">Update *Pages/Instructors/Index.cshtml.cs* with the following code:</span></span>
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Pages/Instructors/Index1.cshtml.cs?name=snippet_all&highlight=2,19-53)]
 
-<span data-ttu-id="b135b-221">`OnGetAsync` 메서드는 선택한 강사의 ID에 대해 경로 데이터(선택 사항)를 받아들입니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-221">The `OnGetAsync` method accepts optional route data for the ID of the selected instructor.</span></span>
+<span data-ttu-id="73611-221">`OnGetAsync` 메서드는 선택한 강사의 ID에 대해 경로 데이터(선택 사항)를 받아들입니다.</span><span class="sxs-lookup"><span data-stu-id="73611-221">The `OnGetAsync` method accepts optional route data for the ID of the selected instructor.</span></span>
 
-<span data-ttu-id="b135b-222">*Pages/Instructors/Index.cshtml.cs* 파일에서 쿼리를 검사합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-222">Examine the query in the *Pages/Instructors/Index.cshtml.cs* file:</span></span>
+<span data-ttu-id="73611-222">*Pages/Instructors/Index.cshtml.cs* 파일에서 쿼리를 검사합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-222">Examine the query in the *Pages/Instructors/Index.cshtml.cs* file:</span></span>
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Pages/Instructors/Index1.cshtml.cs?name=snippet_EagerLoading)]
 
-<span data-ttu-id="b135b-223">이 코드는 다음 탐색 속성에 대한 즉시 로드를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-223">The code specifies eager loading for the following navigation properties:</span></span>
+<span data-ttu-id="73611-223">이 코드는 다음 탐색 속성에 대한 즉시 로드를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-223">The code specifies eager loading for the following navigation properties:</span></span>
 
 * `Instructor.OfficeAssignment`
 * `Instructor.CourseAssignments`
@@ -215,41 +215,41 @@ ms.locfileid: "78645591"
     * `Course.Enrollments`
       * `Enrollment.Student`
 
-<span data-ttu-id="b135b-224">`CourseAssignments` 및 `Course`에 대해 `Include` 및 `ThenInclude` 메서드가 반복되는 것을 알 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-224">Notice the repetition of `Include` and `ThenInclude` methods for `CourseAssignments` and `Course`.</span></span> <span data-ttu-id="b135b-225">이 반복은 `Course` 엔터티의 두 가지 탐색 속성에 대해 즉시 로드를 지정하는 데 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-225">This repetition is necessary to specify eager loading for two navigation properties of the `Course` entity.</span></span>
+<span data-ttu-id="73611-224">`CourseAssignments` 및 `Course`에 대해 `Include` 및 `ThenInclude` 메서드가 반복되는 것을 알 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-224">Notice the repetition of `Include` and `ThenInclude` methods for `CourseAssignments` and `Course`.</span></span> <span data-ttu-id="73611-225">이 반복은 `Course` 엔터티의 두 가지 탐색 속성에 대해 즉시 로드를 지정하는 데 필요합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-225">This repetition is necessary to specify eager loading for two navigation properties of the `Course` entity.</span></span>
 
-<span data-ttu-id="b135b-226">다음 코드는 강사가 선택되었을 때 실행됩니다(`id != null`).</span><span class="sxs-lookup"><span data-stu-id="b135b-226">The following code executes when an instructor is selected (`id != null`).</span></span>
+<span data-ttu-id="73611-226">다음 코드는 강사가 선택되었을 때 실행됩니다(`id != null`).</span><span class="sxs-lookup"><span data-stu-id="73611-226">The following code executes when an instructor is selected (`id != null`).</span></span>
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Pages/Instructors/Index1.cshtml.cs?name=snippet_SelectInstructor)]
 
-<span data-ttu-id="b135b-227">선택한 강사는 뷰 모델의 강사 목록에서 검색됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-227">The selected instructor is retrieved from the list of instructors in the view model.</span></span> <span data-ttu-id="b135b-228">뷰 모델의 `Courses` 속성은 해당 강사의 `CourseAssignments` 탐색 속성에서 `Course` 엔터티로 로드됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-228">The view model's `Courses` property is loaded with the `Course` entities from that instructor's `CourseAssignments` navigation property.</span></span>
+<span data-ttu-id="73611-227">선택한 강사는 뷰 모델의 강사 목록에서 검색됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-227">The selected instructor is retrieved from the list of instructors in the view model.</span></span> <span data-ttu-id="73611-228">뷰 모델의 `Courses` 속성은 해당 강사의 `CourseAssignments` 탐색 속성에서 `Course` 엔터티로 로드됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-228">The view model's `Courses` property is loaded with the `Course` entities from that instructor's `CourseAssignments` navigation property.</span></span>
 
-<span data-ttu-id="b135b-229">`Where` 메서드는 컬렉션도 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-229">The `Where` method returns a collection.</span></span> <span data-ttu-id="b135b-230">그러나 이 경우 필터는 단일 엔터티를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-230">But in this case, the filter will select a single entity.</span></span> <span data-ttu-id="b135b-231">따라서 `Single` 메서드를 호출하여 컬렉션을 단일 `Instructor` 엔터티로 변환합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-231">so the `Single` method is called to convert the collection into a single `Instructor` entity.</span></span> <span data-ttu-id="b135b-232">`Instructor` 엔터티는 `CourseAssignments` 속성에 대한 액세스를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-232">The `Instructor` entity provides access to the `CourseAssignments` property.</span></span> <span data-ttu-id="b135b-233">`CourseAssignments`는 관련 `Course` 엔터티에 대한 액세스를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-233">`CourseAssignments` provides access to the related `Course` entities.</span></span>
+<span data-ttu-id="73611-229">`Where` 메서드는 컬렉션도 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-229">The `Where` method returns a collection.</span></span> <span data-ttu-id="73611-230">그러나 이 경우 필터는 단일 엔터티를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-230">But in this case, the filter will select a single entity.</span></span> <span data-ttu-id="73611-231">따라서 `Single` 메서드를 호출하여 컬렉션을 단일 `Instructor` 엔터티로 변환합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-231">so the `Single` method is called to convert the collection into a single `Instructor` entity.</span></span> <span data-ttu-id="73611-232">`Instructor` 엔터티는 `CourseAssignments` 속성에 대한 액세스를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-232">The `Instructor` entity provides access to the `CourseAssignments` property.</span></span> <span data-ttu-id="73611-233">`CourseAssignments`는 관련 `Course` 엔터티에 대한 액세스를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-233">`CourseAssignments` provides access to the related `Course` entities.</span></span>
 
 ![강사 및 과정 간 관계 m:M](complex-data-model/_static/courseassignment.png)
 
-<span data-ttu-id="b135b-235">`Single` 메서드는 컬렉션에 한 개 항목만 있을 때 컬렉션에서 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-235">The `Single` method is used on a collection when the collection has only one item.</span></span> <span data-ttu-id="b135b-236">`Single` 메서드는 컬렉션이 비어 있거나 둘 이상의 항목이 있는 경우 예외를 throw합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-236">The `Single` method throws an exception if the collection is empty or if there's more than one item.</span></span> <span data-ttu-id="b135b-237">대안은 `SingleOrDefault`입니다. 컬렉션이 비어 있는 경우 기본값을 반환합니다(이 경우 Null).</span><span class="sxs-lookup"><span data-stu-id="b135b-237">An alternative is `SingleOrDefault`, which returns a default value (null in this case) if the collection is empty.</span></span>
+<span data-ttu-id="73611-235">`Single` 메서드는 컬렉션에 한 개 항목만 있을 때 컬렉션에서 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-235">The `Single` method is used on a collection when the collection has only one item.</span></span> <span data-ttu-id="73611-236">`Single` 메서드는 컬렉션이 비어 있거나 둘 이상의 항목이 있는 경우 예외를 throw합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-236">The `Single` method throws an exception if the collection is empty or if there's more than one item.</span></span> <span data-ttu-id="73611-237">대안은 `SingleOrDefault`입니다. 컬렉션이 비어 있는 경우 기본값을 반환합니다(이 경우 Null).</span><span class="sxs-lookup"><span data-stu-id="73611-237">An alternative is `SingleOrDefault`, which returns a default value (null in this case) if the collection is empty.</span></span>
 
-<span data-ttu-id="b135b-238">다음 코드는 과정을 선택할 때 뷰 모델의 `Enrollments` 속성을 채웁니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-238">The following code populates the view model's `Enrollments` property when a course is selected:</span></span>
+<span data-ttu-id="73611-238">다음 코드는 과정을 선택할 때 뷰 모델의 `Enrollments` 속성을 채웁니다.</span><span class="sxs-lookup"><span data-stu-id="73611-238">The following code populates the view model's `Enrollments` property when a course is selected:</span></span>
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Pages/Instructors/Index1.cshtml.cs?name=snippet_SelectCourse)]
 
-### <a name="update-the-instructors-index-page"></a><span data-ttu-id="b135b-239">강사 인덱스 페이지 업데이트</span><span class="sxs-lookup"><span data-stu-id="b135b-239">Update the instructors Index page</span></span>
+### <a name="update-the-instructors-index-page"></a><span data-ttu-id="73611-239">강사 인덱스 페이지 업데이트</span><span class="sxs-lookup"><span data-stu-id="73611-239">Update the instructors Index page</span></span>
 
-<span data-ttu-id="b135b-240">다음 코드로 *Pages/Instructors/Index.cshtml*을 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-240">Update *Pages/Instructors/Index.cshtml* with the following code.</span></span>
+<span data-ttu-id="73611-240">다음 코드로 *Pages/Instructors/Index.cshtml*을 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-240">Update *Pages/Instructors/Index.cshtml* with the following code.</span></span>
 
 [!code-cshtml[](intro/samples/cu30/Pages/Instructors/Index.cshtml?highlight=1,5,8,16-21,25-32,43-57,67-102,104-126)]
 
-<span data-ttu-id="b135b-241">위의 코드로 다음이 변경됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-241">The preceding code makes the following changes:</span></span>
+<span data-ttu-id="73611-241">위의 코드로 다음이 변경됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-241">The preceding code makes the following changes:</span></span>
 
-* <span data-ttu-id="b135b-242">`page` 지시어를 `@page`에서 `@page "{id:int?}"`로 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-242">Updates the `page` directive from `@page` to `@page "{id:int?}"`.</span></span> <span data-ttu-id="b135b-243">`"{id:int?}"`는 경로 템플릿입니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-243">`"{id:int?}"` is a route template.</span></span> <span data-ttu-id="b135b-244">경로 템플릿은 데이터를 라우팅할 URL에서 정수 쿼리 문자열을 변경합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-244">The route template changes integer query strings in the URL to route data.</span></span> <span data-ttu-id="b135b-245">예를 들어, `@page` 지시문만 있는 강사에 대해 **Select** 링크를 클릭하면 다음과 같은 URL이 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-245">For example, clicking on the **Select** link for an instructor with only the `@page` directive produces a URL like the following:</span></span>
+* <span data-ttu-id="73611-242">`page` 지시어를 `@page`에서 `@page "{id:int?}"`로 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-242">Updates the `page` directive from `@page` to `@page "{id:int?}"`.</span></span> <span data-ttu-id="73611-243">`"{id:int?}"`는 경로 템플릿입니다.</span><span class="sxs-lookup"><span data-stu-id="73611-243">`"{id:int?}"` is a route template.</span></span> <span data-ttu-id="73611-244">경로 템플릿은 데이터를 라우팅할 URL에서 정수 쿼리 문자열을 변경합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-244">The route template changes integer query strings in the URL to route data.</span></span> <span data-ttu-id="73611-245">예를 들어, `@page` 지시문만 있는 강사에 대해 **Select** 링크를 클릭하면 다음과 같은 URL이 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-245">For example, clicking on the **Select** link for an instructor with only the `@page` directive produces a URL like the following:</span></span>
 
   `https://localhost:5001/Instructors?id=2`
 
-  <span data-ttu-id="b135b-246">페이지 지시문이 `@page "{id:int?}"`이면 URL은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-246">When the page directive is `@page "{id:int?}"`, the URL is:</span></span>
+  <span data-ttu-id="73611-246">페이지 지시문이 `@page "{id:int?}"`이면 URL은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-246">When the page directive is `@page "{id:int?}"`, the URL is:</span></span>
 
   `https://localhost:5001/Instructors/2`
 
-* <span data-ttu-id="b135b-247">`item.OfficeAssignment`가 Null이 아닌 경우에만 `item.OfficeAssignment.Location`을 표시하는 **Office** 열을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-247">Adds an **Office** column that displays `item.OfficeAssignment.Location` only if `item.OfficeAssignment` isn't null.</span></span> <span data-ttu-id="b135b-248">이는 일대영 또는 일 관계이기 때문에 관련된 OfficeAssignment 엔터티가 있을 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-248">Because this is a one-to-zero-or-one relationship, there might not be a related OfficeAssignment entity.</span></span>
+* <span data-ttu-id="73611-247">`item.OfficeAssignment`가 Null이 아닌 경우에만 `item.OfficeAssignment.Location`을 표시하는 **Office** 열을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-247">Adds an **Office** column that displays `item.OfficeAssignment.Location` only if `item.OfficeAssignment` isn't null.</span></span> <span data-ttu-id="73611-248">이는 일대영 또는 일 관계이기 때문에 관련된 OfficeAssignment 엔터티가 있을 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-248">Because this is a one-to-zero-or-one relationship, there might not be a related OfficeAssignment entity.</span></span>
 
   ```html
   @if (item.OfficeAssignment != null)
@@ -258,9 +258,9 @@ ms.locfileid: "78645591"
   }
   ```
 
-* <span data-ttu-id="b135b-249">각 강사가 가르치는 과정을 표시하는 **Courses** 열을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-249">Adds a **Courses** column that displays courses taught by each instructor.</span></span> <span data-ttu-id="b135b-250">이 razor 구문에 대한 자세한 내용은 [명시적 줄 전환](xref:mvc/views/razor#explicit-line-transition)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="b135b-250">See [Explicit line transition](xref:mvc/views/razor#explicit-line-transition) for more about this razor syntax.</span></span>
+* <span data-ttu-id="73611-249">각 강사가 가르치는 과정을 표시하는 **Courses** 열을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-249">Adds a **Courses** column that displays courses taught by each instructor.</span></span> <span data-ttu-id="73611-250">이 razor 구문에 대한 자세한 내용은 [명시적 줄 전환](xref:mvc/views/razor#explicit-line-transition)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="73611-250">See [Explicit line transition](xref:mvc/views/razor#explicit-line-transition) for more about this razor syntax.</span></span>
 
-* <span data-ttu-id="b135b-251">선택된 강사 및 과정의 `tr` 요소에 `class="success"`를 동적으로 추가하는 코드를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-251">Adds code that dynamically adds `class="success"` to the `tr` element of the selected instructor and course.</span></span> <span data-ttu-id="b135b-252">부트스트랩 클래스를 사용하여 선택된 행에 대한 배경색을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-252">This sets a background color for the selected row using a Bootstrap class.</span></span>
+* <span data-ttu-id="73611-251">선택된 강사 및 과정의 `tr` 요소에 `class="success"`를 동적으로 추가하는 코드를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-251">Adds code that dynamically adds `class="success"` to the `tr` element of the selected instructor and course.</span></span> <span data-ttu-id="73611-252">부트스트랩 클래스를 사용하여 선택된 행에 대한 배경색을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-252">This sets a background color for the selected row using a Bootstrap class.</span></span>
 
   ```html
   string selectedRow = "";
@@ -271,125 +271,125 @@ ms.locfileid: "78645591"
   <tr class="@selectedRow">
   ```
 
-* <span data-ttu-id="b135b-253">**Select**로 레이블 지정된 새 하이퍼링크를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-253">Adds a new hyperlink labeled **Select**.</span></span> <span data-ttu-id="b135b-254">이 링크는 선택한 강사의 ID를 `Index` 메서드에 보내고 배경색을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-254">This link sends the selected instructor's ID to the `Index` method and sets a background color.</span></span>
+* <span data-ttu-id="73611-253">**Select**로 레이블 지정된 새 하이퍼링크를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-253">Adds a new hyperlink labeled **Select**.</span></span> <span data-ttu-id="73611-254">이 링크는 선택한 강사의 ID를 `Index` 메서드에 보내고 배경색을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-254">This link sends the selected instructor's ID to the `Index` method and sets a background color.</span></span>
 
   ```html
   <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
   ```
 
-* <span data-ttu-id="b135b-255">선택된 강사에 대한 과정 테이블을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-255">Adds a table of courses for the selected Instructor.</span></span>
+* <span data-ttu-id="73611-255">선택된 강사에 대한 과정 테이블을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-255">Adds a table of courses for the selected Instructor.</span></span>
 
-* <span data-ttu-id="b135b-256">선택된 과정에 대한 학생 등록 테이블을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-256">Adds a table of student enrollments for the selected course.</span></span>
+* <span data-ttu-id="73611-256">선택된 과정에 대한 학생 등록 테이블을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-256">Adds a table of student enrollments for the selected course.</span></span>
 
-<span data-ttu-id="b135b-257">앱을 실행하고 **강사** 탭을 선택합니다. 페이지에 관련된 `OfficeAssignment` 엔터티의 `Location`(사무실)이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-257">Run the app and select the **Instructors** tab. The page displays the `Location` (office) from the related `OfficeAssignment` entity.</span></span> <span data-ttu-id="b135b-258">`OfficeAssignment`가 Null이면 빈 테이블 셀이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-258">If `OfficeAssignment` is null, an empty table cell is displayed.</span></span>
+<span data-ttu-id="73611-257">앱을 실행하고 **강사** 탭을 선택합니다. 페이지에 관련된 `OfficeAssignment` 엔터티의 `Location`(사무실)이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-257">Run the app and select the **Instructors** tab. The page displays the `Location` (office) from the related `OfficeAssignment` entity.</span></span> <span data-ttu-id="73611-258">`OfficeAssignment`가 Null이면 빈 테이블 셀이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-258">If `OfficeAssignment` is null, an empty table cell is displayed.</span></span>
 
-<span data-ttu-id="b135b-259">강사의 **Select** 링크를 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-259">Click on the **Select** link for an instructor.</span></span> <span data-ttu-id="b135b-260">강사에게 할당된 행 스타일 변경 내용 및 과정이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-260">The row style changes and courses assigned to that instructor are displayed.</span></span>
+<span data-ttu-id="73611-259">강사의 **Select** 링크를 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-259">Click on the **Select** link for an instructor.</span></span> <span data-ttu-id="73611-260">강사에게 할당된 행 스타일 변경 내용 및 과정이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-260">The row style changes and courses assigned to that instructor are displayed.</span></span>
 
-<span data-ttu-id="b135b-261">과정을 선택하여 등록된 학생 및 해당 등급의 목록을 봅니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-261">Select a course to see the list of enrolled students and their grades.</span></span>
+<span data-ttu-id="73611-261">과정을 선택하여 등록된 학생 및 해당 등급의 목록을 봅니다.</span><span class="sxs-lookup"><span data-stu-id="73611-261">Select a course to see the list of enrolled students and their grades.</span></span>
 
 ![강사 및 과정이 선택된 강사 인덱스 페이지](read-related-data/_static/instructors-index30.png)
 
-## <a name="using-single"></a><span data-ttu-id="b135b-263">Single 사용</span><span class="sxs-lookup"><span data-stu-id="b135b-263">Using Single</span></span>
+## <a name="using-single"></a><span data-ttu-id="73611-263">Single 사용</span><span class="sxs-lookup"><span data-stu-id="73611-263">Using Single</span></span>
 
-<span data-ttu-id="b135b-264">`Single` 메서드는 `Where` 메서드를 별도로 호출하는 대신 `Where` 조건을 전달할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-264">The `Single` method can pass in the `Where` condition instead of calling the `Where` method separately:</span></span>
+<span data-ttu-id="73611-264">`Single` 메서드는 `Where` 메서드를 별도로 호출하는 대신 `Where` 조건을 전달할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-264">The `Single` method can pass in the `Where` condition instead of calling the `Where` method separately:</span></span>
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Pages/Instructors/IndexSingle.cshtml.cs?name=snippet_single&highlight=21-22,30-31)]
 
-<span data-ttu-id="b135b-265">Where 조건과 함께 `Single`을 사용하는 것은 개인적으로 선호하는 방법을 선택하면 됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-265">Use of `Single` with a Where condition is a matter of personal preference.</span></span> <span data-ttu-id="b135b-266">이 방법은 `Where` 메서드를 사용하는 것보다 장점이 없습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-266">It provides no benefits over using the `Where` method.</span></span>
+<span data-ttu-id="73611-265">Where 조건과 함께 `Single`을 사용하는 것은 개인적으로 선호하는 방법을 선택하면 됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-265">Use of `Single` with a Where condition is a matter of personal preference.</span></span> <span data-ttu-id="73611-266">이 방법은 `Where` 메서드를 사용하는 것보다 장점이 없습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-266">It provides no benefits over using the `Where` method.</span></span>
 
-## <a name="explicit-loading"></a><span data-ttu-id="b135b-267">명시적 로드</span><span class="sxs-lookup"><span data-stu-id="b135b-267">Explicit loading</span></span>
+## <a name="explicit-loading"></a><span data-ttu-id="73611-267">명시적 로드</span><span class="sxs-lookup"><span data-stu-id="73611-267">Explicit loading</span></span>
 
-<span data-ttu-id="b135b-268">현재 코드는 `Enrollments` 및 `Students`에 대한 즉시 로드를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-268">The current code specifies eager loading for `Enrollments` and `Students`:</span></span>
+<span data-ttu-id="73611-268">현재 코드는 `Enrollments` 및 `Students`에 대한 즉시 로드를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-268">The current code specifies eager loading for `Enrollments` and `Students`:</span></span>
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Pages/Instructors/Index1.cshtml.cs?name=snippet_EagerLoading&highlight=6-9)]
 
-<span data-ttu-id="b135b-269">사용자가 과정에 등록된 내용을 거의 보지 않는다고 가정해 보겠습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-269">Suppose users rarely want to see enrollments in a course.</span></span> <span data-ttu-id="b135b-270">이 경우 최적화는 요청된 경우에만 등록 데이터를 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-270">In that case, an optimization would be to only load the enrollment data if it's requested.</span></span> <span data-ttu-id="b135b-271">이 섹션에서는 `Enrollments` 및 `Students`의 명시적 로드를 사용하도록 `OnGetAsync`가 업데이트됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-271">In this section, the `OnGetAsync` is updated to use explicit loading of `Enrollments` and `Students`.</span></span>
+<span data-ttu-id="73611-269">사용자가 과정에 등록된 내용을 거의 보지 않는다고 가정해 보겠습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-269">Suppose users rarely want to see enrollments in a course.</span></span> <span data-ttu-id="73611-270">이 경우 최적화는 요청된 경우에만 등록 데이터를 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-270">In that case, an optimization would be to only load the enrollment data if it's requested.</span></span> <span data-ttu-id="73611-271">이 섹션에서는 `Enrollments` 및 `Students`의 명시적 로드를 사용하도록 `OnGetAsync`가 업데이트됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-271">In this section, the `OnGetAsync` is updated to use explicit loading of `Enrollments` and `Students`.</span></span>
 
-<span data-ttu-id="b135b-272">다음 코드로 *Pages/Instructors/Index.cshtml.cs*를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-272">Update *Pages/Instructors/Index.cshtml.cs* with the following code.</span></span>
+<span data-ttu-id="73611-272">다음 코드로 *Pages/Instructors/Index.cshtml.cs*를 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-272">Update *Pages/Instructors/Index.cshtml.cs* with the following code.</span></span>
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/Index.cshtml.cs?highlight=31-35,52-56)]
 
-<span data-ttu-id="b135b-273">위의 코드는 등록 및 학생 데이터에 대한 *ThenInclude* 메서드 호출을 삭제합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-273">The preceding code drops the *ThenInclude* method calls for enrollment and student data.</span></span> <span data-ttu-id="b135b-274">과정을 선택하면 명시적 로드 코드가 다음을 검색합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-274">If a course is selected, the explicit loading code retrieves:</span></span>
+<span data-ttu-id="73611-273">위의 코드는 등록 및 학생 데이터에 대한 *ThenInclude* 메서드 호출을 삭제합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-273">The preceding code drops the *ThenInclude* method calls for enrollment and student data.</span></span> <span data-ttu-id="73611-274">과정을 선택하면 명시적 로드 코드가 다음을 검색합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-274">If a course is selected, the explicit loading code retrieves:</span></span>
 
-* <span data-ttu-id="b135b-275">선택한 과정에 대한 `Enrollment` 엔터티</span><span class="sxs-lookup"><span data-stu-id="b135b-275">The `Enrollment` entities for the selected course.</span></span>
-* <span data-ttu-id="b135b-276">각 `Enrollment`에 대한 `Student` 엔터티</span><span class="sxs-lookup"><span data-stu-id="b135b-276">The `Student` entities for each `Enrollment`.</span></span>
+* <span data-ttu-id="73611-275">선택한 과정에 대한 `Enrollment` 엔터티</span><span class="sxs-lookup"><span data-stu-id="73611-275">The `Enrollment` entities for the selected course.</span></span>
+* <span data-ttu-id="73611-276">각 `Enrollment`에 대한 `Student` 엔터티</span><span class="sxs-lookup"><span data-stu-id="73611-276">The `Student` entities for each `Enrollment`.</span></span>
 
-<span data-ttu-id="b135b-277">앞의 코드는 `.AsNoTracking()`을 주석으로 처리하는 것을 알 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-277">Notice that the preceding code comments out `.AsNoTracking()`.</span></span> <span data-ttu-id="b135b-278">탐색 속성은 추적된 엔터티에 대해서만 명시적으로 로드할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-278">Navigation properties can only be explicitly loaded for tracked entities.</span></span>
+<span data-ttu-id="73611-277">앞의 코드는 `.AsNoTracking()`을 주석으로 처리하는 것을 알 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-277">Notice that the preceding code comments out `.AsNoTracking()`.</span></span> <span data-ttu-id="73611-278">탐색 속성은 추적된 엔터티에 대해서만 명시적으로 로드할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-278">Navigation properties can only be explicitly loaded for tracked entities.</span></span>
 
-<span data-ttu-id="b135b-279">앱을 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-279">Test the app.</span></span> <span data-ttu-id="b135b-280">사용자 관점에서 앱은 이전 버전과 동일하게 동작합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-280">From a user's perspective, the app behaves identically to the previous version.</span></span>
+<span data-ttu-id="73611-279">앱을 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-279">Test the app.</span></span> <span data-ttu-id="73611-280">사용자 관점에서 앱은 이전 버전과 동일하게 동작합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-280">From a user's perspective, the app behaves identically to the previous version.</span></span>
 
-## <a name="next-steps"></a><span data-ttu-id="b135b-281">다음 단계</span><span class="sxs-lookup"><span data-stu-id="b135b-281">Next steps</span></span>
+## <a name="next-steps"></a><span data-ttu-id="73611-281">다음 단계</span><span class="sxs-lookup"><span data-stu-id="73611-281">Next steps</span></span>
 
-<span data-ttu-id="b135b-282">다음 자습서에서는 관련된 데이터를 업데이트하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-282">The next tutorial shows how to update related data.</span></span>
+<span data-ttu-id="73611-282">다음 자습서에서는 관련된 데이터를 업데이트하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="73611-282">The next tutorial shows how to update related data.</span></span>
 
 >[!div class="step-by-step"]
-><span data-ttu-id="b135b-283">[이전 자습서](xref:data/ef-rp/complex-data-model)
->[다음 자습서](xref:data/ef-rp/update-related-data)</span><span class="sxs-lookup"><span data-stu-id="b135b-283">[Previous tutorial](xref:data/ef-rp/complex-data-model)
+><span data-ttu-id="73611-283">[이전 자습서](xref:data/ef-rp/complex-data-model)
+>[다음 자습서](xref:data/ef-rp/update-related-data)</span><span class="sxs-lookup"><span data-stu-id="73611-283">[Previous tutorial](xref:data/ef-rp/complex-data-model)
 [Next tutorial](xref:data/ef-rp/update-related-data)</span></span>
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-<span data-ttu-id="b135b-284">이 자습서에서는 관련된 데이터를 읽고 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-284">In this tutorial, related data is read and displayed.</span></span> <span data-ttu-id="b135b-285">관련된 데이터는 EF Core에서 탐색 속성에 로드하는 데이터입니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-285">Related data is data that EF Core loads into navigation properties.</span></span>
+<span data-ttu-id="73611-284">이 자습서에서는 관련된 데이터를 읽고 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-284">In this tutorial, related data is read and displayed.</span></span> <span data-ttu-id="73611-285">관련된 데이터는 EF Core에서 탐색 속성에 로드하는 데이터입니다.</span><span class="sxs-lookup"><span data-stu-id="73611-285">Related data is data that EF Core loads into navigation properties.</span></span>
 
-<span data-ttu-id="b135b-286">해결할 수 없는 문제가 발생할 경우 [완성된 앱을 다운로드하거나 봅니다](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples).</span><span class="sxs-lookup"><span data-stu-id="b135b-286">If you run into problems you can't solve, [download or view the completed app.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)</span></span> <span data-ttu-id="b135b-287">[지침을 다운로드하세요](xref:index#how-to-download-a-sample).</span><span class="sxs-lookup"><span data-stu-id="b135b-287">[Download instructions](xref:index#how-to-download-a-sample).</span></span>
+<span data-ttu-id="73611-286">해결할 수 없는 문제가 발생할 경우 [완성된 앱을 다운로드하거나 봅니다](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples).</span><span class="sxs-lookup"><span data-stu-id="73611-286">If you run into problems you can't solve, [download or view the completed app.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)</span></span> <span data-ttu-id="73611-287">[지침을 다운로드하세요](xref:index#how-to-download-a-sample).</span><span class="sxs-lookup"><span data-stu-id="73611-287">[Download instructions](xref:index#how-to-download-a-sample).</span></span>
 
-<span data-ttu-id="b135b-288">다음 그림은 이 자습서에 대해 완료된 페이지를 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-288">The following illustrations show the completed pages for this tutorial:</span></span>
+<span data-ttu-id="73611-288">다음 그림은 이 자습서에 대해 완료된 페이지를 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="73611-288">The following illustrations show the completed pages for this tutorial:</span></span>
 
 ![과정 인덱스 페이지](read-related-data/_static/courses-index.png)
 
 ![강사 인덱스 페이지](read-related-data/_static/instructors-index.png)
 
-## <a name="eager-explicit-and-lazy-loading-of-related-data"></a><span data-ttu-id="b135b-291">관련된 데이터의 즉시, 명시적 및 지연 로드</span><span class="sxs-lookup"><span data-stu-id="b135b-291">Eager, explicit, and lazy Loading of related data</span></span>
+## <a name="eager-explicit-and-lazy-loading-of-related-data"></a><span data-ttu-id="73611-291">관련된 데이터의 즉시, 명시적 및 지연 로드</span><span class="sxs-lookup"><span data-stu-id="73611-291">Eager, explicit, and lazy Loading of related data</span></span>
 
-<span data-ttu-id="b135b-292">여러 가지 방법으로 EF Core가 관련 데이터를 엔터티의 탐색 속성에 로드할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-292">There are several ways that EF Core can load related data into the navigation properties of an entity:</span></span>
+<span data-ttu-id="73611-292">여러 가지 방법으로 EF Core가 관련 데이터를 엔터티의 탐색 속성에 로드할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-292">There are several ways that EF Core can load related data into the navigation properties of an entity:</span></span>
 
-* <span data-ttu-id="b135b-293">[즉시 로드](/ef/core/querying/related-data#eager-loading).</span><span class="sxs-lookup"><span data-stu-id="b135b-293">[Eager loading](/ef/core/querying/related-data#eager-loading).</span></span> <span data-ttu-id="b135b-294">즉시 로드는 한 형식의 엔터티에 대한 쿼리가 관련 엔터티도 로드하는 경우입니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-294">Eager loading is when a query for one type of entity also loads related entities.</span></span> <span data-ttu-id="b135b-295">엔터티를 읽을 때 관련된 데이터가 검색됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-295">When the entity is read, its related data is retrieved.</span></span> <span data-ttu-id="b135b-296">이는 일반적으로 필요한 데이터를 모두 검색하는 단일 조인 쿼리를 발생시킵니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-296">This typically results in a single join query that retrieves all of the data that's needed.</span></span> <span data-ttu-id="b135b-297">EF 코어는 일부 형식의 즉시 로드에 대해 여러 쿼리를 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-297">EF Core will issue multiple queries for some types of eager loading.</span></span> <span data-ttu-id="b135b-298">여러 쿼리를 실행하는 것이 단일 쿼리가 있는 EF6의 일부 쿼리보다 효율적일 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-298">Issuing multiple queries can be more efficient than was the case for some queries in EF6 where there was a single query.</span></span> <span data-ttu-id="b135b-299">즉시 로드는 `Include` 및 `ThenInclude` 메서드로 지정됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-299">Eager loading is specified with the `Include` and `ThenInclude` methods.</span></span>
+* <span data-ttu-id="73611-293">[즉시 로드](/ef/core/querying/related-data#eager-loading).</span><span class="sxs-lookup"><span data-stu-id="73611-293">[Eager loading](/ef/core/querying/related-data#eager-loading).</span></span> <span data-ttu-id="73611-294">즉시 로드는 한 형식의 엔터티에 대한 쿼리가 관련 엔터티도 로드하는 경우입니다.</span><span class="sxs-lookup"><span data-stu-id="73611-294">Eager loading is when a query for one type of entity also loads related entities.</span></span> <span data-ttu-id="73611-295">엔터티를 읽을 때 관련된 데이터가 검색됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-295">When the entity is read, its related data is retrieved.</span></span> <span data-ttu-id="73611-296">이는 일반적으로 필요한 데이터를 모두 검색하는 단일 조인 쿼리를 발생시킵니다.</span><span class="sxs-lookup"><span data-stu-id="73611-296">This typically results in a single join query that retrieves all of the data that's needed.</span></span> <span data-ttu-id="73611-297">EF 코어는 일부 형식의 즉시 로드에 대해 여러 쿼리를 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-297">EF Core will issue multiple queries for some types of eager loading.</span></span> <span data-ttu-id="73611-298">여러 쿼리를 실행하는 것이 단일 쿼리가 있는 EF6의 일부 쿼리보다 효율적일 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-298">Issuing multiple queries can be more efficient than was the case for some queries in EF6 where there was a single query.</span></span> <span data-ttu-id="73611-299">즉시 로드는 `Include` 및 `ThenInclude` 메서드로 지정됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-299">Eager loading is specified with the `Include` and `ThenInclude` methods.</span></span>
 
   ![즉시 로드 예제](read-related-data/_static/eager-loading.png)
  
-  <span data-ttu-id="b135b-301">즉시 로드는 컬렉션 탐색이 포함된 경우 여러 쿼리를 보냅니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-301">Eager loading sends multiple queries when a collection navigation is included:</span></span>
+  <span data-ttu-id="73611-301">즉시 로드는 컬렉션 탐색이 포함된 경우 여러 쿼리를 보냅니다.</span><span class="sxs-lookup"><span data-stu-id="73611-301">Eager loading sends multiple queries when a collection navigation is included:</span></span>
 
-  * <span data-ttu-id="b135b-302">주 쿼리에 대해 한 개 쿼리</span><span class="sxs-lookup"><span data-stu-id="b135b-302">One query for the main query</span></span> 
-  * <span data-ttu-id="b135b-303">로드 트리에서 각 컬렉션 "에지"에 대해 한 개 쿼리</span><span class="sxs-lookup"><span data-stu-id="b135b-303">One query for each collection "edge" in the load tree.</span></span>
+  * <span data-ttu-id="73611-302">주 쿼리에 대해 한 개 쿼리</span><span class="sxs-lookup"><span data-stu-id="73611-302">One query for the main query</span></span> 
+  * <span data-ttu-id="73611-303">로드 트리에서 각 컬렉션 "에지"에 대해 한 개 쿼리</span><span class="sxs-lookup"><span data-stu-id="73611-303">One query for each collection "edge" in the load tree.</span></span>
 
-* <span data-ttu-id="b135b-304">`Load`를 사용한 별도 쿼리: 별도 쿼리로 데이터를 검색할 수 있으며, EF Core에서 탐색 속성을 “수정”합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-304">Separate queries with `Load`: The data can be retrieved in separate queries, and EF Core "fixes up" the navigation properties.</span></span> <span data-ttu-id="b135b-305">"수정"한다는 것은 EF Core가 탐색 속성을 자동으로 채운다는 것을 의미합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-305">"fixes up" means that EF Core automatically populates the navigation properties.</span></span> <span data-ttu-id="b135b-306">`Load`로 쿼리를 구분하는 것은 즉시 로드보다 더 명시적인 로드입니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-306">Separate queries with `Load` is more like explicit loading than eager loading.</span></span>
+* <span data-ttu-id="73611-304">`Load`를 사용한 별도 쿼리: 별도 쿼리로 데이터를 검색할 수 있으며, EF Core에서 탐색 속성을 “수정”합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-304">Separate queries with `Load`: The data can be retrieved in separate queries, and EF Core "fixes up" the navigation properties.</span></span> <span data-ttu-id="73611-305">"수정"한다는 것은 EF Core가 탐색 속성을 자동으로 채운다는 것을 의미합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-305">"fixes up" means that EF Core automatically populates the navigation properties.</span></span> <span data-ttu-id="73611-306">`Load`로 쿼리를 구분하는 것은 즉시 로드보다 더 명시적인 로드입니다.</span><span class="sxs-lookup"><span data-stu-id="73611-306">Separate queries with `Load` is more like explicit loading than eager loading.</span></span>
 
   ![별도 쿼리 예제](read-related-data/_static/separate-queries.png)
 
-  <span data-ttu-id="b135b-308">참고: EF Core는 이전에 컨텍스트 인스턴스에 로드된 다른 엔터티로 탐색 속성을 자동으로 수정합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-308">Note: EF Core automatically fixes up navigation properties to any other entities that were previously loaded into the context instance.</span></span> <span data-ttu-id="b135b-309">탐색 속성에 대한 데이터가 명시적으로 포함되지 *않더라도* 관련 엔터티의 일부 또는 전부가 이전에 로드된 경우에도 속성이 채워질 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-309">Even if the data for a navigation property is *not* explicitly included, the property may still be populated if some or all of the related entities were previously loaded.</span></span>
+  <span data-ttu-id="73611-308">참고: EF Core는 이전에 컨텍스트 인스턴스에 로드된 다른 엔터티로 탐색 속성을 자동으로 수정합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-308">Note: EF Core automatically fixes up navigation properties to any other entities that were previously loaded into the context instance.</span></span> <span data-ttu-id="73611-309">탐색 속성에 대한 데이터가 명시적으로 포함되지 *않더라도* 관련 엔터티의 일부 또는 전부가 이전에 로드된 경우에도 속성이 채워질 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-309">Even if the data for a navigation property is *not* explicitly included, the property may still be populated if some or all of the related entities were previously loaded.</span></span>
 
-* <span data-ttu-id="b135b-310">[명시적 로드](/ef/core/querying/related-data#explicit-loading).</span><span class="sxs-lookup"><span data-stu-id="b135b-310">[Explicit loading](/ef/core/querying/related-data#explicit-loading).</span></span> <span data-ttu-id="b135b-311">엔터티를 처음 읽을 때 관련된 데이터가 검색되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-311">When the entity is first read, related data isn't retrieved.</span></span> <span data-ttu-id="b135b-312">필요할 때 관련된 데이터를 검색하기 위한 코드를 작성해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-312">Code must be written to retrieve the related data when it's needed.</span></span> <span data-ttu-id="b135b-313">별도 쿼리가 있는 명시적 로드의 경우 여러 쿼리가 DB로 전송됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-313">Explicit loading with separate queries results in multiple queries sent to the DB.</span></span> <span data-ttu-id="b135b-314">명시적 로드에서 코드는 로드될 탐색 속성을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-314">With explicit loading, the code specifies the navigation properties to be loaded.</span></span> <span data-ttu-id="b135b-315">`Load` 메서드를 사용하여 명시적 로드를 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-315">Use the `Load` method to do explicit loading.</span></span> <span data-ttu-id="b135b-316">예를 들어:</span><span class="sxs-lookup"><span data-stu-id="b135b-316">For example:</span></span>
+* <span data-ttu-id="73611-310">[명시적 로드](/ef/core/querying/related-data#explicit-loading).</span><span class="sxs-lookup"><span data-stu-id="73611-310">[Explicit loading](/ef/core/querying/related-data#explicit-loading).</span></span> <span data-ttu-id="73611-311">엔터티를 처음 읽을 때 관련된 데이터가 검색되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-311">When the entity is first read, related data isn't retrieved.</span></span> <span data-ttu-id="73611-312">필요할 때 관련된 데이터를 검색하기 위한 코드를 작성해야 합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-312">Code must be written to retrieve the related data when it's needed.</span></span> <span data-ttu-id="73611-313">별도 쿼리가 있는 명시적 로드의 경우 여러 쿼리가 DB로 전송됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-313">Explicit loading with separate queries results in multiple queries sent to the DB.</span></span> <span data-ttu-id="73611-314">명시적 로드에서 코드는 로드될 탐색 속성을 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-314">With explicit loading, the code specifies the navigation properties to be loaded.</span></span> <span data-ttu-id="73611-315">`Load` 메서드를 사용하여 명시적 로드를 수행합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-315">Use the `Load` method to do explicit loading.</span></span> <span data-ttu-id="73611-316">예를 들어:</span><span class="sxs-lookup"><span data-stu-id="73611-316">For example:</span></span>
 
   ![명시적 로드 예제](read-related-data/_static/explicit-loading.png)
 
-* <span data-ttu-id="b135b-318">[지연 로드](/ef/core/querying/related-data#lazy-loading).</span><span class="sxs-lookup"><span data-stu-id="b135b-318">[Lazy loading](/ef/core/querying/related-data#lazy-loading).</span></span> <span data-ttu-id="b135b-319">[지연 로드가 버전 2.1의 EF Core에 추가되었습니다](/ef/core/querying/related-data#lazy-loading).</span><span class="sxs-lookup"><span data-stu-id="b135b-319">[Lazy loading was added to EF Core in version 2.1](/ef/core/querying/related-data#lazy-loading).</span></span> <span data-ttu-id="b135b-320">엔터티를 처음 읽을 때 관련된 데이터가 검색되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-320">When the entity is first read, related data isn't retrieved.</span></span> <span data-ttu-id="b135b-321">탐색 속성에 처음으로 액세스하려고 할 때 해당 탐색 속성에 필요한 데이터가 자동으로 검색됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-321">The first time a navigation property is accessed, the data required for that navigation property is automatically retrieved.</span></span> <span data-ttu-id="b135b-322">탐색 속성에 처음으로 액세스할 때마다 쿼리가 DB에 전송됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-322">A query is sent to the DB each time a navigation property is accessed for the first time.</span></span>
+* <span data-ttu-id="73611-318">[지연 로드](/ef/core/querying/related-data#lazy-loading).</span><span class="sxs-lookup"><span data-stu-id="73611-318">[Lazy loading](/ef/core/querying/related-data#lazy-loading).</span></span> <span data-ttu-id="73611-319">[지연 로드가 버전 2.1의 EF Core에 추가되었습니다](/ef/core/querying/related-data#lazy-loading).</span><span class="sxs-lookup"><span data-stu-id="73611-319">[Lazy loading was added to EF Core in version 2.1](/ef/core/querying/related-data#lazy-loading).</span></span> <span data-ttu-id="73611-320">엔터티를 처음 읽을 때 관련된 데이터가 검색되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-320">When the entity is first read, related data isn't retrieved.</span></span> <span data-ttu-id="73611-321">탐색 속성에 처음으로 액세스하려고 할 때 해당 탐색 속성에 필요한 데이터가 자동으로 검색됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-321">The first time a navigation property is accessed, the data required for that navigation property is automatically retrieved.</span></span> <span data-ttu-id="73611-322">탐색 속성에 처음으로 액세스할 때마다 쿼리가 DB에 전송됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-322">A query is sent to the DB each time a navigation property is accessed for the first time.</span></span>
 
-* <span data-ttu-id="b135b-323">`Select` 연산자는 필요한 관련된 데이터만 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-323">The `Select` operator loads only the related data needed.</span></span>
+* <span data-ttu-id="73611-323">`Select` 연산자는 필요한 관련된 데이터만 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-323">The `Select` operator loads only the related data needed.</span></span>
 
-## <a name="create-a-course-page-that-displays-department-name"></a><span data-ttu-id="b135b-324">부서 이름을 표시하는 과정 페이지 만들기</span><span class="sxs-lookup"><span data-stu-id="b135b-324">Create a Course page that displays department name</span></span>
+## <a name="create-a-course-page-that-displays-department-name"></a><span data-ttu-id="73611-324">부서 이름을 표시하는 과정 페이지 만들기</span><span class="sxs-lookup"><span data-stu-id="73611-324">Create a Course page that displays department name</span></span>
 
-<span data-ttu-id="b135b-325">과정 엔터티는 `Department` 엔터티가 포함된 탐색 속성을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-325">The Course entity includes a navigation property that contains the `Department` entity.</span></span> <span data-ttu-id="b135b-326">`Department` 엔터티는 과정이 할당된 부서를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-326">The `Department` entity contains the department that the course is assigned to.</span></span>
+<span data-ttu-id="73611-325">과정 엔터티는 `Department` 엔터티가 포함된 탐색 속성을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-325">The Course entity includes a navigation property that contains the `Department` entity.</span></span> <span data-ttu-id="73611-326">`Department` 엔터티는 과정이 할당된 부서를 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-326">The `Department` entity contains the department that the course is assigned to.</span></span>
 
-<span data-ttu-id="b135b-327">과정 목록에 할당된 부서 이름을 표시하려면</span><span class="sxs-lookup"><span data-stu-id="b135b-327">To display the name of the assigned department in a list of courses:</span></span>
+<span data-ttu-id="73611-327">과정 목록에 할당된 부서 이름을 표시하려면</span><span class="sxs-lookup"><span data-stu-id="73611-327">To display the name of the assigned department in a list of courses:</span></span>
 
-* <span data-ttu-id="b135b-328">`Department` 엔터티에서 `Name` 속성을 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-328">Get the `Name` property from the `Department` entity.</span></span>
-* <span data-ttu-id="b135b-329">`Department` 엔터티는 `Course.Department` 탐색 속성에서 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-329">The `Department` entity comes from the `Course.Department` navigation property.</span></span>
+* <span data-ttu-id="73611-328">`Department` 엔터티에서 `Name` 속성을 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="73611-328">Get the `Name` property from the `Department` entity.</span></span>
+* <span data-ttu-id="73611-329">`Department` 엔터티는 `Course.Department` 탐색 속성에서 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="73611-329">The `Department` entity comes from the `Course.Department` navigation property.</span></span>
 
 ![Course.Department](read-related-data/_static/dep-crs.png)
 
 <a name="scaffold"></a>
 
-### <a name="scaffold-the-course-model"></a><span data-ttu-id="b135b-331">과정 모델 스캐폴드</span><span class="sxs-lookup"><span data-stu-id="b135b-331">Scaffold the Course model</span></span>
+### <a name="scaffold-the-course-model"></a><span data-ttu-id="73611-331">과정 모델 스캐폴드</span><span class="sxs-lookup"><span data-stu-id="73611-331">Scaffold the Course model</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="b135b-332">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="b135b-332">Visual Studio</span></span>](#tab/visual-studio) 
+# <a name="visual-studio"></a>[<span data-ttu-id="73611-332">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="73611-332">Visual Studio</span></span>](#tab/visual-studio) 
 
-<span data-ttu-id="b135b-333">[학생 모델 스캐폴드](xref:data/ef-rp/intro#scaffold-the-student-model)의 지침을 따르고 `Course`를 모델 클래스로 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-333">Follow the instructions in [Scaffold the student model](xref:data/ef-rp/intro#scaffold-the-student-model) and use `Course` for the model class.</span></span>
+<span data-ttu-id="73611-333">[학생 모델 스캐폴드](xref:data/ef-rp/intro#scaffold-the-student-model)의 지침을 따르고 `Course`를 모델 클래스로 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-333">Follow the instructions in [Scaffold the student model](xref:data/ef-rp/intro#scaffold-the-student-model) and use `Course` for the model class.</span></span>
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="b135b-334">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="b135b-334">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="73611-334">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="73611-334">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
- <span data-ttu-id="b135b-335">다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-335">Run the following command:</span></span>
+ <span data-ttu-id="73611-335">다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-335">Run the following command:</span></span>
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Course -dc SchoolContext -udl -outDir Pages\Courses --referenceScriptLibraries
@@ -397,86 +397,86 @@ ms.locfileid: "78645591"
 
 ---
 
-<span data-ttu-id="b135b-336">위의 명령은 `Course` 모델을 스캐폴드합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-336">The preceding command scaffolds the `Course` model.</span></span> <span data-ttu-id="b135b-337">Visual Studio에서 프로젝트를 엽니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-337">Open the project in Visual Studio.</span></span>
+<span data-ttu-id="73611-336">위의 명령은 `Course` 모델을 스캐폴드합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-336">The preceding command scaffolds the `Course` model.</span></span> <span data-ttu-id="73611-337">Visual Studio에서 프로젝트를 엽니다.</span><span class="sxs-lookup"><span data-stu-id="73611-337">Open the project in Visual Studio.</span></span>
 
-<span data-ttu-id="b135b-338">*Pages/Courses/Index.cshtml.cs*를 열고 `OnGetAsync` 메서드를 검사합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-338">Open *Pages/Courses/Index.cshtml.cs* and examine the `OnGetAsync` method.</span></span> <span data-ttu-id="b135b-339">스캐폴딩 엔진은 `Department` 탐색 속성에 대한 즉시 로드를 지정했습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-339">The scaffolding engine specified eager loading for the `Department` navigation property.</span></span> <span data-ttu-id="b135b-340">`Include` 메서드가 즉시 로드를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-340">The `Include` method specifies eager loading.</span></span>
+<span data-ttu-id="73611-338">*Pages/Courses/Index.cshtml.cs*를 열고 `OnGetAsync` 메서드를 검사합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-338">Open *Pages/Courses/Index.cshtml.cs* and examine the `OnGetAsync` method.</span></span> <span data-ttu-id="73611-339">스캐폴딩 엔진은 `Department` 탐색 속성에 대한 즉시 로드를 지정했습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-339">The scaffolding engine specified eager loading for the `Department` navigation property.</span></span> <span data-ttu-id="73611-340">`Include` 메서드가 즉시 로드를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-340">The `Include` method specifies eager loading.</span></span>
 
-<span data-ttu-id="b135b-341">앱을 실행하고 **과정** 링크를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-341">Run the app and select the **Courses** link.</span></span> <span data-ttu-id="b135b-342">Department 열에 도움이 되지 않는 `DepartmentID`가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-342">The department column displays the `DepartmentID`, which isn't useful.</span></span>
+<span data-ttu-id="73611-341">앱을 실행하고 **과정** 링크를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-341">Run the app and select the **Courses** link.</span></span> <span data-ttu-id="73611-342">Department 열에 도움이 되지 않는 `DepartmentID`가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-342">The department column displays the `DepartmentID`, which isn't useful.</span></span>
 
-<span data-ttu-id="b135b-343">`OnGetAsync` 메서드를 다음 코드로 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-343">Update the `OnGetAsync` method with the following code:</span></span>
+<span data-ttu-id="73611-343">`OnGetAsync` 메서드를 다음 코드로 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-343">Update the `OnGetAsync` method with the following code:</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Index.cshtml.cs?name=snippet_RevisedIndexMethod)]
 
-<span data-ttu-id="b135b-344">위의 코드는 `AsNoTracking`을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-344">The preceding code adds `AsNoTracking`.</span></span> <span data-ttu-id="b135b-345">반환된 엔터티는 추적되지 않으므로 `AsNoTracking`이 성능을 개선합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-345">`AsNoTracking` improves performance because the entities returned are not tracked.</span></span> <span data-ttu-id="b135b-346">현재 컨텍스트에서 업데이트되지 않으므로 엔터티가 추적되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-346">The entities are not tracked because they're not updated in the current context.</span></span>
+<span data-ttu-id="73611-344">위의 코드는 `AsNoTracking`을 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-344">The preceding code adds `AsNoTracking`.</span></span> <span data-ttu-id="73611-345">반환된 엔터티는 추적되지 않으므로 `AsNoTracking`이 성능을 개선합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-345">`AsNoTracking` improves performance because the entities returned are not tracked.</span></span> <span data-ttu-id="73611-346">현재 컨텍스트에서 업데이트되지 않으므로 엔터티가 추적되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-346">The entities are not tracked because they're not updated in the current context.</span></span>
 
-<span data-ttu-id="b135b-347">*Pages/Courses/Index.cshtml*을 다음 강조 표시된 내용으로 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-347">Update *Pages/Courses/Index.cshtml* with the following highlighted markup:</span></span>
+<span data-ttu-id="73611-347">*Pages/Courses/Index.cshtml*을 다음 강조 표시된 내용으로 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-347">Update *Pages/Courses/Index.cshtml* with the following highlighted markup:</span></span>
 
 [!code-html[](intro/samples/cu/Pages/Courses/Index.cshtml?highlight=4,7,15-17,34-36,44)]
 
-<span data-ttu-id="b135b-348">스캐폴드 코드에 다음 변경 내용을 적용했습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-348">The following changes have been made to the scaffolded code:</span></span>
+<span data-ttu-id="73611-348">스캐폴드 코드에 다음 변경 내용을 적용했습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-348">The following changes have been made to the scaffolded code:</span></span>
 
-* <span data-ttu-id="b135b-349">제목을 Index(인덱스)에서 Courses(과정)로 변경했습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-349">Changed the heading from Index to Courses.</span></span>
-* <span data-ttu-id="b135b-350">`CourseID` 속성 값을 보여 주는 **Number** 열을 추가했습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-350">Added a **Number** column that shows the `CourseID` property value.</span></span> <span data-ttu-id="b135b-351">일반적으로 최종 사용자에게 의미가 없으므로 기본적으로 기본 키는 스캐폴드되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-351">By default, primary keys aren't scaffolded because normally they're meaningless to end users.</span></span> <span data-ttu-id="b135b-352">그러나 이 경우 기본 키는 의미가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-352">However, in this case the primary key is meaningful.</span></span>
-* <span data-ttu-id="b135b-353">부서 이름을 표시하도록 **Department** 열을 변경했습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-353">Changed the **Department** column to display the department name.</span></span> <span data-ttu-id="b135b-354">코드는 `Department` 탐색 속성으로 로드되는 `Department` 엔터티의 `Name` 속성을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-354">The code displays the `Name` property of the `Department` entity that's loaded into the `Department` navigation property:</span></span>
+* <span data-ttu-id="73611-349">제목을 Index(인덱스)에서 Courses(과정)로 변경했습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-349">Changed the heading from Index to Courses.</span></span>
+* <span data-ttu-id="73611-350">`CourseID` 속성 값을 보여 주는 **Number** 열을 추가했습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-350">Added a **Number** column that shows the `CourseID` property value.</span></span> <span data-ttu-id="73611-351">일반적으로 최종 사용자에게 의미가 없으므로 기본적으로 기본 키는 스캐폴드되지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-351">By default, primary keys aren't scaffolded because normally they're meaningless to end users.</span></span> <span data-ttu-id="73611-352">그러나 이 경우 기본 키는 의미가 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-352">However, in this case the primary key is meaningful.</span></span>
+* <span data-ttu-id="73611-353">부서 이름을 표시하도록 **Department** 열을 변경했습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-353">Changed the **Department** column to display the department name.</span></span> <span data-ttu-id="73611-354">코드는 `Department` 탐색 속성으로 로드되는 `Department` 엔터티의 `Name` 속성을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-354">The code displays the `Name` property of the `Department` entity that's loaded into the `Department` navigation property:</span></span>
 
   ```html
   @Html.DisplayFor(modelItem => item.Department.Name)
   ```
 
-<span data-ttu-id="b135b-355">앱을 실행하고 **Courses(과정)** 탭을 선택하여 부서 이름이 있는 목록을 봅니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-355">Run the app and select the **Courses** tab to see the list with department names.</span></span>
+<span data-ttu-id="73611-355">앱을 실행하고 **Courses(과정)** 탭을 선택하여 부서 이름이 있는 목록을 봅니다.</span><span class="sxs-lookup"><span data-stu-id="73611-355">Run the app and select the **Courses** tab to see the list with department names.</span></span>
 
 ![과정 인덱스 페이지](read-related-data/_static/courses-index.png)
 
 <a name="select"></a>
 
-### <a name="loading-related-data-with-select"></a><span data-ttu-id="b135b-357">Select로 관련된 데이터 로드</span><span class="sxs-lookup"><span data-stu-id="b135b-357">Loading related data with Select</span></span>
+### <a name="loading-related-data-with-select"></a><span data-ttu-id="73611-357">Select로 관련된 데이터 로드</span><span class="sxs-lookup"><span data-stu-id="73611-357">Loading related data with Select</span></span>
 
-<span data-ttu-id="b135b-358">`OnGetAsync` 메서드는 `Include` 메서드로 관련된 데이터를 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-358">The `OnGetAsync` method loads related data with the `Include` method:</span></span>
+<span data-ttu-id="73611-358">`OnGetAsync` 메서드는 `Include` 메서드로 관련된 데이터를 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-358">The `OnGetAsync` method loads related data with the `Include` method:</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Index.cshtml.cs?name=snippet_RevisedIndexMethod&highlight=4)]
 
-<span data-ttu-id="b135b-359">`Select` 연산자는 필요한 관련된 데이터만 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-359">The `Select` operator loads only the related data needed.</span></span> <span data-ttu-id="b135b-360">`Department.Name`과 같은 단일 항목에서는 SQL INNER JOIN을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-360">For single items, like the `Department.Name` it uses a SQL INNER JOIN.</span></span> <span data-ttu-id="b135b-361">컬렉션의 경우 다른 데이터베이스 액세스를 사용하지만 컬렉션의 `Include` 연산자도 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-361">For collections, it uses another database access, but so does the `Include` operator on collections.</span></span>
+<span data-ttu-id="73611-359">`Select` 연산자는 필요한 관련된 데이터만 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-359">The `Select` operator loads only the related data needed.</span></span> <span data-ttu-id="73611-360">`Department.Name`과 같은 단일 항목에서는 SQL INNER JOIN을 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-360">For single items, like the `Department.Name` it uses a SQL INNER JOIN.</span></span> <span data-ttu-id="73611-361">컬렉션의 경우 다른 데이터베이스 액세스를 사용하지만 컬렉션의 `Include` 연산자도 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-361">For collections, it uses another database access, but so does the `Include` operator on collections.</span></span>
 
-<span data-ttu-id="b135b-362">다음 코드는 `Select` 메서드로 관련된 데이터를 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-362">The following code loads related data with the `Select` method:</span></span>
+<span data-ttu-id="73611-362">다음 코드는 `Select` 메서드로 관련된 데이터를 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-362">The following code loads related data with the `Select` method:</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/IndexSelect.cshtml.cs?name=snippet_RevisedIndexMethod&highlight=4)]
 
-<span data-ttu-id="b135b-363">`CourseViewModel`:</span><span class="sxs-lookup"><span data-stu-id="b135b-363">The `CourseViewModel`:</span></span>
+<span data-ttu-id="73611-363">`CourseViewModel`:</span><span class="sxs-lookup"><span data-stu-id="73611-363">The `CourseViewModel`:</span></span>
 
 [!code-csharp[](intro/samples/cu/Models/SchoolViewModels/CourseViewModel.cs?name=snippet)]
 
-<span data-ttu-id="b135b-364">전체 예제는 [IndexSelect.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu/Pages/Courses/IndexSelect.cshtml) 및 [IndexSelect.cshtml.cs](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu/Pages/Courses/IndexSelect.cshtml.cs)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="b135b-364">See [IndexSelect.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu/Pages/Courses/IndexSelect.cshtml) and [IndexSelect.cshtml.cs](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu/Pages/Courses/IndexSelect.cshtml.cs) for a complete example.</span></span>
+<span data-ttu-id="73611-364">전체 예제는 [IndexSelect.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu/Pages/Courses/IndexSelect.cshtml) 및 [IndexSelect.cshtml.cs](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu/Pages/Courses/IndexSelect.cshtml.cs)를 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="73611-364">See [IndexSelect.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu/Pages/Courses/IndexSelect.cshtml) and [IndexSelect.cshtml.cs](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu/Pages/Courses/IndexSelect.cshtml.cs) for a complete example.</span></span>
 
-## <a name="create-an-instructors-page-that-shows-courses-and-enrollments"></a><span data-ttu-id="b135b-365">과정 및 등록을 보여 주는 강사 페이지 만들기</span><span class="sxs-lookup"><span data-stu-id="b135b-365">Create an Instructors page that shows Courses and Enrollments</span></span>
+## <a name="create-an-instructors-page-that-shows-courses-and-enrollments"></a><span data-ttu-id="73611-365">과정 및 등록을 보여 주는 강사 페이지 만들기</span><span class="sxs-lookup"><span data-stu-id="73611-365">Create an Instructors page that shows Courses and Enrollments</span></span>
 
-<span data-ttu-id="b135b-366">이 섹션에서는 강사 페이지가 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-366">In this section, the Instructors page is created.</span></span>
+<span data-ttu-id="73611-366">이 섹션에서는 강사 페이지가 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-366">In this section, the Instructors page is created.</span></span>
 
 <a name="IP"></a>
-<span data-ttu-id="b135b-367">![강사 인덱스 페이지](read-related-data/_static/instructors-index.png)</span><span class="sxs-lookup"><span data-stu-id="b135b-367">![Instructors Index page](read-related-data/_static/instructors-index.png)</span></span>
+<span data-ttu-id="73611-367">![강사 인덱스 페이지](read-related-data/_static/instructors-index.png)</span><span class="sxs-lookup"><span data-stu-id="73611-367">![Instructors Index page](read-related-data/_static/instructors-index.png)</span></span>
 
-<span data-ttu-id="b135b-368">이 페이지는 다음과 같은 방법으로 관련된 데이터를 읽고 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-368">This page reads and displays related data in the following ways:</span></span>
+<span data-ttu-id="73611-368">이 페이지는 다음과 같은 방법으로 관련된 데이터를 읽고 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-368">This page reads and displays related data in the following ways:</span></span>
 
-* <span data-ttu-id="b135b-369">강사 목록은 `OfficeAssignment` 엔터티에서 관련된 데이터를 표시합니다(이전 이미지에서 Office).</span><span class="sxs-lookup"><span data-stu-id="b135b-369">The list of instructors displays related data from the `OfficeAssignment` entity (Office in the preceding image).</span></span> <span data-ttu-id="b135b-370">`Instructor` 및 `OfficeAssignment` 엔터티는 일대영 또는 일 관계에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-370">The `Instructor` and `OfficeAssignment` entities are in a one-to-zero-or-one relationship.</span></span> <span data-ttu-id="b135b-371">즉시 로드는 `OfficeAssignment` 엔터티에 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-371">Eager loading is used for the `OfficeAssignment` entities.</span></span> <span data-ttu-id="b135b-372">즉시 로드는 일반적으로 관련된 데이터를 표시해야 할 때 더 효율적입니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-372">Eager loading is typically more efficient when the related data needs to be displayed.</span></span> <span data-ttu-id="b135b-373">이 경우 강사를 위한 사무실 할당이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-373">In this case, office assignments for the instructors are displayed.</span></span>
-* <span data-ttu-id="b135b-374">사용자가 강사(이전 이미지에서 Harui)를 선택하는 경우 관련된 `Course` 엔터티가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-374">When the user selects an instructor (Harui in the preceding image), related `Course` entities are displayed.</span></span> <span data-ttu-id="b135b-375">`Instructor` 및 `Course` 엔터티는 다대다 관계에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-375">The `Instructor` and `Course` entities are in a many-to-many relationship.</span></span> <span data-ttu-id="b135b-376">`Course` 엔터티 및 관련 `Department` 엔터티에 대해 즉시 로드가 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-376">Eager loading is used for the `Course` entities and their related `Department` entities.</span></span> <span data-ttu-id="b135b-377">이 경우 선택한 강사에 대한 과정만 필요하므로 별도 쿼리가 더 효율적일 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-377">In this case, separate queries might be more efficient because only courses for the selected instructor are needed.</span></span> <span data-ttu-id="b135b-378">이 예제에서는 탐색 속성에 있는 엔터티에서 탐색 속성에 대한 즉시 로드를 사용하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-378">This example shows how to use eager loading for navigation properties in entities that are in navigation properties.</span></span>
-* <span data-ttu-id="b135b-379">사용자가 과정(이전 이미지에서 Chemistry)을 선택하면 `Enrollments` 엔터티의 관련된 데이터가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-379">When the user selects a course (Chemistry in the preceding image), related data from the `Enrollments` entity is displayed.</span></span> <span data-ttu-id="b135b-380">이전 이미지에서는 학생 이름 및 학점이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-380">In the preceding image, student name and grade are displayed.</span></span> <span data-ttu-id="b135b-381">`Course` 및 `Enrollment` 엔터티는 일대다 관계에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-381">The `Course` and `Enrollment` entities are in a one-to-many relationship.</span></span>
+* <span data-ttu-id="73611-369">강사 목록은 `OfficeAssignment` 엔터티에서 관련된 데이터를 표시합니다(이전 이미지에서 Office).</span><span class="sxs-lookup"><span data-stu-id="73611-369">The list of instructors displays related data from the `OfficeAssignment` entity (Office in the preceding image).</span></span> <span data-ttu-id="73611-370">`Instructor` 및 `OfficeAssignment` 엔터티는 일대영 또는 일 관계에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-370">The `Instructor` and `OfficeAssignment` entities are in a one-to-zero-or-one relationship.</span></span> <span data-ttu-id="73611-371">즉시 로드는 `OfficeAssignment` 엔터티에 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-371">Eager loading is used for the `OfficeAssignment` entities.</span></span> <span data-ttu-id="73611-372">즉시 로드는 일반적으로 관련된 데이터를 표시해야 할 때 더 효율적입니다.</span><span class="sxs-lookup"><span data-stu-id="73611-372">Eager loading is typically more efficient when the related data needs to be displayed.</span></span> <span data-ttu-id="73611-373">이 경우 강사를 위한 사무실 할당이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-373">In this case, office assignments for the instructors are displayed.</span></span>
+* <span data-ttu-id="73611-374">사용자가 강사(이전 이미지에서 Harui)를 선택하는 경우 관련된 `Course` 엔터티가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-374">When the user selects an instructor (Harui in the preceding image), related `Course` entities are displayed.</span></span> <span data-ttu-id="73611-375">`Instructor` 및 `Course` 엔터티는 다대다 관계에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-375">The `Instructor` and `Course` entities are in a many-to-many relationship.</span></span> <span data-ttu-id="73611-376">`Course` 엔터티 및 관련 `Department` 엔터티에 대해 즉시 로드가 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-376">Eager loading is used for the `Course` entities and their related `Department` entities.</span></span> <span data-ttu-id="73611-377">이 경우 선택한 강사에 대한 과정만 필요하므로 별도 쿼리가 더 효율적일 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-377">In this case, separate queries might be more efficient because only courses for the selected instructor are needed.</span></span> <span data-ttu-id="73611-378">이 예제에서는 탐색 속성에 있는 엔터티에서 탐색 속성에 대한 즉시 로드를 사용하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="73611-378">This example shows how to use eager loading for navigation properties in entities that are in navigation properties.</span></span>
+* <span data-ttu-id="73611-379">사용자가 과정(이전 이미지에서 Chemistry)을 선택하면 `Enrollments` 엔터티의 관련된 데이터가 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-379">When the user selects a course (Chemistry in the preceding image), related data from the `Enrollments` entity is displayed.</span></span> <span data-ttu-id="73611-380">이전 이미지에서는 학생 이름 및 학점이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-380">In the preceding image, student name and grade are displayed.</span></span> <span data-ttu-id="73611-381">`Course` 및 `Enrollment` 엔터티는 일대다 관계에 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-381">The `Course` and `Enrollment` entities are in a one-to-many relationship.</span></span>
 
-### <a name="create-a-view-model-for-the-instructor-index-view"></a><span data-ttu-id="b135b-382">강사 인덱스 뷰에 대한 뷰 모델 만들기</span><span class="sxs-lookup"><span data-stu-id="b135b-382">Create a view model for the Instructor Index view</span></span>
+### <a name="create-a-view-model-for-the-instructor-index-view"></a><span data-ttu-id="73611-382">강사 인덱스 뷰에 대한 뷰 모델 만들기</span><span class="sxs-lookup"><span data-stu-id="73611-382">Create a view model for the Instructor Index view</span></span>
 
-<span data-ttu-id="b135b-383">강사 페이지는 서로 다른 세 테이블의 데이터를 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-383">The instructors page shows data from three different tables.</span></span> <span data-ttu-id="b135b-384">세 개 테이블을 나타내는 세 개 엔터티가 포함된 뷰 모델이 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-384">A view model is created that includes the three entities representing the three tables.</span></span>
+<span data-ttu-id="73611-383">강사 페이지는 서로 다른 세 테이블의 데이터를 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-383">The instructors page shows data from three different tables.</span></span> <span data-ttu-id="73611-384">세 개 테이블을 나타내는 세 개 엔터티가 포함된 뷰 모델이 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-384">A view model is created that includes the three entities representing the three tables.</span></span>
 
-<span data-ttu-id="b135b-385">다음 코드로 *SchoolViewModels* 폴더에서 *InstructorIndexData.cs*를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-385">In the *SchoolViewModels* folder, create *InstructorIndexData.cs* with the following code:</span></span>
+<span data-ttu-id="73611-385">다음 코드로 *SchoolViewModels* 폴더에서 *InstructorIndexData.cs*를 만듭니다.</span><span class="sxs-lookup"><span data-stu-id="73611-385">In the *SchoolViewModels* folder, create *InstructorIndexData.cs* with the following code:</span></span>
 
 [!code-csharp[](intro/samples/cu/Models/SchoolViewModels/InstructorIndexData.cs)]
 
-### <a name="scaffold-the-instructor-model"></a><span data-ttu-id="b135b-386">강사 모델 스캐폴드</span><span class="sxs-lookup"><span data-stu-id="b135b-386">Scaffold the Instructor model</span></span>
+### <a name="scaffold-the-instructor-model"></a><span data-ttu-id="73611-386">강사 모델 스캐폴드</span><span class="sxs-lookup"><span data-stu-id="73611-386">Scaffold the Instructor model</span></span>
 
-# <a name="visual-studio"></a>[<span data-ttu-id="b135b-387">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="b135b-387">Visual Studio</span></span>](#tab/visual-studio) 
+# <a name="visual-studio"></a>[<span data-ttu-id="73611-387">Visual Studio</span><span class="sxs-lookup"><span data-stu-id="73611-387">Visual Studio</span></span>](#tab/visual-studio) 
 
-<span data-ttu-id="b135b-388">[학생 모델 스캐폴드](xref:data/ef-rp/intro#scaffold-the-student-model)의 지침을 따르고 `Instructor`를 모델 클래스로 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-388">Follow the instructions in [Scaffold the student model](xref:data/ef-rp/intro#scaffold-the-student-model) and use `Instructor` for the model class.</span></span>
+<span data-ttu-id="73611-388">[학생 모델 스캐폴드](xref:data/ef-rp/intro#scaffold-the-student-model)의 지침을 따르고 `Instructor`를 모델 클래스로 사용합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-388">Follow the instructions in [Scaffold the student model](xref:data/ef-rp/intro#scaffold-the-student-model) and use `Instructor` for the model class.</span></span>
 
-# <a name="visual-studio-code"></a>[<span data-ttu-id="b135b-389">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="b135b-389">Visual Studio Code</span></span>](#tab/visual-studio-code)
+# <a name="visual-studio-code"></a>[<span data-ttu-id="73611-389">Visual Studio Code</span><span class="sxs-lookup"><span data-stu-id="73611-389">Visual Studio Code</span></span>](#tab/visual-studio-code)
 
- <span data-ttu-id="b135b-390">다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-390">Run the following command:</span></span>
+ <span data-ttu-id="73611-390">다음 명령을 실행합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-390">Run the following command:</span></span>
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Instructor -dc SchoolContext -udl -outDir Pages\Instructors --referenceScriptLibraries
@@ -484,42 +484,42 @@ ms.locfileid: "78645591"
 
 ---
 
-<span data-ttu-id="b135b-391">위의 명령은 `Instructor` 모델을 스캐폴드합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-391">The preceding command scaffolds the `Instructor` model.</span></span> 
-<span data-ttu-id="b135b-392">앱을 실행하고 강사 페이지로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-392">Run the app and navigate to the instructors page.</span></span>
+<span data-ttu-id="73611-391">위의 명령은 `Instructor` 모델을 스캐폴드합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-391">The preceding command scaffolds the `Instructor` model.</span></span> 
+<span data-ttu-id="73611-392">앱을 실행하고 강사 페이지로 이동합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-392">Run the app and navigate to the instructors page.</span></span>
 
-<span data-ttu-id="b135b-393">*Pages/Instructors/Index.cshtml.cs*를 다음 코드로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-393">Replace *Pages/Instructors/Index.cshtml.cs* with the following code:</span></span>
+<span data-ttu-id="73611-393">*Pages/Instructors/Index.cshtml.cs*를 다음 코드로 바꿉니다.</span><span class="sxs-lookup"><span data-stu-id="73611-393">Replace *Pages/Instructors/Index.cshtml.cs* with the following code:</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index1.cshtml.cs?name=snippet_all&highlight=2,18-99)]
 
-<span data-ttu-id="b135b-394">`OnGetAsync` 메서드는 선택한 강사의 ID에 대해 경로 데이터(선택 사항)를 받아들입니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-394">The `OnGetAsync` method accepts optional route data for the ID of the selected instructor.</span></span>
+<span data-ttu-id="73611-394">`OnGetAsync` 메서드는 선택한 강사의 ID에 대해 경로 데이터(선택 사항)를 받아들입니다.</span><span class="sxs-lookup"><span data-stu-id="73611-394">The `OnGetAsync` method accepts optional route data for the ID of the selected instructor.</span></span>
 
-<span data-ttu-id="b135b-395">*Pages/Instructors/Index.cshtml.cs* 파일에서 쿼리를 검사합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-395">Examine the query in the *Pages/Instructors/Index.cshtml.cs* file:</span></span>
+<span data-ttu-id="73611-395">*Pages/Instructors/Index.cshtml.cs* 파일에서 쿼리를 검사합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-395">Examine the query in the *Pages/Instructors/Index.cshtml.cs* file:</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index1.cshtml.cs?name=snippet_ThenInclude)]
 
-<span data-ttu-id="b135b-396">쿼리에는 다음 두 include가 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-396">The query has two includes:</span></span>
+<span data-ttu-id="73611-396">쿼리에는 다음 두 include가 포함됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-396">The query has two includes:</span></span>
 
-* <span data-ttu-id="b135b-397">`OfficeAssignment`: [강사 뷰](#IP)에 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-397">`OfficeAssignment`: Displayed in the [instructors view](#IP).</span></span>
-* <span data-ttu-id="b135b-398">`CourseAssignments`: 가르친 과정을 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-398">`CourseAssignments`: Which brings in the courses taught.</span></span>
+* <span data-ttu-id="73611-397">`OfficeAssignment`: [강사 뷰](#IP)에 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-397">`OfficeAssignment`: Displayed in the [instructors view](#IP).</span></span>
+* <span data-ttu-id="73611-398">`CourseAssignments`: 가르친 과정을 가져옵니다.</span><span class="sxs-lookup"><span data-stu-id="73611-398">`CourseAssignments`: Which brings in the courses taught.</span></span>
 
-### <a name="update-the-instructors-index-page"></a><span data-ttu-id="b135b-399">강사 인덱스 페이지 업데이트</span><span class="sxs-lookup"><span data-stu-id="b135b-399">Update the instructors Index page</span></span>
+### <a name="update-the-instructors-index-page"></a><span data-ttu-id="73611-399">강사 인덱스 페이지 업데이트</span><span class="sxs-lookup"><span data-stu-id="73611-399">Update the instructors Index page</span></span>
 
-<span data-ttu-id="b135b-400">*Pages/Instructors/Index.cshtml*을 다음 표시로 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-400">Update *Pages/Instructors/Index.cshtml* with the following markup:</span></span>
+<span data-ttu-id="73611-400">*Pages/Instructors/Index.cshtml*을 다음 표시로 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-400">Update *Pages/Instructors/Index.cshtml* with the following markup:</span></span>
 
 [!code-html[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=1-65&highlight=1,5,8,16-21,25-32,43-57)]
 
-<span data-ttu-id="b135b-401">위의 표시로 다음이 변경됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-401">The preceding markup makes the following changes:</span></span>
+<span data-ttu-id="73611-401">위의 표시로 다음이 변경됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-401">The preceding markup makes the following changes:</span></span>
 
-* <span data-ttu-id="b135b-402">`page` 지시문을 `@page`에서 `@page "{id:int?}"`로 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-402">Updates the `page` directive from `@page` to `@page "{id:int?}"`.</span></span> <span data-ttu-id="b135b-403">`"{id:int?}"`는 경로 템플릿입니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-403">`"{id:int?}"` is a route template.</span></span> <span data-ttu-id="b135b-404">경로 템플릿은 데이터를 라우팅할 URL에서 정수 쿼리 문자열을 변경합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-404">The route template changes integer query strings in the URL to route data.</span></span> <span data-ttu-id="b135b-405">예를 들어, `@page` 지시문만 있는 강사에 대해 **Select** 링크를 클릭하면 다음과 같은 URL이 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-405">For example, clicking on the **Select** link for an instructor with only the `@page` directive produces a URL like the following:</span></span>
+* <span data-ttu-id="73611-402">`page` 지시문을 `@page`에서 `@page "{id:int?}"`로 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-402">Updates the `page` directive from `@page` to `@page "{id:int?}"`.</span></span> <span data-ttu-id="73611-403">`"{id:int?}"`는 경로 템플릿입니다.</span><span class="sxs-lookup"><span data-stu-id="73611-403">`"{id:int?}"` is a route template.</span></span> <span data-ttu-id="73611-404">경로 템플릿은 데이터를 라우팅할 URL에서 정수 쿼리 문자열을 변경합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-404">The route template changes integer query strings in the URL to route data.</span></span> <span data-ttu-id="73611-405">예를 들어, `@page` 지시문만 있는 강사에 대해 **Select** 링크를 클릭하면 다음과 같은 URL이 생성됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-405">For example, clicking on the **Select** link for an instructor with only the `@page` directive produces a URL like the following:</span></span>
 
   `http://localhost:1234/Instructors?id=2`
 
-  <span data-ttu-id="b135b-406">page 지시문이 `@page "{id:int?}"`이면, 이전 URL은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-406">When the page directive is `@page "{id:int?}"`, the previous URL is:</span></span>
+  <span data-ttu-id="73611-406">page 지시문이 `@page "{id:int?}"`이면, 이전 URL은 다음과 같습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-406">When the page directive is `@page "{id:int?}"`, the previous URL is:</span></span>
 
   `http://localhost:1234/Instructors/2`
 
-* <span data-ttu-id="b135b-407">페이지 제목은 **Instructors(강사)** 입니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-407">Page title is **Instructors**.</span></span>
-* <span data-ttu-id="b135b-408">`item.OfficeAssignment`가 Null이 아닌 경우에만 `item.OfficeAssignment.Location`을 표시하는 **Office** 열을 추가했습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-408">Added an **Office** column that displays `item.OfficeAssignment.Location` only if `item.OfficeAssignment` isn't null.</span></span> <span data-ttu-id="b135b-409">이는 일대영 또는 일 관계이기 때문에 관련된 OfficeAssignment 엔터티가 있을 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-409">Because this is a one-to-zero-or-one relationship, there might not be a related OfficeAssignment entity.</span></span>
+* <span data-ttu-id="73611-407">페이지 제목은 **Instructors(강사)** 입니다.</span><span class="sxs-lookup"><span data-stu-id="73611-407">Page title is **Instructors**.</span></span>
+* <span data-ttu-id="73611-408">`item.OfficeAssignment`가 Null이 아닌 경우에만 `item.OfficeAssignment.Location`을 표시하는 **Office** 열을 추가했습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-408">Added an **Office** column that displays `item.OfficeAssignment.Location` only if `item.OfficeAssignment` isn't null.</span></span> <span data-ttu-id="73611-409">이는 일대영 또는 일 관계이기 때문에 관련된 OfficeAssignment 엔터티가 있을 수 없습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-409">Because this is a one-to-zero-or-one relationship, there might not be a related OfficeAssignment entity.</span></span>
 
   ```html
   @if (item.OfficeAssignment != null)
@@ -528,9 +528,9 @@ ms.locfileid: "78645591"
   }
   ```
 
-* <span data-ttu-id="b135b-410">각 강사가 가르치는 과정을 표시하는 **Courses** 열을 추가했습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-410">Added a **Courses** column that displays courses taught by each instructor.</span></span> <span data-ttu-id="b135b-411">이 razor 구문에 대한 자세한 내용은 [명시적 줄 전환](xref:mvc/views/razor#explicit-line-transition)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="b135b-411">See [Explicit line transition](xref:mvc/views/razor#explicit-line-transition) for more about this razor syntax.</span></span>
+* <span data-ttu-id="73611-410">각 강사가 가르치는 과정을 표시하는 **Courses** 열을 추가했습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-410">Added a **Courses** column that displays courses taught by each instructor.</span></span> <span data-ttu-id="73611-411">이 razor 구문에 대한 자세한 내용은 [명시적 줄 전환](xref:mvc/views/razor#explicit-line-transition)을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="73611-411">See [Explicit line transition](xref:mvc/views/razor#explicit-line-transition) for more about this razor syntax.</span></span>
 
-* <span data-ttu-id="b135b-412">선택된 강사의 `tr` 요소에 `class="success"`를 동적으로 추가하는 코드를 추가했습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-412">Added code that dynamically adds `class="success"` to the `tr` element of the selected instructor.</span></span> <span data-ttu-id="b135b-413">부트스트랩 클래스를 사용하여 선택된 행에 대한 배경색을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-413">This sets a background color for the selected row using a Bootstrap class.</span></span>
+* <span data-ttu-id="73611-412">선택된 강사의 `tr` 요소에 `class="success"`를 동적으로 추가하는 코드를 추가했습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-412">Added code that dynamically adds `class="success"` to the `tr` element of the selected instructor.</span></span> <span data-ttu-id="73611-413">부트스트랩 클래스를 사용하여 선택된 행에 대한 배경색을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-413">This sets a background color for the selected row using a Bootstrap class.</span></span>
 
   ```html
   string selectedRow = "";
@@ -541,114 +541,114 @@ ms.locfileid: "78645591"
   <tr class="@selectedRow">
   ```
 
-* <span data-ttu-id="b135b-414">**Select**로 레이블 지정된 새 하이퍼링크를 추가했습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-414">Added a new hyperlink labeled **Select**.</span></span> <span data-ttu-id="b135b-415">이 링크는 선택한 강사의 ID를 `Index` 메서드에 보내고 배경색을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-415">This link sends the selected instructor's ID to the `Index` method and sets a background color.</span></span>
+* <span data-ttu-id="73611-414">**Select**로 레이블 지정된 새 하이퍼링크를 추가했습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-414">Added a new hyperlink labeled **Select**.</span></span> <span data-ttu-id="73611-415">이 링크는 선택한 강사의 ID를 `Index` 메서드에 보내고 배경색을 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-415">This link sends the selected instructor's ID to the `Index` method and sets a background color.</span></span>
 
   ```html
   <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
   ```
 
-<span data-ttu-id="b135b-416">앱을 실행하고 **강사** 탭을 선택합니다. 페이지에 관련된 `OfficeAssignment` 엔터티의 `Location`(사무실)이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-416">Run the app and select the **Instructors** tab. The page displays the `Location` (office) from the related `OfficeAssignment` entity.</span></span> <span data-ttu-id="b135b-417">OfficeAssignment가 Null이면 빈 테이블 셀이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-417">If OfficeAssignment\` is null, an empty table cell is displayed.</span></span>
+<span data-ttu-id="73611-416">앱을 실행하고 **강사** 탭을 선택합니다. 페이지에 관련된 `OfficeAssignment` 엔터티의 `Location`(사무실)이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-416">Run the app and select the **Instructors** tab. The page displays the `Location` (office) from the related `OfficeAssignment` entity.</span></span> <span data-ttu-id="73611-417">OfficeAssignment가 Null이면 빈 테이블 셀이 표시됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-417">If OfficeAssignment\` is null, an empty table cell is displayed.</span></span>
 
-<span data-ttu-id="b135b-418">**Select** 링크를 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-418">Click on the **Select** link.</span></span> <span data-ttu-id="b135b-419">행 스타일이 변경됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-419">The row style changes.</span></span>
+<span data-ttu-id="73611-418">**Select** 링크를 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-418">Click on the **Select** link.</span></span> <span data-ttu-id="73611-419">행 스타일이 변경됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-419">The row style changes.</span></span>
 
-### <a name="add-courses-taught-by-selected-instructor"></a><span data-ttu-id="b135b-420">선택한 강사가 가르친 과정 추가</span><span class="sxs-lookup"><span data-stu-id="b135b-420">Add courses taught by selected instructor</span></span>
+### <a name="add-courses-taught-by-selected-instructor"></a><span data-ttu-id="73611-420">선택한 강사가 가르친 과정 추가</span><span class="sxs-lookup"><span data-stu-id="73611-420">Add courses taught by selected instructor</span></span>
 
-<span data-ttu-id="b135b-421">*Pages/Instructors/Index.cshtml.cs*에서 `OnGetAsync` 메서드를 다음 코드로 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-421">Update the `OnGetAsync` method in *Pages/Instructors/Index.cshtml.cs* with the following code:</span></span>
+<span data-ttu-id="73611-421">*Pages/Instructors/Index.cshtml.cs*에서 `OnGetAsync` 메서드를 다음 코드로 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-421">Update the `OnGetAsync` method in *Pages/Instructors/Index.cshtml.cs* with the following code:</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index2.cshtml.cs?name=snippet_OnGetAsync&highlight=1,8,16-999)]
 
-<span data-ttu-id="b135b-422">`public int CourseID { get; set; }` 추가</span><span class="sxs-lookup"><span data-stu-id="b135b-422">Add `public int CourseID { get; set; }`</span></span>
+<span data-ttu-id="73611-422">`public int CourseID { get; set; }` 추가</span><span class="sxs-lookup"><span data-stu-id="73611-422">Add `public int CourseID { get; set; }`</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index2.cshtml.cs?name=snippet_1&highlight=12)]
 
-<span data-ttu-id="b135b-423">업데이트된 쿼리를 검토합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-423">Examine the updated query:</span></span>
+<span data-ttu-id="73611-423">업데이트된 쿼리를 검토합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-423">Examine the updated query:</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index2.cshtml.cs?name=snippet_ThenInclude)]
 
-<span data-ttu-id="b135b-424">이전 쿼리는 `Department` 엔터티를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-424">The preceding query adds the `Department` entities.</span></span>
+<span data-ttu-id="73611-424">이전 쿼리는 `Department` 엔터티를 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-424">The preceding query adds the `Department` entities.</span></span>
 
-<span data-ttu-id="b135b-425">다음 코드는 강사가 선택되었을 때 실행됩니다(`id != null`).</span><span class="sxs-lookup"><span data-stu-id="b135b-425">The following code executes when an instructor is selected (`id != null`).</span></span> <span data-ttu-id="b135b-426">선택한 강사는 뷰 모델의 강사 목록에서 검색됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-426">The selected instructor is retrieved from the list of instructors in the view model.</span></span> <span data-ttu-id="b135b-427">뷰 모델의 `Courses` 속성은 해당 강사의 `CourseAssignments` 탐색 속성에서 `Course` 엔터티로 로드됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-427">The view model's `Courses` property is loaded with the `Course` entities from that instructor's `CourseAssignments` navigation property.</span></span>
+<span data-ttu-id="73611-425">다음 코드는 강사가 선택되었을 때 실행됩니다(`id != null`).</span><span class="sxs-lookup"><span data-stu-id="73611-425">The following code executes when an instructor is selected (`id != null`).</span></span> <span data-ttu-id="73611-426">선택한 강사는 뷰 모델의 강사 목록에서 검색됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-426">The selected instructor is retrieved from the list of instructors in the view model.</span></span> <span data-ttu-id="73611-427">뷰 모델의 `Courses` 속성은 해당 강사의 `CourseAssignments` 탐색 속성에서 `Course` 엔터티로 로드됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-427">The view model's `Courses` property is loaded with the `Course` entities from that instructor's `CourseAssignments` navigation property.</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index2.cshtml.cs?name=snippet_ID)]
 
-<span data-ttu-id="b135b-428">`Where` 메서드는 컬렉션도 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-428">The `Where` method returns a collection.</span></span> <span data-ttu-id="b135b-429">앞의 `Where` 메서드에서 단일 `Instructor` 엔터티만 반환됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-429">In the preceding `Where` method, only a single `Instructor` entity is returned.</span></span> <span data-ttu-id="b135b-430">`Single` 메서드는 컬렉션을 단일 `Instructor` 엔터티로 변환합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-430">The `Single` method converts the collection into a single `Instructor` entity.</span></span> <span data-ttu-id="b135b-431">`Instructor` 엔터티는 `CourseAssignments` 속성에 대한 액세스를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-431">The `Instructor` entity provides access to the `CourseAssignments` property.</span></span> <span data-ttu-id="b135b-432">`CourseAssignments`는 관련 `Course` 엔터티에 대한 액세스를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-432">`CourseAssignments` provides access to the related `Course` entities.</span></span>
+<span data-ttu-id="73611-428">`Where` 메서드는 컬렉션도 반환합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-428">The `Where` method returns a collection.</span></span> <span data-ttu-id="73611-429">앞의 `Where` 메서드에서 단일 `Instructor` 엔터티만 반환됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-429">In the preceding `Where` method, only a single `Instructor` entity is returned.</span></span> <span data-ttu-id="73611-430">`Single` 메서드는 컬렉션을 단일 `Instructor` 엔터티로 변환합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-430">The `Single` method converts the collection into a single `Instructor` entity.</span></span> <span data-ttu-id="73611-431">`Instructor` 엔터티는 `CourseAssignments` 속성에 대한 액세스를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-431">The `Instructor` entity provides access to the `CourseAssignments` property.</span></span> <span data-ttu-id="73611-432">`CourseAssignments`는 관련 `Course` 엔터티에 대한 액세스를 제공합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-432">`CourseAssignments` provides access to the related `Course` entities.</span></span>
 
 ![강사 및 과정 간 관계 m:M](complex-data-model/_static/courseassignment.png)
 
-<span data-ttu-id="b135b-434">`Single` 메서드는 컬렉션에 한 개 항목만 있을 때 컬렉션에서 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-434">The `Single` method is used on a collection when the collection has only one item.</span></span> <span data-ttu-id="b135b-435">`Single` 메서드는 컬렉션이 비어 있거나 둘 이상의 항목이 있는 경우 예외를 throw합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-435">The `Single` method throws an exception if the collection is empty or if there's more than one item.</span></span> <span data-ttu-id="b135b-436">대안은 `SingleOrDefault`입니다. 컬렉션이 비어 있는 경우 기본값을 반환합니다(이 경우 Null).</span><span class="sxs-lookup"><span data-stu-id="b135b-436">An alternative is `SingleOrDefault`, which returns a default value (null in this case) if the collection is empty.</span></span> <span data-ttu-id="b135b-437">비어 있는 컬렉션에 `SingleOrDefault` 사용</span><span class="sxs-lookup"><span data-stu-id="b135b-437">Using `SingleOrDefault` on an empty collection:</span></span>
+<span data-ttu-id="73611-434">`Single` 메서드는 컬렉션에 한 개 항목만 있을 때 컬렉션에서 사용됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-434">The `Single` method is used on a collection when the collection has only one item.</span></span> <span data-ttu-id="73611-435">`Single` 메서드는 컬렉션이 비어 있거나 둘 이상의 항목이 있는 경우 예외를 throw합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-435">The `Single` method throws an exception if the collection is empty or if there's more than one item.</span></span> <span data-ttu-id="73611-436">대안은 `SingleOrDefault`입니다. 컬렉션이 비어 있는 경우 기본값을 반환합니다(이 경우 Null).</span><span class="sxs-lookup"><span data-stu-id="73611-436">An alternative is `SingleOrDefault`, which returns a default value (null in this case) if the collection is empty.</span></span> <span data-ttu-id="73611-437">비어 있는 컬렉션에 `SingleOrDefault` 사용</span><span class="sxs-lookup"><span data-stu-id="73611-437">Using `SingleOrDefault` on an empty collection:</span></span>
 
-* <span data-ttu-id="b135b-438">예외가 발생합니다(null 참조에서 `Courses` 속성을 찾으려고 시도하므로).</span><span class="sxs-lookup"><span data-stu-id="b135b-438">Results in an exception (from trying to find a `Courses` property on a null reference).</span></span>
-* <span data-ttu-id="b135b-439">예외 메시지로는 문제의 원인을 명확하게 알기 어렵습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-439">The exception message would less clearly indicate the cause of the problem.</span></span>
+* <span data-ttu-id="73611-438">예외가 발생합니다(null 참조에서 `Courses` 속성을 찾으려고 시도하므로).</span><span class="sxs-lookup"><span data-stu-id="73611-438">Results in an exception (from trying to find a `Courses` property on a null reference).</span></span>
+* <span data-ttu-id="73611-439">예외 메시지로는 문제의 원인을 명확하게 알기 어렵습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-439">The exception message would less clearly indicate the cause of the problem.</span></span>
 
-<span data-ttu-id="b135b-440">다음 코드는 과정을 선택할 때 뷰 모델의 `Enrollments` 속성을 채웁니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-440">The following code populates the view model's `Enrollments` property when a course is selected:</span></span>
+<span data-ttu-id="73611-440">다음 코드는 과정을 선택할 때 뷰 모델의 `Enrollments` 속성을 채웁니다.</span><span class="sxs-lookup"><span data-stu-id="73611-440">The following code populates the view model's `Enrollments` property when a course is selected:</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index2.cshtml.cs?name=snippet_courseID)]
 
-<span data-ttu-id="b135b-441">다음 태그를 *Pages/Instructors/Index.cshtml* Razor Page 끝에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-441">Add the following markup to the end of the *Pages/Instructors/Index.cshtml* Razor Page:</span></span>
+<span data-ttu-id="73611-441">다음 태그를 *Pages/Instructors/Index.cshtml* Razor Page 끝에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-441">Add the following markup to the end of the *Pages/Instructors/Index.cshtml* Razor Page:</span></span>
 
 [!code-html[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=60-102&highlight=7-999)]
 
-<span data-ttu-id="b135b-442">위의 표시는 강사가 선택된 경우 강사와 관련된 과정의 목록을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-442">The preceding markup displays a list of courses related to an instructor when an instructor is selected.</span></span>
+<span data-ttu-id="73611-442">위의 표시는 강사가 선택된 경우 강사와 관련된 과정의 목록을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-442">The preceding markup displays a list of courses related to an instructor when an instructor is selected.</span></span>
 
-<span data-ttu-id="b135b-443">앱을 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-443">Test the app.</span></span> <span data-ttu-id="b135b-444">강사 페이지에서 **Select** 링크를 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-444">Click on a **Select** link on the instructors page.</span></span>
+<span data-ttu-id="73611-443">앱을 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-443">Test the app.</span></span> <span data-ttu-id="73611-444">강사 페이지에서 **Select** 링크를 클릭합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-444">Click on a **Select** link on the instructors page.</span></span>
 
-### <a name="show-student-data"></a><span data-ttu-id="b135b-445">학생 데이터 표시</span><span class="sxs-lookup"><span data-stu-id="b135b-445">Show student data</span></span>
+### <a name="show-student-data"></a><span data-ttu-id="73611-445">학생 데이터 표시</span><span class="sxs-lookup"><span data-stu-id="73611-445">Show student data</span></span>
 
-<span data-ttu-id="b135b-446">이 섹션에서는 선택한 과정에 대한 학생 데이터를 표시하도록 앱이 업데이트됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-446">In this section, the app is updated to show the student data for a selected course.</span></span>
+<span data-ttu-id="73611-446">이 섹션에서는 선택한 과정에 대한 학생 데이터를 표시하도록 앱이 업데이트됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-446">In this section, the app is updated to show the student data for a selected course.</span></span>
 
-<span data-ttu-id="b135b-447">*Pages/Instructors/Index.cshtml.cs*에서 `OnGetAsync` 메서드의 쿼리를 다음 코드로 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-447">Update the query in the `OnGetAsync` method in *Pages/Instructors/Index.cshtml.cs* with the following code:</span></span>
+<span data-ttu-id="73611-447">*Pages/Instructors/Index.cshtml.cs*에서 `OnGetAsync` 메서드의 쿼리를 다음 코드로 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-447">Update the query in the `OnGetAsync` method in *Pages/Instructors/Index.cshtml.cs* with the following code:</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index.cshtml.cs?name=snippet_ThenInclude&highlight=6-9)]
 
-<span data-ttu-id="b135b-448">*Pages/Instructors/Index.cshtml*을 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-448">Update *Pages/Instructors/Index.cshtml*.</span></span> <span data-ttu-id="b135b-449">다음 표시를 파일 끝에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-449">Add the following markup to the end of the file:</span></span>
+<span data-ttu-id="73611-448">*Pages/Instructors/Index.cshtml*을 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-448">Update *Pages/Instructors/Index.cshtml*.</span></span> <span data-ttu-id="73611-449">다음 표시를 파일 끝에 추가합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-449">Add the following markup to the end of the file:</span></span>
 
 [!code-html[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=103-)]
 
-<span data-ttu-id="b135b-450">이전 표시는 선택한 과정을 등록한 학생의 목록을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-450">The preceding markup displays a list of the students who are enrolled in the selected course.</span></span>
+<span data-ttu-id="73611-450">이전 표시는 선택한 과정을 등록한 학생의 목록을 표시합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-450">The preceding markup displays a list of the students who are enrolled in the selected course.</span></span>
 
-<span data-ttu-id="b135b-451">페이지를 새로 고치고 강사를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-451">Refresh the page and select an instructor.</span></span> <span data-ttu-id="b135b-452">과정을 선택하여 등록된 학생 및 해당 등급의 목록을 봅니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-452">Select a course to see the list of enrolled students and their grades.</span></span>
+<span data-ttu-id="73611-451">페이지를 새로 고치고 강사를 선택합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-451">Refresh the page and select an instructor.</span></span> <span data-ttu-id="73611-452">과정을 선택하여 등록된 학생 및 해당 등급의 목록을 봅니다.</span><span class="sxs-lookup"><span data-stu-id="73611-452">Select a course to see the list of enrolled students and their grades.</span></span>
 
 ![강사 및 과정이 선택된 강사 인덱스 페이지](read-related-data/_static/instructors-index.png)
 
-## <a name="using-single"></a><span data-ttu-id="b135b-454">Single 사용</span><span class="sxs-lookup"><span data-stu-id="b135b-454">Using Single</span></span>
+## <a name="using-single"></a><span data-ttu-id="73611-454">Single 사용</span><span class="sxs-lookup"><span data-stu-id="73611-454">Using Single</span></span>
 
-<span data-ttu-id="b135b-455">`Single` 메서드는 `Where` 메서드를 별도로 호출하는 대신 `Where` 조건을 전달할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-455">The `Single` method can pass in the `Where` condition instead of calling the `Where` method separately:</span></span>
+<span data-ttu-id="73611-455">`Single` 메서드는 `Where` 메서드를 별도로 호출하는 대신 `Where` 조건을 전달할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-455">The `Single` method can pass in the `Where` condition instead of calling the `Where` method separately:</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/IndexSingle.cshtml.cs?name=snippet_single&highlight=21-22,30-31)]
 
-<span data-ttu-id="b135b-456">위의 `Single` 접근 방식은 `Where`를 사용하는 것보다 장점을 제공하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-456">The preceding `Single` approach provides no benefits over using `Where`.</span></span> <span data-ttu-id="b135b-457">일부 개발자는 `Single` 방식을 선호합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-457">Some developers prefer the `Single` approach style.</span></span>
+<span data-ttu-id="73611-456">위의 `Single` 접근 방식은 `Where`를 사용하는 것보다 장점을 제공하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-456">The preceding `Single` approach provides no benefits over using `Where`.</span></span> <span data-ttu-id="73611-457">일부 개발자는 `Single` 방식을 선호합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-457">Some developers prefer the `Single` approach style.</span></span>
 
-## <a name="explicit-loading"></a><span data-ttu-id="b135b-458">명시적 로드</span><span class="sxs-lookup"><span data-stu-id="b135b-458">Explicit loading</span></span>
+## <a name="explicit-loading"></a><span data-ttu-id="73611-458">명시적 로드</span><span class="sxs-lookup"><span data-stu-id="73611-458">Explicit loading</span></span>
 
-<span data-ttu-id="b135b-459">현재 코드는 `Enrollments` 및 `Students`에 대한 즉시 로드를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-459">The current code specifies eager loading for `Enrollments` and `Students`:</span></span>
+<span data-ttu-id="73611-459">현재 코드는 `Enrollments` 및 `Students`에 대한 즉시 로드를 지정합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-459">The current code specifies eager loading for `Enrollments` and `Students`:</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index.cshtml.cs?name=snippet_ThenInclude&highlight=6-9)]
 
-<span data-ttu-id="b135b-460">사용자가 과정에 등록된 내용을 거의 보지 않는다고 가정해 보겠습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-460">Suppose users rarely want to see enrollments in a course.</span></span> <span data-ttu-id="b135b-461">이 경우 최적화는 요청된 경우에만 등록 데이터를 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-461">In that case, an optimization would be to only load the enrollment data if it's requested.</span></span> <span data-ttu-id="b135b-462">이 섹션에서는 `Enrollments` 및 `Students`의 명시적 로드를 사용하도록 `OnGetAsync`가 업데이트됩니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-462">In this section, the `OnGetAsync` is updated to use explicit loading of `Enrollments` and `Students`.</span></span>
+<span data-ttu-id="73611-460">사용자가 과정에 등록된 내용을 거의 보지 않는다고 가정해 보겠습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-460">Suppose users rarely want to see enrollments in a course.</span></span> <span data-ttu-id="73611-461">이 경우 최적화는 요청된 경우에만 등록 데이터를 로드합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-461">In that case, an optimization would be to only load the enrollment data if it's requested.</span></span> <span data-ttu-id="73611-462">이 섹션에서는 `Enrollments` 및 `Students`의 명시적 로드를 사용하도록 `OnGetAsync`가 업데이트됩니다.</span><span class="sxs-lookup"><span data-stu-id="73611-462">In this section, the `OnGetAsync` is updated to use explicit loading of `Enrollments` and `Students`.</span></span>
 
-<span data-ttu-id="b135b-463">`OnGetAsync`를 다음 코드로 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-463">Update the `OnGetAsync` with the following code:</span></span>
+<span data-ttu-id="73611-463">`OnGetAsync`를 다음 코드로 업데이트합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-463">Update the `OnGetAsync` with the following code:</span></span>
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/IndexXp.cshtml.cs?name=snippet_OnGetAsync&highlight=9-13,29-35)]
 
-<span data-ttu-id="b135b-464">위의 코드는 등록 및 학생 데이터에 대한 *ThenInclude* 메서드 호출을 삭제합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-464">The preceding code drops the *ThenInclude* method calls for enrollment and student data.</span></span> <span data-ttu-id="b135b-465">과정을 선택하면 강조 표시된 코드가 다음을 검색합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-465">If a course is selected, the highlighted code retrieves:</span></span>
+<span data-ttu-id="73611-464">위의 코드는 등록 및 학생 데이터에 대한 *ThenInclude* 메서드 호출을 삭제합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-464">The preceding code drops the *ThenInclude* method calls for enrollment and student data.</span></span> <span data-ttu-id="73611-465">과정을 선택하면 강조 표시된 코드가 다음을 검색합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-465">If a course is selected, the highlighted code retrieves:</span></span>
 
-* <span data-ttu-id="b135b-466">선택한 과정에 대한 `Enrollment` 엔터티</span><span class="sxs-lookup"><span data-stu-id="b135b-466">The `Enrollment` entities for the selected course.</span></span>
-* <span data-ttu-id="b135b-467">각 `Enrollment`에 대한 `Student` 엔터티</span><span class="sxs-lookup"><span data-stu-id="b135b-467">The `Student` entities for each `Enrollment`.</span></span>
+* <span data-ttu-id="73611-466">선택한 과정에 대한 `Enrollment` 엔터티</span><span class="sxs-lookup"><span data-stu-id="73611-466">The `Enrollment` entities for the selected course.</span></span>
+* <span data-ttu-id="73611-467">각 `Enrollment`에 대한 `Student` 엔터티</span><span class="sxs-lookup"><span data-stu-id="73611-467">The `Student` entities for each `Enrollment`.</span></span>
 
-<span data-ttu-id="b135b-468">위의 코드에서는 `.AsNoTracking()`을 주석 처리했습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-468">Notice the preceding code comments out `.AsNoTracking()`.</span></span> <span data-ttu-id="b135b-469">탐색 속성은 추적된 엔터티에 대해서만 명시적으로 로드할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-469">Navigation properties can only be explicitly loaded for tracked entities.</span></span>
+<span data-ttu-id="73611-468">위의 코드에서는 `.AsNoTracking()`을 주석 처리했습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-468">Notice the preceding code comments out `.AsNoTracking()`.</span></span> <span data-ttu-id="73611-469">탐색 속성은 추적된 엔터티에 대해서만 명시적으로 로드할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="73611-469">Navigation properties can only be explicitly loaded for tracked entities.</span></span>
 
-<span data-ttu-id="b135b-470">앱을 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-470">Test the app.</span></span> <span data-ttu-id="b135b-471">사용자 관점에서 앱은 이전 버전과 동일하게 동작합니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-471">From a users perspective, the app behaves identically to the previous version.</span></span>
+<span data-ttu-id="73611-470">앱을 테스트합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-470">Test the app.</span></span> <span data-ttu-id="73611-471">사용자 관점에서 앱은 이전 버전과 동일하게 동작합니다.</span><span class="sxs-lookup"><span data-stu-id="73611-471">From a users perspective, the app behaves identically to the previous version.</span></span>
 
-<span data-ttu-id="b135b-472">다음 자습서에서는 관련된 데이터를 업데이트하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="b135b-472">The next tutorial shows how to update related data.</span></span>
+<span data-ttu-id="73611-472">다음 자습서에서는 관련된 데이터를 업데이트하는 방법을 보여 줍니다.</span><span class="sxs-lookup"><span data-stu-id="73611-472">The next tutorial shows how to update related data.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="b135b-473">추가 자료</span><span class="sxs-lookup"><span data-stu-id="b135b-473">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="73611-473">추가 자료</span><span class="sxs-lookup"><span data-stu-id="73611-473">Additional resources</span></span>
 
-* [<span data-ttu-id="b135b-474">이 자습서의 YouTube 버전(1부)</span><span class="sxs-lookup"><span data-stu-id="b135b-474">YouTube version of this tutorial (part1)</span></span>](https://www.youtube.com/watch?v=PzKimUDmrvE)
-* [<span data-ttu-id="b135b-475">이 자습서의 YouTube 버전(2부)</span><span class="sxs-lookup"><span data-stu-id="b135b-475">YouTube version of this tutorial (part2)</span></span>](https://www.youtube.com/watch?v=xvDDrIHv5ko)
+* [<span data-ttu-id="73611-474">이 자습서의 YouTube 버전(1부)</span><span class="sxs-lookup"><span data-stu-id="73611-474">YouTube version of this tutorial (part1)</span></span>](https://www.youtube.com/watch?v=PzKimUDmrvE)
+* [<span data-ttu-id="73611-475">이 자습서의 YouTube 버전(2부)</span><span class="sxs-lookup"><span data-stu-id="73611-475">YouTube version of this tutorial (part2)</span></span>](https://www.youtube.com/watch?v=xvDDrIHv5ko)
 
 >[!div class="step-by-step"]
-><span data-ttu-id="b135b-476">[이전](xref:data/ef-rp/complex-data-model)
->[다음](xref:data/ef-rp/update-related-data)</span><span class="sxs-lookup"><span data-stu-id="b135b-476">[Previous](xref:data/ef-rp/complex-data-model)
+><span data-ttu-id="73611-476">[이전](xref:data/ef-rp/complex-data-model)
+>[다음](xref:data/ef-rp/update-related-data)</span><span class="sxs-lookup"><span data-stu-id="73611-476">[Previous](xref:data/ef-rp/complex-data-model)
 [Next](xref:data/ef-rp/update-related-data)</span></span>
 
 ::: moniker-end

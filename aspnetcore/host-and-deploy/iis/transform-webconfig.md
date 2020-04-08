@@ -8,35 +8,35 @@ ms.custom: mvc
 ms.date: 01/13/2020
 uid: host-and-deploy/iis/transform-webconfig
 ms.openlocfilehash: 069b9bb516644a1a722235b33d4916460488ebf2
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78646659"
 ---
-# <a name="transform-webconfig"></a><span data-ttu-id="06b41-103">web.config 변환</span><span class="sxs-lookup"><span data-stu-id="06b41-103">Transform web.config</span></span>
+# <a name="transform-webconfig"></a><span data-ttu-id="a6a94-103">web.config 변환</span><span class="sxs-lookup"><span data-stu-id="a6a94-103">Transform web.config</span></span>
 
-<span data-ttu-id="06b41-104">작성자: [Vijay Ramakrishnan](https://github.com/vijayrkn)</span><span class="sxs-lookup"><span data-stu-id="06b41-104">By [Vijay Ramakrishnan](https://github.com/vijayrkn)</span></span>
+<span data-ttu-id="a6a94-104">작성자: [Vijay Ramakrishnan](https://github.com/vijayrkn)</span><span class="sxs-lookup"><span data-stu-id="a6a94-104">By [Vijay Ramakrishnan](https://github.com/vijayrkn)</span></span>
 
-<span data-ttu-id="06b41-105">다음을 기반으로 앱을 게시할 때 *web.config* 파일의 변환을 자동으로 적용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-105">Transformations to the *web.config* file can be applied automatically when an app is published based on:</span></span>
+<span data-ttu-id="a6a94-105">다음을 기반으로 앱을 게시할 때 *web.config* 파일의 변환을 자동으로 적용할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-105">Transformations to the *web.config* file can be applied automatically when an app is published based on:</span></span>
 
-* [<span data-ttu-id="06b41-106">빌드 구성</span><span class="sxs-lookup"><span data-stu-id="06b41-106">Build configuration</span></span>](#build-configuration)
-* [<span data-ttu-id="06b41-107">Profile</span><span class="sxs-lookup"><span data-stu-id="06b41-107">Profile</span></span>](#profile)
-* [<span data-ttu-id="06b41-108">환경</span><span class="sxs-lookup"><span data-stu-id="06b41-108">Environment</span></span>](#environment)
-* [<span data-ttu-id="06b41-109">사용자 지정</span><span class="sxs-lookup"><span data-stu-id="06b41-109">Custom</span></span>](#custom)
+* [<span data-ttu-id="a6a94-106">빌드 구성</span><span class="sxs-lookup"><span data-stu-id="a6a94-106">Build configuration</span></span>](#build-configuration)
+* [<span data-ttu-id="a6a94-107">Profile</span><span class="sxs-lookup"><span data-stu-id="a6a94-107">Profile</span></span>](#profile)
+* [<span data-ttu-id="a6a94-108">환경</span><span class="sxs-lookup"><span data-stu-id="a6a94-108">Environment</span></span>](#environment)
+* [<span data-ttu-id="a6a94-109">사용자 지정</span><span class="sxs-lookup"><span data-stu-id="a6a94-109">Custom</span></span>](#custom)
 
-<span data-ttu-id="06b41-110">이 변환은 다음 *web.config* 생성 시나리오 중 하나에 대해 발생합니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-110">These transformations occur for either of the following *web.config* generation scenarios:</span></span>
+<span data-ttu-id="a6a94-110">이 변환은 다음 *web.config* 생성 시나리오 중 하나에 대해 발생합니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-110">These transformations occur for either of the following *web.config* generation scenarios:</span></span>
 
-* <span data-ttu-id="06b41-111">`Microsoft.NET.Sdk.Web` SDK에서 자동으로 생성되는 경우</span><span class="sxs-lookup"><span data-stu-id="06b41-111">Generated automatically by the `Microsoft.NET.Sdk.Web` SDK.</span></span>
-* <span data-ttu-id="06b41-112">앱의 [콘텐츠 루트](xref:fundamentals/index#content-root)에서 개발자가 제공하는 경우</span><span class="sxs-lookup"><span data-stu-id="06b41-112">Provided by the developer in the [content root](xref:fundamentals/index#content-root) of the app.</span></span>
+* <span data-ttu-id="a6a94-111">`Microsoft.NET.Sdk.Web` SDK에서 자동으로 생성되는 경우</span><span class="sxs-lookup"><span data-stu-id="a6a94-111">Generated automatically by the `Microsoft.NET.Sdk.Web` SDK.</span></span>
+* <span data-ttu-id="a6a94-112">앱의 [콘텐츠 루트](xref:fundamentals/index#content-root)에서 개발자가 제공하는 경우</span><span class="sxs-lookup"><span data-stu-id="a6a94-112">Provided by the developer in the [content root](xref:fundamentals/index#content-root) of the app.</span></span>
 
-## <a name="build-configuration"></a><span data-ttu-id="06b41-113">빌드 구성</span><span class="sxs-lookup"><span data-stu-id="06b41-113">Build configuration</span></span>
+## <a name="build-configuration"></a><span data-ttu-id="a6a94-113">빌드 구성</span><span class="sxs-lookup"><span data-stu-id="a6a94-113">Build configuration</span></span>
 
-<span data-ttu-id="06b41-114">빌드 구성 변환이 먼저 실행됩니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-114">Build configuration transforms are run first.</span></span>
+<span data-ttu-id="a6a94-114">빌드 구성 변환이 먼저 실행됩니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-114">Build configuration transforms are run first.</span></span>
 
-<span data-ttu-id="06b41-115">*web.config* 변환이 필요한 각 [빌드 구성(Debug|Release)](/dotnet/core/tools/dotnet-publish#options)에 사용할 *web.{CONFIGURATION}.config* 파일을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-115">Include a *web.{CONFIGURATION}.config* file for each [build configuration (Debug|Release)](/dotnet/core/tools/dotnet-publish#options) requiring a *web.config* transformation.</span></span>
+<span data-ttu-id="a6a94-115">*web.config* 변환이 필요한 각 [빌드 구성(Debug|Release)](/dotnet/core/tools/dotnet-publish#options)에 사용할 *web.{CONFIGURATION}.config* 파일을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-115">Include a *web.{CONFIGURATION}.config* file for each [build configuration (Debug|Release)](/dotnet/core/tools/dotnet-publish#options) requiring a *web.config* transformation.</span></span>
 
-<span data-ttu-id="06b41-116">다음 예제에서는 구성별 환경 변수가 *web.Release.config*에서 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-116">In the following example, a configuration-specific environment variable is set in *web.Release.config*:</span></span>
+<span data-ttu-id="a6a94-116">다음 예제에서는 구성별 환경 변수가 *web.Release.config*에서 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-116">In the following example, a configuration-specific environment variable is set in *web.Release.config*:</span></span>
 
 ```xml
 <?xml version="1.0"?>
@@ -56,21 +56,21 @@ ms.locfileid: "78646659"
 </configuration>
 ```
 
-<span data-ttu-id="06b41-117">구성이 *Release*로 설정되면 변환이 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-117">The transform is applied when the configuration is set to *Release*:</span></span>
+<span data-ttu-id="a6a94-117">구성이 *Release*로 설정되면 변환이 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-117">The transform is applied when the configuration is set to *Release*:</span></span>
 
 ```dotnetcli
 dotnet publish --configuration Release
 ```
 
-<span data-ttu-id="06b41-118">구성의 MSBuild 속성은 `$(Configuration)`입니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-118">The MSBuild property for the configuration is `$(Configuration)`.</span></span>
+<span data-ttu-id="a6a94-118">구성의 MSBuild 속성은 `$(Configuration)`입니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-118">The MSBuild property for the configuration is `$(Configuration)`.</span></span>
 
-## <a name="profile"></a><span data-ttu-id="06b41-119">프로필</span><span class="sxs-lookup"><span data-stu-id="06b41-119">Profile</span></span>
+## <a name="profile"></a><span data-ttu-id="a6a94-119">프로필</span><span class="sxs-lookup"><span data-stu-id="a6a94-119">Profile</span></span>
 
-<span data-ttu-id="06b41-120">프로필 변환은 [빌드 구성](#build-configuration) 변환 후에 두 번째로 실행됩니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-120">Profile transformations are run second, after [Build configuration](#build-configuration) transforms.</span></span>
+<span data-ttu-id="a6a94-120">프로필 변환은 [빌드 구성](#build-configuration) 변환 후에 두 번째로 실행됩니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-120">Profile transformations are run second, after [Build configuration](#build-configuration) transforms.</span></span>
 
-<span data-ttu-id="06b41-121">*web.config* 변환이 필요한 각 프로필 구성에 사용할 *web.{PROFILE}.config* 파일을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-121">Include a *web.{PROFILE}.config* file for each profile configuration requiring a *web.config* transformation.</span></span>
+<span data-ttu-id="a6a94-121">*web.config* 변환이 필요한 각 프로필 구성에 사용할 *web.{PROFILE}.config* 파일을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-121">Include a *web.{PROFILE}.config* file for each profile configuration requiring a *web.config* transformation.</span></span>
 
-<span data-ttu-id="06b41-122">다음 예제에서는 프로필별 환경 변수가 폴더 게시 프로필에 대한 *web.FolderProfile.config*에서 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-122">In the following example, a profile-specific environment variable is set in *web.FolderProfile.config* for a folder publish profile:</span></span>
+<span data-ttu-id="a6a94-122">다음 예제에서는 프로필별 환경 변수가 폴더 게시 프로필에 대한 *web.FolderProfile.config*에서 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-122">In the following example, a profile-specific environment variable is set in *web.FolderProfile.config* for a folder publish profile:</span></span>
 
 ```xml
 <?xml version="1.0"?>
@@ -90,23 +90,23 @@ dotnet publish --configuration Release
 </configuration>
 ```
 
-<span data-ttu-id="06b41-123">프로필이 *FolderProfile*인 경우 변환이 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-123">The transform is applied when the profile is *FolderProfile*:</span></span>
+<span data-ttu-id="a6a94-123">프로필이 *FolderProfile*인 경우 변환이 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-123">The transform is applied when the profile is *FolderProfile*:</span></span>
 
 ```dotnetcli
 dotnet publish --configuration Release /p:PublishProfile=FolderProfile
 ```
 
-<span data-ttu-id="06b41-124">프로필 이름의 MSBuild 속성은 `$(PublishProfile)`입니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-124">The MSBuild property for the profile name is `$(PublishProfile)`.</span></span>
+<span data-ttu-id="a6a94-124">프로필 이름의 MSBuild 속성은 `$(PublishProfile)`입니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-124">The MSBuild property for the profile name is `$(PublishProfile)`.</span></span>
 
-<span data-ttu-id="06b41-125">프로필이 전달되지 않으면 기본 프로필 이름은 **FileSystem**이고, 파일이 앱의 콘텐츠 루트에 있으면 *web.FileSystem.config*가 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-125">If no profile is passed, the default profile name is **FileSystem** and *web.FileSystem.config* is applied if the file is present in the app's content root.</span></span>
+<span data-ttu-id="a6a94-125">프로필이 전달되지 않으면 기본 프로필 이름은 **FileSystem**이고, 파일이 앱의 콘텐츠 루트에 있으면 *web.FileSystem.config*가 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-125">If no profile is passed, the default profile name is **FileSystem** and *web.FileSystem.config* is applied if the file is present in the app's content root.</span></span>
 
-## <a name="environment"></a><span data-ttu-id="06b41-126">환경</span><span class="sxs-lookup"><span data-stu-id="06b41-126">Environment</span></span>
+## <a name="environment"></a><span data-ttu-id="a6a94-126">환경</span><span class="sxs-lookup"><span data-stu-id="a6a94-126">Environment</span></span>
 
-<span data-ttu-id="06b41-127">환경 변환은 [빌드 구성](#build-configuration) 및 [프로필](#profile) 변환 후에 세 번째로 실행됩니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-127">Environment transformations are run third, after [Build configuration](#build-configuration) and [Profile](#profile) transforms.</span></span>
+<span data-ttu-id="a6a94-127">환경 변환은 [빌드 구성](#build-configuration) 및 [프로필](#profile) 변환 후에 세 번째로 실행됩니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-127">Environment transformations are run third, after [Build configuration](#build-configuration) and [Profile](#profile) transforms.</span></span>
 
-<span data-ttu-id="06b41-128">*web.config* 변환이 필요한 각 [환경](xref:fundamentals/environments)에 사용할 *web.{ENVIRONMENT}.config* 파일을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-128">Include a *web.{ENVIRONMENT}.config* file for each [environment](xref:fundamentals/environments) requiring a *web.config* transformation.</span></span>
+<span data-ttu-id="a6a94-128">*web.config* 변환이 필요한 각 [환경](xref:fundamentals/environments)에 사용할 *web.{ENVIRONMENT}.config* 파일을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-128">Include a *web.{ENVIRONMENT}.config* file for each [environment](xref:fundamentals/environments) requiring a *web.config* transformation.</span></span>
 
-<span data-ttu-id="06b41-129">다음 예제에서는 환경별 환경 변수가 프로덕션 환경에 대한 *web.Production.config*에서 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-129">In the following example, a environment-specific environment variable is set in *web.Production.config* for the Production environment:</span></span>
+<span data-ttu-id="a6a94-129">다음 예제에서는 환경별 환경 변수가 프로덕션 환경에 대한 *web.Production.config*에서 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-129">In the following example, a environment-specific environment variable is set in *web.Production.config* for the Production environment:</span></span>
 
 ```xml
 <?xml version="1.0"?>
@@ -126,25 +126,25 @@ dotnet publish --configuration Release /p:PublishProfile=FolderProfile
 </configuration>
 ```
 
-<span data-ttu-id="06b41-130">환경이 *Production*인 경우 변환이 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-130">The transform is applied when the environment is *Production*:</span></span>
+<span data-ttu-id="a6a94-130">환경이 *Production*인 경우 변환이 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-130">The transform is applied when the environment is *Production*:</span></span>
 
 ```dotnetcli
 dotnet publish --configuration Release /p:EnvironmentName=Production
 ```
 
-<span data-ttu-id="06b41-131">환경의 MSBuild 속성은 `$(EnvironmentName)`입니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-131">The MSBuild property for the environment is `$(EnvironmentName)`.</span></span>
+<span data-ttu-id="a6a94-131">환경의 MSBuild 속성은 `$(EnvironmentName)`입니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-131">The MSBuild property for the environment is `$(EnvironmentName)`.</span></span>
 
-<span data-ttu-id="06b41-132">Visual Studio에서 게시하고 게시 프로필을 사용하는 경우 <xref:host-and-deploy/visual-studio-publish-profiles#set-the-environment>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="06b41-132">When publishing from Visual Studio and using a publish profile, see <xref:host-and-deploy/visual-studio-publish-profiles#set-the-environment>.</span></span>
+<span data-ttu-id="a6a94-132">Visual Studio에서 게시하고 게시 프로필을 사용하는 경우 <xref:host-and-deploy/visual-studio-publish-profiles#set-the-environment>을 참조하세요.</span><span class="sxs-lookup"><span data-stu-id="a6a94-132">When publishing from Visual Studio and using a publish profile, see <xref:host-and-deploy/visual-studio-publish-profiles#set-the-environment>.</span></span>
 
-<span data-ttu-id="06b41-133">환경 이름이 지정되면 `ASPNETCORE_ENVIRONMENT` 환경 변수가 *web.config* 파일에 자동으로 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-133">The `ASPNETCORE_ENVIRONMENT` environment variable is automatically added to the *web.config* file when the environment name is specified.</span></span>
+<span data-ttu-id="a6a94-133">환경 이름이 지정되면 `ASPNETCORE_ENVIRONMENT` 환경 변수가 *web.config* 파일에 자동으로 추가됩니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-133">The `ASPNETCORE_ENVIRONMENT` environment variable is automatically added to the *web.config* file when the environment name is specified.</span></span>
 
-## <a name="custom"></a><span data-ttu-id="06b41-134">사용자 지정</span><span class="sxs-lookup"><span data-stu-id="06b41-134">Custom</span></span>
+## <a name="custom"></a><span data-ttu-id="a6a94-134">사용자 지정</span><span class="sxs-lookup"><span data-stu-id="a6a94-134">Custom</span></span>
 
-<span data-ttu-id="06b41-135">사용자 지정 변환은 [빌드 구성](#build-configuration), [프로필](#profile) 및 [환경](#environment) 변환 후에 마지막으로 실행됩니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-135">Custom transformations are run last, after [Build configuration](#build-configuration), [Profile](#profile), and [Environment](#environment) transforms.</span></span>
+<span data-ttu-id="a6a94-135">사용자 지정 변환은 [빌드 구성](#build-configuration), [프로필](#profile) 및 [환경](#environment) 변환 후에 마지막으로 실행됩니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-135">Custom transformations are run last, after [Build configuration](#build-configuration), [Profile](#profile), and [Environment](#environment) transforms.</span></span>
 
-<span data-ttu-id="06b41-136">*web.config* 변환이 필요한 각 사용자 지정 구성에 사용할 *{CUSTOM_NAME}.transform* 파일을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-136">Include a *{CUSTOM_NAME}.transform* file for each custom configuration requiring a *web.config* transformation.</span></span>
+<span data-ttu-id="a6a94-136">*web.config* 변환이 필요한 각 사용자 지정 구성에 사용할 *{CUSTOM_NAME}.transform* 파일을 포함합니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-136">Include a *{CUSTOM_NAME}.transform* file for each custom configuration requiring a *web.config* transformation.</span></span>
 
-<span data-ttu-id="06b41-137">다음 예제에서는 사용자 지정 변환 환경 변수가 *custom.transform*에서 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-137">In the following example, a custom transform environment variable is set in *custom.transform*:</span></span>
+<span data-ttu-id="a6a94-137">다음 예제에서는 사용자 지정 변환 환경 변수가 *custom.transform*에서 설정됩니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-137">In the following example, a custom transform environment variable is set in *custom.transform*:</span></span>
 
 ```xml
 <?xml version="1.0"?>
@@ -164,23 +164,23 @@ dotnet publish --configuration Release /p:EnvironmentName=Production
 </configuration>
 ```
 
-<span data-ttu-id="06b41-138">`CustomTransformFileName` 속성이 [dotnet publish](/dotnet/core/tools/dotnet-publish) 명령에 전달되면 변환이 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-138">The transform is applied when the `CustomTransformFileName` property is passed to the [dotnet publish](/dotnet/core/tools/dotnet-publish) command:</span></span>
+<span data-ttu-id="a6a94-138">`CustomTransformFileName` 속성이 [dotnet publish](/dotnet/core/tools/dotnet-publish) 명령에 전달되면 변환이 적용됩니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-138">The transform is applied when the `CustomTransformFileName` property is passed to the [dotnet publish](/dotnet/core/tools/dotnet-publish) command:</span></span>
 
 ```dotnetcli
 dotnet publish --configuration Release /p:CustomTransformFileName=custom.transform
 ```
 
-<span data-ttu-id="06b41-139">프로필 이름의 MSBuild 속성은 `$(CustomTransformFileName)`입니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-139">The MSBuild property for the profile name is `$(CustomTransformFileName)`.</span></span>
+<span data-ttu-id="a6a94-139">프로필 이름의 MSBuild 속성은 `$(CustomTransformFileName)`입니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-139">The MSBuild property for the profile name is `$(CustomTransformFileName)`.</span></span>
 
-## <a name="prevent-webconfig-transformation"></a><span data-ttu-id="06b41-140">web.config 변환 방지</span><span class="sxs-lookup"><span data-stu-id="06b41-140">Prevent web.config transformation</span></span>
+## <a name="prevent-webconfig-transformation"></a><span data-ttu-id="a6a94-140">web.config 변환 방지</span><span class="sxs-lookup"><span data-stu-id="a6a94-140">Prevent web.config transformation</span></span>
 
-<span data-ttu-id="06b41-141">*web.config* 파일의 변환을 방지하려면 MSBuild 속성 `$(IsWebConfigTransformDisabled)`를 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="06b41-141">To prevent transformations of the *web.config* file, set the MSBuild property `$(IsWebConfigTransformDisabled)`:</span></span>
+<span data-ttu-id="a6a94-141">*web.config* 파일의 변환을 방지하려면 MSBuild 속성 `$(IsWebConfigTransformDisabled)`를 설정합니다.</span><span class="sxs-lookup"><span data-stu-id="a6a94-141">To prevent transformations of the *web.config* file, set the MSBuild property `$(IsWebConfigTransformDisabled)`:</span></span>
 
 ```dotnetcli
 dotnet publish /p:IsWebConfigTransformDisabled=true
 ```
 
-## <a name="additional-resources"></a><span data-ttu-id="06b41-142">추가 자료</span><span class="sxs-lookup"><span data-stu-id="06b41-142">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="a6a94-142">추가 자료</span><span class="sxs-lookup"><span data-stu-id="a6a94-142">Additional resources</span></span>
 
-* <span data-ttu-id="06b41-143">[웹 애플리케이션 프로젝트 배포를 위한 Web.config 변환 구문](/previous-versions/dd465326(v=vs.100))</span><span class="sxs-lookup"><span data-stu-id="06b41-143">[Web.config Transformation Syntax for Web Application Project Deployment](/previous-versions/dd465326(v=vs.100))</span></span>
-* <span data-ttu-id="06b41-144">[Visual Studio를 사용하여 웹 프로젝트 배포를 위한 Web.config 변환 구문](/previous-versions/aspnet/dd465326(v=vs.110))</span><span class="sxs-lookup"><span data-stu-id="06b41-144">[Web.config Transformation Syntax for Web Project Deployment Using Visual Studio](/previous-versions/aspnet/dd465326(v=vs.110))</span></span>
+* <span data-ttu-id="a6a94-143">[웹 애플리케이션 프로젝트 배포를 위한 Web.config 변환 구문](/previous-versions/dd465326(v=vs.100))</span><span class="sxs-lookup"><span data-stu-id="a6a94-143">[Web.config Transformation Syntax for Web Application Project Deployment](/previous-versions/dd465326(v=vs.100))</span></span>
+* <span data-ttu-id="a6a94-144">[Visual Studio를 사용하여 웹 프로젝트 배포를 위한 Web.config 변환 구문](/previous-versions/aspnet/dd465326(v=vs.110))</span><span class="sxs-lookup"><span data-stu-id="a6a94-144">[Web.config Transformation Syntax for Web Project Deployment Using Visual Studio](/previous-versions/aspnet/dd465326(v=vs.110))</span></span>
