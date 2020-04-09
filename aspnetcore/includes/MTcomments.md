@@ -1,1 +1,1 @@
-영어가 아닌 다른 언어로 이 문서를 읽는 경우 네이티브 언어로 코드 주석을 보려면 이 [GitHub 토론 문제](https://github.com/aspnet/AspNetCore.Docs/issues/16455)에 알려주세요.
+영어 이외의 언어로 이 글을 읽는 경우 모국어로 코드 주석을 보려면 이 [GitHub 토론 문제에](https://github.com/aspnet/AspNetCore.Docs/issues/16455) 알려주십시오.

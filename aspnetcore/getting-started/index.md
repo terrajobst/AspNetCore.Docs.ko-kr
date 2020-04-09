@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/07/2020
 uid: getting-started
-ms.openlocfilehash: 047fd7a74d3d53f68a730d67b63c65fe6bda529f
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 86a0c8d017138a949fddc0356f3de548d368a4c0
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78644307"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80417606"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>자습서: ASP.NET Core 시작
 
@@ -44,7 +44,7 @@ dotnet new webapp -o aspnetcoreapp
 이전 명령은
 
 * 새 웹앱을 만듭니다.  
-* `-o aspnetcoreapp` 매개 변수는 앱의 원본 파일을 사용하여 *aspnetcoreapp*라는 이름의 디렉터리를 만듭니다.
+* `-o aspnetcoreapp` 매개 변수는 앱의 소스 파일을 사용하여 *aspnetcoreapp*라는 이름의 디렉터리를 만듭니다.
 
 ### <a name="trust-the-development-certificate"></a>개발 인증서 신뢰
 
@@ -91,7 +91,7 @@ cd aspnetcoreapp
 dotnet watch run
 ```
 
-명령 셸에서 앱이 시작되었음을 나타낸 후 [https://localhost:5001](https://localhost:5001)로 이동합니다.
+명령 셸에서 앱이 시작되었음을 확인했으면 `https://localhost:5001`로 이동합니다.
 
 ## <a name="edit-a-razor-page"></a>Razor 페이지 편집
 
@@ -99,7 +99,7 @@ dotnet watch run
 
 [!code-cshtml[](sample/index.cshtml?highlight=9)]
 
-[https://localhost:5001](https://localhost:5001)로 이동하여 페이지를 새로 고치고 변경 내용이 표시되는지 확인합니다.
+`https://localhost:5001`로 이동하여 페이지를 새로 고치고 변경 내용이 표시되는지 확인합니다.
 
 ## <a name="next-steps"></a>다음 단계
 

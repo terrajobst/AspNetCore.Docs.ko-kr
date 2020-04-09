@@ -5,17 +5,17 @@ description: ASP.NET Core 앱에서 .NET을 사용하여 대화형 클라이언�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc, seoapril2019
-ms.date: 01/31/2020
+ms.date: 03/25/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: 038799564078c4d3e8a7aa3a9841c6303edf9d12
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 6d2e95cd2ec92f97a97cb558fb39e4540450c766
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78644265"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80405947"
 ---
 # <a name="introduction-to-aspnet-core-opno-locblazor"></a>ASP.NET Core Blazor 소개
 
@@ -28,6 +28,7 @@ Blazor는 .NET을 사용하여 대화형 클라이언트 쪽 웹 UI를 빌드하
 * JavaScript 대신 C#을 사용하여 풍부한 대화형 UI를 만듭니다.
 * .NET에서 작성된 서버 쪽 및 클라이언트 쪽 앱 논리를 공유합니다.
 * 모바일 브라우저를 포함한 광범위한 브라우저 지원을 위해 UI를 HTML 및 CSS로 렌더링합니다.
+* [Docker](/dotnet/standard/microservices-architecture/container-docker-introduction/index)와 같은 최신 호스트 플랫폼과 통합합니다.
 
 클라이언트 쪽 웹 개발에 .NET을 사용하면 다음과 같은 이점이 있습니다.
 

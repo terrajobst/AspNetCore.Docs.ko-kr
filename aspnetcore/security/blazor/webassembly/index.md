@@ -5,17 +5,17 @@ description: Blazor WebAssemlby 앱을 SPA(단일 페이지 애플리케이션)�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/12/2020
+ms.date: 03/31/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/index
-ms.openlocfilehash: 652d4c61110f786396d9d5af4f131b817c40e333
-ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
+ms.openlocfilehash: be286d770cd8d6e5cf7885b91be8654f74ffd743
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: HT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80219248"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80538978"
 ---
 # <a name="secure-aspnet-core-opno-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 보안
 
@@ -25,7 +25,7 @@ ms.locfileid: "80219248"
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
-Blazor WebAssembly 앱은 SPA(단일 페이지 애플리케이션)와 동일한 방식으로 보호됩니다. 사용자를 SPA에 인증하는 여러 가지 방법이 있지만, [OIDC(Open ID Connect)](https://openid.net/connect/)와 같은 [oAuth 2.0 프로토콜](https://oauth.net/)기반의 구현이 가장 일반적이고 포괄적으로 사용하는 방법입니다.
+Blazor WebAssembly 앱은 SPA(단일 페이지 애플리케이션)와 동일한 방식으로 보호됩니다. 사용자를 SPA에 인증하는 여러 가지 방법이 있지만, [OIDC(Open ID Connect)](https://openid.net/connect/)와 같은 [OAuth 2.0 프로토콜](https://oauth.net/) 기반의 구현을 사용하는 것이 가장 일반적이고 포괄적인 방법입니다.
 
 ## <a name="authentication-library"></a>인증 라이브러리
 
@@ -33,7 +33,7 @@ Blazor WebAssembly는 `Microsoft.AspNetCore.Components.WebAssembly.Authenticatio
 
 Blazor WebAssembly의 인증 지원은 기본 인증 프로토콜 세부 정보를 처리하는 데 사용되는 *oidc-client.js* 라이브러리 위에 빌드됩니다.
 
-SameSite 쿠키를 사용하는 것과 같이 SPA를 인증하기 위한 다른 옵션이 있습니다. 그러나 Blazor WebAssembly의 엔지니어링 설계에서는 oAuth 및 OIDC가 Blazor WebAssembly 앱의 인증을 위한 최고의 옵션으로 자리 잡았습니다. [JWT(JSON Web Token)](https://self-issued.info/docs/draft-ietf-oauth-json-web-token.html) 기반의 [토큰 기반 인증](xref:security/anti-request-forgery#token-based-authentication)이 기능 및 보안상의 이유로 [쿠키 기반 인증](xref:security/anti-request-forgery#cookie-based-authentication) 대신 선택되었습니다.
+SameSite 쿠키를 사용하는 것과 같이 SPA를 인증하기 위한 다른 옵션이 있습니다. 그러나 Blazor WebAssembly의 엔지니어링 설계에서는 OAuth 및 OIDC가 Blazor WebAssembly 앱의 인증을 위한 최고의 옵션으로 자리 잡았습니다. [JWT(JSON Web Token)](https://self-issued.info/docs/draft-ietf-oauth-json-web-token.html) 기반의 [토큰 기반 인증](xref:security/anti-request-forgery#token-based-authentication)이 기능 및 보안상의 이유로 [쿠키 기반 인증](xref:security/anti-request-forgery#cookie-based-authentication) 대신 선택되었습니다.
 
 * 일부 요청에서는 토큰이 전송되지 않으므로 토큰 기반 프로토콜을 사용하면 공격 노출 영역이 적어집니다.
 * 토큰은 명시적으로 전송되므로 [CSRF(교차 사이트 요청 위조)](xref:security/anti-request-forgery)로부터 서버 엔드포인트를 보호할 필요가 없습니다. 따라서 Blazor WebAssembly 앱을 MVC 또는 Razor 페이지 앱과 함께 호스트할 수 있습니다.
@@ -54,6 +54,85 @@ SameSite 쿠키를 사용하는 것과 같이 SPA를 인증하기 위한 다른 
 * Blazor WebAssembly 앱이 로그인 콜백 엔드포인트(`/authentication/login-callback`)를 로드하면 인증 응답이 처리됩니다.
   * 인증 프로세스가 완료되면 사용자는 인증되고 필요에 따라 사용자가 요청한 원래의 보호된 URL로 다시 돌아갑니다.
   * 어떤 이유로든 인증 프로세스가 실패하는 경우 사용자는 로그인 실패 페이지(`/authentication/login-failed`)로 보내지고 오류가 표시됩니다.
+
+## <a name="support-prerendering-with-authentication"></a>인증을 사용한 미리 렌더링 지원
+
+호스트된 Blazor WebAssembly 앱 토픽 중 하나의 지침을 따른 후에는 다음 지침에 따라 다음과 같은 동작을 수행하는 앱을 만듭니다.
+
+* 인증이 필요하지 않은 경로를 미리 렌더링합니다.
+* 인증이 필요한 경로를 미리 렌더링하지 않습니다.
+
+클라이언트 앱의 `Program` 클래스(*Program.cs*)에서 공통 서비스 등록을 별도의 메서드(예: `ConfigureCommonServices`)로 팩터링합니다.
+
+```csharp
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        var builder = WebAssemblyHostBuilder.CreateDefault(args);
+        builder.RootComponents.Add<App>("app");
+
+        services.AddBaseAddressHttpClient();
+        services.Add...;
+
+        ConfigureCommonServices(builder.Services);
+
+        await builder.Build().RunAsync();
+    }
+
+    public static void ConfigureCommonServices(IServiceCollection services)
+    {
+        // Common service registrations
+    }
+}
+```
+
+서버 앱의 `Startup.ConfigureServices`에서 다음과 같은 추가 서비스를 등록합니다.
+
+```csharp
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components.Server;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+public void ConfigureServices(IServiceCollection services)
+{
+    ...
+
+    services.AddRazorPages();
+    services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
+    services.AddScoped<SignOutSessionStateManager>();
+
+    Client.Program.ConfigureCommonServices(services);
+}
+```
+
+서버 앱의 `Startup.Configure` 메서드에서 `endpoints.MapFallbackToFile("index.html")`을 `endpoints.MapFallbackToPage("/_Host")`로 바꿉니다.
+
+```csharp
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    endpoints.MapFallbackToPage("/_Host");
+});
+```
+
+서버 앱에서 *Pages* 폴더가 없으면 이 폴더를 만듭니다. 서버 앱의 *Pages* 폴더 안에 *_Host.cshtml* 페이지를 만듭니다. 클라이언트 앱의 *wwwroot/index.html* 파일 콘텐츠를 *Pages/_Host.cshtml* 파일에 붙여넣습니다. 다음과 같이 파일 콘텐츠를 업데이트합니다.
+
+* `@page "_Host"`를 파일의 맨 위에 추가합니다.
+* `<app>Loading...</app>` 태그를 다음으로 바꿉니다.
+
+  ```cshtml
+  <app>
+      @if (!HttpContext.Request.Path.StartsWithSegments("/authentication"))
+      {
+          <component type="typeof(Wasm.Authentication.Client.App)" render-mode="Static" />
+      }
+      else
+      {
+          <text>Loading...</text>
+      }
+  </app>
+  ```
   
 ## <a name="options-for-hosted-apps-and-third-party-login-providers"></a>호스트된 앱 및 타사 로그인 공급자에 대한 옵션
 
@@ -63,7 +142,7 @@ SameSite 쿠키를 사용하는 것과 같이 SPA를 인증하기 위한 다른 
 
 ### <a name="authenticate-users-to-only-call-protected-third-party-apis"></a>보호된 타사 API만 호출하도록 사용자 인증
 
-타사 API 공급자에 대해 클라이언트 쪽 OAuth 흐름을 사용하여 사용자를 인증합니다.
+클라이언트 쪽 OAuth 흐름을 사용하여 사용자를 타사 API 공급자에 대해 인증합니다.
 
  ```csharp
  builder.services.AddOidcAuthentication(options => { ... });
@@ -85,7 +164,7 @@ SameSite 쿠키를 사용하는 것과 같이 SPA를 인증하기 위한 다른 
 
 서버에서 생성된 액세스 토큰을 사용하여 서버 API 엔드포인트에서 타사 액세스 토큰을 검색합니다. 여기에서 타사 액세스 토큰을 사용하여 클라이언트의 ID에서 직접 타사 API 리소스를 호출합니다.
 
-이 방법은 사용하지 않는 것이 좋습니다. 이 방법을 사용하려면 퍼블릭 클라이언트에 대해 생성된 것처럼 타사 액세스 토큰을 처리해야 합니다. OAuth 용어에서 퍼블릭 앱은 비밀을 안전하게 저장하는 데 신뢰할 수 없으며, 기밀 클라이언트에 대해 액세스 토큰이 생성되므로 클라이언트 암호를 포함하지 않습니다. 기밀 클라이언트는 클라이언트 암호를 포함하는 클라이언트이며 비밀을 안전하게 저장할 수 있는 것으로 간주됩니다.
+이 방법은 사용하지 않는 것이 좋습니다. 이 방법을 사용하려면 퍼블릭 클라이언트에 대해 생성된 것처럼 타사 액세스 토큰을 처리해야 합니다. OAuth 맥락에서, 퍼블릭 앱은 암호를 안전하게 저장하는 데 신뢰할 수 없으므로 클라이언트 암호를 갖지 않으며, 액세스 토큰은 기밀 클라이언트에 대해 생성됩니다. 기밀 클라이언트는 클라이언트 암호를 포함하는 클라이언트이며 비밀을 안전하게 저장할 수 있는 것으로 간주됩니다.
 
 * 타사 액세스 토큰에는 타사에서 더 신뢰할 수 있는 클라이언트에 대한 토큰을 내보낸 사실을 기반으로 중요한 작업을 수행하기 위한 추가 범위가 부여될 수 있습니다.
 * 마찬가지로, 신뢰할 수 없는 클라이언트에 대해서는 새로 고침 토큰을 발급하지 않아야 합니다. 발급할 경우, 다른 제한이 적용되지 않는 한 클라이언트에 무제한 액세스 권한이 제공됩니다.

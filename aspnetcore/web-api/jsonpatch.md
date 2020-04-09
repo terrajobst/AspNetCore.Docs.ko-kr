@@ -4,14 +4,14 @@ author: rick-anderson
 description: ASP.NET Core Web API에서 JSON 패치 요청을 처리하는 방법을 알아봅니다.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/01/2019
+ms.date: 04/02/2020
 uid: web-api/jsonpatch
-ms.openlocfilehash: cf1a00c1928652bf5210b2442087209e23b8868e
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: be4115e870dac818aeb6b1e65ddfb21e89d9cf25
+ms.sourcegitcommit: 9675db7bf4b67ae269f9226b6f6f439b5cce4603
 ms.translationtype: MT
 ms.contentlocale: ko-KR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78652953"
+ms.lasthandoff: 04/03/2020
+ms.locfileid: "80625874"
 ---
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>ASP.NET Core Web API의 JsonPatch
 
@@ -23,30 +23,30 @@ ms.locfileid: "78652953"
 
 ## <a name="package-installation"></a>패키지 설치
 
-JsonPatch 지원은 `Microsoft.AspNetCore.Mvc.NewtonsoftJson` 패키지를 통해 사용하도록 설정됩니다. 이 기능을 사용하도록 설정하려면 앱에서 다음을 수행해야 합니다.
+앱에서 JSON 패치 지원을 활성화하려면 다음 단계를 완료합니다.
 
-* [Microsoft.AspNetCore.Mvc.NewtonsoftJson](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) NuGet 패키지를 설치합니다.
-* `Startup.ConfigureServices`에 대한 호출을 포함하도록 프로젝트의 `AddNewtonsoftJson` 메서드를 수정합니다.
+1. [Microsoft.AspNetCore.Mvc.NewtonsoftJson](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) NuGet 패키지를 설치합니다.
+1. 을 호출할 <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> `Startup.ConfigureServices` 프로젝트의 메서드를 업데이트합니다. 다음은 그 예입니다.
 
-  ```csharp
-  services
-      .AddControllersWithViews()
-      .AddNewtonsoftJson();
-  ```
+    ```csharp
+    services
+        .AddControllersWithViews()
+        .AddNewtonsoftJson();
+    ```
 
 `AddNewtonsoftJson`은 MVC 서비스 등록 메서드
 
-  * `AddRazorPages`
-  * `AddControllersWithViews`
-  * `AddControllers`
+* <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddRazorPages*>
+* <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllersWithViews*>
+* <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllers*>
 
-## <a name="jsonpatch-addnewtonsoftjson-and-systemtextjson"></a>JsonPatch, AddNewtonsoftJson 및 System.Text.Json과 호환됩니다.
-  
-`AddNewtonsoftJson`은 `System.Text.Json`모든**JSON 콘텐츠의 형식을 지정하는 데 사용되는** 기반 입력 및 출력 포맷터를 대체합니다. `JsonPatch`를 사용하여 `Newtonsoft.Json` 지원을 추가하지만 다른 포맷터를 변경하지 않으려면 프로젝트의 `Startup.ConfigureServices`를 다음과 같이 업데이트합니다.
+## <a name="json-patch-addnewtonsoftjson-and-systemtextjson"></a>JSON 패치, 애드뉴턴소프트Json, 시스템.Text.Json
+
+`AddNewtonsoftJson`모든 **JSON** 콘텐츠 서식을 `System.Text.Json`지정하는 데 사용되는 -based 입력 및 출력 포맷을 대체합니다. 을 사용하여 `Newtonsoft.Json`JSON 패치에 대한 지원을 추가하려면 다른 포터를 `Startup.ConfigureServices` 변경하지 않고 다음과 같이 프로젝트의 메서드를 업데이트합니다.
 
 [!code-csharp[](jsonpatch/samples/3.0/WebApp1/Startup.cs?name=snippet)]
 
-앞의 코드에는 [Microsoft.AspNetCore.Mvc.NewtonsoftJson](https://nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson)에 대한 참조 및 다음 using 문이 필요합니다.
+앞의 코드에는 `Microsoft.AspNetCore.Mvc.NewtonsoftJson` 패키지와 다음 `using` 문이 필요합니다.
 
 [!code-csharp[](jsonpatch/samples/3.0/WebApp1/Startup.cs?name=snippet1)]
 
@@ -56,9 +56,9 @@ PUT 및 [PATCH](https://tools.ietf.org/html/rfc5789) 메서드는 기존 리소�
 
 ## <a name="json-patch"></a>JSON 패치
 
-[JSON 패치](https://tools.ietf.org/html/rfc6902)는 리소스에 적용할 업데이트를 지정하기 위한 형식입니다. JSON 패치 문서에는 *작업* 배열이 포함됩니다.{3}{4} 각 작업은 배열 요소 추가 또는 속성 값 바꾸기와 같은 특정 유형의 변경을 식별합니다.
+[JSON 패치](https://tools.ietf.org/html/rfc6902)는 리소스에 적용할 업데이트를 지정하기 위한 형식입니다. JSON 패치 문서에는 작업 배열이 포함됩니다. 각 작업은 특정 유형의 변경을 식별합니다. 이러한 변경 의 예로는 배열 요소를 추가하거나 속성 값을 교체하는 것이 있습니다.
 
-예를 들어 다음 JSON 문서는 리소스, 리소스의 JSON 패치 문서 및 패치 작업을 적용한 결과를 나타냅니다.
+예를 들어 다음 JSON 문서는 리소스, 리소스에 대한 JSON 패치 문서 및 패치 작업을 적용한 결과를 나타냅니다.
 
 ### <a name="resource-example"></a>리소스 예제
 
@@ -98,13 +98,13 @@ PUT 및 [PATCH](https://tools.ietf.org/html/rfc5789) 메서드는 기존 리소�
 }
 ```
 
-JSON 패치 문서를 리소스에 적용하여 변경된 내용은 원자성입니다. 목록에 있는 작업이 하나라도 실패하면 목록의 작업이 적용되지 않습니다.
+리소스에 JSON 패치 문서를 적용하여 변경한 내용은 원자성입니다. 목록의 작업이 실패하면 목록의 작업이 적용되지 않습니다.
 
 ## <a name="path-syntax"></a>경로 구문
 
 작업 개체의 [path](https://tools.ietf.org/html/rfc6901) 속성에서 수준 사이에는 슬래시가 있습니다. `"/address/zipCode"`)을 입력합니다.
 
-0부터 시작하는 인덱스는 배열 요소를 지정하는 데 사용됩니다. `addresses` 배열의 첫 번째 요소는 `/addresses/0`에 있습니다. 배열 끝에 `add`(추가)하려면 인덱스 번호가 아닌 하이픈(-)을 사용합니다(`/addresses/-`).
+0부터 시작하는 인덱스는 배열 요소를 지정하는 데 사용됩니다. `addresses` 배열의 첫 번째 요소는 `/addresses/0`에 있습니다. `add` 배열의 끝에 인덱스 번호 대신 하이픈`-`() 사용 : `/addresses/-`.
 
 ### <a name="operations"></a>작업
 
@@ -114,12 +114,12 @@ JSON 패치 문서를 리소스에 적용하여 변경된 내용은 원자성입
 |-----------|--------------------------------|
 | `add`     | 속성 또는 배열 요소를 추가합니다. 기존 속성의 경우 값을 설정합니다.|
 | `remove`  | 속성 또는 배열 요소를 제거합니다. |
-| `replace` | 동일한 위치에서 `remove`가 뒤에 오는 `add`와 같습니다. |
-| `move`    | 소스의 값을 사용하는 대상에 대한 `remove`가 뒤에 오는 소스에서 `add`와 같습니다. |
+| `replace` | 동일한 위치에서 `add`가 뒤에 오는 `remove`와 같습니다. |
+| `move`    | 소스의 값을 사용하는 대상에 대한 `add`가 뒤에 오는 소스에서 `remove`와 같습니다. |
 | `copy`    | 소스의 값을 사용하는 대상에 대한 `add`와 같습니다. |
 | `test`    | `path`의 값이 제공된 `value`와 같은 경우 성공 상태 코드를 반환합니다.|
 
-## <a name="jsonpatch-in-aspnet-core"></a>ASP.NET Core의 JsonPatch
+## <a name="json-patch-in-aspnet-core"></a>ASP.NET 코어의 JSON 패치
 
 JSON 패치의 ASP.NET Core 구현은 [Microsoft.AspNetCore.JsonPatch](https://www.nuget.org/packages/microsoft.aspnetcore.jsonpatch/) NuGet 패키지로 제공됩니다.
 
@@ -128,14 +128,14 @@ JSON 패치의 ASP.NET Core 구현은 [Microsoft.AspNetCore.JsonPatch](https://w
 API 컨트롤러에서 JSON 패치의 작업 메서드는 다음과 같습니다.
 
 * `HttpPatch` 특성을 사용하여 주석으로 처리됩니다.
-* 일반적으로 `JsonPatchDocument<T>`를 사용하여 `[FromBody]`를 수락합니다.
+* 일반적으로 `[FromBody]`를 사용하여 `JsonPatchDocument<T>`를 수락합니다.
 * 패치 문서에서 `ApplyTo`를 호출하여 변경 내용을 적용합니다.
 
 예를 들면 다음과 같습니다.
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_PatchAction&highlight=1,3,9)]
 
-샘플 앱의 이 코드는 다음 `Customer` 모델에서 작동합니다.
+샘플 앱의 이 코드는 `Customer` 다음 모델에서 작동합니다.
 
 [!code-csharp[](jsonpatch/samples/2.2/Models/Customer.cs?name=snippet_Customer)]
 
@@ -147,7 +147,7 @@ API 컨트롤러에서 JSON 패치의 작업 메서드는 다음과 같습니다
 * 패치를 적용합니다.
 * 응답의 본문으로 결과를 반환합니다.
 
- 실제 앱에서 이 코드는 데이터베이스와 같은 저장소에서 데이터를 검색하고 패치를 적용한 후 데이터베이스를 업데이트합니다.
+실제 앱에서 이 코드는 데이터베이스와 같은 저장소에서 데이터를 검색하고 패치를 적용한 후 데이터베이스를 업데이트합니다.
 
 ### <a name="model-state"></a>모델 상태
 
@@ -163,7 +163,7 @@ API 컨트롤러에서 JSON 패치의 작업 메서드는 다음과 같습니다
 
 ### <a name="dynamic-objects"></a>동적 개체
 
-다음 작업 메서드 예제에서는 동적 개체에 패치를 적용하는 방법을 보여 줍니다.
+다음 작업 방법 예제에서는 동적 개체에 패치를 적용하는 방법을 보여 주며 있습니다.
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_Dynamic)]
 
@@ -188,25 +188,25 @@ API 컨트롤러에서 JSON 패치의 작업 메서드는 다음과 같습니다
     * 속성이 nullable인 경우: null로 설정합니다.
     * 속성이 nullable이 아닌 경우: `default<T>`로 설정합니다.
 
-다음 샘플 패치 문서는 `CustomerName`을 null로 설정하고 `Orders[0]`를 삭제합니다.
+다음 샘플 패치 `CustomerName` 문서는 null로 `Orders[0]`설정하고 삭제합니다.
 
 [!code-json[](jsonpatch/samples/2.2/JSON/remove.json)]
 
 ## <a name="the-replace-operation"></a>바꾸기 작업
 
-이 작업은 `remove`가 뒤에 오는 `add`와 기능적으로 동일합니다.
+이 작업은 `add`가 뒤에 오는 `remove`와 기능적으로 동일합니다.
 
-다음 샘플 패치 문서는 `CustomerName`의 값을 설정하고 `Orders[0]`를 새 `Order` 개체로 바꿉니다.
+다음 샘플 패치 문서에서는 `CustomerName` 값을 설정하고 `Orders[0]`새 `Order` 개체로 바꿉습니다.
 
 [!code-json[](jsonpatch/samples/2.2/JSON/replace.json)]
 
 ## <a name="the-move-operation"></a>이동 작업
 
-* `path`가 배열 요소를 가리키는 경우: `from` 요소를 `path` 요소 위치에 복사한 후 `remove` 요소에서 `from` 작업을 실행합니다.
-* `path`가 속성을 가리키는 경우: `from` 속성 값을 `path` 속성에 복사한 후 `remove` 속성에서 `from` 작업을 실행합니다.
+* `path`가 배열 요소를 가리키는 경우: `from` 요소를 `path` 요소 위치에 복사한 후 `from` 요소에서 `remove` 작업을 실행합니다.
+* `path`가 속성을 가리키는 경우: `from` 속성 값을 `path` 속성에 복사한 후 `from` 속성에서 `remove` 작업을 실행합니다.
 * `path`가 존재하지 않는 속성을 가리키는 경우:
   * 패치할 리소스가 정적 개체인 경우: 요청이 실패합니다.
-  * 패치할 리소스가 동적 개체인 경우: `from` 속성을 `path`에 지정된 위치로 복사한 후 `remove` 속성에서 `from` 작업을 실행합니다.
+  * 패치할 리소스가 동적 개체인 경우: `from` 속성을 `path`에 지정된 위치로 복사한 후 `from` 속성에서 `remove` 작업을 실행합니다.
 
 다음 샘플 패치 문서는 다음을 수행합니다.
 
@@ -218,7 +218,7 @@ API 컨트롤러에서 JSON 패치의 작업 메서드는 다음과 같습니다
 
 ## <a name="the-copy-operation"></a>복사 작업
 
-이 작업은 마지막 `move` 단계 없이 `remove` 작업과 기능적으로 동일합니다.
+이 작업은 마지막 `remove` 단계 없이 `move` 작업과 기능적으로 동일합니다.
 
 다음 샘플 패치 문서는 다음을 수행합니다.
 
@@ -239,14 +239,14 @@ API 컨트롤러에서 JSON 패치의 작업 메서드는 다음과 같습니다
 
 ## <a name="get-the-code"></a>코드 가져오기
 
-[샘플 코드 보기 또는 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples/2.2) ([다운로드하는 방법](xref:index#how-to-download-a-sample))
+[샘플 코드 보기 또는 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples) (다운로드[방법)을 입력합니다.](xref:index#how-to-download-a-sample)
 
 샘플을 테스트하려면 앱을 실행하고 다음 설정을 사용하여 HTTP 요청을 보냅니다.
 
 * URL: `http://localhost:{port}/jsonpatch/jsonpatchwithmodelstate`
 * HTTP 메서드: `PATCH`
 * 헤더: `Content-Type: application/json-patch+json`
-* Body: *json 프로젝트 폴더에서 json 패치* 문서 샘플 중 하나를 복사 하 여 붙여넣습니다.
+* 본문: *JSON* 프로젝트 폴더에서 JSON 패치 문서 샘플 중 하나를 복사하여 붙여넣습니다.
 
 ## <a name="additional-resources"></a>추가 리소스
 
@@ -268,7 +268,7 @@ PUT 및 [PATCH](https://tools.ietf.org/html/rfc5789) 메서드는 기존 리소�
 
 ## <a name="json-patch"></a>JSON 패치
 
-[JSON 패치](https://tools.ietf.org/html/rfc6902)는 리소스에 적용할 업데이트를 지정하기 위한 형식입니다. JSON 패치 문서에는 *작업* 배열이 포함됩니다.{3}{4} 각 작업은 배열 요소 추가 또는 속성 값 바꾸기와 같은 특정 유형의 변경을 식별합니다.
+[JSON 패치](https://tools.ietf.org/html/rfc6902)는 리소스에 적용할 업데이트를 지정하기 위한 형식입니다. JSON 패치 문서에는 작업 배열이 포함됩니다. 각 작업은 배열 요소 추가 또는 속성 값 바꾸기와 같은 특정 유형의 변경을 식별합니다.
 
 예를 들어 다음 JSON 문서는 리소스, 리소스의 JSON 패치 문서 및 패치 작업을 적용한 결과를 나타냅니다.
 
@@ -326,8 +326,8 @@ JSON 패치 문서를 리소스에 적용하여 변경된 내용은 원자성입
 |-----------|--------------------------------|
 | `add`     | 속성 또는 배열 요소를 추가합니다. 기존 속성의 경우 값을 설정합니다.|
 | `remove`  | 속성 또는 배열 요소를 제거합니다. |
-| `replace` | 동일한 위치에서 `remove`가 뒤에 오는 `add`와 같습니다. |
-| `move`    | 소스의 값을 사용하는 대상에 대한 `remove`가 뒤에 오는 소스에서 `add`와 같습니다. |
+| `replace` | 동일한 위치에서 `add`가 뒤에 오는 `remove`와 같습니다. |
+| `move`    | 소스의 값을 사용하는 대상에 대한 `add`가 뒤에 오는 소스에서 `remove`와 같습니다. |
 | `copy`    | 소스의 값을 사용하는 대상에 대한 `add`와 같습니다. |
 | `test`    | `path`의 값이 제공된 `value`와 같은 경우 성공 상태 코드를 반환합니다.|
 
@@ -340,7 +340,7 @@ JSON 패치의 ASP.NET Core 구현은 [Microsoft.AspNetCore.JsonPatch](https://w
 API 컨트롤러에서 JSON 패치의 작업 메서드는 다음과 같습니다.
 
 * `HttpPatch` 특성을 사용하여 주석으로 처리됩니다.
-* 일반적으로 `JsonPatchDocument<T>`를 사용하여 `[FromBody]`를 수락합니다.
+* 일반적으로 `[FromBody]`를 사용하여 `JsonPatchDocument<T>`를 수락합니다.
 * 패치 문서에서 `ApplyTo`를 호출하여 변경 내용을 적용합니다.
 
 예를 들면 다음과 같습니다.
@@ -406,7 +406,7 @@ API 컨트롤러에서 JSON 패치의 작업 메서드는 다음과 같습니다
 
 ## <a name="the-replace-operation"></a>바꾸기 작업
 
-이 작업은 `remove`가 뒤에 오는 `add`와 기능적으로 동일합니다.
+이 작업은 `add`가 뒤에 오는 `remove`와 기능적으로 동일합니다.
 
 다음 샘플 패치 문서는 `CustomerName`의 값을 설정하고 `Orders[0]`를 새 `Order` 개체로 바꿉니다.
 
@@ -414,11 +414,11 @@ API 컨트롤러에서 JSON 패치의 작업 메서드는 다음과 같습니다
 
 ## <a name="the-move-operation"></a>이동 작업
 
-* `path`가 배열 요소를 가리키는 경우: `from` 요소를 `path` 요소 위치에 복사한 후 `remove` 요소에서 `from` 작업을 실행합니다.
-* `path`가 속성을 가리키는 경우: `from` 속성 값을 `path` 속성에 복사한 후 `remove` 속성에서 `from` 작업을 실행합니다.
+* `path`가 배열 요소를 가리키는 경우: `from` 요소를 `path` 요소 위치에 복사한 후 `from` 요소에서 `remove` 작업을 실행합니다.
+* `path`가 속성을 가리키는 경우: `from` 속성 값을 `path` 속성에 복사한 후 `from` 속성에서 `remove` 작업을 실행합니다.
 * `path`가 존재하지 않는 속성을 가리키는 경우:
   * 패치할 리소스가 정적 개체인 경우: 요청이 실패합니다.
-  * 패치할 리소스가 동적 개체인 경우: `from` 속성을 `path`에 지정된 위치로 복사한 후 `remove` 속성에서 `from` 작업을 실행합니다.
+  * 패치할 리소스가 동적 개체인 경우: `from` 속성을 `path`에 지정된 위치로 복사한 후 `from` 속성에서 `remove` 작업을 실행합니다.
 
 다음 샘플 패치 문서는 다음을 수행합니다.
 
@@ -430,7 +430,7 @@ API 컨트롤러에서 JSON 패치의 작업 메서드는 다음과 같습니다
 
 ## <a name="the-copy-operation"></a>복사 작업
 
-이 작업은 마지막 `move` 단계 없이 `remove` 작업과 기능적으로 동일합니다.
+이 작업은 마지막 `remove` 단계 없이 `move` 작업과 기능적으로 동일합니다.
 
 다음 샘플 패치 문서는 다음을 수행합니다.
 
@@ -451,14 +451,14 @@ API 컨트롤러에서 JSON 패치의 작업 메서드는 다음과 같습니다
 
 ## <a name="get-the-code"></a>코드 가져오기
 
-[샘플 코드 보기 또는 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples/2.2) ([다운로드하는 방법](xref:index#how-to-download-a-sample))
+[샘플 코드 보기 또는 다운로드](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/jsonpatch/samples/2.2) (다운로드[방법)을 입력합니다.](xref:index#how-to-download-a-sample)
 
 샘플을 테스트하려면 앱을 실행하고 다음 설정을 사용하여 HTTP 요청을 보냅니다.
 
 * URL: `http://localhost:{port}/jsonpatch/jsonpatchwithmodelstate`
 * HTTP 메서드: `PATCH`
 * 헤더: `Content-Type: application/json-patch+json`
-* Body: *json 프로젝트 폴더에서 json 패치* 문서 샘플 중 하나를 복사 하 여 붙여넣습니다.
+* 본문: *JSON* 프로젝트 폴더에서 JSON 패치 문서 샘플 중 하나를 복사하여 붙여넣습니다.
 
 ## <a name="additional-resources"></a>추가 리소스
 
